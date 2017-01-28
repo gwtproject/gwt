@@ -26,7 +26,6 @@ import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JExpressionStatement;
 import com.google.gwt.dev.jjs.ast.JIfStatement;
 import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.ast.JPrefixOperation;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
@@ -46,25 +45,18 @@ import java.util.List;
  * the arguments are assumed to already be simplified as much as possible.
  */
 public class Simplifier {
-  /**
-   * TODO: if the AST were normalized, we wouldn't need this.
-   */
-  public static boolean isEmpty(JStatement stmt) {
-    if (stmt == null) {
-      return true;
-    }
-    return (stmt instanceof JBlock && ((JBlock) stmt).getStatements().isEmpty());
-  }
 
   /**
    * Negate the supplied expression if negating it makes the expression shorter.
    * Otherwise, return null.
    */
-  private static JExpression maybeUnflipBoolean(JExpression expr) {
-    if (expr instanceof JUnaryOperation) {
-      JUnaryOperation unop = (JUnaryOperation) expr;
-      if (unop.getOp() == JUnaryOperator.NOT) {
-        return unop.getArg();
+  private static JExpression maybeGetNegatedExpressionArgument(JExpression expression) {
+    if (expression instanceof JPrefixOperation) {
+      JPrefixOperation prefixOperation = (JPrefixOperation) expression;
+      if (prefixOperation.getOp() == JUnaryOperator.NOT
+          // Don't flip negations on floating point comparisons
+          && !isFloatingPointComparison(prefixOperation.getArg())) {
+        return prefixOperation.getArg();
       }
     }
     return null;
@@ -98,7 +90,7 @@ public class Simplifier {
    * @return the simplified expression.
    */
   public static JExpression cast(JType type, JExpression exp) {
-    return castImpl(null, exp.getSourceInfo(), type, exp);
+    return simplifyCast(new JCastOperation(exp.getSourceInfo(), type, exp));
   }
 
   /**
@@ -109,37 +101,35 @@ public class Simplifier {
    * (A) (a,b) -> (a, (A) b)
    * </pre>
    *
-   * @param exp a JCastOperation to be simplified.
+   * @param castExpression a JCastOperation to be simplified.
    * @return the simplified expression if a simplification was possible; <code>exp</code> otherwise.
    */
-  public static JExpression cast(JCastOperation exp) {
-    return castImpl(exp, exp.getSourceInfo(), exp.getCastType(), exp.getExpr());
-  }
+  public static JExpression simplifyCast(JCastOperation castExpression) {
+    SourceInfo info = castExpression.getSourceInfo();
+    JType type = castExpression.getCastType();
+    JExpression argument = castExpression.getExpr();
 
-  private static JExpression castImpl(JExpression original, SourceInfo info, JType type,
-      JExpression exp) {
-    info = getBestSourceInfo(original, info, exp);
-    if (exp instanceof JMultiExpression) {
-      // (T)(a,b,c) -> a,b,(T) c
-      JMultiExpression expMulti = (JMultiExpression) exp;
+    if (type == argument.getType()) {
+      return argument;
+    }
+
+    if (argument instanceof JMultiExpression) {
+      // (T) (a, b, c) -> (a, b,(T) c)
+      JMultiExpression expMulti = (JMultiExpression) argument;
       JMultiExpression newMulti = new JMultiExpression(info);
       newMulti.addExpressions(allButLast(expMulti.getExpressions()));
-      newMulti.addExpressions(castImpl(null, info, type, last(expMulti.getExpressions())));
-      // TODO(rluble): immediately simplify the resulting multi.
-      // TODO(rluble): refactor common outward JMultiExpression movement.
+      newMulti.addExpressions(
+          simplifyCast(new JCastOperation(info, type, last(expMulti.getExpressions()))));
       return newMulti;
     }
-    if (type == exp.getType()) {
-      return exp;
-    }
 
-    if (type.isPrimitiveType() && (exp instanceof JValueLiteral)) {
+    if (type.isPrimitiveType() && (argument instanceof JValueLiteral)) {
       // Statically evaluate casting literals.
       JPrimitiveType primitiveType = (JPrimitiveType) type;
-      JValueLiteral expLit = (JValueLiteral) exp;
-      JValueLiteral casted = primitiveType.coerce(expLit);
-      if (casted != null) {
-        return casted;
+      JValueLiteral valueLiteral = (JValueLiteral) argument;
+      JValueLiteral simplifiedExpression = primitiveType.coerce(valueLiteral);
+      if (simplifiedExpression != null) {
+        return simplifiedExpression;
       }
     }
 
@@ -149,18 +139,15 @@ public class Simplifier {
      * of concat.
      */
     if (type == JPrimitiveType.INT) {
-      JType expType = exp.getType();
+      JType expType = argument.getType();
       if ((expType == JPrimitiveType.SHORT)
           || (expType == JPrimitiveType.BYTE)) {
-        return exp;
+        return argument;
       }
     }
 
     // no simplification made
-    if (original != null) {
-      return original;
-    }
-    return new JCastOperation(info, type, exp);
+    return castExpression;
   }
 
   /**
@@ -177,71 +164,63 @@ public class Simplifier {
    * !cond ? then : else -> cond ? else : then
    * </pre>
    *
-   * @param exp a JCondintional to be simplified.
+   * @param expression a JCondintional to be simplified.
    * @return the simplified expression if a simplification was possible; <code>exp</code> otherwise.
    */
-  public static JExpression conditional(JConditional exp) {
-    return conditionalImpl(exp, exp.getSourceInfo(), exp.getType(), exp.getIfTest(),
-        exp.getThenExpr(), exp.getElseExpr());
-  }
-
-  private static JExpression conditionalImpl(JConditional original, SourceInfo info, JType type,
-      JExpression condExpr, JExpression thenExpr, JExpression elseExpr) {
-    info = getBestSourceInfo(original, info, condExpr);
-    if (condExpr instanceof JMultiExpression) {
+  public static JExpression simplifyConditional(JConditional expression) {
+    SourceInfo info = expression.getSourceInfo();
+    JType type = expression.getType();
+    JExpression conditionExpression = expression.getIfTest();
+    JExpression thenExpression = expression.getThenExpr();
+    JExpression elseExpression = expression.getElseExpr();
+    if (conditionExpression instanceof JMultiExpression) {
       // (a,b,c)?d:e -> a,b,(c?d:e)
-      // TODO(spoon): do this outward multi movement for all AST nodes
-      JMultiExpression condMulti = (JMultiExpression) condExpr;
-      JMultiExpression newMulti = new JMultiExpression(info);
-      newMulti.addExpressions(allButLast(condMulti.getExpressions()));
-      newMulti.addExpressions(conditionalImpl(null, info, type, last(condMulti.getExpressions()),
-          thenExpr, elseExpr));
-      // TODO(spoon): immediately simplify the resulting multi
-      return newMulti;
+      JMultiExpression conditionMultiExpression = (JMultiExpression) conditionExpression;
+      JMultiExpression simplifiedExpression = new JMultiExpression(info);
+      simplifiedExpression.addExpressions(allButLast(conditionMultiExpression.getExpressions()));
+      simplifiedExpression.addExpressions(simplifyConditional(new JConditional(info, type,
+          last(conditionMultiExpression.getExpressions()), thenExpression, elseExpression)));
+      return simplifiedExpression;
     }
-    if (condExpr instanceof JBooleanLiteral) {
-      if (((JBooleanLiteral) condExpr).getValue()) {
+    if (conditionExpression instanceof JBooleanLiteral) {
+      return ((JBooleanLiteral) conditionExpression).getValue()
         // e.g. (true ? then : else) -> then
-        return thenExpr;
-      } else {
+        ? thenExpression
         // e.g. (false ? then : else) -> else
-        return elseExpr;
-      }
-    } else if (thenExpr instanceof JBooleanLiteral) {
-      if (((JBooleanLiteral) thenExpr).getValue()) {
+        : elseExpression;
+   }
+
+   if (thenExpression instanceof JBooleanLiteral) {
+     return ((JBooleanLiteral) thenExpression).getValue()
         // e.g. (cond ? true : else) -> cond || else
-        return orImpl(null, info, condExpr, elseExpr);
-      } else {
+        ? or(info, conditionExpression, elseExpression)
         // e.g. (cond ? false : else) -> !cond && else
-        JExpression notCondExpr = notImpl(null, condExpr.getSourceInfo(), condExpr);
-        return andImpl(null, info, notCondExpr, elseExpr);
-      }
-    } else if (elseExpr instanceof JBooleanLiteral) {
-      if (((JBooleanLiteral) elseExpr).getValue()) {
-        // e.g. (cond ? then : true) -> !cond || then
-        JExpression notCondExpr = notImpl(null, condExpr.getSourceInfo(), condExpr);
-        return orImpl(null, info, notCondExpr, thenExpr);
-      } else {
-        // e.g. (cond ? then : false) -> cond && then
-        return andImpl(null, info, condExpr, thenExpr);
-      }
-    } else {
-      // e.g. (!cond ? then : else) -> (cond ? else : then)
-      JExpression unflipped = maybeUnflipBoolean(condExpr);
-      if (unflipped != null) {
-        return new JConditional(info, type, unflipped, elseExpr, thenExpr);
-      }
+        : and(info,
+            negate(conditionExpression.getSourceInfo(), conditionExpression),
+            elseExpression);
     }
 
-    // no simplification made
-    if (original != null) {
-      return original;
+    if (elseExpression instanceof JBooleanLiteral) {
+      return ((JBooleanLiteral) elseExpression).getValue()
+        // e.g. (cond ? then : true) -> !cond || then
+        ? or(info, negate(conditionExpression.getSourceInfo(), conditionExpression), thenExpression)
+        // e.g. (cond ? then : false) -> cond && then
+        : and(info, conditionExpression, thenExpression);
     }
-    return new JConditional(info, type, condExpr, thenExpr, elseExpr);
+
+      // e.g. (!cond ? then : else) -> (cond ? else : then)
+    JExpression negatedExpressionArgument = maybeGetNegatedExpressionArgument(conditionExpression);
+    if (negatedExpressionArgument != null) {
+      return simplifyConditional(
+          new JConditional(info, type, negatedExpressionArgument, elseExpression, thenExpression));
+    }
+
+    // Not simplified.
+    return expression;
   }
 
   /**
-   * Simplifies an ifthenelse statement.
+   * Simplifies an if then else statement.
    *
    * <pre>
    * if(a,b,c) d [else e] -> {a; b; if(c) d [else e]; }
@@ -253,147 +232,159 @@ public class Simplifier {
    * if(c) ; [else ;] -> c
    *</pre>
    *
-   * @param stmt the statement to simplify.
-   * @param currentMethod the method where the statement resides
-   * @return the simplified statement if a simplification could be done and <code>stmt</code>
+   * @param ifStatement the statement to simplify.
+   * @param methodReturnType the return type of the method where the statement resides if any
+   * @return the simplified statement if a simplification could be done and <code>ifStatement</code>
    *         otherwise.
    */
-  public static JStatement ifStatement(JIfStatement stmt,  JMethod currentMethod) {
-    return ifStatementImpl(stmt, stmt.getSourceInfo(), stmt.getIfExpr(),
-        stmt.getThenStmt(), stmt.getElseStmt(), currentMethod);
-  }
-
-  private static JStatement ifStatementImpl(JIfStatement original, SourceInfo info,
-      JExpression condExpr, JStatement thenStmt,JStatement elseStmt, JMethod currentMethod) {
-    info = getBestSourceInfo(original, info, condExpr);
-    if (condExpr instanceof JMultiExpression) {
+  public static JStatement simplifyIfStatement(JIfStatement ifStatement, JType methodReturnType) {
+    SourceInfo info = ifStatement.getSourceInfo();
+    JExpression conditionExpression = ifStatement.getIfExpr();
+    JStatement thenStmt = ifStatement.getThenStmt();
+    JStatement elseStmt = ifStatement.getElseStmt();
+    if (conditionExpression instanceof JMultiExpression) {
       // if(a,b,c) d else e -> {a; b; if(c) d else e; }
-      JMultiExpression condMulti = (JMultiExpression) condExpr;
-      JBlock newBlock = new JBlock(info);
+      JMultiExpression condMulti = (JMultiExpression) conditionExpression;
+      JBlock simplifiedStatement = new JBlock(info);
       for (JExpression expr : allButLast(condMulti.getExpressions())) {
-        newBlock.addStmt(expr.makeStatement());
+        simplifiedStatement.addStmt(expr.makeStatement());
       }
-      newBlock.addStmt(ifStatementImpl(null, info, last(condMulti.getExpressions()), thenStmt,
-          elseStmt, currentMethod));
-      // TODO(spoon): immediately simplify the resulting block
-      return newBlock;
+      simplifiedStatement.addStmt(
+          simplifyIfStatement(
+              new JIfStatement(info, last(condMulti.getExpressions()), thenStmt, elseStmt),
+              methodReturnType));
+      return simplifiedStatement;
     }
 
-    if (condExpr instanceof JBooleanLiteral) {
-      JBooleanLiteral booleanLiteral = (JBooleanLiteral) condExpr;
-      boolean boolVal = booleanLiteral.getValue();
-      if (boolVal && !isEmpty(thenStmt)) {
+    if (conditionExpression instanceof JBooleanLiteral) {
+      boolean conditionValue = ((JBooleanLiteral) conditionExpression).getValue();
+      if (conditionValue && !JjsUtils.isEmptyBlock(thenStmt)) {
         // If true, replace myself with then statement
         return thenStmt;
-      } else if (!boolVal && !isEmpty(elseStmt)) {
+      } else if (!conditionValue && !JjsUtils.isEmptyBlock(elseStmt)) {
         // If false, replace myself with else statement
         return elseStmt;
       } else {
-        // just prune me
-        return condExpr.makeStatement();
+        // just prune me.
+        return conditionExpression.makeStatement();
       }
     }
 
-    if (isEmpty(thenStmt) && isEmpty(elseStmt)) {
-      return condExpr.makeStatement();
+    if (JjsUtils.isEmptyBlock(thenStmt) && JjsUtils.isEmptyBlock(elseStmt)) {
+      return conditionExpression.makeStatement();
     }
 
-    if (!isEmpty(elseStmt)) {
+    if (!JjsUtils.isEmptyBlock(elseStmt)) {
       // if (!cond) foo else bar -> if (cond) bar else foo
-      JExpression unflipped = Simplifier.maybeUnflipBoolean(condExpr);
+      JExpression unflipped = Simplifier.maybeGetNegatedExpressionArgument(conditionExpression);
       if (unflipped != null) {
         // Force sub-parts to blocks, otherwise we break else-if chains.
         // TODO: this goes away when we normalize the Java AST properly.
         thenStmt = ensureBlock(thenStmt);
         elseStmt = ensureBlock(elseStmt);
-        return ifStatementImpl(null, info, unflipped, elseStmt, thenStmt, currentMethod);
+        return simplifyIfStatement(new JIfStatement(info, unflipped, elseStmt, thenStmt), methodReturnType);
       }
     }
 
     JStatement rewritenStatement =
-        rewriteIfIntoBoolean(info, condExpr, thenStmt, elseStmt, currentMethod);
+        rewriteIfStatementAsExpression(info, conditionExpression, thenStmt, elseStmt, methodReturnType);
     if (rewritenStatement != null) {
       return rewritenStatement;
     }
 
     // no simplification made
-    if (original != null) {
-      return original;
-    }
-    return new JIfStatement(info, condExpr, thenStmt, elseStmt);
+    return ifStatement;
   }
 
   /**
    * Simplifies an negation expression.
    *
-   * if(a,b,c) d else e -> {a; b; if(c) d else e; }
+   * !(a > b) => a <= b
    *
-   * @param expr the expression to simplify.
+   * @param expression the expression to simplify.
    * @return the simplified expression if a simplification could be done and <code>expr</code>
    *         otherwise.
    */
-  public static JExpression not(JPrefixOperation expr) {
-    return notImpl(expr, expr.getSourceInfo(), expr.getArg());
+  public static JExpression simplifyNot(JPrefixOperation expression) {
+    JExpression argument = expression.getArg();
+    if (isFloatingPointComparison(argument)) {
+      // Don't negate floating point expression because it changes the values when NaNs are
+      // involved. E.g. !(Nan > 3) is not equivalent to (Nan <= 3).
+      return expression;
+    }
+    SourceInfo info = expression.getSourceInfo();
+    if (argument instanceof JMultiExpression) {
+      // !(a,b,c) -> (a,b,!c)
+      JMultiExpression multiExpression = (JMultiExpression) argument;
+      JMultiExpression simplifiedExpression = new JMultiExpression(info);
+      simplifiedExpression.addExpressions(allButLast(multiExpression.getExpressions()));
+      simplifiedExpression.addExpressions(negate(info, last(multiExpression.getExpressions())));
+      return simplifiedExpression;
+    }
+
+    if (argument instanceof JBinaryOperation) {
+      // try to invert the binary operator
+      JBinaryOperation binaryExpression = (JBinaryOperation) argument;
+      switch (binaryExpression.getOp()) {
+        case EQ:
+          // e.g. !(x == y) -> x != y
+          return new JBinaryOperation(info, binaryExpression.getType(), JBinaryOperator.NEQ,
+              binaryExpression.getLhs(), binaryExpression.getRhs());
+        case NEQ:
+          // e.g. !(x != y) -> x == y
+          return new JBinaryOperation(info, binaryExpression.getType(), JBinaryOperator.EQ,
+              binaryExpression.getLhs(), binaryExpression.getRhs());
+        case GT:
+          // e.g. !(x > y) -> x <= y
+          return new JBinaryOperation(info, binaryExpression.getType(), JBinaryOperator.LTE,
+              binaryExpression.getLhs(), binaryExpression.getRhs());
+        case LTE:
+          // e.g. !(x <= y) -> x > y
+          return new JBinaryOperation(info, binaryExpression.getType(), JBinaryOperator.GT,
+              binaryExpression.getLhs(), binaryExpression.getRhs());
+        case GTE:
+          // e.g. !(x >= y) -> x < y
+          return new JBinaryOperation(info, binaryExpression.getType(), JBinaryOperator.LT,
+              binaryExpression.getLhs(), binaryExpression.getRhs());
+        case LT:
+          // e.g. !(x < y) -> x >= y
+          return new JBinaryOperation(info, binaryExpression.getType(), JBinaryOperator.GTE,
+              binaryExpression.getLhs(), binaryExpression.getRhs());
+      }
+    }
+
+    if (argument instanceof JPrefixOperation) {
+      // try to invert the unary operator
+      JPrefixOperation prefixExpression = (JPrefixOperation) argument;
+      // e.g. !!x -> x
+      if (prefixExpression.getOp() == JUnaryOperator.NOT) {
+        return prefixExpression.getArg();
+      }
+    }
+
+    if (argument instanceof JBooleanLiteral) {
+      JBooleanLiteral booleanLiteral = (JBooleanLiteral) argument;
+      return JBooleanLiteral.get(!booleanLiteral.getValue());
+    }
+    // no simplification made.
+    return expression;
   }
 
-  private static JExpression notImpl(JPrefixOperation original, SourceInfo info, JExpression arg) {
-    info = getBestSourceInfo(original, info, arg);
-    if (arg instanceof JMultiExpression) {
-      // !(a,b,c) -> (a,b,!c)
-      JMultiExpression argMulti = (JMultiExpression) arg;
-      JMultiExpression newMulti = new JMultiExpression(info);
-      newMulti.addExpressions(allButLast(argMulti.getExpressions()));
-      newMulti.addExpressions(notImpl(null, info, last(argMulti.getExpressions())));
-      // TODO(spoon): immediately simplify the newMulti
-      return newMulti;
+  private static boolean isFloatingPointComparison(JExpression expr) {
+    if (expr instanceof JBinaryOperation) {
+      JBinaryOperation binaryOperation = (JBinaryOperation) expr;
+      return
+          binaryOperation.getType() == JPrimitiveType.BOOLEAN
+          && (binaryOperation.getLhs().getType() == JPrimitiveType.FLOAT
+              || binaryOperation.getLhs().getType() == JPrimitiveType.DOUBLE
+              || binaryOperation.getRhs().getType() == JPrimitiveType.FLOAT
+              || binaryOperation.getRhs().getType() == JPrimitiveType.DOUBLE);
     }
-    if (arg instanceof JBinaryOperation) {
-      // try to invert the binary operator
-      JBinaryOperation argOp = (JBinaryOperation) arg;
-      JBinaryOperator op = argOp.getOp();
-      JBinaryOperator newOp = null;
-      if (op == JBinaryOperator.EQ) {
-        // e.g. !(x == y) -> x != y
-        newOp = JBinaryOperator.NEQ;
-      } else if (op == JBinaryOperator.NEQ) {
-        // e.g. !(x != y) -> x == y
-        newOp = JBinaryOperator.EQ;
-      } else if (op == JBinaryOperator.GT) {
-        // e.g. !(x > y) -> x <= y
-        newOp = JBinaryOperator.LTE;
-      } else if (op == JBinaryOperator.LTE) {
-        // e.g. !(x <= y) -> x > y
-        newOp = JBinaryOperator.GT;
-      } else if (op == JBinaryOperator.GTE) {
-        // e.g. !(x >= y) -> x < y
-        newOp = JBinaryOperator.LT;
-      } else if (op == JBinaryOperator.LT) {
-        // e.g. !(x < y) -> x >= y
-        newOp = JBinaryOperator.GTE;
-      }
-      if (newOp != null) {
-        JBinaryOperation newBinOp =
-            new JBinaryOperation(info, argOp.getType(), newOp, argOp.getLhs(), argOp.getRhs());
-        return newBinOp;
-      }
-    } else if (arg instanceof JPrefixOperation) {
-      // try to invert the unary operator
-      JPrefixOperation argOp = (JPrefixOperation) arg;
-      JUnaryOperator op = argOp.getOp();
-      // e.g. !!x -> x
-      if (op == JUnaryOperator.NOT) {
-        return argOp.getArg();
-      }
-    } else if (arg instanceof JBooleanLiteral) {
-      JBooleanLiteral booleanLit = (JBooleanLiteral) arg;
-      return JBooleanLiteral.get(!booleanLit.getValue());
-    }
+    return false;
+  }
 
-    // no simplification made
-    if (original != null) {
-      return original;
-    }
-    return new JPrefixOperation(info, JUnaryOperator.NOT, arg);
+  private static JExpression negate(SourceInfo info, JExpression argument) {
+    return simplifyNot(new JPrefixOperation(info, JUnaryOperator.NOT, argument));
   }
 
   /**
@@ -409,49 +400,44 @@ public class Simplifier {
    * (a, b) && c -> (a, b && c)
    * </pre>
    *
-   * @param exp an AND JBinaryExpression to be simplified.
+   * @param expression an AND JBinaryExpression to be simplified.
    * @return the simplified expression if a simplification was possible; <code>exp</code> otherwise.
    *
    */
-  public static JExpression and(JBinaryOperation exp) {
-    assert exp.getOp() == JBinaryOperator.AND : "Simplifier.and was called with " + exp;
-    return andImpl(exp, null, exp.getLhs(), exp.getRhs());
-  }
-
-  private static JExpression andImpl(JBinaryOperation original, SourceInfo info, JExpression lhs,
-      JExpression rhs) {
-    info = getBestSourceInfo(original, info, lhs);
+  public static JExpression simplifyAnd(JBinaryOperation expression) {
+    assert expression.getOp() == JBinaryOperator.AND
+        : "Simplifier.and was called with " + expression;
+    JExpression lhs = expression.getLhs();
+    JExpression rhs = expression.getRhs();
+    SourceInfo info = expression.getSourceInfo();
     if (lhs instanceof JMultiExpression) {
       // (a,b,c)&&d -> a,b,(c&&d)
-      JMultiExpression lhsMulti = (JMultiExpression) lhs;
-      JMultiExpression newMulti = new JMultiExpression(info);
-      newMulti.addExpressions(allButLast(lhsMulti.getExpressions()));
-      newMulti.addExpressions(andImpl(null, info, last(lhsMulti.getExpressions()), rhs));
-      // TODO(rluble): immediately simplify the resulting multi.
-      // TODO(rluble): refactor common outward JMultiExpression movement.
-      return newMulti;
+      JMultiExpression lhsMultiExpression = (JMultiExpression) lhs;
+      JMultiExpression simplifiedExpression = new JMultiExpression(info);
+      simplifiedExpression.addExpressions(allButLast(lhsMultiExpression.getExpressions()));
+      simplifiedExpression.addExpressions(
+          and(info, last(lhsMultiExpression.getExpressions()), rhs));
+      return simplifiedExpression;
     }
     if (lhs instanceof JBooleanLiteral) {
-      JBooleanLiteral booleanLiteral = (JBooleanLiteral) lhs;
-      if (booleanLiteral.getValue()) {
-        return rhs;
-      } else {
-        return lhs;
-      }
+      return (((JBooleanLiteral) lhs).getValue()) ? rhs : lhs;
+    }
 
-    } else if (rhs instanceof JBooleanLiteral) {
-      JBooleanLiteral booleanLiteral = (JBooleanLiteral) rhs;
-      if (booleanLiteral.getValue()) {
+    if (rhs instanceof JBooleanLiteral) {
+      if (((JBooleanLiteral) rhs).getValue()) {
         return lhs;
       } else if (!lhs.hasSideEffects()) {
+        // Do not remove lhs if it had side effects
         return rhs;
       }
     }
-    // no simplification made
-    if (original != null) {
-      return original;
-    }
-    return new JBinaryOperation(info, rhs.getType(), JBinaryOperator.AND, lhs, rhs);
+
+    // no simplification made.
+    return expression;
+  }
+
+  private static JExpression and(SourceInfo info, JExpression lhs, JExpression rhs) {
+    return simplifyAnd(new JBinaryOperation(info, rhs.getType(), JBinaryOperator.AND, lhs, rhs));
   }
 
   /**
@@ -467,48 +453,40 @@ public class Simplifier {
    * (a, b) || c -> (a, b || c)
    * </pre>
    *
-   * @param exp an OR JBinaryExpression to be simplified.
+   * @param expression an OR JBinaryExpression to be simplified.
    * @return the simplified expression if a simplification was possible; <code>exp</code> otherwise.
    *
    */
-  public static JExpression or(JBinaryOperation exp) {
-    assert exp.getOp() == JBinaryOperator.OR : "Simplifier.and was called with " + exp;
-    return orImpl(exp, null, exp.getLhs(), exp.getRhs());
-  }
-
-  private static JExpression orImpl(JBinaryOperation original, SourceInfo info, JExpression lhs,
-      JExpression rhs) {
-    info = getBestSourceInfo(original, info, lhs);
+  public static JExpression simplifyOr(JBinaryOperation expression) {
+    assert expression.getOp() == JBinaryOperator.OR
+        : "Simplifier.or was called with " + expression;
+    JExpression lhs = expression.getLhs();
+    JExpression rhs = expression.getRhs();
+    SourceInfo info = expression.getSourceInfo();
     if (lhs instanceof JMultiExpression) {
       // (a,b,c)|| d -> a,b,(c||d)
-      JMultiExpression lhsMulti = (JMultiExpression) lhs;
-      JMultiExpression newMulti = new JMultiExpression(info);
-      newMulti.addExpressions(allButLast(lhsMulti.getExpressions()));
-      newMulti.addExpressions(orImpl(null, info, last(lhsMulti.getExpressions()), rhs));
-      // TODO(rluble): immediately simplify the resulting multi.
-      // TODO(rluble): refactor common outward JMultiExpression movement.
-      return newMulti;
+      JMultiExpression lhsMultiExpression = (JMultiExpression) lhs;
+      JMultiExpression simplifiedExpression = new JMultiExpression(info);
+      simplifiedExpression.addExpressions(allButLast(lhsMultiExpression.getExpressions()));
+      simplifiedExpression.addExpressions(or(info, last(lhsMultiExpression.getExpressions()), rhs));
+      return simplifiedExpression;
     }
     if (lhs instanceof JBooleanLiteral) {
-      JBooleanLiteral booleanLiteral = (JBooleanLiteral) lhs;
-      if (booleanLiteral.getValue()) {
-        return lhs;
-      } else {
-        return rhs;
-      }
-    } else if (rhs instanceof JBooleanLiteral) {
-      JBooleanLiteral booleanLiteral = (JBooleanLiteral) rhs;
-      if (!booleanLiteral.getValue()) {
+      return ((JBooleanLiteral) lhs).getValue() ? lhs : rhs;
+    }
+
+    if (rhs instanceof JBooleanLiteral) {
+      if (!((JBooleanLiteral) rhs).getValue()) {
         return lhs;
       } else if (!lhs.hasSideEffects()) {
         return rhs;
       }
     }
-    // no simplification made
-    if (original != null) {
-      return original;
-    }
-    return new JBinaryOperation(info, rhs.getType(), JBinaryOperator.OR, lhs, rhs);
+    return expression;
+  }
+
+  private static JExpression or(SourceInfo info, JExpression lhs, JExpression rhs) {
+    return simplifyOr(new JBinaryOperation(info, rhs.getType(), JBinaryOperator.OR, lhs, rhs));
   }
 
   private static JStatement ensureBlock(JStatement stmt) {
@@ -543,32 +521,13 @@ public class Simplifier {
     return stmt;
   }
 
-  /**
-   * Determine the best SourceInfo to use in a particular transformation.
-   *
-   * @param original the original node that is being transformed. Can be <code>null</code>.
-   * @param info an explicit SourceInfo that might be used, Can be <code>null</code>.
-   * @param defaultNode a node from where to obtain the SourceInfo.
-   * @return a SourceInfo chosen according to the following priority info>original>default.
-   */
-  private static SourceInfo getBestSourceInfo(JNode original, SourceInfo info, JNode defaultNode) {
-    if (info == null) {
-      if (original == null) {
-        info = defaultNode.getSourceInfo();
-      } else {
-        info = original.getSourceInfo();
-      }
-    }
-    return info;
-  }
-
-  private static JStatement rewriteIfIntoBoolean(SourceInfo sourceInfo, JExpression condExpr,
-      JStatement thenStmt, JStatement elseStmt, JMethod currentMethod) {
+  private static JStatement rewriteIfStatementAsExpression(SourceInfo sourceInfo, JExpression condExpr,
+      JStatement thenStmt, JStatement elseStmt, JType methodReturnType) {
     thenStmt = extractSingleStatement(thenStmt);
     elseStmt = extractSingleStatement(elseStmt);
 
     if (thenStmt instanceof JReturnStatement && elseStmt instanceof JReturnStatement
-        && currentMethod != null) {
+        && methodReturnType != null) {
       // Special case
       // if () { return ..; } else { return ..; } =>
       // return ... ? ... : ...;
@@ -580,7 +539,7 @@ public class Simplifier {
       }
 
       JConditional conditional =
-          new JConditional(sourceInfo, currentMethod.getType(), condExpr, thenExpression,
+          new JConditional(sourceInfo, methodReturnType, condExpr, thenExpression,
               elseExpression);
 
       JReturnStatement returnStatement = conditional.makeReturnStatement();
@@ -606,7 +565,7 @@ public class Simplifier {
       if (thenExpression != null) {
         JBinaryOperator binaryOperator = JBinaryOperator.AND;
 
-        JExpression unflipExpression = maybeUnflipBoolean(condExpr);
+        JExpression unflipExpression = maybeGetNegatedExpressionArgument(condExpr);
         if (unflipExpression != null) {
           condExpr = unflipExpression;
           binaryOperator = JBinaryOperator.OR;

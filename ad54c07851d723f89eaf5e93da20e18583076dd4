@@ -16,6 +16,69 @@
       "revId": "ad54c07851d723f89eaf5e93da20e18583076dd4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d912e0c_1cb3d1c8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-01-28T00:33:58Z",
+      "side": 1,
+      "message": "if not used in many places, could we update this name?",
+      "range": {
+        "startLine": 337,
+        "startChar": 28,
+        "endLine": 337,
+        "endChar": 31
+      },
+      "revId": "ad54c07851d723f89eaf5e93da20e18583076dd4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9efa060b_22d48ecf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-01-28T00:33:58Z",
+      "side": 1,
+      "message": "Isn\u0027t this impossible?\ndefault: throw new AssertionError(\"cannot negate \" +operator)",
+      "revId": "ad54c07851d723f89eaf5e93da20e18583076dd4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cccfda1_dc448505",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-01-28T00:33:58Z",
+      "side": 1,
+      "message": "how the expression could be null?",
+      "range": {
+        "startLine": 420,
+        "startChar": 8,
+        "endLine": 420,
+        "endChar": 18
+      },
+      "revId": "ad54c07851d723f89eaf5e93da20e18583076dd4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -16,6 +16,46 @@
       "revId": "cc2d0ea68a00456641ffd7ff55b890af8aacc841",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "67024d6a_67bd96a5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-01-30T20:53:34Z",
+      "side": 1,
+      "message": "I think this potentially changes behavior. You no longer push down the cast on multi-expressions and I\u0027m not sure about all the impacts of that.",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 5
+      },
+      "revId": "cc2d0ea68a00456641ffd7ff55b890af8aacc841",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a06cd968_19860cf1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Simplifier.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-01-30T20:53:34Z",
+      "side": 1,
+      "message": "I asked before but shouldn\u0027t we have default in switch that throws assertion error?",
+      "revId": "cc2d0ea68a00456641ffd7ff55b890af8aacc841",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

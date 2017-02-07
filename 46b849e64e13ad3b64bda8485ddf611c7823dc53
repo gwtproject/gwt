@@ -34,6 +34,24 @@
       "revId": "46b849e64e13ad3b64bda8485ddf611c7823dc53",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcf88ea5_5bf7a3e9",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RPC.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-02-07T10:34:23Z",
+      "side": 1,
+      "message": "Yes, it works too. I generally don\u0027t like importing classes only for javadoc, but maybe I could make an exception here (on the other hand, it\u0027s just one line)",
+      "parentUuid": "68993a37_3e38e93b",
+      "revId": "46b849e64e13ad3b64bda8485ddf611c7823dc53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

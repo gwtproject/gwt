@@ -52,6 +52,24 @@
       "revId": "46b849e64e13ad3b64bda8485ddf611c7823dc53",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1daa205e_afa20412",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RPC.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2017-02-09T23:51:07Z",
+      "side": 1,
+      "message": "Hm after thinking about it I guess the long line is ok. This class probably don\u0027t want to have a dependency on GWT examples or javax.servlet, so we should not use imports.",
+      "parentUuid": "fcf88ea5_5bf7a3e9",
+      "revId": "46b849e64e13ad3b64bda8485ddf611c7823dc53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

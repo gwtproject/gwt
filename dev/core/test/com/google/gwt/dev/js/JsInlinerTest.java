@@ -330,6 +330,18 @@ public class JsInlinerTest extends OptimizerTestBase {
     verifyOptimized(expected, code);
   }
 
+  public void testBlockInline_reuseName() throws Exception {
+    String code = Joiner.on('\n').join(
+        "function foo(a) { throw a + a; }",
+        "function bar(a) { foo(a); foo(a); }",
+        "var a = 42;",
+        "bar(a);");
+
+    String expected = "{a + a;}";
+
+    verifyOptimized(expected, code);
+  }
+
   /**
    * Test that a new expression breaks argument ordering.
    */

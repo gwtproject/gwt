@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5eb78ec7_dd448d15",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-02-13T20:01:03Z",
+      "side": 1,
+      "message": "[error] \u0027java.util.ArrayList\u0027 should be separated from previous imports.",
+      "revId": "06fc03dceba76239f0d2e35aca845c4efa852484",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70664cef_8c9f3787",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1142,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-02-13T20:01:03Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 104).",
+      "revId": "06fc03dceba76239f0d2e35aca845c4efa852484",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50238416_1d015115",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1182,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-02-13T20:01:03Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027No one line javadoc comments\u0027.",
+      "revId": "06fc03dceba76239f0d2e35aca845c4efa852484",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "369e1ef9_7aef91fb",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1227,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-02-13T20:01:03Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027No one line javadoc comments\u0027.",
+      "revId": "06fc03dceba76239f0d2e35aca845c4efa852484",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0c79900_79dd30eb",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-02-13T20:01:03Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 149).",
+      "revId": "06fc03dceba76239f0d2e35aca845c4efa852484",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b1df0e3_8fd2b0d6",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1953,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-02-13T20:01:03Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027No one line javadoc comments\u0027.",
+      "revId": "06fc03dceba76239f0d2e35aca845c4efa852484",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

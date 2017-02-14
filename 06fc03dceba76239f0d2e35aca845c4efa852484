@@ -118,6 +118,24 @@
       "revId": "06fc03dceba76239f0d2e35aca845c4efa852484",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f502bcd_ff86909f",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsInlinerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 10615
+      },
+      "writtenOn": "2017-02-14T16:25:35Z",
+      "side": 1,
+      "message": "Sorry, this was dummy text, updated. The optimized code should be correct, but as you can see it\u0027s not always inlining where it should (even with a second duplicate call to the same method).\n\nI haven\u0027t updated all of the other test cases yet either.",
+      "parentUuid": "c1e1e35a_b6951a7c",
+      "revId": "06fc03dceba76239f0d2e35aca845c4efa852484",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

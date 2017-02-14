@@ -181,7 +181,11 @@ public class JsInlinerTest extends OptimizerTestBase {
         "function uniqueId_forceInline(id) {return jsinterop.closure.getUniqueId(id);}",
         "function b1() { uniqueId_forceInline('a'); uniqueId_forceInline('b');  } b1();");
     expected = Joiner.on('\n').join(
-        "jsinterop.closure.getUniqueId('a');", "jsinterop.closure.getUniqueId('b')");
+        "function a(){",
+        "jsinterop.closure.getUniqueId('a');",
+        "jsinterop.closure.getUniqueId('b')",
+        "}",
+        "a();");
     verifyOptimizedObfuscated(expected, input);
 
     // Test DO_NOT_INLINE
@@ -190,7 +194,8 @@ public class JsInlinerTest extends OptimizerTestBase {
         "function b1() { uniqueId_doNotInline('a'); uniqueId_doNotInline('b');  } b1();");
     expected = Joiner.on('\n').join(
         "function b(a){return jsinterop.closure.getUniqueId(a)}",
-        "b('a');b('b')");
+        "function c(){b('a');b('b')}",
+        "c();");
     verifyOptimizedObfuscated(expected, input);
   }
 
@@ -231,8 +236,8 @@ public class JsInlinerTest extends OptimizerTestBase {
         // callee references array[0] before evaluating argument
         "function callee(arg) { return array[0] + arg; }",
 
-        // non inlineable caller invokes callee with a multi that runs clinit()
-        "function caller_doNotInline() { callee((clinit(),2)); }",
+        // non inlineable caller (must be inlined as expression)
+        "function caller_doNotInline() { callee((clinit(),2)) + 1; }",
 
         // bootstrap the program
         "caller_doNotInline();");
@@ -274,8 +279,8 @@ public class JsInlinerTest extends OptimizerTestBase {
         // callee references field.x before evaluating argument
         "function callee(arg) { var field; return field.x + arg; }",
 
-        // caller invokes callee with a multi that runs clinit()
-        "function caller_doNotInline() { callee((clinit(),2)); }",
+        // non inlineable caller (must be inlined as expression)
+        "function caller_doNotInline() { callee((clinit(),2)) + 1; }",
 
         // bootstrap the program
         "caller_doNotInline();");
@@ -297,8 +302,8 @@ public class JsInlinerTest extends OptimizerTestBase {
         // callee references x before evaluating argument
         "function callee(arg) { alert(x); return arg; }",
 
-        // caller invokes callee with a multi that runs clinit()
-        "function caller_doNotInline() { callee((clinit(),2)); }",
+        // non inlineable caller (must be inlined as expression)
+        "function caller_doNotInline() { callee((clinit(),2)) + 1; }",
 
         // bootstrap the program
         "caller_doNotInline();");
@@ -326,6 +331,22 @@ public class JsInlinerTest extends OptimizerTestBase {
         "function clinit() { clinit = null; }",
         "function caller_doNotInline() {var y; return y=2,clinit(),3;}",
         "caller_doNotInline();");
+
+    verifyOptimized(expected, code);
+  }
+
+  public void testBlockInline_reuseName() throws Exception {
+    String code = Joiner.on('\n').join(
+        "function foo(a) { throw a + a; }",
+        "function bar(a) { foo(a); foo(a); }",
+        "var a = 42;",
+        "bar(a);");
+
+    String expected = Joiner.on('\n').join(
+        "function foo(a) {throw a+a}",
+        "function bar(a) {{var a=a; throw a+a}foo(a)}",
+        "var a = 42;",
+        "bar(a);");
 
     verifyOptimized(expected, code);
   }

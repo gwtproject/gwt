@@ -64,7 +64,8 @@ public class JavaScriptVerifier {
 
       @Override
       public boolean visit(JsBinaryOperation x, JsContext ctx) {
-        if (x.getOperator().isAssignment()) {
+        // The lvalue may also be a JsArrayAccess.
+        if (x.getOperator().isAssignment() && x.getArg1() instanceof JsNameRef) {
           JsNameRef nameRef = (JsNameRef) x.getArg1();
           if (nameRef.getQualifier() == null) {
             declaredEntities.add(nameRef.getName());

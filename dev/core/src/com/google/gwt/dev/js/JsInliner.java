@@ -32,6 +32,7 @@ import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsEmpty;
 import com.google.gwt.dev.js.ast.JsExprStmt;
 import com.google.gwt.dev.js.ast.JsExpression;
+import com.google.gwt.dev.js.ast.JsForIn;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsInvocation;
 import com.google.gwt.dev.js.ast.JsModVisitor;
@@ -66,7 +67,8 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multiset;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -668,6 +670,35 @@ public class JsInliner {
         return;
       }
 
+      if (e instanceof JsInvocation) {
+        // Try to inline a void function that couldn't be inlined as an expression.
+        JsFunction callerFunction = functionStack.peek();
+        JsInvocation invocation = (JsInvocation) e;
+        JsFunction invokedFunction = JsUtils.isFunction(invocation.getQualifier());
+        invocation = makeDirectInvocationForInlining(callerFunction, invocation);
+        if (invocation == null) {
+          return;
+        }
+
+        inlining.push(invokedFunction);
+        JsBlock inlinedBlock =
+            tryToInlineAsBlock(invocation, callerFunction, invokedFunction);
+
+        if (inlinedBlock != null) {
+          /*
+           * See if any further inlining can be performed in the current context.
+           * By attempting to maximize the level of inlining now, we can reduce
+           * the total number of passes required to finalize the AST.
+           */
+          ctx.replaceMe(accept(inlinedBlock));
+        }
+
+        if (inlining.pop() != invokedFunction) {
+          throw new RuntimeException("Unexpected function popped");
+        }
+        return;
+      }
+
       List<JsExprStmt> statements = Lists.newArrayList();
 
       /*
@@ -733,6 +764,64 @@ public class JsInliner {
       }
     }
 
+    /**
+     * Determines whether the call site can be inlined, not considering the actual contents of the
+     * invoked function. If so, replaces Function.prototype.call() with a direct call, and returns
+     * the invocation (possibly unchanged). Returns null if inlining the invocation is not allowed.
+     */
+    private JsInvocation makeDirectInvocationForInlining(
+        JsFunction callerFunction, JsInvocation invocation) {
+
+      /*
+       * We only want to look at invocations of things that we statically know
+       * to be functions. Otherwise, we can't know what statements the
+       * invocation would actually invoke. The static reference would be null
+       * when trying operate on references to external functions, or functions
+       * as arguments to another function.
+       */
+
+      JsFunction invokedFunction = JsUtils.isFunction(invocation.getQualifier());
+      if (invokedFunction == null || !invokedFunction.isInliningAllowed()
+          || blacklist.contains(invokedFunction)
+          || invokedFunction.getBody().getStatements().size() > MAX_INLINE_FN_SIZE) {
+        return null;
+      }
+
+      if (invokedFunction == callerFunction) {
+        /*
+         * The current function has been mutated so as to be self-recursive. Ban
+         * it from any future inlining to prevent infinite expansion.
+         */
+        blacklist.add(invokedFunction);
+        return null;
+      }
+
+      if (inlining.contains(invokedFunction)) {
+        /*
+         * We are already in the middle of attempting to inline a call to this
+         * function. This check prevents infinite expansion across
+         * mutually-recursive, inlinable functions. Any invocation skipped by this
+         * logic will be re-visited in the <code>op = accept(op)</code> call in
+         * the outermost JsInvocation.
+         */
+        return null;
+      }
+
+      invocation = tryToUnravelExplicitCall(invocation);
+
+      if (invocation.getArguments().size() != invokedFunction.getParameters().size()) {
+        /*
+         * This will happen with varargs-style JavaScript functions that rely on the
+         * "arguments" array. The reference to arguments would be detected in
+         * BoundedScopeVisitor, but the code below assumes the same number of
+         * parameters and arguments.
+         */
+        return null;
+      }
+
+      return invocation;
+    }
+
     @Override
     public void endVisit(JsFunction x, JsContext ctx) {
       if (!functionStack.pop().equals(x)) {
@@ -749,53 +838,15 @@ public class JsInliner {
     public void endVisit(JsInvocation x, JsContext ctx) {
       JsFunction callerFunction = functionStack.peek();
 
-      /*
-       * We only want to look at invocations of things that we statically know
-       * to be functions. Otherwise, we can't know what statements the
-       * invocation would actually invoke. The static reference would be null
-       * when trying operate on references to external functions, or functions
-       * as arguments to another function.
-       */
       JsFunction invokedFunction = JsUtils.isFunction(x.getQualifier());
-      if (invokedFunction == null) {
-        return;
-      }
-
-      if (!invokedFunction.isInliningAllowed() || blacklist.contains(invokedFunction)) {
-        return;
-      }
-
-      /*
-       * Don't inline huge functions into huge multi-expressions. Some JS
-       * engines will blow up.
-       */
-      if (invokedFunction.getBody().getStatements().size() > MAX_INLINE_FN_SIZE) {
-        return;
-      }
-
-      /*
-       * The current function has been mutated so as to be self-recursive. Ban
-       * it from any future inlining to prevent infinite expansion.
-       */
-      if (invokedFunction == callerFunction) {
-        blacklist.add(invokedFunction);
-        return;
-      }
-
-      /*
-       * We are already in the middle of attempting to inline a call to this
-       * function. This check prevents infinite expansion across
-       * mutually-recursive, inlinable functions. Any invocation skipped by this
-       * logic will be re-visited in the <code>op = accept(op)</code> call in
-       * the outermost JsInvocation.
-       */
-      if (inlining.contains(invokedFunction)) {
+      x = makeDirectInvocationForInlining(callerFunction, x);
+      if (x == null) {
         return;
       }
 
       inlining.push(invokedFunction);
       x = tryToUnravelExplicitCall(x);
-      JsExpression op = process(x, callerFunction, invokedFunction);
+      JsExpression op = tryToInlineAsExpression(x, callerFunction, invokedFunction);
 
       if (x != op) {
         /*
@@ -883,18 +934,9 @@ public class JsInliner {
      *
      * @return An expression equivalent to <code>x</code>
      */
-    private JsExpression process(JsInvocation x, JsFunction callerFunction,
+    private JsExpression tryToInlineAsExpression(JsInvocation x, JsFunction callerFunction,
         JsFunction invokedFunction) {
-      List<JsStatement> statements;
-      if (invokedFunction.getBody() != null) {
-        statements = Lists.newArrayList(invokedFunction.getBody().getStatements());
-      } else {
-        /*
-         * Will see this with certain classes whose clinits are folded into the
-         * main JsProgram body.
-         */
-        statements = Collections.emptyList();
-      }
+      List<JsStatement> statements = getBody(invokedFunction);
 
       List<JsExpression> inlinableBodyAsExpression =
           Lists.newArrayListWithCapacity(statements.size());
@@ -985,26 +1027,19 @@ public class JsInliner {
       }
 
       // Confirm that the expression conforms to the desired heuristics
-      if (!isInlinable(callerFunction, invokedFunction, thisExpr, x.getArguments(), op)) {
+      if (!canInlineAsExpression(
+          callerFunction, invokedFunction, thisExpr, x.getArguments(), op)) {
         return x;
       }
 
       // Perform the name replacement
-      NameRefReplacerVisitor nameRefReplacer = new NameRefReplacerVisitor(thisExpr,
-          x.getArguments(), invokedFunction.getParameters());
-      for (ListIterator<JsName> nameIterator = extrudedNames.listIterator();
-          nameIterator.hasNext();) {
-
-        JsName name = nameIterator.next();
-
-        JsName newName = getUnusedName(
-            callerFunction.getScope(),
-            invokedFunction.getName() + "_" + name.getIdent(),
-            name.getShortIdent());
-        nameRefReplacer.setReplacementName(name, newName);
-        nameIterator.set(newName);
-      }
-      op = nameRefReplacer.accept(op);
+      NameRefReplacerVisitor nameRefReplacer =
+          createNameRefReplacerForExpressionInlining(
+              thisExpr, x, callerFunction, invokedFunction, extrudedNames);
+      ParameterExpressionReplacerVisitor parameterReplacer =
+          new ParameterExpressionReplacerVisitor(
+              x.getArguments(), invokedFunction.getParameters());
+      op = parameterReplacer.accept(nameRefReplacer.accept(op));
 
       // Normalize any nested comma expressions that we may have generated.
       op = (new CommaNormalizer(extrudedNames)).accept(op);
@@ -1018,9 +1053,7 @@ public class JsInliner {
        * Compare the relative complexity of the original invocation versus the
        * inlined form.
        */
-      if (invokedFunction.getInliningMode() != InliningMode.FORCE_INLINE
-          && isTooComplexToInline(x, op)
-          && isInvokedMoreThanOnce(invokedFunction)) {
+      if (isTooComplexToInline(x, op, invokedFunction)) {
         return x;
       }
 
@@ -1031,6 +1064,137 @@ public class JsInliner {
       invocationCountingVisitor.removeCountsFor(x);
       invocationCountingVisitor.accept(op);
       return op;
+    }
+
+    /**
+     * Determine if the invocation of <code>invokedFunction</code> at callsite <code>x</code>
+     * can be inlined as an equivalent sequence of statements.
+     *
+     * @return A list of statements equivalent to <code>x</code>, or null if infeasible to inline
+     */
+    private JsBlock tryToInlineAsBlock(
+        JsInvocation x, JsFunction callerFunction, JsFunction invokedFunction) {
+      List<JsStatement> statements = getBody(invokedFunction);
+      AnyReturnsVisitor anyReturns = new AnyReturnsVisitor();
+      // Only the last statement may be a return. The return is meaningless, because we only inline
+      // JsExprStmt here, where the return value is ignored.
+      for (int i = 0; i < statements.size() - 1; i++) {
+        anyReturns.accept(statements.get(i));
+      }
+      // Don't allow a JsReturn within another statement.
+      if (!statements.isEmpty() && !isReturnStatement(statements.get(statements.size() - 1))) {
+        anyReturns.accept(statements.get(statements.size() - 1));
+      }
+      if (anyReturns.anyReturns) {
+        return null;
+      }
+
+      JsExpression thisExpr = ((JsNameRef) x.getQualifier()).getQualifier();
+      ExtrudedNamesCollector extrudedNamesCollector =
+          new ExtrudedNamesCollector(callerFunction.getScope(), invokedFunction.getScope());
+      extrudedNamesCollector.acceptList(statements);
+
+      /*
+       * Get the referenced names that need to be copied to the caller's scope.
+       */
+      List<JsName> extrudedNames = extrudedNamesCollector.getExtrudedNames();
+      if (extrudedNames.size() != 0 && callerFunction == programFunction) {
+        // Don't extrude variables into the global scope.
+        return null;
+      }
+
+      if (!canInlineAsBlock(
+          callerFunction, invokedFunction, thisExpr, x.getArguments(), statements)) {
+        return null;
+      }
+
+      // Perform the name replacement
+      NameRefReplacerVisitor nameRefReplacer = createNameRefReplacerForBlockInlining(
+          thisExpr, x, callerFunction, invokedFunction, extrudedNames);
+      List<JsStatement> statementsToInline = new ArrayList<>(statements.size() + 1);
+
+      List<JsParameter> parameters = invokedFunction.getParameters();
+      SourceInfo sourceInfo = x.getSourceInfo();
+      JsVars parameterVars = new JsVars(sourceInfo);
+      for (int i = 0; i < parameters.size(); i++) {
+        // Get the replacement name of the parameter.
+        JsName inlinedParameterName = nameRefReplacer.accept(
+            new JsNameRef(sourceInfo, parameters.get(i).getName())).getName();
+        JsVar var = new JsVar(sourceInfo, inlinedParameterName);
+        var.setInitExpr(x.getArguments().get(i));
+        parameterVars.add(var);
+      }
+      statementsToInline.add(parameterVars);
+      for (int i = 0; i < statements.size(); i++) {
+        JsStatement statement = statements.get(i);
+        if (i + 1 == statements.size() && isReturnStatement(statement)) {
+          statement = new JsExprStmt(statement.getSourceInfo(), ((JsReturn) statement).getExpr());
+        }
+        statementsToInline.add(nameRefReplacer.accept(statement));
+      }
+
+      JsBlock block = new JsBlock(sourceInfo);
+      block.getStatements().addAll(statementsToInline);
+      return isTooComplexToInline(x, block, invokedFunction) ? null : block;
+    }
+
+    private NameRefReplacerVisitor createNameRefReplacerForExpressionInlining(
+        JsExpression thisExpr, JsInvocation x, JsFunction callerFunction,
+        JsFunction invokedFunction, List<JsName> extrudedNames) {
+      NameRefReplacerVisitor replacer = new NameRefReplacerVisitor(thisExpr);
+      for (ListIterator<JsName> nameIterator = extrudedNames.listIterator();
+          nameIterator.hasNext();) {
+        JsName name = nameIterator.next();
+
+        JsName newName = getUnusedName(
+            callerFunction.getScope(),
+            invokedFunction.getName() + "_" + name.getIdent(),
+            name.getShortIdent());
+        replacer.setReplacementName(name, newName);
+        nameIterator.set(newName);
+      }
+      return replacer;
+    }
+
+    private NameRefReplacerVisitor createNameRefReplacerForBlockInlining(
+        JsExpression thisExpr, JsInvocation x, JsFunction callerFunction,
+        JsFunction invokedFunction, List<JsName> extrudedNames) {
+      NameRefReplacerVisitor v =
+          createNameRefReplacerForExpressionInlining(
+              thisExpr, x, callerFunction, invokedFunction, extrudedNames);
+      // Now include generated names for each of the parameters.
+      for (JsParameter parameter : invokedFunction.getParameters()) {
+        JsName origName = parameter.getName();
+        JsName newName = getUnusedName(
+            callerFunction.getScope(),
+            invokedFunction.getName() + "_" + origName.getIdent(),
+            origName.getShortIdent());
+        v.setReplacementName(origName, newName);
+      }
+      return v;
+    }
+
+    /** Finds "return" statements. */
+    private static class AnyReturnsVisitor extends JsVisitor {
+      boolean anyReturns = false;
+
+      @Override
+      public boolean visit(JsReturn x, JsContext ctx) {
+        anyReturns = true;
+        return false;
+      }
+    }
+
+    private List<JsStatement> getBody(JsFunction function) {
+      if (function != null && function.getBody() != null) {
+        return Lists.newArrayList(function.getBody().getStatements());
+      } else {
+        /*
+         * Will see this with certain classes whose clinits are folded into the
+         * main JsProgram body.
+         */
+        return Collections.emptyList();
+      }
     }
 
     private JsName getUnusedName(JsScope scope, String baseName, String shortIdentifier) {
@@ -1055,11 +1219,16 @@ public class JsInliner {
       return scope.declareName(identifier, shortIdentifier);
     }
 
-    private boolean isTooComplexToInline(JsInvocation x, JsExpression op) {
+    /** Returns whether the replacement op cannot be inlined because it is too complex. */
+    private boolean isTooComplexToInline(JsInvocation x, JsNode op, JsFunction invokedFunction) {
+      if (invokedFunction.getInliningMode() == InliningMode.FORCE_INLINE) {
+        return false;
+      }
       int originalComplexity = complexity(x);
       int inlinedComplexity = complexity(op);
-      return ((double) inlinedComplexity) / (originalComplexity + INLINING_BIAS)
+      boolean tooComplex = ((double) inlinedComplexity) / (originalComplexity + INLINING_BIAS)
           > MAX_COMPLEXITY_INCREASE;
+      return tooComplex && !isInvokedMoreThanOnce(invokedFunction);
     }
   }
 
@@ -1174,28 +1343,18 @@ public class JsInliner {
   }
 
   /**
-   * Replace references to JsNames with the inlined JsExpression.
+   * Replace references to the parameter JsNames with the inlined arguments (for inlining as an
+   * expression).
    */
-  private static class NameRefReplacerVisitor extends JsModVisitor {
-    /**
-     * Set up a map to record name replacements to perform.
-     */
-    final Map<JsName, JsName> nameReplacements = Maps.newIdentityHashMap();
-
+  private static class ParameterExpressionReplacerVisitor extends JsModVisitor {
     /**
      * Set up a map of parameter names back to the expressions that will be
      * passed in from the outer call site.
      */
-    final Map<JsName, JsExpression> paramsToArgsMap = Maps.newIdentityHashMap();
+    private final Map<JsName, JsExpression> paramsToArgsMap = Maps.newIdentityHashMap();
 
-    /**
-     * A replacement expression for this references.
-     */
-    private JsExpression thisExpr;
-
-    public NameRefReplacerVisitor(JsExpression thisExpr,
+    public ParameterExpressionReplacerVisitor(
         List<JsExpression> arguments, List<JsParameter> parameters) {
-      this.thisExpr = thisExpr;
       if (parameters.size() != arguments.size()) {
         // This shouldn't happen if the cloned JsInvocation has been properly
         // configured
@@ -1228,25 +1387,6 @@ public class JsInliner {
       }
     }
 
-    @Override
-    public void endVisit(JsThisRef x, JsContext ctx) {
-      assert thisExpr != null;
-      ctx.replaceMe(thisExpr);
-    }
-
-    /**
-     * Set a replacement JsName for all references to a JsName.
-     *
-     * @param name the name to replace
-     * @param newName the new name that should be used in place of references to
-     *          <code>name</code>
-     * @return the previous JsName the name would have been replaced with or
-     *         <code>null</code> if one was not previously set
-     */
-    public JsName setReplacementName(JsName name, JsName newName) {
-      return nameReplacements.put(name, newName);
-    }
-
     /**
      * Determine the replacement expression to use in place of a reference to a
      * given name. Returns <code>null</code> if no replacement has been set for
@@ -1260,11 +1400,106 @@ public class JsInliner {
          * always flexible, then it would be necessary to clone the expression.
          */
         return paramsToArgsMap.get(name);
-      } else if (nameReplacements.containsKey(name)) {
+      } else {
+        return null;
+      }
+    }
+  }
+
+  /**
+   * Re-names extruded names for the function to be inlined, and replaces "this" with the this
+   * expression of the function to be inlined.
+   */
+  private static class NameRefReplacerVisitor extends JsModVisitor {
+    /**
+     * Set up a map to record name replacements to perform.
+     */
+    private final Map<JsName, JsName> nameReplacements = Maps.newIdentityHashMap();
+
+    /**
+     * A replacement expression for this references.
+     */
+    private JsExpression thisExpr;
+
+    public NameRefReplacerVisitor(JsExpression thisExpr) {
+      this.thisExpr = thisExpr;
+    }
+
+    /**
+     * Replace JsNameRefs that refer to parameters with the expression passed
+     * into the function invocation.
+     */
+    @Override
+    public void endVisit(JsNameRef x, JsContext ctx) {
+      if (x.getQualifier() != null) {
+        return;
+      }
+
+      JsExpression replacement = tryGetReplacementExpression(x.getSourceInfo(),
+          x.getName());
+
+      if (replacement != null) {
+        ctx.replaceMe(replacement);
+      }
+    }
+
+    @Override
+    public void endVisit(JsThisRef x, JsContext ctx) {
+      assert thisExpr != null;
+      if (thisExpr != x) {
+        ctx.replaceMe(thisExpr);
+      }
+    }
+
+    @Override
+    public void endVisit(JsVar x, JsContext ctx) {
+      JsExpression replacement = tryGetReplacementExpression(x.getSourceInfo(), x.getName());
+      if (replacement != null && replacement instanceof JsNameRef) {
+        JsVar replacementVar = new JsVar(x.getSourceInfo(), ((JsNameRef) replacement).getName());
+        replacementVar.setInitExpr(x.getInitExpr());
+        ctx.replaceMe(replacementVar);
+      }
+    }
+
+    @Override
+    public void endVisit(JsForIn x, JsContext ctx) {
+      JsExpression iterVarReplacement =
+          tryGetReplacementExpression(x.getSourceInfo(), x.getIterVarName());
+      if (iterVarReplacement != null && iterVarReplacement instanceof JsNameRef) {
+        JsName iterVarName = ((JsNameRef) iterVarReplacement).getName();
+        JsForIn replacement = new JsForIn(x.getSourceInfo(), iterVarName);
+        replacement.setBody(x.getBody());
+        replacement.setIterExpr(x.getIterExpr());
+        replacement.setObjExpr(x.getObjExpr());
+        ctx.replaceMe(replacement);
+      }
+    }
+
+    /**
+     * Determine the replacement expression to use in place of a reference to a
+     * given name. Returns <code>null</code> if no replacement has been set for
+     * the name.
+     */
+    private JsExpression tryGetReplacementExpression(SourceInfo sourceInfo,
+        JsName name) {
+      if (nameReplacements.containsKey(name)) {
         return nameReplacements.get(name).makeRef(sourceInfo);
       } else {
         return null;
       }
+    }
+
+    /**
+     * Set a replacement JsName for all references to a JsName.
+     *
+     * @param name the name to replace
+     * @param newName the new name that should be used in place of references to
+     *          <code>name</code>
+     * @return the previous JsName the name would have been replaced with or
+     *         <code>null</code> if one was not previously set
+     */
+    public JsName setReplacementName(JsName name, JsName newName) {
+      return nameReplacements.put(name, newName);
     }
   }
 
@@ -1286,31 +1521,21 @@ public class JsInliner {
   }
 
   /**
-   * Detects uses of parameters that would produce incorrect results if inlined.
-   * Generally speaking, we disallow the use of parameters as lvalues. Also
-   * detects trying to inline a method which references 'this' where the call
-   * site has no qualifier.
+   * Detects uses of parameters as lvalues, which are disallowed for inlining
+   * as an expression. This does not effect inlining as a block, because each
+   * parameter is replaced with a new variable.
    */
   private static class ParameterUsageVisitor extends JsVisitor {
-    private final boolean hasThisExpr;
     private final Set<JsName> parameterNames;
     private boolean violation = false;
 
-    public ParameterUsageVisitor(boolean hasThisExpr, Set<JsName> parameterNames) {
-      this.hasThisExpr = hasThisExpr;
+    public ParameterUsageVisitor(Set<JsName> parameterNames) {
       this.parameterNames = parameterNames;
     }
 
     @Override
     public void endVisit(JsNameRef x, JsContext ctx) {
       if (ctx.isLvalue() && isParameter(x)) {
-        violation = true;
-      }
-    }
-
-    @Override
-    public void endVisit(JsThisRef x, JsContext ctx) {
-      if (!hasThisExpr) {
         violation = true;
       }
     }
@@ -1329,6 +1554,23 @@ public class JsInliner {
 
       JsName name = ref.getName();
       return parameterNames.contains(name);
+    }
+  }
+
+  /**
+   * Detects a method which references 'this' where the call site has no
+   * qualifier.
+   */
+  private static class ThisExprViolationVisitor extends JsVisitor {
+    private boolean violation = false;
+
+    @Override
+    public void endVisit(JsThisRef x, JsContext ctx) {
+      violation = true;
+    }
+
+    public boolean hasViolation() {
+      return violation;
     }
   }
 
@@ -1639,7 +1881,7 @@ public class JsInliner {
    * that refer to function parameters.
    */
   private static boolean hasCommonIdents(List<JsExpression> arguments,
-      JsNode toInline, Collection<String> parameterIdents) {
+      List<JsStatement> toInline, Collection<String> parameterIdents) {
 
     // This is a fire-twice loop
     boolean checkQualified = false;
@@ -1650,7 +1892,7 @@ public class JsInliner {
       IdentCollector argCollector = new IdentCollector(checkQualified);
       argCollector.acceptList(arguments);
       IdentCollector statementCollector = new IdentCollector(checkQualified);
-      statementCollector.accept(toInline);
+      statementCollector.acceptList(toInline);
 
       Set<String> idents = argCollector.getIdents();
 
@@ -1740,53 +1982,19 @@ public class JsInliner {
     return JsSafeCloner.clone(expression);
   }
 
-  /**
-   * Determine if a statement can be inlined into a call site.
-   */
-  private static boolean isInlinable(JsFunction caller, JsFunction callee,
-      JsExpression thisExpr, List<JsExpression> arguments, JsNode toInline) {
-
-    /*
-     * This will happen with varargs-style JavaScript functions that rely on the
-     * "arguments" array. The reference to arguments would be detected in
-     * BoundedScopeVisitor, but the code below assumes the same number of
-     * parameters and arguments.
-     */
-    if (arguments.size() != callee.getParameters().size()) {
-      return false;
-    }
-
-    // Build up a list of all parameter names
-    Set<JsName> parameterNames = Sets.newHashSet();
-    Set<String> parameterIdents = Sets.newHashSet();
-    for (JsParameter param : callee.getParameters()) {
-      parameterNames.add(param.getName());
-      parameterIdents.add(param.getName().getIdent());
-    }
-
-    /*
-     * Make sure that inlining won't change the final name of non-parameter
-     * idents due to the change of scope. The most likely cause would be the use
-     * of an unqualified variable reference in a JSNI block that happened to
-     * conflict with a Java-derived identifier.
-     */
-    StableNameChecker detector = new StableNameChecker(caller.getScope(),
-        callee.getScope(), parameterNames);
-    detector.accept(toInline);
-    if (!detector.isStable()) {
+  /** Determines whether the expression-ized body of the callee can be inlined. */
+  private static boolean canInlineAsExpression(JsFunction caller, JsFunction callee,
+      JsExpression thisExpr, List<JsExpression> arguments, JsExpression toInline) {
+    if (!canInlineAsBlock(caller, callee, thisExpr, arguments,
+          Arrays.asList(new JsExprStmt(toInline.getSourceInfo(), toInline)))) {
       return false;
     }
 
     /*
-     * Ensure that the names referred to by the argument list and the statement
-     * are disjoint. This prevents inlining of the following:
-     *
-     * static int i; public void add(int a) { i += a; }; add(i++);
+     * Determine if the evaluation of the invocation's arguments may create side
+     * effects. This will determine how aggressively the parameters may be
+     * reordered.
      */
-    if (hasCommonIdents(arguments, toInline, parameterIdents)) {
-      return false;
-    }
-
     List<JsExpression> evalArgs;
     if (thisExpr == null) {
       evalArgs = arguments;
@@ -1795,12 +2003,6 @@ public class JsInliner {
       evalArgs.add(thisExpr);
       evalArgs.addAll(arguments);
     }
-
-    /*
-     * Determine if the evaluation of the invocation's arguments may create side
-     * effects. This will determine how aggressively the parameters may be
-     * reordered.
-     */
     if (isVolatile(evalArgs, caller)) {
       /*
        * Determine the order in which the parameters must be evaluated. This
@@ -1836,12 +2038,77 @@ public class JsInliner {
       }
     }
 
-    // Check that parameters aren't used in such a way as to prohibit inlining
-    ParameterUsageVisitor v = new ParameterUsageVisitor(thisExpr != null,
-        parameterNames);
+    // Check that the parameters aren't used as lvalues.
+    // Build up a list of all parameter names
+    Set<JsName> parameterNames = Sets.newHashSet();
+    Set<String> parameterIdents = Sets.newHashSet();
+    for (JsParameter param : callee.getParameters()) {
+      parameterNames.add(param.getName());
+      parameterIdents.add(param.getName().getIdent());
+    }
+    ParameterUsageVisitor v = new ParameterUsageVisitor(parameterNames);
     v.accept(toInline);
     if (v.hasViolation()) {
       return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * Determines whether the function body can be inlined as a block.
+   *
+   * <p>These are also necessary conditions for inlining as an expression.
+   */
+  private static boolean canInlineAsBlock(JsFunction caller, JsFunction callee,
+      JsExpression thisExpr, List<JsExpression> arguments, List<JsStatement> toInline) {
+    /*
+     * This will happen with varargs-style JavaScript functions that rely on the
+     * "arguments" array. The reference to arguments would be detected in
+     * BoundedScopeVisitor, but the code below assumes the same number of
+     * parameters and arguments.
+     */
+    if (arguments.size() != callee.getParameters().size()) {
+      return false;
+    }
+
+    // Build up a list of all parameter names
+    Set<JsName> parameterNames = Sets.newHashSet();
+    Set<String> parameterIdents = Sets.newHashSet();
+    for (JsParameter param : callee.getParameters()) {
+      parameterNames.add(param.getName());
+      parameterIdents.add(param.getName().getIdent());
+    }
+
+    /*
+     * Make sure that inlining won't change the final name of non-parameter
+     * idents due to the change of scope. The most likely cause would be the use
+     * of an unqualified variable reference in a JSNI block that happened to
+     * conflict with a Java-derived identifier.
+     */
+    StableNameChecker detector = new StableNameChecker(caller.getScope(),
+        callee.getScope(), parameterNames);
+    detector.acceptList(toInline);
+    if (!detector.isStable()) {
+      return false;
+    }
+
+    /*
+     * Ensure that the names referred to by the argument list and the function body
+     * are disjoint. This prevents inlining of the following:
+     *
+     * static int i; public void add(int a) { i += a; }; add(i++);
+     */
+    if (hasCommonIdents(arguments, toInline, parameterIdents)) {
+      return false;
+    }
+
+    if (thisExpr != null) {
+      ThisExprViolationVisitor v = new ThisExprViolationVisitor();
+      v.acceptList(toInline);
+      if (v.hasViolation()) {
+        return false;
+      }
     }
 
     // Hooray!

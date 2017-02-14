@@ -101,6 +101,23 @@
       "revId": "06fc03dceba76239f0d2e35aca845c4efa852484",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1e1e35a_b6951a7c",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsInlinerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-02-14T09:01:06Z",
+      "side": 1,
+      "message": "Why is the \u0027throw\u0027 removed? The initial code should \"throw 84\" (with stacktrace including bar and foo), so I\u0027d expect the optimized code to do the same.\n\nBTW, I\u0027m not familiar with this test code at all, but why the expected code doesn\u0027t contain the \u0027var a \u003d 42;\u0027 too?",
+      "revId": "06fc03dceba76239f0d2e35aca845c4efa852484",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

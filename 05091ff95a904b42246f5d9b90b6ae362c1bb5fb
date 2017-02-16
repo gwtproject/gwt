@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "232df574_5f0a614c",
+        "filename": "user/src/com/google/gwt/user/client/ui/FormPanel.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-02-16T22:38:37Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027static\u0027 modifier.",
+      "revId": "05091ff95a904b42246f5d9b90b6ae362c1bb5fb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

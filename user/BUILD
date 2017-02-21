@@ -530,6 +530,7 @@ AugmentedJar(
         "-Xep:SelfComparison:OFF",  # go/self-comparison-lsc
         "-Xep:SelfEquals:OFF",  # go/self-equals-lsc
         "-Xep:IdentityBinaryExpression:OFF",
+        "-Xep:CollectionIncompatibleType:OFF",
     ],
     deps = [
         "//third_party/java/jsr305_annotations",

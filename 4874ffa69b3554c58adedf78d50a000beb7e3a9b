@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2744d343_c423baa4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 10640
+      },
+      "writtenOn": "2017-02-23T19:37:39Z",
+      "side": 1,
+      "message": "That one was in the old system...  I\u0027m not sure that system supplied a hash, or at least it doesn\u0027t appear in the UI.  (?)",
+      "parentUuid": "f722bf63_bbccff73",
+      "revId": "4874ffa69b3554c58adedf78d50a000beb7e3a9b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8b8b04bc_404aada5",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -65,6 +83,24 @@
       "writtenOn": "2017-02-23T19:17:55Z",
       "side": 1,
       "message": "What\u0027s the impact on UI? Does this also revert the behavior on mobile or have WebKit \u0026 Blink changed enough that this actually is no longer needed ?",
+      "revId": "4874ffa69b3554c58adedf78d50a000beb7e3a9b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90a79a3d_7ba325d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 10640
+      },
+      "writtenOn": "2017-02-23T19:37:39Z",
+      "side": 1,
+      "message": "It should only affect the positioning of tap highlights on mobile devices.  From the 2010 change:\n\"Adds onclick\u003d\u0027\u0027 to cell containers, so that touch devices show tap highlights in the right place.\"\nSimply adding an empty onclick attribute to achieve this result was a bit hacky, and I do think \nit\u0027s likely that behavior changes in the past 6 years may have rendered this approach obsolete.  \nIf there were more potential for meaningful breakage I would hesitate to remove the attribute \nwithout putting some alternate solution in place.  But as things stand I\u0027m comfortable removing\nthis and thus helping enable Strict CSP for GWT.",
+      "parentUuid": "d299b93c_bcef7dcc",
       "revId": "4874ffa69b3554c58adedf78d50a000beb7e3a9b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true

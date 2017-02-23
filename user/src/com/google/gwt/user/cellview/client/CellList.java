@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -52,7 +52,7 @@ import java.util.Set;
 
 /**
  * A single column list of cells.
- * 
+ *
  * <p>
  * <h3>Examples</h3>
  * <dl>
@@ -70,7 +70,7 @@ import java.util.Set;
  * <dd>{@example com.google.gwt.examples.view.KeyProviderExample}</dd>
  * </dl>
  * </p>
- * 
+ *
  * @param <T> the data type of list items
  */
 public class CellList<T> extends AbstractHasData<T> {
@@ -129,7 +129,7 @@ public class CellList<T> extends AbstractHasData<T> {
   }
 
   interface Template extends SafeHtmlTemplates {
-    @Template("<div onclick=\"\" __idx=\"{0}\" class=\"{1}\" style=\"outline:none;\" >{2}</div>")
+    @Template("<div __idx=\"{0}\" class=\"{1}\" style=\"outline:none;\" >{2}</div>")
     SafeHtml div(int idx, String classes, SafeHtml cellContents);
   }
 
@@ -167,7 +167,7 @@ public class CellList<T> extends AbstractHasData<T> {
 
   /**
    * Construct a new {@link CellList}.
-   * 
+   *
    * @param cell the cell used to render each item
    */
   public CellList(final Cell<T> cell) {
@@ -176,7 +176,7 @@ public class CellList<T> extends AbstractHasData<T> {
 
   /**
    * Construct a new {@link CellList} with the specified {@link Resources}.
-   * 
+   *
    * @param cell the cell used to render each item
    * @param resources the resources used for this widget
    */
@@ -187,7 +187,7 @@ public class CellList<T> extends AbstractHasData<T> {
   /**
    * Construct a new {@link CellList} with the specified {@link ProvidesKey key
    * provider}.
-   * 
+   *
    * @param cell the cell used to render each item
    * @param keyProvider an instance of ProvidesKey<T>, or null if the record
    *          object should act as its own key
@@ -199,7 +199,7 @@ public class CellList<T> extends AbstractHasData<T> {
   /**
    * Construct a new {@link CellList} with the specified {@link Resources} and
    * {@link ProvidesKey key provider}.
-   * 
+   *
    * @param cell the cell used to render each item
    * @param resources the resources used for this widget
    * @param keyProvider an instance of ProvidesKey<T>, or null if the record
@@ -234,7 +234,7 @@ public class CellList<T> extends AbstractHasData<T> {
 
   /**
    * Get the message that is displayed when there is no data.
-   * 
+   *
    * @return the empty message
    * @see #setEmptyListMessage(SafeHtml)
    * @deprecated as of GWT 2.3, use {@link #getEmptyListWidget()} instead
@@ -246,7 +246,7 @@ public class CellList<T> extends AbstractHasData<T> {
 
   /**
    * Get the widget displayed when the list has no rows.
-   * 
+   *
    * @return the empty list widget
    */
   public Widget getEmptyListWidget() {
@@ -255,7 +255,7 @@ public class CellList<T> extends AbstractHasData<T> {
 
   /**
    * Get the widget displayed when the data is loading.
-   * 
+   *
    * @return the loading indicator
    */
   public Widget getLoadingIndicator() {
@@ -265,7 +265,7 @@ public class CellList<T> extends AbstractHasData<T> {
   /**
    * Get the {@link Element} for the specified index. If the element has not
    * been created, null is returned.
-   * 
+   *
    * @param indexOnPage the index on the page
    * @return the element, or null if it doesn't exists
    * @throws IndexOutOfBoundsException if the index is outside of the current
@@ -282,7 +282,7 @@ public class CellList<T> extends AbstractHasData<T> {
 
   /**
    * Set the message to display when there is no data.
-   * 
+   *
    * @param html the message to display when there are no results
    * @see #getEmptyListMessage()
    * @deprecated as of GWT 2.3, use
@@ -297,7 +297,7 @@ public class CellList<T> extends AbstractHasData<T> {
 
   /**
    * Set the widget to display when the list has no rows.
-   * 
+   *
    * @param widget the empty data widget
    */
   public void setEmptyListWidget(Widget widget) {
@@ -306,7 +306,7 @@ public class CellList<T> extends AbstractHasData<T> {
 
   /**
    * Set the widget to display when the data is loading.
-   * 
+   *
    * @param widget the loading indicator
    */
   public void setLoadingIndicator(Widget widget) {
@@ -315,7 +315,7 @@ public class CellList<T> extends AbstractHasData<T> {
 
   /**
    * Set the value updater to use when cells modify items.
-   * 
+   *
    * @param valueUpdater the {@link ValueUpdater}
    */
   public void setValueUpdater(ValueUpdater<T> valueUpdater) {
@@ -347,7 +347,7 @@ public class CellList<T> extends AbstractHasData<T> {
 
   /**
    * Fire an event to the cell.
-   * 
+   *
    * @param context the {@link Context} of the cell
    * @param event the event that was fired
    * @param parent the parent of the cell
@@ -380,7 +380,7 @@ public class CellList<T> extends AbstractHasData<T> {
   /**
    * Get the parent element that wraps the cell from the list item. Override
    * this method if you add structure to the element.
-   * 
+   *
    * @param item the row element that wraps the list item
    * @return the parent element of the cell
    */
@@ -457,7 +457,7 @@ public class CellList<T> extends AbstractHasData<T> {
 
   /**
    * Called when the loading state changes.
-   * 
+   *
    * @param state the new loading state
    */
   @Override

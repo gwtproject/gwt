@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "f722bf63_bbccff73",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-02-23T19:17:55Z",
+      "side": 1,
+      "message": "Could this be updated to the Git commit SHA1 instead?",
+      "revId": "4874ffa69b3554c58adedf78d50a000beb7e3a9b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8b8b04bc_404aada5",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -34,6 +51,23 @@
       "revId": "4874ffa69b3554c58adedf78d50a000beb7e3a9b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d299b93c_bcef7dcc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-02-23T19:17:55Z",
+      "side": 1,
+      "message": "What\u0027s the impact on UI? Does this also revert the behavior on mobile or have WebKit \u0026 Blink changed enough that this actually is no longer needed ?",
+      "revId": "4874ffa69b3554c58adedf78d50a000beb7e3a9b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     },
     {
       "key": {

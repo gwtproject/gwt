@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0f6713_9b832843",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellBrowser.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-02-24T19:27:20Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 117).",
+      "revId": "4d89de92e8ac7573da569e6ec8d55453de4f73d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

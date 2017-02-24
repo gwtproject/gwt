@@ -52,6 +52,24 @@
       "revId": "4d89de92e8ac7573da569e6ec8d55453de4f73d4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe88097c_9e426bd5",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellBrowser.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 10640
+      },
+      "writtenOn": "2017-02-24T19:59:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82eae2d9_9d098a9a",
+      "revId": "4d89de92e8ac7573da569e6ec8d55453de4f73d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

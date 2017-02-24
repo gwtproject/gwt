@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c112874_9f07a47c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-02-24T19:20:17Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "009a22e1dea5a9b7d917b9125b72ca3de73ed2d6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43192bcc_edbd4e97",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellBrowser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-02-24T19:20:17Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 117).",
+      "revId": "009a22e1dea5a9b7d917b9125b72ca3de73ed2d6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -33,6 +33,24 @@
       "revId": "009a22e1dea5a9b7d917b9125b72ca3de73ed2d6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf35b08_615ea02c",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellBrowser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 10640
+      },
+      "writtenOn": "2017-02-24T19:22:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "43192bcc_edbd4e97",
+      "revId": "009a22e1dea5a9b7d917b9125b72ca3de73ed2d6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -137,8 +137,8 @@ public class GwtAstBuilderTest extends JJSTestBase {
     sources.add(JavaResourceBase.createMockJavaResource("test.DalTile",
         "package test;",
         "public class DalTile {"
-        + "{ new DalRow().getTiles();"
-        + "}",
+            + "{ new DalRow().getTiles();"
+            + "}",
         "}"
     ));
 
@@ -146,30 +146,30 @@ public class GwtAstBuilderTest extends JJSTestBase {
         "package test;",
         "public class DalGrid {",
         "  public DalNavigationTile getNavigationTile() {"
-        + "  DalRow row = new DalRow();"
-        + "  DalNavigationTile found = null;"
-        + "  for (DalTile dalTile : row.getTiles()) {"
-        + "    if (dalTile instanceof DalNavigationTile) {"
-        + "      found = (DalNavigationTile) dalTile;"
-        + "      break;"
-        + "    }"
-        + "  }"
-        + "  return found;"
-        + "}",
+            + "  DalRow row = new DalRow();"
+            + "  DalNavigationTile found = null;"
+            + "  for (DalTile dalTile : row.getTiles()) {"
+            + "    if (dalTile instanceof DalNavigationTile) {"
+            + "      found = (DalNavigationTile) dalTile;"
+            + "      break;"
+            + "    }"
+            + "  }"
+            + "  return found;"
+            + "}",
         "}"
     ));
 
     sources.add(JavaResourceBase.createMockJavaResource("test.DalRow",
         "package test;",
         "public class DalRow {"
-        + "  public DalTile[] getTiles() {"
-        + "    int length = 5;"
-        + "    DalTile[] result = new DalTile[length];"
-        + "    for (int i = 0; i < length; i++) {"
-        + "      result[i] = new DalTile();"
-        + "    }"
-        + "    return result;"
-        + "  }",
+            + "  public DalTile[] getTiles() {"
+            + "    int length = 5;"
+            + "    DalTile[] result = new DalTile[length];"
+            + "    for (int i = 0; i < length; i++) {"
+            + "      result[i] = new DalTile();"
+            + "    }"
+            + "    return result;"
+            + "  }",
         "}"
     ));
 
@@ -217,7 +217,6 @@ public class GwtAstBuilderTest extends JJSTestBase {
     JDeclaredType lambdaNested = program.getFromTypeMap("test.NestedClasses$lambda$0$Type");
     assertEquals(JDeclaredType.NestedClassDisposition.LAMBDA, lambdaNested.getClassDisposition());
 
-
     JDeclaredType referenceNested =
         program.getFromTypeMap("test.NestedClasses$0methodref$referencedMethod$Type");
     assertEquals(JDeclaredType.NestedClassDisposition.LAMBDA,
@@ -229,6 +228,34 @@ public class GwtAstBuilderTest extends JJSTestBase {
     JDeclaredType lambdaNestedInner = program.getFromTypeMap("test.NestedClasses$2$lambda$0$Type");
     assertEquals(JDeclaredType.NestedClassDisposition.LAMBDA, lambdaNestedInner
         .getClassDisposition());
+  }
+
+  // TODO(rluble): Make an actual test..
+  public void testIntersectionBound() throws UnableToCompleteException {
+    sourceLevel = SourceLevel.JAVA8;
+
+    sources.add(JavaResourceBase.createMockJavaResource("test.IntersectionBound",
+        "package test;",
+        "public class IntersectionBound {",
+        "  public void m() {",
+        "    get().f();",
+        "    get().g();",
+        "    get().h();",
+        "  }",
+        "  public interface A<T> { void f(); }",
+        "  public interface B { void g(); }",
+        "  public interface C { void h(); }",
+        "  <T extends B & A<String> & C> T get() { return null;} ",
+        "}"
+    ));
+
+    JProgram program = compileProgram("test.IntersectionBound");
+    JDeclaredType intersectionBound = program.getFromTypeMap("test.IntersectionBound");
+    for (JMethod method : intersectionBound.getMethods()) {
+      if (method.getName().equals("m")) {
+        assertNull(method.getBody().toString(), intersectionBound);
+      }
+    }
   }
 
   public void testUniqueArrayTypeInstance() throws UnableToCompleteException {
@@ -250,7 +277,7 @@ public class GwtAstBuilderTest extends JJSTestBase {
   private CompilationState buildCompilationState() throws UnableToCompleteException {
     CompilerContext compilerContext =
         new CompilerContext.Builder().options(new PrecompileTaskOptionsImpl() {
-            @Override
+          @Override
           public boolean shouldJDTInlineCompileTimeConstants() {
             return false;
           }
@@ -264,7 +291,7 @@ public class GwtAstBuilderTest extends JJSTestBase {
 
   private JProgram compileProgram(String entryType) throws UnableToCompleteException {
     CompilerContext compilerContext = provideCompilerContext();
-;
+    ;
     CompilationState state = CompilationStateBuilder.buildFrom(logger, compilerContext, sources,
         getAdditionalTypeProviderDelegate());
     JProgram program = JavaAstConstructor.construct(logger, state, compilerContext,

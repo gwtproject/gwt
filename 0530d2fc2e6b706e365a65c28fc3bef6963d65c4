@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "703e0f46_7b8aa781",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/GwtAstBuilderTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-03-05T22:42:17Z",
+      "side": 1,
+      "message": "[error] \u0027while\u0027 is not followed by whitespace.",
+      "revId": "0530d2fc2e6b706e365a65c28fc3bef6963d65c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

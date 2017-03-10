@@ -29,6 +29,7 @@ import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 
+import java.util.function.Function;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -368,5 +369,14 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
   public void testNativeJsMethodDispatch_unreferencedSupertypeMethod() {
     final AbstractNativeType o = createAbstractNativeType("Hello");
     assertEquals("Hello", o.getTextContent());
+  }
+
+  private static String first(String... strings) {
+    return strings[0];
+  }
+
+  public void testVarargsFunctionalConversion() {
+    Function<String[], String> function = CompilerMiscRegressionTest::first;
+    assertEquals("Hello", function.apply(new String[] {"Hello", "GoodBye"}));
   }
 }

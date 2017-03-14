@@ -22,6 +22,30 @@
       "revId": "eadd310f2bd7d8a6abfa18880a8afcd87e36554f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "efff6024_198fedf0",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Runtime.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-03-14T20:26:26Z",
+      "side": 0,
+      "message": "Current code is incorrect and was added during JsInterop refactoring. We original wanted to have proper constructor here so we could access it through the Class and prototype.\nSince the constructor is set to prototype here, this is both incorrect and useless so it is better if we remove than keep.\n\nSo the question is, if we choose to set it to something \u0027more\u0027 correct (but not completely correct in multi ctor scenario) or not set it at all (so will point to Object constructor).\n\nI\u0027m more towards not setting it at all. Let me know if you disagree.",
+      "parentUuid": "f955d415_126d346f",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 24
+      },
+      "revId": "eadd310f2bd7d8a6abfa18880a8afcd87e36554f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

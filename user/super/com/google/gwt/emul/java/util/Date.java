@@ -38,11 +38,15 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
   }
 
   public static long parse(String s) {
+    return (long) parseDbl(s);
+  }
+
+  private static double parseDbl(String s) {
     double parsed = NativeDate.parse(s);
     if (Double.isNaN(parsed)) {
       throw new IllegalArgumentException();
     }
-    return (long) parsed;
+    return parsed;
   }
 
   // CHECKSTYLE_OFF: Matching the spec.
@@ -69,7 +73,7 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
   /**
    * JavaScript Date instance.
    */
-  private final NativeDate jsdate;
+  protected final NativeDate jsdate;
 
   public Date() {
     jsdate = new NativeDate();
@@ -95,29 +99,33 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
   }
 
   public Date(String date) {
-    this(Date.parse(date));
+    this(Date.parseDbl(date));
+  }
+
+  protected Date(double date) {
+    jsdate = new NativeDate(date);
   }
 
   public boolean after(Date when) {
-    return getTime() > when.getTime();
+    return jsdate.getTime() > when.jsdate.getTime();
   }
 
   public boolean before(Date when) {
-    return getTime() < when.getTime();
+    return jsdate.getTime() < when.jsdate.getTime();
   }
 
   public Object clone() {
-    return new Date(getTime());
+    return new Date(jsdate.getTime());
   }
 
   @Override
   public int compareTo(Date other) {
-    return Long.compare(getTime(), other.getTime());
+    return Double.compare(jsdate.getTime(), other.jsdate.getTime());
   }
 
   @Override
   public boolean equals(Object obj) {
-    return ((obj instanceof Date) && (getTime() == ((Date) obj).getTime()));
+    return ((obj instanceof Date) && (jsdate.getTime() == ((Date) obj).jsdate.getTime()));
   }
 
   public int getDate() {
@@ -298,8 +306,11 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
     }
   }
 
+  /**
+   * JavaScript Date representation.
+   */
   @JsType(isNative = true, name = "Date", namespace = JsPackage.GLOBAL)
-  private static class NativeDate {
+  protected static class NativeDate {
     // CHECKSTYLE_OFF: Matching the spec.
     public static native double UTC(int year, int month, int dayOfMonth, int hours,
         int minutes, int seconds, int millis);

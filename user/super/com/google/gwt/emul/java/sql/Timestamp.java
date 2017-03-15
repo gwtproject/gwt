@@ -96,14 +96,21 @@ public class Timestamp extends java.util.Date {
     nanos = (((int) (time % 1000)) * 1000000);
   }
 
+  private Timestamp(double time) {
+    super(time);
+
+    // Seed the milliseconds in nanos
+    nanos = (((int) (time % 1000)) * 1000000);
+  }
+
   public boolean after(Timestamp ts) {
-    return (getTime() > ts.getTime())
-        || (getTime() == ts.getTime() && getNanos() > ts.getNanos());
+    return (jsdate.getTime() > ts.jsdate.getTime())
+        || (jsdate.getTime() == ts.jsdate.getTime() && getNanos() > ts.getNanos());
   }
 
   public boolean before(Timestamp ts) {
-    return (getTime() < ts.getTime())
-        || (getTime() == ts.getTime() && getNanos() < ts.getNanos());
+    return (jsdate.getTime() < ts.jsdate.getTime())
+        || (jsdate.getTime() == ts.jsdate.getTime() && getNanos() < ts.getNanos());
   }
 
   @Override
@@ -116,7 +123,7 @@ public class Timestamp extends java.util.Date {
   }
 
   public int compareTo(Timestamp o) {
-    int cmp = Long.compare(getTime(), o.getTime());
+    int cmp = Double.compare(jsdate.getTime(), o.jsdate.getTime());
     return cmp == 0 ? Integer.compare(getNanos(), o.getNanos()) : cmp;
   }
 
@@ -128,7 +135,7 @@ public class Timestamp extends java.util.Date {
   }
 
   public boolean equals(Timestamp ts) {
-    return ts != null && getTime() == ts.getTime() && getNanos() == ts.getNanos();
+    return ts != null && jsdate.getTime() == ts.jsdate.getTime() && getNanos() == ts.getNanos();
   }
 
   public int getNanos() {

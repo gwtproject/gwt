@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45f7ecc2_092b253b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/NameClashesFixer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-03-16T18:22:15Z",
+      "side": 1,
+      "message": "which should not be shadowed.",
+      "range": {
+        "startLine": 256,
+        "startChar": 75,
+        "endLine": 256,
+        "endChar": 96
+      },
+      "revId": "36f0c400e90ea2b798409ee2a382a6d3b3312d13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b432df24_e279b35a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/NameClashesFixer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-03-16T18:22:15Z",
+      "side": 1,
+      "message": ", (comma)?",
+      "range": {
+        "startLine": 258,
+        "startChar": 15,
+        "endLine": 258,
+        "endChar": 16
+      },
+      "revId": "36f0c400e90ea2b798409ee2a382a6d3b3312d13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c96bf68e_6a17ee23",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-03-16T18:22:15Z",
+      "side": 1,
+      "message": "private (and below)",
+      "range": {
+        "startLine": 376,
+        "startChar": 2,
+        "endLine": 376,
+        "endChar": 8
+      },
+      "revId": "36f0c400e90ea2b798409ee2a382a6d3b3312d13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

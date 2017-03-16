@@ -30,6 +30,7 @@ import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,7 @@ import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import jsinterop.annotations.JsMethod;
 
 /**
  * Tests Miscelaneous fixes.
@@ -368,5 +370,24 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
   public void testNativeJsMethodDispatch_unreferencedSupertypeMethod() {
     final AbstractNativeType o = createAbstractNativeType("Hello");
     assertEquals("Hello", o.getTextContent());
+  }
+
+  @JsMethod
+  public static List<String> singletonFrom(int i, String... arguments) {
+    // Make the second parameter varargs and pass it as a whole to trigger the arguments copying
+    // preamble.
+    return Arrays.asList(arguments).subList(i,i+1);
+  }
+
+  @JsMethod
+  public static List<String> argumentsClasher(int arguments, String... others) {
+    // Make the second parameter varargs and pass it as a whole to trigger the arguments copying
+    // preamble.
+    return Arrays.asList(others).subList(0, arguments);
+  }
+
+  public void testVarargsNamedArguments() {
+    assertEquals("GoodBye", singletonFrom(1, "Hello", "GoodBye").get(0));
+    assertEquals("Hello", argumentsClasher(1, "Hello", "GoodBye").get(0));
   }
 }

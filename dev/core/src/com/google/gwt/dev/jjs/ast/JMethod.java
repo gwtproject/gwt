@@ -83,7 +83,7 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
       return false;
     }
     for (JMethod method : getOverriddenMethodsIncludingSelf()) {
-      if (method.exported || method.isJsFunctionMethod()) {
+      if (method.exported || method.isJsFunctionMethod() || method.isJsNative()) {
         return true;
       }
     }

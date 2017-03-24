@@ -68,6 +68,30 @@
       "revId": "715f9ab41b3c0f3af26af6ec9ac9021b69afd4e1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3be679d1_811a509f",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1764,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-03-24T19:45:26Z",
+      "side": 1,
+      "message": "I agree it should use Double.compare and follow the pattern that we used for the long.",
+      "parentUuid": "fd5521c3_e718a331",
+      "range": {
+        "startLine": 1764,
+        "startChar": 29,
+        "endLine": 1764,
+        "endChar": 52
+      },
+      "revId": "715f9ab41b3c0f3af26af6ec9ac9021b69afd4e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

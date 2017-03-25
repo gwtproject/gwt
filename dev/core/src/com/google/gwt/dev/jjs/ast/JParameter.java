@@ -25,17 +25,19 @@ public class JParameter extends JVariable {
   private final boolean isThis;
   private final boolean isVarags;
   private boolean isOptional;
+  private boolean isDoNotAutobox;
 
   public JParameter(SourceInfo info, String name, JType type, boolean isFinal) {
-    this(info, name, type, isFinal, false, false, false);
+    this(info, name, type, isFinal, false, false, false, false);
   }
 
   JParameter(SourceInfo info, String name, JType type, boolean isFinal, boolean isVarargs,
-      boolean isThis, boolean isOptional) {
+      boolean isThis, boolean isOptional, boolean isDoNotAutobox) {
     super(info, name, type, isFinal);
     this.isThis = isThis;
     this.isVarags = isVarargs;
     this.isOptional = isOptional;
+    this.isDoNotAutobox = isDoNotAutobox;
     assert !isVarargs || type.isArrayType();
   }
 
@@ -65,8 +67,16 @@ public class JParameter extends JVariable {
     return isVarags;
   }
 
+  public boolean isDoNotAutobox() {
+    return isDoNotAutobox;
+  }
+
   public void setOptional() {
     isOptional = true;
+  }
+
+  public void setDoNotAutobox() {
+    isDoNotAutobox = true;
   }
 
   @Override

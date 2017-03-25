@@ -97,6 +97,9 @@ public final class JsInteropUtil {
     if (getInteropAnnotation(annotations, "JsOptional") != null) {
       parameter.setOptional();
     }
+    if (getJavaEmulInternalAnnotation(annotations, "DoNotAutobox") != null) {
+      parameter.setDoNotAutobox();
+    }
   }
 
   public static void maybeSetJsInteropProperties(
@@ -154,4 +157,8 @@ public final class JsInteropUtil {
     return JdtUtil.getAnnotationByName(annotations, "jsinterop.annotations." + name);
   }
 
+  private static AnnotationBinding getJavaEmulInternalAnnotation(
+      Annotation[] annotations, String name) {
+    return JdtUtil.getAnnotationByName(annotations, "javaemul.internal.annotations." + name);
+  }
 }

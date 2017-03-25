@@ -99,14 +99,14 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
    * Adds a new final parameter to this method.
    */
   public JParameter createFinalParameter(SourceInfo info, String name, JType type) {
-    return createParameter(info, name, type, true, false, false, false);
+    return createParameter(info, name, type, true, false, false, false, false);
   }
 
   /**
    * Adds a new parameter to this method.
    */
   public JParameter createParameter(SourceInfo info, String name, JType type) {
-    return createParameter(info, name, type, false, false, false, false);
+    return createParameter(info, name, type, false, false, false, false, false);
   }
 
   /**
@@ -114,7 +114,7 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
    */
   public JParameter createParameter(SourceInfo info, String name, JType type, boolean isFinal,
       boolean isVarargs) {
-    return createParameter(info, name, type, isFinal, isVarargs, false, false);
+    return createParameter(info, name, type, isFinal, isVarargs, false, false, false);
   }
 
   /**
@@ -122,22 +122,23 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
    */
   public JParameter cloneParameter(JParameter from) {
     return createParameter(from.getSourceInfo(), from.getName(), from.getType(), from.isFinal(),
-        from.isVarargs(), from.isThis(), from.isOptional());
+        from.isVarargs(), from.isThis(), from.isOptional(), from.isDoNotAutobox());
   }
 
   /**
    * Creates a parameter to hold the value of this in devirtualized methods.
    */
   public JParameter createThisParameter(SourceInfo info, JType type) {
-    return createParameter(info,  "this$static", type, true, false, true, false);
+    return createParameter(info,  "this$static", type, true, false, true, false, false);
   }
 
-  private JParameter createParameter(SourceInfo info, String name, JType type,
-      boolean isFinal, boolean isVarargs, boolean isThis, boolean isOptional) {
+  private JParameter createParameter(SourceInfo info, String name, JType type, boolean isFinal,
+      boolean isVarargs, boolean isThis, boolean isOptional, boolean isDoNotAutobox) {
     assert (name != null);
     assert (type != null);
 
-    JParameter parameter = new JParameter(info, name, type, isFinal, isVarargs, isThis, isOptional);
+    JParameter parameter =
+        new JParameter(info, name, type, isFinal, isVarargs, isThis, isOptional, isDoNotAutobox);
     addParameter(parameter);
     return parameter;
   }

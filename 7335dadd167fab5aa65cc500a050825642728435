@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06f907e0_0276b714",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2614,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-03-25T01:10:03Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "7335dadd167fab5aa65cc500a050825642728435",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05d0bd8d_ab1b9f0e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2641,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-03-25T01:10:03Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 105).",
+      "revId": "7335dadd167fab5aa65cc500a050825642728435",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

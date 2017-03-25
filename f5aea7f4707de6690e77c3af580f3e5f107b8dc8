@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a7eb9ec_6b42f539",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 3510,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-03-25T18:07:00Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "f5aea7f4707de6690e77c3af580f3e5f107b8dc8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

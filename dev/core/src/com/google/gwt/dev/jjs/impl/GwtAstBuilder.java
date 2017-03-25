@@ -379,7 +379,7 @@ public class GwtAstBuilder {
     public void endVisit(AllocationExpression x, BlockScope scope) {
       try {
         SourceInfo info = makeSourceInfo(x);
-        List<JExpression> arguments = popCallArgs(info, x.arguments, x.binding);
+        List<JExpression> arguments = popCallArguments(info, x.arguments, x.binding);
         pushNewExpression(info, x, null, arguments, scope);
       } catch (Throwable e) {
         throw translateException(x, e);
@@ -773,7 +773,7 @@ public class GwtAstBuilder {
         JConstructor ctor = (JConstructor) typeMap.get(x.binding);
         JExpression trueQualifier = makeThisRef(info);
         JMethodCall call = new JMethodCall(info, trueQualifier, ctor);
-        List<JExpression> callArgs = popCallArgs(info, x.arguments, x.binding);
+        List<JExpression> callArgs = popCallArguments(info, x.arguments, x.binding);
 
         if (curClass.classType.isEnumOrSubclass() != null) {
           // Enums: wire up synthetic name/ordinal params to the super method.
@@ -1367,7 +1367,7 @@ public class GwtAstBuilder {
       // Deal with any boxing/unboxing needed
       JNode node = pop();
       if (node instanceof JExpression) {
-        node = simplify((JExpression) node, (Expression) x.body);
+        node = maybeBoxOrUnbox((JExpression) node, (Expression) x.body);
       }
 
       JMethodBody body = (JMethodBody) curMethod.method.getBody();
@@ -1525,7 +1525,7 @@ public class GwtAstBuilder {
         SourceInfo info = makeSourceInfo(x);
         JMethod method = typeMap.get(x.binding);
 
-        List<JExpression> arguments = popCallArgs(info, x.arguments, x.binding);
+        List<JExpression> arguments = popCallArguments(info, x.arguments, x.binding);
         JExpression receiver = pop(x.receiver);
         if (x.receiver instanceof ThisReference) {
           if (method.isStatic()) {
@@ -1649,7 +1649,7 @@ public class GwtAstBuilder {
     public void endVisit(QualifiedAllocationExpression x, BlockScope scope) {
       try {
         SourceInfo info = makeSourceInfo(x);
-        List<JExpression> arguments = popCallArgs(info, x.arguments, x.binding);
+        List<JExpression> arguments = popCallArguments(info, x.arguments, x.binding);
         pushNewExpression(info, x, x.enclosingInstance(), arguments, scope);
       } catch (Throwable e) {
         throw translateException(x, e);
@@ -1939,7 +1939,7 @@ public class GwtAstBuilder {
       if (samMethod.getType() != JPrimitiveType.VOID) {
         JExpression samExpression = boxOrUnboxExpression(samCall, referredMethodBinding.returnType,
             declarationSamBinding.returnType);
-        samMethodBody.getBlock().addStmt(simplify(samExpression, x).makeReturnStatement());
+        samMethodBody.getBlock().addStmt(maybeBoxOrUnbox(samExpression, x).makeReturnStatement());
       } else {
         samMethodBody.getBlock().addStmt(samCall.makeStatement());
       }
@@ -2585,7 +2585,7 @@ public class GwtAstBuilder {
         assert x instanceof NameReference;
         return null;
       }
-      result = simplify(result, x);
+      result = maybeBoxOrUnbox(result, x);
       return result;
     }
 
@@ -2599,10 +2599,20 @@ public class GwtAstBuilder {
           Predicates.notNull()).size());
 
       for (int i = 0; i < result.size(); i++) {
-        result.set(i, (T) simplify(result.get(i), expressions[i]));
+        result.set(i, (T) maybeBoxOrUnbox(result.get(i), expressions[i]));
       }
       return result;
     }
+
+    protected <T extends JExpression> List<T> popWithoutAutoboxing(Expression[] expressions) {
+      if (expressions == null) {
+        return Collections.emptyList();
+      }
+
+      return  (List<T>) popList(Collections2.filter(Arrays.asList(expressions),
+          Predicates.notNull()).size());
+    }
+
 
     protected JDeclarationStatement pop(LocalDeclaration decl) {
       return (decl == null) ? null : (JDeclarationStatement) pop();
@@ -2611,7 +2621,7 @@ public class GwtAstBuilder {
     protected JStatement pop(Statement x) {
       JNode pop = (x == null) ? null : pop();
       if (x instanceof Expression) {
-        return simplify((JExpression) pop, (Expression) x).makeStatement();
+        return maybeBoxOrUnbox((JExpression) pop, (Expression) x).makeStatement();
       }
       return (JStatement) pop;
     }
@@ -2628,7 +2638,7 @@ public class GwtAstBuilder {
         if (element == null) {
           it.remove();
         } else if (element instanceof JExpression) {
-          it.set((T) simplify((JExpression) element, (Expression) statements[i]).makeStatement());
+          it.set((T) maybeBoxOrUnbox((JExpression) element, (Expression) statements[i]).makeStatement());
         }
       }
       return result;
@@ -3101,25 +3111,32 @@ public class GwtAstBuilder {
       return nodeStack.remove(nodeStack.size() - 1);
     }
 
-    private List<JExpression> popCallArgs(SourceInfo info, Expression[] jdtArgs,
-        MethodBinding binding) {
-      List<JExpression> args = pop(jdtArgs);
-      if (!binding.isVarargs()) {
+    private List<JExpression> popCallArguments(SourceInfo info, Expression[] arguments,
+        MethodBinding methodBinding) {
+      List<JExpression> args = popWithoutAutoboxing(arguments);
+      AnnotationBinding[][] parameterAnnotations = methodBinding.getParameterAnnotations();
+      for (int i = 0; i < args.size(); i++) {
+        if (JdtUtil.getAnnotationByName(parameterAnnotations[Math.min(i, args.size() - 1)],
+            "javaemul.internal.annotations.UncheckedCast") == null) {
+          args.set(i, maybeBoxOrUnbox(args.get(i), arguments[i]));
+        }
+      }
+      if (!methodBinding.isVarargs()) {
         return args;
       }
 
       // Handle the odd var-arg case.
-      if (jdtArgs == null) {
+      if (arguments == null) {
         // Get writable collection (args is currently Collections.emptyList()).
         args = Lists.newArrayListWithCapacity(1);
       }
 
-      TypeBinding[] params = binding.parameters;
+      TypeBinding[] params = methodBinding.parameters;
       int varArg = params.length - 1;
 
       // See if there's a single varArg which is already an array.
       if (args.size() == params.length) {
-        if (jdtArgs[varArg].resolvedType.isCompatibleWith(params[varArg])) {
+        if (arguments[varArg].resolvedType.isCompatibleWith(params[varArg])) {
           // Already the correct array type.
           return args;
         }
@@ -3455,7 +3472,7 @@ public class GwtAstBuilder {
       return result;
     }
 
-    private JExpression simplify(JExpression result, Expression x) {
+    private JExpression maybeBoxOrUnbox(JExpression result, Expression x) {
       return maybeBoxOrUnbox(result, x.implicitConversion);
     }
 

@@ -19,6 +19,7 @@ import static jsinterop.annotations.JsPackage.GLOBAL;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import javaemul.internal.annotations.DoNotAutobox;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 
@@ -79,5 +80,18 @@ public class JsMethodTest extends GWTTestCase {
   public void testStaticNativeJsPropertySetter() {
     setJsInteropSecret("very secret!");
     assertEquals("very secret!", getJsInteropSecret());
+  }
+
+  public double returnWithoutBoxing(@DoNotAutobox Object object) {
+    return (Double) object;
+  }
+
+  public void testDoNotAutobox() {
+    assertEquals(3, returnWithoutBoxing(3));
+    try {
+      returnWithoutBoxing(Long.MAX_VALUE);
+      fail("Should have thrown ClassCastException");
+    } catch (ClassCastException expected) {
+    }
   }
 }

@@ -106,6 +106,28 @@ public class ArraysTest extends EmulTestBase {
         new String[]{null, "foo", null, "foo"}));
   }
 
+  public void testArraysEqualsWithDoubleNaNValues() {
+    assertTrue(Arrays.equals(
+        new double[] { 1.5, 4, Double.NaN },
+        new double[] { 1.5, 4, Double.NaN }
+    ));
+    assertFalse(Arrays.equals(
+        new double[] { 1.5, 4, Double.NaN },
+        new double[] { 1.5, Double.NaN, Double.NaN }
+    ));
+  }
+
+  public void testArraysEqualsWithFloatNaNValues() {
+    assertTrue(Arrays.equals(
+        new float[] { 1.5f, 4f, Float.NaN },
+        new float[] { 1.5f, 4f, Float.NaN }
+    ));
+    assertFalse(Arrays.equals(
+        new float[] { 1.5f, 4f, Float.NaN },
+        new float[] { 1.5f, Float.NaN, Float.NaN }
+    ));
+  }
+
   /**
    * Tests {@link Arrays#asList(Object[])}.
    */
@@ -1319,6 +1341,54 @@ public class ArraysTest extends EmulTestBase {
     Arrays.sort(array);
     assertTrue(Arrays.equals(new int[]{Integer.MIN_VALUE, 1, 2, 3, 3, Integer.MAX_VALUE}, array));
   }
+
+  /**
+   * Tests sorting of doubles
+   */
+  public void testDoubleSort() {
+    double[] array = new double[] {
+      41.5, Double.NaN, Double.NaN, 3, 932535, 1, Double.NaN,
+      -3, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NaN};
+    Arrays.sort(array);
+
+    assertTrue(Arrays.equals(new double[] {
+        Double.NEGATIVE_INFINITY,
+        -3.0,
+        1.0,
+        3.0,
+        41.5,
+        932535.0,
+        Double.POSITIVE_INFINITY,
+        Double.NaN,
+        Double.NaN,
+        Double.NaN,
+        Double.NaN }, array));
+  }
+
+  /**
+   * Tests sorting of floats
+   */
+  public void testFloatSort() {
+    float[] array = new float[] {
+      41.5f, Float.NaN, Float.NaN, 3, 932535, 1, Float.NaN,
+      -3, Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.NaN};
+    Arrays.sort(array);
+
+    assertTrue(Arrays.equals(new float[] {
+        Float.NEGATIVE_INFINITY,
+        -3.0f,
+        1.0f,
+        3.0f,
+        41.5f,
+        932535.0f,
+        Float.POSITIVE_INFINITY,
+        Float.NaN,
+        Float.NaN,
+        Float.NaN,
+        Float.NaN }, array));
+  }
+
+
 
   /**
    * Tests sorting a subrange of a primitive array.

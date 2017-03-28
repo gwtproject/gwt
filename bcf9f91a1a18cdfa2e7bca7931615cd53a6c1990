@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7f0758f_94764d07",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-03-28T01:28:51Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 101).",
+      "revId": "bcf9f91a1a18cdfa2e7bca7931615cd53a6c1990",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "223e1359_7ad35a93",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-03-28T01:28:51Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 103).",
+      "revId": "bcf9f91a1a18cdfa2e7bca7931615cd53a6c1990",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7fa327c9_c5a43d40",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-03-28T01:28:51Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 103).",
+      "revId": "bcf9f91a1a18cdfa2e7bca7931615cd53a6c1990",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0cf82d68_98dd6fce",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-03-28T01:28:51Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "bcf9f91a1a18cdfa2e7bca7931615cd53a6c1990",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c98027d_660e94cb",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-03-28T01:28:51Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 105).",
+      "revId": "bcf9f91a1a18cdfa2e7bca7931615cd53a6c1990",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3905239f_50beea38",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 3104,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-03-28T01:28:51Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 111).",
+      "revId": "bcf9f91a1a18cdfa2e7bca7931615cd53a6c1990",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

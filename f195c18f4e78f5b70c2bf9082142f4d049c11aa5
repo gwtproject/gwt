@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98f0dd2f_507ebf91",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 3094,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-03-28T01:36:46Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 111).",
+      "revId": "f195c18f4e78f5b70c2bf9082142f4d049c11aa5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

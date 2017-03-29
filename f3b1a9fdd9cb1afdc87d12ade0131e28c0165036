@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41efa3e3_4f935b42",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ArraysTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1342,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-03-29T20:16:31Z",
+      "side": 1,
+      "message": "assertTrue(Arrays.equals(new double[]{...}, array)\n\n(and below)",
+      "range": {
+        "startLine": 1332,
+        "startChar": 1,
+        "endLine": 1342,
+        "endChar": 40
+      },
+      "revId": "f3b1a9fdd9cb1afdc87d12ade0131e28c0165036",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

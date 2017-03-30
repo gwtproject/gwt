@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e76d288f_e530578b",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2017-03-30T10:10:47Z",
+      "side": 1,
+      "message": "Double.compare(a, b) \u003d\u003d 0. This method already treats NaN as equal and a patch is in review to treat +-0 as unequal. Same below with Float.compare(a, b)",
+      "range": {
+        "startLine": 781,
+        "startChar": 10,
+        "endLine": 781,
+        "endChar": 46
+      },
+      "revId": "bb7d63925b303f9316cb9299bba1551de1b730ac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

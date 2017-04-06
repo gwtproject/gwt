@@ -212,16 +212,23 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "Line 6: JsProperty 'int EntryPoint.Buggy.isX()' cannot have a non-boolean return.",
         "Line 7: JsProperty 'int EntryPoint.Buggy.getY(int)' should have a correct setter "
             + "or getter signature.",
-        "Line 8: JsProperty 'void EntryPoint.Buggy.getZ()' should have a correct setter "
-            + "or getter signature.",
+        // TODO(rluble): uncomment when void return types are forbidden in getters.
+        // "Line 8: JsProperty 'void EntryPoint.Buggy.getZ()' should have a correct setter "
+        //     + "or getter signature.",
         "Line 9: JsProperty 'void EntryPoint.Buggy.setX(int, int)' should have a correct setter "
             + "or getter signature.",
-        "Line 10: JsProperty 'void EntryPoint.Buggy.setY()' should have a correct setter "
-            + "or getter signature.",
+        // TODO(rluble): uncomment when void return types are forbidden in getters.
+        // "Line 10: JsProperty 'void EntryPoint.Buggy.setY()' should have a correct setter "
+        //     + "or getter signature.",
+        "Line 10: JsProperty 'void EntryPoint.Buggy.setY()' should either follow Java Bean naming "
+            + "conventions or provide a name.",
         "Line 11: JsProperty 'int EntryPoint.Buggy.setZ(int)' should have a correct setter "
             + "or getter signature.",
-        "Line 12: JsProperty 'void EntryPoint.Buggy.setStatic()' should have a correct setter "
-            + "or getter signature.",
+        // TODO(rluble): uncomment when void return types are forbidden in getters.
+        // "Line 12: JsProperty 'void EntryPoint.Buggy.setStatic()' should have a correct setter "
+        //     + "or getter signature.",
+        "Line 12: JsProperty 'void EntryPoint.Buggy.setStatic()' should either follow Java Bean "
+            + "naming conventions or provide a name.",
         "Line 13: JsProperty 'void EntryPoint.Buggy.setW(int[])' cannot have a vararg parameter.");
   }
 

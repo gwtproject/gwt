@@ -144,7 +144,10 @@ public final class JsInteropUtil {
   private static JsMemberType getJsPropertyAccessorType(JMethod method) {
     if (method.getParams().size() == 1 && method.getType() == JPrimitiveType.VOID) {
       return JsMemberType.SETTER;
-    } else if (method.getParams().isEmpty() && method.getType() != JPrimitiveType.VOID) {
+    } else if (method.getParams().isEmpty()
+        // TODO(rluble): void should not be allowed as a return type for property getters.
+        // && method.getType() != JPrimitiveType.VOID
+        ) {
       return JsMemberType.GETTER;
     }
     return JsMemberType.UNDEFINED_ACCESSOR;

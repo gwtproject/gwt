@@ -100,7 +100,9 @@ java_library(
         "-Xep:SelfEquals:OFF",
         "-Xep:FallThrough:OFF",
         "-Xep:ReturnValueIgnored:OFF",
-    ],
+        "-Xep:EqualsIncompatibleType:OFF",
+    ],       
+
     plugins = [
         "//java/com/google/devtools/build/buildjar/plugin/gwt",
     ],
@@ -145,6 +147,7 @@ java_library(
         "-Xep:SelfEquals:OFF",
         "-Xep:FallThrough:OFF",
         "-Xep:ReturnValueIgnored:OFF",
+        "-Xep:EqualsIncompatibleType:OFF",
    ],
     deps = [
         "//third_party/java_src/gwt/svn/trunk/dev:requestfactory-apt-deps",
@@ -427,6 +430,9 @@ java_library(
         "//third_party/java_src/gwt/svn/trunk/dev:compiler.standalone.super",
         "//third_party/java_src/gwt/svn/trunk/dev:servlet-deps",
     ],
+    javacopts = [
+        "-Xep:EqualsIncompatibleType:OFF",
+    ]
 )
 
 # The minimum requirements for GWT-RPC serializable object definition.
@@ -547,6 +553,8 @@ AugmentedJar(
         "-Xep:MissingCasesInEnumSwitch:OFF",
         "-Xep:FallThrough:OFF",
         "-Xep:ReturnValueIgnored:OFF",
+        "-Xep:JUnit3TestNotRun:OFF",
+        "-Xep:EqualsIncompatibleType:OFF",
     ],
     deps = [
         "//third_party/java/jsr305_annotations",

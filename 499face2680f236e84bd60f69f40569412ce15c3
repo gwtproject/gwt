@@ -22,6 +22,30 @@
       "revId": "499face2680f236e84bd60f69f40569412ce15c3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "990578d3_78eba253",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-04-07T22:49:14Z",
+      "side": 1,
+      "message": "It could but I definitely wouldn\u0027t want to hardcode that knowledge in the restriction checker.\n\nAlternatively we could instead make Js.debugger return Void, which reduces the surface of the hack to jsinterop/base.\n\nMaybe we should remove Js.debugger altogether, but let\u0027s discuss this on Monday with goktug.",
+      "parentUuid": "b3edfbde_0dfe880a",
+      "range": {
+        "startLine": 149,
+        "startChar": 4,
+        "endLine": 149,
+        "endChar": 53
+      },
+      "revId": "499face2680f236e84bd60f69f40569412ce15c3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

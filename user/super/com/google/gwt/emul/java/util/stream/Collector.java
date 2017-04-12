@@ -76,7 +76,7 @@ public interface Collector<T,A,R> {
         accumulator,
         combiner,
         Function.identity(),
-        Collections.unmodifiableSet(EnumSet.of(Characteristics.IDENTITY_FINISH, characteristics))
+        characteristics
     );
   }
 

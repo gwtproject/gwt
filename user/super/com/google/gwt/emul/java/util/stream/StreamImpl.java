@@ -563,8 +563,11 @@ final class StreamImpl<T> extends TerminatableStream<StreamImpl<T>> implements S
 
   @Override
   public <A> A[] toArray(IntFunction<A[]> generator) {
-    List<T> collected = collect(Collectors.toList());
-    return collected.toArray(generator.apply(collected.size()));
+    return collect(
+        () -> generator.apply(0),
+        (array, value) -> array[array.length] = (A) value,
+        (a, b) -> { }
+    );
   }
 
   @Override

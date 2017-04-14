@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d127b71d_3746a658",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/StreamImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2017-04-14T02:20:41Z",
+      "side": 1,
+      "message": "It won\u0027t be called in the current impl, but consider implementing this anyway so it could be? \n\ncollect(supplier, accumulator, combiner) passes the combiner (in a lambda) to Collector.of as combiner into collect(Collector), which calls reduce(identity, accumulator, combiner), which doesn\u0027t presently use it. I\u0027m not certain, but it seems that ought to remove Collector.combiner() if used nowhere, and in turn this lambda, even if fully implemented?",
+      "revId": "60b3307b1e881c3347d2ff654681500f48716a97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

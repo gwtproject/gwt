@@ -16,6 +16,24 @@
       "revId": "60b3307b1e881c3347d2ff654681500f48716a97",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f6be92c_4fb2c3ce",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/StreamImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-04-14T23:21:15Z",
+      "side": 1,
+      "message": "I think it is best to minimize the implementation since the stream APIs are quite heavy for web use right now.\n\nSince combiners are for parallelization I think we should consider removing all combiners but just keep the param for compatibility since I don\u0027t foresee using them ever for web (at least until we come up with a good use case).",
+      "parentUuid": "d127b71d_3746a658",
+      "revId": "60b3307b1e881c3347d2ff654681500f48716a97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

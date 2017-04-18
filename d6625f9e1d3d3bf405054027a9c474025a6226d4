@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "718a944a_3b4ed3f5",
+        "filename": "elemental/src/elemental/json/impl/JsonTokenizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6910
+      },
+      "writtenOn": "2017-04-18T13:43:12Z",
+      "side": 1,
+      "message": "Why not use the constant INVALID_CHAR",
+      "revId": "d6625f9e1d3d3bf405054027a9c474025a6226d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

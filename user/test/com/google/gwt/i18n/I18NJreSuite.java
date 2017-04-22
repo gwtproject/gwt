@@ -17,6 +17,7 @@ package com.google.gwt.i18n;
 
 import com.google.gwt.i18n.rebind.LocaleUtilsTest;
 import com.google.gwt.i18n.rebind.LocalizableGeneratorTest;
+import com.google.gwt.i18n.rebind.LookupMethodCreatorTest;
 import com.google.gwt.i18n.server.GwtLocaleTest;
 import com.google.gwt.i18n.server.MessageFormatParserTest;
 import com.google.gwt.i18n.server.PropertyCatalogFactoryTest;
@@ -59,6 +60,7 @@ public class I18NJreSuite {
      */
     // suite.addTestSuite(TypeOracleMessageTest.class);
     suite.addTestSuite(WordCountDirectionEstimatorTest.class);
+    suite.addTestSuite(LookupMethodCreatorTest.class);
     // $JUnit-END$
 
     return suite;

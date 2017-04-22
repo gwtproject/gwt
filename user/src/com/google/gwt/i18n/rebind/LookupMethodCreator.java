@@ -31,23 +31,47 @@ import java.text.MessageFormat;
  * Method creator to call the correct Map for the given Dictionary.
  */
 class LookupMethodCreator extends AbstractMethodCreator {
-  private JType returnType;
+
+  /**
+   * Used partition size if no one is specified.
+   * 
+   * Used in constructor without a partition size.
+   */
+  private static final int DEFAULT_PARTITIONS_SIZE = 500;
+
+  private final JType returnType;
+
+  private final int partitionsSize;
+
+  /**
+   * Constructor for <code>LookupMethodCreator</code>. The default partition size of {@value #DEFAULT_PARTITIONS_SIZE} is used.
+   *
+   * @param classCreator parent class creator
+   * @param returnType associated return type
+   * 
+   * @see LookupMethodCreator#DEFAULT_PARTITIONS_SIZE
+   */
+  public LookupMethodCreator(AbstractGeneratorClassCreator classCreator, JType returnType) {
+    this(classCreator, returnType, DEFAULT_PARTITIONS_SIZE);
+  }
 
   /**
    * Constructor for <code>LookupMethodCreator</code>.
    *
    * @param classCreator parent class creator
    * @param returnType associated return type
+   * @param partitionsSize max numbers of lookups per method.
    */
-  public LookupMethodCreator(AbstractGeneratorClassCreator classCreator,
-      JType returnType) {
+  public LookupMethodCreator(AbstractGeneratorClassCreator classCreator, JType returnType,
+      int partitionsSize) {
     super(classCreator);
     this.returnType = returnType;
+    this.partitionsSize = partitionsSize;
   }
 
   @Override
-  public void createMethodFor(TreeLogger logger, JMethod targetMethod,
-      String key, ResourceList resourceList, GwtLocale locale) {
+  public void createMethodFor(TreeLogger logger, JMethod targetMethod, String key,
+      ResourceList resourceList, GwtLocale locale) {
     createMethodFor(targetMethod);
   }
 
@@ -65,6 +89,15 @@ class LookupMethodCreator extends AbstractMethodCreator {
     return type;
   }
 
+  void printLookup(String methodName) {
+    String body = "if(arg0.equals(" + wrap(methodName) + ")) {";
+    println(body);
+    indent();
+    printFound(methodName);
+    outdent();
+    println("}");
+  }
+
   void createMethodFor(JMethod targetMethod) {
     String template = "{0} target = ({0}) cache.get(arg0);";
     String returnTypeName = getReturnTypeName();
@@ -76,24 +109,51 @@ class LookupMethodCreator extends AbstractMethodCreator {
     outdent();
     println("}");
     JMethod[] methods = ((ConstantsWithLookupImplCreator) currentCreator).allInterfaceMethods;
-    JType erasedType = returnType.getErasedType();
-    for (int i = 0; i < methods.length; i++) {
-      if (methods[i].getReturnType().getErasedType().equals(erasedType)
-          && methods[i] != targetMethod) {
-        String methodName = methods[i].getName();
-        String body = "if(arg0.equals(" + wrap(methodName) + ")) {";
-        println(body);
-        indent();
-        printFound(methodName);
-        outdent();
-        println("}");
-      }
+
+    final int partitions = (methods.length / partitionsSize) + 1;
+    for (int i = 0; i < partitions; i++) {
+      println("target = " + targetMethod.getName() + i + "(arg0);");
+      println("if (target != null) {");
+      indent();
+      println("return target;");
+      outdent();
+      println("}");
     }
+
     String format = "throw new java.util.MissingResourceException(\"Cannot find constant ''\" +"
         + "{0} + \"''; expecting a method name\", \"{1}\", {0});";
-    String result = MessageFormat.format(format, "arg0",
+    String result = MessageFormat.format(format, "arg0", 
         this.currentCreator.getTarget().getQualifiedSourceName());
     println(result);
+    outdent();
+    println("}");
+
+    println("");
+
+    final String argument0Type = targetMethod.getParameterTypes()[0].getQualifiedSourceName();
+    for (int p = 0; p < partitions; p++) {
+      final String templateNewMethod = "private {0} {1}{2}({3} arg0) '{";
+      final String header = MessageFormat.format(templateNewMethod, new Object[] {
+          returnTypeName, targetMethod.getName(), p, argument0Type});
+      println(header);
+      indent();
+      final JType erasedType = returnType.getErasedType();
+      for (int i = 0 + p * partitionsSize; i < methods.length && i < (p + 1)
+          * partitionsSize; i++) {
+        final JMethod method = methods[i];
+        if (method.getReturnType().getErasedType().equals(erasedType) && method != targetMethod) {
+          String methodName = method.getName();
+          printLookup(methodName);
+        }
+      }
+
+      println("return null;");
+      if (p < partitions - 1) {
+        outdent();
+        println("}");
+        println("");
+      }
+    }
   }
 
   void printFound(String methodName) {

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8508845_42cddea6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-04-23T09:42:54Z",
+      "side": 1,
+      "message": "If you have permissions to push it to Gerrit, could you maybe set the author to the actual author of the patch?",
+      "revId": "1abcd02ac17ba780235fd6e6a331ce553d194b06",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

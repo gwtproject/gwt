@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61e354c2_493b9b3c",
+        "filename": "maven/push-gwt.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-05-04T07:35:35Z",
+      "side": 1,
+      "message": "Should 2.8.0-SNAPSHOT be changed to HEAD-SNAPSHOT here?",
+      "revId": "d42b48f596ae24b00c537ad0325abae81988e0ed",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "103665dc_e35e86f3",
+        "filename": "maven/push-gwt.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-05-04T07:35:35Z",
+      "side": 1,
+      "message": "How about changing the regexp instead? (not enough knowledge of \u0027expr\u0027/bash to know whether it\u0027d work though)",
+      "revId": "d42b48f596ae24b00c537ad0325abae81988e0ed",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

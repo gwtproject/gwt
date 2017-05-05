@@ -142,7 +142,7 @@ public final class MathContext implements Serializable {
   public MathContext(String val) {
     checkNotNull(val, "null string");
 
-    Object[] extractedValues = (Object[]) createParseRegexp().exec(val);
+    Object[] extractedValues = createParseRegexp().exec(val);
     if (extractedValues == null || extractedValues.length != 3) {
       throw new IllegalArgumentException("bad string format");
     }

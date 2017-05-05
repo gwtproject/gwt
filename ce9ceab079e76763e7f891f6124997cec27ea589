@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f6a5351_efe8820f",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-05-05T21:05:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c6f139d1_00043278",
+      "revId": "ce9ceab079e76763e7f891f6124997cec27ea589",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

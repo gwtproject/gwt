@@ -693,7 +693,7 @@ public class GenerateJavaScriptAST {
 
     @Override
     public JsNode transformExpressionStatement(JExpressionStatement statement) {
-      return ((JsExpression) transform(statement.getExpr())).makeStmt();
+      return transform(statement.getExpr()).makeStmt();
     }
 
     @Override
@@ -1562,13 +1562,13 @@ public class GenerateJavaScriptAST {
 
           // Replace invocation to ctor with a new op.
           String ident = ref.getIdent();
-          JNode node = nodeByJsniReference.get(ident);
-          assert node instanceof JConstructor;
+          JConstructor constructor = (JConstructor) nodeByJsniReference.get(ident);
+
+          assert constructor instanceof JConstructor;
           assert ref.getQualifier() == null;
-          JsName jsName = names.get(node);
-          assert (jsName != null);
-          ref.resolve(jsName);
-          JsNew jsNew = new JsNew(x.getSourceInfo(), ref);
+          JsNameRef constructorJsName = createStaticReference(constructor, x.getSourceInfo());
+
+          JsNew jsNew = new JsNew(x.getSourceInfo(), constructorJsName);
           jsNew.getArguments().addAll(x.getArguments());
           ctx.replaceMe(jsNew);
         }
@@ -1726,7 +1726,7 @@ public class GenerateJavaScriptAST {
     }
 
     private JsNameRef createStaticReference(JMember member, SourceInfo sourceInfo) {
-      assert member.isStatic();
+      assert !member.needsDynamicDispatch();
       return member.isJsNative()
           ? createGlobalQualifier(member.getQualifiedJsName(), sourceInfo)
           : names.get(member).makeRef(sourceInfo);

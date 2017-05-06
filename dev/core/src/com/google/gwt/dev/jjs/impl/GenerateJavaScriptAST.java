@@ -693,7 +693,7 @@ public class GenerateJavaScriptAST {
 
     @Override
     public JsNode transformExpressionStatement(JExpressionStatement statement) {
-      return ((JsExpression) transform(statement.getExpr())).makeStmt();
+      return transform(statement.getExpr()).makeStmt();
     }
 
     @Override
@@ -1562,15 +1562,12 @@ public class GenerateJavaScriptAST {
 
           // Replace invocation to ctor with a new op.
           String ident = ref.getIdent();
-          JNode node = nodeByJsniReference.get(ident);
-          assert node instanceof JConstructor;
           assert ref.getQualifier() == null;
-          JsName jsName = names.get(node);
-          assert (jsName != null);
-          ref.resolve(jsName);
-          JsNew jsNew = new JsNew(x.getSourceInfo(), ref);
-          jsNew.getArguments().addAll(x.getArguments());
-          ctx.replaceMe(jsNew);
+
+          JConstructor constructor = (JConstructor) nodeByJsniReference.get(ident);
+          JsNameRef constructorJsName = createStaticReference(constructor, x.getSourceInfo());
+
+          ctx.replaceMe(new JsNew(x.getSourceInfo(), constructorJsName, x.getArguments()));
         }
 
         @Override
@@ -1601,16 +1598,16 @@ public class GenerateJavaScriptAST {
               // Replace with a local closure function.
               // function(a,b,c){return new Obj(a,b,c);}
               JConstructor ctor = (JConstructor) node;
-              JsName jsName = names.get(ctor);
-              assert (jsName != null);
-              x.resolve(jsName);
               SourceInfo info = x.getSourceInfo();
+
+              JsNameRef constructorJsName = createStaticReference(ctor, info);
+
               JsFunction closureFunc = new JsFunction(info, function.getScope());
               for (JParameter p : ctor.getParams()) {
                 JsName name = closureFunc.getScope().declareName(p.getName());
                 closureFunc.getParameters().add(new JsParameter(info, name));
               }
-              JsNew jsNew = new JsNew(info, x);
+              JsNew jsNew = new JsNew(info, constructorJsName);
               for (JsParameter p : closureFunc.getParameters()) {
                 jsNew.getArguments().add(p.getName().makeRef(info));
               }
@@ -1726,7 +1723,7 @@ public class GenerateJavaScriptAST {
     }
 
     private JsNameRef createStaticReference(JMember member, SourceInfo sourceInfo) {
-      assert member.isStatic();
+      assert !member.needsDynamicDispatch();
       return member.isJsNative()
           ? createGlobalQualifier(member.getQualifiedJsName(), sourceInfo)
           : names.get(member).makeRef(sourceInfo);

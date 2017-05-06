@@ -23,6 +23,7 @@ import com.google.gwt.junit.client.GWTTestCase;
 
 import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -489,5 +490,41 @@ public class NativeJsTypeTest extends GWTTestCase {
     // properties copied from java.lang.Object).
     assertFalse(error instanceof JavaScriptObject);
     assertTrue(error.toString().contains(ERROR_FROM_NATIVE_ERROR_SUBCLASS));
+  }
+
+  private static native NativeError newError(String message) /*-{
+    var error =  @NativeError::new()();
+    error.@NativeError::message = message;
+    return error;
+  }-*/;
+
+  private static native NativeError newErrorThroughCtorReference() /*-{
+    var ctor =  @NativeError::new();
+    return ctor();
+  }-*/;
+
+  private static native boolean isNan(double number) /*-{
+    return @Global::isNan(D)(number);
+  }-*/;
+
+  private static native double getNan() /*-{
+    return @Global::Nan;
+  }-*/;
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  private static class Global {
+    @JsProperty(namespace = JsPackage.GLOBAL, name = "NaN")
+    public static double Nan;
+    @JsMethod(namespace = JsPackage.GLOBAL, name = "isNaN")
+    public static native boolean isNan(double number);
+  }
+
+  // Regression tests for issue #9520.
+  public void testNativeConstructorJSNI() {
+    assertTrue(newError("Message") instanceof NativeError);
+    assertEquals("Message", newError("Message").message);
+    assertTrue(newErrorThroughCtorReference() instanceof NativeError);
+    assertTrue(Double.isNaN(getNan()));
+    assertTrue(isNan(Double.NaN));
   }
 }

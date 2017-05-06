@@ -490,4 +490,12 @@ public class NativeJsTypeTest extends GWTTestCase {
     assertFalse(error instanceof JavaScriptObject);
     assertTrue(error.toString().contains(ERROR_FROM_NATIVE_ERROR_SUBCLASS));
   }
+
+  private static native NativeError newError() /*-{
+    return @NativeError::new()();
+  }-*/;
+
+  public void testNativeConstructorJSNI() {
+    assertTrue(newError() instanceof NativeError);
+  }
 }

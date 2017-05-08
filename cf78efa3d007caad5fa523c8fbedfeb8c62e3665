@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73a2711d_76aba1fd",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/DoubleSummaryStatisticsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-05-08T20:10:07Z",
+      "side": 1,
+      "message": "I kind of remember earlier somebody mentioned that the count needs to be high to detect the errors.",
+      "revId": "cf78efa3d007caad5fa523c8fbedfeb8c62e3665",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

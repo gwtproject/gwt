@@ -23,6 +23,7 @@ import junit.framework.TestCase;
 public class AboutTest extends TestCase {
 
   public void testGwtName() {
+    new IllegalStateException("dead exception to check code is compiled with error prone.");
     String result = About.getGwtName();
     assertTrue("Google Web Toolkit".equals(result));
   }

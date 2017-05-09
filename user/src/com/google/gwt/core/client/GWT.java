@@ -24,6 +24,9 @@ import com.google.gwt.core.client.impl.Impl;
  * deferred binding.
  */
 public final class GWT {
+  // trigger Error Prone EqualsNaN pattern
+  static final boolean ZERO_DOUBLE_NAN = 0.0 == Double.NaN;
+
   /**
    * This interface is used to catch exceptions at the "top level" just before
    * they escape to the browser. This is used in places where the browser calls

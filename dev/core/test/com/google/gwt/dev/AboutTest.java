@@ -22,6 +22,9 @@ import junit.framework.TestCase;
  */
 public class AboutTest extends TestCase {
 
+  // trigger Error Prone EqualsNaN pattern
+  static final boolean ZERO_DOUBLE_NAN = 0.0 == Double.NaN;
+
   public void testGwtName() {
     String result = About.getGwtName();
     assertTrue("Google Web Toolkit".equals(result));

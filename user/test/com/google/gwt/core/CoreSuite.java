@@ -41,6 +41,9 @@ import junit.framework.Test;
  * All core tests that use GWTTestCase.
  */
 public class CoreSuite {
+  // trigger Error Prone EqualsNaN pattern
+  static final boolean ZERO_DOUBLE_NAN = 0.0 == Double.NaN;
+
   public static Test suite() {
     GWTTestSuite suite = new GWTTestSuite("All core tests");
 

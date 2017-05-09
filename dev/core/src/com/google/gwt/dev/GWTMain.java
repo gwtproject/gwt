@@ -36,5 +36,6 @@ public class GWTMain {
         "runs the development shell");
     System.err.println(Strings.padEnd(Compiler.class.getName(), 40, ' ') +
         "compiles a GWT module");
+    new IllegalStateException("dead exception to check code is compiled with error prone.");
   }
 }

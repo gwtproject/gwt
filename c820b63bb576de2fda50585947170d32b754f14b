@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1b7f35a_db4d470f",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalJsMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-05-10T17:18:04Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "c820b63bb576de2fda50585947170d32b754f14b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "302b67ca_c68e9bbd",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalJsMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-05-10T17:18:04Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "c820b63bb576de2fda50585947170d32b754f14b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

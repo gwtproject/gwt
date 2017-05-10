@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "e00748ed_dab418ec",
+        "filename": "user/super/com/google/gwt/emul/java/lang/CharSequence.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-05-10T18:36:55Z",
+      "side": 1,
+      "message": "nope, you cannot declare any type or member private/package/protected in an interface.",
+      "parentUuid": "6d4828f3_246a7fff",
+      "range": {
+        "startLine": 65,
+        "startChar": 29,
+        "endLine": 65,
+        "endChar": 54
+      },
+      "revId": "bc464016026f979fdf52bd5fcbfdf5f17d32e7c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d007a501_95b0b80b",
         "filename": "user/super/com/google/gwt/emul/java/lang/HasCharSequenceTypeMarker.java",
         "patchSetId": 1

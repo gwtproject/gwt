@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "77728e5a_0884daad",
+        "filename": "user/super/com/google/gwt/emul/java/lang/CharSequence.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-05-10T17:24:30Z",
+      "side": 1,
+      "message": "Parameter is actually * and I defined HasCharSequenceTypeMarker as ? so shouldn\u0027t get any warnings. I will change it to * as well but shouldn\u0027t change any behavior.",
+      "parentUuid": "7aa7a423_6ab1e94a",
+      "range": {
+        "startLine": 65,
+        "startChar": 29,
+        "endLine": 65,
+        "endChar": 54
+      },
+      "revId": "bc464016026f979fdf52bd5fcbfdf5f17d32e7c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e672ad6a_b754a34b",
         "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-05-10T03:49:53Z",
       "side": 1,
       "message": "this can always be assumed non null. No need to check.",
+      "range": {
+        "startLine": 376,
+        "startChar": 42,
+        "endLine": 376,
+        "endChar": 62
+      },
+      "revId": "bc464016026f979fdf52bd5fcbfdf5f17d32e7c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea7a24d7_af6fa5a9",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-05-10T17:24:30Z",
+      "side": 1,
+      "message": "no cannot be assumed non null since methods are devirtualized.",
+      "parentUuid": "e672ad6a_b754a34b",
       "range": {
         "startLine": 376,
         "startChar": 42,

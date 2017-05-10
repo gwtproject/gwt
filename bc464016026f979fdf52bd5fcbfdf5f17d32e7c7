@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "20f388f5_64ad50a2",
+        "filename": "user/super/com/google/gwt/emul/java/lang/CharSequence.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-05-10T18:11:37Z",
+      "side": 1,
+      "message": "I cannot do that since you cannot hide inner type of interfaces.",
+      "parentUuid": "95970d8b_03747c99",
+      "range": {
+        "startLine": 65,
+        "startChar": 29,
+        "endLine": 65,
+        "endChar": 54
+      },
+      "revId": "bc464016026f979fdf52bd5fcbfdf5f17d32e7c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d007a501_95b0b80b",
         "filename": "user/super/com/google/gwt/emul/java/lang/HasCharSequenceTypeMarker.java",
         "patchSetId": 1
@@ -84,6 +108,30 @@
       "writtenOn": "2017-05-10T17:53:03Z",
       "side": 1,
       "message": "Make this an inner class close the its usage and make it * instead of ?",
+      "range": {
+        "startLine": 23,
+        "startChar": 10,
+        "endLine": 23,
+        "endChar": 35
+      },
+      "revId": "bc464016026f979fdf52bd5fcbfdf5f17d32e7c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "03a511f9_ab86d561",
+        "filename": "user/super/com/google/gwt/emul/java/lang/HasCharSequenceTypeMarker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-05-10T18:11:37Z",
+      "side": 1,
+      "message": "see my previous comment but will change to *",
+      "parentUuid": "d007a501_95b0b80b",
       "range": {
         "startLine": 23,
         "startChar": 10,
@@ -167,6 +215,30 @@
     },
     {
       "key": {
+        "uuid": "dbd80afc_ae945deb",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-05-10T18:11:37Z",
+      "side": 1,
+      "message": "er discussed this in debt earlier;  in most String/Double devirtualization we don\u0027t need the check since we access to \u0027this\u0027 object which will throw anyway.",
+      "parentUuid": "b77cc7c3_a22df79b",
+      "range": {
+        "startLine": 376,
+        "startChar": 42,
+        "endLine": 376,
+        "endChar": 62
+      },
+      "revId": "bc464016026f979fdf52bd5fcbfdf5f17d32e7c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ec15547_20b594d9",
         "filename": "user/super/com/google/gwt/emul/java/util/InternalJsMap.java",
         "patchSetId": 1
@@ -202,6 +274,24 @@
     },
     {
       "key": {
+        "uuid": "f31a73c0_59e7e63c",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalJsMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-05-10T18:11:37Z",
+      "side": 1,
+      "message": "file reverted",
+      "parentUuid": "8ca85f24_9e11f653",
+      "revId": "bc464016026f979fdf52bd5fcbfdf5f17d32e7c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "af18dd22_ba567077",
         "filename": "user/super/com/google/gwt/emul/java/util/InternalJsMap.java",
         "patchSetId": 1
@@ -231,6 +321,24 @@
       "side": 1,
       "message": "please fix.",
       "parentUuid": "af18dd22_ba567077",
+      "revId": "bc464016026f979fdf52bd5fcbfdf5f17d32e7c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5548175f_369835a1",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalJsMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-05-10T18:11:37Z",
+      "side": 1,
+      "message": "file reverted",
+      "parentUuid": "9c3dbef3_60adeb53",
       "revId": "bc464016026f979fdf52bd5fcbfdf5f17d32e7c7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

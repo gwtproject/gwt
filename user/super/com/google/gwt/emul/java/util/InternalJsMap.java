@@ -34,7 +34,7 @@ class InternalJsMap<V> {
     private Object[] value;
     public boolean done;
     @JsOverlay
-    public final String getKey() { return JsUtils.unsafeCastToString(value[0]); }
+    public final String getKey() { return JsUtils.uncheckedCast(value[0]); }
     @JsOverlay
     public final V getValue() { return (V) value[1]; }
   }

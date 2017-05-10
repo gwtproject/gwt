@@ -182,6 +182,12 @@ public class Runtime {
           return Object.prototype.toString.call(vArg) === "[object Array]";
         };
     }
+
+    if (!Date.now) {
+      Date.now = function now() {
+        return new Date().getTime();
+      };
+    }
   }-*/;
 
   /**

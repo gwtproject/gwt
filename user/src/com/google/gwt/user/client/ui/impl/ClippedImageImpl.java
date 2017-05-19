@@ -16,8 +16,11 @@
 package com.google.gwt.user.client.ui.impl;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.ImageElement;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.safecss.shared.SafeStyles;
 import com.google.gwt.safecss.shared.SafeStylesBuilder;
@@ -38,13 +41,13 @@ import com.google.gwt.user.client.ui.Image;
 public class ClippedImageImpl {
 
   interface DraggableTemplate extends SafeHtmlTemplates {
-    @SafeHtmlTemplates.Template("<img onload='this.__gwtLastUnhandledEvent=\"load\";' src='{0}' "
+    @SafeHtmlTemplates.Template("<img src='{0}' "
         + "style='{1}' border='0' draggable='true'>")
     SafeHtml image(SafeUri clearImage, SafeStyles style);
   }
 
   interface Template extends SafeHtmlTemplates {
-    @SafeHtmlTemplates.Template("<img onload='this.__gwtLastUnhandledEvent=\"load\";' src='{0}' "
+    @SafeHtmlTemplates.Template("<img src='{0}' "
         + "style='{1}' border='0'>")
     SafeHtml image(SafeUri clearImage, SafeStyles style);
   }
@@ -62,10 +65,26 @@ public class ClippedImageImpl {
   }
 
   public Element createStructure(SafeUri url, int left, int top, int width, int height) {
-    Element tmp = Document.get().createSpanElement();
-    tmp.setInnerSafeHtml(getSafeHtml(url, left, top, width, height));
-    return tmp.getFirstChildElement();
+    ImageElement img = Document.get().createImageElement();
+    img.setPropertyJSO("onload", createOnLoadHandlerFunction());
+    img.setSrc(clearImage.asString());
+
+    Style style = img.getStyle();
+    style.setWidth(width, Unit.PX);
+    style.setHeight(height, Unit.PX);
+    style.setProperty("background",
+        "url(\"" + url.asString() + "\") " + "no-repeat " + (-left + "px ") + (-top + "px"));
+
+    img.setPropertyString("border", "0");
+
+    return img;
   }
+
+  public static native JavaScriptObject createOnLoadHandlerFunction() /*-{
+    return function() {
+      this.__gwtLastUnhandledEvent = 'load';
+    }
+  }-*/;
 
   public Element getImgElement(Image image) {
     return image.getElement();

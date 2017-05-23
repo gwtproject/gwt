@@ -83,6 +83,9 @@
   <define-property name="jre.logging.simpleConsoleHandler" values="ENABLED, DISABLED" />
   <set-property name="jre.logging.simpleConsoleHandler" value="ENABLED"/>
 
+  <define-property name="uncaughtexception.onerror" values="REGISTER, LEAVE_EXISTING, DISABLED" />
+  <set-property name="uncaughtexception.onerror" value="DISABLED"/>
+
   <!-- To support legacy logging flags -->
   <inherits name="com.google.gwt.logging.LogImpl"/>
 </module>

@@ -295,6 +295,27 @@ public final class GWT {
   public static void setUncaughtExceptionHandler(
       UncaughtExceptionHandler handler) {
     uncaughtExceptionHandler = handler;
+    maybeInitializeWindowOnError();
+  }
+
+  private static boolean onErrorInitialized;
+
+  private static void maybeInitializeWindowOnError() {
+    // Dev mode does not do this
+    if (!GWT.isScript()) {
+      return;
+    }
+
+    if ("DISABLED".equals(System.getProperty("uncaughtexception.onerror", "DISABLED"))) {
+      return;
+    }
+    if (onErrorInitialized) {
+      return;
+    }
+    onErrorInitialized = true;
+    boolean leaveExising =
+        "LEAVE_EXISTING".equals(System.getProperty("uncaughtexception.onerror", "LEAVE_EXISTING"));
+    Impl.registerWindowOnError(leaveExising);
   }
 
   /**

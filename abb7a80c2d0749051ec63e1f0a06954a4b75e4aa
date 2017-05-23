@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4831e4b_0a6dac64",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/ClippedImageImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-05-23T18:11:08Z",
+      "side": 1,
+      "message": "This does not use the template anymore, which makes me wonder if this is backwards compatiable.\n\n Lets make sure that internally there are not overrides for different templates. (could be injected via GWT.create)",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 16
+      },
+      "revId": "abb7a80c2d0749051ec63e1f0a06954a4b75e4aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "935729d4_c3ac93de",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/ClippedImageImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-05-23T18:11:08Z",
+      "side": 1,
+      "message": "This does not have the right context:\n\nvar that\u003d this;\nreturn function() {\n  that.....\n};",
+      "revId": "abb7a80c2d0749051ec63e1f0a06954a4b75e4aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

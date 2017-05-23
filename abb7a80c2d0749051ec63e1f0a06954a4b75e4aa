@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ebb6e30e_028077da",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/ClippedImageImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 10840
+      },
+      "writtenOn": "2017-05-23T20:48:48Z",
+      "side": 1,
+      "message": "This is designed to be equivalent to the template (same attributes and everything).\n\nI could refactor to use the template (as in the original code) and set the property on it, e.g.\n\n```\n  Element imgElem \u003d tmp.getFirstChildElement();\n  imgElem.setPropertyJSO(\"onload\", createOnLoadHandlerFunction())\n  return imgElem;\n```",
+      "parentUuid": "e4831e4b_0a6dac64",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 16
+      },
+      "revId": "abb7a80c2d0749051ec63e1f0a06954a4b75e4aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "935729d4_c3ac93de",
         "filename": "user/src/com/google/gwt/user/client/ui/impl/ClippedImageImpl.java",
         "patchSetId": 3
@@ -36,6 +60,24 @@
       "writtenOn": "2017-05-23T18:11:08Z",
       "side": 1,
       "message": "This does not have the right context:\n\nvar that\u003d this;\nreturn function() {\n  that.....\n};",
+      "revId": "abb7a80c2d0749051ec63e1f0a06954a4b75e4aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db2d4528_56463a17",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/ClippedImageImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 10840
+      },
+      "writtenOn": "2017-05-23T20:48:48Z",
+      "side": 1,
+      "message": "This is intentional. When executed in the context of an \"onload\" handler, the `this` in this function resolves to the HTMLImageElement which is the target of the event. This code is equivalent to the original code on lines 41 and 47.\n\nIf we set `that \u003d this`, I think it would either resolve to the global window object or this ClippedImageImpl instance.",
+      "parentUuid": "935729d4_c3ac93de",
       "revId": "abb7a80c2d0749051ec63e1f0a06954a4b75e4aa",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

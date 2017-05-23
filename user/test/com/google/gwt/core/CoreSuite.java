@@ -16,6 +16,7 @@
 package com.google.gwt.core;
 
 import com.google.gwt.core.client.GWTTest;
+import com.google.gwt.core.client.GWTTestCaseUncaughtWindowErrorTest;
 import com.google.gwt.core.client.GwtServletBaseTest;
 import com.google.gwt.core.client.JavaScriptExceptionTest;
 import com.google.gwt.core.client.JavaScriptObjectTest;
@@ -46,6 +47,7 @@ public class CoreSuite {
 
     suite.addTestSuite(GwtServletBaseTest.class);
     suite.addTestSuite(GWTTest.class);
+    suite.addTestSuite(GWTTestCaseUncaughtWindowErrorTest.class);
     suite.addTestSuite(ImplTest.class);
     suite.addTestSuite(JavaScriptExceptionTest.class);
     suite.addTestSuite(JavaScriptObjectTest.class);

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1dd6052d_2089036b",
+        "filename": "user/test/com/google/gwt/core/client/GWTTestCaseUncaughtWindowErrorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-05-23T00:19:17Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "a5f931098e6ebb90e7eea58223f699d0430f1764",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

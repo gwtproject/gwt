@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "14434733_c01bb53d",
+        "filename": "user/src/com/google/gwt/core/Core.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-05-24T23:07:14Z",
+      "side": 1,
+      "message": "pls document",
+      "revId": "a5f931098e6ebb90e7eea58223f699d0430f1764",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7935927_45fa2cd5",
+        "filename": "user/src/com/google/gwt/core/Core.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-05-24T23:07:14Z",
+      "side": 1,
+      "message": "gwt.uncaughtexceptionhandler.windowonerror \u003d IGNORE, IGNORE_IF_HANDLED, REPORT",
+      "range": {
+        "startLine": 86,
+        "startChar": 25,
+        "endLine": 86,
+        "endChar": 42
+      },
+      "revId": "a5f931098e6ebb90e7eea58223f699d0430f1764",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1dd6052d_2089036b",
         "filename": "user/test/com/google/gwt/core/client/GWTTestCaseUncaughtWindowErrorTest.java",
         "patchSetId": 1

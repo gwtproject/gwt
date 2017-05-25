@@ -18,6 +18,7 @@ package com.google.gwt.core.client.impl;
 import com.google.gwt.core.client.Duration;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
+import com.google.gwt.core.client.GwtScriptOnly;
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
 
@@ -169,7 +170,64 @@ public final class Impl {
     uncaughtExceptionHandlerForTest = handler;
   }
 
+  private static void reportWindowOnError(Throwable e) {
+    reportUncaughtException(e, true);
+  }
+
   public static void reportUncaughtException(Throwable e) {
+    reportUncaughtException(e, false);
+  }
+
+  private static boolean onErrorInitialized;
+
+  public static void maybeInitializeWindowOnError() {
+    if ("IGNORE".equals(System.getProperty("gwt.uncaughtexceptionhander.windowonerror"))) {
+      return;
+    }
+    if (onErrorInitialized) {
+      return;
+    }
+    onErrorInitialized = true;
+    boolean reportIfNoHandler =
+        "REPORT_IF_NO_HANDLER"
+            .equals(System.getProperty("gwt.uncaughtexceptionhander.windowonerror"));
+    registerWindowOnError(reportIfNoHandler);
+  }
+  
+  // Make sure dev mode does not try to parse the JSNI method since it contains a reference to
+  // Throwable.of which is not standard Java
+  @SuppressWarnings("deprecation")
+  @GwtScriptOnly
+  public static native void registerWindowOnError(boolean reportIfNoHandler) /*-{
+    var origHandler = $wnd.onerror;
+    if (origHandler && !reportIfNoHandler) {
+      return;
+    }
+
+    // Note we need to trap both window.onerror and $wnd.onerror
+    // Chrome 58 & Safari (10.1) & HtmlUnit uses $wnd.error,
+    // while FF (53) /IE (even edge) listens on window.error
+    window.onerror = $wnd.onerror = function(msg, url, line, column, error) {
+      // IE8, IE9, IE10, safari 9, do not have an error passed
+      if (!error) {
+        error = msg + " " + url + ":" + line
+        // IE8 and IE9 do not have the column number
+        if (column) {
+          error += ":" + column
+        }
+      }
+
+      var throwable = @java.lang.Throwable::of(*)(error);
+      @Impl::reportWindowOnError(*)(throwable);
+
+      if (origHandler) {
+        return origHandler(msg, url, line, column, error);
+      }
+      return false;
+    };
+  }-*/;
+
+  private static void reportUncaughtException(Throwable e, boolean fromOnError) {
     if (Impl.uncaughtExceptionHandlerForTest != null) {
       Impl.uncaughtExceptionHandlerForTest.onUncaughtException(e);
     }
@@ -185,6 +243,12 @@ public final class Impl {
       // the change in the release at last minute.
       handler.onUncaughtException(e);
       return; // Done.
+    }
+
+    if (fromOnError) {
+      // If the error is coming from window.onerror that we registered on, we can not report it
+      // back to the browser since we would end up being called again
+      return;
     }
 
     // Make sure that the exception is not swallowed

@@ -377,6 +377,30 @@
     },
     {
       "key": {
+        "uuid": "3bfe9421_879be85c",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-05-25T00:21:55Z",
+      "side": 1,
+      "message": "Sorry for incomplete one. I\u0027m suggesting following format:\n\u003cErrorMsg\u003e (\u003curl\u003e:line:column)",
+      "parentUuid": "26bde699_ba40302a",
+      "range": {
+        "startLine": 197,
+        "startChar": 24,
+        "endLine": 197,
+        "endChar": 25
+      },
+      "revId": "3ca2effe94bd7187c2d69d568964b56d01db6a39",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17e1a0c0_7566fd33",
         "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
         "patchSetId": 2
@@ -424,6 +448,30 @@
     },
     {
       "key": {
+        "uuid": "456d0888_e06242fe",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-05-25T00:21:55Z",
+      "side": 1,
+      "message": "that\u0027s not exactly true; anyone could listen for event on window or any dom.\nAlso if somebody wanted to listen errors, per your comment earlier, they needed to add the handler here for sure.",
+      "parentUuid": "2b5dc219_9a11a750",
+      "range": {
+        "startLine": 208,
+        "startChar": 15,
+        "endLine": 208,
+        "endChar": 26
+      },
+      "revId": "3ca2effe94bd7187c2d69d568964b56d01db6a39",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b338a40b_1fbbf5b5",
         "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
         "patchSetId": 2
@@ -435,6 +483,30 @@
       "writtenOn": "2017-05-24T23:07:14Z",
       "side": 1,
       "message": "We can rename fromOnError with reportSwallowedExceptionToBrowser.\n\nThen write GWT.isClient \u0026\u0026 reportSwallowedExceptionToBrowser here while moving the detailed comment above to call site of reportUncaughtException. \n\nI think would be easier to follow flow.",
+      "range": {
+        "startLine": 239,
+        "startChar": 20,
+        "endLine": 239,
+        "endChar": 23
+      },
+      "revId": "3ca2effe94bd7187c2d69d568964b56d01db6a39",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "617a5a7e_f49e89df",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-05-25T00:21:55Z",
+      "side": 1,
+      "message": "missed this one.",
+      "parentUuid": "b338a40b_1fbbf5b5",
       "range": {
         "startLine": 239,
         "startChar": 20,

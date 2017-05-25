@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fe4d610a_0c4a14dc",
+        "filename": "user/src/com/google/gwt/core/Core.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-05-25T00:07:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cab701cf_c127fdd2",
+      "revId": "3ca2effe94bd7187c2d69d568964b56d01db6a39",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e285c05b_7030a08d",
         "filename": "user/src/com/google/gwt/core/Core.gwt.xml",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2017-05-24T23:07:14Z",
       "side": 1,
       "message": "gwt.uncaughtexceptionhander.windowonerror \u003d IGNORE, REPORT, REPORT_IF_NO_HANDLER",
+      "range": {
+        "startLine": 86,
+        "startChar": 25,
+        "endLine": 86,
+        "endChar": 50
+      },
+      "revId": "3ca2effe94bd7187c2d69d568964b56d01db6a39",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b85f294d_ad53d60e",
+        "filename": "user/src/com/google/gwt/core/Core.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-05-25T00:07:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e285c05b_7030a08d",
       "range": {
         "startLine": 86,
         "startChar": 25,
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "fc75c373_8f775fd0",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-05-25T00:07:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "379bdf32_06eff909",
+      "revId": "3ca2effe94bd7187c2d69d568964b56d01db6a39",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "007da07d_14c2da7c",
         "filename": "user/src/com/google/gwt/core/client/GWT.java",
         "patchSetId": 2
@@ -70,6 +130,30 @@
       "writtenOn": "2017-05-24T23:07:14Z",
       "side": 1,
       "message": "shouldn\u0027t be needed",
+      "range": {
+        "startLine": 309,
+        "startChar": 72,
+        "endLine": 309,
+        "endChar": 84
+      },
+      "revId": "3ca2effe94bd7187c2d69d568964b56d01db6a39",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "475e66e9_41121f82",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-05-25T00:07:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "007da07d_14c2da7c",
       "range": {
         "startLine": 309,
         "startChar": 72,
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "e4bd78df_db7317a2",
+        "filename": "user/src/com/google/gwt/core/client/GWT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-05-25T00:07:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6126c38f_b71e8977",
+      "range": {
+        "startLine": 317,
+        "startChar": 80,
+        "endLine": 317,
+        "endChar": 97
+      },
+      "revId": "3ca2effe94bd7187c2d69d568964b56d01db6a39",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e10fc44_0dfb47a5",
         "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
         "patchSetId": 2
@@ -116,6 +224,30 @@
       "writtenOn": "2017-05-24T23:07:14Z",
       "side": 1,
       "message": "reportWindowOnError",
+      "range": {
+        "startLine": 173,
+        "startChar": 22,
+        "endLine": 173,
+        "endChar": 33
+      },
+      "revId": "3ca2effe94bd7187c2d69d568964b56d01db6a39",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "31a90cd2_929d8afd",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-05-25T00:07:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e10fc44_0dfb47a5",
       "range": {
         "startLine": 173,
         "startChar": 22,
@@ -145,6 +277,24 @@
     },
     {
       "key": {
+        "uuid": "f3761612_c884ac69",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-05-25T00:07:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0585821_3646685a",
+      "revId": "3ca2effe94bd7187c2d69d568964b56d01db6a39",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff577be1_0e9c96e6",
         "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
         "patchSetId": 2
@@ -156,6 +306,24 @@
       "writtenOn": "2017-05-24T23:07:14Z",
       "side": 1,
       "message": "don\u0027t you need to check both windows?",
+      "revId": "3ca2effe94bd7187c2d69d568964b56d01db6a39",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b8e6b1c6_17b6d117",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-05-25T00:07:05Z",
+      "side": 1,
+      "message": "we own window I figured its fine to take over our own iframe",
+      "parentUuid": "ff577be1_0e9c96e6",
       "revId": "3ca2effe94bd7187c2d69d568964b56d01db6a39",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -185,6 +353,30 @@
     },
     {
       "key": {
+        "uuid": "26bde699_ba40302a",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-05-25T00:07:05Z",
+      "side": 1,
+      "message": "I don\u0027t get it here?",
+      "parentUuid": "5b308aee_7fe5daf1",
+      "range": {
+        "startLine": 197,
+        "startChar": 24,
+        "endLine": 197,
+        "endChar": 25
+      },
+      "revId": "3ca2effe94bd7187c2d69d568964b56d01db6a39",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17e1a0c0_7566fd33",
         "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
         "patchSetId": 2
@@ -196,6 +388,30 @@
       "writtenOn": "2017-05-24T23:07:14Z",
       "side": 1,
       "message": "there could be 2 origHandlers from both windows? I think you need to think this more thoroughly",
+      "range": {
+        "startLine": 208,
+        "startChar": 15,
+        "endLine": 208,
+        "endChar": 26
+      },
+      "revId": "3ca2effe94bd7187c2d69d568964b56d01db6a39",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b5dc219_9a11a750",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-05-25T00:07:05Z",
+      "side": 1,
+      "message": "See my other comment, within our frame we own the globals and there should be noone registered.",
+      "parentUuid": "17e1a0c0_7566fd33",
       "range": {
         "startLine": 208,
         "startChar": 15,
@@ -242,6 +458,30 @@
       "writtenOn": "2017-05-24T23:07:14Z",
       "side": 1,
       "message": "UEH",
+      "range": {
+        "startLine": 31,
+        "startChar": 27,
+        "endLine": 31,
+        "endChar": 30
+      },
+      "revId": "3ca2effe94bd7187c2d69d568964b56d01db6a39",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ce17346_181a3a75",
+        "filename": "user/test/com/google/gwt/core/client/GWTTestCaseUncaughtWindowErrorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-05-25T00:07:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18ffc30e_4a0773d3",
       "range": {
         "startLine": 31,
         "startChar": 27,

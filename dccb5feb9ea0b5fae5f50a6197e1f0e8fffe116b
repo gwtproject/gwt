@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f1d79cb_71ca304c",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-05-25T04:51:36Z",
+      "side": 1,
+      "message": "Now we are piping errors from one handler into another. Let\u0027s talk this tomorrow.",
+      "range": {
+        "startLine": 219,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 7
+      },
+      "revId": "dccb5feb9ea0b5fae5f50a6197e1f0e8fffe116b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

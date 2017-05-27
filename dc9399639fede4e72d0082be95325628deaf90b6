@@ -98,6 +98,30 @@
       "revId": "dc9399639fede4e72d0082be95325628deaf90b6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85984ae2_3ccec220",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/JsExceptionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-05-27T20:16:00Z",
+      "side": 1,
+      "message": "What I mean is: why wasn\u0027t it a problem before this change? and why does it need to change? (\"instanceof\" should work if everything has namespace\u003dGLOBAL)\n\nI have no problem with fixing things, but then it should be labeled as a fix, and not as \"reducing JSNI in *tests*\".\n\nIf the change is required by the changes to the tests, then it means switching from JSNI to JsInterop is a breaking change, and it could possibly affect users; and maybe having Throwable check both $wnd.TypeError and window.TypeError would be better then?\n\nI\u0027d like to understand the rationale from the change to namespace\u003dGLOBAL to namespace\u003d\"\u003cwindow\u003e\" *outside* the tests (in a change labeled as modifying tests)",
+      "parentUuid": "73f64730_70652039",
+      "range": {
+        "startLine": 175,
+        "startChar": 56,
+        "endLine": 175,
+        "endChar": 72
+      },
+      "revId": "dc9399639fede4e72d0082be95325628deaf90b6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

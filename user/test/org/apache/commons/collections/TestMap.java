@@ -370,12 +370,8 @@ public abstract class TestMap extends TestObject{
       if (TestUtils.isJvm()) {
         return null;
       }
-      return getUndefined0();
+      return (new Object[0])[0];
     }
-
-    private static native Object getUndefined0() /*-{
-      return undefined;
-    }-*/;
 
     /**
      *  Test to ensure the test setup is working properly.  This method checks

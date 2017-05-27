@@ -18,6 +18,10 @@ import static com.google.gwt.emultest.java.lang.JsExceptionViolator.getBackingJs
 
 import com.google.gwt.testing.TestUtils;
 
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
+
 /**
  * Unit tests for JsException behavior.
  */
@@ -125,12 +129,16 @@ public class JsExceptionTest extends ThrowableTestBase {
     }
   }
 
-  private static native void throwTypeError() /*-{
-    "dummy".notExistsWillThrowTypeError();
-  }-*/;
+  private static void throwTypeError() {
+    Object nullObject = null;
+    nullObject.toString();
+  }
 
-  private static void assertTypeError(RuntimeException e) {
-    assertInstanceOf("TypeError", getBackingJsObject(e));
+  @JsType(isNative = true, namespace = "<window>")
+  private static class TypeError { }
+
+  protected static void assertTypeError(RuntimeException e) {
+    assertTrue(getBackingJsObject(e) instanceof TypeError);
     assertTrue(e.toString().contains("TypeError"));
   }
 
@@ -143,26 +151,43 @@ public class JsExceptionTest extends ThrowableTestBase {
     }
   }
 
-  private static native void throwSvgError() /*-{
-    // In Firefox, this throws an object (not Error):
-    $doc.createElementNS("http://www.w3.org/2000/svg", "text").getBBox();
+  private static void throwSvgError() {
+    // In old Firefox, this throws an object (not Error):
+    createElementNS("http://www.w3.org/2000/svg", "text").getBBox();
 
     // For other browsers, make sure an exception is thrown to keep the test simple
-    throw new Error("NS_ERROR_FAILURE");
-  }-*/;
+    throw new RuntimeException("NS_ERROR_FAILURE");
+  }
+
+  @JsMethod(name = "document.createElementNS", namespace = JsPackage.GLOBAL)
+  private static native SVGElement createElementNS(String arg1, String arg2);
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
+  private interface SVGElement {
+    public void getBBox();
+  }
 
   private static void assertJsException(Object expected, Throwable exception) {
     assertTrue(exception instanceof RuntimeException);
     assertEquals(expected, getBackingJsObject(exception));
   }
 
-  private static native Object makeJSO() /*-{
-    return {
-      toString : function() {
+  @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+  private static class JsObject {
+    public String name;
+    public String message;
+  }
+
+  private Object makeJSO() {
+    return new JsObject() {
+      {
+        name = "myName";
+        message = "myDescription";
+      }
+
+      public String toString() {
         return "jso";
-      },
-      name : "myName",
-      message : "myDescription",
+      }
     };
-  }-*/;
+  }
 }

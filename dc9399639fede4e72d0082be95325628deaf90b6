@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2da09658_697a2833",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/JsExceptionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-05-27T09:35:59Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "dc9399639fede4e72d0082be95325628deaf90b6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

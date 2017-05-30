@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc4a18fc_21b4b6ca",
+        "filename": "user/test/org/apache/commons/collections/TestMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-05-30T21:53:03Z",
+      "side": 1,
+      "message": "I don\u0027t like this change because it relies on an implementation detail that could potentially change. what about\n\n @JsMethod\n static void returnsVoid() {}\n @JsMethod(name \u003d \"returnsVoid\") \n static native Object undefined();\n\nI forgot whether we allow this clash, but I think we do.",
+      "range": {
+        "startLine": 373,
+        "startChar": 13,
+        "endLine": 373,
+        "endChar": 31
+      },
+      "revId": "b566c34f2f5803238ecf342fbba9e387a0dcb81b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c86d61e_1bc5ac29",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/JsExceptionTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-05-31T20:37:44Z",
+      "side": 1,
+      "message": "This is not really a JSO. It is a Java class that extends a Native one. So either change the name of this method or write it as follows which is more on the spirit of the tests:\n\n  JsObject jsObject \u003d new JsObject();\n  jsObject.name \u003d ...\n  ...\n  return jsObject;",
+      "range": {
+        "startLine": 182,
+        "startChar": 11,
+        "endLine": 186,
+        "endChar": 7
+      },
+      "revId": "272fe929ea255090a95c66d84909ddcfa58a9a17",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

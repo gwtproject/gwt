@@ -22,6 +22,30 @@
       "revId": "b566c34f2f5803238ecf342fbba9e387a0dcb81b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f867d2a2_cfc36f45",
+        "filename": "user/test/org/apache/commons/collections/TestMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-05-31T00:28:53Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "bc4a18fc_21b4b6ca",
+      "range": {
+        "startLine": 373,
+        "startChar": 13,
+        "endLine": 373,
+        "endChar": 31
+      },
+      "revId": "b566c34f2f5803238ecf342fbba9e387a0dcb81b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

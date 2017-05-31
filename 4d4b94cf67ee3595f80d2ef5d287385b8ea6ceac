@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d7c4048_29ac347a",
+        "filename": "user/test/org/apache/commons/collections/TestMap.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-05-31T17:27:58Z",
+      "side": 1,
+      "message": "return getUndefinedImpl()",
+      "range": {
+        "startLine": 376,
+        "startChar": 13,
+        "endLine": 376,
+        "endChar": 32
+      },
+      "revId": "4d4b94cf67ee3595f80d2ef5d287385b8ea6ceac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

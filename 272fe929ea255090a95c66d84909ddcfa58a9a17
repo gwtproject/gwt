@@ -22,6 +22,30 @@
       "revId": "272fe929ea255090a95c66d84909ddcfa58a9a17",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4e0bae1_abc7b56b",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/JsExceptionTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-06-01T00:54:21Z",
+      "side": 1,
+      "message": "Done. I removed it since it is irrelevant here.",
+      "parentUuid": "6c86d61e_1bc5ac29",
+      "range": {
+        "startLine": 182,
+        "startChar": 11,
+        "endLine": 186,
+        "endChar": 7
+      },
+      "revId": "272fe929ea255090a95c66d84909ddcfa58a9a17",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "51943ba2_14369a5d",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-06-01T04:11:44Z",
+      "side": 1,
+      "message": "Delete added blank line.",
+      "revId": "704b43641fc58e8197fb6f8eda8a8931dfea62bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27d4cf04_ec831b97",
         "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerTest.java",
         "patchSetId": 1
@@ -47,6 +64,23 @@
       "writtenOn": "2017-06-01T03:12:38Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "704b43641fc58e8197fb6f8eda8a8931dfea62bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aac1ae39_d783b5e3",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-06-01T04:11:44Z",
+      "side": 1,
+      "message": "Delete added blank line.",
       "revId": "704b43641fc58e8197fb6f8eda8a8931dfea62bb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

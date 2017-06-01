@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48694ff9_97cccb65",
+        "filename": "user/test/com/google/web/bindery/autobean/shared/SplittableTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-06-01T06:25:22Z",
+      "side": 0,
+      "message": "Re-add blank line (for some reason it wasn\u0027t caught in the style precheck, but later failed the build)\n\nI\u0027ll advocate for using google-java-format in new GWT 3 libraries, but in the mean time GWT has its own style guide.",
+      "revId": "fcda29859cc4a3cbdfb07c7caec25ac343a59c74",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

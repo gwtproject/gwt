@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9ea078b_8eddf9dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-06-02T22:16:46Z",
+      "side": 1,
+      "message": "Could you pls update?",
+      "range": {
+        "startLine": 21,
+        "startChar": 44,
+        "endLine": 22,
+        "endChar": 70
+      },
+      "revId": "23ac362b3c6615f6f440e4fe607f5b38c74fd4ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

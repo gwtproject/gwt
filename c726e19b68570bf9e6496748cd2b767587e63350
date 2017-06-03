@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4674ad85_d7f1b213",
+        "filename": "user/src/com/google/gwt/i18n/rebind/AbstractLocalizableInterfaceCreator.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-06-03T06:16:12Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 103).",
+      "revId": "c726e19b68570bf9e6496748cd2b767587e63350",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

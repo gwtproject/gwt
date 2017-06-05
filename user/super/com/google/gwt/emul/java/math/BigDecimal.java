@@ -37,9 +37,9 @@ package java.math;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
-
 import javaemul.internal.JsUtils;
 import javaemul.internal.NativeRegExp;
+import jsinterop.annotations.JsType;
 
 /**
  * This class represents immutable arbitrary precision decimal numbers. Each
@@ -403,15 +403,11 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
 
   private static boolean isValidBigUnscaledDecimal(String str) {
     if (unscaledRegex == null) {
-      unscaledRegex = createBigDecimalUnscaledRegex();
+      unscaledRegex = new NativeRegExp("^[+-]?\\d*$", "i");
     }
 
     return unscaledRegex.test(str);
   }
-
-  private static native NativeRegExp createBigDecimalUnscaledRegex() /*-{
-    return /^[+-]?\d*$/i;
-  }-*/;
 
   private static double parseUnscaled(String str) {
     return isValidBigUnscaledDecimal(str) ? JsUtils.parseInt(str, 10) : Double.NaN;

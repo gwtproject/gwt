@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ac86f529_ae1b11f8",
+        "filename": "user/src/com/google/gwt/core/Core.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-06-06T22:21:16Z",
+      "side": 1,
+      "message": "no current window.onerror handler",
+      "range": {
+        "startLine": 91,
+        "startChar": 54,
+        "endLine": 91,
+        "endChar": 55
+      },
+      "revId": "01b3f447d0a2a2fbdc9660d64a4f4879704122e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "830e66c9_7f8a4f48",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-06-06T22:21:16Z",
+      "side": 1,
+      "message": "Let\u0027s call it reportAlways and update logic accordingly.",
+      "range": {
+        "startLine": 193,
+        "startChar": 58,
+        "endLine": 193,
+        "endChar": 75
+      },
+      "revId": "01b3f447d0a2a2fbdc9660d64a4f4879704122e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e19db0d_e62108cb",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-06-06T22:21:16Z",
+      "side": 1,
+      "message": "!origWindowHandler || !reportIfNoHandler\n\nor \n\nreportAlways || !origWindowHandler",
+      "range": {
+        "startLine": 231,
+        "startChar": 7,
+        "endLine": 231,
+        "endChar": 10
+      },
+      "revId": "01b3f447d0a2a2fbdc9660d64a4f4879704122e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb2d641a_44e9da15",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-06-06T22:21:16Z",
+      "side": 1,
+      "message": "bug?",
+      "range": {
+        "startLine": 232,
+        "startChar": 23,
+        "endLine": 232,
+        "endChar": 36
+      },
+      "revId": "01b3f447d0a2a2fbdc9660d64a4f4879704122e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d4cf8b40_7161c238",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-06-06T22:21:16Z",
+      "side": 1,
+      "message": "$wnd.onerror \u003d function() {\n  errorHandler.apply(arguments);\n  if (origWindowHandler) {\n    origWindowHandler.apply(arguments);\n  }\n}\n\nThis also make sure that we don\u0027t break handlers if more params added over time.",
+      "range": {
+        "startLine": 235,
+        "startChar": 21,
+        "endLine": 235,
+        "endChar": 34
+      },
+      "revId": "01b3f447d0a2a2fbdc9660d64a4f4879704122e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8d4e7e52_d23c62ea",
+        "filename": "user/test/com/google/gwt/core/WindowOnError.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-06-06T22:21:16Z",
+      "side": 1,
+      "message": "let\u0027s test with default that we are planning. REPORT_IF_NO_HANDLER",
+      "range": {
+        "startLine": 17,
+        "startChar": 72,
+        "endLine": 17,
+        "endChar": 78
+      },
+      "revId": "01b3f447d0a2a2fbdc9660d64a4f4879704122e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8aee4a12_8b1875c2",
+        "filename": "user/test/com/google/gwt/core/client/GWTTestCaseUncaughtWindowErrorTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-06-06T22:21:16Z",
+      "side": 1,
+      "message": "WindowOnErrorTest",
+      "range": {
+        "startLine": 24,
+        "startChar": 13,
+        "endLine": 24,
+        "endChar": 47
+      },
+      "revId": "01b3f447d0a2a2fbdc9660d64a4f4879704122e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "895a69d0_1d1705d0",
+        "filename": "user/test/com/google/gwt/core/client/GWTTestCaseUncaughtWindowErrorTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-06-06T22:21:16Z",
+      "side": 1,
+      "message": "see reportUncaughtException instead. Provides simpler testing of this situations.",
+      "range": {
+        "startLine": 35,
+        "startChar": 17,
+        "endLine": 35,
+        "endChar": 32
+      },
+      "revId": "01b3f447d0a2a2fbdc9660d64a4f4879704122e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

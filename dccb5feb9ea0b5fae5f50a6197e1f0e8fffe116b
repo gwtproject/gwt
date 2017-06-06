@@ -22,6 +22,30 @@
       "revId": "dccb5feb9ea0b5fae5f50a6197e1f0e8fffe116b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d7a737f_dae53810",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-06-06T16:31:27Z",
+      "side": 1,
+      "message": "As discussed: we treat each handler separately (window vs. frame).",
+      "parentUuid": "2f1d79cb_71ca304c",
+      "range": {
+        "startLine": 219,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 7
+      },
+      "revId": "dccb5feb9ea0b5fae5f50a6197e1f0e8fffe116b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

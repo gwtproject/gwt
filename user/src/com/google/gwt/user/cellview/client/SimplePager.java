@@ -624,6 +624,7 @@ public class SimplePager extends AbstractPager {
       fastForward.getElement().getParentElement().removeClassName(
           style.disabledButton());
     }
+    fastForward.setDisabled(disabled);
   }
 
   /**

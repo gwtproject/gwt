@@ -51,12 +51,14 @@ public class RichTextAreaImplMozilla extends RichTextAreaImplStandard {
       //
       // Note: These events will not conflict with the
       // addEventListener('oneventtype', ...) in RichTextAreaImplStandard.
-      iframe.contentWindow.onfocus = function() {
-        iframe.contentWindow.onfocus = null;
-        iframe.contentWindow.onmouseover = null;
-        iframe.contentWindow.document.designMode = 'On';
-      };
-
+        // may produce NullPointerException
+        if(iframe.contentWindow) {
+            iframe.contentWindow.onfocus = function () {
+                iframe.contentWindow.onfocus = null;
+                iframe.contentWindow.onmouseover = null;
+                iframe.contentWindow.document.designMode = 'On';
+            };
+        }
       // Issue 1441: we also need to catch the onmouseover event because focus
       // occurs after mouse down, so the cursor will not appear until the user
       // clicks twice, making the RichTextArea look uneditable. Catching the

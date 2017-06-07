@@ -18,6 +18,8 @@
 <!--                                                                        -->
 <module>
 
+    <inherits name="com.google.gwt.core.Core"/>
+
   <!--
     Enumerate one or more valid browser rendering modes, to be compared with
     the runtime value of $doc.compatMode
@@ -49,5 +51,6 @@
   <generate-with class="com.google.gwt.user.rebind.DocumentModeGenerator">
     <when-type-assignable class="com.google.gwt.user.client.DocumentModeAsserter.DocumentModeProperty" />
   </generate-with>
+
 
 </module>

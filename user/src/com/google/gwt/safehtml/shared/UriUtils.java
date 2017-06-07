@@ -237,7 +237,8 @@ public final class UriUtils {
         || "https".equals(schemeLc)
         || "ftp".equals(schemeLc)
         || "mailto".equals(schemeLc)
-        || "MAILTO".equals(scheme.toUpperCase(Locale.ROOT)));
+        || "MAILTO".equals(scheme.toUpperCase(Locale.ROOT))
+        || "tel".equals(schemeLc));
   }
 
   /**

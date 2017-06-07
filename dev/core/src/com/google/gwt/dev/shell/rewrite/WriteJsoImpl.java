@@ -73,8 +73,7 @@ abstract class WriteJsoImpl extends ClassVisitor {
     public void visit(int version, int access, String name, String signature,
         String superName, String[] interfaces) {
 
-      ArrayList<String> jsoDescList = new ArrayList<String>();
-      jsoDescList.addAll(jsoDescriptors);
+      ArrayList<String> jsoDescList = new ArrayList<String>(jsoDescriptors);
       interfaces = jsoDescList.toArray(new String[jsoDescList.size()]);
 
       super.visit(version, access, name, signature, superName, interfaces);

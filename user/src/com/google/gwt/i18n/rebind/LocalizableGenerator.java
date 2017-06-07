@@ -317,8 +317,7 @@ public class LocalizableGenerator extends Generator {
       }
     }
     // collect methods from superinterfaces until hitting Localizable
-    ArrayList<JClassType> todo = new ArrayList<JClassType>();
-    todo.addAll(Arrays.asList(targetClass.getImplementedInterfaces()));
+    ArrayList<JClassType> todo = new ArrayList<JClassType>(Arrays.asList(targetClass.getImplementedInterfaces()));
     while (!todo.isEmpty()) {
       JClassType clazz = todo.remove(0);
       for (JMethod method : clazz.getMethods()) {

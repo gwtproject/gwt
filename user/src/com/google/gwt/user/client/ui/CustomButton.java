@@ -127,10 +127,10 @@ import com.google.gwt.user.client.Event;
  * &lt;g:PushButton ui:field='pushButton' enabled='true'>
  *   &lt;g:upFace>
  *     &lt;b>click me&lt;/b>
- *   &lt;/gwt:upFace>
+ *   &lt;/g:upFace>
  *   &lt;g:upHoveringFace>
  *     &lt;b>Click ME!&lt;/b>
- *   &lt;/gwt:upHoveringFace>
+ *   &lt;/g:upHoveringFace>
  *
  *   &lt;g:downFace image='{downButton}'/>
  *   &lt;g:downHoveringFace image='{downButton}'/>

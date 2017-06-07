@@ -7,7 +7,7 @@
 **Browser (with version):** 
 **Operating System:** 
 
----
+
 
 ##### Description
 <!-- Note: Please use gist.github.com for longer log output -->
@@ -30,14 +30,19 @@
  You can also add additional sections if you need to.
 -->
 
-##### Known workarounds
+###### Known workarounds
+
+
+
+
+
+#### Special features 
 
 
 
 
 
 
-##### Links to further discussions
 
 
 

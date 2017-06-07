@@ -619,4 +619,22 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
   private SelectElement getSelectElement() {
     return getElement().cast();
   }
+  
+  /**
+  * Selects item which has the given value. If value
+  * is not found, nothing is done.
+  * @param value to be selected (<code>null</code>-safe)
+  */
+  public void setSelectedValue(String value) {
+      if (value == null) {
+          value = "";
+      }
+      
+      for (int i = 0; i < getItemCount(); i++) {
+          if (getValue(i).equals(value)) {
+              setSelectedIndex(i);
+              return;
+          }
+      }
+  }
 }

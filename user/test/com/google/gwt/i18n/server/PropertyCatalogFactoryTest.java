@@ -54,6 +54,13 @@ public class PropertyCatalogFactoryTest extends MessageCatalogFactoryTestBase {
         PropertyCatalogFactory.SELECTOR_BOILERPLATE_2,
         "3=You have {0} widgets",
         "3[one]=You have one widget",
+        "",
+        "# Description: Number of widgets you have",
+        "#   0 - arg0, Plural Count, Example: 42",
+        PropertyCatalogFactory.SELECTOR_BOILERPLATE_1,
+        PropertyCatalogFactory.SELECTOR_BOILERPLATE_2,
+        "4=You have {0} widgets",
+        "4[\=1]=You have one widget",
     });
   }
 

@@ -139,7 +139,7 @@ public class PropertyCatalogFactory implements MessageCatalogFactory {
         msg = "";
       }
       String key = baseKey;
-      key += "[" + stringJoin("|", formNames) + "]";
+      key += quoteKey("[" + stringJoin("|", formNames) + "]");
       writer.println(key + "=" + propertiesMessage(style, msg));
     }
 

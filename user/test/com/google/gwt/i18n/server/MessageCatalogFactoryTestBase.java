@@ -72,6 +72,12 @@ public abstract class MessageCatalogFactoryTestBase extends TestCase {
     @AlternateMessage({"one", "You have one widget"})
     @Key("3")
     String onePlural(@PluralCount @Example("42") int arg0);
+
+    @Description("Number of widgets you have")
+    @DefaultMessage("You have {0} widgets")
+    @AlternateMessage({"=1", "You have one widget"})
+    @Key("4")
+    String oneNumberPlural(@PluralCount @Example("42") int arg0);
   }
 
   /**

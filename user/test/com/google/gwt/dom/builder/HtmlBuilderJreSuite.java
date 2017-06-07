@@ -23,6 +23,7 @@ import com.google.gwt.dom.builder.shared.HtmlBaseBuilderTest;
 import com.google.gwt.dom.builder.shared.HtmlBodyBuilderTest;
 import com.google.gwt.dom.builder.shared.HtmlButtonBuilderTest;
 import com.google.gwt.dom.builder.shared.HtmlCanvasBuilderTest;
+import com.google.gwt.dom.builder.shared.HtmlCodeBuilderTest;
 import com.google.gwt.dom.builder.shared.HtmlDListBuilderTest;
 import com.google.gwt.dom.builder.shared.HtmlDivBuilderTest;
 import com.google.gwt.dom.builder.shared.HtmlFieldSetBuilderTest;
@@ -107,6 +108,7 @@ public class HtmlBuilderJreSuite {
     suite.addTestSuite(HtmlOptionBuilderTest.class);
     suite.addTestSuite(HtmlParagraphBuilderTest.class);
     suite.addTestSuite(HtmlParamBuilderTest.class);
+    suite.addTestSuite(HtmlCodeBuilderTest.class);
     suite.addTestSuite(HtmlPreBuilderTest.class);
     suite.addTestSuite(HtmlQuoteBuilderTest.class);
     suite.addTestSuite(HtmlScriptBuilderTest.class);

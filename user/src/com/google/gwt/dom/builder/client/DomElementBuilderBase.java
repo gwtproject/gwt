@@ -23,6 +23,7 @@ import com.google.gwt.dom.builder.shared.BRBuilder;
 import com.google.gwt.dom.builder.shared.BaseBuilder;
 import com.google.gwt.dom.builder.shared.BodyBuilder;
 import com.google.gwt.dom.builder.shared.ButtonBuilder;
+import com.google.gwt.dom.builder.shared.CodeBuilder;
 import com.google.gwt.dom.builder.shared.CanvasBuilder;
 import com.google.gwt.dom.builder.shared.DListBuilder;
 import com.google.gwt.dom.builder.shared.DivBuilder;
@@ -359,6 +360,11 @@ public class DomElementBuilderBase<R extends ElementBuilderBase<?>, E extends El
   @Override
   public InputBuilder startPasswordInput() {
     return delegate.startPasswordInput();
+  }
+
+  @Override
+  public CodeBuilder startCode() {
+    return delegate.startCode();
   }
 
   @Override

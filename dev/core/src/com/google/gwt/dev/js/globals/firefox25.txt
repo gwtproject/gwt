@@ -130,6 +130,7 @@ HTMLBaseElement
 HTMLBodyElement
 HTMLButtonElement
 HTMLCanvasElement
+HTMLCodeElement
 HTMLCollection
 HTMLDListElement
 HTMLDataElement

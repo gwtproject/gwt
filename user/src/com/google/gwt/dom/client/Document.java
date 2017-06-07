@@ -952,6 +952,15 @@ public class Document extends Node {
   }
 
   /**
+   * Creates a &lt;code&gt; element.
+   * 
+   * @return the newly created element
+   */
+  public final CodeElement createCodeElement() {
+    return (CodeElement) DOMImpl.impl.createElement(this, CodeElement.TAG);
+  }
+
+  /**
    * Creates a &lt;pre&gt; element.
    * 
    * @return the newly created element

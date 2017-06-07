@@ -203,6 +203,8 @@ public abstract class ElementBuilderFactory {
 
   public abstract InputBuilder createPasswordInputBuilder();
 
+  public abstract CodeBuilder createCodeBuilder();
+
   public abstract PreBuilder createPreBuilder();
 
   public abstract ButtonBuilder createPushButtonBuilder();

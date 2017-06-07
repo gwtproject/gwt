@@ -23,6 +23,7 @@ import com.google.gwt.dom.client.BaseElement;
 import com.google.gwt.dom.client.BodyElement;
 import com.google.gwt.dom.client.ButtonElement;
 import com.google.gwt.dom.client.CanvasElement;
+import com.google.gwt.dom.client.CodeElement;
 import com.google.gwt.dom.client.DListElement;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
@@ -110,6 +111,7 @@ class HtmlBuilderImpl extends ElementBuilderImpl {
   private HtmlOptGroupBuilder optGroupBuilder;
   private HtmlParagraphBuilder paragraphBuilder;
   private HtmlParamBuilder paramBuilder;
+  private HtmlCodeBuilder codeBuilder;
   private HtmlPreBuilder preBuilder;
   private HtmlQuoteBuilder quoteBuilder;
   private HtmlScriptBuilder scriptBuilder;
@@ -441,6 +443,14 @@ class HtmlBuilderImpl extends ElementBuilderImpl {
 
   public HtmlInputBuilder startPasswordInput() {
     return startInput("password");
+  }
+
+  public HtmlCodeBuilder startCode() {
+    if (codeBuilder == null) {
+      codeBuilder = new HtmlCodeBuilder(this);
+    }
+    trustedStart(CodeElement.TAG, codeBuilder);
+    return codeBuilder;
   }
 
   public HtmlPreBuilder startPre() {

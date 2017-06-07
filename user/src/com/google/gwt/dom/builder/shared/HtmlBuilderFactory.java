@@ -265,6 +265,11 @@ public class HtmlBuilderFactory extends ElementBuilderFactory {
   }
 
   @Override
+  public HtmlCodeBuilder createCodeBuilder() {
+    return impl().startCode();
+  }
+
+  @Override
   public HtmlPreBuilder createPreBuilder() {
     return impl().startPre();
   }

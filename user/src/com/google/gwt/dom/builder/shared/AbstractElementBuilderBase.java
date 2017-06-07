@@ -23,6 +23,7 @@ import com.google.gwt.dom.client.BaseElement;
 import com.google.gwt.dom.client.BodyElement;
 import com.google.gwt.dom.client.ButtonElement;
 import com.google.gwt.dom.client.CanvasElement;
+import com.google.gwt.dom.client.CodeElement;
 import com.google.gwt.dom.client.DListElement;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Element;
@@ -298,6 +299,11 @@ public abstract class AbstractElementBuilderBase<R extends ElementBuilderBase<?>
   @Override
   public void endParam() {
     end(ParamElement.TAG);
+  }
+
+  @Override
+  public void endCode() {
+    end(CodeElement.TAG);
   }
 
   @Override

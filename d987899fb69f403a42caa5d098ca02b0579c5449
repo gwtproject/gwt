@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0236a675_ebc75691",
+        "filename": "user/test/com/google/gwt/core/interop/JsFunctionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-06-25T00:09:09Z",
+      "side": 0,
+      "message": "I guess we already have a test covering the case of a JsFunction with a @JsOverlay. I see that this test is invalid as it is implementing the JsFunction with a default method)..",
+      "range": {
+        "startLine": 291,
+        "startChar": 0,
+        "endLine": 297,
+        "endChar": 3
+      },
+      "revId": "d987899fb69f403a42caa5d098ca02b0579c5449",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3c5ad6f_09bd4e05",
+        "filename": "user/test/com/google/gwt/core/interop/JsTypeSpecialTypesTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-06-25T00:09:09Z",
+      "side": 0,
+      "message": "Are these all already tested in NativeJsTypes or elsewhere?",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 111,
+        "endChar": 3
+      },
+      "revId": "d987899fb69f403a42caa5d098ca02b0579c5449",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

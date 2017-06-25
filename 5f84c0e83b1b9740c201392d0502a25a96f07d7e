@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60e93aec_96a80613",
+        "filename": "user/test/com/google/gwt/core/interop/JsFunctionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-06-25T00:09:09Z",
+      "side": 1,
+      "message": "Presubmits are failing because these are Java8. I think in the opensource build we are building all tests in Java7 except for the Java8 test.\n\nThe simplest thing would be to move these tests to Java8Test.",
+      "range": {
+        "startLine": 279,
+        "startChar": 1,
+        "endLine": 287,
+        "endChar": 3
+      },
+      "revId": "5f84c0e83b1b9740c201392d0502a25a96f07d7e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -16,6 +16,24 @@
       "revId": "87acb941f790f18e326d6e3fb97083793b27ab28",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85f9fbf7_77c6cd9a",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1606,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-06-26T21:34:02Z",
+      "side": 1,
+      "message": "You probably want to make the interface private or package private.",
+      "parentUuid": "b87aad46_9154220b",
+      "revId": "87acb941f790f18e326d6e3fb97083793b27ab28",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

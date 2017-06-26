@@ -22,6 +22,30 @@
       "revId": "5f84c0e83b1b9740c201392d0502a25a96f07d7e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ebf79d9b_f042b26c",
+        "filename": "user/test/com/google/gwt/core/interop/JsFunctionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-06-26T21:26:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60e93aec_96a80613",
+      "range": {
+        "startLine": 279,
+        "startChar": 1,
+        "endLine": 287,
+        "endChar": 3
+      },
+      "revId": "5f84c0e83b1b9740c201392d0502a25a96f07d7e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

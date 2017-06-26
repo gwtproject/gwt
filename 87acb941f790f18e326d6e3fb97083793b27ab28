@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b87aad46_9154220b",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1606,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-06-26T21:26:52Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "87acb941f790f18e326d6e3fb97083793b27ab28",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

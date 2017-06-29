@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd8c2318_234a0e20",
+        "filename": "user/src/com/google/gwt/i18n/rebind/LookupMethodCreator.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-06-29T12:22:31Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 127).",
+      "revId": "a7b2b9bfe79522a137dfa7840f11919a0f70eca9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

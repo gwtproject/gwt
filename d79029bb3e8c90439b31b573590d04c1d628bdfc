@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a685278_8973ac80",
+        "filename": "user/src/com/google/gwt/i18n/rebind/LookupMethodCreator.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-06-29T13:00:19Z",
+      "side": 1,
+      "message": "Looking more closely at the code, there\u0027s a printReturnTarget() that\u0027s overridden in ConstantsWithLookupImplCreator. Shouldn\u0027t it be used here?\n\nOr actually, shouldn\u0027t the private \"partition methods\" return type be returnType.getParameterizedQualifiedSourceName() (i.e. possibly a primitive type, never a wrapper type, contrary to returnTypeName), and then yes reintroduce the \u0027tmp\u0027 variable with the same type (*not* returnTypeName)\n\nThis calls for moar tests.",
+      "revId": "d79029bb3e8c90439b31b573590d04c1d628bdfc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3c06342_884c080f",
+        "filename": "user/test/com/google/gwt/i18n/rebind/LookupMethodCreatorTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-06-29T13:00:19Z",
+      "side": 1,
+      "message": "Maybe add some test with non-String constants to make sure everything still works, and *how* it works.\n\nNote: not really needed, this should be tested in I18NTest#testConstantsWithLookup; does that test still pass with this change? (note that Jenkins doesn\u0027t run tests, hence Verified+1 does not mean tests pass, only that code compiles)",
+      "revId": "d79029bb3e8c90439b31b573590d04c1d628bdfc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

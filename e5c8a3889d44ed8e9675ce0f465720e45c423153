@@ -22,6 +22,30 @@
       "revId": "e5c8a3889d44ed8e9675ce0f465720e45c423153",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9204dec_dd0f5a18",
+        "filename": "user/src/com/google/gwt/i18n/rebind/LookupMethodCreator.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 6910
+      },
+      "writtenOn": "2017-07-06T11:14:16Z",
+      "side": 1,
+      "message": "This was my first approach but with these two if statements the complexity is higher than this solution in my opinion.\n\nif size \u003d\u003d 1 the output will still the same as your expression.\n and now you will see in the generated class that there is only one returned value. THe last methodlookup will throw the exception.\n\nWe should discuss how the generated code should look:\nOption1\npublic java.lang.String getString(java.lang.String arg0) {\n    java.lang.String target \u003d (java.lang.String) cache.get(arg0);\n    if (target !\u003d null) {\n      return target;\n    }\n    if(arg0.equals(\"first\")) {\n      return first();\n    }\n    if(arg0.equals(\"second\")) {\n      return second();\n    }\n    if(arg0.equals(\"third\")) {\n      return third();\n    }\n    return getStringFromPartition0(arg0);\n  }\n  \n  private java.lang.String getStringFromPartition0(java.lang.String arg0) {\n    if(arg0.equals(\"fourth\")) {\n      return fourth();\n    }\n    throw new java.util.MissingResourceException(\"Cannot find constant \u0027\" +arg0 + \"\u0027; expecting a method name\", \"foo.FourEntryMessage\", arg0);\n  }\n\nOption2\npublic java.lang.String getString(java.lang.String arg0) {\n    java.lang.String target \u003d (java.lang.String) cache.get(arg0);\n    if (target !\u003d null) {\n      return target;\n    }\n    String fromPartition \u003d getStringFromPartition0(arg0);\n    if(fromPartition !\u003d null) {\n      return fromPartition;\n    }\n    fromPartition \u003d getStringFromPartition1(arg0);\n    if(fromPartition !\u003d null) {\n      return fromPartition;\n    }\n    throw new java.util.MissingResourceException(\"Cannot find constant \u0027\" +arg0 + \"\u0027; expecting a method name\", \"foo.FourEntryMessage\", arg0);\n  }\n  \n  private java.lang.String getStringFromPartition0(java.lang.String arg0) {\n    if (target !\u003d null) {\n      return target;\n    }\n    if(arg0.equals(\"first\")) {\n      return first();\n    }\n    if(arg0.equals(\"second\")) {\n      return second();\n    }\n    if(arg0.equals(\"third\")) {\n      return third();\n    }\n    return null;\n  }\n  \n  private java.lang.String getStringFromPartition1(java.lang.String arg0) {\n    if(arg0.equals(\"fourth\")) {\n      return fourth();\n    }\n    \n    return null;\n  }\n  \nIn my Opinion the option1 is the best solution",
+      "parentUuid": "24502d2d_8db818f6",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 5
+      },
+      "revId": "e5c8a3889d44ed8e9675ce0f465720e45c423153",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

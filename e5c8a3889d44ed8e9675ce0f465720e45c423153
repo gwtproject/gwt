@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24502d2d_8db818f6",
+        "filename": "user/src/com/google/gwt/i18n/rebind/LookupMethodCreator.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-07-06T08:43:13Z",
+      "side": 1,
+      "message": "Oh wow, this is really hard to follow!\n\nCouldn\u0027t it be written in terms of:\n\n if (methodPartitions.size() \u003d\u003d 1) {\n   createMethodLookups(methodPartitions.get(0));\n } else {\n   for (int i \u003d 0; i \u003c methodPartitions.size(); i++) {\n     // print call to partition method\n   }\n }\n\n // print the throw new MissingResourceException and end method\n\n if (methodPartitions.size() \u003e 1) {\n   for (int i \u003d 0; i \u003c methodPartitions.size(); i++) {\n     List\u003cJMethod\u003e partition \u003d methodPartitions.get(i);\n     // print partition method \u0027i\u0027\n   }\n }\n\nThough actually, with that createMethodFor(…) that only generates the body, this is awkward; the method is supposed to only print/generate the body of the method, and we make it \"close\" en method and generate other methods, taking care of leaving the last one \"open\" so it\u0027ll be \"closed\" by the caller.\n\nThis actually calls for some refactoring! Possibly no longer using AbstractMethodCreator, I don\u0027t know.",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 5
+      },
+      "revId": "e5c8a3889d44ed8e9675ce0f465720e45c423153",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

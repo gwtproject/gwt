@@ -19,6 +19,8 @@ import com.google.gwt.dom.client.AnchorElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.WhiteSpace;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.BidiUtils;
 import com.google.gwt.i18n.client.HasDirection;
 import com.google.gwt.i18n.shared.DirectionEstimator;
@@ -92,6 +94,15 @@ public class Anchor extends FocusWidget implements HasHorizontalAlignment,
 
   private HorizontalAlignmentConstant horzAlign;
 
+  private class DefaultClickHandler implements ClickHandler {
+    public void onClick(ClickEvent event) {
+      String href = getAnchorElement().getHref();
+      if (DEFAULT_HREF.equals(href)) {
+        event.preventDefault();
+      }
+    }
+  }
+
   /**
    * Creates an empty anchor.
    * 
@@ -125,6 +136,7 @@ public class Anchor extends FocusWidget implements HasHorizontalAlignment,
     if (useDefaultHref) {
       setHref(DEFAULT_HREF);
     }
+    addClickHandler(new DefaultClickHandler());
   }
 
   /**
@@ -630,4 +642,5 @@ public class Anchor extends FocusWidget implements HasHorizontalAlignment,
   private AnchorElement getAnchorElement() {
     return AnchorElement.as(getElement());
   }
+
 }

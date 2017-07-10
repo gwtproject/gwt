@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9154a694_f622708e",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-07-10T22:34:36Z",
+      "side": 1,
+      "message": "I think it make more sense to inline the handlers.\n\n$wnd.onerror \u003d function() { ... }",
+      "range": {
+        "startLine": 235,
+        "startChar": 21,
+        "endLine": 235,
+        "endChar": 34
+      },
+      "revId": "2aa2ad801856c5b1dd149c3893594849c446bb79",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "899994f6_0ecab0dc",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-07-10T22:34:36Z",
+      "side": 1,
+      "message": "Whole method can be simplified as:\n\n   function errorHandler(msg, url, line, column, error) {\n      // IE8, IE9, IE10, safari 9, do not have an error passed\n      if (!error) {\n        error \u003d msg + \" (\" + url + \":\" + line\n        // IE8 and IE9 do not have the column number\n        if (column) {\n          error +\u003d \":\" + column\n        }\n        error +\u003d \")\";\n      }\n\n      var throwable \u003d @java.lang.Throwable::of(*)(error);\n      @Impl::reportWindowOnError(*)(throwable);\n    };\n\n\n    function addOnErrorHandler(wndRef) {\n      var origHandler \u003d wndRef.onerror;\n\n      if (origHandler \u0026\u0026 !reportAlways) {\n        return;\n      }\n\n      wndRef.onerror \u003d function() {\n        errorHandler.apply(this, arguments);\n        if (origHandler) {\n          origHandler.apply(this, arguments);\n        }\n        return false;\n      };\n    }\n\n\n    // Note we need to trap both window.onerror and $wnd.onerror\n    // Chrome 58 \u0026 Safari (10.1) \u0026 HtmlUnit uses $wnd.error,\n    // while FF (53) /IE (even edge) listens on window.error\n\n    addOnErrorHandler($wnd);\n    addOnErrorHandler(window);",
+      "revId": "2aa2ad801856c5b1dd149c3893594849c446bb79",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8d5409b3_c7752ead",
+        "filename": "user/test/com/google/gwt/core/client/WindowOnErrorTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-07-10T22:34:36Z",
+      "side": 1,
+      "message": "Overriding the reportUncaughtException helps you to write these tests simpler:\n\n  int reportedJsExceptionCount;\n\n  @Override\n  protected void reportUncaughtException(Throwable ex) {\n    if (ex.getMessage().contains(\"from_js\")) {\n      reportedJsExceptionCount++;\n      // Do not let the test fail\n      return;\n    }\n    super.reportUncaughtException(ex);\n  }\n\n  // Does not work in dev mode, since JNSI code for setting up window.onerror needs Throwable.of\n  // from super sourced code.\n  @DoNotRunWith({Platform.Devel})\n  public void testFailViaWindowOnError() {\n    throwInNonEntryMethod();\n\n    new Timer() {\n      @Override\n      public void run() {\n        assertEquals(1, reportedJsExceptionCount);\n        finishTest();\n      }\n    }.schedule(1000);\n\n    delayTestFinish(2000);\n  }\n\n  private native void throwInNonEntryMethod() /*-{\n    $wnd.setTimeout(function() {\n      throw new Error(\"from_js\");\n    }, 0);\n  }-*/;",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 1
+      },
+      "revId": "2aa2ad801856c5b1dd149c3893594849c446bb79",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

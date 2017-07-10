@@ -16,6 +16,86 @@
       "revId": "dc116b8600224951a3026393fdcfe067ac8e26f9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efaf4e4_e37a7ef0",
+        "filename": "user/src/com/google/gwt/user/client/ui/Anchor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-07-10T21:56:32Z",
+      "side": 1,
+      "message": "You can do just getHref() here and remove the previous line.",
+      "range": {
+        "startLine": 100,
+        "startChar": 30,
+        "endLine": 100,
+        "endChar": 34
+      },
+      "revId": "dc116b8600224951a3026393fdcfe067ac8e26f9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b17e939_c382733e",
+        "filename": "user/src/com/google/gwt/user/client/ui/Anchor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-07-10T21:56:32Z",
+      "side": 1,
+      "message": "nit: we can inline this class for easier reading of the code.",
+      "range": {
+        "startLine": 139,
+        "startChar": 24,
+        "endLine": 139,
+        "endChar": 43
+      },
+      "revId": "dc116b8600224951a3026393fdcfe067ac8e26f9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a91c9ab0_00e0d49e",
+        "filename": "user/src/com/google/gwt/user/client/ui/Anchor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-07-10T21:56:32Z",
+      "side": 1,
+      "message": "Pls add a comment explaining why we bother with adding a handler,",
+      "revId": "dc116b8600224951a3026393fdcfe067ac8e26f9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a15bee0_8873228b",
+        "filename": "user/src/com/google/gwt/user/client/ui/Anchor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-07-10T21:56:32Z",
+      "side": 1,
+      "message": "Since we are always adding a handler now, I wonder if this may result in behavior changes due to potential differences of browser handling of anchor elements with a handler.\n\nThat might not be easy to answer but if there is an alternative maybe we can consider that.",
+      "revId": "dc116b8600224951a3026393fdcfe067ac8e26f9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

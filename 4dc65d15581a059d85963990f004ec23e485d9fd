@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4dd9d7ff_0171a56f",
+        "filename": "user/src/com/google/gwt/event/dom/client/DomEvent.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 10840
+      },
+      "writtenOn": "2017-07-11T22:28:44Z",
+      "side": 1,
+      "message": "I found that there was user code that fired click events with synthetic event objects, e.g. anchor.fireEvent(new ClickEvent() {}). This was used in unit tests.\n\nThis caused an exception here because nativeEvent was null. I added this code to work around this type of problem.",
+      "revId": "4dc65d15581a059d85963990f004ec23e485d9fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

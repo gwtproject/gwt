@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea4bc6ed_71d19e8f",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-07-11T20:44:49Z",
+      "side": 1,
+      "message": "function errorHandler to be consistent.",
+      "range": {
+        "startLine": 194,
+        "startChar": 4,
+        "endLine": 194,
+        "endChar": 31
+      },
+      "revId": "49c4f00b16642ea7ab7d0ec5fe6af1f87969dc18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88b4e845_d5dbe1a8",
+        "filename": "user/test/com/google/gwt/core/client/WindowOnErrorTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-07-11T20:44:49Z",
+      "side": 1,
+      "message": "reportedJsExceptionCount",
+      "range": {
+        "startLine": 55,
+        "startChar": 24,
+        "endLine": 55,
+        "endChar": 38
+      },
+      "revId": "49c4f00b16642ea7ab7d0ec5fe6af1f87969dc18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

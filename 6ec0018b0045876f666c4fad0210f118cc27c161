@@ -1,0 +1,769 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3204f80_08e0a46d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Subject line and body should be separated by a blank line.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cf41c1d7_14351487",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07fa7e49_4bcabb40",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fadab0f6_aa064815",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9661ef3c_3e4fc216",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe86c6ad_284d6d02",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4edc284b_c8ef7a06",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "11319e6d_901e956a",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9322757e_bdac430f",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7149ed0c_5ab8e276",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ff7c7c8_7e353328",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91409402_6a035570",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a5e98df7_97b444fe",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "367a3b2c_fb3227ca",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e76f646_e89a8564",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30eb606b_c56c5721",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffaea13f_51321924",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c616218f_24bb8ef9",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "921faed6_9a6bf4e9",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c90381b8_53afee6d",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c005c8d5_164329ff",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf8b802f_d57e8c50",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "392095a2_4a9b9340",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a66c79dd_124c399a",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6fe41b26_8fcb3471",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "981bd477_17807136",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a6cdac01_bfb1dc78",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a88a7c95_dcaf2ba7",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a5c65f76_4cd0d8b3",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3741ac97_99aa150b",
+        "filename": "user/super/com/google/gwt/emul/java/io/DataOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da1db2da_b053ea63",
+        "filename": "user/super/com/google/gwt/emul/java/io/Externalizable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90db3c31_bf89060b",
+        "filename": "user/super/com/google/gwt/emul/java/io/Externalizable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40cb4180_fdf71128",
+        "filename": "user/super/com/google/gwt/emul/java/io/ObjectInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7be55250_445d13dc",
+        "filename": "user/super/com/google/gwt/emul/java/io/ObjectInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed851a8f_d3ab12b6",
+        "filename": "user/super/com/google/gwt/emul/java/io/ObjectInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb7fb959_eddf4bdd",
+        "filename": "user/super/com/google/gwt/emul/java/io/ObjectInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "681b83c8_ae206ac0",
+        "filename": "user/super/com/google/gwt/emul/java/io/ObjectInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b52d38c6_1395a7f5",
+        "filename": "user/super/com/google/gwt/emul/java/io/ObjectInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99e74560_de24611c",
+        "filename": "user/super/com/google/gwt/emul/java/io/ObjectInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16d31e07_3ad0f24d",
+        "filename": "user/super/com/google/gwt/emul/java/io/ObjectOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26b7139_24beac52",
+        "filename": "user/super/com/google/gwt/emul/java/io/ObjectOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7dbee205_10c820b4",
+        "filename": "user/super/com/google/gwt/emul/java/io/ObjectOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af6c19f7_27489d45",
+        "filename": "user/super/com/google/gwt/emul/java/io/ObjectOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ac56e93_89360e85",
+        "filename": "user/super/com/google/gwt/emul/java/io/ObjectOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04e7b5ca_c81e12e3",
+        "filename": "user/super/com/google/gwt/emul/java/io/ObjectOutput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-14T00:49:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "6ec0018b0045876f666c4fad0210f118cc27c161",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

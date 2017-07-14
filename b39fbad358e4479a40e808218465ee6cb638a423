@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1daa8acb_159e2a11",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-07-14T03:29:28Z",
+      "side": 1,
+      "message": "pls remove",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 22
+      },
+      "revId": "b39fbad358e4479a40e808218465ee6cb638a423",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1fbfd74_f5826d9c",
+        "filename": "user/super/com/google/gwt/emul/java/io/Externalizable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-07-14T03:29:28Z",
+      "side": 1,
+      "message": "missing \u003cp\u003es",
+      "range": {
+        "startLine": 21,
+        "startChar": 1,
+        "endLine": 21,
+        "endChar": 2
+      },
+      "revId": "b39fbad358e4479a40e808218465ee6cb638a423",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b0d1b22_8ad1c6e3",
+        "filename": "user/super/com/google/gwt/emul/java/io/Externalizable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-07-14T03:29:28Z",
+      "side": 1,
+      "message": "methods",
+      "range": {
+        "startLine": 23,
+        "startChar": 26,
+        "endLine": 23,
+        "endChar": 32
+      },
+      "revId": "b39fbad358e4479a40e808218465ee6cb638a423",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "360a2a70_32a3f130",
+        "filename": "user/super/com/google/gwt/emul/java/io/Externalizable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-07-14T03:29:28Z",
+      "side": 1,
+      "message": "Since java8, can\u0027t we make following work:\n\nclass A implements @Gwtncompatible SomeIncompatibleInterface",
+      "revId": "b39fbad358e4479a40e808218465ee6cb638a423",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

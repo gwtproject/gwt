@@ -39,6 +39,30 @@
       "revId": "3ed91c14a0394df1e0f4e99b6b17cb23a40fda13",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87b07dde_e021a5c9",
+        "filename": "user/src/com/google/gwt/user/client/ui/Anchor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 10840
+      },
+      "writtenOn": "2017-07-17T19:48:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "923d3064_6339c88c",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 3
+      },
+      "revId": "3ed91c14a0394df1e0f4e99b6b17cb23a40fda13",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

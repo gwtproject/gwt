@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e8be32b_ce327901",
+        "filename": "user/test/com/google/gwt/emultest/java/util/PriorityQueueTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-18T21:40:43Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.util.Iterator\u0027 import.",
+      "revId": "a13e49a106b0130b44e6688464cf7082d177d242",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bfa70059_ce88b548",
+        "filename": "user/test/com/google/gwt/emultest/java/util/PriorityQueueTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-18T21:40:43Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "a13e49a106b0130b44e6688464cf7082d177d242",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "31aaf585_fbc042a5",
+        "filename": "user/test/com/google/gwt/emultest/java/util/PriorityQueueTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-18T21:40:43Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "a13e49a106b0130b44e6688464cf7082d177d242",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aba7eaff_79a7a739",
+        "filename": "user/test/com/google/gwt/emultest/java/util/PriorityQueueTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-18T21:40:43Z",
+      "side": 1,
+      "message": "[warning] \u0027}\u0027 should be alone on a line.",
+      "revId": "a13e49a106b0130b44e6688464cf7082d177d242",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "28f808be_2aaf70d4",
+        "filename": "user/test/com/google/gwt/emultest/java/util/PriorityQueueTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-18T21:55:52Z",
+      "side": 1,
+      "message": "[warning] \u0027}\u0027 should be alone on a line.",
+      "revId": "a7f26f96952d64816e0ab010452f2696f5d1375e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

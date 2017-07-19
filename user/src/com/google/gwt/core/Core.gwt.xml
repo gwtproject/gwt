@@ -96,4 +96,7 @@
 
   <!-- To support legacy logging flags -->
   <inherits name="com.google.gwt.logging.LogImpl"/>
+
+  <define-property name="gwt.cspCompat" values="OFF, ON"/>
+  <set-property name="gwt.cspCompat" value="OFF"/>
 </module>

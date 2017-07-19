@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9141ead7_a806f7f1",
+        "filename": "user/src/com/google/gwt/user/client/ui/Anchor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-07-19T20:38:56Z",
+      "side": 1,
+      "message": "Let\u0027s put it to UI.gwt.xml instead and call it gwt.cspCompatModeEnabled with values \"true,false\"",
+      "revId": "61fa263d3ce64f1febdf412f7feb49c3680a5f5c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

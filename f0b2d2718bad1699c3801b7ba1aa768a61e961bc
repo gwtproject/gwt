@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e7f8917_314052a7",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ResourceLoaders.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-07-27T09:42:45Z",
+      "side": 1,
+      "message": "This is no longer accurate.",
+      "revId": "f0b2d2718bad1699c3801b7ba1aa768a61e961bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

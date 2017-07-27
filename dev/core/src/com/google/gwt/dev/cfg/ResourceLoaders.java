@@ -15,12 +15,15 @@
  */
 package com.google.gwt.dev.cfg;
 
+import static com.google.gwt.thirdparty.guava.common.base.StandardSystemProperty.JAVA_CLASS_PATH;
+
+import com.google.gwt.thirdparty.guava.common.base.Splitter;
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLClassLoader;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -50,10 +53,10 @@ public class ResourceLoaders {
     @Override
     public List<URL> getClassPath() {
       List<URL> result = new ArrayList<URL>();
-      for (ClassLoader candidate = wrapped; candidate != null; candidate = candidate.getParent()) {
-        if (candidate instanceof URLClassLoader) {
-          URL[] urls = ((URLClassLoader) candidate).getURLs();
-          result.addAll(Arrays.asList(urls));
+      for (String entry : Splitter.on(File.pathSeparatorChar).split(JAVA_CLASS_PATH.value())) {
+        try {
+          result.add(Paths.get(entry).toUri().toURL());
+        } catch (MalformedURLException e) {
         }
       }
       return result;

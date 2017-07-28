@@ -16,6 +16,8 @@
 package com.google.gwt.dev.resource.impl;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.dev.cfg.ResourceLoader;
+import com.google.gwt.dev.cfg.ResourceLoaders;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.util.tools.Utility;
@@ -27,10 +29,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -339,21 +341,15 @@ public class ResourceOracleImplTest extends AbstractResourceOrientedTestBase {
    * multiple ResourceOracleImpls created from the same classloader return the
    * same list of ClassPathEntries.
    */
-  public void testRemoveDuplicates() {
+  public void testSameClassPathEntries() {
     TreeLogger logger = createTestTreeLogger();
-    URL cpe1 = findUrl("com/google/gwt/dev/resource/impl/testdata/cpe1.jar");
-    URL cpe2 = findUrl("com/google/gwt/dev/resource/impl/testdata/cpe2.zip");
-    URLClassLoader classLoader = new URLClassLoader(new URL[]{
-        cpe1, cpe2, cpe2, cpe1, cpe2,}, null);
-    ResourceOracleImpl oracle = new ResourceOracleImpl(logger, classLoader);
+    ResourceOracleImpl oracle = new ResourceOracleImpl(logger);
     List<ClassPathEntry> classPathEntries = oracle.getClassPathEntries();
-    assertEquals(2, classPathEntries.size());
-    assertJarEntry(classPathEntries.get(0), "cpe1.jar");
-    assertJarEntry(classPathEntries.get(1), "cpe2.zip");
-    oracle = new ResourceOracleImpl(logger, classLoader);
+
+    oracle = new ResourceOracleImpl(logger);
     List<ClassPathEntry> classPathEntries2 = oracle.getClassPathEntries();
-    assertEquals(2, classPathEntries2.size());
-    for (int i = 0; i < 2; ++i) {
+    assertEquals(classPathEntries.size(), classPathEntries2.size());
+    for (int i = 0; i < classPathEntries2.size(); ++i) {
       assertSame(classPathEntries.get(i), classPathEntries2.get(i));
     }
   }

@@ -69,7 +69,7 @@ import com.google.gwt.junit.JUnitMessageQueue.ClientStatus;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.junit.client.TimeoutException;
 import com.google.gwt.junit.client.impl.JUnitHost.TestInfo;
-import com.google.gwt.junit.client.impl.JUnitResult;
+import com.google.gwt.junit.client.impl.JUnitResultExt;
 import com.google.gwt.thirdparty.guava.common.base.Splitter;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.util.tools.ArgHandlerFlag;
@@ -81,9 +81,11 @@ import junit.framework.TestCase;
 import junit.framework.TestResult;
 
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -100,7 +102,16 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.DispatcherType;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.Servlet;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * This class is responsible for hosting JUnit test case execution. There are
@@ -1054,7 +1065,7 @@ public class JUnitShell extends DevMode {
       throw new TimeoutException(msg.toString());
     }
 
-    if (messageQueue.hasResults(currentTestInfo)) {
+    if (messageQueue.hasCompleted(currentTestInfo)) {
       return false;
     } else if (pendingException == null) {
       // Instead of waiting around for results, try to compile the next module.
@@ -1129,6 +1140,13 @@ public class JUnitShell extends DevMode {
         }
       }
     }
+    BindingProperty strictCspTestingEnabledProperty =
+        module.getProperties().findBindingProp("gwt.strictCspTestingEnabled");
+
+    if (strictCspTestingEnabledProperty != null && 
+        "true".equals(strictCspTestingEnabledProperty.getConstrainedValue())) {
+      addCspFilter("/" + module.getName() + "/*");
+    }
     if (developmentMode) {
       // BACKWARDS COMPATIBILITY: many linkers currently fail in dev mode.
       try {
@@ -1149,6 +1167,50 @@ public class JUnitShell extends DevMode {
     } else {
       compileForWebMode(module, userAgents);
     }
+  }
+
+  /**
+   * Adds a filter to the server that automatically adds Content-Security-Policy HTTP headers to
+   * responses on the given path.
+   */
+  private void addCspFilter(String path) {
+    wac.addFilter(new FilterHolder(new Filter() {
+      private Pattern urlPattern = Pattern.compile("^/([a-zA-Z0-9_.]+)/.*");
+
+      @Override
+      public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+          throws IOException, ServletException {
+
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        System.out.printf("cspFilter %s\n", httpRequest.getRequestURL());
+
+        String requestUri = httpRequest.getRequestURI();
+        Matcher urlMatch = urlPattern.matcher(requestUri);
+
+        if (urlMatch.matches()) {
+          String rootPath = urlMatch.group(1);
+
+          if (requestUri.endsWith("/csp-checkpoint.html")) {
+            httpResponse.addHeader("Content-Security-Policy",
+                "connect-src 'none'; report-uri /" + rootPath + "/junithost/csp/checkpoint");
+          } else {
+            httpResponse.addHeader("Content-Security-Policy-Report-Only",
+                "script-src 'nonce-gwt-nonce' 'unsafe-inline' 'strict-dynamic' https: http: " +
+                "'unsafe-eval' 'report-sample'; " +
+                "report-uri /" + rootPath + "/junithost/csp/violation");
+          }
+        }
+
+        chain.doFilter(request, response);
+      }
+
+      @Override
+      public void init(FilterConfig arg0) throws ServletException { }
+
+      @Override
+      public void destroy() { }
+    }), path, EnumSet.of(DispatcherType.REQUEST));
   }
 
   private void checkArgs() {
@@ -1250,14 +1312,15 @@ public class JUnitShell extends DevMode {
 
   private void processTestResult(TestCase testCase, TestResult testResult) {
 
-    Map<ClientStatus, JUnitResult> results = messageQueue.getResults(currentTestInfo);
+    Map<ClientStatus, JUnitResultExt> results = messageQueue.getResults(currentTestInfo);
     assert results != null;
     assert results.size() == messageQueue.getNumClients() : results.size()
         + " != " + messageQueue.getNumClients();
 
-    for (Entry<ClientStatus, JUnitResult> entry : results.entrySet()) {
-      JUnitResult result = entry.getValue();
+    for (Entry<ClientStatus, JUnitResultExt> entry : results.entrySet()) {
+      JUnitResultExt result = entry.getValue();
       assert (result != null);
+      assert result.hasCompleted();
 
       if (result.isAnyException()) {
         if (result.isExceptionOf(AssertionFailedError.class)) {
@@ -1334,7 +1397,7 @@ public class JUnitShell extends DevMode {
     currentTestInfo = new TestInfo(currentModule.getName(),
         testCase.getClass().getName(), testCase.getName());
     numTries++;
-    if (messageQueue.hasResults(currentTestInfo)) {
+    if (messageQueue.hasCompleted(currentTestInfo)) {
       // Already have a result.
       processTestResult(testCase, testResult);
       return;
@@ -1386,7 +1449,7 @@ public class JUnitShell extends DevMode {
         return;
       }
     }
-    assert (messageQueue.hasResults(currentTestInfo));
+    assert (messageQueue.hasCompleted(currentTestInfo));
     processTestResult(testCase, testResult);
   }
 

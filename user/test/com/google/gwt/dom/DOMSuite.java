@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dom;
 
+import com.google.gwt.dom.client.CspTest;
 import com.google.gwt.dom.client.DocumentTest;
 import com.google.gwt.dom.client.ElementTest;
 import com.google.gwt.dom.client.FormTests;
@@ -37,6 +38,7 @@ public class DOMSuite {
     GWTTestSuite suite = new GWTTestSuite(
         "Test for suite for the com.google.gwt.dom module");
 
+    suite.addTestSuite(CspTest.class);
     suite.addTestSuite(DocumentTest.class);
     suite.addTestSuite(NodeTest.class);
     suite.addTestSuite(ElementTest.class);

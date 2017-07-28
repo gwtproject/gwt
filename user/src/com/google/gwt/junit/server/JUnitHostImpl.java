@@ -29,8 +29,13 @@ import com.google.gwt.user.client.rpc.InvocationException;
 import com.google.gwt.user.server.rpc.RPCServletUtils;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+import org.eclipse.jetty.http.HttpURI;
+import org.eclipse.jetty.util.UrlEncoded;
+import org.eclipse.jetty.util.ajax.JSON;
+
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
@@ -126,9 +131,43 @@ public class JUnitHostImpl extends RemoteServiceServlet implements JUnitHost, Re
       initResult(request, result);
       result.setException(new JUnitFatalLaunchException(requestPayload));
       getHost().reportFatalLaunch(createNewClientInfo(request), result);
+    } else if (requestURI.endsWith("/junithost/csp/violation")) {
+      processCspViolation(request);
+    } else if (requestURI.endsWith("/junithost/csp/checkpoint")) {
+      processCspCheckpoint(request);
     } else {
       super.service(request, response);
     }
+  }
+
+  private void processCspViolation(HttpServletRequest request)
+      throws ServletException, IOException {
+    String data = RPCServletUtils.readContent(request, "application/csp-report", null);
+    getHost().reportCspViolation(data);
+  }
+
+  private void processCspCheckpoint(HttpServletRequest request)
+      throws ServletException, IOException {
+    UrlEncoded params;
+
+    if (request.getQueryString() == null) {
+      String data = RPCServletUtils.readContent(request, "application/csp-report", null);
+      Map<?, ?> json = (Map<?, ?>) JSON.parse(data);
+      HttpURI url = new HttpURI((String) ((Map<?, ?>) json.get("csp-report")).get("blocked-uri"));
+      params = new UrlEncoded(url.getQuery());
+    } else {
+      params = new UrlEncoded(request.getQueryString());
+    }
+
+    int sessionId = Integer.parseInt(params.getString("sessionId"));
+    String testModule = params.getString("testModule");
+    String testClass = params.getString("testClass");
+    String testMethod = params.getString("testMethod");
+
+    ClientInfoExt clientInfo = createClientInfo(new ClientInfo(sessionId), request);
+    TestInfo testInfo = new TestInfo(testModule, testClass, testMethod);
+
+    getHost().reportCspCheckpoint(clientInfo, testInfo);
   }
 
   private ClientInfoExt createClientInfo(ClientInfo clientInfo, HttpServletRequest request) {

@@ -17,7 +17,11 @@ package com.google.gwt.junit.client.impl;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.IFrameElement;
 import com.google.gwt.http.client.UrlBuilder;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.junit.client.impl.JUnitHost.ClientInfo;
@@ -174,6 +178,11 @@ public class GWTRunner implements EntryPoint {
 
   private GWTTestAccessor testAccessor;
 
+  private IFrameElement cspFrame;
+
+  private static final boolean CSP_TESTING_ENABLED =
+      "true".equals(System.getProperty("gwt.strictCspTestingEnabled"));
+
   // TODO(FINDBUGS): can this be a private constructor to avoid multiple
   // instances?
   public GWTRunner() {
@@ -194,16 +203,27 @@ public class GWTRunner implements EntryPoint {
     clientInfo = new ClientInfo(parseQueryParamInteger(SESSIONID_QUERY_PARAM, -1));
 
     // Kick off the test running process by getting the first method to run from the server.
-    syncToServer();
+    if (CSP_TESTING_ENABLED) {
+      initCspAndSync();
+    } else {
+      syncToServer();
+    }
   }
 
   public void reportResultsAndGetNextMethod(JUnitResult result) {
+    result.cspTestingEnabled = CSP_TESTING_ENABLED;
+
     if (failureMessage != null) {
       RuntimeException ex = new RuntimeException(failureMessage);
       result.setException(ex);
     }
     TestInfo currentTest = getCurrentTest();
     currentResults.put(currentTest, result);
+
+    if (CSP_TESTING_ENABLED) {
+      checkpointCsp(clientInfo, currentTest);
+    }
+
     ++currentTestIndex;
     if (currentTestIndex < currentBlock.getTests().length) {
       // Run the next test after a short delay.
@@ -294,6 +314,7 @@ public class GWTRunner implements EntryPoint {
       RuntimeException ex = new RuntimeException(currentTest
           + ": could not instantiate the requested class", e);
       JUnitResult result = new JUnitResult();
+      result.cspTestingEnabled = CSP_TESTING_ENABLED;
       result.setException(ex);
       reportResultsAndGetNextMethod(result);
       return;
@@ -315,10 +336,43 @@ public class GWTRunner implements EntryPoint {
       junitHost.getTestBlock(firstBlockIndex, clientInfo,
           initialResponseListener);
     } else {
+      int blockIndex = currentBlock.getIndex() + 1;
       junitHost.reportResultsAndGetTestBlock(currentResults,
-          currentBlock.getIndex() + 1, clientInfo, testBlockListener);
+          blockIndex, clientInfo, testBlockListener);
     }
   }
+
+  private void initCspAndSync() {
+    Document doc = Document.get();
+    cspFrame = doc.createIFrameElement();
+    cspFrame.getStyle().setProperty("cssText",
+        "position:absolute; width:0; height:0; border:none; left:-1000px; top:-1000px;");
+    cspFrame.setTabIndex(-1);
+    cspFrame.setSrc("csp-checkpoint.html");
+    cspFrame.setPropertyJSO("onload", createCspFrameLoadHandler());
+
+    doc.getBody().appendChild(cspFrame);
+  }
+
+  private native JavaScriptObject createCspFrameLoadHandler() /*-{
+    var self = this;
+    return function() {
+      self.@com.google.gwt.junit.client.impl.GWTRunner::syncToServer()();
+    }
+  }-*/;
+
+  private void checkpointCsp(ClientInfo clientInfo, TestInfo testInfo) {
+    checkpointCspJs(cspFrame,
+        clientInfo.getSessionId(),
+        testInfo.getTestModule(),
+        testInfo.getTestClass(),
+        testInfo.getTestMethod());
+  }
+
+  private native void checkpointCspJs(Element cspFrame, int sessionId, String testModule, 
+      String testClass, String testMethod) /*-{
+    cspFrame.contentWindow.checkpointCsp(sessionId, testModule, testClass, testMethod);
+  }-*/;
 
   private static native void reportFatalError(String errorMsg)/*-{
     $wnd.junitError("/fatal", errorMsg);

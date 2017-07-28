@@ -21,6 +21,7 @@ import com.google.gwt.junit.JUnitMessageQueue.ClientStatus;
 import com.google.gwt.junit.client.impl.JUnitHost.TestBlock;
 import com.google.gwt.junit.client.impl.JUnitHost.TestInfo;
 import com.google.gwt.junit.client.impl.JUnitResult;
+import com.google.gwt.junit.client.impl.JUnitResultExt;
 
 import junit.framework.TestCase;
 
@@ -215,11 +216,11 @@ public class JUnitMessageQueueTest extends TestCase {
     }
 
     // Get the results
-    Map<ClientStatus, JUnitResult> results = queue.getResults(test0_0);
+    Map<ClientStatus, JUnitResultExt> results = queue.getResults(test0_0);
     assertEquals(3, results.size());
-    for (Entry<ClientStatus, JUnitResult> entry : results.entrySet()) {
+    for (Entry<ClientStatus, JUnitResultExt> entry : results.entrySet()) {
       ClientStatus client = entry.getKey();
-      JUnitResult result = entry.getValue();
+      JUnitResult result = entry.getValue().getResult();
       switch (client.getId()) {
         case 0:
           assertEquals(result0, result);
@@ -275,24 +276,24 @@ public class JUnitMessageQueueTest extends TestCase {
     TestInfo test1_0 = testBlock1[0];
     TestInfo test1_1 = testBlock1[1];
     TestInfo test1_2 = testBlock1[2];
-    assertFalse(queue.hasResults(test0_0));
-    assertFalse(queue.hasResults(test0_1));
-    assertFalse(queue.hasResults(test0_2));
-    assertFalse(queue.hasResults(test1_0));
-    assertFalse(queue.hasResults(test1_1));
-    assertFalse(queue.hasResults(test1_2));
+    assertFalse(queue.hasCompleted(test0_0));
+    assertFalse(queue.hasCompleted(test0_1));
+    assertFalse(queue.hasCompleted(test0_2));
+    assertFalse(queue.hasCompleted(test1_0));
+    assertFalse(queue.hasCompleted(test1_1));
+    assertFalse(queue.hasCompleted(test1_2));
 
     // First client reports results for the first test.
     {
       Map<TestInfo, JUnitResult> results = new HashMap<TestInfo, JUnitResult>();
       results.put(test0_0, new JUnitResult());
       queue.reportResults(createClientInfo(0), results);
-      assertFalse(queue.hasResults(test0_0));
-      assertFalse(queue.hasResults(test0_1));
-      assertFalse(queue.hasResults(test0_2));
-      assertFalse(queue.hasResults(test1_0));
-      assertFalse(queue.hasResults(test1_1));
-      assertFalse(queue.hasResults(test1_2));
+      assertFalse(queue.hasCompleted(test0_0));
+      assertFalse(queue.hasCompleted(test0_1));
+      assertFalse(queue.hasCompleted(test0_2));
+      assertFalse(queue.hasCompleted(test1_0));
+      assertFalse(queue.hasCompleted(test1_1));
+      assertFalse(queue.hasCompleted(test1_2));
     }
 
     // Second client reports results for the first test.
@@ -300,12 +301,12 @@ public class JUnitMessageQueueTest extends TestCase {
       Map<TestInfo, JUnitResult> results = new HashMap<TestInfo, JUnitResult>();
       results.put(test0_0, new JUnitResult());
       queue.reportResults(createClientInfo(1), results);
-      assertFalse(queue.hasResults(test0_0));
-      assertFalse(queue.hasResults(test0_1));
-      assertFalse(queue.hasResults(test0_2));
-      assertFalse(queue.hasResults(test1_0));
-      assertFalse(queue.hasResults(test1_1));
-      assertFalse(queue.hasResults(test1_2));
+      assertFalse(queue.hasCompleted(test0_0));
+      assertFalse(queue.hasCompleted(test0_1));
+      assertFalse(queue.hasCompleted(test0_2));
+      assertFalse(queue.hasCompleted(test1_0));
+      assertFalse(queue.hasCompleted(test1_1));
+      assertFalse(queue.hasCompleted(test1_2));
     }
 
     // First client reports results for the second test.
@@ -313,12 +314,12 @@ public class JUnitMessageQueueTest extends TestCase {
       Map<TestInfo, JUnitResult> results = new HashMap<TestInfo, JUnitResult>();
       results.put(test0_1, new JUnitResult());
       queue.reportResults(createClientInfo(0), results);
-      assertFalse(queue.hasResults(test0_0));
-      assertFalse(queue.hasResults(test0_1));
-      assertFalse(queue.hasResults(test0_2));
-      assertFalse(queue.hasResults(test1_0));
-      assertFalse(queue.hasResults(test1_1));
-      assertFalse(queue.hasResults(test1_2));
+      assertFalse(queue.hasCompleted(test0_0));
+      assertFalse(queue.hasCompleted(test0_1));
+      assertFalse(queue.hasCompleted(test0_2));
+      assertFalse(queue.hasCompleted(test1_0));
+      assertFalse(queue.hasCompleted(test1_1));
+      assertFalse(queue.hasCompleted(test1_2));
     }
 
     // Third client reports results for the first test.
@@ -326,12 +327,12 @@ public class JUnitMessageQueueTest extends TestCase {
       Map<TestInfo, JUnitResult> results = new HashMap<TestInfo, JUnitResult>();
       results.put(test0_0, new JUnitResult());
       queue.reportResults(createClientInfo(2), results);
-      assertTrue(queue.hasResults(test0_0));
-      assertFalse(queue.hasResults(test0_1));
-      assertFalse(queue.hasResults(test0_2));
-      assertFalse(queue.hasResults(test1_0));
-      assertFalse(queue.hasResults(test1_1));
-      assertFalse(queue.hasResults(test1_2));
+      assertTrue(queue.hasCompleted(test0_0));
+      assertFalse(queue.hasCompleted(test0_1));
+      assertFalse(queue.hasCompleted(test0_2));
+      assertFalse(queue.hasCompleted(test1_0));
+      assertFalse(queue.hasCompleted(test1_1));
+      assertFalse(queue.hasCompleted(test1_2));
     }
   }
 
@@ -418,17 +419,17 @@ public class JUnitMessageQueueTest extends TestCase {
     JUnitMessageQueue queue = createQueue(TWO_CLIENTS, ONE_BLOCK,
         ONE_TEST_PER_BLOCK);
     TestInfo testInfo = queue.getTestBlocks().get(0)[0];
-    assertFalse(queue.hasResults(testInfo));
+    assertFalse(queue.hasCompleted(testInfo));
 
     queue.reportResults(createClientInfo(0),
         createTestResults(ONE_TEST_PER_BLOCK));
-    assertFalse(queue.hasResults(testInfo));
+    assertFalse(queue.hasCompleted(testInfo));
     queue.reportResults(createClientInfo(1),
         createTestResults(ONE_TEST_PER_BLOCK));
-    assertTrue(queue.hasResults(testInfo));
+    assertTrue(queue.hasCompleted(testInfo));
 
     queue.removeResults(testInfo);
-    assertFalse(queue.hasResults(testInfo));
+    assertFalse(queue.hasCompleted(testInfo));
   }
 
   public void testRetries() {
@@ -441,9 +442,9 @@ public class JUnitMessageQueueTest extends TestCase {
     results.put(testInfo, junitResult);
     queue.reportResults(createClientInfo(0), results);
     assertTrue(queue.needsRerunning(testInfo));
-    Map<ClientStatus, JUnitResult> queueResults = queue.getResults(testInfo);
+    Map<ClientStatus, JUnitResultExt> queueResults = queue.getResults(testInfo);
     assertEquals(1, queueResults.size());
-    for (JUnitResult result : queueResults.values()) {
+    for (JUnitResultExt result : queueResults.values()) {
       assertNotNull(result.getException());
     }
 
@@ -457,7 +458,7 @@ public class JUnitMessageQueueTest extends TestCase {
     // check that the updated result appears now.
     queueResults = queue.getResults(testInfo);
     assertEquals(2, queueResults.size());
-    for (JUnitResult result : queueResults.values()) {
+    for (JUnitResultExt result : queueResults.values()) {
       assertNull(result.getException());
     }
   }

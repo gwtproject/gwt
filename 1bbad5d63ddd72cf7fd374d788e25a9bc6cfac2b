@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d8dcd2e_07d0a1f5",
+        "filename": "dev/core/test/com/google/gwt/dev/resource/impl/ResourceOracleImplTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-28T20:13:22Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.cfg.ResourceLoader.",
+      "revId": "1bbad5d63ddd72cf7fd374d788e25a9bc6cfac2b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf84154d_48ca448e",
+        "filename": "dev/core/test/com/google/gwt/dev/resource/impl/ResourceOracleImplTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-28T20:13:22Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.cfg.ResourceLoaders.",
+      "revId": "1bbad5d63ddd72cf7fd374d788e25a9bc6cfac2b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cbe8bd4c_801be061",
+        "filename": "dev/core/test/com/google/gwt/dev/resource/impl/ResourceOracleImplTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-07-28T20:13:22Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.Collections.",
+      "revId": "1bbad5d63ddd72cf7fd374d788e25a9bc6cfac2b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -31,22 +31,20 @@ import java.util.List;
  */
 public class ResourceLoaders {
 
-  private static class ClassLoaderAdapter implements ResourceLoader {
-    private final ClassLoader wrapped;
+  private static class ContextClassLoaderAdapter implements ResourceLoader {
+    private final ClassLoader contextClassLoader;
 
-    public ClassLoaderAdapter(ClassLoader wrapped) {
-      // TODO(rluble): Maybe stop wrapping arbitrary class loaders here and always use the
-      // system ClassLoader.
-      this.wrapped = wrapped;
+    public ContextClassLoaderAdapter() {
+      this.contextClassLoader = Thread.currentThread().getContextClassLoader();
     }
 
     @Override
     public boolean equals(Object other) {
-      if (!(other instanceof ClassLoaderAdapter)) {
+      if (!(other instanceof ContextClassLoaderAdapter)) {
         return false;
       }
-      ClassLoaderAdapter otherAdapter = (ClassLoaderAdapter) other;
-      return wrapped.equals(otherAdapter.wrapped);
+      ContextClassLoaderAdapter otherAdapter = (ContextClassLoaderAdapter) other;
+      return contextClassLoader.equals(otherAdapter.contextClassLoader);
     }
 
     /**
@@ -66,12 +64,12 @@ public class ResourceLoaders {
 
     @Override
     public URL getResource(String resourceName) {
-      return wrapped.getResource(resourceName);
+      return contextClassLoader.getResource(resourceName);
     }
 
     @Override
     public int hashCode() {
-      return wrapped.hashCode();
+      return contextClassLoader.hashCode();
     }
   }
 
@@ -137,8 +135,8 @@ public class ResourceLoaders {
   /**
    * Creates a ResourceLoader that loads from the given thread's class loader.
    */
-  public static ResourceLoader forClassLoader(Thread thread) {
-    return wrap(thread.getContextClassLoader());
+  public static ResourceLoader fromContextClassLoader() {
+    return new ContextClassLoaderAdapter();
   }
 
   /**
@@ -147,15 +145,6 @@ public class ResourceLoaders {
    */
   public static ResourceLoader forPathAndFallback(List<File> path, ResourceLoader fallback) {
     return new PrefixLoader(path, fallback);
-  }
-
-  /**
-   * Adapts a ClassLoader to work as a ResourceLoader.
-   * (Caveat: any ClassLoader in the chain that isn't a URLClassLoader won't contribute to the
-   * results of {@link  ResourceLoader#getClassPath}.)
-   */
-  public static ResourceLoader wrap(ClassLoader loader) {
-    return new ClassLoaderAdapter(loader);
   }
 
   private ResourceLoaders() {

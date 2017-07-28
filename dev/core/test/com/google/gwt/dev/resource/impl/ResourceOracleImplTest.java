@@ -27,7 +27,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -332,30 +331,6 @@ public class ResourceOracleImplTest extends AbstractResourceOrientedTestBase {
     testReadingResource(cpe1jar, cpe2zip);
     testReadingResource(cpe1dir, cpe2zip);
     testReadingResource(cpe1zip, cpe2zip);
-  }
-
-  /**
-   * Verify that duplicate entries are removed from the classpath, and that
-   * multiple ResourceOracleImpls created from the same classloader return the
-   * same list of ClassPathEntries.
-   */
-  public void testRemoveDuplicates() {
-    TreeLogger logger = createTestTreeLogger();
-    URL cpe1 = findUrl("com/google/gwt/dev/resource/impl/testdata/cpe1.jar");
-    URL cpe2 = findUrl("com/google/gwt/dev/resource/impl/testdata/cpe2.zip");
-    URLClassLoader classLoader = new URLClassLoader(new URL[]{
-        cpe1, cpe2, cpe2, cpe1, cpe2,}, null);
-    ResourceOracleImpl oracle = new ResourceOracleImpl(logger, classLoader);
-    List<ClassPathEntry> classPathEntries = oracle.getClassPathEntries();
-    assertEquals(2, classPathEntries.size());
-    assertJarEntry(classPathEntries.get(0), "cpe1.jar");
-    assertJarEntry(classPathEntries.get(1), "cpe2.zip");
-    oracle = new ResourceOracleImpl(logger, classLoader);
-    List<ClassPathEntry> classPathEntries2 = oracle.getClassPathEntries();
-    assertEquals(2, classPathEntries2.size());
-    for (int i = 0; i < 2; ++i) {
-      assertSame(classPathEntries.get(i), classPathEntries2.get(i));
-    }
   }
 
   public void testResourceAddition() throws IOException, URISyntaxException {

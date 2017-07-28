@@ -41,6 +41,8 @@ public class JUnitResult implements Serializable {
    */
   SerializableThrowable thrown;
 
+  public boolean cspTestingEnabled;
+
   // Computed at the server, via HTTP header.
   private transient String agent;
 

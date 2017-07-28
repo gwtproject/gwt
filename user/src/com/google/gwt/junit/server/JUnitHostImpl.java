@@ -16,6 +16,8 @@
 package com.google.gwt.junit.server;
 
 import com.google.gwt.core.server.StackTraceDeobfuscator;
+import com.google.gwt.dev.json.JsonException;
+import com.google.gwt.dev.json.JsonObject;
 import com.google.gwt.junit.JUnitFatalLaunchException;
 import com.google.gwt.junit.JUnitMessageQueue;
 import com.google.gwt.junit.JUnitMessageQueue.ClientInfoExt;
@@ -29,7 +31,11 @@ import com.google.gwt.user.client.rpc.InvocationException;
 import com.google.gwt.user.server.rpc.RPCServletUtils;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+import org.eclipse.jetty.http.HttpURI;
+import org.eclipse.jetty.util.UrlEncoded;
+
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.LogRecord;
@@ -126,9 +132,49 @@ public class JUnitHostImpl extends RemoteServiceServlet implements JUnitHost, Re
       initResult(request, result);
       result.setException(new JUnitFatalLaunchException(requestPayload));
       getHost().reportFatalLaunch(createNewClientInfo(request), result);
+    } else if (requestURI.endsWith("/junithost/csp/violation")) {
+      processCspViolation(request);
+    } else if (requestURI.endsWith("/junithost/csp/checkpoint")) {
+      processCspCheckpoint(request);
     } else {
       super.service(request, response);
     }
+  }
+
+  private void processCspViolation(HttpServletRequest request)
+      throws ServletException, IOException {
+    String data = RPCServletUtils.readContent(request, "application/csp-report", null);
+    getHost().reportCspViolation(data);
+  }
+
+  private void processCspCheckpoint(HttpServletRequest request)
+      throws ServletException, IOException {
+    UrlEncoded params;
+
+    if (request.getQueryString() == null) {
+      String data = RPCServletUtils.readContent(request, "application/csp-report", null);
+      JsonObject json;
+      try {
+        json = JsonObject.parse(new StringReader(data));
+      } catch (JsonException ex) {
+        throw new RuntimeException(ex);
+      }
+      HttpURI url = new HttpURI(
+          json.get("csp-report").asObject().get("blocked-uri").asString().getString());
+      params = new UrlEncoded(url.getQuery());
+    } else {
+      params = new UrlEncoded(request.getQueryString());
+    }
+
+    int sessionId = Integer.parseInt(params.getString("sessionId"));
+    String testModule = params.getString("testModule");
+    String testClass = params.getString("testClass");
+    String testMethod = params.getString("testMethod");
+
+    ClientInfoExt clientInfo = createClientInfo(new ClientInfo(sessionId), request);
+    TestInfo testInfo = new TestInfo(testModule, testClass, testMethod);
+
+    getHost().reportCspCheckpoint(clientInfo, testInfo);
   }
 
   private ClientInfoExt createClientInfo(ClientInfo clientInfo, HttpServletRequest request) {

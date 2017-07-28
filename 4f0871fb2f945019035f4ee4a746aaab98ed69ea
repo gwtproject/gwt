@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9817360_aa4e2759",
+        "filename": "user/src/com/google/gwt/junit/server/JUnitHostImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-07-28T20:10:53Z",
+      "side": 1,
+      "message": "We have a com.google.gwt.dev.json (or something like that), and GSON. Though I\u0027d say preferably use the GWT one, as IIRC GSON is only a transitive dependency of Closure for sourcemaps.",
+      "revId": "4f0871fb2f945019035f4ee4a746aaab98ed69ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

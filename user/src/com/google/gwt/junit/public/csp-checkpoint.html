@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<script>
+  function checkpointCsp(sessionId, testModule, testClass, testMethod) {
+    var url = 'junithost/csp/checkpoint' +
+        '?sessionId=' + encodeURIComponent(sessionId) +
+        '&testModule=' + encodeURIComponent(testModule) +
+        '&testClass=' + encodeURIComponent(testClass) +
+        '&testMethod=' + encodeURIComponent(testMethod);
+
+    var anchor = document.createElement('A');
+    anchor.setAttribute('data-url', url);
+    anchor.href = 'javascript:void(fireCsp(' + JSON.stringify(url) + '))';
+    document.body.appendChild(anchor);
+    anchor.click();
+  }
+
+  function fireCsp(url) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.send('');
+  }
+</script>

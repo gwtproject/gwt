@@ -25,6 +25,7 @@ import com.google.gwt.junit.client.GWTTestCaseUncaughtExceptionHandlerTest;
 import com.google.gwt.junit.client.PropertyDefiningGWTTest;
 import com.google.gwt.junit.client2.GWTTestCaseCompileErrorTest;
 import com.google.gwt.junit.client2.GWTTestCaseWrongModuleTest;
+import com.google.gwt.junit.tools.GWTTestSuite;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -34,7 +35,7 @@ import junit.framework.TestSuite;
  */
 public class JUnitSuite {
   public static Test suite() {
-    TestSuite suite = new GwtTestSuiteWithExpectedFailures("Test suite for com.google.gwt.junit");
+    TestSuite suite = new GWTTestSuite("Test suite for com.google.gwt.junit");
 
     suite.addTestSuite(GWTTestCaseTest.class);
     suite.addTestSuite(GWTTestCaseStackTraceTest.class);

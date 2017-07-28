@@ -27,7 +27,7 @@ import java.lang.reflect.Method;
 /**
  * A {@link TestResult} that can interpret {@link ExpectedFailure} on test methods.
  */
-class TestResultWithExpectedFailures extends ForwardingTestResult {
+public class TestResultWithExpectedFailures extends ForwardingTestResult {
 
   private boolean failed;
 

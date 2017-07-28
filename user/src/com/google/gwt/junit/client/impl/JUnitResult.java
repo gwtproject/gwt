@@ -40,6 +40,8 @@ public class JUnitResult implements Serializable {
    * If non-null, an exception that occurred during the run.
    */
   SerializableThrowable thrown;
+  
+  public boolean cspTestingEnabled;
 
   // Computed at the server, via HTTP header.
   private transient String agent;

@@ -20,6 +20,7 @@ import com.google.gwt.junit.client.impl.JUnitHost.ClientInfo;
 import com.google.gwt.junit.client.impl.JUnitHost.TestBlock;
 import com.google.gwt.junit.client.impl.JUnitHost.TestInfo;
 import com.google.gwt.junit.client.impl.JUnitResult;
+import com.google.gwt.junit.client.impl.JUnitResultExt;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -124,7 +125,10 @@ public class JUnitMessageQueue {
    * null, it means that the client requested the test but did not report the
    * results yet.
    */
-  private final Map<TestInfo, Map<ClientStatus, JUnitResult>> testResults = new HashMap<TestInfo, Map<ClientStatus, JUnitResult>>();
+  private final Map<TestInfo, Map<ClientStatus, JUnitResultExt>> testResults =
+      new HashMap<TestInfo, Map<ClientStatus, JUnitResultExt>>();
+
+  private ArrayList<String> pendingCspViolations = new ArrayList<String>();
 
   /**
    * Only instantiable within this package.
@@ -181,7 +185,7 @@ public class JUnitMessageQueue {
       // Record that this client has retrieved the current tests.
       TestInfo[] tests = testBlocks.get(blockIndex);
       for (TestInfo testInfo : tests) {
-        ensureResults(testInfo).put(clientStatus, null);
+        getExtResult(clientInfo, testInfo);
       }
       return new TestBlock(tests, blockIndex);
     }
@@ -215,15 +219,44 @@ public class JUnitMessageQueue {
       if (results == null) {
         throw new IllegalArgumentException("results cannot be null");
       }
-      ClientStatus clientStatus = ensureClientStatus(clientInfo);
+
+      ensureClientStatus(clientInfo);
 
       // Cache the test results.
       for (Map.Entry<TestInfo, JUnitResult> entry : results.entrySet()) {
         TestInfo testInfo = entry.getKey();
-        ensureResults(testInfo).put(clientStatus, entry.getValue());
+        JUnitResult result = entry.getValue();
+        getExtResult(clientInfo, testInfo).setResult(result);
       }
 
       clientStatusesLock.notifyAll();
+    }
+  }
+
+  /**
+   * Called by the servlet when a CSP violation report is received.
+   * @param msg details about the CSP violation
+   */
+  public void reportCspViolation(String msg) {
+    pendingCspViolations.add(msg);
+  }
+
+  /**
+   * Called by the servlet when a CSP checkpoint violation is received. CSP checkpoints violations
+   * are sent after every test when CSP checking is enabled and are used to attribute CSP violations
+   * to the test that generated them.
+   *
+   * @param clientInfo inforamtion about the client
+   * @param testInfo information about the test just completed
+   */
+  public void reportCspCheckpoint(ClientInfoExt clientInfo, TestInfo testInfo) {
+    synchronized (clientStatusesLock) {
+      JUnitResultExt result = getExtResult(clientInfo, testInfo);
+      if (!pendingCspViolations.isEmpty()) {
+        result.setCspViolations(pendingCspViolations);
+        pendingCspViolations.clear();
+      }
+      result.cspCheckpoint();
     }
   }
 
@@ -282,7 +315,7 @@ public class JUnitMessageQueue {
   int getNumClientsRetrievedTest(TestInfo testInfo) {
     synchronized (clientStatusesLock) {
       int count = 0;
-      Map<ClientStatus, JUnitResult> results = testResults.get(testInfo);
+      Map<ClientStatus, JUnitResultExt> results = testResults.get(testInfo);
       if (results != null) {
         count = results.size();
       }
@@ -305,7 +338,7 @@ public class JUnitMessageQueue {
    * @param testInfo the {@link TestInfo} to check for results
    * @return A map of results from all clients.
    */
-  Map<ClientStatus, JUnitResult> getResults(TestInfo testInfo) {
+  Map<ClientStatus, JUnitResultExt> getResults(TestInfo testInfo) {
     synchronized (clientStatusesLock) {
       return testResults.get(testInfo);
     }
@@ -330,7 +363,7 @@ public class JUnitMessageQueue {
    */
   String getUnretrievedClients(TestInfo testInfo) {
     synchronized (clientStatusesLock) {
-      Map<ClientStatus, JUnitResult> results = testResults.get(testInfo);
+      Map<ClientStatus, JUnitResultExt> results = testResults.get(testInfo);
       StringBuilder buf = new StringBuilder();
       int lineCount = 0;
       for (ClientStatus clientStatus : clientStatuses.values()) {
@@ -372,9 +405,9 @@ public class JUnitMessageQueue {
       // Print a list of clients that have connected but not returned results.
       int itemCount = 0;
       StringBuilder buf = new StringBuilder();
-      Map<ClientStatus, JUnitResult> results = testResults.get(testInfo);
+      Map<ClientStatus, JUnitResultExt> results = testResults.get(testInfo);
       if (results != null) {
-        for (Map.Entry<ClientStatus, JUnitResult> entry : results.entrySet()) {
+        for (Map.Entry<ClientStatus, JUnitResultExt> entry : results.entrySet()) {
           if (entry.getValue() == null) {
             buf.append(entry.getKey().getDesc());
             buf.append("\n");
@@ -403,14 +436,14 @@ public class JUnitMessageQueue {
    * @return If the test has completed, <code>true</code>, otherwise
    *         <code>false</code>.
    */
-  boolean hasResults(TestInfo testInfo) {
+  boolean hasCompleted(TestInfo testInfo) {
     synchronized (clientStatusesLock) {
-      Map<ClientStatus, JUnitResult> results = testResults.get(testInfo);
+      Map<ClientStatus, JUnitResultExt> results = testResults.get(testInfo);
       if (results == null || results.size() < numClients) {
         return false;
       }
-      for (JUnitResult result : results.values()) {
-        if (result == null) {
+      for (JUnitResultExt result : results.values()) {
+        if (result == null || !result.hasCompleted()) {
           return false;
         }
       }
@@ -424,20 +457,20 @@ public class JUnitMessageQueue {
    * THROWABLES_NOT_RETRIED}.
    */
   boolean needsRerunning(TestInfo testInfo) {
-    Map<ClientStatus, JUnitResult> results = getResults(testInfo);
+    Map<ClientStatus, JUnitResultExt> results = getResults(testInfo);
     if (results == null) {
       return true;
     }
     if (results.size() != numClients) {
       return true;
     }
-    for (Entry<ClientStatus, JUnitResult> entry : results.entrySet()) {
-      JUnitResult result = entry.getValue();
-      if (result == null) {
+    for (Entry<ClientStatus, JUnitResultExt> entry : results.entrySet()) {
+      JUnitResultExt result = entry.getValue();
+      if (result == null || result.getResult() == null) {
         return true;
       }
 
-      if (isNonFatalFailure(result)) {
+      if (isNonFatalFailure(result.getResult())) {
         return true;
       }
     }
@@ -468,7 +501,7 @@ public class JUnitMessageQueue {
   /**
    * Ensure that a {@link ClientStatus} for the clientId exists.
    * 
-   * @param clientId the id of the client
+   * @param clientInfo the id of the client
    * @return the {@link ClientStatus} for the client
    */
   private ClientStatus ensureClientStatus(ClientInfoExt clientInfo) {
@@ -483,20 +516,27 @@ public class JUnitMessageQueue {
     }
     return clientStatus;
   }
-
+  
   /**
-   * Get the map of test results from all clients for a given {@link TestInfo},
-   * creating it if necessary.
-   * 
-   * @param testInfo the {@link TestInfo}
-   * @return the map of all results
+   * Returns a result object for the given cilentInfo and testInfo. Client and result objects are
+   * created if they don't already exists.
    */
-  private Map<ClientStatus, JUnitResult> ensureResults(TestInfo testInfo) {
-    Map<ClientStatus, JUnitResult> results = testResults.get(testInfo);
+  private JUnitResultExt getExtResult(ClientInfoExt clientInfo, TestInfo testInfo) {
+    ClientStatus clientStatus = ensureClientStatus(clientInfo);
+
+    Map<ClientStatus, JUnitResultExt> results = testResults.get(testInfo);
     if (results == null) {
-      results = new IdentityHashMap<ClientStatus, JUnitResult>();
+      results = new IdentityHashMap<ClientStatus, JUnitResultExt>();
       testResults.put(testInfo, results);
     }
-    return results;
+
+    JUnitResultExt result = results.get(clientStatus);
+    if (result == null) {
+      result = new JUnitResultExt();
+      results.put(clientStatus, result);
+    }
+
+    return result;
   }
+
 }

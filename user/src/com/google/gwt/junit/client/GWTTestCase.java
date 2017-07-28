@@ -18,6 +18,7 @@ package com.google.gwt.junit.client;
 import com.google.gwt.junit.JUnitShell;
 import com.google.gwt.junit.JUnitShell.Strategy;
 import com.google.gwt.junit.PropertyDefiningStrategy;
+import com.google.gwt.junit.TestResultWithExpectedFailures;
 import com.google.gwt.junit.client.impl.JUnitHost.TestInfo;
 
 import junit.framework.TestCase;
@@ -243,7 +244,7 @@ public abstract class GWTTestCase extends TestCase {
    */
   @Override
   public final void run(TestResult result) {
-    testResult = result;
+    testResult = new TestResultWithExpectedFailures(result);
     super.run(result);
   }
 

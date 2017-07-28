@@ -55,4 +55,13 @@
       <when-property-is name="user.agent" value="ie9"/>
     </any>
   </replace-with>
+
+  <!--
+    gwt.cspTestingEnabled enables checking for CSP violations during unit tests.
+    When this is turned on, a nonce-based policy employing 'strict-dynamic' will
+    be enforced on the hosting page. If code run during a unit test violates
+    this policy, an error will be signaled.
+  -->
+  <define-property name="gwt.strictCspTestingEnabled" values="true, false"/>
+  <set-property name="gwt.strictCspTestingEnabled" value="false"/>
 </module>

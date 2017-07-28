@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2fca39d_7fd584dd",
+        "filename": "dev/core/test/com/google/gwt/dev/resource/impl/ResourceOracleImplTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-07-28T19:56:50Z",
+      "side": 0,
+      "message": "let\u0027s preserve the test in some form",
+      "revId": "5b7560c4bb6376e997981387e4f2feee1816e1dc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

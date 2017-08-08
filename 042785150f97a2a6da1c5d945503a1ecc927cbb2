@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc184ede_3753eccf",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1195,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-08-08T23:08:25Z",
+      "side": 1,
+      "message": "not used in this patch right?",
+      "range": {
+        "startLine": 1195,
+        "startChar": 14,
+        "endLine": 1195,
+        "endChar": 68
+      },
+      "revId": "042785150f97a2a6da1c5d945503a1ecc927cbb2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76acb1ed_996579fc",
+        "filename": "user/test/com/google/gwt/junit/client/CspTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-08-08T23:08:25Z",
+      "side": 1,
+      "message": "runner correctly sets up CSP when enabled.",
+      "range": {
+        "startLine": 25,
+        "startChar": 47,
+        "endLine": 26,
+        "endChar": 14
+      },
+      "revId": "042785150f97a2a6da1c5d945503a1ecc927cbb2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7229164_b63a6f68",
+        "filename": "user/test/com/google/gwt/junit/client/CspTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-08-08T23:08:25Z",
+      "side": 1,
+      "message": "$wnd.clickDidFire",
+      "range": {
+        "startLine": 40,
+        "startChar": 32,
+        "endLine": 40,
+        "endChar": 33
+      },
+      "revId": "042785150f97a2a6da1c5d945503a1ecc927cbb2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

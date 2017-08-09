@@ -13,6 +13,8 @@
 <!-- limitations under the License.                                         -->
 
 <module>
-	<inherits name="com.google.gwt.user.User"/>
-	<public path="public-test"/>
+  <inherits name="com.google.gwt.user.User"/>
+  <public path="public-test"/>
+  <set-property name="gwt.cspCompatModeEnabled" value="true"/>
+  <set-property name="gwt.strictCspTestingEnabled" value="true"/>
 </module>

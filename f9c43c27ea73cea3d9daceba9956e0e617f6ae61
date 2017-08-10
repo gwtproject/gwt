@@ -16,6 +16,24 @@
       "revId": "f9c43c27ea73cea3d9daceba9956e0e617f6ae61",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5ffd4ea_b470b0ef",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 10840
+      },
+      "writtenOn": "2017-08-10T21:31:15Z",
+      "side": 1,
+      "message": "We don\u0027t need this logic anymore. Removing.",
+      "parentUuid": "9fef207a_fbd2c359",
+      "revId": "f9c43c27ea73cea3d9daceba9956e0e617f6ae61",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

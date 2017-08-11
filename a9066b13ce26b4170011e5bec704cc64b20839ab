@@ -46,6 +46,30 @@
       "revId": "a9066b13ce26b4170011e5bec704cc64b20839ab",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc2d788c_ea50fc44",
+        "filename": "user/BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2017-08-11T21:49:16Z",
+      "side": 1,
+      "message": "I think it\u0027s clearer to have specifically one build file for blaze and one for Bazel.\n\n\u003e error loading package \u0027@org_gwtproject_gwt//user\u0027: Extension file not found. Unable to load package for \u0027@org_gwtproject_gwt//third_party/java_src/gwt:build-macros.bzl\u0027: BUILD file not found on package path.\n\nThis error will be gone once we have a BUILD.blaze file in the user package\n\n\u003e What if we just moved these targets under user/super/com/google/gwt/emul/BUILD?\n\nI don\u0027t think it\u0027s a good idea, the 3 targets we need have some constraints (visibility and compatible_with) in Blaze that we cannot have  in Bazel.\n\n\n\u003e Alternatively, we could just make sure the build-macros.bzl can be resolved when imported under Bazel then we wouldn\u0027t need this change at all.\n\nThat\u0027s not so simple, you need also to rebase all the targets use in deps or visibility attributes. Some attributes in java_library rule are not supported by bazel. You cannot make a BUILD file working for Blaze and Bazel without using a tool like Copybara.",
+      "parentUuid": "d98df85c_8be67025",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 1
+      },
+      "revId": "a9066b13ce26b4170011e5bec704cc64b20839ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

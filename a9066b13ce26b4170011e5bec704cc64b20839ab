@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a5b4c83_b691de32",
+        "filename": "user/BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 9330
+      },
+      "writtenOn": "2017-08-11T19:16:03Z",
+      "side": 1,
+      "message": "Actually, couldn\u0027t we move these rule further down the tree so that they can sit in a proper BUILD file?\n\nThe only reason these need to be copied from user/BUILD seems to be that there are some other bzl files which don\u0027t want to load. I\u0027m seeing this:\nerror loading package \u0027@org_gwtproject_gwt//user\u0027: Extension file not found. Unable to load package for \u0027@org_gwtproject_gwt//third_party/java_src/gwt:build-macros.bzl\u0027: BUILD file not found on package path.\n\nWhat if we just moved these targets under user/super/com/google/gwt/emul/BUILD?\n\nhttps://github.com/gwtproject/gwt/blob/master/user/BUILD#L682\n\nAlternatively, we could just make sure the build-macros.bzl can be resolved when imported under Bazel then we wouldn\u0027t need this change at all.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 1
+      },
+      "revId": "a9066b13ce26b4170011e5bec704cc64b20839ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

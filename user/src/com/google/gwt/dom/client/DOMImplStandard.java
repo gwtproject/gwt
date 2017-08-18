@@ -132,4 +132,21 @@ abstract class DOMImplStandard extends DOMImpl {
   public native void setInnerText(Element elem, String text) /*-{
     elem.textContent = text || '';
   }-*/;
+
+  @Override
+  Element getDocumentScrollingElement(Document doc) {
+    // Uses http://dev.w3.org/csswg/cssom-view/#dom-document-scrolling element to
+    // avoid trying to guess about browser behavior.
+    if (getNativeDocumentScrollingElement(doc) != null) {
+      return getNativeDocumentScrollingElement(doc);
+    }
+
+    // Return body or documentElement depending if we are in quirks mode or strict mode.
+    return doc.getViewportElement();
+  }
+
+  final native Element getNativeDocumentScrollingElement(Document doc) /*-{
+    return doc.scrollingElement;
+  }-*/;
+
 }

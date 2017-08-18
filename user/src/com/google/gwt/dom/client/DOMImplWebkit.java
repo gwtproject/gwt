@@ -62,5 +62,14 @@ class DOMImplWebkit extends DOMImplStandardBase {
       elem.getStyle().clearProperty("webkitUserDrag");
     }
   }
+
+  @Override
+  Element getDocumentScrollingElement(Document doc) {
+    if (getNativeDocumentScrollingElement(doc) != null) {
+      return getNativeDocumentScrollingElement(doc);
+    }
+    // Old WebKit needs body.scrollLeft in both quirks mode and strict mode.
+    return doc.getBody();
+  }
 }
 

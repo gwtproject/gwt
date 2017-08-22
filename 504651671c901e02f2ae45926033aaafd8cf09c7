@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b36602a_c861bb19",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-08-22T16:39:09Z",
+      "side": 1,
+      "message": "I believe you meant \"quirk\" here (and later in the commit message)\n\n(sorry I forgot to add that comment previously)",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 5
+      },
+      "revId": "504651671c901e02f2ae45926033aaafd8cf09c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16fb8ef0_76e63394",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-08-22T16:39:09Z",
+      "side": 1,
+      "message": "Using the #nnnn notation will create cross references in GitHub, so might be a good idea maybe?\n\n Bug: #9542\n Bug-Link: https://…",
+      "revId": "504651671c901e02f2ae45926033aaafd8cf09c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

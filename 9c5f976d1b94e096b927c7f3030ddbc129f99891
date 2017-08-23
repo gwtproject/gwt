@@ -33,6 +33,40 @@
       "revId": "9c5f976d1b94e096b927c7f3030ddbc129f99891",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0064566_eb588bcc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-08-23T22:07:47Z",
+      "side": 1,
+      "message": "Is the hidden input hack even still actually needed?",
+      "revId": "9c5f976d1b94e096b927c7f3030ddbc129f99891",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d9cb7a7_28a61f95",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-08-23T22:07:47Z",
+      "side": 1,
+      "message": "Use gwt.googlesource.com instead of GitHub? Or maybe just the commit SHA1.",
+      "revId": "9c5f976d1b94e096b927c7f3030ddbc129f99891",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

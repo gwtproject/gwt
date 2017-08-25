@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "cebc27d1_3b39b2c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 11130
+      },
+      "writtenOn": "2017-08-25T15:19:55Z",
+      "side": 1,
+      "message": "Since originally added for IE-specific weirdness with access keys, I\u0027d expect so. As such, I\u0027d rather leave the hack for that in place (fixed), rather than risk breaking behavior by removing it entirely.\n\nUp to you, though? If you\u0027d rather I pull it, we can go that route instead. It just seemed lower risk to tweak the implementation.",
+      "parentUuid": "f0064566_eb588bcc",
+      "revId": "9c5f976d1b94e096b927c7f3030ddbc129f99891",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6d9cb7a7_28a61f95",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -64,6 +82,24 @@
       "writtenOn": "2017-08-23T22:07:47Z",
       "side": 1,
       "message": "Use gwt.googlesource.com instead of GitHub? Or maybe just the commit SHA1.",
+      "revId": "9c5f976d1b94e096b927c7f3030ddbc129f99891",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a43ce33f_f8b46ec5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 11130
+      },
+      "writtenOn": "2017-08-25T15:19:55Z",
+      "side": 1,
+      "message": "Edited to just refer to the commit SHA1 (I think - let me know if that didn\u0027t work?).",
+      "parentUuid": "6d9cb7a7_28a61f95",
       "revId": "9c5f976d1b94e096b927c7f3030ddbc129f99891",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true

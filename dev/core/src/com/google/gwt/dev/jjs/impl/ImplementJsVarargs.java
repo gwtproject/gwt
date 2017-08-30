@@ -284,7 +284,8 @@ public class ImplementJsVarargs {
 
     @Override
     public boolean visit(JMethod x, Context ctx) {
-      if (!x.isJsMethodVarargs()) {
+      if (//x.isJsNative() ||
+          !x.isJsMethodVarargs()) {
         return false;
       }
       varargsParameter = Iterables.getLast(x.getParams());
@@ -334,7 +335,8 @@ public class ImplementJsVarargs {
 
     @Override
     public void endVisit(JMethod x, Context ctx) {
-      if (!x.isJsMethodVarargs()) {
+      if (//x.isJsNative() ||
+          !x.isJsMethodVarargs()) {
         return;
       }
       // rename the varargs variable to _arguments_.

@@ -103,18 +103,24 @@ public class JsTypeVarargsTest extends GWTTestCase {
 
   @JsType(isNative = true, namespace = GLOBAL, name = "Object")
   static class NativeJsType {
+    NativeJsType() { }
+    NativeJsType(int j, NativeJsType... args) { }
   }
 
   @JsType(isNative = true, namespace = GLOBAL,
       name = "JsTypeVarargsTest_MyNativeJsTypeVarargsConstructor")
-  static class NativeJsTypeWithVarargsConstructor {
+  static class NativeJsTypeWithVarargsConstructor extends NativeJsType {
     public Object a;
     public int b;
     NativeJsTypeWithVarargsConstructor(int i, Object... args) { }
+
+    NativeJsTypeWithVarargsConstructor(int i, NativeJsType... args) {
+      super(1, args);
+    }
   }
 
   static class SubclassNativeWithVarargsConstructor extends NativeJsTypeWithVarargsConstructor {
-    SubclassNativeWithVarargsConstructor(int i, Object... args) {
+    SubclassNativeWithVarargsConstructor(int i, NativeJsType... args) {
       super(i, args);
     }
 
@@ -281,7 +287,7 @@ public class JsTypeVarargsTest extends GWTTestCase {
 
   public void testVarargsCall_sideEffectingInstance() {
     SubclassNativeWithVarargsConstructor object =
-        new SubclassNativeWithVarargsConstructor(0, new Object[0]);
+        new SubclassNativeWithVarargsConstructor(0, new NativeJsType[0]);
     sideEffectCount = 0;
     Object[] params = new Object[] { object, null };
     assertSame(object, doSideEffect(object).varargsMethod(0, params));

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a262119_c5738036",
+        "filename": "user/src/com/google/gwt/json/client/JSONParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-08-31T11:42:48Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 120).",
+      "revId": "f20e45873d58b58cbb5ea087c6543a713708af7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

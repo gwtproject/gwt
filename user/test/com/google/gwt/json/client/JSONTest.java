@@ -150,7 +150,7 @@ public class JSONTest extends GWTTestCase {
       arr.set(i, new JSONNumber(i));
     }
     String s = arr.toString();
-    JSONValue v = parseStrictVsLenient(s);
+    JSONValue v = JSONParser.parseStrict(s);
     JSONArray array = v.isArray();
     assertTrue("v must be an array", array != null);
     assertEquals("Array size must be 10", 10, array.size());
@@ -164,17 +164,17 @@ public class JSONTest extends GWTTestCase {
     assertTrue(JSONBoolean.getInstance(true).booleanValue());
     assertFalse(JSONBoolean.getInstance(false).booleanValue());
 
-    JSONValue trueVal = parseStrictVsLenient("true");
+    JSONValue trueVal = JSONParser.parseStrict("true");
     assertEquals(trueVal, trueVal.isBoolean());
     assertTrue(trueVal.isBoolean().booleanValue());
 
-    JSONValue falseVal = parseStrictVsLenient("false");
+    JSONValue falseVal = JSONParser.parseStrict("false");
     assertEquals(falseVal, falseVal.isBoolean());
     assertFalse(falseVal.isBoolean().booleanValue());
   }
 
   public void testEquals() {
-    JSONArray array = parseStrictVsLenient("[]").isArray();
+    JSONArray array = JSONParser.parseStrict("[]").isArray();
     assertEquals(array, new JSONArray(array.getJavaScriptObject()));
 
     assertEquals(JSONBoolean.getInstance(false), JSONBoolean.getInstance(false));
@@ -184,7 +184,7 @@ public class JSONTest extends GWTTestCase {
 
     assertEquals(new JSONNumber(3.1), new JSONNumber(3.1));
 
-    JSONObject object = parseStrictVsLenient("{}").isObject();
+    JSONObject object = JSONParser.parseStrict("{}").isObject();
     assertEquals(object, new JSONObject(object.getJavaScriptObject()));
 
     assertEquals(new JSONString("foo"), new JSONString("foo"));
@@ -227,7 +227,7 @@ public class JSONTest extends GWTTestCase {
   }
 
   public void testHashCode() {
-    JSONArray array = parseStrictVsLenient("[]").isArray();
+    JSONArray array = JSONParser.parseStrict("[]").isArray();
     assertHashCodeEquals(array, new JSONArray(array.getJavaScriptObject()));
 
     assertHashCodeEquals(JSONBoolean.getInstance(false), JSONBoolean.getInstance(false));
@@ -237,7 +237,7 @@ public class JSONTest extends GWTTestCase {
 
     assertHashCodeEquals(new JSONNumber(3.1), new JSONNumber(3.1));
 
-    JSONObject object = parseStrictVsLenient("{}").isObject();
+    JSONObject object = JSONParser.parseStrict("{}").isObject();
     assertHashCodeEquals(object, new JSONObject(object.getJavaScriptObject()));
 
     assertHashCodeEquals(new JSONString("foo"), new JSONString("foo"));
@@ -251,33 +251,17 @@ public class JSONTest extends GWTTestCase {
     }
   }
 
-  public void testLenientAndStrict() {
-    String jsonString = "{ a:27, 'b': 'value' }";
-
-    // parseLenient should succeed
-    JSONValue value = JSONParser.parseLenient(jsonString);
-    JSONObject object = value.isObject();
-    assertEquals(27.0, object.get("a").isNumber().doubleValue());
-    assertEquals("value", object.get("b").isString().stringValue());
-
-    // parseStrict should fail
+  public void testStrict() {
+    String jsonString = "function f() { return 5; }";
     try {
-      parseStrictVsLenient(jsonString);
-      fail();
-    } catch (JSONException e) {
-    }
-
-    // Must fail even on browsers that lack JSON.parse()
-    jsonString = "function f() { return 5; }";
-    try {
-      parseStrictVsLenient(jsonString);
+      JSONParser.parseStrict(jsonString);
       fail();
     } catch (JSONException e) {
     }
   }
 
   public void testMenu() {
-    JSONObject v = (JSONObject) parseStrictVsLenient(menuTest);
+    JSONObject v = (JSONObject) JSONParser.parseStrict(menuTest);
     assertTrue(v.containsKey("menu"));
     JSONObject menu = ((JSONObject) v.get("menu"));
     assertEquals(3, menu.keySet().size());
@@ -287,7 +271,7 @@ public class JSONTest extends GWTTestCase {
     JSONObject obj = new JSONObject();
     nestedAux(obj, 3);
     String s1 = obj.toString();
-    String s2 = parseStrictVsLenient(s1).toString();
+    String s2 = JSONParser.parseStrict(s1).toString();
     assertEquals(s1, s2);
     assertEquals(
         "{\"string3\":\"s3\", \"Number3\":3.1, \"Boolean3\":false, "
@@ -361,7 +345,7 @@ public class JSONTest extends GWTTestCase {
       obj.put("Object " + i, new JSONNumber(i));
     }
     String s = obj.toString();
-    JSONValue v = parseStrictVsLenient(s);
+    JSONValue v = JSONParser.parseStrict(s);
     JSONObject objIn = v.isObject();
     assertTrue("v must be an object", objIn != null);
     assertEquals("Object size must be 10", 10, objIn.keySet().size());
@@ -381,27 +365,27 @@ public class JSONTest extends GWTTestCase {
     } catch (NullPointerException t) {
     }
     try {
-      parseStrictVsLenient(null);
+      JSONParser.parseStrict(null);
       fail();
     } catch (NullPointerException t) {
     }
     try {
-      parseStrictVsLenient("");
+      JSONParser.parseStrict("");
       fail();
     } catch (IllegalArgumentException t) {
     }
     try {
-      parseStrictVsLenient("{\"menu\": {\n" + "  \"id\": \"file\",\n");
+      JSONParser.parseStrict("{\"menu\": {\n" + "  \"id\": \"file\",\n");
       fail();
     } catch (JSONException e) {
     }
     assertEquals("\"null\" should be null JSONValue", JSONNull.getInstance(),
-        parseStrictVsLenient("null"));
+        JSONParser.parseStrict("null"));
     assertEquals("5 should be JSONNumber 5", 5d,
-        parseStrictVsLenient("5").isNumber().doubleValue(), 0.001);
+        JSONParser.parseStrict("5").isNumber().doubleValue(), 0.001);
     assertEquals("\"null\" should be null JSONValue", JSONNull.getInstance(),
-        parseStrictVsLenient("null"));
-    JSONValue somethingHello = parseStrictVsLenient("[{\"something\":\"hello\"}]");
+        JSONParser.parseStrict("null"));
+    JSONValue somethingHello = JSONParser.parseStrict("[{\"something\":\"hello\"}]");
     JSONArray somethingHelloArray = somethingHello.isArray();
     assertTrue("somethingHello must be a JSONArray",
         somethingHelloArray != null);
@@ -429,7 +413,7 @@ public class JSONTest extends GWTTestCase {
 
     String toString = obj.toString();
     assertEquals("{\"a\":42, \"\\\\\":43.5, \"\\\"\":44}", toString.trim());
-    JSONValue parseResponse = parseStrictVsLenient(toString);
+    JSONValue parseResponse = JSONParser.parseStrict(toString);
     JSONObject obj2 = parseResponse.isObject();
     assertJSONObjectEquals(obj, obj2);
   }
@@ -469,7 +453,7 @@ public class JSONTest extends GWTTestCase {
   }
 
   public void testStringTypes() {
-    JSONObject object = parseStrictVsLenient("{\"a\":\"b\",\"null\":\"foo\"}").isObject();
+    JSONObject object = JSONParser.parseStrict("{\"a\":\"b\",\"null\":\"foo\"}").isObject();
     assertNotNull(object);
 
     assertEquals("b",
@@ -488,7 +472,7 @@ public class JSONTest extends GWTTestCase {
   }
 
   public void testUndefined() {
-    JSONObject o = parseStrictVsLenient("{\"foo\":\"foo\",\"bar\":null}").isObject();
+    JSONObject o = JSONParser.parseStrict("{\"foo\":\"foo\",\"bar\":null}").isObject();
     assertEquals(new JSONString("foo"), o.get("foo"));
     assertEquals(JSONNull.getInstance(), o.get("bar"));
     assertNull(o.get("baz"));
@@ -498,7 +482,7 @@ public class JSONTest extends GWTTestCase {
     o.put("foo", null);
     assertNull(o.get("foo"));
 
-    JSONArray array = parseStrictVsLenient("[\"foo\",null]").isArray();
+    JSONArray array = JSONParser.parseStrict("[\"foo\",null]").isArray();
     assertEquals(new JSONString("foo"), array.get(0));
     assertEquals(JSONNull.getInstance(), array.get(1));
     assertNull(array.get(2));
@@ -516,7 +500,7 @@ public class JSONTest extends GWTTestCase {
      */
     String jsonString = "{ \"name\": \"miles\u2028da\u2029vis\", \"ins\u2028tru\u2029ment\": \"trumpet\" }";
     try {
-      JSONValue parsed = parseStrictVsLenient(jsonString);
+      JSONValue parsed = JSONParser.parseStrict(jsonString);
       JSONObject result = parsed.isObject();
       assertNotNull(result);
 
@@ -544,14 +528,14 @@ public class JSONTest extends GWTTestCase {
     // U+2028 and U+2029 should not appear outside a string
     jsonString = "{ \"name\": \"miles davis\",\u2028\"instrument\": \"trumpet\" }";
     try {
-      parseStrictVsLenient(jsonString);
+      JSONParser.parseStrict(jsonString);
       fail();
     } catch (JSONException e) {
     }
 
     jsonString = "{ \"name\":\u2029\"miles davis\", \"instrument\": \"trumpet\" }";
     try {
-      parseStrictVsLenient(jsonString);
+      JSONParser.parseStrict(jsonString);
       fail();
     } catch (JSONException e) {
     }
@@ -563,7 +547,7 @@ public class JSONTest extends GWTTestCase {
   }
 
   public void testWidget() {
-    JSONObject v = (JSONObject) parseStrictVsLenient(widgetTest);
+    JSONObject v = (JSONObject) JSONParser.parseStrict(widgetTest);
     JSONObject widget = (JSONObject) v.get("widget");
     JSONObject window = (JSONObject) widget.get("window");
     JSONValue title = window.get("title");
@@ -578,7 +562,7 @@ public class JSONTest extends GWTTestCase {
   }
 
   private void checkRoundTripJsonText(String jsonText, String normaltext) {
-    JSONString parsed = parseStrictVsLenient(jsonText).isString();
+    JSONString parsed = JSONParser.parseStrict(jsonText).isString();
     assertEquals(normaltext, parsed.stringValue());
     assertEquals(jsonText, parsed.toString());
   }
@@ -624,7 +608,7 @@ public class JSONTest extends GWTTestCase {
     String value = "miles" + chars + "davis";
     String jsonString = "{ \"" + key + "\": \"" + value + "\"}";
     try {
-      JSONValue parsed = parseStrictVsLenient(jsonString);
+      JSONValue parsed = JSONParser.parseStrict(jsonString);
       JSONObject result = parsed.isObject();
       assertNotNull("start = " + start + ", len = " + len, result);
       Set<String> keys = result.keySet();
@@ -661,14 +645,6 @@ public class JSONTest extends GWTTestCase {
     }
     array.set(4, newObj);
     obj.put("Array" + i, array);
-  }
-
-  // Check that parseLenient produces the same results as parseStrict
-  private JSONValue parseStrictVsLenient(String jsonString) {
-    JSONValue strictValue = JSONParser.parseStrict(jsonString);
-    JSONValue lenientValue = JSONParser.parseLenient(jsonString);
-    assertJSONValueEquals(strictValue, lenientValue);
-    return strictValue;
   }
 
   private JSONArray populateRecursiveArray(int numElements, int recursion) {

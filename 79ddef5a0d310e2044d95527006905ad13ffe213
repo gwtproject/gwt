@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a61c4b9_34626e2a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-09-02T09:15:56Z",
+      "side": 1,
+      "message": "Should this say \"partial emulation\"?",
+      "revId": "79ddef5a0d310e2044d95527006905ad13ffe213",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

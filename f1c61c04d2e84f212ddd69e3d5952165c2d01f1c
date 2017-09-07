@@ -16,6 +16,24 @@
       "revId": "f1c61c04d2e84f212ddd69e3d5952165c2d01f1c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c277746a_bef2d2f4",
+        "filename": "user/test/com/google/gwt/core/interop/JsTypeVarargsTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-09-07T17:30:01Z",
+      "side": 1,
+      "message": "It uses the 2nd now but it is irrelevant in most ways since it is a native type. All overloads are dispatched to the same method.",
+      "parentUuid": "2a6714d1_c17399f0",
+      "revId": "f1c61c04d2e84f212ddd69e3d5952165c2d01f1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

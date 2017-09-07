@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a6714d1_c17399f0",
+        "filename": "user/test/com/google/gwt/core/interop/JsTypeVarargsTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-09-07T17:20:45Z",
+      "side": 1,
+      "message": "Which overload does this uses?",
+      "revId": "f1c61c04d2e84f212ddd69e3d5952165c2d01f1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

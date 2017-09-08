@@ -82,8 +82,7 @@ public class Level implements Serializable {
   }
 
   public static Level parse(String name) {
-    Logger.assertLoggingValues();
-    if (System.getProperty("jre.logging.logLevel").equals("OFF")) {
+    if (System.getProperty("jre.logging.logLevel") == "OFF") {
       return null;
     }
 

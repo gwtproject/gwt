@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7612628f_53709f39",
+        "filename": "user/src/com/google/gwt/i18n/rebind/LookupMethodCreator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-09-15T10:51:11Z",
+      "side": 1,
+      "message": "nit: space between \u0027if\u0027 and \u0027(\u0027",
+      "range": {
+        "startLine": 105,
+        "startChar": 21,
+        "endLine": 105,
+        "endChar": 24
+      },
+      "revId": "f58ef7d8c478c77d5b625a7c8737406d15b4c796",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

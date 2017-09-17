@@ -748,6 +748,9 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
           nodeView.showMore();
           return;
         }
+      } else if (isClick && showMoreElem != null && showMoreElem.isOrHasChild(target)) {
+        // Prevents strict-CSP violation due to javascript:'' link target
+        event.preventDefault();
       }
 
       // Forward the event to the cell

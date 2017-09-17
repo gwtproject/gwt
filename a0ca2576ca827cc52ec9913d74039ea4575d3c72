@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3040aa6b_6f9fb8ad",
+        "filename": "user/src/com/google/gwt/user/client/ui/NamedFrame.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-17T18:41:52Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027static\u0027 modifier.",
+      "revId": "a0ca2576ca827cc52ec9913d74039ea4575d3c72",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

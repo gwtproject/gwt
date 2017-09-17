@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87931ed6_2c7cf53e",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-09-17T18:32:39Z",
+      "side": 1,
+      "message": "toUpperCase :)",
+      "range": {
+        "startLine": 721,
+        "startChar": 28,
+        "endLine": 721,
+        "endChar": 40
+      },
+      "revId": "a1a0df72b51055cddcdf5f2401fd17b21e663010",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

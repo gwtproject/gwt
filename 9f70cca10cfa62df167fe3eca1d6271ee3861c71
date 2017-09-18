@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1668bb39_d29f7517",
+        "filename": "user/super/com/google/gwt/emul/java/lang/reflect/Array.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-09-18T18:05:50Z",
+      "side": 1,
+      "message": "Added tests for widening",
+      "parentUuid": "ed8feeea_38bdd43d",
+      "revId": "9f70cca10cfa62df167fe3eca1d6271ee3861c71",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2428cf8_a0a1fefd",
         "filename": "user/super/com/google/gwt/emul/java/lang/reflect/Array.java",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2017-09-14T01:24:53Z",
       "side": 1,
       "message": "This won\u0027t optimize but also behavior will change across different set calls. Let\u0027s replace calls to this w/ checkArgument(false);",
+      "range": {
+        "startLine": 374,
+        "startChar": 34,
+        "endLine": 374,
+        "endChar": 46
+      },
+      "revId": "9f70cca10cfa62df167fe3eca1d6271ee3861c71",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0fd75813_d6a269b3",
+        "filename": "user/super/com/google/gwt/emul/java/lang/reflect/Array.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-09-18T18:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2428cf8_a0a1fefd",
       "range": {
         "startLine": 374,
         "startChar": 34,

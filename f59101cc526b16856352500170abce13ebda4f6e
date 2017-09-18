@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa7b9889_7231c0cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-18T20:30:00Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "f59101cc526b16856352500170abce13ebda4f6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40611163_ca5955d1",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-18T20:30:00Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "f59101cc526b16856352500170abce13ebda4f6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "636392c7_d5a2b8e2",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-18T20:30:00Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "f59101cc526b16856352500170abce13ebda4f6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

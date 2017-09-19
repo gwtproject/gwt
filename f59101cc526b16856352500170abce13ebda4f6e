@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "5453a342_a58930c6",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 6910
+      },
+      "writtenOn": "2017-09-19T06:42:29Z",
+      "side": 1,
+      "message": "Most libraries use this for the constants: DOM_VK_OPEN_BRACKET\n\nShould we use: KEY_OPEN_BRACKET\n\nBecause its clear what is a bracket.",
+      "revId": "f59101cc526b16856352500170abce13ebda4f6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "636392c7_d5a2b8e2",
         "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
         "patchSetId": 1
@@ -47,6 +64,24 @@
       "writtenOn": "2017-09-18T20:30:00Z",
       "side": 1,
       "message": "[info] First sentence should end with a period.",
+      "revId": "f59101cc526b16856352500170abce13ebda4f6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e67f5eb_45f7223b",
+        "filename": "user/src/com/google/gwt/event/dom/client/KeyCodes.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 6910
+      },
+      "writtenOn": "2017-09-19T06:42:29Z",
+      "side": 1,
+      "message": "add newline before coment",
+      "parentUuid": "636392c7_d5a2b8e2",
       "revId": "f59101cc526b16856352500170abce13ebda4f6e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

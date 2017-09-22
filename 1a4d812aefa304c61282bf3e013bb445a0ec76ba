@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "055d0e8a_67ea0733",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTreeNodeView.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-09-22T05:51:41Z",
+      "side": 1,
+      "message": "An anchor without an href\u003d\"\" does not have the same styling AFAIK/IIRC, and because I don\u0027t have much time checking the results, I went for the simplest change (which is consistent with using an Anchor widget without a defined href)",
+      "parentUuid": "97422786_5cd0c52c",
+      "range": {
+        "startLine": 1196,
+        "startChar": 19,
+        "endLine": 1196,
+        "endChar": 26
+      },
+      "revId": "1a4d812aefa304c61282bf3e013bb445a0ec76ba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6dab2945_0d5fd06b",
         "filename": "user/src/com/google/gwt/user/client/ui/NamedFrame.java",
         "patchSetId": 3
@@ -54,6 +78,24 @@
       "side": 1,
       "message": "\u003e [warning] Redundant \u0027static\u0027 modifier.\n\nlets fix this",
       "parentUuid": "6dab2945_0d5fd06b",
+      "revId": "1a4d812aefa304c61282bf3e013bb445a0ec76ba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f77a510_6d1dcad6",
+        "filename": "user/src/com/google/gwt/user/client/ui/NamedFrame.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-09-22T05:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "189c6f77_eb00ac2d",
       "revId": "1a4d812aefa304c61282bf3e013bb445a0ec76ba",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -34,6 +34,24 @@
       "revId": "addb4db53016e2c524f4d5b182e7739cced225bf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af1aca16_bc1812fd",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsRootScope.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-09-25T08:41:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad8eaf7f_9038f173",
+      "revId": "addb4db53016e2c524f4d5b182e7739cced225bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1465,6 +1465,65 @@ public class Java8Test extends GWTTestCase {
         new Some<String>("Hell", concat), "Hell", "o", concat);
   }
 
+  static String concat(String... strs) {
+    String result = "";
+    for (String s : strs) {
+      result += s;
+    }
+    return result;
+  }
+
+  static String anotherConcat(String s1, String s2, String... strs) {
+    String result = s1 + s2;
+    for (String s : strs) {
+      result += s;
+    }
+    return result;
+  }
+
+  public String instanceConcat(String... strs) {
+    String result = "";
+    for (String s : strs) {
+      result += s;
+    }
+    return result;
+  }
+
+  public String anotherInstanceConcat(String s1, String... strs) {
+    String result = s1;
+    for (String s : strs) {
+      result += s;
+    }
+    return result;
+  }
+
+  public String classConcat(Object... objs) {
+    String result = "";
+    for (Object o : objs) {
+      result += o.getClass().getSimpleName();
+    }
+    return result;
+  }
+  
+  public void testMethodReference_varargs() {
+    // More functional arguments than varargs
+    MyFunction2<String, String, String> concat = Java8Test::concat;
+    assertEquals("ab", concat.apply("a", "b"));
+
+    // Less functional arguments than varargs
+    MyFunction2<String, String, String> anotherConcat = Java8Test::anotherConcat;
+    assertEquals("ab", anotherConcat.apply("a", "b"));
+
+//    MyFunction2<Java8Test, String, String> instanceConcat = Java8Test::instanceConcat;
+//    assertEquals("a", instanceConcat.apply(this, "a"));
+//
+//    MyFunction2<Java8Test, String, String> anotherInstanceConcat = Java8Test::anotherInstanceConcat;
+//    assertEquals("a", anotherInstanceConcat.apply(this, "a"));
+
+//    MyFunction2<Java8Test, Object, String> classConcat = Java8Test::classConcat;
+//    assertEquals("Java8TestString", classConcat.apply(this, ""));
+  }
+
   private static <T> void testMethodReference_genericTypeParameters(
       Some<T> some, T t1, T t2, MyFunction2<T, T, T> combine) {
     T t1t2 = combine.apply(t1, t2);

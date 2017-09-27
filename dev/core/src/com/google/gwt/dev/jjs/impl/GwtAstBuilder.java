@@ -1890,8 +1890,14 @@ public class GwtAstBuilder {
       // interface Foo { m(int x, int y); } bound to reference foo(int... args)
       // if varargs and incoming param is not already a var-arg, we'll need to convert
       // trailing args of the target interface into an array
+      boolean isVarargArgumentSuppliedDirectlyAsAnArray =
+          referredMethodBinding.isVarargs()
+              && samBinding.parameters.length == referredMethodBinding.parameters.length
+              && samBinding.parameters[varArg]
+                  .isCompatibleWith(referredMethodBinding.parameters[varArg]);
+
       if (referredMethodBinding.isVarargs()
-          && !samBinding.parameters[varArg].isArrayType()) {
+          && !isVarargArgumentSuppliedDirectlyAsAnArray) {
         varArgInitializers = Lists.newArrayList();
       }
 
@@ -1900,14 +1906,19 @@ public class GwtAstBuilder {
         JExpression paramExpr = param.makeRef(info);
         // params may need to be boxed or unboxed
         TypeBinding destParam = null;
-        // The method declared in the functional interface might have more parameters than the
-        // method referred by the method reference. In the case of an instance method without
+        // The method declared in the functional interface might have more or less parameters than
+        // the method referred by the method reference. In the case of an instance method without
         // an explicit qualifier (A::m vs instance::m) the method in the functional interface will
         // have an additional parameter for the instance preceding all the method parameters.
         TypeBinding samParameterBinding =
-            declarationSamBinding.parameters[paramNumber
-                + (declarationSamBinding.parameters.length
-                - referredMethodBinding.parameters.length)];
+            declarationSamBinding.parameters[
+                Math.max(0,
+                    Math.min(
+                        paramNumber
+                            + (declarationSamBinding.parameters.length
+                                - referredMethodBinding.parameters.length),
+                        declarationSamBinding.parameters.length - 1)
+                )];
         // if it is not the trailing param or varargs, or interface method is already varargs
         if (varArgInitializers == null
             || !referredMethodBinding.isVarargs()

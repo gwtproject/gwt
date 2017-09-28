@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1afe3540_1d8f5e87",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1857,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-28T05:19:19Z",
+      "side": 1,
+      "message": "[error] \u0027\u0026\u0026\u0027 is not followed by whitespace.",
+      "revId": "3436697f1c4dda226ed6dd77164ac16a757bf274",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9c89606_ec5e4609",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1857,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-28T05:19:19Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 110).",
+      "revId": "3436697f1c4dda226ed6dd77164ac16a757bf274",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

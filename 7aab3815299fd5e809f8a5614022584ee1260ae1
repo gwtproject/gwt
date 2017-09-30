@@ -1,0 +1,2299 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb977f4b_fae59daa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "869b50d6_6ea45fad",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e26e23cc_1dc01642",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f6415eb_277f6491",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1a0456_d2d57711",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16d85275_3ebdac3f",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29d0b9aa_548de3dc",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "666c995d_52e3fc1c",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44f24564_77d59cb5",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9d184153_d9e5f915",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8df048eb_71faab1c",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3627458_487cae75",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "769e164c_3849fac2",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e59f4621_a807ae37",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffc7cda5_8e49d8f7",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c48233c_176743c1",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8c312b19_7b03bf75",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc6bdc6c_a939acad",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b75cb38b_55e75352",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e14c1a56_98c55e1a",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7440b93c_cc67f3ae",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23c4a74b_8f232bad",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "add145c4_f3721c78",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b29f61e_5508cf78",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb1248df_2f3a7e02",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a98f9551_7512af93",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "885c3595_d68eb673",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a128c9e_26dc750e",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2da7633c_c016754d",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "26c52d75_637acac2",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ecb45ff0_cab1a72a",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28cdfedf_371ae65e",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32cde228_a7782ccf",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54ed7c11_a7b085a5",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5239637b_5a1ed3e6",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0446057b_b3f20cb1",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "674a58e1_eac996ce",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aa13dbe_7f1a8045",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "26411cad_b2e1232d",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8953a7b5_40faef3a",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fe5a3e8_4202844e",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de6344e5_fc145d54",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd3c4407_47c1134c",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51e17e31_386c1402",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f705f68_b42d3346",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cf8e534d_379c850c",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "00d2bba8_2dbf5017",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df92b8d7_17baf159",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c2b7c69_3634266e",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6169b4e5_93f8f727",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd7e53c2_9558497d",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d094ce3c_c9ef05ac",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1c726c1_56a08cfb",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f3d5a4a8_a66e2ac6",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9733a0e_e6140a29",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "75706242_e332e7a5",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9901274_eb7ad5a2",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb35dc7f_1985bd49",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c9e048c_3fdfd3ba",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/TimeUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d656a9f_fb495d37",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f7fde51_b748d14f",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6d74313_c6699b84",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d98b5cb_ba9e752f",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c6a0554d_03165e55",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0c52e41_f9447049",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8664a30f_e8d55bc4",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64989a28_2662c0bf",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91aa699a_631f113d",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0065cd99_e4a4518d",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cd29874_8a5d3347",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc8f2adb_4ec137d0",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6dcbca2d_6ab92c04",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fe72d4d_a2492b24",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f160cd8_b80dd6a9",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "acda19a2_fe76ca65",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "feb8a768_d8638041",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6a5c0b6_3d163800",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce5daa96_c296d3b3",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53850160_4fd414e8",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff3abaa2_3d796893",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a3f375e_e267aaf9",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d38c79d9_c8feae70",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "206c885f_644718f7",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "831bb1b6_9d796bab",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab4af309_d4c701aa",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca316fe4_11e6e23d",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "beec47d7_d1c096b9",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "18c93701_bfe6c28a",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7924c303_6f6b3ece",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97ba5302_c7606d3e",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30aa60d3_178fe2e5",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "48feaeb0_f037cc83",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "46229bca_8aedb2c5",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f88c0a36_f7a892de",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f7433df_bb63a579",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ce599b1_d27a06d9",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "14873da3_4642b8e6",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db6cb96e_318c929e",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40a78fbb_5bb6b00b",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4069ef9_84742f00",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c8b209c6_b6ed5a8e",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ed01684_e9aa048b",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b1e08b0f_fb696be8",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/TimeUnitTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e1880e9_eb6da746",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/TimeUnitTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4fb236ba_3cc840da",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/TimeUnitTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "509fb69c_33bb2b5f",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/TimeUnitTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4953ba3b_812fc1b0",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/TimeUnitTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d19ad11_de064c4a",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/TimeUnitTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9b030e3_b00906c5",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/TimeUnitTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d717c460_fbb65b99",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/TimeUnitTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ae8b6db_8d804dd5",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/TimeUnitTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0015be7_8d6a2ae0",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/TimeUnitTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "189ce4be_60460741",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/TimeUnitTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f3432bcd_45b63032",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicIntegerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a61a649e_a18ea188",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicIntegerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21e8ae97_5b134bf2",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicIntegerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe6f1dd5_98c72a5f",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicIntegerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "397919de_7a843444",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicIntegerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8036a88c_19f350ba",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicIntegerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9264e7c9_0ff10157",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicIntegerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7adecb2_42f504fa",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicIntegerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9b1cd56c_fa26b59d",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicIntegerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97d346ad_7c89fc29",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicIntegerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702aa700_3ac93b59",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicIntegerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cd6b343_ac2f7819",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicLongTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "08edd3af_975740a1",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicLongTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c35fa4d_77d1903e",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicLongTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b06e4ba6_e1d44105",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicLongTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eaef8368_35108dc4",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicLongTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25347f44_0e85f9fc",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicLongTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505f6b69_cdd9d507",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicLongTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19fb4a96_4631cfb5",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicLongTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24d13e3c_a4361bcb",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicLongTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ba15ec6_b894403d",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicLongTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84081b6a_885c2841",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicLongTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-09-30T04:16:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

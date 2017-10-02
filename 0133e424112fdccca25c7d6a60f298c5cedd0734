@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2c4558a_38fd12f4",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-10-02T19:07:26Z",
+      "side": 1,
+      "message": "I don\u0027t think this needs to be a critical check we want this to compile out.",
+      "range": {
+        "startLine": 362,
+        "startChar": 4,
+        "endLine": 362,
+        "endChar": 36
+      },
+      "revId": "0133e424112fdccca25c7d6a60f298c5cedd0734",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df09a6cb_afcb991c",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/InternalPreconditions.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-10-02T19:07:26Z",
+      "side": 1,
+      "message": "This is not how the Precondition class work, we should use assertions here in dev mode so that people learn that they can not rely on stringindexoutofbounds in their code.",
+      "range": {
+        "startLine": 525,
+        "startChar": 0,
+        "endLine": 525,
+        "endChar": 87
+      },
+      "revId": "0133e424112fdccca25c7d6a60f298c5cedd0734",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

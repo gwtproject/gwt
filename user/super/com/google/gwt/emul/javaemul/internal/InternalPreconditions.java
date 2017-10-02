@@ -498,6 +498,12 @@ public final class InternalPreconditions {
     }
   }
 
+  public static void checkCriticalStringElementIndex(int index, int size) {
+    if (index < 0 || index >= size) {
+      throw new StringIndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+    }
+  }
+
   /**
    * Ensures that {@code index} specifies a valid <i>position</i> in a list of
    * size {@code size}. A position index may range from zero to {@code size}, inclusive.

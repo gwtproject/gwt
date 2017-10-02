@@ -39,6 +39,24 @@ public class StringTest extends GWTTestCase {
 
   public void testCharAt() {
     assertEquals('b', hideFromCompiler("abc").charAt(1));
+
+    try {
+      hideFromCompiler("abc").charAt(-1);
+      fail();
+    } catch (StringIndexOutOfBoundsException ignore) {
+      // expected
+    } catch (AssertionError ignore) {
+      // expected
+    }
+
+    try {
+      hideFromCompiler("abc").charAt(3);
+      fail();
+    } catch (StringIndexOutOfBoundsException ignore) {
+      // expected
+    } catch (AssertionError ignore) {
+      // expected
+    }
   }
 
   public void testCodePoint() {

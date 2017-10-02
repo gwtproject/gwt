@@ -17,6 +17,7 @@
 package java.lang;
 
 import static javaemul.internal.InternalPreconditions.checkCriticalStringBounds;
+import static javaemul.internal.InternalPreconditions.checkElementIndex;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
@@ -358,6 +359,7 @@ public final class String implements Comparable<String>, CharSequence,
 
   @Override
   public char charAt(int index) {
+    checkElementIndex(index, length());
     return asNativeString().charCodeAt(index);
   }
 

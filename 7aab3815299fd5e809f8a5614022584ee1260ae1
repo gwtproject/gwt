@@ -1005,6 +1005,29 @@
     },
     {
       "key": {
+        "uuid": "7fb95bc9_c4ce66c5",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/atomic/AtomicReferenceArray.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-10-02T23:54:39Z",
+      "side": 1,
+      "message": "very surprising to see this implemented with a list instead of an array...",
+      "range": {
+        "startLine": 33,
+        "startChar": 24,
+        "endLine": 33,
+        "endChar": 30
+      },
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d656a9f_fb495d37",
         "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java",
         "patchSetId": 1
@@ -2291,6 +2314,144 @@
       "writtenOn": "2017-09-30T04:16:49Z",
       "side": 1,
       "message": "[info] First sentence should end with a period.",
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d4733011_8ef40e9b",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicReferenceArrayTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-10-02T23:54:39Z",
+      "side": 1,
+      "message": "assertSame",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 16
+      },
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ab6223b_c9916cb9",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicReferenceArrayTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-10-02T23:54:39Z",
+      "side": 1,
+      "message": "assertSame",
+      "range": {
+        "startLine": 63,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 16
+      },
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "26d636d6_cd589ac1",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicReferenceArrayTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-10-02T23:54:39Z",
+      "side": 1,
+      "message": "assertSame and below",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 72,
+        "endChar": 16
+      },
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "515b5fe3_bfc4e39e",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicReferenceArrayTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-10-02T23:54:39Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 82,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 16
+      },
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "18ab3ea9_ccc11699",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicReferenceArrayTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-10-02T23:54:39Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 103,
+        "startChar": 4,
+        "endLine": 103,
+        "endChar": 16
+      },
+      "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2824e0f_31269494",
+        "filename": "user/test/com/google/gwt/emultest/java/util/concurrent/atomic/AtomicReferenceArrayTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-10-02T23:54:39Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 116,
+        "startChar": 4,
+        "endLine": 116,
+        "endChar": 16
+      },
       "revId": "7aab3815299fd5e809f8a5614022584ee1260ae1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

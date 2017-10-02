@@ -17,6 +17,7 @@ package javaemul.internal;
 
 import static java.lang.System.getProperty;
 
+import java.lang.StringIndexOutOfBoundsException;
 import java.util.NoSuchElementException;
 
 /**
@@ -517,6 +518,24 @@ public final class InternalPreconditions {
   public static void checkCriticalPositionIndex(int index, int size) {
     if (index < 0 || index > size) {
       throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+    }
+  }
+
+  public static void checkStringPositionIndex(int index, int size) {
+    if (IS_BOUNDS_CHECKED) {
+      checkCriticalStringPositionIndex(index, size);
+    } else if (IS_ASSERTED) {
+      try {
+        checkCriticalStringPositionIndex(index, size);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
+  public static void checkCriticalStringPositionIndex(int index, int size) {
+    if (index < 0 || index > size) {
+      throw new StringIndexOutOfBoundsException("Index: " + index + ", Size: " + size);
     }
   }
 

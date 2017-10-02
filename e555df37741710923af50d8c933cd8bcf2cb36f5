@@ -51,6 +51,24 @@
       "revId": "e555df37741710923af50d8c933cd8bcf2cb36f5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c77f017_56c4880f",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2017-10-02T17:14:39Z",
+      "side": 1,
+      "message": "Yeah please use StringIndexOutOfBoundsException. Other methods in this emulation also use it.\n\nI am always unsure if it should be critical or not. Given GWT delegates to native charCodeAt() which returns NaN if the index is out of range, a critical check might be worth it because follow up JS code will likely work with the NaN value just fine but produce weird results instead of failing. String.getChars() emulation also uses a critical check which is kind of like the same method as charAt() but just for an index interval.",
+      "parentUuid": "057cfe5a_7ab4684d",
+      "revId": "e555df37741710923af50d8c933cd8bcf2cb36f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

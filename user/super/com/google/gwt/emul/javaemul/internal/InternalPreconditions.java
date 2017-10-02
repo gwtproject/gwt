@@ -520,6 +520,12 @@ public final class InternalPreconditions {
     }
   }
 
+  public static void checkCriticalStringPositionIndex(int index, int size) {
+    if (index < 0 || index > size) {
+      throw new StringIndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+    }
+  }
+
   /**
    * Ensures that {@code start} and {@code end} specify a valid <i>positions</i> in a list
    * of size {@code size}, and are in order. A position index may range from zero to

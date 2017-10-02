@@ -45,6 +45,30 @@
       "revId": "0133e424112fdccca25c7d6a60f298c5cedd0734",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9e00252_ab7326ba",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/InternalPreconditions.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-10-02T19:31:05Z",
+      "side": 1,
+      "message": "technically if it is a critical check, this is a correct implementation but I agree this shouldn\u0027t be a critical check because that would be a big performance hit.",
+      "parentUuid": "df09a6cb_afcb991c",
+      "range": {
+        "startLine": 525,
+        "startChar": 0,
+        "endLine": 525,
+        "endChar": 87
+      },
+      "revId": "0133e424112fdccca25c7d6a60f298c5cedd0734",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

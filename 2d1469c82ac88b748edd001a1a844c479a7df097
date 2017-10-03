@@ -16,6 +16,24 @@
       "revId": "2d1469c82ac88b748edd001a1a844c479a7df097",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b82bfe4_70897714",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_template.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2017-10-03T18:51:04Z",
+      "side": 1,
+      "message": "I see, it\u0027s left for not breaking old browsers.",
+      "parentUuid": "51d0126d_89486896",
+      "revId": "2d1469c82ac88b748edd001a1a844c479a7df097",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

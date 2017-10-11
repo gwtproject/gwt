@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94056841_bfea6fde",
+        "filename": "user/test/com/google/gwt/i18n/server/DateTimeFormatTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2017-10-11T13:23:26Z",
+      "side": 1,
+      "message": "This looks unused, should be removed (along with After/Before above)",
+      "revId": "defd2c57be1b2526bc4c39048e7441300bf5bc67",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64be7d20_c7376a8a",
+        "filename": "user/test/com/google/gwt/i18n/server/DateTimeFormatTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2017-10-11T13:23:26Z",
+      "side": 1,
+      "message": "Before/After annotations not needed, have no effect, should be removed.",
+      "revId": "defd2c57be1b2526bc4c39048e7441300bf5bc67",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b97e48eb_bc6db63c",
+        "filename": "user/test/com/google/gwt/i18n/shared/DateTimeFormatTestBase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2017-10-11T13:23:26Z",
+      "side": 1,
+      "message": "Personally, I\u0027d prefer the other style of date creation, both for readability and for consistency with the other tests?",
+      "revId": "defd2c57be1b2526bc4c39048e7441300bf5bc67",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

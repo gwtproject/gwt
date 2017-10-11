@@ -129,6 +129,23 @@
     },
     {
       "key": {
+        "uuid": "328025af_43bfc03e",
+        "filename": "user/test/com/google/gwt/i18n/server/DateTimeFormatTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-10-11T14:53:15Z",
+      "side": 1,
+      "message": "Copyright needs to be added back.",
+      "revId": "95c926dc0aac6c89e47c28ff581ceb68b99fa556",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "858acbd9_c1d562b2",
         "filename": "user/test/com/google/gwt/i18n/server/DateTimeFormatTest.java",
         "patchSetId": 5

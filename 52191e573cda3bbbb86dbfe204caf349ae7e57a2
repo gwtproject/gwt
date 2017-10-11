@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a4f6be3a_8f51948d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1921,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-10-11T17:26:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98d680e9_1d0f58d3",
+      "range": {
+        "startLine": 1919,
+        "startChar": 24,
+        "endLine": 1921,
+        "endChar": 74
+      },
+      "revId": "52191e573cda3bbbb86dbfe204caf349ae7e57a2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "059ee87e_59c68cc4",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 7
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "1ebe775e_aa743667",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1922,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-10-11T17:26:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "059ee87e_59c68cc4",
+      "range": {
+        "startLine": 1917,
+        "startChar": 0,
+        "endLine": 1922,
+        "endChar": 68
+      },
+      "revId": "52191e573cda3bbbb86dbfe204caf349ae7e57a2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2f44ebbc_7fde6663",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 7
@@ -59,6 +107,24 @@
       "writtenOn": "2017-10-11T03:49:26Z",
       "side": 1,
       "message": "nit: empty line",
+      "revId": "52191e573cda3bbbb86dbfe204caf349ae7e57a2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffa00bc3_e5db3253",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1620,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-10-11T17:26:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f44ebbc_7fde6663",
       "revId": "52191e573cda3bbbb86dbfe204caf349ae7e57a2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

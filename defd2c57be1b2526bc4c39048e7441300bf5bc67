@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6f2d2905_88a37421",
+        "filename": "user/test/com/google/gwt/i18n/server/DateTimeFormatTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-10-11T14:53:11Z",
+      "side": 1,
+      "message": "[error] Line does not match expected header line of \u0027^/\\*[ ]*$\u0027.",
+      "revId": "defd2c57be1b2526bc4c39048e7441300bf5bc67",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "94056841_bfea6fde",
         "filename": "user/test/com/google/gwt/i18n/server/DateTimeFormatTest.java",
         "patchSetId": 6
@@ -16,6 +33,40 @@
       "revId": "defd2c57be1b2526bc4c39048e7441300bf5bc67",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34272258_65905657",
+        "filename": "user/test/com/google/gwt/i18n/server/DateTimeFormatTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-10-11T14:53:11Z",
+      "side": 1,
+      "message": "[error] Unused import - org.junit.Test.",
+      "revId": "defd2c57be1b2526bc4c39048e7441300bf5bc67",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffdf6f01_76877cae",
+        "filename": "user/test/com/google/gwt/i18n/server/DateTimeFormatTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-10-11T14:53:11Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "defd2c57be1b2526bc4c39048e7441300bf5bc67",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     },
     {
       "key": {

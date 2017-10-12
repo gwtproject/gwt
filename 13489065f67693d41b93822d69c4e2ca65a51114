@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bad69c39_6498f4db",
+        "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-10-12T09:29:10Z",
+      "side": 1,
+      "message": "Colin, would you prefer that I use the same code as is now in HtmlUnit (i.e. pass a null jse when the exception is not a JavaScriptException) rather than this assert? (the difference here is that this triggerError is only called from handleJavaScriptException, so we can expect that the exception is a, well, JavaScriptException)",
+      "revId": "13489065f67693d41b93822d69c4e2ca65a51114",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

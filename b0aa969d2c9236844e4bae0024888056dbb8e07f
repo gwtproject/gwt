@@ -16,6 +16,24 @@
       "revId": "b0aa969d2c9236844e4bae0024888056dbb8e07f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b3e0d7e_95150a5c",
+        "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-10-12T11:52:21Z",
+      "side": 1,
+      "message": "Crap, editing in Vim likely was a bad idea…",
+      "parentUuid": "87b1b1af_29ece7f1",
+      "revId": "b0aa969d2c9236844e4bae0024888056dbb8e07f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

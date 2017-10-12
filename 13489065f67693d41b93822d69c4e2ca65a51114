@@ -16,6 +16,24 @@
       "revId": "13489065f67693d41b93822d69c4e2ca65a51114",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23ab9e8f_7485a7d6",
+        "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2017-10-12T11:29:47Z",
+      "side": 1,
+      "message": "I am far from an expert in HtmlUnit, but their authors seemed okay with what I had. My concern was that other Rhino exceptions might be possible in this area, indicating some other error in the code, so I tried a few exceptions _not_ thrown by js `throw` - a syntax error, a type error. They all resulted in JavaScriptException, and no EcmaError or EvaluatorException as feared.\n\nSo in short I don\u0027t know, but I\u0027d err on the side of not causing unexpected assertion failures, just because something ends up being uncaught within a test?",
+      "parentUuid": "bad69c39_6498f4db",
+      "revId": "13489065f67693d41b93822d69c4e2ca65a51114",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

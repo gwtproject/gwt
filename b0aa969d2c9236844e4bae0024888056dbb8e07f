@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87b1b1af_29ece7f1",
+        "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-10-12T11:47:10Z",
+      "side": 1,
+      "message": "[error] File contains tab characters (this is the first instance).",
+      "revId": "b0aa969d2c9236844e4bae0024888056dbb8e07f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

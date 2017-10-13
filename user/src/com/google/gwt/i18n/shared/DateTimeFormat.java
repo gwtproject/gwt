@@ -790,13 +790,28 @@ public class DateTimeFormat {
     int diff = (date.getTimezoneOffset() - timeZone.getOffset(date)) * 60000;
     Date keepDate = new Date(date.getTime() + diff);
     Date keepTime = keepDate;
-    if (keepDate.getTimezoneOffset() != date.getTimezoneOffset()) {
+    if (keepTime.getTimezoneOffset() != date.getTimezoneOffset()) {
+      Date origKeepDateTime = keepDate;
       if (diff > 0) {
-        diff -= NUM_MILLISECONDS_IN_DAY;
+        diff = -NUM_MILLISECONDS_IN_DAY;
       } else {
-        diff += NUM_MILLISECONDS_IN_DAY;
+        diff = NUM_MILLISECONDS_IN_DAY;
       }
-      keepTime = new Date(date.getTime() + diff);
+      keepTime = new Date(keepTime.getTime() + diff);
+      if (keepTime.getDate() == keepDate.getDate()) {
+        // If adjusting keepTime by 24h left it on the same day, then we need to
+        // adjust keepDate one day in the other direction. E.g. if keepTime went
+        // from 2006/10/29 00:30 GMT-0700 to 23:30 GMT-0800, then keepDate needs
+        // to be adjusted to 2009/10/28.
+        keepDate = new Date(keepDate.getTime() - diff);
+      } else if (keepTime.getDate() != date.getDate() && keepDate.getDate() != date.getDate()) {
+        // If all three dates end up being on different days, then keepDate is
+        // wrong; in that case use 'date'.
+        // E.g. if date was 2006/4/2 03:01 GMT-0700, and timeZone is GMT-1000,
+        // keepDate is 2006/4/1 23:01 GMT-0800, keepTime 2006/4/3 00:01 GMT-0700
+        // keepDate needs to be adjusted to 2006/4/2, so date is OK to use.
+        keepDate = date;
+      }
     }
 
     StringBuilder toAppendTo = new StringBuilder(64);

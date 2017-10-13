@@ -81,6 +81,7 @@ public class DateTimeFormat_en_Test extends DateTimeFormatTestBase {
 
     // US PDT transition to PST on 2006/10/29 2:00am, jump back to PDT
     // 2006/4/2 1:00am
+    // That's UTC time 2006/10/29 9:00am
     date.setTime(Date.UTC(2006 - 1900, 10 - 1, 29, 8, 59, 0));
     assertEquals("10/29/2006 01:59:00 PDT", DateTimeFormat.getFormat(
         "MM/dd/yyyy HH:mm:ss z").format(date, usPacific));
@@ -90,6 +91,154 @@ public class DateTimeFormat_en_Test extends DateTimeFormatTestBase {
     date.setTime(Date.UTC(2006 - 1900, 10 - 1, 29, 9, 0, 0));
     assertEquals("10/29/2006 01:00:00 PST", DateTimeFormat.getFormat(
         "MM/dd/yyyy HH:mm:ss z").format(date, usPacific));
+  }
+
+  public void test_daylightTimeTransitionWithAdjustedTimezone() {
+    // Note that what matters most here is the OS timezone, not the target.
+    // OS timezone is assumed to be America/Los_Angeles (PST/PDT).
+
+    TimeZoneConstants timeZoneData = GWT.create(TimeZoneConstants.class);
+    TimeZone usPacific = TimeZone.createTimeZone(timeZoneData.americaLosAngeles());
+    TimeZone usEastern = TimeZone.createTimeZone(timeZoneData.americaNewYork());
+    TimeZone adak = TimeZone.createTimeZone(timeZoneData.americaAdak());
+
+    // US PST transitioned to PDT on 2006/4/2 2:00am, jump to 2006/4/2 3:00am.
+    // That's UTC time 2006/4/2 10:00am
+    // Note: PST/PDT is tested in test_daylightTimeTransition
+    Date date = new Date();
+    date.setTime(Date.UTC(2006 - 1900, 3, 2, 9, 59, 0));
+    assertEquals("04/02/2006 05:59:00 EDT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("04/01/2006 23:59:00 HAST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
+    date.setTime(Date.UTC(2006 - 1900, 3, 2, 10, 01, 0));
+    assertEquals("04/02/2006 06:01:00 EDT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("04/02/2006 00:01:00 HAST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
+    date.setTime(Date.UTC(2006 - 1900, 3, 2, 10, 0, 0));
+    assertEquals("04/02/2006 06:00:00 EDT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("04/02/2006 00:00:00 HAST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
+
+    // US EST transitioned to EDT on 2006/4/2 2:00am, jump to 2006/4/2 3:00am.
+    // That's UTC time 2006/4/2 7:00am
+    date.setTime(Date.UTC(2006 - 1900, 3, 2, 6, 59, 0));
+    assertEquals("04/02/2006 01:59:00 EST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("04/01/2006 22:59:00 PST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usPacific));
+    assertEquals("04/01/2006 20:59:00 HAST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
+    date.setTime(Date.UTC(2006 - 1900, 3, 2, 7, 01, 0));
+    assertEquals("04/02/2006 03:01:00 EDT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("04/01/2006 23:01:00 PST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usPacific));
+    assertEquals("04/01/2006 21:01:00 HAST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
+    date.setTime(Date.UTC(2006 - 1900, 3, 2, 7, 0, 0));
+    assertEquals("04/02/2006 03:00:00 EDT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("04/01/2006 23:00:00 PST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usPacific));
+    assertEquals("04/01/2006 21:00:00 HAST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
+
+    // US HAST transitioned to HADT on 2006/4/2 2:00am, jump to 2006/4/2 3:00am.
+    // That's UTC time 2006/4/2 12:00pm
+    date.setTime(Date.UTC(2006 - 1900, 3, 2, 11, 59, 0));
+    assertEquals("04/02/2006 07:59:00 EDT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("04/02/2006 04:59:00 PDT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usPacific));
+    assertEquals("04/02/2006 01:59:00 HAST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
+    date.setTime(Date.UTC(2006 - 1900, 3, 2, 12, 01, 0));
+    assertEquals("04/02/2006 08:01:00 EDT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("04/02/2006 05:01:00 PDT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usPacific));
+    assertEquals("04/02/2006 03:01:00 HADT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
+    date.setTime(Date.UTC(2006 - 1900, 3, 2, 12, 0, 0));
+    assertEquals("04/02/2006 08:00:00 EDT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("04/02/2006 05:00:00 PDT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usPacific));
+    assertEquals("04/02/2006 03:00:00 HADT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
+
+    // US PDT transition to PST on 2006/10/29 2:00am, jump back to PDT
+    // 2006/4/2 1:00am
+    // That's UTC time 2006/10/29 9:00am
+    // Note: PDT/PST is tested in test_daylightTimeTransition
+    date.setTime(Date.UTC(2006 - 1900, 10 - 1, 29, 8, 59, 0));
+    assertEquals("10/29/2006 03:59:00 EST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("10/28/2006 23:59:00 HADT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
+    date.setTime(Date.UTC(2006 - 1900, 10 - 1, 29, 9, 01, 0));
+    assertEquals("10/29/2006 04:01:00 EST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("10/29/2006 00:01:00 HADT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
+    date.setTime(Date.UTC(2006 - 1900, 10 - 1, 29, 9, 0, 0));
+    assertEquals("10/29/2006 04:00:00 EST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("10/29/2006 00:00:00 HADT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
+
+    // US EDT transition to EST on 2006/10/29 2:00am, jump back to PDT
+    // 2006/4/2 1:00am
+    // That's UTC time 2006/10/29 6:00am
+    date.setTime(Date.UTC(2006 - 1900, 10 - 1, 29, 5, 59, 0));
+    assertEquals("10/29/2006 01:59:00 EDT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("10/28/2006 22:59:00 PDT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usPacific));
+    assertEquals("10/28/2006 20:59:00 HADT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
+    date.setTime(Date.UTC(2006 - 1900, 10 - 1, 29, 6, 01, 0));
+    assertEquals("10/29/2006 01:01:00 EST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("10/28/2006 23:01:00 PDT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usPacific));
+    assertEquals("10/28/2006 21:01:00 HADT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
+    date.setTime(Date.UTC(2006 - 1900, 10 - 1, 29, 6, 0, 0));
+    assertEquals("10/29/2006 01:00:00 EST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("10/28/2006 23:00:00 PDT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usPacific));
+    assertEquals("10/28/2006 21:00:00 HADT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
+
+    // US HADT transition to HAST on 2006/10/29 2:00am, jump back to PDT
+    // 2006/4/2 1:00am
+    // That's UTC time 2006/10/29 11:00am
+    date.setTime(Date.UTC(2006 - 1900, 10 - 1, 29, 10, 59, 0));
+    assertEquals("10/29/2006 05:59:00 EST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("10/29/2006 02:59:00 PST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usPacific));
+    assertEquals("10/29/2006 01:59:00 HADT", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
+    date.setTime(Date.UTC(2006 - 1900, 10 - 1, 29, 11, 01, 0));
+    assertEquals("10/29/2006 06:01:00 EST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("10/29/2006 03:01:00 PST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usPacific));
+    assertEquals("10/29/2006 01:01:00 HAST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
+    date.setTime(Date.UTC(2006 - 1900, 10 - 1, 29, 11, 0, 0));
+    assertEquals("10/29/2006 06:00:00 EST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usEastern));
+    assertEquals("10/29/2006 03:00:00 PST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, usPacific));
+    assertEquals("10/29/2006 01:00:00 HAST", DateTimeFormat.getFormat(
+        "MM/dd/yyyy HH:mm:ss z").format(date, adak));
   }
 
   public void test_EEEEMMMddHHmmsszzzyy() {

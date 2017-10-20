@@ -53,7 +53,16 @@ public class FindPackages {
    * the JAVA_PKGS property.  Add packages here as needed.
    */
   private static final String[] JAVA_PKGS = {
-    "java.lang", "java.lang.annotation", "java.math", "java.io", "java.sql", "java.util", "java.util.logging"};
+    "java.beans",
+    "java.io",
+    "java.lang", "java.lang.annotation", "java.lang.reflect",
+    "java.math",
+    "java.nio.charset",
+    "java.security",
+    "java.sql",
+    "java.text",
+    "java.util", "java.util.concurrent", "java.util.concurrent.atomic", "java.util.function", "java.util.logging", "java.util.stream"
+  };
 
   /**
    * User packages to include, regardless of exclusions.  Add packages here

@@ -15,8 +15,6 @@
  */
 package com.google.gwt.junit;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ONERROR_COLUMN_ERROR_ARGUMENT;
-
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.shell.HostedModePluginObject;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
@@ -26,7 +24,6 @@ import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
-import com.gargoylesoftware.htmlunit.InteractivePage;
 import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptException;
@@ -38,13 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.util.WebClientUtils;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -116,21 +107,21 @@ public class RunStyleHtmlUnit extends RunStyle {
       webClient.setJavaScriptErrorListener(new JavaScriptErrorListener() {
 
         @Override
-        public void loadScriptError(InteractivePage htmlPage, URL scriptUrl,
+        public void loadScriptError(HtmlPage htmlPage, URL scriptUrl,
             Exception exception) {
             treeLogger.log(TreeLogger.ERROR,
               "Load Script Error: " + exception, exception);
         }
 
         @Override
-        public void malformedScriptURL(InteractivePage htmlPage, String url,
+        public void malformedScriptURL(HtmlPage htmlPage, String url,
             MalformedURLException malformedURLException) {
           treeLogger.log(TreeLogger.ERROR,
               "Malformed Script URL: " + malformedURLException.getLocalizedMessage());
         }
 
         @Override
-        public void scriptException(InteractivePage htmlPage,
+        public void scriptException(HtmlPage htmlPage,
             ScriptException scriptException) {
           treeLogger.log(TreeLogger.DEBUG,
               "Script Exception: " + scriptException.getLocalizedMessage() +
@@ -138,7 +129,7 @@ public class RunStyleHtmlUnit extends RunStyle {
         }
 
         @Override
-        public void timeoutError(InteractivePage htmlPage, long allowedTime,
+        public void timeoutError(HtmlPage htmlPage, long allowedTime,
             long executionTime) {
           treeLogger.log(TreeLogger.ERROR,
               "Script Timeout Error " + executionTime + " > " + allowedTime);
@@ -170,9 +161,6 @@ public class RunStyleHtmlUnit extends RunStyle {
         JavaScriptEngine hostedEngine = new HostedJavaScriptEngine(webClient,
             treeLogger);
         webClient.setJavaScriptEngine(hostedEngine);
-      } else {
-        JavaScriptEngine webEngine = new WebJavaScriptEngine(webClient);
-        webClient.setJavaScriptEngine(webEngine);
       }
       if (System.getProperty("gwt.htmlunit.debug") != null) {
         WebClientUtils.attachVisualDebugger(webClient);
@@ -199,84 +187,9 @@ public class RunStyleHtmlUnit extends RunStyle {
     public void initialize(WebWindow webWindow) {
       // Hook in the hosted-mode plugin after initializing the JS engine.
       super.initialize(webWindow);
-      Window window = (Window) webWindow.getScriptableObject();
+      Window window = (Window) webWindow.getScriptObject();
       window.defineProperty("__gwt_HostedModePlugin",
           new HostedModePluginObject(this, logger), ScriptableObject.READONLY);
-    }
-  }
-
-  /**
-   * JavaScriptEngine subclass that fixes a bug when calling {@code window.onerror}.
-   * Make sure to remove when updating HtmlUnit.
-   *
-   * @see <a href="https://sourceforge.net/p/htmlunit/bugs/1924/">HtmlUnit bug #1924</a>
-   */
-  private static class WebJavaScriptEngine extends JavaScriptEngine {
-    private static final Log LOG = LogFactory.getLog(JavaScriptEngine.class);
-
-    public WebJavaScriptEngine(WebClient webClient) {
-      super(webClient);
-    }
-
-    @Override
-    protected void handleJavaScriptException(ScriptException scriptException,
-        boolean triggerOnError) {
-      // XXX(tbroyer): copied from JavaScriptEngine to call below triggerOnError
-      // instead of Window's triggerOnError.
-
-      // Trigger window.onerror, if it has been set.
-      final InteractivePage page = scriptException.getPage();
-      if (triggerOnError && page != null) {
-        final WebWindow window = page.getEnclosingWindow();
-        if (window != null) {
-          final Window w = (Window) window.getScriptableObject();
-          if (w != null) {
-            try {
-              triggerOnError(w, scriptException);
-            } catch (final Exception e) {
-              handleJavaScriptException(new ScriptException(page, e, null), false);
-            }
-          }
-        }
-      }
-      final JavaScriptErrorListener javaScriptErrorListener =
-          getWebClient().getJavaScriptErrorListener();
-      if (javaScriptErrorListener != null) {
-        javaScriptErrorListener.scriptException(page, scriptException);
-      }
-      // Throw a Java exception if the user wants us to.
-      if (getWebClient().getOptions().isThrowExceptionOnScriptError()) {
-        throw scriptException;
-      }
-      // Log the error; ScriptException instances provide good debug info.
-      LOG.info("Caught script exception", scriptException);
-    }
-
-    private void triggerOnError(Window w, ScriptException e) {
-      // XXX(tbroyer): copied from HtmlUnit's javascript.host.Window
-      // with fix unwrapping the JS exception before passing it back to JS.
-      final Object o = w.getOnerror();
-      if (o instanceof Function) {
-        final Function f = (Function) o;
-        final String msg = e.getMessage();
-        final String url = e.getPage().getUrl().toExternalForm();
-        final int line = e.getFailingLineNumber();
-
-        Object[] args;
-        if (w.getBrowserVersion().hasFeature(JS_WINDOW_ONERROR_COLUMN_ERROR_ARGUMENT)) {
-          final int column = e.getFailingColumnNumber();
-
-          Object jsError = null;
-          if (e.getCause() instanceof JavaScriptException) {
-            jsError = ((JavaScriptException) e.getCause()).getValue();
-          }
-
-          args = new Object[] {msg, url, Integer.valueOf(line), Integer.valueOf(column), jsError};
-        } else {
-          args = new Object[] {msg, url, Integer.valueOf(line)};
-        }
-        f.call(Context.getCurrentContext(), w, w, args);
-      }
     }
   }
 
@@ -284,12 +197,11 @@ public class RunStyleHtmlUnit extends RunStyle {
   private static final Map<BrowserVersion, String> USER_AGENT_MAP  = Maps.newHashMap();
 
   static {
-    // “Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36 Edge/12.0″
-    addBrowser(BrowserVersion.EDGE, "safari");
-    addBrowser(BrowserVersion.FIREFOX_38, "gecko1_8");
+    addBrowser(BrowserVersion.FIREFOX_17, "gecko1_8");
     addBrowser(BrowserVersion.CHROME, "safari");
     addBrowser(BrowserVersion.INTERNET_EXPLORER_8, "ie8");
-    addBrowser(BrowserVersion.INTERNET_EXPLORER_11, "gecko1_8");
+    addBrowser(BrowserVersion.INTERNET_EXPLORER_9, "ie9");
+    addBrowser(BrowserVersion.INTERNET_EXPLORER_10, "ie10");
   }
 
   private static void addBrowser(BrowserVersion browser, String userAgent) {
@@ -325,8 +237,8 @@ public class RunStyleHtmlUnit extends RunStyle {
   @Override
   public int initialize(String args) {
     if (args == null || args.length() == 0) {
-      // If no browsers specified, default to Firefox 38.
-      args = "FF38";
+      // If no browsers specified, default to Firefox 17.
+      args = "FF17";
     }
     Set<BrowserVersion> browserSet = new HashSet<BrowserVersion>();
     Set<String> userAgentSet = new HashSet<String>();

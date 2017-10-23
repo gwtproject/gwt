@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dev.jjs.test;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.dev.jjs.test.overrides.package1.Caller;
 import com.google.gwt.dev.jjs.test.overrides.package1.ClassExposingM;
 import com.google.gwt.dev.jjs.test.overrides.package1.SomeParent;
@@ -35,6 +37,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.util.stream.Collectors;
 import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -454,5 +457,60 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
     assertTrue(newArrayThroughCtorReference() instanceof NativeArray);
     assertTrue(Double.isNaN(getNan()));
     assertTrue(isNan(Double.NaN));
+  }
+
+  interface SingleJsoImplA {
+    String getAData();
+
+    List<SingleJsoImplB> getListOfB();
+  }
+
+  interface SingleJsoImplB {
+    String getBData();
+  }
+
+  public static final class AOverlay extends JavaScriptObject implements SingleJsoImplA {
+    protected AOverlay() {}
+
+    @Override
+    public native String getAData()
+        /*-{ return this.data; }-*/;
+
+    @Override
+    public native List<SingleJsoImplB> getListOfB()
+        /*-{ return @java.util.Arrays::asList([Ljava/lang/Object;)(this.listOfb); }-*/;
+  }
+
+  public static final class BOverlay extends JavaScriptObject implements SingleJsoImplB {
+    protected BOverlay() {}
+
+    @Override
+    public native String getBData()
+        /*-{ return this.data; }-*/;
+  }
+
+  private static SingleJsoImplA createA() {
+    return JsonUtils.safeEval(
+        "{\"data\":\"a value\",\"listOfb\":[{\"data\":\"b1\"},{\"data\":\"b2\"}]}");
+  }
+
+  // Regression for issue #9558
+  public void testJSOLivenessSingleImplErasure() {
+    SingleJsoImplA a = createA();
+    String result = a.getListOfB().stream()
+        .map(SingleJsoImplB::getBData).collect(Collectors.joining(","));
+    assertEquals("b1,b2", result);
+    result = a.getListOfB().stream()
+        .map(b -> b.getBData()).collect(Collectors.joining(","));
+    assertEquals("b1,b2", result);
+  }
+
+  public void testLambdaErasureCasts() {
+    List list = new ArrayList<String>();
+    list.add("2");
+    try {
+      ((List<Integer>) list).stream().map(n -> n.intValue() == 2).findAny();
+    } catch (ClassCastException expected) {
+    }
   }
 }

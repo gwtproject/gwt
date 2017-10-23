@@ -1299,15 +1299,21 @@ public class GwtAstBuilder {
 
       // and add any locals that were storing captured outer variables as arguments to the call
       // first
+      int samArg = 0;
       for (JField localField : locals) {
-        samCall.addArg(new JFieldRef(info, new JThisRef(info, innerLambdaClass),
-            localField, innerLambdaClass));
+        JType samArgumentType = lambdaMethod.getParams().get(samArg).getType();
+        JExpression capture = new JFieldRef(info, new JThisRef(info, innerLambdaClass),
+            localField, innerLambdaClass);
+        samCall.addArg(boxOrUnboxExpression(capture, samArgumentType));
+        samArg++;
       }
 
       // and now we propagate the rest of the actual interface method parameters on the end
       // (e.g. ClickEvent e)
       for (JParameter param : samMethod.getParams()) {
-        samCall.addArg(param.makeRef(info));
+        JType samArgumentType = lambdaMethod.getParams().get(samArg).getType();
+        samCall.addArg(boxOrUnboxExpression(param.makeRef(info), samArgumentType));
+        samArg++;
       }
 
       // we either add a return statement, or don't, depending on what the interface wants
@@ -2014,6 +2020,13 @@ public class GwtAstBuilder {
         return expr;
       }
       return new JCastOperation(expr.getSourceInfo(), typeMap.get(castToType), expr);
+    }
+
+    private JExpression boxOrUnboxExpression(JExpression expr, JType toType) {
+      if (expr.getType() == toType) {
+        return expr;
+      }
+      return new JCastOperation(expr.getSourceInfo(), toType, expr);
     }
 
     @Override

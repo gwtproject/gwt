@@ -1931,5 +1931,62 @@ public class Java8Test extends GWTTestCase {
     java.util.function.Function<String[], String> function = Java8Test::first;
     assertEquals("Hello", function.apply(new String[] {"Hello", "GoodBye"}));
   }
+
+  interface SingleJsoImplA {
+    String getAData();
+
+    List<SingleJsoImplB> getListOfB();
+  }
+
+  interface SingleJsoImplB {
+    String getBData();
+  }
+
+  private static final class AOverlay extends JavaScriptObject implements SingleJsoImplA {
+    protected AOverlay() { }
+
+    @Override
+    public native String getAData()
+        /*-{ return this.data; }-*/;
+
+    @Override
+    public native List<SingleJsoImplB> getListOfB()
+        /*-{ return @java.util.Arrays::asList([Ljava/lang/Object;)(this.listOfb); }-*/;
+  }
+
+  private static final class BOverlay extends JavaScriptObject implements SingleJsoImplB {
+    protected BOverlay() { }
+
+    @Override
+    public native String getBData()
+        /*-{ return this.data; }-*/;
+  }
+
+  private static SingleJsoImplA createA() {
+    return JsonUtils.safeEval(
+        "{\"data\":\"a value\",\"listOfb\":[{\"data\":\"b1\"},{\"data\":\"b2\"}]}");
+  }
+
+  // Regression for issue #9558
+  public void testJSOLivenessSingleImplErasure() {
+    SingleJsoImplA a = createA();
+    String result = a.getListOfB().stream()
+        .map(SingleJsoImplB::getBData).collect(Collectors.joining(","));
+    assertEquals("b1,b2", result);
+    result = a.getListOfB().stream()
+        .map(b -> b.getBData()).collect(Collectors.joining(","));
+    assertEquals("b1,b2", result);
+  }
+
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public void testLambdaErasureCasts() {
+    List list = new ArrayList<String>();
+    list.add("2");
+    try {
+      ((List<Integer>) list).stream().map(n -> n.intValue() == 2).findAny();
+      fail("Should have thrown.");
+    } catch (ClassCastException expected) {
+    }
+  }
 }
 

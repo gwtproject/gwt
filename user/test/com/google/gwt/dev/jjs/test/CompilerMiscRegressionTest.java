@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dev.jjs.test;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.dev.jjs.test.overrides.package1.Caller;
 import com.google.gwt.dev.jjs.test.overrides.package1.ClassExposingM;
 import com.google.gwt.dev.jjs.test.overrides.package1.SomeParent;
@@ -34,6 +36,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import java.util.stream.Collectors;
 
 import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsMethod;

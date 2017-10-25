@@ -19,6 +19,7 @@ import com.google.gwt.core.ext.ServletContainer;
 import com.google.gwt.core.ext.ServletContainerLauncher;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.dev.JreUtil;
 import com.google.gwt.dev.util.InstalledHelpInfo;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.collect.Iterators;
@@ -719,7 +720,9 @@ public class JettyLauncher extends ServletContainerLauncher {
     Log.setLog(new JettyTreeLogger(branch));
 
     // Force load some JRE singletons that can pin the classloader.
-    jreLeakPrevention(logger);
+    if (!JreUtil.isJDK9OrHigher()) {
+      jre8LeakPrevention(logger);
+    }
 
     // Turn off XML validation.
     System.setProperty("org.eclipse.jetty.xml.XmlParser.Validating", "false");
@@ -881,8 +884,10 @@ public class JettyLauncher extends ServletContainerLauncher {
    *
    * This product includes software developed by The Apache Software Foundation
    * (http://www.apache.org/).
+   * 
+   * Fixed in Java 9 onwards (from early access build 130)
    */
-  private void jreLeakPrevention(TreeLogger logger) {
+  private void jre8LeakPrevention(TreeLogger logger) {
     // Trigger a call to sun.awt.AppContext.getAppContext(). This will
     // pin the common class loader in memory but that shouldn't be an
     // issue.
@@ -897,6 +902,7 @@ public class JettyLauncher extends ServletContainerLauncher {
      */
     try {
       Class<?> clazz = Class.forName("sun.misc.GC");
+
       Method method = clazz.getDeclaredMethod("requestLatency",
           new Class[]{long.class});
       method.invoke(null, Long.valueOf(3600000));

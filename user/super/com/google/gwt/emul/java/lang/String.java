@@ -205,9 +205,8 @@ public final class String implements Comparable<String>, CharSequence,
   private static String translateReplaceString(String replaceStr) {
     int pos = 0;
     while (0 <= (pos = replaceStr.indexOf("\\", pos))) {
-      if (replaceStr.charAt(pos + 1) == '$') {
-        replaceStr = replaceStr.substring(0, pos) + "$"
-            + replaceStr.substring(++pos);
+      if (replaceStr.asNativeString().charCodeAt(pos + 1) == '$') {
+        replaceStr = replaceStr.substring(0, pos) + "$" + replaceStr.substring(++pos);
       } else {
         replaceStr = replaceStr.substring(0, pos) + replaceStr.substring(++pos);
       }
@@ -451,7 +450,7 @@ public final class String implements Comparable<String>, CharSequence,
 
   private void getChars0(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
     while (srcBegin < srcEnd) {
-      dst[dstBegin++] = charAt(srcBegin++);
+      dst[dstBegin++] = asNativeString().charCodeAt(srcBegin++);
     }
   }
 
@@ -741,11 +740,11 @@ public final class String implements Comparable<String>, CharSequence,
   public String trim() {
     int length = length();
     int start = 0;
-    while (start < length && charAt(start) <= ' ') {
+    while (start < length && asNativeString().charCodeAt(start) <= ' ') {
       start++;
     }
     int end = length;
-    while (end > start && charAt(end - 1) <= ' ') {
+    while (end > start && asNativeString().charCodeAt(end - 1) <= ' ') {
       end--;
     }
     return start > 0 || end < length ? substring(start, end) : this;

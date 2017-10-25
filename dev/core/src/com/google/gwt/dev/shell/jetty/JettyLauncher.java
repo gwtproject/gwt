@@ -901,7 +901,14 @@ public class JettyLauncher extends ServletContainerLauncher {
           new Class[]{long.class});
       method.invoke(null, Long.valueOf(3600000));
     } catch (ClassNotFoundException e) {
-      logger.log(TreeLogger.ERROR, "jreLeakPrevention.gcDaemonFail", e);
+      /*
+       * We catch this because JDK9+ moved this class. This is the same like jetty do.
+       *
+       * see: https://github.com/eclipse/jetty.project/blob/
+       * 71d5fcf246034dce91cd642d35cdbaace9806329/jetty-util/src/main/java/
+       * org/eclipse/jetty/util/preventers/GCThreadLeakPreventer.java
+       */
+      TreeLogger.NULL.log(TreeLogger.ERROR, "jreLeakPrevention.gcDaemonFail", e);
     } catch (SecurityException e) {
       logger.log(TreeLogger.ERROR, "jreLeakPrevention.gcDaemonFail", e);
     } catch (NoSuchMethodException e) {

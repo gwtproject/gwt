@@ -42,6 +42,10 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.util.component.AbstractLifeCycle;
 import org.eclipse.jetty.util.log.Log;
 import org.eclipse.jetty.util.log.Logger;
+import org.eclipse.jetty.util.preventers.AppContextLeakPreventer;
+import org.eclipse.jetty.util.preventers.DOMLeakPreventer;
+import org.eclipse.jetty.util.preventers.GCThreadLeakPreventer;
+import org.eclipse.jetty.util.preventers.SecurityProviderLeakPreventer;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.webapp.ClasspathPattern;
 import org.eclipse.jetty.webapp.Configuration;
@@ -59,10 +63,6 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.imageio.ImageIO;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * A {@link ServletContainerLauncher} for an embedded Jetty server.
@@ -744,6 +744,7 @@ public class JettyLauncher extends ServletContainerLauncher {
     ServerConnector connector = getConnector(server, logger);
     setupConnector(connector, bindAddress, port);
     server.addConnector(connector);
+    addPreventers(server);
 
     Configuration.ClassList cl = Configuration.ClassList.setServerDefault(server);
     try {
@@ -859,6 +860,37 @@ public class JettyLauncher extends ServletContainerLauncher {
      return config;
   }
 
+  private void addPreventers(Server server) {
+    // Trigger a call to sun.awt.AppContext.getAppContext(). This will
+    // pin the common class loader in memory but that shouldn't be an
+    // issue.
+    server.addBean(new AppContextLeakPreventer());
+
+    /*
+     * Several components end up calling: sun.misc.GC.requestLatency(long)
+     *
+     * Those libraries / components known to trigger memory leaks due to 
+     * eventual calls to requestLatency(long) are:
+     * - javax.management.remote.rmi.RMIConnectorServer.start()
+     */
+    server.addBean(new GCThreadLeakPreventer());
+
+    /*
+     * Creating a MessageDigest during web application startup initializes the 
+     * Java Cryptography Architecture. Under certain conditions this starts a 
+     * Token poller thread with TCCL equal to the web application class loader.
+     *
+     * Instead we initialize JCA right now.
+     */
+    server.addBean(new SecurityProviderLeakPreventer());
+
+    /*
+     * Haven't got to the root of what is going on with this leak but if a web app is the first to
+     * make the calls below the web application class loader will be pinned in memory.
+     */
+    server.addBean(new DOMLeakPreventer());
+  }
+
   private void checkStartParams(TreeLogger logger, int port, File appRootDir) {
     if (logger == null) {
       throw new NullPointerException("logger cannot be null");
@@ -899,37 +931,6 @@ public class JettyLauncher extends ServletContainerLauncher {
    * (http://www.apache.org/).
    */
   private void jreLeakPrevention(TreeLogger logger) {
-    // Trigger a call to sun.awt.AppContext.getAppContext(). This will
-    // pin the common class loader in memory but that shouldn't be an
-    // issue.
-    ImageIO.getCacheDirectory();
-
-    /*
-     * Several components end up calling: sun.misc.GC.requestLatency(long)
-     *
-     * Those libraries / components known to trigger memory leaks due to
-     * eventual calls to requestLatency(long) are: -
-     * javax.management.remote.rmi.RMIConnectorServer.start()
-     */
-    try {
-      Class<?> clazz = Class.forName("sun.misc.GC");
-      Method method = clazz.getDeclaredMethod("requestLatency",
-          new Class[]{long.class});
-      method.invoke(null, Long.valueOf(3600000));
-    } catch (ClassNotFoundException e) {
-      logger.log(TreeLogger.ERROR, "jreLeakPrevention.gcDaemonFail", e);
-    } catch (SecurityException e) {
-      logger.log(TreeLogger.ERROR, "jreLeakPrevention.gcDaemonFail", e);
-    } catch (NoSuchMethodException e) {
-      logger.log(TreeLogger.ERROR, "jreLeakPrevention.gcDaemonFail", e);
-    } catch (IllegalArgumentException e) {
-      logger.log(TreeLogger.ERROR, "jreLeakPrevention.gcDaemonFail", e);
-    } catch (IllegalAccessException e) {
-      logger.log(TreeLogger.ERROR, "jreLeakPrevention.gcDaemonFail", e);
-    } catch (InvocationTargetException e) {
-      logger.log(TreeLogger.ERROR, "jreLeakPrevention.gcDaemonFail", e);
-    }
-
     /*
      * Calling getPolicy retains a static reference to the context class loader.
      */
@@ -954,15 +955,6 @@ public class JettyLauncher extends ServletContainerLauncher {
     }
 
     /*
-     * Creating a MessageDigest during web application startup initializes the
-     * Java Cryptography Architecture. Under certain conditions this starts a
-     * Token poller thread with TCCL equal to the web application class loader.
-     *
-     * Instead we initialize JCA right now.
-     */
-    java.security.Security.getProviders();
-
-    /*
      * Several components end up opening JarURLConnections without first
      * disabling caching. This effectively locks the file. Whilst more
      * noticeable and harder to ignore on Windows, it affects all operating
@@ -983,18 +975,6 @@ public class JettyLauncher extends ServletContainerLauncher {
       logger.log(TreeLogger.ERROR, "jreLeakPrevention.jarUrlConnCacheFail", e);
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "jreLeakPrevention.jarUrlConnCacheFail", e);
-    }
-
-    /*
-     * Haven't got to the root of what is going on with this leak but if a web
-     * app is the first to make the calls below the web application class loader
-     * will be pinned in memory.
-     */
-    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    try {
-      factory.newDocumentBuilder();
-    } catch (ParserConfigurationException e) {
-      logger.log(TreeLogger.ERROR, "jreLeakPrevention.xmlParseFail", e);
     }
   }
 }

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1459fa59_abe4fcc8",
+        "filename": "dev/core/src/com/google/gwt/dev/JreUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2017-10-26T13:16:48Z",
+      "side": 1,
+      "message": "whitespace nit, and two lines down",
+      "revId": "3c280e2ccde9bbf594e339421560cd6d2f6df2c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74ee8f94_a9ca4a5a",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/jetty/JettyLauncher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 887,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2017-10-26T13:16:48Z",
+      "side": 1,
+      "message": "whitespace nit",
+      "revId": "3c280e2ccde9bbf594e339421560cd6d2f6df2c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32e6f188_04c4be4e",
+        "filename": "dev/core/test/com/google/gwt/dev/JreUtilTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2017-10-26T13:16:48Z",
+      "side": 1,
+      "message": "It has been a while, but shouldn\u0027t this be added to a test suite?",
+      "revId": "3c280e2ccde9bbf594e339421560cd6d2f6df2c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

@@ -64,7 +64,9 @@ public class ArgHandlerDraftCompile extends ArgHandlerFlag {
     clusterSimilarFunctionsOption.setClusterSimilarFunctions(!value);
     inlineLiteralParametersOption.setInlineLiteralParameters(!value);
     namespaceOption.setNamespace(JsNamespaceOption.PACKAGE);
-    optimizeDataflowOption.setOptimizeDataflow(!value);
+    if (value) {
+      optimizeDataflowOption.setOptimizeDataflow(false);
+    }
     ordinalizeEnumsOption.setOrdinalizeEnums(!value);
     removeDuplicateFunctionsOption.setRemoveDuplicateFunctions(!value);
 

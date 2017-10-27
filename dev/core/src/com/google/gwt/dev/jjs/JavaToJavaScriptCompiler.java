@@ -1447,6 +1447,8 @@ public final class JavaToJavaScriptCompiler {
     }
 
     if (options.shouldOptimizeDataflow()) {
+      logger.log(TreeLogger.Type.WARN,
+          "Unsafe dataflow optimization enabled, diable with -XdisableOptimizeDataflow.");
       // Just run it once, because it is very time consuming
       allOptimizerStats.add(DataflowOptimizer.exec(jprogram));
     }

@@ -40,7 +40,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   private boolean jsonSoycEnabled = false;
   private JsNamespaceOption namespace = JsNamespaceOption.NONE;
   private int optimizationLevel = OptionOptimize.OPTIMIZE_LEVEL_DEFAULT;
-  private boolean optimizeDataflow = true;
+  private boolean optimizeDataflow = false;
   private boolean ordinalizeEnums = true;
   private JsOutputOption output = JsOutputOption.OBFUSCATED;
   private boolean removeDuplicateFunctions = true;

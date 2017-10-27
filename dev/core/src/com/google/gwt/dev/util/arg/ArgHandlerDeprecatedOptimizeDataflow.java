@@ -20,11 +20,11 @@ import com.google.gwt.util.tools.ArgHandlerFlag;
 /**
  * Analyzes and optimizes dataflow.
  */
-public final class ArgHandlerDisableOptimizeDataflow extends ArgHandlerFlag {
+public final class ArgHandlerDeprecatedOptimizeDataflow extends ArgHandlerFlag {
 
   private final OptionOptimizeDataflow option;
 
-  public ArgHandlerDisableOptimizeDataflow(OptionOptimizeDataflow option) {
+  public ArgHandlerDeprecatedOptimizeDataflow(OptionOptimizeDataflow option) {
     this.option = option;
 
     addTagValue("-XdisableOptimizeDataflow", false);

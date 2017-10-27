@@ -107,7 +107,7 @@ public class HostedModeTest extends ArgProcessorTestBase {
     assertFalse(options.isEnableAssertions());
     assertTrue(options.shouldClusterSimilarFunctions());
     assertTrue(options.shouldInlineLiteralParameters());
-    assertTrue(options.shouldOptimizeDataflow());
+    assertFalse(options.shouldOptimizeDataflow());
     assertTrue(options.shouldOrdinalizeEnums());
     assertTrue(options.shouldRemoveDuplicateFunctions());
 

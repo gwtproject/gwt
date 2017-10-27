@@ -885,7 +885,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     assertTrue(options.isEnableAssertions());
     assertTrue(options.shouldClusterSimilarFunctions());
     assertTrue(options.shouldInlineLiteralParameters());
-    assertTrue(options.shouldOptimizeDataflow());
+    assertFalse(options.shouldOptimizeDataflow());
     assertTrue(options.shouldOrdinalizeEnums());
     assertTrue(options.shouldRemoveDuplicateFunctions());
     assertTrue(options.isIncrementalCompileEnabled());
@@ -914,7 +914,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     assertFalse(options.isEnableAssertions());
     assertTrue(options.shouldClusterSimilarFunctions());
     assertTrue(options.shouldInlineLiteralParameters());
-    assertTrue(options.shouldOptimizeDataflow());
+    assertFalse(options.shouldOptimizeDataflow());
     assertTrue(options.shouldOrdinalizeEnums());
     assertTrue(options.shouldRemoveDuplicateFunctions());
     assertFalse(options.isIncrementalCompileEnabled());

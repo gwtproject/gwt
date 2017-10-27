@@ -39,7 +39,7 @@ public class PrecompileTaskArgProcessorTest extends TestCase {
     // Set a bunch of boolean flags using old-style tags.
     precompileTaskArgProcessor.processArgs("-workDir", "/tmp", "-XcompilerMetrics",
         "-XdisableClassMetadata", "-XdisableClusterSimilarFunctions",
-        "-XdisableInlineLiteralParameters", "-XdisableOptimizeDataflow", "-XdisableOrdinalizeEnums",
+        "-XdisableInlineLiteralParameters", "-XoptimizeDataflow", "-XdisableOrdinalizeEnums",
         "-XdisableRemoveDuplicateFunctions", "-XdisableRunAsync", "-XdisableSoycHtml",
         "-XdisableUpdateCheck", "-ea", "-soyc", "-XsoycDetailed",
         "-XenableJsonSoyc", "-strict", "com.google.gwt.dev.DevModule");

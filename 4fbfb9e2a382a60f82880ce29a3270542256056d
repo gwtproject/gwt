@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd98443f_8cba1c38",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-10-28T00:07:00Z",
+      "side": 1,
+      "message": "[error] \u0027javaemul.internal.annotations.DoNotInline\u0027 should be separated from previous imports.",
+      "revId": "4fbfb9e2a382a60f82880ce29a3270542256056d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "086d2bcc_fd0930be",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-10-28T00:07:00Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "4fbfb9e2a382a60f82880ce29a3270542256056d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9df8c75_b5a1f5fd",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-10-28T00:07:00Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "4fbfb9e2a382a60f82880ce29a3270542256056d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b8f83737_2757a283",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-10-28T00:07:00Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "4fbfb9e2a382a60f82880ce29a3270542256056d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6474569_cd741299",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-10-28T00:07:00Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "4fbfb9e2a382a60f82880ce29a3270542256056d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

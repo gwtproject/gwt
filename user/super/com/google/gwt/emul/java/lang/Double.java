@@ -103,7 +103,7 @@ public final class Double extends Number implements Comparable<Double> {
       return 1;
     }
     if (x == y) {
-      return 0;
+      return x == 0 ? Double.compare(1 / x, 1 / y) : 0;
     }
 
     if (isNaN(x)) {

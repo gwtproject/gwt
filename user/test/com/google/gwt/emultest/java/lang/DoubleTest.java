@@ -89,6 +89,10 @@ public class DoubleTest extends GWTTestCase {
     assertTrue(Double.compare(3.0, 500.0) < 0);
     assertTrue(Double.compare(500.0, 3.0) > 0);
     assertTrue(Double.compare(500.0, 500.0) == 0);
+    assertTrue(Double.compare(0.0, -0.0) > 0);
+    assertTrue(Double.compare(-0.0, 0.0) < 0);
+    assertTrue(Double.compare(0.0, 0.0) == 0);
+    assertTrue(Double.compare(-0.0, -0.0) == 0);
   }
 
   public void testNPE() {

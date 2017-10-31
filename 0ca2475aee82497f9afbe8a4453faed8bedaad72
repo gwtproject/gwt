@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "80f1fbb2_538addcf",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-10-31T17:03:18Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.core.client.JavaScriptObject.",
+      "revId": "0ca2475aee82497f9afbe8a4453faed8bedaad72",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ec925003_13b37dc8",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-10-31T17:03:18Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.core.client.JsonUtils.",
+      "revId": "0ca2475aee82497f9afbe8a4453faed8bedaad72",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c6e7748_e54f8a0d",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-10-31T17:03:18Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.stream.Collectors.",
+      "revId": "0ca2475aee82497f9afbe8a4453faed8bedaad72",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

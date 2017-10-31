@@ -16,6 +16,24 @@
       "revId": "73a246fb687f42c50a6b6707569682013a39dc3a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6719f7be_0779a824",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/log/SwingLoggerPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2017-10-31T19:51:18Z",
+      "side": 1,
+      "message": "No idea.\nJust found out about \u0027Refine generification of javax.swing\u0027 and a lot of tickets about it, like this one: https://bugs.openjdk.java.net/browse/JDK-8054360\nI guess not all problems were considered to be fixed. TreeNode has more specialized return types in these methods but DefaultMutableTreeNode does not.",
+      "parentUuid": "3c8a19ec_30f5af64",
+      "revId": "73a246fb687f42c50a6b6707569682013a39dc3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c8a19ec_30f5af64",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/log/SwingLoggerPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-10-31T17:45:58Z",
+      "side": 1,
+      "message": "I\u0027m puzzled, how does that code change doesn\u0027t break earlier Java versions? Actually, javadoc shows a raw Enumeration in Java 8, so I don\u0027t quite understand why/how it compiled earlier…",
+      "revId": "73a246fb687f42c50a6b6707569682013a39dc3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

@@ -77,6 +77,13 @@ public abstract class StackTraceTestBase extends GWTTestCase {
       }
       StackTraceElement actualElement = trace[i];
       String methodName = actualElement == null ? "!MISSING!" : actualElement.getMethodName();
+
+      // Some new browsers (e.g. Chrome) adds "new" to frame if it was constructor call
+      String ctorFramePrefix = "new ";
+      if (methodName.startsWith(ctorFramePrefix)) {
+        methodName = methodName.substring(ctorFramePrefix.length());
+      }
+
       if (expectedMethodName.equals(methodName)) {
         i++;
         continue;

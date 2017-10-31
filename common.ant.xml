@@ -157,7 +157,7 @@
            nowarn="${javac.nowarn}" encoding="${javac.encoding}"
            includeantruntime="false" fork="${javac.fork}" compiler="${javac.compiler}">
       <compilerclasspath if:true="${isJava8}">
-        <pathelement location="${gwt.tools.lib}/errorprone/error_prone_ant-2.0.19.jar"/>
+        <pathelement location="${gwt.tools.lib}/errorprone/error_prone_ant-2.1.2.jar"/>
       </compilerclasspath>
     </javac>
   </presetdef>

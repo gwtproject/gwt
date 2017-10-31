@@ -62,7 +62,7 @@ public class DOMTest extends GWTTestCase {
 
   @Override
   public String getModuleName() {
-    return "com.google.gwt.user.UserTest";
+    return "com.google.gwt.user.DOM";
   }
 
   /**

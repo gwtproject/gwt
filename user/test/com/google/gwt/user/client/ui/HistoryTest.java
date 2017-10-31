@@ -53,7 +53,7 @@ public class HistoryTest extends GWTTestCase {
 
   @Override
   public String getModuleName() {
-    return "com.google.gwt.user.User";
+    return "com.google.gwt.user.History";
   }
 
   protected String getHistoryToken2() {

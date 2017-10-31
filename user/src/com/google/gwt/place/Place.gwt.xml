@@ -2,8 +2,8 @@
 <module>
   <inherits name='com.google.gwt.core.Core'/>
   <inherits name='com.google.gwt.event.Event'/>
-  <!-- For History and Window -->
-  <inherits name='com.google.gwt.user.DOM'/>
+  <inherits name='com.google.gwt.user.History'/>
+  <inherits name='com.google.gwt.user.Window'/>
 
   <source path="shared"/>
   <source path="impl"/>

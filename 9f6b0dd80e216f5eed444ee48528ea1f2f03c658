@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77e6cfd4_3e46ffe0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2004,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-10-31T00:49:23Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "9f6b0dd80e216f5eed444ee48528ea1f2f03c658",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c01e1ef9_e8a8c903",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2004,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-10-31T00:49:23Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027No one line javadoc comments\u0027.",
+      "revId": "9f6b0dd80e216f5eed444ee48528ea1f2f03c658",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e8db2f4_3e9c3a2a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2026,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-10-31T00:49:23Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "9f6b0dd80e216f5eed444ee48528ea1f2f03c658",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee665e3d_d312d979",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2026,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-10-31T00:49:23Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027No one line javadoc comments\u0027.",
+      "revId": "9f6b0dd80e216f5eed444ee48528ea1f2f03c658",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

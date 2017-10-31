@@ -67,7 +67,7 @@ public class WindowTest extends GWTTestCase {
 
   @Override
   public String getModuleName() {
-    return "com.google.gwt.user.User";
+    return "com.google.gwt.user.Window";
   }
 
   public void testLocation() {

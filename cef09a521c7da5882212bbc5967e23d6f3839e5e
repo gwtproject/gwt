@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43d687e4_cffe7e28",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-11-01T18:30:18Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.util.function.BiFunction\u0027 import.",
+      "revId": "cef09a521c7da5882212bbc5967e23d6f3839e5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

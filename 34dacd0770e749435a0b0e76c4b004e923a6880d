@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc336650_413f85d8",
+        "filename": "user/src/com/google/gwt/user/Window.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2017-11-01T21:45:35Z",
+      "side": 1,
+      "message": "Maybe evaluate if still needed? Used by WindowImplIE and the method using TextResource talks about IE6..",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 55
+      },
+      "revId": "34dacd0770e749435a0b0e76c4b004e923a6880d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

@@ -309,6 +309,7 @@ OfflineAudioCompletionEvent
 OfflineAudioContext
 Option
 OscillatorNode
+OverconstrainedError
 OverflowEvent
 PageTransitionEvent
 PasswordCredential
@@ -704,6 +705,7 @@ name
 navigator
 offscreenBuffering
 onabort
+onafterprint
 onanimationend
 onanimationiteration
 onanimationstart
@@ -712,6 +714,7 @@ onautocomplete
 onautocompleteerror
 onauxclick
 onbeforeinstallprompt
+onbeforeprint
 onbeforeunload
 onblur
 oncancel

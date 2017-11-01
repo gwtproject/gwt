@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b1920c29_97e00494",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1951,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-11-01T18:35:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4d50a2b_c52f5349",
+      "range": {
+        "startLine": 1950,
+        "startChar": 6,
+        "endLine": 1951,
+        "endChar": 0
+      },
+      "revId": "91818eecea4e6b4a66ce03b89f75f8e77c88c126",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84e30988_4a78ed4e",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 5
@@ -62,6 +86,48 @@
       "revId": "91818eecea4e6b4a66ce03b89f75f8e77c88c126",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bdbe8de_65a67c7c",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1954,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-11-01T18:35:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84e30988_4a78ed4e",
+      "range": {
+        "startLine": 1954,
+        "startChar": 46,
+        "endLine": 1954,
+        "endChar": 65
+      },
+      "revId": "91818eecea4e6b4a66ce03b89f75f8e77c88c126",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5dd244e4_156e5231",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1954,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-11-01T18:35:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "872c5b6b_9a256374",
+      "revId": "91818eecea4e6b4a66ce03b89f75f8e77c88c126",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

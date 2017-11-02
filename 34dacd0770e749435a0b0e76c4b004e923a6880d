@@ -22,6 +22,30 @@
       "revId": "34dacd0770e749435a0b0e76c4b004e923a6880d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afc26b81_382b0307",
+        "filename": "user/src/com/google/gwt/user/Window.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2017-11-02T00:46:13Z",
+      "side": 1,
+      "message": "Probably would be good to check, but given that someone added ie8, ie9, ie10 to the rebind rule below, I\u0027d imagine that the same bug still applies?\n\nThat said, would probably be good to un-JSNI/JS those, especially when this module is broken out and updated to be gwt3 compatible.\n\nI\u0027m inclined to leave it in this patch at least, and deal with that change, if we make it, in another patch.",
+      "parentUuid": "fc336650_413f85d8",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 55
+      },
+      "revId": "34dacd0770e749435a0b0e76c4b004e923a6880d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

@@ -46,6 +46,52 @@
       "revId": "34dacd0770e749435a0b0e76c4b004e923a6880d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78cfea42_d86235cc",
+        "filename": "user/src/com/google/gwt/user/Window.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-11-03T00:14:04Z",
+      "side": 1,
+      "message": "Introduce a Cookies.gwt.xml and (possibly) BaseListenerWrapper.gwt.xml modules? Not worth it?",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 47
+      },
+      "revId": "34dacd0770e749435a0b0e76c4b004e923a6880d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fc26477_87c317e0",
+        "filename": "user/src/com/google/gwt/user/Window.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2017-11-03T00:14:04Z",
+      "side": 1,
+      "message": "Use WindowImpl*.java?",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 50
+      },
+      "revId": "34dacd0770e749435a0b0e76c4b004e923a6880d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

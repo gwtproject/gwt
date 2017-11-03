@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "0eea39f8_13cc3bc1",
+        "filename": "user/src/com/google/gwt/user/Window.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2017-11-03T01:26:00Z",
+      "side": 1,
+      "message": "Probably true. Again, would prefer to hold off on this until at least another PR, but realistically I\u0027m betting it will wait until these modules get rebuilt without JSNI.",
+      "parentUuid": "916f4b33_9e21c797",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 55
+      },
+      "revId": "34dacd0770e749435a0b0e76c4b004e923a6880d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "78cfea42_d86235cc",
         "filename": "user/src/com/google/gwt/user/Window.gwt.xml",
         "patchSetId": 1
@@ -108,6 +132,30 @@
       "side": 1,
       "message": "Do note that I removed these from the other module - this is now the only module which references these.",
       "parentUuid": "78cfea42_d86235cc",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 47
+      },
+      "revId": "34dacd0770e749435a0b0e76c4b004e923a6880d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6dd39f95_8f3ff093",
+        "filename": "user/src/com/google/gwt/user/Window.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2017-11-03T01:26:00Z",
+      "side": 1,
+      "message": "In other words, they would be single class modules, and only referenced by this module.",
+      "parentUuid": "5dde59e7_3208f0f0",
       "range": {
         "startLine": 45,
         "startChar": 0,

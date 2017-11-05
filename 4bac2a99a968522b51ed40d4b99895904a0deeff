@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42120081_c506841f",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2017-11-05T20:07:11Z",
+      "side": 1,
+      "message": "This will make String.replace to not throw an exception when it should have.",
+      "range": {
+        "startLine": 208,
+        "startChar": 5,
+        "endLine": 208,
+        "endChar": 67
+      },
+      "revId": "4bac2a99a968522b51ed40d4b99895904a0deeff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

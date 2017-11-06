@@ -94,6 +94,30 @@
       "revId": "4bac2a99a968522b51ed40d4b99895904a0deeff",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfb7f9b0_621403ac",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-11-06T22:56:50Z",
+      "side": 1,
+      "message": "Nope. I told you the JDK throws an exception, I did not tell you which? Leaving the charAt() would throw an exception in this case, just not the right one :)\n\nIn general I think the change is OK, just add a comment in replaceAll/replaceFirst that it wont throw an exception when the pattern is invalid. We should probably handle this with internal preconditions and check whether the pattern is valid.",
+      "parentUuid": "842b4d8d_1ae248f9",
+      "range": {
+        "startLine": 208,
+        "startChar": 5,
+        "endLine": 208,
+        "endChar": 67
+      },
+      "revId": "4bac2a99a968522b51ed40d4b99895904a0deeff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

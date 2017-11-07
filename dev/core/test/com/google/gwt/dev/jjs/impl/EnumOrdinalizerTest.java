@@ -538,6 +538,24 @@ public class EnumOrdinalizerTest extends OptimizerTestBase {
     assertAllEnumOrdinalizedReferencesReplaced(result.getOptimizedProgram(), tracker);
   }
 
+  private void setupJsTypeEnum() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType public enum JsFruit {JSAPPLE, JSORANGE}");
+  }
+
+  public void testNotOrdinalizableJsTypeEnum()
+      throws UnableToCompleteException {
+    setupJsTypeEnum();
+    addSnippetClassDecl("public static JsFruit instanceFruit;");
+    Result result = optimize("void", "instanceFruit = JsFruit.JSAPPLE;");
+
+    EnumOrdinalizer.Tracker tracker = EnumOrdinalizer.getTracker();
+    assertTrue(tracker.isVisited("test.EntryPoint$JsFruit"));
+    assertFalse(tracker.isOrdinalized("test.EntryPoint$JsFruit"));
+    assertAllEnumOrdinalizedReferencesReplaced(result.getOptimizedProgram(), tracker);
+  }
+
   public void testNotOrdinalizableJsniFieldRef()
       throws UnableToCompleteException {
     setupFruitEnum();

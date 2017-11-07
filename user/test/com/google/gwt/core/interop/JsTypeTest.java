@@ -79,6 +79,30 @@ public class JsTypeTest extends GWTTestCase {
     assertEquals(10, concreteJsTypeSubclass.publicSubclassMethod());
   }
 
+  @JsType
+  enum JsTypeEnum {
+    JSVALUE0,
+    JSVALUE1;
+  }
+
+  public void testJsTypeEnum() {
+    JsTypeEnum value = JsTypeEnum.JSVALUE1;
+
+    assertEquals(value.ordinal(), ((TestAccessor) this).callJsTypeEmumOrdinalMethod(value));
+  }
+
+  // Obscure the call with an alias so that the call is not detected by EnumOrdinalizer.
+  @JsType(isNative = true)
+  private interface TestAccessor {
+    @JsMethod
+    int callJsTypeEmumOrdinalMethod(JsTypeEnum value);
+  }
+
+  @JsMethod
+  private int callJsTypeEmumOrdinalMethod(Object value) {
+    return callIntFunction(value, "ordinal");
+  }
+
   public void testConcreteJsTypeNoTypeTightenField() {
     // If we type-tighten, java side will see no calls and think that field could only AImpl1.
     ConcreteJsType concreteJsType = new ConcreteJsType();

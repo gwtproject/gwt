@@ -96,6 +96,54 @@
     },
     {
       "key": {
+        "uuid": "3c4e6e78_d5aee986",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-11-07T23:05:31Z",
+      "side": 1,
+      "message": "Enum class is JsType.",
+      "parentUuid": "385ec556_ebef54cd",
+      "range": {
+        "startLine": 467,
+        "startChar": 12,
+        "endLine": 467,
+        "endChar": 37
+      },
+      "revId": "8a789e044a5020cd95d760bd103805bc73805b48",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a8eef0a_dda442a8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-11-07T23:05:31Z",
+      "side": 1,
+      "message": "Enum\u0027s cannot be implemented externally nor extended. When something is not possible and checked, I think it causes confusion.",
+      "parentUuid": "566e5efe_550c6375",
+      "range": {
+        "startLine": 467,
+        "startChar": 43,
+        "endLine": 467,
+        "endChar": 73
+      },
+      "revId": "8a789e044a5020cd95d760bd103805bc73805b48",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a01f350_4e9547ae",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
         "patchSetId": 5

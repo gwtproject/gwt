@@ -463,6 +463,11 @@ public class EnumOrdinalizer {
       if (x == classLiteralHolderType) {
         return false;
       }
+
+      if (x.canBeReferencedExternally() || x.canBeImplementedExternally()) {
+        blackListIfEnum(x, x.getSourceInfo());
+      }
+
       return true;
     }
 

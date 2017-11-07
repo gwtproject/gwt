@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "566e5efe_550c6375",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-11-07T22:56:37Z",
+      "side": 1,
+      "message": "We don\u0027t have native @JsType enums but if one day we add them we need to skip them here, why don\u0027t you like canBeImplementedExternally(). It does make sense here even thought the scenario is currently disallowed.\n\nRemoved.",
+      "parentUuid": "a0f4a4f7_cc7d3224",
+      "range": {
+        "startLine": 467,
+        "startChar": 43,
+        "endLine": 467,
+        "endChar": 73
+      },
+      "revId": "8a789e044a5020cd95d760bd103805bc73805b48",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "385ec556_ebef54cd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-11-07T22:56:37Z",
+      "side": 1,
+      "message": "What is always true for enums? JEnumType inherit most of the behaviour from JClassType in particular canBeReferencedExternally and canBeImplementedExternally?",
+      "parentUuid": "66b8a903_1537aa0e",
+      "range": {
+        "startLine": 467,
+        "startChar": 12,
+        "endLine": 467,
+        "endChar": 37
+      },
+      "revId": "8a789e044a5020cd95d760bd103805bc73805b48",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a01f350_4e9547ae",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
         "patchSetId": 5
@@ -59,6 +107,30 @@
       "writtenOn": "2017-11-07T21:29:06Z",
       "side": 1,
       "message": "let\u0027s move it to endVisit.",
+      "range": {
+        "startLine": 467,
+        "startChar": 0,
+        "endLine": 469,
+        "endChar": 7
+      },
+      "revId": "8a789e044a5020cd95d760bd103805bc73805b48",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1043818c_4fb9a4e8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-11-07T22:56:37Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "3a01f350_4e9547ae",
       "range": {
         "startLine": 467,
         "startChar": 0,

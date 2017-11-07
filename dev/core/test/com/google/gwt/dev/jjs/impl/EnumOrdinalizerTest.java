@@ -538,6 +538,32 @@ public class EnumOrdinalizerTest extends OptimizerTestBase {
     assertAllEnumOrdinalizedReferencesReplaced(result.getOptimizedProgram(), tracker);
   }
 
+  public void testNotOrdinalizableJsTypeEnum()
+      throws UnableToCompleteException {
+    setupJsTypeEnums();
+    addSnippetClassDecl(
+        "public static JsFruit instanceFruit;",
+        "public static JsCustom instanceCustom;");
+    Result result = optimize("void",
+        "instanceFruit = JsFruit.JSAPPLE;",
+        "instanceCustom = JsCustom.VALUE1;");
+
+    EnumOrdinalizer.Tracker tracker = EnumOrdinalizer.getTracker();
+    assertTrue(tracker.isVisited("test.EntryPoint$JsFruit"));
+    assertFalse(tracker.isOrdinalized("test.EntryPoint$JsFruit"));
+
+    assertTrue(tracker.isVisited("test.EntryPoint$JsCustom"));
+    assertFalse(tracker.isOrdinalized("test.EntryPoint$JsCustom"));
+
+    assertAllEnumOrdinalizedReferencesReplaced(result.getOptimizedProgram(), tracker);
+  }
+
+  private void setupJsTypeEnums() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl("@JsType public enum JsFruit {JSAPPLE, JSORANGE}");
+    addSnippetClassDecl("@JsType public enum JsCustom {VALUE0, VALUE1 {} }");
+  }
+
   public void testNotOrdinalizableJsniFieldRef()
       throws UnableToCompleteException {
     setupFruitEnum();

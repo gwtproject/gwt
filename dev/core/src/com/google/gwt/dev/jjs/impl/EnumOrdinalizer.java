@@ -326,16 +326,17 @@ public class EnumOrdinalizer {
     @Override
     public void endVisit(JClassType x, Context ctx) {
       // keep track of all enum classes visited
-      JEnumType maybeEnum = x.isEnumOrSubclass();
-      if (maybeEnum == null) {
+      JEnumType enumClass = x.isEnumOrSubclass();
+      if (enumClass == null) {
         return;
       }
 
-      enumsVisited.add(maybeEnum);
+      enumsVisited.add(enumClass);
 
       // don't need to re-ordinalize a previously ordinalized enum
-      if (maybeEnum.isOrdinalized()) {
-        addToBlackList(maybeEnum, x.getSourceInfo());
+      if (enumClass.isOrdinalized()
+          || enumClass.canBeReferencedExternally()) {
+        addToBlackList(enumClass, x.getSourceInfo());
       }
     }
 

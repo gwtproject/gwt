@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b811649_c1332677",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/EnumOrdinalizerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-11-07T18:40:10Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "bab37a119748ff28f6ddfbb1f77856bb17fe95de",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

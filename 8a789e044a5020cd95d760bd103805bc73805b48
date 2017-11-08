@@ -216,6 +216,30 @@
     },
     {
       "key": {
+        "uuid": "728b45bc_6bcef19e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-11-08T23:45:11Z",
+      "side": 1,
+      "message": "canBeReferencedExternally is almost the same as isJsType, it is isJsType or has a declared member that is a JsMember. Modified the Enum base class used for test to show that enums are still being ordinalized.",
+      "parentUuid": "7f343b57_355a304b",
+      "range": {
+        "startLine": 467,
+        "startChar": 12,
+        "endLine": 467,
+        "endChar": 37
+      },
+      "revId": "8a789e044a5020cd95d760bd103805bc73805b48",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a01f350_4e9547ae",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
         "patchSetId": 5

@@ -192,6 +192,30 @@
     },
     {
       "key": {
+        "uuid": "7f343b57_355a304b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-11-08T20:16:39Z",
+      "side": 1,
+      "message": "What do you mean ack? This code make all enum ordinalization code garbage :)\nDid you forget to publish a commit?",
+      "parentUuid": "b121c96b_47a038fa",
+      "range": {
+        "startLine": 467,
+        "startChar": 12,
+        "endLine": 467,
+        "endChar": 37
+      },
+      "revId": "8a789e044a5020cd95d760bd103805bc73805b48",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a01f350_4e9547ae",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
         "patchSetId": 5

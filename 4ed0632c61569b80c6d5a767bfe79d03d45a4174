@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "9e370baf_51870680",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-11-09T20:08:06Z",
+      "side": 1,
+      "message": "pls add a test for enum causing subclasses.",
+      "parentUuid": "51418703_1890783d",
+      "revId": "4ed0632c61569b80c6d5a767bfe79d03d45a4174",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "81462276_5013d533",
         "filename": "user/test/com/google/gwt/core/interop/JsTypeTest.java",
         "patchSetId": 7

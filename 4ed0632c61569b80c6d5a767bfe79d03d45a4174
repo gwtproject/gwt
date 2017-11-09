@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "51418703_1890783d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-11-09T17:42:53Z",
+      "side": 1,
+      "message": "Not sure what you are asking. Each enum class is represented by its own JEnumType. Enum values (called JEnumField) are initialized to instances of this class, or anonymous innerclasses if they use the anonymous inner class syntax.",
+      "parentUuid": "73362d55_7766b4cd",
+      "revId": "4ed0632c61569b80c6d5a767bfe79d03d45a4174",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "81462276_5013d533",
         "filename": "user/test/com/google/gwt/core/interop/JsTypeTest.java",
         "patchSetId": 7
@@ -39,6 +57,30 @@
       "revId": "4ed0632c61569b80c6d5a767bfe79d03d45a4174",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2acaf6aa_6adeca19",
+        "filename": "user/test/com/google/gwt/core/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-11-09T17:42:53Z",
+      "side": 1,
+      "message": "The enum needs to be passed as parameter typed at the enum type. We need to make sure that the compiler does not see an expression of the enum type passed or cast to Enum or Object.\nIf we make the method callJsTypeEnumOrdinalMethod to receive the enum, the compiler will see it passed as Object to callIntFunction. The ordinalizer also bails out if a Jsni method has the enum type as a parameter (which would have been a more intuitive code).\n\nSo we need to define a native alias so that the call is done to a method with the right parameter type and that the compiler does not see the upcast..",
+      "parentUuid": "81462276_5013d533",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 88
+      },
+      "revId": "4ed0632c61569b80c6d5a767bfe79d03d45a4174",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

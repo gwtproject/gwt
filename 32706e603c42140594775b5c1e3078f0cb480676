@@ -16,6 +16,23 @@
       "revId": "32706e603c42140594775b5c1e3078f0cb480676",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e45055b4_4ba9d36b",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Thread.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-11-09T23:20:06Z",
+      "side": 1,
+      "message": "I think it is better to not have this class at all since when we introduce this, compile error messages that involve Thread will be more confusing. Also usually if you need interrupted you need more APIs as well.\nA lot of people survive fine without it, maybe JsCompiler can as well. Pls share with me th CL.",
+      "revId": "32706e603c42140594775b5c1e3078f0cb480676",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

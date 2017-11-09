@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73362d55_7766b4cd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-11-09T06:22:37Z",
+      "side": 1,
+      "message": "We don\u0027t get individual classes as different JClassType, right?",
+      "revId": "4ed0632c61569b80c6d5a767bfe79d03d45a4174",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81462276_5013d533",
+        "filename": "user/test/com/google/gwt/core/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-11-09T06:22:37Z",
+      "side": 1,
+      "message": "I didn\u0027t understand why we need this on top of callJsTypeEmumOrdinalMethod?",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 88
+      },
+      "revId": "4ed0632c61569b80c6d5a767bfe79d03d45a4174",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

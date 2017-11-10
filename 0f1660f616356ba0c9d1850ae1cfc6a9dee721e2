@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39a679f9_76b531e6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-11-10T07:48:25Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.util.Pair.",
+      "revId": "0f1660f616356ba0c9d1850ae1cfc6a9dee721e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74ddbfbe_a29bf4c7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-11-10T07:48:25Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.thirdparty.guava.common.collect.Maps.",
+      "revId": "0f1660f616356ba0c9d1850ae1cfc6a9dee721e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "227ccb38_655258ab",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-11-10T07:48:25Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.util.Iterator\u0027 import.",
+      "revId": "0f1660f616356ba0c9d1850ae1cfc6a9dee721e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74b44535_b3507d25",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-11-10T07:48:25Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.Map.",
+      "revId": "0f1660f616356ba0c9d1850ae1cfc6a9dee721e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78666f14_af0efe5e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-11-10T07:48:25Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 103).",
+      "revId": "0f1660f616356ba0c9d1850ae1cfc6a9dee721e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

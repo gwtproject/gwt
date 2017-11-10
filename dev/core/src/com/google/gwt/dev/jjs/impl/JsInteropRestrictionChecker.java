@@ -51,15 +51,16 @@ import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsParameter;
 import com.google.gwt.dev.js.ast.JsVisitor;
-import com.google.gwt.dev.util.Pair;
+import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
-import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.LinkedHashMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.Multimap;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 /**
  * Checks and throws errors for invalid JsInterop constructs.
@@ -216,8 +217,8 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
         getDescription(superPrimaryConsructor));
   }
 
-  private void checkMember(
-      JMember member, Map<String, JsMember> localNames, Map<String, JsMember> ownGlobalNames) {
+  private void checkMember(JMember member, Multimap<String, JMember> instanceMembersByJsName) {
+
     if (member.getEnclosingType().isJsNative()) {
       checkMemberOfNativeJsType(member);
     }
@@ -249,12 +250,12 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
 
     checkMemberQualifiedJsName(member);
 
-    if (isCheckedLocalName(member)) {
-      checkLocalName(localNames, member);
+    if (isInstanceJsMember(member)) {
+      checkInstanceNameConsistency(instanceMembersByJsName, member);
     }
 
-    if (isCheckedGlobalName(member)) {
-      checkGlobalName(ownGlobalNames, member);
+    if (isStaticJsMember(member)) {
+      checkStaticNameCollisions(member);
     }
   }
 
@@ -600,41 +601,77 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
     }
   }
 
-  private void checkLocalName(Map<String, JsMember> localNames, JMember member) {
-    Pair<JsMember, JsMember> oldAndNewJsMember = updateJsMembers(localNames, member);
-    JsMember oldJsMember = oldAndNewJsMember.left;
-    JsMember newJsMember = oldAndNewJsMember.right;
+  private void checkInstanceNameConsistency(
+      Multimap<String, JMember> instanceMembersByJsName, JMember member) {
+    checkOverrideConsistency(member);
 
-    checkNameConsistency(member);
-    checkJsPropertyConsistency(member, newJsMember);
-
-    if (oldJsMember == null || oldJsMember == newJsMember) {
+    if (member.isJsNative()) {
       return;
     }
 
-    if (oldJsMember.isJsNative() && newJsMember.isJsNative()) {
+    String name = member.getJsName();
+
+    Set<JMember> potentiallyCollidingMembers =
+        Sets.newLinkedHashSet(instanceMembersByJsName.get(name));
+
+    // Remove self.
+    boolean removed = potentiallyCollidingMembers.remove(member);
+    Preconditions.checkState(removed);
+
+    // Remove native members as they don't cause collisions.
+    Iterables.removeIf(potentiallyCollidingMembers,
+        new Predicate<JMember>() {
+          @Override
+          public boolean apply(JMember member) {
+            return member.isJsNative();
+          }
+        });
+
+    if (potentiallyCollidingMembers.isEmpty()) {
+      // No colliding members.
       return;
     }
 
-    logError(member, "%s and %s cannot both use the same JavaScript name '%s'.",
-        getMemberDescription(member), getMemberDescription(oldJsMember.member), member.getJsName());
+    JMember potentiallyCollidingMember = potentiallyCollidingMembers.iterator().next();
+    if (potentiallyCollidingMembers.size() == 1
+         && isJsPropertyAccessorPair(member, potentiallyCollidingMember)) {
+      if (!checkPropertyConsistency(member, potentiallyCollidingMember)) {
+        // Remove colliding member to avoid duplicate error messages.
+        instanceMembersByJsName.get(name).remove(member);
+      }
+      return;
+    }
+
+    logError(member,
+        "%s and %s cannot both use the same JavaScript name '%s'.",
+        getMemberDescription(member),
+        getMemberDescription(potentiallyCollidingMember),
+        member.getJsName());
+
+    // Remove colliding member avoid duplicate error messages.
+    instanceMembersByJsName.get(name).remove(member);
   }
 
-  private void checkGlobalName(Map<String, JsMember> ownGlobalNames, JMember member) {
-    Pair<JsMember, JsMember> oldAndNewJsMember = updateJsMembers(ownGlobalNames, member);
-    JsMember oldJsMember = oldAndNewJsMember.left;
-    JsMember newJsMember = oldAndNewJsMember.right;
+  private boolean isJsPropertyAccessorPair(JMember thisMember, JMember thatMember) {
+    return (thisMember.getJsMemberType() == JsMemberType.GETTER
+            && thatMember.getJsMemberType() == JsMemberType.SETTER)
+        || (thatMember.getJsMemberType() == JsMemberType.GETTER
+            && thisMember.getJsMemberType() == JsMemberType.SETTER);
+  }
 
-    if (oldJsMember == newJsMember) {
-      // We allow setter-getter to share the name if they are both defined in the same class, so
-      // skipping the global name check. However still need to do a consistency check.
-      checkJsPropertyConsistency(member, newJsMember);
+  private void checkStaticNameCollisions(JMember member) {
+    if (member.isJsNative()) {
       return;
     }
+
+    // TODO(rluble): Add static property consistency check here if static property accessors are
+    // ever allowed.
+    Preconditions.checkArgument(!member.getJsMemberType().isPropertyAccessor());
 
     String currentGlobalNameDescription =
         minimalRebuildCache.addExportedGlobalName(member.getQualifiedJsName(),
             JjsUtils.getReadableDescription(member), member.getEnclosingType().getName());
+
     if (currentGlobalNameDescription == null) {
       return;
     }
@@ -642,14 +679,18 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
         getMemberDescription(member), member.getQualifiedJsName(), currentGlobalNameDescription);
   }
 
-  private void checkJsPropertyConsistency(JMember member, JsMember newMember) {
-    if (newMember.setter != null && newMember.getter != null) {
-      List<JParameter> setterParams = ((JMethod) newMember.setter).getParams();
-      if (isSameType(newMember.getter.getType(), setterParams.get(0).getType())) {
+  private boolean checkPropertyConsistency(JMember member, JMember otherMember) {
+    JMember setter = member.getJsMemberType() == JsMemberType.SETTER ? member : otherMember;
+    JMember getter = member.getJsMemberType() == JsMemberType.GETTER ? member : otherMember;
+    if (setter != null && getter != null) {
+      List<JParameter> setterParams = ((JMethod) setter).getParams();
+      if (isSameType(getter.getType(), setterParams.get(0).getType())) {
         logError(member, "JsProperty setter %s and getter %s cannot have inconsistent types.",
-            getMemberDescription(newMember.setter), getMemberDescription(newMember.getter));
+            getMemberDescription(setter), getMemberDescription(getter));
+        return false;
       }
     }
+    return true;
   }
 
   /**
@@ -661,17 +702,32 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
     return !thisType.getJavahSignatureName().equals(thatType.getJavahSignatureName());
   }
 
-  private void checkNameConsistency(JMember member) {
+  private void checkOverrideConsistency(JMember member) {
     if (member instanceof JMethod) {
       String jsName = member.getJsName();
-      for (JMethod jMethod : ((JMethod) member).getOverriddenMethods()) {
-        String parentName = jMethod.getJsName();
-        if (parentName != null && !parentName.equals(jsName)) {
+      for (JMethod overridenMethod : ((JMethod) member).getOverriddenMethods()) {
+        String parentName = overridenMethod.getJsName();
+        if (parentName == null) {
+          continue;
+        }
+
+        if (!parentName.equals(jsName)) {
           logError(
               member,
               "%s cannot be assigned a different JavaScript name than the method it overrides.",
               getMemberDescription(member));
           break;
+        }
+
+        if (overridenMethod.getJsMemberType() != member.getJsMemberType()) {
+          // Overrides can not change JsMethod to JsProperty nor vice versa.
+          logError(
+              member,
+              "%s %s cannot override %s %s.",
+              member.getJsMemberType() == JsMemberType.METHOD ? "JsMethod" : "JsProperty",
+              getMemberDescription(member),
+              overridenMethod.getJsMemberType() == JsMemberType.METHOD ? "JsMethod" : "JsProperty",
+              getMemberDescription(overridenMethod));
         }
       }
     }
@@ -932,10 +988,9 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
       checkJsConstructorSubtype(type);
     }
 
-    Map<String, JsMember> ownGlobalNames = Maps.newHashMap();
-    Map<String, JsMember> localNames = collectLocalNames(type.getSuperClass());
+    Multimap<String, JMember> instanceJsNames = collectInstanceMembersByJsNames(type);
     for (JMember member : type.getMembers()) {
-      checkMember(member, localNames, ownGlobalNames);
+      checkMember(member, instanceJsNames);
     }
   }
 
@@ -986,46 +1041,35 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
     wasUnusableByJsWarningReported = true;
   }
 
-  private static class JsMember {
-    private JMember member;
-    private JMember setter;
-    private JMember getter;
-
-    public JsMember(JMember member) {
-      this.member = member;
-    }
-
-    public JsMember(JMember member, JMember setter, JMember getter) {
-      this.member = member;
-      this.setter = setter;
-      this.getter = getter;
-    }
-
-    public boolean isJsNative() {
-      return member.isJsNative();
-    }
-
-    public boolean isPropertyAccessor() {
-      return setter != null || getter != null;
-    }
-  }
-
-  private LinkedHashMap<String, JsMember> collectLocalNames(JDeclaredType type) {
+  private Multimap<String, JMember> collectInstanceMembersByJsNames(JDeclaredType type) {
     if (type == null) {
-      return Maps.newLinkedHashMap();
+      return LinkedHashMultimap.create();
     }
 
-    LinkedHashMap<String, JsMember> memberByLocalMemberNames =
-        collectLocalNames(type.getSuperClass());
+    Multimap<String, JMember> instanceMembersByJsName =
+        collectInstanceMembersByJsNames(type.getSuperClass());
     for (JMember member : type.getMembers()) {
-      if (isCheckedLocalName(member)) {
-        updateJsMembers(memberByLocalMemberNames, member);
+      if (isInstanceJsMember(member)) {
+        addMember(instanceMembersByJsName, member);
       }
     }
-    return memberByLocalMemberNames;
+    return instanceMembersByJsName;
   }
 
-  private boolean isCheckedLocalName(JMember method) {
+  private static void addMember(Multimap<String, JMember> instanceMembersByJsName, JMember member) {
+    String name = member.getJsName();
+    Iterables.removeIf(instanceMembersByJsName.get(name),
+        new Predicate<JMember>() {
+          @Override
+          public boolean apply(JMember m) {
+            return overrides(member, m);
+          }
+        });
+
+    instanceMembersByJsName.put(name, member);
+  }
+
+  private boolean isInstanceJsMember(JMember method) {
     return method.needsDynamicDispatch() && method.getJsMemberType() != JsMemberType.NONE
         && !isSyntheticBridgeMethod(method);
   }
@@ -1044,50 +1088,11 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
     return member.isSynthetic() && !((JMethod) member).isForwarding();
   }
 
-  private boolean isCheckedGlobalName(JMember member) {
-    return !member.needsDynamicDispatch() && !member.isJsNative();
+  private boolean isStaticJsMember(JMember member) {
+    return !member.needsDynamicDispatch() && member.getJsMemberType() != JsMemberType.NONE;
   }
 
-  private Pair<JsMember, JsMember> updateJsMembers(
-      Map<String, JsMember> memberByNames, JMember member) {
-    JsMember oldJsMember = memberByNames.get(member.getJsName());
-    JsMember newJsMember = createOrUpdateJsMember(oldJsMember, member);
-    memberByNames.put(member.getJsName(), newJsMember);
-    return Pair.create(oldJsMember, newJsMember);
-  }
-
-  private JsMember createOrUpdateJsMember(JsMember jsMember, JMember member) {
-    switch (member.getJsMemberType()) {
-      case GETTER:
-        if (jsMember != null && jsMember.isPropertyAccessor()) {
-          if (jsMember.getter == null || overrides(member, jsMember.getter)) {
-            jsMember.getter = member;
-            jsMember.member = member;
-            return jsMember;
-          }
-        }
-        return new JsMember(member, jsMember == null ? null : jsMember.setter, member);
-      case SETTER:
-        if (jsMember != null && jsMember.isPropertyAccessor()) {
-          if (jsMember.setter == null || overrides(member, jsMember.setter)) {
-            jsMember.setter = member;
-            jsMember.member = member;
-            return jsMember;
-          }
-        }
-        return new JsMember(member, member, jsMember == null ? null : jsMember.getter);
-      default:
-        if (jsMember != null && !jsMember.isPropertyAccessor()) {
-          if (overrides(member, jsMember.member)) {
-            jsMember.member = member;
-            return jsMember;
-          }
-        }
-        return new JsMember(member);
-    }
-  }
-
-  private boolean overrides(JMember member, JMember potentiallyOverriddenMember) {
+  private static boolean overrides(JMember member, JMember potentiallyOverriddenMember) {
     if (member instanceof JField || potentiallyOverriddenMember instanceof JField) {
       return false;
     }
@@ -1100,7 +1105,7 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
     // GWT models overrides similar to the JVM (not Java) in the sense that for a method to override
     // another they must have identical signatures (includes parameters and return type).
     // Methods that only differ in return types are Java overrides and need to be considered so
-    // for local name collision checking.
+    // for instance name collision checking.
     JMethod potentiallyOverriddenMethod = (JMethod) potentiallyOverriddenMember;
 
     // TODO(goktug): make this more precise to handle package visibilities.

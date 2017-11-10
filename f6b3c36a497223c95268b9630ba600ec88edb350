@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3296bba_1aa89ee0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-11-10T14:19:50Z",
+      "side": 1,
+      "message": "This code is never reached since we are disallowing non native static property accessors. The tests were written but disabled.",
+      "range": {
+        "startLine": 671,
+        "startChar": 0,
+        "endLine": 676,
+        "endChar": 15
+      },
+      "revId": "f6b3c36a497223c95268b9630ba600ec88edb350",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

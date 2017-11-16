@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49d74f98_b4ad8a6a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-11-16T22:24:37Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.LinkedHashSet.",
+      "revId": "eae567cd9c3c1391de1a58c011d8b8174ff53319",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1abfa125_73ca75d9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-11-16T22:24:37Z",
+      "side": 1,
+      "message": "[error] \u0027java.util.LinkedHashSet\u0027 should be separated from previous imports.",
+      "revId": "eae567cd9c3c1391de1a58c011d8b8174ff53319",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

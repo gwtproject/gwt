@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4770abf0_1be42260",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-11-16T22:12:38Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 103).",
+      "revId": "0fe330f8f9724c66a15ab8b8f010b4a0a2fac441",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2431204a_4b6048eb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1049,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-11-16T22:12:38Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 102).",
+      "revId": "0fe330f8f9724c66a15ab8b8f010b4a0a2fac441",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

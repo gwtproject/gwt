@@ -22,8 +22,11 @@ import static javaemul.internal.InternalPreconditions.checkState;
 import java.io.PrintStream;
 import java.io.Serializable;
 
+import javax.annotation.Nonnull;
+
 import javaemul.internal.JsUtils;
 import javaemul.internal.annotations.DoNotInline;
+
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -286,6 +289,7 @@ public class Throwable implements Serializable {
   }
 
   @JsMethod
+  @Nonnull
   public static Throwable of(Object e) {
     // If the JS error is already mapped to a Java Exception, use it.
     if (e != null) {

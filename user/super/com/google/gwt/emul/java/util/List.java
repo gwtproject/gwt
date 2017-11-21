@@ -19,6 +19,8 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.util.function.UnaryOperator;
 
+import javax.annotation.Nonnull;
+
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
@@ -82,5 +84,6 @@ public interface List<E> extends Collection<E> {
     return Spliterators.spliterator(this, Spliterator.ORDERED);
   }
 
+  @Nonnull
   List<E> subList(int fromIndex, int toIndex);
 }

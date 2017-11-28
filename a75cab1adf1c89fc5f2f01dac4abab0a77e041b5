@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "716a7c24_d239a609",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/asm/CollectReferencesVisitor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-11-28T19:26:47Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "a75cab1adf1c89fc5f2f01dac4abab0a77e041b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

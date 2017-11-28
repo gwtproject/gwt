@@ -25,13 +25,13 @@ import org.objectweb.asm.Opcodes;
 class ForceClassVersion15 extends ClassVisitor {
 
   public ForceClassVersion15(ClassVisitor v) {
-    super(Opcodes.ASM5, v);
+    super(Opcodes.ASM6, v);
   }
 
   @Override
   public void visit(final int version, final int access, final String name,
       final String signature, final String superName, final String[] interfaces) {
-    assert (version >= Opcodes.V1_5 && version <= Opcodes.V1_8);
+    assert (version >= Opcodes.V1_5);
     super.visit(Opcodes.V1_5, access, name, signature, superName, interfaces);
   }
 }

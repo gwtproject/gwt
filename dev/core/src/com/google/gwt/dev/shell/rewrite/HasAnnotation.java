@@ -54,7 +54,7 @@ public class HasAnnotation extends ClassVisitor {
   private final String targetDesc;
 
   public HasAnnotation(ClassVisitor v, Class<? extends Annotation> annotation) {
-    super(Opcodes.ASM5, v);
+    super(Opcodes.ASM6, v);
     targetDesc = Type.getDescriptor(annotation);
   }
 

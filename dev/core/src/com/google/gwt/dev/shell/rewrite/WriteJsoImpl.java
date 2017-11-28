@@ -264,7 +264,7 @@ abstract class WriteJsoImpl extends ClassVisitor {
    * @param mapper maps methods to the class in which they are declared
    */
   private WriteJsoImpl(ClassVisitor cv, InstanceMethodOracle mapper) {
-    super(Opcodes.ASM5, cv);
+    super(Opcodes.ASM6, cv);
     this.mapper = mapper;
   }
 

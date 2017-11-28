@@ -79,7 +79,7 @@ public class CollectAnnotationData extends AnnotationVisitor {
     private final List<Object> values = new ArrayList<Object>();
 
     public MyAnnotationArrayVisitor(Callback<Object> callback) {
-      super(Opcodes.ASM5);
+      super(Opcodes.ASM6);
       this.callback = callback;
     }
 
@@ -158,7 +158,7 @@ public class CollectAnnotationData extends AnnotationVisitor {
    */
   CollectAnnotationData(String desc, boolean visible,
       Callback<CollectAnnotationData.AnnotationData> callback) {
-    super(Opcodes.ASM5);
+    super(Opcodes.ASM6);
     annotation = new AnnotationData(desc, visible);
     this.callback = callback;
   }

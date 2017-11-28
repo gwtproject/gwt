@@ -206,7 +206,7 @@ public class RewriteJsniMethods extends ClassVisitor {
 
     public MyMethodAdapter(MethodVisitor mv, int access, String name,
         String desc) {
-      super(Opcodes.ASM5, mv, access, name, desc);
+      super(Opcodes.ASM6, mv, access, name, desc);
       this.descriptor = desc;
       this.name = name;
       isStatic = (access & Opcodes.ACC_STATIC) != 0;
@@ -329,7 +329,7 @@ public class RewriteJsniMethods extends ClassVisitor {
 
   public RewriteJsniMethods(ClassVisitor v,
       Map<String, String> anonymousClassMap) {
-    super(Opcodes.ASM5, v);
+    super(Opcodes.ASM6, v);
     this.anonymousClassMap = anonymousClassMap;
   }
 

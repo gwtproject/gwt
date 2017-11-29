@@ -440,7 +440,7 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
   private static class Global {
     @JsProperty(namespace = JsPackage.GLOBAL, name = "NaN")
     public static double Nan;
-    @JsMethod(namespace = JsPackage.GLOBAL, name = "isNaN")
+    @JsMethod(namespace = "<window>", name = "isNaN")
     public static native boolean isNan(double number);
   }
 
@@ -454,5 +454,11 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
     assertTrue(newArrayThroughCtorReference() instanceof NativeArray);
     assertTrue(Double.isNaN(getNan()));
     assertTrue(isNan(Double.NaN));
+  }
+
+  // Regression tests for issue #9573
+  public void testTopLevelNameClash() {
+    boolean isNaN = Global.isNan(Global.Nan);
+    assertTrue(isNaN);
   }
 }

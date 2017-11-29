@@ -30,6 +30,11 @@ public final class JsNameRef extends JsExpression implements CanBooleanEval, Has
     this.name = name;
   }
 
+  public JsNameRef(SourceInfo sourceInfo, String ident, JsExpression qualifier) {
+    this(sourceInfo, ident);
+    setQualifier(qualifier);
+  }
+
   public JsNameRef(SourceInfo sourceInfo, String ident) {
     super(sourceInfo);
     this.ident = StringInterner.get().intern(ident);

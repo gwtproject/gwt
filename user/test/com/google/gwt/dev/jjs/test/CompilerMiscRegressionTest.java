@@ -428,11 +428,11 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
     return ctor();
   }-*/;
 
-  private static native boolean isNan(double number) /*-{
+  private static native boolean jsniIsNan(double number) /*-{
     return @Global::isNan(D)(number);
   }-*/;
 
-  private static native double getNan() /*-{
+  private static native double jsniGetNan() /*-{
     return @Global::Nan;
   }-*/;
 
@@ -452,7 +452,16 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
     assertTrue(nativeArray instanceof NativeArray);
     assertEquals(2, arrayLength(nativeArray));
     assertTrue(newArrayThroughCtorReference() instanceof NativeArray);
-    assertTrue(Double.isNaN(getNan()));
-    assertTrue(isNan(Double.NaN));
+    assertTrue(Double.isNaN(jsniGetNan()));
+    assertTrue(jsniIsNan(Double.NaN));
+  }
+
+  @JsMethod(namespace = "<window>", name = "isNaN")
+  public static native boolean isNaN(double number);
+
+  // Regression tests for issue #9573
+  public void testTopLevelNameClash() {
+    boolean isNaN =  isNaN(Global.Nan);
+    assertTrue(isNaN);
   }
 }

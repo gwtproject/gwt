@@ -3091,7 +3091,19 @@ public class GenerateJavaScriptAST {
     return names.get(program.getIndexedField(indexedName));
   }
 
-  private static JsNameRef createGlobalQualifier(String qualifier, SourceInfo sourceInfo) {
-     return JsUtils.createQualifiedNameRef(JsInteropUtil.normalizeQualifier(qualifier), sourceInfo);
+  private JsNameRef createGlobalQualifier(String qualifier, SourceInfo sourceInfo) {
+    List<String> parts =
+        Lists.newArrayList(JsInteropUtil.normalizeQualifier(qualifier).split("\\."));
+    // Make the top level name unobfuscatable in the top scope, and remove from parts.
+    String topScopeName = parts.remove(0);
+    JsNameRef ref =
+        jsProgram.getScope().declareUnobfuscatableName(topScopeName).makeRef(sourceInfo);
+
+    for (String part : parts) {
+      // The rest can be left as a name ref to be resolved by JsSymbolResolver later.
+      ref = new JsNameRef(sourceInfo, part, ref);
+    }
+
+    return ref;
   }
 }

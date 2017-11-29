@@ -3091,7 +3091,14 @@ public class GenerateJavaScriptAST {
     return names.get(program.getIndexedField(indexedName));
   }
 
-  private static JsNameRef createGlobalQualifier(String qualifier, SourceInfo sourceInfo) {
-     return JsUtils.createQualifiedNameRef(JsInteropUtil.normalizeQualifier(qualifier), sourceInfo);
+  private JsNameRef createGlobalQualifier(String qualifier, SourceInfo sourceInfo) {
+    String[] topQualifierAndRest = JsInteropUtil.normalizeQualifier(qualifier).split("\\.", 1);
+    JsName topLevelName = jsProgram.getScope().declareUnobfuscatableName(topQualifierAndRest[0]);
+    if (topQualifierAndRest.length == 1) {
+      return topLevelName.makeRef(sourceInfo);
+    }
+    JsNameRef nameRef = JsUtils.createQualifiedNameRef(topQualifierAndRest[1], sourceInfo);
+    nameRef.setQualifier(topLevelName.makeRef(sourceInfo));
+    return nameRef;
   }
 }

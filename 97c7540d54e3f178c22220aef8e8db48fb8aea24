@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "05ffde1d_a81930db",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-12-01T22:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb6220b0_5125d5e0",
+      "range": {
+        "startLine": 29,
+        "startChar": 14,
+        "endLine": 29,
+        "endChar": 43
+      },
+      "revId": "97c7540d54e3f178c22220aef8e8db48fb8aea24",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ff40bf9_c396700d",
         "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-12-01T22:32:44Z",
       "side": 1,
       "message": "testUnmodifiableList and move before the other",
+      "range": {
+        "startLine": 34,
+        "startChar": 14,
+        "endLine": 34,
+        "endChar": 38
+      },
+      "revId": "97c7540d54e3f178c22220aef8e8db48fb8aea24",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a9b5976_51dc0959",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-12-01T22:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ff40bf9_c396700d",
       "range": {
         "startLine": 34,
         "startChar": 14,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "79188cfc_00db54b6",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-12-01T22:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "902f0b8a_ee4dbf45",
+      "range": {
+        "startLine": 39,
+        "startChar": 15,
+        "endLine": 39,
+        "endChar": 41
+      },
+      "revId": "97c7540d54e3f178c22220aef8e8db48fb8aea24",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a1aab9e1_2da9abea",
         "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
         "patchSetId": 2
@@ -82,6 +154,24 @@
       "writtenOn": "2017-12-01T22:32:44Z",
       "side": 1,
       "message": "addAll(Arrays.asList())",
+      "revId": "97c7540d54e3f178c22220aef8e8db48fb8aea24",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7c90d2d_ddfcd003",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-12-01T22:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1aab9e1_2da9abea",
       "revId": "97c7540d54e3f178c22220aef8e8db48fb8aea24",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -134,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "45e43d5a_70e33b75",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-12-01T22:59:54Z",
+      "side": 1,
+      "message": "Not sure what you mean, we are just exhasuting listiterator with and without parameter here?!",
+      "parentUuid": "eb87b555_eebd0113",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 13
+      },
+      "revId": "97c7540d54e3f178c22220aef8e8db48fb8aea24",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a68c5435_7f3bd475",
         "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
         "patchSetId": 2
@@ -145,6 +259,30 @@
       "writtenOn": "2017-12-01T22:32:44Z",
       "side": 1,
       "message": "originalContents",
+      "range": {
+        "startLine": 117,
+        "startChar": 12,
+        "endLine": 117,
+        "endChar": 24
+      },
+      "revId": "97c7540d54e3f178c22220aef8e8db48fb8aea24",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9380f5cd_046d9877",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-12-01T22:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a68c5435_7f3bd475",
       "range": {
         "startLine": 117,
         "startChar": 12,

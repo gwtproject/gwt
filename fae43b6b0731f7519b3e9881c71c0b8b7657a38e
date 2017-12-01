@@ -16,6 +16,185 @@
       "revId": "fae43b6b0731f7519b3e9881c71c0b8b7657a38e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "26793652_ab171da8",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-12-01T21:21:45Z",
+      "side": 1,
+      "message": "Fix.",
+      "parentUuid": "2cfb8e12_95ea6bf5",
+      "revId": "fae43b6b0731f7519b3e9881c71c0b8b7657a38e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "921842f2_4321bd23",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-12-01T21:21:45Z",
+      "side": 1,
+      "message": "I would do\n\n  l -\u003e l.add()\nhere and every where so that the lambda is an operation and there can not be mistakes where the list parameter is different to the list in the lambda. For that you just make the parameter Consumer\u003cList\u003c?\u003e\u003e",
+      "range": {
+        "startLine": 39,
+        "startChar": 20,
+        "endLine": 39,
+        "endChar": 39
+      },
+      "revId": "fae43b6b0731f7519b3e9881c71c0b8b7657a38e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fd88988_02e20d62",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-12-01T21:21:45Z",
+      "side": 1,
+      "message": "Encapsulate these. Also these wont make sense for empty lists because sringIterator.next will throw and the tryModify is obscuring the error.",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 102,
+        "endChar": 11
+      },
+      "revId": "fae43b6b0731f7519b3e9881c71c0b8b7657a38e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85f964b4_8dd1045b",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-12-01T21:21:45Z",
+      "side": 1,
+      "message": "Make this Consumer\u003cList\u003c?\u003e\u003e",
+      "range": {
+        "startLine": 114,
+        "startChar": 46,
+        "endLine": 114,
+        "endChar": 54
+      },
+      "revId": "fae43b6b0731f7519b3e9881c71c0b8b7657a38e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abc38c9e_39f0dcaa",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-12-01T21:21:45Z",
+      "side": 1,
+      "message": "assertUnmodifiableContract",
+      "range": {
+        "startLine": 114,
+        "startChar": 22,
+        "endLine": 114,
+        "endChar": 31
+      },
+      "revId": "fae43b6b0731f7519b3e9881c71c0b8b7657a38e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf2786fb_af7d3383",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-12-01T21:21:45Z",
+      "side": 1,
+      "message": "originalList",
+      "range": {
+        "startLine": 115,
+        "startChar": 12,
+        "endLine": 115,
+        "endChar": 22
+      },
+      "revId": "fae43b6b0731f7519b3e9881c71c0b8b7657a38e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f33a64ff_b134fabf",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-12-01T21:21:45Z",
+      "side": 1,
+      "message": "Use the UnsupportedOperationException.",
+      "range": {
+        "startLine": 119,
+        "startChar": 13,
+        "endLine": 119,
+        "endChar": 29
+      },
+      "revId": "fae43b6b0731f7519b3e9881c71c0b8b7657a38e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d5ed0fd_33f3c588",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-12-01T21:21:45Z",
+      "side": 1,
+      "message": "assertEquals(originalList, list)",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 5
+      },
+      "revId": "fae43b6b0731f7519b3e9881c71c0b8b7657a38e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

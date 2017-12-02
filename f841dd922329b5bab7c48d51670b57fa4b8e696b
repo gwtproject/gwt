@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d94a794c_7de051f0",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-12-02T00:13:08Z",
+      "side": 1,
+      "message": "remove unnecessary parenthesis, here and down the line.",
+      "range": {
+        "startLine": 41,
+        "startChar": 37,
+        "endLine": 41,
+        "endChar": 40
+      },
+      "revId": "f841dd922329b5bab7c48d51670b57fa4b8e696b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae09a0e7_34800e91",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-12-02T00:13:08Z",
+      "side": 1,
+      "message": "remove and only call this one from the right test method.",
+      "range": {
+        "startLine": 62,
+        "startChar": 3,
+        "endLine": 62,
+        "endChar": 26
+      },
+      "revId": "f841dd922329b5bab7c48d51670b57fa4b8e696b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b066b3b_e6fa4074",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-12-02T00:13:08Z",
+      "side": 1,
+      "message": "This is too verbose, a lot of repetition. extract a method assertUnmodifiableContractThroughIterator(list, i -\u003e i.add(\"4\"));\n\n\u003cT\u003e assertUnmodifiableContractThroughIterator(List\u003cT\u003e l, Consumer\u003cListIterator\u003cT\u003e\u003e consumer) {\n  assertUnmodifiableContract(l, l -\u003e { \n      ListIterator\u003cT\u003e i \u003d l.listIterator(); \n      i.next();\n      consumer.accept(i);\n});\n  }",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 40
+      },
+      "revId": "f841dd922329b5bab7c48d51670b57fa4b8e696b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2a98667_9c4631a6",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-12-02T00:13:08Z",
+      "side": 1,
+      "message": "remove ( )",
+      "range": {
+        "startLine": 100,
+        "startChar": 9,
+        "endLine": 100,
+        "endChar": 13
+      },
+      "revId": "f841dd922329b5bab7c48d51670b57fa4b8e696b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

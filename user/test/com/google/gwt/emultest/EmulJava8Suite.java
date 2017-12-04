@@ -22,6 +22,7 @@ import com.google.gwt.emultest.java8.lang.StringTest;
 import com.google.gwt.emultest.java8.math.BigIntegerConvertTest;
 import com.google.gwt.emultest.java8.util.ArrayListTest;
 import com.google.gwt.emultest.java8.util.ArraysTest;
+import com.google.gwt.emultest.java8.util.CollectionsTest;
 import com.google.gwt.emultest.java8.util.ComparatorTest;
 import com.google.gwt.emultest.java8.util.DoubleSummaryStatisticsTest;
 import com.google.gwt.emultest.java8.util.HashMapTest;
@@ -68,6 +69,7 @@ import org.junit.runners.Suite.SuiteClasses;
   //-- java.util
   ArraysTest.class,
   ArrayListTest.class,
+  CollectionsTest.class,
   LinkedListTest.class,
   ListTest.class,
   VectorTest.class,

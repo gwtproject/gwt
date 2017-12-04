@@ -21,6 +21,8 @@ import static javaemul.internal.InternalPreconditions.checkElementIndex;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 
 /**
  * Utility methods that operate on collections.
@@ -351,6 +353,11 @@ public class Collections {
     }
 
     @Override
+    public boolean removeIf(Predicate<? super T> p) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
     public int size() {
       return coll.size();
     }
@@ -428,6 +435,16 @@ public class Collections {
     @Override
     public ListIterator<T> listIterator(int from) {
       return new UnmodifiableListIterator<T>(list.listIterator(from));
+    }
+
+    @Override
+    public void replaceAll(UnaryOperator<T> operator) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void sort(Comparator<? super T> c) {
+      throw new UnsupportedOperationException();
     }
 
     @Override

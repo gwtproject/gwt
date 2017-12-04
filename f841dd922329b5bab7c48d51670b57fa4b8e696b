@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e8696c1_39483af6",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-12-04T16:40:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d94a794c_7de051f0",
+      "range": {
+        "startLine": 41,
+        "startChar": 37,
+        "endLine": 41,
+        "endChar": 40
+      },
+      "revId": "f841dd922329b5bab7c48d51670b57fa4b8e696b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae09a0e7_34800e91",
         "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "f841dd922329b5bab7c48d51670b57fa4b8e696b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4583a54_820eeadd",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-12-04T16:40:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae09a0e7_34800e91",
+      "range": {
+        "startLine": 62,
+        "startChar": 3,
+        "endLine": 62,
+        "endChar": 26
+      },
+      "revId": "f841dd922329b5bab7c48d51670b57fa4b8e696b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "a3d9b7ac_2e027fc2",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-12-04T16:40:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b066b3b_e6fa4074",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 40
+      },
+      "revId": "f841dd922329b5bab7c48d51670b57fa4b8e696b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a2a98667_9c4631a6",
         "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
         "patchSetId": 3
@@ -91,6 +163,30 @@
       "revId": "f841dd922329b5bab7c48d51670b57fa4b8e696b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd343e86_50e727f7",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/CollectionsTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2017-12-04T16:40:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2a98667_9c4631a6",
+      "range": {
+        "startLine": 100,
+        "startChar": 9,
+        "endLine": 100,
+        "endChar": 13
+      },
+      "revId": "f841dd922329b5bab7c48d51670b57fa4b8e696b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

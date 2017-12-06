@@ -33,7 +33,7 @@ public class UnifyAstTest extends OptimizerTestBase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    sourceLevel = SourceLevel.JAVA8;
+    sourceLevel = SourceLevel.JAVA9;
   }
 
   public void testPackageInfo_defaultPackagePresent() throws Exception {

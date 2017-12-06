@@ -27,7 +27,6 @@ Description:
             <property name="max" value="100"/>
             <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
        </module>
-       <module name="FileContentsHolder" />
        <module name="InterfaceIsType">
             <property name="severity" value="ignore"/>
         </module>
@@ -53,7 +52,6 @@ Description:
         </module>
         <module name="LocalVariableName">
             <property name="severity" value="error"/>
-            <property name="tokens" value="PARAMETER_DEF,VARIABLE_DEF"/>
         </module>
         <module name="LeftCurly"/>
         <module name="RightCurly"/>
@@ -203,30 +201,30 @@ Description:
         </module>
         <module name="RedundantModifier"/>
         <module name="EqualsHashCode"/>
+      <module name="SuppressionCommentFilter">
+        <property name="offCommentFormat" value="CHECKSTYLE_OFF"/>
+        <property name="onCommentFormat" value="CHECKSTYLE_ON"/>
+      </module>
+      <module name="SuppressionCommentFilter">
+        <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
+        <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
+        <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
+        <property name="checkFormat" value="MethodName"/>
+      </module>
+      <module name="SuppressionCommentFilter">
+        <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
+        <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
+        <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
+        <property name="checkFormat" value="MemberName"/>
+      </module>
+      <module name="SuppressionCommentFilter">
+        <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
+        <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
+        <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
+        <property name="checkFormat" value="ParameterName"/>
+      </module>
     </module>
     <module name="JavadocPackage">
         <property name="severity" value="ignore"/>
-    </module>
-        <module name="SuppressionCommentFilter">
-       <property name="offCommentFormat" value="CHECKSTYLE_OFF"/>
-       <property name="onCommentFormat" value="CHECKSTYLE_ON"/>
-    </module>
-    <module name="SuppressionCommentFilter">
-       <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
-      <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
-      <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
-      <property name="checkFormat" value="MethodName"/>
-    </module>
-    <module name="SuppressionCommentFilter">
-       <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
-      <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
-      <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
-      <property name="checkFormat" value="MemberName"/>
-    </module>
-    <module name="SuppressionCommentFilter">
-       <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
-      <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
-      <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
-      <property name="checkFormat" value="ParameterName"/>
     </module>
 </module>

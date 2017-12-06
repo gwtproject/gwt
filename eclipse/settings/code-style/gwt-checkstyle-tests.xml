@@ -247,4 +247,7 @@ A more lenient set of style checks for test cases, needed because test often nee
       <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
       <property name="checkFormat" value="ParameterName"/>
     </module>
+    <module name="SuppressionFilter">
+        <property name="file" value="eclipse/settings/code-style/gwt-checkstyle-suppressions.xml"/>
+    </module>
 </module>

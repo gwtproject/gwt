@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Google Inc.
+ * Copyright 2017 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -37,7 +37,7 @@ public class Java8AstTest extends FullCompileTestBase {
 
   @Override
   public void setUp() throws Exception {
-    sourceLevel = SourceLevel.JAVA8;
+    sourceLevel = SourceLevel.JAVA9;
     super.setUp();
     addAll(LAMBDA_METAFACTORY);
 
@@ -1092,29 +1092,6 @@ public class Java8AstTest extends FullCompileTestBase {
         formatSource(samMethod.toSource()));
   }
 
-  public void testIntersectionCastOfLambdaWithClassType() throws Exception {
-    addSnippetClassDecl("interface I1 { public void foo(); }");
-    addSnippetClassDecl("class A { }");
-    String lambda = "Object o = (A & I1) () -> {};";
-    assertEqualBlock("Object o=(EntryPoint$A)(EntryPoint$I1)new EntryPoint$lambda$0$Type();",
-        lambda);
-
-    JProgram program = compileSnippet("void", lambda, false);
-
-    assertNotNull(getMethod(program, "lambda$0"));
-
-    JClassType lambdaInnerClass = (JClassType) getType(program, "test.EntryPoint$lambda$0$Type");
-    assertNotNull(lambdaInnerClass);
-    assertEquals("java.lang.Object", lambdaInnerClass.getSuperClass().getName());
-    assertEquals(1, lambdaInnerClass.getImplements().size());
-    assertTrue(
-        lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I1")));
-    // should implement foo method
-    JMethod samMethod = findMethod(lambdaInnerClass, "foo");
-    assertEquals("public final void foo(){EntryPoint.lambda$0();}",
-        formatSource(samMethod.toSource()));
-  }
-
   public void testIntersectionCastOfLambdaOneAbstractMethod() throws Exception {
     addSnippetClassDecl("interface I1 { public void foo(); }");
     addSnippetClassDecl("interface I2 extends I1{ public void foo();}");
@@ -1141,7 +1118,7 @@ public class Java8AstTest extends FullCompileTestBase {
 
   public void testIntersectionCastMultipleAbstractMethods() throws Exception {
     addSnippetClassDecl("interface I1 { public void foo(); }");
-    addSnippetClassDecl("interface I2 { public void bar(); public void fun();}");
+    addSnippetClassDecl("interface I2 { public void foo(); }");
     String lambda = "Object o = (I1 & I2) () -> {};";
     assertEqualBlock("Object o=(EntryPoint$I1)(EntryPoint$I2)new EntryPoint$lambda$0$Type();",
         lambda);
@@ -1153,7 +1130,7 @@ public class Java8AstTest extends FullCompileTestBase {
     JClassType lambdaInnerClass = (JClassType) getType(program, "test.EntryPoint$lambda$0$Type");
     assertNotNull(lambdaInnerClass);
     assertEquals("java.lang.Object", lambdaInnerClass.getSuperClass().getName());
-    assertEquals(1, lambdaInnerClass.getImplements().size());
+    assertEquals(2, lambdaInnerClass.getImplements().size());
     assertTrue(
         lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I1")));
     // should implement foo method

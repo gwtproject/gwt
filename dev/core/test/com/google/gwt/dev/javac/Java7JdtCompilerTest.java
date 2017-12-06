@@ -50,7 +50,7 @@ public class Java7JdtCompilerTest extends JdtCompilerTestBase {
 
   @Override
   protected SourceLevel getSourceLevel() {
-    // Always compile this tests as Java 8.
-    return SourceLevel.JAVA8;
+    // Always compile this tests as Java 9.
+    return SourceLevel.JAVA9;
   }
 }

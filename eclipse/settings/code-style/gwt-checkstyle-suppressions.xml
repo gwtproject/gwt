@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+    "-//Puppy Crawl//DTD Suppressions 1.0//EN"
+    "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
+<suppressions>
+    <suppress checks="RegexpHeader"
+        files="com/google/gwt/emultest/java/util/concurrent/ConcurrentHashMapTest.java"
+        lines="1"/>
+    <suppress checks="RegexpHeader"
+        files="com/google/gwt/emultest/java/util/concurrent/TimeUnitTest.java"
+        lines="1"/>
+    <suppress checks="RegexpHeader"
+        files="com/google/gwt/emultest/java/util/concurrent/atomic/AtomicIntegerTest.java"
+        lines="1"/>
+    <suppress checks="RegexpHeader"
+        files="com/google/gwt/emultest/java/util/concurrent/atomic/AtomicLongTest.java"
+        lines="1"/>
+</suppressions>

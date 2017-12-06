@@ -19,7 +19,6 @@ import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
 
 import javaemul.internal.annotations.UncheckedCast;
-
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 

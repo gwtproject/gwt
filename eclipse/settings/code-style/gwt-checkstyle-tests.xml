@@ -23,7 +23,6 @@ A more lenient set of style checks for test cases, needed because test often nee
     </module>
     <module name="TreeWalker">
         <property name="fileExtensions" value="java"/> 
-        <module name="FileContentsHolder"/>
         <module name="InterfaceIsType">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="error"/>
             <property name="severity" value="ignore"/>
@@ -54,7 +53,6 @@ A more lenient set of style checks for test cases, needed because test often nee
         <module name="LocalVariableName">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="error"/>
             <property name="severity" value="ignore"/>
-            <property name="tokens" value="PARAMETER_DEF,VARIABLE_DEF"/>
         </module>
         <module name="LeftCurly"/>
         <module name="RightCurly"/>
@@ -119,7 +117,9 @@ A more lenient set of style checks for test cases, needed because test often nee
         <module name="FallThrough">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="error"/>
             <property name="severity" value="ignore"/>
-        </module>
+            <property name="reliefPattern"
+                 value="fallthru|fall through|fallthrough|falls through|Fall through|fall-through"/>
+         </module>
         <module name="IllegalInstantiation">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="error"/>
             <property name="severity" value="ignore"/>
@@ -221,30 +221,32 @@ A more lenient set of style checks for test cases, needed because test often nee
         </module>
         <module name="RedundantModifier"/>
         <module name="EqualsHashCode"/>
-    </module>
+        <module name="SuppressionCommentFilter">
+            <property name="offCommentFormat" value="CHECKSTYLE_OFF(\: ([\w\|]+))?"/>
+            <property name="onCommentFormat" value="CHECKSTYLE_ON(\: ([\w\|]+))?"/>
+        </module>
+        <module name="SuppressionCommentFilter">
+            <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
+            <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
+            <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
+            <property name="checkFormat" value="MethodName"/>
+        </module>
+        <module name="SuppressionCommentFilter">
+            <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
+            <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
+            <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
+            <property name="checkFormat" value="MemberName"/>
+        </module>
+        <module name="SuppressionCommentFilter">
+            <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
+            <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
+            <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
+            <property name="checkFormat" value="ParameterName"/>
+        </module>    </module>
     <module name="JavadocPackage">
         <property name="severity" value="ignore"/>
     </module>
-    <module name="SuppressionCommentFilter">
-        <property name="offCommentFormat" value="CHECKSTYLE_OFF"/>
-        <property name="onCommentFormat" value="CHECKSTYLE_ON"/>
-    </module>
-    <module name="SuppressionCommentFilter">
-       <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
-      <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
-      <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
-      <property name="checkFormat" value="MethodName"/>
-    </module>
-    <module name="SuppressionCommentFilter">
-       <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
-      <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
-      <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
-      <property name="checkFormat" value="MemberName"/>
-    </module>
-    <module name="SuppressionCommentFilter">
-       <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
-      <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
-      <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
-      <property name="checkFormat" value="ParameterName"/>
+    <module name="SuppressionFilter">
+        <property name="file" value="eclipse/settings/code-style/gwt-checkstyle-suppressions.xml"/>
     </module>
 </module>

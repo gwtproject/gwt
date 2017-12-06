@@ -813,7 +813,8 @@ public class JdtCompiler {
    */
   private static final Map<SourceLevel, Long> jdtLevelByGwtLevel =
       ImmutableMap.<SourceLevel, Long>of(
-          SourceLevel.JAVA8, ClassFileConstants.JDK1_8);
+          SourceLevel.JAVA8, ClassFileConstants.JDK1_8,
+          SourceLevel.JAVA9, ClassFileConstants.JDK9);
 
   public JdtCompiler(CompilerContext compilerContext, UnitProcessor processor) {
     this.compilerContext = compilerContext;

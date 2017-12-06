@@ -1215,12 +1215,13 @@ public class GwtAstBuilder {
       // And its JInterface container we must implement
       // There may be more than more JInterface containers to be implemented
       // if the lambda expression is cast to a IntersectionCastType.
-      JInterfaceType[] funcType;
+      JInterfaceType[] lambdaInterfaces;
       if (binding instanceof IntersectionTypeBinding18) {
-        funcType = processIntersectionTypeForLambda((IntersectionTypeBinding18) binding, blockScope,
-            JdtUtil.signature(samBinding));
+        IntersectionTypeBinding18 type = (IntersectionTypeBinding18) binding;
+        lambdaInterfaces =
+            processIntersectionType(type, new JInterfaceType[type.intersectingTypes.length]);
       } else {
-        funcType = new JInterfaceType[] {(JInterfaceType) typeMap.get(binding)};
+        lambdaInterfaces = new JInterfaceType[] {(JInterfaceType) typeMap.get(binding)};
       }
       SourceInfo info = makeSourceInfo(x);
 
@@ -1228,8 +1229,8 @@ public class GwtAstBuilder {
       // class lambda$0$Type implements T {}
 
       String innerLambdaImplementationClassShortName = String.valueOf(x.binding.selector);
-      JClassType innerLambdaClass = createInnerClass(
-          curClass.getClassOrInterface(), innerLambdaImplementationClassShortName, info, funcType);
+      JClassType innerLambdaClass = createInnerClass(curClass.getClassOrInterface(),
+          innerLambdaImplementationClassShortName, info, lambdaInterfaces);
       JConstructor ctor = new JConstructor(info, innerLambdaClass, AccessModifier.PRIVATE);
 
       // locals captured by the lambda and saved as fields on the anonymous inner class
@@ -2224,12 +2225,32 @@ public class GwtAstBuilder {
       List<JLocal> resourceVariables = Lists.newArrayList();
       for (int i = x.resources.length - 1; i >= 0; i--) {
         // Needs to iterate back to front to be inline with the contents of the stack.
+        Statement resource = x.resources[i];
+        JStatement resourceStatement = pop(resource);
 
-        JDeclarationStatement resourceDecl = pop(x.resources[i]);
+        JLocal resourceVar;
+        if (resource instanceof LocalDeclaration) {
+          resourceVar = (JLocal) curMethod.locals.get(((LocalDeclaration) resource).binding);
+        } else {
+          // JLS 14.20.3.1 - Java 9 extension to try-with-resources
+          //    try (expr) {}
+          // which is equivalent to
+          //    try (T $resource = expr) {}
+          SourceInfo sourceInfo = resourceStatement.getSourceInfo();
+          JExpression expression = ((JExpressionStatement) resourceStatement).getExpr();
+          resourceVar = createLocal(
+              sourceInfo, "$resource", expression.getType());
+          resourceStatement =
+              new JBinaryOperation(
+                  sourceInfo,
+                  expression.getType(),
+                  JBinaryOperator.ASG,
+                  resourceVar.createRef(sourceInfo),
+                  expression).makeStatement();
+        }
 
-        JLocal resourceVar = (JLocal) curMethod.locals.get(x.resources[i].binding);
         resourceVariables.add(0, resourceVar);
-        tryBlock.addStmt(0, resourceDecl);
+        tryBlock.addStmt(0, resourceStatement);
       }
 
       // add exception variable
@@ -2273,9 +2294,13 @@ public class GwtAstBuilder {
     }
 
     private JLocal createLocalThrowable(SourceInfo info, String prefix) {
+      return createLocal(info, prefix, javaLangThrowable);
+    }
+
+    private JLocal createLocal(SourceInfo info, String prefix, JType type) {
       int index = curMethod.body.getLocals().size() + 1;
       return JProgram.createLocal(info, prefix + "_" + index,
-          javaLangThrowable, false, curMethod.body);
+          type, false, curMethod.body);
     }
 
     private JStatement createCloseBlockFor(
@@ -3624,37 +3649,30 @@ public class GwtAstBuilder {
       }
     }
 
-    private JReferenceType[] processIntersectionCastType(IntersectionTypeBinding18 type) {
-      JReferenceType[] castTypes = new JReferenceType[type.intersectingTypes.length];
+
+    private JReferenceType[] processIntersectionType(IntersectionTypeBinding18 type) {
+      return processIntersectionType(type, new JReferenceType[type.intersectingTypes.length]);
+    }
+
+    private <T extends JReferenceType> T[] processIntersectionType(
+        IntersectionTypeBinding18 type, T[] intersectionTypes) {
       int i = 0;
       for (ReferenceBinding intersectingTypeBinding : type.intersectingTypes) {
         JType intersectingType = typeMap.get(intersectingTypeBinding);
         assert (intersectingType instanceof JReferenceType);
-        castTypes[i++] = ((JReferenceType) intersectingType);
+        intersectionTypes[i++] =  (T) intersectingType;
       }
-      return castTypes;
+      return intersectionTypes;
     }
 
     private JType[] processCastType(TypeBinding type) {
       if (type instanceof IntersectionTypeBinding18) {
-        return processIntersectionCastType((IntersectionTypeBinding18) type);
+        return processIntersectionType((IntersectionTypeBinding18) type);
       } else {
         return new JType[] {typeMap.get(type)};
       }
     }
 
-    private JInterfaceType[] processIntersectionTypeForLambda(IntersectionTypeBinding18 type,
-        BlockScope scope, String samSignature) {
-      List<JInterfaceType> interfaces = Lists.newArrayList();
-      for (ReferenceBinding intersectingTypeBinding : type.intersectingTypes) {
-        if (shouldImplements(intersectingTypeBinding, scope, samSignature)) {
-          JType intersectingType = typeMap.get(intersectingTypeBinding);
-          assert (intersectingType instanceof JInterfaceType);
-          interfaces.add(((JInterfaceType) intersectingType));
-        }
-      }
-      return Iterables.toArray(interfaces, JInterfaceType.class);
-    }
 
     private boolean isFunctionalInterfaceWithMethod(ReferenceBinding referenceBinding, Scope scope,
         String samSignature) {
@@ -3723,9 +3741,9 @@ public class GwtAstBuilder {
     }
   }
 
-  private <T extends JType> Iterable<T> mapTypes(TypeBinding[] types) {
+  private <T extends JType, B extends TypeBinding> Iterable<T> mapTypes(B[] types) {
     return FluentIterable.from(Arrays.asList(types)).transform(
-        new Function<TypeBinding, T>() {
+        new Function<B, T>() {
           @Override
           public T apply(TypeBinding typeBinding) {
             return (T) typeMap.get(typeBinding.erasure());
@@ -4347,7 +4365,8 @@ public class GwtAstBuilder {
 
       JDeclaredType type;
       if (binding.isClass()) {
-        type = new JClassType(info, name, binding.isAbstract(), binding.isFinal());
+        type = new JClassType(
+            info, name, binding.isAbstract(), binding.isFinal() || binding.isAnonymousType());
       } else if (binding.isInterface() || binding.isAnnotationType()) {
         type = new JInterfaceType(info, name);
       } else if (binding.isEnum()) {

@@ -26,7 +26,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.IntFunction;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import jsinterop.annotations.JsFunction;
@@ -720,43 +722,15 @@ public class Java8Test extends GWTTestCase {
   interface SimpleI {
     int fun();
   }
-  interface SimpleJ {
-    int foo();
-    int bar();
-  }
   interface SimpleK {
   }
   public void testIntersectionCastWithLambdaExpr() {
-    SimpleI simpleI1 = (SimpleI & EmptyI) () -> { return 11; };
+    SimpleI simpleI1 = (SimpleI & EmptyI) () -> 11;
     assertEquals(11, simpleI1.fun());
-    SimpleI simpleI2 = (EmptyI & SimpleI) () -> { return 22; };
+    SimpleI simpleI2 = (EmptyI & SimpleI) () -> 22;
     assertEquals(22, simpleI2.fun());
-    EmptyI emptyI = (EmptyI & SimpleI) () -> { return 33; };
-    try {
-      ((EmptyA & SimpleI) () -> { return 33; }).fun();
-      fail("Should have thrown a ClassCastException");
-    } catch (ClassCastException e) {
-      // expected.
-    }
-    try {
-      ((SimpleI & SimpleJ) () -> { return 44; }).fun();
-      fail("Should have thrown a ClassCastException");
-    } catch (ClassCastException e) {
-      // expected.
-    }
-    try {
-      ((SimpleI & SimpleJ) () -> { return 44; }).foo();
-      fail("Should have thrown a ClassCastException");
-    } catch (ClassCastException e) {
-      // expected.
-    }
-    try {
-      ((SimpleI & SimpleJ) () -> { return 44; }).bar();
-      fail("Should have thrown a ClassCastException");
-    } catch (ClassCastException e) {
-      // expected.
-    }
-    assertEquals(55, ((SimpleI & SimpleK) () -> { return 55; }).fun());
+    EmptyI emptyI = (EmptyI & SimpleI) () -> 33;
+    assertEquals(55, ((SimpleI & SimpleK) () -> 55).fun());
   }
 
   class SimpleA {
@@ -2006,5 +1980,63 @@ public class Java8Test extends GWTTestCase {
     IntFunction<Integer> unboxBox = i -> i;
     assertEquals(2, (int) unboxBox.apply(2));
     assertEquals(2, (int) unboxBox.apply(new Integer(2)));
+  }
+
+  ////////////////////////////////////////////////////////////
+  //
+  //   Tests for language features introduced in Java 9
+  
+  class Resource implements AutoCloseable {
+    boolean isOpen = true;
+
+    public void close() {
+      this.isOpen = false;
+    }
+  }
+
+  public void testTryWithResourcesJava9() {
+    Resource r1 = new Resource();
+    assertTrue(r1.isOpen);
+    Resource r2Copy;
+    try (r1; Resource r2 = new Resource()) {
+      assertTrue(r1.isOpen);
+      assertTrue(r2.isOpen);
+      r2Copy = r2;
+    }
+    assertFalse(r1.isOpen);
+    assertFalse(r2Copy.isOpen);
+  }
+
+  private interface InterfaceWithPrivateMethods {
+    int implementedMethod();
+    
+    default int defaultMethod() {
+      return privateMethod();
+    }
+
+    private int privateMethod() {
+      return implementedMethod();
+    }
+
+    private int staticPrivateMethod() {
+      return 42;
+    }
+  }
+
+  public void testInterfacePrivateMethodsJava9() {
+    InterfaceWithPrivateMethods implementor = () -> 50;
+    assertEquals(50, implementor.implementedMethod());
+    assertEquals(50, implementor.defaultMethod());
+    assertEquals(42, implementor.staticPrivateMethod());
+  }
+
+  public void testAnonymousDiamondJava9() {
+    Supplier<String> helloSupplier = new Supplier<>() {
+      @Override
+      public String get() {
+        return "hello";
+      }
+    };
+    assertEquals("hello", helloSupplier.get());
   }
 }

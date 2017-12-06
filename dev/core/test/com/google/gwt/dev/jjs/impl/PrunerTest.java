@@ -27,7 +27,7 @@ import com.google.gwt.dev.util.arg.SourceLevel;
 public class PrunerTest extends OptimizerTestBase {
   @Override
   protected void setUp() throws Exception {
-    sourceLevel = SourceLevel.JAVA8;
+    sourceLevel = SourceLevel.JAVA9;
     super.setUp();
     runDeadCodeElimination = true;
   }

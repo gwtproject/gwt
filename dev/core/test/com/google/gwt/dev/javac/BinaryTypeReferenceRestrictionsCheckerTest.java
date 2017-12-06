@@ -40,6 +40,7 @@ import org.eclipse.jdt.internal.compiler.env.IBinaryTypeAnnotation;
 import org.eclipse.jdt.internal.compiler.env.ITypeAnnotationWalker;
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
 import org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding;
+import org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.ExternalAnnotationStatus;
 import org.eclipse.jdt.internal.compiler.lookup.ClassScope;
 import org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope;
 import org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment;
@@ -83,6 +84,11 @@ public class BinaryTypeReferenceRestrictionsCheckerTest extends TestCase {
 
     @Override
     public IBinaryField[] getFields() {
+      return null;
+    }
+
+    @Override
+    public char[] getModule() {
       return null;
     }
 
@@ -170,6 +176,10 @@ public class BinaryTypeReferenceRestrictionsCheckerTest extends TestCase {
     public ITypeAnnotationWalker enrichWithExternalAnnotationsFor(
         ITypeAnnotationWalker walker, Object member, LookupEnvironment environment) {
       return walker;
+    }
+    @Override
+    public ExternalAnnotationStatus getExternalAnnotationStatus() {
+      return null;
     }
   }
 

@@ -218,7 +218,7 @@ public class ResolveTypeSignature extends EmptySignatureVisitor {
       JClassType[] typeArgs) {
     int n = typeArgs.length;
     for (int i = 0; i < n; ++i) {
-      JWildcardType wildcard = typeArgs[i].isWildcard();
+      JWildcardType wildcard = typeArgs[i] == null ? null : typeArgs[i].isWildcard();
       // right now we only replace Foo<?> with the constraints defined on the
       // definition (which appears to match the existing TypeOracleUpdater)
       // but other cases may need to be handled.

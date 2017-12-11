@@ -28,6 +28,9 @@ load("//third_party/java_src/gwt:build-macros.bzl", "AugmentedJar")
 java_library(
     name = "codeserver-bare",
     srcs = glob(["java/**/*.java"]),
+    javacopts = [
+        "-XepAllErrorsAsWarnings",
+    ],
     resources = glob([
         "java/**/*.html",
         "java/**/*.ico",

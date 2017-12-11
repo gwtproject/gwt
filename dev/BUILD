@@ -129,10 +129,7 @@ java_library(
     srcs = glob(["core/src/**/*.java"]),
     compatible_with = ["//buildenv/target:appengine"],
     javacopts = [
-        "-Xep:MissingCasesInEnumSwitch:OFF",
-        "-Xep:FallThrough:OFF",
-        "-Xep:ReturnValueIgnored:OFF",
-        "-Xep:EqualsIncompatibleType:OFF",
+        "-XepAllErrorsAsWarnings",
     ],
     deps = [
         ":compiler.standalone.super",
@@ -205,10 +202,7 @@ java_library(
     ),
     compatible_with = ["//buildenv/target:appengine"],
     javacopts = [
-        "-Xep:MissingCasesInEnumSwitch:OFF",
-        "-Xep:FallThrough:OFF",
-        "-Xep:ReturnValueIgnored:OFF",
-        "-Xep:EqualsIncompatibleType:OFF",
+        "-XepAllErrorsAsWarnings",
     ],
     deps = [
         ":compiler.standalone.super",
@@ -302,12 +296,7 @@ java_library(
         "core/test/**/*.java",
     ]),
     javacopts = [
-        "-Xep:MissingCasesInEnumSwitch:OFF",
-        "-Xep:SelfComparison:OFF",
-        "-Xep:SelfEquals:OFF",
-        "-Xep:FallThrough:OFF",
-        "-Xep:ReturnValueIgnored:OFF",
-        "-Xep:EqualsIncompatibleType:OFF",
+        "-XepAllErrorsAsWarnings",
     ],
     deps = [
         ":compiler.standalone.super",

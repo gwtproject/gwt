@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85366861_92286aae",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 2002,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-12-12T20:16:09Z",
+      "side": 1,
+      "message": "[error] Got an exception - expecting EOF, found \u0027assertTrue\u0027",
+      "revId": "bb6d5159ffc001a2c7b7285b1855f9ff0d2f37b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

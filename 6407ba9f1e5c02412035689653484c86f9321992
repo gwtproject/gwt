@@ -22,6 +22,30 @@
       "revId": "6407ba9f1e5c02412035689653484c86f9321992",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f8cd131_6e2c4bd6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 2242,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-12-12T22:22:32Z",
+      "side": 1,
+      "message": "Nope. The variables are by reference. There is a pass later that assigns them an actual name later (based on the name here).",
+      "parentUuid": "64af7a23_9223feac",
+      "range": {
+        "startLine": 2242,
+        "startChar": 28,
+        "endLine": 2242,
+        "endChar": 36
+      },
+      "revId": "6407ba9f1e5c02412035689653484c86f9321992",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

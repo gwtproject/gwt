@@ -513,7 +513,7 @@
              excludes="${gwt.nongwt.testcase.excludes}"/>
     <gwt.junit test.name="test.nongwt"
                test.args="${test.args}"
-               test.jvmargs="${test.jvmargs}"
+               test.jvmargs="${test.jvmargs} -Xmx2g "
                test.out="${junit.out}/nongwt"
                test.cases="test.nongwt.tests">
       <extraclasspaths>

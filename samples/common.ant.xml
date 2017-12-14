@@ -148,7 +148,7 @@
             <pathelement location="${gwt.user.jar}" />
             <pathelement location="${gwt.dev.jar}" />
           </classpath>
-          <jvmarg value="-Xmx384M" />
+          <jvmarg value="-Xmx1g" />
           <arg value="-localWorkers" />
           <arg value="${gwt.samples.localworkers}" />
           <arg value="-war" />

@@ -22,6 +22,8 @@ import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.DOM;
 
+import junit.framework.Assert;
+
 import java.util.Iterator;
 import java.util.Locale;
 
@@ -363,39 +365,6 @@ public class TreeTest extends GWTTestCase {
     assertScrollingOnSelection(tree, true);
   }
 
-  private void assertScrollingOnSelection(Tree tree, boolean shouldScroll) {
-    tree.addItem(new Label("hello1"));
-    tree.addItem(new Label("hello2"));
-    TreeItem levelZeroTreeItem = tree.addItem(new Label("level0"));
-    TreeItem selectedItem = levelZeroTreeItem.addItem(new Label("level1"));
-    selectedItem.addItem(SafeHtmlUtils.fromString("level2"));
-
-    // For the tree to be opened. Otherwise, all sizes will be zero and no scrolling would occur,
-    // regardless of the mode.
-    levelZeroTreeItem.setState(true);
-    selectedItem.setState(true);
-
-    ScrollPanel panel = new ScrollPanel();
-    RootPanel.get().add(panel);
-    panel.setWidget(tree);
-    
-    // Set a size that is smaller than the content to allow scrolling
-    panel.setPixelSize(40, 90);
-
-    assertEquals(0, panel.getVerticalScrollPosition());
-    assertEquals(0, panel.getHorizontalScrollPosition());
-
-    tree.setSelectedItem(selectedItem);
-
-    if (shouldScroll) {
-      assertTrue("Expected vertical scroll", panel.getVerticalScrollPosition() != 0);
-      assertTrue("Expected horizontal scroll", panel.getHorizontalScrollPosition() != 0);
-    } else {
-      assertEquals("Expected no vertical scroll", 0, panel.getVerticalScrollPosition());
-      assertEquals("Expected no horizontal scroll", 0, panel.getHorizontalScrollPosition());
-    }
-  }
-
   public void testSwap() {
     Tree t = createTree();
 
@@ -490,6 +459,90 @@ public class TreeTest extends GWTTestCase {
     assertFalse(childTree.getChildWidgets().containsKey(eLabel.getParent()));
   }
 
+  public void testUpdateFocusableOnClosing() {
+    Tree tree = createTree();
+    tree.setScrollOnSelectEnabled(true);
+    tree.addItem(new Label("hello1"));
+    tree.addItem(new Label("hello2"));
+    TreeItem levelZeroTreeItem = tree.addItem(new Label("level0"));
+    TreeItem levelOneItem = levelZeroTreeItem.addItem(new Label("level1.1"));
+    levelOneItem.addItem(SafeHtmlUtils.fromString("level2"));
+    TreeItem secondLevelOneItem = levelZeroTreeItem.addItem(new Label("level1.2"));
+    // For the tree to be opened. Otherwise, all sizes will be zero and no scrolling would occur,
+    // regardless of the mode.
+    levelZeroTreeItem.setState(true);
+    levelOneItem.setState(true);
+    
+    this.setupTreeWithScrollPanel(tree);
+    
+    tree.setSelectedItem(secondLevelOneItem);
+    String topBeforeCLosing = tree.getElement().getFirstChildElement().getStyle().getProperty("top");
+    // close open level one item which should lead to update of focusable without selection change
+    levelOneItem.setState(false);
+    String topAfterClosing = tree.getElement().getFirstChildElement().getStyle().getProperty("top");
+    assertNotSame("Focusable was not updated!", topBeforeCLosing, topAfterClosing);
+  }
+  
+  public void testUpdateFocusableOnRemoval() {
+    Tree tree = createTree();
+    tree.setScrollOnSelectEnabled(true);
+    tree.addItem(new Label("hello1"));
+    tree.addItem(new Label("hello2"));
+    TreeItem levelZeroTreeItem = tree.addItem(new Label("level0"));
+    TreeItem levelOneItem = levelZeroTreeItem.addItem(new Label("level1.1"));
+    levelOneItem.addItem(SafeHtmlUtils.fromString("level2"));
+    TreeItem secondLevelOneItem = levelZeroTreeItem.addItem(new Label("level1.2"));
+    // For the tree to be opened. Otherwise, all sizes will be zero and no scrolling would occur,
+    // regardless of the mode.
+    levelZeroTreeItem.setState(true);
+    levelOneItem.setState(true);
+    
+    this.setupTreeWithScrollPanel(tree);
+    
+    tree.setSelectedItem(secondLevelOneItem);
+    String topBeforeRemoval = tree.getElement().getFirstChildElement().getStyle().getProperty("top");
+    // remove open level one item which should lead to update of focusable without selection change
+    levelZeroTreeItem.removeItem(levelOneItem);
+    String topAfterRemoval = tree.getElement().getFirstChildElement().getStyle().getProperty("top");
+    assertNotSame("Focusable was not updated!", topBeforeRemoval, topAfterRemoval);
+  }
+  
+  private void assertScrollingOnSelection(Tree tree, boolean shouldScroll) {
+    tree.addItem(new Label("hello1"));
+    tree.addItem(new Label("hello2"));
+    TreeItem levelZeroTreeItem = tree.addItem(new Label("level0"));
+    TreeItem selectedItem = levelZeroTreeItem.addItem(new Label("level1"));
+    selectedItem.addItem(SafeHtmlUtils.fromString("level2"));
+
+    // For the tree to be opened. Otherwise, all sizes will be zero and no scrolling would occur,
+    // regardless of the mode.
+    levelZeroTreeItem.setState(true);
+    selectedItem.setState(true);
+
+    ScrollPanel panel = this.setupTreeWithScrollPanel(tree);
+    // Set a size that is smaller than the content to allow scrolling
+    panel.setPixelSize(40, 90);
+
+    assertEquals(0, panel.getVerticalScrollPosition());
+    assertEquals(0, panel.getHorizontalScrollPosition());
+
+    tree.setSelectedItem(selectedItem);
+    if (shouldScroll) {
+      assertTrue("Expected vertical scroll", panel.getVerticalScrollPosition() != 0);
+      assertTrue("Expected horizontal scroll", panel.getHorizontalScrollPosition() != 0);
+    } else {
+      assertEquals("Expected no vertical scroll", 0, panel.getVerticalScrollPosition());
+      assertEquals("Expected no horizontal scroll", 0, panel.getHorizontalScrollPosition());
+    }
+  }
+  
+  private ScrollPanel setupTreeWithScrollPanel(Tree tree) {
+    ScrollPanel panel = new ScrollPanel();
+    RootPanel.get().add(panel);
+    panel.setWidget(tree);
+    return panel;
+  }
+  
   private Tree createTree() {
     return new Tree();
   }

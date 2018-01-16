@@ -507,6 +507,32 @@ public class TreeTest extends GWTTestCase {
     assertNotSame("Focusable was not updated!", topBeforeRemoval, topAfterRemoval);
   }
   
+  public void testUpdateFocusableOnRemovalOfSelected() {
+    Tree tree = createTree();
+    tree.setScrollOnSelectEnabled(true);
+    tree.addItem(new Label("hello1"));
+    tree.addItem(new Label("hello2"));
+    TreeItem levelZeroTreeItem = tree.addItem(new Label("level0"));
+    TreeItem levelOneItem = levelZeroTreeItem.addItem(new Label("level1.1"));
+    levelOneItem.addItem(SafeHtmlUtils.fromString("level2"));
+    TreeItem secondLevelOneItem = levelZeroTreeItem.addItem(new Label("level1.2"));
+    // For the tree to be opened. Otherwise, all sizes will be zero and no scrolling would occur,
+    // regardless of the mode.
+    levelZeroTreeItem.setState(true);
+    levelOneItem.setState(true);
+    
+    this.setupTreeWithScrollPanel(tree);
+    
+    tree.setSelectedItem(secondLevelOneItem);
+    
+    String topBeforeRemoval = tree.getElement().getFirstChildElement().getStyle().getProperty("top");
+    // remove open level one item which should lead to update of focusable without selection change
+    levelZeroTreeItem.removeItem(secondLevelOneItem);
+    String topAfterRemoval = tree.getElement().getFirstChildElement().getStyle().getProperty("top");
+    assertNotSame("Focusable was not updated!", topBeforeRemoval, topAfterRemoval);
+    assertSame("Focusable was not reset!", "0px", topAfterRemoval);
+  }
+  
   private void assertScrollingOnSelection(Tree tree, boolean shouldScroll) {
     tree.addItem(new Label("hello1"));
     tree.addItem(new Label("hello2"));

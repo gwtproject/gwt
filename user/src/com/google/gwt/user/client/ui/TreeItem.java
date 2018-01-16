@@ -634,18 +634,24 @@ public class TreeItem extends UIObject implements IsTreeItem, HasTreeItems,
     if (children == null || !children.contains(item)) {
       return;
     }
-
+    
+    // Reset focus if necessary
+    if (item.isSelected()){
+      tree.resetFocus();
+    }
+    
     // Orphan.
     Tree oldTree = tree;
     item.setTree(null);
-
+    
     // Physical detach.
     if (isRoot) {
       oldTree.getElement().removeChild(item.getElement());
     } else {
       childSpanElem.removeChild(item.getElement());
     }
-
+    oldTree.moveFocus(true); 
+    
     // Logical detach.
     item.setParentItem(null);
     children.remove(item);
@@ -727,7 +733,8 @@ public class TreeItem extends UIObject implements IsTreeItem, HasTreeItems,
     if (this.open != open) {
       this.open = open;
       updateState(true, true);
-
+      tree.moveFocus(true);
+      
       if (fireEvents && tree != null) {
         tree.fireStateChanged(this, open);
       }

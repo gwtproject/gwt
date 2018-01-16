@@ -930,6 +930,62 @@ public class Tree extends Widget implements HasTreeItems.ForIsWidget, HasWidgets
     }
   }
 
+  /**
+   * Move the tree focus to the specified selected item.
+   * 
+   * @param blockScroll Block scrolling if only focusable shall be updated, i.e. moveFocus is 
+   * not triggered by selection change.
+   */
+  void moveFocus(boolean blockScroll) {
+    if (null == curSelection){
+      return;
+    }
+    Focusable focusableWidget = curSelection.getFocusable();
+    if (focusableWidget != null) {
+      focusableWidget.setFocus(true);
+      if (scrollOnSelectEnabled) {
+        ((Widget) focusableWidget).getElement().scrollIntoView();
+      }
+    } else {
+      // Get the location and size of the given item's content element relative
+      // to the tree.
+      Element treeElem = curSelection.getContentElem();
+      int containerLeft = getAbsoluteLeft();
+      int containerTop = getAbsoluteTop();
+
+      int left = treeElem.getAbsoluteLeft() - containerLeft;
+      int top = treeElem.getAbsoluteTop() - containerTop;
+      int width = treeElem.getPropertyInt("offsetWidth");
+      int height = treeElem.getPropertyInt("offsetHeight");
+
+      // If the item is not visible, quit here
+      if (width == 0 || height == 0) {
+        DOM.setIntStyleAttribute(focusable, "left", 0);
+        DOM.setIntStyleAttribute(focusable, "top", 0);
+        return;
+      }
+      // Set the focusable element's position and size to exactly underlap the
+      // item's content element.
+      focusable.getStyle().setProperty("left", left + "px");
+      focusable.getStyle().setProperty("top", top + "px");
+      focusable.getStyle().setProperty("width", width + "px");
+      focusable.getStyle().setProperty("height", height + "px");
+      
+      if (scrollOnSelectEnabled && !blockScroll) { 
+        // Scroll it into view.
+        focusable.scrollIntoView();
+      }
+
+      // Update ARIA attributes to reflect the information from the
+      // newly-selected item.
+      updateAriaAttributes();
+
+      // Ensure Focus is set, as focus may have been previously delegated by
+      // tree.
+      setFocus(true);
+    }
+  }
+ 
   void orphan(Widget widget) {
     // Validation should already be done.
     assert (widget.getParent() == this);
@@ -943,6 +999,11 @@ public class Tree extends Widget implements HasTreeItems.ForIsWidget, HasWidgets
     }
   }
 
+  void resetFocus() {
+    DOM.setIntStyleAttribute(focusable, "left", 0);
+    DOM.setIntStyleAttribute(focusable, "top", 0);
+  }
+  
   /**
    * Called only from {@link TreeItem}: Shows the closed image on that tree
    * item.
@@ -976,7 +1037,7 @@ public class Tree extends Widget implements HasTreeItems.ForIsWidget, HasWidgets
   void showOpenImage(TreeItem treeItem) {
     showImage(treeItem, images.treeOpen());
   }
-
+  
   /**
    * Collects parents going up the element tree, terminated at the tree root.
    */
@@ -1151,57 +1212,7 @@ public class Tree extends Widget implements HasTreeItems.ForIsWidget, HasWidgets
     }
   }
 
-  /**
-   * Move the tree focus to the specified selected item.
-   */
-  private void moveFocus() {
-    Focusable focusableWidget = curSelection.getFocusable();
-    if (focusableWidget != null) {
-      focusableWidget.setFocus(true);
-      if (scrollOnSelectEnabled) {
-        ((Widget) focusableWidget).getElement().scrollIntoView();
-      }
-    } else {
-      if (scrollOnSelectEnabled) {
-        // Get the location and size of the given item's content element relative
-        // to the tree.
-        Element selectedElem = curSelection.getContentElem();
-        int containerLeft = getAbsoluteLeft();
-        int containerTop = getAbsoluteTop();
   
-        int left = selectedElem.getAbsoluteLeft() - containerLeft;
-        int top = selectedElem.getAbsoluteTop() - containerTop;
-        int width = selectedElem.getPropertyInt("offsetWidth");
-        int height = selectedElem.getPropertyInt("offsetHeight");
-
-        // If the item is not visible, quite here
-        if (width == 0 || height == 0) {
-          DOM.setIntStyleAttribute(focusable, "left", 0);
-          DOM.setIntStyleAttribute(focusable, "top", 0);
-          return;
-        }
-  
-        // Set the focusable element's position and size to exactly underlap the
-        // item's content element.
-        focusable.getStyle().setProperty("left", left + "px");
-        focusable.getStyle().setProperty("top", top + "px");
-        focusable.getStyle().setProperty("width", width + "px");
-        focusable.getStyle().setProperty("height", height + "px");
-  
-        // Scroll it into view.
-        focusable.scrollIntoView();
-      }
-
-      // Update ARIA attributes to reflect the information from the
-      // newly-selected item.
-      updateAriaAttributes();
-
-      // Ensure Focus is set, as focus may have been previously delegated by
-      // tree.
-      setFocus(true);
-    }
-  }
-
   /**
    * Moves to the next item, going into children as if dig is enabled.
    */
@@ -1273,7 +1284,7 @@ public class Tree extends Widget implements HasTreeItems.ForIsWidget, HasWidgets
 
     if (curSelection != null) {
       if (moveFocus) {
-        moveFocus();
+        moveFocus(false);
       }
       // Select the item and fire the selection event.
       curSelection.setSelected(true);

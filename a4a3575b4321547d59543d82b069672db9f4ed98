@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58f2a3a2_60a01b09",
+        "filename": "dev/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2018-01-23T22:29:39Z",
+      "side": 1,
+      "message": "typo: 3.13.100",
+      "range": {
+        "startLine": 77,
+        "startChar": 54,
+        "endLine": 77,
+        "endChar": 63
+      },
+      "revId": "a4a3575b4321547d59543d82b069672db9f4ed98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

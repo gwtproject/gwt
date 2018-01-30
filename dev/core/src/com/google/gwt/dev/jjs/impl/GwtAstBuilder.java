@@ -1251,6 +1251,7 @@ public class GwtAstBuilder {
       // method
       JMethod samMethod = new JMethod(info, interfaceMethod.getName(), innerLambdaClass,
           interfaceMethod.getType(), false, false, true, interfaceMethod.getAccess());
+      samMethod.setSynthetic();
 
       // implements the SAM, e.g. Callback.onCallback(), Runnable.run(), etc
       createLambdaSamMethod(x, interfaceMethod, info, innerLambdaClass, locals, outerField,
@@ -1850,6 +1851,8 @@ public class GwtAstBuilder {
       JMethod samMethod = new JMethod(info, interfaceMethod.getName(),
           innerLambdaClass, interfaceMethod.getType(),
           false, false, true, interfaceMethod.getAccess());
+      samMethod.setSynthetic();
+
       for (JParameter origParam : interfaceMethod.getParams()) {
         samMethod.cloneParameter(origParam);
       }

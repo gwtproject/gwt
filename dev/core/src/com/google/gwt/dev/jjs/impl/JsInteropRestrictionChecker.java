@@ -1014,13 +1014,22 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
   }
 
   private void checkUnusableByJs(JMember member) {
-    logIfUnusableByJs(member, member instanceof JField ? "Type of" : "Return type of", member);
-
     if (member instanceof JMethod) {
-      for (JParameter parameter : ((JMethod) member).getParams()) {
+      JMethod method = (JMethod) member;
+      if (method.isSynthetic() && !method.isSyntheticAccidentalOverride()) {
+        // Do not emit warnings for synthetic methods unless they are accidental overrides.
+        return;
+      }
+
+      logIfUnusableByJs(member, "Return type of", member);
+
+      for (JParameter parameter : method.getParams()) {
         String prefix = String.format("Type of parameter '%s' in", parameter.getName());
         logIfUnusableByJs(parameter, prefix, member);
       }
+    } else {
+      // it's a field
+      logIfUnusableByJs(member, "Type of", member);
     }
   }
 

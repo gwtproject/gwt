@@ -2539,6 +2539,27 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
             + " annotation to the corresponding member.");
   }
 
+  public void testUnusableByJsSyntheticMembersSucceeds() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetImport("jsinterop.annotations.JsFunction");
+    addSnippetClassDecl(
+        "@JsFunction",
+        "public interface I {",
+        "  @SuppressWarnings(\"unusable-by-js\")",
+        "  int m(long l);",
+        "}",
+        "@JsType public static class Buggy {",
+        "  private void m() {",
+        "    I l = e -> 42;",
+        "    I mr = this::mr;",
+        "}",
+        "  private int mr(long l) {",
+        "    return 42;",
+        "}",
+        "}");
+    assertBuggySucceeds();
+  }
+
   private static final MockJavaResource jsFunctionInterface = new MockJavaResource(
       "test.MyJsFunctionInterface") {
     @Override

@@ -1029,6 +1029,14 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
     if (hasType.getType().canBeReferencedExternally()) {
       return;
     }
+
+    if (x.isSynthetic() && x instanceof JMethod) {
+      JMethod method = (JMethod) x;
+      if (!method.isSyntheticAccidentalOverride()) {
+        return;
+      }
+    }
+
     if (isUnusableByJsSuppressed(x.getEnclosingType()) || isUnusableByJsSuppressed(x)
         || isUnusableByJsSuppressed(hasType)) {
       return;

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a3041e2a_00e71dbc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2018-01-31T04:35:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dca6d766_ddd77e85",
+      "revId": "96a224e1d1198e9831163e845a92e38f628ff027",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca93c455_541385da",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 2
@@ -39,6 +57,30 @@
       "revId": "96a224e1d1198e9831163e845a92e38f628ff027",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ac49933_06911813",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2558,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2018-01-31T04:35:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca93c455_541385da",
+      "range": {
+        "startLine": 2558,
+        "startChar": 9,
+        "endLine": 2558,
+        "endChar": 12
+      },
+      "revId": "96a224e1d1198e9831163e845a92e38f628ff027",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

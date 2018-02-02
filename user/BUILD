@@ -27,12 +27,19 @@ package(
 
 load("//third_party/java_src/gwt:build-macros.bzl", "AugmentedJar")
 
+JSINTEROP_SRCS_JAVA7 = glob(
+    ["src/jsinterop/**/*.java"],
+    exclude = [
+        "src/jsinterop/annotations/JsNonNull.java",
+        "src/jsinterop/annotations/JsNullable.java",
+    ],
+)
+
 JSINTEROP_SRCS = glob(["src/jsinterop/**/*.java"])
 
 # GWT JsInterop annotations in a separate library used by hybrid app projects
 java_library(
     name = "gwt-jsinterop-annotations",
-    srcs = JSINTEROP_SRCS,
     compatible_with = [
         "//buildenv/target:android",
         "//buildenv/target:appengine",
@@ -40,6 +47,35 @@ java_library(
     constraints = [
         "android",
     ],
+    exports = select({
+        "//tools/java_toolchain:java7": [":gwt-jsinterop-annotations_java7"],
+        "//conditions:default": [":gwt-jsinterop-annotations_java8"],
+    }),
+)
+
+java_library(
+    name = "gwt-jsinterop-annotations_java7",
+    srcs = JSINTEROP_SRCS_JAVA7,
+    compatible_with = [
+        "//buildenv/target:android",
+        "//buildenv/target:appengine",
+    ],
+    constraints = [
+        "android",
+    ],
+    visibility = ["//visibility:private"],
+)
+
+java_library(
+    name = "gwt-jsinterop-annotations_java8",
+    srcs = JSINTEROP_SRCS,
+    compatible_with = [
+        "//buildenv/target:android",
+    ],
+    constraints = [
+        "android",
+    ],
+    visibility = ["//visibility:private"],
 )
 
 java_library(

@@ -22,9 +22,8 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 import java.io.Serializable;
 
-import javax.annotation.Nonnull;
-
 import jsinterop.annotations.JsIgnore;
+import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsType;
 
 /**
@@ -117,7 +116,7 @@ public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializ
     return super.hashCode();
   }
 
-  @Nonnull
+  @JsNonNull
   public final String name() {
     return name != null ? name : "" + ordinal;
   }

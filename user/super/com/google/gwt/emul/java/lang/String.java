@@ -28,8 +28,6 @@ import java.util.Comparator;
 import java.util.Locale;
 import java.util.StringJoiner;
 
-import javax.annotation.Nonnull;
-
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.EmulatedCharset;
 import javaemul.internal.HashCodes;
@@ -38,6 +36,7 @@ import javaemul.internal.NativeRegExp;
 import javaemul.internal.annotations.DoNotInline;
 
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -190,7 +189,7 @@ public final class String implements Comparable<String>, CharSequence,
 
   // valueOf needs to be treated special:
   // J2cl uses it for String concat and thus it can not use string concatenation itself.
-  @Nonnull
+  @JsNonNull
   public static String valueOf(Object x) {
     return x == null ? "null" : x.toString();
   }

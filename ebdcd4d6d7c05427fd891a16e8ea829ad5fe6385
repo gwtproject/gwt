@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21578647_4a59c274",
+        "filename": "user/BUILD",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 6910
+      },
+      "writtenOn": "2018-02-07T19:26:17Z",
+      "side": 1,
+      "message": "Why not use here all and only JSINTEROP_SRCS_JAVA7 use this exclude the two annotaions",
+      "revId": "ebdcd4d6d7c05427fd891a16e8ea829ad5fe6385",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

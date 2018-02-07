@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68cca190_f42a168b",
+        "filename": "user/src/jsinterop/annotations/JsNullable.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-02-07T18:14:23Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "354ae71b0bd8c30221ed5956371bd721cb153980",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "210ae2f8_ef791496",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Enum.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-02-07T18:14:23Z",
+      "side": 1,
+      "message": "[error] \u0027@JsNonNull\u0027 annotation modifier does not preceed non-annotation modifiers.",
+      "revId": "354ae71b0bd8c30221ed5956371bd721cb153980",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "988fbf63_957a3f78",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-02-07T18:14:23Z",
+      "side": 1,
+      "message": "[error] \u0027@JsNonNull\u0027 annotation modifier does not preceed non-annotation modifiers.",
+      "revId": "354ae71b0bd8c30221ed5956371bd721cb153980",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c53e00b3_8be8b70c",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-02-07T18:14:23Z",
+      "side": 1,
+      "message": "[error] \u0027@JsNonNull\u0027 annotation modifier does not preceed non-annotation modifiers.",
+      "revId": "354ae71b0bd8c30221ed5956371bd721cb153980",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

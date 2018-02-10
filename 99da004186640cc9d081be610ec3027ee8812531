@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5bfe4680_08e451ce",
+        "filename": "dev/core/src/com/google/gwt/dev/PrecompileTaskArgProcessor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-02-10T01:48:07Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.util.arg.ArgHandlerDeprecatedDisableUpdateCheck\u0027 import.",
+      "revId": "99da004186640cc9d081be610ec3027ee8812531",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7885504e_4a7e2a2d",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-02-10T01:48:07Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.util.arg.ArgHandlerDeprecatedDisableUpdateCheck\u0027 import.",
+      "revId": "99da004186640cc9d081be610ec3027ee8812531",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -70,11 +70,6 @@ abstract class UnmodifiableCompilerOptions implements CompilerOptions {
   }
 
   @Override
-  public final void setDisableUpdateCheck(boolean disabled) {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
   public final void setEnableAssertions(boolean enableAssertions) {
     throw new UnsupportedOperationException();
   }

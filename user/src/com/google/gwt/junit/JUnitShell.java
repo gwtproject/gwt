@@ -36,10 +36,10 @@ import com.google.gwt.dev.javac.CompilationProblemReporter;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.CompilationUnit;
 import com.google.gwt.dev.jjs.JsOutputOption;
-import com.google.gwt.dev.shell.CheckForUpdates;
 import com.google.gwt.dev.shell.jetty.JettyLauncher;
 import com.google.gwt.dev.util.arg.ArgHandlerClosureFormattedOutput;
 import com.google.gwt.dev.util.arg.ArgHandlerDeployDir;
+import com.google.gwt.dev.util.arg.ArgHandlerDeprecatedDisableUpdateCheck;
 import com.google.gwt.dev.util.arg.ArgHandlerDeprecatedOptimizeDataflow;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableCastChecking;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableClassMetadata;
@@ -48,7 +48,6 @@ import com.google.gwt.dev.util.arg.ArgHandlerDisableInlineLiteralParameters;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableOrdinalizeEnums;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableRemoveDuplicateFunctions;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableRunAsync;
-import com.google.gwt.dev.util.arg.ArgHandlerDisableUpdateCheck;
 import com.google.gwt.dev.util.arg.ArgHandlerDraftCompile;
 import com.google.gwt.dev.util.arg.ArgHandlerEnableAssertions;
 import com.google.gwt.dev.util.arg.ArgHandlerExtraDir;
@@ -292,7 +291,7 @@ public class JUnitShell extends DevMode {
       registerHandler(new ArgHandlerDisableOrdinalizeEnums(options));
       registerHandler(new ArgHandlerDisableRemoveDuplicateFunctions(options));
       registerHandler(new ArgHandlerDisableRunAsync(options));
-      registerHandler(new ArgHandlerDisableUpdateCheck(options));
+      registerHandler(new ArgHandlerDeprecatedDisableUpdateCheck());
       registerHandler(new ArgHandlerDraftCompile(options));
       registerHandler(new ArgHandlerLocalWorkers(options));
       registerHandler(new ArgHandlerNamespace(options));
@@ -926,14 +925,6 @@ public class JUnitShell extends DevMode {
 
   public CompilerContext getCompilerContext() {
     return compilerContext;
-  }
-
-  /**
-   * Check for updates once a minute.
-   */
-  @Override
-  protected long checkForUpdatesInterval() {
-    return CheckForUpdates.ONE_MINUTE;
   }
 
   @Override

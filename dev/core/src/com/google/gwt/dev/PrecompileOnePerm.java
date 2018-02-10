@@ -22,8 +22,6 @@ import com.google.gwt.dev.CompileTaskRunner.CompileTask;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.ModuleDefLoader;
 import com.google.gwt.dev.cfg.PropertyCombinations;
-import com.google.gwt.dev.shell.CheckForUpdates;
-import com.google.gwt.dev.shell.CheckForUpdates.UpdateResult;
 import com.google.gwt.dev.util.Memory;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.arg.ArgHandlerPerm;
@@ -34,7 +32,6 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 
 import java.io.File;
 import java.util.List;
-import java.util.concurrent.FutureTask;
 
 /**
  * Creates a ready-to-compile AST for a single permutation.
@@ -115,16 +112,7 @@ public class PrecompileOnePerm {
       CompileTask task = new CompileTask() {
         @Override
         public boolean run(TreeLogger logger) throws UnableToCompleteException {
-          FutureTask<UpdateResult> updater = null;
-          if (!options.isUpdateCheckDisabled()) {
-            updater = CheckForUpdates.checkForUpdatesInBackgroundThread(logger,
-                CheckForUpdates.ONE_DAY);
-          }
-          boolean success = new PrecompileOnePerm(options).run(logger);
-          if (success) {
-            CheckForUpdates.logUpdateAvailable(logger, updater);
-          }
-          return success;
+          return new PrecompileOnePerm(options).run(logger);
         }
       };
       if (CompileTaskRunner.runWithAppropriateLogger(options, task)) {

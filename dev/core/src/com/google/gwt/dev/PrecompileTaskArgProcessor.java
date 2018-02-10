@@ -29,7 +29,7 @@ import com.google.gwt.dev.util.arg.ArgHandlerDisableOrdinalizeEnums;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableRemoveDuplicateFunctions;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableRunAsync;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableSoycHtml;
-import com.google.gwt.dev.util.arg.ArgHandlerDisableUpdateCheck;
+import com.google.gwt.dev.util.arg.ArgHandlerDeprecatedDisableUpdateCheck;
 import com.google.gwt.dev.util.arg.ArgHandlerDraftCompile;
 import com.google.gwt.dev.util.arg.ArgHandlerDumpSignatures;
 import com.google.gwt.dev.util.arg.ArgHandlerEnableAssertions;
@@ -71,7 +71,7 @@ class PrecompileTaskArgProcessor extends CompileArgProcessor {
     registerHandler(new ArgHandlerDisableOrdinalizeEnums(options));
     registerHandler(new ArgHandlerDisableRunAsync(options));
     registerHandler(new ArgHandlerDisableSoycHtml(options));
-    registerHandler(new ArgHandlerDisableUpdateCheck(options));
+    registerHandler(new ArgHandlerDeprecatedDisableUpdateCheck());
     registerHandler(new ArgHandlerDraftCompile(options));
     registerHandler(new ArgHandlerDumpSignatures());
     registerHandler(new ArgHandlerEnableAssertions(options));

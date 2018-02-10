@@ -26,7 +26,6 @@ import com.google.gwt.dev.javac.UnitCacheSingleton;
 import com.google.gwt.dev.shell.ArtifactAcceptor;
 import com.google.gwt.dev.shell.BrowserChannelServer;
 import com.google.gwt.dev.shell.BrowserWidgetHost;
-import com.google.gwt.dev.shell.CheckForUpdates;
 import com.google.gwt.dev.shell.ModuleSpaceHost;
 import com.google.gwt.dev.shell.ShellModuleSpaceHost;
 import com.google.gwt.dev.shell.remoteui.RemoteUI;
@@ -724,13 +723,6 @@ public abstract class DevModeBase implements DoneCallback {
     options.setNoServer(!run);
   }
 
-  /**
-   * Derived classes can override to lengthen ping delay.
-   */
-  protected long checkForUpdatesInterval() {
-    return CheckForUpdates.ONE_MINUTE;
-  }
-
   protected abstract HostedModeBaseOptions createOptions();
 
   /**
@@ -788,23 +780,6 @@ public abstract class DevModeBase implements DoneCallback {
 
     // Set done callback
     ui.setCallback(DoneEvent.getType(), this);
-
-    // Check for updates
-    if (!options.isUpdateCheckDisabled()) {
-      final TreeLogger logger = getTopLogger();
-      final CheckForUpdates updateChecker = CheckForUpdates.createUpdateChecker(logger);
-      if (updateChecker != null) {
-        Thread checkerThread = new Thread("GWT Update Checker") {
-          @Override
-          public void run() {
-            CheckForUpdates.logUpdateAvailable(logger, updateChecker
-                .check(checkForUpdatesInterval()));
-          }
-        };
-        checkerThread.setDaemon(true);
-        checkerThread.start();
-      }
-    }
 
     // Accept connections from OOPHM clients
     ensureCodeServerListener();

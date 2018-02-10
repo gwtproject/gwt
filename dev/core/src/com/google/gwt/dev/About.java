@@ -129,7 +129,7 @@ public class About {
    *     couldn't be determined at build time.
    */
   public static GwtVersion getGwtVersionObject() {
-    // This is public because CheckForUpdates and WebAppCreator need access.
+    // This is public because WebAppCreator needs access.
     return gwtVersion;
   }
 

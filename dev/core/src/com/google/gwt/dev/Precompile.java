@@ -31,8 +31,6 @@ import com.google.gwt.dev.javac.CompilationUnit;
 import com.google.gwt.dev.jjs.JavaToJavaScriptCompiler;
 import com.google.gwt.dev.jjs.PrecompilationContext;
 import com.google.gwt.dev.jjs.UnifiedAst;
-import com.google.gwt.dev.shell.CheckForUpdates;
-import com.google.gwt.dev.shell.CheckForUpdates.UpdateResult;
 import com.google.gwt.dev.util.CollapsedPropertyKey;
 import com.google.gwt.dev.util.Memory;
 import com.google.gwt.dev.util.Util;
@@ -52,7 +50,6 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
-import java.util.concurrent.FutureTask;
 
 /**
  * Performs the first phase of compilation, generating the set of permutations
@@ -100,16 +97,7 @@ public class Precompile {
       CompileTask task = new CompileTask() {
         @Override
         public boolean run(TreeLogger logger) throws UnableToCompleteException {
-          FutureTask<UpdateResult> updater = null;
-          if (!options.isUpdateCheckDisabled()) {
-            updater =
-                CheckForUpdates.checkForUpdatesInBackgroundThread(logger, CheckForUpdates.ONE_DAY);
-          }
-          boolean success = new Precompile(options).run(logger);
-          if (success) {
-            CheckForUpdates.logUpdateAvailable(logger, updater);
-          }
-          return success;
+          return new Precompile(options).run(logger);
         }
       };
       if (CompileTaskRunner.runWithAppropriateLogger(options, task)) {

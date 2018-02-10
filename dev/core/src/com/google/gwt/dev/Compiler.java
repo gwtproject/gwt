@@ -25,8 +25,6 @@ import com.google.gwt.dev.javac.UnitCache;
 import com.google.gwt.dev.javac.UnitCacheSingleton;
 import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.js.JsNamespaceOption;
-import com.google.gwt.dev.shell.CheckForUpdates;
-import com.google.gwt.dev.shell.CheckForUpdates.UpdateResult;
 import com.google.gwt.dev.util.Memory;
 import com.google.gwt.dev.util.PersistenceBackedObject;
 import com.google.gwt.dev.util.Util;
@@ -48,7 +46,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.FutureTask;
 
 /**
  * The main executable entry point for the GWT Java to JavaScript compiler.
@@ -110,16 +107,7 @@ public class Compiler {
       CompileTask task = new CompileTask() {
         @Override
         public boolean run(TreeLogger logger) throws UnableToCompleteException {
-          FutureTask<UpdateResult> updater = null;
-          if (!options.isUpdateCheckDisabled()) {
-            updater = CheckForUpdates.checkForUpdatesInBackgroundThread(logger,
-                CheckForUpdates.ONE_DAY);
-          }
-          boolean success = Compiler.compile(logger, options);
-          if (success) {
-            CheckForUpdates.logUpdateAvailable(logger, updater);
-          }
-          return success;
+          return Compiler.compile(logger, options);
         }
       };
       if (CompileTaskRunner.runWithAppropriateLogger(options, task)) {

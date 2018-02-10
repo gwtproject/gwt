@@ -20,19 +20,16 @@ import com.google.gwt.util.tools.ArgHandlerFlag;
 /**
  * Checks to see if an updated version of GWT is available.
  */
-public final class ArgHandlerDisableUpdateCheck extends ArgHandlerFlag {
+@Deprecated
+public final class ArgHandlerDeprecatedDisableUpdateCheck extends ArgHandlerFlag {
 
-  private final OptionDisableUpdateCheck option;
-
-  public ArgHandlerDisableUpdateCheck(OptionDisableUpdateCheck option) {
-    this.option = option;
-
+  public ArgHandlerDeprecatedDisableUpdateCheck() {
     addTagValue("-XdisableUpdateCheck", false);
   }
 
   @Override
   public String getPurposeSnippet() {
-    return "Check to see if an updated version of GWT is available.";
+    return "Deprecated flag.";
   }
 
   @Override
@@ -47,7 +44,6 @@ public final class ArgHandlerDisableUpdateCheck extends ArgHandlerFlag {
 
   @Override
   public boolean setFlag(boolean value) {
-    option.setDisableUpdateCheck(!value);
     return true;
   }
 
@@ -58,6 +54,6 @@ public final class ArgHandlerDisableUpdateCheck extends ArgHandlerFlag {
 
   @Override
   public boolean getDefaultValue() {
-    return !option.isUpdateCheckDisabled();
+    return true;
   }
 }

@@ -33,7 +33,6 @@ import java.io.File;
  */
 public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
     implements PrecompileTaskOptions {
-  private boolean disableUpdateCheck;
   private boolean enableGeneratingOnShards = true;
   private File genDir;
   private final JJSOptionsImpl jjsOptions = new JJSOptionsImpl();
@@ -66,7 +65,6 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
 
     jjsOptions.copyFrom(other);
 
-    setDisableUpdateCheck(other.isUpdateCheckDisabled());
     setGenDir(other.getGenDir());
     setSaveSource(other.shouldSaveSource());
     setSourceMapFilePrefix(other.getSourceMapFilePrefix());
@@ -195,11 +193,6 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
-  public boolean isUpdateCheckDisabled() {
-    return disableUpdateCheck;
-  }
-
-  @Override
   public boolean isValidateOnly() {
     return validateOnly;
   }
@@ -222,11 +215,6 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   @Override
   public void setCompilerMetricsEnabled(boolean enabled) {
     jjsOptions.setCompilerMetricsEnabled(enabled);
-  }
-
-  @Override
-  public void setDisableUpdateCheck(boolean disabled) {
-    disableUpdateCheck = disabled;
   }
 
   @Override

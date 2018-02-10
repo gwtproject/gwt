@@ -233,11 +233,6 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   }
 
   @Override
-  public boolean isUpdateCheckDisabled() {
-    return true;
-  }
-
-  @Override
   public boolean isValidateOnly() {
     return false;
   }

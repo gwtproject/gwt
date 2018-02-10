@@ -60,7 +60,6 @@ public class PrecompileTaskArgProcessorTest extends TestCase {
         handledOptions.shouldRemoveDuplicateFunctions());
     assertNotEquals(defaultOptions.isRunAsyncEnabled(), handledOptions.isRunAsyncEnabled());
     assertNotEquals(defaultOptions.isSoycHtmlDisabled(), handledOptions.isSoycHtmlDisabled());
-    assertNotEquals(defaultOptions.isUpdateCheckDisabled(), handledOptions.isUpdateCheckDisabled());
     assertNotEquals(defaultOptions.isEnableAssertions(), handledOptions.isEnableAssertions());
     assertNotEquals(defaultOptions.isSoycEnabled(), handledOptions.isSoycEnabled());
     assertNotEquals(defaultOptions.isSoycExtra(), handledOptions.isSoycExtra());

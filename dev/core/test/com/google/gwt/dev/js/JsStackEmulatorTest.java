@@ -265,8 +265,7 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
         recordLineNumbersProp));
 
     CompilationState state =
-        CompilationStateBuilder.buildFrom(logger, context,
-            sourceOracle.getResources(), null);
+        CompilationStateBuilder.buildFrom(logger, context, sourceOracle.getResources());
     JProgram jProgram = AstConstructor.construct(logger, state, options, config);
     jProgram.addEntryMethod(findMethod(jProgram, "onModuleLoad"));
 

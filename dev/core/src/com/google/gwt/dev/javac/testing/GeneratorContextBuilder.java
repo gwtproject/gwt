@@ -107,7 +107,7 @@ public class GeneratorContextBuilder {
 
   private CompilationState buildCompilationState() throws UnableToCompleteException {
     TreeLogger logger = treeLogger != null ? treeLogger : createLogger();
-      return new CompilationStateBuilder().doBuildFrom(logger, compilerContext, resources, null);
+      return new CompilationStateBuilder().doBuildFrom(logger, compilerContext, resources);
   }
 
   private TreeLogger createLogger() {

@@ -23,7 +23,6 @@ import com.google.gwt.dev.cfg.MockModuleDef;
 import com.google.gwt.dev.javac.CheckerTestCase;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.CompilationStateBuilder;
-import com.google.gwt.dev.javac.JdtCompiler.AdditionalTypeProviderDelegate;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.javac.testing.impl.MockResourceOracle;
 import com.google.gwt.dev.jjs.JavaAstConstructor;
@@ -333,8 +332,7 @@ public abstract class JJSTestBase extends CheckerTestCase {
       logger = this.logger;
     }
     CompilationState state =
-        CompilationStateBuilder.buildFrom(logger, compilerContext,
-            sourceOracle.getResources(), getAdditionalTypeProviderDelegate());
+        CompilationStateBuilder.buildFrom(logger, compilerContext, sourceOracle.getResources());
     JProgram program =
         JavaAstConstructor.construct(logger, state, compilerContext,
             null, "test.EntryPoint", "com.google.gwt.lang.Exceptions");
@@ -358,14 +356,6 @@ public abstract class JJSTestBase extends CheckerTestCase {
     compilerContext.getOptions().setStrict(true);
     compilerContext.getOptions().setGenerateJsInteropExports(true);
     return compilerContext;
-  }
-
-  /**
-   * Return an AdditionalTypeProviderDelegate that will be able to provide
-   * new sources for unknown classnames.
-   */
-  protected AdditionalTypeProviderDelegate getAdditionalTypeProviderDelegate() {
-    return null;
   }
 
   /**

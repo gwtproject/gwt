@@ -329,6 +329,7 @@ PerformanceObserver
 PerformanceObserverEntryList
 PerformancePaintTiming
 PerformanceResourceTiming
+PerformanceServerTiming
 PerformanceTiming
 PeriodicWave
 Permission
@@ -361,6 +362,8 @@ RTCIceCandidate
 RTCPeerConnection
 RTCRtpContributingSource
 RTCRtpReceiver
+RTCRtpSender
+RTCTrackEvent
 RTCSessionDescription
 RTCStatsReport
 RadioNodeList
@@ -375,6 +378,8 @@ Reflect
 RegExp
 RemotePlayback
 Request
+ResizeObserver
+ResizeObserverEntry
 Response
 SVGAElement
 SVGAltGlyphDefElement

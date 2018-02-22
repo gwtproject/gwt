@@ -302,16 +302,14 @@ public class GwtAstBuilderTest extends JJSTestBase {
         }).build();
     compilerContext.getOptions().setSourceLevel(sourceLevel);
     compilerContext.getOptions().setStrict(true);
-    CompilationState state = CompilationStateBuilder.buildFrom(logger, compilerContext, sources,
-        getAdditionalTypeProviderDelegate());
+    CompilationState state = CompilationStateBuilder.buildFrom(logger, compilerContext, sources);
     return state;
   }
 
   private JProgram compileProgram(String entryType) throws UnableToCompleteException {
     CompilerContext compilerContext = provideCompilerContext();
     ;
-    CompilationState state = CompilationStateBuilder.buildFrom(logger, compilerContext, sources,
-        getAdditionalTypeProviderDelegate());
+    CompilationState state = CompilationStateBuilder.buildFrom(logger, compilerContext, sources);
     JProgram program = JavaAstConstructor.construct(logger, state, compilerContext,
         null, entryType, "com.google.gwt.lang.Exceptions");
     return program;

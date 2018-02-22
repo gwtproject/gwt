@@ -19,7 +19,6 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.CompilerContext;
-import com.google.gwt.dev.javac.JdtCompiler.AdditionalTypeProviderDelegate;
 import com.google.gwt.dev.javac.JdtCompiler.UnitProcessor;
 import com.google.gwt.dev.javac.typemodel.TypeOracle;
 import com.google.gwt.dev.jjs.CorrelationFactory.DummyCorrelationFactory;
@@ -206,13 +205,11 @@ public class CompilationStateBuilder {
 
     private CompilerContext compilerContext;
 
-    public CompileMoreLater(
-        CompilerContext compilerContext, AdditionalTypeProviderDelegate delegate) {
+    public CompileMoreLater(CompilerContext compilerContext) {
       this.compilerContext = compilerContext;
       this.compiler = new JdtCompiler(
           compilerContext, new UnitProcessorImpl());
       this.suppressErrors = !compilerContext.getOptions().isStrict();
-      compiler.setAdditionalTypeProviderDelegate(delegate);
     }
 
     /**
@@ -459,24 +456,12 @@ public class CompilationStateBuilder {
    *
    * @throws UnableToCompleteException if the compiler aborts (not a normal compile error).
    */
-  public static CompilationState buildFrom(
-      TreeLogger logger, CompilerContext compilerContext, Set<Resource> resources)
-      throws UnableToCompleteException {
-    return buildFrom(logger, compilerContext, resources, null);
-  }
-
-  /**
-   * Compiles the given source files and adds them to the CompilationState. See
-   * {@link CompileMoreLater#compile} for details.
-   *
-   * @throws UnableToCompleteException if the compiler aborts (not a normal compile error).
-   */
   public static CompilationState buildFrom(TreeLogger logger, CompilerContext compilerContext,
-      Set<Resource> resources, AdditionalTypeProviderDelegate delegate)
+      Set<Resource> resources)
       throws UnableToCompleteException {
     Event event = SpeedTracerLogger.start(DevModeEventType.CSB_BUILD_FROM_ORACLE);
     try {
-      return instance.doBuildFrom(logger, compilerContext, resources, delegate);
+      return instance.doBuildFrom(logger, compilerContext, resources);
     } finally {
       event.end();
     }
@@ -489,8 +474,7 @@ public class CompilationStateBuilder {
    * TODO: maybe use a finer brush than to synchronize the whole thing.
    */
   public synchronized CompilationState doBuildFrom(TreeLogger logger,
-      CompilerContext compilerContext, Set<Resource> resources,
-      AdditionalTypeProviderDelegate compilerDelegate)
+      CompilerContext compilerContext, Set<Resource> resources)
     throws UnableToCompleteException {
     UnitCache unitCache = compilerContext.getUnitCache();
     assert unitCache != null : "CompilerContext should always contain a unit cache.";
@@ -501,7 +485,7 @@ public class CompilationStateBuilder {
     // Units we don't want to rebuild unless we have to.
     Map<CompilationUnitBuilder, CompilationUnit> cachedUnits = Maps.newIdentityHashMap();
 
-    CompileMoreLater compileMoreLater = new CompileMoreLater(compilerContext, compilerDelegate);
+    CompileMoreLater compileMoreLater = new CompileMoreLater(compilerContext);
 
     // For each incoming Java source file...
     for (Resource resource : resources) {
@@ -586,12 +570,6 @@ public class CompilationStateBuilder {
     }
     byte[] content = out.toByteArray();
     return new ContentId(Shared.getTypeName(resource), Util.computeStrongName(content));
-  }
-
-  public CompilationState doBuildFrom(
-      TreeLogger logger, CompilerContext compilerContext, Set<Resource> resources)
-      throws UnableToCompleteException {
-    return doBuildFrom(logger, compilerContext, resources, null);
   }
 
   /**

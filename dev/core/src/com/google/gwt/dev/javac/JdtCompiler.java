@@ -232,16 +232,26 @@ public class JdtCompiler {
    */
   private static final double ABORT_COUNT_MAX = 100;
 
-  private class CompilerImpl extends Compiler {
-    private TreeLogger logger;
+  private static class CompilerImpl extends Compiler {
+    private final TreeLogger logger;
     private int abortCount = 0;
+    private final UnitProcessor processor;
+    private final Map<String, CompiledClass> internalTypes;
 
-    public CompilerImpl(TreeLogger logger, CompilerOptions compilerOptions) {
-      super(new INameEnvironmentImpl(packages, internalTypes),
+    public CompilerImpl(
+        TreeLogger logger,
+        CompilerOptions compilerOptions,
+        INameEnvironment nameEnvironment,
+        UnitProcessor processor,
+        Map<String, CompiledClass> internalTypes) {
+      super(nameEnvironment,
           DefaultErrorHandlingPolicies.proceedWithAllProblems(),
-          compilerOptions, new ICompilerRequestorImpl(), new DefaultProblemFactory(
-              Locale.getDefault()));
+          compilerOptions,
+          new ICompilerRequestorImpl(),
+          new DefaultProblemFactory(Locale.getDefault()));
       this.logger = logger;
+      this.processor = processor;
+      this.internalTypes = internalTypes;
     }
 
     /**
@@ -296,7 +306,7 @@ public class JdtCompiler {
         createCompiledClass(classFile, results);
       }
       List<CompiledClass> compiledClasses = new ArrayList<CompiledClass>(results.values());
-      addBinaryTypes(compiledClasses);
+      addBinaryTypes(compiledClasses, internalTypes);
 
       ICompilationUnit icu = cud.compilationResult().compilationUnit;
       Adapter adapter = (Adapter) icu;
@@ -997,7 +1007,13 @@ public class JdtCompiler {
       icus.add(new Adapter(builder));
     }
 
-    compilerImpl = new CompilerImpl(logger, getCompilerOptions());
+    compilerImpl =
+        new CompilerImpl(
+            logger,
+            getCompilerOptions(),
+            new INameEnvironmentImpl(packages, internalTypes),
+            processor,
+            internalTypes);
     try {
       compilerImpl.compile(icus.toArray(new ICompilationUnit[icus.size()]));
     } catch (AbortCompilation e) {
@@ -1039,6 +1055,11 @@ public class JdtCompiler {
   }
 
   private void addBinaryTypes(Collection<CompiledClass> compiledClasses) {
+    addBinaryTypes(compiledClasses, internalTypes);
+  }
+
+    private static void addBinaryTypes(
+        Collection<CompiledClass> compiledClasses, Map<String, CompiledClass> internalTypes) {
     for (CompiledClass cc : compiledClasses) {
       internalTypes.put(cc.getInternalName(), cc);
     }

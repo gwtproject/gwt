@@ -26,6 +26,7 @@ import org.eclipse.jdt.internal.compiler.classfmt.ClassFormatException;
 import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer;
 
 import java.io.Serializable;
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -77,7 +78,7 @@ public class CompiledClass implements Serializable {
   private CompiledClass enclosingClass;
   private final String internalName;
   private final boolean isLocal;
-  private transient NameEnvironmentAnswer nameEnvironmentAnswer;
+  private transient SoftReference<NameEnvironmentAnswer> nameEnvironmentAnswerReference;
   private String signatureHash;
 
   private final String sourceName;
@@ -192,10 +193,13 @@ public class CompiledClass implements Serializable {
   }
 
   NameEnvironmentAnswer getNameEnvironmentAnswer() throws ClassFormatException {
+    NameEnvironmentAnswer nameEnvironmentAnswer = nameEnvironmentAnswerReference == null
+        ? null : nameEnvironmentAnswerReference.get();
     if (nameEnvironmentAnswer == null) {
       ClassFileReader cfr =
           new ClassFileReader(getBytes(), unit.getResourceLocation().toCharArray(), true);
       nameEnvironmentAnswer = new NameEnvironmentAnswer(cfr, null);
+      nameEnvironmentAnswerReference = new SoftReference<>(nameEnvironmentAnswer);
     }
     return nameEnvironmentAnswer;
   }

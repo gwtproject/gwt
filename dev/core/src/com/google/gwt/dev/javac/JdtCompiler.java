@@ -514,7 +514,7 @@ public class JdtCompiler {
       }
 
       try {
-        return internalTypes.get(internalName).getNameEnvironmentAnswer();
+        return internalTypes.get(internalName).getNameEnvironmentAnswerReference();
       } catch (ClassFormatException ex) {
         return null;
       }

@@ -416,7 +416,7 @@ public class CompilationStateBuilder {
           // NameEnvironmentAnswer
           for (CompiledClass cc : unit.getCompiledClasses()) {
             try {
-              cc.getNameEnvironmentAnswer();
+              cc.getNameEnvironmentAnswerReference();
             } catch (ClassFormatException ex) {
               isValid = false;
               break;

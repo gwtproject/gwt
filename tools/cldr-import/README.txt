@@ -4,12 +4,7 @@ Steps to process CLDR data from command-line:
 
 - First you have to get latest CLDR data available locally on your system
   and compile it:
-  $ svn co http://unicode.org/repos/cldr/tags/release-25 <cldrdir>
-
-- Second you have to appropriately patch cldr data with modifications
-  maintained in GWT (replace GWT_TOOLS with your gwt tools folder)
-  $ cd <cldrdir>
-  $ patch -p0 -i GWT_TOOLS/lib/cldr/25/GoogleMods.patch
+  $ svn co http://unicode.org/repos/cldr/tags/release-32-0-1 <cldrdir>
 
 - Third, you need to compile cldr tools
   $ cd <cldrdir>/tools/java

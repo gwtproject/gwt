@@ -27,22 +27,7 @@ public class DateTimeFormatInfoImpl_it_CH extends DateTimeFormatInfoImpl_it {
   }
 
   @Override
-  public String dateFormatLong() {
-    return "d MMMM y";
-  }
-
-  @Override
-  public String dateFormatMedium() {
-    return "d-MMM-y";
-  }
-
-  @Override
   public String dateFormatShort() {
     return "dd.MM.yy";
-  }
-
-  @Override
-  public String timeFormatFull() {
-    return "HH.mm:ss 'h' zzzz";
   }
 }

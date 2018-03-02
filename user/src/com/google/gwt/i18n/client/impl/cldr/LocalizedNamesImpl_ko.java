@@ -46,9 +46,8 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "GD",
         "GR",
         "GL",
-        "GW",
         "GN",
-        "CV",
+        "GW",
         "NA",
         "NR",
         "NG",
@@ -56,7 +55,6 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "SS",
         "ZA",
         "NL",
-        "AN",
         "BQ",
         "NP",
         "NO",
@@ -88,6 +86,7 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "LT",
         "LI",
         "MG",
+        "MQ",
         "MH",
         "YT",
         "MO",
@@ -95,7 +94,6 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "MW",
         "MY",
         "ML",
-        "MQ",
         "IM",
         "MX",
         "MC",
@@ -135,31 +133,31 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "BV",
         "BT",
         "MP",
+        "KP",
         "BG",
         "BR",
         "BN",
         "WS",
         "SA",
         "GS",
-        "CY",
         "SM",
         "ST",
         "MF",
         "BL",
+        "PM",
         "EH",
         "SN",
         "RS",
         "EA",
+        "SC",
         "LC",
         "VC",
         "KN",
-        "PM",
         "SH",
         "SO",
         "SB",
         "SD",
         "SR",
-        "SC",
         "LK",
         "SJ",
         "SZ",
@@ -182,16 +180,17 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "IE",
         "AZ",
         "AF",
-        "AI",
         "AD",
         "AL",
         "DZ",
         "AO",
         "AG",
+        "AI",
         "AC",
         "ER",
         "EE",
         "EC",
+        "ET",
         "SV",
         "GB",
         "VG",
@@ -210,7 +209,8 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "UZ",
         "UA",
         "EU",
-        "ET",
+        "EZ",
+        "UN",
         "IQ",
         "IR",
         "IL",
@@ -223,7 +223,6 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "ZM",
         "JE",
         "GQ",
-        "KP",
         "GE",
         "CN",
         "CF",
@@ -235,6 +234,7 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "CL",
         "IC",
         "CM",
+        "CV",
         "KZ",
         "QA",
         "KH",
@@ -258,6 +258,7 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "CP",
         "KG",
         "KI",
+        "CY",
         "TJ",
         "TZ",
         "TH",
@@ -305,7 +306,7 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
     namesMap.put("003", "북아메리카");
     namesMap.put("005", "남아메리카(남미)");
     namesMap.put("009", "오세아니아");
-    namesMap.put("011", "서아프리카");
+    namesMap.put("011", "서부 아프리카");
     namesMap.put("013", "중앙 아메리카");
     namesMap.put("014", "동부 아프리카");
     namesMap.put("015", "북부 아프리카");
@@ -313,10 +314,10 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
     namesMap.put("018", "남부 아프리카");
     namesMap.put("019", "아메리카 대륙");
     namesMap.put("021", "북부 아메리카");
-    namesMap.put("029", "카리브 해 제도");
+    namesMap.put("029", "카리브 제도");
     namesMap.put("030", "동아시아");
     namesMap.put("034", "남아시아");
-    namesMap.put("035", "동남 아시아");
+    namesMap.put("035", "동남아시아");
     namesMap.put("039", "남유럽");
     namesMap.put("053", "오스트랄라시아");
     namesMap.put("054", "멜라네시아");
@@ -332,13 +333,12 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
     namesMap.put("419", "라틴 아메리카");
     namesMap.put("AC", "어센션 섬");
     namesMap.put("AD", "안도라");
-    namesMap.put("AE", "아랍에미리트 연합");
+    namesMap.put("AE", "아랍에미리트");
     namesMap.put("AF", "아프가니스탄");
     namesMap.put("AG", "앤티가 바부다");
-    namesMap.put("AI", "안길라");
+    namesMap.put("AI", "앵귈라");
     namesMap.put("AL", "알바니아");
     namesMap.put("AM", "아르메니아");
-    namesMap.put("AN", "네덜란드령 안틸레스");
     namesMap.put("AO", "앙골라");
     namesMap.put("AQ", "남극 대륙");
     namesMap.put("AR", "아르헨티나");
@@ -357,7 +357,7 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
     namesMap.put("BH", "바레인");
     namesMap.put("BI", "부룬디");
     namesMap.put("BJ", "베냉");
-    namesMap.put("BL", "생 바르텔르미");
+    namesMap.put("BL", "생바르텔레미");
     namesMap.put("BM", "버뮤다");
     namesMap.put("BN", "브루나이");
     namesMap.put("BO", "볼리비아");
@@ -365,18 +365,18 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
     namesMap.put("BR", "브라질");
     namesMap.put("BS", "바하마");
     namesMap.put("BT", "부탄");
-    namesMap.put("BV", "부베");
+    namesMap.put("BV", "부베섬");
     namesMap.put("BW", "보츠와나");
     namesMap.put("BY", "벨라루스");
     namesMap.put("BZ", "벨리즈");
     namesMap.put("CA", "캐나다");
-    namesMap.put("CC", "코코스제도");
+    namesMap.put("CC", "코코스 제도");
     namesMap.put("CD", "콩고-킨샤사");
     namesMap.put("CF", "중앙 아프리카 공화국");
-    namesMap.put("CG", "콩고");
+    namesMap.put("CG", "콩고-브라자빌");
     namesMap.put("CH", "스위스");
     namesMap.put("CI", "코트디부아르");
-    namesMap.put("CK", "쿡제도");
+    namesMap.put("CK", "쿡 제도");
     namesMap.put("CL", "칠레");
     namesMap.put("CM", "카메룬");
     namesMap.put("CN", "중국");
@@ -384,10 +384,10 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
     namesMap.put("CP", "클립퍼튼 섬");
     namesMap.put("CR", "코스타리카");
     namesMap.put("CU", "쿠바");
-    namesMap.put("CV", "까뽀베르데");
+    namesMap.put("CV", "카보베르데");
     namesMap.put("CW", "퀴라소");
     namesMap.put("CX", "크리스마스섬");
-    namesMap.put("CY", "사이프러스");
+    namesMap.put("CY", "키프로스");
     namesMap.put("CZ", "체코");
     namesMap.put("DE", "독일");
     namesMap.put("DG", "디에고 가르시아");
@@ -403,13 +403,14 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
     namesMap.put("EH", "서사하라");
     namesMap.put("ER", "에리트리아");
     namesMap.put("ES", "스페인");
-    namesMap.put("ET", "이디오피아");
+    namesMap.put("ET", "에티오피아");
     namesMap.put("EU", "유럽 연합");
+    namesMap.put("EZ", "유로존");
     namesMap.put("FI", "핀란드");
     namesMap.put("FJ", "피지");
     namesMap.put("FK", "포클랜드 제도");
     namesMap.put("FM", "미크로네시아");
-    namesMap.put("FO", "페로제도");
+    namesMap.put("FO", "페로 제도");
     namesMap.put("FR", "프랑스");
     namesMap.put("GA", "가봉");
     namesMap.put("GB", "영국");
@@ -428,10 +429,10 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
     namesMap.put("GS", "사우스조지아 사우스샌드위치 제도");
     namesMap.put("GT", "과테말라");
     namesMap.put("GU", "괌");
-    namesMap.put("GW", "기네비쏘");
+    namesMap.put("GW", "기니비사우");
     namesMap.put("GY", "가이아나");
-    namesMap.put("HK", "홍콩, 중국 특별행정구");
-    namesMap.put("HM", "허드섬-맥도널드제도");
+    namesMap.put("HK", "홍콩(중국 특별행정구)");
+    namesMap.put("HM", "허드 맥도널드 제도");
     namesMap.put("HN", "온두라스");
     namesMap.put("HR", "크로아티아");
     namesMap.put("HT", "아이티");
@@ -442,7 +443,7 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
     namesMap.put("IL", "이스라엘");
     namesMap.put("IM", "맨 섬");
     namesMap.put("IN", "인도");
-    namesMap.put("IO", "영국령인도양식민지");
+    namesMap.put("IO", "영국령 인도양 식민지");
     namesMap.put("IQ", "이라크");
     namesMap.put("IR", "이란");
     namesMap.put("IS", "아이슬란드");
@@ -455,12 +456,12 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
     namesMap.put("KG", "키르기스스탄");
     namesMap.put("KH", "캄보디아");
     namesMap.put("KI", "키리바시");
-    namesMap.put("KM", "코모로스");
-    namesMap.put("KN", "세인트크리스토퍼 네비스");
-    namesMap.put("KP", "조선 민주주의 인민 공화국");
+    namesMap.put("KM", "코모로");
+    namesMap.put("KN", "세인트키츠 네비스");
+    namesMap.put("KP", "북한");
     namesMap.put("KR", "대한민국");
     namesMap.put("KW", "쿠웨이트");
-    namesMap.put("KY", "케이맨제도");
+    namesMap.put("KY", "케이맨 제도");
     namesMap.put("KZ", "카자흐스탄");
     namesMap.put("LA", "라오스");
     namesMap.put("LB", "레바논");
@@ -477,16 +478,16 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
     namesMap.put("MC", "모나코");
     namesMap.put("MD", "몰도바");
     namesMap.put("ME", "몬테네그로");
-    namesMap.put("MF", "생 마르탱");
+    namesMap.put("MF", "생마르탱");
     namesMap.put("MG", "마다가스카르");
-    namesMap.put("MH", "마샬 군도");
+    namesMap.put("MH", "마셜 제도");
     namesMap.put("MK", "마케도니아");
     namesMap.put("ML", "말리");
     namesMap.put("MM", "미얀마");
     namesMap.put("MN", "몽골");
-    namesMap.put("MO", "마카오, 중국 특별행정구");
+    namesMap.put("MO", "마카오(중국 특별행정구)");
     namesMap.put("MP", "북마리아나제도");
-    namesMap.put("MQ", "말티니크");
+    namesMap.put("MQ", "마르티니크");
     namesMap.put("MR", "모리타니");
     namesMap.put("MS", "몬트세라트");
     namesMap.put("MT", "몰타");
@@ -497,7 +498,7 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
     namesMap.put("MY", "말레이시아");
     namesMap.put("MZ", "모잠비크");
     namesMap.put("NA", "나미비아");
-    namesMap.put("NC", "뉴 칼레도니아");
+    namesMap.put("NC", "뉴칼레도니아");
     namesMap.put("NE", "니제르");
     namesMap.put("NF", "노퍽섬");
     namesMap.put("NG", "나이지리아");
@@ -516,8 +517,8 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
     namesMap.put("PH", "필리핀");
     namesMap.put("PK", "파키스탄");
     namesMap.put("PL", "폴란드");
-    namesMap.put("PM", "세인트피에르-미케롱");
-    namesMap.put("PN", "핏케언섬");
+    namesMap.put("PM", "생피에르 미클롱");
+    namesMap.put("PN", "핏케언 섬");
     namesMap.put("PR", "푸에르토리코");
     namesMap.put("PS", "팔레스타인 지구");
     namesMap.put("PT", "포르투갈");
@@ -532,7 +533,7 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
     namesMap.put("RW", "르완다");
     namesMap.put("SA", "사우디아라비아");
     namesMap.put("SB", "솔로몬 제도");
-    namesMap.put("SC", "쉐이쉘");
+    namesMap.put("SC", "세이셸");
     namesMap.put("SD", "수단");
     namesMap.put("SE", "스웨덴");
     namesMap.put("SG", "싱가포르");
@@ -550,9 +551,9 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
     namesMap.put("SV", "엘살바도르");
     namesMap.put("SX", "신트마르턴");
     namesMap.put("SY", "시리아");
-    namesMap.put("SZ", "스와질랜드");
+    namesMap.put("SZ", "스와질란드");
     namesMap.put("TA", "트리스탄다쿠나");
-    namesMap.put("TC", "터크스케이커스제도");
+    namesMap.put("TC", "터크스 케이커스 제도");
     namesMap.put("TD", "차드");
     namesMap.put("TF", "프랑스 남부 지방");
     namesMap.put("TG", "토고");
@@ -571,25 +572,26 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
     namesMap.put("UA", "우크라이나");
     namesMap.put("UG", "우간다");
     namesMap.put("UM", "미국령 해외 제도");
+    namesMap.put("UN", "유엔");
     namesMap.put("US", "미국");
     namesMap.put("UY", "우루과이");
     namesMap.put("UZ", "우즈베키스탄");
-    namesMap.put("VA", "바티칸");
+    namesMap.put("VA", "바티칸 시국");
     namesMap.put("VC", "세인트빈센트그레나딘");
     namesMap.put("VE", "베네수엘라");
-    namesMap.put("VG", "영국령 버진 아일랜드");
-    namesMap.put("VI", "미국령 버진 아일랜드");
+    namesMap.put("VG", "영국령 버진아일랜드");
+    namesMap.put("VI", "미국령 버진아일랜드");
     namesMap.put("VN", "베트남");
     namesMap.put("VU", "바누아투");
     namesMap.put("WF", "왈리스-푸투나 제도");
     namesMap.put("WS", "사모아");
     namesMap.put("XK", "코소보");
     namesMap.put("YE", "예멘");
-    namesMap.put("YT", "마요티");
+    namesMap.put("YT", "마요트");
     namesMap.put("ZA", "남아프리카");
     namesMap.put("ZM", "잠비아");
     namesMap.put("ZW", "짐바브웨");
-    namesMap.put("ZZ", "알수없거나 유효하지 않은 지역");
+    namesMap.put("ZZ", "알려지지 않은 지역");
   }
 
   @Override
@@ -604,7 +606,7 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "003": "북아메리카",
         "005": "남아메리카(남미)",
         "009": "오세아니아",
-        "011": "서아프리카",
+        "011": "서부 아프리카",
         "013": "중앙 아메리카",
         "014": "동부 아프리카",
         "015": "북부 아프리카",
@@ -612,10 +614,10 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "018": "남부 아프리카",
         "019": "아메리카 대륙",
         "021": "북부 아메리카",
-        "029": "카리브 해 제도",
+        "029": "카리브 제도",
         "030": "동아시아",
         "034": "남아시아",
-        "035": "동남 아시아",
+        "035": "동남아시아",
         "039": "남유럽",
         "053": "오스트랄라시아",
         "054": "멜라네시아",
@@ -631,13 +633,12 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "419": "라틴 아메리카",
         "AC": "어센션 섬",
         "AD": "안도라",
-        "AE": "아랍에미리트 연합",
+        "AE": "아랍에미리트",
         "AF": "아프가니스탄",
         "AG": "앤티가 바부다",
-        "AI": "안길라",
+        "AI": "앵귈라",
         "AL": "알바니아",
         "AM": "아르메니아",
-        "AN": "네덜란드령 안틸레스",
         "AO": "앙골라",
         "AQ": "남극 대륙",
         "AR": "아르헨티나",
@@ -656,7 +657,7 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "BH": "바레인",
         "BI": "부룬디",
         "BJ": "베냉",
-        "BL": "생 바르텔르미",
+        "BL": "생바르텔레미",
         "BM": "버뮤다",
         "BN": "브루나이",
         "BO": "볼리비아",
@@ -664,18 +665,18 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "BR": "브라질",
         "BS": "바하마",
         "BT": "부탄",
-        "BV": "부베",
+        "BV": "부베섬",
         "BW": "보츠와나",
         "BY": "벨라루스",
         "BZ": "벨리즈",
         "CA": "캐나다",
-        "CC": "코코스제도",
+        "CC": "코코스 제도",
         "CD": "콩고-킨샤사",
         "CF": "중앙 아프리카 공화국",
-        "CG": "콩고",
+        "CG": "콩고-브라자빌",
         "CH": "스위스",
         "CI": "코트디부아르",
-        "CK": "쿡제도",
+        "CK": "쿡 제도",
         "CL": "칠레",
         "CM": "카메룬",
         "CN": "중국",
@@ -683,10 +684,10 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "CP": "클립퍼튼 섬",
         "CR": "코스타리카",
         "CU": "쿠바",
-        "CV": "까뽀베르데",
+        "CV": "카보베르데",
         "CW": "퀴라소",
         "CX": "크리스마스섬",
-        "CY": "사이프러스",
+        "CY": "키프로스",
         "CZ": "체코",
         "DE": "독일",
         "DG": "디에고 가르시아",
@@ -702,13 +703,14 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "EH": "서사하라",
         "ER": "에리트리아",
         "ES": "스페인",
-        "ET": "이디오피아",
+        "ET": "에티오피아",
         "EU": "유럽 연합",
+        "EZ": "유로존",
         "FI": "핀란드",
         "FJ": "피지",
         "FK": "포클랜드 제도",
         "FM": "미크로네시아",
-        "FO": "페로제도",
+        "FO": "페로 제도",
         "FR": "프랑스",
         "GA": "가봉",
         "GB": "영국",
@@ -727,10 +729,10 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "GS": "사우스조지아 사우스샌드위치 제도",
         "GT": "과테말라",
         "GU": "괌",
-        "GW": "기네비쏘",
+        "GW": "기니비사우",
         "GY": "가이아나",
-        "HK": "홍콩, 중국 특별행정구",
-        "HM": "허드섬-맥도널드제도",
+        "HK": "홍콩(중국 특별행정구)",
+        "HM": "허드 맥도널드 제도",
         "HN": "온두라스",
         "HR": "크로아티아",
         "HT": "아이티",
@@ -741,7 +743,7 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "IL": "이스라엘",
         "IM": "맨 섬",
         "IN": "인도",
-        "IO": "영국령인도양식민지",
+        "IO": "영국령 인도양 식민지",
         "IQ": "이라크",
         "IR": "이란",
         "IS": "아이슬란드",
@@ -754,12 +756,12 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "KG": "키르기스스탄",
         "KH": "캄보디아",
         "KI": "키리바시",
-        "KM": "코모로스",
-        "KN": "세인트크리스토퍼 네비스",
-        "KP": "조선 민주주의 인민 공화국",
+        "KM": "코모로",
+        "KN": "세인트키츠 네비스",
+        "KP": "북한",
         "KR": "대한민국",
         "KW": "쿠웨이트",
-        "KY": "케이맨제도",
+        "KY": "케이맨 제도",
         "KZ": "카자흐스탄",
         "LA": "라오스",
         "LB": "레바논",
@@ -776,16 +778,16 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "MC": "모나코",
         "MD": "몰도바",
         "ME": "몬테네그로",
-        "MF": "생 마르탱",
+        "MF": "생마르탱",
         "MG": "마다가스카르",
-        "MH": "마샬 군도",
+        "MH": "마셜 제도",
         "MK": "마케도니아",
         "ML": "말리",
         "MM": "미얀마",
         "MN": "몽골",
-        "MO": "마카오, 중국 특별행정구",
+        "MO": "마카오(중국 특별행정구)",
         "MP": "북마리아나제도",
-        "MQ": "말티니크",
+        "MQ": "마르티니크",
         "MR": "모리타니",
         "MS": "몬트세라트",
         "MT": "몰타",
@@ -796,7 +798,7 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "MY": "말레이시아",
         "MZ": "모잠비크",
         "NA": "나미비아",
-        "NC": "뉴 칼레도니아",
+        "NC": "뉴칼레도니아",
         "NE": "니제르",
         "NF": "노퍽섬",
         "NG": "나이지리아",
@@ -815,8 +817,8 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "PH": "필리핀",
         "PK": "파키스탄",
         "PL": "폴란드",
-        "PM": "세인트피에르-미케롱",
-        "PN": "핏케언섬",
+        "PM": "생피에르 미클롱",
+        "PN": "핏케언 섬",
         "PR": "푸에르토리코",
         "PS": "팔레스타인 지구",
         "PT": "포르투갈",
@@ -831,7 +833,7 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "RW": "르완다",
         "SA": "사우디아라비아",
         "SB": "솔로몬 제도",
-        "SC": "쉐이쉘",
+        "SC": "세이셸",
         "SD": "수단",
         "SE": "스웨덴",
         "SG": "싱가포르",
@@ -849,9 +851,9 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "SV": "엘살바도르",
         "SX": "신트마르턴",
         "SY": "시리아",
-        "SZ": "스와질랜드",
+        "SZ": "스와질란드",
         "TA": "트리스탄다쿠나",
-        "TC": "터크스케이커스제도",
+        "TC": "터크스 케이커스 제도",
         "TD": "차드",
         "TF": "프랑스 남부 지방",
         "TG": "토고",
@@ -870,25 +872,26 @@ public class LocalizedNamesImpl_ko extends LocalizedNamesImpl {
         "UA": "우크라이나",
         "UG": "우간다",
         "UM": "미국령 해외 제도",
+        "UN": "유엔",
         "US": "미국",
         "UY": "우루과이",
         "UZ": "우즈베키스탄",
-        "VA": "바티칸",
+        "VA": "바티칸 시국",
         "VC": "세인트빈센트그레나딘",
         "VE": "베네수엘라",
-        "VG": "영국령 버진 아일랜드",
-        "VI": "미국령 버진 아일랜드",
+        "VG": "영국령 버진아일랜드",
+        "VI": "미국령 버진아일랜드",
         "VN": "베트남",
         "VU": "바누아투",
         "WF": "왈리스-푸투나 제도",
         "WS": "사모아",
         "XK": "코소보",
         "YE": "예멘",
-        "YT": "마요티",
+        "YT": "마요트",
         "ZA": "남아프리카",
         "ZM": "잠비아",
         "ZW": "짐바브웨",
-        "ZZ": "알수없거나 유효하지 않은 지역"
+        "ZZ": "알려지지 않은 지역"
     };
   }-*/;
 }

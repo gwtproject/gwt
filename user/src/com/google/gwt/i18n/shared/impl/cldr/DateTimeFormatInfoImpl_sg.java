@@ -212,10 +212,10 @@ public class DateTimeFormatInfoImpl_sg extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "F4-1",
-        "F4-2",
-        "F4-3",
-        "F4-4"
+        "F4–1",
+        "F4–2",
+        "F4–3",
+        "F4–4"
     };
   }
 

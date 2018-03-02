@@ -86,11 +86,6 @@ public class DateTimeFormatInfoImpl_nnh extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
-  }
-
-  @Override
   public String formatYearMonthFullDay() {
     return "'lyɛ'̌ʼ d 'na' MMMM, y";
   }
@@ -114,7 +109,7 @@ public class DateTimeFormatInfoImpl_nnh extends DateTimeFormatInfoImpl {
         "saŋ cÿó",
         "saŋ tsɛ̀ɛ cÿó",
         "saŋ njÿoláʼ",
-        "saŋ tyɛ̀b tyɛ̀b mbʉ̀",
+        "saŋ tyɛ̀b tyɛ̀b mbʉ̀ŋ",
         "saŋ mbʉ̀ŋ",
         "saŋ ngwɔ̀ʼ mbÿɛ",
         "saŋ tàŋa tsetsáʼ",
@@ -150,7 +145,7 @@ public class DateTimeFormatInfoImpl_nnh extends DateTimeFormatInfoImpl {
         "saŋ cÿó",
         "saŋ tsɛ̀ɛ cÿó",
         "saŋ njÿoláʼ",
-        "saŋ tyɛ̀b tyɛ̀b mbʉ̀",
+        "saŋ tyɛ̀b tyɛ̀b mbʉ̀ŋ",
         "saŋ mbʉ̀ŋ",
         "saŋ ngwɔ̀ʼ mbÿɛ",
         "saŋ tàŋa tsetsáʼ",

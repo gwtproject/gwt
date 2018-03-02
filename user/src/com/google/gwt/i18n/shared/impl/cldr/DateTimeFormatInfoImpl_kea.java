@@ -41,7 +41,7 @@ public class DateTimeFormatInfoImpl_kea extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "d 'di' MMM 'di' y";
+    return "d MMM y";
   }
 
   @Override
@@ -87,7 +87,7 @@ public class DateTimeFormatInfoImpl_kea extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrev() {
-    return "MMM 'di' y";
+    return "MMM y";
   }
 
   @Override
@@ -117,12 +117,12 @@ public class DateTimeFormatInfoImpl_kea extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, d 'di' MMM 'di' y";
+    return "EEE, d MMM y";
   }
 
   @Override
   public String formatYearQuarterFull() {
-    return "QQQQ y";
+    return "QQQQ 'di' y";
   }
 
   @Override
@@ -134,7 +134,7 @@ public class DateTimeFormatInfoImpl_kea extends DateTimeFormatInfoImpl {
   public String[] monthsFull() {
     return new String[] {
         "Janeru",
-        "Fevereru",
+        "Febreru",
         "Marsu",
         "Abril",
         "Maiu",
@@ -152,7 +152,7 @@ public class DateTimeFormatInfoImpl_kea extends DateTimeFormatInfoImpl {
   public String[] monthsShort() {
     return new String[] {
         "Jan",
-        "Fev",
+        "Feb",
         "Mar",
         "Abr",
         "Mai",
@@ -169,10 +169,10 @@ public class DateTimeFormatInfoImpl_kea extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Primeru Trimestri",
-        "Sigundu Trimestri",
-        "Terseru Trimestri",
-        "Kuartu Trimestri"
+        "1º trimestri",
+        "2º trimestri",
+        "3º trimestri",
+        "4º trimestri"
     };
   }
 
@@ -200,15 +200,28 @@ public class DateTimeFormatInfoImpl_kea extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] weekdaysFullStandalone() {
+    return new String[] {
+        "dumingu",
+        "sigunda-fera",
+        "tersa-fera",
+        "kuarta-fera",
+        "kinta-fera",
+        "sesta-fera",
+        "sábadu"
+    };
+  }
+
+  @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "d",
-        "s",
-        "t",
-        "k",
-        "k",
-        "s",
-        "s"
+        "D",
+        "S",
+        "T",
+        "K",
+        "K",
+        "S",
+        "S"
     };
   }
 

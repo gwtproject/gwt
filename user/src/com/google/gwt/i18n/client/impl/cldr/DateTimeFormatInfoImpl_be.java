@@ -22,38 +22,50 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_be extends DateTimeFormatInfoImpl {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "да палудня",
-        "пасля палудня"
-    };
-  }
-
-  @Override
   public String dateFormatFull() {
-    return "EEEE, d MMMM y";
+    return "EEEE, d MMMM y 'г'.";
   }
 
   @Override
   public String dateFormatLong() {
-    return "d MMMM y";
+    return "d MMMM y 'г'.";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "d.M.y";
+    return "d.MM.y";
   }
 
   @Override
   public String dateFormatShort() {
-    return "d.M.yy";
+    return "d.MM.yy";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " 'у' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " 'у' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "да н.э.",
-        "н.э."
+        "да нараджэння Хрыстова",
+        "ад нараджэння Хрыстова"
     };
   }
 
@@ -63,26 +75,6 @@ public class DateTimeFormatInfoImpl_be extends DateTimeFormatInfoImpl {
         "да н.э.",
         "н.э."
     };
-  }
-
-  @Override
-  public String formatHour12Minute() {
-    return "h.mm a";
-  }
-
-  @Override
-  public String formatHour12MinuteSecond() {
-    return "h.mm.ss a";
-  }
-
-  @Override
-  public String formatHour24Minute() {
-    return "HH.mm";
-  }
-
-  @Override
-  public String formatHour24MinuteSecond() {
-    return "HH.mm.ss";
   }
 
   @Override
@@ -127,7 +119,7 @@ public class DateTimeFormatInfoImpl_be extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFullDay() {
-    return "d MMMM y";
+    return "d MMMM y 'г'.";
   }
 
   @Override
@@ -267,22 +259,7 @@ public class DateTimeFormatInfoImpl_be extends DateTimeFormatInfoImpl {
 
   @Override
   public String timeFormatFull() {
-    return "HH.mm.ss zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "HH.mm.ss z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "HH.mm.ss";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "HH.mm";
+    return "HH:mm:ss, zzzz";
   }
 
   @Override

@@ -63,8 +63,8 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "BA",
         "BW",
         "BR",
-        "VG",
         "IO",
+        "VG",
         "BN",
         "BF",
         "BI",
@@ -73,6 +73,7 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "VA",
         "GB",
         "VE",
+        "QO",
         "UM",
         "VI",
         "AM",
@@ -106,6 +107,7 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "ER",
         "EE",
         "ET",
+        "EZ",
         "EU",
         "EG",
         "YE",
@@ -115,7 +117,6 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "IL",
         "IN",
         "ID",
-        "QO",
         "IQ",
         "IR",
         "IE",
@@ -156,8 +157,8 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "LY",
         "LI",
         "LU",
-        "MU",
         "MR",
+        "MU",
         "MG",
         "YT",
         "MO",
@@ -184,7 +185,6 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "NE",
         "NG",
         "NL",
-        "AN",
         "BQ",
         "NI",
         "DE",
@@ -194,8 +194,10 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "NO",
         "AE",
         "OM",
+        "UN",
         "BV",
         "AC",
+        "HM",
         "CP",
         "IM",
         "NF",
@@ -203,19 +205,18 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "SH",
         "CK",
         "PN",
-        "SJ",
-        "HM",
+        "TC",
         "PK",
         "PW",
         "PS",
         "PA",
         "PG",
-        "ZA",
         "PY",
         "PE",
         "GS",
         "KR",
         "SS",
+        "ZA",
         "KP",
         "MP",
         "PL",
@@ -248,15 +249,14 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "SI",
         "SB",
         "SO",
+        "US",
         "SD",
         "SR",
-        "US",
         "SL",
         "TJ",
         "TH",
         "TW",
         "TZ",
-        "TC",
         "TL",
         "TG",
         "TK",
@@ -290,6 +290,7 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "ME",
         "CH",
         "SE",
+        "SJ",
         "LK",
         "JM",
         "JP",
@@ -301,7 +302,7 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
     super.loadNameMapJava();
     namesMap.put("001", "Світ");
     namesMap.put("002", "Африка");
-    namesMap.put("003", "Північноамериканський континент");
+    namesMap.put("003", "Північна Америка");
     namesMap.put("005", "Південна Америка");
     namesMap.put("009", "Океанія");
     namesMap.put("011", "Західна Африка");
@@ -311,13 +312,13 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
     namesMap.put("017", "Центральна Африка");
     namesMap.put("018", "Південна Африка");
     namesMap.put("019", "Америка");
-    namesMap.put("021", "Північна Америка");
+    namesMap.put("021", "Північна Америка (регіон)");
     namesMap.put("029", "Карибський басейн");
     namesMap.put("030", "Східна Азія");
     namesMap.put("034", "Південна Азія");
     namesMap.put("035", "Південно-Східна Азія");
     namesMap.put("039", "Південна Європа");
-    namesMap.put("053", "Австралія та Нова Зеландія");
+    namesMap.put("053", "Австралазія");
     namesMap.put("054", "Меланезія");
     namesMap.put("057", "Мікронезійський регіон");
     namesMap.put("061", "Полінезія");
@@ -333,13 +334,12 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
     namesMap.put("AD", "Андорра");
     namesMap.put("AE", "Обʼєднані Арабські Емірати");
     namesMap.put("AF", "Афганістан");
-    namesMap.put("AG", "Антигуа і Барбуда");
-    namesMap.put("AI", "Ангілья");
+    namesMap.put("AG", "Антиґуа і Барбуда");
+    namesMap.put("AI", "Анґілья");
     namesMap.put("AL", "Албанія");
     namesMap.put("AM", "Вірменія");
-    namesMap.put("AN", "Нідерландські Антильські Острови");
     namesMap.put("AO", "Ангола");
-    namesMap.put("AQ", "Антарктида");
+    namesMap.put("AQ", "Антарктика");
     namesMap.put("AR", "Аргентина");
     namesMap.put("AS", "Американське Самоа");
     namesMap.put("AT", "Австрія");
@@ -347,41 +347,41 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
     namesMap.put("AW", "Аруба");
     namesMap.put("AX", "Аландські острови");
     namesMap.put("AZ", "Азербайджан");
-    namesMap.put("BA", "Боснія і Герцоговина");
+    namesMap.put("BA", "Боснія і Герцеґовина");
     namesMap.put("BB", "Барбадос");
     namesMap.put("BD", "Бангладеш");
-    namesMap.put("BE", "Бельгія");
+    namesMap.put("BE", "Бельґія");
     namesMap.put("BF", "Буркіна-Фасо");
     namesMap.put("BG", "Болгарія");
     namesMap.put("BH", "Бахрейн");
     namesMap.put("BI", "Бурунді");
     namesMap.put("BJ", "Бенін");
     namesMap.put("BL", "Сен-Бартельмі");
-    namesMap.put("BM", "Бермуди");
+    namesMap.put("BM", "Бермудські острови");
     namesMap.put("BN", "Бруней");
     namesMap.put("BO", "Болівія");
     namesMap.put("BQ", "Нідерландські Карибські острови");
-    namesMap.put("BR", "Бразилія");
-    namesMap.put("BS", "Багами");
+    namesMap.put("BR", "Бразілія");
+    namesMap.put("BS", "Багамські Острови");
     namesMap.put("BT", "Бутан");
     namesMap.put("BV", "Острів Буве");
     namesMap.put("BW", "Ботсвана");
     namesMap.put("BY", "Білорусь");
     namesMap.put("BZ", "Беліз");
     namesMap.put("CA", "Канада");
-    namesMap.put("CC", "Кокосові острови");
+    namesMap.put("CC", "Кокосові (Кілінгові) острови");
     namesMap.put("CD", "Конго – Кіншаса");
     namesMap.put("CF", "Центральноафриканська Республіка");
     namesMap.put("CG", "Конго – Браззавіль");
     namesMap.put("CH", "Швейцарія");
     namesMap.put("CI", "Кот-д’Івуар");
     namesMap.put("CK", "Острови Кука");
-    namesMap.put("CL", "Чилі");
+    namesMap.put("CL", "Чілі");
     namesMap.put("CM", "Камерун");
     namesMap.put("CN", "Китай");
     namesMap.put("CO", "Колумбія");
     namesMap.put("CP", "Острів Кліппертон");
-    namesMap.put("CR", "Коста-Рика");
+    namesMap.put("CR", "Коста-Ріка");
     namesMap.put("CU", "Куба");
     namesMap.put("CV", "Кабо-Верде");
     namesMap.put("CW", "Кюрасао");
@@ -389,8 +389,8 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
     namesMap.put("CY", "Кіпр");
     namesMap.put("CZ", "Чехія");
     namesMap.put("DE", "Німеччина");
-    namesMap.put("DG", "Дієґо-Ґарсія");
-    namesMap.put("DJ", "Джібуті");
+    namesMap.put("DG", "Дієго-Гарсія");
+    namesMap.put("DJ", "Джибуті");
     namesMap.put("DK", "Данія");
     namesMap.put("DM", "Домініка");
     namesMap.put("DO", "Домініканська Республіка");
@@ -404,33 +404,34 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
     namesMap.put("ES", "Іспанія");
     namesMap.put("ET", "Ефіопія");
     namesMap.put("EU", "Європейський Союз");
+    namesMap.put("EZ", "Єврозона");
     namesMap.put("FI", "Фінляндія");
     namesMap.put("FJ", "Фіджі");
     namesMap.put("FK", "Фолклендські острови");
-    namesMap.put("FM", "Мікронезія Федеративні Штати");
-    namesMap.put("FO", "Фарерські острови");
+    namesMap.put("FM", "Мікронезія");
+    namesMap.put("FO", "Фарерські Острови");
     namesMap.put("FR", "Франція");
     namesMap.put("GA", "Габон");
     namesMap.put("GB", "Велика Британія");
-    namesMap.put("GD", "Гренада");
+    namesMap.put("GD", "Ґренада");
     namesMap.put("GE", "Грузія");
-    namesMap.put("GF", "Французька Гвіана");
-    namesMap.put("GG", "Гернсі");
+    namesMap.put("GF", "Французька Ґвіана");
+    namesMap.put("GG", "Ґернсі");
     namesMap.put("GH", "Гана");
-    namesMap.put("GI", "Гібралтар");
-    namesMap.put("GL", "Гренландія");
+    namesMap.put("GI", "Ґібралтар");
+    namesMap.put("GL", "Ґренландія");
     namesMap.put("GM", "Гамбія");
     namesMap.put("GN", "Гвінея");
-    namesMap.put("GP", "Гваделупа");
+    namesMap.put("GP", "Ґваделупа");
     namesMap.put("GQ", "Екваторіальна Гвінея");
     namesMap.put("GR", "Греція");
-    namesMap.put("GS", "Південна Джорджія та Південні Сандвічеві Острови");
-    namesMap.put("GT", "Гватемала");
-    namesMap.put("GU", "Гуам");
+    namesMap.put("GS", "Південна Джорджія та Південні Сандвічеві острови");
+    namesMap.put("GT", "Ґватемала");
+    namesMap.put("GU", "Ґуам");
     namesMap.put("GW", "Гвінея-Бісау");
-    namesMap.put("GY", "Гайана");
+    namesMap.put("GY", "Ґайана");
     namesMap.put("HK", "Гонконг, О.А.Р. Китаю");
-    namesMap.put("HM", "Острови Херд і Мак-Дональд");
+    namesMap.put("HM", "острів Герд і острови Макдоналд");
     namesMap.put("HN", "Гондурас");
     namesMap.put("HR", "Хорватія");
     namesMap.put("HT", "Гаїті");
@@ -441,7 +442,7 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
     namesMap.put("IL", "Ізраїль");
     namesMap.put("IM", "Острів Мен");
     namesMap.put("IN", "Індія");
-    namesMap.put("IO", "Британські території Індійського океану");
+    namesMap.put("IO", "Британська територія в Індійському Океані");
     namesMap.put("IQ", "Ірак");
     namesMap.put("IR", "Іран");
     namesMap.put("IS", "Ісландія");
@@ -453,7 +454,7 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
     namesMap.put("KE", "Кенія");
     namesMap.put("KG", "Киргизстан");
     namesMap.put("KH", "Камбоджа");
-    namesMap.put("KI", "Кірибаті");
+    namesMap.put("KI", "Кірібаті");
     namesMap.put("KM", "Коморські острови");
     namesMap.put("KN", "Сент-Кітс і Невіс");
     namesMap.put("KP", "Північна Корея");
@@ -469,7 +470,7 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
     namesMap.put("LR", "Ліберія");
     namesMap.put("LS", "Лесото");
     namesMap.put("LT", "Литва");
-    namesMap.put("LU", "Люксембург");
+    namesMap.put("LU", "Люксембурґ");
     namesMap.put("LV", "Латвія");
     namesMap.put("LY", "Лівія");
     namesMap.put("MA", "Марокко");
@@ -483,13 +484,13 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
     namesMap.put("ML", "Малі");
     namesMap.put("MM", "Мʼянма (Бірма)");
     namesMap.put("MN", "Монголія");
-    namesMap.put("MO", "Макао О.А.Р. Китаю");
+    namesMap.put("MO", "Макао, О.А.Р Китаю");
     namesMap.put("MP", "Північні Маріанські Острови");
-    namesMap.put("MQ", "Мартиніка");
+    namesMap.put("MQ", "Мартініка");
     namesMap.put("MR", "Мавританія");
     namesMap.put("MS", "Монтсеррат");
     namesMap.put("MT", "Мальта");
-    namesMap.put("MU", "Маврикій");
+    namesMap.put("MU", "Маврікій");
     namesMap.put("MV", "Мальдіви");
     namesMap.put("MW", "Малаві");
     namesMap.put("MX", "Мексика");
@@ -500,30 +501,30 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
     namesMap.put("NE", "Нігер");
     namesMap.put("NF", "Острів Норфолк");
     namesMap.put("NG", "Нігерія");
-    namesMap.put("NI", "Нікарагуа");
+    namesMap.put("NI", "Нікараґуа");
     namesMap.put("NL", "Нідерланди");
-    namesMap.put("NO", "Норвегія");
+    namesMap.put("NO", "Норвеґія");
     namesMap.put("NP", "Непал");
     namesMap.put("NR", "Науру");
-    namesMap.put("NU", "Нія");
+    namesMap.put("NU", "Ніуе");
     namesMap.put("NZ", "Нова Зеландія");
     namesMap.put("OM", "Оман");
     namesMap.put("PA", "Панама");
     namesMap.put("PE", "Перу");
     namesMap.put("PF", "Французька Полінезія");
-    namesMap.put("PG", "Папуа Нова Гвінея");
+    namesMap.put("PG", "Папуа-Нова Ґвінея");
     namesMap.put("PH", "Філіппіни");
     namesMap.put("PK", "Пакистан");
     namesMap.put("PL", "Польща");
     namesMap.put("PM", "Сен-Пʼєр і Мікелон");
     namesMap.put("PN", "Острови Піткерн");
-    namesMap.put("PR", "Пуерто-Рико");
-    namesMap.put("PS", "Палестина");
-    namesMap.put("PT", "Португалія");
+    namesMap.put("PR", "Пуерто-Ріко");
+    namesMap.put("PS", "Палестинські території");
+    namesMap.put("PT", "Портуґалія");
     namesMap.put("PW", "Палау");
-    namesMap.put("PY", "Парагвай");
+    namesMap.put("PY", "Параґвай");
     namesMap.put("QA", "Катар");
-    namesMap.put("QO", "Інша Океанія");
+    namesMap.put("QO", "Віддалена Океанія");
     namesMap.put("RE", "Реюньйон");
     namesMap.put("RO", "Румунія");
     namesMap.put("RS", "Сербія");
@@ -531,19 +532,19 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
     namesMap.put("RW", "Руанда");
     namesMap.put("SA", "Саудівська Аравія");
     namesMap.put("SB", "Соломонові Острови");
-    namesMap.put("SC", "Сейшельські острови");
+    namesMap.put("SC", "Сейшельські Острови");
     namesMap.put("SD", "Судан");
     namesMap.put("SE", "Швеція");
     namesMap.put("SG", "Сінгапур");
     namesMap.put("SH", "Острів Святої Єлени");
     namesMap.put("SI", "Словенія");
-    namesMap.put("SJ", "Острови Свальбард і Ян-Маєн");
+    namesMap.put("SJ", "Шпіцберґен і Ян-Майен");
     namesMap.put("SK", "Словаччина");
     namesMap.put("SL", "Сьєрра-Леоне");
-    namesMap.put("SM", "Сан-Марино");
+    namesMap.put("SM", "Сан-Маріно");
     namesMap.put("SN", "Сенегал");
     namesMap.put("SO", "Сомалі");
-    namesMap.put("SR", "Суринам");
+    namesMap.put("SR", "Сурінам");
     namesMap.put("SS", "Південний Судан");
     namesMap.put("ST", "Сан-Томе і Прінсіпі");
     namesMap.put("SV", "Сальвадор");
@@ -551,7 +552,7 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
     namesMap.put("SY", "Сирія");
     namesMap.put("SZ", "Свазіленд");
     namesMap.put("TA", "Трістан-да-Кунья");
-    namesMap.put("TC", "Теркс і Кайкос");
+    namesMap.put("TC", "Острови Теркс і Кайкос");
     namesMap.put("TD", "Чад");
     namesMap.put("TF", "Французькі Південні Території");
     namesMap.put("TG", "Того");
@@ -559,22 +560,23 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
     namesMap.put("TJ", "Таджикистан");
     namesMap.put("TK", "Токелау");
     namesMap.put("TL", "Тімор-Лешті");
-    namesMap.put("TM", "Туркменистан");
+    namesMap.put("TM", "Туркменістан");
     namesMap.put("TN", "Туніс");
-    namesMap.put("TO", "Тонга");
+    namesMap.put("TO", "Тонґа");
     namesMap.put("TR", "Туреччина");
-    namesMap.put("TT", "Тринідад і Тобаго");
+    namesMap.put("TT", "Трінідад і Тобаґо");
     namesMap.put("TV", "Тувалу");
     namesMap.put("TW", "Тайвань");
     namesMap.put("TZ", "Танзанія");
     namesMap.put("UA", "Україна");
     namesMap.put("UG", "Уганда");
-    namesMap.put("UM", "Віддалені Острови США");
-    namesMap.put("US", "США");
-    namesMap.put("UY", "Уругвай");
+    namesMap.put("UM", "Віддалені острови США");
+    namesMap.put("UN", "Організація Об’єднаних Націй");
+    namesMap.put("US", "Сполучені Штати");
+    namesMap.put("UY", "Уруґвай");
     namesMap.put("UZ", "Узбекистан");
     namesMap.put("VA", "Ватикан");
-    namesMap.put("VC", "Сент-Вінсент і Гренадини");
+    namesMap.put("VC", "Сент-Вінсент і Ґренадіни");
     namesMap.put("VE", "Венесуела");
     namesMap.put("VG", "Британські Віргінські острови");
     namesMap.put("VI", "Віргінські острови, США");
@@ -585,7 +587,7 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
     namesMap.put("XK", "Косово");
     namesMap.put("YE", "Ємен");
     namesMap.put("YT", "Майотта");
-    namesMap.put("ZA", "ПАР");
+    namesMap.put("ZA", "Південно-Африканська Республіка");
     namesMap.put("ZM", "Замбія");
     namesMap.put("ZW", "Зімбабве");
     namesMap.put("ZZ", "Невідомий регіон");
@@ -600,7 +602,7 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
     return {
         "001": "Світ",
         "002": "Африка",
-        "003": "Північноамериканський континент",
+        "003": "Північна Америка",
         "005": "Південна Америка",
         "009": "Океанія",
         "011": "Західна Африка",
@@ -610,13 +612,13 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "017": "Центральна Африка",
         "018": "Південна Африка",
         "019": "Америка",
-        "021": "Північна Америка",
+        "021": "Північна Америка (регіон)",
         "029": "Карибський басейн",
         "030": "Східна Азія",
         "034": "Південна Азія",
         "035": "Південно-Східна Азія",
         "039": "Південна Європа",
-        "053": "Австралія та Нова Зеландія",
+        "053": "Австралазія",
         "054": "Меланезія",
         "057": "Мікронезійський регіон",
         "061": "Полінезія",
@@ -632,13 +634,12 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "AD": "Андорра",
         "AE": "Обʼєднані Арабські Емірати",
         "AF": "Афганістан",
-        "AG": "Антигуа і Барбуда",
-        "AI": "Ангілья",
+        "AG": "Антиґуа і Барбуда",
+        "AI": "Анґілья",
         "AL": "Албанія",
         "AM": "Вірменія",
-        "AN": "Нідерландські Антильські Острови",
         "AO": "Ангола",
-        "AQ": "Антарктида",
+        "AQ": "Антарктика",
         "AR": "Аргентина",
         "AS": "Американське Самоа",
         "AT": "Австрія",
@@ -646,41 +647,41 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "AW": "Аруба",
         "AX": "Аландські острови",
         "AZ": "Азербайджан",
-        "BA": "Боснія і Герцоговина",
+        "BA": "Боснія і Герцеґовина",
         "BB": "Барбадос",
         "BD": "Бангладеш",
-        "BE": "Бельгія",
+        "BE": "Бельґія",
         "BF": "Буркіна-Фасо",
         "BG": "Болгарія",
         "BH": "Бахрейн",
         "BI": "Бурунді",
         "BJ": "Бенін",
         "BL": "Сен-Бартельмі",
-        "BM": "Бермуди",
+        "BM": "Бермудські острови",
         "BN": "Бруней",
         "BO": "Болівія",
         "BQ": "Нідерландські Карибські острови",
-        "BR": "Бразилія",
-        "BS": "Багами",
+        "BR": "Бразілія",
+        "BS": "Багамські Острови",
         "BT": "Бутан",
         "BV": "Острів Буве",
         "BW": "Ботсвана",
         "BY": "Білорусь",
         "BZ": "Беліз",
         "CA": "Канада",
-        "CC": "Кокосові острови",
+        "CC": "Кокосові (Кілінгові) острови",
         "CD": "Конго – Кіншаса",
         "CF": "Центральноафриканська Республіка",
         "CG": "Конго – Браззавіль",
         "CH": "Швейцарія",
         "CI": "Кот-д’Івуар",
         "CK": "Острови Кука",
-        "CL": "Чилі",
+        "CL": "Чілі",
         "CM": "Камерун",
         "CN": "Китай",
         "CO": "Колумбія",
         "CP": "Острів Кліппертон",
-        "CR": "Коста-Рика",
+        "CR": "Коста-Ріка",
         "CU": "Куба",
         "CV": "Кабо-Верде",
         "CW": "Кюрасао",
@@ -688,8 +689,8 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "CY": "Кіпр",
         "CZ": "Чехія",
         "DE": "Німеччина",
-        "DG": "Дієґо-Ґарсія",
-        "DJ": "Джібуті",
+        "DG": "Дієго-Гарсія",
+        "DJ": "Джибуті",
         "DK": "Данія",
         "DM": "Домініка",
         "DO": "Домініканська Республіка",
@@ -703,33 +704,34 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "ES": "Іспанія",
         "ET": "Ефіопія",
         "EU": "Європейський Союз",
+        "EZ": "Єврозона",
         "FI": "Фінляндія",
         "FJ": "Фіджі",
         "FK": "Фолклендські острови",
-        "FM": "Мікронезія Федеративні Штати",
-        "FO": "Фарерські острови",
+        "FM": "Мікронезія",
+        "FO": "Фарерські Острови",
         "FR": "Франція",
         "GA": "Габон",
         "GB": "Велика Британія",
-        "GD": "Гренада",
+        "GD": "Ґренада",
         "GE": "Грузія",
-        "GF": "Французька Гвіана",
-        "GG": "Гернсі",
+        "GF": "Французька Ґвіана",
+        "GG": "Ґернсі",
         "GH": "Гана",
-        "GI": "Гібралтар",
-        "GL": "Гренландія",
+        "GI": "Ґібралтар",
+        "GL": "Ґренландія",
         "GM": "Гамбія",
         "GN": "Гвінея",
-        "GP": "Гваделупа",
+        "GP": "Ґваделупа",
         "GQ": "Екваторіальна Гвінея",
         "GR": "Греція",
-        "GS": "Південна Джорджія та Південні Сандвічеві Острови",
-        "GT": "Гватемала",
-        "GU": "Гуам",
+        "GS": "Південна Джорджія та Південні Сандвічеві острови",
+        "GT": "Ґватемала",
+        "GU": "Ґуам",
         "GW": "Гвінея-Бісау",
-        "GY": "Гайана",
+        "GY": "Ґайана",
         "HK": "Гонконг, О.А.Р. Китаю",
-        "HM": "Острови Херд і Мак-Дональд",
+        "HM": "острів Герд і острови Макдоналд",
         "HN": "Гондурас",
         "HR": "Хорватія",
         "HT": "Гаїті",
@@ -740,7 +742,7 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "IL": "Ізраїль",
         "IM": "Острів Мен",
         "IN": "Індія",
-        "IO": "Британські території Індійського океану",
+        "IO": "Британська територія в Індійському Океані",
         "IQ": "Ірак",
         "IR": "Іран",
         "IS": "Ісландія",
@@ -752,7 +754,7 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "KE": "Кенія",
         "KG": "Киргизстан",
         "KH": "Камбоджа",
-        "KI": "Кірибаті",
+        "KI": "Кірібаті",
         "KM": "Коморські острови",
         "KN": "Сент-Кітс і Невіс",
         "KP": "Північна Корея",
@@ -768,7 +770,7 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "LR": "Ліберія",
         "LS": "Лесото",
         "LT": "Литва",
-        "LU": "Люксембург",
+        "LU": "Люксембурґ",
         "LV": "Латвія",
         "LY": "Лівія",
         "MA": "Марокко",
@@ -782,13 +784,13 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "ML": "Малі",
         "MM": "Мʼянма (Бірма)",
         "MN": "Монголія",
-        "MO": "Макао О.А.Р. Китаю",
+        "MO": "Макао, О.А.Р Китаю",
         "MP": "Північні Маріанські Острови",
-        "MQ": "Мартиніка",
+        "MQ": "Мартініка",
         "MR": "Мавританія",
         "MS": "Монтсеррат",
         "MT": "Мальта",
-        "MU": "Маврикій",
+        "MU": "Маврікій",
         "MV": "Мальдіви",
         "MW": "Малаві",
         "MX": "Мексика",
@@ -799,30 +801,30 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "NE": "Нігер",
         "NF": "Острів Норфолк",
         "NG": "Нігерія",
-        "NI": "Нікарагуа",
+        "NI": "Нікараґуа",
         "NL": "Нідерланди",
-        "NO": "Норвегія",
+        "NO": "Норвеґія",
         "NP": "Непал",
         "NR": "Науру",
-        "NU": "Нія",
+        "NU": "Ніуе",
         "NZ": "Нова Зеландія",
         "OM": "Оман",
         "PA": "Панама",
         "PE": "Перу",
         "PF": "Французька Полінезія",
-        "PG": "Папуа Нова Гвінея",
+        "PG": "Папуа-Нова Ґвінея",
         "PH": "Філіппіни",
         "PK": "Пакистан",
         "PL": "Польща",
         "PM": "Сен-Пʼєр і Мікелон",
         "PN": "Острови Піткерн",
-        "PR": "Пуерто-Рико",
-        "PS": "Палестина",
-        "PT": "Португалія",
+        "PR": "Пуерто-Ріко",
+        "PS": "Палестинські території",
+        "PT": "Портуґалія",
         "PW": "Палау",
-        "PY": "Парагвай",
+        "PY": "Параґвай",
         "QA": "Катар",
-        "QO": "Інша Океанія",
+        "QO": "Віддалена Океанія",
         "RE": "Реюньйон",
         "RO": "Румунія",
         "RS": "Сербія",
@@ -830,19 +832,19 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "RW": "Руанда",
         "SA": "Саудівська Аравія",
         "SB": "Соломонові Острови",
-        "SC": "Сейшельські острови",
+        "SC": "Сейшельські Острови",
         "SD": "Судан",
         "SE": "Швеція",
         "SG": "Сінгапур",
         "SH": "Острів Святої Єлени",
         "SI": "Словенія",
-        "SJ": "Острови Свальбард і Ян-Маєн",
+        "SJ": "Шпіцберґен і Ян-Майен",
         "SK": "Словаччина",
         "SL": "Сьєрра-Леоне",
-        "SM": "Сан-Марино",
+        "SM": "Сан-Маріно",
         "SN": "Сенегал",
         "SO": "Сомалі",
-        "SR": "Суринам",
+        "SR": "Сурінам",
         "SS": "Південний Судан",
         "ST": "Сан-Томе і Прінсіпі",
         "SV": "Сальвадор",
@@ -850,7 +852,7 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "SY": "Сирія",
         "SZ": "Свазіленд",
         "TA": "Трістан-да-Кунья",
-        "TC": "Теркс і Кайкос",
+        "TC": "Острови Теркс і Кайкос",
         "TD": "Чад",
         "TF": "Французькі Південні Території",
         "TG": "Того",
@@ -858,22 +860,23 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "TJ": "Таджикистан",
         "TK": "Токелау",
         "TL": "Тімор-Лешті",
-        "TM": "Туркменистан",
+        "TM": "Туркменістан",
         "TN": "Туніс",
-        "TO": "Тонга",
+        "TO": "Тонґа",
         "TR": "Туреччина",
-        "TT": "Тринідад і Тобаго",
+        "TT": "Трінідад і Тобаґо",
         "TV": "Тувалу",
         "TW": "Тайвань",
         "TZ": "Танзанія",
         "UA": "Україна",
         "UG": "Уганда",
-        "UM": "Віддалені Острови США",
-        "US": "США",
-        "UY": "Уругвай",
+        "UM": "Віддалені острови США",
+        "UN": "Організація Об’єднаних Націй",
+        "US": "Сполучені Штати",
+        "UY": "Уруґвай",
         "UZ": "Узбекистан",
         "VA": "Ватикан",
-        "VC": "Сент-Вінсент і Гренадини",
+        "VC": "Сент-Вінсент і Ґренадіни",
         "VE": "Венесуела",
         "VG": "Британські Віргінські острови",
         "VI": "Віргінські острови, США",
@@ -884,7 +887,7 @@ public class LocalizedNamesImpl_uk extends LocalizedNamesImpl {
         "XK": "Косово",
         "YE": "Ємен",
         "YT": "Майотта",
-        "ZA": "ПАР",
+        "ZA": "Південно-Африканська Республіка",
         "ZM": "Замбія",
         "ZW": "Зімбабве",
         "ZZ": "Невідомий регіон"

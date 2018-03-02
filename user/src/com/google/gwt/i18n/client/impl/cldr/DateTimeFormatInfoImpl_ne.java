@@ -24,9 +24,14 @@ public class DateTimeFormatInfoImpl_ne extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "पूर्व मध्यान्ह",
-        "उत्तर मध्यान्ह"
+        "पूर्वाह्न",
+        "अपराह्न"
     };
+  }
+
+  @Override
+  public String dateFormatShort() {
+    return "yy/M/d";
   }
 
   @Override
@@ -61,6 +66,11 @@ public class DateTimeFormatInfoImpl_ne extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatYearMonthNumDay() {
+    return "y-MM-dd";
+  }
+
+  @Override
   public String[] monthsFull() {
     return new String[] {
         "जनवरी",
@@ -81,18 +91,36 @@ public class DateTimeFormatInfoImpl_ne extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsNarrow() {
     return new String[] {
-        "१",
-        "२",
-        "३",
-        "४",
-        "५",
-        "६",
-        "७",
-        "८",
-        "९",
-        "१०",
-        "११",
-        "१२"
+        "जन",
+        "फेब",
+        "मार्च",
+        "अप्र",
+        "मे",
+        "जुन",
+        "जुल",
+        "अग",
+        "सेप",
+        "अक्टो",
+        "नोभे",
+        "डिसे"
+    };
+  }
+
+  @Override
+  public String[] monthsNarrowStandalone() {
+    return new String[] {
+        "जन",
+        "फेेब",
+        "मार्च",
+        "अप्र",
+        "मे",
+        "जुन",
+        "जुल",
+        "अग",
+        "सेप",
+        "अक्टो",
+        "नोभे",
+        "डिसे"
     };
   }
 
@@ -141,7 +169,7 @@ public class DateTimeFormatInfoImpl_ne extends DateTimeFormatInfoImpl {
         "सोमबार",
         "मङ्गलबार",
         "बुधबार",
-        "बिहीबार",
+        "बिहिबार",
         "शुक्रबार",
         "शनिबार"
     };
@@ -167,7 +195,7 @@ public class DateTimeFormatInfoImpl_ne extends DateTimeFormatInfoImpl {
         "सोम",
         "मङ्गल",
         "बुध",
-        "बिही",
+        "बिहि",
         "शुक्र",
         "शनि"
     };

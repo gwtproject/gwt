@@ -56,23 +56,24 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "BA",
         "BW",
         "BR",
-        "CI",
         "BN",
         "BG",
         "BF",
         "BI",
         "BT",
         "TD",
+        "CZ",
+        "CI",
         "DK",
         "DG",
         "DM",
         "EG",
         "EC",
-        "SV",
         "AE",
         "ER",
         "EE",
         "ET",
+        "EZ",
         "PH",
         "FI",
         "FJ",
@@ -80,6 +81,7 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "GA",
         "GM",
         "GH",
+        "GG",
         "GE",
         "DE",
         "GI",
@@ -91,10 +93,10 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "GY",
         "GU",
         "GT",
-        "GG",
         "GN",
         "GW",
         "GQ",
+        "PG",
         "HT",
         "NL",
         "HN",
@@ -105,29 +107,27 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "IR",
         "IE",
         "AX",
-        "BV",
         "MP",
-        "VI",
         "VG",
-        "FO",
+        "VI",
         "FK",
+        "FO",
         "KY",
         "IC",
         "CC",
         "CK",
         "MH",
-        "NF",
         "UM",
         "PN",
         "SB",
         "TC",
         "AC",
+        "BV",
         "HM",
         "CX",
         "IM",
-        "MQ",
-        "MS",
         "CP",
+        "NF",
         "IS",
         "IT",
         "IL",
@@ -146,7 +146,9 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "CL",
         "CN",
         "KG",
+        "KI",
         "CO",
+        "UN",
         "KM",
         "CG",
         "CD",
@@ -177,6 +179,7 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "MT",
         "MK",
         "MA",
+        "MQ",
         "MR",
         "MU",
         "GB",
@@ -186,6 +189,7 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "MD",
         "MC",
         "MN",
+        "MS",
         "MZ",
         "NA",
         "NR",
@@ -200,7 +204,6 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "PK",
         "PW",
         "PA",
-        "PG",
         "PY",
         "PE",
         "PF",
@@ -208,21 +211,21 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "PR",
         "PT",
         "CY",
-        "KI",
-        "CF",
-        "CZ",
         "DO",
+        "CF",
         "RE",
+        "HK",
+        "MO",
         "RW",
         "RO",
         "RU",
-        "HK",
-        "MO",
         "EH",
+        "SV",
         "WS",
         "AS",
         "SM",
         "ST",
+        "SC",
         "SN",
         "RS",
         "BL",
@@ -230,15 +233,14 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "KN",
         "LC",
         "MF",
-        "SX",
         "PM",
         "VC",
         "AL",
         "US",
         "SL",
         "SG",
+        "SX",
         "SY",
-        "SC",
         "SK",
         "SI",
         "SO",
@@ -291,7 +293,7 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
   @Override
   protected void loadNameMapJava() {
     super.loadNameMapJava();
-    namesMap.put("001", "Botë");
+    namesMap.put("001", "Bota");
     namesMap.put("002", "Afrikë");
     namesMap.put("003", "Amerika e Veriut");
     namesMap.put("005", "Amerika e Jugut");
@@ -307,7 +309,7 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
     namesMap.put("029", "Karaibe");
     namesMap.put("030", "Azia Lindore");
     namesMap.put("034", "Azia Jugore");
-    namesMap.put("035", "Azia Jug-Lindore");
+    namesMap.put("035", "Azia Juglindore");
     namesMap.put("039", "Europa Jugore");
     namesMap.put("053", "Australazia");
     namesMap.put("054", "Melanezia");
@@ -336,46 +338,44 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
     namesMap.put("AT", "Austri");
     namesMap.put("AU", "Australi");
     namesMap.put("AW", "Arubë");
-    namesMap.put("AX", "Ishujt Aland");
+    namesMap.put("AX", "Ishujt Alandë");
     namesMap.put("AZ", "Azerbajxhan");
-    namesMap.put("BA", "Bosnjë e Hercegovinë");
+    namesMap.put("BA", "Bosnjë-Hercegovinë");
     namesMap.put("BE", "Belgjikë");
+    namesMap.put("BF", "Burkina-Faso");
     namesMap.put("BG", "Bullgari");
-    namesMap.put("BH", "Bahrein");
-    namesMap.put("BI", "Burund");
-    namesMap.put("BL", "Shën Bartolemeo");
+    namesMap.put("BH", "Bahrejn");
+    namesMap.put("BL", "Shën Bartolomeu");
     namesMap.put("BM", "Bermudë");
-    namesMap.put("BN", "Brunej");
     namesMap.put("BO", "Bolivi");
-    namesMap.put("BQ", "Karaibet Holandeze");
+    namesMap.put("BQ", "Karaibet holandeze");
     namesMap.put("BT", "Butan");
-    namesMap.put("BV", "Ishujt Bove");
+    namesMap.put("BV", "Ishulli Bove");
     namesMap.put("BW", "Botsvanë");
     namesMap.put("BY", "Bjellorusi");
-    namesMap.put("BZ", "Beliz");
+    namesMap.put("BZ", "Belizë");
     namesMap.put("CA", "Kanada");
     namesMap.put("CC", "Ishujt Kokos");
     namesMap.put("CD", "Kongo-Kinshasa");
-    namesMap.put("CF", "Republika Afrikano-Qendrore");
+    namesMap.put("CF", "Republika e Afrikës Qendrore");
     namesMap.put("CG", "Kongo-Brazavilë");
     namesMap.put("CH", "Zvicër");
-    namesMap.put("CI", "Bregu i Fildishtë");
     namesMap.put("CK", "Ishujt Kuk");
     namesMap.put("CL", "Kili");
     namesMap.put("CM", "Kamerun");
     namesMap.put("CN", "Kinë");
     namesMap.put("CO", "Kolumbi");
     namesMap.put("CP", "Ishulli Klipërton");
-    namesMap.put("CR", "Kosta Rika");
+    namesMap.put("CR", "Kosta-Rikë");
     namesMap.put("CU", "Kubë");
     namesMap.put("CV", "Kepi i Gjelbër");
     namesMap.put("CW", "Kuraçao");
     namesMap.put("CX", "Ishulli i Krishtlindjes");
     namesMap.put("CY", "Qipro");
-    namesMap.put("CZ", "Republika Çeke");
+    namesMap.put("CZ", "Çeki");
     namesMap.put("DE", "Gjermani");
-    namesMap.put("DG", "Diego Garsia");
-    namesMap.put("DJ", "Xhibut");
+    namesMap.put("DG", "Diego-Garsia");
+    namesMap.put("DJ", "Xhibuti");
     namesMap.put("DK", "Danimarkë");
     namesMap.put("DM", "Dominikë");
     namesMap.put("DO", "Republika Dominikane");
@@ -389,9 +389,10 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
     namesMap.put("ES", "Spanjë");
     namesMap.put("ET", "Etiopi");
     namesMap.put("EU", "Bashkimi Europian");
+    namesMap.put("EZ", "Eurozonë");
     namesMap.put("FI", "Finlandë");
     namesMap.put("FJ", "Fixhi");
-    namesMap.put("FK", "Ishujt Folkland");
+    namesMap.put("FK", "Ishujt Falkland");
     namesMap.put("FM", "Mikronezi");
     namesMap.put("FO", "Ishujt Faroe");
     namesMap.put("FR", "Francë");
@@ -399,20 +400,19 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
     namesMap.put("GD", "Grenadë");
     namesMap.put("GE", "Gjeorgji");
     namesMap.put("GF", "Guajana Franceze");
-    namesMap.put("GG", "Guernsej");
+    namesMap.put("GG", "Gernsej");
     namesMap.put("GH", "Ganë");
     namesMap.put("GI", "Gjibraltar");
     namesMap.put("GL", "Grenlandë");
-    namesMap.put("GM", "Gambi");
     namesMap.put("GN", "Guine");
     namesMap.put("GP", "Guadalupe");
     namesMap.put("GQ", "Guineja Ekuatoriale");
     namesMap.put("GR", "Greqi");
-    namesMap.put("GS", "Xhorxha Jugore dhe Ishujt Senduiç të Jugut");
+    namesMap.put("GS", "Xhorxha Jugore dhe Ishujt Senduiçë të Jugut");
     namesMap.put("GT", "Guatemalë");
     namesMap.put("GW", "Guine-Bisau");
     namesMap.put("GY", "Guajanë");
-    namesMap.put("HK", "RVAK i Hong Kongut");
+    namesMap.put("HK", "RPA i Hong-Kongut");
     namesMap.put("HM", "Ishulli Hërd dhe Ishujt Mekdonald");
     namesMap.put("HR", "Kroaci");
     namesMap.put("HU", "Hungari");
@@ -433,18 +433,17 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
     namesMap.put("KE", "Kenia");
     namesMap.put("KG", "Kirgistan");
     namesMap.put("KH", "Kamboxhia");
-    namesMap.put("KI", "Qiribati");
     namesMap.put("KM", "Komore");
-    namesMap.put("KN", "Shën Kits e Nevis");
+    namesMap.put("KN", "Shën-Kits dhe Nevis");
     namesMap.put("KP", "Koreja e Veriut");
     namesMap.put("KR", "Koreja e Jugut");
     namesMap.put("KW", "Kuvajt");
     namesMap.put("KY", "Ishujt Kajman");
     namesMap.put("KZ", "Kazakistan");
     namesMap.put("LB", "Liban");
-    namesMap.put("LC", "Shën Luçia");
-    namesMap.put("LI", "Lihtënshtajn");
-    namesMap.put("LK", "Sri Lankë");
+    namesMap.put("LC", "Shën-Luçia");
+    namesMap.put("LI", "Lihtenshtajn");
+    namesMap.put("LK", "Sri-Lankë");
     namesMap.put("LR", "Liberi");
     namesMap.put("LS", "Lesoto");
     namesMap.put("LT", "Lituani");
@@ -454,18 +453,18 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
     namesMap.put("MA", "Marok");
     namesMap.put("MC", "Monako");
     namesMap.put("MD", "Moldavi");
-    namesMap.put("ME", "Mali i Zi");
-    namesMap.put("MF", "Shën Martin");
+    namesMap.put("ME", "Mal i Zi");
+    namesMap.put("MF", "Shën-Martin");
     namesMap.put("MG", "Madagaskar");
     namesMap.put("MH", "Ishujt Marshall");
     namesMap.put("MK", "Maqedoni");
     namesMap.put("MM", "Mianmar (Burma)");
     namesMap.put("MN", "Mongoli");
-    namesMap.put("MO", "RVAK i Makaos");
+    namesMap.put("MO", "RPA i Makaos");
     namesMap.put("MP", "Ishujt e Marianës Veriore");
-    namesMap.put("MQ", "Ishulli i Martinikut");
+    namesMap.put("MQ", "Martinikë");
     namesMap.put("MR", "Mauritani");
-    namesMap.put("MS", "Ishulli i Montseratit");
+    namesMap.put("MS", "Montserat");
     namesMap.put("MT", "Maltë");
     namesMap.put("MV", "Maldive");
     namesMap.put("MW", "Malavi");
@@ -474,20 +473,20 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
     namesMap.put("MZ", "Mozambik");
     namesMap.put("NA", "Namibi");
     namesMap.put("NC", "Kaledonia e Re");
-    namesMap.put("NF", "Ishujt Norfolk");
+    namesMap.put("NF", "Ishulli Norfolk");
     namesMap.put("NG", "Nigeri");
     namesMap.put("NI", "Nikaragua");
     namesMap.put("NL", "Holandë");
     namesMap.put("NO", "Norvegji");
-    namesMap.put("NZ", "Zelanda e Re");
+    namesMap.put("NZ", "Zelandë e Re");
     namesMap.put("PF", "Polinezia Franceze");
-    namesMap.put("PG", "Papua Guineja e Re");
+    namesMap.put("PG", "Guineja e Re-Papua");
     namesMap.put("PH", "Filipine");
     namesMap.put("PL", "Poloni");
-    namesMap.put("PM", "Shën Peir dhe Mikuelon");
+    namesMap.put("PM", "Shën Pier dhe Mikelon");
     namesMap.put("PN", "Ishujt Pitkern");
-    namesMap.put("PR", "Porto Riko");
-    namesMap.put("PS", "Territoret palestineze");
+    namesMap.put("PR", "Porto-Riko");
+    namesMap.put("PS", "Territoret Palestineze");
     namesMap.put("PT", "Portugali");
     namesMap.put("PY", "Paraguai");
     namesMap.put("QA", "Katar");
@@ -497,31 +496,31 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
     namesMap.put("RS", "Serbi");
     namesMap.put("RU", "Rusi");
     namesMap.put("RW", "Ruandë");
-    namesMap.put("SA", "Arabi Saudite");
+    namesMap.put("SA", "Arabia Saudite");
     namesMap.put("SB", "Ishujt Solomon");
-    namesMap.put("SC", "Sishel");
+    namesMap.put("SC", "Sejshelle");
     namesMap.put("SE", "Suedi");
     namesMap.put("SG", "Singapor");
-    namesMap.put("SH", "Shën Helena");
+    namesMap.put("SH", "Shën-Helenë");
     namesMap.put("SI", "Slloveni");
-    namesMap.put("SJ", "Svalbard e Zhan Majen");
+    namesMap.put("SJ", "Svalbard dhe Jan-Majen");
     namesMap.put("SK", "Sllovaki");
-    namesMap.put("SL", "Siera Leone");
-    namesMap.put("SN", "Senegali");
+    namesMap.put("SL", "Siera-Leone");
+    namesMap.put("SM", "San-Marino");
     namesMap.put("SO", "Somali");
     namesMap.put("SR", "Surinami");
     namesMap.put("SS", "Sudani i Jugut");
-    namesMap.put("ST", "Sao Tome e Prinsipe");
-    namesMap.put("SX", "Shën Martin (Sint Maarten-pjesa e Mbretërisë së Holandës)");
+    namesMap.put("ST", "Sao Tome dhe Principe");
+    namesMap.put("SV", "Salvador");
+    namesMap.put("SX", "Sint-Marten");
     namesMap.put("SY", "Siri");
     namesMap.put("SZ", "Svazilandë");
-    namesMap.put("TA", "Tristan da Kuna");
-    namesMap.put("TC", "Ishujt Turke dhe Kaike");
+    namesMap.put("TA", "Tristan-da-Kuna");
+    namesMap.put("TC", "Ishujt Turks dhe Kaikos");
     namesMap.put("TD", "Çad");
-    namesMap.put("TF", "Territoret Australiane Franceze");
+    namesMap.put("TF", "Territoret Jugore Franceze");
     namesMap.put("TH", "Tajlandë");
     namesMap.put("TJ", "Taxhikistan");
-    namesMap.put("TL", "Timori Lindor");
     namesMap.put("TN", "Tunizi");
     namesMap.put("TR", "Turqi");
     namesMap.put("TT", "Trinidad e Tobago");
@@ -529,22 +528,22 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
     namesMap.put("TZ", "Tanzani");
     namesMap.put("UA", "Ukrainë");
     namesMap.put("UG", "Ugandë");
-    namesMap.put("UM", "Ishujt periferikë të SHBA-së");
+    namesMap.put("UM", "Ishujt Periferikë të SHBA-së");
+    namesMap.put("UN", "Kombet e Bashkuara");
     namesMap.put("US", "Shtetet e Bashkuara të Amerikës");
     namesMap.put("UY", "Uruguai");
     namesMap.put("VA", "Vatikan");
-    namesMap.put("VC", "Shën Vinsent dhe Grenadinet");
+    namesMap.put("VC", "Shën-Vincent dhe Grenadine");
     namesMap.put("VE", "Venezuelë");
     namesMap.put("VG", "Ishujt e Virgjër Britanikë");
-    namesMap.put("VI", "Ishujt e Virgjër Amerikanë");
-    namesMap.put("WF", "Uollis e Futina");
+    namesMap.put("VI", "Ishujt e Virgjër të SHBA-së");
+    namesMap.put("WF", "Uollis e Futuna");
     namesMap.put("XK", "Kosovë");
     namesMap.put("YE", "Jemen");
     namesMap.put("YT", "Majotë");
     namesMap.put("ZA", "Afrika e Jugut");
-    namesMap.put("ZM", "Zambi");
     namesMap.put("ZW", "Zimbabve");
-    namesMap.put("ZZ", "Rajon i panjohur");
+    namesMap.put("ZZ", "I panjohur");
   }
 
   @Override
@@ -554,7 +553,7 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
 
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
-        "001": "Botë",
+        "001": "Bota",
         "002": "Afrikë",
         "003": "Amerika e Veriut",
         "005": "Amerika e Jugut",
@@ -570,7 +569,7 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "029": "Karaibe",
         "030": "Azia Lindore",
         "034": "Azia Jugore",
-        "035": "Azia Jug-Lindore",
+        "035": "Azia Juglindore",
         "039": "Europa Jugore",
         "053": "Australazia",
         "054": "Melanezia",
@@ -599,46 +598,44 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "AT": "Austri",
         "AU": "Australi",
         "AW": "Arubë",
-        "AX": "Ishujt Aland",
+        "AX": "Ishujt Alandë",
         "AZ": "Azerbajxhan",
-        "BA": "Bosnjë e Hercegovinë",
+        "BA": "Bosnjë-Hercegovinë",
         "BE": "Belgjikë",
+        "BF": "Burkina-Faso",
         "BG": "Bullgari",
-        "BH": "Bahrein",
-        "BI": "Burund",
-        "BL": "Shën Bartolemeo",
+        "BH": "Bahrejn",
+        "BL": "Shën Bartolomeu",
         "BM": "Bermudë",
-        "BN": "Brunej",
         "BO": "Bolivi",
-        "BQ": "Karaibet Holandeze",
+        "BQ": "Karaibet holandeze",
         "BT": "Butan",
-        "BV": "Ishujt Bove",
+        "BV": "Ishulli Bove",
         "BW": "Botsvanë",
         "BY": "Bjellorusi",
-        "BZ": "Beliz",
+        "BZ": "Belizë",
         "CA": "Kanada",
         "CC": "Ishujt Kokos",
         "CD": "Kongo-Kinshasa",
-        "CF": "Republika Afrikano-Qendrore",
+        "CF": "Republika e Afrikës Qendrore",
         "CG": "Kongo-Brazavilë",
         "CH": "Zvicër",
-        "CI": "Bregu i Fildishtë",
         "CK": "Ishujt Kuk",
         "CL": "Kili",
         "CM": "Kamerun",
         "CN": "Kinë",
         "CO": "Kolumbi",
         "CP": "Ishulli Klipërton",
-        "CR": "Kosta Rika",
+        "CR": "Kosta-Rikë",
         "CU": "Kubë",
         "CV": "Kepi i Gjelbër",
         "CW": "Kuraçao",
         "CX": "Ishulli i Krishtlindjes",
         "CY": "Qipro",
-        "CZ": "Republika Çeke",
+        "CZ": "Çeki",
         "DE": "Gjermani",
-        "DG": "Diego Garsia",
-        "DJ": "Xhibut",
+        "DG": "Diego-Garsia",
+        "DJ": "Xhibuti",
         "DK": "Danimarkë",
         "DM": "Dominikë",
         "DO": "Republika Dominikane",
@@ -652,9 +649,10 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "ES": "Spanjë",
         "ET": "Etiopi",
         "EU": "Bashkimi Europian",
+        "EZ": "Eurozonë",
         "FI": "Finlandë",
         "FJ": "Fixhi",
-        "FK": "Ishujt Folkland",
+        "FK": "Ishujt Falkland",
         "FM": "Mikronezi",
         "FO": "Ishujt Faroe",
         "FR": "Francë",
@@ -662,20 +660,19 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "GD": "Grenadë",
         "GE": "Gjeorgji",
         "GF": "Guajana Franceze",
-        "GG": "Guernsej",
+        "GG": "Gernsej",
         "GH": "Ganë",
         "GI": "Gjibraltar",
         "GL": "Grenlandë",
-        "GM": "Gambi",
         "GN": "Guine",
         "GP": "Guadalupe",
         "GQ": "Guineja Ekuatoriale",
         "GR": "Greqi",
-        "GS": "Xhorxha Jugore dhe Ishujt Senduiç të Jugut",
+        "GS": "Xhorxha Jugore dhe Ishujt Senduiçë të Jugut",
         "GT": "Guatemalë",
         "GW": "Guine-Bisau",
         "GY": "Guajanë",
-        "HK": "RVAK i Hong Kongut",
+        "HK": "RPA i Hong-Kongut",
         "HM": "Ishulli Hërd dhe Ishujt Mekdonald",
         "HR": "Kroaci",
         "HU": "Hungari",
@@ -696,18 +693,17 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "KE": "Kenia",
         "KG": "Kirgistan",
         "KH": "Kamboxhia",
-        "KI": "Qiribati",
         "KM": "Komore",
-        "KN": "Shën Kits e Nevis",
+        "KN": "Shën-Kits dhe Nevis",
         "KP": "Koreja e Veriut",
         "KR": "Koreja e Jugut",
         "KW": "Kuvajt",
         "KY": "Ishujt Kajman",
         "KZ": "Kazakistan",
         "LB": "Liban",
-        "LC": "Shën Luçia",
-        "LI": "Lihtënshtajn",
-        "LK": "Sri Lankë",
+        "LC": "Shën-Luçia",
+        "LI": "Lihtenshtajn",
+        "LK": "Sri-Lankë",
         "LR": "Liberi",
         "LS": "Lesoto",
         "LT": "Lituani",
@@ -717,18 +713,18 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "MA": "Marok",
         "MC": "Monako",
         "MD": "Moldavi",
-        "ME": "Mali i Zi",
-        "MF": "Shën Martin",
+        "ME": "Mal i Zi",
+        "MF": "Shën-Martin",
         "MG": "Madagaskar",
         "MH": "Ishujt Marshall",
         "MK": "Maqedoni",
         "MM": "Mianmar (Burma)",
         "MN": "Mongoli",
-        "MO": "RVAK i Makaos",
+        "MO": "RPA i Makaos",
         "MP": "Ishujt e Marianës Veriore",
-        "MQ": "Ishulli i Martinikut",
+        "MQ": "Martinikë",
         "MR": "Mauritani",
-        "MS": "Ishulli i Montseratit",
+        "MS": "Montserat",
         "MT": "Maltë",
         "MV": "Maldive",
         "MW": "Malavi",
@@ -737,20 +733,20 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "MZ": "Mozambik",
         "NA": "Namibi",
         "NC": "Kaledonia e Re",
-        "NF": "Ishujt Norfolk",
+        "NF": "Ishulli Norfolk",
         "NG": "Nigeri",
         "NI": "Nikaragua",
         "NL": "Holandë",
         "NO": "Norvegji",
-        "NZ": "Zelanda e Re",
+        "NZ": "Zelandë e Re",
         "PF": "Polinezia Franceze",
-        "PG": "Papua Guineja e Re",
+        "PG": "Guineja e Re-Papua",
         "PH": "Filipine",
         "PL": "Poloni",
-        "PM": "Shën Peir dhe Mikuelon",
+        "PM": "Shën Pier dhe Mikelon",
         "PN": "Ishujt Pitkern",
-        "PR": "Porto Riko",
-        "PS": "Territoret palestineze",
+        "PR": "Porto-Riko",
+        "PS": "Territoret Palestineze",
         "PT": "Portugali",
         "PY": "Paraguai",
         "QA": "Katar",
@@ -760,31 +756,31 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "RS": "Serbi",
         "RU": "Rusi",
         "RW": "Ruandë",
-        "SA": "Arabi Saudite",
+        "SA": "Arabia Saudite",
         "SB": "Ishujt Solomon",
-        "SC": "Sishel",
+        "SC": "Sejshelle",
         "SE": "Suedi",
         "SG": "Singapor",
-        "SH": "Shën Helena",
+        "SH": "Shën-Helenë",
         "SI": "Slloveni",
-        "SJ": "Svalbard e Zhan Majen",
+        "SJ": "Svalbard dhe Jan-Majen",
         "SK": "Sllovaki",
-        "SL": "Siera Leone",
-        "SN": "Senegali",
+        "SL": "Siera-Leone",
+        "SM": "San-Marino",
         "SO": "Somali",
         "SR": "Surinami",
         "SS": "Sudani i Jugut",
-        "ST": "Sao Tome e Prinsipe",
-        "SX": "Shën Martin (Sint Maarten-pjesa e Mbretërisë së Holandës)",
+        "ST": "Sao Tome dhe Principe",
+        "SV": "Salvador",
+        "SX": "Sint-Marten",
         "SY": "Siri",
         "SZ": "Svazilandë",
-        "TA": "Tristan da Kuna",
-        "TC": "Ishujt Turke dhe Kaike",
+        "TA": "Tristan-da-Kuna",
+        "TC": "Ishujt Turks dhe Kaikos",
         "TD": "Çad",
-        "TF": "Territoret Australiane Franceze",
+        "TF": "Territoret Jugore Franceze",
         "TH": "Tajlandë",
         "TJ": "Taxhikistan",
-        "TL": "Timori Lindor",
         "TN": "Tunizi",
         "TR": "Turqi",
         "TT": "Trinidad e Tobago",
@@ -792,22 +788,22 @@ public class LocalizedNamesImpl_sq extends LocalizedNamesImpl {
         "TZ": "Tanzani",
         "UA": "Ukrainë",
         "UG": "Ugandë",
-        "UM": "Ishujt periferikë të SHBA-së",
+        "UM": "Ishujt Periferikë të SHBA-së",
+        "UN": "Kombet e Bashkuara",
         "US": "Shtetet e Bashkuara të Amerikës",
         "UY": "Uruguai",
         "VA": "Vatikan",
-        "VC": "Shën Vinsent dhe Grenadinet",
+        "VC": "Shën-Vincent dhe Grenadine",
         "VE": "Venezuelë",
         "VG": "Ishujt e Virgjër Britanikë",
-        "VI": "Ishujt e Virgjër Amerikanë",
-        "WF": "Uollis e Futina",
+        "VI": "Ishujt e Virgjër të SHBA-së",
+        "WF": "Uollis e Futuna",
         "XK": "Kosovë",
         "YE": "Jemen",
         "YT": "Majotë",
         "ZA": "Afrika e Jugut",
-        "ZM": "Zambi",
         "ZW": "Zimbabve",
-        "ZZ": "Rajon i panjohur"
+        "ZZ": "I panjohur"
     };
   }-*/;
 }

@@ -37,7 +37,6 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
         "AO",
         "AQ",
         "AG",
-        "AN",
         "SA",
         "DZ",
         "AR",
@@ -72,6 +71,8 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
         "EC",
         "SV",
         "AE",
+        "ET",
+        "EZ",
         "FJ",
         "PH",
         "FI",
@@ -96,18 +97,19 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
         "AC",
         "IM",
         "CX",
-        "HM",
         "CP",
         "AX",
         "IO",
+        "QO",
         "FO",
+        "HM",
+        "GS",
         "KY",
         "CC",
         "CK",
         "FK",
         "MP",
         "MH",
-        "MU",
         "UM",
         "NF",
         "SB",
@@ -117,16 +119,14 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
         "IN",
         "ID",
         "IQ",
+        "IR",
         "ER",
         "IE",
-        "IR",
         "IS",
         "IL",
         "IT",
-        "ET",
         "JM",
         "JP",
-        "GS",
         "JE",
         "GI",
         "GE",
@@ -143,16 +143,17 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
         "KE",
         "KG",
         "KI",
+        "CO",
         "CG",
         "CD",
         "KP",
         "KR",
         "CI",
         "CR",
+        "XK",
         "HR",
         "CU",
         "KW",
-        "CO",
         "CW",
         "LA",
         "LV",
@@ -173,6 +174,7 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
         "MA",
         "MQ",
         "MK",
+        "MU",
         "MR",
         "MX",
         "MM",
@@ -196,7 +198,6 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
         "NL",
         "OM",
         "HN",
-        "QO",
         "PK",
         "PW",
         "PS",
@@ -210,13 +211,12 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
         "PL",
         "PT",
         "GB",
-        "MO",
         "HK",
+        "MO",
         "DO",
         "CF",
-        "CZ",
-        "RO",
         "RW",
+        "RO",
         "RE",
         "RU",
         "WS",
@@ -269,9 +269,11 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
         "TM",
         "TV",
         "TD",
+        "CZ",
         "WF",
         "UG",
         "UA",
+        "UN",
         "HU",
         "EU",
         "UY",
@@ -283,7 +285,6 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
         "CL",
         "CN",
         "CY",
-        "XK",
         "ZM",
         "ZW",
     };
@@ -293,30 +294,30 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
   protected void loadNameMapJava() {
     super.loadNameMapJava();
     namesMap.put("001", "Mundu");
-    namesMap.put("002", "Afrika");
+    namesMap.put("002", "Áfrika");
     namesMap.put("003", "Merka di Norti");
     namesMap.put("005", "Merka di Sul");
     namesMap.put("009", "Oseania");
-    namesMap.put("011", "Afrika Osidental");
+    namesMap.put("011", "Áfrika Osidental");
     namesMap.put("013", "Merka Sentral");
-    namesMap.put("014", "Afrika Oriental");
-    namesMap.put("015", "Norti di Afrika");
-    namesMap.put("017", "Afrika Sentral");
-    namesMap.put("018", "Sul di Afrika");
+    namesMap.put("014", "Áfrika Oriental");
+    namesMap.put("015", "Norti di Áfrika");
+    namesMap.put("017", "Áfrika Sentral");
+    namesMap.put("018", "Sul di Áfrika");
     namesMap.put("019", "Merkas");
     namesMap.put("021", "Norti di Merka");
     namesMap.put("029", "Karaibas");
-    namesMap.put("030", "Azia Oriental");
-    namesMap.put("034", "Sul di Azia");
-    namesMap.put("035", "Sudesti Aziatiku");
+    namesMap.put("030", "Ázia Oriental");
+    namesMap.put("034", "Sul di Ázia");
+    namesMap.put("035", "Sudesti Aziátiku");
     namesMap.put("039", "Europa di Sul");
-    namesMap.put("053", "Australazia");
-    namesMap.put("054", "Melanezia");
-    namesMap.put("057", "Rejiãu di Mikronezia");
-    namesMap.put("061", "Polinezia");
-    namesMap.put("142", "Azia");
-    namesMap.put("143", "Azia Sentral");
-    namesMap.put("145", "Azia Osidental");
+    namesMap.put("053", "Australázia");
+    namesMap.put("054", "Melanézia");
+    namesMap.put("057", "Rejiãu di Mikronézia");
+    namesMap.put("061", "Polinézia");
+    namesMap.put("142", "Ázia");
+    namesMap.put("143", "Ázia Sentral");
+    namesMap.put("145", "Ázia Osidental");
     namesMap.put("150", "Europa");
     namesMap.put("151", "Europa Oriental");
     namesMap.put("154", "Europa di Norti");
@@ -324,32 +325,37 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
     namesMap.put("419", "Merka Latinu");
     namesMap.put("AC", "Ilha di Asensãu");
     namesMap.put("AD", "Andora");
-    namesMap.put("AE", "Emiradus Arabi Unidu");
+    namesMap.put("AE", "Emiradus Árabi Unidu");
     namesMap.put("AF", "Afeganistãu");
     namesMap.put("AG", "Antigua i Barbuda");
     namesMap.put("AI", "Angila");
-    namesMap.put("AN", "Antilhas Olandeza");
-    namesMap.put("AQ", "Antartika");
+    namesMap.put("AL", "Albánia");
+    namesMap.put("AM", "Arménia");
+    namesMap.put("AQ", "Antártika");
     namesMap.put("AR", "Arjentina");
     namesMap.put("AS", "Samoa Merkanu");
+    namesMap.put("AT", "Áustria");
+    namesMap.put("AU", "Austrália");
     namesMap.put("AX", "Ilhas Åland");
     namesMap.put("AZ", "Azerbaijãu");
-    namesMap.put("BA", "Bosnia-Erzegovina");
+    namesMap.put("BA", "Bósnia i Erzegovina");
     namesMap.put("BB", "Barbadus");
     namesMap.put("BD", "Bangladexi");
     namesMap.put("BE", "Béljika");
     namesMap.put("BF", "Burkina Fasu");
+    namesMap.put("BG", "Bulgária");
     namesMap.put("BH", "Barain");
     namesMap.put("BL", "Sãu Bartolomeu");
     namesMap.put("BM", "Bermudas");
-    namesMap.put("BQ", "Karaibas olandes");
+    namesMap.put("BO", "Bolívia");
+    namesMap.put("BQ", "Karaibas Olandezas");
     namesMap.put("BS", "Baamas");
     namesMap.put("BT", "Butãu");
     namesMap.put("BV", "Ilha Buve");
     namesMap.put("BW", "Botsuana");
     namesMap.put("BZ", "Belizi");
     namesMap.put("CA", "Kanadá");
-    namesMap.put("CC", "Ilhas Kokus");
+    namesMap.put("CC", "Ilhas Kokus (Keeling)");
     namesMap.put("CD", "Kongu - Kinxasa");
     namesMap.put("CF", "Republika Sentru-Afrikanu");
     namesMap.put("CG", "Kongu - Brazavili");
@@ -359,7 +365,7 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
     namesMap.put("CL", "Xili");
     namesMap.put("CM", "Kamarõis");
     namesMap.put("CN", "Xina");
-    namesMap.put("CO", "Kulombia");
+    namesMap.put("CO", "Kolômbia");
     namesMap.put("CP", "Ilha Kliperton");
     namesMap.put("CR", "Kosta Rika");
     namesMap.put("CU", "Kuba");
@@ -367,67 +373,69 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
     namesMap.put("CW", "Kurasau");
     namesMap.put("CX", "Ilha di Natal");
     namesMap.put("CY", "Xipri");
-    namesMap.put("CZ", "Republika Txeka");
+    namesMap.put("CZ", "Txékia");
     namesMap.put("DE", "Alimanha");
     namesMap.put("DG", "Diegu Garsia");
     namesMap.put("DJ", "Djibuti");
     namesMap.put("DK", "Dinamarka");
     namesMap.put("DM", "Dominika");
     namesMap.put("DO", "Repúblika Dominikana");
-    namesMap.put("DZ", "Arjelia");
-    namesMap.put("EA", "Seuta i Melila");
+    namesMap.put("DZ", "Arjélia");
+    namesMap.put("EA", "Seuta i Melilha");
     namesMap.put("EC", "Ekuador");
-    namesMap.put("EE", "Stonia");
+    namesMap.put("EE", "Stónia");
     namesMap.put("EG", "Ejitu");
     namesMap.put("EH", "Sara Osidental");
     namesMap.put("ER", "Iritreia");
     namesMap.put("ES", "Spanha");
-    namesMap.put("ET", "Itiopia");
+    namesMap.put("ET", "Etiópia");
     namesMap.put("EU", "Uniãu Europeia");
-    namesMap.put("FI", "Finlandia");
+    namesMap.put("FI", "Finlándia");
     namesMap.put("FJ", "Fidji");
     namesMap.put("FK", "Ilhas Malvinas");
-    namesMap.put("FM", "Mikronezia");
+    namesMap.put("FM", "Mikronézia");
     namesMap.put("FO", "Ilhas Faroe");
     namesMap.put("FR", "Fransa");
     namesMap.put("GA", "Gabãu");
     namesMap.put("GB", "Reinu Unidu");
     namesMap.put("GD", "Granada");
-    namesMap.put("GE", "Jiorjia");
+    namesMap.put("GE", "Jiórjia");
     namesMap.put("GF", "Giana Franseza");
     namesMap.put("GG", "Gernzi");
     namesMap.put("GH", "Gana");
     namesMap.put("GI", "Jibraltar");
-    namesMap.put("GL", "Gronelandia");
+    namesMap.put("GL", "Gronelándia");
+    namesMap.put("GM", "Gámbia");
     namesMap.put("GN", "Gine");
     namesMap.put("GP", "Guadalupi");
     namesMap.put("GQ", "Gine Ekuatorial");
-    namesMap.put("GR", "Gresia");
-    namesMap.put("GS", "Jeórjia di Sul i Ilhas di Sanduixi di Sul");
+    namesMap.put("GR", "Grésia");
+    namesMap.put("GS", "Ilhas Jeórjia di Sul i Sanduixi di Sul");
     namesMap.put("GT", "Guatimala");
     namesMap.put("GW", "Gine-Bisau");
     namesMap.put("GY", "Giana");
-    namesMap.put("HK", "Rejiãu Administrativu Special di Ong Kong");
-    namesMap.put("HM", "Ilha Heard i Ilhas McDonald");
+    namesMap.put("HK", "Rejiãu Administrativu Spesial di Hong Kong");
+    namesMap.put("HM", "Ilhas Heard i McDonald");
     namesMap.put("HN", "Onduras");
-    namesMap.put("HR", "Kroasia");
-    namesMap.put("HT", "Aiti");
+    namesMap.put("HR", "Kroásia");
+    namesMap.put("HT", "Aití");
     namesMap.put("HU", "Ungria");
     namesMap.put("IC", "Kanárias");
-    namesMap.put("ID", "Indonezia");
+    namesMap.put("ID", "Indonézia");
     namesMap.put("IE", "Irlanda");
     namesMap.put("IM", "Ilha di Man");
-    namesMap.put("IO", "Ilhas Britanika di Indiku");
+    namesMap.put("IN", "Índia");
+    namesMap.put("IO", "Ilhas Británikas di Índiku");
     namesMap.put("IQ", "Iraki");
-    namesMap.put("IR", "Iron");
-    namesMap.put("IS", "Islandia");
-    namesMap.put("IT", "Italia");
+    namesMap.put("IR", "Irãu");
+    namesMap.put("IS", "Islándia");
+    namesMap.put("IT", "Itália");
     namesMap.put("JE", "Jersi");
     namesMap.put("JM", "Jamaika");
-    namesMap.put("JO", "Jordania");
+    namesMap.put("JO", "Jordánia");
     namesMap.put("JP", "Japãu");
-    namesMap.put("KE", "Kenia");
-    namesMap.put("KG", "Kirgiston");
+    namesMap.put("KE", "Kénia");
+    namesMap.put("KG", "Kirgistãu");
     namesMap.put("KH", "Kambodja");
     namesMap.put("KM", "Kamoris");
     namesMap.put("KN", "Sãu Kristovãu i Nevis");
@@ -437,46 +445,51 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
     namesMap.put("KY", "Ilhas Kaimãu");
     namesMap.put("KZ", "Kazakistãu");
     namesMap.put("LA", "Laus");
-    namesMap.put("LB", "Libanu");
+    namesMap.put("LB", "Líbanu");
     namesMap.put("LC", "Santa Lúsia");
     namesMap.put("LI", "Lixenstain");
+    namesMap.put("LR", "Libéria");
     namesMap.put("LS", "Lezotu");
-    namesMap.put("LT", "Lituania");
+    namesMap.put("LT", "Lituánia");
     namesMap.put("LU", "Luxemburgu");
-    namesMap.put("LV", "Letonia");
-    namesMap.put("LY", "Libia");
+    namesMap.put("LV", "Letónia");
+    namesMap.put("LY", "Líbia");
     namesMap.put("MA", "Marokus");
-    namesMap.put("MC", "Monaku");
-    namesMap.put("MD", "Moldavia");
+    namesMap.put("MC", "Mónaku");
+    namesMap.put("MD", "Moldávia");
     namesMap.put("ME", "Montenegru");
     namesMap.put("MF", "Sãu Martinhu di Fransa");
     namesMap.put("MG", "Madagaskar");
     namesMap.put("MH", "Ilhas Marxal");
-    namesMap.put("MK", "Masidonia");
-    namesMap.put("MM", "Mianmar");
-    namesMap.put("MO", "Rejiãu Administrativu Special di Makau");
+    namesMap.put("MK", "Masidónia");
+    namesMap.put("MM", "Mianmar (Birmánia)");
+    namesMap.put("MN", "Mongólia");
+    namesMap.put("MO", "Rejiãu Administrativu Spesial di Makau");
     namesMap.put("MP", "Ilhas Marianas di Norti");
     namesMap.put("MQ", "Martinika");
+    namesMap.put("MR", "Mauritánia");
     namesMap.put("MS", "Monserat");
-    namesMap.put("MU", "Ilhas Maurisia");
+    namesMap.put("MU", "Maurísia");
     namesMap.put("MV", "Maldivas");
     namesMap.put("MW", "Malaui");
-    namesMap.put("MX", "Mexiku");
-    namesMap.put("MY", "Malazia");
+    namesMap.put("MX", "Méxiku");
+    namesMap.put("MY", "Malázia");
     namesMap.put("MZ", "Musambiki");
-    namesMap.put("NC", "Nova Kalidonia");
+    namesMap.put("NA", "Namíbia");
+    namesMap.put("NC", "Nova Kalidónia");
     namesMap.put("NE", "Nijer");
     namesMap.put("NF", "Ilhas Norfolk");
-    namesMap.put("NG", "Nijeria");
-    namesMap.put("NI", "Nikaragua");
+    namesMap.put("NG", "Nijéria");
+    namesMap.put("NI", "Nikarágua");
     namesMap.put("NL", "Olanda");
     namesMap.put("NO", "Noruega");
-    namesMap.put("NZ", "Nova Zilandia");
-    namesMap.put("PF", "Polinezia Franseza");
+    namesMap.put("NZ", "Nova Zilándia");
+    namesMap.put("PA", "Panamá");
+    namesMap.put("PF", "Polinézia Franseza");
     namesMap.put("PG", "Papua-Nova Gine");
     namesMap.put("PH", "Filipinas");
     namesMap.put("PK", "Pakistãu");
-    namesMap.put("PL", "Pulonia");
+    namesMap.put("PL", "Pulónia");
     namesMap.put("PM", "San Piere i Mikelon");
     namesMap.put("PN", "Pirkairn");
     namesMap.put("PR", "Portu Riku");
@@ -484,57 +497,62 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
     namesMap.put("PT", "Purtugal");
     namesMap.put("PY", "Paraguai");
     namesMap.put("QA", "Katar");
-    namesMap.put("QO", "Oseania Insular");
-    namesMap.put("RE", "Runion");
-    namesMap.put("RO", "Romenia");
-    namesMap.put("RS", "Servia");
+    namesMap.put("QO", "Ilhas di Oseania");
+    namesMap.put("RE", "Runiãu");
+    namesMap.put("RO", "Ruménia");
+    namesMap.put("RS", "Sérvia");
     namesMap.put("RU", "Rúsia");
     namesMap.put("RW", "Ruanda");
-    namesMap.put("SA", "Arabia Saudita");
-    namesMap.put("SB", "Ilhas Salumon");
+    namesMap.put("SA", "Arábia Saudita");
+    namesMap.put("SB", "Ilhas Salumãu");
     namesMap.put("SC", "Seixelis");
     namesMap.put("SD", "Sudãu");
-    namesMap.put("SE", "Suesia");
+    namesMap.put("SE", "Suésia");
     namesMap.put("SG", "Singapura");
     namesMap.put("SH", "Santa Ilena");
+    namesMap.put("SI", "Slovénia");
     namesMap.put("SJ", "Svalbard i Jan Maien");
+    namesMap.put("SK", "Slovákia");
     namesMap.put("SL", "Sera Lioa");
     namesMap.put("SM", "San Marinu");
-    namesMap.put("SO", "Sumalia");
+    namesMap.put("SO", "Sumália");
     namesMap.put("SR", "Surinami");
     namesMap.put("SS", "Sudãu di Sul");
-    namesMap.put("ST", "Sãu Tume i Prinsipi");
+    namesMap.put("ST", "Sãu Tume i Prínsipi");
     namesMap.put("SX", "Sãu Martinhu di Olanda");
-    namesMap.put("SY", "Siria");
+    namesMap.put("SY", "Síria");
     namesMap.put("SZ", "Suazilándia");
     namesMap.put("TA", "Tristan da Kunha");
     namesMap.put("TC", "Ilhas Turkas i Kaikus");
     namesMap.put("TD", "Txadi");
     namesMap.put("TF", "Terras Franses di Sul");
     namesMap.put("TG", "Togu");
-    namesMap.put("TH", "Tailandia");
+    namesMap.put("TH", "Tailándia");
     namesMap.put("TJ", "Tadjikistãu");
     namesMap.put("TL", "Timor Lesti");
     namesMap.put("TM", "Turkumenistãu");
-    namesMap.put("TN", "Tunizia");
+    namesMap.put("TN", "Tunízia");
     namesMap.put("TR", "Turkia");
     namesMap.put("TT", "Trinidad i Tobagu");
     namesMap.put("TW", "Taiuan");
-    namesMap.put("UA", "Ukrania");
+    namesMap.put("TZ", "Tanzánia");
+    namesMap.put("UA", "Ukránia");
     namesMap.put("UM", "Ilhas Minoris Distantis de Stadus Unidus");
     namesMap.put("US", "Stadus Unidos di Merka");
     namesMap.put("UY", "Uruguai");
     namesMap.put("UZ", "Uzbekistãu");
     namesMap.put("VA", "Vatikanu");
     namesMap.put("VC", "Sãu Bisenti i Granadinas");
-    namesMap.put("VE", "Vinizuea");
-    namesMap.put("VG", "Ilhas Virjens Britanikas");
-    namesMap.put("VI", "Ilhas Virjens Merkanu");
+    namesMap.put("VE", "Vinizuela");
+    namesMap.put("VG", "Ilhas Virjens Británikas");
+    namesMap.put("VI", "Ilhas Virjens Merkanas");
     namesMap.put("WF", "Ualis i Futuna");
-    namesMap.put("YE", "Iemen");
+    namesMap.put("XK", "Kozovu");
+    namesMap.put("YE", "Iémen");
     namesMap.put("YT", "Maiote");
-    namesMap.put("ZA", "Afrika di Sul");
-    namesMap.put("ZW", "Zimbabui");
+    namesMap.put("ZA", "Áfrika di Sul");
+    namesMap.put("ZM", "Zámbia");
+    namesMap.put("ZW", "Zimbábui");
     namesMap.put("ZZ", "Rejiãu Diskonxedu");
   }
 
@@ -546,30 +564,30 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
         "001": "Mundu",
-        "002": "Afrika",
+        "002": "Áfrika",
         "003": "Merka di Norti",
         "005": "Merka di Sul",
         "009": "Oseania",
-        "011": "Afrika Osidental",
+        "011": "Áfrika Osidental",
         "013": "Merka Sentral",
-        "014": "Afrika Oriental",
-        "015": "Norti di Afrika",
-        "017": "Afrika Sentral",
-        "018": "Sul di Afrika",
+        "014": "Áfrika Oriental",
+        "015": "Norti di Áfrika",
+        "017": "Áfrika Sentral",
+        "018": "Sul di Áfrika",
         "019": "Merkas",
         "021": "Norti di Merka",
         "029": "Karaibas",
-        "030": "Azia Oriental",
-        "034": "Sul di Azia",
-        "035": "Sudesti Aziatiku",
+        "030": "Ázia Oriental",
+        "034": "Sul di Ázia",
+        "035": "Sudesti Aziátiku",
         "039": "Europa di Sul",
-        "053": "Australazia",
-        "054": "Melanezia",
-        "057": "Rejiãu di Mikronezia",
-        "061": "Polinezia",
-        "142": "Azia",
-        "143": "Azia Sentral",
-        "145": "Azia Osidental",
+        "053": "Australázia",
+        "054": "Melanézia",
+        "057": "Rejiãu di Mikronézia",
+        "061": "Polinézia",
+        "142": "Ázia",
+        "143": "Ázia Sentral",
+        "145": "Ázia Osidental",
         "150": "Europa",
         "151": "Europa Oriental",
         "154": "Europa di Norti",
@@ -577,32 +595,37 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
         "419": "Merka Latinu",
         "AC": "Ilha di Asensãu",
         "AD": "Andora",
-        "AE": "Emiradus Arabi Unidu",
+        "AE": "Emiradus Árabi Unidu",
         "AF": "Afeganistãu",
         "AG": "Antigua i Barbuda",
         "AI": "Angila",
-        "AN": "Antilhas Olandeza",
-        "AQ": "Antartika",
+        "AL": "Albánia",
+        "AM": "Arménia",
+        "AQ": "Antártika",
         "AR": "Arjentina",
         "AS": "Samoa Merkanu",
+        "AT": "Áustria",
+        "AU": "Austrália",
         "AX": "Ilhas Åland",
         "AZ": "Azerbaijãu",
-        "BA": "Bosnia-Erzegovina",
+        "BA": "Bósnia i Erzegovina",
         "BB": "Barbadus",
         "BD": "Bangladexi",
         "BE": "Béljika",
         "BF": "Burkina Fasu",
+        "BG": "Bulgária",
         "BH": "Barain",
         "BL": "Sãu Bartolomeu",
         "BM": "Bermudas",
-        "BQ": "Karaibas olandes",
+        "BO": "Bolívia",
+        "BQ": "Karaibas Olandezas",
         "BS": "Baamas",
         "BT": "Butãu",
         "BV": "Ilha Buve",
         "BW": "Botsuana",
         "BZ": "Belizi",
         "CA": "Kanadá",
-        "CC": "Ilhas Kokus",
+        "CC": "Ilhas Kokus (Keeling)",
         "CD": "Kongu - Kinxasa",
         "CF": "Republika Sentru-Afrikanu",
         "CG": "Kongu - Brazavili",
@@ -612,7 +635,7 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
         "CL": "Xili",
         "CM": "Kamarõis",
         "CN": "Xina",
-        "CO": "Kulombia",
+        "CO": "Kolômbia",
         "CP": "Ilha Kliperton",
         "CR": "Kosta Rika",
         "CU": "Kuba",
@@ -620,67 +643,69 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
         "CW": "Kurasau",
         "CX": "Ilha di Natal",
         "CY": "Xipri",
-        "CZ": "Republika Txeka",
+        "CZ": "Txékia",
         "DE": "Alimanha",
         "DG": "Diegu Garsia",
         "DJ": "Djibuti",
         "DK": "Dinamarka",
         "DM": "Dominika",
         "DO": "Repúblika Dominikana",
-        "DZ": "Arjelia",
-        "EA": "Seuta i Melila",
+        "DZ": "Arjélia",
+        "EA": "Seuta i Melilha",
         "EC": "Ekuador",
-        "EE": "Stonia",
+        "EE": "Stónia",
         "EG": "Ejitu",
         "EH": "Sara Osidental",
         "ER": "Iritreia",
         "ES": "Spanha",
-        "ET": "Itiopia",
+        "ET": "Etiópia",
         "EU": "Uniãu Europeia",
-        "FI": "Finlandia",
+        "FI": "Finlándia",
         "FJ": "Fidji",
         "FK": "Ilhas Malvinas",
-        "FM": "Mikronezia",
+        "FM": "Mikronézia",
         "FO": "Ilhas Faroe",
         "FR": "Fransa",
         "GA": "Gabãu",
         "GB": "Reinu Unidu",
         "GD": "Granada",
-        "GE": "Jiorjia",
+        "GE": "Jiórjia",
         "GF": "Giana Franseza",
         "GG": "Gernzi",
         "GH": "Gana",
         "GI": "Jibraltar",
-        "GL": "Gronelandia",
+        "GL": "Gronelándia",
+        "GM": "Gámbia",
         "GN": "Gine",
         "GP": "Guadalupi",
         "GQ": "Gine Ekuatorial",
-        "GR": "Gresia",
-        "GS": "Jeórjia di Sul i Ilhas di Sanduixi di Sul",
+        "GR": "Grésia",
+        "GS": "Ilhas Jeórjia di Sul i Sanduixi di Sul",
         "GT": "Guatimala",
         "GW": "Gine-Bisau",
         "GY": "Giana",
-        "HK": "Rejiãu Administrativu Special di Ong Kong",
-        "HM": "Ilha Heard i Ilhas McDonald",
+        "HK": "Rejiãu Administrativu Spesial di Hong Kong",
+        "HM": "Ilhas Heard i McDonald",
         "HN": "Onduras",
-        "HR": "Kroasia",
-        "HT": "Aiti",
+        "HR": "Kroásia",
+        "HT": "Aití",
         "HU": "Ungria",
         "IC": "Kanárias",
-        "ID": "Indonezia",
+        "ID": "Indonézia",
         "IE": "Irlanda",
         "IM": "Ilha di Man",
-        "IO": "Ilhas Britanika di Indiku",
+        "IN": "Índia",
+        "IO": "Ilhas Británikas di Índiku",
         "IQ": "Iraki",
-        "IR": "Iron",
-        "IS": "Islandia",
-        "IT": "Italia",
+        "IR": "Irãu",
+        "IS": "Islándia",
+        "IT": "Itália",
         "JE": "Jersi",
         "JM": "Jamaika",
-        "JO": "Jordania",
+        "JO": "Jordánia",
         "JP": "Japãu",
-        "KE": "Kenia",
-        "KG": "Kirgiston",
+        "KE": "Kénia",
+        "KG": "Kirgistãu",
         "KH": "Kambodja",
         "KM": "Kamoris",
         "KN": "Sãu Kristovãu i Nevis",
@@ -690,46 +715,51 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
         "KY": "Ilhas Kaimãu",
         "KZ": "Kazakistãu",
         "LA": "Laus",
-        "LB": "Libanu",
+        "LB": "Líbanu",
         "LC": "Santa Lúsia",
         "LI": "Lixenstain",
+        "LR": "Libéria",
         "LS": "Lezotu",
-        "LT": "Lituania",
+        "LT": "Lituánia",
         "LU": "Luxemburgu",
-        "LV": "Letonia",
-        "LY": "Libia",
+        "LV": "Letónia",
+        "LY": "Líbia",
         "MA": "Marokus",
-        "MC": "Monaku",
-        "MD": "Moldavia",
+        "MC": "Mónaku",
+        "MD": "Moldávia",
         "ME": "Montenegru",
         "MF": "Sãu Martinhu di Fransa",
         "MG": "Madagaskar",
         "MH": "Ilhas Marxal",
-        "MK": "Masidonia",
-        "MM": "Mianmar",
-        "MO": "Rejiãu Administrativu Special di Makau",
+        "MK": "Masidónia",
+        "MM": "Mianmar (Birmánia)",
+        "MN": "Mongólia",
+        "MO": "Rejiãu Administrativu Spesial di Makau",
         "MP": "Ilhas Marianas di Norti",
         "MQ": "Martinika",
+        "MR": "Mauritánia",
         "MS": "Monserat",
-        "MU": "Ilhas Maurisia",
+        "MU": "Maurísia",
         "MV": "Maldivas",
         "MW": "Malaui",
-        "MX": "Mexiku",
-        "MY": "Malazia",
+        "MX": "Méxiku",
+        "MY": "Malázia",
         "MZ": "Musambiki",
-        "NC": "Nova Kalidonia",
+        "NA": "Namíbia",
+        "NC": "Nova Kalidónia",
         "NE": "Nijer",
         "NF": "Ilhas Norfolk",
-        "NG": "Nijeria",
-        "NI": "Nikaragua",
+        "NG": "Nijéria",
+        "NI": "Nikarágua",
         "NL": "Olanda",
         "NO": "Noruega",
-        "NZ": "Nova Zilandia",
-        "PF": "Polinezia Franseza",
+        "NZ": "Nova Zilándia",
+        "PA": "Panamá",
+        "PF": "Polinézia Franseza",
         "PG": "Papua-Nova Gine",
         "PH": "Filipinas",
         "PK": "Pakistãu",
-        "PL": "Pulonia",
+        "PL": "Pulónia",
         "PM": "San Piere i Mikelon",
         "PN": "Pirkairn",
         "PR": "Portu Riku",
@@ -737,57 +767,62 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
         "PT": "Purtugal",
         "PY": "Paraguai",
         "QA": "Katar",
-        "QO": "Oseania Insular",
-        "RE": "Runion",
-        "RO": "Romenia",
-        "RS": "Servia",
+        "QO": "Ilhas di Oseania",
+        "RE": "Runiãu",
+        "RO": "Ruménia",
+        "RS": "Sérvia",
         "RU": "Rúsia",
         "RW": "Ruanda",
-        "SA": "Arabia Saudita",
-        "SB": "Ilhas Salumon",
+        "SA": "Arábia Saudita",
+        "SB": "Ilhas Salumãu",
         "SC": "Seixelis",
         "SD": "Sudãu",
-        "SE": "Suesia",
+        "SE": "Suésia",
         "SG": "Singapura",
         "SH": "Santa Ilena",
+        "SI": "Slovénia",
         "SJ": "Svalbard i Jan Maien",
+        "SK": "Slovákia",
         "SL": "Sera Lioa",
         "SM": "San Marinu",
-        "SO": "Sumalia",
+        "SO": "Sumália",
         "SR": "Surinami",
         "SS": "Sudãu di Sul",
-        "ST": "Sãu Tume i Prinsipi",
+        "ST": "Sãu Tume i Prínsipi",
         "SX": "Sãu Martinhu di Olanda",
-        "SY": "Siria",
+        "SY": "Síria",
         "SZ": "Suazilándia",
         "TA": "Tristan da Kunha",
         "TC": "Ilhas Turkas i Kaikus",
         "TD": "Txadi",
         "TF": "Terras Franses di Sul",
         "TG": "Togu",
-        "TH": "Tailandia",
+        "TH": "Tailándia",
         "TJ": "Tadjikistãu",
         "TL": "Timor Lesti",
         "TM": "Turkumenistãu",
-        "TN": "Tunizia",
+        "TN": "Tunízia",
         "TR": "Turkia",
         "TT": "Trinidad i Tobagu",
         "TW": "Taiuan",
-        "UA": "Ukrania",
+        "TZ": "Tanzánia",
+        "UA": "Ukránia",
         "UM": "Ilhas Minoris Distantis de Stadus Unidus",
         "US": "Stadus Unidos di Merka",
         "UY": "Uruguai",
         "UZ": "Uzbekistãu",
         "VA": "Vatikanu",
         "VC": "Sãu Bisenti i Granadinas",
-        "VE": "Vinizuea",
-        "VG": "Ilhas Virjens Britanikas",
-        "VI": "Ilhas Virjens Merkanu",
+        "VE": "Vinizuela",
+        "VG": "Ilhas Virjens Británikas",
+        "VI": "Ilhas Virjens Merkanas",
         "WF": "Ualis i Futuna",
-        "YE": "Iemen",
+        "XK": "Kozovu",
+        "YE": "Iémen",
         "YT": "Maiote",
-        "ZA": "Afrika di Sul",
-        "ZW": "Zimbabui",
+        "ZA": "Áfrika di Sul",
+        "ZM": "Zámbia",
+        "ZW": "Zimbábui",
         "ZZ": "Rejiãu Diskonxedu"
     };
   }-*/;

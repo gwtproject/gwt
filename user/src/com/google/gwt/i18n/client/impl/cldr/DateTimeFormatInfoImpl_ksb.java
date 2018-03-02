@@ -161,7 +161,7 @@ public class DateTimeFormatInfoImpl_ksb extends DateTimeFormatInfoImpl {
     return new String[] {
         "Lobo ya bosi",
         "Lobo ya mbii",
-        "Lobo ya nnd'atu",
+        "Lobo ya nnd’atu",
         "Lobo ya nne"
     };
   }
@@ -174,26 +174,6 @@ public class DateTimeFormatInfoImpl_ksb extends DateTimeFormatInfoImpl {
         "L3",
         "L4"
     };
-  }
-
-  @Override
-  public String timeFormatFull() {
-    return "h:mm:ss a zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "h:mm:ss a z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "h:mm:ss a";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "h:mm a";
   }
 
   @Override

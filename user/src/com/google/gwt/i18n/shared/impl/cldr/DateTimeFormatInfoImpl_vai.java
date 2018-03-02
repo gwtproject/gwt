@@ -120,8 +120,8 @@ public class DateTimeFormatInfoImpl_vai extends DateTimeFormatInfoImpl {
         "ꕾꖺ",
         "ꖢꖕ",
         "ꖑꕱ",
-        "6",
-        "7",
+        "ꖱꘋ",
+        "ꖱꕞꔤ",
         "ꗛꔕ",
         "ꕢꕌ",
         "ꕭꖃ",
@@ -151,18 +151,18 @@ public class DateTimeFormatInfoImpl_vai extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "ꖨꕪꖃ ꔞꕮ",
-        "ꕒꕡꖝꖕ",
+        "ꖨꕪꖃ",
+        "ꕒꕡ",
         "ꕾꖺ",
         "ꖢꖕ",
         "ꖑꕱ",
-        "6",
-        "7",
+        "ꖱꘋ",
+        "ꖱꕞ",
         "ꗛꔕ",
         "ꕢꕌ",
         "ꕭꖃ",
-        "ꔞꘋꕔꕿ ꕸꖃꗏ",
-        "ꖨꕪꕱ ꗏꕮ"
+        "ꔞꘋ",
+        "ꖨꕪꕱ"
     };
   }
 

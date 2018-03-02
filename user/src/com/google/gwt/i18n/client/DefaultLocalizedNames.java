@@ -40,7 +40,7 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
     namesMap.put("029", "Caribbean");
     namesMap.put("030", "Eastern Asia");
     namesMap.put("034", "Southern Asia");
-    namesMap.put("035", "South-Eastern Asia");
+    namesMap.put("035", "Southeast Asia");
     namesMap.put("039", "Southern Europe");
     namesMap.put("053", "Australasia");
     namesMap.put("054", "Melanesia");
@@ -53,16 +53,16 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
     namesMap.put("151", "Eastern Europe");
     namesMap.put("154", "Northern Europe");
     namesMap.put("155", "Western Europe");
+    namesMap.put("202", "Sub-Saharan Africa");
     namesMap.put("419", "Latin America");
     namesMap.put("AC", "Ascension Island");
     namesMap.put("AD", "Andorra");
     namesMap.put("AE", "United Arab Emirates");
     namesMap.put("AF", "Afghanistan");
-    namesMap.put("AG", "Antigua and Barbuda");
+    namesMap.put("AG", "Antigua & Barbuda");
     namesMap.put("AI", "Anguilla");
     namesMap.put("AL", "Albania");
     namesMap.put("AM", "Armenia");
-    namesMap.put("AN", "Netherlands Antilles");
     namesMap.put("AO", "Angola");
     namesMap.put("AQ", "Antarctica");
     namesMap.put("AR", "Argentina");
@@ -72,7 +72,7 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
     namesMap.put("AW", "Aruba");
     namesMap.put("AX", "Åland Islands");
     namesMap.put("AZ", "Azerbaijan");
-    namesMap.put("BA", "Bosnia and Herzegovina");
+    namesMap.put("BA", "Bosnia & Herzegovina");
     namesMap.put("BB", "Barbados");
     namesMap.put("BD", "Bangladesh");
     namesMap.put("BE", "Belgium");
@@ -81,7 +81,7 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
     namesMap.put("BH", "Bahrain");
     namesMap.put("BI", "Burundi");
     namesMap.put("BJ", "Benin");
-    namesMap.put("BL", "Saint Barthélemy");
+    namesMap.put("BL", "St. Barthélemy");
     namesMap.put("BM", "Bermuda");
     namesMap.put("BN", "Brunei");
     namesMap.put("BO", "Bolivia");
@@ -95,9 +95,9 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
     namesMap.put("BZ", "Belize");
     namesMap.put("CA", "Canada");
     namesMap.put("CC", "Cocos (Keeling) Islands");
-    namesMap.put("CD", "Congo (DRC)");
+    namesMap.put("CD", "Congo - Kinshasa");
     namesMap.put("CF", "Central African Republic");
-    namesMap.put("CG", "Congo (Republic)");
+    namesMap.put("CG", "Congo - Brazzaville");
     namesMap.put("CH", "Switzerland");
     namesMap.put("CI", "Côte d’Ivoire");
     namesMap.put("CK", "Cook Islands");
@@ -112,7 +112,7 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
     namesMap.put("CW", "Curaçao");
     namesMap.put("CX", "Christmas Island");
     namesMap.put("CY", "Cyprus");
-    namesMap.put("CZ", "Czech Republic");
+    namesMap.put("CZ", "Czechia");
     namesMap.put("DE", "Germany");
     namesMap.put("DG", "Diego Garcia");
     namesMap.put("DJ", "Djibouti");
@@ -120,7 +120,7 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
     namesMap.put("DM", "Dominica");
     namesMap.put("DO", "Dominican Republic");
     namesMap.put("DZ", "Algeria");
-    namesMap.put("EA", "Ceuta and Melilla");
+    namesMap.put("EA", "Ceuta & Melilla");
     namesMap.put("EC", "Ecuador");
     namesMap.put("EE", "Estonia");
     namesMap.put("EG", "Egypt");
@@ -129,9 +129,10 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
     namesMap.put("ES", "Spain");
     namesMap.put("ET", "Ethiopia");
     namesMap.put("EU", "European Union");
+    namesMap.put("EZ", "Eurozone");
     namesMap.put("FI", "Finland");
     namesMap.put("FJ", "Fiji");
-    namesMap.put("FK", "Falkland Islands (Islas Malvinas)");
+    namesMap.put("FK", "Falkland Islands");
     namesMap.put("FM", "Micronesia");
     namesMap.put("FO", "Faroe Islands");
     namesMap.put("FR", "France");
@@ -180,7 +181,7 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
     namesMap.put("KH", "Cambodia");
     namesMap.put("KI", "Kiribati");
     namesMap.put("KM", "Comoros");
-    namesMap.put("KN", "Saint Kitts and Nevis");
+    namesMap.put("KN", "St. Kitts & Nevis");
     namesMap.put("KP", "North Korea");
     namesMap.put("KR", "South Korea");
     namesMap.put("KW", "Kuwait");
@@ -188,7 +189,7 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
     namesMap.put("KZ", "Kazakhstan");
     namesMap.put("LA", "Laos");
     namesMap.put("LB", "Lebanon");
-    namesMap.put("LC", "Saint Lucia");
+    namesMap.put("LC", "St. Lucia");
     namesMap.put("LI", "Liechtenstein");
     namesMap.put("LK", "Sri Lanka");
     namesMap.put("LR", "Liberia");
@@ -201,10 +202,10 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
     namesMap.put("MC", "Monaco");
     namesMap.put("MD", "Moldova");
     namesMap.put("ME", "Montenegro");
-    namesMap.put("MF", "Saint Martin");
+    namesMap.put("MF", "St. Martin");
     namesMap.put("MG", "Madagascar");
     namesMap.put("MH", "Marshall Islands");
-    namesMap.put("MK", "Macedonia (FYROM)");
+    namesMap.put("MK", "Macedonia");
     namesMap.put("ML", "Mali");
     namesMap.put("MM", "Myanmar (Burma)");
     namesMap.put("MN", "Mongolia");
@@ -240,7 +241,7 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
     namesMap.put("PH", "Philippines");
     namesMap.put("PK", "Pakistan");
     namesMap.put("PL", "Poland");
-    namesMap.put("PM", "Saint Pierre and Miquelon");
+    namesMap.put("PM", "St. Pierre & Miquelon");
     namesMap.put("PN", "Pitcairn Islands");
     namesMap.put("PR", "Puerto Rico");
     namesMap.put("PS", "Palestinian Territories");
@@ -260,9 +261,9 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
     namesMap.put("SD", "Sudan");
     namesMap.put("SE", "Sweden");
     namesMap.put("SG", "Singapore");
-    namesMap.put("SH", "Saint Helena");
+    namesMap.put("SH", "St. Helena");
     namesMap.put("SI", "Slovenia");
-    namesMap.put("SJ", "Svalbard and Jan Mayen");
+    namesMap.put("SJ", "Svalbard & Jan Mayen");
     namesMap.put("SK", "Slovakia");
     namesMap.put("SL", "Sierra Leone");
     namesMap.put("SM", "San Marino");
@@ -270,13 +271,13 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
     namesMap.put("SO", "Somalia");
     namesMap.put("SR", "Suriname");
     namesMap.put("SS", "South Sudan");
-    namesMap.put("ST", "São Tomé and Príncipe");
+    namesMap.put("ST", "São Tomé & Príncipe");
     namesMap.put("SV", "El Salvador");
     namesMap.put("SX", "Sint Maarten");
     namesMap.put("SY", "Syria");
     namesMap.put("SZ", "Swaziland");
     namesMap.put("TA", "Tristan da Cunha");
-    namesMap.put("TC", "Turks and Caicos Islands");
+    namesMap.put("TC", "Turks & Caicos Islands");
     namesMap.put("TD", "Chad");
     namesMap.put("TF", "French Southern Territories");
     namesMap.put("TG", "Togo");
@@ -288,13 +289,14 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
     namesMap.put("TN", "Tunisia");
     namesMap.put("TO", "Tonga");
     namesMap.put("TR", "Turkey");
-    namesMap.put("TT", "Trinidad and Tobago");
+    namesMap.put("TT", "Trinidad & Tobago");
     namesMap.put("TV", "Tuvalu");
     namesMap.put("TW", "Taiwan");
     namesMap.put("TZ", "Tanzania");
     namesMap.put("UA", "Ukraine");
     namesMap.put("UG", "Uganda");
     namesMap.put("UM", "U.S. Outlying Islands");
+    namesMap.put("UN", "United Nations");
     namesMap.put("US", "United States");
     namesMap.put("UY", "Uruguay");
     namesMap.put("UZ", "Uzbekistan");
@@ -305,7 +307,7 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
     namesMap.put("VI", "U.S. Virgin Islands");
     namesMap.put("VN", "Vietnam");
     namesMap.put("VU", "Vanuatu");
-    namesMap.put("WF", "Wallis and Futuna");
+    namesMap.put("WF", "Wallis & Futuna");
     namesMap.put("WS", "Samoa");
     namesMap.put("XK", "Kosovo");
     namesMap.put("YE", "Yemen");
@@ -374,8 +376,8 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
         "CC",
         "CO",
         "KM",
-        "CD",
         "CG",
+        "CD",
         "CK",
         "CR",
         "CI",
@@ -397,6 +399,7 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FK",
         "FO",
         "FJ",
@@ -481,7 +484,6 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
         "NR",
         "NP",
         "NL",
-        "AN",
         "NC",
         "NZ",
         "NI",
@@ -511,12 +513,6 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
         "RO",
         "RU",
         "RW",
-        "BL",
-        "SH",
-        "KN",
-        "LC",
-        "MF",
-        "PM",
         "WS",
         "SM",
         "ST",
@@ -537,6 +533,12 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
         "SS",
         "ES",
         "LK",
+        "BL",
+        "SH",
+        "KN",
+        "LC",
+        "MF",
+        "PM",
         "VC",
         "SD",
         "SR",
@@ -566,6 +568,7 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
         "UA",
         "AE",
         "GB",
+        "UN",
         "US",
         "UY",
         "UZ",

@@ -76,11 +76,6 @@ public class DateTimeFormatInfoImpl_bas extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatMonthFullDay() {
-    return "d MMMM";
-  }
-
-  @Override
   public String formatMonthFullWeekdayDay() {
     return "EEEE d MMMM";
   }
@@ -98,11 +93,6 @@ public class DateTimeFormatInfoImpl_bas extends DateTimeFormatInfoImpl {
   @Override
   public String formatYearMonthAbbrevDay() {
     return "d MMM y";
-  }
-
-  @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
   }
 
   @Override

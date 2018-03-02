@@ -94,6 +94,7 @@ public class LocalizedNamesImpl_sv extends LocalizedNamesImpl {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FK",
         "FJ",
         "PH",
@@ -104,6 +105,7 @@ public class LocalizedNamesImpl_sv extends LocalizedNamesImpl {
         "TF",
         "FO",
         "AE",
+        "UN",
         "GA",
         "GM",
         "GE",
@@ -192,7 +194,6 @@ public class LocalizedNamesImpl_sv extends LocalizedNamesImpl {
         "NA",
         "NR",
         "NL",
-        "AN",
         "NP",
         "NI",
         "NE",
@@ -225,9 +226,9 @@ public class LocalizedNamesImpl_sv extends LocalizedNamesImpl {
         "SH",
         "KN",
         "LC",
-        "MF",
         "PM",
         "VC",
+        "MF",
         "SB",
         "WS",
         "SM",
@@ -334,7 +335,6 @@ public class LocalizedNamesImpl_sv extends LocalizedNamesImpl {
     namesMap.put("AG", "Antigua och Barbuda");
     namesMap.put("AL", "Albanien");
     namesMap.put("AM", "Armenien");
-    namesMap.put("AN", "Nederländska Antillerna");
     namesMap.put("AQ", "Antarktis");
     namesMap.put("AS", "Amerikanska Samoa");
     namesMap.put("AT", "Österrike");
@@ -376,6 +376,7 @@ public class LocalizedNamesImpl_sv extends LocalizedNamesImpl {
     namesMap.put("ES", "Spanien");
     namesMap.put("ET", "Etiopien");
     namesMap.put("EU", "Europeiska unionen");
+    namesMap.put("EZ", "eurozonen");
     namesMap.put("FK", "Falklandsöarna");
     namesMap.put("FM", "Mikronesien");
     namesMap.put("FO", "Färöarna");
@@ -387,7 +388,7 @@ public class LocalizedNamesImpl_sv extends LocalizedNamesImpl {
     namesMap.put("GQ", "Ekvatorialguinea");
     namesMap.put("GR", "Grekland");
     namesMap.put("GS", "Sydgeorgien och Sydsandwichöarna");
-    namesMap.put("HK", "Hongkong (S.A.R. Kina)");
+    namesMap.put("HK", "Hongkong");
     namesMap.put("HM", "Heardön och McDonaldöarna");
     namesMap.put("HR", "Kroatien");
     namesMap.put("HU", "Ungern");
@@ -416,12 +417,12 @@ public class LocalizedNamesImpl_sv extends LocalizedNamesImpl {
     namesMap.put("LY", "Libyen");
     namesMap.put("MA", "Marocko");
     namesMap.put("MD", "Moldavien");
-    namesMap.put("MF", "S:t Martin");
+    namesMap.put("MF", "Saint-Martin");
     namesMap.put("MG", "Madagaskar");
     namesMap.put("MH", "Marshallöarna");
     namesMap.put("MK", "Makedonien");
     namesMap.put("MN", "Mongoliet");
-    namesMap.put("MO", "Macao (S.A.R. Kina)");
+    namesMap.put("MO", "Macao");
     namesMap.put("MP", "Nordmarianerna");
     namesMap.put("MR", "Mauretanien");
     namesMap.put("MV", "Maldiverna");
@@ -465,6 +466,7 @@ public class LocalizedNamesImpl_sv extends LocalizedNamesImpl {
     namesMap.put("TT", "Trinidad och Tobago");
     namesMap.put("UA", "Ukraina");
     namesMap.put("UM", "USA:s yttre öar");
+    namesMap.put("UN", "Förenta Nationerna");
     namesMap.put("US", "USA");
     namesMap.put("VA", "Vatikanstaten");
     namesMap.put("VC", "S:t Vincent och Grenadinerna");
@@ -518,7 +520,6 @@ public class LocalizedNamesImpl_sv extends LocalizedNamesImpl {
         "AG": "Antigua och Barbuda",
         "AL": "Albanien",
         "AM": "Armenien",
-        "AN": "Nederländska Antillerna",
         "AQ": "Antarktis",
         "AS": "Amerikanska Samoa",
         "AT": "Österrike",
@@ -560,6 +561,7 @@ public class LocalizedNamesImpl_sv extends LocalizedNamesImpl {
         "ES": "Spanien",
         "ET": "Etiopien",
         "EU": "Europeiska unionen",
+        "EZ": "eurozonen",
         "FK": "Falklandsöarna",
         "FM": "Mikronesien",
         "FO": "Färöarna",
@@ -571,7 +573,7 @@ public class LocalizedNamesImpl_sv extends LocalizedNamesImpl {
         "GQ": "Ekvatorialguinea",
         "GR": "Grekland",
         "GS": "Sydgeorgien och Sydsandwichöarna",
-        "HK": "Hongkong (S.A.R. Kina)",
+        "HK": "Hongkong",
         "HM": "Heardön och McDonaldöarna",
         "HR": "Kroatien",
         "HU": "Ungern",
@@ -600,12 +602,12 @@ public class LocalizedNamesImpl_sv extends LocalizedNamesImpl {
         "LY": "Libyen",
         "MA": "Marocko",
         "MD": "Moldavien",
-        "MF": "S:t Martin",
+        "MF": "Saint-Martin",
         "MG": "Madagaskar",
         "MH": "Marshallöarna",
         "MK": "Makedonien",
         "MN": "Mongoliet",
-        "MO": "Macao (S.A.R. Kina)",
+        "MO": "Macao",
         "MP": "Nordmarianerna",
         "MR": "Mauretanien",
         "MV": "Maldiverna",
@@ -649,6 +651,7 @@ public class LocalizedNamesImpl_sv extends LocalizedNamesImpl {
         "TT": "Trinidad och Tobago",
         "UA": "Ukraina",
         "UM": "USA:s yttre öar",
+        "UN": "Förenta Nationerna",
         "US": "USA",
         "VA": "Vatikanstaten",
         "VC": "S:t Vincent och Grenadinerna",

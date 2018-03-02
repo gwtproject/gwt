@@ -24,19 +24,19 @@ public class DateTimeFormatInfoImpl_hy extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "կեսօրից առաջ",
-        "կեսօրից հետո"
+        "ԿԱ",
+        "ԿՀ"
     };
   }
 
   @Override
   public String dateFormatFull() {
-    return "yթ. MMMM d, EEEE";
+    return "y թ. MMMM d, EEEE";
   }
 
   @Override
   public String dateFormatLong() {
-    return "dd MMMM, yթ.";
+    return "dd MMMM, y թ.";
   }
 
   @Override
@@ -72,8 +72,8 @@ public class DateTimeFormatInfoImpl_hy extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "մ.թ.ա.",
-        "մ.թ."
+        "Քրիստոսից առաջ",
+        "Քրիստոսից հետո"
     };
   }
 
@@ -86,23 +86,8 @@ public class DateTimeFormatInfoImpl_hy extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatHour24Minute() {
-    return "H:mm";
-  }
-
-  @Override
-  public String formatHour24MinuteSecond() {
-    return "H:mm:ss";
-  }
-
-  @Override
   public String formatMonthAbbrevDay() {
     return "d MMM";
-  }
-
-  @Override
-  public String formatMonthFullDay() {
-    return "d MMMM";
   }
 
   @Override
@@ -117,22 +102,22 @@ public class DateTimeFormatInfoImpl_hy extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrev() {
-    return "yթ. LLL";
+    return "y թ. LLL";
   }
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "d MMM, yթ.";
+    return "d MMM, y թ.";
   }
 
   @Override
   public String formatYearMonthFull() {
-    return "yթ. LLLL";
+    return "y թ․ LLLL";
   }
 
   @Override
   public String formatYearMonthFullDay() {
-    return "d MMMM, yթ.";
+    return "d MMMM, y թ.";
   }
 
   @Override
@@ -147,17 +132,17 @@ public class DateTimeFormatInfoImpl_hy extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "yթ. MMM d, EEE";
+    return "y թ. MMM d, EEE";
   }
 
   @Override
   public String formatYearQuarterFull() {
-    return "y թ, QQQQ";
+    return "y թ. QQQQ";
   }
 
   @Override
   public String formatYearQuarterShort() {
-    return "y թ, Q";
+    return "y թ. Q";
   }
 
   @Override
@@ -225,10 +210,10 @@ public class DateTimeFormatInfoImpl_hy extends DateTimeFormatInfoImpl {
         "հնս",
         "հլս",
         "օգս",
-        "սպտ",
-        "հկտ",
-        "նյմ",
-        "դկտ"
+        "սեպ",
+        "հոկ",
+        "նոյ",
+        "դեկ"
     };
   }
 
@@ -253,26 +238,6 @@ public class DateTimeFormatInfoImpl_hy extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String timeFormatFull() {
-    return "H:mm:ss, zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "H:mm:ss, z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "H:mm:ss";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "H:mm";
-  }
-
-  @Override
   public String[] weekdaysFull() {
     return new String[] {
         "կիրակի",
@@ -293,7 +258,7 @@ public class DateTimeFormatInfoImpl_hy extends DateTimeFormatInfoImpl {
         "Ե",
         "Չ",
         "Հ",
-        "Ու",
+        "Ո",
         "Շ"
     };
   }

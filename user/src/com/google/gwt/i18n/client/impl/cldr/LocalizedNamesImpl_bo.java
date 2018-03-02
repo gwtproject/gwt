@@ -45,6 +45,7 @@ public class LocalizedNamesImpl_bo extends LocalizedNamesImpl {
         "EA",
         "EH",
         "EU",
+        "EZ",
         "FM",
         "FO",
         "GF",
@@ -99,6 +100,7 @@ public class LocalizedNamesImpl_bo extends LocalizedNamesImpl {
         "TW",
         "TZ",
         "UM",
+        "UN",
         "VG",
         "VI",
         "WF",
@@ -112,7 +114,6 @@ public class LocalizedNamesImpl_bo extends LocalizedNamesImpl {
         "KW",
         "HR",
         "CI",
-        "KR",
         "CO",
         "CR",
         "KZ",
@@ -136,6 +137,7 @@ public class LocalizedNamesImpl_bo extends LocalizedNamesImpl {
         "GI",
         "GE",
         "JO",
+        "JP",
         "DK",
         "DM",
         "DO",
@@ -167,8 +169,8 @@ public class LocalizedNamesImpl_bo extends LocalizedNamesImpl {
         "BR",
         "BD",
         "BM",
-        "NP",
         "BF",
+        "NP",
         "BB",
         "BJ",
         "VN",
@@ -209,7 +211,6 @@ public class LocalizedNamesImpl_bo extends LocalizedNamesImpl {
         "UA",
         "UG",
         "YE",
-        "JP",
         "RW",
         "RO",
         "IN",
@@ -223,6 +224,7 @@ public class LocalizedNamesImpl_bo extends LocalizedNamesImpl {
         "LS",
         "LI",
         "LB",
+        "KR",
         "AQ",
         "ZA",
         "LK",
@@ -382,13 +384,13 @@ public class LocalizedNamesImpl_bo extends LocalizedNamesImpl {
     namesMap.put("IT", "ཨི་ཀྲར་ལི་");
     namesMap.put("JM", "ཛ་མེ་ཀ།");
     namesMap.put("JO", "ཇོར་ཌན།");
-    namesMap.put("JP", "རི་པིན་");
+    namesMap.put("JP", "ཉི་ཧོང་");
     namesMap.put("KE", "ཁེན་ཉི་ཡ།");
     namesMap.put("KG", "ཁིར་གིཛ་སྟཱན།");
     namesMap.put("KH", "ཀམ་བོ་ཌི་ཡ།");
     namesMap.put("KI", "ཀི་རི་བཱ་ཏི།");
     namesMap.put("KN", "སེནྚ། ཀིཊྚས྄། དང༌། ནེ་བིས྄།");
-    namesMap.put("KR", "ཀོ་རི་ཡ། ལྷོ་མ།");
+    namesMap.put("KR", "ལྷོ་ཀོ་རི་ཡ།");
     namesMap.put("KW", "ཀུ་ཝེད་རྒྱལ་ཁབ།");
     namesMap.put("KY", "ཁེ་མེན་གླིང་ཕྲན།");
     namesMap.put("KZ", "ཁ་ཛཱག་སྟཱན།");
@@ -424,7 +426,7 @@ public class LocalizedNamesImpl_bo extends LocalizedNamesImpl {
     namesMap.put("NI", "ནི་ཀ་ར་གུ་ཨ།");
     namesMap.put("NL", "ཧའོ་ལན།");
     namesMap.put("NO", "ནོར་ཝེ།");
-    namesMap.put("NP", "བར་ཡུལ་");
+    namesMap.put("NP", "བལ་ཡུལ་");
     namesMap.put("NR", "ནཽ་རུ།");
     namesMap.put("NU", "ནིའུ་ཝ།");
     namesMap.put("NZ", "ནིའུ་ཛི་ལན྄ཌ།");
@@ -578,13 +580,13 @@ public class LocalizedNamesImpl_bo extends LocalizedNamesImpl {
         "IT": "ཨི་ཀྲར་ལི་",
         "JM": "ཛ་མེ་ཀ།",
         "JO": "ཇོར་ཌན།",
-        "JP": "རི་པིན་",
+        "JP": "ཉི་ཧོང་",
         "KE": "ཁེན་ཉི་ཡ།",
         "KG": "ཁིར་གིཛ་སྟཱན།",
         "KH": "ཀམ་བོ་ཌི་ཡ།",
         "KI": "ཀི་རི་བཱ་ཏི།",
         "KN": "སེནྚ། ཀིཊྚས྄། དང༌། ནེ་བིས྄།",
-        "KR": "ཀོ་རི་ཡ། ལྷོ་མ།",
+        "KR": "ལྷོ་ཀོ་རི་ཡ།",
         "KW": "ཀུ་ཝེད་རྒྱལ་ཁབ།",
         "KY": "ཁེ་མེན་གླིང་ཕྲན།",
         "KZ": "ཁ་ཛཱག་སྟཱན།",
@@ -620,7 +622,7 @@ public class LocalizedNamesImpl_bo extends LocalizedNamesImpl {
         "NI": "ནི་ཀ་ར་གུ་ཨ།",
         "NL": "ཧའོ་ལན།",
         "NO": "ནོར་ཝེ།",
-        "NP": "བར་ཡུལ་",
+        "NP": "བལ་ཡུལ་",
         "NR": "ནཽ་རུ།",
         "NU": "ནིའུ་ཝ།",
         "NZ": "ནིའུ་ཛི་ལན྄ཌ།",

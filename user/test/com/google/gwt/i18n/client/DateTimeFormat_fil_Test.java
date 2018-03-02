@@ -43,7 +43,7 @@ public class DateTimeFormat_fil_Test extends GWTTestCase {
 
   public void test_ccccc() {
     Date date = new Date(2006 - 1900, 6, 26, 13, 10, 10);
-    assertEquals("M", DateTimeFormat.getFormat("ccccc").format(date));
+    assertEquals("Miy", DateTimeFormat.getFormat("ccccc").format(date));
   }
 
   public void test_EEE() {
@@ -58,6 +58,6 @@ public class DateTimeFormat_fil_Test extends GWTTestCase {
 
   public void test_EEEEE() {
     Date date = new Date(2006 - 1900, 6, 26, 13, 10, 10);
-    assertEquals("M", DateTimeFormat.getFormat("EEEEE").format(date));
+    assertEquals("Miy", DateTimeFormat.getFormat("EEEEE").format(date));
   }
 }

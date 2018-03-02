@@ -27,41 +27,12 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
-        "AC",
-        "AQ",
-        "AX",
-        "BL",
-        "BQ",
-        "BV",
-        "CC",
-        "CP",
-        "CW",
-        "CX",
-        "DG",
-        "EA",
-        "EH",
         "EU",
-        "FO",
-        "GG",
-        "GS",
+        "EZ",
         "HK",
-        "HM",
-        "IC",
-        "IM",
-        "JE",
-        "ME",
-        "MF",
         "MO",
         "QO",
-        "RS",
-        "SJ",
-        "SS",
-        "SX",
-        "TA",
-        "TF",
-        "UM",
-        "VA",
-        "XK",
+        "UN",
         "ER",
         "BZ",
         "SL",
@@ -77,6 +48,7 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "YE",
         "KY",
         "CV",
+        "CX",
         "KE",
         "ET",
         "IN",
@@ -88,17 +60,22 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "PR",
         "PH",
         "FJ",
+        "TF",
         "FI",
+        "TA",
+        "DG",
         "LS",
         "LT",
         "LI",
         "SN",
+        "SJ",
         "SY",
         "SG",
         "SI",
         "SK",
         "PM",
         "VC",
+        "SX",
         "KN",
         "LC",
         "SH",
@@ -106,6 +83,7 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "ZW",
         "DJ",
         "GI",
+        "CP",
         "KI",
         "KG",
         "CU",
@@ -125,12 +103,14 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "AL",
         "AI",
         "AM",
+        "AX",
         "AZ",
         "AD",
         "AO",
         "AW",
         "AR",
         "AG",
+        "AQ",
         "HT",
         "WF",
         "PS",
@@ -146,6 +126,8 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "BS",
         "BH",
         "FK",
+        "FO",
+        "VA",
         "VE",
         "VU",
         "TW",
@@ -159,6 +141,7 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "SA",
         "LA",
         "RW",
+        "EH",
         "ST",
         "WS",
         "CY",
@@ -169,11 +152,14 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "DE",
         "JM",
         "CM",
+        "BQ",
         "NC",
         "QA",
         "KZ",
         "CA",
         "KH",
+        "BL",
+        "MF",
         "GM",
         "GH",
         "GA",
@@ -188,12 +174,14 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "MG",
         "MW",
         "YT",
+        "IM",
         "NG",
         "NE",
         "NA",
         "OM",
         "US",
         "AS",
+        "UM",
         "VI",
         "PT",
         "PL",
@@ -216,10 +204,13 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "CR",
         "CK",
         "KM",
+        "XK",
+        "CC",
         "CG",
         "CD",
         "MD",
         "GB",
+        "BV",
         "BT",
         "BR",
         "BI",
@@ -233,6 +224,7 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "LK",
         "SR",
         "SZ",
+        "SS",
         "SB",
         "SD",
         "UY",
@@ -241,11 +233,13 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "UA",
         "UZ",
         "KW",
+        "CW",
         "GT",
         "GP",
         "GU",
         "GD",
         "GY",
+        "GG",
         "NU",
         "AT",
         "AU",
@@ -259,11 +253,14 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "LU",
         "RU",
         "GE",
+        "GS",
         "JO",
         "MP",
+        "IC",
         "CO",
         "MR",
         "MU",
+        "ME",
         "MA",
         "MC",
         "MN",
@@ -273,6 +270,7 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "EE",
         "EC",
         "SV",
+        "HM",
         "GR",
         "PE",
         "BE",
@@ -282,16 +280,20 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "PF",
         "GF",
         "VN",
+        "EA",
+        "RS",
+        "AC",
         "CZ",
+        "JE",
         "MX",
         "NL",
-        "AN",
     };
   }
 
   @Override
   protected void loadNameMapJava() {
     super.loadNameMapJava();
+    namesMap.put("AC", "ꗻꗡ ꕒꕡꕌ ꗏ ꔳꘋꗣ");
     namesMap.put("AD", "ꕉꖆꕟ");
     namesMap.put("AE", "ꖳꕯꔤꗳ ꕉꕟꔬ ꗡꕆꔓꔻ");
     namesMap.put("AF", "ꕉꔱꕭꔕꔻꕚꘋ");
@@ -299,13 +301,14 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
     namesMap.put("AI", "ꕉꕄꕞ");
     namesMap.put("AL", "ꕉꔷꕑꕇꕩ");
     namesMap.put("AM", "ꕉꕆꕯ");
-    namesMap.put("AN", "ꘉꕜ ꖨꕮꕊ ꕉꘋꔳꔷ");
     namesMap.put("AO", "ꕉꖐꕞ");
+    namesMap.put("AQ", "ꕉꘋꕚꔳꕪ");
     namesMap.put("AR", "ꕉꘀꘋꔳꕯ");
     namesMap.put("AS", "ꕶꕱ ꕢꕹꕎ");
     namesMap.put("AT", "ꖺꔻꖤꕎ");
     namesMap.put("AU", "ꖺꖬꖤꔃꔷꕩ");
     namesMap.put("AW", "ꕉꖩꕑ");
+    namesMap.put("AX", "ꕉꕞꔺ");
     namesMap.put("AZ", "ꕉꕤꕑꔤꕧꘋ");
     namesMap.put("BA", "ꕷꔻꕇꕰ ꗪ ꗥꕤꖑꔲꕯ");
     namesMap.put("BB", "ꕑꔆꖁꔻ");
@@ -316,16 +319,20 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
     namesMap.put("BH", "ꕑꗸꘋ");
     namesMap.put("BI", "ꖜꖩꔺ");
     namesMap.put("BJ", "ꗩꕇꘋ");
+    namesMap.put("BL", "ꕪꘋꕓ ꗞꗢ ꕒꕚꕞꕆ");
     namesMap.put("BM", "ꗩꖷꕜ");
     namesMap.put("BN", "ꖜꖩꘉꔧ");
     namesMap.put("BO", "ꕷꔷꔲꕩ");
+    namesMap.put("BQ", "ꕪꔓꔬꘂꘋ ꖨꕮ ꗨꗳꗣ");
     namesMap.put("BR", "ꖜꕟꔘꔀ");
     namesMap.put("BS", "ꕑꕌꕮꔻ");
     namesMap.put("BT", "ꖜꕚꘋ");
+    namesMap.put("BV", "ꖜꔍꔳ ꔳꘋꗣ");
     namesMap.put("BW", "ꕷꖬꕎꕯ");
     namesMap.put("BY", "ꗩꕞꖩꔻ");
     namesMap.put("BZ", "ꔆꔷꔘ");
     namesMap.put("CA", "ꕪꕯꕜ");
+    namesMap.put("CC", "ꖏꖏꔻ (ꔞꔀꔷꘋ) ꔳꘋꗣ");
     namesMap.put("CD", "ꖏꖐ ꗵꗞꖴꕟꔎ ꕸꖃꔀ");
     namesMap.put("CF", "ꕉꔱꔸꕪ ꗳ ꗳ ꕸꖃꔀ");
     namesMap.put("CG", "ꖏꖐ");
@@ -336,20 +343,26 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
     namesMap.put("CM", "ꕪꔈꖩꘋ");
     namesMap.put("CN", "ꕦꔤꕯ");
     namesMap.put("CO", "ꗛꗏꔭꕩ");
+    namesMap.put("CP", "ꕃꔒꕐꗋꘋ ꔳꘋꗣ");
     namesMap.put("CR", "ꖏꔻꕚ ꔸꕪ");
     namesMap.put("CU", "ꕃꖳꕑ");
     namesMap.put("CV", "ꔞꔪ ꗲꔵ ꔳꘋꗣ");
+    namesMap.put("CW", "ꖴꕟꖇꕱ");
+    namesMap.put("CX", "ꔞꔻꕮꔻ ꔳꘋꗣ");
     namesMap.put("CY", "ꕢꗡꖛꗐꔻ");
     namesMap.put("CZ", "ꗿꕃ ꕸꖃꔀ");
     namesMap.put("DE", "ꕧꕮꔧ");
+    namesMap.put("DG", "ꔵꔀꖑ ꔳꘋꗣ");
     namesMap.put("DJ", "ꕀꖜꔳ");
     namesMap.put("DK", "ꕜꕇꕮꕃ");
     namesMap.put("DM", "ꖁꕆꕇꕪ");
     namesMap.put("DO", "ꖁꕆꕇꕪꘋ ꕸꕱꔀ");
     namesMap.put("DZ", "ꕉꔷꔠꔸꕩ");
+    namesMap.put("EA", "ꗻꕚ ꗪ ꔡꔷꕞ");
     namesMap.put("EC", "ꗡꖴꔃꗍ");
     namesMap.put("EE", "ꗡꔻꕿꕇꕰ");
     namesMap.put("EG", "ꕆꔖꕞ");
+    namesMap.put("EH", "ꕢꕌꕟ ꔎꔒ ꕀꔤ");
     namesMap.put("ER", "ꔀꔸꔳꕟ");
     namesMap.put("ES", "ꕐꘊꔧ");
     namesMap.put("ET", "ꔤꔳꖎꔪꕩ");
@@ -357,12 +370,14 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
     namesMap.put("FJ", "ꔱꔤꕀ");
     namesMap.put("FK", "ꕘꔷꕃ ꖨꕮ ꔳꘋꗣ");
     namesMap.put("FM", "ꕆꖏꕇꔻꕩ");
+    namesMap.put("FO", "ꕘꖄ ꔳꘋꗣ");
     namesMap.put("FR", "ꖢꕟꘋꔻ");
     namesMap.put("GA", "ꕭꕷꘋ");
     namesMap.put("GB", "ꖕꕯꔤꗳ");
     namesMap.put("GD", "ꖶꕟꕯꕜ");
     namesMap.put("GE", "ꗘꖺꕀꕩ");
     namesMap.put("GF", "ꗱꘋꔻ ꖶꕎꕯ");
+    namesMap.put("GG", "ꖶꗦꘋꔻ");
     namesMap.put("GH", "ꕭꕌꕯ");
     namesMap.put("GI", "ꕀꖜꕟꕚ");
     namesMap.put("GL", "ꕧꕓ ꖴꕎ ꖨꕮꕊ");
@@ -371,23 +386,28 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
     namesMap.put("GP", "ꖶꕎꔐꖨꔅ");
     namesMap.put("GQ", "ꖦꕰꕊ ꗳ ꕅꔤꕇ");
     namesMap.put("GR", "ꗥꗷꘋ");
+    namesMap.put("GS", "ꗘꖺꕀꕩ ꗛꔤ ꔒꘋꗣ ꗏ ꗪ ꗇꖢ ꔳꘋꗣ ꗛꔤ ꔒꘋꗣ ꗏ");
     namesMap.put("GT", "ꖶꕎꔎꕮꕞ");
     namesMap.put("GU", "ꖶꕎꕆ");
     namesMap.put("GW", "ꕅꔤꕇ ꔫꕢꕴ");
     namesMap.put("GY", "ꖶꕩꕯ");
+    namesMap.put("HM", "ꗥꗡꔵ ꗪ ꕮꖁꕯ");
     namesMap.put("HN", "ꖽꖫꕟ");
     namesMap.put("HR", "ꖏꔓꔻꕩ");
     namesMap.put("HT", "ꕌꔤꔳ");
     namesMap.put("HU", "ꖽꘋꕭꔓ");
+    namesMap.put("IC", "ꗛꖺꔻꕩ ꔳꘋꗣ");
     namesMap.put("ID", "ꔤꖆꕇꔻꕩ");
     namesMap.put("IE", "ꕉꔓ ꖨꕮꕊ");
     namesMap.put("IL", "ꕑꕇꔻꕞꔤꕞ");
+    namesMap.put("IM", "ꕮꘋ ꔳꘋꗣ");
     namesMap.put("IN", "ꔤꔺꕩ");
     namesMap.put("IO", "ꔛꔟꔻ ꔤꔺꕩ ꗛꔤꘂ ꕗꕴꔀ ꕮ");
     namesMap.put("IQ", "ꔤꕟꕃ");
     namesMap.put("IR", "ꔤꕟꘋ");
     namesMap.put("IS", "ꕉꔤꔻ ꖨꕮꕊ");
     namesMap.put("IT", "ꔤꕚꔷ");
+    namesMap.put("JE", "ꘀꗡꔘ");
     namesMap.put("JM", "ꕧꕮꔧꕪ");
     namesMap.put("JO", "ꗘꖺꗵꘋ");
     namesMap.put("JP", "ꔛꗨꗢ");
@@ -416,6 +436,8 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
     namesMap.put("MA", "ꗞꕟꖏ");
     namesMap.put("MC", "ꗞꕯꖏ");
     namesMap.put("MD", "ꖒꔷꖁꕙ");
+    namesMap.put("ME", "ꗞꔳꕇꖶꖄ");
+    namesMap.put("MF", "ꕪꘋꕓ ꗞꗢ ꕮꕊꔳꘋ");
     namesMap.put("MG", "ꕮꕜꕭꔻꕪ");
     namesMap.put("MH", "ꕮꕊꕣ ꔳꘋꗣ");
     namesMap.put("MK", "ꕮꔖꖁꕇꕰ");
@@ -463,6 +485,7 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
     namesMap.put("QA", "ꕪꕚꕌ");
     namesMap.put("RE", "ꔓꗠꖻ");
     namesMap.put("RO", "ꖄꕆꕇꕰ");
+    namesMap.put("RS", "ꗻꗡꔬꕩ");
     namesMap.put("RU", "ꗐꖺꔻꕩ");
     namesMap.put("RW", "ꕟꖙꕡ");
     namesMap.put("SA", "ꕞꕌꖝ ꕸꖃꔀ");
@@ -473,18 +496,23 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
     namesMap.put("SG", "ꔻꕬꕶꕱ");
     namesMap.put("SH", "ꔻꘋ ꗥꔷꕯ");
     namesMap.put("SI", "ꔻꖃꔍꕇꕰ");
+    namesMap.put("SJ", "ꔻꕙꕒꔵ ꗪ ꕧꘋ ꕮꘂꘋ");
     namesMap.put("SK", "ꔻꖃꕙꕃꕩ");
     namesMap.put("SL", "ꔋꕩ ꕒꕌꖺ ꕸꖃꔀ");
     namesMap.put("SM", "ꕮꔸꖆ ꕢꘋ");
     namesMap.put("SN", "ꔻꕇꕭꕌ");
     namesMap.put("SO", "ꖇꕮꔷꕩ");
     namesMap.put("SR", "ꖬꔸꕯꔈ");
+    namesMap.put("SS", "ꖬꕜꘋ ꗛꔤ ꔒꘋꗣ ꗏ");
     namesMap.put("ST", "ꕢꕴ ꕿꔈ ꗪ ꕉ ꕮꔧ ꕗꕴꔀ");
     namesMap.put("SV", "ꗡꗷ ꕢꔍꗍꖺ");
+    namesMap.put("SX", "ꔻꘋꔳ ꕮꕊꗳꘋ");
     namesMap.put("SY", "ꔻꕩꘋ");
     namesMap.put("SZ", "ꖬꕎꔽ ꖨꕮꕊ");
+    namesMap.put("TA", "ꔳꔻꕚꘋ ꕜ ꖴꕯ");
     namesMap.put("TC", "ꗋꖺꕃꔻ ꗪ ꕪꔤꖏꔻ ꔳꘋꗣ");
     namesMap.put("TD", "ꕦꔵ");
+    namesMap.put("TF", "ꔱꗷꘋꔻ ꗛꔤ ꔒꘋꗣ ꗏ ꕸꖃꔀ ꖸ");
     namesMap.put("TG", "ꕿꖑ");
     namesMap.put("TH", "ꕚꔤ ꖨꕮꕊ");
     namesMap.put("TJ", "ꕚꕀꕃꔻꕚꘋ");
@@ -500,9 +528,11 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
     namesMap.put("TZ", "ꕚꘋꕤꕇꕰ");
     namesMap.put("UA", "ꖳꖴꔓꘋ");
     namesMap.put("UG", "ꖳꕭꕡ");
+    namesMap.put("UM", "ꕶꕱ ꕪꘋ ꗅꘋ ꔳꘋꗣ ꖸ");
     namesMap.put("US", "ꕶꕱ");
     namesMap.put("UY", "ꖳꔓꗝꔀ");
     namesMap.put("UZ", "ꖳꗩꕃꔻꕚꘋ");
+    namesMap.put("VA", "ꕙꔳꕪꘋ ꕢꕨꕌ");
     namesMap.put("VC", "ꔻꘋ ꔲꘋꔻꘋ ꗪ ꖶꔓꕯꔵꘋ ꖸ");
     namesMap.put("VE", "ꕙꔳꕪꘋ ꕸꖃꔀ");
     namesMap.put("VG", "ꔛꔟꔻ ꗩꗡ ꗏ ꖷꖬ ꔳꘋꗣ");
@@ -511,6 +541,7 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
     namesMap.put("VU", "ꕙꖸꕎꖤ");
     namesMap.put("WF", "ꕎꔷꔻ ꗪ ꖢꖤꕯ");
     namesMap.put("WS", "ꕢꕹꖙꕉ");
+    namesMap.put("XK", "ꖏꖇꕾ");
     namesMap.put("YE", "ꔝꘈꘋ");
     namesMap.put("YT", "ꕮꗚꔎ");
     namesMap.put("ZA", "ꕉꔱꔸꕪ ꗛꔤ ꔒꘋꗣ ꗏ ꕸꖃꔀ");
@@ -525,6 +556,7 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
 
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
+        "AC": "ꗻꗡ ꕒꕡꕌ ꗏ ꔳꘋꗣ",
         "AD": "ꕉꖆꕟ",
         "AE": "ꖳꕯꔤꗳ ꕉꕟꔬ ꗡꕆꔓꔻ",
         "AF": "ꕉꔱꕭꔕꔻꕚꘋ",
@@ -532,13 +564,14 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "AI": "ꕉꕄꕞ",
         "AL": "ꕉꔷꕑꕇꕩ",
         "AM": "ꕉꕆꕯ",
-        "AN": "ꘉꕜ ꖨꕮꕊ ꕉꘋꔳꔷ",
         "AO": "ꕉꖐꕞ",
+        "AQ": "ꕉꘋꕚꔳꕪ",
         "AR": "ꕉꘀꘋꔳꕯ",
         "AS": "ꕶꕱ ꕢꕹꕎ",
         "AT": "ꖺꔻꖤꕎ",
         "AU": "ꖺꖬꖤꔃꔷꕩ",
         "AW": "ꕉꖩꕑ",
+        "AX": "ꕉꕞꔺ",
         "AZ": "ꕉꕤꕑꔤꕧꘋ",
         "BA": "ꕷꔻꕇꕰ ꗪ ꗥꕤꖑꔲꕯ",
         "BB": "ꕑꔆꖁꔻ",
@@ -549,16 +582,20 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "BH": "ꕑꗸꘋ",
         "BI": "ꖜꖩꔺ",
         "BJ": "ꗩꕇꘋ",
+        "BL": "ꕪꘋꕓ ꗞꗢ ꕒꕚꕞꕆ",
         "BM": "ꗩꖷꕜ",
         "BN": "ꖜꖩꘉꔧ",
         "BO": "ꕷꔷꔲꕩ",
+        "BQ": "ꕪꔓꔬꘂꘋ ꖨꕮ ꗨꗳꗣ",
         "BR": "ꖜꕟꔘꔀ",
         "BS": "ꕑꕌꕮꔻ",
         "BT": "ꖜꕚꘋ",
+        "BV": "ꖜꔍꔳ ꔳꘋꗣ",
         "BW": "ꕷꖬꕎꕯ",
         "BY": "ꗩꕞꖩꔻ",
         "BZ": "ꔆꔷꔘ",
         "CA": "ꕪꕯꕜ",
+        "CC": "ꖏꖏꔻ (ꔞꔀꔷꘋ) ꔳꘋꗣ",
         "CD": "ꖏꖐ ꗵꗞꖴꕟꔎ ꕸꖃꔀ",
         "CF": "ꕉꔱꔸꕪ ꗳ ꗳ ꕸꖃꔀ",
         "CG": "ꖏꖐ",
@@ -569,20 +606,26 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "CM": "ꕪꔈꖩꘋ",
         "CN": "ꕦꔤꕯ",
         "CO": "ꗛꗏꔭꕩ",
+        "CP": "ꕃꔒꕐꗋꘋ ꔳꘋꗣ",
         "CR": "ꖏꔻꕚ ꔸꕪ",
         "CU": "ꕃꖳꕑ",
         "CV": "ꔞꔪ ꗲꔵ ꔳꘋꗣ",
+        "CW": "ꖴꕟꖇꕱ",
+        "CX": "ꔞꔻꕮꔻ ꔳꘋꗣ",
         "CY": "ꕢꗡꖛꗐꔻ",
         "CZ": "ꗿꕃ ꕸꖃꔀ",
         "DE": "ꕧꕮꔧ",
+        "DG": "ꔵꔀꖑ ꔳꘋꗣ",
         "DJ": "ꕀꖜꔳ",
         "DK": "ꕜꕇꕮꕃ",
         "DM": "ꖁꕆꕇꕪ",
         "DO": "ꖁꕆꕇꕪꘋ ꕸꕱꔀ",
         "DZ": "ꕉꔷꔠꔸꕩ",
+        "EA": "ꗻꕚ ꗪ ꔡꔷꕞ",
         "EC": "ꗡꖴꔃꗍ",
         "EE": "ꗡꔻꕿꕇꕰ",
         "EG": "ꕆꔖꕞ",
+        "EH": "ꕢꕌꕟ ꔎꔒ ꕀꔤ",
         "ER": "ꔀꔸꔳꕟ",
         "ES": "ꕐꘊꔧ",
         "ET": "ꔤꔳꖎꔪꕩ",
@@ -590,12 +633,14 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "FJ": "ꔱꔤꕀ",
         "FK": "ꕘꔷꕃ ꖨꕮ ꔳꘋꗣ",
         "FM": "ꕆꖏꕇꔻꕩ",
+        "FO": "ꕘꖄ ꔳꘋꗣ",
         "FR": "ꖢꕟꘋꔻ",
         "GA": "ꕭꕷꘋ",
         "GB": "ꖕꕯꔤꗳ",
         "GD": "ꖶꕟꕯꕜ",
         "GE": "ꗘꖺꕀꕩ",
         "GF": "ꗱꘋꔻ ꖶꕎꕯ",
+        "GG": "ꖶꗦꘋꔻ",
         "GH": "ꕭꕌꕯ",
         "GI": "ꕀꖜꕟꕚ",
         "GL": "ꕧꕓ ꖴꕎ ꖨꕮꕊ",
@@ -604,23 +649,28 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "GP": "ꖶꕎꔐꖨꔅ",
         "GQ": "ꖦꕰꕊ ꗳ ꕅꔤꕇ",
         "GR": "ꗥꗷꘋ",
+        "GS": "ꗘꖺꕀꕩ ꗛꔤ ꔒꘋꗣ ꗏ ꗪ ꗇꖢ ꔳꘋꗣ ꗛꔤ ꔒꘋꗣ ꗏ",
         "GT": "ꖶꕎꔎꕮꕞ",
         "GU": "ꖶꕎꕆ",
         "GW": "ꕅꔤꕇ ꔫꕢꕴ",
         "GY": "ꖶꕩꕯ",
+        "HM": "ꗥꗡꔵ ꗪ ꕮꖁꕯ",
         "HN": "ꖽꖫꕟ",
         "HR": "ꖏꔓꔻꕩ",
         "HT": "ꕌꔤꔳ",
         "HU": "ꖽꘋꕭꔓ",
+        "IC": "ꗛꖺꔻꕩ ꔳꘋꗣ",
         "ID": "ꔤꖆꕇꔻꕩ",
         "IE": "ꕉꔓ ꖨꕮꕊ",
         "IL": "ꕑꕇꔻꕞꔤꕞ",
+        "IM": "ꕮꘋ ꔳꘋꗣ",
         "IN": "ꔤꔺꕩ",
         "IO": "ꔛꔟꔻ ꔤꔺꕩ ꗛꔤꘂ ꕗꕴꔀ ꕮ",
         "IQ": "ꔤꕟꕃ",
         "IR": "ꔤꕟꘋ",
         "IS": "ꕉꔤꔻ ꖨꕮꕊ",
         "IT": "ꔤꕚꔷ",
+        "JE": "ꘀꗡꔘ",
         "JM": "ꕧꕮꔧꕪ",
         "JO": "ꗘꖺꗵꘋ",
         "JP": "ꔛꗨꗢ",
@@ -649,6 +699,8 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "MA": "ꗞꕟꖏ",
         "MC": "ꗞꕯꖏ",
         "MD": "ꖒꔷꖁꕙ",
+        "ME": "ꗞꔳꕇꖶꖄ",
+        "MF": "ꕪꘋꕓ ꗞꗢ ꕮꕊꔳꘋ",
         "MG": "ꕮꕜꕭꔻꕪ",
         "MH": "ꕮꕊꕣ ꔳꘋꗣ",
         "MK": "ꕮꔖꖁꕇꕰ",
@@ -696,6 +748,7 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "QA": "ꕪꕚꕌ",
         "RE": "ꔓꗠꖻ",
         "RO": "ꖄꕆꕇꕰ",
+        "RS": "ꗻꗡꔬꕩ",
         "RU": "ꗐꖺꔻꕩ",
         "RW": "ꕟꖙꕡ",
         "SA": "ꕞꕌꖝ ꕸꖃꔀ",
@@ -706,18 +759,23 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "SG": "ꔻꕬꕶꕱ",
         "SH": "ꔻꘋ ꗥꔷꕯ",
         "SI": "ꔻꖃꔍꕇꕰ",
+        "SJ": "ꔻꕙꕒꔵ ꗪ ꕧꘋ ꕮꘂꘋ",
         "SK": "ꔻꖃꕙꕃꕩ",
         "SL": "ꔋꕩ ꕒꕌꖺ ꕸꖃꔀ",
         "SM": "ꕮꔸꖆ ꕢꘋ",
         "SN": "ꔻꕇꕭꕌ",
         "SO": "ꖇꕮꔷꕩ",
         "SR": "ꖬꔸꕯꔈ",
+        "SS": "ꖬꕜꘋ ꗛꔤ ꔒꘋꗣ ꗏ",
         "ST": "ꕢꕴ ꕿꔈ ꗪ ꕉ ꕮꔧ ꕗꕴꔀ",
         "SV": "ꗡꗷ ꕢꔍꗍꖺ",
+        "SX": "ꔻꘋꔳ ꕮꕊꗳꘋ",
         "SY": "ꔻꕩꘋ",
         "SZ": "ꖬꕎꔽ ꖨꕮꕊ",
+        "TA": "ꔳꔻꕚꘋ ꕜ ꖴꕯ",
         "TC": "ꗋꖺꕃꔻ ꗪ ꕪꔤꖏꔻ ꔳꘋꗣ",
         "TD": "ꕦꔵ",
+        "TF": "ꔱꗷꘋꔻ ꗛꔤ ꔒꘋꗣ ꗏ ꕸꖃꔀ ꖸ",
         "TG": "ꕿꖑ",
         "TH": "ꕚꔤ ꖨꕮꕊ",
         "TJ": "ꕚꕀꕃꔻꕚꘋ",
@@ -733,9 +791,11 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "TZ": "ꕚꘋꕤꕇꕰ",
         "UA": "ꖳꖴꔓꘋ",
         "UG": "ꖳꕭꕡ",
+        "UM": "ꕶꕱ ꕪꘋ ꗅꘋ ꔳꘋꗣ ꖸ",
         "US": "ꕶꕱ",
         "UY": "ꖳꔓꗝꔀ",
         "UZ": "ꖳꗩꕃꔻꕚꘋ",
+        "VA": "ꕙꔳꕪꘋ ꕢꕨꕌ",
         "VC": "ꔻꘋ ꔲꘋꔻꘋ ꗪ ꖶꔓꕯꔵꘋ ꖸ",
         "VE": "ꕙꔳꕪꘋ ꕸꖃꔀ",
         "VG": "ꔛꔟꔻ ꗩꗡ ꗏ ꖷꖬ ꔳꘋꗣ",
@@ -744,6 +804,7 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "VU": "ꕙꖸꕎꖤ",
         "WF": "ꕎꔷꔻ ꗪ ꖢꖤꕯ",
         "WS": "ꕢꕹꖙꕉ",
+        "XK": "ꖏꖇꕾ",
         "YE": "ꔝꘈꘋ",
         "YT": "ꕮꗚꔎ",
         "ZA": "ꕉꔱꔸꕪ ꗛꔤ ꔒꘋꗣ ꗏ ꕸꖃꔀ",

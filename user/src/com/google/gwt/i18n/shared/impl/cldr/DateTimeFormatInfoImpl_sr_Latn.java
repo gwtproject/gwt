@@ -25,15 +25,15 @@ public class DateTimeFormatInfoImpl_sr_Latn extends DateTimeFormatInfoImpl_sr {
   public String[] ampms() {
     return new String[] {
         "pre podne",
-        "popodne"
+        "po podne"
     };
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "Pre nove ere",
-        "Nove ere"
+        "pre nove ere",
+        "nove ere"
     };
   }
 
@@ -102,10 +102,10 @@ public class DateTimeFormatInfoImpl_sr_Latn extends DateTimeFormatInfoImpl_sr {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Prvo tromesečje",
-        "Drugo tromesečje",
-        "Treće tromesečje",
-        "Četvrto tromesečje"
+        "prvi kvartal",
+        "drugi kvartal",
+        "treći kvartal",
+        "četvrti kvartal"
     };
   }
 

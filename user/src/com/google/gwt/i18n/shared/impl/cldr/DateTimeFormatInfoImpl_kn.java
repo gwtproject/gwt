@@ -22,29 +22,37 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_kn extends DateTimeFormatInfoImpl {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "ಪೂರ್ವಾಹ್ನ",
+        "ಅಪರಾಹ್ನ"
+    };
+  }
+
+  @Override
   public String dateFormatFull() {
-    return "d MMMM y, EEEE";
+    return "EEEE, MMMM d, y";
   }
 
   @Override
   public String dateFormatLong() {
-    return "d MMMM y";
+    return "MMMM d, y";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "d MMM y";
+    return "MMM d, y";
   }
 
   @Override
   public String dateFormatShort() {
-    return "d-M-yy";
+    return "d/M/yy";
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "ಈಸಪೂವ೯.",
+        "ಕ್ರಿಸ್ತ ಪೂರ್ವ",
         "ಕ್ರಿಸ್ತ ಶಕ"
     };
   }
@@ -53,7 +61,7 @@ public class DateTimeFormatInfoImpl_kn extends DateTimeFormatInfoImpl {
   public String[] erasShort() {
     return new String[] {
         "ಕ್ರಿ.ಪೂ",
-        "ಜಾಹೀ"
+        "ಕ್ರಿ.ಶ"
     };
   }
 
@@ -70,11 +78,6 @@ public class DateTimeFormatInfoImpl_kn extends DateTimeFormatInfoImpl {
   @Override
   public String formatHour12MinuteSecond() {
     return "hh:mm:ss a";
-  }
-
-  @Override
-  public String formatMonthAbbrevDay() {
-    return "d MMM";
   }
 
   @Override
@@ -99,7 +102,7 @@ public class DateTimeFormatInfoImpl_kn extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "d, MMM, y";
+    return "MMM d,y";
   }
 
   @Override
@@ -109,7 +112,7 @@ public class DateTimeFormatInfoImpl_kn extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFullDay() {
-    return "d MMMM y";
+    return "MMMM d, y";
   }
 
   @Override
@@ -124,7 +127,7 @@ public class DateTimeFormatInfoImpl_kn extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "d MMM, y EEE";
+    return "EEE, MMM d, y";
   }
 
   @Override
@@ -148,7 +151,7 @@ public class DateTimeFormatInfoImpl_kn extends DateTimeFormatInfoImpl {
         "ಜೂನ್",
         "ಜುಲೈ",
         "ಆಗಸ್ಟ್",
-        "ಸಪ್ಟೆಂಬರ್",
+        "ಸೆಪ್ಟೆಂಬರ್",
         "ಅಕ್ಟೋಬರ್",
         "ನವೆಂಬರ್",
         "ಡಿಸೆಂಬರ್"
@@ -176,28 +179,46 @@ public class DateTimeFormatInfoImpl_kn extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "ಜನ.",
-        "ಫೆಬ್ರು.",
-        "ಮಾ",
-        "ಏಪ್ರಿ.",
+        "ಜನವರಿ",
+        "ಫೆಬ್ರವರಿ",
+        "ಮಾರ್ಚ್",
+        "ಏಪ್ರಿ",
         "ಮೇ",
-        "ಜೂ",
-        "ಜು.",
-        "ಆಗ.",
-        "ಸೆಪ್ಟೆಂ.",
-        "ಅಕ್ಟೋ.",
-        "ನವೆಂ.",
-        "ಡಿಸೆಂ."
+        "ಜೂನ್",
+        "ಜುಲೈ",
+        "ಆಗ",
+        "ಸೆಪ್ಟೆಂ",
+        "ಅಕ್ಟೋ",
+        "ನವೆಂ",
+        "ಡಿಸೆಂ"
+    };
+  }
+
+  @Override
+  public String[] monthsShortStandalone() {
+    return new String[] {
+        "ಜನ",
+        "ಫೆಬ್ರ",
+        "ಮಾರ್ಚ್",
+        "ಏಪ್ರಿ",
+        "ಮೇ",
+        "ಜೂನ್",
+        "ಜುಲೈ",
+        "ಆಗ",
+        "ಸೆಪ್ಟೆಂ",
+        "ಅಕ್ಟೋ",
+        "ನವೆಂ",
+        "ಡಿಸೆಂ"
     };
   }
 
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "1 ನೇ ತ್ರೈಮಾಸಿಕ",
+        "1ನೇ ತ್ರೈಮಾಸಿಕ",
         "2ನೇ ತ್ರೈಮಾಸಿಕ",
-        "3 ನೇ ತ್ರೈಮಾಸಿಕ",
-        "4 ನೇ ತ್ರೈಮಾಸಿಕ"
+        "3ನೇ ತ್ರೈಮಾಸಿಕ",
+        "4ನೇ ತ್ರೈಮಾಸಿಕ"
     };
   }
 
@@ -234,7 +255,7 @@ public class DateTimeFormatInfoImpl_kn extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "ರವಿವಾರ",
+        "ಭಾನುವಾರ",
         "ಸೋಮವಾರ",
         "ಮಂಗಳವಾರ",
         "ಬುಧವಾರ",
@@ -247,7 +268,7 @@ public class DateTimeFormatInfoImpl_kn extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "ರ",
+        "ಭಾ",
         "ಸೋ",
         "ಮಂ",
         "ಬು",
@@ -260,20 +281,7 @@ public class DateTimeFormatInfoImpl_kn extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "ರ.",
-        "ಸೋ.",
-        "ಮಂ.",
-        "ಬು.",
-        "ಗು.",
-        "ಶು.",
-        "ಶನಿ."
-    };
-  }
-
-  @Override
-  public String[] weekdaysShortStandalone() {
-    return new String[] {
-        "ರವಿ",
+        "ಭಾನು",
         "ಸೋಮ",
         "ಮಂಗಳ",
         "ಬುಧ",

@@ -22,33 +22,154 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_uz extends DateTimeFormatInfoImpl {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "TO",
+        "TK"
+    };
+  }
+
+  @Override
   public String dateFormatFull() {
-    return "EEEE, y MMMM dd";
+    return "EEEE, d-MMMM, y";
+  }
+
+  @Override
+  public String dateFormatLong() {
+    return "d-MMMM, y";
+  }
+
+  @Override
+  public String dateFormatMedium() {
+    return "d-MMM, y";
   }
 
   @Override
   public String dateFormatShort() {
-    return "yy/MM/dd";
+    return "dd/MM/yy";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "M.A.",
-        "E"
+        "miloddan avvalgi",
+        "milodiy"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "M.A.",
-        "E"
+        "m.a.",
+        "milodiy"
     };
   }
 
   @Override
+  public String formatMonthAbbrevDay() {
+    return "d-MMM";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "d-MMMM";
+  }
+
+  @Override
+  public String formatMonthFullWeekdayDay() {
+    return "EEEE, d-MMMM";
+  }
+
+  @Override
+  public String formatMonthNumDay() {
+    return "dd/MM";
+  }
+
+  @Override
+  public String formatYearMonthAbbrev() {
+    return "MMM, y";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "d-MMM, y";
+  }
+
+  @Override
+  public String formatYearMonthFull() {
+    return "MMMM, y";
+  }
+
+  @Override
+  public String formatYearMonthFullDay() {
+    return "d-MMMM, y";
+  }
+
+  @Override
+  public String formatYearMonthNum() {
+    return "MM.y";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "dd/MM/y";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "EEE, d-MMM, y";
+  }
+
+  @Override
+  public String formatYearQuarterFull() {
+    return "y, QQQQ";
+  }
+
+  @Override
+  public String formatYearQuarterShort() {
+    return "y, Q";
+  }
+
+  @Override
   public String[] monthsFull() {
+    return new String[] {
+        "yanvar",
+        "fevral",
+        "mart",
+        "aprel",
+        "may",
+        "iyun",
+        "iyul",
+        "avgust",
+        "sentabr",
+        "oktabr",
+        "noyabr",
+        "dekabr"
+    };
+  }
+
+  @Override
+  public String[] monthsFullStandalone() {
     return new String[] {
         "Yanvar",
         "Fevral",
@@ -58,8 +179,8 @@ public class DateTimeFormatInfoImpl_uz extends DateTimeFormatInfoImpl {
         "Iyun",
         "Iyul",
         "Avgust",
-        "Sentyabr",
-        "Oktyabr",
+        "Sentabr",
+        "Oktabr",
         "Noyabr",
         "Dekabr"
     };
@@ -86,17 +207,35 @@ public class DateTimeFormatInfoImpl_uz extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "Yanv",
+        "yan",
+        "fev",
+        "mar",
+        "apr",
+        "may",
+        "iyn",
+        "iyl",
+        "avg",
+        "sen",
+        "okt",
+        "noy",
+        "dek"
+    };
+  }
+
+  @Override
+  public String[] monthsShortStandalone() {
+    return new String[] {
+        "Yan",
         "Fev",
         "Mar",
         "Apr",
         "May",
-        "Iyun",
-        "Iyul",
+        "Iyn",
+        "Iyl",
         "Avg",
         "Sen",
         "Okt",
-        "Noya",
+        "Noy",
         "Dek"
     };
   }
@@ -119,6 +258,16 @@ public class DateTimeFormatInfoImpl_uz extends DateTimeFormatInfoImpl {
         "3-ch",
         "4-ch"
     };
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "H:mm:ss (zzzz)";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "H:mm:ss (z)";
   }
 
   @Override
@@ -150,7 +299,7 @@ public class DateTimeFormatInfoImpl_uz extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "Yaksh",
+        "Yak",
         "Dush",
         "Sesh",
         "Chor",

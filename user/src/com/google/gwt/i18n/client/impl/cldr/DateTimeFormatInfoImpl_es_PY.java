@@ -22,7 +22,33 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_es_PY extends DateTimeFormatInfoImpl_es_419 {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "a. m.",
+        "p. m."
+    };
+  }
+
+  @Override
   public int firstDayOfTheWeek() {
     return 0;
+  }
+
+  @Override
+  public String[] monthsShort() {
+    return new String[] {
+        "ene.",
+        "feb.",
+        "mar.",
+        "abr.",
+        "may.",
+        "jun.",
+        "jul.",
+        "ago.",
+        "sept.",
+        "oct.",
+        "nov.",
+        "dic."
+    };
   }
 }

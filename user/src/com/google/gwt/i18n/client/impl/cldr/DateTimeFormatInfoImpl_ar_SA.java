@@ -27,6 +27,56 @@ public class DateTimeFormatInfoImpl_ar_SA extends DateTimeFormatInfoImpl_ar_001 
   }
 
   @Override
+  public String formatYear() {
+    return "y G";
+  }
+
+  @Override
+  public String formatYearMonthAbbrev() {
+    return "MMM y G";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "d MMM y G";
+  }
+
+  @Override
+  public String formatYearMonthFull() {
+    return "MMMM y G";
+  }
+
+  @Override
+  public String formatYearMonthFullDay() {
+    return "d MMMM y G";
+  }
+
+  @Override
+  public String formatYearMonthNum() {
+    return "M‏/y G";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "d‏/M‏/y G";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "EEE، d MMM y G";
+  }
+
+  @Override
+  public String formatYearQuarterFull() {
+    return "QQQQ y G";
+  }
+
+  @Override
+  public String formatYearQuarterShort() {
+    return "Q y G";
+  }
+
+  @Override
   public int weekendEnd() {
     return 6;
   }

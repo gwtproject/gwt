@@ -44,8 +44,8 @@ public class DateTimeFormatInfoImpl_id extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "SM",
-        "M"
+        "Sebelum Masehi",
+        "Masehi"
     };
   }
 

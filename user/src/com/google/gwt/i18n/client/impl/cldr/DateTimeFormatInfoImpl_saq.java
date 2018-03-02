@@ -131,7 +131,7 @@ public class DateTimeFormatInfoImpl_saq extends DateTimeFormatInfoImpl {
         "Lapa le obo",
         "Lapa le waare",
         "Lapa le okuni",
-        "Lapa le ong'wan",
+        "Lapa le ong’wan",
         "Lapa le imet",
         "Lapa le ile",
         "Lapa le sapa",
@@ -200,31 +200,11 @@ public class DateTimeFormatInfoImpl_saq extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String timeFormatFull() {
-    return "h:mm:ss a zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "h:mm:ss a z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "h:mm:ss a";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "h:mm a";
-  }
-
-  @Override
   public String[] weekdaysFull() {
     return new String[] {
         "Mderot ee are",
         "Mderot ee kuni",
-        "Mderot ee ong'wan",
+        "Mderot ee ong’wan",
         "Mderot ee inet",
         "Mderot ee ile",
         "Mderot ee sapa",

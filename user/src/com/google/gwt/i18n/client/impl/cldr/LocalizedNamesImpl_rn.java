@@ -39,18 +39,17 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
         "ZA",
         "DZ",
         "AL",
-        "VI",
         "PH",
         "MP",
         "RE",
         "SB",
         "SC",
         "TC",
+        "VI",
         "AD",
         "AO",
         "AI",
         "AG",
-        "AN",
         "AQ",
         "SA",
         "AR",
@@ -95,6 +94,7 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FJ",
         "FI",
         "FO",
@@ -119,9 +119,9 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
         "HM",
         "HN",
         "HU",
-        "VG",
         "CV",
         "KY",
+        "VG",
         "IC",
         "UA",
         "IM",
@@ -164,8 +164,8 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
         "LV",
         "LA",
         "LS",
-        "AE",
         "US",
+        "AE",
         "LB",
         "LR",
         "LY",
@@ -282,6 +282,7 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
         "GB",
         "UM",
         "VA",
+        "UN",
         "RW",
         "UZ",
         "VU",
@@ -300,13 +301,12 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
   protected void loadNameMapJava() {
     super.loadNameMapJava();
     namesMap.put("AD", "Andora");
-    namesMap.put("AE", "Leta Zunze Ubumwe z'Abarabu");
+    namesMap.put("AE", "Leta Zunze Ubumwe z’Abarabu");
     namesMap.put("AF", "Afuganisitani");
     namesMap.put("AG", "Antigwa na Baribuda");
     namesMap.put("AI", "Angwila");
     namesMap.put("AL", "Alubaniya");
     namesMap.put("AM", "Arumeniya");
-    namesMap.put("AN", "Antiye y'Abaholandi");
     namesMap.put("AR", "Arijantine");
     namesMap.put("AS", "Samowa nyamerika");
     namesMap.put("AT", "Otirishe");
@@ -364,7 +364,7 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
     namesMap.put("GB", "Ubwongereza");
     namesMap.put("GD", "Gerenada");
     namesMap.put("GE", "Jeworujiya");
-    namesMap.put("GF", "Gwayana y'Abafaransa");
+    namesMap.put("GF", "Gwayana y’Abafaransa");
     namesMap.put("GH", "Gana");
     namesMap.put("GI", "Juburalitari");
     namesMap.put("GL", "Gurunilandi");
@@ -385,7 +385,7 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
     namesMap.put("IE", "Irilandi");
     namesMap.put("IL", "Isiraheli");
     namesMap.put("IN", "Ubuhindi");
-    namesMap.put("IO", "Intara y'Ubwongereza yo mu birwa by'Abahindi");
+    namesMap.put("IO", "Intara y’Ubwongereza yo mu birwa by’Abahindi");
     namesMap.put("IQ", "Iraki");
     namesMap.put("IR", "Irani");
     namesMap.put("IS", "Ayisilandi");
@@ -397,8 +397,8 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
     namesMap.put("KH", "Kamboje");
     namesMap.put("KM", "Izinga rya Komore");
     namesMap.put("KN", "Sekitsi na Nevisi");
-    namesMap.put("KP", "Koreya y'amajaruguru");
-    namesMap.put("KR", "Koreya y'amajepfo");
+    namesMap.put("KP", "Koreya y’amajaruguru");
+    namesMap.put("KR", "Koreya y’amajepfo");
     namesMap.put("KW", "Koweti");
     namesMap.put("KY", "Ibirwa bya Keyimani");
     namesMap.put("KZ", "Kazakisitani");
@@ -444,7 +444,7 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
     namesMap.put("NU", "Niyuwe");
     namesMap.put("NZ", "Nuvelizelandi");
     namesMap.put("OM", "Omani");
-    namesMap.put("PF", "Polineziya y'Abafaransa");
+    namesMap.put("PF", "Polineziya y’Abafaransa");
     namesMap.put("PG", "Papuwa Niyugineya");
     namesMap.put("PH", "Amazinga ya Filipine");
     namesMap.put("PK", "Pakisitani");
@@ -483,7 +483,7 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
     namesMap.put("TH", "Tayilandi");
     namesMap.put("TJ", "Tajikisitani");
     namesMap.put("TK", "Tokelawu");
-    namesMap.put("TL", "Timoru y'iburasirazuba");
+    namesMap.put("TL", "Timoru y’iburasirazuba");
     namesMap.put("TM", "Turukumenisitani");
     namesMap.put("TN", "Tuniziya");
     namesMap.put("TR", "Turukiya");
@@ -498,15 +498,15 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
     namesMap.put("VA", "Umurwa wa Vatikani");
     namesMap.put("VC", "Sevensa na Gerenadine");
     namesMap.put("VE", "Venezuwela");
-    namesMap.put("VG", "Ibirwa by'isugi by'Abongereza");
-    namesMap.put("VI", "Amazinga y'Isugi y'Abanyamerika");
+    namesMap.put("VG", "Ibirwa by’isugi by’Abongereza");
+    namesMap.put("VI", "Amazinga y’Isugi y’Abanyamerika");
     namesMap.put("VN", "Viyetinamu");
     namesMap.put("VU", "Vanuwatu");
     namesMap.put("WF", "Walisi na Futuna");
     namesMap.put("WS", "Samowa");
     namesMap.put("YE", "Yemeni");
     namesMap.put("YT", "Mayote");
-    namesMap.put("ZA", "Afurika y'Epfo");
+    namesMap.put("ZA", "Afurika y’Epfo");
     namesMap.put("ZM", "Zambiya");
   }
 
@@ -518,13 +518,12 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
         "AD": "Andora",
-        "AE": "Leta Zunze Ubumwe z'Abarabu",
+        "AE": "Leta Zunze Ubumwe z’Abarabu",
         "AF": "Afuganisitani",
         "AG": "Antigwa na Baribuda",
         "AI": "Angwila",
         "AL": "Alubaniya",
         "AM": "Arumeniya",
-        "AN": "Antiye y'Abaholandi",
         "AR": "Arijantine",
         "AS": "Samowa nyamerika",
         "AT": "Otirishe",
@@ -582,7 +581,7 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
         "GB": "Ubwongereza",
         "GD": "Gerenada",
         "GE": "Jeworujiya",
-        "GF": "Gwayana y'Abafaransa",
+        "GF": "Gwayana y’Abafaransa",
         "GH": "Gana",
         "GI": "Juburalitari",
         "GL": "Gurunilandi",
@@ -603,7 +602,7 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
         "IE": "Irilandi",
         "IL": "Isiraheli",
         "IN": "Ubuhindi",
-        "IO": "Intara y'Ubwongereza yo mu birwa by'Abahindi",
+        "IO": "Intara y’Ubwongereza yo mu birwa by’Abahindi",
         "IQ": "Iraki",
         "IR": "Irani",
         "IS": "Ayisilandi",
@@ -615,8 +614,8 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
         "KH": "Kamboje",
         "KM": "Izinga rya Komore",
         "KN": "Sekitsi na Nevisi",
-        "KP": "Koreya y'amajaruguru",
-        "KR": "Koreya y'amajepfo",
+        "KP": "Koreya y’amajaruguru",
+        "KR": "Koreya y’amajepfo",
         "KW": "Koweti",
         "KY": "Ibirwa bya Keyimani",
         "KZ": "Kazakisitani",
@@ -662,7 +661,7 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
         "NU": "Niyuwe",
         "NZ": "Nuvelizelandi",
         "OM": "Omani",
-        "PF": "Polineziya y'Abafaransa",
+        "PF": "Polineziya y’Abafaransa",
         "PG": "Papuwa Niyugineya",
         "PH": "Amazinga ya Filipine",
         "PK": "Pakisitani",
@@ -701,7 +700,7 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
         "TH": "Tayilandi",
         "TJ": "Tajikisitani",
         "TK": "Tokelawu",
-        "TL": "Timoru y'iburasirazuba",
+        "TL": "Timoru y’iburasirazuba",
         "TM": "Turukumenisitani",
         "TN": "Tuniziya",
         "TR": "Turukiya",
@@ -716,15 +715,15 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
         "VA": "Umurwa wa Vatikani",
         "VC": "Sevensa na Gerenadine",
         "VE": "Venezuwela",
-        "VG": "Ibirwa by'isugi by'Abongereza",
-        "VI": "Amazinga y'Isugi y'Abanyamerika",
+        "VG": "Ibirwa by’isugi by’Abongereza",
+        "VI": "Amazinga y’Isugi y’Abanyamerika",
         "VN": "Viyetinamu",
         "VU": "Vanuwatu",
         "WF": "Walisi na Futuna",
         "WS": "Samowa",
         "YE": "Yemeni",
         "YT": "Mayote",
-        "ZA": "Afurika y'Epfo",
+        "ZA": "Afurika y’Epfo",
         "ZM": "Zambiya"
     };
   }-*/;

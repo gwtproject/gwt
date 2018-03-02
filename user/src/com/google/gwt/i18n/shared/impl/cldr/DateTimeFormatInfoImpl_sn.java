@@ -22,30 +22,10 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_sn extends DateTimeFormatInfoImpl {
 
   @Override
-  public String dateFormatFull() {
-    return "EEEE, d MMMM y";
-  }
-
-  @Override
-  public String dateFormatLong() {
-    return "d MMMM y";
-  }
-
-  @Override
-  public String dateFormatMedium() {
-    return "d MMM y";
-  }
-
-  @Override
-  public String dateFormatShort() {
-    return "dd/MM/y";
-  }
-
-  @Override
   public String[] erasFull() {
     return new String[] {
         "Kristo asati auya",
-        "Kristo ashaya"
+        "mugore ramambo vedu"
     };
   }
 
@@ -60,53 +40,8 @@ public class DateTimeFormatInfoImpl_sn extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatMonthNumDay() {
-    return "M/d";
-  }
-
-  @Override
-  public String formatYearMonthAbbrev() {
-    return "MMM y";
-  }
-
-  @Override
-  public String formatYearMonthAbbrevDay() {
-    return "d MMM y";
-  }
-
-  @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
-  }
-
-  @Override
-  public String formatYearMonthFullDay() {
-    return "d MMMM y";
-  }
-
-  @Override
-  public String formatYearMonthNum() {
-    return "M/y";
-  }
-
-  @Override
   public String formatYearMonthNumDay() {
-    return "d/M/y";
-  }
-
-  @Override
-  public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
-  }
-
-  @Override
-  public String formatYearQuarterFull() {
-    return "QQQQ y";
-  }
-
-  @Override
-  public String formatYearQuarterShort() {
-    return "Q y";
+    return "y-MM-dd";
   }
 
   @Override
@@ -158,7 +93,7 @@ public class DateTimeFormatInfoImpl_sn extends DateTimeFormatInfoImpl {
         "Nya",
         "Gun",
         "Gum",
-        "Mb",
+        "Mbu",
         "Zvi"
     };
   }
@@ -181,26 +116,6 @@ public class DateTimeFormatInfoImpl_sn extends DateTimeFormatInfoImpl {
         "K3",
         "K4"
     };
-  }
-
-  @Override
-  public String timeFormatFull() {
-    return "h:mm:ss a zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "h:mm:ss a z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "h:mm:ss a";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "h:mm a";
   }
 
   @Override
@@ -234,10 +149,10 @@ public class DateTimeFormatInfoImpl_sn extends DateTimeFormatInfoImpl {
     return new String[] {
         "Svo",
         "Muv",
-        "Chip",
-        "Chit",
-        "Chin",
-        "Chis",
+        "Chp",
+        "Cht",
+        "Chn",
+        "Chs",
         "Mug"
     };
   }

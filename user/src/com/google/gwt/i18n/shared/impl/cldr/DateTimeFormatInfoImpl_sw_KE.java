@@ -22,6 +22,26 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_sw_KE extends DateTimeFormatInfoImpl_sw {
 
   @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " 'saa' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " 'saa' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
   public int firstDayOfTheWeek() {
     return 0;
   }

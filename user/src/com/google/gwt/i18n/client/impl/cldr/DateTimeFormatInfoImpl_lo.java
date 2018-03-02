@@ -72,8 +72,8 @@ public class DateTimeFormatInfoImpl_lo extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "ກ່ອນ ຄ.ສ.",
-        "ຄ.ສ."
+        "ກ່ອນຄຣິດສັກກະລາດ",
+        "ຄຣິດສັກກະລາດ"
     };
   }
 
@@ -103,11 +103,6 @@ public class DateTimeFormatInfoImpl_lo extends DateTimeFormatInfoImpl {
   @Override
   public String formatMonthAbbrevDay() {
     return "d MMM";
-  }
-
-  @Override
-  public String formatMonthFullDay() {
-    return "d MMMM";
   }
 
   @Override
@@ -275,25 +270,12 @@ public class DateTimeFormatInfoImpl_lo extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
-    };
-  }
-
-  @Override
-  public String[] weekdaysNarrowStandalone() {
-    return new String[] {
-        "ທ",
+        "ອາ",
         "ຈ",
-        "ຄ",
-        "​ພຸ",
+        "ອ",
         "ພ",
-        "​ສຸ",
+        "ພຫ",
+        "ສຸ",
         "ສ"
     };
   }
@@ -301,13 +283,13 @@ public class DateTimeFormatInfoImpl_lo extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "ວັນອາທິດ",
-        "ວັນຈັນ",
-        "ວັນອັງຄານ",
-        "ວັນພຸດ",
-        "ວັນພະຫັດ",
-        "ວັນສຸກ",
-        "ວັນເສົາ"
+        "ອາທິດ",
+        "ຈັນ",
+        "ອັງຄານ",
+        "ພຸດ",
+        "ພະຫັດ",
+        "ສຸກ",
+        "ເສົາ"
     };
   }
 }

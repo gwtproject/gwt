@@ -22,16 +22,8 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_vo extends DateTimeFormatInfoImpl {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "posz.",
-        "büz."
-    };
-  }
-
-  @Override
   public String dateFormatFull() {
-    return "y MMMMa 'd'. d'id'";
+    return "y MMMM'a' 'd'. d'id'";
   }
 
   @Override
@@ -113,9 +105,9 @@ public class DateTimeFormatInfoImpl_vo extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsFull() {
     return new String[] {
-        "janul",
+        "yanul",
         "febul",
-        "mäzil",
+        "mäzul",
         "prilul",
         "mayul",
         "yunul",
@@ -131,7 +123,7 @@ public class DateTimeFormatInfoImpl_vo extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsNarrow() {
     return new String[] {
-        "J",
+        "Y",
         "F",
         "M",
         "P",
@@ -149,7 +141,7 @@ public class DateTimeFormatInfoImpl_vo extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "jan",
+        "yan",
         "feb",
         "mäz",
         "prl",
@@ -167,7 +159,7 @@ public class DateTimeFormatInfoImpl_vo extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShortStandalone() {
     return new String[] {
-        "jan",
+        "yan",
         "feb",
         "mäz",
         "prl",
@@ -178,7 +170,7 @@ public class DateTimeFormatInfoImpl_vo extends DateTimeFormatInfoImpl {
         "set",
         "tob",
         "nov",
-        "Dek"
+        "dek"
     };
   }
 

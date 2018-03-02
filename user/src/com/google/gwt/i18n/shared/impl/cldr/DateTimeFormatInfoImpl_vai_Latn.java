@@ -32,6 +32,11 @@ public class DateTimeFormatInfoImpl_vai_Latn extends DateTimeFormatInfoImpl_vai 
   }
 
   @Override
+  public String formatYearMonthFull() {
+    return "y MMMM";
+  }
+
+  @Override
   public String formatYearMonthNumDay() {
     return "M/d/y";
   }

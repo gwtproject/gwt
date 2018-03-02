@@ -91,11 +91,6 @@ public class DateTimeFormatInfoImpl_zgh extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatMonthFullDay() {
-    return "d MMMM";
-  }
-
-  @Override
   public String formatMonthFullWeekdayDay() {
     return "EEEE d MMMM";
   }
@@ -111,16 +106,6 @@ public class DateTimeFormatInfoImpl_zgh extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatYearMonthAbbrevDay() {
-    return "d MMM, y";
-  }
-
-  @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
-  }
-
-  @Override
   public String formatYearMonthFullDay() {
     return "d MMMM y";
   }
@@ -132,7 +117,7 @@ public class DateTimeFormatInfoImpl_zgh extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d/M/y";
+    return "y-MM-dd";
   }
 
   @Override

@@ -22,6 +22,14 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_es_CL extends DateTimeFormatInfoImpl_es_419 {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "a. m.",
+        "p. m."
+    };
+  }
+
+  @Override
   public String dateFormatMedium() {
     return "dd-MM-y";
   }
@@ -44,5 +52,23 @@ public class DateTimeFormatInfoImpl_es_CL extends DateTimeFormatInfoImpl_es_419 
   @Override
   public String formatYearMonthNumDay() {
     return "dd-MM-y";
+  }
+
+  @Override
+  public String[] monthsShortStandalone() {
+    return new String[] {
+        "ene.",
+        "feb.",
+        "mar.",
+        "abr.",
+        "may.",
+        "jun.",
+        "jul.",
+        "ago.",
+        "sept.",
+        "oct.",
+        "nov.",
+        "dic."
+    };
   }
 }

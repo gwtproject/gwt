@@ -96,6 +96,7 @@ public class LocalizedNamesImpl_mg extends LocalizedNamesImpl {
         "US",
         "ET",
         "EU",
+        "EZ",
         "IO",
         "FJ",
         "PH",
@@ -282,10 +283,10 @@ public class LocalizedNamesImpl_mg extends LocalizedNamesImpl {
         "TT",
         "TD",
         "UM",
+        "UN",
         "VU",
         "VE",
         "VN",
-        "AN",
         "WF",
         "XK",
         "YE",
@@ -301,7 +302,6 @@ public class LocalizedNamesImpl_mg extends LocalizedNamesImpl {
     super.loadNameMapJava();
     namesMap.put("AE", "Emirà Arabo mitambatra");
     namesMap.put("AG", "Antiga sy Barboda");
-    namesMap.put("AN", "Vondronosy karaiba holandey");
     namesMap.put("AR", "Arzantina");
     namesMap.put("AS", "Samoa amerikanina");
     namesMap.put("AT", "Aotrisy");
@@ -321,8 +321,8 @@ public class LocalizedNamesImpl_mg extends LocalizedNamesImpl {
     namesMap.put("BW", "Botsoana");
     namesMap.put("BY", "Belarosy");
     namesMap.put("CA", "Kanada");
-    namesMap.put("CD", "Repoblikan'i Kongo");
-    namesMap.put("CF", "Repoblika Ivon'Afrika");
+    namesMap.put("CD", "Repoblikan’i Kongo");
+    namesMap.put("CF", "Repoblika Ivon’Afrika");
     namesMap.put("CG", "Kôngô");
     namesMap.put("CH", "Soisa");
     namesMap.put("CK", "Nosy Kook");
@@ -334,7 +334,7 @@ public class LocalizedNamesImpl_mg extends LocalizedNamesImpl {
     namesMap.put("CU", "Kiobà");
     namesMap.put("CV", "Nosy Cap-Vert");
     namesMap.put("CY", "Sypra");
-    namesMap.put("CZ", "Repoblikan'i Tseky");
+    namesMap.put("CZ", "Repoblikan’i Tseky");
     namesMap.put("DE", "Alemaina");
     namesMap.put("DJ", "Djiboti");
     namesMap.put("DK", "Danmarka");
@@ -461,7 +461,7 @@ public class LocalizedNamesImpl_mg extends LocalizedNamesImpl {
     namesMap.put("US", "Etazonia");
     namesMap.put("UY", "Orogoay");
     namesMap.put("UZ", "Ozbekistan");
-    namesMap.put("VA", "Firenen'i Vatikana");
+    namesMap.put("VA", "Firenen’i Vatikana");
     namesMap.put("VC", "Saint-Vincent-et-les Grenadines");
     namesMap.put("VE", "Venezoelà");
     namesMap.put("VG", "Nosy britanika virijiny");
@@ -482,7 +482,6 @@ public class LocalizedNamesImpl_mg extends LocalizedNamesImpl {
     return {
         "AE": "Emirà Arabo mitambatra",
         "AG": "Antiga sy Barboda",
-        "AN": "Vondronosy karaiba holandey",
         "AR": "Arzantina",
         "AS": "Samoa amerikanina",
         "AT": "Aotrisy",
@@ -502,8 +501,8 @@ public class LocalizedNamesImpl_mg extends LocalizedNamesImpl {
         "BW": "Botsoana",
         "BY": "Belarosy",
         "CA": "Kanada",
-        "CD": "Repoblikan'i Kongo",
-        "CF": "Repoblika Ivon'Afrika",
+        "CD": "Repoblikan’i Kongo",
+        "CF": "Repoblika Ivon’Afrika",
         "CG": "Kôngô",
         "CH": "Soisa",
         "CK": "Nosy Kook",
@@ -515,7 +514,7 @@ public class LocalizedNamesImpl_mg extends LocalizedNamesImpl {
         "CU": "Kiobà",
         "CV": "Nosy Cap-Vert",
         "CY": "Sypra",
-        "CZ": "Repoblikan'i Tseky",
+        "CZ": "Repoblikan’i Tseky",
         "DE": "Alemaina",
         "DJ": "Djiboti",
         "DK": "Danmarka",
@@ -642,7 +641,7 @@ public class LocalizedNamesImpl_mg extends LocalizedNamesImpl {
         "US": "Etazonia",
         "UY": "Orogoay",
         "UZ": "Ozbekistan",
-        "VA": "Firenen'i Vatikana",
+        "VA": "Firenen’i Vatikana",
         "VC": "Saint-Vincent-et-les Grenadines",
         "VE": "Venezoelà",
         "VG": "Nosy britanika virijiny",

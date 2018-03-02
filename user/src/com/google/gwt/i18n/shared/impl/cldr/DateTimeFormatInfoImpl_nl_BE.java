@@ -22,12 +22,22 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_nl_BE extends DateTimeFormatInfoImpl_nl {
 
   @Override
-  public String dateFormatMedium() {
-    return "d-MMM-y";
+  public String dateFormatShort() {
+    return "d/MM/yy";
   }
 
   @Override
-  public String dateFormatShort() {
-    return "d/MM/yy";
+  public String formatMonthNumDay() {
+    return "d/M";
+  }
+
+  @Override
+  public String formatYearMonthNum() {
+    return "M/y";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "d/M/y";
   }
 }

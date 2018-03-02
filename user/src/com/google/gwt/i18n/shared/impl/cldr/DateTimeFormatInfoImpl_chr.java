@@ -50,18 +50,30 @@ public class DateTimeFormatInfoImpl_chr extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] erasFull() {
-    return new String[] {
-        "Ꮟ ᏥᏌ ᎾᏕᎲᏍᎬᎾ",
-        "ᎠᎩᏃᎮᎵᏓᏍᏗᏱ ᎠᏕᏘᏱᏍᎬ ᏱᎰᏩ ᏧᏓᏂᎸᎢᏍᏗ"
-    };
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " ᎤᎾᎢ " + timePattern;
   }
 
   @Override
-  public String[] erasShort() {
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " ᎤᎾᎢ " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String[] erasFull() {
     return new String[] {
-        "ᎤᏓᎷᎸ",
-        "ᎤᎶᏐᏅ"
+        "ᏧᏓᎷᎸ ᎤᎷᎯᏍᏗ ᎦᎶᏁᏛ",
+        "ᎠᏃ ᏙᎻᏂ"
     };
   }
 
@@ -71,13 +83,8 @@ public class DateTimeFormatInfoImpl_chr extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatHour24Minute() {
-    return "H:mm";
-  }
-
-  @Override
-  public String formatHour24MinuteSecond() {
-    return "H:mm:ss";
+  public String formatMonthFullWeekdayDay() {
+    return "EEEE, MMMM d";
   }
 
   @Override
@@ -187,10 +194,10 @@ public class DateTimeFormatInfoImpl_chr extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Q1",
-        "Q2",
-        "Q3",
-        "Q4"
+        "1st ᎩᏄᏙᏗ",
+        "2nd ᎩᏄᏙᏗ",
+        "3rd ᎩᏄᏙᏗ",
+        "4th ᎩᏄᏙᏗ"
     };
   }
 

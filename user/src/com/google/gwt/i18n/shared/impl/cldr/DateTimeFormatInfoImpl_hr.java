@@ -38,7 +38,7 @@ public class DateTimeFormatInfoImpl_hr extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "d.M.yy.";
+    return "dd. MM. y.";
   }
 
   @Override
@@ -54,8 +54,8 @@ public class DateTimeFormatInfoImpl_hr extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "Prije Krista",
-        "Poslije Krista"
+        "prije Krista",
+        "poslije Krista"
     };
   }
 
@@ -63,7 +63,7 @@ public class DateTimeFormatInfoImpl_hr extends DateTimeFormatInfoImpl {
   public String[] erasShort() {
     return new String[] {
         "pr. Kr.",
-        "p. Kr."
+        "po. Kr."
     };
   }
 
@@ -99,7 +99,7 @@ public class DateTimeFormatInfoImpl_hr extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthNumDay() {
-    return "d. M.";
+    return "dd. MM.";
   }
 
   @Override
@@ -129,12 +129,12 @@ public class DateTimeFormatInfoImpl_hr extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "M. y.";
+    return "MM. y.";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d. M. y.";
+    return "dd. MM. y.";
   }
 
   @Override
@@ -242,6 +242,11 @@ public class DateTimeFormatInfoImpl_hr extends DateTimeFormatInfoImpl {
         "3kv",
         "4kv"
     };
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "HH:mm:ss (zzzz)";
   }
 
   @Override

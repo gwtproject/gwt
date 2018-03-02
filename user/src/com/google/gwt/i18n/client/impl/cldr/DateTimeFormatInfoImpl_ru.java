@@ -38,7 +38,7 @@ public class DateTimeFormatInfoImpl_ru extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "dd.MM.yy";
+    return "dd.MM.y";
   }
 
   @Override
@@ -64,8 +64,8 @@ public class DateTimeFormatInfoImpl_ru extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "до н.э.",
-        "н.э."
+        "до Рождества Христова",
+        "от Рождества Христова"
     };
   }
 
@@ -109,7 +109,7 @@ public class DateTimeFormatInfoImpl_ru extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrev() {
-    return "LLL y";
+    return "LLL y 'г'.";
   }
 
   @Override
@@ -119,7 +119,7 @@ public class DateTimeFormatInfoImpl_ru extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFull() {
-    return "LLLL y";
+    return "LLLL y 'г'.";
   }
 
   @Override
@@ -139,7 +139,7 @@ public class DateTimeFormatInfoImpl_ru extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, d MMM y";
+    return "EEE, d MMM y 'г'.";
   }
 
   @Override
@@ -173,18 +173,18 @@ public class DateTimeFormatInfoImpl_ru extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsFullStandalone() {
     return new String[] {
-        "Январь",
-        "Февраль",
-        "Март",
-        "Апрель",
-        "Май",
-        "Июнь",
-        "Июль",
-        "Август",
-        "Сентябрь",
-        "Октябрь",
-        "Ноябрь",
-        "Декабрь"
+        "январь",
+        "февраль",
+        "март",
+        "апрель",
+        "май",
+        "июнь",
+        "июль",
+        "август",
+        "сентябрь",
+        "октябрь",
+        "ноябрь",
+        "декабрь"
     };
   }
 
@@ -211,11 +211,11 @@ public class DateTimeFormatInfoImpl_ru extends DateTimeFormatInfoImpl {
     return new String[] {
         "янв.",
         "февр.",
-        "марта",
+        "мар.",
         "апр.",
         "мая",
-        "июня",
-        "июля",
+        "июн.",
+        "июл.",
         "авг.",
         "сент.",
         "окт.",
@@ -227,18 +227,18 @@ public class DateTimeFormatInfoImpl_ru extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShortStandalone() {
     return new String[] {
-        "Янв.",
-        "Февр.",
-        "Март",
-        "Апр.",
-        "Май",
-        "Июнь",
-        "Июль",
-        "Авг.",
-        "Сент.",
-        "Окт.",
-        "Нояб.",
-        "Дек."
+        "янв.",
+        "февр.",
+        "март",
+        "апр.",
+        "май",
+        "июнь",
+        "июль",
+        "авг.",
+        "сент.",
+        "окт.",
+        "нояб.",
+        "дек."
     };
   }
 
@@ -296,19 +296,6 @@ public class DateTimeFormatInfoImpl_ru extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] weekdaysFullStandalone() {
-    return new String[] {
-        "Воскресенье",
-        "Понедельник",
-        "Вторник",
-        "Среда",
-        "Четверг",
-        "Пятница",
-        "Суббота"
-    };
-  }
-
-  @Override
   public String[] weekdaysNarrow() {
     return new String[] {
         "вс",
@@ -344,19 +331,6 @@ public class DateTimeFormatInfoImpl_ru extends DateTimeFormatInfoImpl {
         "чт",
         "пт",
         "сб"
-    };
-  }
-
-  @Override
-  public String[] weekdaysShortStandalone() {
-    return new String[] {
-        "Вс",
-        "Пн",
-        "Вт",
-        "Ср",
-        "Чт",
-        "Пт",
-        "Сб"
     };
   }
 }

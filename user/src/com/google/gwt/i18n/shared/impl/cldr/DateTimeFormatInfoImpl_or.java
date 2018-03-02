@@ -31,37 +31,49 @@ public class DateTimeFormatInfoImpl_or extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatFull() {
-    return "EEEE, d MMMM y";
+    return "EEEE, MMMM d, y";
   }
 
   @Override
   public String dateFormatLong() {
-    return "d MMMM y";
+    return "MMMM d, y";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "d MMM y";
+    return "MMM d, y";
   }
 
   @Override
   public String dateFormatShort() {
-    return "d-M-yy";
+    return "M/d/yy";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return timePattern + " ଠାରେ " + datePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return timePattern + " ଠାରେ " + datePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "BCE",
-        "CE"
-    };
-  }
-
-  @Override
-  public String[] erasShort() {
-    return new String[] {
-        "BCE",
-        "CE"
+        "ଖ୍ରୀଷ୍ଟପୂର୍ବ",
+        "ଖ୍ରୀଷ୍ଟାବ୍ଦ"
     };
   }
 
@@ -71,13 +83,23 @@ public class DateTimeFormatInfoImpl_or extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthFullWeekdayDay() {
+    return "EEEE, MMMM d";
+  }
+
+  @Override
   public String formatMonthNumDay() {
-    return "d-M";
+    return "M/d";
+  }
+
+  @Override
+  public String formatYearMonthAbbrev() {
+    return "MMM y";
   }
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "d MMM y";
+    return "MMM d, y";
   }
 
   @Override
@@ -87,17 +109,22 @@ public class DateTimeFormatInfoImpl_or extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFullDay() {
-    return "d MMMM y";
+    return "MMMM d, y";
   }
 
   @Override
   public String formatYearMonthNum() {
-    return "M-y";
+    return "M/y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d-M-y";
+    return "M/d/y";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "EEE, MMM d, y";
   }
 
   @Override
@@ -114,10 +141,10 @@ public class DateTimeFormatInfoImpl_or extends DateTimeFormatInfoImpl {
   public String[] monthsFull() {
     return new String[] {
         "ଜାନୁଆରୀ",
-        "ଫେବ୍ରୁୟାରୀ",
+        "ଫେବୃଆରୀ",
         "ମାର୍ଚ୍ଚ",
         "ଅପ୍ରେଲ",
-        "ମେ",
+        "ମଇ",
         "ଜୁନ",
         "ଜୁଲାଇ",
         "ଅଗଷ୍ଟ",
@@ -135,7 +162,7 @@ public class DateTimeFormatInfoImpl_or extends DateTimeFormatInfoImpl {
         "ଫେ",
         "ମା",
         "ଅ",
-        "ମେ",
+        "ମଇ",
         "ଜୁ",
         "ଜୁ",
         "ଅ",
@@ -150,10 +177,10 @@ public class DateTimeFormatInfoImpl_or extends DateTimeFormatInfoImpl {
   public String[] monthsShort() {
     return new String[] {
         "ଜାନୁଆରୀ",
-        "ଫେବ୍ରୁୟାରୀ",
+        "ଫେବୃଆରୀ",
         "ମାର୍ଚ୍ଚ",
         "ଅପ୍ରେଲ",
-        "ମେ",
+        "ମଇ",
         "ଜୁନ",
         "ଜୁଲାଇ",
         "ଅଗଷ୍ଟ",
@@ -167,10 +194,20 @@ public class DateTimeFormatInfoImpl_or extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Q1",
-        "Q2",
-        "Q3",
-        "Q4"
+        "1ମ ତ୍ରୟମାସ",
+        "2ୟ ତ୍ରୟମାସ",
+        "3ୟ ତ୍ରୟମାସ",
+        "4ର୍ଥ ତ୍ରୟମାସ"
+    };
+  }
+
+  @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "1ମ ତ୍ରୟମାସ",
+        "2ୟ ତ୍ରୟମାସ",
+        "3ୟ ତ୍ରୟମାସ",
+        "4ର୍ଥ ତ୍ରୟମାସ"
     };
   }
 

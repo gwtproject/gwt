@@ -22,6 +22,14 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_nl extends DateTimeFormatInfoImpl {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "a.m.",
+        "p.m."
+    };
+  }
+
+  @Override
   public String dateFormatFull() {
     return "EEEE d MMMM y";
   }
@@ -42,9 +50,19 @@ public class DateTimeFormatInfoImpl_nl extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " 'om' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " 'om' " + timePattern;
+  }
+
+  @Override
   public String[] erasFull() {
     return new String[] {
-        "Voor Christus",
+        "voor Christus",
         "na Christus"
     };
   }
@@ -155,24 +173,6 @@ public class DateTimeFormatInfoImpl_nl extends DateTimeFormatInfoImpl {
         "okt.",
         "nov.",
         "dec."
-    };
-  }
-
-  @Override
-  public String[] monthsShortStandalone() {
-    return new String[] {
-        "jan",
-        "feb",
-        "mrt",
-        "apr",
-        "mei",
-        "jun",
-        "jul",
-        "aug",
-        "sep",
-        "okt",
-        "nov",
-        "dec"
     };
   }
 

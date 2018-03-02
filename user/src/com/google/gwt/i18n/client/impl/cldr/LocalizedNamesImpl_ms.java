@@ -25,13 +25,19 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
 
   @Override
+  public String[] loadLikelyRegionCodes() {
+    return new String[] {
+        "MY",
+    };
+  }
+
+  @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
         "AF",
         "ZA",
         "AL",
         "DZ",
-        "AS",
         "US",
         "AD",
         "AO",
@@ -48,6 +54,7 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "BS",
         "BH",
         "BD",
+        "UN",
         "BB",
         "NL",
         "BQ",
@@ -81,6 +88,7 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "CU",
         "CW",
         "CY",
+        "CZ",
         "DK",
         "DG",
         "DJ",
@@ -99,6 +107,7 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "GE",
         "GH",
         "GI",
+        "GR",
         "GL",
         "GD",
         "GP",
@@ -132,7 +141,6 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "KZ",
         "KH",
         "KE",
-        "GS",
         "AX",
         "IC",
         "KY",
@@ -140,6 +148,8 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "CK",
         "FK",
         "FO",
+        "GS",
+        "HM",
         "MP",
         "MH",
         "PN",
@@ -191,14 +201,12 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "NA",
         "NR",
         "NP",
-        "AN",
         "NC",
         "NZ",
         "NI",
         "NE",
         "NG",
         "NU",
-        "NF",
         "NO",
         "QO",
         "OM",
@@ -216,11 +224,10 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "AC",
         "BV",
         "CP",
-        "HM",
         "CX",
+        "NF",
         "QA",
         "CF",
-        "CZ",
         "DO",
         "RE",
         "RO",
@@ -235,6 +242,7 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "PM",
         "VC",
         "WS",
+        "AS",
         "SM",
         "ST",
         "SN",
@@ -283,9 +291,9 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "PS",
         "TF",
         "YE",
-        "GR",
         "ZM",
         "ZW",
+        "EZ",
     };
   }
 
@@ -321,21 +329,20 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
     namesMap.put("AE", "Emiriah Arab Bersatu");
     namesMap.put("AG", "Antigua dan Barbuda");
     namesMap.put("AQ", "Antartika");
+    namesMap.put("AS", "Samoa Amerika");
     namesMap.put("AX", "Kepulauan Aland");
     namesMap.put("BA", "Bosnia dan Herzegovina");
+    namesMap.put("BL", "Saint Barthélemy");
     namesMap.put("BQ", "Belanda Caribbean");
     namesMap.put("BV", "Pulau Bouvet");
     namesMap.put("CA", "Kanada");
     namesMap.put("CC", "Kepulauan Cocos (Keeling)");
-    namesMap.put("CD", "Congo - Kinshasa");
     namesMap.put("CF", "Republik Afrika Tengah");
-    namesMap.put("CG", "Congo - Brazzaville");
     namesMap.put("CI", "Cote d’Ivoire");
     namesMap.put("CK", "Kepulauan Cook");
     namesMap.put("CP", "Pulau Clipperton");
     namesMap.put("CW", "Curacao");
     namesMap.put("CX", "Pulau Krismas");
-    namesMap.put("CZ", "Republik Czech");
     namesMap.put("DE", "Jerman");
     namesMap.put("DO", "Republik Dominica");
     namesMap.put("EA", "Ceuta dan Melilla");
@@ -343,15 +350,15 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
     namesMap.put("EH", "Sahara Barat");
     namesMap.put("ES", "Sepanyol");
     namesMap.put("EU", "Kesatuan Eropah");
+    namesMap.put("EZ", "Zon Euro");
     namesMap.put("FK", "Kepulauan Falkland");
     namesMap.put("FO", "Kepulauan Faroe");
     namesMap.put("FR", "Perancis");
     namesMap.put("GF", "Guiana Perancis");
     namesMap.put("GQ", "Guinea Khatulistiwa");
-    namesMap.put("GR", "Yunani");
-    namesMap.put("GS", "Kepualaun Georgia Selatan dan Sandwich Selatan");
+    namesMap.put("GS", "Kepulauan Georgia Selatan & Sandwich Selatan");
     namesMap.put("GW", "Guinea Bissau");
-    namesMap.put("HM", "Pulau Heard dan Kepulauan McDonald");
+    namesMap.put("HM", "Kepulauan Heard & McDonald");
     namesMap.put("IC", "Kepulauan Canary");
     namesMap.put("IO", "Wilayah Lautan Hindi British");
     namesMap.put("IT", "Itali");
@@ -362,12 +369,13 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
     namesMap.put("KR", "Korea Selatan");
     namesMap.put("KY", "Kepulauan Cayman");
     namesMap.put("LB", "Lubnan");
+    namesMap.put("LC", "Saint Lucia");
     namesMap.put("MA", "Maghribi");
+    namesMap.put("MF", "Saint Martin");
     namesMap.put("MG", "Madagaskar");
     namesMap.put("MH", "Kepulauan Marshall");
-    namesMap.put("MK", "Macedonia");
     namesMap.put("MP", "Kepulauan Mariana Utara");
-    namesMap.put("MZ", "Mozambik");
+    namesMap.put("NF", "Pulau Norfolk");
     namesMap.put("NL", "Belanda");
     namesMap.put("PF", "Polinesia Perancis");
     namesMap.put("PH", "Filipina");
@@ -380,16 +388,17 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
     namesMap.put("SA", "Arab Saudi");
     namesMap.put("SB", "Kepulauan Solomon");
     namesMap.put("SG", "Singapura");
+    namesMap.put("SH", "Saint Helena");
     namesMap.put("SJ", "Svalbard dan Jan Mayen");
     namesMap.put("SR", "Surinam");
     namesMap.put("SS", "Sudan Selatan");
     namesMap.put("ST", "Sao Tome dan Principe");
     namesMap.put("TC", "Kepulauan Turks dan Caicos");
     namesMap.put("TF", "Wilayah Selatan Perancis");
-    namesMap.put("TL", "Timor Timur");
     namesMap.put("TR", "Turki");
     namesMap.put("TT", "Trinidad dan Tobago");
     namesMap.put("UM", "Kepulauan Terpencil A.S.");
+    namesMap.put("UN", "Bangsa-bangsa Bersatu");
     namesMap.put("US", "Amerika Syarikat");
     namesMap.put("VA", "Kota Vatican");
     namesMap.put("VC", "Saint Vincent dan Grenadines");
@@ -437,21 +446,20 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "AE": "Emiriah Arab Bersatu",
         "AG": "Antigua dan Barbuda",
         "AQ": "Antartika",
+        "AS": "Samoa Amerika",
         "AX": "Kepulauan Aland",
         "BA": "Bosnia dan Herzegovina",
+        "BL": "Saint Barthélemy",
         "BQ": "Belanda Caribbean",
         "BV": "Pulau Bouvet",
         "CA": "Kanada",
         "CC": "Kepulauan Cocos (Keeling)",
-        "CD": "Congo - Kinshasa",
         "CF": "Republik Afrika Tengah",
-        "CG": "Congo - Brazzaville",
         "CI": "Cote d’Ivoire",
         "CK": "Kepulauan Cook",
         "CP": "Pulau Clipperton",
         "CW": "Curacao",
         "CX": "Pulau Krismas",
-        "CZ": "Republik Czech",
         "DE": "Jerman",
         "DO": "Republik Dominica",
         "EA": "Ceuta dan Melilla",
@@ -459,15 +467,15 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "EH": "Sahara Barat",
         "ES": "Sepanyol",
         "EU": "Kesatuan Eropah",
+        "EZ": "Zon Euro",
         "FK": "Kepulauan Falkland",
         "FO": "Kepulauan Faroe",
         "FR": "Perancis",
         "GF": "Guiana Perancis",
         "GQ": "Guinea Khatulistiwa",
-        "GR": "Yunani",
-        "GS": "Kepualaun Georgia Selatan dan Sandwich Selatan",
+        "GS": "Kepulauan Georgia Selatan & Sandwich Selatan",
         "GW": "Guinea Bissau",
-        "HM": "Pulau Heard dan Kepulauan McDonald",
+        "HM": "Kepulauan Heard & McDonald",
         "IC": "Kepulauan Canary",
         "IO": "Wilayah Lautan Hindi British",
         "IT": "Itali",
@@ -478,12 +486,13 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "KR": "Korea Selatan",
         "KY": "Kepulauan Cayman",
         "LB": "Lubnan",
+        "LC": "Saint Lucia",
         "MA": "Maghribi",
+        "MF": "Saint Martin",
         "MG": "Madagaskar",
         "MH": "Kepulauan Marshall",
-        "MK": "Macedonia",
         "MP": "Kepulauan Mariana Utara",
-        "MZ": "Mozambik",
+        "NF": "Pulau Norfolk",
         "NL": "Belanda",
         "PF": "Polinesia Perancis",
         "PH": "Filipina",
@@ -496,16 +505,17 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "SA": "Arab Saudi",
         "SB": "Kepulauan Solomon",
         "SG": "Singapura",
+        "SH": "Saint Helena",
         "SJ": "Svalbard dan Jan Mayen",
         "SR": "Surinam",
         "SS": "Sudan Selatan",
         "ST": "Sao Tome dan Principe",
         "TC": "Kepulauan Turks dan Caicos",
         "TF": "Wilayah Selatan Perancis",
-        "TL": "Timor Timur",
         "TR": "Turki",
         "TT": "Trinidad dan Tobago",
         "UM": "Kepulauan Terpencil A.S.",
+        "UN": "Bangsa-bangsa Bersatu",
         "US": "Amerika Syarikat",
         "VA": "Kota Vatican",
         "VC": "Saint Vincent dan Grenadines",

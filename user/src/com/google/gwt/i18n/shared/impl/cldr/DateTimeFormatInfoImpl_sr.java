@@ -25,7 +25,7 @@ public class DateTimeFormatInfoImpl_sr extends DateTimeFormatInfoImpl {
   public String[] ampms() {
     return new String[] {
         "пре подне",
-        "поподне"
+        "по подне"
     };
   }
 
@@ -52,8 +52,8 @@ public class DateTimeFormatInfoImpl_sr extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "Пре нове ере",
-        "Нове ере"
+        "пре нове ере",
+        "нове ере"
     };
   }
 
@@ -63,31 +63,6 @@ public class DateTimeFormatInfoImpl_sr extends DateTimeFormatInfoImpl {
         "п. н. е.",
         "н. е."
     };
-  }
-
-  @Override
-  public String formatHour12Minute() {
-    return "hh.mm a";
-  }
-
-  @Override
-  public String formatHour12MinuteSecond() {
-    return "hh.mm.ss a";
-  }
-
-  @Override
-  public String formatHour24Minute() {
-    return "HH.mm";
-  }
-
-  @Override
-  public String formatHour24MinuteSecond() {
-    return "HH.mm.ss";
-  }
-
-  @Override
-  public String formatMinuteSecond() {
-    return "mm.ss";
   }
 
   @Override
@@ -102,12 +77,12 @@ public class DateTimeFormatInfoImpl_sr extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE d. MMMM";
+    return "EEEE, d. MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "d/M";
+    return "d.M.";
   }
 
   @Override
@@ -152,12 +127,12 @@ public class DateTimeFormatInfoImpl_sr extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearQuarterFull() {
-    return "QQQQ. y";
+    return "QQQQ y.";
   }
 
   @Override
   public String formatYearQuarterShort() {
-    return "Q. y";
+    return "Q y.";
   }
 
   @Override
@@ -217,10 +192,10 @@ public class DateTimeFormatInfoImpl_sr extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Прво тромесечје",
-        "Друго тромесечје",
-        "Треће тромесечје",
-        "Четврто тромесечје"
+        "први квартал",
+        "други квартал",
+        "трећи квартал",
+        "четврти квартал"
     };
   }
 
@@ -232,26 +207,6 @@ public class DateTimeFormatInfoImpl_sr extends DateTimeFormatInfoImpl {
         "К3",
         "К4"
     };
-  }
-
-  @Override
-  public String timeFormatFull() {
-    return "HH.mm.ss zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "HH.mm.ss z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "HH.mm.ss";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "HH.mm";
   }
 
   @Override

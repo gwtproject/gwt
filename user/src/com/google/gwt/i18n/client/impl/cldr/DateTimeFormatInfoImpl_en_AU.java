@@ -30,43 +30,8 @@ public class DateTimeFormatInfoImpl_en_AU extends DateTimeFormatInfoImpl_en_001 
   }
 
   @Override
-  public String dateFormatFull() {
-    return "EEEE, d MMMM y";
-  }
-
-  @Override
-  public String dateFormatLong() {
-    return "d MMMM y";
-  }
-
-  @Override
-  public String dateFormatMedium() {
-    return "d MMM y";
-  }
-
-  @Override
   public String dateFormatShort() {
-    return "d/MM/y";
-  }
-
-  @Override
-  public String dateTimeFull(String timePattern, String datePattern) {
-    return datePattern + " " + timePattern;
-  }
-
-  @Override
-  public String dateTimeLong(String timePattern, String datePattern) {
-    return datePattern + " " + timePattern;
-  }
-
-  @Override
-  public String dateTimeMedium(String timePattern, String datePattern) {
-    return datePattern + " " + timePattern;
-  }
-
-  @Override
-  public String dateTimeShort(String timePattern, String datePattern) {
-    return datePattern + " " + timePattern;
+    return "d/M/yy";
   }
 
   @Override
@@ -75,47 +40,51 @@ public class DateTimeFormatInfoImpl_en_AU extends DateTimeFormatInfoImpl_en_001 
   }
 
   @Override
-  public String formatMonthAbbrevDay() {
-    return "d MMM";
-  }
-
-  @Override
-  public String formatMonthFullDay() {
-    return "d MMMM";
-  }
-
-  @Override
-  public String formatMonthFullWeekdayDay() {
-    return "EEEE d MMMM";
-  }
-
-  @Override
   public String formatMonthNumDay() {
-    return "dd/MM";
+    return "d/M";
   }
 
   @Override
-  public String formatYearMonthAbbrevDay() {
-    return "d MMM y";
+  public String[] monthsShort() {
+    return new String[] {
+        "Jan.",
+        "Feb.",
+        "Mar.",
+        "Apr.",
+        "May",
+        "Jun.",
+        "Jul.",
+        "Aug.",
+        "Sep.",
+        "Oct.",
+        "Nov.",
+        "Dec."
+    };
   }
 
   @Override
-  public String formatYearMonthFullDay() {
-    return "d MMMM y";
+  public String[] weekdaysNarrow() {
+    return new String[] {
+        "Su.",
+        "M.",
+        "Tu.",
+        "W.",
+        "Th.",
+        "F.",
+        "Sa."
+    };
   }
 
   @Override
-  public String formatYearMonthNum() {
-    return "MM/y";
-  }
-
-  @Override
-  public String formatYearMonthNumDay() {
-    return "d/M/y";
-  }
-
-  @Override
-  public String formatYearMonthWeekdayDay() {
-    return "EEE, d MMM y";
+  public String[] weekdaysShort() {
+    return new String[] {
+        "Sun.",
+        "Mon.",
+        "Tue.",
+        "Wed.",
+        "Thu.",
+        "Fri.",
+        "Sat."
+    };
   }
 }

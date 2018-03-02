@@ -37,7 +37,6 @@ public class LocalizedNamesImpl_cgg extends LocalizedNamesImpl {
         "AG",
         "AO",
         "AI",
-        "AN",
         "AQ",
         "AR",
         "DZ",
@@ -86,7 +85,6 @@ public class LocalizedNamesImpl_cgg extends LocalizedNamesImpl {
         "DG",
         "DM",
         "EA",
-        "MP",
         "TC",
         "FK",
         "KY",
@@ -96,6 +94,7 @@ public class LocalizedNamesImpl_cgg extends LocalizedNamesImpl {
         "SB",
         "VI",
         "VG",
+        "MP",
         "EH",
         "CF",
         "NF",
@@ -104,6 +103,7 @@ public class LocalizedNamesImpl_cgg extends LocalizedNamesImpl {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FJ",
         "PH",
         "FO",
@@ -274,6 +274,7 @@ public class LocalizedNamesImpl_cgg extends LocalizedNamesImpl {
         "UG",
         "UA",
         "UM",
+        "UN",
         "UY",
         "UZ",
         "VU",
@@ -299,7 +300,6 @@ public class LocalizedNamesImpl_cgg extends LocalizedNamesImpl {
     namesMap.put("AI", "Angwira");
     namesMap.put("AL", "Arubania");
     namesMap.put("AM", "Arimeniya");
-    namesMap.put("AN", "Antiri za Hoorandi");
     namesMap.put("AO", "Angora");
     namesMap.put("AR", "Arigentina");
     namesMap.put("AS", "Samowa ya Ameerika");
@@ -406,7 +406,7 @@ public class LocalizedNamesImpl_cgg extends LocalizedNamesImpl {
     namesMap.put("ML", "Mari");
     namesMap.put("MM", "Myanamar");
     namesMap.put("MN", "Mongoria");
-    namesMap.put("MP", "Ebizinga by'amatemba ga Mariana");
+    namesMap.put("MP", "Ebizinga by’amatemba ga Mariana");
     namesMap.put("MR", "Mauriteeniya");
     namesMap.put("MS", "Montserrati");
     namesMap.put("MT", "Marita");
@@ -501,7 +501,6 @@ public class LocalizedNamesImpl_cgg extends LocalizedNamesImpl {
         "AI": "Angwira",
         "AL": "Arubania",
         "AM": "Arimeniya",
-        "AN": "Antiri za Hoorandi",
         "AO": "Angora",
         "AR": "Arigentina",
         "AS": "Samowa ya Ameerika",
@@ -608,7 +607,7 @@ public class LocalizedNamesImpl_cgg extends LocalizedNamesImpl {
         "ML": "Mari",
         "MM": "Myanamar",
         "MN": "Mongoria",
-        "MP": "Ebizinga by'amatemba ga Mariana",
+        "MP": "Ebizinga by’amatemba ga Mariana",
         "MR": "Mauriteeniya",
         "MS": "Montserrati",
         "MT": "Marita",

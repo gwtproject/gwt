@@ -22,6 +22,14 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_es_CO extends DateTimeFormatInfoImpl_es_419 {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "a. m.",
+        "p. m."
+    };
+  }
+
+  @Override
   public String dateFormatMedium() {
     return "d/MM/y";
   }
@@ -32,13 +40,66 @@ public class DateTimeFormatInfoImpl_es_CO extends DateTimeFormatInfoImpl_es_419 
   }
 
   @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
   public int firstDayOfTheWeek() {
     return 0;
   }
 
   @Override
+  public String formatHour24Minute() {
+    return "H:mm";
+  }
+
+  @Override
+  public String formatHour24MinuteSecond() {
+    return "H:mm:ss";
+  }
+
+  @Override
+  public String formatMonthAbbrevDay() {
+    return "d 'de' MMM";
+  }
+
+  @Override
+  public String formatYearMonthAbbrev() {
+    return "MMM 'de' y";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "d 'de' MMM 'de' y";
+  }
+
+  @Override
+  public String[] monthsShortStandalone() {
+    return new String[] {
+        "ene.",
+        "feb.",
+        "mar.",
+        "abr.",
+        "may.",
+        "jun.",
+        "jul.",
+        "ago.",
+        "sept.",
+        "oct.",
+        "nov.",
+        "dic."
+    };
+  }
+
+  @Override
   public String timeFormatFull() {
-    return "h:mm:ss a (zzzz)";
+    return "h:mm:ss a zzzz";
   }
 
   @Override
@@ -54,5 +115,31 @@ public class DateTimeFormatInfoImpl_es_CO extends DateTimeFormatInfoImpl_es_419 
   @Override
   public String timeFormatShort() {
     return "h:mm a";
+  }
+
+  @Override
+  public String[] weekdaysNarrow() {
+    return new String[] {
+        "D",
+        "L",
+        "M",
+        "M",
+        "J",
+        "V",
+        "S"
+    };
+  }
+
+  @Override
+  public String[] weekdaysNarrowStandalone() {
+    return new String[] {
+        "d",
+        "l",
+        "m",
+        "m",
+        "j",
+        "v",
+        "s"
+    };
   }
 }

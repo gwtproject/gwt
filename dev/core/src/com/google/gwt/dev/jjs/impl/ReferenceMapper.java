@@ -33,6 +33,7 @@ import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.util.StringInterner;
+import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 import com.google.gwt.thirdparty.guava.common.collect.Interner;
 
 import org.eclipse.jdt.internal.compiler.lookup.ArrayBinding;
@@ -184,11 +185,13 @@ public class ReferenceMapper {
   }
 
   public void setField(FieldBinding binding, JField field) {
+    Preconditions.checkArgument(get(binding.declaringClass.erasure()) == field.getEnclosingType());
     String key = JdtUtil.signature(binding);
     sourceFields.put(key, field);
   }
 
   public void setMethod(MethodBinding binding, JMethod method) {
+    Preconditions.checkArgument(get(binding.declaringClass.erasure()) == method.getEnclosingType());
     String key = JdtUtil.signature(binding);
     sourceMethods.put(key, method);
   }

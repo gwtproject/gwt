@@ -46,6 +46,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -274,6 +275,40 @@ public class GwtAstBuilderTest extends JJSTestBase {
               "test.IntersectionBound$A", "test.IntersectionBound$B", "test.IntersectionBound$C")),
           castToTypeNames);
     }
+  }
+
+  public void testBridgeMethodResolution() throws UnableToCompleteException {
+    sourceLevel = SourceLevel.JAVA9;
+
+    sources.add(JavaResourceBase.createMockJavaResource("test.SuperInterface",
+        "package test;",
+        "public interface SuperInterface<T> {",
+        "  void m(T t);",
+        "}",
+        "interface SubInterface extends  SuperInterface<String> {",
+        "  void m(String t);",
+        "  default SubInterface get() { ",
+        "    // A lambda that will have a bridge m(Object) -> m(String)",
+        "    return o -> {};",
+        "  } ",
+        "  static <T> void applyM(SuperInterface<T> s) { s.m(null); } ",
+        "}"
+    ));
+
+    JProgram program = compileProgram("test.SuperInterface");
+    JMethod applyM = findQualifiedMethod(program, "test.SubInterface.applyM");
+
+    final Set<String> calledMethods = new HashSet<>();
+
+    new JVisitor() {
+      @Override
+      public void endVisit(JMethodCall x, Context ctx) {
+        calledMethods.add(x.getTarget().getQualifiedName());
+      }
+    }.accept(applyM);
+    assertEquals(
+        Sets.newHashSet(Arrays.asList("test.SuperInterface.m(Ljava/lang/Object;)V")),
+        calledMethods);
   }
 
   public void testUniqueArrayTypeInstance() throws UnableToCompleteException {

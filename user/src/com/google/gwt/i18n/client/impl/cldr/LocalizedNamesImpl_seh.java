@@ -36,7 +36,6 @@ public class LocalizedNamesImpl_seh extends LocalizedNamesImpl {
         "AO",
         "AI",
         "AG",
-        "AN",
         "AQ",
         "SA",
         "DZ",
@@ -110,6 +109,7 @@ public class LocalizedNamesImpl_seh extends LocalizedNamesImpl {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FJ",
         "PH",
         "FI",
@@ -276,6 +276,7 @@ public class LocalizedNamesImpl_seh extends LocalizedNamesImpl {
         "UA",
         "UG",
         "UM",
+        "UN",
         "UY",
         "UZ",
         "VU",
@@ -297,7 +298,6 @@ public class LocalizedNamesImpl_seh extends LocalizedNamesImpl {
     namesMap.put("AG", "Antígua e Barbuda");
     namesMap.put("AL", "Albânia");
     namesMap.put("AM", "Armênia");
-    namesMap.put("AN", "Antilhas Holandesas");
     namesMap.put("AS", "Samoa Americana");
     namesMap.put("AT", "Áustria");
     namesMap.put("AU", "Austrália");
@@ -473,7 +473,6 @@ public class LocalizedNamesImpl_seh extends LocalizedNamesImpl {
         "AG": "Antígua e Barbuda",
         "AL": "Albânia",
         "AM": "Armênia",
-        "AN": "Antilhas Holandesas",
         "AS": "Samoa Americana",
         "AT": "Áustria",
         "AU": "Austrália",

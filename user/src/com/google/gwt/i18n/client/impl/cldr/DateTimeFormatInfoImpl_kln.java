@@ -24,8 +24,8 @@ public class DateTimeFormatInfoImpl_kln extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "BE",
-        "KE"
+        "krn",
+        "koosk"
     };
   }
 
@@ -129,17 +129,17 @@ public class DateTimeFormatInfoImpl_kln extends DateTimeFormatInfoImpl {
   public String[] monthsFull() {
     return new String[] {
         "Mulgul",
-        "Ng'atyato",
-        "Kiptamo",
-        "Iwat kut",
-        "Ng'eiyet",
-        "Waki",
-        "Roptui",
-        "Kipkogaga",
-        "Buret",
-        "Epeso",
-        "Kipsunde netai",
-        "Kipsunde nebo aeng"
+        "Ng’atyaato",
+        "Kiptaamo",
+        "Iwootkuut",
+        "Mamuut",
+        "Paagi",
+        "Ng’eiyeet",
+        "Rooptui",
+        "Bureet",
+        "Epeeso",
+        "Kipsuunde ne taai",
+        "Kipsuunde nebo aeng’"
     };
   }
 
@@ -148,12 +148,12 @@ public class DateTimeFormatInfoImpl_kln extends DateTimeFormatInfoImpl {
     return new String[] {
         "M",
         "N",
-        "K",
+        "T",
         "I",
+        "M",
+        "P",
         "N",
-        "W",
         "R",
-        "K",
         "B",
         "E",
         "K",
@@ -165,17 +165,17 @@ public class DateTimeFormatInfoImpl_kln extends DateTimeFormatInfoImpl {
   public String[] monthsShort() {
     return new String[] {
         "Mul",
-        "Nga",
-        "Kip",
-        "Iwa",
+        "Ngat",
+        "Taa",
+        "Iwo",
+        "Mam",
+        "Paa",
         "Nge",
-        "Wak",
-        "Rop",
-        "Kog",
+        "Roo",
         "Bur",
         "Epe",
-        "Tai",
-        "Aen"
+        "Kpt",
+        "Kpa"
     };
   }
 
@@ -183,9 +183,9 @@ public class DateTimeFormatInfoImpl_kln extends DateTimeFormatInfoImpl {
   public String[] quartersFull() {
     return new String[] {
         "Robo netai",
-        "Robo nebo aeng'",
+        "Robo nebo aeng’",
         "Robo nebo somok",
-        "Robo nebo ang'wan"
+        "Robo nebo ang’wan"
     };
   }
 
@@ -200,35 +200,15 @@ public class DateTimeFormatInfoImpl_kln extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String timeFormatFull() {
-    return "h:mm:ss a zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "h:mm:ss a z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "h:mm:ss a";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "h:mm a";
-  }
-
-  @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "Betutab tisap",
-        "Betut netai",
-        "Betutab aeng'",
-        "Betutab somok",
-        "Betutab ang'wan",
-        "Betutab mut",
-        "Betutab lo"
+        "Kotisap",
+        "Kotaai",
+        "Koaeng’",
+        "Kosomok",
+        "Koang’wan",
+        "Komuut",
+        "Kolo"
     };
   }
 
@@ -237,7 +217,7 @@ public class DateTimeFormatInfoImpl_kln extends DateTimeFormatInfoImpl {
     return new String[] {
         "T",
         "T",
-        "A",
+        "O",
         "S",
         "A",
         "M",
@@ -248,13 +228,13 @@ public class DateTimeFormatInfoImpl_kln extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "Tis",
-        "Tai",
-        "Aen",
-        "Som",
-        "Ang",
-        "Mut",
-        "Loh"
+        "Kts",
+        "Kot",
+        "Koo",
+        "Kos",
+        "Koa",
+        "Kom",
+        "Kol"
     };
   }
 }

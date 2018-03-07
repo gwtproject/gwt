@@ -23,7 +23,7 @@ public class DateTimeFormatInfoImpl_ast extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatFull() {
-    return "EEEE, dd MMMM 'de' y";
+    return "EEEE, d MMMM 'de' y";
   }
 
   @Override
@@ -42,29 +42,54 @@ public class DateTimeFormatInfoImpl_ast extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " 'a' 'les' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " 'a' 'les' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
   public String[] erasFull() {
     return new String[] {
-        "a.C.",
-        "d.C."
+        "enantes de Cristu",
+        "después de Cristu"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "a.C.",
+        "e.C.",
         "d.C."
     };
   }
 
   @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "d MMMM";
+  }
+
+  @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
+    return "EEEE, d MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M/d";
+    return "d/M";
   }
 
   @Override
@@ -74,17 +99,17 @@ public class DateTimeFormatInfoImpl_ast extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "MMM d, y";
+    return "d MMM y";
   }
 
   @Override
   public String formatYearMonthFull() {
-    return "MMMM y";
+    return "LLLL 'de' y";
   }
 
   @Override
   public String formatYearMonthFullDay() {
-    return "MMMM d, y";
+    return "d MMMM 'de' y";
   }
 
   @Override
@@ -94,17 +119,17 @@ public class DateTimeFormatInfoImpl_ast extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNumDay() {
-    return "M/d/y";
+    return "d/M/y";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
+    return "EEE, d MMM y";
   }
 
   @Override
   public String formatYearQuarterFull() {
-    return "QQQQ y";
+    return "QQQQ 'de' y";
   }
 
   @Override
@@ -118,15 +143,15 @@ public class DateTimeFormatInfoImpl_ast extends DateTimeFormatInfoImpl {
         "de xineru",
         "de febreru",
         "de marzu",
-        "d'abril",
+        "d’abril",
         "de mayu",
         "de xunu",
         "de xunetu",
-        "d'agostu",
+        "d’agostu",
         "de setiembre",
-        "d'ochobre",
+        "d’ochobre",
         "de payares",
-        "d'avientu"
+        "d’avientu"
     };
   }
 
@@ -254,10 +279,10 @@ public class DateTimeFormatInfoImpl_ast extends DateTimeFormatInfoImpl {
         "dom",
         "llu",
         "mar",
-        "mie",
+        "mié",
         "xue",
         "vie",
-        "sab"
+        "sáb"
     };
   }
 }

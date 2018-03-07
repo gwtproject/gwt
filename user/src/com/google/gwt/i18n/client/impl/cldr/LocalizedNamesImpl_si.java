@@ -70,6 +70,7 @@ public class LocalizedNamesImpl_si extends LocalizedNamesImpl {
         "AE",
         "UM",
         "US",
+        "UN",
         "GB",
         "ER",
         "SV",
@@ -162,7 +163,6 @@ public class LocalizedNamesImpl_si extends LocalizedNamesImpl {
         "NA",
         "NI",
         "NU",
-        "AN",
         "NL",
         "NP",
         "NO",
@@ -229,6 +229,7 @@ public class LocalizedNamesImpl_si extends LocalizedNamesImpl {
         "MZ",
         "MT",
         "UA",
+        "EZ",
         "EU",
         "YE",
         "RE",
@@ -337,18 +338,17 @@ public class LocalizedNamesImpl_si extends LocalizedNamesImpl {
     namesMap.put("AI", "ඇන්ගුයිලාව");
     namesMap.put("AL", "ඇල්බේනියාව");
     namesMap.put("AM", "ආර්මේනියාව");
-    namesMap.put("AN", "නෙදර්ලන්ත ඇන්ටිලීසිය");
     namesMap.put("AO", "ඇන්ගෝලාව");
     namesMap.put("AQ", "ඇන්ටාක්ටිකාව");
     namesMap.put("AR", "ආර්ජෙන්ටිනාව");
     namesMap.put("AS", "ඇමරිකානු සැමෝවාව");
     namesMap.put("AT", "ඔස්ට්‍රියාව");
     namesMap.put("AU", "ඕස්ට්‍රේලියාව");
-    namesMap.put("AW", "අරුබාව");
+    namesMap.put("AW", "අරූබා");
     namesMap.put("AX", "ඕලන්ඩ් දූපත්");
     namesMap.put("AZ", "අසර්බයිජානය");
     namesMap.put("BA", "බොස්නියාව සහ හර්සගොවීනාව");
-    namesMap.put("BB", "බාර්බඩෝස්");
+    namesMap.put("BB", "බාබඩෝස්");
     namesMap.put("BD", "බංග්ලාදේශය");
     namesMap.put("BE", "බෙල්ජියම");
     namesMap.put("BF", "බර්කිනා ෆාසෝ");
@@ -404,6 +404,7 @@ public class LocalizedNamesImpl_si extends LocalizedNamesImpl {
     namesMap.put("ES", "ස්පාඤ්ඤය");
     namesMap.put("ET", "ඉතියෝපියාව");
     namesMap.put("EU", "යුරෝපා සංගමය");
+    namesMap.put("EZ", "යුරෝ කලාපය");
     namesMap.put("FI", "ෆින්ලන්තය");
     namesMap.put("FJ", "ෆීජී");
     namesMap.put("FK", "ෆෝක්ලන්ත දූපත්");
@@ -473,7 +474,7 @@ public class LocalizedNamesImpl_si extends LocalizedNamesImpl {
     namesMap.put("LV", "ලැට්වියාව");
     namesMap.put("LY", "ලිබියාව");
     namesMap.put("MA", "මොරොක්කෝව");
-    namesMap.put("MC", "මොනැකෝව");
+    namesMap.put("MC", "මොනාකෝව");
     namesMap.put("MD", "මොල්ඩෝවාව");
     namesMap.put("ME", "මොන්ටෙනීග්‍රෝ");
     namesMap.put("MF", "ශාන්ත මාර්ටින්");
@@ -570,6 +571,7 @@ public class LocalizedNamesImpl_si extends LocalizedNamesImpl {
     namesMap.put("UA", "යුක්රේනය");
     namesMap.put("UG", "උගන්ඩාව");
     namesMap.put("UM", "එක්සත් ජනපද ඈත දූපත්");
+    namesMap.put("UN", "එක්සත් ජාතීන්");
     namesMap.put("US", "එක්සත් ජනපදය");
     namesMap.put("UY", "උරුගුවේ");
     namesMap.put("UZ", "උස්බෙකිස්ථානය");
@@ -636,18 +638,17 @@ public class LocalizedNamesImpl_si extends LocalizedNamesImpl {
         "AI": "ඇන්ගුයිලාව",
         "AL": "ඇල්බේනියාව",
         "AM": "ආර්මේනියාව",
-        "AN": "නෙදර්ලන්ත ඇන්ටිලීසිය",
         "AO": "ඇන්ගෝලාව",
         "AQ": "ඇන්ටාක්ටිකාව",
         "AR": "ආර්ජෙන්ටිනාව",
         "AS": "ඇමරිකානු සැමෝවාව",
         "AT": "ඔස්ට්‍රියාව",
         "AU": "ඕස්ට්‍රේලියාව",
-        "AW": "අරුබාව",
+        "AW": "අරූබා",
         "AX": "ඕලන්ඩ් දූපත්",
         "AZ": "අසර්බයිජානය",
         "BA": "බොස්නියාව සහ හර්සගොවීනාව",
-        "BB": "බාර්බඩෝස්",
+        "BB": "බාබඩෝස්",
         "BD": "බංග්ලාදේශය",
         "BE": "බෙල්ජියම",
         "BF": "බර්කිනා ෆාසෝ",
@@ -703,6 +704,7 @@ public class LocalizedNamesImpl_si extends LocalizedNamesImpl {
         "ES": "ස්පාඤ්ඤය",
         "ET": "ඉතියෝපියාව",
         "EU": "යුරෝපා සංගමය",
+        "EZ": "යුරෝ කලාපය",
         "FI": "ෆින්ලන්තය",
         "FJ": "ෆීජී",
         "FK": "ෆෝක්ලන්ත දූපත්",
@@ -772,7 +774,7 @@ public class LocalizedNamesImpl_si extends LocalizedNamesImpl {
         "LV": "ලැට්වියාව",
         "LY": "ලිබියාව",
         "MA": "මොරොක්කෝව",
-        "MC": "මොනැකෝව",
+        "MC": "මොනාකෝව",
         "MD": "මොල්ඩෝවාව",
         "ME": "මොන්ටෙනීග්‍රෝ",
         "MF": "ශාන්ත මාර්ටින්",
@@ -869,6 +871,7 @@ public class LocalizedNamesImpl_si extends LocalizedNamesImpl {
         "UA": "යුක්රේනය",
         "UG": "උගන්ඩාව",
         "UM": "එක්සත් ජනපද ඈත දූපත්",
+        "UN": "එක්සත් ජාතීන්",
         "US": "එක්සත් ජනපදය",
         "UY": "උරුගුවේ",
         "UZ": "උස්බෙකිස්ථානය",

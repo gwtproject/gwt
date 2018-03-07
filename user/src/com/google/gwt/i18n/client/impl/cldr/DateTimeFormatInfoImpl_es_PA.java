@@ -22,6 +22,14 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_es_PA extends DateTimeFormatInfoImpl_es_419 {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "a. m.",
+        "p. m."
+    };
+  }
+
+  @Override
   public String dateFormatMedium() {
     return "MM/dd/y";
   }
@@ -42,6 +50,16 @@ public class DateTimeFormatInfoImpl_es_PA extends DateTimeFormatInfoImpl_es_419 
   }
 
   @Override
+  public String formatYearMonthAbbrev() {
+    return "MMM y";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "d MMM y";
+  }
+
+  @Override
   public String formatYearMonthNum() {
     return "MM/y";
   }
@@ -49,5 +67,35 @@ public class DateTimeFormatInfoImpl_es_PA extends DateTimeFormatInfoImpl_es_419 
   @Override
   public String formatYearMonthNumDay() {
     return "MM/dd/y";
+  }
+
+  @Override
+  public String[] quartersFull() {
+    return new String[] {
+        "1er. trimestre",
+        "2do. trimestre",
+        "3er. trimestre",
+        "4.º trimestre"
+    };
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "h:mm:ss a zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "h:mm:ss a z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "h:mm:ss a";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "h:mm a";
   }
 }

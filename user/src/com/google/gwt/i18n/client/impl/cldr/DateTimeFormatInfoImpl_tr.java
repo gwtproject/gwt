@@ -46,7 +46,7 @@ public class DateTimeFormatInfoImpl_tr extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "d MM y";
+    return "d.MM.y";
   }
 
   @Override
@@ -82,17 +82,17 @@ public class DateTimeFormatInfoImpl_tr extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthFullDay() {
-    return "dd MMMM";
+    return "d MMMM";
   }
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "dd MMMM EEEE";
+    return "d MMMM EEEE";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "dd/MM";
+    return "d/M";
   }
 
   @Override
@@ -102,7 +102,7 @@ public class DateTimeFormatInfoImpl_tr extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "dd MMM y";
+    return "d MMM y";
   }
 
   @Override
@@ -128,16 +128,6 @@ public class DateTimeFormatInfoImpl_tr extends DateTimeFormatInfoImpl {
   @Override
   public String formatYearMonthWeekdayDay() {
     return "d MMM y EEE";
-  }
-
-  @Override
-  public String formatYearQuarterFull() {
-    return "y/QQQQ";
-  }
-
-  @Override
-  public String formatYearQuarterShort() {
-    return "y/Q";
   }
 
   @Override

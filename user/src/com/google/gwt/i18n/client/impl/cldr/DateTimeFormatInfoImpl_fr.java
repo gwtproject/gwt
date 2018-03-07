@@ -42,6 +42,21 @@ public class DateTimeFormatInfoImpl_fr extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " 'à' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " 'à' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + " 'à' " + timePattern;
+  }
+
+  @Override
   public String[] erasFull() {
     return new String[] {
         "avant Jésus-Christ",
@@ -74,7 +89,7 @@ public class DateTimeFormatInfoImpl_fr extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthNumDay() {
-    return "d/M";
+    return "dd/MM";
   }
 
   @Override
@@ -99,12 +114,12 @@ public class DateTimeFormatInfoImpl_fr extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "M/y";
+    return "MM/y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d/M/y";
+    return "dd/MM/y";
   }
 
   @Override

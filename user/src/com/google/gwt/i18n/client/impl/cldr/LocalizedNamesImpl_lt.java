@@ -25,13 +25,6 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
 
   @Override
-  public String[] loadLikelyRegionCodes() {
-    return new String[] {
-        "LT",
-    };
-  }
-
-  @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
         "AF",
@@ -77,7 +70,6 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
         "CL",
         "AC",
         "DK",
-        "GB",
         "VG",
         "DG",
         "DM",
@@ -91,6 +83,7 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FO",
         "FJ",
         "PH",
@@ -127,6 +120,8 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
         "JP",
         "YE",
         "JO",
+        "GB",
+        "UN",
         "US",
         "AE",
         "UM",
@@ -205,7 +200,6 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
         "NF",
         "NO",
         "QO",
-        "AN",
         "OM",
         "PK",
         "PW",
@@ -243,6 +237,7 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
         "MF",
         "PM",
         "KN",
+        "LC",
         "RS",
         "EA",
         "SL",
@@ -263,7 +258,6 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
         "SE",
         "CH",
         "VC",
-        "LC",
         "TJ",
         "TH",
         "TW",
@@ -337,7 +331,6 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
     namesMap.put("AI", "Angilija");
     namesMap.put("AL", "Albanija");
     namesMap.put("AM", "Armėnija");
-    namesMap.put("AN", "Olandijos Antilai");
     namesMap.put("AQ", "Antarktida");
     namesMap.put("AS", "Amerikos Samoa");
     namesMap.put("AT", "Austrija");
@@ -400,6 +393,7 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
     namesMap.put("ES", "Ispanija");
     namesMap.put("ET", "Etiopija");
     namesMap.put("EU", "Europos Sąjunga");
+    namesMap.put("EZ", "euro zona");
     namesMap.put("FI", "Suomija");
     namesMap.put("FJ", "Fidžis");
     namesMap.put("FK", "Folklando Salos");
@@ -407,7 +401,7 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
     namesMap.put("FO", "Farerų Salos");
     namesMap.put("FR", "Prancūzija");
     namesMap.put("GA", "Gabonas");
-    namesMap.put("GB", "Didžioji Britanija");
+    namesMap.put("GB", "Jungtinė Karalystė");
     namesMap.put("GE", "Gruzija");
     namesMap.put("GF", "Prancūzijos Gviana");
     namesMap.put("GG", "Gernsis");
@@ -458,7 +452,7 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
     namesMap.put("KZ", "Kazachstanas");
     namesMap.put("LA", "Laosas");
     namesMap.put("LB", "Libanas");
-    namesMap.put("LC", "Šventoji Liucija");
+    namesMap.put("LC", "Sent Lusija");
     namesMap.put("LI", "Lichtenšteinas");
     namesMap.put("LK", "Šri Lanka");
     namesMap.put("LR", "Liberija");
@@ -500,13 +494,13 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
     namesMap.put("NU", "Niujė");
     namesMap.put("NZ", "Naujoji Zelandija");
     namesMap.put("OM", "Omanas");
-    namesMap.put("PF", "Prancūzų Polinezija");
+    namesMap.put("PF", "Prancūzijos Polinezija");
     namesMap.put("PG", "Papua Naujoji Gvinėja");
     namesMap.put("PH", "Filipinai");
     namesMap.put("PK", "Pakistanas");
     namesMap.put("PL", "Lenkija");
     namesMap.put("PM", "Sen Pjeras ir Mikelonas");
-    namesMap.put("PN", "Pitkernas");
+    namesMap.put("PN", "Pitkerno salos");
     namesMap.put("PR", "Puerto Rikas");
     namesMap.put("PS", "Palestinos teritorija");
     namesMap.put("PT", "Portugalija");
@@ -555,6 +549,7 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
     namesMap.put("TZ", "Tanzanija");
     namesMap.put("UA", "Ukraina");
     namesMap.put("UM", "Jungtinių Valstijų Mažosios Tolimosios Salos");
+    namesMap.put("UN", "Jungtinės Tautos");
     namesMap.put("US", "Jungtinės Valstijos");
     namesMap.put("UY", "Urugvajus");
     namesMap.put("UZ", "Uzbekistanas");
@@ -564,7 +559,7 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
     namesMap.put("VG", "Didžiosios Britanijos Mergelių Salos");
     namesMap.put("VI", "Jungtinių Valstijų Mergelių Salos");
     namesMap.put("VN", "Vietnamas");
-    namesMap.put("WF", "Volisas ir Futuna");
+    namesMap.put("WF", "Volisas ir Futūna");
     namesMap.put("XK", "Kosovas");
     namesMap.put("YE", "Jemenas");
     namesMap.put("YT", "Majotas");
@@ -619,7 +614,6 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
         "AI": "Angilija",
         "AL": "Albanija",
         "AM": "Armėnija",
-        "AN": "Olandijos Antilai",
         "AQ": "Antarktida",
         "AS": "Amerikos Samoa",
         "AT": "Austrija",
@@ -682,6 +676,7 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
         "ES": "Ispanija",
         "ET": "Etiopija",
         "EU": "Europos Sąjunga",
+        "EZ": "euro zona",
         "FI": "Suomija",
         "FJ": "Fidžis",
         "FK": "Folklando Salos",
@@ -689,7 +684,7 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
         "FO": "Farerų Salos",
         "FR": "Prancūzija",
         "GA": "Gabonas",
-        "GB": "Didžioji Britanija",
+        "GB": "Jungtinė Karalystė",
         "GE": "Gruzija",
         "GF": "Prancūzijos Gviana",
         "GG": "Gernsis",
@@ -740,7 +735,7 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
         "KZ": "Kazachstanas",
         "LA": "Laosas",
         "LB": "Libanas",
-        "LC": "Šventoji Liucija",
+        "LC": "Sent Lusija",
         "LI": "Lichtenšteinas",
         "LK": "Šri Lanka",
         "LR": "Liberija",
@@ -782,13 +777,13 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
         "NU": "Niujė",
         "NZ": "Naujoji Zelandija",
         "OM": "Omanas",
-        "PF": "Prancūzų Polinezija",
+        "PF": "Prancūzijos Polinezija",
         "PG": "Papua Naujoji Gvinėja",
         "PH": "Filipinai",
         "PK": "Pakistanas",
         "PL": "Lenkija",
         "PM": "Sen Pjeras ir Mikelonas",
-        "PN": "Pitkernas",
+        "PN": "Pitkerno salos",
         "PR": "Puerto Rikas",
         "PS": "Palestinos teritorija",
         "PT": "Portugalija",
@@ -837,6 +832,7 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
         "TZ": "Tanzanija",
         "UA": "Ukraina",
         "UM": "Jungtinių Valstijų Mažosios Tolimosios Salos",
+        "UN": "Jungtinės Tautos",
         "US": "Jungtinės Valstijos",
         "UY": "Urugvajus",
         "UZ": "Uzbekistanas",
@@ -846,7 +842,7 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
         "VG": "Didžiosios Britanijos Mergelių Salos",
         "VI": "Jungtinių Valstijų Mergelių Salos",
         "VN": "Vietnamas",
-        "WF": "Volisas ir Futuna",
+        "WF": "Volisas ir Futūna",
         "XK": "Kosovas",
         "YE": "Jemenas",
         "YT": "Majotas",

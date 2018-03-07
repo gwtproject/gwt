@@ -25,7 +25,7 @@ public class DateTimeFormatInfoImpl_mgh extends DateTimeFormatInfoImpl {
   public String[] ampms() {
     return new String[] {
         "wichishu",
-        "mchochil'l"
+        "mchochil’l"
     };
   }
 
@@ -96,11 +96,6 @@ public class DateTimeFormatInfoImpl_mgh extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
-  }
-
-  @Override
   public String formatYearMonthFullDay() {
     return "d MMMM y";
   }
@@ -144,7 +139,7 @@ public class DateTimeFormatInfoImpl_mgh extends DateTimeFormatInfoImpl {
         "Mweri wo tisa",
         "Mweri wo kumi",
         "Mweri wo kumi na moja",
-        "Mweri wo kumi na yel'li"
+        "Mweri wo kumi na yel’li"
     };
   }
 
@@ -192,26 +187,6 @@ public class DateTimeFormatInfoImpl_mgh extends DateTimeFormatInfoImpl {
         "Q3",
         "Q4"
     };
-  }
-
-  @Override
-  public String timeFormatFull() {
-    return "h:mm:ss a zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "h:mm:ss a z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "h:mm:ss a";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "h:mm a";
   }
 
   @Override

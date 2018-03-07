@@ -27,6 +27,24 @@ public class DateTimeFormatInfoImpl_fr_MA extends DateTimeFormatInfoImpl_fr {
   }
 
   @Override
+  public String[] monthsShort() {
+    return new String[] {
+        "jan.",
+        "fév.",
+        "mar.",
+        "avr.",
+        "mai",
+        "jui.",
+        "juil.",
+        "août",
+        "sept.",
+        "oct.",
+        "nov.",
+        "déc."
+    };
+  }
+
+  @Override
   public int weekendEnd() {
     return 6;
   }

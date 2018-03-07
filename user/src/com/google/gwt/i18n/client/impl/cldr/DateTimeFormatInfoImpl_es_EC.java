@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Google Inc.
+ * Copyright 2012 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,15 +14,18 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=25
-//  date=$Date: 2013-08-29 04:32:04 +0200 (Thu, 29 Aug 2013) $
-//  number=$Revision: 9287 $
-//  type=419
 
 /**
  * Implementation of DateTimeFormatInfo for the "es_EC" locale.
  */
 public class DateTimeFormatInfoImpl_es_EC extends DateTimeFormatInfoImpl_es_419 {
+
+  @Override
+  public String[] ampms() {
+    return new String[] {
+        "a. m.",
+        "p. m."
+    };
+  }
 }

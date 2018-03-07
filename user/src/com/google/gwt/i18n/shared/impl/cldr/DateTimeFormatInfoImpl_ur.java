@@ -22,26 +22,18 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_ur extends DateTimeFormatInfoImpl {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "قبل دوپہر",
-        "بعد دوپہر"
-    };
-  }
-
-  @Override
   public String dateFormatFull() {
-    return "EEEE، d MMMM، y";
+    return "EEEE, MMMM d, y";
   }
 
   @Override
   public String dateFormatLong() {
-    return "d MMMM، y";
+    return "MMMM d, y";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "d MMM، y";
+    return "MMM d, y";
   }
 
   @Override
@@ -53,15 +45,15 @@ public class DateTimeFormatInfoImpl_ur extends DateTimeFormatInfoImpl {
   public String[] erasFull() {
     return new String[] {
         "قبل مسیح",
-        "عیسوی سن"
+        "عیسوی"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "ق م",
-        "عیسوی سن"
+        "قبل مسیح",
+        "عیسوی"
     };
   }
 
@@ -73,11 +65,6 @@ public class DateTimeFormatInfoImpl_ur extends DateTimeFormatInfoImpl {
   @Override
   public String formatMonthAbbrevDay() {
     return "d MMM";
-  }
-
-  @Override
-  public String formatMonthFullDay() {
-    return "d MMMM";
   }
 
   @Override
@@ -107,7 +94,7 @@ public class DateTimeFormatInfoImpl_ur extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFullDay() {
-    return "d MMMM، y";
+    return "MMMM d, y";
   }
 
   @Override
@@ -215,7 +202,7 @@ public class DateTimeFormatInfoImpl_ur extends DateTimeFormatInfoImpl {
   public String[] weekdaysFull() {
     return new String[] {
         "اتوار",
-        "سوموار",
+        "پیر",
         "منگل",
         "بدھ",
         "جمعرات",
@@ -228,7 +215,7 @@ public class DateTimeFormatInfoImpl_ur extends DateTimeFormatInfoImpl {
   public String[] weekdaysShort() {
     return new String[] {
         "اتوار",
-        "سوموار",
+        "پیر",
         "منگل",
         "بدھ",
         "جمعرات",

@@ -25,4 +25,24 @@ public class DateTimeFormatInfoImpl_fr_DJ extends DateTimeFormatInfoImpl_fr {
   public int firstDayOfTheWeek() {
     return 6;
   }
+
+  @Override
+  public String timeFormatFull() {
+    return "h:mm:ss a zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "h:mm:ss a z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "h:mm:ss a";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "h:mm a";
+  }
 }

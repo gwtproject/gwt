@@ -58,6 +58,11 @@ public class DateTimeFormatInfoImpl_ks extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public int firstDayOfTheWeek() {
+    return 0;
+  }
+
+  @Override
   public String formatMonthAbbrevDay() {
     return "d-MMM";
   }
@@ -248,5 +253,10 @@ public class DateTimeFormatInfoImpl_ks extends DateTimeFormatInfoImpl {
         "جُمہ",
         "بٹوار"
     };
+  }
+
+  @Override
+  public int weekendStart() {
+    return 0;
   }
 }

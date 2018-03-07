@@ -31,12 +31,12 @@ public class DateTimeFormatInfoImpl_ar extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatFull() {
-    return "EEEE، d MMMM، y";
+    return "EEEE، d MMMM y";
   }
 
   @Override
   public String dateFormatLong() {
-    return "d MMMM، y";
+    return "d MMMM y";
   }
 
   @Override
@@ -97,7 +97,7 @@ public class DateTimeFormatInfoImpl_ar extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "d MMM، y";
+    return "d MMM y";
   }
 
   @Override
@@ -107,7 +107,7 @@ public class DateTimeFormatInfoImpl_ar extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFullDay() {
-    return "d MMMM، y";
+    return "d MMMM y";
   }
 
   @Override
@@ -122,7 +122,7 @@ public class DateTimeFormatInfoImpl_ar extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE، d MMM، y";
+    return "EEE، d MMM y";
   }
 
   @Override

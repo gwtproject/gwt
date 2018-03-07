@@ -31,17 +31,17 @@ public class DateTimeFormatInfoImpl_vi extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatFull() {
-    return "EEEE, 'ngày' dd MMMM 'năm' y";
+    return "EEEE, d MMMM, y";
   }
 
   @Override
   public String dateFormatLong() {
-    return "'Ngày' dd 'tháng' MM 'năm' y";
+    return "d MMMM, y";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "dd-MM-y";
+    return "d MMM, y";
   }
 
   @Override
@@ -61,18 +61,18 @@ public class DateTimeFormatInfoImpl_vi extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateTimeMedium(String timePattern, String datePattern) {
-    return timePattern + " " + datePattern;
+    return timePattern + ", " + datePattern;
   }
 
   @Override
   public String dateTimeShort(String timePattern, String datePattern) {
-    return timePattern + " " + datePattern;
+    return timePattern + ", " + datePattern;
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "tr. CN",
+        "Trước CN",
         "sau CN"
     };
   }
@@ -80,34 +80,29 @@ public class DateTimeFormatInfoImpl_vi extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasShort() {
     return new String[] {
-        "tr. CN",
+        "Trước CN",
         "sau CN"
     };
   }
 
   @Override
   public String formatMonthAbbrevDay() {
-    return "dd MMM";
+    return "d MMM";
   }
 
   @Override
   public String formatMonthFullDay() {
-    return "dd MMMM";
+    return "d MMMM";
   }
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, dd MMMM";
+    return "EEEE, d MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "dd-M";
-  }
-
-  @Override
-  public String formatYear() {
-    return "'Năm' y";
+    return "dd/M";
   }
 
   @Override
@@ -117,17 +112,17 @@ public class DateTimeFormatInfoImpl_vi extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "dd MMM, y";
+    return "d MMM, y";
   }
 
   @Override
   public String formatYearMonthFull() {
-    return "MMMM y";
+    return "MMMM 'năm' y";
   }
 
   @Override
   public String formatYearMonthFullDay() {
-    return "dd MMMM, y";
+    return "d MMMM, y";
   }
 
   @Override
@@ -142,12 +137,12 @@ public class DateTimeFormatInfoImpl_vi extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, dd MMM y";
+    return "EEE, d MMM, y";
   }
 
   @Override
   public String formatYearQuarterFull() {
-    return "QQQQ y";
+    return "QQQQ 'năm' y";
   }
 
   @Override

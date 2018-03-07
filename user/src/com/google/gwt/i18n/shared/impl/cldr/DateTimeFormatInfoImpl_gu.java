@@ -38,7 +38,17 @@ public class DateTimeFormatInfoImpl_gu extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "d-MM-yy";
+    return "d/M/yy";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " એ " + timePattern + " વાગ્યે";
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " એ " + timePattern + " વાગ્યે";
   }
 
   @Override
@@ -52,8 +62,8 @@ public class DateTimeFormatInfoImpl_gu extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasShort() {
     return new String[] {
-        "ઈસુના જન્મ પહેલા",
-        "ઇસવીસન"
+        "ઈ.સ.પૂર્વે",
+        "ઈ.સ."
     };
   }
 
@@ -182,30 +192,12 @@ public class DateTimeFormatInfoImpl_gu extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] monthsShortStandalone() {
-    return new String[] {
-        "જાન્યુ",
-        "ફેબ્રુ",
-        "માર્ચ",
-        "એપ્રિલ",
-        "મે",
-        "જૂન",
-        "જુલાઈ",
-        "ઑગ",
-        "સપ્ટે",
-        "ઑક્ટો",
-        "નવે",
-        "ડિસે"
-    };
-  }
-
-  @Override
   public String[] quartersFull() {
     return new String[] {
-        "પહેલો ત્રિમાસ",
-        "બીજો ત્રિમાસ",
-        "ત્રીજો ત્રિમાસ",
-        "ચોથો ત્રિમાસ"
+        "1લો ત્રિમાસ",
+        "2જો ત્રિમાસ",
+        "3જો ત્રિમાસ",
+        "4થો ત્રિમાસ"
     };
   }
 

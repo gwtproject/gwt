@@ -30,28 +30,33 @@ public class DateTimeFormatInfoImpl_bo extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String dateFormatFull() {
+    return "y MMMMའི་ཚེས་d, EEEE";
+  }
+
+  @Override
   public String dateFormatLong() {
-    return "སྦྱི་ལོ་y MMMMའི་ཙེས་dད";
+    return "སྤྱི་ལོ་y MMMMའི་ཚེས་d";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "y ལོ་འི་MMMཙེས་d";
+    return "y ལོའི་MMMཚེས་d";
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "སྤྱི་ལོ་སྔོན།",
-        "སྤྱི་ལོ།"
+        "སྤྱི་ལོ་སྔོན་",
+        "སྤྱི་ལོ་"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "སྤྱི་ལོ་སྔོན།",
-        "སྤྱི་ལོ།"
+        "སྤྱི་ལོ་སྔོན་",
+        "སྤྱི་ལོ་"
     };
   }
 
@@ -61,26 +66,59 @@ public class DateTimeFormatInfoImpl_bo extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthAbbrevDay() {
+    return "MMMཚེས་d";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "MMMMའི་ཚེས་d";
+  }
+
+  @Override
+  public String formatMonthFullWeekdayDay() {
+    return "MMMMཚེས་d, EEEE";
+  }
+
+  @Override
+  public String formatYearMonthAbbrev() {
+    return "y LLL";
+  }
+
+  @Override
   public String formatYearMonthAbbrevDay() {
-    return "y ལོ་འི་MMMཙེས་d";
+    return "y ལོའི་MMMཚེས་d";
   }
 
   @Override
   public String formatYearMonthFullDay() {
-    return "སྦྱི་ལོ་y MMMMའི་ཙེས་dད";
-  }
-
-  @Override
-  public String formatYearMonthNumDay() {
-    return "y-M-d";
+    return "སྤྱི་ལོ་y MMMMའི་ཚེས་d";
   }
 
   @Override
   public String[] monthsFull() {
     return new String[] {
+        "ཟླ་བ་དང་པོ",
+        "ཟླ་བ་གཉིས་པ",
+        "ཟླ་བ་གསུམ་པ",
+        "ཟླ་བ་བཞི་པ",
+        "ཟླ་བ་ལྔ་པ",
+        "ཟླ་བ་དྲུག་པ",
+        "ཟླ་བ་བདུན་པ",
+        "ཟླ་བ་བརྒྱད་པ",
+        "ཟླ་བ་དགུ་པ",
+        "ཟླ་བ་བཅུ་པ",
+        "ཟླ་བ་བཅུ་གཅིག་པ",
+        "ཟླ་བ་བཅུ་གཉིས་པ"
+    };
+  }
+
+  @Override
+  public String[] monthsFullStandalone() {
+    return new String[] {
         "ཟླ་བ་དང་པོ་",
         "ཟླ་བ་གཉིས་པ་",
-        "ཟླ་བ་སུམ་པ་",
+        "ཟླ་བ་གསུམ་པ་",
         "ཟླ་བ་བཞི་པ་",
         "ཟླ་བ་ལྔ་པ་",
         "ཟླ་བ་དྲུག་པ་",
@@ -134,7 +172,7 @@ public class DateTimeFormatInfoImpl_bo extends DateTimeFormatInfoImpl {
     return new String[] {
         "དུས་ཚིགས་དང་པོ།",
         "དུས་ཚིགས་གཉིས་པ།",
-        "་དུས་ཚིགས་གསུམ་པ།",
+        "དུས་ཚིགས་གསུམ་པ།",
         "དུས་ཚིགས་བཞི་པ།"
     };
   }
@@ -144,9 +182,29 @@ public class DateTimeFormatInfoImpl_bo extends DateTimeFormatInfoImpl {
     return new String[] {
         "དུས་ཚིགས་དང་པོ།",
         "དུས་ཚིགས་གཉིས་པ།",
-        "་དུས་ཚིགས་གསུམ་པ།",
+        "དུས་ཚིགས་གསུམ་པ།",
         "དུས་ཚིགས་བཞི་པ།"
     };
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "h:mm:ss a zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "h:mm:ss a z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "h:mm:ss a";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "h:mm a";
   }
 
   @Override
@@ -155,9 +213,9 @@ public class DateTimeFormatInfoImpl_bo extends DateTimeFormatInfoImpl {
         "གཟའ་ཉི་མ་",
         "གཟའ་ཟླ་བ་",
         "གཟའ་མིག་དམར་",
-        "གཟའ་ཧླག་པ་",
+        "གཟའ་ལྷག་པ་",
         "གཟའ་ཕུར་བུ་",
-        "གཟའ་སངས་",
+        "གཟའ་པ་སངས་",
         "གཟའ་སྤེན་པ་"
     };
   }
@@ -167,24 +225,11 @@ public class DateTimeFormatInfoImpl_bo extends DateTimeFormatInfoImpl {
     return new String[] {
         "ཉི",
         "ཟླ",
-        "མི",
-        "ཧླག",
-        "ཕུ",
-        "ས",
-        "སྤེ"
-    };
-  }
-
-  @Override
-  public String[] weekdaysNarrowStandalone() {
-    return new String[] {
-        "ཉི",
-        "ཟླ",
-        "མི",
-        "ཧླ",
-        "ཕུ",
-        "ས",
-        "སྤེ"
+        "མིག",
+        "ལྷག",
+        "ཕུར",
+        "སངས",
+        "སྤེན"
     };
   }
 
@@ -194,9 +239,9 @@ public class DateTimeFormatInfoImpl_bo extends DateTimeFormatInfoImpl {
         "ཉི་མ་",
         "ཟླ་བ་",
         "མིག་དམར་",
-        "ཧླག་པ་",
+        "ལྷག་པ་",
         "ཕུར་བུ་",
-        "སངས་",
+        "པ་སངས་",
         "སྤེན་པ་"
     };
   }

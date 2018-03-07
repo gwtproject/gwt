@@ -22,26 +22,8 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_en_IE extends DateTimeFormatInfoImpl_en_150 {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "a.m.",
-        "p.m."
-    };
-  }
-
-  @Override
-  public String dateFormatLong() {
-    return "d MMMM y";
-  }
-
-  @Override
-  public String dateFormatMedium() {
-    return "d MMM y";
-  }
-
-  @Override
-  public String dateFormatShort() {
-    return "dd/MM/y";
+  public String dateFormatFull() {
+    return "EEEE d MMMM y";
   }
 
   @Override
@@ -50,7 +32,17 @@ public class DateTimeFormatInfoImpl_en_IE extends DateTimeFormatInfoImpl_en_150 
   }
 
   @Override
-  public String timeFormatFull() {
-    return "HH:mm:ss zzzz";
+  public String formatMonthNumDay() {
+    return "d/M";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "d/M/y";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "EEE d MMM y";
   }
 }

@@ -25,6 +25,13 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class LocalizedNamesImpl_ks extends LocalizedNamesImpl {
 
   @Override
+  public String[] loadLikelyRegionCodes() {
+    return new String[] {
+        "IN",
+    };
+  }
+
+  @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
         "AC",
@@ -33,6 +40,7 @@ public class LocalizedNamesImpl_ks extends LocalizedNamesImpl {
         "DG",
         "EA",
         "EU",
+        "EZ",
         "FM",
         "FO",
         "IC",
@@ -40,6 +48,7 @@ public class LocalizedNamesImpl_ks extends LocalizedNamesImpl {
         "SS",
         "SX",
         "TA",
+        "UN",
         "XK",
         "AZ",
         "AU",
@@ -206,7 +215,6 @@ public class LocalizedNamesImpl_ks extends LocalizedNamesImpl {
         "NI",
         "NE",
         "NG",
-        "AN",
         "NC",
         "NU",
         "NZ",
@@ -329,7 +337,6 @@ public class LocalizedNamesImpl_ks extends LocalizedNamesImpl {
     namesMap.put("AI", "انگوئیلا");
     namesMap.put("AL", "اٮ۪لبانِیا");
     namesMap.put("AM", "اَرمانِیا");
-    namesMap.put("AN", "نَیدَرلینٛڑٕس اٮ۪نٹَیلٕس");
     namesMap.put("AO", "انگولا");
     namesMap.put("AQ", "اینٹارٹِکا");
     namesMap.put("AR", "أرجَنٹینا");
@@ -614,7 +621,6 @@ public class LocalizedNamesImpl_ks extends LocalizedNamesImpl {
         "AI": "انگوئیلا",
         "AL": "اٮ۪لبانِیا",
         "AM": "اَرمانِیا",
-        "AN": "نَیدَرلینٛڑٕس اٮ۪نٹَیلٕس",
         "AO": "انگولا",
         "AQ": "اینٹارٹِکا",
         "AR": "أرجَنٹینا",

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Google Inc.
+ * Copyright 2012 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,7 +14,6 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
 
 /**
@@ -24,110 +23,150 @@ public class DateTimeFormatInfoImpl_tt extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatFull() {
-    return "d MMMM y";
+    return "d MMMM, y 'ел', EEEE";
   }
 
   @Override
   public String dateFormatLong() {
-    return "d MMMM y";
+    return "d MMMM, y 'ел'";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "dd.MM.yyyy";
+    return "d MMM, y 'ел'";
   }
 
   @Override
   public String dateFormatShort() {
-    return "dd.MM.yyyy";
+    return "dd.MM.y";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "BCE",
-        "CE"
+        "безнең эрага кадәр",
+        "безнең эра"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "BCE",
-        "CE"
+        "б.э.к.",
+        "б.э."
     };
   }
 
   @Override
+  public String formatHour24Minute() {
+    return "H:mm";
+  }
+
+  @Override
+  public String formatHour24MinuteSecond() {
+    return "H:mm:ss";
+  }
+
+  @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "d MMMM";
+  }
+
+  @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
+    return "EEEE, d MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M/d";
+    return "dd.MM";
   }
 
   @Override
   public String formatYearMonthAbbrev() {
-    return "MMM y";
+    return "MMM, y 'ел'";
   }
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "MMM d, y";
+    return "d MMM, y 'ел'";
   }
 
   @Override
   public String formatYearMonthFull() {
-    return "MMMM y";
+    return "MMMM, y 'ел'";
   }
 
   @Override
   public String formatYearMonthFullDay() {
-    return "MMMM d, y";
+    return "d MMMM, y 'ел'";
   }
 
   @Override
   public String formatYearMonthNum() {
-    return "M/y";
+    return "MM.y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "M/d/y";
+    return "dd.MM.y";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
+    return "EEE, d MMM, y 'ел'";
   }
 
   @Override
   public String formatYearQuarterFull() {
-    return "QQQQ y";
+    return "QQQQ, y 'ел'";
   }
 
   @Override
   public String formatYearQuarterShort() {
-    return "Q y";
+    return "Q, y 'ел'";
   }
 
   @Override
   public String[] monthsFull() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
+        "гыйнвар",
+        "февраль",
+        "март",
+        "апрель",
+        "май",
+        "июнь",
+        "июль",
+        "август",
+        "сентябрь",
+        "октябрь",
+        "ноябрь",
+        "декабрь"
     };
   }
 
@@ -152,34 +191,44 @@ public class DateTimeFormatInfoImpl_tt extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
+        "гыйн.",
+        "фев.",
+        "мар.",
+        "апр.",
+        "май",
+        "июнь",
+        "июль",
+        "авг.",
+        "сент.",
+        "окт.",
+        "нояб.",
+        "дек."
     };
   }
 
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Q1",
-        "Q2",
-        "Q3",
-        "Q4"
+        "1 нче квартал",
+        "2 нче квартал",
+        "3 нче квартал",
+        "4 нче квартал"
+    };
+  }
+
+  @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "1 нче кв.",
+        "2 нче кв.",
+        "3 нче кв.",
+        "4 нче кв."
     };
   }
 
   @Override
   public String timeFormatFull() {
-    return "h:mm:ss a zzzz";
+    return "H:mm:ss zzzz";
   }
 
   @Override
@@ -200,39 +249,39 @@ public class DateTimeFormatInfoImpl_tt extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
+        "якшәмбе",
+        "дүшәмбе",
+        "сишәмбе",
+        "чәршәмбе",
+        "пәнҗешәмбе",
+        "җомга",
+        "шимбә"
     };
   }
 
   @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
+        "Я",
+        "Д",
+        "С",
+        "Ч",
+        "П",
+        "Җ",
+        "Ш"
     };
   }
 
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
+        "якш.",
+        "дүш.",
+        "сиш.",
+        "чәр.",
+        "пәнҗ.",
+        "җом.",
+        "шим."
     };
   }
 }

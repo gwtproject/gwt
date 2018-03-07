@@ -91,6 +91,7 @@ public class LocalizedNamesImpl_eo extends LocalizedNamesImpl {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FO",
         "FJ",
         "PH",
@@ -119,8 +120,8 @@ public class LocalizedNamesImpl_eo extends LocalizedNamesImpl {
         "HM",
         "IN",
         "ES",
-        "HK",
         "HN",
+        "HK",
         "HU",
         "IC",
         "IM",
@@ -191,7 +192,6 @@ public class LocalizedNamesImpl_eo extends LocalizedNamesImpl {
         "MS",
         "NA",
         "NR",
-        "AN",
         "NL",
         "NP",
         "NG",
@@ -271,6 +271,7 @@ public class LocalizedNamesImpl_eo extends LocalizedNamesImpl {
         "TV",
         "UG",
         "UA",
+        "UN",
         "AE",
         "GB",
         "UY",
@@ -293,13 +294,12 @@ public class LocalizedNamesImpl_eo extends LocalizedNamesImpl {
   protected void loadNameMapJava() {
     super.loadNameMapJava();
     namesMap.put("AD", "Andoro");
-    namesMap.put("AE", "Unuiĝintaj Arabaj Emirlandos");
+    namesMap.put("AE", "Unuiĝintaj Arabaj Emirlandoj");
     namesMap.put("AF", "Afganujo");
     namesMap.put("AG", "Antigvo-Barbudo");
     namesMap.put("AI", "Angvilo");
     namesMap.put("AL", "Albanujo");
     namesMap.put("AM", "Armenujo");
-    namesMap.put("AN", "Nederlandaj Antiloj");
     namesMap.put("AO", "Angolo");
     namesMap.put("AQ", "Antarkto");
     namesMap.put("AR", "Argentino");
@@ -376,6 +376,7 @@ public class LocalizedNamesImpl_eo extends LocalizedNamesImpl {
     namesMap.put("GU", "Gvamo");
     namesMap.put("GW", "Gvineo-Bisaŭo");
     namesMap.put("GY", "Gujano");
+    namesMap.put("HK", "Honkongo");
     namesMap.put("HM", "Herda kaj Makdonaldaj Insuloj");
     namesMap.put("HN", "Honduro");
     namesMap.put("HR", "Kroatujo");
@@ -517,6 +518,7 @@ public class LocalizedNamesImpl_eo extends LocalizedNamesImpl {
     namesMap.put("ZA", "Sud-Afriko");
     namesMap.put("ZM", "Zambio");
     namesMap.put("ZW", "Zimbabvo");
+    namesMap.put("ZZ", "nekonata regiono");
   }
 
   @Override
@@ -527,13 +529,12 @@ public class LocalizedNamesImpl_eo extends LocalizedNamesImpl {
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
         "AD": "Andoro",
-        "AE": "Unuiĝintaj Arabaj Emirlandos",
+        "AE": "Unuiĝintaj Arabaj Emirlandoj",
         "AF": "Afganujo",
         "AG": "Antigvo-Barbudo",
         "AI": "Angvilo",
         "AL": "Albanujo",
         "AM": "Armenujo",
-        "AN": "Nederlandaj Antiloj",
         "AO": "Angolo",
         "AQ": "Antarkto",
         "AR": "Argentino",
@@ -610,6 +611,7 @@ public class LocalizedNamesImpl_eo extends LocalizedNamesImpl {
         "GU": "Gvamo",
         "GW": "Gvineo-Bisaŭo",
         "GY": "Gujano",
+        "HK": "Honkongo",
         "HM": "Herda kaj Makdonaldaj Insuloj",
         "HN": "Honduro",
         "HR": "Kroatujo",
@@ -750,7 +752,8 @@ public class LocalizedNamesImpl_eo extends LocalizedNamesImpl {
         "YT": "Majoto",
         "ZA": "Sud-Afriko",
         "ZM": "Zambio",
-        "ZW": "Zimbabvo"
+        "ZW": "Zimbabvo",
+        "ZZ": "nekonata regiono"
     };
   }-*/;
 }

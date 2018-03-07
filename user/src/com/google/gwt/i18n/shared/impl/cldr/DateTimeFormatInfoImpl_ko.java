@@ -22,14 +22,6 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_ko extends DateTimeFormatInfoImpl {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "오전",
-        "오후"
-    };
-  }
-
-  @Override
   public String dateFormatFull() {
     return "y년 M월 d일 EEEE";
   }
@@ -51,14 +43,6 @@ public class DateTimeFormatInfoImpl_ko extends DateTimeFormatInfoImpl {
 
   @Override
   public String[] erasFull() {
-    return new String[] {
-        "서력기원전",
-        "서력기원"
-    };
-  }
-
-  @Override
-  public String[] erasShort() {
     return new String[] {
         "기원전",
         "서기"

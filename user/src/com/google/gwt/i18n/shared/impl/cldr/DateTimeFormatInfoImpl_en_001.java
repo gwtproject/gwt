@@ -22,7 +22,72 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_en_001 extends DateTimeFormatInfoImpl_en {
 
   @Override
+  public String dateFormatFull() {
+    return "EEEE, d MMMM y";
+  }
+
+  @Override
+  public String dateFormatLong() {
+    return "d MMMM y";
+  }
+
+  @Override
+  public String dateFormatMedium() {
+    return "d MMM y";
+  }
+
+  @Override
+  public String dateFormatShort() {
+    return "dd/MM/y";
+  }
+
+  @Override
   public int firstDayOfTheWeek() {
     return 1;
+  }
+
+  @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "d MMMM";
+  }
+
+  @Override
+  public String formatMonthFullWeekdayDay() {
+    return "EEEE, d MMMM";
+  }
+
+  @Override
+  public String formatMonthNumDay() {
+    return "dd/MM";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "d MMM y";
+  }
+
+  @Override
+  public String formatYearMonthFullDay() {
+    return "d MMMM y";
+  }
+
+  @Override
+  public String formatYearMonthNum() {
+    return "MM/y";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "dd/MM/y";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "EEE, d MMM y";
   }
 }

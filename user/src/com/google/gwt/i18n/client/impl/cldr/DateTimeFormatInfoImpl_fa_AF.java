@@ -40,7 +40,7 @@ public class DateTimeFormatInfoImpl_fa_AF extends DateTimeFormatInfoImpl_fa {
   }
 
   @Override
-  public String[] monthsNarrowStandalone() {
+  public String[] monthsNarrow() {
     return new String[] {
         "ج",
         "ف",
@@ -61,17 +61,60 @@ public class DateTimeFormatInfoImpl_fa_AF extends DateTimeFormatInfoImpl_fa {
   public String[] monthsShort() {
     return new String[] {
         "جنو",
-        "فوریهٔ",
-        "مارس",
-        "آوریل",
-        "مـی",
-        "ژوئن",
+        "فبروری",
+        "مارچ",
+        "اپریل",
+        "می",
+        "جون",
         "جول",
-        "اوت",
-        "سپتامبر",
-        "اکتبر",
-        "نوامبر",
+        "اگست",
+        "سپتمبر",
+        "اکتوبر",
+        "نومبر",
         "دسم"
     };
+  }
+
+  @Override
+  public String[] monthsShortStandalone() {
+    return new String[] {
+        "جنوری",
+        "فبروری",
+        "مارچ",
+        "اپریل",
+        "می",
+        "جون",
+        "جولای",
+        "اگست",
+        "سپتمبر",
+        "اکتوبر",
+        "نومبر",
+        "دسمبر"
+    };
+  }
+
+  @Override
+  public String[] quartersFull() {
+    return new String[] {
+        "ربع اول",
+        "ربع دوم",
+        "ربع سوم",
+        "ربع چهارم"
+    };
+  }
+
+  @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "ر۱",
+        "ر۲",
+        "ر۳",
+        "ر۴"
+    };
+  }
+
+  @Override
+  public int weekendStart() {
+    return 4;
   }
 }

@@ -27,6 +27,36 @@ public class DateTimeFormatInfoImpl_ar_IL extends DateTimeFormatInfoImpl_ar_001 
   }
 
   @Override
+  public String formatHour24Minute() {
+    return "H:mm";
+  }
+
+  @Override
+  public String formatHour24MinuteSecond() {
+    return "H:mm:ss";
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "H:mm:ss zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "H:mm:ss z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "H:mm:ss";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "H:mm";
+  }
+
+  @Override
   public int weekendEnd() {
     return 6;
   }

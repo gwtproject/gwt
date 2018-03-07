@@ -40,7 +40,6 @@ public class LocalizedNamesImpl_shi_Latn extends LocalizedNamesImpl_shi {
         "AI",
         "AO",
         "AG",
-        "AN",
         "AQ",
         "AR",
         "AM",
@@ -95,6 +94,7 @@ public class LocalizedNamesImpl_shi_Latn extends LocalizedNamesImpl_shi {
         "EA",
         "EH",
         "EU",
+        "EZ",
         "VU",
         "FJ",
         "PH",
@@ -271,6 +271,7 @@ public class LocalizedNamesImpl_shi_Latn extends LocalizedNamesImpl_shi {
         "TR",
         "UA",
         "UM",
+        "UN",
         "UY",
         "AU",
         "UZ",
@@ -299,7 +300,6 @@ public class LocalizedNamesImpl_shi_Latn extends LocalizedNamesImpl_shi {
     namesMap.put("AI", "angila");
     namesMap.put("AL", "albanya");
     namesMap.put("AM", "arminya");
-    namesMap.put("AN", "antiy n hulanda");
     namesMap.put("AO", "angula");
     namesMap.put("AR", "arjantin");
     namesMap.put("AS", "samwa tamirikanit");
@@ -533,7 +533,6 @@ public class LocalizedNamesImpl_shi_Latn extends LocalizedNamesImpl_shi {
         "AI": "angila",
         "AL": "albanya",
         "AM": "arminya",
-        "AN": "antiy n hulanda",
         "AO": "angula",
         "AR": "arjantin",
         "AS": "samwa tamirikanit",

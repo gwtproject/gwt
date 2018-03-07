@@ -22,6 +22,14 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_es_PE extends DateTimeFormatInfoImpl_es_419 {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "a. m.",
+        "p. m."
+    };
+  }
+
+  @Override
   public String dateFormatShort() {
     return "d/MM/yy";
   }
@@ -32,7 +40,74 @@ public class DateTimeFormatInfoImpl_es_PE extends DateTimeFormatInfoImpl_es_419 
   }
 
   @Override
-  public String timeFormatFull() {
-    return "HH'H'mm''ss'' zzzz";
+  public String[] monthsFull() {
+    return new String[] {
+        "enero",
+        "febrero",
+        "marzo",
+        "abril",
+        "mayo",
+        "junio",
+        "julio",
+        "agosto",
+        "setiembre",
+        "octubre",
+        "noviembre",
+        "diciembre"
+    };
+  }
+
+  @Override
+  public String[] monthsFullStandalone() {
+    return new String[] {
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Setiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre"
+    };
+  }
+
+  @Override
+  public String[] monthsShort() {
+    return new String[] {
+        "ene.",
+        "feb.",
+        "mar.",
+        "abr.",
+        "may.",
+        "jun.",
+        "jul.",
+        "ago.",
+        "set.",
+        "oct.",
+        "nov.",
+        "dic."
+    };
+  }
+
+  @Override
+  public String[] monthsShortStandalone() {
+    return new String[] {
+        "Ene.",
+        "Feb.",
+        "Mar.",
+        "Abr.",
+        "May.",
+        "Jun.",
+        "Jul.",
+        "Ago.",
+        "Set.",
+        "Oct.",
+        "Nov.",
+        "Dic."
+    };
   }
 }

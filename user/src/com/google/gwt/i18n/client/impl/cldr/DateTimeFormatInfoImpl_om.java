@@ -52,37 +52,22 @@ public class DateTimeFormatInfoImpl_om extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "KD",
-        "KB"
+        "Dheengadda Jeesu",
+        "CE"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "KD",
-        "KB"
+        "BCE",
+        "CE"
     };
   }
 
   @Override
   public int firstDayOfTheWeek() {
     return 0;
-  }
-
-  @Override
-  public String formatMonthFullDay() {
-    return "d MMMM";
-  }
-
-  @Override
-  public String formatMonthNumDay() {
-    return "d/M";
-  }
-
-  @Override
-  public String formatYearMonthAbbrevDay() {
-    return "d-MMM-y";
   }
 
   @Override
@@ -96,18 +81,8 @@ public class DateTimeFormatInfoImpl_om extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatYearMonthNum() {
-    return "M/y";
-  }
-
-  @Override
   public String formatYearMonthNumDay() {
-    return "d/M/y";
-  }
-
-  @Override
-  public String formatYearQuarterFull() {
-    return "QQQQ y";
+    return "y-MM-dd";
   }
 
   @Override
@@ -154,10 +129,10 @@ public class DateTimeFormatInfoImpl_om extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Q1",
-        "Q2",
-        "Q3",
-        "Q4"
+        "Kurmaana 1",
+        "Kurmaana 2",
+        "Kurmaana 3",
+        "Kurmaana 4"
     };
   }
 

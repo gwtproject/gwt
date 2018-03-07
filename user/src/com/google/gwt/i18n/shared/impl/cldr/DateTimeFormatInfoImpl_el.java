@@ -61,19 +61,19 @@ public class DateTimeFormatInfoImpl_el extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateTimeMedium(String timePattern, String datePattern) {
-    return datePattern + " - " + timePattern;
+    return datePattern + ", " + timePattern;
   }
 
   @Override
   public String dateTimeShort(String timePattern, String datePattern) {
-    return datePattern + " - " + timePattern;
+    return datePattern + ", " + timePattern;
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "π.Χ.",
-        "μ.Χ."
+        "προ Χριστού",
+        "μετά Χριστόν"
     };
   }
 
@@ -86,8 +86,18 @@ public class DateTimeFormatInfoImpl_el extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthAbbrev() {
+    return "MMM";
+  }
+
+  @Override
   public String formatMonthAbbrevDay() {
     return "d MMM";
+  }
+
+  @Override
+  public String formatMonthFull() {
+    return "MMMM";
   }
 
   @Override
@@ -107,7 +117,7 @@ public class DateTimeFormatInfoImpl_el extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrev() {
-    return "LLL y";
+    return "MMM y";
   }
 
   @Override

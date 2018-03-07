@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "nds" locale.
@@ -27,176 +22,181 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_nds extends DateTimeFormatInfoImpl {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "vm",
+        "nm"
+    };
+  }
+
+  @Override
+  public String dateFormatFull() {
+    return "EEEE, 'de' d. MMMM y";
+  }
+
+  @Override
+  public String dateFormatLong() {
+    return "d. MMMM y";
+  }
+
+  @Override
+  public String dateFormatMedium() {
+    return "d. MMM y";
+  }
+
+  @Override
+  public String dateFormatShort() {
+    return "d.MM.yy";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
   public String[] erasFull() {
     return new String[] {
-        "BCE",
-        "CE"
+        "vör Christus",
+        "na Christus"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "BCE",
-        "CE"
+        "v.Chr.",
+        "n.Chr."
     };
-  }
-
-  @Override
-  public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
-  }
-
-  @Override
-  public String formatMonthNumDay() {
-    return "M/d";
-  }
-
-  @Override
-  public String formatYearMonthAbbrev() {
-    return "MMM y";
-  }
-
-  @Override
-  public String formatYearMonthAbbrevDay() {
-    return "MMM d, y";
-  }
-
-  @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
-  }
-
-  @Override
-  public String formatYearMonthFullDay() {
-    return "MMMM d, y";
-  }
-
-  @Override
-  public String formatYearMonthNum() {
-    return "M/y";
-  }
-
-  @Override
-  public String formatYearMonthNumDay() {
-    return "M/d/y";
-  }
-
-  @Override
-  public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
-  }
-
-  @Override
-  public String formatYearQuarterFull() {
-    return "QQQQ y";
-  }
-
-  @Override
-  public String formatYearQuarterShort() {
-    return "Q y";
   }
 
   @Override
   public String[] monthsFull() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
-    };
-  }
-
-  @Override
-  public String[] monthsNarrow() {
-    return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
+        "Januaar",
+        "Februaar",
+        "März",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktover",
+        "November",
+        "Dezember"
     };
   }
 
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
+        "Jan.",
+        "Feb.",
+        "März",
+        "Apr.",
+        "Mai",
+        "Juni",
+        "Juli",
+        "Aug.",
+        "Sep.",
+        "Okt.",
+        "Nov.",
+        "Dez."
     };
   }
 
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Q1",
-        "Q2",
-        "Q3",
-        "Q4"
+        "1. Quartaal",
+        "2. Quartaal",
+        "3. Quartaal",
+        "4. Quartaal"
     };
+  }
+
+  @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "Q.1",
+        "Q.2",
+        "Q.3",
+        "Q.4"
+    };
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "'Klock' H.mm:ss (zzzz)";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "'Klock' H.mm:ss (z)";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "'Klock' H.mm:ss";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "'Kl'. H.mm";
   }
 
   @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
+        "Sünndag",
+        "Maandag",
+        "Dingsdag",
+        "Middeweken",
+        "Dunnersdag",
+        "Freedag",
+        "Sünnavend"
     };
   }
 
   @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
+        "S",
+        "M",
+        "D",
+        "M",
+        "D",
+        "F",
+        "S"
     };
   }
 
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
+        "Sü.",
+        "Ma.",
+        "Di.",
+        "Mi.",
+        "Du.",
+        "Fr.",
+        "Sa."
     };
   }
 }

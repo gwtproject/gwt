@@ -23,6 +23,6 @@ public class DateTimeFormatInfoImpl_zh_Hans extends DateTimeFormatInfoImpl_zh {
 
   @Override
   public int firstDayOfTheWeek() {
-    return 0;
+    return 1;
   }
 }

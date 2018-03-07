@@ -24,8 +24,8 @@ public class DateTimeFormatInfoImpl_guz extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "Ma/Mo",
-        "Mambia/Mog"
+        "Ma",
+        "Mo"
     };
   }
 
@@ -182,7 +182,7 @@ public class DateTimeFormatInfoImpl_guz extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Erobo entang'ani",
+        "Erobo entang’ani",
         "Erobo yakabere",
         "Erobo yagatato",
         "Erobo yakane"
@@ -197,26 +197,6 @@ public class DateTimeFormatInfoImpl_guz extends DateTimeFormatInfoImpl {
         "E3",
         "E4"
     };
-  }
-
-  @Override
-  public String timeFormatFull() {
-    return "h:mm:ss a zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "h:mm:ss a z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "h:mm:ss a";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "h:mm a";
   }
 
   @Override

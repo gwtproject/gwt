@@ -76,11 +76,6 @@ public class DateTimeFormatInfoImpl_rn extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatMonthFullDay() {
-    return "d MMMM";
-  }
-
-  @Override
   public String formatMonthFullWeekdayDay() {
     return "EEEE d MMMM";
   }
@@ -98,11 +93,6 @@ public class DateTimeFormatInfoImpl_rn extends DateTimeFormatInfoImpl {
   @Override
   public String formatYearMonthAbbrevDay() {
     return "d MMM y";
-  }
-
-  @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
   }
 
   @Override
@@ -192,10 +182,10 @@ public class DateTimeFormatInfoImpl_rn extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Igice ca mbere c'umwaka",
-        "Igice ca kabiri c'umwaka",
-        "Igice ca gatatu c'umwaka",
-        "Igice ca kane c'umwaka"
+        "Igice ca mbere c’umwaka",
+        "Igice ca kabiri c’umwaka",
+        "Igice ca gatatu c’umwaka",
+        "Igice ca kane c’umwaka"
     };
   }
 
@@ -212,7 +202,7 @@ public class DateTimeFormatInfoImpl_rn extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "Ku w'indwi",
+        "Ku w’indwi",
         "Ku wa mbere",
         "Ku wa kabiri",
         "Ku wa gatatu",

@@ -75,7 +75,6 @@ public class LocalizedNamesImpl_vo extends LocalizedNamesImpl {
         "CK",
         "CL",
         "CM",
-        "CN",
         "CO",
         "CP",
         "CR",
@@ -98,9 +97,9 @@ public class LocalizedNamesImpl_vo extends LocalizedNamesImpl {
         "EG",
         "EH",
         "ER",
-        "ES",
         "ET",
         "EU",
+        "EZ",
         "FI",
         "FJ",
         "FK",
@@ -108,9 +107,7 @@ public class LocalizedNamesImpl_vo extends LocalizedNamesImpl {
         "FO",
         "FR",
         "GA",
-        "GB",
         "GD",
-        "GE",
         "GF",
         "GG",
         "GH",
@@ -121,6 +118,7 @@ public class LocalizedNamesImpl_vo extends LocalizedNamesImpl {
         "GP",
         "GQ",
         "GR",
+        "GE",
         "GS",
         "GT",
         "GU",
@@ -137,16 +135,13 @@ public class LocalizedNamesImpl_vo extends LocalizedNamesImpl {
         "IE",
         "IL",
         "IM",
-        "IN",
         "IO",
         "IQ",
         "IR",
         "IS",
-        "IT",
         "JE",
         "JM",
         "JO",
-        "JP",
         "KE",
         "KG",
         "KH",
@@ -159,9 +154,12 @@ public class LocalizedNamesImpl_vo extends LocalizedNamesImpl {
         "KY",
         "KZ",
         "LA",
+        "US",
         "LB",
         "LC",
         "LI",
+        "IN",
+        "IT",
         "LK",
         "LR",
         "LS",
@@ -170,6 +168,7 @@ public class LocalizedNamesImpl_vo extends LocalizedNamesImpl {
         "LV",
         "LY",
         "MA",
+        "MX",
         "MC",
         "MD",
         "ME",
@@ -189,10 +188,10 @@ public class LocalizedNamesImpl_vo extends LocalizedNamesImpl {
         "MU",
         "MV",
         "MW",
-        "MX",
         "MY",
         "MZ",
         "NA",
+        "NR",
         "NC",
         "NE",
         "NF",
@@ -201,11 +200,11 @@ public class LocalizedNamesImpl_vo extends LocalizedNamesImpl {
         "NL",
         "NO",
         "NP",
-        "NR",
         "NU",
         "NZ",
         "OM",
         "PA",
+        "PW",
         "PE",
         "PF",
         "PG",
@@ -214,14 +213,14 @@ public class LocalizedNamesImpl_vo extends LocalizedNamesImpl {
         "PL",
         "PM",
         "PN",
+        "PT",
         "PR",
         "PS",
-        "PT",
-        "PW",
         "PY",
         "QA",
         "QO",
         "RE",
+        "GB",
         "RO",
         "RS",
         "RU",
@@ -240,6 +239,7 @@ public class LocalizedNamesImpl_vo extends LocalizedNamesImpl {
         "SM",
         "SN",
         "SO",
+        "ES",
         "SR",
         "SS",
         "ST",
@@ -260,6 +260,7 @@ public class LocalizedNamesImpl_vo extends LocalizedNamesImpl {
         "TN",
         "TO",
         "TR",
+        "CN",
         "TT",
         "TV",
         "TW",
@@ -267,7 +268,7 @@ public class LocalizedNamesImpl_vo extends LocalizedNamesImpl {
         "UA",
         "UG",
         "UM",
-        "US",
+        "UN",
         "UY",
         "UZ",
         "VA",
@@ -280,6 +281,7 @@ public class LocalizedNamesImpl_vo extends LocalizedNamesImpl {
         "WF",
         "WS",
         "XK",
+        "JP",
         "YE",
         "YT",
         "ZA",
@@ -291,6 +293,23 @@ public class LocalizedNamesImpl_vo extends LocalizedNamesImpl {
   @Override
   protected void loadNameMapJava() {
     super.loadNameMapJava();
+    namesMap.put("BR", "Brasilän");
+    namesMap.put("CN", "Tsyinän");
+    namesMap.put("DE", "Deutän");
+    namesMap.put("ES", "Spanyän");
+    namesMap.put("FR", "Fransän");
+    namesMap.put("GB", "Regän Pebalöl");
+    namesMap.put("GE", "Grusiyän");
+    namesMap.put("GR", "Grikän");
+    namesMap.put("IN", "Lindän");
+    namesMap.put("IT", "Litaliyän");
+    namesMap.put("JP", "Yapän");
+    namesMap.put("MX", "Mäxikän");
+    namesMap.put("NR", "Naureän");
+    namesMap.put("PT", "Portugän");
+    namesMap.put("PW", "Palauäns");
+    namesMap.put("RU", "Rusän");
+    namesMap.put("US", "Lamerikän");
   }
 
   @Override
@@ -300,7 +319,23 @@ public class LocalizedNamesImpl_vo extends LocalizedNamesImpl {
 
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
-
+        "BR": "Brasilän",
+        "CN": "Tsyinän",
+        "DE": "Deutän",
+        "ES": "Spanyän",
+        "FR": "Fransän",
+        "GB": "Regän Pebalöl",
+        "GE": "Grusiyän",
+        "GR": "Grikän",
+        "IN": "Lindän",
+        "IT": "Litaliyän",
+        "JP": "Yapän",
+        "MX": "Mäxikän",
+        "NR": "Naureän",
+        "PT": "Portugän",
+        "PW": "Palauäns",
+        "RU": "Rusän",
+        "US": "Lamerikän"
     };
   }-*/;
 }

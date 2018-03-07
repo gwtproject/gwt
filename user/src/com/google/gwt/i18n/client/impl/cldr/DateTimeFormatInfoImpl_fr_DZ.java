@@ -27,12 +27,32 @@ public class DateTimeFormatInfoImpl_fr_DZ extends DateTimeFormatInfoImpl_fr {
   }
 
   @Override
+  public String timeFormatFull() {
+    return "h:mm:ss a zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "h:mm:ss a z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "h:mm:ss a";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "h:mm a";
+  }
+
+  @Override
   public int weekendEnd() {
-    return 5;
+    return 6;
   }
 
   @Override
   public int weekendStart() {
-    return 4;
+    return 5;
   }
 }

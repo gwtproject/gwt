@@ -34,6 +34,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsMethod;
@@ -454,5 +455,25 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
     assertTrue(newArrayThroughCtorReference() instanceof NativeArray);
     assertTrue(Double.isNaN(getNan()));
     assertTrue(isNan(Double.NaN));
+  }
+
+  interface Selector extends Predicate<String> {
+    @Override
+    boolean test(String object);
+
+    default Selector trueSelector() {
+      // Unused variable that creates a lambda with a bridge for the method test. The bug #9598
+      // was caused by GwtAstBuilder associating the method bridge method Lambda.test(Object) on the
+      // lambda below to the method Predicate.test(Object), causing the method resolution in the
+      // code that refers to the Predicate.test(Object) in the test below to point to the wrong
+      // method.
+      return receiver -> true;
+    }
+  }
+
+  // Regression tests for #9598
+  public void testImproperMethodResolution() {
+    Predicate p = o -> true;
+    assertTrue(p.test(null));
   }
 }

@@ -2917,7 +2917,6 @@ public class GwtAstBuilder {
       } else {
         body.getBlock().addStmt(call.makeReturnStatement());
       }
-      typeMap.setMethod(sourceMethodBinding, bridgeMethod);
       return bridgeMethod;
     }
 

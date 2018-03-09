@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c13526aa_f706c424",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-03-09T03:09:18Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.function.Predicate.",
+      "revId": "46eeb1bcffeaacd40a3c30511e7c5275471fd8fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

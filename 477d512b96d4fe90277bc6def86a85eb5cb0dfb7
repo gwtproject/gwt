@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "693a1bc1_e8e8aa0b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 2920,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-03-09T03:24:58Z",
+      "side": 0,
+      "message": "This is actually the reason for the problem. The whole thing is just due to an (unnecessary) optimization in ReferenceResolver that keeps track of the methods defined in the source being compiled so that calls to those methods are resolved right away (i.e. here in GwtAstBuilder) instead of later when running UnifyAst.\n\nThis code here was registering a bridge method as the method to use if a call to the superclass method was found which is obviously incorrect. Added preconditions in setMethod and setField to avoid this situations.",
+      "revId": "477d512b96d4fe90277bc6def86a85eb5cb0dfb7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

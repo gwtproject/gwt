@@ -46,12 +46,12 @@ public class DateTimeFormatInfoImpl_nn extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "dd.MM.yy";
+    return "dd.MM.y";
   }
 
   @Override
   public String dateTimeLong(String timePattern, String datePattern) {
-    return datePattern + " 'kl.' " + timePattern;
+    return datePattern + " 'kl'. " + timePattern;
   }
 
   @Override
@@ -127,7 +127,7 @@ public class DateTimeFormatInfoImpl_nn extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "M y";
+    return "M.y";
   }
 
   @Override

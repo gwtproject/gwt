@@ -28,11 +28,11 @@ public class DateTimeFormatInfoImpl_ar_OM extends DateTimeFormatInfoImpl_ar_001 
 
   @Override
   public int weekendEnd() {
-    return 5;
+    return 6;
   }
 
   @Override
   public int weekendStart() {
-    return 4;
+    return 5;
   }
 }

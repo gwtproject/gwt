@@ -32,20 +32,10 @@ public class DateTimeFormatInfoImpl_mg extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String dateFormatMedium() {
-    return "d MMM, y";
-  }
-
-  @Override
-  public String dateFormatShort() {
-    return "d/M/y";
-  }
-
-  @Override
   public String[] erasFull() {
     return new String[] {
-        "Alohan'i JK",
-        "Aorian'i JK"
+        "Alohan’i JK",
+        "Aorian’i JK"
     };
   }
 
@@ -111,7 +101,7 @@ public class DateTimeFormatInfoImpl_mg extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d/M/y";
+    return "y-MM-dd";
   }
 
   @Override

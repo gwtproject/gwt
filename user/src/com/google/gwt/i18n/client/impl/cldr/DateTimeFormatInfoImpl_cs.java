@@ -22,6 +22,14 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_cs extends DateTimeFormatInfoImpl {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "dop.",
+        "odp."
+    };
+  }
+
+  @Override
   public String dateFormatFull() {
     return "EEEE d. MMMM y";
   }
@@ -44,8 +52,8 @@ public class DateTimeFormatInfoImpl_cs extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "př. n. l.",
-        "n. l."
+        "před naším letopočtem",
+        "našeho letopočtu"
     };
   }
 
@@ -188,24 +196,6 @@ public class DateTimeFormatInfoImpl_cs extends DateTimeFormatInfoImpl {
         "10",
         "11",
         "12"
-    };
-  }
-
-  @Override
-  public String[] monthsNarrowStandalone() {
-    return new String[] {
-        "l",
-        "ú",
-        "b",
-        "d",
-        "k",
-        "č",
-        "č",
-        "s",
-        "z",
-        "ř",
-        "l",
-        "p"
     };
   }
 

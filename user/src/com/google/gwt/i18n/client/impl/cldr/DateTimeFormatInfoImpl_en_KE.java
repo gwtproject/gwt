@@ -25,4 +25,24 @@ public class DateTimeFormatInfoImpl_en_KE extends DateTimeFormatInfoImpl_en_001 
   public int firstDayOfTheWeek() {
     return 0;
   }
+
+  @Override
+  public String timeFormatFull() {
+    return "HH:mm:ss zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "HH:mm:ss z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "HH:mm:ss";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "HH:mm";
+  }
 }

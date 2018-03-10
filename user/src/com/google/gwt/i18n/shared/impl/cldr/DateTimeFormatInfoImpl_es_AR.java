@@ -22,8 +22,31 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_es_AR extends DateTimeFormatInfoImpl_es_419 {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "a. m.",
+        "p. m."
+    };
+  }
+
+  @Override
   public int firstDayOfTheWeek() {
     return 0;
+  }
+
+  @Override
+  public String formatHour12MinuteSecond() {
+    return "hh:mm:ss";
+  }
+
+  @Override
+  public String formatYearMonthAbbrev() {
+    return "MMM y";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "d 'de' MMM 'de' y";
   }
 
   @Override
@@ -32,7 +55,30 @@ public class DateTimeFormatInfoImpl_es_AR extends DateTimeFormatInfoImpl_es_419 
   }
 
   @Override
-  public String timeFormatFull() {
-    return "HH'h'''mm:ss zzzz";
+  public String formatYearMonthWeekdayDay() {
+    return "EEE, d MMM y";
+  }
+
+  @Override
+  public String[] quartersFull() {
+    return new String[] {
+        "1.er trimestre",
+        "2.º trimestre",
+        "3.er trimestre",
+        "4.º trimestre"
+    };
+  }
+
+  @Override
+  public String[] weekdaysNarrow() {
+    return new String[] {
+        "D",
+        "L",
+        "M",
+        "M",
+        "J",
+        "V",
+        "S"
+    };
   }
 }

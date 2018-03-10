@@ -39,7 +39,6 @@ public class LocalizedNamesImpl_rof extends LocalizedNamesImpl {
         "AO",
         "AI",
         "AG",
-        "AN",
         "AQ",
         "AW",
         "AU",
@@ -85,6 +84,7 @@ public class LocalizedNamesImpl_rof extends LocalizedNamesImpl {
         "ER",
         "EE",
         "EU",
+        "EZ",
         "AE",
         "FJ",
         "PH",
@@ -259,6 +259,7 @@ public class LocalizedNamesImpl_rof extends LocalizedNamesImpl {
         "PS",
         "UA",
         "UM",
+        "UN",
         "PT",
         "UY",
         "RU",
@@ -298,7 +299,6 @@ public class LocalizedNamesImpl_rof extends LocalizedNamesImpl {
     namesMap.put("AG", "Antigua na Babuda");
     namesMap.put("AI", "Anguila");
     namesMap.put("AM", "Amenia");
-    namesMap.put("AN", "Antili za Uholanzi");
     namesMap.put("AO", "Angolo");
     namesMap.put("AR", "Ajentina");
     namesMap.put("AS", "Samoa ya Marekani");
@@ -477,7 +477,6 @@ public class LocalizedNamesImpl_rof extends LocalizedNamesImpl {
         "AG": "Antigua na Babuda",
         "AI": "Anguila",
         "AM": "Amenia",
-        "AN": "Antili za Uholanzi",
         "AO": "Angolo",
         "AR": "Ajentina",
         "AS": "Samoa ya Marekani",

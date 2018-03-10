@@ -22,39 +22,32 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_az_Cyrl extends DateTimeFormatInfoImpl_az {
 
   @Override
-  public String dateFormatFull() {
-    return "EEEE, d, MMMM, y";
-  }
-
-  @Override
-  public String dateFormatLong() {
-    return "d MMMM, y";
-  }
-
-  @Override
-  public String dateFormatMedium() {
-    return "d MMM, y";
+  public String[] ampms() {
+    return new String[] {
+        "АМ",
+        "ПМ"
+    };
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "BCE",
-        "CE"
+        "ерамыздан әввәл",
+        "јени ера"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "BCE",
-        "CE"
+        "е.ә.",
+        "ј.е."
     };
   }
 
   @Override
-  public String formatMonthFullWeekdayDay() {
-    return "EEEE, d, MMMM";
+  public String formatMonthFullDay() {
+    return "MMMM d";
   }
 
   @Override
@@ -63,23 +56,8 @@ public class DateTimeFormatInfoImpl_az_Cyrl extends DateTimeFormatInfoImpl_az {
   }
 
   @Override
-  public String formatYearMonthAbbrevDay() {
-    return "d MMM, y";
-  }
-
-  @Override
   public String formatYearMonthFull() {
-    return "MMMM, y";
-  }
-
-  @Override
-  public String formatYearMonthFullDay() {
-    return "d MMMM, y";
-  }
-
-  @Override
-  public String formatYearMonthWeekdayDay() {
-    return "EEE, d, MMM, y";
+    return "y MMMM";
   }
 
   @Override
@@ -101,40 +79,58 @@ public class DateTimeFormatInfoImpl_az_Cyrl extends DateTimeFormatInfoImpl_az {
   }
 
   @Override
+  public String[] monthsFullStandalone() {
+    return new String[] {
+        "Јанвар",
+        "Феврал",
+        "Март",
+        "Апрел",
+        "Май",
+        "Ијун",
+        "Ијул",
+        "Август",
+        "Сентјабр",
+        "Октјабр",
+        "Нојабр",
+        "Декабр"
+    };
+  }
+
+  @Override
   public String[] monthsShort() {
     return new String[] {
-        "јанвар",
-        "феврал",
-        "март",
-        "апрел",
+        "јан",
+        "фев",
+        "мар",
+        "апр",
         "май",
-        "ијун",
-        "ијул",
-        "август",
-        "сентјабр",
-        "октјабр",
-        "нојабр",
-        "декабр"
+        "ијн",
+        "ијл",
+        "авг",
+        "сен",
+        "окт",
+        "ној",
+        "дек"
     };
   }
 
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Q1",
-        "Q2",
-        "Q3",
-        "Q4"
+        "1-ҹи квартал",
+        "2-ҹи квартал",
+        "3-ҹү квартал",
+        "4-ҹү квартал"
     };
   }
 
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "Q1",
-        "Q2",
-        "Q3",
-        "Q4"
+        "1-ҹи кв.",
+        "2-ҹи кв.",
+        "3-ҹү кв.",
+        "4-ҹү кв."
     };
   }
 
@@ -154,13 +150,13 @@ public class DateTimeFormatInfoImpl_az_Cyrl extends DateTimeFormatInfoImpl_az {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "базар",
-        "базар ертәси",
-        "чәршәнбә ахшамы",
-        "чәршәнбә",
-        "ҹүмә ахшамы",
-        "ҹүмә",
-        "шәнбә"
+        "Б.",
+        "Б.Е.",
+        "Ч.А.",
+        "Ч.",
+        "Ҹ.А.",
+        "Ҹ.",
+        "Ш."
     };
   }
 }

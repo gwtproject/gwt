@@ -197,7 +197,7 @@ public class DefaultDateTimeFormatInfo implements DateTimeFormatInfo {
 
   @Override
   public String formatYearMonthNumDay() {
-    return "y-MM-dd";
+    return "y-M-d";
   }
 
   @Override

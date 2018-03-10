@@ -44,24 +44,25 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "KH",
         "GN",
         "GW",
+        "KW",
         "GP",
         "GT",
-        "KI",
         "CD",
         "CG",
         "KZ",
         "BQ",
         "CM",
+        "KI",
         "CU",
-        "KG",
         "CW",
-        "KW",
+        "KG",
         "JM",
         "GI",
         "DJ",
         "CN",
         "GE",
         "JO",
+        "TD",
         "WS",
         "SA",
         "EH",
@@ -118,17 +119,18 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "MS",
         "ME",
         "MV",
+        "MO",
         "MG",
         "MQ",
         "YT",
         "MW",
         "ML",
-        "MO",
         "MY",
         "MU",
         "MR",
         "MM",
         "UA",
+        "RW",
         "RU",
         "LV",
         "LA",
@@ -137,13 +139,13 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "LY",
         "LR",
         "LU",
-        "RW",
         "VU",
         "WF",
         "SZ",
         "SJ",
         "CH",
         "SE",
+        "UN",
         "EU",
         "US",
         "AE",
@@ -152,16 +154,13 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "SK",
         "SI",
         "CF",
-        "CZ",
         "GM",
         "DO",
         "SG",
         "LK",
-        "CK",
         "FK",
         "MH",
         "MP",
-        "UM",
         "FO",
         "CC",
         "SB",
@@ -170,21 +169,18 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "AU",
         "AT",
         "AD",
-        "AO",
         "DZ",
-        "AG",
-        "TF",
         "AF",
         "ZA",
-        "AM",
+        "AW",
         "AR",
         "AZ",
         "AS",
+        "AM",
         "IT",
         "IN",
         "ID",
         "IL",
-        "GQ",
         "ET",
         "EG",
         "IQ",
@@ -192,26 +188,24 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "UZ",
         "UG",
         "UY",
-        "AW",
         "HN",
         "HU",
         "HK",
         "GD",
         "CX",
         "CP",
-        "GS",
         "NF",
         "BV",
         "AC",
-        "HM",
         "GG",
         "KP",
         "KR",
+        "EZ",
         "QO",
+        "TF",
         "IO",
         "KE",
         "CV",
-        "KY",
         "JE",
         "SL",
         "KN",
@@ -223,6 +217,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "SN",
         "SH",
         "EA",
+        "CZ",
         "RS",
         "ST",
         "SC",
@@ -231,7 +226,6 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "TR",
         "NP",
         "NL",
-        "AN",
         "BJ",
         "BZ",
         "BY",
@@ -250,23 +244,24 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "LS",
         "VE",
         "EC",
+        "GQ",
         "ER",
         "SV",
         "IM",
         "EE",
-        "HT",
         "CA",
-        "TD",
         "SM",
         "ZM",
         "MK",
+        "AO",
         "AI",
         "AQ",
+        "AG",
         "AL",
         "CI",
+        "HR",
         "CO",
         "CR",
-        "HR",
         "XK",
         "KM",
         "SO",
@@ -288,11 +283,17 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "FM",
         "IS",
         "IE",
+        "HT",
         "IC",
-        "VG",
+        "CK",
+        "GS",
         "PN",
-        "VI",
+        "UM",
+        "KY",
         "TC",
+        "VI",
+        "VG",
+        "HM",
     };
   }
 
@@ -303,48 +304,47 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
     namesMap.put("002", "ອາຟຣິກາ");
     namesMap.put("003", "ອາເມລິກາເໜືອ");
     namesMap.put("005", "ອາເມລິກາໃຕ້");
-    namesMap.put("009", "ໂອຊີເນຍ");
+    namesMap.put("009", "ໂອຊີອານີ");
     namesMap.put("011", "ອາຟຣິກາຕາເວັນຕົກ");
     namesMap.put("013", "ອາເມລິກາກາງ");
     namesMap.put("014", "ອາຟຣິກາຕາເວັນອອກ");
     namesMap.put("015", "ອາຟຣິກາເໜືອ");
     namesMap.put("017", "ອາຟຣິກາກາງ");
-    namesMap.put("018", "ອາຟຣິກາໃຕ້");
+    namesMap.put("018", "ອາຟຣິກາຕອນໃຕ້");
     namesMap.put("019", "ອາເມຣິກາ");
-    namesMap.put("021", "ອາເມລິກາເໜືອສຸດ");
+    namesMap.put("021", "ພາກເໜືອອາເມລີກາ");
     namesMap.put("029", "ຄາຣິບບຽນ");
-    namesMap.put("030", "ເອເຊຍຕາເວັນອອກ");
-    namesMap.put("034", "ເອເຊຍໃຕ້");
-    namesMap.put("035", "ເອເຊຍຕາເວັນອອກສ່ຽງໃຕ້");
+    namesMap.put("030", "ອາຊີຕາເວັນອອກ");
+    namesMap.put("034", "ອາຊີໄຕ້");
+    namesMap.put("035", "ອາຊີຕາເວັນອອກສ່ຽງໄຕ້");
     namesMap.put("039", "ຢູໂຣບໃຕ້");
-    namesMap.put("053", "ອອສເຕຣເລເຊຍ");
+    namesMap.put("053", "ໂອດສະຕາລີ");
     namesMap.put("054", "ເມລານີເຊຍ");
     namesMap.put("057", "ເຂດໄມໂຄຣເນຊຽນ");
     namesMap.put("061", "ໂພລີນີເຊຍ");
-    namesMap.put("142", "ເອເຊຍ");
-    namesMap.put("143", "ເອເຊຍກາງ");
-    namesMap.put("145", "ເອເຊຍຕາເວັນຕົກ");
+    namesMap.put("142", "ອາຊີ");
+    namesMap.put("143", "ອາຊີກາງ");
+    namesMap.put("145", "ອາຊີຕາເວັນຕົກ");
     namesMap.put("150", "ຢູໂຣບ");
     namesMap.put("151", "ຢູໂຣບຕາເວັນອອກ");
     namesMap.put("154", "ຢູໂຣບເໜືອ");
     namesMap.put("155", "ຢູໂຣບຕາເວັນຕົກ");
-    namesMap.put("419", "ອາເມລິກາ ລາຕິນ");
+    namesMap.put("419", "ລາຕິນ ອາເມລິກາ");
     namesMap.put("AC", "ເກາະອາເຊນຊັນ");
     namesMap.put("AD", "ອັນດໍຣາ");
-    namesMap.put("AE", "ສະຫະລັດອາຫຣັບເອມິເຣດ");
-    namesMap.put("AF", "ອາຟການິສຖານ");
-    namesMap.put("AG", "ອາທິກົວ ບາບູດາ");
+    namesMap.put("AE", "ສະຫະລັດອາຣັບເອມິເຣດ");
+    namesMap.put("AF", "ອາຟການິດສະຖານ");
+    namesMap.put("AG", "ແອນທິກົວ ແລະ ບາບູດາ");
     namesMap.put("AI", "ແອນກຸຍລາ");
     namesMap.put("AL", "ແອວເບເນຍ");
-    namesMap.put("AM", "ອາມີເນຍ");
-    namesMap.put("AN", "ເນເທີແລນແອນເທິນ");
-    namesMap.put("AO", "ອັນໂກລາ");
+    namesMap.put("AM", "ອາເມເນຍ");
+    namesMap.put("AO", "ແອງໂກລາ");
     namesMap.put("AQ", "ແອນຕາດຕິກາ");
     namesMap.put("AR", "ອາເຈນທິນາ");
     namesMap.put("AS", "ອາເມຣິກາ ຊາມົວ");
     namesMap.put("AT", "ອອສເທຣຍ");
     namesMap.put("AU", "ອອສເຕຣເລຍ");
-    namesMap.put("AW", "ອໍຣູບາ");
+    namesMap.put("AW", "ອາຣູບາ");
     namesMap.put("AX", "ຫມູ່ເກາະໂອລັນ");
     namesMap.put("AZ", "ອາເຊີໄບຈານ");
     namesMap.put("BA", "ບອດສະເນຍ ແລະ ແຮສໂກວີນາ");
@@ -375,7 +375,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
     namesMap.put("CG", "ຄອງໂກ - ບຣາຊາວິວ");
     namesMap.put("CH", "ສະວິດເຊີແລນ");
     namesMap.put("CI", "ໂຄຕີ ວົວ");
-    namesMap.put("CK", "ຫມູ່ເກາະຄູກ");
+    namesMap.put("CK", "ໝູ່ເກາະຄຸກ");
     namesMap.put("CL", "ຊິລີ");
     namesMap.put("CM", "ຄາເມຣູນ");
     namesMap.put("CN", "ຈີນ");
@@ -387,7 +387,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
     namesMap.put("CW", "ຄູຣາຊາວ");
     namesMap.put("CX", "ເກາະຄຣິສມາດ");
     namesMap.put("CY", "ໄຊປຣັສ");
-    namesMap.put("CZ", "ສາທາລະນະລັດເຊກ");
+    namesMap.put("CZ", "ເຊັກເຊຍ");
     namesMap.put("DE", "ເຢຍລະມັນ");
     namesMap.put("DG", "ດິເອໂກ ກາເຊຍ");
     namesMap.put("DJ", "ຈິບູຕິ");
@@ -396,7 +396,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
     namesMap.put("DO", "ສາທາລະນະລັດ ໂດມິນິກັນ");
     namesMap.put("DZ", "ອັລຈິເຣຍ");
     namesMap.put("EA", "ເຊວຕາ ແລະເມລິນລາ");
-    namesMap.put("EC", "ເອກກວາດໍ");
+    namesMap.put("EC", "ເອກວາດໍ");
     namesMap.put("EE", "ເອສໂຕເນຍ");
     namesMap.put("EG", "ອີຢິບ");
     namesMap.put("EH", "ຊາຮາຣາຕາເວັນຕົກ");
@@ -404,6 +404,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
     namesMap.put("ES", "ສະເປນ");
     namesMap.put("ET", "ອີທິໂອເປຍ");
     namesMap.put("EU", "ສະຫະພາບຢູໂຣບ");
+    namesMap.put("EZ", "ເຂດຢູໂຣບ");
     namesMap.put("FI", "ຟິນແລນ");
     namesMap.put("FJ", "ຟິຈິ");
     namesMap.put("FK", "ຫມູ່ເກາະຟອກແລນ");
@@ -414,26 +415,26 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
     namesMap.put("GB", "ສະຫະລາດຊະອະນາຈັກ");
     namesMap.put("GD", "ເກຣເນດາ");
     namesMap.put("GE", "ຈໍເຈຍ");
-    namesMap.put("GF", "ເຟຣນຊ ກຸຍອານາ");
+    namesMap.put("GF", "ເຟຣນຊ໌ ກຸຍອານາ");
     namesMap.put("GG", "ເກີນຊີ");
-    namesMap.put("GH", "ການ່າ");
+    namesMap.put("GH", "ການາ");
     namesMap.put("GI", "ຈິບບຣອນທາ");
     namesMap.put("GL", "ກຣີນແລນ");
     namesMap.put("GM", "ສາທາລະນະລັດແກມເບຍ");
     namesMap.put("GN", "ກິນີ");
     namesMap.put("GP", "ກົວດາລູບ");
-    namesMap.put("GQ", "ອີຄົວໂຕຣຽວ ກີນີ");
+    namesMap.put("GQ", "ເອຄົວໂທຣຽວ ກີນີ");
     namesMap.put("GR", "ກຣີຊ");
-    namesMap.put("GS", "ເກາະຈອດເຈຍໃຕ້ແລະຫມູ່ເກາະແຊນວິດຕອນໃຕ້");
+    namesMap.put("GS", "ໝູ່ເກາະ ຈໍເຈຍຕອນໃຕ້ ແລະ ແຊນວິດຕອນໃຕ້");
     namesMap.put("GT", "ກົວເທມາລາ");
-    namesMap.put("GU", "ກວມ");
-    namesMap.put("GW", "ກິນີ-ບິສໂຊ");
+    namesMap.put("GU", "ກວາມ");
+    namesMap.put("GW", "ກິນີ-ບິສເຊົາ");
     namesMap.put("GY", "ກາຍຢານາ");
     namesMap.put("HK", "ຮົງກົງ ເຂດປົກຄອງພິເສດ ຈີນ");
-    namesMap.put("HM", "ເກາະເຮີດແລະຫມູ່ເກາະແມັກໂດນອລ");
+    namesMap.put("HM", "ໝູ່ເກາະເຮີດ & ແມັກໂດນອລ");
     namesMap.put("HN", "ຮອນດູຣັສ");
-    namesMap.put("HR", "ໂຄເອເຊຍ");
-    namesMap.put("HT", "ເຮທີ");
+    namesMap.put("HR", "ໂຄຣເອເທຍ");
+    namesMap.put("HT", "ໄຮຕິ");
     namesMap.put("HU", "ຮັງກາຣີ");
     namesMap.put("IC", "ໝູ່ເກາະຄານາຣີ");
     namesMap.put("ID", "ອິນໂດເນເຊຍ");
@@ -441,9 +442,9 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
     namesMap.put("IL", "ອິສຣາເອວ");
     namesMap.put("IM", "ເອວ ອອບ ແມນ");
     namesMap.put("IN", "ອິນເດຍ");
-    namesMap.put("IO", "ເຂດແດນບຣິທິສອິນດຽນໂອຊຽນ");
+    namesMap.put("IO", "ເຂດແດນອັງກິດໃນມະຫາສະມຸດອິນເດຍ");
     namesMap.put("IQ", "ອີຣັກ");
-    namesMap.put("IR", "ອີຣ່ານ");
+    namesMap.put("IR", "ອີຣານ");
     namesMap.put("IS", "ໄອສແລນ");
     namesMap.put("IT", "ອິຕາລີ");
     namesMap.put("JE", "ເຈີຊີ");
@@ -451,15 +452,15 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
     namesMap.put("JO", "ຈໍແດນ");
     namesMap.put("JP", "ຍີ່ປຸ່ນ");
     namesMap.put("KE", "ເຄນຢາ");
-    namesMap.put("KG", "ຄີກິສຖານ");
+    namesMap.put("KG", "ຄຽກກິດສະຖານ");
     namesMap.put("KH", "ກຳປູເຈຍ");
-    namesMap.put("KI", "ຄຣິບາຕິ");
+    namesMap.put("KI", "ຄິຣິບາທິ");
     namesMap.put("KM", "ໂຄໂມໂຣສ");
     namesMap.put("KN", "ເຊນ ຄິດ ແລະ ເນວິສ");
     namesMap.put("KP", "ເກົາຫລີເໜືອ");
     namesMap.put("KR", "ເກົາຫລີໃຕ້");
-    namesMap.put("KW", "ຄູເວດ");
-    namesMap.put("KY", "ເຄແມນ ໄອສແລນ");
+    namesMap.put("KW", "ກູເວດ");
+    namesMap.put("KY", "ໝູ່ເກາະ ເຄແມນ");
     namesMap.put("KZ", "ຄາຊັກສະຖານ");
     namesMap.put("LA", "ລາວ");
     namesMap.put("LB", "ເລບານອນ");
@@ -477,13 +478,13 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
     namesMap.put("MD", "ໂມນໂດວາ");
     namesMap.put("ME", "ມອນເຕເນໂກຣ");
     namesMap.put("MF", "ເຊນ ມາທິນ");
-    namesMap.put("MG", "ມາດາກາສກາ");
+    namesMap.put("MG", "ມາດາກາສະກາ");
     namesMap.put("MH", "ຫມູ່ເກາະມາແຊວ");
     namesMap.put("MK", "ແມຊິໂດເນຍ");
-    namesMap.put("ML", "ມາລິ");
-    namesMap.put("MM", "ມຽນມາ pເບີມາ)");
+    namesMap.put("ML", "ມາລີ");
+    namesMap.put("MM", "ມຽນມາ (ເບີມາ)");
     namesMap.put("MN", "ມອງໂກເລຍ");
-    namesMap.put("MO", "ມາເກົ້າ ເຂດປົກຄອງພິເສດ ຈີນ");
+    namesMap.put("MO", "ມາກາວ ເຂດປົກຄອງພິເສດ ຈີນ");
     namesMap.put("MP", "ຫມູ່ເກາະມາແຊວຕອນເຫນືອ");
     namesMap.put("MQ", "ມາຕິນີກ");
     namesMap.put("MR", "ມົວຣິເທເນຍ");
@@ -509,18 +510,18 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
     namesMap.put("NZ", "ນິວຊີແລນ");
     namesMap.put("OM", "ໂອມານ");
     namesMap.put("PA", "ພານາມາ");
-    namesMap.put("PE", "ເພີຣູ");
-    namesMap.put("PF", "ເຟຣນຊ ໂພລີເນເຂຍ");
+    namesMap.put("PE", "ເປຣູ");
+    namesMap.put("PF", "ເຟຣນຊ໌ ໂພລິນີເຊຍ");
     namesMap.put("PG", "ປາປົວນິວກີນີ");
     namesMap.put("PH", "ຟິລິບປິນ");
-    namesMap.put("PK", "ປາກິສຖານ");
+    namesMap.put("PK", "ປາກິດສະຖານ");
     namesMap.put("PL", "ໂປແລນ");
     namesMap.put("PM", "ເຊນ ປີແອ ມິເກວລອນ");
     namesMap.put("PN", "ໝູ່ເກາະພິດແຄນ");
     namesMap.put("PR", "ເພືອໂຕ ຣິໂກ");
     namesMap.put("PS", "ດິນແດນ ປາເລສຕິນຽນ");
     namesMap.put("PT", "ພອລທູໂກ");
-    namesMap.put("PW", "ປາເລົາ");
+    namesMap.put("PW", "ປາລາວ");
     namesMap.put("PY", "ພາຣາກວຍ");
     namesMap.put("QA", "ກາຕາ");
     namesMap.put("QO", "ເຂດຫ່າງໄກໂອຊີເນຍ");
@@ -528,7 +529,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
     namesMap.put("RO", "ໂຣແມເນຍ");
     namesMap.put("RS", "ເຊີເບຍ");
     namesMap.put("RU", "ຣັດເຊຍ");
-    namesMap.put("RW", "ວັນດາ");
+    namesMap.put("RW", "ຣວັນດາ");
     namesMap.put("SA", "ຊາອຸດິ ອາຣາເບຍ");
     namesMap.put("SB", "ຫມູ່ເກາະໂຊໂລມອນ");
     namesMap.put("SC", "ເຊເຊວເລສ");
@@ -547,19 +548,19 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
     namesMap.put("SS", "ຊູດານໃຕ້");
     namesMap.put("ST", "ເຊົາທູເມ ແລະ ພຣິນຊິບ");
     namesMap.put("SV", "ເອວ ຊໍວາດໍ");
-    namesMap.put("SX", "ຊິນ ມາທິນ");
+    namesMap.put("SX", "ຊິນ ມາເທັນ");
     namesMap.put("SY", "ຊີເຣຍ");
     namesMap.put("SZ", "ສະວາຊິແລນ");
     namesMap.put("TA", "ທຣິສຕັນ ດາ ກັນຮາ");
     namesMap.put("TC", "ໝູ່ເກາະ ເທີກ ແລະ ໄຄໂຄສ");
-    namesMap.put("TD", "ແຊດ");
-    namesMap.put("TF", "ອານາເຂດທາງໃຕ້ຂອງຝຣັ່ງ");
+    namesMap.put("TD", "ຊາດ");
+    namesMap.put("TF", "ເຂດແດນທາງໃຕ້ຂອຝຮັ່ງ");
     namesMap.put("TG", "ໂຕໂກ");
     namesMap.put("TH", "ໄທ");
-    namesMap.put("TJ", "ທາຈິກິສຖານ");
+    namesMap.put("TJ", "ທາຈິກິດສະຖານ");
     namesMap.put("TK", "ໂຕເກເລົາ");
     namesMap.put("TL", "ທິມໍ-ເລສເຕ");
-    namesMap.put("TM", "ເທີກເມນິສຖານ");
+    namesMap.put("TM", "ເທີກເມນິສະຖານ");
     namesMap.put("TN", "ຕູນິເຊຍ");
     namesMap.put("TO", "ທອງກາ");
     namesMap.put("TR", "ເທີຄີ");
@@ -569,23 +570,24 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
     namesMap.put("TZ", "ທານຊາເນຍ");
     namesMap.put("UA", "ຢູເຄຣນ");
     namesMap.put("UG", "ອູການດາ");
-    namesMap.put("UM", "ຫມູ່ເກາະຮອບນອກຂອງສະຫະລັດ");
+    namesMap.put("UM", "ໝູ່ເກາະຮອບນອກຂອງສະຫະລັດຯ");
+    namesMap.put("UN", "ສະຫະປະຊາຊາດ");
     namesMap.put("US", "ສະຫະລັດ");
     namesMap.put("UY", "ອູຣຸກວຍ");
-    namesMap.put("UZ", "ອຸສເບກິສຖານ");
+    namesMap.put("UZ", "ອຸສເບກິສະຖານ");
     namesMap.put("VA", "ນະຄອນ ວາຕິກັນ");
-    namesMap.put("VC", "ເຊນ ວິນເຊນ ແລະ ເດິ ເກຣເນດິນ");
+    namesMap.put("VC", "ເຊນ ວິນເຊນ ແລະ ເກຣເນດິນ");
     namesMap.put("VE", "ເວເນຊູເອລາ");
-    namesMap.put("VG", "ໝູ່ເກາະ ບຣິທິຊ ເວີຈິນ");
-    namesMap.put("VI", "ໝູ່ເກາະ ຢູເອສ ເວີຈິນ");
+    namesMap.put("VG", "ໝູ່ເກາະ ເວີຈິນຂອງອັງກິດ");
+    namesMap.put("VI", "ໝູ່ເກາະ ເວີຈິນ ຂອງສະຫະລັດ");
     namesMap.put("VN", "ຫວຽດນາມ");
     namesMap.put("VU", "ວານົວຕູ");
-    namesMap.put("WF", "ວາລິສ ແລະ ຟຸຕູນາ");
+    namesMap.put("WF", "ວາລລິສ ແລະ ຟູຕູນາ");
     namesMap.put("WS", "ຊາມົວ");
     namesMap.put("XK", "ໂຄໂຊໂວ");
     namesMap.put("YE", "ເຢເມນ");
-    namesMap.put("YT", "ມາຢອດ");
-    namesMap.put("ZA", "ອາຟະລິກາໃຕ້");
+    namesMap.put("YT", "ມາຢັອດ");
+    namesMap.put("ZA", "ອາຟຣິກາໃຕ້");
     namesMap.put("ZM", "ແຊມເບຍ");
     namesMap.put("ZW", "ຊິມບັບເວ");
     namesMap.put("ZZ", "ຂົງເຂດທີ່ບໍ່ຮູ້ຈັກ");
@@ -602,48 +604,47 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "002": "ອາຟຣິກາ",
         "003": "ອາເມລິກາເໜືອ",
         "005": "ອາເມລິກາໃຕ້",
-        "009": "ໂອຊີເນຍ",
+        "009": "ໂອຊີອານີ",
         "011": "ອາຟຣິກາຕາເວັນຕົກ",
         "013": "ອາເມລິກາກາງ",
         "014": "ອາຟຣິກາຕາເວັນອອກ",
         "015": "ອາຟຣິກາເໜືອ",
         "017": "ອາຟຣິກາກາງ",
-        "018": "ອາຟຣິກາໃຕ້",
+        "018": "ອາຟຣິກາຕອນໃຕ້",
         "019": "ອາເມຣິກາ",
-        "021": "ອາເມລິກາເໜືອສຸດ",
+        "021": "ພາກເໜືອອາເມລີກາ",
         "029": "ຄາຣິບບຽນ",
-        "030": "ເອເຊຍຕາເວັນອອກ",
-        "034": "ເອເຊຍໃຕ້",
-        "035": "ເອເຊຍຕາເວັນອອກສ່ຽງໃຕ້",
+        "030": "ອາຊີຕາເວັນອອກ",
+        "034": "ອາຊີໄຕ້",
+        "035": "ອາຊີຕາເວັນອອກສ່ຽງໄຕ້",
         "039": "ຢູໂຣບໃຕ້",
-        "053": "ອອສເຕຣເລເຊຍ",
+        "053": "ໂອດສະຕາລີ",
         "054": "ເມລານີເຊຍ",
         "057": "ເຂດໄມໂຄຣເນຊຽນ",
         "061": "ໂພລີນີເຊຍ",
-        "142": "ເອເຊຍ",
-        "143": "ເອເຊຍກາງ",
-        "145": "ເອເຊຍຕາເວັນຕົກ",
+        "142": "ອາຊີ",
+        "143": "ອາຊີກາງ",
+        "145": "ອາຊີຕາເວັນຕົກ",
         "150": "ຢູໂຣບ",
         "151": "ຢູໂຣບຕາເວັນອອກ",
         "154": "ຢູໂຣບເໜືອ",
         "155": "ຢູໂຣບຕາເວັນຕົກ",
-        "419": "ອາເມລິກາ ລາຕິນ",
+        "419": "ລາຕິນ ອາເມລິກາ",
         "AC": "ເກາະອາເຊນຊັນ",
         "AD": "ອັນດໍຣາ",
-        "AE": "ສະຫະລັດອາຫຣັບເອມິເຣດ",
-        "AF": "ອາຟການິສຖານ",
-        "AG": "ອາທິກົວ ບາບູດາ",
+        "AE": "ສະຫະລັດອາຣັບເອມິເຣດ",
+        "AF": "ອາຟການິດສະຖານ",
+        "AG": "ແອນທິກົວ ແລະ ບາບູດາ",
         "AI": "ແອນກຸຍລາ",
         "AL": "ແອວເບເນຍ",
-        "AM": "ອາມີເນຍ",
-        "AN": "ເນເທີແລນແອນເທິນ",
-        "AO": "ອັນໂກລາ",
+        "AM": "ອາເມເນຍ",
+        "AO": "ແອງໂກລາ",
         "AQ": "ແອນຕາດຕິກາ",
         "AR": "ອາເຈນທິນາ",
         "AS": "ອາເມຣິກາ ຊາມົວ",
         "AT": "ອອສເທຣຍ",
         "AU": "ອອສເຕຣເລຍ",
-        "AW": "ອໍຣູບາ",
+        "AW": "ອາຣູບາ",
         "AX": "ຫມູ່ເກາະໂອລັນ",
         "AZ": "ອາເຊີໄບຈານ",
         "BA": "ບອດສະເນຍ ແລະ ແຮສໂກວີນາ",
@@ -674,7 +675,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "CG": "ຄອງໂກ - ບຣາຊາວິວ",
         "CH": "ສະວິດເຊີແລນ",
         "CI": "ໂຄຕີ ວົວ",
-        "CK": "ຫມູ່ເກາະຄູກ",
+        "CK": "ໝູ່ເກາະຄຸກ",
         "CL": "ຊິລີ",
         "CM": "ຄາເມຣູນ",
         "CN": "ຈີນ",
@@ -686,7 +687,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "CW": "ຄູຣາຊາວ",
         "CX": "ເກາະຄຣິສມາດ",
         "CY": "ໄຊປຣັສ",
-        "CZ": "ສາທາລະນະລັດເຊກ",
+        "CZ": "ເຊັກເຊຍ",
         "DE": "ເຢຍລະມັນ",
         "DG": "ດິເອໂກ ກາເຊຍ",
         "DJ": "ຈິບູຕິ",
@@ -695,7 +696,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "DO": "ສາທາລະນະລັດ ໂດມິນິກັນ",
         "DZ": "ອັລຈິເຣຍ",
         "EA": "ເຊວຕາ ແລະເມລິນລາ",
-        "EC": "ເອກກວາດໍ",
+        "EC": "ເອກວາດໍ",
         "EE": "ເອສໂຕເນຍ",
         "EG": "ອີຢິບ",
         "EH": "ຊາຮາຣາຕາເວັນຕົກ",
@@ -703,6 +704,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "ES": "ສະເປນ",
         "ET": "ອີທິໂອເປຍ",
         "EU": "ສະຫະພາບຢູໂຣບ",
+        "EZ": "ເຂດຢູໂຣບ",
         "FI": "ຟິນແລນ",
         "FJ": "ຟິຈິ",
         "FK": "ຫມູ່ເກາະຟອກແລນ",
@@ -713,26 +715,26 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "GB": "ສະຫະລາດຊະອະນາຈັກ",
         "GD": "ເກຣເນດາ",
         "GE": "ຈໍເຈຍ",
-        "GF": "ເຟຣນຊ ກຸຍອານາ",
+        "GF": "ເຟຣນຊ໌ ກຸຍອານາ",
         "GG": "ເກີນຊີ",
-        "GH": "ການ່າ",
+        "GH": "ການາ",
         "GI": "ຈິບບຣອນທາ",
         "GL": "ກຣີນແລນ",
         "GM": "ສາທາລະນະລັດແກມເບຍ",
         "GN": "ກິນີ",
         "GP": "ກົວດາລູບ",
-        "GQ": "ອີຄົວໂຕຣຽວ ກີນີ",
+        "GQ": "ເອຄົວໂທຣຽວ ກີນີ",
         "GR": "ກຣີຊ",
-        "GS": "ເກາະຈອດເຈຍໃຕ້ແລະຫມູ່ເກາະແຊນວິດຕອນໃຕ້",
+        "GS": "ໝູ່ເກາະ ຈໍເຈຍຕອນໃຕ້ ແລະ ແຊນວິດຕອນໃຕ້",
         "GT": "ກົວເທມາລາ",
-        "GU": "ກວມ",
-        "GW": "ກິນີ-ບິສໂຊ",
+        "GU": "ກວາມ",
+        "GW": "ກິນີ-ບິສເຊົາ",
         "GY": "ກາຍຢານາ",
         "HK": "ຮົງກົງ ເຂດປົກຄອງພິເສດ ຈີນ",
-        "HM": "ເກາະເຮີດແລະຫມູ່ເກາະແມັກໂດນອລ",
+        "HM": "ໝູ່ເກາະເຮີດ & ແມັກໂດນອລ",
         "HN": "ຮອນດູຣັສ",
-        "HR": "ໂຄເອເຊຍ",
-        "HT": "ເຮທີ",
+        "HR": "ໂຄຣເອເທຍ",
+        "HT": "ໄຮຕິ",
         "HU": "ຮັງກາຣີ",
         "IC": "ໝູ່ເກາະຄານາຣີ",
         "ID": "ອິນໂດເນເຊຍ",
@@ -740,9 +742,9 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "IL": "ອິສຣາເອວ",
         "IM": "ເອວ ອອບ ແມນ",
         "IN": "ອິນເດຍ",
-        "IO": "ເຂດແດນບຣິທິສອິນດຽນໂອຊຽນ",
+        "IO": "ເຂດແດນອັງກິດໃນມະຫາສະມຸດອິນເດຍ",
         "IQ": "ອີຣັກ",
-        "IR": "ອີຣ່ານ",
+        "IR": "ອີຣານ",
         "IS": "ໄອສແລນ",
         "IT": "ອິຕາລີ",
         "JE": "ເຈີຊີ",
@@ -750,15 +752,15 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "JO": "ຈໍແດນ",
         "JP": "ຍີ່ປຸ່ນ",
         "KE": "ເຄນຢາ",
-        "KG": "ຄີກິສຖານ",
+        "KG": "ຄຽກກິດສະຖານ",
         "KH": "ກຳປູເຈຍ",
-        "KI": "ຄຣິບາຕິ",
+        "KI": "ຄິຣິບາທິ",
         "KM": "ໂຄໂມໂຣສ",
         "KN": "ເຊນ ຄິດ ແລະ ເນວິສ",
         "KP": "ເກົາຫລີເໜືອ",
         "KR": "ເກົາຫລີໃຕ້",
-        "KW": "ຄູເວດ",
-        "KY": "ເຄແມນ ໄອສແລນ",
+        "KW": "ກູເວດ",
+        "KY": "ໝູ່ເກາະ ເຄແມນ",
         "KZ": "ຄາຊັກສະຖານ",
         "LA": "ລາວ",
         "LB": "ເລບານອນ",
@@ -776,13 +778,13 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "MD": "ໂມນໂດວາ",
         "ME": "ມອນເຕເນໂກຣ",
         "MF": "ເຊນ ມາທິນ",
-        "MG": "ມາດາກາສກາ",
+        "MG": "ມາດາກາສະກາ",
         "MH": "ຫມູ່ເກາະມາແຊວ",
         "MK": "ແມຊິໂດເນຍ",
-        "ML": "ມາລິ",
-        "MM": "ມຽນມາ pເບີມາ)",
+        "ML": "ມາລີ",
+        "MM": "ມຽນມາ (ເບີມາ)",
         "MN": "ມອງໂກເລຍ",
-        "MO": "ມາເກົ້າ ເຂດປົກຄອງພິເສດ ຈີນ",
+        "MO": "ມາກາວ ເຂດປົກຄອງພິເສດ ຈີນ",
         "MP": "ຫມູ່ເກາະມາແຊວຕອນເຫນືອ",
         "MQ": "ມາຕິນີກ",
         "MR": "ມົວຣິເທເນຍ",
@@ -808,18 +810,18 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "NZ": "ນິວຊີແລນ",
         "OM": "ໂອມານ",
         "PA": "ພານາມາ",
-        "PE": "ເພີຣູ",
-        "PF": "ເຟຣນຊ ໂພລີເນເຂຍ",
+        "PE": "ເປຣູ",
+        "PF": "ເຟຣນຊ໌ ໂພລິນີເຊຍ",
         "PG": "ປາປົວນິວກີນີ",
         "PH": "ຟິລິບປິນ",
-        "PK": "ປາກິສຖານ",
+        "PK": "ປາກິດສະຖານ",
         "PL": "ໂປແລນ",
         "PM": "ເຊນ ປີແອ ມິເກວລອນ",
         "PN": "ໝູ່ເກາະພິດແຄນ",
         "PR": "ເພືອໂຕ ຣິໂກ",
         "PS": "ດິນແດນ ປາເລສຕິນຽນ",
         "PT": "ພອລທູໂກ",
-        "PW": "ປາເລົາ",
+        "PW": "ປາລາວ",
         "PY": "ພາຣາກວຍ",
         "QA": "ກາຕາ",
         "QO": "ເຂດຫ່າງໄກໂອຊີເນຍ",
@@ -827,7 +829,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "RO": "ໂຣແມເນຍ",
         "RS": "ເຊີເບຍ",
         "RU": "ຣັດເຊຍ",
-        "RW": "ວັນດາ",
+        "RW": "ຣວັນດາ",
         "SA": "ຊາອຸດິ ອາຣາເບຍ",
         "SB": "ຫມູ່ເກາະໂຊໂລມອນ",
         "SC": "ເຊເຊວເລສ",
@@ -846,19 +848,19 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "SS": "ຊູດານໃຕ້",
         "ST": "ເຊົາທູເມ ແລະ ພຣິນຊິບ",
         "SV": "ເອວ ຊໍວາດໍ",
-        "SX": "ຊິນ ມາທິນ",
+        "SX": "ຊິນ ມາເທັນ",
         "SY": "ຊີເຣຍ",
         "SZ": "ສະວາຊິແລນ",
         "TA": "ທຣິສຕັນ ດາ ກັນຮາ",
         "TC": "ໝູ່ເກາະ ເທີກ ແລະ ໄຄໂຄສ",
-        "TD": "ແຊດ",
-        "TF": "ອານາເຂດທາງໃຕ້ຂອງຝຣັ່ງ",
+        "TD": "ຊາດ",
+        "TF": "ເຂດແດນທາງໃຕ້ຂອຝຮັ່ງ",
         "TG": "ໂຕໂກ",
         "TH": "ໄທ",
-        "TJ": "ທາຈິກິສຖານ",
+        "TJ": "ທາຈິກິດສະຖານ",
         "TK": "ໂຕເກເລົາ",
         "TL": "ທິມໍ-ເລສເຕ",
-        "TM": "ເທີກເມນິສຖານ",
+        "TM": "ເທີກເມນິສະຖານ",
         "TN": "ຕູນິເຊຍ",
         "TO": "ທອງກາ",
         "TR": "ເທີຄີ",
@@ -868,23 +870,24 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "TZ": "ທານຊາເນຍ",
         "UA": "ຢູເຄຣນ",
         "UG": "ອູການດາ",
-        "UM": "ຫມູ່ເກາະຮອບນອກຂອງສະຫະລັດ",
+        "UM": "ໝູ່ເກາະຮອບນອກຂອງສະຫະລັດຯ",
+        "UN": "ສະຫະປະຊາຊາດ",
         "US": "ສະຫະລັດ",
         "UY": "ອູຣຸກວຍ",
-        "UZ": "ອຸສເບກິສຖານ",
+        "UZ": "ອຸສເບກິສະຖານ",
         "VA": "ນະຄອນ ວາຕິກັນ",
-        "VC": "ເຊນ ວິນເຊນ ແລະ ເດິ ເກຣເນດິນ",
+        "VC": "ເຊນ ວິນເຊນ ແລະ ເກຣເນດິນ",
         "VE": "ເວເນຊູເອລາ",
-        "VG": "ໝູ່ເກາະ ບຣິທິຊ ເວີຈິນ",
-        "VI": "ໝູ່ເກາະ ຢູເອສ ເວີຈິນ",
+        "VG": "ໝູ່ເກາະ ເວີຈິນຂອງອັງກິດ",
+        "VI": "ໝູ່ເກາະ ເວີຈິນ ຂອງສະຫະລັດ",
         "VN": "ຫວຽດນາມ",
         "VU": "ວານົວຕູ",
-        "WF": "ວາລິສ ແລະ ຟຸຕູນາ",
+        "WF": "ວາລລິສ ແລະ ຟູຕູນາ",
         "WS": "ຊາມົວ",
         "XK": "ໂຄໂຊໂວ",
         "YE": "ເຢເມນ",
-        "YT": "ມາຢອດ",
-        "ZA": "ອາຟະລິກາໃຕ້",
+        "YT": "ມາຢັອດ",
+        "ZA": "ອາຟຣິກາໃຕ້",
         "ZM": "ແຊມເບຍ",
         "ZW": "ຊິມບັບເວ",
         "ZZ": "ຂົງເຂດທີ່ບໍ່ຮູ້ຈັກ"

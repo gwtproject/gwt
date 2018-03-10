@@ -22,7 +22,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 /**
  * Localized names for the "es_MX" locale.
  */
-public class LocalizedNamesImpl_es_MX extends LocalizedNamesImpl_es {
+public class LocalizedNamesImpl_es_MX extends LocalizedNamesImpl_es_419 {
 
   @Override
   public String[] loadSortedRegionCodes() {
@@ -35,7 +35,6 @@ public class LocalizedNamesImpl_es_MX extends LocalizedNamesImpl_es {
         "AI",
         "AQ",
         "AG",
-        "AN",
         "SA",
         "DZ",
         "AR",
@@ -67,19 +66,20 @@ public class LocalizedNamesImpl_es_MX extends LocalizedNamesImpl_es {
         "CM",
         "CA",
         "BQ",
+        "QA",
         "EA",
         "TD",
+        "CZ",
         "CL",
         "CN",
         "CY",
         "VA",
         "CO",
         "KM",
-        "CG",
         "KP",
         "KR",
-        "CI",
         "CR",
+        "CI",
         "HR",
         "CU",
         "CW",
@@ -144,11 +144,11 @@ public class LocalizedNamesImpl_es_MX extends LocalizedNamesImpl_es {
         "FK",
         "MP",
         "MH",
+        "UM",
         "PN",
         "SB",
         "TC",
         "QO",
-        "UM",
         "VG",
         "VI",
         "IL",
@@ -215,12 +215,11 @@ public class LocalizedNamesImpl_es_MX extends LocalizedNamesImpl_es {
         "PL",
         "PT",
         "PR",
-        "QA",
         "HK",
         "MO",
         "GB",
         "CF",
-        "CZ",
+        "CG",
         "CD",
         "DO",
         "RE",
@@ -275,6 +274,7 @@ public class LocalizedNamesImpl_es_MX extends LocalizedNamesImpl_es {
         "TV",
         "UA",
         "UG",
+        "UN",
         "EU",
         "UY",
         "UZ",
@@ -286,49 +286,34 @@ public class LocalizedNamesImpl_es_MX extends LocalizedNamesImpl_es {
         "DJ",
         "ZM",
         "ZW",
+        "EZ",
     };
   }
 
   @Override
   protected void loadNameMapJava() {
     super.loadNameMapJava();
-    namesMap.put("005", "Sudamérica");
     namesMap.put("011", "África Occidental");
     namesMap.put("014", "África Oriental");
-    namesMap.put("015", "África del Norte");
-    namesMap.put("017", "África Central");
-    namesMap.put("018", "África del Sur");
-    namesMap.put("019", "Américas");
-    namesMap.put("021", "América Septentrional");
+    namesMap.put("015", "África septentrional");
+    namesMap.put("018", "África meridional");
     namesMap.put("030", "Asia Oriental");
-    namesMap.put("034", "Asia del Sur");
+    namesMap.put("034", "Asia meridional");
     namesMap.put("035", "Sudeste Asiático");
-    namesMap.put("039", "Europa del Sur");
-    namesMap.put("143", "Asia Central");
+    namesMap.put("039", "Europa meridional");
+    namesMap.put("057", "Región de Micronesia");
     namesMap.put("145", "Asia Occidental");
     namesMap.put("151", "Europa Oriental");
-    namesMap.put("154", "Europa del Norte");
+    namesMap.put("154", "Europa septentrional");
     namesMap.put("155", "Europa Occidental");
-    namesMap.put("AC", "Isla Ascensión");
-    namesMap.put("BA", "Bosnia-Herzegovina");
-    namesMap.put("BD", "Bangladesh");
-    namesMap.put("CC", "Islas Cocos (Keeling)");
-    namesMap.put("CG", "Congo Brazzaville");
-    namesMap.put("CX", "Isla de Navidad");
+    namesMap.put("BA", "Bosnia y Herzegovina");
+    namesMap.put("CI", "Côte d’Ivoire");
+    namesMap.put("EZ", "zona euro");
     namesMap.put("GG", "Guernsey");
-    namesMap.put("GS", "Islas Georgias del Sur y Sandwich del Sur");
-    namesMap.put("GW", "Guinea-Bissau");
-    namesMap.put("HK", "Región Administrativa Especial de Hong Kong de la República Popular China");
-    namesMap.put("IC", "Islas Canarias");
-    namesMap.put("IQ", "Irak");
-    namesMap.put("MO", "Región Administrativa Especial de Macao de la República Popular China");
-    namesMap.put("NU", "Niue");
-    namesMap.put("PW", "Palaos");
-    namesMap.put("QA", "Qatar");
-    namesMap.put("QO", "Islas Ultramarinas");
     namesMap.put("TA", "Tristán de Acuña");
-    namesMap.put("UM", "Islas UltramarinasMenores de Estados Unidos");
-    namesMap.put("VI", "Islas Vírgenes de los Estados Unidos");
+    namesMap.put("TL", "Timor-Leste");
+    namesMap.put("UM", "Islas menores alejadas de EE. UU.");
+    namesMap.put("VI", "Islas Vírgenes de EE. UU.");
   }
 
   @Override
@@ -338,43 +323,27 @@ public class LocalizedNamesImpl_es_MX extends LocalizedNamesImpl_es {
 
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
-        "005": "Sudamérica",
         "011": "África Occidental",
         "014": "África Oriental",
-        "015": "África del Norte",
-        "017": "África Central",
-        "018": "África del Sur",
-        "019": "Américas",
-        "021": "América Septentrional",
+        "015": "África septentrional",
+        "018": "África meridional",
         "030": "Asia Oriental",
-        "034": "Asia del Sur",
+        "034": "Asia meridional",
         "035": "Sudeste Asiático",
-        "039": "Europa del Sur",
-        "143": "Asia Central",
+        "039": "Europa meridional",
+        "057": "Región de Micronesia",
         "145": "Asia Occidental",
         "151": "Europa Oriental",
-        "154": "Europa del Norte",
+        "154": "Europa septentrional",
         "155": "Europa Occidental",
-        "AC": "Isla Ascensión",
-        "BA": "Bosnia-Herzegovina",
-        "BD": "Bangladesh",
-        "CC": "Islas Cocos (Keeling)",
-        "CG": "Congo Brazzaville",
-        "CX": "Isla de Navidad",
+        "BA": "Bosnia y Herzegovina",
+        "CI": "Côte d’Ivoire",
+        "EZ": "zona euro",
         "GG": "Guernsey",
-        "GS": "Islas Georgias del Sur y Sandwich del Sur",
-        "GW": "Guinea-Bissau",
-        "HK": "Región Administrativa Especial de Hong Kong de la República Popular China",
-        "IC": "Islas Canarias",
-        "IQ": "Irak",
-        "MO": "Región Administrativa Especial de Macao de la República Popular China",
-        "NU": "Niue",
-        "PW": "Palaos",
-        "QA": "Qatar",
-        "QO": "Islas Ultramarinas",
         "TA": "Tristán de Acuña",
-        "UM": "Islas UltramarinasMenores de Estados Unidos",
-        "VI": "Islas Vírgenes de los Estados Unidos"
+        "TL": "Timor-Leste",
+        "UM": "Islas menores alejadas de EE. UU.",
+        "VI": "Islas Vírgenes de EE. UU."
     };
   }-*/;
 }

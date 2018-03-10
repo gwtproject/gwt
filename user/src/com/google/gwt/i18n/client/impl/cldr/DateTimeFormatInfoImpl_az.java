@@ -45,7 +45,7 @@ public class DateTimeFormatInfoImpl_az extends DateTimeFormatInfoImpl {
   public String[] erasFull() {
     return new String[] {
         "eramızdan əvvəl",
-        "bizim eramızın"
+        "yeni era"
     };
   }
 
@@ -53,7 +53,7 @@ public class DateTimeFormatInfoImpl_az extends DateTimeFormatInfoImpl {
   public String[] erasShort() {
     return new String[] {
         "e.ə.",
-        "b.e."
+        "y.e."
     };
   }
 
@@ -238,7 +238,7 @@ public class DateTimeFormatInfoImpl_az extends DateTimeFormatInfoImpl {
         "Ç.A.",
         "Ç.",
         "C.A.",
-        "C",
+        "C.",
         "Ş."
     };
   }

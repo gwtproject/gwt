@@ -22,16 +22,6 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_de_AT extends DateTimeFormatInfoImpl_de {
 
   @Override
-  public String dateFormatFull() {
-    return "EEEE, dd. MMMM y";
-  }
-
-  @Override
-  public String dateFormatLong() {
-    return "dd. MMMM y";
-  }
-
-  @Override
   public String[] monthsFull() {
     return new String[] {
         "Jänner",

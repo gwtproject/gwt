@@ -41,6 +41,7 @@ public class LocalizedNamesImpl_bez extends LocalizedNamesImpl {
         "EA",
         "EH",
         "EU",
+        "EZ",
         "FO",
         "GG",
         "GS",
@@ -58,7 +59,6 @@ public class LocalizedNamesImpl_bez extends LocalizedNamesImpl {
         "AO",
         "AI",
         "AG",
-        "AN",
         "AT",
         "AU",
         "IE",
@@ -285,6 +285,7 @@ public class LocalizedNamesImpl_bez extends LocalizedNamesImpl {
         "IO",
         "PS",
         "UM",
+        "UN",
         "XK",
     };
   }
@@ -299,7 +300,6 @@ public class LocalizedNamesImpl_bez extends LocalizedNamesImpl {
     namesMap.put("AI", "Huanguila");
     namesMap.put("AL", "Hualbania");
     namesMap.put("AM", "Huamenia");
-    namesMap.put("AN", "Huantili dza Huuholanzi");
     namesMap.put("AO", "Huangola");
     namesMap.put("AR", "Huajendina");
     namesMap.put("AS", "Husamoa ya Humalekani");
@@ -533,7 +533,6 @@ public class LocalizedNamesImpl_bez extends LocalizedNamesImpl {
         "AI": "Huanguila",
         "AL": "Hualbania",
         "AM": "Huamenia",
-        "AN": "Huantili dza Huuholanzi",
         "AO": "Huangola",
         "AR": "Huajendina",
         "AS": "Husamoa ya Humalekani",

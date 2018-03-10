@@ -30,15 +30,35 @@ public class DateTimeFormatInfoImpl_bs_Cyrl extends DateTimeFormatInfoImpl_bs {
   }
 
   @Override
-  public String dateFormatShort() {
-    return "d.M.yy.";
+  public String dateFormatFull() {
+    return "EEEE, dd. MMMM y.";
+  }
+
+  @Override
+  public String dateFormatLong() {
+    return "dd. MMMM y.";
+  }
+
+  @Override
+  public String dateFormatMedium() {
+    return "dd.MM.y.";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "Пре нове ере",
-        "Нове ере"
+        "прије нове ере",
+        "нове ере"
     };
   }
 
@@ -51,6 +71,66 @@ public class DateTimeFormatInfoImpl_bs_Cyrl extends DateTimeFormatInfoImpl_bs {
   }
 
   @Override
+  public String formatDay() {
+    return "d";
+  }
+
+  @Override
+  public String formatMonthAbbrevDay() {
+    return "dd. MMM";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "MMMM d";
+  }
+
+  @Override
+  public String formatMonthFullWeekdayDay() {
+    return "EEEE, dd. MMMM";
+  }
+
+  @Override
+  public String formatMonthNumDay() {
+    return "dd.MM.";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "dd. MMM y.";
+  }
+
+  @Override
+  public String formatYearMonthFull() {
+    return "y MMMM";
+  }
+
+  @Override
+  public String formatYearMonthNum() {
+    return "MM.y.";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "dd.MM.y.";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "EEE, dd. MMM y.";
+  }
+
+  @Override
+  public String formatYearQuarterFull() {
+    return "y QQQQ";
+  }
+
+  @Override
+  public String formatYearQuarterShort() {
+    return "y Q";
+  }
+
+  @Override
   public String[] monthsFull() {
     return new String[] {
         "јануар",
@@ -60,7 +140,7 @@ public class DateTimeFormatInfoImpl_bs_Cyrl extends DateTimeFormatInfoImpl_bs {
         "мај",
         "јуни",
         "јули",
-        "август",
+        "аугуст",
         "септембар",
         "октобар",
         "новембар",
@@ -96,7 +176,7 @@ public class DateTimeFormatInfoImpl_bs_Cyrl extends DateTimeFormatInfoImpl_bs {
         "мај",
         "јун",
         "јул",
-        "авг",
+        "ауг",
         "сеп",
         "окт",
         "нов",
@@ -127,8 +207,8 @@ public class DateTimeFormatInfoImpl_bs_Cyrl extends DateTimeFormatInfoImpl_bs {
   @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "недеља",
-        "понедељак",
+        "недјеља",
+        "понедјељак",
         "уторак",
         "сриједа",
         "четвртак",

@@ -50,7 +50,6 @@ public class LocalizedNamesImpl_mer extends LocalizedNamesImpl {
         "AO",
         "AI",
         "AG",
-        "AN",
         "AQ",
         "AM",
         "AW",
@@ -97,6 +96,7 @@ public class LocalizedNamesImpl_mer extends LocalizedNamesImpl {
         "ER",
         "EE",
         "EU",
+        "EZ",
         "AE",
         "FJ",
         "PH",
@@ -275,6 +275,7 @@ public class LocalizedNamesImpl_mer extends LocalizedNamesImpl {
         "UG",
         "UA",
         "UM",
+        "UN",
         "UY",
         "UZ",
         "VU",
@@ -297,7 +298,6 @@ public class LocalizedNamesImpl_mer extends LocalizedNamesImpl {
     namesMap.put("AF", "Afuganistani");
     namesMap.put("AG", "Antigua na Barbuda");
     namesMap.put("AL", "Alubania");
-    namesMap.put("AN", "Antili cia Holandi");
     namesMap.put("AR", "Ajentina");
     namesMap.put("AS", "Samoa ya Amerika");
     namesMap.put("AT", "Austiria");
@@ -390,7 +390,6 @@ public class LocalizedNamesImpl_mer extends LocalizedNamesImpl {
     namesMap.put("MC", "Monako");
     namesMap.put("MG", "Madagasika");
     namesMap.put("MH", "Aĩrandi cia Marshal");
-    namesMap.put("MK", "Macedonia");
     namesMap.put("MM", "Myanima");
     namesMap.put("MP", "Aĩrandi cia Mariana ya nothi");
     namesMap.put("MQ", "Martiniki");
@@ -474,7 +473,6 @@ public class LocalizedNamesImpl_mer extends LocalizedNamesImpl {
         "AF": "Afuganistani",
         "AG": "Antigua na Barbuda",
         "AL": "Alubania",
-        "AN": "Antili cia Holandi",
         "AR": "Ajentina",
         "AS": "Samoa ya Amerika",
         "AT": "Austiria",
@@ -567,7 +565,6 @@ public class LocalizedNamesImpl_mer extends LocalizedNamesImpl {
         "MC": "Monako",
         "MG": "Madagasika",
         "MH": "Aĩrandi cia Marshal",
-        "MK": "Macedonia",
         "MM": "Myanima",
         "MP": "Aĩrandi cia Mariana ya nothi",
         "MQ": "Martiniki",

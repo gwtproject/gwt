@@ -46,11 +46,6 @@ public class DateTimeFormatInfoImpl_shi_Latn extends DateTimeFormatInfoImpl_shi 
   }
 
   @Override
-  public int firstDayOfTheWeek() {
-    return 6;
-  }
-
-  @Override
   public String[] monthsFull() {
     return new String[] {
         "innayr",
@@ -148,15 +143,5 @@ public class DateTimeFormatInfoImpl_shi_Latn extends DateTimeFormatInfoImpl_shi 
         "asim",
         "asiḍ"
     };
-  }
-
-  @Override
-  public int weekendEnd() {
-    return 6;
-  }
-
-  @Override
-  public int weekendStart() {
-    return 5;
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Google Inc.
+ * Copyright 2012 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,15 +14,75 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=25
-//  date=$Date: 2013-07-20 19:27:45 +0200 (Sat, 20 Jul 2013) $
-//  number=$Revision: 9061 $
-//  type=MP
 
 /**
  * Implementation of DateTimeFormatInfo for the "en_MP" locale.
  */
 public class DateTimeFormatInfoImpl_en_MP extends DateTimeFormatInfoImpl_en_001 {
+
+  @Override
+  public String dateFormatFull() {
+    return "EEEE, MMMM d, y";
+  }
+
+  @Override
+  public String dateFormatLong() {
+    return "MMMM d, y";
+  }
+
+  @Override
+  public String dateFormatMedium() {
+    return "MMM d, y";
+  }
+
+  @Override
+  public String dateFormatShort() {
+    return "M/d/yy";
+  }
+
+  @Override
+  public String formatMonthAbbrevDay() {
+    return "MMM d";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "MMMM d";
+  }
+
+  @Override
+  public String formatMonthFullWeekdayDay() {
+    return "EEEE, MMMM d";
+  }
+
+  @Override
+  public String formatMonthNumDay() {
+    return "M/d";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "MMM d, y";
+  }
+
+  @Override
+  public String formatYearMonthFullDay() {
+    return "MMMM d, y";
+  }
+
+  @Override
+  public String formatYearMonthNum() {
+    return "M/y";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "M/d/y";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "EEE, MMM d, y";
+  }
 }

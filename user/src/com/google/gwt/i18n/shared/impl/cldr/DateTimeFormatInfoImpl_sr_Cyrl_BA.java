@@ -22,62 +22,43 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_sr_Cyrl_BA extends DateTimeFormatInfoImpl_sr {
 
   @Override
-  public String dateFormatMedium() {
-    return "y-MM-dd";
-  }
-
-  @Override
-  public String dateFormatShort() {
-    return "yy-MM-dd";
-  }
-
-  @Override
-  public String formatHour24Minute() {
-    return "HH:mm";
-  }
-
-  @Override
-  public String formatHour24MinuteSecond() {
-    return "HH:mm:ss";
-  }
-
-  @Override
-  public String[] monthsFull() {
+  public String[] ampms() {
     return new String[] {
-        "јануар",
-        "фебруар",
-        "март",
-        "април",
-        "мај",
-        "јуни",
-        "јули",
-        "август",
-        "септембар",
-        "октобар",
-        "новембар",
-        "децембар"
+        "прије подне",
+        "по подне"
     };
   }
 
   @Override
-  public String timeFormatFull() {
-    return "HH 'часова', mm 'минута', ss 'секунди' zzzz";
+  public String[] erasFull() {
+    return new String[] {
+        "прије нове ере",
+        "нове ере"
+    };
   }
 
   @Override
-  public String timeFormatMedium() {
-    return "HH:mm:ss";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "HH:mm";
+  public String[] monthsShort() {
+    return new String[] {
+        "јан.",
+        "феб.",
+        "март",
+        "апр.",
+        "мај",
+        "јун",
+        "јул",
+        "авг.",
+        "септ.",
+        "окт.",
+        "нов.",
+        "дец."
+    };
   }
 
   @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "недеља",
+        "недјеља",
         "понедељак",
         "уторак",
         "сриједа",
@@ -90,13 +71,13 @@ public class DateTimeFormatInfoImpl_sr_Cyrl_BA extends DateTimeFormatInfoImpl_sr
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "нед",
-        "пон",
-        "уто",
-        "сри",
-        "чет",
-        "пет",
-        "суб"
+        "нед.",
+        "пон.",
+        "ут.",
+        "ср.",
+        "чет.",
+        "пет.",
+        "суб."
     };
   }
 }

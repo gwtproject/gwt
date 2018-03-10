@@ -22,33 +22,8 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_ar_MA extends DateTimeFormatInfoImpl_ar_001 {
 
   @Override
-  public String dateFormatMedium() {
-    return "y/MM/dd";
-  }
-
-  @Override
-  public String dateFormatShort() {
-    return "y/M/d";
-  }
-
-  @Override
   public int firstDayOfTheWeek() {
     return 6;
-  }
-
-  @Override
-  public String formatMonthNumDay() {
-    return "M/d";
-  }
-
-  @Override
-  public String formatYearMonthNum() {
-    return "y/M";
-  }
-
-  @Override
-  public String formatYearMonthNumDay() {
-    return "y/M/d";
   }
 
   @Override
@@ -103,6 +78,26 @@ public class DateTimeFormatInfoImpl_ar_MA extends DateTimeFormatInfoImpl_ar_001 
         "نونبر",
         "دجنبر"
     };
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "HH:mm:ss zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "HH:mm:ss z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "HH:mm:ss";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "HH:mm";
   }
 
   @Override

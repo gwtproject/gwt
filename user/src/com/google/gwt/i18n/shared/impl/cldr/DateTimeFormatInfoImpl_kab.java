@@ -50,6 +50,26 @@ public class DateTimeFormatInfoImpl_kab extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " 'af' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " 'af' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
   public String[] erasFull() {
     return new String[] {
         "send talalit n Ɛisa",
@@ -169,7 +189,43 @@ public class DateTimeFormatInfoImpl_kab extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] monthsFullStandalone() {
+    return new String[] {
+        "Yennayer",
+        "Fuṛar",
+        "Meɣres",
+        "Yebrir",
+        "Mayyu",
+        "Yunyu",
+        "Yulyu",
+        "Ɣuct",
+        "Ctembeṛ",
+        "Tubeṛ",
+        "Wambeṛ",
+        "Dujembeṛ"
+    };
+  }
+
+  @Override
   public String[] monthsNarrow() {
+    return new String[] {
+        "Y",
+        "F",
+        "Ɣ",
+        "B",
+        "M",
+        "N",
+        "L",
+        "C",
+        "T",
+        "R",
+        "W",
+        "D"
+    };
+  }
+
+  @Override
+  public String[] monthsNarrowStandalone() {
     return new String[] {
         "Y",
         "F",
@@ -205,6 +261,24 @@ public class DateTimeFormatInfoImpl_kab extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] monthsShortStandalone() {
+    return new String[] {
+        "Yen",
+        "Fur",
+        "Meɣ",
+        "Yeb",
+        "May",
+        "Yun",
+        "Yul",
+        "Ɣuc",
+        "Cte",
+        "Tub",
+        "Wam",
+        "Duj"
+    };
+  }
+
+  @Override
   public String[] quartersFull() {
     return new String[] {
         "akraḍaggur amenzu",
@@ -225,6 +299,26 @@ public class DateTimeFormatInfoImpl_kab extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String timeFormatFull() {
+    return "h:mm:ss a zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "h:mm:ss a z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "h:mm:ss a";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "h:mm a";
+  }
+
+  @Override
   public String[] weekdaysFull() {
     return new String[] {
         "Yanass",
@@ -238,7 +332,33 @@ public class DateTimeFormatInfoImpl_kab extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] weekdaysFullStandalone() {
+    return new String[] {
+        "Acer",
+        "Arim",
+        "Aram",
+        "Ahad",
+        "Amhad",
+        "Sem",
+        "Sed"
+    };
+  }
+
+  @Override
   public String[] weekdaysNarrow() {
+    return new String[] {
+        "C",
+        "R",
+        "A",
+        "H",
+        "M",
+        "S",
+        "D"
+    };
+  }
+
+  @Override
+  public String[] weekdaysNarrowStandalone() {
     return new String[] {
         "Y",
         "S",
@@ -264,12 +384,25 @@ public class DateTimeFormatInfoImpl_kab extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] weekdaysShortStandalone() {
+    return new String[] {
+        "Ace",
+        "Ari",
+        "Ara",
+        "Aha",
+        "Amh",
+        "Sem",
+        "Sed"
+    };
+  }
+
+  @Override
   public int weekendEnd() {
-    return 5;
+    return 6;
   }
 
   @Override
   public int weekendStart() {
-    return 4;
+    return 5;
   }
 }

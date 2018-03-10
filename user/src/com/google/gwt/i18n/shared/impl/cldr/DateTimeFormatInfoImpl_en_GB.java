@@ -22,42 +22,15 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_en_GB extends DateTimeFormatInfoImpl_en_150 {
 
   @Override
-  public String dateFormatFull() {
-    return "EEEE, d MMMM y";
+  public String[] ampms() {
+    return new String[] {
+        "am",
+        "pm"
+    };
   }
 
   @Override
-  public String dateFormatLong() {
-    return "d MMMM y";
-  }
-
-  @Override
-  public String dateFormatMedium() {
-    return "d MMM y";
-  }
-
-  @Override
-  public String dateFormatShort() {
-    return "dd/MM/y";
-  }
-
-  @Override
-  public String formatMonthNumDay() {
-    return "dd/MM";
-  }
-
-  @Override
-  public String formatYearMonthNumDay() {
-    return "dd/MM/y";
-  }
-
-  @Override
-  public String formatYearMonthWeekdayDay() {
-    return "EEE, d MMM y";
-  }
-
-  @Override
-  public String timeFormatFull() {
-    return "HH:mm:ss zzzz";
+  public String formatMonthFullWeekdayDay() {
+    return "EEEE d MMMM";
   }
 }

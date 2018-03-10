@@ -27,18 +27,8 @@ public class DateTimeFormatInfoImpl_zh_Hans_SG extends DateTimeFormatInfoImpl_zh
   }
 
   @Override
-  public String dateTimeFull(String timePattern, String datePattern) {
-    return datePattern + timePattern;
-  }
-
-  @Override
-  public String dateTimeLong(String timePattern, String datePattern) {
-    return datePattern + timePattern;
-  }
-
-  @Override
-  public String formatHour12Minute() {
-    return "ahh:mm";
+  public int firstDayOfTheWeek() {
+    return 0;
   }
 
   @Override
@@ -57,22 +47,7 @@ public class DateTimeFormatInfoImpl_zh_Hans_SG extends DateTimeFormatInfoImpl_zh
   }
 
   @Override
-  public String formatYearMonthNum() {
-    return "y年M月";
-  }
-
-  @Override
   public String formatYearMonthNumDay() {
     return "y年M月d日";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "ahh:mm:ssz";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "ahh:mm";
   }
 }

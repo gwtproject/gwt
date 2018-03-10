@@ -45,7 +45,6 @@ public class LocalizedNamesImpl_nmg extends LocalizedNamesImpl {
         "IL",
         "AX",
         "AZ",
-        "AN",
         "BS",
         "BH",
         "BB",
@@ -80,6 +79,7 @@ public class LocalizedNamesImpl_nmg extends LocalizedNamesImpl {
         "ER",
         "ET",
         "EU",
+        "EZ",
         "FR",
         "FJ",
         "PH",
@@ -271,6 +271,7 @@ public class LocalizedNamesImpl_nmg extends LocalizedNamesImpl {
         "UG",
         "UA",
         "UM",
+        "UN",
         "UY",
         "UZ",
         "VU",
@@ -298,7 +299,6 @@ public class LocalizedNamesImpl_nmg extends LocalizedNamesImpl {
     namesMap.put("AG", "Antíga bá Barbúda");
     namesMap.put("AI", "Anguílla");
     namesMap.put("AM", "Arménia");
-    namesMap.put("AN", "B'Antilles bó Nedɛrland");
     namesMap.put("AR", "Argentína");
     namesMap.put("AS", "Samoa m ́Amɛ́rka");
     namesMap.put("AT", "Ötrish");
@@ -381,6 +381,7 @@ public class LocalizedNamesImpl_nmg extends LocalizedNamesImpl {
     namesMap.put("KY", "Maŋ́ má kumbi");
     namesMap.put("KZ", "Kazakstaŋ");
     namesMap.put("LB", "Libaŋ");
+    namesMap.put("LC", "Saint Lucia");
     namesMap.put("LI", "Lishenstein");
     namesMap.put("LS", "Lesoto");
     namesMap.put("LT", "Lituaniá");
@@ -389,7 +390,6 @@ public class LocalizedNamesImpl_nmg extends LocalizedNamesImpl {
     namesMap.put("MD", "Mɔldavia");
     namesMap.put("MG", "Madagaskar");
     namesMap.put("MH", "Maŋ́ má Marshall");
-    namesMap.put("MK", "Macedonia");
     namesMap.put("MM", "Myanmar");
     namesMap.put("MN", "Mɔngolia");
     namesMap.put("MP", "Maŋ́ Mariá");
@@ -476,7 +476,6 @@ public class LocalizedNamesImpl_nmg extends LocalizedNamesImpl {
         "AG": "Antíga bá Barbúda",
         "AI": "Anguílla",
         "AM": "Arménia",
-        "AN": "B'Antilles bó Nedɛrland",
         "AR": "Argentína",
         "AS": "Samoa m ́Amɛ́rka",
         "AT": "Ötrish",
@@ -559,6 +558,7 @@ public class LocalizedNamesImpl_nmg extends LocalizedNamesImpl {
         "KY": "Maŋ́ má kumbi",
         "KZ": "Kazakstaŋ",
         "LB": "Libaŋ",
+        "LC": "Saint Lucia",
         "LI": "Lishenstein",
         "LS": "Lesoto",
         "LT": "Lituaniá",
@@ -567,7 +567,6 @@ public class LocalizedNamesImpl_nmg extends LocalizedNamesImpl {
         "MD": "Mɔldavia",
         "MG": "Madagaskar",
         "MH": "Maŋ́ má Marshall",
-        "MK": "Macedonia",
         "MM": "Myanmar",
         "MN": "Mɔngolia",
         "MP": "Maŋ́ Mariá",

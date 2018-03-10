@@ -54,8 +54,8 @@ public class DateTimeFormatInfoImpl_pl extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "p.n.e.",
-        "n.e."
+        "przed naszą erą",
+        "naszej ery"
     };
   }
 
@@ -187,6 +187,24 @@ public class DateTimeFormatInfoImpl_pl extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] monthsNarrowStandalone() {
+    return new String[] {
+        "S",
+        "L",
+        "M",
+        "K",
+        "M",
+        "C",
+        "L",
+        "S",
+        "W",
+        "P",
+        "L",
+        "G"
+    };
+  }
+
+  @Override
   public String[] monthsShort() {
     return new String[] {
         "sty",
@@ -217,10 +235,10 @@ public class DateTimeFormatInfoImpl_pl extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "K1",
-        "K2",
-        "K3",
-        "K4"
+        "I kw.",
+        "II kw.",
+        "III kw.",
+        "IV kw."
     };
   }
 
@@ -239,6 +257,19 @@ public class DateTimeFormatInfoImpl_pl extends DateTimeFormatInfoImpl {
 
   @Override
   public String[] weekdaysNarrow() {
+    return new String[] {
+        "n",
+        "p",
+        "w",
+        "ś",
+        "c",
+        "p",
+        "s"
+    };
+  }
+
+  @Override
+  public String[] weekdaysNarrowStandalone() {
     return new String[] {
         "N",
         "P",

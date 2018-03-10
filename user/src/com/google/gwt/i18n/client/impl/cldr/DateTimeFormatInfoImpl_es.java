@@ -41,7 +41,7 @@ public class DateTimeFormatInfoImpl_es extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "d/M/y";
+    return "d MMM y";
   }
 
   @Override
@@ -63,7 +63,7 @@ public class DateTimeFormatInfoImpl_es extends DateTimeFormatInfoImpl {
   public String[] erasFull() {
     return new String[] {
         "antes de Cristo",
-        "anno Dómini"
+        "después de Cristo"
     };
   }
 
@@ -92,7 +92,7 @@ public class DateTimeFormatInfoImpl_es extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthAbbrevDay() {
-    return "d 'de' MMM";
+    return "d MMM";
   }
 
   @Override
@@ -102,7 +102,7 @@ public class DateTimeFormatInfoImpl_es extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE d 'de' MMMM";
+    return "EEEE, d 'de' MMMM";
   }
 
   @Override
@@ -112,12 +112,12 @@ public class DateTimeFormatInfoImpl_es extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrev() {
-    return "MMM 'de' y";
+    return "MMM y";
   }
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "d 'de' MMM 'de' y";
+    return "d MMM y";
   }
 
   @Override
@@ -142,7 +142,7 @@ public class DateTimeFormatInfoImpl_es extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, d 'de' MMMM 'de' y";
+    return "EEE, d MMM y";
   }
 
   @Override
@@ -170,24 +170,6 @@ public class DateTimeFormatInfoImpl_es extends DateTimeFormatInfoImpl {
         "octubre",
         "noviembre",
         "diciembre"
-    };
-  }
-
-  @Override
-  public String[] monthsFullStandalone() {
-    return new String[] {
-        "Enero",
-        "Febrero",
-        "Marzo",
-        "Abril",
-        "Mayo",
-        "Junio",
-        "Julio",
-        "Agosto",
-        "Septiembre",
-        "Octubre",
-        "Noviembre",
-        "Diciembre"
     };
   }
 
@@ -224,24 +206,6 @@ public class DateTimeFormatInfoImpl_es extends DateTimeFormatInfoImpl {
         "oct.",
         "nov.",
         "dic."
-    };
-  }
-
-  @Override
-  public String[] monthsShortStandalone() {
-    return new String[] {
-        "Ene.",
-        "Feb.",
-        "Mar.",
-        "Abr.",
-        "May.",
-        "Jun.",
-        "Jul.",
-        "Ago.",
-        "Sept.",
-        "Oct.",
-        "Nov.",
-        "Dic."
     };
   }
 
@@ -299,19 +263,6 @@ public class DateTimeFormatInfoImpl_es extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] weekdaysFullStandalone() {
-    return new String[] {
-        "Domingo",
-        "Lunes",
-        "Martes",
-        "Miércoles",
-        "Jueves",
-        "Viernes",
-        "Sábado"
-    };
-  }
-
-  @Override
   public String[] weekdaysNarrow() {
     return new String[] {
         "D",
@@ -334,19 +285,6 @@ public class DateTimeFormatInfoImpl_es extends DateTimeFormatInfoImpl {
         "jue.",
         "vie.",
         "sáb."
-    };
-  }
-
-  @Override
-  public String[] weekdaysShortStandalone() {
-    return new String[] {
-        "Dom.",
-        "Lun.",
-        "Mar.",
-        "Mié.",
-        "Jue.",
-        "Vie.",
-        "Sáb."
     };
   }
 }

@@ -72,6 +72,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
         "BG",
         "BF",
         "BI",
+        "CA",
         "DK",
         "DG",
         "DM",
@@ -90,6 +91,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FK",
         "FO",
         "FJ",
@@ -105,9 +107,9 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
         "GH",
         "GI",
         "GW",
+        "GR",
         "GD",
         "GL",
-        "GR",
         "GP",
         "GU",
         "GT",
@@ -128,7 +130,6 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
         "IT",
         "KH",
         "CM",
-        "CA",
         "IC",
         "CV",
         "BQ",
@@ -187,9 +188,8 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
         "MM",
         "NA",
         "NR",
-        "AN",
-        "NL",
         "NP",
+        "NL",
         "NC",
         "NZ",
         "NI",
@@ -246,10 +246,10 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
         "SZ",
         "SE",
         "CH",
-        "TH",
         "TW",
         "TJ",
         "TZ",
+        "TH",
         "TL",
         "CF",
         "TG",
@@ -270,6 +270,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
         "VI",
         "UG",
         "UA",
+        "UN",
         "AE",
         "GB",
         "UY",
@@ -330,7 +331,6 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
     namesMap.put("AI", "Anguilla nutome");
     namesMap.put("AL", "Albania nutome");
     namesMap.put("AM", "Armenia nutome");
-    namesMap.put("AN", "Nedalands Antilis nutome");
     namesMap.put("AO", "Angola nutome");
     namesMap.put("AQ", "Antartica nutome");
     namesMap.put("AR", "Argentina nutome");
@@ -361,7 +361,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
     namesMap.put("BW", "Botswana nutome");
     namesMap.put("BY", "Belarus nutome");
     namesMap.put("BZ", "Belize nutome");
-    namesMap.put("CA", "Kanada nutome");
+    namesMap.put("CA", "Canada nutome");
     namesMap.put("CC", "Kokos (Kiling) fudomekpo nutome");
     namesMap.put("CD", "Kongo Kinshasa nutome");
     namesMap.put("CF", "Titina Afrika repɔblik nutome");
@@ -394,7 +394,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
     namesMap.put("EG", "Egypte nutome");
     namesMap.put("EH", "Ɣetoɖoƒe Sahara nutome");
     namesMap.put("ER", "Eritrea nutome");
-    namesMap.put("ES", "Spania nutome");
+    namesMap.put("ES", "Spain nutome");
     namesMap.put("ET", "Etiopia nutome");
     namesMap.put("EU", "Europa Wɔɖeka nutome");
     namesMap.put("FI", "Finland nutome");
@@ -402,7 +402,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
     namesMap.put("FK", "Falkland ƒudomekpowo nutome");
     namesMap.put("FM", "Mikronesia nutome");
     namesMap.put("FO", "Faroe ƒudomekpowo nutome");
-    namesMap.put("FR", "Frans nutome");
+    namesMap.put("FR", "France nutome");
     namesMap.put("GA", "Gabɔn nutome");
     namesMap.put("GB", "United Kingdom nutome");
     namesMap.put("GD", "Grenada nutome");
@@ -416,7 +416,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
     namesMap.put("GN", "Guini nutome");
     namesMap.put("GP", "Guadelupe nutome");
     namesMap.put("GQ", "Ekuatorial Guini nutome");
-    namesMap.put("GR", "Grisi nutome");
+    namesMap.put("GR", "Greece nutome");
     namesMap.put("GS", "Anyiehe Georgia kple Anyiehe Sandwich ƒudomekpowo nutome");
     namesMap.put("GT", "Guatemala nutome");
     namesMap.put("GU", "Guam nutome");
@@ -485,7 +485,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
     namesMap.put("MU", "mauritiusdukɔ");
     namesMap.put("MV", "maldivesdukɔ");
     namesMap.put("MW", "Malawi nutome");
-    namesMap.put("MX", "Meksico nutome");
+    namesMap.put("MX", "Mexico nutome");
     namesMap.put("MY", "Malaysia nutome");
     namesMap.put("MZ", "Mozambiki nutome");
     namesMap.put("NA", "Namibia nutome");
@@ -494,7 +494,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
     namesMap.put("NF", "Norfolk ƒudomekpo nutome");
     namesMap.put("NG", "Nigeria nutome");
     namesMap.put("NI", "Nicaraguadukɔ");
-    namesMap.put("NL", "Nedalands nutome");
+    namesMap.put("NL", "Netherlands nutome");
     namesMap.put("NO", "Norway nutome");
     namesMap.put("NP", "Nepal nutome");
     namesMap.put("NR", "Nauru nutome");
@@ -548,7 +548,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
     namesMap.put("TD", "Tsad nutome");
     namesMap.put("TF", "Anyiehe Franseme nutome");
     namesMap.put("TG", "Togo nutome");
-    namesMap.put("TH", "Tailand nutome");
+    namesMap.put("TH", "Thailand nutome");
     namesMap.put("TJ", "Tajikistan nutome");
     namesMap.put("TK", "Tokelau nutome");
     namesMap.put("TL", "Timor-Leste nutome");
@@ -577,7 +577,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
     namesMap.put("WS", "Samoa nutome");
     namesMap.put("YE", "Yemen nutome");
     namesMap.put("YT", "Mayotte nutome");
-    namesMap.put("ZA", "Anyiehe Afrika nutome");
+    namesMap.put("ZA", "Anyiehe Africa nutome");
     namesMap.put("ZM", "Zambia nutome");
     namesMap.put("ZW", "Zimbabwe nutome");
     namesMap.put("ZZ", "nutome manya");
@@ -628,7 +628,6 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
         "AI": "Anguilla nutome",
         "AL": "Albania nutome",
         "AM": "Armenia nutome",
-        "AN": "Nedalands Antilis nutome",
         "AO": "Angola nutome",
         "AQ": "Antartica nutome",
         "AR": "Argentina nutome",
@@ -659,7 +658,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
         "BW": "Botswana nutome",
         "BY": "Belarus nutome",
         "BZ": "Belize nutome",
-        "CA": "Kanada nutome",
+        "CA": "Canada nutome",
         "CC": "Kokos (Kiling) fudomekpo nutome",
         "CD": "Kongo Kinshasa nutome",
         "CF": "Titina Afrika repɔblik nutome",
@@ -692,7 +691,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
         "EG": "Egypte nutome",
         "EH": "Ɣetoɖoƒe Sahara nutome",
         "ER": "Eritrea nutome",
-        "ES": "Spania nutome",
+        "ES": "Spain nutome",
         "ET": "Etiopia nutome",
         "EU": "Europa Wɔɖeka nutome",
         "FI": "Finland nutome",
@@ -700,7 +699,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
         "FK": "Falkland ƒudomekpowo nutome",
         "FM": "Mikronesia nutome",
         "FO": "Faroe ƒudomekpowo nutome",
-        "FR": "Frans nutome",
+        "FR": "France nutome",
         "GA": "Gabɔn nutome",
         "GB": "United Kingdom nutome",
         "GD": "Grenada nutome",
@@ -714,7 +713,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
         "GN": "Guini nutome",
         "GP": "Guadelupe nutome",
         "GQ": "Ekuatorial Guini nutome",
-        "GR": "Grisi nutome",
+        "GR": "Greece nutome",
         "GS": "Anyiehe Georgia kple Anyiehe Sandwich ƒudomekpowo nutome",
         "GT": "Guatemala nutome",
         "GU": "Guam nutome",
@@ -783,7 +782,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
         "MU": "mauritiusdukɔ",
         "MV": "maldivesdukɔ",
         "MW": "Malawi nutome",
-        "MX": "Meksico nutome",
+        "MX": "Mexico nutome",
         "MY": "Malaysia nutome",
         "MZ": "Mozambiki nutome",
         "NA": "Namibia nutome",
@@ -792,7 +791,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
         "NF": "Norfolk ƒudomekpo nutome",
         "NG": "Nigeria nutome",
         "NI": "Nicaraguadukɔ",
-        "NL": "Nedalands nutome",
+        "NL": "Netherlands nutome",
         "NO": "Norway nutome",
         "NP": "Nepal nutome",
         "NR": "Nauru nutome",
@@ -846,7 +845,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
         "TD": "Tsad nutome",
         "TF": "Anyiehe Franseme nutome",
         "TG": "Togo nutome",
-        "TH": "Tailand nutome",
+        "TH": "Thailand nutome",
         "TJ": "Tajikistan nutome",
         "TK": "Tokelau nutome",
         "TL": "Timor-Leste nutome",
@@ -875,7 +874,7 @@ public class LocalizedNamesImpl_ee extends LocalizedNamesImpl {
         "WS": "Samoa nutome",
         "YE": "Yemen nutome",
         "YT": "Mayotte nutome",
-        "ZA": "Anyiehe Afrika nutome",
+        "ZA": "Anyiehe Africa nutome",
         "ZM": "Zambia nutome",
         "ZW": "Zimbabwe nutome",
         "ZZ": "nutome manya"

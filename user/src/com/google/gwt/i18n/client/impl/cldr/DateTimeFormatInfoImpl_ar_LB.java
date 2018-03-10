@@ -22,11 +22,6 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_ar_LB extends DateTimeFormatInfoImpl_ar_001 {
 
   @Override
-  public String dateFormatMedium() {
-    return "MMM d, y";
-  }
-
-  @Override
   public String[] monthsFull() {
     return new String[] {
         "كانون الثاني",

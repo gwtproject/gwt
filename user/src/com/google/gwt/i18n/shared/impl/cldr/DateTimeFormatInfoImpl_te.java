@@ -23,17 +23,17 @@ public class DateTimeFormatInfoImpl_te extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatFull() {
-    return "d MMMM y EEEE";
+    return "d, MMMM y, EEEE";
   }
 
   @Override
   public String dateFormatLong() {
-    return "d MMMM y";
+    return "d MMMM, y";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "d MMM y";
+    return "d MMM, y";
   }
 
   @Override
@@ -42,10 +42,20 @@ public class DateTimeFormatInfoImpl_te extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern + "కి";
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern + "కి";
+  }
+
+  @Override
   public String[] erasFull() {
     return new String[] {
-        "ఈసాపూర్వ.",
-        "సన్."
+        "క్రీస్తు పూర్వం",
+        "క్రీస్తు శకం"
     };
   }
 
@@ -74,7 +84,7 @@ public class DateTimeFormatInfoImpl_te extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, d MMMM";
+    return "d MMMM, EEEE";
   }
 
   @Override
@@ -99,7 +109,7 @@ public class DateTimeFormatInfoImpl_te extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFullDay() {
-    return "d MMMM y";
+    return "d MMMM, y";
   }
 
   @Override
@@ -114,7 +124,7 @@ public class DateTimeFormatInfoImpl_te extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, d, MMM y";
+    return "d MMM, y, EEE";
   }
 
   @Override
@@ -133,28 +143,10 @@ public class DateTimeFormatInfoImpl_te extends DateTimeFormatInfoImpl {
         "జనవరి",
         "ఫిబ్రవరి",
         "మార్చి",
-        "ఎప్రిల్",
+        "ఏప్రిల్",
         "మే",
         "జూన్",
         "జులై",
-        "ఆగస్టు",
-        "సెప్టెంబర్",
-        "అక్టోబర్",
-        "నవంబర్",
-        "డిసెంబర్"
-    };
-  }
-
-  @Override
-  public String[] monthsFullStandalone() {
-    return new String[] {
-        "జనవరి",
-        "ఫిబ్రవరి",
-        "మార్చి",
-        "ఎప్రిల్",
-        "మే",
-        "జూన్",
-        "జూలై",
         "ఆగస్టు",
         "సెప్టెంబర్",
         "అక్టోబర్",
@@ -200,30 +192,12 @@ public class DateTimeFormatInfoImpl_te extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] monthsShortStandalone() {
-    return new String[] {
-        "జన",
-        "ఫిబ్ర",
-        "మార్చి",
-        "ఏప్రి",
-        "మే",
-        "జూన్",
-        "జులై",
-        "ఆగస్టు",
-        "సెప్టెం",
-        "అక్టో",
-        "నవం",
-        "డిసెం"
-    };
-  }
-
-  @Override
   public String[] quartersFull() {
     return new String[] {
-        "1వ త్రైమాసం",
-        "2వ త్రైమాసం",
-        "3వ త్రైమాసం",
-        "4వ త్రైమాసం"
+        "1వ త్రైమాసికం",
+        "2వ త్రైమాసికం",
+        "3వ త్రైమాసికం",
+        "4వ త్రైమాసికం"
     };
   }
 

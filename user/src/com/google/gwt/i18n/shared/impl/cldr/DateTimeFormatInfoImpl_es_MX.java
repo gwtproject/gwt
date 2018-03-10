@@ -24,14 +24,9 @@ public class DateTimeFormatInfoImpl_es_MX extends DateTimeFormatInfoImpl_es_419 
   @Override
   public String[] ampms() {
     return new String[] {
-        "a.m.",
-        "p.m."
+        "a. m.",
+        "p. m."
     };
-  }
-
-  @Override
-  public String dateFormatMedium() {
-    return "dd/MM/y";
   }
 
   @Override
@@ -40,176 +35,98 @@ public class DateTimeFormatInfoImpl_es_MX extends DateTimeFormatInfoImpl_es_419 
   }
 
   @Override
-  public String dateTimeFull(String timePattern, String datePattern) {
-    return datePattern + " " + timePattern;
-  }
-
-  @Override
-  public String dateTimeLong(String timePattern, String datePattern) {
-    return datePattern + " " + timePattern;
-  }
-
-  @Override
-  public String[] erasShort() {
-    return new String[] {
-        "a.C.",
-        "d.C."
-    };
-  }
-
-  @Override
   public int firstDayOfTheWeek() {
     return 0;
   }
 
   @Override
-  public String formatHour12Minute() {
-    return "hh:mm a";
-  }
-
-  @Override
-  public String formatHour12MinuteSecond() {
-    return "hh:mm:ss a";
-  }
-
-  @Override
   public String formatHour24Minute() {
-    return "HH:mm";
+    return "H:mm";
   }
 
   @Override
   public String formatHour24MinuteSecond() {
-    return "HH:mm:ss";
+    return "H:mm:ss";
   }
 
   @Override
-  public String[] monthsFullStandalone() {
-    return new String[] {
-        "enero",
-        "febrero",
-        "marzo",
-        "abril",
-        "mayo",
-        "junio",
-        "julio",
-        "agosto",
-        "septiembre",
-        "octubre",
-        "noviembre",
-        "diciembre"
-    };
+  public String formatYearMonthWeekdayDay() {
+    return "EEE, d 'de' MMMM 'de' y";
   }
 
   @Override
-  public String[] monthsNarrow() {
-    return new String[] {
-        "E",
-        "F",
-        "Ma",
-        "A",
-        "My",
-        "Jn",
-        "Jl",
-        "Ag",
-        "S",
-        "O",
-        "N",
-        "D"
-    };
+  public String formatYearQuarterShort() {
+    return "Q y";
   }
 
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "ene.",
-        "febr.",
-        "mzo.",
-        "abr.",
-        "my.",
-        "jun.",
-        "jul.",
-        "ag.",
-        "set.",
-        "oct.",
-        "nov.",
-        "dic."
+        "ene",
+        "feb",
+        "mar",
+        "abr",
+        "may",
+        "jun",
+        "jul",
+        "ago",
+        "sep",
+        "oct",
+        "nov",
+        "dic"
     };
   }
 
   @Override
-  public String[] monthsShortStandalone() {
+  public String[] quartersFull() {
     return new String[] {
-        "en.",
-        "febr.",
-        "mzo.",
-        "abr.",
-        "my.",
-        "jun",
-        "jul",
-        "ag.",
-        "set.",
-        "oct.",
-        "nov.",
-        "dic."
+        "1.er trimestre",
+        "2º. trimestre",
+        "3.er trimestre",
+        "4o. trimestre"
+    };
+  }
+
+  @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "1er. trim.",
+        "2º. trim.",
+        "3er. trim.",
+        "4º trim."
     };
   }
 
   @Override
   public String timeFormatFull() {
-    return "HH:mm:ss zzzz";
+    return "H:mm:ss zzzz";
   }
 
   @Override
   public String timeFormatLong() {
-    return "HH:mm:ss z";
+    return "H:mm:ss z";
   }
 
   @Override
   public String timeFormatMedium() {
-    return "HH:mm:ss";
+    return "H:mm:ss";
   }
 
   @Override
   public String timeFormatShort() {
-    return "HH:mm";
+    return "H:mm";
   }
 
   @Override
-  public String[] weekdaysFullStandalone() {
+  public String[] weekdaysNarrow() {
     return new String[] {
-        "domingo",
-        "lunes",
-        "martes",
-        "miércoles",
-        "jueves",
-        "viernes",
-        "sábado"
-    };
-  }
-
-  @Override
-  public String[] weekdaysShort() {
-    return new String[] {
-        "dom.",
-        "lun.",
-        "mar.",
-        "miér.",
-        "jue.",
-        "vier.",
-        "sáb"
-    };
-  }
-
-  @Override
-  public String[] weekdaysShortStandalone() {
-    return new String[] {
-        "dom.",
-        "lun",
-        "mar.",
-        "mié.",
-        "jue.",
-        "vie",
-        "sáb."
+        "D",
+        "L",
+        "M",
+        "M",
+        "J",
+        "V",
+        "S"
     };
   }
 }

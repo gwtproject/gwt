@@ -66,6 +66,11 @@ public class DateTimeFormatInfoImpl_eo extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatYearMonthAbbrevDay() {
+    return "y-MMM-d";
+  }
+
+  @Override
   public String formatYearMonthFullDay() {
     return "y-MMMM-d";
   }
@@ -85,24 +90,6 @@ public class DateTimeFormatInfoImpl_eo extends DateTimeFormatInfoImpl {
         "oktobro",
         "novembro",
         "decembro"
-    };
-  }
-
-  @Override
-  public String[] monthsNarrow() {
-    return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
     };
   }
 
@@ -127,10 +114,10 @@ public class DateTimeFormatInfoImpl_eo extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "1a kvaronjaro",
-        "2a kvaronjaro",
-        "3a kvaronjaro",
-        "4a kvaronjaro"
+        "1-a kvaronjaro",
+        "2-a kvaronjaro",
+        "3-a kvaronjaro",
+        "4-a kvaronjaro"
     };
   }
 
@@ -159,6 +146,19 @@ public class DateTimeFormatInfoImpl_eo extends DateTimeFormatInfoImpl {
         "ĵaŭdo",
         "vendredo",
         "sabato"
+    };
+  }
+
+  @Override
+  public String[] weekdaysNarrow() {
+    return new String[] {
+        "D",
+        "L",
+        "M",
+        "M",
+        "Ĵ",
+        "V",
+        "S"
     };
   }
 

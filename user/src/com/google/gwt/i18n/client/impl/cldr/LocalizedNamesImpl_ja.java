@@ -75,7 +75,6 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "QO",
         "OM",
         "NL",
-        "AN",
         "BQ",
         "CV",
         "GY",
@@ -105,7 +104,6 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "GL",
         "CX",
         "CP",
-        "GE",
         "GD",
         "HR",
         "KY",
@@ -119,6 +117,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "CG",
         "CD",
         "SA",
+        "GS",
         "WS",
         "ST",
         "ZM",
@@ -131,6 +130,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "GI",
         "JE",
         "JM",
+        "GE",
         "SY",
         "SG",
         "SX",
@@ -254,6 +254,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "MN",
         "ME",
         "MS",
+        "EZ",
         "JO",
         "LA",
         "LV",
@@ -271,18 +272,18 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "IO",
         "VG",
         "EU",
+        "KR",
+        "UM",
+        "UN",
         "EH",
         "GQ",
         "TW",
-        "KR",
         "CF",
         "MO",
         "HK",
         "CN",
-        "KP",
         "TL",
         "ZA",
-        "GS",
         "SS",
         "AQ",
         "JP",
@@ -291,8 +292,8 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "TF",
         "VI",
         "AS",
-        "UM",
         "MP",
+        "KP",
     };
   }
 
@@ -337,7 +338,6 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
     namesMap.put("AI", "アンギラ");
     namesMap.put("AL", "アルバニア");
     namesMap.put("AM", "アルメニア");
-    namesMap.put("AN", "オランダ領アンティル");
     namesMap.put("AO", "アンゴラ");
     namesMap.put("AQ", "南極");
     namesMap.put("AR", "アルゼンチン");
@@ -356,7 +356,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
     namesMap.put("BH", "バーレーン");
     namesMap.put("BI", "ブルンジ");
     namesMap.put("BJ", "ベナン");
-    namesMap.put("BL", "サン・バルテルミー島");
+    namesMap.put("BL", "サン・バルテルミー");
     namesMap.put("BM", "バミューダ");
     namesMap.put("BN", "ブルネイ");
     namesMap.put("BO", "ボリビア");
@@ -387,7 +387,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
     namesMap.put("CW", "キュラソー");
     namesMap.put("CX", "クリスマス島");
     namesMap.put("CY", "キプロス");
-    namesMap.put("CZ", "チェコ共和国");
+    namesMap.put("CZ", "チェコ");
     namesMap.put("DE", "ドイツ");
     namesMap.put("DG", "ディエゴガルシア島");
     namesMap.put("DJ", "ジブチ");
@@ -404,6 +404,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
     namesMap.put("ES", "スペイン");
     namesMap.put("ET", "エチオピア");
     namesMap.put("EU", "欧州連合");
+    namesMap.put("EZ", "ユーロ圏");
     namesMap.put("FI", "フィンランド");
     namesMap.put("FJ", "フィジー");
     namesMap.put("FK", "フォークランド諸島");
@@ -413,7 +414,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
     namesMap.put("GA", "ガボン");
     namesMap.put("GB", "イギリス");
     namesMap.put("GD", "グレナダ");
-    namesMap.put("GE", "グルジア");
+    namesMap.put("GE", "ジョージア");
     namesMap.put("GF", "仏領ギアナ");
     namesMap.put("GG", "ガーンジー");
     namesMap.put("GH", "ガーナ");
@@ -424,7 +425,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
     namesMap.put("GP", "グアドループ");
     namesMap.put("GQ", "赤道ギニア");
     namesMap.put("GR", "ギリシャ");
-    namesMap.put("GS", "南ジョージア島・南サンドイッチ諸島");
+    namesMap.put("GS", "サウスジョージア・サウスサンドウィッチ諸島");
     namesMap.put("GT", "グアテマラ");
     namesMap.put("GU", "グアム");
     namesMap.put("GW", "ギニアビサウ");
@@ -455,9 +456,9 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
     namesMap.put("KH", "カンボジア");
     namesMap.put("KI", "キリバス");
     namesMap.put("KM", "コモロ");
-    namesMap.put("KN", "セントクリストファー・ネイビス");
-    namesMap.put("KP", "朝鮮民主主義人民共和国");
-    namesMap.put("KR", "大韓民国");
+    namesMap.put("KN", "セントクリストファー・ネーヴィス");
+    namesMap.put("KP", "北朝鮮");
+    namesMap.put("KR", "韓国");
     namesMap.put("KW", "クウェート");
     namesMap.put("KY", "ケイマン諸島");
     namesMap.put("KZ", "カザフスタン");
@@ -469,7 +470,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
     namesMap.put("LR", "リベリア");
     namesMap.put("LS", "レソト");
     namesMap.put("LT", "リトアニア");
-    namesMap.put("LU", "ルクセンブルグ");
+    namesMap.put("LU", "ルクセンブルク");
     namesMap.put("LV", "ラトビア");
     namesMap.put("LY", "リビア");
     namesMap.put("MA", "モロッコ");
@@ -481,7 +482,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
     namesMap.put("MH", "マーシャル諸島");
     namesMap.put("MK", "マケドニア");
     namesMap.put("ML", "マリ");
-    namesMap.put("MM", "ミャンマー");
+    namesMap.put("MM", "ミャンマー (ビルマ)");
     namesMap.put("MN", "モンゴル");
     namesMap.put("MO", "中華人民共和国マカオ特別行政区");
     namesMap.put("MP", "北マリアナ諸島");
@@ -490,7 +491,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
     namesMap.put("MS", "モントセラト");
     namesMap.put("MT", "マルタ");
     namesMap.put("MU", "モーリシャス");
-    namesMap.put("MV", "モルジブ");
+    namesMap.put("MV", "モルディブ");
     namesMap.put("MW", "マラウイ");
     namesMap.put("MX", "メキシコ");
     namesMap.put("MY", "マレーシア");
@@ -505,7 +506,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
     namesMap.put("NO", "ノルウェー");
     namesMap.put("NP", "ネパール");
     namesMap.put("NR", "ナウル");
-    namesMap.put("NU", "ニウエ島");
+    namesMap.put("NU", "ニウエ");
     namesMap.put("NZ", "ニュージーランド");
     namesMap.put("OM", "オマーン");
     namesMap.put("PA", "パナマ");
@@ -518,13 +519,13 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
     namesMap.put("PM", "サンピエール島・ミクロン島");
     namesMap.put("PN", "ピトケアン諸島");
     namesMap.put("PR", "プエルトリコ");
-    namesMap.put("PS", "パレスチナ");
+    namesMap.put("PS", "パレスチナ自治区");
     namesMap.put("PT", "ポルトガル");
     namesMap.put("PW", "パラオ");
     namesMap.put("PY", "パラグアイ");
     namesMap.put("QA", "カタール");
     namesMap.put("QO", "オセアニア周辺地域");
-    namesMap.put("RE", "レユニオン島");
+    namesMap.put("RE", "レユニオン");
     namesMap.put("RO", "ルーマニア");
     namesMap.put("RS", "セルビア");
     namesMap.put("RU", "ロシア");
@@ -569,12 +570,13 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
     namesMap.put("TZ", "タンザニア");
     namesMap.put("UA", "ウクライナ");
     namesMap.put("UG", "ウガンダ");
-    namesMap.put("UM", "米領太平洋諸島");
+    namesMap.put("UM", "合衆国領有小離島");
+    namesMap.put("UN", "国際連合");
     namesMap.put("US", "アメリカ合衆国");
     namesMap.put("UY", "ウルグアイ");
     namesMap.put("UZ", "ウズベキスタン");
     namesMap.put("VA", "バチカン市国");
-    namesMap.put("VC", "セントビンセント・グレナディーン諸島");
+    namesMap.put("VC", "セントビンセント及びグレナディーン諸島");
     namesMap.put("VE", "ベネズエラ");
     namesMap.put("VG", "英領ヴァージン諸島");
     namesMap.put("VI", "米領ヴァージン諸島");
@@ -584,7 +586,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
     namesMap.put("WS", "サモア");
     namesMap.put("XK", "コソボ");
     namesMap.put("YE", "イエメン");
-    namesMap.put("YT", "マヨット島");
+    namesMap.put("YT", "マヨット");
     namesMap.put("ZA", "南アフリカ");
     namesMap.put("ZM", "ザンビア");
     namesMap.put("ZW", "ジンバブエ");
@@ -636,7 +638,6 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "AI": "アンギラ",
         "AL": "アルバニア",
         "AM": "アルメニア",
-        "AN": "オランダ領アンティル",
         "AO": "アンゴラ",
         "AQ": "南極",
         "AR": "アルゼンチン",
@@ -655,7 +656,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "BH": "バーレーン",
         "BI": "ブルンジ",
         "BJ": "ベナン",
-        "BL": "サン・バルテルミー島",
+        "BL": "サン・バルテルミー",
         "BM": "バミューダ",
         "BN": "ブルネイ",
         "BO": "ボリビア",
@@ -686,7 +687,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "CW": "キュラソー",
         "CX": "クリスマス島",
         "CY": "キプロス",
-        "CZ": "チェコ共和国",
+        "CZ": "チェコ",
         "DE": "ドイツ",
         "DG": "ディエゴガルシア島",
         "DJ": "ジブチ",
@@ -703,6 +704,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "ES": "スペイン",
         "ET": "エチオピア",
         "EU": "欧州連合",
+        "EZ": "ユーロ圏",
         "FI": "フィンランド",
         "FJ": "フィジー",
         "FK": "フォークランド諸島",
@@ -712,7 +714,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "GA": "ガボン",
         "GB": "イギリス",
         "GD": "グレナダ",
-        "GE": "グルジア",
+        "GE": "ジョージア",
         "GF": "仏領ギアナ",
         "GG": "ガーンジー",
         "GH": "ガーナ",
@@ -723,7 +725,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "GP": "グアドループ",
         "GQ": "赤道ギニア",
         "GR": "ギリシャ",
-        "GS": "南ジョージア島・南サンドイッチ諸島",
+        "GS": "サウスジョージア・サウスサンドウィッチ諸島",
         "GT": "グアテマラ",
         "GU": "グアム",
         "GW": "ギニアビサウ",
@@ -754,9 +756,9 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "KH": "カンボジア",
         "KI": "キリバス",
         "KM": "コモロ",
-        "KN": "セントクリストファー・ネイビス",
-        "KP": "朝鮮民主主義人民共和国",
-        "KR": "大韓民国",
+        "KN": "セントクリストファー・ネーヴィス",
+        "KP": "北朝鮮",
+        "KR": "韓国",
         "KW": "クウェート",
         "KY": "ケイマン諸島",
         "KZ": "カザフスタン",
@@ -768,7 +770,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "LR": "リベリア",
         "LS": "レソト",
         "LT": "リトアニア",
-        "LU": "ルクセンブルグ",
+        "LU": "ルクセンブルク",
         "LV": "ラトビア",
         "LY": "リビア",
         "MA": "モロッコ",
@@ -780,7 +782,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "MH": "マーシャル諸島",
         "MK": "マケドニア",
         "ML": "マリ",
-        "MM": "ミャンマー",
+        "MM": "ミャンマー (ビルマ)",
         "MN": "モンゴル",
         "MO": "中華人民共和国マカオ特別行政区",
         "MP": "北マリアナ諸島",
@@ -789,7 +791,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "MS": "モントセラト",
         "MT": "マルタ",
         "MU": "モーリシャス",
-        "MV": "モルジブ",
+        "MV": "モルディブ",
         "MW": "マラウイ",
         "MX": "メキシコ",
         "MY": "マレーシア",
@@ -804,7 +806,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "NO": "ノルウェー",
         "NP": "ネパール",
         "NR": "ナウル",
-        "NU": "ニウエ島",
+        "NU": "ニウエ",
         "NZ": "ニュージーランド",
         "OM": "オマーン",
         "PA": "パナマ",
@@ -817,13 +819,13 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "PM": "サンピエール島・ミクロン島",
         "PN": "ピトケアン諸島",
         "PR": "プエルトリコ",
-        "PS": "パレスチナ",
+        "PS": "パレスチナ自治区",
         "PT": "ポルトガル",
         "PW": "パラオ",
         "PY": "パラグアイ",
         "QA": "カタール",
         "QO": "オセアニア周辺地域",
-        "RE": "レユニオン島",
+        "RE": "レユニオン",
         "RO": "ルーマニア",
         "RS": "セルビア",
         "RU": "ロシア",
@@ -868,12 +870,13 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "TZ": "タンザニア",
         "UA": "ウクライナ",
         "UG": "ウガンダ",
-        "UM": "米領太平洋諸島",
+        "UM": "合衆国領有小離島",
+        "UN": "国際連合",
         "US": "アメリカ合衆国",
         "UY": "ウルグアイ",
         "UZ": "ウズベキスタン",
         "VA": "バチカン市国",
-        "VC": "セントビンセント・グレナディーン諸島",
+        "VC": "セントビンセント及びグレナディーン諸島",
         "VE": "ベネズエラ",
         "VG": "英領ヴァージン諸島",
         "VI": "米領ヴァージン諸島",
@@ -883,7 +886,7 @@ public class LocalizedNamesImpl_ja extends LocalizedNamesImpl {
         "WS": "サモア",
         "XK": "コソボ",
         "YE": "イエメン",
-        "YT": "マヨット島",
+        "YT": "マヨット",
         "ZA": "南アフリカ",
         "ZM": "ザンビア",
         "ZW": "ジンバブエ",

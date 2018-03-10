@@ -102,6 +102,7 @@ public class LocalizedNamesImpl_sn extends LocalizedNamesImpl {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FJ",
         "FI",
         "FO",
@@ -196,7 +197,6 @@ public class LocalizedNamesImpl_sn extends LocalizedNamesImpl {
         "NR",
         "NP",
         "NL",
-        "AN",
         "NC",
         "NZ",
         "NI",
@@ -270,6 +270,7 @@ public class LocalizedNamesImpl_sn extends LocalizedNamesImpl {
         "UG",
         "UA",
         "UM",
+        "UN",
         "AE",
         "GB",
         "UY",
@@ -326,6 +327,7 @@ public class LocalizedNamesImpl_sn extends LocalizedNamesImpl {
     namesMap.put("CO", "Kolombia");
     namesMap.put("CR", "Kostarika");
     namesMap.put("CV", "Zvitsuwa zveCape Verde");
+    namesMap.put("CZ", "Czech Republic");
     namesMap.put("DZ", "Aljeria");
     namesMap.put("ET", "Etiopia");
     namesMap.put("FK", "Zvitsuwa zveFalklands");
@@ -333,24 +335,30 @@ public class LocalizedNamesImpl_sn extends LocalizedNamesImpl {
     namesMap.put("IL", "Izuraeri");
     namesMap.put("KH", "Kambodia");
     namesMap.put("KM", "Komoro");
+    namesMap.put("KN", "Saint Kitts and Nevis");
     namesMap.put("KP", "Korea, North");
     namesMap.put("KR", "Korea, South");
     namesMap.put("KY", "Zvitsuwa zveCayman");
+    namesMap.put("LC", "Saint Lucia");
     namesMap.put("MH", "Zvitsuwa zveMarshall");
-    namesMap.put("MK", "Macedonia");
     namesMap.put("MM", "Myanmar");
     namesMap.put("MP", "Zvitsuwa zvekumaodzanyemba eMariana");
     namesMap.put("NF", "Chitsuwa cheNorfolk");
+    namesMap.put("PM", "Saint Pierre and Miquelon");
     namesMap.put("PN", "Pitcairn");
     namesMap.put("SB", "Zvitsuwa zvaSolomon");
+    namesMap.put("SH", "Saint Helena");
+    namesMap.put("ST", "São Tomé and Príncipe");
     namesMap.put("TC", "Zvitsuwa zveTurk neCaico");
     namesMap.put("TD", "Chadi");
     namesMap.put("TL", "East Timor");
+    namesMap.put("TT", "Trinidad and Tobago");
     namesMap.put("US", "Amerika");
     namesMap.put("VA", "Vatican State");
     namesMap.put("VC", "Saint Vincent and the Grenadines");
     namesMap.put("VG", "Zvitsuwa zveHingirandi");
     namesMap.put("VI", "Zvitsuwa zveAmerika");
+    namesMap.put("WF", "Wallis and Futuna");
   }
 
   @Override
@@ -387,6 +395,7 @@ public class LocalizedNamesImpl_sn extends LocalizedNamesImpl {
         "CO": "Kolombia",
         "CR": "Kostarika",
         "CV": "Zvitsuwa zveCape Verde",
+        "CZ": "Czech Republic",
         "DZ": "Aljeria",
         "ET": "Etiopia",
         "FK": "Zvitsuwa zveFalklands",
@@ -394,24 +403,30 @@ public class LocalizedNamesImpl_sn extends LocalizedNamesImpl {
         "IL": "Izuraeri",
         "KH": "Kambodia",
         "KM": "Komoro",
+        "KN": "Saint Kitts and Nevis",
         "KP": "Korea, North",
         "KR": "Korea, South",
         "KY": "Zvitsuwa zveCayman",
+        "LC": "Saint Lucia",
         "MH": "Zvitsuwa zveMarshall",
-        "MK": "Macedonia",
         "MM": "Myanmar",
         "MP": "Zvitsuwa zvekumaodzanyemba eMariana",
         "NF": "Chitsuwa cheNorfolk",
+        "PM": "Saint Pierre and Miquelon",
         "PN": "Pitcairn",
         "SB": "Zvitsuwa zvaSolomon",
+        "SH": "Saint Helena",
+        "ST": "São Tomé and Príncipe",
         "TC": "Zvitsuwa zveTurk neCaico",
         "TD": "Chadi",
         "TL": "East Timor",
+        "TT": "Trinidad and Tobago",
         "US": "Amerika",
         "VA": "Vatican State",
         "VC": "Saint Vincent and the Grenadines",
         "VG": "Zvitsuwa zveHingirandi",
-        "VI": "Zvitsuwa zveAmerika"
+        "VI": "Zvitsuwa zveAmerika",
+        "WF": "Wallis and Futuna"
     };
   }-*/;
 }

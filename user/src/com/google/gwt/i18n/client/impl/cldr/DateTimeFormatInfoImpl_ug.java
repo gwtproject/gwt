@@ -24,29 +24,24 @@ public class DateTimeFormatInfoImpl_ug extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "چۈشتىن بۇرۇن",
-        "چۈشتىن كېيىن"
+        "چ.ب",
+        "چ.ك"
     };
   }
 
   @Override
   public String dateFormatFull() {
-    return "EEEE، MMMM d، y";
+    return "y d-MMMM، EEEE";
   }
 
   @Override
   public String dateFormatLong() {
-    return "MMMM d، y";
+    return "d-MMMM، y";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "MMM d، y";
-  }
-
-  @Override
-  public String dateFormatShort() {
-    return "M/d/yy";
+    return "d-MMM، y";
   }
 
   @Override
@@ -70,64 +65,59 @@ public class DateTimeFormatInfoImpl_ug extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasShort() {
     return new String[] {
-        "مىلادىيەدىن بۇرۇن",
+        "BCE",
         "مىلادىيە"
     };
   }
 
   @Override
+  public int firstDayOfTheWeek() {
+    return 0;
+  }
+
+  @Override
+  public String formatMonthAbbrevDay() {
+    return "d-MMM";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "d-MMMM";
+  }
+
+  @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE، MMMM d";
+    return "d-MMMM، EEEE";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M/d";
-  }
-
-  @Override
-  public String formatYearMonthAbbrev() {
-    return "MMM y";
+    return "d-M";
   }
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "MMM d، y";
-  }
-
-  @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
+    return "y d-MMM";
   }
 
   @Override
   public String formatYearMonthFullDay() {
-    return "MMMM d، y";
+    return "d-MMMM، y";
   }
 
   @Override
   public String formatYearMonthNum() {
-    return "M/y";
+    return "M-y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "M/d/y";
+    return "y-d-M";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE، MMM d، y";
-  }
-
-  @Override
-  public String formatYearQuarterFull() {
-    return "QQQQ y";
-  }
-
-  @Override
-  public String formatYearQuarterShort() {
-    return "Q y";
+    return "y d-MMM، EEE";
   }
 
   @Override
@@ -143,7 +133,7 @@ public class DateTimeFormatInfoImpl_ug extends DateTimeFormatInfoImpl {
         "ئاۋغۇست",
         "سېنتەبىر",
         "ئۆكتەبىر",
-        "بويابىر",
+        "نويابىر",
         "دېكابىر"
     };
   }
@@ -197,10 +187,10 @@ public class DateTimeFormatInfoImpl_ug extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "بىرىنچى پەسىل",
-        "ئىككىنچى پەسىل",
-        "ئۈچىنچى پەسىل",
-        "تۆتىنچى پەسىل"
+        "1-پەسىل",
+        "2-پەسىل",
+        "3-پەسىل",
+        "4-پەسىل"
     };
   }
 
@@ -258,7 +248,7 @@ public class DateTimeFormatInfoImpl_ug extends DateTimeFormatInfoImpl {
         "سە",
         "چا",
         "پە",
-        "چۈ",
+        "جۈ",
         "شە"
     };
   }

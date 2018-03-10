@@ -37,7 +37,6 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
         "AI",
         "AQ",
         "AG",
-        "AN",
         "SA",
         "AR",
         "AM",
@@ -71,6 +70,7 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
         "CL",
         "CN",
         "CY",
+        "VA",
         "CO",
         "KM",
         "CG",
@@ -87,13 +87,11 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
         "DJ",
         "DM",
         "EG",
-        "SV",
         "AE",
         "EC",
         "ER",
         "ES",
         "EE",
-        "VA",
         "US",
         "ET",
         "FJ",
@@ -126,21 +124,21 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
         "AC",
         "IM",
         "NF",
-        "AX",
         "KY",
         "IC",
         "CC",
         "CK",
-        "UM",
+        "AX",
         "FO",
         "HM",
         "FK",
-        "MP",
         "MH",
+        "UM",
+        "PN",
         "SB",
         "TC",
-        "VG",
         "VI",
+        "VG",
         "IN",
         "ID",
         "IQ",
@@ -160,6 +158,7 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
         "XK",
         "KW",
         "LA",
+        "RE",
         "LS",
         "LV",
         "LB",
@@ -175,6 +174,7 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
         "MV",
         "ML",
         "MT",
+        "MP",
         "MA",
         "MQ",
         "MU",
@@ -190,6 +190,7 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
         "MZ",
         "MM",
         "NA",
+        "UN",
         "NR",
         "NP",
         "NI",
@@ -199,6 +200,7 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
         "NO",
         "NC",
         "NZ",
+        "QO",
         "OM",
         "UG",
         "UZ",
@@ -211,7 +213,6 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
         "BQ",
         "PE",
         "PH",
-        "PN",
         "PL",
         "PF",
         "PR",
@@ -219,25 +220,23 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
         "QA",
         "HK",
         "MO",
-        "QO",
         "CF",
         "DO",
-        "CZ",
-        "RE",
         "RO",
         "GB",
         "RU",
         "RW",
         "EH",
         "BL",
+        "KN",
         "SH",
         "LC",
-        "KN",
         "SM",
         "MF",
         "SX",
         "PM",
         "VC",
+        "SV",
         "WS",
         "AS",
         "ST",
@@ -262,6 +261,7 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
         "TW",
         "TZ",
         "TD",
+        "CZ",
         "TF",
         "IO",
         "PS",
@@ -286,24 +286,44 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
         "YE",
         "ZM",
         "ZW",
+        "EZ",
     };
   }
 
   @Override
   protected void loadNameMapJava() {
     super.loadNameMapJava();
-    namesMap.put("053", "Australie et Nouvelle-Zélande");
-    namesMap.put("AC", "Île de l'Ascension");
-    namesMap.put("BL", "Saint-Barthélémy");
+    namesMap.put("151", "Europe orientale");
+    namesMap.put("AC", "île de l’Ascension");
+    namesMap.put("AX", "îles d’Åland");
+    namesMap.put("BN", "Brunei");
+    namesMap.put("BV", "île Bouvet");
     namesMap.put("BY", "Bélarus");
+    namesMap.put("CC", "îles Cocos (Keeling)");
+    namesMap.put("CK", "îles Cook");
+    namesMap.put("CX", "île Christmas");
+    namesMap.put("FK", "îles Malouines");
     namesMap.put("FM", "Micronésie");
-    namesMap.put("GS", "Géorgie du Sud et les îles Sandwich du Sud");
-    namesMap.put("IO", "Territoire britannique de l'océan Indien");
-    namesMap.put("MF", "Saint-Martin");
-    namesMap.put("PS", "Territoire palestinien");
-    namesMap.put("RE", "Réunion");
-    namesMap.put("TC", "Îles Turks et Caïques");
-    namesMap.put("UM", "Îles éloignées des États-Unis");
+    namesMap.put("FO", "îles Féroé");
+    namesMap.put("HM", "îles Heard et McDonald");
+    namesMap.put("IC", "îles Canaries");
+    namesMap.put("IM", "île de Man");
+    namesMap.put("IO", "territoire britannique de l’océan Indien");
+    namesMap.put("MF", "Saint-Martin (France)");
+    namesMap.put("MM", "Myanmar");
+    namesMap.put("MP", "Mariannes du Nord");
+    namesMap.put("NF", "île Norfolk");
+    namesMap.put("PN", "îles Pitcairn");
+    namesMap.put("QO", "Océanie lointaine");
+    namesMap.put("RE", "la Réunion");
+    namesMap.put("SX", "Saint-Martin (Pays-Bas)");
+    namesMap.put("TK", "Tokelau");
+    namesMap.put("TL", "Timor-Leste");
+    namesMap.put("UM", "îles mineures éloignées des États-Unis");
+    namesMap.put("VA", "Cité du Vatican");
+    namesMap.put("VC", "Saint-Vincent-et-les Grenadines");
+    namesMap.put("VG", "îles Vierges britanniques");
+    namesMap.put("VI", "îles Vierges américaines");
   }
 
   @Override
@@ -313,18 +333,37 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
 
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
-        "053": "Australie et Nouvelle-Zélande",
-        "AC": "Île de l'Ascension",
-        "BL": "Saint-Barthélémy",
+        "151": "Europe orientale",
+        "AC": "île de l’Ascension",
+        "AX": "îles d’Åland",
+        "BN": "Brunei",
+        "BV": "île Bouvet",
         "BY": "Bélarus",
+        "CC": "îles Cocos (Keeling)",
+        "CK": "îles Cook",
+        "CX": "île Christmas",
+        "FK": "îles Malouines",
         "FM": "Micronésie",
-        "GS": "Géorgie du Sud et les îles Sandwich du Sud",
-        "IO": "Territoire britannique de l'océan Indien",
-        "MF": "Saint-Martin",
-        "PS": "Territoire palestinien",
-        "RE": "Réunion",
-        "TC": "Îles Turks et Caïques",
-        "UM": "Îles éloignées des États-Unis"
+        "FO": "îles Féroé",
+        "HM": "îles Heard et McDonald",
+        "IC": "îles Canaries",
+        "IM": "île de Man",
+        "IO": "territoire britannique de l’océan Indien",
+        "MF": "Saint-Martin (France)",
+        "MM": "Myanmar",
+        "MP": "Mariannes du Nord",
+        "NF": "île Norfolk",
+        "PN": "îles Pitcairn",
+        "QO": "Océanie lointaine",
+        "RE": "la Réunion",
+        "SX": "Saint-Martin (Pays-Bas)",
+        "TK": "Tokelau",
+        "TL": "Timor-Leste",
+        "UM": "îles mineures éloignées des États-Unis",
+        "VA": "Cité du Vatican",
+        "VC": "Saint-Vincent-et-les Grenadines",
+        "VG": "îles Vierges britanniques",
+        "VI": "îles Vierges américaines"
     };
   }-*/;
 }

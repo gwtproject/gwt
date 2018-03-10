@@ -22,19 +22,87 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_br extends DateTimeFormatInfoImpl {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "A.M.",
+        "G.M."
+    };
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " 'da' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " 'da' " + timePattern;
+  }
+
+  @Override
   public String[] erasFull() {
     return new String[] {
-        "BCE",
-        "CE"
+        "a-raok Jezuz-Krist",
+        "goude Jezuz-Krist"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "BCE",
-        "CE"
+        "a-raok J.K.",
+        "goude J.K."
     };
+  }
+
+  @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
+  }
+
+  @Override
+  public String formatMonthFullWeekdayDay() {
+    return "EEEE d MMMM";
+  }
+
+  @Override
+  public String formatMonthNumDay() {
+    return "dd/MM";
+  }
+
+  @Override
+  public String formatYearMonthAbbrev() {
+    return "MMM y";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "d MMM y";
+  }
+
+  @Override
+  public String formatYearMonthNum() {
+    return "MM/y";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "dd/MM/y";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "EEE d MMM y";
+  }
+
+  @Override
+  public String formatYearQuarterFull() {
+    return "QQQQ y";
+  }
+
+  @Override
+  public String formatYearQuarterShort() {
+    return "Q y";
   }
 
   @Override
@@ -58,15 +126,15 @@ public class DateTimeFormatInfoImpl_br extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsNarrow() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
         "10",
         "11",
         "12"
@@ -76,28 +144,56 @@ public class DateTimeFormatInfoImpl_br extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "Gen",
-        "Cʼhwe",
-        "Meur",
-        "Ebr",
+        "Gen.",
+        "Cʼhwe.",
+        "Meur.",
+        "Ebr.",
         "Mae",
-        "Mezh",
-        "Goue",
+        "Mezh.",
+        "Goue.",
         "Eost",
-        "Gwen",
+        "Gwen.",
         "Here",
         "Du",
-        "Ker"
+        "Kzu."
+    };
+  }
+
+  @Override
+  public String[] monthsShortStandalone() {
+    return new String[] {
+        "Gen.",
+        "Cʼhwe.",
+        "Meur.",
+        "Ebr.",
+        "Mae",
+        "Mezh.",
+        "Goue.",
+        "Eost",
+        "Gwen.",
+        "Here",
+        "Du",
+        "Ker."
     };
   }
 
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Q1",
-        "Q2",
-        "Q3",
-        "Q4"
+        "1añ trimiziad",
+        "2l trimiziad",
+        "3e trimiziad",
+        "4e trimiziad"
+    };
+  }
+
+  @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "1añ trim.",
+        "2l trim.",
+        "3e trim.",
+        "4e trim."
     };
   }
 
@@ -117,26 +213,26 @@ public class DateTimeFormatInfoImpl_br extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "su",
-        "lu",
-        "mz",
-        "mc",
-        "ya",
-        "gw",
-        "sa"
+        "Su",
+        "L",
+        "Mz",
+        "Mc",
+        "Y",
+        "G",
+        "Sa"
     };
   }
 
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "sul",
-        "lun",
-        "meu.",
-        "mer.",
-        "yaou",
-        "gwe.",
-        "sad."
+        "Sul",
+        "Lun",
+        "Meu.",
+        "Mer.",
+        "Yaou",
+        "Gwe.",
+        "Sad."
     };
   }
 }

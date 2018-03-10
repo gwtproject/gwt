@@ -25,6 +25,13 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class LocalizedNamesImpl_gsw extends LocalizedNamesImpl {
 
   @Override
+  public String[] loadLikelyRegionCodes() {
+    return new String[] {
+        "CH",
+    };
+  }
+
+  @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
         "AX",
@@ -86,6 +93,7 @@ public class LocalizedNamesImpl_gsw extends LocalizedNamesImpl {
         "CI",
         "SV",
         "EU",
+        "EZ",
         "FK",
         "FO",
         "FI",
@@ -176,7 +184,6 @@ public class LocalizedNamesImpl_gsw extends LocalizedNamesImpl {
         "NR",
         "NP",
         "NI",
-        "AN",
         "NG",
         "NE",
         "NU",
@@ -268,6 +275,7 @@ public class LocalizedNamesImpl_gsw extends LocalizedNamesImpl {
         "TV",
         "UG",
         "UA",
+        "UN",
         "HU",
         "UY",
         "UZ",
@@ -328,7 +336,6 @@ public class LocalizedNamesImpl_gsw extends LocalizedNamesImpl {
     namesMap.put("AG", "Antigua und Barbuda");
     namesMap.put("AL", "Albaanie");
     namesMap.put("AM", "Armeenie");
-    namesMap.put("AN", "Niderländischi Antille");
     namesMap.put("AO", "Angoola");
     namesMap.put("AQ", "Antarktis");
     namesMap.put("AR", "Argentiinie");
@@ -447,7 +454,6 @@ public class LocalizedNamesImpl_gsw extends LocalizedNamesImpl {
     namesMap.put("MA", "Marokko");
     namesMap.put("MD", "Republik Moldau");
     namesMap.put("ME", "Monteneegro");
-    namesMap.put("MF", "St. Martin");
     namesMap.put("MG", "Madagaschkar");
     namesMap.put("MH", "Marshallinsle");
     namesMap.put("MK", "Mazedoonie");
@@ -496,7 +502,6 @@ public class LocalizedNamesImpl_gsw extends LocalizedNamesImpl {
     namesMap.put("SC", "Seischälle");
     namesMap.put("SE", "Schweede");
     namesMap.put("SG", "Singapuur");
-    namesMap.put("SH", "St. Helena");
     namesMap.put("SI", "Sloweenie");
     namesMap.put("SJ", "Svalbard und Jaan Määie");
     namesMap.put("SK", "Slowakäi");
@@ -582,7 +587,6 @@ public class LocalizedNamesImpl_gsw extends LocalizedNamesImpl {
         "AG": "Antigua und Barbuda",
         "AL": "Albaanie",
         "AM": "Armeenie",
-        "AN": "Niderländischi Antille",
         "AO": "Angoola",
         "AQ": "Antarktis",
         "AR": "Argentiinie",
@@ -701,7 +705,6 @@ public class LocalizedNamesImpl_gsw extends LocalizedNamesImpl {
         "MA": "Marokko",
         "MD": "Republik Moldau",
         "ME": "Monteneegro",
-        "MF": "St. Martin",
         "MG": "Madagaschkar",
         "MH": "Marshallinsle",
         "MK": "Mazedoonie",
@@ -750,7 +753,6 @@ public class LocalizedNamesImpl_gsw extends LocalizedNamesImpl {
         "SC": "Seischälle",
         "SE": "Schweede",
         "SG": "Singapuur",
-        "SH": "St. Helena",
         "SI": "Sloweenie",
         "SJ": "Svalbard und Jaan Määie",
         "SK": "Slowakäi",

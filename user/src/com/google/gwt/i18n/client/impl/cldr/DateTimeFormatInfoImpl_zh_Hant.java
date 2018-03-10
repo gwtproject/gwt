@@ -22,13 +22,8 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_zh_Hant extends DateTimeFormatInfoImpl_zh {
 
   @Override
-  public String dateFormatShort() {
-    return "y/M/d";
-  }
-
-  @Override
-  public String dateTimeFull(String timePattern, String datePattern) {
-    return datePattern + timePattern;
+  public String dateFormatFull() {
+    return "y年M月d日 EEEE";
   }
 
   @Override
@@ -48,8 +43,18 @@ public class DateTimeFormatInfoImpl_zh_Hant extends DateTimeFormatInfoImpl_zh {
   }
 
   @Override
-  public int firstDayOfTheWeek() {
-    return 0;
+  public String formatMonthFullWeekdayDay() {
+    return "M月d日 EEEE";
+  }
+
+  @Override
+  public String formatYearMonthNum() {
+    return "y/M";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "y年M月d日 EEE";
   }
 
   @Override
@@ -93,21 +98,21 @@ public class DateTimeFormatInfoImpl_zh_Hant extends DateTimeFormatInfoImpl_zh {
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "1季",
-        "2季",
-        "3季",
-        "4季"
+        "第1季",
+        "第2季",
+        "第3季",
+        "第4季"
     };
   }
 
   @Override
   public String timeFormatFull() {
-    return "zzzzah時mm分ss秒";
+    return "ah:mm:ss [zzzz]";
   }
 
   @Override
   public String timeFormatLong() {
-    return "zah時mm分ss秒";
+    return "ah:mm:ss [z]";
   }
 
   @Override

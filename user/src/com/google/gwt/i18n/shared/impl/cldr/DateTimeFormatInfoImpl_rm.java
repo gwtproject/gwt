@@ -22,14 +22,6 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_rm extends DateTimeFormatInfoImpl {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "am",
-        "sm"
-    };
-  }
-
-  @Override
   public String dateFormatFull() {
     return "EEEE, 'ils' d 'da' MMMM y";
   }
@@ -91,11 +83,6 @@ public class DateTimeFormatInfoImpl_rm extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
-  }
-
-  @Override
   public String formatYearMonthFullDay() {
     return "d 'da' MMMM y";
   }
@@ -107,22 +94,7 @@ public class DateTimeFormatInfoImpl_rm extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d.M.y";
-  }
-
-  @Override
-  public String formatYearMonthWeekdayDay() {
-    return "EEE, d. MMM y";
-  }
-
-  @Override
-  public String formatYearQuarterFull() {
-    return "QQQQ y";
-  }
-
-  @Override
-  public String formatYearQuarterShort() {
-    return "Q y";
+    return "y-MM-dd";
   }
 
   @Override
@@ -181,16 +153,6 @@ public class DateTimeFormatInfoImpl_rm extends DateTimeFormatInfoImpl {
 
   @Override
   public String[] quartersFull() {
-    return new String[] {
-        "1. quartal",
-        "2. quartal",
-        "3. quartal",
-        "4. quartal"
-    };
-  }
-
-  @Override
-  public String[] quartersShort() {
     return new String[] {
         "1. quartal",
         "2. quartal",

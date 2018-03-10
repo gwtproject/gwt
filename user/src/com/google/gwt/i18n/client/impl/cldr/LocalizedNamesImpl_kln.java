@@ -25,6 +25,13 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class LocalizedNamesImpl_kln extends LocalizedNamesImpl {
 
   @Override
+  public String[] loadLikelyRegionCodes() {
+    return new String[] {
+        "KE",
+    };
+  }
+
+  @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
         "AC",
@@ -51,7 +58,6 @@ public class LocalizedNamesImpl_kln extends LocalizedNamesImpl {
         "AO",
         "AI",
         "AG",
-        "AN",
         "AR",
         "AM",
         "AW",
@@ -254,6 +260,7 @@ public class LocalizedNamesImpl_kln extends LocalizedNamesImpl {
         "ZM",
         "ZW",
         "EU",
+        "EZ",
         "FO",
         "GG",
         "GS",
@@ -285,6 +292,7 @@ public class LocalizedNamesImpl_kln extends LocalizedNamesImpl {
         "TA",
         "TF",
         "UM",
+        "UN",
         "XK",
     };
   }
@@ -299,7 +307,6 @@ public class LocalizedNamesImpl_kln extends LocalizedNamesImpl {
     namesMap.put("AI", "Emetab Anguilla");
     namesMap.put("AL", "Emetab Albania");
     namesMap.put("AM", "Emetab Armenia");
-    namesMap.put("AN", "Emetab Antile nebo Holand");
     namesMap.put("AO", "Emetab Angola");
     namesMap.put("AR", "Emetab Argentina");
     namesMap.put("AS", "Emetab American Samoa");
@@ -330,7 +337,7 @@ public class LocalizedNamesImpl_kln extends LocalizedNamesImpl {
     namesMap.put("CF", "Emetab Afrika nebo Kwen");
     namesMap.put("CG", "Emetab Congo - Brazzaville");
     namesMap.put("CH", "Emetab Switzerland");
-    namesMap.put("CI", "Emetab Côte d'Ivoire");
+    namesMap.put("CI", "Emetab Côte d’Ivoire");
     namesMap.put("CK", "Ikwembeyotab Cook");
     namesMap.put("CL", "Emetab Chile");
     namesMap.put("CM", "Emetab Cameroon");
@@ -533,7 +540,6 @@ public class LocalizedNamesImpl_kln extends LocalizedNamesImpl {
         "AI": "Emetab Anguilla",
         "AL": "Emetab Albania",
         "AM": "Emetab Armenia",
-        "AN": "Emetab Antile nebo Holand",
         "AO": "Emetab Angola",
         "AR": "Emetab Argentina",
         "AS": "Emetab American Samoa",
@@ -564,7 +570,7 @@ public class LocalizedNamesImpl_kln extends LocalizedNamesImpl {
         "CF": "Emetab Afrika nebo Kwen",
         "CG": "Emetab Congo - Brazzaville",
         "CH": "Emetab Switzerland",
-        "CI": "Emetab Côte d'Ivoire",
+        "CI": "Emetab Côte d’Ivoire",
         "CK": "Ikwembeyotab Cook",
         "CL": "Emetab Chile",
         "CM": "Emetab Cameroon",

@@ -52,42 +52,22 @@ public class DateTimeFormatInfoImpl_sl extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "pred našim štetjem",
-        "naše štetje"
+        "pred Kristusom",
+        "po Kristusu"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "pr. n. št.",
+        "pr. Kr.",
         "po Kr."
     };
   }
 
   @Override
-  public String formatHour12Minute() {
-    return "h.mm a";
-  }
-
-  @Override
-  public String formatHour12MinuteSecond() {
-    return "h.mm.ss a";
-  }
-
-  @Override
-  public String formatHour24Minute() {
-    return "HH.mm";
-  }
-
-  @Override
-  public String formatHour24MinuteSecond() {
-    return "HH.mm.ss";
-  }
-
-  @Override
-  public String formatMinuteSecond() {
-    return "mm.ss";
+  public String formatDay() {
+    return "d.";
   }
 
   @Override
@@ -210,24 +190,6 @@ public class DateTimeFormatInfoImpl_sl extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] monthsShortStandalone() {
-    return new String[] {
-        "jan",
-        "feb",
-        "mar",
-        "apr",
-        "maj",
-        "jun",
-        "jul",
-        "avg",
-        "sep",
-        "okt",
-        "nov",
-        "dec"
-    };
-  }
-
-  @Override
   public String[] quartersFull() {
     return new String[] {
         "1. četrtletje",
@@ -238,23 +200,13 @@ public class DateTimeFormatInfoImpl_sl extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String timeFormatFull() {
-    return "HH.mm.ss zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "HH.mm.ss z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "HH.mm.ss";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "HH.mm";
+  public String[] quartersShort() {
+    return new String[] {
+        "1. čet.",
+        "2. čet.",
+        "3. čet.",
+        "4. čet."
+    };
   }
 
   @Override
@@ -293,19 +245,6 @@ public class DateTimeFormatInfoImpl_sl extends DateTimeFormatInfoImpl {
         "čet.",
         "pet.",
         "sob."
-    };
-  }
-
-  @Override
-  public String[] weekdaysShortStandalone() {
-    return new String[] {
-        "ned",
-        "pon",
-        "tor",
-        "sre",
-        "čet",
-        "pet",
-        "sob"
     };
   }
 }

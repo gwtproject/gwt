@@ -167,7 +167,7 @@ public class DateTimeFormatInfoImpl_ja extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearQuarterFull() {
-    return "yQQQQ";
+    return "y年QQQQ";
   }
 
   @Override

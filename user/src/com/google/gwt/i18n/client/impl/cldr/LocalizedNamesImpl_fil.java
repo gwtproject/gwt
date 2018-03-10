@@ -113,6 +113,7 @@ public class LocalizedNamesImpl_fil extends LocalizedNamesImpl {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FK",
         "FO",
         "FJ",
@@ -139,6 +140,7 @@ public class LocalizedNamesImpl_fil extends LocalizedNamesImpl {
         "GY",
         "HT",
         "HM",
+        "KP",
         "HN",
         "HK",
         "HU",
@@ -155,6 +157,7 @@ public class LocalizedNamesImpl_fil extends LocalizedNamesImpl {
         "JP",
         "JE",
         "JO",
+        "EH",
         "KZ",
         "KE",
         "KI",
@@ -197,7 +200,6 @@ public class LocalizedNamesImpl_fil extends LocalizedNamesImpl {
         "NR",
         "NP",
         "NL",
-        "AN",
         "NC",
         "NZ",
         "NI",
@@ -206,7 +208,6 @@ public class LocalizedNamesImpl_fil extends LocalizedNamesImpl {
         "NU",
         "NF",
         "MP",
-        "KP",
         "NO",
         "OM",
         "QO",
@@ -227,13 +228,8 @@ public class LocalizedNamesImpl_fil extends LocalizedNamesImpl {
         "RO",
         "RU",
         "RW",
-        "BL",
-        "SH",
-        "KN",
         "LC",
         "MF",
-        "PM",
-        "VC",
         "WS",
         "SM",
         "ST",
@@ -250,10 +246,13 @@ public class LocalizedNamesImpl_fil extends LocalizedNamesImpl {
         "SO",
         "ZA",
         "GS",
-        "KR",
-        "SS",
         "ES",
         "LK",
+        "BL",
+        "SH",
+        "KN",
+        "PM",
+        "VC",
         "SD",
         "SR",
         "SJ",
@@ -265,6 +264,8 @@ public class LocalizedNamesImpl_fil extends LocalizedNamesImpl {
         "TJ",
         "TZ",
         "TH",
+        "KR",
+        "SS",
         "TL",
         "TG",
         "TK",
@@ -282,6 +283,7 @@ public class LocalizedNamesImpl_fil extends LocalizedNamesImpl {
         "UA",
         "AE",
         "GB",
+        "UN",
         "UY",
         "UZ",
         "VU",
@@ -289,7 +291,6 @@ public class LocalizedNamesImpl_fil extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
-        "EH",
         "YE",
         "ZM",
         "ZW",
@@ -300,20 +301,37 @@ public class LocalizedNamesImpl_fil extends LocalizedNamesImpl {
   protected void loadNameMapJava() {
     super.loadNameMapJava();
     namesMap.put("001", "Mundo");
+    namesMap.put("003", "Hilagang Amerika");
+    namesMap.put("005", "Timog Amerika");
+    namesMap.put("011", "Kanlurang Africa");
+    namesMap.put("013", "Gitnang Amerika");
+    namesMap.put("014", "Silangang Africa");
+    namesMap.put("015", "Hilagang Africa");
+    namesMap.put("017", "Gitnang Africa");
+    namesMap.put("018", "Katimugang Africa");
     namesMap.put("029", "Carribbean");
+    namesMap.put("030", "Silangang Asya");
+    namesMap.put("034", "Katimugang Asya");
+    namesMap.put("035", "Timog-Silangang Asya");
+    namesMap.put("039", "Katimugang Europe");
+    namesMap.put("057", "Rehiyon ng Micronesia");
+    namesMap.put("142", "Asya");
+    namesMap.put("143", "Gitnang Asya");
+    namesMap.put("145", "Kanlurang Asya");
+    namesMap.put("151", "Silangang Europe");
+    namesMap.put("154", "Hilagang Europe");
+    namesMap.put("155", "Kanlurang Europe");
     namesMap.put("AC", "Acsencion island");
-    namesMap.put("CD", "Congo - Kinshasa");
-    namesMap.put("CG", "Congo - Brazzaville");
-    namesMap.put("CI", "Côte d'Ivoire");
-    namesMap.put("FK", "Falkland Islands");
-    namesMap.put("GS", "South Georgia and the South Sandwich Islands");
-    namesMap.put("HM", "Heard Island and McDonald Islands");
-    namesMap.put("IC", "Canary Island");
-    namesMap.put("MK", "Macedonia");
+    namesMap.put("BA", "Bosnia and Herzegovina");
+    namesMap.put("EH", "Kanlurang Sahara");
+    namesMap.put("KP", "Hilagang Korea");
+    namesMap.put("KR", "Timog Korea");
+    namesMap.put("LC", "Saint Lucia");
+    namesMap.put("MF", "Saint Martin");
     namesMap.put("PH", "Pilipinas");
+    namesMap.put("SS", "Timog Sudan");
     namesMap.put("TA", "Tristan de Cunha");
     namesMap.put("US", "Estados Unidos");
-    namesMap.put("VC", "Saint Vincent and the Grenadines");
     namesMap.put("ZZ", "Hindi Kilalang Rehiyon");
   }
 
@@ -325,20 +343,37 @@ public class LocalizedNamesImpl_fil extends LocalizedNamesImpl {
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
         "001": "Mundo",
+        "003": "Hilagang Amerika",
+        "005": "Timog Amerika",
+        "011": "Kanlurang Africa",
+        "013": "Gitnang Amerika",
+        "014": "Silangang Africa",
+        "015": "Hilagang Africa",
+        "017": "Gitnang Africa",
+        "018": "Katimugang Africa",
         "029": "Carribbean",
+        "030": "Silangang Asya",
+        "034": "Katimugang Asya",
+        "035": "Timog-Silangang Asya",
+        "039": "Katimugang Europe",
+        "057": "Rehiyon ng Micronesia",
+        "142": "Asya",
+        "143": "Gitnang Asya",
+        "145": "Kanlurang Asya",
+        "151": "Silangang Europe",
+        "154": "Hilagang Europe",
+        "155": "Kanlurang Europe",
         "AC": "Acsencion island",
-        "CD": "Congo - Kinshasa",
-        "CG": "Congo - Brazzaville",
-        "CI": "Côte d'Ivoire",
-        "FK": "Falkland Islands",
-        "GS": "South Georgia and the South Sandwich Islands",
-        "HM": "Heard Island and McDonald Islands",
-        "IC": "Canary Island",
-        "MK": "Macedonia",
+        "BA": "Bosnia and Herzegovina",
+        "EH": "Kanlurang Sahara",
+        "KP": "Hilagang Korea",
+        "KR": "Timog Korea",
+        "LC": "Saint Lucia",
+        "MF": "Saint Martin",
         "PH": "Pilipinas",
+        "SS": "Timog Sudan",
         "TA": "Tristan de Cunha",
         "US": "Estados Unidos",
-        "VC": "Saint Vincent and the Grenadines",
         "ZZ": "Hindi Kilalang Rehiyon"
     };
   }-*/;

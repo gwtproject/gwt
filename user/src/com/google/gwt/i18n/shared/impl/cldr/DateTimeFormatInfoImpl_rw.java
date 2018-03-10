@@ -22,16 +22,6 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_rw extends DateTimeFormatInfoImpl {
 
   @Override
-  public String dateFormatFull() {
-    return "EEEE, y MMMM dd";
-  }
-
-  @Override
-  public String dateFormatShort() {
-    return "yy/MM/dd";
-  }
-
-  @Override
   public String[] erasFull() {
     return new String[] {
         "BCE",
@@ -45,6 +35,11 @@ public class DateTimeFormatInfoImpl_rw extends DateTimeFormatInfoImpl {
         "BCE",
         "CE"
     };
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "y-MM-dd";
   }
 
   @Override

@@ -107,6 +107,7 @@ public class LocalizedNamesImpl_naq extends LocalizedNamesImpl {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FK",
         "FJ",
         "FI",
@@ -194,7 +195,6 @@ public class LocalizedNamesImpl_naq extends LocalizedNamesImpl {
         "NR",
         "NP",
         "NL",
-        "AN",
         "NC",
         "NZ",
         "NI",
@@ -272,6 +272,7 @@ public class LocalizedNamesImpl_naq extends LocalizedNamesImpl {
         "UG",
         "UA",
         "UM",
+        "UN",
         "AE",
         "GB",
         "UY",
@@ -342,7 +343,6 @@ public class LocalizedNamesImpl_naq extends LocalizedNamesImpl {
     namesMap.put("ET", "Ethiopiab");
     namesMap.put("FI", "Finlandi");
     namesMap.put("FJ", "Fijib");
-    namesMap.put("FK", "Falkland Islands");
     namesMap.put("FR", "Frankreiki");
     namesMap.put("GA", "Gaboni");
     namesMap.put("GE", "Georgiab");
@@ -366,11 +366,13 @@ public class LocalizedNamesImpl_naq extends LocalizedNamesImpl {
     namesMap.put("KE", "Kenyab");
     namesMap.put("KG", "Kyrgyzstanni");
     namesMap.put("KH", "Cambodiab");
+    namesMap.put("KN", "Saint Kitts and Nevis");
     namesMap.put("KP", "Koreab, Noord");
     namesMap.put("KR", "Koreab, Suid");
     namesMap.put("KW", "Kuwaiti");
     namesMap.put("KZ", "Kazakhstanni");
     namesMap.put("LB", "Lebanonni");
+    namesMap.put("LC", "Saint Lucia");
     namesMap.put("LI", "Liechtensteinni");
     namesMap.put("LK", "Sri Lankab");
     namesMap.put("LR", "Liberiab");
@@ -398,6 +400,7 @@ public class LocalizedNamesImpl_naq extends LocalizedNamesImpl {
     namesMap.put("PH", "Philippinni");
     namesMap.put("PK", "Pakistanni");
     namesMap.put("PL", "Polandi");
+    namesMap.put("PM", "Saint Pierre and Miquelon");
     namesMap.put("PN", "Pitcairn");
     namesMap.put("PS", "Palestinian West Bank and Gaza");
     namesMap.put("PT", "Portugali");
@@ -407,17 +410,21 @@ public class LocalizedNamesImpl_naq extends LocalizedNamesImpl {
     namesMap.put("SA", "Saudi Arabiab");
     namesMap.put("SD", "Sudanni");
     namesMap.put("SE", "Swedeb");
+    namesMap.put("SH", "Saint Helena");
     namesMap.put("SN", "Senegali");
     namesMap.put("SO", "Somaliab");
+    namesMap.put("ST", "São Tomé and Príncipe");
     namesMap.put("SV", "El Salvadori");
     namesMap.put("SY", "Syriab");
     namesMap.put("SZ", "Swazilandi");
+    namesMap.put("TC", "Turks and Caicos Islands");
     namesMap.put("TD", "Chadi");
     namesMap.put("TG", "Togob");
     namesMap.put("TH", "Thailandi");
     namesMap.put("TL", "East Timor");
     namesMap.put("TN", "Tunisiab");
     namesMap.put("TR", "Turkeieb");
+    namesMap.put("TT", "Trinidad and Tobago");
     namesMap.put("TZ", "Tanzaniab");
     namesMap.put("UG", "Ugandab");
     namesMap.put("US", "Amerikab");
@@ -426,6 +433,7 @@ public class LocalizedNamesImpl_naq extends LocalizedNamesImpl {
     namesMap.put("VC", "Saint Vincent and the Grenadines");
     namesMap.put("VE", "Venezuelab");
     namesMap.put("VN", "Vietnammi");
+    namesMap.put("WF", "Wallis and Futuna");
     namesMap.put("ZA", "Suid Afrikab");
     namesMap.put("ZM", "Zambiab");
     namesMap.put("ZW", "Zimbabweb");
@@ -488,7 +496,6 @@ public class LocalizedNamesImpl_naq extends LocalizedNamesImpl {
         "ET": "Ethiopiab",
         "FI": "Finlandi",
         "FJ": "Fijib",
-        "FK": "Falkland Islands",
         "FR": "Frankreiki",
         "GA": "Gaboni",
         "GE": "Georgiab",
@@ -512,11 +519,13 @@ public class LocalizedNamesImpl_naq extends LocalizedNamesImpl {
         "KE": "Kenyab",
         "KG": "Kyrgyzstanni",
         "KH": "Cambodiab",
+        "KN": "Saint Kitts and Nevis",
         "KP": "Koreab, Noord",
         "KR": "Koreab, Suid",
         "KW": "Kuwaiti",
         "KZ": "Kazakhstanni",
         "LB": "Lebanonni",
+        "LC": "Saint Lucia",
         "LI": "Liechtensteinni",
         "LK": "Sri Lankab",
         "LR": "Liberiab",
@@ -544,6 +553,7 @@ public class LocalizedNamesImpl_naq extends LocalizedNamesImpl {
         "PH": "Philippinni",
         "PK": "Pakistanni",
         "PL": "Polandi",
+        "PM": "Saint Pierre and Miquelon",
         "PN": "Pitcairn",
         "PS": "Palestinian West Bank and Gaza",
         "PT": "Portugali",
@@ -553,17 +563,21 @@ public class LocalizedNamesImpl_naq extends LocalizedNamesImpl {
         "SA": "Saudi Arabiab",
         "SD": "Sudanni",
         "SE": "Swedeb",
+        "SH": "Saint Helena",
         "SN": "Senegali",
         "SO": "Somaliab",
+        "ST": "São Tomé and Príncipe",
         "SV": "El Salvadori",
         "SY": "Syriab",
         "SZ": "Swazilandi",
+        "TC": "Turks and Caicos Islands",
         "TD": "Chadi",
         "TG": "Togob",
         "TH": "Thailandi",
         "TL": "East Timor",
         "TN": "Tunisiab",
         "TR": "Turkeieb",
+        "TT": "Trinidad and Tobago",
         "TZ": "Tanzaniab",
         "UG": "Ugandab",
         "US": "Amerikab",
@@ -572,6 +586,7 @@ public class LocalizedNamesImpl_naq extends LocalizedNamesImpl {
         "VC": "Saint Vincent and the Grenadines",
         "VE": "Venezuelab",
         "VN": "Vietnammi",
+        "WF": "Wallis and Futuna",
         "ZA": "Suid Afrikab",
         "ZM": "Zambiab",
         "ZW": "Zimbabweb"

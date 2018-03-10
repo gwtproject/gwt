@@ -22,8 +22,11 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_fr_CA extends DateTimeFormatInfoImpl_fr {
 
   @Override
-  public String dateFormatMedium() {
-    return "y-MM-dd";
+  public String[] ampms() {
+    return new String[] {
+        "a.m.",
+        "p.m."
+    };
   }
 
   @Override
@@ -32,8 +35,38 @@ public class DateTimeFormatInfoImpl_fr_CA extends DateTimeFormatInfoImpl_fr {
   }
 
   @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
+  }
+
+  @Override
   public int firstDayOfTheWeek() {
     return 0;
+  }
+
+  @Override
+  public String formatHour12Minute() {
+    return "h 'h' mm a";
+  }
+
+  @Override
+  public String formatHour12MinuteSecond() {
+    return "h 'h' mm 'min' ss 's' a";
+  }
+
+  @Override
+  public String formatHour24Minute() {
+    return "HH 'h' mm";
+  }
+
+  @Override
+  public String formatHour24MinuteSecond() {
+    return "HH 'h' mm 'min' ss 's'";
+  }
+
+  @Override
+  public String formatMinuteSecond() {
+    return "mm 'min' ss 's'";
   }
 
   @Override
@@ -52,7 +85,40 @@ public class DateTimeFormatInfoImpl_fr_CA extends DateTimeFormatInfoImpl_fr {
   }
 
   @Override
+  public String[] monthsShort() {
+    return new String[] {
+        "janv.",
+        "févr.",
+        "mars",
+        "avr.",
+        "mai",
+        "juin",
+        "juill.",
+        "août",
+        "sept.",
+        "oct.",
+        "nov.",
+        "déc."
+    };
+  }
+
+  @Override
   public String timeFormatFull() {
     return "HH 'h' mm 'min' ss 's' zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "HH 'h' mm 'min' ss 's' z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "HH 'h' mm 'min' ss 's'";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "HH 'h' mm";
   }
 }

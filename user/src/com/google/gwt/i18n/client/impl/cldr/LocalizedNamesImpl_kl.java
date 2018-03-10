@@ -92,6 +92,7 @@ public class LocalizedNamesImpl_kl extends LocalizedNamesImpl {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FK",
         "FJ",
         "FI",
@@ -271,6 +272,7 @@ public class LocalizedNamesImpl_kl extends LocalizedNamesImpl {
         "UG",
         "UA",
         "UM",
+        "UN",
         "HU",
         "UY",
         "UZ",
@@ -321,6 +323,7 @@ public class LocalizedNamesImpl_kl extends LocalizedNamesImpl {
     namesMap.put("AX", "Ålandi");
     namesMap.put("BA", "Bosnia aamma Herzegovina");
     namesMap.put("BE", "Belgia");
+    namesMap.put("BL", "Saint Barthélemy");
     namesMap.put("BV", "Bouvet qeqertaq");
     namesMap.put("BY", "Hvideruslandi");
     namesMap.put("CC", "Cocos qeqertaq");
@@ -369,6 +372,7 @@ public class LocalizedNamesImpl_kl extends LocalizedNamesImpl {
     namesMap.put("KY", "Cayman qeqertaq");
     namesMap.put("KZ", "Kasakhstani");
     namesMap.put("LB", "Libanon");
+    namesMap.put("LC", "Saint Lucia");
     namesMap.put("LI", "Liechtensteini");
     namesMap.put("LT", "Litaueni");
     namesMap.put("LV", "Letlandi");
@@ -394,6 +398,7 @@ public class LocalizedNamesImpl_kl extends LocalizedNamesImpl {
     namesMap.put("RU", "Ruslandi");
     namesMap.put("SD", "Avannarleqsudan");
     namesMap.put("SE", "Sverige");
+    namesMap.put("SH", "Saint Helena");
     namesMap.put("SJ", "Svalbard aamma Jan Mayen");
     namesMap.put("SS", "Kujalleqsudan");
     namesMap.put("ST", "São Tomé aamma Príncipe");
@@ -451,6 +456,7 @@ public class LocalizedNamesImpl_kl extends LocalizedNamesImpl {
         "AX": "Ålandi",
         "BA": "Bosnia aamma Herzegovina",
         "BE": "Belgia",
+        "BL": "Saint Barthélemy",
         "BV": "Bouvet qeqertaq",
         "BY": "Hvideruslandi",
         "CC": "Cocos qeqertaq",
@@ -499,6 +505,7 @@ public class LocalizedNamesImpl_kl extends LocalizedNamesImpl {
         "KY": "Cayman qeqertaq",
         "KZ": "Kasakhstani",
         "LB": "Libanon",
+        "LC": "Saint Lucia",
         "LI": "Liechtensteini",
         "LT": "Litaueni",
         "LV": "Letlandi",
@@ -524,6 +531,7 @@ public class LocalizedNamesImpl_kl extends LocalizedNamesImpl {
         "RU": "Ruslandi",
         "SD": "Avannarleqsudan",
         "SE": "Sverige",
+        "SH": "Saint Helena",
         "SJ": "Svalbard aamma Jan Mayen",
         "SS": "Kujalleqsudan",
         "ST": "São Tomé aamma Príncipe",

@@ -22,14 +22,6 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_km extends DateTimeFormatInfoImpl {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "ព្រឹក",
-        "ល្ងាច"
-    };
-  }
-
-  @Override
   public String dateFormatFull() {
     return "EEEE d MMMM y";
   }
@@ -46,7 +38,27 @@ public class DateTimeFormatInfoImpl_km extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "d/M/y";
+    return "d/M/yy";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " នៅ​ម៉ោង " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " នៅ​ម៉ោង " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
   }
 
   @Override
@@ -76,18 +88,13 @@ public class DateTimeFormatInfoImpl_km extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatMonthFullDay() {
-    return "d MMMM";
-  }
-
-  @Override
   public String formatMonthFullWeekdayDay() {
     return "EEEE d MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "d-M";
+    return "d/M";
   }
 
   @Override
@@ -112,12 +119,12 @@ public class DateTimeFormatInfoImpl_km extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "M-y";
+    return "M/y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d-M-y";
+    return "d/M/y";
   }
 
   @Override
@@ -156,18 +163,18 @@ public class DateTimeFormatInfoImpl_km extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsNarrow() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
+        "ម",
+        "ក",
+        "ម",
+        "ម",
+        "ឧ",
+        "ម",
+        "ក",
+        "ស",
+        "ក",
+        "ត",
+        "វ",
+        "ធ"
     };
   }
 
@@ -192,20 +199,20 @@ public class DateTimeFormatInfoImpl_km extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "ត្រីមាសទី ១",
-        "ត្រីមាសទី ២",
-        "ត្រីមាសទី ៣",
-        "ត្រីមាសទី ៤"
+        "ត្រីមាសទី 1",
+        "ត្រីមាសទី 2",
+        "ត្រីមាសទី 3",
+        "ត្រីមាសទី 4"
     };
   }
 
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "ត្រីមាស ១",
-        "ត្រីមាស ២",
-        "ត្រីមាស ៣",
-        "ត្រីមាស ៤"
+        "ត្រីមាសទី 1",
+        "ត្រីមាសទី 2",
+        "ត្រីមាសទី 3",
+        "ត្រីមាសទី 4"
     };
   }
 
@@ -233,7 +240,7 @@ public class DateTimeFormatInfoImpl_km extends DateTimeFormatInfoImpl {
   public String[] weekdaysFull() {
     return new String[] {
         "អាទិត្យ",
-        "ចន្ទ",
+        "ច័ន្ទ",
         "អង្គារ",
         "ពុធ",
         "ព្រហស្បតិ៍",
@@ -245,13 +252,13 @@ public class DateTimeFormatInfoImpl_km extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
+        "អ",
+        "ច",
+        "អ",
+        "ព",
+        "ព",
+        "ស",
+        "ស"
     };
   }
 
@@ -259,7 +266,7 @@ public class DateTimeFormatInfoImpl_km extends DateTimeFormatInfoImpl {
   public String[] weekdaysShort() {
     return new String[] {
         "អាទិត្យ",
-        "ចន្ទ",
+        "ច័ន្ទ",
         "អង្គារ",
         "ពុធ",
         "ព្រហស្បតិ៍",

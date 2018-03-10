@@ -52,8 +52,8 @@ public class DateTimeFormatInfoImpl_so extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "Ciise ka hor (CS)",
-        "Ciise ka dib (CS)"
+        "CK",
+        "CD"
     };
   }
 
@@ -234,7 +234,7 @@ public class DateTimeFormatInfoImpl_so extends DateTimeFormatInfoImpl {
         "I",
         "T",
         "A",
-        "K",
+        "Kh",
         "J",
         "S"
     };

@@ -31,7 +31,7 @@ public class DateTimeFormatInfoImpl_af extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatFull() {
-    return "EEEE dd MMMM y";
+    return "EEEE, dd MMMM y";
   }
 
   @Override
@@ -66,13 +66,23 @@ public class DateTimeFormatInfoImpl_af extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "d MMM";
+  }
+
+  @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
+    return "EEEE d MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M/d";
+    return "dd-MM";
   }
 
   @Override
@@ -97,12 +107,12 @@ public class DateTimeFormatInfoImpl_af extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "M/y";
+    return "MM-y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "M/d/y";
+    return "y-MM-dd";
   }
 
   @Override
@@ -141,18 +151,18 @@ public class DateTimeFormatInfoImpl_af extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
+        "Jan.",
+        "Feb.",
+        "Mrt.",
+        "Apr.",
         "Mei",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Okt",
-        "Nov",
-        "Des"
+        "Jun.",
+        "Jul.",
+        "Aug.",
+        "Sep.",
+        "Okt.",
+        "Nov.",
+        "Des."
     };
   }
 
@@ -174,26 +184,6 @@ public class DateTimeFormatInfoImpl_af extends DateTimeFormatInfoImpl {
         "K3",
         "K4"
     };
-  }
-
-  @Override
-  public String timeFormatFull() {
-    return "h:mm:ss a zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "h:mm:ss a z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "h:mm:ss a";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "h:mm a";
   }
 
   @Override
@@ -225,13 +215,13 @@ public class DateTimeFormatInfoImpl_af extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "So",
-        "Ma",
-        "Di",
-        "Wo",
-        "Do",
-        "Vr",
-        "Sa"
+        "So.",
+        "Ma.",
+        "Di.",
+        "Wo.",
+        "Do.",
+        "Vr.",
+        "Sa."
     };
   }
 }

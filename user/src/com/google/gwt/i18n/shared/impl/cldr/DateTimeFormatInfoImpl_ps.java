@@ -40,11 +40,6 @@ public class DateTimeFormatInfoImpl_ps extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String dateFormatMedium() {
-    return "d MMM y";
-  }
-
-  @Override
   public String dateFormatShort() {
     return "y/M/d";
   }
@@ -52,15 +47,15 @@ public class DateTimeFormatInfoImpl_ps extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "ق.م.",
-        "م."
+        "له میلاد څخه وړاندې",
+        "له میلاد څخه وروسته"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "ق.م.",
+        "له میلاد وړاندې",
         "م."
     };
   }
@@ -81,8 +76,23 @@ public class DateTimeFormatInfoImpl_ps extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthFullDay() {
+    return "d MMMM";
+  }
+
+  @Override
+  public String formatMonthNumDay() {
+    return "M/d";
+  }
+
+  @Override
+  public String formatYear() {
+    return "G y";
+  }
+
+  @Override
   public String formatYearMonthAbbrev() {
-    return "G y MMM";
+    return "د G y د MMM";
   }
 
   @Override
@@ -92,7 +102,7 @@ public class DateTimeFormatInfoImpl_ps extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFull() {
-    return "G y MMMM";
+    return "د G y د MMMM";
   }
 
   @Override
@@ -102,7 +112,7 @@ public class DateTimeFormatInfoImpl_ps extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "GGGGG y-MM";
+    return "G y/M";
   }
 
   @Override
@@ -132,10 +142,28 @@ public class DateTimeFormatInfoImpl_ps extends DateTimeFormatInfoImpl {
         "فبروري",
         "مارچ",
         "اپریل",
-        "می",
+        "مۍ",
         "جون",
         "جولای",
-        "اګست",
+        "اگست",
+        "سېپتمبر",
+        "اکتوبر",
+        "نومبر",
+        "دسمبر"
+    };
+  }
+
+  @Override
+  public String[] monthsFullStandalone() {
+    return new String[] {
+        "جنوري",
+        "فېبروري",
+        "مارچ",
+        "اپریل",
+        "مۍ",
+        "جون",
+        "جولای",
+        "اگست",
         "سپتمبر",
         "اکتوبر",
         "نومبر",
@@ -145,6 +173,24 @@ public class DateTimeFormatInfoImpl_ps extends DateTimeFormatInfoImpl {
 
   @Override
   public String[] monthsNarrow() {
+    return new String[] {
+        "ج",
+        "ف",
+        "م",
+        "ا",
+        "م",
+        "ج",
+        "ج",
+        "ا",
+        "س",
+        "ا",
+        "ن",
+        "د"
+    };
+  }
+
+  @Override
+  public String[] monthsNarrowStandalone() {
     return new String[] {
         "1",
         "2",
@@ -168,10 +214,28 @@ public class DateTimeFormatInfoImpl_ps extends DateTimeFormatInfoImpl {
         "فبروري",
         "مارچ",
         "اپریل",
-        "می",
+        "مۍ",
         "جون",
         "جولای",
-        "اګست",
+        "اگست",
+        "سېپتمبر",
+        "اکتوبر",
+        "نومبر",
+        "دسمبر"
+    };
+  }
+
+  @Override
+  public String[] monthsShortStandalone() {
+    return new String[] {
+        "جنوري",
+        "فبروري",
+        "مارچ",
+        "اپریل",
+        "مۍ",
+        "جون",
+        "جولای",
+        "اگست",
         "سپتمبر",
         "اکتوبر",
         "نومبر",
@@ -182,10 +246,20 @@ public class DateTimeFormatInfoImpl_ps extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Q1",
-        "Q2",
-        "Q3",
-        "Q4"
+        "لومړۍ ربعه",
+        "۲مه ربعه",
+        "۳مه ربعه",
+        "۴مه ربعه"
+    };
+  }
+
+  @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "لومړۍ ربعه",
+        "۲مه ربعه",
+        "۳مه ربعه",
+        "۴مه ربعه"
     };
   }
 
@@ -212,26 +286,26 @@ public class DateTimeFormatInfoImpl_ps extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "یکشنبه",
-        "دوشنبه",
-        "سه‌شنبه",
-        "چهارشنبه",
-        "پنجشنبه",
+        "يونۍ",
+        "دونۍ",
+        "درېنۍ",
+        "څلرنۍ",
+        "پينځنۍ",
         "جمعه",
-        "شنبه"
+        "اونۍ"
     };
   }
 
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "یکشنبه",
-        "دوشنبه",
-        "سه‌شنبه",
-        "چهارشنبه",
-        "پنجشنبه",
+        "يونۍ",
+        "دونۍ",
+        "درېنۍ",
+        "څلرنۍ",
+        "پينځنۍ",
         "جمعه",
-        "شنبه"
+        "اونۍ"
     };
   }
 }

@@ -74,7 +74,7 @@ public class DateTimeFormatInfoImpl_sw extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthNumDay() {
-    return "d-M";
+    return "d/M";
   }
 
   @Override
@@ -118,11 +118,6 @@ public class DateTimeFormatInfoImpl_sw extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatYearQuarterShort() {
-    return "Q y";
-  }
-
-  @Override
   public String[] monthsFull() {
     return new String[] {
         "Januari",
@@ -161,31 +156,21 @@ public class DateTimeFormatInfoImpl_sw extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Robo 1",
-        "Robo 2",
-        "Robo 3",
-        "Robo 4"
+        "Robo ya 1",
+        "Robo ya 2",
+        "Robo ya 3",
+        "Robo ya 4"
     };
   }
 
   @Override
-  public String timeFormatFull() {
-    return "h:mm:ss a zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "h:mm:ss a z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "h:mm:ss a";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "h:mm a";
+  public String[] quartersShort() {
+    return new String[] {
+        "Robo ya 1",
+        "Robo ya 2",
+        "Robo ya 3",
+        "Robo ya 4"
+    };
   }
 
   @Override
@@ -198,19 +183,6 @@ public class DateTimeFormatInfoImpl_sw extends DateTimeFormatInfoImpl {
         "Alhamisi",
         "Ijumaa",
         "Jumamosi"
-    };
-  }
-
-  @Override
-  public String[] weekdaysNarrow() {
-    return new String[] {
-        "2",
-        "3",
-        "4",
-        "5",
-        "A",
-        "I",
-        "1"
     };
   }
 

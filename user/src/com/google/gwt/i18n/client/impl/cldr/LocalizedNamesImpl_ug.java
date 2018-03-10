@@ -25,18 +25,27 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
 
   @Override
+  public String[] loadLikelyRegionCodes() {
+    return new String[] {
+        "CN",
+    };
+  }
+
+  @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "EZ",
+        "UN",
         "AR",
         "AW",
         "AC",
         "AF",
+        "UM",
+        "VI",
         "AX",
         "AL",
         "DZ",
         "AS",
-        "UM",
-        "VI",
         "US",
         "AQ",
         "AG",
@@ -44,8 +53,8 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "AO",
         "AI",
         "AU",
-        "AT",
         "MO",
+        "AT",
         "CF",
         "QO",
         "OM",
@@ -64,34 +73,33 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "ER",
         "EE",
         "ET",
-        "GQ",
         "EC",
+        "GQ",
         "AM",
         "AE",
         "AZ",
-        "SV",
         "IO",
-        "GB",
         "VG",
         "BB",
-        "BD",
         "BS",
         "BW",
         "BA",
         "BO",
+        "BV",
         "BR",
+        "GB",
         "MM",
         "BN",
         "BT",
         "BF",
         "BI",
         "BG",
-        "BV",
         "BM",
         "BY",
         "BZ",
         "BE",
         "BJ",
+        "BD",
         "BH",
         "TJ",
         "TZ",
@@ -114,19 +122,17 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "ZA",
         "GS",
         "SS",
-        "KR",
-        "HM",
         "DK",
         "DM",
         "DO",
         "DG",
-        "CX",
+        "RO",
         "RW",
         "RU",
-        "RO",
         "RE",
         "ZM",
         "ZW",
+        "SV",
         "WS",
         "ST",
         "SM",
@@ -135,8 +141,8 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "LC",
         "MF",
         "PM",
-        "SH",
         "VC",
+        "SH",
         "SB",
         "SO",
         "LK",
@@ -156,7 +162,6 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "EA",
         "SC",
         "SA",
-        "KP",
         "MP",
         "CH",
         "SE",
@@ -173,6 +178,7 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "PH",
         "FI",
         "QA",
+        "ME",
         "KZ",
         "KG",
         "BQ",
@@ -182,8 +188,10 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "IC",
         "KY",
         "CI",
+        "KR",
         "CR",
         "XK",
+        "CC",
         "CO",
         "KM",
         "CG",
@@ -196,13 +204,12 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "CK",
         "KW",
         "KE",
-        "CC",
         "LA",
         "LV",
         "LR",
         "LT",
-        "LU",
         "LI",
+        "LU",
         "LB",
         "LY",
         "LS",
@@ -216,6 +223,7 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "MT",
         "MV",
         "ML",
+        "IM",
         "YT",
         "MR",
         "MU",
@@ -223,21 +231,20 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "MD",
         "MC",
         "MS",
-        "ME",
         "MN",
         "EG",
         "FM",
+        "CX",
         "MX",
-        "IM",
         "NA",
         "NR",
         "NF",
         "NO",
         "NI",
-        "NU",
-        "NG",
-        "NP",
         "NE",
+        "NG",
+        "NU",
+        "NP",
         "JM",
         "JP",
         "EU",
@@ -257,6 +264,7 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "PE",
         "PS",
         "TD",
+        "KP",
         "CL",
         "CZ",
         "GA",
@@ -273,12 +281,13 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "GW",
         "GY",
         "GU",
-        "DE",
         "GG",
+        "DE",
         "HT",
         "HN",
         "ID",
         "IN",
+        "HM",
         "VA",
         "WF",
         "VU",
@@ -325,29 +334,29 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
     namesMap.put("AD", "ئاندوررا");
     namesMap.put("AE", "ئەرەب بىرلەشمە خەلىپىلىكى");
     namesMap.put("AF", "ئافغانىستان");
-    namesMap.put("AG", "ئانتىگۋا ۋە باربۇدا");
+    namesMap.put("AG", "ئانتىگۇئا ۋە باربۇدا");
     namesMap.put("AI", "ئانگۋىللا");
     namesMap.put("AL", "ئالبانىيە");
     namesMap.put("AM", "ئەرمېنىيە");
     namesMap.put("AO", "ئانگولا");
     namesMap.put("AQ", "ئانتاركتىكا");
     namesMap.put("AR", "ئارگېنتىنا");
-    namesMap.put("AS", "ئامېرىكا تەۋەلىكىدىكى ساموئا");
-    namesMap.put("AT", "ئاۋسترىيە");
+    namesMap.put("AS", "ئامېرىكا ساموئا");
+    namesMap.put("AT", "ئاۋىستىرىيە");
     namesMap.put("AU", "ئاۋسترالىيە");
     namesMap.put("AW", "ئارۇبا");
     namesMap.put("AX", "ئالاند ئاراللىرى");
     namesMap.put("AZ", "ئەزەربەيجان");
-    namesMap.put("BA", "بوسنىيە-گېرتسېگوۋىنا");
+    namesMap.put("BA", "بوسىنىيە ۋە گېرتسېگوۋىنا");
     namesMap.put("BB", "باربادوس");
-    namesMap.put("BD", "باڭلادىش");
+    namesMap.put("BD", "بېنگال");
     namesMap.put("BE", "بېلگىيە");
-    namesMap.put("BF", "بۇركىنا-فاسو");
+    namesMap.put("BF", "بۇركىنا فاسو");
     namesMap.put("BG", "بۇلغارىيە");
     namesMap.put("BH", "بەھرەين");
     namesMap.put("BI", "بۇرۇندى");
     namesMap.put("BJ", "بېنىن");
-    namesMap.put("BL", "ساينىت-بارتھېلەمي ئاراللىرى");
+    namesMap.put("BL", "ساينت بارتېلېمى");
     namesMap.put("BM", "بېرمۇدا");
     namesMap.put("BN", "بىرۇنېي");
     namesMap.put("BO", "بولىۋىيە");
@@ -355,16 +364,16 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
     namesMap.put("BR", "بىرازىلىيە");
     namesMap.put("BS", "باھاما");
     namesMap.put("BT", "بۇتان");
-    namesMap.put("BV", "بۇۋېت ئاراللىرى");
+    namesMap.put("BV", "بوۋېت ئارىلى");
     namesMap.put("BW", "بوتسۋانا");
     namesMap.put("BY", "بېلارۇسىيە");
     namesMap.put("BZ", "بېلىز");
     namesMap.put("CA", "كانادا");
-    namesMap.put("CC", "كەئەلىڭ كوكۇس ئاراللىرى");
+    namesMap.put("CC", "كوكوس (كىلىڭ) ئاراللىرى");
     namesMap.put("CD", "كونگو - كىنشاسا");
     namesMap.put("CF", "ئوتتۇرا ئافرىقا جۇمھۇرىيىتى");
     namesMap.put("CG", "كونگو - بىراززاۋىل");
-    namesMap.put("CH", "شىۋىتسارىيە");
+    namesMap.put("CH", "شىۋېتسارىيە");
     namesMap.put("CI", "كوتې دې ئىۋوئىر");
     namesMap.put("CK", "كۇك ئاراللىرى");
     namesMap.put("CL", "چىلى");
@@ -375,8 +384,8 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
     namesMap.put("CR", "كوستارىكا");
     namesMap.put("CU", "كۇبا");
     namesMap.put("CV", "يېشىل تۇمشۇق");
-    namesMap.put("CW", "كۇراسو");
-    namesMap.put("CX", "روژدېستۋو ئارىلى");
+    namesMap.put("CW", "كۇراچاۋ");
+    namesMap.put("CX", "مىلاد ئارىلى");
     namesMap.put("CY", "سىپرۇس");
     namesMap.put("CZ", "چېخ جۇمھۇرىيىتى");
     namesMap.put("DE", "گېرمانىيە");
@@ -387,11 +396,11 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
     namesMap.put("DO", "دومىنىكا جۇمھۇرىيىتى");
     namesMap.put("DZ", "ئالجىرىيە");
     namesMap.put("EA", "سېيتا ۋە مېلىلا");
-    namesMap.put("EC", "ئېكۋادور");
+    namesMap.put("EC", "ئېكۋاتور");
     namesMap.put("EE", "ئېستونىيە");
     namesMap.put("EG", "مىسىر");
     namesMap.put("EH", "غەربىي ساخارا");
-    namesMap.put("ER", "ئېرىترېيە");
+    namesMap.put("ER", "ئېرىترىيە");
     namesMap.put("ES", "ئىسپانىيە");
     namesMap.put("ET", "ئېفىيوپىيە");
     namesMap.put("EU", "ياۋروپا ئىتتىپاقى");
@@ -399,29 +408,29 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
     namesMap.put("FJ", "فىجى");
     namesMap.put("FK", "فالكلاند ئاراللىرى");
     namesMap.put("FM", "مىكرونېزىيە");
-    namesMap.put("FO", "فائېرو ئاراللىرى");
+    namesMap.put("FO", "فارو ئاراللىرى");
     namesMap.put("FR", "فىرانسىيە");
     namesMap.put("GA", "گابون");
-    namesMap.put("GB", "ئەنگلىيە پادىشاھلىقى");
+    namesMap.put("GB", "بىرلەشمە پادىشاھلىق");
     namesMap.put("GD", "گىرېنادا");
-    namesMap.put("GE", "گىروزىيە");
+    namesMap.put("GE", "گىرۇزىيە");
     namesMap.put("GF", "فىرانسىيەگە قاراشلىق گىۋىيانا");
-    namesMap.put("GG", "گېرىنسى");
+    namesMap.put("GG", "گۇرنسېي");
     namesMap.put("GH", "گانا");
     namesMap.put("GI", "جەبىلتارىق");
-    namesMap.put("GL", "گىرېنلاند");
+    namesMap.put("GL", "گىرېنلاندىيە");
     namesMap.put("GM", "گامبىيە");
-    namesMap.put("GN", "گىۋىنېيە");
+    namesMap.put("GN", "گىۋىنىيە");
     namesMap.put("GP", "گىۋادېلۇپ");
-    namesMap.put("GQ", "ئېكۋاتور گىۋىنېيەسى");
+    namesMap.put("GQ", "ئېكۋاتور گىۋىنىيەسى");
     namesMap.put("GR", "گىرېتسىيە");
-    namesMap.put("GS", "جەنۇبىي جورجىيە ۋە جەنۇبىي ساندىۋىچ ئاراللىرى");
+    namesMap.put("GS", "جەنۇبىي جورجىيە ۋە جەنۇبىي ساندۋىچ ئاراللىرى");
     namesMap.put("GT", "گىۋاتېمالا");
     namesMap.put("GU", "گۇئام");
-    namesMap.put("GW", "گىۋىنېيە-بىسسائۇ");
+    namesMap.put("GW", "گىۋىنىيە بىسسائۇ");
     namesMap.put("GY", "گىۋىيانا");
     namesMap.put("HK", "شياڭگاڭ ئالاھىدە مەمۇرىي رايونى (جۇڭگو)");
-    namesMap.put("HM", "خېرد ۋە ماك-دونالد ئارىلى");
+    namesMap.put("HM", "ھېرد ئارىلى ۋە ماكدونالد ئاراللىرى");
     namesMap.put("HN", "ھوندۇراس");
     namesMap.put("HR", "كىرودىيە");
     namesMap.put("HT", "ھايتى");
@@ -430,9 +439,9 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
     namesMap.put("ID", "ھىندونېزىيە");
     namesMap.put("IE", "ئىرېلاندىيە");
     namesMap.put("IL", "ئىسرائىلىيە");
-    namesMap.put("IM", "مېن ئارىلى");
+    namesMap.put("IM", "مان ئارىلى");
     namesMap.put("IN", "ھىندىستان");
-    namesMap.put("IO", "ئەنگلىيەنىڭ ھىندى ئوكياندىكى تەۋەلىكى");
+    namesMap.put("IO", "ئەنگلىيەگە قاراشلىق ھىندى ئوكيان تېررىتورىيەسى");
     namesMap.put("IQ", "ئىراق");
     namesMap.put("IR", "ئىران");
     namesMap.put("IS", "ئىسلاندىيە");
@@ -446,16 +455,16 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
     namesMap.put("KH", "كامبودژا");
     namesMap.put("KI", "كىرىباتى");
     namesMap.put("KM", "كومورو");
-    namesMap.put("KN", "ساينىت-كىرىستوفېر ۋە نېۋىس");
-    namesMap.put("KP", "شىمالىي كورىيە");
-    namesMap.put("KR", "جەنۇبىي كورىيە");
+    namesMap.put("KN", "ساينت كىتىس ۋە نېۋىس");
+    namesMap.put("KP", "چاۋشيەن");
+    namesMap.put("KR", "كورېيە");
     namesMap.put("KW", "كۇۋەيت");
     namesMap.put("KY", "كايمان ئاراللىرى");
     namesMap.put("KZ", "قازاقىستان");
     namesMap.put("LA", "لائوس");
     namesMap.put("LB", "لىۋان");
-    namesMap.put("LC", "ساينىت-لۇسىيە");
-    namesMap.put("LI", "لىچتېنشتېين بەگلىكى");
+    namesMap.put("LC", "ساينت لۇسىيە");
+    namesMap.put("LI", "لىكتېنستېين");
     namesMap.put("LK", "سىرىلانكا");
     namesMap.put("LR", "لىبېرىيە");
     namesMap.put("LS", "لېسوتو");
@@ -466,29 +475,29 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
     namesMap.put("MA", "ماراكەش");
     namesMap.put("MC", "موناكو");
     namesMap.put("MD", "مولدوۋا");
-    namesMap.put("ME", "مونتېنېگرو");
-    namesMap.put("MF", "ساينىت-مارتېن");
+    namesMap.put("ME", "قارا تاغ");
+    namesMap.put("MF", "ساينت مارتىن");
     namesMap.put("MG", "ماداغاسقار");
     namesMap.put("MH", "مارشال ئاراللىرى");
     namesMap.put("MK", "ماكېدونىيە");
     namesMap.put("ML", "مالى");
     namesMap.put("MM", "بىرما");
     namesMap.put("MN", "موڭغۇلىيە");
-    namesMap.put("MO", "ئاۋمېن ئالاھىدە مەمۇرىي رايونى (جۇڭگو)");
+    namesMap.put("MO", "ئاۋمېن ئالاھىدە مەمۇرىي رايونى");
     namesMap.put("MP", "شىمالىي مارىيانا ئاراللىرى");
     namesMap.put("MQ", "مارتىنىكا");
     namesMap.put("MR", "ماۋرىتانىيە");
     namesMap.put("MS", "مونتسېررات");
     namesMap.put("MT", "مالتا");
-    namesMap.put("MU", "ماۋرىتىئۇس");
+    namesMap.put("MU", "ماۋرىتىيۇس");
     namesMap.put("MV", "مالدىۋې");
     namesMap.put("MW", "مالاۋى");
     namesMap.put("MX", "مېكسىكا");
-    namesMap.put("MY", "مالايشىيا");
+    namesMap.put("MY", "مالايسىيا");
     namesMap.put("MZ", "موزامبىك");
     namesMap.put("NA", "نامىبىيە");
     namesMap.put("NC", "يېڭى كالېدونىيە");
-    namesMap.put("NE", "نېگىر");
+    namesMap.put("NE", "نىگېر");
     namesMap.put("NF", "نورفولك ئارىلى");
     namesMap.put("NG", "نىگېرىيە");
     namesMap.put("NI", "نىكاراگۇئا");
@@ -496,31 +505,31 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
     namesMap.put("NO", "نورۋېگىيە");
     namesMap.put("NP", "نېپال");
     namesMap.put("NR", "ناۋرۇ");
-    namesMap.put("NU", "نىيۇئې");
+    namesMap.put("NU", "نيۇئې");
     namesMap.put("NZ", "يېڭى زېلاندىيە");
     namesMap.put("OM", "ئومان");
     namesMap.put("PA", "پاناما");
     namesMap.put("PE", "پېرۇ");
     namesMap.put("PF", "فىرانسىيەگە قاراشلىق پولىنېزىيە");
-    namesMap.put("PG", "پاپۇئا يېڭى گىۋىنېيەسى");
+    namesMap.put("PG", "پاپۇئا يېڭى گىۋىنىيەسى");
     namesMap.put("PH", "فىلىپپىن");
     namesMap.put("PK", "پاكىستان");
     namesMap.put("PL", "پولشا");
-    namesMap.put("PM", "ساينىت-پىئېر ۋە مىكېلون ئاراللىرى");
-    namesMap.put("PN", "پىتكاير ئاراللىرى");
-    namesMap.put("PR", "پۇئېرتو-رىكو");
+    namesMap.put("PM", "ساينت پىيېر ۋە مىكېلون ئاراللىرى");
+    namesMap.put("PN", "پىتكايرن ئاراللىرى");
+    namesMap.put("PR", "پۇئېرتو رىكو");
     namesMap.put("PS", "پەلەستىن زېمىنى");
     namesMap.put("PT", "پورتۇگالىيە");
-    namesMap.put("PW", "پالاۋ");
+    namesMap.put("PW", "پالائۇ");
     namesMap.put("PY", "پاراگۋاي");
     namesMap.put("QA", "قاتار");
     namesMap.put("QO", "ئوكيانىيە ئەتراپىدىكى ئاراللار");
-    namesMap.put("RE", "رېئونىيون");
-    namesMap.put("RO", "رۇمىنىيە");
+    namesMap.put("RE", "رېيۇنىيون");
+    namesMap.put("RO", "رومىنىيە");
     namesMap.put("RS", "سېربىيە");
     namesMap.put("RU", "رۇسىيە");
     namesMap.put("RW", "رىۋاندا");
-    namesMap.put("SA", "سەئۇدى ئەرەبىستان");
+    namesMap.put("SA", "سەئۇدىي ئەرەبىستان");
     namesMap.put("SB", "سولومون ئاراللىرى");
     namesMap.put("SC", "سېيشېل");
     namesMap.put("SD", "سۇدان");
@@ -528,23 +537,23 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
     namesMap.put("SG", "سىنگاپور");
     namesMap.put("SH", "ساينىت ھېلېنا");
     namesMap.put("SI", "سىلوۋېنىيە");
-    namesMap.put("SJ", "سىۋالبارد ۋە يان-مايېن ئارىلى");
+    namesMap.put("SJ", "سىۋالبارد ۋە يان مايېن");
     namesMap.put("SK", "سىلوۋاكىيە");
     namesMap.put("SL", "سېررالېئون");
-    namesMap.put("SM", "سان-مارىنو");
+    namesMap.put("SM", "سان مارىنو");
     namesMap.put("SN", "سېنېگال");
     namesMap.put("SO", "سومالى");
     namesMap.put("SR", "سۇرىنام");
     namesMap.put("SS", "جەنۇبىي سۇدان");
     namesMap.put("ST", "سان تومې ۋە پرىنسىپې");
-    namesMap.put("SV", "ئەل سالۋادور");
+    namesMap.put("SV", "سالۋادور");
     namesMap.put("SX", "سىنت مارتېن");
-    namesMap.put("SY", "سۈرىيە");
+    namesMap.put("SY", "سۇرىيە");
     namesMap.put("SZ", "سىۋېزىلاند");
     namesMap.put("TA", "ترىستان داكۇنھا");
     namesMap.put("TC", "تۇركس ۋە كايكوس ئاراللىرى");
     namesMap.put("TD", "چاد");
-    namesMap.put("TF", "فىرانسىيەگە قاراشلىق جەنۇبتىكى زېمىنلىرى");
+    namesMap.put("TF", "فىرانسىيەنىڭ جەنۇبىي زېمىنى");
     namesMap.put("TG", "توگو");
     namesMap.put("TH", "تايلاند");
     namesMap.put("TJ", "تاجىكىستان");
@@ -560,22 +569,22 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
     namesMap.put("TZ", "تانزانىيە");
     namesMap.put("UA", "ئۇكرائىنا");
     namesMap.put("UG", "ئۇگاندا");
-    namesMap.put("UM", "ئامېرىكا تەۋەلىكىدىكى سىرتقى كىچىك ئاراللار");
-    namesMap.put("US", "ئامېرىكا قوشما شتاتلىرى");
+    namesMap.put("UM", "ئا ق ش تاشقى ئاراللىرى");
+    namesMap.put("US", "ئامېرىكا قوشما ئىشتاتلىرى");
     namesMap.put("UY", "ئۇرۇگۋاي");
     namesMap.put("UZ", "ئۆزبېكىستان");
-    namesMap.put("VA", "ۋاتىكان شەھىرى");
-    namesMap.put("VC", "ساينىت-ۋىنسېنت ۋە گىرېنادىنېس");
-    namesMap.put("VE", "ۋېنېزۇئېلا");
-    namesMap.put("VG", "ئەنگلىيەگە قاراشلىق ۋىرجىن ئارىلى");
-    namesMap.put("VI", "ئامېرىكا تەۋەلىكىدىكى ۋىرجىن تاقىم ئاراللىرى");
+    namesMap.put("VA", "ۋاتىكان");
+    namesMap.put("VC", "ساينت ۋىنسېنت ۋە گىرېنادىنېس");
+    namesMap.put("VE", "ۋېنېسۇئېلا");
+    namesMap.put("VG", "ئەنگلىيە ۋىرگىن ئاراللىرى");
+    namesMap.put("VI", "ئا ق ش ۋىرگىن ئاراللىرى");
     namesMap.put("VN", "ۋىيېتنام");
     namesMap.put("VU", "ۋانۇئاتۇ");
-    namesMap.put("WF", "ۋالىس ۋە فۇتۇنا");
+    namesMap.put("WF", "ۋاللىس ۋە فۇتۇنا");
     namesMap.put("WS", "ساموئا");
     namesMap.put("XK", "كوسوۋو");
     namesMap.put("YE", "يەمەن");
-    namesMap.put("YT", "مايوتتې");
+    namesMap.put("YT", "مايوتى");
     namesMap.put("ZA", "جەنۇبىي ئافرىقا");
     namesMap.put("ZM", "زامبىيە");
     namesMap.put("ZW", "زىمبابۋې");
@@ -623,29 +632,29 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "AD": "ئاندوررا",
         "AE": "ئەرەب بىرلەشمە خەلىپىلىكى",
         "AF": "ئافغانىستان",
-        "AG": "ئانتىگۋا ۋە باربۇدا",
+        "AG": "ئانتىگۇئا ۋە باربۇدا",
         "AI": "ئانگۋىللا",
         "AL": "ئالبانىيە",
         "AM": "ئەرمېنىيە",
         "AO": "ئانگولا",
         "AQ": "ئانتاركتىكا",
         "AR": "ئارگېنتىنا",
-        "AS": "ئامېرىكا تەۋەلىكىدىكى ساموئا",
-        "AT": "ئاۋسترىيە",
+        "AS": "ئامېرىكا ساموئا",
+        "AT": "ئاۋىستىرىيە",
         "AU": "ئاۋسترالىيە",
         "AW": "ئارۇبا",
         "AX": "ئالاند ئاراللىرى",
         "AZ": "ئەزەربەيجان",
-        "BA": "بوسنىيە-گېرتسېگوۋىنا",
+        "BA": "بوسىنىيە ۋە گېرتسېگوۋىنا",
         "BB": "باربادوس",
-        "BD": "باڭلادىش",
+        "BD": "بېنگال",
         "BE": "بېلگىيە",
-        "BF": "بۇركىنا-فاسو",
+        "BF": "بۇركىنا فاسو",
         "BG": "بۇلغارىيە",
         "BH": "بەھرەين",
         "BI": "بۇرۇندى",
         "BJ": "بېنىن",
-        "BL": "ساينىت-بارتھېلەمي ئاراللىرى",
+        "BL": "ساينت بارتېلېمى",
         "BM": "بېرمۇدا",
         "BN": "بىرۇنېي",
         "BO": "بولىۋىيە",
@@ -653,16 +662,16 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "BR": "بىرازىلىيە",
         "BS": "باھاما",
         "BT": "بۇتان",
-        "BV": "بۇۋېت ئاراللىرى",
+        "BV": "بوۋېت ئارىلى",
         "BW": "بوتسۋانا",
         "BY": "بېلارۇسىيە",
         "BZ": "بېلىز",
         "CA": "كانادا",
-        "CC": "كەئەلىڭ كوكۇس ئاراللىرى",
+        "CC": "كوكوس (كىلىڭ) ئاراللىرى",
         "CD": "كونگو - كىنشاسا",
         "CF": "ئوتتۇرا ئافرىقا جۇمھۇرىيىتى",
         "CG": "كونگو - بىراززاۋىل",
-        "CH": "شىۋىتسارىيە",
+        "CH": "شىۋېتسارىيە",
         "CI": "كوتې دې ئىۋوئىر",
         "CK": "كۇك ئاراللىرى",
         "CL": "چىلى",
@@ -673,8 +682,8 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "CR": "كوستارىكا",
         "CU": "كۇبا",
         "CV": "يېشىل تۇمشۇق",
-        "CW": "كۇراسو",
-        "CX": "روژدېستۋو ئارىلى",
+        "CW": "كۇراچاۋ",
+        "CX": "مىلاد ئارىلى",
         "CY": "سىپرۇس",
         "CZ": "چېخ جۇمھۇرىيىتى",
         "DE": "گېرمانىيە",
@@ -685,11 +694,11 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "DO": "دومىنىكا جۇمھۇرىيىتى",
         "DZ": "ئالجىرىيە",
         "EA": "سېيتا ۋە مېلىلا",
-        "EC": "ئېكۋادور",
+        "EC": "ئېكۋاتور",
         "EE": "ئېستونىيە",
         "EG": "مىسىر",
         "EH": "غەربىي ساخارا",
-        "ER": "ئېرىترېيە",
+        "ER": "ئېرىترىيە",
         "ES": "ئىسپانىيە",
         "ET": "ئېفىيوپىيە",
         "EU": "ياۋروپا ئىتتىپاقى",
@@ -697,29 +706,29 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "FJ": "فىجى",
         "FK": "فالكلاند ئاراللىرى",
         "FM": "مىكرونېزىيە",
-        "FO": "فائېرو ئاراللىرى",
+        "FO": "فارو ئاراللىرى",
         "FR": "فىرانسىيە",
         "GA": "گابون",
-        "GB": "ئەنگلىيە پادىشاھلىقى",
+        "GB": "بىرلەشمە پادىشاھلىق",
         "GD": "گىرېنادا",
-        "GE": "گىروزىيە",
+        "GE": "گىرۇزىيە",
         "GF": "فىرانسىيەگە قاراشلىق گىۋىيانا",
-        "GG": "گېرىنسى",
+        "GG": "گۇرنسېي",
         "GH": "گانا",
         "GI": "جەبىلتارىق",
-        "GL": "گىرېنلاند",
+        "GL": "گىرېنلاندىيە",
         "GM": "گامبىيە",
-        "GN": "گىۋىنېيە",
+        "GN": "گىۋىنىيە",
         "GP": "گىۋادېلۇپ",
-        "GQ": "ئېكۋاتور گىۋىنېيەسى",
+        "GQ": "ئېكۋاتور گىۋىنىيەسى",
         "GR": "گىرېتسىيە",
-        "GS": "جەنۇبىي جورجىيە ۋە جەنۇبىي ساندىۋىچ ئاراللىرى",
+        "GS": "جەنۇبىي جورجىيە ۋە جەنۇبىي ساندۋىچ ئاراللىرى",
         "GT": "گىۋاتېمالا",
         "GU": "گۇئام",
-        "GW": "گىۋىنېيە-بىسسائۇ",
+        "GW": "گىۋىنىيە بىسسائۇ",
         "GY": "گىۋىيانا",
         "HK": "شياڭگاڭ ئالاھىدە مەمۇرىي رايونى (جۇڭگو)",
-        "HM": "خېرد ۋە ماك-دونالد ئارىلى",
+        "HM": "ھېرد ئارىلى ۋە ماكدونالد ئاراللىرى",
         "HN": "ھوندۇراس",
         "HR": "كىرودىيە",
         "HT": "ھايتى",
@@ -728,9 +737,9 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "ID": "ھىندونېزىيە",
         "IE": "ئىرېلاندىيە",
         "IL": "ئىسرائىلىيە",
-        "IM": "مېن ئارىلى",
+        "IM": "مان ئارىلى",
         "IN": "ھىندىستان",
-        "IO": "ئەنگلىيەنىڭ ھىندى ئوكياندىكى تەۋەلىكى",
+        "IO": "ئەنگلىيەگە قاراشلىق ھىندى ئوكيان تېررىتورىيەسى",
         "IQ": "ئىراق",
         "IR": "ئىران",
         "IS": "ئىسلاندىيە",
@@ -744,16 +753,16 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "KH": "كامبودژا",
         "KI": "كىرىباتى",
         "KM": "كومورو",
-        "KN": "ساينىت-كىرىستوفېر ۋە نېۋىس",
-        "KP": "شىمالىي كورىيە",
-        "KR": "جەنۇبىي كورىيە",
+        "KN": "ساينت كىتىس ۋە نېۋىس",
+        "KP": "چاۋشيەن",
+        "KR": "كورېيە",
         "KW": "كۇۋەيت",
         "KY": "كايمان ئاراللىرى",
         "KZ": "قازاقىستان",
         "LA": "لائوس",
         "LB": "لىۋان",
-        "LC": "ساينىت-لۇسىيە",
-        "LI": "لىچتېنشتېين بەگلىكى",
+        "LC": "ساينت لۇسىيە",
+        "LI": "لىكتېنستېين",
         "LK": "سىرىلانكا",
         "LR": "لىبېرىيە",
         "LS": "لېسوتو",
@@ -764,29 +773,29 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "MA": "ماراكەش",
         "MC": "موناكو",
         "MD": "مولدوۋا",
-        "ME": "مونتېنېگرو",
-        "MF": "ساينىت-مارتېن",
+        "ME": "قارا تاغ",
+        "MF": "ساينت مارتىن",
         "MG": "ماداغاسقار",
         "MH": "مارشال ئاراللىرى",
         "MK": "ماكېدونىيە",
         "ML": "مالى",
         "MM": "بىرما",
         "MN": "موڭغۇلىيە",
-        "MO": "ئاۋمېن ئالاھىدە مەمۇرىي رايونى (جۇڭگو)",
+        "MO": "ئاۋمېن ئالاھىدە مەمۇرىي رايونى",
         "MP": "شىمالىي مارىيانا ئاراللىرى",
         "MQ": "مارتىنىكا",
         "MR": "ماۋرىتانىيە",
         "MS": "مونتسېررات",
         "MT": "مالتا",
-        "MU": "ماۋرىتىئۇس",
+        "MU": "ماۋرىتىيۇس",
         "MV": "مالدىۋې",
         "MW": "مالاۋى",
         "MX": "مېكسىكا",
-        "MY": "مالايشىيا",
+        "MY": "مالايسىيا",
         "MZ": "موزامبىك",
         "NA": "نامىبىيە",
         "NC": "يېڭى كالېدونىيە",
-        "NE": "نېگىر",
+        "NE": "نىگېر",
         "NF": "نورفولك ئارىلى",
         "NG": "نىگېرىيە",
         "NI": "نىكاراگۇئا",
@@ -794,31 +803,31 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "NO": "نورۋېگىيە",
         "NP": "نېپال",
         "NR": "ناۋرۇ",
-        "NU": "نىيۇئې",
+        "NU": "نيۇئې",
         "NZ": "يېڭى زېلاندىيە",
         "OM": "ئومان",
         "PA": "پاناما",
         "PE": "پېرۇ",
         "PF": "فىرانسىيەگە قاراشلىق پولىنېزىيە",
-        "PG": "پاپۇئا يېڭى گىۋىنېيەسى",
+        "PG": "پاپۇئا يېڭى گىۋىنىيەسى",
         "PH": "فىلىپپىن",
         "PK": "پاكىستان",
         "PL": "پولشا",
-        "PM": "ساينىت-پىئېر ۋە مىكېلون ئاراللىرى",
-        "PN": "پىتكاير ئاراللىرى",
-        "PR": "پۇئېرتو-رىكو",
+        "PM": "ساينت پىيېر ۋە مىكېلون ئاراللىرى",
+        "PN": "پىتكايرن ئاراللىرى",
+        "PR": "پۇئېرتو رىكو",
         "PS": "پەلەستىن زېمىنى",
         "PT": "پورتۇگالىيە",
-        "PW": "پالاۋ",
+        "PW": "پالائۇ",
         "PY": "پاراگۋاي",
         "QA": "قاتار",
         "QO": "ئوكيانىيە ئەتراپىدىكى ئاراللار",
-        "RE": "رېئونىيون",
-        "RO": "رۇمىنىيە",
+        "RE": "رېيۇنىيون",
+        "RO": "رومىنىيە",
         "RS": "سېربىيە",
         "RU": "رۇسىيە",
         "RW": "رىۋاندا",
-        "SA": "سەئۇدى ئەرەبىستان",
+        "SA": "سەئۇدىي ئەرەبىستان",
         "SB": "سولومون ئاراللىرى",
         "SC": "سېيشېل",
         "SD": "سۇدان",
@@ -826,23 +835,23 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "SG": "سىنگاپور",
         "SH": "ساينىت ھېلېنا",
         "SI": "سىلوۋېنىيە",
-        "SJ": "سىۋالبارد ۋە يان-مايېن ئارىلى",
+        "SJ": "سىۋالبارد ۋە يان مايېن",
         "SK": "سىلوۋاكىيە",
         "SL": "سېررالېئون",
-        "SM": "سان-مارىنو",
+        "SM": "سان مارىنو",
         "SN": "سېنېگال",
         "SO": "سومالى",
         "SR": "سۇرىنام",
         "SS": "جەنۇبىي سۇدان",
         "ST": "سان تومې ۋە پرىنسىپې",
-        "SV": "ئەل سالۋادور",
+        "SV": "سالۋادور",
         "SX": "سىنت مارتېن",
-        "SY": "سۈرىيە",
+        "SY": "سۇرىيە",
         "SZ": "سىۋېزىلاند",
         "TA": "ترىستان داكۇنھا",
         "TC": "تۇركس ۋە كايكوس ئاراللىرى",
         "TD": "چاد",
-        "TF": "فىرانسىيەگە قاراشلىق جەنۇبتىكى زېمىنلىرى",
+        "TF": "فىرانسىيەنىڭ جەنۇبىي زېمىنى",
         "TG": "توگو",
         "TH": "تايلاند",
         "TJ": "تاجىكىستان",
@@ -858,22 +867,22 @@ public class LocalizedNamesImpl_ug extends LocalizedNamesImpl {
         "TZ": "تانزانىيە",
         "UA": "ئۇكرائىنا",
         "UG": "ئۇگاندا",
-        "UM": "ئامېرىكا تەۋەلىكىدىكى سىرتقى كىچىك ئاراللار",
-        "US": "ئامېرىكا قوشما شتاتلىرى",
+        "UM": "ئا ق ش تاشقى ئاراللىرى",
+        "US": "ئامېرىكا قوشما ئىشتاتلىرى",
         "UY": "ئۇرۇگۋاي",
         "UZ": "ئۆزبېكىستان",
-        "VA": "ۋاتىكان شەھىرى",
-        "VC": "ساينىت-ۋىنسېنت ۋە گىرېنادىنېس",
-        "VE": "ۋېنېزۇئېلا",
-        "VG": "ئەنگلىيەگە قاراشلىق ۋىرجىن ئارىلى",
-        "VI": "ئامېرىكا تەۋەلىكىدىكى ۋىرجىن تاقىم ئاراللىرى",
+        "VA": "ۋاتىكان",
+        "VC": "ساينت ۋىنسېنت ۋە گىرېنادىنېس",
+        "VE": "ۋېنېسۇئېلا",
+        "VG": "ئەنگلىيە ۋىرگىن ئاراللىرى",
+        "VI": "ئا ق ش ۋىرگىن ئاراللىرى",
         "VN": "ۋىيېتنام",
         "VU": "ۋانۇئاتۇ",
-        "WF": "ۋالىس ۋە فۇتۇنا",
+        "WF": "ۋاللىس ۋە فۇتۇنا",
         "WS": "ساموئا",
         "XK": "كوسوۋو",
         "YE": "يەمەن",
-        "YT": "مايوتتې",
+        "YT": "مايوتى",
         "ZA": "جەنۇبىي ئافرىقا",
         "ZM": "زامبىيە",
         "ZW": "زىمبابۋې",

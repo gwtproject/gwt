@@ -22,38 +22,50 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_kk extends DateTimeFormatInfoImpl {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "түске дейін",
-        "түстен кейін"
-    };
-  }
-
-  @Override
   public String dateFormatFull() {
-    return "EEEE, d MMMM y 'ж'.";
+    return "y 'ж'. d MMMM, EEEE";
   }
 
   @Override
   public String dateFormatLong() {
-    return "d MMMM y 'ж'.";
+    return "y 'ж'. d MMMM";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "dd.MM.y";
+    return "y 'ж'. dd MMM";
   }
 
   @Override
   public String dateFormatShort() {
-    return "dd/MM/yy";
+    return "dd.MM.yy";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "б.з.д.",
-        "б.з."
+        "Біздің заманымызға дейін",
+        "біздің заманымыз"
     };
   }
 
@@ -77,47 +89,57 @@ public class DateTimeFormatInfoImpl_kk extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, d MMMM";
+    return "d MMMM, EEEE";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "dd-MM";
+    return "dd.MM";
   }
 
   @Override
   public String formatYearMonthAbbrev() {
-    return "MMM y";
+    return "y 'ж'. MMM";
   }
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "d MMM y";
+    return "y 'ж'. d MMM";
   }
 
   @Override
   public String formatYearMonthFull() {
-    return "MMMM y";
+    return "y 'ж'. MMMM";
   }
 
   @Override
   public String formatYearMonthFullDay() {
-    return "d MMMM y 'ж'.";
+    return "y 'ж'. d MMMM";
   }
 
   @Override
   public String formatYearMonthNum() {
-    return "MM-y";
+    return "MM.y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "dd-MM-y";
+    return "dd.MM.y";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, d MMM y";
+    return "y 'ж'. d MMM, EEE";
+  }
+
+  @Override
+  public String formatYearQuarterFull() {
+    return "y 'ж'. QQQQ";
+  }
+
+  @Override
+  public String formatYearQuarterShort() {
+    return "y 'ж'. Q";
   }
 
   @Override
@@ -139,20 +161,38 @@ public class DateTimeFormatInfoImpl_kk extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] monthsFullStandalone() {
+    return new String[] {
+        "Қаңтар",
+        "Ақпан",
+        "Наурыз",
+        "Сәуір",
+        "Мамыр",
+        "Маусым",
+        "Шілде",
+        "Тамыз",
+        "Қыркүйек",
+        "Қазан",
+        "Қараша",
+        "Желтоқсан"
+    };
+  }
+
+  @Override
   public String[] monthsNarrow() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
+        "Қ",
+        "А",
+        "Н",
+        "С",
+        "М",
+        "М",
+        "Ш",
+        "Т",
+        "Қ",
+        "Қ",
+        "Қ",
+        "Ж"
     };
   }
 
@@ -170,27 +210,45 @@ public class DateTimeFormatInfoImpl_kk extends DateTimeFormatInfoImpl {
         "қыр.",
         "қаз.",
         "қар.",
-        "желт."
+        "жел."
+    };
+  }
+
+  @Override
+  public String[] monthsShortStandalone() {
+    return new String[] {
+        "Қаң.",
+        "Ақп.",
+        "Нау.",
+        "Сәу.",
+        "Мам.",
+        "Мау.",
+        "Шіл.",
+        "Там.",
+        "Қыр.",
+        "Қаз.",
+        "Қар.",
+        "Жел."
     };
   }
 
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "1-інші тоқсан",
-        "2-інші тоқсан",
-        "3-інші тоқсан",
-        "4-інші тоқсан"
+        "І тоқсан",
+        "ІІ тоқсан",
+        "ІІІ тоқсан",
+        "IV тоқсан"
     };
   }
 
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "1-тоқсан",
-        "2-тоқсан",
-        "3-тоқсан",
-        "4-тоқсан"
+        "І тқс.",
+        "ІІ тқс.",
+        "ІІІ тқс.",
+        "IV тқс."
     };
   }
 
@@ -204,6 +262,19 @@ public class DateTimeFormatInfoImpl_kk extends DateTimeFormatInfoImpl {
         "бейсенбі",
         "жұма",
         "сенбі"
+    };
+  }
+
+  @Override
+  public String[] weekdaysFullStandalone() {
+    return new String[] {
+        "Жексенбі",
+        "Дүйсенбі",
+        "Сейсенбі",
+        "Сәрсенбі",
+        "Бейсенбі",
+        "Жұма",
+        "Сенбі"
     };
   }
 
@@ -223,13 +294,13 @@ public class DateTimeFormatInfoImpl_kk extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "жс.",
-        "дс.",
-        "сс.",
-        "ср.",
-        "бс.",
-        "жм.",
-        "сб."
+        "Жс",
+        "Дс",
+        "Сс",
+        "Ср",
+        "Бс",
+        "Жм",
+        "Сб"
     };
   }
 }

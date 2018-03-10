@@ -22,33 +22,162 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_se_FI extends DateTimeFormatInfoImpl_se {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "ib",
+        "eb"
+    };
+  }
+
+  @Override
+  public String dateFormatFull() {
+    return "EEEE d MMMM y";
+  }
+
+  @Override
+  public String dateFormatLong() {
+    return "d MMMM y";
+  }
+
+  @Override
+  public String dateFormatMedium() {
+    return "d MMM y";
+  }
+
+  @Override
+  public String dateFormatShort() {
+    return "dd.MM.y";
+  }
+
+  @Override
+  public String[] erasFull() {
+    return new String[] {
+        "ovdal Kristusa",
+        "maŋŋel Kristusa"
+    };
+  }
+
+  @Override
+  public String[] erasShort() {
+    return new String[] {
+        "oKr.",
+        "mKr."
+    };
+  }
+
+  @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "d MMMM";
+  }
+
+  @Override
+  public String formatMonthFullWeekdayDay() {
+    return "EEEE d MMMM";
+  }
+
+  @Override
+  public String formatMonthNumDay() {
+    return "d/M";
+  }
+
+  @Override
+  public String formatYearMonthAbbrev() {
+    return "MMM y";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "d MMM y";
+  }
+
+  @Override
+  public String formatYearMonthFull() {
+    return "MMMM y";
+  }
+
+  @Override
+  public String formatYearMonthFullDay() {
+    return "d MMMM y";
+  }
+
+  @Override
+  public String formatYearMonthNum() {
+    return "MM.y";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "dd.MM.y";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "EEE d MMM y";
+  }
+
+  @Override
+  public String formatYearQuarterFull() {
+    return "QQQQ y";
+  }
+
+  @Override
+  public String formatYearQuarterShort() {
+    return "Q y";
+  }
+
+  @Override
   public String[] monthsShort() {
     return new String[] {
-        "ođđajage",
-        "guovva",
-        "njukča",
-        "cuoŋo",
-        "miesse",
-        "geasse",
-        "suoidne",
-        "borge",
-        "čakča",
-        "golggot",
-        "skábma",
-        "juovla"
+        "ođđj",
+        "guov",
+        "njuk",
+        "cuoŋ",
+        "mies",
+        "geas",
+        "suoi",
+        "borg",
+        "čakč",
+        "golg",
+        "skáb",
+        "juov"
+    };
+  }
+
+  @Override
+  public String[] quartersFull() {
+    return new String[] {
+        "1. njealjádas",
+        "2. njealjádas",
+        "3. njealjádas",
+        "4. njealjádas"
+    };
+  }
+
+  @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "1Q",
+        "2Q",
+        "3Q",
+        "4Q"
     };
   }
 
   @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "aejlege",
-        "måanta",
-        "däjsta",
-        "gaskevahkoe",
-        "dåarsta",
-        "bearjadahke",
-        "laavadahke"
+        "sotnabeaivi",
+        "mánnodat",
+        "disdat",
+        "gaskavahkku",
+        "duorastat",
+        "bearjadat",
+        "lávvordat"
     };
   }
 
@@ -62,6 +191,19 @@ public class DateTimeFormatInfoImpl_se_FI extends DateTimeFormatInfoImpl_se {
         "D",
         "B",
         "L"
+    };
+  }
+
+  @Override
+  public String[] weekdaysShort() {
+    return new String[] {
+        "so",
+        "má",
+        "di",
+        "ga",
+        "du",
+        "be",
+        "lá"
     };
   }
 }

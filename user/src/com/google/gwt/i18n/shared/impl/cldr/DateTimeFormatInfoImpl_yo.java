@@ -60,7 +60,7 @@ public class DateTimeFormatInfoImpl_yo extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasShort() {
     return new String[] {
-        "SK",
+        "BCE",
         "LK"
     };
   }
@@ -81,11 +81,6 @@ public class DateTimeFormatInfoImpl_yo extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatYearMonthAbbrevDay() {
-    return "d MMM y";
-  }
-
-  @Override
   public String formatYearMonthFull() {
     return "MMMM y";
   }
@@ -102,7 +97,7 @@ public class DateTimeFormatInfoImpl_yo extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d/M/y";
+    return "y-MM-dd";
   }
 
   @Override
@@ -192,26 +187,6 @@ public class DateTimeFormatInfoImpl_yo extends DateTimeFormatInfoImpl {
         "K3",
         "K4"
     };
-  }
-
-  @Override
-  public String timeFormatFull() {
-    return "h:mm:ss a zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "h:mm:ss a z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "h:mm:ss a";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "h:mm a";
   }
 
   @Override

@@ -50,6 +50,21 @@ public class DateTimeFormatInfoImpl_fi extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " 'klo' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " 'klo' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + " 'klo' " + timePattern;
+  }
+
+  @Override
   public String[] erasFull() {
     return new String[] {
         "ennen Kristuksen syntymää",
@@ -212,18 +227,18 @@ public class DateTimeFormatInfoImpl_fi extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "tammikuuta",
-        "helmikuuta",
-        "maaliskuuta",
-        "huhtikuuta",
-        "toukokuuta",
-        "kesäkuuta",
-        "heinäkuuta",
-        "elokuuta",
-        "syyskuuta",
-        "lokakuuta",
-        "marraskuuta",
-        "joulukuuta"
+        "tammik.",
+        "helmik.",
+        "maalisk.",
+        "huhtik.",
+        "toukok.",
+        "kesäk.",
+        "heinäk.",
+        "elok.",
+        "syysk.",
+        "lokak.",
+        "marrask.",
+        "jouluk."
     };
   }
 

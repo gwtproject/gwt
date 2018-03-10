@@ -37,29 +37,31 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "KE",
         "CM",
         "CA",
+        "IC",
         "KH",
         "CP",
+        "KG",
         "KZ",
         "QA",
-        "IC",
         "BQ",
+        "CV",
         "CC",
         "XK",
         "KM",
         "CO",
+        "CR",
+        "CI",
+        "UN",
         "KW",
         "KY",
-        "CR",
+        "CW",
         "CU",
         "CK",
         "CD",
         "CG",
         "CX",
         "HR",
-        "KG",
         "KI",
-        "CW",
-        "CV",
         "CZ",
         "TD",
         "CL",
@@ -69,11 +71,10 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "GD",
         "GH",
         "GA",
-        "GW",
-        "GN",
         "GY",
+        "GN",
+        "GW",
         "GU",
-        "GP",
         "JP",
         "JM",
         "JE",
@@ -84,23 +85,23 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "JO",
         "GG",
         "GT",
+        "GP",
+        "SX",
         "SG",
         "ES",
         "SJ",
-        "SK",
-        "SI",
         "KN",
-        "ST",
         "PM",
         "VC",
         "BL",
         "MF",
         "LC",
         "SH",
-        "SZ",
-        "SX",
-        "EA",
+        "SM",
         "WS",
+        "EA",
+        "SK",
+        "SI",
         "RS",
         "CY",
         "SO",
@@ -109,26 +110,28 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "SY",
         "SD",
         "SR",
-        "SM",
+        "ST",
         "SA",
         "SB",
         "SC",
         "CH",
+        "SZ",
         "SE",
         "ZW",
         "ZM",
         "TC",
         "TZ",
         "CN",
-        "MO",
-        "HK",
-        "TM",
         "TJ",
+        "TM",
+        "TK",
         "TG",
         "TN",
+        "TV",
         "TR",
         "KR",
         "GS",
+        "SS",
         "MP",
         "ZA",
         "TO",
@@ -136,8 +139,6 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "TT",
         "TW",
         "TH",
-        "TK",
-        "TV",
         "DK",
         "DO",
         "DM",
@@ -146,13 +147,13 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "NC",
         "NZ",
         "NL",
-        "NR",
         "NE",
         "NG",
         "NI",
         "NP",
         "NU",
         "NF",
+        "NR",
         "NO",
         "PN",
         "PA",
@@ -163,8 +164,8 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "PS",
         "PL",
         "PE",
-        "PT",
         "PR",
+        "PT",
         "FR",
         "GF",
         "TF",
@@ -175,15 +176,17 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "FJ",
         "FK",
         "VE",
-        "VA",
         "VU",
+        "CF",
+        "VA",
         "VN",
-        "VG",
         "IO",
+        "VG",
         "BD",
         "BE",
         "BR",
         "BN",
+        "BZ",
         "BS",
         "BF",
         "BB",
@@ -192,19 +195,19 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "BO",
         "BJ",
         "BY",
-        "BG",
         "BT",
         "BV",
         "BI",
-        "BZ",
+        "BG",
         "BA",
         "BW",
+        "MO",
         "MX",
+        "MK",
+        "MG",
         "IM",
         "MY",
-        "MK",
         "MQ",
-        "MG",
         "MH",
         "MW",
         "ML",
@@ -213,37 +216,35 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "MC",
         "YT",
         "MS",
-        "MR",
+        "MU",
         "MT",
         "MD",
         "MA",
-        "MU",
+        "MR",
         "MV",
         "MM",
         "KP",
-        "SS",
         "MN",
         "ME",
         "YE",
         "UA",
         "UG",
         "GB",
-        "US",
         "UM",
         "VI",
         "AE",
         "RW",
         "RO",
-        "RU",
         "RE",
+        "RU",
         "LB",
         "LI",
+        "LY",
         "LT",
         "LV",
         "LA",
         "LR",
         "LS",
-        "LY",
         "LU",
         "WF",
         "QO",
@@ -251,23 +252,25 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "HM",
         "HU",
         "HT",
+        "HK",
         "HN",
         "EE",
-        "AC",
-        "AO",
         "ID",
         "IL",
+        "AC",
         "AZ",
         "EH",
         "AQ",
+        "AO",
         "AI",
         "AG",
         "AD",
         "AS",
+        "US",
         "DZ",
         "SV",
+        "AL",
         "TL",
-        "CF",
         "AR",
         "AF",
         "AM",
@@ -275,7 +278,6 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "AX",
         "IN",
         "IS",
-        "CI",
         "IE",
         "OM",
         "GQ",
@@ -286,9 +288,9 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "IR",
         "ER",
         "ET",
-        "AL",
         "UZ",
         "UY",
+        "EZ",
         "EU",
         "AT",
         "AU",
@@ -300,94 +302,94 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
     super.loadNameMapJava();
     namesMap.put("001", "ကမ္ဘာ");
     namesMap.put("002", "အာဖရိက");
-    namesMap.put("003", "မြောက် အမေရိက");
+    namesMap.put("003", "မြောက် အမေရိကတိုက်");
     namesMap.put("005", "တောင် အမေရိက");
     namesMap.put("009", "သမုဒ္ဒရာဒေသ");
     namesMap.put("011", "အနောက် အာဖရိက");
-    namesMap.put("013", "အလယ်ပိုင်း အမေရိက");
-    namesMap.put("014", "အရှေ့ပိုင်း အာဖရိက");
-    namesMap.put("015", "မြောက်ပိုင်း အာဖရိက");
-    namesMap.put("017", "အလယ်ပိုင်း အာဖရိက");
-    namesMap.put("018", "တောင်ပိုင်း အာဖရိက");
-    namesMap.put("019", "အမေရိကများ");
-    namesMap.put("021", "မြောက်ပိုင်း အမေရိက");
-    namesMap.put("029", "ကာရီဘီယံ");
-    namesMap.put("030", "အရှေ့ပိုင်း အာရှ");
-    namesMap.put("034", "တောင်ပိုင်း အာရှ");
-    namesMap.put("035", "အရှေ့တောင်ပိုင်းအာရှ");
-    namesMap.put("039", "တောင်ပိုင်း ဥရောပ");
+    namesMap.put("013", "ဗဟို အမေရိက");
+    namesMap.put("014", "အရှေ့ အာဖရိက");
+    namesMap.put("015", "မြောက် အာဖရိက");
+    namesMap.put("017", "အလယ် အာဖရိက");
+    namesMap.put("018", "အာဖရိက တောင်ပိုင်း");
+    namesMap.put("019", "အမေရိကန်");
+    namesMap.put("021", "မြောက် အမေရိက");
+    namesMap.put("029", "ကာရစ်ဘီယံ");
+    namesMap.put("030", "အရှေ့အာရှ");
+    namesMap.put("034", "တောင်အာရှ");
+    namesMap.put("035", "အရှေ့တောင်အာရှ");
+    namesMap.put("039", "တောင်ဥရောပ");
     namesMap.put("053", "ဩစတြေးလျနှင့် နယူးဇီလန်");
     namesMap.put("054", "မီလာနီးရှား");
-    namesMap.put("057", "မိုင်ခရိုနီရှားနယ်");
+    namesMap.put("057", "မိုက်ခရိုနီးရှား ဒေသ");
     namesMap.put("061", "ပိုလီနီရှား");
     namesMap.put("142", "အာရှ");
-    namesMap.put("143", "အလယ် အာရှ");
-    namesMap.put("145", "အနောက် အာရှ");
+    namesMap.put("143", "အလယ်အာရှ");
+    namesMap.put("145", "အနောက်အာရှ");
     namesMap.put("150", "ဥရောပ");
-    namesMap.put("151", "အရှေ့ပိုင်း ဥရောပ");
-    namesMap.put("154", "မြောက်ပိုင်း ဥရောပ");
-    namesMap.put("155", "အနောက်ပိုင်း ဥရောပ");
+    namesMap.put("151", "အရှေ့ ဥရောပ");
+    namesMap.put("154", "မြောက် ဥရောပ");
+    namesMap.put("155", "အနောက် ဥရောပ");
     namesMap.put("419", "လက်တင်အမေရိက");
-    namesMap.put("AC", "အက်စ်စင်ရှီအွန်ကျွန်း");
+    namesMap.put("AC", "အဆန်းရှင်းကျွန်း");
     namesMap.put("AD", "အန်ဒိုရာ");
     namesMap.put("AE", "ယူအေအီး");
     namesMap.put("AF", "အာဖဂန်နစ္စတန်");
-    namesMap.put("AG", "အန်တီဂုအာနှင့်ဘာဘုဒါ");
-    namesMap.put("AI", "အန်ဂွီလာ");
-    namesMap.put("AL", "အဲလ်ဘာနီအာ");
-    namesMap.put("AM", "အာမေနီးယား");
-    namesMap.put("AO", "အင်ဂိုလာ");
+    namesMap.put("AG", "အန်တီဂွါနှင့် ဘာဘူဒါ");
+    namesMap.put("AI", "အန်ဂီလာ");
+    namesMap.put("AL", "အယ်လ်ဘေးနီးယား");
+    namesMap.put("AM", "အာမေးနီးယား");
+    namesMap.put("AO", "အန်ဂိုလာ");
     namesMap.put("AQ", "အန္တာတိက");
     namesMap.put("AR", "အာဂျင်တီးနား");
-    namesMap.put("AS", "အမေရိကန် စမိုအ");
+    namesMap.put("AS", "အမေရိကန် ဆမိုးအား");
     namesMap.put("AT", "ဩစတြီးယား");
     namesMap.put("AU", "ဩစတြေးလျ");
-    namesMap.put("AW", "အာရုဘာ");
+    namesMap.put("AW", "အာရူးဗား");
     namesMap.put("AX", "အာလန်ကျွန်း");
     namesMap.put("AZ", "အဇာဘိုင်ဂျန်");
-    namesMap.put("BA", "ဘော့စနီးယား နှင့် ဟာဇီဂိုဘီးနား");
-    namesMap.put("BB", "ဘာဘဒိုးစ်");
+    namesMap.put("BA", "ဘော့စနီးယားနှင့် ဟာဇီဂိုဗီနား");
+    namesMap.put("BB", "ဘာဘေးဒိုးစ်");
     namesMap.put("BD", "ဘင်္ဂလားဒေ့ရှ်");
     namesMap.put("BE", "ဘယ်လ်ဂျီယမ်");
-    namesMap.put("BF", "ဘာကီနာ ဖာဆို");
-    namesMap.put("BG", "ဘူဂေးရီးယား");
+    namesMap.put("BF", "ဘာကီးနား ဖားဆို");
+    namesMap.put("BG", "ဘူလ်ဂေးရီးယား");
     namesMap.put("BH", "ဘာရိန်း");
     namesMap.put("BI", "ဘူရွန်ဒီ");
     namesMap.put("BJ", "ဘီနင်");
-    namesMap.put("BL", "စိန့်ဘာသီလီမိုင်");
-    namesMap.put("BM", "ဘာမူဒါ");
+    namesMap.put("BL", "စိန့်ဘာသယ်လ်မီ");
+    namesMap.put("BM", "ဘာမြူဒါ");
     namesMap.put("BN", "ဘရူနိုင်း");
-    namesMap.put("BO", "ဘိုလီးဘီးယား");
-    namesMap.put("BQ", "ကာရီဘီယံနယ်သာလန်");
+    namesMap.put("BO", "ဘိုလီးဗီးယား");
+    namesMap.put("BQ", "ကာရစ်ဘီယံ နယ်သာလန်");
     namesMap.put("BR", "ဘရာဇီး");
     namesMap.put("BS", "ဘဟားမား");
     namesMap.put("BT", "ဘူတန်");
     namesMap.put("BV", "ဘူဗက်ကျွန်း");
-    namesMap.put("BW", "ဘော့စ်ဝါနာ");
+    namesMap.put("BW", "ဘော့ဆွာနာ");
     namesMap.put("BY", "ဘီလာရုစ်");
-    namesMap.put("BZ", "ဘေလီဇ်");
+    namesMap.put("BZ", "ဘလိဇ်");
     namesMap.put("CA", "ကနေဒါ");
-    namesMap.put("CC", "ကိုကိုး ကျွန်းစု");
-    namesMap.put("CD", "ကွန်ဂို-ကင်ရှာစ");
-    namesMap.put("CF", "အလယ်ပိုင်း အာဖရိက ပြည်ထောင်စု");
-    namesMap.put("CG", "ကွန်ဂို-ဘရာဇာဗီလ်");
-    namesMap.put("CH", "ဆွစ်ဇလန်");
-    namesMap.put("CI", "အိုင်ဗရီကိုစ့်");
+    namesMap.put("CC", "ကိုကိုးကျွန်း");
+    namesMap.put("CD", "ကွန်ဂို");
+    namesMap.put("CF", "ဗဟို အာဖရိက ပြည်ထောင်စု");
+    namesMap.put("CG", "ကွန်ဂို-ဘရာဇာဗီးလ်");
+    namesMap.put("CH", "ဆွစ်ဇာလန်");
+    namesMap.put("CI", "ကို့တ် ဒီဗွာ");
     namesMap.put("CK", "ကွတ် ကျွန်းစု");
     namesMap.put("CL", "ချီလီ");
     namesMap.put("CM", "ကင်မရွန်း");
     namesMap.put("CN", "တရုတ်");
     namesMap.put("CO", "ကိုလံဘီယာ");
     namesMap.put("CP", "ကလစ်ပါတန်ကျွန်း");
-    namesMap.put("CR", "ကော့စ်တာရီကာ");
+    namesMap.put("CR", "ကို့စ်တာရီကာ");
     namesMap.put("CU", "ကျူးဘား");
-    namesMap.put("CV", "ခေ့ပ်ဗာဒူ");
-    namesMap.put("CW", "ခူရာကာအို");
+    namesMap.put("CV", "ကိတ်ဗာဒီ");
+    namesMap.put("CW", "ကျူရေးကိုးစ်");
     namesMap.put("CX", "ခရစ်စမတ် ကျွန်း");
-    namesMap.put("CY", "ဆိုက်ပရက်စ်");
-    namesMap.put("CZ", "ချက် ပြည်ထောင်စု");
-    namesMap.put("DE", "ဂျာမဏီ");
-    namesMap.put("DG", "ဒီအေဂိုဂရာစီအာ");
+    namesMap.put("CY", "ဆိုက်ပရပ်စ်");
+    namesMap.put("CZ", "ချက်ကီယား");
+    namesMap.put("DE", "ဂျာမနီ");
+    namesMap.put("DG", "ဒီအဲဂိုဂါစီရာ");
     namesMap.put("DJ", "ဂျီဘူတီ");
     namesMap.put("DK", "ဒိန်းမတ်");
     namesMap.put("DM", "ဒိုမီနီကာ");
@@ -397,49 +399,50 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
     namesMap.put("EC", "အီကွေဒေါ");
     namesMap.put("EE", "အက်စတိုးနီးယား");
     namesMap.put("EG", "အီဂျစ်");
-    namesMap.put("EH", "အနောက်ပိုင်း ဆာဟာရ");
-    namesMap.put("ER", "အီရီတရီအာ");
+    namesMap.put("EH", "အနောက် ဆာဟာရ");
+    namesMap.put("ER", "အီရီထရီးယား");
     namesMap.put("ES", "စပိန်");
     namesMap.put("ET", "အီသီယိုးပီးယား");
     namesMap.put("EU", "ဥရောပသမဂ္ဂ");
+    namesMap.put("EZ", "ဥရောပဒေသ");
     namesMap.put("FI", "ဖင်လန်");
     namesMap.put("FJ", "ဖီဂျီ");
-    namesMap.put("FK", "ဖောက်ကလန် ကျွန်းစု");
+    namesMap.put("FK", "ဖော့ကလန် ကျွန်းစု");
     namesMap.put("FM", "မိုင်ခရိုနီရှား");
     namesMap.put("FO", "ဖာရိုး ကျွန်းစုများ");
     namesMap.put("FR", "ပြင်သစ်");
     namesMap.put("GA", "ဂါဘွန်");
     namesMap.put("GB", "ယူနိုက်တက်ကင်းဒမ်း");
-    namesMap.put("GD", "ဂရီနာဒါ");
+    namesMap.put("GD", "ဂရီနေဒါ");
     namesMap.put("GE", "ဂျော်ဂျီယာ");
     namesMap.put("GF", "ပြင်သစ် ဂီယာနာ");
     namesMap.put("GG", "ဂွန်းဇီ");
     namesMap.put("GH", "ဂါနာ");
     namesMap.put("GI", "ဂျီဘရော်လ်တာ");
     namesMap.put("GL", "ဂရင်းလန်း");
-    namesMap.put("GM", "ဂန်ဘီရာ");
-    namesMap.put("GN", "ဂီးနီ");
-    namesMap.put("GP", "ဂူအာဒီလုပ်");
-    namesMap.put("GQ", "အီကွေတာ ဂီရာနာ");
+    namesMap.put("GM", "ဂမ်ဘီရာ");
+    namesMap.put("GN", "ဂီနီ");
+    namesMap.put("GP", "ဂွါဒီလု");
+    namesMap.put("GQ", "အီကွေတာ ဂီနီ");
     namesMap.put("GR", "ဂရိ");
     namesMap.put("GS", "တောင် ဂျော်ဂျီယာ နှင့် တောင် ဆင်းဒဝစ်ဂျ် ကျွန်းစုများ");
-    namesMap.put("GT", "ဂွာတီမာလာ");
+    namesMap.put("GT", "ဂွါတီမာလာ");
     namesMap.put("GU", "ဂူအမ်");
-    namesMap.put("GW", "ဂီရာနာ-ဘီစ်စာဥ");
-    namesMap.put("GY", "ဂူရာနာ");
-    namesMap.put("HK", "တရုတ်၏ အထူးအုပ်ချုပ်ခွင့်ရ ဟောင်ကောင်");
+    namesMap.put("GW", "ဂီနီ-ဘီစော");
+    namesMap.put("GY", "ဂိုင်ယာနာ");
+    namesMap.put("HK", "ဟောင်ကောင် (တရုတ်ပြည်)");
     namesMap.put("HM", "ဟတ်ကျွန်းနှင့်မက်ဒေါနယ်ကျွန်းစု");
     namesMap.put("HN", "ဟွန်ဒူးရပ်စ်");
     namesMap.put("HR", "ခရိုအေးရှား");
     namesMap.put("HT", "ဟေတီ");
     namesMap.put("HU", "ဟန်ဂေရီ");
-    namesMap.put("IC", "ကာနာရီကျွန်းစု");
+    namesMap.put("IC", "ကနေရီ ကျွန်းစု");
     namesMap.put("ID", "အင်ဒိုနီးရှား");
     namesMap.put("IE", "အိုင်ယာလန်");
     namesMap.put("IL", "အစ္စရေး");
     namesMap.put("IM", "မန်ကျွန်း");
     namesMap.put("IN", "အိန္ဒိယ");
-    namesMap.put("IO", "ဗြိတိသျှ အိန္ဒြိယ သမုဒ္ဒရာ ပိုင်နက်");
+    namesMap.put("IO", "ဗြိတိသျှပိုင် အိန္ဒိယသမုဒ္ဒရာကျွန်းများ");
     namesMap.put("IQ", "အီရတ်");
     namesMap.put("IR", "အီရန်");
     namesMap.put("IS", "အိုက်စလန်");
@@ -449,7 +452,7 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
     namesMap.put("JO", "ဂျော်ဒန်");
     namesMap.put("JP", "ဂျပန်");
     namesMap.put("KE", "ကင်ညာ");
-    namesMap.put("KG", "ခရူဂစ်စတန်");
+    namesMap.put("KG", "ကာဂျစ္စတန်");
     namesMap.put("KH", "ကမ္ဘောဒီးယား");
     namesMap.put("KI", "ခီရီဘာတီ");
     namesMap.put("KM", "ကိုမိုရိုစ်");
@@ -461,132 +464,133 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
     namesMap.put("KZ", "ကာဇက်စတန်");
     namesMap.put("LA", "လာအို");
     namesMap.put("LB", "လက်ဘနွန်");
-    namesMap.put("LC", "စိန့်လူစီအာ");
-    namesMap.put("LI", "လစ်ခ်ထင်စတိုင်");
+    namesMap.put("LC", "စိန့်လူစီယာ");
+    namesMap.put("LI", "လစ်တန်စတိန်း");
     namesMap.put("LK", "သီရိလင်္ကာ");
-    namesMap.put("LR", "လိုင်ဘေးရီးယား");
+    namesMap.put("LR", "လိုက်ဘေးရီးယား");
     namesMap.put("LS", "လီဆိုသို");
     namesMap.put("LT", "လစ်သူယေးနီးယား");
     namesMap.put("LU", "လူဇင်ဘတ်");
     namesMap.put("LV", "လတ်ဗီးယား");
-    namesMap.put("LY", "လီဗရာ");
+    namesMap.put("LY", "လစ်ဗျား");
     namesMap.put("MA", "မော်ရိုကို");
     namesMap.put("MC", "မိုနာကို");
     namesMap.put("MD", "မောလ်ဒိုဗာ");
     namesMap.put("ME", "မွန်တီနိဂရိုး");
     namesMap.put("MF", "စိန့်မာတင်");
-    namesMap.put("MG", "မာဒါဂတ်စကာ");
+    namesMap.put("MG", "မဒါဂတ်စကား");
     namesMap.put("MH", "မာရှယ် ကျွန်းစု");
-    namesMap.put("MK", "မာစီဒိုးနီးယား");
+    namesMap.put("MK", "မက်ဆီဒိုးနီးယား");
     namesMap.put("ML", "မာလီ");
     namesMap.put("MM", "မြန်မာ");
     namesMap.put("MN", "မွန်ဂိုးလီးယား");
-    namesMap.put("MO", "တရုတ်၏ အထူးအုပ်ချုပ်ခွင့်ရ မကာအို");
+    namesMap.put("MO", "မကာအို (တရုတ်ပြည်)");
     namesMap.put("MP", "တောင်ပိုင်းမာရီအာနာကျွန်းစု");
-    namesMap.put("MQ", "မာတီနီကီ");
-    namesMap.put("MR", "မောရီတာနီအာ");
+    namesMap.put("MQ", "မာတီနိခ်");
+    namesMap.put("MR", "မော်ရီတေးနီးယား");
     namesMap.put("MS", "မောင့်စဲရက်");
     namesMap.put("MT", "မောလ်တာ");
-    namesMap.put("MU", "မော်ရေရှားစ်");
+    namesMap.put("MU", "မောရစ်ရှ");
     namesMap.put("MV", "မော်လ်ဒိုက်");
     namesMap.put("MW", "မာလာဝီ");
     namesMap.put("MX", "မက္ကဆီကို");
     namesMap.put("MY", "မလေးရှား");
-    namesMap.put("MZ", "မိုဇန်ဘစ်");
-    namesMap.put("NA", "နမ်မီးဘီးယား");
+    namesMap.put("MZ", "မိုဇမ်ဘစ်");
+    namesMap.put("NA", "နမီးဘီးယား");
     namesMap.put("NC", "နယူး ကယ်လီဒိုနီးယား");
     namesMap.put("NE", "နိုင်ဂျာ");
-    namesMap.put("NF", "နောဖော့ခ်ကျွန်း");
+    namesMap.put("NF", "နောဖုတ်ကျွန်း");
     namesMap.put("NG", "နိုင်ဂျီးရီးယား");
-    namesMap.put("NI", "နီကာရာဂွာ");
+    namesMap.put("NI", "နီကာရာဂွါ");
     namesMap.put("NL", "နယ်သာလန်");
     namesMap.put("NO", "နော်ဝေ");
     namesMap.put("NP", "နီပေါ");
-    namesMap.put("NR", "နာဥူရူ");
+    namesMap.put("NR", "နော်ရူး");
     namesMap.put("NU", "နီဥူအေ");
     namesMap.put("NZ", "နယူးဇီလန်");
     namesMap.put("OM", "အိုမန်");
     namesMap.put("PA", "ပနားမား");
     namesMap.put("PE", "ပီရူး");
-    namesMap.put("PF", "ပြင်သစ် ပေါ်လီနေးရှား");
-    namesMap.put("PG", "ပါပူရာနယူးဂီနီ");
+    namesMap.put("PF", "ပြင်သစ် ပေါ်လီနီးရှား");
+    namesMap.put("PG", "ပါပူအာ နယူးဂီနီ");
     namesMap.put("PH", "ဖိလစ်ပိုင်");
     namesMap.put("PK", "ပါကစ္စတန်");
     namesMap.put("PL", "ပိုလန်");
-    namesMap.put("PM", "စိန့်ပီအဲရီနှင့်မီကွီလွန်");
+    namesMap.put("PM", "စိန့်ပီအဲရ်နှင့် မီကွီလွန်");
     namesMap.put("PN", "ပစ်တ်ကိန်းကျွန်းစု");
-    namesMap.put("PR", "ပေါ်တူရီကို");
+    namesMap.put("PR", "ပေါ်တိုရီကို");
     namesMap.put("PS", "ပါလက်စတိုင်း ပိုင်နက်");
     namesMap.put("PT", "ပေါ်တူဂီ");
-    namesMap.put("PW", "ပလောင်");
+    namesMap.put("PW", "ပလာအို");
     namesMap.put("PY", "ပါရာဂွေး");
     namesMap.put("QA", "ကာတာ");
-    namesMap.put("QO", "သမုဒ္ဒရာဒေသအပြင်ထွက်နေသောဒေသများ");
-    namesMap.put("RE", "ရဲအူနီရွန်");
+    namesMap.put("QO", "သမုဒ္ဒရာ အပြင်ဘက်ရှိ ကျွန်းနိုင်ငံများ");
+    namesMap.put("RE", "ရီယူနီယန်");
     namesMap.put("RO", "ရိုမေးနီးယား");
     namesMap.put("RS", "ဆားဘီးယား");
-    namesMap.put("RU", "ရုရှ");
+    namesMap.put("RU", "ရုရှား");
     namesMap.put("RW", "ရဝန်ဒါ");
-    namesMap.put("SA", "ဆော်ဒီအာရေးဗီးယား");
+    namesMap.put("SA", "ဆော်ဒီအာရေးဘီးယား");
     namesMap.put("SB", "ဆော်လမွန်ကျွန်းစု");
-    namesMap.put("SC", "ဆေးရှလ်");
+    namesMap.put("SC", "ဆေးရှဲ");
     namesMap.put("SD", "ဆူဒန်");
     namesMap.put("SE", "ဆွီဒင်");
     namesMap.put("SG", "စင်္ကာပူ");
-    namesMap.put("SH", "စိန့်ဟဲလီနာ");
-    namesMap.put("SI", "စလိုဗေးနီးယား");
+    namesMap.put("SH", "စိန့်ဟယ်လယ်နာ");
+    namesMap.put("SI", "ဆလိုဗေးနီးယား");
     namesMap.put("SJ", "စဗိုလ်ဘတ်နှင့်ဂျန်မေရန်");
-    namesMap.put("SK", "စလိုဗေးကီးယား");
-    namesMap.put("SL", "ဆီအဲရာ လီအိုနီ");
-    namesMap.put("SM", "ဆော့န်မာရီနို");
+    namesMap.put("SK", "ဆလိုဗက်ကီးယား");
+    namesMap.put("SL", "ဆီယာရာ လီယွန်း");
+    namesMap.put("SM", "ဆန်မာရီနို");
     namesMap.put("SN", "ဆီနီဂေါ");
     namesMap.put("SO", "ဆိုမာလီယာ");
-    namesMap.put("SR", "ဆူရီနိမ်း");
-    namesMap.put("SS", "မြောက်ဆူဒန်");
-    namesMap.put("ST", "စိန့်တိုမီနှင့်ပရင်စီပ့်");
+    namesMap.put("SR", "ဆူရာနမ်");
+    namesMap.put("SS", "တောင် ဆူဒန်");
+    namesMap.put("ST", "ဆောင်တူမေးနှင့် ပရင်စီပီ");
     namesMap.put("SV", "အယ်လ်ဆာဗေးဒိုး");
-    namesMap.put("SX", "ဆင့်မာအာတင်");
+    namesMap.put("SX", "စင့်မာတင်");
     namesMap.put("SY", "ဆီးရီးယား");
-    namesMap.put("SZ", "စွာဇီလန်");
-    namesMap.put("TA", "ထရစ်တန်ဒါကွန်ဟာ");
+    namesMap.put("SZ", "ဆွာဇီလန်");
+    namesMap.put("TA", "ထရစ္စတန် ဒါ ကွန်ဟာ");
     namesMap.put("TC", "တခ်စ်နှင့်ကာအီကိုစ်ကျွန်းစု");
     namesMap.put("TD", "ချဒ်");
     namesMap.put("TF", "ပြင်သစ် တောင်ပိုင်း ပိုင်နက်များ");
     namesMap.put("TG", "တိုဂို");
     namesMap.put("TH", "ထိုင်း");
     namesMap.put("TJ", "တာဂျီကစ္စတန်");
-    namesMap.put("TK", "ထိုးခါလူ");
+    namesMap.put("TK", "တိုကလောင်");
     namesMap.put("TL", "အရှေ့တီမော");
-    namesMap.put("TM", "တာခ်မီန့စ်တန်");
+    namesMap.put("TM", "တာ့ခ်မင်နစ္စတန်");
     namesMap.put("TN", "တူနီးရှား");
     namesMap.put("TO", "တွန်ဂါ");
     namesMap.put("TR", "တူရကီ");
-    namesMap.put("TT", "ထရိုင်နီဒတ်နှင့်တိုဘာဂို");
-    namesMap.put("TV", "ထူးဗလူ");
+    namesMap.put("TT", "ထရီနီဒတ်နှင့် တိုဘက်ဂို");
+    namesMap.put("TV", "တူဗားလူ");
     namesMap.put("TW", "ထိုင်ဝမ်");
     namesMap.put("TZ", "တန်ဇန်းနီးယား");
     namesMap.put("UA", "ယူကရိန်း");
-    namesMap.put("UG", "ယူဂန္ဓာ");
-    namesMap.put("UM", "ယူနိုက်တက်စတိတ် အပြင်ထွက် နေသည့် သေးငယ်သောကျွန်းများ");
-    namesMap.put("US", "ယူနိုက်တက်စတိတ်");
+    namesMap.put("UG", "ယူဂန်းဒါး");
+    namesMap.put("UM", "ယူနိုက်တက်စတိတ် ကျွန်းနိုင်ငံများ");
+    namesMap.put("UN", "ကုလသမဂ္ဂ");
+    namesMap.put("US", "အမေရိကန် ပြည်ထောင်စု");
     namesMap.put("UY", "ဥရုဂွေး");
-    namesMap.put("UZ", "ဥဘက်ကစ္စတန်");
-    namesMap.put("VA", "ဗာတီကန်စီတီး");
-    namesMap.put("VC", "စိန့်ဗင့်ဆင့်နှင့် သည်ဂရဲနာဒင်းစ်");
+    namesMap.put("UZ", "ဥဇဘက်ကစ္စတန်");
+    namesMap.put("VA", "ဗာတီကန်စီးတီး");
+    namesMap.put("VC", "စိန့်ဗင်းဆင့်နှင့် ဂရိနေဒိုင်");
     namesMap.put("VE", "ဗင်နီဇွဲလား");
     namesMap.put("VG", "ဗြိတိသျှ ဗာဂျင်း ကျွန်းစု");
     namesMap.put("VI", "ယူအက်စ် ဗာဂျင်း ကျွန်းစု");
     namesMap.put("VN", "ဗီယက်နမ်");
-    namesMap.put("VU", "ဗာနုအာတူ");
-    namesMap.put("WF", "ဝေါလစ်နှင့်ဖူထူးနား");
-    namesMap.put("WS", "ဆာမိုအာ");
+    namesMap.put("VU", "ဗနွားတူ");
+    namesMap.put("WF", "ဝေါလစ်နှင့် ဖူကျူးနား");
+    namesMap.put("WS", "ဆမိုးအား");
     namesMap.put("XK", "ကိုဆိုဗို");
     namesMap.put("YE", "ယီမင်");
-    namesMap.put("YT", "မေအိုတီ");
+    namesMap.put("YT", "မေယော့");
     namesMap.put("ZA", "တောင်အာဖရိက");
     namesMap.put("ZM", "ဇမ်ဘီယာ");
     namesMap.put("ZW", "ဇင်ဘာဘွေ");
-    namesMap.put("ZZ", "မသိ သို့မဟုတ် မရှိ သော နေရာ");
+    namesMap.put("ZZ", "မသိ (သို့) မရှိသော ဒေသ");
   }
 
   @Override
@@ -598,94 +602,94 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
     return {
         "001": "ကမ္ဘာ",
         "002": "အာဖရိက",
-        "003": "မြောက် အမေရိက",
+        "003": "မြောက် အမေရိကတိုက်",
         "005": "တောင် အမေရိက",
         "009": "သမုဒ္ဒရာဒေသ",
         "011": "အနောက် အာဖရိက",
-        "013": "အလယ်ပိုင်း အမေရိက",
-        "014": "အရှေ့ပိုင်း အာဖရိက",
-        "015": "မြောက်ပိုင်း အာဖရိက",
-        "017": "အလယ်ပိုင်း အာဖရိက",
-        "018": "တောင်ပိုင်း အာဖရိက",
-        "019": "အမေရိကများ",
-        "021": "မြောက်ပိုင်း အမေရိက",
-        "029": "ကာရီဘီယံ",
-        "030": "အရှေ့ပိုင်း အာရှ",
-        "034": "တောင်ပိုင်း အာရှ",
-        "035": "အရှေ့တောင်ပိုင်းအာရှ",
-        "039": "တောင်ပိုင်း ဥရောပ",
+        "013": "ဗဟို အမေရိက",
+        "014": "အရှေ့ အာဖရိက",
+        "015": "မြောက် အာဖရိက",
+        "017": "အလယ် အာဖရိက",
+        "018": "အာဖရိက တောင်ပိုင်း",
+        "019": "အမေရိကန်",
+        "021": "မြောက် အမေရိက",
+        "029": "ကာရစ်ဘီယံ",
+        "030": "အရှေ့အာရှ",
+        "034": "တောင်အာရှ",
+        "035": "အရှေ့တောင်အာရှ",
+        "039": "တောင်ဥရောပ",
         "053": "ဩစတြေးလျနှင့် နယူးဇီလန်",
         "054": "မီလာနီးရှား",
-        "057": "မိုင်ခရိုနီရှားနယ်",
+        "057": "မိုက်ခရိုနီးရှား ဒေသ",
         "061": "ပိုလီနီရှား",
         "142": "အာရှ",
-        "143": "အလယ် အာရှ",
-        "145": "အနောက် အာရှ",
+        "143": "အလယ်အာရှ",
+        "145": "အနောက်အာရှ",
         "150": "ဥရောပ",
-        "151": "အရှေ့ပိုင်း ဥရောပ",
-        "154": "မြောက်ပိုင်း ဥရောပ",
-        "155": "အနောက်ပိုင်း ဥရောပ",
+        "151": "အရှေ့ ဥရောပ",
+        "154": "မြောက် ဥရောပ",
+        "155": "အနောက် ဥရောပ",
         "419": "လက်တင်အမေရိက",
-        "AC": "အက်စ်စင်ရှီအွန်ကျွန်း",
+        "AC": "အဆန်းရှင်းကျွန်း",
         "AD": "အန်ဒိုရာ",
         "AE": "ယူအေအီး",
         "AF": "အာဖဂန်နစ္စတန်",
-        "AG": "အန်တီဂုအာနှင့်ဘာဘုဒါ",
-        "AI": "အန်ဂွီလာ",
-        "AL": "အဲလ်ဘာနီအာ",
-        "AM": "အာမေနီးယား",
-        "AO": "အင်ဂိုလာ",
+        "AG": "အန်တီဂွါနှင့် ဘာဘူဒါ",
+        "AI": "အန်ဂီလာ",
+        "AL": "အယ်လ်ဘေးနီးယား",
+        "AM": "အာမေးနီးယား",
+        "AO": "အန်ဂိုလာ",
         "AQ": "အန္တာတိက",
         "AR": "အာဂျင်တီးနား",
-        "AS": "အမေရိကန် စမိုအ",
+        "AS": "အမေရိကန် ဆမိုးအား",
         "AT": "ဩစတြီးယား",
         "AU": "ဩစတြေးလျ",
-        "AW": "အာရုဘာ",
+        "AW": "အာရူးဗား",
         "AX": "အာလန်ကျွန်း",
         "AZ": "အဇာဘိုင်ဂျန်",
-        "BA": "ဘော့စနီးယား နှင့် ဟာဇီဂိုဘီးနား",
-        "BB": "ဘာဘဒိုးစ်",
+        "BA": "ဘော့စနီးယားနှင့် ဟာဇီဂိုဗီနား",
+        "BB": "ဘာဘေးဒိုးစ်",
         "BD": "ဘင်္ဂလားဒေ့ရှ်",
         "BE": "ဘယ်လ်ဂျီယမ်",
-        "BF": "ဘာကီနာ ဖာဆို",
-        "BG": "ဘူဂေးရီးယား",
+        "BF": "ဘာကီးနား ဖားဆို",
+        "BG": "ဘူလ်ဂေးရီးယား",
         "BH": "ဘာရိန်း",
         "BI": "ဘူရွန်ဒီ",
         "BJ": "ဘီနင်",
-        "BL": "စိန့်ဘာသီလီမိုင်",
-        "BM": "ဘာမူဒါ",
+        "BL": "စိန့်ဘာသယ်လ်မီ",
+        "BM": "ဘာမြူဒါ",
         "BN": "ဘရူနိုင်း",
-        "BO": "ဘိုလီးဘီးယား",
-        "BQ": "ကာရီဘီယံနယ်သာလန်",
+        "BO": "ဘိုလီးဗီးယား",
+        "BQ": "ကာရစ်ဘီယံ နယ်သာလန်",
         "BR": "ဘရာဇီး",
         "BS": "ဘဟားမား",
         "BT": "ဘူတန်",
         "BV": "ဘူဗက်ကျွန်း",
-        "BW": "ဘော့စ်ဝါနာ",
+        "BW": "ဘော့ဆွာနာ",
         "BY": "ဘီလာရုစ်",
-        "BZ": "ဘေလီဇ်",
+        "BZ": "ဘလိဇ်",
         "CA": "ကနေဒါ",
-        "CC": "ကိုကိုး ကျွန်းစု",
-        "CD": "ကွန်ဂို-ကင်ရှာစ",
-        "CF": "အလယ်ပိုင်း အာဖရိက ပြည်ထောင်စု",
-        "CG": "ကွန်ဂို-ဘရာဇာဗီလ်",
-        "CH": "ဆွစ်ဇလန်",
-        "CI": "အိုင်ဗရီကိုစ့်",
+        "CC": "ကိုကိုးကျွန်း",
+        "CD": "ကွန်ဂို",
+        "CF": "ဗဟို အာဖရိက ပြည်ထောင်စု",
+        "CG": "ကွန်ဂို-ဘရာဇာဗီးလ်",
+        "CH": "ဆွစ်ဇာလန်",
+        "CI": "ကို့တ် ဒီဗွာ",
         "CK": "ကွတ် ကျွန်းစု",
         "CL": "ချီလီ",
         "CM": "ကင်မရွန်း",
         "CN": "တရုတ်",
         "CO": "ကိုလံဘီယာ",
         "CP": "ကလစ်ပါတန်ကျွန်း",
-        "CR": "ကော့စ်တာရီကာ",
+        "CR": "ကို့စ်တာရီကာ",
         "CU": "ကျူးဘား",
-        "CV": "ခေ့ပ်ဗာဒူ",
-        "CW": "ခူရာကာအို",
+        "CV": "ကိတ်ဗာဒီ",
+        "CW": "ကျူရေးကိုးစ်",
         "CX": "ခရစ်စမတ် ကျွန်း",
-        "CY": "ဆိုက်ပရက်စ်",
-        "CZ": "ချက် ပြည်ထောင်စု",
-        "DE": "ဂျာမဏီ",
-        "DG": "ဒီအေဂိုဂရာစီအာ",
+        "CY": "ဆိုက်ပရပ်စ်",
+        "CZ": "ချက်ကီယား",
+        "DE": "ဂျာမနီ",
+        "DG": "ဒီအဲဂိုဂါစီရာ",
         "DJ": "ဂျီဘူတီ",
         "DK": "ဒိန်းမတ်",
         "DM": "ဒိုမီနီကာ",
@@ -695,49 +699,50 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "EC": "အီကွေဒေါ",
         "EE": "အက်စတိုးနီးယား",
         "EG": "အီဂျစ်",
-        "EH": "အနောက်ပိုင်း ဆာဟာရ",
-        "ER": "အီရီတရီအာ",
+        "EH": "အနောက် ဆာဟာရ",
+        "ER": "အီရီထရီးယား",
         "ES": "စပိန်",
         "ET": "အီသီယိုးပီးယား",
         "EU": "ဥရောပသမဂ္ဂ",
+        "EZ": "ဥရောပဒေသ",
         "FI": "ဖင်လန်",
         "FJ": "ဖီဂျီ",
-        "FK": "ဖောက်ကလန် ကျွန်းစု",
+        "FK": "ဖော့ကလန် ကျွန်းစု",
         "FM": "မိုင်ခရိုနီရှား",
         "FO": "ဖာရိုး ကျွန်းစုများ",
         "FR": "ပြင်သစ်",
         "GA": "ဂါဘွန်",
         "GB": "ယူနိုက်တက်ကင်းဒမ်း",
-        "GD": "ဂရီနာဒါ",
+        "GD": "ဂရီနေဒါ",
         "GE": "ဂျော်ဂျီယာ",
         "GF": "ပြင်သစ် ဂီယာနာ",
         "GG": "ဂွန်းဇီ",
         "GH": "ဂါနာ",
         "GI": "ဂျီဘရော်လ်တာ",
         "GL": "ဂရင်းလန်း",
-        "GM": "ဂန်ဘီရာ",
-        "GN": "ဂီးနီ",
-        "GP": "ဂူအာဒီလုပ်",
-        "GQ": "အီကွေတာ ဂီရာနာ",
+        "GM": "ဂမ်ဘီရာ",
+        "GN": "ဂီနီ",
+        "GP": "ဂွါဒီလု",
+        "GQ": "အီကွေတာ ဂီနီ",
         "GR": "ဂရိ",
         "GS": "တောင် ဂျော်ဂျီယာ နှင့် တောင် ဆင်းဒဝစ်ဂျ် ကျွန်းစုများ",
-        "GT": "ဂွာတီမာလာ",
+        "GT": "ဂွါတီမာလာ",
         "GU": "ဂူအမ်",
-        "GW": "ဂီရာနာ-ဘီစ်စာဥ",
-        "GY": "ဂူရာနာ",
-        "HK": "တရုတ်၏ အထူးအုပ်ချုပ်ခွင့်ရ ဟောင်ကောင်",
+        "GW": "ဂီနီ-ဘီစော",
+        "GY": "ဂိုင်ယာနာ",
+        "HK": "ဟောင်ကောင် (တရုတ်ပြည်)",
         "HM": "ဟတ်ကျွန်းနှင့်မက်ဒေါနယ်ကျွန်းစု",
         "HN": "ဟွန်ဒူးရပ်စ်",
         "HR": "ခရိုအေးရှား",
         "HT": "ဟေတီ",
         "HU": "ဟန်ဂေရီ",
-        "IC": "ကာနာရီကျွန်းစု",
+        "IC": "ကနေရီ ကျွန်းစု",
         "ID": "အင်ဒိုနီးရှား",
         "IE": "အိုင်ယာလန်",
         "IL": "အစ္စရေး",
         "IM": "မန်ကျွန်း",
         "IN": "အိန္ဒိယ",
-        "IO": "ဗြိတိသျှ အိန္ဒြိယ သမုဒ္ဒရာ ပိုင်နက်",
+        "IO": "ဗြိတိသျှပိုင် အိန္ဒိယသမုဒ္ဒရာကျွန်းများ",
         "IQ": "အီရတ်",
         "IR": "အီရန်",
         "IS": "အိုက်စလန်",
@@ -747,7 +752,7 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "JO": "ဂျော်ဒန်",
         "JP": "ဂျပန်",
         "KE": "ကင်ညာ",
-        "KG": "ခရူဂစ်စတန်",
+        "KG": "ကာဂျစ္စတန်",
         "KH": "ကမ္ဘောဒီးယား",
         "KI": "ခီရီဘာတီ",
         "KM": "ကိုမိုရိုစ်",
@@ -759,132 +764,133 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "KZ": "ကာဇက်စတန်",
         "LA": "လာအို",
         "LB": "လက်ဘနွန်",
-        "LC": "စိန့်လူစီအာ",
-        "LI": "လစ်ခ်ထင်စတိုင်",
+        "LC": "စိန့်လူစီယာ",
+        "LI": "လစ်တန်စတိန်း",
         "LK": "သီရိလင်္ကာ",
-        "LR": "လိုင်ဘေးရီးယား",
+        "LR": "လိုက်ဘေးရီးယား",
         "LS": "လီဆိုသို",
         "LT": "လစ်သူယေးနီးယား",
         "LU": "လူဇင်ဘတ်",
         "LV": "လတ်ဗီးယား",
-        "LY": "လီဗရာ",
+        "LY": "လစ်ဗျား",
         "MA": "မော်ရိုကို",
         "MC": "မိုနာကို",
         "MD": "မောလ်ဒိုဗာ",
         "ME": "မွန်တီနိဂရိုး",
         "MF": "စိန့်မာတင်",
-        "MG": "မာဒါဂတ်စကာ",
+        "MG": "မဒါဂတ်စကား",
         "MH": "မာရှယ် ကျွန်းစု",
-        "MK": "မာစီဒိုးနီးယား",
+        "MK": "မက်ဆီဒိုးနီးယား",
         "ML": "မာလီ",
         "MM": "မြန်မာ",
         "MN": "မွန်ဂိုးလီးယား",
-        "MO": "တရုတ်၏ အထူးအုပ်ချုပ်ခွင့်ရ မကာအို",
+        "MO": "မကာအို (တရုတ်ပြည်)",
         "MP": "တောင်ပိုင်းမာရီအာနာကျွန်းစု",
-        "MQ": "မာတီနီကီ",
-        "MR": "မောရီတာနီအာ",
+        "MQ": "မာတီနိခ်",
+        "MR": "မော်ရီတေးနီးယား",
         "MS": "မောင့်စဲရက်",
         "MT": "မောလ်တာ",
-        "MU": "မော်ရေရှားစ်",
+        "MU": "မောရစ်ရှ",
         "MV": "မော်လ်ဒိုက်",
         "MW": "မာလာဝီ",
         "MX": "မက္ကဆီကို",
         "MY": "မလေးရှား",
-        "MZ": "မိုဇန်ဘစ်",
-        "NA": "နမ်မီးဘီးယား",
+        "MZ": "မိုဇမ်ဘစ်",
+        "NA": "နမီးဘီးယား",
         "NC": "နယူး ကယ်လီဒိုနီးယား",
         "NE": "နိုင်ဂျာ",
-        "NF": "နောဖော့ခ်ကျွန်း",
+        "NF": "နောဖုတ်ကျွန်း",
         "NG": "နိုင်ဂျီးရီးယား",
-        "NI": "နီကာရာဂွာ",
+        "NI": "နီကာရာဂွါ",
         "NL": "နယ်သာလန်",
         "NO": "နော်ဝေ",
         "NP": "နီပေါ",
-        "NR": "နာဥူရူ",
+        "NR": "နော်ရူး",
         "NU": "နီဥူအေ",
         "NZ": "နယူးဇီလန်",
         "OM": "အိုမန်",
         "PA": "ပနားမား",
         "PE": "ပီရူး",
-        "PF": "ပြင်သစ် ပေါ်လီနေးရှား",
-        "PG": "ပါပူရာနယူးဂီနီ",
+        "PF": "ပြင်သစ် ပေါ်လီနီးရှား",
+        "PG": "ပါပူအာ နယူးဂီနီ",
         "PH": "ဖိလစ်ပိုင်",
         "PK": "ပါကစ္စတန်",
         "PL": "ပိုလန်",
-        "PM": "စိန့်ပီအဲရီနှင့်မီကွီလွန်",
+        "PM": "စိန့်ပီအဲရ်နှင့် မီကွီလွန်",
         "PN": "ပစ်တ်ကိန်းကျွန်းစု",
-        "PR": "ပေါ်တူရီကို",
+        "PR": "ပေါ်တိုရီကို",
         "PS": "ပါလက်စတိုင်း ပိုင်နက်",
         "PT": "ပေါ်တူဂီ",
-        "PW": "ပလောင်",
+        "PW": "ပလာအို",
         "PY": "ပါရာဂွေး",
         "QA": "ကာတာ",
-        "QO": "သမုဒ္ဒရာဒေသအပြင်ထွက်နေသောဒေသများ",
-        "RE": "ရဲအူနီရွန်",
+        "QO": "သမုဒ္ဒရာ အပြင်ဘက်ရှိ ကျွန်းနိုင်ငံများ",
+        "RE": "ရီယူနီယန်",
         "RO": "ရိုမေးနီးယား",
         "RS": "ဆားဘီးယား",
-        "RU": "ရုရှ",
+        "RU": "ရုရှား",
         "RW": "ရဝန်ဒါ",
-        "SA": "ဆော်ဒီအာရေးဗီးယား",
+        "SA": "ဆော်ဒီအာရေးဘီးယား",
         "SB": "ဆော်လမွန်ကျွန်းစု",
-        "SC": "ဆေးရှလ်",
+        "SC": "ဆေးရှဲ",
         "SD": "ဆူဒန်",
         "SE": "ဆွီဒင်",
         "SG": "စင်္ကာပူ",
-        "SH": "စိန့်ဟဲလီနာ",
-        "SI": "စလိုဗေးနီးယား",
+        "SH": "စိန့်ဟယ်လယ်နာ",
+        "SI": "ဆလိုဗေးနီးယား",
         "SJ": "စဗိုလ်ဘတ်နှင့်ဂျန်မေရန်",
-        "SK": "စလိုဗေးကီးယား",
-        "SL": "ဆီအဲရာ လီအိုနီ",
-        "SM": "ဆော့န်မာရီနို",
+        "SK": "ဆလိုဗက်ကီးယား",
+        "SL": "ဆီယာရာ လီယွန်း",
+        "SM": "ဆန်မာရီနို",
         "SN": "ဆီနီဂေါ",
         "SO": "ဆိုမာလီယာ",
-        "SR": "ဆူရီနိမ်း",
-        "SS": "မြောက်ဆူဒန်",
-        "ST": "စိန့်တိုမီနှင့်ပရင်စီပ့်",
+        "SR": "ဆူရာနမ်",
+        "SS": "တောင် ဆူဒန်",
+        "ST": "ဆောင်တူမေးနှင့် ပရင်စီပီ",
         "SV": "အယ်လ်ဆာဗေးဒိုး",
-        "SX": "ဆင့်မာအာတင်",
+        "SX": "စင့်မာတင်",
         "SY": "ဆီးရီးယား",
-        "SZ": "စွာဇီလန်",
-        "TA": "ထရစ်တန်ဒါကွန်ဟာ",
+        "SZ": "ဆွာဇီလန်",
+        "TA": "ထရစ္စတန် ဒါ ကွန်ဟာ",
         "TC": "တခ်စ်နှင့်ကာအီကိုစ်ကျွန်းစု",
         "TD": "ချဒ်",
         "TF": "ပြင်သစ် တောင်ပိုင်း ပိုင်နက်များ",
         "TG": "တိုဂို",
         "TH": "ထိုင်း",
         "TJ": "တာဂျီကစ္စတန်",
-        "TK": "ထိုးခါလူ",
+        "TK": "တိုကလောင်",
         "TL": "အရှေ့တီမော",
-        "TM": "တာခ်မီန့စ်တန်",
+        "TM": "တာ့ခ်မင်နစ္စတန်",
         "TN": "တူနီးရှား",
         "TO": "တွန်ဂါ",
         "TR": "တူရကီ",
-        "TT": "ထရိုင်နီဒတ်နှင့်တိုဘာဂို",
-        "TV": "ထူးဗလူ",
+        "TT": "ထရီနီဒတ်နှင့် တိုဘက်ဂို",
+        "TV": "တူဗားလူ",
         "TW": "ထိုင်ဝမ်",
         "TZ": "တန်ဇန်းနီးယား",
         "UA": "ယူကရိန်း",
-        "UG": "ယူဂန္ဓာ",
-        "UM": "ယူနိုက်တက်စတိတ် အပြင်ထွက် နေသည့် သေးငယ်သောကျွန်းများ",
-        "US": "ယူနိုက်တက်စတိတ်",
+        "UG": "ယူဂန်းဒါး",
+        "UM": "ယူနိုက်တက်စတိတ် ကျွန်းနိုင်ငံများ",
+        "UN": "ကုလသမဂ္ဂ",
+        "US": "အမေရိကန် ပြည်ထောင်စု",
         "UY": "ဥရုဂွေး",
-        "UZ": "ဥဘက်ကစ္စတန်",
-        "VA": "ဗာတီကန်စီတီး",
-        "VC": "စိန့်ဗင့်ဆင့်နှင့် သည်ဂရဲနာဒင်းစ်",
+        "UZ": "ဥဇဘက်ကစ္စတန်",
+        "VA": "ဗာတီကန်စီးတီး",
+        "VC": "စိန့်ဗင်းဆင့်နှင့် ဂရိနေဒိုင်",
         "VE": "ဗင်နီဇွဲလား",
         "VG": "ဗြိတိသျှ ဗာဂျင်း ကျွန်းစု",
         "VI": "ယူအက်စ် ဗာဂျင်း ကျွန်းစု",
         "VN": "ဗီယက်နမ်",
-        "VU": "ဗာနုအာတူ",
-        "WF": "ဝေါလစ်နှင့်ဖူထူးနား",
-        "WS": "ဆာမိုအာ",
+        "VU": "ဗနွားတူ",
+        "WF": "ဝေါလစ်နှင့် ဖူကျူးနား",
+        "WS": "ဆမိုးအား",
         "XK": "ကိုဆိုဗို",
         "YE": "ယီမင်",
-        "YT": "မေအိုတီ",
+        "YT": "မေယော့",
         "ZA": "တောင်အာဖရိက",
         "ZM": "ဇမ်ဘီယာ",
         "ZW": "ဇင်ဘာဘွေ",
-        "ZZ": "မသိ သို့မဟုတ် မရှိ သော နေရာ"
+        "ZZ": "မသိ (သို့) မရှိသော ဒေသ"
     };
   }-*/;
 }

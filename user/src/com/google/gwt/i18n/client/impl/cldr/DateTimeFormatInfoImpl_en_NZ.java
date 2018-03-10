@@ -22,24 +22,6 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_en_NZ extends DateTimeFormatInfoImpl_en_001 {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "am",
-        "pm"
-    };
-  }
-
-  @Override
-  public String dateFormatFull() {
-    return "EEEE, d MMMM y";
-  }
-
-  @Override
-  public String dateFormatLong() {
-    return "d MMMM y";
-  }
-
-  @Override
   public String dateFormatMedium() {
     return "d/MM/y";
   }
@@ -50,72 +32,12 @@ public class DateTimeFormatInfoImpl_en_NZ extends DateTimeFormatInfoImpl_en_001 
   }
 
   @Override
-  public String dateTimeFull(String timePattern, String datePattern) {
-    return datePattern + " " + timePattern;
-  }
-
-  @Override
-  public String dateTimeLong(String timePattern, String datePattern) {
-    return datePattern + " " + timePattern;
-  }
-
-  @Override
-  public String dateTimeMedium(String timePattern, String datePattern) {
-    return datePattern + " " + timePattern;
-  }
-
-  @Override
-  public String dateTimeShort(String timePattern, String datePattern) {
-    return datePattern + " " + timePattern;
-  }
-
-  @Override
-  public int firstDayOfTheWeek() {
-    return 0;
-  }
-
-  @Override
-  public String formatMonthAbbrevDay() {
-    return "d MMM";
-  }
-
-  @Override
-  public String formatMonthFullDay() {
-    return "d MMMM";
-  }
-
-  @Override
-  public String formatMonthFullWeekdayDay() {
-    return "EEEE, d MMMM";
-  }
-
-  @Override
   public String formatMonthNumDay() {
     return "d/M";
   }
 
   @Override
-  public String formatYearMonthAbbrevDay() {
-    return "d MMM y";
-  }
-
-  @Override
-  public String formatYearMonthFullDay() {
-    return "d MMMM y";
-  }
-
-  @Override
-  public String formatYearMonthNum() {
-    return "MM/y";
-  }
-
-  @Override
   public String formatYearMonthNumDay() {
     return "d/MM/y";
-  }
-
-  @Override
-  public String formatYearMonthWeekdayDay() {
-    return "EEE, d MMM y";
   }
 }

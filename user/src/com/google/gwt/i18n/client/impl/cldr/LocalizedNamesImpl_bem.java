@@ -25,6 +25,13 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class LocalizedNamesImpl_bem extends LocalizedNamesImpl {
 
   @Override
+  public String[] loadLikelyRegionCodes() {
+    return new String[] {
+        "ZM",
+    };
+  }
+
+  @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
         "AC",
@@ -101,6 +108,7 @@ public class LocalizedNamesImpl_bem extends LocalizedNamesImpl {
         "ES",
         "ET",
         "EU",
+        "EZ",
         "FI",
         "FJ",
         "FK",
@@ -267,6 +275,7 @@ public class LocalizedNamesImpl_bem extends LocalizedNamesImpl {
         "UA",
         "UG",
         "UM",
+        "UN",
         "US",
         "UY",
         "UZ",

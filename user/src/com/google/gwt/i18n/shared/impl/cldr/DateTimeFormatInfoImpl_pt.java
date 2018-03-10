@@ -33,19 +33,19 @@ public class DateTimeFormatInfoImpl_pt extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "dd/MM/y";
+    return "d 'de' MMM 'de' y";
   }
 
   @Override
   public String dateFormatShort() {
-    return "dd/MM/yy";
+    return "dd/MM/y";
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "Antes de Cristo",
-        "Ano do Senhor"
+        "antes de Cristo",
+        "depois de Cristo"
     };
   }
 
@@ -115,6 +115,16 @@ public class DateTimeFormatInfoImpl_pt extends DateTimeFormatInfoImpl {
   @Override
   public String formatYearMonthWeekdayDay() {
     return "EEE, d 'de' MMM 'de' y";
+  }
+
+  @Override
+  public String formatYearQuarterFull() {
+    return "QQQQ 'de' y";
+  }
+
+  @Override
+  public String formatYearQuarterShort() {
+    return "Q 'de' y";
   }
 
   @Override

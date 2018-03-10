@@ -22,7 +22,119 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_es_419 extends DateTimeFormatInfoImpl_es {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "a.m.",
+        "p.m."
+    };
+  }
+
+  @Override
   public int firstDayOfTheWeek() {
     return 1;
+  }
+
+  @Override
+  public String formatHour24Minute() {
+    return "HH:mm";
+  }
+
+  @Override
+  public String formatHour24MinuteSecond() {
+    return "HH:mm:ss";
+  }
+
+  @Override
+  public String formatYearMonthAbbrev() {
+    return "MMMM 'de' y";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "d 'de' MMMM 'de' y";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "EEE, d 'de' MMM 'de' y";
+  }
+
+  @Override
+  public String formatYearQuarterShort() {
+    return "Q 'de' y";
+  }
+
+  @Override
+  public String[] monthsShort() {
+    return new String[] {
+        "ene.",
+        "feb.",
+        "mar.",
+        "abr.",
+        "may.",
+        "jun.",
+        "jul.",
+        "ago.",
+        "sep.",
+        "oct.",
+        "nov.",
+        "dic."
+    };
+  }
+
+  @Override
+  public String[] quartersFull() {
+    return new String[] {
+        "1.º trimestre",
+        "2.º trimestre",
+        "3.º trimestre",
+        "4.º trimestre"
+    };
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "HH:mm:ss zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "HH:mm:ss z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "HH:mm:ss";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "HH:mm";
+  }
+
+  @Override
+  public String[] weekdaysNarrow() {
+    return new String[] {
+        "d",
+        "l",
+        "m",
+        "m",
+        "j",
+        "v",
+        "s"
+    };
+  }
+
+  @Override
+  public String[] weekdaysNarrowStandalone() {
+    return new String[] {
+        "D",
+        "L",
+        "M",
+        "M",
+        "J",
+        "V",
+        "S"
+    };
   }
 }

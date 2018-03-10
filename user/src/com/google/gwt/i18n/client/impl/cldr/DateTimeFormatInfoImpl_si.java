@@ -32,8 +32,8 @@ public class DateTimeFormatInfoImpl_si extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "ක්‍රිස්තු පූර්‍ව",
-        "ක්‍රිස්තු වර්‍ෂ"
+        "ක්‍රිස්තු පූර්ව",
+        "ක්‍රිස්තු වර්ෂ"
     };
   }
 
@@ -56,6 +56,16 @@ public class DateTimeFormatInfoImpl_si extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatHour24Minute() {
+    return "HH.mm";
+  }
+
+  @Override
+  public String formatHour24MinuteSecond() {
+    return "HH.mm.ss";
+  }
+
+  @Override
   public String formatMinuteSecond() {
     return "mm.ss";
   }
@@ -73,11 +83,6 @@ public class DateTimeFormatInfoImpl_si extends DateTimeFormatInfoImpl {
   @Override
   public String formatYearMonthNum() {
     return "y-M";
-  }
-
-  @Override
-  public String formatYearMonthNumDay() {
-    return "y-M-d";
   }
 
   @Override
@@ -174,22 +179,22 @@ public class DateTimeFormatInfoImpl_si extends DateTimeFormatInfoImpl {
 
   @Override
   public String timeFormatFull() {
-    return "a h.mm.ss zzzz";
+    return "HH.mm.ss zzzz";
   }
 
   @Override
   public String timeFormatLong() {
-    return "a h.mm.ss z";
+    return "HH.mm.ss z";
   }
 
   @Override
   public String timeFormatMedium() {
-    return "a h.mm.ss";
+    return "HH.mm.ss";
   }
 
   @Override
   public String timeFormatShort() {
-    return "a h.mm";
+    return "HH.mm";
   }
 
   @Override

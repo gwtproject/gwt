@@ -28,12 +28,12 @@ public class DateTimeFormatInfoImpl_it extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatLong() {
-    return "dd MMMM y";
+    return "d MMMM y";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "dd/MMM/y";
+    return "d MMM y";
   }
 
   @Override
@@ -42,29 +42,29 @@ public class DateTimeFormatInfoImpl_it extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
   public String[] erasFull() {
     return new String[] {
-        "a.C.",
-        "d.C."
+        "avanti Cristo",
+        "dopo Cristo"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "aC",
-        "dC"
+        "a.C.",
+        "d.C."
     };
-  }
-
-  @Override
-  public String formatHour12Minute() {
-    return "hh:mm a";
-  }
-
-  @Override
-  public String formatHour12MinuteSecond() {
-    return "hh:mm:ss a";
   }
 
   @Override
@@ -151,24 +151,6 @@ public class DateTimeFormatInfoImpl_it extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] monthsFullStandalone() {
-    return new String[] {
-        "Gennaio",
-        "Febbraio",
-        "Marzo",
-        "Aprile",
-        "Maggio",
-        "Giugno",
-        "Luglio",
-        "Agosto",
-        "Settembre",
-        "Ottobre",
-        "Novembre",
-        "Dicembre"
-    };
-  }
-
-  @Override
   public String[] monthsNarrow() {
     return new String[] {
         "G",
@@ -234,19 +216,6 @@ public class DateTimeFormatInfoImpl_it extends DateTimeFormatInfoImpl {
         "giovedì",
         "venerdì",
         "sabato"
-    };
-  }
-
-  @Override
-  public String[] weekdaysFullStandalone() {
-    return new String[] {
-        "Domenica",
-        "Lunedì",
-        "Martedì",
-        "Mercoledì",
-        "Giovedì",
-        "Venerdì",
-        "Sabato"
     };
   }
 

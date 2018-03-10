@@ -37,7 +37,6 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
         "AI",
         "AQ",
         "AG",
-        "AN",
         "SA",
         "AR",
         "AM",
@@ -95,6 +94,7 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
         "ER",
         "EE",
         "ET",
+        "EZ",
         "FJ",
         "PH",
         "FI",
@@ -277,6 +277,7 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
         "TV",
         "UA",
         "UG",
+        "UN",
         "HU",
         "EU",
         "UY",
@@ -297,13 +298,13 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
     namesMap.put("005", "America dal Sid");
     namesMap.put("011", "Africa dal Vest");
     namesMap.put("013", "America Centrala");
-    namesMap.put("014", "Africa da l'Ost");
+    namesMap.put("014", "Africa da l’Ost");
     namesMap.put("015", "Africa dal Nord");
     namesMap.put("017", "Africa Centrala");
     namesMap.put("018", "Africa Meridiunala");
     namesMap.put("019", "America dal Nord, America Centrala ed America dal Sid");
     namesMap.put("029", "Caribica");
-    namesMap.put("030", "Asia da l'Ost");
+    namesMap.put("030", "Asia da l’Ost");
     namesMap.put("034", "Asia dal Sid");
     namesMap.put("035", "Asia dal Sidost");
     namesMap.put("039", "Europa dal Sid");
@@ -319,7 +320,6 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
     namesMap.put("419", "America Latina");
     namesMap.put("AE", "Emirats Arabs Unids");
     namesMap.put("AG", "Antigua e Barbuda");
-    namesMap.put("AN", "Antillas Ollandaisas");
     namesMap.put("AR", "Argentinia");
     namesMap.put("AS", "Samoa Americana");
     namesMap.put("AX", "Inslas Aland");
@@ -329,7 +329,7 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
     namesMap.put("BE", "Belgia");
     namesMap.put("BL", "Son Barthélemy");
     namesMap.put("BM", "Bermudas");
-    namesMap.put("BR", "Brasila");
+    namesMap.put("BR", "Brasilia");
     namesMap.put("BV", "Insla Bouvet");
     namesMap.put("BY", "Bielorussia");
     namesMap.put("CC", "Inslas Cocos");
@@ -337,7 +337,7 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
     namesMap.put("CF", "Republica Centralafricana");
     namesMap.put("CG", "Congo");
     namesMap.put("CH", "Svizra");
-    namesMap.put("CI", "Costa d'Ivur");
+    namesMap.put("CI", "Costa d’Ivur");
     namesMap.put("CK", "Inslas Cook");
     namesMap.put("CM", "Camerun");
     namesMap.put("CO", "Columbia");
@@ -366,13 +366,13 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
     namesMap.put("GQ", "Guinea Equatoriala");
     namesMap.put("GR", "Grezia");
     namesMap.put("GS", "Georgia dal Sid e las Inslas Sandwich dal Sid");
-    namesMap.put("HK", "Regiun d'administraziun speziala da Hongkong, China");
-    namesMap.put("HM", "Inslas da Heard e da McDonlad");
+    namesMap.put("HK", "Regiun d’administraziun speziala da Hongkong, China");
+    namesMap.put("HM", "Inslas da Heard e da McDonald");
     namesMap.put("HR", "Croazia");
     namesMap.put("HU", "Ungaria");
     namesMap.put("IE", "Irlanda");
     namesMap.put("IM", "Insla da Man");
-    namesMap.put("IO", "Territori Britannic en l'Ocean Indic");
+    namesMap.put("IO", "Territori Britannic en l’Ocean Indic");
     namesMap.put("IQ", "Irac");
     namesMap.put("IS", "Islanda");
     namesMap.put("IT", "Italia");
@@ -389,16 +389,17 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
     namesMap.put("KY", "Inslas Cayman");
     namesMap.put("KZ", "Kasachstan");
     namesMap.put("LB", "Libanon");
+    namesMap.put("LC", "Saint Lucia");
     namesMap.put("LT", "Lituania");
     namesMap.put("LU", "Luxemburg");
     namesMap.put("LV", "Lettonia");
     namesMap.put("LY", "Libia");
     namesMap.put("MA", "Maroc");
     namesMap.put("MD", "Moldavia");
+    namesMap.put("MF", "Saint Martin");
     namesMap.put("MH", "Inslas da Marshall");
-    namesMap.put("MK", "Macedonia");
     namesMap.put("MM", "Myanmar");
-    namesMap.put("MO", "Regiun d'administraziun speziala Macao, China");
+    namesMap.put("MO", "Regiun d’administraziun speziala Macao, China");
     namesMap.put("MP", "Inslas Mariannas dal Nord");
     namesMap.put("MR", "Mauretania");
     namesMap.put("MV", "Maldivas");
@@ -426,7 +427,7 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
     namesMap.put("SC", "Seychellas");
     namesMap.put("SE", "Svezia");
     namesMap.put("SG", "Singapur");
-    namesMap.put("SH", "Sontg'Elena");
+    namesMap.put("SH", "Sontg’Elena");
     namesMap.put("SJ", "Svalbard e Jan Mayen");
     namesMap.put("SK", "Slovachia");
     namesMap.put("SR", "Surinam");
@@ -438,19 +439,19 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
     namesMap.put("TF", "Territoris Franzos Meridiunals");
     namesMap.put("TH", "Tailanda");
     namesMap.put("TJ", "Tadschikistan");
-    namesMap.put("TL", "Timor da l'Ost");
+    namesMap.put("TL", "Timor da l’Ost");
     namesMap.put("TN", "Tunesia");
     namesMap.put("TR", "Tirchia");
     namesMap.put("TT", "Trinidad e Tobago");
     namesMap.put("TZ", "Tansania");
     namesMap.put("UA", "Ucraina");
-    namesMap.put("UM", "Inslas pitschnas perifericas dals Stadis Unids da l'America");
-    namesMap.put("US", "Stadis Unids da l'America");
+    namesMap.put("UM", "Inslas pitschnas perifericas dals Stadis Unids da l’America");
+    namesMap.put("US", "Stadis Unids da l’America");
     namesMap.put("UZ", "Usbekistan");
     namesMap.put("VA", "Citad dal Vatican");
     namesMap.put("VC", "Saint Vincent e las Grenadinas");
-    namesMap.put("VG", "Inslas Verginas Britannicas");
-    namesMap.put("VI", "Inslas Verginas Americanas");
+    namesMap.put("VG", "Inslas Virginas Britannicas");
+    namesMap.put("VI", "Inslas Virginas Americanas");
     namesMap.put("WF", "Wallis e Futuna");
     namesMap.put("YE", "Jemen");
     namesMap.put("ZA", "Africa dal Sid");
@@ -471,13 +472,13 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
         "005": "America dal Sid",
         "011": "Africa dal Vest",
         "013": "America Centrala",
-        "014": "Africa da l'Ost",
+        "014": "Africa da l’Ost",
         "015": "Africa dal Nord",
         "017": "Africa Centrala",
         "018": "Africa Meridiunala",
         "019": "America dal Nord, America Centrala ed America dal Sid",
         "029": "Caribica",
-        "030": "Asia da l'Ost",
+        "030": "Asia da l’Ost",
         "034": "Asia dal Sid",
         "035": "Asia dal Sidost",
         "039": "Europa dal Sid",
@@ -493,7 +494,6 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
         "419": "America Latina",
         "AE": "Emirats Arabs Unids",
         "AG": "Antigua e Barbuda",
-        "AN": "Antillas Ollandaisas",
         "AR": "Argentinia",
         "AS": "Samoa Americana",
         "AX": "Inslas Aland",
@@ -503,7 +503,7 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
         "BE": "Belgia",
         "BL": "Son Barthélemy",
         "BM": "Bermudas",
-        "BR": "Brasila",
+        "BR": "Brasilia",
         "BV": "Insla Bouvet",
         "BY": "Bielorussia",
         "CC": "Inslas Cocos",
@@ -511,7 +511,7 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
         "CF": "Republica Centralafricana",
         "CG": "Congo",
         "CH": "Svizra",
-        "CI": "Costa d'Ivur",
+        "CI": "Costa d’Ivur",
         "CK": "Inslas Cook",
         "CM": "Camerun",
         "CO": "Columbia",
@@ -540,13 +540,13 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
         "GQ": "Guinea Equatoriala",
         "GR": "Grezia",
         "GS": "Georgia dal Sid e las Inslas Sandwich dal Sid",
-        "HK": "Regiun d'administraziun speziala da Hongkong, China",
-        "HM": "Inslas da Heard e da McDonlad",
+        "HK": "Regiun d’administraziun speziala da Hongkong, China",
+        "HM": "Inslas da Heard e da McDonald",
         "HR": "Croazia",
         "HU": "Ungaria",
         "IE": "Irlanda",
         "IM": "Insla da Man",
-        "IO": "Territori Britannic en l'Ocean Indic",
+        "IO": "Territori Britannic en l’Ocean Indic",
         "IQ": "Irac",
         "IS": "Islanda",
         "IT": "Italia",
@@ -563,16 +563,17 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
         "KY": "Inslas Cayman",
         "KZ": "Kasachstan",
         "LB": "Libanon",
+        "LC": "Saint Lucia",
         "LT": "Lituania",
         "LU": "Luxemburg",
         "LV": "Lettonia",
         "LY": "Libia",
         "MA": "Maroc",
         "MD": "Moldavia",
+        "MF": "Saint Martin",
         "MH": "Inslas da Marshall",
-        "MK": "Macedonia",
         "MM": "Myanmar",
-        "MO": "Regiun d'administraziun speziala Macao, China",
+        "MO": "Regiun d’administraziun speziala Macao, China",
         "MP": "Inslas Mariannas dal Nord",
         "MR": "Mauretania",
         "MV": "Maldivas",
@@ -600,7 +601,7 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
         "SC": "Seychellas",
         "SE": "Svezia",
         "SG": "Singapur",
-        "SH": "Sontg'Elena",
+        "SH": "Sontg’Elena",
         "SJ": "Svalbard e Jan Mayen",
         "SK": "Slovachia",
         "SR": "Surinam",
@@ -612,19 +613,19 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
         "TF": "Territoris Franzos Meridiunals",
         "TH": "Tailanda",
         "TJ": "Tadschikistan",
-        "TL": "Timor da l'Ost",
+        "TL": "Timor da l’Ost",
         "TN": "Tunesia",
         "TR": "Tirchia",
         "TT": "Trinidad e Tobago",
         "TZ": "Tansania",
         "UA": "Ucraina",
-        "UM": "Inslas pitschnas perifericas dals Stadis Unids da l'America",
-        "US": "Stadis Unids da l'America",
+        "UM": "Inslas pitschnas perifericas dals Stadis Unids da l’America",
+        "US": "Stadis Unids da l’America",
         "UZ": "Usbekistan",
         "VA": "Citad dal Vatican",
         "VC": "Saint Vincent e las Grenadinas",
-        "VG": "Inslas Verginas Britannicas",
-        "VI": "Inslas Verginas Americanas",
+        "VG": "Inslas Virginas Britannicas",
+        "VI": "Inslas Virginas Americanas",
         "WF": "Wallis e Futuna",
         "YE": "Jemen",
         "ZA": "Africa dal Sid",

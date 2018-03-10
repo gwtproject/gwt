@@ -53,13 +53,18 @@ public class DateTimeFormatInfoImpl_wae extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthAbbrevDay() {
+    return "d. MMM";
+  }
+
+  @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
+    return "EEEE, d. MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M/d";
+    return "d. MMM";
   }
 
   @Override
@@ -69,42 +74,17 @@ public class DateTimeFormatInfoImpl_wae extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "MMM d, y";
-  }
-
-  @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
+    return "d. MMM y";
   }
 
   @Override
   public String formatYearMonthFullDay() {
-    return "MMMM d, y";
-  }
-
-  @Override
-  public String formatYearMonthNum() {
-    return "M/y";
-  }
-
-  @Override
-  public String formatYearMonthNumDay() {
-    return "M/d/y";
+    return "d. MMMM y";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
-  }
-
-  @Override
-  public String formatYearQuarterFull() {
-    return "QQQQ y";
-  }
-
-  @Override
-  public String formatYearQuarterShort() {
-    return "Q y";
+    return "EEE, d. MMM y";
   }
 
   @Override

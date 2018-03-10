@@ -72,15 +72,15 @@ public class DateTimeFormatInfoImpl_ee extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "Hafi Yesu Va Do ŋgɔ",
-        "Yesu Ŋɔli"
+        "Hafi Yesu Va",
+        "Yesu ŋɔli"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "hY",
+        "HYV",
         "Yŋ"
     };
   }
@@ -241,7 +241,7 @@ public class DateTimeFormatInfoImpl_ee extends DateTimeFormatInfoImpl {
 
   @Override
   public String timeFormatFull() {
-    return "a h:mm:ss zzzz";
+    return "a 'ga' h:mm:ss zzzz";
   }
 
   @Override

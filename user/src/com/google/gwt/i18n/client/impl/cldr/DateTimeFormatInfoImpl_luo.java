@@ -123,7 +123,7 @@ public class DateTimeFormatInfoImpl_luo extends DateTimeFormatInfoImpl {
         "Dwe mar Achiel",
         "Dwe mar Ariyo",
         "Dwe mar Adek",
-        "Dwe mar Ang'wen",
+        "Dwe mar Ang’wen",
         "Dwe mar Abich",
         "Dwe mar Auchiel",
         "Dwe mar Abiriyo",
@@ -192,33 +192,13 @@ public class DateTimeFormatInfoImpl_luo extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String timeFormatFull() {
-    return "h:mm:ss a zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "h:mm:ss a z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "h:mm:ss a";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "h:mm a";
-  }
-
-  @Override
   public String[] weekdaysFull() {
     return new String[] {
         "Jumapil",
         "Wuok Tich",
         "Tich Ariyo",
         "Tich Adek",
-        "Tich Ang'wen",
+        "Tich Ang’wen",
         "Tich Abich",
         "Ngeso"
     };

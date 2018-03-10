@@ -74,7 +74,7 @@ public class DateTimeFormatInfoImpl_ar_IQ extends DateTimeFormatInfoImpl_ar_001 
         "تموز",
         "آب",
         "أيلول",
-        "تشرین الأول",
+        "تشرين الأول",
         "تشرين الثاني",
         "كانون الأول"
     };

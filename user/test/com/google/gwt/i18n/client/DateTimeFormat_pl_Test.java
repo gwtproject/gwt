@@ -48,7 +48,7 @@ public class DateTimeFormat_pl_Test extends GWTTestCase {
 
   public void test_LLLLL() {
     Date date = new Date(2006 - 1900, 6, 27, 13, 10, 10);
-    assertEquals("l", DateTimeFormat.getFormat("LLLLL").format(date));
+    assertEquals("L", DateTimeFormat.getFormat("LLLLL").format(date));
   }
 
   public void test_MM() {

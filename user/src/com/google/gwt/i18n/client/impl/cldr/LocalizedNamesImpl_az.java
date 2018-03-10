@@ -25,8 +25,16 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
 
   @Override
+  public String[] loadLikelyRegionCodes() {
+    return new String[] {
+        "AZ",
+    };
+  }
+
+  @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "UM",
         "VI",
         "AX",
         "AL",
@@ -40,7 +48,9 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
         "AG",
         "AR",
         "AW",
+        "AC",
         "EU",
+        "EZ",
         "AU",
         "AT",
         "AZ",
@@ -53,7 +63,7 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
         "BJ",
         "BM",
         "GB",
-        "UM",
+        "UN",
         "AE",
         "BO",
         "BG",
@@ -74,6 +84,7 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
         "DJ",
         "CL",
         "CN",
+        "GI",
         "ZA",
         "GS",
         "KR",
@@ -90,7 +101,6 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
         "EE",
         "FO",
         "FJ",
-        "CI",
         "PH",
         "FI",
         "FK",
@@ -100,12 +110,10 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
         "GF",
         "PS",
         "GG",
-        "GI",
         "GE",
         "HT",
         "HM",
         "IN",
-        "AN",
         "HN",
         "HK",
         "ID",
@@ -119,11 +127,11 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
         "SE",
         "CH",
         "IT",
+        "CV",
         "KH",
         "CM",
         "CA",
         "IC",
-        "CV",
         "BQ",
         "KY",
         "KE",
@@ -137,6 +145,7 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
         "CD",
         "XK",
         "CR",
+        "CI",
         "CU",
         "CK",
         "CW",
@@ -175,6 +184,7 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
         "MS",
         "ME",
         "MZ",
+        "PM",
         "SH",
         "MM",
         "MA",
@@ -204,7 +214,7 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
         "GA",
         "GM",
         "GH",
-        "QA",
+        "GY",
         "KZ",
         "GD",
         "GL",
@@ -213,28 +223,26 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
         "GT",
         "GN",
         "GW",
-        "GY",
         "KG",
         "EH",
+        "QA",
         "RE",
         "RW",
         "RO",
         "RU",
         "SV",
         "WS",
+        "SM",
+        "ST",
+        "SN",
         "BL",
         "KN",
         "LC",
-        "SM",
         "MF",
-        "PM",
         "VC",
-        "ST",
-        "SN",
         "RS",
         "EA",
         "SC",
-        "SL",
         "KP",
         "MP",
         "SG",
@@ -249,21 +257,22 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
         "SY",
         "SJ",
         "SZ",
+        "SL",
         "TL",
         "SA",
         "TJ",
-        "TZ",
         "TH",
+        "TZ",
         "TW",
         "TK",
         "TO",
         "TG",
+        "TC",
         "TT",
         "TA",
         "TN",
         "TR",
         "TM",
-        "TC",
         "TV",
         "UA",
         "WF",
@@ -279,7 +288,6 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
         "JP",
         "NC",
         "NZ",
-        "AC",
         "GR",
         "YE",
         "ZM",
@@ -303,7 +311,7 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
     namesMap.put("015", "Şimali Afrika");
     namesMap.put("017", "Mərkəzi Afrika");
     namesMap.put("018", "Cənubi Afrika");
-    namesMap.put("019", "Amerikalar");
+    namesMap.put("019", "Amerika");
     namesMap.put("021", "Şimal Amerikası");
     namesMap.put("029", "Karib");
     namesMap.put("030", "Şərqi Asiya");
@@ -322,54 +330,54 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
     namesMap.put("154", "Şimali Avropa");
     namesMap.put("155", "Qərbi Avropa");
     namesMap.put("419", "Latın Amerikası");
-    namesMap.put("AC", "Yüksəliş Adası");
+    namesMap.put("AC", "Askenson adası");
     namesMap.put("AE", "Birləşmiş Ərəb Əmirlikləri");
     namesMap.put("AF", "Əfqanıstan");
     namesMap.put("AG", "Antiqua və Barbuda");
-    namesMap.put("AI", "Angila");
+    namesMap.put("AI", "Angilya");
     namesMap.put("AL", "Albaniya");
     namesMap.put("AM", "Ermənistan");
-    namesMap.put("AN", "Hollandiya antilleri");
     namesMap.put("AO", "Anqola");
     namesMap.put("AQ", "Antarktika");
     namesMap.put("AS", "Amerika Samoası");
     namesMap.put("AT", "Avstriya");
     namesMap.put("AU", "Avstraliya");
-    namesMap.put("AX", "Aland Adaları");
+    namesMap.put("AX", "Aland adaları");
     namesMap.put("AZ", "Azərbaycan");
-    namesMap.put("BA", "Bosniya və Hersoqovina");
+    namesMap.put("BA", "Bosniya və Herseqovina");
     namesMap.put("BD", "Banqladeş");
     namesMap.put("BE", "Belçika");
-    namesMap.put("BG", "Bolqariya");
+    namesMap.put("BG", "Bolqarıstan");
     namesMap.put("BH", "Bəhreyn");
-    namesMap.put("BL", "San Bartolomey");
+    namesMap.put("BL", "Sent-Bartelemi");
+    namesMap.put("BM", "Bermud adaları");
     namesMap.put("BN", "Bruney");
     namesMap.put("BO", "Boliviya");
     namesMap.put("BQ", "Karib Niderlandı");
     namesMap.put("BR", "Braziliya");
-    namesMap.put("BS", "Baham Adaları");
+    namesMap.put("BS", "Baham adaları");
     namesMap.put("BT", "Butan");
-    namesMap.put("BV", "Buve Adası");
+    namesMap.put("BV", "Buve adası");
     namesMap.put("BW", "Botsvana");
     namesMap.put("BZ", "Beliz");
     namesMap.put("CA", "Kanada");
-    namesMap.put("CC", "Kokos Adaları");
+    namesMap.put("CC", "Kokos (Kilinq) adaları");
     namesMap.put("CD", "Konqo - Kinşasa");
     namesMap.put("CF", "Mərkəzi Afrika Respublikası");
     namesMap.put("CG", "Konqo - Brazzavil");
     namesMap.put("CH", "İsveçrə");
-    namesMap.put("CI", "Fil Dişi Sahili");
-    namesMap.put("CK", "Kuk Adaları");
+    namesMap.put("CI", "Kotd’ivuar");
+    namesMap.put("CK", "Kuk adaları");
     namesMap.put("CL", "Çili");
     namesMap.put("CM", "Kamerun");
     namesMap.put("CN", "Çin");
     namesMap.put("CO", "Kolumbiya");
-    namesMap.put("CP", "Klipperton Adası");
+    namesMap.put("CP", "Klipperton adası");
     namesMap.put("CR", "Kosta Rika");
     namesMap.put("CU", "Kuba");
-    namesMap.put("CV", "Kape Verde");
+    namesMap.put("CV", "Kabo-Verde");
     namesMap.put("CW", "Kurasao");
-    namesMap.put("CX", "Milad Adası");
+    namesMap.put("CX", "Milad adası");
     namesMap.put("CY", "Kipr");
     namesMap.put("CZ", "Çexiya");
     namesMap.put("DE", "Almaniya");
@@ -383,46 +391,48 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
     namesMap.put("EC", "Ekvador");
     namesMap.put("EE", "Estoniya");
     namesMap.put("EG", "Misir");
-    namesMap.put("EH", "Qərbi Sahara");
+    namesMap.put("EH", "Qərbi Saxara");
     namesMap.put("ER", "Eritreya");
     namesMap.put("ES", "İspaniya");
     namesMap.put("ET", "Efiopiya");
     namesMap.put("EU", "Avropa Birliyi");
+    namesMap.put("EZ", "Avrozona");
     namesMap.put("FI", "Finlandiya");
     namesMap.put("FJ", "Fici");
-    namesMap.put("FK", "Folklend Adaları");
+    namesMap.put("FK", "Folklend adaları");
     namesMap.put("FM", "Mikroneziya");
-    namesMap.put("FO", "Farer Adaları");
+    namesMap.put("FO", "Farer adaları");
     namesMap.put("FR", "Fransa");
     namesMap.put("GA", "Qabon");
     namesMap.put("GB", "Birləşmiş Krallıq");
     namesMap.put("GD", "Qrenada");
     namesMap.put("GE", "Gürcüstan");
-    namesMap.put("GF", "Fransız Qviyanası");
-    namesMap.put("GG", "Gernsey");
+    namesMap.put("GF", "Fransa Qvianası");
+    namesMap.put("GG", "Gernsi");
     namesMap.put("GH", "Qana");
+    namesMap.put("GI", "Cəbəllütariq");
     namesMap.put("GL", "Qrenlandiya");
     namesMap.put("GM", "Qambiya");
     namesMap.put("GN", "Qvineya");
     namesMap.put("GP", "Qvadelupa");
     namesMap.put("GQ", "Ekvatorial Qvineya");
     namesMap.put("GR", "Yunanıstan");
-    namesMap.put("GS", "Cənubi Corciya və Cənubi Sendviç Adaları");
+    namesMap.put("GS", "Cənubi Corciya və Cənubi Sendviç adaları");
     namesMap.put("GT", "Qvatemala");
     namesMap.put("GU", "Quam");
     namesMap.put("GW", "Qvineya-Bisau");
-    namesMap.put("GY", "Qviyana");
+    namesMap.put("GY", "Qayana");
     namesMap.put("HK", "Honq Konq Xüsusi İnzibati Ərazi Çin");
-    namesMap.put("HM", "Herd və Mak Donald Adaları");
+    namesMap.put("HM", "Herd və Makdonald adaları");
     namesMap.put("HR", "Xorvatiya");
     namesMap.put("HU", "Macarıstan");
-    namesMap.put("IC", "Kanar Adaları");
+    namesMap.put("IC", "Kanar adaları");
     namesMap.put("ID", "İndoneziya");
     namesMap.put("IE", "İrlandiya");
     namesMap.put("IL", "İsrail");
-    namesMap.put("IM", "Men Adası");
+    namesMap.put("IM", "Men adası");
     namesMap.put("IN", "Hindistan");
-    namesMap.put("IO", "Britaniya Hind Okeanı Ərazisi");
+    namesMap.put("IO", "Britaniyanın Hind Okeanı Ərazisi");
     namesMap.put("IQ", "İraq");
     namesMap.put("IR", "İran");
     namesMap.put("IS", "İslandiya");
@@ -434,17 +444,17 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
     namesMap.put("KE", "Keniya");
     namesMap.put("KG", "Qırğızıstan");
     namesMap.put("KH", "Kamboca");
-    namesMap.put("KM", "Komor Adaları");
-    namesMap.put("KN", "San Kits və Nevis");
+    namesMap.put("KM", "Komor adaları");
+    namesMap.put("KN", "Sent-Kits və Nevis");
     namesMap.put("KP", "Şimali Koreya");
     namesMap.put("KR", "Cənubi Koreya");
     namesMap.put("KW", "Küveyt");
-    namesMap.put("KY", "Kayman Adaları");
+    namesMap.put("KY", "Kayman adaları");
     namesMap.put("KZ", "Qazaxıstan");
     namesMap.put("LB", "Livan");
-    namesMap.put("LC", "San Lüsiya");
+    namesMap.put("LC", "Sent-Lusiya");
     namesMap.put("LI", "Lixtenşteyn");
-    namesMap.put("LK", "Şri Lanka");
+    namesMap.put("LK", "Şri-Lanka");
     namesMap.put("LR", "Liberiya");
     namesMap.put("LS", "Lesoto");
     namesMap.put("LT", "Litva");
@@ -454,93 +464,97 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
     namesMap.put("MA", "Mərakeş");
     namesMap.put("MC", "Monako");
     namesMap.put("ME", "Monteneqro");
-    namesMap.put("MF", "San Martin");
+    namesMap.put("MF", "Sent Martin");
     namesMap.put("MG", "Madaqaskar");
-    namesMap.put("MH", "Marşal Adaları");
+    namesMap.put("MH", "Marşal adaları");
     namesMap.put("MK", "Makedoniya");
     namesMap.put("MM", "Myanma");
-    namesMap.put("MN", "Monqoliya");
+    namesMap.put("MN", "Monqolustan");
     namesMap.put("MO", "Makao Xüsusi İnzibati Ərazi Çin");
-    namesMap.put("MP", "Şimali Mariana Adaları");
+    namesMap.put("MP", "Şimali Marian adaları");
     namesMap.put("MQ", "Martinik");
     namesMap.put("MR", "Mavritaniya");
     namesMap.put("MS", "Monserat");
     namesMap.put("MU", "Mavriki");
-    namesMap.put("MV", "Maldiv Adaları");
+    namesMap.put("MV", "Maldiv adaları");
     namesMap.put("MW", "Malavi");
     namesMap.put("MX", "Meksika");
     namesMap.put("MY", "Malayziya");
     namesMap.put("MZ", "Mozambik");
     namesMap.put("NA", "Namibiya");
     namesMap.put("NC", "Yeni Kaledoniya");
-    namesMap.put("NF", "Norfolk Adası");
+    namesMap.put("NF", "Norfolk adası");
     namesMap.put("NG", "Nigeriya");
     namesMap.put("NI", "Nikaraqua");
     namesMap.put("NL", "Niderland");
     namesMap.put("NO", "Norveç");
     namesMap.put("NZ", "Yeni Zelandiya");
-    namesMap.put("PF", "Fransız Polineziyası");
-    namesMap.put("PG", "Papua Yeni Qvineya");
+    namesMap.put("PF", "Fransa Polineziyası");
+    namesMap.put("PG", "Papua-Yeni Qvineya");
     namesMap.put("PH", "Filippin");
     namesMap.put("PL", "Polşa");
-    namesMap.put("PM", "San Pier və Mikelon");
-    namesMap.put("PN", "Pitkern Adaları");
+    namesMap.put("PM", "Müqəddəs Pyer və Mikelon");
+    namesMap.put("PN", "Pitkern adaları");
     namesMap.put("PR", "Puerto Riko");
     namesMap.put("PS", "Fələstin Əraziləri");
-    namesMap.put("PT", "Portuqal");
+    namesMap.put("PT", "Portuqaliya");
     namesMap.put("PY", "Paraqvay");
+    namesMap.put("QA", "Qətər");
     namesMap.put("QO", "Uzaq Okeaniya");
-    namesMap.put("RE", "Reunion");
+    namesMap.put("RE", "Reyunyon");
     namesMap.put("RO", "Rumıniya");
     namesMap.put("RS", "Serbiya");
     namesMap.put("RU", "Rusiya");
     namesMap.put("RW", "Ruanda");
     namesMap.put("SA", "Səudiyyə Ərəbistanı");
-    namesMap.put("SB", "Solomon Adaları");
-    namesMap.put("SC", "Seyşel Adaları");
+    namesMap.put("SB", "Solomon adaları");
+    namesMap.put("SC", "Seyşel adaları");
     namesMap.put("SE", "İsveç");
     namesMap.put("SG", "Sinqapur");
     namesMap.put("SH", "Müqəddəs Yelena");
     namesMap.put("SI", "Sloveniya");
-    namesMap.put("SJ", "Svalbard və Yan Mayen");
+    namesMap.put("SJ", "Svalbard və Yan-Mayen");
     namesMap.put("SK", "Slovakiya");
-    namesMap.put("SL", "Siera Leon");
+    namesMap.put("SL", "Syerra-Leone");
+    namesMap.put("SM", "San-Marino");
     namesMap.put("SN", "Seneqal");
     namesMap.put("SO", "Somali");
     namesMap.put("SR", "Surinam");
     namesMap.put("SS", "Cənubi Sudan");
-    namesMap.put("ST", "Sao Tome və Prinsip");
+    namesMap.put("ST", "San-Tome və Prinsipi");
     namesMap.put("SV", "Salvador");
+    namesMap.put("SX", "Sint-Marten");
     namesMap.put("SY", "Suriya");
     namesMap.put("SZ", "Svazilend");
     namesMap.put("TA", "Tristan da Kunya");
-    namesMap.put("TC", "Turks və Kaikos Adaları");
+    namesMap.put("TC", "Törks və Kaykos adaları");
     namesMap.put("TD", "Çad");
-    namesMap.put("TF", "Fransa Cənub Əraziləri");
+    namesMap.put("TF", "Fransanın Cənub Əraziləri");
     namesMap.put("TG", "Toqo");
-    namesMap.put("TH", "Tayland");
+    namesMap.put("TH", "Tailand");
     namesMap.put("TJ", "Tacikistan");
     namesMap.put("TL", "Şərqi Timor");
     namesMap.put("TM", "Türkmənistan");
     namesMap.put("TN", "Tunis");
     namesMap.put("TO", "Tonqa");
-    namesMap.put("TR", "Türkiya");
+    namesMap.put("TR", "Türkiyə");
     namesMap.put("TT", "Trinidad və Tobaqo");
     namesMap.put("TW", "Tayvan");
     namesMap.put("TZ", "Tanzaniya");
     namesMap.put("UA", "Ukrayna");
     namesMap.put("UG", "Uqanda");
-    namesMap.put("UM", "Birləşmiş Ştatlar Uzaq Adalar");
+    namesMap.put("UM", "ABŞ-a bağlı kiçik adacıqlar");
+    namesMap.put("UN", "Birləşmiş Millətlər Təşkilatı");
     namesMap.put("US", "Amerika Birləşmiş Ştatları");
     namesMap.put("UY", "Uruqvay");
     namesMap.put("UZ", "Özbəkistan");
     namesMap.put("VA", "Vatikan");
-    namesMap.put("VC", "San Vinsent və Qrenada");
+    namesMap.put("VC", "Sent-Vinsent və Qrenadinlər");
     namesMap.put("VE", "Venesuela");
-    namesMap.put("VG", "Britaniya Vircin Adaları");
-    namesMap.put("VI", "ABŞ Vircin Adaları");
+    namesMap.put("VG", "Britaniyanın Virgin adaları");
+    namesMap.put("VI", "ABŞ Virgin adaları");
     namesMap.put("VN", "Vyetnam");
-    namesMap.put("WF", "Uolis və Futuna");
+    namesMap.put("WF", "Uollis və Futuna");
     namesMap.put("YE", "Yəmən");
     namesMap.put("YT", "Mayot");
     namesMap.put("ZA", "Cənub Afrika");
@@ -567,7 +581,7 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
         "015": "Şimali Afrika",
         "017": "Mərkəzi Afrika",
         "018": "Cənubi Afrika",
-        "019": "Amerikalar",
+        "019": "Amerika",
         "021": "Şimal Amerikası",
         "029": "Karib",
         "030": "Şərqi Asiya",
@@ -586,54 +600,54 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
         "154": "Şimali Avropa",
         "155": "Qərbi Avropa",
         "419": "Latın Amerikası",
-        "AC": "Yüksəliş Adası",
+        "AC": "Askenson adası",
         "AE": "Birləşmiş Ərəb Əmirlikləri",
         "AF": "Əfqanıstan",
         "AG": "Antiqua və Barbuda",
-        "AI": "Angila",
+        "AI": "Angilya",
         "AL": "Albaniya",
         "AM": "Ermənistan",
-        "AN": "Hollandiya antilleri",
         "AO": "Anqola",
         "AQ": "Antarktika",
         "AS": "Amerika Samoası",
         "AT": "Avstriya",
         "AU": "Avstraliya",
-        "AX": "Aland Adaları",
+        "AX": "Aland adaları",
         "AZ": "Azərbaycan",
-        "BA": "Bosniya və Hersoqovina",
+        "BA": "Bosniya və Herseqovina",
         "BD": "Banqladeş",
         "BE": "Belçika",
-        "BG": "Bolqariya",
+        "BG": "Bolqarıstan",
         "BH": "Bəhreyn",
-        "BL": "San Bartolomey",
+        "BL": "Sent-Bartelemi",
+        "BM": "Bermud adaları",
         "BN": "Bruney",
         "BO": "Boliviya",
         "BQ": "Karib Niderlandı",
         "BR": "Braziliya",
-        "BS": "Baham Adaları",
+        "BS": "Baham adaları",
         "BT": "Butan",
-        "BV": "Buve Adası",
+        "BV": "Buve adası",
         "BW": "Botsvana",
         "BZ": "Beliz",
         "CA": "Kanada",
-        "CC": "Kokos Adaları",
+        "CC": "Kokos (Kilinq) adaları",
         "CD": "Konqo - Kinşasa",
         "CF": "Mərkəzi Afrika Respublikası",
         "CG": "Konqo - Brazzavil",
         "CH": "İsveçrə",
-        "CI": "Fil Dişi Sahili",
-        "CK": "Kuk Adaları",
+        "CI": "Kotd’ivuar",
+        "CK": "Kuk adaları",
         "CL": "Çili",
         "CM": "Kamerun",
         "CN": "Çin",
         "CO": "Kolumbiya",
-        "CP": "Klipperton Adası",
+        "CP": "Klipperton adası",
         "CR": "Kosta Rika",
         "CU": "Kuba",
-        "CV": "Kape Verde",
+        "CV": "Kabo-Verde",
         "CW": "Kurasao",
-        "CX": "Milad Adası",
+        "CX": "Milad adası",
         "CY": "Kipr",
         "CZ": "Çexiya",
         "DE": "Almaniya",
@@ -647,46 +661,48 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
         "EC": "Ekvador",
         "EE": "Estoniya",
         "EG": "Misir",
-        "EH": "Qərbi Sahara",
+        "EH": "Qərbi Saxara",
         "ER": "Eritreya",
         "ES": "İspaniya",
         "ET": "Efiopiya",
         "EU": "Avropa Birliyi",
+        "EZ": "Avrozona",
         "FI": "Finlandiya",
         "FJ": "Fici",
-        "FK": "Folklend Adaları",
+        "FK": "Folklend adaları",
         "FM": "Mikroneziya",
-        "FO": "Farer Adaları",
+        "FO": "Farer adaları",
         "FR": "Fransa",
         "GA": "Qabon",
         "GB": "Birləşmiş Krallıq",
         "GD": "Qrenada",
         "GE": "Gürcüstan",
-        "GF": "Fransız Qviyanası",
-        "GG": "Gernsey",
+        "GF": "Fransa Qvianası",
+        "GG": "Gernsi",
         "GH": "Qana",
+        "GI": "Cəbəllütariq",
         "GL": "Qrenlandiya",
         "GM": "Qambiya",
         "GN": "Qvineya",
         "GP": "Qvadelupa",
         "GQ": "Ekvatorial Qvineya",
         "GR": "Yunanıstan",
-        "GS": "Cənubi Corciya və Cənubi Sendviç Adaları",
+        "GS": "Cənubi Corciya və Cənubi Sendviç adaları",
         "GT": "Qvatemala",
         "GU": "Quam",
         "GW": "Qvineya-Bisau",
-        "GY": "Qviyana",
+        "GY": "Qayana",
         "HK": "Honq Konq Xüsusi İnzibati Ərazi Çin",
-        "HM": "Herd və Mak Donald Adaları",
+        "HM": "Herd və Makdonald adaları",
         "HR": "Xorvatiya",
         "HU": "Macarıstan",
-        "IC": "Kanar Adaları",
+        "IC": "Kanar adaları",
         "ID": "İndoneziya",
         "IE": "İrlandiya",
         "IL": "İsrail",
-        "IM": "Men Adası",
+        "IM": "Men adası",
         "IN": "Hindistan",
-        "IO": "Britaniya Hind Okeanı Ərazisi",
+        "IO": "Britaniyanın Hind Okeanı Ərazisi",
         "IQ": "İraq",
         "IR": "İran",
         "IS": "İslandiya",
@@ -698,17 +714,17 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
         "KE": "Keniya",
         "KG": "Qırğızıstan",
         "KH": "Kamboca",
-        "KM": "Komor Adaları",
-        "KN": "San Kits və Nevis",
+        "KM": "Komor adaları",
+        "KN": "Sent-Kits və Nevis",
         "KP": "Şimali Koreya",
         "KR": "Cənubi Koreya",
         "KW": "Küveyt",
-        "KY": "Kayman Adaları",
+        "KY": "Kayman adaları",
         "KZ": "Qazaxıstan",
         "LB": "Livan",
-        "LC": "San Lüsiya",
+        "LC": "Sent-Lusiya",
         "LI": "Lixtenşteyn",
-        "LK": "Şri Lanka",
+        "LK": "Şri-Lanka",
         "LR": "Liberiya",
         "LS": "Lesoto",
         "LT": "Litva",
@@ -718,93 +734,97 @@ public class LocalizedNamesImpl_az extends LocalizedNamesImpl {
         "MA": "Mərakeş",
         "MC": "Monako",
         "ME": "Monteneqro",
-        "MF": "San Martin",
+        "MF": "Sent Martin",
         "MG": "Madaqaskar",
-        "MH": "Marşal Adaları",
+        "MH": "Marşal adaları",
         "MK": "Makedoniya",
         "MM": "Myanma",
-        "MN": "Monqoliya",
+        "MN": "Monqolustan",
         "MO": "Makao Xüsusi İnzibati Ərazi Çin",
-        "MP": "Şimali Mariana Adaları",
+        "MP": "Şimali Marian adaları",
         "MQ": "Martinik",
         "MR": "Mavritaniya",
         "MS": "Monserat",
         "MU": "Mavriki",
-        "MV": "Maldiv Adaları",
+        "MV": "Maldiv adaları",
         "MW": "Malavi",
         "MX": "Meksika",
         "MY": "Malayziya",
         "MZ": "Mozambik",
         "NA": "Namibiya",
         "NC": "Yeni Kaledoniya",
-        "NF": "Norfolk Adası",
+        "NF": "Norfolk adası",
         "NG": "Nigeriya",
         "NI": "Nikaraqua",
         "NL": "Niderland",
         "NO": "Norveç",
         "NZ": "Yeni Zelandiya",
-        "PF": "Fransız Polineziyası",
-        "PG": "Papua Yeni Qvineya",
+        "PF": "Fransa Polineziyası",
+        "PG": "Papua-Yeni Qvineya",
         "PH": "Filippin",
         "PL": "Polşa",
-        "PM": "San Pier və Mikelon",
-        "PN": "Pitkern Adaları",
+        "PM": "Müqəddəs Pyer və Mikelon",
+        "PN": "Pitkern adaları",
         "PR": "Puerto Riko",
         "PS": "Fələstin Əraziləri",
-        "PT": "Portuqal",
+        "PT": "Portuqaliya",
         "PY": "Paraqvay",
+        "QA": "Qətər",
         "QO": "Uzaq Okeaniya",
-        "RE": "Reunion",
+        "RE": "Reyunyon",
         "RO": "Rumıniya",
         "RS": "Serbiya",
         "RU": "Rusiya",
         "RW": "Ruanda",
         "SA": "Səudiyyə Ərəbistanı",
-        "SB": "Solomon Adaları",
-        "SC": "Seyşel Adaları",
+        "SB": "Solomon adaları",
+        "SC": "Seyşel adaları",
         "SE": "İsveç",
         "SG": "Sinqapur",
         "SH": "Müqəddəs Yelena",
         "SI": "Sloveniya",
-        "SJ": "Svalbard və Yan Mayen",
+        "SJ": "Svalbard və Yan-Mayen",
         "SK": "Slovakiya",
-        "SL": "Siera Leon",
+        "SL": "Syerra-Leone",
+        "SM": "San-Marino",
         "SN": "Seneqal",
         "SO": "Somali",
         "SR": "Surinam",
         "SS": "Cənubi Sudan",
-        "ST": "Sao Tome və Prinsip",
+        "ST": "San-Tome və Prinsipi",
         "SV": "Salvador",
+        "SX": "Sint-Marten",
         "SY": "Suriya",
         "SZ": "Svazilend",
         "TA": "Tristan da Kunya",
-        "TC": "Turks və Kaikos Adaları",
+        "TC": "Törks və Kaykos adaları",
         "TD": "Çad",
-        "TF": "Fransa Cənub Əraziləri",
+        "TF": "Fransanın Cənub Əraziləri",
         "TG": "Toqo",
-        "TH": "Tayland",
+        "TH": "Tailand",
         "TJ": "Tacikistan",
         "TL": "Şərqi Timor",
         "TM": "Türkmənistan",
         "TN": "Tunis",
         "TO": "Tonqa",
-        "TR": "Türkiya",
+        "TR": "Türkiyə",
         "TT": "Trinidad və Tobaqo",
         "TW": "Tayvan",
         "TZ": "Tanzaniya",
         "UA": "Ukrayna",
         "UG": "Uqanda",
-        "UM": "Birləşmiş Ştatlar Uzaq Adalar",
+        "UM": "ABŞ-a bağlı kiçik adacıqlar",
+        "UN": "Birləşmiş Millətlər Təşkilatı",
         "US": "Amerika Birləşmiş Ştatları",
         "UY": "Uruqvay",
         "UZ": "Özbəkistan",
         "VA": "Vatikan",
-        "VC": "San Vinsent və Qrenada",
+        "VC": "Sent-Vinsent və Qrenadinlər",
         "VE": "Venesuela",
-        "VG": "Britaniya Vircin Adaları",
-        "VI": "ABŞ Vircin Adaları",
+        "VG": "Britaniyanın Virgin adaları",
+        "VI": "ABŞ Virgin adaları",
         "VN": "Vyetnam",
-        "WF": "Uolis və Futuna",
+        "WF": "Uollis və Futuna",
         "YE": "Yəmən",
         "YT": "Mayot",
         "ZA": "Cənub Afrika",

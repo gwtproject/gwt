@@ -41,7 +41,6 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "GB",
         "AQ",
         "AG",
-        "AN",
         "AR",
         "AW",
         "HT",
@@ -56,6 +55,7 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "BM",
         "BG",
         "MM",
+        "FO",
         "IC",
         "CV",
         "KY",
@@ -67,10 +67,9 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "VI",
         "VG",
         "CC",
+        "UM",
         "SB",
-        "FO",
         "AX",
-        "BL",
         "BO",
         "BA",
         "BW",
@@ -81,7 +80,6 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "BI",
         "BT",
         "BY",
-        "CP",
         "CW",
         "DK",
         "DG",
@@ -89,14 +87,16 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "DJ",
         "EC",
         "ER",
+        "BV",
+        "CP",
         "NF",
         "IM",
-        "BV",
         "CX",
         "AC",
         "ES",
         "EE",
         "ET",
+        "EZ",
         "EG",
         "FR",
         "FJ",
@@ -165,6 +165,7 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "IO",
         "MG",
         "MV",
+        "MO",
         "MW",
         "MY",
         "ML",
@@ -174,9 +175,7 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "MK",
         "YT",
         "MX",
-        "MF",
         "FM",
-        "MO",
         "MD",
         "MC",
         "MN",
@@ -212,26 +211,28 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "PT",
         "PR",
         "QO",
-        "CD",
-        "CZ",
         "CF",
         "DO",
+        "CD",
         "RU",
         "RO",
         "RW",
         "EH",
         "WS",
         "AS",
+        "BL",
         "SH",
         "KN",
         "LC",
         "SM",
+        "MF",
         "PM",
         "VC",
         "ST",
         "SV",
         "SN",
         "RS",
+        "CZ",
         "SL",
         "CL",
         "SK",
@@ -268,7 +269,7 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "TD",
         "TV",
         "UG",
-        "UM",
+        "UN",
         "UZ",
         "VU",
         "VA",
@@ -315,7 +316,7 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
     namesMap.put("154", "Erópa ya Nola");
     namesMap.put("155", "Erópa ya Wɛ́sita");
     namesMap.put("419", "Ameríka Latína");
-    namesMap.put("AC", "Esenga ya Mbuta o likoló");
+    namesMap.put("AC", "Esanga ya Mbuta o Likoló");
     namesMap.put("AD", "Andorɛ");
     namesMap.put("AE", "Lɛmila alabo");
     namesMap.put("AF", "Afiganisitá");
@@ -323,7 +324,6 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
     namesMap.put("AI", "Angiyɛ");
     namesMap.put("AL", "Alibani");
     namesMap.put("AM", "Amɛni");
-    namesMap.put("AN", "Antiyɛ ya Olandɛ");
     namesMap.put("AO", "Angóla");
     namesMap.put("AQ", "Antarctique");
     namesMap.put("AR", "Arizantinɛ");
@@ -340,17 +340,18 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
     namesMap.put("BG", "Biligari");
     namesMap.put("BH", "Bahrɛnɛ");
     namesMap.put("BJ", "Benɛ");
+    namesMap.put("BL", "Sántu Barthélemy");
     namesMap.put("BN", "Brineyi");
     namesMap.put("BO", "Bolivi");
     namesMap.put("BR", "Brezílɛ");
     namesMap.put("BS", "Bahamasɛ");
     namesMap.put("BT", "Butáni");
-    namesMap.put("BV", "Esenga Buvé");
+    namesMap.put("BV", "Esanga Buvé");
     namesMap.put("BY", "Byelorisi");
     namesMap.put("BZ", "Belizɛ");
     namesMap.put("CA", "Kanada");
     namesMap.put("CC", "Bisanga Kokos");
-    namesMap.put("CD", "Repibiki demokratiki ya Kongó");
+    namesMap.put("CD", "Republíki ya Kongó Demokratíki");
     namesMap.put("CF", "Repibiki ya Afríka ya Káti");
     namesMap.put("CG", "Kongo");
     namesMap.put("CH", "Swisɛ");
@@ -360,12 +361,13 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
     namesMap.put("CM", "Kamɛrune");
     namesMap.put("CN", "Sinɛ");
     namesMap.put("CO", "Kolombi");
+    namesMap.put("CP", "Esanga Clipperton");
     namesMap.put("CR", "Kositarika");
     namesMap.put("CU", "Kiba");
     namesMap.put("CV", "Bisanga bya Kapevɛrɛ");
-    namesMap.put("CX", "Esenga ya Mbótama");
+    namesMap.put("CX", "Esanga ya Mbótama");
     namesMap.put("CY", "Sípɛlɛ");
-    namesMap.put("CZ", "Repibiki Tsekɛ");
+    namesMap.put("CZ", "Shekia");
     namesMap.put("DE", "Alemani");
     namesMap.put("DJ", "Dzibuti");
     namesMap.put("DK", "Danɛmarike");
@@ -385,7 +387,7 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
     namesMap.put("FJ", "Fidzi");
     namesMap.put("FK", "Bisanga bya Maluni");
     namesMap.put("FM", "Mikronezi");
-    namesMap.put("FO", "Bisanga ya Fɛróa");
+    namesMap.put("FO", "Bisanga bya Faloé");
     namesMap.put("FR", "Falánsɛ");
     namesMap.put("GA", "Gabɔ");
     namesMap.put("GB", "Angɛlɛtɛ́lɛ");
@@ -406,6 +408,7 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
     namesMap.put("GU", "Gwamɛ");
     namesMap.put("GW", "Ginɛbisau");
     namesMap.put("GY", "Giyane");
+    namesMap.put("HK", "Hong Kong (Shina)");
     namesMap.put("HM", "Ile Heard et Iles McDonald");
     namesMap.put("HN", "Ondurasɛ");
     namesMap.put("HR", "Krowasi");
@@ -422,6 +425,7 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
     namesMap.put("IR", "Irâ");
     namesMap.put("IS", "Isilandɛ");
     namesMap.put("IT", "Itali");
+    namesMap.put("JE", "Jelezy");
     namesMap.put("JM", "Zamaiki");
     namesMap.put("JO", "Zɔdani");
     namesMap.put("JP", "Zapɔ");
@@ -449,12 +453,14 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
     namesMap.put("MC", "Monako");
     namesMap.put("MD", "Molidavi");
     namesMap.put("ME", "Monténégro");
+    namesMap.put("MF", "Sántu Martin");
     namesMap.put("MG", "Madagasikari");
     namesMap.put("MH", "Bisanga bya Marishalɛ");
     namesMap.put("MK", "Masedwanɛ");
     namesMap.put("ML", "Malí");
     namesMap.put("MM", "Birmanie");
     namesMap.put("MN", "Mongolí");
+    namesMap.put("MO", "Makau (Shina)");
     namesMap.put("MP", "Bisanga bya Marianɛ ya nɔ́rdi");
     namesMap.put("MQ", "Martiniki");
     namesMap.put("MR", "Moritani");
@@ -527,6 +533,7 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
     namesMap.put("TW", "Taiwanin");
     namesMap.put("TZ", "Tanzani");
     namesMap.put("UA", "Ikrɛni");
+    namesMap.put("UM", "Bisanga Mokɛ́na Mosíká bya Lisangá lya Ameríka");
     namesMap.put("US", "Ameriki");
     namesMap.put("UY", "Irigwei");
     namesMap.put("UZ", "Uzibɛkisitá");
@@ -573,7 +580,7 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "154": "Erópa ya Nola",
         "155": "Erópa ya Wɛ́sita",
         "419": "Ameríka Latína",
-        "AC": "Esenga ya Mbuta o likoló",
+        "AC": "Esanga ya Mbuta o Likoló",
         "AD": "Andorɛ",
         "AE": "Lɛmila alabo",
         "AF": "Afiganisitá",
@@ -581,7 +588,6 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "AI": "Angiyɛ",
         "AL": "Alibani",
         "AM": "Amɛni",
-        "AN": "Antiyɛ ya Olandɛ",
         "AO": "Angóla",
         "AQ": "Antarctique",
         "AR": "Arizantinɛ",
@@ -598,17 +604,18 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "BG": "Biligari",
         "BH": "Bahrɛnɛ",
         "BJ": "Benɛ",
+        "BL": "Sántu Barthélemy",
         "BN": "Brineyi",
         "BO": "Bolivi",
         "BR": "Brezílɛ",
         "BS": "Bahamasɛ",
         "BT": "Butáni",
-        "BV": "Esenga Buvé",
+        "BV": "Esanga Buvé",
         "BY": "Byelorisi",
         "BZ": "Belizɛ",
         "CA": "Kanada",
         "CC": "Bisanga Kokos",
-        "CD": "Repibiki demokratiki ya Kongó",
+        "CD": "Republíki ya Kongó Demokratíki",
         "CF": "Repibiki ya Afríka ya Káti",
         "CG": "Kongo",
         "CH": "Swisɛ",
@@ -618,12 +625,13 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "CM": "Kamɛrune",
         "CN": "Sinɛ",
         "CO": "Kolombi",
+        "CP": "Esanga Clipperton",
         "CR": "Kositarika",
         "CU": "Kiba",
         "CV": "Bisanga bya Kapevɛrɛ",
-        "CX": "Esenga ya Mbótama",
+        "CX": "Esanga ya Mbótama",
         "CY": "Sípɛlɛ",
-        "CZ": "Repibiki Tsekɛ",
+        "CZ": "Shekia",
         "DE": "Alemani",
         "DJ": "Dzibuti",
         "DK": "Danɛmarike",
@@ -643,7 +651,7 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "FJ": "Fidzi",
         "FK": "Bisanga bya Maluni",
         "FM": "Mikronezi",
-        "FO": "Bisanga ya Fɛróa",
+        "FO": "Bisanga bya Faloé",
         "FR": "Falánsɛ",
         "GA": "Gabɔ",
         "GB": "Angɛlɛtɛ́lɛ",
@@ -664,6 +672,7 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "GU": "Gwamɛ",
         "GW": "Ginɛbisau",
         "GY": "Giyane",
+        "HK": "Hong Kong (Shina)",
         "HM": "Ile Heard et Iles McDonald",
         "HN": "Ondurasɛ",
         "HR": "Krowasi",
@@ -680,6 +689,7 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "IR": "Irâ",
         "IS": "Isilandɛ",
         "IT": "Itali",
+        "JE": "Jelezy",
         "JM": "Zamaiki",
         "JO": "Zɔdani",
         "JP": "Zapɔ",
@@ -707,12 +717,14 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "MC": "Monako",
         "MD": "Molidavi",
         "ME": "Monténégro",
+        "MF": "Sántu Martin",
         "MG": "Madagasikari",
         "MH": "Bisanga bya Marishalɛ",
         "MK": "Masedwanɛ",
         "ML": "Malí",
         "MM": "Birmanie",
         "MN": "Mongolí",
+        "MO": "Makau (Shina)",
         "MP": "Bisanga bya Marianɛ ya nɔ́rdi",
         "MQ": "Martiniki",
         "MR": "Moritani",
@@ -785,6 +797,7 @@ public class LocalizedNamesImpl_ln extends LocalizedNamesImpl {
         "TW": "Taiwanin",
         "TZ": "Tanzani",
         "UA": "Ikrɛni",
+        "UM": "Bisanga Mokɛ́na Mosíká bya Lisangá lya Ameríka",
         "US": "Ameriki",
         "UY": "Irigwei",
         "UZ": "Uzibɛkisitá",

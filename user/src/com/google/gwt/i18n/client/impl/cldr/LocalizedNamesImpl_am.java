@@ -48,16 +48,15 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "LA",
         "LR",
         "LS",
+        "MK",
         "FM",
         "ML",
         "MW",
         "MY",
         "MT",
         "MV",
-        "MU",
         "MH",
         "MQ",
-        "MK",
         "MO",
         "MM",
         "MG",
@@ -66,6 +65,7 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "TL",
         "EH",
         "MD",
+        "MU",
         "MR",
         "MA",
         "MC",
@@ -73,9 +73,9 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "MS",
         "MN",
         "MZ",
+        "RU",
         "RW",
         "RE",
-        "RU",
         "RO",
         "SB",
         "KP",
@@ -110,6 +110,7 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "VC",
         "KN",
         "PM",
+        "BZ",
         "BT",
         "BG",
         "BF",
@@ -118,7 +119,6 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "BH",
         "BB",
         "BD",
-        "BZ",
         "BY",
         "BE",
         "BM",
@@ -159,7 +159,6 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "NR",
         "NG",
         "NL",
-        "AN",
         "NP",
         "NO",
         "NF",
@@ -182,6 +181,7 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "IS",
         "AF",
         "UY",
+        "UZ",
         "IQ",
         "IR",
         "ET",
@@ -192,7 +192,6 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "ER",
         "EE",
         "IL",
-        "GB",
         "OM",
         "AT",
         "CW",
@@ -227,12 +226,14 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "CF",
         "MP",
         "IO",
+        "UN",
         "AE",
         "TC",
         "AX",
         "AS",
         "VI",
         "EU",
+        "EZ",
         "VG",
         "BQ",
         "IC",
@@ -245,8 +246,8 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "PS",
         "FK",
         "US",
+        "GB",
         "UA",
-        "UZ",
         "UG",
         "SS",
         "ZA",
@@ -254,11 +255,12 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "GS",
         "DG",
         "DK",
-        "DM",
         "DO",
+        "DM",
         "DE",
         "JE",
         "DJ",
+        "GI",
         "JM",
         "JP",
         "JO",
@@ -268,7 +270,6 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "GT",
         "GP",
         "GY",
-        "GI",
         "GN",
         "GW",
         "GM",
@@ -331,19 +332,18 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
     namesMap.put("419", "ላቲን አሜሪካ");
     namesMap.put("AC", "አሴንሽን ደሴት");
     namesMap.put("AD", "አንዶራ");
-    namesMap.put("AE", "የተባበሩት አረብ ኤምሬትስ");
+    namesMap.put("AE", "የተባበሩት ዓረብ ኤምሬትስ");
     namesMap.put("AF", "አፍጋኒስታን");
     namesMap.put("AG", "አንቲጓ እና ባሩዳ");
-    namesMap.put("AI", "አንጉኢላ");
+    namesMap.put("AI", "አንጉይላ");
     namesMap.put("AL", "አልባኒያ");
     namesMap.put("AM", "አርሜኒያ");
-    namesMap.put("AN", "ኔዘርላንድስ አንቲልስ");
     namesMap.put("AO", "አንጐላ");
     namesMap.put("AQ", "አንታርክቲካ");
     namesMap.put("AR", "አርጀንቲና");
     namesMap.put("AS", "የአሜሪካ ሳሞአ");
     namesMap.put("AT", "ኦስትሪያ");
-    namesMap.put("AU", "አውስትሬሊያ");
+    namesMap.put("AU", "አውስትራልያ");
     namesMap.put("AW", "አሩባ");
     namesMap.put("AX", "የአላንድ ደሴቶች");
     namesMap.put("AZ", "አዘርባጃን");
@@ -367,7 +367,7 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
     namesMap.put("BV", "ቡቬት ደሴት");
     namesMap.put("BW", "ቦትስዋና");
     namesMap.put("BY", "ቤላሩስ");
-    namesMap.put("BZ", "ቤሊዘ");
+    namesMap.put("BZ", "በሊዝ");
     namesMap.put("CA", "ካናዳ");
     namesMap.put("CC", "ኮኮስ(ኬሊንግ) ደሴቶች");
     namesMap.put("CD", "ኮንጎ-ኪንሻሳ");
@@ -381,19 +381,19 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
     namesMap.put("CN", "ቻይና");
     namesMap.put("CO", "ኮሎምቢያ");
     namesMap.put("CP", "ክሊፐርቶን ደሴት");
-    namesMap.put("CR", "ኮስታ ሪካ");
+    namesMap.put("CR", "ኮስታሪካ");
     namesMap.put("CU", "ኩባ");
     namesMap.put("CV", "ኬፕ ቬርዴ");
     namesMap.put("CW", "ኩራሳዎ");
     namesMap.put("CX", "የገና ደሴት");
     namesMap.put("CY", "ሳይፕረስ");
-    namesMap.put("CZ", "ቼክ ሪፑብሊክ");
+    namesMap.put("CZ", "ቼችኒያ");
     namesMap.put("DE", "ጀርመን");
     namesMap.put("DG", "ዲዬጎ ጋርሺያ");
     namesMap.put("DJ", "ጂቡቲ");
     namesMap.put("DK", "ዴንማርክ");
     namesMap.put("DM", "ዶሚኒካ");
-    namesMap.put("DO", "ዶሚኒክ ሪፑብሊክ");
+    namesMap.put("DO", "ዶመኒካን ሪፑብሊክ");
     namesMap.put("DZ", "አልጄሪያ");
     namesMap.put("EA", "ሴኡታና ሜሊላ");
     namesMap.put("EC", "ኢኳዶር");
@@ -404,20 +404,21 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
     namesMap.put("ES", "ስፔን");
     namesMap.put("ET", "ኢትዮጵያ");
     namesMap.put("EU", "የአውሮፓ ህብረት");
+    namesMap.put("EZ", "የአውሮፓ ዞን");
     namesMap.put("FI", "ፊንላንድ");
     namesMap.put("FJ", "ፊጂ");
-    namesMap.put("FK", "የፎልክላንድ ደሴቶች");
+    namesMap.put("FK", "የፎክላንድ ደሴቶች");
     namesMap.put("FM", "ሚክሮኔዢያ");
     namesMap.put("FO", "የፋሮ ደሴቶች");
     namesMap.put("FR", "ፈረንሳይ");
     namesMap.put("GA", "ጋቦን");
-    namesMap.put("GB", "እንግሊዝ");
+    namesMap.put("GB", "ዩናይትድ ኪንግደም");
     namesMap.put("GD", "ግሬናዳ");
     namesMap.put("GE", "ጆርጂያ");
     namesMap.put("GF", "የፈረንሳይ ጉዊአና");
     namesMap.put("GG", "ጉርነሲ");
     namesMap.put("GH", "ጋና");
-    namesMap.put("GI", "ጊብራልታር");
+    namesMap.put("GI", "ጂብራልተር");
     namesMap.put("GL", "ግሪንላንድ");
     namesMap.put("GM", "ጋምቢያ");
     namesMap.put("GN", "ጊኒ");
@@ -429,7 +430,7 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
     namesMap.put("GU", "ጉዋም");
     namesMap.put("GW", "ጊኒ ቢሳኦ");
     namesMap.put("GY", "ጉያና");
-    namesMap.put("HK", "ሆንግ ኮንግ SAR ቻይና");
+    namesMap.put("HK", "ሆንግ ኮንግ ልዩ የአስተዳደር ክልል ቻይና");
     namesMap.put("HM", "ኽርድ ደሴቶችና ማክዶናልድ ደሴቶች");
     namesMap.put("HN", "ሆንዱራስ");
     namesMap.put("HR", "ክሮኤሽያ");
@@ -479,7 +480,7 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
     namesMap.put("MF", "ሴንት ማርቲን");
     namesMap.put("MG", "ማዳጋስካር");
     namesMap.put("MH", "ማርሻል አይላንድ");
-    namesMap.put("MK", "ማከዶኒያ");
+    namesMap.put("MK", "መቄዶንያ");
     namesMap.put("ML", "ማሊ");
     namesMap.put("MM", "ማይናማር(በርማ)");
     namesMap.put("MN", "ሞንጎሊያ");
@@ -489,7 +490,7 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
     namesMap.put("MR", "ሞሪቴኒያ");
     namesMap.put("MS", "ሞንትሴራት");
     namesMap.put("MT", "ማልታ");
-    namesMap.put("MU", "ማሩሸስ");
+    namesMap.put("MU", "ሞሪሸስ");
     namesMap.put("MV", "ማልዲቭስ");
     namesMap.put("MW", "ማላዊ");
     namesMap.put("MX", "ሜክሲኮ");
@@ -502,7 +503,7 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
     namesMap.put("NG", "ናይጄሪያ");
     namesMap.put("NI", "ኒካራጓ");
     namesMap.put("NL", "ኔዘርላንድ");
-    namesMap.put("NO", "ኖርዌ");
+    namesMap.put("NO", "ኖርዌይ");
     namesMap.put("NP", "ኔፓል");
     namesMap.put("NR", "ናኡሩ");
     namesMap.put("NU", "ኒኡይ");
@@ -527,7 +528,7 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
     namesMap.put("RE", "ሪዩኒየን");
     namesMap.put("RO", "ሮሜኒያ");
     namesMap.put("RS", "ሰርብያ");
-    namesMap.put("RU", "ራሺያ");
+    namesMap.put("RU", "ሩስያ");
     namesMap.put("RW", "ሩዋንዳ");
     namesMap.put("SA", "ሳውድአረቢያ");
     namesMap.put("SB", "ሰሎሞን ደሴት");
@@ -570,13 +571,14 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
     namesMap.put("UA", "ዩክሬን");
     namesMap.put("UG", "ዩጋንዳ");
     namesMap.put("UM", "የዩ ኤስ ጠረፍ ላይ ያሉ ደሴቶች");
+    namesMap.put("UN", "የተባበሩት መንግስታት");
     namesMap.put("US", "ዩናይትድ ስቴትስ");
     namesMap.put("UY", "ኡራጓይ");
-    namesMap.put("UZ", "ዩዝበኪስታን");
+    namesMap.put("UZ", "ኡዝቤኪስታን");
     namesMap.put("VA", "ቫቲካን ከተማ");
     namesMap.put("VC", "ቅዱስ ቪንሴንት እና ግሬናዲንስ");
     namesMap.put("VE", "ቬንዙዌላ");
-    namesMap.put("VG", "የእንግሊዝ ድንግል ደሴቶች");
+    namesMap.put("VG", "የእንግሊዝ ቨርጂን ደሴቶች");
     namesMap.put("VI", "የአሜሪካ ቨርጂን ደሴቶች");
     namesMap.put("VN", "ቬትናም");
     namesMap.put("VU", "ቫኑአቱ");
@@ -630,19 +632,18 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "419": "ላቲን አሜሪካ",
         "AC": "አሴንሽን ደሴት",
         "AD": "አንዶራ",
-        "AE": "የተባበሩት አረብ ኤምሬትስ",
+        "AE": "የተባበሩት ዓረብ ኤምሬትስ",
         "AF": "አፍጋኒስታን",
         "AG": "አንቲጓ እና ባሩዳ",
-        "AI": "አንጉኢላ",
+        "AI": "አንጉይላ",
         "AL": "አልባኒያ",
         "AM": "አርሜኒያ",
-        "AN": "ኔዘርላንድስ አንቲልስ",
         "AO": "አንጐላ",
         "AQ": "አንታርክቲካ",
         "AR": "አርጀንቲና",
         "AS": "የአሜሪካ ሳሞአ",
         "AT": "ኦስትሪያ",
-        "AU": "አውስትሬሊያ",
+        "AU": "አውስትራልያ",
         "AW": "አሩባ",
         "AX": "የአላንድ ደሴቶች",
         "AZ": "አዘርባጃን",
@@ -666,7 +667,7 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "BV": "ቡቬት ደሴት",
         "BW": "ቦትስዋና",
         "BY": "ቤላሩስ",
-        "BZ": "ቤሊዘ",
+        "BZ": "በሊዝ",
         "CA": "ካናዳ",
         "CC": "ኮኮስ(ኬሊንግ) ደሴቶች",
         "CD": "ኮንጎ-ኪንሻሳ",
@@ -680,19 +681,19 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "CN": "ቻይና",
         "CO": "ኮሎምቢያ",
         "CP": "ክሊፐርቶን ደሴት",
-        "CR": "ኮስታ ሪካ",
+        "CR": "ኮስታሪካ",
         "CU": "ኩባ",
         "CV": "ኬፕ ቬርዴ",
         "CW": "ኩራሳዎ",
         "CX": "የገና ደሴት",
         "CY": "ሳይፕረስ",
-        "CZ": "ቼክ ሪፑብሊክ",
+        "CZ": "ቼችኒያ",
         "DE": "ጀርመን",
         "DG": "ዲዬጎ ጋርሺያ",
         "DJ": "ጂቡቲ",
         "DK": "ዴንማርክ",
         "DM": "ዶሚኒካ",
-        "DO": "ዶሚኒክ ሪፑብሊክ",
+        "DO": "ዶመኒካን ሪፑብሊክ",
         "DZ": "አልጄሪያ",
         "EA": "ሴኡታና ሜሊላ",
         "EC": "ኢኳዶር",
@@ -703,20 +704,21 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "ES": "ስፔን",
         "ET": "ኢትዮጵያ",
         "EU": "የአውሮፓ ህብረት",
+        "EZ": "የአውሮፓ ዞን",
         "FI": "ፊንላንድ",
         "FJ": "ፊጂ",
-        "FK": "የፎልክላንድ ደሴቶች",
+        "FK": "የፎክላንድ ደሴቶች",
         "FM": "ሚክሮኔዢያ",
         "FO": "የፋሮ ደሴቶች",
         "FR": "ፈረንሳይ",
         "GA": "ጋቦን",
-        "GB": "እንግሊዝ",
+        "GB": "ዩናይትድ ኪንግደም",
         "GD": "ግሬናዳ",
         "GE": "ጆርጂያ",
         "GF": "የፈረንሳይ ጉዊአና",
         "GG": "ጉርነሲ",
         "GH": "ጋና",
-        "GI": "ጊብራልታር",
+        "GI": "ጂብራልተር",
         "GL": "ግሪንላንድ",
         "GM": "ጋምቢያ",
         "GN": "ጊኒ",
@@ -728,7 +730,7 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "GU": "ጉዋም",
         "GW": "ጊኒ ቢሳኦ",
         "GY": "ጉያና",
-        "HK": "ሆንግ ኮንግ SAR ቻይና",
+        "HK": "ሆንግ ኮንግ ልዩ የአስተዳደር ክልል ቻይና",
         "HM": "ኽርድ ደሴቶችና ማክዶናልድ ደሴቶች",
         "HN": "ሆንዱራስ",
         "HR": "ክሮኤሽያ",
@@ -778,7 +780,7 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "MF": "ሴንት ማርቲን",
         "MG": "ማዳጋስካር",
         "MH": "ማርሻል አይላንድ",
-        "MK": "ማከዶኒያ",
+        "MK": "መቄዶንያ",
         "ML": "ማሊ",
         "MM": "ማይናማር(በርማ)",
         "MN": "ሞንጎሊያ",
@@ -788,7 +790,7 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "MR": "ሞሪቴኒያ",
         "MS": "ሞንትሴራት",
         "MT": "ማልታ",
-        "MU": "ማሩሸስ",
+        "MU": "ሞሪሸስ",
         "MV": "ማልዲቭስ",
         "MW": "ማላዊ",
         "MX": "ሜክሲኮ",
@@ -801,7 +803,7 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "NG": "ናይጄሪያ",
         "NI": "ኒካራጓ",
         "NL": "ኔዘርላንድ",
-        "NO": "ኖርዌ",
+        "NO": "ኖርዌይ",
         "NP": "ኔፓል",
         "NR": "ናኡሩ",
         "NU": "ኒኡይ",
@@ -826,7 +828,7 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "RE": "ሪዩኒየን",
         "RO": "ሮሜኒያ",
         "RS": "ሰርብያ",
-        "RU": "ራሺያ",
+        "RU": "ሩስያ",
         "RW": "ሩዋንዳ",
         "SA": "ሳውድአረቢያ",
         "SB": "ሰሎሞን ደሴት",
@@ -869,13 +871,14 @@ public class LocalizedNamesImpl_am extends LocalizedNamesImpl {
         "UA": "ዩክሬን",
         "UG": "ዩጋንዳ",
         "UM": "የዩ ኤስ ጠረፍ ላይ ያሉ ደሴቶች",
+        "UN": "የተባበሩት መንግስታት",
         "US": "ዩናይትድ ስቴትስ",
         "UY": "ኡራጓይ",
-        "UZ": "ዩዝበኪስታን",
+        "UZ": "ኡዝቤኪስታን",
         "VA": "ቫቲካን ከተማ",
         "VC": "ቅዱስ ቪንሴንት እና ግሬናዲንስ",
         "VE": "ቬንዙዌላ",
-        "VG": "የእንግሊዝ ድንግል ደሴቶች",
+        "VG": "የእንግሊዝ ቨርጂን ደሴቶች",
         "VI": "የአሜሪካ ቨርጂን ደሴቶች",
         "VN": "ቬትናም",
         "VU": "ቫኑአቱ",

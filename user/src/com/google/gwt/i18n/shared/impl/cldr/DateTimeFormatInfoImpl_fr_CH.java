@@ -32,6 +32,21 @@ public class DateTimeFormatInfoImpl_fr_CH extends DateTimeFormatInfoImpl_fr {
   }
 
   @Override
+  public String formatMonthNumDay() {
+    return "dd.MM.";
+  }
+
+  @Override
+  public String formatYearMonthNum() {
+    return "MM.y";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "dd.MM.y";
+  }
+
+  @Override
   public String timeFormatFull() {
     return "HH.mm:ss 'h' zzzz";
   }

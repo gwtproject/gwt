@@ -22,42 +22,23 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_ne_IN extends DateTimeFormatInfoImpl_ne {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "पूर्वाह्न",
-        "अपराह्न"
-    };
+  public String timeFormatFull() {
+    return "h:mm:ss a zzzz";
   }
 
   @Override
-  public String[] monthsFull() {
-    return new String[] {
-        "जनवरी",
-        "फरवरी",
-        "मार्च",
-        "अप्रेल",
-        "मई",
-        "जुन",
-        "जुलाई",
-        "अगस्त",
-        "सेप्टेम्बर",
-        "अक्टोबर",
-        "नोभेम्बर",
-        "दिसम्बर"
-    };
+  public String timeFormatLong() {
+    return "h:mm:ss a z";
   }
 
   @Override
-  public String[] weekdaysFull() {
-    return new String[] {
-        "आइतवार",
-        "सोमवार",
-        "मङ्गलवार",
-        "बुधवार",
-        "बिहीवार",
-        "शुक्रवार",
-        "शनिवार"
-    };
+  public String timeFormatMedium() {
+    return "h:mm:ss a";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "h:mm a";
   }
 
   @Override

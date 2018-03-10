@@ -52,7 +52,7 @@ public class DateTimeFormatInfoImpl_hu extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "időszámításunk előtt",
+        "Krisztus előtt",
         "időszámításunk szerint"
     };
   }
@@ -222,10 +222,10 @@ public class DateTimeFormatInfoImpl_hu extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "N1",
-        "N2",
-        "N3",
-        "N4"
+        "I. n.év",
+        "II. n.év",
+        "III. n.év",
+        "IV. n.év"
     };
   }
 

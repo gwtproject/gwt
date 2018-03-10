@@ -36,7 +36,6 @@ public class LocalizedNamesImpl_fur extends LocalizedNamesImpl {
         "AI",
         "AQ",
         "AG",
-        "AN",
         "SA",
         "AR",
         "AM",
@@ -93,6 +92,7 @@ public class LocalizedNamesImpl_fur extends LocalizedNamesImpl {
         "ER",
         "EE",
         "ET",
+        "EZ",
         "PH",
         "FI",
         "FJ",
@@ -274,6 +274,7 @@ public class LocalizedNamesImpl_fur extends LocalizedNamesImpl {
         "TV",
         "UA",
         "UG",
+        "UN",
         "EU",
         "UY",
         "UZ",
@@ -325,7 +326,6 @@ public class LocalizedNamesImpl_fur extends LocalizedNamesImpl {
     namesMap.put("AG", "Antigua e Barbuda");
     namesMap.put("AL", "Albanie");
     namesMap.put("AM", "Armenie");
-    namesMap.put("AN", "Antilis olandesis");
     namesMap.put("AQ", "Antartic");
     namesMap.put("AR", "Argjentine");
     namesMap.put("AS", "Samoa merecanis");
@@ -345,7 +345,6 @@ public class LocalizedNamesImpl_fur extends LocalizedNamesImpl {
     namesMap.put("CC", "Isulis Cocos");
     namesMap.put("CD", "Republiche Democratiche dal Congo");
     namesMap.put("CF", "Republiche centri africane");
-    namesMap.put("CG", "Congo - Brazzaville");
     namesMap.put("CH", "Svuizare");
     namesMap.put("CI", "Cueste di Avoli");
     namesMap.put("CK", "Isulis Cook");
@@ -529,7 +528,6 @@ public class LocalizedNamesImpl_fur extends LocalizedNamesImpl {
         "AG": "Antigua e Barbuda",
         "AL": "Albanie",
         "AM": "Armenie",
-        "AN": "Antilis olandesis",
         "AQ": "Antartic",
         "AR": "Argjentine",
         "AS": "Samoa merecanis",
@@ -549,7 +547,6 @@ public class LocalizedNamesImpl_fur extends LocalizedNamesImpl {
         "CC": "Isulis Cocos",
         "CD": "Republiche Democratiche dal Congo",
         "CF": "Republiche centri africane",
-        "CG": "Congo - Brazzaville",
         "CH": "Svuizare",
         "CI": "Cueste di Avoli",
         "CK": "Isulis Cook",

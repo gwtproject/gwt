@@ -24,8 +24,8 @@ public class DateTimeFormatInfoImpl_ksh extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "v.m.",
-        "n.m."
+        "v.M.",
+        "n.M."
     };
   }
 
@@ -52,8 +52,8 @@ public class DateTimeFormatInfoImpl_ksh extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "vür Chrestus",
-        "noh Chrestus"
+        "vür Krestos",
+        "noh Krestos"
     };
   }
 
@@ -66,13 +66,18 @@ public class DateTimeFormatInfoImpl_ksh extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
+  public String formatMonthAbbrevDay() {
+    return "d. MMM";
   }
 
   @Override
-  public String formatMonthNumDay() {
-    return "M/d";
+  public String formatMonthFullDay() {
+    return "d. MMMM";
+  }
+
+  @Override
+  public String formatMonthFullWeekdayDay() {
+    return "EEEE d. MMMM";
   }
 
   @Override
@@ -82,7 +87,7 @@ public class DateTimeFormatInfoImpl_ksh extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "MMM d, y";
+    return "d. MMM. y";
   }
 
   @Override
@@ -92,22 +97,22 @@ public class DateTimeFormatInfoImpl_ksh extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFullDay() {
-    return "MMMM d, y";
+    return "d. MMMM y";
   }
 
   @Override
   public String formatYearMonthNum() {
-    return "M/y";
+    return "Y-MM";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "M/d/y";
+    return "y-MM-dd";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
+    return "EEE d. MMM. y";
   }
 
   @Override
@@ -117,7 +122,7 @@ public class DateTimeFormatInfoImpl_ksh extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearQuarterShort() {
-    return "Q y";
+    return "Qy";
   }
 
   @Override
@@ -127,14 +132,32 @@ public class DateTimeFormatInfoImpl_ksh extends DateTimeFormatInfoImpl {
         "Fäbrowa",
         "Määz",
         "Aprell",
-        "Mäi",
+        "Mai",
         "Juuni",
         "Juuli",
         "Oujoß",
         "Septämber",
-        "Oktoober",
+        "Oktohber",
         "Novämber",
         "Dezämber"
+    };
+  }
+
+  @Override
+  public String[] monthsNarrow() {
+    return new String[] {
+        "J",
+        "F",
+        "M",
+        "A",
+        "M",
+        "J",
+        "J",
+        "O",
+        "S",
+        "O",
+        "N",
+        "D"
     };
   }
 
@@ -145,7 +168,7 @@ public class DateTimeFormatInfoImpl_ksh extends DateTimeFormatInfoImpl {
         "Fäb",
         "Mäz",
         "Apr",
-        "Mäi",
+        "Mai",
         "Jun",
         "Jul",
         "Ouj",
@@ -163,7 +186,7 @@ public class DateTimeFormatInfoImpl_ksh extends DateTimeFormatInfoImpl {
         "Fäb.",
         "Mäz.",
         "Apr.",
-        "Mäi",
+        "Mai",
         "Jun.",
         "Jul.",
         "Ouj.",
@@ -177,10 +200,10 @@ public class DateTimeFormatInfoImpl_ksh extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "1. Quattaal",
-        "2. Quattaal",
-        "3. Quattaal",
-        "4. Quattaal"
+        "1. Quattahl",
+        "2. Quattahl",
+        "3. Quattahl",
+        "4. Quattahl"
     };
   }
 
@@ -198,7 +221,7 @@ public class DateTimeFormatInfoImpl_ksh extends DateTimeFormatInfoImpl {
   public String[] weekdaysFull() {
     return new String[] {
         "Sunndaach",
-        "Moondaach",
+        "Mohndaach",
         "Dinnsdaach",
         "Metwoch",
         "Dunnersdaach",

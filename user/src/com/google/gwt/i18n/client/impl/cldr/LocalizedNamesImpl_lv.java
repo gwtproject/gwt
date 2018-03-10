@@ -30,7 +30,6 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "AF",
         "AL",
         "DZ",
-        "AS",
         "US",
         "AD",
         "AI",
@@ -38,10 +37,12 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "AQ",
         "AG",
         "AE",
+        "UN",
         "AR",
         "AM",
         "AW",
         "UM",
+        "AS",
         "VI",
         "AU",
         "AT",
@@ -84,6 +85,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "DJ",
         "EG",
         "EU",
+        "EZ",
         "EC",
         "GQ",
         "ER",
@@ -197,7 +199,6 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "NR",
         "NP",
         "NL",
-        "AN",
         "BQ",
         "NE",
         "NG",
@@ -330,10 +331,9 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
     namesMap.put("AI", "Angilja");
     namesMap.put("AL", "Albānija");
     namesMap.put("AM", "Armēnija");
-    namesMap.put("AN", "Nīderlandes Antiļas");
     namesMap.put("AQ", "Antarktika");
     namesMap.put("AR", "Argentīna");
-    namesMap.put("AS", "Amerikāņu Samoa");
+    namesMap.put("AS", "ASV Samoa");
     namesMap.put("AT", "Austrija");
     namesMap.put("AU", "Austrālija");
     namesMap.put("AX", "Olandes salas");
@@ -345,6 +345,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
     namesMap.put("BF", "Burkinafaso");
     namesMap.put("BG", "Bulgārija");
     namesMap.put("BH", "Bahreina");
+    namesMap.put("BI", "Burundija");
     namesMap.put("BJ", "Benina");
     namesMap.put("BL", "Senbartelmī");
     namesMap.put("BM", "Bermudu salas");
@@ -359,10 +360,10 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
     namesMap.put("BY", "Baltkrievija");
     namesMap.put("BZ", "Beliza");
     namesMap.put("CA", "Kanāda");
-    namesMap.put("CC", "Kokosu jeb Kīlinga salas");
-    namesMap.put("CD", "Kongo-Kinšasa");
+    namesMap.put("CC", "Kokosu (Kīlinga) salas");
+    namesMap.put("CD", "Kongo (Kinšasa)");
     namesMap.put("CF", "Centrālāfrikas Republika");
-    namesMap.put("CG", "Kongo - Brazavila");
+    namesMap.put("CG", "Kongo (Brazavila)");
     namesMap.put("CH", "Šveice");
     namesMap.put("CI", "Kotdivuāra");
     namesMap.put("CK", "Kuka salas");
@@ -394,17 +395,18 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
     namesMap.put("ES", "Spānija");
     namesMap.put("ET", "Etiopija");
     namesMap.put("EU", "Eiropas Savienība");
+    namesMap.put("EZ", "Eirozona");
     namesMap.put("FI", "Somija");
     namesMap.put("FJ", "Fidži");
     namesMap.put("FK", "Folklenda salas");
     namesMap.put("FM", "Mikronēzija");
-    namesMap.put("FO", "Fēru Salas");
+    namesMap.put("FO", "Fēru salas");
     namesMap.put("FR", "Francija");
     namesMap.put("GA", "Gabona");
     namesMap.put("GB", "Lielbritānija");
     namesMap.put("GD", "Grenāda");
     namesMap.put("GE", "Gruzija");
-    namesMap.put("GF", "Franču Gviāna");
+    namesMap.put("GF", "Francijas Gviāna");
     namesMap.put("GG", "Gērnsija");
     namesMap.put("GH", "Gana");
     namesMap.put("GI", "Gibraltārs");
@@ -420,7 +422,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
     namesMap.put("GW", "Gvineja-Bisava");
     namesMap.put("GY", "Gajāna");
     namesMap.put("HK", "Ķīnas īpašās pārvaldes apgabals Honkonga");
-    namesMap.put("HM", "Hērda un Makdonalda salas");
+    namesMap.put("HM", "Hērda sala un Makdonalda salas");
     namesMap.put("HN", "Hondurasa");
     namesMap.put("HR", "Horvātija");
     namesMap.put("HU", "Ungārija");
@@ -433,7 +435,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
     namesMap.put("IO", "Indijas okeāna Britu teritorija");
     namesMap.put("IQ", "Irāka");
     namesMap.put("IR", "Irāna");
-    namesMap.put("IS", "Īslande");
+    namesMap.put("IS", "Islande");
     namesMap.put("IT", "Itālija");
     namesMap.put("JE", "Džērsija");
     namesMap.put("JM", "Jamaika");
@@ -491,13 +493,13 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
     namesMap.put("NP", "Nepāla");
     namesMap.put("NZ", "Jaunzēlande");
     namesMap.put("OM", "Omāna");
-    namesMap.put("PF", "Franču Polinēzija");
+    namesMap.put("PF", "Francijas Polinēzija");
     namesMap.put("PG", "Papua-Jaungvineja");
     namesMap.put("PH", "Filipīnas");
     namesMap.put("PK", "Pakistāna");
     namesMap.put("PL", "Polija");
     namesMap.put("PM", "Senpjēra un Mikelona");
-    namesMap.put("PN", "Pitkērna");
+    namesMap.put("PN", "Pitkērnas salas");
     namesMap.put("PR", "Puertoriko");
     namesMap.put("PS", "Palestīna");
     namesMap.put("PT", "Portugāle");
@@ -511,7 +513,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
     namesMap.put("RW", "Ruanda");
     namesMap.put("SA", "Saūda Arābija");
     namesMap.put("SB", "Zālamana salas");
-    namesMap.put("SC", "Seišeļu salas");
+    namesMap.put("SC", "Seišelu salas");
     namesMap.put("SD", "Sudāna");
     namesMap.put("SE", "Zviedrija");
     namesMap.put("SG", "Singapūra");
@@ -533,7 +535,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
     namesMap.put("TA", "Tristana da Kuņas salas");
     namesMap.put("TC", "Tērksas un Kaikosas salas");
     namesMap.put("TD", "Čada");
-    namesMap.put("TF", "Francijas Dienvidjūru Zemes");
+    namesMap.put("TF", "Francijas Dienvidjūru teritorija");
     namesMap.put("TH", "Taizeme");
     namesMap.put("TJ", "Tadžikistāna");
     namesMap.put("TL", "Austrumtimora");
@@ -544,7 +546,8 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
     namesMap.put("TW", "Taivāna");
     namesMap.put("TZ", "Tanzānija");
     namesMap.put("UA", "Ukraina");
-    namesMap.put("UM", "ASV Aizjūras salas");
+    namesMap.put("UM", "ASV Mazās Aizjūras salas");
+    namesMap.put("UN", "Apvienoto Nāciju Organizācija");
     namesMap.put("US", "Amerikas Savienotās Valstis");
     namesMap.put("UY", "Urugvaja");
     namesMap.put("UZ", "Uzbekistāna");
@@ -554,7 +557,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
     namesMap.put("VG", "Britu Virdžīnas");
     namesMap.put("VI", "ASV Virdžīnas");
     namesMap.put("VN", "Vjetnama");
-    namesMap.put("WF", "Volisa un Futuna");
+    namesMap.put("WF", "Volisa un Futunas salas");
     namesMap.put("XK", "Kosova");
     namesMap.put("YE", "Jemena");
     namesMap.put("YT", "Majota");
@@ -609,10 +612,9 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "AI": "Angilja",
         "AL": "Albānija",
         "AM": "Armēnija",
-        "AN": "Nīderlandes Antiļas",
         "AQ": "Antarktika",
         "AR": "Argentīna",
-        "AS": "Amerikāņu Samoa",
+        "AS": "ASV Samoa",
         "AT": "Austrija",
         "AU": "Austrālija",
         "AX": "Olandes salas",
@@ -624,6 +626,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "BF": "Burkinafaso",
         "BG": "Bulgārija",
         "BH": "Bahreina",
+        "BI": "Burundija",
         "BJ": "Benina",
         "BL": "Senbartelmī",
         "BM": "Bermudu salas",
@@ -638,10 +641,10 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "BY": "Baltkrievija",
         "BZ": "Beliza",
         "CA": "Kanāda",
-        "CC": "Kokosu jeb Kīlinga salas",
-        "CD": "Kongo-Kinšasa",
+        "CC": "Kokosu (Kīlinga) salas",
+        "CD": "Kongo (Kinšasa)",
         "CF": "Centrālāfrikas Republika",
-        "CG": "Kongo - Brazavila",
+        "CG": "Kongo (Brazavila)",
         "CH": "Šveice",
         "CI": "Kotdivuāra",
         "CK": "Kuka salas",
@@ -673,17 +676,18 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "ES": "Spānija",
         "ET": "Etiopija",
         "EU": "Eiropas Savienība",
+        "EZ": "Eirozona",
         "FI": "Somija",
         "FJ": "Fidži",
         "FK": "Folklenda salas",
         "FM": "Mikronēzija",
-        "FO": "Fēru Salas",
+        "FO": "Fēru salas",
         "FR": "Francija",
         "GA": "Gabona",
         "GB": "Lielbritānija",
         "GD": "Grenāda",
         "GE": "Gruzija",
-        "GF": "Franču Gviāna",
+        "GF": "Francijas Gviāna",
         "GG": "Gērnsija",
         "GH": "Gana",
         "GI": "Gibraltārs",
@@ -699,7 +703,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "GW": "Gvineja-Bisava",
         "GY": "Gajāna",
         "HK": "Ķīnas īpašās pārvaldes apgabals Honkonga",
-        "HM": "Hērda un Makdonalda salas",
+        "HM": "Hērda sala un Makdonalda salas",
         "HN": "Hondurasa",
         "HR": "Horvātija",
         "HU": "Ungārija",
@@ -712,7 +716,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "IO": "Indijas okeāna Britu teritorija",
         "IQ": "Irāka",
         "IR": "Irāna",
-        "IS": "Īslande",
+        "IS": "Islande",
         "IT": "Itālija",
         "JE": "Džērsija",
         "JM": "Jamaika",
@@ -770,13 +774,13 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "NP": "Nepāla",
         "NZ": "Jaunzēlande",
         "OM": "Omāna",
-        "PF": "Franču Polinēzija",
+        "PF": "Francijas Polinēzija",
         "PG": "Papua-Jaungvineja",
         "PH": "Filipīnas",
         "PK": "Pakistāna",
         "PL": "Polija",
         "PM": "Senpjēra un Mikelona",
-        "PN": "Pitkērna",
+        "PN": "Pitkērnas salas",
         "PR": "Puertoriko",
         "PS": "Palestīna",
         "PT": "Portugāle",
@@ -790,7 +794,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "RW": "Ruanda",
         "SA": "Saūda Arābija",
         "SB": "Zālamana salas",
-        "SC": "Seišeļu salas",
+        "SC": "Seišelu salas",
         "SD": "Sudāna",
         "SE": "Zviedrija",
         "SG": "Singapūra",
@@ -812,7 +816,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "TA": "Tristana da Kuņas salas",
         "TC": "Tērksas un Kaikosas salas",
         "TD": "Čada",
-        "TF": "Francijas Dienvidjūru Zemes",
+        "TF": "Francijas Dienvidjūru teritorija",
         "TH": "Taizeme",
         "TJ": "Tadžikistāna",
         "TL": "Austrumtimora",
@@ -823,7 +827,8 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "TW": "Taivāna",
         "TZ": "Tanzānija",
         "UA": "Ukraina",
-        "UM": "ASV Aizjūras salas",
+        "UM": "ASV Mazās Aizjūras salas",
+        "UN": "Apvienoto Nāciju Organizācija",
         "US": "Amerikas Savienotās Valstis",
         "UY": "Urugvaja",
         "UZ": "Uzbekistāna",
@@ -833,7 +838,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "VG": "Britu Virdžīnas",
         "VI": "ASV Virdžīnas",
         "VN": "Vjetnama",
-        "WF": "Volisa un Futuna",
+        "WF": "Volisa un Futunas salas",
         "XK": "Kosova",
         "YE": "Jemena",
         "YT": "Majota",

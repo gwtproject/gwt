@@ -41,12 +41,27 @@ public class DateTimeFormatInfoImpl_ca extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "dd/MM/y";
+    return "d MMM y";
   }
 
   @Override
   public String dateFormatShort() {
     return "d/M/yy";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " 'a' 'les' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " 'a' 'les' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
   }
 
   @Override
@@ -87,7 +102,7 @@ public class DateTimeFormatInfoImpl_ca extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE d MMMM";
+    return "EEEE, d MMMM";
   }
 
   @Override
@@ -97,12 +112,12 @@ public class DateTimeFormatInfoImpl_ca extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrev() {
-    return "LLL y";
+    return "LLL 'de' y";
   }
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "d MMM y";
+    return "d MMM 'de' y";
   }
 
   @Override
@@ -127,7 +142,7 @@ public class DateTimeFormatInfoImpl_ca extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, d MMM, y";
+    return "EEE, d MMM y";
   }
 
   @Override
@@ -142,6 +157,24 @@ public class DateTimeFormatInfoImpl_ca extends DateTimeFormatInfoImpl {
 
   @Override
   public String[] monthsFull() {
+    return new String[] {
+        "de gener",
+        "de febrer",
+        "de març",
+        "d’abril",
+        "de maig",
+        "de juny",
+        "de juliol",
+        "d’agost",
+        "de setembre",
+        "d’octubre",
+        "de novembre",
+        "de desembre"
+    };
+  }
+
+  @Override
+  public String[] monthsFullStandalone() {
     return new String[] {
         "gener",
         "febrer",
@@ -179,8 +212,26 @@ public class DateTimeFormatInfoImpl_ca extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShort() {
     return new String[] {
+        "de gen.",
+        "de febr.",
+        "de març",
+        "d’abr.",
+        "de maig",
+        "de juny",
+        "de jul.",
+        "d’ag.",
+        "de set.",
+        "d’oct.",
+        "de nov.",
+        "de des."
+    };
+  }
+
+  @Override
+  public String[] monthsShortStandalone() {
+    return new String[] {
         "gen.",
-        "feb.",
+        "febr.",
         "març",
         "abr.",
         "maig",

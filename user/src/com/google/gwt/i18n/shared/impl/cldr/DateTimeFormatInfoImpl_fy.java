@@ -42,6 +42,16 @@ public class DateTimeFormatInfoImpl_fy extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " 'om' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " 'om' " + timePattern;
+  }
+
+  @Override
   public String[] erasFull() {
     return new String[] {
         "Foar Kristus",
@@ -58,13 +68,23 @@ public class DateTimeFormatInfoImpl_fy extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "d MMMM";
+  }
+
+  @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
+    return "EEEE d MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M/d";
+    return "d-M";
   }
 
   @Override
@@ -74,7 +94,7 @@ public class DateTimeFormatInfoImpl_fy extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "MMM d, y";
+    return "d MMM y";
   }
 
   @Override
@@ -84,22 +104,22 @@ public class DateTimeFormatInfoImpl_fy extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFullDay() {
-    return "MMMM d, y";
+    return "d MMMM y";
   }
 
   @Override
   public String formatYearMonthNum() {
-    return "M/y";
+    return "M-y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "M/d/y";
+    return "d-M-y";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
+    return "EEE d MMM y";
   }
 
   @Override
@@ -115,64 +135,46 @@ public class DateTimeFormatInfoImpl_fy extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsFull() {
     return new String[] {
-        "jannewaris",
-        "febrewaris",
-        "maart",
-        "april",
-        "maaie",
-        "juny",
-        "july",
-        "augustus",
-        "septimber",
-        "oktober",
-        "novimber",
-        "desimber"
+        "Jannewaris",
+        "Febrewaris",
+        "Maart",
+        "April",
+        "Maaie",
+        "Juny",
+        "July",
+        "Augustus",
+        "Septimber",
+        "Oktober",
+        "Novimber",
+        "Desimber"
     };
   }
 
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "jan.",
-        "feb.",
-        "mrt.",
-        "apr.",
-        "mai",
-        "jun.",
-        "jul.",
-        "aug.",
-        "sep.",
-        "okt.",
-        "nov.",
-        "des."
-    };
-  }
-
-  @Override
-  public String[] monthsShortStandalone() {
-    return new String[] {
-        "jan",
-        "feb",
-        "mrt",
-        "apr",
-        "mai",
-        "jun",
-        "jul",
-        "aug",
-        "sep",
-        "okt",
-        "nov",
-        "des"
+        "Jan",
+        "Feb",
+        "Mrt",
+        "Apr",
+        "Mai",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Okt",
+        "Nov",
+        "Des"
     };
   }
 
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "1e kwartaal",
-        "2e kwartaal",
-        "3e kwartaal",
-        "4e kwartaal"
+        "1e fearnsjier",
+        "2e fearnsjier",
+        "3e fearnsjier",
+        "4e fearnsjier"
     };
   }
 
@@ -196,19 +198,6 @@ public class DateTimeFormatInfoImpl_fy extends DateTimeFormatInfoImpl {
         "tongersdei",
         "freed",
         "sneon"
-    };
-  }
-
-  @Override
-  public String[] weekdaysNarrow() {
-    return new String[] {
-        "Z",
-        "M",
-        "D",
-        "W",
-        "D",
-        "V",
-        "Z"
     };
   }
 

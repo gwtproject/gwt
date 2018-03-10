@@ -23,16 +23,16 @@ public class DateTimeFormatInfoImpl_shi_Tfng extends DateTimeFormatInfoImpl_shi 
 
   @Override
   public int firstDayOfTheWeek() {
-    return 6;
+    return 1;
   }
 
   @Override
   public int weekendEnd() {
-    return 6;
+    return 0;
   }
 
   @Override
   public int weekendStart() {
-    return 5;
+    return 6;
   }
 }

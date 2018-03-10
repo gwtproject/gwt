@@ -46,12 +46,12 @@ public class DateTimeFormatInfoImpl_nb extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "dd.MM.yy";
+    return "dd.MM.y";
   }
 
   @Override
   public String dateTimeLong(String timePattern, String datePattern) {
-    return datePattern + " 'kl.' " + timePattern;
+    return datePattern + " 'kl'. " + timePattern;
   }
 
   @Override
@@ -67,8 +67,8 @@ public class DateTimeFormatInfoImpl_nb extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "f.Kr.",
-        "e.Kr."
+        "før Kristus",
+        "etter Kristus"
     };
   }
 
@@ -83,31 +83,6 @@ public class DateTimeFormatInfoImpl_nb extends DateTimeFormatInfoImpl {
   @Override
   public String formatDay() {
     return "d.";
-  }
-
-  @Override
-  public String formatHour12Minute() {
-    return "h.mm a";
-  }
-
-  @Override
-  public String formatHour12MinuteSecond() {
-    return "h.mm.ss a";
-  }
-
-  @Override
-  public String formatHour24Minute() {
-    return "HH.mm";
-  }
-
-  @Override
-  public String formatHour24MinuteSecond() {
-    return "HH.mm.ss";
-  }
-
-  @Override
-  public String formatMinuteSecond() {
-    return "mm.ss";
   }
 
   @Override
@@ -250,26 +225,6 @@ public class DateTimeFormatInfoImpl_nb extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String timeFormatFull() {
-    return "HH.mm.ss zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "HH.mm.ss z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "HH.mm.ss";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "HH.mm";
-  }
-
-  @Override
   public String[] weekdaysFull() {
     return new String[] {
         "søndag",
@@ -305,19 +260,6 @@ public class DateTimeFormatInfoImpl_nb extends DateTimeFormatInfoImpl {
         "tor.",
         "fre.",
         "lør."
-    };
-  }
-
-  @Override
-  public String[] weekdaysShortStandalone() {
-    return new String[] {
-        "sø.",
-        "ma.",
-        "ti.",
-        "on.",
-        "to.",
-        "fr.",
-        "lø."
     };
   }
 }

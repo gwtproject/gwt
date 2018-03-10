@@ -88,7 +88,6 @@ public class LocalizedNamesImpl_xog extends LocalizedNamesImpl {
         "EA",
         "FK",
         "SB",
-        "AN",
         "IO",
         "PH",
         "KY",
@@ -107,6 +106,7 @@ public class LocalizedNamesImpl_xog extends LocalizedNamesImpl {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FJ",
         "FI",
         "FO",
@@ -267,6 +267,7 @@ public class LocalizedNamesImpl_xog extends LocalizedNamesImpl {
         "TV",
         "TZ",
         "UM",
+        "UN",
         "VU",
         "VA",
         "VE",
@@ -299,7 +300,6 @@ public class LocalizedNamesImpl_xog extends LocalizedNamesImpl {
     namesMap.put("AI", "Angwila");
     namesMap.put("AL", "Alibaniya");
     namesMap.put("AM", "Arameniya");
-    namesMap.put("AN", "Ebizinga bya Antile by'abaHolandi");
     namesMap.put("AR", "Arigentina");
     namesMap.put("AS", "Samowa omumerika");
     namesMap.put("AT", "Awusituriya");
@@ -425,7 +425,7 @@ public class LocalizedNamesImpl_xog extends LocalizedNamesImpl {
     namesMap.put("NA", "Namibiya");
     namesMap.put("NC", "Kaledonya mupya");
     namesMap.put("NE", "Nije");
-    namesMap.put("NF", "Kizinga ky'eNorofoko");
+    namesMap.put("NF", "Kizinga ky’eNorofoko");
     namesMap.put("NG", "Nayijerya");
     namesMap.put("NI", "Nikaraguwa");
     namesMap.put("NL", "Holandi");
@@ -489,7 +489,7 @@ public class LocalizedNamesImpl_xog extends LocalizedNamesImpl {
     namesMap.put("VC", "Senti Vinsenti ni Gurendadiini");
     namesMap.put("VE", "Venzwera");
     namesMap.put("VG", "Ebizinga bya Virigini ebitwalibwa Bungereza");
-    namesMap.put("VI", "Ebizinga bya Virigini eby'Amerika");
+    namesMap.put("VI", "Ebizinga bya Virigini eby’Amerika");
     namesMap.put("VN", "Vyetinaamu");
     namesMap.put("VU", "Vanawuwatu");
     namesMap.put("WF", "Walisi ni Futuna");
@@ -513,7 +513,6 @@ public class LocalizedNamesImpl_xog extends LocalizedNamesImpl {
         "AI": "Angwila",
         "AL": "Alibaniya",
         "AM": "Arameniya",
-        "AN": "Ebizinga bya Antile by'abaHolandi",
         "AR": "Arigentina",
         "AS": "Samowa omumerika",
         "AT": "Awusituriya",
@@ -639,7 +638,7 @@ public class LocalizedNamesImpl_xog extends LocalizedNamesImpl {
         "NA": "Namibiya",
         "NC": "Kaledonya mupya",
         "NE": "Nije",
-        "NF": "Kizinga ky'eNorofoko",
+        "NF": "Kizinga ky’eNorofoko",
         "NG": "Nayijerya",
         "NI": "Nikaraguwa",
         "NL": "Holandi",
@@ -703,7 +702,7 @@ public class LocalizedNamesImpl_xog extends LocalizedNamesImpl {
         "VC": "Senti Vinsenti ni Gurendadiini",
         "VE": "Venzwera",
         "VG": "Ebizinga bya Virigini ebitwalibwa Bungereza",
-        "VI": "Ebizinga bya Virigini eby'Amerika",
+        "VI": "Ebizinga bya Virigini eby’Amerika",
         "VN": "Vyetinaamu",
         "VU": "Vanawuwatu",
         "WF": "Walisi ni Futuna",

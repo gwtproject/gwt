@@ -46,7 +46,7 @@ public class DateTimeFormatInfoImpl_zh extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "yy/M/d";
+    return "y/M/d";
   }
 
   @Override
@@ -63,6 +63,11 @@ public class DateTimeFormatInfoImpl_zh extends DateTimeFormatInfoImpl {
         "公元前",
         "公元"
     };
+  }
+
+  @Override
+  public int firstDayOfTheWeek() {
+    return 0;
   }
 
   @Override
@@ -127,7 +132,7 @@ public class DateTimeFormatInfoImpl_zh extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "y/M";
+    return "y年M月";
   }
 
   @Override
@@ -226,12 +231,12 @@ public class DateTimeFormatInfoImpl_zh extends DateTimeFormatInfoImpl {
 
   @Override
   public String timeFormatFull() {
-    return "zzzzah:mm:ss";
+    return "zzzz ah:mm:ss";
   }
 
   @Override
   public String timeFormatLong() {
-    return "zah:mm:ss";
+    return "z ah:mm:ss";
   }
 
   @Override

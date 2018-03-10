@@ -25,6 +25,14 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
 
   @Override
+  public String[] loadLikelyRegionCodes() {
+    return new String[] {
+        "CN",
+        "SG",
+    };
+  }
+
+  @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
         "AL",
@@ -114,7 +122,6 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
         "KR",
         "NL",
         "BQ",
-        "AN",
         "SX",
         "HM",
         "ME",
@@ -151,12 +158,14 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
         "LR",
         "LY",
         "LT",
+        "UN",
         "LI",
         "RE",
         "LU",
         "RW",
         "RO",
         "MG",
+        "IM",
         "MT",
         "MV",
         "MW",
@@ -166,7 +175,6 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
         "MH",
         "MQ",
         "YT",
-        "IM",
         "MU",
         "MR",
         "US",
@@ -197,6 +205,7 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
         "NO",
         "NF",
         "EU",
+        "EZ",
         "PW",
         "PN",
         "PT",
@@ -330,7 +339,6 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
     namesMap.put("AI", "安圭拉");
     namesMap.put("AL", "阿尔巴尼亚");
     namesMap.put("AM", "亚美尼亚");
-    namesMap.put("AN", "荷属安的列斯群岛");
     namesMap.put("AO", "安哥拉");
     namesMap.put("AQ", "南极洲");
     namesMap.put("AR", "阿根廷");
@@ -353,11 +361,11 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
     namesMap.put("BM", "百慕大");
     namesMap.put("BN", "文莱");
     namesMap.put("BO", "玻利维亚");
-    namesMap.put("BQ", "荷兰加勒比区");
+    namesMap.put("BQ", "荷属加勒比区");
     namesMap.put("BR", "巴西");
     namesMap.put("BS", "巴哈马");
     namesMap.put("BT", "不丹");
-    namesMap.put("BV", "布维特岛");
+    namesMap.put("BV", "布韦岛");
     namesMap.put("BW", "博茨瓦纳");
     namesMap.put("BY", "白俄罗斯");
     namesMap.put("BZ", "伯利兹");
@@ -380,7 +388,7 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
     namesMap.put("CW", "库拉索");
     namesMap.put("CX", "圣诞岛");
     namesMap.put("CY", "塞浦路斯");
-    namesMap.put("CZ", "捷克共和国");
+    namesMap.put("CZ", "捷克");
     namesMap.put("DE", "德国");
     namesMap.put("DG", "迪戈加西亚岛");
     namesMap.put("DJ", "吉布提");
@@ -397,6 +405,7 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
     namesMap.put("ES", "西班牙");
     namesMap.put("ET", "埃塞俄比亚");
     namesMap.put("EU", "欧盟");
+    namesMap.put("EZ", "欧元区");
     namesMap.put("FI", "芬兰");
     namesMap.put("FJ", "斐济");
     namesMap.put("FK", "福克兰群岛");
@@ -417,7 +426,7 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
     namesMap.put("GP", "瓜德罗普");
     namesMap.put("GQ", "赤道几内亚");
     namesMap.put("GR", "希腊");
-    namesMap.put("GS", "南乔治亚岛和南桑威齐群岛");
+    namesMap.put("GS", "南乔治亚和南桑威奇群岛");
     namesMap.put("GT", "危地马拉");
     namesMap.put("GU", "关岛");
     namesMap.put("GW", "几内亚比绍");
@@ -432,7 +441,7 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
     namesMap.put("ID", "印度尼西亚");
     namesMap.put("IE", "爱尔兰");
     namesMap.put("IL", "以色列");
-    namesMap.put("IM", "曼岛");
+    namesMap.put("IM", "马恩岛");
     namesMap.put("IN", "印度");
     namesMap.put("IO", "英属印度洋领地");
     namesMap.put("IQ", "伊拉克");
@@ -468,7 +477,7 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
     namesMap.put("MA", "摩洛哥");
     namesMap.put("MC", "摩纳哥");
     namesMap.put("MD", "摩尔多瓦");
-    namesMap.put("ME", "黑山共和国");
+    namesMap.put("ME", "黑山");
     namesMap.put("MF", "法属圣马丁");
     namesMap.put("MG", "马达加斯加");
     namesMap.put("MH", "马绍尔群岛");
@@ -530,7 +539,7 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
     namesMap.put("SG", "新加坡");
     namesMap.put("SH", "圣赫勒拿");
     namesMap.put("SI", "斯洛文尼亚");
-    namesMap.put("SJ", "斯瓦尔巴特和扬马延");
+    namesMap.put("SJ", "斯瓦尔巴和扬马延");
     namesMap.put("SK", "斯洛伐克");
     namesMap.put("SL", "塞拉利昂");
     namesMap.put("SM", "圣马力诺");
@@ -563,14 +572,15 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
     namesMap.put("UA", "乌克兰");
     namesMap.put("UG", "乌干达");
     namesMap.put("UM", "美国本土外小岛屿");
+    namesMap.put("UN", "联合国");
     namesMap.put("US", "美国");
     namesMap.put("UY", "乌拉圭");
     namesMap.put("UZ", "乌兹别克斯坦");
     namesMap.put("VA", "梵蒂冈");
     namesMap.put("VC", "圣文森特和格林纳丁斯");
     namesMap.put("VE", "委内瑞拉");
-    namesMap.put("VG", "英属维京群岛");
-    namesMap.put("VI", "美属维京群岛");
+    namesMap.put("VG", "英属维尔京群岛");
+    namesMap.put("VI", "美属维尔京群岛");
     namesMap.put("VN", "越南");
     namesMap.put("VU", "瓦努阿图");
     namesMap.put("WF", "瓦利斯和富图纳");
@@ -629,7 +639,6 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
         "AI": "安圭拉",
         "AL": "阿尔巴尼亚",
         "AM": "亚美尼亚",
-        "AN": "荷属安的列斯群岛",
         "AO": "安哥拉",
         "AQ": "南极洲",
         "AR": "阿根廷",
@@ -652,11 +661,11 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
         "BM": "百慕大",
         "BN": "文莱",
         "BO": "玻利维亚",
-        "BQ": "荷兰加勒比区",
+        "BQ": "荷属加勒比区",
         "BR": "巴西",
         "BS": "巴哈马",
         "BT": "不丹",
-        "BV": "布维特岛",
+        "BV": "布韦岛",
         "BW": "博茨瓦纳",
         "BY": "白俄罗斯",
         "BZ": "伯利兹",
@@ -679,7 +688,7 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
         "CW": "库拉索",
         "CX": "圣诞岛",
         "CY": "塞浦路斯",
-        "CZ": "捷克共和国",
+        "CZ": "捷克",
         "DE": "德国",
         "DG": "迪戈加西亚岛",
         "DJ": "吉布提",
@@ -696,6 +705,7 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
         "ES": "西班牙",
         "ET": "埃塞俄比亚",
         "EU": "欧盟",
+        "EZ": "欧元区",
         "FI": "芬兰",
         "FJ": "斐济",
         "FK": "福克兰群岛",
@@ -716,7 +726,7 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
         "GP": "瓜德罗普",
         "GQ": "赤道几内亚",
         "GR": "希腊",
-        "GS": "南乔治亚岛和南桑威齐群岛",
+        "GS": "南乔治亚和南桑威奇群岛",
         "GT": "危地马拉",
         "GU": "关岛",
         "GW": "几内亚比绍",
@@ -731,7 +741,7 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
         "ID": "印度尼西亚",
         "IE": "爱尔兰",
         "IL": "以色列",
-        "IM": "曼岛",
+        "IM": "马恩岛",
         "IN": "印度",
         "IO": "英属印度洋领地",
         "IQ": "伊拉克",
@@ -767,7 +777,7 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
         "MA": "摩洛哥",
         "MC": "摩纳哥",
         "MD": "摩尔多瓦",
-        "ME": "黑山共和国",
+        "ME": "黑山",
         "MF": "法属圣马丁",
         "MG": "马达加斯加",
         "MH": "马绍尔群岛",
@@ -829,7 +839,7 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
         "SG": "新加坡",
         "SH": "圣赫勒拿",
         "SI": "斯洛文尼亚",
-        "SJ": "斯瓦尔巴特和扬马延",
+        "SJ": "斯瓦尔巴和扬马延",
         "SK": "斯洛伐克",
         "SL": "塞拉利昂",
         "SM": "圣马力诺",
@@ -862,14 +872,15 @@ public class LocalizedNamesImpl_zh extends LocalizedNamesImpl {
         "UA": "乌克兰",
         "UG": "乌干达",
         "UM": "美国本土外小岛屿",
+        "UN": "联合国",
         "US": "美国",
         "UY": "乌拉圭",
         "UZ": "乌兹别克斯坦",
         "VA": "梵蒂冈",
         "VC": "圣文森特和格林纳丁斯",
         "VE": "委内瑞拉",
-        "VG": "英属维京群岛",
-        "VI": "美属维京群岛",
+        "VG": "英属维尔京群岛",
+        "VI": "美属维尔京群岛",
         "VN": "越南",
         "VU": "瓦努阿图",
         "WF": "瓦利斯和富图纳",

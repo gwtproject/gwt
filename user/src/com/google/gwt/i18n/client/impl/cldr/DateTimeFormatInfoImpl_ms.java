@@ -24,8 +24,8 @@ public class DateTimeFormatInfoImpl_ms extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "pg",
-        "ptg"
+        "PG",
+        "PTG"
     };
   }
 
@@ -50,6 +50,16 @@ public class DateTimeFormatInfoImpl_ms extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
   public String[] erasFull() {
     return new String[] {
         "S.M.",
@@ -63,11 +73,6 @@ public class DateTimeFormatInfoImpl_ms extends DateTimeFormatInfoImpl {
         "S.M.",
         "TM"
     };
-  }
-
-  @Override
-  public String formatHour24Minute() {
-    return "H:mm";
   }
 
   @Override

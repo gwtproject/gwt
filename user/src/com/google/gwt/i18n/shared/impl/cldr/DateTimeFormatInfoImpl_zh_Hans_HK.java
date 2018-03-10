@@ -27,13 +27,8 @@ public class DateTimeFormatInfoImpl_zh_Hans_HK extends DateTimeFormatInfoImpl_zh
   }
 
   @Override
-  public String dateTimeFull(String timePattern, String datePattern) {
-    return datePattern + timePattern;
-  }
-
-  @Override
-  public String dateTimeLong(String timePattern, String datePattern) {
-    return datePattern + timePattern;
+  public int firstDayOfTheWeek() {
+    return 0;
   }
 
   @Override

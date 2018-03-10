@@ -44,9 +44,9 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "AZ",
         "AU",
         "BS",
-        "BH",
         "BD",
         "BB",
+        "BH",
         "BE",
         "BZ",
         "BJ",
@@ -56,11 +56,9 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "BW",
         "BV",
         "BR",
-        "IO",
         "BN",
         "BG",
         "BF",
-        "MM",
         "BI",
         "BT",
         "KY",
@@ -71,8 +69,8 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "DK",
         "DG",
         "DJ",
-        "DO",
         "DM",
+        "DO",
         "EG",
         "EC",
         "GQ",
@@ -80,6 +78,7 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "ER",
         "EE",
         "ET",
+        "EZ",
         "EU",
         "AT",
         "TL",
@@ -88,15 +87,16 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "CI",
         "PH",
         "FI",
+        "QO",
         "FR",
-        "PF",
         "GF",
-        "MF",
+        "PF",
+        "TF",
         "FO",
         "GA",
         "GM",
-        "GE",
         "GH",
+        "GE",
         "GI",
         "GD",
         "GR",
@@ -120,6 +120,7 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "IR",
         "IE",
         "IS",
+        "IM",
         "IL",
         "IT",
         "JM",
@@ -164,12 +165,11 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "MG",
         "MO",
         "MK",
+        "MY",
         "MW",
         "MV",
-        "MY",
         "ML",
         "MT",
-        "IM",
         "MA",
         "MH",
         "MQ",
@@ -185,20 +185,18 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "MR",
         "MU",
         "MZ",
+        "MM",
         "NA",
         "NR",
         "NP",
-        "AN",
         "NL",
         "BQ",
-        "SX",
         "NE",
         "NG",
         "NI",
         "NU",
-        "KP",
         "MP",
-        "SD",
+        "KP",
         "NO",
         "NF",
         "NC",
@@ -215,22 +213,18 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "PL",
         "PT",
         "PR",
-        "QO",
         "RE",
         "RW",
         "RO",
         "RU",
-        "BL",
-        "SH",
-        "KN",
-        "LC",
         "PM",
-        "VC",
         "SB",
         "US",
+        "UM",
         "VI",
         "ZM",
         "AE",
+        "UN",
         "WS",
         "SM",
         "ST",
@@ -241,13 +235,22 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "SL",
         "ZW",
         "SG",
+        "SX",
         "SK",
         "SI",
         "SO",
         "ES",
         "LK",
+        "SH",
+        "KN",
+        "LC",
+        "VC",
+        "BL",
+        "MF",
         "GB",
+        "IO",
         "VG",
+        "SD",
         "ZA",
         "GS",
         "KR",
@@ -259,10 +262,9 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "SE",
         "SY",
         "TJ",
-        "TZ",
         "TH",
         "TW",
-        "TF",
+        "TZ",
         "TG",
         "TK",
         "TO",
@@ -276,7 +278,6 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "DE",
         "UG",
         "UA",
-        "UM",
         "HU",
         "UY",
         "UZ",
@@ -293,75 +294,78 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
   protected void loadNameMapJava() {
     super.loadNameMapJava();
     namesMap.put("001", "heimur");
+    namesMap.put("002", "Afrika");
     namesMap.put("003", "Norðuramerika");
     namesMap.put("005", "Suðuramerika");
-    namesMap.put("009", "Kyrrahavsoyggjarnar");
+    namesMap.put("009", "Osiania");
     namesMap.put("011", "Vesturafrika");
-    namesMap.put("013", "Sentralamerika");
+    namesMap.put("013", "Miðamerika");
     namesMap.put("014", "Eysturafrika");
     namesMap.put("015", "Norðurafrika");
     namesMap.put("017", "Miðafrika");
-    namesMap.put("018", "Suður Afrika");
+    namesMap.put("018", "sunnari partur av Afrika");
     namesMap.put("019", "Amerika");
-    namesMap.put("021", "Amerika norður Meksiko");
+    namesMap.put("021", "Amerika norðanfyri Meksiko");
     namesMap.put("029", "Karibia");
     namesMap.put("030", "Eysturasia");
     namesMap.put("034", "Suðurasia");
-    namesMap.put("035", "Suðureysturasia");
+    namesMap.put("035", "Útsynningsasia");
     namesMap.put("039", "Suðurevropa");
-    namesMap.put("053", "Avstralia og Nýsæland");
-    namesMap.put("057", "Mikronesiske regionen");
-    namesMap.put("143", "Sentralasia");
+    namesMap.put("053", "Avstralasia");
+    namesMap.put("057", "Mikronesi øki");
+    namesMap.put("143", "Miðasia");
     namesMap.put("145", "Vesturasia");
     namesMap.put("150", "Evropa");
     namesMap.put("151", "Eysturevropa");
     namesMap.put("154", "Norðurevropa");
     namesMap.put("155", "Vesturevropa");
     namesMap.put("419", "Latínamerika");
-    namesMap.put("AC", "Ascensionoyggjin");
+    namesMap.put("AC", "Ascension");
     namesMap.put("AE", "Sameindu Emirríkini");
     namesMap.put("AF", "Afganistan");
-    namesMap.put("AG", "Antigua og Barbuda");
-    namesMap.put("AN", "Niðurlendsku Antilloyggjarnar");
     namesMap.put("AQ", "Antarktis");
-    namesMap.put("AS", "Amerikanska Sámoa");
+    namesMap.put("AS", "Amerikanska Samoa");
     namesMap.put("AT", "Eysturríki");
     namesMap.put("AU", "Avstralia");
     namesMap.put("AX", "Áland");
-    namesMap.put("AZ", "Aserbajdsjan");
+    namesMap.put("AZ", "Aserbadjan");
     namesMap.put("BA", "Bosnia-Hersegovina");
     namesMap.put("BD", "Bangladesj");
     namesMap.put("BE", "Belgia");
+    namesMap.put("BH", "Barein");
+    namesMap.put("BL", "St-Barthélemy");
     namesMap.put("BQ", "Niðurlonds Karibia");
-    namesMap.put("BR", "Brasilia");
+    namesMap.put("BR", "Brasil");
+    namesMap.put("BS", "Bahamaoyggjar");
     namesMap.put("BT", "Butan");
-    namesMap.put("BV", "Bouvetoyggjin");
+    namesMap.put("BV", "Bouvetoyggj");
     namesMap.put("BW", "Botsvana");
     namesMap.put("BY", "Hvítarussland");
     namesMap.put("BZ", "Belis");
     namesMap.put("CA", "Kanada");
-    namesMap.put("CC", "Kokosoyggjarnar");
-    namesMap.put("CD", "Kongo-Kinshasa");
+    namesMap.put("CC", "Kokosoyggjar");
+    namesMap.put("CD", "Kongo, Dem. Lýðveldið");
     namesMap.put("CF", "Miðafrikalýðveldið");
     namesMap.put("CG", "Kongo");
     namesMap.put("CH", "Sveis");
     namesMap.put("CI", "Fílabeinsstrondin");
-    namesMap.put("CK", "Cooksoyggjarnar");
+    namesMap.put("CK", "Cooksoyggjar");
     namesMap.put("CL", "Kili");
     namesMap.put("CM", "Kamerun");
     namesMap.put("CN", "Kina");
     namesMap.put("CO", "Kolombia");
-    namesMap.put("CP", "Clippertonoyggjin");
+    namesMap.put("CP", "Clipperton");
     namesMap.put("CR", "Kosta Rika");
     namesMap.put("CU", "Kuba");
-    namesMap.put("CV", "Grønhøvdaoyggjarnar");
+    namesMap.put("CV", "Grønhøvdaoyggjar");
     namesMap.put("CX", "Jólaoyggjin");
     namesMap.put("CY", "Kýpros");
     namesMap.put("CZ", "Kekkia");
     namesMap.put("DE", "Týskland");
-    namesMap.put("DK", "Danmørk");
+    namesMap.put("DJ", "Djibuti");
+    namesMap.put("DK", "Danmark");
     namesMap.put("DM", "Dominika");
-    namesMap.put("DO", "Domingo lýðveldið");
+    namesMap.put("DO", "Dominikalýðveldið");
     namesMap.put("EA", "Ceuta og Melilla");
     namesMap.put("EC", "Ekvador");
     namesMap.put("EE", "Estland");
@@ -370,123 +374,122 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
     namesMap.put("ES", "Spania");
     namesMap.put("ET", "Etiopia");
     namesMap.put("EU", "Evropasamveldið");
+    namesMap.put("EZ", "Evrasona");
     namesMap.put("FI", "Finnland");
-    namesMap.put("FK", "Falklandsoyggjarnar");
-    namesMap.put("FM", "Mikronesia");
+    namesMap.put("FK", "Falklandsoyggjar");
+    namesMap.put("FM", "Mikronesiasamveldið");
     namesMap.put("FO", "Føroyar");
     namesMap.put("FR", "Frakland");
-    namesMap.put("GB", "Stóra Bretland");
-    namesMap.put("GF", "Fransk Gujana");
+    namesMap.put("GB", "Stórabretland");
+    namesMap.put("GF", "Franska Gujana");
+    namesMap.put("GH", "Gana");
     namesMap.put("GL", "Grønland");
-    namesMap.put("GQ", "Ekvator Guinea");
+    namesMap.put("GQ", "Ekvatorguinea");
     namesMap.put("GR", "Grikkaland");
-    namesMap.put("GS", "Suðurgeorgia");
-    namesMap.put("GW", "Guinea Bissau");
+    namesMap.put("GS", "Suðurgeorgia og Suðursandwichoyggjar");
     namesMap.put("GY", "Gujana");
-    namesMap.put("HK", "Hongkong");
-    namesMap.put("HM", "Heard- og McDonald-oyggjarnar");
+    namesMap.put("HK", "Hong Kong SAR Kina");
+    namesMap.put("HM", "Heard og McDonaldoyggjar");
     namesMap.put("HR", "Kroatia");
     namesMap.put("HU", "Ungarn");
-    namesMap.put("IC", "Kanaríoyggjarnar");
+    namesMap.put("IC", "Kanariuoyggjar");
     namesMap.put("IE", "Írland");
     namesMap.put("IL", "Ísrael");
-    namesMap.put("IM", "Mann");
-    namesMap.put("IO", "Bretsku Indiahavsoyggjarnar");
+    namesMap.put("IO", "Stóra Bretlands Indiahavoyggjar");
     namesMap.put("IQ", "Irak");
     namesMap.put("IS", "Ísland");
     namesMap.put("IT", "Italia");
-    namesMap.put("JM", "Jameika");
-    namesMap.put("JO", "Jordania");
+    namesMap.put("JM", "Jamaika");
     namesMap.put("KE", "Kenja");
     namesMap.put("KG", "Kirgisia");
     namesMap.put("KH", "Kambodja");
-    namesMap.put("KM", "Komorooyggjarnar");
-    namesMap.put("KN", "Saint Kitts og Nevis");
-    namesMap.put("KP", "Norður-Korea");
-    namesMap.put("KR", "Suður-Korea");
+    namesMap.put("KM", "Komoroyggjar");
+    namesMap.put("KP", "Norðurkorea");
+    namesMap.put("KR", "Suðurkorea");
     namesMap.put("KW", "Kuvait");
-    namesMap.put("KY", "Caymanoyggjarnar");
+    namesMap.put("KY", "Caymanoyggjar");
     namesMap.put("KZ", "Kasakstan");
     namesMap.put("LB", "Libanon");
-    namesMap.put("LC", "Saint Lusia");
-    namesMap.put("LI", "Liktenstein");
+    namesMap.put("LC", "St. Lusia");
+    namesMap.put("LI", "Liktinstein");
     namesMap.put("LS", "Lesoto");
     namesMap.put("LT", "Litava");
     namesMap.put("LU", "Luksemborg");
     namesMap.put("LV", "Lettland");
     namesMap.put("MA", "Marokko");
     namesMap.put("MC", "Monako");
-    namesMap.put("MF", "Fransk Saint Martin");
+    namesMap.put("MF", "St-Martin");
     namesMap.put("MG", "Madagaskar");
-    namesMap.put("MH", "Marshalloyggjarnar");
+    namesMap.put("MH", "Marshalloyggjar");
     namesMap.put("MK", "Makedónia");
-    namesMap.put("MM", "Burma");
-    namesMap.put("MO", "Makao");
-    namesMap.put("MP", "Norðurmarianoyggjarnar");
+    namesMap.put("MO", "Makao SAR Kina");
+    namesMap.put("MP", "Norðaru Mariuoyggjar");
     namesMap.put("MR", "Móritania");
     namesMap.put("MU", "Móritius");
-    namesMap.put("MV", "Maldivuoyggjarnar");
+    namesMap.put("MV", "Maldivoyggjar");
     namesMap.put("MW", "Malavi");
     namesMap.put("MX", "Meksiko");
-    namesMap.put("MY", "Maleisia");
+    namesMap.put("MY", "Malaisia");
     namesMap.put("MZ", "Mosambik");
-    namesMap.put("NC", "Ný-Kaledonia");
-    namesMap.put("NF", "Norfolkoyggjin");
+    namesMap.put("NC", "Nýkaledónia");
+    namesMap.put("NF", "Norfolksoyggj");
     namesMap.put("NI", "Nikaragua");
     namesMap.put("NL", "Niðurlond");
     namesMap.put("NO", "Noreg");
-    namesMap.put("NZ", "Ný Sæland");
-    namesMap.put("PE", "Perú");
+    namesMap.put("NZ", "Nýsæland");
     namesMap.put("PF", "Franska Polynesia");
     namesMap.put("PG", "Papua Nýguinea");
     namesMap.put("PH", "Filipsoyggjar");
     namesMap.put("PL", "Pólland");
     namesMap.put("PM", "Saint Pierre og Miquelon");
-    namesMap.put("PN", "Pitcairn");
-    namesMap.put("PS", "Palestinskt territorium");
-    namesMap.put("PY", "Paraguei");
+    namesMap.put("PN", "Pitcairnoyggjar");
+    namesMap.put("PR", "Puerto Riko");
+    namesMap.put("PS", "Palestinskt landøki");
+    namesMap.put("PY", "Paraguai");
     namesMap.put("QA", "Katar");
+    namesMap.put("QO", "fjarskoti Osiania");
     namesMap.put("RO", "Rumenia");
     namesMap.put("RU", "Russland");
     namesMap.put("RW", "Ruanda");
-    namesMap.put("SA", "Saudi-Arábia");
-    namesMap.put("SB", "Sálomonoyggjarnar");
-    namesMap.put("SC", "Seyskelloyggjarnar");
-    namesMap.put("SD", "Norðursudan");
+    namesMap.put("SA", "Saudiarabia");
+    namesMap.put("SB", "Salomonoyggjar");
+    namesMap.put("SC", "Seyskelloyggjar");
     namesMap.put("SE", "Svøríki");
     namesMap.put("SG", "Singapor");
-    namesMap.put("SJ", "Svalbard og Jan Mayen");
+    namesMap.put("SL", "Sierra Leona");
     namesMap.put("SR", "Surinam");
     namesMap.put("SS", "Suðursudan");
-    namesMap.put("ST", "Sao Tome og Prinsipi");
-    namesMap.put("SX", "Niðurlonds Saint Martin");
+    namesMap.put("ST", "Sao Tome & Prinsipi");
+    namesMap.put("SY", "Sýria");
     namesMap.put("SZ", "Svasiland");
-    namesMap.put("TC", "Turks- og Caicosoyggjarnar");
+    namesMap.put("TC", "Turks- og Caicosoyggjar");
     namesMap.put("TD", "Kjad");
-    namesMap.put("TH", "Teiland");
+    namesMap.put("TF", "Fronsku sunnaru landaøki");
+    namesMap.put("TH", "Tailand");
     namesMap.put("TJ", "Tadsjikistan");
-    namesMap.put("TL", "Eystur-Timor");
+    namesMap.put("TL", "Eysturtimor");
     namesMap.put("TN", "Tunesia");
     namesMap.put("TR", "Turkaland");
-    namesMap.put("TT", "Trinidad og Tobago");
-    namesMap.put("TW", "Teivan");
+    namesMap.put("TW", "Taivan");
     namesMap.put("TZ", "Tansania");
-    namesMap.put("UA", "Ukreina");
+    namesMap.put("UA", "Ukraina");
+    namesMap.put("UM", "Sambandsríki Amerikas fjarskotnu oyggjar");
+    namesMap.put("UN", "Sameindu Tjóðir");
     namesMap.put("US", "Sambandsríki Amerika");
-    namesMap.put("UY", "Uruguei");
+    namesMap.put("UY", "Uruguai");
     namesMap.put("UZ", "Usbekistan");
-    namesMap.put("VA", "Vatikan");
-    namesMap.put("VC", "Saint Vinsent og Grenadinoyggjar");
+    namesMap.put("VA", "Vatikanbýur");
+    namesMap.put("VC", "St. Vinsent & Grenadinoyggjar");
     namesMap.put("VE", "Venesuela");
-    namesMap.put("VG", "Stóra Bretlands Jómfrúoyggjarnar");
-    namesMap.put("VI", "Sambandsríki Amerikas Jómfrúoyggjarnar");
-    namesMap.put("WF", "Wallis og Futuna");
-    namesMap.put("WS", "Sámoa");
+    namesMap.put("VG", "Stóra Bretlands Jomfrúoyggjar");
+    namesMap.put("VI", "Sambandsríki Amerikas Jomfrúoyggjar");
+    namesMap.put("VN", "Vjetnam");
+    namesMap.put("WF", "Wallis- og Futunaoyggjar");
     namesMap.put("YE", "Jemen");
-    namesMap.put("ZA", "Suðurafrikalýðveldið");
+    namesMap.put("ZA", "Suðurafrika");
     namesMap.put("ZM", "Sambia");
     namesMap.put("ZW", "Simbabvi");
-    namesMap.put("ZZ", "(ukendt område)");
+    namesMap.put("ZZ", "ókent øki");
   }
 
   @Override
@@ -497,75 +500,78 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
         "001": "heimur",
+        "002": "Afrika",
         "003": "Norðuramerika",
         "005": "Suðuramerika",
-        "009": "Kyrrahavsoyggjarnar",
+        "009": "Osiania",
         "011": "Vesturafrika",
-        "013": "Sentralamerika",
+        "013": "Miðamerika",
         "014": "Eysturafrika",
         "015": "Norðurafrika",
         "017": "Miðafrika",
-        "018": "Suður Afrika",
+        "018": "sunnari partur av Afrika",
         "019": "Amerika",
-        "021": "Amerika norður Meksiko",
+        "021": "Amerika norðanfyri Meksiko",
         "029": "Karibia",
         "030": "Eysturasia",
         "034": "Suðurasia",
-        "035": "Suðureysturasia",
+        "035": "Útsynningsasia",
         "039": "Suðurevropa",
-        "053": "Avstralia og Nýsæland",
-        "057": "Mikronesiske regionen",
-        "143": "Sentralasia",
+        "053": "Avstralasia",
+        "057": "Mikronesi øki",
+        "143": "Miðasia",
         "145": "Vesturasia",
         "150": "Evropa",
         "151": "Eysturevropa",
         "154": "Norðurevropa",
         "155": "Vesturevropa",
         "419": "Latínamerika",
-        "AC": "Ascensionoyggjin",
+        "AC": "Ascension",
         "AE": "Sameindu Emirríkini",
         "AF": "Afganistan",
-        "AG": "Antigua og Barbuda",
-        "AN": "Niðurlendsku Antilloyggjarnar",
         "AQ": "Antarktis",
-        "AS": "Amerikanska Sámoa",
+        "AS": "Amerikanska Samoa",
         "AT": "Eysturríki",
         "AU": "Avstralia",
         "AX": "Áland",
-        "AZ": "Aserbajdsjan",
+        "AZ": "Aserbadjan",
         "BA": "Bosnia-Hersegovina",
         "BD": "Bangladesj",
         "BE": "Belgia",
+        "BH": "Barein",
+        "BL": "St-Barthélemy",
         "BQ": "Niðurlonds Karibia",
-        "BR": "Brasilia",
+        "BR": "Brasil",
+        "BS": "Bahamaoyggjar",
         "BT": "Butan",
-        "BV": "Bouvetoyggjin",
+        "BV": "Bouvetoyggj",
         "BW": "Botsvana",
         "BY": "Hvítarussland",
         "BZ": "Belis",
         "CA": "Kanada",
-        "CC": "Kokosoyggjarnar",
-        "CD": "Kongo-Kinshasa",
+        "CC": "Kokosoyggjar",
+        "CD": "Kongo, Dem. Lýðveldið",
         "CF": "Miðafrikalýðveldið",
         "CG": "Kongo",
         "CH": "Sveis",
         "CI": "Fílabeinsstrondin",
-        "CK": "Cooksoyggjarnar",
+        "CK": "Cooksoyggjar",
         "CL": "Kili",
         "CM": "Kamerun",
         "CN": "Kina",
         "CO": "Kolombia",
-        "CP": "Clippertonoyggjin",
+        "CP": "Clipperton",
         "CR": "Kosta Rika",
         "CU": "Kuba",
-        "CV": "Grønhøvdaoyggjarnar",
+        "CV": "Grønhøvdaoyggjar",
         "CX": "Jólaoyggjin",
         "CY": "Kýpros",
         "CZ": "Kekkia",
         "DE": "Týskland",
-        "DK": "Danmørk",
+        "DJ": "Djibuti",
+        "DK": "Danmark",
         "DM": "Dominika",
-        "DO": "Domingo lýðveldið",
+        "DO": "Dominikalýðveldið",
         "EA": "Ceuta og Melilla",
         "EC": "Ekvador",
         "EE": "Estland",
@@ -574,123 +580,122 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "ES": "Spania",
         "ET": "Etiopia",
         "EU": "Evropasamveldið",
+        "EZ": "Evrasona",
         "FI": "Finnland",
-        "FK": "Falklandsoyggjarnar",
-        "FM": "Mikronesia",
+        "FK": "Falklandsoyggjar",
+        "FM": "Mikronesiasamveldið",
         "FO": "Føroyar",
         "FR": "Frakland",
-        "GB": "Stóra Bretland",
-        "GF": "Fransk Gujana",
+        "GB": "Stórabretland",
+        "GF": "Franska Gujana",
+        "GH": "Gana",
         "GL": "Grønland",
-        "GQ": "Ekvator Guinea",
+        "GQ": "Ekvatorguinea",
         "GR": "Grikkaland",
-        "GS": "Suðurgeorgia",
-        "GW": "Guinea Bissau",
+        "GS": "Suðurgeorgia og Suðursandwichoyggjar",
         "GY": "Gujana",
-        "HK": "Hongkong",
-        "HM": "Heard- og McDonald-oyggjarnar",
+        "HK": "Hong Kong SAR Kina",
+        "HM": "Heard og McDonaldoyggjar",
         "HR": "Kroatia",
         "HU": "Ungarn",
-        "IC": "Kanaríoyggjarnar",
+        "IC": "Kanariuoyggjar",
         "IE": "Írland",
         "IL": "Ísrael",
-        "IM": "Mann",
-        "IO": "Bretsku Indiahavsoyggjarnar",
+        "IO": "Stóra Bretlands Indiahavoyggjar",
         "IQ": "Irak",
         "IS": "Ísland",
         "IT": "Italia",
-        "JM": "Jameika",
-        "JO": "Jordania",
+        "JM": "Jamaika",
         "KE": "Kenja",
         "KG": "Kirgisia",
         "KH": "Kambodja",
-        "KM": "Komorooyggjarnar",
-        "KN": "Saint Kitts og Nevis",
-        "KP": "Norður-Korea",
-        "KR": "Suður-Korea",
+        "KM": "Komoroyggjar",
+        "KP": "Norðurkorea",
+        "KR": "Suðurkorea",
         "KW": "Kuvait",
-        "KY": "Caymanoyggjarnar",
+        "KY": "Caymanoyggjar",
         "KZ": "Kasakstan",
         "LB": "Libanon",
-        "LC": "Saint Lusia",
-        "LI": "Liktenstein",
+        "LC": "St. Lusia",
+        "LI": "Liktinstein",
         "LS": "Lesoto",
         "LT": "Litava",
         "LU": "Luksemborg",
         "LV": "Lettland",
         "MA": "Marokko",
         "MC": "Monako",
-        "MF": "Fransk Saint Martin",
+        "MF": "St-Martin",
         "MG": "Madagaskar",
-        "MH": "Marshalloyggjarnar",
+        "MH": "Marshalloyggjar",
         "MK": "Makedónia",
-        "MM": "Burma",
-        "MO": "Makao",
-        "MP": "Norðurmarianoyggjarnar",
+        "MO": "Makao SAR Kina",
+        "MP": "Norðaru Mariuoyggjar",
         "MR": "Móritania",
         "MU": "Móritius",
-        "MV": "Maldivuoyggjarnar",
+        "MV": "Maldivoyggjar",
         "MW": "Malavi",
         "MX": "Meksiko",
-        "MY": "Maleisia",
+        "MY": "Malaisia",
         "MZ": "Mosambik",
-        "NC": "Ný-Kaledonia",
-        "NF": "Norfolkoyggjin",
+        "NC": "Nýkaledónia",
+        "NF": "Norfolksoyggj",
         "NI": "Nikaragua",
         "NL": "Niðurlond",
         "NO": "Noreg",
-        "NZ": "Ný Sæland",
-        "PE": "Perú",
+        "NZ": "Nýsæland",
         "PF": "Franska Polynesia",
         "PG": "Papua Nýguinea",
         "PH": "Filipsoyggjar",
         "PL": "Pólland",
         "PM": "Saint Pierre og Miquelon",
-        "PN": "Pitcairn",
-        "PS": "Palestinskt territorium",
-        "PY": "Paraguei",
+        "PN": "Pitcairnoyggjar",
+        "PR": "Puerto Riko",
+        "PS": "Palestinskt landøki",
+        "PY": "Paraguai",
         "QA": "Katar",
+        "QO": "fjarskoti Osiania",
         "RO": "Rumenia",
         "RU": "Russland",
         "RW": "Ruanda",
-        "SA": "Saudi-Arábia",
-        "SB": "Sálomonoyggjarnar",
-        "SC": "Seyskelloyggjarnar",
-        "SD": "Norðursudan",
+        "SA": "Saudiarabia",
+        "SB": "Salomonoyggjar",
+        "SC": "Seyskelloyggjar",
         "SE": "Svøríki",
         "SG": "Singapor",
-        "SJ": "Svalbard og Jan Mayen",
+        "SL": "Sierra Leona",
         "SR": "Surinam",
         "SS": "Suðursudan",
-        "ST": "Sao Tome og Prinsipi",
-        "SX": "Niðurlonds Saint Martin",
+        "ST": "Sao Tome & Prinsipi",
+        "SY": "Sýria",
         "SZ": "Svasiland",
-        "TC": "Turks- og Caicosoyggjarnar",
+        "TC": "Turks- og Caicosoyggjar",
         "TD": "Kjad",
-        "TH": "Teiland",
+        "TF": "Fronsku sunnaru landaøki",
+        "TH": "Tailand",
         "TJ": "Tadsjikistan",
-        "TL": "Eystur-Timor",
+        "TL": "Eysturtimor",
         "TN": "Tunesia",
         "TR": "Turkaland",
-        "TT": "Trinidad og Tobago",
-        "TW": "Teivan",
+        "TW": "Taivan",
         "TZ": "Tansania",
-        "UA": "Ukreina",
+        "UA": "Ukraina",
+        "UM": "Sambandsríki Amerikas fjarskotnu oyggjar",
+        "UN": "Sameindu Tjóðir",
         "US": "Sambandsríki Amerika",
-        "UY": "Uruguei",
+        "UY": "Uruguai",
         "UZ": "Usbekistan",
-        "VA": "Vatikan",
-        "VC": "Saint Vinsent og Grenadinoyggjar",
+        "VA": "Vatikanbýur",
+        "VC": "St. Vinsent & Grenadinoyggjar",
         "VE": "Venesuela",
-        "VG": "Stóra Bretlands Jómfrúoyggjarnar",
-        "VI": "Sambandsríki Amerikas Jómfrúoyggjarnar",
-        "WF": "Wallis og Futuna",
-        "WS": "Sámoa",
+        "VG": "Stóra Bretlands Jomfrúoyggjar",
+        "VI": "Sambandsríki Amerikas Jomfrúoyggjar",
+        "VN": "Vjetnam",
+        "WF": "Wallis- og Futunaoyggjar",
         "YE": "Jemen",
-        "ZA": "Suðurafrikalýðveldið",
+        "ZA": "Suðurafrika",
         "ZM": "Sambia",
         "ZW": "Simbabvi",
-        "ZZ": "(ukendt område)"
+        "ZZ": "ókent øki"
     };
   }-*/;
 }

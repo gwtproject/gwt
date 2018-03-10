@@ -31,24 +31,29 @@ public class DateTimeFormatInfoImpl_my extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatFull() {
-    return "EEEE, y MMMM dd";
+    return "y၊ MMMM d၊ EEEE";
+  }
+
+  @Override
+  public String dateFormatLong() {
+    return "y၊ d MMMM";
+  }
+
+  @Override
+  public String dateFormatMedium() {
+    return "y၊ MMM d";
   }
 
   @Override
   public String dateFormatShort() {
-    return "yy/MM/dd";
-  }
-
-  @Override
-  public String dateTimeFull(String timePattern, String datePattern) {
-    return datePattern + "မှာ " + timePattern;
+    return "dd-MM-yy";
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "ခရစ်တော် မပေါ်မီကာလ",
-        "ခရစ်တော် ပေါ်ထွန်းပြီးကာလ"
+        "ခရစ်တော် မပေါ်မီနှစ်",
+        "ခရစ်နှစ်"
     };
   }
 
@@ -66,23 +71,68 @@ public class DateTimeFormatInfoImpl_my extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatHour12Minute() {
+    return "a h:mm";
+  }
+
+  @Override
+  public String formatHour12MinuteSecond() {
+    return "a h:mm:ss";
+  }
+
+  @Override
+  public String formatHour24Minute() {
+    return "B H:mm";
+  }
+
+  @Override
+  public String formatHour24MinuteSecond() {
+    return "B HH:mm:ss";
+  }
+
+  @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
+  }
+
+  @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
+    return "MMMM d ရက် EEEEနေ့";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M/d";
+    return "d/M";
+  }
+
+  @Override
+  public String formatYearMonthAbbrev() {
+    return "MMM y";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "y၊ MMM d";
+  }
+
+  @Override
+  public String formatYearMonthFullDay() {
+    return "y၊ d MMMM";
   }
 
   @Override
   public String formatYearMonthNum() {
-    return "y/M";
+    return "M/y";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "dd-MM-y";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, y MMM d";
+    return "y၊ MMM d၊ EEE";
   }
 
   @Override
@@ -124,18 +174,18 @@ public class DateTimeFormatInfoImpl_my extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "ဇန်နဝါရီ",
-        "ဖေဖော်ဝါရီ",
+        "ဇန်",
+        "ဖေ",
         "မတ်",
-        "ဧပြီ",
+        "ဧ",
         "မေ",
         "ဇွန်",
-        "ဇူလိုင်",
-        "ဩဂုတ်",
-        "စက်တင်ဘာ",
-        "အောက်တိုဘာ",
-        "နိုဝင်ဘာ",
-        "ဒီဇင်ဘာ"
+        "ဇူ",
+        "ဩ",
+        "စက်",
+        "အောက်",
+        "နို",
+        "ဒီ"
     };
   }
 
@@ -157,6 +207,26 @@ public class DateTimeFormatInfoImpl_my extends DateTimeFormatInfoImpl {
         "တတိယ သုံးလပတ်",
         "စတုတ္ထ သုံးလပတ်"
     };
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "zzzz HH:mm:ss";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "z HH:mm:ss";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "B HH:mm:ss";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "B H:mm";
   }
 
   @Override

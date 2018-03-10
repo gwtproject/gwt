@@ -15,14 +15,12 @@
  */
 package com.google.gwt.i18n.client.impl.cldr;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 // DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "zh_Hans_HK" locale.
  */
-public class LocalizedNamesImpl_zh_Hans_HK extends LocalizedNamesImpl_zh_Hans {
+public class LocalizedNamesImpl_zh_Hans_HK extends LocalizedNamesImpl_zh {
 
   @Override
   public String[] loadSortedRegionCodes() {
@@ -181,7 +179,6 @@ public class LocalizedNamesImpl_zh_Hans_HK extends LocalizedNamesImpl_zh_Hans {
         "RE",
         "PE",
         "SO",
-        "IM",
         "KI",
         "FM",
         "CZ",
@@ -189,7 +186,6 @@ public class LocalizedNamesImpl_zh_Hans_HK extends LocalizedNamesImpl_zh_Hans {
         "MZ",
         "NL",
         "BQ",
-        "AN",
         "SX",
         "BW",
         "CM",
@@ -257,6 +253,7 @@ public class LocalizedNamesImpl_zh_Hans_HK extends LocalizedNamesImpl_zh_Hans {
         "CK",
         "CW",
         "KY",
+        "EZ",
         "EU",
         "TO",
         "JE",
@@ -267,6 +264,7 @@ public class LocalizedNamesImpl_zh_Hans_HK extends LocalizedNamesImpl_zh_Hans {
         "NU",
         "MM",
         "RO",
+        "UN",
         "SD",
         "SR",
         "LS",
@@ -280,6 +278,7 @@ public class LocalizedNamesImpl_zh_Hans_HK extends LocalizedNamesImpl_zh_Hans {
         "ML",
         "MK",
         "MW",
+        "IM",
         "MQ",
         "MV",
         "MY",
@@ -288,25 +287,4 @@ public class LocalizedNamesImpl_zh_Hans_HK extends LocalizedNamesImpl_zh_Hans {
         "MG",
     };
   }
-
-  @Override
-  protected void loadNameMapJava() {
-    super.loadNameMapJava();
-    namesMap.put("GP", "瓜德罗普岛");
-    namesMap.put("ME", "黑山");
-    namesMap.put("PM", "圣皮埃尔和密克隆");
-  }
-
-  @Override
-  protected JavaScriptObject loadNameMapNative() {
-    return overrideMap(super.loadNameMapNative(), loadMyNameMap());
-  }
-
-  private native JavaScriptObject loadMyNameMap() /*-{
-    return {
-        "GP": "瓜德罗普岛",
-        "ME": "黑山",
-        "PM": "圣皮埃尔和密克隆"
-    };
-  }-*/;
 }

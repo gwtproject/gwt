@@ -22,6 +22,14 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_ta extends DateTimeFormatInfoImpl {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "முற்பகல்",
+        "பிற்பகல்"
+    };
+  }
+
+  @Override
   public String dateFormatFull() {
     return "EEEE, d MMMM, y";
   }
@@ -38,14 +46,34 @@ public class DateTimeFormatInfoImpl_ta extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "d-M-yy";
+    return "d/M/yy";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " ’அன்று’ " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " ’அன்று’ " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
         "கிறிஸ்துவுக்கு முன்",
-        "அனோ டோமினி"
+        "அன்னோ டோமினி"
     };
   }
 
@@ -60,6 +88,16 @@ public class DateTimeFormatInfoImpl_ta extends DateTimeFormatInfoImpl {
   @Override
   public int firstDayOfTheWeek() {
     return 0;
+  }
+
+  @Override
+  public String formatHour12Minute() {
+    return "a h:mm";
+  }
+
+  @Override
+  public String formatHour12MinuteSecond() {
+    return "a h:mm:ss";
   }
 
   @Override
@@ -136,24 +174,6 @@ public class DateTimeFormatInfoImpl_ta extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] monthsFullStandalone() {
-    return new String[] {
-        "ஜனவரி",
-        "பிப்ரவரி",
-        "மார்ச்",
-        "ஏப்ரல்",
-        "மே",
-        "ஜூன்",
-        "ஜூலை",
-        "ஆகஸ்டு",
-        "செப்டம்பர்",
-        "அக்டோபர்",
-        "நவம்பர்",
-        "டிசம்பர்"
-    };
-  }
-
-  @Override
   public String[] monthsNarrow() {
     return new String[] {
         "ஜ",
@@ -192,7 +212,7 @@ public class DateTimeFormatInfoImpl_ta extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "முதல் காலாண்டு",
+        "ஒன்றாம் காலாண்டு",
         "இரண்டாம் காலாண்டு",
         "மூன்றாம் காலாண்டு",
         "நான்காம் காலாண்டு"
@@ -202,31 +222,31 @@ public class DateTimeFormatInfoImpl_ta extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "காலாண்டு1",
-        "காலாண்டு2",
-        "காலாண்டு3",
-        "காலாண்டு4"
+        "காலா.1",
+        "காலா.2",
+        "காலா.3",
+        "காலா.4"
     };
   }
 
   @Override
   public String timeFormatFull() {
-    return "h:mm:ss a zzzz";
+    return "a h:mm:ss zzzz";
   }
 
   @Override
   public String timeFormatLong() {
-    return "h:mm:ss a z";
+    return "a h:mm:ss z";
   }
 
   @Override
   public String timeFormatMedium() {
-    return "h:mm:ss a";
+    return "a h:mm:ss";
   }
 
   @Override
   public String timeFormatShort() {
-    return "h:mm a";
+    return "a h:mm";
   }
 
   @Override
@@ -258,13 +278,13 @@ public class DateTimeFormatInfoImpl_ta extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "ஞா",
-        "தி",
-        "செ",
-        "பு",
-        "வி",
-        "வெ",
-        "ச"
+        "ஞாயி.",
+        "திங்.",
+        "செவ்.",
+        "புத.",
+        "வியா.",
+        "வெள்.",
+        "சனி"
     };
   }
 

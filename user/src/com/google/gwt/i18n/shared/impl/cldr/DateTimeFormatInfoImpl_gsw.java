@@ -24,8 +24,8 @@ public class DateTimeFormatInfoImpl_gsw extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "v.m.",
-        "n.m."
+        "vorm.",
+        "nam."
     };
   }
 

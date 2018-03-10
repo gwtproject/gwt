@@ -22,32 +22,6 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_ur_IN extends DateTimeFormatInfoImpl_ur {
 
   @Override
-  public String[] weekdaysFull() {
-    return new String[] {
-        "اتوار",
-        "پیر",
-        "منگل",
-        "بدھ",
-        "جمعرات",
-        "جمعہ",
-        "ہفتہ"
-    };
-  }
-
-  @Override
-  public String[] weekdaysShort() {
-    return new String[] {
-        "اتوار",
-        "پیر",
-        "منگل",
-        "بدھ",
-        "جمعرات",
-        "جمعہ",
-        "ہفتہ"
-    };
-  }
-
-  @Override
   public int weekendStart() {
     return 0;
   }

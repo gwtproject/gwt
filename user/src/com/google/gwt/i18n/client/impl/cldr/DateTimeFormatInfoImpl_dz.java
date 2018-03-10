@@ -91,11 +91,6 @@ public class DateTimeFormatInfoImpl_dz extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatMonthFullDay() {
-    return "སྤྱི་LLLL ཚེ་d";
-  }
-
-  @Override
   public String formatMonthFullWeekdayDay() {
     return "EEEE, སྤྱི་LLLL ཚེ་d";
   }
@@ -111,11 +106,6 @@ public class DateTimeFormatInfoImpl_dz extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatYearMonthFull() {
-    return "y སྤྱི་ཟླ་MMMM";
-  }
-
-  @Override
   public String formatYearMonthFullDay() {
     return "སྤྱི་ལོ་y MMMM ཚེས་ d";
   }
@@ -123,11 +113,6 @@ public class DateTimeFormatInfoImpl_dz extends DateTimeFormatInfoImpl {
   @Override
   public String formatYearMonthNum() {
     return "y-M";
-  }
-
-  @Override
-  public String formatYearMonthNumDay() {
-    return "y-M-d";
   }
 
   @Override

@@ -66,58 +66,13 @@ public class DateTimeFormatInfoImpl_sah extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
-  }
-
-  @Override
-  public String formatMonthNumDay() {
-    return "M/d";
-  }
-
-  @Override
-  public String formatYearMonthAbbrev() {
-    return "MMM y";
-  }
-
-  @Override
-  public String formatYearMonthAbbrevDay() {
-    return "MMM d, y";
-  }
-
-  @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
-  }
-
-  @Override
   public String formatYearMonthFullDay() {
-    return "MMMM d, y";
-  }
-
-  @Override
-  public String formatYearMonthNum() {
-    return "M/y";
+    return "y, MMMM d";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "M/d/y";
-  }
-
-  @Override
-  public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
-  }
-
-  @Override
-  public String formatYearQuarterFull() {
-    return "QQQQ y";
-  }
-
-  @Override
-  public String formatYearQuarterShort() {
-    return "Q y";
+    return "y-MM-dd";
   }
 
   @Override
@@ -134,7 +89,25 @@ public class DateTimeFormatInfoImpl_sah extends DateTimeFormatInfoImpl {
         "Балаҕан ыйын",
         "Алтынньы",
         "Сэтинньи",
-        "Ахсынньы"
+        "ахсынньы"
+    };
+  }
+
+  @Override
+  public String[] monthsFullStandalone() {
+    return new String[] {
+        "тохсунньу",
+        "олунньу",
+        "кулун тутар",
+        "муус устар",
+        "ыам ыйа",
+        "бэс ыйа",
+        "от ыйа",
+        "атырдьых ыйа",
+        "балаҕан ыйа",
+        "алтынньы",
+        "сэтинньи",
+        "ахсынньы"
     };
   }
 
@@ -161,13 +134,13 @@ public class DateTimeFormatInfoImpl_sah extends DateTimeFormatInfoImpl {
     return new String[] {
         "Тохс",
         "Олун",
-        "Клн_ттр",
-        "Мус_уст",
-        "Ыам_йн",
-        "Бэс_йн",
-        "От_йн",
-        "Атрдь_йн",
-        "Блҕн_йн",
+        "Клн",
+        "Мсу",
+        "Ыам",
+        "Бэс",
+        "Отй",
+        "Атр",
+        "Блҕ",
         "Алт",
         "Сэт",
         "Ахс"
@@ -197,13 +170,13 @@ public class DateTimeFormatInfoImpl_sah extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "Баскыһыанньа",
-        "Бэнидиэлинньик",
-        "Оптуорунньук",
-        "Сэрэдэ",
-        "Чэппиэр",
+        "баскыһыанньа",
+        "бэнидиэнньик",
+        "оптуорунньук",
+        "сэрэдэ",
+        "чэппиэр",
         "Бээтиҥсэ",
-        "Субуота"
+        "субуота"
     };
   }
 
@@ -223,13 +196,13 @@ public class DateTimeFormatInfoImpl_sah extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "Бс",
-        "Бн",
-        "Оп",
-        "Сэ",
-        "Чп",
-        "Бэ",
-        "Сб"
+        "бс",
+        "бн",
+        "оп",
+        "сэ",
+        "чп",
+        "бэ",
+        "сб"
     };
   }
 }

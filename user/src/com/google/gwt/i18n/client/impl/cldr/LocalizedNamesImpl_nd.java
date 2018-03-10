@@ -100,6 +100,7 @@ public class LocalizedNamesImpl_nd extends LocalizedNamesImpl {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FK",
         "FJ",
         "FI",
@@ -193,7 +194,6 @@ public class LocalizedNamesImpl_nd extends LocalizedNamesImpl {
         "NR",
         "NP",
         "NL",
-        "AN",
         "NC",
         "NZ",
         "NI",
@@ -272,6 +272,7 @@ public class LocalizedNamesImpl_nd extends LocalizedNamesImpl {
         "VI",
         "UG",
         "UM",
+        "UN",
         "AE",
         "GB",
         "UZ",
@@ -321,10 +322,10 @@ public class LocalizedNamesImpl_nd extends LocalizedNamesImpl {
     namesMap.put("CO", "Kholombiya");
     namesMap.put("CR", "Khosta Rikha");
     namesMap.put("CV", "Cape Verde Islands");
+    namesMap.put("CZ", "Czech Republic");
     namesMap.put("DK", "Denmakhi");
     namesMap.put("DM", "Dominikha");
     namesMap.put("DZ", "Aljeriya");
-    namesMap.put("FK", "Falkland Islands");
     namesMap.put("FR", "Furansi");
     namesMap.put("GA", "Gabhoni");
     namesMap.put("GF", "Gwiyana ye Furansi");
@@ -339,14 +340,15 @@ public class LocalizedNamesImpl_nd extends LocalizedNamesImpl {
     namesMap.put("KE", "Khenya");
     namesMap.put("KI", "Khiribati");
     namesMap.put("KM", "Khomoro");
+    namesMap.put("KN", "Saint Kitts and Nevis");
     namesMap.put("KW", "Khuweiti");
     namesMap.put("LB", "Lebhanoni");
+    namesMap.put("LC", "Saint Lucia");
     namesMap.put("LR", "Libheriya");
     namesMap.put("LY", "Libhiya");
     namesMap.put("MA", "Morokho");
     namesMap.put("MC", "Monakho");
     namesMap.put("MG", "Madagaska");
-    namesMap.put("MK", "Macedonia");
     namesMap.put("MM", "Myanmar");
     namesMap.put("MX", "Meksikho");
     namesMap.put("MY", "Malezhiya");
@@ -359,14 +361,18 @@ public class LocalizedNamesImpl_nd extends LocalizedNamesImpl {
     namesMap.put("PF", "Pholinesiya ye Fulansi");
     namesMap.put("PK", "Phakistani");
     namesMap.put("PL", "Pholandi");
+    namesMap.put("PM", "Saint Pierre and Miquelon");
     namesMap.put("PN", "Pitcairn");
     namesMap.put("PS", "Palestinian West Bank and Gaza");
     namesMap.put("QA", "Kathari");
     namesMap.put("RU", "Rashiya");
     namesMap.put("RW", "Ruwanda");
     namesMap.put("SD", "Sudani");
+    namesMap.put("SH", "Saint Helena");
     namesMap.put("SN", "Senegali");
     namesMap.put("SO", "Somaliya");
+    namesMap.put("ST", "São Tomé and Príncipe");
+    namesMap.put("TC", "Turks and Caicos Islands");
     namesMap.put("TD", "Chadi");
     namesMap.put("TG", "Thogo");
     namesMap.put("TH", "Thayilandi");
@@ -385,6 +391,7 @@ public class LocalizedNamesImpl_nd extends LocalizedNamesImpl {
     namesMap.put("VA", "Vatican State");
     namesMap.put("VC", "Saint Vincent and the Grenadines");
     namesMap.put("VU", "Vhanuatu");
+    namesMap.put("WF", "Wallis and Futuna");
     namesMap.put("WS", "Samowa");
     namesMap.put("YE", "Yemeni");
     namesMap.put("ZA", "Mzansi ye Afrika");
@@ -427,10 +434,10 @@ public class LocalizedNamesImpl_nd extends LocalizedNamesImpl {
         "CO": "Kholombiya",
         "CR": "Khosta Rikha",
         "CV": "Cape Verde Islands",
+        "CZ": "Czech Republic",
         "DK": "Denmakhi",
         "DM": "Dominikha",
         "DZ": "Aljeriya",
-        "FK": "Falkland Islands",
         "FR": "Furansi",
         "GA": "Gabhoni",
         "GF": "Gwiyana ye Furansi",
@@ -445,14 +452,15 @@ public class LocalizedNamesImpl_nd extends LocalizedNamesImpl {
         "KE": "Khenya",
         "KI": "Khiribati",
         "KM": "Khomoro",
+        "KN": "Saint Kitts and Nevis",
         "KW": "Khuweiti",
         "LB": "Lebhanoni",
+        "LC": "Saint Lucia",
         "LR": "Libheriya",
         "LY": "Libhiya",
         "MA": "Morokho",
         "MC": "Monakho",
         "MG": "Madagaska",
-        "MK": "Macedonia",
         "MM": "Myanmar",
         "MX": "Meksikho",
         "MY": "Malezhiya",
@@ -465,14 +473,18 @@ public class LocalizedNamesImpl_nd extends LocalizedNamesImpl {
         "PF": "Pholinesiya ye Fulansi",
         "PK": "Phakistani",
         "PL": "Pholandi",
+        "PM": "Saint Pierre and Miquelon",
         "PN": "Pitcairn",
         "PS": "Palestinian West Bank and Gaza",
         "QA": "Kathari",
         "RU": "Rashiya",
         "RW": "Ruwanda",
         "SD": "Sudani",
+        "SH": "Saint Helena",
         "SN": "Senegali",
         "SO": "Somaliya",
+        "ST": "São Tomé and Príncipe",
+        "TC": "Turks and Caicos Islands",
         "TD": "Chadi",
         "TG": "Thogo",
         "TH": "Thayilandi",
@@ -491,6 +503,7 @@ public class LocalizedNamesImpl_nd extends LocalizedNamesImpl {
         "VA": "Vatican State",
         "VC": "Saint Vincent and the Grenadines",
         "VU": "Vhanuatu",
+        "WF": "Wallis and Futuna",
         "WS": "Samowa",
         "YE": "Yemeni",
         "ZA": "Mzansi ye Afrika",

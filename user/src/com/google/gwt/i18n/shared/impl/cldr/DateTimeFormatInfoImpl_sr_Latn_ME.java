@@ -22,7 +22,62 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_sr_Latn_ME extends DateTimeFormatInfoImpl_sr_Latn {
 
   @Override
-  public String dateFormatLong() {
-    return "d.MM.y.";
+  public String[] ampms() {
+    return new String[] {
+        "prije podne",
+        "po podne"
+    };
+  }
+
+  @Override
+  public String[] erasFull() {
+    return new String[] {
+        "prije nove ere",
+        "nove ere"
+    };
+  }
+
+  @Override
+  public String[] monthsShort() {
+    return new String[] {
+        "jan.",
+        "feb.",
+        "mart",
+        "apr.",
+        "maj",
+        "jun",
+        "jul",
+        "avg.",
+        "sept.",
+        "okt.",
+        "nov.",
+        "dec."
+    };
+  }
+
+  @Override
+  public String[] weekdaysFull() {
+    return new String[] {
+        "nedjelja",
+        "ponedeljak",
+        "utorak",
+        "srijeda",
+        "četvrtak",
+        "petak",
+        "subota"
+    };
+  }
+
+  @Override
+  public String[] weekdaysShort() {
+    return new String[] {
+        "ned.",
+        "pon.",
+        "ut.",
+        "sr.",
+        "čet.",
+        "pet.",
+        "sub."
+    };
   }
 }

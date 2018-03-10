@@ -66,11 +66,6 @@ public class DateTimeFormatInfoImpl_nus extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public int firstDayOfTheWeek() {
-    return 6;
-  }
-
-  @Override
   public String formatMinuteSecond() {
     return "m:ss";
   }
@@ -78,11 +73,6 @@ public class DateTimeFormatInfoImpl_nus extends DateTimeFormatInfoImpl {
   @Override
   public String formatMonthAbbrevDay() {
     return "d MMM";
-  }
-
-  @Override
-  public String formatMonthFullDay() {
-    return "d MMMM";
   }
 
   @Override
@@ -103,11 +93,6 @@ public class DateTimeFormatInfoImpl_nus extends DateTimeFormatInfoImpl {
   @Override
   public String formatYearMonthAbbrevDay() {
     return "d MMM y";
-  }
-
-  @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
   }
 
   @Override
@@ -271,15 +256,5 @@ public class DateTimeFormatInfoImpl_nus extends DateTimeFormatInfoImpl {
         "Dhieec",
         "Bäkɛl"
     };
-  }
-
-  @Override
-  public int weekendEnd() {
-    return 6;
-  }
-
-  @Override
-  public int weekendStart() {
-    return 5;
   }
 }

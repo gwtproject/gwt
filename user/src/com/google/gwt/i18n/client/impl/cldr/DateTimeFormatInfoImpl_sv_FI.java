@@ -22,12 +22,17 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_sv_FI extends DateTimeFormatInfoImpl_sv {
 
   @Override
-  public String dateFormatFull() {
-    return "EEEE'en' 'den' d:'e' MMMM y";
+  public String dateFormatShort() {
+    return "dd-MM-y";
   }
 
   @Override
-  public String dateFormatShort() {
-    return "dd-MM-y";
+  public String[] quartersShort() {
+    return new String[] {
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4"
+    };
   }
 }

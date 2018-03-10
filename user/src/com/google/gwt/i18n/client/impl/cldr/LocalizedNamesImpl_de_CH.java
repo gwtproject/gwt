@@ -59,6 +59,7 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
         "BM",
         "BT",
         "BO",
+        "BQ",
         "BA",
         "BW",
         "BV",
@@ -78,17 +79,17 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
         "CI",
         "CW",
         "DK",
-        "KP",
         "DE",
         "DG",
-        "DJ",
         "DM",
         "DO",
+        "DJ",
         "EC",
         "SV",
         "ER",
         "EE",
         "EU",
+        "EZ",
         "FK",
         "FO",
         "FJ",
@@ -136,7 +137,6 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
         "CA",
         "IC",
         "CV",
-        "BQ",
         "KZ",
         "QA",
         "KE",
@@ -188,15 +188,16 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
         "NZ",
         "NI",
         "NL",
-        "AN",
         "NE",
         "NG",
         "NU",
+        "KP",
         "MP",
         "NF",
         "NO",
         "OM",
         "AT",
+        "TL",
         "PK",
         "PS",
         "PW",
@@ -209,12 +210,11 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
         "PL",
         "PT",
         "PR",
-        "KR",
         "MD",
         "RE",
+        "RW",
         "RO",
         "RU",
-        "RW",
         "SB",
         "ZM",
         "WS",
@@ -235,6 +235,7 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
         "HK",
         "MO",
         "ES",
+        "SJ",
         "LK",
         "BL",
         "SH",
@@ -246,16 +247,15 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
         "ZA",
         "SD",
         "GS",
+        "KR",
         "SS",
         "SR",
-        "SJ",
         "SZ",
         "SY",
         "TJ",
         "TW",
         "TZ",
         "TH",
-        "TL",
         "TG",
         "TK",
         "TO",
@@ -278,6 +278,7 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
         "VE",
         "AE",
         "US",
+        "UN",
         "VN",
         "WF",
         "CX",
@@ -292,18 +293,14 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
   @Override
   protected void loadNameMapJava() {
     super.loadNameMapJava();
-    namesMap.put("BD", "Bangladesh");
     namesMap.put("BN", "Brunei");
     namesMap.put("BW", "Botswana");
     namesMap.put("BY", "Weissrussland");
     namesMap.put("CV", "Kapverden");
-    namesMap.put("DJ", "Djibouti");
     namesMap.put("GB", "Grossbritannien");
-    namesMap.put("MH", "Marshall-Inseln");
     namesMap.put("QO", "Äusseres Ozeanien");
-    namesMap.put("RW", "Rwanda");
     namesMap.put("SB", "Salomon-Inseln");
-    namesMap.put("ST", "Sao Tomé und Principe");
+    namesMap.put("TL", "Osttimor");
     namesMap.put("ZW", "Zimbabwe");
   }
 
@@ -314,18 +311,14 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
 
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
-        "BD": "Bangladesh",
         "BN": "Brunei",
         "BW": "Botswana",
         "BY": "Weissrussland",
         "CV": "Kapverden",
-        "DJ": "Djibouti",
         "GB": "Grossbritannien",
-        "MH": "Marshall-Inseln",
         "QO": "Äusseres Ozeanien",
-        "RW": "Rwanda",
         "SB": "Salomon-Inseln",
-        "ST": "Sao Tomé und Principe",
+        "TL": "Osttimor",
         "ZW": "Zimbabwe"
     };
   }-*/;

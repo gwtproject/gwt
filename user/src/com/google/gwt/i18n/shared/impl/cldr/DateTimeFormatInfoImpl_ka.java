@@ -33,7 +33,7 @@ public class DateTimeFormatInfoImpl_ka extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "d MMM, y";
+    return "d MMM. y";
   }
 
   @Override
@@ -42,7 +42,17 @@ public class DateTimeFormatInfoImpl_ka extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
   public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
     return datePattern + ", " + timePattern;
   }
 
@@ -89,12 +99,12 @@ public class DateTimeFormatInfoImpl_ka extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrev() {
-    return "MMM, y";
+    return "MMM. y";
   }
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "d MMM, y";
+    return "d MMM. y";
   }
 
   @Override
@@ -119,7 +129,7 @@ public class DateTimeFormatInfoImpl_ka extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, d MMM, y";
+    return "EEE, d MMM. y";
   }
 
   @Override

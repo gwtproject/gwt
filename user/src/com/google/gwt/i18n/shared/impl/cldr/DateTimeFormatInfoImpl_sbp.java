@@ -91,11 +91,6 @@ public class DateTimeFormatInfoImpl_sbp extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
-  }
-
-  @Override
   public String formatYearMonthFullDay() {
     return "d MMMM y";
   }
@@ -197,26 +192,6 @@ public class DateTimeFormatInfoImpl_sbp extends DateTimeFormatInfoImpl {
         "L3",
         "L4"
     };
-  }
-
-  @Override
-  public String timeFormatFull() {
-    return "h:mm:ss a zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "h:mm:ss a z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "h:mm:ss a";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "h:mm a";
   }
 
   @Override

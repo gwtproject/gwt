@@ -31,12 +31,12 @@ public class DateTimeFormatInfoImpl_gd extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatFull() {
-    return "EEEE, d MMMM y";
+    return "EEEE, d'mh' MMMM y";
   }
 
   @Override
   public String dateFormatLong() {
-    return "d MMMM y";
+    return "d'mh' MMMM y";
   }
 
   @Override
@@ -52,8 +52,8 @@ public class DateTimeFormatInfoImpl_gd extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "Ro Chrìost",
-        "Anno Domini"
+        "Ro Chrìosta",
+        "An dèidh Chrìosta"
     };
   }
 
@@ -66,13 +66,28 @@ public class DateTimeFormatInfoImpl_gd extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatHour12Minute() {
+    return "h:mma";
+  }
+
+  @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "d'mh' MMMM";
+  }
+
+  @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
+    return "EEEE, d MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M/d";
+    return "d/M";
   }
 
   @Override
@@ -82,17 +97,17 @@ public class DateTimeFormatInfoImpl_gd extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "MMM d, y";
+    return "d MMM y";
   }
 
   @Override
   public String formatYearMonthFull() {
-    return "MMMM y";
+    return "LLLL y";
   }
 
   @Override
   public String formatYearMonthFullDay() {
-    return "MMMM d, y";
+    return "d'mh' MMMM y";
   }
 
   @Override
@@ -107,7 +122,7 @@ public class DateTimeFormatInfoImpl_gd extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
+    return "EEE, d MMM y";
   }
 
   @Override
@@ -122,6 +137,24 @@ public class DateTimeFormatInfoImpl_gd extends DateTimeFormatInfoImpl {
 
   @Override
   public String[] monthsFull() {
+    return new String[] {
+        "dhen Fhaoilleach",
+        "dhen Ghearran",
+        "dhen Mhàrt",
+        "dhen Ghiblean",
+        "dhen Chèitean",
+        "dhen Ògmhios",
+        "dhen Iuchar",
+        "dhen Lùnastal",
+        "dhen t-Sultain",
+        "dhen Dàmhair",
+        "dhen t-Samhain",
+        "dhen Dùbhlachd"
+    };
+  }
+
+  @Override
+  public String[] monthsFullStandalone() {
     return new String[] {
         "Am Faoilleach",
         "An Gearran",
@@ -141,18 +174,18 @@ public class DateTimeFormatInfoImpl_gd extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsNarrow() {
     return new String[] {
-        "FA",
-        "GE",
-        "MÀ",
-        "GI",
-        "CÈ",
-        "ÒG",
-        "IU",
-        "LÙ",
-        "SU",
-        "DÀ",
-        "SA",
-        "DÙ"
+        "F",
+        "G",
+        "M",
+        "G",
+        "C",
+        "Ò",
+        "I",
+        "L",
+        "S",
+        "D",
+        "S",
+        "D"
     };
   }
 
@@ -177,20 +210,20 @@ public class DateTimeFormatInfoImpl_gd extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "1d ràithe",
-        "2na ràithe",
-        "3as ràithe",
-        "4mh ràithe"
+        "1d chairteal",
+        "2na cairteal",
+        "3s cairteal",
+        "4mh cairteal"
     };
   }
 
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "R1",
-        "R2",
-        "R3",
-        "R4"
+        "C1",
+        "C2",
+        "C3",
+        "C4"
     };
   }
 
@@ -201,7 +234,7 @@ public class DateTimeFormatInfoImpl_gd extends DateTimeFormatInfoImpl {
         "DiLuain",
         "DiMàirt",
         "DiCiadain",
-        "Diardaoin",
+        "DiarDaoin",
         "DihAoine",
         "DiSathairne"
     };

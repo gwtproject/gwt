@@ -22,69 +22,28 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_ti_ER extends DateTimeFormatInfoImpl_ti {
 
   @Override
-  public String dateFormatFull() {
-    return "EEEE፡ dd MMMM መዓልቲ y G";
-  }
-
-  @Override
-  public String[] monthsFull() {
+  public String[] erasFull() {
     return new String[] {
-        "ጥሪ",
-        "ለካቲት",
-        "መጋቢት",
-        "ሚያዝያ",
-        "ግንቦት",
-        "ሰነ",
-        "ሓምለ",
-        "ነሓሰ",
-        "መስከረም",
-        "ጥቅምቲ",
-        "ሕዳር",
-        "ታሕሳስ"
+        "ዓመተ ዓለም",
+        "ዓመተ ምህረት"
     };
   }
 
   @Override
-  public String[] monthsShort() {
-    return new String[] {
-        "ጥሪ",
-        "ለካቲ",
-        "መጋቢ",
-        "ሚያዝ",
-        "ግንቦ",
-        "ሰነ",
-        "ሓምለ",
-        "ነሓሰ",
-        "መስከ",
-        "ጥቅም",
-        "ሕዳር",
-        "ታሕሳ"
-    };
+  public int firstDayOfTheWeek() {
+    return 1;
   }
 
   @Override
-  public String[] weekdaysFull() {
+  public String[] weekdaysNarrowStandalone() {
     return new String[] {
-        "ሰንበት",
-        "ሰኑይ",
-        "ሰሉስ",
-        "ረቡዕ",
-        "ሓሙስ",
-        "ዓርቢ",
-        "ቀዳም"
-    };
-  }
-
-  @Override
-  public String[] weekdaysShort() {
-    return new String[] {
-        "ሰንበት",
-        "ሰኑይ",
-        "ሰሉስ",
-        "ረቡዕ",
-        "ሓሙስ",
-        "ዓርቢ",
-        "ቀዳም"
+        "ሰ",
+        "ሰ",
+        "ሰ",
+        "ረ",
+        "ሓ",
+        "ዓ",
+        "ቀ"
     };
   }
 }

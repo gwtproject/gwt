@@ -58,14 +58,12 @@ public class LocalizedNamesImpl_sah extends LocalizedNamesImpl {
         "BN",
         "BO",
         "BQ",
-        "BR",
         "BS",
         "BT",
         "BV",
         "BW",
         "BY",
         "BZ",
-        "CA",
         "CC",
         "CD",
         "CF",
@@ -73,12 +71,10 @@ public class LocalizedNamesImpl_sah extends LocalizedNamesImpl {
         "CH",
         "CI",
         "CK",
-        "CL",
         "CM",
         "CO",
         "CP",
         "CR",
-        "CU",
         "CV",
         "CW",
         "CX",
@@ -93,21 +89,19 @@ public class LocalizedNamesImpl_sah extends LocalizedNamesImpl {
         "DZ",
         "EA",
         "EC",
-        "EE",
         "EG",
         "EH",
         "ER",
         "ES",
         "ET",
         "EU",
-        "FI",
+        "EZ",
         "FJ",
         "FK",
         "FM",
         "FO",
         "FR",
         "GA",
-        "GB",
         "GD",
         "GE",
         "GF",
@@ -133,17 +127,13 @@ public class LocalizedNamesImpl_sah extends LocalizedNamesImpl {
         "HU",
         "IC",
         "ID",
-        "IE",
         "IL",
-        "IM",
         "IN",
         "IO",
         "IQ",
         "IR",
-        "IS",
         "IT",
         "JE",
-        "JM",
         "JO",
         "JP",
         "KE",
@@ -164,10 +154,7 @@ public class LocalizedNamesImpl_sah extends LocalizedNamesImpl {
         "LK",
         "LR",
         "LS",
-        "LT",
         "LU",
-        "LV",
-        "LY",
         "MA",
         "MC",
         "MD",
@@ -188,7 +175,6 @@ public class LocalizedNamesImpl_sah extends LocalizedNamesImpl {
         "MU",
         "MV",
         "MW",
-        "MX",
         "MY",
         "MZ",
         "NA",
@@ -198,7 +184,6 @@ public class LocalizedNamesImpl_sah extends LocalizedNamesImpl {
         "NG",
         "NI",
         "NL",
-        "NO",
         "NP",
         "NR",
         "NU",
@@ -223,13 +208,10 @@ public class LocalizedNamesImpl_sah extends LocalizedNamesImpl {
         "RE",
         "RO",
         "RS",
-        "RU",
         "RW",
         "SA",
         "SB",
         "SC",
-        "SD",
-        "SE",
         "SG",
         "SH",
         "SI",
@@ -266,7 +248,7 @@ public class LocalizedNamesImpl_sah extends LocalizedNamesImpl {
         "UA",
         "UG",
         "UM",
-        "US",
+        "UN",
         "UY",
         "UZ",
         "VA",
@@ -284,7 +266,27 @@ public class LocalizedNamesImpl_sah extends LocalizedNamesImpl {
         "ZA",
         "ZM",
         "ZW",
+        "US",
+        "RU",
+        "BR",
+        "JM",
+        "IE",
+        "IS",
+        "CA",
+        "CU",
         "CN",
+        "LV",
+        "LY",
+        "LT",
+        "MX",
+        "IM",
+        "NO",
+        "SD",
+        "GB",
+        "FI",
+        "CL",
+        "SE",
+        "EE",
     };
   }
 
@@ -295,7 +297,27 @@ public class LocalizedNamesImpl_sah extends LocalizedNamesImpl {
     namesMap.put("002", "Аапырыка");
     namesMap.put("003", "Хотугу Эмиэрикэ");
     namesMap.put("005", "Соҕуруу Эмиэрикэ");
+    namesMap.put("BR", "Бразилия");
+    namesMap.put("CA", "Канаада");
+    namesMap.put("CL", "Чиили");
     namesMap.put("CN", "Кытай");
+    namesMap.put("CU", "Кууба");
+    namesMap.put("EE", "Эстония");
+    namesMap.put("FI", "Финляндия");
+    namesMap.put("GB", "Улуу Британия");
+    namesMap.put("IE", "Ирландия");
+    namesMap.put("IM", "Мэн арыы");
+    namesMap.put("IS", "Исландия");
+    namesMap.put("JM", "Дьамаайка");
+    namesMap.put("LT", "Литва");
+    namesMap.put("LV", "Латвия");
+    namesMap.put("LY", "Лиибийэ");
+    namesMap.put("MX", "Миэксикэ");
+    namesMap.put("NO", "Норвегия");
+    namesMap.put("RU", "Арассыыйа");
+    namesMap.put("SD", "Судаан");
+    namesMap.put("SE", "Швеция");
+    namesMap.put("US", "Америка Холбоһуктаах Штааттара");
   }
 
   @Override
@@ -309,7 +331,27 @@ public class LocalizedNamesImpl_sah extends LocalizedNamesImpl {
         "002": "Аапырыка",
         "003": "Хотугу Эмиэрикэ",
         "005": "Соҕуруу Эмиэрикэ",
-        "CN": "Кытай"
+        "BR": "Бразилия",
+        "CA": "Канаада",
+        "CL": "Чиили",
+        "CN": "Кытай",
+        "CU": "Кууба",
+        "EE": "Эстония",
+        "FI": "Финляндия",
+        "GB": "Улуу Британия",
+        "IE": "Ирландия",
+        "IM": "Мэн арыы",
+        "IS": "Исландия",
+        "JM": "Дьамаайка",
+        "LT": "Литва",
+        "LV": "Латвия",
+        "LY": "Лиибийэ",
+        "MX": "Миэксикэ",
+        "NO": "Норвегия",
+        "RU": "Арассыыйа",
+        "SD": "Судаан",
+        "SE": "Швеция",
+        "US": "Америка Холбоһуктаах Штааттара"
     };
   }-*/;
 }

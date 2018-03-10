@@ -125,10 +125,10 @@ public class DateTimeFormatInfoImpl_teo extends DateTimeFormatInfoImpl {
     return new String[] {
         "Orara",
         "Omuk",
-        "Okwamg'",
-        "Odung'el",
+        "Okwamg’",
+        "Odung’el",
         "Omaruk",
-        "Omodok'king'ol",
+        "Omodok’king’ol",
         "Ojola",
         "Opedel",
         "Osokosokoma",
@@ -180,7 +180,7 @@ public class DateTimeFormatInfoImpl_teo extends DateTimeFormatInfoImpl {
         "Akwota abe",
         "Akwota Aane",
         "Akwota auni",
-        "Akwota Aung'on"
+        "Akwota Aung’on"
     };
   }
 
@@ -195,33 +195,13 @@ public class DateTimeFormatInfoImpl_teo extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String timeFormatFull() {
-    return "h:mm:ss a zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "h:mm:ss a z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "h:mm:ss a";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "h:mm a";
-  }
-
-  @Override
   public String[] weekdaysFull() {
     return new String[] {
         "Nakaejuma",
         "Nakaebarasa",
         "Nakaare",
         "Nakauni",
-        "Nakaung'on",
+        "Nakaung’on",
         "Nakakany",
         "Nakasabiti"
     };

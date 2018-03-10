@@ -24,8 +24,8 @@ public class DateTimeFormatInfoImpl_fa extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "قبل‌ازظهر",
-        "بعدازظهر"
+        "ق.ظ.",
+        "ب.ظ."
     };
   }
 
@@ -101,73 +101,38 @@ public class DateTimeFormatInfoImpl_fa extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatMonthAbbrevDay() {
-    return "d LLL";
-  }
-
-  @Override
-  public String formatMonthFullDay() {
-    return "d LLLL";
-  }
-
-  @Override
-  public String formatMonthFullWeekdayDay() {
-    return "EEEE d LLLL";
-  }
-
-  @Override
-  public String formatMonthNumDay() {
-    return "M/d";
-  }
-
-  @Override
-  public String formatYear() {
-    return "y G";
-  }
-
-  @Override
   public String formatYearMonthAbbrev() {
-    return "MMM y G";
+    return "MMM y";
   }
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "d MMM y G";
-  }
-
-  @Override
-  public String formatYearMonthFull() {
-    return "MMMM y G";
+    return "d MMM y";
   }
 
   @Override
   public String formatYearMonthFullDay() {
-    return "d MMMM y G";
+    return "d MMMM y";
   }
 
   @Override
   public String formatYearMonthNum() {
-    return "y/M G";
+    return "y/M";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "y/M/d G";
-  }
-
-  @Override
-  public String formatYearMonthWeekdayDay() {
-    return "EEE d MMM y G";
+    return "y/M/d";
   }
 
   @Override
   public String formatYearQuarterFull() {
-    return "QQQQ y G";
+    return "QQQQ y";
   }
 
   @Override
   public String formatYearQuarterShort() {
-    return "Q y G";
+    return "Q y";
   }
 
   @Override
@@ -346,6 +311,6 @@ public class DateTimeFormatInfoImpl_fa extends DateTimeFormatInfoImpl {
 
   @Override
   public int weekendStart() {
-    return 4;
+    return 5;
   }
 }

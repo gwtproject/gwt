@@ -53,7 +53,7 @@ public class DateTimeFormatInfoImpl_ti extends DateTimeFormatInfoImpl {
   public String[] erasFull() {
     return new String[] {
         "ዓ/ዓ",
-        "ዓ/ም"
+        "ዓመተ ምህረት"
     };
   }
 
@@ -66,18 +66,8 @@ public class DateTimeFormatInfoImpl_ti extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatMonthFullDay() {
-    return "d MMMM";
-  }
-
-  @Override
-  public String formatMonthNumDay() {
-    return "d/M";
-  }
-
-  @Override
-  public String formatYearMonthAbbrevDay() {
-    return "d-MMM-y";
+  public int firstDayOfTheWeek() {
+    return 0;
   }
 
   @Override
@@ -91,18 +81,8 @@ public class DateTimeFormatInfoImpl_ti extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatYearMonthNum() {
-    return "M/y";
-  }
-
-  @Override
   public String formatYearMonthNumDay() {
-    return "d/M/y";
-  }
-
-  @Override
-  public String formatYearQuarterFull() {
-    return "QQQQ y";
+    return "y-MM-dd";
   }
 
   @Override
@@ -113,64 +93,74 @@ public class DateTimeFormatInfoImpl_ti extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsFull() {
     return new String[] {
-        "ጃንዩወሪ",
-        "ፌብሩወሪ",
-        "ማርች",
-        "ኤፕረል",
-        "ሜይ",
-        "ጁን",
-        "ጁላይ",
-        "ኦገስት",
-        "ሴፕቴምበር",
-        "ኦክተውበር",
-        "ኖቬምበር",
-        "ዲሴምበር"
+        "ጥሪ",
+        "ለካቲት",
+        "መጋቢት",
+        "ሚያዝያ",
+        "ግንቦት",
+        "ሰነ",
+        "ሓምለ",
+        "ነሓሰ",
+        "መስከረም",
+        "ጥቅምቲ",
+        "ሕዳር",
+        "ታሕሳስ"
     };
   }
 
   @Override
   public String[] monthsNarrow() {
     return new String[] {
-        "ጃ",
-        "ፌ",
-        "ማ",
-        "ኤ",
-        "ሜ",
-        "ጁ",
-        "ጁ",
-        "ኦ",
-        "ሴ",
-        "ኦ",
-        "ኖ",
-        "ዲ"
+        "ጥ",
+        "ለ",
+        "መ",
+        "ሚ",
+        "ግ",
+        "ሰ",
+        "ሓ",
+        "ነ",
+        "መ",
+        "ጥ",
+        "ሕ",
+        "ታ"
     };
   }
 
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "ጃንዩ",
-        "ፌብሩ",
-        "ማርች",
-        "ኤፕረ",
-        "ሜይ",
-        "ጁን",
-        "ጁላይ",
-        "ኦገስ",
-        "ሴፕቴ",
-        "ኦክተ",
-        "ኖቬም",
-        "ዲሴም"
+        "ጥሪ",
+        "ለካ",
+        "መጋ",
+        "ሚያ",
+        "ግን",
+        "ሰነ",
+        "ሓም",
+        "ነሓ",
+        "መስ",
+        "ጥቅ",
+        "ሕዳ",
+        "ታሕ"
     };
   }
 
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Q1",
-        "Q2",
-        "Q3",
-        "Q4"
+        "ቀዳማይ ርብዒ",
+        "ካልኣይ ርብዒ",
+        "ሳልሳይ ርብዒ",
+        "ራብዓይ ርብዒ"
+    };
+  }
+
+  @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "ር1",
+        "ር2",
+        "ር3",
+        "ር4"
     };
   }
 
@@ -208,13 +198,39 @@ public class DateTimeFormatInfoImpl_ti extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] weekdaysFullStandalone() {
+    return new String[] {
+        "ሰንበት",
+        "ሰኑይ",
+        "ሰሉስ",
+        "ረቡዕ",
+        "ሓሙስ",
+        "ዓርቢ",
+        "ቀዳም"
+    };
+  }
+
+  @Override
   public String[] weekdaysNarrow() {
+    return new String[] {
+        "ሰ",
+        "ሰ",
+        "ሰ",
+        "ረ",
+        "ሓ",
+        "ዓ",
+        "ቀ"
+    };
+  }
+
+  @Override
+  public String[] weekdaysNarrowStandalone() {
     return new String[] {
         "ሰ",
         "ሰ",
         "ሠ",
         "ረ",
-        "ኃ",
+        "ሓ",
         "ዓ",
         "ቀ"
     };
@@ -223,13 +239,13 @@ public class DateTimeFormatInfoImpl_ti extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "ሰንበት",
-        "ሰኑይ",
-        "ሠሉስ",
-        "ረቡዕ",
-        "ኃሙስ",
-        "ዓርቢ",
-        "ቀዳም"
+        "ሰን",
+        "ሰኑ",
+        "ሰሉ",
+        "ረቡ",
+        "ሓሙ",
+        "ዓር",
+        "ቀዳ"
     };
   }
 }

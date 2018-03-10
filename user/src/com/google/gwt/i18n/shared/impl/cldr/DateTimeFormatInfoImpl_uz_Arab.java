@@ -22,6 +22,14 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_uz_Arab extends DateTimeFormatInfoImpl_uz {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "AM",
+        "PM"
+    };
+  }
+
+  @Override
   public String dateFormatFull() {
     return "y نچی ییل d نچی MMMM EEEE کونی";
   }
@@ -39,6 +47,26 @@ public class DateTimeFormatInfoImpl_uz_Arab extends DateTimeFormatInfoImpl_uz {
   @Override
   public String dateFormatShort() {
     return "y/M/d";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
   }
 
   @Override
@@ -63,8 +91,23 @@ public class DateTimeFormatInfoImpl_uz_Arab extends DateTimeFormatInfoImpl_uz {
   }
 
   @Override
-  public String formatYear() {
-    return "G y";
+  public String formatMonthAbbrevDay() {
+    return "MMM d";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "MMMM d";
+  }
+
+  @Override
+  public String formatMonthFullWeekdayDay() {
+    return "MMMM d, EEEE";
+  }
+
+  @Override
+  public String formatMonthNumDay() {
+    return "MM-dd";
   }
 
   @Override
@@ -155,7 +198,7 @@ public class DateTimeFormatInfoImpl_uz_Arab extends DateTimeFormatInfoImpl_uz {
         "فبر",
         "مار",
         "اپر",
-        "مـی",
+        "می",
         "جون",
         "جول",
         "اگس",
@@ -184,16 +227,6 @@ public class DateTimeFormatInfoImpl_uz_Arab extends DateTimeFormatInfoImpl_uz {
         "Q3",
         "Q4"
     };
-  }
-
-  @Override
-  public String timeFormatFull() {
-    return "H:mm:ss (zzzz)";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "H:mm:ss (z)";
   }
 
   @Override

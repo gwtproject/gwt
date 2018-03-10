@@ -66,13 +66,23 @@ public class DateTimeFormatInfoImpl_fur extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "d 'di' MMMM";
+  }
+
+  @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
+    return "EEEE d MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M/d";
+    return "d/M";
   }
 
   @Override
@@ -81,18 +91,13 @@ public class DateTimeFormatInfoImpl_fur extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatYearMonthAbbrevDay() {
-    return "MMM d, y";
-  }
-
-  @Override
   public String formatYearMonthFull() {
-    return "MMMM y";
+    return "LLLL 'dal' y";
   }
 
   @Override
   public String formatYearMonthFullDay() {
-    return "MMMM d, y";
+    return "d 'di' MMMM 'dal' y";
   }
 
   @Override
@@ -102,12 +107,12 @@ public class DateTimeFormatInfoImpl_fur extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNumDay() {
-    return "M/d/y";
+    return "d/M/y";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
+    return "EEE d MMM y";
   }
 
   @Override

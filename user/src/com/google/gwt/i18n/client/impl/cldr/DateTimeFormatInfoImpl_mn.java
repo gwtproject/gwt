@@ -31,17 +31,22 @@ public class DateTimeFormatInfoImpl_mn extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatFull() {
-    return "EEEE, y 'оны' MMMM 'сарын' dd";
+    return "y 'оны' MMM'ын' d. EEEE 'гараг'.";
   }
 
   @Override
   public String dateFormatLong() {
-    return "y 'оны' MMMM 'сарын' d";
+    return "y 'оны' MMM'ын' d";
   }
 
   @Override
-  public String dateTimeShort(String timePattern, String datePattern) {
-    return datePattern + ", " + timePattern;
+  public String dateFormatMedium() {
+    return "y.MM.dd";
+  }
+
+  @Override
+  public String dateFormatShort() {
+    return "y.MM.dd";
   }
 
   @Override
@@ -61,33 +66,58 @@ public class DateTimeFormatInfoImpl_mn extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthAbbrevDay() {
+    return "MMM'ын' d";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "MMM'ын' d";
+  }
+
+  @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE MMMM d";
+    return "MMMM'ын' d, EEEE";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M-d";
+    return "MM/dd";
+  }
+
+  @Override
+  public String formatYearMonthAbbrev() {
+    return "y 'оны' MMM";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "y.MM.dd";
+  }
+
+  @Override
+  public String formatYearMonthFull() {
+    return "y 'оны' MMM";
   }
 
   @Override
   public String formatYearMonthFullDay() {
-    return "y 'оны' MMMM 'сарын' d";
+    return "y.MM.dd";
   }
 
   @Override
   public String formatYearMonthNum() {
-    return "y-M";
+    return "y M";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "y-M-d";
+    return "y.MM.dd";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, y MMM d";
+    return "y.MM.dd, EEE";
   }
 
   @Override
@@ -103,7 +133,7 @@ public class DateTimeFormatInfoImpl_mn extends DateTimeFormatInfoImpl {
         "Гуравдугаар сар",
         "Дөрөвдүгээр сар",
         "Тавдугаар сар",
-        "Зургадугаар сар",
+        "Зургаадугаар сар",
         "Долдугаар сар",
         "Наймдугаар сар",
         "Есдүгээр сар",
@@ -116,18 +146,18 @@ public class DateTimeFormatInfoImpl_mn extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsNarrow() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
+        "I",
+        "II",
+        "III",
+        "IV",
+        "V",
+        "VI",
+        "VII",
+        "VIII",
+        "IX",
+        "X",
+        "XI",
+        "XII"
     };
   }
 
@@ -162,11 +192,21 @@ public class DateTimeFormatInfoImpl_mn extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "У1",
-        "У2",
-        "У3",
-        "У4"
+        "I улирал",
+        "II улирал",
+        "III улирал",
+        "IV улирал"
     };
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "HH:mm:ss (zzzz)";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "HH:mm:ss (z)";
   }
 
   @Override
@@ -185,13 +225,13 @@ public class DateTimeFormatInfoImpl_mn extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
+        "Ня",
+        "Да",
+        "Мя",
+        "Лх",
+        "Пү",
+        "Ба",
+        "Бя"
     };
   }
 

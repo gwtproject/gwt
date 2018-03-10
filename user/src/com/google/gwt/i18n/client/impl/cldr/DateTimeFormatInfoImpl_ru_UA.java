@@ -22,16 +22,6 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_ru_UA extends DateTimeFormatInfoImpl_ru {
 
   @Override
-  public String dateFormatLong() {
-    return "d MMMM y";
-  }
-
-  @Override
-  public String dateFormatMedium() {
-    return "d MMM y";
-  }
-
-  @Override
   public String formatHour24Minute() {
     return "HH:mm";
   }
@@ -39,16 +29,6 @@ public class DateTimeFormatInfoImpl_ru_UA extends DateTimeFormatInfoImpl_ru {
   @Override
   public String formatHour24MinuteSecond() {
     return "HH:mm:ss";
-  }
-
-  @Override
-  public String formatYearMonthAbbrevDay() {
-    return "d MMM y";
-  }
-
-  @Override
-  public String formatYearMonthFullDay() {
-    return "d MMMM y";
   }
 
   @Override

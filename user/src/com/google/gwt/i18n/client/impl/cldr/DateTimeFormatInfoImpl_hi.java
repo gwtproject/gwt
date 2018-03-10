@@ -24,8 +24,8 @@ public class DateTimeFormatInfoImpl_hi extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "पूर्व",
-        "अपर"
+        "पूर्वाह्न",
+        "अपराह्न"
     };
   }
 
@@ -41,12 +41,12 @@ public class DateTimeFormatInfoImpl_hi extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "dd-MM-y";
+    return "d MMM y";
   }
 
   @Override
   public String dateFormatShort() {
-    return "d-M-yy";
+    return "d/M/yy";
   }
 
   @Override
@@ -73,7 +73,7 @@ public class DateTimeFormatInfoImpl_hi extends DateTimeFormatInfoImpl {
   public String[] erasFull() {
     return new String[] {
         "ईसा-पूर्व",
-        "ईस्वी"
+        "ईसवी सन"
     };
   }
 
@@ -117,7 +117,7 @@ public class DateTimeFormatInfoImpl_hi extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "d MMM, y";
+    return "d MMM y";
   }
 
   @Override
@@ -167,7 +167,7 @@ public class DateTimeFormatInfoImpl_hi extends DateTimeFormatInfoImpl {
         "जुलाई",
         "अगस्त",
         "सितंबर",
-        "अक्टूबर",
+        "अक्तूबर",
         "नवंबर",
         "दिसंबर"
     };
@@ -194,18 +194,18 @@ public class DateTimeFormatInfoImpl_hi extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "जन",
-        "फ़र",
+        "जन॰",
+        "फ़र॰",
         "मार्च",
-        "अप्रै",
+        "अप्रैल",
         "मई",
         "जून",
-        "जुला",
-        "अग",
-        "सितं",
-        "अक्टू",
-        "नवं",
-        "दिसं"
+        "जुल॰",
+        "अग॰",
+        "सित॰",
+        "अक्तू॰",
+        "नव॰",
+        "दिस॰"
     };
   }
 

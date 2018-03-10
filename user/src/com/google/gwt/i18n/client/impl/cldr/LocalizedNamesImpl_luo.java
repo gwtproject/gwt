@@ -117,6 +117,7 @@ public class LocalizedNamesImpl_luo extends LocalizedNamesImpl {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FJ",
         "FI",
         "FO",
@@ -202,7 +203,6 @@ public class LocalizedNamesImpl_luo extends LocalizedNamesImpl {
         "NR",
         "NP",
         "NL",
-        "AN",
         "NC",
         "NZ",
         "NI",
@@ -279,6 +279,7 @@ public class LocalizedNamesImpl_luo extends LocalizedNamesImpl {
         "UG",
         "UA",
         "UM",
+        "UN",
         "AE",
         "GB",
         "UY",
@@ -305,17 +306,19 @@ public class LocalizedNamesImpl_luo extends LocalizedNamesImpl {
     namesMap.put("CG", "Congo");
     namesMap.put("CI", "Côte d");
     namesMap.put("CV", "Cape Verde Islands");
+    namesMap.put("CZ", "Czech Republic");
     namesMap.put("FK", "Chuia mar Falkland");
     namesMap.put("KN", "Saint Kitts gi Nevis");
     namesMap.put("KP", "Korea Masawa");
     namesMap.put("KR", "Korea Milambo");
+    namesMap.put("LC", "Saint Lucia");
     namesMap.put("MH", "Chuia mar Marshall");
-    namesMap.put("MK", "Macedonia");
     namesMap.put("MM", "Myanmar");
     namesMap.put("NF", "Chuia mar Norfolk");
     namesMap.put("PM", "Saint Pierre gi Miquelon");
     namesMap.put("PN", "Pitcairn");
     namesMap.put("PS", "Palestinian West Bank gi Gaza");
+    namesMap.put("SH", "Saint Helena");
     namesMap.put("ST", "São Tomé gi Príncipe");
     namesMap.put("TC", "Turks gi Caicos Islands");
     namesMap.put("TL", "East Timor");
@@ -339,17 +342,19 @@ public class LocalizedNamesImpl_luo extends LocalizedNamesImpl {
         "CG": "Congo",
         "CI": "Côte d",
         "CV": "Cape Verde Islands",
+        "CZ": "Czech Republic",
         "FK": "Chuia mar Falkland",
         "KN": "Saint Kitts gi Nevis",
         "KP": "Korea Masawa",
         "KR": "Korea Milambo",
+        "LC": "Saint Lucia",
         "MH": "Chuia mar Marshall",
-        "MK": "Macedonia",
         "MM": "Myanmar",
         "NF": "Chuia mar Norfolk",
         "PM": "Saint Pierre gi Miquelon",
         "PN": "Pitcairn",
         "PS": "Palestinian West Bank gi Gaza",
+        "SH": "Saint Helena",
         "ST": "São Tomé gi Príncipe",
         "TC": "Turks gi Caicos Islands",
         "TL": "East Timor",

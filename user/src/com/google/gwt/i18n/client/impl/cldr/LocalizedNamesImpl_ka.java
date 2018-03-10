@@ -42,8 +42,8 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "AL",
         "DZ",
         "AC",
-        "US",
         "AS",
+        "US",
         "AI",
         "AO",
         "AD",
@@ -60,9 +60,9 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "BB",
         "BS",
         "BH",
+        "BY",
         "BE",
         "BZ",
-        "BY",
         "BJ",
         "BM",
         "BO",
@@ -78,6 +78,8 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "BI",
         "BT",
         "GA",
+        "GB",
+        "UN",
         "GY",
         "GM",
         "GH",
@@ -93,11 +95,11 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "GU",
         "DK",
         "EH",
-        "GB",
         "DG",
         "DM",
         "DO",
         "EG",
+        "EZ",
         "EU",
         "ET",
         "EC",
@@ -111,6 +113,7 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "VN",
         "ZM",
         "ZW",
+        "TC",
         "TR",
         "TM",
         "JM",
@@ -185,7 +188,6 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "NE",
         "NG",
         "NL",
-        "AN",
         "NI",
         "NU",
         "NO",
@@ -210,13 +212,15 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "SV",
         "WS",
         "ZA",
-        "GS",
         "KR",
         "SS",
+        "GS",
         "SM",
         "ST",
         "SA",
         "FR",
+        "GF",
+        "PF",
         "GE",
         "SC",
         "BL",
@@ -244,7 +248,6 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "TH",
         "TZ",
         "TJ",
-        "TC",
         "TL",
         "TG",
         "TK",
@@ -264,8 +267,6 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "FI",
         "FJ",
         "FK",
-        "GF",
-        "PF",
         "TF",
         "VA",
         "CC",
@@ -301,33 +302,33 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
     super.loadNameMapJava();
     namesMap.put("001", "მსოფლიო");
     namesMap.put("002", "აფრიკა");
-    namesMap.put("003", "ჩრდილოეთი ამერიკა");
-    namesMap.put("005", "სამხრეთი ამერიკა");
+    namesMap.put("003", "ჩრდილოეთ ამერიკა");
+    namesMap.put("005", "სამხრეთ ამერიკა");
     namesMap.put("009", "ოკეანეთი");
-    namesMap.put("011", "დასავლეთი აფრიკა");
+    namesMap.put("011", "დასავლეთ აფრიკა");
     namesMap.put("013", "ცენტრალური ამერიკა");
-    namesMap.put("014", "აღმოსავლეთი აფრიკა");
-    namesMap.put("015", "ჩრდილოეთი აფრიკა");
+    namesMap.put("014", "აღმოსავლეთ აფრიკა");
+    namesMap.put("015", "ჩრდილოეთ აფრიკა");
     namesMap.put("017", "შუა აფრიკა");
-    namesMap.put("018", "სამხრეთი აფრიკა");
+    namesMap.put("018", "სამხრეთ აფრიკა");
     namesMap.put("019", "ამერიკები");
     namesMap.put("021", "ამერიკის ჩრდილოეთი");
     namesMap.put("029", "კარიბის ზღვა");
-    namesMap.put("030", "აღმოსავლეთი აზია");
-    namesMap.put("034", "სამხრეთი აზია");
-    namesMap.put("035", "სამხრეთ-აღმოსავლეთი აზია");
-    namesMap.put("039", "სამხრეთი ევროპა");
+    namesMap.put("030", "აღმოსავლეთ აზია");
+    namesMap.put("034", "სამხრეთ აზია");
+    namesMap.put("035", "სამხრეთ-აღმოსავლეთ აზია");
+    namesMap.put("039", "სამხრეთ ევროპა");
     namesMap.put("053", "ავსტრალაზია");
     namesMap.put("054", "მელანეზია");
     namesMap.put("057", "მიკრონეზიის რეგიონი");
     namesMap.put("061", "პოლინეზია");
     namesMap.put("142", "აზია");
     namesMap.put("143", "ცენტრალური აზია");
-    namesMap.put("145", "დასავლეთი აზია");
+    namesMap.put("145", "დასავლეთ აზია");
     namesMap.put("150", "ევროპა");
-    namesMap.put("151", "აღმოსავლეთი ევროპა");
-    namesMap.put("154", "ჩრდილოეთი ევროპა");
-    namesMap.put("155", "დასავლეთი ევროპა");
+    namesMap.put("151", "აღმოსავლეთ ევროპა");
+    namesMap.put("154", "ჩრდილოეთ ევროპა");
+    namesMap.put("155", "დასავლეთ ევროპა");
     namesMap.put("419", "ლათინური ამერიკა");
     namesMap.put("AC", "ამაღლების კუნძული");
     namesMap.put("AD", "ანდორა");
@@ -337,11 +338,10 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
     namesMap.put("AI", "ანგვილა");
     namesMap.put("AL", "ალბანეთი");
     namesMap.put("AM", "სომხეთი");
-    namesMap.put("AN", "ნიდერლანდების ანტილები");
     namesMap.put("AO", "ანგოლა");
     namesMap.put("AQ", "ანტარქტიკა");
     namesMap.put("AR", "არგენტინა");
-    namesMap.put("AS", "ამერიკული სამოა");
+    namesMap.put("AS", "ამერიკის სამოა");
     namesMap.put("AT", "ავსტრია");
     namesMap.put("AU", "ავსტრალია");
     namesMap.put("AW", "არუბა");
@@ -356,17 +356,17 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
     namesMap.put("BH", "ბაჰრეინი");
     namesMap.put("BI", "ბურუნდი");
     namesMap.put("BJ", "ბენინი");
-    namesMap.put("BL", "სენ-ბართლემი");
-    namesMap.put("BM", "ბერმუდი");
+    namesMap.put("BL", "სენ-ბართელმი");
+    namesMap.put("BM", "ბერმუდა");
     namesMap.put("BN", "ბრუნეი");
     namesMap.put("BO", "ბოლივია");
     namesMap.put("BQ", "კარიბის ნიდერლანდები");
     namesMap.put("BR", "ბრაზილია");
     namesMap.put("BS", "ბაჰამის კუნძულები");
     namesMap.put("BT", "ბუტანი");
-    namesMap.put("BV", "ბუვეს კუნძული");
+    namesMap.put("BV", "ბუვე");
     namesMap.put("BW", "ბოტსვანა");
-    namesMap.put("BY", "ბელორუსია");
+    namesMap.put("BY", "ბელარუსი");
     namesMap.put("BZ", "ბელიზი");
     namesMap.put("CA", "კანადა");
     namesMap.put("CC", "ქოქოსის (კილინგის) კუნძულები");
@@ -387,23 +387,24 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
     namesMap.put("CW", "კიურასაო");
     namesMap.put("CX", "შობის კუნძული");
     namesMap.put("CY", "კვიპროსი");
-    namesMap.put("CZ", "ჩეხეთის რესპუბლიკა");
+    namesMap.put("CZ", "ჩეხეთი");
     namesMap.put("DE", "გერმანია");
     namesMap.put("DG", "დიეგო-გარსია");
     namesMap.put("DJ", "ჯიბუტი");
     namesMap.put("DK", "დანია");
     namesMap.put("DM", "დომინიკა");
-    namesMap.put("DO", "დომინიკანის რესპუბლიკა");
+    namesMap.put("DO", "დომინიკელთა რესპუბლიკა");
     namesMap.put("DZ", "ალჟირი");
     namesMap.put("EA", "სეუტა და მელილა");
     namesMap.put("EC", "ეკვადორი");
     namesMap.put("EE", "ესტონეთი");
     namesMap.put("EG", "ეგვიპტე");
-    namesMap.put("EH", "დასავლეთი საჰარა");
+    namesMap.put("EH", "დასავლეთ საჰარა");
     namesMap.put("ER", "ერიტრეა");
     namesMap.put("ES", "ესპანეთი");
     namesMap.put("ET", "ეთიოპია");
     namesMap.put("EU", "ევროკავშირი");
+    namesMap.put("EZ", "ევროზონა");
     namesMap.put("FI", "ფინეთი");
     namesMap.put("FJ", "ფიჯი");
     namesMap.put("FK", "ფოლკლენდის კუნძულები");
@@ -411,20 +412,20 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
     namesMap.put("FO", "ფარერის კუნძულები");
     namesMap.put("FR", "საფრანგეთი");
     namesMap.put("GA", "გაბონი");
-    namesMap.put("GB", "დიდი ბრიტანეთი");
+    namesMap.put("GB", "გაერთიანებული სამეფო");
     namesMap.put("GD", "გრენადა");
     namesMap.put("GE", "საქართველო");
-    namesMap.put("GF", "ფრანგული გვიანა");
+    namesMap.put("GF", "საფრანგეთის გვიანა");
     namesMap.put("GG", "გერნსი");
     namesMap.put("GH", "განა");
     namesMap.put("GI", "გიბრალტარი");
     namesMap.put("GL", "გრენლანდია");
     namesMap.put("GM", "გამბია");
     namesMap.put("GN", "გვინეა");
-    namesMap.put("GP", "გვადელუპე");
+    namesMap.put("GP", "გვადელუპა");
     namesMap.put("GQ", "ეკვატორული გვინეა");
     namesMap.put("GR", "საბერძნეთი");
-    namesMap.put("GS", "სამხრეთი გეორგია და სამხრეთ სენდვიჩის კუნძულები");
+    namesMap.put("GS", "სამხრეთ ჯორჯია და სამხრეთ სენდვიჩის კუნძულები");
     namesMap.put("GT", "გვატემალა");
     namesMap.put("GU", "გუამი");
     namesMap.put("GW", "გვინეა-ბისაუ");
@@ -441,7 +442,7 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
     namesMap.put("IL", "ისრაელი");
     namesMap.put("IM", "მენის კუნძული");
     namesMap.put("IN", "ინდოეთი");
-    namesMap.put("IO", "ბრიტანული ტერიტორია ინდოეთის ოკეანეში");
+    namesMap.put("IO", "ბრიტანეთის ტერიტორია ინდოეთის ოკეანეში");
     namesMap.put("IQ", "ერაყი");
     namesMap.put("IR", "ირანი");
     namesMap.put("IS", "ისლანდია");
@@ -456,15 +457,15 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
     namesMap.put("KI", "კირიბატი");
     namesMap.put("KM", "კომორის კუნძულები");
     namesMap.put("KN", "სენტ-კიტსი და ნევისი");
-    namesMap.put("KP", "ჩრდილოეთი კორეა");
-    namesMap.put("KR", "სამხრეთი კორეა");
+    namesMap.put("KP", "ჩრდილოეთ კორეა");
+    namesMap.put("KR", "სამხრეთ კორეა");
     namesMap.put("KW", "ქუვეითი");
     namesMap.put("KY", "კაიმანის კუნძულები");
     namesMap.put("KZ", "ყაზახეთი");
     namesMap.put("LA", "ლაოსი");
     namesMap.put("LB", "ლიბანი");
     namesMap.put("LC", "სენტ-ლუსია");
-    namesMap.put("LI", "ლიხტენშტეინი");
+    namesMap.put("LI", "ლიხტენშტაინი");
     namesMap.put("LK", "შრი-ლანკა");
     namesMap.put("LR", "ლიბერია");
     namesMap.put("LS", "ლესოთო");
@@ -490,7 +491,7 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
     namesMap.put("MS", "მონსერატი");
     namesMap.put("MT", "მალტა");
     namesMap.put("MU", "მავრიკი");
-    namesMap.put("MV", "მალდივის კუნძულები");
+    namesMap.put("MV", "მალდივები");
     namesMap.put("MW", "მალავი");
     namesMap.put("MX", "მექსიკა");
     namesMap.put("MY", "მალაიზია");
@@ -510,7 +511,7 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
     namesMap.put("OM", "ომანი");
     namesMap.put("PA", "პანამა");
     namesMap.put("PE", "პერუ");
-    namesMap.put("PF", "ფრანგული პოლინეზია");
+    namesMap.put("PF", "საფრანგეთის პოლინეზია");
     namesMap.put("PG", "პაპუა-ახალი გვინეა");
     namesMap.put("PH", "ფილიპინები");
     namesMap.put("PK", "პაკისტანი");
@@ -544,21 +545,21 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
     namesMap.put("SN", "სენეგალი");
     namesMap.put("SO", "სომალი");
     namesMap.put("SR", "სურინამი");
-    namesMap.put("SS", "სამხრეთი სუდანი");
+    namesMap.put("SS", "სამხრეთ სუდანი");
     namesMap.put("ST", "სან-ტომე და პრინსიპი");
     namesMap.put("SV", "სალვადორი");
     namesMap.put("SX", "სინტ-მარტენი");
     namesMap.put("SY", "სირია");
     namesMap.put("SZ", "სვაზილენდი");
     namesMap.put("TA", "ტრისტან-და-კუნია");
-    namesMap.put("TC", "ტერკსის და კაიკოსის კუნძულები");
+    namesMap.put("TC", "თერქს-ქაიქოსის კუნძულები");
     namesMap.put("TD", "ჩადი");
     namesMap.put("TF", "ფრანგული სამხრეთის ტერიტორიები");
     namesMap.put("TG", "ტოგო");
     namesMap.put("TH", "ტაილანდი");
     namesMap.put("TJ", "ტაჯიკეთი");
     namesMap.put("TK", "ტოკელაუ");
-    namesMap.put("TL", "ტიმორ-ლეშტი");
+    namesMap.put("TL", "ტიმორ-ლესტე");
     namesMap.put("TM", "თურქმენეთი");
     namesMap.put("TN", "ტუნისი");
     namesMap.put("TO", "ტონგა");
@@ -570,14 +571,15 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
     namesMap.put("UA", "უკრაინა");
     namesMap.put("UG", "უგანდა");
     namesMap.put("UM", "აშშ-ის შორეული კუნძულები");
+    namesMap.put("UN", "გაერო");
     namesMap.put("US", "ამერიკის შეერთებული შტატები");
     namesMap.put("UY", "ურუგვაი");
     namesMap.put("UZ", "უზბეკეთი");
     namesMap.put("VA", "ქალაქი ვატიკანი");
     namesMap.put("VC", "სენტ-ვინსენტი და გრენადინები");
     namesMap.put("VE", "ვენესუელა");
-    namesMap.put("VG", "ბრიტანეთის ვირჯინიის კუნძულები");
-    namesMap.put("VI", "აშშ-ის ვირჯინიის კუნძულები");
+    namesMap.put("VG", "ბრიტანეთის ვირჯინის კუნძულები");
+    namesMap.put("VI", "აშშ-ის ვირჯინის კუნძულები");
     namesMap.put("VN", "ვიეტნამი");
     namesMap.put("VU", "ვანუატუ");
     namesMap.put("WF", "უოლისი და ფუტუნა");
@@ -585,7 +587,7 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
     namesMap.put("XK", "კოსოვო");
     namesMap.put("YE", "იემენი");
     namesMap.put("YT", "მაიოტა");
-    namesMap.put("ZA", "სამხრეთ აფრიკა");
+    namesMap.put("ZA", "სამხრეთ აფრიკის რესპუბლიკა");
     namesMap.put("ZM", "ზამბია");
     namesMap.put("ZW", "ზიმბაბვე");
     namesMap.put("ZZ", "უცნობი რეგიონი");
@@ -600,33 +602,33 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
     return {
         "001": "მსოფლიო",
         "002": "აფრიკა",
-        "003": "ჩრდილოეთი ამერიკა",
-        "005": "სამხრეთი ამერიკა",
+        "003": "ჩრდილოეთ ამერიკა",
+        "005": "სამხრეთ ამერიკა",
         "009": "ოკეანეთი",
-        "011": "დასავლეთი აფრიკა",
+        "011": "დასავლეთ აფრიკა",
         "013": "ცენტრალური ამერიკა",
-        "014": "აღმოსავლეთი აფრიკა",
-        "015": "ჩრდილოეთი აფრიკა",
+        "014": "აღმოსავლეთ აფრიკა",
+        "015": "ჩრდილოეთ აფრიკა",
         "017": "შუა აფრიკა",
-        "018": "სამხრეთი აფრიკა",
+        "018": "სამხრეთ აფრიკა",
         "019": "ამერიკები",
         "021": "ამერიკის ჩრდილოეთი",
         "029": "კარიბის ზღვა",
-        "030": "აღმოსავლეთი აზია",
-        "034": "სამხრეთი აზია",
-        "035": "სამხრეთ-აღმოსავლეთი აზია",
-        "039": "სამხრეთი ევროპა",
+        "030": "აღმოსავლეთ აზია",
+        "034": "სამხრეთ აზია",
+        "035": "სამხრეთ-აღმოსავლეთ აზია",
+        "039": "სამხრეთ ევროპა",
         "053": "ავსტრალაზია",
         "054": "მელანეზია",
         "057": "მიკრონეზიის რეგიონი",
         "061": "პოლინეზია",
         "142": "აზია",
         "143": "ცენტრალური აზია",
-        "145": "დასავლეთი აზია",
+        "145": "დასავლეთ აზია",
         "150": "ევროპა",
-        "151": "აღმოსავლეთი ევროპა",
-        "154": "ჩრდილოეთი ევროპა",
-        "155": "დასავლეთი ევროპა",
+        "151": "აღმოსავლეთ ევროპა",
+        "154": "ჩრდილოეთ ევროპა",
+        "155": "დასავლეთ ევროპა",
         "419": "ლათინური ამერიკა",
         "AC": "ამაღლების კუნძული",
         "AD": "ანდორა",
@@ -636,11 +638,10 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "AI": "ანგვილა",
         "AL": "ალბანეთი",
         "AM": "სომხეთი",
-        "AN": "ნიდერლანდების ანტილები",
         "AO": "ანგოლა",
         "AQ": "ანტარქტიკა",
         "AR": "არგენტინა",
-        "AS": "ამერიკული სამოა",
+        "AS": "ამერიკის სამოა",
         "AT": "ავსტრია",
         "AU": "ავსტრალია",
         "AW": "არუბა",
@@ -655,17 +656,17 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "BH": "ბაჰრეინი",
         "BI": "ბურუნდი",
         "BJ": "ბენინი",
-        "BL": "სენ-ბართლემი",
-        "BM": "ბერმუდი",
+        "BL": "სენ-ბართელმი",
+        "BM": "ბერმუდა",
         "BN": "ბრუნეი",
         "BO": "ბოლივია",
         "BQ": "კარიბის ნიდერლანდები",
         "BR": "ბრაზილია",
         "BS": "ბაჰამის კუნძულები",
         "BT": "ბუტანი",
-        "BV": "ბუვეს კუნძული",
+        "BV": "ბუვე",
         "BW": "ბოტსვანა",
-        "BY": "ბელორუსია",
+        "BY": "ბელარუსი",
         "BZ": "ბელიზი",
         "CA": "კანადა",
         "CC": "ქოქოსის (კილინგის) კუნძულები",
@@ -686,23 +687,24 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "CW": "კიურასაო",
         "CX": "შობის კუნძული",
         "CY": "კვიპროსი",
-        "CZ": "ჩეხეთის რესპუბლიკა",
+        "CZ": "ჩეხეთი",
         "DE": "გერმანია",
         "DG": "დიეგო-გარსია",
         "DJ": "ჯიბუტი",
         "DK": "დანია",
         "DM": "დომინიკა",
-        "DO": "დომინიკანის რესპუბლიკა",
+        "DO": "დომინიკელთა რესპუბლიკა",
         "DZ": "ალჟირი",
         "EA": "სეუტა და მელილა",
         "EC": "ეკვადორი",
         "EE": "ესტონეთი",
         "EG": "ეგვიპტე",
-        "EH": "დასავლეთი საჰარა",
+        "EH": "დასავლეთ საჰარა",
         "ER": "ერიტრეა",
         "ES": "ესპანეთი",
         "ET": "ეთიოპია",
         "EU": "ევროკავშირი",
+        "EZ": "ევროზონა",
         "FI": "ფინეთი",
         "FJ": "ფიჯი",
         "FK": "ფოლკლენდის კუნძულები",
@@ -710,20 +712,20 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "FO": "ფარერის კუნძულები",
         "FR": "საფრანგეთი",
         "GA": "გაბონი",
-        "GB": "დიდი ბრიტანეთი",
+        "GB": "გაერთიანებული სამეფო",
         "GD": "გრენადა",
         "GE": "საქართველო",
-        "GF": "ფრანგული გვიანა",
+        "GF": "საფრანგეთის გვიანა",
         "GG": "გერნსი",
         "GH": "განა",
         "GI": "გიბრალტარი",
         "GL": "გრენლანდია",
         "GM": "გამბია",
         "GN": "გვინეა",
-        "GP": "გვადელუპე",
+        "GP": "გვადელუპა",
         "GQ": "ეკვატორული გვინეა",
         "GR": "საბერძნეთი",
-        "GS": "სამხრეთი გეორგია და სამხრეთ სენდვიჩის კუნძულები",
+        "GS": "სამხრეთ ჯორჯია და სამხრეთ სენდვიჩის კუნძულები",
         "GT": "გვატემალა",
         "GU": "გუამი",
         "GW": "გვინეა-ბისაუ",
@@ -740,7 +742,7 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "IL": "ისრაელი",
         "IM": "მენის კუნძული",
         "IN": "ინდოეთი",
-        "IO": "ბრიტანული ტერიტორია ინდოეთის ოკეანეში",
+        "IO": "ბრიტანეთის ტერიტორია ინდოეთის ოკეანეში",
         "IQ": "ერაყი",
         "IR": "ირანი",
         "IS": "ისლანდია",
@@ -755,15 +757,15 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "KI": "კირიბატი",
         "KM": "კომორის კუნძულები",
         "KN": "სენტ-კიტსი და ნევისი",
-        "KP": "ჩრდილოეთი კორეა",
-        "KR": "სამხრეთი კორეა",
+        "KP": "ჩრდილოეთ კორეა",
+        "KR": "სამხრეთ კორეა",
         "KW": "ქუვეითი",
         "KY": "კაიმანის კუნძულები",
         "KZ": "ყაზახეთი",
         "LA": "ლაოსი",
         "LB": "ლიბანი",
         "LC": "სენტ-ლუსია",
-        "LI": "ლიხტენშტეინი",
+        "LI": "ლიხტენშტაინი",
         "LK": "შრი-ლანკა",
         "LR": "ლიბერია",
         "LS": "ლესოთო",
@@ -789,7 +791,7 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "MS": "მონსერატი",
         "MT": "მალტა",
         "MU": "მავრიკი",
-        "MV": "მალდივის კუნძულები",
+        "MV": "მალდივები",
         "MW": "მალავი",
         "MX": "მექსიკა",
         "MY": "მალაიზია",
@@ -809,7 +811,7 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "OM": "ომანი",
         "PA": "პანამა",
         "PE": "პერუ",
-        "PF": "ფრანგული პოლინეზია",
+        "PF": "საფრანგეთის პოლინეზია",
         "PG": "პაპუა-ახალი გვინეა",
         "PH": "ფილიპინები",
         "PK": "პაკისტანი",
@@ -843,21 +845,21 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "SN": "სენეგალი",
         "SO": "სომალი",
         "SR": "სურინამი",
-        "SS": "სამხრეთი სუდანი",
+        "SS": "სამხრეთ სუდანი",
         "ST": "სან-ტომე და პრინსიპი",
         "SV": "სალვადორი",
         "SX": "სინტ-მარტენი",
         "SY": "სირია",
         "SZ": "სვაზილენდი",
         "TA": "ტრისტან-და-კუნია",
-        "TC": "ტერკსის და კაიკოსის კუნძულები",
+        "TC": "თერქს-ქაიქოსის კუნძულები",
         "TD": "ჩადი",
         "TF": "ფრანგული სამხრეთის ტერიტორიები",
         "TG": "ტოგო",
         "TH": "ტაილანდი",
         "TJ": "ტაჯიკეთი",
         "TK": "ტოკელაუ",
-        "TL": "ტიმორ-ლეშტი",
+        "TL": "ტიმორ-ლესტე",
         "TM": "თურქმენეთი",
         "TN": "ტუნისი",
         "TO": "ტონგა",
@@ -869,14 +871,15 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "UA": "უკრაინა",
         "UG": "უგანდა",
         "UM": "აშშ-ის შორეული კუნძულები",
+        "UN": "გაერო",
         "US": "ამერიკის შეერთებული შტატები",
         "UY": "ურუგვაი",
         "UZ": "უზბეკეთი",
         "VA": "ქალაქი ვატიკანი",
         "VC": "სენტ-ვინსენტი და გრენადინები",
         "VE": "ვენესუელა",
-        "VG": "ბრიტანეთის ვირჯინიის კუნძულები",
-        "VI": "აშშ-ის ვირჯინიის კუნძულები",
+        "VG": "ბრიტანეთის ვირჯინის კუნძულები",
+        "VI": "აშშ-ის ვირჯინის კუნძულები",
         "VN": "ვიეტნამი",
         "VU": "ვანუატუ",
         "WF": "უოლისი და ფუტუნა",
@@ -884,7 +887,7 @@ public class LocalizedNamesImpl_ka extends LocalizedNamesImpl {
         "XK": "კოსოვო",
         "YE": "იემენი",
         "YT": "მაიოტა",
-        "ZA": "სამხრეთ აფრიკა",
+        "ZA": "სამხრეთ აფრიკის რესპუბლიკა",
         "ZM": "ზამბია",
         "ZW": "ზიმბაბვე",
         "ZZ": "უცნობი რეგიონი"

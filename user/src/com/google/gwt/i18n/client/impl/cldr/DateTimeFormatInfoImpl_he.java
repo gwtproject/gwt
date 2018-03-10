@@ -46,7 +46,7 @@ public class DateTimeFormatInfoImpl_he extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "dd/MM/yy";
+    return "d.M.y";
   }
 
   @Override
@@ -81,13 +81,23 @@ public class DateTimeFormatInfoImpl_he extends DateTimeFormatInfoImpl {
   public String[] erasShort() {
     return new String[] {
         "לפנה״ס",
-        "לסה״נ"
+        "לספירה"
     };
   }
 
   @Override
   public int firstDayOfTheWeek() {
     return 0;
+  }
+
+  @Override
+  public String formatHour24Minute() {
+    return "H:mm";
+  }
+
+  @Override
+  public String formatHour24MinuteSecond() {
+    return "H:mm:ss";
   }
 
   @Override
@@ -107,7 +117,7 @@ public class DateTimeFormatInfoImpl_he extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthNumDay() {
-    return "d/M";
+    return "d.M";
   }
 
   @Override
@@ -143,6 +153,16 @@ public class DateTimeFormatInfoImpl_he extends DateTimeFormatInfoImpl {
   @Override
   public String formatYearMonthWeekdayDay() {
     return "EEE, d בMMM y";
+  }
+
+  @Override
+  public String formatYearQuarterFull() {
+    return "QQQQ y";
+  }
+
+  @Override
+  public String formatYearQuarterShort() {
+    return "Q y";
   }
 
   @Override
@@ -210,13 +230,23 @@ public class DateTimeFormatInfoImpl_he extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] quartersShort() {
-    return new String[] {
-        "רבעון 1",
-        "רבעון 2",
-        "רבעון 3",
-        "רבעון 4"
-    };
+  public String timeFormatFull() {
+    return "H:mm:ss zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "H:mm:ss z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "H:mm:ss";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "H:mm";
   }
 
   @Override

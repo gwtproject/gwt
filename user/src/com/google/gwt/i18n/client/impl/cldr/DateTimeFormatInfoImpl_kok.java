@@ -71,6 +71,16 @@ public class DateTimeFormatInfoImpl_kok extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatYearMonthFullDay() {
+    return "d MMMM y";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "y-MM-dd";
+  }
+
+  @Override
   public String[] monthsFull() {
     return new String[] {
         "जानेवारी",
@@ -79,10 +89,10 @@ public class DateTimeFormatInfoImpl_kok extends DateTimeFormatInfoImpl {
         "एप्रिल",
         "मे",
         "जून",
-        "जुलै",
-        "ओगस्ट",
-        "सेप्टेंबर",
-        "ओक्टोबर",
+        "जुलाय",
+        "आगोस्त",
+        "सप्टेंबर",
+        "ऑक्टोबर",
         "नोव्हेंबर",
         "डिसेंबर"
     };
@@ -115,10 +125,10 @@ public class DateTimeFormatInfoImpl_kok extends DateTimeFormatInfoImpl {
         "एप्रिल",
         "मे",
         "जून",
-        "जुलै",
-        "ओगस्ट",
-        "सेप्टेंबर",
-        "ओक्टोबर",
+        "जुलाय",
+        "आगोस्त",
+        "सप्टेंबर",
+        "ऑक्टोबर",
         "नोव्हेंबर",
         "डिसेंबर"
     };
@@ -157,26 +167,39 @@ public class DateTimeFormatInfoImpl_kok extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "आदित्यवार",
-        "सोमवार",
+        "आयतार",
+        "सोमार",
         "मंगळार",
         "बुधवार",
         "गुरुवार",
-        "शुक्रवार",
-        "शनिवार"
+        "शुक्रार",
+        "शेनवार"
+    };
+  }
+
+  @Override
+  public String[] weekdaysNarrow() {
+    return new String[] {
+        "आ",
+        "सो",
+        "मं",
+        "बु",
+        "गु",
+        "शु",
+        "शे"
     };
   }
 
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "रवि",
-        "सोम",
-        "मंगळ",
-        "बुध",
-        "गुरु",
-        "शुक्र",
-        "शनि"
+        "आयतार",
+        "सोमार",
+        "मंगळार",
+        "बुधवार",
+        "गुरुवार",
+        "शुक्रार",
+        "शेनवार"
     };
   }
 

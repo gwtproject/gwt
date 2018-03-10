@@ -25,6 +25,13 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
 
   @Override
+  public String[] loadLikelyRegionCodes() {
+    return new String[] {
+        "NG",
+    };
+  }
+
+  @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
         "AC",
@@ -39,7 +46,6 @@ public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
         "AI",
         "AO",
         "AG",
-        "AN",
         "AQ",
         "AR",
         "AM",
@@ -91,6 +97,7 @@ public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
         "ER",
         "EE",
         "EU",
+        "EZ",
         "FR",
         "FJ",
         "PH",
@@ -275,6 +282,7 @@ public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
         "TR",
         "TM",
         "UM",
+        "UN",
         "UZ",
         "WF",
         "XK",
@@ -299,7 +307,6 @@ public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
     namesMap.put("AI", "Angila");
     namesMap.put("AL", "Albaniya");
     namesMap.put("AM", "Armeniya");
-    namesMap.put("AN", "Antiya Na Holan");
     namesMap.put("AR", "Arjantiniya");
     namesMap.put("AS", "Samowa Ta Amurka");
     namesMap.put("AT", "Ostiriya");
@@ -370,7 +377,7 @@ public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
     namesMap.put("HU", "Hungari");
     namesMap.put("ID", "Indunusiya");
     namesMap.put("IE", "Ayalan");
-    namesMap.put("IL", "Izira'ila");
+    namesMap.put("IL", "Iziraʼila");
     namesMap.put("IN", "Indiya");
     namesMap.put("IO", "Yankin Birtaniya Na Tekun Indiya");
     namesMap.put("IQ", "Iraƙi");
@@ -501,7 +508,6 @@ public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
         "AI": "Angila",
         "AL": "Albaniya",
         "AM": "Armeniya",
-        "AN": "Antiya Na Holan",
         "AR": "Arjantiniya",
         "AS": "Samowa Ta Amurka",
         "AT": "Ostiriya",
@@ -572,7 +578,7 @@ public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
         "HU": "Hungari",
         "ID": "Indunusiya",
         "IE": "Ayalan",
-        "IL": "Izira'ila",
+        "IL": "Iziraʼila",
         "IN": "Indiya",
         "IO": "Yankin Birtaniya Na Tekun Indiya",
         "IQ": "Iraƙi",

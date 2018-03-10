@@ -23,11 +23,11 @@ public class DateTimeFormatInfoImpl_pa_Guru extends DateTimeFormatInfoImpl_pa {
 
   @Override
   public int firstDayOfTheWeek() {
-    return 0;
+    return 1;
   }
 
   @Override
   public int weekendStart() {
-    return 0;
+    return 6;
   }
 }

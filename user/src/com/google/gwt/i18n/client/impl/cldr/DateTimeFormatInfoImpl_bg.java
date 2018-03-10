@@ -24,8 +24,8 @@ public class DateTimeFormatInfoImpl_bg extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "пр.об.",
-        "сл.об."
+        "am",
+        "pm"
     };
   }
 
@@ -46,7 +46,7 @@ public class DateTimeFormatInfoImpl_bg extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "d.MM.yy";
+    return "d.MM.yy 'г'.";
   }
 
   @Override
@@ -72,8 +72,8 @@ public class DateTimeFormatInfoImpl_bg extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "пр.Хр.",
-        "сл.Хр."
+        "преди Христа",
+        "след Христа"
     };
   }
 
@@ -86,13 +86,23 @@ public class DateTimeFormatInfoImpl_bg extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatHour12Minute() {
+    return "h:mm 'ч'. a";
+  }
+
+  @Override
+  public String formatHour12MinuteSecond() {
+    return "h:mm:ss 'ч'. a";
+  }
+
+  @Override
   public String formatHour24Minute() {
-    return "H:mm";
+    return "H:mm 'ч'.";
   }
 
   @Override
   public String formatHour24MinuteSecond() {
-    return "H:mm:ss";
+    return "H:mm:ss 'ч'.";
   }
 
   @Override
@@ -152,7 +162,7 @@ public class DateTimeFormatInfoImpl_bg extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "M.y 'г'.";
+    return "MM.y 'г'.";
   }
 
   @Override
@@ -214,59 +224,59 @@ public class DateTimeFormatInfoImpl_bg extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "ян.",
-        "февр.",
+        "яну",
+        "фев",
         "март",
-        "апр.",
+        "апр",
         "май",
         "юни",
         "юли",
-        "авг.",
-        "септ.",
-        "окт.",
-        "ноем.",
-        "дек."
+        "авг",
+        "сеп",
+        "окт",
+        "ное",
+        "дек"
     };
   }
 
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "1-во тримесечие",
-        "2-ро тримесечие",
-        "3-то тримесечие",
-        "4-то тримесечие"
+        "1. тримесечие",
+        "2. тримесечие",
+        "3. тримесечие",
+        "4. тримесечие"
     };
   }
 
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "1 трим.",
-        "2 трим.",
-        "3 трим.",
-        "4 трим."
+        "1. трим.",
+        "2. трим.",
+        "3. трим.",
+        "4. трим."
     };
   }
 
   @Override
   public String timeFormatFull() {
-    return "H:mm:ss zzzz";
+    return "H:mm:ss 'ч'. zzzz";
   }
 
   @Override
   public String timeFormatLong() {
-    return "H:mm:ss z";
+    return "H:mm:ss 'ч'. z";
   }
 
   @Override
   public String timeFormatMedium() {
-    return "H:mm:ss";
+    return "H:mm:ss 'ч'.";
   }
 
   @Override
   public String timeFormatShort() {
-    return "H:mm";
+    return "H:mm 'ч'.";
   }
 
   @Override

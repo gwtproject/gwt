@@ -24,8 +24,8 @@ public class DateTimeFormatInfoImpl_lv extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "priekšpusdienā",
-        "pēcpusdienā"
+        "priekšp.",
+        "pēcp."
     };
   }
 
@@ -117,7 +117,7 @@ public class DateTimeFormatInfoImpl_lv extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d.M.y.";
+    return "y.MM.d.";
   }
 
   @Override
@@ -132,7 +132,7 @@ public class DateTimeFormatInfoImpl_lv extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearQuarterShort() {
-    return "Q y";
+    return "y. 'g'. Q";
   }
 
   @Override
@@ -150,24 +150,6 @@ public class DateTimeFormatInfoImpl_lv extends DateTimeFormatInfoImpl {
         "oktobris",
         "novembris",
         "decembris"
-    };
-  }
-
-  @Override
-  public String[] monthsFullStandalone() {
-    return new String[] {
-        "Janvāris",
-        "Februāris",
-        "Marts",
-        "Aprīlis",
-        "Maijs",
-        "Jūnijs",
-        "Jūlijs",
-        "Augusts",
-        "Septembris",
-        "Oktobris",
-        "Novembris",
-        "Decembris"
     };
   }
 
@@ -190,24 +172,6 @@ public class DateTimeFormatInfoImpl_lv extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] monthsShortStandalone() {
-    return new String[] {
-        "Janv.",
-        "Febr.",
-        "Marts",
-        "Apr.",
-        "Maijs",
-        "Jūn.",
-        "Jūl.",
-        "Aug.",
-        "Sept.",
-        "Okt.",
-        "Nov.",
-        "Dec."
-    };
-  }
-
-  @Override
   public String[] quartersFull() {
     return new String[] {
         "1. ceturksnis",
@@ -220,10 +184,10 @@ public class DateTimeFormatInfoImpl_lv extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "C1",
-        "C2",
-        "C3",
-        "C4"
+        "1. cet.",
+        "2. cet.",
+        "3. cet.",
+        "4. cet."
     };
   }
 
@@ -269,13 +233,26 @@ public class DateTimeFormatInfoImpl_lv extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "Sv",
-        "Pr",
-        "Ot",
-        "Tr",
-        "Ce",
-        "Pk",
-        "Se"
+        "svētd.",
+        "pirmd.",
+        "otrd.",
+        "trešd.",
+        "ceturtd.",
+        "piektd.",
+        "sestd."
+    };
+  }
+
+  @Override
+  public String[] weekdaysShortStandalone() {
+    return new String[] {
+        "Svētd.",
+        "Pirmd.",
+        "Otrd.",
+        "Trešd.",
+        "Ceturtd.",
+        "Piektd.",
+        "Sestd."
     };
   }
 }

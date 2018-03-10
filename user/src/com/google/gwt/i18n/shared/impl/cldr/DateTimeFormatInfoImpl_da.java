@@ -28,27 +28,27 @@ public class DateTimeFormatInfoImpl_da extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatLong() {
-    return "d. MMM y";
+    return "d. MMMM y";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "dd/MM/y";
+    return "d. MMM y";
   }
 
   @Override
   public String dateFormatShort() {
-    return "dd/MM/yy";
+    return "dd/MM/y";
   }
 
   @Override
   public String dateTimeFull(String timePattern, String datePattern) {
-    return datePattern + " 'kl.' " + timePattern;
+    return datePattern + " 'kl'. " + timePattern;
   }
 
   @Override
   public String dateTimeLong(String timePattern, String datePattern) {
-    return datePattern + " 'kl.' " + timePattern;
+    return datePattern + " 'kl'. " + timePattern;
   }
 
   @Override
@@ -209,24 +209,6 @@ public class DateTimeFormatInfoImpl_da extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] monthsShortStandalone() {
-    return new String[] {
-        "jan",
-        "feb",
-        "mar",
-        "apr",
-        "maj",
-        "jun",
-        "jul",
-        "aug",
-        "sep",
-        "okt",
-        "nov",
-        "dec"
-    };
-  }
-
-  @Override
   public String[] quartersFull() {
     return new String[] {
         "1. kvartal",
@@ -239,10 +221,10 @@ public class DateTimeFormatInfoImpl_da extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "K1",
-        "K2",
-        "K3",
-        "K4"
+        "1. kvt.",
+        "2. kvt.",
+        "3. kvt.",
+        "4. kvt."
     };
   }
 

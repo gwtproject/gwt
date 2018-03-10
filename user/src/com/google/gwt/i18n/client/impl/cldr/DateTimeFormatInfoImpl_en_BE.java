@@ -20,4 +20,24 @@ package com.google.gwt.i18n.client.impl.cldr;
  * Implementation of DateTimeFormatInfo for the "en_BE" locale.
  */
 public class DateTimeFormatInfoImpl_en_BE extends DateTimeFormatInfoImpl_en_150 {
+
+  @Override
+  public String dateFormatMedium() {
+    return "dd MMM y";
+  }
+
+  @Override
+  public String dateFormatShort() {
+    return "dd/MM/yy";
+  }
+
+  @Override
+  public String formatMonthNumDay() {
+    return "d/M";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "d/M/y";
+  }
 }

@@ -22,14 +22,6 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_bn extends DateTimeFormatInfoImpl {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "am",
-        "pm"
-    };
-  }
-
-  @Override
   public String dateFormatFull() {
     return "EEEE, d MMMM, y";
   }
@@ -53,7 +45,7 @@ public class DateTimeFormatInfoImpl_bn extends DateTimeFormatInfoImpl {
   public String[] erasFull() {
     return new String[] {
         "খ্রিস্টপূর্ব",
-        "খৃষ্টাব্দ"
+        "খ্রীষ্টাব্দ"
     };
   }
 
@@ -174,6 +166,24 @@ public class DateTimeFormatInfoImpl_bn extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShort() {
     return new String[] {
+        "জানু",
+        "ফেব",
+        "মার্চ",
+        "এপ্রিল",
+        "মে",
+        "জুন",
+        "জুলাই",
+        "আগস্ট",
+        "সেপ্টেম্বর",
+        "অক্টোবর",
+        "নভেম্বর",
+        "ডিসেম্বর"
+    };
+  }
+
+  @Override
+  public String[] monthsShortStandalone() {
+    return new String[] {
         "জানুয়ারী",
         "ফেব্রুয়ারী",
         "মার্চ",
@@ -192,20 +202,10 @@ public class DateTimeFormatInfoImpl_bn extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "প্রথম চতুর্থাংশ",
-        "দ্বিতীয় চতুর্থাংশ",
-        "তৃতীয় চতুর্থাংশ",
-        "চতুর্থ চতুর্থাংশ"
-    };
-  }
-
-  @Override
-  public String[] quartersShort() {
-    return new String[] {
-        "চতুর্থাংশ ১",
-        "চতুর্থাংশ ২",
-        "চতুর্থাংশ ৩",
-        "চতুর্থাংশ ৪"
+        "ত্রৈমাসিক",
+        "দ্বিতীয় ত্রৈমাসিক",
+        "তৃতীয় ত্রৈমাসিক",
+        "চতুর্থ ত্রৈমাসিক"
     };
   }
 
@@ -231,6 +231,19 @@ public class DateTimeFormatInfoImpl_bn extends DateTimeFormatInfoImpl {
 
   @Override
   public String[] weekdaysFull() {
+    return new String[] {
+        "রবিবার",
+        "সোমবার",
+        "মঙ্গলবার",
+        "বুধবার",
+        "বৃহস্পতিবার",
+        "শুক্রবার",
+        "শনিবার"
+    };
+  }
+
+  @Override
+  public String[] weekdaysFullStandalone() {
     return new String[] {
         "রবিবার",
         "সোমবার",

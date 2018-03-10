@@ -114,8 +114,8 @@ public class DateTimeFormatInfoImpl_gv extends DateTimeFormatInfoImpl {
         "Luanistyn",
         "M-fouyir",
         "J-fouyir",
-        "M.Houney",
-        "M.Nollick"
+        "M-Houney",
+        "M-Nollick"
     };
   }
 

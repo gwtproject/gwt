@@ -22,6 +22,14 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_es_PR extends DateTimeFormatInfoImpl_es_419 {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "a. m.",
+        "p. m."
+    };
+  }
+
+  @Override
   public String dateFormatMedium() {
     return "MM/dd/y";
   }

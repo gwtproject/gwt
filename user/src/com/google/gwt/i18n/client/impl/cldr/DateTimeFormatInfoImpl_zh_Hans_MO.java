@@ -27,23 +27,13 @@ public class DateTimeFormatInfoImpl_zh_Hans_MO extends DateTimeFormatInfoImpl_zh
   }
 
   @Override
-  public String dateTimeFull(String timePattern, String datePattern) {
-    return datePattern + timePattern;
-  }
-
-  @Override
-  public String dateTimeLong(String timePattern, String datePattern) {
-    return datePattern + timePattern;
+  public int firstDayOfTheWeek() {
+    return 0;
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M-d";
-  }
-
-  @Override
-  public String formatYearMonthNum() {
-    return "y年M月";
+    return "d/M";
   }
 
   @Override

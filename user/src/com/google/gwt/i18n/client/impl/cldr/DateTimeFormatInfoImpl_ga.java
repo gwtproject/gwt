@@ -24,8 +24,8 @@ public class DateTimeFormatInfoImpl_ga extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "a.m.",
-        "p.m."
+        "r.n.",
+        "i.n."
     };
   }
 
@@ -123,6 +123,16 @@ public class DateTimeFormatInfoImpl_ga extends DateTimeFormatInfoImpl {
   @Override
   public String formatYearMonthWeekdayDay() {
     return "EEE d MMM y";
+  }
+
+  @Override
+  public String formatYearQuarterFull() {
+    return "QQQQ y";
+  }
+
+  @Override
+  public String formatYearQuarterShort() {
+    return "Q y";
   }
 
   @Override

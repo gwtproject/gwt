@@ -23,19 +23,24 @@ public class DateTimeFormatInfoImpl_eu extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatFull() {
-    return "y('e')'ko' MMMM d, EEEE";
+    return "y('e')'ko' MMMM'ren' d('a'), EEEE";
   }
 
   @Override
   public String dateFormatLong() {
-    return "y('e')'ko' MMMM d";
+    return "y('e')'ko' MMMM'ren' d('a')";
+  }
+
+  @Override
+  public String dateFormatShort() {
+    return "yy/M/d";
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
         "K.a.",
-        "K.o."
+        "Kristo ondoren"
     };
   }
 
@@ -59,7 +64,7 @@ public class DateTimeFormatInfoImpl_eu extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFullDay() {
-    return "y('e')'ko' MMMM d";
+    return "y('e')'ko' MMMM'ren' d";
   }
 
   @Override
@@ -85,24 +90,6 @@ public class DateTimeFormatInfoImpl_eu extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsFull() {
     return new String[] {
-        "urtarrilak",
-        "otsailak",
-        "martxoak",
-        "apirilak",
-        "maiatzak",
-        "ekainak",
-        "uztailak",
-        "abuztuak",
-        "irailak",
-        "urriak",
-        "azaroak",
-        "abenduak"
-    };
-  }
-
-  @Override
-  public String[] monthsFullStandalone() {
-    return new String[] {
         "urtarrila",
         "otsaila",
         "martxoa",
@@ -115,6 +102,24 @@ public class DateTimeFormatInfoImpl_eu extends DateTimeFormatInfoImpl {
         "urria",
         "azaroa",
         "abendua"
+    };
+  }
+
+  @Override
+  public String[] monthsFullStandalone() {
+    return new String[] {
+        "urtarrila",
+        "Otsaila",
+        "Martxoa",
+        "Apirila",
+        "Maiatza",
+        "Ekaina",
+        "Uztaila",
+        "Abuztua",
+        "Iraila",
+        "Urria",
+        "Azaroa",
+        "Abendua"
     };
   }
 
@@ -175,6 +180,16 @@ public class DateTimeFormatInfoImpl_eu extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String timeFormatFull() {
+    return "HH:mm:ss (zzzz)";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "HH:mm:ss (z)";
+  }
+
+  @Override
   public String[] weekdaysFull() {
     return new String[] {
         "igandea",
@@ -184,6 +199,19 @@ public class DateTimeFormatInfoImpl_eu extends DateTimeFormatInfoImpl {
         "osteguna",
         "ostirala",
         "larunbata"
+    };
+  }
+
+  @Override
+  public String[] weekdaysFullStandalone() {
+    return new String[] {
+        "Igandea",
+        "Astelehena",
+        "Asteartea",
+        "Asteazkena",
+        "Osteguna",
+        "Ostirala",
+        "Larunbata"
     };
   }
 

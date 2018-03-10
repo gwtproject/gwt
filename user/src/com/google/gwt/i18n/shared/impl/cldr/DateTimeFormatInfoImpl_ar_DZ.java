@@ -22,33 +22,8 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_ar_DZ extends DateTimeFormatInfoImpl_ar_001 {
 
   @Override
-  public String dateFormatMedium() {
-    return "y/MM/dd";
-  }
-
-  @Override
-  public String dateFormatShort() {
-    return "y/M/d";
-  }
-
-  @Override
   public int firstDayOfTheWeek() {
     return 6;
-  }
-
-  @Override
-  public String formatMonthNumDay() {
-    return "M/d";
-  }
-
-  @Override
-  public String formatYearMonthNum() {
-    return "y/M";
-  }
-
-  @Override
-  public String formatYearMonthNumDay() {
-    return "y/M/d";
   }
 
   @Override
@@ -107,11 +82,11 @@ public class DateTimeFormatInfoImpl_ar_DZ extends DateTimeFormatInfoImpl_ar_001 
 
   @Override
   public int weekendEnd() {
-    return 5;
+    return 6;
   }
 
   @Override
   public int weekendStart() {
-    return 4;
+    return 5;
   }
 }

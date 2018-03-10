@@ -48,6 +48,7 @@ public class LocalizedNamesImpl_yo extends LocalizedNamesImpl {
         "EA",
         "EH",
         "EU",
+        "EZ",
         "FO",
         "GG",
         "GS",
@@ -55,6 +56,7 @@ public class LocalizedNamesImpl_yo extends LocalizedNamesImpl {
         "HK",
         "HM",
         "IC",
+        "VA",
         "IM",
         "JE",
         "ME",
@@ -121,7 +123,6 @@ public class LocalizedNamesImpl_yo extends LocalizedNamesImpl {
         "ET",
         "VU",
         "FR",
-        "VA",
         "VE",
         "VN",
         "FJ",
@@ -216,7 +217,6 @@ public class LocalizedNamesImpl_yo extends LocalizedNamesImpl {
         "NA",
         "NR",
         "NL",
-        "AN",
         "NP",
         "NI",
         "NU",
@@ -292,6 +292,7 @@ public class LocalizedNamesImpl_yo extends LocalizedNamesImpl {
         "TA",
         "TF",
         "UM",
+        "UN",
         "XK",
     };
   }
@@ -306,7 +307,6 @@ public class LocalizedNamesImpl_yo extends LocalizedNamesImpl {
     namesMap.put("AI", "Orílẹ́ède Ààngúlílà");
     namesMap.put("AL", "Orílẹ́ède Àlùbàníánì");
     namesMap.put("AM", "Orílẹ́ède Améníà");
-    namesMap.put("AN", "Orílẹ́ède Nedalandi ti Antelisi");
     namesMap.put("AO", "Orílẹ́ède Ààngólà");
     namesMap.put("AR", "Orílẹ́ède Agentínà");
     namesMap.put("AS", "Sámóánì ti Orílẹ́ède Àméríkà");
@@ -511,7 +511,7 @@ public class LocalizedNamesImpl_yo extends LocalizedNamesImpl {
     namesMap.put("US", "Orílẹ́ède Orilẹede Amerika");
     namesMap.put("UY", "Orílẹ́ède Nruguayi");
     namesMap.put("UZ", "Orílẹ́ède Nṣibẹkisitani");
-    namesMap.put("VA", "Orílẹ́ède Fatikani");
+    namesMap.put("VA", "Ìlú Vatican");
     namesMap.put("VC", "Orílẹ́ède Fisẹnnti ati Genadina");
     namesMap.put("VE", "Orílẹ́ède Fẹnẹṣuẹla");
     namesMap.put("VG", "Orílẹ́ède Etíkun Fágínì ti ìlú Bírítísì");
@@ -541,7 +541,6 @@ public class LocalizedNamesImpl_yo extends LocalizedNamesImpl {
         "AI": "Orílẹ́ède Ààngúlílà",
         "AL": "Orílẹ́ède Àlùbàníánì",
         "AM": "Orílẹ́ède Améníà",
-        "AN": "Orílẹ́ède Nedalandi ti Antelisi",
         "AO": "Orílẹ́ède Ààngólà",
         "AR": "Orílẹ́ède Agentínà",
         "AS": "Sámóánì ti Orílẹ́ède Àméríkà",
@@ -746,7 +745,7 @@ public class LocalizedNamesImpl_yo extends LocalizedNamesImpl {
         "US": "Orílẹ́ède Orilẹede Amerika",
         "UY": "Orílẹ́ède Nruguayi",
         "UZ": "Orílẹ́ède Nṣibẹkisitani",
-        "VA": "Orílẹ́ède Fatikani",
+        "VA": "Ìlú Vatican",
         "VC": "Orílẹ́ède Fisẹnnti ati Genadina",
         "VE": "Orílẹ́ède Fẹnẹṣuẹla",
         "VG": "Orílẹ́ède Etíkun Fágínì ti ìlú Bírítísì",

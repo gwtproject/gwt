@@ -22,14 +22,6 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_mt extends DateTimeFormatInfoImpl {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "QN",
-        "WN"
-    };
-  }
-
-  @Override
   public String dateFormatFull() {
     return "EEEE, d 'ta'’ MMMM y";
   }
@@ -71,8 +63,53 @@ public class DateTimeFormatInfoImpl_mt extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthFullDay() {
+    return "d 'ta'’ MMMM";
+  }
+
+  @Override
+  public String formatMonthFullWeekdayDay() {
+    return "EEEE, d 'ta'’ MMMM";
+  }
+
+  @Override
+  public String formatYearMonthAbbrev() {
+    return "MMM y";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "d 'ta'’ MMM, y";
+  }
+
+  @Override
+  public String formatYearMonthFull() {
+    return "MMMM y";
+  }
+
+  @Override
   public String formatYearMonthFullDay() {
     return "d 'ta'’ MMMM y";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "d/M/y";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "EEE, d 'ta'’ MMM, y";
+  }
+
+  @Override
+  public String formatYearQuarterFull() {
+    return "QQQQ - y";
+  }
+
+  @Override
+  public String formatYearQuarterShort() {
+    return "Q - y";
   }
 
   @Override
@@ -112,6 +149,24 @@ public class DateTimeFormatInfoImpl_mt extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] monthsNarrowStandalone() {
+    return new String[] {
+        "Jn",
+        "Fr",
+        "Mz",
+        "Ap",
+        "Mj",
+        "Ġn",
+        "Lj",
+        "Aw",
+        "St",
+        "Ob",
+        "Nv",
+        "Dċ"
+    };
+  }
+
+  @Override
   public String[] monthsShort() {
     return new String[] {
         "Jan",
@@ -132,10 +187,10 @@ public class DateTimeFormatInfoImpl_mt extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "K1",
-        "K2",
-        "K3",
-        "K4"
+        "1el kwart",
+        "2ni kwart",
+        "3et kwart",
+        "4ba’ kwart"
     };
   }
 
@@ -165,13 +220,26 @@ public class DateTimeFormatInfoImpl_mt extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "Ħ",
+        "Ħd",
         "T",
-        "T",
-        "E",
-        "Ħ",
-        "Ġ",
-        "S"
+        "Tl",
+        "Er",
+        "Ħm",
+        "Ġm",
+        "Sb"
+    };
+  }
+
+  @Override
+  public String[] weekdaysNarrowStandalone() {
+    return new String[] {
+        "Ħd",
+        "Tn",
+        "Tl",
+        "Er",
+        "Ħm",
+        "Ġm",
+        "Sb"
     };
   }
 

@@ -58,7 +58,6 @@ public class LocalizedNamesImpl_se extends LocalizedNamesImpl {
         "BA",
         "BW",
         "BV",
-        "BQ",
         "BR",
         "VG",
         "BN",
@@ -94,6 +93,7 @@ public class LocalizedNamesImpl_se extends LocalizedNamesImpl {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FK",
         "FO",
         "FJ",
@@ -272,6 +272,7 @@ public class LocalizedNamesImpl_se extends LocalizedNamesImpl {
         "UG",
         "UA",
         "UM",
+        "UN",
         "HU",
         "UY",
         "UZ",
@@ -281,6 +282,7 @@ public class LocalizedNamesImpl_se extends LocalizedNamesImpl {
         "VN",
         "BY",
         "NL",
+        "BQ",
         "SX",
         "WF",
         "ZM",
@@ -332,6 +334,8 @@ public class LocalizedNamesImpl_se extends LocalizedNamesImpl {
     namesMap.put("BA", "Bosnia-Hercegovina");
     namesMap.put("BE", "Belgia");
     namesMap.put("BG", "Bulgária");
+    namesMap.put("BL", "Saint Barthélemy");
+    namesMap.put("BQ", "Vuolleeatnamat Karibe");
     namesMap.put("BR", "Brasil");
     namesMap.put("BV", "Bouvet-sullot");
     namesMap.put("BY", "Vilges-Ruošša");
@@ -398,6 +402,7 @@ public class LocalizedNamesImpl_se extends LocalizedNamesImpl {
     namesMap.put("KY", "Cayman-sullot");
     namesMap.put("KZ", "Kasakstan");
     namesMap.put("LB", "Libanon");
+    namesMap.put("LC", "Saint Lucia");
     namesMap.put("LT", "Lietuva");
     namesMap.put("LV", "Látvia");
     namesMap.put("MA", "Marokko");
@@ -435,6 +440,7 @@ public class LocalizedNamesImpl_se extends LocalizedNamesImpl {
     namesMap.put("SC", "Seychellsullot");
     namesMap.put("SD", "Davvisudan");
     namesMap.put("SE", "Ruoŧŧa");
+    namesMap.put("SH", "Saint Helena");
     namesMap.put("SJ", "Svalbárda ja Jan Mayen");
     namesMap.put("SK", "Slovákia");
     namesMap.put("SO", "Somália");
@@ -512,6 +518,8 @@ public class LocalizedNamesImpl_se extends LocalizedNamesImpl {
         "BA": "Bosnia-Hercegovina",
         "BE": "Belgia",
         "BG": "Bulgária",
+        "BL": "Saint Barthélemy",
+        "BQ": "Vuolleeatnamat Karibe",
         "BR": "Brasil",
         "BV": "Bouvet-sullot",
         "BY": "Vilges-Ruošša",
@@ -578,6 +586,7 @@ public class LocalizedNamesImpl_se extends LocalizedNamesImpl {
         "KY": "Cayman-sullot",
         "KZ": "Kasakstan",
         "LB": "Libanon",
+        "LC": "Saint Lucia",
         "LT": "Lietuva",
         "LV": "Látvia",
         "MA": "Marokko",
@@ -615,6 +624,7 @@ public class LocalizedNamesImpl_se extends LocalizedNamesImpl {
         "SC": "Seychellsullot",
         "SD": "Davvisudan",
         "SE": "Ruoŧŧa",
+        "SH": "Saint Helena",
         "SJ": "Svalbárda ja Jan Mayen",
         "SK": "Slovákia",
         "SO": "Somália",

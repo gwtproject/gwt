@@ -68,18 +68,18 @@ public class DateTimeFormatInfoImpl_kw extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsFull() {
     return new String[] {
-        "Mys Genver",
-        "Mys Whevrel",
-        "Mys Merth",
-        "Mys Ebrel",
-        "Mys Me",
-        "Mys Efan",
-        "Mys Gortheren",
-        "Mye Est",
-        "Mys Gwyngala",
-        "Mys Hedra",
-        "Mys Du",
-        "Mys Kevardhu"
+        "mis Genver",
+        "mis Hwevrer",
+        "mis Meurth",
+        "mis Ebrel",
+        "mis Me",
+        "mis Metheven",
+        "mis Gortheren",
+        "mis Est",
+        "mis Gwynngala",
+        "mis Hedra",
+        "mis Du",
+        "mis Kevardhu"
     };
   }
 
@@ -105,11 +105,11 @@ public class DateTimeFormatInfoImpl_kw extends DateTimeFormatInfoImpl {
   public String[] monthsShort() {
     return new String[] {
         "Gen",
-        "Whe",
-        "Mer",
+        "Hwe",
+        "Meu",
         "Ebr",
         "Me",
-        "Efn",
+        "Met",
         "Gor",
         "Est",
         "Gwn",
@@ -132,13 +132,13 @@ public class DateTimeFormatInfoImpl_kw extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "De Sul",
-        "De Lun",
-        "De Merth",
-        "De Merher",
-        "De Yow",
-        "De Gwener",
-        "De Sadorn"
+        "dy Sul",
+        "dy Lun",
+        "dy Meurth",
+        "dy Merher",
+        "dy Yow",
+        "dy Gwener",
+        "dy Sadorn"
     };
   }
 

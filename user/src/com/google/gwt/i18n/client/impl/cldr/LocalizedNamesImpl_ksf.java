@@ -37,7 +37,6 @@ public class LocalizedNamesImpl_ksf extends LocalizedNamesImpl {
         "AI",
         "AO",
         "AG",
-        "AN",
         "AQ",
         "SA",
         "AR",
@@ -86,6 +85,7 @@ public class LocalizedNamesImpl_ksf extends LocalizedNamesImpl {
         "EA",
         "EH",
         "EU",
+        "EZ",
         "FJ",
         "PH",
         "FI",
@@ -253,6 +253,7 @@ public class LocalizedNamesImpl_ksf extends LocalizedNamesImpl {
         "UG",
         "UA",
         "UM",
+        "UN",
         "UY",
         "UZ",
         "WF",
@@ -299,7 +300,6 @@ public class LocalizedNamesImpl_ksf extends LocalizedNamesImpl {
     namesMap.put("AI", "angiya");
     namesMap.put("AL", "albaní");
     namesMap.put("AM", "armɛní");
-    namesMap.put("AN", "antíyǝ nɛlandé");
     namesMap.put("AO", "angóla");
     namesMap.put("AR", "arjǝntín");
     namesMap.put("AS", "samɔa a amɛrika");
@@ -533,7 +533,6 @@ public class LocalizedNamesImpl_ksf extends LocalizedNamesImpl {
         "AI": "angiya",
         "AL": "albaní",
         "AM": "armɛní",
-        "AN": "antíyǝ nɛlandé",
         "AO": "angóla",
         "AR": "arjǝntín",
         "AS": "samɔa a amɛrika",

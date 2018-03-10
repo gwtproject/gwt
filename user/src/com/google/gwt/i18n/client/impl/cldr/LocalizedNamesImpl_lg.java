@@ -62,18 +62,17 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
         "BJ",
         "BM",
         "SB",
+        "PH",
+        "CK",
+        "MH",
+        "MP",
+        "VI",
         "IO",
         "FK",
         "CV",
         "KM",
         "MV",
         "TC",
-        "AN",
-        "PH",
-        "CK",
-        "MH",
-        "MP",
-        "VI",
         "KY",
         "VG",
         "BL",
@@ -114,6 +113,7 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FJ",
         "FI",
         "FO",
@@ -274,6 +274,7 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
         "TT",
         "TV",
         "UM",
+        "UN",
         "VU",
         "VA",
         "VE",
@@ -306,7 +307,6 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
     namesMap.put("AI", "Angwila");
     namesMap.put("AL", "Alibaniya");
     namesMap.put("AM", "Arameniya");
-    namesMap.put("AN", "Bizinga bya Antile eby'abaHolandi");
     namesMap.put("AR", "Arigentina");
     namesMap.put("AS", "Samowa omumerika");
     namesMap.put("AT", "Awusituriya");
@@ -340,7 +340,7 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
     namesMap.put("CN", "Cayina");
     namesMap.put("CO", "Kolombya");
     namesMap.put("CR", "Kosita Rika");
-    namesMap.put("CV", "Bizinga by'e Kepu Veredi");
+    namesMap.put("CV", "Bizinga by’e Kepu Veredi");
     namesMap.put("CY", "Sipuriya");
     namesMap.put("CZ", "Lipubulika ya Ceeka");
     namesMap.put("DE", "Budaaki");
@@ -356,7 +356,7 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
     namesMap.put("ES", "Sipeyini");
     namesMap.put("ET", "Esyopya");
     namesMap.put("FI", "Finilandi");
-    namesMap.put("FK", "Bizinga by'eFalikalandi");
+    namesMap.put("FK", "Bizinga by’eFalikalandi");
     namesMap.put("FM", "Mikuronezya");
     namesMap.put("FR", "Bufalansa");
     namesMap.put("GA", "Gaboni");
@@ -370,7 +370,7 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
     namesMap.put("GM", "Gambya");
     namesMap.put("GN", "Gini");
     namesMap.put("GP", "Gwadalupe");
-    namesMap.put("GQ", "Gayana ey'oku ekweta");
+    namesMap.put("GQ", "Gayana ey’oku ekweta");
     namesMap.put("GR", "Bugereeki/Buyonaani");
     namesMap.put("GT", "Gwatemala");
     namesMap.put("GU", "Gwamu");
@@ -384,7 +384,7 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
     namesMap.put("IE", "Ayalandi");
     namesMap.put("IL", "Yisirayeri");
     namesMap.put("IN", "Buyindi");
-    namesMap.put("IO", "Bizinga by'eCago");
+    namesMap.put("IO", "Bizinga by’eCago");
     namesMap.put("IQ", "Yiraaka");
     namesMap.put("IR", "Yiraani");
     namesMap.put("IS", "Ayisirandi");
@@ -394,10 +394,10 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
     namesMap.put("JP", "Japani");
     namesMap.put("KG", "Kirigizisitaani");
     namesMap.put("KH", "Kambodya");
-    namesMap.put("KM", "Bizinga by'eKomoro");
+    namesMap.put("KM", "Bizinga by’eKomoro");
     namesMap.put("KN", "Senti Kitisi ne Nevisi");
-    namesMap.put("KP", "Koreya ey'omumambuka");
-    namesMap.put("KR", "Koreya ey'omumaserengeta");
+    namesMap.put("KP", "Koreya ey’omumambuka");
+    namesMap.put("KR", "Koreya ey’omumaserengeta");
     namesMap.put("KW", "Kuweti");
     namesMap.put("KY", "Bizinga ebya Kayimaani");
     namesMap.put("KZ", "Kazakisitaani");
@@ -419,20 +419,20 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
     namesMap.put("MK", "Masedoniya");
     namesMap.put("MM", "Myanima");
     namesMap.put("MN", "Mongoliya");
-    namesMap.put("MP", "Bizinga bya Mariyana eby'omumambuka");
+    namesMap.put("MP", "Bizinga bya Mariyana eby’omumambuka");
     namesMap.put("MQ", "Maritiniiki");
     namesMap.put("MR", "Mawulitenya");
     namesMap.put("MS", "Monteseraati");
     namesMap.put("MT", "Malita");
     namesMap.put("MU", "Mawulisyasi");
-    namesMap.put("MV", "Bizinga by'eMalidive");
+    namesMap.put("MV", "Bizinga by’eMalidive");
     namesMap.put("MX", "Mekisiko");
     namesMap.put("MY", "Malezya");
     namesMap.put("MZ", "Mozambiiki");
     namesMap.put("NA", "Namibiya");
     namesMap.put("NC", "Kaledonya mupya");
     namesMap.put("NE", "Nije");
-    namesMap.put("NF", "Kizinga ky'eNorofoko");
+    namesMap.put("NF", "Kizinga ky’eNorofoko");
     namesMap.put("NG", "Nayijerya");
     namesMap.put("NI", "Nikaraguwa");
     namesMap.put("NL", "Holandi");
@@ -459,7 +459,7 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
     namesMap.put("RO", "Lomaniya");
     namesMap.put("RU", "Lasa");
     namesMap.put("SA", "Sawudarebya - Buwarabu");
-    namesMap.put("SB", "Bizanga by'eSolomooni");
+    namesMap.put("SB", "Bizanga by’eSolomooni");
     namesMap.put("SC", "Sesere");
     namesMap.put("SD", "Sudaani");
     namesMap.put("SE", "Swideni");
@@ -476,7 +476,7 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
     namesMap.put("SV", "El salivado");
     namesMap.put("SY", "Siriya");
     namesMap.put("SZ", "Swazirandi");
-    namesMap.put("TC", "Bizinga by'eTaaka ne Kayikosi");
+    namesMap.put("TC", "Bizinga by’eTaaka ne Kayikosi");
     namesMap.put("TD", "Caadi");
     namesMap.put("TH", "Tayirandi");
     namesMap.put("TJ", "Tajikisitaani");
@@ -497,7 +497,7 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
     namesMap.put("VC", "Senti Vinsenti ne Gurendadiini");
     namesMap.put("VE", "Venzwera");
     namesMap.put("VG", "Bizinga ebya Virigini ebitwalibwa Bungereza");
-    namesMap.put("VI", "Bizinga bya Virigini eby'Amerika");
+    namesMap.put("VI", "Bizinga bya Virigini eby’Amerika");
     namesMap.put("VN", "Vyetinaamu");
     namesMap.put("VU", "Vanawuwatu");
     namesMap.put("WF", "Walisi ne Futuna");
@@ -521,7 +521,6 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
         "AI": "Angwila",
         "AL": "Alibaniya",
         "AM": "Arameniya",
-        "AN": "Bizinga bya Antile eby'abaHolandi",
         "AR": "Arigentina",
         "AS": "Samowa omumerika",
         "AT": "Awusituriya",
@@ -555,7 +554,7 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
         "CN": "Cayina",
         "CO": "Kolombya",
         "CR": "Kosita Rika",
-        "CV": "Bizinga by'e Kepu Veredi",
+        "CV": "Bizinga by’e Kepu Veredi",
         "CY": "Sipuriya",
         "CZ": "Lipubulika ya Ceeka",
         "DE": "Budaaki",
@@ -571,7 +570,7 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
         "ES": "Sipeyini",
         "ET": "Esyopya",
         "FI": "Finilandi",
-        "FK": "Bizinga by'eFalikalandi",
+        "FK": "Bizinga by’eFalikalandi",
         "FM": "Mikuronezya",
         "FR": "Bufalansa",
         "GA": "Gaboni",
@@ -585,7 +584,7 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
         "GM": "Gambya",
         "GN": "Gini",
         "GP": "Gwadalupe",
-        "GQ": "Gayana ey'oku ekweta",
+        "GQ": "Gayana ey’oku ekweta",
         "GR": "Bugereeki/Buyonaani",
         "GT": "Gwatemala",
         "GU": "Gwamu",
@@ -599,7 +598,7 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
         "IE": "Ayalandi",
         "IL": "Yisirayeri",
         "IN": "Buyindi",
-        "IO": "Bizinga by'eCago",
+        "IO": "Bizinga by’eCago",
         "IQ": "Yiraaka",
         "IR": "Yiraani",
         "IS": "Ayisirandi",
@@ -609,10 +608,10 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
         "JP": "Japani",
         "KG": "Kirigizisitaani",
         "KH": "Kambodya",
-        "KM": "Bizinga by'eKomoro",
+        "KM": "Bizinga by’eKomoro",
         "KN": "Senti Kitisi ne Nevisi",
-        "KP": "Koreya ey'omumambuka",
-        "KR": "Koreya ey'omumaserengeta",
+        "KP": "Koreya ey’omumambuka",
+        "KR": "Koreya ey’omumaserengeta",
         "KW": "Kuweti",
         "KY": "Bizinga ebya Kayimaani",
         "KZ": "Kazakisitaani",
@@ -634,20 +633,20 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
         "MK": "Masedoniya",
         "MM": "Myanima",
         "MN": "Mongoliya",
-        "MP": "Bizinga bya Mariyana eby'omumambuka",
+        "MP": "Bizinga bya Mariyana eby’omumambuka",
         "MQ": "Maritiniiki",
         "MR": "Mawulitenya",
         "MS": "Monteseraati",
         "MT": "Malita",
         "MU": "Mawulisyasi",
-        "MV": "Bizinga by'eMalidive",
+        "MV": "Bizinga by’eMalidive",
         "MX": "Mekisiko",
         "MY": "Malezya",
         "MZ": "Mozambiiki",
         "NA": "Namibiya",
         "NC": "Kaledonya mupya",
         "NE": "Nije",
-        "NF": "Kizinga ky'eNorofoko",
+        "NF": "Kizinga ky’eNorofoko",
         "NG": "Nayijerya",
         "NI": "Nikaraguwa",
         "NL": "Holandi",
@@ -674,7 +673,7 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
         "RO": "Lomaniya",
         "RU": "Lasa",
         "SA": "Sawudarebya - Buwarabu",
-        "SB": "Bizanga by'eSolomooni",
+        "SB": "Bizanga by’eSolomooni",
         "SC": "Sesere",
         "SD": "Sudaani",
         "SE": "Swideni",
@@ -691,7 +690,7 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
         "SV": "El salivado",
         "SY": "Siriya",
         "SZ": "Swazirandi",
-        "TC": "Bizinga by'eTaaka ne Kayikosi",
+        "TC": "Bizinga by’eTaaka ne Kayikosi",
         "TD": "Caadi",
         "TH": "Tayirandi",
         "TJ": "Tajikisitaani",
@@ -712,7 +711,7 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
         "VC": "Senti Vinsenti ne Gurendadiini",
         "VE": "Venzwera",
         "VG": "Bizinga ebya Virigini ebitwalibwa Bungereza",
-        "VI": "Bizinga bya Virigini eby'Amerika",
+        "VI": "Bizinga bya Virigini eby’Amerika",
         "VN": "Vyetinaamu",
         "VU": "Vanawuwatu",
         "WF": "Walisi ne Futuna",

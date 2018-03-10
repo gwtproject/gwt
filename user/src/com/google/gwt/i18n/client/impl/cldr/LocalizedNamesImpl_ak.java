@@ -91,6 +91,7 @@ public class LocalizedNamesImpl_ak extends LocalizedNamesImpl {
         "EH",
         "KP",
         "EU",
+        "EZ",
         "FJ",
         "FI",
         "FO",
@@ -205,7 +206,6 @@ public class LocalizedNamesImpl_ak extends LocalizedNamesImpl {
         "NF",
         "NO",
         "NL",
-        "AN",
         "NP",
         "OM",
         "PK",
@@ -274,6 +274,7 @@ public class LocalizedNamesImpl_ak extends LocalizedNamesImpl {
         "UG",
         "UA",
         "UM",
+        "UN",
         "AE",
         "UZ",
         "VU",
@@ -305,7 +306,6 @@ public class LocalizedNamesImpl_ak extends LocalizedNamesImpl {
     namesMap.put("AI", "Anguila");
     namesMap.put("AL", "Albenia");
     namesMap.put("AM", "Aamenia");
-    namesMap.put("AN", "Nɛdɛland Antelez");
     namesMap.put("AR", "Agyɛntina");
     namesMap.put("AS", "Amɛrika Samoa");
     namesMap.put("AT", "Ɔstria");
@@ -331,7 +331,7 @@ public class LocalizedNamesImpl_ak extends LocalizedNamesImpl {
     namesMap.put("CF", "Afrika Finimfin Man");
     namesMap.put("CG", "Kongo");
     namesMap.put("CH", "Swetzaland");
-    namesMap.put("CI", "La Côte d'Ivoire");
+    namesMap.put("CI", "La Côte d’Ivoire");
     namesMap.put("CK", "Kook Nsupɔw");
     namesMap.put("CL", "Kyili");
     namesMap.put("CM", "Kamɛrun");
@@ -395,6 +395,7 @@ public class LocalizedNamesImpl_ak extends LocalizedNamesImpl {
     namesMap.put("KY", "Kemanfo Islands");
     namesMap.put("KZ", "Kazakstan");
     namesMap.put("LB", "Lɛbanɔn");
+    namesMap.put("LC", "Saint Lucia");
     namesMap.put("LI", "Lektenstaen");
     namesMap.put("LR", "Laeberia");
     namesMap.put("LS", "Lɛsutu");
@@ -439,7 +440,9 @@ public class LocalizedNamesImpl_ak extends LocalizedNamesImpl {
     namesMap.put("RU", "Rɔhyea");
     namesMap.put("SC", "Seyhyɛl");
     namesMap.put("SG", "Singapɔ");
+    namesMap.put("SH", "Saint Helena");
     namesMap.put("SI", "Slovinia");
+    namesMap.put("ST", "São Tomé and Príncipe");
     namesMap.put("SV", "Ɛl Salvadɔ");
     namesMap.put("SY", "Siria");
     namesMap.put("TC", "Turks ne Caicos Islands");
@@ -479,7 +482,6 @@ public class LocalizedNamesImpl_ak extends LocalizedNamesImpl {
         "AI": "Anguila",
         "AL": "Albenia",
         "AM": "Aamenia",
-        "AN": "Nɛdɛland Antelez",
         "AR": "Agyɛntina",
         "AS": "Amɛrika Samoa",
         "AT": "Ɔstria",
@@ -505,7 +507,7 @@ public class LocalizedNamesImpl_ak extends LocalizedNamesImpl {
         "CF": "Afrika Finimfin Man",
         "CG": "Kongo",
         "CH": "Swetzaland",
-        "CI": "La Côte d'Ivoire",
+        "CI": "La Côte d’Ivoire",
         "CK": "Kook Nsupɔw",
         "CL": "Kyili",
         "CM": "Kamɛrun",
@@ -569,6 +571,7 @@ public class LocalizedNamesImpl_ak extends LocalizedNamesImpl {
         "KY": "Kemanfo Islands",
         "KZ": "Kazakstan",
         "LB": "Lɛbanɔn",
+        "LC": "Saint Lucia",
         "LI": "Lektenstaen",
         "LR": "Laeberia",
         "LS": "Lɛsutu",
@@ -613,7 +616,9 @@ public class LocalizedNamesImpl_ak extends LocalizedNamesImpl {
         "RU": "Rɔhyea",
         "SC": "Seyhyɛl",
         "SG": "Singapɔ",
+        "SH": "Saint Helena",
         "SI": "Slovinia",
+        "ST": "São Tomé and Príncipe",
         "SV": "Ɛl Salvadɔ",
         "SY": "Siria",
         "TC": "Turks ne Caicos Islands",

@@ -253,13 +253,13 @@ public class DateTimeFormatInfoImpl_ro extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "Dum",
-        "Lun",
-        "Mar",
-        "Mie",
-        "Joi",
-        "Vin",
-        "Sâm"
+        "dum.",
+        "lun.",
+        "mar.",
+        "mie.",
+        "joi",
+        "vin.",
+        "sâm."
     };
   }
 }

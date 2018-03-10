@@ -22,14 +22,6 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_et extends DateTimeFormatInfoImpl {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "e.k.",
-        "p.k."
-    };
-  }
-
-  @Override
   public String dateFormatFull() {
     return "EEEE, d. MMMM y";
   }
@@ -41,7 +33,7 @@ public class DateTimeFormatInfoImpl_et extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "dd.MM.y";
+    return "d. MMM y";
   }
 
   @Override
@@ -52,37 +44,17 @@ public class DateTimeFormatInfoImpl_et extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "enne meie aega",
-        "meie aja järgi"
+        "enne Kristust",
+        "pärast Kristust"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "e.m.a.",
-        "m.a.j."
+        "eKr",
+        "pKr"
     };
-  }
-
-  @Override
-  public String formatHour12MinuteSecond() {
-    return "h:mm.ss a";
-  }
-
-  @Override
-  public String formatHour24Minute() {
-    return "H:mm";
-  }
-
-  @Override
-  public String formatHour24MinuteSecond() {
-    return "H:mm.ss";
-  }
-
-  @Override
-  public String formatMinuteSecond() {
-    return "mm.ss";
   }
 
   @Override
@@ -232,26 +204,6 @@ public class DateTimeFormatInfoImpl_et extends DateTimeFormatInfoImpl {
         "K3",
         "K4"
     };
-  }
-
-  @Override
-  public String timeFormatFull() {
-    return "H:mm.ss zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "H:mm.ss z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "H:mm.ss";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "H:mm";
   }
 
   @Override

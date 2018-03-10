@@ -51,6 +51,11 @@ public class DateTimeFormatInfoImpl_ii extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatYearMonthNumDay() {
+    return "y-MM-dd";
+  }
+
+  @Override
   public String[] monthsFull() {
     return new String[] {
         "ꋍꆪ",
@@ -89,18 +94,18 @@ public class DateTimeFormatInfoImpl_ii extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
+        "ꋍꆪ",
+        "ꑍꆪ",
+        "ꌕꆪ",
+        "ꇖꆪ",
+        "ꉬꆪ",
+        "ꃘꆪ",
+        "ꏃꆪ",
+        "ꉆꆪ",
+        "ꈬꆪ",
+        "ꊰꆪ",
+        "ꊰꊪꆪ",
+        "ꊰꑋꆪ"
     };
   }
 
@@ -122,6 +127,26 @@ public class DateTimeFormatInfoImpl_ii extends DateTimeFormatInfoImpl {
         "ꃅꍵ",
         "ꃅꋆ"
     };
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "h:mm:ss a zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "h:mm:ss a z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "h:mm:ss a";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "h:mm a";
   }
 
   @Override

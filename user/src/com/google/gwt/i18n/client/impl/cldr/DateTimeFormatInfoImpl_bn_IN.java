@@ -27,26 +27,6 @@ public class DateTimeFormatInfoImpl_bn_IN extends DateTimeFormatInfoImpl_bn {
   }
 
   @Override
-  public String[] quartersFull() {
-    return new String[] {
-        "ত্রৈমাসিক",
-        "ষাণ্মাসিক",
-        "তৃতীয় চতুর্থাংশ",
-        "বার্ষিক"
-    };
-  }
-
-  @Override
-  public String[] quartersShort() {
-    return new String[] {
-        "ত্রৈমাসিক",
-        "ষাণ্মাসিক",
-        "চতুর্থাংশ ৩",
-        "বার্ষিক"
-    };
-  }
-
-  @Override
   public int weekendStart() {
     return 0;
   }

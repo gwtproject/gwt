@@ -77,10 +77,10 @@ public class DateTimeFormat_de_Test extends DateTimeFormatTestBase {
     assertEquals("13:49", shortTimeFormat);
 
     String medFormat = DateTimeFormat.getMediumDateTimeFormat().format(date);
-    assertEquals("04.08.2006 13:49:24", medFormat);
+    assertEquals("04.08.2006, 13:49:24", medFormat);
 
     String shortFormat = DateTimeFormat.getShortDateTimeFormat().format(date);
-    assertEquals("04.08.06 13:49", shortFormat);
+    assertEquals("04.08.06, 13:49", shortFormat);
   }
 
   public void test_QQQQyy() {

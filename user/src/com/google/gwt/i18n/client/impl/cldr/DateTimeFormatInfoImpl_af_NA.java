@@ -40,24 +40,4 @@ public class DateTimeFormatInfoImpl_af_NA extends DateTimeFormatInfoImpl_af {
   public int firstDayOfTheWeek() {
     return 1;
   }
-
-  @Override
-  public String timeFormatFull() {
-    return "HH:mm:ss zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "HH:mm:ss z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "HH:mm:ss";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "HH:mm";
-  }
 }

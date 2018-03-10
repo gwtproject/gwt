@@ -38,21 +38,21 @@ public class DateTimeFormatInfoImpl_ml extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "dd/MM/yy";
+    return "d/M/yy";
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "ക്രിസ്തുവിനു് മുമ്പ്‌",
-        "ക്രിസ്തുവിന് പിൻപ്"
+        "ക്രിസ്‌തുവിന് മുമ്പ്",
+        "ആന്നോ ഡൊമിനി"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "ക്രി.മൂ",
+        "ക്രി.മു.",
         "എഡി"
     };
   }
@@ -73,11 +73,6 @@ public class DateTimeFormatInfoImpl_ml extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatYearMonthNum() {
-    return "M-y";
-  }
-
-  @Override
   public String formatYearMonthNumDay() {
     return "d/M/y";
   }
@@ -92,7 +87,7 @@ public class DateTimeFormatInfoImpl_ml extends DateTimeFormatInfoImpl {
         "മേയ്",
         "ജൂൺ",
         "ജൂലൈ",
-        "ആഗസ്റ്റ്",
+        "ഓഗസ്റ്റ്",
         "സെപ്റ്റംബർ",
         "ഒക്‌ടോബർ",
         "നവംബർ",
@@ -107,8 +102,8 @@ public class DateTimeFormatInfoImpl_ml extends DateTimeFormatInfoImpl {
         "ഫെ",
         "മാ",
         "ഏ",
-        "മേ",
-        "ജൂ",
+        "മെ",
+        "ജൂൺ",
         "ജൂ",
         "ഓ",
         "സെ",
@@ -204,6 +199,19 @@ public class DateTimeFormatInfoImpl_ml extends DateTimeFormatInfoImpl {
 
   @Override
   public String[] weekdaysNarrow() {
+    return new String[] {
+        "ഞ",
+        "തി",
+        "ചൊ",
+        "ബു",
+        "വ്യാ",
+        "വെ",
+        "ശ"
+    };
+  }
+
+  @Override
+  public String[] weekdaysNarrowStandalone() {
     return new String[] {
         "ഞാ",
         "തി",

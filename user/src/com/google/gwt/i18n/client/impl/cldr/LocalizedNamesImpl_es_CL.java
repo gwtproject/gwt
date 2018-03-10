@@ -22,7 +22,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 /**
  * Localized names for the "es_CL" locale.
  */
-public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
+public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es_419 {
 
   @Override
   public String[] loadSortedRegionCodes() {
@@ -35,7 +35,6 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "AI",
         "AQ",
         "AG",
-        "AN",
         "SA",
         "DZ",
         "AR",
@@ -70,6 +69,7 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "QA",
         "EA",
         "TD",
+        "CZ",
         "CL",
         "CN",
         "CY",
@@ -97,6 +97,7 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "US",
         "EE",
         "ET",
+        "EZ",
         "PH",
         "FI",
         "FJ",
@@ -123,16 +124,15 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "HU",
         "IN",
         "ID",
-        "IR",
         "IQ",
+        "IR",
         "IE",
-        "BV",
-        "CX",
-        "CP",
         "AC",
+        "BV",
+        "CP",
         "IM",
+        "CX",
         "IS",
-        "NU",
         "NF",
         "AX",
         "KY",
@@ -149,6 +149,7 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "PN",
         "SB",
         "TC",
+        "QO",
         "VG",
         "VI",
         "IL",
@@ -193,12 +194,14 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "MS",
         "MZ",
         "MM",
+        "UN",
         "NA",
         "NR",
         "NP",
         "NI",
         "NE",
         "NG",
+        "NU",
         "NO",
         "NC",
         "NZ",
@@ -218,7 +221,6 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "MO",
         "GB",
         "CF",
-        "CZ",
         "CG",
         "CD",
         "DO",
@@ -261,7 +263,6 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "TJ",
         "IO",
         "PS",
-        "QO",
         "TF",
         "TL",
         "TG",
@@ -292,14 +293,12 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
   @Override
   protected void loadNameMapJava() {
     super.loadNameMapJava();
-    namesMap.put("005", "Sudamérica");
-    namesMap.put("AN", "Antillas Holandesas");
-    namesMap.put("AZ", "Azerbayán");
-    namesMap.put("BD", "Bangladesh");
+    namesMap.put("BA", "Bosnia y Herzegovina");
     namesMap.put("EH", "Sahara Occidental");
     namesMap.put("PS", "Territorio Palestino");
-    namesMap.put("RO", "Rumania");
-    namesMap.put("SA", "Arabia Saudita");
+    namesMap.put("TA", "Tristán de Acuña");
+    namesMap.put("TL", "Timor-Leste");
+    namesMap.put("UM", "Islas menores alejadas de EE. UU.");
   }
 
   @Override
@@ -309,14 +308,12 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
 
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
-        "005": "Sudamérica",
-        "AN": "Antillas Holandesas",
-        "AZ": "Azerbayán",
-        "BD": "Bangladesh",
+        "BA": "Bosnia y Herzegovina",
         "EH": "Sahara Occidental",
         "PS": "Territorio Palestino",
-        "RO": "Rumania",
-        "SA": "Arabia Saudita"
+        "TA": "Tristán de Acuña",
+        "TL": "Timor-Leste",
+        "UM": "Islas menores alejadas de EE. UU."
     };
   }-*/;
 }

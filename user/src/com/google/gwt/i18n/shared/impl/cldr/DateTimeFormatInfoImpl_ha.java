@@ -94,12 +94,7 @@ public class DateTimeFormatInfoImpl_ha extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d/M/y";
-  }
-
-  @Override
-  public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
+    return "y-MM-dd";
   }
 
   @Override
@@ -194,7 +189,7 @@ public class DateTimeFormatInfoImpl_ha extends DateTimeFormatInfoImpl {
         "Talata",
         "Laraba",
         "Alhamis",
-        "Jumma'a",
+        "Jummaʼa",
         "Asabar"
     };
   }
@@ -215,13 +210,13 @@ public class DateTimeFormatInfoImpl_ha extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "Lh",
-        "Li",
-        "Ta",
-        "Lr",
-        "Al",
-        "Ju",
-        "As"
+        "Lah",
+        "Lit",
+        "Tal",
+        "Lar",
+        "Alh",
+        "Jum",
+        "Asa"
     };
   }
 }

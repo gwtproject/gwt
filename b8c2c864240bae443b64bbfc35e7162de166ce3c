@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef9a884_d13217fa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-03-11T05:06:54Z",
+      "side": 1,
+      "message": "[warning] Subject line and body should be separated by a blank line.",
+      "revId": "b8c2c864240bae443b64bbfc35e7162de166ce3c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a1a2135_58617876",
+        "filename": "user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_as.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-03-11T05:06:54Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 102).",
+      "revId": "b8c2c864240bae443b64bbfc35e7162de166ce3c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c95c9d9c_582581e5",
+        "filename": "user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ccp.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-03-11T05:06:54Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 118).",
+      "revId": "b8c2c864240bae443b64bbfc35e7162de166ce3c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55fa90a0_2b818f4e",
+        "filename": "user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ccp.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-03-11T05:06:54Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 109).",
+      "revId": "b8c2c864240bae443b64bbfc35e7162de166ce3c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2abb44a3_e94bdf1c",
+        "filename": "user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_ccp.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-03-11T05:06:54Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 108).",
+      "revId": "b8c2c864240bae443b64bbfc35e7162de166ce3c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6501c7a4_f18dba37",
+        "filename": "user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_mt.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-03-11T05:06:54Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 108).",
+      "revId": "b8c2c864240bae443b64bbfc35e7162de166ce3c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "26ad3a26_cda8090f",
+        "filename": "user/src/com/google/gwt/i18n/client/impl/cldr/LocalizedNamesImpl_mt.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-03-11T05:06:54Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 104).",
+      "revId": "b8c2c864240bae443b64bbfc35e7162de166ce3c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

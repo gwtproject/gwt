@@ -266,7 +266,7 @@ abstract class DOMImpl {
   }-*/;
 
   public int getScrollLeft(Document doc) {
-    return doc.getViewportElement().getScrollLeft();
+    return ensureDocumentScrollingElement(doc).getScrollLeft();
   }
 
   public int getScrollLeft(Element elem) {
@@ -274,7 +274,7 @@ abstract class DOMImpl {
   }
 
   public int getScrollTop(Document doc) {
-    return doc.getViewportElement().getScrollTop();
+    return ensureDocumentScrollingElement(doc).getScrollTop();
   }
 
   public native String getStyleProperty(Style style, String name) /*-{
@@ -376,7 +376,7 @@ abstract class DOMImpl {
   }-*/;
 
   public void setScrollLeft(Document doc, int left) {
-    doc.getViewportElement().setScrollLeft(left);
+    ensureDocumentScrollingElement(doc).setScrollLeft(left);
   }
 
   public native void setScrollLeft(Element elem, int left) /*-{
@@ -384,7 +384,7 @@ abstract class DOMImpl {
   }-*/;
 
   public void setScrollTop(Document doc, int top) {
-    doc.getViewportElement().setScrollTop(top);
+    ensureDocumentScrollingElement(doc).setScrollTop(top);
   }
 
   public native String toString(Element elem) /*-{
@@ -496,4 +496,15 @@ abstract class DOMImpl {
   private native double eventGetSubPixelClientY(NativeEvent evt) /*-{
     return evt.clientY || 0;
   }-*/;
+
+  private Element ensureDocumentScrollingElement(Document document) {
+    // In some case (e.g SVG document and old Webkit browsers), getDocumentScrollingElement can
+    // return null. In this case, default to documentElement.
+    Element scrollingElement = getDocumentScrollingElement(document);
+    return scrollingElement != null ? scrollingElement : document.getDocumentElement();
+  }
+ 
+  Element getDocumentScrollingElement(Document doc)  {
+    return doc.getViewportElement();
+  }
 }

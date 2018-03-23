@@ -91,10 +91,6 @@ class DOMImplIE9 extends DOMImplStandardBase {
     setScrollLeftImpl(elem, left);
   }
 
-  @Override
-  public void setScrollLeft(Document doc, int left) {
-    setScrollLeft(doc.getDocumentElement(), left);
-  }
 
   private native double getBoundingClientRectLeft(Element elem) /*-{
     // getBoundingClientRect() throws a JS exception if the elem is not attached

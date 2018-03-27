@@ -96,6 +96,15 @@ public class ThrowableTest extends ThrowableTestBase {
     assertTrue(caughtNative.toString().contains(e.getClass().getName()));
   }
 
+  public void testCatchNativeWithNewlineInMesssage() {
+    if (TestUtils.isJvm()) {
+      return;
+    }
+    Throwable e = new Throwable("my\nmsg");
+    Object caughtNative = catchNative(createThrower(e));
+    assertTrue(caughtNative.toString().contains("my\u200b\nmsg"));
+  }
+
   public void testJavaNativeJavaSandwichCatch() {
     if (TestUtils.isJvm()) {
       return;

@@ -105,10 +105,13 @@ public class Throwable implements Serializable {
   }
 
   private void initializeBackingError() {
-    // Replace newlines with spaces so that we don't confuse the parser
-    // below which splits on newlines, and will otherwise try to parse
-    // the error message as part of the stack trace.
-    String message = detailMessage == null ? null : detailMessage.nativeReplaceAll("\n", " ");
+    /*
+     * Prefix newlines in the _message_ with u200b so that StackTraceCreator can distinguish them
+     * from the newlines in the JavaScript Error _stack trace_. (StackTraceCreator's input is a
+     * string that often contains both the message and the stack trace.)
+     */
+    String message =
+        detailMessage == null ? null : detailMessage.nativeReplaceAll("\n", "\u200b\n");
     String errorMessage = toString(message);
 
     setBackingJsObject(fixIE(createError(errorMessage)));

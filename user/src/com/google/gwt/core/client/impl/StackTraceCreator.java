@@ -373,8 +373,21 @@ public class StackTraceCreator {
     return (match && match[1]) || @StackTraceCreator::ANONYMOUS;
   }-*/;
 
+  /*
+   * u200b is a special character inserted by our Throwable.initializeBackingError before any
+   * newlines in the Throwable _message_ so that we can distinguish those newlines from the newlines
+   * that separate lines of the _stack trace_.
+   *
+   * Why replace()+split() instead of a regex with lookbehind? Because lookbehind isn't available
+   * until ECMAScript 2018.
+   *
+   * Why not have Throwable generate \n\u200b instead of \u200b\n so that we can use lookahead?
+   * Because u200b, despite being a "zero-width space," does take up space when it appears at the
+   * _beginning_ of a line, at least in some terminals, including xterm. Ditto for u2060 (word
+   * joiner) and probably other "zero-width" characters.
+   */
   private static native JsArrayString split(Object t) /*-{
     var e = t.@Throwable::backingJsObject;
-    return (e && e.stack) ? e.stack.split('\n') : [];
+    return (e && e.stack) ? e.stack.replace('\u200b\n', ' ').split('\n') : [];
   }-*/;
 }

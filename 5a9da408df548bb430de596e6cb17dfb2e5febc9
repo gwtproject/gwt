@@ -16,6 +16,24 @@
       "revId": "5a9da408df548bb430de596e6cb17dfb2e5febc9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a3c6af8_2cea4a62",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReferenceMapper.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-03-27T16:54:23Z",
+      "side": 1,
+      "message": "Assertions are disabled by default and our current practice (in particular in j2cl) is to make sure preconditions are always checked. It does reduce the time to diagnose bugs and makes it more difficult to introduce bugs resulting in more resilient code. The cost of these checks is negligible.\n\nThe bug fix is sufficient, this only prevents from introducing a similar bug since as you can see, even when the problem is hit and the AST is not correct the code might not exhibit the error.\n\n(the reason why even with the incorrect AST GWT will most likely emit correct code is that both the original method and the bridge method override will be dispatched through the same name, it is only hit when the optimization takes advantage of a more precise but wrong target)",
+      "parentUuid": "c99f37c5_dfa2f0fd",
+      "revId": "5a9da408df548bb430de596e6cb17dfb2e5febc9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

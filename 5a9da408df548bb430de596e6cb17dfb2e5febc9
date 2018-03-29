@@ -34,6 +34,24 @@
       "revId": "5a9da408df548bb430de596e6cb17dfb2e5febc9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5fc327aa_85b8d24b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReferenceMapper.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2018-03-29T03:10:49Z",
+      "side": 1,
+      "message": "Thanks - I semi-regularly hit assertions in gwt2, sounds like it might be good to tighten those up to preconditions in general based on what you are describing.",
+      "parentUuid": "9a3c6af8_2cea4a62",
+      "revId": "5a9da408df548bb430de596e6cb17dfb2e5febc9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

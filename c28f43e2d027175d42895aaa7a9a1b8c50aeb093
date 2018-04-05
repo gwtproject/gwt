@@ -16,6 +16,24 @@
       "revId": "c28f43e2d027175d42895aaa7a9a1b8c50aeb093",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16242bbd_98ad0da1",
+        "filename": "user/test/com/google/gwt/emultest/java/io/StringReaderTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 10615
+      },
+      "writtenOn": "2018-04-05T13:41:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4f24b97_9d9ac9dc",
+      "revId": "c28f43e2d027175d42895aaa7a9a1b8c50aeb093",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

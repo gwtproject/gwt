@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c08376a_6cdd747d",
+        "filename": "user/super/com/google/gwt/emul/java/io/Reader.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2018-04-05T21:50:19Z",
+      "side": 1,
+      "message": "This seems dangerous. We create up to 2^31 buffer which I think is too large. If we support large skips, we should do it properly with a smaller buffer.",
+      "revId": "bdac0022aad871b649b3ed78f255c195f40424cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

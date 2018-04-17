@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27c73969_3aa04707",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JavaSourceParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-17T19:26:23Z",
+      "side": 1,
+      "message": "remove this as it is handed in the loop already.",
+      "range": {
+        "startLine": 126,
+        "startChar": 29,
+        "endLine": 126,
+        "endChar": 56
+      },
+      "revId": "adb0ed3582393b2b3b72ef0866216327762d0b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1df78245_808d7d00",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 4358,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-17T19:26:23Z",
+      "side": 1,
+      "message": "is this the qualified source name? or the qualified binary name or just the simple name.BTW it is not necessarily a class it might be an interface or enum.\n\nThis is the qualified source name (separated with dots not dollars) so name the method getQualifiedSourceName.",
+      "range": {
+        "startLine": 4358,
+        "startChar": 28,
+        "endLine": 4358,
+        "endChar": 40
+      },
+      "revId": "adb0ed3582393b2b3b72ef0866216327762d0b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ae82459_88dff4f4",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java10AstTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-17T19:26:23Z",
+      "side": 1,
+      "message": "remove spaces.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 2
+      },
+      "revId": "adb0ed3582393b2b3b72ef0866216327762d0b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e66537ce_28b5b63b",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java10AstTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-17T19:26:23Z",
+      "side": 1,
+      "message": "add a test for\n\nfor (var a : list)\n\nwhich exercises a different codepath in the compiler.",
+      "range": {
+        "startLine": 45,
+        "startChar": 14,
+        "endLine": 45,
+        "endChar": 45
+      },
+      "revId": "adb0ed3582393b2b3b72ef0866216327762d0b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22616689_63a6fe81",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/UnifyAstTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-17T19:26:23Z",
+      "side": 1,
+      "message": "Maybe we should leave all of this as the default and change the default (but it has been changed already, right?). Let\u0027s only add source level for the exceptional cases in which we are not testing at Java 10.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 37
+      },
+      "revId": "adb0ed3582393b2b3b72ef0866216327762d0b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9004798c_4d80534a",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java10Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-17T19:26:23Z",
+      "side": 1,
+      "message": "We should discuss which is the lowest jvm version gwt runs under. I would love to remove all special handling form Java8Test. But let\u0027s do it as a follow up.",
+      "range": {
+        "startLine": 24,
+        "startChar": 80,
+        "endLine": 24,
+        "endChar": 88
+      },
+      "revId": "adb0ed3582393b2b3b72ef0866216327762d0b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aba9e840_45195f24",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java10Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-17T19:26:23Z",
+      "side": 1,
+      "message": "remove trailing white spaces. You can probably configure your editor to remove those on save.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 2
+      },
+      "revId": "adb0ed3582393b2b3b72ef0866216327762d0b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46ade2e3_e701d287",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java10Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-17T19:26:23Z",
+      "side": 1,
+      "message": "do here \n  String s3 \u003d s2; \n\nthat makes sure that s2 was inferred as a string and not an Object.",
+      "revId": "adb0ed3582393b2b3b72ef0866216327762d0b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

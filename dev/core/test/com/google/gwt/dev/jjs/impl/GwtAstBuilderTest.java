@@ -41,7 +41,6 @@ import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVariable;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.resource.Resource;
-import com.google.gwt.dev.util.arg.SourceLevel;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
@@ -179,13 +178,9 @@ public class GwtAstBuilderTest extends JJSTestBase {
             + "  }",
         "}"
     ));
-
-    sourceLevel = SourceLevel.DEFAULT_SOURCE_LEVEL;
   }
 
   public void testNestedClassDisposition() throws UnableToCompleteException {
-    sourceLevel = SourceLevel.JAVA9;
-
     sources.add(JavaResourceBase.createMockJavaResource("test.NestedClasses",
         "package test;",
         "public class NestedClasses {",
@@ -238,8 +233,6 @@ public class GwtAstBuilderTest extends JJSTestBase {
   }
 
   public void testIntersectionBound() throws UnableToCompleteException {
-    sourceLevel = SourceLevel.JAVA9;
-
     sources.add(JavaResourceBase.createMockJavaResource("test.IntersectionBound",
         "package test;",
         "public class IntersectionBound {",
@@ -278,8 +271,6 @@ public class GwtAstBuilderTest extends JJSTestBase {
   }
 
   public void testBridgeMethodResolution() throws UnableToCompleteException {
-    sourceLevel = SourceLevel.JAVA9;
-
     sources.add(JavaResourceBase.createMockJavaResource("test.SuperInterface",
         "package test;",
         "public interface SuperInterface<T> {",

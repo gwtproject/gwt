@@ -4355,14 +4355,7 @@ public class GwtAstBuilder {
     SourceInfo info = makeSourceInfo(x);
     try {
       SourceTypeBinding binding = x.binding;
-      String name;
-      if (binding instanceof LocalTypeBinding) {
-        char[] localName = binding.constantPoolName();
-        name = new String(localName).replace('/', '.');
-      } else {
-        name = JdtUtil.asDottedString(binding.compoundName);
-      }
-      name = intern(name);
+      String name = intern(JdtUtil.getQualifiedSourceName(binding));
 
       JDeclaredType type;
       if (binding.isClass()) {

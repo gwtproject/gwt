@@ -79,7 +79,8 @@ public final class JdtUtil {
   }
 
   /**
-   * Returns the name of the class from reference binding.
+   * Returns the fully qualified source name of the type (class, interface or enum) from reference
+   * binding.
    * <p>
    * JDT Core (at least 3.11.0.v20150407) returns <code>$Local$</code> synthetic name for local
    * classes.<br>
@@ -88,7 +89,7 @@ public final class JdtUtil {
    * <code>test.Class1$2</code>).
    * </p>
    */
-  public static String getClassName(ReferenceBinding binding) {
+  public static String getQualifiedSourceName(ReferenceBinding binding) {
     if (binding instanceof LocalTypeBinding) {
       // Using here constantPoolName() instead of coumpoundName due JDT not computing the
       // right compoundName for lambdas inside local class.

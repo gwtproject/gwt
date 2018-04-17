@@ -24,7 +24,8 @@ import com.google.gwt.util.tools.Utility;
 public enum SourceLevel {
   // Source levels must appear in ascending order for the default setting logic to work.
   JAVA8("1.8", "8"),
-  JAVA9("1.9", "9");
+  JAVA9("1.9", "9"),
+  JAVA10("1.10", "10");
 
   /**
    * The default java sourceLevel.
@@ -97,6 +98,13 @@ public enum SourceLevel {
     }
     // If everything fails set default to JAVA8.
     return JAVA8;
+  }
+
+  /**
+   * Returns the highest supported version of the Java.
+   */
+  public static SourceLevel getHighest() {
+    return SourceLevel.values()[SourceLevel.values().length - 1];
   }
 }
 

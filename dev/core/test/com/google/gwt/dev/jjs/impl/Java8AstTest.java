@@ -24,7 +24,6 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.util.arg.SourceLevel;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 
 import java.util.Collections;
@@ -37,7 +36,6 @@ public class Java8AstTest extends FullCompileTestBase {
 
   @Override
   public void setUp() throws Exception {
-    sourceLevel = SourceLevel.JAVA9;
     super.setUp();
     addAll(LAMBDA_METAFACTORY);
 

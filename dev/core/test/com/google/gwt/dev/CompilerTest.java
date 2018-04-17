@@ -958,11 +958,16 @@ public class CompilerTest extends ArgProcessorTestBase {
     assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.7"));
     assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.8"));
     assertEquals(SourceLevel.JAVA9, SourceLevel.getBestMatchingVersion("1.9"));
+    assertEquals(SourceLevel.JAVA10, SourceLevel.getBestMatchingVersion("1.10"));
 
     // not proper version strings => default to JAVA8.
     assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.6u3"));
     assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.6b3"));
     assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.7b3"));
+  }
+
+  public void testSourceLevelHighestVersion() {
+    assertEquals(SourceLevel.values()[SourceLevel.values().length - 1], SourceLevel.getHighest());
   }
 
   /**
@@ -1696,7 +1701,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     File applicationDir = Files.createTempDir();
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
-    compilerOptions.setSourceLevel(SourceLevel.JAVA9);
+    compilerOptions.setSourceLevel(SourceLevel.JAVA10);
 
     // Compile the application with no errors.
     compileToJs(TreeLogger.NULL, compilerOptions, applicationDir, "com.foo.Errors",
@@ -1759,7 +1764,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     File applicationDir = Files.createTempDir();
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
-    compilerOptions.setSourceLevel(SourceLevel.JAVA9);
+    compilerOptions.setSourceLevel(SourceLevel.JAVA10);
     compilerOptions.setGenerateJsInteropExports(false);
 
     // Compile the application with no errors.
@@ -2110,7 +2115,7 @@ public class CompilerTest extends ArgProcessorTestBase {
 
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
-    compilerOptions.setSourceLevel(SourceLevel.JAVA9);
+    compilerOptions.setSourceLevel(SourceLevel.JAVA10);
 
     checkRecompiledModifiedApp(compilerOptions, "com.foo.DefaultMethod",
         Lists.newArrayList(moduleResource, entryPointResource, aSubclass,

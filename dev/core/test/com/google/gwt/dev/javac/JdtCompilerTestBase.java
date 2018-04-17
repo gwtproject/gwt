@@ -61,7 +61,7 @@ public abstract class JdtCompilerTestBase extends TestCase {
    * <p>Override this method in the derived test case to request a specific source level.
    */
   protected SourceLevel getSourceLevel() {
-    return SourceLevel.DEFAULT_SOURCE_LEVEL;
+    return SourceLevel.getHighest();
   }
 
   protected static void addAll(Collection<CompilationUnitBuilder> units, Resource... sourceFiles) {

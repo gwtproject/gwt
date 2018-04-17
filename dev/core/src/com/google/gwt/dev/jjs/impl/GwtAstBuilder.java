@@ -215,7 +215,6 @@ import org.eclipse.jdt.internal.compiler.lookup.ClassScope;
 import org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope;
 import org.eclipse.jdt.internal.compiler.lookup.FieldBinding;
 import org.eclipse.jdt.internal.compiler.lookup.IntersectionTypeBinding18;
-import org.eclipse.jdt.internal.compiler.lookup.LocalTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.LocalVariableBinding;
 import org.eclipse.jdt.internal.compiler.lookup.MethodBinding;
 import org.eclipse.jdt.internal.compiler.lookup.MethodScope;
@@ -4355,14 +4354,7 @@ public class GwtAstBuilder {
     SourceInfo info = makeSourceInfo(x);
     try {
       SourceTypeBinding binding = x.binding;
-      String name;
-      if (binding instanceof LocalTypeBinding) {
-        char[] localName = binding.constantPoolName();
-        name = new String(localName).replace('/', '.');
-      } else {
-        name = JdtUtil.asDottedString(binding.compoundName);
-      }
-      name = intern(name);
+      String name = intern(JdtUtil.getQualifiedSourceName(binding));
 
       JDeclaredType type;
       if (binding.isClass()) {

@@ -361,7 +361,7 @@ public abstract class JJSTestBase extends CheckerTestCase {
   /**
    * Java source level compatibility option.
    */
-  protected SourceLevel sourceLevel = SourceLevel.DEFAULT_SOURCE_LEVEL;
+  protected SourceLevel sourceLevel = SourceLevel.getHighest();
 
   protected static <T> void assertContainsAll(Iterable<T> expectedMethodSnippets,
       Set<T> actualMethodSnippets) {

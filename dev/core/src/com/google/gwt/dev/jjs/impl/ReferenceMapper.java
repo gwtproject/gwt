@@ -288,7 +288,7 @@ public class ReferenceMapper {
   }
 
   private JDeclaredType createType(ReferenceBinding binding) {
-    String name = JdtUtil.asDottedString(binding.compoundName);
+    String name = JdtUtil.getQualifiedSourceName(binding);
     SourceInfo info = SourceOrigin.UNKNOWN;
     if (binding.isClass()) {
       return new JClassType(info, name, binding.isAbstract(), binding.isFinal());

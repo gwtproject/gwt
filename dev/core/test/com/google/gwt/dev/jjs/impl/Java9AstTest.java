@@ -20,7 +20,6 @@ import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.util.arg.SourceLevel;
 
 /**
  * Tests that {@link com.google.gwt.dev.jjs.impl.GwtAstBuilder} correctly builds the AST for
@@ -30,7 +29,6 @@ public class Java9AstTest extends FullCompileTestBase {
 
   @Override
   public void setUp() throws Exception {
-    sourceLevel = SourceLevel.JAVA9;
     super.setUp();
     addAll(
         JavaResourceBase.createMockJavaResource("test.InterfaceWithPrivateMethods",

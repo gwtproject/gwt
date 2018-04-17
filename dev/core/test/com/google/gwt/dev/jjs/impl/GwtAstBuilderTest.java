@@ -184,7 +184,7 @@ public class GwtAstBuilderTest extends JJSTestBase {
   }
 
   public void testNestedClassDisposition() throws UnableToCompleteException {
-    sourceLevel = SourceLevel.JAVA9;
+    sourceLevel = SourceLevel.JAVA10;
 
     sources.add(JavaResourceBase.createMockJavaResource("test.NestedClasses",
         "package test;",
@@ -238,7 +238,7 @@ public class GwtAstBuilderTest extends JJSTestBase {
   }
 
   public void testIntersectionBound() throws UnableToCompleteException {
-    sourceLevel = SourceLevel.JAVA9;
+    sourceLevel = SourceLevel.JAVA10;
 
     sources.add(JavaResourceBase.createMockJavaResource("test.IntersectionBound",
         "package test;",
@@ -278,7 +278,7 @@ public class GwtAstBuilderTest extends JJSTestBase {
   }
 
   public void testBridgeMethodResolution() throws UnableToCompleteException {
-    sourceLevel = SourceLevel.JAVA9;
+    sourceLevel = SourceLevel.JAVA10;
 
     sources.add(JavaResourceBase.createMockJavaResource("test.SuperInterface",
         "package test;",

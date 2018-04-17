@@ -98,7 +98,8 @@ public class GwtIncompatiblePreprocessor {
     }
 
     if (newMethods.size() != tyDecl.methods.length) {
-      tyDecl.methods = newMethods.toArray(new AbstractMethodDeclaration[newMethods.size()]);
+      tyDecl.methods = newMethods.isEmpty() ? null : newMethods.toArray(
+          new AbstractMethodDeclaration[newMethods.size()]);
     }
   }
 
@@ -118,7 +119,8 @@ public class GwtIncompatiblePreprocessor {
     }
 
     if (newFields.size() != tyDecl.fields.length) {
-      tyDecl.fields = newFields.toArray(new FieldDeclaration[newFields.size()]);
+      tyDecl.fields = newFields.isEmpty() ? null : newFields.toArray(new FieldDeclaration[newFields
+          .size()]);
     }
   }
 
@@ -151,11 +153,11 @@ public class GwtIncompatiblePreprocessor {
       return;
     }
     tyDecl.superclass = null;
-    tyDecl.superInterfaces = new TypeReference[0];
-    tyDecl.annotations = new Annotation[0];
-    tyDecl.methods = new AbstractMethodDeclaration[0];
-    tyDecl.memberTypes = new TypeDeclaration[0];
-    tyDecl.fields = new FieldDeclaration[0];
+    tyDecl.superInterfaces = null;
+    tyDecl.annotations = null;
+    tyDecl.methods = null;
+    tyDecl.memberTypes = null;
+    tyDecl.fields = null;
     if (TypeDeclaration.kind(tyDecl.modifiers) == TypeDeclaration.CLASS_DECL) {
       // Create a default constructor so that the class is proper.
       ConstructorDeclaration constructor = tyDecl.createDefaultConstructor(true, true);

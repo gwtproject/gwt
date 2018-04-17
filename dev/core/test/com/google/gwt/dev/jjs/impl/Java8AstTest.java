@@ -37,7 +37,7 @@ public class Java8AstTest extends FullCompileTestBase {
 
   @Override
   public void setUp() throws Exception {
-    sourceLevel = SourceLevel.JAVA9;
+    sourceLevel = SourceLevel.JAVA10;
     super.setUp();
     addAll(LAMBDA_METAFACTORY);
 

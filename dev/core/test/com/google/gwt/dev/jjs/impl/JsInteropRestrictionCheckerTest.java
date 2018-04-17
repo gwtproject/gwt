@@ -28,7 +28,7 @@ import com.google.gwt.dev.util.arg.SourceLevel;
 public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
   @Override
   public void setUp() {
-    sourceLevel = SourceLevel.JAVA9;
+    sourceLevel = SourceLevel.JAVA10;
   }
 
   // TODO: eventually test this for default methods in Java 8.

@@ -33,7 +33,6 @@
 	<classpathentry kind="var" path="GWT_TOOLS/lib/w3c/flute/flute-1.3-gg2.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/cglib/cglib-3.1.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/objenesis/objenesis-1.2.jar"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-5.0.3/lib/asm-all-5.0.3.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/gwt-dev"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/htmlunit/htmlunit-2.19/htmlunit-2.19.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/htmlunit/htmlunit-2.19/htmlunit-core-js-2.15.jar"/>
@@ -62,7 +61,10 @@
 	<classpathentry kind="var" path="GWT_TOOLS/lib/testng/testng-5.14.1-nojunit.jar" sourcepath="/GWT_TOOLS/lib/testng/testng-5.14.1-sources.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/protobuf/protobuf-2.5.0/protobuf-java-rebased-2.5.0.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/jscomp/20160315/sourcemap-rebased.jar"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/org.eclipse.jdt.core_3.13.100-CUSTOM-GWT-20180108.jar"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/jdtCompilerAdapter_3.13.100-CUSTOM-GWT-20180108.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/org.eclipse.jdt.core_3.13.102-CUSTOM-GWT-20180415.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/jdtCompilerAdapter_3.13.102-CUSTOM-GWT-20180415.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-6.0/asm-6.0.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-6.0/asm-analysis-6.0.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-6.0/asm-commons-6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

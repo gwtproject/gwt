@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "3cd03a89_d6516d63",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/GwtIncompatiblePreprocessor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-17T19:27:35Z",
+      "side": 1,
+      "message": "do we need to null all of them? Are they correctly handled everywhere else? (I am think GwtAstBuilder)",
+      "range": {
+        "startLine": 155,
+        "startChar": 4,
+        "endLine": 160,
+        "endChar": 25
+      },
+      "revId": "adb0ed3582393b2b3b72ef0866216327762d0b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "27c73969_3aa04707",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JavaSourceParser.java",
         "patchSetId": 1

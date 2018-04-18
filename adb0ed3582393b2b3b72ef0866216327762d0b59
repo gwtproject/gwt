@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "df879eb7_d10db516",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/GwtIncompatiblePreprocessor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2018-04-18T19:07:38Z",
+      "side": 1,
+      "message": "Actually only methods array leads to AIOOBE in JDT (see https://bugs.eclipse.org/bugs/show_bug.cgi?id\u003d533435#c8). But I was not sure that cover all cases that may lead to AIOOBE, so I changed all of them for safety.\n\nI had looked through references on these arrays and all of them seems to be covered by null-checks.",
+      "parentUuid": "3cd03a89_d6516d63",
+      "range": {
+        "startLine": 155,
+        "startChar": 4,
+        "endLine": 160,
+        "endChar": 25
+      },
+      "revId": "adb0ed3582393b2b3b72ef0866216327762d0b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "27c73969_3aa04707",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JavaSourceParser.java",
         "patchSetId": 1
@@ -117,6 +141,30 @@
     },
     {
       "key": {
+        "uuid": "e3d5c894_04c65342",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java10AstTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2018-04-18T19:07:38Z",
+      "side": 1,
+      "message": "Good point. I forgot about loops. I\u0027ll add loops in AST and integration tests.",
+      "parentUuid": "e66537ce_28b5b63b",
+      "range": {
+        "startLine": 45,
+        "startChar": 14,
+        "endLine": 45,
+        "endChar": 45
+      },
+      "revId": "adb0ed3582393b2b3b72ef0866216327762d0b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "22616689_63a6fe81",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/UnifyAstTest.java",
         "patchSetId": 1
@@ -128,6 +176,30 @@
       "writtenOn": "2018-04-17T19:26:23Z",
       "side": 1,
       "message": "Maybe we should leave all of this as the default and change the default (but it has been changed already, right?). Let\u0027s only add source level for the exceptional cases in which we are not testing at Java 10.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 37
+      },
+      "revId": "adb0ed3582393b2b3b72ef0866216327762d0b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d820cb9_fc815139",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/UnifyAstTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2018-04-18T19:07:38Z",
+      "side": 1,
+      "message": "\u003eMaybe we should leave all of this as the default and change the default (but it has been changed already, right?).\n\nDefault level is taken from jvm for AST tests (see SourceLevel.DEFAULT_SOURCE_LEVEL and JJSTestBase.sourceLevel). And fallback is Java8.\n\n\u003eLet\u0027s only add source level for the exceptional cases in which we are not testing at Java 10.\n\nDo you mean removing sourceLevel override from all AST tests and set default to Java10?",
+      "parentUuid": "22616689_63a6fe81",
       "range": {
         "startLine": 36,
         "startChar": 0,

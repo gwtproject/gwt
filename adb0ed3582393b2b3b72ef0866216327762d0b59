@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d48c0234_b2f2f633",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/GwtIncompatiblePreprocessor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-18T20:43:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "df879eb7_d10db516",
+      "range": {
+        "startLine": 155,
+        "startChar": 4,
+        "endLine": 160,
+        "endChar": 25
+      },
+      "revId": "adb0ed3582393b2b3b72ef0866216327762d0b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27c73969_3aa04707",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JavaSourceParser.java",
         "patchSetId": 1
@@ -165,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "a2d5edd3_030cb31e",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java10AstTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-18T20:43:41Z",
+      "side": 1,
+      "message": "Only the \"foreach\" loop is really different as it is handled specially in GwtAstBuilder (line 888) and synthesizes there extra code to obtain an iterator and use it or to iterate over an array. I would have both examples:\nfor(var a : iterable_object) and for(var a : array)",
+      "parentUuid": "e3d5c894_04c65342",
+      "range": {
+        "startLine": 45,
+        "startChar": 14,
+        "endLine": 45,
+        "endChar": 45
+      },
+      "revId": "adb0ed3582393b2b3b72ef0866216327762d0b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "22616689_63a6fe81",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/UnifyAstTest.java",
         "patchSetId": 1
@@ -200,6 +248,30 @@
       "side": 1,
       "message": "\u003eMaybe we should leave all of this as the default and change the default (but it has been changed already, right?).\n\nDefault level is taken from jvm for AST tests (see SourceLevel.DEFAULT_SOURCE_LEVEL and JJSTestBase.sourceLevel). And fallback is Java8.\n\n\u003eLet\u0027s only add source level for the exceptional cases in which we are not testing at Java 10.\n\nDo you mean removing sourceLevel override from all AST tests and set default to Java10?",
       "parentUuid": "22616689_63a6fe81",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 37
+      },
+      "revId": "adb0ed3582393b2b3b72ef0866216327762d0b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2155855c_20d94239",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/UnifyAstTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-18T20:43:41Z",
+      "side": 1,
+      "message": "I would change com.google.gwt.dev.jjs.impl.JJSTestBase to initilialize the source level to the highest supported:\n\nIntroduce SourceLevel.getHighest() and change JSTestBase (line 364) to\n\nprotected SourceLevel sourceLevel \u003d SourceLevel.getHighest();\n\nThat was all the unit tests are always running with the highest JDT sourceLevel (which is what we normally want, JDT does not care what version is the jvm it is running under).\n\nIf there is some test that requires a specific version (lower) then that test should have the explicit setting. I don\u0027t think any of our tests require a lower version though.\n\nSo after changing JJSTestBase you can remove the line setting the source level in the constructor for all the unit tests.",
+      "parentUuid": "7d820cb9_fc815139",
       "range": {
         "startLine": 36,
         "startChar": 0,

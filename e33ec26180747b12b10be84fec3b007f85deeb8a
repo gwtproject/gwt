@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc3e7a90_89333cef",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java10AstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-19T21:39:40Z",
+      "side": 1,
+      "message": "missing space.\n\nMaybe better make the examples minimalisit\n\nfor (var i \u003d 1;;) {\n}",
+      "range": {
+        "startLine": 68,
+        "startChar": 18,
+        "endLine": 68,
+        "endChar": 20
+      },
+      "revId": "e33ec26180747b12b10be84fec3b007f85deeb8a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fde6a74_3ed5b92d",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java10AstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-19T21:39:40Z",
+      "side": 1,
+      "message": "same\n\nfor (var s : new String[0]) {\n}",
+      "range": {
+        "startLine": 83,
+        "startChar": 18,
+        "endLine": 83,
+        "endChar": 20
+      },
+      "revId": "e33ec26180747b12b10be84fec3b007f85deeb8a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e046d7af_013c153f",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java10AstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-19T21:39:40Z",
+      "side": 1,
+      "message": "I don\u0027t think we need this one. I don\u0027t see anything special about this case regarding var.",
+      "range": {
+        "startLine": 97,
+        "startChar": 1,
+        "endLine": 118,
+        "endChar": 3
+      },
+      "revId": "e33ec26180747b12b10be84fec3b007f85deeb8a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8aeacc3_177900c2",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java10AstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-19T21:39:40Z",
+      "side": 1,
+      "message": "for(var s : (Iterable\u003cString\u003e) null) {\n}",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 11
+      },
+      "revId": "e33ec26180747b12b10be84fec3b007f85deeb8a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "04a6cf70_34ce628d",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java10AstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-20T21:28:35Z",
+      "side": 1,
+      "message": "The double bracketing in new String[][0] is confusing, that can be fixed in ToStringGenerationVisitor but I don\u0027t think it is worth it.\n\nI don\u0027t mind leaving it like this, or you can change \"new String[0]\" to \"new String[] { }\" which will be printed by ToStringGenerationVisitor without the extra brackets.\n\nYou can so the check via the AST if you prefer but I think the test as it is is enough.",
+      "parentUuid": "8a66e07a_25370d33",
+      "range": {
+        "startLine": 83,
+        "startChar": 18,
+        "endLine": 83,
+        "endChar": 20
+      },
+      "revId": "e33ec26180747b12b10be84fec3b007f85deeb8a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e046d7af_013c153f",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java10AstTest.java",
         "patchSetId": 2

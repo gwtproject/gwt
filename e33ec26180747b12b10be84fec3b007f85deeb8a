@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "ebf0f1e0_28425854",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java10AstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2018-04-22T08:32:04Z",
+      "side": 1,
+      "message": "Done. Initializer changed to new String[]{}.",
+      "parentUuid": "04a6cf70_34ce628d",
+      "range": {
+        "startLine": 83,
+        "startChar": 18,
+        "endLine": 83,
+        "endChar": 20
+      },
+      "revId": "e33ec26180747b12b10be84fec3b007f85deeb8a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e046d7af_013c153f",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java10AstTest.java",
         "patchSetId": 2

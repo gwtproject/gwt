@@ -432,6 +432,7 @@ public final class ResourceGeneratorUtil {
 
     if (resourceAnnotation == null) {
       if (defaultSuffixes != null) {
+        List<URL> l = new ArrayList<URL>();
         for (String extension : defaultSuffixes) {
           if (logger.isLoggable(TreeLogger.SPAM)) {
             logger.log(TreeLogger.SPAM, "Trying default extension " + extension);
@@ -444,9 +445,13 @@ public final class ResourceGeneratorUtil {
             // Take the first match
             if (resourceUrl != null) {
               addTypeRequirementsForMethod(context, method);
-              return new URL[] {resourceUrl};
+              l.add(resourceUrl);
+              break;
             }
           }
+        }
+        if (l.size() > 0) {
+            return l.toArray(new URL[l.size()]);
         }
       }
 

@@ -1553,11 +1553,8 @@ public class GwtAstBuilder {
 
         JMethodCall methodCall = new JMethodCall(info, receiver, method);
 
-        // On a super ref, don't allow polymorphic dispatch. Oddly enough,
-        // QualifiedSuperReference not derived from SuperReference!
-        boolean isSuperRef =
-            x.receiver instanceof SuperReference || x.receiver instanceof QualifiedSuperReference;
-        if (isSuperRef) {
+        // On a super ref, don't allow polymorphic dispatch.
+        if (isSuperReference(x.receiver)) {
           methodCall.setStaticDispatchOnly();
         }
 
@@ -1885,7 +1882,7 @@ public class GwtAstBuilder {
         // For static methods, instance will be null
         samCall = new JMethodCall(info, instance, referredMethod);
         // if super::method, we need static dispatch
-        if (x.lhs instanceof SuperReference) {
+        if (isSuperReference(x.lhs)) {
           samCall.setStaticDispatchOnly();
         }
       }
@@ -4469,6 +4466,13 @@ public class GwtAstBuilder {
     } catch (IllegalAccessException e) {
       throw translateException(astNode, e);
     }
+  }
+
+  /**
+   * Returns <code>true</code> if the expression is either unqualified or qualified super reference.
+   */
+  private static boolean isSuperReference(Expression expression) {
+    return expression instanceof SuperReference || expression instanceof QualifiedSuperReference;
   }
 
   static class JdtPrivateHacks {

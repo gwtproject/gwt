@@ -112,6 +112,10 @@ public class Java8Test extends GWTTestCase {
     assertFalse(isGwtSourceLevel9());
   }
 
+  public void testQualifiedSuperReferenceExpression() {
+    assertFalse(isGwtSourceLevel9());
+  }
+
   public void testSuperReferenceExpressionWithVarArgs() {
     assertFalse(isGwtSourceLevel9());
   }

@@ -1553,11 +1553,8 @@ public class GwtAstBuilder {
 
         JMethodCall methodCall = new JMethodCall(info, receiver, method);
 
-        // On a super ref, don't allow polymorphic dispatch. Oddly enough,
-        // QualifiedSuperReference not derived from SuperReference!
-        boolean isSuperRef =
-            x.receiver instanceof SuperReference || x.receiver instanceof QualifiedSuperReference;
-        if (isSuperRef) {
+        // On a super ref, don't allow polymorphic dispatch.
+        if (JdtUtil.isSuperReference(x.receiver)) {
           methodCall.setStaticDispatchOnly();
         }
 
@@ -1885,7 +1882,7 @@ public class GwtAstBuilder {
         // For static methods, instance will be null
         samCall = new JMethodCall(info, instance, referredMethod);
         // if super::method, we need static dispatch
-        if (x.lhs instanceof SuperReference) {
+        if (JdtUtil.isSuperReference(x.lhs)) {
           samCall.setStaticDispatchOnly();
         }
       }

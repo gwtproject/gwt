@@ -28,6 +28,9 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
+import org.eclipse.jdt.internal.compiler.ast.Expression;
+import org.eclipse.jdt.internal.compiler.ast.QualifiedSuperReference;
+import org.eclipse.jdt.internal.compiler.ast.SuperReference;
 import org.eclipse.jdt.internal.compiler.impl.BooleanConstant;
 import org.eclipse.jdt.internal.compiler.impl.StringConstant;
 import org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding;
@@ -518,5 +521,12 @@ public final class JdtUtil {
         boxType.getExactMethod(selector, new TypeBinding[0], scope.compilationUnitScope());
     assert valueMethod != null;
     return valueMethod;
+  }
+
+  /**
+   * Returns <code>true</code> if the expression is either unqualified or qualified super reference.
+   */
+  public static boolean isSuperReference(Expression expression) {
+    return expression instanceof SuperReference || expression instanceof QualifiedSuperReference;
   }
 }

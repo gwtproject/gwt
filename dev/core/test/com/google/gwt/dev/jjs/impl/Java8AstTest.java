@@ -19,11 +19,14 @@ import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
+import com.google.gwt.dev.jjs.ast.JDeclaredType;
+import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 
 import java.util.Collections;
@@ -1206,6 +1209,76 @@ public class Java8AstTest extends FullCompileTestBase {
     //
     // Also just performing the compile asserts that the AST is well formed.
     compileSnippetToJS(entryPointClass);
+  }
+
+  public void testSuperReferenceExpression() throws Exception {
+    addAll(JavaResourceBase.createMockJavaResource("test.I",
+        "package test;",
+        "interface I {",
+        "  int get();",
+        "}"
+    ));
+    addAll(JavaResourceBase.createMockJavaResource("test.Y",
+        "package test;",
+        "class Y {",
+        "  int foo(){",
+        "    return 42;",
+        "  }",
+        "}"
+    ));
+    addAll(JavaResourceBase.createMockJavaResource("test.X",
+        "package test;",
+        "class X extends Y {",
+        "  int foo(){",
+        "    I i = super::foo;",
+        "    return i.get();",
+        "  }",
+        "}"
+    ));
+
+    JProgram program = compileSnippet("void", "new X().foo();");
+
+    JDeclaredType methodReferenceType = (JDeclaredType) findType(program, "X$0methodref$foo$Type");
+    JField outerField = methodReferenceType.getFields().get(0);
+    JMethod referenceMethod = findMethod(methodReferenceType, "get");
+    JMethodBody methodBody = (JMethodBody) referenceMethod.getBody();
+    JReturnStatement returnStatement = (JReturnStatement) methodBody.getStatements().get(0);
+    assertEquals("this." + outerField.getName() + ".Y.foo()", returnStatement.getExpr().toSource());
+  }
+
+  public void testQualifiedSuperReferenceExpression() throws Exception {
+    addAll(JavaResourceBase.createMockJavaResource("test.I",
+        "package test;",
+        "interface I {",
+        "  int get();",
+        "}"
+    ));
+    addAll(JavaResourceBase.createMockJavaResource("test.Y",
+        "package test;",
+        "class Y {",
+        "  int foo(){",
+        "    return 42;",
+        "  }",
+        "}"
+    ));
+    addAll(JavaResourceBase.createMockJavaResource("test.X",
+        "package test;",
+        "class X extends Y {",
+        "  int foo(){",
+        "    I i = X.super::foo;",
+        "    return i.get();",
+        "  }",
+        "}"
+    ));
+
+    JProgram program = compileSnippet("void", "new X().foo();");
+
+    JDeclaredType methodReferenceType = (JDeclaredType) findType(program, "X$0methodref$foo$Type");
+    JField outerField = methodReferenceType.getFields().get(0);
+    JMethod referenceMethod = findMethod(methodReferenceType, "get");
+    JMethodBody methodBody = (JMethodBody) referenceMethod.getBody();
+    JReturnStatement returnStatement = (JReturnStatement) methodBody.getStatements().get(0);
+    assertEquals("this." + outerField.getName() + ".Y.foo()", returnStatement.getExpr().toSource());
   }
 
   @Override

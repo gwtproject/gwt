@@ -371,6 +371,27 @@ public class Java8Test extends GWTTestCase {
     assertEquals(42, new X().goo());
   }
 
+  public void testQualifiedSuperReferenceExpression() {
+    class Y {
+      int foo(Integer i) {
+        return 42;
+      }
+    }
+
+    class X extends Y {
+      int foo(Integer i) {
+        return 23;
+      }
+
+      int goo() {
+        I i = X.super::foo;
+        return i.foo(0);
+      }
+    }
+
+    assertEquals(42, new X().goo());
+  }
+
   static class X2 {
     protected int field;
     void foo() {

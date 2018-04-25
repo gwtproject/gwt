@@ -22,6 +22,30 @@
       "revId": "f62e75898ee5a66cbb46dfd93168d148ae6864cf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b8ab8e2_801451ad",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2018-04-25T04:46:23Z",
+      "side": 1,
+      "message": "There are references to the ASM in `com.google.gwt.dev.javac` and `Request Factory`.",
+      "parentUuid": "022c825d_9bbc7fb7",
+      "range": {
+        "startLine": 91,
+        "startChar": 28,
+        "endLine": 91,
+        "endChar": 38
+      },
+      "revId": "f62e75898ee5a66cbb46dfd93168d148ae6864cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

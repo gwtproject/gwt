@@ -34,6 +34,5 @@
 	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-6.1.1/asm-commons-6.1.1.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-6.1.1/asm-tree-6.1.1.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-6.1.1/asm-util-6.1.1.jar"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-6.1.1/asm-xml-6.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c3fd67b_3290369f",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-04-25T13:48:55Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JAbstractMethodBody.",
+      "revId": "6a97774297b2202a6ffc2be152174a68a20468e0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "489bf85a_b806e196",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-04-25T13:48:55Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JDeclarationStatement.",
+      "revId": "6a97774297b2202a6ffc2be152174a68a20468e0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d21dd7d_185859b5",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-04-25T13:48:55Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JStatement.",
+      "revId": "6a97774297b2202a6ffc2be152174a68a20468e0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba52a956_08cd4d88",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-04-25T13:48:55Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JType.",
+      "revId": "6a97774297b2202a6ffc2be152174a68a20468e0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51ec721f_873b3efc",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1218,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-04-25T13:48:55Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "6a97774297b2202a6ffc2be152174a68a20468e0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

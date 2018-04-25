@@ -46,6 +46,30 @@
       "revId": "f62e75898ee5a66cbb46dfd93168d148ae6864cf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65a8411b_6e42aad5",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-04-25T05:53:10Z",
+      "side": 1,
+      "message": "\u003e Actually I don\u0027t think we even use it or need it. Maybe remove?\n\nWe\u0027re using asm-parent as a BOM for dependency management: it helps us pin the version of all ASM dependencies in one go (like this POM for GWT). We\u0027ll have to switch to declaring each ASM dependency we\u0027re using individually, like we do for Jetty dependencies for example (I just haven\u0027t had time yet to do the patch)",
+      "parentUuid": "9b8ab8e2_801451ad",
+      "range": {
+        "startLine": 91,
+        "startChar": 28,
+        "endLine": 91,
+        "endChar": 38
+      },
+      "revId": "f62e75898ee5a66cbb46dfd93168d148ae6864cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

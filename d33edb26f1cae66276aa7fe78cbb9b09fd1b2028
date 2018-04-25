@@ -22,6 +22,30 @@
       "revId": "d33edb26f1cae66276aa7fe78cbb9b09fd1b2028",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b26f5aa0_5c038f50",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-04-25T14:12:00Z",
+      "side": 1,
+      "message": "Internally I can see that we were only using asm and asm-commons. It might make sense to include them, I\u0027ll leave it to your judgement.",
+      "parentUuid": "0827d50d_df9eacb2",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 25
+      },
+      "revId": "d33edb26f1cae66276aa7fe78cbb9b09fd1b2028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

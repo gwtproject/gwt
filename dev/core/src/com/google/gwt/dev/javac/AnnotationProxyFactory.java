@@ -267,8 +267,24 @@ class AnnotationProxyFactory {
           }
           msg.append(method.getName()).append('=');
           Object myVal = method.invoke(proxy);
-          if (myVal.getClass().isArray()) {
-            msg.append(java.util.Arrays.deepToString((Object[]) myVal));
+          if (myVal instanceof Object[]) {
+            msg.append(Arrays.deepToString((Object[]) myVal));
+          } else if (myVal instanceof boolean[]) {
+            msg.append(Arrays.toString((boolean[]) myVal));
+          } else if (myVal instanceof byte[]) {
+            msg.append(Arrays.toString((byte[]) myVal));
+          } else if (myVal instanceof char[]) {
+            msg.append(Arrays.toString((char[]) myVal));
+          } else if (myVal instanceof short[]) {
+            msg.append(Arrays.toString((short[]) myVal));
+          } else if (myVal instanceof int[]) {
+            msg.append(Arrays.toString((int[]) myVal));
+          } else if (myVal instanceof long[]) {
+            msg.append(Arrays.toString((long[]) myVal));
+          } else if (myVal instanceof float[]) {
+            msg.append(Arrays.toString((float[]) myVal));
+          } else if (myVal instanceof double[]) {
+            msg.append(Arrays.toString((double[]) myVal));
           } else {
             msg.append(myVal);
           }

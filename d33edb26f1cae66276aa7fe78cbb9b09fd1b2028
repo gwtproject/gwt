@@ -46,6 +46,30 @@
       "revId": "d33edb26f1cae66276aa7fe78cbb9b09fd1b2028",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7d250ef_5e790976",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-04-29T11:58:30Z",
+      "side": 1,
+      "message": "There\u0027s org.objectweb.asm.util.TraceClassVisitor from asm-util being used in dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java.",
+      "parentUuid": "b26f5aa0_5c038f50",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 25
+      },
+      "revId": "d33edb26f1cae66276aa7fe78cbb9b09fd1b2028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

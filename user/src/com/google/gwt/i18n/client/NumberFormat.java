@@ -1095,7 +1095,7 @@ public class NumberFormat {
       ret = Double.NaN;
     } else {
       int[] tempPos = {0};
-      ret = parseNumber(valueOnly, tempPos);
+      ret = parseNumber(valueOnly, tempPos) / multiplier;
       inOutPos[0] += tempPos[0];
     }
 

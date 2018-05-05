@@ -107,7 +107,13 @@ public class NumberParse_en_Test extends GWTTestCase {
   
   public void testPrecentParse() {
     Number value;
-    
+
+    value = numberParse("#.##", "123.4579%");
+    assertTrue(value.doubleValue() == (123.4579 / 100));
+
+    value = numberParse("#.##%", "123.4579%");
+    assertTrue(value.doubleValue() == (123.4579 / 100));
+
     value = numberParse("0.0;(0.0)", "123.4579%");
     assertTrue(value.doubleValue() == (123.4579 / 100));
 

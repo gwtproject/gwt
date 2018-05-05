@@ -98,6 +98,12 @@ public class NumberParse_fr_Test extends GWTTestCase {
 
     Number value;
 
+    value = numberParse("#.##", "123,4579%");
+    assertTrue(value.doubleValue() == (123.4579 / 100));
+
+    value = numberParse("#.##%", "123,4579%");
+    assertTrue(value.doubleValue() == (123.4579 / 100));
+
     value = numberParse("0.0;(0.0)", "123,4579%");
     assertEquals((123.4579 / 100), value.doubleValue(), 0.0);
 

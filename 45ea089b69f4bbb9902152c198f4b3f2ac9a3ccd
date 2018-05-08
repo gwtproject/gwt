@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f812df2_3d06e436",
+        "filename": "user/test/com/google/gwt/i18n/client/NumberParse_en_Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2018-05-08T12:48:41Z",
+      "side": 1,
+      "message": "Fix the typo in the method name while changing it?",
+      "revId": "45ea089b69f4bbb9902152c198f4b3f2ac9a3ccd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95853c12_dd58ccdd",
+        "filename": "user/test/com/google/gwt/i18n/client/NumberParse_en_Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2018-05-08T12:48:41Z",
+      "side": 1,
+      "message": "Probably worth testing the other cases too, to make sure that they all behave through either code path.\n\nMaybe also add some negative test cases (one for each of these?) where the percent symbol is in the format but not the input string, so that we verify failure?",
+      "revId": "45ea089b69f4bbb9902152c198f4b3f2ac9a3ccd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

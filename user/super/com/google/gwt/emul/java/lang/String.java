@@ -523,11 +523,14 @@ public final class String implements Comparable<String>, CharSequence,
   public boolean regionMatches(boolean ignoreCase, int toffset, String other,
       int ooffset, int len) {
     checkNotNull(other);
-    if (toffset < 0 || ooffset < 0 || len <= 0) {
+    if (toffset < 0 || ooffset < 0) {
       return false;
     }
     if (toffset + len > length() || ooffset + len > other.length()) {
       return false;
+    }
+    if (len <= 0) {
+      return true;
     }
 
     String left = asNativeString().substr(toffset, len);

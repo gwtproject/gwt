@@ -670,6 +670,17 @@ public class StringTest extends GWTTestCase {
     assertFalse(test.regionMatches(true, 1, "bCdx", 1, 3));
     assertTrue(test.regionMatches(true, 0, "xaBcd", 1, 4));
 
+    String empty = String.valueOf(new char[] {});
+    assertTrue(empty.regionMatches(true, 0, "", 0, 0));
+    assertTrue(empty.regionMatches(true, 0, " ", 0, 0));
+    assertFalse(empty.regionMatches(true, 0, " ", 0, 1));
+
+    assertTrue(test.regionMatches(true, 0, "xx", 0, -1));
+    assertFalse(test.regionMatches(true, -1, "xx", 0, 0));
+    assertFalse(test.regionMatches(true, 0, "xx", -1, 0));
+    assertFalse(test.regionMatches(true, -1, "F", 0, 1));
+    assertFalse(test.regionMatches(true, -1, "A", 0, 1));
+
     try {
       test.regionMatches(-1, null, -1, -1);
       fail();

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d73e67f_f8bafb48",
+        "filename": "user/test/com/google/gwt/i18n/client/NumberParse_en_Test.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2018-05-09T19:27:39Z",
+      "side": 1,
+      "message": "Except for 0 vs #, this looks like a dup of lines 160-161?",
+      "revId": "4c77ddda90982b5c61a2783073412387899d21e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

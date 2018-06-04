@@ -174,7 +174,8 @@ public class MakeCallsStatic {
         newMethod.setJsOverlay();
       }
 
-      JType thisParameterType = enclosingType.strengthenToNonNull();
+      // Do not strengthen to non null since the implicit NPE in instance dispatch is gone.
+      JType thisParameterType = enclosingType;
       // Setup parameters; map from the old params to the new params
       JParameter thisParam = newMethod.createThisParameter(sourceInfo, thisParameterType);
       Map<JParameter, JParameter> varMap = Maps.newIdentityHashMap();

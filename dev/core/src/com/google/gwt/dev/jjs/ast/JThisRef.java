@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dev.jjs.ast;
 
+import static com.google.gwt.thirdparty.guava.common.base.Preconditions.checkArgument;
+
 import com.google.gwt.dev.jjs.SourceInfo;
 
 /**
@@ -22,20 +24,27 @@ import com.google.gwt.dev.jjs.SourceInfo;
  */
 public class JThisRef extends JExpression {
 
-  private final JDeclaredType type;
+  private final JDeclaredType classType;
+  private final JType type;
 
-  public JThisRef(SourceInfo info, JDeclaredType type) {
+  public JThisRef(SourceInfo info, JDeclaredType classType) {
+    this(info, classType, classType);
+  }
+
+  public JThisRef(SourceInfo info, JDeclaredType classType, JType type) {
     super(info);
+    this.classType = classType;
     this.type = type;
+    checkArgument(type.getUnderlyingType().equals(classType));
   }
 
   public JDeclaredType getClassType() {
-    return type;
+    return classType;
   }
 
   @Override
   public JType getType() {
-    return type.strengthenToNonNull();
+    return type;
   }
 
   @Override

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02ddd874_695360dd",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/JavaAstConstructor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-06-05T15:16:16Z",
+      "side": 1,
+      "message": "Is this related?",
+      "revId": "a6fb80a7bd89ca9ea52c7bd0add0547f962b95bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

@@ -340,7 +340,10 @@ public final class JsRootScope extends JsScope {
       "$stack", "$stackDepth", "$location",
 
       // TODO: prove why this is necessary or remove it
-      "call",};
+      "call",
+
+      // Used if firefox flag "security.webauth.u2f" is true (cannot be overridden)
+      "u2f",};
 
   static {
     INSTANCE = new JsRootScope();

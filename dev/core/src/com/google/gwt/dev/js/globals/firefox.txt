@@ -453,6 +453,7 @@ TimeRanges
 TransitionEvent
 TreeWalker
 TypeError
+U2F
 UIEvent
 URIError
 URL
@@ -521,6 +522,7 @@ netscape
 parseFloat
 parseInt
 sidebar
+u2f
 undefined
 unescape
 uneval

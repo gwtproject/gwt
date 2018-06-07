@@ -68,6 +68,30 @@
       "revId": "3de1c0f1f2fe101c89900ddd135048a574021cf0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a5ffac3_8a086021",
+        "filename": "dev/core/src/com/google/gwt/dev/js/globals/firefox.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2018-06-07T15:53:38Z",
+      "side": 1,
+      "message": "The uppercase version is the constructor of the lower case instance, so both are required.",
+      "parentUuid": "a98e772c_c5218a13",
+      "range": {
+        "startLine": 456,
+        "startChar": 0,
+        "endLine": 456,
+        "endChar": 3
+      },
+      "revId": "3de1c0f1f2fe101c89900ddd135048a574021cf0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

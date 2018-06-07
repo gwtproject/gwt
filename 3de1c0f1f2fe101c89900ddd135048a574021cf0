@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "01d07b05_dea8a427",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-06-07T15:48:11Z",
+      "side": 1,
+      "message": "Run globals.html and add all the missing one. Then the commit message for this change should be\n\nUpdated globals for Firefox version x.x.x",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 70
+      },
+      "revId": "3de1c0f1f2fe101c89900ddd135048a574021cf0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd477234_3f5869cd",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsRootScope.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-06-07T15:48:11Z",
+      "side": 1,
+      "message": "This should not be needed. Please revert the changes to this file.",
+      "range": {
+        "startLine": 345,
+        "startChar": 2,
+        "endLine": 347,
+        "endChar": 0
+      },
+      "revId": "3de1c0f1f2fe101c89900ddd135048a574021cf0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a98e772c_c5218a13",
+        "filename": "dev/core/src/com/google/gwt/dev/js/globals/firefox.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-06-07T15:48:11Z",
+      "side": 1,
+      "message": "So there are both an uppercase and lowercase global symbol? I think only the lower case is  needed.\n\nYou could run the globals.html as colin suggested to see what symbols are really missing if firefox.",
+      "range": {
+        "startLine": 456,
+        "startChar": 0,
+        "endLine": 456,
+        "endChar": 3
+      },
+      "revId": "3de1c0f1f2fe101c89900ddd135048a574021cf0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

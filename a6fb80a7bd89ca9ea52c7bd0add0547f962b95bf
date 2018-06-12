@@ -16,6 +16,24 @@
       "revId": "a6fb80a7bd89ca9ea52c7bd0add0547f962b95bf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0153e97_0044f6ce",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/JavaAstConstructor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2018-06-12T22:28:36Z",
+      "side": 1,
+      "message": "Yes. Due the the changes about the nullability assumption on this, the (intermediate) code in some of the existing unit tests might call Cast.maskUndefined().",
+      "parentUuid": "02ddd874_695360dd",
+      "revId": "a6fb80a7bd89ca9ea52c7bd0add0547f962b95bf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

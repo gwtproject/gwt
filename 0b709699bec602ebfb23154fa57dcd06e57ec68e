@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce4316a7_5cc5a23e",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2018-06-19T16:15:27Z",
+      "side": 1,
+      "message": "Technically, this will overflow on large values of low and high, right? Doing the shift before adding low means that we can\u0027t overflow int.",
+      "revId": "0b709699bec602ebfb23154fa57dcd06e57ec68e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21314dfa_5fc330a5",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/computeScriptBase.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-06-19T14:45:43Z",
+      "side": 1,
+      "message": "That TODO could then be removed, right?",
+      "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "289bc6b6_9bf4bb50",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/computeScriptBase.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-06-19T14:45:43Z",
+      "side": 1,
+      "message": "nit: spaces around the + operator",
+      "range": {
+        "startLine": 39,
+        "startChar": 27,
+        "endLine": 39,
+        "endChar": 30
+      },
+      "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "691e6e88_e730744a",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/computeScriptBase.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-06-19T14:45:43Z",
+      "side": 1,
+      "message": "We don\u0027t use tabs",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 1
+      },
+      "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a71ed34_becabe2f",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/computeScriptBase.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-06-19T14:45:43Z",
+      "side": 1,
+      "message": "Remove, don\u0027t comment code out.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 9
+      },
+      "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffeaf587_a93796fc",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-06-19T14:45:43Z",
+      "side": 1,
+      "message": "Move before the \"Try to get the url from a meta property first\" comment (possibly even before the \"This code follows the order…\" comment)",
+      "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a346b14_5412520c",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_main.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-06-19T14:45:43Z",
+      "side": 1,
+      "message": "Isn\u0027t that equivalent to\n\n typeof importScripts !\u003d\u003d \u0027function\u0027\n\n?",
+      "range": {
+        "startLine": 38,
+        "startChar": 6,
+        "endLine": 38,
+        "endChar": 44
+      },
+      "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9b75533_25832cf0",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_main.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-06-19T14:45:43Z",
+      "side": 1,
+      "message": "Put line inside parenthesized block\n\n if (…) {\n   this.__dialog \u003d new Dialog();\n }",
+      "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ee10449_c37485bf",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_main.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-06-19T14:45:43Z",
+      "side": 1,
+      "message": "log result.status and __recompiler.getLogUrl() ?",
+      "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c0d5fc1_253559a7",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_template.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-06-19T14:45:43Z",
+      "side": 1,
+      "message": "nit: spaces\n\n … ? self : window;",
+      "range": {
+        "startLine": 18,
+        "startChar": 48,
+        "endLine": 18,
+        "endChar": 61
+      },
+      "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a2c7e8c_52e4204a",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/computeScriptBase.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-06-19T14:45:43Z",
+      "side": 1,
+      "message": "When compiling for a worker, you should probably use a specific primary linker that would use its own computeScriptBase.js.",
+      "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

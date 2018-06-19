@@ -65,6 +65,23 @@
     },
     {
       "key": {
+        "uuid": "17a448a8_209f47c1",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/computeScriptBase.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2018-06-19T14:47:06Z",
+      "side": 1,
+      "message": "delete dead code?",
+      "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4a71ed34_becabe2f",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/computeScriptBase.js",
         "patchSetId": 1
@@ -82,6 +99,23 @@
         "endLine": 46,
         "endChar": 9
       },
+      "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f2a1ccd_47dd6456",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/computeScriptBase.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2018-06-19T14:47:06Z",
+      "side": 1,
+      "message": "restore whitespace - it doesnt look like this block of code has changes otherwise.",
       "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
@@ -128,6 +162,23 @@
     },
     {
       "key": {
+        "uuid": "2dbbcf65_00ee622c",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_main.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2018-06-19T14:47:06Z",
+      "side": 1,
+      "message": "`!\u003d\u003d` instead of a `!` wrapper around the `\u003d\u003d\u003d`?",
+      "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e9b75533_25832cf0",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_main.js",
         "patchSetId": 1
@@ -139,6 +190,23 @@
       "writtenOn": "2018-06-19T14:45:43Z",
       "side": 1,
       "message": "Put line inside parenthesized block\n\n if (…) {\n   this.__dialog \u003d new Dialog();\n }",
+      "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0b0fe3b_a4f3a88a",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_main.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2018-06-19T14:47:06Z",
+      "side": 1,
+      "message": "Looks like tabs are used in this file instead of spaces in a few spots",
       "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
@@ -185,6 +253,40 @@
     },
     {
       "key": {
+        "uuid": "7a1a27b1_85f9d4c5",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_template.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2018-06-19T14:47:06Z",
+      "side": 1,
+      "message": "Could merge this `if` into the previous `else` and avoid nesting.",
+      "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b61c572b_3fa6a290",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/computeScriptBase.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2018-06-19T14:47:06Z",
+      "side": 1,
+      "message": "Is this always attached in this way?",
+      "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1a2c7e8c_52e4204a",
         "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/computeScriptBase.js",
         "patchSetId": 1
@@ -196,6 +298,23 @@
       "writtenOn": "2018-06-19T14:45:43Z",
       "side": 1,
       "message": "When compiling for a worker, you should probably use a specific primary linker that would use its own computeScriptBase.js.",
+      "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d2845ae_88a57981",
+        "filename": "dev/core/src/com/google/gwt/core/linker/CrossSiteIframeTemplate.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2018-06-19T14:47:06Z",
+      "side": 1,
+      "message": "It may make more sense instead to encourage workers to simply disable this check, or use a property to detect that the app is running in a worker and never run the doc mode asserter in the first place.",
       "revId": "40aaa03cf0cd781e678626d43c03b7e64667d3b0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true

@@ -976,7 +976,7 @@ public class Collections {
     int high = sortedList.size() - 1;
 
     while (low <= high) {
-      final int mid = low + ((high - low) >> 1);
+      final int mid = (low + high) >>> 1;
       final T midVal = sortedList.get(mid);
       final int compareResult = comparator.compare(midVal, key);
 
@@ -990,7 +990,7 @@ public class Collections {
       }
     }
     // key not found.
-    return -low - 1;
+    return ~low;
   }
 
   public static <T> void copy(List<? super T> dest, List<? extends T> src) {

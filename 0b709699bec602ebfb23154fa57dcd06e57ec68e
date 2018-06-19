@@ -34,6 +34,24 @@
       "revId": "0b709699bec602ebfb23154fa57dcd06e57ec68e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8936da0e_46a64a88",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2018-06-19T16:26:55Z",
+      "side": 1,
+      "message": "Consider a list of size Integer.MAX_VALUE/2+1 (or 1073741825), where we try to find the last item. If my math is right, low will be 1073741824, and 1073741824+1073741825 is over Integer.MAX_VALUE, and in JS the expression `(1073741824 + 1073741825) \u003e\u003e 1` results in -1073741824.\n\nThis would at least occur in any case larger than that where the item to find is near the end of the list.",
+      "parentUuid": "dd384070_86e8403c",
+      "revId": "0b709699bec602ebfb23154fa57dcd06e57ec68e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

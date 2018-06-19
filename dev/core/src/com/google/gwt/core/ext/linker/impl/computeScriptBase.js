@@ -63,7 +63,7 @@ function computeScriptBase() {
   
 // =============== Various methods to try finding the base =================  
   function tryMetaTag() {
-    var metaVal = __gwt_getMetaProperty('baseUrl');
+    var metaVal = __MODULE_FUNC__.__gwt_getMetaProperty('baseUrl');
     if (metaVal != null) {
       return metaVal;
     }
@@ -71,6 +71,10 @@ function computeScriptBase() {
   }
     
   function tryNocacheJsTag() {
+    if (typeof importScripts === 'function') {
+      return getDirectoryOfFile(self.location.href);
+    }
+
     // By default, this script looks like something/moduleName.nocache.js
     // so look for a script tag that looks like that
     var scriptTags = $doc.getElementsByTagName('script');

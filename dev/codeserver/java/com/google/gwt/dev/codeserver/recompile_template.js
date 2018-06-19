@@ -15,8 +15,8 @@
  */
 (function(){
   // Variables declared in this scope will be seen by both recompile_lib and the property providers.
-  var $wnd = window;
-  var $doc = $wnd.document;
+  var $wnd = typeof importScripts === 'function'?self:window;
+  var $doc = typeof importScripts === 'function'?self:$wnd.document;
   var __moduleName = __MODULE_NAME__;
 
   // Because GWT linker architecture allows property providers to use global variables
@@ -37,14 +37,18 @@
     __MAIN__
   };
 
-  if (/loaded|complete/.test($doc.readyState)) {
-    executeMain();
+  if (typeof importScripts === 'function') {
+	executeMain();
   } else {
-    //defer app script insertion until the body is ready
-    if($wnd.addEventListener){
-      $wnd.addEventListener('load', executeMain, false);
-    } else{
-      $wnd.attachEvent('onload', executeMain);
+    if (/loaded|complete/.test($doc.readyState)) {
+      executeMain();
+    } else {
+      //defer app script insertion until the body is ready
+      if($wnd.addEventListener){
+        $wnd.addEventListener('load', executeMain, false);
+      } else{
+        $wnd.attachEvent('onload', executeMain);
+      }
     }
   }
 })();

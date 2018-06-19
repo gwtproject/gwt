@@ -15,8 +15,8 @@
  */
 __BEGIN_TRY_BLOCK__
 function __MODULE_FUNC__() {
-  var $wnd = __WINDOW_DEF__;
-  var $doc = __DOCUMENT_DEF__;
+  var $wnd = typeof importScripts === 'function'?self:__WINDOW_DEF__;
+  var $doc = typeof importScripts === 'function'?self:__DOCUMENT_DEF__;
 
   sendStats('bootstrap', 'begin');
 
@@ -142,22 +142,30 @@ function __MODULE_FUNC__() {
    ***************************************************************************/
 
   // Must be called before computeScriptBase() and getCompiledFilename()
-  processMetas();
+  if (!typeof importScripts === 'function') {
+    processMetas();
+  }
 
   // Must be set before getCompiledFilename() is called
   __MODULE_FUNC__.__moduleBase = computeScriptBase();
+
   activeModules["__MODULE_NAME__"].moduleBase = __MODULE_FUNC__.__moduleBase;
 
   // Must be done right before the "bootstrap" "end" stat is sent
   var filename = getCompiledCodeFilename();
 
   __DEV_MODE_REDIRECT_HOOK__
-
   loadExternalStylesheets();
 
   sendStats('bootstrap', 'end');
 
-  installScript(filename);
+  if (typeof importScripts === 'function') {
+	// Fix com.google.gwt.user.client.DocumentModeAsserter to allow undefined compatMode
+	self.compatMode = "CSS1Compat";
+	self.importScripts(filename);
+  } else {
+    installScript(filename);
+  }
 
   return true; // success
 }

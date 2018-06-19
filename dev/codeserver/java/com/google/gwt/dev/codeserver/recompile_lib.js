@@ -259,10 +259,14 @@ Recompiler.prototype.__jsonp = function(url, callback) {
 };
 
 Recompiler.prototype.__injectScriptTag = function(url) {
-  var script = $doc.createElement('script');
-  script.src = url;
-  var $head = $doc.head || $doc.getElementsByTagName('head')[0];
-  $head.appendChild(script);
+  if (typeof importScripts === 'function') {
+	importScripts(url);
+  } else {
+    var script = $doc.createElement('script');
+    script.src = url;
+    var $head = $doc.head || $doc.getElementsByTagName('head')[0];
+    $head.appendChild(script);
+  }
 };
 
 /**
@@ -280,6 +284,12 @@ Recompiler.prototype.__getBaseUrl = function(url) {
  * @returns {string} the url of the code server
  */
 Recompiler.prototype.getCodeServerBaseUrl = function() {
+  if (typeof importScripts === 'function') {
+    return self.__serverUrl__+'/';
+/*    var loc = self.location;
+    return loc.protocol+"://"+loc.hostname+":__SUPERDEV_PORT__";*/
+  }
+
   var scriptTagsToSearch = $doc.getElementsByTagName('script');
   var expectedSuffix = '/recompile-requester/' + this.__moduleName;
   for (var i = 0; i < scriptTagsToSearch.length; i++) {
@@ -296,10 +306,15 @@ Recompiler.prototype.getCodeServerBaseUrl = function() {
  */
 Recompiler.prototype.loadApp = function() {
   var url = this.getCodeServerBaseUrl() + this.__moduleName + '/' + this.__moduleName + '.nocache.js';
-  var scriptTag = $doc.createElement('script');
-  scriptTag.src = url;
-  var $head = $doc.head || $doc.getElementsByTagName('head')[0];
-  $head.insertBefore(scriptTag, $head.firstElementChild || $head.children[0]);
+
+  if (typeof importScripts === 'function') {
+	importScripts(url);
+  } else {
+    var scriptTag = $doc.createElement('script');
+    scriptTag.src = url;
+    var $head = $doc.head || $doc.getElementsByTagName('head')[0];
+    $head.insertBefore(scriptTag, $head.firstElementChild || $head.children[0]);
+  }
 };
 
 Recompiler.prototype.getLogUrl = function() {
@@ -416,6 +431,17 @@ BaseUrlProvider.prototype.__maybeConvertToAbsoluteUrl = function(url) {
 BaseUrlProvider.prototype.getBaseUrl = function() {
   // This code follows the order in com/google/gwt/core/ext/linker/impl/computeScriptBase.js
   // Try to get the url from a meta property first
+
+  if (typeof importScripts === 'function') {
+    // try the location
+    var expectedSuffix = this.__moduleName + '.nocache.js';
+	var candidate = StringHelper.removeQueryString(self.location.href);
+	if (StringHelper.endsWith(candidate, expectedSuffix)) {
+	  var stripedUrl = this.__stripHashQueryAndFileName(candidate);
+	  return this.__maybeConvertToAbsoluteUrl(stripedUrl);
+	}
+  }
+
   var url = this.__getBaseUrlFromMetaTag();
   if (url) {
     return this.__maybeConvertToAbsoluteUrl(url);

@@ -35,21 +35,30 @@ function computeScriptBase() {
 
   var expectedSuffix = '/__MODULE_NAME__.nocache.js';
 
-  var scriptTags = $doc.getElementsByTagName('script');
-  for (var i = 0;; i++) {
-    var tag = scriptTags[i];
-    if (!tag) {
-      break;
-    }
-    var candidate = tag.src;
-    var lastMatch = candidate.lastIndexOf(expectedSuffix);
-    if (lastMatch == candidate.length - expectedSuffix.length) {
-      // Assumes that either the URL is absolute, or it's relative
-      // and the html file is hosted by this code server.
-      return candidate.substring(0, lastMatch + 1);
-    }
+  if (typeof importScripts === 'function') {
+	  return self.__serverUrl__+"/__MODULE_NAME__/";
+	  /*var candidate = self.location.href;
+      var lastMatch = candidate.lastIndexOf(expectedSuffix);
+      if (lastMatch == candidate.length - expectedSuffix.length) {
+        // Assumes that either the URL is absolute, or it's relative
+        // and the html file is hosted by this code server.
+        return candidate.substring(0, lastMatch + 1);
+      }*/
   }
-
+    var scriptTags = $doc.getElementsByTagName('script');
+    for (var i = 0;; i++) {
+      var tag = scriptTags[i];
+      if (!tag) {
+        break;
+      }
+      var candidate = tag.src;
+      var lastMatch = candidate.lastIndexOf(expectedSuffix);
+      if (lastMatch == candidate.length - expectedSuffix.length) {
+        // Assumes that either the URL is absolute, or it's relative
+        // and the html file is hosted by this code server.
+        return candidate.substring(0, lastMatch + 1);
+      }
+    }
   $wnd.alert('Unable to load Super Dev Mode version of __MODULE_NAME__.');
   return null;
 }

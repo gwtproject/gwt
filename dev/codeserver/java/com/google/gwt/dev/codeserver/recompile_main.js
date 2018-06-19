@@ -34,7 +34,10 @@ function Main(moduleName, initPropertyProviders){
   var metaTagParser = new MetaTagParser(moduleName);
   var propertySource = new PropertySource(moduleName, initPropertyProviders, metaTagParser);
   this.__moduleName = moduleName;
-  this.__dialog = new Dialog();
+
+  if (!(typeof importScripts === 'function'))
+	this.__dialog = new Dialog();
+
   this.__recompiler = new Recompiler(moduleName, propertySource.computeBindingProperties());
   this.__baseUrlProvider = new BaseUrlProvider(moduleName, metaTagParser);
 }
@@ -52,18 +55,28 @@ Main.prototype.compile = function() {
     $wnd[moduleBaseKey] = this.__baseUrlProvider.getBaseUrl();
   }
 
-  this.__dialog.clear();
-  this.__dialog.add(this.__dialog.createTextElement("div", "12pt", "Compiling " + this.__moduleName));
-  this.__dialog.show();
-  this.__recompiler.compile(function(result) {
-    that.__dialog.clear();
-    if (result.status != 'ok') {
-      that.__renderError(result);
-    } else {
-      that.__dialog.hide();
-      that.__recompiler.loadApp();
-    }
-  });
+  if (typeof importScripts === 'function') {
+	  this.__recompiler.compile(function(result) {
+	    if (result.status != 'ok') {
+	      console.log("Error when compiling worker")
+	    } else {
+	      that.__recompiler.loadApp();
+	    }
+	  });
+  } else {
+    this.__dialog.clear();
+    this.__dialog.add(this.__dialog.createTextElement("div", "12pt", "Compiling " + this.__moduleName));
+    this.__dialog.show();
+    this.__recompiler.compile(function(result) {
+      that.__dialog.clear();
+      if (result.status != 'ok') {
+        that.__renderError(result);
+      } else {
+        that.__dialog.hide();
+        that.__recompiler.loadApp();
+      }
+    });
+  }
 };
 
 /**

@@ -236,6 +236,7 @@ public class MenuBarTest extends WidgetTestBase {
 
   @DoNotRunWith({Platform.HtmlUnitBug})
   public void testSetFocusOnHoverEnabled() {
+    delayTestFinish(1000);
     TextBox focusOwner = new TextBox();
     RootPanel.get().add(focusOwner);
     focusOwner.setFocus(true);
@@ -247,7 +248,13 @@ public class MenuBarTest extends WidgetTestBase {
 
     assertFocused(focusOwner.getElement());
     menu.itemOver(item0, true);
-    assertFocused(menu.getElement());
+    Scheduler.get().scheduleDeferred(new Command() {
+      @Override
+      public void execute() {
+        assertFocused(menu.getElement());
+        finishTest();
+      }
+    });
   }
 
   public void testSetFocusOnHoverDisabled() {

@@ -783,7 +783,7 @@ public class ImageTest extends GWTTestCase {
   public void testWrapOfSubclass() {
     String uid = Document.get().createUniqueId();
     DivElement div = Document.get().createDivElement();
-    div.setInnerHTML("<img id='" + uid + "' src='counting-forward.png'>");
+    div.setInnerHTML("<img id='" + uid + "' src='counting-forwards.png'>");
     Document.get().getBody().appendChild(div);
 
     final TestImage image = TestImage.wrap(Document.get().getElementById(uid));

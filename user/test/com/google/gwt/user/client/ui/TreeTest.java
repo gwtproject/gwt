@@ -356,6 +356,9 @@ public class TreeTest extends GWTTestCase {
   }
 
   @DoNotRunWith(Platform.HtmlUnitLayout)
+  // TODO: Test fails in recent chrome versions when using manual mode.
+  // https://github.com/gwtproject/gwt/issues/9475
+  // https://bugs.chromium.org/p/chromium/issues/detail?id=681382
   public void testScrollOnSelectEnabledTrue() {
     // With scrolling enabled (default)
     Tree tree = createTree();

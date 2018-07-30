@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1786cbad_922b241d",
+        "filename": "user/test/com/google/gwt/view/client/DefaultSelectionModelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2018-07-30T15:42:52Z",
+      "side": 1,
+      "message": "I picked 2000 and 1000 to be consistent with the other tests of theses classes that use the same values. But yes it could be shorter in all these cases, including existing tests. \n\nJust shortening the timer delay might not be a good solution. Wondering what happens if JVM does GC for too long and HTMLUnit now wants to execute both timer and deferred command asap. Then ordering comes into play.\n\nIn this case here it might also work to just schedule a deferred command within the first deferred command. Similar to your other comment.",
+      "parentUuid": "8eca8d7d_29d7d86d",
+      "revId": "316596bb4634c96e02fc94cf97ed6c33d3308f21",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8ff994e8_7e3a7edd",
         "filename": "user/test/com/google/gwt/view/client/SingleSelectionModelTest.java",
         "patchSetId": 2

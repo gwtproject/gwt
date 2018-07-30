@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8eca8d7d_29d7d86d",
+        "filename": "user/test/com/google/gwt/view/client/DefaultSelectionModelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2018-07-30T14:04:40Z",
+      "side": 1,
+      "message": "1s seems excessive (but I\u0027d want to check other tests to be consistent), but on the other hand we have to wait \"an event loop or two\" to ensure that nothing was erroneously scheduled, and i\u0027m not sure a good way to do that other than just having a scheduled command defer itself N times after the desired event occurs.",
+      "revId": "316596bb4634c96e02fc94cf97ed6c33d3308f21",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ff994e8_7e3a7edd",
+        "filename": "user/test/com/google/gwt/view/client/SingleSelectionModelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2018-07-30T14:04:40Z",
+      "side": 1,
+      "message": "In this kind of case, it seems sufficient to just run after \"scheduleFinally\", i.e. run finishTest in a deferred command, rather than waiting a full second?",
+      "revId": "316596bb4634c96e02fc94cf97ed6c33d3308f21",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

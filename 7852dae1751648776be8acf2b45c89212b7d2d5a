@@ -16,6 +16,24 @@
       "revId": "7852dae1751648776be8acf2b45c89212b7d2d5a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12502fae_84001f28",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2018-08-03T19:05:42Z",
+      "side": 1,
+      "message": "No it won\u0027t since there is JS accessible field in Throwable.",
+      "parentUuid": "8f0d805c_bfc78b90",
+      "revId": "7852dae1751648776be8acf2b45c89212b7d2d5a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

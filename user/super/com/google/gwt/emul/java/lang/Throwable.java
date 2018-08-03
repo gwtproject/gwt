@@ -22,11 +22,11 @@ import static javaemul.internal.InternalPreconditions.checkState;
 import java.io.PrintStream;
 import java.io.Serializable;
 
-import javaemul.internal.JsUtils;
 import javaemul.internal.annotations.DoNotInline;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
@@ -150,7 +150,10 @@ public class Throwable implements Serializable {
 
   private void linkBack(Object error) {
     if (error != null) {
-      JsUtils.setPropertySafe(error, "__java$exception", this);
+      try {
+        // This may throw exception in strict mode.
+        ((HasJavaThrowable) error).setJavaThrowable(this);
+      } catch (Throwable ignored) { }
     }
   }
 
@@ -294,7 +297,7 @@ public class Throwable implements Serializable {
   public static @JsNonNull Throwable of(Object e) {
     // If the JS error is already mapped to a Java Exception, use it.
     if (e != null) {
-      Throwable throwable = JsUtils.getProperty(e, "__java$exception");
+      Throwable throwable = ((HasJavaThrowable) e).getJavaThrowable();
       if (throwable != null) {
         return throwable;
       }
@@ -311,4 +314,13 @@ public class Throwable implements Serializable {
 
   @JsType(isNative = true, name = "TypeError", namespace = "<window>")
   private static class NativeTypeError { }
+
+  @JsType(isNative = true, name = "?", namespace = JsPackage.GLOBAL)
+  private interface HasJavaThrowable {
+    @JsProperty(name = "__java$exception")
+    void setJavaThrowable(Throwable t);
+
+    @JsProperty(name = "__java$exception")
+    Throwable getJavaThrowable();
+  }
 }

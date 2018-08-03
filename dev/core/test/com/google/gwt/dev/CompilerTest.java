@@ -2759,6 +2759,7 @@ public class CompilerTest extends ArgProcessorTestBase {
         "java.lang.String$NativeFunction",
         "java.lang.String$NativeString",
         "java.lang.Throwable",
+        "java.lang.Throwable$HasJavaThrowable",
         "java.lang.Throwable$NativeError",
         "java.lang.Throwable$NativeTypeError",
         "javaemul.internal.NativeRegExp",

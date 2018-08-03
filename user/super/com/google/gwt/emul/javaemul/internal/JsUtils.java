@@ -59,12 +59,5 @@ public class JsUtils {
   public static native void setProperty(Object map, String key, Object value) /*-{
     map[key] = value;
   }-*/;
-
-  public static native void setPropertySafe(Object map, String key, Object value) /*-{
-    try {
-      // This may throw exception in strict mode.
-      map[key] = value;
-    } catch(ignored) { }
-  }-*/;
 }
 

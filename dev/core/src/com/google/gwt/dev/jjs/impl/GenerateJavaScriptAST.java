@@ -249,7 +249,7 @@ public class GenerateJavaScriptAST {
         jsName = topScope.declareName(mangleName(x), x.getName());
       } else {
         jsName = JjsUtils.requiresJsName(x)
-                ? scopeStack.peek().declareUnobfuscatableName(x.getJsName())
+                ? objectScope.declareUnobfuscatableName(x.getJsName())
                 : scopeStack.peek().declareName(mangleName(x), x.getName());
       }
       names.put(x, jsName);
@@ -373,7 +373,7 @@ public class GenerateJavaScriptAST {
       if (x.needsDynamicDispatch()) {
         if (polymorphicNames.get(x) == null) {
           JsName polyName = JjsUtils.requiresJsName(x)
-                  ? interfaceScope.declareUnobfuscatableName(x.getJsName())
+                  ? objectScope.declareUnobfuscatableName(x.getJsName())
                   : interfaceScope.declareName(mangleNameForPoly(x), name);
           polymorphicNames.put(x, polyName);
         }

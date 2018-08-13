@@ -93,18 +93,22 @@ function maven-gwt() {
   # Create jsinterop libs
   for i in $jsinteropLibs
   do
-    echo "Creating jsinterop-${i}.jar and jsinterop-${i}-sources.jar"
-    zip $GWT_EXTRACT_DIR/gwt-user.jar --copy --out $GWT_EXTRACT_DIR/jsinterop-${i}.jar \
-        "jsinterop/${i}/*"
-    zip -d $GWT_EXTRACT_DIR/jsinterop-${i}.jar \
-        "jsinterop/${i}/*.java" "jsinterop/${i}/*.gwt.xml"
-    zip $GWT_EXTRACT_DIR/gwt-user.jar --copy --out $GWT_EXTRACT_DIR/jsinterop-${i}-sources.jar \
-        "jsinterop/${i}/*.java" "jsinterop/${i}/*.gwt.xml"
+    echo "Unzipping jsinterop/${i}/* from $GWT_EXTRACT_DIR/gwt-user.jar"
+    unzip $GWT_EXTRACT_DIR/gwt-user.jar jsinterop/${i}/* -d $GWT_EXTRACT_DIR
+    echo "Creating jsinterop-${i}-sources.jar"
+    jar cf $GWT_EXTRACT_DIR/jsinterop-${i}-sources.jar -C $GWT_EXTRACT_DIR jsinterop/${i}/*.java
+    rm -rf $GWT_EXTRACT_DIR/jsinterop/${i}/*.java
+    jar uf $GWT_EXTRACT_DIR/jsinterop-${i}-sources.jar -C $GWT_EXTRACT_DIR jsinterop/${i}/*.gwt.xml
+    rm -rf $GWT_EXTRACT_DIR/jsinterop/${i}/*.gwt.xml
+    echo "Creating jsinterop-${i}.jar"
+    jar cf $GWT_EXTRACT_DIR/jsinterop-${i}.jar -C $GWT_EXTRACT_DIR jsinterop/${i}
+    rm -rf $GWT_EXTRACT_DIR/jsinterop/${i}
     echo "Removing jsinterop/${i} from gwt-user"
     zip -d $GWT_EXTRACT_DIR/gwt-user.jar "jsinterop/${i}/*"
     echo "Removing jsinterop/${i} from gwt-servlet"
     zip -d $GWT_EXTRACT_DIR/gwt-servlet.jar "jsinterop/${i}/*"
   done
+  rm -rf $GWT_EXTRACT_DIR/jsinterop
 
   echo "Removing bundled third-parties from gwt-dev"
   zip -q $GWT_EXTRACT_DIR/gwt-dev.jar --copy --out $GWT_EXTRACT_DIR/gwt-dev-trimmed.jar \

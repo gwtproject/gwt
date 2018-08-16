@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8fb8e24_05aef9ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2018-08-16T14:28:08Z",
+      "side": 1,
+      "message": "Rather than the github \"Fixes\" lable, the convention used is like this:\n\nBug: #1234\nBug-Link: https://github.com/gwtproject/gwt/issues/1234\nChange-Id: 0987654321fedcba",
+      "revId": "16c59e92837b2e9523bce0baac94291987ac3cb9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

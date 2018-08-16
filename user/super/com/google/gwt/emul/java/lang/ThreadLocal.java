@@ -26,19 +26,27 @@ import java.util.function.Supplier;
  * @param <T> value type.
  */
 public class ThreadLocal<T> {
-
+  private boolean setInitialValue = true;
   private T value;
 
   public T get() {
+    if (setInitialValue) {
+      set(initialValue());
+    }
     return value;
   }
 
   public void set(T value) {
     this.value = value;
+    this.setInitialValue = false;
   }
 
   public void remove() {
     value = null;
+  }
+
+  protected T initialValue() {
+    return null;
   }
 
   public static <S> ThreadLocal<S> withInitial(Supplier<? extends S> supplier) {

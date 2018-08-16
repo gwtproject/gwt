@@ -62,8 +62,8 @@ public class ThreadLocalTest extends EmulTestBase {
             return "initial";
           }
         };
-    withInitialValue.set("override");
-    assertEquals("override", withInitialValue.get());
+    threadLocal.set("override");
+    assertEquals("override", threadLocal.get());
   }
 
   public void testInitialValue_setCalledAfterInitialValue() {
@@ -74,8 +74,8 @@ public class ThreadLocalTest extends EmulTestBase {
             return "initial";
           }
         };
-    assertEquals("initial", withInitialValue.get());
-    withInitialValue.set("override");
-    assertEquals("override", withInitialValue.get());
+    assertEquals("initial", threadLocal.get());
+    threadLocal.set("override");
+    assertEquals("override", threadLocal.get());
   }
 }

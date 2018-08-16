@@ -36,4 +36,46 @@ public class ThreadLocalTest extends EmulTestBase {
     assertNull(threadLocal.get());
     threadLocal.remove(); // This shouldn't throw any exception
   }
+
+  public void testInitialValue() {
+    int[] counter = new int[1];
+    ThreadLocal<String> withInitialValue =
+        new ThreadLocal<String>() {
+          @Override
+          protected String initialValue() {
+            counter[0]++;
+            return "initial";
+          }
+        };
+    assertEquals("initial", withInitialValue.get());
+
+    // check that initialValue() is only invoked once
+    withInitialValue.get();
+    assertEquals(1, counter[0]);
+  }
+
+  public void testInitialValue_setCalledBeforeGet() {
+    ThreadLocal<String> threadLocal =
+        new ThreadLocal<String>() {
+          @Override
+          protected String initialValue() {
+            return "initial";
+          }
+        };
+    withInitialValue.set("override");
+    assertEquals("override", withInitialValue.get());
+  }
+
+  public void testInitialValue_setCalledAfterInitialValue() {
+    ThreadLocal<String> threadLocal =
+        new ThreadLocal<String>() {
+          @Override
+          protected String initialValue() {
+            return "initial";
+          }
+        };
+    assertEquals("initial", withInitialValue.get());
+    withInitialValue.set("override");
+    assertEquals("override", withInitialValue.get());
+  }
 }

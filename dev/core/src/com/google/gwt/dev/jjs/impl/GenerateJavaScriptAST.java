@@ -248,8 +248,11 @@ public class GenerateJavaScriptAST {
       if (x.isStatic()) {
         jsName = topScope.declareName(mangleName(x), x.getName());
       } else {
+        // Reserve the JsName for JsProperty fields in the interfaceScope so that they are not
+        // accidentally overridden by subclasses. Regular fields can be declared in their enclosing
+        // scope since their mangling makes them unique.
         jsName = JjsUtils.requiresJsName(x)
-                ? scopeStack.peek().declareUnobfuscatableName(x.getJsName())
+                ? interfaceScope.declareUnobfuscatableName(x.getJsName())
                 : scopeStack.peek().declareName(mangleName(x), x.getName());
       }
       names.put(x, jsName);

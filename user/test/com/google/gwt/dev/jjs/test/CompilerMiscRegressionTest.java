@@ -473,4 +473,35 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
 
     assertTrue(objectWithOverlay.getThis() == null);
   }
+
+  private static class ClassWithSingleField {
+    int firstField = 1;
+
+    // Make sure firstField is not optimized away.
+    void setFirstField(int n) {
+      firstField = n;
+    }
+  }
+
+  private static class SubClass extends ClassWithSingleField {
+    // @JsProperties with names chosen so that they are almost guaranteed to collide when using
+    // the JsObfuscateNamer.
+    @JsProperty
+    int a = 2;
+    @JsProperty
+    int b = 3;
+    @JsProperty
+    int c = 4;
+  }
+
+  // Regression test for issue 9623.
+  public void testJsPropertyFieldCollision() {
+    SubClass subClass = new SubClass();
+    assertEquals(1, subClass.firstField);
+    // Make sure firstField is not optimized away.
+    subClass.setFirstField(5);
+    assertEquals(2, subClass.a);
+    assertEquals(3, subClass.b);
+    assertEquals(4, subClass.c);
+  }
 }

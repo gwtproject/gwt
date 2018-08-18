@@ -16,6 +16,40 @@
       "revId": "83d3a9a278730f5d5509c456b96032b854cdff7a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f576f618_3174fa2f",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/ThreadLocalTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2018-08-18T20:49:03Z",
+      "side": 1,
+      "message": "This should never be called when set() is called. So add fail() here, to make the test fail in case it will be called.",
+      "revId": "83d3a9a278730f5d5509c456b96032b854cdff7a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76562996_1f82b678",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/ThreadLocalTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2018-08-18T20:49:03Z",
+      "side": 1,
+      "message": "Extend this test so it looks like\n\n    assertEquals(\"initial\", withInitialValue.get());\n    withInitialValue.set(\"override\");\n    assertEquals(\"override\", withInitialValue.get());\n    withInitialValue.remove();\n    assertEquals(\"initial\", withInitialValue.get());",
+      "revId": "83d3a9a278730f5d5509c456b96032b854cdff7a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

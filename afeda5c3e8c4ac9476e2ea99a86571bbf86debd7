@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d632e0b_6f1ec796",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-08-19T12:08:40Z",
+      "side": 1,
+      "message": "This could probably extract only the needed files instead of the whole JAR.",
+      "revId": "afeda5c3e8c4ac9476e2ea99a86571bbf86debd7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b343cd55_3cf00d4d",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-08-19T12:08:40Z",
+      "side": 1,
+      "message": "We\u0027ll want to update this to also generate (or simply copy) a manifest for gwt-dev.jar and gwt-user.jar",
+      "revId": "afeda5c3e8c4ac9476e2ea99a86571bbf86debd7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

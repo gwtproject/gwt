@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ecf126a_c7af7d26",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 11233
+      },
+      "writtenOn": "2018-08-21T19:29:37Z",
+      "side": 1,
+      "message": "It only extracts the files found in the the jsinterop.\"i\" package. I think you have misread the line. Otherwise i need some more clarification on the issue.",
+      "parentUuid": "4d632e0b_6f1ec796",
+      "revId": "afeda5c3e8c4ac9476e2ea99a86571bbf86debd7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b343cd55_3cf00d4d",
         "filename": "maven/lib-gwt.sh",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2018-08-19T12:08:40Z",
       "side": 1,
       "message": "We\u0027ll want to update this to also generate (or simply copy) a manifest for gwt-dev.jar and gwt-user.jar",
+      "revId": "afeda5c3e8c4ac9476e2ea99a86571bbf86debd7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd5067b3_f2f4bac0",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 11233
+      },
+      "writtenOn": "2018-08-21T19:29:37Z",
+      "side": 1,
+      "message": "\"injecting\" manifest files into zip files can be a bit dodgy, since the META-INF folder and MANIFEST.MF file needs to appear first in the archive. But i will see what i can come up with.",
+      "parentUuid": "b343cd55_3cf00d4d",
       "revId": "afeda5c3e8c4ac9476e2ea99a86571bbf86debd7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true

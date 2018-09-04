@@ -1,0 +1,72 @@
+// CHECKSTYLE_OFF: Copyrighted to Guava Authors.
+/*
+ * Copyright (C) 2011 The Guava Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+// CHECKSTYLE_ON
+
+package java.util.concurrent.atomic;
+
+/**
+ * GWT emulated version of {@link AtomicReference}.
+ *
+ * @param <V> The type of object referred to by this reference
+ */
+public class AtomicReference<V> {
+
+  private V value;
+
+  public AtomicReference() {
+  }
+
+  public AtomicReference(V initialValue) {
+    value = initialValue;
+  }
+
+  public boolean compareAndSet(V expect, V update) {
+    if (value == expect) {
+      value = update;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public V get() {
+    return value;
+  }
+
+  public V getAndSet(V newValue) {
+    V oldValue = value;
+    value = newValue;
+    return oldValue;
+  }
+
+  public void lazySet(V newValue) {
+    set(newValue);
+  }
+
+  public void set(V newValue) {
+    value = newValue;
+  }
+
+  public boolean weakCompareAndSet(V expect, V update) {
+    return compareAndSet(expect, update);
+  }
+
+  @Override
+  public String toString() {
+    return String.valueOf(value);
+  }
+}

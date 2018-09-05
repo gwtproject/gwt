@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3463e75a_c5b93a5a",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/atomic/AtomicReference.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2018-09-05T00:34:39Z",
+      "side": 1,
+      "message": "If this is new file (not a move), let\u0027s start with a fresh copyright:\n\n/*\n * Copyright 2018 Google Inc.\n *\n * Licensed under the Apache License, Version 2.0 (the \"License\"); you may not\n * use this file except in compliance with the License. You may obtain a copy of\n * the License at\n *\n * http://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an \"AS IS\" BASIS, WITHOUT\n * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the\n * License for the specific language governing permissions and limitations under\n * the License.\n */",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "b5af3d4bd73d03d318f64af0a2478038f31bacbe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a9437c9_90713430",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/atomic/AtomicReference.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2018-09-05T00:34:39Z",
+      "side": 1,
+      "message": "let\u0027s add some tests.",
+      "range": {
+        "startLine": 26,
+        "startChar": 13,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "b5af3d4bd73d03d318f64af0a2478038f31bacbe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5dcb418_acc351b9",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/atomic/AtomicReference.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2018-09-05T00:34:39Z",
+      "side": 1,
+      "message": "the contract is \u0027final\u0027 for all these methods.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "revId": "b5af3d4bd73d03d318f64af0a2478038f31bacbe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

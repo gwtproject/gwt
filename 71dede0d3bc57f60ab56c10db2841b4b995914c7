@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d3c23ed_ff0a89ea",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/atomic/AtomicReference.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2018-09-05T20:11:10Z",
+      "side": 1,
+      "message": "pls remove",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 0
+      },
+      "revId": "71dede0d3bc57f60ab56c10db2841b4b995914c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6353ff84_cc8774be",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/atomic/AtomicReference.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2018-09-05T20:11:10Z",
+      "side": 1,
+      "message": "pls remove",
+      "revId": "71dede0d3bc57f60ab56c10db2841b4b995914c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

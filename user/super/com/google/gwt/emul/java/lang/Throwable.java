@@ -315,6 +315,7 @@ public class Throwable implements Serializable {
   @JsType(isNative = true, name = "TypeError", namespace = "<window>")
   private static class NativeTypeError { }
 
+  @SuppressWarnings("unusable-by-js")
   @JsType(isNative = true, name = "?", namespace = JsPackage.GLOBAL)
   private interface HasJavaThrowable {
     @JsProperty(name = "__java$exception")

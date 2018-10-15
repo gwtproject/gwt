@@ -2746,6 +2746,8 @@ public class CompilerTest extends ArgProcessorTestBase {
     // always traversed fully and polute the tests, so they will be removed from stale type
     // comparisons.
     staleTypeNames.removeAll(Arrays.asList(
+        "java.io.HasSerializableTypeMarker",
+        "java.io.Serializable",
         "java.lang.Boolean",
         "java.lang.CharSequence",
         "java.lang.Comparable",

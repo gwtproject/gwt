@@ -19,6 +19,8 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import jsinterop.annotations.JsNonNull;
 
+import java.io.Serializable;
+
 /**
  * Skeletal implementation of the Map interface. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractMap.html">[Sun
@@ -32,7 +34,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   /**
    * A mutable {@link Map.Entry} shared by several {@link Map} implementations.
    */
-  public static class SimpleEntry<K, V> extends AbstractEntry<K, V> {
+  public static class SimpleEntry<K, V> extends AbstractEntry<K, V> implements Serializable {
     public SimpleEntry(K key, V value) {
       super(key, value);
     }
@@ -45,7 +47,8 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   /**
    * An immutable {@link Map.Entry} shared by several {@link Map} implementations.
    */
-  public static class SimpleImmutableEntry<K, V> extends AbstractEntry<K, V> {
+  public static class SimpleImmutableEntry<K, V> extends AbstractEntry<K, V> implements
+      Serializable {
     public SimpleImmutableEntry(K key, V value) {
       super(key, value);
     }

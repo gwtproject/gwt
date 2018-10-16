@@ -354,7 +354,7 @@ public class Collections {
    * TODO: make the unmodifiable collections serializable.
    */
 
-  static class UnmodifiableCollection<T> implements Collection<T> {
+  static class UnmodifiableCollection<T> implements Collection<T>, Serializable {
     protected final Collection<? extends T> coll;
 
     public UnmodifiableCollection(Collection<? extends T> coll) {
@@ -523,7 +523,7 @@ public class Collections {
     }
   }
 
-  static class UnmodifiableMap<K, V> implements Map<K, V> {
+  static class UnmodifiableMap<K, V> implements Map<K, V>, Serializable {
 
     static class UnmodifiableEntrySet<K, V> extends
         UnmodifiableSet<Map.Entry<K, V>> {

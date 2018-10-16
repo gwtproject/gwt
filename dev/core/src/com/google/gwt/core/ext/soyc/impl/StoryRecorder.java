@@ -168,18 +168,16 @@ public class StoryRecorder {
       SourceInfo info = range.getSourceInfo();
       assert info != null;
 
-      // Infer dependency information
-      if (!dependencyScope.isEmpty()) {
-
-        /*
-         * Pop frames until we get back to a container, using this as a chance
-         * to build up our list of non-overlapping Ranges to report back to the
-         * user.
-         */
-        while (!dependencyScope.peek().range.contains(range)) {
-          popAndRecord(dependencyScope, fragment);
-        }
+      /*
+       * Infer dependency information
+       * Pop frames until we get back to a container, using this as a chance
+       * to build up our list of non-overlapping Ranges to report back to the
+       * user.
+       */
+      while (!dependencyScope.isEmpty() && !dependencyScope.peek().range.contains(range)) {
+        popAndRecord(dependencyScope, fragment);
       }
+      
 
       // Possibly create and record Members
       if (!sourceInfoSeen.contains(info)) {

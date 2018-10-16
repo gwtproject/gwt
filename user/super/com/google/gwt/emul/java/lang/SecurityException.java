@@ -23,6 +23,6 @@ package java.lang;
  * It is provided in GWT only for compatibility with user code that explicitly catches it.
  */
 public class SecurityException extends RuntimeException {
-  private SecurityException() {
+  public SecurityException() {
   }
 }

@@ -175,15 +175,15 @@ public final class Integer extends Number implements Comparable<Integer> {
 
   public static int rotateLeft(int i, int distance) {
     int rotateValue = distance % SIZE;
-    int lowerBits = i >>> (rotateValue - distance);
-    int upperBits = i << distance;
+    int lowerBits = i >>> (SIZE - rotateValue);
+    int upperBits = i << rotateValue;
     return upperBits | lowerBits;
   }
 
   public static int rotateRight(int i, int distance) {
     int rotateValue = distance % SIZE;
-    int upperBits = i << (rotateValue - distance);
-    int lowerBits = i >>> distance;
+    int upperBits = i << (SIZE - rotateValue);
+    int lowerBits = i >>> rotateValue;
     return upperBits | lowerBits;
   }
 

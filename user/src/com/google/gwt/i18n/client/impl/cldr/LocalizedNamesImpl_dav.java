@@ -282,6 +282,8 @@ public class LocalizedNamesImpl_dav extends LocalizedNamesImpl {
         "VI",
         "VG",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "JO",

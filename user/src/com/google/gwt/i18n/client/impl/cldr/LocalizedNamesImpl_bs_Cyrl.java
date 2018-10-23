@@ -28,6 +28,8 @@ public class LocalizedNamesImpl_bs_Cyrl extends LocalizedNamesImpl_bs {
   public String[] loadSortedRegionCodes() {
     return new String[] {
         "SX",
+        "XA",
+        "XB",
         "JM",
         "JP",
         "YE",

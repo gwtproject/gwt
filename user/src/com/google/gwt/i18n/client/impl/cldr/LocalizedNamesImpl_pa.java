@@ -34,7 +34,8 @@ public class LocalizedNamesImpl_pa extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
-        "EZ",
+        "XA",
+        "XB",
         "AZ",
         "AF",
         "AS",
@@ -236,6 +237,7 @@ public class LocalizedNamesImpl_pa extends LocalizedNamesImpl {
         "UG",
         "GB",
         "EU",
+        "EZ",
         "RW",
         "RE",
         "RU",
@@ -329,6 +331,7 @@ public class LocalizedNamesImpl_pa extends LocalizedNamesImpl {
     namesMap.put("151", "ਪੂਰਬੀ ਯੂਰਪ");
     namesMap.put("154", "ਉੱਤਰੀ ਯੂਰਪ");
     namesMap.put("155", "ਪੱਛਮੀ ਯੂਰਪ");
+    namesMap.put("202", "ਉਪ-ਸਹਾਰਾ ਅਫ਼ਰੀਕਾ");
     namesMap.put("419", "ਲਾਤੀਨੀ ਅਮਰੀਕਾ");
     namesMap.put("AC", "ਅਸੈਂਸ਼ਨ ਟਾਪੂ");
     namesMap.put("AD", "ਅੰਡੋਰਾ");
@@ -404,6 +407,7 @@ public class LocalizedNamesImpl_pa extends LocalizedNamesImpl {
     namesMap.put("ES", "ਸਪੇਨ");
     namesMap.put("ET", "ਇਥੋਪੀਆ");
     namesMap.put("EU", "ਯੂਰਪੀ ਸੰਘ");
+    namesMap.put("EZ", "ਯੂਰੋਜ਼ੋਨ");
     namesMap.put("FI", "ਫਿਨਲੈਂਡ");
     namesMap.put("FJ", "ਫ਼ਿਜੀ");
     namesMap.put("FK", "ਫ਼ਾਕਲੈਂਡ ਟਾਪੂ");
@@ -628,6 +632,7 @@ public class LocalizedNamesImpl_pa extends LocalizedNamesImpl {
         "151": "ਪੂਰਬੀ ਯੂਰਪ",
         "154": "ਉੱਤਰੀ ਯੂਰਪ",
         "155": "ਪੱਛਮੀ ਯੂਰਪ",
+        "202": "ਉਪ-ਸਹਾਰਾ ਅਫ਼ਰੀਕਾ",
         "419": "ਲਾਤੀਨੀ ਅਮਰੀਕਾ",
         "AC": "ਅਸੈਂਸ਼ਨ ਟਾਪੂ",
         "AD": "ਅੰਡੋਰਾ",
@@ -703,6 +708,7 @@ public class LocalizedNamesImpl_pa extends LocalizedNamesImpl {
         "ES": "ਸਪੇਨ",
         "ET": "ਇਥੋਪੀਆ",
         "EU": "ਯੂਰਪੀ ਸੰਘ",
+        "EZ": "ਯੂਰੋਜ਼ੋਨ",
         "FI": "ਫਿਨਲੈਂਡ",
         "FJ": "ਫ਼ਿਜੀ",
         "FK": "ਫ਼ਾਕਲੈਂਡ ਟਾਪੂ",

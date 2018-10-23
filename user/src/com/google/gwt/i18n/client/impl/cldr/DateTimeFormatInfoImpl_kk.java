@@ -215,24 +215,6 @@ public class DateTimeFormatInfoImpl_kk extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] monthsShortStandalone() {
-    return new String[] {
-        "Қаң.",
-        "Ақп.",
-        "Нау.",
-        "Сәу.",
-        "Мам.",
-        "Мау.",
-        "Шіл.",
-        "Там.",
-        "Қыр.",
-        "Қаз.",
-        "Қар.",
-        "Жел."
-    };
-  }
-
-  @Override
   public String[] quartersFull() {
     return new String[] {
         "І тоқсан",
@@ -266,19 +248,6 @@ public class DateTimeFormatInfoImpl_kk extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] weekdaysFullStandalone() {
-    return new String[] {
-        "Жексенбі",
-        "Дүйсенбі",
-        "Сейсенбі",
-        "Сәрсенбі",
-        "Бейсенбі",
-        "Жұма",
-        "Сенбі"
-    };
-  }
-
-  @Override
   public String[] weekdaysNarrow() {
     return new String[] {
         "Ж",
@@ -294,13 +263,13 @@ public class DateTimeFormatInfoImpl_kk extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "Жс",
-        "Дс",
-        "Сс",
-        "Ср",
-        "Бс",
-        "Жм",
-        "Сб"
+        "жс",
+        "дс",
+        "сс",
+        "ср",
+        "бс",
+        "жм",
+        "сб"
     };
   }
 }

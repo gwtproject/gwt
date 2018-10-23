@@ -35,6 +35,7 @@ public class LocalizedNamesImpl_af extends LocalizedNamesImpl {
   public String[] loadSortedRegionCodes() {
     return new String[] {
         "AF",
+        "QO",
         "AX",
         "AL",
         "DZ",
@@ -207,7 +208,6 @@ public class LocalizedNamesImpl_af extends LocalizedNamesImpl {
         "UA",
         "UZ",
         "OM",
-        "QO",
         "AT",
         "TL",
         "PK",
@@ -291,6 +291,8 @@ public class LocalizedNamesImpl_af extends LocalizedNamesImpl {
         "VI",
         "WF",
         "EH",
+        "XA",
+        "XB",
         "IS",
         "ZM",
         "ZW",
@@ -313,7 +315,7 @@ public class LocalizedNamesImpl_af extends LocalizedNamesImpl {
     namesMap.put("018", "Suider-Afrika");
     namesMap.put("019", "Amerikas");
     namesMap.put("021", "Noordelike Amerika");
-    namesMap.put("029", "Karibies");
+    namesMap.put("029", "Karibiese streek");
     namesMap.put("030", "Oos-Asië");
     namesMap.put("034", "Suid-Asië");
     namesMap.put("035", "Suidoos-Asië");
@@ -329,6 +331,7 @@ public class LocalizedNamesImpl_af extends LocalizedNamesImpl {
     namesMap.put("151", "Oos-Europa");
     namesMap.put("154", "Noord-Europa");
     namesMap.put("155", "Wes-Europa");
+    namesMap.put("202", "Afrika suid van die Sahara");
     namesMap.put("419", "Latyns-Amerika");
     namesMap.put("AC", "Ascensioneiland");
     namesMap.put("AE", "Verenigde Arabiese Emirate");
@@ -465,7 +468,7 @@ public class LocalizedNamesImpl_af extends LocalizedNamesImpl {
     namesMap.put("PN", "Pitcairneilande");
     namesMap.put("PS", "Palestynse gebiede");
     namesMap.put("QA", "Katar");
-    namesMap.put("QO", "Omliggende Oseanië");
+    namesMap.put("QO", "Afgeleë Oseanië");
     namesMap.put("RO", "Roemenië");
     namesMap.put("RS", "Serwië");
     namesMap.put("RU", "Rusland");
@@ -529,7 +532,7 @@ public class LocalizedNamesImpl_af extends LocalizedNamesImpl {
         "018": "Suider-Afrika",
         "019": "Amerikas",
         "021": "Noordelike Amerika",
-        "029": "Karibies",
+        "029": "Karibiese streek",
         "030": "Oos-Asië",
         "034": "Suid-Asië",
         "035": "Suidoos-Asië",
@@ -545,6 +548,7 @@ public class LocalizedNamesImpl_af extends LocalizedNamesImpl {
         "151": "Oos-Europa",
         "154": "Noord-Europa",
         "155": "Wes-Europa",
+        "202": "Afrika suid van die Sahara",
         "419": "Latyns-Amerika",
         "AC": "Ascensioneiland",
         "AE": "Verenigde Arabiese Emirate",
@@ -681,7 +685,7 @@ public class LocalizedNamesImpl_af extends LocalizedNamesImpl {
         "PN": "Pitcairneilande",
         "PS": "Palestynse gebiede",
         "QA": "Katar",
-        "QO": "Omliggende Oseanië",
+        "QO": "Afgeleë Oseanië",
         "RO": "Roemenië",
         "RS": "Serwië",
         "RU": "Rusland",

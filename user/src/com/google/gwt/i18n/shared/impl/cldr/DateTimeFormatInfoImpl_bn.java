@@ -59,7 +59,7 @@ public class DateTimeFormatInfoImpl_bn extends DateTimeFormatInfoImpl {
 
   @Override
   public int firstDayOfTheWeek() {
-    return 5;
+    return 0;
   }
 
   @Override
@@ -210,6 +210,16 @@ public class DateTimeFormatInfoImpl_bn extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "ত্রৈমাসিক",
+        "দ্বিতীয় ত্রৈমাসিক",
+        "তৃতীয় ত্রৈমাসিক",
+        "চতুর্থ ত্রৈমাসিক"
+    };
+  }
+
+  @Override
   public String timeFormatFull() {
     return "h:mm:ss a zzzz";
   }
@@ -237,19 +247,6 @@ public class DateTimeFormatInfoImpl_bn extends DateTimeFormatInfoImpl {
         "মঙ্গলবার",
         "বুধবার",
         "বৃহস্পতিবার",
-        "শুক্রবার",
-        "শনিবার"
-    };
-  }
-
-  @Override
-  public String[] weekdaysFullStandalone() {
-    return new String[] {
-        "রবিবার",
-        "সোমবার",
-        "মঙ্গলবার",
-        "বুধবার",
-        "বৃহষ্পতিবার",
         "শুক্রবার",
         "শনিবার"
     };

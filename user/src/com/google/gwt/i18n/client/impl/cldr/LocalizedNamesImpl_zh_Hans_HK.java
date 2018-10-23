@@ -25,6 +25,8 @@ public class LocalizedNamesImpl_zh_Hans_HK extends LocalizedNamesImpl_zh {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "GN",
         "GW",
         "YE",

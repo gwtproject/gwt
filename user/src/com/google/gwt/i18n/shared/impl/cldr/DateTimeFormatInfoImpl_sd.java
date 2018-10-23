@@ -40,8 +40,8 @@ public class DateTimeFormatInfoImpl_sd extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasShort() {
     return new String[] {
-        "BCE",
-        "CE"
+        "BC",
+        "CD"
     };
   }
 
@@ -51,58 +51,8 @@ public class DateTimeFormatInfoImpl_sd extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
-  }
-
-  @Override
-  public String formatMonthNumDay() {
-    return "M/d";
-  }
-
-  @Override
-  public String formatYearMonthAbbrev() {
-    return "MMM y";
-  }
-
-  @Override
-  public String formatYearMonthAbbrevDay() {
-    return "MMM d, y";
-  }
-
-  @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
-  }
-
-  @Override
-  public String formatYearMonthFullDay() {
-    return "MMMM d, y";
-  }
-
-  @Override
-  public String formatYearMonthNum() {
-    return "M/y";
-  }
-
-  @Override
   public String formatYearMonthNumDay() {
-    return "M/d/y";
-  }
-
-  @Override
-  public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
-  }
-
-  @Override
-  public String formatYearQuarterFull() {
-    return "QQQQ y";
-  }
-
-  @Override
-  public String formatYearQuarterShort() {
-    return "Q y";
+    return "y-MM-dd";
   }
 
   @Override
@@ -120,24 +70,6 @@ public class DateTimeFormatInfoImpl_sd extends DateTimeFormatInfoImpl {
         "آڪٽوبر",
         "نومبر",
         "ڊسمبر"
-    };
-  }
-
-  @Override
-  public String[] monthsNarrow() {
-    return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
     };
   }
 
@@ -172,10 +104,10 @@ public class DateTimeFormatInfoImpl_sd extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "پهرين ٽي ماهي",
-        "ٻين ٽي ماهي",
-        "ٽين ٽي ماهي",
-        "چوٿين ٽي ماهي"
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q5"
     };
   }
 
@@ -222,19 +154,6 @@ public class DateTimeFormatInfoImpl_sd extends DateTimeFormatInfoImpl {
         "خم",
         "جمعو",
         "ڇنڇر"
-    };
-  }
-
-  @Override
-  public String[] weekdaysNarrowStandalone() {
-    return new String[] {
-        "آچ",
-        "سو",
-        "اڱ",
-        "ار",
-        "خم",
-        "جم",
-        "ڇن"
     };
   }
 

@@ -284,6 +284,8 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
         "VN",
         "DE",
         "WF",
+        "XA",
+        "XB",
         "ZM",
         "ZW",
         "CV",
@@ -322,6 +324,7 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
     namesMap.put("151", "Rytų Europa");
     namesMap.put("154", "Šiaurės Europa");
     namesMap.put("155", "Vakarų Europa");
+    namesMap.put("202", "Užsachario Afrika");
     namesMap.put("419", "Lotynų Amerika");
     namesMap.put("AC", "Dangun Žengimo sala");
     namesMap.put("AD", "Andora");
@@ -605,6 +608,7 @@ public class LocalizedNamesImpl_lt extends LocalizedNamesImpl {
         "151": "Rytų Europa",
         "154": "Šiaurės Europa",
         "155": "Vakarų Europa",
+        "202": "Užsachario Afrika",
         "419": "Lotynų Amerika",
         "AC": "Dangun Žengimo sala",
         "AD": "Andora",

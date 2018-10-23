@@ -287,6 +287,8 @@ public class LocalizedNamesImpl_ga extends LocalizedNamesImpl {
         "VU",
         "VE",
         "VN",
+        "XA",
+        "XB",
     };
   }
 
@@ -294,7 +296,7 @@ public class LocalizedNamesImpl_ga extends LocalizedNamesImpl {
   protected void loadNameMapJava() {
     super.loadNameMapJava();
     namesMap.put("001", "an Domhan");
-    namesMap.put("002", "An Afraic");
+    namesMap.put("002", "an Afraic");
     namesMap.put("003", "Meiriceá Thuaidh");
     namesMap.put("005", "Meiriceá Theas");
     namesMap.put("009", "an Aigéine");
@@ -302,7 +304,7 @@ public class LocalizedNamesImpl_ga extends LocalizedNamesImpl {
     namesMap.put("013", "Meiriceá Láir");
     namesMap.put("014", "Oirthear na hAfraice");
     namesMap.put("015", "Tuaisceart na hAfraice");
-    namesMap.put("017", "An Afraic Láir");
+    namesMap.put("017", "an Afraic Láir");
     namesMap.put("018", "Deisceart na hAfraice");
     namesMap.put("019", "Críocha Mheiriceá");
     namesMap.put("021", "Tuaisceart Mheiriceá");
@@ -322,6 +324,7 @@ public class LocalizedNamesImpl_ga extends LocalizedNamesImpl {
     namesMap.put("151", "Oirthear na hEorpa");
     namesMap.put("154", "Tuaisceart na hEorpa");
     namesMap.put("155", "Iarthar na hEorpa");
+    namesMap.put("202", "an Afraic fho-Shahárach");
     namesMap.put("419", "Meiriceá Laidineach");
     namesMap.put("AC", "Oileán na Deascabhála");
     namesMap.put("AD", "Andóra");
@@ -379,7 +382,7 @@ public class LocalizedNamesImpl_ga extends LocalizedNamesImpl {
     namesMap.put("CV", "Rinn Verde");
     namesMap.put("CX", "Oileán na Nollag");
     namesMap.put("CY", "an Chipir");
-    namesMap.put("CZ", "An tSeicia");
+    namesMap.put("CZ", "an tSeicia");
     namesMap.put("DE", "an Ghearmáin");
     namesMap.put("DK", "an Danmhairg");
     namesMap.put("DM", "Doiminice");
@@ -578,7 +581,7 @@ public class LocalizedNamesImpl_ga extends LocalizedNamesImpl {
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
         "001": "an Domhan",
-        "002": "An Afraic",
+        "002": "an Afraic",
         "003": "Meiriceá Thuaidh",
         "005": "Meiriceá Theas",
         "009": "an Aigéine",
@@ -586,7 +589,7 @@ public class LocalizedNamesImpl_ga extends LocalizedNamesImpl {
         "013": "Meiriceá Láir",
         "014": "Oirthear na hAfraice",
         "015": "Tuaisceart na hAfraice",
-        "017": "An Afraic Láir",
+        "017": "an Afraic Láir",
         "018": "Deisceart na hAfraice",
         "019": "Críocha Mheiriceá",
         "021": "Tuaisceart Mheiriceá",
@@ -606,6 +609,7 @@ public class LocalizedNamesImpl_ga extends LocalizedNamesImpl {
         "151": "Oirthear na hEorpa",
         "154": "Tuaisceart na hEorpa",
         "155": "Iarthar na hEorpa",
+        "202": "an Afraic fho-Shahárach",
         "419": "Meiriceá Laidineach",
         "AC": "Oileán na Deascabhála",
         "AD": "Andóra",
@@ -663,7 +667,7 @@ public class LocalizedNamesImpl_ga extends LocalizedNamesImpl {
         "CV": "Rinn Verde",
         "CX": "Oileán na Nollag",
         "CY": "an Chipir",
-        "CZ": "An tSeicia",
+        "CZ": "an tSeicia",
         "DE": "an Ghearmáin",
         "DK": "an Danmhairg",
         "DM": "Doiminice",

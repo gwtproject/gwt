@@ -34,6 +34,8 @@ public class LocalizedNamesImpl_hi extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "AO",
         "AQ",
         "AZ",
@@ -127,6 +129,7 @@ public class LocalizedNamesImpl_hi extends LocalizedNamesImpl {
         "TO",
         "TG",
         "TN",
+        "TA",
         "DG",
         "DK",
         "DO",
@@ -141,7 +144,6 @@ public class LocalizedNamesImpl_hi extends LocalizedNamesImpl {
         "TV",
         "TK",
         "TT",
-        "TA",
         "TH",
         "ZA",
         "KR",
@@ -329,6 +331,7 @@ public class LocalizedNamesImpl_hi extends LocalizedNamesImpl {
     namesMap.put("151", "पूर्वी यूरोप");
     namesMap.put("154", "उत्तरी यूरोप");
     namesMap.put("155", "पश्चिमी यूरोप");
+    namesMap.put("202", "उप-सहारा अफ़्रीका");
     namesMap.put("419", "लैटिन अमेरिका");
     namesMap.put("AC", "असेंशन द्वीप");
     namesMap.put("AD", "एंडोरा");
@@ -551,7 +554,7 @@ public class LocalizedNamesImpl_hi extends LocalizedNamesImpl {
     namesMap.put("SX", "सिंट मार्टिन");
     namesMap.put("SY", "सीरिया");
     namesMap.put("SZ", "स्वाज़ीलैंड");
-    namesMap.put("TA", "त्रिस्टान डा कुना");
+    namesMap.put("TA", "ट्रिस्टन दा कुना");
     namesMap.put("TC", "तुर्क और कैकोज़ द्वीपसमूह");
     namesMap.put("TD", "चाड");
     namesMap.put("TF", "फ़्रांसीसी दक्षिणी क्षेत्र");
@@ -629,6 +632,7 @@ public class LocalizedNamesImpl_hi extends LocalizedNamesImpl {
         "151": "पूर्वी यूरोप",
         "154": "उत्तरी यूरोप",
         "155": "पश्चिमी यूरोप",
+        "202": "उप-सहारा अफ़्रीका",
         "419": "लैटिन अमेरिका",
         "AC": "असेंशन द्वीप",
         "AD": "एंडोरा",
@@ -851,7 +855,7 @@ public class LocalizedNamesImpl_hi extends LocalizedNamesImpl {
         "SX": "सिंट मार्टिन",
         "SY": "सीरिया",
         "SZ": "स्वाज़ीलैंड",
-        "TA": "त्रिस्टान डा कुना",
+        "TA": "ट्रिस्टन दा कुना",
         "TC": "तुर्क और कैकोज़ द्वीपसमूह",
         "TD": "चाड",
         "TF": "फ़्रांसीसी दक्षिणी क्षेत्र",

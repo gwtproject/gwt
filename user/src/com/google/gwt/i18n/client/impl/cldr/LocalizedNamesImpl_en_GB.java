@@ -213,6 +213,8 @@ public class LocalizedNamesImpl_en_GB extends LocalizedNamesImpl_en {
         "PN",
         "PL",
         "PT",
+        "XA",
+        "XB",
         "PR",
         "QA",
         "RE",

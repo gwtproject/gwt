@@ -24,24 +24,24 @@ public class DateTimeFormatInfoImpl_mn extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "ҮӨ",
-        "ҮХ"
+        "ү.ө.",
+        "ү.х."
     };
   }
 
   @Override
   public String dateFormatFull() {
-    return "y 'оны' MMM'ын' d. EEEE 'гараг'.";
+    return "y.MM.dd, EEEE";
   }
 
   @Override
   public String dateFormatLong() {
-    return "y 'оны' MMM'ын' d";
+    return "y.MM.dd";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "y.MM.dd";
+    return "y 'оны' MMM'ын' d";
   }
 
   @Override
@@ -72,17 +72,17 @@ public class DateTimeFormatInfoImpl_mn extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthFullDay() {
-    return "MMM'ын' d";
+    return "MMMM'ын' d";
   }
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "MMMM'ын' d, EEEE";
+    return "MMMM'ын' d. EEEE";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "MM/dd";
+    return "MMMMM/dd";
   }
 
   @Override
@@ -92,7 +92,7 @@ public class DateTimeFormatInfoImpl_mn extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "y.MM.dd";
+    return "y 'оны' MMM'ын' d";
   }
 
   @Override
@@ -102,12 +102,12 @@ public class DateTimeFormatInfoImpl_mn extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFullDay() {
-    return "y.MM.dd";
+    return "y 'оны' MMMM'ын' d";
   }
 
   @Override
   public String formatYearMonthNum() {
-    return "y M";
+    return "y MMMMM";
   }
 
   @Override
@@ -117,7 +117,7 @@ public class DateTimeFormatInfoImpl_mn extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "y.MM.dd, EEE";
+    return "y 'оны' MMM'ын' d. EEE";
   }
 
   @Override
@@ -126,7 +126,30 @@ public class DateTimeFormatInfoImpl_mn extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatYearQuarterShort() {
+    return "y 'оны' Q";
+  }
+
+  @Override
   public String[] monthsFull() {
+    return new String[] {
+        "нэгдүгээр сар",
+        "хоёрдугаар сар",
+        "гуравдугаар сар",
+        "дөрөвдүгээр сар",
+        "тавдугаар сар",
+        "зургаадугаар сар",
+        "долоодугаар сар",
+        "наймдугаар сар",
+        "есдүгээр сар",
+        "аравдугаар сар",
+        "арван нэгдүгээр сар",
+        "арван хоёрдугаар сар"
+    };
+  }
+
+  @Override
+  public String[] monthsFullStandalone() {
     return new String[] {
         "Нэгдүгээр сар",
         "Хоёрдугаар сар",
@@ -134,7 +157,7 @@ public class DateTimeFormatInfoImpl_mn extends DateTimeFormatInfoImpl {
         "Дөрөвдүгээр сар",
         "Тавдугаар сар",
         "Зургаадугаар сар",
-        "Долдугаар сар",
+        "Долоодугаар сар",
         "Наймдугаар сар",
         "Есдүгээр сар",
         "Аравдугаар сар",
@@ -219,6 +242,19 @@ public class DateTimeFormatInfoImpl_mn extends DateTimeFormatInfoImpl {
         "пүрэв",
         "баасан",
         "бямба"
+    };
+  }
+
+  @Override
+  public String[] weekdaysFullStandalone() {
+    return new String[] {
+        "Ням",
+        "Даваа",
+        "Мягмар",
+        "Лхагва",
+        "Пүрэв",
+        "Баасан",
+        "Бямба"
     };
   }
 

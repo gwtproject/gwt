@@ -286,6 +286,8 @@ public class LocalizedNamesImpl_smn extends LocalizedNamesImpl {
         "NL",
         "AX",
         "WF",
+        "XA",
+        "XB",
         "ZW",
     };
   }

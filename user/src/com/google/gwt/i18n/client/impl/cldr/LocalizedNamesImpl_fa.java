@@ -35,6 +35,8 @@ public class LocalizedNamesImpl_fa extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "AW",
         "AR",
         "AL",
@@ -155,6 +157,7 @@ public class LocalizedNamesImpl_fa extends LocalizedNamesImpl {
         "AS",
         "SM",
         "EA",
+        "TF",
         "PS",
         "LK",
         "BL",
@@ -193,7 +196,6 @@ public class LocalizedNamesImpl_fa extends LocalizedNamesImpl {
         "KZ",
         "QA",
         "IO",
-        "TF",
         "LA",
         "LB",
         "LV",
@@ -330,6 +332,7 @@ public class LocalizedNamesImpl_fa extends LocalizedNamesImpl {
     namesMap.put("151", "شرق اروپا");
     namesMap.put("154", "شمال اروپا");
     namesMap.put("155", "غرب اروپا");
+    namesMap.put("202", "افریقای سیاه");
     namesMap.put("419", "امریکای لاتین");
     namesMap.put("AC", "جزایر آسنسیون");
     namesMap.put("AD", "آندورا");
@@ -431,7 +434,7 @@ public class LocalizedNamesImpl_fa extends LocalizedNamesImpl {
     namesMap.put("GU", "گوام");
     namesMap.put("GW", "گینهٔ بیسائو");
     namesMap.put("GY", "گویان");
-    namesMap.put("HK", "هنگ‌کنگ، ناحیهٔ ویژهٔ حکومتی چین");
+    namesMap.put("HK", "هنگ‌کنگ، منطقۀ ویژۀ اداری چین");
     namesMap.put("HM", "جزیرهٔ هرد و جزایر مک‌دونالد");
     namesMap.put("HN", "هندوراس");
     namesMap.put("HR", "کرواسی");
@@ -456,7 +459,7 @@ public class LocalizedNamesImpl_fa extends LocalizedNamesImpl {
     namesMap.put("KG", "قرقیزستان");
     namesMap.put("KH", "کامبوج");
     namesMap.put("KI", "کیریباتی");
-    namesMap.put("KM", "کومورو");
+    namesMap.put("KM", "کومور");
     namesMap.put("KN", "سنت کیتس و نویس");
     namesMap.put("KP", "کرهٔ شمالی");
     namesMap.put("KR", "کرهٔ جنوبی");
@@ -485,7 +488,7 @@ public class LocalizedNamesImpl_fa extends LocalizedNamesImpl {
     namesMap.put("ML", "مالی");
     namesMap.put("MM", "میانمار (برمه)");
     namesMap.put("MN", "مغولستان");
-    namesMap.put("MO", "ماکائو، ناحیهٔ ویژهٔ حکومتی چین");
+    namesMap.put("MO", "ماکائو، منطقۀ ویژۀ اداری چین");
     namesMap.put("MP", "جزایر ماریانای شمالی");
     namesMap.put("MQ", "مارتینیک");
     namesMap.put("MR", "موریتانی");
@@ -555,7 +558,7 @@ public class LocalizedNamesImpl_fa extends LocalizedNamesImpl {
     namesMap.put("TA", "تریستان دا کونا");
     namesMap.put("TC", "جزایر تورکس و کایکوس");
     namesMap.put("TD", "چاد");
-    namesMap.put("TF", "قلمروهای جنوبی فرانسه");
+    namesMap.put("TF", "سرزمین‌های جنوب فرانسه");
     namesMap.put("TG", "توگو");
     namesMap.put("TH", "تایلند");
     namesMap.put("TJ", "تاجیکستان");
@@ -630,6 +633,7 @@ public class LocalizedNamesImpl_fa extends LocalizedNamesImpl {
         "151": "شرق اروپا",
         "154": "شمال اروپا",
         "155": "غرب اروپا",
+        "202": "افریقای سیاه",
         "419": "امریکای لاتین",
         "AC": "جزایر آسنسیون",
         "AD": "آندورا",
@@ -731,7 +735,7 @@ public class LocalizedNamesImpl_fa extends LocalizedNamesImpl {
         "GU": "گوام",
         "GW": "گینهٔ بیسائو",
         "GY": "گویان",
-        "HK": "هنگ‌کنگ، ناحیهٔ ویژهٔ حکومتی چین",
+        "HK": "هنگ‌کنگ، منطقۀ ویژۀ اداری چین",
         "HM": "جزیرهٔ هرد و جزایر مک‌دونالد",
         "HN": "هندوراس",
         "HR": "کرواسی",
@@ -756,7 +760,7 @@ public class LocalizedNamesImpl_fa extends LocalizedNamesImpl {
         "KG": "قرقیزستان",
         "KH": "کامبوج",
         "KI": "کیریباتی",
-        "KM": "کومورو",
+        "KM": "کومور",
         "KN": "سنت کیتس و نویس",
         "KP": "کرهٔ شمالی",
         "KR": "کرهٔ جنوبی",
@@ -785,7 +789,7 @@ public class LocalizedNamesImpl_fa extends LocalizedNamesImpl {
         "ML": "مالی",
         "MM": "میانمار (برمه)",
         "MN": "مغولستان",
-        "MO": "ماکائو، ناحیهٔ ویژهٔ حکومتی چین",
+        "MO": "ماکائو، منطقۀ ویژۀ اداری چین",
         "MP": "جزایر ماریانای شمالی",
         "MQ": "مارتینیک",
         "MR": "موریتانی",
@@ -855,7 +859,7 @@ public class LocalizedNamesImpl_fa extends LocalizedNamesImpl {
         "TA": "تریستان دا کونا",
         "TC": "جزایر تورکس و کایکوس",
         "TD": "چاد",
-        "TF": "قلمروهای جنوبی فرانسه",
+        "TF": "سرزمین‌های جنوب فرانسه",
         "TG": "توگو",
         "TH": "تایلند",
         "TJ": "تاجیکستان",

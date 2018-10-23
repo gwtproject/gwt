@@ -81,11 +81,6 @@ public class DateTimeFormatInfoImpl_so extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatYearMonthAbbrevDay() {
-    return "d-MMM-y";
-  }
-
-  @Override
   public String formatYearMonthFull() {
     return "MMMM y";
   }
@@ -102,7 +97,7 @@ public class DateTimeFormatInfoImpl_so extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d/M/y";
+    return "y-MM-dd";
   }
 
   @Override
@@ -139,6 +134,24 @@ public class DateTimeFormatInfoImpl_so extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] monthsFullStandalone() {
+    return new String[] {
+        "Jannaayo",
+        "Febraayo",
+        "Maarso",
+        "Abriil",
+        "May",
+        "Juun",
+        "Luuliyo",
+        "Ogost",
+        "Sebtembar",
+        "Oktoobar",
+        "Nofembar",
+        "Desembar"
+    };
+  }
+
+  @Override
   public String[] monthsNarrow() {
     return new String[] {
         "K",
@@ -157,20 +170,56 @@ public class DateTimeFormatInfoImpl_so extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] monthsNarrowStandalone() {
+    return new String[] {
+        "J",
+        "F",
+        "M",
+        "A",
+        "M",
+        "J",
+        "L",
+        "O",
+        "S",
+        "O",
+        "N",
+        "D"
+    };
+  }
+
+  @Override
   public String[] monthsShort() {
     return new String[] {
         "Kob",
         "Lab",
         "Sad",
         "Afr",
-        "Sha",
-        "Lix",
-        "Tod",
-        "Sid",
-        "Sag",
-        "Tob",
-        "KIT",
-        "LIT"
+        "May",
+        "Juun",
+        "Luuliyo",
+        "Og",
+        "Sebtembar",
+        "Oktoobar",
+        "Nofembar",
+        "Dec"
+    };
+  }
+
+  @Override
+  public String[] monthsShortStandalone() {
+    return new String[] {
+        "Jan",
+        "Feb",
+        "Mar",
+        "Abr",
+        "May",
+        "Juun",
+        "Luuliyo",
+        "Og",
+        "Seb",
+        "Okt",
+        "Nof",
+        "Des"
     };
   }
 

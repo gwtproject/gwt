@@ -285,6 +285,8 @@ public class LocalizedNamesImpl_de_AT extends LocalizedNamesImpl_de {
         "WF",
         "CX",
         "EH",
+        "XA",
+        "XB",
         "CF",
         "CY",
     };

@@ -73,7 +73,6 @@ public class LocalizedNamesImpl_pl extends LocalizedNamesImpl {
         "CL",
         "CN",
         "HR",
-        "CP",
         "CI",
         "CW",
         "CY",
@@ -278,6 +277,7 @@ public class LocalizedNamesImpl_pl extends LocalizedNamesImpl {
         "IT",
         "BV",
         "CX",
+        "CP",
         "IM",
         "SH",
         "AC",
@@ -291,6 +291,8 @@ public class LocalizedNamesImpl_pl extends LocalizedNamesImpl {
         "FO",
         "SB",
         "ST",
+        "XA",
+        "XB",
         "ZM",
         "ZW",
         "AE",
@@ -328,6 +330,7 @@ public class LocalizedNamesImpl_pl extends LocalizedNamesImpl {
     namesMap.put("151", "Europa Wschodnia");
     namesMap.put("154", "Europa Północna");
     namesMap.put("155", "Europa Zachodnia");
+    namesMap.put("202", "Afryka Subsaharyjska");
     namesMap.put("419", "Ameryka Łacińska");
     namesMap.put("AC", "Wyspa Wniebowstąpienia");
     namesMap.put("AD", "Andora");
@@ -362,7 +365,7 @@ public class LocalizedNamesImpl_pl extends LocalizedNamesImpl {
     namesMap.put("CM", "Kamerun");
     namesMap.put("CN", "Chiny");
     namesMap.put("CO", "Kolumbia");
-    namesMap.put("CP", "Clipperton");
+    namesMap.put("CP", "Wyspa Clippertona");
     namesMap.put("CR", "Kostaryka");
     namesMap.put("CU", "Kuba");
     namesMap.put("CV", "Republika Zielonego Przylądka");
@@ -550,6 +553,7 @@ public class LocalizedNamesImpl_pl extends LocalizedNamesImpl {
         "151": "Europa Wschodnia",
         "154": "Europa Północna",
         "155": "Europa Zachodnia",
+        "202": "Afryka Subsaharyjska",
         "419": "Ameryka Łacińska",
         "AC": "Wyspa Wniebowstąpienia",
         "AD": "Andora",
@@ -584,7 +588,7 @@ public class LocalizedNamesImpl_pl extends LocalizedNamesImpl {
         "CM": "Kamerun",
         "CN": "Chiny",
         "CO": "Kolumbia",
-        "CP": "Clipperton",
+        "CP": "Wyspa Clippertona",
         "CR": "Kostaryka",
         "CU": "Kuba",
         "CV": "Republika Zielonego Przylądka",

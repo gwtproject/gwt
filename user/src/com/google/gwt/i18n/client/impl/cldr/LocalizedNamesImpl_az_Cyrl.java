@@ -34,6 +34,8 @@ public class LocalizedNamesImpl_az_Cyrl extends LocalizedNamesImpl_az {
         "MK",
         "PS",
         "UN",
+        "XA",
+        "XB",
         "JM",
         "JP",
         "NZ",

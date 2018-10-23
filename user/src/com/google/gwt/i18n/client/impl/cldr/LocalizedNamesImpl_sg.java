@@ -274,6 +274,8 @@ public class LocalizedNamesImpl_sg extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "JM",

@@ -48,6 +48,8 @@ public class LocalizedNamesImpl_tg extends LocalizedNamesImpl {
         "PS",
         "QO",
         "UN",
+        "XA",
+        "XB",
         "AU",
         "AT",
         "AL",

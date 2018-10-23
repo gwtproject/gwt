@@ -33,6 +33,8 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "MO",
         "QO",
         "UN",
+        "XA",
+        "XB",
         "ER",
         "BZ",
         "SL",

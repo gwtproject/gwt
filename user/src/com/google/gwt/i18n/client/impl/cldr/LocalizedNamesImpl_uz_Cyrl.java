@@ -29,6 +29,8 @@ public class LocalizedNamesImpl_uz_Cyrl extends LocalizedNamesImpl_uz {
     return new String[] {
         "EZ",
         "UN",
+        "XA",
+        "XB",
         "QO",
         "UZ",
         "AU",

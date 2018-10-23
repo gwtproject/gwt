@@ -34,6 +34,8 @@ public class LocalizedNamesImpl_be extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "UN",
         "AE",
         "AZ",
@@ -329,6 +331,7 @@ public class LocalizedNamesImpl_be extends LocalizedNamesImpl {
     namesMap.put("151", "Усходняя Еўропа");
     namesMap.put("154", "Паўночная Еўропа");
     namesMap.put("155", "Заходняя Еўропа");
+    namesMap.put("202", "Трапічная Афрыка");
     namesMap.put("419", "Лацінская Амерыка");
     namesMap.put("AC", "Востраў Узнясення");
     namesMap.put("AD", "Андора");
@@ -629,6 +632,7 @@ public class LocalizedNamesImpl_be extends LocalizedNamesImpl {
         "151": "Усходняя Еўропа",
         "154": "Паўночная Еўропа",
         "155": "Заходняя Еўропа",
+        "202": "Трапічная Афрыка",
         "419": "Лацінская Амерыка",
         "AC": "Востраў Узнясення",
         "AD": "Андора",

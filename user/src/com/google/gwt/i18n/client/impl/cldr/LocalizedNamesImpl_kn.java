@@ -34,13 +34,14 @@ public class LocalizedNamesImpl_kn extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "AO",
         "AQ",
         "AD",
         "AZ",
         "AF",
         "AS",
-        "US",
         "AW",
         "AR",
         "DZ",
@@ -235,6 +236,7 @@ public class LocalizedNamesImpl_kn extends LocalizedNamesImpl {
         "VI",
         "UM",
         "AE",
+        "US",
         "EU",
         "EZ",
         "YE",
@@ -329,6 +331,7 @@ public class LocalizedNamesImpl_kn extends LocalizedNamesImpl {
     namesMap.put("151", "ಪೂರ್ವ ಯೂರೋಪ್");
     namesMap.put("154", "ಉತ್ತರ ಯೂರೋಪ್");
     namesMap.put("155", "ಪಶ್ಚಿಮ ಯೂರೋಪ್");
+    namesMap.put("202", "ಉಪ-ಸಹಾರನ್ ಆಫ್ರಿಕಾ");
     namesMap.put("419", "ಲ್ಯಾಟಿನ್ ಅಮೇರಿಕಾ");
     namesMap.put("AC", "ಅಸೆನ್ಶನ್ ದ್ವೀಪ");
     namesMap.put("AD", "ಅಂಡೋರಾ");
@@ -535,7 +538,7 @@ public class LocalizedNamesImpl_kn extends LocalizedNamesImpl {
     namesMap.put("SC", "ಸೀಶೆಲ್ಲೆಸ್");
     namesMap.put("SD", "ಸುಡಾನ್");
     namesMap.put("SE", "ಸ್ವೀಡನ್");
-    namesMap.put("SG", "ಸಿಂಗಾಪುರ್");
+    namesMap.put("SG", "ಸಿಂಗಪುರ್");
     namesMap.put("SH", "ಸೇಂಟ್ ಹೆಲೆನಾ");
     namesMap.put("SI", "ಸ್ಲೋವೇನಿಯಾ");
     namesMap.put("SJ", "ಸ್ವಾಲ್ಬಾರ್ಡ್ ಮತ್ತು ಜಾನ್ ಮೆಯನ್");
@@ -572,7 +575,7 @@ public class LocalizedNamesImpl_kn extends LocalizedNamesImpl {
     namesMap.put("UG", "ಉಗಾಂಡಾ");
     namesMap.put("UM", "ಯುಎಸ್‌ ಔಟ್‌ಲೇಯಿಂಗ್ ದ್ವೀಪಗಳು");
     namesMap.put("UN", "ಸಂಯುಕ್ತ ಸಂಸ್ಥಾನಗಳು");
-    namesMap.put("US", "ಅಮೇರಿಕಾ ಸಂಯುಕ್ತ ಸಂಸ್ಥಾನ");
+    namesMap.put("US", "ಯುನೈಟೆಡ್ ಸ್ಟೇಟ್ಸ್");
     namesMap.put("UY", "ಉರುಗ್ವೆ");
     namesMap.put("UZ", "ಉಜ್ಬೇಕಿಸ್ಥಾನ್");
     namesMap.put("VA", "ವ್ಯಾಟಿಕನ್ ಸಿಟಿ");
@@ -629,6 +632,7 @@ public class LocalizedNamesImpl_kn extends LocalizedNamesImpl {
         "151": "ಪೂರ್ವ ಯೂರೋಪ್",
         "154": "ಉತ್ತರ ಯೂರೋಪ್",
         "155": "ಪಶ್ಚಿಮ ಯೂರೋಪ್",
+        "202": "ಉಪ-ಸಹಾರನ್ ಆಫ್ರಿಕಾ",
         "419": "ಲ್ಯಾಟಿನ್ ಅಮೇರಿಕಾ",
         "AC": "ಅಸೆನ್ಶನ್ ದ್ವೀಪ",
         "AD": "ಅಂಡೋರಾ",
@@ -835,7 +839,7 @@ public class LocalizedNamesImpl_kn extends LocalizedNamesImpl {
         "SC": "ಸೀಶೆಲ್ಲೆಸ್",
         "SD": "ಸುಡಾನ್",
         "SE": "ಸ್ವೀಡನ್",
-        "SG": "ಸಿಂಗಾಪುರ್",
+        "SG": "ಸಿಂಗಪುರ್",
         "SH": "ಸೇಂಟ್ ಹೆಲೆನಾ",
         "SI": "ಸ್ಲೋವೇನಿಯಾ",
         "SJ": "ಸ್ವಾಲ್ಬಾರ್ಡ್ ಮತ್ತು ಜಾನ್ ಮೆಯನ್",
@@ -872,7 +876,7 @@ public class LocalizedNamesImpl_kn extends LocalizedNamesImpl {
         "UG": "ಉಗಾಂಡಾ",
         "UM": "ಯುಎಸ್‌ ಔಟ್‌ಲೇಯಿಂಗ್ ದ್ವೀಪಗಳು",
         "UN": "ಸಂಯುಕ್ತ ಸಂಸ್ಥಾನಗಳು",
-        "US": "ಅಮೇರಿಕಾ ಸಂಯುಕ್ತ ಸಂಸ್ಥಾನ",
+        "US": "ಯುನೈಟೆಡ್ ಸ್ಟೇಟ್ಸ್",
         "UY": "ಉರುಗ್ವೆ",
         "UZ": "ಉಜ್ಬೇಕಿಸ್ಥಾನ್",
         "VA": "ವ್ಯಾಟಿಕನ್ ಸಿಟಿ",

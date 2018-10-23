@@ -66,11 +66,6 @@ public class DateTimeFormatInfoImpl_ga extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public int firstDayOfTheWeek() {
-    return 0;
-  }
-
-  @Override
   public String formatMonthAbbrevDay() {
     return "d MMM";
   }

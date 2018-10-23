@@ -283,6 +283,8 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "YE",
         "ZM",
         "ZW",
@@ -293,7 +295,12 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
   @Override
   protected void loadNameMapJava() {
     super.loadNameMapJava();
+    namesMap.put("030", "Asie orientale");
+    namesMap.put("039", "Europe méridionale");
+    namesMap.put("145", "Asie occidentale");
     namesMap.put("151", "Europe orientale");
+    namesMap.put("154", "Europe septentrionale");
+    namesMap.put("155", "Europe occidentale");
     namesMap.put("AC", "île de l’Ascension");
     namesMap.put("AX", "îles d’Åland");
     namesMap.put("BN", "Brunei");
@@ -317,7 +324,6 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
     namesMap.put("QO", "Océanie lointaine");
     namesMap.put("RE", "la Réunion");
     namesMap.put("SX", "Saint-Martin (Pays-Bas)");
-    namesMap.put("TK", "Tokelau");
     namesMap.put("TL", "Timor-Leste");
     namesMap.put("UM", "îles mineures éloignées des États-Unis");
     namesMap.put("VA", "Cité du Vatican");
@@ -333,7 +339,12 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
 
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
+        "030": "Asie orientale",
+        "039": "Europe méridionale",
+        "145": "Asie occidentale",
         "151": "Europe orientale",
+        "154": "Europe septentrionale",
+        "155": "Europe occidentale",
         "AC": "île de l’Ascension",
         "AX": "îles d’Åland",
         "BN": "Brunei",
@@ -357,7 +368,6 @@ public class LocalizedNamesImpl_fr_CA extends LocalizedNamesImpl_fr {
         "QO": "Océanie lointaine",
         "RE": "la Réunion",
         "SX": "Saint-Martin (Pays-Bas)",
-        "TK": "Tokelau",
         "TL": "Timor-Leste",
         "UM": "îles mineures éloignées des États-Unis",
         "VA": "Cité du Vatican",

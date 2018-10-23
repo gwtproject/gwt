@@ -78,16 +78,6 @@ public class DateTimeFormatInfoImpl_ru extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatHour24Minute() {
-    return "H:mm";
-  }
-
-  @Override
-  public String formatHour24MinuteSecond() {
-    return "H:mm:ss";
-  }
-
-  @Override
   public String formatMonthAbbrevDay() {
     return "d MMM";
   }
@@ -260,26 +250,6 @@ public class DateTimeFormatInfoImpl_ru extends DateTimeFormatInfoImpl {
         "3-й кв.",
         "4-й кв."
     };
-  }
-
-  @Override
-  public String timeFormatFull() {
-    return "H:mm:ss zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "H:mm:ss z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "H:mm:ss";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "H:mm";
   }
 
   @Override

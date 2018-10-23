@@ -22,11 +22,6 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_ar_TN extends DateTimeFormatInfoImpl_ar_001 {
 
   @Override
-  public int firstDayOfTheWeek() {
-    return 0;
-  }
-
-  @Override
   public String[] monthsFull() {
     return new String[] {
         "جانفي",
@@ -78,15 +73,5 @@ public class DateTimeFormatInfoImpl_ar_TN extends DateTimeFormatInfoImpl_ar_001 
         "نوفمبر",
         "ديسمبر"
     };
-  }
-
-  @Override
-  public int weekendEnd() {
-    return 6;
-  }
-
-  @Override
-  public int weekendStart() {
-    return 5;
   }
 }

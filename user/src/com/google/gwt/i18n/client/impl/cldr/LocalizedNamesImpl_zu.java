@@ -294,6 +294,8 @@ public class LocalizedNamesImpl_zu extends LocalizedNamesImpl {
         "ZM",
         "ZW",
         "IL",
+        "XA",
+        "XB",
     };
   }
 

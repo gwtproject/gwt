@@ -25,6 +25,8 @@ public class LocalizedNamesImpl_zh_Hant_TW extends LocalizedNamesImpl_zh_Hant {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "TT",
         "TR",
         "TC",

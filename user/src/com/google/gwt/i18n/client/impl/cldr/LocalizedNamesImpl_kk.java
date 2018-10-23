@@ -34,12 +34,13 @@ public class LocalizedNamesImpl_kk extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "AU",
         "AT",
         "AX",
         "AL",
         "DZ",
-        "QO",
         "AS",
         "US",
         "AI",
@@ -238,6 +239,7 @@ public class LocalizedNamesImpl_kk extends LocalizedNamesImpl {
         "SO",
         "SD",
         "SR",
+        "QO",
         "SL",
         "HK",
         "TW",
@@ -311,7 +313,7 @@ public class LocalizedNamesImpl_kk extends LocalizedNamesImpl {
     namesMap.put("015", "Солтүстік Африка");
     namesMap.put("017", "Орталық Африка");
     namesMap.put("018", "Оңтүстік Африка");
-    namesMap.put("019", "Солтүстік және Оңтүстік Америка");
+    namesMap.put("019", "Америка");
     namesMap.put("021", "Солтүстік Америка (аймақ)");
     namesMap.put("029", "Кариб");
     namesMap.put("030", "Шығыс Азия");
@@ -329,6 +331,7 @@ public class LocalizedNamesImpl_kk extends LocalizedNamesImpl {
     namesMap.put("151", "Шығыс Еуропа");
     namesMap.put("154", "Солтүстік Еуропа");
     namesMap.put("155", "Батыс Еуропа");
+    namesMap.put("202", "Субсахаралық Африка");
     namesMap.put("419", "Латын Америкасы");
     namesMap.put("AC", "Әскенжін аралы");
     namesMap.put("AD", "Андорра");
@@ -524,7 +527,7 @@ public class LocalizedNamesImpl_kk extends LocalizedNamesImpl {
     namesMap.put("PW", "Палау");
     namesMap.put("PY", "Парагвай");
     namesMap.put("QA", "Катар");
-    namesMap.put("QO", "Алыс Океания");
+    namesMap.put("QO", "Сыртқы Океания");
     namesMap.put("RE", "Реюньон");
     namesMap.put("RO", "Румыния");
     namesMap.put("RS", "Сербия");
@@ -611,7 +614,7 @@ public class LocalizedNamesImpl_kk extends LocalizedNamesImpl {
         "015": "Солтүстік Африка",
         "017": "Орталық Африка",
         "018": "Оңтүстік Африка",
-        "019": "Солтүстік және Оңтүстік Америка",
+        "019": "Америка",
         "021": "Солтүстік Америка (аймақ)",
         "029": "Кариб",
         "030": "Шығыс Азия",
@@ -629,6 +632,7 @@ public class LocalizedNamesImpl_kk extends LocalizedNamesImpl {
         "151": "Шығыс Еуропа",
         "154": "Солтүстік Еуропа",
         "155": "Батыс Еуропа",
+        "202": "Субсахаралық Африка",
         "419": "Латын Америкасы",
         "AC": "Әскенжін аралы",
         "AD": "Андорра",
@@ -824,7 +828,7 @@ public class LocalizedNamesImpl_kk extends LocalizedNamesImpl {
         "PW": "Палау",
         "PY": "Парагвай",
         "QA": "Катар",
-        "QO": "Алыс Океания",
+        "QO": "Сыртқы Океания",
         "RE": "Реюньон",
         "RO": "Румыния",
         "RS": "Сербия",

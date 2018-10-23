@@ -36,6 +36,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "AO",
         "AQ",
         "AG",
+        "GB",
         "AE",
         "UN",
         "AR",
@@ -168,7 +169,6 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "LB",
         "LR",
         "LY",
-        "GB",
         "LT",
         "LI",
         "LU",
@@ -280,6 +280,8 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "SB",
         "ZM",
         "KP",
@@ -322,6 +324,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
     namesMap.put("151", "Austrumeiropa");
     namesMap.put("154", "Ziemeļeiropa");
     namesMap.put("155", "Rietumeiropa");
+    namesMap.put("202", "Subsahāras Āfrika");
     namesMap.put("419", "Latīņamerika");
     namesMap.put("AC", "Debesbraukšanas sala");
     namesMap.put("AD", "Andora");
@@ -403,7 +406,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
     namesMap.put("FO", "Fēru salas");
     namesMap.put("FR", "Francija");
     namesMap.put("GA", "Gabona");
-    namesMap.put("GB", "Lielbritānija");
+    namesMap.put("GB", "Apvienotā Karaliste");
     namesMap.put("GD", "Grenāda");
     namesMap.put("GE", "Gruzija");
     namesMap.put("GF", "Francijas Gviāna");
@@ -603,6 +606,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "151": "Austrumeiropa",
         "154": "Ziemeļeiropa",
         "155": "Rietumeiropa",
+        "202": "Subsahāras Āfrika",
         "419": "Latīņamerika",
         "AC": "Debesbraukšanas sala",
         "AD": "Andora",
@@ -684,7 +688,7 @@ public class LocalizedNamesImpl_lv extends LocalizedNamesImpl {
         "FO": "Fēru salas",
         "FR": "Francija",
         "GA": "Gabona",
-        "GB": "Lielbritānija",
+        "GB": "Apvienotā Karaliste",
         "GD": "Grenāda",
         "GE": "Gruzija",
         "GF": "Francijas Gviāna",

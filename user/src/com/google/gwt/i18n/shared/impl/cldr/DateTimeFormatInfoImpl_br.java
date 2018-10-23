@@ -30,6 +30,26 @@ public class DateTimeFormatInfoImpl_br extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String dateFormatFull() {
+    return "EEEE d MMMM y";
+  }
+
+  @Override
+  public String dateFormatLong() {
+    return "d MMMM y";
+  }
+
+  @Override
+  public String dateFormatMedium() {
+    return "d MMM y";
+  }
+
+  @Override
+  public String dateFormatShort() {
+    return "dd/MM/y";
+  }
+
+  @Override
   public String dateTimeFull(String timePattern, String datePattern) {
     return datePattern + " 'da' " + timePattern;
   }
@@ -37,6 +57,11 @@ public class DateTimeFormatInfoImpl_br extends DateTimeFormatInfoImpl {
   @Override
   public String dateTimeLong(String timePattern, String datePattern) {
     return datePattern + " 'da' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
   }
 
   @Override
@@ -61,6 +86,11 @@ public class DateTimeFormatInfoImpl_br extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthFullDay() {
+    return "d MMMM";
+  }
+
+  @Override
   public String formatMonthFullWeekdayDay() {
     return "EEEE d MMMM";
   }
@@ -78,6 +108,16 @@ public class DateTimeFormatInfoImpl_br extends DateTimeFormatInfoImpl {
   @Override
   public String formatYearMonthAbbrevDay() {
     return "d MMM y";
+  }
+
+  @Override
+  public String formatYearMonthFull() {
+    return "MMMM y";
+  }
+
+  @Override
+  public String formatYearMonthFullDay() {
+    return "d MMMM y";
   }
 
   @Override
@@ -156,24 +196,6 @@ public class DateTimeFormatInfoImpl_br extends DateTimeFormatInfoImpl {
         "Here",
         "Du",
         "Kzu."
-    };
-  }
-
-  @Override
-  public String[] monthsShortStandalone() {
-    return new String[] {
-        "Gen.",
-        "Cʼhwe.",
-        "Meur.",
-        "Ebr.",
-        "Mae",
-        "Mezh.",
-        "Goue.",
-        "Eost",
-        "Gwen.",
-        "Here",
-        "Du",
-        "Ker."
     };
   }
 

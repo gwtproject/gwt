@@ -288,6 +288,8 @@ public class LocalizedNamesImpl_nb extends LocalizedNamesImpl {
         "EH",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "QO",
         "ZM",
         "ZW",
@@ -325,6 +327,7 @@ public class LocalizedNamesImpl_nb extends LocalizedNamesImpl {
     namesMap.put("151", "Øst-Europa");
     namesMap.put("154", "Nord-Europa");
     namesMap.put("155", "Vest-Europa");
+    namesMap.put("202", "Afrika sør for Sahara");
     namesMap.put("419", "Latin-Amerika");
     namesMap.put("AC", "Ascension");
     namesMap.put("AE", "De forente arabiske emirater");
@@ -415,7 +418,7 @@ public class LocalizedNamesImpl_nb extends LocalizedNamesImpl {
     namesMap.put("PH", "Filippinene");
     namesMap.put("PL", "Polen");
     namesMap.put("PM", "Saint-Pierre-et-Miquelon");
-    namesMap.put("PN", "Pitcairn");
+    namesMap.put("PN", "Pitcairnøyene");
     namesMap.put("PS", "Det palestinske området");
     namesMap.put("QO", "Ytre Oseania");
     namesMap.put("RU", "Russland");
@@ -481,6 +484,7 @@ public class LocalizedNamesImpl_nb extends LocalizedNamesImpl {
         "151": "Øst-Europa",
         "154": "Nord-Europa",
         "155": "Vest-Europa",
+        "202": "Afrika sør for Sahara",
         "419": "Latin-Amerika",
         "AC": "Ascension",
         "AE": "De forente arabiske emirater",
@@ -571,7 +575,7 @@ public class LocalizedNamesImpl_nb extends LocalizedNamesImpl {
         "PH": "Filippinene",
         "PL": "Polen",
         "PM": "Saint-Pierre-et-Miquelon",
-        "PN": "Pitcairn",
+        "PN": "Pitcairnøyene",
         "PS": "Det palestinske området",
         "QO": "Ytre Oseania",
         "RU": "Russland",

@@ -34,6 +34,8 @@ public class LocalizedNamesImpl_yue_Hans extends LocalizedNamesImpl_yue {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "VU",
         "BT",
         "TO",

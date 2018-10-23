@@ -275,6 +275,8 @@ public class LocalizedNamesImpl_xog extends LocalizedNamesImpl {
         "WF",
         "UY",
         "UZ",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "ID",

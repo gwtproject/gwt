@@ -129,24 +129,6 @@ public class DateTimeFormatInfoImpl_uz_Cyrl extends DateTimeFormatInfoImpl_uz {
   }
 
   @Override
-  public String[] monthsFullStandalone() {
-    return new String[] {
-        "Январ",
-        "Феврал",
-        "Март",
-        "Апрел",
-        "Май",
-        "Июн",
-        "Июл",
-        "Август",
-        "Сентябр",
-        "Октябр",
-        "Ноябр",
-        "Декабр"
-    };
-  }
-
-  @Override
   public String[] monthsNarrow() {
     return new String[] {
         "Я",
@@ -179,24 +161,6 @@ public class DateTimeFormatInfoImpl_uz_Cyrl extends DateTimeFormatInfoImpl_uz {
         "окт",
         "ноя",
         "дек"
-    };
-  }
-
-  @Override
-  public String[] monthsShortStandalone() {
-    return new String[] {
-        "Янв",
-        "Фев",
-        "Мар",
-        "Апр",
-        "Май",
-        "Июн",
-        "Июл",
-        "Авг",
-        "Сен",
-        "Окт",
-        "Ноя",
-        "Дек"
     };
   }
 
@@ -244,19 +208,6 @@ public class DateTimeFormatInfoImpl_uz_Cyrl extends DateTimeFormatInfoImpl_uz {
   }
 
   @Override
-  public String[] weekdaysFullStandalone() {
-    return new String[] {
-        "Якшанба",
-        "Душанба",
-        "Сешанба",
-        "Чоршанба",
-        "Пайшанба",
-        "Жума",
-        "Шанба"
-    };
-  }
-
-  @Override
   public String[] weekdaysNarrow() {
     return new String[] {
         "Я",
@@ -279,19 +230,6 @@ public class DateTimeFormatInfoImpl_uz_Cyrl extends DateTimeFormatInfoImpl_uz {
         "пай",
         "жум",
         "шан"
-    };
-  }
-
-  @Override
-  public String[] weekdaysShortStandalone() {
-    return new String[] {
-        "Якш",
-        "Душ",
-        "Сеш",
-        "Чор",
-        "Пай",
-        "Жум",
-        "Шан"
     };
   }
 }

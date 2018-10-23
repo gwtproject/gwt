@@ -27,11 +27,12 @@ public class LocalizedNamesImpl_zh_Hant_MO extends LocalizedNamesImpl_zh_Hant {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "AF",
         "AR",
         "AE",
         "OM",
-        "AZ",
         "AC",
         "AL",
         "DZ",
@@ -75,8 +76,8 @@ public class LocalizedNamesImpl_zh_Hant_MO extends LocalizedNamesImpl_zh_Hant {
         "DE",
         "DG",
         "TG",
-        "DM",
         "DO",
+        "DM",
         "RU",
         "EC",
         "ER",
@@ -119,11 +120,11 @@ public class LocalizedNamesImpl_zh_Hant_MO extends LocalizedNamesImpl_zh_Hant {
         "ZW",
         "CM",
         "QA",
+        "CC",
         "KM",
         "XK",
         "CI",
         "KW",
-        "CC",
         "CP",
         "HR",
         "KE",
@@ -225,6 +226,7 @@ public class LocalizedNamesImpl_zh_Hant_MO extends LocalizedNamesImpl_zh_Hant {
         "VA",
         "FJ",
         "AM",
+        "AZ",
         "CG",
         "CD",
         "TV",
@@ -300,7 +302,7 @@ public class LocalizedNamesImpl_zh_Hant_MO extends LocalizedNamesImpl_zh_Hant {
     namesMap.put("AE", "阿拉伯聯合酋長國");
     namesMap.put("AG", "安提瓜和巴布達");
     namesMap.put("AW", "阿魯巴");
-    namesMap.put("AZ", "阿塞拜疆");
+    namesMap.put("AZ", "亞塞拜疆");
     namesMap.put("BA", "波斯尼亞和黑塞哥維那");
     namesMap.put("BB", "巴巴多斯");
     namesMap.put("BF", "布基納法索");
@@ -310,13 +312,14 @@ public class LocalizedNamesImpl_zh_Hant_MO extends LocalizedNamesImpl_zh_Hant {
     namesMap.put("BV", "鮑威特島");
     namesMap.put("BW", "博茨瓦納");
     namesMap.put("BZ", "伯利茲");
-    namesMap.put("CC", "可可斯群島");
+    namesMap.put("CC", "科科斯 (基林) 群島");
     namesMap.put("CI", "科特迪瓦");
     namesMap.put("CP", "克里珀頓島");
     namesMap.put("CR", "哥斯達黎加");
     namesMap.put("CV", "佛得角");
     namesMap.put("CY", "塞浦路斯");
     namesMap.put("DJ", "吉布提");
+    namesMap.put("DO", "多米尼加共和國");
     namesMap.put("EC", "厄瓜多爾");
     namesMap.put("ER", "厄立特里亞");
     namesMap.put("ET", "埃塞俄比亞");
@@ -333,14 +336,13 @@ public class LocalizedNamesImpl_zh_Hant_MO extends LocalizedNamesImpl_zh_Hant {
     namesMap.put("HR", "克羅地亞");
     namesMap.put("IM", "馬恩島");
     namesMap.put("IT", "意大利");
-    namesMap.put("KE", "肯雅");
+    namesMap.put("KE", "肯尼亞");
     namesMap.put("KM", "科摩羅");
     namesMap.put("KN", "聖基茨和尼維斯");
     namesMap.put("LA", "老撾");
     namesMap.put("LC", "聖盧西亞");
     namesMap.put("LI", "列支敦士登");
     namesMap.put("LR", "利比里亞");
-    namesMap.put("LV", "拉脱維亞");
     namesMap.put("ME", "黑山");
     namesMap.put("ML", "馬里");
     namesMap.put("MR", "毛里塔尼亞");
@@ -401,7 +403,7 @@ public class LocalizedNamesImpl_zh_Hant_MO extends LocalizedNamesImpl_zh_Hant {
         "AE": "阿拉伯聯合酋長國",
         "AG": "安提瓜和巴布達",
         "AW": "阿魯巴",
-        "AZ": "阿塞拜疆",
+        "AZ": "亞塞拜疆",
         "BA": "波斯尼亞和黑塞哥維那",
         "BB": "巴巴多斯",
         "BF": "布基納法索",
@@ -411,13 +413,14 @@ public class LocalizedNamesImpl_zh_Hant_MO extends LocalizedNamesImpl_zh_Hant {
         "BV": "鮑威特島",
         "BW": "博茨瓦納",
         "BZ": "伯利茲",
-        "CC": "可可斯群島",
+        "CC": "科科斯 (基林) 群島",
         "CI": "科特迪瓦",
         "CP": "克里珀頓島",
         "CR": "哥斯達黎加",
         "CV": "佛得角",
         "CY": "塞浦路斯",
         "DJ": "吉布提",
+        "DO": "多米尼加共和國",
         "EC": "厄瓜多爾",
         "ER": "厄立特里亞",
         "ET": "埃塞俄比亞",
@@ -434,14 +437,13 @@ public class LocalizedNamesImpl_zh_Hant_MO extends LocalizedNamesImpl_zh_Hant {
         "HR": "克羅地亞",
         "IM": "馬恩島",
         "IT": "意大利",
-        "KE": "肯雅",
+        "KE": "肯尼亞",
         "KM": "科摩羅",
         "KN": "聖基茨和尼維斯",
         "LA": "老撾",
         "LC": "聖盧西亞",
         "LI": "列支敦士登",
         "LR": "利比里亞",
-        "LV": "拉脱維亞",
         "ME": "黑山",
         "ML": "馬里",
         "MR": "毛里塔尼亞",

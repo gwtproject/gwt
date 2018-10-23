@@ -312,6 +312,8 @@ public class LocalizedNamesImpl extends LocalizedNamesImplBase {
         "VU": "Vanuatu",
         "WF": "Wallis & Futuna",
         "WS": "Samoa",
+        "XA": "Pseudo-Accents",
+        "XB": "Pseudo-Bidi",
         "XK": "Kosovo",
         "YE": "Yemen",
         "YT": "Mayotte",

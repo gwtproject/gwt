@@ -24,8 +24,8 @@ public class DateTimeFormatInfoImpl_as extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "পূৰ্বাহ্ণ",
-        "অপৰাহ্ণ"
+        "পূৰ্বাহ্ন",
+        "অপৰাহ্ন"
     };
   }
 
@@ -60,8 +60,8 @@ public class DateTimeFormatInfoImpl_as extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasShort() {
     return new String[] {
-        "খ্ৰী.পূ.",
-        "খ্ৰী.দ."
+        "খ্ৰীঃ পূঃ",
+        "খ্ৰীঃ"
     };
   }
 
@@ -72,12 +72,12 @@ public class DateTimeFormatInfoImpl_as extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatHour12Minute() {
-    return "h.mm. a";
+    return "a h.mm";
   }
 
   @Override
   public String formatHour12MinuteSecond() {
-    return "h.mm.ss a";
+    return "a h.mm.ss";
   }
 
   @Override
@@ -182,24 +182,6 @@ public class DateTimeFormatInfoImpl_as extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] monthsNarrowStandalone() {
-    return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
-    };
-  }
-
-  @Override
   public String[] monthsShort() {
     return new String[] {
         "জানু",
@@ -220,41 +202,41 @@ public class DateTimeFormatInfoImpl_as extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "প্ৰথম প্ৰহৰ",
-        "দ্বিতীয় প্ৰহৰ",
-        "তৃতীয় প্ৰহৰ",
-        "চতুৰ্থ প্ৰহৰ"
+        "প্ৰথম তিনিমাহ",
+        "দ্বিতীয় তিনিমাহ",
+        "তৃতীয় তিনিমাহ",
+        "চতুৰ্থ তিনিমাহ"
     };
   }
 
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "তি1",
-        "তি2",
-        "তি3",
-        "তি4"
+        "১মঃ তিঃ",
+        "২য়ঃ তিঃ",
+        "৩য়ঃ তিঃ",
+        "৪ৰ্থঃ তিঃ"
     };
   }
 
   @Override
   public String timeFormatFull() {
-    return "h.mm.ss a zzzz";
+    return "a h.mm.ss zzzz";
   }
 
   @Override
   public String timeFormatLong() {
-    return "h.mm.ss a z";
+    return "a h.mm.ss z";
   }
 
   @Override
   public String timeFormatMedium() {
-    return "h.mm.ss a";
+    return "a h.mm.ss";
   }
 
   @Override
   public String timeFormatShort() {
-    return "h.mm. a";
+    return "a h.mm";
   }
 
   @Override

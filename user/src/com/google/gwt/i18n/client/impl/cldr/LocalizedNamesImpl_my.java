@@ -34,6 +34,8 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "KE",
         "CM",
         "CA",
@@ -132,7 +134,6 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "KR",
         "GS",
         "SS",
-        "MP",
         "ZA",
         "TO",
         "TA",
@@ -224,6 +225,7 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "MV",
         "MM",
         "KP",
+        "MP",
         "MN",
         "ME",
         "YE",
@@ -260,9 +262,9 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "AC",
         "AZ",
         "EH",
-        "AQ",
         "AO",
         "AI",
+        "AQ",
         "AG",
         "AD",
         "AS",
@@ -329,6 +331,7 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
     namesMap.put("151", "အရှေ့ ဥရောပ");
     namesMap.put("154", "မြောက် ဥရောပ");
     namesMap.put("155", "အနောက် ဥရောပ");
+    namesMap.put("202", "ဆာဟာရ-အောက်ပိုင်း အာဖရိက");
     namesMap.put("419", "လက်တင်အမေရိက");
     namesMap.put("AC", "အဆန်းရှင်းကျွန်း");
     namesMap.put("AD", "အန်ဒိုရာ");
@@ -339,7 +342,7 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
     namesMap.put("AL", "အယ်လ်ဘေးနီးယား");
     namesMap.put("AM", "အာမေးနီးယား");
     namesMap.put("AO", "အန်ဂိုလာ");
-    namesMap.put("AQ", "အန္တာတိက");
+    namesMap.put("AQ", "အန်တာတိက");
     namesMap.put("AR", "အာဂျင်တီးနား");
     namesMap.put("AS", "အမေရိကန် ဆမိုးအား");
     namesMap.put("AT", "ဩစတြီးယား");
@@ -485,7 +488,7 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
     namesMap.put("MM", "မြန်မာ");
     namesMap.put("MN", "မွန်ဂိုးလီးယား");
     namesMap.put("MO", "မကာအို (တရုတ်ပြည်)");
-    namesMap.put("MP", "တောင်ပိုင်းမာရီအာနာကျွန်းစု");
+    namesMap.put("MP", "မြောက်ပိုင်းမာရီအာနာကျွန်းစု");
     namesMap.put("MQ", "မာတီနိခ်");
     namesMap.put("MR", "မော်ရီတေးနီးယား");
     namesMap.put("MS", "မောင့်စဲရက်");
@@ -493,7 +496,7 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
     namesMap.put("MU", "မောရစ်ရှ");
     namesMap.put("MV", "မော်လ်ဒိုက်");
     namesMap.put("MW", "မာလာဝီ");
-    namesMap.put("MX", "မက္ကဆီကို");
+    namesMap.put("MX", "မက်ကဆီကို");
     namesMap.put("MY", "မလေးရှား");
     namesMap.put("MZ", "မိုဇမ်ဘစ်");
     namesMap.put("NA", "နမီးဘီးယား");
@@ -629,6 +632,7 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "151": "အရှေ့ ဥရောပ",
         "154": "မြောက် ဥရောပ",
         "155": "အနောက် ဥရောပ",
+        "202": "ဆာဟာရ-အောက်ပိုင်း အာဖရိက",
         "419": "လက်တင်အမေရိက",
         "AC": "အဆန်းရှင်းကျွန်း",
         "AD": "အန်ဒိုရာ",
@@ -639,7 +643,7 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "AL": "အယ်လ်ဘေးနီးယား",
         "AM": "အာမေးနီးယား",
         "AO": "အန်ဂိုလာ",
-        "AQ": "အန္တာတိက",
+        "AQ": "အန်တာတိက",
         "AR": "အာဂျင်တီးနား",
         "AS": "အမေရိကန် ဆမိုးအား",
         "AT": "ဩစတြီးယား",
@@ -785,7 +789,7 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "MM": "မြန်မာ",
         "MN": "မွန်ဂိုးလီးယား",
         "MO": "မကာအို (တရုတ်ပြည်)",
-        "MP": "တောင်ပိုင်းမာရီအာနာကျွန်းစု",
+        "MP": "မြောက်ပိုင်းမာရီအာနာကျွန်းစု",
         "MQ": "မာတီနိခ်",
         "MR": "မော်ရီတေးနီးယား",
         "MS": "မောင့်စဲရက်",
@@ -793,7 +797,7 @@ public class LocalizedNamesImpl_my extends LocalizedNamesImpl {
         "MU": "မောရစ်ရှ",
         "MV": "မော်လ်ဒိုက်",
         "MW": "မာလာဝီ",
-        "MX": "မက္ကဆီကို",
+        "MX": "မက်ကဆီကို",
         "MY": "မလေးရှား",
         "MZ": "မိုဇမ်ဘစ်",
         "NA": "နမီးဘီးယား",

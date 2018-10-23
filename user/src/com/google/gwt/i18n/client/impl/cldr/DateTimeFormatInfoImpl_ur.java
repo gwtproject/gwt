@@ -23,17 +23,17 @@ public class DateTimeFormatInfoImpl_ur extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatFull() {
-    return "EEEE, MMMM d, y";
+    return "EEEE، d MMMM، y";
   }
 
   @Override
   public String dateFormatLong() {
-    return "MMMM d, y";
+    return "d MMMM، y";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "MMM d, y";
+    return "d MMM، y";
   }
 
   @Override
@@ -68,6 +68,11 @@ public class DateTimeFormatInfoImpl_ur extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthFullDay() {
+    return "d MMMM";
+  }
+
+  @Override
   public String formatMonthFullWeekdayDay() {
     return "EEEE، d MMMM";
   }
@@ -94,7 +99,7 @@ public class DateTimeFormatInfoImpl_ur extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFullDay() {
-    return "MMMM d, y";
+    return "d MMMM، y";
   }
 
   @Override

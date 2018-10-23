@@ -293,6 +293,8 @@ public class LocalizedNamesImpl_yo extends LocalizedNamesImpl {
         "TF",
         "UM",
         "UN",
+        "XA",
+        "XB",
         "XK",
     };
   }

@@ -275,6 +275,8 @@ public class LocalizedNamesImpl_haw extends LocalizedNamesImpl {
         "VU",
         "WF",
         "WS",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "YT",

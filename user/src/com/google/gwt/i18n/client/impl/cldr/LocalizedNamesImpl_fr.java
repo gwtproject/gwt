@@ -299,6 +299,8 @@ public class LocalizedNamesImpl_fr extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "YE",
         "ZM",
         "ZW",
@@ -323,20 +325,21 @@ public class LocalizedNamesImpl_fr extends LocalizedNamesImpl {
     namesMap.put("019", "Amériques");
     namesMap.put("021", "Amérique septentrionale");
     namesMap.put("029", "Caraïbes");
-    namesMap.put("030", "Asie orientale");
+    namesMap.put("030", "Asie de l’Est");
     namesMap.put("034", "Asie du Sud");
     namesMap.put("035", "Asie du Sud-Est");
-    namesMap.put("039", "Europe méridionale");
+    namesMap.put("039", "Europe du Sud");
     namesMap.put("053", "Australasie");
     namesMap.put("054", "Mélanésie");
     namesMap.put("057", "région micronésienne");
     namesMap.put("061", "Polynésie");
     namesMap.put("142", "Asie");
     namesMap.put("143", "Asie centrale");
-    namesMap.put("145", "Asie occidentale");
+    namesMap.put("145", "Asie de l’Ouest");
     namesMap.put("151", "Europe de l’Est");
-    namesMap.put("154", "Europe septentrionale");
-    namesMap.put("155", "Europe occidentale");
+    namesMap.put("154", "Europe du Nord");
+    namesMap.put("155", "Europe de l’Ouest");
+    namesMap.put("202", "Afrique subsaharienne");
     namesMap.put("419", "Amérique latine");
     namesMap.put("AC", "Île de l’Ascension");
     namesMap.put("AD", "Andorre");
@@ -504,7 +507,6 @@ public class LocalizedNamesImpl_fr extends LocalizedNamesImpl {
     namesMap.put("TF", "Terres australes françaises");
     namesMap.put("TH", "Thaïlande");
     namesMap.put("TJ", "Tadjikistan");
-    namesMap.put("TK", "Tokélaou");
     namesMap.put("TL", "Timor oriental");
     namesMap.put("TM", "Turkménistan");
     namesMap.put("TN", "Tunisie");
@@ -549,20 +551,21 @@ public class LocalizedNamesImpl_fr extends LocalizedNamesImpl {
         "019": "Amériques",
         "021": "Amérique septentrionale",
         "029": "Caraïbes",
-        "030": "Asie orientale",
+        "030": "Asie de l’Est",
         "034": "Asie du Sud",
         "035": "Asie du Sud-Est",
-        "039": "Europe méridionale",
+        "039": "Europe du Sud",
         "053": "Australasie",
         "054": "Mélanésie",
         "057": "région micronésienne",
         "061": "Polynésie",
         "142": "Asie",
         "143": "Asie centrale",
-        "145": "Asie occidentale",
+        "145": "Asie de l’Ouest",
         "151": "Europe de l’Est",
-        "154": "Europe septentrionale",
-        "155": "Europe occidentale",
+        "154": "Europe du Nord",
+        "155": "Europe de l’Ouest",
+        "202": "Afrique subsaharienne",
         "419": "Amérique latine",
         "AC": "Île de l’Ascension",
         "AD": "Andorre",
@@ -730,7 +733,6 @@ public class LocalizedNamesImpl_fr extends LocalizedNamesImpl {
         "TF": "Terres australes françaises",
         "TH": "Thaïlande",
         "TJ": "Tadjikistan",
-        "TK": "Tokélaou",
         "TL": "Timor oriental",
         "TM": "Turkménistan",
         "TN": "Tunisie",

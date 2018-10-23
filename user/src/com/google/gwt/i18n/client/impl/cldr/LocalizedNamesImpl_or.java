@@ -34,6 +34,8 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "AX",
         "AT",
         "AU",
@@ -219,7 +221,6 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
         "MG",
         "MQ",
         "MH",
-        "MD",
         "MV",
         "ML",
         "MY",
@@ -232,6 +233,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
         "MZ",
         "MC",
         "MA",
+        "MD",
         "MR",
         "GB",
         "US",
@@ -304,7 +306,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
     namesMap.put("002", "ଆଫ୍ରିକା");
     namesMap.put("003", "ଉତ୍ତର ଆମେରିକା");
     namesMap.put("005", "ଦକ୍ଷିଣ ଆମେରିକା");
-    namesMap.put("009", "ଓସେନିଆ");
+    namesMap.put("009", "ଓସିନିଆ");
     namesMap.put("011", "ପଶ୍ଚିମ ଆଫ୍ରିକା");
     namesMap.put("013", "ମଧ୍ୟ ଆମେରିକା");
     namesMap.put("014", "ପୂର୍ବ ଆଫ୍ରିକା");
@@ -316,7 +318,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
     namesMap.put("029", "କାରିବିଆନ୍");
     namesMap.put("030", "ପୂର୍ବ ଏସିଆ");
     namesMap.put("034", "ଦକ୍ଷିଣ ଏସିଆ");
-    namesMap.put("035", "ଦକ୍ଷିଣ-ପୂର୍ବ ଏସିଆ");
+    namesMap.put("035", "ଦକ୍ଷିଣପୂର୍ବ ଏସିଆ");
     namesMap.put("039", "ଦକ୍ଷିଣ ୟୁରୋପ୍");
     namesMap.put("053", "ଅଷ୍ଟ୍ରେଲେସିଆ");
     namesMap.put("054", "ମେଲାନେସିଆ");
@@ -329,6 +331,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
     namesMap.put("151", "ପୂର୍ବ ୟୁରୋପ୍");
     namesMap.put("154", "ଉତ୍ତର ୟୁରୋପ୍");
     namesMap.put("155", "ପଶ୍ଚିମ ୟୁରୋପ୍");
+    namesMap.put("202", "ଉପ-ସାହାରା ଆଫ୍ରିକା");
     namesMap.put("419", "ଲାଟିନ୍‌ ଆମେରିକା");
     namesMap.put("AC", "ଆସେନସିଅନ୍‌ ଦ୍ୱୀପ");
     namesMap.put("AD", "ଆଣ୍ଡୋରା");
@@ -374,7 +377,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
     namesMap.put("CF", "ମଧ୍ୟ ଆଫ୍ରିକୀୟ ସାଧାରଣତନ୍ତ୍ର");
     namesMap.put("CG", "କଙ୍ଗୋ-ବ୍ରାଜିଭିଲ୍ଲେ");
     namesMap.put("CH", "ସ୍ୱିଜରଲ୍ୟାଣ୍ଡ");
-    namesMap.put("CI", "କୋଟେ ଡି ଆଇଭୋରି");
+    namesMap.put("CI", "କୋତ୍ ଡି ଭ୍ଵାର୍");
     namesMap.put("CK", "କୁକ୍‌ ଦ୍ୱୀପପୁଞ୍ଜ");
     namesMap.put("CL", "ଚିଲ୍ଲୀ");
     namesMap.put("CM", "କାମେରୁନ୍");
@@ -422,7 +425,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
     namesMap.put("GL", "ଗ୍ରୀନଲ୍ୟାଣ୍ଡ");
     namesMap.put("GM", "ଗାମ୍ବିଆ");
     namesMap.put("GN", "ଗୁଇନିଆ");
-    namesMap.put("GP", "ଗୁଆଡେଲୋପ୍‌");
+    namesMap.put("GP", "ଗୁଆଡେଲୋପ୍");
     namesMap.put("GQ", "ଇକ୍ବାଟେରିଆଲ୍ ଗୁଇନିଆ");
     namesMap.put("GR", "ଗ୍ରୀସ୍");
     namesMap.put("GS", "ଦକ୍ଷିଣ ଜର୍ଜିଆ ଏବଂ ଦକ୍ଷିଣ ସାଣ୍ଡୱିଚ୍ ଦ୍ୱୀପପୁଞ୍ଜ");
@@ -455,7 +458,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
     namesMap.put("KG", "କିର୍ଗିଜିସ୍ତାନ");
     namesMap.put("KH", "କାମ୍ବୋଡିଆ");
     namesMap.put("KI", "କିରିବାଟି");
-    namesMap.put("KM", "କୋମୋରସ୍‌");
+    namesMap.put("KM", "କୋମୋରସ୍");
     namesMap.put("KN", "ସେଣ୍ଟ କିଟସ୍‌ ଏବଂ ନେଭିସ୍‌");
     namesMap.put("KP", "ଉତ୍ତର କୋରିଆ");
     namesMap.put("KR", "ଦକ୍ଷିଣ କୋରିଆ");
@@ -475,11 +478,11 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
     namesMap.put("LY", "ଲିବ୍ୟା");
     namesMap.put("MA", "ମୋରୋକ୍କୋ");
     namesMap.put("MC", "ମୋନାକୋ");
-    namesMap.put("MD", "ମାଲଡୋଭା");
+    namesMap.put("MD", "ମୋଲଡୋଭା");
     namesMap.put("ME", "ମଣ୍ଟେନିଗ୍ରୋ");
     namesMap.put("MF", "ସେଣ୍ଟ ମାର୍ଟିନ୍");
     namesMap.put("MG", "ମାଡାଗାସ୍କର୍");
-    namesMap.put("MH", "ମାର୍ଶାଲ୍‌ ଦ୍ୱୀପପୁଞ୍ଜ");
+    namesMap.put("MH", "ମାର୍ଶାଲ୍ ଦ୍ୱୀପପୁଞ୍ଜ");
     namesMap.put("MK", "ମାସେଡୋନିଆ");
     namesMap.put("ML", "ମାଲି");
     namesMap.put("MM", "ମିଆଁମାର");
@@ -499,7 +502,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
     namesMap.put("NA", "ନାମିବିଆ");
     namesMap.put("NC", "ନୂତନ କାଲେଡୋନିଆ");
     namesMap.put("NE", "ନାଇଜର");
-    namesMap.put("NF", "ନର୍ଫକ୍‌ ଦ୍ୱୀପ");
+    namesMap.put("NF", "ନର୍ଫକ୍ ଦ୍ଵୀପ");
     namesMap.put("NG", "ନାଇଜେରିଆ");
     namesMap.put("NI", "ନିକାରାଗୁଆ");
     namesMap.put("NL", "ନେଦରଲ୍ୟାଣ୍ଡ");
@@ -524,7 +527,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
     namesMap.put("PW", "ପାଲାଉ");
     namesMap.put("PY", "ପାରାଗୁଏ");
     namesMap.put("QA", "କତାର୍");
-    namesMap.put("QO", "ସୀମାନ୍ତବର୍ତ୍ତୀ ଓସେନିଆ");
+    namesMap.put("QO", "ସୀମାନ୍ତବର୍ତ୍ତୀ ଓସିନିଆ");
     namesMap.put("RE", "ରିୟୁନିଅନ୍");
     namesMap.put("RO", "ରୋମାନିଆ");
     namesMap.put("RS", "ସର୍ବିଆ");
@@ -568,14 +571,14 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
     namesMap.put("TV", "ତୁଭାଲୁ");
     namesMap.put("TW", "ତାଇୱାନ");
     namesMap.put("TZ", "ତାଞ୍ଜାନିଆ");
-    namesMap.put("UA", "ୟୁକ୍ରେନ୍‌");
+    namesMap.put("UA", "ୟୁକ୍ରେନ୍");
     namesMap.put("UG", "ଉଗାଣ୍ଡା");
     namesMap.put("UM", "ଯୁକ୍ତରାଷ୍ଟ୍ର ଆଉଟ୍‌ଲାଇଙ୍ଗ ଦ୍ଵୀପପୁଞ୍ଜ");
     namesMap.put("UN", "ଜାତିସଂଘ");
     namesMap.put("US", "ଯୁକ୍ତ ରାଷ୍ଟ୍ର");
     namesMap.put("UY", "ଉରୁଗୁଏ");
     namesMap.put("UZ", "ଉଜବେକିସ୍ତାନ");
-    namesMap.put("VA", "ଭାଟିକାନ୍‌ ସିଟି");
+    namesMap.put("VA", "ଭାଟିକାନ୍ ସିଟି");
     namesMap.put("VC", "ସେଣ୍ଟ ଭିନସେଣ୍ଟ ଏବଂ ଦି ଗ୍ରେନାଡିସ୍");
     namesMap.put("VE", "ଭେନେଜୁଏଲା");
     namesMap.put("VG", "ବ୍ରିଟିଶ୍‌ ଭର୍ଜିନ୍ ଦ୍ୱୀପପୁଞ୍ଜ");
@@ -604,7 +607,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
         "002": "ଆଫ୍ରିକା",
         "003": "ଉତ୍ତର ଆମେରିକା",
         "005": "ଦକ୍ଷିଣ ଆମେରିକା",
-        "009": "ଓସେନିଆ",
+        "009": "ଓସିନିଆ",
         "011": "ପଶ୍ଚିମ ଆଫ୍ରିକା",
         "013": "ମଧ୍ୟ ଆମେରିକା",
         "014": "ପୂର୍ବ ଆଫ୍ରିକା",
@@ -616,7 +619,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
         "029": "କାରିବିଆନ୍",
         "030": "ପୂର୍ବ ଏସିଆ",
         "034": "ଦକ୍ଷିଣ ଏସିଆ",
-        "035": "ଦକ୍ଷିଣ-ପୂର୍ବ ଏସିଆ",
+        "035": "ଦକ୍ଷିଣପୂର୍ବ ଏସିଆ",
         "039": "ଦକ୍ଷିଣ ୟୁରୋପ୍",
         "053": "ଅଷ୍ଟ୍ରେଲେସିଆ",
         "054": "ମେଲାନେସିଆ",
@@ -629,6 +632,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
         "151": "ପୂର୍ବ ୟୁରୋପ୍",
         "154": "ଉତ୍ତର ୟୁରୋପ୍",
         "155": "ପଶ୍ଚିମ ୟୁରୋପ୍",
+        "202": "ଉପ-ସାହାରା ଆଫ୍ରିକା",
         "419": "ଲାଟିନ୍‌ ଆମେରିକା",
         "AC": "ଆସେନସିଅନ୍‌ ଦ୍ୱୀପ",
         "AD": "ଆଣ୍ଡୋରା",
@@ -674,7 +678,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
         "CF": "ମଧ୍ୟ ଆଫ୍ରିକୀୟ ସାଧାରଣତନ୍ତ୍ର",
         "CG": "କଙ୍ଗୋ-ବ୍ରାଜିଭିଲ୍ଲେ",
         "CH": "ସ୍ୱିଜରଲ୍ୟାଣ୍ଡ",
-        "CI": "କୋଟେ ଡି ଆଇଭୋରି",
+        "CI": "କୋତ୍ ଡି ଭ୍ଵାର୍",
         "CK": "କୁକ୍‌ ଦ୍ୱୀପପୁଞ୍ଜ",
         "CL": "ଚିଲ୍ଲୀ",
         "CM": "କାମେରୁନ୍",
@@ -722,7 +726,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
         "GL": "ଗ୍ରୀନଲ୍ୟାଣ୍ଡ",
         "GM": "ଗାମ୍ବିଆ",
         "GN": "ଗୁଇନିଆ",
-        "GP": "ଗୁଆଡେଲୋପ୍‌",
+        "GP": "ଗୁଆଡେଲୋପ୍",
         "GQ": "ଇକ୍ବାଟେରିଆଲ୍ ଗୁଇନିଆ",
         "GR": "ଗ୍ରୀସ୍",
         "GS": "ଦକ୍ଷିଣ ଜର୍ଜିଆ ଏବଂ ଦକ୍ଷିଣ ସାଣ୍ଡୱିଚ୍ ଦ୍ୱୀପପୁଞ୍ଜ",
@@ -755,7 +759,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
         "KG": "କିର୍ଗିଜିସ୍ତାନ",
         "KH": "କାମ୍ବୋଡିଆ",
         "KI": "କିରିବାଟି",
-        "KM": "କୋମୋରସ୍‌",
+        "KM": "କୋମୋରସ୍",
         "KN": "ସେଣ୍ଟ କିଟସ୍‌ ଏବଂ ନେଭିସ୍‌",
         "KP": "ଉତ୍ତର କୋରିଆ",
         "KR": "ଦକ୍ଷିଣ କୋରିଆ",
@@ -775,11 +779,11 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
         "LY": "ଲିବ୍ୟା",
         "MA": "ମୋରୋକ୍କୋ",
         "MC": "ମୋନାକୋ",
-        "MD": "ମାଲଡୋଭା",
+        "MD": "ମୋଲଡୋଭା",
         "ME": "ମଣ୍ଟେନିଗ୍ରୋ",
         "MF": "ସେଣ୍ଟ ମାର୍ଟିନ୍",
         "MG": "ମାଡାଗାସ୍କର୍",
-        "MH": "ମାର୍ଶାଲ୍‌ ଦ୍ୱୀପପୁଞ୍ଜ",
+        "MH": "ମାର୍ଶାଲ୍ ଦ୍ୱୀପପୁଞ୍ଜ",
         "MK": "ମାସେଡୋନିଆ",
         "ML": "ମାଲି",
         "MM": "ମିଆଁମାର",
@@ -799,7 +803,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
         "NA": "ନାମିବିଆ",
         "NC": "ନୂତନ କାଲେଡୋନିଆ",
         "NE": "ନାଇଜର",
-        "NF": "ନର୍ଫକ୍‌ ଦ୍ୱୀପ",
+        "NF": "ନର୍ଫକ୍ ଦ୍ଵୀପ",
         "NG": "ନାଇଜେରିଆ",
         "NI": "ନିକାରାଗୁଆ",
         "NL": "ନେଦରଲ୍ୟାଣ୍ଡ",
@@ -824,7 +828,7 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
         "PW": "ପାଲାଉ",
         "PY": "ପାରାଗୁଏ",
         "QA": "କତାର୍",
-        "QO": "ସୀମାନ୍ତବର୍ତ୍ତୀ ଓସେନିଆ",
+        "QO": "ସୀମାନ୍ତବର୍ତ୍ତୀ ଓସିନିଆ",
         "RE": "ରିୟୁନିଅନ୍",
         "RO": "ରୋମାନିଆ",
         "RS": "ସର୍ବିଆ",
@@ -868,14 +872,14 @@ public class LocalizedNamesImpl_or extends LocalizedNamesImpl {
         "TV": "ତୁଭାଲୁ",
         "TW": "ତାଇୱାନ",
         "TZ": "ତାଞ୍ଜାନିଆ",
-        "UA": "ୟୁକ୍ରେନ୍‌",
+        "UA": "ୟୁକ୍ରେନ୍",
         "UG": "ଉଗାଣ୍ଡା",
         "UM": "ଯୁକ୍ତରାଷ୍ଟ୍ର ଆଉଟ୍‌ଲାଇଙ୍ଗ ଦ୍ଵୀପପୁଞ୍ଜ",
         "UN": "ଜାତିସଂଘ",
         "US": "ଯୁକ୍ତ ରାଷ୍ଟ୍ର",
         "UY": "ଉରୁଗୁଏ",
         "UZ": "ଉଜବେକିସ୍ତାନ",
-        "VA": "ଭାଟିକାନ୍‌ ସିଟି",
+        "VA": "ଭାଟିକାନ୍ ସିଟି",
         "VC": "ସେଣ୍ଟ ଭିନସେଣ୍ଟ ଏବଂ ଦି ଗ୍ରେନାଡିସ୍",
         "VE": "ଭେନେଜୁଏଲା",
         "VG": "ବ୍ରିଟିଶ୍‌ ଭର୍ଜିନ୍ ଦ୍ୱୀପପୁଞ୍ଜ",

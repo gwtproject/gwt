@@ -149,7 +149,7 @@ public class DateTimeFormatInfoImpl_kl extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "sabaat",
+        "sapaat",
         "ataasinngorneq",
         "marlunngorneq",
         "pingasunngorneq",
@@ -175,7 +175,7 @@ public class DateTimeFormatInfoImpl_kl extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "sab",
+        "sap",
         "ata",
         "mar",
         "pin",

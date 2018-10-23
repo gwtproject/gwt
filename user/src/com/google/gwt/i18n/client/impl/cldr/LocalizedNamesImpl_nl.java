@@ -288,6 +288,8 @@ public class LocalizedNamesImpl_nl extends LocalizedNamesImpl {
         "VN",
         "WF",
         "EH",
+        "XA",
+        "XB",
         "ZM",
         "ZW",
         "ZA",
@@ -331,6 +333,7 @@ public class LocalizedNamesImpl_nl extends LocalizedNamesImpl {
     namesMap.put("151", "Oost-Europa");
     namesMap.put("154", "Noord-Europa");
     namesMap.put("155", "West-Europa");
+    namesMap.put("202", "Sub-Saharaans Afrika");
     namesMap.put("419", "Latijns-Amerika");
     namesMap.put("AC", "Ascension");
     namesMap.put("AE", "Verenigde Arabische Emiraten");
@@ -523,6 +526,7 @@ public class LocalizedNamesImpl_nl extends LocalizedNamesImpl {
         "151": "Oost-Europa",
         "154": "Noord-Europa",
         "155": "West-Europa",
+        "202": "Sub-Saharaans Afrika",
         "419": "Latijns-Amerika",
         "AC": "Ascension",
         "AE": "Verenigde Arabische Emiraten",

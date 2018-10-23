@@ -241,11 +241,11 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "SO",
         "ES",
         "LK",
+        "BL",
         "SH",
         "KN",
         "LC",
         "VC",
-        "BL",
         "MF",
         "GB",
         "IO",
@@ -287,6 +287,8 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "EH",
         "VN",
         "WF",
+        "XA",
+        "XB",
     };
   }
 
@@ -319,6 +321,7 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
     namesMap.put("151", "Eysturevropa");
     namesMap.put("154", "Norðurevropa");
     namesMap.put("155", "Vesturevropa");
+    namesMap.put("202", "Afrika sunnanfyri Sahara");
     namesMap.put("419", "Latínamerika");
     namesMap.put("AC", "Ascension");
     namesMap.put("AE", "Sameindu Emirríkini");
@@ -333,7 +336,6 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
     namesMap.put("BD", "Bangladesj");
     namesMap.put("BE", "Belgia");
     namesMap.put("BH", "Barein");
-    namesMap.put("BL", "St-Barthélemy");
     namesMap.put("BQ", "Niðurlonds Karibia");
     namesMap.put("BR", "Brasil");
     namesMap.put("BS", "Bahamaoyggjar");
@@ -366,7 +368,6 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
     namesMap.put("DK", "Danmark");
     namesMap.put("DM", "Dominika");
     namesMap.put("DO", "Dominikalýðveldið");
-    namesMap.put("EA", "Ceuta og Melilla");
     namesMap.put("EC", "Ekvador");
     namesMap.put("EE", "Estland");
     namesMap.put("EG", "Egyptaland");
@@ -441,7 +442,7 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
     namesMap.put("PG", "Papua Nýguinea");
     namesMap.put("PH", "Filipsoyggjar");
     namesMap.put("PL", "Pólland");
-    namesMap.put("PM", "Saint Pierre og Miquelon");
+    namesMap.put("PM", "Saint Pierre & Miquelon");
     namesMap.put("PN", "Pitcairnoyggjar");
     namesMap.put("PR", "Puerto Riko");
     namesMap.put("PS", "Palestinskt landøki");
@@ -525,6 +526,7 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "151": "Eysturevropa",
         "154": "Norðurevropa",
         "155": "Vesturevropa",
+        "202": "Afrika sunnanfyri Sahara",
         "419": "Latínamerika",
         "AC": "Ascension",
         "AE": "Sameindu Emirríkini",
@@ -539,7 +541,6 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "BD": "Bangladesj",
         "BE": "Belgia",
         "BH": "Barein",
-        "BL": "St-Barthélemy",
         "BQ": "Niðurlonds Karibia",
         "BR": "Brasil",
         "BS": "Bahamaoyggjar",
@@ -572,7 +573,6 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "DK": "Danmark",
         "DM": "Dominika",
         "DO": "Dominikalýðveldið",
-        "EA": "Ceuta og Melilla",
         "EC": "Ekvador",
         "EE": "Estland",
         "EG": "Egyptaland",
@@ -647,7 +647,7 @@ public class LocalizedNamesImpl_fo extends LocalizedNamesImpl {
         "PG": "Papua Nýguinea",
         "PH": "Filipsoyggjar",
         "PL": "Pólland",
-        "PM": "Saint Pierre og Miquelon",
+        "PM": "Saint Pierre & Miquelon",
         "PN": "Pitcairnoyggjar",
         "PR": "Puerto Riko",
         "PS": "Palestinskt landøki",

@@ -282,6 +282,8 @@ public class LocalizedNamesImpl_lg extends LocalizedNamesImpl {
         "WF",
         "UY",
         "UZ",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "ID",

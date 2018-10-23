@@ -23,7 +23,7 @@ public class DateTimeFormatInfoImpl_nl_BE extends DateTimeFormatInfoImpl_nl {
 
   @Override
   public String dateFormatShort() {
-    return "d/MM/yy";
+    return "d/MM/y";
   }
 
   @Override

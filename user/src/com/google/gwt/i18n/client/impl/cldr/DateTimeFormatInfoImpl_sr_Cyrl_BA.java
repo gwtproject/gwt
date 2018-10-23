@@ -38,20 +38,20 @@ public class DateTimeFormatInfoImpl_sr_Cyrl_BA extends DateTimeFormatInfoImpl_sr
   }
 
   @Override
-  public String[] monthsShort() {
+  public String[] monthsShortStandalone() {
     return new String[] {
-        "јан.",
-        "феб.",
+        "јан",
+        "феб",
         "март",
-        "апр.",
+        "апр",
         "мај",
         "јун",
         "јул",
-        "авг.",
-        "септ.",
-        "окт.",
-        "нов.",
-        "дец."
+        "авг",
+        "септ",
+        "окт",
+        "нов",
+        "дец"
     };
   }
 
@@ -71,13 +71,13 @@ public class DateTimeFormatInfoImpl_sr_Cyrl_BA extends DateTimeFormatInfoImpl_sr
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "нед.",
-        "пон.",
-        "ут.",
-        "ср.",
-        "чет.",
-        "пет.",
-        "суб."
+        "нед",
+        "пон",
+        "ут",
+        "ср",
+        "чет",
+        "пет",
+        "суб"
     };
   }
 }

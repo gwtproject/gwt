@@ -27,11 +27,6 @@ public class DateTimeFormatInfoImpl_en_IE extends DateTimeFormatInfoImpl_en_150 
   }
 
   @Override
-  public int firstDayOfTheWeek() {
-    return 0;
-  }
-
-  @Override
   public String formatMonthNumDay() {
     return "d/M";
   }

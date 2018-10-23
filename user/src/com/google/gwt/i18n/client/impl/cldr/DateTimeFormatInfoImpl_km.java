@@ -250,6 +250,19 @@ public class DateTimeFormatInfoImpl_km extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] weekdaysFullStandalone() {
+    return new String[] {
+        "អាទិត្យ",
+        "ចន្ទ",
+        "អង្គារ",
+        "ពុធ",
+        "ព្រហស្បតិ៍",
+        "សុក្រ",
+        "សៅរ៍"
+    };
+  }
+
+  @Override
   public String[] weekdaysNarrow() {
     return new String[] {
         "អ",
@@ -266,10 +279,10 @@ public class DateTimeFormatInfoImpl_km extends DateTimeFormatInfoImpl {
   public String[] weekdaysShort() {
     return new String[] {
         "អាទិត្យ",
-        "ច័ន្ទ",
+        "ចន្ទ",
         "អង្គារ",
         "ពុធ",
-        "ព្រហស្បតិ៍",
+        "ព្រហ",
         "សុក្រ",
         "សៅរ៍"
     };

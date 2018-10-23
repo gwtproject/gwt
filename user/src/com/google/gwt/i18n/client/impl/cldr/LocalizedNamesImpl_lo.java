@@ -34,6 +34,8 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "GR",
         "GL",
         "GU",
@@ -160,7 +162,6 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "LK",
         "FK",
         "MH",
-        "MP",
         "FO",
         "CC",
         "SB",
@@ -227,8 +228,8 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "NP",
         "NL",
         "BJ",
-        "BZ",
         "BY",
+        "BZ",
         "BE",
         "BF",
         "BM",
@@ -288,6 +289,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "CK",
         "GS",
         "PN",
+        "MP",
         "UM",
         "KY",
         "TC",
@@ -329,6 +331,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
     namesMap.put("151", "ຢູໂຣບຕາເວັນອອກ");
     namesMap.put("154", "ຢູໂຣບເໜືອ");
     namesMap.put("155", "ຢູໂຣບຕາເວັນຕົກ");
+    namesMap.put("202", "ຊັບ ຊາຮາຣານ ອາຟຣິກາ");
     namesMap.put("419", "ລາຕິນ ອາເມລິກາ");
     namesMap.put("AC", "ເກາະອາເຊນຊັນ");
     namesMap.put("AD", "ອັນດໍຣາ");
@@ -366,7 +369,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
     namesMap.put("BT", "ພູຖານ");
     namesMap.put("BV", "ເກາະບູເວດ");
     namesMap.put("BW", "ບອດສະວານາ");
-    namesMap.put("BY", "ເບວບາຣຸສ");
+    namesMap.put("BY", "ເບລາຣຸສ");
     namesMap.put("BZ", "ເບລີຊ");
     namesMap.put("CA", "ແຄນາດາ");
     namesMap.put("CC", "ຫມູ່ເກາະໂກໂກສ");
@@ -485,7 +488,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
     namesMap.put("MM", "ມຽນມາ (ເບີມາ)");
     namesMap.put("MN", "ມອງໂກເລຍ");
     namesMap.put("MO", "ມາກາວ ເຂດປົກຄອງພິເສດ ຈີນ");
-    namesMap.put("MP", "ຫມູ່ເກາະມາແຊວຕອນເຫນືອ");
+    namesMap.put("MP", "ໝູ່ເກາະມາເຣຍນາຕອນເໜືອ");
     namesMap.put("MQ", "ມາຕິນີກ");
     namesMap.put("MR", "ມົວຣິເທເນຍ");
     namesMap.put("MS", "ມອນເຊີຣາດ");
@@ -629,6 +632,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "151": "ຢູໂຣບຕາເວັນອອກ",
         "154": "ຢູໂຣບເໜືອ",
         "155": "ຢູໂຣບຕາເວັນຕົກ",
+        "202": "ຊັບ ຊາຮາຣານ ອາຟຣິກາ",
         "419": "ລາຕິນ ອາເມລິກາ",
         "AC": "ເກາະອາເຊນຊັນ",
         "AD": "ອັນດໍຣາ",
@@ -666,7 +670,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "BT": "ພູຖານ",
         "BV": "ເກາະບູເວດ",
         "BW": "ບອດສະວານາ",
-        "BY": "ເບວບາຣຸສ",
+        "BY": "ເບລາຣຸສ",
         "BZ": "ເບລີຊ",
         "CA": "ແຄນາດາ",
         "CC": "ຫມູ່ເກາະໂກໂກສ",
@@ -785,7 +789,7 @@ public class LocalizedNamesImpl_lo extends LocalizedNamesImpl {
         "MM": "ມຽນມາ (ເບີມາ)",
         "MN": "ມອງໂກເລຍ",
         "MO": "ມາກາວ ເຂດປົກຄອງພິເສດ ຈີນ",
-        "MP": "ຫມູ່ເກາະມາແຊວຕອນເຫນືອ",
+        "MP": "ໝູ່ເກາະມາເຣຍນາຕອນເໜືອ",
         "MQ": "ມາຕິນີກ",
         "MR": "ມົວຣິເທເນຍ",
         "MS": "ມອນເຊີຣາດ",

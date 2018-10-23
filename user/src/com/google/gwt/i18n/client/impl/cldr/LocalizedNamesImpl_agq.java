@@ -276,6 +276,8 @@ public class LocalizedNamesImpl_agq extends LocalizedNamesImpl {
         "VN",
         "VE",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "UG",
         "UA",

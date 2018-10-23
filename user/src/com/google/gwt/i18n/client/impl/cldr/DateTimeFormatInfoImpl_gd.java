@@ -92,7 +92,7 @@ public class DateTimeFormatInfoImpl_gd extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrev() {
-    return "MMM y";
+    return "LLL Y";
   }
 
   @Override
@@ -112,12 +112,12 @@ public class DateTimeFormatInfoImpl_gd extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "M/y";
+    return "L/y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "M/d/y";
+    return "d/M/y";
   }
 
   @Override

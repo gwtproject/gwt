@@ -22,11 +22,6 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_ar_MA extends DateTimeFormatInfoImpl_ar_001 {
 
   @Override
-  public int firstDayOfTheWeek() {
-    return 6;
-  }
-
-  @Override
   public String[] monthsFull() {
     return new String[] {
         "يناير",
@@ -98,15 +93,5 @@ public class DateTimeFormatInfoImpl_ar_MA extends DateTimeFormatInfoImpl_ar_001 
   @Override
   public String timeFormatShort() {
     return "HH:mm";
-  }
-
-  @Override
-  public int weekendEnd() {
-    return 6;
-  }
-
-  @Override
-  public int weekendStart() {
-    return 5;
   }
 }

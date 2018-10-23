@@ -88,6 +88,8 @@ public class LocalizedNamesImpl_yi extends LocalizedNamesImpl {
         "VG",
         "VI",
         "WF",
+        "XA",
+        "XB",
         "AL",
         "AO",
         "AD",

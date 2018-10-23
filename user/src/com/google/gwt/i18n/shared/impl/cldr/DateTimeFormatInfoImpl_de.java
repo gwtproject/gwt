@@ -22,14 +22,6 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_de extends DateTimeFormatInfoImpl {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "vorm.",
-        "nachm."
-    };
-  }
-
-  @Override
   public String dateFormatFull() {
     return "EEEE, d. MMMM y";
   }
@@ -179,7 +171,7 @@ public class DateTimeFormatInfoImpl_de extends DateTimeFormatInfoImpl {
         "Juni",
         "Juli",
         "Aug.",
-        "Sep.",
+        "Sept.",
         "Okt.",
         "Nov.",
         "Dez."

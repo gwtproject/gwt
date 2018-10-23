@@ -34,6 +34,8 @@ public class LocalizedNamesImpl_th extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "GR",
         "GL",
         "GU",
@@ -253,8 +255,8 @@ public class LocalizedNamesImpl_th extends LocalizedNamesImpl {
         "FK",
         "FO",
         "MH",
-        "VI",
         "UM",
+        "VI",
         "AX",
         "AS",
         "AU",
@@ -329,6 +331,7 @@ public class LocalizedNamesImpl_th extends LocalizedNamesImpl {
     namesMap.put("151", "ยุโรปตะวันออก");
     namesMap.put("154", "ยุโรปเหนือ");
     namesMap.put("155", "ยุโรปตะวันตก");
+    namesMap.put("202", "แอฟริกาใต้สะฮารา");
     namesMap.put("419", "ละตินอเมริกา");
     namesMap.put("AC", "เกาะแอสเซนชัน");
     namesMap.put("AD", "อันดอร์รา");
@@ -579,7 +582,7 @@ public class LocalizedNamesImpl_th extends LocalizedNamesImpl {
     namesMap.put("VC", "เซนต์วินเซนต์และเกรนาดีนส์");
     namesMap.put("VE", "เวเนซุเอลา");
     namesMap.put("VG", "หมู่เกาะบริติชเวอร์จิน");
-    namesMap.put("VI", "หมู่เกาะยูเอสเวอร์จิน");
+    namesMap.put("VI", "หมู่เกาะเวอร์จินของสหรัฐอเมริกา");
     namesMap.put("VN", "เวียดนาม");
     namesMap.put("VU", "วานูอาตู");
     namesMap.put("WF", "วาลลิสและฟุตูนา");
@@ -629,6 +632,7 @@ public class LocalizedNamesImpl_th extends LocalizedNamesImpl {
         "151": "ยุโรปตะวันออก",
         "154": "ยุโรปเหนือ",
         "155": "ยุโรปตะวันตก",
+        "202": "แอฟริกาใต้สะฮารา",
         "419": "ละตินอเมริกา",
         "AC": "เกาะแอสเซนชัน",
         "AD": "อันดอร์รา",
@@ -879,7 +883,7 @@ public class LocalizedNamesImpl_th extends LocalizedNamesImpl {
         "VC": "เซนต์วินเซนต์และเกรนาดีนส์",
         "VE": "เวเนซุเอลา",
         "VG": "หมู่เกาะบริติชเวอร์จิน",
-        "VI": "หมู่เกาะยูเอสเวอร์จิน",
+        "VI": "หมู่เกาะเวอร์จินของสหรัฐอเมริกา",
         "VN": "เวียดนาม",
         "VU": "วานูอาตู",
         "WF": "วาลลิสและฟุตูนา",

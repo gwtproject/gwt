@@ -289,6 +289,8 @@ public class LocalizedNamesImpl_fi extends LocalizedNamesImpl {
         "RU",
         "VN",
         "EE",
+        "XA",
+        "XB",
         "UN",
         "US",
         "UM",
@@ -327,6 +329,7 @@ public class LocalizedNamesImpl_fi extends LocalizedNamesImpl {
     namesMap.put("151", "Itä-Eurooppa");
     namesMap.put("154", "Pohjois-Eurooppa");
     namesMap.put("155", "Länsi-Eurooppa");
+    namesMap.put("202", "Saharan eteläpuolinen Afrikka");
     namesMap.put("419", "Latinalainen Amerikka");
     namesMap.put("AC", "Ascension-saari");
     namesMap.put("AE", "Arabiemiirikunnat");
@@ -509,6 +512,7 @@ public class LocalizedNamesImpl_fi extends LocalizedNamesImpl {
         "151": "Itä-Eurooppa",
         "154": "Pohjois-Eurooppa",
         "155": "Länsi-Eurooppa",
+        "202": "Saharan eteläpuolinen Afrikka",
         "419": "Latinalainen Amerikka",
         "AC": "Ascension-saari",
         "AE": "Arabiemiirikunnat",

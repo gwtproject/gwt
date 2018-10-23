@@ -30,6 +30,8 @@ public class LocalizedNamesImpl_ti extends LocalizedNamesImpl {
         "EU",
         "EZ",
         "UN",
+        "XA",
+        "XB",
         "HU",
         "HT",
         "IN",

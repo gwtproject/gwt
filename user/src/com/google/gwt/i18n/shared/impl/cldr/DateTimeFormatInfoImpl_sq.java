@@ -24,8 +24,8 @@ public class DateTimeFormatInfoImpl_sq extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "e paradites",
-        "e pasdites"
+        "p.d.",
+        "m.d."
     };
   }
 
@@ -169,24 +169,6 @@ public class DateTimeFormatInfoImpl_sq extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] monthsFullStandalone() {
-    return new String[] {
-        "Janar",
-        "Shkurt",
-        "Mars",
-        "Prill",
-        "Maj",
-        "Qershor",
-        "Korrik",
-        "Gusht",
-        "Shtator",
-        "Tetor",
-        "Nëntor",
-        "Dhjetor"
-    };
-  }
-
-  @Override
   public String[] monthsNarrow() {
     return new String[] {
         "j",
@@ -205,24 +187,6 @@ public class DateTimeFormatInfoImpl_sq extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] monthsNarrowStandalone() {
-    return new String[] {
-        "J",
-        "Sh",
-        "M",
-        "P",
-        "M",
-        "Q",
-        "K",
-        "G",
-        "Sh",
-        "T",
-        "N",
-        "Dh"
-    };
-  }
-
-  @Override
   public String[] monthsShort() {
     return new String[] {
         "jan",
@@ -237,24 +201,6 @@ public class DateTimeFormatInfoImpl_sq extends DateTimeFormatInfoImpl {
         "tet",
         "nën",
         "dhj"
-    };
-  }
-
-  @Override
-  public String[] monthsShortStandalone() {
-    return new String[] {
-        "Jan",
-        "Shk",
-        "Mar",
-        "Pri",
-        "Maj",
-        "Qer",
-        "Korr",
-        "Gush",
-        "Sht",
-        "Tet",
-        "Nën",
-        "Dhj"
     };
   }
 
@@ -312,28 +258,15 @@ public class DateTimeFormatInfoImpl_sq extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] weekdaysFullStandalone() {
-    return new String[] {
-        "E diel",
-        "E hënë",
-        "E martë",
-        "E mërkurë",
-        "E enjte",
-        "E premte",
-        "E shtunë"
-    };
-  }
-
-  @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "D",
-        "H",
-        "M",
-        "M",
-        "E",
-        "P",
-        "Sh"
+        "d",
+        "h",
+        "m",
+        "m",
+        "e",
+        "p",
+        "sh"
     };
   }
 
@@ -347,6 +280,19 @@ public class DateTimeFormatInfoImpl_sq extends DateTimeFormatInfoImpl {
         "Enj",
         "Pre",
         "Sht"
+    };
+  }
+
+  @Override
+  public String[] weekdaysShortStandalone() {
+    return new String[] {
+        "die",
+        "hën",
+        "mar",
+        "mër",
+        "enj",
+        "pre",
+        "sht"
     };
   }
 }

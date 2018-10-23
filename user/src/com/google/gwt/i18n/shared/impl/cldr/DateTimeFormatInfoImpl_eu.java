@@ -32,6 +32,11 @@ public class DateTimeFormatInfoImpl_eu extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String dateFormatMedium() {
+    return "y('e')'ko' MMM d('a')";
+  }
+
+  @Override
   public String dateFormatShort() {
     return "yy/M/d";
   }
@@ -102,24 +107,6 @@ public class DateTimeFormatInfoImpl_eu extends DateTimeFormatInfoImpl {
         "urria",
         "azaroa",
         "abendua"
-    };
-  }
-
-  @Override
-  public String[] monthsFullStandalone() {
-    return new String[] {
-        "urtarrila",
-        "Otsaila",
-        "Martxoa",
-        "Apirila",
-        "Maiatza",
-        "Ekaina",
-        "Uztaila",
-        "Abuztua",
-        "Iraila",
-        "Urria",
-        "Azaroa",
-        "Abendua"
     };
   }
 
@@ -199,19 +186,6 @@ public class DateTimeFormatInfoImpl_eu extends DateTimeFormatInfoImpl {
         "osteguna",
         "ostirala",
         "larunbata"
-    };
-  }
-
-  @Override
-  public String[] weekdaysFullStandalone() {
-    return new String[] {
-        "Igandea",
-        "Astelehena",
-        "Asteartea",
-        "Asteazkena",
-        "Osteguna",
-        "Ostirala",
-        "Larunbata"
     };
   }
 

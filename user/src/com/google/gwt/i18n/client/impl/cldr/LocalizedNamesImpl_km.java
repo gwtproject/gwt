@@ -34,6 +34,8 @@ public class LocalizedNamesImpl_km extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "KH",
         "CA",
         "QA",
@@ -329,6 +331,7 @@ public class LocalizedNamesImpl_km extends LocalizedNamesImpl {
     namesMap.put("151", "អឺរ៉ុប​ខាង​កើត");
     namesMap.put("154", "អឺរ៉ុប​ខាង​ជើង");
     namesMap.put("155", "អឺរ៉ុប​ខាង​លិច");
+    namesMap.put("202", "អនុតំបន់សាហារ៉ាអាហ្វ្រិក");
     namesMap.put("419", "អាមេរិក​ឡាទីន");
     namesMap.put("AC", "កោះ​អាសេនសិន");
     namesMap.put("AD", "អង់ដូរ៉ា");
@@ -629,6 +632,7 @@ public class LocalizedNamesImpl_km extends LocalizedNamesImpl {
         "151": "អឺរ៉ុប​ខាង​កើត",
         "154": "អឺរ៉ុប​ខាង​ជើង",
         "155": "អឺរ៉ុប​ខាង​លិច",
+        "202": "អនុតំបន់សាហារ៉ាអាហ្វ្រិក",
         "419": "អាមេរិក​ឡាទីន",
         "AC": "កោះ​អាសេនសិន",
         "AD": "អង់ដូរ៉ា",

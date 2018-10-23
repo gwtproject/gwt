@@ -49,6 +49,8 @@ public class LocalizedNamesImpl_ks extends LocalizedNamesImpl {
         "SX",
         "TA",
         "UN",
+        "XA",
+        "XB",
         "XK",
         "AZ",
         "AU",

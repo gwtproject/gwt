@@ -38,20 +38,20 @@ public class DateTimeFormatInfoImpl_sr_Latn_BA extends DateTimeFormatInfoImpl_sr
   }
 
   @Override
-  public String[] monthsShort() {
+  public String[] monthsShortStandalone() {
     return new String[] {
-        "jan.",
-        "feb.",
+        "jan",
+        "feb",
         "mart",
-        "apr.",
+        "apr",
         "maj",
         "jun",
         "jul",
-        "avg.",
-        "sept.",
-        "okt.",
-        "nov.",
-        "dec."
+        "avg",
+        "sept",
+        "okt",
+        "nov",
+        "dec"
     };
   }
 
@@ -71,13 +71,13 @@ public class DateTimeFormatInfoImpl_sr_Latn_BA extends DateTimeFormatInfoImpl_sr
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "ned.",
-        "pon.",
-        "ut.",
-        "sr.",
-        "čet.",
-        "pet.",
-        "sub."
+        "ned",
+        "pon",
+        "ut",
+        "sr",
+        "čet",
+        "pet",
+        "sub"
     };
   }
 }

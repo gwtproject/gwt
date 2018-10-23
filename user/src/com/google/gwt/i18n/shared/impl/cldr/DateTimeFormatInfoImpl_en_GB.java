@@ -20,17 +20,4 @@ package com.google.gwt.i18n.shared.impl.cldr;
  * Implementation of DateTimeFormatInfo for the "en_GB" locale.
  */
 public class DateTimeFormatInfoImpl_en_GB extends DateTimeFormatInfoImpl_en_150 {
-
-  @Override
-  public String[] ampms() {
-    return new String[] {
-        "am",
-        "pm"
-    };
-  }
-
-  @Override
-  public String formatMonthFullWeekdayDay() {
-    return "EEEE d MMMM";
-  }
 }

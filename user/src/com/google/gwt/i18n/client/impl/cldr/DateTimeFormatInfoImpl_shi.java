@@ -66,11 +66,6 @@ public class DateTimeFormatInfoImpl_shi extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public int firstDayOfTheWeek() {
-    return 6;
-  }
-
-  @Override
   public String formatMinuteSecond() {
     return "m:ss";
   }
@@ -248,15 +243,5 @@ public class DateTimeFormatInfoImpl_shi extends DateTimeFormatInfoImpl {
         "ⴰⵙⵉⵎ",
         "ⴰⵙⵉⴹ"
     };
-  }
-
-  @Override
-  public int weekendEnd() {
-    return 6;
-  }
-
-  @Override
-  public int weekendStart() {
-    return 5;
   }
 }

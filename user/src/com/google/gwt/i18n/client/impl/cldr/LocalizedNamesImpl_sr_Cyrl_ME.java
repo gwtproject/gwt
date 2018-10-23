@@ -27,6 +27,8 @@ public class LocalizedNamesImpl_sr_Cyrl_ME extends LocalizedNamesImpl_sr {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "AF",
         "AZ",
         "AL",

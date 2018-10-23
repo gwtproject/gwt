@@ -269,6 +269,8 @@ public class LocalizedNamesImpl_mfe extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "JM",

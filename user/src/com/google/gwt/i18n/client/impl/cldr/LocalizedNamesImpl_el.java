@@ -34,6 +34,8 @@ public class LocalizedNamesImpl_el extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "SH",
         "LC",
         "BL",
@@ -88,6 +90,7 @@ public class LocalizedNamesImpl_el extends LocalizedNamesImpl {
         "GG",
         "GU",
         "GP",
+        "WF",
         "GT",
         "GY",
         "GN",
@@ -226,7 +229,6 @@ public class LocalizedNamesImpl_el extends LocalizedNamesImpl {
         "BQ",
         "OM",
         "HN",
-        "WF",
         "HU",
         "UG",
         "UZ",
@@ -329,6 +331,7 @@ public class LocalizedNamesImpl_el extends LocalizedNamesImpl {
     namesMap.put("151", "Ανατολική Ευρώπη");
     namesMap.put("154", "Βόρεια Ευρώπη");
     namesMap.put("155", "Δυτική Ευρώπη");
+    namesMap.put("202", "Υποσαχάρια Αφρική");
     namesMap.put("419", "Λατινική Αμερική");
     namesMap.put("AC", "Νήσος Ασενσιόν");
     namesMap.put("AD", "Ανδόρα");
@@ -554,7 +557,7 @@ public class LocalizedNamesImpl_el extends LocalizedNamesImpl {
     namesMap.put("TA", "Τριστάν ντα Κούνια");
     namesMap.put("TC", "Νήσοι Τερκς και Κάικος");
     namesMap.put("TD", "Τσαντ");
-    namesMap.put("TF", "Γαλλικές περιοχές του νοτίου ημισφαιρίου");
+    namesMap.put("TF", "Γαλλικά Νότια Εδάφη");
     namesMap.put("TG", "Τόγκο");
     namesMap.put("TH", "Ταϊλάνδη");
     namesMap.put("TJ", "Τατζικιστάν");
@@ -582,7 +585,7 @@ public class LocalizedNamesImpl_el extends LocalizedNamesImpl {
     namesMap.put("VI", "Αμερικανικές Παρθένες Νήσοι");
     namesMap.put("VN", "Βιετνάμ");
     namesMap.put("VU", "Βανουάτου");
-    namesMap.put("WF", "Ουάλις και Φουτούνα");
+    namesMap.put("WF", "Γουάλις και Φουτούνα");
     namesMap.put("WS", "Σαμόα");
     namesMap.put("XK", "Κοσσυφοπέδιο");
     namesMap.put("YE", "Υεμένη");
@@ -629,6 +632,7 @@ public class LocalizedNamesImpl_el extends LocalizedNamesImpl {
         "151": "Ανατολική Ευρώπη",
         "154": "Βόρεια Ευρώπη",
         "155": "Δυτική Ευρώπη",
+        "202": "Υποσαχάρια Αφρική",
         "419": "Λατινική Αμερική",
         "AC": "Νήσος Ασενσιόν",
         "AD": "Ανδόρα",
@@ -854,7 +858,7 @@ public class LocalizedNamesImpl_el extends LocalizedNamesImpl {
         "TA": "Τριστάν ντα Κούνια",
         "TC": "Νήσοι Τερκς και Κάικος",
         "TD": "Τσαντ",
-        "TF": "Γαλλικές περιοχές του νοτίου ημισφαιρίου",
+        "TF": "Γαλλικά Νότια Εδάφη",
         "TG": "Τόγκο",
         "TH": "Ταϊλάνδη",
         "TJ": "Τατζικιστάν",
@@ -882,7 +886,7 @@ public class LocalizedNamesImpl_el extends LocalizedNamesImpl {
         "VI": "Αμερικανικές Παρθένες Νήσοι",
         "VN": "Βιετνάμ",
         "VU": "Βανουάτου",
-        "WF": "Ουάλις και Φουτούνα",
+        "WF": "Γουάλις και Φουτούνα",
         "WS": "Σαμόα",
         "XK": "Κοσσυφοπέδιο",
         "YE": "Υεμένη",

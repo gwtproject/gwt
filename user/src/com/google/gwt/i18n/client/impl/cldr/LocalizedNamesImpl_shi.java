@@ -62,6 +62,8 @@ public class LocalizedNamesImpl_shi extends LocalizedNamesImpl {
         "TF",
         "UM",
         "UN",
+        "XA",
+        "XB",
         "XK",
         "PS",
         "AZ",

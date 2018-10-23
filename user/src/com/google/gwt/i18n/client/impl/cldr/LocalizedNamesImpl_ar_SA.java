@@ -27,6 +27,8 @@ public class LocalizedNamesImpl_ar_SA extends LocalizedNamesImpl_ar {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "ET",
         "AZ",
         "AM",
@@ -298,7 +300,6 @@ public class LocalizedNamesImpl_ar_SA extends LocalizedNamesImpl_ar {
     namesMap.put("EA", "سبتة ومليلية");
     namesMap.put("MO", "ماكاو الصينية (منطقة إدارية خاصة)");
     namesMap.put("MS", "مونتيسيرات");
-    namesMap.put("PM", "سان بيير وميكولون");
     namesMap.put("UY", "أوروغواي");
   }
 
@@ -314,7 +315,6 @@ public class LocalizedNamesImpl_ar_SA extends LocalizedNamesImpl_ar {
         "EA": "سبتة ومليلية",
         "MO": "ماكاو الصينية (منطقة إدارية خاصة)",
         "MS": "مونتيسيرات",
-        "PM": "سان بيير وميكولون",
         "UY": "أوروغواي"
     };
   }-*/;

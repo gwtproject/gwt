@@ -106,6 +106,7 @@ public class LocalizedNamesImpl_to extends LocalizedNamesImpl {
         "MR",
         "MU",
         "MX",
+        "MM",
         "FM",
         "MA",
         "MD",
@@ -145,7 +146,6 @@ public class LocalizedNamesImpl_to extends LocalizedNamesImpl {
         "BE",
         "BZ",
         "PE",
-        "MM",
         "BM",
         "BD",
         "BJ",
@@ -230,6 +230,8 @@ public class LocalizedNamesImpl_to extends LocalizedNamesImpl {
         "VU",
         "VE",
         "VN",
+        "XA",
+        "XB",
         "IE",
         "AF",
         "ZA",
@@ -474,7 +476,7 @@ public class LocalizedNamesImpl_to extends LocalizedNamesImpl {
     namesMap.put("MH", "ʻOtumotu Māsolo");
     namesMap.put("MK", "Masetōnia");
     namesMap.put("ML", "Māli");
-    namesMap.put("MM", "Pema");
+    namesMap.put("MM", "Mianimā (Pema)");
     namesMap.put("MN", "Mongokōlia");
     namesMap.put("MO", "Makau SAR Siaina");
     namesMap.put("MP", "ʻOtumotu Maliana tokelau");
@@ -769,7 +771,7 @@ public class LocalizedNamesImpl_to extends LocalizedNamesImpl {
         "MH": "ʻOtumotu Māsolo",
         "MK": "Masetōnia",
         "ML": "Māli",
-        "MM": "Pema",
+        "MM": "Mianimā (Pema)",
         "MN": "Mongokōlia",
         "MO": "Makau SAR Siaina",
         "MP": "ʻOtumotu Maliana tokelau",

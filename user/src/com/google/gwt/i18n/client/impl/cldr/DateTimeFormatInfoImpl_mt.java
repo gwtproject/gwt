@@ -94,7 +94,7 @@ public class DateTimeFormatInfoImpl_mt extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d/M/y";
+    return "M/d/y";
   }
 
   @Override

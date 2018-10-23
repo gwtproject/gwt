@@ -243,6 +243,8 @@ public class LocalizedNamesImpl_cy extends LocalizedNamesImpl {
         "VE",
         "WF",
         "UA",
+        "XA",
+        "XB",
         "BS",
         "UN",
         "CG",
@@ -318,6 +320,7 @@ public class LocalizedNamesImpl_cy extends LocalizedNamesImpl {
     namesMap.put("151", "Dwyrain Ewrop");
     namesMap.put("154", "Gogledd Ewrop");
     namesMap.put("155", "Gorllewin Ewrop");
+    namesMap.put("202", "Affrica Is-Sahara");
     namesMap.put("419", "America Ladin");
     namesMap.put("AC", "Ynys Ascension");
     namesMap.put("AE", "Emiradau Arabaidd Unedig");
@@ -327,7 +330,6 @@ public class LocalizedNamesImpl_cy extends LocalizedNamesImpl {
     namesMap.put("AT", "Awstria");
     namesMap.put("AU", "Awstralia");
     namesMap.put("AX", "Ynysoedd Åland");
-    namesMap.put("BA", "Bosnia a Herzegovina");
     namesMap.put("BE", "Gwlad Belg");
     namesMap.put("BG", "Bwlgaria");
     namesMap.put("BL", "Saint Barthélemy");
@@ -372,7 +374,7 @@ public class LocalizedNamesImpl_cy extends LocalizedNamesImpl {
     namesMap.put("GR", "Gwlad Groeg");
     namesMap.put("GS", "De Georgia ac Ynysoedd Sandwich y De");
     namesMap.put("GW", "Guiné-Bissau");
-    namesMap.put("HK", "Hong Kong RhGA Tsieina");
+    namesMap.put("HK", "Hong Kong SAR Tseina");
     namesMap.put("HM", "Ynys Heard ac Ynysoedd McDonald");
     namesMap.put("HU", "Hwngari");
     namesMap.put("IC", "Yr Ynysoedd Dedwydd");
@@ -478,6 +480,7 @@ public class LocalizedNamesImpl_cy extends LocalizedNamesImpl {
         "151": "Dwyrain Ewrop",
         "154": "Gogledd Ewrop",
         "155": "Gorllewin Ewrop",
+        "202": "Affrica Is-Sahara",
         "419": "America Ladin",
         "AC": "Ynys Ascension",
         "AE": "Emiradau Arabaidd Unedig",
@@ -487,7 +490,6 @@ public class LocalizedNamesImpl_cy extends LocalizedNamesImpl {
         "AT": "Awstria",
         "AU": "Awstralia",
         "AX": "Ynysoedd Åland",
-        "BA": "Bosnia a Herzegovina",
         "BE": "Gwlad Belg",
         "BG": "Bwlgaria",
         "BL": "Saint Barthélemy",
@@ -532,7 +534,7 @@ public class LocalizedNamesImpl_cy extends LocalizedNamesImpl {
         "GR": "Gwlad Groeg",
         "GS": "De Georgia ac Ynysoedd Sandwich y De",
         "GW": "Guiné-Bissau",
-        "HK": "Hong Kong RhGA Tsieina",
+        "HK": "Hong Kong SAR Tseina",
         "HM": "Ynys Heard ac Ynysoedd McDonald",
         "HU": "Hwngari",
         "IC": "Yr Ynysoedd Dedwydd",

@@ -261,6 +261,8 @@ public class LocalizedNamesImpl_ksf extends LocalizedNamesImpl {
         "VA",
         "VN",
         "VE",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "ZM",

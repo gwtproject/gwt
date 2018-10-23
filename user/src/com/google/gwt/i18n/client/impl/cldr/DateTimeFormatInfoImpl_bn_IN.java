@@ -22,11 +22,6 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_bn_IN extends DateTimeFormatInfoImpl_bn {
 
   @Override
-  public int firstDayOfTheWeek() {
-    return 0;
-  }
-
-  @Override
   public int weekendStart() {
     return 0;
   }

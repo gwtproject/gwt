@@ -270,6 +270,8 @@ public class LocalizedNamesImpl_os extends LocalizedNamesImpl {
         "VU",
         "WF",
         "WS",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "YT",

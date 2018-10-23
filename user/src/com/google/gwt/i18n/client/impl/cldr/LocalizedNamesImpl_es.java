@@ -93,6 +93,7 @@ public class LocalizedNamesImpl_es extends LocalizedNamesImpl {
         "VA",
         "CO",
         "KM",
+        "CG",
         "KP",
         "KR",
         "CR",
@@ -235,7 +236,6 @@ public class LocalizedNamesImpl_es extends LocalizedNamesImpl {
         "MO",
         "GB",
         "CF",
-        "CG",
         "CD",
         "DO",
         "RE",
@@ -298,6 +298,8 @@ public class LocalizedNamesImpl_es extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "YE",
         "DJ",
         "ZM",
@@ -335,6 +337,7 @@ public class LocalizedNamesImpl_es extends LocalizedNamesImpl {
     namesMap.put("151", "Europa oriental");
     namesMap.put("154", "Europa septentrional");
     namesMap.put("155", "Europa occidental");
+    namesMap.put("202", "África subsahariana");
     namesMap.put("419", "Latinoamérica");
     namesMap.put("AC", "Isla de la Ascensión");
     namesMap.put("AE", "Emiratos Árabes Unidos");
@@ -364,7 +367,7 @@ public class LocalizedNamesImpl_es extends LocalizedNamesImpl {
     namesMap.put("CC", "Islas Cocos");
     namesMap.put("CD", "República Democrática del Congo");
     namesMap.put("CF", "República Centroafricana");
-    namesMap.put("CG", "República del Congo");
+    namesMap.put("CG", "Congo");
     namesMap.put("CH", "Suiza");
     namesMap.put("CK", "Islas Cook");
     namesMap.put("CM", "Camerún");
@@ -544,6 +547,7 @@ public class LocalizedNamesImpl_es extends LocalizedNamesImpl {
         "151": "Europa oriental",
         "154": "Europa septentrional",
         "155": "Europa occidental",
+        "202": "África subsahariana",
         "419": "Latinoamérica",
         "AC": "Isla de la Ascensión",
         "AE": "Emiratos Árabes Unidos",
@@ -573,7 +577,7 @@ public class LocalizedNamesImpl_es extends LocalizedNamesImpl {
         "CC": "Islas Cocos",
         "CD": "República Democrática del Congo",
         "CF": "República Centroafricana",
-        "CG": "República del Congo",
+        "CG": "Congo",
         "CH": "Suiza",
         "CK": "Islas Cook",
         "CM": "Camerún",

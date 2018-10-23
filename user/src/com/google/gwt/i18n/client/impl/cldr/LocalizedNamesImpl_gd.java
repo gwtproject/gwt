@@ -224,7 +224,6 @@ public class LocalizedNamesImpl_gd extends LocalizedNamesImpl {
         "KN",
         "LC",
         "MF",
-        "PS",
         "US",
         "NL",
         "BQ",
@@ -284,9 +283,12 @@ public class LocalizedNamesImpl_gd extends LocalizedNamesImpl {
         "TM",
         "WF",
         "UG",
+        "PS",
         "UY",
         "UZ",
         "VU",
+        "XA",
+        "XB",
     };
   }
 
@@ -322,6 +324,7 @@ public class LocalizedNamesImpl_gd extends LocalizedNamesImpl {
     namesMap.put("151", "An Roinn-Eòrpa an Ear");
     namesMap.put("154", "An Roinn-Eòrpa a Tuath");
     namesMap.put("155", "An Roinn-Eòrpa an Iar");
+    namesMap.put("202", "Afraga Deas air an t-Sathara");
     namesMap.put("419", "Aimeireaga Laidinneach");
     namesMap.put("AC", "Eilean na Deasgabhalach");
     namesMap.put("AE", "Na h-Iomaratan Arabach Aonaichte");
@@ -498,7 +501,7 @@ public class LocalizedNamesImpl_gd extends LocalizedNamesImpl {
     namesMap.put("PM", "Saint Pierre agus Miquelon");
     namesMap.put("PN", "Eileanan Pheit a’ Chàirn");
     namesMap.put("PR", "Porto Rìceo");
-    namesMap.put("PS", "Na Ranntairean Palastaineach");
+    namesMap.put("PS", "Ùghdarras nam Palastaineach");
     namesMap.put("PT", "A’ Phortagail");
     namesMap.put("PW", "Palabh");
     namesMap.put("PY", "Paraguaidh");
@@ -597,6 +600,7 @@ public class LocalizedNamesImpl_gd extends LocalizedNamesImpl {
         "151": "An Roinn-Eòrpa an Ear",
         "154": "An Roinn-Eòrpa a Tuath",
         "155": "An Roinn-Eòrpa an Iar",
+        "202": "Afraga Deas air an t-Sathara",
         "419": "Aimeireaga Laidinneach",
         "AC": "Eilean na Deasgabhalach",
         "AE": "Na h-Iomaratan Arabach Aonaichte",
@@ -773,7 +777,7 @@ public class LocalizedNamesImpl_gd extends LocalizedNamesImpl {
         "PM": "Saint Pierre agus Miquelon",
         "PN": "Eileanan Pheit a’ Chàirn",
         "PR": "Porto Rìceo",
-        "PS": "Na Ranntairean Palastaineach",
+        "PS": "Ùghdarras nam Palastaineach",
         "PT": "A’ Phortagail",
         "PW": "Palabh",
         "PY": "Paraguaidh",

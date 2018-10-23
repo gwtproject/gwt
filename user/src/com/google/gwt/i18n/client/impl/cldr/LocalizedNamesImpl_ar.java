@@ -43,6 +43,8 @@ public class LocalizedNamesImpl_ar extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "ET",
         "AZ",
         "AM",
@@ -338,6 +340,7 @@ public class LocalizedNamesImpl_ar extends LocalizedNamesImpl {
     namesMap.put("151", "شرق أوروبا");
     namesMap.put("154", "شمال أوروبا");
     namesMap.put("155", "غرب أوروبا");
+    namesMap.put("202", "أفريقيا جنوب الصحراء الكبرى");
     namesMap.put("419", "أمريكا اللاتينية");
     namesMap.put("AC", "جزيرة أسينشيون");
     namesMap.put("AD", "أندورا");
@@ -568,7 +571,7 @@ public class LocalizedNamesImpl_ar extends LocalizedNamesImpl {
     namesMap.put("TH", "تايلاند");
     namesMap.put("TJ", "طاجيكستان");
     namesMap.put("TK", "توكيلو");
-    namesMap.put("TL", "تيمور- ليشتي");
+    namesMap.put("TL", "تيمور - ليشتي");
     namesMap.put("TM", "تركمانستان");
     namesMap.put("TN", "تونس");
     namesMap.put("TO", "تونغا");
@@ -638,6 +641,7 @@ public class LocalizedNamesImpl_ar extends LocalizedNamesImpl {
         "151": "شرق أوروبا",
         "154": "شمال أوروبا",
         "155": "غرب أوروبا",
+        "202": "أفريقيا جنوب الصحراء الكبرى",
         "419": "أمريكا اللاتينية",
         "AC": "جزيرة أسينشيون",
         "AD": "أندورا",
@@ -868,7 +872,7 @@ public class LocalizedNamesImpl_ar extends LocalizedNamesImpl {
         "TH": "تايلاند",
         "TJ": "طاجيكستان",
         "TK": "توكيلو",
-        "TL": "تيمور- ليشتي",
+        "TL": "تيمور - ليشتي",
         "TM": "تركمانستان",
         "TN": "تونس",
         "TO": "تونغا",

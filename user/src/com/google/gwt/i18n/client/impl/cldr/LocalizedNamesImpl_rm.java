@@ -286,6 +286,8 @@ public class LocalizedNamesImpl_rm extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "XK",
     };
   }

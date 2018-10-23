@@ -283,6 +283,8 @@ public class LocalizedNamesImpl_hsb extends LocalizedNamesImpl {
         "QO",
         "HK",
         "MO",
+        "XA",
+        "XB",
         "EH",
         "AE",
         "GB",

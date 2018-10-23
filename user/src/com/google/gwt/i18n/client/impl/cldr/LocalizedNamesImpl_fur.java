@@ -283,6 +283,8 @@ public class LocalizedNamesImpl_fur extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "ZM",

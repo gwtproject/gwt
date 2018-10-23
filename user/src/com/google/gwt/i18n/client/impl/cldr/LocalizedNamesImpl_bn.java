@@ -35,6 +35,8 @@ public class LocalizedNamesImpl_bn extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "AT",
         "AU",
         "AO",
@@ -222,6 +224,7 @@ public class LocalizedNamesImpl_bn extends LocalizedNamesImpl {
         "ME",
         "MR",
         "MU",
+        "MD",
         "FM",
         "MG",
         "MM",
@@ -240,7 +243,6 @@ public class LocalizedNamesImpl_bn extends LocalizedNamesImpl {
         "MZ",
         "MC",
         "MA",
-        "MD",
         "MO",
         "MK",
         "GB",
@@ -330,6 +332,7 @@ public class LocalizedNamesImpl_bn extends LocalizedNamesImpl {
     namesMap.put("151", "পূর্ব ইউরোপ");
     namesMap.put("154", "উত্তর ইউরোপ");
     namesMap.put("155", "পশ্চিম ইউরোপ");
+    namesMap.put("202", "উপ সাহারান আফ্রিকা");
     namesMap.put("419", "ল্যাটিন আমেরিকা");
     namesMap.put("AC", "অ্যাসসেনশন আইল্যান্ড");
     namesMap.put("AD", "আন্ডোরা");
@@ -476,7 +479,7 @@ public class LocalizedNamesImpl_bn extends LocalizedNamesImpl {
     namesMap.put("LY", "লিবিয়া");
     namesMap.put("MA", "মোরক্কো");
     namesMap.put("MC", "মোনাকো");
-    namesMap.put("MD", "মোল্দাভিয়া");
+    namesMap.put("MD", "মলডোভা");
     namesMap.put("ME", "মন্টিনিগ্রো");
     namesMap.put("MF", "সেন্ট মার্টিন");
     namesMap.put("MG", "মাদাগাস্কার");
@@ -630,6 +633,7 @@ public class LocalizedNamesImpl_bn extends LocalizedNamesImpl {
         "151": "পূর্ব ইউরোপ",
         "154": "উত্তর ইউরোপ",
         "155": "পশ্চিম ইউরোপ",
+        "202": "উপ সাহারান আফ্রিকা",
         "419": "ল্যাটিন আমেরিকা",
         "AC": "অ্যাসসেনশন আইল্যান্ড",
         "AD": "আন্ডোরা",
@@ -776,7 +780,7 @@ public class LocalizedNamesImpl_bn extends LocalizedNamesImpl {
         "LY": "লিবিয়া",
         "MA": "মোরক্কো",
         "MC": "মোনাকো",
-        "MD": "মোল্দাভিয়া",
+        "MD": "মলডোভা",
         "ME": "মন্টিনিগ্রো",
         "MF": "সেন্ট মার্টিন",
         "MG": "মাদাগাস্কার",

@@ -66,11 +66,6 @@ public class DateTimeFormatInfoImpl_tzm extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public int firstDayOfTheWeek() {
-    return 6;
-  }
-
-  @Override
   public String formatMonthFullWeekdayDay() {
     return "EEEE, MMMM d";
   }
@@ -236,15 +231,5 @@ public class DateTimeFormatInfoImpl_tzm extends DateTimeFormatInfoImpl {
         "Asm",
         "Asḍ"
     };
-  }
-
-  @Override
-  public int weekendEnd() {
-    return 6;
-  }
-
-  @Override
-  public int weekendStart() {
-    return 5;
   }
 }

@@ -30,11 +30,6 @@ public class DateTimeFormatInfoImpl_am extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String dateFormatFull() {
-    return "EEEE ፣d MMMM y";
-  }
-
-  @Override
   public String dateFormatLong() {
     return "d MMMM y";
   }

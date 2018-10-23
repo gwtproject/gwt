@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Google Inc.
+ * Copyright 2012 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,7 +14,6 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
 
 /**
@@ -39,165 +38,145 @@ public class DateTimeFormatInfoImpl_mi extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public int firstDayOfTheWeek() {
-    return 0;
+  public String formatHour12Minute() {
+    return "h:mm";
   }
 
   @Override
-  public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
-  }
-
-  @Override
-  public String formatMonthNumDay() {
-    return "M/d";
-  }
-
-  @Override
-  public String formatYearMonthAbbrev() {
-    return "MMM y";
-  }
-
-  @Override
-  public String formatYearMonthAbbrevDay() {
-    return "MMM d, y";
-  }
-
-  @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
-  }
-
-  @Override
-  public String formatYearMonthFullDay() {
-    return "MMMM d, y";
-  }
-
-  @Override
-  public String formatYearMonthNum() {
-    return "M/y";
-  }
-
-  @Override
-  public String formatYearMonthNumDay() {
-    return "M/d/y";
-  }
-
-  @Override
-  public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
-  }
-
-  @Override
-  public String formatYearQuarterFull() {
-    return "QQQQ y";
-  }
-
-  @Override
-  public String formatYearQuarterShort() {
-    return "Q y";
+  public String formatHour12MinuteSecond() {
+    return "h:mm:ss";
   }
 
   @Override
   public String[] monthsFull() {
     return new String[] {
-        "Hānuere",
-        "Pēpuere",
-        "Māehe",
-        "Āperira",
-        "Mei",
-        "Hune",
-        "Hūrae",
-        "Ākuhata",
-        "Hepetema",
-        "Oketopa",
-        "Noema",
-        "Tīhema"
+        "Kohitātea",
+        "Huitanguru",
+        "Poutūterangi",
+        "Paengawhāwhā",
+        "Haratua",
+        "Pipiri",
+        "Hōngongoi",
+        "Hereturikōkā",
+        "Mahuru",
+        "Whiringa-ā-nuku",
+        "Whiringa-ā-rangi",
+        "Hakihea"
     };
   }
 
   @Override
   public String[] monthsNarrow() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
+        "K",
+        "H",
+        "P",
+        "P",
+        "H",
+        "P",
+        "H",
+        "H",
+        "M",
+        "N",
+        "R",
+        "H"
     };
   }
 
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "Hānuere",
-        "Pēpuere",
-        "Māehe",
-        "Āperira",
-        "Mei",
-        "Hune",
-        "Hūrae",
-        "Ākuhata",
-        "Hepetema",
-        "Oketopa",
-        "Noema",
-        "Tīhema"
+        "Kohi",
+        "Hui",
+        "Pou",
+        "Pae",
+        "Hara",
+        "Pipi",
+        "Hōngo",
+        "Here",
+        "Mahu",
+        "Nuku",
+        "Rangi",
+        "Haki"
     };
   }
 
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Q1",
-        "Q2",
-        "Q3",
-        "Q4"
+        "Hauwhā tuatahi",
+        "Hauwhā tuarua",
+        "Hauwhā tuatoru",
+        "Hauwhā tuawhā"
     };
+  }
+
+  @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "HW1",
+        "HW2",
+        "HW3",
+        "HW4"
+    };
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "h:mm:ss a zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "h:mm:ss a z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "h:mm:ss";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "h:mm";
   }
 
   @Override
   public String[] weekdaysFull() {
     return new String[] {
         "Rātapu",
-        "Mane",
-        "Tūrei",
-        "Wenerei",
-        "Tāite",
-        "Paraire",
-        "Hātarei"
+        "Rāhina",
+        "Rātū",
+        "Rāapa",
+        "Rāpare",
+        "Rāmere",
+        "Rāhoroi"
     };
   }
 
   @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
+        "T",
+        "H",
+        "T",
+        "A",
+        "P",
+        "M",
+        "H"
     };
   }
 
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "Rātapu",
-        "Mane",
-        "Tūrei",
-        "Wenerei",
-        "Tāite",
-        "Paraire",
-        "Hātarei"
+        "Tap",
+        "Hin",
+        "Tū",
+        "Apa",
+        "Par",
+        "Mer",
+        "Hor"
     };
   }
 }

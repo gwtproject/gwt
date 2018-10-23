@@ -27,6 +27,8 @@ public class LocalizedNamesImpl_bn_IN extends LocalizedNamesImpl_bn {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "AT",
         "AU",
         "AO",
@@ -293,7 +295,6 @@ public class LocalizedNamesImpl_bn_IN extends LocalizedNamesImpl_bn {
   @Override
   protected void loadNameMapJava() {
     super.loadNameMapJava();
-    namesMap.put("MD", "মলডোভা");
     namesMap.put("UM", "মার্কিন যুক্তরাষ্ট্রের পার্শ্ববর্তী দ্বীপপুঞ্জ");
   }
 
@@ -304,7 +305,6 @@ public class LocalizedNamesImpl_bn_IN extends LocalizedNamesImpl_bn {
 
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
-        "MD": "মলডোভা",
         "UM": "মার্কিন যুক্তরাষ্ট্রের পার্শ্ববর্তী দ্বীপপুঞ্জ"
     };
   }-*/;

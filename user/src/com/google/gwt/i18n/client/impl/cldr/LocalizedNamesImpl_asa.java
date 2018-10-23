@@ -284,6 +284,8 @@ public class LocalizedNamesImpl_asa extends LocalizedNamesImpl {
         "VI",
         "VG",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "JO",

@@ -202,7 +202,7 @@ public class DateTimeFormatInfoImpl_kab extends DateTimeFormatInfoImpl {
         "Ctembeṛ",
         "Tubeṛ",
         "Wambeṛ",
-        "Dujembeṛ"
+        "Duǧembeṛ"
     };
   }
 

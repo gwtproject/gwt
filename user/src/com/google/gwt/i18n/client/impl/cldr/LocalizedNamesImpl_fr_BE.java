@@ -283,6 +283,8 @@ public class LocalizedNamesImpl_fr_BE extends LocalizedNamesImpl_fr {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "YE",
         "ZM",
         "ZW",

@@ -31,7 +31,7 @@ public class DateTimeFormatInfoImpl_af extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatFull() {
-    return "EEEE, dd MMMM y";
+    return "EEEE dd MMMM y";
   }
 
   @Override
@@ -117,7 +117,7 @@ public class DateTimeFormatInfoImpl_af extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, d MMM y";
+    return "EEE d MMM y";
   }
 
   @Override

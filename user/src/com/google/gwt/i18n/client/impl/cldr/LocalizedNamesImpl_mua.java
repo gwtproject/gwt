@@ -282,6 +282,8 @@ public class LocalizedNamesImpl_mua extends LocalizedNamesImpl {
         "UZ",
         "VA",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "ZM",

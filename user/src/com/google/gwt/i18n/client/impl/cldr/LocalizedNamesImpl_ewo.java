@@ -280,6 +280,8 @@ public class LocalizedNamesImpl_ewo extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "GI",

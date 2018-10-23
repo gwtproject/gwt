@@ -234,7 +234,6 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "RU",
         "RW",
         "EH",
-        "BL",
         "SH",
         "KN",
         "LC",
@@ -256,6 +255,7 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "SI",
         "SO",
         "LK",
+        "BL",
         "SD",
         "SS",
         "SR",
@@ -290,6 +290,8 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "IO",
         "PS",
         "TF",
+        "XA",
+        "XB",
         "YE",
         "ZM",
         "ZW",
@@ -324,6 +326,7 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
     namesMap.put("151", "Eropah Timur");
     namesMap.put("154", "Eropah Utara");
     namesMap.put("155", "Eropah Barat");
+    namesMap.put("202", "Afrika Sub-Sahara");
     namesMap.put("419", "Amerika Latin");
     namesMap.put("AC", "Pulau Ascension");
     namesMap.put("AE", "Emiriah Arab Bersatu");
@@ -332,7 +335,7 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
     namesMap.put("AS", "Samoa Amerika");
     namesMap.put("AX", "Kepulauan Aland");
     namesMap.put("BA", "Bosnia dan Herzegovina");
-    namesMap.put("BL", "Saint Barthélemy");
+    namesMap.put("BL", "St. Barthelemy");
     namesMap.put("BQ", "Belanda Caribbean");
     namesMap.put("BV", "Pulau Bouvet");
     namesMap.put("CA", "Kanada");
@@ -441,6 +444,7 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "151": "Eropah Timur",
         "154": "Eropah Utara",
         "155": "Eropah Barat",
+        "202": "Afrika Sub-Sahara",
         "419": "Amerika Latin",
         "AC": "Pulau Ascension",
         "AE": "Emiriah Arab Bersatu",
@@ -449,7 +453,7 @@ public class LocalizedNamesImpl_ms extends LocalizedNamesImpl {
         "AS": "Samoa Amerika",
         "AX": "Kepulauan Aland",
         "BA": "Bosnia dan Herzegovina",
-        "BL": "Saint Barthélemy",
+        "BL": "St. Barthelemy",
         "BQ": "Belanda Caribbean",
         "BV": "Pulau Bouvet",
         "CA": "Kanada",

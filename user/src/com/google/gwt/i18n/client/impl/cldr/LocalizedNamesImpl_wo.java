@@ -293,6 +293,8 @@ public class LocalizedNamesImpl_wo extends LocalizedNamesImpl {
         "VU",
         "VE",
         "VN",
+        "XA",
+        "XB",
         "YE",
     };
   }

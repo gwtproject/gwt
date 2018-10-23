@@ -260,6 +260,8 @@ public class LocalizedNamesImpl_sah extends LocalizedNamesImpl {
         "VU",
         "WF",
         "WS",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "YT",

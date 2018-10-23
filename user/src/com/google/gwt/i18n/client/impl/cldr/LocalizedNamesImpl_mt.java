@@ -37,7 +37,6 @@ public class LocalizedNamesImpl_mt extends LocalizedNamesImpl {
         "CV",
         "EA",
         "CY",
-        "CN",
         "KM",
         "CW",
         "DG",
@@ -61,6 +60,7 @@ public class LocalizedNamesImpl_mt extends LocalizedNamesImpl {
         "NF",
         "TD",
         "CL",
+        "CN",
         "DK",
         "BS",
         "BH",
@@ -124,6 +124,7 @@ public class LocalizedNamesImpl_mt extends LocalizedNamesImpl {
         "CG",
         "KP",
         "KR",
+        "XK",
         "CI",
         "HR",
         "KW",
@@ -206,7 +207,6 @@ public class LocalizedNamesImpl_mt extends LocalizedNamesImpl {
         "ZW",
         "JE",
         "KI",
-        "XK",
         "CU",
         "AF",
         "ZA",
@@ -237,6 +237,7 @@ public class LocalizedNamesImpl_mt extends LocalizedNamesImpl {
         "IT",
         "IS",
         "SE",
+        "CH",
         "OM",
         "UG",
         "UA",
@@ -286,7 +287,8 @@ public class LocalizedNamesImpl_mt extends LocalizedNamesImpl {
         "EU",
         "VU",
         "WF",
-        "CH",
+        "XA",
+        "XB",
     };
   }
 
@@ -360,11 +362,12 @@ public class LocalizedNamesImpl_mt extends LocalizedNamesImpl {
     namesMap.put("CD", "ir-Repubblika Demokratika tal-Kongo");
     namesMap.put("CF", "ir-Repubblika Ċentru-Afrikana");
     namesMap.put("CG", "il-Kongo - Brazzaville");
-    namesMap.put("CH", "Żvizzera");
+    namesMap.put("CH", "l-Iżvizzera");
     namesMap.put("CI", "il-Kosta tal-Avorju");
     namesMap.put("CK", "Gżejjer Cook");
     namesMap.put("CL", "iċ-Ċili");
     namesMap.put("CM", "il-Kamerun");
+    namesMap.put("CN", "iċ-Ċina");
     namesMap.put("CO", "il-Kolombja");
     namesMap.put("CP", "il-Gżira Clipperton");
     namesMap.put("CR", "il-Costa Rica");
@@ -530,6 +533,7 @@ public class LocalizedNamesImpl_mt extends LocalizedNamesImpl {
     namesMap.put("VI", "il-Gżejjer Verġni tal-Istati Uniti");
     namesMap.put("VN", "il-Vjetnam");
     namesMap.put("WF", "Wallis u Futuna");
+    namesMap.put("XK", "il-Kosovo");
     namesMap.put("YE", "il-Jemen");
     namesMap.put("ZA", "l-Afrika t’Isfel");
     namesMap.put("ZM", "iż-Żambja");
@@ -611,11 +615,12 @@ public class LocalizedNamesImpl_mt extends LocalizedNamesImpl {
         "CD": "ir-Repubblika Demokratika tal-Kongo",
         "CF": "ir-Repubblika Ċentru-Afrikana",
         "CG": "il-Kongo - Brazzaville",
-        "CH": "Żvizzera",
+        "CH": "l-Iżvizzera",
         "CI": "il-Kosta tal-Avorju",
         "CK": "Gżejjer Cook",
         "CL": "iċ-Ċili",
         "CM": "il-Kamerun",
+        "CN": "iċ-Ċina",
         "CO": "il-Kolombja",
         "CP": "il-Gżira Clipperton",
         "CR": "il-Costa Rica",
@@ -781,6 +786,7 @@ public class LocalizedNamesImpl_mt extends LocalizedNamesImpl {
         "VI": "il-Gżejjer Verġni tal-Istati Uniti",
         "VN": "il-Vjetnam",
         "WF": "Wallis u Futuna",
+        "XK": "il-Kosovo",
         "YE": "il-Jemen",
         "ZA": "l-Afrika t’Isfel",
         "ZM": "iż-Żambja",

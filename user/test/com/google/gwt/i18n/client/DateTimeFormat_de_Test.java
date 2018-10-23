@@ -51,7 +51,7 @@ public class DateTimeFormat_de_Test extends DateTimeFormatTestBase {
 
   public void test_hhmmssa() {
     Date date = new Date(2006 - 1900, 6, 27, 13, 10, 10);
-    assertEquals("1:10:10 nachm.",
+    assertEquals("1:10:10 PM",
         DateTimeFormat.getFormat("h:mm:ss a").format(date));
   }
 
@@ -212,7 +212,7 @@ public class DateTimeFormat_de_Test extends DateTimeFormatTestBase {
 
   public void test_yyyyyMMMMM() {
     Date date = new Date(2006 - 1900, 6, 27, 13, 10, 10);
-    assertEquals("02006.J.27 n. Chr. 01:10 nachm.", DateTimeFormat.getFormat(
+    assertEquals("02006.J.27 n. Chr. 01:10 PM", DateTimeFormat.getFormat(
         "yyyyy.MMMMM.dd GGG hh:mm aaa").format(date));
   }
 

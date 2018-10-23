@@ -45,6 +45,11 @@ public class DateTimeFormatInfoImpl_bs_Cyrl extends DateTimeFormatInfoImpl_bs {
   }
 
   @Override
+  public String dateFormatShort() {
+    return "d.M.yy.";
+  }
+
+  @Override
   public String dateTimeFull(String timePattern, String datePattern) {
     return datePattern + " " + timePattern;
   }

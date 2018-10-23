@@ -29,6 +29,8 @@ public class LocalizedNamesImpl_chr extends LocalizedNamesImpl {
     return new String[] {
         "UM",
         "VI",
+        "XA",
+        "XB",
         "AM",
         "AL",
         "DZ",
@@ -234,7 +236,6 @@ public class LocalizedNamesImpl_chr extends LocalizedNamesImpl {
         "CN",
         "CX",
         "TW",
-        "TO",
         "TJ",
         "TH",
         "TZ",
@@ -245,6 +246,7 @@ public class LocalizedNamesImpl_chr extends LocalizedNamesImpl {
         "TG",
         "DM",
         "DO",
+        "TO",
         "TN",
         "TV",
         "TM",
@@ -322,12 +324,13 @@ public class LocalizedNamesImpl_chr extends LocalizedNamesImpl {
     namesMap.put("151", "ᏗᎧᎸᎬ ᏗᏜ ᏳᎳᏛ");
     namesMap.put("154", "ᏧᏴᏢ ᏗᏜ ᏳᎳᏛ");
     namesMap.put("155", "ᏭᏕᎵᎬ ᏗᏜ ᏳᎳᏛ");
+    namesMap.put("202", "ᎭᏫᏂ-ᏌᎭᏩ ᎬᎿᎨᏍᏛ");
     namesMap.put("419", "ᎳᏘᏂ ᎠᎹᏰᏟ");
     namesMap.put("AC", "ᎤᎵᏌᎳᏓᏅ ᎤᎦᏚᏛᎢ");
     namesMap.put("AD", "ᎠᏂᏙᎳ");
     namesMap.put("AE", "ᏌᏊ ᎢᏳᎾᎵᏍᏔᏅ ᎡᎳᏈ ᎢᎹᎵᏘᏏ");
     namesMap.put("AF", "ᎠᏫᎨᏂᏍᏖᏂ");
-    namesMap.put("AG", "ᎤᏪᏘ ᎠᎴ ᏆᏊᏓ");
+    namesMap.put("AG", "ᎤᏪᏘ & ᏆᏊᏓ");
     namesMap.put("AI", "ᎠᏂᎩᎳ");
     namesMap.put("AL", "ᎠᎵᏇᏂᏯ");
     namesMap.put("AM", "ᎠᎵᎻᏂᎠ");
@@ -340,7 +343,7 @@ public class LocalizedNamesImpl_chr extends LocalizedNamesImpl {
     namesMap.put("AW", "ᎠᎷᏆ");
     namesMap.put("AX", "ᎣᎴᏅᏓ ᏚᎦᏚᏛᎢ");
     namesMap.put("AZ", "ᎠᏎᏆᏣᏂ");
-    namesMap.put("BA", "ᏉᏏᏂᎠ ᎠᎴ ᎲᏤᎪᏫ");
+    namesMap.put("BA", "ᏉᏏᏂᎠ & ᎲᏤᎪᏫ");
     namesMap.put("BB", "ᏆᏇᏙᏍ");
     namesMap.put("BD", "ᏆᏂᎦᎵᏕᏍ");
     namesMap.put("BE", "ᏇᎵᏥᎥᎻ");
@@ -475,7 +478,7 @@ public class LocalizedNamesImpl_chr extends LocalizedNamesImpl {
     namesMap.put("MH", "ᎹᏌᎵ ᏚᎦᏚᏛᎢ");
     namesMap.put("MK", "ᎹᏎᏙᏂᏯ");
     namesMap.put("ML", "ᎹᎵ");
-    namesMap.put("MM", "ᎹᏯᎹᎵ");
+    namesMap.put("MM", "ᎹᏯᎹᎵ (ᏇᎵᎹ)");
     namesMap.put("MN", "ᎹᏂᎪᎵᎠ");
     namesMap.put("MO", "ᎹᎧᎣ (ᎤᏓᏤᎵᏓ ᏧᏂᎸᏫᏍᏓᏁᏗ ᎢᎬᎾᏕᎾ) ᏣᎢ");
     namesMap.put("MP", "ᏧᏴᏢ ᏗᏜ ᎹᎵᎠᎾ ᏚᎦᏚᏛᎢ");
@@ -555,7 +558,7 @@ public class LocalizedNamesImpl_chr extends LocalizedNamesImpl {
     namesMap.put("TL", "ᏘᎼᎵ-ᎴᏍᏖ");
     namesMap.put("TM", "ᏛᎵᎩᎺᏂᏍᏔᏂ");
     namesMap.put("TN", "ᏚᏂᏏᏍᎠ");
-    namesMap.put("TO", "ᏔᏂᎪ");
+    namesMap.put("TO", "ᏙᎾᎦ");
     namesMap.put("TR", "ᎬᏃ");
     namesMap.put("TT", "ᏟᏂᏕᏗ ᎠᎴ ᏙᏆᎪ");
     namesMap.put("TV", "ᏚᏩᎷ");
@@ -622,12 +625,13 @@ public class LocalizedNamesImpl_chr extends LocalizedNamesImpl {
         "151": "ᏗᎧᎸᎬ ᏗᏜ ᏳᎳᏛ",
         "154": "ᏧᏴᏢ ᏗᏜ ᏳᎳᏛ",
         "155": "ᏭᏕᎵᎬ ᏗᏜ ᏳᎳᏛ",
+        "202": "ᎭᏫᏂ-ᏌᎭᏩ ᎬᎿᎨᏍᏛ",
         "419": "ᎳᏘᏂ ᎠᎹᏰᏟ",
         "AC": "ᎤᎵᏌᎳᏓᏅ ᎤᎦᏚᏛᎢ",
         "AD": "ᎠᏂᏙᎳ",
         "AE": "ᏌᏊ ᎢᏳᎾᎵᏍᏔᏅ ᎡᎳᏈ ᎢᎹᎵᏘᏏ",
         "AF": "ᎠᏫᎨᏂᏍᏖᏂ",
-        "AG": "ᎤᏪᏘ ᎠᎴ ᏆᏊᏓ",
+        "AG": "ᎤᏪᏘ & ᏆᏊᏓ",
         "AI": "ᎠᏂᎩᎳ",
         "AL": "ᎠᎵᏇᏂᏯ",
         "AM": "ᎠᎵᎻᏂᎠ",
@@ -640,7 +644,7 @@ public class LocalizedNamesImpl_chr extends LocalizedNamesImpl {
         "AW": "ᎠᎷᏆ",
         "AX": "ᎣᎴᏅᏓ ᏚᎦᏚᏛᎢ",
         "AZ": "ᎠᏎᏆᏣᏂ",
-        "BA": "ᏉᏏᏂᎠ ᎠᎴ ᎲᏤᎪᏫ",
+        "BA": "ᏉᏏᏂᎠ & ᎲᏤᎪᏫ",
         "BB": "ᏆᏇᏙᏍ",
         "BD": "ᏆᏂᎦᎵᏕᏍ",
         "BE": "ᏇᎵᏥᎥᎻ",
@@ -775,7 +779,7 @@ public class LocalizedNamesImpl_chr extends LocalizedNamesImpl {
         "MH": "ᎹᏌᎵ ᏚᎦᏚᏛᎢ",
         "MK": "ᎹᏎᏙᏂᏯ",
         "ML": "ᎹᎵ",
-        "MM": "ᎹᏯᎹᎵ",
+        "MM": "ᎹᏯᎹᎵ (ᏇᎵᎹ)",
         "MN": "ᎹᏂᎪᎵᎠ",
         "MO": "ᎹᎧᎣ (ᎤᏓᏤᎵᏓ ᏧᏂᎸᏫᏍᏓᏁᏗ ᎢᎬᎾᏕᎾ) ᏣᎢ",
         "MP": "ᏧᏴᏢ ᏗᏜ ᎹᎵᎠᎾ ᏚᎦᏚᏛᎢ",
@@ -855,7 +859,7 @@ public class LocalizedNamesImpl_chr extends LocalizedNamesImpl {
         "TL": "ᏘᎼᎵ-ᎴᏍᏖ",
         "TM": "ᏛᎵᎩᎺᏂᏍᏔᏂ",
         "TN": "ᏚᏂᏏᏍᎠ",
-        "TO": "ᏔᏂᎪ",
+        "TO": "ᏙᎾᎦ",
         "TR": "ᎬᏃ",
         "TT": "ᏟᏂᏕᏗ ᎠᎴ ᏙᏆᎪ",
         "TV": "ᏚᏩᎷ",

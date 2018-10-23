@@ -278,6 +278,8 @@ public class LocalizedNamesImpl_ii extends LocalizedNamesImpl {
         "VU",
         "WF",
         "WS",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "YT",

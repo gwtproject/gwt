@@ -38,7 +38,7 @@ public class DateTimeFormatInfoImpl_da extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "dd/MM/y";
+    return "dd.MM.y";
   }
 
   @Override
@@ -124,7 +124,7 @@ public class DateTimeFormatInfoImpl_da extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthNumDay() {
-    return "d/M";
+    return "d.M";
   }
 
   @Override
@@ -149,12 +149,12 @@ public class DateTimeFormatInfoImpl_da extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "M/y";
+    return "M.y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d/M/y";
+    return "d.M.y";
   }
 
   @Override

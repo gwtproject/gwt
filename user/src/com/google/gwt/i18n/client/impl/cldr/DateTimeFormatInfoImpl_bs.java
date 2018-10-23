@@ -22,14 +22,6 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_bs extends DateTimeFormatInfoImpl {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "prijepodne",
-        "popodne"
-    };
-  }
-
-  @Override
   public String dateFormatFull() {
     return "EEEE, d. MMMM y.";
   }
@@ -46,7 +38,7 @@ public class DateTimeFormatInfoImpl_bs extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "d.M.yy.";
+    return "d. M. y.";
   }
 
   @Override
@@ -170,7 +162,7 @@ public class DateTimeFormatInfoImpl_bs extends DateTimeFormatInfoImpl {
         "maj",
         "juni",
         "juli",
-        "avgust",
+        "august",
         "septembar",
         "oktobar",
         "novembar",
@@ -206,7 +198,7 @@ public class DateTimeFormatInfoImpl_bs extends DateTimeFormatInfoImpl {
         "maj",
         "jun",
         "jul",
-        "avg",
+        "aug",
         "sep",
         "okt",
         "nov",

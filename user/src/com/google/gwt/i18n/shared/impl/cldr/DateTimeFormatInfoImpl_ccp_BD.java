@@ -22,11 +22,6 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_ccp_BD extends DateTimeFormatInfoImpl_ccp {
 
   @Override
-  public int firstDayOfTheWeek() {
-    return 5;
-  }
-
-  @Override
   public int weekendStart() {
     return 6;
   }

@@ -275,6 +275,8 @@ public class LocalizedNamesImpl_tzm extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "GR",

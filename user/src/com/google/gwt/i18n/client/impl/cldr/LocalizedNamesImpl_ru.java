@@ -39,6 +39,8 @@ public class LocalizedNamesImpl_ru extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "AU",
         "AT",
         "AZ",
@@ -130,7 +132,6 @@ public class LocalizedNamesImpl_ru extends LocalizedNamesImpl {
         "YE",
         "CV",
         "KZ",
-        "KY",
         "KH",
         "CM",
         "CA",
@@ -195,6 +196,7 @@ public class LocalizedNamesImpl_ru extends LocalizedNamesImpl {
         "NC",
         "NO",
         "AE",
+        "PN",
         "TC",
         "HM",
         "BV",
@@ -206,8 +208,8 @@ public class LocalizedNamesImpl_ru extends LocalizedNamesImpl {
         "SH",
         "OM",
         "UN",
+        "KY",
         "CK",
-        "PN",
         "PK",
         "PW",
         "PS",
@@ -334,6 +336,7 @@ public class LocalizedNamesImpl_ru extends LocalizedNamesImpl {
     namesMap.put("151", "Восточная Европа");
     namesMap.put("154", "Северная Европа");
     namesMap.put("155", "Западная Европа");
+    namesMap.put("202", "Тропическая Африка");
     namesMap.put("419", "Латинская Америка");
     namesMap.put("AC", "о-в Вознесения");
     namesMap.put("AD", "Андорра");
@@ -465,7 +468,7 @@ public class LocalizedNamesImpl_ru extends LocalizedNamesImpl {
     namesMap.put("KP", "КНДР");
     namesMap.put("KR", "Республика Корея");
     namesMap.put("KW", "Кувейт");
-    namesMap.put("KY", "Каймановы о-ва");
+    namesMap.put("KY", "Острова Кайман");
     namesMap.put("KZ", "Казахстан");
     namesMap.put("LA", "Лаос");
     namesMap.put("LB", "Ливан");
@@ -522,7 +525,7 @@ public class LocalizedNamesImpl_ru extends LocalizedNamesImpl {
     namesMap.put("PK", "Пакистан");
     namesMap.put("PL", "Польша");
     namesMap.put("PM", "Сен-Пьер и Микелон");
-    namesMap.put("PN", "острова Питкэрн");
+    namesMap.put("PN", "о-ва Питкэрн");
     namesMap.put("PR", "Пуэрто-Рико");
     namesMap.put("PS", "Палестинские территории");
     namesMap.put("PT", "Португалия");
@@ -583,7 +586,7 @@ public class LocalizedNamesImpl_ru extends LocalizedNamesImpl {
     namesMap.put("VA", "Ватикан");
     namesMap.put("VC", "Сент-Винсент и Гренадины");
     namesMap.put("VE", "Венесуэла");
-    namesMap.put("VG", "Виргинские о-ва (Британские)");
+    namesMap.put("VG", "Виргинские о-ва (Великобритания)");
     namesMap.put("VI", "Виргинские о-ва (США)");
     namesMap.put("VN", "Вьетнам");
     namesMap.put("VU", "Вануату");
@@ -634,6 +637,7 @@ public class LocalizedNamesImpl_ru extends LocalizedNamesImpl {
         "151": "Восточная Европа",
         "154": "Северная Европа",
         "155": "Западная Европа",
+        "202": "Тропическая Африка",
         "419": "Латинская Америка",
         "AC": "о-в Вознесения",
         "AD": "Андорра",
@@ -765,7 +769,7 @@ public class LocalizedNamesImpl_ru extends LocalizedNamesImpl {
         "KP": "КНДР",
         "KR": "Республика Корея",
         "KW": "Кувейт",
-        "KY": "Каймановы о-ва",
+        "KY": "Острова Кайман",
         "KZ": "Казахстан",
         "LA": "Лаос",
         "LB": "Ливан",
@@ -822,7 +826,7 @@ public class LocalizedNamesImpl_ru extends LocalizedNamesImpl {
         "PK": "Пакистан",
         "PL": "Польша",
         "PM": "Сен-Пьер и Микелон",
-        "PN": "острова Питкэрн",
+        "PN": "о-ва Питкэрн",
         "PR": "Пуэрто-Рико",
         "PS": "Палестинские территории",
         "PT": "Португалия",
@@ -883,7 +887,7 @@ public class LocalizedNamesImpl_ru extends LocalizedNamesImpl {
         "VA": "Ватикан",
         "VC": "Сент-Винсент и Гренадины",
         "VE": "Венесуэла",
-        "VG": "Виргинские о-ва (Британские)",
+        "VG": "Виргинские о-ва (Великобритания)",
         "VI": "Виргинские о-ва (США)",
         "VN": "Вьетнам",
         "VU": "Вануату",

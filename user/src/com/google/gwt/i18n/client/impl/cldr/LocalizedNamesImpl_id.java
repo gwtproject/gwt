@@ -288,6 +288,8 @@ public class LocalizedNamesImpl_id extends LocalizedNamesImpl {
         "IO",
         "TF",
         "PS",
+        "XA",
+        "XB",
         "YE",
         "JO",
         "GR",
@@ -326,6 +328,7 @@ public class LocalizedNamesImpl_id extends LocalizedNamesImpl {
     namesMap.put("151", "Eropa Bagian Timur");
     namesMap.put("154", "Eropa Bagian Utara");
     namesMap.put("155", "Eropa Bagian Barat");
+    namesMap.put("202", "Afrika Sub-Sahara");
     namesMap.put("419", "Amerika Latin");
     namesMap.put("AC", "Pulau Ascension");
     namesMap.put("AE", "Uni Emirat Arab");
@@ -502,6 +505,7 @@ public class LocalizedNamesImpl_id extends LocalizedNamesImpl {
         "151": "Eropa Bagian Timur",
         "154": "Eropa Bagian Utara",
         "155": "Eropa Bagian Barat",
+        "202": "Afrika Sub-Sahara",
         "419": "Amerika Latin",
         "AC": "Pulau Ascension",
         "AE": "Uni Emirat Arab",

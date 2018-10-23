@@ -52,7 +52,7 @@ public class DateTimeFormatInfoImpl_th extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "ปีก่อนคริสต์ศักราช",
+        "ปีก่อนคริสตกาล",
         "คริสต์ศักราช"
     };
   }
@@ -60,7 +60,7 @@ public class DateTimeFormatInfoImpl_th extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasShort() {
     return new String[] {
-        "ปีก่อน ค.ศ.",
+        "ก่อน ค.ศ.",
         "ค.ศ."
     };
   }

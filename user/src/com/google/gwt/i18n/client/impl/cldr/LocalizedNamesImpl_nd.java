@@ -281,6 +281,8 @@ public class LocalizedNamesImpl_nd extends LocalizedNamesImpl {
         "VU",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "UA",

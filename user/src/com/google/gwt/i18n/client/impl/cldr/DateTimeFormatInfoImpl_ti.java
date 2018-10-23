@@ -198,19 +198,6 @@ public class DateTimeFormatInfoImpl_ti extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] weekdaysFullStandalone() {
-    return new String[] {
-        "ሰንበት",
-        "ሰኑይ",
-        "ሰሉስ",
-        "ረቡዕ",
-        "ሓሙስ",
-        "ዓርቢ",
-        "ቀዳም"
-    };
-  }
-
-  @Override
   public String[] weekdaysNarrow() {
     return new String[] {
         "ሰ",

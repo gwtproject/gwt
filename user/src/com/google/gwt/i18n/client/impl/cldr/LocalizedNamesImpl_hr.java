@@ -290,6 +290,8 @@ public class LocalizedNamesImpl_hr extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "ZM",
         "EH",
         "CV",
@@ -329,6 +331,7 @@ public class LocalizedNamesImpl_hr extends LocalizedNamesImpl {
     namesMap.put("151", "Istočna Europa");
     namesMap.put("154", "Sjeverna Europa");
     namesMap.put("155", "Zapadna Europa");
+    namesMap.put("202", "Subsaharska Afrika");
     namesMap.put("419", "Latinska Amerika");
     namesMap.put("AC", "Otok Ascension");
     namesMap.put("AD", "Andora");
@@ -483,7 +486,7 @@ public class LocalizedNamesImpl_hr extends LocalizedNamesImpl {
     namesMap.put("PM", "Sveti Petar i Mikelon");
     namesMap.put("PN", "Otoci Pitcairn");
     namesMap.put("PR", "Portoriko");
-    namesMap.put("PS", "Palestinsko Područje");
+    namesMap.put("PS", "Palestinsko područje");
     namesMap.put("PY", "Paragvaj");
     namesMap.put("QA", "Katar");
     namesMap.put("QO", "Vanjska područja Oceanije");
@@ -572,6 +575,7 @@ public class LocalizedNamesImpl_hr extends LocalizedNamesImpl {
         "151": "Istočna Europa",
         "154": "Sjeverna Europa",
         "155": "Zapadna Europa",
+        "202": "Subsaharska Afrika",
         "419": "Latinska Amerika",
         "AC": "Otok Ascension",
         "AD": "Andora",
@@ -726,7 +730,7 @@ public class LocalizedNamesImpl_hr extends LocalizedNamesImpl {
         "PM": "Sveti Petar i Mikelon",
         "PN": "Otoci Pitcairn",
         "PR": "Portoriko",
-        "PS": "Palestinsko Područje",
+        "PS": "Palestinsko područje",
         "PY": "Paragvaj",
         "QA": "Katar",
         "QO": "Vanjska područja Oceanije",

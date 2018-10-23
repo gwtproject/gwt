@@ -282,6 +282,8 @@ public class LocalizedNamesImpl_es_US extends LocalizedNamesImpl_es {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "YE",
         "DJ",
         "ZM",
@@ -293,6 +295,7 @@ public class LocalizedNamesImpl_es_US extends LocalizedNamesImpl_es {
   @Override
   protected void loadNameMapJava() {
     super.loadNameMapJava();
+    namesMap.put("CG", "República del Congo");
     namesMap.put("IC", "Islas Canarias");
     namesMap.put("TA", "Tristán da Cunha");
   }
@@ -304,6 +307,7 @@ public class LocalizedNamesImpl_es_US extends LocalizedNamesImpl_es {
 
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
+        "CG": "República del Congo",
         "IC": "Islas Canarias",
         "TA": "Tristán da Cunha"
     };

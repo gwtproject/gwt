@@ -28,35 +28,33 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
   public String[] loadSortedRegionCodes() {
     return new String[] {
         "AC",
-        "AD",
         "AF",
-        "ZA",
         "AI",
         "AL",
         "DZ",
+        "AD",
         "AO",
         "AQ",
         "AG",
-        "AN",
         "SA",
         "AR",
         "AM",
         "AU",
         "AT",
         "AW",
-        "AX",
         "AZ",
         "BS",
         "BD",
         "BB",
         "BE",
+        "BZ",
         "BJ",
+        "BM",
         "BH",
         "BT",
         "BY",
         "MM",
         "BL",
-        "BM",
         "BN",
         "BO",
         "BA",
@@ -66,22 +64,23 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "BG",
         "BF",
         "BI",
-        "BZ",
         "KH",
         "CM",
         "CA",
         "CC",
         "CD",
+        "CZ",
         "CL",
         "CN",
         "CI",
+        "VA",
         "CO",
         "KM",
         "CG",
         "KP",
         "KR",
-        "CP",
         "CR",
+        "CP",
         "HR",
         "CU",
         "CV",
@@ -94,12 +93,12 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "EA",
         "EC",
         "EG",
+        "SV",
         "AE",
         "ER",
         "ES",
         "EE",
         "ET",
-        "EU",
         "FI",
         "FJ",
         "FK",
@@ -109,15 +108,15 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "GD",
         "GE",
         "DE",
-        "GG",
         "GH",
         "GI",
         "GP",
         "GR",
         "GL",
         "GS",
-        "GT",
         "GU",
+        "GT",
+        "GG",
         "GN",
         "GW",
         "GQ",
@@ -129,12 +128,13 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "HN",
         "HU",
         "IC",
-        "IM",
         "IN",
         "ID",
         "BV",
+        "IM",
         "CX",
         "NF",
+        "AX",
         "CK",
         "KY",
         "FO",
@@ -156,6 +156,7 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "KE",
         "KG",
         "KI",
+        "XK",
         "KW",
         "LA",
         "LS",
@@ -171,23 +172,24 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "MW",
         "MY",
         "ML",
+        "MT",
         "MA",
         "MR",
-        "MC",
-        "ME",
         "MX",
         "MF",
         "FM",
         "MO",
         "MD",
+        "MC",
         "MN",
+        "ME",
         "MZ",
         "MQ",
         "MS",
-        "MT",
         "MU",
         "MV",
         "NA",
+        "UN",
         "NL",
         "NP",
         "NI",
@@ -198,14 +200,14 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "NZ",
         "NR",
         "NU",
+        "QO",
         "OM",
-        "PA",
         "PK",
+        "PA",
         "PG",
         "PY",
         "PE",
         "PH",
-        "PM",
         "PN",
         "PL",
         "PF",
@@ -214,16 +216,13 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "PS",
         "PW",
         "QA",
-        "QO",
         "RE",
         "GB",
         "CF",
         "DO",
-        "CZ",
         "RO",
-        "RS",
-        "RU",
         "RW",
+        "RU",
         "EH",
         "WS",
         "AS",
@@ -232,22 +231,24 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "VC",
         "SM",
         "SN",
+        "RS",
         "SC",
         "SG",
         "SH",
         "SL",
-        "SJ",
         "SK",
         "SI",
         "SO",
         "LK",
         "ST",
+        "PM",
         "US",
+        "ZA",
         "SD",
         "SS",
         "CH",
         "SR",
-        "SV",
+        "SJ",
         "SE",
         "SZ",
         "SX",
@@ -272,30 +273,56 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "UG",
         "UA",
         "UM",
+        "EU",
         "UY",
         "UZ",
-        "VA",
         "VU",
         "VE",
         "VG",
         "VI",
         "VN",
         "WF",
-        "XK",
+        "XA",
+        "XB",
         "YE",
         "YT",
         "ZM",
         "ZW",
+        "EZ",
     };
   }
 
   @Override
   protected void loadNameMapJava() {
     super.loadNameMapJava();
+    namesMap.put("001", "Mundo");
+    namesMap.put("003", "America del Nord");
+    namesMap.put("005", "America del Sud");
+    namesMap.put("011", "Africa occidental");
+    namesMap.put("013", "America central");
+    namesMap.put("014", "Africa oriental");
+    namesMap.put("015", "Africa septentrional");
+    namesMap.put("017", "Africa central");
+    namesMap.put("018", "Africa meridional");
+    namesMap.put("021", "America septentrional");
+    namesMap.put("029", "Caribes");
+    namesMap.put("030", "Asia oriental");
+    namesMap.put("034", "Asia meridional");
+    namesMap.put("035", "Asia del sud-est");
+    namesMap.put("039", "Europa meridional");
+    namesMap.put("057", "Region micronesian");
+    namesMap.put("143", "Asia central");
+    namesMap.put("145", "Asia occidental");
+    namesMap.put("150", "Europa");
+    namesMap.put("151", "Europa oriental");
+    namesMap.put("154", "Europa septentrional");
+    namesMap.put("155", "Europa occidental");
+    namesMap.put("202", "Africa subsaharian");
+    namesMap.put("419", "America latin");
     namesMap.put("AE", "Emiratos Arabe Unite");
     namesMap.put("AG", "Antigua e Barbuda");
-    namesMap.put("AN", "Antillas nederlandese");
     namesMap.put("AS", "Samoa american");
+    namesMap.put("AX", "Insulas Åland");
     namesMap.put("AZ", "Azerbaidzhan");
     namesMap.put("BA", "Bosnia e Herzegovina");
     namesMap.put("BE", "Belgica");
@@ -309,13 +336,15 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
     namesMap.put("CM", "Camerun");
     namesMap.put("CX", "Insula de Natal");
     namesMap.put("CY", "Cypro");
-    namesMap.put("CZ", "Republica Tchec");
+    namesMap.put("CZ", "Chechia");
     namesMap.put("DE", "Germania");
     namesMap.put("DK", "Danmark");
     namesMap.put("DO", "Republica Dominican");
     namesMap.put("EG", "Egypto");
     namesMap.put("EH", "Sahara occidental");
     namesMap.put("ES", "Espania");
+    namesMap.put("EU", "Union Europee");
+    namesMap.put("EZ", "Zona euro");
     namesMap.put("FI", "Finlandia");
     namesMap.put("FO", "Insulas Feroe");
     namesMap.put("FR", "Francia");
@@ -326,6 +355,7 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
     namesMap.put("GR", "Grecia");
     namesMap.put("HU", "Hungaria");
     namesMap.put("IE", "Irlanda");
+    namesMap.put("IM", "Insula de Man");
     namesMap.put("IO", "Territorio oceanic britanno-indian");
     namesMap.put("IQ", "Irak");
     namesMap.put("IS", "Islanda");
@@ -341,11 +371,11 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
     namesMap.put("LB", "Libano");
     namesMap.put("LC", "Sancte Lucia");
     namesMap.put("LT", "Lituania");
+    namesMap.put("LU", "Luxemburg");
     namesMap.put("LV", "Lettonia");
     namesMap.put("MA", "Marocco");
     namesMap.put("MD", "Moldavia");
     namesMap.put("MH", "Insulas Marshall");
-    namesMap.put("MK", "Macedonia");
     namesMap.put("MM", "Birmania/Myanmar");
     namesMap.put("MP", "Insulas Marianna del Nord");
     namesMap.put("NC", "Nove Caledonia");
@@ -357,10 +387,13 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
     namesMap.put("PG", "Papua Nove Guinea");
     namesMap.put("PH", "Philippinas");
     namesMap.put("PL", "Polonia");
+    namesMap.put("PM", "St. Pierre e Miquelon");
+    namesMap.put("QO", "Oceania remote");
     namesMap.put("RW", "Ruanda");
     namesMap.put("SA", "Arabia Saudita");
     namesMap.put("SB", "Insulas Solomon");
     namesMap.put("SE", "Svedia");
+    namesMap.put("SJ", "Svalbard e Jan Mayen");
     namesMap.put("SK", "Slovachia");
     namesMap.put("SS", "Sudan del Sud");
     namesMap.put("SZ", "Swazilandia");
@@ -370,13 +403,15 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
     namesMap.put("TH", "Thailandia");
     namesMap.put("TJ", "Tadzhikistan");
     namesMap.put("TL", "Timor del Est");
-    namesMap.put("TO", "tonga");
     namesMap.put("TR", "Turchia");
     namesMap.put("TT", "Trinidad e Tobago");
     namesMap.put("UA", "Ukraina");
+    namesMap.put("UN", "Nationes Unite");
     namesMap.put("US", "Statos Unite");
+    namesMap.put("VA", "Citate del Vaticano");
     namesMap.put("VC", "Sancte Vincente e le Grenadinas");
-    namesMap.put("ZA", "Africa del Sud");
+    namesMap.put("ZA", "Sudafrica");
+    namesMap.put("ZZ", "Region incognite");
   }
 
   @Override
@@ -386,10 +421,34 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
 
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
+        "001": "Mundo",
+        "003": "America del Nord",
+        "005": "America del Sud",
+        "011": "Africa occidental",
+        "013": "America central",
+        "014": "Africa oriental",
+        "015": "Africa septentrional",
+        "017": "Africa central",
+        "018": "Africa meridional",
+        "021": "America septentrional",
+        "029": "Caribes",
+        "030": "Asia oriental",
+        "034": "Asia meridional",
+        "035": "Asia del sud-est",
+        "039": "Europa meridional",
+        "057": "Region micronesian",
+        "143": "Asia central",
+        "145": "Asia occidental",
+        "150": "Europa",
+        "151": "Europa oriental",
+        "154": "Europa septentrional",
+        "155": "Europa occidental",
+        "202": "Africa subsaharian",
+        "419": "America latin",
         "AE": "Emiratos Arabe Unite",
         "AG": "Antigua e Barbuda",
-        "AN": "Antillas nederlandese",
         "AS": "Samoa american",
+        "AX": "Insulas Åland",
         "AZ": "Azerbaidzhan",
         "BA": "Bosnia e Herzegovina",
         "BE": "Belgica",
@@ -403,13 +462,15 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "CM": "Camerun",
         "CX": "Insula de Natal",
         "CY": "Cypro",
-        "CZ": "Republica Tchec",
+        "CZ": "Chechia",
         "DE": "Germania",
         "DK": "Danmark",
         "DO": "Republica Dominican",
         "EG": "Egypto",
         "EH": "Sahara occidental",
         "ES": "Espania",
+        "EU": "Union Europee",
+        "EZ": "Zona euro",
         "FI": "Finlandia",
         "FO": "Insulas Feroe",
         "FR": "Francia",
@@ -420,6 +481,7 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "GR": "Grecia",
         "HU": "Hungaria",
         "IE": "Irlanda",
+        "IM": "Insula de Man",
         "IO": "Territorio oceanic britanno-indian",
         "IQ": "Irak",
         "IS": "Islanda",
@@ -435,11 +497,11 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "LB": "Libano",
         "LC": "Sancte Lucia",
         "LT": "Lituania",
+        "LU": "Luxemburg",
         "LV": "Lettonia",
         "MA": "Marocco",
         "MD": "Moldavia",
         "MH": "Insulas Marshall",
-        "MK": "Macedonia",
         "MM": "Birmania/Myanmar",
         "MP": "Insulas Marianna del Nord",
         "NC": "Nove Caledonia",
@@ -451,10 +513,13 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "PG": "Papua Nove Guinea",
         "PH": "Philippinas",
         "PL": "Polonia",
+        "PM": "St. Pierre e Miquelon",
+        "QO": "Oceania remote",
         "RW": "Ruanda",
         "SA": "Arabia Saudita",
         "SB": "Insulas Solomon",
         "SE": "Svedia",
+        "SJ": "Svalbard e Jan Mayen",
         "SK": "Slovachia",
         "SS": "Sudan del Sud",
         "SZ": "Swazilandia",
@@ -464,13 +529,15 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "TH": "Thailandia",
         "TJ": "Tadzhikistan",
         "TL": "Timor del Est",
-        "TO": "tonga",
         "TR": "Turchia",
         "TT": "Trinidad e Tobago",
         "UA": "Ukraina",
+        "UN": "Nationes Unite",
         "US": "Statos Unite",
+        "VA": "Citate del Vaticano",
         "VC": "Sancte Vincente e le Grenadinas",
-        "ZA": "Africa del Sud"
+        "ZA": "Sudafrica",
+        "ZZ": "Region incognite"
     };
   }-*/;
 }

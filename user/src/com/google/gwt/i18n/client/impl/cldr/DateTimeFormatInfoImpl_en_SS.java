@@ -22,6 +22,14 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_en_SS extends DateTimeFormatInfoImpl_en {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "am",
+        "pm"
+    };
+  }
+
+  @Override
   public String dateFormatFull() {
     return "EEEE, d MMMM y";
   }

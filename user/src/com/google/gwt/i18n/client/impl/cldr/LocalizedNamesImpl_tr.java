@@ -82,6 +82,7 @@ public class LocalizedNamesImpl_tr extends LocalizedNamesImpl {
         "CV",
         "KY",
         "GI",
+        "EA",
         "DZ",
         "CX",
         "DJ",
@@ -244,7 +245,6 @@ public class LocalizedNamesImpl_tr extends LocalizedNamesImpl {
         "SM",
         "ST",
         "SN",
-        "EA",
         "SC",
         "RS",
         "SL",
@@ -288,6 +288,8 @@ public class LocalizedNamesImpl_tr extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "YE",
         "NC",
         "NZ",
@@ -329,6 +331,7 @@ public class LocalizedNamesImpl_tr extends LocalizedNamesImpl {
     namesMap.put("151", "Doğu Avrupa");
     namesMap.put("154", "Kuzey Avrupa");
     namesMap.put("155", "Batı Avrupa");
+    namesMap.put("202", "Sahra Altı Afrika");
     namesMap.put("419", "Latin Amerika");
     namesMap.put("AC", "Ascension Adası");
     namesMap.put("AE", "Birleşik Arap Emirlikleri");
@@ -380,7 +383,7 @@ public class LocalizedNamesImpl_tr extends LocalizedNamesImpl {
     namesMap.put("DM", "Dominika");
     namesMap.put("DO", "Dominik Cumhuriyeti");
     namesMap.put("DZ", "Cezayir");
-    namesMap.put("EA", "Septe ve Melilla");
+    namesMap.put("EA", "Ceuta ve Melilla");
     namesMap.put("EC", "Ekvador");
     namesMap.put("EE", "Estonya");
     namesMap.put("EG", "Mısır");
@@ -561,6 +564,7 @@ public class LocalizedNamesImpl_tr extends LocalizedNamesImpl {
         "151": "Doğu Avrupa",
         "154": "Kuzey Avrupa",
         "155": "Batı Avrupa",
+        "202": "Sahra Altı Afrika",
         "419": "Latin Amerika",
         "AC": "Ascension Adası",
         "AE": "Birleşik Arap Emirlikleri",
@@ -612,7 +616,7 @@ public class LocalizedNamesImpl_tr extends LocalizedNamesImpl {
         "DM": "Dominika",
         "DO": "Dominik Cumhuriyeti",
         "DZ": "Cezayir",
-        "EA": "Septe ve Melilla",
+        "EA": "Ceuta ve Melilla",
         "EC": "Ekvador",
         "EE": "Estonya",
         "EG": "Mısır",

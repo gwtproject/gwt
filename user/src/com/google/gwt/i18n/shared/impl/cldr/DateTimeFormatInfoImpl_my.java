@@ -61,7 +61,7 @@ public class DateTimeFormatInfoImpl_my extends DateTimeFormatInfoImpl {
   public String[] erasShort() {
     return new String[] {
         "ဘီစီ",
-        "အေဒီ"
+        "အဒေီ"
     };
   }
 

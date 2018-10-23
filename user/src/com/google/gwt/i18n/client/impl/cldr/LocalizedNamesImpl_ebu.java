@@ -282,6 +282,8 @@ public class LocalizedNamesImpl_ebu extends LocalizedNamesImpl {
         "VI",
         "VG",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "JO",

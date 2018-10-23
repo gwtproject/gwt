@@ -27,6 +27,8 @@ public class LocalizedNamesImpl_ky extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "UM",
         "AU",
         "AT",
@@ -35,7 +37,6 @@ public class LocalizedNamesImpl_ky extends LocalizedNamesImpl {
         "AL",
         "DZ",
         "QO",
-        "US",
         "AS",
         "AI",
         "AO",
@@ -121,13 +122,13 @@ public class LocalizedNamesImpl_ky extends LocalizedNamesImpl {
         "ES",
         "IT",
         "YE",
+        "CV",
         "KZ",
         "KY",
         "KH",
         "CM",
         "CA",
         "IC",
-        "CV",
         "BQ",
         "QA",
         "KE",
@@ -142,6 +143,7 @@ public class LocalizedNamesImpl_ky extends LocalizedNamesImpl {
         "XK",
         "CR",
         "CI",
+        "US",
         "CU",
         "KW",
         "CK",
@@ -322,6 +324,7 @@ public class LocalizedNamesImpl_ky extends LocalizedNamesImpl {
     namesMap.put("151", "Чыгыш Европа");
     namesMap.put("154", "Түндүк Европа");
     namesMap.put("155", "Батыш Европа");
+    namesMap.put("202", "Африка өлкөлөрү");
     namesMap.put("419", "Латын Америкасы");
     namesMap.put("AC", "Вознесение аралы");
     namesMap.put("AD", "Андорра");
@@ -376,7 +379,7 @@ public class LocalizedNamesImpl_ky extends LocalizedNamesImpl {
     namesMap.put("CP", "Клиппертон аралы");
     namesMap.put("CR", "Коста-Рика");
     namesMap.put("CU", "Куба");
-    namesMap.put("CV", "Капе Верде");
+    namesMap.put("CV", "Кабо-Верде");
     namesMap.put("CW", "Кюрасао");
     namesMap.put("CX", "Рождество аралы");
     namesMap.put("CY", "Кипр");
@@ -490,7 +493,7 @@ public class LocalizedNamesImpl_ky extends LocalizedNamesImpl {
     namesMap.put("MY", "Малайзия");
     namesMap.put("MZ", "Мозамбик");
     namesMap.put("NA", "Намибия");
-    namesMap.put("NC", "Жаӊы Каледония");
+    namesMap.put("NC", "Жаңы Каледония");
     namesMap.put("NE", "Нигер");
     namesMap.put("NF", "Норфолк аралы");
     namesMap.put("NG", "Нигерия");
@@ -500,13 +503,13 @@ public class LocalizedNamesImpl_ky extends LocalizedNamesImpl {
     namesMap.put("NP", "Непал");
     namesMap.put("NR", "Науру");
     namesMap.put("NU", "Ниуэ");
-    namesMap.put("NZ", "Жаӊы Зеландия");
+    namesMap.put("NZ", "Жаңы Зеландия");
     namesMap.put("OM", "Оман");
     namesMap.put("PA", "Панама");
     namesMap.put("PE", "Перу");
     namesMap.put("PF", "Полинезия (франциялык)");
     namesMap.put("PG", "Папуа-Жаңы Гвинея");
-    namesMap.put("PH", "Филлипин");
+    namesMap.put("PH", "Филиппин");
     namesMap.put("PK", "Пакистан");
     namesMap.put("PL", "Польша");
     namesMap.put("PM", "Сен-Пьер жана Микелон");
@@ -565,7 +568,7 @@ public class LocalizedNamesImpl_ky extends LocalizedNamesImpl {
     namesMap.put("UG", "Уганда");
     namesMap.put("UM", "АКШнын сырткы аралдары");
     namesMap.put("UN", "БУ");
-    namesMap.put("US", "Америка Кошмо Штаттары");
+    namesMap.put("US", "Кошмо Штаттар");
     namesMap.put("UY", "Уругвай");
     namesMap.put("UZ", "Өзбекстан");
     namesMap.put("VA", "Ватикан");
@@ -622,6 +625,7 @@ public class LocalizedNamesImpl_ky extends LocalizedNamesImpl {
         "151": "Чыгыш Европа",
         "154": "Түндүк Европа",
         "155": "Батыш Европа",
+        "202": "Африка өлкөлөрү",
         "419": "Латын Америкасы",
         "AC": "Вознесение аралы",
         "AD": "Андорра",
@@ -676,7 +680,7 @@ public class LocalizedNamesImpl_ky extends LocalizedNamesImpl {
         "CP": "Клиппертон аралы",
         "CR": "Коста-Рика",
         "CU": "Куба",
-        "CV": "Капе Верде",
+        "CV": "Кабо-Верде",
         "CW": "Кюрасао",
         "CX": "Рождество аралы",
         "CY": "Кипр",
@@ -790,7 +794,7 @@ public class LocalizedNamesImpl_ky extends LocalizedNamesImpl {
         "MY": "Малайзия",
         "MZ": "Мозамбик",
         "NA": "Намибия",
-        "NC": "Жаӊы Каледония",
+        "NC": "Жаңы Каледония",
         "NE": "Нигер",
         "NF": "Норфолк аралы",
         "NG": "Нигерия",
@@ -800,13 +804,13 @@ public class LocalizedNamesImpl_ky extends LocalizedNamesImpl {
         "NP": "Непал",
         "NR": "Науру",
         "NU": "Ниуэ",
-        "NZ": "Жаӊы Зеландия",
+        "NZ": "Жаңы Зеландия",
         "OM": "Оман",
         "PA": "Панама",
         "PE": "Перу",
         "PF": "Полинезия (франциялык)",
         "PG": "Папуа-Жаңы Гвинея",
-        "PH": "Филлипин",
+        "PH": "Филиппин",
         "PK": "Пакистан",
         "PL": "Польша",
         "PM": "Сен-Пьер жана Микелон",
@@ -865,7 +869,7 @@ public class LocalizedNamesImpl_ky extends LocalizedNamesImpl {
         "UG": "Уганда",
         "UM": "АКШнын сырткы аралдары",
         "UN": "БУ",
-        "US": "Америка Кошмо Штаттары",
+        "US": "Кошмо Штаттар",
         "UY": "Уругвай",
         "UZ": "Өзбекстан",
         "VA": "Ватикан",

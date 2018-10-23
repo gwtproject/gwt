@@ -102,7 +102,6 @@ public class LocalizedNamesImpl_vi extends LocalizedNamesImpl {
         "CX",
         "IM",
         "NF",
-        "AS",
         "DE",
         "EC",
         "SV",
@@ -236,6 +235,7 @@ public class LocalizedNamesImpl_vi extends LocalizedNamesImpl {
         "RW",
         "PM",
         "WS",
+        "AS",
         "SM",
         "ST",
         "CZ",
@@ -291,6 +291,8 @@ public class LocalizedNamesImpl_vi extends LocalizedNamesImpl {
         "QO",
         "GB",
         "WF",
+        "XA",
+        "XB",
         "YE",
         "ZM",
         "ZW",
@@ -327,12 +329,13 @@ public class LocalizedNamesImpl_vi extends LocalizedNamesImpl {
     namesMap.put("151", "Đông Âu");
     namesMap.put("154", "Bắc Âu");
     namesMap.put("155", "Tây Âu");
+    namesMap.put("202", "Châu Phi hạ Sahara");
     namesMap.put("419", "Châu Mỹ La-tinh");
     namesMap.put("AC", "Đảo Ascension");
     namesMap.put("AE", "Các Tiểu Vương quốc Ả Rập Thống nhất");
     namesMap.put("AG", "Antigua và Barbuda");
     namesMap.put("AQ", "Nam Cực");
-    namesMap.put("AS", "Đảo Somoa thuộc Mỹ");
+    namesMap.put("AS", "Samoa thuộc Mỹ");
     namesMap.put("AT", "Áo");
     namesMap.put("AX", "Quần đảo Åland");
     namesMap.put("BA", "Bosnia và Herzegovina");
@@ -372,7 +375,7 @@ public class LocalizedNamesImpl_vi extends LocalizedNamesImpl {
     namesMap.put("IC", "Quần đảo Canary");
     namesMap.put("IM", "Đảo Man");
     namesMap.put("IN", "Ấn Độ");
-    namesMap.put("IO", "Lãnh thổ Ấn độ dương thuộc Anh");
+    namesMap.put("IO", "Lãnh thổ Ấn Độ Dương thuộc Anh");
     namesMap.put("JP", "Nhật Bản");
     namesMap.put("KH", "Campuchia");
     namesMap.put("KN", "St. Kitts và Nevis");
@@ -459,12 +462,13 @@ public class LocalizedNamesImpl_vi extends LocalizedNamesImpl {
         "151": "Đông Âu",
         "154": "Bắc Âu",
         "155": "Tây Âu",
+        "202": "Châu Phi hạ Sahara",
         "419": "Châu Mỹ La-tinh",
         "AC": "Đảo Ascension",
         "AE": "Các Tiểu Vương quốc Ả Rập Thống nhất",
         "AG": "Antigua và Barbuda",
         "AQ": "Nam Cực",
-        "AS": "Đảo Somoa thuộc Mỹ",
+        "AS": "Samoa thuộc Mỹ",
         "AT": "Áo",
         "AX": "Quần đảo Åland",
         "BA": "Bosnia và Herzegovina",
@@ -504,7 +508,7 @@ public class LocalizedNamesImpl_vi extends LocalizedNamesImpl {
         "IC": "Quần đảo Canary",
         "IM": "Đảo Man",
         "IN": "Ấn Độ",
-        "IO": "Lãnh thổ Ấn độ dương thuộc Anh",
+        "IO": "Lãnh thổ Ấn Độ Dương thuộc Anh",
         "JP": "Nhật Bản",
         "KH": "Campuchia",
         "KN": "St. Kitts và Nevis",

@@ -22,11 +22,6 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_fr_MA extends DateTimeFormatInfoImpl_fr {
 
   @Override
-  public int firstDayOfTheWeek() {
-    return 6;
-  }
-
-  @Override
   public String[] monthsShort() {
     return new String[] {
         "jan.",
@@ -42,15 +37,5 @@ public class DateTimeFormatInfoImpl_fr_MA extends DateTimeFormatInfoImpl_fr {
         "nov.",
         "déc."
     };
-  }
-
-  @Override
-  public int weekendEnd() {
-    return 6;
-  }
-
-  @Override
-  public int weekendStart() {
-    return 5;
   }
 }

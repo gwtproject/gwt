@@ -180,7 +180,7 @@ public class DateTimeFormatInfoImpl_id extends DateTimeFormatInfoImpl {
         "Mei",
         "Jun",
         "Jul",
-        "Agt",
+        "Agu",
         "Sep",
         "Okt",
         "Nov",

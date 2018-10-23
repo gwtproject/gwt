@@ -291,6 +291,8 @@ public class LocalizedNamesImpl_hu extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "ZM",
         "ZW",
         "CV",
@@ -329,6 +331,7 @@ public class LocalizedNamesImpl_hu extends LocalizedNamesImpl {
     namesMap.put("151", "Kelet-Európa");
     namesMap.put("154", "Észak-Európa");
     namesMap.put("155", "Nyugat-Európa");
+    namesMap.put("202", "Szubszaharai Afrika");
     namesMap.put("419", "Latin-Amerika");
     namesMap.put("AC", "Ascension-sziget");
     namesMap.put("AE", "Egyesült Arab Emírségek");
@@ -390,7 +393,7 @@ public class LocalizedNamesImpl_hu extends LocalizedNamesImpl {
     namesMap.put("FJ", "Fidzsi");
     namesMap.put("FK", "Falkland-szigetek");
     namesMap.put("FM", "Mikronézia");
-    namesMap.put("FO", "Feröer-szigetek");
+    namesMap.put("FO", "Feröer szigetek");
     namesMap.put("FR", "Franciaország");
     namesMap.put("GB", "Egyesült Királyság");
     namesMap.put("GE", "Grúzia");
@@ -514,6 +517,7 @@ public class LocalizedNamesImpl_hu extends LocalizedNamesImpl {
     namesMap.put("VC", "Saint Vincent és a Grenadine-szigetek");
     namesMap.put("VG", "Brit Virgin-szigetek");
     namesMap.put("VI", "Amerikai Virgin-szigetek");
+    namesMap.put("VN", "Vietnám");
     namesMap.put("WF", "Wallis és Futuna");
     namesMap.put("WS", "Szamoa");
     namesMap.put("XK", "Koszovó");
@@ -558,6 +562,7 @@ public class LocalizedNamesImpl_hu extends LocalizedNamesImpl {
         "151": "Kelet-Európa",
         "154": "Észak-Európa",
         "155": "Nyugat-Európa",
+        "202": "Szubszaharai Afrika",
         "419": "Latin-Amerika",
         "AC": "Ascension-sziget",
         "AE": "Egyesült Arab Emírségek",
@@ -619,7 +624,7 @@ public class LocalizedNamesImpl_hu extends LocalizedNamesImpl {
         "FJ": "Fidzsi",
         "FK": "Falkland-szigetek",
         "FM": "Mikronézia",
-        "FO": "Feröer-szigetek",
+        "FO": "Feröer szigetek",
         "FR": "Franciaország",
         "GB": "Egyesült Királyság",
         "GE": "Grúzia",
@@ -743,6 +748,7 @@ public class LocalizedNamesImpl_hu extends LocalizedNamesImpl {
         "VC": "Saint Vincent és a Grenadine-szigetek",
         "VG": "Brit Virgin-szigetek",
         "VI": "Amerikai Virgin-szigetek",
+        "VN": "Vietnám",
         "WF": "Wallis és Futuna",
         "WS": "Szamoa",
         "XK": "Koszovó",

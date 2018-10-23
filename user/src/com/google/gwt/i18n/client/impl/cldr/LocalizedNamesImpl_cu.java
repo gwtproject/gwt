@@ -263,6 +263,8 @@ public class LocalizedNamesImpl_cu extends LocalizedNamesImpl {
         "VU",
         "WF",
         "WS",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "YT",

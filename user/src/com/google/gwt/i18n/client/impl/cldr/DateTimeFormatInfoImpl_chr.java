@@ -25,7 +25,7 @@ public class DateTimeFormatInfoImpl_chr extends DateTimeFormatInfoImpl {
   public String[] ampms() {
     return new String[] {
         "ᏌᎾᎴ",
-        "ᏒᎯᏱᎢᏗᏢ"
+        "ᏒᎯᏱᎢ"
     };
   }
 

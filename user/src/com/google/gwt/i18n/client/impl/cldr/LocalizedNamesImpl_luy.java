@@ -289,6 +289,8 @@ public class LocalizedNamesImpl_luy extends LocalizedNamesImpl {
         "VI",
         "VG",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "JO",

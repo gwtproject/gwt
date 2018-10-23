@@ -34,6 +34,8 @@ public class LocalizedNamesImpl_bg extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "AU",
         "AT",
         "AZ",
@@ -329,6 +331,7 @@ public class LocalizedNamesImpl_bg extends LocalizedNamesImpl {
     namesMap.put("151", "Източна Европа");
     namesMap.put("154", "Северна Европа");
     namesMap.put("155", "Западна Европа");
+    namesMap.put("202", "Субсахарска Африка");
     namesMap.put("419", "Латинска Америка");
     namesMap.put("AC", "остров Възнесение");
     namesMap.put("AD", "Андора");
@@ -362,7 +365,7 @@ public class LocalizedNamesImpl_bg extends LocalizedNamesImpl {
     namesMap.put("BO", "Боливия");
     namesMap.put("BQ", "Карибска Нидерландия");
     namesMap.put("BR", "Бразилия");
-    namesMap.put("BS", "Бахами");
+    namesMap.put("BS", "Бахамски острови");
     namesMap.put("BT", "Бутан");
     namesMap.put("BV", "остров Буве");
     namesMap.put("BW", "Ботсвана");
@@ -407,7 +410,7 @@ public class LocalizedNamesImpl_bg extends LocalizedNamesImpl {
     namesMap.put("EZ", "Еврозона");
     namesMap.put("FI", "Финландия");
     namesMap.put("FJ", "Фиджи");
-    namesMap.put("FK", "Фолклендски острови");
+    namesMap.put("FK", "Фолкландски острови");
     namesMap.put("FM", "Микронезия");
     namesMap.put("FO", "Фарьорски острови");
     namesMap.put("FR", "Франция");
@@ -629,6 +632,7 @@ public class LocalizedNamesImpl_bg extends LocalizedNamesImpl {
         "151": "Източна Европа",
         "154": "Северна Европа",
         "155": "Западна Европа",
+        "202": "Субсахарска Африка",
         "419": "Латинска Америка",
         "AC": "остров Възнесение",
         "AD": "Андора",
@@ -662,7 +666,7 @@ public class LocalizedNamesImpl_bg extends LocalizedNamesImpl {
         "BO": "Боливия",
         "BQ": "Карибска Нидерландия",
         "BR": "Бразилия",
-        "BS": "Бахами",
+        "BS": "Бахамски острови",
         "BT": "Бутан",
         "BV": "остров Буве",
         "BW": "Ботсвана",
@@ -707,7 +711,7 @@ public class LocalizedNamesImpl_bg extends LocalizedNamesImpl {
         "EZ": "Еврозона",
         "FI": "Финландия",
         "FJ": "Фиджи",
-        "FK": "Фолклендски острови",
+        "FK": "Фолкландски острови",
         "FM": "Микронезия",
         "FO": "Фарьорски острови",
         "FR": "Франция",

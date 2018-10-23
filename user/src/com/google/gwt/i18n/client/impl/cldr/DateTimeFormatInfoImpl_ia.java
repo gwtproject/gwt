@@ -22,21 +22,33 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_ia extends DateTimeFormatInfoImpl {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "a.m.",
-        "p.m."
-    };
+  public String dateFormatFull() {
+    return "EEEE 'le' d 'de' MMMM y";
   }
 
   @Override
-  public String dateFormatFull() {
-    return "EEEE, y MMMM dd";
+  public String dateFormatLong() {
+    return "d 'de' MMMM y";
+  }
+
+  @Override
+  public String dateFormatMedium() {
+    return "d MMM y";
   }
 
   @Override
   public String dateFormatShort() {
-    return "yy/MM/dd";
+    return "dd-MM-y";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " 'a' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " 'a' " + timePattern;
   }
 
   @Override
@@ -56,13 +68,23 @@ public class DateTimeFormatInfoImpl_ia extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "d 'de' MMMM";
+  }
+
+  @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
+    return "EEEE d MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M/d";
+    return "dd-MM";
   }
 
   @Override
@@ -72,7 +94,7 @@ public class DateTimeFormatInfoImpl_ia extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "MMM d, y";
+    return "d MMM y";
   }
 
   @Override
@@ -82,27 +104,27 @@ public class DateTimeFormatInfoImpl_ia extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFullDay() {
-    return "MMMM d, y";
+    return "d 'de' MMMM y";
   }
 
   @Override
   public String formatYearMonthNum() {
-    return "M/y";
+    return "MM-y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "M/d/y";
+    return "dd-MM-y";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
+    return "EEE d MMM y";
   }
 
   @Override
   public String formatYearQuarterFull() {
-    return "QQQQ y";
+    return "QQQQ 'de' y";
   }
 
   @Override
@@ -130,6 +152,24 @@ public class DateTimeFormatInfoImpl_ia extends DateTimeFormatInfoImpl {
 
   @Override
   public String[] monthsNarrow() {
+    return new String[] {
+        "j",
+        "f",
+        "m",
+        "a",
+        "m",
+        "j",
+        "j",
+        "a",
+        "s",
+        "o",
+        "n",
+        "d"
+    };
+  }
+
+  @Override
+  public String[] monthsNarrowStandalone() {
     return new String[] {
         "1",
         "2",
@@ -167,10 +207,10 @@ public class DateTimeFormatInfoImpl_ia extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "1-me trimestre",
-        "2-nde trimestre",
-        "3-tie trimestre",
-        "4-te trimestre"
+        "1me trimestre",
+        "2nde trimestre",
+        "3tie trimestre",
+        "4te trimestre"
     };
   }
 
@@ -194,6 +234,19 @@ public class DateTimeFormatInfoImpl_ia extends DateTimeFormatInfoImpl {
         "jovedi",
         "venerdi",
         "sabbato"
+    };
+  }
+
+  @Override
+  public String[] weekdaysNarrow() {
+    return new String[] {
+        "d",
+        "l",
+        "m",
+        "m",
+        "j",
+        "v",
+        "s"
     };
   }
 

@@ -288,6 +288,8 @@ public class LocalizedNamesImpl_mg extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "ZM",

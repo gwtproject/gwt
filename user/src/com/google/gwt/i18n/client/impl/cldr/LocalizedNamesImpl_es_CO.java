@@ -283,6 +283,8 @@ public class LocalizedNamesImpl_es_CO extends LocalizedNamesImpl_es_419 {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "YE",
         "DJ",
         "ZM",

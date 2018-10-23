@@ -46,7 +46,7 @@ public class DateTimeFormatInfoImpl_nl extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "dd-MM-yy";
+    return "dd-MM-y";
   }
 
   @Override

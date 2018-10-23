@@ -36,6 +36,8 @@ public class LocalizedNamesImpl_mzn extends LocalizedNamesImpl {
     return new String[] {
         "EZ",
         "UN",
+        "XA",
+        "XB",
         "AZ",
         "AW",
         "AR",

@@ -282,6 +282,8 @@ public class LocalizedNamesImpl_kea extends LocalizedNamesImpl {
         "VA",
         "VN",
         "VE",
+        "XA",
+        "XB",
         "CL",
         "CN",
         "CY",

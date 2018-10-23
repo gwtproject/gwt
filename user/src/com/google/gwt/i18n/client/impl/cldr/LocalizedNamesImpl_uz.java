@@ -282,6 +282,8 @@ public class LocalizedNamesImpl_uz extends LocalizedNamesImpl {
         "VE",
         "HU",
         "VN",
+        "XA",
+        "XB",
         "HM",
         "CN",
         "HR",
@@ -329,6 +331,7 @@ public class LocalizedNamesImpl_uz extends LocalizedNamesImpl {
     namesMap.put("151", "Sharqiy Yevropa");
     namesMap.put("154", "Shimoliy Yevropa");
     namesMap.put("155", "G‘arbiy Yevropa");
+    namesMap.put("202", "Sahro janubidagi Afrika");
     namesMap.put("419", "Lotin Amerikasi");
     namesMap.put("AC", "Me’roj oroli");
     namesMap.put("AE", "Birlashgan Arab Amirliklari");
@@ -589,6 +592,7 @@ public class LocalizedNamesImpl_uz extends LocalizedNamesImpl {
         "151": "Sharqiy Yevropa",
         "154": "Shimoliy Yevropa",
         "155": "G‘arbiy Yevropa",
+        "202": "Sahro janubidagi Afrika",
         "419": "Lotin Amerikasi",
         "AC": "Me’roj oroli",
         "AE": "Birlashgan Arab Amirliklari",

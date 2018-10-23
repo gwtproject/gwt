@@ -286,6 +286,8 @@ public class LocalizedNamesImpl_yo_BJ extends LocalizedNamesImpl_yo {
         "TF",
         "UM",
         "UN",
+        "XA",
+        "XB",
         "XK",
     };
   }

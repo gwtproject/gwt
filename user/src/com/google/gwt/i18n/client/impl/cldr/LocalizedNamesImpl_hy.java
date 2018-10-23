@@ -27,6 +27,8 @@ public class LocalizedNamesImpl_hy extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "XA",
+        "XB",
         "VI",
         "AZ",
         "AX",
@@ -322,6 +324,7 @@ public class LocalizedNamesImpl_hy extends LocalizedNamesImpl {
     namesMap.put("151", "Արևելյան Եվրոպա");
     namesMap.put("154", "Հյուսիսային Եվրոպա");
     namesMap.put("155", "Արևմտյան Եվրոպա");
+    namesMap.put("202", "Արևադարձային Աֆրիկա");
     namesMap.put("419", "Լատինական Ամերիկա");
     namesMap.put("AC", "Համբարձման կղզի");
     namesMap.put("AD", "Անդորրա");
@@ -355,7 +358,7 @@ public class LocalizedNamesImpl_hy extends LocalizedNamesImpl {
     namesMap.put("BO", "Բոլիվիա");
     namesMap.put("BQ", "Կարիբյան Նիդեռլանդներ");
     namesMap.put("BR", "Բրազիլիա");
-    namesMap.put("BS", "Բահամաներ");
+    namesMap.put("BS", "Բահամյան կղզիներ");
     namesMap.put("BT", "Բութան");
     namesMap.put("BV", "Բուվե կղզի");
     namesMap.put("BW", "Բոթսվանա");
@@ -453,7 +456,7 @@ public class LocalizedNamesImpl_hy extends LocalizedNamesImpl {
     namesMap.put("KP", "Հյուսիսային Կորեա");
     namesMap.put("KR", "Հարավային Կորեա");
     namesMap.put("KW", "Քուվեյթ");
-    namesMap.put("KY", "Կայման կղզիներ");
+    namesMap.put("KY", "Կայմանյան կղզիներ");
     namesMap.put("KZ", "Ղազախստան");
     namesMap.put("LA", "Լաոս");
     namesMap.put("LB", "Լիբանան");
@@ -622,6 +625,7 @@ public class LocalizedNamesImpl_hy extends LocalizedNamesImpl {
         "151": "Արևելյան Եվրոպա",
         "154": "Հյուսիսային Եվրոպա",
         "155": "Արևմտյան Եվրոպա",
+        "202": "Արևադարձային Աֆրիկա",
         "419": "Լատինական Ամերիկա",
         "AC": "Համբարձման կղզի",
         "AD": "Անդորրա",
@@ -655,7 +659,7 @@ public class LocalizedNamesImpl_hy extends LocalizedNamesImpl {
         "BO": "Բոլիվիա",
         "BQ": "Կարիբյան Նիդեռլանդներ",
         "BR": "Բրազիլիա",
-        "BS": "Բահամաներ",
+        "BS": "Բահամյան կղզիներ",
         "BT": "Բութան",
         "BV": "Բուվե կղզի",
         "BW": "Բոթսվանա",
@@ -753,7 +757,7 @@ public class LocalizedNamesImpl_hy extends LocalizedNamesImpl {
         "KP": "Հյուսիսային Կորեա",
         "KR": "Հարավային Կորեա",
         "KW": "Քուվեյթ",
-        "KY": "Կայման կղզիներ",
+        "KY": "Կայմանյան կղզիներ",
         "KZ": "Ղազախստան",
         "LA": "Լաոս",
         "LB": "Լիբանան",

@@ -41,7 +41,7 @@ public class DateTimeFormatInfoImpl_gl extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "dd/MM/y";
+    return "d 'de' MMM 'de' y";
   }
 
   @Override

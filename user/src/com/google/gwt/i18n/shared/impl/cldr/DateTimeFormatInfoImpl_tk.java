@@ -66,13 +66,23 @@ public class DateTimeFormatInfoImpl_tk extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "d MMMM";
+  }
+
+  @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
+    return "d MMMM EEEE";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M/d";
+    return "dd.MM";
   }
 
   @Override
@@ -82,7 +92,7 @@ public class DateTimeFormatInfoImpl_tk extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "MMM d, y";
+    return "d MMM y";
   }
 
   @Override
@@ -92,32 +102,22 @@ public class DateTimeFormatInfoImpl_tk extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFullDay() {
-    return "MMMM d, y";
+    return "d MMMM y";
   }
 
   @Override
   public String formatYearMonthNum() {
-    return "M/y";
+    return "MM.y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "M/d/y";
+    return "dd.MM.y";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
-  }
-
-  @Override
-  public String formatYearQuarterFull() {
-    return "QQQQ y";
-  }
-
-  @Override
-  public String formatYearQuarterShort() {
-    return "Q y";
+    return "d MMM y EEE";
   }
 
   @Override
@@ -197,7 +197,7 @@ public class DateTimeFormatInfoImpl_tk extends DateTimeFormatInfoImpl {
     return new String[] {
         "Ýan",
         "Few",
-        "Mart",
+        "Mar",
         "Apr",
         "Maý",
         "Iýun",

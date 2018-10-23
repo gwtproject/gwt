@@ -282,6 +282,8 @@ public class LocalizedNamesImpl_kde extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "JO",

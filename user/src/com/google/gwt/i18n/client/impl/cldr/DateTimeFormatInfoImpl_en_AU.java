@@ -22,14 +22,6 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_en_AU extends DateTimeFormatInfoImpl_en_001 {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "am",
-        "pm"
-    };
-  }
-
-  @Override
   public String dateFormatShort() {
     return "d/M/yy";
   }
@@ -45,24 +37,6 @@ public class DateTimeFormatInfoImpl_en_AU extends DateTimeFormatInfoImpl_en_001 
   }
 
   @Override
-  public String[] monthsShort() {
-    return new String[] {
-        "Jan.",
-        "Feb.",
-        "Mar.",
-        "Apr.",
-        "May",
-        "Jun.",
-        "Jul.",
-        "Aug.",
-        "Sep.",
-        "Oct.",
-        "Nov.",
-        "Dec."
-    };
-  }
-
-  @Override
   public String[] weekdaysNarrow() {
     return new String[] {
         "Su.",
@@ -72,19 +46,6 @@ public class DateTimeFormatInfoImpl_en_AU extends DateTimeFormatInfoImpl_en_001 
         "Th.",
         "F.",
         "Sa."
-    };
-  }
-
-  @Override
-  public String[] weekdaysShort() {
-    return new String[] {
-        "Sun.",
-        "Mon.",
-        "Tue.",
-        "Wed.",
-        "Thu.",
-        "Fri.",
-        "Sat."
     };
   }
 }

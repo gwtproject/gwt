@@ -22,14 +22,6 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_hy extends DateTimeFormatInfoImpl {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "ԿԱ",
-        "ԿՀ"
-    };
-  }
-
-  @Override
   public String dateFormatFull() {
     return "y թ. MMMM d, EEEE";
   }

@@ -309,6 +309,8 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
     namesMap.put("VU", "Vanuatu");
     namesMap.put("WF", "Wallis & Futuna");
     namesMap.put("WS", "Samoa");
+    namesMap.put("XA", "Pseudo-Accents");
+    namesMap.put("XB", "Pseudo-Bidi");
     namesMap.put("XK", "Kosovo");
     namesMap.put("YE", "Yemen");
     namesMap.put("YT", "Mayotte");
@@ -507,6 +509,8 @@ public class DefaultLocalizedNames extends DefaultLocalizedNamesBase {
         "PN",
         "PL",
         "PT",
+        "XA",
+        "XB",
         "PR",
         "QA",
         "RE",

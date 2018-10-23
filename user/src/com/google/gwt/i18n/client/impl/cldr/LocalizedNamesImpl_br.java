@@ -59,6 +59,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "BA",
         "BW",
         "BR",
+        "UN",
         "BN",
         "BG",
         "BF",
@@ -85,7 +86,6 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "ER",
         "EE",
         "ET",
-        "EZ",
         "FJ",
         "PH",
         "FI",
@@ -217,7 +217,6 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "QA",
         "DO",
         "CF",
-        "CZ",
         "GB",
         "RO",
         "RU",
@@ -259,8 +258,10 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "SZ",
         "TJ",
         "TW",
+        "EZ",
         "TZ",
         "TD",
+        "CZ",
         "TH",
         "TL",
         "IO",
@@ -275,7 +276,6 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "TM",
         "TV",
         "UA",
-        "UN",
         "EU",
         "UY",
         "VU",
@@ -283,6 +283,8 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "YE",
         "ZM",
         "NZ",
@@ -322,6 +324,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
     namesMap.put("151", "Europa ar Reter");
     namesMap.put("154", "Europa an Norzh");
     namesMap.put("155", "Europa ar Cʼhornôg");
+    namesMap.put("202", "Afrika issaharat");
     namesMap.put("419", "Amerika Latin");
     namesMap.put("AC", "Enez Ascension");
     namesMap.put("AE", "Emirelezhioù Arab Unanet");
@@ -356,7 +359,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
     namesMap.put("CV", "Kab-Glas");
     namesMap.put("CX", "Enez Christmas");
     namesMap.put("CY", "Kiprenez");
-    namesMap.put("CZ", "Republik Tchek");
+    namesMap.put("CZ", "Tchekia");
     namesMap.put("DE", "Alamagn");
     namesMap.put("DK", "Danmark");
     namesMap.put("DO", "Republik Dominikan");
@@ -367,6 +370,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
     namesMap.put("ES", "Spagn");
     namesMap.put("ET", "Etiopia");
     namesMap.put("EU", "Unaniezh Europa");
+    namesMap.put("EZ", "takad an euro");
     namesMap.put("FJ", "Fidji");
     namesMap.put("FK", "Inizi Falkland");
     namesMap.put("FM", "Mikronezia");
@@ -466,6 +470,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
     namesMap.put("UA", "Ukraina");
     namesMap.put("UG", "Ouganda");
     namesMap.put("UM", "Inizi diabell ar Stadoù-Unanet");
+    namesMap.put("UN", "Broadoù unanet");
     namesMap.put("US", "Stadoù-Unanet");
     namesMap.put("UZ", "Ouzbekistan");
     namesMap.put("VA", "Vatikan");
@@ -514,6 +519,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "151": "Europa ar Reter",
         "154": "Europa an Norzh",
         "155": "Europa ar Cʼhornôg",
+        "202": "Afrika issaharat",
         "419": "Amerika Latin",
         "AC": "Enez Ascension",
         "AE": "Emirelezhioù Arab Unanet",
@@ -548,7 +554,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "CV": "Kab-Glas",
         "CX": "Enez Christmas",
         "CY": "Kiprenez",
-        "CZ": "Republik Tchek",
+        "CZ": "Tchekia",
         "DE": "Alamagn",
         "DK": "Danmark",
         "DO": "Republik Dominikan",
@@ -559,6 +565,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "ES": "Spagn",
         "ET": "Etiopia",
         "EU": "Unaniezh Europa",
+        "EZ": "takad an euro",
         "FJ": "Fidji",
         "FK": "Inizi Falkland",
         "FM": "Mikronezia",
@@ -658,6 +665,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "UA": "Ukraina",
         "UG": "Ouganda",
         "UM": "Inizi diabell ar Stadoù-Unanet",
+        "UN": "Broadoù unanet",
         "US": "Stadoù-Unanet",
         "UZ": "Ouzbekistan",
         "VA": "Vatikan",

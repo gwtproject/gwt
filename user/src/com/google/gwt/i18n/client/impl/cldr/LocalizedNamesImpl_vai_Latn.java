@@ -270,6 +270,8 @@ public class LocalizedNamesImpl_vai_Latn extends LocalizedNamesImpl_vai {
         "VN",
         "VE",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "UZ",

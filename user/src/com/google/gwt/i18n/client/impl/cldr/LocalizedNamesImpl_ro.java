@@ -290,6 +290,8 @@ public class LocalizedNamesImpl_ro extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "YE",
         "ZM",
         "ZW",
@@ -325,6 +327,7 @@ public class LocalizedNamesImpl_ro extends LocalizedNamesImpl {
     namesMap.put("151", "Europa Orientală");
     namesMap.put("154", "Europa Septentrională");
     namesMap.put("155", "Europa Occidentală");
+    namesMap.put("202", "Africa Subsahariană");
     namesMap.put("419", "America Latină");
     namesMap.put("AC", "Insula Ascension");
     namesMap.put("AE", "Emiratele Arabe Unite");
@@ -448,7 +451,6 @@ public class LocalizedNamesImpl_ro extends LocalizedNamesImpl {
     namesMap.put("TF", "Teritoriile Australe și Antarctice Franceze");
     namesMap.put("TH", "Thailanda");
     namesMap.put("TJ", "Tadjikistan");
-    namesMap.put("TL", "Timorul de Est");
     namesMap.put("TR", "Turcia");
     namesMap.put("TT", "Trinidad și Tobago");
     namesMap.put("UA", "Ucraina");
@@ -496,6 +498,7 @@ public class LocalizedNamesImpl_ro extends LocalizedNamesImpl {
         "151": "Europa Orientală",
         "154": "Europa Septentrională",
         "155": "Europa Occidentală",
+        "202": "Africa Subsahariană",
         "419": "America Latină",
         "AC": "Insula Ascension",
         "AE": "Emiratele Arabe Unite",
@@ -619,7 +622,6 @@ public class LocalizedNamesImpl_ro extends LocalizedNamesImpl {
         "TF": "Teritoriile Australe și Antarctice Franceze",
         "TH": "Thailanda",
         "TJ": "Tadjikistan",
-        "TL": "Timorul de Est",
         "TR": "Turcia",
         "TT": "Trinidad și Tobago",
         "UA": "Ucraina",

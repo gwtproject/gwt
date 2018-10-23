@@ -104,6 +104,8 @@ public class LocalizedNamesImpl_bo extends LocalizedNamesImpl {
         "VG",
         "VI",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YT",
         "QA",

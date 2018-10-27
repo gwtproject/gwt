@@ -80,7 +80,7 @@
           <include name="objectweb/asm-6.1.1/asm-commons-6.1.1.jar"/>
           <include name="objectweb/asm-6.1.1/asm-util-6.1.1.jar"/>
           <include name="guava/guava-19.0/guava-19.0-rebased.jar"/>
-          <include name="icu4j/50.1.1/icu4j.jar"/>
+          <include name="icu4j/63.1/icu4j.jar"/>
           <include name="jetty/jetty-9.2.14.v20151106/jetty-all-9.2.14.v20151106.jar"/>
           <include name="gson/gson-2.6.2.jar"/>
           <include name="jscomp/20160315/sourcemap-rebased.jar"/>
@@ -139,7 +139,7 @@
           <zipfileset
               src="${gwt.tools.lib}/eclipse/jdtCompilerAdapter_3.13.102-CUSTOM-GWT-20180415.jar"/>
           <zipfileset src="${gwt.tools.lib}/guava/guava-19.0/guava-19.0-rebased.jar"/>
-          <zipfileset src="${gwt.tools.lib}/icu4j/50.1.1/icu4j.jar"/>
+          <zipfileset src="${gwt.tools.lib}/icu4j/63.1/icu4j.jar"/>
           <zipfileset
               src="${gwt.tools.lib}/jetty/jetty-9.2.14.v20151106/jetty-all-9.2.14.v20151106.jar"/>
           <zipfileset src="${gwt.tools.lib}/gson/gson-2.6.2.jar"/>

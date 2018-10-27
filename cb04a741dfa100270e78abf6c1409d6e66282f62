@@ -1,0 +1,276 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e122caf4_a0c63661",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/Flow.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-10-27T17:19:39Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "cb04a741dfa100270e78abf6c1409d6e66282f62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "308b05e5_e83cf2cb",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/Flow.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-10-27T17:19:39Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "cb04a741dfa100270e78abf6c1409d6e66282f62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0482e21f_3106c717",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/Flow.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-10-27T17:19:39Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027static\u0027 modifier.",
+      "revId": "cb04a741dfa100270e78abf6c1409d6e66282f62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77031f6b_6aa691b6",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/Flow.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-10-27T17:19:39Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cb04a741dfa100270e78abf6c1409d6e66282f62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04d57adf_406c53c0",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/Flow.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-10-27T17:19:39Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "cb04a741dfa100270e78abf6c1409d6e66282f62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04fa0c96_fc85ffda",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/Flow.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-10-27T17:19:39Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027static\u0027 modifier.",
+      "revId": "cb04a741dfa100270e78abf6c1409d6e66282f62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "538d495c_6e6eb9e6",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/Flow.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-10-27T17:19:39Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cb04a741dfa100270e78abf6c1409d6e66282f62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "954efb82_afd543c0",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/Flow.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-10-27T17:19:39Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cb04a741dfa100270e78abf6c1409d6e66282f62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f36c683_7c415694",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/Flow.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-10-27T17:19:39Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cb04a741dfa100270e78abf6c1409d6e66282f62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1be6aeb7_ba6218a0",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/Flow.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-10-27T17:19:39Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cb04a741dfa100270e78abf6c1409d6e66282f62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea8de2c0_d1d6ab19",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/Flow.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-10-27T17:19:39Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "cb04a741dfa100270e78abf6c1409d6e66282f62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f78fbe11_eb56f2cd",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/Flow.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-10-27T17:19:39Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027static\u0027 modifier.",
+      "revId": "cb04a741dfa100270e78abf6c1409d6e66282f62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "506d8eda_3c22645e",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/Flow.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-10-27T17:19:39Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cb04a741dfa100270e78abf6c1409d6e66282f62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e889cf1_58c676e3",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/Flow.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-10-27T17:19:39Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cb04a741dfa100270e78abf6c1409d6e66282f62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f53cdcd7_7036971a",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/Flow.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-10-27T17:19:39Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "cb04a741dfa100270e78abf6c1409d6e66282f62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2884230_d549b0e7",
+        "filename": "user/super/com/google/gwt/emul/java/util/concurrent/Flow.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-10-27T17:19:39Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027static\u0027 modifier.",
+      "revId": "cb04a741dfa100270e78abf6c1409d6e66282f62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

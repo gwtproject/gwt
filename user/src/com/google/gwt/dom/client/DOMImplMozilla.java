@@ -20,7 +20,16 @@ package com.google.gwt.dom.client;
  */
 class DOMImplMozilla extends DOMImplStandard {
 
-  private static native int getGeckoVersion() /*-{
+  private static int cachedGeckoVersion = -2;
+
+  private static int getGeckoVersion() {
+    if (cachedGeckoVersion == -2) {
+      cachedGeckoVersion = getNativeGeckoVersion();
+    }
+    return cachedGeckoVersion;
+  }
+
+  private static native int getNativeGeckoVersion() /*-{
     var result = /rv:([0-9]+)\.([0-9]+)(\.([0-9]+))?.*?/.exec(navigator.userAgent.toLowerCase());
     if (result && result.length >= 3) {
       var version = (parseInt(result[1]) * 1000000) + (parseInt(result[2]) * 1000) +

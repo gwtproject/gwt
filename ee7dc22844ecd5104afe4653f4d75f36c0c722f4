@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "019f27ea_f6ac673a",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-11-26T12:31:39Z",
+      "side": 1,
+      "message": "It introduces a clinit (class initialization) though, which has a runtime cost (fwiw, the one from DOMImpl creating a DOMImpl instance would be optimized out as DOMImpl methods are \"static-ified\")\n\nI did a bit of testing (compiling a small app in PRETTY style and looking at the produced JS) and using a static field initialized with a constant doesn\u0027t produce a clinit (the field is transformed to a \"global\" variable), so the solutions with -2 or 0 as a sentinel value for \"not initialized\" would work.",
+      "parentUuid": "7ba40699_0f41ab7f",
+      "revId": "ee7dc22844ecd5104afe4653f4d75f36c0c722f4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ee6208b0_eae0d277",
         "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
         "patchSetId": 1

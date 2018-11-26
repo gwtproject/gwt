@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "7ba40699_0f41ab7f",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 11267
+      },
+      "writtenOn": "2018-11-26T11:52:55Z",
+      "side": 1,
+      "message": "Great,\n\nThis approach seems the most understable as well : \n\n private static int geckoVersion \u003d getGeckoVersion();\n\nI\u0027ll update it.",
+      "parentUuid": "934ab7d7_e0a44187",
+      "revId": "ee7dc22844ecd5104afe4653f4d75f36c0c722f4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ee6208b0_eae0d277",
         "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
         "patchSetId": 1
@@ -47,6 +65,30 @@
       "writtenOn": "2018-11-26T09:46:09Z",
       "side": 1,
       "message": "Not really useful",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 6
+      },
+      "revId": "ee7dc22844ecd5104afe4653f4d75f36c0c722f4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "978f2298_792b7693",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 11267
+      },
+      "writtenOn": "2018-11-26T11:52:55Z",
+      "side": 1,
+      "message": "Old habit to document everything I do.",
+      "parentUuid": "ee6208b0_eae0d277",
       "range": {
         "startLine": 43,
         "startChar": 0,

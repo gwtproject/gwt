@@ -20,14 +20,38 @@ package com.google.gwt.dom.client;
  */
 class DOMImplMozilla extends DOMImplStandard {
 
-  private static native int getGeckoVersion() /*-{
-    var result = /rv:([0-9]+)\.([0-9]+)(\.([0-9]+))?.*?/.exec(navigator.userAgent.toLowerCase());
-    if (result && result.length >= 3) {
-      var version = (parseInt(result[1]) * 1000000) + (parseInt(result[2]) * 1000) +
-        parseInt(result.length >= 5 && !isNaN(result[4]) ? result[4] : 0);
-      return version;
-    }
-    return -1; // not gecko
+  private static boolean isGecko = true;
+
+  private static int geckoVersion = -1;
+
+  private static int getGeckoVersion() {
+      // do we know yet if this is a Gecko browser
+      if (!isGecko) {
+          return -1;
+      }
+      // have we never done the native method 
+      if (geckoVersion == -1) {
+          geckoVersion = getNativeGeckoVersion();
+          if (geckoVersion < 0) {
+              // store that this is not a gecko, it will skip the -1 test condition
+              isGecko = false;
+          }
+      }
+      return geckoVersion;
+  }
+
+  /**
+   *  This is the native call 
+   *  @return the gecko version if found, -1 otherwise
+   */ 
+  private static native int getNativeGeckoVersion() /*-{
+      var result = /rv:([0-9]+)\.([0-9]+)(\.([0-9]+))?.*?/.exec(navigator.userAgent.toLowerCase());
+      if (result && result.length >= 3) {
+        var version = (parseInt(result[1]) * 1000000) + (parseInt(result[2]) * 1000) +
+          parseInt(result.length >= 5 && !isNaN(result[4]) ? result[4] : 0);
+        return version;
+      }
+      return -1; // not gecko
   }-*/;
 
   /**

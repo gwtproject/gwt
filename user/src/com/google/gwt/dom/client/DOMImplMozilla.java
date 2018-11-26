@@ -20,6 +20,8 @@ package com.google.gwt.dom.client;
  */
 class DOMImplMozilla extends DOMImplStandard {
 
+  private static int geckoVersion = getGeckoVersion();
+
   private static native int getGeckoVersion() /*-{
     var result = /rv:([0-9]+)\.([0-9]+)(\.([0-9]+))?.*?/.exec(navigator.userAgent.toLowerCase());
     if (result && result.length >= 3) {
@@ -36,7 +38,6 @@ class DOMImplMozilla extends DOMImplStandard {
    * @return true if using Gecko 1.9 (Firefox 3) or later
    */
   private static boolean isGecko19() {
-    int geckoVersion = getGeckoVersion();
     return (geckoVersion != -1) && (geckoVersion >= 1009000);
   }
 
@@ -46,7 +47,6 @@ class DOMImplMozilla extends DOMImplStandard {
    * @return true if using Gecko 1.9.0 (Firefox 3) or earlier
    */
   private static boolean isGecko190OrBefore() {
-    int geckoVersion = getGeckoVersion();
     return (geckoVersion != -1) && (geckoVersion <= 1009000);
   }
 
@@ -56,7 +56,6 @@ class DOMImplMozilla extends DOMImplStandard {
    * @return true if using Gecko 1.9.1 (Firefox 3.5) or earlier
    */
   private static boolean isGecko191OrBefore() {
-    int geckoVersion = getGeckoVersion();
     return (geckoVersion != -1) && (geckoVersion <= 1009001);
   }
 
@@ -66,7 +65,6 @@ class DOMImplMozilla extends DOMImplStandard {
    * @return true if using Gecko 1.9.2 (Firefox 3.6) or earlier
    */
   private static boolean isGecko192OrBefore() {
-    int geckoVersion = getGeckoVersion();
     return (geckoVersion != -1) && (geckoVersion <= 1009002);
   }
 
@@ -76,7 +74,6 @@ class DOMImplMozilla extends DOMImplStandard {
    * @return true if using Gecko 2.0.0 (Firefox 4.0) or earlier
    */
   private static boolean isGecko2OrBefore() {
-    int geckoVersion = getGeckoVersion();
     return (geckoVersion != -1) && (geckoVersion < 2000000);
   }
 

@@ -42,6 +42,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -260,12 +261,10 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
     random.nextBytes(cookieBytes);
     String cookie = StringUtils.toHexString(cookieBytes);
 
-    // Cook up the classpath, main class, and extra args
-    args.addAll(Arrays.asList("-classpath",
-        ManagementFactory.getRuntimeMXBean().getClassPath(),
-        CompilePermsServer.class.getName(), "-host", "localhost", "-port",
-        String.valueOf(port), "-logLevel", logLevel.toString(), "-cookie",
-        cookie));
+    // Cook up the main class, and extra args
+    args.addAll(Arrays.asList(CompilePermsServer.class.getName(),
+        "-host", "localhost", "-port", String.valueOf(port),
+        "-logLevel", logLevel.toString(), "-cookie", cookie));
 
     // Filter undesirable arguments
     for (Iterator<String> iter = args.iterator(); iter.hasNext();) {
@@ -277,6 +276,10 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
 
     ProcessBuilder builder = new ProcessBuilder();
     builder.command(args);
+
+    // Setup the classpath
+    Map<String, String> env = builder.environment();
+    env.put("CLASSPATH", ManagementFactory.getRuntimeMXBean().getClassPath());
 
     try {
       final Process proc = builder.start();

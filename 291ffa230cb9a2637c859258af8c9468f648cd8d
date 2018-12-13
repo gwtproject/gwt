@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "e37ca73c_12852888",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-12-13T17:27:06Z",
+      "side": 1,
+      "message": "Could you amend you commit message to re-add those lines?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 55
+      },
+      "revId": "291ffa230cb9a2637c859258af8c9468f648cd8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0387768d_19c53bb4",
         "filename": "dev/core/src/com/google/gwt/dev/ExternalPermutationWorkerFactory.java",
         "patchSetId": 2

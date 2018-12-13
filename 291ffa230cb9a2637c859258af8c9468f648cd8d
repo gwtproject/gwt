@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0387768d_19c53bb4",
+        "filename": "dev/core/src/com/google/gwt/dev/ExternalPermutationWorkerFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2018-12-13T11:22:42Z",
+      "side": 1,
+      "message": "Would it break the line limit to directly put into the map without using a local variable? I think I\u0027d prefer:\n\n builder.environment().put(\"CLASSPATH\", ManagementFactory.getRuntimeMXBean().getClassPath());\n\nWDYT?",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 77
+      },
+      "revId": "291ffa230cb9a2637c859258af8c9468f648cd8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "889c3504_acab7e5a",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/ListTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T22:59:27Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.emultest.java9.util.SetTest.assertNPE\u0027 import.",
+      "revId": "3bf432cc43eea272836e3b9f6c60769fa20144f9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e41061c5_15bd0304",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/MapTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T22:59:27Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.emultest.java9.util.SetTest.assertIAE\u0027 import.",
+      "revId": "3bf432cc43eea272836e3b9f6c60769fa20144f9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e17b06f8_14b2a4bb",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/SetTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T22:59:27Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "3bf432cc43eea272836e3b9f6c60769fa20144f9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

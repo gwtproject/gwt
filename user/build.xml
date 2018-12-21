@@ -151,7 +151,7 @@
           depends="compile.dev.tests, compile.emma.if.enabled">
     <mkdir dir="${javac.junit.out}"/>
     <gwt.javac srcdir="test" destdir="${javac.junit.out}"
-               excludes="com/google/gwt/langtest/**,**/super/**,**/java8/**,**/*Java8Suite.java">
+               excludes="com/google/gwt/langtest/**,**/super/**,**/java8/**,**/*Java8Suite.java, **/java9/**, **/java10/**">
       <compilerarg value="-Xep:MissingCasesInEnumSwitch:OFF" compiler="com.google.errorprone.ErrorProneAntCompilerAdapter"/>
       <compilerarg value="-Xep:SelfComparison:OFF" compiler="com.google.errorprone.ErrorProneAntCompilerAdapter"/>
       <compilerarg value="-Xep:SelfEquals:OFF" compiler="com.google.errorprone.ErrorProneAntCompilerAdapter"/>

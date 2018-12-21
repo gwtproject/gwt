@@ -15,6 +15,7 @@
  */
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
@@ -34,6 +35,212 @@ import jsinterop.annotations.JsType;
  */
 @JsType
 public interface Map<K, V> {
+
+  @JsIgnore
+  static <K, V> Map<K, V> of() {
+    return Collections.emptyMap();
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(K key, V value) {
+    return Collections.singletonMap(checkNotNull(key), checkNotNull(value));
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(
+      K k1, V v1,
+      K k2, V v2
+  ) {
+    Map<K, V> map = new HashMap<>(2);
+    map.put(checkNotNull(k1), checkNotNull(v1));
+    checkArgument(map.put(checkNotNull(k2), checkNotNull(v2)) == null, "Duplicate key " + k2);
+    return Collections.unmodifiableMap(map);
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(
+      K k1, V v1,
+      K k2, V v2,
+      K k3, V v3
+  ) {
+    Map<K, V> map = new HashMap<>(3);
+    map.put(checkNotNull(k1), checkNotNull(v1));
+    checkArgument(map.put(checkNotNull(k2), checkNotNull(v2)) == null, "Duplicate key " + k2);
+    checkArgument(map.put(checkNotNull(k3), checkNotNull(v3)) == null, "Duplicate key " + k3);
+    return Collections.unmodifiableMap(map);
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(
+      K k1, V v1,
+      K k2, V v2,
+      K k3, V v3,
+      K k4, V v4
+  ) {
+    Map<K, V> map = new HashMap<>(4);
+    map.put(checkNotNull(k1), checkNotNull(v1));
+    checkArgument(map.put(checkNotNull(k2), checkNotNull(v2)) == null, "Duplicate key " + k2);
+    checkArgument(map.put(checkNotNull(k3), checkNotNull(v3)) == null, "Duplicate key " + k3);
+    checkArgument(map.put(checkNotNull(k4), checkNotNull(v4)) == null, "Duplicate key " + k4);
+    return Collections.unmodifiableMap(map);
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(
+      K k1, V v1,
+      K k2, V v2,
+      K k3, V v3,
+      K k4, V v4,
+      K k5, V v5
+  ) {
+    Map<K, V> map = new HashMap<>(5);
+    map.put(checkNotNull(k1), checkNotNull(v1));
+    checkArgument(map.put(checkNotNull(k2), checkNotNull(v2)) == null, "Duplicate key " + k2);
+    checkArgument(map.put(checkNotNull(k3), checkNotNull(v3)) == null, "Duplicate key " + k3);
+    checkArgument(map.put(checkNotNull(k4), checkNotNull(v4)) == null, "Duplicate key " + k4);
+    checkArgument(map.put(checkNotNull(k5), checkNotNull(v5)) == null, "Duplicate key " + k5);
+    return Collections.unmodifiableMap(map);
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(
+      K k1, V v1,
+      K k2, V v2,
+      K k3, V v3,
+      K k4, V v4,
+      K k5, V v5,
+      K k6, V v6
+  ) {
+    Map<K, V> map = new HashMap<>(6);
+    map.put(checkNotNull(k1), checkNotNull(v1));
+    checkArgument(map.put(checkNotNull(k2), checkNotNull(v2)) == null, "Duplicate key " + k2);
+    checkArgument(map.put(checkNotNull(k3), checkNotNull(v3)) == null, "Duplicate key " + k3);
+    checkArgument(map.put(checkNotNull(k4), checkNotNull(v4)) == null, "Duplicate key " + k4);
+    checkArgument(map.put(checkNotNull(k5), checkNotNull(v5)) == null, "Duplicate key " + k5);
+    checkArgument(map.put(checkNotNull(k6), checkNotNull(v6)) == null, "Duplicate key " + k6);
+    return Collections.unmodifiableMap(map);
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(
+      K k1, V v1,
+      K k2, V v2,
+      K k3, V v3,
+      K k4, V v4,
+      K k5, V v5,
+      K k6, V v6,
+      K k7, V v7
+  ) {
+    Map<K, V> map = new HashMap<>(7);
+    map.put(checkNotNull(k1), checkNotNull(v1));
+    checkArgument(map.put(checkNotNull(k2), checkNotNull(v2)) == null, "Duplicate key " + k2);
+    checkArgument(map.put(checkNotNull(k3), checkNotNull(v3)) == null, "Duplicate key " + k3);
+    checkArgument(map.put(checkNotNull(k4), checkNotNull(v4)) == null, "Duplicate key " + k4);
+    checkArgument(map.put(checkNotNull(k5), checkNotNull(v5)) == null, "Duplicate key " + k5);
+    checkArgument(map.put(checkNotNull(k6), checkNotNull(v6)) == null, "Duplicate key " + k6);
+    checkArgument(map.put(checkNotNull(k7), checkNotNull(v7)) == null, "Duplicate key " + k7);
+    return Collections.unmodifiableMap(map);
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(
+      K k1, V v1,
+      K k2, V v2,
+      K k3, V v3,
+      K k4, V v4,
+      K k5, V v5,
+      K k6, V v6,
+      K k7, V v7,
+      K k8, V v8
+  ) {
+    Map<K, V> map = new HashMap<>(8);
+    map.put(checkNotNull(k1), checkNotNull(v1));
+    checkArgument(map.put(checkNotNull(k2), checkNotNull(v2)) == null, "Duplicate key " + k2);
+    checkArgument(map.put(checkNotNull(k3), checkNotNull(v3)) == null, "Duplicate key " + k3);
+    checkArgument(map.put(checkNotNull(k4), checkNotNull(v4)) == null, "Duplicate key " + k4);
+    checkArgument(map.put(checkNotNull(k5), checkNotNull(v5)) == null, "Duplicate key " + k5);
+    checkArgument(map.put(checkNotNull(k6), checkNotNull(v6)) == null, "Duplicate key " + k6);
+    checkArgument(map.put(checkNotNull(k7), checkNotNull(v7)) == null, "Duplicate key " + k7);
+    checkArgument(map.put(checkNotNull(k8), checkNotNull(v8)) == null, "Duplicate key " + k8);
+    return Collections.unmodifiableMap(map);
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(
+      K k1, V v1,
+      K k2, V v2,
+      K k3, V v3,
+      K k4, V v4,
+      K k5, V v5,
+      K k6, V v6,
+      K k7, V v7,
+      K k8, V v8,
+      K k9, V v9
+  ) {
+    Map<K, V> map = new HashMap<>(9);
+    map.put(checkNotNull(k1), checkNotNull(v1));
+    checkArgument(map.put(checkNotNull(k2), checkNotNull(v2)) == null, "Duplicate key " + k2);
+    checkArgument(map.put(checkNotNull(k3), checkNotNull(v3)) == null, "Duplicate key " + k3);
+    checkArgument(map.put(checkNotNull(k4), checkNotNull(v4)) == null, "Duplicate key " + k4);
+    checkArgument(map.put(checkNotNull(k5), checkNotNull(v5)) == null, "Duplicate key " + k5);
+    checkArgument(map.put(checkNotNull(k6), checkNotNull(v6)) == null, "Duplicate key " + k6);
+    checkArgument(map.put(checkNotNull(k7), checkNotNull(v7)) == null, "Duplicate key " + k7);
+    checkArgument(map.put(checkNotNull(k8), checkNotNull(v8)) == null, "Duplicate key " + k8);
+    checkArgument(map.put(checkNotNull(k9), checkNotNull(v9)) == null, "Duplicate key " + k9);
+    return Collections.unmodifiableMap(map);
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> of(
+      K k1, V v1,
+      K k2, V v2,
+      K k3, V v3,
+      K k4, V v4,
+      K k5, V v5,
+      K k6, V v6,
+      K k7, V v7,
+      K k8, V v8,
+      K k9, V v9,
+      K k10, V v10
+  ) {
+    Map<K, V> map = new HashMap<>(10);
+    map.put(checkNotNull(k1), checkNotNull(v1));
+    checkArgument(map.put(checkNotNull(k2), checkNotNull(v2)) == null, "Duplicate key " + k2);
+    checkArgument(map.put(checkNotNull(k3), checkNotNull(v3)) == null, "Duplicate key " + k3);
+    checkArgument(map.put(checkNotNull(k4), checkNotNull(v4)) == null, "Duplicate key " + k4);
+    checkArgument(map.put(checkNotNull(k5), checkNotNull(v5)) == null, "Duplicate key " + k5);
+    checkArgument(map.put(checkNotNull(k6), checkNotNull(v6)) == null, "Duplicate key " + k6);
+    checkArgument(map.put(checkNotNull(k7), checkNotNull(v7)) == null, "Duplicate key " + k7);
+    checkArgument(map.put(checkNotNull(k8), checkNotNull(v8)) == null, "Duplicate key " + k8);
+    checkArgument(map.put(checkNotNull(k9), checkNotNull(v9)) == null, "Duplicate key " + k9);
+    checkArgument(map.put(checkNotNull(k10), checkNotNull(v10)) == null, "Duplicate key " + k10);
+    return Collections.unmodifiableMap(map);
+  }
+
+  @JsIgnore
+  static <K, V> Entry<K, V> entry(K key, V value) {
+    // This isn't quite consistent with the javadoc, since this is serializable, while entry()
+    // need not be serializable.
+    return new AbstractMap.SimpleImmutableEntry(
+        checkNotNull(key),
+        checkNotNull(value)
+    );
+  }
+
+  @JsIgnore
+  static <K, V> Map<K, V> ofEntries(Entry<? extends K, ? extends V>... entries) {
+    Map<K, V> map = new HashMap<>(entries.length);
+
+    for (int i = 0; i < entries.length; i++) {
+      // TODO this perhaps can be optimized if we know the entry is an instanceo of
+      //  AbstractMap.SimpleImmutableEntry, or something more specialized?
+      Entry<? extends K, ? extends V> entry = checkNotNull(entries[i]);
+      checkArgument(map.put(checkNotNull(entry.getKey()), checkNotNull(entry.getValue())) == null,
+          "Duplicate key " + entry.getKey());
+    }
+
+    return Collections.unmodifiableMap(map);
+  }
 
   /**
    * Represents an individual map entry.
@@ -205,5 +412,6 @@ public interface Map<K, V> {
 
   int size();
 
-  @JsNonNull Collection<V> values();
+  @JsNonNull
+  Collection<V> values();
 }

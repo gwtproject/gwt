@@ -1,0 +1,276 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ae1e31f_9ab60ebc",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/ListTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T21:50:24Z",
+      "side": 1,
+      "message": "[error] Line does not match expected header line of \u0027^/\\*[ ]*$\u0027.",
+      "revId": "28b868fd60164aaf2060449e80907db13a1c98f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6a354bc_4448a985",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/ListTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T21:50:24Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.emultest.java9.util.SetTest.assertNPE\u0027 import.",
+      "revId": "28b868fd60164aaf2060449e80907db13a1c98f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4472a98e_84021c54",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/ListTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T21:50:24Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "28b868fd60164aaf2060449e80907db13a1c98f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb1e3ca1_593ab3c5",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/ListTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T21:50:24Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "28b868fd60164aaf2060449e80907db13a1c98f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64155d0d_2879c166",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/MapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T21:50:24Z",
+      "side": 1,
+      "message": "[error] Line does not match expected header line of \u0027^/\\*[ ]*$\u0027.",
+      "revId": "28b868fd60164aaf2060449e80907db13a1c98f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c0f2c0bd_3a485c93",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/MapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T21:50:24Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.emultest.java9.util.SetTest.*\u0027 import.",
+      "revId": "28b868fd60164aaf2060449e80907db13a1c98f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ec82b4d0_db6278ba",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/MapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T21:50:24Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - com.google.gwt.emultest.java9.util.SetTest.*.",
+      "revId": "28b868fd60164aaf2060449e80907db13a1c98f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e936090b_3d576033",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/MapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T21:50:24Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "28b868fd60164aaf2060449e80907db13a1c98f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "470e2046_02298694",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/MapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T21:50:24Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "28b868fd60164aaf2060449e80907db13a1c98f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0c35bb43_94f7fecc",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/MapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T21:50:24Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "28b868fd60164aaf2060449e80907db13a1c98f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49676de7_a75650b6",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/MapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T21:50:24Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "28b868fd60164aaf2060449e80907db13a1c98f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ec91f426_3e77a29c",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/MapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T21:50:24Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "28b868fd60164aaf2060449e80907db13a1c98f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bdfb9b2e_278ae322",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/SetTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T21:50:24Z",
+      "side": 1,
+      "message": "[error] Line does not match expected header line of \u0027^/\\*[ ]*$\u0027.",
+      "revId": "28b868fd60164aaf2060449e80907db13a1c98f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a36c013_2fc855cd",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/SetTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T21:50:24Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "28b868fd60164aaf2060449e80907db13a1c98f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65423400_17bfcc5e",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/SetTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T21:50:24Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "28b868fd60164aaf2060449e80907db13a1c98f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ed26012_80ee1ea7",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/SetTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2018-12-21T21:50:24Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "28b868fd60164aaf2060449e80907db13a1c98f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

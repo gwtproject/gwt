@@ -52,7 +52,7 @@ public class Throwable implements Serializable {
   private transient Throwable[] suppressedExceptions;
   private transient StackTraceElement[] stackTrace = new StackTraceElement[0];
   private transient boolean disableSuppression;
-  private transient boolean writetableStackTrace = true;
+  private transient boolean writableStackTrace = true;
 
   @JsProperty
   private transient Object backingJsObject = UNINITIALIZED;
@@ -87,12 +87,12 @@ public class Throwable implements Serializable {
    * Those features should only be disabled in very specific cases.
    */
   protected Throwable(String message, Throwable cause, boolean enableSuppression,
-      boolean writetableStackTrace) {
+      boolean writableStackTrace) {
     this.cause = cause;
     this.detailMessage = message;
-    this.writetableStackTrace = writetableStackTrace;
+    this.writableStackTrace = writableStackTrace;
     this.disableSuppression = !enableSuppression;
-    if (writetableStackTrace) {
+    if (writableStackTrace) {
       fillInStackTrace();
     }
     initializeBackingError();
@@ -184,7 +184,7 @@ public class Throwable implements Serializable {
    */
   @DoNotInline
   public Throwable fillInStackTrace() {
-    if (writetableStackTrace) {
+    if (writableStackTrace) {
       // If this is the first run, let constructor initialize it.
       // (We need to initialize the backingJsObject from constructor as our own implementation of
       // fillInStackTrace is not guaranteed to be executed.)

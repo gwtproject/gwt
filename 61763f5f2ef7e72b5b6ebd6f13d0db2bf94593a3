@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94c275ea_1f864cf7",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/GwtAstBuilderTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2019-01-30T18:19:05Z",
+      "side": 1,
+      "message": "If I\u0027m understanding this right, under the new jdt fewer casts are synthesized for b() and c()? I\u0027m not sure I understand how no casts at all are required for the b() case.\n\nSince this is the only code which changed substantially, it seems worth understanding better.",
+      "revId": "61763f5f2ef7e72b5b6ebd6f13d0db2bf94593a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

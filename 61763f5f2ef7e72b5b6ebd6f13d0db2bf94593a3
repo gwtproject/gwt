@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "082188bc_4b963682",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/GwtAstBuilderTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2019-01-30T18:38:16Z",
+      "side": 1,
+      "message": "Extract this to a method \"getCastsNames()\".\nAdd an assertion after the loop that maybeCastOperations instanceOf MethodCall to make sure no other unexpected transformations happened.\n\nrewrite the test as\n\nList\u003cStatements\u003e statements \u003d ((JMethodBody) mainMethod.getBody()).getStatements();\nassertEquals(Arrays.asList(....), getCasts(statements.get(0));\nassertEquals(Arrays.asList(....), getCasts(statements.get(1));\nassertEquals(Arrays.asList(....), getCasts(statements.get(2));",
+      "range": {
+        "startLine": 259,
+        "startChar": 5,
+        "endLine": 266,
+        "endChar": 7
+      },
+      "revId": "61763f5f2ef7e72b5b6ebd6f13d0db2bf94593a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd9629f9_6829ccd0",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/GwtAstBuilderTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2019-01-30T18:38:16Z",
+      "side": 1,
+      "message": "Here we should assert precisely the order that we are expecting. It should still be a list.",
+      "range": {
+        "startLine": 273,
+        "startChar": 17,
+        "endLine": 274,
+        "endChar": 35
+      },
+      "revId": "61763f5f2ef7e72b5b6ebd6f13d0db2bf94593a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "94c275ea_1f864cf7",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/GwtAstBuilderTest.java",
         "patchSetId": 1
@@ -13,6 +59,24 @@
       "writtenOn": "2019-01-30T18:19:05Z",
       "side": 1,
       "message": "If I\u0027m understanding this right, under the new jdt fewer casts are synthesized for b() and c()? I\u0027m not sure I understand how no casts at all are required for the b() case.\n\nSince this is the only code which changed substantially, it seems worth understanding better.",
+      "revId": "61763f5f2ef7e72b5b6ebd6f13d0db2bf94593a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77cd6ba6_b651efe3",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/GwtAstBuilderTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2019-01-30T18:38:16Z",
+      "side": 1,
+      "message": "Due to erasure, Java statically guarantees that T is of type B. So it is OK not to have a cast to B. I am surprised that get().a() ends up with casting to A, B and C while get().c() only ends up casting to C. Java spec only requires cast to A in the former.\n\nExcept for the behavior of get().a(), it seems that the TODO is satisfied. \n\nNot knowing the reason for this asymmetry is troublesome, I would debug GwtAstBuilder on this test.",
+      "parentUuid": "94c275ea_1f864cf7",
       "revId": "61763f5f2ef7e72b5b6ebd6f13d0db2bf94593a3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true

@@ -22,6 +22,7 @@
     </licenses>
     <properties>
       <jetty.version>9.2.14.v20151106</jetty.version>
+      <asm.version>7.1</asm.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -89,17 +90,17 @@
             <dependency>
                 <groupId>org.ow2.asm</groupId>
                 <artifactId>asm</artifactId>
-                <version>6.1.1</version>
+                <version>${asm.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.ow2.asm</groupId>
                 <artifactId>asm-commons</artifactId>
-                <version>6.1.1</version>
+                <version>${asm.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.ow2.asm</groupId>
                 <artifactId>asm-util</artifactId>
-                <version>6.1.1</version>
+                <version>${asm.version}</version>
             </dependency>
             <dependency>
                 <groupId>colt</groupId>

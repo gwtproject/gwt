@@ -45,8 +45,11 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -237,25 +240,24 @@ public class GwtAstBuilderTest extends JJSTestBase {
         "package test;",
         "public class IntersectionBound {",
         "  public void main() {",
-        "    get().f();",
-        "    get().g();",
-        "    get().h();",
+        "    get().a();",
+        "    get().b();",
+        "    get().c();",
         "  }",
-        "  public interface A<T> { void f(); }",
-        "  public interface B { void g(); }",
-        "  public interface C { void h(); }",
+        "  public interface A<T> { void a(); }",
+        "  public interface B { void b(); }",
+        "  public interface C { void c(); }",
         "  <T extends B & A<String> & C> T get() { return null;} ",
         "}"
     ));
 
     JProgram program = compileProgram("test.IntersectionBound");
     JMethod mainMethod = findQualifiedMethod(program, "test.IntersectionBound.main");
+
+    Map<String, Set<String>> castsForMethodCall = new HashMap<>();
     for (JStatement statement : ((JMethodBody) mainMethod.getBody()).getStatements()) {
-      // TODO: should have inserted only a cast to the type needed in the specific context context,
-      // but that would require some redesign. For now make sure all the casts from the intersection
-      // type are emitted.
-      JExpression maybeCastOperation =
-          ((JMethodCall) ((JExpressionStatement) statement).getExpr()).getInstance();
+      JMethodCall methodCall = (JMethodCall) ((JExpressionStatement) statement).getExpr();
+      JExpression maybeCastOperation = methodCall.getInstance();
       Set<String> castToTypeNames = Sets.newHashSet();
       while (maybeCastOperation instanceof  JCastOperation) {
         JCastOperation castOperation = (JCastOperation) maybeCastOperation;
@@ -263,11 +265,15 @@ public class GwtAstBuilderTest extends JJSTestBase {
         maybeCastOperation = castOperation.getExpr();
       }
 
-      assertEquals(
-          Sets.newHashSet(Arrays.asList(
-              "test.IntersectionBound$A", "test.IntersectionBound$B", "test.IntersectionBound$C")),
-          castToTypeNames);
+      castsForMethodCall.put(methodCall.getTarget().getName(), castToTypeNames);
     }
+
+    // TODO: should have inserted only a cast to the type needed in the specific context context,
+    // but that would require some redesign.
+    assertEquals(Sets.newHashSet("test.IntersectionBound$A", "test.IntersectionBound$B",
+        "test.IntersectionBound$C"), castsForMethodCall.get("a"));
+    assertEquals(Collections.emptySet(), castsForMethodCall.get("b"));
+    assertEquals(Sets.newHashSet("test.IntersectionBound$C"), castsForMethodCall.get("c"));
   }
 
   public void testBridgeMethodResolution() throws UnableToCompleteException {

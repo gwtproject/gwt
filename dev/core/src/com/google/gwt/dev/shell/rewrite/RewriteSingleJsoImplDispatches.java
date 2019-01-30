@@ -57,7 +57,7 @@ import java.util.TreeSet;
 public class RewriteSingleJsoImplDispatches extends ClassVisitor {
   private class MyMethodVisitor extends MethodVisitor {
     public MyMethodVisitor(MethodVisitor mv) {
-      super(Opcodes.ASM6, mv);
+      super(Opcodes.ASM7, mv);
     }
 
     /*
@@ -133,7 +133,7 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
 
   public RewriteSingleJsoImplDispatches(ClassVisitor v, TypeOracle typeOracle,
       SingleJsoImplData jsoData) {
-    super(Opcodes.ASM6, v);
+    super(Opcodes.ASM7, v);
     this.typeOracle = typeOracle;
     this.jsoData = jsoData;
   }

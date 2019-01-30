@@ -56,7 +56,7 @@ public class BytecodeSignatureMaker {
     private Map<String, String> methods = new HashMap<String, String>();
 
     public CompileDependencyVisitor() {
-      super(Opcodes.ASM6);
+      super(Opcodes.ASM7);
     }
 
     public String getSignature() {

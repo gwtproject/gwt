@@ -42,7 +42,7 @@ public class CollectReferencesVisitor extends EmptyVisitor {
   private class CollectGenericTypes extends SignatureVisitor {
 
     public CollectGenericTypes() {
-      super(Opcodes.ASM6);
+      super(Opcodes.ASM7);
     }
 
     @Override
@@ -121,7 +121,7 @@ public class CollectReferencesVisitor extends EmptyVisitor {
   }
 
   CollectReferencesVisitor() {
-    this.av = new AnnotationVisitor(Opcodes.ASM6, this.av) {
+    this.av = new AnnotationVisitor(Opcodes.ASM7, this.av) {
       @Override
       public void visitEnum(String name, String desc, String value) {
         addTypeIfClass(desc);

@@ -26,17 +26,13 @@ import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.jjs.JavaAstConstructor;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JArrayType;
-import com.google.gwt.dev.jjs.ast.JCastOperation;
 import com.google.gwt.dev.jjs.ast.JClassLiteral;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JExpression;
-import com.google.gwt.dev.jjs.ast.JExpressionStatement;
 import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
-import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVariable;
 import com.google.gwt.dev.jjs.ast.JVisitor;
@@ -233,41 +229,25 @@ public class GwtAstBuilderTest extends JJSTestBase {
   }
 
   public void testIntersectionBound() throws UnableToCompleteException {
-    sources.add(JavaResourceBase.createMockJavaResource("test.IntersectionBound",
+    addAll(JavaResourceBase.createMockJavaResource("test.IntersectionBound",
         "package test;",
+        "interface A<T> { void a(); }",
+        "interface B { void b(); }",
+        "interface C { void c(); }",
         "public class IntersectionBound {",
-        "  public void main() {",
-        "    get().f();",
-        "    get().g();",
-        "    get().h();",
-        "  }",
-        "  public interface A<T> { void f(); }",
-        "  public interface B { void g(); }",
-        "  public interface C { void h(); }",
         "  <T extends B & A<String> & C> T get() { return null;} ",
         "}"
     ));
 
-    JProgram program = compileProgram("test.IntersectionBound");
-    JMethod mainMethod = findQualifiedMethod(program, "test.IntersectionBound.main");
-    for (JStatement statement : ((JMethodBody) mainMethod.getBody()).getStatements()) {
-      // TODO: should have inserted only a cast to the type needed in the specific context context,
-      // but that would require some redesign. For now make sure all the casts from the intersection
-      // type are emitted.
-      JExpression maybeCastOperation =
-          ((JMethodCall) ((JExpressionStatement) statement).getExpr()).getInstance();
-      Set<String> castToTypeNames = Sets.newHashSet();
-      while (maybeCastOperation instanceof  JCastOperation) {
-        JCastOperation castOperation = (JCastOperation) maybeCastOperation;
-        castToTypeNames.add(castOperation.getCastType().getName());
-        maybeCastOperation = castOperation.getExpr();
-      }
-
-      assertEquals(
-          Sets.newHashSet(Arrays.asList(
-              "test.IntersectionBound$A", "test.IntersectionBound$B", "test.IntersectionBound$C")),
-          castToTypeNames);
-    }
+    assertEqualBlock(
+        "((C)(B)(A)(new IntersectionBound()).get()).a();",
+        "new IntersectionBound().get().a();");
+    assertEqualBlock(
+        "(new IntersectionBound()).get().b();",
+        "new IntersectionBound().get().b();");
+    assertEqualBlock(
+        "((C)(new IntersectionBound()).get()).c();", 
+        "new IntersectionBound().get().c();");
   }
 
   public void testBridgeMethodResolution() throws UnableToCompleteException {

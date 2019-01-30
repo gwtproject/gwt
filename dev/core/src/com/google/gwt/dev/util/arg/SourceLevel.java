@@ -25,7 +25,8 @@ public enum SourceLevel {
   // Source levels must appear in ascending order for the default setting logic to work.
   JAVA8("1.8", "8"),
   JAVA9("1.9", "9"),
-  JAVA10("1.10", "10");
+  JAVA10("1.10", "10"),
+  JAVA11("1.11", "11");
 
   /**
    * The default java sourceLevel.

@@ -6,12 +6,12 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/apache/ant-1.6.5.jar" sourcepath="/GWT_TOOLS/lib/apache/ant-1.6.5-src.zip"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/apache/tapestry-util-text-4.0.2.jar" sourcepath="/GWT_TOOLS/lib/apache/tapestry-util-text-4.0.2-src.zip"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/org.eclipse.jdt.core_3.13.102-CUSTOM-GWT-20180415.jar" sourcepath="/GWT_TOOLS/lib/eclipse/org.eclipse.jdt.core.source_3.13.102-CUSTOM-GWT-20180415.jar"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/jdtCompilerAdapter_3.13.102-CUSTOM-GWT-20180415.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/org.eclipse.jdt.core_3.16.0.v20181130-1748.jar" sourcepath="/GWT_TOOLS/lib/eclipse/org.eclipse.jdt.core.source_3.16.0.v20181130-1748.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/jdtCompilerAdapter_3.16.0.v20181130-1748.jar"/>
 	<classpathentry exported="true" kind="var" path="GWT_TOOLS/lib/jetty/jetty-9.2.14.v20151106/jetty-all-9.2.14.v20151106.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/jsr305/jsr305.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/junit/junit-4.8.2.jar" sourcepath="/GWT_TOOLS/lib/junit/junit-4.8.2-src.zip"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-6.1.1/asm-6.1.1.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-7.0/asm-7.0.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/tomcat/ant-launcher-1.6.5.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/tomcat/catalina-1.0.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/tomcat/catalina-optional-1.0.jar"/>
@@ -30,9 +30,9 @@
 	<classpathentry exported="true" kind="var" path="GWT_TOOLS/lib/tomcat/tomcat-websocket-api-8.0.28.jar"/>
 	<classpathentry exported="true" kind="var" path="GWT_TOOLS/lib/tomcat/tomcat-annotations-api-8.0.28.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/colt/colt-1.2.jar" sourcepath="/GWT_TOOLS/lib/colt/colt-1.2-src.jar"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-6.1.1/asm-analysis-6.1.1.jar"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-6.1.1/asm-commons-6.1.1.jar"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-6.1.1/asm-tree-6.1.1.jar"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-6.1.1/asm-util-6.1.1.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-7.0/asm-analysis-7.0.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-7.0/asm-commons-7.0.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-7.0/asm-tree-7.0.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-7.0/asm-util-7.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1024,7 +1024,7 @@ public class Java8AstTest extends FullCompileTestBase {
     addSnippetClassDecl("interface I1 { public void foo(); }");
     addSnippetClassDecl("interface I2 { }");
     String lambda = "Object o = (I2 & I1) () -> {};";
-    assertEqualBlock("Object o=(EntryPoint$I2)(EntryPoint$I1)new EntryPoint$lambda$0$Type();",
+    assertEqualBlock("Object o=(EntryPoint$I1)(EntryPoint$I2)new EntryPoint$lambda$0$Type();",
         lambda);
 
     JProgram program = compileSnippet("void", lambda, false);
@@ -1060,7 +1060,7 @@ public class Java8AstTest extends FullCompileTestBase {
     addSnippetClassDecl("interface I3 { }");
     String lambda = "I2 o = (I3 & I2 & I1) () -> {};";
     assertEqualBlock(
-        "EntryPoint$I2 o=(EntryPoint$I3)(EntryPoint$I2)(EntryPoint$I1)new EntryPoint$lambda$0$Type();",
+        "EntryPoint$I2 o=(EntryPoint$I1)(EntryPoint$I2)(EntryPoint$I3)new EntryPoint$lambda$0$Type();",
         lambda);
 
     JProgram program = compileSnippet("void", lambda, false);

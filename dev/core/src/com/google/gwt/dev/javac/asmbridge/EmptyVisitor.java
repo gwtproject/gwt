@@ -27,7 +27,7 @@ import org.objectweb.asm.Opcodes;
  */
 public class EmptyVisitor extends ClassVisitor {
 
-  protected AnnotationVisitor av = new AnnotationVisitor(Opcodes.ASM6) {
+  protected AnnotationVisitor av = new AnnotationVisitor(Opcodes.ASM7) {
 
     @Override
     public AnnotationVisitor visitAnnotation(String name, String desc) {
@@ -41,10 +41,10 @@ public class EmptyVisitor extends ClassVisitor {
   };
 
   public EmptyVisitor() {
-    super(Opcodes.ASM6);
+    super(Opcodes.ASM7);
   }
 
-  protected MethodVisitor mv = new MethodVisitor(Opcodes.ASM6) {
+  protected MethodVisitor mv = new MethodVisitor(Opcodes.ASM7) {
 
     @Override
     public AnnotationVisitor visitAnnotationDefault() {
@@ -63,7 +63,7 @@ public class EmptyVisitor extends ClassVisitor {
     }
   };
 
-  protected FieldVisitor fv = new FieldVisitor(Opcodes.ASM6) {
+  protected FieldVisitor fv = new FieldVisitor(Opcodes.ASM7) {
 
     @Override
     public AnnotationVisitor visitAnnotation(String desc, boolean visible) {

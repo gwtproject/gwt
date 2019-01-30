@@ -959,6 +959,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.8"));
     assertEquals(SourceLevel.JAVA9, SourceLevel.getBestMatchingVersion("1.9"));
     assertEquals(SourceLevel.JAVA10, SourceLevel.getBestMatchingVersion("1.10"));
+    assertEquals(SourceLevel.JAVA11, SourceLevel.getBestMatchingVersion("1.11"));
 
     // not proper version strings => default to JAVA8.
     assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.6u3"));
@@ -1701,7 +1702,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     File applicationDir = Files.createTempDir();
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
-    compilerOptions.setSourceLevel(SourceLevel.JAVA10);
+    compilerOptions.setSourceLevel(SourceLevel.JAVA11);
 
     // Compile the application with no errors.
     compileToJs(TreeLogger.NULL, compilerOptions, applicationDir, "com.foo.Errors",
@@ -1764,7 +1765,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     File applicationDir = Files.createTempDir();
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
-    compilerOptions.setSourceLevel(SourceLevel.JAVA10);
+    compilerOptions.setSourceLevel(SourceLevel.JAVA11);
     compilerOptions.setGenerateJsInteropExports(false);
 
     // Compile the application with no errors.
@@ -2115,7 +2116,7 @@ public class CompilerTest extends ArgProcessorTestBase {
 
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
-    compilerOptions.setSourceLevel(SourceLevel.JAVA10);
+    compilerOptions.setSourceLevel(SourceLevel.JAVA11);
 
     checkRecompiledModifiedApp(compilerOptions, "com.foo.DefaultMethod",
         Lists.newArrayList(moduleResource, entryPointResource, aSubclass,

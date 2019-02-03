@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aaa3cb29_0e41c6cf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1782,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2019-02-03T02:37:08Z",
+      "side": 1,
+      "message": "Please extract as a method and use the same for both lambdas and method references. I see that for lambdas there is another version for processIntersectionType. These two should be the same. All the types in the intersection need to be supers of the lambda implementation, and the implementation should be the same for both lambdas and method references.\n\nKeep in mind that Ray wrote much of the lambda handling code in GwtAstBuilder before the Java 8 spec was finalized (where I think lambdas were thought to be able to implement also classes if they had a single abstract method), so there might be code that is doing unnecessary things.\n\nLooking at processIntersectionTypeForLambda it seems that the extra code trying to filter the intersection types that have the functional method being implemented should not be necessary.\n\nW.r.t. to the call to JdtUtil.signature (mentioned in the issue) it is indifferent to use the declarationSamBinding or the samBinding. The difference between the two is the type parameterization. Because type parameterization does not change the signature both signatures are the same.",
+      "range": {
+        "startLine": 1775,
+        "startChar": 0,
+        "endLine": 1782,
+        "endChar": 7
+      },
+      "revId": "02d685daffab4e89ba7c643260460d879a69a561",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "093fec19_1c45d898",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2019-02-03T02:37:08Z",
+      "side": 1,
+      "message": "You should have some tests were the interfaces are parameterized.",
+      "range": {
+        "startLine": 1143,
+        "startChar": 2,
+        "endLine": 1153,
+        "endChar": 102
+      },
+      "revId": "02d685daffab4e89ba7c643260460d879a69a561",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

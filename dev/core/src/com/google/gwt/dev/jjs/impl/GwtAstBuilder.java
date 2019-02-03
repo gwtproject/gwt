@@ -1214,14 +1214,7 @@ public class GwtAstBuilder {
       // And its JInterface container we must implement
       // There may be more than more JInterface containers to be implemented
       // if the lambda expression is cast to a IntersectionCastType.
-      JInterfaceType[] lambdaInterfaces;
-      if (binding instanceof IntersectionTypeBinding18) {
-        IntersectionTypeBinding18 type = (IntersectionTypeBinding18) binding;
-        lambdaInterfaces =
-            processIntersectionType(type, new JInterfaceType[type.intersectingTypes.length]);
-      } else {
-        lambdaInterfaces = new JInterfaceType[] {(JInterfaceType) typeMap.get(binding)};
-      }
+      JInterfaceType[] lambdaInterfaces = getInterfacesToImplement(binding);
       SourceInfo info = makeSourceInfo(x);
 
       // Create an inner class to implement the interface and SAM method.
@@ -1268,6 +1261,14 @@ public class GwtAstBuilder {
       popMethodInfo();
       // Add the newly generated type
       newTypes.add(innerLambdaClass);
+    }
+
+    private JInterfaceType[] getInterfacesToImplement(TypeBinding binding) {
+      if (binding instanceof IntersectionTypeBinding18) {
+        IntersectionTypeBinding18 type = (IntersectionTypeBinding18) binding;
+        return processIntersectionType(type, new JInterfaceType[type.intersectingTypes.length]);
+      }
+      return new JInterfaceType[]{(JInterfaceType) typeMap.get(binding)};
     }
 
     private void createFunctionalExpressionBridges(
@@ -1771,7 +1772,8 @@ public class GwtAstBuilder {
           binding.getSingleAbstractMethod(blockScope, false).original();
       // Get the interface method is binds to
       JMethod interfaceMethod = typeMap.get(declarationSamBinding);
-      JInterfaceType funcType = (JInterfaceType) typeMap.get(binding);
+
+      JInterfaceType[] funcType = getInterfacesToImplement(binding);
       SourceInfo info = makeSourceInfo(x);
 
       // Get the method that the Type::method is actually referring to

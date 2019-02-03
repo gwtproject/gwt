@@ -1617,7 +1617,7 @@ public class Java8Test extends GWTTestCase {
     assertEquals(4, outer.createInner2Param().apply(1, 2).sum);
     assertEquals(7, outer.createInner3Param().apply(1, 2, 3).sum);
     assertEquals(7, outer.createInner2ParamArray().apply(1, new Integer[] {2, 3}).sum);
-    
+
     // inner class constructor varargs + autoboxing
     assertEquals(2, outer.createInner1IntParam().apply(1).sum);
     assertEquals(4, outer.createInner2IntParam().apply(1, 2).sum);
@@ -2006,7 +2006,7 @@ public class Java8Test extends GWTTestCase {
   ////////////////////////////////////////////////////////////
   //
   //   Tests for language features introduced in Java 9
-  
+
   class Resource implements AutoCloseable {
     boolean isOpen = true;
 
@@ -2079,5 +2079,38 @@ public class Java8Test extends GWTTestCase {
   public void testImproperMethodResolution() {
     Predicate p = o -> true;
     assertTrue(p.test(null));
+  }
+
+  interface I2<T> { public T foo(T arg); }
+
+  interface I1 extends I2<String> { public String foo(String arg0); }
+
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public void testIntersectionCastLambda() {
+
+    Object instance = (I1 & I2<String>) val -> "#" + val;
+
+    assertTrue(instance instanceof I1);
+    assertTrue(instance instanceof I2);
+
+    I1 lambda = (I1) instance;
+    I2 raw = lambda;
+    assertEquals("#1", raw.foo("2")); // tests that the bridge exists and is correct
+    assertEquals("#2", lambda.foo("2"));
+  }
+
+  static class C { public static String append(String str) { return "#" + str; } }
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public void testIntersectionCastMethodReference() {
+
+    Object instance = (I1 & I2<String>) C::append;
+
+    assertTrue(instance instanceof I1);
+    assertTrue(instance instanceof I2);
+
+    I1 lambda = (I1) instance;
+    I2 raw = lambda;
+    assertEquals("#1", raw.foo("1")); // tests that the bridge exists and is correct
+    assertEquals("#2", lambda.foo("2"));
   }
 }

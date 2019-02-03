@@ -360,6 +360,14 @@ public class Java8Test extends GWTTestCase {
     assertFalse(isGwtSourceLevel9());
   }
 
+  public void testIntersectionCastLambda() {
+    assertFalse(isGwtSourceLevel9());
+  }
+
+  public void testIntersectionCastMethodReference() {
+    assertFalse(isGwtSourceLevel9());
+  }
+
   private boolean isGwtSourceLevel9() {
     return JUnitShell.getCompilerOptions().getSourceLevel().compareTo(SourceLevel.JAVA9) >= 0;
   }

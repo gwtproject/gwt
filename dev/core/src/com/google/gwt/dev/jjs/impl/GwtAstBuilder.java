@@ -1771,7 +1771,15 @@ public class GwtAstBuilder {
           binding.getSingleAbstractMethod(blockScope, false).original();
       // Get the interface method is binds to
       JMethod interfaceMethod = typeMap.get(declarationSamBinding);
-      JInterfaceType funcType = (JInterfaceType) typeMap.get(binding);
+
+      JInterfaceType[] funcType;
+      if (binding instanceof IntersectionTypeBinding18) {
+        IntersectionTypeBinding18 type = (IntersectionTypeBinding18) binding;
+        funcType =
+            processIntersectionType(type, new JInterfaceType[type.intersectingTypes.length]);
+      } else {
+        funcType = new JInterfaceType[] {(JInterfaceType) typeMap.get(binding)};
+      }
       SourceInfo info = makeSourceInfo(x);
 
       // Get the method that the Type::method is actually referring to

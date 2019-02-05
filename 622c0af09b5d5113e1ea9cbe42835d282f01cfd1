@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd87b754_2471b42a",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractMap.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2019-02-05T07:59:23Z",
+      "side": 1,
+      "message": "Maybe update link?",
+      "revId": "622c0af09b5d5113e1ea9cbe42835d282f01cfd1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40a3dee0_b82e37ef",
+        "filename": "user/super/com/google/gwt/emul/java/util/List.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2019-02-05T07:59:23Z",
+      "side": 1,
+      "message": "Is the `new ArrayList` necessary here?",
+      "revId": "622c0af09b5d5113e1ea9cbe42835d282f01cfd1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7070ce9d_c6b6b14e",
+        "filename": "user/super/com/google/gwt/emul/java/util/Set.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2019-02-05T07:59:23Z",
+      "side": 1,
+      "message": "`new HashSet(3)` ? (same in other factory methods)",
+      "revId": "622c0af09b5d5113e1ea9cbe42835d282f01cfd1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f10aa21_7fcbf1c2",
+        "filename": "user/test/com/google/gwt/emultest/java9/util/SetTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2019-02-05T07:59:23Z",
+      "side": 1,
+      "message": "Maybe extract in some \"TestUtils/TestAsserts\"?",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 3
+      },
+      "revId": "622c0af09b5d5113e1ea9cbe42835d282f01cfd1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

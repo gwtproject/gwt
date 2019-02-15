@@ -604,7 +604,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
       return false;
     }
     printMethodHeader(x);
-    if (x.isAbstract()) {
+    if (x.isAbstract() || x.isJsNative()) {
       semi();
       newlineOpt();
     } else {

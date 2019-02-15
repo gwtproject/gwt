@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ca22430_d6530bc1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ToStringGenerationVisitor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2019-02-15T16:58:12Z",
+      "side": 1,
+      "message": "If the NPE is caused by a jsinterop native method failing since x.getBody() is then null, I\u0027m not sure this is the fix - is isJsNative() also used for JSNI methods, which actually have a body that can be dumped?\n\nIf there is any chance of that being true, we probably actually want a `.getBody() !\u003d null` check here. The only possible way I can see for this is if:\n * the method isn\u0027t marked as JsOverlay,\n * the enclosing type isn\u0027t a JSO\n * the enclosing type _is_ a jsinterop native type, and\n * the method itself is still JSNI\n\nThe jsinterop-base module gets close in a few ways here, and this seems to be the more-or-less sanctioned way of saying \"I have to declare native code which needs to be implemented differently for gwt2 and j2cl\", but I don\u0027t think any of those are in native types (just in `Js`, `InternalJsUtils`). Still seems like it might be more defensive to actually check for the null?",
+      "revId": "743cec1bf86e1e59c11270a624d1fc7407ee433d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

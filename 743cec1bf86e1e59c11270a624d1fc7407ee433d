@@ -16,6 +16,24 @@
       "revId": "743cec1bf86e1e59c11270a624d1fc7407ee433d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "689c524d_36a7fa67",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ToStringGenerationVisitor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2019-02-28T17:38:34Z",
+      "side": 1,
+      "message": "getBody() returns null for native methods without JSNI bodies. I think that is the only case. JSNI methods will have a JsniMethodBody as body whereas non JSNI, non native methods will have a JMethodBody as body.\n\nNevertheless x.isJsNative() is the right call here.",
+      "parentUuid": "0ca22430_d6530bc1",
+      "revId": "743cec1bf86e1e59c11270a624d1fc7407ee433d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

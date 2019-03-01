@@ -615,7 +615,9 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
 
   @Override
   public boolean visit(JMethodBody x, Context ctx) {
-    accept(x.getBlock());
+    if (x != null && !x.isJsniMethodBody()) {
+      accept(x.getBlock());
+    }
     return false;
   }
 

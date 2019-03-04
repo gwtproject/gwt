@@ -164,6 +164,30 @@
     },
     {
       "key": {
+        "uuid": "03e6b86c_ff389eba",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1146,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2019-03-04T22:29:21Z",
+      "side": 1,
+      "message": "This should be enough here. \n\nThere should be a test for this fix in Java8Test as well.\n\nSomething of similar structure to this test,\n\nassert(lambda instanceof Ix)\nI2 raw \u003d lambda;\nassert(raw.foo(...) \u003d\u003d ); // tests that the bridge exists and is correct\nassert(lambda.foo(...) \u003d\u003d )",
+      "parentUuid": "8fec99c4_aeb3bf33",
+      "range": {
+        "startLine": 1143,
+        "startChar": 98,
+        "endLine": 1146,
+        "endChar": 61
+      },
+      "revId": "b0fd2b7e45e1546578f76e68865ce6aa08345f90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5d595f08_e54757e5",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
         "patchSetId": 4

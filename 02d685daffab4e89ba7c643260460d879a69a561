@@ -69,6 +69,30 @@
       "revId": "02d685daffab4e89ba7c643260460d879a69a561",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72176838_174d1e6a",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2019-03-04T18:51:49Z",
+      "side": 1,
+      "message": "\u003e Not sure the best place to address this (gh issue perhaps? gwt-contrib list?), but I started this work by adding a test for lambda intersection casts and made one of the interfaces generic. There are 2-3 issues that come up both in that test and in the related method reference version:\n\nAre you referring to the code in patchset 4?, I left a comment there. I suspect that the code should be rejected by JDT, since the intersection has 2 unrelated abstract methods. It is only the method in the subclass (in this scenario, the lambda) that makes them related. Javac rejects the code as having non overriding abstract methods.",
+      "parentUuid": "8f2e6b3e_e7baef96",
+      "range": {
+        "startLine": 1143,
+        "startChar": 2,
+        "endLine": 1153,
+        "endChar": 102
+      },
+      "revId": "02d685daffab4e89ba7c643260460d879a69a561",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

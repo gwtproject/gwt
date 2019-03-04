@@ -161,6 +161,29 @@
       "revId": "b0fd2b7e45e1546578f76e68865ce6aa08345f90",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d595f08_e54757e5",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1162,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2019-03-04T19:28:19Z",
+      "side": 1,
+      "message": "you should use the signature of foo here instead of \"foo\" since there will be two methods named \"foo\" (the other is the bridge foo(Object), and just by chance you are getting the right one here.\n\nLook at the implementation of method.getSignature() for details but it should be something like \"foo(Ljava/lang/String)V\"",
+      "range": {
+        "startLine": 1162,
+        "startChar": 25,
+        "endLine": 1162,
+        "endChar": 60
+      },
+      "revId": "b0fd2b7e45e1546578f76e68865ce6aa08345f90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

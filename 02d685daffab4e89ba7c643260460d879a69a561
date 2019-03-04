@@ -45,6 +45,30 @@
       "revId": "02d685daffab4e89ba7c643260460d879a69a561",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f2e6b3e_e7baef96",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2019-03-04T04:32:53Z",
+      "side": 1,
+      "message": "Not sure the best place to address this (gh issue perhaps? gwt-contrib list?), but I started this work by adding a test for lambda intersection casts and made one of the interfaces generic. There are 2-3 issues that come up both in that test and in the related method reference version:\n\n 1. ReferenceMapper.get(MethodBinding) ends up with a non-synthetic binding for a non-external method, thus blowing that assert\n 2. JjsUtils.createSyntheticAbstractStub breaks because the provided type is not abstract.\n 3. The generated java code does not include the generics in the cast. I\u0027m not certain that this is actually a problem, since the raw cast will still be legal in plain Java, though in my head at least it loses type info? From testing, this is also the case in non-intersection cases, so I\u0027m guessing this is expected behavior.\n\nFor #1, the type is `test.EntryPoint$lambda$0$Type (final extends Object implements EntryPoint$I1, EntryPoint$I2)`, and the instance is a `JClassType`. My read of this is that the assertion is in error, and that the `type.isAbstract()` part of the check should be removed (the other half passes).\n\nFor #2, I\u0027m not sure what we learn here exactly , the `binding` in this case is `public abstract void foo(java.lang.String)`, just a plain MethodBinding, and the `method` is `test.EntryPoint$I2.foo(Ljava/lang/String;)V`. I don\u0027t yet understand why either one of either of the checks in this assert must be true in this case, and why it is different when making one of the interfaces generic. When this is commented out and the other issues corrected, the tests pass.\n\nFor both cases, these fail prior to the patch here, so I can either follow up with another patch as I try to better understand #2 and fix it, or we can hold off on landing this until 100% right?",
+      "parentUuid": "093fec19_1c45d898",
+      "range": {
+        "startLine": 1143,
+        "startChar": 2,
+        "endLine": 1153,
+        "endChar": 102
+      },
+      "revId": "02d685daffab4e89ba7c643260460d879a69a561",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

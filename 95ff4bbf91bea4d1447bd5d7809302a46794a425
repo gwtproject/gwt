@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c39a8253_fb3be746",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/GwtAstBuilderTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2019-03-24T17:29:07Z",
+      "side": 1,
+      "message": "I am still a bit surprised about the ordering here. I would expect it to be eithar B,A,C or C,A,B.",
+      "range": {
+        "startLine": 243,
+        "startChar": 10,
+        "endLine": 243,
+        "endChar": 19
+      },
+      "revId": "95ff4bbf91bea4d1447bd5d7809302a46794a425",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

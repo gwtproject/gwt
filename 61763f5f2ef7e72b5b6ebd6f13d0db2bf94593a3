@@ -170,6 +170,24 @@
       "revId": "61763f5f2ef7e72b5b6ebd6f13d0db2bf94593a3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b286c04_c7dc8ff9",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/GwtAstBuilderTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2019-03-24T17:29:07Z",
+      "side": 1,
+      "message": "Sounds good.",
+      "parentUuid": "ab51101a_9cd18b2c",
+      "revId": "61763f5f2ef7e72b5b6ebd6f13d0db2bf94593a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

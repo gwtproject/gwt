@@ -30,6 +30,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.eclipse.jetty.servlets.GzipFilter;
 
 import java.io.BufferedReader;
@@ -136,6 +137,7 @@ public class WebServer {
       }
     }), "/*");
     newHandler.addFilter(GzipFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
+    newHandler.addFilter(CrossOriginFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
     newServer.setHandler(newHandler);
     try {
       newServer.start();

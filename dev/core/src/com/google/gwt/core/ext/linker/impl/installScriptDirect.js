@@ -10,6 +10,7 @@ function installScript(filename) {
     var script = doc.createElement('script');
     script.language='javascript';
     script.src = code;
+    script.setAttribute('crossorigin', '');
     if (__MODULE_FUNC__.__errFn) {
       script.onerror = function() {
         __MODULE_FUNC__.__errFn('__MODULE_FUNC__', new Error("Failed to load " + code));

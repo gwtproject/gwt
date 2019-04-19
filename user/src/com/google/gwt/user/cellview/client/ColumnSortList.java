@@ -208,7 +208,7 @@ public class ColumnSortList {
     Column<?, ?> column = sortInfo.getColumn();
     for (int i = 0; i < infos.size(); i++) {
       ColumnSortInfo curInfo = infos.get(i);
-      if (curInfo.getColumn() == column) {
+      if (curInfo.getColumn() == column && sortInfo.isAscending() == curInfo.isAscending()) {
         infos.remove(i);
         if (i < index) {
           index--;

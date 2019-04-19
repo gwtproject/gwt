@@ -29,8 +29,8 @@ public class ColumnSortListTest extends TestCase {
     ColumnSortList list = new ColumnSortList();
     assertEquals(0, list.size());
 
-    list.push(createColumnSortInfo());
-    list.push(createColumnSortInfo());
+    list.push(createColumnSortInfo(true));
+    list.push(createColumnSortInfo(true));
     assertEquals(2, list.size());
     list.clear();
     assertEquals(0, list.size());
@@ -46,7 +46,7 @@ public class ColumnSortListTest extends TestCase {
     assertEquals(list0.hashCode(), list1.hashCode());
 
     // Compare with one item.
-    ColumnSortInfo info0 = createColumnSortInfo();
+    ColumnSortInfo info0 = createColumnSortInfo(true);
     list0.push(info0);
     list1.push(info0);
     assertTrue(list0.equals(list1));
@@ -54,7 +54,7 @@ public class ColumnSortListTest extends TestCase {
     assertEquals(list0.hashCode(), list1.hashCode());
 
     // Compare different sizes.
-    ColumnSortInfo info1 = createColumnSortInfo();
+    ColumnSortInfo info1 = createColumnSortInfo(true);
     list0.push(info1);
     assertFalse(list0.equals(list1));
     assertFalse(list1.equals(list0));
@@ -62,7 +62,7 @@ public class ColumnSortListTest extends TestCase {
     list1.push(info1); // Make the lists equal again.
 
     // Compare with different items that equals each other.
-    ColumnSortInfo info2a = createColumnSortInfo();
+    ColumnSortInfo info2a = createColumnSortInfo(true);
     ColumnSortInfo info2b = new ColumnSortInfo(info2a.getColumn(), info2a.isAscending());
     list0.push(info2a);
     list1.push(info2b);
@@ -86,7 +86,7 @@ public class ColumnSortListTest extends TestCase {
     assertEquals(0, list.size());
 
     // Insert into an empty list.
-    ColumnSortInfo info0 = createColumnSortInfo();
+    ColumnSortInfo info0 = createColumnSortInfo(true);
     list.insert(0, info0);
     assertEquals(1, list.size());
     assertEquals(info0, list.get(0));
@@ -105,14 +105,14 @@ public class ColumnSortListTest extends TestCase {
     assertEquals(info0, list.get(0));
 
     // Insert a second item at index 0.
-    ColumnSortInfo info1 = createColumnSortInfo();
+    ColumnSortInfo info1 = createColumnSortInfo(true);
     list.insert(0, info1);
     assertEquals(2, list.size());
     assertEquals(info1, list.get(0));
     assertEquals(info0, list.get(1));
 
     // Insert a third item at the last index.
-    ColumnSortInfo info2 = createColumnSortInfo();
+    ColumnSortInfo info2 = createColumnSortInfo(true);
     list.insert(list.size(), info2);
     assertEquals(3, list.size());
     assertEquals(info1, list.get(0));
@@ -214,7 +214,7 @@ public class ColumnSortListTest extends TestCase {
     }
 
     // Push an item.
-    ColumnSortInfo info0 = createColumnSortInfo();
+    ColumnSortInfo info0 = createColumnSortInfo(true);
     list.push(info0);
     assertEquals(1, list.size());
     assertEquals(info0, list.get(0));
@@ -225,14 +225,14 @@ public class ColumnSortListTest extends TestCase {
     assertEquals(info0, list.get(0));
 
     // Push a second item.
-    ColumnSortInfo info1 = createColumnSortInfo();
+    ColumnSortInfo info1 = createColumnSortInfo(true);
     list.push(info1);
     assertEquals(2, list.size());
     assertEquals(info1, list.get(0));
     assertEquals(info0, list.get(1));
 
     // Push a third item.
-    ColumnSortInfo info2 = createColumnSortInfo();
+    ColumnSortInfo info2 = createColumnSortInfo(true);
     list.push(info2);
     assertEquals(3, list.size());
     assertEquals(info2, list.get(0));
@@ -275,7 +275,7 @@ public class ColumnSortListTest extends TestCase {
     assertFalse(info1.isAscending());
 
     // Push a non-null value.
-    ColumnSortInfo info2 = createColumnSortInfo();
+    ColumnSortInfo info2 = createColumnSortInfo(true);
     list.push(info2);
     assertEquals(2, list.size());
     assertNull(list.get(1).getColumn());
@@ -291,16 +291,16 @@ public class ColumnSortListTest extends TestCase {
     ColumnSortList list = new ColumnSortList();
 
     // Remove the only item.
-    ColumnSortInfo info = createColumnSortInfo();
+    ColumnSortInfo info = createColumnSortInfo(true);
     list.push(info);
     assertEquals(1, list.size());
     assertTrue(list.remove(info));
     assertEquals(0, list.size());
 
     // Remove a middle item.
-    ColumnSortInfo info0 = createColumnSortInfo();
-    ColumnSortInfo info1 = createColumnSortInfo();
-    ColumnSortInfo info2 = createColumnSortInfo();
+    ColumnSortInfo info0 = createColumnSortInfo(true);
+    ColumnSortInfo info1 = createColumnSortInfo(true);
+    ColumnSortInfo info2 = createColumnSortInfo(true);
     list.push(info0);
     list.push(info1);
     list.push(info2);
@@ -311,16 +311,32 @@ public class ColumnSortListTest extends TestCase {
     assertEquals(info0, list.get(1));
 
     // Remove an item that doesn't exist.
-    assertFalse(list.remove(createColumnSortInfo()));
+    assertFalse(list.remove(createColumnSortInfo(true)));
   }
+  public void testPushSameColumnSortInfo() {
+    ColumnSortList list = new ColumnSortList();
+    assertEquals(0, list.size());
 
+    ColumnSortInfo info0 = createColumnSortInfo(true);
+    ColumnSortInfo info1 = createColumnSortInfo(true);
+    ColumnSortInfo info2 = createColumnSortInfo(false);
+
+    list.push(info0);
+    list.push(info1);
+    assertEquals(1, list.size());
+
+    list.push(info2);
+    assertEquals(2, list.size());
+
+
+  }
   /**
    * Create a {@link ColumnSortInfo} with a unique column and cell.
    * 
    * @return a new {@link ColumnSortInfo}
    */
-  private ColumnSortInfo createColumnSortInfo() {
-    return new ColumnSortInfo(new IdentityColumn<String>(new TextCell()), true);
+  private ColumnSortInfo createColumnSortInfo(boolean ascending) {
+    return new ColumnSortInfo(new IdentityColumn<String>(new TextCell()), ascending);
   }
 
 }

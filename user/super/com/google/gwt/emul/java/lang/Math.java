@@ -47,23 +47,23 @@ public final class Math {
   private static final double PI_OVER_180 = PI / 180.0;
   private static final double PI_UNDER_180 = 180.0 / PI;
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.abs")
   public static native double abs(double x);
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.abs")
   public static native float abs(float x);
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.abs")
   public static native int abs(int x);
 
   public static long abs(long x) {
     return x < 0 ? -x : x;
   }
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.acos")
   public static native double acos(double x);
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.asin")
   public static native double asin(double x);
 
   public static int addExact(int x, int y) {
@@ -79,17 +79,17 @@ public final class Math {
     return r;
   }
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.atan")
   public static native double atan(double x);
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.atan2")
   public static native double atan2(double y, double x);
 
   public static double cbrt(double x) {
     return x == 0 || !Double.isFinite(x) ? x : pow(x, 1.0 / 3.0);
   }
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.ceil")
   public static native double ceil(double x);
 
   public static double copySign(double magnitude, double sign) {
@@ -104,7 +104,7 @@ public final class Math {
     return (float) copySign((double) magnitude, (double) sign);
   }
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.cos")
   public static native double cos(double x);
 
   public static double cosh(double x) {
@@ -121,14 +121,14 @@ public final class Math {
     return x - 1;
   }
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.exp")
   public static native double exp(double x);
 
   public static double expm1(double d) {
     return d == 0 ? d : exp(d) - 1;
   }
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.floor")
   public static native double floor(double x);
 
   public static int floorDiv(int dividend, int divisor) {
@@ -168,7 +168,7 @@ public final class Math {
     return x + 1;
   }
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.log")
   public static native double log(double x);
 
   public static double log10(double x) {
@@ -179,26 +179,26 @@ public final class Math {
     return x == 0 ? x : log(x + 1);
   }
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.max")
   public static native double max(double x, double y);
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.max")
   public static native float max(float x, float y);
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.max")
   public static native int max(int x, int y);
 
   public static long max(long x, long y) {
     return x > y ? x : y;
   }
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.min")
   public static native double min(double x, double y);
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.min")
   public static native float min(float x, float y);
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.min")
   public static native int min(int x, int y);
 
   public static long min(long x, long y) {
@@ -233,10 +233,10 @@ public final class Math {
     return -x;
   }
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.pow")
   public static native double pow(double x, double exp);
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.random")
   public static native double random();
 
   public static double rint(double x) {
@@ -304,17 +304,17 @@ public final class Math {
     return (float) signum((double) f);
   }
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.sin")
   public static native double sin(double x);
 
   public static double sinh(double x) {
     return x == 0 ? x : (exp(x) - exp(-x)) / 2;
   }
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.sqrt")
   public static native double sqrt(double x);
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.tan")
   public static native double tan(double x);
 
   public static double tanh(double x) {

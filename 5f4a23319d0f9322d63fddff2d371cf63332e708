@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f655552_e1448df2",
+        "filename": "dev/core/src/com/google/gwt/dev/util/DiskCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2019-06-19T13:58:04Z",
+      "side": 1,
+      "message": "Here and below indent looks a little off. Are these accidental tabs with size 8? GWT code style always uses spaces instead of tabs.",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 1
+      },
+      "revId": "5f4a23319d0f9322d63fddff2d371cf63332e708",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

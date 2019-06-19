@@ -49,7 +49,7 @@ public class DiskCache {
   public static DiskCache INSTANCE = new DiskCache();
 
   private boolean atEnd = true;
-  private RandomAccessFile file;
+  private final RandomAccessFile file;
 
   private DiskCache() {
     try {
@@ -57,6 +57,7 @@ public class DiskCache {
       temp.deleteOnExit();
       file = new RandomAccessFile(temp, "rw");
       file.setLength(0);
+      registerShutdownHook();
     } catch (IOException e) {
       throw new RuntimeException("Unable to initialize byte cache", e);
     }
@@ -232,5 +233,26 @@ public class DiskCache {
       atEnd = true;
       return position;
     }
+  }
+
+  /**
+   * Register a shutdown hook to close the RandomAccessFile associated with the temp file.<br>
+   * There is a known <a href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4171239">bug</a>
+   * in Windows that prevents the 'temp' file from being deleted by 'deleteOnExit'
+   * (see {@link DiskCache#DiskCache()}) because it is still open by the RandomAccessFile.<br>
+   * This hook forces the RandomAccessFile to be closed at shutdown to allow the correct
+   * 'temp' file removal.
+   */
+  private void registerShutdownHook() {
+    Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          file.close();
+        } catch (IOException e) {
+          // No exception handling in a shutdown hook
+        }
+      }
+    }));
   }
 }

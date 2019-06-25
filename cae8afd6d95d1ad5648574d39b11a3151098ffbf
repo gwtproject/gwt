@@ -163,6 +163,29 @@
       "revId": "cae8afd6d95d1ad5648574d39b11a3151098ffbf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84f964e7_5e7c15e8",
+        "filename": "dev/core/src/com/google/gwt/dev/util/DiskCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2019-06-25T13:24:48Z",
+      "side": 1,
+      "message": "Remove tabs.",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 23
+      },
+      "revId": "cae8afd6d95d1ad5648574d39b11a3151098ffbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57a63bc2_f54f0ec4",
+        "filename": "dev/core/src/com/google/gwt/dev/util/DiskCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2019-06-25T13:24:48Z",
+      "side": 1,
+      "message": "This is redundant if the code reaches registrerShutdownHook, file is not null. File is never set to null either. We should make file final.",
+      "range": {
+        "startLine": 248,
+        "startChar": 6,
+        "endLine": 248,
+        "endChar": 23
+      },
+      "revId": "3521eda967760d7d252974b3f2e76d57c47c1a81",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

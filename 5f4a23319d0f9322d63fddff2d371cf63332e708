@@ -22,6 +22,30 @@
       "revId": "5f4a23319d0f9322d63fddff2d371cf63332e708",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d9a2ca5_caee7475",
+        "filename": "dev/core/src/com/google/gwt/dev/util/DiskCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 11334
+      },
+      "writtenOn": "2019-06-26T07:42:30Z",
+      "side": 1,
+      "message": "You are right. There was an error with the indent",
+      "parentUuid": "4f655552_e1448df2",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 1
+      },
+      "revId": "5f4a23319d0f9322d63fddff2d371cf63332e708",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

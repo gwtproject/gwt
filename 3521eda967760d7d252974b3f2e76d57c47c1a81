@@ -22,6 +22,30 @@
       "revId": "3521eda967760d7d252974b3f2e76d57c47c1a81",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15aeaac1_f40292b4",
+        "filename": "dev/core/src/com/google/gwt/dev/util/DiskCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 11334
+      },
+      "writtenOn": "2019-06-26T07:42:30Z",
+      "side": 1,
+      "message": "Agreed, this was more a kind of defensive safety check but it is useless indeed.\nIs it still ok? Does it need to be removed?",
+      "parentUuid": "57a63bc2_f54f0ec4",
+      "range": {
+        "startLine": 248,
+        "startChar": 6,
+        "endLine": 248,
+        "endChar": 23
+      },
+      "revId": "3521eda967760d7d252974b3f2e76d57c47c1a81",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

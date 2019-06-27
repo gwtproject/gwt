@@ -46,6 +46,30 @@
       "revId": "3521eda967760d7d252974b3f2e76d57c47c1a81",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a995667_fadcb204",
+        "filename": "dev/core/src/com/google/gwt/dev/util/DiskCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2019-06-27T20:07:59Z",
+      "side": 1,
+      "message": "I would prefer it to be removed and file to be made final. In general we try to avoid defensive programming.",
+      "parentUuid": "15aeaac1_f40292b4",
+      "range": {
+        "startLine": 248,
+        "startChar": 6,
+        "endLine": 248,
+        "endChar": 23
+      },
+      "revId": "3521eda967760d7d252974b3f2e76d57c47c1a81",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

@@ -24,6 +24,8 @@ import java.io.Serializable;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
+import jsinterop.annotations.JsNonNull;
+
 /**
  * Utility methods that operate on collections.
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html">
@@ -186,6 +188,7 @@ public class Collections {
     }
 
     @Override
+    @JsNonNull
     public Set keySet() {
       return EMPTY_SET;
     }
@@ -458,6 +461,7 @@ public class Collections {
     }
 
     @Override
+    @JsNonNull
     public List<T> subList(int fromIndex, int toIndex) {
       return new UnmodifiableList<T>(list.subList(fromIndex, toIndex));
     }
@@ -626,6 +630,7 @@ public class Collections {
     }
 
     @Override
+    @JsNonNull
     public Set<K> keySet() {
       if (keySet == null) {
         keySet = new UnmodifiableSet<K>(map.keySet());

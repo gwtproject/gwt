@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a55d8db0_dd3e766c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2019-07-30T16:50:25Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "5fa1eadeb89db7efc6116fe40d06ba0c0227909d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56d337b8_278b48aa",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2019-07-30T16:50:25Z",
+      "side": 1,
+      "message": "[error] \u0027@JsNonNull\u0027 annotation modifier does not preceed non-annotation modifiers.",
+      "revId": "5fa1eadeb89db7efc6116fe40d06ba0c0227909d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ae05066_9793dcf9",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2019-07-30T16:50:25Z",
+      "side": 1,
+      "message": "[error] \u0027@JsNonNull\u0027 annotation modifier does not preceed non-annotation modifiers.",
+      "revId": "5fa1eadeb89db7efc6116fe40d06ba0c0227909d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca5f64dc_d27bb20a",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractNavigableMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2019-07-30T16:50:25Z",
+      "side": 1,
+      "message": "[error] \u0027@JsNonNull\u0027 annotation modifier does not preceed non-annotation modifiers.",
+      "revId": "5fa1eadeb89db7efc6116fe40d06ba0c0227909d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f34ec38_b5b1467b",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2019-07-30T16:50:25Z",
+      "side": 1,
+      "message": "[error] \u0027jsinterop.annotations.JsNonNull\u0027 should be separated from previous imports.",
+      "revId": "5fa1eadeb89db7efc6116fe40d06ba0c0227909d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a699bdcc_83192969",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2019-07-30T16:50:25Z",
+      "side": 1,
+      "message": "[error] \u0027@JsNonNull\u0027 annotation modifier does not preceed non-annotation modifiers.",
+      "revId": "5fa1eadeb89db7efc6116fe40d06ba0c0227909d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "00693145_f3331104",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2019-07-30T16:50:25Z",
+      "side": 1,
+      "message": "[error] \u0027@JsNonNull\u0027 annotation modifier does not preceed non-annotation modifiers.",
+      "revId": "5fa1eadeb89db7efc6116fe40d06ba0c0227909d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ecad7cc2_9d3dd831",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2019-07-30T16:50:25Z",
+      "side": 1,
+      "message": "[error] \u0027@JsNonNull\u0027 annotation modifier does not preceed non-annotation modifiers.",
+      "revId": "5fa1eadeb89db7efc6116fe40d06ba0c0227909d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a287bb5a_a0563e13",
+        "filename": "user/super/com/google/gwt/emul/java/util/Vector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2019-07-30T16:50:25Z",
+      "side": 1,
+      "message": "[error] \u0027jsinterop.annotations.JsNonNull\u0027 should be separated from previous imports.",
+      "revId": "5fa1eadeb89db7efc6116fe40d06ba0c0227909d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "735c1786_c410f30b",
+        "filename": "user/super/com/google/gwt/emul/java/util/Vector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2019-07-30T16:50:25Z",
+      "side": 1,
+      "message": "[error] \u0027@JsNonNull\u0027 annotation modifier does not preceed non-annotation modifiers.",
+      "revId": "5fa1eadeb89db7efc6116fe40d06ba0c0227909d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

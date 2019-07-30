@@ -21,6 +21,7 @@ import java.io.Serializable;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
+import jsinterop.annotations.JsNonNull;
 
 /**
  * To keep performance characteristics in line with Java community expectations,
@@ -246,7 +247,7 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
   }
 
   @Override
-  public List<E> subList(int fromIndex, int toIndex) {
+  public @JsNonNull List<E> subList(int fromIndex, int toIndex) {
     return arrayList.subList(fromIndex, toIndex);
   }
 

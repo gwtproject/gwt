@@ -23,6 +23,7 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import java.io.Serializable;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
+import jsinterop.annotations.JsNonNull;
 
 /**
  * Utility methods that operate on collections.
@@ -186,7 +187,7 @@ public class Collections {
     }
 
     @Override
-    public Set keySet() {
+    public @JsNonNull Set keySet() {
       return EMPTY_SET;
     }
 
@@ -458,7 +459,7 @@ public class Collections {
     }
 
     @Override
-    public List<T> subList(int fromIndex, int toIndex) {
+    public @JsNonNull List<T> subList(int fromIndex, int toIndex) {
       return new UnmodifiableList<T>(list.subList(fromIndex, toIndex));
     }
   }
@@ -626,7 +627,7 @@ public class Collections {
     }
 
     @Override
-    public Set<K> keySet() {
+    public @JsNonNull Set<K> keySet() {
       if (keySet == null) {
         keySet = new UnmodifiableSet<K>(map.keySet());
       }

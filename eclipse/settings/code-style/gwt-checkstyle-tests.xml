@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+/<?xml version="1.0" encoding="UTF-8"?>
 <!--
   This configuration file was written by the eclipse-cs plugin configuration editor
 -->
@@ -183,14 +183,6 @@ A more lenient set of style checks for test cases, needed because test often nee
             <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Author tags"/>
             <property name="severity" value="error"/>
             <property name="format" value="@author"/>
-        </module>
-        <module name="Regexp">
-            <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="No one line javadoc comments"/>
-            <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="error"/>
-            <property name="severity" value="ignore"/>
-            <property name="format" value="[/][*][*][^\n]*[*][/]"/>
-            <property name="message" value="No one line javadoc comments"/>
-            <property name="illegalPattern" value="true"/>
         </module>
         <module name="MemberName">
             <property name="severity" value="ignore"/>

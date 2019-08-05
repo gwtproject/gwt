@@ -171,13 +171,6 @@ Description:
             <property name="severity" value="error"/>
             <property name="format" value="@author"/>
         </module>
-        <module name="Regexp">
-            <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="No one line javadoc comments"/>
-            <property name="severity" value="error"/>
-            <property name="format" value="[/][*][*][^\n]*[*][/]"/>
-            <property name="message" value="No one line javadoc comments"/>
-            <property name="illegalPattern" value="true"/>
-        </module>
         <module name="NoWhitespaceAfter">
             <property name="severity" value="error"/>
             <property name="allowLineBreaks" value="false"/>

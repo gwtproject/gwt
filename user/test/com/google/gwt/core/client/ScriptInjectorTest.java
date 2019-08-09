@@ -1,12 +1,12 @@
 /*
  * Copyright 2011 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -157,21 +157,18 @@ public class ScriptInjectorTest extends GWTTestCase {
 
   /**
    * This script injection should fail and fire the onFailure callback.
-   * 
-   * Note, the onerror mechanism used to trigger the failure event is a modern browser
-   * feature.
-   * 
-   * On IE, the script.onerror tag has been documented, but busted for <a
-   * href=
+   *
+   * <p>Note, the onerror mechanism used to trigger the failure event is a modern browser feature.
+   *
+   * <p>On IE, the script.onerror tag has been documented, but busted for <a href=
    * "http://stackoverflow.com/questions/2027849/how-to-trigger-script-onerror-in-internet-explorer/2032014#2032014"
    * >aeons</a>.
-   * 
    */
   public void testInjectUrlFail() {
     if (isIE8Or9()) {
       return;
     }
-    
+
     delayTestFinish(TEST_DELAY);
     final String scriptUrl = "uNkNoWn_sCrIpT_404.js";
     JavaScriptObject injectedElement =
@@ -389,6 +386,10 @@ public class ScriptInjectorTest extends GWTTestCase {
   }
 
   public void testInjectUrlTopWindowNoncePropegated() {
+    if (isIE8Or9()) {
+      // IE doesn't support CSP.
+      return;
+    }
     delayTestFinish(TEST_DELAY);
     final String scriptUrl = "script_injector_test9.js";
     final String nonceScriptUrl = "script_injector_test9_nonce.js";
@@ -430,6 +431,10 @@ public class ScriptInjectorTest extends GWTTestCase {
   }
 
   public void testInjectUrlThisWindowNoncePropegated() {
+    if (isIE8Or9()) {
+      // IE doesn't support CSP.
+      return;
+    }
     delayTestFinish(TEST_DELAY);
     final String scriptUrl = "script_injector_test10.js";
     final String nonceScriptUrl = "script_injector_test10_nonce.js";

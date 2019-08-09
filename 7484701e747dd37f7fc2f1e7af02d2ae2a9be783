@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a20a9e76_940f3c2d",
+        "filename": "user/test/com/google/gwt/core/client/ScriptInjectorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2019-08-09T23:10:43Z",
+      "side": 1,
+      "message": "if (isIE8Or9()) {\n  // IE doesn\u0027t support CSP.\n  return;\n}",
+      "range": {
+        "startLine": 392,
+        "startChar": 4,
+        "endLine": 393,
+        "endChar": 22
+      },
+      "revId": "7484701e747dd37f7fc2f1e7af02d2ae2a9be783",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

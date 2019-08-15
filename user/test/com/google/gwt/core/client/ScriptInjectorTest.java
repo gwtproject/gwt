@@ -393,8 +393,8 @@ public class ScriptInjectorTest extends GWTTestCase {
     delayTestFinish(TEST_DELAY);
     final String scriptUrl = "script_injector_test9.js";
     final String nonceScriptUrl = "script_injector_test9_nonce.js";
-    String nonce = "IAlwaysGetTheShemp";
-    JavaScriptObject noncedScript =
+    final String nonce = "IAlwaysGetTheShemp";
+    final JavaScriptObject noncedScript =
         nativeAddScriptWithNonceToWindow(nativeTopWindow(), nonce, nonceScriptUrl);
     assertEquals(nonce, nativeGetScriptNonce(noncedScript));
     assertFalse(nativeTest9Worked());
@@ -438,8 +438,8 @@ public class ScriptInjectorTest extends GWTTestCase {
     delayTestFinish(TEST_DELAY);
     final String scriptUrl = "script_injector_test10.js";
     final String nonceScriptUrl = "script_injector_test10_nonce.js";
-    String nonce = "ANearbyRoosterIsInHighDef";
-    JavaScriptObject noncedScript =
+    final String nonce = "ANearbyRoosterIsInHighDef";
+    final JavaScriptObject noncedScript =
         nativeAddScriptWithNonceToWindow(nativeThisWindow(), nonce, nonceScriptUrl);
     assertEquals(nonce, nativeGetScriptNonce(noncedScript));
     assertFalse(nativeTest10Worked());

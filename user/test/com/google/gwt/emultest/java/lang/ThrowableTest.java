@@ -17,11 +17,11 @@ package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.testing.TestUtils;
 
+import javaemul.internal.JsUtils;
+
 import jsinterop.annotations.JsType;
 
-/**
- * Unit tests for the GWT emulation of java.lang.Throwable class.
- */
+/** Unit tests for the GWT emulation of java.lang.Throwable class. */
 public class ThrowableTest extends ThrowableTestBase {
 
   @Override
@@ -111,6 +111,48 @@ public class ThrowableTest extends ThrowableTestBase {
     }
     Throwable e = new Throwable();
     assertSame(e, javaNativeJavaSandwich(e));
+  }
+
+  public void testLinkedBackingObjects() {
+    if (TestUtils.isJvm()) {
+      return;
+    }
+    Throwable rootCause = new Throwable("Root cause");
+    Throwable subError = new Throwable("Sub-error", rootCause);
+
+    Error backingError = (Error) catchNative(createThrower(subError));
+    Error rootBackingError = (Error) catchNative(createThrower(rootCause));
+    assertEquals(
+        "backingJsObject should have a cause linked to the parent backingJsObject",
+        rootBackingError,
+        JsUtils.getProperty(backingError, "cause"));
+  }
+
+  public void testLinkedBackingObjects_initCause() {
+    if (TestUtils.isJvm()) {
+      return;
+    }
+    Throwable rootCause = new Throwable("Root cause");
+    Throwable subError = new Throwable("Sub-error");
+    subError.initCause(rootCause);
+
+    Error backingError = (Error) catchNative(createThrower(subError));
+    Error rootBackingError = (Error) catchNative(createThrower(rootCause));
+    assertEquals(
+        "backingJsObject should have a cause linked to the parent backingJsObject",
+        rootBackingError,
+        JsUtils.getProperty(backingError, "cause"));
+  }
+
+  public void testLinkedBackingObjects_noCause() {
+    if (TestUtils.isJvm()) {
+      return;
+    }
+    Throwable subError = new Throwable("Sub-error");
+
+    Error backingError = (Error) catchNative(createThrower(subError));
+    assertNull(
+        "backingJsObject should have no linked cause", JsUtils.getProperty(backingError, "cause"));
   }
 
   @JsType(isNative = true, namespace = "<window>")

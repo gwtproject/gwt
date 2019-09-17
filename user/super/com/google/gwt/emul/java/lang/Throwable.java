@@ -22,6 +22,7 @@ import static javaemul.internal.InternalPreconditions.checkState;
 import java.io.PrintStream;
 import java.io.Serializable;
 
+import javaemul.internal.JsUtils;
 import javaemul.internal.annotations.DoNotInline;
 
 import jsinterop.annotations.JsMethod;
@@ -146,6 +147,7 @@ public class Throwable implements Serializable {
   private void setBackingJsObject(Object backingJsObject) {
     this.backingJsObject = backingJsObject;
     linkBack(backingJsObject);
+    linkBackingCause();
   }
 
   private void linkBack(Object error) {
@@ -155,6 +157,13 @@ public class Throwable implements Serializable {
         ((HasJavaThrowable) error).setJavaThrowable(this);
       } catch (Throwable ignored) { }
     }
+  }
+
+  private void linkBackingCause() {
+    if (cause == null || !(backingJsObject instanceof NativeError)) {
+      return;
+    }
+    JsUtils.setProperty(backingJsObject, "cause", cause.backingJsObject);
   }
 
   /**
@@ -242,6 +251,7 @@ public class Throwable implements Serializable {
     checkState(this.cause == null, "Can't overwrite cause");
     checkCriticalArgument(cause != this, "Self-causation not permitted");
     this.cause = cause;
+    linkBackingCause();
     return this;
   }
 

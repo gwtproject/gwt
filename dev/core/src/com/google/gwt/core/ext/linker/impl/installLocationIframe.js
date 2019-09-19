@@ -35,6 +35,7 @@ function setupInstallLocation() {
   scriptFrame.style.cssText = 'position:absolute; width:0; height:0; border:none; left: -1000px;'
     + ' top: -1000px;';
   scriptFrame.tabIndex = -1;
+  scriptFrame.setAttribute('aria-hidden', 'true');
   $doc.body.appendChild(scriptFrame);
 
   frameDoc = scriptFrame.contentWindow.document;

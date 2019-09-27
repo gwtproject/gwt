@@ -102,7 +102,7 @@ public class ThrowableTest extends ThrowableTestBase {
     }
     Throwable e = new Throwable("my\nmsg");
     Object caughtNative = catchNative(createThrower(e));
-    assertTrue(caughtNative.toString().contains("my\u200b\nmsg"));
+    assertTrue(caughtNative.toString().contains("my\nmsg"));
   }
 
   public void testJavaNativeJavaSandwichCatch() {

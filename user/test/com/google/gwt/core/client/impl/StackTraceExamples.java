@@ -135,7 +135,8 @@ public class StackTraceExamples {
           "                };\n" +
           "            } has no method 'nonExistentMethod'\n" +
           "    at dumpException6 (http://www.example.com/test/ABCD.cache.js:82:20)\n" +
-          "    at HTMLButtonElement.onclick (http://www.example.com/test/ABCD.cache.js:101:122)"
+          "    at HTMLButtonElement.onclick (http://www.example.com/test/ABCD.cache.js:101:122)",
+      toString: function() { return this.name + ": " + this.message; },
     };
   }-*/;
 

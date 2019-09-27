@@ -106,16 +106,7 @@ public class Throwable implements Serializable {
   }
 
   private void initializeBackingError() {
-    /*
-     * Prefix newlines in the _message_ with u200b so that StackTraceCreator can distinguish them
-     * from the newlines in the JavaScript Error _stack trace_. (StackTraceCreator's input is a
-     * string that often contains both the message and the stack trace.)
-     */
-    String message =
-        detailMessage == null ? null : detailMessage.nativeReplaceAll("\n", "\u200b\n");
-    String errorMessage = toString(message);
-
-    setBackingJsObject(fixIE(createError(errorMessage)));
+    setBackingJsObject(fixIE(createError(toString(detailMessage))));
 
     captureStackTrace();
   }

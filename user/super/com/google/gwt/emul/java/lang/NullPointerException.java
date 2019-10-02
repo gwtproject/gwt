@@ -35,7 +35,7 @@ public class NullPointerException extends JsException {
     super(typeError);
   }
 
-  @Override
+  // Not @Override since J2CL doesn't need it hence doesn't have the method.
   Object createError(String msg) {
     return new NativeTypeError(msg);
   }

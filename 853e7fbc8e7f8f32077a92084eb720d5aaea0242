@@ -16,6 +16,52 @@
       "revId": "853e7fbc8e7f8f32077a92084eb720d5aaea0242",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81c9831d_d98533ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2019-10-02T03:02:48Z",
+      "side": 1,
+      "message": "Maybe not call it a fork but just super-source here and in the first like. Or maybe J2CL has its own version of Throwable. Let\u0027s not use the fork wording since it can be misinterpreted.",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 72
+      },
+      "revId": "853e7fbc8e7f8f32077a92084eb720d5aaea0242",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a3816a6_4095bda6",
+        "filename": "user/super/com/google/gwt/emul/java/lang/NullPointerException.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2019-10-02T03:02:48Z",
+      "side": 1,
+      "message": "Don\u0027t @Override",
+      "range": {
+        "startLine": 38,
+        "startChar": 3,
+        "endLine": 38,
+        "endChar": 9
+      },
+      "revId": "853e7fbc8e7f8f32077a92084eb720d5aaea0242",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

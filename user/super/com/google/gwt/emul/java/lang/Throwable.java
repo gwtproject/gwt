@@ -117,6 +117,9 @@ public class Throwable implements Serializable {
     return new NativeError(msg);
   }
 
+  // Called by J2CL transpiler. Do not remove!
+  void privateInitError(Object error) { }
+
   @SuppressWarnings("unusable-by-js")
   private static native Object fixIE(Object e) /*-{
     // In IE -unlike every other browser-, the stack property is not defined until you throw it.

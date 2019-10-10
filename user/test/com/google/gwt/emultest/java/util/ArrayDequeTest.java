@@ -19,6 +19,8 @@ import static java.util.Arrays.asList;
 
 import com.google.gwt.core.client.JavaScriptException;
 
+import com.google.gwt.testing.TestUtils;
+
 import org.apache.commons.collections.TestCollection;
 
 import java.util.ArrayDeque;
@@ -236,7 +238,9 @@ public class ArrayDequeTest extends TestCollection {
     deque.removeLast();
     try {
       it.next();
-      fail();
+      if (TestUtils.getJdkVersion() < 11) {
+        fail();
+      }
     } catch (ConcurrentModificationException expected) { }
 
     deque = new ArrayDeque<>(asList(getFullNonNullElements()));
@@ -260,7 +264,9 @@ public class ArrayDequeTest extends TestCollection {
     deque.addLast(new Object());
     try {
       it.next();
-      fail();
+      if (TestUtils.getJdkVersion() < 11) {
+        fail();
+      }
     } catch (ConcurrentModificationException expected) { }
 
     deque = new ArrayDeque<>(asList(getFullNonNullElements()));
@@ -282,7 +288,9 @@ public class ArrayDequeTest extends TestCollection {
     deque.removeFirst();
     try {
       it.remove();
-      fail();
+      if (TestUtils.getJdkVersion() < 11) {
+        fail();
+      }
     } catch (ConcurrentModificationException expected) { }
   }
 
@@ -299,7 +307,9 @@ public class ArrayDequeTest extends TestCollection {
     deque.removeFirst();
     try {
       it.next();
-      fail();
+      if (TestUtils.getJdkVersion() < 11) {
+        fail();
+      }
     } catch (ConcurrentModificationException expected) { }
 
     deque = new ArrayDeque<>(asList(getFullNonNullElements()));
@@ -318,7 +328,9 @@ public class ArrayDequeTest extends TestCollection {
     try {
       it.next();
     } catch (ConcurrentModificationException e) {
-      fail();
+      if (TestUtils.getJdkVersion() < 11) {
+        fail();
+      }
     }
     deque.addFirst(new Object());
     try {
@@ -345,7 +357,9 @@ public class ArrayDequeTest extends TestCollection {
     deque.removeLast();
     try {
       it.remove();
-      fail();
+      if (TestUtils.getJdkVersion() < 11) {
+        fail();
+      }
     } catch (ConcurrentModificationException expected) { }
   }
 

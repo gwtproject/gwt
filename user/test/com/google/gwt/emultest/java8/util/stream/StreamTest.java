@@ -20,6 +20,8 @@ import static java.util.Arrays.asList;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
+import com.google.gwt.testing.TestUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -473,6 +475,15 @@ public class StreamTest extends EmulTestBase {
     s.close();
     // not called again on subsequent closes
     assertEquals(1, calledCount[0]);
+
+    if (TestUtils.getJdkVersion() >= 11) {
+      try {
+        s = s.onClose(() -> calledCount[0]++);
+        fail();
+      } catch (IllegalStateException expected) {
+      }
+      return;
+    }
 
     // Add a handler after close, and re-close, the handler will only go off after the _second_
     // close

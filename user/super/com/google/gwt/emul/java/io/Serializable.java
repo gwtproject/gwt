@@ -36,6 +36,7 @@ public interface Serializable {
         || type.equals("number")
         || type.equals("string")
         || instance.getTypeMarker()
+        // Arrays are implicitly instances of Serializable (JLS 10.7).
         || instance.getClass().isArray();
   }
   // CHECKSTYLE_ON: end utility methods

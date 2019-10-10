@@ -690,7 +690,9 @@ public class StringTest extends GWTTestCase {
 
     try {
       test.regionMatches(true, -1, null, -1, -1);
-      fail();
+      if (TestUtils.getJdkVersion() < 11) {
+        fail();
+      }
     } catch (NullPointerException expected) {
       // NPE must be thrown before any range checks
     }

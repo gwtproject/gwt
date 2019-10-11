@@ -100,12 +100,10 @@ A more lenient set of style checks for test cases, needed because test often nee
             <property name="logLoadErrors" value="true"/>
             <property name="tokens" value="METHOD_DEF"/>
         </module>
-        <module name="ImportOrder">
-            <property name="severity" value="error"/>
-            <property name="groups" value="com.google, cern, com, junit, net, org, java, javax"/>
-            <property name="ordered" value="true"/>
-            <property name="separated" value="true"/>
-            <property name="option" value="top"/>
+        <module name="CustomImportOrder">
+            <property name="sortImportsInGroupAlphabetically" value="true"/>
+            <property name="separateLineBetweenGroups" value="true"/>
+            <property name="customImportOrderRules" value="STATIC###THIRD_PARTY_PACKAGE"/>
         </module>
         <module name="DefaultComesLast">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="error"/>
@@ -142,6 +140,10 @@ A more lenient set of style checks for test cases, needed because test often nee
         <module name="WhitespaceAround">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Must have spaces"/>
             <property name="severity" value="error"/>
+            <property name="allowEmptyMethods	" value="true"/>
+            <property name="allowEmptyConstructors	" value="true"/>
+            <property name="allowEmptyTypes	" value="true"/>
+            <property name="allowEmptyLoops	" value="true"/>
             <property name="tokens" value="COLON,NOT_EQUAL,QUESTION,DIV,DIV_ASSIGN,BXOR,BXOR_ASSIGN,MINUS,LCURLY,STAR,STAR_ASSIGN,TYPE_EXTENSION_AND,BAND,LAND,BAND_ASSIGN,MOD,MOD_ASSIGN,PLUS,PLUS_ASSIGN,LT,SL,SL_ASSIGN,LE,ASSIGN,MINUS_ASSIGN,EQUAL,GT,GE,SR,SR_ASSIGN,BSR,BSR_ASSIGN,BOR,BOR_ASSIGN,LOR,LITERAL_ASSERT,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,SLIST,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE"/>
         </module>
         <module name="Regexp">

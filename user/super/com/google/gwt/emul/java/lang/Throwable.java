@@ -21,8 +21,8 @@ import static javaemul.internal.InternalPreconditions.checkState;
 
 import java.io.PrintStream;
 import java.io.Serializable;
+import java.util.Arrays;
 
-import javaemul.internal.JsUtils;
 import javaemul.internal.annotations.DoNotInline;
 
 import jsinterop.annotations.JsMethod;
@@ -141,23 +141,39 @@ public class Throwable implements Serializable {
   private void setBackingJsObject(Object backingJsObject) {
     this.backingJsObject = backingJsObject;
     linkBack(backingJsObject);
-    linkBackingCause();
   }
 
-  private void linkBack(Object error) {
-    if (error != null) {
+  private native void linkBack(Object error) /*-{
+
+    if (error instanceof Object) {
       try {
         // This may throw exception in strict mode.
-        ((HasJavaThrowable) error).setJavaThrowable(this);
-      } catch (Throwable ignored) { }
-    }
-  }
+        error.__java$exception = this;
 
-  private void linkBackingCause() {
-    if (cause == null || !(backingJsObject instanceof NativeError)) {
-      return;
+        if (navigator.userAgent.toLowerCase().indexOf("msie") != -1 && $doc.documentMode < 9) {
+          return;
+        }
+
+        var throwable = this;
+        Object.defineProperties(error, {
+          cause: {
+            get: function() {
+              var cause = throwable.@Throwable::getCause()();
+              return cause && cause.@Throwable::getBackingJsObject()();
+            }
+          },
+          suppressed: {
+            get: function() {
+              return throwable.@Throwable::getBackingSuppressed()();
+            }
+          }
+        });
+      } catch (ignored) {}
     }
-    JsUtils.setProperty(backingJsObject, "cause", cause.backingJsObject);
+  }-*/;
+
+  private Object[] getBackingSuppressed() {
+    return Arrays.stream(getSuppressed()).map(t -> t.backingJsObject).toArray();
   }
 
   /**
@@ -245,7 +261,6 @@ public class Throwable implements Serializable {
     checkState(this.cause == null, "Can't overwrite cause");
     checkCriticalArgument(cause != this, "Self-causation not permitted");
     this.cause = cause;
-    linkBackingCause();
     return this;
   }
 
@@ -322,9 +337,6 @@ public class Throwable implements Serializable {
   @SuppressWarnings("unusable-by-js")
   @JsType(isNative = true, name = "?", namespace = JsPackage.GLOBAL)
   private interface HasJavaThrowable {
-    @JsProperty(name = "__java$exception")
-    void setJavaThrowable(Throwable t);
-
     @JsProperty(name = "__java$exception")
     Throwable getJavaThrowable();
   }

@@ -16,8 +16,12 @@
 package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
-
+import javaemul.internal.JsUtils;
 import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
  * Base class that provides utilities for testing subclasses of Throwable.
@@ -29,10 +33,17 @@ public abstract class ThrowableTestBase extends GWTTestCase {
     void throwException() throws Throwable;
   }
 
+  @JsMethod
+  protected static native Throwable createJsException(Object wrapped) /*-{
+    return @com.google.gwt.core.client.JavaScriptException::new(Ljava/lang/Object;)(wrapped);
+  }-*/;
+
+  @JsMethod
   protected static native void throwNative(Object e) /*-{
     throw e;
   }-*/;
 
+  @JsMethod
   protected static native Object catchNative(Thrower thrower) /*-{
     try {
       thrower();
@@ -68,7 +79,25 @@ public abstract class ThrowableTestBase extends GWTTestCase {
   }
 
   // java throw -> jsni catch -> jsni throw -> java catch
-  protected Throwable javaNativeJavaSandwich(Throwable e) {
+  protected static Throwable javaNativeJavaSandwich(Throwable e) {
     return catchJava(createNativeThrower(catchNative(createThrower(e))));
+  }
+
+  protected static BackingJsObject getBackingJsObject(Throwable t) {
+    return (BackingJsObject) catchNative(createThrower(t));
+  }
+
+  /** A JavaScript object backing a Throwable. */
+  @JsType(isNative = true, name = "*", namespace = JsPackage.GLOBAL)
+  interface BackingJsObject {
+    @JsOverlay
+    default Object getCause() {
+      return JsUtils.getProperty(this, "cause");
+    }
+
+    @JsOverlay
+    default Object[] getSuppressed() {
+      return JsUtils.getProperty(this, "suppressed");
+    }
   }
 }

@@ -13,9 +13,6 @@
  */
 package com.google.gwt.emultest.java.lang;
 
-import static com.google.gwt.emultest.java.lang.JsExceptionViolator.createJsException;
-import static com.google.gwt.emultest.java.lang.JsExceptionViolator.getBackingJsObject;
-
 import com.google.gwt.testing.TestUtils;
 
 import jsinterop.annotations.JsMethod;
@@ -43,19 +40,19 @@ public class JsExceptionTest extends ThrowableTestBase {
 
   public void testCatchJava() {
     Object obj = new Object();
-    Exception e = createJsException(obj);
+    Throwable e = createJsException(obj);
     assertJsException(obj, catchJava(createThrower(e)));
   }
 
   public void testCatchNative() {
     Object obj = new Object();
-    Exception e = createJsException(obj);
+    Throwable e = createJsException(obj);
     assertSame(obj, catchNative(createThrower(e)));
   }
 
   public void testCatchNativePropagatedFromFinally() {
     Object obj = new Object();
-    Exception e = createJsException(obj);
+    Throwable e = createJsException(obj);
     assertSame(obj, catchNative(wrapWithFinally(createThrower(e))));
     assertTrue(keepFinallyAlive);
   }
@@ -76,7 +73,7 @@ public class JsExceptionTest extends ThrowableTestBase {
 
   public void testJavaNativeJavaSandwichCatch() {
     Object obj = new Object();
-    Exception e = createJsException(obj);
+    Throwable e = createJsException(obj);
     assertJsException(obj, javaNativeJavaSandwich(e));
   }
 

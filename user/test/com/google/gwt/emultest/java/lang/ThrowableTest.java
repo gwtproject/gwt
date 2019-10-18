@@ -16,9 +16,6 @@
 package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.testing.TestUtils;
-
-import javaemul.internal.JsUtils;
-
 import jsinterop.annotations.JsType;
 
 /** Unit tests for the GWT emulation of java.lang.Throwable class. */
@@ -74,7 +71,7 @@ public class ThrowableTest extends ThrowableTestBase {
     }
     Throwable e = new Throwable("<my msg>");
     Object caughtNative = catchNative(createThrower(e));
-    assertTrue(caughtNative instanceof Error);
+    assertTrue(caughtNative instanceof JsError);
     assertTrue(caughtNative.toString().contains("<my msg>"));
     assertTrue(caughtNative.toString().contains(Throwable.class.getName()));
   }
@@ -91,7 +88,7 @@ public class ThrowableTest extends ThrowableTestBase {
     };
 
     Object caughtNative = catchNative(createThrower(e));
-    assertTrue(caughtNative instanceof Error);
+    assertTrue(caughtNative instanceof JsError);
     assertTrue(caughtNative.toString().contains("<my msg>"));
     assertTrue(caughtNative.toString().contains(e.getClass().getName()));
   }
@@ -120,12 +117,7 @@ public class ThrowableTest extends ThrowableTestBase {
     Throwable rootCause = new Throwable("Root cause");
     Throwable subError = new Throwable("Sub-error", rootCause);
 
-    Error backingError = (Error) catchNative(createThrower(subError));
-    Error rootBackingError = (Error) catchNative(createThrower(rootCause));
-    assertEquals(
-        "backingJsObject should have a cause linked to the parent backingJsObject",
-        rootBackingError,
-        JsUtils.getProperty(backingError, "cause"));
+    assertEquals(getBackingJsObject(rootCause), getBackingJsObject(subError).getCause());
   }
 
   public void testLinkedBackingObjects_initCause() {
@@ -136,12 +128,7 @@ public class ThrowableTest extends ThrowableTestBase {
     Throwable subError = new Throwable("Sub-error");
     subError.initCause(rootCause);
 
-    Error backingError = (Error) catchNative(createThrower(subError));
-    Error rootBackingError = (Error) catchNative(createThrower(rootCause));
-    assertEquals(
-        "backingJsObject should have a cause linked to the parent backingJsObject",
-        rootBackingError,
-        JsUtils.getProperty(backingError, "cause"));
+    assertEquals(getBackingJsObject(rootCause), getBackingJsObject(subError).getCause());
   }
 
   public void testLinkedBackingObjects_noCause() {
@@ -150,11 +137,10 @@ public class ThrowableTest extends ThrowableTestBase {
     }
     Throwable subError = new Throwable("Sub-error");
 
-    Error backingError = (Error) catchNative(createThrower(subError));
-    assertNull(
-        "backingJsObject should have no linked cause", JsUtils.getProperty(backingError, "cause"));
+    assertNull(getBackingJsObject(subError).getCause());
   }
 
-  @JsType(isNative = true, namespace = "<window>")
-  private static class Error { }
+
+  @JsType(isNative = true, name = "Error", namespace = "<window>")
+  private static class JsError { }
 }

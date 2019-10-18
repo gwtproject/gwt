@@ -129,10 +129,24 @@ public class JsExceptionTest extends ThrowableTestBase {
   @JsType(isNative = true, namespace = "<window>")
   private static class TypeError { }
 
-  protected static void assertTypeError(RuntimeException e) {
+  private static void assertTypeError(RuntimeException e) {
     assertTrue(getBackingJsObject(e) instanceof TypeError);
     assertTrue(e.toString().contains("TypeError"));
   }
+
+  public void testFrozenObject() {
+    try {
+      Object e = new TypeError();
+      freeze(e);
+      throwNative(e);
+      fail();
+    } catch (RuntimeException e) {
+      e = (RuntimeException) javaNativeJavaSandwich(e);
+    }
+  }
+
+  @JsMethod(name = "Object.freeze", namespace = JsPackage.GLOBAL)
+  private static native void freeze(Object o);
 
   public void testSvgError() {
     try {

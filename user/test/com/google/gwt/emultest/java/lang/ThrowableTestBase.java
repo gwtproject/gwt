@@ -16,11 +16,10 @@
 package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
-import javaemul.internal.JsUtils;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
@@ -90,14 +89,10 @@ public abstract class ThrowableTestBase extends GWTTestCase {
   /** A JavaScript object backing a Throwable. */
   @JsType(isNative = true, name = "*", namespace = JsPackage.GLOBAL)
   interface BackingJsObject {
-    @JsOverlay
-    default Object getCause() {
-      return JsUtils.getProperty(this, "cause");
-    }
+    @JsProperty
+    Object getCause();
 
-    @JsOverlay
-    default Object[] getSuppressed() {
-      return JsUtils.getProperty(this, "suppressed");
-    }
+    @JsProperty
+    Object[] getSuppressed();
   }
 }

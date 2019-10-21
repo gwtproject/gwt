@@ -16,6 +16,7 @@
 package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.testing.TestUtils;
+import java.io.IOException;
 import jsinterop.annotations.JsType;
 
 /** Unit tests for the GWT emulation of java.lang.Throwable class. */
@@ -111,7 +112,7 @@ public class ThrowableTest extends ThrowableTestBase {
   }
 
   public void testLinkedBackingObjects() {
-    if (TestUtils.isJvm()) {
+    if (isJvmOrIe8()) {
       return;
     }
     Throwable rootCause = new Throwable("Root cause");
@@ -121,7 +122,7 @@ public class ThrowableTest extends ThrowableTestBase {
   }
 
   public void testLinkedBackingObjects_initCause() {
-    if (TestUtils.isJvm()) {
+    if (isJvmOrIe8()) {
       return;
     }
     Throwable rootCause = new Throwable("Root cause");
@@ -132,7 +133,7 @@ public class ThrowableTest extends ThrowableTestBase {
   }
 
   public void testLinkedBackingObjects_noCause() {
-    if (TestUtils.isJvm()) {
+    if (isJvmOrIe8()) {
       return;
     }
     Throwable subError = new Throwable("Sub-error");
@@ -140,6 +141,45 @@ public class ThrowableTest extends ThrowableTestBase {
     assertNull(getBackingJsObject(subError).getCause());
   }
 
+  public void testLinkedSuppressedErrors_suppressedAddedViaInit() {
+    if (isJvmOrIe8()) {
+      return;
+    }
+    final Throwable suppressed = new Throwable();
+    Throwable e =
+        new Throwable() {
+          {
+            addSuppressed(suppressed);
+          }
+        };
+
+    assertEquals(getBackingJsObject(suppressed), getBackingJsObject(e).getSuppressed()[0]);
+  }
+
+  public void testLinkedSuppressedErrors_tryWithResources() {
+    if (isJvmOrIe8()) {
+      return;
+    }
+
+    class FailingResource implements AutoCloseable {
+      @Override
+      public void close() throws IOException {
+        throw new IOException("onClose");
+      }
+    }
+
+    RuntimeException e = new RuntimeException("try");
+    try (FailingResource r = new FailingResource()) {
+      throw e;
+    } catch (Exception expected) { }
+
+    assertEquals(
+        getBackingJsObject(e.getSuppressed()[0]), getBackingJsObject(e).getSuppressed()[0]);
+  }
+
+  private static boolean isJvmOrIe8() {
+    return TestUtils.isJvm() || System.getProperty("user.agent", "safari").equals("ie8");
+  }
 
   @JsType(isNative = true, name = "Error", namespace = "<window>")
   private static class JsError { }

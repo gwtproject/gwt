@@ -16,6 +16,7 @@
 package java.io;
 
 import javaemul.internal.JsUtils;
+import javaemul.internal.NativeArray;
 import jsinterop.annotations.JsMethod;
 
 /**
@@ -37,7 +38,7 @@ public interface Serializable {
         || type.equals("string")
         || instance.getTypeMarker()
         // Arrays are implicitly instances of Serializable (JLS 10.7).
-        || instance.getClass().isArray();
+        || NativeArray.isArray(instance);
   }
   // CHECKSTYLE_ON: end utility methods
 }

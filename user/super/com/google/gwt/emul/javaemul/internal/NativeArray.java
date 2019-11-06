@@ -39,4 +39,6 @@ public class NativeArray {
   public native Object[] slice(int fromIndex, int toIndex);
   public native void splice(int index, int deleteCount, @DoNotAutobox Object... value);
   public native <T> void sort(CompareFunction compareFunction);
+
+  public static native boolean isArray(Object o);
 }

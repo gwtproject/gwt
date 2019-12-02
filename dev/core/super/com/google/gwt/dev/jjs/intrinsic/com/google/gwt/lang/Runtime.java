@@ -163,7 +163,21 @@ public class Runtime {
       JavaScriptObject samMethod,
       JavaScriptObject ctor,
       JavaScriptObject ctorArguments) /*-{
-    var lambda = function() { return samMethod.apply(lambda, arguments); }
+    var lambda;
+    switch (samMethod.length) {
+      case 0: lambda = function() {return samMethod.apply(lambda, arguments);}; break;
+      case 1: lambda = function(a1) {return samMethod.apply(lambda, arguments);}; break;
+      case 2: lambda = function(a1, a2) {return samMethod.apply(lambda, arguments);}; break;
+      case 3: lambda = function(a1, a2, a3) {return samMethod.apply(lambda, arguments);}; break;
+      case 4: lambda = function(a1, a2, a3, a4) {return samMethod.apply(lambda, arguments);}; break;
+      case 5: lambda = function(a1, a2, a3, a4, a5) {return samMethod.apply(lambda, arguments);}; break;
+      case 6: lambda = function(a1, a2, a3, a4, a5, a6) {return samMethod.apply(lambda, arguments);}; break;
+      case 7: lambda = function(a1, a2, a3, a4, a5, a6, a7) {return samMethod.apply(lambda, arguments);}; break;
+      case 8: lambda = function(a1, a2, a3, a4, a5, a6, a7, a8) {return samMethod.apply(lambda, arguments);}; break;
+      case 9: lambda = function(a1, a2, a3, a4, a5, a6, a7, a8, a9) {return samMethod.apply(lambda, arguments);}; break;
+      default: lambda = function(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10) {return samMethod.apply(lambda, arguments);};
+    }
+
     ctor.apply(lambda, ctorArguments);
     return lambda;
   }-*/;

@@ -17,6 +17,8 @@ package com.google.gwt.emultest;
 
 import com.google.gwt.emultest.java.util.ArrayDequeTest;
 import com.google.gwt.emultest.java.util.ArrayListTest;
+import com.google.gwt.emultest.java.util.ArraysDoubleSemanticsTest;
+import com.google.gwt.emultest.java.util.ArraysFloatSemanticsTest;
 import com.google.gwt.emultest.java.util.ArraysTest;
 import com.google.gwt.emultest.java.util.BitSetTest;
 import com.google.gwt.emultest.java.util.CollectionsTest;
@@ -38,7 +40,6 @@ import com.google.gwt.emultest.java.util.TreeMapStringStringWithComparatorTest;
 import com.google.gwt.emultest.java.util.TreeSetIntegerTest;
 import com.google.gwt.emultest.java.util.TreeSetIntegerWithComparatorTest;
 import com.google.gwt.emultest.java.util.VectorTest;
-
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -48,6 +49,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
   ArrayDequeTest.class,
   ArrayListTest.class,
+  ArraysDoubleSemanticsTest.class,
+  ArraysFloatSemanticsTest.class,
   ArraysTest.class,
   BitSetTest.class,
   CollectionsTest.class,
@@ -72,4 +75,4 @@ import org.junit.runners.Suite.SuiteClasses;
   // Put last to reduce number of times the test framework switches modules
   HashMapSmokeTest.class,
 })
-public class CollectionsSuite { }
+public class CollectionsSuite {}

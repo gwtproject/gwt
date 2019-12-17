@@ -39,11 +39,9 @@ import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
-
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.JsUtils;
 import javaemul.internal.NativeArray.CompareFunction;
-
 import jsinterop.annotations.JsFunction;
 
 /**
@@ -287,34 +285,11 @@ public class Arrays {
    *         the array) minus 1 (to ensure error returns are negative)
    */
   public static int binarySearch(float[] sortedArray, int fromIndex, int toIndex, float key) {
-    checkCriticalArrayBounds(fromIndex, toIndex, sortedArray.length);
-    return binarySearch0(sortedArray, fromIndex, toIndex, key);
+    return binarySearch(JsUtils.<double[]>uncheckedCast(sortedArray), fromIndex, toIndex, key);
   }
 
   public static int binarySearch(float[] sortedArray, float key) {
-    return binarySearch0(sortedArray, 0, sortedArray.length, key);
-  }
-
-  private static int binarySearch0(final float[] sortedArray, int fromIndex, int toIndex,
-      final float key) {
-    int low = fromIndex;
-    int high = toIndex - 1;
-
-    while (low <= high) {
-      final int mid = low + ((high - low) >> 1);
-      final float midVal = sortedArray[mid];
-
-      if (midVal < key) {
-        low = mid + 1;
-      } else if (midVal > key) {
-        high = mid - 1;
-      } else {
-        // key found
-        return mid;
-      }
-    }
-    // key not found.
-    return -low - 1;
+    return binarySearch(JsUtils.<double[]>uncheckedCast(sortedArray), key);
   }
 
   /**
@@ -780,7 +755,8 @@ public class Arrays {
     }
 
     for (int i = 0; i < array1.length; ++i) {
-      if (array1[i] != array2[i]) {
+      // Make sure we follow Double equality semantics (per spec of the method).
+      if (!((Double) array1[i]).equals(array2[i])) {
         return false;
       }
     }
@@ -789,25 +765,7 @@ public class Arrays {
   }
 
   public static boolean equals(float[] array1, float[] array2) {
-    if (array1 == array2) {
-      return true;
-    }
-
-    if (array1 == null || array2 == null) {
-      return false;
-    }
-
-    if (array1.length != array2.length) {
-      return false;
-    }
-
-    for (int i = 0; i < array1.length; ++i) {
-      if (array1[i] != array2[i]) {
-        return false;
-      }
-    }
-
-    return true;
+    return equals(JsUtils.<double[]>uncheckedCast(array1), JsUtils.<double[]>uncheckedCast(array2));
   }
 
   public static boolean equals(int[] array1, int[] array2) {

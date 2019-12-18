@@ -37,18 +37,4 @@ public class ArraysDoubleSemanticsTest extends EmulTestBase {
     // Should be assertTrue(Arrays.equals(new double[] {Double.NaN}, new double[] {Double.NaN}));
     assertFalse(Arrays.equals(new double[] {Double.NaN}, new double[] {Double.NaN}));
   }
-
-  public void testBinarySearch() throws Exception {
-    // Semantics don't match JVM.
-    if (TestUtils.isJvm()) {
-      return;
-    }
-
-    // Should be assertEquals(-1, Arrays.binarySearch(new double[] {-0.0d}, 0.0d));
-    assertEquals(0, Arrays.binarySearch(new double[] {-0.0d}, 0.0d));
-    // Should be assertEquals(-1, Arrays.binarySearch(new double[] {0.0d}, Double.NaN));
-    assertEquals(0, Arrays.binarySearch(new double[] {0.0d}, Double.NaN));
-    // Should be assertEquals(1, Arrays.binarySearch(new double[] {0.0d, Double.NaN}, Double.NaN));
-    assertEquals(0, Arrays.binarySearch(new double[] {0.0d, Double.NaN}, Double.NaN));
-  }
 }

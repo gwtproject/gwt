@@ -37,18 +37,4 @@ public class ArraysFloatSemanticsTest extends EmulTestBase {
     // Should be assertTrue(Arrays.equals(new float[] {Float.NaN}, new float[] {Float.NaN}));
     assertFalse(Arrays.equals(new float[] {Float.NaN}, new float[] {Float.NaN}));
   }
-
-  public void testBinarySearch() throws Exception {
-    // Semantics don't match JVM.
-    if (TestUtils.isJvm()) {
-      return;
-    }
-
-    // Should be assertEquals(-1, Arrays.binarySearch(new float[] {-0.0f}, 0.0f));
-    assertEquals(0, Arrays.binarySearch(new float[] {-0.0f}, 0.0f));
-    // Should be assertEquals(-1, Arrays.binarySearch(new float[] {0.0f}, Float.NaN));
-    assertEquals(0, Arrays.binarySearch(new float[] {0.0f}, Float.NaN));
-    // Should be assertEquals(1, Arrays.binarySearch(new float[] {0.0f, Float.NaN}, Float.NaN));
-    assertEquals(0, Arrays.binarySearch(new float[] {0.0f, Float.NaN}, Float.NaN));
-  }
 }

@@ -254,9 +254,10 @@ public class Arrays {
       final int mid = low + ((high - low) >> 1);
       final double midVal = sortedArray[mid];
 
-      if (midVal < key) {
+      int cmp = Double.compare(midVal, key);
+      if (cmp < 0) {
         low = mid + 1;
-      } else if (midVal > key) {
+      } else if (cmp > 0) {
         high = mid - 1;
       } else {
         // key found

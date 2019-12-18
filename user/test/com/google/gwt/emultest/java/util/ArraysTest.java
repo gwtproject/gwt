@@ -299,6 +299,10 @@ public class ArraysTest extends EmulTestBase {
     assertEquals(2, ret);
     ret = Arrays.binarySearch(a3, 1, 4, -71);
     assertEquals(-2, ret);
+
+    assertEquals(-2, Arrays.binarySearch(new float[] {-0.0f}, 0.0f));
+    assertEquals(-2, Arrays.binarySearch(new float[] {0.0f}, Float.NaN));
+    assertEquals(1, Arrays.binarySearch(new float[] {0.0f, Float.NaN}, Float.NaN));
   }
 
   /**
@@ -336,6 +340,10 @@ public class ArraysTest extends EmulTestBase {
     assertEquals(2, ret);
     ret = Arrays.binarySearch(a3, 1, 4, -71);
     assertEquals(-2, ret);
+
+    assertEquals(-2, Arrays.binarySearch(new float[] {-0.0f}, 0.0f));
+    assertEquals(-2, Arrays.binarySearch(new float[] {0.0f}, Float.NaN));
+    assertEquals(1, Arrays.binarySearch(new float[] {0.0f, Float.NaN}, Float.NaN));
   }
 
   /**

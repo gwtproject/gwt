@@ -34,6 +34,24 @@
       "revId": "cb9b374f2da7611f80db8fcfe36b113057ff35ab",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b354072f_134467cc",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ArraysTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-01-10T19:11:31Z",
+      "side": 1,
+      "message": "That would be great if you can send a patch; otherwise will take a look next week.",
+      "parentUuid": "34dd6efa_3014fe71",
+      "revId": "cb9b374f2da7611f80db8fcfe36b113057ff35ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

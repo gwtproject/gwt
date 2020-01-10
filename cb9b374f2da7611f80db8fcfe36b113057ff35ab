@@ -16,6 +16,24 @@
       "revId": "cb9b374f2da7611f80db8fcfe36b113057ff35ab",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34dd6efa_3014fe71",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ArraysTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-01-10T19:09:50Z",
+      "side": 1,
+      "message": "That\u0027s correct. Good catch. I failed on copy-paste.",
+      "parentUuid": "227d9a36_eabc7457",
+      "revId": "cb9b374f2da7611f80db8fcfe36b113057ff35ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

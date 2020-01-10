@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "227d9a36_eabc7457",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ArraysTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2020-01-10T08:50:16Z",
+      "side": 1,
+      "message": "shouldn\u0027t these be double[] ?",
+      "revId": "cb9b374f2da7611f80db8fcfe36b113057ff35ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5396840_9aeee7e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6910
+      },
+      "writtenOn": "2020-01-14T18:24:59Z",
+      "side": 1,
+      "message": "I suggest:\nInterfaces marked as @JsFunction have property length set to 0\n\nThis patch supports up to 10 arguments and then degrades to previous behavior. A full generic, argument count agnostic, based on eval, implementation is 300x slower compared to this so it is not considered in this patch.\nCheck https://jsfiddle.net/vasvir/forwtzqd/ for more.\n\nBug-Link: https://github.com/gwtproject/gwt/issues/9675\n\nChange-Id: I7af77f4b5e05c29a275c5b4a3f5610288f11dba9",
+      "revId": "2da17acb795c0a0de6fe3c6f60f88f9adb37dec1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b868c3cc_b67c9065",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Runtime.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 6910
+      },
+      "writtenOn": "2020-01-14T18:24:59Z",
+      "side": 1,
+      "message": "you say in your commit message: \"... degrades to previous behavior\"\n\nWolud it not better to add case 10 and let the default previous behavior (or case 0)",
+      "revId": "2da17acb795c0a0de6fe3c6f60f88f9adb37dec1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

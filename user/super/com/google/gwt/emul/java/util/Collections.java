@@ -21,8 +21,10 @@ import static javaemul.internal.InternalPreconditions.checkElementIndex;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
+import java.util.stream.Stream;
 
 import jsinterop.annotations.JsNonNull;
 
@@ -294,11 +296,104 @@ public class Collections {
     }
   }
 
+  /**
+   * Delegates everything but equals and hashCode similar to the original synchronizedCollection, as
+   * per spec.
+   */
+  static class SynchronizedCollection<E> implements Collection<E>, Serializable {
+    final Collection<E> c;
+
+    SynchronizedCollection(Collection<E> c) {
+      this.c = Objects.requireNonNull(c);
+    }
+
+    public int size() {
+      return c.size();
+    }
+
+    public boolean isEmpty() {
+      return c.isEmpty();
+    }
+
+    public boolean contains(Object o) {
+      return c.contains(o);
+    }
+
+    public Object[] toArray() {
+      return c.toArray();
+    }
+
+    public <T> T[] toArray(T[] a) {
+      return c.toArray(a);
+    }
+
+    public Iterator<E> iterator() {
+      return c.iterator();
+    }
+
+    public boolean add(E e) {
+      return c.add(e);
+    }
+
+    public boolean remove(Object o) {
+      return c.remove(o);
+    }
+
+    public boolean containsAll(Collection<?> coll) {
+      return c.containsAll(coll);
+    }
+
+    public boolean addAll(Collection<? extends E> coll) {
+      return c.addAll(coll);
+    }
+
+    public boolean removeAll(Collection<?> coll) {
+      return c.removeAll(coll);
+    }
+
+    public boolean retainAll(Collection<?> coll) {
+      return c.retainAll(coll);
+    }
+
+    public void clear() {
+      c.clear();
+    }
+
+    public String toString() {
+      return c.toString();
+    }
+
+    @Override
+    public void forEach(Consumer<? super E> consumer) {
+      c.forEach(consumer);
+    }
+
+    @Override
+    public boolean removeIf(Predicate<? super E> filter) {
+      return c.removeIf(filter);
+    }
+
+    @Override
+    public Spliterator<E> spliterator() {
+      return c.spliterator();
+    }
+
+    @Override
+    public Stream<E> stream() {
+      return c.stream();
+    }
+
+    @Override
+    public Stream<E> parallelStream() {
+      return c.parallelStream();
+    }
+  }
+
   /*
    * Returns the input collection as it is.
    */
   public static <T> Collection<T> synchronizedCollection(Collection<T> c) {
-    return c;
+    return new SynchronizedCollection<>(c);
   }
 
   /*

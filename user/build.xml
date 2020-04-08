@@ -126,6 +126,8 @@
             location="${gwt.tools.lib}/hibernate/validator/hibernate-validator-4.1.0.Final-sources.jar"/>
         <pathelement
             location="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar"/>
+        <pathelement
+            location="${gwt.tools.lib}/jsinterop/jsinterop-annotations-2.0.0.jar"/>
         <pathelement location="${gwt.dev.jar}"/>
       </classpath>
     </gwt.javac>
@@ -206,6 +208,7 @@
       <zipfileset
           src="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar"/>
       <zipfileset src="${gwt.tools.lib}/gss/2015-11-04/closure-stylesheets-library-20151104-rebased.jar"/>
+      <zipfileset src="${gwt.tools.lib}/jsinterop/jsinterop-annotations-2.0.0.jar"/>
     </gwt.jar>
   </target>
 

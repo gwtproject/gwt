@@ -36,8 +36,6 @@ function warnJavaDoc () {
 function maven-gwt() {
   local gwtMavenVersion=$1
   shift
-  local jsinteropMavenVersion=$1
-  shift
   local gwtSdkArchive=$1
   shift
   local mavenRepoUrl=$1
@@ -69,16 +67,12 @@ function maven-gwt() {
   JAVADOC_FILE_PATH=$RANDOM_DIR/gwt-javadoc.jar
   [ -d $GWT_EXTRACT_DIR/doc/javadoc ] && jar cf $JAVADOC_FILE_PATH -C $GWT_EXTRACT_DIR/doc/javadoc .
 
-  # Create a dummy javadoc JAR for JsInterop (gwt-javadoc is too heavy)
-  JSINTEROP_JAVADOC_FILE_PATH=$RANDOM_DIR/jsinterop-javadoc.jar
-  jar cf $JSINTEROP_JAVADOC_FILE_PATH -C $pomDir/jsinterop README.javadoc
-
   # Generate POMs with correct version
   for template in `find $pomDir -name pom-template.xml`
   do
     dir=`dirname $template`
     pushd $dir > /dev/null
-    sed -e "s|\${gwtVersion}|$gwtMavenVersion|g" -e "s|\${jsinteropVersion}|$jsinteropMavenVersion|g" pom-template.xml >pom.xml
+    sed -e "s|\${gwtVersion}|$gwtMavenVersion|g" pom-template.xml >pom.xml
     popd > /dev/null
   done
 
@@ -87,24 +81,6 @@ function maven-gwt() {
   if [ -f $GWT_EXTRACT_DIR/gwt-elemental.jar ]; then
     gwtLibs="${gwtLibs} elemental"
   fi
-
-  jsinteropLibs='annotations'
-
-  # Create jsinterop libs
-  for i in $jsinteropLibs
-  do
-    echo "Creating jsinterop-${i}.jar and jsinterop-${i}-sources.jar"
-    zip $GWT_EXTRACT_DIR/gwt-user.jar --copy --out $GWT_EXTRACT_DIR/jsinterop-${i}.jar \
-        "jsinterop/${i}/*"
-    zip -d $GWT_EXTRACT_DIR/jsinterop-${i}.jar \
-        "jsinterop/${i}/*.java" "jsinterop/${i}/*.gwt.xml"
-    zip $GWT_EXTRACT_DIR/gwt-user.jar --copy --out $GWT_EXTRACT_DIR/jsinterop-${i}-sources.jar \
-        "jsinterop/${i}/*.java" "jsinterop/${i}/*.gwt.xml"
-    echo "Removing jsinterop/${i} from gwt-user"
-    zip -d $GWT_EXTRACT_DIR/gwt-user.jar "jsinterop/${i}/*"
-    echo "Removing jsinterop/${i} from gwt-servlet"
-    zip -d $GWT_EXTRACT_DIR/gwt-servlet.jar "jsinterop/${i}/*"
-  done
 
   echo "Removing bundled third-parties from gwt-dev"
   zip -q $GWT_EXTRACT_DIR/gwt-dev.jar --copy --out $GWT_EXTRACT_DIR/gwt-dev-trimmed.jar \
@@ -162,16 +138,6 @@ function maven-gwt() {
   do
     maven-deploy-file $mavenRepoUrl $mavenRepoId $GWT_EXTRACT_DIR/requestfactory-${i}.jar $pomDir/requestfactory/${i}/pom.xml \
         $JAVADOC_FILE_PATH $GWT_EXTRACT_DIR/requestfactory-${i}-src.jar \
-         || die
-  done
-
-  # Deploy jsInterop jars
-  maven-deploy-file $mavenRepoUrl $mavenRepoId $pomDir/jsinterop/pom.xml $pomDir/jsinterop/pom.xml || die
-
-  for i in $jsinteropLibs
-  do
-    maven-deploy-file $mavenRepoUrl $mavenRepoId $GWT_EXTRACT_DIR/jsinterop-${i}.jar $pomDir/jsinterop/${i}/pom.xml \
-        $JSINTEROP_JAVADOC_FILE_PATH $GWT_EXTRACT_DIR/jsinterop-${i}-sources.jar \
          || die
   done
 

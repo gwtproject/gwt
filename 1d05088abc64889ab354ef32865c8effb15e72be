@@ -175,6 +175,47 @@
       "revId": "1d05088abc64889ab354ef32865c8effb15e72be",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74f8ee26_d29fbbc9",
+        "filename": "elemental/src/elemental/js/JsBrowser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2020-04-09T21:56:12Z",
+      "side": 1,
+      "message": "Sorry I did not pay attention to the visibility of the types",
+      "parentUuid": "cf00f4f3_8e9273f9",
+      "revId": "1d05088abc64889ab354ef32865c8effb15e72be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "784b6884_5a67372a",
+        "filename": "elemental/src/elemental/js/util/Xhr.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2020-04-09T21:56:12Z",
+      "side": 1,
+      "message": "missing deprecated",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 29
+      },
+      "revId": "1d05088abc64889ab354ef32865c8effb15e72be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

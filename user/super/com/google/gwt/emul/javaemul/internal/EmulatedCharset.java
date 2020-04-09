@@ -34,6 +34,16 @@ public abstract class EmulatedCharset extends Charset {
     }
 
     @Override
+    public byte[] getBytes(char[] buffer, int offset, int count) {
+      int n = offset + count;
+      byte[] bytes = new byte[count];
+      for (int i = offset; i < n; ++i) {
+        bytes[i] = (byte) (buffer[i] & 255);
+      }
+      return bytes;
+    }
+
+    @Override
     public byte[] getBytes(String str) {
       int n = str.length();
       byte[] bytes = new byte[n];
@@ -118,6 +128,26 @@ public abstract class EmulatedCharset extends Charset {
     }
 
     @Override
+    public byte[] getBytes(char[] buffer, int offset, int count) {
+      int n = offset + count;
+      int byteCount = 0;
+      for (int i = offset; i < n;) {
+        int ch = Character.codePointAt(buffer, i, n);
+        i += Character.charCount(ch);
+        byteCount += getByteCount(ch);
+      }
+
+      byte[] bytes = new byte[byteCount];
+      int out = 0;
+      for (int i = offset; i < n; ) {
+        int ch = Character.codePointAt(buffer, i, n);
+        i += Character.charCount(ch);
+        out += encodeUtf8(bytes, out, ch);
+      }
+      return bytes;
+    }
+
+    @Override
     public byte[] getBytes(String str) {
       // TODO(jat): consider using unescape(encodeURIComponent(bytes)) instead
       int n = str.length();
@@ -125,17 +155,7 @@ public abstract class EmulatedCharset extends Charset {
       for (int i = 0; i < n;) {
         int ch = str.codePointAt(i);
         i += Character.charCount(ch);
-        if (ch < (1 << 7)) {
-          byteCount++;
-        } else if (ch < (1 << 11)) {
-          byteCount += 2;
-        } else if (ch < (1 << 16)) {
-          byteCount += 3;
-        } else if (ch < (1 << 21)) {
-          byteCount += 4;
-        } else if (ch < (1 << 26)) {
-          byteCount += 5;
-        }
+        byteCount += getByteCount(ch);
       }
       byte[] bytes = new byte[byteCount];
       int out = 0;
@@ -145,6 +165,27 @@ public abstract class EmulatedCharset extends Charset {
         out += encodeUtf8(bytes, out, ch);
       }
       return bytes;
+    }
+
+    /**
+     * Returns number of bytes used to store the character {@code ch}.
+     *
+     * @param ch character
+     * @return number of bytes used to store the character
+     */
+    private int getByteCount(int ch) {
+      if (ch < (1 << 7)) {
+        return 1;
+      } else if (ch < (1 << 11)) {
+        return 2;
+      } else if (ch < (1 << 16)) {
+        return 3;
+      } else if (ch < (1 << 21)) {
+        return 4;
+      } else if (ch < (1 << 26)) {
+        return 5;
+      }
+      return 0;
     }
 
     /**
@@ -196,6 +237,8 @@ public abstract class EmulatedCharset extends Charset {
   }
 
   public abstract byte[] getBytes(String string);
+
+  public abstract byte[] getBytes(char[] buffer, int offset, int count);
 
   public abstract char[] decodeString(byte[] bytes, int ofs, int len);
 }

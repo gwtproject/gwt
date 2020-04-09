@@ -28,6 +28,7 @@ import elemental.json.JsonValue;
 /**
  * Client-side implementation of JsonObject interface.
  */
+@Deprecated
 final public class JsJsonObject extends JsJsonValue
     implements JsonObject {
 

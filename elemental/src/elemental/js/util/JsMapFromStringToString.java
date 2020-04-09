@@ -22,6 +22,7 @@ import elemental.util.MapFromStringToString;
 /**
  * A JavaScript native implementation of {@link MapFromStringToString}.
  */
+@Deprecated
 public final class JsMapFromStringToString extends JavaScriptObject
     implements MapFromStringToString {
 

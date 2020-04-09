@@ -27,5 +27,6 @@ import java.util.Date;
 /**
   * $CLASSJAVADOC
   */
+@Deprecated
 public interface $ID$EXTENDS {
 $!MEMBERS}

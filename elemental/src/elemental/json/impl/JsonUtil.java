@@ -29,6 +29,7 @@ import elemental.json.impl.JsonContext;
 /**
  * Direct port of json2.js at http://www.json.org/json2.js to GWT.
  */
+@Deprecated
 public class JsonUtil {
 
   private static class StringifyJsonVisitor extends JsonVisitor {

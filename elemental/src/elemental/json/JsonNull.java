@@ -18,5 +18,6 @@ package elemental.json;
 /**
  * Represents the Json null value.
  */
+@Deprecated
 public interface JsonNull extends JsonValue {
 }

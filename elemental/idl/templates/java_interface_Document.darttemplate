@@ -28,6 +28,7 @@ import java.util.Date;
 /**
   * $CLASSJAVADOC
   */
+@Deprecated
 public interface $ID$EXTENDS {
 
 /**
@@ -56,6 +57,7 @@ public interface Events {
 /**
  * Contains the set of standard values returned by {@link #readyState}.
  */
+@Deprecated
 public interface ReadyState {
 
   /**

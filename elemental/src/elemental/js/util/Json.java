@@ -21,6 +21,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  * A static API to the browser's JSON object.
  * TODO(knorton) : Remove this when generated DOM bindings are submitted. 
  */
+@Deprecated
 public class Json {
   /**
    * Parse a string containing JSON into a {@link JavaScriptObject}.

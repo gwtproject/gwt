@@ -20,6 +20,7 @@ package elemental.util;
  *
  * @see elemental.js.util.JsArrayOfInt
  */
+@Deprecated
 public interface ArrayOfInt {
 
   /**

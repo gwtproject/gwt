@@ -25,6 +25,7 @@ import elemental.util.MapFromIntTo;
 /**
  * JRE implementation of MapFromIntTo for server and dev mode.
  */
+@Deprecated
 public class JreMapFromIntTo<T> implements MapFromIntTo<T> {
 
   /*

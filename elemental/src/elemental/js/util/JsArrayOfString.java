@@ -24,6 +24,7 @@ import elemental.util.CanCompareString;
 /**
  * JavaScript native implementation of {@link ArrayOfString}.
  */
+@Deprecated
 public final class JsArrayOfString extends JsArrayString implements ArrayOfString {
   
   /**

@@ -23,6 +23,7 @@ import elemental.html.*;
 /**
   * $CLASSJAVADOC
   */
+@Deprecated
 public interface $NAME {
   $TYPE on$NAME($PARAMS);
 }

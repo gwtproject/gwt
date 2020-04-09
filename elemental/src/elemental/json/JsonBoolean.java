@@ -18,6 +18,7 @@ package elemental.json;
 /**
  * Represents a Json boolean.
  */
+@Deprecated
 public interface JsonBoolean extends JsonValue {
   boolean getBoolean();
 }

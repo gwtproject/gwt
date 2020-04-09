@@ -21,6 +21,7 @@ import elemental.json.JsonBoolean;
  * Client-side 'low overhead' JSO implementation using extension method
  * technique.
  */
+@Deprecated
 final public class JsJsonBoolean extends JsJsonValue
     implements JsonBoolean {
 

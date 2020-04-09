@@ -26,6 +26,7 @@ import elemental.html.Window;
 /**
  * A Simpler way to use {@link XMLHttpRequest}.
  */
+@Deprecated
 public class Xhr {
   /**
    * Interface for getting notified when an XHR successfully completes, or

@@ -18,6 +18,7 @@ package elemental.json;
 /**
  * Represents a Json String value.
  */
+@Deprecated
 public interface JsonString extends JsonValue {
   String getString();
 }

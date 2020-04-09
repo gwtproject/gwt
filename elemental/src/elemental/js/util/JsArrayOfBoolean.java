@@ -23,6 +23,7 @@ import elemental.util.ArrayOfBoolean;
 /**
  * JavaScript native implementation of {@link ArrayOfBoolean}.
  */
+@Deprecated
 public final class JsArrayOfBoolean extends JsArrayBoolean implements ArrayOfBoolean {
 
   /**

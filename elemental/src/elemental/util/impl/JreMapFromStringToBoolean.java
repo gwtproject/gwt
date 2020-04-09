@@ -22,6 +22,7 @@ import elemental.util.MapFromStringToBoolean;
 /**
  * JRE implementation of MapFromStringToBoolean for server and dev mode.
  */
+@Deprecated
 public class JreMapFromStringToBoolean implements MapFromStringToBoolean {
 
  /*

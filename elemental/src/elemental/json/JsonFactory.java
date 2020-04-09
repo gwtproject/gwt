@@ -18,6 +18,7 @@ package elemental.json;
 /**
  * Factory interface for parsing and creating JSON objects.
  */
+@Deprecated
 public interface JsonFactory {
 
   /**

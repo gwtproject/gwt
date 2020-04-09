@@ -37,6 +37,7 @@ import elemental.js.xml.*;
 
 import java.util.Date;
 
+@Deprecated
 public class $ID$EXTENDS $IMPLEMENTS {
   protected $ID() {}
 

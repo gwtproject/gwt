@@ -26,6 +26,7 @@ import elemental.json.JsonValue;
 /**
  * Server-side implementation of JsonString.
  */
+@Deprecated
 public class JreJsonString extends JreJsonValue implements JsonString {
 
   private static final long serialVersionUID = 1L;

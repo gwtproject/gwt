@@ -28,6 +28,7 @@ import java.util.Date;
 /**
   * $CLASSJAVADOC
   */
+@Deprecated
 public interface $ID$EXTENDS {
 /**
  * Defines the standard key locations returned by {@link #getKeyLocation}.
@@ -75,6 +76,7 @@ public interface KeyLocation {
  *
  * @see "http://code.google.com/p/closure-library/source/browse/trunk/closure/goog/events/keycodes.js"
  */
+@Deprecated
 public interface KeyCode {
   public static final int BACKSPACE = 8;
   public static final int TAB = 9;
@@ -185,6 +187,7 @@ public interface KeyCode {
  * by {@link #getKeyboardIdentifier} when the key does not have a direct
  * unicode mapping.
  */
+@Deprecated
 public interface KeyName {
 
   /** The Accept (Commit, OK) key */

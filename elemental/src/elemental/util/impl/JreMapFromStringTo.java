@@ -25,6 +25,7 @@ import elemental.util.MapFromStringTo;
 /**
  * JRE implementation of MapFromStringTo for server and dev mode.
  */
+@Deprecated
 public class JreMapFromStringTo<T> implements MapFromStringTo<T> {
 
   /*

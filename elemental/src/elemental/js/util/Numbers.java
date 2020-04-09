@@ -18,6 +18,7 @@ package elemental.js.util;
 /**
  * Utility class for miscellaneous numeric stuff.
  */
+@Deprecated
 public class Numbers {
   /**
    * Converts a <code>double</code> to a {@link String} with a specified number

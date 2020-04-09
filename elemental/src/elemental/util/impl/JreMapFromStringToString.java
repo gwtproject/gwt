@@ -21,6 +21,7 @@ import elemental.util.MapFromStringToString;
 /**
  * JRE implementation of MapFromStringToString for server and dev mode.
  */
+@Deprecated
 public class JreMapFromStringToString implements MapFromStringToString {
 
   /*

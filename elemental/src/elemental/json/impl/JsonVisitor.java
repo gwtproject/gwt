@@ -30,6 +30,7 @@ import elemental.json.impl.JsonContext;
  * returns a boolean that determines whether or not to process its contained
  * values.
  */
+@Deprecated
 class JsonVisitor {
 
   private class ImmutableJsonContext extends JsonContext {

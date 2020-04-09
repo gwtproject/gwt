@@ -22,6 +22,7 @@ import elemental.util.MapFromIntToString;
 /**
  * JRE implementation of MapFromIntToString for server and dev mode.
  */
+@Deprecated
 public class JreMapFromIntToString implements MapFromIntToString {
 
  /*

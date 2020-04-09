@@ -24,6 +24,7 @@ import elemental.util.CanCompareNumber;
 /**
  * JavaScript native implementation of {@link ArrayOfNumber}.
  */
+@Deprecated
 public final class JsArrayOfNumber extends JsArrayNumber implements ArrayOfNumber {
 
   /**

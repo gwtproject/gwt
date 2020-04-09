@@ -22,6 +22,7 @@ import elemental.js.JsBrowser;
 /**
  * Entry-point for getting the access to browser globals.
  */
+@Deprecated
 public class Browser {
 
   /**

@@ -28,6 +28,7 @@ import java.util.Date;
 /**
   * $CLASSJAVADOC
   */
+@Deprecated
 public interface $ID$EXTENDS {
 public static final String CLICK = "click";
 public static final String CONTEXTMENU = "contextmenu";

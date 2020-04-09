@@ -21,6 +21,7 @@ package elemental.js.util;
  * A utility class for accessing global functions and values in an ECMAScript
  * context.
  */
+@Deprecated
 public class JsGlobals {
   /**
    * Decodes an encoded URI to a URI string.

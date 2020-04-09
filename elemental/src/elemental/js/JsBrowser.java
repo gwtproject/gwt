@@ -25,6 +25,7 @@ import elemental.js.html.JsWindow;
 /**
  * JavaScript native implementation of {@link elemental.client.Browser}.
  */
+@Deprecated
 public class JsBrowser {
   /**
    * A {@link Browser.Info} implementation for when the browser is known to be

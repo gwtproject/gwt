@@ -27,6 +27,7 @@ import elemental.util.Collections;
 /**
  * JRE implementation of ArrayOfString for server and dev mode.
  */
+@Deprecated
 public class JreArrayOfString implements ArrayOfString {
 
   private ArrayOf<String> array;

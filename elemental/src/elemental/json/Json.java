@@ -20,6 +20,7 @@ import elemental.json.impl.JreJsonFactory;
 /**
  * Vends out implementation of JsonFactory.
  */
+@Deprecated
 public class Json {
 
   public static JsonString create(String string) {

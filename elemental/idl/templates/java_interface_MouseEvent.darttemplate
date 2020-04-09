@@ -28,10 +28,12 @@ import java.util.Date;
 /**
   * $CLASSJAVADOC
   */
+@Deprecated
 public interface $ID$EXTENDS {
   /**
    * Contains the set of standard values returned by {@link #button}.
    */
+  @Deprecated
   public interface Button {
     public static final short PRIMARY = 0;
     public static final short AUXILIARY = 1;

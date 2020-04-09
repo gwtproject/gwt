@@ -23,6 +23,7 @@ import elemental.util.*;
  * Indexable, Settable, Mappable.
  */
 // TODO (cromwellian) add generic when JSO bug in gwt-dev fixed
+@Deprecated
 public class JsElementalBase extends JavaScriptObject implements Mappable, 
     Indexable, IndexableInt, IndexableNumber, Settable, SettableInt, SettableNumber {
 

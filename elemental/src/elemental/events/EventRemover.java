@@ -16,6 +16,7 @@
 
 package elemental.events;
 
+@Deprecated
 public interface EventRemover {
   void remove();
 }

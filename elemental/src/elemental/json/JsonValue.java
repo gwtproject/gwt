@@ -20,6 +20,7 @@ import java.io.Serializable;
 /**
  * Base interface for all Json values.
  */
+@Deprecated
 public interface JsonValue extends Serializable {
 
   /**

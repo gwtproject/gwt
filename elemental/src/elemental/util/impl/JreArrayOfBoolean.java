@@ -23,6 +23,7 @@ import elemental.util.Collections;
 /**
  * JRE implementation of ArrayOfBoolean for server and dev mode.
  */
+@Deprecated
 public class JreArrayOfBoolean implements ArrayOfBoolean {
 
   /*

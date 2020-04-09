@@ -26,11 +26,13 @@ import elemental.html.Window;
 /**
  * A Simpler way to use {@link XMLHttpRequest}.
  */
+@Deprecated
 public class Xhr {
   /**
    * Interface for getting notified when an XHR successfully completes, or
    * errors out.
    */
+  @Deprecated
   public interface Callback {
     void onFail(XMLHttpRequest xhr);
 

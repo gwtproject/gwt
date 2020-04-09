@@ -22,6 +22,7 @@ import elemental.util.ArrayOfInt;
  *
  * @see ArrayOfInt#sort(CanCompareInt)
  */
+@Deprecated
 public interface CanCompareInt {
 
   /**

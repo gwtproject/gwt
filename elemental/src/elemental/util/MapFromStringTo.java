@@ -22,6 +22,7 @@ package elemental.util;
  * 
  * @see elemental.js.util.JsMapFromStringTo
  */
+@Deprecated
 public interface MapFromStringTo<V> {
 
   /**

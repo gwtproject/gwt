@@ -3,6 +3,7 @@ package elemental.util;
 /**
  * Models any object which acts like a Javascript array of primitive numbers..
  */
+@Deprecated
 public interface IndexableNumber {
 
   /**

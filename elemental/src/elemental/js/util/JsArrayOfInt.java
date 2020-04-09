@@ -24,6 +24,7 @@ import elemental.util.CanCompareInt;
 /**
  * JavaScript implementation of {@link ArrayOfInt}.
  */
+@Deprecated
 public final class JsArrayOfInt extends JsArrayInteger implements ArrayOfInt {
 
   /**

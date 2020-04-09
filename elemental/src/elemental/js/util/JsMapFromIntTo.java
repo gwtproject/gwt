@@ -22,6 +22,7 @@ import elemental.util.MapFromIntTo;
 /**
  * JavaScript native implementation of {@link MapFromIntTo}.
  */
+@Deprecated
 public final class JsMapFromIntTo<V> extends JavaScriptObject implements MapFromIntTo<V> {
   
   /**

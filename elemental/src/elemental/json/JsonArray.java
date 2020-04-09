@@ -18,6 +18,7 @@ package elemental.json;
 /**
  * Represents a Json array.
  */
+@Deprecated
 public interface JsonArray extends JsonValue {
 
   /**

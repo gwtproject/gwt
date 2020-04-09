@@ -20,6 +20,7 @@ package elemental.util;
  * 
  * @see elemental.js.util.JsMapFromStringToInt
  */
+@Deprecated
 public interface MapFromStringToInt {
 
   /**

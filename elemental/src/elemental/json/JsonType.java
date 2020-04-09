@@ -18,6 +18,7 @@ package elemental.json;
 /**
  * Represents the type of the underlying JsonValue.
  */
+@Deprecated
 public enum JsonType {
   OBJECT, ARRAY, STRING, NUMBER, BOOLEAN, NULL;
 }

@@ -26,6 +26,7 @@ import elemental.json.JsonValue;
  * Implementation of parsing a JSON string into instances of {@link
  * com.google.gwt.dev.json.JsonValue}.
  */
+@Deprecated
 class JsonTokenizer {
 
   private static final int INVALID_CHAR = -1;

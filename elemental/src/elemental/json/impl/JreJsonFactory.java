@@ -29,6 +29,7 @@ import elemental.json.JsonValue;
 /**
  * Implementation of JsonFactory interface using org.json library.
  */
+@Deprecated
 public class JreJsonFactory implements JsonFactory {
 
   public JsonString create(String string) {

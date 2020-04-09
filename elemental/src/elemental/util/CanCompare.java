@@ -24,6 +24,7 @@ import elemental.util.ArrayOf;
  *
  * @param <T>
  */
+@Deprecated
 public interface CanCompare<T> {
 
   /**

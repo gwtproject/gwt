@@ -53,6 +53,7 @@ import elemental.html.*;
 /**
   * $CLASS_JAVADOC
   */
+@Deprecated
 public interface $ID$EXTENDS {
 $!MEMBERS
 """)
@@ -77,6 +78,7 @@ import elemental.js.stylesheets.*;
 
 import java.util.Date;
 
+@Deprecated
 public class $ID$EXTENDS $IMPLEMENTS {
   protected $ID() {}
 $!MEMBERS

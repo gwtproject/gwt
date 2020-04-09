@@ -20,6 +20,7 @@ import elemental.json.*;
 /**
  * A {@link JsonContext} with integer based location context.
  */
+@Deprecated
 class JsonArrayContext extends JsonContext {
 
   int currentIndex = 0;

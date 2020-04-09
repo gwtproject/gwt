@@ -22,6 +22,7 @@ import elemental.util.MapFromStringToNumber;
 /**
  * A JavaScript native implementation of {@link MapFromStringToNumber}.
  */
+@Deprecated
 public final class JsMapFromStringToNumber extends JavaScriptObject
     implements MapFromStringToNumber {
 

@@ -25,6 +25,7 @@ import elemental.util.CanCompare;
 /**
  * JRE implementation of ArrayOf for server and dev mode.
  */
+@Deprecated
 public class JreArrayOf<T> implements ArrayOf<T> {
 
   /*

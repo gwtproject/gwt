@@ -18,6 +18,7 @@ package elemental.json;
 /**
  * Represents a Json number value.
  */
+@Deprecated
 public interface JsonNumber extends JsonValue {
   double getNumber();
 }

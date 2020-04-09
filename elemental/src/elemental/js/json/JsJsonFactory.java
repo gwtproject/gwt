@@ -26,6 +26,7 @@ import elemental.json.JsonValue;
 /**
  * JSNI based implementation of JsonFactory.
  */
+@Deprecated
 public class JsJsonFactory implements JsonFactory {
 
   private static native <T extends JsonValue> T parse0(String jsonString) /*-{

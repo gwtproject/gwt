@@ -26,6 +26,7 @@ import elemental.json.JsonValue;
 /**
  * Server-side implementation of JsonBoolean.
  */
+@Deprecated
 public class JreJsonBoolean extends JreJsonValue implements JsonBoolean {
 
   private static final long serialVersionUID = 1L;

@@ -20,6 +20,7 @@ package elemental.util;
  * 
  * @see elemental.js.util.JsMapFromIntTo
  */
+@Deprecated
 public interface MapFromIntTo<V> {
   /**
    * Retrieves a value for the specified key.

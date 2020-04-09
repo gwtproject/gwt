@@ -20,6 +20,7 @@ package elemental.util;
  *
  * @see elemental.js.util.JsArrayOfBoolean
  */
+@Deprecated
 public interface ArrayOfBoolean {
   /**
    * Returns a new array that is the concatenation of this array and <code>

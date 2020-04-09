@@ -20,6 +20,7 @@ package elemental.util;
  *
  * @see elemental.js.util.JsArrayOfNumber
  */
+@Deprecated
 public interface ArrayOfNumber {
   /**
    * Returns a new array that is the concatenation of this array and <code>

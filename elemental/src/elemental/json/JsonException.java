@@ -18,6 +18,7 @@ package elemental.json;
 /**
  * A exception representing an error in parsing or serializing Json.
  */
+@Deprecated
 public class JsonException extends RuntimeException {
 
   public JsonException(String s) {

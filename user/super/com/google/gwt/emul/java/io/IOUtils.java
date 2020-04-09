@@ -59,6 +59,23 @@ final class IOUtils {
   }
 
   /**
+   * Validates the offset and the byte count for the given string.
+   *
+   * @param str String to be checked.
+   * @param offset Starting offset in the string.
+   * @param count Total number of characters to be accessed.
+   * @throws NullPointerException if the given reference to the string is null.
+   * @throws IndexOutOfBoundsException if {@code offset} is negative, {@code count} is
+   *     negative or their sum exceeds the string length.
+   */
+  public static void checkOffsetAndCount(String str, int offset, int count) {
+    // Ensure we throw a NullPointerException instead of a JavascriptException in case the
+    // given string is null.
+    checkNotNull(str);
+    checkOffsetAndCount(str.length(), offset, count);
+  }
+
+  /**
    * Validates the offset and the byte count for the given array length.
    *
    * @param length Length of the array to be checked.

@@ -19,6 +19,7 @@ package elemental.util;
  * Models an object which can act like a Javascript array capable of indexed assignment.
  */
 // TODO (cromwellian) add generic when JSO bug in gwt-dev fixed
+@Deprecated
 public interface SettableNumber extends IndexableNumber {
 
   /**

@@ -25,6 +25,7 @@ import elemental.util.Collections;
 /**
  * JRE implementation of ArrayOfInt for server and dev mode.
  */
+@Deprecated
 public class JreArrayOfNumber implements ArrayOfNumber {
 
   /*

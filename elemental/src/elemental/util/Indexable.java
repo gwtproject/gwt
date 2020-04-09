@@ -19,6 +19,7 @@ package elemental.util;
  * Models any object which can act like a Javascript array, having length and a getter.
  */
 // TODO (cromwellian) add generic when JSO bug in gwt-dev fixed
+@Deprecated
 public interface Indexable /* <T> */ {
 
   /**

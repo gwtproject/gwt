@@ -21,6 +21,7 @@ import elemental.json.JsonValue;
  * Represents the current location where a value is stored, and allows
  * the value's replacement or deletion.
  */
+@Deprecated
 abstract class JsonContext {
 
   private JsonValue value;

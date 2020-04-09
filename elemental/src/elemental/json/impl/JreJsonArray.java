@@ -34,6 +34,7 @@ import elemental.json.JsonValue;
 /**
  * Server-side implementation of JsonArray.
  */
+@Deprecated
 public class JreJsonArray extends JreJsonValue implements JsonArray {
 
   private static final long serialVersionUID = 1L;

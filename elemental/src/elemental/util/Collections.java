@@ -33,6 +33,7 @@ import elemental.util.impl.JreMapFromStringToString;
 /**
  * Factory and utility methods for elemental collections.
  */
+@Deprecated
 public class Collections {
 
   /**

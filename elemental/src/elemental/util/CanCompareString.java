@@ -22,6 +22,7 @@ import elemental.util.ArrayOfString;
  *
  * @see ArrayOfString#sort(CanCompareString)
  */
+@Deprecated
 public interface CanCompareString {
   
   /**

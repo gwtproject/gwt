@@ -22,6 +22,7 @@ import elemental.util.ArrayOfString;
  * supported directly in {@link String} in order to use the proper elemental
  * types.
  */
+@Deprecated
 public class StringUtil {
   
   /**

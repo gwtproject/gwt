@@ -23,6 +23,7 @@ import elemental.util.CanCompare;
 /**
  * JavaScript native implementation of {@link ArrayOf}.
  */
+@Deprecated
 public final class JsArrayOf<T> extends JavaScriptObject implements ArrayOf<T> {
   
   /**

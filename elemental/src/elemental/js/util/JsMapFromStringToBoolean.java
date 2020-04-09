@@ -22,6 +22,7 @@ import elemental.util.MapFromStringToBoolean;
 /**
  * A JavaScript native implementation of {@link MapFromStringToBoolean}.
  */
+@Deprecated
 public final class JsMapFromStringToBoolean extends JavaScriptObject
     implements MapFromStringToBoolean {
 

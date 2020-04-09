@@ -23,6 +23,7 @@ import elemental.json.JsonValue;
 /**
  * JSO backed implementation of JsonValue.
  */
+@Deprecated
 public class JsJsonValue extends JavaScriptObject implements JsonValue {
 
   static native JsonValue box(JsonValue value) /*-{

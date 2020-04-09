@@ -22,6 +22,7 @@ import elemental.js.JsBrowser;
 /**
  * Entry-point for getting the access to browser globals.
  */
+@Deprecated
 public class Browser {
 
   /**
@@ -31,6 +32,7 @@ public class Browser {
    * 
    * TODO(knorton): Add the gwt.xml file that enables permutations.
    */
+  @Deprecated
   public interface Info {
     
     /**

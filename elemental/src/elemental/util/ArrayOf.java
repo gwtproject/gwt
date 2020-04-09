@@ -22,6 +22,7 @@ package elemental.util;
  *
  * @see elemental.js.util.JsArrayOf
  */
+@Deprecated
 public interface ArrayOf<T> {
 
   /**

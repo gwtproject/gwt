@@ -33,6 +33,7 @@ import elemental.js.stylesheets.*;
 
 import java.util.Date;
 
+@Deprecated
 public class $ID$EXTENDS $IMPLEMENTS {
   protected $ID() {}
 $!MEMBERS}

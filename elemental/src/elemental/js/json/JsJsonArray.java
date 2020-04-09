@@ -28,6 +28,7 @@ import elemental.json.JsonValue;
 /**
  * Client-side implementation of JsonArray.
  */
+@Deprecated
 final public class JsJsonArray extends JsJsonValue
     implements JsonArray {
 

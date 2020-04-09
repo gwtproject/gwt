@@ -20,6 +20,7 @@ import elemental.json.*;
 /**
  * A {@link JsonContext} with String based location index.
  */
+@Deprecated
 class JsonObjectContext extends JsonContext {
 
   String currentKey;

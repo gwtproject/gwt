@@ -22,6 +22,7 @@ import elemental.util.MapFromStringTo;
 /**
  * JavaScript native implementation of {@link MapFromStringTo}.
  */
+@Deprecated
 public final class JsMapFromStringTo<V> extends JavaScriptObject implements MapFromStringTo<V> {
 
   /**

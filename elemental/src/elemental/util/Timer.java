@@ -28,6 +28,7 @@ import elemental.dom.TimeoutHandler;
  * To schedule a timer, simply create a subclass of it (overriding {@link #run})
  * and call {@link #schedule} or {@link #scheduleRepeating}.
  */
+@Deprecated
 public abstract class Timer {
 
   private boolean isRepeating;

@@ -19,6 +19,7 @@ package elemental.util;
  * An object which can act like a Javascript object with String keys.
  */
 // TODO (cromwellian) add generic when JSO bug in gwt-dev fixed
+@Deprecated
 public interface Mappable /* <T> */ {
 
   /**

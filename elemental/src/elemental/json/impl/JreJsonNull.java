@@ -24,6 +24,7 @@ import elemental.json.JsonValue;
 /**
  * Server-side implementation of JsonObject.
  */
+@Deprecated
 public class JreJsonNull extends JreJsonValue implements JsonNull {
 
   private static final long serialVersionUID = 1L;

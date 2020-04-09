@@ -20,6 +20,7 @@ package elemental.util;
  * 
  * @see elemental.js.util.JsArrayOfString
  */
+@Deprecated
 public interface ArrayOfString {
   /**
    * Returns a new array that is the concatenation of this array and <code>

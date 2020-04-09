@@ -20,6 +20,7 @@ package elemental.util;
  *
  * @see elemental.js.util.JsMapFromStringToBoolean
  */
+@Deprecated
 public interface MapFromStringToBoolean {
 
   /**

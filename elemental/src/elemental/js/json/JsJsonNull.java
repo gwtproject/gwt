@@ -21,6 +21,7 @@ import elemental.json.JsonNull;
  * Client-side implementation of JsonNull as "extension methods" on an actual
  * null.
  */
+@Deprecated
 final public class JsJsonNull extends JsJsonValue
     implements JsonNull {
 

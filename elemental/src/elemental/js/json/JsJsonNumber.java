@@ -21,6 +21,7 @@ import elemental.json.JsonNumber;
  * Client-side 'low overhead' JSO implementation using extension method
  * technique.
  */
+@Deprecated
 final public class JsJsonNumber extends JsJsonValue
     implements JsonNumber {
 

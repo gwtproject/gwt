@@ -21,6 +21,7 @@ import elemental.json.JsonString;
  * Client-side 'zero overhead' JSO implementation using extension method
  * technique.
  */
+@Deprecated
 final public class JsJsonString extends JsJsonValue
     implements JsonString {
   

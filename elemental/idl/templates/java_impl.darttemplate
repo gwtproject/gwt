@@ -6,5 +6,6 @@ import elemental.html.*;
 /**
   * $CLASS_JAVADOC
   */
+@Deprecated
 public class $CLASSNAME$EXTENDS$IMPLEMENTS {
 $!MEMBERS}

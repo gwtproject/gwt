@@ -21,6 +21,7 @@ import elemental.util.*;
 /**
  */
 // TODO (cromwellian) add generic when JSO bug in gwt-dev fixed
+@Deprecated
 public class JsMappable extends JsElementalBase implements Mappable {
   protected JsMappable() {}
 }

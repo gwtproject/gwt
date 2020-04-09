@@ -28,11 +28,13 @@ import java.util.Date;
 /**
   * $CLASSJAVADOC
   */
+@Deprecated
 public interface $ID$EXTENDS {
 
 /**
  * Contains the set of standard values used with {@link #createEvent}.
  */
+@Deprecated
 public interface Events {
   public static final String CUSTOM = "CustomEvent";
   public static final String KEYBOARD = "KeyboardEvent";
@@ -56,6 +58,7 @@ public interface Events {
 /**
  * Contains the set of standard values returned by {@link #readyState}.
  */
+@Deprecated
 public interface ReadyState {
 
   /**

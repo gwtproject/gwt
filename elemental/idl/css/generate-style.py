@@ -53,6 +53,7 @@ import elemental.html.*;
 /**
   * $CLASS_JAVADOC
   */
+@Deprecated
 public interface $ID$EXTENDS {
 $!MEMBERS
 """)
@@ -77,6 +78,7 @@ import elemental.js.stylesheets.*;
 
 import java.util.Date;
 
+@Deprecated
 public class $ID$EXTENDS $IMPLEMENTS {
   protected $ID() {}
 $!MEMBERS
@@ -114,7 +116,7 @@ $!MEMBERS
       js_prop = "this." + js_prop
 
     if output_mode == 'enum':
-      wintf('\npublic interface %s {\n' % method_suffix)
+      wintf('\n@Deprecated\npublic interface %s {\n' % method_suffix)
       for p in params:
         wintf(CONST_PREFIX + PropToConstant(p) + ' = "' + p + '";\n')
       wintf('}\n\n')

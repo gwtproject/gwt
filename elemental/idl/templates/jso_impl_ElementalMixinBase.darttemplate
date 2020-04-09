@@ -34,6 +34,7 @@ import java.util.Date;
   * may implement a given interface, we hoist all of the explicit
   * mixin classes into a base JSO used by all of elemental.
   */
+@Deprecated
 public class JsElementalMixinBase $EXTENDS $IMPLEMENTS {
   protected JsElementalMixinBase() {}
 $!MEMBERS

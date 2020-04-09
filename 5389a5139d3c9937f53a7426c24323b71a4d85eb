@@ -232,6 +232,29 @@
     },
     {
       "key": {
+        "uuid": "e75b4f0f_7cf17323",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/EmulatedCharset.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-04-09T19:34:33Z",
+      "side": 1,
+      "message": "these steps are unnecessary. J2CL arrays are not bound checked; just create an empty array",
+      "range": {
+        "startLine": 133,
+        "startChar": 6,
+        "endLine": 140,
+        "endChar": 41
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4bf5cceb_380b05cd",
         "filename": "user/test/com/google/gwt/emultest/java/io/WriterTest.java",
         "patchSetId": 2

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aad153ff_aa90279f",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2020-04-09T10:00:30Z",
+      "side": 1,
+      "message": "maven/push-gwt.sh calls this function and needs to take into account this (breaking) change",
+      "revId": "b2d71ec0744b8b355453fbf8caf095e54827f608",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

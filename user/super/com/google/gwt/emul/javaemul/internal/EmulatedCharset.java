@@ -34,6 +34,16 @@ public abstract class EmulatedCharset extends Charset {
     }
 
     @Override
+    public byte[] getBytes(char[] buffer, int offset, int count) {
+      int n = offset + count;
+      byte[] bytes = new byte[count];
+      for (int i = offset; i < n; ++i) {
+        bytes[i] = (byte) (buffer[i] & 255);
+      }
+      return bytes;
+    }
+
+    @Override
     public byte[] getBytes(String str) {
       int n = str.length();
       byte[] bytes = new byte[n];
@@ -118,26 +128,23 @@ public abstract class EmulatedCharset extends Charset {
     }
 
     @Override
+    public byte[] getBytes(char[] buffer, int offset, int count) {
+      int n = offset + count;
+      byte[] bytes = new byte[0];
+      int out = 0;
+      for (int i = offset; i < n; ) {
+        int ch = Character.codePointAt(buffer, i, n);
+        i += Character.charCount(ch);
+        out += encodeUtf8(bytes, out, ch);
+      }
+      return bytes;
+    }
+
+    @Override
     public byte[] getBytes(String str) {
       // TODO(jat): consider using unescape(encodeURIComponent(bytes)) instead
       int n = str.length();
-      int byteCount = 0;
-      for (int i = 0; i < n;) {
-        int ch = str.codePointAt(i);
-        i += Character.charCount(ch);
-        if (ch < (1 << 7)) {
-          byteCount++;
-        } else if (ch < (1 << 11)) {
-          byteCount += 2;
-        } else if (ch < (1 << 16)) {
-          byteCount += 3;
-        } else if (ch < (1 << 21)) {
-          byteCount += 4;
-        } else if (ch < (1 << 26)) {
-          byteCount += 5;
-        }
-      }
-      byte[] bytes = new byte[byteCount];
+      byte[] bytes = new byte[0];
       int out = 0;
       for (int i = 0; i < n;) {
         int ch = str.codePointAt(i);
@@ -196,6 +203,8 @@ public abstract class EmulatedCharset extends Charset {
   }
 
   public abstract byte[] getBytes(String string);
+
+  public abstract byte[] getBytes(char[] buffer, int offset, int count);
 
   public abstract char[] decodeString(byte[] bytes, int ofs, int len);
 }

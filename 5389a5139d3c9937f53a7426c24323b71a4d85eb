@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c77c49b8_db96ee64",
+        "filename": "user/super/com/google/gwt/emul/java/io/OutputStreamWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-13T14:06:29Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "f77bc8ee_6082584c",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 3
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18abcb07_6aee73ea",
         "filename": "user/super/com/google/gwt/emul/java/io/OutputStreamWriter.java",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efddc826_ef9a569e",
+        "filename": "user/super/com/google/gwt/emul/java/io/OutputStreamWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-13T14:06:29Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "18abcb07_6aee73ea",
+      "range": {
+        "startLine": 41,
+        "startChar": 46,
+        "endLine": 41,
+        "endChar": 51
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "7c55253d_21d39f9d",
+        "filename": "user/super/com/google/gwt/emul/java/io/OutputStreamWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-13T14:06:29Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "e07713d4_e4f72228",
+      "range": {
+        "startLine": 42,
+        "startChar": 22,
+        "endLine": 42,
+        "endChar": 46
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6adbe5a0_be85de30",
         "filename": "user/super/com/google/gwt/emul/java/io/OutputStreamWriter.java",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15102785_797813f2",
+        "filename": "user/super/com/google/gwt/emul/java/io/OutputStreamWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-13T14:06:29Z",
+      "side": 1,
+      "message": "Replaced.",
+      "parentUuid": "6adbe5a0_be85de30",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 19
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "35f6426d_949e0ae6",
+        "filename": "user/super/com/google/gwt/emul/java/io/OutputStreamWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-13T14:06:29Z",
+      "side": 1,
+      "message": "Replaced the \u0027if\u0027 condition with checkNotNull method here as well.",
+      "parentUuid": "07d11d88_a706ecdd",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 5
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0048ffbd_a6b3b13f",
         "filename": "user/super/com/google/gwt/emul/java/io/Writer.java",
         "patchSetId": 2
@@ -128,6 +248,30 @@
       "writtenOn": "2020-04-09T19:10:58Z",
       "side": 1,
       "message": "pls remove this and all references except the constructor parameter.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 24
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "599848b5_b3ca0181",
+        "filename": "user/super/com/google/gwt/emul/java/io/Writer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-13T14:06:29Z",
+      "side": 1,
+      "message": "Removed the references.\n\nHowever, I\u0027ve a doubt. I am assuming the lock is not required because in GWT synchronized doesn\u0027t make sense as there is a single UI thread. But I could see some usages in gwt/emul, in particular, java.util.Random where the synchronized keyword has been used in method signatures. Is it just present to provide parity with JDK implementations or when used in method signature, the \"synchronized\" keyword also has some meaning in GWT world? \n\neg - https://source.corp.google.com/piper///depot/google3/third_party/java_src/gwt/svn/trunk/user/super/com/google/gwt/emul/java/util/Random.java;l\u003d202?q\u003drandom.java%20f:gwt%2Femul%20f:java%2Futil\u0026sq\u003dpackage:piper%20file:%2F%2Fdepot%2Fgoogle3%20-file:google3%2Fexperimental",
+      "parentUuid": "0048ffbd_a6b3b13f",
       "range": {
         "startLine": 33,
         "startChar": 0,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "b97d3c14_c588c6f5",
+        "filename": "user/super/com/google/gwt/emul/java/io/Writer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-13T14:06:29Z",
+      "side": 1,
+      "message": "There is a specific method checkOffsetAndCount present in IOUtils but it had only been overloaded for char[] and byte[]. Added another overloaded method for string to keep the code streamline.",
+      "parentUuid": "1395557d_fcb8330d",
+      "range": {
+        "startLine": 131,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 5
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05c022f6_ddb6a97f",
         "filename": "user/super/com/google/gwt/emul/java/io/Writer.java",
         "patchSetId": 2
@@ -183,6 +351,30 @@
       "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be792006_a17aaeb1",
+        "filename": "user/super/com/google/gwt/emul/java/io/Writer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-13T14:06:29Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "05c022f6_ddb6a97f",
+      "range": {
+        "startLine": 167,
+        "startChar": 10,
+        "endLine": 167,
+        "endChar": 25
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     },
     {
       "key": {
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "359cbd9c_0db09914",
+        "filename": "user/super/com/google/gwt/emul/java/io/Writer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-13T14:06:29Z",
+      "side": 1,
+      "message": "Done. Replaced with checkPositionIndexes method in InternalPreconditions and Objects.toString().",
+      "parentUuid": "5b05e430_665c223d",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 3
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e0d79adc_d9f8fff5",
         "filename": "user/super/com/google/gwt/emul/java/io/Writer.java",
         "patchSetId": 2
@@ -232,6 +448,30 @@
     },
     {
       "key": {
+        "uuid": "f174c17f_2478aeca",
+        "filename": "user/super/com/google/gwt/emul/java/io/Writer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-13T14:06:29Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "e0d79adc_d9f8fff5",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 3
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e75b4f0f_7cf17323",
         "filename": "user/super/com/google/gwt/emul/javaemul/internal/EmulatedCharset.java",
         "patchSetId": 2
@@ -243,6 +483,30 @@
       "writtenOn": "2020-04-09T19:34:33Z",
       "side": 1,
       "message": "these steps are unnecessary. J2CL arrays are not bound checked; just create an empty array",
+      "range": {
+        "startLine": 133,
+        "startChar": 6,
+        "endLine": 140,
+        "endChar": 41
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "310efc55_5593fab7",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/EmulatedCharset.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-13T14:06:29Z",
+      "side": 1,
+      "message": "I understand that J2CL arrays are not bound checked while making raw accesses but following the similar logic, the steps should not be necessary in the method getBytes(String) below as well right? I think it will be better to keep both methods similar as they are doing exact same thing.",
+      "parentUuid": "e75b4f0f_7cf17323",
       "range": {
         "startLine": 133,
         "startChar": 6,
@@ -278,6 +542,30 @@
     },
     {
       "key": {
+        "uuid": "dcecf889_6309da44",
+        "filename": "user/test/com/google/gwt/emultest/java/io/WriterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-13T14:06:29Z",
+      "side": 1,
+      "message": "Done. Abstract Writer class doesn\u0027t have toCharArray method so there were two options available:\n\n1. ((TestWriter) writer).toCharArray()\n2. TestWriter.toCharArray() -- making method static and outputChars variable static.\n\nImplemented 2nd option as it looked more readable and less confusion regarding an explicit cast. Let me know if the first one makes more sense to you.",
+      "parentUuid": "4bf5cceb_380b05cd",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 40
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5732c4ce_9dfe6881",
         "filename": "user/test/com/google/gwt/emultest/java/io/WriterTest.java",
         "patchSetId": 2
@@ -301,6 +589,30 @@
     },
     {
       "key": {
+        "uuid": "381c02e9_1874b626",
+        "filename": "user/test/com/google/gwt/emultest/java/io/WriterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-13T14:06:29Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "5732c4ce_9dfe6881",
+      "range": {
+        "startLine": 81,
+        "startChar": 11,
+        "endLine": 81,
+        "endChar": 19
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "82850b72_34d12f42",
         "filename": "user/test/com/google/gwt/emultest/java/io/WriterTest.java",
         "patchSetId": 2
@@ -321,6 +633,30 @@
       "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c86247ec_af742621",
+        "filename": "user/test/com/google/gwt/emultest/java/io/WriterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-13T14:06:29Z",
+      "side": 1,
+      "message": "assertArrayEquals is only available in junit I believe. None of the existing tests even use this method and use the format assertTrue(Arrays.equals(expected, actual)) [1]. Correct me if I\u0027ve missed something here and if it still can be replaced by assertArrayEquals by somehow importing junit for GWT tests.\n\n[1] https://source.corp.google.com/search?q\u003df:gwt%2Femultest%20arrays.equals\u0026sq\u003dpackage:piper%20file:%2F%2Fdepot%2Fgoogle3%20-file:google3%2Fexperimental",
+      "parentUuid": "82850b72_34d12f42",
+      "range": {
+        "startLine": 82,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 14
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

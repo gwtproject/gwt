@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "bf5b75c7_f814ce2b",
+        "filename": "user/super/com/google/gwt/emul/java/io/OutputStreamWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-04-13T21:45:54Z",
+      "side": 1,
+      "message": "I meant for all Javadoc comments; not only class. We generally don\u0027t include them to avoid people copy-pasting them for a licensed code.",
+      "parentUuid": "c77c49b8_db96ee64",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 3
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "18abcb07_6aee73ea",
         "filename": "user/super/com/google/gwt/emul/java/io/OutputStreamWriter.java",
         "patchSetId": 2
@@ -284,6 +308,30 @@
     },
     {
       "key": {
+        "uuid": "998352c1_1559cab7",
+        "filename": "user/super/com/google/gwt/emul/java/io/Writer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-04-13T21:45:54Z",
+      "side": 1,
+      "message": "It doesn\u0027t have any meaning and never had. I don\u0027t know why the original author included that in Random class.",
+      "parentUuid": "599848b5_b3ca0181",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 24
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1395557d_fcb8330d",
         "filename": "user/super/com/google/gwt/emul/java/io/Writer.java",
         "patchSetId": 2
@@ -375,6 +423,30 @@
       "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ce45b85_99bd8299",
+        "filename": "user/super/com/google/gwt/emul/java/io/Writer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-04-13T21:45:54Z",
+      "side": 1,
+      "message": "Object.toString handles null pls remove previous null handling (that was what I meant, sorry I wasn\u0027t clear before)",
+      "parentUuid": "be792006_a17aaeb1",
+      "range": {
+        "startLine": 167,
+        "startChar": 10,
+        "endLine": 167,
+        "endChar": 25
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     },
     {
       "key": {
@@ -519,6 +591,30 @@
     },
     {
       "key": {
+        "uuid": "e4bb1712_1aa26051",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/EmulatedCharset.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-04-13T21:45:54Z",
+      "side": 1,
+      "message": "Yes we should remove that from both.",
+      "parentUuid": "310efc55_5593fab7",
+      "range": {
+        "startLine": 133,
+        "startChar": 6,
+        "endLine": 140,
+        "endChar": 41
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4bf5cceb_380b05cd",
         "filename": "user/test/com/google/gwt/emultest/java/io/WriterTest.java",
         "patchSetId": 2
@@ -563,6 +659,30 @@
       "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7367c40_fd8f74f6",
+        "filename": "user/test/com/google/gwt/emultest/java/io/WriterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-04-13T21:45:54Z",
+      "side": 1,
+      "message": "I prefer the first option instead of static state in test. You can change the type of \u0027writer\u0027 field to TestWriter to avoid the casts.",
+      "parentUuid": "dcecf889_6309da44",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 40
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     },
     {
       "key": {
@@ -648,6 +768,30 @@
       "side": 1,
       "message": "assertArrayEquals is only available in junit I believe. None of the existing tests even use this method and use the format assertTrue(Arrays.equals(expected, actual)) [1]. Correct me if I\u0027ve missed something here and if it still can be replaced by assertArrayEquals by somehow importing junit for GWT tests.\n\n[1] https://source.corp.google.com/search?q\u003df:gwt%2Femultest%20arrays.equals\u0026sq\u003dpackage:piper%20file:%2F%2Fdepot%2Fgoogle3%20-file:google3%2Fexperimental",
       "parentUuid": "82850b72_34d12f42",
+      "range": {
+        "startLine": 82,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 14
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4d5a113_435eb048",
+        "filename": "user/test/com/google/gwt/emultest/java/io/WriterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-04-13T21:45:54Z",
+      "side": 1,
+      "message": "J2CL has emulation for it but it seems like GWT is missing that. Pls keep it as it is.",
+      "parentUuid": "c86247ec_af742621",
       "range": {
         "startLine": 82,
         "startChar": 4,

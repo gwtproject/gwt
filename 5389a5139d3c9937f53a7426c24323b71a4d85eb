@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "b2d926ac_378c36e0",
+        "filename": "user/super/com/google/gwt/emul/java/io/OutputStreamWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-14T20:39:26Z",
+      "side": 1,
+      "message": "This is however not a pattern in gwt/emul [1]. Class javadocs are linked using anchor tag but javadocs for methods are either properly present or omitted completely. Let me know if you would want to have javadocs provided via anchor tag for this patch. Or maybe a separate patch with streamlining all javadocs across whole gwt/emul.\neg: \u003ca href\u003d\"https://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStreamWriter.html#OutputStreamWriter(java.io.OutputStream,%20java.nio.charset.Charset)\"\u003e\n\n[1] https://source.corp.google.com/search?q\u003d%22%3Ca%22%20%22href%22%20f:gwt%2Femul\u0026sq\u003dpackage:piper%20file:%2F%2Fdepot%2Fgoogle3%20-file:google3%2Fexperimental",
+      "parentUuid": "bf5b75c7_f814ce2b",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 3
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "18abcb07_6aee73ea",
         "filename": "user/super/com/google/gwt/emul/java/io/OutputStreamWriter.java",
         "patchSetId": 2
@@ -450,6 +474,30 @@
     },
     {
       "key": {
+        "uuid": "13a5fad2_cda73be9",
+        "filename": "user/super/com/google/gwt/emul/java/io/Writer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-14T20:39:26Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "1ce45b85_99bd8299",
+      "range": {
+        "startLine": 167,
+        "startChar": 10,
+        "endLine": 167,
+        "endChar": 25
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b05e430_665c223d",
         "filename": "user/super/com/google/gwt/emul/java/io/Writer.java",
         "patchSetId": 2
@@ -615,6 +663,30 @@
     },
     {
       "key": {
+        "uuid": "92680ee0_fbe61544",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/EmulatedCharset.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-14T20:39:26Z",
+      "side": 1,
+      "message": "Done. Removed from both.",
+      "parentUuid": "e4bb1712_1aa26051",
+      "range": {
+        "startLine": 133,
+        "startChar": 6,
+        "endLine": 140,
+        "endChar": 41
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4bf5cceb_380b05cd",
         "filename": "user/test/com/google/gwt/emultest/java/io/WriterTest.java",
         "patchSetId": 2
@@ -683,6 +755,30 @@
       "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2d5ab4b_f93b238d",
+        "filename": "user/test/com/google/gwt/emultest/java/io/WriterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-14T20:39:26Z",
+      "side": 1,
+      "message": "Done. Implemented 1st option and changed writer to TestWriter to avoid typecast.",
+      "parentUuid": "a7367c40_fd8f74f6",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 40
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     },
     {
       "key": {

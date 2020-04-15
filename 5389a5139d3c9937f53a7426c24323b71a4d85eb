@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "96e73439_25b25dfe",
+        "filename": "user/super/com/google/gwt/emul/java/io/OutputStreamWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-04-15T20:56:24Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "36a157a4_e627f1c6",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 3
+      },
+      "revId": "5389a5139d3c9937f53a7426c24323b71a4d85eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18abcb07_6aee73ea",
         "filename": "user/super/com/google/gwt/emul/java/io/OutputStreamWriter.java",
         "patchSetId": 2

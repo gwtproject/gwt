@@ -15,8 +15,8 @@
  */
 package java.io;
 
+import static javaemul.internal.InternalPreconditions.checkCriticalStringBounds;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
-import static javaemul.internal.InternalPreconditions.checkPositionIndexes;
 
 import java.util.Objects;
 
@@ -57,7 +57,6 @@ public abstract class Writer implements Appendable, Closeable, Flushable {
   }
 
   public void write(String str, int offset, int count) throws IOException {
-    IOUtils.checkOffsetAndCount(str, offset, count);
     char[] buf = new char[count];
     str.getChars(offset, offset + count, buf, 0);
     write(buf, 0, buf.length);
@@ -77,7 +76,15 @@ public abstract class Writer implements Appendable, Closeable, Flushable {
     if (csq == null) {
       csq = "null";
     }
-    checkPositionIndexes(start, end, csq.length());
+    /*
+     * Ensure we throw StringIndexOutOfBoundsException as String#subsequence method depends on
+     * JavaScript's string#substr() which has different behaviour than original Java method.
+     *
+     * JavaScript behaviour of substr(start, length):
+     * "gwt".substr(0, -1) returns ""
+     * "gwt".substr(-1, 1) returns "t" -> Calculates substring from end.
+     */
+    checkCriticalStringBounds(start, end, csq.length());
     write(csq.subSequence(start, end).toString());
     return this;
   }

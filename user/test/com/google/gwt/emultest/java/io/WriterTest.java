@@ -122,8 +122,8 @@ public class WriterTest extends GWTTestCase {
     final CharSequence csq = "hola";
     try {
       writer.append(csq, -1, 2);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IndexOutOfBoundsException expected) {
+      fail("should have thrown StringIndexOutOfBoundsException");
+    } catch (StringIndexOutOfBoundsException expected) {
     }
   }
 
@@ -131,8 +131,8 @@ public class WriterTest extends GWTTestCase {
     final CharSequence csq = "hola";
     try {
       writer.append(csq, 0, -1);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IllegalArgumentException expected) {
+      fail("should have thrown StringIndexOutOfBoundsException");
+    } catch (StringIndexOutOfBoundsException expected) {
     }
   }
 
@@ -140,8 +140,8 @@ public class WriterTest extends GWTTestCase {
     final CharSequence csq = "hola";
     try {
       writer.append(csq, 2, 1);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IllegalArgumentException expected) {
+      fail("should have thrown StringIndexOutOfBoundsException");
+    } catch (StringIndexOutOfBoundsException expected) {
     }
   }
 
@@ -213,8 +213,8 @@ public class WriterTest extends GWTTestCase {
     final String str = "hola";
     try {
       writer.append(str, -1, 2);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IndexOutOfBoundsException expected) {
+      fail("should have thrown StringIndexOutOfBoundsException");
+    } catch (StringIndexOutOfBoundsException expected) {
     }
   }
 
@@ -222,8 +222,8 @@ public class WriterTest extends GWTTestCase {
     final String str = "hola";
     try {
       writer.append(str, 0, -1);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IllegalArgumentException expected) {
+      fail("should have thrown StringIndexOutOfBoundsException");
+    } catch (StringIndexOutOfBoundsException expected) {
     }
   }
 
@@ -231,8 +231,8 @@ public class WriterTest extends GWTTestCase {
     final String str = "hola";
     try {
       writer.append(str, 2, 1);
-      fail("should have thrown IndexOutOfBoundsException");
-    } catch (IllegalArgumentException expected) {
+      fail("should have thrown StringIndexOutOfBoundsException");
+    } catch (StringIndexOutOfBoundsException expected) {
     }
   }
 

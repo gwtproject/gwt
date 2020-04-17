@@ -78,11 +78,13 @@ public class OutputStreamWriterTest extends GWTTestCase {
 
   public void testWriteUnicodeChar() throws IOException {
     writer.write(UNICODE_STRING, 0, UNICODE_STRING.length());
+    writer.close();
     assertTrue(Arrays.equals(UNICODE_STRING.getBytes(encodingUTF8Charset), baos.toByteArray()));
   }
 
   public void testWriteASCIIChar() throws IOException {
     writer.write(ASCII_CHAR_ARRAY, 0, ASCII_CHAR_ARRAY.length);
+    writer.close();
     assertTrue(
         Arrays.equals(
             new String(ASCII_CHAR_ARRAY).getBytes(encodingUTF8Charset), baos.toByteArray()));

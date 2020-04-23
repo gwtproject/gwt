@@ -16,6 +16,7 @@
 package com.google.gwt.emultest;
 
 import com.google.gwt.emultest.java.internal.CoercionsTest;
+import com.google.gwt.emultest.java.io.BufferedWriterTest;
 import com.google.gwt.emultest.java.io.ByteArrayInputStreamTest;
 import com.google.gwt.emultest.java.io.ByteArrayOutputStreamTest;
 import com.google.gwt.emultest.java.io.FilterInputStreamTest;
@@ -70,6 +71,7 @@ import org.junit.runners.Suite.SuiteClasses;
   CoercionsTest.class,
 
   // -- java.io
+  BufferedWriterTest.class,
   ByteArrayInputStreamTest.class,
   ByteArrayOutputStreamTest.class,
   FilterInputStreamTest.class,

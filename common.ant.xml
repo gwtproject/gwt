@@ -27,11 +27,8 @@
         message="This build file is in an inconsistent state (${ant.file} != ${test.ant.file})."/>
 
   <!-- Global Properties -->
-  <condition property="isJava8">
-    <not>
-      <equals arg1="${ant.java.version}" arg2="1.7" />
-    </not>
-  </condition>
+  <!-- Now that Java8 is the baseline, this property indicates that the build should target the baseline, excluding 11+ tests, etc -->
+  <property name="isJava8" value="true" />
   <property environment="env"/>
   <condition property="gwt.version" value="${env.GWT_VERSION}" else="0.0.0">
     <isset property="env.GWT_VERSION"/>
@@ -61,15 +58,12 @@
   <property name="javac.debug" value="true"/>
   <property name="javac.debuglevel" value="lines,vars,source"/>
   <property name="javac.encoding" value="utf-8"/>
-  <property name="javac.source" value="1.7"/>
-  <property name="javac.target" value="1.7"/>
+  <property name="javac.source" value="8"/>
+  <property name="javac.target" value="8"/>
   <property name="javac.nowarn" value="true"/>
-  <condition property="javac.fork" value="true" else="false">
-    <isfalse value="${isJava8}"/>
-  </condition>
-  <condition property="javac.compiler" value="modern" else="com.google.errorprone.ErrorProneAntCompilerAdapter">
-    <isfalse value="${isJava8}"/>
-  </condition>
+
+  <property name="javac.fork" value="false" />
+  <property name="javac.compiler" value="modern" />
   <property name="junit.out" location="${project.build}/test"/>
   <property name="emma.dir" value="${gwt.tools.redist}/emma"/>
   <property name="emma.filter.exclude" value=""/>
@@ -156,8 +150,8 @@
            debuglevel="${javac.debuglevel}" source="${javac.source}" target="${javac.target}"
            nowarn="${javac.nowarn}" encoding="${javac.encoding}"
            includeantruntime="false" fork="${javac.fork}" compiler="${javac.compiler}">
-      <compilerclasspath if:true="${isJava8}">
-        <pathelement location="${gwt.tools.lib}/errorprone/error_prone_ant-2.0.19.jar"/>
+      <compilerclasspath>
+        <pathelement location="${gwt.tools.lib}/errorprone/error_prone_ant-2.1.2.jar"/>
       </compilerclasspath>
     </javac>
   </presetdef>

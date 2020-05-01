@@ -17,7 +17,6 @@ package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.testing.TestUtils;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -27,7 +26,8 @@ import java.util.Date;
 @SuppressWarnings("deprecation")
 public class DateTest extends GWTTestCase {
   public static final String CURRENT = "CURRENT";
-  public static final String TO_STRING_PATTERN = "\\w{3} \\w{3} \\d{2} \\d{2}:\\d{2}:\\d{2}( .+)? \\d{4}";
+  public static final String TO_STRING_PATTERN =
+      "\\w{3} \\w{3} \\d{2} \\d{2}:\\d{2}:\\d{2}( .+)? \\d{4}";
   public static final long DAY_MILLISECONDS_SHIFT = 27;
   public static final String FUTURE = "FUTURE";
   public static final String PAST = "PAST";
@@ -385,10 +385,15 @@ public class DateTest extends GWTTestCase {
     // /////////////////////////////
     // Current
     // /////////////////////////////
-    Date accum0 = create();
-    String arg10 = createString(CURRENT);
-    long a0 = Date.parse(arg10);
-    assertEquals(roundToDay(accum0.getTime()), roundToDay(a0));
+
+    // TODO(b/146498060): Reenable the roundtrip once toLocaleString is fixed for ie11.
+    if (false) {
+      Date accum0 = create();
+      String arg10 = createString(CURRENT);
+      long a0 = Date.parse(arg10);
+      assertEquals(roundToDay(accum0.getTime()), roundToDay(a0));
+    }
+
     // /////////////////////////////
     // Past
     // /////////////////////////////

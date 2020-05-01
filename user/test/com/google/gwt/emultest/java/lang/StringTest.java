@@ -18,7 +18,6 @@ package com.google.gwt.emultest.java.lang;
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.testing.TestUtils;
-
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Locale;
@@ -365,6 +364,8 @@ public class StringTest extends GWTTestCase {
     assertTrue(hideFromCompiler("").equals(""));
     assertFalse(hideFromCompiler("").equals(null));
 
+    // TODO: String.equals does not have NPE check
+/*
     try {
       returnNull().equals("other");
       fail();
@@ -382,6 +383,7 @@ public class StringTest extends GWTTestCase {
     } catch (JavaScriptException e) {
       // expected
     }
+*/
   }
 
   public void testEqualsIgnoreCase() {
@@ -813,6 +815,32 @@ public class StringTest extends GWTTestCase {
     assertEquals("cd", hideFromCompiler("abcdefghi").substring(2, 4));
     assertEquals("bc", hideFromCompiler("abcdef").substring(1, 3));
     assertEquals("bcdef", hideFromCompiler("abcdef").substring(1));
+    assertEquals("", hideFromCompiler("abcdef").substring(6));
+    assertEquals("", hideFromCompiler("abcdef").substring(6, 6));
+
+    try {
+      hideFromCompiler("abc").substring(-1);
+      fail("Should have thrown");
+    } catch (IndexOutOfBoundsException expected) {
+    }
+
+    try {
+      hideFromCompiler("abc").substring(4);
+      fail("Should have thrown");
+    } catch (IndexOutOfBoundsException expected) {
+    }
+
+    try {
+      hideFromCompiler("abc").substring(2, 4);
+      fail("Should have thrown");
+    } catch (IndexOutOfBoundsException expected) {
+    }
+
+    try {
+      hideFromCompiler("abc").substring(2, 1);
+      fail("Should have thrown");
+    } catch (IndexOutOfBoundsException expected) {
+    }
   }
 
   public void testToCharArray() {

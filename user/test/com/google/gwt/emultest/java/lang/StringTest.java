@@ -811,6 +811,32 @@ public class StringTest extends GWTTestCase {
     assertEquals("cd", hideFromCompiler("abcdefghi").substring(2, 4));
     assertEquals("bc", hideFromCompiler("abcdef").substring(1, 3));
     assertEquals("bcdef", hideFromCompiler("abcdef").substring(1));
+    assertEquals("", hideFromCompiler("abcdef").substring(6));
+    assertEquals("", hideFromCompiler("abcdef").substring(6, 6));
+
+    try {
+      hideFromCompiler("abc").substring(-1);
+      fail("Should have thrown");
+    } catch (IndexOutOfBoundsException expected) {
+    }
+
+    try {
+      hideFromCompiler("abc").substring(4);
+      fail("Should have thrown");
+    } catch (IndexOutOfBoundsException expected) {
+    }
+
+    try {
+      hideFromCompiler("abc").substring(2, 4);
+      fail("Should have thrown");
+    } catch (IndexOutOfBoundsException expected) {
+    }
+
+    try {
+      hideFromCompiler("abc").substring(2, 1);
+      fail("Should have thrown");
+    } catch (IndexOutOfBoundsException expected) {
+    }
   }
 
   public void testToCharArray() {

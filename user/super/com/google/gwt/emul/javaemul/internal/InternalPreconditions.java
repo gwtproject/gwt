@@ -591,6 +591,23 @@ public final class InternalPreconditions {
    *
    * @throws StringIndexOutOfBoundsException if the range is not legal
    */
+  public static void checkStringBounds(int start, int end, int length) {
+    if (IS_BOUNDS_CHECKED) {
+      checkCriticalStringBounds(start, end, length);
+    } else if (IS_ASSERTED) {
+      try {
+        checkCriticalStringBounds(start, end, length);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
+  /**
+   * Checks that string bounds are correct.
+   *
+   * @throws StringIndexOutOfBoundsException if the range is not legal
+   */
   public static void checkCriticalStringBounds(int start, int end, int length) {
     if (start < 0 || end > length || end < start) {
       throw new StringIndexOutOfBoundsException(

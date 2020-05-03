@@ -196,6 +196,7 @@
           <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar"/>
           <pathelement location="${gwt.tools.antlib}/ant-junit-1.6.5.jar"/>
           <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
+          <pathelement location="${gwt.tools.lib}/jsinterop/jsinterop-annotations-2.0.0.jar"/>
         </classpath>
       </taskdef>
 
@@ -238,6 +239,7 @@
           <pathelement location="${gwt.dev.staging.jar}"/>
           <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar"/>
           <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
+          <pathelement location="${gwt.tools.lib}/jsinterop/jsinterop-annotations-2.0.0.jar"/>
           <pathelement location="${gwt.tools.lib}/w3c/sac/sac-1.3.jar"/>
           <pathelement location="${gwt.tools.lib}/w3c/flute/flute-1.3-gg2.jar"/>
           <extraclasspaths/>

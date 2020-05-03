@@ -25,6 +25,7 @@
         <pathelement location="${javac.out}"/>
         <pathelement location="${gwt.dev.jar}" />
         <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar" />
+        <pathelement location="${gwt.tools.lib}/jsinterop/jsinterop-annotations-2.0.0.jar"/>
       </classpath>
     </gwt.javac>
   </target>
@@ -68,6 +69,7 @@
         <pathelement location="${gwt.root}/user/super/"/>
         <pathelement location="java/" />
         <pathelement location="javatests/" />
+        <pathelement location="${gwt.tools.lib}/jsinterop/jsinterop-annotations-2.0.0.jar"/>
       </extraclasspaths>
     </gwt.junit>
   </target>

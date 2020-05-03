@@ -168,6 +168,7 @@
         <pathelement location="${javac.out}"/>
         <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar"/>
         <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
+        <pathelement location="${gwt.tools.lib}/jsinterop/jsinterop-annotations-2.0.0.jar"/>
         <path refid="test.extraclasspath"/>
       </classpath>
       <compilerarg value="-processor"/>
@@ -189,6 +190,7 @@
         <pathelement location="${javac.out}"/>
         <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar"/>
         <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
+        <pathelement location="${gwt.tools.lib}/jsinterop/jsinterop-annotations-2.0.0.jar"/>
         <path refid="test.extraclasspath"/>
       </classpath>
     </gwt.javac>

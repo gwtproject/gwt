@@ -16,6 +16,24 @@
       "revId": "c60ccded97ab9a13fed5b77a32bc15986a58a975",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03382d06_725abe6a",
+        "filename": "common.ant.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2020-05-04T19:26:54Z",
+      "side": 1,
+      "message": "Good call.  I was trying to add it in a place where we took it for granted that the full classpath would be set already, since it is assumed in many places that these annotations are part of any user classpath.",
+      "parentUuid": "4c5abfae_094f719f",
+      "revId": "c60ccded97ab9a13fed5b77a32bc15986a58a975",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

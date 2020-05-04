@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c5abfae_094f719f",
+        "filename": "common.ant.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2020-05-04T19:17:49Z",
+      "side": 1,
+      "message": "-1\njsinterop-annotations should only be added where gwt-user was present in one form or another (or to compile gwt-user)\n\nChasing other similar dependencies such as javax.validation or streaming-parser or flute should give us the full list.",
+      "revId": "c60ccded97ab9a13fed5b77a32bc15986a58a975",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

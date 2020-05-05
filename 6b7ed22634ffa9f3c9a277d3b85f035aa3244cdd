@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce88f0f7_8af3663f",
+        "filename": "dev/codeserver/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2020-05-05T22:01:02Z",
+      "side": 1,
+      "message": "I\u0027m all but certain you also need an entry here for the same jar, since otherwise jsinterop-annotations won\u0027t be present on the classpath when these tests run.",
+      "revId": "6b7ed22634ffa9f3c9a277d3b85f035aa3244cdd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

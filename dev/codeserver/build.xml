@@ -25,6 +25,7 @@
         <pathelement location="${javac.out}"/>
         <pathelement location="${gwt.dev.jar}" />
         <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar" />
+        <pathelement location="${gwt.tools.lib}/jsinterop/jsinterop-annotations-2.0.0.jar" />
       </classpath>
     </gwt.javac>
   </target>
@@ -63,6 +64,7 @@
         <pathelement location="${gwt.root}/build/out/dev/bin-test"/>
         <pathelement location="${project.lib}"/>
         <pathelement location="${gwt.dev.jar}" />
+        <pathelement location="${gwt.tools.lib}/jsinterop/jsinterop-annotations-2.0.0.jar" />
         <!-- Pull in gwt-user sources -->
         <pathelement location="${gwt.root}/user/src/"/>
         <pathelement location="${gwt.root}/user/super/"/>

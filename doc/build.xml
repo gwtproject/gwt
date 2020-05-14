@@ -20,6 +20,7 @@
     <pathelement location="${gwt.root}/user/super" />
     <pathelement location="${gwt.root}/dev/core/src" />
     <pathelement location="${gwt.root}/dev/core/super" />
+    <pathelement location="${gwt.build.out}/jsinterop-annotations"/>
   </path>
 
   <path id="USER_CLASS_PATH">
@@ -75,6 +76,9 @@
 
   <!-- Really rebuild the javadoc -->
   <target name="makeJavadoc">
+    <!-- Unpack the jsinterop-annotation sources so we can include them -->
+    <unzip src="${gwt.tools.lib}/jsinterop/jsinterop-annotations-2.0.0-sources.jar"
+           dest="${gwt.build.out}/jsinterop-annotations"/>
     <java classpathref="DOC_PATH" classname="com.google.doctool.custom.FindPackages" fork="yes" failonerror="true">
       <arg value="${gwt.root}" />
     </java>

@@ -78,7 +78,7 @@ public class FindPackages {
    */
   private static final String[] SOURCE_DIRS = {
       "user/src", "user/javadoc", "user/super", "dev/core/src",
-      "dev/core/super"};
+      "dev/core/super", "build/out/jsinterop-annotations"};
 
   /**
    * Individual user classes to include, even if the rest of their packages

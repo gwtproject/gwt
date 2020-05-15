@@ -61,7 +61,7 @@ public class MessageDigestTest extends EmulTestBase {
           + "them, and theylooked down upon the broad sweep of the beach at the foot of "
           + "the greatchalk cliff in which Von Bork, like some wandering eagle, had "
           + "perchedhimself four years before. They stood with their heads close "
-          + "together,talking in low, confidential tones. From below the two glowing "
+          + "together,talking in low tones. From below the two glowing "
           + "ends oftheir cigars might have been the smouldering eyes of some "
           + "malignantfiend looking down in the darkness.A remarkable man this Von Bork--a "
           + "man who could hardly be matched amongall the devoted agents of the Kaiser. "
@@ -77,7 +77,7 @@ public class MessageDigestTest extends EmulTestBase {
           + "welcomeyou will receive. I happen to know what is thought in the "
           + "highestquarters of your work in this country.' He was a huge man, "
           + "thesecretary, deep, broad, and tall, with",
-      "ae610cd119d74e5ac18c111d4a91ef3f",
+      "e4ab6d550fe9878dd9b2c83648e1a190",
   };
 
   private String[] sha256TestData = new String[] {

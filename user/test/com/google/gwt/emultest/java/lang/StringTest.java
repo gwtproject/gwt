@@ -18,7 +18,6 @@ package com.google.gwt.emultest.java.lang;
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.testing.TestUtils;
-
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Locale;
@@ -715,9 +714,8 @@ public class StringTest extends GWTTestCase {
     String exampleXd = String.valueOf(new char[] {
         'e', 'x', 'a', 'm', 'p', 'l', 'e', ' ', 'x', 'd'});
     assertEquals("example xd", exampleXd.replace('\r', ' ').replace('\n', ' '));
-    String dogFood = String.valueOf(new char[] {
-        'd', 'o', 'g', '\u0120', 'f', 'o', 'o', 'd'});
-    assertEquals("dog food", dogFood.replace('\u0120', ' '));
+    String dotFood = String.valueOf(new char[] {'d', 'o', 't', '\u0120', 'f', 'o', 'o', 'd'});
+    assertEquals("dot food", dotFood.replace('\u0120', ' '));
     String testStr = String.valueOf(new char[] {
         '\u1111', 'B', '\u1111', 'B', '\u1111', 'B'});
     assertEquals("ABABAB", testStr.replace('\u1111', 'A'));

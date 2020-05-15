@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3958382c_bbb29762",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/StringTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2020-05-15T01:54:12Z",
+      "side": 1,
+      "message": "I am not sure why these are now commented out now. Were these tests not passing? Is it not the case that calling equals on null throws?\n\nI see the TODO that seems to suggest that these tests were already failing.",
+      "range": {
+        "startLine": 368,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 2
+      },
+      "revId": "a929ec8aa7f2142e83c37cfb7176f11fb9ae02fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43f3f771_35763a42",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/StringTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2020-05-15T01:54:12Z",
+      "side": 1,
+      "message": "Are these actually StringIndexOutOfBoundsExceptions. I see that the doc only says throws IndexOutOfBoundsExceptions.",
+      "range": {
+        "startLine": 836,
+        "startChar": 13,
+        "endLine": 836,
+        "endChar": 38
+      },
+      "revId": "a929ec8aa7f2142e83c37cfb7176f11fb9ae02fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "595390aa_5aab5d5c",
+        "filename": "user/test/com/google/gwt/emultest/java/util/DateTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2020-05-15T01:54:12Z",
+      "side": 1,
+      "message": "was this failing? Why did we not see it.\n\nWe should settle on one way to disable tests. The other one was just commented out this one is if (false).",
+      "range": {
+        "startLine": 389,
+        "startChar": 3,
+        "endLine": 389,
+        "endChar": 87
+      },
+      "revId": "a929ec8aa7f2142e83c37cfb7176f11fb9ae02fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

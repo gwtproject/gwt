@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0eceee15_a44bbd94",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/StringTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2020-05-15T19:18:40Z",
+      "side": 1,
+      "message": "No idea why dots instead of dogs are now a thing but ok ;)",
+      "revId": "178c60a224e9ff8b9e05904e099a91c0e12f107e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cef76d30_20192686",
+        "filename": "user/test/com/google/gwt/emultest/java/util/DateTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2020-05-15T19:18:40Z",
+      "side": 1,
+      "message": "More context for non Googlers would be helpful.",
+      "revId": "178c60a224e9ff8b9e05904e099a91c0e12f107e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

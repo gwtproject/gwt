@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bbe3ea65_38044bf6",
+        "filename": "user/super/com/google/gwt/emul/java/lang/AbstractStringBuilder.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-05-15T23:37:58Z",
+      "side": 1,
+      "message": "This was relying on existing behavior of substring where end \u003e length.",
+      "parentUuid": "4380385e_3a1859fd",
+      "revId": "c65c864cb11220fdf3233ab551e2789b35161912",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "357629ad_f569db46",
         "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "c65c864cb11220fdf3233ab551e2789b35161912",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82b66815_6ee13718",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-05-15T23:37:58Z",
+      "side": 1,
+      "message": "pls discard, tooling failure.",
+      "parentUuid": "357629ad_f569db46",
+      "revId": "c65c864cb11220fdf3233ab551e2789b35161912",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "9fe4a2c8_54261481",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/InternalPreconditions.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-05-15T23:37:58Z",
+      "side": 1,
+      "message": "used by substring",
+      "parentUuid": "0101fe6d_9e01000f",
+      "revId": "c65c864cb11220fdf3233ab551e2789b35161912",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83f311d6_756ef4e4",
         "filename": "user/test/com/google/gwt/emultest/java/lang/StringTest.java",
         "patchSetId": 6
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "668faf14_ac5dc0f8",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/StringTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-05-15T23:37:58Z",
+      "side": 1,
+      "message": "pls discard.",
+      "parentUuid": "83f311d6_756ef4e4",
+      "revId": "c65c864cb11220fdf3233ab551e2789b35161912",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b9b91c5_166154fd",
         "filename": "user/test/com/google/gwt/emultest/java/util/DateTest.java",
         "patchSetId": 6
@@ -84,6 +156,24 @@
       "revId": "c65c864cb11220fdf3233ab551e2789b35161912",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd7c88a3_692f8c40",
+        "filename": "user/test/com/google/gwt/emultest/java/util/DateTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-05-15T23:37:58Z",
+      "side": 1,
+      "message": "pls discard.",
+      "parentUuid": "8b9b91c5_166154fd",
+      "revId": "c65c864cb11220fdf3233ab551e2789b35161912",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

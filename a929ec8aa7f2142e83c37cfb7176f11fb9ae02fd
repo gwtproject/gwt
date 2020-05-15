@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "633cc878_7eb05800",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/StringTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-05-15T23:37:58Z",
+      "side": 1,
+      "message": "Pls ignore.",
+      "parentUuid": "3958382c_bbb29762",
+      "range": {
+        "startLine": 368,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 2
+      },
+      "revId": "a929ec8aa7f2142e83c37cfb7176f11fb9ae02fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43f3f771_35763a42",
         "filename": "user/test/com/google/gwt/emultest/java/lang/StringTest.java",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "a929ec8aa7f2142e83c37cfb7176f11fb9ae02fd",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b891c67f_da4abd78",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/StringTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-05-15T23:37:58Z",
+      "side": 1,
+      "message": "Yes they are StringIndexOutOfBoundsExceptions",
+      "parentUuid": "43f3f771_35763a42",
+      "range": {
+        "startLine": 836,
+        "startChar": 13,
+        "endLine": 836,
+        "endChar": 38
+      },
+      "revId": "a929ec8aa7f2142e83c37cfb7176f11fb9ae02fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     },
     {
       "key": {

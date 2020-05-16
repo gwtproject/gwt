@@ -308,7 +308,7 @@ public final class Math {
   public static native double sin(double x);
 
   public static double sinh(double x) {
-    return x == 0 ? x : (exp(x) - exp(-x)) / 2;
+    return x == 0.0 ? x : (exp(x) - exp(-x)) / 2;
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.sqrt")
@@ -319,13 +319,15 @@ public final class Math {
 
   public static double tanh(double x) {
     if (x == 0.0) {
+      // -0.0 should return -0.0.
       return x;
-    } else if (Double.isInfinite(x)) {
-      return signum(x);
-    } else {
-      double e2x = exp(2 * x);
-      return (e2x - 1) / (e2x + 1);
     }
+
+    double e2x = exp(2 * x);
+    if (Double.isInfinite(e2x)) {
+      return 1;
+    }
+    return (e2x - 1) / (e2x + 1);
   }
 
   public static double toDegrees(double x) {

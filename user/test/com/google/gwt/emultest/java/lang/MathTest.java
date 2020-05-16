@@ -579,8 +579,14 @@ public class MathTest extends GWTTestCase {
     assertEquals(0.761594155, v, 1e-7);
     v = Math.tanh(-1.0);
     assertEquals(-0.761594155, v, 1e-7);
+    v = Math.tanh(500);
+    assertEquals(1.0, v, 1e-7);
+    v = Math.tanh(-500);
+    assertEquals(-1.0, v, 1e-7);
     v = Math.tanh(Double.NaN);
     assertNaN(v);
+    v = Math.tanh(Double.MAX_VALUE);
+    assertEquals(1.0, v, 1e-7);
     v = Math.tanh(Double.NEGATIVE_INFINITY);
     assertEquals(-1.0, v, 1e-7);
     v = Math.tanh(Double.POSITIVE_INFINITY);

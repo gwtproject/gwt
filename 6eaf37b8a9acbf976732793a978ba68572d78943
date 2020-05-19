@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c21c44c7_7499aee0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 6910
+      },
+      "writtenOn": "2020-05-19T06:27:55Z",
+      "side": 1,
+      "message": "shouldn\u0027t we reference th issue ID?\nIssue: #9688",
+      "revId": "6eaf37b8a9acbf976732793a978ba68572d78943",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

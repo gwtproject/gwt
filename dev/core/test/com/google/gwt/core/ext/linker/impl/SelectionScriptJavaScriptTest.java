@@ -265,6 +265,10 @@ public class SelectionScriptJavaScriptTest extends TestCase {
     webConnection.setResponse(new URL(
         "http://foo.test/foo/test.Module.nocache.js"), testScript.toString(),
         "application/javascript");
+    webConnection.setResponse(new URL(
+            "http://foo.test/from/nocache/__MODULE_NAME__.nocache.js"),
+            testScript.toString(),
+            "application/javascript");
     webClient.setWebConnection(webConnection);
 
     final List<String> alerts = new ArrayList<String>();

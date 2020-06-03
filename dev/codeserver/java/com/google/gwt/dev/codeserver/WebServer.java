@@ -123,7 +123,6 @@ public class WebServer {
     connector.setHost(bindAddress);
     connector.setPort(port);
     connector.setReuseAddress(false);
-    connector.setSoLingerTime(0);
     newServer.addConnector(connector);
 
     ServletContextHandler newHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);

@@ -149,7 +149,6 @@ public class XMLTest extends GWTTestCase {
     assertEquals(de.getAttributeNode("unset"), null);
   }
 
-  @DoNotRunWith({Platform.HtmlUnitBug})
   public void testCreate() {
     Document d = XMLParser.createDocument();
     CDATASection createCDATA = d.createCDATASection("sampl<<< >>e data");

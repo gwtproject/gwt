@@ -418,12 +418,6 @@ public class HistoryTest extends GWTTestCase {
     timer.schedule(200);
   }
 
-  /*
-   * HtmlUnit reports:
-   *   expected=abc;,/?:@&=+$-_.!~*()ABC123foo
-   *   actual  =abc;,/?:@&=%20$-_.!~*()ABC123foo
-   */
-  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testTokenNonescaping() {
     final String shouldNotChange = "abc;,/?:@&=+$-_.!~*()ABC123foo";
 

@@ -21,8 +21,6 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.junit.DoNotRunWith;
-import com.google.gwt.junit.Platform;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.Command;
 
@@ -216,7 +214,6 @@ public class MenuBarTest extends WidgetTestBase {
     assertNull(l2.getPopup());
   }
 
-  @DoNotRunWith({Platform.HtmlUnitBug})
   public void testBlur() {
     // Create a menu bar with children.
     final MenuBar menu = new MenuBar();
@@ -234,7 +231,6 @@ public class MenuBarTest extends WidgetTestBase {
     assertNull(menu.getSelectedItem());
   }
 
-  @DoNotRunWith({Platform.HtmlUnitBug})
   public void testSetFocusOnHoverEnabled() {
     delayTestFinish(1000);
     TextBox focusOwner = new TextBox();

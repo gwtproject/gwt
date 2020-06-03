@@ -26,6 +26,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import org.eclipse.jetty.http.HttpField;
 import org.eclipse.jetty.http.HttpFields;
+import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.server.HttpConfiguration;
 import org.eclipse.jetty.server.HttpConnectionFactory;
 import org.eclipse.jetty.server.Request;
@@ -36,6 +37,8 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.SslConnectionFactory;
 import org.eclipse.jetty.server.handler.RequestLogHandler;
+import org.eclipse.jetty.servlet.ErrorPageErrorHandler;
+import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.util.component.AbstractLifeCycle;
 import org.eclipse.jetty.util.log.Log;
 import org.eclipse.jetty.util.log.Logger;
@@ -127,7 +130,7 @@ public class JettyLauncher extends ServletContainerLauncher {
       }
       if (logger.isLoggable(logStatus)) {
         TreeLogger branch = logger.branch(logStatus, String.valueOf(status)
-            + " - " + request.getMethod() + ' ' + request.getUri() + " ("
+            + " - " + request.getMethod() + ' ' + request.getRequestURI() + " ("
             + userString + request.getRemoteHost() + ')' + bytesString);
         if (branch.isLoggable(logHeaders)) {
           logHeaders(branch.branch(logHeaders, "Request headers"), logHeaders,
@@ -350,6 +353,7 @@ public class JettyLauncher extends ServletContainerLauncher {
       private final ClasspathPattern systemClassesFromWebappFirst = new ClasspathPattern(new String[] {
           "-javax.servlet.",
           "-javax.el.",
+          "-javax.websocket.",
           "javax.",
       });
       private final ClasspathPattern allowedFromSystemClassLoader = new ClasspathPattern(new String[] {
@@ -371,11 +375,13 @@ public class JettyLauncher extends ServletContainerLauncher {
 
       @Override
       public Enumeration<URL> getResources(String name) throws IOException {
-        // Logic copied from Jetty's WebAppClassLoader
-        List<URL> fromParent = isServerClass(name)
+        // Logic copied from Jetty's WebAppClassLoader, modified to use the system classloader
+        // instead of the parent classloader for server classes
+        List<URL> fromParent = WebAppContextWithReload.this.isServerClass(name)
             ? Collections.<URL>emptyList()
             : Lists.newArrayList(Iterators.forEnumeration(systemClassLoader.getResources(name)));
-        Iterator<URL> fromWebapp = isSystemClass(name) && !fromParent.isEmpty()
+        Iterator<URL> fromWebapp = WebAppContextWithReload.this.isSystemClass(name)
+                && !fromParent.isEmpty()
             ? Collections.<URL>emptyIterator()
             : Iterators.forEnumeration(findResources(name));
         return Iterators.asEnumeration(Iterators.concat(fromWebapp, fromParent.iterator()));
@@ -394,7 +400,8 @@ public class JettyLauncher extends ServletContainerLauncher {
         // Note: bootstrap has already been searched, so javax. classes should be
         // tried from the webapp first (except for javax.servlet and javax.el).
         URL found;
-        if (isSystemClass(checkName) && !systemClassesFromWebappFirst.match(checkName)) {
+        if (WebAppContextWithReload.this.isSystemClass(checkName)
+                && !systemClassesFromWebappFirst.match(checkName)) {
           found = systemClassLoader.getResource(name);
           if (found != null) {
             return found;
@@ -409,7 +416,7 @@ public class JettyLauncher extends ServletContainerLauncher {
 
         // See if the outside world has it.
         found = systemClassLoader.getResource(name);
-        if (found == null || isServerClass(checkName)) {
+        if (found == null || WebAppContextWithReload.this.isServerClass(checkName)) {
           return null;
         }
 
@@ -431,22 +438,27 @@ public class JettyLauncher extends ServletContainerLauncher {
       }
 
       @Override
-      protected Class<?> findClass(String name) throws ClassNotFoundException {
+      protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
         // For system path, always prefer the outside world.
         // Note: bootstrap has already been searched, so javax. classes should be
         // tried from the webapp first (except for javax.servlet).
-        if (isSystemClass(name) && !systemClassesFromWebappFirst.match(name)) {
+        if (WebAppContextWithReload.this.isSystemClass(name)
+                && !systemClassesFromWebappFirst.match(name)) {
           try {
-            return systemClassLoader.loadClass(name);
+            Class<?> loaded = systemClassLoader.loadClass(name);
+            if (resolve) {
+              resolveClass(loaded);
+            }
+            return loaded;
           } catch (ClassNotFoundException e) {
           }
         }
 
         try {
-          return super.findClass(name);
+          return super.loadClass(name, resolve);
         } catch (ClassNotFoundException e) {
           // Don't allow server classes to be loaded from the outside.
-          if (isServerClass(name)) {
+          if (WebAppContextWithReload.this.isServerClass(name)) {
             throw e;
           }
         }
@@ -455,7 +467,7 @@ public class JettyLauncher extends ServletContainerLauncher {
         String resourceName = name.replace('.', '/') + ".class";
         URL found = systemClassLoader.getResource(resourceName);
         if (found == null) {
-          return null;
+          throw new ClassNotFoundException(name);
         }
 
         // Special-case JDBCUnloader; it should always be loaded in the webapp classloader
@@ -467,17 +479,21 @@ public class JettyLauncher extends ServletContainerLauncher {
         // Those classes are allowed to be loaded right from the systemClassLoader
         // Note: Jetty classes here are not "server classes", handled above.
         if (allowedFromSystemClassLoader.match(name)) {
-          return systemClassLoader.loadClass(name);
+          Class<?> loaded = systemClassLoader.loadClass(name);
+          if (resolve) {
+            resolveClass(loaded);
+          }
+          return loaded;
         }
 
         // Warn, add containing URL to our own ClassLoader, and retry the call.
         String warnMessage = "Server class '"
-            + name
-            + "' could not be found in the web app, but was found on the system classpath";
+                + name
+                + "' could not be found in the web app, but was found on the system classpath";
         if (!addContainingClassPathEntry(warnMessage, found, resourceName)) {
           throw new ClassNotFoundException(name);
         }
-        return super.findClass(name);
+        return super.loadClass(name, resolve);
       }
 
       private boolean addContainingClassPathEntry(String warnMessage,
@@ -533,7 +549,9 @@ public class JettyLauncher extends ServletContainerLauncher {
 
     private WebAppContextWithReload(TreeLogger logger, String webApp,
         String contextPath) {
-      super(webApp, contextPath);
+      super(null, contextPath, null, null, null, new ErrorPageErrorHandler(),
+              ServletContextHandler.SESSIONS);
+      this.setWar(webApp);
       this.logger = logger;
 
       // Prevent file locking on Windows; pick up file changes.
@@ -594,9 +612,6 @@ public class JettyLauncher extends ServletContainerLauncher {
 
     // Allow binding to a port even if it's still in state TIME_WAIT.
     connector.setReuseAddress(true);
-
-    // Linux keeps the port blocked after shutdown if we don't disable this.
-    connector.setSoLingerTime(0);
   }
 
   // default value used if setBaseLogLevel isn't called
@@ -751,7 +766,8 @@ public class JettyLauncher extends ServletContainerLauncher {
     }
 
     // Create a new web app in the war directory.
-      WebAppContext wac = createWebAppContext(logger, appRootDir);
+    WebAppContext wac = createWebAppContext(logger, appRootDir);
+    wac.setSecurityHandler(new ConstraintSecurityHandler());
 
     RequestLogHandler logHandler = new RequestLogHandler();
     logHandler.setRequestLog(new JettyRequestLogger(logger, getBaseLogLevel()));

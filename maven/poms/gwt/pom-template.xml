@@ -21,8 +21,8 @@
         </license>
     </licenses>
     <properties>
-      <jetty.version>9.2.14.v20151106</jetty.version>
-      <asm.version>7.1</asm.version>
+      <jetty.version>9.4.44.v20210927</jetty.version>
+      <asm.version>9.2</asm.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -118,7 +118,7 @@
             <dependency>
                 <groupId>net.sourceforge.htmlunit</groupId>
                 <artifactId>htmlunit</artifactId>
-                <version>2.19</version>
+                <version>2.55.0</version>
             </dependency>
             <dependency>
                 <groupId>org.w3c.css</groupId>

@@ -467,14 +467,6 @@ public class CreateEventTest extends GWTTestCase {
     assertTrue("Expected parent to receive event", listener.parentReceived);
   }
 
-  /**
-   * Tests createErrorEvent().
-   *
-   * Failed in all modes due to HtmlUnit bug:
-   * https://sourceforge.net/tracker/?func
-   * =detail&aid=2888342&group_id=47038&atid=448266
-   */
-  @DoNotRunWith({Platform.HtmlUnitBug})
   public void testTriggerErrorEvent() {
     ImgEventListener listener = new ImgEventListener("error");
     Event.setEventListener(parent, listener);
@@ -686,12 +678,6 @@ public class CreateEventTest extends GWTTestCase {
     listener.cancel();
   }
 
-  /**
-   * Tests createKeyPressEvent().
-   *
-   * Failed in all modes due to HtmlUnit bug:
-   */
-  @DoNotRunWith({Platform.HtmlUnitBug})
   public void testTriggerScrollEvent() {
     NonBubbleAssertingEventListener listener = new NonBubbleAssertingEventListener(
         "scroll") {

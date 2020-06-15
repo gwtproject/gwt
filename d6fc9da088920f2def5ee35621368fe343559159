@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "b3671b99_dd414ab6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2020-06-15T14:26:58Z",
+      "side": 1,
+      "message": "Did you mean \"remove\"?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "d6fc9da088920f2def5ee35621368fe343559159",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ce266540_c4424afa",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -13,6 +36,24 @@
       "writtenOn": "2020-06-15T13:32:56Z",
       "side": 1,
       "message": "Need to remove this once we\u0027re ready to merge and this change to tools is landed",
+      "revId": "d6fc9da088920f2def5ee35621368fe343559159",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23b55f79_4176d980",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2020-06-15T14:26:58Z",
+      "side": 1,
+      "message": "Fwiw, better remove it early and guard mergeability with a manual Verified-1 or Code-Review-2 (or WIP)",
+      "parentUuid": "ce266540_c4424afa",
       "revId": "d6fc9da088920f2def5ee35621368fe343559159",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
@@ -33,6 +74,23 @@
       "revId": "d6fc9da088920f2def5ee35621368fe343559159",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cd99182_91e73386",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/PathPrefix.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2020-06-15T14:26:58Z",
+      "side": 1,
+      "message": "nit: should we rename it to only com.google.gwt.thirdparty.ant.types.ZipScanner? (i.e. removing the \u0027org.apache.tools\u0027 inner segments)",
+      "revId": "d6fc9da088920f2def5ee35621368fe343559159",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

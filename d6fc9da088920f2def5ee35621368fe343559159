@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9557774b_944fe9f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2020-06-15T22:58:29Z",
+      "side": 1,
+      "message": "I did, don\u0027t write commits before finishing first cup of coffee...",
+      "parentUuid": "b3671b99_dd414ab6",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "d6fc9da088920f2def5ee35621368fe343559159",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce266540_c4424afa",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -60,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "ef9f5e4d_41d9eb92",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2020-06-15T22:58:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23b55f79_4176d980",
+      "revId": "d6fc9da088920f2def5ee35621368fe343559159",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c4a2209_98f2fbe1",
         "filename": "dev/core/src/com/google/gwt/dev/resource/impl/DefaultFilters.java",
         "patchSetId": 1
@@ -88,6 +130,24 @@
       "writtenOn": "2020-06-15T14:26:58Z",
       "side": 1,
       "message": "nit: should we rename it to only com.google.gwt.thirdparty.ant.types.ZipScanner? (i.e. removing the \u0027org.apache.tools\u0027 inner segments)",
+      "revId": "d6fc9da088920f2def5ee35621368fe343559159",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7868a0f2_de938072",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/PathPrefix.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2020-06-15T22:58:29Z",
+      "side": 1,
+      "message": "I had initially done it this way as this is the first non-`com.google.*` package, so thought extra prefixing might be appropriate. Examining the contents of gwt-dev, I see that is incorrect, org.json is repackaged as com.google.gwt.thirdparty.json.\n\nSince the jar contains both `org.apache.tools.ant...` and `org.apache.tools.zip.*`, I think I\u0027ll leave the apache prefix in as well? So, replacing `org.apache.tools` with `com.google.gwt.thirdparty.apache`, with subpackages `ant` and `zip`, rather than `tools` as the common shared package?",
+      "parentUuid": "7cd99182_91e73386",
       "revId": "d6fc9da088920f2def5ee35621368fe343559159",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true

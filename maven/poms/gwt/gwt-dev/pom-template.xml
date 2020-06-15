@@ -45,10 +45,6 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>ant</groupId>
-            <artifactId>ant</artifactId>
-        </dependency>
-        <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
         </dependency>

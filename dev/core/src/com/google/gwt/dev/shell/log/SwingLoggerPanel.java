@@ -485,9 +485,9 @@ public class SwingLoggerPanel extends JPanel implements TreeSelectionListener,
    */
   @SuppressWarnings("unchecked")
   public void collapseAll() {
-    Enumeration<DefaultMutableTreeNode> children = root.postorderEnumeration();
+    Enumeration<TreeNode> children = root.postorderEnumeration();
     while (children.hasMoreElements()) {
-      DefaultMutableTreeNode node = children.nextElement();
+      DefaultMutableTreeNode node = (DefaultMutableTreeNode) children.nextElement();
       if (node != root) {
         tree.collapsePath(new TreePath(node.getPath()));
       }
@@ -509,9 +509,9 @@ public class SwingLoggerPanel extends JPanel implements TreeSelectionListener,
    */
   @SuppressWarnings("unchecked")
   public void expandAll() {
-    Enumeration<DefaultMutableTreeNode> children = root.postorderEnumeration();
+    Enumeration<TreeNode> children = root.postorderEnumeration();
     while (children.hasMoreElements()) {
-      DefaultMutableTreeNode node = children.nextElement();
+      DefaultMutableTreeNode node = (DefaultMutableTreeNode) children.nextElement();
       if (node != root) {
         tree.expandPath(new TreePath(node.getPath()));
       }
@@ -605,10 +605,10 @@ public class SwingLoggerPanel extends JPanel implements TreeSelectionListener,
 
   protected ArrayList<DefaultMutableTreeNode> doFind(String search) {
     @SuppressWarnings("unchecked")
-    Enumeration<DefaultMutableTreeNode> children = root.preorderEnumeration();
+    Enumeration<TreeNode> children = root.preorderEnumeration();
     ArrayList<DefaultMutableTreeNode> matches = new ArrayList<DefaultMutableTreeNode>();
     while (children.hasMoreElements()) {
-      DefaultMutableTreeNode node = children.nextElement();
+      DefaultMutableTreeNode node = (DefaultMutableTreeNode) children.nextElement();
       if (node != root && nodeMatches(node, search)) {
         matches.add(node);
         // Make sure our this entry is visible by expanding up to parent

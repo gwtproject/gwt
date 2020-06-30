@@ -16,15 +16,13 @@
 package com.google.gwt.emultest.java.sql;
 
 import com.google.gwt.junit.client.GWTTestCase;
-
 import java.sql.Date;
 
 /**
- * Tests {@link java.sql.Date}. We assume that the underlying
- * {@link java.util.Date} implementation is correct and concentrate only on the
- * differences between the two.
+ * Tests {@link java.sql.Date}. We assume that the underlying {@link java.util.Date} implementation
+ * is correct and concentrate only on the differences between the two.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings({"deprecation", "DoNotCall"})
 public class SqlDateTest extends GWTTestCase {
 
   /**

@@ -15,14 +15,10 @@
  */
 package java.lang;
 
-/**
- * Wraps a primitive <code>long</code> as an object.
- */
+/** Wraps a primitive <code>long</code> as an object. */
 public final class Long extends Number implements Comparable<Long> {
 
-  /**
-   * Use nested class to avoid clinit on outer.
-   */
+  /** Use nested class to avoid clinit on outer. */
   static class BoxedValues {
     // Box values according to JLS - between -128 and 127
     static Long[] boxedValues = new Long[256];
@@ -56,7 +52,9 @@ public final class Long extends Number implements Comparable<Long> {
   }
 
   public static int hashCode(long l) {
-    return (int) l;
+    int high = (int) (l >>> 32);
+    int low = (int) l;
+    return high ^ low;
   }
 
   public static long highestOneBit(long i) {
@@ -109,15 +107,13 @@ public final class Long extends Number implements Comparable<Long> {
   public static long reverse(long i) {
     int high = (int) (i >>> 32);
     int low = (int) i;
-    return ((long) Integer.reverse(low) << 32)
-        | (Integer.reverse(high) & 0xffffffffL);
+    return ((long) Integer.reverse(low) << 32) | (Integer.reverse(high) & 0xffffffffL);
   }
 
   public static long reverseBytes(long i) {
     int high = (int) (i >>> 32);
     int low = (int) i;
-    return ((long) Integer.reverseBytes(low) << 32)
-        | (Integer.reverseBytes(high) & 0xffffffffL);
+    return ((long) Integer.reverseBytes(low) << 32) | (Integer.reverseBytes(high) & 0xffffffffL);
   }
 
   public static long rotateLeft(long i, int distance) {

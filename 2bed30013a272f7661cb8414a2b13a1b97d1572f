@@ -16,6 +16,24 @@
       "revId": "2bed30013a272f7661cb8414a2b13a1b97d1572f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3634dff8_34ed84bf",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/log/SwingLoggerPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2020-07-01T22:16:14Z",
+      "side": 1,
+      "message": "All three cases make a call to `node.getPath()`, which isn\u0027t available on TreeNode, only on this specific type.",
+      "parentUuid": "9117179e_a71bd3f6",
+      "revId": "2bed30013a272f7661cb8414a2b13a1b97d1572f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

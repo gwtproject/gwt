@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9117179e_a71bd3f6",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/log/SwingLoggerPanel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2020-07-01T22:07:50Z",
+      "side": 1,
+      "message": "Couldn\u0027t we change \u0027node\u0027 to TreeNode instead of the cast?",
+      "revId": "2bed30013a272f7661cb8414a2b13a1b97d1572f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

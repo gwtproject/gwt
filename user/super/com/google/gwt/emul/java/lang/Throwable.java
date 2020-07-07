@@ -21,7 +21,6 @@ import static javaemul.internal.InternalPreconditions.checkState;
 
 import java.io.PrintStream;
 import java.io.Serializable;
-import java.util.Arrays;
 
 import javaemul.internal.annotations.DoNotInline;
 
@@ -173,7 +172,13 @@ public class Throwable implements Serializable {
   }-*/;
 
   private Object[] getBackingSuppressed() {
-    return Arrays.stream(getSuppressed()).map(t -> t.backingJsObject).toArray();
+    // local variable as the whole method ends up being inlined three times
+    Throwable[] suppressed = getSuppressed();
+    Object[] result = new Object[suppressed.length];
+    for (int i = 0; i < suppressed.length; i++) {
+      result[i] = suppressed[i].backingJsObject;
+    }
+    return result;
   }
 
   /**

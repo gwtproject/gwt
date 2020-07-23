@@ -261,8 +261,7 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
     String cookie = StringUtils.toHexString(cookieBytes);
 
     // Cook up the classpath, main class, and extra args
-    args.addAll(Arrays.asList("-classpath",
-        ManagementFactory.getRuntimeMXBean().getClassPath(),
+    args.addAll(Arrays.asList(
         CompilePermsServer.class.getName(), "-host", "localhost", "-port",
         String.valueOf(port), "-logLevel", logLevel.toString(), "-cookie",
         cookie));
@@ -276,6 +275,7 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
     }
 
     ProcessBuilder builder = new ProcessBuilder();
+    builder.environment().put("CLASSPATH", ManagementFactory.getRuntimeMXBean().getClassPath());
     builder.command(args);
 
     try {

@@ -16,6 +16,24 @@
       "revId": "7de9ce8930d029cef35a41f79202213a736b9e86",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab52d066_27dcb8a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-07-29T23:09:06Z",
+      "side": 1,
+      "message": "My interpretation is java/lang/Math has a less strict contract that allows various runtimes to optimize the operations:\n\n\"Unlike some of the numeric methods of class StrictMath, all implementations of the equivalent functions of class Math are not defined to return the bit-for-bit same results. This relaxation permits better-performing implementations where strict reproducibility is not required.\n\nBy default many of the Math methods simply call the equivalent method in StrictMath for their implementation. Code generators are encouraged to use platform-specific native libraries or microprocessor instructions, where available, to provide higher-performance implementations of Math methods. Such higher-performance implementations still must conform to the specification for Math.\"\n\nSince we don\u0027t have such optimizations, I believe that we inherently have strict reproducible results.",
+      "parentUuid": "c6aaaa05_7047ac8b",
+      "revId": "7de9ce8930d029cef35a41f79202213a736b9e86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

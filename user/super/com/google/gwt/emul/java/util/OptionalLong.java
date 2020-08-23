@@ -54,6 +54,10 @@ public final class OptionalLong {
     return present;
   }
 
+  public boolean isEmpty() {
+    return !present;
+  }
+
   public long getAsLong() {
     checkCriticalElement(present);
     return ref;

@@ -54,6 +54,10 @@ public final class OptionalInt {
     return present;
   }
 
+  public boolean isEmpty() {
+    return !present;
+  }
+
   public int getAsInt() {
     checkCriticalElement(present);
     return ref;

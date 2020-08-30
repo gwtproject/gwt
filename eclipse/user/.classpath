@@ -65,5 +65,6 @@
 	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/jdtCompilerAdapter_3.17.0.v20190306-2240.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-7.1/asm-7.1.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-7.1/asm-commons-7.1.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/jsinterop/jsinterop-annotations-2.0.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

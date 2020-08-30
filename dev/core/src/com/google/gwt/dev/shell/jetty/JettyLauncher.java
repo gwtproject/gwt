@@ -127,7 +127,7 @@ public class JettyLauncher extends ServletContainerLauncher {
       }
       if (logger.isLoggable(logStatus)) {
         TreeLogger branch = logger.branch(logStatus, String.valueOf(status)
-            + " - " + request.getMethod() + ' ' + request.getUri() + " ("
+            + " - " + request.getMethod() + ' ' + request.getHttpURI() + " ("
             + userString + request.getRemoteHost() + ')' + bytesString);
         if (branch.isLoggable(logHeaders)) {
           logHeaders(branch.branch(logHeaders, "Request headers"), logHeaders,
@@ -512,6 +512,14 @@ public class JettyLauncher extends ServletContainerLauncher {
               + classPathURL + '\'', e);
           return false;
         }
+      }
+
+      private boolean isServerClass(String name) {
+        return WebAppContextWithReload.this.isServerClass(name);
+      }
+
+      private boolean isSystemClass(String name) {
+        return WebAppContextWithReload.this.isSystemClass(name);
       }
     }
 

@@ -21,7 +21,7 @@
         </license>
     </licenses>
     <properties>
-      <jetty.version>9.2.14.v20151106</jetty.version>
+      <jetty.version>9.4.31.v20200723</jetty.version>
       <asm.version>7.1</asm.version>
     </properties>
     <dependencyManagement>

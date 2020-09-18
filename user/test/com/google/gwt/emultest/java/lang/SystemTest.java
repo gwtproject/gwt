@@ -15,8 +15,6 @@
  */
 package com.google.gwt.emultest.java.lang;
 
-import com.google.gwt.junit.DoNotRunWith;
-import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.testing.TestUtils;
 
@@ -312,7 +310,6 @@ public class SystemTest extends GWTTestCase {
     assertNotSame(System.identityHashCode(o), System.identityHashCode(new Object()));
   }
 
-  @DoNotRunWith(Platform.Devel)
   public void testGetProperty() {
     if (TestUtils.isJvm()) {
       return;

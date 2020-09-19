@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48fe8b83_35c645f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2020-09-19T09:38:38Z",
+      "side": 1,
+      "message": "We still have \"test.dev.*\" Ant tasks, so they aren\u0027t really \"unused\".\nWe have some cleanup work to do in Ant build scripts…\n\nI, for one, am not opposed to this change, but I think we should remove dev tests first.",
+      "revId": "a6fc379be5ee7762fa80317f690b98b22a16ddf4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

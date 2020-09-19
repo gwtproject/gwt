@@ -39,7 +39,8 @@ package com.google.gwt.emultest.java.math;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 import com.google.gwt.testing.TestUtils;
-
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
 import java.math.BigInteger;
 import java.util.Random;
 
@@ -786,25 +787,39 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
       // JRE implementation doesn't have the method tested here
       return;
     }
-    BigInteger val = BigIntegerViolator.fromDouble(1.0);
+    BigInteger val = BigInteger.valueOf(noopToCompileForJvm(1.0));
     assertEquals("1", val.toString());
-    val = BigIntegerViolator.fromDouble(100.0);
+    val = BigInteger.valueOf(noopToCompileForJvm(100.0));
     assertEquals("100", val.toString());
-    val = BigIntegerViolator.fromDouble(2147483647.0);
+    val = BigInteger.valueOf(noopToCompileForJvm(2147483647.0));
     assertEquals("2147483647", val.toString());
-    val = BigIntegerViolator.fromDouble(-2147483647.0);
+    val = BigInteger.valueOf(noopToCompileForJvm(-2147483647.0));
     assertEquals("-2147483647", val.toString());
-    val = BigIntegerViolator.fromDouble(2147483648.0);
+    val = BigInteger.valueOf(noopToCompileForJvm(2147483648.0));
     assertEquals("2147483648", val.toString());
-    val = BigIntegerViolator.fromDouble(-2147483648.0);
+    val = BigInteger.valueOf(noopToCompileForJvm(-2147483648.0));
     assertEquals("-2147483648", val.toString());
-    val = BigIntegerViolator.fromDouble(4294967295.0);
+    val = BigInteger.valueOf(noopToCompileForJvm(4294967295.0));
     assertEquals("4294967295", val.toString());
-    val = BigIntegerViolator.fromDouble(-4294967295.0);
+    val = BigInteger.valueOf(noopToCompileForJvm(-4294967295.0));
     assertEquals("-4294967295", val.toString());
-    val = BigIntegerViolator.fromDouble(4294967296.0);
+    val = BigInteger.valueOf(noopToCompileForJvm(4294967296.0));
     assertEquals("4294967296", val.toString());
-    val = BigIntegerViolator.fromDouble(-4294967296.0);
+    val = BigInteger.valueOf(noopToCompileForJvm(-4294967296.0));
     assertEquals("-4294967296", val.toString());
+  }
+
+  @Target({ElementType.METHOD})
+  private @interface GwtIncompatible {}
+
+  @GwtIncompatible
+  private static long noopToCompileForJvm(double d) {
+    // The BigInteger.valueOf(double) doesn't exist on JVM. This methods exists to so that this test
+    // can be compiled with the standard JRE.
+    throw new AssertionError();
+  }
+
+  private static double noopToCompileForJvm(Double d) {
+    return d;
   }
 }

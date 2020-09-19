@@ -606,7 +606,7 @@ public class Arrays {
   }
 
   private static void checkCopyOfRange(Object original, int from, int to) {
-    checkArgument(from <= to, "%s > %s", from, to);
+    checkArgument(from <= to, from + " > " + to);
     int len = ArrayHelper.getLength(original);
     checkCriticalArrayBounds(from, from, len);
   }

@@ -232,7 +232,7 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
   }
 
   public static <E extends Enum<E>> EnumSet<E> range(E from, E to) {
-    checkArgument(from.compareTo(to) <= 0, "%s > %s", from, to);
+    checkArgument(from.compareTo(to) <= 0, from + " > " + to);
 
     E[] all = from.getDeclaringClass().getEnumConstants();
     E[] set = ArrayHelper.createFrom(all, all.length);

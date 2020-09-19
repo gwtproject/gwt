@@ -324,35 +324,6 @@ public final class InternalPreconditions {
   }
 
   /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   */
-  public static void checkArgument(boolean expression, String errorMessageTemplate,
-      Object... errorMessageArgs) {
-    if (IS_API_CHECKED) {
-      checkCriticalArgument(expression, errorMessageTemplate, errorMessageArgs);
-    } else if (IS_ASSERTED) {
-      try {
-        checkCriticalArgument(expression, errorMessageTemplate, errorMessageArgs);
-      } catch (Exception e) {
-        throw new AssertionError(e);
-      }
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   * <p>
-   * For cases where failing fast is pretty important and not failing early could cause bugs that
-   * are much harder to debug.
-   */
-  public static void checkCriticalArgument(boolean expression, String errorMessageTemplate,
-      Object... errorMessageArgs) {
-    if (!expression) {
-      throw new IllegalArgumentException(format(errorMessageTemplate, errorMessageArgs));
-    }
-  }
-
-  /**
    * Ensures the truth of an expression involving the state of the calling instance, but not
    * involving any parameters to the calling method.
    *
@@ -613,44 +584,6 @@ public final class InternalPreconditions {
       throw new StringIndexOutOfBoundsException(
           "fromIndex: " + start + ", toIndex: " + end + ", length: " + length);
     }
-  }
-
-  /**
-   * Substitutes each {@code %s} in {@code template} with an argument. These are matched by
-   * position: the first {@code %s} gets {@code args[0]}, etc.  If there are more arguments than
-   * placeholders, the unmatched arguments will be appended to the end of the formatted message in
-   * square braces.
-   */
-  private static String format(String template, Object... args) {
-    template = String.valueOf(template); // null -> "null"
-
-    // start substituting the arguments into the '%s' placeholders
-    StringBuilder builder = new StringBuilder(template.length() + 16 * args.length);
-    int templateStart = 0;
-    int i = 0;
-    while (i < args.length) {
-      int placeholderStart = template.indexOf("%s", templateStart);
-      if (placeholderStart == -1) {
-        break;
-      }
-      builder.append(template.substring(templateStart, placeholderStart));
-      builder.append(args[i++]);
-      templateStart = placeholderStart + 2;
-    }
-    builder.append(template.substring(templateStart));
-
-    // if we run out of placeholders, append the extra args in square braces
-    if (i < args.length) {
-      builder.append(" [");
-      builder.append(args[i++]);
-      while (i < args.length) {
-        builder.append(", ");
-        builder.append(args[i++]);
-      }
-      builder.append(']');
-    }
-
-    return builder.toString();
   }
 
   // Hides the constructor for this static utility class.

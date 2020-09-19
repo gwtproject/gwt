@@ -19,9 +19,7 @@ import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import com.google.gwt.core.client.JavaScriptObject;
-
 import java.io.Serializable;
-
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsType;
@@ -55,7 +53,7 @@ public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializ
     checkNotNull(name);
 
     T result = Enum.<T> get0(map, ":" + name);
-    checkCriticalArgument(result != null, "Enum constant undefined: %s", name);
+    checkCriticalArgument(result != null, "Enum constant undefined: " + name);
     return result;
   }
 

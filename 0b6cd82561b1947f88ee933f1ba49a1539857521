@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "b6ec12eb_b2d8a4a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2020-09-19T16:04:02Z",
+      "side": 1,
+      "message": "valueOf(double)",
+      "range": {
+        "startLine": 7,
+        "startChar": 19,
+        "endLine": 7,
+        "endChar": 25
+      },
+      "revId": "0b6cd82561b1947f88ee933f1ba49a1539857521",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "73a29e16_4e923c35",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -16,6 +39,75 @@
       "revId": "0b6cd82561b1947f88ee933f1ba49a1539857521",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "604e50fa_c09a7803",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2020-09-19T16:04:02Z",
+      "side": 1,
+      "message": "valueOf(long) method which is already public.",
+      "range": {
+        "startLine": 9,
+        "startChar": 111,
+        "endLine": 9,
+        "endChar": 128
+      },
+      "revId": "0b6cd82561b1947f88ee933f1ba49a1539857521",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d074c205_757d484b",
+        "filename": "user/test/com/google/gwt/emultest/java/math/BigIntegerConstructorsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2020-09-19T16:04:02Z",
+      "side": 1,
+      "message": "Don\u0027t like the name toFakeLong because it not actually returning a long in the useful case. But I see that is difficult to come up with a name for this. \n\nmaybe cast() or jvmHelper() or shim() or jvmAdaptor(). None I like much but better than toFakeLong.",
+      "range": {
+        "startLine": 816,
+        "startChar": 22,
+        "endLine": 816,
+        "endChar": 32
+      },
+      "revId": "0b6cd82561b1947f88ee933f1ba49a1539857521",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b75db2b_73620117",
+        "filename": "user/test/com/google/gwt/emultest/java/math/BigIntegerConstructorsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2020-09-19T16:04:02Z",
+      "side": 1,
+      "message": "This method exists so that this test can be compiled for with the standard JRE.",
+      "range": {
+        "startLine": 817,
+        "startChar": 60,
+        "endLine": 819,
+        "endChar": 45
+      },
+      "revId": "0b6cd82561b1947f88ee933f1ba49a1539857521",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

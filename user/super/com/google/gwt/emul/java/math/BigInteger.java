@@ -162,7 +162,7 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
     return new BigInteger(1, intCount + 1, resDigits);
   }
 
-  static BigInteger valueOf(double val) {
+  public static BigInteger valueOf(double val) {
     if (val < 0) {
       if (val != -1) {
         return new BigInteger(-1, -val);

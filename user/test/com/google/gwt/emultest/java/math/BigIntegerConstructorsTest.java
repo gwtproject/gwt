@@ -39,7 +39,8 @@ package com.google.gwt.emultest.java.math;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 import com.google.gwt.testing.TestUtils;
-
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
 import java.math.BigInteger;
 import java.util.Random;
 
@@ -786,25 +787,40 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
       // JRE implementation doesn't have the method tested here
       return;
     }
-    BigInteger val = BigIntegerViolator.fromDouble(1.0);
+    BigInteger val = BigInteger.valueOf(toFakeLong(1.0));
     assertEquals("1", val.toString());
-    val = BigIntegerViolator.fromDouble(100.0);
+    val = BigInteger.valueOf(toFakeLong(100.0));
     assertEquals("100", val.toString());
-    val = BigIntegerViolator.fromDouble(2147483647.0);
+    val = BigInteger.valueOf(toFakeLong(2147483647.0));
     assertEquals("2147483647", val.toString());
-    val = BigIntegerViolator.fromDouble(-2147483647.0);
+    val = BigInteger.valueOf(toFakeLong(-2147483647.0));
     assertEquals("-2147483647", val.toString());
-    val = BigIntegerViolator.fromDouble(2147483648.0);
+    val = BigInteger.valueOf(toFakeLong(2147483648.0));
     assertEquals("2147483648", val.toString());
-    val = BigIntegerViolator.fromDouble(-2147483648.0);
+    val = BigInteger.valueOf(toFakeLong(-2147483648.0));
     assertEquals("-2147483648", val.toString());
-    val = BigIntegerViolator.fromDouble(4294967295.0);
+    val = BigInteger.valueOf(toFakeLong(4294967295.0));
     assertEquals("4294967295", val.toString());
-    val = BigIntegerViolator.fromDouble(-4294967295.0);
+    val = BigInteger.valueOf(toFakeLong(-4294967295.0));
     assertEquals("-4294967295", val.toString());
-    val = BigIntegerViolator.fromDouble(4294967296.0);
+    val = BigInteger.valueOf(toFakeLong(4294967296.0));
     assertEquals("4294967296", val.toString());
-    val = BigIntegerViolator.fromDouble(-4294967296.0);
+    val = BigInteger.valueOf(toFakeLong(-4294967296.0));
     assertEquals("-4294967296", val.toString());
+  }
+
+  @Target({ElementType.METHOD})
+  private @interface GwtIncompatible {}
+
+  @GwtIncompatible
+  private static long toFakeLong(double d) {
+    // The BigInteger.valueOf(double) doesn't exist on JVM. This methods exists to convince javac
+    // that we are calling the overload that takes long, however it is removed on Web hence the
+    // noop method below gets called instead.
+    throw new AssertionError();
+  }
+
+  private static double toFakeLong(Double d) {
+    return d;
   }
 }

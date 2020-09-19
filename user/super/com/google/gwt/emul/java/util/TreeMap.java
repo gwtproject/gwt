@@ -602,22 +602,6 @@ public class TreeMap<K, V> extends AbstractNavigableMap<K, V> implements Seriali
     return foundNode;
   }
 
-  /**
-   * Used for testing. Validate that the tree meets all red-black correctness
-   * requirements. These include:
-   *
-   * <pre>
-   *  - root is black
-   *  - no children of a red node may be red
-   *  - the black height of every path through the three to a leaf is exactly the same
-   * </pre>
-   *
-   * @throws RuntimeException if any correctness errors are detected.
-   */
-  void assertCorrectness() {
-    assertCorrectness(root, true);
-  }
-
   @Override
   Iterator<Entry<K, V>> descendingEntryIterator() {
     return new DescendingEntryIterator();
@@ -626,44 +610,6 @@ public class TreeMap<K, V> extends AbstractNavigableMap<K, V> implements Seriali
   @Override
   Iterator<Entry<K, V>> entryIterator() {
     return new EntryIterator();
-  }
-
-  /**
-   * Internal helper function for public {@link #assertCorrectness()}.
-   *
-   * @param tree the subtree to validate.
-   * @param isRed true if the parent of this node is red.
-   * @return the black height of this subtree.
-   * @throws RuntimeException if this RB-tree is not valid.
-   */
-  private int assertCorrectness(Node<K, V> tree, boolean isRed) {
-    if (tree == null) {
-      return 0;
-    }
-    if (isRed && tree.isRed) {
-      throw new RuntimeException("Two red nodes adjacent");
-    }
-
-    Node<K, V> leftNode = tree.child[LEFT];
-    if (leftNode != null
-        && cmp.compare(leftNode.getKey(), tree.getKey()) > 0) {
-      throw new RuntimeException("Left child " + leftNode
-          + " larger than " + tree);
-    }
-
-    Node<K, V> rightNode = tree.child[RIGHT];
-    if (rightNode != null
-        && cmp.compare(rightNode.getKey(), tree.getKey()) < 0) {
-      throw new RuntimeException("Right child " + rightNode
-          + " smaller than " + tree);
-    }
-
-    int leftHeight = assertCorrectness(leftNode, tree.isRed);
-    int rightHeight = assertCorrectness(rightNode, tree.isRed);
-    if (leftHeight != 0 && rightHeight != 0 && leftHeight != rightHeight) {
-      throw new RuntimeException("Black heights don't match");
-    }
-    return tree.isRed ? leftHeight : leftHeight + 1;
   }
 
   /**

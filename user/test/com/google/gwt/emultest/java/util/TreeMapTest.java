@@ -3500,15 +3500,6 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     this.comparator = comparator;
   }
 
-  @Override
-  protected void verifyMap() {
-    if (!TestUtils.isJvm()) {
-      // Verify red-black correctness in our implementation
-      TreeMapViolator.callAssertCorrectness((TreeMap) map);
-    }
-    super.verifyMap();
-  }
-
   NavigableMap<K, V> createMap() {
     return createNavigableMap();
   }

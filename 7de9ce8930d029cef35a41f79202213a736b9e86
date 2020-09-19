@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85c98399_2fea36f7",
+        "filename": "user/super/com/google/gwt/emul/java/util/TreeMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2020-09-19T16:17:04Z",
+      "side": 0,
+      "message": "I am not sure I would remove these methods, they are still good documentation of the class invariants even if now the tests can not call them. But I leave it up to you.",
+      "range": {
+        "startLine": 605,
+        "startChar": 0,
+        "endLine": 620,
+        "endChar": 0
+      },
+      "revId": "7de9ce8930d029cef35a41f79202213a736b9e86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

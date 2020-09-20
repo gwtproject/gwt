@@ -34,6 +34,24 @@
       "revId": "a6fc379be5ee7762fa80317f690b98b22a16ddf4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afda16e2_f8660fc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2020-09-20T10:12:49Z",
+      "side": 1,
+      "message": "Well, I have no idea what the build on Jenkins does 😉\n\nIn http://www.gwtproject.org/makinggwtbetter.html#testing we instruct to run \"ant test\" which will call all \"test.dev.*\" tasks.\n\nHow about just adding **/EmulSuite.class to gwt.junit.testcase.dev.excludes property in user/build.xml?\n\n(if it were me, we\u0027d delete all those tasks altogether, but I\u0027m not sure what the Steering Committee position is wrt DevMode)",
+      "parentUuid": "23f83274_1dd5f518",
+      "revId": "a6fc379be5ee7762fa80317f690b98b22a16ddf4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
     }
   ]
 }

@@ -52,6 +52,24 @@
       "revId": "a6fc379be5ee7762fa80317f690b98b22a16ddf4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "473b65a4_c8238d13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-09-22T17:59:06Z",
+      "side": 1,
+      "message": "Done. Excluded from user/build.xml.",
+      "parentUuid": "afda16e2_f8660fc3",
+      "revId": "a6fc379be5ee7762fa80317f690b98b22a16ddf4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bedb089d_b09cdbda",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Math.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-09-23T03:52:15Z",
+      "side": 1,
+      "message": "Double.isInfinite(e2x)",
+      "range": {
+        "startLine": 327,
+        "startChar": 26,
+        "endLine": 327,
+        "endChar": 33
+      },
+      "revId": "4b244545c297a4fb19fef3412cc7248f1f67192e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a25b280_098a1827",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/MathTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-09-23T03:52:15Z",
+      "side": 1,
+      "message": "Could you also add:\n\n v \u003d Math.tanh(-500);\n assertEquals(-1.0, v, 1e-7);",
+      "range": {
+        "startLine": 583,
+        "startChar": 0,
+        "endLine": 583,
+        "endChar": 31
+      },
+      "revId": "4b244545c297a4fb19fef3412cc7248f1f67192e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    }
+  ]
+}

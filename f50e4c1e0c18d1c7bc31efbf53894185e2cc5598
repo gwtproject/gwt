@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb8b7d70_3cf08d94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-09-29T19:42:15Z",
+      "side": 1,
+      "message": "As discussed offline, going ahead with putting buffering logic inside BufferedWriter.\n",
+      "revId": "f50e4c1e0c18d1c7bc31efbf53894185e2cc5598",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "e21600cd_8636c121",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-09-30T21:31:21Z",
+      "side": 1,
+      "message": "I ran \"blaze test //third_party/java_src/gwt:smoke\" mentioned at go/gwt-submit and all the tests pass.\n\nAlso I\u0027m unable to open the link (http://build.gwtproject.org/job/gwt.presubmit/3609/console#footer-container) mentioned by Leeroy Jenkins to look at the details.",
+      "parentUuid": "5d1fedb5_00931897",
+      "revId": "4bea13ea868762e3dd8881181e7a9df973b9ca8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5dd81195_c6410fc5",
         "filename": "user/super/com/google/gwt/emul/java/io/BufferedWriter.java",
         "patchSetId": 2
@@ -51,6 +69,24 @@
       "revId": "4bea13ea868762e3dd8881181e7a9df973b9ca8c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1187a3f_ef17d9c2",
+        "filename": "user/super/com/google/gwt/emul/java/io/BufferedWriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-09-30T21:31:21Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "5dd81195_c6410fc5",
+      "revId": "4bea13ea868762e3dd8881181e7a9df973b9ca8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     },
     {
       "key": {

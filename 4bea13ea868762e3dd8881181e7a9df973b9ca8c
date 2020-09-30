@@ -217,6 +217,30 @@
       "revId": "4bea13ea868762e3dd8881181e7a9df973b9ca8c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2537bcf_234175e6",
+        "filename": "user/test/com/google/gwt/emultest/java/io/BufferedWriterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-09-30T21:57:50Z",
+      "side": 1,
+      "message": "Discussed offline. Dropping the test.",
+      "parentUuid": "a0174cde_abe81e5a",
+      "range": {
+        "startLine": 116,
+        "startChar": 4,
+        "endLine": 120,
+        "endChar": 5
+      },
+      "revId": "4bea13ea868762e3dd8881181e7a9df973b9ca8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

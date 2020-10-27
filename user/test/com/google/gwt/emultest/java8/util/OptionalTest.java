@@ -196,6 +196,7 @@ public class OptionalTest extends GWTTestCase {
     assertSame(REFERENCE, present.orElse(OTHER_REFERENCE));
   }
 
+  @SuppressWarnings("DangerousLiteralNull") // Intentionally misusing Optional to test bug parity.
   public void testOrElseGet() {
     // empty case
     try {
@@ -216,6 +217,7 @@ public class OptionalTest extends GWTTestCase {
     }));
   }
 
+  @SuppressWarnings("DangerousLiteralNull") // Intentionally misusing Optional to test bug parity.
   public void testOrElseThrow() {
     // empty case
     try {

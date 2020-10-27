@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4cbcbee_66fd866b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2020-10-27T18:49:36Z",
+      "side": 1,
+      "message": "Seems reasonable to me, but would it be more useful (in terms of \"yes, this one thing is deliberately wrong\") to put the annotation on the specific wrong test cases?",
+      "revId": "9a48d64f31980b8219428418c945ad10fb4f4561",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

@@ -24,6 +24,7 @@ import java.util.Optional;
 /**
  * Tests for Optional JRE emulation.
  */
+@SuppressWarnings("DangerousLiteralNull") // Intentionally misusing Optional to test bug parity.
 public class OptionalTest extends GWTTestCase {
 
   private static final Object REFERENCE = new Object();

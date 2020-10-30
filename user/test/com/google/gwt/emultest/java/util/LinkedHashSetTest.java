@@ -15,7 +15,6 @@
  */
 package com.google.gwt.emultest.java.util;
 
-import org.apache.commons.collections.TestSet;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

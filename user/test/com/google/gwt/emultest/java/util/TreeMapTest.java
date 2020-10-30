@@ -16,9 +16,6 @@
 package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.testing.TestUtils;
-
-import org.apache.commons.collections.TestMap;
-
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,12 +38,10 @@ import java.util.TreeMap;
  *
  * @param <K> The key type for the underlying TreeMap
  * @param <V> The value type for the underlying TreeMap
- *
- * TODO(jat): this whole structure needs work. Ideally we would port a new
- * Apache collections test to GWT, but that is not an insignificant amount of
- * work.
+ *     <p>TODO(jat): this whole structure needs work. Ideally we would port a new Apache collections
+ *     test to GWT, but that is not an insignificant amount of work.
  */
-public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
+abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
 
   private static class ConflictingKey implements Comparable<CharSequence> {
     private final String value;

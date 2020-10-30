@@ -15,7 +15,6 @@
 <module>
   <inherits name='com.google.gwt.junit.JUnit' />
   <inherits name='com.google.gwt.testing.TestUtils' />
-  <inherits name='org.apache.commons.Collections' />
   <source path='java' />
   <source path='java8' />
 

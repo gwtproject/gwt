@@ -18,11 +18,7 @@ package com.google.gwt.emultest.java.util;
 import static java.util.Arrays.asList;
 
 import com.google.gwt.core.client.JavaScriptException;
-
 import com.google.gwt.testing.TestUtils;
-
-import org.apache.commons.collections.TestCollection;
-
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;

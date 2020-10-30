@@ -16,9 +16,6 @@
 package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.testing.TestUtils;
-
-import org.apache.commons.collections.TestSet;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -36,12 +33,10 @@ import java.util.TreeSet;
  * Tests <code>TreeSet</code>.
  *
  * @param <E> The key type for the underlying TreeSet
- *
- * TODO(jat): this whole structure needs work. Ideally we would port a new
- * Apache collections test to GWT, but that is not an insignificant amount of
- * work.
+ *     <p>TODO(jat): this whole structure needs work. Ideally we would port a new Apache collections
+ *     test to GWT, but that is not an insignificant amount of work.
  */
-public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
+abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
 
   /**
    * Verify a Set is explicitly and implicitly empty.

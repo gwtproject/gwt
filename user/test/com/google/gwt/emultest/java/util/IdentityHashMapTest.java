@@ -16,9 +16,6 @@
 package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.testing.TestUtils;
-
-import org.apache.commons.collections.TestMap;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
@@ -27,6 +24,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import org.apache.commons.collections.TestMap;
 
 /**
  * Tests <code>IdentityHashMap</code>.
@@ -734,6 +732,16 @@ public class IdentityHashMapTest extends TestMap {
     Iterator itVal = valColl.iterator();
     String val = (String) itVal.next();
     assertEquals(VALUE_VAL, val);
+  }
+
+  public void testUnboxedValues() {
+    IdentityHashMap map = new IdentityHashMap();
+    map.put(true, null);
+    map.put(false, null);
+    map.put(true, null);
+    assertEquals(2, map.size());
+    assertTrue(map.containsKey(true));
+    assertTrue(map.containsKey(false));
   }
 
   @Override

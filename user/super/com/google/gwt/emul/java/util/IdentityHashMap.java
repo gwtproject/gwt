@@ -17,8 +17,6 @@ package java.util;
 
 import java.io.Serializable;
 
-import javaemul.internal.HashCodes;
-
 /**
  * Map using reference equality on keys. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/IdentityHashMap.html">[Sun
@@ -102,6 +100,6 @@ public class IdentityHashMap<K, V> extends AbstractHashMap<K, V> implements
 
   @Override
   int getHashCode(Object key) {
-    return HashCodes.getObjectIdentityHashCode(key);
+    return System.identityHashCode(key);
   }
 }

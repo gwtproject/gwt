@@ -16,6 +16,23 @@
       "message": "[warning] Commit message lines should be 72 characters or fewer.",
       "revId": "fdc98fb817dad9b2f130f2dc9ea8b5dfd51f62b1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d516a365_6e113286",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2020-10-30T12:39:26Z",
+      "side": 1,
+      "message": "If I\u0027m reading this right, that answer is CC-BY-SA 3.0, and I\u0027m not sure it is compatible with the Apache v2 license that we use. This discussion to confirm that:  https://softwareengineering.stackexchange.com/questions/170185/is-creative-commons-license-compatible-with-apache-license\n\nThat said it is clearly a standard implementation (so noted in the comments of the linked answer), but citing it this way and copy/pasting even comments might not be advised.",
+      "revId": "fdc98fb817dad9b2f130f2dc9ea8b5dfd51f62b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

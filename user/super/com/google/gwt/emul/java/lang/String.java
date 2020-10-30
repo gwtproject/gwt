@@ -454,7 +454,13 @@ public final class String implements Comparable<String>, CharSequence,
 
   @Override
   public int hashCode() {
-    return HashCodes.getStringHashCode(this);
+    // https://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript-jquery
+    int h = 0;
+    for (int i = 0; i < length(); i++) {
+      h  = ((h << 5) - h) + charAt(i);
+      h |= 0; // Convert to 32bit integer
+    }
+    return h;
   }
 
   public int indexOf(int codePoint) {

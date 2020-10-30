@@ -15,8 +15,6 @@
  */
 package com.google.gwt.emultest.java.util;
 
-import org.apache.commons.collections.TestCollection;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -25,9 +23,7 @@ import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 import java.util.TreeSet;
 
-/**
- * Test PriorityQueue.
- */
+/** Test PriorityQueue. */
 public class PriorityQueueTest extends TestCollection {
 
   public void testAdd() {
@@ -35,6 +31,7 @@ public class PriorityQueueTest extends TestCollection {
 
     try {
       queue.add(null);
+      fail("Expected NullPointerException");
     } catch (NullPointerException expected) {
     }
 
@@ -140,12 +137,13 @@ public class PriorityQueueTest extends TestCollection {
     pq = new PriorityQueue<Integer>(11);
     assertNull(pq.comparator());
 
-    Comparator<Integer> comparator = new Comparator<Integer>() {
-      @Override
-      public int compare(Integer o1, Integer o2) {
-        return o1 - o2;
-      }
-    };
+    Comparator<Integer> comparator =
+        new Comparator<Integer>() {
+          @Override
+          public int compare(Integer o1, Integer o2) {
+            return o1 - o2;
+          }
+        };
     pq = new PriorityQueue<Integer>(11, comparator);
     assertEquals(comparator, pq.comparator());
 
@@ -243,9 +241,7 @@ public class PriorityQueueTest extends TestCollection {
     return pq;
   }
 
-  /**
-   * Null elements are prohibited in PriorityQueue.
-   */
+  /** Null elements are prohibited in PriorityQueue. */
   @Override
   protected Object[] getFullElements() {
     return new Integer[] {1, 2, 3, 4};

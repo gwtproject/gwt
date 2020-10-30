@@ -18,11 +18,7 @@ package com.google.gwt.emultest.java.util;
 import static java.util.Arrays.asList;
 
 import com.google.gwt.core.client.JavaScriptException;
-
 import com.google.gwt.testing.TestUtils;
-
-import org.apache.commons.collections.TestCollection;
-
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,9 +27,7 @@ import java.util.Deque;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * Tests ArrayDeque class.
- */
+/** Tests ArrayDeque class. */
 public class ArrayDequeTest extends TestCollection {
 
   public void testAdd() throws Exception {
@@ -52,7 +46,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.add(null);
       fail();
-    } catch (NullPointerException expected) { }
+    } catch (NullPointerException expected) {
+    }
   }
 
   public void testAddAll() throws Exception {
@@ -67,7 +62,8 @@ public class ArrayDequeTest extends TestCollection {
       deque = new ArrayDeque<>();
       deque.addAll(asList(o1, null, o2));
       fail();
-    } catch (NullPointerException expected) { }
+    } catch (NullPointerException expected) {
+    }
   }
 
   public void testAddFirst() {
@@ -86,7 +82,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.addFirst(null);
       fail();
-    } catch (NullPointerException expected) { }
+    } catch (NullPointerException expected) {
+    }
   }
 
   public void testAddLast() {
@@ -105,7 +102,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.addLast(null);
       fail();
-    } catch (NullPointerException expected) { }
+    } catch (NullPointerException expected) {
+    }
   }
 
   public void testConstructorFromCollection() {
@@ -122,7 +120,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       new ArrayDeque<>(asList(new Object(), null, new Object()));
       fail();
-    } catch (NullPointerException expected) { }
+    } catch (NullPointerException expected) {
+    }
 
     Collection<Object> collection = new ArrayList<>(asList(getFullNonNullElements()));
     checkDequeSizeAndContent(new ArrayDeque<>(collection), getFullNonNullElements());
@@ -163,7 +162,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       it.next();
       fail();
-    } catch (NoSuchElementException expected) { }
+    } catch (NoSuchElementException expected) {
+    }
 
     deque.add(o1);
     deque.add(o2);
@@ -179,7 +179,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       it.next();
       fail();
-    } catch (NoSuchElementException expected) { }
+    } catch (NoSuchElementException expected) {
+    }
     checkDequeSizeAndContent(deque, o1, o2, o3);
 
     deque = new ArrayDeque<>();
@@ -207,7 +208,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.element();
       fail();
-    } catch (NoSuchElementException expected) { }
+    } catch (NoSuchElementException expected) {
+    }
 
     deque.add(o1);
     assertEquals(o1, deque.element());
@@ -222,7 +224,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.element();
       fail();
-    } catch (NoSuchElementException expected) { }
+    } catch (NoSuchElementException expected) {
+    }
   }
 
   public void testFailFastIterator() {
@@ -241,7 +244,8 @@ public class ArrayDequeTest extends TestCollection {
       if (TestUtils.getJdkVersion() < 11) {
         fail();
       }
-    } catch (ConcurrentModificationException expected) { }
+    } catch (ConcurrentModificationException expected) {
+    }
 
     deque = new ArrayDeque<>(asList(getFullNonNullElements()));
     it = deque.iterator();
@@ -250,7 +254,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       it.next();
       fail();
-    } catch (ConcurrentModificationException expected) { }
+    } catch (ConcurrentModificationException expected) {
+    }
 
     deque = new ArrayDeque<>(asList(getFullNonNullElements()));
     it = deque.iterator();
@@ -267,7 +272,8 @@ public class ArrayDequeTest extends TestCollection {
       if (TestUtils.getJdkVersion() < 11) {
         fail();
       }
-    } catch (ConcurrentModificationException expected) { }
+    } catch (ConcurrentModificationException expected) {
+    }
 
     deque = new ArrayDeque<>(asList(getFullNonNullElements()));
     it = deque.iterator();
@@ -291,7 +297,8 @@ public class ArrayDequeTest extends TestCollection {
       if (TestUtils.getJdkVersion() < 11) {
         fail();
       }
-    } catch (ConcurrentModificationException expected) { }
+    } catch (ConcurrentModificationException expected) {
+    }
   }
 
   public void testFailFastDescendingIterator() {
@@ -310,7 +317,8 @@ public class ArrayDequeTest extends TestCollection {
       if (TestUtils.getJdkVersion() < 11) {
         fail();
       }
-    } catch (ConcurrentModificationException expected) { }
+    } catch (ConcurrentModificationException expected) {
+    }
 
     deque = new ArrayDeque<>(asList(getFullNonNullElements()));
     it = deque.descendingIterator();
@@ -319,7 +327,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       it.next();
       fail();
-    } catch (ConcurrentModificationException expected) { }
+    } catch (ConcurrentModificationException expected) {
+    }
 
     deque = new ArrayDeque<>(asList(getFullNonNullElements()));
     it = deque.descendingIterator();
@@ -336,7 +345,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       it.next();
       fail();
-    } catch (ConcurrentModificationException expected) { }
+    } catch (ConcurrentModificationException expected) {
+    }
 
     deque = new ArrayDeque<>(asList(getFullNonNullElements()));
     it = deque.descendingIterator();
@@ -360,7 +370,8 @@ public class ArrayDequeTest extends TestCollection {
       if (TestUtils.getJdkVersion() < 11) {
         fail();
       }
-    } catch (ConcurrentModificationException expected) { }
+    } catch (ConcurrentModificationException expected) {
+    }
   }
 
   public void testGetFirst() {
@@ -371,7 +382,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.getFirst();
       fail();
-    } catch (NoSuchElementException expected) { }
+    } catch (NoSuchElementException expected) {
+    }
 
     deque.add(o1);
     assertEquals(o1, deque.getFirst());
@@ -386,7 +398,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.getFirst();
       fail();
-    } catch (NoSuchElementException expected) { }
+    } catch (NoSuchElementException expected) {
+    }
   }
 
   public void testGetLast() {
@@ -397,7 +410,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.getLast();
       fail();
-    } catch (NoSuchElementException expected) { }
+    } catch (NoSuchElementException expected) {
+    }
 
     deque.add(o1);
     assertEquals(o1, deque.getLast());
@@ -412,7 +426,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.getLast();
       fail();
-    } catch (NoSuchElementException expected) { }
+    } catch (NoSuchElementException expected) {
+    }
   }
 
   public void testOffer() {
@@ -431,7 +446,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.offer(null);
       fail();
-    } catch (NullPointerException expected) { }
+    } catch (NullPointerException expected) {
+    }
   }
 
   public void testOfferFirst() {
@@ -450,7 +466,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.offerFirst(null);
       fail();
-    } catch (NullPointerException expected) { }
+    } catch (NullPointerException expected) {
+    }
   }
 
   public void testOfferLast() {
@@ -469,7 +486,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.offerLast(null);
       fail();
-    } catch (NullPointerException expected) { }
+    } catch (NullPointerException expected) {
+    }
   }
 
   public void testPeek() {
@@ -619,7 +637,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.pop();
       fail();
-    } catch (NoSuchElementException expected) { }
+    } catch (NoSuchElementException expected) {
+    }
 
     deque.add(o1);
     assertEquals(o1, deque.pop());
@@ -634,7 +653,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.pop();
       fail();
-    } catch (NoSuchElementException expected) { }
+    } catch (NoSuchElementException expected) {
+    }
   }
 
   public void testPush() {
@@ -653,7 +673,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.push(null);
       fail();
-    } catch (NullPointerException expected) { }
+    } catch (NullPointerException expected) {
+    }
   }
 
   public void testRemove() {
@@ -664,7 +685,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.remove();
       fail();
-    } catch (NoSuchElementException expected) { }
+    } catch (NoSuchElementException expected) {
+    }
 
     deque.add(o1);
     assertEquals(o1, deque.remove());
@@ -680,7 +702,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.remove();
       fail();
-    } catch (NoSuchElementException expected) { }
+    } catch (NoSuchElementException expected) {
+    }
   }
 
   public void testRemoveElement() {
@@ -712,7 +735,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.removeFirst();
       fail();
-    } catch (NoSuchElementException expected) { }
+    } catch (NoSuchElementException expected) {
+    }
 
     deque.add(o1);
     assertEquals(o1, deque.removeFirst());
@@ -728,7 +752,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.removeFirst();
       fail();
-    } catch (NoSuchElementException expected) { }
+    } catch (NoSuchElementException expected) {
+    }
   }
 
   public void testRemoveFirstOccurrence() {
@@ -778,7 +803,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.removeLast();
       fail();
-    } catch (NoSuchElementException expected) { }
+    } catch (NoSuchElementException expected) {
+    }
 
     deque.add(o1);
     assertEquals(o1, deque.removeLast());
@@ -794,7 +820,8 @@ public class ArrayDequeTest extends TestCollection {
     try {
       deque.removeLast();
       fail();
-    } catch (NoSuchElementException expected) { }
+    } catch (NoSuchElementException expected) {
+    }
   }
 
   public void testRemoveLastOccurrence() {
@@ -858,9 +885,7 @@ public class ArrayDequeTest extends TestCollection {
     assertTrue(deque.isEmpty());
   }
 
-  /**
-   * Null elements are prohibited in ArrayDeque.
-   */
+  /** Null elements are prohibited in ArrayDeque. */
   @Override
   protected Object[] getFullElements() {
     return getFullNonNullElements();

@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,8 +15,6 @@
  */
 package com.google.gwt.emultest.java.util;
 
-import org.apache.commons.collections.TestArrayList;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,32 +22,32 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * Tests List, and, by extension AbstractList. Uses inheritance to inherit all
- * of Apache's TestList and TestCollection.
+ * Tests List, and, by extension AbstractList. Uses inheritance to inherit all of Apache's TestList
+ * and TestCollection.
  */
 @SuppressWarnings("unchecked")
 public abstract class ListTestBase extends TestArrayList {
 
-  private static volatile boolean NO_OPTIMIZE_FALSE = false;
+  private static final boolean NO_OPTIMIZE_FALSE = false;
 
   public void testAddAll() {
     List<Integer> list = makeEmptyList();
     list.addAll(Arrays.asList(1, 2, 3, 4));
     list.addAll(2, Arrays.asList(21, 22));
 
-    checkListSizeAndContent(list, 1, 2, 21, 22, 3 ,4);
+    checkListSizeAndContent(list, 1, 2, 21, 22, 3, 4);
 
     list = makeEmptyList();
     list.addAll(Arrays.asList(1, 2, 3, 4));
     list.addAll(0, Arrays.asList(21, 22));
 
-    checkListSizeAndContent(list, 21, 22, 1, 2, 3 ,4);
+    checkListSizeAndContent(list, 21, 22, 1, 2, 3, 4);
 
     list = makeEmptyList();
     list.addAll(Arrays.asList(1, 2, 3, 4));
     list.addAll(4, Arrays.asList(21, 22));
 
-    checkListSizeAndContent(list, 1, 2, 3 ,4, 21, 22);
+    checkListSizeAndContent(list, 1, 2, 3, 4, 21, 22);
   }
 
   public void testAddAllReturnValue() {
@@ -237,9 +235,7 @@ public abstract class ListTestBase extends TestArrayList {
     }
   }
 
-  /**
-   * Test add() method for list returned by List<E>.subList() method.
-   */
+  /** Test add() method for list returned by List<E>.subList() method. */
   public void testSubListAdd() {
     List<Integer> baseList = createListWithContent(new int[] {1, 2, 3, 4, 5});
     List<Integer> sublist = baseList.subList(1, 3);
@@ -299,14 +295,14 @@ public abstract class ListTestBase extends TestArrayList {
       fail("Expected IndexOutOfBoundsException");
     } catch (IndexOutOfBoundsException expected) {
     }
-    
+
     assertFalse(sublist.remove(Integer.valueOf(4)));
-    
+
     assertTrue(sublist.remove(Integer.valueOf(3)));
-    
+
     assertEquals(0, sublist.size());
     assertEquals(3, baseList.size());
-    
+
     sublist.add(6);
     checkListSizeAndContent(baseList, 1, 6, 4, 5);
   }

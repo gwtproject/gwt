@@ -1,3 +1,4 @@
+// CHECKSTYLE_OFF: Copyrighted to ASF
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements. See the NOTICE file distributed with this
@@ -5,18 +6,19 @@
  * licenses this file to You under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
- * 
- * THIS CODE HAS BEEN EXTENSIVELY HACKED BY GOOGLE TO WORK WITH GWT. 
+ *
+ * THIS CODE HAS BEEN EXTENSIVELY HACKED BY GOOGLE TO WORK WITH GWT.
  */
-package org.apache.commons.collections;
+// CHECKSTYLE_ON
+package com.google.gwt.emultest.java.util;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,40 +27,32 @@ import java.util.NoSuchElementException;
 
 /**
  * Abstract class for testing the ListIterator interface.
- * <p>
- * This class provides a framework for testing an implementation of
- * ListIterator. Concrete subclasses must provide the list iterator to be
- * tested. They must also specify certain details of how the list iterator
- * operates by overriding the supportsXxx() methods if necessary.
- * 
- * @since Commons Collections 3.0
- * @version $Revision$ $Date$
- * 
- * @author Rodney Waldhoff
- * @author Stephen Colebourne
+ *
+ * <p>This class provides a framework for testing an implementation of ListIterator. Concrete
+ * subclasses must provide the list iterator to be tested. They must also specify certain details of
+ * how the list iterator operates by overriding the supportsXxx() methods if necessary.
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
-public abstract class AbstractTestListIterator extends TestIterator {
+abstract class AbstractTestListIterator extends TestIterator {
 
   // -----------------------------------------------------------------------
   /**
    * Implement this method to return a list iterator over an empty collection.
-   * 
+   *
    * @return an empty iterator
    */
   public abstract ListIterator makeEmptyListIterator();
 
   /**
-   * Implement this method to return a list iterator over a collection with
-   * elements.
-   * 
+   * Implement this method to return a list iterator over a collection with elements.
+   *
    * @return a full iterator
    */
   public abstract ListIterator makeFullListIterator();
 
   /**
    * Implements the abstract superclass method to return the list iterator.
-   * 
+   *
    * @return an empty iterator
    */
   @Override
@@ -68,7 +62,7 @@ public abstract class AbstractTestListIterator extends TestIterator {
 
   /**
    * Implements the abstract superclass method to return the list iterator.
-   * 
+   *
    * @return a full iterator
    */
   @Override
@@ -77,9 +71,8 @@ public abstract class AbstractTestListIterator extends TestIterator {
   }
 
   /**
-   * Whether or not we are testing an iterator that supports add(). Default is
-   * true.
-   * 
+   * Whether or not we are testing an iterator that supports add(). Default is true.
+   *
    * @return true if Iterator supports add
    */
   public boolean supportsAdd() {
@@ -87,26 +80,21 @@ public abstract class AbstractTestListIterator extends TestIterator {
   }
 
   /**
-   * Whether or not we are testing an iterator that supports set(). Default is
-   * true.
-   * 
+   * Whether or not we are testing an iterator that supports set(). Default is true.
+   *
    * @return true if Iterator supports set
    */
   public boolean supportsSet() {
     return true;
   }
 
-  /**
-   * The value to be used in the add and set tests. Default is null.
-   */
+  /** The value to be used in the add and set tests. Default is null. */
   public Object addSetValue() {
     return null;
   }
 
   // -----------------------------------------------------------------------
-  /**
-   * Test that the empty list iterator contract is correct.
-   */
+  /** Test that the empty list iterator contract is correct. */
   public void testEmptyListIteratorIsIndeedEmpty() {
     if (supportsEmptyIterator() == false) {
       return;
@@ -134,9 +122,7 @@ public abstract class AbstractTestListIterator extends TestIterator {
     }
   }
 
-  /**
-   * Test navigation through the iterator.
-   */
+  /** Test navigation through the iterator. */
   public void testWalkForwardAndBack() {
     ArrayList list = new ArrayList();
     ListIterator it = makeFullListIterator();
@@ -172,9 +158,7 @@ public abstract class AbstractTestListIterator extends TestIterator {
     }
   }
 
-  /**
-   * Test add behaviour.
-   */
+  /** Test add behaviour. */
   public void testAdd() {
     ListIterator it = makeFullListIterator();
 
@@ -209,9 +193,7 @@ public abstract class AbstractTestListIterator extends TestIterator {
     }
   }
 
-  /**
-   * Test set behaviour.
-   */
+  /** Test set behaviour. */
   public void testSet() {
     ListIterator it = makeFullListIterator();
 
@@ -237,7 +219,6 @@ public abstract class AbstractTestListIterator extends TestIterator {
 
     // repeated set calls should be fine
     it.set(addSetValue());
-
   }
 
   public void testRemoveThenSet() {
@@ -267,9 +248,7 @@ public abstract class AbstractTestListIterator extends TestIterator {
     }
   }
 
-  /**
-   * Test remove after add behaviour.
-   */
+  /** Test remove after add behaviour. */
   public void testAddThenRemove() {
     ListIterator it = makeFullListIterator();
 
@@ -284,5 +263,4 @@ public abstract class AbstractTestListIterator extends TestIterator {
       }
     }
   }
-
 }

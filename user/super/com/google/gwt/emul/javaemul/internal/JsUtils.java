@@ -55,9 +55,5 @@ public class JsUtils {
   public static native <T> T getProperty(Object map, String key) /*-{
     return map[key];
   }-*/;
-
-  public static native void setProperty(Object map, String key, Object value) /*-{
-    map[key] = value;
-  }-*/;
 }
 

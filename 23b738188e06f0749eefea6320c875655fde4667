@@ -1,0 +1,837 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41354b05_61dda2ea",
+        "filename": "user/test/com/google/gwt/emultest/java/util/DefaultMapEntry.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "632746cf_68952ec0",
+        "filename": "user/test/com/google/gwt/emultest/java/util/DefaultMapEntry.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94ecffdf_43110db2",
+        "filename": "user/test/com/google/gwt/emultest/java/util/DefaultMapEntry.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26290eaf_8865bc56",
+        "filename": "user/test/com/google/gwt/emultest/java/util/DefaultMapEntry.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaedd831_e8615da3",
+        "filename": "user/test/com/google/gwt/emultest/java/util/DefaultMapEntry.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4d8683a_e0581761",
+        "filename": "user/test/com/google/gwt/emultest/java/util/DefaultMapEntry.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cbd5f49_79be965b",
+        "filename": "user/test/com/google/gwt/emultest/java/util/LocalTestNode.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fc6ea5b_34d9b044",
+        "filename": "user/test/com/google/gwt/emultest/java/util/LocalTestNode.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69cec155_661e189f",
+        "filename": "user/test/com/google/gwt/emultest/java/util/LocalTestNode.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4148747d_23d3b2bd",
+        "filename": "user/test/com/google/gwt/emultest/java/util/LocalTestNode.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17b40a5f_adb25a18",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae9439e9_f3488927",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6370b2b8_b5af7177",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a3f798a_1d663416",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0989cf1_fd1b7db3",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "171e12e1_667aec32",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1764c838_0559d652",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e42fe4bc_41cfb11a",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a80088d_5adf8afc",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b02d5cce_c0902efe",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestCollection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd77d919_c773890b",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestComparator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84a0ea6e_f2e4f11a",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestIterator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "511f6c5a_b02500a8",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aef5368a_8c467b93",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14d609f7_b6fd7cd7",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cc8cb93_a33d0ef3",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e1fd6aa_7510e1e0",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20a94d43_ada6fedc",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba2eac24_c2a90694",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8b1fa5f_47f7cc23",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e494067d_c8d64626",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a9ac153_97d84cdc",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a28d4874_e7b37c6c",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d1861eb_e15d0163",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84a1143a_d9c34a82",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b75cfcb_a42f486c",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a518efaf_a7a1f973",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7b0ed96_d26b68d0",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "848ec2e8_faa8a098",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a800922_11216a43",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c49dfa4_ac7acb7e",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62171869_4b0f6725",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0b18f49_8aee4821",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffe88ba7_d49e7246",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "249eebc1_9524422c",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b2156c0_1551e5b2",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75b8a359_69e2ea30",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65cf2fcf_c55e8d39",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ad14539_deadb76b",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2020-10-30T04:30:26Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "23b738188e06f0749eefea6320c875655fde4667",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

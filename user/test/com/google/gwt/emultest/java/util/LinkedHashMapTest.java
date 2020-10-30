@@ -16,9 +16,6 @@
 package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.testing.TestUtils;
-
-import org.apache.commons.collections.TestMap;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -27,9 +24,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-/**
- * Tests <code>LinkedHashMap</code>.
- */
+/** Tests <code>LinkedHashMap</code>. */
 public class LinkedHashMapTest extends TestMap {
   // should be a method-level class, however to avoid serialization warning made
   // static instead.
@@ -84,12 +79,13 @@ public class LinkedHashMapTest extends TestMap {
   private static final float LOAD_FACTOR_ONE_HALF = 0.5F;
   private static final float LOAD_FACTOR_ONE_TENTH = 0.1F;
   private static final float LOAD_FACTOR_ZERO = 0.0F;
-  private static final Object ODD_ZERO_KEY = new Object() {
-    @Override
-    public int hashCode() {
-      return 0;
-    }
-  };
+  private static final Object ODD_ZERO_KEY =
+      new Object() {
+        @Override
+        public int hashCode() {
+          return 0;
+        }
+      };
   private static final String ODD_ZERO_VALUE = "odd zero";
   private static final int SIZE_ONE = 1;
   private static final int SIZE_THREE = 3;
@@ -103,13 +99,10 @@ public class LinkedHashMapTest extends TestMap {
   private static final String VALUE_4 = "val4";
   private static final String VALUE_TEST_CONTAINS_DOES_NOT_EXIST = "does not exist";
   private static final Integer VALUE_TEST_CONTAINS_KEY = new Integer(5);
-  private static final String VALUE_TEST_ENTRY_SET_1 = KEY_TEST_ENTRY_SET
-      + " - value1";
-  private static final String VALUE_TEST_ENTRY_SET_2 = KEY_TEST_ENTRY_SET
-      + " - value2";
+  private static final String VALUE_TEST_ENTRY_SET_1 = KEY_TEST_ENTRY_SET + " - value1";
+  private static final String VALUE_TEST_ENTRY_SET_2 = KEY_TEST_ENTRY_SET + " - value2";
   private static final String VALUE_TEST_GET = KEY_TEST_GET + " - Value";
-  private static final String VALUE_TEST_KEY_SET = KEY_TEST_KEY_SET
-      + " - value";
+  private static final String VALUE_TEST_KEY_SET = KEY_TEST_KEY_SET + " - value";
   private static final String VALUE_TEST_PUT_1 = KEY_TEST_PUT + " - value 1";
   private static final String VALUE_TEST_PUT_2 = KEY_TEST_PUT + " - value 2";
   private static final String VALUE_TEST_REMOVE = KEY_TEST_REMOVE + " - value";
@@ -232,11 +225,10 @@ public class LinkedHashMapTest extends TestMap {
     LinkedHashMap<String, Integer> hashMap = new LinkedHashMap<String, Integer>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
 
-    assertFalse("check contains of empty map",
-        hashMap.containsValue(VALUE_TEST_CONTAINS_KEY));
+    assertFalse("check contains of empty map", hashMap.containsValue(VALUE_TEST_CONTAINS_KEY));
     hashMap.put(KEY_TEST_CONTAINS_VALUE, VALUE_TEST_CONTAINS_KEY);
-    assertTrue("check contains of map with element",
-        hashMap.containsValue(VALUE_TEST_CONTAINS_KEY));
+    assertTrue(
+        "check contains of map with element", hashMap.containsValue(VALUE_TEST_CONTAINS_KEY));
     assertFalse(
         "check contains of map other element",
         hashMap.containsValue(
@@ -453,8 +445,8 @@ public class LinkedHashMapTest extends TestMap {
    */
   public void testLinkedHashMapIntFloat() {
 
-    LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>(CAPACITY_16,
-        LOAD_FACTOR_ONE_HALF);
+    LinkedHashMap<String, String> hashMap =
+        new LinkedHashMap<String, String>(CAPACITY_16, LOAD_FACTOR_ONE_HALF);
     checkEmptyLinkedHashMapAssumptions(hashMap);
 
     // TODO(mmendez): how do we verify capacity and load factor?
@@ -520,8 +512,7 @@ public class LinkedHashMapTest extends TestMap {
   }
 
   public void testLRU() {
-    LinkedHashMap<String, String> m = new LinkedHashMap<String, String>(10,
-        .5f, true);
+    LinkedHashMap<String, String> m = new LinkedHashMap<String, String>(10, .5f, true);
     m.put("A", "A");
     m.put("B", "B");
     m.put("C", "C");
@@ -553,9 +544,7 @@ public class LinkedHashMapTest extends TestMap {
     assertEquals(VALUE_TEST_PUT_1, hashMap.put(null, VALUE_TEST_PUT_2));
   }
 
-  /**
-   * Test method for 'java.util.LinkedHashMap.putAll(Map)'.
-   */
+  /** Test method for 'java.util.LinkedHashMap.putAll(Map)'. */
   public void testPutAll() {
     LinkedHashMap<String, String> srcMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(srcMap);
@@ -618,9 +607,7 @@ public class LinkedHashMapTest extends TestMap {
     dstMap.putAll(dstMap);
   }
 
-  /**
-   * Test method for 'java.util.LinkedHashMap.remove(Object)'.
-   */
+  /** Test method for 'java.util.LinkedHashMap.remove(Object)'. */
   public void testRemove() {
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
@@ -674,9 +661,7 @@ public class LinkedHashMapTest extends TestMap {
     assertEquals("New-C", entries.next().getValue());
   }
 
-  /**
-   * Test method for 'java.util.LinkedHashMap.size()'.
-   */
+  /** Test method for 'java.util.LinkedHashMap.size()'. */
   public void testSize() {
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
@@ -711,9 +696,7 @@ public class LinkedHashMapTest extends TestMap {
     assertEquals(SIZE_ZERO, hashMap.size());
   }
 
-  /**
-   * Test method for 'java.util.AbstractMap.toString()'.
-   */
+  /** Test method for 'java.util.AbstractMap.toString()'. */
   public void testToString() {
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
@@ -722,9 +705,7 @@ public class LinkedHashMapTest extends TestMap {
     assertTrue(entryString.equals(hashMap.toString()));
   }
 
-  /**
-   * Test method for 'java.util.AbstractMap.values()'.
-   */
+  /** Test method for 'java.util.AbstractMap.values()'. */
   public void testValues() {
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
@@ -748,10 +729,9 @@ public class LinkedHashMapTest extends TestMap {
   }
 
   /**
-   * This method exists because java 1.5 no longer has
-   * LinkedHashMap(LinkedHashMap), replacing it with LinkedHashMap(Map<? extends
-   * K, ? extends V> m). Nevertheless, we want to use it in Production Mode to
-   * test that Production Mode function.
+   * This method exists because java 1.5 no longer has LinkedHashMap(LinkedHashMap), replacing it
+   * with LinkedHashMap(Map<? extends K, ? extends V> m). Nevertheless, we want to use it in
+   * Production Mode to test that Production Mode function.
    *
    * @param hashMap the LinkedHashMap to be copied
    * @return the copy

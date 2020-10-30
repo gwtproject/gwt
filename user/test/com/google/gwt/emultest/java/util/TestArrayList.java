@@ -1,3 +1,4 @@
+// CHECKSTYLE_OFF: Copyrighted to ASF
 /*
  * Copyright 1999-2004 The Apache Software Foundation
  *
@@ -13,36 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// CHECKSTYLE_ON
 // MODIFIED BY GOOGLE
-package org.apache.commons.collections;
+package com.google.gwt.emultest.java.util;
 
 import java.util.List;
 
-/**
- * @author <a href="mailto:jvanzyl@apache.org">Jason van Zyl</a>
- * @version $Id: TestArrayList.java,v 1.5.2.1 2004/05/22 12:14:05 scolebourne Exp $
- */
 @SuppressWarnings({"unchecked", "rawtypes"})
-public abstract class TestArrayList extends TestList
-{ 
-  
- 
-    // GOOGLE
-    protected List list = makeEmptyList();
+abstract class TestArrayList extends TestList {
 
+  // GOOGLE
+  protected List list = makeEmptyList();
 
-    public void testNewArrayList()
-    {
-         assertTrue("New list is empty", list.isEmpty());
+  public void testNewArrayList() {
+    assertTrue("New list is empty", list.isEmpty());
     assertEquals("New list has size zero", 0, list.size());
-    }
+  }
 
-    public void testSearch()
-    {
-        list.add("First Item");
-        list.add("Last Item");
+  public void testSearch() {
+    list.add("First Item");
+    list.add("Last Item");
     assertEquals("First item is 'First Item'", "First Item", list.get(0));
     assertEquals("Last Item is 'Last Item'", "Last Item", list.get(1));
-    }
-
+  }
 }

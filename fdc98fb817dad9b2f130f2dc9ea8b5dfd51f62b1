@@ -51,6 +51,24 @@
       "parentUuid": "d516a365_6e113286",
       "revId": "fdc98fb817dad9b2f130f2dc9ea8b5dfd51f62b1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d462ab0f_8ee0133a",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2020-10-31T04:00:45Z",
+      "side": 1,
+      "message": "Slightly modified and explained how the algorithm is derived.\nEffective Java and many other refers to the same algorithm so this should be good as you pointed out.",
+      "parentUuid": "3885b9e0_2c61d6ae",
+      "revId": "fdc98fb817dad9b2f130f2dc9ea8b5dfd51f62b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

@@ -16,7 +16,6 @@
 
 package java.util;
 
-import static javaemul.internal.Coercions.ensureInt;
 import static javaemul.internal.InternalPreconditions.checkArraySize;
 
 import javaemul.internal.ArrayHelper;
@@ -222,7 +221,7 @@ public class BitSet {
   }
 
   private static int wordAt(int[] array, int index) {
-    return ensureInt(array[index]);
+    return array[index] | 0; // ensure int even if we go out of bounds.
   }
 
   // GWT emulates integer with double and doesn't overflow. Enfore it by a integer mask.

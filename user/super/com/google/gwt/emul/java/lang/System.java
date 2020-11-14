@@ -20,9 +20,12 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.isTypeChecked;
 
 import java.io.PrintStream;
+import java.util.function.Supplier;
 
 import javaemul.internal.ArrayHelper;
+import javaemul.internal.ConsoleLogger;
 import javaemul.internal.HashCodes;
+import javaemul.internal.InternalPreconditions;
 import javaemul.internal.JsUtils;
 
 import jsinterop.annotations.JsMethod;
@@ -128,11 +131,156 @@ public final class System {
     System.out = out;
   }
 
+  public static Logger getLogger(String name) {
+    return new LoggerImpl(name);
+  }
+
   private static boolean arrayTypeMatch(Class<?> srcComp, Class<?> destComp) {
     if (srcComp.isPrimitive()) {
       return srcComp.equals(destComp);
     } else {
       return !destComp.isPrimitive();
+    }
+  }
+
+  /**
+   * An emulation of the java.lang.System.Logger interface, added in JDK 9.
+   */
+  public interface Logger {
+    /**
+     * An emulation of the java.lang.System.Logger.Level enum, added in JDK 9.
+     */
+    enum Level {
+      ALL(Integer.MIN_VALUE),
+      TRACE(400),
+      DEBUG(500),
+      INFO(800),
+      WARNING(900),
+      ERROR(1000),
+      OFF(Integer.MAX_VALUE);
+
+      private final int severity;
+
+      Level(int severity) {
+        this.severity = severity;
+      }
+
+      public String getName() {
+        return name();
+      }
+
+      public int getSeverity() {
+        return severity;
+      }
+    }
+
+    String getName();
+
+    boolean isLoggable(Level level);
+
+    default void log(Level level, Object obj) {
+      InternalPreconditions.checkNotNull(obj);
+      log(level, obj::toString, null);
+    }
+
+    default void log(Level level, String msg) {
+      log(level, msg, null);
+    }
+
+    default void log(Level level, String msg, Throwable thrown) {
+      log(level, () -> msg, thrown);
+    }
+
+    default void log(Level level, Supplier<String> msgSupplier) {
+      log(level, msgSupplier, null);
+    }
+
+    void log(Level level, Supplier<String> msgSupplier, Throwable thrown);
+  }
+
+  private static class LoggerImpl implements Logger {
+
+    private static final boolean ALL_ENABLED;
+    private static final boolean INFO_ENABLED;
+    private static final boolean WARNING_ENABLED;
+    private static final boolean ERROR_ENABLED;
+
+    static {
+      // '==' instead of equals makes it compile out faster.
+
+      String level = System.getProperty("jre.logging.logLevel");
+      if (level != "ALL"
+          && level != "INFO"
+          && level != "WARNING"
+          && level != "SEVERE" // alias for j.u.l compatibility
+          && level != "ERROR"
+          && level != "OFF") {
+        throw new AssertionError("Undefined value for jre.logging.logLevel: '" + level + "'");
+      }
+
+      ALL_ENABLED = level == "ALL";
+      INFO_ENABLED = level == "ALL" || level == "INFO";
+      WARNING_ENABLED = level == "ALL" || level == "INFO" || level == "WARNING";
+      ERROR_ENABLED = level == "ALL" || level == "INFO" || level == "WARNING"
+          || level == "SEVERE" || level == "ERROR";
+    }
+
+    private final String name;
+
+    private LoggerImpl(String name) {
+      this.name = name;
+    }
+
+    @Override
+    public String getName() {
+      return name;
+    }
+
+    @Override
+    public boolean isLoggable(Level level) {
+      InternalPreconditions.checkNotNull(level);
+      if (ALL_ENABLED) {
+        return level != Level.OFF;
+      } else if (INFO_ENABLED) {
+        return level == Level.INFO || level == Level.WARNING || level == Level.ERROR;
+      } else if (WARNING_ENABLED) {
+        return level == Level.WARNING || level == Level.ERROR;
+      } else if (ERROR_ENABLED) {
+        return level == Level.ERROR;
+      } else {
+        return false;
+      }
+    }
+
+    @Override
+    public void log(Level level, Supplier<String> msgSupplier, Throwable thrown) {
+      InternalPreconditions.checkNotNull(msgSupplier);
+      if (!isLoggable(level)) {
+        return;
+      }
+      ConsoleLogger consoleLogger = ConsoleLogger.createIfSupported();
+      if (consoleLogger == null) {
+        return;
+      }
+      String consoleLogLevel = toConsoleLogLevel(level);
+      // XXX: use 'name' here? Fwiw, j.u.l.SimpleConsoleLogHandler ignores it as well.
+      consoleLogger.log(consoleLogLevel, msgSupplier.get());
+      if (thrown != null) {
+        consoleLogger.log(consoleLogLevel, thrown);
+      }
+    }
+
+    private String toConsoleLogLevel(Level level) {
+      switch (level) {
+        case ERROR:
+          return "error";
+        case WARNING:
+          return "warn";
+        case INFO:
+          return "info";
+        default:
+          return "log";
+      }
     }
   }
 }

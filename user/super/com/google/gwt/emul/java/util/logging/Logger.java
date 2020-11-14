@@ -41,6 +41,7 @@ public class Logger {
         && level != "INFO"
         && level != "WARNING"
         && level != "SEVERE"
+        && level != "ERROR" // alias for System.Logger compatibility
         && level != "OFF") {
       throw new AssertionError("Undefined value for jre.logging.logLevel: '" + level + "'");
     }
@@ -49,7 +50,8 @@ public class Logger {
     ALL_ENABLED = level == "ALL";
     INFO_ENABLED = level == "ALL" || level == "INFO";
     WARNING_ENABLED = level == "ALL" || level == "INFO" || level == "WARNING";
-    SEVERE_ENABLED = level == "ALL" || level == "INFO" || level == "WARNING" || level == "SEVERE";
+    SEVERE_ENABLED = level == "ALL" || level == "INFO" || level == "WARNING"
+        || level == "SEVERE" || level == "ERROR";
   }
 
   public static Logger getGlobal() {

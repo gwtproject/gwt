@@ -15,72 +15,189 @@
  */
 package java.io;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 /**
- * @skip
+ * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html">the
+ * official Java API doc</a> for details.
  */
 public class PrintStream extends FilterOutputStream {
 
+  /* To avoid recursive closing */
+  private boolean closing = false;
+  private boolean trouble = false;
+  private BufferedWriter textOut;
+  private OutputStreamWriter charOut;
+
   public PrintStream(OutputStream out) {
     super(out);
+    this.charOut = new OutputStreamWriter(this, UTF_8);
+    this.textOut = new BufferedWriter(charOut);
   }
 
   public void print(boolean x) {
+    write(x ? "true" : "false");
   }
 
   public void print(char x) {
+    write(String.valueOf(x));
   }
 
   public void print(char[] x) {
+    write(x);
   }
 
   public void print(double x) {
+    write(String.valueOf(x));
   }
 
   public void print(float x) {
+    write(String.valueOf(x));
   }
 
   public void print(int x) {
+    write(String.valueOf(x));
   }
 
   public void print(long x) {
+    write(String.valueOf(x));
   }
 
   public void print(Object x) {
+    write(String.valueOf(x));
   }
 
   public void print(String s) {
+    if (s == null) {
+      s = "null";
+    }
+    write(s);
   }
 
   public void println() {
+    newLine();
   }
 
   public void println(boolean x) {
+    print(x);
+    newLine();
   }
 
   public void println(char x) {
+    print(x);
+    newLine();
   }
 
   public void println(char[] x) {
+    print(x);
+    newLine();
   }
 
   public void println(double x) {
+    print(x);
+    newLine();
   }
 
   public void println(float x) {
+    print(x);
+    newLine();
   }
 
   public void println(int x) {
+    print(x);
+    newLine();
   }
 
   public void println(long x) {
+    print(x);
+    newLine();
   }
 
   public void println(Object x) {
+    print(x);
+    newLine();
   }
 
   public void println(String s) {
+    print(s);
+    newLine();
   }
 
+  @Override
   public void flush() {
+    try {
+      if (ensureOpen()) {
+        out.flush();
+      }
+    } catch (IOException x) {
+      trouble = true;
+    }
+  }
+
+  @Override
+  public void close() {
+    if (!closing) {
+      closing = true;
+      try {
+        textOut.close();
+        out.close();
+      } catch (IOException x) {
+        trouble = true;
+      }
+      textOut = null;
+      charOut = null;
+      out = null;
+    }
+  }
+
+  public boolean checkError() {
+    if (out != null) {
+      flush();
+    }
+    if (out instanceof java.io.PrintStream) {
+      PrintStream ps = (PrintStream) out;
+      return ps.checkError();
+    }
+    return trouble;
+  }
+
+  private boolean ensureOpen() throws IOException {
+    return out != null;
+  }
+
+  private void newLine() {
+    try {
+      textOut.newLine();
+      textOut.flush();
+      charOut.flush();
+    } catch (IOException x) {
+      trouble = true;
+    }
+  }
+
+  private void write(char buf[]) {
+    try {
+      if (ensureOpen()) {
+        textOut.write(buf);
+        textOut.flush();
+        charOut.flush();
+      }
+    } catch (IOException x) {
+      trouble = true;
+    }
+  }
+
+  private void write(String s) {
+    try {
+      if (ensureOpen()) {
+        textOut.write(s);
+        textOut.flush();
+        if ((s.indexOf('\n') >= 0)) {
+          out.flush();
+        }
+      }
+    } catch (IOException x) {
+      trouble = true;
+    }
   }
 }

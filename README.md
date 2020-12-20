@@ -126,6 +126,36 @@
     user           | test.dev.* test.emma.*                | gwt.junit.testcase.dev.includes      | `**/*Suite.class`
                    |                                       | gwt.junit.testcase.dev.excludes      | `**/*JsInteropSuite.class,**/*JreSuite.class,***/OptimizedOnly*`
 
+Running GWT Tests in Eclipse
+
+You should be able to run most of your GWT tests from within Eclipse using the following steps.
+
+Right-click on a test that extends GWTTestCase and go to Run As > JUnit Test. It's likely you will see the error message below.
+
+
+Invalid launch configuration: -XstartOnFirstThread not specified.
+
+On Mac OS X, GWT requires that the Java virtual machine be invoked with the
+-XstartOnFirstThread VM argument.
+
+Example:
+  java -XstartOnFirstThread -cp gwt-dev-mac.jar com.google.gwt.dev.GWTShell
+
+To fix this error, go to Run > Open Run Dialog. Click on the Arguments tab and add the following values. The 2nd value is to increase the amount of memory available to the test and avoid an OOM error.
+
+-XstartOnFirstThread -Xmx512M
+When you re-run the test, you will probably see the following error:
+
+com.google.gwt.junit.JUnitFatalLaunchException: The test class 'org.richresume.client.home.HomeControllerGwtTest' 
+was not found in module 'org.richresume.client.Application'; no compilation unit for that type was seen
+  at com.google.gwt.junit.JUnitShell.checkTestClassInCurrentModule(JUnitShell.java:193)
+  at com.google.gwt.junit.JUnitShell.runTestImpl(JUnitShell.java:628)
+  at com.google.gwt.junit.JUnitShell.runTest(JUnitShell.java:150)
+  at com.google.gwt.junit.client.GWTTestCase.runTest(GWTTestCase.java:219)
+To fix this, open the Run Dialog again, click on the Classpath tab and click on User Entries. Click on the Advanced button and select Add Folders. In the Folder Selection dialog, select your source and test directories (e.g. src/main/java and src/test/java).
+Run the test again and you should see a green bar in your JUnit tab.
+To create a JUnit configuration that runs all tests, duplicate the previously mentioned run configuration. Then change the name to "All Tests" and select the 2nd radio button to run all tests in the project.
+Click Run to execute all the tests in the project.
 ### Examples
 
  - Run all tests in dev

@@ -16,6 +16,24 @@
       "message": "It looks like the patch is not compiling.",
       "revId": "a7d99d6093f9ee76577683ec44ae067f59854103",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd0a7dc0_3eee92f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2020-12-20T00:00:53Z",
+      "side": 1,
+      "message": "I\u0027ve fixed the compilation issue and minor issues with the unit tests. However, cl/347905924 still shows 1 failing test i.e. j2cl integration test for size. I\u0027m not sure how to fix that? I think it would be only necessary when pulling back the code in google3?\n\nI did not use the automatic jre_export.sh script to create this review. Not sure if the j2cl size test is something that script would\u0027ve taken care of automatically.",
+      "parentUuid": "1e9d2fca_b3709349",
+      "revId": "a7d99d6093f9ee76577683ec44ae067f59854103",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

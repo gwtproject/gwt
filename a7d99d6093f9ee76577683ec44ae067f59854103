@@ -34,6 +34,24 @@
       "parentUuid": "1e9d2fca_b3709349",
       "revId": "a7d99d6093f9ee76577683ec44ae067f59854103",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16c9a499_a81aaf89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2021-01-06T03:45:42Z",
+      "side": 1,
+      "message": "Could you run the size report on your CL and send the CL to me in critique?",
+      "parentUuid": "cd0a7dc0_3eee92f8",
+      "revId": "a7d99d6093f9ee76577683ec44ae067f59854103",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

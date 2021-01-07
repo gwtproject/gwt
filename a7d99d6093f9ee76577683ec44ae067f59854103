@@ -52,6 +52,24 @@
       "parentUuid": "cd0a7dc0_3eee92f8",
       "revId": "a7d99d6093f9ee76577683ec44ae067f59854103",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eb18b5f_3a63e3a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2021-01-07T05:53:17Z",
+      "side": 1,
+      "message": "Sorry, but I\u0027m not sure which CL are you referring to here? Also FYI, I did not create the change using the new jre_export.sh script as I was having some Git related issues. However, I was able to generate the gerrit change using probably the old method mentioned in this doc. [1]\n\nCopybara has created this CL - cl/350486051 for the current gerrit change. Here is the cl from my cider client - cl/347674205. Are any of these two cls that you were referring to?\n\n[1] https://docs.google.com/document/d/1olB6J7ajZW8OnQk0OJdx1_G0-pTH3En2C6giSojf7lA/edit#heading\u003dh.iqwpg520jotl",
+      "parentUuid": "16c9a499_a81aaf89",
+      "revId": "a7d99d6093f9ee76577683ec44ae067f59854103",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

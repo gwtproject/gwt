@@ -24,6 +24,30 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac85c97f_1d63d41e",
+        "filename": "user/super/com/google/gwt/emul/java/io/PrintStream.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2021-01-30T10:34:34Z",
+      "side": 1,
+      "message": "Added this to match the server behaviour in case of incorrect input. If the check is not present, GWT would throw TypeError wrapped in JsException when x.length is invoked on x\u003dnull. Whereas JDK would throw NullPointerException.\n\nHowever, removing it for now as I gather from past conversations that GWT doesn\u0027t try to match exceptional behaviour and there are known gaps.\n\nLet me know if it makes sense to keep the change anyways.",
+      "parentUuid": "e24cf65f_fe0209f6",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 5
+      },
+      "revId": "ee2e706fa97758a02555dba279b2b9199248b003",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85fd4b6d_ef239d23",
@@ -47,6 +71,30 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71f4786b_0cc8320b",
+        "filename": "user/super/com/google/gwt/emul/java/io/PrintStream.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2021-01-30T10:34:34Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "85fd4b6d_ef239d23",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 5
+      },
+      "revId": "ee2e706fa97758a02555dba279b2b9199248b003",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96fd3657_deebe820",
@@ -60,6 +108,24 @@
       "writtenOn": "2021-01-30T06:48:04Z",
       "side": 1,
       "message": "could you add tests for {set/check/clear}Error.",
+      "revId": "ee2e706fa97758a02555dba279b2b9199248b003",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e484a995_3111ff9e",
+        "filename": "user/test/com/google/gwt/emultest/java/io/PrintStreamTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 11389
+      },
+      "writtenOn": "2021-01-30T10:34:34Z",
+      "side": 1,
+      "message": "Added. Created a mock/test class to test clearError method.",
+      "parentUuid": "96fd3657_deebe820",
       "revId": "ee2e706fa97758a02555dba279b2b9199248b003",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }

@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e24cf65f_fe0209f6",
+        "filename": "user/super/com/google/gwt/emul/java/io/PrintStream.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2021-01-30T06:48:04Z",
+      "side": 1,
+      "message": "is this necessary?",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 5
+      },
+      "revId": "ee2e706fa97758a02555dba279b2b9199248b003",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85fd4b6d_ef239d23",
+        "filename": "user/super/com/google/gwt/emul/java/io/PrintStream.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2021-01-30T06:48:04Z",
+      "side": 1,
+      "message": "let\u0027s remove the javadocs.",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 5
+      },
+      "revId": "ee2e706fa97758a02555dba279b2b9199248b003",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96fd3657_deebe820",
+        "filename": "user/test/com/google/gwt/emultest/java/io/PrintStreamTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2021-01-30T06:48:04Z",
+      "side": 1,
+      "message": "could you add tests for {set/check/clear}Error.",
+      "revId": "ee2e706fa97758a02555dba279b2b9199248b003",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

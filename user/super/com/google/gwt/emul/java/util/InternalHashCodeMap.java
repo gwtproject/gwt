@@ -19,7 +19,6 @@ import static java.util.ConcurrentModificationDetector.structureChanged;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
-
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.JsUtils;
 import javaemul.internal.NativeArray;
@@ -157,6 +156,6 @@ class InternalHashCodeMap<K, V> implements Iterable<Entry<K, V>> {
    * also handles null keys as well.
    */
   private int hash(Object key) {
-    return key == null ? 0 : host.getHashCode(key);
+    return host.getHashCode(key);
   }
 }

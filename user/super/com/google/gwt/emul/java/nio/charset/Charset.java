@@ -21,7 +21,6 @@ import static javaemul.internal.InternalPreconditions.checkArgument;
 import java.util.Collections;
 import java.util.SortedMap;
 import java.util.TreeMap;
-
 import javaemul.internal.EmulatedCharset;
 import javaemul.internal.NativeRegExp;
 
@@ -43,6 +42,10 @@ public abstract class Charset implements Comparable<Charset> {
 
   public static SortedMap<String, Charset> availableCharsets() {
     return AvailableCharsets.CHARSETS;
+  }
+
+  public static Charset defaultCharset() {
+    return EmulatedCharset.UTF_8;
   }
 
   public static Charset forName(String charsetName) {

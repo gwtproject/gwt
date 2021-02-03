@@ -18,7 +18,6 @@ package java.lang;
 import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 
 import java.io.Serializable;
-
 import javaemul.internal.NativeRegExp;
 
 /**
@@ -44,7 +43,6 @@ import javaemul.internal.NativeRegExp;
  *  - isISOControl(char)
  *  - isMirrored(char)
  *  - isSpaceChar(char)
- *  - isTitleCase(char)
  *  - isUnicodeIdentifierPart(char)
  *  - isUnicodeIdentifierStart(char)
  *  - getDirectionality(*)
@@ -327,6 +325,11 @@ public final class Character implements Comparable<Character>, Serializable {
 
   public static boolean isSurrogatePair(char highSurrogate, char lowSurrogate) {
     return isHighSurrogate(highSurrogate) && isLowSurrogate(lowSurrogate);
+  }
+
+  public static boolean isTitleCase(char c) {
+    // https://www.compart.com/en/unicode/category/Lt
+    return c != toUpperCase(c) && c != toLowerCase(c);
   }
 
   /*

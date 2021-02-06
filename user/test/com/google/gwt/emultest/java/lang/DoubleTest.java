@@ -539,5 +539,12 @@ public class DoubleTest extends GWTTestCase {
     // Do we need a special check for +inf == +inf and -inf == -inf?
     assertEquals(expected, actual);
   }
-}
 
+  // Disabled since it is broken for Firefox.
+  // public void testDoubleToRawLongBits() {
+  //   long l = 0x7ff80000000004d2L;
+  //   double d = Double.longBitsToDouble(l);
+  //   assertEquals(l, Double.doubleToRawLongBits(d));
+  //   assertEquals(0x7ff8000000000000L, Double.doubleToLongBits(d));
+  // }
+}

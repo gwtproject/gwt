@@ -426,4 +426,12 @@ public class FloatTest extends GWTTestCase {
     }
     assertEquals(expected, actual);
   }
+
+  // Disabled since it is broken for Firefox.
+  // public void testFloatToRawIntBits() {
+  //   int i = 0x7fc004d2;
+  //   float f = Float.intBitsToFloat(i);
+  //   assertEquals(i, Float.floatToRawIntBits(f));
+  //   assertEquals(0x7fc00000, Float.floatToIntBits(f));
+  // }
 }

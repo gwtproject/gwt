@@ -2746,32 +2746,32 @@ public class CompilerTest extends ArgProcessorTestBase {
     // List of JRE types that provide JsInterop entry points and jre native JsTypes. These are
     // always traversed fully and polute the tests, so they will be removed from stale type
     // comparisons.
-    staleTypeNames.removeAll(Arrays.asList(
-        "java.io.HasSerializableTypeMarker",
-        "java.io.Serializable",
-        "java.lang.Boolean",
-        "java.lang.CharSequence",
-        "java.lang.Cloneable",
-        "java.lang.Comparable",
-        "java.lang.Double",
-        "java.lang.HasCharSequenceTypeMarker",
-        "java.lang.HasCloneableTypeMarker",
-        "java.lang.HasComparableTypeMarker",
-        "java.lang.Integer$NativeNumber",
-        "java.lang.Number",
-        "java.lang.Number$JavaLangNumber",
-        "java.lang.String",
-        "java.lang.String$NativeFunction",
-        "java.lang.String$NativeString",
-        "java.lang.Throwable",
-        "java.lang.Throwable$HasJavaThrowable",
-        "java.lang.Throwable$NativeError",
-        "java.lang.Throwable$NativeTypeError",
-        "javaemul.internal.JsUtils",
-        "javaemul.internal.JsUtils$NativeNumber",
-        "javaemul.internal.HashCodes",
-        "javaemul.internal.NativeRegExp",
-        "javaemul.internal.NativeRegExp$Match"));
+    staleTypeNames.removeAll(
+        Arrays.asList(
+            "java.io.HasSerializableTypeMarker",
+            "java.io.Serializable",
+            "java.lang.Boolean",
+            "java.lang.CharSequence",
+            "java.lang.Cloneable",
+            "java.lang.Comparable",
+            "java.lang.Double",
+            "java.lang.HasCharSequenceTypeMarker",
+            "java.lang.HasCloneableTypeMarker",
+            "java.lang.HasComparableTypeMarker",
+            "java.lang.Integer$NativeNumber",
+            "java.lang.Number",
+            "java.lang.Number$JavaLangNumber",
+            "java.lang.String",
+            "java.lang.String$NativeFunction",
+            "java.lang.String$NativeString",
+            "java.lang.Throwable",
+            "java.lang.Throwable$HasJavaThrowable",
+            "java.lang.Throwable$NativeError",
+            "java.lang.Throwable$NativeTypeError",
+            "javaemul.internal.HashCodes",
+            "javaemul.internal.NativeRegExp",
+            "javaemul.internal.NativeRegExp$Match"));
+    staleTypeNames.removeIf(x -> x.startsWith("javaemul.internal.JsUtils"));
     return staleTypeNames;
   }
 

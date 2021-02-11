@@ -24,9 +24,9 @@ public class HashCodes {
       case "string":
         return JsUtils.<String>uncheckedCast(o).hashCode();
       case "number":
-        return Double.hashCode(JsUtils.unsafeCastToDouble(o));
+        return JsUtils.<Double>uncheckedCast(o).hashCode();
       case "boolean":
-        return Boolean.hashCode(JsUtils.unsafeCastToBoolean(o));
+        return JsUtils.<Boolean>uncheckedCast(o).hashCode();
       default:
         return o == null ? 0 : getObjectIdentityHashCode(o);
     }

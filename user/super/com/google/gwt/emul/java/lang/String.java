@@ -376,8 +376,8 @@ public final class String implements Comparable<String>, CharSequence,
   public int compareTo(String other) {
     // Trick compiler into thinking that these are double so what we could do arithmetic comparison
     // which is supported on underlying JavaScript strings.
-    double a = JsUtils.unsafeCastToDouble(checkNotNull(this));
-    double b = JsUtils.unsafeCastToDouble(checkNotNull(other));
+    double a = JsUtils.<Double>uncheckedCast(this);
+    double b = JsUtils.<Double>uncheckedCast(other);
     return a == b ? 0 : (a < b ? -1 : 1);
   }
 

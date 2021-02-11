@@ -38,14 +38,6 @@ public class JsUtils {
     return value === undefined;
   }-*/;
 
-  public static native double unsafeCastToDouble(Object number) /*-{
-   return number;
-  }-*/;
-
-  public static native boolean unsafeCastToBoolean(Object bool) /*-{
-   return bool;
-  }-*/;
-
   @UncheckedCast
   public static native <T> T uncheckedCast(@DoNotAutobox Object o) /*-{
     return o;

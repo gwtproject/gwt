@@ -15,10 +15,12 @@
  */
 package javaemul.internal;
 
-/**
- * Contains logics for calculating hash codes in JavaScript.
- */
+import jsinterop.annotations.JsType;
+
+/** Contains logics for calculating hash codes in JavaScript. */
+@JsType
 public class HashCodes {
+
   public static int getIdentityHashCode(Object o) {
     switch (JsUtils.typeOf(o)) {
       case "string":
@@ -32,7 +34,13 @@ public class HashCodes {
     }
   }
 
-  public static int getObjectIdentityHashCode(Object o) {
-    return ObjectHashing.getHashCode(o);
+  private static int nextHash;
+
+  public static native int getObjectIdentityHashCode(Object o) /*-{
+    return o.$H || (o.$H = @HashCodes::getNextHash()());
+  }-*/;
+
+  public static int getNextHash() {
+    return ++nextHash;
   }
 }

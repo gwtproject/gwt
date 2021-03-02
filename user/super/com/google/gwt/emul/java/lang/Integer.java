@@ -16,7 +16,6 @@
 package java.lang;
 
 import javaemul.internal.JsUtils;
-import jsinterop.annotations.JsType;
 
 /**
  * Wraps a primitive <code>int</code> as an object.
@@ -220,35 +219,16 @@ public final class Integer extends Number implements Comparable<Integer> {
     return toUnsignedString(value, 8);
   }
 
-  private static String toUnsignedString(int value, int radix) {
-    return toRadixString(toUnsigned(value), radix);
+  static String toUnsignedString(int value, int radix) {
+    return JsUtils.uintToString(value, radix);
   }
-
-  @SuppressWarnings("unusable-by-js")
-  private static native double toUnsigned(int value) /*-{
-    // Might return a number that is larger than int32
-    return (value >>> 0);
-  }-*/;
 
   public static String toString(int value) {
     return String.valueOf(value);
   }
 
   public static String toString(int value, int radix) {
-    if (radix == 10 || radix < Character.MIN_RADIX || radix > Character.MAX_RADIX) {
-      return String.valueOf(value);
-    }
-    return toRadixString(value, radix);
-  }
-
-  private static String toRadixString(double value, int radix) {
-    NativeNumber number = JsUtils.uncheckedCast(value);
-    return number.toString(radix);
-  }
-
-  @JsType(isNative = true, name = "Number", namespace = "<window>")
-  private interface NativeNumber {
-    String toString(int radix);
+    return JsUtils.intToString(value, radix);
   }
 
   public static Integer valueOf(int i) {

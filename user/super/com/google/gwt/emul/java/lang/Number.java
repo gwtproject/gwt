@@ -16,10 +16,8 @@
 package java.lang;
 
 import java.io.Serializable;
-
 import javaemul.internal.JsUtils;
 import javaemul.internal.NativeRegExp;
-
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
@@ -192,11 +190,8 @@ public abstract class Number implements Serializable {
     if (!__isValidDouble(s)) {
       throw NumberFormatException.forInputString(s);
     }
-    return parseFloat(s);
+    return JsUtils.parseFloat(s);
   }
-
-  @JsMethod(namespace = "<window>")
-  private static native double parseFloat(String str);
 
   /**
    * @skip

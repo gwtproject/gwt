@@ -18,12 +18,11 @@ package javaemul.internal;
 import javaemul.internal.annotations.DoNotAutobox;
 import javaemul.internal.annotations.UncheckedCast;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsType;
 
-/**
- * Provides an interface for simple JavaScript idioms that can not be expressed in Java.
- */
+/** Provides an interface for simple JavaScript idioms that can not be expressed in Java. */
 @SuppressWarnings("unusable-by-js")
-public class JsUtils {
+public final class JsUtils {
 
   @JsMethod(namespace = "<window>", name = "Date.now")
   public static native double getTime();
@@ -31,8 +30,41 @@ public class JsUtils {
   @JsMethod(namespace = "<window>")
   public static native int parseInt(String s, int radix);
 
+  @JsMethod(namespace = "<window>")
+  public static native double parseFloat(String str);
+
   @JsMethod(namespace = "<window>", name = "typeof")
   public static native String typeOf(Object obj);
+
+  public static String toPrecision(double value, int precision) {
+    NativeNumber number = JsUtils.uncheckedCast(value);
+    return number.toPrecision(precision);
+  }
+
+  public static String intToString(int value, int radix) {
+    return numberToString(value, radix);
+  }
+
+  public static String uintToString(int value, int radix) {
+    return numberToString(toDoubleFromUnsignedInt(value), radix);
+  }
+
+  @JsMethod
+  public static native int toDoubleFromUnsignedInt(int value) /*-{
+    return value >>> 0;
+  }-*/;
+
+  private static String numberToString(double value, int radix) {
+    NativeNumber number = JsUtils.uncheckedCast(value);
+    return number.toString(radix);
+  }
+
+  @JsType(isNative = true, name = "Number", namespace = "<window>")
+  private interface NativeNumber {
+    String toString(int radix);
+
+    String toPrecision(int precision);
+  }
 
   public static native boolean isUndefined(Object value) /*-{
     return value === undefined;

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da7baf93_f83b4171",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2021-03-02T05:35:27Z",
+      "side": 1,
+      "message": "Reapplying +2 after test whitelist.",
+      "revId": "f1353be9dbaa361822ea11a1f8eb0219d1265235",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

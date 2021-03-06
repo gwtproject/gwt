@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d6c5e52_47c11888",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/JsUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2021-03-06T15:50:03Z",
+      "side": 1,
+      "message": "Here it should be ((long) (intBits[1] | 0]) \u003c\u003c 32. With the parens inside the lhs of the \u003c\u003c.\n\nOtherwise I think you are loosing all of the bits. \u003c\u003c returns a 32-bit int IIRC, so it will be all 0s for a long number like 0x1000000000000 (14 zeros, only 1 bit in second leftmost position). Could you add a test for this?",
+      "range": {
+        "startLine": 127,
+        "startChar": 20,
+        "endLine": 127,
+        "endChar": 51
+      },
+      "revId": "7e5c4008426f853ab2a8765a17aa3cb207fb3d05",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e6542fc_385c4537",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/JsUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2021-03-06T15:50:03Z",
+      "side": 1,
+      "message": "I don\u0027t this is needed since the following \u0026 operation takes care of zeroing those bits as well. But is is correct, an in some cases might result in the conversion to long choosing the more optimized representation.",
+      "range": {
+        "startLine": 128,
+        "startChar": 30,
+        "endLine": 128,
+        "endChar": 34
+      },
+      "revId": "7e5c4008426f853ab2a8765a17aa3cb207fb3d05",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

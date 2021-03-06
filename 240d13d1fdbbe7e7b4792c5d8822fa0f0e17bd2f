@@ -235,6 +235,30 @@
       },
       "revId": "240d13d1fdbbe7e7b4792c5d8822fa0f0e17bd2f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "590b8984_998f08e0",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/DoubleTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2021-03-06T15:50:03Z",
+      "side": 1,
+      "message": "FYI, Other numbers other than NaN might be represented in denormal form and it might be broken for those too.",
+      "parentUuid": "c0e4e060_95aa56eb",
+      "range": {
+        "startLine": 543,
+        "startChar": 5,
+        "endLine": 543,
+        "endChar": 44
+      },
+      "revId": "240d13d1fdbbe7e7b4792c5d8822fa0f0e17bd2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

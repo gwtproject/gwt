@@ -22,6 +22,30 @@
       },
       "revId": "240d13d1fdbbe7e7b4792c5d8822fa0f0e17bd2f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93d114ee_ac97587b",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2021-03-06T07:13:29Z",
+      "side": 1,
+      "message": "The difference between the 2 methods is; doubleToLongBits already needs to return the canonical form of NaN so it has the correct behavior in Firefox.",
+      "parentUuid": "cffc214d_b555b73f",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 57
+      },
+      "revId": "240d13d1fdbbe7e7b4792c5d8822fa0f0e17bd2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

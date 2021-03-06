@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e77d4023_1d3d975d",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2780,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2021-03-06T08:40:24Z",
+      "side": 1,
+      "message": "Ha. Are we still compiling GWT with java 7? I thought we moved to 8.\n\nWhy not remove all javaemul.internal?",
+      "range": {
+        "startLine": 2774,
+        "startChar": 0,
+        "endLine": 2780,
+        "endChar": 11
+      },
+      "revId": "451f8f18768749d4b9ed2a90ad33bd6256e985a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f4673c7_a89704ae",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/JsUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2021-03-06T08:40:24Z",
+      "side": 1,
+      "message": "I guess since the code passes all the tests, that these implementations are equivalent to the ones removed.",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 69
+      },
+      "revId": "451f8f18768749d4b9ed2a90ad33bd6256e985a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

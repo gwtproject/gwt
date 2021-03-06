@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import javaemul.internal.LongUtils;
+
 /** Wraps a primitive <code>long</code> as an object. */
 public final class Long extends Number implements Comparable<Long> {
 
@@ -30,9 +32,9 @@ public final class Long extends Number implements Comparable<Long> {
   public static final int BYTES = SIZE / Byte.SIZE;
   public static final Class<Long> TYPE = long.class;
 
-  public static int bitCount(long i) {
-    int high = (int) (i >> 32);
-    int low = (int) i;
+  public static int bitCount(long l) {
+    int high = LongUtils.getHighBits(l);
+    int low = (int) l;
     return Integer.bitCount(high) + Integer.bitCount(low);
   }
 
@@ -52,17 +54,15 @@ public final class Long extends Number implements Comparable<Long> {
   }
 
   public static int hashCode(long l) {
-    int high = (int) (l >>> 32);
-    int low = (int) l;
-    return high ^ low;
+    return LongUtils.getHighBits(l) ^ LongUtils.getLowBits(l);
   }
 
-  public static long highestOneBit(long i) {
-    int high = (int) (i >> 32);
+  public static long highestOneBit(long l) {
+    int high = LongUtils.getHighBits(l);
     if (high != 0) {
-      return ((long) Integer.highestOneBit(high)) << 32;
+      return LongUtils.fromBits(0, Integer.highestOneBit(high));
     } else {
-      return Integer.highestOneBit((int) i) & 0xFFFFFFFFL;
+      return LongUtils.fromBits(Integer.highestOneBit((int) l), 0);
     }
   }
 
@@ -78,21 +78,21 @@ public final class Long extends Number implements Comparable<Long> {
     return Math.min(a, b);
   }
 
-  public static int numberOfLeadingZeros(long i) {
-    int high = (int) (i >> 32);
+  public static int numberOfLeadingZeros(long l) {
+    int high = LongUtils.getHighBits(l);
     if (high != 0) {
       return Integer.numberOfLeadingZeros(high);
     } else {
-      return Integer.numberOfLeadingZeros((int) i) + 32;
+      return Integer.numberOfLeadingZeros((int) l) + 32;
     }
   }
 
-  public static int numberOfTrailingZeros(long i) {
-    int low = (int) i;
+  public static int numberOfTrailingZeros(long l) {
+    int low = (int) l;
     if (low != 0) {
       return Integer.numberOfTrailingZeros(low);
     } else {
-      return Integer.numberOfTrailingZeros((int) (i >> 32)) + 32;
+      return Integer.numberOfTrailingZeros(LongUtils.getHighBits(l)) + 32;
     }
   }
 
@@ -104,16 +104,16 @@ public final class Long extends Number implements Comparable<Long> {
     return __parseAndValidateLong(s, radix);
   }
 
-  public static long reverse(long i) {
-    int high = (int) (i >>> 32);
-    int low = (int) i;
-    return ((long) Integer.reverse(low) << 32) | (Integer.reverse(high) & 0xffffffffL);
+  public static long reverse(long l) {
+    int high = LongUtils.getHighBits(l);
+    int low = (int) l;
+    return LongUtils.fromBits(Integer.reverse(high), Integer.reverse(low));
   }
 
-  public static long reverseBytes(long i) {
-    int high = (int) (i >>> 32);
-    int low = (int) i;
-    return ((long) Integer.reverseBytes(low) << 32) | (Integer.reverseBytes(high) & 0xffffffffL);
+  public static long reverseBytes(long l) {
+    int high = LongUtils.getHighBits(l);
+    int low = (int) l;
+    return LongUtils.fromBits(Integer.reverseBytes(high), Integer.reverseBytes(low));
   }
 
   public static long rotateLeft(long i, int distance) {

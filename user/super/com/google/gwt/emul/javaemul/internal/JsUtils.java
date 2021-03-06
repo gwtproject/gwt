@@ -124,16 +124,14 @@ public final class JsUtils {
     ArrayBuffer buf = new ArrayBuffer(8);
     JsUtils.<double[]>uncheckedCast(new Float64Array(buf))[0] = value;
     int[] intBits = JsUtils.<int[]>uncheckedCast(new Uint32Array(buf));
-    long highBits = ((long) (intBits[1] | 0)) << 32;
-    long lowBits = (intBits[0] | 0) & 0x00000000ffffffffL;
-    return highBits | lowBits;
+    return LongUtils.fromBits(intBits[0] | 0, intBits[1] | 0);
   }
 
   public static double longBitsToDouble(long value) {
     ArrayBuffer buf = new ArrayBuffer(8);
     int[] intBits = JsUtils.<int[]>uncheckedCast(new Uint32Array(buf));
     intBits[0] = (int) value;
-    intBits[1] = (int) (value >>> 32);
+    intBits[1] = LongUtils.getHighBits(value);
     return JsUtils.<double[]>uncheckedCast(new Float64Array(buf))[0];
   }
 

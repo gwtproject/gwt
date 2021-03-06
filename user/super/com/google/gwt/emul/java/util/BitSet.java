@@ -19,6 +19,7 @@ package java.util;
 import static javaemul.internal.InternalPreconditions.checkArraySize;
 
 import javaemul.internal.ArrayHelper;
+import javaemul.internal.LongUtils;
 
 /**
  * This implementation uses a dense array holding bit groups of size 31 to keep track of when bits
@@ -815,7 +816,7 @@ public class BitSet {
   private static long getLong(int[] words, int bitIndex) {
     int low = getInt(words, bitIndex);
     int high = getInt(words, bitIndex + 32);
-    return ((long) high << 32) | (low & 0xffff_ffffL);
+    return LongUtils.fromBits(low, high);
   }
 
   public static BitSet valueOf(byte[] words) {

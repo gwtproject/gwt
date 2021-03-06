@@ -39,6 +39,7 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
 import java.util.Random;
+import javaemul.internal.LongUtils;
 
 /**
  * This class represents immutable integer numbers of arbitrary length. Large
@@ -488,7 +489,7 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
   BigInteger(int sign, long val) {
     // PRE: (val >= 0) && (sign >= -1) && (sign <= 1)
     this.sign = sign;
-    if ((val & 0xFFFFFFFF00000000L) == 0) {
+    if (LongUtils.getHighBits(val) == 0) {
       // It fits in one 'int'
       numberLength = 1;
       digits = new int[] {(int) val};
@@ -952,9 +953,11 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
    */
   @Override
   public long longValue() {
-    long value = (numberLength > 1) ? (((long) digits[1]) << 32)
-        | (digits[0] & 0xFFFFFFFFL) : (digits[0] & 0xFFFFFFFFL);
-    return (sign * value);
+    long value =
+        numberLength > 1
+            ? LongUtils.fromBits(digits[0], digits[1])
+            : LongUtils.fromBits(digits[0], 0);
+    return sign > 0 ? value : -value;
   }
 
   /**

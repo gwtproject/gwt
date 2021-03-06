@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cffc214d_b555b73f",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2021-03-06T06:57:19Z",
+      "side": 1,
+      "message": "If I understand correctly the bug description this method *always* returns canonical form of NaN. So it implies that doubleToLongBits() is also boken on Firefox. Could you clarify ?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 57
+      },
+      "revId": "240d13d1fdbbe7e7b4792c5d8822fa0f0e17bd2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

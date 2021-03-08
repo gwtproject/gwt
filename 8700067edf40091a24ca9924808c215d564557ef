@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c02eb8de_a27e7f7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-03-08T20:38:18Z",
+      "side": 1,
+      "message": "That kills IE8/IE9 (and possibly IE10) support in GWT: https://caniuse.com/typedarrays\n\nThis is long overdue if you ask me, but still a notable change.",
+      "revId": "8700067edf40091a24ca9924808c215d564557ef",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

@@ -34,6 +34,7 @@
  */
 package java.math;
 
+import static javaemul.internal.Coercions.ensureInt;
 import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
@@ -95,11 +96,6 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
   static final BigInteger MINUS_ONE = new BigInteger(-1, 1);
 
   /**
-   * 2^32.
-   */
-  static final double POW32 = 4294967296d;
-
-  /**
    * All the {@code BigInteger} numbers in the range [0,10] are cached.
    */
   static final BigInteger[] SMALL_VALUES = {
@@ -138,17 +134,19 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
   }
 
   public static BigInteger valueOf(long val) {
-    if (val < 0) {
-      if (val != -1) {
-        return new BigInteger(-1, -val);
-      }
-      return MINUS_ONE;
-    } else if (val <= 10) {
-      return SMALL_VALUES[(int) val];
-    } else {
-      // (val > 10)
-      return new BigInteger(1, val);
+    return val >= 0 ? BigInteger.fromBits(val) : BigInteger.fromBits(-val).negate();
+  }
+
+  private static BigInteger fromBits(long bits) {
+    int lowDigits = (int) bits;
+    int highDigits = (int) (bits >>> 32);
+    if (highDigits != 0) {
+      return new BigInteger(1, lowDigits, highDigits);
     }
+    if (lowDigits > 10 || lowDigits < 0) {
+      return new BigInteger(1, lowDigits);
+    }
+    return SMALL_VALUES[lowDigits];
   }
 
   static BigInteger getPowerOfTwo(int exp) {
@@ -160,20 +158,6 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
     int resDigits[] = new int[intCount + 1];
     resDigits[intCount] = 1 << bitN;
     return new BigInteger(1, intCount + 1, resDigits);
-  }
-
-  public static BigInteger valueOf(double val) {
-    if (val < 0) {
-      if (val != -1) {
-        return new BigInteger(-1, -val);
-      }
-      return MINUS_ONE;
-    } else if (val <= 10) {
-      return SMALL_VALUES[(int) val];
-    } else {
-      // (val > 10)
-      return new BigInteger(1, val);
-    }
   }
 
   /**
@@ -232,18 +216,6 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
     bi.digits = digits;
     bi.cutOffLeadingZeroes();
   }
-
-  /**
-   * Converts an integral double to an unsigned integer; ie 2^31 will be
-   * returned as 0x80000000.
-   *
-   * @param val
-   * @return val as an unsigned int
-   */
-  @SuppressWarnings("unusable-by-js")
-  private static native int toUnsignedInt(double val) /*-{
-    return val | 0;
-  }-*/;
 
   /**
    * The magnitude of this big integer. This array is in little endian order and
@@ -437,16 +409,17 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
    * @param sign the sign of the number
    * @param value the only one digit of array
    */
-  BigInteger(int sign, int value) {
-    this.sign = sign;
-    numberLength = 1;
-    digits = new int[] {value};
+  BigInteger(int sign, int bits) {
+    this(sign, 1, new int[] {bits});
+  }
+
+  BigInteger(int sign, int lowBits, int highBits) {
+    this(sign, 2, new int[] {lowBits, highBits});
   }
 
   /**
-   * Creates a new {@code BigInteger} with the given sign and magnitude. This
-   * constructor does not create a copy, so any changes to the reference will
-   * affect the new number.
+   * Creates a new {@code BigInteger} with the given sign and magnitude. This constructor does not
+   * create a copy, so any changes to the reference will affect the new number.
    *
    * @param signum The sign of the number represented by {@code digits}
    * @param digits The magnitude of the number
@@ -465,8 +438,8 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
   }
 
   /**
-   * Constructs a number without to create new space. This construct should be
-   * used only if the three fields of representation are known.
+   * Constructs a number without to create new space. This construct should be used only if the
+   * three fields of representation are known.
    *
    * @param sign the sign of the number
    * @param numberLength the length of the internal array
@@ -479,53 +452,13 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
   }
 
   /**
-   * Creates a new {@code BigInteger} whose value is equal to the specified
-   * {@code long}.
-   *
-   * @param sign the sign of the number
-   * @param val the value of the new {@code BigInteger}.
-   */
-  BigInteger(int sign, long val) {
-    // PRE: (val >= 0) && (sign >= -1) && (sign <= 1)
-    this.sign = sign;
-    if ((val & 0xFFFFFFFF00000000L) == 0) {
-      // It fits in one 'int'
-      numberLength = 1;
-      digits = new int[] {(int) val};
-    } else {
-      numberLength = 2;
-      digits = new int[] {(int) val, (int) (val >> 32)};
-    }
-  }
-
-  /**
-   * Creates a new {@code BigInteger} whose value is equal to the specified
-   * {@code double} (which must be an integral value).
-   *
-   * @param sign the sign of the number
-   * @param val the value of the new {@code BigInteger}.
-   */
-  private BigInteger(int sign, double val) {
-    // PRE: (val >= 0) && (sign >= -1) && (sign <= 1)
-    this.sign = sign;
-    if (val < POW32) {
-      // It fits in one 'int'
-      numberLength = 1;
-      digits = new int[] { toUnsignedInt(val) };
-    } else {
-      numberLength = 2;
-      digits = new int[] { toUnsignedInt(val % POW32), toUnsignedInt(val / POW32) };
-    }
-  }
-
-  /**
    * Returns a (new) {@code BigInteger} whose value is the absolute value of
    * {@code this}.
    *
    * @return {@code abs(this)}.
    */
   public BigInteger abs() {
-    return ((sign < 0) ? new BigInteger(1, numberLength, digits) : this);
+    return sign < 0 ? negate() : this;
   }
 
   /**
@@ -912,7 +845,7 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
   public int intValue() {
     int i = digits[0];
     // i is always positive except for Integer.MIN_VALUE because of int overflow
-    return (sign > 0 || i == Integer.MIN_VALUE) ? i : -i;
+    return sign > 0 ? i : ensureInt(-i);
   }
 
   /**
@@ -1110,10 +1043,7 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
    */
   public BigInteger multiply(BigInteger val) {
     // This let us to throw NullPointerException when val == null
-    if (val.sign == 0) {
-      return ZERO;
-    }
-    if (sign == 0) {
+    if (val.sign == 0 || sign == 0) {
       return ZERO;
     }
     return Multiplication.multiply(this, val);
@@ -1125,7 +1055,7 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
    * @return {@code -this}.
    */
   public BigInteger negate() {
-    return ((sign == 0) ? this : new BigInteger(-sign, numberLength, digits));
+    return sign == 0 ? this : new BigInteger(-sign, numberLength, digits);
   }
 
   /**

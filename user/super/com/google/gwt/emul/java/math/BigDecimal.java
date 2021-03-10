@@ -2572,7 +2572,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
 
   private BigInteger getUnscaledValue() {
     if (intVal == null) {
-      intVal = BigInteger.valueOf(smallValue);
+      intVal = BigInteger.valueOf((long) smallValue);
     }
     return intVal;
   }

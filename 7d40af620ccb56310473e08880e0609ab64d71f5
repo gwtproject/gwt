@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a99d7e5_7062e5d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2021-03-12T05:39:23Z",
+      "side": 1,
+      "message": "Re-apply +2 after trivial changes.",
+      "revId": "7d40af620ccb56310473e08880e0609ab64d71f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

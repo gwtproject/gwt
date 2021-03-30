@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f73a9935_1e858bbe",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalHashCodeMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2021-03-30T19:32:26Z",
+      "side": 1,
+      "message": "In GWT this is not equivalent to new NativeArray(). GWT\u0027s Object arrays are stamped IIRC.",
+      "range": {
+        "startLine": 150,
+        "startChar": 33,
+        "endLine": 150,
+        "endChar": 46
+      },
+      "revId": "073679594c6ead7abe501009f8ba31eb390047fc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

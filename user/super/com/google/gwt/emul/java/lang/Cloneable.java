@@ -15,7 +15,7 @@
  */
 package java.lang;
 
-import javaemul.internal.NativeArray;
+import javaemul.internal.ArrayHelper;
 import jsinterop.annotations.JsMethod;
 
 /**
@@ -32,7 +32,7 @@ public interface Cloneable {
 
     return instance.getTypeMarker()
         // Arrays are implicitly instances of Cloneable (JLS 10.7).
-        || NativeArray.isArray(instance);
+        || ArrayHelper.isArray(instance);
   }
   // CHECKSTYLE_ON: end utility methods
 }

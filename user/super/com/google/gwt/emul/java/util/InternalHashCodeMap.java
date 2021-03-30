@@ -21,7 +21,6 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.JsUtils;
-import javaemul.internal.NativeArray;
 
 /**
  * A simple wrapper around JavaScriptObject to provide {@link java.util.Map}-like semantics for any
@@ -148,7 +147,7 @@ class InternalHashCodeMap<K, V> implements Iterable<Entry<K, V>> {
   }
 
   private Entry<K, V>[] newEntryChain() {
-    return JsUtils.uncheckedCast(new NativeArray());
+    return JsUtils.uncheckedCast(new Object[0]);
   }
 
   /**

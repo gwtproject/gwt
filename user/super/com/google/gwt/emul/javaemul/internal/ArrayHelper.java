@@ -15,14 +15,14 @@
  */
 package javaemul.internal;
 
+import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
-/**
- * Provides utilities to perform operations on Arrays.
- */
-public class ArrayHelper {
+/** Provides utilities to perform operations on Arrays. */
+public final class ArrayHelper {
 
   public static final int ARRAY_PROCESS_BATCH_SIZE = 10000;
 
@@ -42,6 +42,9 @@ public class ArrayHelper {
   public static <T> T[] createFrom(T[] array, int length) {
     return ArrayStamper.stampJavaTypeInfo(new NativeArray(length), array);
   }
+
+  @JsMethod(name = "Array.isArray", namespace = JsPackage.GLOBAL)
+  public static native boolean isArray(Object o);
 
   public static int getLength(Object array) {
     return asNativeArray(array).length;
@@ -85,7 +88,7 @@ public class ArrayHelper {
       int batchEnd = Math.min(batchStart + ARRAY_PROCESS_BATCH_SIZE, end);
       len = batchEnd - batchStart;
       Object[] spliceArgs = unsafeClone(src, batchStart, batchEnd);
-      asNativeArray(spliceArgs).splice(0, 0, destOfs, overwrite ? len : 0);
+      asNativeArray(spliceArgs).splice(0, 0, (double) destOfs, (double) (overwrite ? len : 0));
       getSpliceFunction().apply(destArray, spliceArgs);
       batchStart = batchEnd;
       destOfs += len;
@@ -100,8 +103,35 @@ public class ArrayHelper {
   @JsProperty(name = "Array.prototype.splice", namespace = "<window>")
   private static native NativeFunction getSpliceFunction();
 
-  public static NativeArray asNativeArray(Object array) {
+  /** Compare function for sort. */
+  @JsFunction
+  public interface CompareFunction {
+    double compare(Object d1, Object d2);
+  }
+
+  public static void sort(Object array, CompareFunction fn) {
+    asNativeArray(array).sort(fn);
+  }
+
+  private static NativeArray asNativeArray(Object array) {
     return JsUtils.uncheckedCast(array);
   }
+
+  @JsType(isNative = true, name = "Array", namespace = "<window>")
+  private static class NativeArray {
+    int length;
+
+    NativeArray(int length) {}
+
+    native Object concat(Object arrayToAdd);
+
+    native Object[] slice(int fromIndex, int toIndex);
+
+    native void splice(int index, int deleteCount, Object... value);
+
+    native <T> void sort(CompareFunction compareFunction);
+  }
+
+  private ArrayHelper() {}
 }
 

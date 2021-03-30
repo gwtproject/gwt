@@ -18,6 +18,24 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1194f07a_2beec36c",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/ArrayHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2021-03-30T07:30:50Z",
+      "side": 1,
+      "message": "Doesn\u0027t matter in this context, isArray behavior doesn\u0027t change.\nHowever I updated to be consistent (including another old occurrence)",
+      "parentUuid": "64a4eaab_f81e7245",
+      "revId": "616baa834cd9cba3f7427a3a24edfa5336ee1fad",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecb6c232_98c10616",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-03-30T07:15:58Z",
       "side": 1,
       "message": "I see this loses @DoNotAutobox here. This method seems to only be used in lines 58 where the vararg is empty, 62 where it receives an Object, and 91 where you cast to \u0027double\u0027 explicitly.\n\nI\u0027m curious to understand the implications of this. Why go from @DoNotAutobox with \u0027int\u0027s as arguments (that, IIUC, would be passed as Doubles due to @DoNotAutobox) to straight Object... with explicit casts to \u0027double\u0027?",
+      "revId": "616baa834cd9cba3f7427a3a24edfa5336ee1fad",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd189655_901f8d2f",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/ArrayHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2021-03-30T07:30:50Z",
+      "side": 1,
+      "message": "It wasn\u0027t clear why it was needed so I dropped it and then later discovered the usage. However I didn\u0027t roll the change back since its private now and the use is limited to this class and it seems easier to follow the code with the explicit behavior.\n(I don\u0027t have a strong opinion on this though.)",
+      "parentUuid": "ecb6c232_98c10616",
       "revId": "616baa834cd9cba3f7427a3a24edfa5336ee1fad",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }

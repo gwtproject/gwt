@@ -60,8 +60,8 @@
         <pathelement
             location="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar"/>
         <pathelement location="${gwt.build.lib}/gwt-dev-${build.host.platform}.jar"/>
-        <pathelement location="${alldeps.jar}"/>
         <pathelement location="${gwt.tools.lib}/jsinterop/jsinterop-annotations-2.0.0.jar"/>
+        <pathelement location="${alldeps.jar}"/>
       </classpath>
     </gwt.javac>
 

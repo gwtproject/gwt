@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "417a6016_c0801951",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-04-06T01:19:45Z",
+      "side": 1,
+      "message": "Thanks for the patch - is there a problem with the classpath as it is today? I think these tests already work without adding this, or are you considering some new tests which would require this?\n\nIs there an issue or other discussion around this topic that I missed?",
+      "revId": "c61f161e83d96fec871d74319740ef2b7cdcfa62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

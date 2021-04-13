@@ -27,7 +27,6 @@ import java.io.Serializable;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
-
 import javaemul.internal.ArrayHelper;
 
 /**
@@ -78,7 +77,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
 
   @Override
   public boolean add(E o) {
-    array[array.length] = o;
+    ArrayHelper.push(array, o);
     return true;
   }
 

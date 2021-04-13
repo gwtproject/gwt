@@ -53,15 +53,19 @@ public final class ArrayHelper {
     asNativeArray(array).length = length;
   }
 
-  public static void removeFrom(Object array, int index, int deleteCount) {
+  public static void push(Object[] array, Object o) {
+    asNativeArray(array).push(o);
+  }
+
+  public static void removeFrom(Object[] array, int index, int deleteCount) {
     asNativeArray(array).splice(index, deleteCount);
   }
 
-  public static void insertTo(Object array, int index, Object value) {
+  public static void insertTo(Object[] array, int index, Object value) {
     asNativeArray(array).splice(index, 0, value);
   }
 
-  public static void insertTo(Object array, int index, Object[] values) {
+  public static void insertTo(Object[] array, int index, Object[] values) {
     copy(values, 0, array, index, values.length, false);
   }
 
@@ -122,7 +126,7 @@ public final class ArrayHelper {
 
     NativeArray(int length) {}
 
-    native Object concat(Object arrayToAdd);
+    native void push(Object item);
 
     native Object[] slice(int fromIndex, int toIndex);
 

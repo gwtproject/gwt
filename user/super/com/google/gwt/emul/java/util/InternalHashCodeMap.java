@@ -15,8 +15,6 @@
  */
 package java.util;
 
-import static java.util.ConcurrentModificationDetector.structureChanged;
-
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 import javaemul.internal.ArrayHelper;
@@ -58,7 +56,7 @@ class InternalHashCodeMap<K, V> implements Iterable<Entry<K, V>> {
     }
     chain[chain.length] = new SimpleEntry<K, V>(key, value);
     size++;
-    structureChanged(host);
+    host.structureChanged();
     return null;
   }
 
@@ -77,7 +75,7 @@ class InternalHashCodeMap<K, V> implements Iterable<Entry<K, V>> {
           ArrayHelper.removeFrom(chain, i, 1);
         }
         size--;
-        structureChanged(host);
+        host.structureChanged();
         return entry.getValue();
       }
     }

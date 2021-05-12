@@ -17,6 +17,7 @@ package javaemul.internal;
 
 import static java.lang.System.getProperty;
 
+import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
 
 /**
@@ -139,7 +140,7 @@ public final class InternalPreconditions {
     } else if (IS_ASSERTED) {
       try {
         checkCriticalType(expression, message);
-      } catch (Exception e) {
+      } catch (RuntimeException e) {
         throw new AssertionError(e);
       }
     }
@@ -586,6 +587,24 @@ public final class InternalPreconditions {
     }
   }
 
+  public static void checkConcurrentModification(int currentModCount, int recordedModCount) {
+    if (IS_API_CHECKED) {
+      checkCriticalConcurrentModification(currentModCount, recordedModCount);
+    } else if (IS_ASSERTED) {
+      try {
+        checkCriticalConcurrentModification(currentModCount, recordedModCount);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
+  public static void checkCriticalConcurrentModification(
+      double currentModCount, double recordedModCount) {
+    if (currentModCount != recordedModCount) {
+      throw new ConcurrentModificationException();
+    }
+  }
   // Hides the constructor for this static utility class.
   private InternalPreconditions() { }
 }

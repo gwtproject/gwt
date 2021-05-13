@@ -413,7 +413,7 @@ public final class Character implements Comparable<Character>, Serializable {
   }
 
   public static char toLowerCase(char c) {
-    return String.valueOf(c).toLowerCase().charAt(0);
+    return CaseMapper.charToLowerCase(c);
   }
 
   public static String toString(char x) {
@@ -421,7 +421,7 @@ public final class Character implements Comparable<Character>, Serializable {
   }
 
   public static char toUpperCase(char c) {
-    return String.valueOf(c).toUpperCase().charAt(0);
+    return CaseMapper.charToUpperCase(c);
   }
 
   public static Character valueOf(char c) {

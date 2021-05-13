@@ -16,6 +16,23 @@
       "message": "[warning] Commit message lines should be 72 characters or fewer.",
       "revId": "c1c6d48323b8a549412e943f9cf2050eff7e7247",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c037943_f515d996",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2021-05-13T23:45:38Z",
+      "side": 1,
+      "message": "Actually thinking of it, we don\u0027t need this since WASM version has its own detection in place.\nUnless if you prefer this CL for other reasons, I will just stub the class on WASM side.\nLet me know what you think....",
+      "revId": "c1c6d48323b8a549412e943f9cf2050eff7e7247",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

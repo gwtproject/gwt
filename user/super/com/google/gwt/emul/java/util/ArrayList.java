@@ -112,7 +112,9 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
 
   @Override
   public void clear() {
-    array = (E[]) new Object[0];
+    // We are not re-creating the array since ArrayList is expected to preserve it is capacity on
+    // clear and re-creating will change the performance characteristics in J2Wasm.
+    setSize(0);
   }
 
   public Object clone() {

@@ -25,8 +25,14 @@ public final class ArrayHelper {
 
   public static final int ARRAY_PROCESS_BATCH_SIZE = 10000;
 
+  public static <T> T[] clone(T[] array) {
+    Object result = asNativeArray(array).slice();
+    return ArrayStamper.stampJavaTypeInfo(result, array);
+  }
+
   public static <T> T[] clone(T[] array, int fromIndex, int toIndex) {
     Object result = unsafeClone(array, fromIndex, toIndex);
+    setLength(result, toIndex - fromIndex);
     return ArrayStamper.stampJavaTypeInfo(result, array);
   }
 
@@ -127,6 +133,8 @@ public final class ArrayHelper {
     NativeArray(int length) {}
 
     native void push(Object item);
+
+    native Object[] slice();
 
     native Object[] slice(int fromIndex, int toIndex);
 

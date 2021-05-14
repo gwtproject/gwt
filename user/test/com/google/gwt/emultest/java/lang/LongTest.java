@@ -1,12 +1,12 @@
 /*
  * Copyright 2007 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -87,7 +87,7 @@ public class LongTest extends GWTTestCase {
     assertEquals(63, Long.numberOfTrailingZeros(Long.MIN_VALUE));
     assertEquals(20, Long.numberOfTrailingZeros(-0x7ff00000L));
   }
- 
+
   public void testParse() {
     assertEquals(0L, Long.parseLong("0"));
     assertEquals(100000000000L, Long.parseLong("100000000000"));
@@ -251,6 +251,9 @@ public class LongTest extends GWTTestCase {
     assertEquals("10001111101101101111011110001100100000000", Long.toBinaryString(1234500000000L));
     assertEquals("1111111111111111111111101110000010010010000100001110011100000000",
         Long.toBinaryString(-1234500000000L));
+    assertEquals(
+        "1111111111111111111111111111111111111111111111111111111111111111",
+        Long.toBinaryString(-1));
   }
 
   public void testToHexString() {
@@ -258,6 +261,7 @@ public class LongTest extends GWTTestCase {
     assertEquals("12345", Long.toHexString(0x12345L));
     assertEquals("1234500000000", Long.toHexString(0x1234500000000L));
     assertEquals("fff1234500000000", Long.toHexString(0xFFF1234500000000L));
+    assertEquals("ffffffffffffffff", Long.toHexString(-1));
   }
 
   public void testToOctalString() {
@@ -265,6 +269,7 @@ public class LongTest extends GWTTestCase {
     assertEquals("77777777777", Long.toOctalString(077777777777L));
     assertEquals("1000000000000000000000", Long.toOctalString(Long.MIN_VALUE));
     assertEquals("777777777777777777777", Long.toOctalString(Long.MAX_VALUE));
+    assertEquals("1777777777777777777777", Long.toOctalString(-1));
   }
 
   public void testToString() {

@@ -210,7 +210,7 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
 
   private void init(EnumMap<K, ? extends V> m) {
     keySet = m.keySet.clone();
-    values = ArrayHelper.clone(m.values, 0, m.values.length);
+    values = ArrayHelper.clone(m.values);
   }
 
   private V set(int ordinal, V value) {

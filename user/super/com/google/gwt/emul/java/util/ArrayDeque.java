@@ -150,11 +150,7 @@ public class ArrayDeque<E> extends AbstractCollection<E> implements Deque<E>, Cl
     return Integer.highestOneBit(num) << 1;
   }
 
-  /**
-   * This field holds a JavaScript array.
-   */
-  @SuppressWarnings("unchecked")
-  private E[] array = (E[]) new Object[MIN_INITIAL_CAPACITY];
+  private E[] array;
 
   /**
    * The index of the element at the head of the deque (which is the
@@ -170,15 +166,16 @@ public class ArrayDeque<E> extends AbstractCollection<E> implements Deque<E>, Cl
   private int tail;
 
   public ArrayDeque() {
+    this.array = (E[]) new Object[MIN_INITIAL_CAPACITY];
+  }
+
+  public ArrayDeque(int numElements) {
+    this.array = (E[]) new Object[nextArrayLength(numElements)];
   }
 
   public ArrayDeque(Collection<? extends E> c) {
     this(c.size());
     addAll(c);
-  }
-
-  public ArrayDeque(int numElements) {
-    ArrayHelper.setLength(array, nextArrayLength(numElements));
   }
 
   @Override

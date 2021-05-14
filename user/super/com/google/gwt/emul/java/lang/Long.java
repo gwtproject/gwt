@@ -228,7 +228,9 @@ public final class Long extends Number implements Comparable<Long> {
 
   private static String toPowerOfTwoUnsignedString(long value, int shift) {
     final int radix = 1 << shift;
-    if (Integer.MIN_VALUE <= value && value <= Integer.MAX_VALUE) {
+
+    int highBits = LongUtils.getHighBits(value);
+    if (highBits == 0) {
       return Integer.toString((int) value, radix);
     }
 

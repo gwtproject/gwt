@@ -129,7 +129,7 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
 
     @Override
     public EnumSet<E> clone() {
-      E[] clonedSet = ArrayHelper.clone(set, 0, set.length);
+      E[] clonedSet = ArrayHelper.clone(set);
       return new EnumSetImpl<E>(all, clonedSet, size);
     }
 
@@ -176,7 +176,7 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
 
   public static <E extends Enum<E>> EnumSet<E> allOf(Class<E> elementType) {
     E[] all = elementType.getEnumConstants();
-    E[] set = ArrayHelper.clone(all, 0, all.length);
+    E[] set = ArrayHelper.clone(all);
     return new EnumSetImpl<E>(all, set, all.length);
   }
 

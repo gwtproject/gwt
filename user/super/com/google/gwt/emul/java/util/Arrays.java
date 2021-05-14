@@ -600,9 +600,7 @@ public class Arrays {
   }
 
   private static <T> T[] copyObjectArray(T[] original, int from, int to) {
-    T[] copy = ArrayHelper.clone(original, from, to);
-    ArrayHelper.setLength(copy, to - from);
-    return copy;
+    return ArrayHelper.clone(original, from, to);
   }
 
   private static void checkCopyOfRange(Object original, int from, int to) {

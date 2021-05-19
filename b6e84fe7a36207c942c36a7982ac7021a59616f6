@@ -63,6 +63,30 @@
       },
       "revId": "b6e84fe7a36207c942c36a7982ac7021a59616f6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e036edd2_0041cae5",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/ArrayHelper.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2021-05-19T21:44:37Z",
+      "side": 1,
+      "message": "Does it make sense to use clone to enlarge an array? It seems to me that this is only use from Arrays.copyOf which flows to Arrays.copyObjectArray which already does the setLength.\n\nI think copyObjectArray is the right place for the set length, since there is an analogous setLength in copyPrimitiveArray.\n\nThose two have different behaviour though, primitive arrays are trimmed (if they were expanded the new slots would need to be filled with the right 0 constant).\n\nBut I see that there are many calls to clone directly, ok.",
+      "parentUuid": "21effe78_f85f0f90",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 43
+      },
+      "revId": "b6e84fe7a36207c942c36a7982ac7021a59616f6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

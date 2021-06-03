@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fe30f24_047f571d",
+        "filename": "user/super/com/google/gwt/emul/java/lang/System.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2021-06-03T19:41:24Z",
+      "side": 1,
+      "message": "Is there no more precision than millis in JavaScript?",
+      "range": {
+        "startLine": 102,
+        "startChar": 44,
+        "endLine": 102,
+        "endChar": 61
+      },
+      "revId": "595bc258f227c047e18b5301cef063eee0305b3c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

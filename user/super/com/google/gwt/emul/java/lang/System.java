@@ -34,6 +34,8 @@ import jsinterop.annotations.JsMethod;
  */
 public final class System {
 
+  private static final int MILLIS_TO_NANOS = 1_000_000;
+
   /**
    * Does nothing in web mode. To get output in web mode, subclass PrintStream
    * and call {@link #setErr(PrintStream)}.
@@ -94,6 +96,10 @@ public final class System {
 
   public static long currentTimeMillis() {
     return (long) JsUtils.getTime();
+  }
+
+  public static long nanoTime() {
+    return (long) (JsUtils.performanceNow() * MILLIS_TO_NANOS);
   }
 
   /**

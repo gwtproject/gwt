@@ -23,9 +23,9 @@ import java.io.PrintStream;
 
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.HashCodes;
-import javaemul.internal.JsUtils;
 
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 
 /**
  * General-purpose low-level utility methods. GWT only supports a limited subset
@@ -93,8 +93,15 @@ public final class System {
   }
 
   public static long currentTimeMillis() {
-    return (long) JsUtils.getTime();
+    return (long) now();
   }
+
+  public static long nanoTime() {
+    return (long) (now() * 1000000);
+  }
+
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "performance.now")
+  private static native double now();
 
   /**
    * Has no effect; just here for source compatibility.

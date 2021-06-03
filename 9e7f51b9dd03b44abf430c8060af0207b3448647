@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ec5c70a_07dc59f9",
+        "filename": "user/super/com/google/gwt/emul/java/lang/System.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2021-06-03T06:55:40Z",
+      "side": 1,
+      "message": "performance.now !\u003d wall time \npls add test for System.currentTimeMillis() \u003e Date.parse(\"2021\")",
+      "revId": "9e7f51b9dd03b44abf430c8060af0207b3448647",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10cf8270_9a71b9d7",
+        "filename": "user/super/com/google/gwt/emul/java/lang/System.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2021-06-03T06:55:40Z",
+      "side": 1,
+      "message": "pls add test System.nanoTime() \u003e 0",
+      "range": {
+        "startLine": 99,
+        "startChar": 21,
+        "endLine": 99,
+        "endChar": 29
+      },
+      "revId": "9e7f51b9dd03b44abf430c8060af0207b3448647",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4ed7b6e_e8cb5371",
+        "filename": "user/super/com/google/gwt/emul/java/lang/System.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2021-06-03T06:55:40Z",
+      "side": 1,
+      "message": "private static final int MILLIS_TO_NANOS \u003d 1_000_000;",
+      "range": {
+        "startLine": 100,
+        "startChar": 27,
+        "endLine": 100,
+        "endChar": 34
+      },
+      "revId": "9e7f51b9dd03b44abf430c8060af0207b3448647",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f294c0e0_21076baa",
+        "filename": "user/super/com/google/gwt/emul/java/lang/System.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2021-06-03T06:55:40Z",
+      "side": 1,
+      "message": "pls move to JsUtils.",
+      "revId": "9e7f51b9dd03b44abf430c8060af0207b3448647",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

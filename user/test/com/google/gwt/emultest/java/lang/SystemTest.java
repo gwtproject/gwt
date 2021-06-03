@@ -18,6 +18,7 @@ package com.google.gwt.emultest.java.lang;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.testing.TestUtils;
 
+import java.sql.Date;
 import java.util.Arrays;
 
 /**
@@ -323,4 +324,13 @@ public class SystemTest extends GWTTestCase {
     // Note that default is not a String literal.
     assertEquals("default", System.getProperty("otherNonExistent", someConf));
   }
+
+  public void testNanoTime() {
+    assertTrue(System.nanoTime() > 0);
+  }
+
+  public void testCurrentTimeMillis() {
+    assertTrue(System.currentTimeMillis() > Date.parse("1-1-2021"));
+  }
 }
+

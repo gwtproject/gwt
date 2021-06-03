@@ -27,6 +27,9 @@ public final class JsUtils {
   @JsMethod(namespace = "<window>", name = "Date.now")
   public static native double getTime();
 
+  @JsMethod(namespace = "<window>", name = "performance.now")
+  public static native double now();
+
   @JsMethod(namespace = "<window>")
   public static native int parseInt(String s, int radix);
 

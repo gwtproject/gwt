@@ -15,11 +15,14 @@
  */
 package com.google.gwt.emultest.java.lang;
 
+import static com.google.gwt.junit.Platform.HtmlUnitBug;
+
+import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.testing.TestUtils;
 
-import java.sql.Date;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * Tests java.lang.System.
@@ -325,12 +328,13 @@ public class SystemTest extends GWTTestCase {
     assertEquals("default", System.getProperty("otherNonExistent", someConf));
   }
 
+  @DoNotRunWith({HtmlUnitBug})
   public void testNanoTime() {
     assertTrue(System.nanoTime() > 0);
   }
 
   public void testCurrentTimeMillis() {
-    assertTrue(System.currentTimeMillis() > Date.parse("1-1-2021"));
+    assertTrue(System.currentTimeMillis() > Date.parse("1/1/2021"));
   }
 }
 

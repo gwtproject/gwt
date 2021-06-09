@@ -17,7 +17,6 @@
 package com.google.gwt.emultest.java.nio.charset;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
-
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.UnsupportedCharsetException;
@@ -49,22 +48,22 @@ public class CharsetTest extends EmulTestBase {
     try {
       Charset.forName("");
       fail();
-    } catch (IllegalCharsetNameException expected) {
+    } catch (IllegalCharsetNameException | UnsupportedCharsetException expected) {
     }
     try {
       Charset.forName("!@#$");
       fail();
-    } catch (IllegalCharsetNameException expected) {
+    } catch (IllegalCharsetNameException | UnsupportedCharsetException expected) {
     }
     try {
       Charset.forName("_UTF_8");
       fail();
-    } catch (IllegalCharsetNameException expected) {
+    } catch (IllegalCharsetNameException | UnsupportedCharsetException expected) {
     }
     try {
       Charset.forName("UTF_8#");
       fail();
-    } catch (IllegalCharsetNameException expected) {
+    } catch (IllegalCharsetNameException | UnsupportedCharsetException expected) {
     }
   }
 

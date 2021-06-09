@@ -22,7 +22,6 @@ import java.util.Collections;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import javaemul.internal.EmulatedCharset;
-import javaemul.internal.NativeRegExp;
 
 /**
  * A minimal emulation of {@link Charset}.
@@ -60,11 +59,7 @@ public abstract class Charset implements Comparable<Charset> {
       return EmulatedCharset.UTF_8;
     }
 
-    if (new NativeRegExp("^[A-Za-z0-9][\\w-:\\.\\+]*$").test(charsetName)) {
-      throw new UnsupportedCharsetException(charsetName);
-    } else {
-      throw new IllegalCharsetNameException(charsetName);
-    }
+    throw new UnsupportedCharsetException(charsetName);
   }
 
   private final String name;

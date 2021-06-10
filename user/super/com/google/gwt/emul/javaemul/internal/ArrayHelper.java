@@ -64,6 +64,18 @@ public final class ArrayHelper {
     asNativeArray(array).push(o);
   }
 
+  /**
+   * Sets an element of an array.
+   *
+   * <p>In GWT, the naive approach of checking or setting an element which may be out of bounds is
+   * optimal. This method always returns the original value, or null for out of bounds.
+   */
+  public static <T> T setAt(T[] array, int index, T value) {
+    T originalValue = array[index];
+    array[index] = value;
+    return originalValue;
+  }
+
   public static void removeFrom(Object[] array, int index, int deleteCount) {
     asNativeArray(array).splice(index, deleteCount);
   }

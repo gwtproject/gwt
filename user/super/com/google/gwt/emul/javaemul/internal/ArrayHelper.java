@@ -123,6 +123,10 @@ public final class ArrayHelper {
     asNativeArray(array).sort(fn);
   }
 
+  public static <T> void setAt(T[] array, int index, T value) {
+    array[index] = value;
+  }
+
   private static NativeArray asNativeArray(Object array) {
     return JsUtils.uncheckedCast(array);
   }

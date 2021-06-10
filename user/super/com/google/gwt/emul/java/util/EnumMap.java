@@ -214,8 +214,10 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
   }
 
   private V set(int ordinal, V value) {
-    V was = values[ordinal];
-    values[ordinal] = value;
-    return was;
+    V was = null;
+    if (ordinal < values.length) {
+      was = values[ordinal];
+    }
+    ArrayHelper.setAt(values, ordinal, value);
   }
 }

@@ -110,7 +110,7 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
 
     @Override
     public V setValue(V value) {
-      return set(key.ordinal(), value);
+      return ArrayHelper.setAt(values, key.ordinal(), value);
     }
   }
 
@@ -175,12 +175,12 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
   @Override
   public V put(K key, V value) {
     keySet.add(key);
-    return set(key.ordinal(), value);
+    return ArrayHelper.setAt(values, key.ordinal(), value);
   }
 
   @Override
   public V remove(Object key) {
-    return keySet.remove(key) ? set(asOrdinal(key), null) : null;
+    return keySet.remove(key) ? ArrayHelpers.setAt(values, asOrdinal(key), null) : null;
   }
 
   @Override
@@ -211,11 +211,5 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
   private void init(EnumMap<K, ? extends V> m) {
     keySet = m.keySet.clone();
     values = ArrayHelper.clone(m.values);
-  }
-
-  private V set(int ordinal, V value) {
-    V was = values[ordinal];
-    values[ordinal] = value;
-    return was;
   }
 }

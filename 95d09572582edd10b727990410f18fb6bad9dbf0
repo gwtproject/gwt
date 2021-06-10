@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73d04b35_8db70d13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-06-10T21:55:42Z",
+      "side": 1,
+      "message": "I must say I don\u0027t get the rationale for this change.",
+      "revId": "95d09572582edd10b727990410f18fb6bad9dbf0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b5eca0a_f4eb9a1d",
+        "filename": "user/super/com/google/gwt/emul/java/util/EnumMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-06-10T21:55:42Z",
+      "side": 1,
+      "message": "This method is missing a \u0027return was;\u0027",
+      "revId": "95d09572582edd10b727990410f18fb6bad9dbf0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

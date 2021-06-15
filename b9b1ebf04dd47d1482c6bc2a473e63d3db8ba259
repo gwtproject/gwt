@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f7b27b2_f82acf0b",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/ArrayHelper.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2021-06-15T17:49:25Z",
+      "side": 1,
+      "message": "Let\u0027s move near push method.",
+      "revId": "b9b1ebf04dd47d1482c6bc2a473e63d3db8ba259",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

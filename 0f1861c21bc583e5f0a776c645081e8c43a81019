@@ -18,6 +18,24 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e65a9fac_f7e24786",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 10615
+      },
+      "writtenOn": "2021-06-15T17:03:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfbef985_f2436a47",
+      "revId": "0f1861c21bc583e5f0a776c645081e8c43a81019",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbfd8e2c_3e2561e7",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Ok since this is a very simple check, we can just add a comment here and that will also keep setAt more optimal if also used elsewhere.",
       "parentUuid": "60067503_e59655b4",
+      "revId": "0f1861c21bc583e5f0a776c645081e8c43a81019",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60424db6_5d681c3f",
+        "filename": "user/super/com/google/gwt/emul/java/util/EnumMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 10615
+      },
+      "writtenOn": "2021-06-15T17:03:33Z",
+      "side": 1,
+      "message": "OK -- at the end of last week I looped Goktug into the J2CL changes on an internal thread.\n\nI\u0027ve fleshed out the GWT commit message and added ArrayHelper javadoc.",
+      "parentUuid": "bd822545_e6ff7827",
       "revId": "0f1861c21bc583e5f0a776c645081e8c43a81019",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }

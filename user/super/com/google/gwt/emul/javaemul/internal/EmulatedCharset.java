@@ -131,11 +131,10 @@ public abstract class EmulatedCharset extends Charset {
     public byte[] getBytes(char[] buffer, int offset, int count) {
       int n = offset + count;
       byte[] bytes = new byte[0];
-      int out = 0;
       for (int i = offset; i < n; ) {
         int ch = Character.codePointAt(buffer, i, n);
         i += Character.charCount(ch);
-        out += encodeUtf8(bytes, out, ch);
+        encodeUtf8(bytes, ch);
       }
       return bytes;
     }
@@ -145,11 +144,10 @@ public abstract class EmulatedCharset extends Charset {
       // TODO(jat): consider using unescape(encodeURIComponent(bytes)) instead
       int n = str.length();
       byte[] bytes = new byte[0];
-      int out = 0;
       for (int i = 0; i < n;) {
         int ch = str.codePointAt(i);
         i += Character.charCount(ch);
-        out += encodeUtf8(bytes, out, ch);
+        encodeUtf8(bytes, ch);
       }
       return bytes;
     }
@@ -158,43 +156,37 @@ public abstract class EmulatedCharset extends Charset {
      * Encode a single character in UTF8.
      *
      * @param bytes byte array to store character in
-     * @param ofs offset into byte array to store first byte
      * @param codePoint character to encode
-     * @return number of bytes consumed by encoding the character
      * @throws IllegalArgumentException if codepoint >= 2^26
      */
-    private int encodeUtf8(byte[] bytes, int ofs, int codePoint) {
+    private void encodeUtf8(byte[] bytes, int codePoint) {
       if (codePoint < (1 << 7)) {
-        bytes[ofs] = (byte) (codePoint & 127);
-        return 1;
+        ArrayHelper.push(bytes, (byte) (codePoint & 127));
       } else if (codePoint < (1 << 11)) {
         // 110xxxxx 10xxxxxx
-        bytes[ofs++] = (byte) (((codePoint >> 6) & 31) | 0xC0);
-        bytes[ofs] = (byte) ((codePoint & 63) | 0x80);
-        return 2;
+        ArrayHelper.push(bytes, (byte) (((codePoint >> 6) & 31) | 0xC0));
+        ArrayHelper.push(bytes, (byte) ((codePoint & 63) | 0x80));
       } else if (codePoint < (1 << 16)) {
         // 1110xxxx 10xxxxxx 10xxxxxx
-        bytes[ofs++] = (byte) (((codePoint >> 12) & 15) | 0xE0);
-        bytes[ofs++] = (byte) (((codePoint >> 6) & 63) | 0x80);
-        bytes[ofs] = (byte) ((codePoint & 63) | 0x80);
-        return 3;
+        ArrayHelper.push(bytes, (byte) (((codePoint >> 12) & 15) | 0xE0));
+        ArrayHelper.push(bytes, (byte) (((codePoint >> 6) & 63) | 0x80));
+        ArrayHelper.push(bytes, (byte) ((codePoint & 63) | 0x80));
       } else if (codePoint < (1 << 21)) {
         // 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
-        bytes[ofs++] = (byte) (((codePoint >> 18) & 7) | 0xF0);
-        bytes[ofs++] = (byte) (((codePoint >> 12) & 63) | 0x80);
-        bytes[ofs++] = (byte) (((codePoint >> 6) & 63) | 0x80);
-        bytes[ofs] = (byte) ((codePoint & 63) | 0x80);
-        return 4;
+        ArrayHelper.push(bytes, (byte) (((codePoint >> 18) & 7) | 0xF0));
+        ArrayHelper.push(bytes, (byte) (((codePoint >> 12) & 63) | 0x80));
+        ArrayHelper.push(bytes, (byte) (((codePoint >> 6) & 63) | 0x80));
+        ArrayHelper.push(bytes, (byte) ((codePoint & 63) | 0x80));
       } else if (codePoint < (1 << 26)) {
         // 111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
-        bytes[ofs++] = (byte) (((codePoint >> 24) & 3) | 0xF8);
-        bytes[ofs++] = (byte) (((codePoint >> 18) & 63) | 0x80);
-        bytes[ofs++] = (byte) (((codePoint >> 12) & 63) | 0x80);
-        bytes[ofs++] = (byte) (((codePoint >> 6) & 63) | 0x80);
-        bytes[ofs] = (byte) ((codePoint & 63) | 0x80);
-        return 5;
+        ArrayHelper.push(bytes, (byte) (((codePoint >> 24) & 3) | 0xF8));
+        ArrayHelper.push(bytes, (byte) (((codePoint >> 18) & 63) | 0x80));
+        ArrayHelper.push(bytes, (byte) (((codePoint >> 12) & 63) | 0x80));
+        ArrayHelper.push(bytes, (byte) (((codePoint >> 6) & 63) | 0x80));
+        ArrayHelper.push(bytes, (byte) ((codePoint & 63) | 0x80));
+      } else {
+        throw new IllegalArgumentException("Character out of range: " + codePoint);
       }
-      throw new IllegalArgumentException("Character out of range: " + codePoint);
     }
   }
 

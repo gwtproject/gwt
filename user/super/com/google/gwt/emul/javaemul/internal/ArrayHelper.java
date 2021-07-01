@@ -64,6 +64,10 @@ public final class ArrayHelper {
     asNativeArray(array).push(o);
   }
 
+  public static void push(byte[] array, byte o) {
+    asNativeArray(array).push(o);
+  }
+
   /**
    * Sets an element of an array.
    *

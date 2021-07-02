@@ -15,6 +15,7 @@
  */
 package javaemul.internal;
 
+import javaemul.internal.annotations.DoNotAutobox;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
@@ -149,7 +150,7 @@ public final class ArrayHelper {
 
     NativeArray(int length) {}
 
-    native void push(Object item);
+    native void push(@DoNotAutobox Object item);
 
     native Object[] slice();
 

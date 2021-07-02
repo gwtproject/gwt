@@ -20,6 +20,7 @@ import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.testing.TestUtils;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.Locale;
 
 /**
@@ -421,6 +422,7 @@ public class StringTest extends GWTTestCase {
     for (int i = 0; i < str.length(); ++i) {
       assertEquals((byte) str.charAt(i), bytes[i]);
     }
+    assertTrue(Arrays.equals(bytes, str.getBytes()));
   }
 
   public void testGetBytesLatin1() throws UnsupportedEncodingException {

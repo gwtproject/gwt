@@ -6,6 +6,7 @@ __MODULE_FUNC__.__installRunAsyncCode = function(code) {
   var doc = getInstallLocationDoc();
   var docbody = doc.body;
   var script = doc.createElement('script');
+  script.crossOrigin = '';
   script.language='javascript';
   script.text = code;
   docbody.appendChild(script);

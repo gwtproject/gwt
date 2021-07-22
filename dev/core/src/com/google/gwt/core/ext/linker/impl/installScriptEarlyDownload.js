@@ -35,14 +35,16 @@ function installScript(filename) {
       scriptFrag.appendChild(doc.createTextNode("\");"));
       script = doc.createElement('script');
       script.language='javascript';
+      script.crossOrigin = '';
       script.appendChild(scriptFrag);
       docbody.appendChild(script);
       removeScript(docbody, script);
     } else {
       for (var i = 0; i < code.length; i++) {
         script = doc.createElement('script');
- 	script.language='javascript';
-	script.text = code[i];
+        script.language='javascript';
+        script.crossOrigin='';
+        script.text = code[i];
         docbody.appendChild(script);
         removeScript(docbody, script);
       }

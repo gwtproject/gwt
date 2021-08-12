@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd294dac_024099d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2021-08-12T21:49:31Z",
+      "side": 1,
+      "message": "Generally we don\u0027t put dummy classes to emulation. This particular problem better addressed in internal only way specific to GWT. Let\u0027s talk over the CL.",
+      "revId": "c9a1fc16a0a1e5445ddfee7ed147d7d129f36344",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

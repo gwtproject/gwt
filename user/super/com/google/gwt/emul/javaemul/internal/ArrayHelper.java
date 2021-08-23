@@ -99,6 +99,11 @@ public final class ArrayHelper {
 
   private static void copy(
       Object src, int srcOfs, Object dest, int destOfs, int len, boolean overwrite) {
+
+    if (len == 0) {
+      return;
+    }
+
     /*
      * Array.prototype.splice is not used directly to overcome the limits imposed to the number of
      * function parameters by browsers.

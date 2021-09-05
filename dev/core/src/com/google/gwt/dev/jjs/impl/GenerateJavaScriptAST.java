@@ -2338,8 +2338,8 @@ public class GenerateJavaScriptAST {
       addMethodDefinitionStatement(method, methodDefinitionStatement);
 
       if (shouldEmitDisplayNames()) {
-        JsExprStmt displayNameAssignment = outputDisplayName(functionNameRef, method);
-        addMethodDefinitionStatement(method, displayNameAssignment);
+        addMethodDefinitionStatement(method, outputDisplayName(functionNameRef, method));
+        addMethodDefinitionStatement(method, outputFunctionNameProperty(functionNameRef, method));
       }
     }
 
@@ -2357,6 +2357,21 @@ public class GenerateJavaScriptAST {
       JsStringLiteral displayMethodName =
           new JsStringLiteral(function.getSourceInfo(), displayStringName);
       return createAssignment(displayName, displayMethodName).makeStmt();
+    }
+
+    private JsExprStmt outputFunctionNameProperty(JsNameRef function, JMethod method) {
+      String displayStringName = getDisplayName(method);
+      SourceInfo sourceInfo = function.getSourceInfo();
+      JsStringLiteral displayMethodName =
+          new JsStringLiteral(sourceInfo, displayStringName);
+      JsObjectLiteral props = JsObjectLiteral.builder(sourceInfo)
+              .add(new JsStringLiteral(sourceInfo, "name"), JsObjectLiteral.builder(sourceInfo)
+                      .add("value", displayMethodName)
+                      .build())
+              .build();
+      JsExpression[] args = {function, props};
+      return constructInvocation(sourceInfo, RuntimeConstants.RUNTIME_DEFINE_PROPERTIES, args)
+              .makeStmt();
     }
 
     private boolean shouldEmitDisplayNames() {

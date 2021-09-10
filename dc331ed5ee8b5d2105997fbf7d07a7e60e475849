@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e6f6659_bcf07aa3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5680
+      },
+      "writtenOn": "2021-09-10T09:09:46Z",
+      "side": 1,
+      "message": "Validated that patch will fix the bug reproducible with https://github.com/vertispan/unhandled-promise-rejection\n\n ",
+      "revId": "dc331ed5ee8b5d2105997fbf7d07a7e60e475849",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa80720e_d457a381",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2373,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2021-09-23T20:33:10Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 106).",
+      "revId": "3a7d04910018db5934fa2f49c1562f33f24a7776",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

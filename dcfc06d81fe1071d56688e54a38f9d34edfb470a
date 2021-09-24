@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7f5218b_317733ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5680
+      },
+      "writtenOn": "2021-09-24T16:03:19Z",
+      "side": 1,
+      "message": "The use of ExternalPermutationWorkerFactory can be forced with - Dgwt.jjs.permutationWorkerFactory\u003dcom.google.gwt.dev.ExternalPermutationWorkerFactory.\n\nWe have also several GWT apps which compiles with a very large classpath. I have validated that with this fix I\u0027m now able to compile the application correctly under windows without the use of ThreadedPermutationWorkerFactory. ",
+      "revId": "dcfc06d81fe1071d56688e54a38f9d34edfb470a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

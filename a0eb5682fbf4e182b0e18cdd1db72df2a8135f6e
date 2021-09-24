@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3994872_012213c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-09-24T14:20:04Z",
+      "side": 1,
+      "message": "Consider this to supersede your patch, including fixes to more JS files?\nhttps://gwt-review.googlesource.com/c/gwt/+/23500",
+      "revId": "a0eb5682fbf4e182b0e18cdd1db72df2a8135f6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "954090ea_6c0d2f2b",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-09-24T14:20:04Z",
+      "side": 1,
+      "message": "I\u0027m not sure this is necessary, at least in my testing of my own patch, setting the crossorigin property is enough, since the makeCompilerOutputPage below already sets cors headers (though it has a TODO asking \"why do we need this\").\n\nThis is the path that serves all content from the compiled dir (js, any linked artifacts, public/ resources), so it should be complete?",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 3
+      },
+      "revId": "a0eb5682fbf4e182b0e18cdd1db72df2a8135f6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

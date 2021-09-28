@@ -24,6 +24,15 @@ public final class Long extends Number implements Comparable<Long> {
   static class BoxedValues {
     // Box values according to JLS - between -128 and 127
     static Long[] boxedValues = new Long[256];
+
+    private static Long get(long l) {
+      int rebase = (int) l + 128;
+      Long result = BoxedValues.boxedValues[rebase];
+      if (result == null) {
+        result = BoxedValues.boxedValues[rebase] = new Long(l);
+      }
+      return result;
+    }
   }
 
   public static final long MAX_VALUE = 0x7fffffffffffffffL;
@@ -206,16 +215,11 @@ public final class Long extends Number implements Comparable<Long> {
     return String.valueOf(buf, cursor, bufLen - cursor);
   }
 
-  public static Long valueOf(long i) {
-    if (i > -129 && i < 128) {
-      int rebase = (int) i + 128;
-      Long result = BoxedValues.boxedValues[rebase];
-      if (result == null) {
-        result = BoxedValues.boxedValues[rebase] = new Long(i);
-      }
-      return result;
+  public static Long valueOf(long l) {
+    if (l > -129 && l < 128) {
+      return BoxedValues.get(l);
     }
-    return new Long(i);
+    return new Long(l);
   }
 
   public static Long valueOf(String s) throws NumberFormatException {

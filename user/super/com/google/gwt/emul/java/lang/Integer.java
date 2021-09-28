@@ -34,6 +34,15 @@ public final class Integer extends Number implements Comparable<Integer> {
   private static class BoxedValues {
     // Box values according to JLS - between -128 and 127
     private static Integer[] boxedValues = new Integer[256];
+
+    private static Integer get(int i) {
+      int rebase = i + 128;
+      Integer result = boxedValues[rebase];
+      if (result == null) {
+        result = boxedValues[rebase] = new Integer(i);
+      }
+      return result;
+    }
   }
 
   /**
@@ -233,12 +242,7 @@ public final class Integer extends Number implements Comparable<Integer> {
 
   public static Integer valueOf(int i) {
     if (i > -129 && i < 128) {
-      int rebase = i + 128;
-      Integer result = BoxedValues.boxedValues[rebase];
-      if (result == null) {
-        result = BoxedValues.boxedValues[rebase] = new Integer(i);
-      }
-      return result;
+      return BoxedValues.get(i);
     }
     return new Integer(i);
   }

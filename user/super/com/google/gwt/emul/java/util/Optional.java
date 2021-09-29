@@ -57,6 +57,10 @@ public final class Optional<T> {
     return ref != null;
   }
 
+  public boolean isEmpty() {
+    return ref == null;
+  }
+
   public T get() {
     checkCriticalElement(isPresent());
     return ref;

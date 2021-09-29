@@ -59,6 +59,21 @@ public class OptionalTest extends GWTTestCase {
     assertTrue(present.isPresent());
   }
 
+  // Disabled until Java 11 is enabled in Open source
+/*  public void testIsEmpty() {
+    // empty case
+    assertTrue(empty.isEmpty());
+
+    empty = Optional.ofNullable(null);
+    assertTrue(empty.isEmpty());
+
+    // non-empty case
+    assertFalse(present.isEmpty());
+
+    present = Optional.ofNullable(REFERENCE);
+    assertFalse(present.isEmpty());
+  }*/
+
   public void testGet() {
     // empty case
     try {

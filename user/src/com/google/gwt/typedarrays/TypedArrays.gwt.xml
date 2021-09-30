@@ -22,27 +22,6 @@
   <super-source path="super" />
   <public path="public" />
 
-  <!-- IE8, IE9 do not support typed arrays -->
-  <replace-with class="com.google.gwt.typedarrays.client.NoSupportImpl">
-    <when-type-is class="com.google.gwt.typedarrays.client.NativeImpl"/>
-    <any>
-      <when-property-is name="user.agent" value="ie8"/>
-      <when-property-is name="user.agent" value="ie9"/>
-    </any>
-  </replace-with>
-
-  <!-- Older versions of WebKit, IE10 support DataView but not Uint8ClampedArray -->
-  <!-- TODO: Safari 5.1 does not support Float64Array -->
-  <replace-with class="com.google.gwt.typedarrays.client.NativeImplEmulClamped">
-    <when-type-is class="com.google.gwt.typedarrays.client.NativeImpl"/>
-    <any>
-      <when-property-is name="user.agent" value="safari"/>
-      <when-property-is name="user.agent" value="ie10"/>
-    </any>
-  </replace-with>
-
-  <!-- IE11 and Firefox support typed arrays -->
-  <!-- TODO: Chrome 27+, Safari 5.1+, Android 4.0+ have full support -->
   <replace-with class="com.google.gwt.typedarrays.client.NativeImplFull">
     <when-type-is class="com.google.gwt.typedarrays.client.NativeImpl"/>
   </replace-with>

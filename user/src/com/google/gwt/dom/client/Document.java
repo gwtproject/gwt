@@ -1391,9 +1391,7 @@ public class Document extends Node {
    * @return the document's head
    */
   public final native HeadElement getHead() /*-{
-    // IE8 does not have document.head
-    // when removing IE8 support we remove the second statement
-    return this.head || this.getElementsByTagName('head')[0];
+    return this.head;
   }-*/;
 
   /**

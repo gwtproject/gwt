@@ -26,7 +26,11 @@ import com.google.gwt.user.client.Event;
  * Base implementation of {@link com.google.gwt.user.client.impl.DOMImpl} shared
  * by those browsers that come a bit closer to supporting a common standard (ie,
  * not legacy IEs).
+ *
+ * <p>Deprecated, may be flattened into DOMImpl, as this is the only direct
+ * subclass.</p>
  */
+@Deprecated
 public abstract class DOMImplStandard extends DOMImpl {
 
   /**

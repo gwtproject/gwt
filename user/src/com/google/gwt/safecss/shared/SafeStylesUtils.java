@@ -46,42 +46,14 @@ public final class SafeStylesUtils {
 
   /**
    * Standard implementation of this class.
+   *
+   * <p>Deprecated, as this is the only implementation, this may be removed in
+   * a future release.</p>
    */
+  @Deprecated
   static class Impl {
     public SafeStyles forOpacity(double value) {
       return new SafeStylesString("opacity: " + value + ";");
-    }
-  }
-
-  /**
-   * Server implementation of this class.
-   * 
-   * <p>
-   * The server doesn't necessarily know the user agent of the client, so we
-   * combine the results of all other implementations.
-   * </p>
-   */
-  static class ImplServer extends Impl {
-
-    private ImplIE8 implIE = new ImplIE8();
-
-    @Override
-    public SafeStyles forOpacity(double value) {
-      SafeStylesBuilder sb = new SafeStylesBuilder();
-      sb.append(super.forOpacity(value));
-      sb.append(implIE.forOpacity(value));
-      return sb.toSafeStyles();
-    }
-  }
-
-  /**
-   * IE8 implementation of this class.
-   */
-  static class ImplIE8 extends Impl {
-    @Override
-    public SafeStyles forOpacity(double value) {
-      // IE8 uses an alpha filter instead of opacity.
-      return new SafeStylesString("filter: alpha(opacity=" + (value * 100) + ");");
     }
   }
 
@@ -686,7 +658,7 @@ public final class SafeStylesUtils {
       if (GWT.isClient()) {
         impl = GWT.create(Impl.class);
       } else {
-        impl = new ImplServer();
+        impl = new Impl();
       }
     }
     return impl;

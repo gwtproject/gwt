@@ -288,8 +288,7 @@ public class ScriptInjector {
   }-*/;
 
   private static native void nativeAttachToHead(JavaScriptObject doc, JavaScriptObject scriptElement) /*-{
-    // IE8 does not have document.head
-    (doc.head || doc.getElementsByTagName("head")[0]).appendChild(scriptElement);
+    doc.head.appendChild(scriptElement);
   }-*/;
 
   private static native JavaScriptObject nativeDefaultWindow() /*-{

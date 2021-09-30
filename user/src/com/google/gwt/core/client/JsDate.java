@@ -93,14 +93,7 @@ public class JsDate extends JavaScriptObject {
    * the number of milliseconds elapsed since 1 January 1970 00:00:00 UTC.
    */
   public static native double now() /*-{
-      // IE8 does not have Date.now
-      // when removing IE8 support we change this to Date.now()
-      if (Date.now) {
-          // Date.now vs Date.getTime() performance comparison:
-          // http://jsperf.com/date-now-vs-new-date/8
-          return Date.now();
-      }
-      return (new Date()).getTime();
+      return Date.now();
   }-*/;
 
   /**

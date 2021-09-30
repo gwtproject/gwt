@@ -79,17 +79,6 @@ public class Geolocation {
   }
 
   /**
-   * Detector for browsers that do not support Geolocation.
-   */
-  @SuppressWarnings("unused")
-  private static class GeolocationSupportDetectorNo extends GeolocationSupportDetector {
-    @Override
-    public boolean isSupported() {
-      return false;
-    }
-  }
-
-  /**
    * Additional options for receiving the user's location.
    */
   public static class PositionOptions {

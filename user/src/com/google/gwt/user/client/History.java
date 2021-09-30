@@ -116,7 +116,7 @@ public class History {
 
   /**
    * History implementation using hash tokens.
-   * <p>This is the default implementation for all browsers except IE8.
+   * <p>This is the default implementation for all browsers.
    */
   private static class HistoryImpl {
 
@@ -139,39 +139,6 @@ public class History {
     public void replaceToken(String historyToken) {
       Window.Location.replace("#" + historyToken);
     }
-  }
-
-  /**
-   * History implementation for IE8 using onhashchange.
-   */
-  @SuppressWarnings("unused")
-  private static class HistoryImplIE8 extends HistoryImpl {
-    @Override
-    protected native void attachListener() /*-{
-      var handler = $entry(@History::onHashChanged());
-      var oldHandler = $wnd.onhashchange;
-      $wnd.onhashchange = function() {
-        var ex;
-
-        try {
-          handler();
-        } catch(e) {
-          ex = e;
-        }
-
-        if (oldHandler != null) {
-          try {
-            oldHandler();
-          } catch(e) {
-            ex = ex || e;
-          }
-        }
-
-        if (ex != null) {
-          throw ex;
-        }
-      };
-    }-*/;
   }
 
   @SuppressWarnings("deprecation")

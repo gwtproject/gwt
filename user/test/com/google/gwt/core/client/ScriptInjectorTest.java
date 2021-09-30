@@ -27,26 +27,7 @@ public class ScriptInjectorTest extends GWTTestCase {
   private static boolean browserChecked = false;
   private static final int CHECK_DELAY = 100;
 
-  private static boolean isIE8Or9 = false;
   private static final int TEST_DELAY = 10000;
-
-  /**
-   * Check if the browser is IE8,9.
-   *
-   * @return <code>true</code> if the browser is IE8, IE9
-   *         <code>false</code> any other browser
-   */
-  static boolean isIE8Or9() {
-    if (!browserChecked) {
-      isIE8Or9 = isIE8Or9Impl();
-      browserChecked = true;
-    }
-    return isIE8Or9;
-  }
-
-  private static native boolean isIE8Or9Impl() /*-{
-    return /msie/i.test(navigator.userAgent) && $doc.documentMode >= 8 && $doc.documentMode <= 9;
-  }-*/;
 
   @Override
   public String getModuleName() {
@@ -63,10 +44,8 @@ public class ScriptInjectorTest extends GWTTestCase {
     new FromString(scriptBody).inject();
     boolean worked = nativeTest1Worked();
     JavaScriptObject scriptElement = findScriptTextInThisWindow(scriptBody);
-    if (!isIE8Or9()) {
-      cleanupThisWindow("__ti1_var__", scriptElement);
-      assertFalse("cleanup failed", nativeTest1Worked());
-    }
+    cleanupThisWindow("__ti1_var__", scriptElement);
+    assertFalse("cleanup failed", nativeTest1Worked());
     assertTrue("__ti1_var not set in this window", worked);
     assertNull("script element 1 not removed by injection", scriptElement);
     finishTest();
@@ -81,10 +60,8 @@ public class ScriptInjectorTest extends GWTTestCase {
     ScriptInjector.fromString(scriptBody).setWindow(ScriptInjector.TOP_WINDOW).inject();
     boolean worked = nativeTest2Worked();
     JavaScriptObject scriptElement = findScriptTextInTopWindow(scriptBody);
-    if (!isIE8Or9()) {
-      cleanupTopWindow("__ti2_var__", scriptElement);
-      assertTrue("__ti2_var not set in top window", worked);
-    }
+    cleanupTopWindow("__ti2_var__", scriptElement);
+    assertTrue("__ti2_var not set in top window", worked);
     assertNull("script element 2 not removed by injection", scriptElement);
   }
 
@@ -99,10 +76,8 @@ public class ScriptInjectorTest extends GWTTestCase {
     JavaScriptObject scriptElement = findScriptTextInThisWindow(scriptBody);
     // Since we are not in the top window, there is no nonce.
     assertNull(nativeGetScriptNonce(scriptElement));
-    if (!isIE8Or9()) {
-      cleanupThisWindow("__ti3_var__", scriptElement);
-      assertFalse("cleanup failed", nativeTest3Worked());
-    }
+    cleanupThisWindow("__ti3_var__", scriptElement);
+    assertFalse("cleanup failed", nativeTest3Worked());
     assertTrue(worked);
     assertNotNull("script element 3 should have been left in DOM", scriptElement);
   }
@@ -165,10 +140,6 @@ public class ScriptInjectorTest extends GWTTestCase {
    * >aeons</a>.
    */
   public void testInjectUrlFail() {
-    if (isIE8Or9()) {
-      return;
-    }
-
     delayTestFinish(TEST_DELAY);
     final String scriptUrl = "uNkNoWn_sCrIpT_404.js";
     JavaScriptObject injectedElement =
@@ -215,10 +186,8 @@ public class ScriptInjectorTest extends GWTTestCase {
                 JavaScriptObject scriptElement = findScriptUrlInThisWindow(scriptUrl);
                 // Since we are not in the top window, there is no nonce.
                 assertNull(nativeGetScriptNonce(scriptElement));
-                if (!isIE8Or9()) {
-                  cleanupThisWindow("__ti4_var__", scriptElement);
-                  assertFalse("cleanup failed", nativeTest4Worked());
-                }
+                cleanupThisWindow("__ti4_var__", scriptElement);
+                assertFalse("cleanup failed", nativeTest4Worked());
                 assertTrue("__ti4_var not set in this window", worked);
                 assertNotNull("script element 4 not found", scriptElement);
                 assertEquals(injectedElement, scriptElement);
@@ -256,10 +225,8 @@ public class ScriptInjectorTest extends GWTTestCase {
                     JavaScriptObject scriptElement = findScriptUrlInThisWindow(scriptUrl);
                     // Since we are not in the top window, there is no nonce.
                     assertNull(nativeGetScriptNonce(scriptElement));
-                    if (!isIE8Or9()) {
-                      cleanupThisWindow("__ti5_var__", scriptElement);
-                      assertFalse("cleanup failed", nativeTest5Worked());
-                    }
+                    cleanupThisWindow("__ti5_var__", scriptElement);
+                    assertFalse("cleanup failed", nativeTest5Worked());
                     assertTrue("__ti5_var not set in this window", worked);
                     assertNotNull("script element 5 not found", scriptElement);
                     finishTest();
@@ -294,10 +261,8 @@ public class ScriptInjectorTest extends GWTTestCase {
                 }
                 JavaScriptObject scriptElement = findScriptUrlInTopWindow(scriptUrl);
                 assertDefaultNonce(scriptElement);
-                if (!isIE8Or9()) {
-                  cleanupTopWindow("__ti6_var__", scriptElement);
-                  assertFalse("cleanup failed", nativeTest6Worked());
-                }
+                cleanupTopWindow("__ti6_var__", scriptElement);
+                assertFalse("cleanup failed", nativeTest6Worked());
                 assertTrue("__ti6_var not set in top window", worked);
                 assertNotNull("script element 6 not found", scriptElement);
                 finishTest();
@@ -334,10 +299,8 @@ public class ScriptInjectorTest extends GWTTestCase {
                     boolean worked = nativeTest7Worked();
                     JavaScriptObject scriptElement = findScriptUrlInTopWindow(scriptUrl);
                     assertDefaultNonce(scriptElement);
-                    if (!isIE8Or9()) {
-                      cleanupTopWindow("__ti7_var__", scriptElement);
-                      assertFalse("cleanup failed", nativeTest7Worked());
-                    }
+                    cleanupTopWindow("__ti7_var__", scriptElement);
+                    assertFalse("cleanup failed", nativeTest7Worked());
                     assertTrue("__ti7_var not set in top window", worked);
                     assertNotNull("script element 7 not found", scriptElement);
                     finishTest();
@@ -372,10 +335,8 @@ public class ScriptInjectorTest extends GWTTestCase {
                     String testVar = nativeGetTestUtf8Var();
                     JavaScriptObject scriptElement = findScriptUrlInTopWindow(scriptUrl);
                     assertDefaultNonce(scriptElement);
-                    if (!isIE8Or9()) {
-                      cleanupTopWindow("__ti_utf8_var__", scriptElement);
-                      assertEquals("cleanup failed", "", nativeGetTestUtf8Var());
-                    }
+                    cleanupTopWindow("__ti_utf8_var__", scriptElement);
+                    assertEquals("cleanup failed", "", nativeGetTestUtf8Var());
                     assertEquals("__ti_utf8_var not set in top window", "à", testVar);
                     assertNotNull("script element not found", scriptElement);
                     finishTest();
@@ -386,10 +347,6 @@ public class ScriptInjectorTest extends GWTTestCase {
   }
 
   public void testInjectUrlTopWindowNoncePropegated() {
-    if (isIE8Or9()) {
-      // IE doesn't support CSP.
-      return;
-    }
     delayTestFinish(TEST_DELAY);
     final String scriptUrl = "script_injector_test9.js";
     final String nonceScriptUrl = "script_injector_test9_nonce.js";
@@ -416,11 +373,9 @@ public class ScriptInjectorTest extends GWTTestCase {
                     boolean worked = nativeTest9Worked();
                     JavaScriptObject scriptElement = findScriptUrlInTopWindow(scriptUrl);
                     assertEquals(nonce, nativeGetScriptNonce(scriptElement));
-                    if (!isIE8Or9()) {
-                      cleanupTopWindow("__ti9_var__", scriptElement);
-                      cleanupTopWindow("__ti9_nonce_var__", noncedScript);
-                      assertFalse("cleanup failed", nativeTest9Worked());
-                    }
+                    cleanupTopWindow("__ti9_var__", scriptElement);
+                    cleanupTopWindow("__ti9_nonce_var__", noncedScript);
+                    assertFalse("cleanup failed", nativeTest9Worked());
                     assertTrue("__ti9_var not set in top window", worked);
                     assertNotNull("script element 9 not found", scriptElement);
                     finishTest();
@@ -431,10 +386,6 @@ public class ScriptInjectorTest extends GWTTestCase {
   }
 
   public void testInjectUrlThisWindowNoncePropegated() {
-    if (isIE8Or9()) {
-      // IE doesn't support CSP.
-      return;
-    }
     delayTestFinish(TEST_DELAY);
     final String scriptUrl = "script_injector_test10.js";
     final String nonceScriptUrl = "script_injector_test10_nonce.js";
@@ -460,11 +411,9 @@ public class ScriptInjectorTest extends GWTTestCase {
                     boolean worked = nativeTest10Worked();
                     JavaScriptObject scriptElement = findScriptUrlInThisWindow(scriptUrl);
                     assertEquals(nonce, nativeGetScriptNonce(scriptElement));
-                    if (!isIE8Or9()) {
-                      cleanupThisWindow("__ti10_var__", scriptElement);
-                      cleanupThisWindow("__ti10_nonce_var__", noncedScript);
-                      assertFalse("cleanup failed", nativeTest10Worked());
-                    }
+                    cleanupThisWindow("__ti10_var__", scriptElement);
+                    cleanupThisWindow("__ti10_nonce_var__", noncedScript);
+                    assertFalse("cleanup failed", nativeTest10Worked());
                     assertTrue("__ti10_var not set in top window", worked);
                     assertNotNull("script element 10 not found", scriptElement);
                     finishTest();

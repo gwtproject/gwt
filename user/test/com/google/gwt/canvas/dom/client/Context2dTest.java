@@ -215,8 +215,7 @@ public class Context2dTest extends GWTTestCase {
     assertEquals(0.5, context.getGlobalAlpha());
   }
 
-  // This test currently fails on IE9 and is disabled.
-  public void disabled_testGlobalComposite() {
+  public void testGlobalComposite() {
     if (canvas1 == null) {
       return; // don't continue if not supported
     }

@@ -56,7 +56,10 @@ public class TreeItem extends UIObject implements IsTreeItem, HasTreeItems,
 
   /**
    * Implementation class for {@link TreeItem}.
+   *
+   * <p>Deprecated, this may be removed and its implementations inlined into TreeItem.</p>
    */
+  @Deprecated
   public static class TreeItemImpl {
     public TreeItemImpl() {
       initializeClonableElements();
@@ -107,17 +110,6 @@ public class TreeItem extends UIObject implements IsTreeItem, HasTreeItems,
         DOM.appendChild(BASE_BARE_ELEM, contentElem);
         Roles.getTreeitemRole().set(contentElem);
       }
-    }
-  }
-
-  /**
-   * IE specific implementation class for {@link TreeItem}.
-   */
-  public static class TreeItemImplIE8ToIE10 extends TreeItemImpl {
-    @Override
-    void convertToFullNode(TreeItem item) {
-      super.convertToFullNode(item);
-      item.getElement().getStyle().setProperty("marginBottom", "0px");
     }
   }
 

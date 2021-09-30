@@ -25,14 +25,6 @@
   <set-property name="videoElementSupport" value="maybe" />
   <set-property name="audioElementSupport" value="maybe" />
 
-  <set-property name="videoElementSupport" value="no">
-    <when-property-is name="user.agent" value="ie8" />
-  </set-property>
-  
-  <set-property name="audioElementSupport" value="no">
-    <when-property-is name="user.agent" value="ie8" />
-  </set-property>
-
   <replace-with class="com.google.gwt.media.client.Video.VideoElementSupportDetectedMaybe">
     <when-type-is class="com.google.gwt.media.client.Video.VideoElementSupportDetector" />
     <when-property-is name="videoElementSupport" value="maybe" />

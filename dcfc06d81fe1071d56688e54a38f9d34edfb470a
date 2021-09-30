@@ -16,6 +16,23 @@
       "message": "The use of ExternalPermutationWorkerFactory can be forced with - Dgwt.jjs.permutationWorkerFactory\u003dcom.google.gwt.dev.ExternalPermutationWorkerFactory.\n\nWe have also several GWT apps which compiles with a very large classpath. I have validated that with this fix I\u0027m now able to compile the application correctly under windows without the use of ThreadedPermutationWorkerFactory. ",
       "revId": "dcfc06d81fe1071d56688e54a38f9d34edfb470a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5d424d5_7f148ab5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-09-30T22:25:16Z",
+      "side": 1,
+      "message": "Also confirmed on linux, verified that the processes did indeed start correctly, and were reading from that environment variable as opposed to getting the classpath some other way.\n\nI\u0027ll amend the title and message and merge, unless anyone else has a thought on this?",
+      "revId": "dcfc06d81fe1071d56688e54a38f9d34edfb470a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

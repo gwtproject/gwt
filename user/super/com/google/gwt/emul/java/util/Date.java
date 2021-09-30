@@ -87,7 +87,6 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
     jsdate = new NativeDate();
     jsdate.setFullYear(year + 1900, month, date);
     jsdate.setHours(hrs, min, sec, 0);
-    fixDaylightSavings(hrs);
   }
 
   public Date(long date) {
@@ -165,30 +164,25 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
   public void setDate(int date) {
     int hours = jsdate.getHours();
     jsdate.setDate(date);
-    fixDaylightSavings(hours);
   }
 
   public void setHours(int hours) {
     jsdate.setHours(hours);
-    fixDaylightSavings(hours);
   }
 
   public void setMinutes(int minutes) {
     int hours = getHours() + minutes / 60;
     jsdate.setMinutes(minutes);
-    fixDaylightSavings(hours);
   }
 
   public void setMonth(int month) {
     int hours = jsdate.getHours();
     jsdate.setMonth(month);
-    fixDaylightSavings(hours);
   }
 
   public void setSeconds(int seconds) {
     int hours = getHours() + seconds / (60 * 60);
     jsdate.setSeconds(seconds);
-    fixDaylightSavings(hours);
   }
 
   public void setTime(long time) {
@@ -198,7 +192,6 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
   public void setYear(int year) {
     int hours = jsdate.getHours();
     jsdate.setFullYear(year + 1900);
-    fixDaylightSavings(hours);
   }
 
   public String toGMTString() {
@@ -228,75 +221,6 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
   }
 
   private static final long ONE_HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
-
-  /*
-   * Some browsers have the following behavior:
-   *
-   * GAP
-   * // Assume a U.S. time zone with daylight savings
-   * // Set a non-existent time: 2:00 am Sunday March 8, 2009
-   * var date = new Date(2009, 2, 8, 2, 0, 0);
-   * var hours = date.getHours(); // returns 1
-   *
-   * The equivalent Java code will return 3.
-   *
-   * OVERLAP
-   * // Assume a U.S. time zone with daylight savings
-   * // Set to an ambiguous time: 1:30 am Sunday November 1, 2009
-   * var date = new Date(2009, 10, 1, 1, 30, 0);
-   * var nextHour = new Date(date.getTime() + 60*60*1000);
-   * var hours = nextHour.getHours(); // returns 1
-   *
-   * The equivalent Java code will return 2.
-   *
-   * To compensate, fixDaylightSavings adjusts the date to match Java semantics.
-   */
-
-  /**
-   * Detects if the requested time falls into a non-existent time range due to local time advancing
-   * into daylight savings time or is ambiguous due to going out of daylight savings. If so, adjust
-   * accordingly.
-   */
-  private void fixDaylightSavings(int requestedHours) {
-    requestedHours %= 24;
-    if (jsdate.getHours() != requestedHours) {
-      // Hours passed to the constructor don't match the hours in the created JavaScript Date; this
-      // might be due either because they are outside 0-24 range, there was overflow from
-      // minutes:secs:millis or because we are in the situation GAP and has to be fixed.
-      NativeDate copy = new NativeDate(jsdate.getTime());
-      copy.setDate(copy.getDate() + 1);
-      int timeDiff = jsdate.getTimezoneOffset() - copy.getTimezoneOffset();
-
-      // If the time zone offset is changing, advance the hours and
-      // minutes from the initially requested time by the change amount
-      if (timeDiff > 0) {
-        // The requested time falls into a non-existent time range due to
-        // local time advancing into daylight savings time. If so, push the requested
-        // time forward out of the non-existent range.
-        int timeDiffHours = timeDiff / 60;
-        int timeDiffMinutes = timeDiff % 60;
-        int day = jsdate.getDate();
-        int badHours = jsdate.getHours();
-        if (badHours + timeDiffHours >= 24) {
-          day++;
-        }
-        NativeDate newTime = new NativeDate(jsdate.getFullYear(), jsdate.getMonth(),
-            day, requestedHours + timeDiffHours, jsdate.getMinutes() + timeDiffMinutes,
-            jsdate.getSeconds(), jsdate.getMilliseconds());
-        jsdate.setTime(newTime.getTime());
-      }
-    }
-
-    // Check for situation OVERLAP by advancing the clock by 1 hour and see if getHours() returns
-    // the same. This solves issues like Safari returning '3/21/2015 23:00' when time is set to
-    // '2/22/2015'.
-    double originalTimeInMillis = jsdate.getTime();
-    jsdate.setTime(originalTimeInMillis + ONE_HOUR_IN_MILLISECONDS);
-    if (jsdate.getHours() != requestedHours) {
-      // We are not in the duplicated hour, so revert the change.
-      jsdate.setTime(originalTimeInMillis);
-    }
-  }
 
   @JsType(isNative = true, name = "Date", namespace = JsPackage.GLOBAL)
   private static class NativeDate {

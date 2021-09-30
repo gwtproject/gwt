@@ -86,11 +86,9 @@ PropertySource.prototype.__computePropValue = function(propName) {
     return val;
   } else {
     // TODO(dankurka): trigger this error in the ui
-    // IE8 only has console defined if its dev tools have been opened before
-    if ($wnd.console && $wnd.console.log) {
-      $wnd.console.log("provider for " + propName
-          + " returned unexpected value: '" + val + "'");
-    }
+    $wnd.console.log("provider for " + propName
+        + " returned unexpected value: '" + val + "'");
+
     throw "can't compute binding property value for " + propName;
   }
 };

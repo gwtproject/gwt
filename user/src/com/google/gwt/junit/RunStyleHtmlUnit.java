@@ -288,7 +288,6 @@ public class RunStyleHtmlUnit extends RunStyle {
     addBrowser(BrowserVersion.EDGE, "safari");
     addBrowser(BrowserVersion.FIREFOX_38, "gecko1_8");
     addBrowser(BrowserVersion.CHROME, "safari");
-    addBrowser(BrowserVersion.INTERNET_EXPLORER_8, "ie8");
     addBrowser(BrowserVersion.INTERNET_EXPLORER_11, "gecko1_8");
   }
 

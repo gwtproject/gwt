@@ -46,27 +46,12 @@ public class DataResourceDoNotEmbedTest extends GWTTestCase {
    */
   private static final String DATA_URL_SCHEME = "data:";
 
-  /**
-   * HACK: Older versions of IE do not support RFC 2397 data URLs. See
-   * com/google/gwt/resources/Resources.gwt.xml
-   */
-  private static native boolean isPreIe8() /*-{
-    // Stolen from UserAgentPropertyGenerator
-    var ua = navigator.userAgent.toLowerCase();
-    return ua.indexOf("msie") != -1
-        && !($doc.documentMode >= 8);
-  }-*/;
-
   @Override
   public String getModuleName() {
     return "com.google.gwt.resources.ResourcesTest";
   }
 
   public void testDoNotEmbedAnnotationMissingShouldEmbed() {
-    if (isPreIe8()) {
-      // Skip this test for browsers which do not support data URLs
-      return;
-    }
     Resources r = GWT.create(Resources.class);
     String url = r.resourceDoNotEmbedAnnotationMissing().getUrl();
     assertTrue("url '" + url + "' doesn't start with'" + DATA_URL_SCHEME + "'",

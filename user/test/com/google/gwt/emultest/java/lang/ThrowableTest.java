@@ -112,7 +112,7 @@ public class ThrowableTest extends ThrowableTestBase {
   }
 
   public void testLinkedBackingObjects() {
-    if (isJvmOrIe8()) {
+    if (TestUtils.isJvm()) {
       return;
     }
     Throwable rootCause = new Throwable("Root cause");
@@ -122,7 +122,7 @@ public class ThrowableTest extends ThrowableTestBase {
   }
 
   public void testLinkedBackingObjects_initCause() {
-    if (isJvmOrIe8()) {
+    if (TestUtils.isJvm()) {
       return;
     }
     Throwable rootCause = new Throwable("Root cause");
@@ -133,7 +133,7 @@ public class ThrowableTest extends ThrowableTestBase {
   }
 
   public void testLinkedBackingObjects_noCause() {
-    if (isJvmOrIe8()) {
+    if (TestUtils.isJvm()) {
       return;
     }
     Throwable subError = new Throwable("Sub-error");
@@ -142,7 +142,7 @@ public class ThrowableTest extends ThrowableTestBase {
   }
 
   public void testLinkedSuppressedErrors_suppressedAddedViaInit() {
-    if (isJvmOrIe8()) {
+    if (TestUtils.isJvm()) {
       return;
     }
     final Throwable suppressed = new Throwable();
@@ -157,7 +157,7 @@ public class ThrowableTest extends ThrowableTestBase {
   }
 
   public void testLinkedSuppressedErrors_tryWithResources() {
-    if (isJvmOrIe8()) {
+    if (TestUtils.isJvm()) {
       return;
     }
 
@@ -175,10 +175,6 @@ public class ThrowableTest extends ThrowableTestBase {
 
     assertEquals(
         getBackingJsObject(e.getSuppressed()[0]), getBackingJsObject(e).getSuppressed()[0]);
-  }
-
-  private static boolean isJvmOrIe8() {
-    return TestUtils.isJvm() || System.getProperty("user.agent", "safari").equals("ie8");
   }
 
   @JsType(isNative = true, name = "Error", namespace = "<window>")

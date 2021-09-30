@@ -527,7 +527,7 @@ public class JUnitShell extends DevMode {
         @Override
         public String getPurpose() {
           return "Specify the user agents to reduce the number of permutations for remote browser tests;"
-              + " e.g. ie8,safari,gecko1_8";
+              + " e.g. safari,gecko1_8";
         }
 
         @Override

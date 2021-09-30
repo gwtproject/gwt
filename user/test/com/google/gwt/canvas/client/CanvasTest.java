@@ -36,10 +36,6 @@ public class CanvasTest extends GWTTestCase {
     return (geckoVersion != -1) && (geckoVersion >= 1009001);
   }-*/;
 
-  private static native boolean isIE8() /*-{
-    return $wnd.navigator.userAgent.toLowerCase().indexOf('msie') != -1 && $doc.documentMode == 8;
-  }-*/;
-
   private static native boolean isWebkit525OrBefore() /*-{
     return @com.google.gwt.dom.client.DOMImplWebkit::isWebkit525OrBefore()();
   }-*/;
@@ -176,10 +172,6 @@ public class CanvasTest extends GWTTestCase {
     if (isFirefox35OrLater()) {
       assertTrue(Canvas.isSupported());
       assertTrue(Canvas.isSupported());
-    }
-    if (isIE8()) {
-      assertFalse(Canvas.isSupported());
-      assertFalse(Canvas.isSupported());
     }
   }
 

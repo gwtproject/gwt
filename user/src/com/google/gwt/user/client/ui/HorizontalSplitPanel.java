@@ -19,13 +19,11 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style.TextAlign;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Timer;
 
 /**
  * A panel that arranges two widgets in a single horizontal row and allows the
@@ -181,162 +179,6 @@ public final class HorizontalSplitPanel extends SplitPanel {
       // recomputed automatically by CSS. This is helpful, as we do not
       // have to worry about watching for resize events and adjusting the
       // right-side width.
-    }
-  }
-
-  /**
-   * The IE8 implementation for horizontal split panels.
-   */
-  @SuppressWarnings("unused")
-  // will be used by IE8 permutation
-  private static class ImplIE8 extends Impl {
-
-    private boolean isResizeInProgress = false;
-
-    private int splitPosition = 0;
-
-    @Override
-    public void init(HorizontalSplitPanel panel) {
-      this.panel = panel;
-
-      final Element elem = panel.getElement();
-
-      // Prevents inherited text-align settings from interfering with the
-      // panel's layout. The setting we choose must be bidi-sensitive,
-      // as left-alignment is the default with LTR directionality, and
-      // right-alignment is the default with RTL directionality.
-      if (LocaleInfo.getCurrentLocale().isRTL()) {
-        elem.getStyle().setTextAlign(TextAlign.RIGHT);
-      } else {
-        elem.getStyle().setTextAlign(TextAlign.LEFT);
-      }
-
-      elem.getStyle().setProperty("position", "relative");
-
-      /*
-       * Technically, these are snapped to the top and bottom, but IE doesn't
-       * provide a reliable way to make that happen, so a resize listener is
-       * wired up to control the height of these elements.
-       */
-      addAbsolutePositoning(panel.getElement(LEFT));
-      addAbsolutePositoning(panel.getElement(RIGHT));
-      addAbsolutePositoning(panel.getSplitElement());
-
-      expandToFitParentUsingPercentages(panel.container);
-
-      if (LocaleInfo.getCurrentLocale().isRTL()) {
-        // Snap the left pane to the left edge of the container. We
-        // only need to do this when layout is RTL; if we don't, the
-        // left pane will overlap the right pane.
-        setLeft(panel.getElement(LEFT), "0px");
-      }
-    }
-
-    @Override
-    public void onAttach() {
-      addResizeListener(panel.container);
-      onResize();
-    }
-
-    @Override
-    public void onDetach() {
-      panel.container.setAttribute("onresize", null);
-    }
-
-    @Override
-    public void onSplitResize(int px) {
-      final int resizeUpdatePeriod = 20; // ms
-      if (!isResizeInProgress) {
-        isResizeInProgress = true;
-        new Timer() {
-          @Override
-          public void run() {
-            setSplitPositionUsingPixels(splitPosition);
-            isResizeInProgress = false;
-          }
-        }.schedule(resizeUpdatePeriod);
-      }
-      splitPosition = px;
-    }
-
-    @Override
-    public void setSplitPositionUsingPixels(int px) {
-      if (LocaleInfo.getCurrentLocale().isRTL()) {
-        final Element splitElem = panel.getSplitElement();
-
-        final int rootElemWidth = getOffsetWidth(panel.container);
-        final int splitElemWidth = getOffsetWidth(splitElem);
-
-        // This represents an invalid state where layout is incomplete. This
-        // typically happens before DOM attachment, but I leave it here as a
-        // precaution because negative width/height style attributes produce
-        // errors on IE.
-        if (rootElemWidth < splitElemWidth) {
-          return;
-        }
-
-        // Compute the new right side width.
-        int newRightWidth = rootElemWidth - px - splitElemWidth;
-
-        // Constrain the dragging to the physical size of the panel.
-        if (px < 0) {
-          px = 0;
-          newRightWidth = rootElemWidth - splitElemWidth;
-        } else if (newRightWidth < 0) {
-          px = rootElemWidth - splitElemWidth;
-          newRightWidth = 0;
-        }
-
-        // Set the width of the right side.
-        setWidth(panel.getElement(RIGHT), newRightWidth + "px");
-
-        // Move the splitter to the right edge of the left element.
-        setLeft(splitElem, px + "px");
-
-        // Update the width of the left side
-        if (px == 0) {
-
-          // This takes care of a qurky RTL layout bug with IE6.
-          // During DOM construction and layout, onResize events
-          // are fired, and this method is called with px == 0.
-          // If one tries to set the width of the LEFT element to
-          // before layout completes, the RIGHT element will
-          // appear to be blanked out.
-          Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-            public void execute() {
-              setWidth(panel.getElement(LEFT), "0px");
-            }
-          });
-        } else {
-          setWidth(panel.getElement(LEFT), px + "px");
-        }
-
-      } else {
-        super.setSplitPositionUsingPixels(px);
-      }
-    }
-
-    @Override
-    public void updateRightWidth(Element rightElem, int newRightWidth) {
-      setWidth(rightElem, newRightWidth + "px");
-    }
-
-    private native void addResizeListener(Element container) /*-{
-      var self = this;
-      container.onresize = $entry(function() {
-        self.@com.google.gwt.user.client.ui.HorizontalSplitPanel$ImplIE8::onResize()();
-      });
-    }-*/;
-
-    private void onResize() {
-      final Element leftElem = panel.getElement(LEFT);
-      final Element rightElem = panel.getElement(RIGHT);
-
-      final String height = getOffsetHeight(panel.container) + "px";
-      setHeight(rightElem, height);
-      setHeight(panel.getSplitElement(), height);
-      setHeight(leftElem, height);
-      setSplitPositionUsingPixels(getOffsetWidth(leftElem));
     }
   }
 

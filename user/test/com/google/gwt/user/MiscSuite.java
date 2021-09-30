@@ -16,7 +16,6 @@
 package com.google.gwt.user;
 
 import com.google.gwt.junit.tools.GWTTestSuite;
-import com.google.gwt.layout.client.LayoutTest;
 import com.google.gwt.user.client.CommandExecutorTest;
 import com.google.gwt.user.client.CookieTest;
 import com.google.gwt.user.client.DoubleClickEventSinkTest;
@@ -49,7 +48,6 @@ public class MiscSuite {
     suite.addTestSuite(EventTest.class);
     suite.addTestSuite(GestureEventSinkTest.class);
     suite.addTestSuite(ImageBundleGeneratorTest.class);
-    suite.addTestSuite(LayoutTest.class);
     suite.addTestSuite(TimerTest.class);
     suite.addTestSuite(TouchEventSinkTest.class);
     suite.addTestSuite(WindowTest.class);

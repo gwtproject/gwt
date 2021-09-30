@@ -24,13 +24,4 @@
   <replace-with class="com.google.gwt.user.client.ui.ResizeLayoutPanel.ImplStandard">
     <when-type-is class="com.google.gwt.user.client.ui.ResizeLayoutPanel.Impl"/>
   </replace-with>
-
-  <!-- IE supports onresize. -->
-  <replace-with class="com.google.gwt.user.client.ui.ResizeLayoutPanel.ImplTrident">
-    <when-type-is class="com.google.gwt.user.client.ui.ResizeLayoutPanel.Impl"/>
-    <any>
-      <when-property-is name="user.agent" value="ie8"/>
-      <when-property-is name="user.agent" value="ie9"/>
-    </any>
-  </replace-with>
 </module>

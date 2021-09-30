@@ -28,7 +28,11 @@ import java.util.Set;
 
 /**
  * Implementation used by various cell based widgets.
+ *
+ * <p>Deprecated, may be flattened into its subclass CellBasedWidgetImplStandard
+ * in a future release.</p>
  */
+@Deprecated
 abstract class CellBasedWidgetImpl {
 
   /**

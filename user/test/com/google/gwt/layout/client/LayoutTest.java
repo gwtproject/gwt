@@ -256,10 +256,9 @@ public class LayoutTest extends GWTTestCase {
 
   /**
    * Tests that the layout reacts to font-size changes.
-   * 
-   * TODO(jgw): Enable this test when it is fixed for IE8.
    */
-  public void disabledTestFontSizeChange() {
+  @DoNotRunWith(Platform.HtmlUnitLayout)
+  public void testFontSizeChange() {
     layer0.setLeftWidth(0, PX, 1, EM);
     layer0.setTopHeight(0, PX, 1, EM);
     layout.layout();

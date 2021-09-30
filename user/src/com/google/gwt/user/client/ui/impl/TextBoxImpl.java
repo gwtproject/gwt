@@ -19,7 +19,10 @@ import com.google.gwt.dom.client.Element;
 
 /**
  * Implementation class used by {@link com.google.gwt.user.client.ui.TextBox}.
+ *
+ * <p>Deprecated, may be flattened into TextBox, as this has no subclasses.</p>
  */
+@Deprecated
 public class TextBoxImpl {
 
   public native int getCursorPos(Element elem) /*-{

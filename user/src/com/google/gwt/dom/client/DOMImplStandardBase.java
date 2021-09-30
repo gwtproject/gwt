@@ -19,7 +19,10 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * StandardBase implementation of {@link com.google.gwt.user.client.impl.DOMImpl}.
+ *
+ * <p>Deprecated, may be flattened into DOMImplWebkit, its only subclass.</p>
  */
+@Deprecated
 class DOMImplStandardBase extends DOMImplStandard {
 
   private static class ClientRect extends JavaScriptObject {

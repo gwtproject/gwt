@@ -20,7 +20,11 @@ import com.google.gwt.core.client.JavaScriptObject;
 /**
  * This class implements the methods for standard browsers that use the
  * DOMParser model of XML parsing.
+ *
+ * <p>Deprecated, may be flattened into XMLParserImpl, as this is the only
+ * direct subclass.</p>
  */
+@Deprecated
 class XMLParserImplStandard extends XMLParserImpl {
 
   protected static native JavaScriptObject createDOMParser() /*-{

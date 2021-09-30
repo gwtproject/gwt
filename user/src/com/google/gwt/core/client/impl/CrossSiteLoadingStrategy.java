@@ -79,8 +79,7 @@ public class CrossSiteLoadingStrategy implements LoadingStrategy {
   }-*/;
 
   private static native void installScriptTag(JavaScriptObject script) /*-{
-    // IE8 does not have document.head
-    (document.head || document.getElementsByTagName("head")[0]).appendChild(script);
+    document.head.appendChild(script);
   }-*/;
 
   private static native JavaScriptObject removeTagAndCallErrorHandler(
@@ -93,8 +92,7 @@ public class CrossSiteLoadingStrategy implements LoadingStrategy {
        }
        @com.google.gwt.core.client.impl.CrossSiteLoadingStrategy::clearOnSuccess(*)(fragment);
        @com.google.gwt.core.client.impl.CrossSiteLoadingStrategy::clearCallbacks(*)(tag);
-       // IE8 does not have document.head
-       (document.head || document.getElementsByTagName("head")[0]).removeChild(tag);
+       document.head.removeChild(tag);
        function callLoadTerminated() {
          loadFinishedHandler.@com.google.gwt.core.client.impl.AsyncFragmentLoader.LoadTerminatedHandler::loadTerminated(*)(exception);
        }
@@ -107,8 +105,7 @@ public class CrossSiteLoadingStrategy implements LoadingStrategy {
      return function(code) {
        @com.google.gwt.core.client.impl.CrossSiteLoadingStrategy::clearOnSuccess(*)(fragment);
        @com.google.gwt.core.client.impl.CrossSiteLoadingStrategy::clearCallbacks(*)(tag);
-       // IE8 does not have document.head
-       (document.head || document.getElementsByTagName("head")[0]).removeChild(tag);
+       document.head.removeChild(tag);
        __gwtModuleFunction.installCode(code);
      }
    }-*/;

@@ -19,7 +19,10 @@ package com.google.gwt.dom.client;
  * Base implementation of {@link com.google.gwt.user.client.impl.DOMImpl} shared
  * by those browsers that come a bit closer to supporting a common standard (ie,
  * not IE).
+ *
+ * <p>Deprecated, may be flattened into DOMImpl, as this is the only direct subclass.</p>
  */
+@Deprecated
 abstract class DOMImplStandard extends DOMImpl {
 
   @Override

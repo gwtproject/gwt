@@ -19,7 +19,10 @@ import com.google.gwt.dom.client.Element;
 
 /**
  * Implementation class used by {@link com.google.gwt.user.client.ui.FormPanel}.
+ *
+ * <p>Deprecated, may be inlined into FormPanel as it has no other implementations.</p>
  */
+@Deprecated
 public class FormPanelImpl {
 
   /**

@@ -19,7 +19,6 @@ import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 
 import java.io.Serializable;
 import javaemul.internal.NativeRegExp;
-import javaemul.internal.annotations.HasNoSideEffects;
 
 /**
  * Wraps a native <code>char</code> as an object.
@@ -105,15 +104,6 @@ public final class Character implements Comparable<Character>, Serializable {
   private static class BoxedValues {
     // Box values according to JLS - from \u0000 to \u007f
     private static Character[] boxedValues = new Character[128];
-
-    @HasNoSideEffects
-    private static Character get(char c) {
-      Character result = BoxedValues.boxedValues[c];
-      if (result == null) {
-        result = BoxedValues.boxedValues[c] = new Character(c);
-      }
-      return result;
-    }
   }
 
   public static final Class<Character> TYPE = Character.class;
@@ -436,7 +426,11 @@ public final class Character implements Comparable<Character>, Serializable {
 
   public static Character valueOf(char c) {
     if (c < 128) {
-      return BoxedValues.get(c);
+      Character result = BoxedValues.boxedValues[c];
+      if (result == null) {
+        result = BoxedValues.boxedValues[c] = new Character(c);
+      }
+      return result;
     }
     return new Character(c);
   }

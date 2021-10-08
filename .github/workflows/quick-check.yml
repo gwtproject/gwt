@@ -1,0 +1,37 @@
+# Run simple checks to make sure that the build is sane when any branch is pushed.
+name: Quick smoke test
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout GWT itself into one directory
+        uses: actions/checkout@v2
+        with:
+          path: 'gwt'
+      - name: Checkout GWT tools into a sibling directory
+        uses: actions/checkout@v2
+        with:
+          repository: 'gwtproject/tools'
+          path: 'tools'
+          clean: false
+      - name: Set up JDK 8
+        # GWT presently requires Java8 to build, but can run on newer Java versions
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+      - name: Build, test, produce docs
+        # Presently this runs no tests at all, but could
+        run: |
+          cd gwt
+          ant clean dist doc checkstyle apicheck
+      - name: Report test results
+        uses: mikepenz/action-junit-report@v2
+        if: always()
+        with:
+          report_paths: 'gwt/build/out/**/test/*/reports/TEST-*.xml'
+      - name: Report Checkstyle issues
+        uses: jwgmeligmeyling/checkstyle-github-action@v1.2
+        with:
+          path: 'gwt/build/out/**/checkstyle*.xml'

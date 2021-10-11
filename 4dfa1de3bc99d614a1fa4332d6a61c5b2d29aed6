@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75d4afd4_17ced46a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-10-11T21:01:30Z",
+      "side": 1,
+      "message": "Prepopulated with the basics from the 2.7/2.8 release, with a new entry in excludedFiles_old for `com.google.gwt.common`, and the current set of API changes present since the 2.9.0 release added at the bottom of the file.\n\nSee https://github.com/gwtproject/tools/pull/22 for the jars necessary to build this - once that has merged we can check for future changes.",
+      "revId": "4dfa1de3bc99d614a1fa4332d6a61c5b2d29aed6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

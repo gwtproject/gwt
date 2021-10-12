@@ -16,6 +16,23 @@
       "message": "Prepopulated with the basics from the 2.7/2.8 release, with a new entry in excludedFiles_old for `com.google.gwt.common`, and the current set of API changes present since the 2.9.0 release added at the bottom of the file.\n\nSee https://github.com/gwtproject/tools/pull/22 for the jars necessary to build this - once that has merged we can check for future changes.",
       "revId": "4dfa1de3bc99d614a1fa4332d6a61c5b2d29aed6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "126ca203_ecbc13c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-10-12T16:19:54Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Verified-1\n\u003e \n\u003e Oops, this change failed the build and/or style presubmit. :(  More details at http://build.gwtproject.org/job/gwt.presubmit/3677/console#footer-container\n\nThis link isn\u0027t visible outside of Google, but almost certainly it is saying that the gwtproject/tools pull request has to merge first, then we can re-run this.",
+      "revId": "4dfa1de3bc99d614a1fa4332d6a61c5b2d29aed6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

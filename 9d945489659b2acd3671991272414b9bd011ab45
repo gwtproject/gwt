@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "365fa2ec_791c7f28",
+        "filename": "common.ant.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-10-14T22:26:11Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be the reverse? (using ErrorProne with JDK8, using modern with JDK7)\n\nThings would ideally be updated for a newer ErrorProne, which deprecated that Ant compiler, but that\u0027s a change for another patch.",
+      "revId": "9d945489659b2acd3671991272414b9bd011ab45",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc9d757c_9e4fd73f",
+        "filename": "common.ant.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-10-14T22:26:11Z",
+      "side": 1,
+      "message": "Any specific reason for this update? (those versions are so old I can\u0027t remember what they bring)",
+      "revId": "9d945489659b2acd3671991272414b9bd011ab45",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

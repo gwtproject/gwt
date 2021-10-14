@@ -1,6 +1,6 @@
 # Run simple checks to make sure that the build is sane when any branch is pushed.
 name: Quick smoke test
-on: [push, pull_request]
+on: [pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest

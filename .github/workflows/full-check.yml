@@ -34,13 +34,38 @@ jobs:
       - name: Build, test, produce docs
         run: |
           cd gwt
-          ant clean test dist doc
-      - name: Report test results
-        uses: mikepenz/action-junit-report@v2
+          java -version
+          ant -version
+          export \
+            TZ=America/Los_Angeles \
+            ANT_OPTS=-Dfile.encoding=UTF8 \
+            ANT_OPTS=-Xmx2g
+          ant clean test dist doc \
+            -Dtest.web.htmlunit.disable=true \
+            -Dtest.nometa.htmlunit.disable=true \
+            -Dtest.emma.htmlunit.disable=true
+      #- name: Report test results
+      #  uses: mikepenz/action-junit-report@v2
+      #  if: always()
+      #  with:
+      #    report_paths: 'gwt/build/out/**/test/*/reports/TEST-*.xml'
+      #- name: Report Checkstyle issues
+      #  uses: jwgmeligmeyling/checkstyle-github-action@v1.2
+      #  with:
+      #    path: 'gwt/build/out/**/checkstyle*.xml'
+      - name: Upload checkstyle xml for manual review
+        uses: actions/upload-artifact@v2
         if: always()
         with:
-          report_paths: 'gwt/build/out/**/test/*/reports/TEST-*.xml'
-      - name: Report Checkstyle issues
-        uses: jwgmeligmeyling/checkstyle-github-action@v1.2
-        with:
           path: 'gwt/build/out/**/checkstyle*.xml'
+          retention-days: 5
+      - name: Upload test xml files
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          path: 'gwt/build/out/**/test/*/reports/TEST-*.xml'
+          retention-days: 5
+      - name: On success, upload the release zip
+        uses: actions/upload-artifact@v2
+        with:
+          path: 'gwt/build/dist/*.zip'

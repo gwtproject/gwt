@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18df4d25_5f6bb258",
+        "filename": "common.ant.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-10-14T22:32:49Z",
+      "side": 1,
+      "message": "I\u0027ve long since forgotten why this ended up being necessarily, so I\u0027ll repeat the work and see what I find.\n\nI did once get latest errorprone building, but it was more than a bit of a headache, each time I upgraded I found that the ant instructions were incorrect, and some dependency or another was undocumented. Probably worth revisiting, in case that has been tidied up (or, converting to something that isn\u0027t ant, but that\u0027s a separate discussion with its own problems).",
+      "parentUuid": "365fa2ec_791c7f28",
+      "revId": "9d945489659b2acd3671991272414b9bd011ab45",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc9d757c_9e4fd73f",
         "filename": "common.ant.xml",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2021-10-14T22:26:11Z",
       "side": 1,
       "message": "Any specific reason for this update? (those versions are so old I can\u0027t remember what they bring)",
+      "revId": "9d945489659b2acd3671991272414b9bd011ab45",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3ef41ae_d6db16af",
+        "filename": "common.ant.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-10-14T22:32:49Z",
+      "side": 1,
+      "message": "So 2.1.2 adds support for Java 9, at least that is why it was originally added to the gwtproject/tools repo. However java8 this also has the benefit of not trying to compile various .java files found on the classpath (instead of just sources) - in our case it is necessary to prevent the testng sources jar from tripping our of our error prone checks:\n```\n[gwt.javac] Compiling 1685 source files to /home/colin/workspace/gwt/build/out/user/bin-test\n[gwt.javac] /home/colin/workspace/tools/lib/testng/testng-5.14.1-sources.jar(/org/testng/internal/annotations/JDK15TagFactory.java):507: error: [GetClassOnAnnotation] Calling getClass() on an annotation may return a proxy class\n[gwt.javac]       Method m \u003d test.getClass().getMethod(methodName, new Class[0]);\n[gwt.javac]                               ^\n[gwt.javac]     (see http://errorprone.info/bugpattern/GetClassOnAnnotation)\n[gwt.javac]   Did you mean \u0027Method m \u003d test.annotationType().getMethod(methodName, new Class[0]);\u0027?\n```",
+      "parentUuid": "bc9d757c_9e4fd73f",
       "revId": "9d945489659b2acd3671991272414b9bd011ab45",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }

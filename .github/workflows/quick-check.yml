@@ -1,6 +1,6 @@
 # Run simple checks to make sure that the build is sane when any branch is pushed.
 name: Quick smoke test
-on: [pull_request]
+on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,7 +14,6 @@ jobs:
         with:
           repository: 'gwtproject/tools'
           path: 'tools'
-          clean: false
       - name: Set up JDK 8
         # GWT presently requires Java8 to build, but can run on newer Java versions
         uses: actions/setup-java@v2
@@ -25,13 +24,33 @@ jobs:
         # Presently this runs no tests at all, but could
         run: |
           cd gwt
+          # Set env vars to ensure we get the build we expect
+          export \
+            TZ=America/Los_Angeles \
+            ANT_OPTS=-Dfile.encoding=UTF8 \
+            ANT_OPTS=-Xmx2g
           ant clean dist doc checkstyle apicheck
-      - name: Report test results
-        uses: mikepenz/action-junit-report@v2
+#       These are disabled for now as they are slow to process and sometimes seem to hang
+#      - name: Report test results
+#        uses: mikepenz/action-junit-report@v2
+#        if: always()
+#        with:
+#          report_paths: 'gwt/build/out/**/test/**/reports/TEST-*.xml'
+#      - name: Report Checkstyle issues
+#        uses: jwgmeligmeyling/checkstyle-github-action@v1.2
+#        with:
+#          path: 'gwt/build/out/**/checkstyle*.xml'
+      - name: Upload checkstyle xml for manual review
+        uses: actions/upload-artifact@v2
         if: always()
         with:
-          report_paths: 'gwt/build/out/**/test/*/reports/TEST-*.xml'
-      - name: Report Checkstyle issues
-        uses: jwgmeligmeyling/checkstyle-github-action@v1.2
-        with:
+          name: checkstyle-reports
           path: 'gwt/build/out/**/checkstyle*.xml'
+          retention-days: 5
+      - name: Upload test xml files for manual review
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: junit-reports
+          path: 'gwt/build/out/**/test/**/reports/TEST-*.xml'
+          retention-days: 5

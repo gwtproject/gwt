@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4816a514_26e6ded8",
+        "filename": "common.ant.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-10-15T08:06:23Z",
+      "side": 1,
+      "message": "Actually, I was talking about both javac.fork and javac.compiler (they go in pair)\n\nWith JDK 7 (and long before that), we used javac.compiler\u003dmodern (i.e. no ErrorProne) and javac.fork\u003dtrue (to set some heap memory at the time that has actually since been removed, so javac.fork\u003dtrue probably was no longer necessary: https://github.com/gwtproject/gwt/commit/ed07433edeb8a5cc97adb43349a6810f7e899331, yup that\u0027s more than 11 years ago); and with JDK 8, we used javac.compiler\u003dcom.google.errorprone.ErrorProneAntCompilerAdapter which then required javac.fork\u003dfalse (https://github.com/gwtproject/gwt/commit/e2fe2c658959f9e020cda695c18e18889d1a5d47, that\u0027s where memoryMaximumSize\u003d\"1024m\" was removed).\n\nIf we want to compile using ErrorProne, then we need javac.compiler\u003dcom.google.errorprone.ErrorProneAntCompilerAdapter and javac.fork\u003dfalse.\nIf we use javac.compiler\u003dmodern then we won\u0027t use ErrorProne and we can remove the compilerclasspath (we can also use javac.fork\u003dfalse which might speed up the build a bit)",
+      "parentUuid": "b8a5d7f3_bd40e9f9",
+      "revId": "9d945489659b2acd3671991272414b9bd011ab45",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc9d757c_9e4fd73f",
         "filename": "common.ant.xml",
         "patchSetId": 1
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "So 2.1.2 adds support for Java 9, at least that is why it was originally added to the gwtproject/tools repo. However java8 this also has the benefit of not trying to compile various .java files found on the classpath (instead of just sources) - in our case it is necessary to prevent the testng sources jar from tripping our of our error prone checks:\n```\n[gwt.javac] Compiling 1685 source files to /home/colin/workspace/gwt/build/out/user/bin-test\n[gwt.javac] /home/colin/workspace/tools/lib/testng/testng-5.14.1-sources.jar(/org/testng/internal/annotations/JDK15TagFactory.java):507: error: [GetClassOnAnnotation] Calling getClass() on an annotation may return a proxy class\n[gwt.javac]       Method m \u003d test.getClass().getMethod(methodName, new Class[0]);\n[gwt.javac]                               ^\n[gwt.javac]     (see http://errorprone.info/bugpattern/GetClassOnAnnotation)\n[gwt.javac]   Did you mean \u0027Method m \u003d test.annotationType().getMethod(methodName, new Class[0]);\u0027?\n```",
       "parentUuid": "bc9d757c_9e4fd73f",
+      "revId": "9d945489659b2acd3671991272414b9bd011ab45",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e87f875_067cae15",
+        "filename": "common.ant.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-10-15T08:06:23Z",
+      "side": 1,
+      "message": "Ah, I didn\u0027t have in mind that we (you) now were building with JDK 11 too.\n\nI suppose you had that error prior to the other part of this change that unconditionally sets javac.compiler to \u0027modern\u0027? (see comment above)\n\nFwiw, if we want to update ErrorProne, things have changed quite a bit about how to use it with Ant (required since ErrorProne 2.3.2, but probably usable since 2.0.18 actually): https://errorprone.info/docs/installation#ant\n\nKeep in mind that every version of ErrorProne possibly comes with a different set of checks enabled by default, so upgrading ErrorProne might fail the build due to new/newly-enabled checks. That said, Google probably uses the latest version internally (but not necessarily with the same set of checks enabled by default) so the risk should be low (unless it\u0027s in parts of the code base they have deleted on their side)\n\nOverall, as with the other comment above, the question is: do we want to keep ErrorProne or not (I couldn\u0027t imagine a project without it, even though it rarely fails my builds, so I\u0027d vote for keeping it; but if it\u0027s too much work to keep it working with JDK 8 and JDK 11 for instance, then let\u0027s remove it)",
+      "parentUuid": "a3ef41ae_d6db16af",
       "revId": "9d945489659b2acd3671991272414b9bd011ab45",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }

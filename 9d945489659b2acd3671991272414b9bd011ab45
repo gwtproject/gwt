@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8a5d7f3_bd40e9f9",
+        "filename": "common.ant.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-10-15T02:24:00Z",
+      "side": 1,
+      "message": "Thanks for bringing this up - I see no obvious difference with either Java 8 or Java 11 with this set to `false`, and I agree with your conclusion that this more accurately reflects what the old xml was trying to do.\n\nJava 11 has a build issue in one dev/core/ test, which I\u0027ll patch separately, plus of course the Javadoc issues. I did not run all tests, but I did compile all sources and tests for gwt itself to confirm that this worked correctly.",
+      "parentUuid": "18df4d25_5f6bb258",
+      "revId": "9d945489659b2acd3671991272414b9bd011ab45",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc9d757c_9e4fd73f",
         "filename": "common.ant.xml",
         "patchSetId": 1

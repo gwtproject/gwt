@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3fddcd8_9bb2654a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-10-15T02:24:00Z",
+      "side": 1,
+      "message": "The previous build passed the usual gwt nightly configuration as I understand it, see https://github.com/niloc132/gwt/actions/runs/1343497153\n\nA new build will be done in about 2 hours with fork\u003dfalse, https://github.com/niloc132/gwt/runs/3901769445, hopefully showing the same.",
+      "revId": "fa344b65025095f8dbd9280dc500458da2afc026",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

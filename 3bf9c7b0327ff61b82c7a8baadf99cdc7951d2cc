@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "416440d4_bffc8f95",
+        "filename": "user/build.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-10-15T20:45:28Z",
+      "side": 1,
+      "message": "Yes, will add TODO and reword to be clearer about what we could be skipping.",
+      "parentUuid": "e0dcd4f8_e7b193c0",
+      "revId": "3bf9c7b0327ff61b82c7a8baadf99cdc7951d2cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "396b9449_77b97782",
         "filename": "user/build.xml",
         "patchSetId": 3
@@ -31,6 +49,30 @@
       "writtenOn": "2021-10-15T17:38:54Z",
       "side": 1,
       "message": "Note: we can remove that everywhere now that we use that compiler unconditionally.",
+      "range": {
+        "startLine": 159,
+        "startChar": 61,
+        "endLine": 159,
+        "endChar": 122
+      },
+      "revId": "3bf9c7b0327ff61b82c7a8baadf99cdc7951d2cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8cfa36e_9380d754",
+        "filename": "user/build.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-10-15T20:45:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "396b9449_77b97782",
       "range": {
         "startLine": 159,
         "startChar": 61,
@@ -54,6 +96,24 @@
       "writtenOn": "2021-10-15T17:38:54Z",
       "side": 1,
       "message": "The best way to solve this would probably be to use an explicit sourcepath (empty, or the srcdir), rather than the implicit sourcepath\u003dclasspath, which then finds source files in the classpath and possibly compiles them.\n\nSee https://blog.ltgt.net/most-build-tools-misuse-javac/ for details.\n\nThis could be done as a followup though.\n\n(I don\u0027t quite understand why we didn\u0027t have the problem previously though)",
+      "revId": "3bf9c7b0327ff61b82c7a8baadf99cdc7951d2cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97e3f106_ff58b4f2",
+        "filename": "user/build.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-10-15T20:45:28Z",
+      "side": 1,
+      "message": "I also don\u0027t understand, but I get this problem every build locally where I attempt to compile user tests, though I manually workaround it. My only guess is that there is some other details about build.gwtproject.org that causes the behavior to be different, though without access to even logs, this is only a guess.\n\n(pre-submit edit) It also looks like the [last round of tests failed](https://github.com/niloc132/gwt/runs/3908186403), at a guess it seems that testng\u0027s annotations are getting built into the test classes directory, and ingested as tests:\n```\n     [junit] Running org.testng.ISuite\n    [junit] Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.106 sec\n    [junit] Test org.testng.ISuite FAILED\n    [junit] Running org.testng.annotations.AfterSuite\n    [junit] Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.109 sec\n    [junit] Test org.testng.annotations.AfterSuite FAILED\n    [junit] Running org.testng.annotations.BeforeSuite\n    [junit] Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.105 sec\n    [junit] Test org.testng.annotations.BeforeSuite FAILED\n    [junit] Running org.testng.internal.annotations.IAfterSuite\n    [junit] Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.106 sec\n    [junit] Test org.testng.internal.annotations.IAfterSuite FAILED\n    [junit] Running org.testng.internal.annotations.IBeforeSuite\n    [junit] Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.137 sec\n    [junit] Test org.testng.internal.annotations.IBeforeSuite FAILED\n    [junit] Running org.testng.xml.XmlSuite\n    [junit] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.109 sec\n    [junit] Test org.testng.xml.XmlSuite FAILED\n    [junit] Running test.ServletMappingSuite\n    [junit] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 24.34 sec\n```\n\nThis is directly related to switching from modern to error-prone for the compiler, and local testing indicates that this is not affected by the error-prone-ant version. I\u0027ll experiment with sourcepath to see if I can resolve this before I update the review again.",
+      "parentUuid": "72104813_4516ce59",
       "revId": "3bf9c7b0327ff61b82c7a8baadf99cdc7951d2cc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }

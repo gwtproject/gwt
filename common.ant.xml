@@ -1,4 +1,4 @@
-<project name="common" xmlns:if="ant:if">
+<project name="common" xmlns:if="ant:if" xmlns:unless="ant:unless">
   <!-- it's okay for this not to exist, but it gives a place to store
        personal property settings, if any, persistently.  For example, you
        might use it to set gwt.junit.testcase.includes to a narrower subset
@@ -65,6 +65,14 @@
   <property name="javac.source" value="8"/>
   <property name="javac.target" value="8"/>
   <property name="javac.nowarn" value="true"/>
+
+  <!-- javac and errorprone instructions from https://errorprone.info/docs/installation#ant -->
+  <property name="errorprone.javac.jar" location="${gwt.tools.lib}/errorprone/javac-9+181-r4173-1.jar"/>
+  <path id="errorprone.processorpath.ref">
+    <pathelement location="${gwt.tools.lib}/errorprone/error_prone_core-2.9.0-with-dependencies.jar"/>
+    <pathelement location="${gwt.tools.lib}/errorprone/jFormatString-3.0.0.jar"/>
+    <pathelement location="${gwt.tools.lib}/errorprone/dataflow-errorprone-3.15.0.jar"/>
+  </path>
 
   <property name="junit.out" location="${project.build}/test"/>
   <property name="emma.dir" value="${gwt.tools.redist}/emma"/>
@@ -147,13 +155,45 @@
     </ant>
   </presetdef>
 
-  <presetdef name="gwt.javac">
-    <javac srcdir="src" destdir="${javac.out}" debug="${javac.debug}"
-           debuglevel="${javac.debuglevel}" source="${javac.source}" target="${javac.target}"
-           nowarn="${javac.nowarn}" encoding="${javac.encoding}"
-           includeantruntime="false" fork="true" compiler="modern">
-    </javac>
-  </presetdef>
+  <macrodef name="gwt.javac">
+    <attribute name="srcdir" default="src" />
+    <attribute name="destdir" default="${javac.out}" />
+    <attribute name="source" default="${javac.source}" />
+    <attribute name="target" default="${javac.target}" />
+    <attribute name="excludes" default="" />
+    <attribute name="processorpath" default="" />
+    <attribute name="errorprone.args" default="" />
+    <element name="javaccontents" implicit="true" optional="true" />
+
+    <sequential>
+      <path id="mergedprocessorpath.ref">
+        <path refid="errorprone.processorpath.ref"/>
+        <path refid="@{processorpath}" unless:blank="@{processorpath}" />
+      </path>
+      <mkdir dir="@{destdir}"/>
+      <javac srcdir="@{srcdir}" sourcepath="@{srcdir}" destdir="@{destdir}" debug="${javac.debug}"
+             debuglevel="${javac.debuglevel}" source="@{source}" target="@{target}"
+             nowarn="${javac.nowarn}" encoding="${javac.encoding}" includeantruntime="false"
+             fork="true" compiler="modern" excludes="@{excludes}">
+        <compilerarg value="-J-Xbootclasspath/p:${errorprone.javac.jar}" if:true="${isJava8}"/>
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-XDcompilePolicy=simple"/>
+        <compilerarg value="-processorpath"/>
+        <compilerarg pathref="mergedprocessorpath.ref"/>
+        <compilerarg value="-Xplugin:ErrorProne @{errorprone.args}" />
+        <javaccontents />
+      </javac>
+    </sequential>
+  </macrodef>
 
   <macrodef name="gwt.jar">
     <attribute name="destfile" default="${project.lib}"/>

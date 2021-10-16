@@ -116,6 +116,24 @@
       "parentUuid": "72104813_4516ce59",
       "revId": "3bf9c7b0327ff61b82c7a8baadf99cdc7951d2cc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "355761a1_7e3cbf63",
+        "filename": "user/build.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-10-16T16:56:31Z",
+      "side": 1,
+      "message": "According to https://ant.apache.org/manual/Tasks/javac.html, sourcepath defaults to the srcdir attribute already. Maybe this changes when the errorprone adapter is used? Directly setting sourcepath to src or \"\" has no effect when errorprone is the compiler.\n\nSetting verbose\u003dtrue and sourcepath\u003d\"\" with the ErrorProneAdapter confirms (huge output, I omitted uninteresting content):\n```\n[gwt.javac] [search path for source files: /home/colin/workspace/gwt/build/out/user/bin-test,/home/colin/workspace/gwt/build/out/user/bin,.../home/colin/workspace/tools/lib/testng/testng-5.14.1-sources.jar,/home/colin/workspace/tools/lib/testng/testng-5.14.1-nojunit.jar, ...]\n```\nIn contrast, changing nothing except switching back to modern:\n```\n[gwt.javac] [search path for source files: /home/colin/workspace/gwt/user/src]\n```\nMaybe we fall back to using compiler\u003dmodern for java8, until we can update to a newer errorprone in a separate patch?\n\n---\n\nI revived my patch that upgraded to EP 2.4.0, and also tried latest, 2.9.0. There are a few complications that I think warrant sticking with \"modern\":\n * First, to use this as a -Xplugin, the jars are passed to `-processorpath`. The common.ant.xml file defines a presetdef which must provide this, and then in user/build.xml, the `-compile.tests.java8` task tries to call gwt.javac preset with  a `-processor` arg... which now cannot find the class it was looking for. The solution would be to correctly pass a `-processorpath` argument, but passing a second such arg overrides the first, so the plugin is missing.\n * Second, all `-Xep:...` arg must part of the same argument as the original `-Xplugin:ErrorProne`, and later `-Xplugin:ErrorProne` compilerargs override earlier ones, resulting in a gigantic 500 character long string in the xml, and each usage of the presetdef must re-declare `-Xep:DeadException:ERROR`.\n \nBetween the two of these, my limited ant knowledge says we need to switch to a macrodef or some other more flexible ant tool to better define these.",
+      "parentUuid": "97e3f106_ff58b4f2",
+      "revId": "3bf9c7b0327ff61b82c7a8baadf99cdc7951d2cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

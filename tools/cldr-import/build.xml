@@ -44,9 +44,8 @@
   </path>
 
   <target name="compile" description="Compile java source">
-    <mkdir dir="${javac.out}" />
     <gwt.javac>
-      <classpath refid="project.class.path"/>
+      <classpath refid="project.class.path" />
     </gwt.javac>
     <copy todir="${javac.out}">
       <fileset dir="src" excludes="**/*.java"/>
@@ -54,7 +53,6 @@
   </target>
 
   <target name="compile.tests" description="Compile java source">
-    <mkdir dir="${javac.junit.out}" />
     <gwt.javac srcdir="test" destdir="${javac.junit.out}">
       <classpath>
         <pathelement location="${javac.out}"/>

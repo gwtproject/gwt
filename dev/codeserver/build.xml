@@ -6,7 +6,6 @@
   <property.ensure name="gwt.dev.jar" location="${gwt.build.lib}/gwt-dev.jar" />
 
   <target name="compile">
-    <mkdir dir="${javac.out}" />
     <gwt.javac srcdir="java">
       <classpath>
         <pathelement location="${gwt.dev.jar}" />
@@ -16,7 +15,6 @@
 
   <target name="compile.tests" depends="compile"
           description="Compile tests java source">
-    <mkdir dir="${javac.junit.out}" />
     <gwt.javac srcdir="" destdir="${javac.junit.out}">
       <src path="java" />
       <src path="javatests" />

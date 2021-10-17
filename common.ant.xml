@@ -67,9 +67,7 @@
   <condition property="javac.fork" value="true" else="false">
     <isfalse value="${isJava8}"/>
   </condition>
-  <condition property="javac.compiler" value="modern" else="com.google.errorprone.ErrorProneAntCompilerAdapter">
-    <isfalse value="${isJava8}"/>
-  </condition>
+  <property name="javac.errorprone.args" value=""/>
   <property name="junit.out" location="${project.build}/test"/>
   <property name="emma.dir" value="${gwt.tools.redist}/emma"/>
   <property name="emma.filter.exclude" value=""/>
@@ -121,6 +119,10 @@
   <path id="project.classpath.src">
     <pathelement location="${gwt.root}/${project.tail}/src"/>
   </path>
+  <path id="javac.errorprone.processorpath">
+    <!-- TODO: replace with error_prone_core and dependencies -->
+    <pathelement location="${gwt.tools.lib}/errorprone/error_prone_ant-2.0.19.jar"/>
+  </path>
 
   <!-- Pulls in tasks defined in ant-contrib, i.e. foreach -->
   <taskdef resource="net/sf/antcontrib/antlib.xml">
@@ -151,14 +153,18 @@
     </ant>
   </presetdef>
 
+  <!-- XXX: possibly replace with a macrodef to more easily use javac.errorprone.args and javac.errorprone.processorpath -->
   <presetdef name="gwt.javac">
     <javac srcdir="src" destdir="${javac.out}" debug="${javac.debug}"
            debuglevel="${javac.debuglevel}" source="${javac.source}" target="${javac.target}"
            nowarn="${javac.nowarn}" encoding="${javac.encoding}"
-           includeantruntime="false" fork="${javac.fork}" compiler="${javac.compiler}">
-      <compilerclasspath if:true="${isJava8}">
-        <pathelement location="${gwt.tools.lib}/errorprone/error_prone_ant-2.0.19.jar"/>
-      </compilerclasspath>
+           includeantruntime="false" fork="${isJava8}" compiler="modern">
+      <!-- TODO: replace with standalone error_prone_javac JAR -->
+      <compilerarg if:true="${isJava8}" value="-J-Xbootclasspath/p:${gwt.tools.lib}/errorprone/error_prone_ant-2.0.19.jar"/>
+      <compilerarg if:true="${isJava8}" value="-XDcompilePolicy=simple"/>
+      <compilerarg if:true="${isJava8}" value="-processorpath"/>
+      <compilerarg if:true="${isJava8}" pathref="javac.errorprone.processorpath"/>
+      <compilerarg if:true="${isJava8}" value="-Xplugin:ErrorProne ${javac.errorprone.args}"/>
     </javac>
   </presetdef>
 

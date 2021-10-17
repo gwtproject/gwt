@@ -1,4 +1,4 @@
-<project name="common" xmlns:if="ant:if">
+<project name="common" xmlns:if="ant:if" xmlns:unless="ant:unless">
   <!-- it's okay for this not to exist, but it gives a place to store
        personal property settings, if any, persistently.  For example, you
        might use it to set gwt.junit.testcase.includes to a narrower subset
@@ -67,9 +67,7 @@
   <condition property="javac.fork" value="true" else="false">
     <isfalse value="${isJava8}"/>
   </condition>
-  <condition property="javac.compiler" value="modern" else="com.google.errorprone.ErrorProneAntCompilerAdapter">
-    <isfalse value="${isJava8}"/>
-  </condition>
+  <property name="javac.errorprone.args" value=""/>
   <property name="junit.out" location="${project.build}/test"/>
   <property name="emma.dir" value="${gwt.tools.redist}/emma"/>
   <property name="emma.filter.exclude" value=""/>
@@ -121,6 +119,10 @@
   <path id="project.classpath.src">
     <pathelement location="${gwt.root}/${project.tail}/src"/>
   </path>
+  <path id="javac.errorprone.processorpath">
+    <!-- TODO: replace with error_prone_core and dependencies -->
+    <pathelement location="${gwt.tools.lib}/errorprone/error_prone_ant-2.0.19.jar"/>
+  </path>
 
   <!-- Pulls in tasks defined in ant-contrib, i.e. foreach -->
   <taskdef resource="net/sf/antcontrib/antlib.xml">
@@ -151,16 +153,33 @@
     </ant>
   </presetdef>
 
-  <presetdef name="gwt.javac">
-    <javac srcdir="src" destdir="${javac.out}" debug="${javac.debug}"
-           debuglevel="${javac.debuglevel}" source="${javac.source}" target="${javac.target}"
-           nowarn="${javac.nowarn}" encoding="${javac.encoding}"
-           includeantruntime="false" fork="${javac.fork}" compiler="${javac.compiler}">
-      <compilerclasspath if:true="${isJava8}">
-        <pathelement location="${gwt.tools.lib}/errorprone/error_prone_ant-2.0.19.jar"/>
-      </compilerclasspath>
-    </javac>
-  </presetdef>
+  <macrodef name="gwt.javac">
+    <attribute name="srcdir" default="src"/>
+    <attribute name="destdir" default="${javac.out}"/>
+    <attribute name="source" default="${javac.source}"/>
+    <attribute name="target" default="${javac.target}"/>
+    <attribute name="processorpath" default=""/>
+    <attribute name="errorprone.args" default=""/>
+    <element name="javaccontents" optional="true" implicit="true"/>
+    <sequential>
+      <path id="processorpath">
+        <path refid="javac.errorprone.processorpath"/>
+        <path refid="@{processorpath}" unless:blank="@{processorpath}"/>
+      </path>
+      <javac srcdir="@{srcdir}" destdir="@{destdir}" excludes="@{excludes}" debug="${javac.debug}"
+            debuglevel="${javac.debuglevel}" source="@{source}" target="@{target}"
+            nowarn="${javac.nowarn}" encoding="${javac.encoding}"
+            includeantruntime="false" fork="${isJava8}" compiler="modern">
+        <!-- TODO: replace with standalone error_prone_javac JAR -->
+        <compilerarg if:true="${isJava8}" value="-J-Xbootclasspath/p:${gwt.tools.lib}/errorprone/error_prone_ant-2.0.19.jar"/>
+        <compilerarg if:true="${isJava8}" value="-XDcompilePolicy=simple"/>
+        <compilerarg if:true="${isJava8}" value="-processorpath"/>
+        <compilerarg if:true="${isJava8}" pathref="processorpath"/>
+        <compilerarg if:true="${isJava8}" value="-Xplugin:ErrorProne @{errorprone.args}"/>
+        <javaccontents/>
+      </javac>
+    </sequential>
+  </macrodef>
 
   <macrodef name="gwt.jar">
     <attribute name="destfile" default="${project.lib}"/>

@@ -22,7 +22,8 @@
 
   <target name="compile" description="Compile all class files">
     <mkdir dir="${javac.out}" />
-    <gwt.javac srcdir="src:idl/generated/src" excludes="**/super/**">
+    <gwt.javac srcdir="src:idl/generated/src">
+      <exclude name="**/super/**"/>
       <classpath>
         <pathelement location="${gwt.dev.jar}" />
         <pathelement location="${gwt.user.jar}" />
@@ -33,7 +34,8 @@
   <target name="compile.tests" if="generated" depends="check.generated" description="Compile Tests">
     <echo message="${javac.junit.out}" />
     <mkdir dir="${javac.junit.out}" />
-    <gwt.javac srcdir="src:idl/generated/src:tests" destdir="${javac.junit.out}" excludes="**/super/**">
+    <gwt.javac srcdir="src:idl/generated/src:tests" destdir="${javac.junit.out}">
+      <exclude name="**/super/**"/>
       <classpath>
         <pathelement location="${javac.out}"/>
         <pathelement location="${gwt.dev.jar}" />

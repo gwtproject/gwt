@@ -134,6 +134,24 @@
       "parentUuid": "97e3f106_ff58b4f2",
       "revId": "3bf9c7b0327ff61b82c7a8baadf99cdc7951d2cc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2518d45c_e9d5f8e2",
+        "filename": "user/build.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-10-17T16:15:32Z",
+      "side": 1,
+      "message": "\u003e Maybe we fall back to using compiler\u003dmodern for java8, until we can update to a newer errorprone in a separate patch?\n\nThat\u0027s an option.\n\n\u003e ---\n\u003e \n\u003e I revived my patch that upgraded to EP 2.4.0, and also tried latest, 2.9.0. There are a few complications that I think warrant sticking with \"modern\":\n\u003e  * First, to use this as a -Xplugin, the jars are passed to `-processorpath`. The common.ant.xml file defines a presetdef which must provide this, and then in user/build.xml, the `-compile.tests.java8` task tries to call gwt.javac preset with  a `-processor` arg... which now cannot find the class it was looking for. The solution would be to correctly pass a `-processorpath` argument, but passing a second such arg overrides the first, so the plugin is missing.\n\n…unless you repeat the ErrorProne libs in that new processorpath.\n\n\u003e  * Second, all `-Xep:...` arg must part of the same argument as the original `-Xplugin:ErrorProne`, and later `-Xplugin:ErrorProne` compilerargs override earlier ones, resulting in a gigantic 500 character long string in the xml, and each usage of the presetdef must re-declare `-Xep:DeadException:ERROR`.\n\nYou can split arguments on multiple lines actually.\n\n\u003e Between the two of these, my limited ant knowledge says we need to switch to a macrodef or some other more flexible ant tool to better define these.\n\nI managed to make it work using \u003clocal\u003e so you can redefine the \u003cproperty\u003e locally (adding a few \u003csequential\u003e to create new scopes as needed), and this is picked up by the presetdef as it\u0027s evaluated in-place.\nhttps://gwt-review.googlesource.com/c/gwt/+/23720\n\nI haven\u0027t tested with Java 7 but it should still build OK (and we\u0027re about to remove support for it anyway so…)",
+      "parentUuid": "355761a1_7e3cbf63",
+      "revId": "3bf9c7b0327ff61b82c7a8baadf99cdc7951d2cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

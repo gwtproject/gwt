@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4fc5f56_18ed29bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-10-17T16:22:09Z",
+      "side": 1,
+      "message": "Nice - I also was working on https://github.com/niloc132/gwt/commit/f07f58c8b7d38dcda7acc9e4900f2b1b4b5b4baf, which moves to latest error-prone, and shifts the sequential into the gwt.javac by making it a macrodef instead of presetdef. Splitting attr value into multiple lines would make it much more readable, but it does seem to require a differently named child element for the standard javac children as far as I could tell.\n\nThoughts on landing the java7 removal first, and then pursuing one of these? \n\nMy primary concern is that in order to update to recent htmlunit/jetty, we must drop java7, and I\u0027m unsure how that will interact with the existing Jenkins - while the last set of shared jenkins configs say that Java 8 is being used to run all tests, I can\u0027t reproduce that so far.",
+      "revId": "112629a52138fd09e51a6d20022ef0bc5cfab842",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

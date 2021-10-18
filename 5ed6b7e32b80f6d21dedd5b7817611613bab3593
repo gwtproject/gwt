@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62454861_c5563ce2",
+        "filename": "user/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-10-18T02:52:29Z",
+      "side": 1,
+      "message": "looks like you cherry-picked my patch/changes and didn\u0027t catch the update (because I hadn\u0027t pushed it yet), this must still be a \u003csrc\u003e tag so that the srcdir\u003d attribute still gets its default value of `src`.\n\nhttps://github.com/niloc132/gwt/commit/f574b07a8fc0c149e895a8875ac249158eceb1e7\n\nHere\u0027s my entire proposed errorprone cleanup, including the update to 2.9.0 as long as we\u0027re at it https://github.com/niloc132/gwt/compare/3bf9c7b..5d6afb5bc1",
+      "revId": "5ed6b7e32b80f6d21dedd5b7817611613bab3593",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

@@ -152,6 +152,24 @@
       "parentUuid": "355761a1_7e3cbf63",
       "revId": "3bf9c7b0327ff61b82c7a8baadf99cdc7951d2cc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e39aaca_6a0886f9",
+        "filename": "user/build.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-10-21T15:55:04Z",
+      "side": 1,
+      "message": "Since either errorprone patch requires java8, I\u0027ve updated this again, hopefully getting the comments to a better point of clarity, and making the build always use fork\u003dtrue, compiler\u003dmodern (since this commit requires it, and the updated errorprone approach also requires it).\n\nI deliberately left in the (presently unusable) errorprone flags, so that they are are there to diff when we re-add errorprone next.\n\nWe can land either patch on top of it - I sent you some feedback on your patch, but in lieu of handling that, consider my alternative, with errorprone up to latest. I borrowed a bit of your approach and style choices, follow up is in https://gwt-review.googlesource.com/c/gwt/+/23740",
+      "parentUuid": "2518d45c_e9d5f8e2",
+      "revId": "3bf9c7b0327ff61b82c7a8baadf99cdc7951d2cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

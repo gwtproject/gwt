@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75bc7388_7e483bcd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-10-21T15:58:22Z",
+      "side": 1,
+      "message": "Before this can be merged, https://github.com/gwtproject/tools/23 must be merged. I\u0027m a little surprised that the fast style check passed, and am guessing that the other jenkins check will fail until these jars are available.",
+      "revId": "9455c4142f8b20b7c77ffb53c44961bb2fabe871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

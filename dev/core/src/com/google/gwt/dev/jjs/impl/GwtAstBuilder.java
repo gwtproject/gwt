@@ -4183,6 +4183,24 @@ public class GwtAstBuilder {
         }
       }
 
+      if(x.isRecord()){
+        if (type.getFields() != null) {
+          // build implicit methods
+          for (JField field : type.getFields()){
+            // pick the most specific sourceinfo we can find, for the "field" itself
+            SourceInfo sourceInfo = field.getSourceInfo();
+
+            // create a method binding that corresponds to the method we are creating, jdt won't offer us one
+            MethodBinding recordComponentAccessor = binding.getExactMethod(field.getName().toCharArray(), new TypeBinding[0], curCud.scope);
+
+            // create a simple accessor method and bind it so it can be used anywhere outside this type
+            JReturnStatement jReturnStatement = new JFieldRef(sourceInfo, new JThisRef(sourceInfo, type), field, type).makeReturnStatement();
+            JMethod syntheticMethod = createSyntheticMethod(sourceInfo, field.getName(), type, field.getType(), false, false, true, AccessModifier.PUBLIC, jReturnStatement);
+            typeMap.setMethod(recordComponentAccessor, syntheticMethod);
+          }
+        }
+      }
+
       if (x.memberTypes != null) {
         for (TypeDeclaration memberType : x.memberTypes) {
           createMembers(memberType);

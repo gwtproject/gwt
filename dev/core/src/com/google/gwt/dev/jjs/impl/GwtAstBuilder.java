@@ -4184,21 +4184,40 @@ public class GwtAstBuilder {
       }
 
       if(x.isRecord()){
-        if (type.getFields() != null) {
-          // build implicit methods
-          for (JField field : type.getFields()){
-            // pick the most specific sourceinfo we can find, for the "field" itself
-            SourceInfo sourceInfo = field.getSourceInfo();
+        // build implicit record component accessor methods, JDT doesn't declare them
+        for (JField field : type.getFields()){
+          // pick the most specific sourceinfo we can find, for the "field" itself
+          SourceInfo sourceInfo = field.getSourceInfo();
 
-            // create a method binding that corresponds to the method we are creating, jdt won't offer us one
-            MethodBinding recordComponentAccessor = binding.getExactMethod(field.getName().toCharArray(), new TypeBinding[0], curCud.scope);
+          // create a method binding that corresponds to the method we are creating, jdt won't offer us one
+          MethodBinding recordComponentAccessor = binding.getExactMethod(field.getName().toCharArray(), new TypeBinding[0], curCud.scope);
 
-            // create a simple accessor method and bind it so it can be used anywhere outside this type
-            JReturnStatement jReturnStatement = new JFieldRef(sourceInfo, new JThisRef(sourceInfo, type), field, type).makeReturnStatement();
-            JMethod syntheticMethod = createSyntheticMethod(sourceInfo, field.getName(), type, field.getType(), false, false, true, AccessModifier.PUBLIC, jReturnStatement);
-            typeMap.setMethod(recordComponentAccessor, syntheticMethod);
-          }
+          // create a simple accessor method and bind it so it can be used anywhere outside this type
+          JReturnStatement fieldReference = new JFieldRef(sourceInfo, new JThisRef(sourceInfo, type), field, type).makeReturnStatement();
+          JMethod syntheticMethod = createSyntheticMethod(sourceInfo, field.getName(), type, field.getType(), false, false, true, AccessModifier.PUBLIC, fieldReference);
+          typeMap.setMethod(recordComponentAccessor, syntheticMethod);
         }
+
+        // these don't seem to be necessary
+//        MethodBinding toStringBinding = binding.getExactMethod(TO_STRING_METHOD_NAME.toCharArray(), new TypeBinding[0], curCud.scope);
+//        createMethodFromBinding(info, toStringBinding, null);
+//        createMethodFromBinding(info, binding.getExactMethod(HASHCODE_METHOD_NAME.toCharArray(), new TypeBinding[0], curCud.scope), null);
+//        createMethodFromBinding(info, binding.getExactMethod(EQUALS_METHOD_NAME.toCharArray(), new TypeBinding[] { x.scope.getJavaLangObject() }, curCud.scope), new String[] { "other" });
+
+//      JReturnStatement objectEqualsCheck = new JMethodCall(info, null, new JMethod(info, EQUALS_METHOD_NAME))
+//      createSyntheticMethod(info, "equals", type, JPrimitiveType.BOOLEAN, false, false, true, AccessModifier.PUBLIC, objectEqualsCheck);
+
+        List<JExpression> args = new ArrayList<>();
+        JMethod getClassMethod = type.getMethods().get(GET_CLASS_METHOD_INDEX);
+        JMethod classGetSimpleName = typeMap.get(curCud.scope.getJavaLangClass().getExactMethod("getName".toCharArray(), Binding.NO_TYPES, curCud.scope));
+        args.add(new JMethodCall(info, new JMethodCall(info, new JThisRef(info, type), getClassMethod), classGetSimpleName));
+        for (JField field : type.getFields()) {
+          args.add(new JBinaryOperation(info, javaLangString, JBinaryOperator.CONCAT, new JStringLiteral(info, field.getName() + "=", javaLangString), new JFieldRef(info, new JThisRef(info, type), field, type)));
+        }
+
+        JMethodCall toStringHelper = new JMethodCall(info, null, typeMap.get(binding.superclass.getExactMethod("__toString".toCharArray(), new TypeBinding[] {curCud.scope.getJavaLangString(), curCud.scope.createArrayType(curCud.scope.getJavaLangString(), 1)}, curCud.scope)), args);
+        JMethod toString = createSyntheticMethod(info, "toString", type, javaLangString, false, false, true, AccessModifier.PUBLIC, toStringHelper.makeReturnStatement());
+        typeMap.setMethod(binding.getExactMethod(TO_STRING_METHOD_NAME.toCharArray(), Binding.NO_TYPES, curCud.scope), toString);
       }
 
       if (x.memberTypes != null) {

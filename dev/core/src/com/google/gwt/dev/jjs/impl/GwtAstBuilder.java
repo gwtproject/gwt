@@ -240,7 +240,9 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Constructs a GWT Java AST from a single isolated compilation unit. The AST is
@@ -2671,12 +2673,111 @@ public class GwtAstBuilder {
         processEnumType((JEnumType) type);
       }
 
+      if (x.isRecord()) {
+        writeRecordMethods(type);
+      }
+
       if (type instanceof JClassType && type.isJsNative()) {
         maybeImplementJavaLangObjectMethodsOnNativeClass(type);
       }
       addBridgeMethods(x.binding);
 
       curClass = classStack.pop();
+    }
+
+    private void writeRecordMethods(JDeclaredType type) {
+      // This is a record type, and any methods that were declared but not referenced now need
+      // to be defined. These include the field-named method accessors, equals/hashCode and
+      // toString. If not defined, we'll synthesize them based on the record components.
+      SourceInfo info = type.getSourceInfo();
+      for (JMethod method : type.getMethods()) {
+        if (method.getBody() != null) {
+          // if there is a body, that means the record has its own declaration of this method, and we should not re-declare it
+          continue;
+        }
+
+        if (method.getName().equals(TO_STRING_METHOD_NAME) && method.getParams().isEmpty()) {
+          List<JExpression> args = new ArrayList<>();
+
+          // note that we don't append this, but will start the reduce with it
+          JStringLiteral start = new JStringLiteral(info, type.getName() + " { ", javaLangString);
+          // alternative impl to consider, so that type metadata obf works
+          //JMethod getClassMethod = type.getMethods().get(GET_CLASS_METHOD_INDEX);
+          //JMethod classGetSimpleName = typeMap.get(curCud.scope.getJavaLangClass().getExactMethod("getSimpleName".toCharArray(), Binding.NO_TYPES, curCud.scope));
+          //JMethodCall start = new JMethodCall(info, new JMethodCall(info, new JThisRef(info, type), getClassMethod), classGetSimpleName);
+
+          args.add(new JStringLiteral(info, " { ", javaLangString));
+          List<JField> fields = type.getFields();
+          for (int i = 0; i < fields.size(); i++) {
+            if (i != 0) {
+              args.add(new JStringLiteral(info, ", ", javaLangString));
+            }
+            JField field = fields.get(i);
+            args.add(new JStringLiteral(info, field.getName() + "=", javaLangString));
+            args.add(new JFieldRef(info, new JThisRef(info, type), field, type));
+          }
+          args.add(new JStringLiteral(info, "}", javaLangString));
+          JExpression entireExpression = args.stream().reduce(start, (left, right) -> new JBinaryOperation(info, javaLangString, JBinaryOperator.CONCAT, left, right));
+
+          JMethodBody body = new JMethodBody(info);
+          body.getBlock().addStmt(entireExpression.makeReturnStatement());
+          method.setBody(body);
+        } else if (method.getName().equals(EQUALS_METHOD_NAME) && method.getParams().size() == 1 && method.getParams().get(0).getType().equals(javaLangObject)) {
+          JMethodBody body = new JMethodBody(info);
+          JParameter otherParam = method.getParams().get(0);
+
+          // Equals is built from first == check between this and other, as a fast path for the same object and
+          // also to ensure that other isn't null. Then MyRecord.class == other.getClass(), and now we know
+          // they're the same type and can cast safely to access fields for the rest.
+          JBinaryOperation eq = new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.EQ, new JThisRef(info, type), otherParam.createRef(info));
+          body.getBlock().addStmt(new JIfStatement(info, eq, JBooleanLiteral.FALSE.makeReturnStatement(), null));
+
+          // This is wrong and not optimized automatically, but it is resolvable without waiting for a later visitor
+          //TODO replace with Object.getClass instead of Cast.getClass()
+          JBinaryOperation sameTypeCheck = new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.EQ, new JClassLiteral(info, type), new JMethodCall(info, null, CAST_GET_CLASS_METHOD, otherParam.createRef(info)));
+          body.getBlock().addStmt(new JIfStatement(info, sameTypeCheck, JBooleanLiteral.FALSE.makeReturnStatement(), null));
+
+          JLocal typedOther = JProgram.createLocal(info, "other", type, true, body);
+          body.getBlock().addStmt(new JBinaryOperation(info, type, JBinaryOperator.ASG, typedOther.createRef(info), new JCastOperation(info, type, otherParam.createRef(info))).makeStatement());
+
+          List<JExpression> andedFieldChecks = type.getFields().stream()
+                  .filter(field -> !field.isStatic())
+                  .map(field -> new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.EQ, new JFieldRef(info, new JThisRef(info, type), field, type), new JFieldRef(info, typedOther.createRef(info), field, type)))
+                  .collect(Collectors.toList());
+
+
+          JExpression and = andedFieldChecks.stream().reduce(JBooleanLiteral.TRUE, (left, right) -> new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.AND, left, right));
+          body.getBlock().addStmt(and.makeReturnStatement());
+          method.setBody(body);
+        } else if (method.getName().equals(HASHCODE_METHOD_NAME) && method.getParams().isEmpty()) {
+          List<JExpression> fields = type.getFields().stream().map(field -> new JFieldRef(info, new JThisRef(info, type), field, type)).collect(Collectors.toList());
+
+          JMethodCall invoke = new JMethodCall(info, null, OBJECTS_HASH_METHOD, fields);
+
+          JMethodBody body = new JMethodBody(info);
+          body.getBlock().addStmt(invoke.makeReturnStatement());
+
+          method.setBody(body);
+        } else if (method.getParams().isEmpty()) {
+          // check if it has the same name+type as a field
+          Optional<JField> matchingField = type.getFields().stream()
+                  .filter(f -> f.getName().equals(method.getName()))
+                  .filter(f -> f.getType().equals(method.getType()))
+                  .findFirst();
+          if (matchingField.isPresent()) {
+            JField field = matchingField.get();
+            // we acn pick a more specific source for this than the others, use the "field" itself
+            SourceInfo sourceInfo = field.getSourceInfo();
+
+            // create a simple accessor method and bind it so it can be used anywhere outside this type
+            JFieldRef fieldReference = new JFieldRef(sourceInfo, new JThisRef(sourceInfo, type), field, type);
+            JMethodBody body = new JMethodBody(info);
+            body.getBlock().addStmt(fieldReference.makeReturnStatement());
+            method.setBody(body);
+          }
+        }
+      }
+
     }
 
     protected JBlock pop(Block x) {
@@ -4000,6 +4101,10 @@ public class GwtAstBuilder {
       JMethod.getExternalizedMethod("com.google.gwt.lang.Cast",
       "getClass(Ljava/lang/Object;)Ljava/lang/Class;", true);
 
+  private static JMethod OBJECTS_HASH_METHOD =
+          JMethod.getExternalizedMethod("java.util.Objects",
+          "hash([Ljava/lang/Object;)I", true);
+
   private List<JDeclaredType> processImpl() {
     CompilationUnitDeclaration cud = curCud.cud;
     if (cud.types == null) {
@@ -4128,7 +4233,7 @@ public class GwtAstBuilder {
     JDeclaredType type = (JDeclaredType) typeMap.get(binding);
     SourceInfo info = type.getSourceInfo();
     try {
-      /**
+      /*
        * We emulate static initializers and instance initializers as methods. As
        * in other cases, this gives us: simpler AST, easier to optimize, more
        * like output JavaScript. Clinit is always in slot 0, init (if it exists)
@@ -4186,38 +4291,20 @@ public class GwtAstBuilder {
       if(x.isRecord()){
         // build implicit record component accessor methods, JDT doesn't declare them
         for (JField field : type.getFields()){
-          // pick the most specific sourceinfo we can find, for the "field" itself
-          SourceInfo sourceInfo = field.getSourceInfo();
-
-          // create a method binding that corresponds to the method we are creating, jdt won't offer us one
+          // create a method binding that corresponds to the method we are creating, jdt won't offer us one unless
+          // it was defined in source
           MethodBinding recordComponentAccessor = binding.getExactMethod(field.getName().toCharArray(), new TypeBinding[0], curCud.scope);
-
-          // create a simple accessor method and bind it so it can be used anywhere outside this type
-          JReturnStatement fieldReference = new JFieldRef(sourceInfo, new JThisRef(sourceInfo, type), field, type).makeReturnStatement();
-          JMethod syntheticMethod = createSyntheticMethod(sourceInfo, field.getName(), type, field.getType(), false, false, true, AccessModifier.PUBLIC, fieldReference);
-          typeMap.setMethod(recordComponentAccessor, syntheticMethod);
+          typeMap.get(recordComponentAccessor);
         }
 
-        // these don't seem to be necessary
-//        MethodBinding toStringBinding = binding.getExactMethod(TO_STRING_METHOD_NAME.toCharArray(), new TypeBinding[0], curCud.scope);
-//        createMethodFromBinding(info, toStringBinding, null);
-//        createMethodFromBinding(info, binding.getExactMethod(HASHCODE_METHOD_NAME.toCharArray(), new TypeBinding[0], curCud.scope), null);
-//        createMethodFromBinding(info, binding.getExactMethod(EQUALS_METHOD_NAME.toCharArray(), new TypeBinding[] { x.scope.getJavaLangObject() }, curCud.scope), new String[] { "other" });
-
-//      JReturnStatement objectEqualsCheck = new JMethodCall(info, null, new JMethod(info, EQUALS_METHOD_NAME))
-//      createSyntheticMethod(info, "equals", type, JPrimitiveType.BOOLEAN, false, false, true, AccessModifier.PUBLIC, objectEqualsCheck);
-
-        List<JExpression> args = new ArrayList<>();
-        JMethod getClassMethod = type.getMethods().get(GET_CLASS_METHOD_INDEX);
-        JMethod classGetSimpleName = typeMap.get(curCud.scope.getJavaLangClass().getExactMethod("getName".toCharArray(), Binding.NO_TYPES, curCud.scope));
-        args.add(new JMethodCall(info, new JMethodCall(info, new JThisRef(info, type), getClassMethod), classGetSimpleName));
-        for (JField field : type.getFields()) {
-          args.add(new JBinaryOperation(info, javaLangString, JBinaryOperator.CONCAT, new JStringLiteral(info, field.getName() + "=", javaLangString), new JFieldRef(info, new JThisRef(info, type), field, type)));
-        }
-
-        JMethodCall toStringHelper = new JMethodCall(info, null, typeMap.get(binding.superclass.getExactMethod("__toString".toCharArray(), new TypeBinding[] {curCud.scope.getJavaLangString(), curCud.scope.createArrayType(curCud.scope.getJavaLangString(), 1)}, curCud.scope)), args);
-        JMethod toString = createSyntheticMethod(info, "toString", type, javaLangString, false, false, true, AccessModifier.PUBLIC, toStringHelper.makeReturnStatement());
-        typeMap.setMethod(binding.getExactMethod(TO_STRING_METHOD_NAME.toCharArray(), Binding.NO_TYPES, curCud.scope), toString);
+        // at this time, we need to be sure a binding exists, either because the record declared its own, or we make one
+        // specifically for it
+        MethodBinding toStringBinding = binding.getExactMethod(TO_STRING_METHOD_NAME.toCharArray(), Binding.NO_TYPES, curCud.scope);
+        typeMap.get(toStringBinding);
+        MethodBinding equalsBinding = binding.getExactMethod(EQUALS_METHOD_NAME.toCharArray(), new TypeBinding[] { x.scope.getJavaLangObject() }, curCud.scope);
+        typeMap.get(equalsBinding);
+        MethodBinding hashcodeBinding = binding.getExactMethod(HASHCODE_METHOD_NAME.toCharArray(), Binding.NO_TYPES, curCud.scope);
+        typeMap.get(hashcodeBinding);
       }
 
       if (x.memberTypes != null) {

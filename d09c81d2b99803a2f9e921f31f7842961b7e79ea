@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8064ffd9_ef71ae7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-10-31T02:48:51Z",
+      "side": 1,
+      "message": "Added one more change which lets at least gwt.javac\u0027s errorprone plugin work on java 11 (without warnings) and 17 (without errors), though the javadoc tasks are still problematic.",
+      "revId": "d09c81d2b99803a2f9e921f31f7842961b7e79ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

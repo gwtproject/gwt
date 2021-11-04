@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80853bd0_2559abb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8145
+      },
+      "writtenOn": "2021-11-04T19:02:14Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Verified-1\n\u003e \n\u003e Oops, this change failed the build and/or style presubmit. :(  More details at http://build.gwtproject.org/job/gwt.presubmit/3687/console#footer-container\n\n",
+      "revId": "ca1d81b73ad305f85bf3a58feed01438a5daa0c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

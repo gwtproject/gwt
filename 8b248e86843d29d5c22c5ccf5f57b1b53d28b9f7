@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "dbafce47_40de592e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-11-04T21:02:45Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1:\n\u003e \n\u003e Change imported as http://cl/407663197\n\nI\u0027m not sure exactly what this implies, but we can\u0027t merge this out here without the apichecker fixes (which in turn requires the gwtproject/tools merge to provide the reference jar for gwt 2.9).",
+      "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c889040e_b75b4f23",
         "filename": "user/src/com/google/gwt/core/client/ScriptInjector.java",
         "patchSetId": 1

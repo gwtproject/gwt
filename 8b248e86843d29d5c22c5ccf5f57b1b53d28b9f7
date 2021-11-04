@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c889040e_b75b4f23",
+        "filename": "user/src/com/google/gwt/core/client/ScriptInjector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2021-11-04T15:41:13Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 106).",
+      "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f60bbe7_ae7d3cc5",
+        "filename": "user/src/com/google/gwt/core/client/impl/CrossSiteLoadingStrategy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2021-11-04T15:41:13Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 134).",
+      "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "310e0a6a_093c2d97",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2021-11-04T15:41:13Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 105).",
+      "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

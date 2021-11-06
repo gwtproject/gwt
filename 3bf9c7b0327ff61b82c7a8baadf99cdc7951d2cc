@@ -36,6 +36,24 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82098178_e57e294d",
+        "filename": "user/build.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-06T17:05:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "416440d4_bffc8f95",
+      "revId": "3bf9c7b0327ff61b82c7a8baadf99cdc7951d2cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "396b9449_77b97782",
@@ -168,6 +186,24 @@
       "side": 1,
       "message": "Since either errorprone patch requires java8, I\u0027ve updated this again, hopefully getting the comments to a better point of clarity, and making the build always use fork\u003dtrue, compiler\u003dmodern (since this commit requires it, and the updated errorprone approach also requires it).\n\nI deliberately left in the (presently unusable) errorprone flags, so that they are are there to diff when we re-add errorprone next.\n\nWe can land either patch on top of it - I sent you some feedback on your patch, but in lieu of handling that, consider my alternative, with errorprone up to latest. I borrowed a bit of your approach and style choices, follow up is in https://gwt-review.googlesource.com/c/gwt/+/23740",
       "parentUuid": "2518d45c_e9d5f8e2",
+      "revId": "3bf9c7b0327ff61b82c7a8baadf99cdc7951d2cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7fe2eca_dbbb81fc",
+        "filename": "user/build.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-06T17:05:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1e39aaca_6a0886f9",
       "revId": "3bf9c7b0327ff61b82c7a8baadf99cdc7951d2cc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }

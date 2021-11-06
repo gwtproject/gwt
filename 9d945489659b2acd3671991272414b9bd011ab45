@@ -90,6 +90,24 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17337739_7c336875",
+        "filename": "common.ant.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-06T17:05:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f24d6cb6_109f9342",
+      "revId": "9d945489659b2acd3671991272414b9bd011ab45",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc9d757c_9e4fd73f",
@@ -157,6 +175,24 @@
       "side": 1,
       "message": "No, we can\u0027t build with anything past Java 8 \"for real\", I only ran a quick local test, where everything related to Javadoc was disabled. Our current doclets use the Java8 APIs that were removed in Java9, and there is no simple upgrade path, so this remains an impediment (and is noted on https://github.com/gwtproject/gwt/issues/9683).\n\nI have local changes stashed away somewhere that brought us up to 2.3.1 (still in the ant-specific jar), and then 2.4.0, but as mentioned above these hit some headaches so I\u0027m not pushing them yet. With better visibility into CI this will be easier to move forward.\n\nAssuming correcting my mistake in modern vs errorprone causes no issues in java8 (and hopefully 11), lets definitely stick with errorprone, and worry about upgrading later?",
       "parentUuid": "9e87f875_067cae15",
+      "revId": "9d945489659b2acd3671991272414b9bd011ab45",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64a70d81_aa4ca517",
+        "filename": "common.ant.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-06T17:05:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "917fa4f3_e5ff6ec9",
       "revId": "9d945489659b2acd3671991272414b9bd011ab45",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }

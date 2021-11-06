@@ -50,6 +50,24 @@
       "message": "Should javaemul.internal be excluded too? Do we care about API breaking changes there?",
       "revId": "4dfa1de3bc99d614a1fa4332d6a61c5b2d29aed6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcd59d67_785bb82f",
+        "filename": "tools/api-checker/config/gwt29_210userapi.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-11-06T18:37:33Z",
+      "side": 1,
+      "message": "Good call, I agree that this seems reasonable, in the same way that com.google.gwt.lang is also excluded.",
+      "parentUuid": "d56fbe53_5fdbad0e",
+      "revId": "4dfa1de3bc99d614a1fa4332d6a61c5b2d29aed6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

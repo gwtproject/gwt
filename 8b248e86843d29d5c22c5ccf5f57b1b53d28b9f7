@@ -24,6 +24,30 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfdc7ce0_154a7781",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-11-06T19:15:22Z",
+      "side": 1,
+      "message": "On the one hand, it does seem reasonable to keep the classes around if used by downstream projects. On the other hand, I offer two arguments:\n\n* IE6/7 were \"more alive\" when we cut those browsers off in ~2014 than IE8/9/10 are today, as far as I can tell - XP lived for a very long time, and as I recall it was still possible to run IE7 in Vista (possibly it was the default version for some builds?)\n* If we leave the classes in place to make downstream libraries easier to handle, then the additional selection properties for ie8, ie9, ie10 must remain too, though we could still leave them out of the defaults. Otherwise, downstream .gwt.xml files that offer rebind rules that handle user.agent\u003die8 etc will need to also be updated.\n\nI\u0027m amenable to either path, though at the very least I believe that the rebind rules should be removed and the non-public (using your definition) types/members should be removed. If the goal is _only_ to allow downstream projects to remain compatible, we could take the further step of removing any implementation.\n\nI\u0027ll also note that the last patch, we did make some breaking changes even to the classes that remained, such as renaming FormPanelImplIE6 to FormPanelIE8, deleting PopupImplIe6. \n\nOne final option for consideration: redefine \"public\" above, instead of \"visible and extendable in downstream code\" to mean \"listed as part of the public api\", i.e. only types and members that the apichecker noticed and disapproved of.\n\nSo, three proposed paths here (ordered very roughly by descending preference, but I think all are reasonable enough to consider):\n* Leave the patch as-is, downstream projects that still \"support\" ie8-10 may make some small changes\n* Restore the extends-property declarations (though add a set-property to avoid ie8-10 being enabled by default), restore any \"public\" type that a downstream project might have extended, mark all such types as Deprecated\n* Optional extra step for the last option , remove implementation of any leftover dead/deprecated types. This isn\u0027t too serious of an option, but we are quite confident at this point that these browsers do not matter, and this move would seek to maintain only the ability to compile in downstream projects.",
+      "parentUuid": "039298eb_ac970e86",
+      "range": {
+        "startLine": 16,
+        "startChar": 24,
+        "endLine": 18,
+        "endChar": 11
+      },
+      "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "dbafce47_40de592e",
@@ -145,6 +169,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3beea39e_a52c848c",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-11-06T19:15:22Z",
+      "side": 1,
+      "message": "I agree, but wanted to draw the line somewhere in terms of how deep to make changes, how much reading was necessary to handle this already large patch.",
+      "parentUuid": "6235527d_46f1b06f",
+      "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ca85630_e923a6f5",
         "filename": "user/test/com/google/gwt/core/client/impl/StackTraceNativeTest.java",
         "patchSetId": 1
@@ -156,6 +198,24 @@
       "writtenOn": "2021-11-06T13:16:02Z",
       "side": 1,
       "message": "Same here, we could further removing this as well.",
+      "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddd5f808_259fc35e",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceNativeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-11-06T19:15:22Z",
+      "side": 1,
+      "message": "Definitely agree that a followup patch should consider these things, or just assume they are dealt with in the modularization work (note that this one will not be, since this is effectively only a test of \"does Error.stackTraceLimit or does (new Error).stack exist\", and exists only for the sake of gwt2\u0027s Exceptions intrinsic type).",
+      "parentUuid": "7ca85630_e923a6f5",
       "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }

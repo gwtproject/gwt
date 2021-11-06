@@ -33,6 +33,23 @@
       "message": "\u003e Patch Set 1: Verified-1\n\u003e \n\u003e Oops, this change failed the build and/or style presubmit. :(  More details at http://build.gwtproject.org/job/gwt.presubmit/3677/console#footer-container\n\nThis link isn\u0027t visible outside of Google, but almost certainly it is saying that the gwtproject/tools pull request has to merge first, then we can re-run this.",
       "revId": "4dfa1de3bc99d614a1fa4332d6a61c5b2d29aed6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d56fbe53_5fdbad0e",
+        "filename": "tools/api-checker/config/gwt29_210userapi.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-06T12:41:00Z",
+      "side": 1,
+      "message": "Should javaemul.internal be excluded too? Do we care about API breaking changes there?",
+      "revId": "4dfa1de3bc99d614a1fa4332d6a61c5b2d29aed6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

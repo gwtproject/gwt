@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "039298eb_ac970e86",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-06T13:16:02Z",
+      "side": 1,
+      "message": "Should they be marked as @Deprecated as a signal? (both for GWT maintainers that they were only left in place for backwards compatibility, and for downstream project maintainers that they should try to remove their uses)\nOr do you intend to keep them ad vitam? (given the ongoing move to org.gwtproject)",
+      "range": {
+        "startLine": 16,
+        "startChar": 24,
+        "endLine": 18,
+        "endChar": 11
+      },
+      "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "dbafce47_40de592e",
@@ -14,6 +37,23 @@
       "writtenOn": "2021-11-04T21:02:45Z",
       "side": 1,
       "message": "\u003e Patch Set 1:\n\u003e \n\u003e Change imported as http://cl/407663197\n\nI\u0027m not sure exactly what this implies, but we can\u0027t merge this out here without the apichecker fixes (which in turn requires the gwtproject/tools merge to provide the reference jar for gwt 2.9).",
+      "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45724a8a_a326760a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-06T13:16:02Z",
+      "side": 1,
+      "message": "Looks like there\u0027s actually a lot of room for improvement all over the place, with runtime checks for very old Gecko or WebKit versions.\nMaybe not worth removing them now as we\u0027re moving to org.gwtproject. Feel free to ignore all those comments then.",
       "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
@@ -65,6 +105,57 @@
       "writtenOn": "2021-11-04T15:41:13Z",
       "side": 1,
       "message": "[warning] Line is longer than 100 characters (found 105).",
+      "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4875b171_300c0922",
+        "filename": "user/src/com/google/gwt/safecss/shared/SafeStylesUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-06T13:16:02Z",
+      "side": 1,
+      "message": "In this case, given that the class is not public, I\u0027d vote for removing it altogether (and same for all other non-public, i.e. package-private, classes when we remove all subclasses as part of this patch, if any)\n\nThis could possibly be done in a followup patch (or never done if we consider that only org.gwtproject is worth \"actively maintaining\" and we don\u0027t want to invest too much time in c.g.g)",
+      "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6235527d_46f1b06f",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-06T13:16:02Z",
+      "side": 1,
+      "message": "This is a private class (not even package-private), so we could also remove it altogether, moving the methods to the parent class.",
+      "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ca85630_e923a6f5",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceNativeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-06T13:16:02Z",
+      "side": 1,
+      "message": "Same here, we could further removing this as well.",
       "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }

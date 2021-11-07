@@ -48,6 +48,30 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a248ba90_608d7c13",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-07T00:23:27Z",
+      "side": 1,
+      "message": "Ah, I may have been misunderstood: I meant annotating the classes that you did leave here for backwards compatibility, not annotating *instead* of removing.",
+      "parentUuid": "cfdc7ce0_154a7781",
+      "range": {
+        "startLine": 16,
+        "startChar": 24,
+        "endLine": 18,
+        "endChar": 11
+      },
+      "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "dbafce47_40de592e",
@@ -185,6 +209,24 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cd6a597_604465af",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-07T00:23:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3beea39e_a52c848c",
+      "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ca85630_e923a6f5",
@@ -216,6 +258,24 @@
       "side": 1,
       "message": "Definitely agree that a followup patch should consider these things, or just assume they are dealt with in the modularization work (note that this one will not be, since this is effectively only a test of \"does Error.stackTraceLimit or does (new Error).stack exist\", and exists only for the sake of gwt2\u0027s Exceptions intrinsic type).",
       "parentUuid": "7ca85630_e923a6f5",
+      "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfff1de0_27f8536c",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceNativeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-07T00:23:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ddd5f808_259fc35e",
       "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }

@@ -41,6 +41,30 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13abfd2f_d41d3ec7",
+        "filename": "common.ant.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-11-09T22:20:28Z",
+      "side": 1,
+      "message": "Added that remark.",
+      "parentUuid": "687e90c5_f43eb341",
+      "range": {
+        "startLine": 154,
+        "startChar": 49,
+        "endLine": 154,
+        "endChar": 66
+      },
+      "revId": "841f5e443de82e671ef6995c660a508bdfd433a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6265d5c_b184ae93",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-11-06T17:05:45Z",
       "side": 1,
       "message": "nit: I would remove that in this commit",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 26
+      },
+      "revId": "841f5e443de82e671ef6995c660a508bdfd433a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c394c89b_39d63e94",
+        "filename": "common.ant.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-11-09T22:20:28Z",
+      "side": 1,
+      "message": "Agreed, will remove this since it doesn\u0027t do anything, later commit will handle it.",
+      "parentUuid": "b6265d5c_b184ae93",
       "range": {
         "startLine": 155,
         "startChar": 0,

@@ -35,6 +35,7 @@ public class SqlTimeTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @SuppressWarnings("DoNotCall")
   public void testUnimplementedFunctions() {
     Time d = new Time(0);
 

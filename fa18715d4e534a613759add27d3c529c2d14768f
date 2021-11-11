@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "310a1332_68de215a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-11-11T01:38:22Z",
+      "side": 1,
+      "message": "(Deliberately holding off trying to land this or anything else until we see a successful nightly build with the java7-\u003e8 commit)",
+      "revId": "fa18715d4e534a613759add27d3c529c2d14768f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

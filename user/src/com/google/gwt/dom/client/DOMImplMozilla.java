@@ -233,6 +233,20 @@ class DOMImplMozilla extends DOMImplStandard {
   private native NativeEvent createKeyEventImpl(Document doc, String type,
       boolean canBubble, boolean cancelable, boolean ctrlKey, boolean altKey,
       boolean shiftKey, boolean metaKey, int keyCode, int charCode) /*-{
+    try {
+      return new KeyboardEvent(type, {
+        ctrlKey: ctrlKey,
+        altKey: altKey,
+        shiftKey: shiftKey,
+        metaKey: metaKey,
+        keyCode: keyCode,
+        charCode: charCode,
+        bubbles: canBubble,
+        cancelable: cancelable
+      });
+    } catch (ignored) {
+        // if this fails, continue on and create the event the old way
+    }
     var evt = doc.createEvent('KeyboardEvent');
     if (evt.initKeyEvent) {
       // Gecko

@@ -312,6 +312,8 @@ public class CreateEventTest extends GWTTestCase {
    * Tests that {@link Event#getCurrentEvent()} returns the right value for
    * synthesized events.
    */
+  // broken until htmlunit upgrade
+  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testGetCurrentEvent() {
     CurrentEventListener listener = new CurrentEventListener();
     Event.setEventListener(child, listener);
@@ -512,6 +514,8 @@ public class CreateEventTest extends GWTTestCase {
   /**
    * Tests createKeyDownEvent().
    */
+  // broken until htmlunit upgrade
+  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testTriggerKeyDownEvent() {
     KeyCodeEventListener listener = new KeyCodeEventListener("keydown");
     EventCreator creator = new EventCreator() {
@@ -549,6 +553,8 @@ public class CreateEventTest extends GWTTestCase {
   /**
    * Tests createKeyUpEvent().
    */
+  // broken until htmlunit upgrade
+  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testTriggerKeyUpEvent() {
     KeyCodeEventListener listener = new KeyCodeEventListener("keyup");
     EventCreator creator = new EventCreator() {

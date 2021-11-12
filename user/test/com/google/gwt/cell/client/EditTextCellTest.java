@@ -22,6 +22,8 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 
 /**
@@ -49,6 +51,8 @@ public class EditTextCellTest extends EditableCellTestBase<String, ViewData> {
   /**
    * Cancel and switch to read only mode.
    */
+  // broken until htmlunit upgrade
+  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testOnBrowserEventCancel() {
     NativeEvent event = Document.get().createKeyUpEvent(
         false, false, false, false, KeyCodes.KEY_ESCAPE);
@@ -65,6 +69,8 @@ public class EditTextCellTest extends EditableCellTestBase<String, ViewData> {
   /**
    * Cancel and switch to read only mode after committing once.
    */
+  // broken until htmlunit upgrade
+  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testOnBrowserEventCancelSecondEdit() {
     NativeEvent event = Document.get().createKeyUpEvent(
         false, false, false, false, KeyCodes.KEY_ESCAPE);
@@ -89,6 +95,8 @@ public class EditTextCellTest extends EditableCellTestBase<String, ViewData> {
   /**
    * Commit and switch to read only mode.
    */
+  // broken until htmlunit upgrade
+  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testOnBrowserEventCommit() {
     NativeEvent event = Document.get().createKeyUpEvent(
         false, false, false, false, KeyCodes.KEY_ENTER);

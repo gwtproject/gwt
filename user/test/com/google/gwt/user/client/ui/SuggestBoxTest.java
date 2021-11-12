@@ -22,6 +22,8 @@ import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle.MultiWordSuggestion;
 import com.google.gwt.user.client.ui.SuggestBox.DefaultSuggestionDisplay;
 import com.google.gwt.user.client.ui.SuggestBox.SuggestionCallback;
@@ -418,6 +420,8 @@ public class SuggestBoxTest extends WidgetTestBase {
   /**
    * See https://code.google.com/p/google-web-toolkit/issues/detail?id=3533
    */
+  // broken until htmlunit upgrade
+  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testKeyDownEvent() {
     final int[] eventFireCount = {0};
     SuggestBox box = new SuggestBox();
@@ -436,6 +440,8 @@ public class SuggestBoxTest extends WidgetTestBase {
   /**
    * See https://code.google.com/p/google-web-toolkit/issues/detail?id=3533
    */
+  // broken until htmlunit upgrade
+  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testKeyUpEvent() {
     final int[] eventFireCount = {0};
     SuggestBox box = new SuggestBox();

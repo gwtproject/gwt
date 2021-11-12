@@ -28,6 +28,8 @@ import com.google.gwt.dom.client.TableCellElement;
 import com.google.gwt.dom.client.TableRowElement;
 import com.google.gwt.dom.client.TableSectionElement;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.cellview.client.AbstractHasData.DefaultKeyboardSelectionHandler;
 import com.google.gwt.user.cellview.client.HasKeyboardPagingPolicy.KeyboardPagingPolicy;
@@ -1145,6 +1147,8 @@ public abstract class AbstractCellTableTestBase<T extends AbstractCellTable<Stri
     assertNull(table.getLoadingIndicator());
   }
 
+  // broken until htmlunit upgrade
+  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testSortableColumn() {
     T table = createAbstractHasData(new TextCell());
     table.getColumn(0).setSortable(true);

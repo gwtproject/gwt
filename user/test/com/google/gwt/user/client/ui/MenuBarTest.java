@@ -372,6 +372,8 @@ public class MenuBarTest extends WidgetTestBase {
     assertEquals(item1, bar.getSelectedItem());
   }
 
+  // broken until htmlunit upgrade
+  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testEscapeKey() {
     // Create a menu bar with children.
     MenuBar l0 = new MenuBar();
@@ -579,6 +581,8 @@ public class MenuBarTest extends WidgetTestBase {
     assertNull(bar.getSelectedItem());
   }
 
+  // broken until htmlunit upgrade
+  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testTabKey() {
     // Create a menu bar with children.
     MenuBar l0 = new MenuBar();

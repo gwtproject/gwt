@@ -18,6 +18,8 @@ package com.google.gwt.view.client;
 import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.view.client.DefaultSelectionEventManager.BlacklistEventTranslator;
 import com.google.gwt.view.client.DefaultSelectionEventManager.SelectAction;
@@ -250,6 +252,8 @@ public class DefaultSelectionEventManagerTest extends GWTTestCase {
     assertSelected(model);
   }
 
+  // broken until htmlunit upgrade
+  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testHandleSelectionEvent() {
     SingleSelectionModel<String> model = new SingleSelectionModel<String>();
     display.setSelectionModel(model);

@@ -18,6 +18,8 @@ package com.google.gwt.cell.client;
 import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 
 /**
@@ -35,6 +37,8 @@ public class TextInputCellTest extends
         "hello", expected);
   }
 
+  // broken until htmlunit upgrade
+  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testOnBrowserEventKeyUp() {
     NativeEvent event = Document.get().createKeyUpEvent(false, false, false,
         false, 0);

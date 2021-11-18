@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b040dab5_0cfa67d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-11-18T19:36:24Z",
+      "side": 1,
+      "message": "This patch serves as simpler way to review the necessary fix for latest Firefox to programmatically create keyboard event instances, and is manually tested in ff and ie11. In order for it to still pass tests in htmlunit, many tests must be disabled temporarily, but an upcoming patch to update htmlunit will be able to re-enable these tests.\n\nThis is currently written to be a smaller, standalone patch, to simplify the large htmlunit patch, but it could just as easily be squashed into the htmlunit patch which will follow, and slightly reduce the overall set of churn.",
+      "revId": "869f77f1c54ca86be6c663bec87246b040351a94",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

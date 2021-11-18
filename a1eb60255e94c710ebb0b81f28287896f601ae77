@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f0c34eb_91be3527",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2021-11-18T20:30:24Z",
+      "side": 1,
+      "message": "[warning] Footer fields should be in Title-Case.",
+      "revId": "a1eb60255e94c710ebb0b81f28287896f601ae77",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "705c930b_a3154666",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/jetty/JettyLauncher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2021-11-18T20:30:24Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 147).",
+      "revId": "a1eb60255e94c710ebb0b81f28287896f601ae77",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3858df3_bf4c1c18",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/jetty/JettyLauncher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2021-11-18T20:30:24Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 108).",
+      "revId": "a1eb60255e94c710ebb0b81f28287896f601ae77",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7b8f538_cb9e13f7",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/jetty/JettyLauncher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2021-11-18T20:30:24Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 118).",
+      "revId": "a1eb60255e94c710ebb0b81f28287896f601ae77",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e613c34f_1f08c25b",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/jetty/JettyLauncher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2021-11-18T20:30:24Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 108).",
+      "revId": "a1eb60255e94c710ebb0b81f28287896f601ae77",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "404f2cf9_a377e875",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/jetty/JettyLauncher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2021-11-18T20:30:24Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 110).",
+      "revId": "a1eb60255e94c710ebb0b81f28287896f601ae77",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbf7d604_58347dc6",
+        "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2021-11-18T20:30:24Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 128).",
+      "revId": "a1eb60255e94c710ebb0b81f28287896f601ae77",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "421e45bb_b34929e4",
+        "filename": "user/test/com/google/gwt/user/client/ui/PopupTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2021-11-18T20:30:24Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "a1eb60255e94c710ebb0b81f28287896f601ae77",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

@@ -72,6 +72,30 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3db6f87_091bc2bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-11-18T17:54:35Z",
+      "side": 1,
+      "message": "Okay, this might be overboard, but take a look - when a rebind candidate has no other implementations, I\u0027ve marked it as likely to be removed and inlined into the actual class, and when the class hierarchy is linear I\u0027ve likewise marked at least one class as likely to be flattened into its superclass. This latter case could be handled differently, my thinking was that it probably makes more sense to retain the base name (e.g. \"DOMImpl\") rather than the never-instantiated subclass (e.g. \"DOMImplStandard\") which then has additional subclasses, since that is what is created directly via GWT.create - and if no \"non-Standard\" implementations exist, should be part of the base class.",
+      "parentUuid": "a248ba90_608d7c13",
+      "range": {
+        "startLine": 16,
+        "startChar": 24,
+        "endLine": 18,
+        "endChar": 11
+      },
+      "revId": "8b248e86843d29d5c22c5ccf5f57b1b53d28b9f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "dbafce47_40de592e",

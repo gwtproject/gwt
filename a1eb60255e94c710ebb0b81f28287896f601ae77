@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0c43f7bc_4fb8db4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-11-18T20:30:57Z",
+      "side": 1,
+      "message": "Requires https://github.com/gwtproject/tools/pull/24 to be able to build.\n\nThis patch presently includes the effective contents of https://gwt-review.googlesource.com/c/gwt/+/23800 and https://gwt-review.googlesource.com/c/gwt/+/23820, but we could also land those separately for better granularity. As far as I can tell, no other changes could be split off into their own commits.",
+      "revId": "a1eb60255e94c710ebb0b81f28287896f601ae77",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "705c930b_a3154666",
         "filename": "dev/core/src/com/google/gwt/dev/shell/jetty/JettyLauncher.java",
         "patchSetId": 1

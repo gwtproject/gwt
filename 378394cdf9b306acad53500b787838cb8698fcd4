@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4d9c774_43380f0e",
+        "filename": "dev/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-19T17:59:15Z",
+      "side": 1,
+      "message": "Indeed many artifacts provides the needed class: https://search.maven.org/search?q\u003dfc:%22javax.security.auth.message.AuthException%22\n…and many of them are under Apache or EPL.\nProbably the reason we get the servlet-api from Tomcat; we could do the same here.\n\nI don\u0027t really mind doing that exclusion though.",
+      "parentUuid": "c962282c_26736135",
+      "revId": "378394cdf9b306acad53500b787838cb8698fcd4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b68c57d_9a9ad190",
         "filename": "dev/core/src/com/google/gwt/dev/shell/HostedModePluginObject.java",
         "patchSetId": 2

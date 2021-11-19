@@ -18,6 +18,57 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9b3eed7_1fd2973d",
+        "filename": "dev/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-19T14:52:06Z",
+      "side": 1,
+      "message": "What does that actually mean? Doesn\u0027t jetty-all package jetty-jaspi? (from GitHub: this service file comes from jetty-jaspi, and jetty-all includes jetty-jaspi)",
+      "revId": "378394cdf9b306acad53500b787838cb8698fcd4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b68c57d_9a9ad190",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/HostedModePluginObject.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-19T14:52:06Z",
+      "side": 1,
+      "message": "nit: move to com.gargoylesoftaware \"import block\"",
+      "revId": "378394cdf9b306acad53500b787838cb8698fcd4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "684e9d49_182e5cb6",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/HtmlUnitSessionHandler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-19T14:52:06Z",
+      "side": 1,
+      "message": "nit: move to com.gargoylesoftaware \"import block\"",
+      "revId": "378394cdf9b306acad53500b787838cb8698fcd4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9022420e_224ebc86",

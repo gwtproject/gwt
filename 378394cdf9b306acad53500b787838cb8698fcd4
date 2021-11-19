@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80a3967a_82b27269",
+        "filename": "dev/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2021-11-19T21:47:43Z",
+      "side": 1,
+      "message": "Tomcat\u0027s version definitely is Apache: https://github.com/apache/tomcat/blob/9.0.x/java/javax/security/auth/message/AuthException.java\n\nLicensing issues are the same for the Servlet API, where javax.servlet:javax.servlet-api clearly is CDDL/GPLv2+classpath too https://search.maven.org/artifact/javax.servlet/javax.servlet-api/3.1.0/jar, whereas Tomcat\u0027s implementation is Apache, which is why we use Tomcat\u0027s one.",
+      "parentUuid": "f34b750e_5bdf9b8d",
+      "revId": "378394cdf9b306acad53500b787838cb8698fcd4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b68c57d_9a9ad190",
         "filename": "dev/core/src/com/google/gwt/dev/shell/HostedModePluginObject.java",
         "patchSetId": 2

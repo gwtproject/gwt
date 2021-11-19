@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f34b750e_5bdf9b8d",
+        "filename": "dev/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-11-19T19:20:19Z",
+      "side": 1,
+      "message": "Right, lots of projects package it, but always standalone rather than inlining it or referencing something that seems canonical. Keeping it in its own jar doesn\u0027t outright say \"this is gpl+classpath\", but it does seem to imply it to me. The most \"canonical\" looking one I can find is https://search.maven.org/artifact/javax.security.auth.message/javax.security.auth.message-api/1.1.1/jar, which outright says CDDL/GPLv2+classpath.\n\nFor us to package the standalone jars in that way, we could package the jar in the GWT download zip, but then require any project add the extra jsr196 jar to their devmode/compile classpaths, which seems difficult to do seamlessly. \n\nIf it is needed (release notes should mention this), adding the missing jar and making a meta-inf/services entry somewhere in the project would re-enable it.",
+      "parentUuid": "e4d9c774_43380f0e",
+      "revId": "378394cdf9b306acad53500b787838cb8698fcd4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b68c57d_9a9ad190",
         "filename": "dev/core/src/com/google/gwt/dev/shell/HostedModePluginObject.java",
         "patchSetId": 2

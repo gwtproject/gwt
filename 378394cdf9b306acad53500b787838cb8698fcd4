@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c962282c_26736135",
+        "filename": "dev/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-11-19T16:31:39Z",
+      "side": 1,
+      "message": "It means I neglected the rest of the comment, thanks for the reminder.\n\nContext: https://github.com/eclipse/jetty.project/issues/4621, https://github.com/eclipse/jetty.project/pull/4710\n\nWhile jaspi is included in jetty-all, some javax.security.auth.message types are not included in jetty-all - I had understood this to have been for licensing reasons, that it couldnt be packaged, repackaged alongside the rest of jetty, but had to be in its own distinct jar.\n\nAs I understand it, the jakarta instance of those classes will be available under EPL (same as the rest of jetty?). It _appears_ that everyone else has the same concern, every copy of AuthException I am finding on maven central is also in a standalone jar.",
+      "parentUuid": "e9b3eed7_1fd2973d",
+      "revId": "378394cdf9b306acad53500b787838cb8698fcd4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b68c57d_9a9ad190",
         "filename": "dev/core/src/com/google/gwt/dev/shell/HostedModePluginObject.java",
         "patchSetId": 2
@@ -65,6 +83,23 @@
       "writtenOn": "2021-11-19T14:52:06Z",
       "side": 1,
       "message": "nit: move to com.gargoylesoftaware \"import block\"",
+      "revId": "378394cdf9b306acad53500b787838cb8698fcd4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a63c6bcf_9ebc6dd0",
+        "filename": "samples/hello/src/jetty-env.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-11-19T16:31:39Z",
+      "side": 1,
+      "message": "This file shouldnt exist, was accidentally added for testing (without contents)",
       "revId": "378394cdf9b306acad53500b787838cb8698fcd4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },

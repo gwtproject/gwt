@@ -34,6 +34,24 @@
       "parentUuid": "5be13884_637655e3",
       "revId": "ccfbbc1c077dced7641fa7bd81eb3ee70995c314",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85b44239_a1bc25a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-11-29T19:39:04Z",
+      "side": 1,
+      "message": "Nevermind, I see now - the GAP sample does indeed pass in all browsers I tested, but at least Chrome/Firefox are failing the OVERLAP sample. I\u0027ll close this and see later if I can only do away with the GAP fix when time permits.",
+      "parentUuid": "97561e08_bace6017",
+      "revId": "ccfbbc1c077dced7641fa7bd81eb3ee70995c314",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

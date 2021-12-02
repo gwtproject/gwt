@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e7108b2_98f60a25",
+        "filename": "dev/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-12-02T21:12:19Z",
+      "side": 1,
+      "message": "Unfortunately it seems it isn\u0027t that simple - the tomcat implementation of javax.security.auth.message is licensed in a way that we can use it, but the implementation of https://github.com/apache/tomcat/blob/9.0.x/java/javax/security/auth/message/config/AuthConfigFactory.java is such that you need the rest of tomcat to be able to use it\n\n```\njava.lang.ClassNotFoundException: org.apache.catalina.authenticator.jaspic.AuthConfigFactoryImpl \tat java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:581) \tat java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178) \tat java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:522) \tat java.base/java.lang.Class.forName0(Native Method) \tat java.base/java.lang.Class.forName(Class.java:315) \tat javax.security.auth.message.config.AuthConfigFactory$1.run(AuthConfigFactory.java:75) \tat javax.security.auth.message.config.AuthConfigFactory$1.run(AuthConfigFactory.java:67) \tat java.base/java.security.AccessController.doPrivileged(Native Method) \tat javax.security.auth.message.config.AuthConfigFactory.getFactory(AuthConfigFactory.java:66) \tat org.eclipse.jetty.security.jaspi.JaspiAuthenticatorFactory.getAuthenticator(JaspiAuthenticatorFactory.java:90) \tat org.eclipse.jetty.security.SecurityHandler.doStart(SecurityHandler.java:388) \tat org.eclipse.jetty.security.ConstraintSecurityHandler.doStart(ConstraintSecurityHandler.java:417) \tat org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:73)\n```\n\nI\u0027ll download a few more jars that have some of these classes and see if any is usable directly with jetty, or if jetty\u0027s instance clearly is licensed in a way we can use it. First other impl I saw was jboss-jaspi-api_1.1_spec-1.0.0.Final.jar, and the jar\u0027s contents indicate it is GPL+classpath.\n\n\n--\n\njavax.servlet/javax.servlet-api might not be licensed in a way we can repackage it, but we use tomcat-servlet-api-8.0.28.jar from gwtproject/tools (and websocket-api, annotations-api as well).",
+      "parentUuid": "80a3967a_82b27269",
+      "revId": "378394cdf9b306acad53500b787838cb8698fcd4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b68c57d_9a9ad190",
         "filename": "dev/core/src/com/google/gwt/dev/shell/HostedModePluginObject.java",
         "patchSetId": 2

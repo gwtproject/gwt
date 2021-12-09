@@ -70,12 +70,6 @@
     <gwt.ant dir="user"/>
   </target>
 
-  <target name="elemental"
-          description="[subdir] Builds (or runs ${target} if set) only the elemental library">
-    <call-subproject subproject="user" subtarget="build"/>
-    <gwt.ant dir="elemental"/>
-  </target>
-
   <target name="tools" description="[subdir] Builds (or runs ${target} if set) only the tools">
     <call-subproject subproject="user" subtarget="build"/>
     <gwt.ant dir="tools"/>
@@ -143,7 +137,7 @@
   </target>
 
   <target name="test" depends="buildonly,apicheck,checkstyle"
-          description="[action] Runs all the GWT tests, including checkstyle, apicheck and elemental">
+          description="[action] Runs all the GWT tests, including checkstyle and apicheck">
     <call-subproject subproject="buildtools" subtarget="test"/>
     <call-subproject subproject="dev" subtarget="test"/>
     <call-subproject subproject="user" subtarget="test"/>
@@ -151,7 +145,6 @@
     <call-subproject subproject="requestfactory" subtarget="test"/>
     <call-subproject subproject="servlet" subtarget="test"/>
     <call-subproject subproject="tools" subtarget="test"/>
-    <call-subproject subproject="elemental" subtarget="test"/>
   </target>
 
   <target name="testrf" depends="buildonly"

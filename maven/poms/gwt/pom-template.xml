@@ -47,11 +47,6 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.google.gwt</groupId>
-                <artifactId>gwt-elemental</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.google.web.bindery</groupId>
                 <artifactId>requestfactory</artifactId>
                 <version>${project.version}</version>

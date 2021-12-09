@@ -76,11 +76,7 @@ function maven-gwt() {
     popd > /dev/null
   done
 
-  # Silently skip Elemental if it doesn't exist
   gwtLibs='dev user servlet codeserver'
-  if [ -f $GWT_EXTRACT_DIR/gwt-elemental.jar ]; then
-    gwtLibs="${gwtLibs} elemental"
-  fi
 
   echo "Removing bundled third-parties from gwt-dev"
   zip -q $GWT_EXTRACT_DIR/gwt-dev.jar --copy --out $GWT_EXTRACT_DIR/gwt-dev-trimmed.jar \

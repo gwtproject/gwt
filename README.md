@@ -18,9 +18,6 @@
 
  - In order to build GWT, `java` and `ant` are required in your system.
 
- - Optional: if you want to compile elemental you need
-   `python` and `g++` installed.
-
  - You need the [GWT tools repository](https://github.com/gwtproject/tools/)
    checked out and up-to-date. By default it is expected to be found at `../tools`.
    You can override the default location using the GWT_TOOLS environment variable
@@ -28,7 +25,7 @@
 
  - To create the SDK distribution files run:
 
-   `$ ant clean elemental dist-dev`
+   `$ ant clean dist-dev`
 
    or if you don't have `python` and `g++` just run
 
@@ -39,11 +36,11 @@
 
    if you want to specify a different version number run:
 
-   `$ ant clean elemental dist-dev -Dgwt.version=x.x.x`
+   `$ ant clean dist-dev -Dgwt.version=x.x.x`
 
  - To compile everything including examples you have to run
 
-   `$ ant clean elemental dist`
+   `$ ant clean dist`
 
 ### How to verify GWT code conventions:
 
@@ -106,10 +103,6 @@
     user           | test.nometa.selenium   | test.nometa.selenium.disable   | Run -XdisableClassMetadata tests using Selenium RC servers
     user           | test.emma.selenium     | test.emma.selenium.disable     | Run emma tests with Selenium RC servers
     requestfactory | test                   | test.requestfactory.disable    | Request Factory library
-    elemental      | test                   | test.elemental.disable         | Elemental library
-    elemental      | test.nongwt            | test.nongwt.disable            | Run elemental tests that not require GWTTestCase
-    elemental      | test.dev.htmlunit      | test.dev.htmlunit.disable      | Run elemental dev-mode tests with HtmlUnit
-    elemental      | test.web.htmlunit      | test.web.htmlunit.disable      | Run elemental web-mode tests with HtmlUnit
     tools          | test                   | test.tools.disable             | Some tools used in GWT development
 
    Additionally you can utilize some variables to filter which test to run in each task:
@@ -151,17 +144,6 @@
     _Note: that we disable dev tests because code server depends on dev
     and we don`t want to run its tests._
 
- - Run all tests in elemental:
-
-   `$ ( cd elemental && ant test.nongwt )`
-
-    or
-
-   `$ ant elemental -Dtarget=test -Dtest.dev.disable=true -Dtest.user.disable=true`
-
-    _Note: that we have to disable dev and user tests because elemental
-    depends on both._
-
  - Run all tests in tools
 
    `$ ant tools -Dtarget=test -Dtest.dev.disable=true -Dtest.user.disable=true`
@@ -196,7 +178,6 @@
           -Dtest.dev.disable=true \
           -Dtest.codeserver.disable=true \
           -Dtest.requestfactory.disable=true \
-          -Dtest.elemental.disable=true \
           -Dtest.tools.disable=true \
           -Dtest.dev.htmlunit.disable=true \
           -Dtest.web.htmlunit.disable=true \

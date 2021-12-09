@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21577907_37413e9a",
+        "filename": "dev/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-12-09T17:08:27Z",
+      "side": 1,
+      "message": "I think we\u0027re going to have to settle for the exclusion right now, and consider not using jetty-all in the non-maven build.\n\n---\n\nI tried using jetty\u0027s own javax.security.auth.message, but jetty\u0027s implementation of AuthConfigFactory tries to load the class org.apache.geronimo.components.jaspi.AuthConfigFactoryImpl by name, which also isn\u0027t in jetty-all (but can be found in org.apache.geronimo.components:geronimo-jaspi:2.0.0, last released in 2012).\n\nAdditionally, the maven dependencies of gwt-dev are just jetty-webapp, jetty-servlets, jetty-annotations, and the apache-jsp project, none of which depend (directly or transitively) on any of the jaspi jars.\n\nMy conclusion is that the service loader exclusion is the simplest way to address this in general (with a mention in the release notes about enabling jaspi), and that in the future it would make more sense to only collect the dependencies of those jetty jars, rather than deal with the set of classes provided by jetty-all.",
+      "parentUuid": "6e7108b2_98f60a25",
+      "revId": "378394cdf9b306acad53500b787838cb8698fcd4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b68c57d_9a9ad190",
         "filename": "dev/core/src/com/google/gwt/dev/shell/HostedModePluginObject.java",
         "patchSetId": 2
@@ -138,6 +156,24 @@
       "writtenOn": "2021-11-19T14:52:06Z",
       "side": 1,
       "message": "nit: move to com.gargoylesoftaware \"import block\"",
+      "revId": "378394cdf9b306acad53500b787838cb8698fcd4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8198c2db_e1784aaa",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/HostedModePluginObject.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-12-09T17:08:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b68c57d_9a9ad190",
       "revId": "378394cdf9b306acad53500b787838cb8698fcd4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
@@ -159,6 +195,24 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e24c9bef_d7fc1527",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/HtmlUnitSessionHandler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-12-09T17:08:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "684e9d49_182e5cb6",
+      "revId": "378394cdf9b306acad53500b787838cb8698fcd4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a63c6bcf_9ebc6dd0",
@@ -172,6 +226,24 @@
       "writtenOn": "2021-11-19T16:31:39Z",
       "side": 1,
       "message": "This file shouldnt exist, was accidentally added for testing (without contents)",
+      "revId": "378394cdf9b306acad53500b787838cb8698fcd4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e6470c0_e8436c6c",
+        "filename": "samples/hello/src/jetty-env.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2021-12-09T17:08:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a63c6bcf_9ebc6dd0",
       "revId": "378394cdf9b306acad53500b787838cb8698fcd4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },

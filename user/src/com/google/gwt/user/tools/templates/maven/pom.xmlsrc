@@ -14,7 +14,7 @@
 
     <!-- Setting maven.compiler.source to something different to 1.8
          needs that you configure the sourceLevel in gwt-maven-plugin since
-         GWT compiler 2.8 requires 1.8 (see gwt-maven-plugin block below) -->
+         GWT compiler 2.8 and above requires 1.8 (see gwt-maven-plugin block below) -->
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
 
@@ -27,7 +27,7 @@
     <dependencies>
       <!-- ensure all GWT deps use the same version (unless overridden) -->
       <dependency>
-        <groupId>com.google.gwt</groupId>
+        <groupId>org.gwtproject</groupId>
         <artifactId>gwt</artifactId>
         <version>@gwtVersion</version>
         <type>pom</type>
@@ -38,24 +38,24 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.google.gwt</groupId>
+      <groupId>org.gwtproject</groupId>
       <artifactId>gwt-servlet</artifactId>
       <scope>runtime</scope>
     </dependency>
     <dependency>
-      <groupId>com.google.gwt</groupId>
+      <groupId>org.gwtproject</groupId>
       <artifactId>gwt-user</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.google.gwt</groupId>
+      <groupId>org.gwtproject</groupId>
       <artifactId>gwt-dev</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -70,7 +70,7 @@
       <plugin>
         <groupId>net.ltgt.gwt.maven</groupId>
         <artifactId>gwt-maven-plugin</artifactId>
-        <version>1.0-rc-8</version>
+        <version>1.0.1</version>
         <executions>
           <execution>
             <goals>
@@ -83,7 +83,7 @@
           <moduleName>@moduleName</moduleName>
           <moduleShortName>@moduleShortName</moduleShortName>
           <failOnError>true</failOnError>
-          <!-- GWT compiler 2.8 requires 1.8, hence define sourceLevel here if you use
+          <!-- GWT compiler 2.8 and above requires 1.8, hence define sourceLevel here if you use
                a different source language for java compilation -->
           <sourceLevel>1.8</sourceLevel>
           <!-- Compiler configuration -->

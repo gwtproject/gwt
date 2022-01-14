@@ -50,6 +50,23 @@
       "message": "[warning] Line is longer than 100 characters (found 134).",
       "revId": "aab7ed5f360c752163d7ab3be708ecb518e2b3d1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6cede99_22b8c6e8",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplStandard.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-01-14T18:01:32Z",
+      "side": 1,
+      "message": "nit: there\u0027s a @deprecated javadoc tag specifically for that 😉",
+      "revId": "aab7ed5f360c752163d7ab3be708ecb518e2b3d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

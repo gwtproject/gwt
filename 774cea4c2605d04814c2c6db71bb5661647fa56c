@@ -16,6 +16,115 @@
       "message": "This commit is modeled after proposal #3 at https://github.com/tbroyer/gwt-relocation-tests/, copying/updating poms, and updating scripts to match.\n\nI\u0027ve deployed using the renamed old script and new script (with the old name) to https://repo.vertispan.com/gwt-groupid-migration-test/ for more testing, and so far have found that compilation works in both popular gwt maven plugins, though one has an issue generating modules (reported as https://github.com/tbroyer/gwt-maven-plugin/issues/150). \n\n--\n\nThere is a snag with snapshots though, and I can\u0027t find existing discussion around it, so we might have missed it. This change makes it hard to make a usable SNAPSHOT release of the old com.google.gwt groupId: each deployed artifact gets a specific timestamp attached to it on the server, and as they are not deployed instantly, the snapshots attached to `com.google.gwt:gwt-user` might not match that of `org.gwtproject:gwt-user`. Maven will read the old gav\u0027s pom, and notice that a new groupId is in use, and attempt to use the same artifactId and version. This can be confirmed by adding https://repo.vertispan.com/gwt-snapshot/ as a repository and trying to resolve com.google.gwt:gwt:2.10.0-new-groupid-SNAPSHOT.\n\nIf it were possible to specify a version in the \u003crelocation\u003e tag, we could try publishing a single HEAD-SNAPSHOT from com.google.gwt which points to something like just HEAD-SNAPSHOT or the latest stable release, but this doesn\u0027t seem to be an option. \n\nThis in turn will cause a problem for the org.gwtproject:gwt template pom, which lists `com.google.gwt:gwt-user:${project.version}`, etc.\n\n--\n\nThis commit is currently ordered after removing the deprecated elemental v1 project, as the old artifacts will not only be unchanged, but should continue to work, so publishing them again is not necessary.\n\n--\n\nOne final note: I think I would prefer to change the base groupId for the gwt- artifacts to `org.gwtproject.gwt`, so that rather than have a \"top level\" artifact, let it be alongside the other artifacts in the org.gwtproject package. That is, the GWT2 compiler and runtime are not the chief product of the GWT Project, but one of several. For the sake of this first draft however, I left it as I found it in the gwt-relocation-tests proposals/experiments.",
       "revId": "774cea4c2605d04814c2c6db71bb5661647fa56c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef1d2f7d_86d21394",
+        "filename": "maven/google-poms/gwt/pom-template.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-01-14T18:26:32Z",
+      "side": 1,
+      "message": "Should we update those parent POMs to stop using these deprecated (and outdated) oss-parent parents? (see https://central.sonatype.org/publish/publish-maven/#deprecated-oss-parent)\nShould this be done in a separate commit?\n\nBTW, in the google-poms, given that there are no JARs, the setup might be much simpler (only the GPG plugin)",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 13
+      },
+      "revId": "774cea4c2605d04814c2c6db71bb5661647fa56c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69f2ff14_e1aee71b",
+        "filename": "maven/google-poms/gwt/pom-template.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-01-14T18:26:32Z",
+      "side": 1,
+      "message": "Those are duplicated",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 25
+      },
+      "revId": "774cea4c2605d04814c2c6db71bb5661647fa56c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42582b7a_acf24fee",
+        "filename": "maven/push-gwt-ogg.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-01-14T18:26:32Z",
+      "side": 1,
+      "message": "How about push-gwtproject.sh?",
+      "revId": "774cea4c2605d04814c2c6db71bb5661647fa56c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5823add0_572185b2",
+        "filename": "maven/push-gwt-ogg.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-01-14T18:26:32Z",
+      "side": 1,
+      "message": "Should be the non-Google snapshots repo here.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 86
+      },
+      "revId": "774cea4c2605d04814c2c6db71bb5661647fa56c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef49eb57_4dcca2bd",
+        "filename": "maven/push-gwt.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-01-14T18:26:32Z",
+      "side": 1,
+      "message": "delete lines rather than commenting them?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 3
+      },
+      "revId": "774cea4c2605d04814c2c6db71bb5661647fa56c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

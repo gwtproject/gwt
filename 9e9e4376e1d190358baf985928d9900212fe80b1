@@ -1,0 +1,276 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e537b31a_8b8134a5",
+        "filename": "user/test/com/google/gwt/emultest/java/util/DefaultMapEntry.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2022-01-18T21:28:31Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "9e9e4376e1d190358baf985928d9900212fe80b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b378a92a_768cc876",
+        "filename": "user/test/com/google/gwt/emultest/java/util/DefaultMapEntry.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2022-01-18T21:28:31Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "9e9e4376e1d190358baf985928d9900212fe80b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31197c9d_60a59324",
+        "filename": "user/test/com/google/gwt/emultest/java/util/DefaultMapEntry.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2022-01-18T21:28:31Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "9e9e4376e1d190358baf985928d9900212fe80b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f4090ab_6420d872",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestComparator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2022-01-18T21:28:31Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "9e9e4376e1d190358baf985928d9900212fe80b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e94fef99_a45562d2",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestIterator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2022-01-18T21:28:31Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "9e9e4376e1d190358baf985928d9900212fe80b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c92d96c_d7c3c2c2",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2022-01-18T21:28:31Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "9e9e4376e1d190358baf985928d9900212fe80b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3886590f_2b66a55f",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2022-01-18T21:28:31Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "9e9e4376e1d190358baf985928d9900212fe80b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3186e310_b6cee70c",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestList.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2022-01-18T21:28:31Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "9e9e4376e1d190358baf985928d9900212fe80b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "792fabdb_b47ed621",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2022-01-18T21:28:31Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "9e9e4376e1d190358baf985928d9900212fe80b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e281c3b2_8ac79d2e",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2022-01-18T21:28:31Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "9e9e4376e1d190358baf985928d9900212fe80b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "191642de_19ed36fd",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2022-01-18T21:28:31Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "9e9e4376e1d190358baf985928d9900212fe80b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ef8005e_be053570",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2022-01-18T21:28:31Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "9e9e4376e1d190358baf985928d9900212fe80b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8c3adf4_88a2b9f8",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2022-01-18T21:28:31Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "9e9e4376e1d190358baf985928d9900212fe80b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d399e63c_688c41be",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2022-01-18T21:28:31Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "9e9e4376e1d190358baf985928d9900212fe80b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a94f4c5_4f79cff2",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2022-01-18T21:28:31Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "9e9e4376e1d190358baf985928d9900212fe80b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4d51658_44ce7055",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2022-01-18T21:28:31Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "9e9e4376e1d190358baf985928d9900212fe80b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

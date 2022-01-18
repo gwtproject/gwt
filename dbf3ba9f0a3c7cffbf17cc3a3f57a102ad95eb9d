@@ -94,6 +94,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b06e54c9_e30dd06f",
+        "filename": "user/test/com/google/gwt/emultest/java/util/DefaultMapEntry.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2022-01-18T21:32:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f675078_3195d26d",
+      "range": {
+        "startLine": 112,
+        "startChar": 11,
+        "endLine": 112,
+        "endChar": 17
+      },
+      "revId": "dbf3ba9f0a3c7cffbf17cc3a3f57a102ad95eb9d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7659db51_95e9ccee",
         "filename": "user/test/com/google/gwt/emultest/java/util/TestComparator.java",
         "patchSetId": 2
@@ -139,6 +163,30 @@
       "writtenOn": "2022-01-15T12:53:53Z",
       "side": 1,
       "message": "typo",
+      "range": {
+        "startLine": 23,
+        "startChar": 19,
+        "endLine": 23,
+        "endChar": 26
+      },
+      "revId": "dbf3ba9f0a3c7cffbf17cc3a3f57a102ad95eb9d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "870fb3f1_b86a254a",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TestIterator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2022-01-18T21:32:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "204c0f7a_c5c6e6b4",
       "range": {
         "startLine": 23,
         "startChar": 19,
@@ -359,6 +407,30 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1935638d_d83b2c55",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TreeMapTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2022-01-18T21:32:06Z",
+      "side": 1,
+      "message": "Formatting was right but removed the comment.",
+      "parentUuid": "a1027612_621defcd",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 6
+      },
+      "revId": "dbf3ba9f0a3c7cffbf17cc3a3f57a102ad95eb9d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "293de6ef_7f5d98a8",
@@ -372,6 +444,30 @@
       "writtenOn": "2022-01-15T12:53:53Z",
       "side": 1,
       "message": "same here. Is the todo still relevant ?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 68
+      },
+      "revId": "dbf3ba9f0a3c7cffbf17cc3a3f57a102ad95eb9d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9854abb3_cc41b782",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TreeSetTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2022-01-18T21:32:06Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "293de6ef_7f5d98a8",
       "range": {
         "startLine": 36,
         "startChar": 0,

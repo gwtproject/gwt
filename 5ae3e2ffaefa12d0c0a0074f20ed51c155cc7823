@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "083fab5a_207cdbc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-02-11T01:08:17Z",
+      "side": 1,
+      "message": "Manually rebased, all tests passed locally (`ant clean test dist doc -Dtest.web.htmlunit.disable\u003dtrue -Dtest.nometa.htmlunit.disable\u003dtrue             -Dtest.emma.htmlunit.disable\u003dtrue` just like the nightlies). I\u0027ll merge the gwtproject/tools next, as this patch should be next to merge I think?",
+      "revId": "5ae3e2ffaefa12d0c0a0074f20ed51c155cc7823",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "808e4561_ad1a7f30",
         "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
         "patchSetId": 4

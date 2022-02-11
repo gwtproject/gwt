@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "808e4561_ad1a7f30",
+        "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2022-02-11T01:06:19Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 128).",
+      "revId": "5ae3e2ffaefa12d0c0a0074f20ed51c155cc7823",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

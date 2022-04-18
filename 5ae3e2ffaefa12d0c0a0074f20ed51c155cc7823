@@ -35,6 +35,23 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "760d6ea9_951c0456",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/jetty/JettyLauncher.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-04-18T21:32:17Z",
+      "side": 1,
+      "message": "Remove this, it adds nothing by overriding a method, not changing its signature, and only calling its super impl.",
+      "revId": "5ae3e2ffaefa12d0c0a0074f20ed51c155cc7823",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "808e4561_ad1a7f30",

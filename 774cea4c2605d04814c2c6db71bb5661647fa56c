@@ -18,6 +18,23 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8127dd5c_984a6e4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-04-21T18:17:41Z",
+      "side": 1,
+      "message": "I\u0027ve updated this to latest (to resolve merge conflicts) and made changes to address these comments.\n\nThere is still a problem here with the relocation in that it will break any com.google.gwt SNAPSHOTs, so we will need to ask Google to delete all HEAD-SNAPSHOT builds to avoid users getting stale ones. You can test this by trying to add https://repo.vertispan.com/gwt-snapshot/ as a maven repository to a project, and try to resolve com.google.gwt artifacts with version 2.10.0-new-groupid-SNAPSHOT - the relocation will be requested, but it will use the timestamp that the com.google.gwt artifact was uploaded, rather than just point to the plain version.\n\nI\u0027ve uploaded this latest build as if it were a release to https://repo.vertispan.com/gwt-groupid-migration-test/. This repository can be added to a project, with the gwt version 2.10.0-new-groupid-2, using a mix of the old and new groupId, any project and library should still work.\n\nTesting process:\nFirst, check out this commit, and set up env vars:\n```\nexport GWT_VERSION\u003d2.10.0-new-groupid-2\nexport GWT_MAVEN_REPO_URL\u003dhttps://repo.vertispan.com/gwt-groupid-migration-test/\nexport GWT_MAVEN_REPO_ID\u003dvertispan-snapshots\n```\nNext, build the distribution (be sure to have jdk8 set for JAVA_HOME first):\n```\nant dist\n```\nAnd then deploy both com.google.gwt and org.gwtproject artifacts (these are interactive, but the env vars above set most of the defaults).\n```\nmaven/push-gwt.sh\nmaven/push-gwtproject.sh\n```",
+      "revId": "774cea4c2605d04814c2c6db71bb5661647fa56c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef1d2f7d_86d21394",
@@ -31,6 +48,30 @@
       "writtenOn": "2022-01-14T18:26:32Z",
       "side": 1,
       "message": "Should we update those parent POMs to stop using these deprecated (and outdated) oss-parent parents? (see https://central.sonatype.org/publish/publish-maven/#deprecated-oss-parent)\nShould this be done in a separate commit?\n\nBTW, in the google-poms, given that there are no JARs, the setup might be much simpler (only the GPG plugin)",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 13
+      },
+      "revId": "774cea4c2605d04814c2c6db71bb5661647fa56c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "942151fa_c1d0ab57",
+        "filename": "maven/google-poms/gwt/pom-template.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-04-21T18:17:41Z",
+      "side": 1,
+      "message": "Yes, but in a later change?",
+      "parentUuid": "ef1d2f7d_86d21394",
       "range": {
         "startLine": 5,
         "startChar": 0,
@@ -64,6 +105,30 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "907b5d71_313a7115",
+        "filename": "maven/google-poms/gwt/pom-template.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-04-21T18:17:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69f2ff14_e1aee71b",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 25
+      },
+      "revId": "774cea4c2605d04814c2c6db71bb5661647fa56c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42582b7a_acf24fee",
@@ -77,6 +142,24 @@
       "writtenOn": "2022-01-14T18:26:32Z",
       "side": 1,
       "message": "How about push-gwtproject.sh?",
+      "revId": "774cea4c2605d04814c2c6db71bb5661647fa56c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02e993bd_032fe0d0",
+        "filename": "maven/push-gwt-ogg.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-04-21T18:17:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42582b7a_acf24fee",
       "revId": "774cea4c2605d04814c2c6db71bb5661647fa56c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
@@ -104,6 +187,30 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "307c3a40_7f72cf91",
+        "filename": "maven/push-gwt-ogg.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-04-21T18:17:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5823add0_572185b2",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 86
+      },
+      "revId": "774cea4c2605d04814c2c6db71bb5661647fa56c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef49eb57_4dcca2bd",
@@ -117,6 +224,30 @@
       "writtenOn": "2022-01-14T18:26:32Z",
       "side": 1,
       "message": "delete lines rather than commenting them?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 3
+      },
+      "revId": "774cea4c2605d04814c2c6db71bb5661647fa56c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "109f8511_a6068358",
+        "filename": "maven/push-gwt.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-04-21T18:17:41Z",
+      "side": 1,
+      "message": "Done, here and below",
+      "parentUuid": "ef49eb57_4dcca2bd",
       "range": {
         "startLine": 32,
         "startChar": 0,

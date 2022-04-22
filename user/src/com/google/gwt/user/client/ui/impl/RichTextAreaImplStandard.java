@@ -94,6 +94,7 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
   }
 
   @Override
+  @SuppressWarnings("deprecation")
   public native void initElement()  /*-{
     // Most browsers don't like setting designMode until slightly _after_
     // the iframe becomes attached to the DOM. Any non-zero timeout will do

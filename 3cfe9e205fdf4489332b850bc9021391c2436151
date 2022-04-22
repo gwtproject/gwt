@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c4d5b99_abcb83c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-04-22T21:56:50Z",
+      "side": 1,
+      "message": "nit: script has been renamed",
+      "range": {
+        "startLine": 11,
+        "startChar": 6,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "revId": "3cfe9e205fdf4489332b850bc9021391c2436151",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

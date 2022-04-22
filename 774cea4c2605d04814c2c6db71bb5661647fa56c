@@ -82,6 +82,30 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1034161_48c2506e",
+        "filename": "maven/google-poms/gwt/pom-template.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-04-22T21:56:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "942151fa_c1d0ab57",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 13
+      },
+      "revId": "774cea4c2605d04814c2c6db71bb5661647fa56c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69f2ff14_e1aee71b",
@@ -119,6 +143,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "69f2ff14_e1aee71b",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 25
+      },
+      "revId": "774cea4c2605d04814c2c6db71bb5661647fa56c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "781d3738_8991fa31",
+        "filename": "maven/google-poms/gwt/pom-template.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-04-22T21:56:50Z",
+      "side": 1,
+      "message": "Hmm, still there",
+      "parentUuid": "907b5d71_313a7115",
       "range": {
         "startLine": 29,
         "startChar": 0,

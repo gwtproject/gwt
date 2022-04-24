@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28d8c74a_a80afa92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-04-24T18:43:46Z",
+      "side": 1,
+      "message": "Jenkins style check: https://github.com/niloc132/gwt/actions/runs/2216485053\nJenkins nightly build: https://github.com/niloc132/gwt/actions/runs/2216485052",
+      "revId": "7803393082d5b2c7eca2b3116df0dd3557321439",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

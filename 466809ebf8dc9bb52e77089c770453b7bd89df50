@@ -50,6 +50,24 @@
       "message": "Shouldn\u0027t this one be removed?",
       "revId": "466809ebf8dc9bb52e77089c770453b7bd89df50",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "674a6cf1_b9d76fbb",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-04-28T20:55:50Z",
+      "side": 1,
+      "message": "Yes - it didn\u0027t work previously (before \"duplicating\" the dependencies in the gwt pom), I made a mistake in leaving this in after testing.\n\nCan you confirm what is supposed to happen for GWT 2.10.1 and beyond in the org.gwtproject poms, should they still depend on o.g.g:gwt-user:2.10.0 for some period of time?",
+      "parentUuid": "b6d792b5_92f18b98",
+      "revId": "466809ebf8dc9bb52e77089c770453b7bd89df50",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

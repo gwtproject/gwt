@@ -16,6 +16,40 @@
       "message": "I\u0027ve updated this with a few changes. First, I figured out why we had the duplicate entries in the `org.gwtproject:gwt` pom - I was supposed to change the groupId of the second entry, but failed to do so, and only noticed this when I updated a project to use only `org.gwtproject` groupIds.\n\nThe samples have also been updated to use the new groupId and an updated version of the net.ltgt plugin for gwt.",
       "revId": "466809ebf8dc9bb52e77089c770453b7bd89df50",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24b21299_0a4fdb57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-04-28T19:35:51Z",
+      "side": 1,
+      "message": "SGTM",
+      "revId": "466809ebf8dc9bb52e77089c770453b7bd89df50",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6d792b5_92f18b98",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-04-28T19:35:51Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this one be removed?",
+      "revId": "466809ebf8dc9bb52e77089c770453b7bd89df50",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

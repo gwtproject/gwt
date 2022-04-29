@@ -1,0 +1,164 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "070b3ea4_144fda7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-04-29T12:21:24Z",
+      "side": 1,
+      "message": "I re-reviewed more carefully (only the POMs, not the scripts), and found a few issues/discrepancies.",
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2442cb43_cff1632c",
+        "filename": "maven/google-poms/gwt/pom-template.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-04-29T12:21:24Z",
+      "side": 1,
+      "message": "Just noticing this now, but these (and htmlunit) should be updated to reflect Ie14cb33cb0edea57c121de943f2964a8cf0540ee",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 36
+      },
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "660fe478_dbb5c3b5",
+        "filename": "maven/poms/gwt/gwt-codeserver/pom-template.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-04-29T12:21:24Z",
+      "side": 1,
+      "message": "Should be updated to org.gwtproject too",
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "842dbe46_a721d84f",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-04-29T12:21:24Z",
+      "side": 1,
+      "message": "If we only expect Google to publish a 2.10.0 *once* and then reference it from our 2.10.1, 2.11.0, etc. I wonder if we shouldn\u0027t hardcode the 2.10.0 here (of course, it would make testing a big harder, your 2.10.0-new-groupid-N scheme works rather well).\nMaybe do it in a followup commit once this is actually published? (should we prepare the commit and just wait before merging it, so we don\u0027t forget it? or create an issue?)\n\n…or use another placeholder, filled in when generating the POMs, so we can easily use 2.10.0-new-groupid-N for testing (we could even possibly test a c.g.g in 2.10.0-new-groupid-5 with o.g 2.10.0-new-groupid-6 for instance, as a preliminary test for 2.10.0 vs 2.10.1)",
+      "range": {
+        "startLine": 32,
+        "startChar": 25,
+        "endLine": 32,
+        "endChar": 43
+      },
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b444fbba_437d3040",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-04-29T12:21:24Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we do here as in c.g.g:gwt (it only imports c.g.w.b:requestfactory, not o.g.w.b:requestfactory), and add the c.g.w.b dependencies to o.g.w.b:requestfactory.\n\nFwiw, this would cut the direct dependency of org.gwtproject to com.google.gwt POMs, so even if those aren\u0027t deployed it should be possible to use only org.gwtproject dependencies (and possibly use dependency exclusions if third-party libs bring com.google.gwt dependencies): this is dependencyManagement so dependencies here aren\u0027t resolved (except for those scope\u003dimport ones) so it shouldn\u0027t matter if they\u0027re missing as long as you don\u0027t use them.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 25
+      },
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0c54594_d42d7466",
+        "filename": "maven/poms/requestfactory/pom-template.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-04-29T12:21:24Z",
+      "side": 1,
+      "message": "See comment in maven/poms/gwt/pom-template.xml: add com.google.web.bindery dependencies here.",
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "498548b9_f4b92134",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-04-29T12:21:24Z",
+      "side": 1,
+      "message": "Update to 4.13.2? (could be done in a separate commit)",
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76836d36_c28cc57c",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-04-29T12:21:24Z",
+      "side": 1,
+      "message": "Unrelated to this change but should this be updated? (same above in \u003cproperties\u003e BTW)",
+      "range": {
+        "startLine": 86,
+        "startChar": 28,
+        "endLine": 86,
+        "endChar": 31
+      },
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    }
+  ]
+}

@@ -68,6 +68,24 @@
       "parentUuid": "b6d792b5_92f18b98",
       "revId": "466809ebf8dc9bb52e77089c770453b7bd89df50",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c036668_09f86e94",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-04-29T03:40:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "674a6cf1_b9d76fbb",
+      "revId": "466809ebf8dc9bb52e77089c770453b7bd89df50",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

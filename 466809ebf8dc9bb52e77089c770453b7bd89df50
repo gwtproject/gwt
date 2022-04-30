@@ -104,6 +104,24 @@
       "parentUuid": "5c036668_09f86e94",
       "revId": "466809ebf8dc9bb52e77089c770453b7bd89df50",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "892cfbb7_eb176909",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-04-30T00:14:57Z",
+      "side": 1,
+      "message": "\u003e I think we need to test this specifically to confirm, but that\u0027s how I\u0027d expect it to work in theory.\n\nTested, works as expected: https://github.com/tbroyer/gwt-relocation-tests/#experiment-7",
+      "parentUuid": "dc044c5d_5c08c589",
+      "revId": "466809ebf8dc9bb52e77089c770453b7bd89df50",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

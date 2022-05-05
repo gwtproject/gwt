@@ -56,6 +56,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "295fc24c_3dfeabfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-05-05T16:15:42Z",
+      "side": 1,
+      "message": "Tested with the dynatablerf sample: works OK.\nTested with my legacy project: fails when resolving c.g.g:gwt-user coming as a third-party transitive dependency; this is expected.\nAdded a Gradle module substitution rule, compiles OK:\n\n dependencies {\n   modules {\n     module(\"com.google.gwt:gwt-user\") { replacedBy(\"org.gwtproject:gwt-user\") }\n   }\n }",
+      "parentUuid": "07a2e7d6_57561ad2",
+      "revId": "299ae9563d6a92f11dd24b69496d7371b1ef16fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ebbc0f49_2b500f7c",
         "filename": "maven/poms/requestfactory/pom-template.xml",
         "patchSetId": 7

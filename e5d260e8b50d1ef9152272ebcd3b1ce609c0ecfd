@@ -53,6 +53,24 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c2f6da1_706994ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-05-05T10:18:03Z",
+      "side": 1,
+      "message": "Will test soon (but I\u0027m rather confident that it won\u0027t break)",
+      "parentUuid": "992d4aed_62688709",
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2442cb43_cff1632c",
@@ -182,6 +200,30 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e565554_7bb9da2a",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-05-05T10:18:03Z",
+      "side": 1,
+      "message": "Yes, hard-coding it later is fine. If it\u0027s ever forgotten before pushing the next release it\u0027ll hopefully be detected with the RC (which also means doing a RC for the next version, even if it\u0027s just a small bugfix release).",
+      "parentUuid": "0369479d_140edd16",
+      "range": {
+        "startLine": 32,
+        "startChar": 25,
+        "endLine": 32,
+        "endChar": 43
+      },
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b444fbba_437d3040",
@@ -229,6 +271,30 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b62a80f_d3089d10",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-05-05T10:18:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "962245ba_cdc7b186",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 25
+      },
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0c54594_d42d7466",
@@ -242,6 +308,24 @@
       "writtenOn": "2022-04-29T12:21:24Z",
       "side": 1,
       "message": "See comment in maven/poms/gwt/pom-template.xml: add com.google.web.bindery dependencies here.",
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a72be40e_4263ed94",
+        "filename": "maven/poms/requestfactory/pom-template.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-05-05T10:18:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c0c54594_d42d7466",
       "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
@@ -318,6 +402,30 @@
       "side": 1,
       "message": "Changed to \"GWT 2.8 and above\" to be clear - though this comment dates to a time when it might have been surprising to require java 8 as a minimum at all, so probably this could be safely removed entirely...\n\n(Also changed samples/validation/pom.xml)",
       "parentUuid": "76836d36_c28cc57c",
+      "range": {
+        "startLine": 86,
+        "startChar": 28,
+        "endLine": 86,
+        "endChar": 31
+      },
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9f32154_64762e5f",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-05-05T10:18:03Z",
+      "side": 1,
+      "message": "Now that Java 7 is no longer supported (since 2.9 actually), maybe remove the comments entirely.",
+      "parentUuid": "08d2bec5_1155fbc9",
       "range": {
         "startLine": 86,
         "startChar": 28,

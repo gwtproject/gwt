@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "46ca6256_dde6cbaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2022-05-05T15:11:39Z",
+      "side": 1,
+      "message": "I don\u0027t think I have a working account on repo.vertispan.com (I have credentials in my password manager, but they\u0027re not accepted), so couldn\u0027t test.\nThe way I wanted to test this is with the dynatablerf sample, as it has no third-party dependency that would depend on com.google.gwt artifacts (mobilewebapp depends on GIN for instance, so wouldn\u0027t qualify: it would theoretically upgrade them to 2.10.0-new-groupid-5 and then fail to find them)",
+      "parentUuid": "1c063efa_d6785d7c",
+      "revId": "299ae9563d6a92f11dd24b69496d7371b1ef16fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ebbc0f49_2b500f7c",
         "filename": "maven/poms/requestfactory/pom-template.xml",
         "patchSetId": 7

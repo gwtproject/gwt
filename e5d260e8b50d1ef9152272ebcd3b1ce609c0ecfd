@@ -18,6 +18,41 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef651d48_b10002cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-05-05T04:08:02Z",
+      "side": 1,
+      "message": "Thanks for taking a closer look - I originally had hoped you would be the one making the change itself, so I greatly appreciate you spotting these issues.",
+      "parentUuid": "070b3ea4_144fda7b",
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "992d4aed_62688709",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-05-05T04:08:02Z",
+      "side": 1,
+      "message": "Updated, 2.10.0-new-groupid-5 deployed to the repo server.",
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2442cb43_cff1632c",
@@ -41,6 +76,30 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d16822cb_24765b06",
+        "filename": "maven/google-poms/gwt/pom-template.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-05-05T04:08:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2442cb43_cff1632c",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 36
+      },
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "660fe478_dbb5c3b5",
@@ -54,6 +113,24 @@
       "writtenOn": "2022-04-29T12:21:24Z",
       "side": 1,
       "message": "Should be updated to org.gwtproject too",
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b23a1e4_4c80eba4",
+        "filename": "maven/poms/gwt/gwt-codeserver/pom-template.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-05-05T04:08:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "660fe478_dbb5c3b5",
       "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
@@ -83,6 +160,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0369479d_140edd16",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-05-05T04:08:02Z",
+      "side": 1,
+      "message": "Yeah I thought about this, but it seemed like \"cheap insurance\" - make it easy (from this perspective) to do another com.google.gwt release to ensure we don\u0027t have to do it.\n\nI\u0027m still leaning towards \"leave it flexible now, and hard code it later\", but will be guided by your wisdom/preference.",
+      "parentUuid": "842dbe46_a721d84f",
+      "range": {
+        "startLine": 32,
+        "startChar": 25,
+        "endLine": 32,
+        "endChar": 43
+      },
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b444fbba_437d3040",
         "filename": "maven/poms/gwt/pom-template.xml",
         "patchSetId": 6
@@ -94,6 +195,30 @@
       "writtenOn": "2022-04-29T12:21:24Z",
       "side": 1,
       "message": "Shouldn\u0027t we do here as in c.g.g:gwt (it only imports c.g.w.b:requestfactory, not o.g.w.b:requestfactory), and add the c.g.w.b dependencies to o.g.w.b:requestfactory.\n\nFwiw, this would cut the direct dependency of org.gwtproject to com.google.gwt POMs, so even if those aren\u0027t deployed it should be possible to use only org.gwtproject dependencies (and possibly use dependency exclusions if third-party libs bring com.google.gwt dependencies): this is dependencyManagement so dependencies here aren\u0027t resolved (except for those scope\u003dimport ones) so it shouldn\u0027t matter if they\u0027re missing as long as you don\u0027t use them.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 25
+      },
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "962245ba_cdc7b186",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-05-05T04:08:02Z",
+      "side": 1,
+      "message": "I\u0027m not exactly sure that I fully understood this, but I think I\u0027ve made the change you suggest - left this and the requestfactory pom unresolved to be certain you are happy with the results.",
+      "parentUuid": "b444fbba_437d3040",
       "range": {
         "startLine": 69,
         "startChar": 0,
@@ -138,6 +263,24 @@
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b32add14_85077f44",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-05-05T04:08:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "498548b9_f4b92134",
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76836d36_c28cc57c",
@@ -151,6 +294,30 @@
       "writtenOn": "2022-04-29T12:21:24Z",
       "side": 1,
       "message": "Unrelated to this change but should this be updated? (same above in \u003cproperties\u003e BTW)",
+      "range": {
+        "startLine": 86,
+        "startChar": 28,
+        "endLine": 86,
+        "endChar": 31
+      },
+      "revId": "e5d260e8b50d1ef9152272ebcd3b1ce609c0ecfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08d2bec5_1155fbc9",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-05-05T04:08:02Z",
+      "side": 1,
+      "message": "Changed to \"GWT 2.8 and above\" to be clear - though this comment dates to a time when it might have been surprising to require java 8 as a minimum at all, so probably this could be safely removed entirely...\n\n(Also changed samples/validation/pom.xml)",
+      "parentUuid": "76836d36_c28cc57c",
       "range": {
         "startLine": 86,
         "startChar": 28,

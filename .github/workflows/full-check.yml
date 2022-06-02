@@ -1,0 +1,77 @@
+# Run all tests and builds all aspects of GWT using Java8. Runs nightly (plus
+# or minus timzeones) on the master branch, and will also run right away on a
+# push to a release branch. Checkstyle and test failures will be reported so
+# they are visible on github, releases will be made available too (soon).
+name: Full build
+on:
+  schedule:
+    # This time is selected to be early in the morning in NA/SA/EU/ME
+    - cron:  '0 6 * * *'
+  push:
+    # Temporary addition to be able to run tests on branches that match the pattern
+    branches: [ '*-test', 'release/*' ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout GWT itself into one directory
+        uses: actions/checkout@v2
+        with:
+          path: 'gwt'
+      - name: Checkout GWT tools into a sibling directory
+        uses: actions/checkout@v2
+        with:
+          repository: 'gwtproject/tools'
+          ref: 'master'
+          path: 'tools'
+      - name: Set up JDK 8
+        # GWT presently requires Java8 to build, but can run on newer Java versions
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+      - name: Build, test, produce docs
+        run: |
+          cd gwt
+          java -version
+          ant -version
+          # Set env vars to ensure we get the build we expect
+          export \
+            TZ=America/Los_Angeles \
+            ANT_OPTS='-Dfile.encoding=UTF8 -Xmx2g'
+          # Run the ant tasks, disabling watchFileChanges to work around a github actions limitation
+          ant clean test dist doc \
+            -Dtest.jvmargs='-ea -Dgwt.watchFileChanges=false' \
+            -Dtest.web.htmlunit.disable=true \
+            -Dtest.nometa.htmlunit.disable=true \
+            -Dtest.emma.htmlunit.disable=true
+#       These are disabled for now as they are slow to process and sometimes seem to hang
+#      - name: Report test results
+#        uses: mikepenz/action-junit-report@v2
+#        if: always()
+#        with:
+#          report_paths: 'gwt/build/out/**/test/**/reports/TEST-*.xml'
+#      - name: Report Checkstyle issues
+#        uses: jwgmeligmeyling/checkstyle-github-action@v1.2
+#        with:
+#          path: 'gwt/build/out/**/checkstyle*.xml'
+      - name: Upload checkstyle xml for manual review
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: checkstyle-reports
+          path: 'gwt/build/out/**/checkstyle*.xml'
+          retention-days: 14
+      - name: Upload test xml files for manual review
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: junit-reports
+          path: 'gwt/build/out/**/test/**/reports/TEST-*.xml'
+          retention-days: 14
+      - name: On success, upload the release zip
+        uses: actions/upload-artifact@v2
+        with:
+          name: gwt
+          path: 'gwt/build/dist/gwt-*.zip'

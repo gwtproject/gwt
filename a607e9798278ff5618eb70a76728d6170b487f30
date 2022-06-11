@@ -16,6 +16,23 @@
       "message": "I\u0027ve pushed this to the release/2.10 branch, and intend to tag it as something specific for the google side of the release (say, 2.10.0-google), not re-release the org.gwtproject side.\n\nI\u0027ll set up a test for this shortly to validate that nothing surprising happens by setting this. Julien, if you get the chance, try to deploy and close this, to confirm sonatype is happy? If not, I\u0027ll ping you after I\u0027ve validated that there were no surprises.",
       "revId": "a607e9798278ff5618eb70a76728d6170b487f30",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cec0a51_bd5124bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2022-06-11T00:49:51Z",
+      "side": 1,
+      "message": "I\u0027ve deployed this to https://repo.vertispan.com/gwt-groupid-migration-test/ and confirmed that these poms still behave as I would expect when I add that as a repo server to a given project.\n\nI ran one test on a maven project, and one on a gradle project.",
+      "revId": "a607e9798278ff5618eb70a76728d6170b487f30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46"
     }
   ]
 }

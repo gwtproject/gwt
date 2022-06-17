@@ -51,7 +51,7 @@
    everything including tests, to check APIs, and to verify code style.
    It shouldn't take longer than 3-4 minutes.
 
-   `$ ant compile.tests apicheck checkstyle
+   `$ ant compile.tests apicheck checkstyle`
 
 ### How to run GWT tests
 
@@ -110,14 +110,14 @@
     Module         | Task                                  | Properties                           | Default
     ---------------|---------------------------------------|--------------------------------------|-------------------
     dev/core       | test                                  | gwt.junit.testcase.dev.core.includes | `**/com/google/**/*Test.class`
-                   |                                       | gwt.junit.testcase.dev.core.excludes |
+    &nbsp;         |                                       | gwt.junit.testcase.dev.core.excludes |
     user           | test                                  | gwt.junit.testcase.includes          | `**/*Suite.class`
     user           | test.nongwt                           | gwt.nongwt.testcase.includes         | `**/*JreSuite.class`
-                   |                                       | gwt.nongwt.testcase.excludes         |
+    &nbsp;         |                                       | gwt.nongwt.testcase.excludes         |
     user           | test.web.* test.draft.* test.nometa.* | gwt.junit.testcase.web.includes      | `**/*Suite.class`
-                   |                                       | gwt.junit.testcase.web.excludes      | `**/*JsInteropSuite.class,**/*JreSuite.class,***/OptimizedOnly*`
+    &nbsp;         |                                       | gwt.junit.testcase.web.excludes      | `**/*JsInteropSuite.class,**/*JreSuite.class,***/OptimizedOnly*`
     user           | test.dev.* test.emma.*                | gwt.junit.testcase.dev.includes      | `**/*Suite.class`
-                   |                                       | gwt.junit.testcase.dev.excludes      | `**/*JsInteropSuite.class,**/*JreSuite.class,***/OptimizedOnly*`
+    &nbsp;         |                                       | gwt.junit.testcase.dev.excludes      | `**/*JsInteropSuite.class,**/*JreSuite.class,***/OptimizedOnly*`
 
 ### Examples
 

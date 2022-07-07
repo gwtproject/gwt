@@ -1,6 +1,6 @@
 ## GWT
 
-  [![nightly](https://img.shields.io/jenkins/s/http/build.gwtproject.org/gwt.svg?label=nightly)](http://build.gwtproject.org/job/gwt/)
+  [![nightly](https://img.shields.io/github/v/release/gwtproject/gwt)](https://github.com/gwtproject/gwt/releases)
   [![gitter](https://img.shields.io/badge/gitter.im-Join%20Chat-green.svg)](https://gitter.im/gwtproject/gwt/)
   [![irc](https://img.shields.io/badge/irc:%20chat.freenode.net-%23%23gwt-green.svg)](https://webchat.freenode.net/)
 

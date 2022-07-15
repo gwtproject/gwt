@@ -47,10 +47,11 @@ jobs:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -eux
+          shopt -s extglob
           cd gwt
-          for xml in $(find build/out | grep checkstyle); do
-            echo $xml
-            reviewdog -f=checkstyle -filter-mode=diff_context -reporter=github-pr-review -level=info < $xml
+          for f in build/out/**/checkstyle*.xml ; do
+            echo $f
+            reviewdog -f=checkstyle -filter-mode=diff_context -reporter=github-pr-review -level=info < $f
           done
       - name: Upload checkstyle xml for manual review
         uses: actions/upload-artifact@v2

@@ -44,7 +44,8 @@ jobs:
           # Set env vars to ensure we get the build/test we expect
           export \
             TZ=America/Los_Angeles \
-            ANT_OPTS='-Dfile.encoding=UTF8 -Xmx2g'
+            ANT_OPTS='-Dfile.encoding=UTF8 -Xmx2g' \
+            GWT_VERSION=HEAD-SNAPSHOT
           # Run the ant tasks, disabling watchFileChanges to work around a github actions limitation
           ant clean test dist doc \
             -Dtest.jvmargs='-ea -Dgwt.watchFileChanges=false' \
@@ -75,3 +76,24 @@ jobs:
         with:
           name: gwt
           path: 'gwt/build/dist/gwt-*.zip'
+
+      - name: Create a settings.xml file with sonatype deploy credentials
+        if: github.event_name == 'schedule'
+        uses: s4u/maven-settings-action@v2.6.0
+        with:
+          servers: |
+            [{
+              "id": "sonatype-snapshots",
+              "username": "${{ secrets.SONATYPE_USERNAME }}",
+              "password": "${{ secrets.SONATYPE_PASSWORD }}"
+            }]
+      - name: Nightly builds should be deployed as snapshots to sonatype
+        if: github.event_name == 'schedule'
+        run: |
+          set -eux
+          # Set the version to deploy (it was also set in the build step above)
+          export GWT_VERSION=HEAD-SNAPSHOT
+          export GWT_MAVEN_REPO_URL=https://oss.sonatype.org/content/repositories/snapshots/
+          export GWT_MAVEN_REPO_ID=sonatype-snapshots
+          # With no user input, run the push-gwtproject.sh script to deploy org.gwtproject artifacts
+          maven/push-gwtproject.sh < /dev/null

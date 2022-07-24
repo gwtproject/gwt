@@ -80,7 +80,7 @@ jobs:
       - name: Set up sonatype credentials
         # Using the same java version as above, set up a settings.xml file
         uses: actions/setup-java@v3
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' && github.repository_owner == 'gwtproject'
         with:
           java-version: '8'
           distribution: 'temurin'
@@ -90,7 +90,7 @@ jobs:
           server-password: SONATYPE_PASSWORD
 
       - name: Nightly builds should be deployed as snapshots to sonatype
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' && github.repository_owner == 'gwtproject'
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}

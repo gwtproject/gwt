@@ -85,37 +85,37 @@ public final class ClientSerializationStreamReader extends
   }
 
   public native boolean readBoolean() /*-{
-    return !!this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index];
+    return !!this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++];
   }-*/;
 
   public native byte readByte() /*-{
-    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index];
+    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++];
   }-*/;
 
   public native char readChar() /*-{
-    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index];
+    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++];
   }-*/;
 
   public native double readDouble() /*-{
-    return Number(this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index]);
+    return Number(this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++]);
   }-*/;
 
   public native float readFloat() /*-{
-    return Number(this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index]);
+    return Number(this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++]);
   }-*/;
 
   public native int readInt() /*-{
-    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index];
+    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++];
   }-*/;
 
   @UnsafeNativeLong
   public native long readLong() /*-{
-    var s = this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index];
+    var s = this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++];
     return @ClientSerializationStreamReader::longFromBase64(Ljava/lang/String;)(s);
   }-*/;
 
   public native short readShort() /*-{
-    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index];
+    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++];
   }-*/;
 
   public String readString() {
@@ -139,7 +139,7 @@ public final class ClientSerializationStreamReader extends
   }-*/;
 
   private native JavaScriptObject readJavaScriptObject() /*-{
-    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index];
+    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++];
   }-*/;
 
   private static int readVersion(String encodedString) {

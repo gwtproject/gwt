@@ -15,12 +15,6 @@
  */
 package com.google.gwt.user.server.rpc.impl;
 
-import com.google.gwt.user.client.rpc.CustomFieldSerializer;
-import com.google.gwt.user.client.rpc.SerializationException;
-import com.google.gwt.user.client.rpc.impl.AbstractSerializationStreamWriter;
-import com.google.gwt.user.server.Base64Utils;
-import com.google.gwt.user.server.rpc.SerializationPolicy;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -30,10 +24,16 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
+import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+
+import com.google.gwt.user.client.rpc.CustomFieldSerializer;
+import com.google.gwt.user.client.rpc.SerializationException;
+import com.google.gwt.user.client.rpc.impl.AbstractSerializationStreamWriter;
+import com.google.gwt.user.server.Base64Utils;
+import com.google.gwt.user.server.rpc.SerializationPolicy;
 
 /**
  * For internal use only. Used for server call serialization. This class is
@@ -872,9 +872,9 @@ public final class ServerSerializationStreamWriter extends
   }
 
   private void writePayload(LengthConstrainedArray stream) {
-    ListIterator<String> tokenIterator = tokenList.listIterator(tokenList.size());
-    while (tokenIterator.hasPrevious()) {
-      stream.addToken(tokenIterator.previous());
+    Iterator<String> tokenIterator = tokenList.iterator();
+    while (tokenIterator.hasNext()) {
+      stream.addToken(tokenIterator.next());
     }
   }
 

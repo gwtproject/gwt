@@ -186,6 +186,7 @@ public final class ClientSerializationStreamReader extends
 
   private RpcDecoder decoder;
   private int index;
+  private int indexFromEnd;
   private Serializer serializer;
 
   /**
@@ -323,6 +324,7 @@ public final class ClientSerializationStreamReader extends
     }
 
     index = 0;
+    indexFromEnd = decoder.getValues().size();
     super.prepareToRead(encoded);
 
     if (getVersion() < SERIALIZATION_STREAM_MIN_VERSION
@@ -378,6 +380,12 @@ public final class ClientSerializationStreamReader extends
   @Override
   public int readInt() {    
     JsNumberLiteral literal = (JsNumberLiteral) decoder.getValues().get(index++);
+    return (int) literal.getValue();
+  }
+  
+  @Override
+  public int readIntFromEnd() {    
+    JsNumberLiteral literal = (JsNumberLiteral) decoder.getValues().get(--indexFromEnd);
     return (int) literal.getValue();
   }
   

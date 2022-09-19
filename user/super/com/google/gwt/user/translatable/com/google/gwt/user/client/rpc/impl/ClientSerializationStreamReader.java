@@ -40,6 +40,7 @@ public final class ClientSerializationStreamReader extends
   }-*/;
 
   int index;
+  int indexFromEnd;
 
   JavaScriptObject results;
 
@@ -66,7 +67,8 @@ public final class ClientSerializationStreamReader extends
       results = JsonUtils.safeEval(encoded);
     }
 
-    index = getLength(results);
+    index = 0;
+    indexFromEnd = getLength(results);
     super.prepareToRead(encoded);
 
     if (getVersion() < SERIALIZATION_STREAM_MIN_VERSION
@@ -81,7 +83,7 @@ public final class ClientSerializationStreamReader extends
           + "server: " + getFlags());
     }
 
-    stringTable = readJavaScriptObject();
+    stringTable = readJavaScriptObjectFromEnd();
   }
 
   public native boolean readBoolean() /*-{
@@ -105,7 +107,11 @@ public final class ClientSerializationStreamReader extends
   }-*/;
 
   public native int readInt() /*-{
-    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++];
+  return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++];
+}-*/;
+
+  public native int readIntFromEnd() /*-{
+  	return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::indexFromEnd];
   }-*/;
 
   @UnsafeNativeLong
@@ -139,7 +145,11 @@ public final class ClientSerializationStreamReader extends
   }-*/;
 
   private native JavaScriptObject readJavaScriptObject() /*-{
-    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++];
+  return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++];
+}-*/;
+
+  private native JavaScriptObject readJavaScriptObjectFromEnd() /*-{
+    return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[--this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::indexFromEnd];
   }-*/;
 
   private static int readVersion(String encodedString) {

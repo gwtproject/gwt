@@ -32,6 +32,8 @@ public interface SerializationStreamReader {
 
   int readInt() throws SerializationException;
 
+  int readIntFromEnd() throws SerializationException;
+
   long readLong() throws SerializationException;
 
   Object readObject() throws SerializationException;

@@ -93,11 +93,11 @@ public abstract class AbstractSerializationStreamReader extends
 
     // Read the stream version number
     //
-    setVersion(readInt());
+    setVersion(readIntFromEnd());
 
     // Read the flags from the stream
     //
-    setFlags(readInt());
+    setFlags(readIntFromEnd());
   }
 
   public final Object readObject() throws SerializationException {

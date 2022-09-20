@@ -555,7 +555,12 @@ public final class ServerSerializationStreamReader extends AbstractSerialization
 
   @Override
   public int readIntFromEnd() throws SerializationException {
-	  throw new UnsupportedOperationException();
+    String value = extractFromEnd();
+    try {
+      return Integer.parseInt(value);
+    } catch (NumberFormatException e) {
+      throw getNumberFormatException(value, "int", Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
   }
 
   @Override

@@ -29,7 +29,7 @@
             <dependency>
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwt-user</artifactId>
-                <version>${project.version}</version>
+                <version>2.10.0</version>
             </dependency>
             <dependency>
                 <groupId>org.gwtproject</groupId>
@@ -39,7 +39,7 @@
             <dependency>
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwt-dev</artifactId>
-                <version>${project.version}</version>
+                <version>2.10.0</version>
             </dependency>
             <dependency>
                 <groupId>org.gwtproject</groupId>
@@ -49,7 +49,7 @@
             <dependency>
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwt-codeserver</artifactId>
-                <version>${project.version}</version>
+                <version>2.10.0</version>
             </dependency>
             <dependency>
                 <groupId>org.gwtproject</groupId>
@@ -59,7 +59,7 @@
             <dependency>
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwt-servlet</artifactId>
-                <version>${project.version}</version>
+                <version>2.10.0</version>
             </dependency>
             <dependency>
                 <groupId>org.gwtproject</groupId>

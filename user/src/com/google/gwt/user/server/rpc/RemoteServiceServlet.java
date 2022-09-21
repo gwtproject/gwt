@@ -17,12 +17,9 @@ package com.google.gwt.user.server.rpc;
 
 import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADER;
 
-import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.SerializationException;
-
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
@@ -34,6 +31,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
+import com.google.gwt.user.client.rpc.RpcTokenException;
+import com.google.gwt.user.client.rpc.SerializationException;
 
 /**
  * The servlet base class for your RPC service implementations that
@@ -266,7 +267,7 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
    * possible XSRF attacks and then decodes the <code>payload</code> using
    * {@link RPC#decodeRequest(String, Class, SerializationPolicyProvider)}
    * to do the actual work.
-   * Once the request is decoded {@link RemoteServiceServlet#processCall(RPCRequest)}
+   * Once the request is decoded {@link RemoteServiceServlet#processCall(RPCRequest, Writer)}
    * will be called.
    * <p>
    * Subclasses may optionally override this method to handle the payload in any
@@ -278,6 +279,7 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
    * This is public so that it can be unit tested easily without HTTP.
    *
    * @param payload the UTF-8 request payload
+   * @param writer the writer to write the output to
    * @return a string which encodes either the method's return, a checked
    *         exception thrown by the method, or an
    *         {@link IncompatibleRemoteServiceException}
@@ -287,25 +289,25 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
    * @throws RuntimeException if the service method throws an unchecked
    *           exception (the exception will be the one thrown by the service)
    */
-  public String processCall(String payload) throws SerializationException {
+  public void processCall(String payload, Writer writer) throws SerializationException {
     // First, check for possible XSRF situation
     checkPermutationStrongName();
 
     RPCRequest rpcRequest;
     try {
       rpcRequest = RPC.decodeRequest(payload, delegate.getClass(), this);
+      processCall(rpcRequest, writer);
     } catch (IncompatibleRemoteServiceException ex) {
       log(
           "An IncompatibleRemoteServiceException was thrown while processing this call.",
           ex);
-      return RPC.encodeResponseForFailedRequest(null, ex);
+      RPC.encodeResponseForFailedRequest(null, ex, writer);
     }
-    return processCall(rpcRequest);
   }
 
   /**
    * Process an already decoded RPC request. Uses the
-   * {@link RPC#invokeAndEncodeResponse(Object, java.lang.reflect.Method, Object[])}
+   * {@link RPC#invokeAndEncodeResponse(Object, java.lang.reflect.Method, Object[], Writer)}
    * method to do the actual work.
    * <p>
    * Subclasses may optionally override this method to handle the decoded rpc
@@ -318,6 +320,7 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
    * This is public so that it can be unit tested easily without HTTP.
    *
    * @param rpcRequest the already decoded RPC request
+   * @param writer output to be written to this writer
    * @return a string which encodes either the method's return, a checked
    *         exception thrown by the method, or an
    *         {@link IncompatibleRemoteServiceException}
@@ -327,21 +330,21 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
    * @throws RuntimeException if the service method throws an unchecked
    *           exception (the exception will be the one thrown by the service)
    */
-  public String processCall(RPCRequest rpcRequest) throws SerializationException {
+  public void processCall(RPCRequest rpcRequest, Writer writer) throws SerializationException {
     try {
       onAfterRequestDeserialized(rpcRequest);
-      return RPC.invokeAndEncodeResponse(delegate, rpcRequest.getMethod(),
+      RPC.invokeAndEncodeResponse(delegate, rpcRequest.getMethod(),
           rpcRequest.getParameters(), rpcRequest.getSerializationPolicy(),
-          rpcRequest.getFlags());
+          rpcRequest.getFlags(), writer);
     } catch (IncompatibleRemoteServiceException ex) {
       log(
           "An IncompatibleRemoteServiceException was thrown while processing this call.",
           ex);
-      return RPC.encodeResponseForFailedRequest(rpcRequest, ex);
+      RPC.encodeResponseForFailedRequest(rpcRequest, ex, writer);
     } catch (RpcTokenException tokenException) {
       log("An RpcTokenException was thrown while processing this call.",
           tokenException);
-      return RPC.encodeResponseForFailedRequest(rpcRequest, tokenException);
+      RPC.encodeResponseForFailedRequest(rpcRequest, tokenException, writer);
     }
   }
 
@@ -366,23 +369,28 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
     // Let subclasses see the serialized request.
     //
     onBeforeRequestDeserialized(requestPayload);
+    
+    // Create Writer on response, considering GZIP compression if requested
+    //
+    final Writer writer = createWriterForResponse(request, response);
 
     // Invoke the core dispatching logic, which returns the serialized
     // result.
     //
-    String responsePayload = processCall(requestPayload);
+    processCall(requestPayload, writer);
 
     // Let subclasses see the serialized response.
     //
-    onAfterResponseSerialized(responsePayload);
+    onAfterResponseSerialized(""); // TODO if this object has a more specific implementation of onAfterResponseSerialized, we need to "tee" the response into a String that we pass to onAfterResponseSerialized
 
-    // Write the response.
+    // Finish the response.
     //
-    writeResponse(request, response, responsePayload);
+    writer.flush();
+    writer.close();
   }
 
   /**
-   * This method is called by {@link #processCall(String)} and will throw a
+   * This method is called by {@link #processCall(String, Writer)} and will throw a
    * SecurityException if {@link #getPermutationStrongName()} returns
    * <code>null</code>. This method can be overridden to be a no-op if there are
    * clients that are not expected to provide the
@@ -484,27 +492,6 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
   protected void onBeforeRequestDeserialized(String serializedRequest) {
   }
 
-  /**
-   * Determines whether the response to a given servlet request should or should
-   * not be GZIP compressed. This method is only called in cases where the
-   * requester accepts GZIP encoding.
-   * <p>
-   * This implementation currently returns <code>true</code> if the response
-   * string's estimated byte length is longer than 256 bytes. Subclasses can
-   * override this logic.
-   * </p>
-   * 
-   * @param request the request being served
-   * @param response the response that will be written into
-   * @param responsePayload the payload that is about to be sent to the client
-   * @return <code>true</code> if responsePayload should be GZIP compressed,
-   *         otherwise <code>false</code>.
-   */
-  protected boolean shouldCompressResponse(HttpServletRequest request,
-      HttpServletResponse response, String responsePayload) {
-    return RPCServletUtils.exceedsUncompressedContentLengthLimit(responsePayload);
-  }
-
   private SerializationPolicy getCachedSerializationPolicy(
       String moduleBaseURL, String strongName) {
     synchronized (serializationPolicyCache) {
@@ -520,12 +507,9 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
     }
   }
 
-  private void writeResponse(HttpServletRequest request,
-      HttpServletResponse response, String responsePayload) throws IOException {
-    boolean gzipEncode = RPCServletUtils.acceptsGzipEncoding(request)
-        && shouldCompressResponse(request, response, responsePayload);
-
-    RPCServletUtils.writeResponse(getServletContext(), response,
-        responsePayload, gzipEncode);
+  private Writer createWriterForResponse(HttpServletRequest request,
+      HttpServletResponse response) throws IOException {
+    boolean gzipEncode = RPCServletUtils.acceptsGzipEncoding(request);
+    return RPCServletUtils.createWriterForResponse(getServletContext(), response, gzipEncode);
   }
 }

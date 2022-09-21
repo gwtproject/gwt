@@ -19,6 +19,9 @@ package com.google.gwt.user.server.rpc;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.lang.reflect.Method;
 import java.nio.charset.Charset;
 import java.util.Locale;
@@ -331,50 +334,34 @@ public class RPCServletUtils {
    * @throws IOException if reading, writing, or closing the response's output
    *           stream fails
    */
-  public static void writeResponse(ServletContext servletContext,
-      HttpServletResponse response, String responseContent, boolean gzipResponse)
+  public static Writer createWriterForResponse(ServletContext servletContext,
+      HttpServletResponse response, boolean gzipResponse)
       throws IOException {
-
-    byte[] responseBytes = responseContent.getBytes(CHARSET_UTF8);
+    final Writer writer;
+    final OutputStream output = response.getOutputStream();
     if (gzipResponse) {
       // Compress the reply and adjust headers.
       //
-      ByteArrayOutputStream output = null;
       GZIPOutputStream gzipOutputStream = null;
-      Throwable caught = null;
       try {
-        output = new ByteArrayOutputStream(responseBytes.length);
         gzipOutputStream = new GZIPOutputStream(output);
-        gzipOutputStream.write(responseBytes);
-        gzipOutputStream.finish();
-        gzipOutputStream.flush();
         setGzipEncodingHeader(response);
-        responseBytes = output.toByteArray();
-      } catch (IOException e) {
-        caught = e;
       } finally {
         if (null != gzipOutputStream) {
           gzipOutputStream.close();
         }
-        if (null != output) {
-          output.close();
-        }
       }
-
-      if (caught != null) {
-        servletContext.log("Unable to compress response", caught);
-        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        return;
-      }
+      writer = new OutputStreamWriter(gzipOutputStream, CHARSET_UTF8);
+    } else {
+      writer = new OutputStreamWriter(output, CHARSET_UTF8);
     }
 
     // Send the reply.
     //
-    response.setContentLength(responseBytes.length);
     response.setContentType(CONTENT_TYPE_APPLICATION_JSON_UTF8);
     response.setStatus(HttpServletResponse.SC_OK);
     response.setHeader(CONTENT_DISPOSITION, ATTACHMENT);
-    response.getOutputStream().write(responseBytes);
+    return writer;
   }
 
   /**

@@ -15,18 +15,8 @@
  */
 package com.google.gwt.user.server.rpc;
 
-import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RpcToken;
-import com.google.gwt.user.client.rpc.SerializationException;
-import com.google.gwt.user.client.rpc.impl.AbstractSerializationStream;
-import com.google.gwt.user.server.rpc.impl.DequeMap;
-import com.google.gwt.user.server.rpc.impl.LegacySerializationPolicy;
-import com.google.gwt.user.server.rpc.impl.SerializabilityUtil;
-import com.google.gwt.user.server.rpc.impl.ServerSerializationStreamReader;
-import com.google.gwt.user.server.rpc.impl.ServerSerializationStreamWriter;
-import com.google.gwt.user.server.rpc.impl.TypeNameObfuscator;
-
+import java.io.IOException;
+import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
@@ -36,6 +26,19 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RpcToken;
+import com.google.gwt.user.client.rpc.RpcTokenException;
+import com.google.gwt.user.client.rpc.SerializationException;
+import com.google.gwt.user.client.rpc.impl.AbstractSerializationStream;
+import com.google.gwt.user.server.rpc.impl.DequeMap;
+import com.google.gwt.user.server.rpc.impl.LegacySerializationPolicy;
+import com.google.gwt.user.server.rpc.impl.SerializabilityUtil;
+import com.google.gwt.user.server.rpc.impl.ServerSerializationStreamReader;
+import com.google.gwt.user.server.rpc.impl.ServerSerializationStreamWriter;
+import com.google.gwt.user.server.rpc.impl.TypeNameObfuscator;
 
 /**
  * Utility class for integrating with the RPC system. This class exposes methods
@@ -336,17 +339,17 @@ public final class RPC {
    * </p>
    * @param rpcRequest the RPCRequest that failed to execute, may be null
    * @param cause the {@link Throwable} that was thrown
-   * @return a String that encodes the exception
+   * @param writer output to be written to this writer
    * @throws SerializationException if the result cannot be serialized
    */
-  public static String encodeResponseForFailedRequest(RPCRequest rpcRequest, Throwable cause)
+  public static void encodeResponseForFailedRequest(RPCRequest rpcRequest, Throwable cause, Writer writer)
       throws SerializationException {
     if (rpcRequest == null) {
-      return RPC.encodeResponseForFailure(null, cause,
-          getDefaultSerializationPolicy(), AbstractSerializationStream.DEFAULT_FLAGS);
+      RPC.encodeResponseForFailure(null, cause,
+          getDefaultSerializationPolicy(), AbstractSerializationStream.DEFAULT_FLAGS, writer);
     } else {
-      return RPC.encodeResponseForFailure(null, cause,
-          rpcRequest.getSerializationPolicy(), rpcRequest.getFlags());
+      RPC.encodeResponseForFailure(null, cause,
+          rpcRequest.getSerializationPolicy(), rpcRequest.getFlags(), writer);
     }
   }
 
@@ -358,6 +361,7 @@ public final class RPC {
    * @param serviceMethod the method that threw the exception, may be
    *          <code>null</code>
    * @param cause the {@link Throwable} that was thrown
+   * @param writer the writer to serialize the output to
    * @return a string that encodes the exception
    * 
    * @throws NullPointerException if the cause is <code>null</code>
@@ -365,9 +369,9 @@ public final class RPC {
    * @throws UnexpectedException if the result was an unexpected exception (a
    *           checked exception not declared in the serviceMethod's signature)
    */
-  public static String encodeResponseForFailure(Method serviceMethod, Throwable cause)
+  public static void encodeResponseForFailure(Method serviceMethod, Throwable cause, Writer writer)
       throws SerializationException {
-    return encodeResponseForFailure(serviceMethod, cause, getDefaultSerializationPolicy());
+    encodeResponseForFailure(serviceMethod, cause, getDefaultSerializationPolicy(), writer);
   }
 
   /**
@@ -387,6 +391,7 @@ public final class RPC {
    *          <code>null</code>
    * @param cause the {@link Throwable} that was thrown
    * @param serializationPolicy determines the serialization policy to be used
+   * @param writer the writer to serialize the output to
    * @return a string that encodes the exception
    * 
    * @throws NullPointerException if the cause or the serializationPolicy
@@ -395,14 +400,14 @@ public final class RPC {
    * @throws UnexpectedException if the result was an unexpected exception (a
    *           checked exception not declared in the serviceMethod's signature)
    */
-  public static String encodeResponseForFailure(Method serviceMethod, Throwable cause,
-      SerializationPolicy serializationPolicy) throws SerializationException {
-    return encodeResponseForFailure(serviceMethod, cause, serializationPolicy,
-        AbstractSerializationStream.DEFAULT_FLAGS);
+  public static void encodeResponseForFailure(Method serviceMethod, Throwable cause,
+      SerializationPolicy serializationPolicy, Writer writer) throws SerializationException {
+    encodeResponseForFailure(serviceMethod, cause, serializationPolicy,
+        AbstractSerializationStream.DEFAULT_FLAGS, writer);
   }
 
-  public static String encodeResponseForFailure(Method serviceMethod, Throwable cause,
-      SerializationPolicy serializationPolicy, int flags) throws SerializationException {
+  public static void encodeResponseForFailure(Method serviceMethod, Throwable cause,
+      SerializationPolicy serializationPolicy, int flags, Writer writer) throws SerializationException {
     if (cause == null) {
       throw new NullPointerException("cause cannot be null");
     }
@@ -416,7 +421,7 @@ public final class RPC {
           + "' threw an unexpected exception: " + cause.toString(), cause);
     }
 
-    return encodeResponse(cause.getClass(), cause, true, flags, serializationPolicy);
+    encodeResponse(cause.getClass(), cause, true, flags, serializationPolicy, writer);
   }
 
   /**
@@ -425,6 +430,7 @@ public final class RPC {
    * 
    * @param serviceMethod the method whose result we are encoding
    * @param object the instance that we wish to encode
+   * @param writer the writer to serialize the output to
    * @return a string that encodes the object, if the object is compatible with
    *         the service method's declared return type
    * 
@@ -433,9 +439,9 @@ public final class RPC {
    * @throws NullPointerException if the service method is <code>null</code>
    * @throws SerializationException if the result cannot be serialized
    */
-  public static String encodeResponseForSuccess(Method serviceMethod, Object object)
+  public static void encodeResponseForSuccess(Method serviceMethod, Object object, Writer writer)
       throws SerializationException {
-    return encodeResponseForSuccess(serviceMethod, object, getDefaultSerializationPolicy());
+    encodeResponseForSuccess(serviceMethod, object, getDefaultSerializationPolicy(), writer);
   }
 
   /**
@@ -453,6 +459,7 @@ public final class RPC {
    * @param serviceMethod the method whose result we are encoding
    * @param object the instance that we wish to encode
    * @param serializationPolicy determines the serialization policy to be used
+   * @param writer output will be written here
    * @return a string that encodes the object, if the object is compatible with
    *         the service method's declared return type
    * 
@@ -462,14 +469,14 @@ public final class RPC {
    *           serializationPolicy are <code>null</code>
    * @throws SerializationException if the result cannot be serialized
    */
-  public static String encodeResponseForSuccess(Method serviceMethod, Object object,
-      SerializationPolicy serializationPolicy) throws SerializationException {
-    return encodeResponseForSuccess(serviceMethod, object, serializationPolicy,
-        AbstractSerializationStream.DEFAULT_FLAGS);
+  public static void encodeResponseForSuccess(Method serviceMethod, Object object,
+      SerializationPolicy serializationPolicy, Writer writer) throws SerializationException {
+    encodeResponseForSuccess(serviceMethod, object, serializationPolicy,
+        AbstractSerializationStream.DEFAULT_FLAGS, writer);
   }
 
-  public static String encodeResponseForSuccess(Method serviceMethod, Object object,
-      SerializationPolicy serializationPolicy, int flags) throws SerializationException {
+  public static void encodeResponseForSuccess(Method serviceMethod, Object object,
+      SerializationPolicy serializationPolicy, int flags, Writer writer) throws SerializationException {
     if (serviceMethod == null) {
       throw new NullPointerException("serviceMethod cannot be null");
     }
@@ -494,7 +501,7 @@ public final class RPC {
       }
     }
 
-    return encodeResponse(methodReturnType, object, false, flags, serializationPolicy);
+    encodeResponse(methodReturnType, object, false, flags, serializationPolicy, writer);
   }
 
   /**
@@ -518,6 +525,7 @@ public final class RPC {
    * @param target instance on which to invoke the serviceMethod
    * @param serviceMethod the method to invoke
    * @param args arguments used for the method invocation
+   * @param writer the writer to serialize the output to
    * @return a string which encodes either the method's return or a checked
    *         exception thrown by the method
    * 
@@ -528,9 +536,9 @@ public final class RPC {
    * @throws UnexpectedException if the serviceMethod throws a checked exception
    *           that is not declared in its signature
    */
-  public static String invokeAndEncodeResponse(Object target, Method serviceMethod, Object[] args)
+  public static void invokeAndEncodeResponse(Object target, Method serviceMethod, Object[] args, Writer writer)
       throws SerializationException {
-    return invokeAndEncodeResponse(target, serviceMethod, args, getDefaultSerializationPolicy());
+    invokeAndEncodeResponse(target, serviceMethod, args, getDefaultSerializationPolicy(), writer);
   }
 
   /**
@@ -554,6 +562,7 @@ public final class RPC {
    * @param serviceMethod the method to invoke
    * @param args arguments used for the method invocation
    * @param serializationPolicy determines the serialization policy to be used
+   * @param writer the writer to serialize the output to
    * @return a string which encodes either the method's return or a checked
    *         exception thrown by the method
    * 
@@ -566,14 +575,14 @@ public final class RPC {
    * @throws UnexpectedException if the serviceMethod throws a checked exception
    *           that is not declared in its signature
    */
-  public static String invokeAndEncodeResponse(Object target, Method serviceMethod, Object[] args,
-      SerializationPolicy serializationPolicy) throws SerializationException {
-    return invokeAndEncodeResponse(target, serviceMethod, args, serializationPolicy,
-        AbstractSerializationStream.DEFAULT_FLAGS);
+  public static void invokeAndEncodeResponse(Object target, Method serviceMethod, Object[] args,
+      SerializationPolicy serializationPolicy, Writer writer) throws SerializationException {
+    invokeAndEncodeResponse(target, serviceMethod, args, serializationPolicy,
+        AbstractSerializationStream.DEFAULT_FLAGS, writer);
   }
 
-  public static String invokeAndEncodeResponse(Object target, Method serviceMethod, Object[] args,
-      SerializationPolicy serializationPolicy, int flags) throws SerializationException {
+  public static void invokeAndEncodeResponse(Object target, Method serviceMethod, Object[] args,
+      SerializationPolicy serializationPolicy, int flags, Writer writer) throws SerializationException {
     if (serviceMethod == null) {
       throw new NullPointerException("serviceMethod");
     }
@@ -582,11 +591,9 @@ public final class RPC {
       throw new NullPointerException("serializationPolicy");
     }
 
-    String responsePayload;
     try {
       Object result = serviceMethod.invoke(target, args);
-
-      responsePayload = encodeResponseForSuccess(serviceMethod, result, serializationPolicy, flags);
+      encodeResponseForSuccess(serviceMethod, result, serializationPolicy, flags, writer);
     } catch (IllegalAccessException e) {
       SecurityException securityException =
           new SecurityException(formatIllegalAccessErrorMessage(target, serviceMethod));
@@ -601,11 +608,8 @@ public final class RPC {
       // Try to encode the caught exception
       //
       Throwable cause = e.getCause();
-
-      responsePayload = encodeResponseForFailure(serviceMethod, cause, serializationPolicy, flags);
+      encodeResponseForFailure(serviceMethod, cause, serializationPolicy, flags, writer);
     }
-
-    return responsePayload;
   }
 
   private static int getRpcVersion() throws SerializationException {
@@ -624,28 +628,39 @@ public final class RPC {
   /**
    * Returns a string that encodes the results of an RPC call. Private overload
    * that takes a flag signaling the preamble of the response payload.
-   * 
    * @param object the object that we wish to send back to the client
    * @param wasThrown if true, the object being returned was an exception thrown
    *          by the service method; if false, it was the result of the service
    *          method's invocation
-   * @return a string that encodes the response from a service method
+   * @param writer the writer to serialize the output to
+   * 
    * @throws SerializationException if the object cannot be serialized
    */
-  private static String encodeResponse(Class<?> responseClass, Object object, boolean wasThrown,
-      int flags, SerializationPolicy serializationPolicy) throws SerializationException {
-
+  private static void encodeResponse(Class<?> responseClass, Object object, boolean wasThrown,
+      int flags, SerializationPolicy serializationPolicy, Writer writer) throws SerializationException {
+    try {
+      writer.append("//");
+      if (wasThrown) {
+        writer.append("EX");
+      } else {
+        writer.append("OK");
+      }
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
     ServerSerializationStreamWriter stream =
-        new ServerSerializationStreamWriter(serializationPolicy, getRpcVersion());
+        new ServerSerializationStreamWriter(serializationPolicy, getRpcVersion(), writer);
     stream.setFlags(flags);
 
     stream.prepareToWrite();
     if (responseClass != void.class) {
       stream.serializeValue(object, responseClass);
     }
-
-    String bufferStr = (wasThrown ? "//EX" : "//OK") + stream.toString();
-    return bufferStr;
+    try {
+      stream.writeStringTableAndHeaderAfterPayloadFinished();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   private static String formatIllegalAccessErrorMessage(Object target, Method serviceMethod) {

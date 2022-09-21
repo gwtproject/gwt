@@ -24,7 +24,7 @@
  * interfaces, in which case incoming RPC calls will be directed to the
  * servlet subclass itself; or it can be overridden to give finer control over
  * routing RPC calls within a server framework.  (For more details on the
- * latter, see the {@link com.google.gwt.user.server.rpc.RemoteServiceServlet#processCall(String) RemoteServiceServlet.processCall(String)} method.)
+ * latter, see the {@link com.google.gwt.user.server.rpc.RemoteServiceServlet#processCall(String, Writer) RemoteServiceServlet.processCall(String)} method.)
  * </p>
  * 
  * <p>
@@ -37,7 +37,7 @@
  * <p>
  * Note that the default RemoteServiceServlet implementation never throws
  * exceptions to the servlet container.  All exceptions that escape the
- * {@link com.google.gwt.user.server.rpc.RemoteServiceServlet#processCall(String) RemoteServiceServlet.processCall(String)}
+ * {@link com.google.gwt.user.server.rpc.RemoteServiceServlet#processCall(String, Writer) RemoteServiceServlet.processCall(String)}
  * method will be caught, logged in the servlet context, and will cause a generic 
  * failure message to be sent to the GWT client -- with a 500 status code.  To 
  * customize this behavior, override 
@@ -45,3 +45,5 @@
  * </p>
  */
 package com.google.gwt.user.server.rpc;
+
+import java.io.Writer;

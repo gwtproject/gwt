@@ -18,13 +18,14 @@ package com.google.gwt.user.server.rpc.impl;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -47,52 +48,60 @@ public final class ServerSerializationStreamWriter extends
    * This class exists to work around a bug in IE6/7 that limits the size of
    * array literals.
    */
-  public static class LengthConstrainedArray {
+  private static class LengthConstrainedArray {
     public static final int MAXIMUM_ARRAY_LENGTH = 1 << 15;
     private static final String POSTLUDE = "])";
     private static final String PRELUDE = "].concat([";
 
-    private final StringBuffer buffer;
+    private final Writer writer;
     private int count = 0;
     private boolean needsComma = false;
+    /**
+     * The number of tokens written through this object; relevant for knowing
+     * when to split an array into two.
+     */
     private int total = 0;
     private boolean javascript = false;
 
-    public LengthConstrainedArray() {
-      buffer = new StringBuffer();
-    }
-
-    public LengthConstrainedArray(int capacityGuess) {
-      buffer = new StringBuffer(capacityGuess);
+    public LengthConstrainedArray(Writer writer) {
+      this.writer = writer;
+      try {
+        writer.append("[");
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
     }
 
     public void addToken(CharSequence token) {
-      total++;
-      if (count++ == MAXIMUM_ARRAY_LENGTH) {
-        if (total == MAXIMUM_ARRAY_LENGTH + 1) {
-          buffer.append(PRELUDE);
-          javascript = true;
-        } else {
-          buffer.append("],[");
+      try {
+        total++;
+        if (count++ == MAXIMUM_ARRAY_LENGTH) {
+          if (total == MAXIMUM_ARRAY_LENGTH + 1) {
+            writer.append(PRELUDE);
+            javascript = true;
+          } else {
+            writer.append("],[");
+          }
+          count = 0;
+          needsComma = false;
         }
-        count = 0;
-        needsComma = false;
+  
+        if (needsComma) {
+          writer.append(",");
+        } else {
+          needsComma = true;
+        }
+        writer.append(token);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
       }
-
-      if (needsComma) {
-        buffer.append(",");
-      } else {
-        needsComma = true;
-      }
-
-      buffer.append(token);
     }
 
-    public void addEscapedToken(String token) {
+    public void addEscapedToken(String token) throws IOException {
       addToken(escapeString(token, true, this));
     }
 
-    public void addToken(int i) {
+    public void addToken(int i) throws IOException {
       addToken(String.valueOf(i));
     }
 
@@ -104,13 +113,25 @@ public final class ServerSerializationStreamWriter extends
       this.javascript = javascript;
     }
 
+    /**
+     * Closes off the JavaScript array in the output
+     */
+    public void finish() {
+      try {
+        if (total > MAXIMUM_ARRAY_LENGTH) {
+          writer.append(POSTLUDE);
+        } else {
+          writer.append("]");
+        }
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    }
+    
     @Override
     public String toString() {
-      if (total > MAXIMUM_ARRAY_LENGTH) {
-        return "[" + buffer.toString() + POSTLUDE;
-      } else {
-        return "[" + buffer.toString() + "]";
-      }
+      return getClass().getSimpleName()+" [writer=" + writer + ", needsComma=" + needsComma + ", total="
+          + total + ", javascript=" + javascript + "]";
     }
   }
 
@@ -576,24 +597,21 @@ public final class ServerSerializationStreamWriter extends
 
   private final SerializationPolicy serializationPolicy;
 
-  private ArrayList<String> tokenList = new ArrayList<String>();
+  private final LengthConstrainedArray encoder;
 
-  private int tokenListCharCount;
-
-  public ServerSerializationStreamWriter(SerializationPolicy serializationPolicy) {
+  public ServerSerializationStreamWriter(SerializationPolicy serializationPolicy, Writer writer) {
     this.serializationPolicy = serializationPolicy;
+    this.encoder = new LengthConstrainedArray(writer);
   }
 
-  public ServerSerializationStreamWriter(SerializationPolicy serializationPolicy, int version) {
-    this(serializationPolicy);
+  public ServerSerializationStreamWriter(SerializationPolicy serializationPolicy, int version, Writer writer) {
+    this(serializationPolicy, writer);
     setVersion(version);
   }
 
   @Override
   public void prepareToWrite() {
     super.prepareToWrite();
-    tokenList.clear();
-    tokenListCharCount = 0;
   }
 
   public void serializeValue(Object value, Class<?> type)
@@ -616,16 +634,17 @@ public final class ServerSerializationStreamWriter extends
    */
   @Override
   public String toString() {
-    // Build a JavaScript string (with escaping, of course).
-    // We take a guess at how big to make to buffer to avoid numerous resizes.
-    //
-    int capacityGuess = 2 * tokenListCharCount + 2 * tokenList.size();
-    LengthConstrainedArray stream = new LengthConstrainedArray(capacityGuess);
-    writePayload(stream);
-    writeStringTable(stream);
-    writeHeader(stream);
-
-    return stream.toString();
+    return getClass().getName()+" for serialization policy "+serializationPolicy;
+  }
+  
+  /**
+   * To be called after all payload has been written with any of the {@code write...}
+   * methods. Appends the string table and header to the output stream.
+   */
+  public void writeStringTableAndHeaderAfterPayloadFinished() throws IOException {
+    writeStringTable();
+    writeHeader();
+    encoder.finish();
   }
   
   @Override
@@ -657,10 +676,7 @@ public final class ServerSerializationStreamWriter extends
 
   @Override
   protected void append(String token) {
-    tokenList.add(token);
-    if (token != null) {
-      tokenListCharCount += token.length();
-    }
+    encoder.addToken(token);
   }
 
   @Override
@@ -861,29 +877,23 @@ public final class ServerSerializationStreamWriter extends
    * Notice that the field are written in reverse order that the client can just
    * pop items out of the stream.
    */
-  private void writeHeader(LengthConstrainedArray stream) {
-    stream.addToken(getFlags());
-    if (stream.isJavaScript() && getVersion() >= SERIALIZATION_STREAM_JSON_VERSION) {
+  private void writeHeader() throws IOException {
+    encoder.addToken(getFlags());
+    if (encoder.isJavaScript() && getVersion() >= SERIALIZATION_STREAM_JSON_VERSION) {
       // Ensure we are not using the JSON supported version if stream is Javascript instead of JSON
-      stream.addToken(SERIALIZATION_STREAM_JSON_VERSION - 1);
+      encoder.addToken(SERIALIZATION_STREAM_JSON_VERSION - 1);
     } else {
-      stream.addToken(getVersion());
+      encoder.addToken(getVersion());
     }
   }
 
-  private void writePayload(LengthConstrainedArray stream) {
-    Iterator<String> tokenIterator = tokenList.iterator();
-    while (tokenIterator.hasNext()) {
-      stream.addToken(tokenIterator.next());
-    }
-  }
-
-  private void writeStringTable(LengthConstrainedArray stream) {
-    LengthConstrainedArray tableStream = new LengthConstrainedArray();
+  private void writeStringTable() throws IOException {
+    final StringWriter buffer = new StringWriter();
+    LengthConstrainedArray tableStream = new LengthConstrainedArray(buffer);
     for (String s : getStringTable()) {
       tableStream.addEscapedToken(s);
     }
-    stream.addToken(tableStream.toString());
-    stream.setJavaScript(stream.isJavaScript() || tableStream.isJavaScript());
+    encoder.addToken(tableStream.toString());
+    encoder.setJavaScript(encoder.isJavaScript() || tableStream.isJavaScript());
   }
 }

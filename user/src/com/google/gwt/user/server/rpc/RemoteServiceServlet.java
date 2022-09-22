@@ -19,6 +19,7 @@ import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADE
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -372,21 +373,41 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
     
     // Create Writer on response, considering GZIP compression if requested
     //
-    final Writer writer = createWriterForResponse(request, response);
+    final Writer responseWriter = createWriterForResponse(request, response);
+    final boolean onAfterResponseSerializedOverridden = isOnAfterResponseSerializedOverridden();
+    final Writer writer;
+    final StringWriter writerForResponseCopy;
+    if (onAfterResponseSerializedOverridden) {
+      writerForResponseCopy = new StringWriter();
+      writer = new TeeWriter(responseWriter, writerForResponseCopy);
+    } else {
+      writerForResponseCopy = null;
+      writer = responseWriter;
+    }
 
     // Invoke the core dispatching logic, which returns the serialized
     // result.
     //
     processCall(requestPayload, writer);
 
-    // Let subclasses see the serialized response.
-    //
-    onAfterResponseSerialized(""); // TODO if this object has a more specific implementation of onAfterResponseSerialized, we need to "tee" the response into a String that we pass to onAfterResponseSerialized
+    if (onAfterResponseSerializedOverridden) {
+      // Let subclasses see the serialized response.
+      //
+      onAfterResponseSerialized(writerForResponseCopy.toString());
+    }
 
     // Finish the response.
     //
     writer.flush();
     writer.close();
+  }
+
+  private boolean isOnAfterResponseSerializedOverridden() {
+    try {
+      return getClass().getMethod("onAfterResponseSerialized", new Class<?>[] { String.class }).getDeclaringClass() != getClass();
+    } catch (NoSuchMethodException | SecurityException e) {
+      throw new RuntimeException("Couldn't find onAfterResponseSerialized method", e);
+    }
   }
 
   /**

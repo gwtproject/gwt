@@ -337,30 +337,19 @@ public class RPCServletUtils {
   public static Writer createWriterForResponse(ServletContext servletContext,
       HttpServletResponse response, boolean gzipResponse)
       throws IOException {
-    final Writer writer;
-    final OutputStream output = response.getOutputStream();
-    if (gzipResponse) {
-      // Compress the reply and adjust headers.
-      //
-      GZIPOutputStream gzipOutputStream = null;
-      try {
-        gzipOutputStream = new GZIPOutputStream(output);
-        setGzipEncodingHeader(response);
-      } finally {
-        if (null != gzipOutputStream) {
-          gzipOutputStream.close();
-        }
-      }
-      writer = new OutputStreamWriter(gzipOutputStream, CHARSET_UTF8);
-    } else {
-      writer = new OutputStreamWriter(output, CHARSET_UTF8);
-    }
-
-    // Send the reply.
-    //
     response.setContentType(CONTENT_TYPE_APPLICATION_JSON_UTF8);
     response.setStatus(HttpServletResponse.SC_OK);
     response.setHeader(CONTENT_DISPOSITION, ATTACHMENT);
+    final Writer writer;
+    if (gzipResponse) {
+      // Compress the reply and adjust headers.
+      //
+      setGzipEncodingHeader(response);
+      final GZIPOutputStream gzipOutputStream = new GZIPOutputStream(response.getOutputStream());
+      writer = new OutputStreamWriter(gzipOutputStream, CHARSET_UTF8);
+    } else {
+      writer = new OutputStreamWriter(response.getOutputStream(), CHARSET_UTF8);
+    }
     return writer;
   }
 

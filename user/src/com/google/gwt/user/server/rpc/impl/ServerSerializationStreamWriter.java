@@ -893,7 +893,7 @@ public final class ServerSerializationStreamWriter extends
     for (String s : getStringTable()) {
       tableStream.addEscapedToken(s);
     }
-    encoder.addToken(tableStream.toString());
+    encoder.addToken(buffer.toString());
     encoder.setJavaScript(encoder.isJavaScript() || tableStream.isJavaScript());
   }
 }

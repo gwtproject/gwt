@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
@@ -404,8 +406,20 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
 
   private boolean isOnAfterResponseSerializedOverridden() {
     try {
-      return getClass().getMethod("onAfterResponseSerialized", new Class<?>[] { String.class }).getDeclaringClass() != getClass();
-    } catch (NoSuchMethodException | SecurityException e) {
+      Class<?> c = getClass();
+      boolean foundOverride = false;
+      while (!foundOverride && c != RemoteServiceServlet.class) {
+        try {
+          final Method m = c.getDeclaredMethod("onAfterResponseSerialized", new Class<?>[] { String.class });
+          foundOverride = m != null;
+          // no need to check visibility because an override must be at least protected or public
+        } catch (NoSuchMethodException e) {
+          // ignore; the method wasn't found in the class referenced by c
+        }
+        c = c.getSuperclass();
+      }
+      return foundOverride;
+    } catch (SecurityException e) {
       throw new RuntimeException("Couldn't find onAfterResponseSerialized method", e);
     }
   }

@@ -14,7 +14,7 @@ import java.io.Writer;
 public class TeeWriter extends FilterWriter {
     private final Writer tee;
     
-    protected TeeWriter(Writer out, Writer tee) {
+    public TeeWriter(Writer out, Writer tee) {
         super(out);
         this.tee = tee;
     }

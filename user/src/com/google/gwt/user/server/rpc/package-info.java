@@ -45,5 +45,3 @@
  * </p>
  */
 package com.google.gwt.user.server.rpc;
-
-import java.io.Writer;

@@ -1002,20 +1002,20 @@ public final class ServerSerializationStreamReader extends AbstractSerialization
   }
 
   private String extract() throws SerializationException {
-	    try {
-	      return tokenList.get(tokenListIndex++);
-	    } catch (IndexOutOfBoundsException e) {
-	      throw new SerializationException("Too few tokens in RPC request", e);
-	    }
-	  }
+    try {
+      return tokenList.get(tokenListIndex++);
+    } catch (IndexOutOfBoundsException e) {
+      throw new SerializationException("Too few tokens in RPC request", e);
+    }
+  }
 
   private String extractFromEnd() throws SerializationException {
-	    try {
-	      return tokenList.get(tokenListIndex++);
-	    } catch (IndexOutOfBoundsException e) {
-	      throw new SerializationException("Too few tokens in RPC request", e);
-	    }
-	  }
+    try {
+      return tokenList.get(tokenListIndex++);
+    } catch (IndexOutOfBoundsException e) {
+      throw new SerializationException("Too few tokens in RPC request", e);
+    }
+  }
 
   /**
    * Returns a suitable NumberFormatException with an explanatory message when a

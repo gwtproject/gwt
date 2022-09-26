@@ -130,8 +130,8 @@ public final class ServerSerializationStreamWriter extends
     
     @Override
     public String toString() {
-      return getClass().getSimpleName()+" [writer=" + writer + ", needsComma=" + needsComma + ", total="
-          + total + ", javascript=" + javascript + "]";
+      return getClass().getSimpleName() + " [writer=" + writer + ", needsComma=" + needsComma
+          + ", total=" + total + ", javascript=" + javascript + "]";
     }
   }
 
@@ -634,7 +634,7 @@ public final class ServerSerializationStreamWriter extends
    */
   @Override
   public String toString() {
-    return getClass().getName()+" for serialization policy "+serializationPolicy;
+    return getClass().getName() + " for serialization policy " + serializationPolicy;
   }
   
   /**

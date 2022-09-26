@@ -361,7 +361,6 @@ public final class RPC {
    *          <code>null</code>
    * @param cause the {@link Throwable} that was thrown
    * @param writer the writer to serialize the output to
-   * @return a string that encodes the exception
    * 
    * @throws NullPointerException if the cause is <code>null</code>
    * @throws SerializationException if the result cannot be serialized
@@ -391,7 +390,6 @@ public final class RPC {
    * @param cause the {@link Throwable} that was thrown
    * @param serializationPolicy determines the serialization policy to be used
    * @param writer the writer to serialize the output to
-   * @return a string that encodes the exception
    * 
    * @throws NullPointerException if the cause or the serializationPolicy
    *           are <code>null</code>

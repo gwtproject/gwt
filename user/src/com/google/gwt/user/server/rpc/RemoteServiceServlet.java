@@ -324,9 +324,6 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
    *
    * @param rpcRequest the already decoded RPC request
    * @param writer output to be written to this writer
-   * @return a string which encodes either the method's return, a checked
-   *         exception thrown by the method, or an
-   *         {@link IncompatibleRemoteServiceException}
    * @throws SerializationException if we cannot serialize the response
    * @throws UnexpectedException if the invocation throws a checked exception
    *           that is not declared in the service method's signature

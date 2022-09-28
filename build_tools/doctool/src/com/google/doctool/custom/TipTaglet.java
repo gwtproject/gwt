@@ -37,42 +37,52 @@ public class TipTaglet implements Taglet {
   public TipTaglet() {
   }
 
+  @Override
   public String getName() {
     return "tip";
   }
 
+  @Override
   public boolean inConstructor() {
     return true;
   }
 
+  @Override
   public boolean inField() {
     return true;
   }
 
+  @Override
   public boolean inMethod() {
     return true;
   }
 
+  @Override
   public boolean inOverview() {
     return true;
   }
 
+  @Override
   public boolean inPackage() {
     return true;
   }
 
+  @Override
   public boolean inType() {
     return true;
   }
 
+  @Override
   public boolean isInlineTag() {
     return false;
   }
 
+  @Override
   public String toString(Tag tag) {
     return null;
   }
 
+  @Override
   public String toString(Tag[] tags) {
     if (tags == null || tags.length == 0) {
       return null;

@@ -37,43 +37,53 @@ public class IncludeTaglet implements Taglet {
     tagletMap.put(tag.getName(), tag);
   }
 
+  @Override
   public String getName() {
     return "gwt.include";
   }
 
+  @Override
   public boolean inConstructor() {
     return true;
   }
 
+  @Override
   public boolean inField() {
     return true;
   }
 
+  @Override
   public boolean inMethod() {
     return true;
   }
 
+  @Override
   public boolean inOverview() {
     return true;
   }
 
+  @Override
   public boolean inPackage() {
     return true;
   }
 
+  @Override
   public boolean inType() {
     return true;
   }
 
+  @Override
   public boolean isInlineTag() {
     return true;
   }
 
+  @Override
   public String toString(Tag tag) {
     String contents = ResourceIncluder.getResourceFromClasspathScrubbedForHTML(tag);
     return "<blockquote><pre>" + contents + "</pre></blockquote>";
   }
 
+  @Override
   public String toString(Tag[] tags) {
     return null;
   }

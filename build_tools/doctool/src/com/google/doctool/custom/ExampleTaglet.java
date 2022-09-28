@@ -42,41 +42,51 @@ public class ExampleTaglet implements Taglet {
     tagletMap.put(tag.getName(), tag);
   }
 
+  @Override
   public String getName() {
     return "example";
   }
 
+  @Override
   public boolean inConstructor() {
     return true;
   }
 
+  @Override
   public boolean inField() {
     return true;
   }
 
+  @Override
   public boolean inMethod() {
     return true;
   }
 
+  @Override
   public boolean inOverview() {
     return true;
   }
 
+  @Override
   public boolean inPackage() {
     return true;
   }
 
+  @Override
   public boolean inType() {
     return true;
   }
 
+  @Override
   public boolean isInlineTag() {
     return true;
   }
 
+  @Override
   public String toString(Tag tag) {
     SourcePosition position = LinkResolver.resolveLink(tag,
         new ExtraClassResolver() {
+          @Override
           public ClassDoc findClass(String className) {
             return GWTJavaDoclet.root.classNamed(className);
           }
@@ -89,6 +99,7 @@ public class ExampleTaglet implements Taglet {
     return "<blockquote><pre>" + slurpSource + "</pre></blockquote>";
   }
 
+  @Override
   public String toString(Tag[] tags) {
     if (tags == null || tags.length == 0) {
       return null;

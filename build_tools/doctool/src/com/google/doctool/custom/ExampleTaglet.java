@@ -15,7 +15,6 @@
  */
 package com.google.doctool.custom;
 
-import com.google.doctool.Booklet;
 import com.google.doctool.LinkResolver;
 import com.google.doctool.LinkResolver.ExtraClassResolver;
 
@@ -24,6 +23,9 @@ import com.sun.javadoc.SourcePosition;
 import com.sun.javadoc.Tag;
 import com.sun.tools.doclets.Taglet;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -80,7 +82,7 @@ public class ExampleTaglet implements Taglet {
           }
         });
 
-    String slurpSource = Booklet.slurpSource(position);
+    String slurpSource = slurpSource(position);
     // The <pre> tag still requires '<' and '>' characters to be escaped
     slurpSource = slurpSource.replace("<", "&lt;");
     slurpSource = slurpSource.replace(">", "&gt;");
@@ -96,6 +98,65 @@ public class ExampleTaglet implements Taglet {
       result += toString(tags[i]);
     }
     return result;
+  }
+
+  private static String slurpSource(SourcePosition position) {
+    BufferedReader br = null;
+    try {
+      br = new BufferedReader(new FileReader(position.file()));
+      for (int i = 0, n = position.line() - 1; i < n; ++i) {
+        br.readLine();
+      }
+
+      StringBuffer lines = new StringBuffer();
+      String line = br.readLine();
+      int braceDepth = 0;
+      int indent = -1;
+      boolean seenSemiColonOrBrace = false;
+      while (line != null) {
+        if (indent == -1) {
+          for (indent = 0; Character.isWhitespace(line.charAt(indent)); ++indent) {
+            // just accumulate
+          }
+        }
+
+        if (line.length() >= indent) {
+          line = line.substring(indent);
+        }
+
+        lines.append(line).append("\n");
+        for (int i = 0, n = line.length(); i < n; ++i) {
+          char c = line.charAt(i);
+          if (c == '{') {
+            seenSemiColonOrBrace = true;
+            ++braceDepth;
+          } else if (c == '}') {
+            --braceDepth;
+          } else if (c == ';') {
+            seenSemiColonOrBrace = true;
+          }
+        }
+
+        if (braceDepth > 0 || !seenSemiColonOrBrace) {
+          line = br.readLine();
+        } else {
+          break;
+        }
+      }
+
+      return lines.toString();
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        if (br != null) {
+          br.close();
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+    return "";
   }
 
 }

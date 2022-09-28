@@ -3,7 +3,7 @@
   <property name="project.tail" value="doc" />
   <import file="${gwt.root}/common.ant.xml" />
 
-  <property.ensure name="java.tools.path" location="${java.home}/../lib/tools.jar" unless="build.host.ismac" message="Cannot find ${java.home}/../lib/tools.jar; please use a JDK when building doc rather than a JRE." />
+<!--  <property.ensure name="java.tools.path" location="${java.home}/../lib/tools.jar" unless="build.host.ismac" message="Cannot find ${java.home}/../lib/tools.jar; please use a JDK when building doc rather than a JRE." />-->
 
   <property.ensure name="gwt.user.jar" location="${gwt.build.lib}/gwt-user.jar" />
   <!-- Platform shouldn't matter here, just picking one -->
@@ -79,39 +79,42 @@
       <arg value="${gwt.root}" />
     </java>
     <property file="${gwt.root}/build/out/packages.properties" />
-    <java classpathref="DOC_PATH" classname="com.google.doctool.custom.GWTJavaDoclet" fork="yes" failonerror="true">
-      <jvmarg value="-Xmx1024m" />
-      <arg value="-Xdoclint:none" if:true="${isJava8}" />
-      <arg value="-noindex" />
-      <arg value="-notree" />
-      <arg value="-quiet" />
-      <arg value="-notimestamp" />
-      <arg value="-use" />
-      <arg value="-source" />
-      <arg value="${javac.source}" />
-      <arg value="-windowtitle" />
-      <arg value="GWT Javadoc" />
-      <arg value="-doctitle" />
-      <arg value="GWT API Reference" />
-      <arg value="-header" />
-      <arg value="GWT ${gwt.version}" />
-      <arg value="-package" />
-      <arg value="-encoding"/>
-      <arg value="UTF-8"/>
-      <arg value="-d" />
-      <arg value="${project.build}/javadoc" />
-      <arg value="-linkoffline" />
-      <arg value="http://download.oracle.com/javaee/6/api/" />
-      <arg value="validation-package-list" />
-      <arg value="-classpath" />
-      <arg pathref="USER_CLASS_PATH" />
-      <arg value="-sourcepath" />
-      <arg pathref="USER_SOURCE_PATH" />
-      <arg value="-examplepackages" />
-      <arg value="com.google.gwt.examples;com.google.gwt.examples.i18n;com.google.gwt.examples.http.client;com.google.gwt.examples.rpc.server;com.google.gwt.examples.benchmarks;com.google.gwt.examples.cell;com.google.gwt.examples.cellview;com.google.gwt.examples.view;com.google.gwt.examples.cellview;com.google.gwt.examples.dom.builder" />
-      <arg value="-packages" />
-      <arg value="${USER_PKGS};${USER_CLASSES}" />
-    </java>
+    <javadoc classpathref="DOC_PATH" failonerror="true" maxmemory="1g"
+             destdir="${project.build}/javadoc"
+             source="${javac.source}"
+             encoding="UTF-8"
+             access="package"
+             packagenames="${USER_PKGS}"
+             noindex="true"
+             notree="true"
+             use="true"
+             windowtitle="GWT Javadoc"
+             doctitle="GWT API Reference"
+             header="GWT ${gwt.version}"
+             linkoffline="http://download.oracle.com/javaee/6/api/ validation-package-list"
+    >
+      <!-- suppress errors that don't break the output, we should refine this to just suppress things we haven't fixed yet -->
+      <arg value="-Xdoclint:none" />
+      <classpath refid="USER_CLASS_PATH" />
+      <sourcepath refid="USER_SOURCE_PATH" />
+
+      <!-- TODO restore example packges with new taglet -->
+      <!--      <arg value="-examplepackages" />-->
+      <!--      <arg value="com.google.gwt.examples;com.google.gwt.examples.i18n;com.google.gwt.examples.http.client;com.google.gwt.examples.rpc.server;com.google.gwt.examples.benchmarks;com.google.gwt.examples.cell;com.google.gwt.examples.cellview;com.google.gwt.examples.view;com.google.gwt.examples.cellview;com.google.gwt.examples.dom.builder" />-->
+
+      <!-- TODO restore user classes -->
+      <!--      <arg value="${USER_PKGS};${USER_CLASSES}" />-->
+
+      <taglet name="com.google.doctool.custom.TipTaglet">
+        <path refid="DOC_PATH" />
+      </taglet>
+      <taglet name="com.google.doctool.custom.IncludeTaglet">
+        <path refid="DOC_PATH" />
+      </taglet>
+<!--      <tag name="tip"  />-->
+      <tag name="example"  />
+      <tag name="gwt.include"  />
+    </javadoc>
   </target>
 
   <target name="emul-ezt">

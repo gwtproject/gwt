@@ -18,9 +18,17 @@ package com.google.doctool.custom;
 import com.google.doctool.ResourceIncluder;
 
 import com.sun.javadoc.Tag;
-import com.sun.tools.doclets.Taglet;
+import com.sun.source.doctree.DocTree;
+import com.sun.source.doctree.TextTree;
+import com.sun.source.util.DocTreeScanner;
+import com.sun.source.util.SimpleDocTreeVisitor;
+import jdk.javadoc.doclet.Taglet;
 
+import javax.lang.model.element.Element;
+import java.util.EnumSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * A taglet for slurping in the content of artbitrary files appearing on the
@@ -28,64 +36,34 @@ import java.util.Map;
  */
 public class IncludeTaglet implements Taglet {
 
-  public static void register(Map tagletMap) {
-    IncludeTaglet tag = new IncludeTaglet();
-    Taglet t = (Taglet) tagletMap.get(tag.getName());
-    if (t != null) {
-      tagletMap.remove(tag.getName());
-    }
-    tagletMap.put(tag.getName(), tag);
-  }
-
   @Override
   public String getName() {
     return "gwt.include";
   }
 
   @Override
-  public boolean inConstructor() {
-    return true;
+  public String toString(List<? extends DocTree> list, Element element) {
+    //TODO handle more than one
+    for (DocTree docTree : list) {
+      return docTree.accept(new DocTreeScanner<String, Void>() {
+        @Override
+        public String visitText(TextTree node, Void unused) {
+          String contents = ResourceIncluder.getResourceFromClasspathScrubbedForHTML(node.getBody());
+          return "<blockquote><pre>" + contents + "</pre></blockquote>";
+        }
+      }, null);
+    }
+    return null;
   }
 
   @Override
-  public boolean inField() {
-    return true;
-  }
-
-  @Override
-  public boolean inMethod() {
-    return true;
-  }
-
-  @Override
-  public boolean inOverview() {
-    return true;
-  }
-
-  @Override
-  public boolean inPackage() {
-    return true;
-  }
-
-  @Override
-  public boolean inType() {
-    return true;
+  public Set<Location> getAllowedLocations() {
+    return EnumSet.allOf(Location.class);
   }
 
   @Override
   public boolean isInlineTag() {
     return true;
-  }
-
-  @Override
-  public String toString(Tag tag) {
-    String contents = ResourceIncluder.getResourceFromClasspathScrubbedForHTML(tag);
-    return "<blockquote><pre>" + contents + "</pre></blockquote>";
-  }
-
-  @Override
-  public String toString(Tag[] tags) {
-    return null;
   }
 
 }

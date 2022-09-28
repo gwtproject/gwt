@@ -36,8 +36,8 @@ public class GWTJavaDoclet extends Doclet {
       TipTaglet.class.getName(), "-taglet", IncludeTaglet.class.getName()};
 
   public static void main(String[] args) {
-    List examplePackages = new ArrayList();
-    List filteredArgs = new ArrayList();
+    List<String> examplePackages = new ArrayList<>();
+    List<String> filteredArgs = new ArrayList<>();
 
     // filter out and save packages args
     for (int i = 0; i < args.length; ++i) {
@@ -60,14 +60,15 @@ public class GWTJavaDoclet extends Doclet {
 
     // Build a javadoc structure that includes example packages for reference
     String name = GWTJavaDoclet.class.getName();
-    List myArgs = new ArrayList();
+    List<String> myArgs = new ArrayList<>();
     myArgs.addAll(filteredArgs);
     myArgs.addAll(examplePackages);
-    Main.execute(name, name, (String[]) myArgs.toArray(new String[] {}));
+    System.out.println(myArgs);
+    jdk.javadoc.internal.tool.Main.execute((String[]) myArgs.toArray(new String[] {}));
 
     // Now delegate to the real javadoc without the example packages
-    filteredArgs.addAll(0, Arrays.asList(TAGLET_ARGS));
-    Main.execute((String[]) filteredArgs.toArray(new String[] {}));
+//    filteredArgs.addAll(0, Arrays.asList(TAGLET_ARGS));
+    jdk.javadoc.internal.tool.Main.execute(filteredArgs.toArray(new String[] {}));
   }
 
   public static int optionLength(String option) {

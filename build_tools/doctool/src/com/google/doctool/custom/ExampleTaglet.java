@@ -20,27 +20,21 @@ import com.google.doctool.LinkResolver.ExtraClassResolver;
 
 import com.sun.javadoc.ClassDoc;
 import com.sun.javadoc.SourcePosition;
-import com.sun.javadoc.Tag;
-import com.sun.tools.doclets.Taglet;
+import com.sun.source.doctree.DocTree;
+import jdk.javadoc.doclet.Taglet;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Map;
+import javax.lang.model.element.Element;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * A taglet for slurping examples into javadoc output.
  */
 public class ExampleTaglet implements Taglet {
-
-  public static void register(Map tagletMap) {
-    ExampleTaglet tag = new ExampleTaglet();
-    Taglet t = (Taglet) tagletMap.get(tag.getName());
-    if (t != null) {
-      tagletMap.remove(tag.getName());
-    }
-    tagletMap.put(tag.getName(), tag);
-  }
 
   @Override
   public String getName() {
@@ -48,49 +42,13 @@ public class ExampleTaglet implements Taglet {
   }
 
   @Override
-  public boolean inConstructor() {
-    return true;
-  }
-
-  @Override
-  public boolean inField() {
-    return true;
-  }
-
-  @Override
-  public boolean inMethod() {
-    return true;
-  }
-
-  @Override
-  public boolean inOverview() {
-    return true;
-  }
-
-  @Override
-  public boolean inPackage() {
-    return true;
-  }
-
-  @Override
-  public boolean inType() {
-    return true;
-  }
-
-  @Override
-  public boolean isInlineTag() {
-    return true;
-  }
-
-  @Override
-  public String toString(Tag tag) {
+  public String toString(List<? extends DocTree> list, Element element) {
     SourcePosition position = LinkResolver.resolveLink(tag,
-        new ExtraClassResolver() {
-          @Override
-          public ClassDoc findClass(String className) {
-            return GWTJavaDoclet.root.classNamed(className);
-          }
-        });
+            new ExtraClassResolver() {
+              public ClassDoc findClass(String className) {
+                return GWTJavaDoclet.root.classNamed(className);
+              }
+            });
 
     String slurpSource = slurpSource(position);
     // The <pre> tag still requires '<' and '>' characters to be escaped
@@ -100,15 +58,13 @@ public class ExampleTaglet implements Taglet {
   }
 
   @Override
-  public String toString(Tag[] tags) {
-    if (tags == null || tags.length == 0) {
-      return null;
-    }
-    String result = "";
-    for (int i = 0; i < tags.length; i++) {
-      result += toString(tags[i]);
-    }
-    return result;
+  public Set<Location> getAllowedLocations() {
+    return EnumSet.allOf(Location.class);
+  }
+
+  @Override
+  public boolean isInlineTag() {
+    return true;
   }
 
   private static String slurpSource(SourcePosition position) {

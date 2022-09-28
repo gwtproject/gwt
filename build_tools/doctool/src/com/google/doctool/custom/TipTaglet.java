@@ -15,27 +15,21 @@
  */
 package com.google.doctool.custom;
 
-import com.sun.javadoc.Tag;
-import com.sun.tools.doclets.Taglet;
+import com.sun.source.doctree.DocTree;
+import com.sun.source.doctree.TextTree;
+import com.sun.source.doctree.UnknownBlockTagTree;
+import com.sun.source.util.DocTreeScanner;
+import jdk.javadoc.doclet.Taglet;
 
-import java.util.Map;
+import javax.lang.model.element.Element;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * A taglet for including GWT tip tags in javadoc output.
  */
 public class TipTaglet implements Taglet {
-
-  public static void register(Map tagletMap) {
-    TipTaglet tag = new TipTaglet();
-    Taglet t = (Taglet) tagletMap.get(tag.getName());
-    if (t != null) {
-      tagletMap.remove(tag.getName());
-    }
-    tagletMap.put(tag.getName(), tag);
-  }
-
-  public TipTaglet() {
-  }
 
   @Override
   public String getName() {
@@ -43,62 +37,50 @@ public class TipTaglet implements Taglet {
   }
 
   @Override
-  public boolean inConstructor() {
-    return true;
+  public Set<Location> getAllowedLocations() {
+    return EnumSet.allOf(Location.class);
   }
 
   @Override
-  public boolean inField() {
-    return true;
+  public String toString(List<? extends DocTree> list, Element element) {
+    if (list == null || list.size() == 0) {
+      return null;
+    }
+    StringBuilder result = new StringBuilder("<DT><B>Tip:</B></DT><DD>");
+    if (list.size() == 1) {
+      appendText(list.get(0), result);
+    } else {
+      result.append("<UL>");
+      for (int i = 0; i < list.size(); i++) {
+        result.append("<LI>");
+        appendText(list.get(i), result);
+        result.append("</LI>");
+      }
+      result.append("</UL>");
+    }
+    result.append("</DD>");
+    return result.toString();
   }
 
-  @Override
-  public boolean inMethod() {
-    return true;
-  }
+  /**
+   *
+   * @param docTree
+   * @param result
+   */
+  private void appendText(DocTree docTree, StringBuilder result) {
+    docTree.accept(new DocTreeScanner<Void, Void>() {
 
-  @Override
-  public boolean inOverview() {
-    return true;
-  }
-
-  @Override
-  public boolean inPackage() {
-    return true;
-  }
-
-  @Override
-  public boolean inType() {
-    return true;
+      @Override
+      public Void visitText(TextTree node, Void s) {
+        result.append(node.getBody());
+        return super.visitText(node, s);
+      }
+    }, null);
   }
 
   @Override
   public boolean isInlineTag() {
     return false;
-  }
-
-  @Override
-  public String toString(Tag tag) {
-    return null;
-  }
-
-  @Override
-  public String toString(Tag[] tags) {
-    if (tags == null || tags.length == 0) {
-      return null;
-    }
-    String result = "<DT><B>Tip:</B></DT><DD>";
-    if (tags.length == 1) {
-      result += tags[0].text();
-    } else {
-      result += "<UL>";
-      for (int i = 0; i < tags.length; i++) {
-        result += "<LI>" + tags[i].text() + "</LI>";
-      }
-      result += "</UL>";
-    }
-    result += "</DD>";
-    return result;
   }
 
 }

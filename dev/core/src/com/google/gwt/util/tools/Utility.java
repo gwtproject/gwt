@@ -27,6 +27,7 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.net.URI;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -162,7 +163,7 @@ public final class Utility {
       }
       ByteArrayOutputStream os = new ByteArrayOutputStream();
       streamOut(in, os, 1024);
-      return new String(os.toByteArray(), "UTF-8");
+      return os.toString(StandardCharsets.UTF_8);
     } finally {
       close(in);
     }

@@ -15,12 +15,11 @@
  */
 package com.google.doctool;
 
-import com.sun.javadoc.Tag;
-
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Utility methods related to including external resources in doc.
@@ -28,27 +27,26 @@ import java.io.InputStream;
 public class ResourceIncluder {
 
   /**
-   * Copied from {@link com.google.gwt.util.tools.Utility#close(InputStream)}.
+   * Copied from {@link com.google.gwt.util.tools.Utility#close(AutoCloseable)}.
    */
-  public static void close(InputStream is) {
+  public static void close(AutoCloseable is) {
     try {
       if (is != null) {
         is.close();
       }
-    } catch (IOException e) {
+    } catch (Exception e) {
     }
   }
 
-  public static String getResourceFromClasspathScrubbedForHTML(Tag tag) {
-    String partialPath = tag.text();
+  public static String getResourceFromClasspathScrubbedForHTML(String partialPath) {
     try {
       String contents;
       contents = getFileFromClassPath(partialPath);
       contents = scrubForHtml(contents);
       return contents;
     } catch (IOException e) {
-      System.err.println(tag.position().toString()
-          + ": unable to include resource " + partialPath + " for tag " + tag);
+      System.err.println("Unable to handle path " + partialPath);
+      e.printStackTrace();
       System.exit(1);
       return null;
     }
@@ -71,7 +69,7 @@ public class ResourceIncluder {
       while ((ch = in.read()) != -1) {
         os.write(ch);
       }
-      return new String(os.toByteArray(), "UTF-8");
+      return os.toString(StandardCharsets.UTF_8);
     } finally {
       close(in);
     }

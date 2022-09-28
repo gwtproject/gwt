@@ -32,7 +32,7 @@
   baseline, excluding 11+ tests, etc. This is temporary, to remove Java7 support, but not yet
   remove the various places that version may matter, while Java 9+ support is pending.
   -->
-  <property name="isJava8" value="true" />
+  <property name="isJava8" value="false" />
   <property environment="env"/>
   <condition property="gwt.version" value="${env.GWT_VERSION}" else="0.0.0">
     <isset property="env.GWT_VERSION"/>

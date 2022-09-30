@@ -86,7 +86,13 @@ public final class ServerSerializationStreamWriter extends
       }
     }
 
-    public void addToken(CharSequence token) {
+    /**
+     * For versions prior to {@link AbstractSerializationStream#SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION}
+     * payload tokens are to be written in reverse order and therefore will be buffered in {@link #tokensInReverseOrder}
+     * For versions starting with {@link AbstractSerializationStream#SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION}
+     * also the payload tokens will be sent straight into the writer instead.
+     */
+    public void addPayloadToken(CharSequence token) {
       if (tokensInReverseOrder == null) {
         // append token directly to writer in forward order
         addTokenToWriter(token);
@@ -94,6 +100,14 @@ public final class ServerSerializationStreamWriter extends
         // enqueue token in reverse order buffer for later writing in finish()
         tokensInReverseOrder.add(0, token);
       }
+    }
+    
+    /**
+     * Appends a token at the end of the output written
+     */
+    public void addToken(CharSequence token) {
+        // append token directly to writer in forward order
+        addTokenToWriter(token);
     }
     
     private void addTokenToWriter(CharSequence token) {
@@ -135,17 +149,20 @@ public final class ServerSerializationStreamWriter extends
     public void setJavaScript(boolean javascript) {
       this.javascript = javascript;
     }
+    
+    public void finishPayload() {
+      if (tokensInReverseOrder != null) {
+        for (final CharSequence payloadToken : tokensInReverseOrder) {
+          addTokenToWriter(payloadToken);
+        }
+      }
+    }
 
     /**
      * Closes off the JavaScript array in the output
      */
     public void finish() {
       try {
-        if (tokensInReverseOrder != null) {
-          for (final CharSequence token : tokensInReverseOrder) {
-            addTokenToWriter(token);
-          }
-        }
         if (total > MAXIMUM_ARRAY_LENGTH) {
           writer.append(POSTLUDE);
         } else {
@@ -670,6 +687,7 @@ public final class ServerSerializationStreamWriter extends
    * Appends the string table and header to the output stream.
    */
   public void writeStringTableAndHeaderAfterPayloadFinished() throws IOException {
+    encoder.finishPayload();
     writeStringTable();
     writeHeader();
     encoder.finish();
@@ -704,7 +722,7 @@ public final class ServerSerializationStreamWriter extends
 
   @Override
   protected void append(String token) {
-    encoder.addToken(token);
+    encoder.addPayloadToken(token);
   }
 
   @Override

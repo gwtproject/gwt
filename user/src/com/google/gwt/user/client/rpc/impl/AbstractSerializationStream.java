@@ -42,7 +42,15 @@ public abstract class AbstractSerializationStream {
   /**
    * The newest supported RPC protocol version.
    */
-  public static final int SERIALIZATION_STREAM_MAX_VERSION = 8;
+  public static final int SERIALIZATION_STREAM_MAX_VERSION = 9;
+  
+  /**
+   * The first version that is streaming content in forward order from
+   * server to client, passing through a {@link Writer} for writing the
+   * serialization payload to the HTTP response with close to no additional
+   * memory footprint for buffering and converting.
+   */
+  public static final int SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION = 9;
 
   /**
    * The current RPC protocol version.

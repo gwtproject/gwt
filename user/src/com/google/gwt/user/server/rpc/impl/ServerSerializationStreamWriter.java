@@ -873,10 +873,6 @@ public final class ServerSerializationStreamWriter extends
     }
   }
 
-  /**
-   * Notice that the field are written in reverse order that the client can just
-   * pop items out of the stream.
-   */
   private void writeHeader() throws IOException {
     encoder.addToken(getFlags());
     if (encoder.isJavaScript() && getVersion() >= SERIALIZATION_STREAM_JSON_VERSION) {

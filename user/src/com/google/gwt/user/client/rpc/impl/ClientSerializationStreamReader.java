@@ -342,25 +342,25 @@ public final class ClientSerializationStreamReader extends
 
   @Override
   public boolean readBoolean() {
-    JsValueLiteral literal = decoder.getValues().get(index++);
+    JsValueLiteral literal = decoder.getValues().get(getVersion() >= SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION ? index++ : --indexFromEnd);
     return literal.isBooleanTrue();
   }
 
   @Override
   public byte readByte() {    
-    JsNumberLiteral literal = (JsNumberLiteral) decoder.getValues().get(index++);
+    JsNumberLiteral literal = (JsNumberLiteral) decoder.getValues().get(getVersion() >= SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION ? index++ : --indexFromEnd);
     return (byte) literal.getValue();
   }
   
   @Override
   public char readChar() {    
-    JsNumberLiteral literal = (JsNumberLiteral) decoder.getValues().get(index++);
+    JsNumberLiteral literal = (JsNumberLiteral) decoder.getValues().get(getVersion() >= SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION ? index++ : --indexFromEnd);
     return (char) literal.getValue();
   }
   
   @Override
   public double readDouble() {    
-    JsValueLiteral valueLiteral = decoder.getValues().get(index++);
+    JsValueLiteral valueLiteral = decoder.getValues().get(getVersion() >= SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION ? index++ : --indexFromEnd);
     if (valueLiteral instanceof JsNumberLiteral) {
       JsNumberLiteral literal = (JsNumberLiteral) valueLiteral;
       return literal.getValue();
@@ -379,7 +379,7 @@ public final class ClientSerializationStreamReader extends
   
   @Override
   public int readInt() {    
-    JsNumberLiteral literal = (JsNumberLiteral) decoder.getValues().get(index++);
+    JsNumberLiteral literal = (JsNumberLiteral) decoder.getValues().get(getVersion() >= SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION ? index++ : --indexFromEnd);
     return (int) literal.getValue();
   }
   
@@ -392,12 +392,12 @@ public final class ClientSerializationStreamReader extends
   @Override
   public long readLong() {    
     return Base64Utils.longFromBase64(
-        ((JsStringLiteral) decoder.getValues().get(index++)).getValue());
+        ((JsStringLiteral) decoder.getValues().get(getVersion() >= SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION ? index++ : --indexFromEnd)).getValue());
   }
   
   @Override
   public short readShort() {    
-    JsNumberLiteral literal = (JsNumberLiteral) decoder.getValues().get(index++);
+    JsNumberLiteral literal = (JsNumberLiteral) decoder.getValues().get(getVersion() >= SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION ? index++ : --indexFromEnd);
     return (short) literal.getValue();
   }
   

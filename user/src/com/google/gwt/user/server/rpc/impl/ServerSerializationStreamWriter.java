@@ -26,12 +26,14 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import com.google.gwt.user.client.rpc.CustomFieldSerializer;
 import com.google.gwt.user.client.rpc.SerializationException;
+import com.google.gwt.user.client.rpc.impl.AbstractSerializationStream;
 import com.google.gwt.user.client.rpc.impl.AbstractSerializationStreamWriter;
 import com.google.gwt.user.server.Base64Utils;
 import com.google.gwt.user.server.rpc.SerializationPolicy;
@@ -54,6 +56,13 @@ public final class ServerSerializationStreamWriter extends
     private static final String PRELUDE = "].concat([";
 
     private final Writer writer;
+    /**
+     * A buffer used for versions before
+     * {@link AbstractSerializationStream#SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION}
+     * which write the payload tokens in reverse order; {@code null} for versions
+     * that use forward streaming.
+     */
+    private final List<CharSequence> tokensInReverseOrder;
     private int count = 0;
     private boolean needsComma = false;
     /**
@@ -63,8 +72,13 @@ public final class ServerSerializationStreamWriter extends
     private int total = 0;
     private boolean javascript = false;
 
-    public LengthConstrainedArray(Writer writer) {
+    public LengthConstrainedArray(int version, Writer writer) {
       this.writer = writer;
+      if (version < AbstractSerializationStream.SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION) {
+        tokensInReverseOrder = new LinkedList<>();
+      } else {
+        tokensInReverseOrder = null;
+      }
       try {
         writer.append("[");
       } catch (IOException e) {
@@ -73,6 +87,16 @@ public final class ServerSerializationStreamWriter extends
     }
 
     public void addToken(CharSequence token) {
+      if (tokensInReverseOrder == null) {
+        // append token directly to writer in forward order
+        addTokenToWriter(token);
+      } else {
+        // enqueue token in reverse order buffer for later writing in finish()
+        tokensInReverseOrder.add(0, token);
+      }
+    }
+    
+    private void addTokenToWriter(CharSequence token) {
       try {
         total++;
         if (count++ == MAXIMUM_ARRAY_LENGTH) {
@@ -85,7 +109,6 @@ public final class ServerSerializationStreamWriter extends
           count = 0;
           needsComma = false;
         }
-  
         if (needsComma) {
           writer.append(",");
         } else {
@@ -118,6 +141,11 @@ public final class ServerSerializationStreamWriter extends
      */
     public void finish() {
       try {
+        if (tokensInReverseOrder != null) {
+          for (final CharSequence token : tokensInReverseOrder) {
+            addTokenToWriter(token);
+          }
+        }
         if (total > MAXIMUM_ARRAY_LENGTH) {
           writer.append(POSTLUDE);
         } else {
@@ -601,7 +629,7 @@ public final class ServerSerializationStreamWriter extends
 
   public ServerSerializationStreamWriter(SerializationPolicy serializationPolicy, Writer writer) {
     this.serializationPolicy = serializationPolicy;
-    this.encoder = new LengthConstrainedArray(writer);
+    this.encoder = new LengthConstrainedArray(getVersion(), writer);
   }
 
   public ServerSerializationStreamWriter(SerializationPolicy serializationPolicy, int version, Writer writer) {
@@ -638,8 +666,8 @@ public final class ServerSerializationStreamWriter extends
   }
   
   /**
-   * To be called after all payload has been written with any of the {@code write...}
-   * methods. Appends the string table and header to the output stream.
+   * To be called after all payload has been written with any of the {@code write...} methods.
+   * Appends the string table and header to the output stream.
    */
   public void writeStringTableAndHeaderAfterPayloadFinished() throws IOException {
     writeStringTable();
@@ -885,7 +913,7 @@ public final class ServerSerializationStreamWriter extends
 
   private void writeStringTable() throws IOException {
     final StringWriter buffer = new StringWriter();
-    LengthConstrainedArray tableStream = new LengthConstrainedArray(buffer);
+    LengthConstrainedArray tableStream = new LengthConstrainedArray(getVersion(), buffer);
     for (String s : getStringTable()) {
       tableStream.addEscapedToken(s);
     }

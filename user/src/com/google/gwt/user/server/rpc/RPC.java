@@ -587,7 +587,6 @@ public final class RPC {
     if (serializationPolicy == null) {
       throw new NullPointerException("serializationPolicy");
     }
-
     try {
       Object result = serviceMethod.invoke(target, args);
       encodeResponseForSuccess(serviceMethod, result, serializationPolicy, flags, writer);
@@ -609,7 +608,7 @@ public final class RPC {
     }
   }
 
-  private static int getRpcVersion() throws SerializationException {
+  static int getRpcVersion() throws SerializationException {
     int version =
         Integer.getInteger("gwt.rpc.version",
             AbstractSerializationStream.SERIALIZATION_STREAM_VERSION);

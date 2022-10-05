@@ -17,24 +17,21 @@ package com.google.doctool.custom;
 
 import com.google.doctool.ResourceIncluder;
 
-import com.sun.javadoc.Tag;
 import com.sun.source.doctree.DocTree;
-import com.sun.source.doctree.TextTree;
-import com.sun.source.util.DocTreeScanner;
-import com.sun.source.util.SimpleDocTreeVisitor;
-import jdk.javadoc.doclet.Taglet;
 
 import javax.lang.model.element.Element;
+import java.io.IOException;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
+
+import static javax.tools.Diagnostic.Kind.ERROR;
 
 /**
  * A taglet for slurping in the content of artbitrary files appearing on the
  * classpath into javadoc.
  */
-public class IncludeTaglet implements Taglet {
+public class IncludeTaglet extends AbstractTaglet {
 
   @Override
   public String getName() {
@@ -43,17 +40,21 @@ public class IncludeTaglet implements Taglet {
 
   @Override
   public String toString(List<? extends DocTree> list, Element element) {
-    //TODO handle more than one
+    StringBuilder results = new StringBuilder();
     for (DocTree docTree : list) {
-      return docTree.accept(new DocTreeScanner<String, Void>() {
-        @Override
-        public String visitText(TextTree node, Void unused) {
-          String contents = ResourceIncluder.getResourceFromClasspathScrubbedForHTML(node.getBody());
-          return "<blockquote><pre>" + contents + "</pre></blockquote>";
-        }
-      }, null);
+      String text = getText(docTree);
+
+      try {
+        String contents = ResourceIncluder.getResourceFromClasspathScrubbedForHTML(text);
+        results.append("<blockquote><pre>").append(contents).append("</pre></blockquote>");
+      } catch (IOException e) {
+        e.printStackTrace();
+        printMessage(ERROR, "Error in reading file: " + e.getMessage(), element, docTree);
+        // return empty to let javadoc report this
+        return "";
+      }
     }
-    return null;
+    return results.toString();
   }
 
   @Override

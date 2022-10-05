@@ -111,6 +111,9 @@
       <taglet name="com.google.doctool.custom.IncludeTaglet">
         <path refid="DOC_PATH" />
       </taglet>
+      <taglet name="com.google.doctool.custom.ExampleTaglet">
+        <path refid="DOC_PATH" />
+      </taglet>
 <!--      <tag name="tip"  />-->
       <tag name="example"  />
       <tag name="gwt.include"  />

@@ -38,18 +38,11 @@ public class ResourceIncluder {
     }
   }
 
-  public static String getResourceFromClasspathScrubbedForHTML(String partialPath) {
-    try {
-      String contents;
-      contents = getFileFromClassPath(partialPath);
-      contents = scrubForHtml(contents);
-      return contents;
-    } catch (IOException e) {
-      System.err.println("Unable to handle path " + partialPath);
-      e.printStackTrace();
-      System.exit(1);
-      return null;
-    }
+  public static String getResourceFromClasspathScrubbedForHTML(String partialPath) throws IOException {
+    String contents;
+    contents = getFileFromClassPath(partialPath);
+    contents = scrubForHtml(contents);
+    return contents;
   }
 
   /**
@@ -65,10 +58,19 @@ public class ResourceIncluder {
         throw new FileNotFoundException(partialPath);
       }
       ByteArrayOutputStream os = new ByteArrayOutputStream();
-      int ch;
-      while ((ch = in.read()) != -1) {
-        os.write(ch);
+      byte[] buffer = new byte[1024];
+      int bytesRead;
+      while (true) {
+        bytesRead = in.read(buffer);
+        if (bytesRead >= 0) {
+          // Copy the bytes out.
+          os.write(buffer, 0, bytesRead);
+        } else {
+          // End of input stream.
+          break;
+        }
       }
+
       return os.toString(StandardCharsets.UTF_8);
     } finally {
       close(in);

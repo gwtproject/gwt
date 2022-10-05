@@ -16,10 +16,6 @@
 package com.google.doctool.custom;
 
 import com.sun.source.doctree.DocTree;
-import com.sun.source.doctree.TextTree;
-import com.sun.source.doctree.UnknownBlockTagTree;
-import com.sun.source.util.DocTreeScanner;
-import jdk.javadoc.doclet.Taglet;
 
 import javax.lang.model.element.Element;
 import java.util.EnumSet;
@@ -29,7 +25,7 @@ import java.util.Set;
 /**
  * A taglet for including GWT tip tags in javadoc output.
  */
-public class TipTaglet implements Taglet {
+public class TipTaglet extends AbstractTaglet {
 
   @Override
   public String getName() {
@@ -48,34 +44,18 @@ public class TipTaglet implements Taglet {
     }
     StringBuilder result = new StringBuilder("<DT><B>Tip:</B></DT><DD>");
     if (list.size() == 1) {
-      appendText(list.get(0), result);
+      result.append(getText(list.get(0)));
     } else {
       result.append("<UL>");
       for (int i = 0; i < list.size(); i++) {
         result.append("<LI>");
-        appendText(list.get(i), result);
+        result.append(getText(list.get(i)));
         result.append("</LI>");
       }
       result.append("</UL>");
     }
     result.append("</DD>");
     return result.toString();
-  }
-
-  /**
-   *
-   * @param docTree
-   * @param result
-   */
-  private void appendText(DocTree docTree, StringBuilder result) {
-    docTree.accept(new DocTreeScanner<Void, Void>() {
-
-      @Override
-      public Void visitText(TextTree node, Void s) {
-        result.append(node.getBody());
-        return super.visitText(node, s);
-      }
-    }, null);
   }
 
   @Override

@@ -13,7 +13,7 @@
     </gwt.javac>
   </target>
 
-  <target name="build" depends="compile" description="Packages this project into a jar">
+  <target name="build" depends="compile" description="Packages this project into a jar" unless="${isJava8}">
     <mkdir dir="${gwt.build.lib}" />
     <gwt.jar>
       <fileset dir="src" />

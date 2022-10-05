@@ -28,11 +28,11 @@
 
   <!-- Global Properties -->
   <!--
-  Now that Java8 is the baseline, this property indicates that the build should target the
-  baseline, excluding 11+ tests, etc. This is temporary, to remove Java7 support, but not yet
-  remove the various places that version may matter, while Java 9+ support is pending.
+  Indicate if we are running in Java8, and so cannot run java9+ tests or generate Javadoc.
   -->
-  <property name="isJava8" value="false" />
+  <condition property="isJava8">
+    <equals arg1="${ant.java.version}" arg2="1.8" />
+  </condition>
   <property environment="env"/>
   <condition property="gwt.version" value="${env.GWT_VERSION}" else="0.0.0">
     <isset property="env.GWT_VERSION"/>

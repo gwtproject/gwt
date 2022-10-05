@@ -39,7 +39,7 @@
   </path>
 
   <!-- Rebuild the javadoc if a source file is newer than the index-->
-  <target name="javadoc">
+  <target name="javadoc" unless="${isJava8}">
     <outofdate>
       <sourcefiles>
         <fileset file="./src/gwt-user.html" />

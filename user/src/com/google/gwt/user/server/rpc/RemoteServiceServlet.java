@@ -270,7 +270,7 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
    * possible XSRF attacks and then decodes the <code>payload</code> using
    * {@link RPC#decodeRequest(String, Class, SerializationPolicyProvider)}
    * to do the actual work.
-   * Once the request is decoded {@link RemoteServiceServlet#processCall(RPCRequest, Writer)}
+   * Once the request is decoded {@link RemoteServiceServlet#processCall(RPCRequest)}
    * will be called.
    * <p>
    * Subclasses may optionally override this method to handle the payload in any
@@ -282,32 +282,36 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
    * This is public so that it can be unit tested easily without HTTP.
    *
    * @param payload the UTF-8 request payload
-   * @param writer the writer to write the output to
+   * @return a string which encodes either the method's return, a checked
+   *         exception thrown by the method, or an
+   *         {@link IncompatibleRemoteServiceException}, or {@code null} if a protocol version of
+   *         {@link AbstractSerializationStream#SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION} or
+   *         newer has been selected
    * @throws SerializationException if we cannot serialize the response
    * @throws UnexpectedException if the invocation throws a checked exception
    *           that is not declared in the service method's signature
    * @throws RuntimeException if the service method throws an unchecked
    *           exception (the exception will be the one thrown by the service)
    */
-  public void processCall(String payload, Writer writer) throws SerializationException {
+  public String processCall(String payload) throws SerializationException {
     // First, check for possible XSRF situation
     checkPermutationStrongName();
 
     RPCRequest rpcRequest;
     try {
       rpcRequest = RPC.decodeRequest(payload, delegate.getClass(), this);
-      processCall(rpcRequest, writer);
     } catch (IncompatibleRemoteServiceException ex) {
       log(
           "An IncompatibleRemoteServiceException was thrown while processing this call.",
           ex);
-      RPC.encodeResponseForFailedRequest(null, ex, writer);
+      return RPC.encodeResponseForFailedRequest(null, ex);
     }
+    return processCall(rpcRequest);
   }
 
   /**
    * Process an already decoded RPC request. Uses the
-   * {@link RPC#invokeAndEncodeResponse(Object, java.lang.reflect.Method, Object[], Writer)}
+   * {@link RPC#invokeAndEncodeResponse(Object, java.lang.reflect.Method, Object[])}
    * method to do the actual work.
    * <p>
    * Subclasses may optionally override this method to handle the decoded rpc
@@ -320,28 +324,32 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
    * This is public so that it can be unit tested easily without HTTP.
    *
    * @param rpcRequest the already decoded RPC request
-   * @param writer output to be written to this writer
+   * @return a string which encodes either the method's return, a checked
+   *         exception thrown by the method, or an
+   *         {@link IncompatibleRemoteServiceException}, or {@code null} if a protocol version of
+   *         {@link AbstractSerializationStream#SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION} or
+   *         newer has been selected
    * @throws SerializationException if we cannot serialize the response
    * @throws UnexpectedException if the invocation throws a checked exception
    *           that is not declared in the service method's signature
    * @throws RuntimeException if the service method throws an unchecked
    *           exception (the exception will be the one thrown by the service)
    */
-  public void processCall(RPCRequest rpcRequest, Writer writer) throws SerializationException {
+  public String processCall(RPCRequest rpcRequest) throws SerializationException {
     try {
       onAfterRequestDeserialized(rpcRequest);
-      RPC.invokeAndEncodeResponse(delegate, rpcRequest.getMethod(),
+      return RPC.invokeAndEncodeResponse(delegate, rpcRequest.getMethod(),
           rpcRequest.getParameters(), rpcRequest.getSerializationPolicy(),
-          rpcRequest.getFlags(), writer);
+          rpcRequest.getFlags());
     } catch (IncompatibleRemoteServiceException ex) {
       log(
           "An IncompatibleRemoteServiceException was thrown while processing this call.",
           ex);
-      RPC.encodeResponseForFailedRequest(rpcRequest, ex, writer);
+      return RPC.encodeResponseForFailedRequest(rpcRequest, ex);
     } catch (RpcTokenException tokenException) {
       log("An RpcTokenException was thrown while processing this call.",
           tokenException);
-      RPC.encodeResponseForFailedRequest(rpcRequest, tokenException, writer);
+      return RPC.encodeResponseForFailedRequest(rpcRequest, tokenException);
     }
   }
 
@@ -371,31 +379,32 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
     //
     final Writer responseWriter = createWriterForResponse(request, response);
     final boolean onAfterResponseSerializedOverridden = isOnAfterResponseSerializedOverridden();
-    final Writer writer;
     final StringWriter writerForResponseCopy;
     if (onAfterResponseSerializedOverridden) {
       writerForResponseCopy = new StringWriter();
-      writer = new TeeWriter(responseWriter, writerForResponseCopy);
     } else {
       writerForResponseCopy = null;
-      writer = responseWriter;
     }
-
-    // Invoke the core dispatching logic, which returns the serialized
-    // result.
-    //
-    processCall(requestPayload, writer);
-
-    if (onAfterResponseSerializedOverridden) {
-      // Let subclasses see the serialized response.
+    final TeeWriter<StringWriter> writer = new TeeWriter<>(responseWriter, writerForResponseCopy);
+    RPC.setResponseWriter(writer);
+    try {
+      // Invoke the core dispatching logic, which returns the serialized
+      // result.
       //
-      onAfterResponseSerialized(writerForResponseCopy.toString());
+      String responsePayload = processCall(requestPayload);
+      
+      if (onAfterResponseSerializedOverridden) {
+        // Let subclasses see the serialized response.
+        // For the old protocol version it was already assembled
+        // and returned by processCall(requestPayload). For protocol
+        // versions starting with AbstractSerializationStream.SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION
+        // null is returned by processCall(requestPayload), and the
+        // payload is obtained from the StringWriter
+        onAfterResponseSerialized(responsePayload != null ? responsePayload : writerForResponseCopy.toString());
+      }
+    } finally {
+      RPC.unsetResponseWriter();
     }
-
-    // Finish the response.
-    //
-    writer.flush();
-    writer.close();
   }
 
   private boolean isOnAfterResponseSerializedOverridden() {

@@ -20,7 +20,6 @@ import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADE
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.SerializationException;
-import com.google.gwt.user.client.rpc.impl.AbstractSerializationStream;
 
 import java.io.IOException;
 import java.io.InputStream;

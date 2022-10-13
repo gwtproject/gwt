@@ -29,7 +29,6 @@ import com.google.gwt.user.server.rpc.impl.TypeNameObfuscator;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;

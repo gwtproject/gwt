@@ -15,7 +15,6 @@ package com.google.gwt.user.server.rpc;
 
 import java.io.FilterWriter;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.io.Writer;
 
 /**
@@ -25,6 +24,8 @@ import java.io.Writer;
  * can be obtained by calling {@link #getOtherWriter()}. This can, e.g., be used with a
  * {@link StringWriter} from which the output written to this writer can later be obtained as a
  * single {@link String}.
+ * 
+ * @param <W> the type of the other writer to which output is sent in parallel
  */
 public class TeeWriter<W extends Writer> extends FilterWriter {
   private W tee;

@@ -88,7 +88,7 @@ public final class ClientSerializationStreamReader extends
 
   public native boolean readBoolean() /*-{
     return !!this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[
-      this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::getVersion() >=
+      this.@com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::getVersion()() >=
         @com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION ?
           this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++ :
           --this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::indexFromEnd]
@@ -96,7 +96,7 @@ public final class ClientSerializationStreamReader extends
 
   public native byte readByte() /*-{
     return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[
-      this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::getVersion() >=
+      this.@com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::getVersion()() >=
         @com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION ?
           this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++ :
           --this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::indexFromEnd];
@@ -104,7 +104,7 @@ public final class ClientSerializationStreamReader extends
 
   public native char readChar() /*-{
     return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[
-      this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::getVersion() >=
+      this.@com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::getVersion()() >=
         @com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION ?
           this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++ :
           --this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::indexFromEnd];
@@ -112,7 +112,7 @@ public final class ClientSerializationStreamReader extends
 
   public native double readDouble() /*-{
     return Number(this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[
-      this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::getVersion() >=
+      this.@com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::getVersion()() >=
         @com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION ?
           this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++ :
           --this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::indexFromEnd]);
@@ -120,7 +120,7 @@ public final class ClientSerializationStreamReader extends
 
   public native float readFloat() /*-{
     return Number(this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[
-      this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::getVersion() >=
+      this.@com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::getVersion()() >=
         @com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION ?
           this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++ :
           --this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::indexFromEnd]);
@@ -128,7 +128,7 @@ public final class ClientSerializationStreamReader extends
 
   public native int readInt() /*-{
   return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[
-      this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::getVersion() >=
+      this.@com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::getVersion()() >=
         @com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION ?
           this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++ :
           --this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::indexFromEnd];
@@ -141,7 +141,7 @@ public final class ClientSerializationStreamReader extends
   @UnsafeNativeLong
   public native long readLong() /*-{
     var s = this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[
-      this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::getVersion() >=
+      this.@com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::getVersion()() >=
         @com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION ?
           this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++ :
           --this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::indexFromEnd];
@@ -150,7 +150,7 @@ public final class ClientSerializationStreamReader extends
 
   public native short readShort() /*-{
     return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[
-      this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::getVersion() >=
+      this.@com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::getVersion()() >=
         @com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION ?
           this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++ :
           --this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::indexFromEnd];
@@ -178,7 +178,7 @@ public final class ClientSerializationStreamReader extends
 
   private native JavaScriptObject readJavaScriptObject() /*-{
     return this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::results[
-      this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::getVersion() >=
+      this.@com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::getVersion()() >=
         @com.google.gwt.user.client.rpc.impl.AbstractSerializationStream::SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION ?
           this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::index++ :
           --this.@com.google.gwt.user.client.rpc.impl.ClientSerializationStreamReader::indexFromEnd];

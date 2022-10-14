@@ -47,14 +47,8 @@ public final class ServerSerializationStreamWriter extends
 
   /**
    * Builds a string that evaluates into an array containing the given elements.
-   * This class exists to work around a bug in IE6/7 that limits the size of
-   * array literals.
    */
-  private static class LengthConstrainedArray {
-    public static final int MAXIMUM_ARRAY_LENGTH = 1 << 15;
-    private static final String POSTLUDE = "])";
-    private static final String PRELUDE = "].concat([";
-
+  private static class TokenEncoder {
     private final Writer writer;
     /**
      * A buffer used for versions before
@@ -63,16 +57,9 @@ public final class ServerSerializationStreamWriter extends
      * that use forward streaming.
      */
     private final List<CharSequence> tokensInReverseOrder;
-    private int count = 0;
     private boolean needsComma = false;
-    /**
-     * The number of tokens written through this object; relevant for knowing
-     * when to split an array into two.
-     */
-    private int total = 0;
-    private boolean javascript = false;
 
-    public LengthConstrainedArray(int version, Writer writer) {
+    public TokenEncoder(int version, Writer writer) {
       this.writer = writer;
       if (version < AbstractSerializationStream.SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION) {
         tokensInReverseOrder = new LinkedList<>();
@@ -112,17 +99,6 @@ public final class ServerSerializationStreamWriter extends
     
     private void addTokenToWriter(CharSequence token) {
       try {
-        total++;
-        if (count++ == MAXIMUM_ARRAY_LENGTH) {
-          if (total == MAXIMUM_ARRAY_LENGTH + 1) {
-            writer.append(PRELUDE);
-            javascript = true;
-          } else {
-            writer.append("],[");
-          }
-          count = 0;
-          needsComma = false;
-        }
         if (needsComma) {
           writer.append(",");
         } else {
@@ -135,21 +111,13 @@ public final class ServerSerializationStreamWriter extends
     }
 
     public void addEscapedToken(String token) throws IOException {
-      addToken(escapeString(token, true, this));
+      addToken(escapeString(token, true));
     }
 
     public void addToken(int i) throws IOException {
       addToken(String.valueOf(i));
     }
 
-    public boolean isJavaScript() {
-      return javascript;
-    }
-
-    public void setJavaScript(boolean javascript) {
-      this.javascript = javascript;
-    }
-    
     public void finishPayload() {
       if (tokensInReverseOrder != null) {
         for (final CharSequence payloadToken : tokensInReverseOrder) {
@@ -163,11 +131,7 @@ public final class ServerSerializationStreamWriter extends
      */
     public void finish() {
       try {
-        if (total > MAXIMUM_ARRAY_LENGTH) {
-          writer.append(POSTLUDE);
-        } else {
-          writer.append("]");
-        }
+        writer.append("]");
       } catch (IOException e) {
         throw new RuntimeException(e);
       }
@@ -175,8 +139,7 @@ public final class ServerSerializationStreamWriter extends
     
     @Override
     public String toString() {
-      return getClass().getSimpleName() + " [writer=" + writer + ", needsComma=" + needsComma
-          + ", total=" + total + ", javascript=" + javascript + "]";
+      return getClass().getSimpleName() + " [writer=" + writer + ", needsComma=" + needsComma + "]";
     }
   }
 
@@ -457,7 +420,7 @@ public final class ServerSerializationStreamWriter extends
    * than 1.3 that supports unicode strings.
    */
   public static String escapeString(String toEscape) {
-    return escapeString(toEscape, false, null);
+    return escapeString(toEscape, false);
   }
 
   /**
@@ -473,11 +436,10 @@ public final class ServerSerializationStreamWriter extends
    * than 1.3 that supports unicode strings.
    */
   public static String escapeStringSplitNodes(String toEscape) {
-    return escapeString(toEscape, true, null);
+    return escapeString(toEscape, true);
   }
 
-  private static String escapeString(String toEscape, boolean splitNodes,
-      LengthConstrainedArray array) {
+  private static String escapeString(String toEscape, boolean splitNodes) {
     // Since escaped characters will increase the output size, allocate extra room to start.
     int length = toEscape.length();
     int capacityIncrement = Math.max(length, 16);
@@ -508,9 +470,6 @@ public final class ServerSerializationStreamWriter extends
         charVector.add(JS_QUOTE_CHAR);
         charVector.add('+');
         charVector.add(JS_QUOTE_CHAR);
-        if (array != null) {
-          array.setJavaScript(true);
-        }
       }
     }
 
@@ -642,16 +601,12 @@ public final class ServerSerializationStreamWriter extends
 
   private final SerializationPolicy serializationPolicy;
 
-  private final LengthConstrainedArray encoder;
-
-  public ServerSerializationStreamWriter(SerializationPolicy serializationPolicy, Writer writer) {
-    this.serializationPolicy = serializationPolicy;
-    this.encoder = new LengthConstrainedArray(getVersion(), writer);
-  }
+  private final TokenEncoder encoder;
 
   public ServerSerializationStreamWriter(SerializationPolicy serializationPolicy, int version, Writer writer) {
-    this(serializationPolicy, writer);
     setVersion(version);
+    this.serializationPolicy = serializationPolicy;
+    this.encoder = new TokenEncoder(version, writer);
   }
 
   @Override
@@ -921,22 +876,16 @@ public final class ServerSerializationStreamWriter extends
 
   private void writeHeader() throws IOException {
     encoder.addToken(getFlags());
-    if (encoder.isJavaScript() && getVersion() >= SERIALIZATION_STREAM_JSON_VERSION) {
-      // Ensure we are not using the JSON supported version if stream is Javascript instead of JSON
-      encoder.addToken(SERIALIZATION_STREAM_JSON_VERSION - 1);
-    } else {
-      encoder.addToken(getVersion());
-    }
+    encoder.addToken(getVersion());
   }
 
   private void writeStringTable() throws IOException {
     final StringWriter buffer = new StringWriter();
-    LengthConstrainedArray tableStream = new LengthConstrainedArray(getVersion(), buffer);
+    TokenEncoder tableStream = new TokenEncoder(getVersion(), buffer);
     for (String s : getStringTable()) {
       tableStream.addEscapedToken(s);
     }
     tableStream.finish();
     encoder.addToken(buffer.toString());
-    encoder.setJavaScript(encoder.isJavaScript() || tableStream.isJavaScript());
   }
 }

@@ -128,7 +128,7 @@ public class FindPackages {
       out.println("JAVA_PKGS=\\");
       for (int i = 0; i < JAVA_PKGS.length; i++) {
         if (i < JAVA_PKGS.length - 1) {
-          out.println(JAVA_PKGS[i] + ",\\");
+          out.println(JAVA_PKGS[i] + ";\\");
         } else {
           out.println(JAVA_PKGS[i]);
         }

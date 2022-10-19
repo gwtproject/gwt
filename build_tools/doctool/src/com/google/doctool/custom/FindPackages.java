@@ -145,10 +145,10 @@ public class FindPackages {
         String classPath = className.substring(0, className.lastIndexOf('/'));
         if (!classPaths.contains(classPath)) {
           classPaths.add(classPath);
-          out.println("${gwt.root}/" + classPath + "/package-info.java" + ":\\");
+          out.println("${gwt.root}/" + classPath + "/package-info.java" + ",\\");
         }
         if (i < USER_CLASSES.length - 1) {
-          out.println("${gwt.root}/" + className + ":\\");
+          out.println("${gwt.root}/" + className + ",\\");
         } else {
           out.println("${gwt.root}/" + className);
         }

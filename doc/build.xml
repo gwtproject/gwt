@@ -39,7 +39,7 @@
   </path>
 
   <!-- Rebuild the javadoc if a source file is newer than the index-->
-  <target name="javadoc" unless="${isJava8}">
+  <target name="javadoc" unless="isJava8">
     <outofdate>
       <sourcefiles>
         <fileset file="./src/gwt-user.html" />
@@ -120,7 +120,7 @@
     </javadoc>
   </target>
 
-  <target name="emul-ezt">
+  <target name="emul-ezt" unless="isJava8">
     <outofdate>
       <sourcefiles>
         <fileset dir="${gwt.root}/user/super/com/google/gwt/emul">

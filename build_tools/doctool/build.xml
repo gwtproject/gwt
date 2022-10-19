@@ -7,9 +7,6 @@
 
   <target name="compile" description="Compiles this project">
     <gwt.javac>
-      <classpath>
-        <pathelement location="${java.tools.path}" />
-      </classpath>
     </gwt.javac>
   </target>
 

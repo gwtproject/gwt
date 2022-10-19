@@ -6,6 +6,9 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java-version: ['8', '11']
     steps:
       - name: Checkout GWT itself into one directory
         uses: actions/checkout@v2
@@ -18,11 +21,11 @@ jobs:
         with:
           repository: 'gwtproject/tools'
           path: 'tools'
-      - name: Set up JDK 8
-        # GWT presently requires Java8 to build, but can run on newer Java versions
+      - name: Set up JDK ${{ matrix.java-version }}
+        # GWT presently requires Java8 to build just the SDK and some tests, or 11 to build everything, but can run on newer Java versions
         uses: actions/setup-java@v2
         with:
-          java-version: '8'
+          java-version: ${{ matrix.java-version }}
           distribution: 'temurin'
       - name: Set up reviewdog for easier checks on the PR's checkstyle output
         uses: reviewdog/action-setup@v1

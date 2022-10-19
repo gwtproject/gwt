@@ -163,7 +163,7 @@ public final class Utility {
       }
       ByteArrayOutputStream os = new ByteArrayOutputStream();
       streamOut(in, os, 1024);
-      return os.toString(StandardCharsets.UTF_8);
+      return new String(os.toByteArray(), "UTF-8");
     } finally {
       close(in);
     }

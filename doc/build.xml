@@ -92,12 +92,10 @@
              linkoffline="http://download.oracle.com/javaee/6/api/ validation-package-list">
       <!-- suppress errors that don't break the output, we should refine this to just suppress things we haven't fixed yet -->
       <arg value="-Xdoclint:none" />
+      <!-- re-enable frames for now, until we get to >=13 and have search -->
+      <arg value="--frames" />
       <classpath refid="USER_CLASS_PATH" />
       <sourcepath refid="USER_SOURCE_PATH" />
-
-      <!-- TODO restore example packges with new taglet -->
-      <!--      <arg value="-examplepackages" />-->
-      <!--      <arg value="com.google.gwt.examples;com.google.gwt.examples.i18n;com.google.gwt.examples.http.client;com.google.gwt.examples.rpc.server;com.google.gwt.examples.benchmarks;com.google.gwt.examples.cell;com.google.gwt.examples.cellview;com.google.gwt.examples.view;com.google.gwt.examples.cellview;com.google.gwt.examples.dom.builder" />-->
 
       <taglet name="com.google.doctool.custom.TipTaglet">
         <path refid="DOC_PATH" />

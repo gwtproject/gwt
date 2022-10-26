@@ -3,8 +3,6 @@
   <property name="project.tail" value="doc" />
   <import file="${gwt.root}/common.ant.xml" />
 
-<!--  <property.ensure name="java.tools.path" location="${java.home}/../lib/tools.jar" unless="build.host.ismac" message="Cannot find ${java.home}/../lib/tools.jar; please use a JDK when building doc rather than a JRE." />-->
-
   <property.ensure name="gwt.user.jar" location="${gwt.build.lib}/gwt-user.jar" />
   <!-- Platform shouldn't matter here, just picking one -->
   <property.ensure name="gwt.dev.jar" location="${gwt.build.lib}/gwt-dev.jar" />
@@ -34,12 +32,11 @@
   <path id="DOC_PATH">
     <pathelement location="./src" />
     <pathelement location="${gwt.build.lib}/gwt-doctool.jar" />
-    <path path="${java.tools.path}" />
     <path refid="USER_SOURCE_PATH" />
   </path>
 
   <!-- Rebuild the javadoc if a source file is newer than the index-->
-  <target name="javadoc" unless="isJava8">
+  <target name="javadoc">
     <outofdate>
       <sourcefiles>
         <fileset file="./src/gwt-user.html" />
@@ -74,7 +71,7 @@
   </target>
 
   <!-- Really rebuild the javadoc -->
-  <target name="makeJavadoc">
+  <target name="makeJavadoc" unless="isJava8">
     <java classpathref="DOC_PATH" classname="com.google.doctool.custom.FindPackages" fork="yes" failonerror="true">
       <arg value="${gwt.root}" />
     </java>
@@ -92,8 +89,7 @@
              windowtitle="GWT Javadoc"
              doctitle="GWT API Reference"
              header="GWT ${gwt.version}"
-             linkoffline="http://download.oracle.com/javaee/6/api/ validation-package-list"
-    >
+             linkoffline="http://download.oracle.com/javaee/6/api/ validation-package-list">
       <!-- suppress errors that don't break the output, we should refine this to just suppress things we haven't fixed yet -->
       <arg value="-Xdoclint:none" />
       <classpath refid="USER_CLASS_PATH" />
@@ -112,9 +108,6 @@
       <taglet name="com.google.doctool.custom.ExampleTaglet">
         <path refid="DOC_PATH" />
       </taglet>
-<!--      <tag name="tip"  />-->
-      <tag name="example"  />
-      <tag name="gwt.include"  />
     </javadoc>
   </target>
 

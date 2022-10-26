@@ -26,7 +26,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
- * Used by trunk/doc/build.xml to generate the packages.properties file.
+ * Used by doc/build.xml to generate the packages.properties file.
  */
 public class FindPackages {
 
@@ -55,13 +55,20 @@ public class FindPackages {
   private static final String[] JAVA_PKGS = {
     "java.beans",
     "java.io",
-    "java.lang", "java.lang.annotation", "java.lang.reflect",
+    "java.lang",
+    "java.lang.annotation",
+    "java.lang.reflect",
     "java.math",
     "java.nio.charset",
     "java.security",
     "java.sql",
     "java.text",
-    "java.util", "java.util.concurrent", "java.util.concurrent.atomic", "java.util.function", "java.util.logging", "java.util.stream"
+    "java.util",
+    "java.util.concurrent",
+    "java.util.concurrent.atomic",
+    "java.util.function",
+    "java.util.logging",
+    "java.util.stream"
   };
 
   /**
@@ -90,14 +97,14 @@ public class FindPackages {
       "user/src/com/google/gwt/i18n/server/GwtLocaleFactoryImpl.java",
       "user/src/com/google/gwt/i18n/server/GwtLocaleImpl.java"};
 
-  private static Pattern exclusions;
+  private static final Pattern exclusions;
   static {
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < EXCLUSIONS.length; i++) {
       String ex = EXCLUSIONS[i];
       ex = ex.replace(".", "\\.");
       if (i < EXCLUSIONS.length - 1) {
-        sb.append(ex + "|");
+        sb.append(ex).append("|");
       } else {
         sb.append(ex);
       }
@@ -134,7 +141,7 @@ public class FindPackages {
         }
       }
       out.println("# The last package should not have a trailing semicolon");
-      out.println("");
+      out.println();
       out.println("# Individual classes to include when we don't want to include an entire package");
       out.println("USER_CLASSES=\\");
 
@@ -153,7 +160,7 @@ public class FindPackages {
           out.println("${gwt.root}/" + className);
         }
       }
-      out.println("");
+      out.println();
       out.println("# Packages to include");
       out.println("USER_PKGS=\\");
 

@@ -27,7 +27,6 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.net.URI;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;

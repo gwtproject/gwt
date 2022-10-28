@@ -721,10 +721,7 @@ public final class RPC {
     }
     try {
       stream.writeStringTableAndHeaderAfterPayloadFinished();
-      // Finish the response.
-      //
-      writer.flush();
-      writer.close();
+      finishResponse();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -736,6 +733,14 @@ public final class RPC {
       result = null;
     }
     return result;
+  }
+
+  public static void finishResponse() throws IOException {
+    // Finish the response.
+    //
+    final TeeWriter<StringWriter> writer = getResponseWriter();
+    writer.flush();
+    writer.close();
   }
 
   private static String formatIllegalAccessErrorMessage(Object target, Method serviceMethod) {

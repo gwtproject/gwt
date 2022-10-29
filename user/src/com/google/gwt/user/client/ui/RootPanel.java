@@ -179,6 +179,12 @@ public class RootPanel extends AbsolutePanel {
       // for any reason, return a new RootPanel rather than the existing one (
       // see issue 1937).
       if ((elem == null) || (rp.getElement() == elem)) {
+        // if id and elem are null, set the element of existing rp with the 
+        // current body to handle scenarios where body gets replaced/refreshed
+        // from DOM on certain actions like page navigation.
+        if(id == null && elem == null) {
+          rp.setElement((Element) natGetBodyElement());
+        }
         // There's already an existing RootPanel for this element. Return it.
         return rp;
       }

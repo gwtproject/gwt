@@ -182,7 +182,7 @@ public class RootPanel extends AbsolutePanel {
         // if id and elem are null, set the element of existing rp with the 
         // current body to handle scenarios where body gets replaced/refreshed
         // from DOM on certain actions like page navigation.
-        if(id == null && elem == null) {
+        if(id == null) {
           rp.setElement((Element) getBodyElement());
         }
         // There's already an existing RootPanel for this element. Return it.

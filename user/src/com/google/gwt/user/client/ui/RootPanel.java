@@ -183,7 +183,7 @@ public class RootPanel extends AbsolutePanel {
         // current body to handle scenarios where body gets replaced/refreshed
         // from DOM on certain actions like page navigation.
         if(id == null && elem == null) {
-          rp.setElement((Element) natGetBodyElement());
+          rp.setElement((Element) getBodyElement());
         }
         // There's already an existing RootPanel for this element. Return it.
         return rp;

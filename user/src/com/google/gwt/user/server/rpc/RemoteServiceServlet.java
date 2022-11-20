@@ -427,7 +427,7 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
   }
 
   /**
-   * This method is called by {@link #processCall(String, Writer)} and will throw a
+   * This method is called by {@link #processCall(String)} and will throw a
    * SecurityException if {@link #getPermutationStrongName()} returns
    * <code>null</code>. This method can be overridden to be a no-op if there are
    * clients that are not expected to provide the

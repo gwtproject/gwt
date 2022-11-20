@@ -327,7 +327,6 @@ public class RPCServletUtils {
    *
    * @param servletContext servlet context for this response
    * @param response response instance
-   * @param responseContent a string containing the response content
    * @param gzipResponse if <code>true</code> the response content will be gzip
    *          encoded before being written into the response
    * @throws IOException if reading, writing, or closing the response's output

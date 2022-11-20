@@ -137,7 +137,7 @@ public final class ServerSerializationStreamWriter extends
         throw new RuntimeException(e);
       }
     }
-    
+
     @Override
     public String toString() {
       return getClass().getSimpleName() + " [writer=" + writer + ", needsComma=" + needsComma + "]";

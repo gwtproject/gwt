@@ -15,6 +15,12 @@
  */
 package com.google.gwt.user.server.rpc.impl;
 
+import com.google.gwt.user.client.rpc.CustomFieldSerializer;
+import com.google.gwt.user.client.rpc.SerializationException;
+import com.google.gwt.user.client.rpc.impl.AbstractSerializationStreamWriter;
+import com.google.gwt.user.server.Base64Utils;
+import com.google.gwt.user.server.rpc.SerializationPolicy;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -30,13 +36,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import com.google.gwt.user.client.rpc.CustomFieldSerializer;
-import com.google.gwt.user.client.rpc.SerializationException;
-import com.google.gwt.user.client.rpc.impl.AbstractSerializationStream;
-import com.google.gwt.user.client.rpc.impl.AbstractSerializationStreamWriter;
-import com.google.gwt.user.server.Base64Utils;
-import com.google.gwt.user.server.rpc.SerializationPolicy;
 
 /**
  * For internal use only. Used for server call serialization. This class is

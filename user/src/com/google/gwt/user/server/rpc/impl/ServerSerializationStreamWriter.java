@@ -17,6 +17,7 @@ package com.google.gwt.user.server.rpc.impl;
 
 import com.google.gwt.user.client.rpc.CustomFieldSerializer;
 import com.google.gwt.user.client.rpc.SerializationException;
+import com.google.gwt.user.client.rpc.impl.AbstractSerializationStream;
 import com.google.gwt.user.client.rpc.impl.AbstractSerializationStreamWriter;
 import com.google.gwt.user.server.Base64Utils;
 import com.google.gwt.user.server.rpc.SerializationPolicy;
@@ -25,6 +26,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.StringWriter;
+import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -105,15 +107,15 @@ public final class ServerSerializationStreamWriter extends
         }
         writer.append(token);
       } catch (IOException e) {
-        throw new RuntimeException(e);
+        throw new UncheckedIOException(e);
       }
     }
 
-    public void addEscapedToken(String token) throws IOException {
+    public void addEscapedToken(String token) {
       addToken(escapeString(token, true));
     }
 
-    public void addToken(int i) throws IOException {
+    public void addToken(int i) {
       addToken(String.valueOf(i));
     }
 

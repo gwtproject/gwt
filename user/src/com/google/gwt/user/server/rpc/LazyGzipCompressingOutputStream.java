@@ -124,7 +124,7 @@ public class LazyGzipCompressingOutputStream extends FilterOutputStream {
    * compression decision.
    */
   private void flushBuffer() throws IOException {
-    out.write(buffer);
+    out.write(buffer, 0, bytesWrittenToBuffer);
     buffer = null;
   }
 }

@@ -54,7 +54,6 @@ public class LazyGzipCompressingOutputStream extends FilterOutputStream {
     super(response.getOutputStream());
     buffer = new byte[sizeLimitForNoCompression];
     this.response = response;
-    count++;
   }
 
   @Override
@@ -111,7 +110,6 @@ public class LazyGzipCompressingOutputStream extends FilterOutputStream {
     RPCServletUtils.setGzipEncodingHeader(response);
     out = new GZIPOutputStream(out);
     flushBuffer();
-    compressed++;
   }
 
   /**

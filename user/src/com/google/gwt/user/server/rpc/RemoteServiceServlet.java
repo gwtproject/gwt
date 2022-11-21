@@ -281,9 +281,7 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
    * This is public so that it can be unit tested easily without HTTP.
    *
    * @param payload the UTF-8 request payload
-   * @return a string which encodes either the method's return, a checked
-   *         exception thrown by the method, or an
-   *         {@link IncompatibleRemoteServiceException}, or {@code null} if a protocol version of
+   * @return a string which encodes either the method's return or {@code null} if a protocol version of
    *         {@link AbstractSerializationStream#SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION} or
    *         newer has been selected
    * @throws SerializationException if we cannot serialize the response
@@ -291,6 +289,8 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
    *           that is not declared in the service method's signature
    * @throws RuntimeException if the service method throws an unchecked
    *           exception (the exception will be the one thrown by the service)
+   * @throws IncompatibleRemoteServiceException when an incompatibility is detected between a
+   *           {@link RemoteService} client and its corresponding {@link RemoteService} server
    */
   public String processCall(String payload) throws SerializationException {
     // First, check for possible XSRF situation
@@ -427,7 +427,7 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
   }
 
   /**
-   * This method is called by {@link #processCall(String, Writer)} and will throw a
+   * This method is called by {@link #processCall(String)} and will throw a
    * SecurityException if {@link #getPermutationStrongName()} returns
    * <code>null</code>. This method can be overridden to be a no-op if there are
    * clients that are not expected to provide the

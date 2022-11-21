@@ -326,7 +326,6 @@ public class RPCServletUtils {
    *
    * @param servletContext servlet context for this response
    * @param response response instance
-   * @param responseContent a string containing the response content
    * @param clientAcceptsGzipEncoding if <code>true</code> the response content will be gzip
    *          encoded before being written into the response in case it
    *          {@link #exceedsUncompressedContentLengthLimit(String) exceeds a certain size limit}

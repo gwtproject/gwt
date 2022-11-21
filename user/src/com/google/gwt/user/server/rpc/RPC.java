@@ -700,39 +700,54 @@ public final class RPC {
    */
   private static String encodeResponse(Class<?> responseClass, Object object, boolean wasThrown,
       int flags, SerializationPolicy serializationPolicy) throws SerializationException {
-    final TeeWriter<StringWriter> writer = getResponseWriter();
+    final TeeWriter<StringWriter> responseWriter = getResponseWriter();
     try {
-      writer.append("//");
-      if (wasThrown) {
-        writer.append("EX");
+      // for test backward compatibility: if no response writer is set, this method has been
+      // reached on a non-standard call path and will respond with the serialized payload string
+      final TeeWriter<StringWriter> writer;
+      if (responseWriter == null) {
+          writer = new TeeWriter<>(new StringWriter(), new StringWriter());
+          setResponseWriter(writer);
       } else {
-        writer.append("OK");
+        writer = responseWriter;
       }
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+      try {
+        writer.append("//");
+        if (wasThrown) {
+          writer.append("EX");
+        } else {
+          writer.append("OK");
+        }
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+      ServerSerializationStreamWriter stream =
+          new ServerSerializationStreamWriter(serializationPolicy, getRpcVersion(), writer);
+      stream.setFlags(flags);
+  
+      stream.prepareToWrite();
+      if (responseClass != void.class) {
+        stream.serializeValue(object, responseClass);
+      }
+      try {
+        stream.writeStringTableAndHeaderAfterPayloadFinished();
+        finishResponse();
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+      final String result;
+      StringWriter stringWriter = writer.getOtherWriter();
+      if (stringWriter != null) {
+        result = stringWriter.toString();
+      } else {
+        result = null;
+      }
+      return result;
+    } finally {
+      if (responseWriter == null) {
+        unsetResponseWriter();
+      }
     }
-    ServerSerializationStreamWriter stream =
-        new ServerSerializationStreamWriter(serializationPolicy, getRpcVersion(), writer);
-    stream.setFlags(flags);
-
-    stream.prepareToWrite();
-    if (responseClass != void.class) {
-      stream.serializeValue(object, responseClass);
-    }
-    try {
-      stream.writeStringTableAndHeaderAfterPayloadFinished();
-      finishResponse();
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-    final String result;
-    StringWriter stringWriter = writer.getOtherWriter();
-    if (stringWriter != null) {
-      result = stringWriter.toString();
-    } else {
-      result = null;
-    }
-    return result;
   }
 
   public static void finishResponse() throws IOException {

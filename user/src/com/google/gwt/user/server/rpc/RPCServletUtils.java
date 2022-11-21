@@ -25,7 +25,6 @@ import java.lang.reflect.Method;
 import java.nio.charset.Charset;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.zip.GZIPOutputStream;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -328,24 +327,25 @@ public class RPCServletUtils {
    * @param servletContext servlet context for this response
    * @param response response instance
    * @param responseContent a string containing the response content
-   * @param gzipResponse if <code>true</code> the response content will be gzip
-   *          encoded before being written into the response
+   * @param clientAcceptsGzipEncoding if <code>true</code> the response content will be gzip
+   *          encoded before being written into the response in case it
+   *          {@link #exceedsUncompressedContentLengthLimit(String) exceeds a certain size limit}
    * @throws IOException if reading, writing, or closing the response's output
    *           stream fails
    */
   public static Writer createWriterForResponse(ServletContext servletContext,
-      HttpServletResponse response, boolean gzipResponse)
+      HttpServletResponse response, boolean clientAcceptsGzipEncoding)
       throws IOException {
     response.setContentType(CONTENT_TYPE_APPLICATION_JSON_UTF8);
     response.setStatus(HttpServletResponse.SC_OK);
     response.setHeader(CONTENT_DISPOSITION, ATTACHMENT);
     final Writer writer;
-    if (gzipResponse) {
-      // Compress the reply and adjust headers.
+    if (clientAcceptsGzipEncoding) {
+      // Compress the reply and adjust headers if the payload exceeds UNCOMPRESSED_BYTE_SIZE_LIMIT
       //
       setGzipEncodingHeader(response);
-      final GZIPOutputStream gzipOutputStream = new GZIPOutputStream(response.getOutputStream());
-      writer = new OutputStreamWriter(gzipOutputStream, CHARSET_UTF8);
+      final LazyGzipCompressingOutputStream lazyCompressingOutputStream = new LazyGzipCompressingOutputStream(response, UNCOMPRESSED_BYTE_SIZE_LIMIT);
+      writer = new OutputStreamWriter(lazyCompressingOutputStream, CHARSET_UTF8);
     } else {
       writer = new OutputStreamWriter(response.getOutputStream(), CHARSET_UTF8);
     }

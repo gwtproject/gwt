@@ -546,7 +546,7 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
 
   private Writer createWriterForResponse(HttpServletRequest request,
       HttpServletResponse response) throws IOException {
-    boolean gzipEncode = RPCServletUtils.acceptsGzipEncoding(request);
-    return RPCServletUtils.createWriterForResponse(getServletContext(), response, gzipEncode);
+    boolean clientAcceptsGzipEncoding = RPCServletUtils.acceptsGzipEncoding(request);
+    return RPCServletUtils.createWriterForResponse(getServletContext(), response, clientAcceptsGzipEncoding);
   }
 }

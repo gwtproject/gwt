@@ -343,7 +343,6 @@ public class RPCServletUtils {
     if (clientAcceptsGzipEncoding) {
       // Compress the reply and adjust headers if the payload exceeds UNCOMPRESSED_BYTE_SIZE_LIMIT
       //
-      setGzipEncodingHeader(response);
       final LazyGzipCompressingOutputStream lazyCompressingOutputStream = new LazyGzipCompressingOutputStream(response, UNCOMPRESSED_BYTE_SIZE_LIMIT);
       writer = new OutputStreamWriter(lazyCompressingOutputStream, CHARSET_UTF8);
     } else {

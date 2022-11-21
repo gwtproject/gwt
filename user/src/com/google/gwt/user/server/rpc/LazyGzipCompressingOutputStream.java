@@ -49,10 +49,6 @@ public class LazyGzipCompressingOutputStream extends FilterOutputStream {
   private int bytesWrittenToBuffer;
   private final HttpServletResponse response;
   
-  // TODO remove debug stats again:
-  private static int count = 0;
-  private static int compressed = 0;
-
   public LazyGzipCompressingOutputStream(HttpServletResponse response,
       int sizeLimitForNoCompression) throws IOException {
     super(response.getOutputStream());

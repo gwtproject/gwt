@@ -78,14 +78,14 @@ public class LazyGzipCompressingOutputStream extends FilterOutputStream {
   @Override
   public void write(byte[] b, int off, int len) throws IOException {
     if (buffer == null) {
-      super.write(b);
+      super.write(b, off, len);
     } else {
       if (bytesWrittenToBuffer + len <= buffer.length) {
         System.arraycopy(b, off, buffer, bytesWrittenToBuffer, len);
         bytesWrittenToBuffer += len;
       } else {
         activateCompression();
-        super.write(b);
+        super.write(b, off, len);
       }
     }
   }

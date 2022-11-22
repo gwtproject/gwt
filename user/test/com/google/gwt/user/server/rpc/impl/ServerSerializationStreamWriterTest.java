@@ -18,6 +18,9 @@ package com.google.gwt.user.server.rpc.impl;
 
 import junit.framework.TestCase;
 
+import java.io.IOException;
+import java.io.StringWriter;
+
 /**
  * Tests {@link ServerSerializationStreamWriter}.
  */
@@ -114,36 +117,13 @@ public class ServerSerializationStreamWriterTest extends TestCase {
         escaped);
   }
 
-  public void testWritingRpcVersion8Message() {
-    ServerSerializationStreamWriter writer = new ServerSerializationStreamWriter(null, 8);
+  public void testWritingRpcVersion8Message() throws IOException {
+    final StringWriter stringWriter = new StringWriter();
+    ServerSerializationStreamWriter writer = new ServerSerializationStreamWriter(null, 8, stringWriter);
     writer.writeDouble(Double.NEGATIVE_INFINITY);
     writer.writeDouble(Double.POSITIVE_INFINITY);
     writer.writeDouble(Double.NaN);
-    assertEquals("[\"NaN\",\"Infinity\",\"-Infinity\",[],0,8]", writer.toString());
+    writer.writeStringTableAndHeaderAfterPayloadFinished();
+    assertEquals("[\"NaN\",\"Infinity\",\"-Infinity\",[],0,8]", stringWriter.toString());
   }
-
-  public void testVersion8Fallbacks() {
-    StringBuilder longString = new StringBuilder(66000);
-    for (int i = 0; i < 660000; i++) {
-      longString.append("a");
-    }
-
-    // Fallbacks to 7 if string gets concatenated
-    ServerSerializationStreamWriter writer = new ServerSerializationStreamWriter(null, 8);
-    writer.writeString(longString.toString());
-    String encoded = writer.toString();
-    assertEquals("7", encoded.substring(encoded.lastIndexOf(",") + 1, encoded.lastIndexOf("]")));
-
-    // Fallbacks to 7 if array size reached maximum
-    int maxArrayLength =
-        ServerSerializationStreamWriter.LengthConstrainedArray.MAXIMUM_ARRAY_LENGTH + 100;
-    writer = new ServerSerializationStreamWriter(null, 8);
-    for (int i = 0; i < maxArrayLength; i++) {
-      writer.writeInt(i);
-    }
-
-    encoded = writer.toString();
-    assertEquals("7", encoded.substring(encoded.lastIndexOf(",") + 1, encoded.lastIndexOf("]")));
-  }
-
 }

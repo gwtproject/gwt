@@ -44,6 +44,25 @@ public class ClientSerializationStreamReaderTest extends TestCase {
     assertEquals(3.5, reader.readDouble());
   }
 
+  public void testReadForward() throws SerializationException {
+    ClientSerializationStreamReader reader = new ClientSerializationStreamReader(null);
+
+    reader.prepareToRead("["
+        + "3.5,"  // a double
+        + "1,"  // String table index: "one"
+        + "3,"  // String table index: "three"
+        + "2,"  // String table index: "two"
+        + "[\"one\",\"two\",\"three\"],"
+        + "0,"  // flags
+        + AbstractSerializationStream.SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION  // version
+        + "]");
+
+    assertEquals(3.5, reader.readDouble());
+    assertEquals("one", reader.readString());
+    assertEquals("three", reader.readString());
+    assertEquals("two", reader.readString());
+  }
+
   public void testRead_stringConcats() throws SerializationException {
     ClientSerializationStreamReader reader = new ClientSerializationStreamReader(null);
 
@@ -52,6 +71,19 @@ public class ClientSerializationStreamReaderTest extends TestCase {
         + "[\"one\"+\"two\"+\"three\"],"
         + "0,"  // flags
         + AbstractSerializationStream.SERIALIZATION_STREAM_VERSION  // version
+        + "]");
+
+    assertEquals("onetwothree", reader.readString());
+  }
+
+  public void testRead_stringConcats_Forward() throws SerializationException {
+    ClientSerializationStreamReader reader = new ClientSerializationStreamReader(null);
+
+    reader.prepareToRead("["
+        + "1,"  // String table index: "onetwothree"
+        + "[\"one\"+\"two\"+\"three\"],"
+        + "0,"  // flags
+        + AbstractSerializationStream.SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION  // version
         + "]");
 
     assertEquals("onetwothree", reader.readString());
@@ -71,6 +103,22 @@ public class ClientSerializationStreamReaderTest extends TestCase {
 
     assertEquals("two", reader.readString());
     assertEquals("one", reader.readString());
+  }
+
+  public void testRead_arrayConcats_Forward() throws SerializationException {
+    ClientSerializationStreamReader reader = new ClientSerializationStreamReader(null);
+
+    reader.prepareToRead("["
+        + "1,"  // String table index: "one"
+        + "2"  // String table index: "two"
+        + "].concat(["
+        + "[\"one\"].concat([\"two\"]),"
+        + "0,"  // flags
+        + AbstractSerializationStream.SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION  // version
+        + "])");
+
+    assertEquals("one", reader.readString());
+    assertEquals("two", reader.readString());
   }
 
   /*
@@ -103,6 +151,36 @@ public class ClientSerializationStreamReaderTest extends TestCase {
     }
   }
 
+  /*
+   * Note: this test verifies a issue with the Rhino parser that limits the size of a single string
+   * node to 64KB. If this test starts failing, then the Rhino parser may have been fixed to support
+   * larger strings and the string concat workaround could be removed.
+   */
+  public void testRead_stringOver64KB_Forward() {
+    ClientSerializationStreamReader reader = new ClientSerializationStreamReader(null);
+
+    int stringLength = 0xFFFF;
+    StringBuilder builder = new StringBuilder(stringLength);
+    for (int i = 0; i < stringLength; i++) {
+      builder.append('y');
+    }
+
+    // Push the string size over 64KB.
+    builder.append('z');
+
+    try {
+      reader.prepareToRead("["
+          + "1,"  // String table index
+          + "[\"" + builder.toString() + "\"],"
+          + "0,"  // flags
+          + AbstractSerializationStream.SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION // version
+          + "]");
+      fail("Expected SerializationException");
+    } catch (SerializationException e) {
+      // Expected.
+    }
+  }
+
   public void testRead_stringOver64KB_concat() throws SerializationException {
     ClientSerializationStreamReader reader = new ClientSerializationStreamReader(null);
 
@@ -124,6 +202,32 @@ public class ClientSerializationStreamReaderTest extends TestCase {
         + "[\"" + node1Builder.toString() + "\"+\"" + node2Builder.toString() + "\"],"
         + "0,"  // flags
         + AbstractSerializationStream.SERIALIZATION_STREAM_VERSION  // version
+        + "]");
+
+    assertEquals(node1Builder.toString() + node2Builder.toString(), reader.readString());
+  }
+
+  public void testRead_stringOver64KB_concat_Forward() throws SerializationException {
+    ClientSerializationStreamReader reader = new ClientSerializationStreamReader(null);
+
+    // First node is maximum allowed 64KB.
+    int node1Length = 0xFFFF;
+    StringBuilder node1Builder = new StringBuilder(node1Length);
+    for (int i = 0; i < node1Length; i++) {
+      node1Builder.append('y');
+    }
+
+    int node2Length = 0xFF;
+    StringBuilder node2Builder = new StringBuilder(0xFF);
+    for (int i = 0; i < node2Length; i++) {
+      node2Builder.append('z');
+    }
+
+    reader.prepareToRead("["
+        + "1,"  // String table index
+        + "[\"" + node1Builder.toString() + "\"+\"" + node2Builder.toString() + "\"],"
+        + "0,"  // flags
+        + AbstractSerializationStream.SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION  // version
         + "]");
 
     assertEquals(node1Builder.toString() + node2Builder.toString(), reader.readString());

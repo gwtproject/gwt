@@ -112,7 +112,7 @@ public final class ServerSerializationStreamWriter extends
     }
 
     public void addEscapedToken(String token) {
-      addToken(escapeString(token, true));
+      addToken(escapeString(token, false));
     }
 
     public void addToken(int i) {

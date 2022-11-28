@@ -101,7 +101,10 @@ public class Parser {
      */
     Object tempBlock = nf.createLeaf(TokenStream.BLOCK);
     ((Node) tempBlock).setIsSyntheticBlock(true);
-
+    
+    // Add script indicator
+    sourceAdd((char)ts.SCRIPT);
+    
     while (true) {
       ts.flags |= ts.TSF_REGEXP;
       tt = ts.getToken();
@@ -1399,9 +1402,10 @@ public class Parser {
    * character representing the type, and either 1 or 4 characters representing
    * the bit-encoding of the number. String types NAME, STRING and OBJECT are
    * currently stored as a token type, followed by a character giving the length
-   * of the string (assumed to be less than 2^16), followed by the characters of
+   * of the string (assumed to be less than 2^15), or two characters in case the
+   * length is greater than 2^15, followed by the characters of
    * the string inlined into the source string. Changing this to some reference
-   * to to the string in the compiled class' constant pool would probably save a
+   * to the string in the compiled class' constant pool would probably save a
    * lot of space... but would require some method of deriving the final
    * constant pool entry from information available at parse time.
    *
@@ -1421,18 +1425,43 @@ public class Parser {
   }
 
   private void sourceAddString(int type, String str) {
-    int L = str.length();
-    // java string length < 2^16?
-    if (Context.check && L > Character.MAX_VALUE)
-      Context.codeBug();
-
-    if (sourceTop + L + 2 > sourceBuffer.length) {
-      increaseSourceCapacity(sourceTop + L + 2);
-    }
     sourceAdd((char) type);
-    sourceAdd((char) L);
+    sourceAddString(str);
+  }
+
+  private void sourceAddString(String str) {
+    int L = str.length();
+    int lengthEncodingSize = 1;
+    if (L >= 0x8000) {
+      lengthEncodingSize = 2;
+    }
+    int nextTop = sourceTop + lengthEncodingSize + L;
+    if (nextTop > sourceBuffer.length) {
+      increaseSourceCapacity(nextTop);
+    }
+    if (L >= 0x8000) {
+      // Use 2 chars to encode strings exceeding 32K, where the highest
+      // bit in the first char indicates presence of the next byte
+      sourceBuffer[sourceTop] = (char) (0x8000 | (L >>> 16));
+      ++sourceTop;
+    }
+    sourceBuffer[sourceTop] = (char) L;
+    ++sourceTop;
     str.getChars(0, L, sourceBuffer, sourceTop);
-    sourceTop += L;
+    sourceTop = nextTop;
+  }
+
+  static int getSourceString(String source, int offset, Object[] result) {
+    int length = source.charAt(offset);
+    ++offset;
+    if ((0x8000 & length) != 0) {
+      length = ((0x7FFF & length) << 16) | source.charAt(offset);
+      ++offset;
+    }
+    if (result != null) {
+      result[0] = source.substring(offset, offset + length);
+    }
+    return offset + length;
   }
 
   private void sourceAddNumber(double n) {

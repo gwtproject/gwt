@@ -121,66 +121,6 @@ public class ClientSerializationStreamReaderTest extends TestCase {
     assertEquals("two", reader.readString());
   }
 
-  /*
-   * Note: this test verifies a issue with the Rhino parser that limits the size of a single string
-   * node to 64KB. If this test starts failing, then the Rhino parser may have been fixed to support
-   * larger strings and the string concat workaround could be removed.
-   */
-  public void testRead_stringOver64KB() {
-    ClientSerializationStreamReader reader = new ClientSerializationStreamReader(null);
-
-    int stringLength = 0xFFFF;
-    StringBuilder builder = new StringBuilder(stringLength);
-    for (int i = 0; i < stringLength; i++) {
-      builder.append('y');
-    }
-
-    // Push the string size over 64KB.
-    builder.append('z');
-
-    try {
-      reader.prepareToRead("["
-          + "1,"  // String table index
-          + "[\"" + builder.toString() + "\"],"
-          + "0,"  // flags
-          + AbstractSerializationStream.SERIALIZATION_STREAM_VERSION  // version
-          + "]");
-      fail("Expected SerializationException");
-    } catch (SerializationException e) {
-      // Expected.
-    }
-  }
-
-  /*
-   * Note: this test verifies a issue with the Rhino parser that limits the size of a single string
-   * node to 64KB. If this test starts failing, then the Rhino parser may have been fixed to support
-   * larger strings and the string concat workaround could be removed.
-   */
-  public void testRead_stringOver64KB_Forward() {
-    ClientSerializationStreamReader reader = new ClientSerializationStreamReader(null);
-
-    int stringLength = 0xFFFF;
-    StringBuilder builder = new StringBuilder(stringLength);
-    for (int i = 0; i < stringLength; i++) {
-      builder.append('y');
-    }
-
-    // Push the string size over 64KB.
-    builder.append('z');
-
-    try {
-      reader.prepareToRead("["
-          + "1,"  // String table index
-          + "[\"" + builder.toString() + "\"],"
-          + "0,"  // flags
-          + AbstractSerializationStream.SERIALIZATION_STREAM_FORWARD_STREAMING_VERSION // version
-          + "]");
-      fail("Expected SerializationException");
-    } catch (SerializationException e) {
-      // Expected.
-    }
-  }
-
   public void testRead_stringOver64KB_concat() throws SerializationException {
     ClientSerializationStreamReader reader = new ClientSerializationStreamReader(null);
 

@@ -20,12 +20,11 @@ import com.google.doctool.ResourceIncluder;
 import com.sun.source.doctree.DocTree;
 
 import javax.lang.model.element.Element;
+import javax.tools.Diagnostic;
 import java.io.IOException;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
-
-import static javax.tools.Diagnostic.Kind.ERROR;
 
 /**
  * A taglet for slurping in the content of artbitrary files appearing on the
@@ -49,7 +48,8 @@ public class IncludeTaglet extends AbstractTaglet {
         results.append("<blockquote><pre>").append(contents).append("</pre></blockquote>");
       } catch (IOException e) {
         e.printStackTrace();
-        printMessage(ERROR, "Error in reading file: " + e.getMessage(), element, docTree);
+        printMessage(Diagnostic.Kind.ERROR, "Error in reading file: " + e.getMessage(), element,
+                docTree);
         // return empty to let javadoc report this
         return "";
       }

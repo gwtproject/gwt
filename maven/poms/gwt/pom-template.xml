@@ -67,6 +67,11 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.gwtproject</groupId>
+                <artifactId>gwt-servlet-jakarta</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.gwtproject.web.bindery</groupId>
                 <artifactId>requestfactory</artifactId>
                 <version>${project.version}</version>

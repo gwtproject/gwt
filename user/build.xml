@@ -146,6 +146,57 @@
     </gwt.javac>
   </target>
 
+  <target name="compile-jakarta" description="Compile all class files for jakarta servlets"
+          unless="compile.complete">
+    <sequential>
+      <copy todir="${project.build}/jakarta-src">
+        <fileset dir="src" />
+        <filterchain>
+          <tokenfilter>
+            <replacestring from="javax.servlet" to="jakarta.servlet"/>
+          </tokenfilter>
+        </filterchain>
+      </copy>
+      <gwt.javac
+              srcdir="${project.build}/jakarta-src"
+              destdir="${javac.out}-jakarta"
+              excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java,**/junit/**"
+              errorprone.args="
+              -Xep:MissingCasesInEnumSwitch:OFF
+              -Xep:SelfComparison:OFF
+              -Xep:SelfEquals:OFF
+              -Xep:FallThrough:OFF
+              -Xep:ReturnValueIgnored:OFF
+              -Xep:EqualsIncompatibleType:OFF
+            ">
+        <src path="super/com/google/gwt/emul/javaemul/internal" />
+        <classpath>
+          <pathelement location="${gwt.tools.lib}/gss/2015-11-04/closure-stylesheets-library-20151104-rebased.jar"/>
+          <!--        <pathelement location="${gwt.tools.lib}/tomcat/tomcat-servlet-api-8.0.28.jar"/>-->
+          <pathelement location="${gwt.tools.lib}/jakarta-servlet/jakarta.servlet-api-5.0.0/jakarta.servlet-api-5.0.0.jar" />
+          <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar"/>
+          <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
+          <pathelement location="${gwt.tools.lib}/w3c/sac/sac-1.3.jar"/>
+          <pathelement location="${gwt.tools.lib}/w3c/flute/flute-1.3-gg2.jar"/>
+          <pathelement location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA.jar"/>
+          <!-- The source is included so validation is available from client code -->
+          <pathelement
+                  location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA-sources.jar"/>
+          <!-- Hibernate is included until we can provide the super source as an third party jar" -->
+          <pathelement
+                  location="${gwt.tools.lib}/hibernate/validator/hibernate-validator-4.1.0.Final.jar"/>
+          <pathelement
+                  location="${gwt.tools.lib}/hibernate/validator/hibernate-validator-4.1.0.Final-sources.jar"/>
+          <pathelement
+                  location="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar"/>
+          <pathelement
+                  location="${gwt.tools.lib}/jsinterop/jsinterop-annotations-2.0.0.jar"/>
+          <pathelement location="${gwt.dev.jar}"/>
+        </classpath>
+      </gwt.javac>
+    </sequential>
+  </target>
+
   <!--
     Compile test code for dev to pick up TypeOracleTestUtils and others.
     Compiles test dependencies in dev/core
@@ -195,7 +246,7 @@
     </gwt.javac>
   </target>
 
-  <target name="build" depends="compile"
+  <target name="build" depends="compile, compile-jakarta"
           description="Build and package this project">
     <mkdir dir="${gwt.build.lib}"/>
     <gwt.jar>

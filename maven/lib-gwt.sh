@@ -64,7 +64,7 @@ function maven-gwt() {
   GWT_EXTRACT_DIR=`ls $RANDOM_DIR | tail -n1`
   GWT_EXTRACT_DIR=$RANDOM_DIR/$GWT_EXTRACT_DIR
 
-  JAVADOC_FILE_PATH=$RANDOM_DIR/gwt-javadoc.jar
+  JAVADOC_FILE_PATH=$RANDOM_DIR/gwt-javadoc.jar #TODO also wrong for jakarta
   [ -d $GWT_EXTRACT_DIR/doc/javadoc ] && jar cf $JAVADOC_FILE_PATH -C $GWT_EXTRACT_DIR/doc/javadoc .
 
   # Generate POMs with correct version
@@ -76,7 +76,7 @@ function maven-gwt() {
     popd > /dev/null
   done
 
-  gwtLibs='dev user servlet codeserver'
+  gwtLibs='dev user servlet servlet-jakarta codeserver'
 
   echo "Removing bundled third-parties from gwt-dev"
   zip -q $GWT_EXTRACT_DIR/gwt-dev.jar --copy --out $GWT_EXTRACT_DIR/gwt-dev-trimmed.jar \
@@ -118,8 +118,10 @@ function maven-gwt() {
     # If there are no sources, use gwt-user sources.
     # This is a bit hacky but Sonatype requires a
     # source jar for Central, and lack of sources
-    # should only happen for gwt-servlet which is
-    # basically a subset of gwt-user.
+    # should only happen for gwt-servlet and
+    # gwt-servlet-jakarta which are basically a
+    # subset of gwt-user.
+    #TODO this is wrong for jakarta sources
     if [ ! -f $SOURCES_PATH_FILE ]; then
       SOURCES_PATH_FILE=$GWT_EXTRACT_DIR/gwt-user-sources.jar
     fi

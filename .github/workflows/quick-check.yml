@@ -47,7 +47,7 @@ jobs:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -eux
-          shopt -s extglob
+          shopt -s globstar
           cd gwt
           for f in build/out/**/checkstyle*.xml ; do
             echo $f

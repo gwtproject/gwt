@@ -13,8 +13,6 @@
  */
 package com.google.gwt.user.server.rpc;
 
-import java.io.ObjectInputStream;
-
 /**
  * A serialization-compatible mock for {@link java.util.EnumMap} that uses an equal
  * {@link #serialVersionUID} and a compatible set of fields. When de-serializing an
@@ -64,9 +62,9 @@ class EnumMap<K extends Enum<K>, V> extends java.util.EnumMap<K, V> {
     // Read in the key type and any hidden stuff
     s.defaultReadObject();
     // Read in size (number of Mappings)
-    int size = s.readInt();
+    int numberOfMappings = s.readInt();
     // Read the keys and values, and put the mappings in the HashMap
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < numberOfMappings; i++) {
       s.readObject(); // key
       s.readObject(); // value
     }

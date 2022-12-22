@@ -112,14 +112,16 @@ public final class LinkedHashMap_CustomFieldSerializer extends
         if (!isAccessible) {
           f = LinkedHashMap.class.getDeclaredField("accessOrder");
           synchronized (f) {
-            // see if we can *try* setting the accessOrder field accessible:
-            final Method trySetAccessible = AccessibleObject.class.getDeclaredMethod("trySetAccessible");
-            if (trySetAccessible != null) { // Java 9 or beyond
+            try {
+              // see if we can *try* setting the accessOrder field accessible:
+              final Method trySetAccessible = AccessibleObject.class.getDeclaredMethod("trySetAccessible");
+              // no exception, then we are on Java 9 or beyond
               if ((boolean) trySetAccessible.invoke(f)) {
                 accessOrderField.set(f);
                 isAccessible = true;
               }
-            } else { // Java <=8: it won't create a warning but it may fail with an exception
+            } catch (NoSuchMethodException e) {
+              // Java <= 8: it won't create a warning but it may fail with an exception
               // Ensure all threads can see the accessibility.
               f.setAccessible(true);
               accessOrderField.set(f);
@@ -139,8 +141,6 @@ public final class LinkedHashMap_CustomFieldSerializer extends
       } catch (IllegalAccessException e) {
         // fall through
       } catch (InvocationTargetException e) {
-        // fall through
-      } catch (NoSuchMethodException e) {
         // fall through
       }
       reflectionHasFailed.set(true);

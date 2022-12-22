@@ -67,9 +67,9 @@ public class EnumMapUtil {
         result = EnumMap.class;
       } else {
         try {
-          result = Class.forName(desc.getName(), false, Thread.currentThread().getContextClassLoader());
-        } catch (ClassNotFoundException e) {
           result = super.resolveClass(desc);
+        } catch (ClassNotFoundException e) {
+          result = Class.forName(desc.getName(), false, Thread.currentThread().getContextClassLoader());
         }
       }
       return result;

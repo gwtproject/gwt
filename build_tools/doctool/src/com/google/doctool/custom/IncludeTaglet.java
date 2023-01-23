@@ -41,7 +41,7 @@ public class IncludeTaglet extends AbstractTaglet {
   public String toString(List<? extends DocTree> list, Element element) {
     StringBuilder results = new StringBuilder();
     for (DocTree docTree : list) {
-      String text = getText(docTree);
+      String text = getHtmlContent(docTree);
 
       try {
         String contents = ResourceIncluder.getResourceFromClasspathScrubbedForHTML(text);

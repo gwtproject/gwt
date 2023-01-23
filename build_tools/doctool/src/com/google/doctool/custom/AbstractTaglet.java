@@ -16,6 +16,9 @@
 package com.google.doctool.custom;
 
 import com.sun.source.doctree.DocTree;
+import com.sun.source.doctree.EndElementTree;
+import com.sun.source.doctree.EntityTree;
+import com.sun.source.doctree.StartElementTree;
 import com.sun.source.doctree.TextTree;
 import com.sun.source.util.DocTreeScanner;
 import jdk.javadoc.doclet.Doclet;
@@ -37,18 +40,53 @@ public abstract class AbstractTaglet implements Taglet {
     }
 
     /**
-     * Given a tag, returns the text within that tag.
+     * Given a tag, returns the html within that tag.
      *
      * @param tag the tag to read the text from
-     * @return the body of the textnode within that tag
+     * @return the tags, entities, and text within that tag, as an html string
      */
-    protected String getText(DocTree tag) {
-        return tag.accept(new DocTreeScanner<String, Void>() {
+    protected String getHtmlContent(DocTree tag) {
+        StringBuilder sb = new StringBuilder();
+        tag.accept(new DocTreeScanner<Void, Void>() {
             @Override
-            public String visitText(TextTree node, Void unused) {
-                return node.getBody();
+            public Void visitStartElement(StartElementTree node, Void unused) {
+                sb.append("<").append(node.getName());
+                if (!node.getAttributes().isEmpty()) {
+                    sb.append(" ");
+                    // super only scans attributes
+                    super.visitStartElement(node, unused);
+                }
+                if (node.isSelfClosing()) {
+                    sb.append("/>");
+                } else {
+                    sb.append(">");
+                }
+
+                return null;
+            }
+
+            @Override
+            public Void visitEndElement(EndElementTree node, Void unused) {
+                sb.append("</").append(node.getName()).append(">");
+                return null;
+            }
+
+            @Override
+            public Void visitText(TextTree node, Void unused) {
+                // Only includes non-entity text
+                sb.append(node.getBody());
+                return null;
+            }
+
+            @Override
+            public Void visitEntity(EntityTree node, Void unused) {
+                // Entities need to be wrapped in &/;, but we aren't worrying about illegal
+                // entities here, assuming they are handled elsewhere
+                sb.append("&").append(node.getName()).append(";");
+                return null;
             }
         }, null);
+        return sb.toString();
     }
 
     /**

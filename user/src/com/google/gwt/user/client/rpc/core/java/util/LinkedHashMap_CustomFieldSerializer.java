@@ -114,7 +114,8 @@ public final class LinkedHashMap_CustomFieldSerializer extends
           synchronized (f) {
             try {
               // see if we can *try* setting the accessOrder field accessible:
-              final Method trySetAccessible = AccessibleObject.class.getDeclaredMethod("trySetAccessible");
+              final Method trySetAccessible = AccessibleObject.class.getDeclaredMethod(
+                  "trySetAccessible");
               // no exception, then we are on Java 9 or beyond
               if ((boolean) trySetAccessible.invoke(f)) {
                 accessOrderField.set(f);

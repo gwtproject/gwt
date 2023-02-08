@@ -65,6 +65,8 @@ public class Java10Test extends GWTTestCase {
     assertEquals("42", o.s);
   }
 
+  //TODO add a test here, in case type inference around var and intersection casts does something irritating
+
   public void testLocalVarType_LambdaCapture() {
     var s = "42";
     Supplier<String> supplier = () -> s;

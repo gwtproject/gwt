@@ -638,7 +638,12 @@ public class GwtAstBuilder {
     public void endVisit(ConditionalExpression x, BlockScope scope) {
       try {
         SourceInfo info = makeSourceInfo(x);
-        JType type = typeMap.get(x.resolvedType);
+        JType type;
+        if (x.resolvedType instanceof IntersectionTypeBinding18) {
+          type = typeMap.get(getFirstNonObjectInIntersection((IntersectionTypeBinding18) x.resolvedType));
+        } else {
+          type = typeMap.get(x.resolvedType);
+        }
         JExpression valueIfFalse = pop(x.valueIfFalse);
         JExpression valueIfTrue = pop(x.valueIfTrue);
         JExpression condition = pop(x.condition);
@@ -646,6 +651,15 @@ public class GwtAstBuilder {
       } catch (Throwable e) {
         throw translateException(x, e);
       }
+    }
+
+    private TypeBinding getFirstNonObjectInIntersection(IntersectionTypeBinding18 resolvedType) {
+      for (ReferenceBinding type : resolvedType.intersectingTypes) {
+        if (type != curCud.cud.scope.getJavaLangObject()) {
+          return type;
+        }
+      }
+      throw new IllegalStateException("Type doesn't have a non-java.lang.Object it intersects " + resolvedType);
     }
 
     @Override

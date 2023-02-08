@@ -1092,7 +1092,7 @@ public class JUnitShell extends DevMode {
     try {
       success = Compiler.compile(getTopLogger(), options, module);
     } catch (Exception e) {
-      //noinspection ThrowableNotThrown
+      // noinspection ThrowableNotThrown
       CompilationProblemReporter.logAndTranslateException(getTopLogger(), e);
     }
     if (!success) {

@@ -640,7 +640,9 @@ public class GwtAstBuilder {
         SourceInfo info = makeSourceInfo(x);
         JType type;
         if (x.resolvedType instanceof IntersectionTypeBinding18) {
-          type = typeMap.get(getFirstNonObjectInIntersection((IntersectionTypeBinding18) x.resolvedType));
+          type = typeMap.get(
+                  getFirstNonObjectInIntersection((IntersectionTypeBinding18) x.resolvedType)
+          );
         } else {
           type = typeMap.get(x.resolvedType);
         }
@@ -653,13 +655,25 @@ public class GwtAstBuilder {
       }
     }
 
+    /**
+     * Returns the first non-Object type in the intersection. As intersections can only contain one
+     * class, and that class must be first, this ensures that if there is a class it will be the
+     * returned type, but if there are only interfaces, the first interface will be selected.
+     * <p></p>
+     * This behavior is consistent with ReferenceMapper.get() with assertions disabled - that is,
+     * where {@code referenceMapper.get(foo)} would fail due to an assertion, if assertions are
+     * disabled then {@code
+     * referenceMapper.get(foo).equals(referenceMapper.get(getFirstNonObjectInIntersection(foo))
+     * } will be true.
+     */
     private TypeBinding getFirstNonObjectInIntersection(IntersectionTypeBinding18 resolvedType) {
       for (ReferenceBinding type : resolvedType.intersectingTypes) {
         if (type != curCud.cud.scope.getJavaLangObject()) {
           return type;
         }
       }
-      throw new IllegalStateException("Type doesn't have a non-java.lang.Object it intersects " + resolvedType);
+      throw new IllegalStateException("Type doesn't have a non-java.lang.Object it intersects "
+              + resolvedType);
     }
 
     @Override
@@ -2956,7 +2970,9 @@ public class GwtAstBuilder {
       JType localType;
       if (resolvedType.constantPoolName() != null) {
         if (resolvedType instanceof IntersectionTypeBinding18) {
-          localType = typeMap.get(getFirstNonObjectInIntersection((IntersectionTypeBinding18) resolvedType));
+          localType = typeMap.get(
+                  getFirstNonObjectInIntersection((IntersectionTypeBinding18) resolvedType)
+          );
         } else {
           localType = typeMap.get(resolvedType);
         }

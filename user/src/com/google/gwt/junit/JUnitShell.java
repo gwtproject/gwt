@@ -1092,7 +1092,8 @@ public class JUnitShell extends DevMode {
     try {
       success = Compiler.compile(getTopLogger(), options, module);
     } catch (Exception e) {
-      getTopLogger().log(Type.ERROR, "Compiler aborted with an exception ", e);
+      //noinspection ThrowableNotThrown
+      CompilationProblemReporter.logAndTranslateException(getTopLogger(), e);
     }
     if (!success) {
       throw new UnableToCompleteException();

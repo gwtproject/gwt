@@ -50,6 +50,10 @@ public class Java10Test extends GWTTestCase {
     assertFalse(isGwtSourceLevel10());
   }
 
+  public void testLocalVarType_Ternary() {
+    assertFalse(isGwtSourceLevel10());
+  }
+
   public void testLocalVarType_LambdaCapture() {
     assertFalse(isGwtSourceLevel10());
   }

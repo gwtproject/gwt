@@ -21,8 +21,10 @@ import com.google.gwt.junit.client.GWTTestCase;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 
+import java.io.Serializable;
+
 /**
- * Tests Java 10 features. It is super sourced so that gwt can be compiles under Java 7.
+ * Tests Java 10 features. It is super sourced so that gwt can be compiled under Java 7.
  *
  * IMPORTANT: For each test here there must exist the corresponding method in the non super sourced
  * version.
@@ -66,6 +68,28 @@ public class Java10Test extends GWTTestCase {
   }
 
   //TODO add a test here, in case type inference around var and intersection casts does something irritating
+  public void testLocalVarType_Ternary() {
+    var value = true ? "a" : 'c';
+    checkSerializableDispatch(value);
+    checkComparableDispatch(value);
+    assertEquals("a", value.toString());
+  }
+
+  private void checkSerializableDispatch(Object fail) {
+    fail("should not be treated as object");
+  }
+
+  private void checkSerializableDispatch(Serializable pass) {
+    // pass
+  }
+
+  private void checkComparableDispatch(Object fail) {
+    fail("should not be treated as object");
+  }
+
+  private void checkComparableDispatch(Comparable<?> pass) {
+    // pass
+  }
 
   public void testLocalVarType_LambdaCapture() {
     var s = "42";

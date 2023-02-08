@@ -2955,7 +2955,11 @@ public class GwtAstBuilder {
       TypeBinding resolvedType = x.type.resolvedType;
       JType localType;
       if (resolvedType.constantPoolName() != null) {
-        localType = typeMap.get(resolvedType);
+        if (resolvedType instanceof IntersectionTypeBinding18) {
+          localType = typeMap.get(getFirstNonObjectInIntersection((IntersectionTypeBinding18) resolvedType));
+        } else {
+          localType = typeMap.get(resolvedType);
+        }
       } else {
         // Special case, a statically unreachable local type.
         localType = JReferenceType.NULL_TYPE;

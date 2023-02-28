@@ -19,9 +19,9 @@ import com.google.gwt.user.client.rpc.CustomFieldSerializer;
 import com.google.gwt.user.client.rpc.SerializationException;
 import com.google.gwt.user.client.rpc.SerializationStreamReader;
 import com.google.gwt.user.client.rpc.SerializationStreamWriter;
+import com.google.gwt.user.server.rpc.EnumMapUtil;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
+import java.io.IOException;
 import java.util.EnumMap;
 
 /**
@@ -55,24 +55,13 @@ public final class EnumMap_CustomFieldSerializer extends CustomFieldSerializer<E
    */
   public static void serialize(SerializationStreamWriter streamWriter, EnumMap instance)
       throws SerializationException {
-    Class c = instance.getClass();
-    Field keyUniverseField;
-    Object keyUniverse = null;
-
+    Class<? extends Enum<?>> keyType;
     try {
-      keyUniverseField = c.getDeclaredField("keyUniverse");
-      keyUniverseField.setAccessible(true);
-      keyUniverse = keyUniverseField.get(instance);
-    } catch (IllegalArgumentException e) {
-      throw new SerializationException(e);
-    } catch (IllegalAccessException e) {
-      throw new SerializationException(e);
-    } catch (SecurityException e) {
-      throw new SerializationException(e);
-    } catch (NoSuchFieldException e) {
+      keyType = EnumMapUtil.getKeyType(instance);
+    } catch (ClassNotFoundException | IOException e) {
       throw new SerializationException(e);
     }
-    Object exemplar = Array.get(keyUniverse, 0);
+    Object exemplar = keyType.getEnumConstants()[0];
     streamWriter.writeObject(exemplar);
     Map_CustomFieldSerializerBase.serialize(streamWriter, instance);
   }

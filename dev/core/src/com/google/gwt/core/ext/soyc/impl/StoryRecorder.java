@@ -176,7 +176,7 @@ public class StoryRecorder {
          * to build up our list of non-overlapping Ranges to report back to the
          * user.
          */
-        while (!dependencyScope.peek().range.contains(range)) {
+        while (!dependencyScope.isEmpty() && !dependencyScope.peek().range.contains(range)) {
           popAndRecord(dependencyScope, fragment);
         }
       }

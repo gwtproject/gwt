@@ -70,7 +70,12 @@ public class ResolvePermutationDependentValues {
       }
 
       assert x.isProperty();
-      ctx.replaceMe(propertyValueExpression(x));
+      try {
+        ctx.replaceMe(propertyValueExpression(x));
+      } catch (RuntimeException ex) {
+        throw new InternalCompilerException(x,
+                "Problem replacing '" + x.getRequestedValue() + "'", ex);
+      }
     }
 
     private JExpression propertyValueExpression(JPermutationDependentValue x) {

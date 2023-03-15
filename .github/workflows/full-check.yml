@@ -65,19 +65,19 @@ jobs:
         uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: checkstyle-reports
+          name: checkstyle-reports-java${{ matrix.java-version }}
           path: 'gwt/build/out/**/checkstyle*.xml'
       - name: Upload test xml files for manual review in its own artifact
         uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: junit-reports
+          name: junit-reports-java${{ matrix.java-version }}
           path: 'gwt/build/out/**/test/**/reports/TEST-*.xml'
 
       - name: On success, upload the release zip
         uses: actions/upload-artifact@v2
         with:
-          name: gwt
+          name: gwt-java${{ matrix.java-version }}
           path: 'gwt/build/dist/gwt-*.zip'
 
       - name: Set up sonatype credentials
@@ -93,7 +93,7 @@ jobs:
           server-password: SONATYPE_PASSWORD
 
       - name: Nightly builds should be deployed as snapshots to sonatype
-        if: github.event_name == 'schedule' && github.repository_owner == 'gwtproject'
+        if: github.event_name == 'schedule' && github.repository_owner == 'gwtproject' && ${{ matrix.java-version }} == '11'
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}

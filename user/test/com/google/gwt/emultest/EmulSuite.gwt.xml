@@ -20,4 +20,7 @@
 
   <define-configuration-property name="someConfigurationProperty" is-multi-valued='false'/>
   <set-configuration-property name="someConfigurationProperty" value="conf"/>
+
+  <define-configuration-property name="someUnSpecifiedProperty" is-multi-valued='false'/>
+  <!-- defined, but no value set, will return null -->
 </module>

@@ -273,6 +273,7 @@
           <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
           <pathelement location="${gwt.tools.lib}/w3c/sac/sac-1.3.jar"/>
           <pathelement location="${gwt.tools.lib}/w3c/flute/flute-1.3-gg2.jar"/>
+          <pathelement location="${gwt.tools.lib}/jaxb/jaxb-api-2.3.3.jar"/>
           <extraclasspaths/>
         </classpath>
 

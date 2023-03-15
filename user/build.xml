@@ -154,7 +154,7 @@
           unless="compile.tests.complete">
   </target>
 
-  <target name="-compile.tests.java8" if="isJava8" depends="compile.dev.tests, compile.emma.if.enabled">
+  <target name="-compile.tests.java8" depends="compile.dev.tests, compile.emma.if.enabled">
     <gwt.javac srcdir="test" destdir="${javac.junit.out}"
                excludes="com/google/gwt/langtest/**,**/super/**"
                processorpath="test.extraclasspath"

@@ -20,7 +20,7 @@ function installScript(filename) {
     var docbody = doc.body;
     var script;
     // for sourcemaps, we inject the code as a single string for Chrome
-    if (navigator.userAgent.includes("Chrome")) {
+    if (navigator.userAgent.indexOf("Chrome") > -1) {
       var codeString = "";
       for (var i = 0; i < code.length; i++) {
         codeString += code[i];

@@ -42,7 +42,7 @@ public class ValidatorResolutionCompileTest extends TckCompileTestCase {
         Pattern.compile("More than one maximally specific "
         + "\\@org\\.hibernate\\.jsr303\\.tck\\.tests\\.constraints\\.validatorresolution"
         + ".Ambiguous\\("
-        + "((\\s)*(message=foobar|payload=\\[\\]|groups=\\[\\])(,)?){3}"
+        + "((\\s)*(message=\"?foobar\"?|payload=(\\[\\]|\\{\\})|groups=(\\[\\]|\\{\\}))(,)?){3}"
         + "\\) "
         + "ConstraintValidator for type "
         + "class org\\.hibernate\\.jsr303\\.tck\\.tests\\.constraints"
@@ -60,8 +60,8 @@ public class ValidatorResolutionCompileTest extends TckCompileTestCase {
     assertBeanValidatorFailsToCompile(UnexpectedTypeValidator.class, Bar.class,
         ValidationException.class, Pattern.compile(
         "No \\@javax\\.validation\\.constraints\\.Size\\("
-            + "((\\s)*(message=\\{javax\\.validation\\.constraints\\.Size\\.message\\}|"
-            + "min=0|max=2147483647|payload=\\[\\]|groups=\\[\\])(,)?){5}"
+            + "((\\s)*(message=\"?\\{javax\\.validation\\.constraints\\.Size\\.message\\}\"?|"
+            + "min=0|max=2147483647|payload=(\\[\\]|\\{\\})|groups=(\\[\\]|\\{\\}))(,)?){5}"
             + "\\) "
             + "ConstraintValidator for type class java\\.lang\\.Integer"));
   }

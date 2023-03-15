@@ -22,6 +22,14 @@
     <isfalse value="${isJava8}" />
   </condition>
 
+  <!-- Disable legacy dev mode test on Java 9 and above -->
+  <condition property="test.dev.htmlunit.disable" value="true">
+    <isfalse value="${isJava8}" />
+  </condition>
+  <condition property="test.dev.selenium.disable" value="true">
+    <isfalse value="${isJava8}" />
+  </condition>
+
   <property name="gwt.junit.testcase.dev.includes" value="${gwt.junit.testcase.includes}"/>
   <!-- TODO once we compile with Java >8, update this to exclude tests based on running JDK version -->
   <condition property="gwt.junit.testcase.dev.excludes"

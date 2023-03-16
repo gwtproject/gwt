@@ -21,19 +21,13 @@ function installScript(filename) {
     var script;
     // for sourcemaps, we inject the code as a single string for Chrome
     if (navigator.userAgent.indexOf("Chrome") > -1) {
-      var codeString = "";
-      for (var i = 0; i < code.length; i++) {
-        codeString += code[i];
-      }
       script = doc.createElement('script');
-      script.language = 'javascript';
-      script.text = codeString;
+      script.text = code.join('');
       docbody.appendChild(script);
       removeScript(docbody, script);
     } else {
       for (var i = 0; i < code.length; i++) {
         script = doc.createElement('script');
-        script.language='javascript';
         script.text = code[i];
         docbody.appendChild(script);
         removeScript(docbody, script);

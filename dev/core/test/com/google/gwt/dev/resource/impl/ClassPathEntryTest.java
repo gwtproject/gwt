@@ -32,11 +32,6 @@ import java.util.Set;
  */
 public class ClassPathEntryTest extends AbstractResourceOrientedTestBase {
 
-  /**
-   * This test will likely not work on Windows since directories that start with . are not
-   * implicitly hidden there. But since Java 6 does not have a File.setHidden() function, fixing
-   * this test for Windows is deferred till GWT officially depends on Java 7.
-   */
   public void testIgnoresHiddenDirectories() throws IOException {
     // Setup a /tmp/.svn/ShouldNotBeFound.java folder structure.
     File tempDir = Files.createTempDir();
@@ -44,6 +39,8 @@ public class ClassPathEntryTest extends AbstractResourceOrientedTestBase {
     nestedHiddenDir.mkdir();
     File javaFile = new File(nestedHiddenDir, "ShouldNotBeFound.java");
     javaFile.createNewFile();
+    // windows needs the hidden attribute to be set on file (not parent directory)
+    java.nio.file.Files.setAttribute(javaFile.toPath(), "dos:hidden", Boolean.TRUE);
 
     // Perform a class path directory inspection.
     DirectoryClassPathEntry cpe = new DirectoryClassPathEntry(tempDir);

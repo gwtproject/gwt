@@ -25,12 +25,16 @@ import java.nio.file.FileSystemException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 /**
  * Tests for ResourceAccumulator.
  */
 public class ResourceAccumulatorTest extends TestCase {
+
+  private final static boolean IS_WINDOWS = System.getProperty("os.name")
+          .toLowerCase(Locale.US).startsWith("windows");
 
   public void testAddFile() throws Exception {
     File rootDirectory = Files.createTempDir();
@@ -169,6 +173,9 @@ public class ResourceAccumulatorTest extends TestCase {
   }
 
   public void testRenameParentDirectory() throws Exception {
+    if (IS_WINDOWS) {
+      return; // moving a directory while WatchService is running -> access denied
+    }
     File rootDirectory = Files.createTempDir();
     File parentDirectory = createDirectoryIn("original_dir", rootDirectory);
     File subDirectory = createDirectoryIn("subdir", parentDirectory);
@@ -196,6 +203,9 @@ public class ResourceAccumulatorTest extends TestCase {
   }
 
   public void testSymlinkInfiniteLoop() throws Exception {
+    if (IS_WINDOWS) {
+      return; // symlinks not working on Windows
+    }
     File rootDirectory = Files.createTempDir();
     File subDirectory = Files.createTempDir();
 
@@ -224,6 +234,9 @@ public class ResourceAccumulatorTest extends TestCase {
   }
 
   public void testSymlinks() throws Exception {
+    if (IS_WINDOWS) {
+      return; // symlinks not working on Windows
+    }
     File scratchDirectory = Files.createTempDir();
     File newFile = createFileIn("New.java", scratchDirectory);
     File rootDirectory = Files.createTempDir();

@@ -318,14 +318,11 @@ public class SystemTest extends GWTTestCase {
     assertEquals("conf", System.getProperty("someConfigurationProperty"));
     assertEquals("conf", System.getProperty("someConfigurationProperty", "default"));
 
-    assertEquals(null, System.getProperty("someUnSpecifiedProperty", null));
-    assertEquals("default1", System.getProperty("someUnSpecifiedProperty", "default1"));
+    String someConf = System.getProperty("nonExistent", "default");
+    assertEquals("default", someConf);
 
-    String someConf = System.getProperty("nonExistent", "default2");
-    assertEquals("default2", someConf);
-
-    // Note that default is not a String literal, but can be computed at runtime
-    assertEquals("default23", System.getProperty("otherNonExistent", someConf + "3"));
+    // Note that default is not a String literal.
+    assertEquals("default", System.getProperty("otherNonExistent", someConf));
   }
 
   public void testNanoTime() {

@@ -38,6 +38,7 @@ import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JSwitchStatement;
 import com.google.gwt.dev.jjs.ast.RuntimeConstants;
 import com.google.gwt.thirdparty.guava.common.base.Function;
+import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
@@ -80,11 +81,11 @@ public class ResolvePermutationDependentValues {
     private JExpression propertyValueExpression(JPermutationDependentValue x) {
       List<String> propertyValues = props.getConfigurationProperties().getStrings(x.getRequestedValue());
 
-      assert propertyValues.size() <= 1 : propertyValues;
+      String propertyValue = propertyValues.isEmpty() ? null : Joiner.on(",").join(propertyValues);
 
-      String configPropertyValue = propertyValues.isEmpty() ? null : propertyValues.get(0);
-      if (configPropertyValue != null) {
-        return program.getLiteral(x.getSourceInfo(), configPropertyValue);
+      if (propertyValue != null) {
+        // It is a configuration property.
+        return program.getLiteral(x.getSourceInfo(), propertyValue);
       }
 
       if (isSoftPermutationProperty(x.getRequestedValue())) {
@@ -92,13 +93,12 @@ public class ResolvePermutationDependentValues {
         return new JMethodCall(x.getSourceInfo(), null, method);
       }
 
-      String bindingPropertyValue = commonPropertyAndBindingInfo.getPropertyValue(x.getRequestedValue());
+      propertyValue = commonPropertyAndBindingInfo.getPropertyValue(x.getRequestedValue());
 
-      if (bindingPropertyValue != null) {
-        return program.getLiteral(x.getSourceInfo(), bindingPropertyValue);
+      if (propertyValue != null) {
+        return program.getLiteral(x.getSourceInfo(), propertyValue);
       }
 
-      assert x.getDefaultValueExpression() != null : "Default value was not set for " + x;
       return x.getDefaultValueExpression();
     }
 

@@ -17,12 +17,13 @@ package com.google.gwt.dev.resource.impl;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
-import com.google.gwt.thirdparty.guava.common.io.Files;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.DosFileAttributeView;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -34,16 +35,20 @@ public class ClassPathEntryTest extends AbstractResourceOrientedTestBase {
 
   public void testIgnoresHiddenDirectories() throws IOException {
     // Setup a /tmp/.svn/ShouldNotBeFound.java folder structure.
-    File tempDir = Files.createTempDir();
-    File nestedHiddenDir = new File(tempDir, ".svn");
-    nestedHiddenDir.mkdir();
-    File javaFile = new File(nestedHiddenDir, "ShouldNotBeFound.java");
-    javaFile.createNewFile();
+    Path tempDir = Files.createTempDirectory(null);
+    Path nestedHiddenDir = tempDir.resolve(".svn");
+    Files.createDirectory(nestedHiddenDir);
+    Path javaFile = nestedHiddenDir.resolve("ShouldNotBeFound.java");
+    Files.createFile(javaFile);
     // windows needs the hidden attribute to be set on file (not parent directory)
-    java.nio.file.Files.setAttribute(javaFile.toPath(), "dos:hidden", Boolean.TRUE);
+    DosFileAttributeView hiddenAttr = Files.getFileAttributeView(javaFile,
+            DosFileAttributeView.class);
+    if (hiddenAttr != null) {
+      hiddenAttr.setHidden(true);
+    }
 
     // Perform a class path directory inspection.
-    DirectoryClassPathEntry cpe = new DirectoryClassPathEntry(tempDir);
+    DirectoryClassPathEntry cpe = new DirectoryClassPathEntry(tempDir.toFile());
     Map<AbstractResource, ResourceResolution> resources =
         cpe.findApplicableResources(TreeLogger.NULL, createInclusivePathPrefixSet());
 
@@ -63,7 +68,7 @@ public class ClassPathEntryTest extends AbstractResourceOrientedTestBase {
   public void testForResourceListenerLeaks_pathPrefixSetIsCollected() throws Exception {
     // Create a folder an initially empty folder.
     PathPrefixSet pathPrefixSet = createInclusivePathPrefixSet();
-    DirectoryClassPathEntry classPathEntry = new DirectoryClassPathEntry(Files.createTempDir());
+    DirectoryClassPathEntry classPathEntry = new DirectoryClassPathEntry(Files.createTempDirectory(null).toFile());
 
     // Show that we are not listening.
     awaitFullGc();
@@ -91,7 +96,8 @@ public class ClassPathEntryTest extends AbstractResourceOrientedTestBase {
   public void testForResourceListenerLeaks_classPathEntryIsCollected() throws Exception {
     // Create a folder an initially empty folder.
     PathPrefixSet pathPrefixSet = createInclusivePathPrefixSet();
-    DirectoryClassPathEntry classPathEntry = new DirectoryClassPathEntry(Files.createTempDir());
+    DirectoryClassPathEntry classPathEntry = new DirectoryClassPathEntry(
+            Files.createTempDirectory(null).toFile());
 
     // Show that we are not listening.
     awaitFullGc();
@@ -119,8 +125,8 @@ public class ClassPathEntryTest extends AbstractResourceOrientedTestBase {
   public void testResourceCreated(Collection<PathPrefixSet> pathPrefixSets) throws IOException,
       InterruptedException {
     // Create a folder an initially empty folder.
-    File tempDir = Files.createTempDir();
-    DirectoryClassPathEntry cpe = new DirectoryClassPathEntry(tempDir);
+    Path tempDir = Files.createTempDirectory(null);
+    DirectoryClassPathEntry cpe = new DirectoryClassPathEntry(tempDir.toFile());
 
     // Perform a class path directory inspection.
     for (PathPrefixSet pathPrefixSet : pathPrefixSets) {
@@ -132,8 +138,8 @@ public class ClassPathEntryTest extends AbstractResourceOrientedTestBase {
     }
 
     // Create a file and give file events time to fire.
-    File createdFile = new File(tempDir, "Created.java");
-    createdFile.createNewFile();
+    Path createdFile = tempDir.resolve("Created.java");
+    Files.createFile(createdFile);
     Thread.sleep(10);
 
     // Perform a class path directory inspection.
@@ -158,10 +164,10 @@ public class ClassPathEntryTest extends AbstractResourceOrientedTestBase {
   private void testResourceDeleted(Collection<PathPrefixSet> pathPrefixSets) throws IOException,
       InterruptedException {
     // Create a folder with one initial file, that can be deleted.
-    File tempDir = Files.createTempDir();
-    File fileToDelete = new File(tempDir, "ToDelete.java");
-    fileToDelete.createNewFile();
-    DirectoryClassPathEntry cpe = new DirectoryClassPathEntry(tempDir);
+    Path tempDir = Files.createTempDirectory(null);
+    Path fileToDelete = tempDir.resolve("ToDelete.java");
+    Files.createFile(fileToDelete);
+    DirectoryClassPathEntry cpe = new DirectoryClassPathEntry(tempDir.toFile());
 
     // Perform a class path directory inspection.
     for (PathPrefixSet pathPrefixSet : pathPrefixSets) {
@@ -174,7 +180,7 @@ public class ClassPathEntryTest extends AbstractResourceOrientedTestBase {
     }
 
     // Delete the file and give file events time to fire.
-    fileToDelete.delete();
+    Files.delete(fileToDelete);
     Thread.sleep(10);
 
     // Perform a class path directory inspection.
@@ -198,10 +204,10 @@ public class ClassPathEntryTest extends AbstractResourceOrientedTestBase {
   private void testResourceRenamed(Collection<PathPrefixSet> pathPrefixSets) throws IOException,
       InterruptedException {
     // Create a folder with one initial file, that can be renamed.
-    File tempDir = Files.createTempDir();
-    File fileToRename = new File(tempDir, "ToRename.java");
-    fileToRename.createNewFile();
-    DirectoryClassPathEntry cpe = new DirectoryClassPathEntry(tempDir);
+    Path tempDir = Files.createTempDirectory(null);
+    Path fileToRename = tempDir.resolve("ToRename.java");
+    Files.createFile(fileToRename);
+    DirectoryClassPathEntry cpe = new DirectoryClassPathEntry(tempDir.toFile());
 
     // Perform class path directory inspections.
     for (PathPrefixSet pathPrefixSet : pathPrefixSets) {
@@ -214,7 +220,7 @@ public class ClassPathEntryTest extends AbstractResourceOrientedTestBase {
     }
 
     // Rename the file and give file events time to fire.
-    fileToRename.renameTo(new File(tempDir, "Renamed.java"));
+    Files.move(fileToRename, tempDir.resolve("Renamed.java"));
     Thread.sleep(10);
 
     for (PathPrefixSet pathPrefixSet : pathPrefixSets) {

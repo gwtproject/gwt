@@ -89,21 +89,6 @@ function __MODULE_FUNC__() {
   // base url.
   //
   function computeScriptBase() {
-    var thisScript
-    ,markerId = "__gwt_marker___MODULE_NAME__"
-    ,markerScript;
-
-    $doc.write('<script id="' + markerId + '"></script>');
-    markerScript = $doc.getElementById(markerId);
-
-    // Our script element is assumed to be the closest previous script element
-    // to the marker, so start at the marker and walk backwards until we find
-    // a script.
-    thisScript = markerScript && markerScript.previousSibling;
-    while (thisScript && thisScript.tagName != 'SCRIPT') {
-      thisScript = thisScript.previousSibling;
-    }
-
     // Gets the part of a url up to and including the 'path' portion.
     function getDirectoryOfFile(path) {
       // Truncate starting at the first '?' or '#', whichever comes first. 
@@ -119,6 +104,7 @@ function __MODULE_FUNC__() {
       return (slashIndex >= 0) ? path.substring(0, slashIndex + 1) : '';
     };
 
+    var thisScript = $doc.currentScript;
     if (thisScript && thisScript.src) {
       // Compute our base url
       base = getDirectoryOfFile(thisScript.src);
@@ -145,11 +131,6 @@ function __MODULE_FUNC__() {
       var img = $doc.createElement("img");
       img.src = base + 'clear.cache.gif';
       base = getDirectoryOfFile(img.src);
-    }
-
-    if (markerScript) {
-      // remove the marker element
-      markerScript.parentNode.removeChild(markerScript);
     }
   }
   

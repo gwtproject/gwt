@@ -118,10 +118,9 @@ function maven-gwt() {
     # If there are no sources, use gwt-user sources.
     # This is a bit hacky but Sonatype requires a
     # source jar for Central, and lack of sources
-    # should only happen for gwt-servlet and
-    # gwt-servlet-jakarta which are basically a
+    # should only happen for gwt-servlet which are basically a
     # subset of gwt-user.
-    #TODO this is wrong for jakarta sources
+    # For servlet-jakarta, a seperate source file is built.
     if [ ! -f $SOURCES_PATH_FILE ]; then
       SOURCES_PATH_FILE=$GWT_EXTRACT_DIR/gwt-user-sources.jar
     fi

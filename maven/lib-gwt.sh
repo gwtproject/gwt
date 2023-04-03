@@ -64,8 +64,15 @@ function maven-gwt() {
   GWT_EXTRACT_DIR=`ls $RANDOM_DIR | tail -n1`
   GWT_EXTRACT_DIR=$RANDOM_DIR/$GWT_EXTRACT_DIR
 
-  JAVADOC_FILE_PATH=$RANDOM_DIR/gwt-javadoc.jar #TODO also wrong for jakarta
+  JAVADOC_FILE_PATH=$RANDOM_DIR/gwt-javadoc.jar
   [ -d $GWT_EXTRACT_DIR/doc/javadoc ] && jar cf $JAVADOC_FILE_PATH -C $GWT_EXTRACT_DIR/doc/javadoc .
+
+  JAVADOC_JAKARTA_FILE_PATH=$RANDOM_DIR/gwt-jakarta-javadoc.jar
+  if [[ -d $GWT_EXTRACT_DIR/doc/javadoc ]]; then
+      cp -r $GWT_EXTRACT_DIR/doc/javadoc $GWT_EXTRACT_DIR/doc/javadoc-jakarta
+      find $GWT_EXTRACT_DIR/doc/javadoc-jakarta -type f -exec sed -i 's/javax.servlet/jakarta.servlet/g' {} +
+      jar cf $JAVADOC_JAKARTA_FILE_PATH -C $GWT_EXTRACT_DIR/doc/javadoc-jakarta .
+  fi
 
   # Generate POMs with correct version
   for template in `find $pomDir -name pom-template.xml`
@@ -123,6 +130,10 @@ function maven-gwt() {
     # For servlet-jakarta, a seperate source file is built.
     if [ ! -f $SOURCES_PATH_FILE ]; then
       SOURCES_PATH_FILE=$GWT_EXTRACT_DIR/gwt-user-sources.jar
+    fi
+
+    if [[ $i == "servlet-jakarta" ]]; then
+      JAVADOC_FILE_PATH=$JAVADOC_JAKARTA_FILE_PATH
     fi
 
     maven-deploy-file $mavenRepoUrl $mavenRepoId "$CUR_FILE" $gwtPomFile "$JAVADOC_FILE_PATH" "$SOURCES_PATH_FILE" || die

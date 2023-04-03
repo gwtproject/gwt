@@ -1,9 +1,9 @@
 push-gwt.sh packages and deploys GWT to a local or remote Maven
 repository
  
-To build GWT from trunk and deploy to your local repo:
+To build GWT from main and deploy to your local repo:
 
-> cd trunk
+> git checkout main
 > ant clean dist-dev
 > maven/push-gwt.sh
 
@@ -19,7 +19,7 @@ script. If the remote repo requires a username and password, define
 the repo in your ~/.m2/settings.xml as below and set GWT_MAVEN_REPO_ID
 = server id. In this example, GWT_MAVEN_REPO_ID would be "sonatype".
 
-> cd trunk
+> git checkout main
 > ant clean dist # must be dist, not dist-dev, to generate Javadocs
 > maven/push-gwt.sh
 

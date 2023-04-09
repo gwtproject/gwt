@@ -2003,78 +2003,6 @@ public class Java8Test extends GWTTestCase {
     assertEquals(2, (int) unboxBox.apply(new Integer(2)));
   }
 
-  ////////////////////////////////////////////////////////////
-  //
-  //   Tests for language features introduced in Java 9
-
-  class Resource implements AutoCloseable {
-    boolean isOpen = true;
-
-    public void close() {
-      this.isOpen = false;
-    }
-  }
-
-  public void testTryWithResourcesJava9() {
-    Resource r1 = new Resource();
-    assertTrue(r1.isOpen);
-    Resource r2Copy;
-    try (r1; Resource r2 = new Resource()) {
-      assertTrue(r1.isOpen);
-      assertTrue(r2.isOpen);
-      r2Copy = r2;
-    }
-    assertFalse(r1.isOpen);
-    assertFalse(r2Copy.isOpen);
-  }
-
-  private interface InterfaceWithPrivateMethods {
-    int implementedMethod();
-
-    default int defaultMethod() {
-      return privateMethod();
-    }
-
-    private int privateMethod() {
-      return implementedMethod();
-    }
-
-    private int staticPrivateMethod() {
-      return 42;
-    }
-  }
-
-  public void testInterfacePrivateMethodsJava9() {
-    InterfaceWithPrivateMethods implementor = () -> 50;
-    assertEquals(50, implementor.implementedMethod());
-    assertEquals(50, implementor.defaultMethod());
-    assertEquals(42, implementor.staticPrivateMethod());
-  }
-
-  public void testAnonymousDiamondJava9() {
-    Supplier<String> helloSupplier = new Supplier<>() {
-      @Override
-      public String get() {
-        return "hello";
-      }
-    };
-    assertEquals("hello", helloSupplier.get());
-  }
-
-  interface Selector extends Predicate<String> {
-    @Override
-    boolean test(String object);
-
-    default Selector trueSelector() {
-      // Unused variable that creates a lambda with a bridge for the method test. The bug #9598
-      // was caused by GwtAstBuilder associating the bridge method Lambda.test(Object) on the
-      // lambda below to the method Predicate.test(Object), causing the method resolution in the
-      // code that refers to the Predicate.test(Object) in the test below to refer to
-      // Lambda.test(Object) which is the wrong method.
-      return receiver -> true;
-    }
-  }
-
   // Regression tests for #9598
   public void testImproperMethodResolution() {
     Predicate p = o -> true;
@@ -2099,11 +2027,11 @@ public class Java8Test extends GWTTestCase {
     assertEquals("#2", lambda.foo("2"));
   }
 
-  static class C { public static String append(String str) { return "#" + str; } }
+  static class C2 { public static String append(String str) { return "#" + str; } }
   @SuppressWarnings({"rawtypes", "unchecked"})
   public void testIntersectionCastMethodReference() {
 
-    Object instance = (I1 & I2<String>) C::append;
+    Object instance = (I1 & I2<String>) C2::append;
 
     assertTrue(instance instanceof I1);
     assertTrue(instance instanceof I2);

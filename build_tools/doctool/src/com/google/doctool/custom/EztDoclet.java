@@ -137,6 +137,7 @@ public class EztDoclet {
         // Sort the classes alphabetically
         ClassDoc[] classes = pack.allClasses(true);
         Arrays.sort(classes, new Comparator<ClassDoc>() {
+          @Override
           public int compare(ClassDoc arg0, ClassDoc arg1) {
             return arg0.name().compareTo(arg1.name());
           }

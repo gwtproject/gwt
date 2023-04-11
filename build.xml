@@ -98,7 +98,7 @@
     <gwt.ant dir="samples"/>
   </target>
 
-  <target name="buildtools" description="[subdir] Build (or runs ${target} if set) the build tools">
+  <target name="buildtools" description="[subdir] Build (or runs ${target} if set) the build tools" unless="isJava8">
     <gwt.ant dir="build_tools"/>
   </target>
 

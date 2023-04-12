@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -46,12 +47,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * A doclet for using producing EZT output listing the specified classes and
+ * A doclet for listing the specified classes and
  * their methods and constructors.
  */
-public class EztDoclet implements Doclet {
+public class JavaEmulSummaryDoclet implements Doclet {
 
-    public static final String OPT_EZTFILE = "-eztfile";
+    public static final String OPT_OUTFILE = "-outfile";
     private static final String JAVADOC_URL = "https://docs.oracle.com/javase/8/docs/api/";
 
     private Reporter reporter;
@@ -63,51 +64,53 @@ public class EztDoclet implements Doclet {
 
             File outFile = new File(outputFile);
             outFile.getParentFile().mkdirs();
-            FileWriter fw = new FileWriter(outFile);
-            PrintWriter pw = new PrintWriter(fw, true);
+            try (FileWriter fw = new FileWriter(outFile);
+                 PrintWriter pw = new PrintWriter(fw, true)) {
 
-            pw.println("<ol class=\"toc\" id=\"pageToc\">");
-            getSpecifiedPackages(env)
-                    .forEach(pack -> {
-                        pw.format("  <li><a href=\"#Package_%s\">%s</a></li>\n",
-                                pack.getQualifiedName().toString().replace('.', '_'),
-                                pack.getQualifiedName().toString());
-                    } );
+                pw.println("<ol class=\"toc\" id=\"pageToc\">");
+                getSpecifiedPackages(env)
+                        .forEach(pack -> {
+                            pw.format("  <li><a href=\"#Package_%s\">%s</a></li>\n",
+                                    pack.getQualifiedName()
+                                            .toString().replace('.', '_'),
+                                    pack.getQualifiedName().toString());
+                        });
 
-            pw.println("</ol>\n");
+                pw.println("</ol>\n");
 
-            getSpecifiedPackages(env).forEach(pack -> {
-                pw.format("<h2 id=\"Package_%s\">Package %s</h2>\n",
-                        pack.getQualifiedName().toString().replace('.', '_'),
-                        pack.getQualifiedName().toString());
-                pw.println("<dl>");
+                getSpecifiedPackages(env).forEach(pack -> {
+                    pw.format("<h2 id=\"Package_%s\">Package %s</h2>\n",
+                            pack.getQualifiedName().toString().replace('.', '_'),
+                            pack.getQualifiedName().toString());
+                    pw.println("<dl>");
 
-                String packURL = JAVADOC_URL + pack.getQualifiedName().toString()
-                        .replace(".", "/") + "/";
+                    String packURL = JAVADOC_URL + pack.getQualifiedName().toString()
+                            .replace(".", "/") + "/";
 
-                Iterator<? extends Element> classesIterator = pack.getEnclosedElements()
-                        .stream()
-                        .filter(element -> env.isSelected(element) && env.isIncluded(element))
-                        .filter(element -> element.getModifiers().contains(Modifier.PUBLIC))
-                        .sorted(Comparator.comparing((Element o) -> o.getSimpleName().toString()))
-                        .iterator();
+                    Iterator<? extends Element> classesIterator = pack.getEnclosedElements()
+                            .stream()
+                            .filter(element -> env.isSelected(element) && env.isIncluded(element))
+                            .filter(element -> element.getModifiers().contains(Modifier.PUBLIC))
+                            .sorted(Comparator.comparing((Element o) -> o.getSimpleName()
+                                    .toString()))
+                            .iterator();
 
-                while (classesIterator.hasNext()) {
-                    Element cls = classesIterator.next();
-                    // Each class links to Oracle's main JavaDoc
-                    emitClassDocs(env, pw, packURL, cls);
-                    if (classesIterator.hasNext()) {
-                        pw.print("\n");
+                    while (classesIterator.hasNext()) {
+                        Element cls = classesIterator.next();
+                        // Each class links to Oracle's main JavaDoc
+                        emitClassDocs(env, pw, packURL, cls);
+                        if (classesIterator.hasNext()) {
+                            pw.print("\n");
+                        }
                     }
-                }
 
-                pw.println("</dl>\n");
-            } );
-
-            pw.close();
+                    pw.println("</dl>\n");
+                });
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         return true;
     }
 
@@ -148,7 +151,7 @@ public class EztDoclet implements Doclet {
 
         // Print out all constructors and methods
         if (!members.isEmpty()) {
-            pw.format("  <dd>%s</dd>\n", String.join(", ", members));
+            pw.format("  <dd>%s</dd>\n", createMemberList(members));
         }
 
         Iterator<? extends Element> classesIterator = cls.getEnclosedElements()
@@ -170,6 +173,19 @@ public class EztDoclet implements Doclet {
                 pw.print("\n");
             }
         }
+    }
+
+    private String createMemberList(Collection<String> members) {
+        StringBuilder sb = new StringBuilder();
+        Iterator<String> iter = members.iterator();
+        while (iter.hasNext()) {
+            String member = iter.next();
+            sb.append(member);
+            if (iter.hasNext()) {
+                sb.append(", ");
+            }
+        }
+        return sb.toString();
     }
 
     private String qualifiedSimpleName(Element element) {
@@ -208,7 +224,7 @@ public class EztDoclet implements Doclet {
 
     @Override
     public String getName() {
-        return "EztDoclet";
+        return "JreEmulationSummaryDoclet";
     }
 
     @Override
@@ -223,7 +239,7 @@ public class EztDoclet implements Doclet {
 
                     @Override
                     public String getDescription() {
-                        return "Ezt Doc location";
+                        return "JRE emulation summary Doc location";
                     }
 
                     @Override
@@ -233,7 +249,7 @@ public class EztDoclet implements Doclet {
 
                     @Override
                     public List<String> getNames() {
-                        return List.of(OPT_EZTFILE);
+                        return List.of(OPT_OUTFILE);
                     }
 
                     @Override
@@ -244,11 +260,14 @@ public class EztDoclet implements Doclet {
                     @Override
                     public boolean process(String opt, List<String> arguments) {
                         if (arguments.isEmpty()) {
-                            reporter.print(Diagnostic.Kind.ERROR, "You must specify an output filepath with "
-                                    + OPT_EZTFILE);
+                            reporter.print(Diagnostic.Kind.ERROR,
+                                    "You must specify an output filepath with "
+                                            + OPT_OUTFILE);
                             return false;
                         }
-                        reporter.print(Diagnostic.Kind.NOTE, "EztDoclet Option : " + arguments.get(0));
+                        reporter.print(Diagnostic.Kind.NOTE,
+                                "JRE emulation summary Doclet Option : "
+                                + arguments.get(0));
                         outputFile = arguments.get(0);
                         return true;
                     }

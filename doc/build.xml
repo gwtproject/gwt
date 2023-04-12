@@ -92,7 +92,8 @@
              linkoffline="http://download.oracle.com/javaee/6/api/ validation-package-list">
       <!-- suppress errors that don't break the output, we should refine this to just suppress things we haven't fixed yet -->
       <arg value="-Xdoclint:none" />
-
+      <!-- re-enable frames for now, until we get to >=13 and have search -->
+      <arg value="--frames" />
       <classpath refid="USER_CLASS_PATH" />
       <sourcepath refid="USER_SOURCE_PATH" />
 
@@ -108,7 +109,7 @@
     </javadoc>
   </target>
 
-  <target name="emul-ezt" unless="isJava8">
+  <target name="emul-doc" unless="isJava8">
     <outofdate>
       <sourcefiles>
         <fileset dir="${gwt.root}/user/super/com/google/gwt/emul">
@@ -119,24 +120,25 @@
         <pathelement path="${project.build}/emul-ezt/fragment.html" />
       </targetfiles>
       <sequential>
-        <echo>Building JRE emulation EZT</echo>
+        <echo>Building JRE emulation summary</echo>
         <java classpathref="DOC_PATH" classname="com.google.doctool.custom.FindPackages" fork="yes" failonerror="true">
           <arg value="${gwt.root}" />
         </java>
         <property file="${gwt.root}/build/out/packages.properties" />
-        <java classpathref="DOC_PATH" classname="com.google.doctool.JreDocTool" fork="yes" failonerror="true">
-          <arg value="-out" />
+        <javadoc classpathref="USER_CLASS_PATH" failonerror="true"
+                 sourcepath="${gwt.root}/user/super/com/google/gwt/emul:${gwt.root}/dev/core/super/com/google/gwt/dev/jjs/intrinsic"
+                 encoding="UTF-8"
+                 access="public"
+                 source="${javac.source}"
+                 packagenames="${JAVA_PKGS}"
+                 docletpath="${project.build}/../build_tools/doctool/bin"
+                 doclet="com.google.doctool.custom.JavaEmulSummaryDoclet">
+          <arg value="-outfile" />
           <arg value="${project.build}/emul-ezt/fragment.html" />
-          <arg value="-classpath" />
-          <arg pathref="USER_CLASS_PATH" />
-          <arg value="-sourcepath" />
-          <arg path="${gwt.root}/user/super/com/google/gwt/emul:${gwt.root}/dev/core/super/com/google/gwt/dev/jjs/intrinsic" />
-          <arg value="-packages" />
-          <arg value="${JAVA_PKGS}" />
-        </java>
+        </javadoc>
       </sequential>
     </outofdate>
   </target>
 
-  <target name="build" depends="javadoc, emul-ezt" />
+  <target name="build" depends="javadoc, emul-doc" />
 </project>

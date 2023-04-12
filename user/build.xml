@@ -15,10 +15,9 @@
   <property name="emma.merged.out" value="${junit.out}/emma-coverage"/>
 
   <property name="gwt.junit.testcase.web.includes" value="${gwt.junit.testcase.includes}"/>
-  <!-- TODO once we compile with Java >8, update this to exclude tests based on running JDK version -->
   <condition property="gwt.junit.testcase.web.excludes"
-            value="**/*JreSuite.class,**/OptimizedOnly*,**/*Java8Suite.class"
-            else="**/*JreSuite.class,**/OptimizedOnly*,**/*Java8Suite.class">
+            value="**/*JreSuite.class,**/OptimizedOnly*"
+            else="**/*JreSuite.class,**/OptimizedOnly*,**/*Java9Suite.class">
     <isfalse value="${isJava8}" />
   </condition>
 
@@ -31,9 +30,8 @@
   </condition>
 
   <property name="gwt.junit.testcase.dev.includes" value="${gwt.junit.testcase.includes}"/>
-  <!-- TODO once we compile with Java >8, update this to exclude tests based on running JDK version -->
   <condition property="gwt.junit.testcase.dev.excludes"
-            value="**/EmulSuite.class,**/JSONSuite.class,**/RunAsyncSuite.class,**/*CompilerSuite.class,**/*JsInteropSuite.class,**/*JreSuite.class,**/OptimizedOnly*,**/*Java8Suite.class"
+            value="**/EmulSuite.class,**/JSONSuite.class,**/RunAsyncSuite.class,**/*CompilerSuite.class,**/*JsInteropSuite.class,**/*JreSuite.class,**/OptimizedOnly*"
             else="**/EmulSuite.class,**/JSONSuite.class,**/RunAsyncSuite.class,**/*CompilerSuite.class,**/*JsInteropSuite.class,**/*JreSuite.class,**/OptimizedOnly*,**/*Java8Suite.class">
     <isfalse value="${isJava8}" />
   </condition>
@@ -183,6 +181,7 @@
                  -Xep:ComparableType:OFF
                  -Xep:DoNotCall:OFF
                  -Xep:BadAnnotationImplementation:OFF
+                 -Xep:DuplicateMapKeys:OFF
                ">
       <classpath>
         <pathelement location="${javac.out}"/>

@@ -123,6 +123,7 @@ public class SetTest extends EmulTestBase {
       // success
     }
 
+    // if any, remove an item actually in the set
     if (contents.length > 1) {
       // Without any items, remove(T) defaults to iterating items present, so we only test from
       // present items
@@ -132,16 +133,21 @@ public class SetTest extends EmulTestBase {
       } catch (UnsupportedOperationException ignored) {
         // success
       }
+    }
 
-      // This will actually succeed if the collection is empty, since the base implementation
-      // invokes the iterator and removes each item - an empty collection does no iteration,
-      // so the operation trivially passes
-      try {
-        set.clear();
-        fail("Set should be unmodifiable: clear()");
-      } catch (UnsupportedOperationException ignored) {
-        // success
-      }
+    // Remove an item that will not be in the set
+    try {
+      set.remove("not present");
+      fail("Set should be unmodifiable: remove(T)");
+    } catch (UnsupportedOperationException ignored) {
+      // success
+    }
+
+    try {
+      set.clear();
+      fail("Set should be unmodifiable: clear()");
+    } catch (UnsupportedOperationException ignored) {
+      // success
     }
   }
 

@@ -17,6 +17,7 @@
   <inherits name='com.google.gwt.testing.TestUtils' />
   <source path='java' />
   <source path='java8' />
+  <source path='java9' />
 
   <define-configuration-property name="someConfigurationProperty" is-multi-valued='false'/>
   <set-configuration-property name="someConfigurationProperty" value="conf"/>

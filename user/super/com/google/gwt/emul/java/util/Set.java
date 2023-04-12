@@ -31,7 +31,7 @@ import jsinterop.annotations.JsType;
 public interface Set<E> extends Collection<E> {
   @JsIgnore
   static <E> Set<E> of() {
-    return Collections.emptySet();
+    return Collections.unmodifiableSet(Collections.emptySet());
   }
 
   @JsIgnore
@@ -88,7 +88,7 @@ public interface Set<E> extends Collection<E> {
   static <E> Set<E> of(E... elements) {
     HashSet<E> set = new HashSet<>();
     for (int i = 0; i < elements.length; i++) {
-      checkArgument(set.add(checkNotNull(elements[i])));
+      checkArgument(set.add(checkNotNull(elements[i])), "Can't add the same item multiple times");
     }
     return Collections.unmodifiableSet(set);
   }

@@ -17,6 +17,9 @@ package com.google.gwt.emultest.java9.util;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
+import java.util.AbstractMap;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -156,6 +159,13 @@ public class MapTest extends EmulTestBase {
     } catch (UnsupportedOperationException ignore) {
       // expected
     }
+
+    assertNPE("Map.entry", () -> {
+      Map.entry(null, "value");
+    });
+    assertNPE("Map.entry", () -> {
+      Map.entry("key", null);
+    });
   }
 
   public void testOfEntries() {

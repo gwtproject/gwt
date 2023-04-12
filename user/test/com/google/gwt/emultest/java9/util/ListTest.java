@@ -77,6 +77,7 @@ public class ListTest extends EmulTestBase {
     assertNPE("of", () -> List.of("a", "b", "c", "d", null));
     assertNPE("of", () -> List.of("a", "b", "c", "d", "e", null));
     assertNPE("of", () -> List.of("a", "b", "c", "d", "e", "f", null));
+    assertNPE("of", () -> List.of("a", "b", "c", "d", "e", "f", "g", null));
     assertNPE("of", () -> List.of("a", "b", "c", "d", "e", "f", "g", "h", null));
     assertNPE("of", () -> List.of("a", "b", "c", "d", "e", "f", "g", "h", "i", null));
     assertNPE("of", () -> List.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", null));
@@ -110,6 +111,7 @@ public class ListTest extends EmulTestBase {
       // success
     }
 
+    // if any, remove an item actually in the list
     if (contents.length > 0) {
       // Without any items, remove(T) defaults to iterating items present, so we only test from
       // present items
@@ -119,16 +121,21 @@ public class ListTest extends EmulTestBase {
       } catch (UnsupportedOperationException ignored) {
         // success
       }
+    }
 
-      // This will actually succeed if the collection is empty, since the base implementation
-      // invokes the iterator and removes each item - an empty collection does no iteration,
-      // so the operation trivially passes
-      try {
-        list.clear();
-        fail("List should be unmodifiable: clear()");
-      } catch (UnsupportedOperationException ignored) {
-        // success
-      }
+    // Remove an item that will not be in the list
+    try {
+      list.remove("not present");
+      fail("List should be unmodifiable: remove(T)");
+    } catch (UnsupportedOperationException ignored) {
+      //success
+    }
+
+    try {
+      list.clear();
+      fail("List should be unmodifiable: clear()");
+    } catch (UnsupportedOperationException ignored) {
+      // success
     }
   }
 

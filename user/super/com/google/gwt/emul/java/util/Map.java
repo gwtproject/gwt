@@ -220,9 +220,9 @@ public interface Map<K, V> {
   static <K, V> Entry<K, V> entry(K key, V value) {
     // This isn't quite consistent with the javadoc, since this is serializable, while entry()
     // need not be serializable.
-    return new AbstractMap.SimpleImmutableEntry(
-        checkNotNull(key),
-        checkNotNull(value)
+    return new AbstractMap.NonNullableImmutableEntry<>(
+        key,
+        value
     );
   }
 
@@ -231,11 +231,14 @@ public interface Map<K, V> {
     Map<K, V> map = new HashMap<>();
 
     for (int i = 0; i < entries.length; i++) {
-      // TODO this perhaps can be optimized if we know the entry is an instance of
-      //  AbstractMap.SimpleImmutableEntry, or something more specialized?
-      Entry<? extends K, ? extends V> entry = entries[i];
-      checkArgument(map.put(checkNotNull(entry.getKey()), checkNotNull(entry.getValue())) == null,
-          "Duplicate key " + entry.getKey());
+      Entry<? extends K, ? extends V> entry = checkNotNull(entries[i]);
+      K key = entry.getKey();
+      if (entry instanceof AbstractMap.NonNullableImmutableEntry) {
+        // key/value cannot be null for this type, still need to check for collisions
+        checkArgument(map.put(key, entry.getValue()) == null, "Can't add multiple entries with the same key");
+      } else {
+        checkArgument(map.put(checkNotNull(key), checkNotNull(entry.getValue())) == null, "Can't add multiple entries with the same key");
+      }
     }
 
     return Collections.unmodifiableMap(map);

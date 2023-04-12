@@ -37,7 +37,7 @@ public interface List<E> extends Collection<E> {
 
   @JsIgnore
   static <E> List<E> of() {
-    return Collections.emptyList();
+    return Collections.unmodifiableList(Collections.emptyList());
   }
 
   @JsIgnore

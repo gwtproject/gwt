@@ -18,6 +18,8 @@ package com.google.doctool;
 
 import com.google.doctool.custom.EztDoclet;
 
+import javax.tools.DocumentationTool;
+import javax.tools.ToolProvider;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -132,7 +134,7 @@ public class JreDocTool {
   }
 
   private void process() {
-    List<String> args = new ArrayList<String>();
+    List<String> args = new ArrayList<String>(Arrays.asList(this.packages.split(";")));
 
     args.add("-public");
 
@@ -153,8 +155,7 @@ public class JreDocTool {
     args.add(EztDoclet.OPT_EZTFILE);
     args.add(this.outputFile);
 
-    args.addAll(Arrays.asList(this.packages.split(";")));
-
-    com.sun.tools.javadoc.Main.execute(args.toArray(new String[0]));
+    DocumentationTool javaDocTool = ToolProvider.getSystemDocumentationTool();
+    javaDocTool.run(null, null, null, args.toArray(new String[0]));
   }
 }

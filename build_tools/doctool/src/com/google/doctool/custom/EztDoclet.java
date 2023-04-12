@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,168 +16,256 @@
 
 package com.google.doctool.custom;
 
-import com.sun.javadoc.ClassDoc;
-import com.sun.javadoc.DocErrorReporter;
-import com.sun.javadoc.ExecutableMemberDoc;
-import com.sun.javadoc.FieldDoc;
-import com.sun.javadoc.PackageDoc;
-import com.sun.javadoc.RootDoc;
+import jdk.javadoc.doclet.Doclet;
+import jdk.javadoc.doclet.DocletEnvironment;
+import jdk.javadoc.doclet.Reporter;
 
+import javax.lang.model.SourceVersion;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.PackageElement;
+import javax.lang.model.type.ArrayType;
+import javax.lang.model.type.TypeKind;
+import javax.lang.model.type.TypeMirror;
+import javax.tools.Diagnostic;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * A doclet for using producing EZT output listing the specified classes and
  * their methods and constructors.
  */
-public class EztDoclet {
+public class EztDoclet implements Doclet {
 
-  public static final String OPT_EZTFILE = "-eztfile";
+    public static final String OPT_EZTFILE = "-eztfile";
+    private static final String JAVADOC_URL = "https://docs.oracle.com/javase/8/docs/api/";
 
-  private static EztDoclet EZT_DOCLET;
+    private Reporter reporter;
+    private String outputFile;
 
-  private static final String JAVADOC_URL = "https://docs.oracle.com/javase/8/docs/api/";
+    @Override
+    public boolean run(DocletEnvironment env) {
+        try {
 
-  public static int optionLength(String option) {
-    if (option.equals(OPT_EZTFILE)) {
-      return 2;
+            File outFile = new File(outputFile);
+            outFile.getParentFile().mkdirs();
+            FileWriter fw = new FileWriter(outFile);
+            PrintWriter pw = new PrintWriter(fw, true);
+
+            pw.println("<ol class=\"toc\" id=\"pageToc\">");
+            getSpecifiedPackages(env)
+                    .forEach(pack -> {
+                        pw.format("  <li><a href=\"#Package_%s\">%s</a></li>\n",
+                                pack.getQualifiedName().toString().replace('.', '_'),
+                                pack.getQualifiedName().toString());
+                    } );
+
+            pw.println("</ol>\n");
+
+            getSpecifiedPackages(env).forEach(pack -> {
+                pw.format("<h2 id=\"Package_%s\">Package %s</h2>\n",
+                        pack.getQualifiedName().toString().replace('.', '_'),
+                        pack.getQualifiedName().toString());
+                pw.println("<dl>");
+
+                String packURL = JAVADOC_URL + pack.getQualifiedName().toString()
+                        .replace(".", "/") + "/";
+
+                Iterator<? extends Element> classesIterator = pack.getEnclosedElements()
+                        .stream()
+                        .filter(element -> env.isSelected(element) && env.isIncluded(element))
+                        .filter(element -> element.getModifiers().contains(Modifier.PUBLIC))
+                        .sorted(Comparator.comparing((Element o) -> o.getSimpleName().toString()))
+                        .iterator();
+
+                while (classesIterator.hasNext()) {
+                    Element cls = classesIterator.next();
+                    // Each class links to Oracle's main JavaDoc
+                    emitClassDocs(env, pw, packURL, cls);
+                    if (classesIterator.hasNext()) {
+                        pw.print("\n");
+                    }
+                }
+
+                pw.println("</dl>\n");
+            } );
+
+            pw.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return true;
     }
-    return 0;
-  }
 
-  public static boolean start(RootDoc root) {
-    getDoclet().process(root);
-    return true;
-  }
+    private void emitClassDocs(DocletEnvironment env, PrintWriter pw, String packURL, Element cls) {
+        pw.format("  <dt><a href=\"%s%s.html\">%s</a></dt>\n", packURL,
+                qualifiedSimpleName(cls), qualifiedSimpleName(cls));
 
-  public static boolean validOptions(String[][] options,
-      DocErrorReporter reporter) {
-    return getDoclet().analyzeOptions(options, reporter);
-  }
+        // Print out all fields
+        String fields = cls.getEnclosedElements()
+                .stream()
+                .filter(element -> element.getKind().isField())
+                .filter(field -> field.getModifiers().contains(Modifier.PUBLIC))
+                .map(field -> field.getSimpleName().toString())
+                .collect(Collectors.joining(", "));
 
-  private static EztDoclet getDoclet() {
-    if (EZT_DOCLET == null) {
-      EZT_DOCLET = new EztDoclet();
-    }
-    return EZT_DOCLET;
-  }
-
-  private String outputFile;
-
-  private boolean analyzeOptions(String[][] options, DocErrorReporter reporter) {
-    for (int i = 0; i < options.length; i++) {
-      if (options[i][0] == OPT_EZTFILE) {
-        outputFile = options[i][1];
-      }
-    }
-
-    if (outputFile == null) {
-      reporter.printError("You must specify an output filepath with "
-          + OPT_EZTFILE);
-      return false;
-    }
-
-    return true;
-  }
-
-  private String createFieldList(Collection<FieldDoc> fields) {
-    StringBuffer buffer = new StringBuffer();
-    Iterator<FieldDoc> iter = fields.iterator();
-    while (iter.hasNext()) {
-      FieldDoc field = iter.next();
-      buffer.append(field.name());
-      if (iter.hasNext()) {
-        buffer.append(", ");
-      }
-    }
-    return buffer.toString();
-  }
-
-  private String createMemberList(Collection<ExecutableMemberDoc> members) {
-    StringBuffer buffer = new StringBuffer();
-    Iterator<ExecutableMemberDoc> iter = members.iterator();
-    while (iter.hasNext()) {
-      ExecutableMemberDoc member = iter.next();
-      buffer.append(member.name() + member.flatSignature());
-      if (iter.hasNext()) {
-        buffer.append(", ");
-      }
-    }
-    return buffer.toString();
-  }
-
-  private void process(RootDoc root) {
-    try {
-      File outFile = new File(outputFile);
-      outFile.getParentFile().mkdirs();
-      FileWriter fw = new FileWriter(outFile);
-      PrintWriter pw = new PrintWriter(fw, true);
-
-      pw.println("<ol class=\"toc\" id=\"pageToc\">");
-      for (PackageDoc pack : root.specifiedPackages()) {
-        pw.format("  <li><a href=\"#Package_%s\">%s</a></li>\n",
-            pack.name().replace('.', '_'), pack.name());
-      }
-      pw.println("</ol>\n");
-
-      for (PackageDoc pack : root.specifiedPackages()) {
-        pw.format("<h2 id=\"Package_%s\">Package %s</h2>\n",
-            pack.name().replace('.', '_'), pack.name());
-        pw.println("<dl>");
-
-        String packURL = JAVADOC_URL + pack.name().replace(".", "/") + "/";
-
-        // Sort the classes alphabetically
-        ClassDoc[] classes = pack.allClasses(true);
-        Arrays.sort(classes, new Comparator<ClassDoc>() {
-          @Override
-          public int compare(ClassDoc arg0, ClassDoc arg1) {
-            return arg0.name().compareTo(arg1.name());
-          }
-        });
-
-        Iterator<ClassDoc> iter = Arrays.asList(classes).iterator();
-        while (iter.hasNext()) {
-          ClassDoc cls = iter.next();
-
-          // Each class links to Sun's main JavaDoc
-          pw.format("  <dt><a href=\"%s%s.html\">%s</a></dt>\n", packURL,
-              cls.name(), cls.name());
-
-          // Print out all fields
-          Collection<FieldDoc> fields = new ArrayList<FieldDoc>();
-          fields.addAll(Arrays.asList(cls.fields(true)));
-
-          if (!fields.isEmpty()) {
-            pw.format("  <dd style='margin-bottom: 0.5em;'>%s</dd>\n", createFieldList(fields));
-          }
-
-          // Print out all constructors and methods
-          Collection<ExecutableMemberDoc> members = new ArrayList<ExecutableMemberDoc>();
-          members.addAll(Arrays.asList(cls.constructors(true)));
-          members.addAll(Arrays.asList(cls.methods(true)));
-
-          if (!members.isEmpty()) {
-            pw.format("  <dd>%s</dd>\n", createMemberList(members));
-          }
-
-          if (iter.hasNext()) {
-            pw.print("\n");
-          }
+        if (!fields.isEmpty()) {
+            pw.format("  <dd style='margin-bottom: 0.5em;'>%s</dd>\n", fields);
         }
 
-        pw.println("</dl>\n");
-      }
-      pw.close();
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+        List<String> constructors = cls.getEnclosedElements()
+                .stream()
+                .filter(element -> ElementKind.CONSTRUCTOR == element.getKind())
+                .filter(member -> member.getModifiers().contains(Modifier.PUBLIC))
+                .map(member -> (ExecutableElement) member)
+                .map(executableElement -> flatSignature(env, cls, executableElement))
+                .collect(Collectors.toList());
+
+        List<String> methods = cls.getEnclosedElements()
+                .stream()
+                .filter(element -> ElementKind.METHOD == element.getKind())
+                .filter(member -> member.getModifiers().contains(Modifier.PUBLIC))
+                .map(member -> (ExecutableElement) member)
+                .map(executableElement -> flatSignature(env, cls, executableElement))
+                .collect(Collectors.toList());
+
+        List<String> members = new ArrayList<>(constructors);
+        members.addAll(methods);
+
+        // Print out all constructors and methods
+        if (!members.isEmpty()) {
+            pw.format("  <dd>%s</dd>\n", String.join(", ", members));
+        }
+
+        Iterator<? extends Element> classesIterator = cls.getEnclosedElements()
+                .stream()
+                .filter(element -> element.getKind().isClass()
+                        || element.getKind().isInterface()
+                        || ElementKind.ENUM == element.getKind())
+                .filter(element -> element.getModifiers().contains(Modifier.PUBLIC))
+                .sorted(Comparator.comparing((Element o) -> o.getSimpleName().toString()))
+                .iterator();
+        if (classesIterator.hasNext()) {
+            pw.print("\n");
+        }
+        while (classesIterator.hasNext()) {
+            Element innerCls = classesIterator.next();
+            // Each class links to Sun's main JavaDoc
+            emitClassDocs(env, pw, packURL, innerCls);
+            if (classesIterator.hasNext()) {
+                pw.print("\n");
+            }
+        }
     }
-  }
+
+    private String qualifiedSimpleName(Element element) {
+        String elementName = element.getSimpleName().toString();
+        if (ElementKind.PACKAGE != element.getEnclosingElement().getKind()) {
+            return qualifiedSimpleName(element.getEnclosingElement()) + "." + elementName;
+        }
+        return elementName;
+    }
+
+    private String flatSignature(DocletEnvironment env, Element parent, ExecutableElement member) {
+        return (ElementKind.CONSTRUCTOR == member.getKind()
+                ? parent.getSimpleName().toString()
+                : member.getSimpleName().toString()) +
+                "(" + member.getParameters()
+                .stream()
+                .map(Element::asType)
+                .map(t -> simpleParamName(env, t))
+                .collect(Collectors.joining(", ")) + ")";
+    }
+
+    private String simpleParamName(DocletEnvironment env, TypeMirror type) {
+        if (type.getKind().isPrimitive() || TypeKind.TYPEVAR == type.getKind()) {
+            return String.valueOf(type);
+        } else if (TypeKind.ARRAY == type.getKind()) {
+            return simpleParamName(env, ((ArrayType) type).getComponentType()) + "[]";
+        } else {
+            return qualifiedSimpleName(env.getTypeUtils().asElement(type));
+        }
+    }
+
+    @Override
+    public void init(Locale locale, Reporter reporter) {
+        this.reporter = reporter;
+    }
+
+    @Override
+    public String getName() {
+        return "EztDoclet";
+    }
+
+    @Override
+    public Set<? extends Option> getSupportedOptions() {
+        Option[] options = {
+                new Option() {
+
+                    @Override
+                    public int getArgumentCount() {
+                        return 1;
+                    }
+
+                    @Override
+                    public String getDescription() {
+                        return "Ezt Doc location";
+                    }
+
+                    @Override
+                    public Kind getKind() {
+                        return Kind.STANDARD;
+                    }
+
+                    @Override
+                    public List<String> getNames() {
+                        return List.of(OPT_EZTFILE);
+                    }
+
+                    @Override
+                    public String getParameters() {
+                        return "file";
+                    }
+
+                    @Override
+                    public boolean process(String opt, List<String> arguments) {
+                        if (arguments.isEmpty()) {
+                            reporter.print(Diagnostic.Kind.ERROR, "You must specify an output filepath with "
+                                    + OPT_EZTFILE);
+                            return false;
+                        }
+                        reporter.print(Diagnostic.Kind.NOTE, "EztDoclet Option : " + arguments.get(0));
+                        outputFile = arguments.get(0);
+                        return true;
+                    }
+                }
+        };
+        return new HashSet<>(Arrays.asList(options));
+    }
+
+    @Override
+    public SourceVersion getSupportedSourceVersion() {
+        return SourceVersion.latestSupported();
+    }
+
+    private Stream<PackageElement> getSpecifiedPackages(DocletEnvironment root) {
+        return root.getSpecifiedElements()
+                .stream()
+                .filter(element -> ElementKind.PACKAGE == element.getKind())
+                .map(element -> (PackageElement) element);
+    }
 }

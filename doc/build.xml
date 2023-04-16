@@ -83,17 +83,14 @@
              access="package"
              packagenames="${USER_PKGS}"
              sourcefiles="${USER_CLASSES}"
-             noindex="true"
              notree="true"
              use="true"
              windowtitle="GWT Javadoc"
              doctitle="GWT API Reference"
              header="GWT ${gwt.version}"
-             linkoffline="http://download.oracle.com/javaee/6/api/ validation-package-list">
+             linkoffline="https://docs.oracle.com/en/java/javase/11/docs/api/ validation-package-list">
       <!-- suppress errors that don't break the output, we should refine this to just suppress things we haven't fixed yet -->
       <arg value="-Xdoclint:none" />
-      <!-- re-enable frames for now, until we get to >=13 and have search -->
-      <arg value="--frames" />
       <classpath refid="USER_CLASS_PATH" />
       <sourcepath refid="USER_SOURCE_PATH" />
 

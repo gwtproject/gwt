@@ -731,15 +731,13 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
       print(".class)");
     } else {
       assert x.isProperty();
-      print("GWT.getProperty(");
+      print("System.getProperty(");
       print("\"");
       print(x.getRequestedValue());
       print("\"");
-      if (x.getResultValues().get(0) != null) {
-        print(",");
-        print("\"");
-        print(x.getResultValues().get(0));
-        print("\"");
+      if (x.getDefaultValueExpression() != null) {
+        print(", ");
+        accept(x.getDefaultValueExpression());
       }
       print(")");
     }

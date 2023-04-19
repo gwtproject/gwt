@@ -254,6 +254,14 @@ public class LongTest extends GWTTestCase {
     assertEquals(
         "1111111111111111111111111111111111111111111111111111111111111111",
         Long.toBinaryString(-1));
+
+    // Test int MAX+1 and int -1, as both are positive longs, but negative ints
+    assertEquals(
+        "10000000000000000000000000000000",
+        Long.toBinaryString(((long) Integer.MAX_VALUE) + 1));
+    assertEquals(
+        "11111111111111111111111111111111",
+        Long.toBinaryString(4294967295L));
   }
 
   public void testToHexString() {
@@ -262,6 +270,8 @@ public class LongTest extends GWTTestCase {
     assertEquals("1234500000000", Long.toHexString(0x1234500000000L));
     assertEquals("fff1234500000000", Long.toHexString(0xFFF1234500000000L));
     assertEquals("ffffffffffffffff", Long.toHexString(-1));
+    assertEquals("80000000", Long.toHexString(((long) Integer.MAX_VALUE) + 1));
+    assertEquals("ffffffff", Long.toHexString(4294967295L));
   }
 
   public void testToOctalString() {
@@ -270,6 +280,8 @@ public class LongTest extends GWTTestCase {
     assertEquals("1000000000000000000000", Long.toOctalString(Long.MIN_VALUE));
     assertEquals("777777777777777777777", Long.toOctalString(Long.MAX_VALUE));
     assertEquals("1777777777777777777777", Long.toOctalString(-1));
+    assertEquals("20000000000", Long.toOctalString(((long) Integer.MAX_VALUE) + 1));
+    assertEquals("37777777777", Long.toOctalString(4294967295L));
   }
 
   public void testToString() {
@@ -281,6 +293,8 @@ public class LongTest extends GWTTestCase {
     assertEquals("80765", Long.toString(80765L));
     assertEquals("-2147483648", Long.toString((long) Integer.MIN_VALUE));
     assertEquals("2147483647", Long.toString((long) Integer.MAX_VALUE));
+    assertEquals("2147483648", Long.toString(((long) Integer.MAX_VALUE) + 1));
+    assertEquals("4294967295", Long.toString((long) 4294967295L));
     assertEquals("-89000000005", Long.toString(-89000000005L));
     assertEquals("89000000005", Long.toString(89000000005L));
     assertEquals("-9223372036854775808", Long.toString(Long.MIN_VALUE));

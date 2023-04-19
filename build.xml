@@ -31,9 +31,9 @@
   </macrodef>
 
   <property name="gwt.apicheck.config"
-            location="tools/api-checker/config/gwt29_210userapi.conf"/>
+            location="tools/api-checker/config/gwt210_211userapi.conf"/>
   <property name="gwt.apicheck.referencelibs"
-            value="${gwt.tools}/api-checker-reference/2.9.0/gwt-dev-modified.jar:${gwt.tools}/api-checker-reference/2.9.0/gwt-user-modified.jar"/>
+            value="${gwt.tools}/api-checker-reference/2.10.0/gwt-dev-modified.jar:${gwt.tools}/api-checker-reference/2.10.0/gwt-user-modified.jar"/>
 
   <target name="buildonly"
           description="[action] Minimal one-platform devel build, without distro packaging">
@@ -98,7 +98,7 @@
     <gwt.ant dir="samples"/>
   </target>
 
-  <target name="buildtools" description="[subdir] Build (or runs ${target} if set) the build tools">
+  <target name="buildtools" description="[subdir] Build (or runs ${target} if set) the build tools" unless="isJava8">
     <gwt.ant dir="build_tools"/>
   </target>
 

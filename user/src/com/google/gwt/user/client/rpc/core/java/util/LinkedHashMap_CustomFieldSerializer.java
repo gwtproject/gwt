@@ -20,7 +20,10 @@ import com.google.gwt.user.client.rpc.SerializationException;
 import com.google.gwt.user.client.rpc.SerializationStreamReader;
 import com.google.gwt.user.client.rpc.SerializationStreamWriter;
 
+import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.LinkedHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
@@ -105,15 +108,31 @@ public final class LinkedHashMap_CustomFieldSerializer extends
     if (!reflectionHasFailed.get()) {
       try {
         Field f = accessOrderField.get();
-        if (f == null || !f.isAccessible()) {
+        boolean isAccessible = f != null && f.isAccessible();
+        if (!isAccessible) {
           f = LinkedHashMap.class.getDeclaredField("accessOrder");
           synchronized (f) {
-            // Ensure all threads can see the accessibility.
-            f.setAccessible(true);
+            try {
+              // see if we can *try* setting the accessOrder field accessible:
+              final Method trySetAccessible = AccessibleObject.class.getDeclaredMethod(
+                  "trySetAccessible");
+              // no exception, then we are on Java 9 or beyond
+              if ((boolean) trySetAccessible.invoke(f)) {
+                accessOrderField.set(f);
+                isAccessible = true;
+              }
+            } catch (NoSuchMethodException e) {
+              // Java <= 8: it won't create a warning but it may fail with an exception
+              // Ensure all threads can see the accessibility.
+              f.setAccessible(true);
+              accessOrderField.set(f);
+              isAccessible = true;
+            }
           }
-          accessOrderField.set(f);
         }
-        return ((Boolean) f.get(instance)).booleanValue();
+        if (isAccessible) {
+          return ((Boolean) f.get(instance)).booleanValue();
+        }
       } catch (SecurityException e) {
         // fall through
       } catch (NoSuchFieldException e) {
@@ -121,6 +140,8 @@ public final class LinkedHashMap_CustomFieldSerializer extends
       } catch (IllegalArgumentException e) {
         // fall through
       } catch (IllegalAccessException e) {
+        // fall through
+      } catch (InvocationTargetException e) {
         // fall through
       }
       reflectionHasFailed.set(true);

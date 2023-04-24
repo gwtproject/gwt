@@ -37,6 +37,20 @@
 
   <!-- Rebuild the javadoc if a source file is newer than the index-->
   <target name="javadoc">
+    <copy file="${gwt.root}/user/src/com/google/gwt/logging/server/RemoteLoggingServiceImpl.java" tofile="${project.build}/javadoc-src/com/google/gwt/logging/server/jakarta/RemoteLoggingServiceImpl.java"/>
+    <copy file="${gwt.root}/user/src/com/google/gwt/user/server/Util.java" tofile="${project.build}/javadoc-src/com/google/gwt/user/server/jakarta/Util.java"/>
+    <copy todir="${project.build}/javadoc-src/com/google/gwt/user/server/rpc/jakarta">
+      <filelist dir="${gwt.root}/user/src/com/google/gwt/user/server/rpc">
+        <file name="AbstractRemoteServiceServlet.java"/>
+        <file name="AbstractXsrfProtectedServiceServlet.java"/>
+        <file name="RemoteServiceServlet.java"/>
+        <file name="RPCServletUtils.java"/>
+        <file name="RPC.java"/>
+        <file name="XsrfProtectedServiceServlet.java"/>
+        <file name="XsrfTokenServiceServlet.java"/>
+      </filelist>
+    </copy>
+    <replace dir="${project.build}/javadoc-src" token="javax.servlet" value="jakarta.servlet"/>
     <outofdate>
       <sourcefiles>
         <fileset file="./src/gwt-user.html" />
@@ -78,7 +92,6 @@
     <property file="${gwt.root}/build/out/packages.properties" />
     <javadoc classpathref="DOC_PATH" failonerror="true" maxmemory="1g"
              destdir="${project.build}/javadoc"
-             source="${javac.source}"
              encoding="UTF-8"
              access="package"
              packagenames="${USER_PKGS}"
@@ -90,12 +103,15 @@
              doctitle="GWT API Reference"
              header="GWT ${gwt.version}"
              linkoffline="http://download.oracle.com/javaee/6/api/ validation-package-list">
+<!--      <fileset dir="${javac.source}"/>-->
+<!--      <fileset dir="${project.build}/javadoc-src"/>-->
       <!-- suppress errors that don't break the output, we should refine this to just suppress things we haven't fixed yet -->
       <arg value="-Xdoclint:none" />
       <!-- re-enable frames for now, until we get to >=13 and have search -->
       <arg value="--frames" />
       <classpath refid="USER_CLASS_PATH" />
       <sourcepath refid="USER_SOURCE_PATH" />
+      <sourcepath path="${project.build}/javadoc-src" />
 
       <taglet name="com.google.doctool.custom.TipTaglet">
         <path refid="DOC_PATH" />

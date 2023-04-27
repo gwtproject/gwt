@@ -42,6 +42,8 @@
  - To compile everything including examples you have to run
 
    `$ ant clean dist`
+   
+ - To create maven artifacts (after building .jar using ant), use [following guide](./maven/README.txt).
 
 ### How to verify GWT code conventions:
 

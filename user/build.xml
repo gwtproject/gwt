@@ -17,7 +17,7 @@
   <property name="gwt.junit.testcase.web.includes" value="${gwt.junit.testcase.includes}"/>
   <condition property="gwt.junit.testcase.web.excludes"
             value="**/*JreSuite.class,**/OptimizedOnly*"
-            else="**/*JreSuite.class,**/OptimizedOnly*,**/*Java9Suite.class">
+            else="**/*JreSuite.class,**/OptimizedOnly*,**/*Java9Suite.class,**/*Java10Suite.class,**/*Java11Suite.class">
     <isfalse value="${isJava8}" />
   </condition>
 
@@ -32,7 +32,7 @@
   <property name="gwt.junit.testcase.dev.includes" value="${gwt.junit.testcase.includes}"/>
   <condition property="gwt.junit.testcase.dev.excludes"
             value="**/EmulSuite.class,**/JSONSuite.class,**/RunAsyncSuite.class,**/*CompilerSuite.class,**/*JsInteropSuite.class,**/*JreSuite.class,**/OptimizedOnly*"
-            else="**/EmulSuite.class,**/JSONSuite.class,**/RunAsyncSuite.class,**/*CompilerSuite.class,**/*JsInteropSuite.class,**/*JreSuite.class,**/OptimizedOnly*,**/*Java8Suite.class">
+            else="**/EmulSuite.class,**/JSONSuite.class,**/RunAsyncSuite.class,**/*CompilerSuite.class,**/*JsInteropSuite.class,**/*JreSuite.class,**/OptimizedOnly*,**/*Java9Suite.class,**/*Java10Suite.class,**/*Java11Suite.class">
     <isfalse value="${isJava8}" />
   </condition>
 
@@ -156,13 +156,13 @@
       Compiles the test code for this project
   -->
   <target name="compile.tests"
-          depends="-compile.tests.java8"
+          depends="-compile.tests.java8,-compile.tests.java11"
           unless="compile.tests.complete">
   </target>
 
   <target name="-compile.tests.java8" depends="compile.dev.tests, compile.emma.if.enabled">
     <gwt.javac srcdir="test" destdir="${javac.junit.out}"
-               excludes="com/google/gwt/langtest/**,**/super/**"
+               excludes="com/google/gwt/langtest/**,**/super/**,**/java9/**,**/*Java9*.java,**/java10/**,**/*Java10*.java,**/java11/**,**/*Java11*.java"
                processorpath="test.extraclasspath"
                errorprone.args="
                  -Xep:SelfAssignment:OFF
@@ -192,6 +192,39 @@
       <compilerarg value="-processor"/>
       <compilerarg value="com.google.web.bindery.requestfactory.apt.RfValidator"/>
     </gwt.javac>
+  </target>
+  <target name="-compile.tests.java11" unless="isJava8" depends="-compile.tests.java8">
+    <gwt.javac srcdir="test" destdir="${javac.junit.out}"
+               excludes="com/google/gwt/langtest/**,**/super/**"
+               processorpath="test.extraclasspath"
+               errorprone.args="
+                 -Xep:SelfAssignment:OFF
+                 -Xep:MissingCasesInEnumSwitch:OFF
+                 -Xep:SelfComparison:OFF
+                 -Xep:SelfEquals:OFF
+                 -Xep:FallThrough:OFF
+                 -Xep:ReturnValueIgnored:OFF
+                 -Xep:EqualsIncompatibleType:OFF
+                 -Xep:IdentityBinaryExpression:OFF
+                 -Xep:LoopConditionChecker:OFF
+                 -Xep:JUnitAssertSameCheck:OFF
+                 -Xep:CollectionIncompatibleType:OFF
+                 -Xep:DeadThread:OFF
+                 -Xep:ComplexBooleanConstant:OFF
+                 -Xep:ComparableType:OFF
+                 -Xep:DoNotCall:OFF
+                 -Xep:BadAnnotationImplementation:OFF
+                 -Xep:DuplicateMapKeys:OFF
+               ">
+      <classpath>
+        <pathelement location="${javac.junit.out}"/>
+        <pathelement location="${javac.out}"/>
+        <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar"/>
+        <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
+        <path refid="test.extraclasspath"/>
+      </classpath>
+    </gwt.javac>
+
   </target>
 
   <target name="build" depends="compile"

@@ -83,7 +83,6 @@
              access="package"
              packagenames="${USER_PKGS}"
              sourcefiles="${USER_CLASSES}"
-             notree="true"
              use="true"
              windowtitle="GWT Javadoc"
              doctitle="GWT API Reference"

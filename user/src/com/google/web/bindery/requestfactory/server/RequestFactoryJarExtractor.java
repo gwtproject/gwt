@@ -386,7 +386,7 @@ public class RequestFactoryJarExtractor {
     private String sourceType;
 
     public ClassProcessor(String sourceType, ClassVisitor cv, State state) {
-      super(Opcodes.ASM7, cv);
+      super(Opcodes.ASM9, cv);
       this.sourceType = sourceType;
       this.state = state;
     }
@@ -630,7 +630,7 @@ public class RequestFactoryJarExtractor {
    */
   private class NativeMethodDefanger extends ClassVisitor {
     public NativeMethodDefanger(ClassVisitor cv) {
-      super(Opcodes.ASM7, cv);
+      super(Opcodes.ASM9, cv);
     }
 
     @Override

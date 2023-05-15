@@ -147,7 +147,7 @@
   <target name="compile-jakarta" description="Compile all class files for jakarta servlets"
           unless="compile.complete">
     <sequential>
-      <copy todir="${project.build}/jakarta-src">
+      <copy todir="${project.build}/jakarta-src" encoding="${javac.encoding}">
         <fileset dir="src" />
         <filterchain>
           <tokenfilter>

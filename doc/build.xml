@@ -38,7 +38,7 @@
 
   <!-- Rebuild the javadoc if a source file is newer than the index-->
   <target name="javadoc">
-    <copy todir="${project.build}/javadoc-src/com/google/gwt/logging/server/jakarta">
+    <copy todir="${project.build}/javadoc-src/com/google/gwt/logging/server/jakarta" encoding="${javac.encoding}">
       <filelist dir="${gwt.root}/user/src/com/google/gwt/logging/server">
         <file name="InvalidJsonLogRecordFormatException.java"/>
         <file name="JsonLogRecordServerUtil.java"/>
@@ -49,7 +49,7 @@
         <file name="package-info.java"/>
       </filelist>
     </copy>
-    <copy todir="${project.build}/javadoc-src/com/google/gwt/core/server/jakarta">
+    <copy todir="${project.build}/javadoc-src/com/google/gwt/core/server/jakarta" encoding="${javac.encoding}">
       <filelist dir="${gwt.root}/user/src/com/google/gwt/core/server">
         <file name="GwtServletBase.java"/>
         <file name="ServerGwtBridge.java"/>
@@ -57,8 +57,8 @@
         <file name="ObjectNew.java"/>
       </filelist>
     </copy>
-    <copy file="${gwt.root}/user/src/com/google/gwt/user/server/Util.java" tofile="${project.build}/javadoc-src/com/google/gwt/user/server/jakarta/Util.java"/>
-    <copy todir="${project.build}/javadoc-src/com/google/gwt/user/server/rpc/jakarta">
+    <copy file="${gwt.root}/user/src/com/google/gwt/user/server/Util.java" tofile="${project.build}/javadoc-src/com/google/gwt/user/server/jakarta/Util.java" encoding="${javac.encoding}"/>
+    <copy todir="${project.build}/javadoc-src/com/google/gwt/user/server/rpc/jakarta" encoding="${javac.encoding}">
       <filelist dir="${gwt.root}/user/src/com/google/gwt/user/server/rpc">
         <file name="AbstractRemoteServiceServlet.java"/>
         <file name="AbstractXsrfProtectedServiceServlet.java"/>
@@ -78,7 +78,7 @@
         <file name="package-info.java"/>
       </filelist>
     </copy>
-    <copy todir="${project.build}/javadoc-src/com/google/gwt/examples/rpc/server/jakarta">
+    <copy todir="${project.build}/javadoc-src/com/google/gwt/examples/rpc/server/jakarta" encoding="${javac.encoding}">
       <filelist dir="${gwt.root}/user/javadoc/com/google/gwt/examples/rpc/server">
         <file name="AdvancedExample.java"/>
       </filelist>

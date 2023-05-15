@@ -27,6 +27,7 @@
     <pathelement location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA.jar" />
     <pathelement location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA-sources.jar" />
     <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar" />
+    <pathelement location="${gwt.tools.lib}/jakarta-servlet/jakarta.servlet-api-5.0.0/jakarta.servlet-api-5.0.0.jar" />
   </path>
 
   <path id="DOC_PATH">
@@ -37,23 +38,67 @@
 
   <!-- Rebuild the javadoc if a source file is newer than the index-->
   <target name="javadoc">
-    <copy file="${gwt.root}/user/src/com/google/gwt/logging/server/RemoteLoggingServiceImpl.java" tofile="${project.build}/javadoc-src/com/google/gwt/logging/server/jakarta/RemoteLoggingServiceImpl.java"/>
+    <copy todir="${project.build}/javadoc-src/com/google/gwt/logging/server/jakarta">
+      <filelist dir="${gwt.root}/user/src/com/google/gwt/logging/server">
+        <file name="InvalidJsonLogRecordFormatException.java"/>
+        <file name="JsonLogRecordServerUtil.java"/>
+        <file name="RemoteLoggingServiceImpl.java"/>
+        <file name="package-info.java"/>
+        <file name="package-info.java"/>
+        <file name="RemoteLoggingServiceUtil.java"/>
+        <file name="package-info.java"/>
+      </filelist>
+    </copy>
+    <copy todir="${project.build}/javadoc-src/com/google/gwt/core/server/jakarta">
+      <filelist dir="${gwt.root}/user/src/com/google/gwt/core/server">
+        <file name="GwtServletBase.java"/>
+        <file name="ServerGwtBridge.java"/>
+        <file name="LocalizableInstantiator.java"/>
+        <file name="ObjectNew.java"/>
+      </filelist>
+    </copy>
     <copy file="${gwt.root}/user/src/com/google/gwt/user/server/Util.java" tofile="${project.build}/javadoc-src/com/google/gwt/user/server/jakarta/Util.java"/>
     <copy todir="${project.build}/javadoc-src/com/google/gwt/user/server/rpc/jakarta">
       <filelist dir="${gwt.root}/user/src/com/google/gwt/user/server/rpc">
         <file name="AbstractRemoteServiceServlet.java"/>
         <file name="AbstractXsrfProtectedServiceServlet.java"/>
+        <file name="NoXsrfProtect.java"/>
         <file name="RemoteServiceServlet.java"/>
+        <file name="RPCRequest.java"/>
         <file name="RPCServletUtils.java"/>
         <file name="RPC.java"/>
+        <file name="SerializationPolicy.java"/>
+        <file name="SerializationPolicyClient.java"/>
+        <file name="SerializationPolicyLoader.java"/>
+        <file name="SerializationPolicyProvider.java"/>
+        <file name="UnexpectedException.java"/>
         <file name="XsrfProtectedServiceServlet.java"/>
         <file name="XsrfTokenServiceServlet.java"/>
+        <file name="XsrfProtect.java"/>
+        <file name="package-info.java"/>
+      </filelist>
+    </copy>
+    <copy todir="${project.build}/javadoc-src/com/google/gwt/examples/rpc/server/jakarta">
+      <filelist dir="${gwt.root}/user/javadoc/com/google/gwt/examples/rpc/server">
+        <file name="AdvancedExample.java"/>
       </filelist>
     </copy>
     <replace dir="${project.build}/javadoc-src" token="javax.servlet" value="jakarta.servlet"/>
+    <replace dir="${project.build}/javadoc-src" token="package com.google.gwt.user.server.rpc" value="package com.google.gwt.user.server.rpc.jakarta"/>
+    <replace dir="${project.build}/javadoc-src" token="package com.google.gwt.user.server;" value="package com.google.gwt.user.server.jakarta;"/>
+    <replace dir="${project.build}/javadoc-src" token="package com.google.gwt.core.server" value="package com.google.gwt.core.server.jakarta"/>
+    <replace dir="${project.build}/javadoc-src" token="package com.google.gwt.logging.server" value="package com.google.gwt.logging.server.jakarta"/>
+    <replace dir="${project.build}/javadoc-src" token="package com.google.gwt.examples.rpc.server" value="package com.google.gwt.examples.rpc.server.jakarta"/>
+    <replace dir="${project.build}/javadoc-src" token="package com.google.web.bindery.requestfactory.server" value="package com.google.web.bindery.requestfactory.server.jakarta"/>
+    <replace dir="${project.build}/javadoc-src" token="com.google.gwt.examples.rpc.server.AdvancedExample" value="com.google.gwt.examples.rpc.server.jakarta.AdvancedExample"/>
+    <replace dir="${project.build}/javadoc-src" token="com.google.gwt.user.server.rpc.RemoteServiceServlet" value="com.google.gwt.user.server.rpc.jakarta.RemoteServiceServlet"/>
+    <replace dir="${project.build}/javadoc-src" token="com.google.gwt.user.server.rpc.RPC" value="com.google.gwt.user.server.rpc.jakarta.RPC"/>
     <outofdate>
       <sourcefiles>
         <fileset file="./src/gwt-user.html" />
+        <fileset dir="${project.build}/javadoc-src">
+          <include name="**/*.java" />
+        </fileset>
         <fileset dir="${gwt.root}/user/src">
           <include name="**/*.java" />
         </fileset>
@@ -106,7 +151,9 @@
       <arg value="-Xdoclint:none" />
       <classpath refid="USER_CLASS_PATH" />
       <sourcepath refid="USER_SOURCE_PATH" />
-      <sourcepath path="${project.build}/javadoc-src" />
+      <fileset dir="${project.build}/javadoc-src">
+        <include name="**" />
+      </fileset>
 
       <taglet name="com.google.doctool.custom.TipTaglet">
         <path refid="DOC_PATH" />

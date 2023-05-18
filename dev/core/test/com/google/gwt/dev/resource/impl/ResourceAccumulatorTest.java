@@ -215,7 +215,7 @@ public class ResourceAccumulatorTest extends TestCase {
     // Symlink in a loop
     java.nio.file.Files.createSymbolicLink(rootDirectory.resolve("sublink"),
         subDirectory);
-    java.nio.file.Files.createSymbolicLink(subDirectory.resolve( "sublink"),
+    java.nio.file.Files.createSymbolicLink(subDirectory.resolve("sublink"),
         rootDirectory);
     createFileIn("New.java", subDirectory);
     waitForFileEvents();
@@ -246,9 +246,9 @@ public class ResourceAccumulatorTest extends TestCase {
     assertTrue(getResources(resourceAccumulator).isEmpty());
 
     // Symlink in a subdirectory and then symlink in a contained file.
-    Files.createSymbolicLink(rootDirectory.resolve( "sublink"),
+    Files.createSymbolicLink(rootDirectory.resolve("sublink"),
         subDirectory);
-    Files.createSymbolicLink(subDirectory.resolve( "New.java"),
+    Files.createSymbolicLink(subDirectory.resolve("New.java"),
         newFile);
     waitForFileEvents();
 

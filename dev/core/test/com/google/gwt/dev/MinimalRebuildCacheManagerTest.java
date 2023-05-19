@@ -18,11 +18,14 @@ import com.google.gwt.dev.cfg.PropertyCombinations.PermutationDescription;
 import com.google.gwt.dev.jjs.ast.JTypeOracle;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
-import com.google.gwt.thirdparty.guava.common.io.Files;
 
 import junit.framework.TestCase;
 
-import java.io.File;
+import org.apache.commons.io.FileUtils;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Map;
 
 /**
@@ -30,15 +33,15 @@ import java.util.Map;
  */
 public class MinimalRebuildCacheManagerTest extends TestCase {
 
-  public void testCacheChange() throws InterruptedException {
+  public void testCacheChange() throws InterruptedException, IOException {
     String moduleName = "com.google.FooModule";
     Map<String, String> initialCompilerOptions = ImmutableMap.of("option", "oldvalue");
     PermutationDescription permutationDescription = new PermutationDescription();
-    File cacheDir = Files.createTempDir();
+    Path cacheDir = Files.createTempDirectory(null);
 
     MinimalRebuildCacheManager minimalRebuildCacheManager =
         new MinimalRebuildCacheManager(
-            TreeLogger.NULL, cacheDir, initialCompilerOptions);
+            TreeLogger.NULL, cacheDir.toFile(), initialCompilerOptions);
 
     // Make sure we start with a blank slate.
     minimalRebuildCacheManager.deleteCaches();
@@ -65,7 +68,7 @@ public class MinimalRebuildCacheManagerTest extends TestCase {
     Map<String, String> newCompilerOptions = ImmutableMap.of("option", "newvalue");
     minimalRebuildCacheManager =
         new MinimalRebuildCacheManager(
-            TreeLogger.NULL, cacheDir, newCompilerOptions);
+            TreeLogger.NULL, cacheDir.toFile(), newCompilerOptions);
 
     // Now get the cache for FooModule under different compiler flags
     MinimalRebuildCache fooCacheNew = minimalRebuildCacheManager.getCache(moduleName,
@@ -84,7 +87,7 @@ public class MinimalRebuildCacheManagerTest extends TestCase {
     // Switch back to the initial option values and verify you get the same old cache.
     minimalRebuildCacheManager =
         new MinimalRebuildCacheManager(
-            TreeLogger.NULL, cacheDir, initialCompilerOptions);
+            TreeLogger.NULL, cacheDir.toFile(), initialCompilerOptions);
 
     // Now get the cache for FooModule under different under initial options values.
     MinimalRebuildCache fooCacheResetOptions = minimalRebuildCacheManager.getCache(
@@ -96,16 +99,16 @@ public class MinimalRebuildCacheManagerTest extends TestCase {
     assertTrue(fooCacheOld.hasSameContent(fooCacheResetOptions));
     minimalRebuildCacheManager.deleteCaches();
     minimalRebuildCacheManager.shutdown();
-    cacheDir.delete();
+    FileUtils.deleteDirectory(cacheDir.toFile());
   }
 
-  public void testReload() throws InterruptedException {
-    File cacheDir = Files.createTempDir();
+  public void testReload() throws InterruptedException, IOException {
+    Path cacheDir = Files.createTempDirectory(null);
 
     String moduleName = "com.google.FooModule";
     MinimalRebuildCacheManager minimalRebuildCacheManager =
         new MinimalRebuildCacheManager(
-            TreeLogger.NULL, cacheDir, ImmutableMap.<String, String>of());
+            TreeLogger.NULL, cacheDir.toFile(), ImmutableMap.<String, String>of());
     PermutationDescription permutationDescription = new PermutationDescription();
 
     // Make sure we start with a blank slate.
@@ -149,7 +152,7 @@ public class MinimalRebuildCacheManagerTest extends TestCase {
     // Start a new cache manager in the same folder.
     MinimalRebuildCacheManager reloadedMinimalRebuildCacheManager =
         new MinimalRebuildCacheManager(
-            TreeLogger.NULL, cacheDir, ImmutableMap.<String, String>of());
+            TreeLogger.NULL, cacheDir.toFile(), ImmutableMap.<String, String>of());
 
     // Reread the previously saved cache.
     MinimalRebuildCache reloadedCache =

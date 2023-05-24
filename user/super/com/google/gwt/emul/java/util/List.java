@@ -95,7 +95,9 @@ public interface List<E> extends Collection<E> {
     for (int i = 0; i < elements.length; i++) {
       checkNotNull(elements[i]);
     }
-    return Collections.unmodifiableList(Arrays.asList((E[]) ArrayHelper.unsafeClone(elements, 0, elements.length)));
+    return Collections.unmodifiableList(
+            Arrays.asList((E[]) ArrayHelper.unsafeClone(elements, 0, elements.length))
+    );
   }
 
   @JsMethod(name = "addAtIndex")

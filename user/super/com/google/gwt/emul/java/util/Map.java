@@ -38,7 +38,7 @@ public interface Map<K, V> {
 
   @JsIgnore
   static <K, V> Map<K, V> of() {
-    return Collections.emptyMap();
+    return Collections.unmodifiableMap(Collections.emptyMap());
   }
 
   @JsIgnore
@@ -235,9 +235,15 @@ public interface Map<K, V> {
       K key = entry.getKey();
       if (entry instanceof AbstractMap.NonNullableImmutableEntry) {
         // key/value cannot be null for this type, still need to check for collisions
-        checkArgument(map.put(key, entry.getValue()) == null, "Can't add multiple entries with the same key");
+        checkArgument(
+                map.put(key, entry.getValue()) == null,
+                "Can't add multiple entries with the same key"
+        );
       } else {
-        checkArgument(map.put(checkNotNull(key), checkNotNull(entry.getValue())) == null, "Can't add multiple entries with the same key");
+        checkArgument(
+                map.put(checkNotNull(key), checkNotNull(entry.getValue())) == null,
+                "Can't add multiple entries with the same key"
+        );
       }
     }
 

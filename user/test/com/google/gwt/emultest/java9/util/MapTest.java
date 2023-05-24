@@ -134,13 +134,20 @@ public class MapTest extends EmulTestBase {
       } catch (UnsupportedOperationException ignored) {
         // success
       }
+    }
 
-      try {
-        map.clear();
-        fail("Set should be unmodifiable: clear()");
-      } catch (UnsupportedOperationException ignored) {
-        // expected
-      }
+    try {
+      map.remove("not found");
+      fail("Map should be unmodifiable: remove(T)");
+    } catch (UnsupportedOperationException ignored) {
+      // success
+    }
+
+    try {
+      map.clear();
+      fail("Set should be unmodifiable: clear()");
+    } catch (UnsupportedOperationException ignored) {
+      // expected
     }
   }
 

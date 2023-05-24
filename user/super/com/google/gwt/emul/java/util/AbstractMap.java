@@ -63,7 +63,8 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   /**
    * Internal implementation for immutable entries with non-null keys and values.
    */
-  static final class NonNullableImmutableEntry<K, V> extends AbstractMap.SimpleImmutableEntry<K, V> {
+  static final class NonNullableImmutableEntry<K, V> extends
+          AbstractMap.SimpleImmutableEntry<K, V> {
     public NonNullableImmutableEntry(K key, V value) {
       super(checkNotNull(key), checkNotNull(value));
     }

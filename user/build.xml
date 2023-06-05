@@ -217,8 +217,25 @@
       </move>
       <move todir="${project.build}/jakarta-src/com/google/web/bindery/requestfactory/server/jakarta">
         <filelist dir="${project.build}/jakarta-src/com/google/web/bindery/requestfactory/server">
-          <file name="RequestFactoryServlet.java"/>
+          <file name="DeadEntityException.java"/>
+          <file name="DefaultExceptionHandler.java"/>
+          <file name="ExceptionHandler.java"/>
+          <file name="FindServiceLayer.java"/>
+          <file name="LocatorServiceLayer.java"/>
           <file name="Logging.java"/>
+          <file name="Pair.java"/>
+          <file name="ReflectiveServiceLayer.java"/>
+          <file name="RequestFactoryJarExtractor.java"/>
+          <file name="RequestFactoryServlet.java"/>
+          <file name="ReportableException.java"/>
+          <file name="RequestState.java"/>
+          <file name="Resolver.java"/>
+          <file name="ResolverServiceLayer.java"/>
+          <file name="ServiceLayerCache.java"/>
+          <file name="ServiceLayerDecorator.java"/>
+          <file name="ServiceLayer.java"/>
+          <file name="SimpleRequestProcessor.java"/>
+          <file name="UnexpectedException.java"/>
         </filelist>
         <filterchain>
           <tokenfilter>
@@ -228,10 +245,12 @@
           </tokenfilter>
         </filterchain>
       </move>
-      <replace dir="${project.build}/jakarta-src" token="com.google.gwt.user.server.rpc.SerializationPolicy" value="com.google.gwt.user.server.rpc.jakarta.SerializationPolicy"/>
-      <replace dir="${project.build}/jakarta-src" token="com.google.gwt.user.server.rpc.RPC" value="com.google.gwt.user.server.rpc.jakarta.RPC"/>
-      <replace dir="${project.build}/jakarta-src" token="com.google.gwt.user.server.rpc.XsrfProtect" value="com.google.gwt.user.server.rpc.jakarta.XsrfProtect"/>
       <replace dir="${project.build}/jakarta-src" token="com.google.gwt.core.server.ServerGwtBridge" value="com.google.gwt.core.server.jakarta.ServerGwtBridge"/>
+      <replace dir="${project.build}/jakarta-src" token="com.google.gwt.user.server.rpc.RPC;" value="com.google.gwt.user.server.rpc.jakarta.RPC;"/>
+      <replace dir="${project.build}/jakarta-src" token="com.google.gwt.user.server.rpc.SerializationPolicy" value="com.google.gwt.user.server.rpc.jakarta.SerializationPolicy"/>
+      <replace dir="${project.build}/jakarta-src" token="com.google.gwt.user.server.rpc.XsrfProtect" value="com.google.gwt.user.server.rpc.jakarta.XsrfProtect"/>
+      <replace dir="${project.build}/jakarta-src" token="com.google.web.bindery.requestfactory.server.Logging" value="com.google.web.bindery.requestfactory.server.jakarta.Logging"/>
+      <replace dir="${project.build}/jakarta-src" token="com.google.web.bindery.requestfactory.server.SimpleRequestProcessor" value="com.google.web.bindery.requestfactory.server.jakarta.SimpleRequestProcessor"/>
 
       <gwt.javac
               srcdir="${project.build}/jakarta-src"

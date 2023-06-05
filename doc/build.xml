@@ -84,7 +84,7 @@
       </filelist>
     </copy>
     <replace dir="${project.build}/javadoc-src" token="javax.servlet" value="jakarta.servlet"/>
-    <replace dir="${project.build}/javadoc-src" token="package com.google.gwt.user.server.rpc" value="package com.google.gwt.user.server.rpc.jakarta"/>
+    <replace dir="${project.build}/javadoc-src" token="package com.google.gwt.user.server.rpc;" value="package com.google.gwt.user.server.rpc.jakarta;"/>
     <replace dir="${project.build}/javadoc-src" token="package com.google.gwt.user.server;" value="package com.google.gwt.user.server.jakarta;"/>
     <replace dir="${project.build}/javadoc-src" token="package com.google.gwt.core.server" value="package com.google.gwt.core.server.jakarta"/>
     <replace dir="${project.build}/javadoc-src" token="package com.google.gwt.logging.server" value="package com.google.gwt.logging.server.jakarta"/>

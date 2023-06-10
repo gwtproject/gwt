@@ -172,6 +172,7 @@ public class MapTest extends EmulTestBase {
     });
   }
 
+  @SuppressWarnings("DuplicateMapKeys")
   public void testOfEntries() {
     Map<String, Integer> map = Map.ofEntries(
         Map.entry("a", 1),

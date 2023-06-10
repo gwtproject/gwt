@@ -181,7 +181,6 @@
                  -Xep:ComparableType:OFF
                  -Xep:DoNotCall:OFF
                  -Xep:BadAnnotationImplementation:OFF
-                 -Xep:DuplicateMapKeys:OFF
                ">
       <classpath>
         <pathelement location="${javac.out}"/>
@@ -214,7 +213,6 @@
                  -Xep:ComparableType:OFF
                  -Xep:DoNotCall:OFF
                  -Xep:BadAnnotationImplementation:OFF
-                 -Xep:DuplicateMapKeys:OFF
                ">
       <classpath>
         <pathelement location="${javac.junit.out}"/>

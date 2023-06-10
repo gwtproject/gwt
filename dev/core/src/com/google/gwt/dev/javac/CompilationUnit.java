@@ -66,7 +66,7 @@ public abstract class CompilationUnit implements Serializable {
 
       public AnonymousClassVisitor() {
 
-        this.mv = new org.objectweb.asm.MethodVisitor(Opcodes.ASM7, this.mv) {
+        this.mv = new org.objectweb.asm.MethodVisitor(Opcodes.ASM9, this.mv) {
           @Override
           public void visitCode() {
             ++sawCode;

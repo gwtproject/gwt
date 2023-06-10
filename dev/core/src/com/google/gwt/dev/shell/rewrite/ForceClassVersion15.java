@@ -25,7 +25,7 @@ import org.objectweb.asm.Opcodes;
 class ForceClassVersion15 extends ClassVisitor {
 
   public ForceClassVersion15(ClassVisitor v) {
-    super(Opcodes.ASM7, v);
+    super(Opcodes.ASM9, v);
   }
 
   @Override

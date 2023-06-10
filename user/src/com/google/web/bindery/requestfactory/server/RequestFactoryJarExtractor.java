@@ -352,7 +352,7 @@ public class RequestFactoryJarExtractor {
 
     public AnnotationProcessor(String sourceType, AnnotationVisitor av) {
       // TODO(rluble): should we chain av to super here?
-      super(Opcodes.ASM7);
+      super(Opcodes.ASM9);
       this.sourceType = sourceType;
       this.av = av;
     }
@@ -386,7 +386,7 @@ public class RequestFactoryJarExtractor {
     private String sourceType;
 
     public ClassProcessor(String sourceType, ClassVisitor cv, State state) {
-      super(Opcodes.ASM7, cv);
+      super(Opcodes.ASM9, cv);
       this.sourceType = sourceType;
       this.state = state;
     }
@@ -519,7 +519,7 @@ public class RequestFactoryJarExtractor {
 
     public FieldProcessor(String sourceType, FieldVisitor fv) {
       // TODO(rluble): Should we chain fv to super here?
-      super(Opcodes.ASM7);
+      super(Opcodes.ASM9);
       this.sourceType = sourceType;
       this.fv = fv;
     }
@@ -541,7 +541,7 @@ public class RequestFactoryJarExtractor {
     private final String sourceType;
 
     public MethodProcessor(String sourceType, MethodVisitor mv) {
-      super(Opcodes.ASM7, mv);
+      super(Opcodes.ASM9, mv);
       this.sourceType = sourceType;
     }
 
@@ -630,7 +630,7 @@ public class RequestFactoryJarExtractor {
    */
   private class NativeMethodDefanger extends ClassVisitor {
     public NativeMethodDefanger(ClassVisitor cv) {
-      super(Opcodes.ASM7, cv);
+      super(Opcodes.ASM9, cv);
     }
 
     @Override

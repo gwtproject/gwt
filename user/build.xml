@@ -232,6 +232,7 @@
       <!-- add an extra wildcard import to relocated rpc/rf classes that need to reference existing types -->
       <replace file="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/jakarta/AbstractXsrfProtectedServiceServlet.java" token="${line.separator}/**" value="import com.google.gwt.user.server.rpc.*;${line.separator}${line.separator}/**" />
       <replace file="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/jakarta/RPC.java" token="${line.separator}/**" value="import com.google.gwt.user.server.rpc.*;${line.separator}${line.separator}/**" />
+      <replace file="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/jakarta/RPC.java" token="com.google.gwt.examples.rpc.server.AdvancedExample" value="com.google.gwt.examples.rpc.server.jakarta.AdvancedExample" />
       <replace file="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/jakarta/RemoteServiceServlet.java" token="${line.separator}/**" value="import com.google.gwt.user.server.rpc.*;${line.separator}${line.separator}/**" />
       <replace file="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/jakarta/SerializationPolicyClient.java" token="${line.separator}/**" value="import com.google.gwt.user.server.rpc.*;${line.separator}${line.separator}/**" />
       <replace file="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/jakarta/AbstractRemoteServiceServlet.java" token="${line.separator}/**" value="import com.google.gwt.user.server.rpc.*;${line.separator}${line.separator}/**" />

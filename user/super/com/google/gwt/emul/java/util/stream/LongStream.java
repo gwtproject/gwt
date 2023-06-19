@@ -164,6 +164,30 @@ public interface LongStream extends BaseStream<Long, LongStream> {
     return StreamSupport.longStream(spliterator, false);
   }
 
+  static LongStream iterate(long seed, LongPredicate hasNext, LongUnaryOperator f) {
+    Spliterator.OfLong spliterator =
+        new Spliterators.AbstractLongSpliterator(
+            Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED) {
+          private long next = seed;
+          private boolean terminated = false;
+
+          @Override
+          public boolean tryAdvance(LongConsumer action) {
+            if (terminated) {
+              return false;
+            }
+            if (!hasNext.test(next)) {
+              terminated = true;
+              return false;
+            }
+            action.accept(next);
+            next = f.applyAsLong(next);
+            return true;
+          }
+        };
+    return StreamSupport.longStream(spliterator, false);
+  }
+
   static LongStream of(long... values) {
     return Arrays.stream(values);
   }
@@ -231,6 +255,20 @@ public interface LongStream extends BaseStream<Long, LongStream> {
 
   LongStream distinct();
 
+  default LongStream dropWhile(LongPredicate predicate) {
+    return filter(new LongPredicate() {
+      private boolean drop = true;
+      @Override
+      public boolean test(long value) {
+        if (!drop) {
+          return true;
+        }
+        drop = predicate.test(value);
+        return !drop;
+      }
+    });
+  }
+
   LongStream filter(LongPredicate predicate);
 
   OptionalLong findAny();
@@ -284,6 +322,20 @@ public interface LongStream extends BaseStream<Long, LongStream> {
   long sum();
 
   LongSummaryStatistics summaryStatistics();
+
+  default LongStream takeWhile(LongPredicate predicate) {
+    return filter(new LongPredicate() {
+      private boolean take = true;
+      @Override
+      public boolean test(long value) {
+        if (!take) {
+          return false;
+        }
+        take = predicate.test(value);
+        return take;
+      }
+    });
+  }
 
   long[] toArray();
 }

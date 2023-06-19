@@ -165,6 +165,30 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
     return StreamSupport.stream(spliterator, false);
   }
 
+  static <T> Stream<T> iterate(T seed, Predicate<? super T> hasNext, UnaryOperator<T> f) {
+    AbstractSpliterator<T> spliterator =
+        new Spliterators.AbstractSpliterator<T>(
+            Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED) {
+          private T next = seed;
+          private boolean terminated = false;
+
+          @Override
+          public boolean tryAdvance(Consumer<? super T> action) {
+            if (terminated) {
+              return false;
+            }
+            if (!hasNext.test(next)) {
+              terminated = true;
+              return false;
+            }
+            action.accept(next);
+            next = f.apply(next);
+            return true;
+          }
+        };
+    return StreamSupport.stream(spliterator, false);
+  }
+
   static <T> Stream<T> of(T t) {
     // TODO consider a splittable that returns only a single value, either for use here or in the
     //      singleton collection types
@@ -173,6 +197,14 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
 
   static <T> Stream<T> of(T... values) {
     return Arrays.stream(values);
+  }
+
+  static <T> Stream<T> ofNullable(T t) {
+    if (t == null) {
+      return empty();
+    } else {
+      return of(t);
+    }
   }
 
   boolean allMatch(Predicate<? super T> predicate);
@@ -187,6 +219,20 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
   long count();
 
   Stream<T> distinct();
+
+  default Stream<T> dropWhile(Predicate<? super T> predicate) {
+    return filter(new Predicate<T>() {
+      private boolean drop = true;
+      @Override
+      public boolean test(T t) {
+        if (!drop) {
+          return true;
+        }
+        drop = predicate.test(t);
+        return !drop;
+      }
+    });
+  }
 
   Stream<T> filter(Predicate<? super T> predicate);
 
@@ -235,6 +281,20 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
   Stream<T> sorted();
 
   Stream<T> sorted(Comparator<? super T> comparator);
+
+  default Stream<T> takeWhile(Predicate<? super T> predicate) {
+    return filter(new Predicate<T>() {
+      private boolean take = true;
+      @Override
+      public boolean test(T t) {
+        if (!take) {
+          return false;
+        }
+        take = predicate.test(t);
+        return take;
+      }
+    });
+  }
 
   Object[] toArray();
 

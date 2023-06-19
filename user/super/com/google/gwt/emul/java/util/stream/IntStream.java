@@ -166,6 +166,30 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
     return StreamSupport.intStream(spliterator, false);
   }
 
+  static IntStream iterate(int seed, IntPredicate hasNext, IntUnaryOperator f) {
+    Spliterator.OfInt spliterator =
+        new Spliterators.AbstractIntSpliterator(
+            Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED) {
+          private int next = seed;
+          private boolean terminated = false;
+
+          @Override
+          public boolean tryAdvance(IntConsumer action) {
+            if (terminated) {
+              return false;
+            }
+            if (!hasNext.test(next)) {
+              terminated = true;
+              return false;
+            }
+            action.accept(next);
+            next = f.applyAsInt(next);
+            return true;
+          }
+        };
+    return StreamSupport.intStream(spliterator, false);
+  }
+
   static IntStream of(int... values) {
     return Arrays.stream(values);
   }
@@ -235,6 +259,20 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
 
   IntStream distinct();
 
+  default IntStream dropWhile(IntPredicate predicate) {
+    return filter(new IntPredicate() {
+      private boolean drop = true;
+      @Override
+      public boolean test(int value) {
+        if (!drop) {
+          return true;
+        }
+        drop = predicate.test(value);
+        return !drop;
+      }
+    });
+  }
+
   IntStream filter(IntPredicate predicate);
 
   OptionalInt findAny();
@@ -288,6 +326,20 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
   int sum();
 
   IntSummaryStatistics summaryStatistics();
+
+  default IntStream takeWhile(IntPredicate predicate) {
+    return filter(new IntPredicate() {
+      private boolean take = true;
+      @Override
+      public boolean test(int value) {
+        if (!take) {
+          return false;
+        }
+        take = predicate.test(value);
+        return take;
+      }
+    });
+  }
 
   int[] toArray();
 }

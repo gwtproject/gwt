@@ -162,6 +162,30 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
     return StreamSupport.doubleStream(spliterator, false);
   }
 
+  static DoubleStream iterate(double seed, DoublePredicate hasNext, DoubleUnaryOperator f) {
+    Spliterator.OfDouble spliterator =
+        new Spliterators.AbstractDoubleSpliterator(
+            Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED) {
+          private double next = seed;
+          private boolean terminated = false;
+
+          @Override
+          public boolean tryAdvance(DoubleConsumer action) {
+            if (terminated) {
+              return false;
+            }
+            if (!hasNext.test(next)) {
+              terminated = true;
+              return false;
+            }
+            action.accept(next);
+            next = f.applyAsDouble(next);
+            return true;
+          }
+        };
+    return StreamSupport.doubleStream(spliterator, false);
+  }
+
   static DoubleStream of(double... values) {
     return Arrays.stream(values);
   }
@@ -184,6 +208,20 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
   long count();
 
   DoubleStream distinct();
+
+  default DoubleStream dropWhile(DoublePredicate predicate) {
+    return filter(new DoublePredicate() {
+      private boolean drop = true;
+      @Override
+      public boolean test(double value) {
+        if (!drop) {
+          return true;
+        }
+        drop = predicate.test(value);
+        return !drop;
+      }
+    });
+  }
 
   DoubleStream filter(DoublePredicate predicate);
 
@@ -238,6 +276,20 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
   double sum();
 
   DoubleSummaryStatistics summaryStatistics();
+
+  default DoubleStream takeWhile(DoublePredicate predicate) {
+    return filter(new DoublePredicate() {
+      private boolean take = true;
+      @Override
+      public boolean test(double value) {
+        if (!take) {
+          return false;
+        }
+        take = predicate.test(value);
+        return take;
+      }
+    });
+  }
 
   double[] toArray();
 }

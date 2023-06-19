@@ -44,9 +44,7 @@
         <file name="JsonLogRecordServerUtil.java"/>
         <file name="RemoteLoggingServiceImpl.java"/>
         <file name="package-info.java"/>
-        <file name="package-info.java"/>
         <file name="RemoteLoggingServiceUtil.java"/>
-        <file name="package-info.java"/>
       </filelist>
     </copy>
     <copy todir="${project.build}/javadoc-src/com/google/gwt/core/server/jakarta" encoding="${javac.encoding}">
@@ -58,11 +56,13 @@
       </filelist>
     </copy>
     <copy file="${gwt.root}/user/src/com/google/gwt/user/server/Util.java" tofile="${project.build}/javadoc-src/com/google/gwt/user/server/jakarta/Util.java" encoding="${javac.encoding}"/>
+    <copy file="${gwt.root}/user/src/com/google/gwt/user/server/package-info.java" tofile="${project.build}/javadoc-src/com/google/gwt/user/server/jakarta/package-info.java" encoding="${javac.encoding}"/>
     <copy todir="${project.build}/javadoc-src/com/google/gwt/user/server/rpc/jakarta" encoding="${javac.encoding}">
       <filelist dir="${gwt.root}/user/src/com/google/gwt/user/server/rpc">
         <file name="AbstractRemoteServiceServlet.java"/>
         <file name="AbstractXsrfProtectedServiceServlet.java"/>
         <file name="NoXsrfProtect.java"/>
+        <file name="package-info.java"/>
         <file name="RemoteServiceServlet.java"/>
         <file name="RPCRequest.java"/>
         <file name="RPCServletUtils.java"/>
@@ -75,7 +75,6 @@
         <file name="XsrfProtectedServiceServlet.java"/>
         <file name="XsrfTokenServiceServlet.java"/>
         <file name="XsrfProtect.java"/>
-        <file name="package-info.java"/>
       </filelist>
     </copy>
     <copy todir="${project.build}/javadoc-src/com/google/gwt/examples/rpc/server/jakarta" encoding="${javac.encoding}">

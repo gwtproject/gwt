@@ -10,7 +10,6 @@
   <property.ensure name="gwt.user.bin" location="${gwt.user.build}/bin" />
   <property.ensure name="gwt.user-jakarta.bin" location="${gwt.user.build}/bin-jakarta" />
   <property.ensure name="gwt.user-jakarta.src" location="${gwt.user.build}/jakarta-src" />
-
   <property name="project.lib.deps"
       location="${gwt.build.lib}/gwt-${ant.project.name}-deps.jar" />
 

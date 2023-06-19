@@ -148,13 +148,6 @@
           unless="compile.complete">
     <sequential>
       <copy todir="${project.build}/jakarta-src" encoding="${javac.encoding}">
-        <fileset dir="src" />
-        <filterchain>
-          <tokenfilter>
-            <replacestring from="javax.servlet" to="jakarta.servlet"/>
-          </tokenfilter>
-        </filterchain>
-      </copy>
       <move todir="${project.build}/jakarta-src/com/google/gwt/core/server/jakarta">
         <filelist dir="${project.build}/jakarta-src/com/google/gwt/core/server">
           <file name="GwtServletBase.java"/>
@@ -273,7 +266,6 @@
       <replace dir="${project.build}/jakarta-src" token="com.google.gwt.user.server.rpc.XsrfProtect" value="com.google.gwt.user.server.rpc.jakarta.XsrfProtect"/>
       <replace dir="${project.build}/jakarta-src" token="com.google.web.bindery.requestfactory.server.Logging" value="com.google.web.bindery.requestfactory.server.jakarta.Logging"/>
       <replace dir="${project.build}/jakarta-src" token="com.google.web.bindery.requestfactory.server.SimpleRequestProcessor" value="com.google.web.bindery.requestfactory.server.jakarta.SimpleRequestProcessor"/>
-
       <gwt.javac
               srcdir="${project.build}/jakarta-src"
               destdir="${javac.out}-jakarta"

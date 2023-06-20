@@ -18,6 +18,8 @@ package java.util;
 import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
+import java.util.stream.Collectors;
+
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsType;
 
@@ -97,5 +99,10 @@ public interface Set<E> extends Collection<E> {
   @Override
   default Spliterator<E> spliterator() {
     return Spliterators.spliterator(this, Spliterator.DISTINCT);
+  }
+
+  static <E> Set<E> copyOf(Collection<? extends E> coll) {
+    // TODO if the given collection is immutable and has no nulls, return it
+    return coll.stream().collect(Collectors.toUnmodifiableSet());
   }
 }

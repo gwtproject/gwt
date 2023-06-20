@@ -96,7 +96,7 @@ public class SetTest extends EmulTestBase {
     assertIAE("Set.of(...)", () -> Set.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "a"));
   }
 
-  protected static void assertIsImmutableSetOf(Set<String> set, String... contents) {
+  public static void assertIsImmutableSetOf(Set<String> set, String... contents) {
     assertEquals(contents.length, set.size());
     for (int i = 0; i < contents.length; i++) {
       assertTrue(set.contains(contents[i]));

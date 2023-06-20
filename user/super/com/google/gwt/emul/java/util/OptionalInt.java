@@ -90,6 +90,10 @@ public final class OptionalInt {
     return present ? ref : other.getAsInt();
   }
 
+  public int orElseThrow() {
+    return getAsInt();
+  }
+
   public <X extends Throwable> int orElseThrow(Supplier<X> exceptionSupplier) throws X {
     if (present) {
       return ref;

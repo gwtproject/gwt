@@ -90,6 +90,10 @@ public final class OptionalLong {
     return present ? ref : other.getAsLong();
   }
 
+  public long orElseThrow() {
+    return getAsLong();
+  }
+
   public <X extends Throwable> long orElseThrow(Supplier<X> exceptionSupplier) throws X {
     if (present) {
       return ref;

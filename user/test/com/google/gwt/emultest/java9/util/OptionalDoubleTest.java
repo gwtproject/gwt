@@ -37,6 +37,7 @@ public class OptionalDoubleTest extends EmulTestBase {
     OptionalDouble.empty().ifPresentOrElse(ignore -> {
       fail("Should not call present action");
     }, () -> called[0]++);
+    assertEquals(1, called[0]);
   }
 
   public void testStream() {

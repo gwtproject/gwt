@@ -339,6 +339,11 @@ public final class Collectors {
     return toCollection(ArrayList::new);
   }
 
+  public static <T> Collector<T, ?, List<T>> toUnmodifiableList() {
+    Collector<T, ?, List<T>> mapping = mapping(Objects::requireNonNull, toList());
+    return collectingAndThen(mapping, Collections::unmodifiableList);
+  }
+
   public static <T, K, U> Collector<T, ?, Map<K, U>> toMap(
       final Function<? super T, ? extends K> keyMapper,
       final Function<? super T, ? extends U> valueMapper) {
@@ -355,6 +360,27 @@ public final class Collectors {
       Function<? super T, ? extends U> valueMapper,
       BinaryOperator<U> mergeFunction) {
     return toMap(keyMapper, valueMapper, mergeFunction, HashMap::new);
+  }
+
+  public static <T, K, U> Collector<T, ?, Map<K, U>> toUnmodifiableMap(Function<? super T, ?
+      extends K> keyMapper, Function<? super T, ? extends U> valueMapper) {
+    return collectingAndThen(
+            toMap(disallowNulls(keyMapper), disallowNulls(valueMapper)),
+            Collections::unmodifiableMap
+    );
+  }
+
+  public static <T, K, U> Collector<T, ?, Map<K, U>> toUnmodifiableMap(Function<? super T, ?
+      extends K> keyMapper, Function<? super T, ? extends U> valueMapper, BinaryOperator<U>
+                                                                            mergeFunction) {
+    return collectingAndThen(
+            toMap(disallowNulls(keyMapper), disallowNulls(valueMapper), mergeFunction),
+            Collections::unmodifiableMap
+    );
+  }
+
+  private static <T, R> Function<T, R> disallowNulls(Function<T, R> func) {
+    return func.andThen(Objects::requireNonNull);
   }
 
   public static <T, K, U, M extends Map<K, U>> Collector<T, ?, M> toMap(
@@ -387,6 +413,11 @@ public final class Collectors {
         s -> s,
         Collector.Characteristics.UNORDERED, Collector.Characteristics.IDENTITY_FINISH
     );
+  }
+
+  public static <T> Collector<T, ?, Set<T>> toUnmodifiableSet() {
+    Collector<T, ?, Set<T>> mapping = mapping(Objects::requireNonNull, toSet());
+    return collectingAndThen(mapping, Collections::unmodifiableSet);
   }
 
   private static <T, D, A> D streamAndCollect(Collector<? super T, A, D> downstream, List<T> list) {

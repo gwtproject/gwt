@@ -148,6 +148,13 @@
           unless="compile.complete">
     <sequential>
       <copy todir="${project.build}/jakarta-src" encoding="${javac.encoding}">
+        <fileset dir="src" />
+        <filterchain>
+          <tokenfilter>
+            <replacestring from="javax.servlet" to="jakarta.servlet"/>
+          </tokenfilter>
+        </filterchain>
+      </copy>
       <move todir="${project.build}/jakarta-src/com/google/gwt/core/server/jakarta">
         <filelist dir="${project.build}/jakarta-src/com/google/gwt/core/server">
           <file name="GwtServletBase.java"/>

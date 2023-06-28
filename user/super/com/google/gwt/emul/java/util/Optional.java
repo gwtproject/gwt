@@ -110,7 +110,7 @@ public final class Optional<T> {
     if (isPresent()) {
       return this;
     } else {
-      return (Optional) supplier.get();
+      return (Optional) checkNotNull(supplier.get());
     }
   }
 

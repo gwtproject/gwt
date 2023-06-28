@@ -55,6 +55,18 @@ public class OptionalTest extends EmulTestBase {
 
     or = Optional.<String>empty().or(() -> Optional.empty());
     assertFalse(or.isPresent());
+
+    Optional<Object> empty = Optional.empty();
+    Optional<Object> present = Optional.of("asdf");
+    assertNPE("empty().or(null)", () -> {
+      empty.or(null);
+    });
+    assertNPE("present.or(null)", () -> {
+      present.or(null);
+    });
+    assertNPE("empty.or(() -> null)", () -> {
+      empty.or(() -> null);
+    });
   }
 
   public void testStream() {

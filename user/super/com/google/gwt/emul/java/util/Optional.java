@@ -106,6 +106,7 @@ public final class Optional<T> {
   }
 
   public Optional<T> or(Supplier<? extends Optional<? extends T>> supplier) {
+    checkNotNull(supplier);
     if (isPresent()) {
       return this;
     } else {

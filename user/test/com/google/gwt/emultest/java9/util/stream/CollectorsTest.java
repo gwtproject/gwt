@@ -40,6 +40,15 @@ public class CollectorsTest extends EmulTestBase {
     applyItems(Arrays.asList("a", "b"), flatMapping, Collections.singletonList("a"),
         Collections.singletonList("b"));
     applyItems(Arrays.asList("c", "d"), flatMapping, Collections.emptyList(), Arrays.asList("c", "d"));
+
+    Collector<Collection<String>, ?, List<String>> flatMappingToNull = flatMapping(items -> {
+      if (items.size() % 2 == 0) {
+        // Return null instead of  empty
+        return null;
+      }
+      return items.stream();
+    }, toList());
+    applyItems(Arrays.asList("a"), flatMappingToNull, Arrays.asList("a"), Arrays.asList("b", "c"));
   }
 
   public void testFiltering() {

@@ -175,7 +175,11 @@ public final class Collectors {
     return new CollectorImpl<>(
         downstream.supplier(),
         (A a, T t) -> {
-            mapper.apply(t).forEach(u -> {
+            Stream<? extends U> stream = mapper.apply(t);
+            if (stream == null) {
+              return;
+            }
+            stream.forEach(u -> {
               downstream.accumulator().accept(a, u);
             });
         },

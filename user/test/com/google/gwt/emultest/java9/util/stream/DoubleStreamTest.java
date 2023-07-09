@@ -24,9 +24,15 @@ import java.util.stream.DoubleStream;
  */
 public class DoubleStreamTest extends EmulTestBase {
   public void testIterate() {
+    // terminating stream, based on a predicate
     assertEquals(
         new double[] {10, 11, 12, 13, 14},
         DoubleStream.iterate(0, i -> i < 15, i -> i + 1).skip(10).toArray());
+
+    // infinite stream, verify that it is limited by a downstream step
+    assertEquals(
+        new double[] {0, 1, 2, 3, 4},
+        DoubleStream.iterate(0, i -> i + 1).limit(5).toArray());
   }
 
   public void testTakeWhile() {
@@ -35,6 +41,11 @@ public class DoubleStreamTest extends EmulTestBase {
         DoubleStream.of(1, 2, 3, 4, 5).takeWhile(i -> i < 3).toArray()
     );
     assertEquals(0, DoubleStream.of(1, 2, 3, 4, 5).takeWhile(i -> i > 2).count());
+
+    assertEquals(
+            new double[] {0, 1, 2, 3, 4},
+            DoubleStream.iterate(0, i -> i + 1).takeWhile(i -> i < 5).toArray()
+    );
   }
 
   public void testDropWhile() {
@@ -45,6 +56,12 @@ public class DoubleStreamTest extends EmulTestBase {
     assertEquals(
         new double[] {1, 2, 3, 4, 5},
         DoubleStream.of(1, 2, 3, 4, 5).dropWhile(i -> i > 2).toArray()
+    );
+
+    // pass an infinite stream to dropWhile, ensure it handles it
+    assertEquals(
+            new double[] {6, 7, 8, 9, 10},
+            DoubleStream.iterate(0, i -> i + 1).dropWhile(i -> i < 5).limit(5).toArray()
     );
   }
 }

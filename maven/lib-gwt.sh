@@ -64,7 +64,7 @@ function maven-gwt() {
   GWT_EXTRACT_DIR=`ls $RANDOM_DIR | tail -n1`
   GWT_EXTRACT_DIR=$RANDOM_DIR/$GWT_EXTRACT_DIR
 
-  JAVADOC_FILE_PATH=$RANDOM_DIR/gwt-javadoc.jar #TODO also wrong for jakarta
+  JAVADOC_FILE_PATH=$RANDOM_DIR/gwt-javadoc.jar
   [ -d $GWT_EXTRACT_DIR/doc/javadoc ] && jar cf $JAVADOC_FILE_PATH -C $GWT_EXTRACT_DIR/doc/javadoc .
 
   JAVADOC_JAKARTA_FILE_PATH=$RANDOM_DIR/gwt-jakarta-javadoc.jar

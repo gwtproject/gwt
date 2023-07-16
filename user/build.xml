@@ -160,6 +160,8 @@
         <filterchain>
           <tokenfilter>
             <replacestring from="javax.servlet" to="jakarta.servlet"/>
+            <replacestring from="package com.google.gwt.core.server" to="package com.google.gwt.core.server.jakarta"/>
+            <replaceregex pattern="^/\*\*" replace="import com.google.gwt.core.server.ServerGwtBridge;${line.separator}${line.separator}/**" />
           </tokenfilter>
         </filterchain>
       </move>

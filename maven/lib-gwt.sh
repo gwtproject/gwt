@@ -67,6 +67,13 @@ function maven-gwt() {
   JAVADOC_FILE_PATH=$RANDOM_DIR/gwt-javadoc.jar #TODO also wrong for jakarta
   [ -d $GWT_EXTRACT_DIR/doc/javadoc ] && jar cf $JAVADOC_FILE_PATH -C $GWT_EXTRACT_DIR/doc/javadoc .
 
+  JAVADOC_JAKARTA_FILE_PATH=$RANDOM_DIR/gwt-jakarta-javadoc.jar
+  if [[ -d $GWT_EXTRACT_DIR/doc/javadoc ]]; then
+      cp -r $GWT_EXTRACT_DIR/doc/javadoc $GWT_EXTRACT_DIR/doc/javadoc-jakarta
+      find $GWT_EXTRACT_DIR/doc/javadoc-jakarta -type f -exec sed -i 's/javax.servlet/jakarta.servlet/g' {} +
+      jar cf $JAVADOC_JAKARTA_FILE_PATH -C $GWT_EXTRACT_DIR/doc/javadoc-jakarta .
+  fi
+
   # Generate POMs with correct version
   for template in `find $pomDir -name pom-template.xml`
   do
@@ -118,12 +125,15 @@ function maven-gwt() {
     # If there are no sources, use gwt-user sources.
     # This is a bit hacky but Sonatype requires a
     # source jar for Central, and lack of sources
-    # should only happen for gwt-servlet and
-    # gwt-servlet-jakarta which are basically a
+    # should only happen for gwt-servlet which are basically a
     # subset of gwt-user.
-    #TODO this is wrong for jakarta sources
+    # For servlet-jakarta, a seperate source file is built.
     if [ ! -f $SOURCES_PATH_FILE ]; then
       SOURCES_PATH_FILE=$GWT_EXTRACT_DIR/gwt-user-sources.jar
+    fi
+
+    if [[ $i == "servlet-jakarta" ]]; then
+      JAVADOC_FILE_PATH=$JAVADOC_JAKARTA_FILE_PATH
     fi
 
     maven-deploy-file $mavenRepoUrl $mavenRepoId "$CUR_FILE" $gwtPomFile "$JAVADOC_FILE_PATH" "$SOURCES_PATH_FILE" || die

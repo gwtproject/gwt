@@ -251,6 +251,7 @@
         <jvmarg value="-Demma.coverage.out.merge=true"/>
         <jvmarg value="-Dcom.google.gwt.junit.reportPath=reports"/>
         <jvmarg line="@{test.jvmargs}"/>
+        <jvmarg line="--add-opens=java.base/java.lang=ALL-UNNAMED" unless:true="${isJava8}"/>
         <sysproperty key="gwt.args" value="@{test.args}"/>
         <sysproperty key="java.awt.headless" value="true"/>
         <classpath>

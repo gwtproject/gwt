@@ -53,7 +53,7 @@ import java.util.stream.Stream;
 public class JavaEmulSummaryDoclet implements Doclet {
 
     public static final String OPT_OUTFILE = "-outfile";
-    private static final String JAVADOC_URL = "https://docs.oracle.com/javase/8/docs/api/";
+    private static final String JAVADOC_URL = "https://docs.oracle.com/en/java/javase/11/docs/api/";
 
     private Reporter reporter;
     private String outputFile;

@@ -110,9 +110,6 @@
       <arg value="-Xdoclint:none" />
       <classpath refid="USER_CLASS_PATH" />
       <sourcepath refid="USER_SOURCE_PATH" />
-      <fileset dir="${project.build}/javadoc-src">
-        <include name="**" />
-      </fileset>
 
       <taglet name="com.google.doctool.custom.TipTaglet">
         <path refid="DOC_PATH" />

@@ -240,7 +240,7 @@
       <replace file="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/jakarta/AbstractRemoteServiceServlet.java" token="${line.separator}/**" value="import com.google.gwt.user.server.rpc.*;${line.separator}${line.separator}/**" />
       <replace file="${project.build}/jakarta-src/com/google/web/bindery/requestfactory/server/jakarta/RequestFactoryServlet.java" token="${line.separator}/**" value="import com.google.web.bindery.requestfactory.server.*;${line.separator}${line.separator}/**"/>
 
-      <!-- Compile a specific gwt-user jar just for jakarta -->
+      <!-- Compile a specific gwt-user jar just for jakarta, which will be only used then to produce gwt-servlet-jakarta.jar -->
       <gwt.javac
               srcdir="${project.build}/jakarta-src"
               destdir="${javac.out}-jakarta"
@@ -338,6 +338,8 @@
       <fileset dir="src" excludes="**/package.html"/>
       <fileset dir="super" excludes="**/package.html"/>
       <fileset dir="${javac.out}"/>
+      <!-- Copy jakarta-only sources as well, as gwt-user's sources are used for all other jars as well -->
+      <fileset dir="${project.build}/jakarta-src" />
       <zipfileset src="${gwt.tools.lib}/tomcat/tomcat-servlet-api-8.0.28.jar"
                   excludes="**/*.java"/>
       <zipfileset src="${gwt.tools.lib}/w3c/sac/sac-1.3.jar"/>

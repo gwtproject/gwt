@@ -27,6 +27,10 @@ public class StreamTest extends EmulTestBase {
     assertEquals(
         new Integer[] {10, 11, 12, 13, 14},
         Stream.iterate(0, i -> i < 15, i -> i + 1).skip(10).toArray(Integer[]::new));
+    // infinite stream, verify that it is limited by a downstream step
+    assertEquals(
+            new Integer[] {0, 1, 2, 3, 4},
+            Stream.iterate(0, i -> i + 1).limit(5).toArray());
   }
 
   public void testOfNullable() {
@@ -43,6 +47,11 @@ public class StreamTest extends EmulTestBase {
         Stream.of(1, 2, 3, 4, 5).takeWhile(i -> i < 3).toArray(Integer[]::new)
     );
     assertEquals(0, Stream.of(1, 2, 3, 4, 5).takeWhile(i -> i > 2).count());
+
+    assertEquals(
+            new Integer[] {0, 1, 2, 3, 4},
+            Stream.iterate(0, i -> i + 1).takeWhile(i -> i < 5).toArray()
+    );
   }
 
   public void testDropWhile() {
@@ -53,6 +62,12 @@ public class StreamTest extends EmulTestBase {
     assertEquals(
         new Integer[] {1, 2, 3, 4, 5},
         Stream.of(1, 2, 3, 4, 5).dropWhile(i -> i > 2).toArray(Integer[]::new)
+    );
+
+    // pass an infinite stream to dropWhile, ensure it handles it
+    assertEquals(
+            new Integer[] {5, 6, 7, 8, 9},
+            Stream.iterate(0, i -> i + 1).dropWhile(i -> i < 5).limit(5).toArray()
     );
   }
 }

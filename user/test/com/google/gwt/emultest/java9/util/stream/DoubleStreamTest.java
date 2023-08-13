@@ -60,7 +60,7 @@ public class DoubleStreamTest extends EmulTestBase {
 
     // pass an infinite stream to dropWhile, ensure it handles it
     assertEquals(
-            new double[] {6, 7, 8, 9, 10},
+            new double[] {5, 6, 7, 8, 9},
             DoubleStream.iterate(0, i -> i + 1).dropWhile(i -> i < 5).limit(5).toArray()
     );
   }

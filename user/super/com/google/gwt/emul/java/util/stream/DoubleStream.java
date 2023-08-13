@@ -210,17 +210,41 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
   DoubleStream distinct();
 
   default DoubleStream dropWhile(DoublePredicate predicate) {
-    return filter(new DoublePredicate() {
-      private boolean drop = true;
-      @Override
-      public boolean test(double value) {
-        if (!drop) {
-          return true;
-        }
-        drop = predicate.test(value);
-        return !drop;
-      }
-    });
+    Spliterator.OfDouble prev = spliterator();
+    Spliterator.OfDouble spliterator =
+            new Spliterators.AbstractDoubleSpliterator(
+                    prev.estimateSize(), prev.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+              private boolean drop = true;
+              private boolean found;
+
+              @Override
+              public boolean tryAdvance(DoubleConsumer action) {
+                found = false;
+                if (drop) {
+                  // drop items until we find one that matches
+                  while (drop && prev.tryAdvance((double item) -> {
+                    if (!predicate.test(item)) {
+                      drop = false;
+                      found = true;
+                      action.accept(item);
+                    }
+                  })) {
+                    // do nothing, work is done in tryAdvance
+                  }
+                  return found;
+                } else {
+                  // accept one item
+                  return prev.tryAdvance((double item) -> {
+                    found = true;
+                    action.accept(item);
+                  });
+                }
+
+                // only return true if we accepted at least one item
+//                return found;
+              }
+            };
+    return StreamSupport.doubleStream(spliterator, false);
   }
 
   DoubleStream filter(DoublePredicate predicate);
@@ -278,17 +302,32 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
   DoubleSummaryStatistics summaryStatistics();
 
   default DoubleStream takeWhile(DoublePredicate predicate) {
-    return filter(new DoublePredicate() {
-      private boolean take = true;
-      @Override
-      public boolean test(double value) {
-        if (!take) {
-          return false;
-        }
-        take = predicate.test(value);
-        return take;
-      }
-    });
+    Spliterator.OfDouble original = spliterator();
+    Spliterator.OfDouble spliterator =
+            new Spliterators.AbstractDoubleSpliterator(
+                    original.estimateSize(), original.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+              private boolean take = true;
+              private boolean found;
+
+              @Override
+              public boolean tryAdvance(DoubleConsumer action) {
+                found = false;
+                if (!take) {
+                  // already failed the check
+                  return false;
+                }
+                original.tryAdvance((double item) -> {
+                  if (predicate.test(item)) {
+                    found = true;
+                    action.accept(item);
+                  } else {
+                    take = false;
+                  }
+                });
+                return found;
+              }
+            };
+    return StreamSupport.doubleStream(spliterator, false);
   }
 
   double[] toArray();

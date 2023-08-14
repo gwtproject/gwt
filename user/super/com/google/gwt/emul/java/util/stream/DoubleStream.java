@@ -231,17 +231,12 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
                   })) {
                     // do nothing, work is done in tryAdvance
                   }
+                  // only return true if we accepted at least one item
                   return found;
                 } else {
-                  // accept one item
-                  return prev.tryAdvance((double item) -> {
-                    found = true;
-                    action.accept(item);
-                  });
+                  // accept one item, return result
+                  return prev.tryAdvance(action);
                 }
-
-                // only return true if we accepted at least one item
-//                return found;
               }
             };
     return StreamSupport.doubleStream(spliterator, false);

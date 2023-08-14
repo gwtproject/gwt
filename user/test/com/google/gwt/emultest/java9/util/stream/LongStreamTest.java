@@ -30,8 +30,8 @@ public class LongStreamTest extends EmulTestBase {
 
     // infinite stream, verify that it is limited by a downstream step
     assertEquals(
-            new long[] {0, 1, 2, 3, 4},
-            LongStream.iterate(0, i -> i + 1).limit(5).toArray());
+        new long[] {0, 1, 2, 3, 4},
+        LongStream.iterate(0, i -> i + 1).limit(5).toArray());
   }
 
   public void testTakeWhile() {
@@ -42,8 +42,8 @@ public class LongStreamTest extends EmulTestBase {
     assertEquals(0, LongStream.of(1, 2, 3, 4, 5).takeWhile(i -> i > 2).count());
 
     assertEquals(
-            new long[] {0, 1, 2, 3, 4},
-            LongStream.iterate(0, i -> i + 1).takeWhile(i -> i < 5).toArray()
+        new long[] {0, 1, 2, 3, 4},
+        LongStream.iterate(0, i -> i + 1).takeWhile(i -> i < 5).toArray()
     );
   }
 
@@ -59,8 +59,8 @@ public class LongStreamTest extends EmulTestBase {
 
     // pass an infinite stream to dropWhile, ensure it handles it
     assertEquals(
-            new long[] {5, 6, 7, 8, 9},
-            LongStream.iterate(0, i -> i + 1).dropWhile(i -> i < 5).limit(5).toArray()
+        new long[] {5, 6, 7, 8, 9},
+        LongStream.iterate(0, i -> i + 1).dropWhile(i -> i < 5).limit(5).toArray()
     );
   }
 }

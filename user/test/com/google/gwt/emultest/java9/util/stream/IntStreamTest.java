@@ -42,8 +42,8 @@ public class IntStreamTest extends EmulTestBase {
     assertEquals(0, IntStream.of(1, 2, 3, 4, 5).takeWhile(i -> i > 2).count());
 
     assertEquals(
-            new int[] {0, 1, 2, 3, 4},
-            IntStream.iterate(0, i -> i + 1).takeWhile(i -> i < 5).toArray()
+        new int[] {0, 1, 2, 3, 4},
+        IntStream.iterate(0, i -> i + 1).takeWhile(i -> i < 5).toArray()
     );
   }
 
@@ -59,8 +59,8 @@ public class IntStreamTest extends EmulTestBase {
 
     // pass an infinite stream to dropWhile, ensure it handles it
     assertEquals(
-            new int[] {5, 6, 7, 8, 9},
-            IntStream.iterate(0, i -> i + 1).dropWhile(i -> i < 5).limit(5).toArray()
+        new int[] {5, 6, 7, 8, 9},
+        IntStream.iterate(0, i -> i + 1).dropWhile(i -> i < 5).limit(5).toArray()
     );
   }
 }

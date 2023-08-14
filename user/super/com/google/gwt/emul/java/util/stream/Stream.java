@@ -223,33 +223,33 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
   default Stream<T> dropWhile(Predicate<? super T> predicate) {
     Spliterator<T> prev = spliterator();
     Spliterator<T> spliterator =
-            new Spliterators.AbstractSpliterator<T>(
-                    prev.estimateSize(), prev.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
-              private boolean drop = true;
-              private boolean found;
+        new Spliterators.AbstractSpliterator<T>(
+                prev.estimateSize(), prev.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+          private boolean drop = true;
+          private boolean found;
 
-              @Override
-              public boolean tryAdvance(Consumer<? super T> action) {
-                found = false;
-                if (drop) {
-                  // drop items until we find one that matches
-                  while (drop && prev.tryAdvance(item -> {
-                    if (!predicate.test(item)) {
-                      drop = false;
-                      found = true;
-                      action.accept(item);
-                    }
-                  })) {
-                    // do nothing, work is done in tryAdvance
-                  }
-                  // only return true if we accepted at least one item
-                  return found;
-                } else {
-                  // accept one item, return result
-                  return prev.tryAdvance(action);
+          @Override
+          public boolean tryAdvance(Consumer<? super T> action) {
+            found = false;
+            if (drop) {
+              // drop items until we find one that matches
+              while (drop && prev.tryAdvance(item -> {
+                if (!predicate.test(item)) {
+                  drop = false;
+                  found = true;
+                  action.accept(item);
                 }
+              })) {
+                // do nothing, work is done in tryAdvance
               }
-            };
+              // only return true if we accepted at least one item
+              return found;
+            } else {
+              // accept one item, return result
+              return prev.tryAdvance(action);
+            }
+          }
+        };
     return StreamSupport.stream(spliterator, false);
   }
 
@@ -304,29 +304,29 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
   default Stream<T> takeWhile(Predicate<? super T> predicate) {
     Spliterator<T> original = spliterator();
     Spliterator<T> spliterator =
-            new Spliterators.AbstractSpliterator<T>(
-                    original.estimateSize(), original.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
-              private boolean take = true;
-              private boolean found;
+        new Spliterators.AbstractSpliterator<T>(
+                original.estimateSize(), original.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+          private boolean take = true;
+          private boolean found;
 
-              @Override
-              public boolean tryAdvance(Consumer<? super T> action) {
-                found = false;
-                if (!take) {
-                  // already failed the check
-                  return false;
-                }
-                original.tryAdvance(item -> {
-                  if (predicate.test(item)) {
-                    found = true;
-                    action.accept(item);
-                  } else {
-                    take = false;
-                  }
-                });
-                return found;
+          @Override
+          public boolean tryAdvance(Consumer<? super T> action) {
+            found = false;
+            if (!take) {
+              // already failed the check
+              return false;
+            }
+            original.tryAdvance(item -> {
+              if (predicate.test(item)) {
+                found = true;
+                action.accept(item);
+              } else {
+                take = false;
               }
-            };
+            });
+            return found;
+          }
+        };
     return StreamSupport.stream(spliterator, false);
   }
 

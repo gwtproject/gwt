@@ -37,6 +37,7 @@ import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeLinkedList;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeSingleton;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeTreeMap;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeTreeSet;
+import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeUnmodifiable;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeVector;
 import com.google.gwt.user.client.rpc.TestSetValidator;
 
@@ -561,6 +562,15 @@ public class CollectionsTestServiceImpl extends RemoteServiceServlet implements
   public List<MarkerTypeSingleton> echoSingletonList(
       List<MarkerTypeSingleton> value) throws CollectionsTestServiceException {
     if (!TestSetValidator.isValidSingletonList(value)) {
+      throw new CollectionsTestServiceException();
+    }
+
+    return value;
+  }
+  @Override
+  public List<MarkerTypeUnmodifiable> echoUnmodifiableList(
+      List<MarkerTypeUnmodifiable> value) throws CollectionsTestServiceException {
+    if (!TestSetValidator.isValidUnmodifiableList(value)) {
       throw new CollectionsTestServiceException();
     }
 

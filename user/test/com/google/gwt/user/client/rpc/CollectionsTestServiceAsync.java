@@ -35,6 +35,7 @@ import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeLinkedList;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeSingleton;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeTreeMap;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeTreeSet;
+import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeUnmodifiable;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeVector;
 
 import java.sql.Time;
@@ -168,4 +169,8 @@ public interface CollectionsTestServiceAsync {
   // For Collections.singletonList()
   void echoSingletonList(List<MarkerTypeSingleton> value,
       AsyncCallback<List<MarkerTypeSingleton>> callback);
+
+  // For Collections.unmodifiableList()
+  void echoUnmodifiableList(List<MarkerTypeUnmodifiable> value,
+                         AsyncCallback<List<MarkerTypeUnmodifiable>> callback);
 }

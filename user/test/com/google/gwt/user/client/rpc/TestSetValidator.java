@@ -28,6 +28,7 @@ import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeIdentityHashMapVa
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeSingleton;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeTreeMap;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeTreeSet;
+import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeUnmodifiable;
 import com.google.gwt.user.client.rpc.TestSetFactory.SerializableDoublyLinkedNode;
 import com.google.gwt.user.client.rpc.TestSetFactory.SerializableGraphWithCFS;
 import com.google.gwt.user.client.rpc.TestSetFactory.SerializablePrivateNoArg;
@@ -817,6 +818,28 @@ public class TestSetValidator {
     }
     MarkerTypeSingleton singleton = (MarkerTypeSingleton) value;
     if (!"singleton".equals(singleton.getValue())) {
+      return false;
+    }
+    return true;
+  }
+
+  public static boolean isValidUnmodifiableList(List<MarkerTypeUnmodifiable> list) {
+    if (list == null) {
+      return false;
+    }
+    try {
+      list.add(new MarkerTypeUnmodifiable());
+      return false;
+    } catch (UnsupportedOperationException ignored) {
+      // expected
+    }
+    Object value = list.get(0);
+    // Perform instanceof check in case RPC did the wrong thing
+    if (!(value instanceof MarkerTypeUnmodifiable)) {
+      return false;
+    }
+    MarkerTypeSingleton singleton = (MarkerTypeSingleton) value;
+    if (!"unmodifiable".equals(singleton.getValue())) {
       return false;
     }
     return true;

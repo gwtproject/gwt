@@ -350,10 +350,6 @@ public class Collections {
     return s;
   }
 
-  /*
-   * TODO: make the unmodifiable collections serializable.
-   */
-
   static class UnmodifiableCollection<T> implements Collection<T>, Serializable {
     protected final Collection<? extends T> coll;
 

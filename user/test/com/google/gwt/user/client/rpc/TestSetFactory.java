@@ -22,6 +22,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.EnumMap;
@@ -311,6 +312,15 @@ public class TestSetFactory {
   public static final class MarkerTypeSingleton extends MarkerBase {
     MarkerTypeSingleton() {
       super("singleton");
+    }
+  }
+  /**
+   * A single-use marker type to independently check type parameter exposure in
+   * unmodifiable collections.
+   */
+  public static final class MarkerTypeUnmodifiable extends MarkerBase {
+    MarkerTypeUnmodifiable() {
+      super("unmodifiable");
     }
   }
 
@@ -781,6 +791,10 @@ public class TestSetFactory {
 
   public static List<MarkerTypeSingleton> createSingletonList() {
     return java.util.Collections.singletonList(new MarkerTypeSingleton());
+  }
+
+  public static List<MarkerTypeUnmodifiable> createUnmodifiableList() {
+    return java.util.Collections.unmodifiableList(Collections.singletonList(new MarkerTypeUnmodifiable()));
   }
 
   public static java.sql.Date[] createSqlDateArray() {

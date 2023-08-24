@@ -36,6 +36,7 @@ import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeLinkedList;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeSingleton;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeTreeMap;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeTreeSet;
+import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeUnmodifiable;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeVector;
 import com.google.gwt.user.client.rpc.core.java.util.LinkedHashMap_CustomFieldSerializer;
 
@@ -849,6 +850,25 @@ public class CollectionsTest extends RpcTestBase {
           public void onSuccess(List<MarkerTypeSingleton> result) {
             assertNotNull(result);
             assertTrue(TestSetValidator.isValidSingletonList(result));
+            finishTest();
+          }
+        });
+  }
+
+  public void testUnmodifiableList() {
+    CollectionsTestServiceAsync service = getServiceAsync();
+    delayTestFinishForRpc();
+    service.echoUnmodifiableList(TestSetFactory.createUnmodifiableList(),
+        new AsyncCallback<List<MarkerTypeUnmodifiable>>() {
+          @Override
+          public void onFailure(Throwable caught) {
+            TestSetValidator.rethrowException(caught);
+          }
+
+          @Override
+          public void onSuccess(List<MarkerTypeUnmodifiable> result) {
+            assertNotNull(result);
+            assertTrue(TestSetValidator.isValidUnmodifiableList(result));
             finishTest();
           }
         });

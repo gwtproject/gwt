@@ -35,6 +35,7 @@ import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeLinkedList;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeSingleton;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeTreeMap;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeTreeSet;
+import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeUnmodifiable;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeVector;
 
 import java.sql.Time;
@@ -192,5 +193,9 @@ public interface CollectionsTestService extends RemoteService {
 
   // For Collections.singletonList()
   List<MarkerTypeSingleton> echoSingletonList(List<MarkerTypeSingleton> value)
+      throws CollectionsTestServiceException;
+
+  // For Collections.unmodifiableList()
+  List<MarkerTypeUnmodifiable> echoUnmodifiableList(List<MarkerTypeUnmodifiable> value)
       throws CollectionsTestServiceException;
 }

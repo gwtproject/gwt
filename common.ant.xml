@@ -62,8 +62,7 @@
   <property name="javac.debug" value="true"/>
   <property name="javac.debuglevel" value="lines,vars,source"/>
   <property name="javac.encoding" value="utf-8"/>
-  <property name="javac.source" value="8"/>
-  <property name="javac.target" value="8"/>
+  <property name="javac.release" value="8"/>
   <property name="javac.nowarn" value="true"/>
 
   <!-- javac and errorprone instructions from https://errorprone.info/docs/installation#ant -->
@@ -158,8 +157,7 @@
   <macrodef name="gwt.javac">
     <attribute name="srcdir" default="src" />
     <attribute name="destdir" default="${javac.out}" />
-    <attribute name="source" default="${javac.source}" />
-    <attribute name="target" default="${javac.target}" />
+    <attribute name="release" default="${javac.release}" />
     <attribute name="excludes" default="" />
     <attribute name="processorpath" default="" />
     <attribute name="errorprone.args" default="" />
@@ -172,7 +170,7 @@
       </path>
       <mkdir dir="@{destdir}"/>
       <javac srcdir="@{srcdir}" sourcepath="@{srcdir}" destdir="@{destdir}" debug="${javac.debug}"
-             debuglevel="${javac.debuglevel}" source="@{source}" target="@{target}"
+             debuglevel="${javac.debuglevel}" source="@{release}" target="@{release}" release="@{release}"
              nowarn="${javac.nowarn}" encoding="${javac.encoding}" includeantruntime="false"
              fork="true" compiler="modern" excludes="@{excludes}">
         <compilerarg value="-J-Xbootclasspath/p:${errorprone.javac.jar}" if:true="${isJava8}"/>

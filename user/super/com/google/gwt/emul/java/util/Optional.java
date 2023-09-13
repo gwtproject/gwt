@@ -130,6 +130,10 @@ public final class Optional<T> {
     return isPresent() ? ref : other.get();
   }
 
+  public T orElseThrow() {
+    return get();
+  }
+
   public <X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSupplier) throws X {
     if (isPresent()) {
       return ref;

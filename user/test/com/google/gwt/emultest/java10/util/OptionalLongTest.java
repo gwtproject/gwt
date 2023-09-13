@@ -32,7 +32,7 @@ public class OptionalLongTest extends EmulTestBase {
       // expected
     }
 
-    long value = OptionalLong.of(10).orElseThrow();
-    assertEquals(10, value);
+    long value = OptionalLong.of(10L).orElseThrow();
+    assertEquals(10L, value);
   }
 }

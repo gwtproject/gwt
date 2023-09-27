@@ -97,6 +97,7 @@
     <property file="${gwt.root}/build/out/packages.properties" />
     <javadoc classpathref="DOC_PATH" failonerror="true" maxmemory="1g"
              destdir="${project.build}/javadoc"
+             source="${javac.release}"
              encoding="UTF-8"
              access="package"
              packagenames="${USER_PKGS}"
@@ -143,7 +144,7 @@
                  sourcepath="${gwt.root}/user/super/com/google/gwt/emul:${gwt.root}/dev/core/super/com/google/gwt/dev/jjs/intrinsic"
                  encoding="UTF-8"
                  access="public"
-                 source="${javac.source}"
+                 source="${javac.release}"
                  packagenames="${JAVA_PKGS}"
                  docletpath="${project.build}/../build_tools/doctool/bin"
                  doclet="com.google.doctool.custom.JavaEmulSummaryDoclet">

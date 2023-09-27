@@ -4,7 +4,11 @@
   <import file="${gwt.root}/common.ant.xml" />
 
   <target name="compile" description="Compiles this project">
-    <gwt.javac />
+    <!--
+    As guarded below in the build target, doctool can't be built on
+    Java 8. In theory release could be set to 9, but 9 and 10 are EOL.
+    -->
+    <gwt.javac release="11" />
   </target>
 
   <target name="build" depends="compile" description="Packages this project into a jar" unless="${isJava8}">

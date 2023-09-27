@@ -25,8 +25,9 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Server-side object that handles log messages sent by
- * {@link com.google.web.bindery.requestfactory.gwt.client.RequestFactoryLogHandler}
- * .
+ * {@link com.google.web.bindery.requestfactory.gwt.client.RequestFactoryLogHandler}.
+ * To use this in {@code jakarta.servlet} projects, create your own LoggingRequest
+ * and RequestFactoryLogHandler types that reference the jakarta variant of this class.
  */
 public class Logging {
 
@@ -36,7 +37,7 @@ public class Logging {
    * Logs a message.
    * 
    * @param logRecordJson a json serialized LogRecord, as provided by
-   *          {@link com.google.gwt.logging.client.JsonLogRecordClientUtil#logRecordAsJsonObject(LogRecord)}
+   *          {@link com.google.gwt.logging.client.JsonLogRecordClientUtil#logRecordAsJson(java.util.logging.LogRecord)} )}
    * @throws RemoteLoggingException if logging fails
    */
   public static void logMessage(String logRecordJson) throws RemoteLoggingException {

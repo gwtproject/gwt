@@ -149,9 +149,9 @@
     <sequential>
       <!-- Start by copying all sources as-is to a new directory - Note that despite the name, there will be a small bit of servlet-specific code left in here, mostly for the junit runner which will not be updated at this time. -->
       <copy todir="${project.build}/no-servlet-src" encoding="${javac.encoding}">
-        <!-- Exclude files for builds or examples -->
-        <fileset dir="src" excludes="**/RequestFactoryLogHandler.java,**/RequestFactoryJarExtractor.java" />
+        <fileset dir="src" />
       </copy>
+
       <!-- Move any server-side code that uses servlets to a separate directory, and refactor to replace javax with jakarta -->
       <move todir="${project.build}/jakarta-src/com/google/gwt/core/server/jakarta">
         <filelist dir="${project.build}/no-servlet-src/com/google/gwt/core/server">
@@ -205,13 +205,17 @@
       </move>
       <move todir="${project.build}/jakarta-src/com/google/web/bindery/requestfactory/server/jakarta">
         <filelist dir="${project.build}/no-servlet-src/com/google/web/bindery/requestfactory/server">
-          <file name="RequestFactoryServlet.java"/>
           <file name="Logging.java"/>
+          <file name="RequestFactoryJarExtractor.java"/>
+          <file name="RequestFactoryServlet.java"/>
         </filelist>
         <filterchain>
           <tokenfilter>
             <replacestring from="package com.google.web.bindery.requestfactory.server" to="package com.google.web.bindery.requestfactory.server.jakarta"/>
             <replacestring from="com.google.gwt.user.server.rpc.RPCServletUtils" to="com.google.gwt.user.server.rpc.jakarta.RPCServletUtils"/>
+            <replacestring from="com.google.web.bindery.requestfactory.shared.LoggingRequest" to="com.google.web.bindery.requestfactory.shared.jakarta.LoggingRequest"/>
+            <replacestring from="com.google.web.bindery.requestfactory.gwt.client.RequestFactoryLogHandler" to="com.google.web.bindery.requestfactory.gwt.client.jakarta.RequestFactoryLogHandler"/>
+            <replaceregex pattern="^/\*\*" replace="import com.google.web.bindery.requestfactory.server.*;${line.separator}${line.separator}/**" />
           </tokenfilter>
           <tokenfilter>
             <replacestring from="javax.servlet" to="jakarta.servlet"/>
@@ -227,6 +231,17 @@
             <replacestring from="package com.google.web.bindery.requestfactory.shared" to="package com.google.web.bindery.requestfactory.shared.jakarta"/>
             <replacestring from="com.google.web.bindery.requestfactory.server.Logging" to="com.google.web.bindery.requestfactory.server.jakarta.Logging"/>
             <replaceregex pattern="^/\*\*" replace="import com.google.web.bindery.requestfactory.shared.*;${line.separator}${line.separator}/**" />
+          </tokenfilter>
+        </filterchain>
+      </move>
+      <move todir="${project.build}/jakarta-src/com/google/web/bindery/requestfactory/gwt/client/jakarta">
+        <filelist dir="${project.build}/no-servlet-src/com/google/web/bindery/requestfactory/gwt/client">
+          <file name="RequestFactoryLogHandler.java"/>
+        </filelist>
+        <filterchain>
+          <tokenfilter>
+            <replacestring from="package com.google.web.bindery.requestfactory.gwt.client" to="package com.google.web.bindery.requestfactory.gwt.client.jakarta"/>
+            <replacestring from="com.google.web.bindery.requestfactory.shared.LoggingRequest" to="com.google.web.bindery.requestfactory.shared.jakarta.LoggingRequest"/>
           </tokenfilter>
         </filterchain>
       </move>

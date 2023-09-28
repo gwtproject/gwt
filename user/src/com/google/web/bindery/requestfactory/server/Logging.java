@@ -26,8 +26,12 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Server-side object that handles log messages sent by
  * {@link com.google.web.bindery.requestfactory.gwt.client.RequestFactoryLogHandler}.
- * To use this in {@code jakarta.servlet} projects, create your own LoggingRequest
- * and RequestFactoryLogHandler types that reference the jakarta variant of this class.
+ * <p>To use this in {@code jakarta.servlet} projects, be sure to reference
+ * {@link com.google.web.bindery.requestfactory.shared.jakarta.LoggingRequest
+ * com.google.web.bindery.requestfactory.shared.jakarta.LoggingRequest} instead
+ * of the non-jakarta version, and making a copy of {@code RequestFactoryLogHandler}
+ * that uses it.
+ * </p>
  */
 public class Logging {
 

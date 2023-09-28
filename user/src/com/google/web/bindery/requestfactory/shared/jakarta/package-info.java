@@ -16,8 +16,9 @@
 
 /**
  * Jakarta-specific package for server-only classes. To use these types, be sure
- * to use the {@code gwt-servlet-jakarta.jar}.
+ * to use the {@code gwt-servlet-jakarta.jar}, or
+ * {@code requestfactory-server-jakarta.jar}.
  *
  * @since GWT 2.11
  */
-package com.google.gwt.user.server.jakarta;
+package com.google.web.bindery.requestfactory.shared.jakarta;

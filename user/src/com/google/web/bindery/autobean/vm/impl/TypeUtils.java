@@ -207,6 +207,9 @@ public class TypeUtils {
       Object genericDeclaration = variable.getGenericDeclaration();
       if (genericDeclaration instanceof Class<?>) {
         Class<?> declaration = (Class<?>) genericDeclaration;
+        if (declaration.equals(containingType)) {
+          return ensureBaseType(type);
+        }
         // could probably optimize, but would involve duplicating a bunch of
         // getParameterization's code
         Type[] types = getParameterization(declaration, containingType);

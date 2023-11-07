@@ -23,8 +23,8 @@ import java.util.Optional;
  * Tests for java.util.Optional Java 11 API emulation.
  */
 public class OptionalTest extends EmulTestBase {
-    public void testIsEmpty() {
-        assertTrue(Optional.empty().isEmpty());
-        assertFalse(Optional.of(this).isEmpty());
-    }
+  public void testIsEmpty() {
+    assertTrue(Optional.empty().isEmpty());
+    assertFalse(Optional.of(this).isEmpty());
+  }
 }

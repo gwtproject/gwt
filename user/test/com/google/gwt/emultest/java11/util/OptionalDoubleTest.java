@@ -23,8 +23,8 @@ import java.util.OptionalDouble;
  * Tests for java.util.OptionalDouble Java 11 API emulation.
  */
 public class OptionalDoubleTest extends EmulTestBase {
-    public void testIsEmpty() {
-        assertTrue(OptionalDouble.empty().isEmpty());
-        assertFalse(OptionalDouble.of(78.9).isEmpty());
-    }
+  public void testIsEmpty() {
+    assertTrue(OptionalDouble.empty().isEmpty());
+    assertFalse(OptionalDouble.of(78.9).isEmpty());
+  }
 }

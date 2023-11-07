@@ -23,8 +23,8 @@ import java.util.OptionalInt;
  * Tests for java.util.OptionalInt Java 11 API emulation.
  */
 public class OptionalIntTest extends EmulTestBase {
-    public void testIsEmpty() {
-        assertTrue(OptionalInt.empty().isEmpty());
-        assertFalse(OptionalInt.of(456).isEmpty());
-    }
+  public void testIsEmpty() {
+    assertTrue(OptionalInt.empty().isEmpty());
+    assertFalse(OptionalInt.of(456).isEmpty());
+  }
 }

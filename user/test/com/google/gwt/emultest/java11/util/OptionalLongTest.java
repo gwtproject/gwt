@@ -23,8 +23,8 @@ import java.util.OptionalLong;
  * Tests for java.util.OptionalLong Java 11 API emulation.
  */
 public class OptionalLongTest extends EmulTestBase {
-    public void testIsEmpty() {
-        assertTrue(OptionalLong.empty().isEmpty());
-        assertFalse(OptionalLong.of(123L).isEmpty());
-    }
+  public void testIsEmpty() {
+    assertTrue(OptionalLong.empty().isEmpty());
+    assertFalse(OptionalLong.of(123L).isEmpty());
+  }
 }

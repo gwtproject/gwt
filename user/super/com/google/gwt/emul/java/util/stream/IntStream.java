@@ -253,8 +253,8 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
   default IntStream dropWhile(IntPredicate predicate) {
     Spliterator.OfInt prev = spliterator();
     Spliterator.OfInt spliterator =
-        new Spliterators.AbstractIntSpliterator(
-                prev.estimateSize(), prev.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+        new Spliterators.AbstractIntSpliterator(prev.estimateSize(),
+                prev.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
           private boolean drop = true;
           private boolean found;
 
@@ -340,8 +340,8 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
   default IntStream takeWhile(IntPredicate predicate) {
     Spliterator.OfInt original = spliterator();
     Spliterator.OfInt spliterator =
-        new Spliterators.AbstractIntSpliterator(
-                original.estimateSize(), original.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+        new Spliterators.AbstractIntSpliterator(original.estimateSize(),
+                original.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
           private boolean take = true;
           private boolean found;
 

@@ -251,8 +251,8 @@ public interface LongStream extends BaseStream<Long, LongStream> {
   default LongStream dropWhile(LongPredicate predicate) {
     Spliterator.OfLong prev = spliterator();
     Spliterator.OfLong spliterator =
-        new Spliterators.AbstractLongSpliterator(
-                prev.estimateSize(), prev.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+        new Spliterators.AbstractLongSpliterator(prev.estimateSize(),
+                prev.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
           private boolean drop = true;
           private boolean found;
 
@@ -338,8 +338,8 @@ public interface LongStream extends BaseStream<Long, LongStream> {
   default LongStream takeWhile(LongPredicate predicate) {
     Spliterator.OfLong original = spliterator();
     Spliterator.OfLong spliterator =
-        new Spliterators.AbstractLongSpliterator(
-                original.estimateSize(), original.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+        new Spliterators.AbstractLongSpliterator(original.estimateSize(),
+                original.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
           private boolean take = true;
           private boolean found;
 

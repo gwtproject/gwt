@@ -216,8 +216,8 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
   default Stream<T> dropWhile(Predicate<? super T> predicate) {
     Spliterator<T> prev = spliterator();
     Spliterator<T> spliterator =
-        new Spliterators.AbstractSpliterator<T>(
-                prev.estimateSize(), prev.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+        new Spliterators.AbstractSpliterator<T>(prev.estimateSize(),
+                prev.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
           private boolean drop = true;
           private boolean found;
 
@@ -297,8 +297,8 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
   default Stream<T> takeWhile(Predicate<? super T> predicate) {
     Spliterator<T> original = spliterator();
     Spliterator<T> spliterator =
-        new Spliterators.AbstractSpliterator<T>(
-                original.estimateSize(), original.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+        new Spliterators.AbstractSpliterator<T>(original.estimateSize(),
+                original.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
           private boolean take = true;
           private boolean found;
 

@@ -204,8 +204,8 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
   default DoubleStream dropWhile(DoublePredicate predicate) {
     Spliterator.OfDouble prev = spliterator();
     Spliterator.OfDouble spliterator =
-        new Spliterators.AbstractDoubleSpliterator(
-                prev.estimateSize(), prev.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+        new Spliterators.AbstractDoubleSpliterator(prev.estimateSize(),
+                prev.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
           private boolean drop = true;
           private boolean found;
 
@@ -291,8 +291,8 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
   default DoubleStream takeWhile(DoublePredicate predicate) {
     Spliterator.OfDouble original = spliterator();
     Spliterator.OfDouble spliterator =
-        new Spliterators.AbstractDoubleSpliterator(
-                original.estimateSize(), original.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
+        new Spliterators.AbstractDoubleSpliterator(original.estimateSize(),
+                original.characteristics() & ~(Spliterator.SIZED | Spliterator.SUBSIZED)) {
           private boolean take = true;
           private boolean found;
 

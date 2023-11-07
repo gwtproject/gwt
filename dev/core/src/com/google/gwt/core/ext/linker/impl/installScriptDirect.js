@@ -9,7 +9,9 @@ function installScript(filename) {
     var docbody = doc.body;
     var script = doc.createElement('script');
     script.language='javascript';
-    script.crossOrigin='';
+    if (location.host) {
+      script.crossOrigin='';
+    }
     script.src = code;
     if (__MODULE_FUNC__.__errFn) {
       script.onerror = function() {

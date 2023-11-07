@@ -22,6 +22,10 @@ import com.google.gwt.emultest.java9.util.stream.LongStreamTest;
 import com.google.gwt.emultest.java9.util.stream.StreamTest;
 import com.google.gwt.emultest.java9.util.ListTest;
 import com.google.gwt.emultest.java9.util.MapTest;
+import com.google.gwt.emultest.java9.util.OptionalDoubleTest;
+import com.google.gwt.emultest.java9.util.OptionalIntTest;
+import com.google.gwt.emultest.java9.util.OptionalLongTest;
+import com.google.gwt.emultest.java9.util.OptionalTest;
 import com.google.gwt.emultest.java9.util.SetTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -36,8 +40,12 @@ import org.junit.runners.Suite.SuiteClasses;
         LongStreamTest.class,
         StreamTest.class,
         ListTest.class,
-        SetTest.class,
-        MapTest.class
+        MapTest.class,
+        OptionalDoubleTest.class,
+        OptionalIntTest.class,
+        OptionalLongTest.class,
+        OptionalTest.class,
+        SetTest.class
 })
 public class EmulJava9Suite {
 }

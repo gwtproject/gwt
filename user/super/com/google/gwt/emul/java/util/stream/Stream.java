@@ -153,12 +153,17 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
     AbstractSpliterator<T> spliterator =
         new Spliterators.AbstractSpliterator<T>(
             Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED) {
+          private boolean first = true;
           private T next = seed;
 
           @Override
           public boolean tryAdvance(Consumer<? super T> action) {
+            if (!first) {
+              next = f.apply(next);
+            }
+            first = false;
+
             action.accept(next);
-            next = f.apply(next);
             return true;
           }
         };
@@ -169,6 +174,7 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
     AbstractSpliterator<T> spliterator =
         new Spliterators.AbstractSpliterator<T>(
             Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED) {
+          private boolean first = true;
           private T next = seed;
           private boolean terminated = false;
 
@@ -177,12 +183,16 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
             if (terminated) {
               return false;
             }
+            if (!first) {
+              next = f.apply(next);
+            }
+            first = false;
+
             if (!hasNext.test(next)) {
               terminated = true;
               return false;
             }
             action.accept(next);
-            next = f.apply(next);
             return true;
           }
         };

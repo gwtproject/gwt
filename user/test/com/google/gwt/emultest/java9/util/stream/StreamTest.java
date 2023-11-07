@@ -27,10 +27,48 @@ public class StreamTest extends EmulTestBase {
     assertEquals(
         new Integer[] {10, 11, 12, 13, 14},
         Stream.iterate(0, i -> i < 15, i -> i + 1).skip(10).toArray(Integer[]::new));
-    // infinite stream, verify that it is limited by a downstream step
-    assertEquals(
-        new Integer[] {0, 1, 2, 3, 4},
-        Stream.iterate(0, i -> i + 1).limit(5).toArray());
+
+    // Check that the functions are called the correct number of times with a hasNext limiting
+    // stream size
+    {
+      int[] nextCalledCount = {0};
+      int[] hasNextCalledCount = {0};
+      Integer[] array = Stream.iterate(0, val -> {
+        hasNextCalledCount[0]++;
+        return val < 5;
+      }, val -> {
+        nextCalledCount[0]++;
+        return val + 1;
+      }).toArray(Integer[]::new);
+
+      // Verify that the next was called for each value after the seed (plus one for testing that
+      // the stream is over)
+      assertEquals(array.length, nextCalledCount[0]);
+      // Verify that the hasNext function was called once for each value (plus one as above)
+      assertEquals(array.length + 1, hasNextCalledCount[0]);
+      // Sanity check the values returned
+      assertEquals(new Integer[]{0, 1, 2, 3, 4}, array);
+    }
+
+    // Same test repeated, but instead limit() will stop the stream from continuing
+    {
+      int[] nextCalledCount = {0};
+      int[] hasNextCalledCount = {0};
+      Integer[] array = Stream.iterate(0, val -> {
+        hasNextCalledCount[0]++;
+        return val < 5;
+      }, val -> {
+        nextCalledCount[0]++;
+        return val + 1;
+      }).limit(3).toArray(Integer[]::new);
+
+      // Verify that the next was called for each value after the seed
+      assertEquals(array.length - 1, nextCalledCount[0]);
+      // Verify that the hasNext function was called once for each value
+      assertEquals(array.length, hasNextCalledCount[0]);
+      // Sanity check the values returned
+      assertEquals(new Integer[]{0, 1, 2}, array);
+    }
   }
 
   public void testOfNullable() {

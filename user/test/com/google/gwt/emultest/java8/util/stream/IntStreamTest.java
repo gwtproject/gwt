@@ -116,6 +116,22 @@ public class IntStreamTest extends EmulTestBase {
     assertEquals(
         new int[] {10, 11, 12, 13, 14},
         IntStream.iterate(0, i -> i + 1).skip(10).limit(5).toArray());
+
+    // Infinite stream, verify that it is correctly limited by a downstream step
+    assertEquals(
+            new int[] {0, 1, 2, 3, 4},
+            IntStream.iterate(0, i -> i + 1).limit(5).toArray());
+
+    // Check that the function is called the correct number of times
+    int[] calledCount = {0};
+    int[] array = IntStream.iterate(0, val -> {
+      calledCount[0]++;
+      return val + 1;
+    }).limit(5).toArray();
+    // Verify that the function was called for each value after the seed
+    assertEquals(array.length - 1, calledCount[0]);
+    // Sanity check the values returned
+    assertEquals(new int[] {0, 1, 2, 3, 4}, array);
   }
 
   public void testGenerate() {

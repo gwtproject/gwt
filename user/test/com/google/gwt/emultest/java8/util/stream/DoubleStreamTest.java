@@ -117,6 +117,22 @@ public class DoubleStreamTest extends EmulTestBase {
     assertEquals(
         new double[] {10d, 11d, 12d, 13d, 14d},
         DoubleStream.iterate(0d, l -> l + 1d).skip(10).limit(5).toArray());
+
+    // Infinite stream, verify that it is correctly limited by a downstream step
+    assertEquals(
+        new double[] {0, 1, 2, 3, 4},
+        DoubleStream.iterate(0, i -> i + 1).limit(5).toArray());
+
+    // Check that the function is called the correct number of times
+    int[] calledCount = {0};
+    double[] array = DoubleStream.iterate(0, val -> {
+      calledCount[0]++;
+      return val + 1;
+    }).limit(5).toArray();
+    // Verify that the function was called for each value after the seed
+    assertEquals(array.length - 1, calledCount[0]);
+    // Sanity check the values returned
+    assertEquals(new double[] {0, 1, 2, 3, 4}, array);
   }
 
   public void testGenerate() {

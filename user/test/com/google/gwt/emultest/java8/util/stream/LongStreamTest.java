@@ -115,6 +115,22 @@ public class LongStreamTest extends EmulTestBase {
     assertEquals(
         new long[] {10L, 11L, 12L, 13L, 14L},
         LongStream.iterate(0L, l -> l + 1L).skip(10).limit(5).toArray());
+
+    // Infinite stream, verify that it is correctly limited by a downstream step
+    assertEquals(
+            new long[] {0, 1, 2, 3, 4},
+            LongStream.iterate(0, i -> i + 1).limit(5).toArray());
+
+    // Check that the function is called the correct number of times
+    int[] calledCount = {0};
+    long[] array = LongStream.iterate(0, val -> {
+      calledCount[0]++;
+      return val + 1;
+    }).limit(5).toArray();
+    // Verify that the function was called for each value after the seed
+    assertEquals(array.length - 1, calledCount[0]);
+    // Sanity check the values returned
+    assertEquals(new long[] {0, 1, 2, 3, 4}, array);
   }
 
   public void testGenerate() {

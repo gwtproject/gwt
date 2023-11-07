@@ -149,27 +149,14 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
   }
 
   static IntStream iterate(int seed, IntUnaryOperator f) {
-
-    AbstractIntSpliterator spliterator =
-        new Spliterators.AbstractIntSpliterator(
-            Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED) {
-          private int next = seed;
-
-          @Override
-          public boolean tryAdvance(IntConsumer action) {
-            action.accept(next);
-            next = f.applyAsInt(next);
-            return true;
-          }
-        };
-
-    return StreamSupport.intStream(spliterator, false);
+    return iterate(seed, ignore -> true, f);
   }
 
   static IntStream iterate(int seed, IntPredicate hasNext, IntUnaryOperator f) {
     Spliterator.OfInt spliterator =
         new Spliterators.AbstractIntSpliterator(
             Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED) {
+          private boolean first = true;
           private int next = seed;
           private boolean terminated = false;
 
@@ -178,12 +165,16 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
             if (terminated) {
               return false;
             }
+            if (!first) {
+              next = f.applyAsInt(next);
+            }
+            first = false;
+
             if (!hasNext.test(next)) {
               terminated = true;
               return false;
             }
             action.accept(next);
-            next = f.applyAsInt(next);
             return true;
           }
         };

@@ -150,24 +150,7 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
   }
 
   static <T> Stream<T> iterate(T seed, UnaryOperator<T> f) {
-    AbstractSpliterator<T> spliterator =
-        new Spliterators.AbstractSpliterator<T>(
-            Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED) {
-          private boolean first = true;
-          private T next = seed;
-
-          @Override
-          public boolean tryAdvance(Consumer<? super T> action) {
-            if (!first) {
-              next = f.apply(next);
-            }
-            first = false;
-
-            action.accept(next);
-            return true;
-          }
-        };
-    return StreamSupport.stream(spliterator, false);
+    return iterate(seed, ignore -> true, f);
   }
 
   static <T> Stream<T> iterate(T seed, Predicate<? super T> hasNext, UnaryOperator<T> f) {

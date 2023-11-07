@@ -149,25 +149,14 @@ public interface LongStream extends BaseStream<Long, LongStream> {
   }
 
   static LongStream iterate(long seed, LongUnaryOperator f) {
-    AbstractLongSpliterator spliterator =
-        new Spliterators.AbstractLongSpliterator(
-            Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED) {
-          private long next = seed;
-
-          @Override
-          public boolean tryAdvance(LongConsumer action) {
-            action.accept(next);
-            next = f.applyAsLong(next);
-            return true;
-          }
-        };
-    return StreamSupport.longStream(spliterator, false);
+    return iterate(seed, ignore -> true, f);
   }
 
   static LongStream iterate(long seed, LongPredicate hasNext, LongUnaryOperator f) {
     Spliterator.OfLong spliterator =
         new Spliterators.AbstractLongSpliterator(
             Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED) {
+          private boolean first = true;
           private long next = seed;
           private boolean terminated = false;
 
@@ -176,12 +165,16 @@ public interface LongStream extends BaseStream<Long, LongStream> {
             if (terminated) {
               return false;
             }
+            if (!first) {
+              next = f.applyAsLong(next);
+            }
+            first = false;
+
             if (!hasNext.test(next)) {
               terminated = true;
               return false;
             }
             action.accept(next);
-            next = f.applyAsLong(next);
             return true;
           }
         };

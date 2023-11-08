@@ -17,6 +17,8 @@
 package com.google.gwt.emultest.java8.util.stream;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -111,6 +113,10 @@ public class LongStreamTest extends EmulTestBase {
     assertEquals(Arrays.asList("first", "second"), closed);
   }
 
+  // Java8 has the same bug that GWT previously had here, so we're excluding Java8 from running
+  // this test. Presently, legacy dev mode is the only way to actually run this test using the
+  // JVM's own implementation, so marking this DoNotRunWith(Devel) is sufficient to avoid this.
+  @DoNotRunWith(Platform.Devel)
   public void testIterate() {
     assertEquals(
         new long[] {10L, 11L, 12L, 13L, 14L},

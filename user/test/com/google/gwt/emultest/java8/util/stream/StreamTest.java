@@ -132,6 +132,22 @@ public class StreamTest extends EmulTestBase {
     assertEquals(
         new Integer[] {10, 11, 12, 13, 14},
         Stream.iterate(0, i -> i + 1).skip(10).limit(5).toArray(Integer[]::new));
+
+    // Infinite stream, verify that it is correctly limited by a downstream step
+    assertEquals(
+            new Integer[] {0, 1, 2, 3, 4},
+            Stream.iterate(0, i -> i + 1).limit(5).toArray());
+
+    // Check that the function is called the correct number of times
+    int[] calledCount = {0};
+    Integer[] array = Stream.iterate(0, val -> {
+      calledCount[0]++;
+      return val + 1;
+    }).limit(5).toArray(Integer[]::new);
+    // Verify that the function was called for each value after the seed
+    assertEquals(array.length - 1, calledCount[0]);
+    // Sanity check the values returned
+    assertEquals(new Integer[] {0, 1, 2, 3, 4}, array);
   }
 
   public void testGenerate() {

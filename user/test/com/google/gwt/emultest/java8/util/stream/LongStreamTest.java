@@ -17,6 +17,8 @@
 package com.google.gwt.emultest.java8.util.stream;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -111,10 +113,30 @@ public class LongStreamTest extends EmulTestBase {
     assertEquals(Arrays.asList("first", "second"), closed);
   }
 
+  // Java8 has the same bug that GWT previously had here, so we're excluding Java8 from running
+  // this test. Presently, legacy dev mode is the only way to actually run this test using the
+  // JVM's own implementation, so marking this DoNotRunWith(Devel) is sufficient to avoid this.
+  @DoNotRunWith(Platform.Devel)
   public void testIterate() {
     assertEquals(
         new long[] {10L, 11L, 12L, 13L, 14L},
         LongStream.iterate(0L, l -> l + 1L).skip(10).limit(5).toArray());
+
+    // Infinite stream, verify that it is correctly limited by a downstream step
+    assertEquals(
+            new long[] {0, 1, 2, 3, 4},
+            LongStream.iterate(0, i -> i + 1).limit(5).toArray());
+
+    // Check that the function is called the correct number of times
+    int[] calledCount = {0};
+    long[] array = LongStream.iterate(0, val -> {
+      calledCount[0]++;
+      return val + 1;
+    }).limit(5).toArray();
+    // Verify that the function was called for each value after the seed
+    assertEquals(array.length - 1, calledCount[0]);
+    // Sanity check the values returned
+    assertEquals(new long[] {0, 1, 2, 3, 4}, array);
   }
 
   public void testGenerate() {

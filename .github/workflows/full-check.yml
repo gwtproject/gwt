@@ -29,9 +29,8 @@ jobs:
       - name: Checkout GWT tools into a sibling directory
         uses: actions/checkout@v2
         with:
-          repository: 'sparsick/gwt-tools'
+          repository: 'gwtproject/tools'
           path: 'tools'
-          ref: '9727-jakarta-servlet-support'
       - name: Set up JDK ${{ matrix.java-version }}
         # GWT presently requires Java8 to build just the SDK and some tests, or 11 to build everything, but can run on newer Java versions
         uses: actions/setup-java@v3

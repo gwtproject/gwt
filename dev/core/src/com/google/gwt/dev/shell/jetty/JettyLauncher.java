@@ -63,11 +63,41 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Stream;
 
 /**
  * A {@link ServletContainerLauncher} for an embedded Jetty server.
  */
 public class JettyLauncher extends ServletContainerLauncher {
+  private static final AtomicBoolean hasLoggedDeprecationWarning = new AtomicBoolean(false);
+
+  /**
+   * Disable warning about JettyLauncher being deprecated when running tests, as this only is
+   * intended to apply to DevMode - The test runner can be updated at the same time as any other
+   * changes are made to JettyLauncher.
+   */
+  public static void suppressDeprecationWarningForTests() {
+    hasLoggedDeprecationWarning.set(true);
+  }
+
+  /**
+   * Warns, only once, that JettyLauncher is deprecated for removal. Call when it is clear that
+   * the developer is actively deploying code to, or loading resources from, the embedded Jetty
+   * instance.
+   *
+   * @param log existing TreeLogger to append warning to
+   */
+  private static void maybeLogDeprecationWarning(TreeLogger log) {
+    if (hasLoggedDeprecationWarning.compareAndSet(false, true)) {
+      log.log(TreeLogger.Type.WARN, "DevMode will default to -noserver in a future release, and " +
+              "JettyLauncher may be removed or changed. Please consider running your own " +
+              "application server and either passing -noserver to DevMode or migrating to " +
+              "CodeServer. Alternatively, consider implementing your own " +
+              "ServletContainerLauncher to continue running your application server from " +
+              "DevMode.");
+    }
+  }
 
   /**
    * Log jetty requests/responses to TreeLogger.
@@ -92,6 +122,10 @@ public class JettyLauncher extends ServletContainerLauncher {
       if (status < 0) {
         // Copied from NCSARequestLog
         status = 404;
+      }
+      if (status != 404) {
+        // Ignore 404 errors, log the first other call to the server if we haven't logged yet
+        maybeLogDeprecationWarning(logger);
       }
       TreeLogger.Type logStatus, logHeaders;
       if (status >= 500) {
@@ -566,6 +600,15 @@ public class JettyLauncher extends ServletContainerLauncher {
     protected void doStart() throws Exception {
       setClassLoader(new WebAppClassLoaderExtension());
       super.doStart();
+
+      // After start, warn if a servlet/filter was configured other than those provided by Jetty
+      boolean hasNonJettyFiltersOrServlets = Stream.concat(
+              getServletContext().getServletRegistrations().values().stream(),
+              getServletContext().getFilterRegistrations().values().stream()
+      ).anyMatch(r -> !r.getClassName().startsWith("org.eclipse.jetty"));
+      if (hasNonJettyFiltersOrServlets) {
+        maybeLogDeprecationWarning(logger);
+      }
     }
 
     @Override

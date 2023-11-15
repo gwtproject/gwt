@@ -21,7 +21,6 @@ import com.google.gwt.user.client.rpc.SerializationException;
 import com.google.gwt.user.client.rpc.SerializedTypeViolationException;
 import com.google.gwt.user.client.rpc.impl.AbstractSerializationStreamReader;
 import com.google.gwt.user.server.Base64Utils;
-import com.google.gwt.user.server.rpc.RPC;
 import com.google.gwt.user.server.rpc.SerializationPolicy;
 import com.google.gwt.user.server.rpc.SerializationPolicyProvider;
 import com.google.gwt.user.server.rpc.ServerCustomFieldSerializer;
@@ -367,7 +366,7 @@ public final class ServerSerializationStreamReader extends AbstractSerialization
 
   private final ClassLoader classLoader;
 
-  private SerializationPolicy serializationPolicy = RPC.getDefaultSerializationPolicy();
+  private SerializationPolicy serializationPolicy = LegacySerializationPolicy.getInstance();
 
   private final SerializationPolicyProvider serializationPolicyProvider;
 

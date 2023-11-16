@@ -2351,8 +2351,7 @@ public class GenerateJavaScriptAST {
     }
 
     private JsExprStmt outputDisplayName(JsNameRef function, JMethod method) {
-      JsNameRef displayName = new JsNameRef(function.getSourceInfo(), "displayName");
-      displayName.setQualifier(function);
+      JsNameRef displayName = new JsNameRef(function.getSourceInfo(), "displayName", function);
       String displayStringName = getDisplayName(method);
       JsStringLiteral displayMethodName =
           new JsStringLiteral(function.getSourceInfo(), displayStringName);

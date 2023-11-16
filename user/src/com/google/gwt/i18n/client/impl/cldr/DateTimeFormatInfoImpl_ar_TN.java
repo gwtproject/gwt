@@ -22,36 +22,6 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_ar_TN extends DateTimeFormatInfoImpl_ar_001 {
 
   @Override
-  public String dateFormatMedium() {
-    return "y/MM/dd";
-  }
-
-  @Override
-  public String dateFormatShort() {
-    return "y/M/d";
-  }
-
-  @Override
-  public int firstDayOfTheWeek() {
-    return 0;
-  }
-
-  @Override
-  public String formatMonthNumDay() {
-    return "M/d";
-  }
-
-  @Override
-  public String formatYearMonthNum() {
-    return "y/M";
-  }
-
-  @Override
-  public String formatYearMonthNumDay() {
-    return "y/M/d";
-  }
-
-  @Override
   public String[] monthsFull() {
     return new String[] {
         "جانفي",
@@ -103,15 +73,5 @@ public class DateTimeFormatInfoImpl_ar_TN extends DateTimeFormatInfoImpl_ar_001 
         "نوفمبر",
         "ديسمبر"
     };
-  }
-
-  @Override
-  public int weekendEnd() {
-    return 6;
-  }
-
-  @Override
-  public int weekendStart() {
-    return 5;
   }
 }

@@ -39,7 +39,6 @@ public class LocalizedNamesImpl_lag extends LocalizedNamesImpl {
         "AO",
         "AI",
         "AG",
-        "AN",
         "AQ",
         "AM",
         "AW",
@@ -85,6 +84,7 @@ public class LocalizedNamesImpl_lag extends LocalizedNamesImpl {
         "ER",
         "EE",
         "EU",
+        "EZ",
         "FJ",
         "FO",
         "GH",
@@ -250,6 +250,7 @@ public class LocalizedNamesImpl_lag extends LocalizedNamesImpl {
         "PH",
         "GR",
         "UM",
+        "UN",
         "UY",
         "RU",
         "UZ",
@@ -271,6 +272,8 @@ public class LocalizedNamesImpl_lag extends LocalizedNamesImpl {
         "VG",
         "MP",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "IO",
@@ -299,7 +302,6 @@ public class LocalizedNamesImpl_lag extends LocalizedNamesImpl {
     namesMap.put("AI", "Anguíila");
     namesMap.put("AL", "Alubánia");
     namesMap.put("AM", "Ariménia");
-    namesMap.put("AN", "Antili ya Ʉholáanzi");
     namesMap.put("AO", "Angóola");
     namesMap.put("AR", "Ajentíina");
     namesMap.put("AS", "Samóoa ya Amerɨ́ka");
@@ -533,7 +535,6 @@ public class LocalizedNamesImpl_lag extends LocalizedNamesImpl {
         "AI": "Anguíila",
         "AL": "Alubánia",
         "AM": "Ariménia",
-        "AN": "Antili ya Ʉholáanzi",
         "AO": "Angóola",
         "AR": "Ajentíina",
         "AS": "Samóoa ya Amerɨ́ka",

@@ -84,6 +84,7 @@ public class LocalizedNamesImpl_vai_Latn extends LocalizedNamesImpl_vai {
         "EA",
         "EH",
         "EU",
+        "EZ",
         "FK",
         "PH",
         "FJ",
@@ -193,7 +194,6 @@ public class LocalizedNamesImpl_vai_Latn extends LocalizedNamesImpl_vai {
         "NA",
         "NP",
         "NL",
-        "AN",
         "NI",
         "NU",
         "NR",
@@ -264,11 +264,14 @@ public class LocalizedNamesImpl_vai_Latn extends LocalizedNamesImpl_vai {
         "TO",
         "TR",
         "UM",
+        "UN",
         "VU",
         "VA",
         "VN",
         "VE",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "UZ",
@@ -299,7 +302,6 @@ public class LocalizedNamesImpl_vai_Latn extends LocalizedNamesImpl_vai {
     namesMap.put("AI", "Aŋgíla");
     namesMap.put("AL", "Abhaniya");
     namesMap.put("AM", "Améniya");
-    namesMap.put("AN", "Nidɔlɛŋ Aŋtili");
     namesMap.put("AO", "Aŋgóla");
     namesMap.put("AR", "Ajɛŋtína");
     namesMap.put("AS", "Poo Sambowa");
@@ -532,7 +534,6 @@ public class LocalizedNamesImpl_vai_Latn extends LocalizedNamesImpl_vai {
         "AI": "Aŋgíla",
         "AL": "Abhaniya",
         "AM": "Améniya",
-        "AN": "Nidɔlɛŋ Aŋtili",
         "AO": "Aŋgóla",
         "AR": "Ajɛŋtína",
         "AS": "Poo Sambowa",

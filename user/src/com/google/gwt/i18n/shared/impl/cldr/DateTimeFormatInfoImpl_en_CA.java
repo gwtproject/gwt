@@ -22,6 +22,29 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_en_CA extends DateTimeFormatInfoImpl_en_001 {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "a.m.",
+        "p.m."
+    };
+  }
+
+  @Override
+  public String dateFormatFull() {
+    return "EEEE, MMMM d, y";
+  }
+
+  @Override
+  public String dateFormatLong() {
+    return "MMMM d, y";
+  }
+
+  @Override
+  public String dateFormatMedium() {
+    return "MMM d, y";
+  }
+
+  @Override
   public String dateFormatShort() {
     return "y-MM-dd";
   }
@@ -32,8 +55,33 @@ public class DateTimeFormatInfoImpl_en_CA extends DateTimeFormatInfoImpl_en_001 
   }
 
   @Override
+  public String formatMonthAbbrevDay() {
+    return "MMM d";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "MMMM d";
+  }
+
+  @Override
+  public String formatMonthFullWeekdayDay() {
+    return "EEEE, MMMM d";
+  }
+
+  @Override
   public String formatMonthNumDay() {
     return "MM-dd";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "MMM d, y";
+  }
+
+  @Override
+  public String formatYearMonthFullDay() {
+    return "MMMM d, y";
   }
 
   @Override
@@ -44,5 +92,41 @@ public class DateTimeFormatInfoImpl_en_CA extends DateTimeFormatInfoImpl_en_001 
   @Override
   public String formatYearMonthNumDay() {
     return "y-MM-dd";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "EEE, MMM d, y";
+  }
+
+  @Override
+  public String[] monthsShort() {
+    return new String[] {
+        "Jan.",
+        "Feb.",
+        "Mar.",
+        "Apr.",
+        "May",
+        "Jun.",
+        "Jul.",
+        "Aug.",
+        "Sep.",
+        "Oct.",
+        "Nov.",
+        "Dec."
+    };
+  }
+
+  @Override
+  public String[] weekdaysShort() {
+    return new String[] {
+        "Sun.",
+        "Mon.",
+        "Tue.",
+        "Wed.",
+        "Thu.",
+        "Fri.",
+        "Sat."
+    };
   }
 }

@@ -22,15 +22,6 @@
   -->
   <set-property name="touchEventSupport" value="maybe" />
 
-  <!-- Older browsers do not support touch events. -->
-  <set-property name="touchEventSupport" value="no">
-    <any>
-      <when-property-is name="user.agent" value="ie8" />
-      <when-property-is name="user.agent" value="ie9" />
-      <when-property-is name="user.agent" value="ie10" />
-    </any>
-  </set-property>
-
   <replace-with class="com.google.gwt.event.dom.client.TouchEvent.TouchSupportDetectorNo">
     <when-type-is class="com.google.gwt.event.dom.client.TouchEvent.TouchSupportDetector" />
     <when-property-is name="touchEventSupport" value="no" />

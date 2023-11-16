@@ -88,11 +88,7 @@ public class HistoryTest extends GWTTestCase {
       NativeEvent clickEvent =
           Document.get().createClickEvent(0, 0, 0, 0, 0, false, false, false, false);
 
-      if (isIE8orIE9()) {
-        click(anchorElement);
-      } else {
-        anchorElement.dispatchEvent(clickEvent);
-      }
+      anchorElement.dispatchEvent(clickEvent);
 
     } finally {
       Document.get().getBody().removeChild(anchorElement);
@@ -418,12 +414,6 @@ public class HistoryTest extends GWTTestCase {
     timer.schedule(200);
   }
 
-  /*
-   * HtmlUnit reports:
-   *   expected=abc;,/?:@&=+$-_.!~*()ABC123foo
-   *   actual  =abc;,/?:@&=%20$-_.!~*()ABC123foo
-   */
-  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testTokenNonescaping() {
     final String shouldNotChange = "abc;,/?:@&=+$-_.!~*()ABC123foo";
 
@@ -515,10 +505,5 @@ public class HistoryTest extends GWTTestCase {
 
   private native void click(Element el) /*-{
    el.click();
-  }-*/;
-
-  private native boolean isIE8orIE9() /*-{
-    return $wnd.navigator.userAgent.toLowerCase().indexOf('msie') != -1 &&
-        ($doc.documentMode == 8 || $doc.documentMode == 9);
   }-*/;
 }

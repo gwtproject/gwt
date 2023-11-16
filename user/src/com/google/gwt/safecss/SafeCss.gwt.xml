@@ -21,17 +21,6 @@
   <inherits name="com.google.gwt.dom.DOM" />
   <inherits name="com.google.gwt.useragent.UserAgent"/>
 
-  <replace-with class="com.google.gwt.safecss.shared.SafeStylesUtils.ImplIE8">
-    <when-type-is class="com.google.gwt.safecss.shared.SafeStylesUtils.Impl" />
-    <when-property-is name="user.agent" value="ie8" />
-  </replace-with>
-
-  <!-- Override IE9 fallback. -->
-  <replace-with class="com.google.gwt.safecss.shared.SafeStylesUtils.Impl">
-    <when-type-is class="com.google.gwt.safecss.shared.SafeStylesUtils.Impl" />
-    <when-property-is name="user.agent" value="ie9" />
-  </replace-with>
-
   <source path="shared"/>
   <super-source path="super"/>
 </module>

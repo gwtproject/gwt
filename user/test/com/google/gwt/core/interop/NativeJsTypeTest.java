@@ -466,6 +466,15 @@ public class NativeJsTypeTest extends GWTTestCase {
     assertSame(MainWindow.window, AlsoMainWindow.window);
   }
 
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "goog.global")
+  private static class WindowThroughGoogGlobal {
+    public static Object window;
+  }
+
+  public void testGoogGlobalAlias() {
+    assertSame(MainWindow.window, WindowThroughGoogGlobal.window);
+  }
+
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Error")
   private static class NativeError {
     public String message;

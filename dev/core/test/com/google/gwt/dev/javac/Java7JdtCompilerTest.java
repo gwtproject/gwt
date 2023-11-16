@@ -16,7 +16,6 @@
 package com.google.gwt.dev.javac;
 
 import com.google.gwt.dev.javac.testing.impl.Java7MockResources;
-import com.google.gwt.dev.util.arg.SourceLevel;
 
 
 /**
@@ -46,11 +45,5 @@ public class Java7JdtCompilerTest extends JdtCompilerTestBase {
   public void testCompileMultiExceptions() throws Exception {
     assertResourcesCompileSuccessfully(Java7MockResources.EXCEPTION1, Java7MockResources.EXCEPTION2,
         Java7MockResources.MULTI_EXCEPTION_TEST);
-  }
-
-  @Override
-  protected SourceLevel getSourceLevel() {
-    // Always compile this tests as Java 8.
-    return SourceLevel.JAVA8;
   }
 }

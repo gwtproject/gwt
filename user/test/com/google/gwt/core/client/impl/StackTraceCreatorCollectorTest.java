@@ -64,8 +64,7 @@ public class StackTraceCreatorCollectorTest extends GWTTestCase {
     assertStackTrace(StackTraceExamples.chrome_31_file(), expected);
   }
 
-  // Asserts expected behavior but it is broken
-  public void _disabled_testChrome_31_multiline() {
+  public void testChrome_31_multiline() {
     StackTraceElement[] expected = new StackTraceElement[] {
         createSTE("dumpException6", "http://www.example.com/test/ABCD.cache.js@20", 82),
         createSTE("onclick", "http://www.example.com/test/ABCD.cache.js@122", 101),

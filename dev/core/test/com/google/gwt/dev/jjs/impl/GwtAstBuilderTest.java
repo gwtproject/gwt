@@ -26,26 +26,22 @@ import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.jjs.JavaAstConstructor;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JArrayType;
-import com.google.gwt.dev.jjs.ast.JCastOperation;
 import com.google.gwt.dev.jjs.ast.JClassLiteral;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JExpression;
-import com.google.gwt.dev.jjs.ast.JExpressionStatement;
 import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
-import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVariable;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.resource.Resource;
-import com.google.gwt.dev.util.arg.SourceLevel;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -178,13 +174,9 @@ public class GwtAstBuilderTest extends JJSTestBase {
             + "  }",
         "}"
     ));
-
-    sourceLevel = SourceLevel.DEFAULT_SOURCE_LEVEL;
   }
 
   public void testNestedClassDisposition() throws UnableToCompleteException {
-    sourceLevel = SourceLevel.JAVA8;
-
     sources.add(JavaResourceBase.createMockJavaResource("test.NestedClasses",
         "package test;",
         "public class NestedClasses {",
@@ -237,43 +229,57 @@ public class GwtAstBuilderTest extends JJSTestBase {
   }
 
   public void testIntersectionBound() throws UnableToCompleteException {
-    sourceLevel = SourceLevel.JAVA8;
-
-    sources.add(JavaResourceBase.createMockJavaResource("test.IntersectionBound",
+    addAll(JavaResourceBase.createMockJavaResource("test.IntersectionBound",
         "package test;",
+        "interface A<T> { void a(); }",
+        "interface B { void b(); }",
+        "interface C { void c(); }",
         "public class IntersectionBound {",
-        "  public void main() {",
-        "    get().f();",
-        "    get().g();",
-        "    get().h();",
-        "  }",
-        "  public interface A<T> { void f(); }",
-        "  public interface B { void g(); }",
-        "  public interface C { void h(); }",
         "  <T extends B & A<String> & C> T get() { return null;} ",
         "}"
     ));
 
-    JProgram program = compileProgram("test.IntersectionBound");
-    JMethod mainMethod = findQualifiedMethod(program, "test.IntersectionBound.main");
-    for (JStatement statement : ((JMethodBody) mainMethod.getBody()).getStatements()) {
-      // TODO: should have inserted only a cast to the type needed in the specific context context,
-      // but that would require some redesign. For now make sure all the casts from the intersection
-      // type are emitted.
-      JExpression maybeCastOperation =
-          ((JMethodCall) ((JExpressionStatement) statement).getExpr()).getInstance();
-      Set<String> castToTypeNames = Sets.newHashSet();
-      while (maybeCastOperation instanceof  JCastOperation) {
-        JCastOperation castOperation = (JCastOperation) maybeCastOperation;
-        castToTypeNames.add(castOperation.getCastType().getName());
-        maybeCastOperation = castOperation.getExpr();
-      }
+    assertEqualBlock(
+        "((C)(B)(A)(new IntersectionBound()).get()).a();",
+        "new IntersectionBound().get().a();");
+    assertEqualBlock(
+        "(new IntersectionBound()).get().b();",
+        "new IntersectionBound().get().b();");
+    assertEqualBlock(
+        "((C)(new IntersectionBound()).get()).c();", 
+        "new IntersectionBound().get().c();");
+  }
 
-      assertEquals(
-          Sets.newHashSet(Arrays.asList(
-              "test.IntersectionBound$A", "test.IntersectionBound$B", "test.IntersectionBound$C")),
-          castToTypeNames);
-    }
+  public void testBridgeMethodResolution() throws UnableToCompleteException {
+    sources.add(JavaResourceBase.createMockJavaResource("test.SuperInterface",
+        "package test;",
+        "public interface SuperInterface<T> {",
+        "  void m(T t);",
+        "}",
+        "interface SubInterface extends  SuperInterface<String> {",
+        "  void m(String t);",
+        "  default SubInterface get() { ",
+        "    // A lambda that will have a bridge m(Object) -> m(String)",
+        "    return o -> {};",
+        "  } ",
+        "  static <T> void applyM(SuperInterface<T> s) { s.m(null); } ",
+        "}"
+    ));
+
+    JProgram program = compileProgram("test.SuperInterface");
+    JMethod applyM = findQualifiedMethod(program, "test.SubInterface.applyM");
+
+    final Set<String> calledMethods = new HashSet<>();
+
+    new JVisitor() {
+      @Override
+      public void endVisit(JMethodCall x, Context ctx) {
+        calledMethods.add(x.getTarget().getQualifiedName());
+      }
+    }.accept(applyM);
+    assertEquals(
+        Sets.newHashSet(Arrays.asList("test.SuperInterface.m(Ljava/lang/Object;)V")),
+        calledMethods);
   }
 
   public void testUniqueArrayTypeInstance() throws UnableToCompleteException {
@@ -302,16 +308,14 @@ public class GwtAstBuilderTest extends JJSTestBase {
         }).build();
     compilerContext.getOptions().setSourceLevel(sourceLevel);
     compilerContext.getOptions().setStrict(true);
-    CompilationState state = CompilationStateBuilder.buildFrom(logger, compilerContext, sources,
-        getAdditionalTypeProviderDelegate());
+    CompilationState state = CompilationStateBuilder.buildFrom(logger, compilerContext, sources);
     return state;
   }
 
   private JProgram compileProgram(String entryType) throws UnableToCompleteException {
     CompilerContext compilerContext = provideCompilerContext();
     ;
-    CompilationState state = CompilationStateBuilder.buildFrom(logger, compilerContext, sources,
-        getAdditionalTypeProviderDelegate());
+    CompilationState state = CompilationStateBuilder.buildFrom(logger, compilerContext, sources);
     JProgram program = JavaAstConstructor.construct(logger, state, compilerContext,
         null, entryType, "com.google.gwt.lang.Exceptions");
     return program;

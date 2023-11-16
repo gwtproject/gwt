@@ -15,14 +15,15 @@
  */
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkCriticalElement;
+import static javaemul.internal.InternalPreconditions.checkCriticalNotNull;
+import static javaemul.internal.InternalPreconditions.checkNotNull;
+
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-
-import static javaemul.internal.InternalPreconditions.checkCriticalElement;
-import static javaemul.internal.InternalPreconditions.checkCriticalNotNull;
-import static javaemul.internal.InternalPreconditions.checkNotNull;
+import java.util.stream.Stream;
 
 /**
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html">
@@ -57,6 +58,10 @@ public final class Optional<T> {
     return ref != null;
   }
 
+  public boolean isEmpty() {
+    return ref == null;
+  }
+
   public T get() {
     checkCriticalElement(isPresent());
     return ref;
@@ -65,6 +70,14 @@ public final class Optional<T> {
   public void ifPresent(Consumer<? super T> consumer) {
     if (isPresent()) {
       consumer.accept(ref);
+    }
+  }
+
+  public void ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction) {
+    if (isPresent()) {
+      action.accept(ref);
+    } else {
+      emptyAction.run();
     }
   }
 
@@ -92,12 +105,33 @@ public final class Optional<T> {
     return empty();
   }
 
+  public Optional<T> or(Supplier<? extends Optional<? extends T>> supplier) {
+    checkNotNull(supplier);
+    if (isPresent()) {
+      return this;
+    } else {
+      return (Optional) checkNotNull(supplier.get());
+    }
+  }
+
+  public Stream<T> stream() {
+    if (isPresent()) {
+      return Stream.of(ref);
+    } else {
+      return Stream.empty();
+    }
+  }
+
   public T orElse(T other) {
     return isPresent() ? ref : other;
   }
 
   public T orElseGet(Supplier<? extends T> other) {
     return isPresent() ? ref : other.get();
+  }
+
+  public T orElseThrow() {
+    return get();
   }
 
   public <X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSupplier) throws X {

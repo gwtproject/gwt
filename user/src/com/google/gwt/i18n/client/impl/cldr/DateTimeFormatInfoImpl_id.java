@@ -44,8 +44,8 @@ public class DateTimeFormatInfoImpl_id extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "SM",
-        "M"
+        "Sebelum Masehi",
+        "Masehi"
     };
   }
 
@@ -180,7 +180,7 @@ public class DateTimeFormatInfoImpl_id extends DateTimeFormatInfoImpl {
         "Mei",
         "Jun",
         "Jul",
-        "Agt",
+        "Agu",
         "Sep",
         "Okt",
         "Nov",

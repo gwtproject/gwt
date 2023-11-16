@@ -108,6 +108,7 @@ public class LocalizedNamesImpl_pa_Arab extends LocalizedNamesImpl_pa {
         "ES",
         "ET",
         "EU",
+        "EZ",
         "FI",
         "FJ",
         "FK",
@@ -273,6 +274,7 @@ public class LocalizedNamesImpl_pa_Arab extends LocalizedNamesImpl_pa {
         "UA",
         "UG",
         "UM",
+        "UN",
         "US",
         "UY",
         "UZ",
@@ -285,6 +287,8 @@ public class LocalizedNamesImpl_pa_Arab extends LocalizedNamesImpl_pa {
         "VU",
         "WF",
         "WS",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "YT",
@@ -298,7 +302,7 @@ public class LocalizedNamesImpl_pa_Arab extends LocalizedNamesImpl_pa {
   @Override
   protected void loadNameMapJava() {
     super.loadNameMapJava();
-    namesMap.put("PK", "پکستان");
+    namesMap.put("PK", "پاکستان");
   }
 
   @Override
@@ -308,7 +312,7 @@ public class LocalizedNamesImpl_pa_Arab extends LocalizedNamesImpl_pa {
 
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
-        "PK": "پکستان"
+        "PK": "پاکستان"
     };
   }-*/;
 }

@@ -23,62 +23,38 @@ public class DateTimeFormatInfoImpl_zh_Hant_MO extends DateTimeFormatInfoImpl_zh
 
   @Override
   public String dateFormatFull() {
-    return "y年MM月dd日EEEE";
-  }
-
-  @Override
-  public String dateFormatLong() {
-    return "y年MM月dd日";
+    return "y年M月d日EEEE";
   }
 
   @Override
   public String dateFormatShort() {
-    return "yy年M月d日";
+    return "d/M/y";
   }
 
   @Override
-  public String dateTimeFull(String timePattern, String datePattern) {
-    return datePattern + " " + timePattern;
+  public String[] erasFull() {
+    return new String[] {
+        "公元前",
+        "公元"
+    };
   }
 
   @Override
-  public String dateTimeMedium(String timePattern, String datePattern) {
-    return datePattern + timePattern;
-  }
-
-  @Override
-  public String dateTimeShort(String timePattern, String datePattern) {
-    return datePattern + timePattern;
+  public String[] erasShort() {
+    return new String[] {
+        "公元前",
+        "公元"
+    };
   }
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "M月d日 (EEEE)";
+    return "M月d日EEEE";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M-d";
-  }
-
-  @Override
-  public String formatYearMonthAbbrev() {
-    return "y 年 M 月";
-  }
-
-  @Override
-  public String formatYearMonthAbbrevDay() {
-    return "y 年 M 月 d 日";
-  }
-
-  @Override
-  public String formatYearMonthFull() {
-    return "y 年 M 月";
-  }
-
-  @Override
-  public String formatYearMonthFullDay() {
-    return "y 年 M 月 d 日";
+    return "d/M";
   }
 
   @Override
@@ -93,16 +69,16 @@ public class DateTimeFormatInfoImpl_zh_Hant_MO extends DateTimeFormatInfoImpl_zh
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "y 年 M 月 d 日 (EEE)";
+    return "y年M月d日EEE";
   }
 
   @Override
-  public String timeFormatFull() {
-    return "ah:mm:ss [zzzz]";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "ah:mm:ss [z]";
+  public String[] quartersShort() {
+    return new String[] {
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4"
+    };
   }
 }

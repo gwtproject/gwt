@@ -32,6 +32,7 @@ public class RichTextAreaImplMozilla extends RichTextAreaImplStandard {
   }
 
   @Override
+  @SuppressWarnings("deprecation")
   public native void initElement() /*-{
     // Mozilla doesn't allow designMode to be set reliably until the iframe is
     // fully loaded.

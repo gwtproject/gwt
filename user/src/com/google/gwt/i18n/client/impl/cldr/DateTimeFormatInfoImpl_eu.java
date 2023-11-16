@@ -23,19 +23,29 @@ public class DateTimeFormatInfoImpl_eu extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatFull() {
-    return "y('e')'ko' MMMM d, EEEE";
+    return "y('e')'ko' MMMM'ren' d('a'), EEEE";
   }
 
   @Override
   public String dateFormatLong() {
-    return "y('e')'ko' MMMM d";
+    return "y('e')'ko' MMMM'ren' d('a')";
+  }
+
+  @Override
+  public String dateFormatMedium() {
+    return "y('e')'ko' MMM d('a')";
+  }
+
+  @Override
+  public String dateFormatShort() {
+    return "yy/M/d";
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
         "K.a.",
-        "K.o."
+        "Kristo ondoren"
     };
   }
 
@@ -59,7 +69,7 @@ public class DateTimeFormatInfoImpl_eu extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFullDay() {
-    return "y('e')'ko' MMMM d";
+    return "y('e')'ko' MMMM'ren' d";
   }
 
   @Override
@@ -84,24 +94,6 @@ public class DateTimeFormatInfoImpl_eu extends DateTimeFormatInfoImpl {
 
   @Override
   public String[] monthsFull() {
-    return new String[] {
-        "urtarrilak",
-        "otsailak",
-        "martxoak",
-        "apirilak",
-        "maiatzak",
-        "ekainak",
-        "uztailak",
-        "abuztuak",
-        "irailak",
-        "urriak",
-        "azaroak",
-        "abenduak"
-    };
-  }
-
-  @Override
-  public String[] monthsFullStandalone() {
     return new String[] {
         "urtarrila",
         "otsaila",
@@ -172,6 +164,16 @@ public class DateTimeFormatInfoImpl_eu extends DateTimeFormatInfoImpl {
         "3Hh",
         "4Hh"
     };
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "HH:mm:ss (zzzz)";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "HH:mm:ss (z)";
   }
 
   @Override

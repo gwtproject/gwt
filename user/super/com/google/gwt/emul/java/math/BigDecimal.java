@@ -37,11 +37,8 @@ package java.math;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
-
 import javaemul.internal.JsUtils;
 import javaemul.internal.NativeRegExp;
-
-import jsinterop.annotations.JsType;
 
 /**
  * This class represents immutable arbitrary precision decimal numbers. Each
@@ -496,16 +493,6 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
    * @param digits number of digits of precision to include
    * @return non-localized string representation of {@code d}
    */
-  private static String toPrecision(double value, int digits) {
-    NativeNumber number = JsUtils.uncheckedCast(value);
-    return number.toPrecision(digits);
-  }
-
-  @JsType(isNative = true, name = "Number", namespace = "<window>")
-  private interface NativeNumber {
-    String toPrecision(int digits);
-  }
-
   private static BigDecimal valueOf(double smallValue, double scale) {
     return new BigDecimal(smallValue, scale);
   }
@@ -720,7 +707,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
       // math.03=Infinity or NaN
       throw new NumberFormatException("Infinite or NaN"); //$NON-NLS-1$
     }
-    initFrom(toPrecision(val, 20));
+    initFrom(JsUtils.toPrecision(val, 20));
   }
 
   /**
@@ -736,11 +723,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
    *           represented within the given precision without rounding.
    */
   public BigDecimal(double val, MathContext mc) {
-    if (Double.isInfinite(val) || Double.isNaN(val)) {
-      // math.03=Infinity or NaN
-      throw new NumberFormatException("Infinite or NaN"); //$NON-NLS-1$
-    }
-    initFrom(toPrecision(val, 20));
+    this(val);
     inplaceRound(mc);
   }
 
@@ -2589,7 +2572,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
 
   private BigInteger getUnscaledValue() {
     if (intVal == null) {
-      intVal = BigInteger.valueOf(smallValue);
+      intVal = BigInteger.valueOf((long) smallValue);
     }
     return intVal;
   }

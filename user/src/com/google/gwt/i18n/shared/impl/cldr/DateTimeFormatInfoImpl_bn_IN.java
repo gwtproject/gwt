@@ -22,31 +22,6 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_bn_IN extends DateTimeFormatInfoImpl_bn {
 
   @Override
-  public int firstDayOfTheWeek() {
-    return 0;
-  }
-
-  @Override
-  public String[] quartersFull() {
-    return new String[] {
-        "ত্রৈমাসিক",
-        "ষাণ্মাসিক",
-        "তৃতীয় চতুর্থাংশ",
-        "বার্ষিক"
-    };
-  }
-
-  @Override
-  public String[] quartersShort() {
-    return new String[] {
-        "ত্রৈমাসিক",
-        "ষাণ্মাসিক",
-        "চতুর্থাংশ ৩",
-        "বার্ষিক"
-    };
-  }
-
-  @Override
   public int weekendStart() {
     return 0;
   }

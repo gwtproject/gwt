@@ -22,6 +22,8 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.checkPositionIndex;
 import static javaemul.internal.InternalPreconditions.checkState;
 
+import jsinterop.annotations.JsNonNull;
+
 /**
  * Skeletal implementation of the List interface. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractList.html">[Sun
@@ -281,6 +283,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
   }
 
   @Override
+  @JsNonNull
   public List<E> subList(int fromIndex, int toIndex) {
     return new SubList<E>(this, fromIndex, toIndex);
   }

@@ -22,11 +22,6 @@
   -->
   <set-property name="dragEventSupport" value="maybe" />
 
-  <!-- Older browsers do not support drag events. -->
-  <set-property name="dragEventSupport" value="no">
-    <when-property-is name="user.agent" value="ie8" />
-  </set-property>
-
   <replace-with class="com.google.gwt.event.dom.client.DragDropEventBase.DragSupportDetectorNo">
     <when-type-is class="com.google.gwt.event.dom.client.DragDropEventBase.DragSupportDetector" />
     <when-property-is name="dragEventSupport" value="no" />

@@ -36,7 +36,6 @@ public class LocalizedNamesImpl_mfe extends LocalizedNamesImpl {
         "AO",
         "AI",
         "AG",
-        "AN",
         "AQ",
         "AM",
         "AW",
@@ -83,6 +82,7 @@ public class LocalizedNamesImpl_mfe extends LocalizedNamesImpl {
         "ER",
         "EE",
         "EU",
+        "EZ",
         "FJ",
         "PH",
         "FI",
@@ -262,12 +262,15 @@ public class LocalizedNamesImpl_mfe extends LocalizedNamesImpl {
         "TM",
         "TV",
         "UM",
+        "UN",
         "GB",
         "UY",
         "VU",
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "JM",
@@ -298,7 +301,6 @@ public class LocalizedNamesImpl_mfe extends LocalizedNamesImpl {
     namesMap.put("AG", "Antigua-ek-Barbuda");
     namesMap.put("AL", "Albani");
     namesMap.put("AM", "Armeni");
-    namesMap.put("AN", "Antiy neerlande");
     namesMap.put("AR", "Larzantinn");
     namesMap.put("AS", "Samoa amerikin");
     namesMap.put("AT", "Lostris");
@@ -321,7 +323,6 @@ public class LocalizedNamesImpl_mfe extends LocalizedNamesImpl {
     namesMap.put("CF", "Repiblik Lafrik Santral");
     namesMap.put("CG", "Kongo");
     namesMap.put("CH", "Laswis");
-    namesMap.put("CI", "Côte d'Ivoire");
     namesMap.put("CK", "Zil Cook");
     namesMap.put("CL", "Shili");
     namesMap.put("CM", "Kamerounn");
@@ -476,7 +477,6 @@ public class LocalizedNamesImpl_mfe extends LocalizedNamesImpl {
         "AG": "Antigua-ek-Barbuda",
         "AL": "Albani",
         "AM": "Armeni",
-        "AN": "Antiy neerlande",
         "AR": "Larzantinn",
         "AS": "Samoa amerikin",
         "AT": "Lostris",
@@ -499,7 +499,6 @@ public class LocalizedNamesImpl_mfe extends LocalizedNamesImpl {
         "CF": "Repiblik Lafrik Santral",
         "CG": "Kongo",
         "CH": "Laswis",
-        "CI": "Côte d'Ivoire",
         "CK": "Zil Cook",
         "CL": "Shili",
         "CM": "Kamerounn",

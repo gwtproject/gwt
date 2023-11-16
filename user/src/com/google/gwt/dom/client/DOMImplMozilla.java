@@ -20,7 +20,16 @@ package com.google.gwt.dom.client;
  */
 class DOMImplMozilla extends DOMImplStandard {
 
-  private static native int getGeckoVersion() /*-{
+  private static int cachedGeckoVersion = -2;
+
+  private static int getGeckoVersion() {
+    if (cachedGeckoVersion == -2) {
+      cachedGeckoVersion = getNativeGeckoVersion();
+    }
+    return cachedGeckoVersion;
+  }
+
+  private static native int getNativeGeckoVersion() /*-{
     var result = /rv:([0-9]+)\.([0-9]+)(\.([0-9]+))?.*?/.exec(navigator.userAgent.toLowerCase());
     if (result && result.length >= 3) {
       var version = (parseInt(result[1]) * 1000000) + (parseInt(result[2]) * 1000) +
@@ -224,6 +233,18 @@ class DOMImplMozilla extends DOMImplStandard {
   private native NativeEvent createKeyEventImpl(Document doc, String type,
       boolean canBubble, boolean cancelable, boolean ctrlKey, boolean altKey,
       boolean shiftKey, boolean metaKey, int keyCode, int charCode) /*-{
+    if (!!window.KeyboardEvent) {
+      return new KeyboardEvent(type, {
+        ctrlKey: ctrlKey,
+        altKey: altKey,
+        shiftKey: shiftKey,
+        metaKey: metaKey,
+        keyCode: keyCode,
+        charCode: charCode,
+        bubbles: canBubble,
+        cancelable: cancelable
+      });
+    }
     var evt = doc.createEvent('KeyboardEvent');
     if (evt.initKeyEvent) {
       // Gecko

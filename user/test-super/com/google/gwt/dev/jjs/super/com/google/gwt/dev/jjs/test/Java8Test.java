@@ -27,6 +27,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.IntFunction;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import jsinterop.annotations.JsFunction;
@@ -362,6 +364,27 @@ public class Java8Test extends GWTTestCase {
 
       int goo() {
         I i = super::foo;
+        return i.foo(0);
+      }
+    }
+
+    assertEquals(42, new X().goo());
+  }
+
+  public void testQualifiedSuperReferenceExpression() {
+    class Y {
+      int foo(Integer i) {
+        return 42;
+      }
+    }
+
+    class X extends Y {
+      int foo(Integer i) {
+        return 23;
+      }
+
+      int goo() {
+        I i = X.super::foo;
         return i.foo(0);
       }
     }
@@ -720,43 +743,15 @@ public class Java8Test extends GWTTestCase {
   interface SimpleI {
     int fun();
   }
-  interface SimpleJ {
-    int foo();
-    int bar();
-  }
   interface SimpleK {
   }
   public void testIntersectionCastWithLambdaExpr() {
-    SimpleI simpleI1 = (SimpleI & EmptyI) () -> { return 11; };
+    SimpleI simpleI1 = (SimpleI & EmptyI) () -> 11;
     assertEquals(11, simpleI1.fun());
-    SimpleI simpleI2 = (EmptyI & SimpleI) () -> { return 22; };
+    SimpleI simpleI2 = (EmptyI & SimpleI) () -> 22;
     assertEquals(22, simpleI2.fun());
-    EmptyI emptyI = (EmptyI & SimpleI) () -> { return 33; };
-    try {
-      ((EmptyA & SimpleI) () -> { return 33; }).fun();
-      fail("Should have thrown a ClassCastException");
-    } catch (ClassCastException e) {
-      // expected.
-    }
-    try {
-      ((SimpleI & SimpleJ) () -> { return 44; }).fun();
-      fail("Should have thrown a ClassCastException");
-    } catch (ClassCastException e) {
-      // expected.
-    }
-    try {
-      ((SimpleI & SimpleJ) () -> { return 44; }).foo();
-      fail("Should have thrown a ClassCastException");
-    } catch (ClassCastException e) {
-      // expected.
-    }
-    try {
-      ((SimpleI & SimpleJ) () -> { return 44; }).bar();
-      fail("Should have thrown a ClassCastException");
-    } catch (ClassCastException e) {
-      // expected.
-    }
-    assertEquals(55, ((SimpleI & SimpleK) () -> { return 55; }).fun());
+    EmptyI emptyI = (EmptyI & SimpleI) () -> 33;
+    assertEquals(55, ((SimpleI & SimpleK) () -> 55).fun());
   }
 
   class SimpleA {
@@ -1622,7 +1617,7 @@ public class Java8Test extends GWTTestCase {
     assertEquals(4, outer.createInner2Param().apply(1, 2).sum);
     assertEquals(7, outer.createInner3Param().apply(1, 2, 3).sum);
     assertEquals(7, outer.createInner2ParamArray().apply(1, new Integer[] {2, 3}).sum);
-    
+
     // inner class constructor varargs + autoboxing
     assertEquals(2, outer.createInner1IntParam().apply(1).sum);
     assertEquals(4, outer.createInner2IntParam().apply(1, 2).sum);
@@ -2006,5 +2001,44 @@ public class Java8Test extends GWTTestCase {
     IntFunction<Integer> unboxBox = i -> i;
     assertEquals(2, (int) unboxBox.apply(2));
     assertEquals(2, (int) unboxBox.apply(new Integer(2)));
+  }
+
+  // Regression tests for #9598
+  public void testImproperMethodResolution() {
+    Predicate p = o -> true;
+    assertTrue(p.test(null));
+  }
+
+  interface I2<T> { public T foo(T arg); }
+
+  interface I1 extends I2<String> { public String foo(String arg0); }
+
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public void testIntersectionCastLambda() {
+
+    Object instance = (I1 & I2<String>) val -> "#" + val;
+
+    assertTrue(instance instanceof I1);
+    assertTrue(instance instanceof I2);
+
+    I1 lambda = (I1) instance;
+    I2 raw = lambda;
+    assertEquals("#1", raw.foo("1")); // tests that the bridge exists and is correct
+    assertEquals("#2", lambda.foo("2"));
+  }
+
+  static class C2 { public static String append(String str) { return "#" + str; } }
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public void testIntersectionCastMethodReference() {
+
+    Object instance = (I1 & I2<String>) C2::append;
+
+    assertTrue(instance instanceof I1);
+    assertTrue(instance instanceof I2);
+
+    I1 lambda = (I1) instance;
+    I2 raw = lambda;
+    assertEquals("#1", raw.foo("1")); // tests that the bridge exists and is correct
+    assertEquals("#2", lambda.foo("2"));
   }
 }

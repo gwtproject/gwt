@@ -37,7 +37,6 @@ public class LocalizedNamesImpl_yav extends LocalizedNamesImpl {
         "DZ",
         "AW",
         "US",
-        "AN",
         "AQ",
         "AZ",
         "AX",
@@ -61,6 +60,7 @@ public class LocalizedNamesImpl_yav extends LocalizedNamesImpl {
         "ER",
         "ET",
         "EU",
+        "EZ",
         "VU",
         "VA",
         "FR",
@@ -277,8 +277,11 @@ public class LocalizedNamesImpl_yav extends LocalizedNamesImpl {
         "RO",
         "RU",
         "UM",
+        "UN",
         "UZ",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "HN",
@@ -299,7 +302,6 @@ public class LocalizedNamesImpl_yav extends LocalizedNamesImpl {
     namesMap.put("AI", "Aŋkíla");
     namesMap.put("AL", "Alpaní");
     namesMap.put("AM", "Almanía");
-    namesMap.put("AN", "andíiy u nitililáand");
     namesMap.put("AO", "Aŋkúla");
     namesMap.put("AR", "Alsaŋtín");
     namesMap.put("AS", "Sámua u Amelíka");
@@ -532,7 +534,6 @@ public class LocalizedNamesImpl_yav extends LocalizedNamesImpl {
         "AI": "Aŋkíla",
         "AL": "Alpaní",
         "AM": "Almanía",
-        "AN": "andíiy u nitililáand",
         "AO": "Aŋkúla",
         "AR": "Alsaŋtín",
         "AS": "Sámua u Amelíka",

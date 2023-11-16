@@ -16,17 +16,23 @@
 package com.google.gwt.emultest;
 
 import com.google.gwt.emultest.java.internal.CoercionsTest;
+import com.google.gwt.emultest.java.io.BufferedWriterTest;
 import com.google.gwt.emultest.java.io.ByteArrayInputStreamTest;
 import com.google.gwt.emultest.java.io.ByteArrayOutputStreamTest;
 import com.google.gwt.emultest.java.io.FilterInputStreamTest;
 import com.google.gwt.emultest.java.io.FilterOutputStreamTest;
 import com.google.gwt.emultest.java.io.InputStreamTest;
 import com.google.gwt.emultest.java.io.OutputStreamTest;
+import com.google.gwt.emultest.java.io.OutputStreamWriterTest;
+import com.google.gwt.emultest.java.io.PrintStreamTest;
+import com.google.gwt.emultest.java.io.WriterTest;
 import com.google.gwt.emultest.java.lang.BooleanTest;
 import com.google.gwt.emultest.java.lang.ByteTest;
 import com.google.gwt.emultest.java.lang.CharacterTest;
 import com.google.gwt.emultest.java.lang.CompilerConstantStringTest;
+import com.google.gwt.emultest.java.lang.DoubleEqualsSemanticsTest;
 import com.google.gwt.emultest.java.lang.DoubleTest;
+import com.google.gwt.emultest.java.lang.FloatEqualsSemanticsTest;
 import com.google.gwt.emultest.java.lang.FloatTest;
 import com.google.gwt.emultest.java.lang.IntegerTest;
 import com.google.gwt.emultest.java.lang.JsExceptionTest;
@@ -52,7 +58,10 @@ import com.google.gwt.emultest.java.security.MessageDigestTest;
 import com.google.gwt.emultest.java.sql.SqlDateTest;
 import com.google.gwt.emultest.java.sql.SqlTimeTest;
 import com.google.gwt.emultest.java.sql.SqlTimestampTest;
-
+import com.google.gwt.emultest.java.util.ComparatorTest;
+import com.google.gwt.emultest.java.util.DateTest;
+import com.google.gwt.emultest.java.util.ObjectsTest;
+import com.google.gwt.emultest.java.util.RandomTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -63,12 +72,16 @@ import org.junit.runners.Suite.SuiteClasses;
   CoercionsTest.class,
 
   // -- java.io
+  BufferedWriterTest.class,
   ByteArrayInputStreamTest.class,
   ByteArrayOutputStreamTest.class,
   FilterInputStreamTest.class,
   FilterOutputStreamTest.class,
   InputStreamTest.class,
   OutputStreamTest.class,
+  OutputStreamWriterTest.class,
+  PrintStreamTest.class,
+  WriterTest.class,
 
   // -- java.lang
   BooleanTest.class,
@@ -76,7 +89,9 @@ import org.junit.runners.Suite.SuiteClasses;
   CharacterTest.class,
   CompilerConstantStringTest.class,
   DoubleTest.class,
+  DoubleEqualsSemanticsTest.class,
   FloatTest.class,
+  FloatEqualsSemanticsTest.class,
   IntegerTest.class,
   JsExceptionTest.class,
   LongTest.class,
@@ -113,7 +128,13 @@ import org.junit.runners.Suite.SuiteClasses;
   SqlTimeTest.class,
   SqlTimestampTest.class,
 
+  // -- java.util
+  ComparatorTest.class,
+  DateTest.class,
+  ObjectsTest.class,
+  RandomTest.class,
+
   // Put last to reduce number of times the test framework switches modules
   MathContextWithObfuscatedEnumsTest.class,
 })
-public class EmulSuite { }
+public class EmulSuite {}

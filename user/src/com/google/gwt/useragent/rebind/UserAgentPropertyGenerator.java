@@ -42,9 +42,6 @@ public class UserAgentPropertyGenerator implements PropertyProviderGenerator {
    */
   private enum UserAgent {
     safari("return (ua.indexOf('webkit') != -1);"),
-    ie10("return (ua.indexOf('msie') != -1 && (docMode >= 10 && docMode < 11));"),
-    ie9("return (ua.indexOf('msie') != -1 && (docMode >= 9 && docMode < 11));"),
-    ie8("return (ua.indexOf('msie') != -1 && (docMode >= 8 && docMode < 11));"),
     gecko1_8("return (ua.indexOf('gecko') != -1 || docMode >= 11);");
 
     private final String predicateBlock;

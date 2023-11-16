@@ -36,13 +36,13 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "AI",
         "AQ",
         "AG",
-        "AN",
         "CI",
         "AU",
         "AT",
         "SA",
         "AR",
         "AM",
+        "RE",
         "AW",
         "AZ",
         "BS",
@@ -59,6 +59,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "BA",
         "BW",
         "BR",
+        "UN",
         "BN",
         "BG",
         "BF",
@@ -124,6 +125,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "CC",
         "MP",
         "MH",
+        "SB",
         "TC",
         "IR",
         "IQ",
@@ -143,6 +145,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "KH",
         "CM",
         "CA",
+        "BQ",
         "KZ",
         "KE",
         "CY",
@@ -153,6 +156,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "CD",
         "KP",
         "KR",
+        "XK",
         "KW",
         "HR",
         "CU",
@@ -190,7 +194,6 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "MM",
         "NA",
         "NR",
-        "BQ",
         "NP",
         "NI",
         "NE",
@@ -214,8 +217,6 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "QA",
         "DO",
         "CF",
-        "CZ",
-        "RE",
         "GB",
         "RO",
         "RU",
@@ -226,7 +227,6 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "KN",
         "LC",
         "MF",
-        "SB",
         "SV",
         "WS",
         "AS",
@@ -258,8 +258,10 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "SZ",
         "TJ",
         "TW",
+        "EZ",
         "TZ",
         "TD",
+        "CZ",
         "TH",
         "TL",
         "IO",
@@ -281,7 +283,8 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
-        "XK",
+        "XA",
+        "XB",
         "YE",
         "ZM",
         "NZ",
@@ -321,11 +324,11 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
     namesMap.put("151", "Europa ar Reter");
     namesMap.put("154", "Europa an Norzh");
     namesMap.put("155", "Europa ar Cʼhornôg");
+    namesMap.put("202", "Afrika issaharat");
     namesMap.put("419", "Amerika Latin");
     namesMap.put("AC", "Enez Ascension");
     namesMap.put("AE", "Emirelezhioù Arab Unanet");
     namesMap.put("AG", "Antigua ha Barbuda");
-    namesMap.put("AN", "Antilhez Nederlandat");
     namesMap.put("AQ", "Antarktika");
     namesMap.put("AR", "Arcʼhantina");
     namesMap.put("AS", "Samoa Amerikan");
@@ -336,7 +339,8 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
     namesMap.put("BA", "Bosnia ha Herzegovina");
     namesMap.put("BE", "Belgia");
     namesMap.put("BH", "Bahrein");
-    namesMap.put("BQ", "Nederlandat Karib");
+    namesMap.put("BL", "Saint Barthélemy");
+    namesMap.put("BQ", "Karib Nederlandat");
     namesMap.put("BT", "Bhoutan");
     namesMap.put("BV", "Enez Bouvet");
     namesMap.put("CA", "Kanada");
@@ -352,10 +356,10 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
     namesMap.put("CO", "Kolombia");
     namesMap.put("CP", "Enez Clipperton");
     namesMap.put("CU", "Kuba");
-    namesMap.put("CV", "Kab Glas");
+    namesMap.put("CV", "Kab-Glas");
     namesMap.put("CX", "Enez Christmas");
     namesMap.put("CY", "Kiprenez");
-    namesMap.put("CZ", "Republik Tchek");
+    namesMap.put("CZ", "Tchekia");
     namesMap.put("DE", "Alamagn");
     namesMap.put("DK", "Danmark");
     namesMap.put("DO", "Republik Dominikan");
@@ -366,6 +370,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
     namesMap.put("ES", "Spagn");
     namesMap.put("ET", "Etiopia");
     namesMap.put("EU", "Unaniezh Europa");
+    namesMap.put("EZ", "takad an euro");
     namesMap.put("FJ", "Fidji");
     namesMap.put("FK", "Inizi Falkland");
     namesMap.put("FM", "Mikronezia");
@@ -406,10 +411,12 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
     namesMap.put("KY", "Inizi Cayman");
     namesMap.put("KZ", "Kazakstan");
     namesMap.put("LB", "Liban");
+    namesMap.put("LC", "Saint Lucia");
     namesMap.put("LT", "Lituania");
     namesMap.put("LU", "Luksembourg");
     namesMap.put("LY", "Libia");
     namesMap.put("MA", "Maroko");
+    namesMap.put("MF", "Saint Martin");
     namesMap.put("MG", "Madagaskar");
     namesMap.put("MH", "Inizi Marshall");
     namesMap.put("MK", "Makedonia");
@@ -429,7 +436,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
     namesMap.put("NZ", "Zeland-Nevez");
     namesMap.put("PA", "Panamá");
     namesMap.put("PE", "Perou");
-    namesMap.put("PF", "Polinezia cʼhall");
+    namesMap.put("PF", "Polinezia Cʼhall");
     namesMap.put("PG", "Papoua Ginea-Nevez");
     namesMap.put("PH", "Filipinez");
     namesMap.put("PL", "Polonia");
@@ -437,18 +444,19 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
     namesMap.put("PN", "Enez Pitcairn");
     namesMap.put("PS", "Tiriadoù Palestina");
     namesMap.put("QO", "Oseania diabell");
-    namesMap.put("RE", "Reünion");
+    namesMap.put("RE", "Ar Reünion");
     namesMap.put("RO", "Roumania");
     namesMap.put("RU", "Rusia");
     namesMap.put("SA", "Arabia Saoudat");
-    namesMap.put("SB", "Salomon");
+    namesMap.put("SB", "Inizi Salomon");
     namesMap.put("SC", "Sechelez");
     namesMap.put("SD", "Soudan");
     namesMap.put("SE", "Sveden");
     namesMap.put("SG", "Singapour");
+    namesMap.put("SH", "Saint-Helena");
     namesMap.put("SJ", "Svalbard");
     namesMap.put("SR", "Surinam");
-    namesMap.put("SS", "Su Soudan");
+    namesMap.put("SS", "Susoudan");
     namesMap.put("ST", "São Tomé ha Príncipe");
     namesMap.put("SV", "Salvador");
     namesMap.put("SY", "Siria");
@@ -462,6 +470,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
     namesMap.put("UA", "Ukraina");
     namesMap.put("UG", "Ouganda");
     namesMap.put("UM", "Inizi diabell ar Stadoù-Unanet");
+    namesMap.put("UN", "Broadoù unanet");
     namesMap.put("US", "Stadoù-Unanet");
     namesMap.put("UZ", "Ouzbekistan");
     namesMap.put("VA", "Vatikan");
@@ -510,11 +519,11 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "151": "Europa ar Reter",
         "154": "Europa an Norzh",
         "155": "Europa ar Cʼhornôg",
+        "202": "Afrika issaharat",
         "419": "Amerika Latin",
         "AC": "Enez Ascension",
         "AE": "Emirelezhioù Arab Unanet",
         "AG": "Antigua ha Barbuda",
-        "AN": "Antilhez Nederlandat",
         "AQ": "Antarktika",
         "AR": "Arcʼhantina",
         "AS": "Samoa Amerikan",
@@ -525,7 +534,8 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "BA": "Bosnia ha Herzegovina",
         "BE": "Belgia",
         "BH": "Bahrein",
-        "BQ": "Nederlandat Karib",
+        "BL": "Saint Barthélemy",
+        "BQ": "Karib Nederlandat",
         "BT": "Bhoutan",
         "BV": "Enez Bouvet",
         "CA": "Kanada",
@@ -541,10 +551,10 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "CO": "Kolombia",
         "CP": "Enez Clipperton",
         "CU": "Kuba",
-        "CV": "Kab Glas",
+        "CV": "Kab-Glas",
         "CX": "Enez Christmas",
         "CY": "Kiprenez",
-        "CZ": "Republik Tchek",
+        "CZ": "Tchekia",
         "DE": "Alamagn",
         "DK": "Danmark",
         "DO": "Republik Dominikan",
@@ -555,6 +565,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "ES": "Spagn",
         "ET": "Etiopia",
         "EU": "Unaniezh Europa",
+        "EZ": "takad an euro",
         "FJ": "Fidji",
         "FK": "Inizi Falkland",
         "FM": "Mikronezia",
@@ -595,10 +606,12 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "KY": "Inizi Cayman",
         "KZ": "Kazakstan",
         "LB": "Liban",
+        "LC": "Saint Lucia",
         "LT": "Lituania",
         "LU": "Luksembourg",
         "LY": "Libia",
         "MA": "Maroko",
+        "MF": "Saint Martin",
         "MG": "Madagaskar",
         "MH": "Inizi Marshall",
         "MK": "Makedonia",
@@ -618,7 +631,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "NZ": "Zeland-Nevez",
         "PA": "Panamá",
         "PE": "Perou",
-        "PF": "Polinezia cʼhall",
+        "PF": "Polinezia Cʼhall",
         "PG": "Papoua Ginea-Nevez",
         "PH": "Filipinez",
         "PL": "Polonia",
@@ -626,18 +639,19 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "PN": "Enez Pitcairn",
         "PS": "Tiriadoù Palestina",
         "QO": "Oseania diabell",
-        "RE": "Reünion",
+        "RE": "Ar Reünion",
         "RO": "Roumania",
         "RU": "Rusia",
         "SA": "Arabia Saoudat",
-        "SB": "Salomon",
+        "SB": "Inizi Salomon",
         "SC": "Sechelez",
         "SD": "Soudan",
         "SE": "Sveden",
         "SG": "Singapour",
+        "SH": "Saint-Helena",
         "SJ": "Svalbard",
         "SR": "Surinam",
-        "SS": "Su Soudan",
+        "SS": "Susoudan",
         "ST": "São Tomé ha Príncipe",
         "SV": "Salvador",
         "SY": "Siria",
@@ -651,6 +665,7 @@ public class LocalizedNamesImpl_br extends LocalizedNamesImpl {
         "UA": "Ukraina",
         "UG": "Ouganda",
         "UM": "Inizi diabell ar Stadoù-Unanet",
+        "UN": "Broadoù unanet",
         "US": "Stadoù-Unanet",
         "UZ": "Ouzbekistan",
         "VA": "Vatikan",

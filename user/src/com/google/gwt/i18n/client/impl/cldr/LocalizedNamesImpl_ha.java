@@ -25,6 +25,13 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
 
   @Override
+  public String[] loadLikelyRegionCodes() {
+    return new String[] {
+        "NG",
+    };
+  }
+
+  @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
         "AC",
@@ -39,7 +46,6 @@ public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
         "AI",
         "AO",
         "AG",
-        "AN",
         "AQ",
         "AR",
         "AM",
@@ -91,6 +97,7 @@ public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
         "ER",
         "EE",
         "EU",
+        "EZ",
         "FR",
         "FJ",
         "PH",
@@ -180,12 +187,12 @@ public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
         "MS",
         "MA",
         "MQ",
-        "EG",
         "MK",
         "YT",
         "ME",
         "MF",
         "FM",
+        "EG",
         "MO",
         "MC",
         "MR",
@@ -275,8 +282,11 @@ public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
         "TR",
         "TM",
         "UM",
+        "UN",
         "UZ",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "IO",
@@ -299,7 +309,6 @@ public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
     namesMap.put("AI", "Angila");
     namesMap.put("AL", "Albaniya");
     namesMap.put("AM", "Armeniya");
-    namesMap.put("AN", "Antiya Na Holan");
     namesMap.put("AR", "Arjantiniya");
     namesMap.put("AS", "Samowa Ta Amurka");
     namesMap.put("AT", "Ostiriya");
@@ -343,7 +352,7 @@ public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
     namesMap.put("DZ", "Aljeriya");
     namesMap.put("EC", "Ekwador");
     namesMap.put("EE", "Estoniya");
-    namesMap.put("EG", "Masar, Misira");
+    namesMap.put("EG", "Misira");
     namesMap.put("ER", "Eritireya");
     namesMap.put("ES", "Sipen");
     namesMap.put("ET", "Habasha");
@@ -370,7 +379,7 @@ public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
     namesMap.put("HU", "Hungari");
     namesMap.put("ID", "Indunusiya");
     namesMap.put("IE", "Ayalan");
-    namesMap.put("IL", "Izira'ila");
+    namesMap.put("IL", "Iziraʼila");
     namesMap.put("IN", "Indiya");
     namesMap.put("IO", "Yankin Birtaniya Na Tekun Indiya");
     namesMap.put("IQ", "Iraƙi");
@@ -501,7 +510,6 @@ public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
         "AI": "Angila",
         "AL": "Albaniya",
         "AM": "Armeniya",
-        "AN": "Antiya Na Holan",
         "AR": "Arjantiniya",
         "AS": "Samowa Ta Amurka",
         "AT": "Ostiriya",
@@ -545,7 +553,7 @@ public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
         "DZ": "Aljeriya",
         "EC": "Ekwador",
         "EE": "Estoniya",
-        "EG": "Masar, Misira",
+        "EG": "Misira",
         "ER": "Eritireya",
         "ES": "Sipen",
         "ET": "Habasha",
@@ -572,7 +580,7 @@ public class LocalizedNamesImpl_ha extends LocalizedNamesImpl {
         "HU": "Hungari",
         "ID": "Indunusiya",
         "IE": "Ayalan",
-        "IL": "Izira'ila",
+        "IL": "Iziraʼila",
         "IN": "Indiya",
         "IO": "Yankin Birtaniya Na Tekun Indiya",
         "IQ": "Iraƙi",

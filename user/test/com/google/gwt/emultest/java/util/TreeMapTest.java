@@ -16,9 +16,6 @@
 package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.testing.TestUtils;
-
-import org.apache.commons.collections.TestMap;
-
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,12 +38,8 @@ import java.util.TreeMap;
  *
  * @param <K> The key type for the underlying TreeMap
  * @param <V> The value type for the underlying TreeMap
- *
- * TODO(jat): this whole structure needs work. Ideally we would port a new
- * Apache collections test to GWT, but that is not an insignificant amount of
- * work.
  */
-public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
+abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
 
   private static class ConflictingKey implements Comparable<CharSequence> {
     private final String value;
@@ -91,15 +84,13 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
   }
 
   /**
-   * Verify that two Collections are deeply equivalent. Some of the Sets that
-   * need to be verified do not implement a sensible equals method
-   * (TreeMap.values for example).
+   * Verify that two Collections are deeply equivalent. Some of the Sets that need to be verified do
+   * not implement a sensible equals method (TreeMap.values for example).
    *
    * @param expected
    * @param actual
    */
-  private static <T> void _assertEquals(Collection<T> expected,
-      Collection<T> actual) {
+  private static <T> void _assertEquals(Collection<T> expected, Collection<T> actual) {
     // verify equivalence using collection interface
     assertEquals(expected.isEmpty(), actual.isEmpty());
     assertEquals(expected.size(), actual.size());
@@ -137,9 +128,8 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * @param expected
    * @param actual
    */
-  private static <K, V> void _assertEquals(SortedMap<K, V> expected,
-      SortedMap<K, V> actual) {
-    _assertEquals((Map<K, V>) expected, (Map<K, V>) actual);
+  private static <K, V> void _assertEquals(SortedMap<K, V> expected, SortedMap<K, V> actual) {
+    _assertEquals(expected, (Map<K, V>) actual);
 
     // verify the order of the associated collections
     assertEquals(expected.keySet().toArray(), actual.keySet().toArray());
@@ -148,8 +138,7 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
   }
 
   /**
-   * Create the expected return of toString for a Map containing only the passed
-   * key and value.
+   * Create the expected return of toString for a Map containing only the passed key and value.
    *
    * @param key
    * @param value
@@ -166,8 +155,8 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
   }
 
   /**
-   * Verify entry to be immutable and to have correct values of {@code Map.Entry#toString()}
-   * and {@code Map.Entry#hashCode()}.
+   * Verify entry to be immutable and to have correct values of {@code Map.Entry#toString()} and
+   * {@code Map.Entry#hashCode()}.
    */
   @SuppressWarnings("unchecked")
   private static void verifyEntry(Entry entry) {
@@ -178,22 +167,21 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     }
     Object key = entry.getKey();
     Object value = entry.getValue();
-    int expectedHashCode = (key == null ? 0 : key.hashCode())
-        ^ (value == null ? 0 : value.hashCode());
+    int expectedHashCode =
+        (key == null ? 0 : key.hashCode()) ^ (value == null ? 0 : value.hashCode());
     assertEquals(expectedHashCode, entry.hashCode());
     assertEquals(key + "=" + value, entry.toString());
   }
 
-  /**
-   * comparator used when creating the SortedMap.
-   */
+  /** comparator used when creating the SortedMap. */
   private Comparator<K> comparator = null;
-  private boolean isClearSupported = true;
-  private boolean isNullKeySupported = true;
-  private boolean isNullValueSupported = true;
-  private boolean isPutAllSupported = true;
-  private boolean isPutSupported = true;
-  private boolean isRemoveSupported = true;
+
+  private final boolean isClearSupported = true;
+  private final boolean isNullKeySupported = true;
+  private final boolean isNullValueSupported = true;
+  private final boolean isPutAllSupported = true;
+  private final boolean isPutSupported = true;
+  private final boolean isRemoveSupported = true;
 
   @Override
   public String getModuleName() {
@@ -289,9 +277,7 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     }
   }
 
-  /**
-   * Test method for 'java.lang.Object.clone()'.
-   */
+  /** Test method for 'java.lang.Object.clone()'. */
   public void testClone() {
     // Map<K, V> map = createMap();
     // Check empty clone behavior
@@ -333,12 +319,13 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     assertNull(treeMap.comparator());
     assertNull(secondTreeMap.comparator());
 
-    final Comparator<? super K> customComparator = new Comparator<K>() {
-      @Override
-      public int compare(K o1, K o2) {
-        return o1.compareTo(o2);
-      }
-    };
+    final Comparator<? super K> customComparator =
+        new Comparator<K>() {
+          @Override
+          public int compare(K o1, K o2) {
+            return o1.compareTo(o2);
+          }
+        };
     treeMap = new TreeMap<>(customComparator);
     secondTreeMap = new TreeMap<>(treeMap);
     assertSame(customComparator, treeMap.comparator());
@@ -680,7 +667,7 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
       keys.remove(null);
     }
 
-    Comparator<? super K> cmp = ((TreeMap<K, V>) map).comparator();
+    Comparator<? super K> cmp = map.comparator();
     Collections.sort(keys, Collections.reverseOrder(cmp));
     Iterator<K> it = map.descendingKeySet().iterator();
     for (K key : keys) {
@@ -748,22 +735,24 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
   public void testEntrySet_add_throwsUnsupportedOperationException() {
     Map<K, V> map = createMap();
     try {
-      map.entrySet().add(new Entry<K, V>() {
-        @Override
-        public K getKey() {
-          return null;
-        }
+      map.entrySet()
+          .add(
+              new Entry<K, V>() {
+                @Override
+                public K getKey() {
+                  return null;
+                }
 
-        @Override
-        public V getValue() {
-          return null;
-        }
+                @Override
+                public V getValue() {
+                  return null;
+                }
 
-        @Override
-        public V setValue(V value) {
-          return null;
-        }
-      });
+                @Override
+                public V setValue(V value) {
+                  return null;
+                }
+              });
       fail("expected exception");
     } catch (UnsupportedOperationException e) {
       // expected outcome
@@ -1652,7 +1641,6 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
    * Test method for 'java.util.Map.isEmpty()'.
    *
    * @see java.util.Map#isEmpty()
-   *
    */
   public void testIsEmpty() {
     K[] keys = getKeys();
@@ -2034,7 +2022,7 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     for (Object key : getSampleKeys()) {
       keys.add((K) key);
     }
-    Comparator<? super K> cmp = ((TreeMap<K, V>) map).comparator();
+    Comparator<? super K> cmp = map.comparator();
     Collections.sort(keys, cmp);
     Iterator<K> it = map.navigableKeySet().iterator();
     for (K key : keys) {
@@ -2156,15 +2144,14 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
   }
 
   /**
-   * Test method for 'java.util.Map.put(Object, Object)'. This test shows some
-   * bad behavior of the TreeMap class before JDK 7. A mapping with null key can
-   * be put in but several methods are are unusable afterward.
+   * Test method for 'java.util.Map.put(Object, Object)'. This test shows some bad behavior of the
+   * TreeMap class before JDK 7. A mapping with null key can be put in but several methods are are
+   * unusable afterward.
    *
-   * A SortedMap with natural ordering (no comparator) is supposed to throw a
-   * null pointer exception if a null keys are "not supported". For a natural
-   * ordered TreeMap before JDK 7, a null pointer exception is not thrown. But,
-   * the map is left in a state where any other key based methods result in a
-   * null pointer exception.
+   * <p>A SortedMap with natural ordering (no comparator) is supposed to throw a null pointer
+   * exception if a null keys are "not supported". For a natural ordered TreeMap before JDK 7, a
+   * null pointer exception is not thrown. But, the map is left in a state where any other key based
+   * methods result in a null pointer exception.
    *
    * @see java.util.Map#put(Object, Object)
    */
@@ -2306,8 +2293,7 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
   }
 
   public void testPut_ComparableKey() {
-    final boolean java6CompatibleSources =
-        !TestUtils.isJvm() || TestUtils.getJdkVersion() < 7;
+    final boolean java6CompatibleSources = !TestUtils.isJvm() || TestUtils.getJdkVersion() < 7;
     TreeMap map = new TreeMap();
     ConflictingKey conflictingKey = new ConflictingKey("conflictingKey");
     try {
@@ -2814,8 +2800,8 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
       fail("Should throw an IllegalArgumentException");
     } catch (IllegalArgumentException expected) {
     }
-    assertEquals(keys.length,
-        map.subMap(getLessThanMinimumKey(), getGreaterThanMaximumKey()).size());
+    assertEquals(
+        keys.length, map.subMap(getLessThanMinimumKey(), getGreaterThanMaximumKey()).size());
   }
 
   /**
@@ -2842,14 +2828,14 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     assertEquals(0, map.subMap(keys[0], keys[0]).size());
     // bounded by a "wide" range
     assertEquals(1, map.subMap(getLessThanMinimumKey(), getGreaterThanMaximumKey()).size());
-    assertEquals(1, map.subMap(getLessThanMinimumKey(), false,
-        getGreaterThanMaximumKey(), false).size());
-    assertEquals(1, map.subMap(getLessThanMinimumKey(), true,
-        getGreaterThanMaximumKey(), false).size());
-    assertEquals(1, map.subMap(getLessThanMinimumKey(), false,
-        getGreaterThanMaximumKey(), true).size());
-    assertEquals(1, map.subMap(getLessThanMinimumKey(), true,
-        getGreaterThanMaximumKey(), true).size());
+    assertEquals(
+        1, map.subMap(getLessThanMinimumKey(), false, getGreaterThanMaximumKey(), false).size());
+    assertEquals(
+        1, map.subMap(getLessThanMinimumKey(), true, getGreaterThanMaximumKey(), false).size());
+    assertEquals(
+        1, map.subMap(getLessThanMinimumKey(), false, getGreaterThanMaximumKey(), true).size());
+    assertEquals(
+        1, map.subMap(getLessThanMinimumKey(), true, getGreaterThanMaximumKey(), true).size());
 
     // test with two entry map
     map.put(keys[1], values[1]);
@@ -2860,36 +2846,26 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     assertEquals(0, map.subMap(keys[0], false, keys[1], false).size());
 
     assertEquals(1, map.subMap(keys[0], false, keys[1], true).size());
-    assertEquals(keys[1], map.subMap(keys[0], false,
-        keys[1], true).keySet().toArray()[0]);
+    assertEquals(keys[1], map.subMap(keys[0], false, keys[1], true).keySet().toArray()[0]);
 
     assertEquals(1, map.subMap(keys[0], true, keys[1], false).size());
-    assertEquals(keys[0], map.subMap(keys[0], true,
-        keys[1], false).keySet().toArray()[0]);
+    assertEquals(keys[0], map.subMap(keys[0], true, keys[1], false).keySet().toArray()[0]);
 
     assertEquals(2, map.subMap(keys[0], true, keys[1], true).size());
-    assertEquals(keys[0], map.subMap(keys[0], true,
-        keys[1], true).keySet().toArray()[0]);
-    assertEquals(keys[1], map.subMap(keys[0], true,
-        keys[1], true).keySet().toArray()[1]);
+    assertEquals(keys[0], map.subMap(keys[0], true, keys[1], true).keySet().toArray()[0]);
+    assertEquals(keys[1], map.subMap(keys[0], true, keys[1], true).keySet().toArray()[1]);
 
     // bounded by a "wide" range
     assertEquals(2, map.subMap(getLessThanMinimumKey(), getGreaterThanMaximumKey()).size());
 
-    assertEquals(2, map.subMap(getLessThanMinimumKey(), false,
-        getGreaterThanMaximumKey(), false).size());
-    assertEquals(1, map.subMap(keys[0], false,
-        getGreaterThanMaximumKey(), false).size());
-    assertEquals(0, map.subMap(keys[0], false,
-        keys[1], false).size());
-    assertEquals(2, map.subMap(keys[0], true,
-        getGreaterThanMaximumKey(), false).size());
-    assertEquals(1, map.subMap(keys[0], true,
-        keys[1], false).size());
-    assertEquals(2, map.subMap(keys[0], true,
-        getGreaterThanMaximumKey(), true).size());
-    assertEquals(2, map.subMap(keys[0], true,
-        keys[1], true).size());
+    assertEquals(
+        2, map.subMap(getLessThanMinimumKey(), false, getGreaterThanMaximumKey(), false).size());
+    assertEquals(1, map.subMap(keys[0], false, getGreaterThanMaximumKey(), false).size());
+    assertEquals(0, map.subMap(keys[0], false, keys[1], false).size());
+    assertEquals(2, map.subMap(keys[0], true, getGreaterThanMaximumKey(), false).size());
+    assertEquals(1, map.subMap(keys[0], true, keys[1], false).size());
+    assertEquals(2, map.subMap(keys[0], true, getGreaterThanMaximumKey(), true).size());
+    assertEquals(2, map.subMap(keys[0], true, keys[1], true).size());
   }
 
   public void testSubMap_empty() {
@@ -3320,9 +3296,7 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     assertTrue(map.containsKey(keys[0]));
   }
 
-  /**
-   * Test method for 'java.lang.Object.toString()'.
-   */
+  /** Test method for 'java.lang.Object.toString()'. */
   public void testToString() {
     K[] keys = getKeys();
     V[] values = getValues();
@@ -3498,15 +3472,6 @@ public abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
 
   protected void setComparator(Comparator<K> comparator) {
     this.comparator = comparator;
-  }
-
-  @Override
-  protected void verifyMap() {
-    if (!TestUtils.isJvm()) {
-      // Verify red-black correctness in our implementation
-      TreeMapViolator.callAssertCorrectness((TreeMap) map);
-    }
-    super.verifyMap();
   }
 
   NavigableMap<K, V> createMap() {

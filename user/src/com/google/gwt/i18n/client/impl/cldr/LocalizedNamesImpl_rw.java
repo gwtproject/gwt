@@ -108,6 +108,7 @@ public class LocalizedNamesImpl_rw extends LocalizedNamesImpl {
         "ES",
         "ET",
         "EU",
+        "EZ",
         "FI",
         "FJ",
         "FK",
@@ -142,7 +143,6 @@ public class LocalizedNamesImpl_rw extends LocalizedNamesImpl {
         "IC",
         "ID",
         "IE",
-        "TO",
         "IL",
         "IM",
         "IN",
@@ -233,7 +233,6 @@ public class LocalizedNamesImpl_rw extends LocalizedNamesImpl {
         "RO",
         "RS",
         "RU",
-        "RW",
         "SA",
         "SB",
         "SC",
@@ -266,6 +265,7 @@ public class LocalizedNamesImpl_rw extends LocalizedNamesImpl {
         "TL",
         "TM",
         "TN",
+        "TO",
         "TR",
         "TT",
         "TV",
@@ -274,6 +274,8 @@ public class LocalizedNamesImpl_rw extends LocalizedNamesImpl {
         "UA",
         "UG",
         "UM",
+        "UN",
+        "RW",
         "US",
         "UY",
         "UZ",
@@ -286,6 +288,8 @@ public class LocalizedNamesImpl_rw extends LocalizedNamesImpl {
         "VU",
         "WF",
         "WS",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "YT",
@@ -298,7 +302,7 @@ public class LocalizedNamesImpl_rw extends LocalizedNamesImpl {
   @Override
   protected void loadNameMapJava() {
     super.loadNameMapJava();
-    namesMap.put("TO", "Igitonga");
+    namesMap.put("RW", "U Rwanda");
   }
 
   @Override
@@ -308,7 +312,7 @@ public class LocalizedNamesImpl_rw extends LocalizedNamesImpl {
 
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
-        "TO": "Igitonga"
+        "RW": "U Rwanda"
     };
   }-*/;
 }

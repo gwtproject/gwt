@@ -24,19 +24,19 @@ public class DateTimeFormatInfoImpl_mk extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "претпладне",
-        "попладне"
+        "претпл.",
+        "попл."
     };
   }
 
   @Override
   public String dateFormatFull() {
-    return "EEEE, dd MMMM y 'г'.";
+    return "EEEE, dd MMMM y";
   }
 
   @Override
   public String dateFormatLong() {
-    return "dd MMMM y 'г'.";
+    return "dd MMMM y";
   }
 
   @Override
@@ -52,8 +52,8 @@ public class DateTimeFormatInfoImpl_mk extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "пр.н.е.",
-        "н.е."
+        "пред нашата ера",
+        "од нашата ера"
     };
   }
 
@@ -77,17 +77,12 @@ public class DateTimeFormatInfoImpl_mk extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE d MMMM";
+    return "EEEE, d MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
     return "d.M";
-  }
-
-  @Override
-  public String formatYear() {
-    return "y 'г'.";
   }
 
   @Override
@@ -107,7 +102,7 @@ public class DateTimeFormatInfoImpl_mk extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFullDay() {
-    return "d MMMM y 'г'.";
+    return "d MMMM y";
   }
 
   @Override
@@ -200,6 +195,16 @@ public class DateTimeFormatInfoImpl_mk extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "јан-мар",
+        "апр-јун",
+        "јул-сеп",
+        "окт-дек"
+    };
+  }
+
+  @Override
   public String[] weekdaysFull() {
     return new String[] {
         "недела",
@@ -231,6 +236,19 @@ public class DateTimeFormatInfoImpl_mk extends DateTimeFormatInfoImpl {
         "нед.",
         "пон.",
         "вт.",
+        "сре.",
+        "чет.",
+        "пет.",
+        "саб."
+    };
+  }
+
+  @Override
+  public String[] weekdaysShortStandalone() {
+    return new String[] {
+        "нед.",
+        "пон.",
+        "вто.",
         "сре.",
         "чет.",
         "пет.",

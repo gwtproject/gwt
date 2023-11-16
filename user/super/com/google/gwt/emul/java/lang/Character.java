@@ -18,8 +18,8 @@ package java.lang;
 import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 
 import java.io.Serializable;
-
 import javaemul.internal.NativeRegExp;
+import javaemul.internal.annotations.HasNoSideEffects;
 
 /**
  * Wraps a native <code>char</code> as an object.
@@ -44,7 +44,6 @@ import javaemul.internal.NativeRegExp;
  *  - isISOControl(char)
  *  - isMirrored(char)
  *  - isSpaceChar(char)
- *  - isTitleCase(char)
  *  - isUnicodeIdentifierPart(char)
  *  - isUnicodeIdentifierStart(char)
  *  - getDirectionality(*)
@@ -106,6 +105,15 @@ public final class Character implements Comparable<Character>, Serializable {
   private static class BoxedValues {
     // Box values according to JLS - from \u0000 to \u007f
     private static Character[] boxedValues = new Character[128];
+
+    @HasNoSideEffects
+    private static Character get(char c) {
+      Character result = BoxedValues.boxedValues[c];
+      if (result == null) {
+        result = BoxedValues.boxedValues[c] = new Character(c);
+      }
+      return result;
+    }
   }
 
   public static final Class<Character> TYPE = Character.class;
@@ -329,6 +337,11 @@ public final class Character implements Comparable<Character>, Serializable {
     return isHighSurrogate(highSurrogate) && isLowSurrogate(lowSurrogate);
   }
 
+  public static boolean isTitleCase(char c) {
+    // https://www.compart.com/en/unicode/category/Lt
+    return c != toUpperCase(c) && c != toLowerCase(c);
+  }
+
   /*
    * TODO: correct Unicode handling.
    */
@@ -410,7 +423,7 @@ public final class Character implements Comparable<Character>, Serializable {
   }
 
   public static char toLowerCase(char c) {
-    return String.valueOf(c).toLowerCase().charAt(0);
+    return CaseMapper.charToLowerCase(c);
   }
 
   public static String toString(char x) {
@@ -418,16 +431,12 @@ public final class Character implements Comparable<Character>, Serializable {
   }
 
   public static char toUpperCase(char c) {
-    return String.valueOf(c).toUpperCase().charAt(0);
+    return CaseMapper.charToUpperCase(c);
   }
 
   public static Character valueOf(char c) {
     if (c < 128) {
-      Character result = BoxedValues.boxedValues[c];
-      if (result == null) {
-        result = BoxedValues.boxedValues[c] = new Character(c);
-      }
-      return result;
+      return BoxedValues.get(c);
     }
     return new Character(c);
   }

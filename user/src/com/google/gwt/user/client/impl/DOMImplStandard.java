@@ -26,7 +26,11 @@ import com.google.gwt.user.client.Event;
  * Base implementation of {@link com.google.gwt.user.client.impl.DOMImpl} shared
  * by those browsers that come a bit closer to supporting a common standard (ie,
  * not legacy IEs).
+ *
+ * <p>Deprecated, may be flattened into DOMImpl, as this is the only direct
+ * subclass.</p>
  */
+@Deprecated
 public abstract class DOMImplStandard extends DOMImpl {
 
   /**
@@ -241,6 +245,7 @@ public abstract class DOMImplStandard extends DOMImpl {
     foreach(captureEvents, function(e, fn) { $wnd.addEventListener(e, fn, true); });
   }-*/;
 
+  @SuppressWarnings("deprecation")
   protected native void sinkBitlessEventImpl(Element elem, String eventTypeName) /*-{
     var dispatchMap = @com.google.gwt.user.client.impl.DOMImplStandard::bitlessEventDispatchers;
     var dispatcher = dispatchMap[eventTypeName] || dispatchMap['_default_'];
@@ -351,6 +356,7 @@ public abstract class DOMImplStandard extends DOMImpl {
     }
   }
 
+  @SuppressWarnings("deprecation")
   private static native EventMap getBitlessEventDispatchers() /*-{
     return {
       _default_: @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent(*),
@@ -359,6 +365,7 @@ public abstract class DOMImplStandard extends DOMImpl {
     };
   }-*/;
 
+  @SuppressWarnings("deprecation")
   private static native EventMap getCaptureEventDispatchers() /*-{
     return {
       // Mouse events

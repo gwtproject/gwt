@@ -22,6 +22,14 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_pa_Arab extends DateTimeFormatInfoImpl_pa {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "AM",
+        "PM"
+    };
+  }
+
+  @Override
   public String dateFormatFull() {
     return "EEEE, dd MMMM y";
   }
@@ -29,6 +37,11 @@ public class DateTimeFormatInfoImpl_pa_Arab extends DateTimeFormatInfoImpl_pa {
   @Override
   public String dateFormatShort() {
     return "dd/MM/y";
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
   }
 
   @Override
@@ -47,14 +60,9 @@ public class DateTimeFormatInfoImpl_pa_Arab extends DateTimeFormatInfoImpl_pa {
   @Override
   public String[] erasShort() {
     return new String[] {
-        "BCE",
-        "CE"
+        "ايساپورو",
+        "سں"
     };
-  }
-
-  @Override
-  public int firstDayOfTheWeek() {
-    return 0;
   }
 
   @Override
@@ -63,13 +71,13 @@ public class DateTimeFormatInfoImpl_pa_Arab extends DateTimeFormatInfoImpl_pa {
   }
 
   @Override
-  public String formatMonthFullDay() {
-    return "MMMM d";
+  public String formatMonthFullWeekdayDay() {
+    return "MMMM d, EEEE";
   }
 
   @Override
-  public String formatMonthFullWeekdayDay() {
-    return "MMMM d, EEEE";
+  public String formatYearMonthFull() {
+    return "y MMMM";
   }
 
   @Override
@@ -193,5 +201,10 @@ public class DateTimeFormatInfoImpl_pa_Arab extends DateTimeFormatInfoImpl_pa {
         "جمعہ",
         "ہفتہ"
     };
+  }
+
+  @Override
+  public int weekendStart() {
+    return 6;
   }
 }

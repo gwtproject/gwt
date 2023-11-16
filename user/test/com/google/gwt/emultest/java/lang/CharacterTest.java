@@ -16,6 +16,7 @@
 package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
+import java.util.Arrays;
 
 /**
  * Tests for java.lang.Character.
@@ -414,6 +415,52 @@ public class CharacterTest extends GWTTestCase {
     for (int c : supplementaryCounterExamples) {
       assertFalse(Character.isWhitespace(c));
     }
+  }
+
+  public void test_isTitleCaseC() {
+    char[] expectedTitleCaseChars = {
+      (char) 0x01c5,
+      (char) 0x01c8,
+      (char) 0x01cb,
+      (char) 0x01f2,
+      (char) 0x1f88,
+      (char) 0x1f89,
+      (char) 0x1f8a,
+      (char) 0x1f8b,
+      (char) 0x1f8c,
+      (char) 0x1f8d,
+      (char) 0x1f8e,
+      (char) 0x1f8f,
+      (char) 0x1f98,
+      (char) 0x1f99,
+      (char) 0x1f9a,
+      (char) 0x1f9b,
+      (char) 0x1f9c,
+      (char) 0x1f9d,
+      (char) 0x1f9e,
+      (char) 0x1f9f,
+      (char) 0x1fa8,
+      (char) 0x1fa9,
+      (char) 0x1faa,
+      (char) 0x1fab,
+      (char) 0x1fac,
+      (char) 0x1fad,
+      (char) 0x1fae,
+      (char) 0x1faf,
+      (char) 0x1fbc,
+      (char) 0x1fcc,
+      (char) 0x1ffc
+    };
+
+    char[] foundChars = new char[expectedTitleCaseChars.length];
+    int lastFoundCharIndex = 0;
+    for (char c = 0; c < 65535; c++) {
+      if (Character.isTitleCase(c)) {
+        foundChars[lastFoundCharIndex++] = c;
+      }
+    }
+
+    assertTrue(Arrays.equals(expectedTitleCaseChars, foundChars));
   }
 
   public void testToString() {

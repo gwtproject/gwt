@@ -82,8 +82,7 @@ public abstract class FullCompileTestBase extends JJSTestBase {
 
     CompilerContext compilerContext = provideCompilerContext();
     CompilationState state =
-        CompilationStateBuilder.buildFrom(logger, compilerContext,
-            sourceOracle.getResources(), getAdditionalTypeProviderDelegate());
+        CompilationStateBuilder.buildFrom(logger, compilerContext, sourceOracle.getResources());
     ConfigurationProperties config = new ConfigurationProperties(Lists.newArrayList(
         configurationProperties));
 

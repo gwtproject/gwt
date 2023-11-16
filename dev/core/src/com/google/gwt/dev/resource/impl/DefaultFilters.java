@@ -15,14 +15,14 @@
  */
 package com.google.gwt.dev.resource.impl;
 
-import org.apache.tools.ant.types.ZipScanner;
+import com.google.gwt.thirdparty.apache.ant.types.ZipScanner;
 
 import java.util.regex.Pattern;
 
 /**
  * A singleton class that provides blazingly fast implementation of the default
- * excludes of Ant's {@link org.apache.tools.ant.DirectoryScanner}, assuming
- * case-sensitiveness.
+ * excludes of Ant's {@link com.google.gwt.thirdparty.apache.ant.DirectoryScanner},
+ * assuming case-sensitiveness.
  *
  * TODO: this class needs to be revisited, when Gwt's Ant is upgraded.
  *

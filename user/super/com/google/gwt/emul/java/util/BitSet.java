@@ -16,10 +16,10 @@
 
 package java.util;
 
-import static javaemul.internal.Coercions.ensureInt;
 import static javaemul.internal.InternalPreconditions.checkArraySize;
 
 import javaemul.internal.ArrayHelper;
+import javaemul.internal.LongUtils;
 
 /**
  * This implementation uses a dense array holding bit groups of size 31 to keep track of when bits
@@ -222,7 +222,7 @@ public class BitSet {
   }
 
   private static int wordAt(int[] array, int index) {
-    return ensureInt(array[index]);
+    return array[index] | 0; // ensure int even if we go out of bounds.
   }
 
   // GWT emulates integer with double and doesn't overflow. Enfore it by a integer mask.
@@ -816,7 +816,7 @@ public class BitSet {
   private static long getLong(int[] words, int bitIndex) {
     int low = getInt(words, bitIndex);
     int high = getInt(words, bitIndex + 32);
-    return ((long) high << 32) | (low & 0xffff_ffffL);
+    return LongUtils.fromBits(low, high);
   }
 
   public static BitSet valueOf(byte[] words) {

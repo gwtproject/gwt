@@ -20,11 +20,9 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.isTypeChecked;
 
 import java.io.PrintStream;
-
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.HashCodes;
 import javaemul.internal.JsUtils;
-
 import jsinterop.annotations.JsMethod;
 
 /**
@@ -33,6 +31,8 @@ import jsinterop.annotations.JsMethod;
  * available.
  */
 public final class System {
+
+  private static final int MILLIS_TO_NANOS = 1_000_000;
 
   /**
    * Does nothing in web mode. To get output in web mode, subclass PrintStream
@@ -50,6 +50,13 @@ public final class System {
     checkNotNull(src, "src");
     checkNotNull(dest, "dest");
 
+    // Fast path for no type checking. Also hides rest of the checking specific code from compilers.
+    if (!isTypeChecked()) {
+      checkArrayCopyIndicies(src, srcOfs, dest, destOfs, len);
+      ArrayHelper.copy(src, srcOfs, dest, destOfs, len);
+      return;
+    }
+
     Class<?> srcType = src.getClass();
     Class<?> destType = dest.getClass();
     checkArrayType(srcType.isArray(), "srcType is not an array");
@@ -59,18 +66,14 @@ public final class System {
     Class<?> destComp = destType.getComponentType();
     checkArrayType(arrayTypeMatch(srcComp, destComp), "Array types don't match");
 
-    int srclen = ArrayHelper.getLength(src);
-    int destlen = ArrayHelper.getLength(dest);
-    if (srcOfs < 0 || destOfs < 0 || len < 0 || srcOfs + len > srclen || destOfs + len > destlen) {
-      throw new IndexOutOfBoundsException();
-    }
+    checkArrayCopyIndicies(src, srcOfs, dest, destOfs, len);
 
     /*
      * If the arrays are not references or if they are exactly the same type, we
      * can copy them in native code for speed. Otherwise, we have to copy them
      * in Java so we get appropriate errors.
      */
-    if (isTypeChecked() && !srcComp.isPrimitive() && !srcType.equals(destType)) {
+    if (!srcComp.isPrimitive() && !srcType.equals(destType)) {
       // copy in Java to make sure we get ArrayStoreExceptions if the values
       // aren't compatible
       Object[] srcArray = (Object[]) src;
@@ -79,21 +82,34 @@ public final class System {
         // TODO(jat): how does backward copies handle failures in the middle?
         // copy backwards to avoid destructive copies
         srcOfs += len;
-        for (int destEnd = destOfs + len; destEnd-- > destOfs;) {
+        for (int destEnd = destOfs + len; destEnd-- > destOfs; ) {
           destArray[destEnd] = srcArray[--srcOfs];
         }
       } else {
-        for (int destEnd = destOfs + len; destOfs < destEnd;) {
+        for (int destEnd = destOfs + len; destOfs < destEnd; ) {
           destArray[destOfs++] = srcArray[srcOfs++];
         }
       }
-    } else if (len > 0) {
+    } else {
       ArrayHelper.copy(src, srcOfs, dest, destOfs, len);
+    }
+  }
+
+  private static void checkArrayCopyIndicies(
+      Object src, int srcOfs, Object dest, int destOfs, int len) {
+    int srclen = ArrayHelper.getLength(src);
+    int destlen = ArrayHelper.getLength(dest);
+    if (srcOfs < 0 || destOfs < 0 || len < 0 || srcOfs + len > srclen || destOfs + len > destlen) {
+      throw new IndexOutOfBoundsException();
     }
   }
 
   public static long currentTimeMillis() {
     return (long) JsUtils.getTime();
+  }
+
+  public static long nanoTime() {
+    return (long) (JsUtils.performanceNow() * MILLIS_TO_NANOS);
   }
 
   /**

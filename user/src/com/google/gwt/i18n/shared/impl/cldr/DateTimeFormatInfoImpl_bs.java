@@ -22,38 +22,40 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_bs extends DateTimeFormatInfoImpl {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "pre podne",
-        "popodne"
-    };
-  }
-
-  @Override
   public String dateFormatFull() {
-    return "EEEE, dd. MMMM y.";
+    return "EEEE, d. MMMM y.";
   }
 
   @Override
   public String dateFormatLong() {
-    return "dd. MMMM y.";
+    return "d. MMMM y.";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "dd.MM.y.";
+    return "d. MMM y.";
   }
 
   @Override
   public String dateFormatShort() {
-    return "dd.MM.yy.";
+    return "d. M. y.";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " 'u' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " 'u' " + timePattern;
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "Pre nove ere",
-        "Nove ere"
+        "prije nove ere",
+        "nove ere"
     };
   }
 
@@ -61,8 +63,13 @@ public class DateTimeFormatInfoImpl_bs extends DateTimeFormatInfoImpl {
   public String[] erasShort() {
     return new String[] {
         "p. n. e.",
-        "n. e"
+        "n. e."
     };
+  }
+
+  @Override
+  public String formatDay() {
+    return "d.";
   }
 
   @Override
@@ -77,22 +84,22 @@ public class DateTimeFormatInfoImpl_bs extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthAbbrevDay() {
-    return "dd. MMM";
+    return "d. MMM";
   }
 
   @Override
   public String formatMonthFullDay() {
-    return "dd. MMMM";
+    return "d. MMMM";
   }
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, dd. MMMM";
+    return "EEEE, d. MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "dd.MM.";
+    return "d.M.";
   }
 
   @Override
@@ -107,12 +114,12 @@ public class DateTimeFormatInfoImpl_bs extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "dd. MMM y.";
+    return "d. MMM y.";
   }
 
   @Override
   public String formatYearMonthFull() {
-    return "MMMM y.";
+    return "LLLL y.";
   }
 
   @Override
@@ -122,17 +129,27 @@ public class DateTimeFormatInfoImpl_bs extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "MM.y.";
+    return "MM/y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "dd.MM.y.";
+    return "d.M.y.";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, dd. MMM y.";
+    return "EEE, d. MMM y.";
+  }
+
+  @Override
+  public String formatYearQuarterFull() {
+    return "QQQQ y.";
+  }
+
+  @Override
+  public String formatYearQuarterShort() {
+    return "Q y.";
   }
 
   @Override
@@ -145,7 +162,7 @@ public class DateTimeFormatInfoImpl_bs extends DateTimeFormatInfoImpl {
         "maj",
         "juni",
         "juli",
-        "avgust",
+        "august",
         "septembar",
         "oktobar",
         "novembar",
@@ -181,7 +198,7 @@ public class DateTimeFormatInfoImpl_bs extends DateTimeFormatInfoImpl {
         "maj",
         "jun",
         "jul",
-        "avg",
+        "aug",
         "sep",
         "okt",
         "nov",
@@ -202,10 +219,10 @@ public class DateTimeFormatInfoImpl_bs extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "K1",
-        "K2",
-        "K3",
-        "K4"
+        "KV1",
+        "KV2",
+        "KV3",
+        "KV4"
     };
   }
 
@@ -219,6 +236,32 @@ public class DateTimeFormatInfoImpl_bs extends DateTimeFormatInfoImpl {
         "četvrtak",
         "petak",
         "subota"
+    };
+  }
+
+  @Override
+  public String[] weekdaysNarrow() {
+    return new String[] {
+        "N",
+        "P",
+        "U",
+        "S",
+        "Č",
+        "P",
+        "S"
+    };
+  }
+
+  @Override
+  public String[] weekdaysNarrowStandalone() {
+    return new String[] {
+        "n",
+        "p",
+        "u",
+        "s",
+        "č",
+        "p",
+        "s"
     };
   }
 

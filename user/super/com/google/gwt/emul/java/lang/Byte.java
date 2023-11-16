@@ -32,6 +32,17 @@ public final class Byte extends Number implements Comparable<Byte> {
   private static class BoxedValues {
     // Box all values according to JLS
     private static Byte[] boxedValues = new Byte[256];
+
+    // This method should be marked with @HasNoSideEffects but it seems to trigger a bug
+    // in the optimizing pipeling and breaks one test.
+    private static Byte get(byte b) {
+      int rebase = b + 128;
+      Byte result = BoxedValues.boxedValues[rebase];
+      if (result == null) {
+        result = BoxedValues.boxedValues[rebase] = new Byte(b);
+      }
+      return result;
+    }
   }
 
   public static int compare(byte x, byte y) {
@@ -60,12 +71,7 @@ public final class Byte extends Number implements Comparable<Byte> {
   }
 
   public static Byte valueOf(byte b) {
-    int rebase = b + 128;
-    Byte result = BoxedValues.boxedValues[rebase];
-    if (result == null) {
-      result = BoxedValues.boxedValues[rebase] = new Byte(b);
-    }
-    return result;
+    return BoxedValues.get(b);
   }
 
   public static Byte valueOf(String s) throws NumberFormatException {

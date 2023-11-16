@@ -15,6 +15,8 @@
  */
 package java.util;
 
+import jsinterop.annotations.JsNonNull;
+
 /**
  * Skeletal implementation of a NavigableMap.
  */
@@ -377,6 +379,7 @@ abstract class AbstractNavigableMap<K, V> extends AbstractMap<K, V> implements N
   }
 
   @Override
+  @JsNonNull
   public Set<K> keySet() {
     return navigableKeySet();
   }

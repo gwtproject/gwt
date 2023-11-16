@@ -24,8 +24,8 @@ public class DateTimeFormatInfoImpl_sv extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "FM",
-        "EM"
+        "fm",
+        "em"
     };
   }
 
@@ -101,8 +101,23 @@ public class DateTimeFormatInfoImpl_sv extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatYearMonthNumDay() {
+    return "y-MM-dd";
+  }
+
+  @Override
   public String formatYearMonthWeekdayDay() {
     return "EEE d MMM y";
+  }
+
+  @Override
+  public String formatYearQuarterFull() {
+    return "QQQQ y";
+  }
+
+  @Override
+  public String formatYearQuarterShort() {
+    return "Q y";
   }
 
   @Override
@@ -124,56 +139,20 @@ public class DateTimeFormatInfoImpl_sv extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] monthsFullStandalone() {
-    return new String[] {
-        "Januari",
-        "Februari",
-        "Mars",
-        "April",
-        "Maj",
-        "Juni",
-        "Juli",
-        "Augusti",
-        "September",
-        "Oktober",
-        "November",
-        "December"
-    };
-  }
-
-  @Override
   public String[] monthsShort() {
     return new String[] {
-        "jan",
-        "feb",
-        "mar",
-        "apr",
+        "jan.",
+        "feb.",
+        "mars",
+        "apr.",
         "maj",
-        "jun",
-        "jul",
-        "aug",
-        "sep",
-        "okt",
-        "nov",
-        "dec"
-    };
-  }
-
-  @Override
-  public String[] monthsShortStandalone() {
-    return new String[] {
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "Maj",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Okt",
-        "Nov",
-        "Dec"
+        "juni",
+        "juli",
+        "aug.",
+        "sep.",
+        "okt.",
+        "nov.",
+        "dec."
     };
   }
 
@@ -216,19 +195,6 @@ public class DateTimeFormatInfoImpl_sv extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] weekdaysFullStandalone() {
-    return new String[] {
-        "Söndag",
-        "Måndag",
-        "Tisdag",
-        "Onsdag",
-        "Torsdag",
-        "Fredag",
-        "Lördag"
-    };
-  }
-
-  @Override
   public String[] weekdaysNarrow() {
     return new String[] {
         "S",
@@ -251,19 +217,6 @@ public class DateTimeFormatInfoImpl_sv extends DateTimeFormatInfoImpl {
         "tors",
         "fre",
         "lör"
-    };
-  }
-
-  @Override
-  public String[] weekdaysShortStandalone() {
-    return new String[] {
-        "Sön",
-        "Mån",
-        "Tis",
-        "Ons",
-        "Tor",
-        "Fre",
-        "Lör"
     };
   }
 }

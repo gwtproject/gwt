@@ -21,8 +21,6 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.junit.DoNotRunWith;
-import com.google.gwt.junit.Platform;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.Command;
 
@@ -216,7 +214,6 @@ public class MenuBarTest extends WidgetTestBase {
     assertNull(l2.getPopup());
   }
 
-  @DoNotRunWith({Platform.HtmlUnitBug})
   public void testBlur() {
     // Create a menu bar with children.
     final MenuBar menu = new MenuBar();
@@ -234,20 +231,26 @@ public class MenuBarTest extends WidgetTestBase {
     assertNull(menu.getSelectedItem());
   }
 
-  @DoNotRunWith({Platform.HtmlUnitBug})
   public void testSetFocusOnHoverEnabled() {
+    delayTestFinish(1000);
     TextBox focusOwner = new TextBox();
     RootPanel.get().add(focusOwner);
     focusOwner.setFocus(true);
     assertFocused(focusOwner.getElement());
 
-    MenuBar menu = new MenuBar();
+    final MenuBar menu = new MenuBar();
     MenuItem item0 = menu.addItem("item0", BLANK_COMMAND);
     RootPanel.get().add(menu);
 
     assertFocused(focusOwner.getElement());
     menu.itemOver(item0, true);
-    assertFocused(menu.getElement());
+    Scheduler.get().scheduleDeferred(new Command() {
+      @Override
+      public void execute() {
+        assertFocused(menu.getElement());
+        finishTest();
+      }
+    });
   }
 
   public void testSetFocusOnHoverDisabled() {

@@ -48,7 +48,7 @@ final class Exceptions {
   }-*/;
 
   private static native Throwable getJavaException(Object e)/*-{
-    return e && e["__java$exception"];
+    return e && e.__java$exception;
   }-*/;
 
   static AssertionError makeAssertionError() {

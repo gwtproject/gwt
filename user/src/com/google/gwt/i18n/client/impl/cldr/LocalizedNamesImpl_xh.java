@@ -104,10 +104,12 @@ public class LocalizedNamesImpl_xh extends LocalizedNamesImpl {
         "EE",
         "EG",
         "EH",
+        "ZA",
         "ER",
         "ES",
         "ET",
         "EU",
+        "EZ",
         "FI",
         "FJ",
         "FK",
@@ -274,6 +276,7 @@ public class LocalizedNamesImpl_xh extends LocalizedNamesImpl {
         "UA",
         "UG",
         "UM",
+        "UN",
         "US",
         "UY",
         "UZ",
@@ -286,10 +289,11 @@ public class LocalizedNamesImpl_xh extends LocalizedNamesImpl {
         "VU",
         "WF",
         "WS",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "YT",
-        "ZA",
         "ZM",
         "ZW",
     };
@@ -298,6 +302,7 @@ public class LocalizedNamesImpl_xh extends LocalizedNamesImpl {
   @Override
   protected void loadNameMapJava() {
     super.loadNameMapJava();
+    namesMap.put("ZA", "eMzantsi Afrika");
   }
 
   @Override
@@ -307,7 +312,7 @@ public class LocalizedNamesImpl_xh extends LocalizedNamesImpl {
 
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
-
+        "ZA": "eMzantsi Afrika"
     };
   }-*/;
 }

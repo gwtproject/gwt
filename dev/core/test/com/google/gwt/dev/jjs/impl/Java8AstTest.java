@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Google Inc.
+ * Copyright 2017 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,12 +19,14 @@ import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
+import com.google.gwt.dev.jjs.ast.JDeclaredType;
+import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.util.arg.SourceLevel;
+import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 
 import java.util.Collections;
@@ -37,7 +39,6 @@ public class Java8AstTest extends FullCompileTestBase {
 
   @Override
   public void setUp() throws Exception {
-    sourceLevel = SourceLevel.JAVA8;
     super.setUp();
     addAll(LAMBDA_METAFACTORY);
 
@@ -1023,7 +1024,7 @@ public class Java8AstTest extends FullCompileTestBase {
     addSnippetClassDecl("interface I1 { public void foo(); }");
     addSnippetClassDecl("interface I2 { }");
     String lambda = "Object o = (I2 & I1) () -> {};";
-    assertEqualBlock("Object o=(EntryPoint$I2)(EntryPoint$I1)new EntryPoint$lambda$0$Type();",
+    assertEqualBlock("Object o=(EntryPoint$I1)(EntryPoint$I2)new EntryPoint$lambda$0$Type();",
         lambda);
 
     JProgram program = compileSnippet("void", lambda, false);
@@ -1059,7 +1060,7 @@ public class Java8AstTest extends FullCompileTestBase {
     addSnippetClassDecl("interface I3 { }");
     String lambda = "I2 o = (I3 & I2 & I1) () -> {};";
     assertEqualBlock(
-        "EntryPoint$I2 o=(EntryPoint$I3)(EntryPoint$I2)(EntryPoint$I1)new EntryPoint$lambda$0$Type();",
+        "EntryPoint$I2 o=(EntryPoint$I1)(EntryPoint$I2)(EntryPoint$I3)new EntryPoint$lambda$0$Type();",
         lambda);
 
     JProgram program = compileSnippet("void", lambda, false);
@@ -1092,29 +1093,6 @@ public class Java8AstTest extends FullCompileTestBase {
         formatSource(samMethod.toSource()));
   }
 
-  public void testIntersectionCastOfLambdaWithClassType() throws Exception {
-    addSnippetClassDecl("interface I1 { public void foo(); }");
-    addSnippetClassDecl("class A { }");
-    String lambda = "Object o = (A & I1) () -> {};";
-    assertEqualBlock("Object o=(EntryPoint$A)(EntryPoint$I1)new EntryPoint$lambda$0$Type();",
-        lambda);
-
-    JProgram program = compileSnippet("void", lambda, false);
-
-    assertNotNull(getMethod(program, "lambda$0"));
-
-    JClassType lambdaInnerClass = (JClassType) getType(program, "test.EntryPoint$lambda$0$Type");
-    assertNotNull(lambdaInnerClass);
-    assertEquals("java.lang.Object", lambdaInnerClass.getSuperClass().getName());
-    assertEquals(1, lambdaInnerClass.getImplements().size());
-    assertTrue(
-        lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I1")));
-    // should implement foo method
-    JMethod samMethod = findMethod(lambdaInnerClass, "foo");
-    assertEquals("public final void foo(){EntryPoint.lambda$0();}",
-        formatSource(samMethod.toSource()));
-  }
-
   public void testIntersectionCastOfLambdaOneAbstractMethod() throws Exception {
     addSnippetClassDecl("interface I1 { public void foo(); }");
     addSnippetClassDecl("interface I2 extends I1{ public void foo();}");
@@ -1139,12 +1117,34 @@ public class Java8AstTest extends FullCompileTestBase {
         formatSource(samMethod.toSource()));
   }
 
-  public void testIntersectionCastMultipleAbstractMethods() throws Exception {
+  public void testIntersectionCastOfLambdaMultipleAbstractMethods() throws Exception {
     addSnippetClassDecl("interface I1 { public void foo(); }");
-    addSnippetClassDecl("interface I2 { public void bar(); public void fun();}");
+    addSnippetClassDecl("interface I2 { public void foo(); }");
     String lambda = "Object o = (I1 & I2) () -> {};";
     assertEqualBlock("Object o=(EntryPoint$I1)(EntryPoint$I2)new EntryPoint$lambda$0$Type();",
         lambda);
+
+    JProgram program = compileSnippet("void", lambda, false);
+
+    assertNotNull(getMethod(program, "lambda$0"));
+
+    JClassType lambdaInnerClass = (JClassType) getType(program, "test.EntryPoint$lambda$0$Type");
+    assertNotNull(lambdaInnerClass);
+    assertEquals("java.lang.Object", lambdaInnerClass.getSuperClass().getName());
+    assertEquals(2, lambdaInnerClass.getImplements().size());
+    assertTrue(
+        lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I1")));
+    // should implement foo method
+    JMethod samMethod = findMethod(lambdaInnerClass, "foo");
+    assertEquals("public final void foo(){EntryPoint.lambda$0();}",
+        formatSource(samMethod.toSource()));
+  }
+
+  public void testIntersectionCastOfLambdaMultipleAbstractMethodsWithGenerics() throws Exception {
+    addSnippetClassDecl("interface I1 extends I2<String> { public void foo(String arg0); }");
+    addSnippetClassDecl("interface I2<T> { public void foo(T arg); }");
+    String lambda = "Object o = (I1 & I2<String>) str -> {};";
+    assertEqualBlock("Object o=(EntryPoint$I1)new EntryPoint$lambda$0$Type();", lambda);
 
     JProgram program = compileSnippet("void", lambda, false);
 
@@ -1157,8 +1157,146 @@ public class Java8AstTest extends FullCompileTestBase {
     assertTrue(
         lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I1")));
     // should implement foo method
+    JMethod samMethod = findMethod(lambdaInnerClass, "foo(Ljava/lang/String;)V");
+    assertEquals("public final void foo(String arg0){EntryPoint.lambda$0(arg0);}",
+        formatSource(samMethod.toSource()));
+  }
+  public void testIntersectionCastOfMethodReference() throws Exception {
+    addSnippetClassDecl("static class C { public static void go() {} }");
+    addSnippetClassDecl("interface I1 { public void foo(); }");
+    addSnippetClassDecl("interface I2 { }");
+    String methodReference = "Object o = (I2 & I1) C::go;";
+    assertEqualBlock("Object o=(EntryPoint$I1)(EntryPoint$I2)new EntryPoint$0methodref$go$Type();",
+        methodReference);
+    JProgram program = compileSnippet("void", methodReference, false);
+
+    // created by GwtAstBuilder
+    JClassType lambdaInnerClass = (JClassType) getType(program, "test.EntryPoint$0methodref$go$Type");
+    assertNotNull(lambdaInnerClass);
+
+    // no fields
+    assertEquals(0, lambdaInnerClass.getFields().size());
+
+    // should have constructor taking no args
+    JMethod ctor = findMethod(lambdaInnerClass, "EntryPoint$0methodref$go$Type");
+    assertTrue(ctor instanceof JConstructor);
+    assertEquals(0, ctor.getParams().size());
+
+    // should implements I1 and I2
+    assertTrue(
+        lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I1")));
+    assertTrue(
+        lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I2")));
+    // should implement foo method
     JMethod samMethod = findMethod(lambdaInnerClass, "foo");
-    assertEquals("public final void foo(){EntryPoint.lambda$0();}",
+    assertEquals("public final void foo(){EntryPoint$C.go();}",
+        formatSource(samMethod.toSource()));
+  }
+
+  public void testMultipleIntersectionCastOfMethodReference() throws Exception {
+    addSnippetClassDecl("static class C { public static void go() {} }");
+    addSnippetClassDecl("interface I1 { public void foo(); }");
+    addSnippetClassDecl("interface I2 { }");
+    addSnippetClassDecl("interface I3 { }");
+    String methodReference = "I2 o = (I3 & I2 & I1) C::go;";
+    assertEqualBlock(
+        "EntryPoint$I2 o=(EntryPoint$I1)(EntryPoint$I2)(EntryPoint$I3)new EntryPoint$0methodref$go$Type();",
+        methodReference);
+
+    JProgram program = compileSnippet("void", methodReference, false);
+
+    // created by GwtAstBuilder
+    JClassType lambdaInnerClass = (JClassType) getType(program, "test.EntryPoint$0methodref$go$Type");
+    assertNotNull(lambdaInnerClass);
+
+    // no fields
+    assertEquals(0, lambdaInnerClass.getFields().size());
+
+    // should have constructor taking no args
+    JMethod ctor = findMethod(lambdaInnerClass, "EntryPoint$0methodref$go$Type");
+    assertTrue(ctor instanceof JConstructor);
+    assertEquals(0, ctor.getParams().size());
+
+    // should extends java.lang.Object, implements I1, I2 and I3
+    assertEquals("java.lang.Object", lambdaInnerClass.getSuperClass().getName());
+    assertTrue(
+        lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I1")));
+    assertTrue(
+        lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I2")));
+    assertTrue(
+        lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I3")));
+    // should implement foo method
+    JMethod samMethod = findMethod(lambdaInnerClass, "foo");
+    assertEquals("public final void foo(){EntryPoint$C.go();}",
+        formatSource(samMethod.toSource()));
+  }
+
+  public void testIntersectionCastOfMethodReferenceOneAbstractMethod() throws Exception {
+    addSnippetClassDecl("static class C { public static void go() {} }");
+    addSnippetClassDecl("interface I1 { public void foo(); }");
+    addSnippetClassDecl("interface I2 extends I1{ public void foo();}");
+    String lambda = "Object o = (I1 & I2) C::go;";
+    // (I1 & I2) is resolved to I2 by JDT.
+    assertEqualBlock("Object o=(EntryPoint$I2)new EntryPoint$0methodref$go$Type();",
+        lambda);
+
+    JProgram program = compileSnippet("void", lambda, false);
+
+    JClassType lambdaInnerClass = (JClassType) getType(program, "test.EntryPoint$0methodref$go$Type");
+    assertNotNull(lambdaInnerClass);
+    assertEquals("java.lang.Object", lambdaInnerClass.getSuperClass().getName());
+    assertEquals(1, lambdaInnerClass.getImplements().size()); // only implements I2.
+    assertTrue(
+        lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I2")));
+    // should implement foo method
+    JMethod samMethod = findMethod(lambdaInnerClass, "foo");
+    assertEquals("public final void foo(){EntryPoint$C.go();}",
+        formatSource(samMethod.toSource()));
+  }
+
+  public void testIntersectionCastOfMethodReferenceMultipleAbstractMethods() throws Exception {
+    addSnippetClassDecl("static class C { public static void go() {} }");
+    addSnippetClassDecl("interface I1 { public void foo(); }");
+    addSnippetClassDecl("interface I2 { public void foo(); }");
+    String methodReference = "Object o = (I1 & I2) C::go;";
+    assertEqualBlock("Object o=(EntryPoint$I1)(EntryPoint$I2)new EntryPoint$0methodref$go$Type();",
+        methodReference);
+
+    JProgram program = compileSnippet("void", methodReference, false);
+
+    JClassType lambdaInnerClass = (JClassType) getType(program, "test.EntryPoint$0methodref$go$Type");
+    assertNotNull(lambdaInnerClass);
+    assertEquals("java.lang.Object", lambdaInnerClass.getSuperClass().getName());
+    assertEquals(2, lambdaInnerClass.getImplements().size());
+    assertTrue(
+        lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I1")));
+  assertTrue(
+        lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I2")));
+    // should implement foo method
+    JMethod samMethod = findMethod(lambdaInnerClass, "foo");
+    assertEquals("public final void foo(){EntryPoint$C.go();}",
+        formatSource(samMethod.toSource()));
+  }
+
+  public void testIntersectionCastOfMethodReferenceMultipleAbstractMethodsWithGenerics() throws Exception {
+    addSnippetClassDecl("static class C { public static void go(String arg) {} }");
+    addSnippetClassDecl("interface I1 extends I2<String> { public void foo(String arg); }");
+    addSnippetClassDecl("interface I2<T> { public void foo(T arg); }");
+    String methodReference = "Object o = (I1 & I2<String>) C::go;";
+    assertEqualBlock("Object o=(EntryPoint$I1)new EntryPoint$0methodref$go$Type();",
+        methodReference);
+
+    JProgram program = compileSnippet("void", methodReference, false);
+
+    JClassType lambdaInnerClass = (JClassType) getType(program, "test.EntryPoint$0methodref$go$Type");
+    assertNotNull(lambdaInnerClass);
+    assertEquals("java.lang.Object", lambdaInnerClass.getSuperClass().getName());
+    assertEquals(1, lambdaInnerClass.getImplements().size());
+    assertTrue(
+        lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I1")));
+    // should implement foo method
+    JMethod samMethod = findMethod(lambdaInnerClass, "foo(Ljava/lang/String;)V");
+    assertEquals("public final void foo(String arg){EntryPoint$C.go(arg);}",
         formatSource(samMethod.toSource()));
   }
 
@@ -1231,6 +1369,76 @@ public class Java8AstTest extends FullCompileTestBase {
     //
     // Also just performing the compile asserts that the AST is well formed.
     compileSnippetToJS(entryPointClass);
+  }
+
+  public void testSuperReferenceExpression() throws Exception {
+    addAll(JavaResourceBase.createMockJavaResource("test.I",
+        "package test;",
+        "interface I {",
+        "  int get();",
+        "}"
+    ));
+    addAll(JavaResourceBase.createMockJavaResource("test.Y",
+        "package test;",
+        "class Y {",
+        "  int foo(){",
+        "    return 42;",
+        "  }",
+        "}"
+    ));
+    addAll(JavaResourceBase.createMockJavaResource("test.X",
+        "package test;",
+        "class X extends Y {",
+        "  int foo(){",
+        "    I i = super::foo;",
+        "    return i.get();",
+        "  }",
+        "}"
+    ));
+
+    JProgram program = compileSnippet("void", "new X().foo();");
+
+    JDeclaredType methodReferenceType = (JDeclaredType) findType(program, "X$0methodref$foo$Type");
+    JField outerField = methodReferenceType.getFields().get(0);
+    JMethod referenceMethod = findMethod(methodReferenceType, "get");
+    JMethodBody methodBody = (JMethodBody) referenceMethod.getBody();
+    JReturnStatement returnStatement = (JReturnStatement) methodBody.getStatements().get(0);
+    assertEquals("this." + outerField.getName() + ".Y.foo()", returnStatement.getExpr().toSource());
+  }
+
+  public void testQualifiedSuperReferenceExpression() throws Exception {
+    addAll(JavaResourceBase.createMockJavaResource("test.I",
+        "package test;",
+        "interface I {",
+        "  int get();",
+        "}"
+    ));
+    addAll(JavaResourceBase.createMockJavaResource("test.Y",
+        "package test;",
+        "class Y {",
+        "  int foo(){",
+        "    return 42;",
+        "  }",
+        "}"
+    ));
+    addAll(JavaResourceBase.createMockJavaResource("test.X",
+        "package test;",
+        "class X extends Y {",
+        "  int foo(){",
+        "    I i = X.super::foo;",
+        "    return i.get();",
+        "  }",
+        "}"
+    ));
+
+    JProgram program = compileSnippet("void", "new X().foo();");
+
+    JDeclaredType methodReferenceType = (JDeclaredType) findType(program, "X$0methodref$foo$Type");
+    JField outerField = methodReferenceType.getFields().get(0);
+    JMethod referenceMethod = findMethod(methodReferenceType, "get");
+    JMethodBody methodBody = (JMethodBody) referenceMethod.getBody();
+    JReturnStatement returnStatement = (JReturnStatement) methodBody.getStatements().get(0);
+    assertEquals("this." + outerField.getName() + ".Y.foo()", returnStatement.getExpr().toSource());
   }
 
   @Override

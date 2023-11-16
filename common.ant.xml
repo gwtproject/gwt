@@ -1,4 +1,4 @@
-<project name="common" xmlns:if="ant:if">
+<project name="common" xmlns:if="ant:if" xmlns:unless="ant:unless">
   <!-- it's okay for this not to exist, but it gives a place to store
        personal property settings, if any, persistently.  For example, you
        might use it to set gwt.junit.testcase.includes to a narrower subset
@@ -27,10 +27,11 @@
         message="This build file is in an inconsistent state (${ant.file} != ${test.ant.file})."/>
 
   <!-- Global Properties -->
+  <!--
+  Indicate if we are running in Java8, and so cannot run java9+ tests or generate Javadoc.
+  -->
   <condition property="isJava8">
-    <not>
-      <equals arg1="${ant.java.version}" arg2="1.7" />
-    </not>
+    <equals arg1="${ant.java.version}" arg2="1.8" />
   </condition>
   <property environment="env"/>
   <condition property="gwt.version" value="${env.GWT_VERSION}" else="0.0.0">
@@ -61,15 +62,17 @@
   <property name="javac.debug" value="true"/>
   <property name="javac.debuglevel" value="lines,vars,source"/>
   <property name="javac.encoding" value="utf-8"/>
-  <property name="javac.source" value="1.7"/>
-  <property name="javac.target" value="1.7"/>
+  <property name="javac.release" value="8"/>
   <property name="javac.nowarn" value="true"/>
-  <condition property="javac.fork" value="true" else="false">
-    <isfalse value="${isJava8}"/>
-  </condition>
-  <condition property="javac.compiler" value="modern" else="com.google.errorprone.ErrorProneAntCompilerAdapter">
-    <isfalse value="${isJava8}"/>
-  </condition>
+
+  <!-- javac and errorprone instructions from https://errorprone.info/docs/installation#ant -->
+  <property name="errorprone.javac.jar" location="${gwt.tools.lib}/errorprone/javac-9+181-r4173-1.jar"/>
+  <path id="errorprone.processorpath.ref">
+    <pathelement location="${gwt.tools.lib}/errorprone/error_prone_core-2.9.0-with-dependencies.jar"/>
+    <pathelement location="${gwt.tools.lib}/errorprone/jFormatString-3.0.0.jar"/>
+    <pathelement location="${gwt.tools.lib}/errorprone/dataflow-errorprone-3.15.0.jar"/>
+  </path>
+
   <property name="junit.out" location="${project.build}/test"/>
   <property name="emma.dir" value="${gwt.tools.redist}/emma"/>
   <property name="emma.filter.exclude" value=""/>
@@ -151,16 +154,44 @@
     </ant>
   </presetdef>
 
-  <presetdef name="gwt.javac">
-    <javac srcdir="src" destdir="${javac.out}" debug="${javac.debug}"
-           debuglevel="${javac.debuglevel}" source="${javac.source}" target="${javac.target}"
-           nowarn="${javac.nowarn}" encoding="${javac.encoding}"
-           includeantruntime="false" fork="${javac.fork}" compiler="${javac.compiler}">
-      <compilerclasspath if:true="${isJava8}">
-        <pathelement location="${gwt.tools.lib}/errorprone/error_prone_ant-2.0.19.jar"/>
-      </compilerclasspath>
-    </javac>
-  </presetdef>
+  <macrodef name="gwt.javac">
+    <attribute name="srcdir" default="src" />
+    <attribute name="destdir" default="${javac.out}" />
+    <attribute name="release" default="${javac.release}" />
+    <attribute name="excludes" default="" />
+    <attribute name="processorpath" default="" />
+    <attribute name="errorprone.args" default="" />
+    <element name="javaccontents" implicit="true" optional="true" />
+
+    <sequential>
+      <path id="mergedprocessorpath.ref">
+        <path refid="errorprone.processorpath.ref"/>
+        <path refid="@{processorpath}" unless:blank="@{processorpath}" />
+      </path>
+      <mkdir dir="@{destdir}"/>
+      <javac srcdir="@{srcdir}" sourcepath="@{srcdir}" destdir="@{destdir}" debug="${javac.debug}"
+             debuglevel="${javac.debuglevel}" source="@{release}" target="@{release}" release="@{release}"
+             nowarn="${javac.nowarn}" encoding="${javac.encoding}" includeantruntime="false"
+             fork="true" compiler="modern" excludes="@{excludes}">
+        <compilerarg value="-J-Xbootclasspath/p:${errorprone.javac.jar}" if:true="${isJava8}"/>
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <compilerarg value="-XDcompilePolicy=simple"/>
+        <compilerarg value="-processorpath"/>
+        <compilerarg pathref="mergedprocessorpath.ref"/>
+        <compilerarg value="-Xplugin:ErrorProne @{errorprone.args}" />
+        <javaccontents />
+      </javac>
+    </sequential>
+  </macrodef>
 
   <macrodef name="gwt.jar">
     <attribute name="destfile" default="${project.lib}"/>
@@ -218,6 +249,7 @@
         <jvmarg value="-Demma.coverage.out.merge=true"/>
         <jvmarg value="-Dcom.google.gwt.junit.reportPath=reports"/>
         <jvmarg line="@{test.jvmargs}"/>
+        <jvmarg line="--add-opens=java.base/java.lang=ALL-UNNAMED" unless:true="${isJava8}"/>
         <sysproperty key="gwt.args" value="@{test.args}"/>
         <sysproperty key="java.awt.headless" value="true"/>
         <classpath>
@@ -240,6 +272,7 @@
           <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
           <pathelement location="${gwt.tools.lib}/w3c/sac/sac-1.3.jar"/>
           <pathelement location="${gwt.tools.lib}/w3c/flute/flute-1.3-gg2.jar"/>
+          <pathelement location="${gwt.tools.lib}/jaxb/jaxb-api-2.3.3.jar"/>
           <extraclasspaths/>
         </classpath>
 

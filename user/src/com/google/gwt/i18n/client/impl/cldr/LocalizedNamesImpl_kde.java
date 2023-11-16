@@ -40,7 +40,6 @@ public class LocalizedNamesImpl_kde extends LocalizedNamesImpl {
         "AO",
         "AI",
         "AG",
-        "AN",
         "AQ",
         "AU",
         "AT",
@@ -101,6 +100,7 @@ public class LocalizedNamesImpl_kde extends LocalizedNamesImpl {
         "SV",
         "EE",
         "EU",
+        "EZ",
         "FJ",
         "PH",
         "FO",
@@ -271,6 +271,7 @@ public class LocalizedNamesImpl_kde extends LocalizedNamesImpl {
         "UY",
         "RU",
         "UM",
+        "UN",
         "SZ",
         "SE",
         "CH",
@@ -281,6 +282,8 @@ public class LocalizedNamesImpl_kde extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "JO",
@@ -298,7 +301,6 @@ public class LocalizedNamesImpl_kde extends LocalizedNamesImpl {
     namesMap.put("AG", "Antigua na Balbuda");
     namesMap.put("AI", "Angwila");
     namesMap.put("AM", "Almenia");
-    namesMap.put("AN", "Antili za Uholanzi");
     namesMap.put("AR", "Adyentina");
     namesMap.put("AS", "Samoa ya Malekani");
     namesMap.put("AT", "Austlia");
@@ -322,7 +324,7 @@ public class LocalizedNamesImpl_kde extends LocalizedNamesImpl {
     namesMap.put("BY", "Belalusi");
     namesMap.put("CA", "Kanada");
     namesMap.put("CD", "Jamuhuli ya Chidemoklasia ya kuKongo");
-    namesMap.put("CF", "Jamuhuli ya Afilika ya Paching'ati");
+    namesMap.put("CF", "Jamuhuli ya Afilika ya Paching’ati");
     namesMap.put("CG", "Kongo");
     namesMap.put("CH", "Uswisi");
     namesMap.put("CI", "Kodivaa");
@@ -491,7 +493,6 @@ public class LocalizedNamesImpl_kde extends LocalizedNamesImpl {
         "AG": "Antigua na Balbuda",
         "AI": "Angwila",
         "AM": "Almenia",
-        "AN": "Antili za Uholanzi",
         "AR": "Adyentina",
         "AS": "Samoa ya Malekani",
         "AT": "Austlia",
@@ -515,7 +516,7 @@ public class LocalizedNamesImpl_kde extends LocalizedNamesImpl {
         "BY": "Belalusi",
         "CA": "Kanada",
         "CD": "Jamuhuli ya Chidemoklasia ya kuKongo",
-        "CF": "Jamuhuli ya Afilika ya Paching'ati",
+        "CF": "Jamuhuli ya Afilika ya Paching’ati",
         "CG": "Kongo",
         "CH": "Uswisi",
         "CI": "Kodivaa",

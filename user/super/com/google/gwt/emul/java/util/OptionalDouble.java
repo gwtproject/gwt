@@ -15,11 +15,12 @@
  */
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkCriticalElement;
+
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
-
-import static javaemul.internal.InternalPreconditions.checkCriticalElement;
+import java.util.stream.DoubleStream;
 
 /**
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/OptionalDouble.html">
@@ -54,6 +55,10 @@ public final class OptionalDouble {
     return present;
   }
 
+  public boolean isEmpty() {
+    return !present;
+  }
+
   public double getAsDouble() {
     checkCriticalElement(present);
     return ref;
@@ -65,12 +70,32 @@ public final class OptionalDouble {
     }
   }
 
+  public void ifPresentOrElse(DoubleConsumer action, Runnable emptyAction) {
+    if (isPresent()) {
+      action.accept(ref);
+    } else {
+      emptyAction.run();
+    }
+  }
+
+  public DoubleStream stream() {
+    if (isPresent()) {
+      return DoubleStream.of(ref);
+    } else {
+      return DoubleStream.empty();
+    }
+  }
+
   public double orElse(double other) {
     return present ? ref : other;
   }
 
   public double orElseGet(DoubleSupplier other) {
     return present ? ref : other.getAsDouble();
+  }
+
+  public double orElseThrow() {
+    return getAsDouble();
   }
 
   public <X extends Throwable> double orElseThrow(Supplier<X> exceptionSupplier) throws X {

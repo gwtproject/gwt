@@ -215,7 +215,6 @@ import org.eclipse.jdt.internal.compiler.lookup.ClassScope;
 import org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope;
 import org.eclipse.jdt.internal.compiler.lookup.FieldBinding;
 import org.eclipse.jdt.internal.compiler.lookup.IntersectionTypeBinding18;
-import org.eclipse.jdt.internal.compiler.lookup.LocalTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.LocalVariableBinding;
 import org.eclipse.jdt.internal.compiler.lookup.MethodBinding;
 import org.eclipse.jdt.internal.compiler.lookup.MethodScope;
@@ -1215,21 +1214,15 @@ public class GwtAstBuilder {
       // And its JInterface container we must implement
       // There may be more than more JInterface containers to be implemented
       // if the lambda expression is cast to a IntersectionCastType.
-      JInterfaceType[] funcType;
-      if (binding instanceof IntersectionTypeBinding18) {
-        funcType = processIntersectionTypeForLambda((IntersectionTypeBinding18) binding, blockScope,
-            JdtUtil.signature(samBinding));
-      } else {
-        funcType = new JInterfaceType[] {(JInterfaceType) typeMap.get(binding)};
-      }
+      JInterfaceType[] lambdaInterfaces = getInterfacesToImplement(binding);
       SourceInfo info = makeSourceInfo(x);
 
       // Create an inner class to implement the interface and SAM method.
       // class lambda$0$Type implements T {}
 
       String innerLambdaImplementationClassShortName = String.valueOf(x.binding.selector);
-      JClassType innerLambdaClass = createInnerClass(
-          curClass.getClassOrInterface(), innerLambdaImplementationClassShortName, info, funcType);
+      JClassType innerLambdaClass = createInnerClass(curClass.getClassOrInterface(),
+          innerLambdaImplementationClassShortName, info, lambdaInterfaces);
       JConstructor ctor = new JConstructor(info, innerLambdaClass, AccessModifier.PRIVATE);
 
       // locals captured by the lambda and saved as fields on the anonymous inner class
@@ -1250,6 +1243,7 @@ public class GwtAstBuilder {
       // method
       JMethod samMethod = new JMethod(info, interfaceMethod.getName(), innerLambdaClass,
           interfaceMethod.getType(), false, false, true, interfaceMethod.getAccess());
+      samMethod.setSynthetic();
 
       // implements the SAM, e.g. Callback.onCallback(), Runnable.run(), etc
       createLambdaSamMethod(x, interfaceMethod, info, innerLambdaClass, locals, outerField,
@@ -1267,6 +1261,14 @@ public class GwtAstBuilder {
       popMethodInfo();
       // Add the newly generated type
       newTypes.add(innerLambdaClass);
+    }
+
+    private JInterfaceType[] getInterfacesToImplement(TypeBinding binding) {
+      if (binding instanceof IntersectionTypeBinding18) {
+        IntersectionTypeBinding18 type = (IntersectionTypeBinding18) binding;
+        return processIntersectionType(type, new JInterfaceType[type.intersectingTypes.length]);
+      }
+      return new JInterfaceType[]{(JInterfaceType) typeMap.get(binding)};
     }
 
     private void createFunctionalExpressionBridges(
@@ -1552,11 +1554,8 @@ public class GwtAstBuilder {
 
         JMethodCall methodCall = new JMethodCall(info, receiver, method);
 
-        // On a super ref, don't allow polymorphic dispatch. Oddly enough,
-        // QualifiedSuperReference not derived from SuperReference!
-        boolean isSuperRef =
-            x.receiver instanceof SuperReference || x.receiver instanceof QualifiedSuperReference;
-        if (isSuperRef) {
+        // On a super ref, don't allow polymorphic dispatch.
+        if (isSuperReference(x.receiver)) {
           methodCall.setStaticDispatchOnly();
         }
 
@@ -1773,7 +1772,8 @@ public class GwtAstBuilder {
           binding.getSingleAbstractMethod(blockScope, false).original();
       // Get the interface method is binds to
       JMethod interfaceMethod = typeMap.get(declarationSamBinding);
-      JInterfaceType funcType = (JInterfaceType) typeMap.get(binding);
+
+      JInterfaceType[] funcType = getInterfacesToImplement(binding);
       SourceInfo info = makeSourceInfo(x);
 
       // Get the method that the Type::method is actually referring to
@@ -1849,6 +1849,8 @@ public class GwtAstBuilder {
       JMethod samMethod = new JMethod(info, interfaceMethod.getName(),
           innerLambdaClass, interfaceMethod.getType(),
           false, false, true, interfaceMethod.getAccess());
+      samMethod.setSynthetic();
+
       for (JParameter origParam : interfaceMethod.getParams()) {
         samMethod.cloneParameter(origParam);
       }
@@ -1882,7 +1884,7 @@ public class GwtAstBuilder {
         // For static methods, instance will be null
         samCall = new JMethodCall(info, instance, referredMethod);
         // if super::method, we need static dispatch
-        if (x.lhs instanceof SuperReference) {
+        if (isSuperReference(x.lhs)) {
           samCall.setStaticDispatchOnly();
         }
       }
@@ -2224,12 +2226,32 @@ public class GwtAstBuilder {
       List<JLocal> resourceVariables = Lists.newArrayList();
       for (int i = x.resources.length - 1; i >= 0; i--) {
         // Needs to iterate back to front to be inline with the contents of the stack.
+        Statement resource = x.resources[i];
+        JStatement resourceStatement = pop(resource);
 
-        JDeclarationStatement resourceDecl = pop(x.resources[i]);
+        JLocal resourceVar;
+        if (resource instanceof LocalDeclaration) {
+          resourceVar = (JLocal) curMethod.locals.get(((LocalDeclaration) resource).binding);
+        } else {
+          // JLS 14.20.3.1 - Java 9 extension to try-with-resources
+          //    try (expr) {}
+          // which is equivalent to
+          //    try (T $resource = expr) {}
+          SourceInfo sourceInfo = resourceStatement.getSourceInfo();
+          JExpression expression = ((JExpressionStatement) resourceStatement).getExpr();
+          resourceVar = createLocal(
+              sourceInfo, "$resource", expression.getType());
+          resourceStatement =
+              new JBinaryOperation(
+                  sourceInfo,
+                  expression.getType(),
+                  JBinaryOperator.ASG,
+                  resourceVar.createRef(sourceInfo),
+                  expression).makeStatement();
+        }
 
-        JLocal resourceVar = (JLocal) curMethod.locals.get(x.resources[i].binding);
         resourceVariables.add(0, resourceVar);
-        tryBlock.addStmt(0, resourceDecl);
+        tryBlock.addStmt(0, resourceStatement);
       }
 
       // add exception variable
@@ -2273,9 +2295,13 @@ public class GwtAstBuilder {
     }
 
     private JLocal createLocalThrowable(SourceInfo info, String prefix) {
+      return createLocal(info, prefix, javaLangThrowable);
+    }
+
+    private JLocal createLocal(SourceInfo info, String prefix, JType type) {
       int index = curMethod.body.getLocals().size() + 1;
       return JProgram.createLocal(info, prefix + "_" + index,
-          javaLangThrowable, false, curMethod.body);
+          type, false, curMethod.body);
     }
 
     private JStatement createCloseBlockFor(
@@ -2889,7 +2915,6 @@ public class GwtAstBuilder {
       } else {
         body.getBlock().addStmt(call.makeReturnStatement());
       }
-      typeMap.setMethod(sourceMethodBinding, bridgeMethod);
       return bridgeMethod;
     }
 
@@ -3624,37 +3649,29 @@ public class GwtAstBuilder {
       }
     }
 
-    private JReferenceType[] processIntersectionCastType(IntersectionTypeBinding18 type) {
-      JReferenceType[] castTypes = new JReferenceType[type.intersectingTypes.length];
+    private JReferenceType[] processIntersectionType(IntersectionTypeBinding18 type) {
+      return processIntersectionType(type, new JReferenceType[type.intersectingTypes.length]);
+    }
+
+    private <T extends JReferenceType> T[] processIntersectionType(
+        IntersectionTypeBinding18 type, T[] intersectionTypes) {
       int i = 0;
       for (ReferenceBinding intersectingTypeBinding : type.intersectingTypes) {
         JType intersectingType = typeMap.get(intersectingTypeBinding);
         assert (intersectingType instanceof JReferenceType);
-        castTypes[i++] = ((JReferenceType) intersectingType);
+        intersectionTypes[i++] =  (T) intersectingType;
       }
-      return castTypes;
+      return intersectionTypes;
     }
 
     private JType[] processCastType(TypeBinding type) {
       if (type instanceof IntersectionTypeBinding18) {
-        return processIntersectionCastType((IntersectionTypeBinding18) type);
+        return processIntersectionType((IntersectionTypeBinding18) type);
       } else {
         return new JType[] {typeMap.get(type)};
       }
     }
 
-    private JInterfaceType[] processIntersectionTypeForLambda(IntersectionTypeBinding18 type,
-        BlockScope scope, String samSignature) {
-      List<JInterfaceType> interfaces = Lists.newArrayList();
-      for (ReferenceBinding intersectingTypeBinding : type.intersectingTypes) {
-        if (shouldImplements(intersectingTypeBinding, scope, samSignature)) {
-          JType intersectingType = typeMap.get(intersectingTypeBinding);
-          assert (intersectingType instanceof JInterfaceType);
-          interfaces.add(((JInterfaceType) intersectingType));
-        }
-      }
-      return Iterables.toArray(interfaces, JInterfaceType.class);
-    }
 
     private boolean isFunctionalInterfaceWithMethod(ReferenceBinding referenceBinding, Scope scope,
         String samSignature) {
@@ -3723,9 +3740,9 @@ public class GwtAstBuilder {
     }
   }
 
-  private <T extends JType> Iterable<T> mapTypes(TypeBinding[] types) {
+  private <T extends JType, B extends TypeBinding> Iterable<T> mapTypes(B[] types) {
     return FluentIterable.from(Arrays.asList(types)).transform(
-        new Function<TypeBinding, T>() {
+        new Function<B, T>() {
           @Override
           public T apply(TypeBinding typeBinding) {
             return (T) typeMap.get(typeBinding.erasure());
@@ -4336,18 +4353,12 @@ public class GwtAstBuilder {
     SourceInfo info = makeSourceInfo(x);
     try {
       SourceTypeBinding binding = x.binding;
-      String name;
-      if (binding instanceof LocalTypeBinding) {
-        char[] localName = binding.constantPoolName();
-        name = new String(localName).replace('/', '.');
-      } else {
-        name = JdtUtil.asDottedString(binding.compoundName);
-      }
-      name = intern(name);
+      String name = intern(JdtUtil.getQualifiedSourceName(binding));
 
       JDeclaredType type;
       if (binding.isClass()) {
-        type = new JClassType(info, name, binding.isAbstract(), binding.isFinal());
+        type = new JClassType(
+            info, name, binding.isAbstract(), binding.isFinal() || binding.isAnonymousType());
       } else if (binding.isInterface() || binding.isAnnotationType()) {
         type = new JInterfaceType(info, name);
       } else if (binding.isEnum()) {
@@ -4457,6 +4468,13 @@ public class GwtAstBuilder {
     } catch (IllegalAccessException e) {
       throw translateException(astNode, e);
     }
+  }
+
+  /**
+   * Returns <code>true</code> if the expression is either unqualified or qualified super reference.
+   */
+  private static boolean isSuperReference(Expression expression) {
+    return expression instanceof SuperReference || expression instanceof QualifiedSuperReference;
   }
 
   static class JdtPrivateHacks {

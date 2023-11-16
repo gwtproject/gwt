@@ -31,9 +31,9 @@
   </macrodef>
 
   <property name="gwt.apicheck.config"
-            location="tools/api-checker/config/gwt27_28userApi.conf"/>
+            location="tools/api-checker/config/gwt210_211userapi.conf"/>
   <property name="gwt.apicheck.referencelibs"
-            value="${gwt.tools}/api-checker-reference/2.7.0/gwt-dev-modified.jar:${gwt.tools}/api-checker-reference/2.7.0/gwt-user-modified.jar"/>
+            value="${gwt.tools}/api-checker-reference/2.10.0/gwt-dev-modified.jar:${gwt.tools}/api-checker-reference/2.10.0/gwt-user-modified.jar"/>
 
   <target name="buildonly"
           description="[action] Minimal one-platform devel build, without distro packaging">
@@ -70,12 +70,6 @@
     <gwt.ant dir="user"/>
   </target>
 
-  <target name="elemental"
-          description="[subdir] Builds (or runs ${target} if set) only the elemental library">
-    <call-subproject subproject="user" subtarget="build"/>
-    <gwt.ant dir="elemental"/>
-  </target>
-
   <target name="tools" description="[subdir] Builds (or runs ${target} if set) only the tools">
     <call-subproject subproject="user" subtarget="build"/>
     <gwt.ant dir="tools"/>
@@ -104,7 +98,7 @@
     <gwt.ant dir="samples"/>
   </target>
 
-  <target name="buildtools" description="[subdir] Build (or runs ${target} if set) the build tools">
+  <target name="buildtools" description="[subdir] Build (or runs ${target} if set) the build tools" unless="isJava8">
     <gwt.ant dir="build_tools"/>
   </target>
 
@@ -143,7 +137,7 @@
   </target>
 
   <target name="test" depends="buildonly,apicheck,checkstyle"
-          description="[action] Runs all the GWT tests, including checkstyle, apicheck and elemental">
+          description="[action] Runs all the GWT tests, including checkstyle and apicheck">
     <call-subproject subproject="buildtools" subtarget="test"/>
     <call-subproject subproject="dev" subtarget="test"/>
     <call-subproject subproject="user" subtarget="test"/>
@@ -151,7 +145,6 @@
     <call-subproject subproject="requestfactory" subtarget="test"/>
     <call-subproject subproject="servlet" subtarget="test"/>
     <call-subproject subproject="tools" subtarget="test"/>
-    <call-subproject subproject="elemental" subtarget="test"/>
   </target>
 
   <target name="testrf" depends="buildonly"
@@ -213,7 +206,7 @@
         <pathelement location="${gwt.build.out}/tools/api-checker/bin"/>
         <fileset dir="${gwt.build.lib}" includes="gwt-user.jar,gwt-dev.jar"/>
         <pathelement path="${java.class.path}"/>
-        <pathelement location="${gwt.tools.lib}/apache/ant-1.6.5.jar"/>
+        <pathelement location="${gwt.tools.lib}/apache/ant-zipscanner/ant-zipscanner-1.6.5-1-rebased.jar"/>
         <pathelement location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA.jar"/>
         <pathelement
             location="${gwt.tools.lib}/hibernate/validator/hibernate-validator-4.1.0.Final.jar"/>

@@ -15,17 +15,26 @@
  */
 package java.lang;
 
-/**
- * Wraps a primitive <code>long</code> as an object.
- */
+import javaemul.internal.LongUtils;
+import javaemul.internal.annotations.HasNoSideEffects;
+
+/** Wraps a primitive <code>long</code> as an object. */
 public final class Long extends Number implements Comparable<Long> {
 
-  /**
-   * Use nested class to avoid clinit on outer.
-   */
+  /** Use nested class to avoid clinit on outer. */
   static class BoxedValues {
     // Box values according to JLS - between -128 and 127
     static Long[] boxedValues = new Long[256];
+
+    @HasNoSideEffects
+    private static Long get(long l) {
+      int rebase = (int) l + 128;
+      Long result = BoxedValues.boxedValues[rebase];
+      if (result == null) {
+        result = BoxedValues.boxedValues[rebase] = new Long(l);
+      }
+      return result;
+    }
   }
 
   public static final long MAX_VALUE = 0x7fffffffffffffffL;
@@ -34,9 +43,9 @@ public final class Long extends Number implements Comparable<Long> {
   public static final int BYTES = SIZE / Byte.SIZE;
   public static final Class<Long> TYPE = long.class;
 
-  public static int bitCount(long i) {
-    int high = (int) (i >> 32);
-    int low = (int) i;
+  public static int bitCount(long l) {
+    int high = LongUtils.getHighBits(l);
+    int low = (int) l;
     return Integer.bitCount(high) + Integer.bitCount(low);
   }
 
@@ -56,15 +65,15 @@ public final class Long extends Number implements Comparable<Long> {
   }
 
   public static int hashCode(long l) {
-    return (int) l;
+    return LongUtils.getHighBits(l) ^ (int) l;
   }
 
-  public static long highestOneBit(long i) {
-    int high = (int) (i >> 32);
+  public static long highestOneBit(long l) {
+    int high = LongUtils.getHighBits(l);
     if (high != 0) {
-      return ((long) Integer.highestOneBit(high)) << 32;
+      return LongUtils.fromBits(0, Integer.highestOneBit(high));
     } else {
-      return Integer.highestOneBit((int) i) & 0xFFFFFFFFL;
+      return LongUtils.fromBits(Integer.highestOneBit((int) l), 0);
     }
   }
 
@@ -80,21 +89,21 @@ public final class Long extends Number implements Comparable<Long> {
     return Math.min(a, b);
   }
 
-  public static int numberOfLeadingZeros(long i) {
-    int high = (int) (i >> 32);
+  public static int numberOfLeadingZeros(long l) {
+    int high = LongUtils.getHighBits(l);
     if (high != 0) {
       return Integer.numberOfLeadingZeros(high);
     } else {
-      return Integer.numberOfLeadingZeros((int) i) + 32;
+      return Integer.numberOfLeadingZeros((int) l) + 32;
     }
   }
 
-  public static int numberOfTrailingZeros(long i) {
-    int low = (int) i;
+  public static int numberOfTrailingZeros(long l) {
+    int low = (int) l;
     if (low != 0) {
       return Integer.numberOfTrailingZeros(low);
     } else {
-      return Integer.numberOfTrailingZeros((int) (i >> 32)) + 32;
+      return Integer.numberOfTrailingZeros(LongUtils.getHighBits(l)) + 32;
     }
   }
 
@@ -106,18 +115,16 @@ public final class Long extends Number implements Comparable<Long> {
     return __parseAndValidateLong(s, radix);
   }
 
-  public static long reverse(long i) {
-    int high = (int) (i >>> 32);
-    int low = (int) i;
-    return ((long) Integer.reverse(low) << 32)
-        | (Integer.reverse(high) & 0xffffffffL);
+  public static long reverse(long l) {
+    int high = LongUtils.getHighBits(l);
+    int low = (int) l;
+    return LongUtils.fromBits(Integer.reverse(high), Integer.reverse(low));
   }
 
-  public static long reverseBytes(long i) {
-    int high = (int) (i >>> 32);
-    int low = (int) i;
-    return ((long) Integer.reverseBytes(low) << 32)
-        | (Integer.reverseBytes(high) & 0xffffffffL);
+  public static long reverseBytes(long l) {
+    int high = LongUtils.getHighBits(l);
+    int low = (int) l;
+    return LongUtils.fromBits(Integer.reverseBytes(high), Integer.reverseBytes(low));
   }
 
   public static long rotateLeft(long i, int distance) {
@@ -210,16 +217,11 @@ public final class Long extends Number implements Comparable<Long> {
     return String.valueOf(buf, cursor, bufLen - cursor);
   }
 
-  public static Long valueOf(long i) {
-    if (i > -129 && i < 128) {
-      int rebase = (int) i + 128;
-      Long result = BoxedValues.boxedValues[rebase];
-      if (result == null) {
-        result = BoxedValues.boxedValues[rebase] = new Long(i);
-      }
-      return result;
+  public static Long valueOf(long l) {
+    if (l > -129 && l < 128) {
+      return BoxedValues.get(l);
     }
-    return new Long(i);
+    return new Long(l);
   }
 
   public static Long valueOf(String s) throws NumberFormatException {
@@ -232,8 +234,10 @@ public final class Long extends Number implements Comparable<Long> {
 
   private static String toPowerOfTwoUnsignedString(long value, int shift) {
     final int radix = 1 << shift;
-    if (Integer.MIN_VALUE <= value && value <= Integer.MAX_VALUE) {
-      return Integer.toString((int) value, radix);
+
+    int highBits = LongUtils.getHighBits(value);
+    if (highBits == 0) {
+      return Integer.toUnsignedString((int) value, radix);
     }
 
     final int mask = radix - 1;

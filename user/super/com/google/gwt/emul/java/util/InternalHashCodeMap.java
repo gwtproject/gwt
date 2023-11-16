@@ -15,14 +15,10 @@
  */
 package java.util;
 
-import static java.util.ConcurrentModificationDetector.structureChanged;
-
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
-
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.JsUtils;
-import javaemul.internal.NativeArray;
 
 /**
  * A simple wrapper around JavaScriptObject to provide {@link java.util.Map}-like semantics for any
@@ -60,7 +56,7 @@ class InternalHashCodeMap<K, V> implements Iterable<Entry<K, V>> {
     }
     chain[chain.length] = new SimpleEntry<K, V>(key, value);
     size++;
-    structureChanged(host);
+    host.structureChanged();
     return null;
   }
 
@@ -79,7 +75,7 @@ class InternalHashCodeMap<K, V> implements Iterable<Entry<K, V>> {
           ArrayHelper.removeFrom(chain, i, 1);
         }
         size--;
-        structureChanged(host);
+        host.structureChanged();
         return entry.getValue();
       }
     }
@@ -149,7 +145,7 @@ class InternalHashCodeMap<K, V> implements Iterable<Entry<K, V>> {
   }
 
   private Entry<K, V>[] newEntryChain() {
-    return JsUtils.uncheckedCast(new NativeArray());
+    return JsUtils.uncheckedCast(new Object[0]);
   }
 
   /**
@@ -157,6 +153,6 @@ class InternalHashCodeMap<K, V> implements Iterable<Entry<K, V>> {
    * also handles null keys as well.
    */
   private int hash(Object key) {
-    return key == null ? 0 : host.getHashCode(key);
+    return host.getHashCode(key);
   }
 }

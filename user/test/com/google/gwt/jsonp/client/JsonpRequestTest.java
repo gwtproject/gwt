@@ -223,19 +223,13 @@ public class JsonpRequestTest extends GWTTestCase {
         new AssertFailureCallback<String>("ERROR"));
   }
 
-  /**
-   * Hangs indefinitely in devmode with HtmlUnit.
-   * <p>
-   * Call occurs through postponedActions in HtmlUnit that execute
-   * synchronously. Should be async. Need to file HtmlUnitBug.
-   */
-  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testIds() {
     delayTestFinish(RESPONSE_DELAY);
+    Counter counter = new Counter(2);
     JsonpRequest<String> reqA = jsonp.requestString(echo("'A'"),
-        new AssertSuccessCallback<String>("A"));
+        new AssertSuccessCallback<String>("A", counter));
     JsonpRequest<String> reqB = jsonp.requestString(echo("'B'"),
-        new AssertSuccessCallback<String>("B"));
+        new AssertSuccessCallback<String>("B", counter));
     // WARNING: knows the current structure of IDs
     int idA = Integer.parseInt(reqA.getCallbackId().substring(1));
     int idB = Integer.parseInt(reqB.getCallbackId().substring(1));

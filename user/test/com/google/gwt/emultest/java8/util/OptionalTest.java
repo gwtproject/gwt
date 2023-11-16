@@ -59,6 +59,21 @@ public class OptionalTest extends GWTTestCase {
     assertTrue(present.isPresent());
   }
 
+  // Disabled until Java 11 is enabled in Open source
+/*  public void testIsEmpty() {
+    // empty case
+    assertTrue(empty.isEmpty());
+
+    empty = Optional.ofNullable(null);
+    assertTrue(empty.isEmpty());
+
+    // non-empty case
+    assertFalse(present.isEmpty());
+
+    present = Optional.ofNullable(REFERENCE);
+    assertFalse(present.isEmpty());
+  }*/
+
   public void testGet() {
     // empty case
     try {
@@ -196,6 +211,7 @@ public class OptionalTest extends GWTTestCase {
     assertSame(REFERENCE, present.orElse(OTHER_REFERENCE));
   }
 
+  @SuppressWarnings("DangerousLiteralNull") // Intentionally misusing Optional to test bug parity.
   public void testOrElseGet() {
     // empty case
     try {
@@ -216,6 +232,7 @@ public class OptionalTest extends GWTTestCase {
     }));
   }
 
+  @SuppressWarnings("DangerousLiteralNull") // Intentionally misusing Optional to test bug parity.
   public void testOrElseThrow() {
     // empty case
     try {

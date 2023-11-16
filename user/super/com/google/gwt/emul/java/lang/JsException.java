@@ -22,8 +22,13 @@ package java.lang;
  */
 public class JsException extends RuntimeException {
 
+  private static final Object UNINITIALIZED = "__noinit__";
+
+  private Object backingJsObject = UNINITIALIZED;
+
   protected JsException(Object backingJsObject) {
     super(backingJsObject);
+    this.backingJsObject = backingJsObject;
   }
 
   JsException(String msg) {
@@ -32,5 +37,11 @@ public class JsException extends RuntimeException {
 
   JsException() {
     super();
+  }
+
+  // Note that this initialization path is only used for J2CL transpiler, not in GWT.
+  @Override
+  void privateInitError(Object error) {
+    super.privateInitError(backingJsObject == UNINITIALIZED ? error : backingJsObject);
   }
 }

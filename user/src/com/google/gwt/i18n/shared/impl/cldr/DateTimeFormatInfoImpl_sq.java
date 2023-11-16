@@ -24,29 +24,29 @@ public class DateTimeFormatInfoImpl_sq extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "paradite",
-        "pasdite"
+        "p.d.",
+        "m.d."
     };
   }
 
   @Override
   public String dateFormatFull() {
-    return "EEEE, dd MMMM y";
+    return "EEEE, d MMMM y";
   }
 
   @Override
   public String dateFormatLong() {
-    return "dd MMMM y";
+    return "d MMMM y";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "dd/MM/y";
+    return "d MMM y";
   }
 
   @Override
   public String dateFormatShort() {
-    return "dd/MM/yy";
+    return "d.M.yy";
   }
 
   @Override
@@ -60,18 +60,28 @@ public class DateTimeFormatInfoImpl_sq extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
   public String[] erasFull() {
     return new String[] {
-        "para erës së re",
-        "erës së re"
+        "para Krishtit",
+        "mbas Krishtit"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "p.e.r.",
-        "e.r."
+        "p.K.",
+        "mb.K."
     };
   }
 
@@ -87,12 +97,12 @@ public class DateTimeFormatInfoImpl_sq extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE d MMMM";
+    return "EEEE, d MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "d/M";
+    return "d.M";
   }
 
   @Override
@@ -117,12 +127,12 @@ public class DateTimeFormatInfoImpl_sq extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "M/y";
+    return "M.y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "dd/MM/y";
+    return "d.M.y";
   }
 
   @Override
@@ -132,12 +142,12 @@ public class DateTimeFormatInfoImpl_sq extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearQuarterFull() {
-    return "QQQQ y";
+    return "QQQQ, y";
   }
 
   @Override
   public String formatYearQuarterShort() {
-    return "Q y";
+    return "Q, y";
   }
 
   @Override
@@ -161,36 +171,36 @@ public class DateTimeFormatInfoImpl_sq extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsNarrow() {
     return new String[] {
-        "J",
-        "S",
-        "M",
-        "P",
-        "M",
-        "Q",
-        "K",
-        "G",
-        "S",
-        "T",
-        "N",
-        "D"
+        "j",
+        "sh",
+        "m",
+        "p",
+        "m",
+        "q",
+        "k",
+        "g",
+        "sh",
+        "t",
+        "n",
+        "dh"
     };
   }
 
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "Jan",
-        "Shk",
-        "Mar",
-        "Pri",
-        "Maj",
-        "Qer",
-        "Kor",
-        "Gsh",
-        "Sht",
-        "Tet",
-        "Nën",
-        "Dhj"
+        "jan",
+        "shk",
+        "mar",
+        "pri",
+        "maj",
+        "qer",
+        "korr",
+        "gush",
+        "sht",
+        "tet",
+        "nën",
+        "dhj"
     };
   }
 
@@ -207,11 +217,31 @@ public class DateTimeFormatInfoImpl_sq extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "T1",
-        "T2",
-        "T3",
-        "T4"
+        "tremujori I",
+        "tremujori II",
+        "tremujori III",
+        "tremujori IV"
     };
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "h:mm:ss a, zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "h:mm:ss a, z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "h:mm:ss a";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "h:mm a";
   }
 
   @Override
@@ -230,13 +260,13 @@ public class DateTimeFormatInfoImpl_sq extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "D",
-        "H",
-        "M",
-        "M",
-        "E",
-        "P",
-        "S"
+        "d",
+        "h",
+        "m",
+        "m",
+        "e",
+        "p",
+        "sh"
     };
   }
 
@@ -250,6 +280,19 @@ public class DateTimeFormatInfoImpl_sq extends DateTimeFormatInfoImpl {
         "Enj",
         "Pre",
         "Sht"
+    };
+  }
+
+  @Override
+  public String[] weekdaysShortStandalone() {
+    return new String[] {
+        "die",
+        "hën",
+        "mar",
+        "mër",
+        "enj",
+        "pre",
+        "sht"
     };
   }
 }

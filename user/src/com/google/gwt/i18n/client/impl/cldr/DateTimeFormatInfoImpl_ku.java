@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Google Inc.
+ * Copyright 2012 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,7 +14,6 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
 
 /**
@@ -23,18 +22,26 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_ku extends DateTimeFormatInfoImpl {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "BN",
+        "PN"
+    };
+  }
+
+  @Override
   public String[] erasFull() {
     return new String[] {
-        "BCE",
-        "CE"
+        "berî zayînê",
+        "piştî zayînê"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "BCE",
-        "CE"
+        "BZ",
+        "PZ"
     };
   }
 
@@ -96,103 +103,131 @@ public class DateTimeFormatInfoImpl_ku extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsFull() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
+        "rêbendanê",
+        "reşemiyê",
+        "adarê",
+        "avrêlê",
+        "gulanê",
+        "pûşperê",
+        "tîrmehê",
+        "gelawêjê",
+        "rezberê",
+        "kewçêrê",
+        "sermawezê",
+        "berfanbarê"
+    };
+  }
+
+  @Override
+  public String[] monthsFullStandalone() {
+    return new String[] {
+        "rêbendan",
+        "reşemî",
+        "adar",
+        "avrêl",
+        "gulan",
+        "pûşper",
+        "tîrmeh",
+        "gelawêj",
+        "rezber",
+        "kewçêr",
+        "sermawez",
+        "berfanbar"
     };
   }
 
   @Override
   public String[] monthsNarrow() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
+        "R",
+        "R",
+        "A",
+        "A",
+        "G",
+        "P",
+        "T",
+        "G",
+        "R",
+        "K",
+        "S",
+        "B"
     };
   }
 
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
+        "rêb",
+        "reş",
+        "ada",
+        "avr",
+        "gul",
+        "pûş",
+        "tîr",
+        "gel",
+        "rez",
+        "kew",
+        "ser",
+        "ber"
     };
   }
 
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Q1",
-        "Q2",
-        "Q3",
-        "Q4"
+        "Ç1",
+        "Ç2",
+        "Ç3",
+        "Ç4"
+    };
+  }
+
+  @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "Ç1",
+        "Ç2",
+        "Ç3",
+        "Ç4"
     };
   }
 
   @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "یەکشەممە",
-        "دووشەممە",
-        "سێشەممە",
-        "چوارشەممە",
-        "5",
-        "6",
-        "7"
+        "yekşem",
+        "duşem",
+        "sêşem",
+        "çarşem",
+        "pêncşem",
+        "în",
+        "şemî"
     };
   }
 
   @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "ی",
-        "د",
-        "س",
-        "4",
-        "5",
-        "6",
-        "7"
+        "Y",
+        "D",
+        "S",
+        "Ç",
+        "P",
+        "Î",
+        "Ş"
     };
   }
 
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "یەکشەممە",
-        "دووشەممە",
-        "سێشەممە",
-        "چوارشەممە",
-        "5",
-        "6",
-        "7"
+        "yş",
+        "dş",
+        "sş",
+        "çş",
+        "pş",
+        "în",
+        "ş"
     };
   }
 }

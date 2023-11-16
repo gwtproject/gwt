@@ -22,17 +22,22 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_fr_TN extends DateTimeFormatInfoImpl_fr {
 
   @Override
-  public int firstDayOfTheWeek() {
-    return 0;
+  public String timeFormatFull() {
+    return "h:mm:ss a zzzz";
   }
 
   @Override
-  public int weekendEnd() {
-    return 6;
+  public String timeFormatLong() {
+    return "h:mm:ss a z";
   }
 
   @Override
-  public int weekendStart() {
-    return 5;
+  public String timeFormatMedium() {
+    return "h:mm:ss a";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "h:mm a";
   }
 }

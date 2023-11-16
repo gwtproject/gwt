@@ -43,12 +43,12 @@ public class DateTimeFormatInfoImpl_fil extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateTimeFull(String timePattern, String datePattern) {
-    return datePattern + " 'ng' " + timePattern;
+    return datePattern + " 'nang' " + timePattern;
   }
 
   @Override
   public String dateTimeLong(String timePattern, String datePattern) {
-    return datePattern + " 'ng' " + timePattern;
+    return datePattern + " 'nang' " + timePattern;
   }
 
   @Override
@@ -59,14 +59,6 @@ public class DateTimeFormatInfoImpl_fil extends DateTimeFormatInfoImpl {
   @Override
   public String dateTimeShort(String timePattern, String datePattern) {
     return datePattern + ", " + timePattern;
-  }
-
-  @Override
-  public String[] erasFull() {
-    return new String[] {
-        "BC",
-        "AD"
-    };
   }
 
   @Override
@@ -150,18 +142,36 @@ public class DateTimeFormatInfoImpl_fil extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsNarrow() {
     return new String[] {
+        "Ene",
+        "Peb",
+        "Mar",
+        "Abr",
+        "May",
+        "Hun",
+        "Hul",
+        "Ago",
+        "Set",
+        "Okt",
+        "Nob",
+        "Dis"
+    };
+  }
+
+  @Override
+  public String[] monthsNarrowStandalone() {
+    return new String[] {
         "E",
         "P",
         "M",
         "A",
         "M",
-        "H",
-        "H",
-        "A",
-        "S",
-        "O",
-        "N",
-        "D"
+        "Hun",
+        "Hul",
+        "Ago",
+        "Set",
+        "Okt",
+        "Nob",
+        "Dis"
     };
   }
 
@@ -229,13 +239,13 @@ public class DateTimeFormatInfoImpl_fil extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "L",
-        "L",
-        "M",
-        "M",
-        "H",
-        "B",
-        "S"
+        "Lin",
+        "Lun",
+        "Mar",
+        "Miy",
+        "Huw",
+        "Biy",
+        "Sab"
     };
   }
 

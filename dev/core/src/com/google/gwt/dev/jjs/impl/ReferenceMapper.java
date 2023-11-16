@@ -33,6 +33,7 @@ import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.util.StringInterner;
+import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 import com.google.gwt.thirdparty.guava.common.collect.Interner;
 
 import org.eclipse.jdt.internal.compiler.lookup.ArrayBinding;
@@ -184,13 +185,26 @@ public class ReferenceMapper {
   }
 
   public void setField(FieldBinding binding, JField field) {
+    // Make sure that the enclosing type of the field binding corresponds to the enclosing type of
+    // field to avoid associating a field binding with the wrong JField.
+    Preconditions.checkArgument(get(binding.declaringClass.erasure()) == field.getEnclosingType());
+
     String key = JdtUtil.signature(binding);
-    sourceFields.put(key, field);
+    JField oldField = sourceFields.put(key, field);
+
+    // Make sure this is called at most once per field binding.
+    Preconditions.checkState(oldField == null);
   }
 
   public void setMethod(MethodBinding binding, JMethod method) {
+    // Make sure that the enclosing type of the method binding corresponds to the enclosing type of
+    // method to avoid associating a method binding with the wrong JMethod.
+    Preconditions.checkArgument(get(binding.declaringClass.erasure()) == method.getEnclosingType());
     String key = JdtUtil.signature(binding);
-    sourceMethods.put(key, method);
+    JMethod oldMethod = sourceMethods.put(key, method);
+
+    // Make sure this is called at most once per method binding.
+    Preconditions.checkState(oldMethod == null);
   }
 
   public void setSourceType(SourceTypeBinding binding, JDeclaredType type) {
@@ -274,7 +288,7 @@ public class ReferenceMapper {
   }
 
   private JDeclaredType createType(ReferenceBinding binding) {
-    String name = JdtUtil.asDottedString(binding.compoundName);
+    String name = JdtUtil.getQualifiedSourceName(binding);
     SourceInfo info = SourceOrigin.UNKNOWN;
     if (binding.isClass()) {
       return new JClassType(info, name, binding.isAbstract(), binding.isFinal());

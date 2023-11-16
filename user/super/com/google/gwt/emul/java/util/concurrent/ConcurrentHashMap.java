@@ -22,6 +22,7 @@ import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -141,5 +142,9 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V> implements Concur
 
   public Enumeration<K> keys() {
     return Collections.enumeration(keySet());
+  }
+
+  public static <T> Set<T> newKeySet() {
+    return new HashSet<>();
   }
 }

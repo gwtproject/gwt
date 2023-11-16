@@ -41,12 +41,32 @@ public class DateTimeFormatInfoImpl_uk extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "d MMM y";
+    return "d MMM y 'р'.";
   }
 
   @Override
   public String dateFormatShort() {
     return "dd.MM.yy";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " 'о' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " 'о' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
   }
 
   @Override
@@ -60,8 +80,8 @@ public class DateTimeFormatInfoImpl_uk extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasShort() {
     return new String[] {
-        "до н.е.",
-        "н.е."
+        "до н. е.",
+        "н. е."
     };
   }
 
@@ -151,23 +171,41 @@ public class DateTimeFormatInfoImpl_uk extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsFullStandalone() {
     return new String[] {
-        "Січень",
-        "Лютий",
-        "Березень",
-        "Квітень",
-        "Травень",
-        "Червень",
-        "Липень",
-        "Серпень",
-        "Вересень",
-        "Жовтень",
-        "Листопад",
-        "Грудень"
+        "січень",
+        "лютий",
+        "березень",
+        "квітень",
+        "травень",
+        "червень",
+        "липень",
+        "серпень",
+        "вересень",
+        "жовтень",
+        "листопад",
+        "грудень"
     };
   }
 
   @Override
   public String[] monthsNarrow() {
+    return new String[] {
+        "с",
+        "л",
+        "б",
+        "к",
+        "т",
+        "ч",
+        "л",
+        "с",
+        "в",
+        "ж",
+        "л",
+        "г"
+    };
+  }
+
+  @Override
+  public String[] monthsNarrowStandalone() {
     return new String[] {
         "С",
         "Л",
@@ -205,38 +243,38 @@ public class DateTimeFormatInfoImpl_uk extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShortStandalone() {
     return new String[] {
-        "Січ",
-        "Лют",
-        "Бер",
-        "Кві",
-        "Тра",
-        "Чер",
-        "Лип",
-        "Сер",
-        "Вер",
-        "Жов",
-        "Лис",
-        "Гру"
+        "січ",
+        "лют",
+        "бер",
+        "кві",
+        "тра",
+        "чер",
+        "лип",
+        "сер",
+        "вер",
+        "жов",
+        "лис",
+        "гру"
     };
   }
 
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "I квартал",
-        "II квартал",
-        "III квартал",
-        "IV квартал"
+        "1-й квартал",
+        "2-й квартал",
+        "3-й квартал",
+        "4-й квартал"
     };
   }
 
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "I кв.",
-        "II кв.",
-        "III кв.",
-        "IV кв."
+        "1-й кв.",
+        "2-й кв.",
+        "3-й кв.",
+        "4-й кв."
     };
   }
 
@@ -250,19 +288,6 @@ public class DateTimeFormatInfoImpl_uk extends DateTimeFormatInfoImpl {
         "четвер",
         "пʼятниця",
         "субота"
-    };
-  }
-
-  @Override
-  public String[] weekdaysFullStandalone() {
-    return new String[] {
-        "Неділя",
-        "Понеділок",
-        "Вівторок",
-        "Середа",
-        "Четвер",
-        "Пʼятниця",
-        "Субота"
     };
   }
 
@@ -282,13 +307,13 @@ public class DateTimeFormatInfoImpl_uk extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "Нд",
-        "Пн",
-        "Вт",
-        "Ср",
-        "Чт",
-        "Пт",
-        "Сб"
+        "нд",
+        "пн",
+        "вт",
+        "ср",
+        "чт",
+        "пт",
+        "сб"
     };
   }
 }

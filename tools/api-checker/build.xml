@@ -12,7 +12,6 @@
   <property.ensure name="gwt.user.jar" location="${gwt.build.lib}/gwt-user.jar" />
 
   <target name="compile" description="Compile all class files">
-    <mkdir dir="${javac.out}" />
     <gwt.javac>
       <classpath>
         <pathelement location="${gwt.dev.jar}" />
@@ -31,7 +30,6 @@
   <target name="compile.tests"
       depends="compile.dev.tests, compile.emma.if.enabled"
       description="Compiles the test code for this project">
-    <mkdir dir="${javac.junit.out}" />
     <gwt.javac srcdir="test" destdir="${javac.junit.out}">
       <classpath>
         <pathelement location="${javac.out}" />

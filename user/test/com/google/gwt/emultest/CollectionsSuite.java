@@ -17,11 +17,11 @@ package com.google.gwt.emultest;
 
 import com.google.gwt.emultest.java.util.ArrayDequeTest;
 import com.google.gwt.emultest.java.util.ArrayListTest;
+import com.google.gwt.emultest.java.util.ArraysDoubleSemanticsTest;
+import com.google.gwt.emultest.java.util.ArraysFloatSemanticsTest;
 import com.google.gwt.emultest.java.util.ArraysTest;
 import com.google.gwt.emultest.java.util.BitSetTest;
 import com.google.gwt.emultest.java.util.CollectionsTest;
-import com.google.gwt.emultest.java.util.ComparatorTest;
-import com.google.gwt.emultest.java.util.DateTest;
 import com.google.gwt.emultest.java.util.EnumMapTest;
 import com.google.gwt.emultest.java.util.EnumSetTest;
 import com.google.gwt.emultest.java.util.HashMapSmokeTest;
@@ -31,9 +31,7 @@ import com.google.gwt.emultest.java.util.IdentityHashMapTest;
 import com.google.gwt.emultest.java.util.LinkedHashMapTest;
 import com.google.gwt.emultest.java.util.LinkedHashSetTest;
 import com.google.gwt.emultest.java.util.LinkedListTest;
-import com.google.gwt.emultest.java.util.ObjectsTest;
 import com.google.gwt.emultest.java.util.PriorityQueueTest;
-import com.google.gwt.emultest.java.util.RandomTest;
 import com.google.gwt.emultest.java.util.StackTest;
 import com.google.gwt.emultest.java.util.TreeMapIntegerDoubleTest;
 import com.google.gwt.emultest.java.util.TreeMapIntegerDoubleWithComparatorTest;
@@ -42,7 +40,6 @@ import com.google.gwt.emultest.java.util.TreeMapStringStringWithComparatorTest;
 import com.google.gwt.emultest.java.util.TreeSetIntegerTest;
 import com.google.gwt.emultest.java.util.TreeSetIntegerWithComparatorTest;
 import com.google.gwt.emultest.java.util.VectorTest;
-
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -52,11 +49,11 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
   ArrayDequeTest.class,
   ArrayListTest.class,
+  ArraysDoubleSemanticsTest.class,
+  ArraysFloatSemanticsTest.class,
   ArraysTest.class,
   BitSetTest.class,
   CollectionsTest.class,
-  ComparatorTest.class,
-  DateTest.class,
   EnumMapTest.class,
   EnumSetTest.class,
   HashMapTest.class,
@@ -65,9 +62,7 @@ import org.junit.runners.Suite.SuiteClasses;
   LinkedHashMapTest.class,
   LinkedHashSetTest.class,
   LinkedListTest.class,
-  ObjectsTest.class,
   PriorityQueueTest.class,
-  RandomTest.class,
   StackTest.class,
   VectorTest.class,
   TreeMapStringStringTest.class,
@@ -80,4 +75,4 @@ import org.junit.runners.Suite.SuiteClasses;
   // Put last to reduce number of times the test framework switches modules
   HashMapSmokeTest.class,
 })
-public class CollectionsSuite { }
+public class CollectionsSuite {}

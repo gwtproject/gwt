@@ -27,12 +27,19 @@ package(
 
 load("//third_party/java_src/gwt:build-macros.bzl", "AugmentedJar")
 
+JSINTEROP_SRCS_JAVA7 = glob(
+    ["src/jsinterop/**/*.java"],
+    exclude = [
+        "src/jsinterop/annotations/JsNonNull.java",
+        "src/jsinterop/annotations/JsNullable.java",
+    ],
+)
+
 JSINTEROP_SRCS = glob(["src/jsinterop/**/*.java"])
 
 # GWT JsInterop annotations in a separate library used by hybrid app projects
 java_library(
     name = "gwt-jsinterop-annotations",
-    srcs = JSINTEROP_SRCS,
     compatible_with = [
         "//buildenv/target:android",
         "//buildenv/target:appengine",
@@ -40,6 +47,35 @@ java_library(
     constraints = [
         "android",
     ],
+    exports = select({
+        "//tools/java_toolchain:java7": [":gwt-jsinterop-annotations_java7"],
+        "//conditions:default": [":gwt-jsinterop-annotations_java8"],
+    }),
+)
+
+java_library(
+    name = "gwt-jsinterop-annotations_java7",
+    srcs = JSINTEROP_SRCS_JAVA7,
+    compatible_with = [
+        "//buildenv/target:android",
+        "//buildenv/target:appengine",
+    ],
+    constraints = [
+        "android",
+    ],
+    visibility = ["//visibility:private"],
+)
+
+java_library(
+    name = "gwt-jsinterop-annotations_java8",
+    srcs = JSINTEROP_SRCS,
+    compatible_with = [
+        "//buildenv/target:android",
+    ],
+    constraints = [
+        "android",
+    ],
+    visibility = ["//visibility:private"],
 )
 
 java_library(
@@ -98,9 +134,7 @@ java_library(
     ),
     compatible_with = ["//buildenv/target:appengine"],
     javacopts = [
-        "-Xep:FutureReturnValueIgnored:OFF",
-        "-Xep:MissingCasesInEnumSwitch:OFF",
-        "-Xep:EqualsIncompatibleType:OFF",
+        "-XepAllErrorsAsWarnings",
     ],
     plugins = [
         "//java/com/google/devtools/build/buildjar/plugin/gwt",
@@ -140,7 +174,9 @@ java_library(
         "src/com/google/gwt/user/server/Base64Utils.java",
     ],
     compatible_with = ["//buildenv/target:appengine"],
-    javacopts = ["-Xep:MissingCasesInEnumSwitch:OFF"],
+    javacopts = [
+        "-XepAllErrorsAsWarnings",
+    ],
     deps = [
         "//third_party/java_src/gwt/svn/trunk/dev:requestfactory-apt-deps",
     ],
@@ -416,7 +452,9 @@ java_library(
         ] + DTO_SRCS + JVM_REGEXP_SRCS,
     ),
     compatible_with = ["//buildenv/target:appengine"],
-    javacopts = ["-Xep:EqualsIncompatibleType:OFF"],
+    javacopts = [
+        "-XepAllErrorsAsWarnings",
+    ],
     deps = [
         ":gwt-dto-serializers",
         ":gwt-javaemul-annotations",
@@ -547,16 +585,7 @@ AugmentedJar(
         "//third_party/java_src/gwt/svn/trunk/dev:dev-test-code",
     ],
     javacopts = [
-        "-Xep:CheckReturnValue:OFF",
-        "-Xep:DeadThread:OFF",
-        "-Xep:ReturnValueIgnored:OFF",
-        "-Xep:SelfComparison:OFF",  # go/self-comparison-lsc
-        "-Xep:SelfEquals:OFF",  # go/self-equals-lsc
-        "-Xep:IdentityBinaryExpression:OFF",
-        "-Xep:LoopConditionChecker:OFF",
-        "-Xep:EqualsIncompatibleType:OFF",
-        "-Xep:LogicalAssignment:OFF",
-        "-Xep:ComplexBooleanConstant:OFF",
+        "-XepAllErrorsAsWarnings",
     ],
     deps = [
         "//third_party/java/jsr305_annotations",

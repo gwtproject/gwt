@@ -15,28 +15,32 @@
  */
 package javaemul.internal;
 
-/**
- * Contains logics for calculating hash codes in JavaScript.
- */
+import jsinterop.annotations.JsType;
+
+/** Contains logics for calculating hash codes in JavaScript. */
+@JsType
 public class HashCodes {
+
   public static int getIdentityHashCode(Object o) {
     switch (JsUtils.typeOf(o)) {
       case "string":
-        return getStringHashCode(JsUtils.uncheckedCast(o));
+        return JsUtils.<String>uncheckedCast(o).hashCode();
       case "number":
-        return Double.hashCode(JsUtils.unsafeCastToDouble(o));
+        return JsUtils.<Double>uncheckedCast(o).hashCode();
       case "boolean":
-        return Boolean.hashCode(JsUtils.unsafeCastToBoolean(o));
+        return JsUtils.<Boolean>uncheckedCast(o).hashCode();
       default:
         return o == null ? 0 : getObjectIdentityHashCode(o);
     }
   }
 
-  public static int getObjectIdentityHashCode(Object o) {
-    return ObjectHashing.getHashCode(o);
-  }
+  private static int nextHash;
 
-  public static int getStringHashCode(String s) {
-    return StringHashCache.getHashCode(s);
+  public static native int getObjectIdentityHashCode(Object o) /*-{
+    return o.$H || (o.$H = @HashCodes::getNextHash()());
+  }-*/;
+
+  public static int getNextHash() {
+    return ++nextHash;
   }
 }

@@ -115,18 +115,18 @@ public class DateTimeFormatInfoImpl_vai extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsFull() {
     return new String[] {
-        "ꖨꕪꖃ ꔞꕮ",
+        "ꖨꖕ ꕪꕴ ꔞꔀꕮꕊ",
         "ꕒꕡꖝꖕ",
         "ꕾꖺ",
         "ꖢꖕ",
         "ꖑꕱ",
-        "6",
-        "7",
+        "ꖱꘋ",
+        "ꖱꕞꔤ",
         "ꗛꔕ",
         "ꕢꕌ",
         "ꕭꖃ",
         "ꔞꘋꕔꕿ ꕸꖃꗏ",
-        "ꖨꕪꕱ ꗏꕮ"
+        "ꖨꖕ ꕪꕴ ꗏꖺꕮꕊ"
     };
   }
 
@@ -151,18 +151,18 @@ public class DateTimeFormatInfoImpl_vai extends DateTimeFormatInfoImpl {
   @Override
   public String[] monthsShort() {
     return new String[] {
-        "ꖨꕪꖃ ꔞꕮ",
-        "ꕒꕡꖝꖕ",
+        "ꖨꖕꔞ",
+        "ꕒꕡ",
         "ꕾꖺ",
         "ꖢꖕ",
         "ꖑꕱ",
-        "6",
-        "7",
+        "ꖱꘋ",
+        "ꖱꕞ",
         "ꗛꔕ",
         "ꕢꕌ",
         "ꕭꖃ",
-        "ꔞꘋꕔꕿ ꕸꖃꗏ",
-        "ꖨꕪꕱ ꗏꕮ"
+        "ꔞꘋ",
+        "ꖨꖕꗏ"
     };
   }
 

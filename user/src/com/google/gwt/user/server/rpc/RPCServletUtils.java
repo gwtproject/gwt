@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.zip.GZIPOutputStream;
@@ -35,15 +36,16 @@ import javax.servlet.http.HttpServletResponse;
  * the RPC system.
  */
 public class RPCServletUtils {
-  
+
   public static final String CHARSET_UTF8_NAME = "UTF-8";
-  
+
   /**
-   * The UTF-8 Charset. Use this to avoid concurrency bottlenecks when
-   * converting between byte arrays and Strings.
-   * See http://code.google.com/p/google-web-toolkit/issues/detail?id=6398
+   * The UTF-8 Charset.
+   *
+   * Deprecated: please use {@link StandardCharsets#UTF_8} instead.
    */
-  public static final Charset CHARSET_UTF8 = Charset.forName(CHARSET_UTF8_NAME);
+  @Deprecated
+  public static final Charset CHARSET_UTF8 = StandardCharsets.UTF_8;
 
   /**
    * Package protected for use in tests.
@@ -73,17 +75,16 @@ public class RPCServletUtils {
   private static final int UNCOMPRESSED_BYTE_SIZE_LIMIT = 256;
 
   /**
-   * Contains cached mappings from character set name to Charset. The
-   * null key maps to the default UTF-8 character set.
+   * Contains cached mappings from character set name to Charset.
    */
   private static final ConcurrentHashMap<String, Charset> CHARSET_CACHE =
       new ConcurrentHashMap<String, Charset>();
 
-  /**
-   * Pre-populate the character set cache with UTF-8.
+  /*
+    Pre-populate the character set cache with UTF-8.
    */
   static {
-    CHARSET_CACHE.put(CHARSET_UTF8_NAME, CHARSET_UTF8);
+    CHARSET_CACHE.put(CHARSET_UTF8_NAME, StandardCharsets.UTF_8);
   }
 
   /**
@@ -131,7 +132,7 @@ public class RPCServletUtils {
   public static Charset getCharset(String encoding) {
         
     if (encoding == null) {
-      return CHARSET_UTF8;
+      return StandardCharsets.UTF_8;
     }
     
     Charset charset = CHARSET_CACHE.get(encoding);
@@ -335,7 +336,7 @@ public class RPCServletUtils {
       HttpServletResponse response, String responseContent, boolean gzipResponse)
       throws IOException {
 
-    byte[] responseBytes = responseContent.getBytes(CHARSET_UTF8);
+    byte[] responseBytes = responseContent.getBytes(StandardCharsets.UTF_8);
     if (gzipResponse) {
       // Compress the reply and adjust headers.
       //
@@ -396,7 +397,7 @@ public class RPCServletUtils {
       response.setContentType("text/plain");
       response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
       try {
-        response.getOutputStream().write(GENERIC_FAILURE_MSG.getBytes(CHARSET_UTF8));
+        response.getOutputStream().write(GENERIC_FAILURE_MSG.getBytes(StandardCharsets.UTF_8));
       } catch (IllegalStateException e) {
         // Handle the (unexpected) case where getWriter() was previously used
         response.getWriter().write(GENERIC_FAILURE_MSG);

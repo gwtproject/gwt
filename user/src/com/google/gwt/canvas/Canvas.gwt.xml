@@ -22,17 +22,6 @@
   <!-- Give default support value of maybe -->
   <set-property name="canvasElementSupport" value="maybe" />
 
-  <!-- Give default support value of no to unsupported browsers -->
-  <set-property name="canvasElementSupport" value="no">
-    <all>
-      <when-property-is name="user.agent" value="ie8"/>
-      <!-- removes IE9 fallback to IE8 -->
-      <none>
-        <when-property-is name="user.agent" value="ie9"/>
-      </none>
-    </all>
-  </set-property>
-
   <replace-with class="com.google.gwt.canvas.client.Canvas.CanvasElementSupportDetectedMaybe">
     <when-type-is class="com.google.gwt.canvas.client.Canvas.CanvasElementSupportDetector" />
     <when-property-is name="canvasElementSupport" value="maybe" />

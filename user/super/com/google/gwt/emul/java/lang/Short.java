@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import javaemul.internal.annotations.HasNoSideEffects;
+
 /**
  * Wraps a primitive <code>short</code> as an object.
  */
@@ -32,6 +34,16 @@ public final class Short extends Number implements Comparable<Short> {
   private static class BoxedValues {
     // Box values according to JLS - between -128 and 127
     private static Short[] boxedValues = new Short[256];
+
+    @HasNoSideEffects
+    private static Short get(short s) {
+      int rebase = s + 128;
+      Short result = BoxedValues.boxedValues[rebase];
+      if (result == null) {
+        result = BoxedValues.boxedValues[rebase] = new Short(s);
+      }
+      return result;
+    }
   }
 
   public static int compare(short x, short y) {
@@ -65,12 +77,7 @@ public final class Short extends Number implements Comparable<Short> {
 
   public static Short valueOf(short s) {
     if (s > -129 && s < 128) {
-      int rebase = s + 128;
-      Short result = BoxedValues.boxedValues[rebase];
-      if (result == null) {
-        result = BoxedValues.boxedValues[rebase] = new Short(s);
-      }
-      return result;
+      return BoxedValues.get(s);
     }
     return new Short(s);
   }

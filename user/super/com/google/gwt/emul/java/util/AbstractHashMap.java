@@ -15,13 +15,11 @@
  */
 package java.util;
 
-import static java.util.ConcurrentModificationDetector.checkStructuralChange;
-import static java.util.ConcurrentModificationDetector.recordLastKnownStructure;
-import static java.util.ConcurrentModificationDetector.structureChanged;
-
 import static javaemul.internal.InternalPreconditions.checkArgument;
+import static javaemul.internal.InternalPreconditions.checkConcurrentModification;
 import static javaemul.internal.InternalPreconditions.checkElement;
 import static javaemul.internal.InternalPreconditions.checkState;
+import static javaemul.internal.InternalPreconditions.isApiChecked;
 
 import javaemul.internal.JsUtils;
 import javaemul.internal.annotations.SpecializeMethod;
@@ -80,10 +78,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     private Iterator<Entry<K, V>> current = stringMapEntries;
     private Iterator<Entry<K, V>> last;
     private boolean hasNext = computeHasNext();
-
-    public EntrySetIterator() {
-      recordLastKnownStructure(AbstractHashMap.this, this);
-    }
+    private int lastModCount = modCount;
 
     @Override
     public boolean hasNext() {
@@ -103,7 +98,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
 
     @Override
     public Entry<K, V> next() {
-      checkStructuralChange(AbstractHashMap.this, this);
+      checkConcurrentModification(modCount, lastModCount);
       checkElement(hasNext());
 
       last = current;
@@ -116,13 +111,13 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     @Override
     public void remove() {
       checkState(last != null);
-      checkStructuralChange(AbstractHashMap.this, this);
+      checkConcurrentModification(modCount, lastModCount);
 
       last.remove();
       last = null;
       hasNext = computeHasNext();
 
-      recordLastKnownStructure(AbstractHashMap.this, this);
+      lastModCount = modCount;
     }
   }
 
@@ -135,6 +130,8 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
    * A map of Strings onto values.
    */
   private transient InternalStringMap<K, V> stringMap;
+
+  int modCount;
 
   public AbstractHashMap() {
     reset();
@@ -166,7 +163,16 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
   private void reset() {
     hashCodeMap = new InternalHashCodeMap<K, V>(this);
     stringMap = new InternalStringMap<K, V>(this);
-    structureChanged(this);
+    structureChanged();
+  }
+
+  void structureChanged() {
+    if (!isApiChecked()) {
+      // Shouldn't be necessary but JsCompiler chokes on removing modCount so make sure we don't pay
+      // cost for updating the field.
+      return;
+    }
+    this.modCount++;
   }
 
   @SpecializeMethod(params = {String.class}, target = "hasStringValue")

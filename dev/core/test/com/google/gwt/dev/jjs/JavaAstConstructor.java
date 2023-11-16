@@ -126,6 +126,7 @@ public class JavaAstConstructor {
           "  public static native boolean isNotNull(Object a) /*-{ }-*/;",
           "  public static native boolean jsEquals(Object a, Object b) /*-{ }-*/;",
           "  public static native boolean jsNotEquals(Object a, Object b) /*-{ }-*/;",
+          "  public static native Object maskUndefined(Object src) /*-{ }-*/;",
           "  public static int narrow_int(double x) { return 0; }",
           "  public static byte narrow_long(double x) { return 0; }",
           "}"

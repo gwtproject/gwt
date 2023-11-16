@@ -22,12 +22,11 @@ import static javaemul.internal.InternalPreconditions.checkState;
 import java.io.PrintStream;
 import java.io.Serializable;
 
-import javax.annotation.Nonnull;
-
-import javaemul.internal.JsUtils;
 import javaemul.internal.annotations.DoNotInline;
 
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsNonNull;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
@@ -53,7 +52,7 @@ public class Throwable implements Serializable {
   private transient Throwable[] suppressedExceptions;
   private transient StackTraceElement[] stackTrace = new StackTraceElement[0];
   private transient boolean disableSuppression;
-  private transient boolean writetableStackTrace = true;
+  private transient boolean writableStackTrace = true;
 
   @JsProperty
   private transient Object backingJsObject = UNINITIALIZED;
@@ -88,12 +87,12 @@ public class Throwable implements Serializable {
    * Those features should only be disabled in very specific cases.
    */
   protected Throwable(String message, Throwable cause, boolean enableSuppression,
-      boolean writetableStackTrace) {
+      boolean writableStackTrace) {
     this.cause = cause;
     this.detailMessage = message;
-    this.writetableStackTrace = writetableStackTrace;
+    this.writableStackTrace = writableStackTrace;
     this.disableSuppression = !enableSuppression;
-    if (writetableStackTrace) {
+    if (writableStackTrace) {
       fillInStackTrace();
     }
     initializeBackingError();
@@ -106,13 +105,7 @@ public class Throwable implements Serializable {
   }
 
   private void initializeBackingError() {
-    // Replace newlines with spaces so that we don't confuse the parser
-    // below which splits on newlines, and will otherwise try to parse
-    // the error message as part of the stack trace.
-    String message = detailMessage == null ? null : detailMessage.nativeReplaceAll("\n", " ");
-    String errorMessage = toString(message);
-
-    setBackingJsObject(fixIE(createError(errorMessage)));
+    setBackingJsObject(fixIE(createError(toString(detailMessage))));
 
     captureStackTrace();
   }
@@ -122,6 +115,9 @@ public class Throwable implements Serializable {
   Object createError(String msg) {
     return new NativeError(msg);
   }
+
+  // Called by J2CL transpiler. Do not remove!
+  void privateInitError(Object error) { }
 
   @SuppressWarnings("unusable-by-js")
   private static native Object fixIE(Object e) /*-{
@@ -146,10 +142,43 @@ public class Throwable implements Serializable {
     linkBack(backingJsObject);
   }
 
-  private void linkBack(Object error) {
-    if (error != null) {
-      JsUtils.setPropertySafe(error, "__java$exception", this);
+  private native void linkBack(Object error) /*-{
+
+    if (error instanceof Object) {
+      try {
+        // This may throw exception in strict mode.
+        error.__java$exception = this;
+
+        if (navigator.userAgent.toLowerCase().indexOf("msie") != -1 && $doc.documentMode < 9) {
+          return;
+        }
+
+        var throwable = this;
+        Object.defineProperties(error, {
+          cause: {
+            get: function() {
+              var cause = throwable.@Throwable::getCause()();
+              return cause && cause.@Throwable::getBackingJsObject()();
+            }
+          },
+          suppressed: {
+            get: function() {
+              return throwable.@Throwable::getBackingSuppressed()();
+            }
+          }
+        });
+      } catch (ignored) {}
     }
+  }-*/;
+
+  private Object[] getBackingSuppressed() {
+    // local variable as the whole method ends up being inlined three times
+    Throwable[] suppressed = getSuppressed();
+    Object[] result = new Object[suppressed.length];
+    for (int i = 0; i < suppressed.length; i++) {
+      result[i] = suppressed[i].backingJsObject;
+    }
+    return result;
   }
 
   /**
@@ -179,7 +208,7 @@ public class Throwable implements Serializable {
    */
   @DoNotInline
   public Throwable fillInStackTrace() {
-    if (writetableStackTrace) {
+    if (writableStackTrace) {
       // If this is the first run, let constructor initialize it.
       // (We need to initialize the backingJsObject from constructor as our own implementation of
       // fillInStackTrace is not guaranteed to be executed.)
@@ -289,11 +318,10 @@ public class Throwable implements Serializable {
   }
 
   @JsMethod
-  @Nonnull
-  public static Throwable of(Object e) {
+  public static @JsNonNull Throwable of(Object e) {
     // If the JS error is already mapped to a Java Exception, use it.
     if (e != null) {
-      Throwable throwable = JsUtils.getProperty(e, "__java$exception");
+      Throwable throwable = ((HasJavaThrowable) e).getJavaThrowable();
       if (throwable != null) {
         return throwable;
       }
@@ -310,4 +338,11 @@ public class Throwable implements Serializable {
 
   @JsType(isNative = true, name = "TypeError", namespace = "<window>")
   private static class NativeTypeError { }
+
+  @SuppressWarnings("unusable-by-js")
+  @JsType(isNative = true, name = "?", namespace = JsPackage.GLOBAL)
+  private interface HasJavaThrowable {
+    @JsProperty(name = "__java$exception")
+    Throwable getJavaThrowable();
+  }
 }

@@ -105,11 +105,8 @@ public class StackTraceNativeTest extends StackTraceTestBase {
         ? limited_wrap : (thrown != TYPE_ERROR ? limited_fillInStackTrace : full);
   }
 
-  // TODO(goktug): new Error().stack is broken for htmlunit:
-  // https://sourceforge.net/p/htmlunit/bugs/1606/
-  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testCollectorType() {
-    if (isIE8() || isSafari5()) {
+    if (isSafari5()) {
       assertTrue(isLegacyCollector());
     } else {
       assertTrue(isModernCollector());
@@ -123,10 +120,6 @@ public class StackTraceNativeTest extends StackTraceTestBase {
   private static boolean isModernCollector() {
     return StackTraceCreator.collector instanceof CollectorModern;
   }
-
-  private static native boolean isIE8() /*-{
-    return navigator.userAgent.toLowerCase().indexOf('msie') != -1 && $doc.documentMode == 8;
-  }-*/;
 
   private static native boolean isSafari5() /*-{
     return navigator.userAgent.match(' Safari/') && !navigator.userAgent.match(' Chrom')

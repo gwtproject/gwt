@@ -85,6 +85,7 @@ public class ScriptInjector {
       JavaScriptObject scriptElement = nativeMakeScriptElement(doc);
       assert scriptElement != null;
       nativeSetText(scriptElement, scriptBody);
+      nativePropagateScriptNonceIfPossible(doc, scriptElement);
       nativeAttachToHead(doc, scriptElement);
       if (removeTag) {
         nativeRemove(scriptElement);
@@ -144,6 +145,7 @@ public class ScriptInjector {
         attachListeners(scriptElement, callback, removeTag);
       }
       nativeSetSrc(scriptElement, scriptUrl);
+      nativePropagateScriptNonceIfPossible(doc, scriptElement);
       nativeAttachToHead(doc, scriptElement);
       return scriptElement;
     }
@@ -286,8 +288,7 @@ public class ScriptInjector {
   }-*/;
 
   private static native void nativeAttachToHead(JavaScriptObject doc, JavaScriptObject scriptElement) /*-{
-    // IE8 does not have document.head
-    (doc.head || doc.getElementsByTagName("head")[0]).appendChild(scriptElement);
+    doc.head.appendChild(scriptElement);
   }-*/;
 
   private static native JavaScriptObject nativeDefaultWindow() /*-{
@@ -312,6 +313,15 @@ public class ScriptInjector {
 
   private static native void nativeSetText(JavaScriptObject element, String scriptBody) /*-{
     element.text = scriptBody;
+  }-*/;
+
+  private static native void nativePropagateScriptNonceIfPossible(
+      JavaScriptObject doc, JavaScriptObject element) /*-{
+    if (doc.querySelector && doc.querySelector('script[nonce]')) {
+      var firstNoncedScript = doc.querySelector('script[nonce]');
+      var nonce = firstNoncedScript['nonce'] || firstNoncedScript.getAttribute('nonce');
+      element.setAttribute('nonce', nonce);
+    }
   }-*/;
 
   private static native JavaScriptObject nativeTopWindow() /*-{

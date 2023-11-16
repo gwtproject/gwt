@@ -43,7 +43,6 @@ public class LocalizedNamesImpl_lu extends LocalizedNamesImpl {
         "AI",
         "AO",
         "AG",
-        "AN",
         "AQ",
         "AW",
         "AX",
@@ -84,6 +83,7 @@ public class LocalizedNamesImpl_lu extends LocalizedNamesImpl {
         "EE",
         "ET",
         "EU",
+        "EZ",
         "FI",
         "FO",
         "FJ",
@@ -276,11 +276,14 @@ public class LocalizedNamesImpl_lu extends LocalizedNamesImpl {
         "UG",
         "UA",
         "UM",
+        "UN",
         "UZ",
         "VU",
         "VE",
         "VN",
         "WF",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "ZM",
@@ -299,7 +302,6 @@ public class LocalizedNamesImpl_lu extends LocalizedNamesImpl {
     namesMap.put("AI", "Angiye");
     namesMap.put("AL", "Alubani");
     namesMap.put("AM", "Ameni");
-    namesMap.put("AN", "Antiye wa Olande");
     namesMap.put("AR", "Alijantine");
     namesMap.put("AS", "Samoa wa Ameriki");
     namesMap.put("AT", "Otilisi");
@@ -510,7 +512,6 @@ public class LocalizedNamesImpl_lu extends LocalizedNamesImpl {
         "AI": "Angiye",
         "AL": "Alubani",
         "AM": "Ameni",
-        "AN": "Antiye wa Olande",
         "AR": "Alijantine",
         "AS": "Samoa wa Ameriki",
         "AT": "Otilisi",

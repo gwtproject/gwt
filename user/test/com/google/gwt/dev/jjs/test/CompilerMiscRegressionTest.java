@@ -37,6 +37,7 @@ import java.util.Map;
 
 import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -463,5 +464,22 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
   public void testTopLevelNameClash() {
     boolean isNaN =  isNaN(Global.Nan);
     assertTrue(isNaN);
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  private static class NativeObjectWithOverlay {
+    public NativeObjectWithOverlay() { }
+    @JsOverlay
+    final NativeObjectWithOverlay getThis() {
+      return this;
+    }
+  }
+
+  public void testOveralyDispatchOnNull() {
+    // Define a variable where the compiler can not statically determine that it is actually null.
+    NativeObjectWithOverlay objectWithOverlay =
+        Math.random() > 1000 ? new NativeObjectWithOverlay() : null;
+
+    assertTrue(objectWithOverlay.getThis() == null);
   }
 }

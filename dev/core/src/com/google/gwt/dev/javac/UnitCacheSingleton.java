@@ -57,7 +57,8 @@ public class UnitCacheSingleton {
         Md5Utils.getMd5Digest(
             Joiner.on('-').join(
                 options.getJsInteropExportFilter(),
-                options.shouldGenerateJsInteropExports()
+                options.shouldGenerateJsInteropExports(),
+                options.getSourceLevel()
         ).getBytes()));
   }
 

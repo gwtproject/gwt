@@ -530,6 +530,9 @@ public class GenerateJavaScriptAST {
     private final JsName arrayLength = objectScope.declareUnobfuscatableName("length");
     private final JsName globalTemp = topScope.declareUnobfuscatableName("_");
     private final JsName prototype = objectScope.declareUnobfuscatableName("prototype");
+    private final JsName wnd = topScope.declareUnobfuscatableName("$wnd");
+    private final JsName goog = topScope.declareUnobfuscatableName("goog");
+    private final JsName global = topScope.declareUnobfuscatableName("global");
 
     @Override
     public JsExpression transformArrayLength(JArrayLength expression) {
@@ -1238,13 +1241,17 @@ public class GenerateJavaScriptAST {
     }
 
     private Set<JDeclaredType> generatePreamble(JProgram program) {
+      SourceInfo programSourceInfo = jsProgram.getSourceInfo();
+
       // Reserve the "_" identifier.
-      JsVars vars = new JsVars(jsProgram.getSourceInfo());
-      vars.add(new JsVar(jsProgram.getSourceInfo(), globalTemp));
+      JsVars vars = new JsVars(programSourceInfo, new JsVar(programSourceInfo, globalTemp));
       addVarsIfNotEmpty(vars);
 
       // Generate immortal types in the preamble.
       generateImmortalTypes(vars);
+
+      // Generate the assignment to goog.global.
+      generateGoogGlobalInitialization(programSourceInfo);
 
       //  Perform necessary polyfills.
       addTypeDefinitionStatement(
@@ -1271,6 +1278,26 @@ public class GenerateJavaScriptAST {
       Set<JDeclaredType> preambleTypes = Sets.newLinkedHashSet(alreadyProcessed);
       preambleTypes.addAll(classLiteralSupportClasses);
       return preambleTypes;
+    }
+
+    private void generateGoogGlobalInitialization(SourceInfo programSourceInfo) {
+      // $wnd.goog = $wnd.goog || {}
+      JsNameRef wndGoog  = goog.makeQualifiedRef(programSourceInfo, wnd.makeRef(programSourceInfo));
+      generatePropertyInitialization(
+          programSourceInfo, wndGoog, JsObjectLiteral.builder(programSourceInfo).build());
+
+      // $wnd.goog.global = $wnd.goog.global || $wnd
+      JsNameRef wndGoogGlobal  = global.makeQualifiedRef(programSourceInfo, wndGoog);
+      generatePropertyInitialization(
+          programSourceInfo, wndGoogGlobal, wnd.makeRef(programSourceInfo));
+    }
+
+    private void generatePropertyInitialization(
+        SourceInfo sourceInfo, JsNameRef qualifiedNameRef, JsExpression initializer) {
+      getGlobalStatements().add(
+          new JsBinaryOperation(sourceInfo, JsBinaryOperator.ASG, qualifiedNameRef,
+              new JsBinaryOperation(sourceInfo, JsBinaryOperator.OR,
+                  qualifiedNameRef, initializer)).makeStmt());
     }
 
     private JsNameRef transformIntoLabelReference(SourceInfo info, JLabel label) {
@@ -2311,8 +2338,8 @@ public class GenerateJavaScriptAST {
       addMethodDefinitionStatement(method, methodDefinitionStatement);
 
       if (shouldEmitDisplayNames()) {
-        JsExprStmt displayNameAssignment = outputDisplayName(functionNameRef, method);
-        addMethodDefinitionStatement(method, displayNameAssignment);
+        addMethodDefinitionStatement(method, outputDisplayName(functionNameRef, method));
+        addMethodDefinitionStatement(method, outputFunctionNameProperty(functionNameRef, method));
       }
     }
 
@@ -2330,6 +2357,21 @@ public class GenerateJavaScriptAST {
       JsStringLiteral displayMethodName =
           new JsStringLiteral(function.getSourceInfo(), displayStringName);
       return createAssignment(displayName, displayMethodName).makeStmt();
+    }
+
+    private JsExprStmt outputFunctionNameProperty(JsNameRef function, JMethod method) {
+      String displayStringName = getDisplayName(method);
+      SourceInfo sourceInfo = function.getSourceInfo();
+      JsStringLiteral displayMethodName =
+          new JsStringLiteral(sourceInfo, displayStringName);
+      JsObjectLiteral props = JsObjectLiteral.builder(sourceInfo)
+              .add(new JsStringLiteral(sourceInfo, "name"), JsObjectLiteral.builder(sourceInfo)
+                      .add("value", displayMethodName)
+                      .build())
+              .build();
+      JsExpression[] args = {function, props};
+      return constructInvocation(sourceInfo, RuntimeConstants.RUNTIME_DEFINE_PROPERTIES, args)
+              .makeStmt();
     }
 
     private boolean shouldEmitDisplayNames() {

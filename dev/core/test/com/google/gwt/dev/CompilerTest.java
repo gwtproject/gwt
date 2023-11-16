@@ -39,13 +39,13 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.io.Files;
 import com.google.gwt.util.tools.Utility;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 /**
@@ -957,12 +957,18 @@ public class CompilerTest extends ArgProcessorTestBase {
 
     assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.7"));
     assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.8"));
-    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.9"));
+    assertEquals(SourceLevel.JAVA9, SourceLevel.getBestMatchingVersion("9"));
+    assertEquals(SourceLevel.JAVA10, SourceLevel.getBestMatchingVersion("10"));
+    assertEquals(SourceLevel.JAVA11, SourceLevel.getBestMatchingVersion("11"));
 
     // not proper version strings => default to JAVA8.
     assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.6u3"));
     assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.6b3"));
     assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.7b3"));
+  }
+
+  public void testSourceLevelHighestVersion() {
+    assertEquals(SourceLevel.values()[SourceLevel.values().length - 1], SourceLevel.getHighest());
   }
 
   /**
@@ -1696,7 +1702,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     File applicationDir = Files.createTempDir();
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
-    compilerOptions.setSourceLevel(SourceLevel.JAVA8);
+    compilerOptions.setSourceLevel(SourceLevel.JAVA11);
 
     // Compile the application with no errors.
     compileToJs(TreeLogger.NULL, compilerOptions, applicationDir, "com.foo.Errors",
@@ -1759,7 +1765,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     File applicationDir = Files.createTempDir();
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
-    compilerOptions.setSourceLevel(SourceLevel.JAVA8);
+    compilerOptions.setSourceLevel(SourceLevel.JAVA11);
     compilerOptions.setGenerateJsInteropExports(false);
 
     // Compile the application with no errors.
@@ -2110,7 +2116,7 @@ public class CompilerTest extends ArgProcessorTestBase {
 
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
-    compilerOptions.setSourceLevel(SourceLevel.JAVA8);
+    compilerOptions.setSourceLevel(SourceLevel.JAVA11);
 
     checkRecompiledModifiedApp(compilerOptions, "com.foo.DefaultMethod",
         Lists.newArrayList(moduleResource, entryPointResource, aSubclass,
@@ -2740,24 +2746,37 @@ public class CompilerTest extends ArgProcessorTestBase {
     // List of JRE types that provide JsInterop entry points and jre native JsTypes. These are
     // always traversed fully and polute the tests, so they will be removed from stale type
     // comparisons.
-    staleTypeNames.removeAll(Arrays.asList(
-        "java.lang.Boolean",
-        "java.lang.CharSequence",
-        "java.lang.Comparable",
-        "java.lang.Double",
-        "java.lang.HasCharSequenceTypeMarker",
-        "java.lang.HasComparableTypeMarker",
-        "java.lang.Integer$NativeNumber",
-        "java.lang.Number",
-        "java.lang.Number$JavaLangNumber",
-        "java.lang.String",
-        "java.lang.String$NativeFunction",
-        "java.lang.String$NativeString",
-        "java.lang.Throwable",
-        "java.lang.Throwable$NativeError",
-        "java.lang.Throwable$NativeTypeError",
-        "javaemul.internal.NativeRegExp",
-        "javaemul.internal.NativeRegExp$Match"));
+    staleTypeNames.removeAll(
+        Arrays.asList(
+            "java.io.HasSerializableTypeMarker",
+            "java.io.Serializable",
+            "java.lang.Boolean",
+            "java.lang.CharSequence",
+            "java.lang.Cloneable",
+            "java.lang.Comparable",
+            "java.lang.Double",
+            "java.lang.HasCharSequenceTypeMarker",
+            "java.lang.HasCloneableTypeMarker",
+            "java.lang.HasComparableTypeMarker",
+            "java.lang.Integer$NativeNumber",
+            "java.lang.Number",
+            "java.lang.Number$JavaLangNumber",
+            "java.lang.String",
+            "java.lang.String$NativeFunction",
+            "java.lang.String$NativeString",
+            "java.lang.Throwable",
+            "java.lang.Throwable$HasJavaThrowable",
+            "java.lang.Throwable$NativeError",
+            "java.lang.Throwable$NativeTypeError"));
+
+    staleTypeNames.removeIf(
+        new Predicate<String>() {
+          @Override
+          public boolean test(String name) {
+            return name.startsWith("javaemul.internal");
+          }
+        });
+
     return staleTypeNames;
   }
 

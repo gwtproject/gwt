@@ -17,6 +17,8 @@ package java.util;
 
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
+import jsinterop.annotations.JsNonNull;
+
 /**
  * Skeletal implementation of the Map interface. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractMap.html">[Sun
@@ -191,6 +193,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   }
 
   @Override
+  @JsNonNull
   public Set<K> keySet() {
     return new AbstractSet<K>() {
       @Override

@@ -20,16 +20,11 @@ import com.google.gwt.dev.MinimalRebuildCache;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.util.arg.SourceLevel;
 
 /**
  * Tests for the JsInteropRestrictionChecker.
  */
 public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
-  @Override
-  public void setUp() {
-    sourceLevel = SourceLevel.JAVA8;
-  }
 
   // TODO: eventually test this for default methods in Java 8.
   public void testCollidingAccidentalOverrideConcreteMethodFails() throws Exception {
@@ -2537,6 +2532,27 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
             + "by but exposed to JavaScript.",
         "Suppress \"[unusable-by-js]\" warnings by adding a `@SuppressWarnings(\"unusable-by-js\")`"
             + " annotation to the corresponding member.");
+  }
+
+  public void testUnusableByJsSyntheticMembersSucceeds() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetImport("jsinterop.annotations.JsFunction");
+    addSnippetClassDecl(
+        "@JsFunction",
+        "public interface I {",
+        "  @SuppressWarnings(\"unusable-by-js\")",
+        "  int m(long l);",
+        "}",
+        "@JsType public static class Buggy {",
+        "  private void m() {",
+        "    I l = e -> 42;",
+        "    I mr = this::mr;",
+        "  }",
+        "  private int mr(long l) {",
+        "    return 42;",
+        "  }",
+        "}");
+    assertBuggySucceeds();
   }
 
   private static final MockJavaResource jsFunctionInterface = new MockJavaResource(

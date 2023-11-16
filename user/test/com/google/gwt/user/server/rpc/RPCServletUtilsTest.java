@@ -24,6 +24,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import javax.servlet.ReadListener;
 import javax.servlet.ServletException;
@@ -200,8 +201,8 @@ public class RPCServletUtilsTest extends TestCase {
    * default UTF-8 character set when passed a null encoding value.
    */
   public void testGetDefaultCharset() {
-    assertEquals(Charset.forName("UTF-8"), RPCServletUtils.CHARSET_UTF8);
-    assertSame(RPCServletUtils.CHARSET_UTF8, RPCServletUtils.getCharset(null));
+    assertEquals(Charset.forName("UTF-8"), StandardCharsets.UTF_8);
+    assertSame(StandardCharsets.UTF_8, RPCServletUtils.getCharset(null));
   }
 
   /**

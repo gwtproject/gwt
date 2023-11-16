@@ -50,26 +50,6 @@ public class DateTimeFormatInfoImpl_en_DG extends DateTimeFormatInfoImpl_en {
   }
 
   @Override
-  public String dateTimeFull(String timePattern, String datePattern) {
-    return datePattern + " " + timePattern;
-  }
-
-  @Override
-  public String dateTimeLong(String timePattern, String datePattern) {
-    return datePattern + " " + timePattern;
-  }
-
-  @Override
-  public String dateTimeMedium(String timePattern, String datePattern) {
-    return datePattern + " " + timePattern;
-  }
-
-  @Override
-  public String dateTimeShort(String timePattern, String datePattern) {
-    return datePattern + " " + timePattern;
-  }
-
-  @Override
   public int firstDayOfTheWeek() {
     return 1;
   }
@@ -86,7 +66,7 @@ public class DateTimeFormatInfoImpl_en_DG extends DateTimeFormatInfoImpl_en {
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE d MMMM";
+    return "EEEE, d MMMM";
   }
 
   @Override

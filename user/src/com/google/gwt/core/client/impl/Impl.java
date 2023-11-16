@@ -192,16 +192,6 @@ public final class Impl {
   @GwtScriptOnly
   public static native void registerWindowOnError(boolean reportAlways) /*-{
     function errorHandler(msg, url, line, column, error) {
-      // IE8, IE9, IE10, safari 9, do not have an error passed
-      if (!error) {
-        error = msg + " (" + url + ":" + line
-        // IE8 and IE9 do not have the column number
-        if (column) {
-          error += ":" + column
-        }
-        error += ")";
-      }
-
       var throwable = @java.lang.Throwable::of(*)(error);
       @Impl::reportWindowOnError(*)(throwable);
     };

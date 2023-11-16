@@ -375,6 +375,15 @@ public class StackTraceCreator {
 
   private static native JsArrayString split(Object t) /*-{
     var e = t.@Throwable::backingJsObject;
-    return (e && e.stack) ? e.stack.split('\n') : [];
+    if (e && e.stack) {
+      var stack = e.stack;
+      // If the stack starts with toString of Error, drop it.
+      var toString = e + "\n";
+      if (stack.substring(0, toString.length) == toString) {
+        stack = stack.substring(toString.length);
+      }
+      return stack.split('\n');
+    }
+    return [];
   }-*/;
 }

@@ -42,6 +42,7 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
+import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JTryStatement;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVariable;
@@ -556,6 +557,17 @@ public class TypeTightener {
         newCall.addArgs(x.getArgs());
         newCall.setCannotBePolymorphic();
         ctx.replaceMe(newCall);
+      }
+    }
+
+    @Override
+    public void endVisit(JThisRef x, Context ctx) {
+      if (getCurrentMethod().isJsOverlay()) {
+        return;
+      }
+      if (x.getType().canBeNull()) {
+        ctx.replaceMe(
+            new JThisRef(x.getSourceInfo(), x.getClassType(), x.getType().strengthenToNonNull()));
       }
     }
 

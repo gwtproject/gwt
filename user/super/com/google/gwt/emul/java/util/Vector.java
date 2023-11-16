@@ -22,6 +22,8 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
+import jsinterop.annotations.JsNonNull;
+
 /**
  * To keep performance characteristics in line with Java community expectations,
  * <code>Vector</code> is a wrapper around <code>ArrayList</code>.
@@ -246,6 +248,7 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
   }
 
   @Override
+  @JsNonNull
   public List<E> subList(int fromIndex, int toIndex) {
     return arrayList.subList(fromIndex, toIndex);
   }

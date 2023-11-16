@@ -19,7 +19,6 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
-import com.google.gwt.dev.util.arg.SourceLevel;
 
 /**
  * Test for {@link Pruner}.
@@ -27,7 +26,6 @@ import com.google.gwt.dev.util.arg.SourceLevel;
 public class PrunerTest extends OptimizerTestBase {
   @Override
   protected void setUp() throws Exception {
-    sourceLevel = SourceLevel.JAVA8;
     super.setUp();
     runDeadCodeElimination = true;
   }

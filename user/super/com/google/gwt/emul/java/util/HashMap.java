@@ -70,6 +70,9 @@ public class HashMap<K, V> extends AbstractHashMap<K, V> implements Cloneable,
 
   @Override
   int getHashCode(Object key) {
+    if (key == null) {
+      return 0;
+    }
     int hashCode = key.hashCode();
     // Coerce to int -- our classes all do this, but a user-written class might not.
     return ensureInt(hashCode);

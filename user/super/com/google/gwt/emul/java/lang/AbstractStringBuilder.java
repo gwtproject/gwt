@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import static javaemul.internal.InternalPreconditions.checkStringElementIndex;
+
 /**
  * A base class to share implementation between {@link StringBuffer} and {@link StringBuilder}.
  * <p>
@@ -113,6 +115,14 @@ abstract class AbstractStringBuilder implements CharSequence, Appendable {
   }
 
   void replace0(int start, int end, String toInsert) {
+    int length = string.length();
+    if (end > length) {
+      end = length;
+    } else {
+      // Only checking for start > end; since rest is checked with substring.
+      checkStringElementIndex(start, end + 1);
+    }
+
     string = string.substring(0, start) + toInsert + string.substring(end);
   }
 

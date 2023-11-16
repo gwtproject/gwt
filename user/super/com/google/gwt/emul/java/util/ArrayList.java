@@ -27,7 +27,6 @@ import java.io.Serializable;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
-
 import javaemul.internal.ArrayHelper;
 
 /**
@@ -78,7 +77,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
 
   @Override
   public boolean add(E o) {
-    array[array.length] = o;
+    ArrayHelper.push(array, o);
     return true;
   }
 
@@ -113,7 +112,9 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
 
   @Override
   public void clear() {
-    array = (E[]) new Object[0];
+    // We are not re-creating the array since ArrayList is expected to preserve it is capacity on
+    // clear and re-creating will change the performance characteristics in J2Wasm.
+    setSize(0);
   }
 
   public Object clone() {
@@ -256,7 +257,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
 
   @Override
   public Object[] toArray() {
-    return ArrayHelper.clone(array, 0, array.length);
+    return ArrayHelper.clone(array);
   }
 
   /*

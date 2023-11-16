@@ -95,31 +95,6 @@ import java.util.Set;
  * Manages the process of compiling {@link CompilationUnit}s.
  */
 public class JdtCompiler {
-  /**
-   * Provides hooks for changing the behavior of the JdtCompiler when unknown
-   * types are encountered during compilation. Currently used for allowing
-   * external tools to provide source lazily when undefined references appear.
-   */
-  public interface AdditionalTypeProviderDelegate {
-    /**
-     * Checks for additional packages which may contain additional compilation
-     * units.
-     *
-     * @param slashedPackageName the '/' separated name of the package to find
-     * @return <code>true</code> if such a package exists
-     */
-    boolean doFindAdditionalPackage(String slashedPackageName);
-
-    /**
-     * Finds a new compilation unit on-the-fly for the requested type, if there
-     * is an alternate mechanism for doing so.
-     *
-     * @param binaryName the binary name of the requested type
-     * @return a unit answering the name, or <code>null</code> if no such unit
-     *         can be created
-     */
-    GeneratedUnit doFindAdditionalType(String binaryName);
-  }
 
   /**
    * A default processor that simply collects build units.
@@ -257,15 +232,26 @@ public class JdtCompiler {
    */
   private static final double ABORT_COUNT_MAX = 100;
 
-  private class CompilerImpl extends Compiler {
-    private TreeLogger logger;
+  private static class CompilerImpl extends Compiler {
+    private final TreeLogger logger;
     private int abortCount = 0;
+    private final UnitProcessor processor;
+    private final Map<String, CompiledClass> internalTypes;
 
-    public CompilerImpl(TreeLogger logger, CompilerOptions compilerOptions) {
-      super(new INameEnvironmentImpl(), DefaultErrorHandlingPolicies.proceedWithAllProblems(),
-          compilerOptions, new ICompilerRequestorImpl(), new DefaultProblemFactory(
-              Locale.getDefault()));
+    public CompilerImpl(
+        TreeLogger logger,
+        CompilerOptions compilerOptions,
+        INameEnvironment nameEnvironment,
+        UnitProcessor processor,
+        Map<String, CompiledClass> internalTypes) {
+      super(nameEnvironment,
+          DefaultErrorHandlingPolicies.proceedWithAllProblems(),
+          compilerOptions,
+          new ICompilerRequestorImpl(),
+          new DefaultProblemFactory(Locale.getDefault()));
       this.logger = logger;
+      this.processor = processor;
+      this.internalTypes = internalTypes;
     }
 
     /**
@@ -320,7 +306,7 @@ public class JdtCompiler {
         createCompiledClass(classFile, results);
       }
       List<CompiledClass> compiledClasses = new ArrayList<CompiledClass>(results.values());
-      addBinaryTypes(compiledClasses);
+      addBinaryTypes(compiledClasses, internalTypes);
 
       ICompilationUnit icu = cud.compilationResult().compilationUnit;
       Adapter adapter = (Adapter) icu;
@@ -376,7 +362,26 @@ public class JdtCompiler {
   /**
    * How JDT receives files from the environment.
    */
-  private class INameEnvironmentImpl implements INameEnvironment {
+  private static class INameEnvironmentImpl implements INameEnvironment {
+
+    /**
+     * Remembers types that have been found in the classpath or not found at all to avoid
+     * unnecessary resource scanning.
+     */
+    private final Map<String, NameEnvironmentAnswer> cachedClassPathAnswerByInternalName =
+        Maps.newHashMap();
+
+    private final Set<String> packages;
+
+    private final Set<String> notPackages = new HashSet<String>();
+
+    private final Map<String, CompiledClass> internalTypes;
+
+    public INameEnvironmentImpl(Set<String> packages, Map<String, CompiledClass> internalTypes) {
+      this.packages = packages;
+      this.internalTypes = internalTypes;
+    }
+
     @Override
     public void cleanup() {
     }
@@ -399,11 +404,6 @@ public class JdtCompiler {
       NameEnvironmentAnswer cachedAnswer = findTypeInCache(internalName);
       if (cachedAnswer != null) {
         return cachedAnswer;
-      }
-
-      NameEnvironmentAnswer additionalProviderAnswer = findTypeInAdditionalProvider(internalName);
-      if (additionalProviderAnswer != null) {
-        return additionalProviderAnswer;
       }
 
       NameEnvironmentAnswer classPathAnswer = findTypeInClassPath(internalName);
@@ -520,19 +520,6 @@ public class JdtCompiler {
       }
     }
 
-    private NameEnvironmentAnswer findTypeInAdditionalProvider(String internalName) {
-      if (additionalTypeProviderDelegate == null) {
-        return null;
-      }
-
-      GeneratedUnit unit = additionalTypeProviderDelegate.doFindAdditionalType(internalName);
-      if (unit == null) {
-        return null;
-      }
-
-      return new NameEnvironmentAnswer(new Adapter(CompilationUnitBuilder.create(unit)), null);
-    }
-
     private NameEnvironmentAnswer findTypeInClassPath(String internalName) {
 
       // If the class was previously queried here return the cached result.
@@ -611,14 +598,9 @@ public class JdtCompiler {
       if (notPackages.contains(slashedPackageName)) {
         return false;
       }
-      if ((additionalTypeProviderDelegate != null && additionalTypeProviderDelegate
-          .doFindAdditionalPackage(slashedPackageName))) {
-        addPackages(slashedPackageName);
-        return true;
-      }
       // Include class loader check for binary-only annotations.
       if (caseSensitivePathExists(slashedPackageName)) {
-        addPackages(slashedPackageName);
+        addPackages(packages, slashedPackageName);
         return true;
       } else {
         notPackages.add(slashedPackageName);
@@ -765,19 +747,10 @@ public class JdtCompiler {
     }
   }
 
-  private AdditionalTypeProviderDelegate additionalTypeProviderDelegate;
-
   /**
    * Maps internal names to compiled classes.
    */
   private final Map<String, CompiledClass> internalTypes = new HashMap<String, CompiledClass>();
-
-  /**
-   * Remembers types that have been found in the classpath or not found at all to avoid unnecessary
-   * resource scanning.
-   */
-  private final Map<String, NameEnvironmentAnswer> cachedClassPathAnswerByInternalName =
-      Maps.newHashMap();
 
   /**
    * Remembers types that where not found during resolution to avoid unnecessary file scanning.
@@ -788,8 +761,6 @@ public class JdtCompiler {
    * Only active during a compile.
    */
   private transient CompilerImpl compilerImpl;
-
-  private final Set<String> notPackages = new HashSet<String>();
 
   private final Set<String> packages = new HashSet<String>();
 
@@ -813,7 +784,10 @@ public class JdtCompiler {
    */
   private static final Map<SourceLevel, Long> jdtLevelByGwtLevel =
       ImmutableMap.<SourceLevel, Long>of(
-          SourceLevel.JAVA8, ClassFileConstants.JDK1_8);
+          SourceLevel.JAVA8, ClassFileConstants.JDK1_8,
+          SourceLevel.JAVA9, ClassFileConstants.JDK9,
+          SourceLevel.JAVA10, ClassFileConstants.JDK10,
+          SourceLevel.JAVA11, ClassFileConstants.JDK11);
 
   public JdtCompiler(CompilerContext compilerContext, UnitProcessor processor) {
     this.compilerContext = compilerContext;
@@ -1035,7 +1009,13 @@ public class JdtCompiler {
       icus.add(new Adapter(builder));
     }
 
-    compilerImpl = new CompilerImpl(logger, getCompilerOptions());
+    compilerImpl =
+        new CompilerImpl(
+            logger,
+            getCompilerOptions(),
+            new INameEnvironmentImpl(packages, internalTypes),
+            processor,
+            internalTypes);
     try {
       compilerImpl.compile(icus.toArray(new ICompilationUnit[icus.size()]));
     } catch (AbortCompilation e) {
@@ -1069,10 +1049,6 @@ public class JdtCompiler {
     return typeBinding;
   }
 
-  public void setAdditionalTypeProviderDelegate(AdditionalTypeProviderDelegate newDelegate) {
-    additionalTypeProviderDelegate = newDelegate;
-  }
-
   /**
    * Sets whether the compiler should remove unused imports.
    */
@@ -1081,12 +1057,21 @@ public class JdtCompiler {
   }
 
   private void addBinaryTypes(Collection<CompiledClass> compiledClasses) {
+    addBinaryTypes(compiledClasses, internalTypes);
+  }
+
+    private static void addBinaryTypes(
+        Collection<CompiledClass> compiledClasses, Map<String, CompiledClass> internalTypes) {
     for (CompiledClass cc : compiledClasses) {
       internalTypes.put(cc.getInternalName(), cc);
     }
   }
 
   private void addPackages(String slashedPackageName) {
+    addPackages(packages, slashedPackageName);
+  }
+
+  private static void addPackages(Set<String> packages, String slashedPackageName) {
     while (packages.add(slashedPackageName)) {
       int pos = slashedPackageName.lastIndexOf('/');
       if (pos > 0) {

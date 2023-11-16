@@ -207,6 +207,11 @@ public class DateTimeFormatInfoImpl_to extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String timeFormatLong() {
+    return "h:mm:ss a z";
+  }
+
+  @Override
   public String timeFormatMedium() {
     return "h:mm:ss a";
   }

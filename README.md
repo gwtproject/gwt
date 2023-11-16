@@ -1,6 +1,7 @@
-## GWT
+## GWT
 
-  [![nightly](https://img.shields.io/jenkins/s/http/build.gwtproject.org/gwt.svg?label=nightly)](http://build.gwtproject.org/job/gwt/)
+  [![latest release](https://img.shields.io/github/v/release/gwtproject/gwt)](https://github.com/gwtproject/gwt/releases)
+  [![nightly](https://github.com/gwtproject/gwt/actions/workflows/full-check.yml/badge.svg)](https://github.com/gwtproject/gwt/actions/workflows/full-check.yml)
   [![gitter](https://img.shields.io/badge/gitter.im-Join%20Chat-green.svg)](https://gitter.im/gwtproject/gwt/)
   [![irc](https://img.shields.io/badge/irc:%20chat.freenode.net-%23%23gwt-green.svg)](https://webchat.freenode.net/)
 
@@ -18,19 +19,12 @@
 
  - In order to build GWT, `java` and `ant` are required in your system.
 
- - Optional: if you want to compile elemental you need
-   `python` and `g++` installed.
-
  - You need the [GWT tools repository](https://github.com/gwtproject/tools/)
    checked out and up-to-date. By default it is expected to be found at `../tools`.
    You can override the default location using the GWT_TOOLS environment variable
    or passing `-Dgwt.tools=` argument to ant.
 
  - To create the SDK distribution files run:
-
-   `$ ant clean elemental dist-dev`
-
-   or if you don't have `python` and `g++` just run
 
    `$ ant clean dist-dev`
 
@@ -39,11 +33,13 @@
 
    if you want to specify a different version number run:
 
-   `$ ant clean elemental dist-dev -Dgwt.version=x.x.x`
+   `$ ant clean dist-dev -Dgwt.version=x.x.x`
 
  - To compile everything including examples you have to run
 
-   `$ ant clean elemental dist`
+   `$ ant clean dist`
+   
+ - To create maven artifacts (after building .jar using ant), use [following guide](./maven/README.txt).
 
 ### How to verify GWT code conventions:
 
@@ -54,7 +50,7 @@
    everything including tests, to check APIs, and to verify code style.
    It shouldn't take longer than 3-4 minutes.
 
-   `$ ant compile.tests apicheck checkstyle
+   `$ ant compile.tests apicheck checkstyle`
 
 ### How to run GWT tests
 
@@ -106,10 +102,6 @@
     user           | test.nometa.selenium   | test.nometa.selenium.disable   | Run -XdisableClassMetadata tests using Selenium RC servers
     user           | test.emma.selenium     | test.emma.selenium.disable     | Run emma tests with Selenium RC servers
     requestfactory | test                   | test.requestfactory.disable    | Request Factory library
-    elemental      | test                   | test.elemental.disable         | Elemental library
-    elemental      | test.nongwt            | test.nongwt.disable            | Run elemental tests that not require GWTTestCase
-    elemental      | test.dev.htmlunit      | test.dev.htmlunit.disable      | Run elemental dev-mode tests with HtmlUnit
-    elemental      | test.web.htmlunit      | test.web.htmlunit.disable      | Run elemental web-mode tests with HtmlUnit
     tools          | test                   | test.tools.disable             | Some tools used in GWT development
 
    Additionally you can utilize some variables to filter which test to run in each task:
@@ -117,14 +109,14 @@
     Module         | Task                                  | Properties                           | Default
     ---------------|---------------------------------------|--------------------------------------|-------------------
     dev/core       | test                                  | gwt.junit.testcase.dev.core.includes | `**/com/google/**/*Test.class`
-                   |                                       | gwt.junit.testcase.dev.core.excludes |
+    &nbsp;         |                                       | gwt.junit.testcase.dev.core.excludes |
     user           | test                                  | gwt.junit.testcase.includes          | `**/*Suite.class`
     user           | test.nongwt                           | gwt.nongwt.testcase.includes         | `**/*JreSuite.class`
-                   |                                       | gwt.nongwt.testcase.excludes         |
+    &nbsp;         |                                       | gwt.nongwt.testcase.excludes         |
     user           | test.web.* test.draft.* test.nometa.* | gwt.junit.testcase.web.includes      | `**/*Suite.class`
-                   |                                       | gwt.junit.testcase.web.excludes      | `**/*JsInteropSuite.class,**/*JreSuite.class,***/OptimizedOnly*`
+    &nbsp;         |                                       | gwt.junit.testcase.web.excludes      | `**/*JsInteropSuite.class,**/*JreSuite.class,***/OptimizedOnly*`
     user           | test.dev.* test.emma.*                | gwt.junit.testcase.dev.includes      | `**/*Suite.class`
-                   |                                       | gwt.junit.testcase.dev.excludes      | `**/*JsInteropSuite.class,**/*JreSuite.class,***/OptimizedOnly*`
+    &nbsp;         |                                       | gwt.junit.testcase.dev.excludes      | `**/*JsInteropSuite.class,**/*JreSuite.class,***/OptimizedOnly*`
 
 ### Examples
 
@@ -150,17 +142,6 @@
 
     _Note: that we disable dev tests because code server depends on dev
     and we don`t want to run its tests._
-
- - Run all tests in elemental:
-
-   `$ ( cd elemental && ant test.nongwt )`
-
-    or
-
-   `$ ant elemental -Dtarget=test -Dtest.dev.disable=true -Dtest.user.disable=true`
-
-    _Note: that we have to disable dev and user tests because elemental
-    depends on both._
 
  - Run all tests in tools
 
@@ -196,7 +177,6 @@
           -Dtest.dev.disable=true \
           -Dtest.codeserver.disable=true \
           -Dtest.requestfactory.disable=true \
-          -Dtest.elemental.disable=true \
           -Dtest.tools.disable=true \
           -Dtest.dev.htmlunit.disable=true \
           -Dtest.web.htmlunit.disable=true \

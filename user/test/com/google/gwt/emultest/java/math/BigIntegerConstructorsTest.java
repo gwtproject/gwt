@@ -38,8 +38,6 @@
 package com.google.gwt.emultest.java.math;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
-import com.google.gwt.testing.TestUtils;
-
 import java.math.BigInteger;
 import java.util.Random;
 
@@ -776,35 +774,5 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
       assertTrue(resBytes[i] == rBytes[i]);
     }
     assertEquals("incorrect sign", 1, aNumber.signum());
-  }
-
-  /**
-   * Test internal static factory method.
-   */
-  public void testValueOfDouble() {
-    if (TestUtils.isJvm()) {
-      // JRE implementation doesn't have the method tested here
-      return;
-    }
-    BigInteger val = BigIntegerViolator.fromDouble(1.0);
-    assertEquals("1", val.toString());
-    val = BigIntegerViolator.fromDouble(100.0);
-    assertEquals("100", val.toString());
-    val = BigIntegerViolator.fromDouble(2147483647.0);
-    assertEquals("2147483647", val.toString());
-    val = BigIntegerViolator.fromDouble(-2147483647.0);
-    assertEquals("-2147483647", val.toString());
-    val = BigIntegerViolator.fromDouble(2147483648.0);
-    assertEquals("2147483648", val.toString());
-    val = BigIntegerViolator.fromDouble(-2147483648.0);
-    assertEquals("-2147483648", val.toString());
-    val = BigIntegerViolator.fromDouble(4294967295.0);
-    assertEquals("4294967295", val.toString());
-    val = BigIntegerViolator.fromDouble(-4294967295.0);
-    assertEquals("-4294967295", val.toString());
-    val = BigIntegerViolator.fromDouble(4294967296.0);
-    assertEquals("4294967296", val.toString());
-    val = BigIntegerViolator.fromDouble(-4294967296.0);
-    assertEquals("-4294967296", val.toString());
   }
 }

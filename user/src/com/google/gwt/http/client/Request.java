@@ -35,7 +35,10 @@ public class Request {
   /**
    * Native implementation associated with {@link Request}. User classes should not use this class
    * directly.
+   *
+   * <p>Deprecated, as the only implementation this may be removed in a future release.</p>
    */
+  @Deprecated
   static class RequestImpl {
 
     /**
@@ -46,32 +49,6 @@ public class Request {
      */
     Response createResponse(final XMLHttpRequest xmlHttpRequest) {
       return new ResponseImpl(xmlHttpRequest);
-    }
-  }
-
-  /**
-   * Special {@link RequestImpl} for IE8, IE9 to work around some IE specialities.
-   */
-  static class RequestImplIE8And9 extends RequestImpl {
-
-    @Override
-    Response createResponse(XMLHttpRequest xmlHttpRequest) {
-      return new ResponseImpl(xmlHttpRequest) {
-
-        @Override
-        public int getStatusCode() {
-          /*
-           * http://code.google.com/p/google-web-toolkit/issues/detail?id=5031
-           *
-           * The XMLHTTPRequest object in IE will return a status code of 1223 and drop some
-           * response headers if the server returns a HTTP/204.
-           *
-           * This issue is fixed in IE10.
-           */
-          int statusCode = super.getStatusCode();
-          return (statusCode == 1223) ? SC_NO_CONTENT : statusCode;
-        }
-      };
     }
   }
 

@@ -51,12 +51,12 @@ public class DateTimeFormatInfoImpl_is extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateTimeFull(String timePattern, String datePattern) {
-    return datePattern + " 'kl.' " + timePattern;
+    return datePattern + " 'kl'. " + timePattern;
   }
 
   @Override
   public String dateTimeLong(String timePattern, String datePattern) {
-    return datePattern + " 'kl.' " + timePattern;
+    return datePattern + " 'kl'. " + timePattern;
   }
 
   @Override

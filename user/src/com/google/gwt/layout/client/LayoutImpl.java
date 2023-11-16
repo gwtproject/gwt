@@ -38,7 +38,11 @@ import com.google.gwt.layout.client.Layout.Layer;
  * 
  * Note: This implementation class has state, so {@link Layout} must create a
  * new instance for each layout-parent.
+ *
+ * <p>Deprecated, as this is the only implementation, it may be removed in a future
+ * release.</p>
  */
+@Deprecated
 class LayoutImpl {
 
   private static DivElement fixedRuler;

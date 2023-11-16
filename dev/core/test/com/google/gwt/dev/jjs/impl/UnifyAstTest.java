@@ -23,18 +23,11 @@ import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.util.arg.SourceLevel;
 
 /**
  * Test for {@link UnifyAst}.
  */
 public class UnifyAstTest extends OptimizerTestBase {
-
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    sourceLevel = SourceLevel.JAVA8;
-  }
 
   public void testPackageInfo_defaultPackagePresent() throws Exception {
     final MockJavaResource packageInfo =

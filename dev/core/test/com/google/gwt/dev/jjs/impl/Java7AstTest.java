@@ -19,7 +19,6 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.javac.testing.impl.Java7MockResources;
 import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.jjs.ast.JExpression;
-import com.google.gwt.dev.util.arg.SourceLevel;
 
 /**
  * Tests that {@link GwtAstBuilder} correctly builds the AST for features introduced in Java 7.
@@ -30,7 +29,6 @@ public class Java7AstTest extends JJSTestBase {
   // of nodes.
   @Override
   public void setUp() {
-    sourceLevel = SourceLevel.JAVA8;
     addAll(JavaResourceBase.AUTOCLOSEABLE, Java7MockResources.TEST_RESOURCE,
         Java7MockResources.EXCEPTION1, Java7MockResources.EXCEPTION2);
   }

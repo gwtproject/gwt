@@ -16,9 +16,6 @@
 package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.testing.TestUtils;
-
-import org.apache.commons.collections.TestSet;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -35,13 +32,12 @@ import java.util.TreeSet;
 /**
  * Tests <code>TreeSet</code>.
  *
- * @param <E> The key type for the underlying TreeSet
+ * <p>TODO(jat): this whole structure needs work. Ideally we would port a new Apache collections
+ * test to GWT, but that is not an insignificant amount of work.
  *
- * TODO(jat): this whole structure needs work. Ideally we would port a new
- * Apache collections test to GWT, but that is not an insignificant amount of
- * work.
+ * @param <E> The key type for the underlying TreeSet
  */
-public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
+abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
 
   /**
    * Verify a Set is explicitly and implicitly empty.
@@ -55,15 +51,13 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
   }
 
   /**
-   * Verify that two Collections are deeply equivalent. Some of the Sets that
-   * need to be verified do not implement a sensible equals method
-   * (TreeSet.values for example).
+   * Verify that two Collections are deeply equivalent. Some of the Sets that need to be verified do
+   * not implement a sensible equals method (TreeSet.values for example).
    *
    * @param expected
    * @param actual
    */
-  private static <T> void _assertEquals(Collection<T> expected,
-      Collection<T> actual) {
+  private static <T> void _assertEquals(Collection<T> expected, Collection<T> actual) {
     // verify equivalence using collection interface
     assertEquals(expected.isEmpty(), actual.isEmpty());
     assertEquals(expected.size(), actual.size());
@@ -83,9 +77,8 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @param expected
    * @param actual
    */
-  private static <E> void _assertEquals(SortedSet<E> expected,
-      SortedSet<E> actual) {
-    _assertEquals((Set<E>) expected, (Set<E>) actual);
+  private static <E> void _assertEquals(SortedSet<E> expected, SortedSet<E> actual) {
+    _assertEquals(expected, (Set<E>) actual);
 
     // verify the order of the associated collections
     assertEquals(expected.toArray(), actual.toArray());
@@ -105,16 +98,14 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     return reversedCollection;
   }
 
-  /**
-   * comparator used when creating the SortedSet.
-   */
+  /** comparator used when creating the SortedSet. */
   private Comparator<E> comparator = null;
 
-  private boolean isAddSupported = true;
-  private boolean isClearSupported = true;
-  private boolean isNullKeySupported = true;
-  private boolean isPutAllSupported = true;
-  private boolean isRemoveSupported = true;
+  private final boolean isAddSupported = true;
+  private final boolean isClearSupported = true;
+  private final boolean isNullKeySupported = true;
+  private final boolean isPutAllSupported = true;
+  private final boolean isRemoveSupported = true;
 
   public TreeSetTest() {
     super("TreeSetTest");
@@ -490,12 +481,12 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.TreeSet#TreeSet(Comparator)
    */
   public void testConstructor_comparator() {
-    TreeSet<E> TreeSet = new TreeSet<E>(getComparator());
-    _assertEmpty(TreeSet);
+    TreeSet<E> treeSet = new TreeSet<E>(getComparator());
+    _assertEmpty(treeSet);
     if (isNaturalOrder()) {
-      assertNull(TreeSet.comparator());
+      assertNull(treeSet.comparator());
     } else {
-      assertSame(getComparator(), TreeSet.comparator());
+      assertSame(getComparator(), treeSet.comparator());
     }
   }
 
@@ -720,10 +711,10 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.SortedSet#first()
    */
   public void testFirstKey_throwsNoSuchElementException() {
-    SortedSet<E> SortedSet = createNavigableSet();
+    SortedSet<E> sortedSet = createNavigableSet();
     // test with no entries
     try {
-      SortedSet.first();
+      sortedSet.first();
       fail("expected exception");
     } catch (NoSuchElementException e) {
       // expected outcome
@@ -781,14 +772,14 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    */
   @SuppressWarnings("unchecked")
   public void testHeadMap_throwsClassCastException() {
-    SortedSet SortedSet = createNavigableSet();
-    SortedSet.add(getKeys()[0]);
+    SortedSet sortedSet = createNavigableSet();
+    sortedSet.add(getKeys()[0]);
     if (isNaturalOrder()) {
       // TODO Why does this succeed with natural ordering when subSet doesn't?
-      SortedSet.headSet(getConflictingKey());
+      sortedSet.headSet(getConflictingKey());
     } else {
       try {
-        SortedSet.headSet(getConflictingKey());
+        sortedSet.headSet(getConflictingKey());
         assertTrue("CCE expected in Development Mode", !TestUtils.isJvm());
       } catch (ClassCastException e) {
         // expected outcome
@@ -891,7 +882,6 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * Test method for 'java.util.Set.isEmpty()'. *
    *
    * @see java.util.Set#isEmpty()
-   *
    */
   public void testIsEmpty() {
     Set<E> sourceSet = createSet();
@@ -940,10 +930,10 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.SortedSet#last()
    */
   public void testLastKey_throwsNoSuchElementException() {
-    SortedSet<E> SortedSet = createNavigableSet();
+    SortedSet<E> sortedSet = createNavigableSet();
     // test with no entries
     try {
-      SortedSet.last();
+      sortedSet.last();
       fail("expected exception");
     } catch (NoSuchElementException e) {
       // expected outcome
@@ -1102,10 +1092,10 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    */
   @SuppressWarnings("unchecked")
   public void testSubMap_throwsClassCastException() {
-    SortedSet SortedSet = createNavigableSet();
-    SortedSet.add(getKeys()[0]);
+    SortedSet sortedSet = createNavigableSet();
+    sortedSet.add(getKeys()[0]);
     try {
-      SortedSet.subSet(getConflictingKey(), getKeys()[0]);
+      sortedSet.subSet(getConflictingKey(), getKeys()[0]);
       assertTrue("CCE expected in Development Mode", !TestUtils.isJvm());
     } catch (IllegalArgumentException e) {
       // since we can't ensure CCEs in Production Mode, we may get IAE
@@ -1114,7 +1104,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
       // expected outcome
     }
     try {
-      SortedSet.subSet(getKeys()[0], getConflictingKey());
+      sortedSet.subSet(getKeys()[0], getConflictingKey());
       assertTrue("CCE expected in Development Mode", !TestUtils.isJvm());
     } catch (IllegalArgumentException e) {
       // since we can't ensure CCEs in Production Mode, we may get IAE
@@ -1130,9 +1120,9 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.SortedSet#subSet(Object, Object)
    */
   public void testSubMap_throwsIllegalArgumentException() {
-    SortedSet<E> SortedSet = createNavigableSet();
+    SortedSet<E> sortedSet = createNavigableSet();
     try {
-      SortedSet.subSet(getGreaterThanMaximumKey(), getLessThanMinimumKey());
+      sortedSet.subSet(getGreaterThanMaximumKey(), getLessThanMinimumKey());
       fail("expected exception");
     } catch (IllegalArgumentException e) {
       // from key is greater than the to key
@@ -1160,65 +1150,62 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     sortedSet.add(getKeys()[0]);
     assertEquals(0, sortedSet.subSet(getKeys()[0], getKeys()[0]).size());
     // bounded by a "wide" range
-    assertEquals(1, sortedSet.subSet(getLessThanMinimumKey(),
-        getGreaterThanMaximumKey()).size());
-    assertEquals(1, sortedSet.subSet(getLessThanMinimumKey(), false,
-        getGreaterThanMaximumKey(), false).size());
-    assertEquals(1, sortedSet.subSet(getLessThanMinimumKey(), true,
-        getGreaterThanMaximumKey(), false).size());
-    assertEquals(1, sortedSet.subSet(getLessThanMinimumKey(), false,
-        getGreaterThanMaximumKey(), true).size());
-    assertEquals(1, sortedSet.subSet(getLessThanMinimumKey(), true,
-        getGreaterThanMaximumKey(), true).size());
+    assertEquals(1, sortedSet.subSet(getLessThanMinimumKey(), getGreaterThanMaximumKey()).size());
+    assertEquals(
+        1,
+        sortedSet.subSet(getLessThanMinimumKey(), false, getGreaterThanMaximumKey(), false).size());
+    assertEquals(
+        1,
+        sortedSet.subSet(getLessThanMinimumKey(), true, getGreaterThanMaximumKey(), false).size());
+    assertEquals(
+        1,
+        sortedSet.subSet(getLessThanMinimumKey(), false, getGreaterThanMaximumKey(), true).size());
+    assertEquals(
+        1,
+        sortedSet.subSet(getLessThanMinimumKey(), true, getGreaterThanMaximumKey(), true).size());
 
     // test with two entry set
     sortedSet.add(getKeys()[1]);
 
     assertEquals(1, sortedSet.subSet(getKeys()[0], getKeys()[1]).size());
-    assertEquals(getKeys()[0],
-        sortedSet.subSet(getKeys()[0], getKeys()[1]).toArray()[0]);
+    assertEquals(getKeys()[0], sortedSet.subSet(getKeys()[0], getKeys()[1]).toArray()[0]);
 
     assertEquals(0, sortedSet.subSet(getKeys()[0], false, getKeys()[1], false).size());
 
     assertEquals(1, sortedSet.subSet(getKeys()[0], false, getKeys()[1], true).size());
-    assertEquals(getKeys()[1], sortedSet.subSet(getKeys()[0], false,
-        getKeys()[1], true).toArray()[0]);
+    assertEquals(
+        getKeys()[1], sortedSet.subSet(getKeys()[0], false, getKeys()[1], true).toArray()[0]);
 
     assertEquals(1, sortedSet.subSet(getKeys()[0], true, getKeys()[1], false).size());
-    assertEquals(getKeys()[0], sortedSet.subSet(getKeys()[0], true,
-        getKeys()[1], false).toArray()[0]);
+    assertEquals(
+        getKeys()[0], sortedSet.subSet(getKeys()[0], true, getKeys()[1], false).toArray()[0]);
 
     assertEquals(2, sortedSet.subSet(getKeys()[0], true, getKeys()[1], true).size());
-    assertEquals(getKeys()[0], sortedSet.subSet(getKeys()[0], true,
-        getKeys()[1], true).toArray()[0]);
-    assertEquals(getKeys()[1], sortedSet.subSet(getKeys()[0], true,
-        getKeys()[1], true).toArray()[1]);
+    assertEquals(
+        getKeys()[0], sortedSet.subSet(getKeys()[0], true, getKeys()[1], true).toArray()[0]);
+    assertEquals(
+        getKeys()[1], sortedSet.subSet(getKeys()[0], true, getKeys()[1], true).toArray()[1]);
 
     // bounded by a "wide" range
-    SortedSet<E> subSet = sortedSet.subSet(getLessThanMinimumKey(),
-        getGreaterThanMaximumKey());
+    SortedSet<E> subSet = sortedSet.subSet(getLessThanMinimumKey(), getGreaterThanMaximumKey());
 
     assertEquals(2, subSet.size());
 
-    assertEquals(2, sortedSet.subSet(getLessThanMinimumKey(), false,
-        getGreaterThanMaximumKey(), false).size());
-    assertEquals(1, sortedSet.subSet(getKeys()[0], false,
-        getGreaterThanMaximumKey(), false).size());
-    assertEquals(0, sortedSet.subSet(getKeys()[0], false,
-        getKeys()[1], false).size());
-    assertEquals(2, sortedSet.subSet(getKeys()[0], true,
-        getGreaterThanMaximumKey(), false).size());
-    assertEquals(1, sortedSet.subSet(getKeys()[0], true,
-        getKeys()[1], false).size());
-    assertEquals(2, sortedSet.subSet(getKeys()[0], true,
-        getGreaterThanMaximumKey(), true).size());
-    assertEquals(2, sortedSet.subSet(getKeys()[0], true,
-        getKeys()[1], true).size());
+    assertEquals(
+        2,
+        sortedSet.subSet(getLessThanMinimumKey(), false, getGreaterThanMaximumKey(), false).size());
+    assertEquals(
+        1, sortedSet.subSet(getKeys()[0], false, getGreaterThanMaximumKey(), false).size());
+    assertEquals(0, sortedSet.subSet(getKeys()[0], false, getKeys()[1], false).size());
+    assertEquals(2, sortedSet.subSet(getKeys()[0], true, getGreaterThanMaximumKey(), false).size());
+    assertEquals(1, sortedSet.subSet(getKeys()[0], true, getKeys()[1], false).size());
+    assertEquals(2, sortedSet.subSet(getKeys()[0], true, getGreaterThanMaximumKey(), true).size());
+    assertEquals(2, sortedSet.subSet(getKeys()[0], true, getKeys()[1], true).size());
   }
 
   /**
-   * Test method for 'java.util.SortedSet.tailSet(Object)' and
-   * '@see java.util.NavigableSet.tailSet(Object, boolean)'.
+   * Test method for 'java.util.SortedSet.tailSet(Object)' and '@see
+   * java.util.NavigableSet.tailSet(Object, boolean)'.
    *
    * @see java.util.SortedSet#tailSet(Object)
    * @see java.util.NavigableSet#tailSet(Object, boolean)
@@ -1233,8 +1220,8 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
   }
 
   /**
-   * Test method for 'java.util.SortedSet.tailSet(Object)' and
-   * '@see java.util.NavigableSet.tailSet(Object, boolean)'.
+   * Test method for 'java.util.SortedSet.tailSet(Object)' and '@see
+   * java.util.NavigableSet.tailSet(Object, boolean)'.
    *
    * @see java.util.SortedSet#tailSet(Object)
    * @see java.util.NavigableSet#tailSet(Object, boolean)
@@ -1257,8 +1244,8 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
   }
 
   /**
-   * Test method for 'java.util.SortedSet.tailSet(Object)' and
-   * '@see java.util.NavigableSet.tailSet(Object, boolean)'.
+   * Test method for 'java.util.SortedSet.tailSet(Object)' and '@see
+   * java.util.NavigableSet.tailSet(Object, boolean)'.
    *
    * @see java.util.SortedSet#tailSet(Object)
    * @see java.util.NavigableSet#tailSet(Object, boolean)
@@ -1282,8 +1269,8 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
   }
 
   /**
-   * Test method for 'java.util.SortedSet.tailSet(Object)' and
-   * '@see java.util.NavigableSet.tailSet(Object, boolean)'.
+   * Test method for 'java.util.SortedSet.tailSet(Object)' and '@see
+   * java.util.NavigableSet.tailSet(Object, boolean)'.
    *
    * @see java.util.SortedSet#tailSet(Object)
    * @see java.util.NavigableSet#tailSet(Object, boolean)
@@ -1333,14 +1320,14 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    */
   @SuppressWarnings("unchecked")
   public void testTailSet_throwsClassCastException() {
-    SortedSet SortedSet = createNavigableSet();
-    SortedSet.add(getKeys()[0]);
+    SortedSet sortedSet = createNavigableSet();
+    sortedSet.add(getKeys()[0]);
     if (isNaturalOrder()) {
       // TODO Why does this succeed with natural ordering when subSet doesn't?
-      SortedSet.tailSet(getConflictingKey());
+      sortedSet.tailSet(getConflictingKey());
     } else {
       try {
-        SortedSet.tailSet(getConflictingKey());
+        sortedSet.tailSet(getConflictingKey());
         assertTrue("CCE expected in Development Mode", !TestUtils.isJvm());
       } catch (ClassCastException e) {
         // expected outcome
@@ -1384,7 +1371,6 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     return comparator == null;
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   protected Set makeEmptySet() {
     return createTreeSet();

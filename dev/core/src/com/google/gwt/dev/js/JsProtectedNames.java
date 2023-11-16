@@ -77,7 +77,7 @@ public class JsProtectedNames {
         "Path", "self");
 
     illegalNames.addAll(loadGlobals("chrome"));
-    illegalNames.addAll(loadGlobals("firefox25"));
+    illegalNames.addAll(loadGlobals("firefox"));
     illegalNames.addAll(loadGlobals("ie9"));
     // Impl.getHashCode
     illegalNames.add("$H");

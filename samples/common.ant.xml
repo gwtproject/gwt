@@ -148,7 +148,7 @@
             <pathelement location="${gwt.user.jar}" />
             <pathelement location="${gwt.dev.jar}" />
           </classpath>
-          <jvmarg value="-Xmx384M" />
+          <jvmarg value="-Xmx1g" />
           <arg value="-localWorkers" />
           <arg value="${gwt.samples.localworkers}" />
           <arg value="-war" />
@@ -174,7 +174,7 @@
         </targetfiles>
         <sequential>
           <mkdir dir="${samples.scripts}/${sample.upper}" />
-          <java classname="com.google.gwt.user.tools.WebAppCreator" classpath="${gwt.user.jar}:${gwt.dev.jar}" failonerror="true">
+          <java classname="com.google.gwt.user.tools.WebAppCreator" classpath="${gwt.user.jar}:${gwt.dev.jar}" failonerror="true" fork="true">
             <!-- Relative path is important! Paths will be relative in final distro -->
             <sysproperty key="gwt.devjar" value="../../gwt-dev.jar" />
             <arg value="-XnoEclipse" />

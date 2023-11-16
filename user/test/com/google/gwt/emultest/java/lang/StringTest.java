@@ -18,9 +18,9 @@ package com.google.gwt.emultest.java.lang;
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.testing.TestUtils;
-
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.Locale;
 
 /**
@@ -422,6 +422,7 @@ public class StringTest extends GWTTestCase {
     for (int i = 0; i < str.length(); ++i) {
       assertEquals((byte) str.charAt(i), bytes[i]);
     }
+    assertTrue(Arrays.equals(bytes, str.getBytes()));
   }
 
   public void testGetBytesLatin1() throws UnsupportedEncodingException {
@@ -670,6 +671,17 @@ public class StringTest extends GWTTestCase {
     assertFalse(test.regionMatches(true, 1, "bCdx", 1, 3));
     assertTrue(test.regionMatches(true, 0, "xaBcd", 1, 4));
 
+    String empty = String.valueOf(new char[] {});
+    assertTrue(empty.regionMatches(true, 0, "", 0, 0));
+    assertTrue(empty.regionMatches(true, 0, " ", 0, 0));
+    assertFalse(empty.regionMatches(true, 0, " ", 0, 1));
+
+    assertTrue(test.regionMatches(true, 0, "xx", 0, -1));
+    assertFalse(test.regionMatches(true, -1, "xx", 0, 0));
+    assertFalse(test.regionMatches(true, 0, "xx", -1, 0));
+    assertFalse(test.regionMatches(true, -1, "F", 0, 1));
+    assertFalse(test.regionMatches(true, -1, "A", 0, 1));
+
     try {
       test.regionMatches(-1, null, -1, -1);
       fail();
@@ -679,7 +691,9 @@ public class StringTest extends GWTTestCase {
 
     try {
       test.regionMatches(true, -1, null, -1, -1);
-      fail();
+      if (TestUtils.getJdkVersion() < 11) {
+        fail();
+      }
     } catch (NullPointerException expected) {
       // NPE must be thrown before any range checks
     }
@@ -702,9 +716,8 @@ public class StringTest extends GWTTestCase {
     String exampleXd = String.valueOf(new char[] {
         'e', 'x', 'a', 'm', 'p', 'l', 'e', ' ', 'x', 'd'});
     assertEquals("example xd", exampleXd.replace('\r', ' ').replace('\n', ' '));
-    String dogFood = String.valueOf(new char[] {
-        'd', 'o', 'g', '\u0120', 'f', 'o', 'o', 'd'});
-    assertEquals("dog food", dogFood.replace('\u0120', ' '));
+    String dotFood = String.valueOf(new char[] {'d', 'o', 't', '\u0120', 'f', 'o', 'o', 'd'});
+    assertEquals("dot food", dotFood.replace('\u0120', ' '));
     String testStr = String.valueOf(new char[] {
         '\u1111', 'B', '\u1111', 'B', '\u1111', 'B'});
     assertEquals("ABABAB", testStr.replace('\u1111', 'A'));
@@ -800,6 +813,32 @@ public class StringTest extends GWTTestCase {
     assertEquals("cd", hideFromCompiler("abcdefghi").substring(2, 4));
     assertEquals("bc", hideFromCompiler("abcdef").substring(1, 3));
     assertEquals("bcdef", hideFromCompiler("abcdef").substring(1));
+    assertEquals("", hideFromCompiler("abcdef").substring(6));
+    assertEquals("", hideFromCompiler("abcdef").substring(6, 6));
+
+    try {
+      hideFromCompiler("abc").substring(-1);
+      fail("Should have thrown");
+    } catch (IndexOutOfBoundsException expected) {
+    }
+
+    try {
+      hideFromCompiler("abc").substring(4);
+      fail("Should have thrown");
+    } catch (IndexOutOfBoundsException expected) {
+    }
+
+    try {
+      hideFromCompiler("abc").substring(2, 4);
+      fail("Should have thrown");
+    } catch (IndexOutOfBoundsException expected) {
+    }
+
+    try {
+      hideFromCompiler("abc").substring(2, 1);
+      fail("Should have thrown");
+    } catch (IndexOutOfBoundsException expected) {
+    }
   }
 
   public void testToCharArray() {

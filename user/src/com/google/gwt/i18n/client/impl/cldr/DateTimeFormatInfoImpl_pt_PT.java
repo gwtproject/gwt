@@ -30,6 +30,16 @@ public class DateTimeFormatInfoImpl_pt_PT extends DateTimeFormatInfoImpl_pt {
   }
 
   @Override
+  public String dateFormatMedium() {
+    return "dd/MM/y";
+  }
+
+  @Override
+  public String dateFormatShort() {
+    return "dd/MM/yy";
+  }
+
+  @Override
   public String dateTimeFull(String timePattern, String datePattern) {
     return datePattern + " 'às' " + timePattern;
   }
@@ -50,13 +60,18 @@ public class DateTimeFormatInfoImpl_pt_PT extends DateTimeFormatInfoImpl_pt {
   }
 
   @Override
-  public int firstDayOfTheWeek() {
-    return 1;
+  public String formatMonthAbbrevDay() {
+    return "d/MM";
   }
 
   @Override
-  public String formatMonthAbbrevDay() {
-    return "d/MM";
+  public String formatMonthFullWeekdayDay() {
+    return "cccc, d 'de' MMMM";
+  }
+
+  @Override
+  public String formatMonthNumDay() {
+    return "dd/MM";
   }
 
   @Override
@@ -75,58 +90,25 @@ public class DateTimeFormatInfoImpl_pt_PT extends DateTimeFormatInfoImpl_pt {
   }
 
   @Override
-  public String formatYearQuarterFull() {
-    return "QQQQ 'de' y";
-  }
-
-  @Override
-  public String formatYearQuarterShort() {
-    return "Q 'de' y";
-  }
-
-  @Override
-  public String[] monthsFull() {
-    return new String[] {
-        "Janeiro",
-        "Fevereiro",
-        "Março",
-        "Abril",
-        "Maio",
-        "Junho",
-        "Julho",
-        "Agosto",
-        "Setembro",
-        "Outubro",
-        "Novembro",
-        "Dezembro"
-    };
-  }
-
-  @Override
-  public String[] monthsShort() {
-    return new String[] {
-        "Jan",
-        "Fev",
-        "Mar",
-        "Abr",
-        "Mai",
-        "Jun",
-        "Jul",
-        "Ago",
-        "Set",
-        "Out",
-        "Nov",
-        "Dez"
-    };
-  }
-
-  @Override
   public String[] quartersFull() {
     return new String[] {
         "1.º trimestre",
         "2.º trimestre",
         "3.º trimestre",
         "4.º trimestre"
+    };
+  }
+
+  @Override
+  public String[] weekdaysShort() {
+    return new String[] {
+        "domingo",
+        "segunda",
+        "terça",
+        "quarta",
+        "quinta",
+        "sexta",
+        "sábado"
     };
   }
 }

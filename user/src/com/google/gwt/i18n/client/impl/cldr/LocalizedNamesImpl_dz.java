@@ -27,6 +27,10 @@ public class LocalizedNamesImpl_dz extends LocalizedNamesImpl {
   @Override
   public String[] loadSortedRegionCodes() {
     return new String[] {
+        "EZ",
+        "UN",
+        "XA",
+        "XB",
         "XK",
         "QA",
         "IC",

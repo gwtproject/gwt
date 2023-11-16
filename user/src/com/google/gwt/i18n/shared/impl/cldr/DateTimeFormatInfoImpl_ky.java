@@ -24,55 +24,45 @@ public class DateTimeFormatInfoImpl_ky extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "түшкө чейинки",
-        "түштөн кийинки"
+        "тң",
+        "тк"
     };
   }
 
   @Override
   public String dateFormatFull() {
-    return "EEEE, d-MMMM, y-'ж'.";
+    return "y-'ж'., d-MMMM, EEEE";
   }
 
   @Override
   public String dateFormatLong() {
-    return "d-MMMM, y-'ж'.";
+    return "y-'ж'., d-MMMM";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "dd.MM.y";
+    return "y-'ж'., d-MMM";
   }
 
   @Override
   public String dateFormatShort() {
-    return "dd.MM.yy";
+    return "d/M/yy";
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "б.з. чейин",
-        "б.з."
+        "биздин заманга чейин",
+        "биздин заман"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "б.з. ч.",
+        "б.з.ч.",
         "б.з."
     };
-  }
-
-  @Override
-  public String formatHour12Minute() {
-    return "a h:mm";
-  }
-
-  @Override
-  public String formatHour12MinuteSecond() {
-    return "a h:mm:ss";
   }
 
   @Override
@@ -107,12 +97,17 @@ public class DateTimeFormatInfoImpl_ky extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFull() {
-    return "y-'ж'. MMMM";
+    return "y-'ж'., MMMM";
   }
 
   @Override
   public String formatYearMonthFullDay() {
-    return "d-MMMM, y-'ж'.";
+    return "y-'ж'., d-MMMM";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "y-dd-MM";
   }
 
   @Override
@@ -145,6 +140,24 @@ public class DateTimeFormatInfoImpl_ky extends DateTimeFormatInfoImpl {
         "октябрь",
         "ноябрь",
         "декабрь"
+    };
+  }
+
+  @Override
+  public String[] monthsFullStandalone() {
+    return new String[] {
+        "Январь",
+        "Февраль",
+        "Март",
+        "Апрель",
+        "Май",
+        "Июнь",
+        "Июль",
+        "Август",
+        "Сентябрь",
+        "Октябрь",
+        "Ноябрь",
+        "Декабрь"
     };
   }
 
@@ -185,6 +198,24 @@ public class DateTimeFormatInfoImpl_ky extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] monthsShortStandalone() {
+    return new String[] {
+        "Янв",
+        "Фев",
+        "Мар",
+        "Апр",
+        "Май",
+        "Июн",
+        "Июл",
+        "Авг",
+        "Сен",
+        "Окт",
+        "Ноя",
+        "Дек"
+    };
+  }
+
+  @Override
   public String[] quartersFull() {
     return new String[] {
         "1-чейрек",
@@ -207,26 +238,13 @@ public class DateTimeFormatInfoImpl_ky extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "Жек",
-        "Дүй",
-        "Шей",
-        "Шар",
-        "Бей",
-        "Жум",
-        "Ишм"
-    };
-  }
-
-  @Override
-  public String[] weekdaysFullStandalone() {
-    return new String[] {
-        "Жекшемби",
-        "Дүйшөмбү",
-        "Шейшемби",
-        "Шаршемби",
-        "Бейшемби",
-        "Жума",
-        "Ишемби"
+        "жекшемби",
+        "дүйшөмбү",
+        "шейшемби",
+        "шаршемби",
+        "бейшемби",
+        "жума",
+        "ишемби"
     };
   }
 
@@ -246,26 +264,13 @@ public class DateTimeFormatInfoImpl_ky extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "Жк",
-        "Дш",
-        "Ше",
-        "Ша",
-        "Бш",
-        "Жм",
-        "Иш"
-    };
-  }
-
-  @Override
-  public String[] weekdaysShortStandalone() {
-    return new String[] {
-        "Жек",
-        "Дүй",
-        "Шей",
-        "Шар",
-        "Бей",
-        "Жум",
-        "Ишм"
+        "жек.",
+        "дүй.",
+        "шейш.",
+        "шарш.",
+        "бейш.",
+        "жума",
+        "ишм."
     };
   }
 }

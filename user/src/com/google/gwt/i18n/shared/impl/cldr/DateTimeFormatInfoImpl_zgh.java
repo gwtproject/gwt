@@ -66,11 +66,6 @@ public class DateTimeFormatInfoImpl_zgh extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public int firstDayOfTheWeek() {
-    return 6;
-  }
-
-  @Override
   public String formatMinuteSecond() {
     return "m:ss";
   }
@@ -91,11 +86,6 @@ public class DateTimeFormatInfoImpl_zgh extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatMonthFullDay() {
-    return "d MMMM";
-  }
-
-  @Override
   public String formatMonthFullWeekdayDay() {
     return "EEEE d MMMM";
   }
@@ -111,16 +101,6 @@ public class DateTimeFormatInfoImpl_zgh extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatYearMonthAbbrevDay() {
-    return "d MMM, y";
-  }
-
-  @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
-  }
-
-  @Override
   public String formatYearMonthFullDay() {
     return "d MMMM y";
   }
@@ -132,7 +112,7 @@ public class DateTimeFormatInfoImpl_zgh extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d/M/y";
+    return "y-MM-dd";
   }
 
   @Override
@@ -248,15 +228,5 @@ public class DateTimeFormatInfoImpl_zgh extends DateTimeFormatInfoImpl {
         "ⴰⵙⵉⵎ",
         "ⴰⵙⵉⴹ"
     };
-  }
-
-  @Override
-  public int weekendEnd() {
-    return 6;
-  }
-
-  @Override
-  public int weekendStart() {
-    return 5;
   }
 }

@@ -23,7 +23,7 @@ public class DateTimeFormatInfoImpl_sk extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatFull() {
-    return "EEEE, d. MMMM y";
+    return "EEEE d. MMMM y";
   }
 
   @Override
@@ -33,27 +33,42 @@ public class DateTimeFormatInfoImpl_sk extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "d.M.y";
+    return "d. M. y";
   }
 
   @Override
   public String dateFormatShort() {
-    return "d.M.y";
+    return "d. M. y";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "pred n.l.",
-        "n.l."
+        "pred Kristom",
+        "po Kristovi"
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "pred n.l.",
-        "n.l."
+        "pred Kr.",
+        "po Kr."
     };
   }
 
@@ -74,7 +89,7 @@ public class DateTimeFormatInfoImpl_sk extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthAbbrevDay() {
-    return "d. MMM.";
+    return "d. M.";
   }
 
   @Override
@@ -84,22 +99,22 @@ public class DateTimeFormatInfoImpl_sk extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, d. MMMM";
+    return "EEEE d. MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "d.M.";
+    return "d. M.";
   }
 
   @Override
   public String formatYearMonthAbbrev() {
-    return "LLL y";
+    return "M/y";
   }
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "d.M.y";
+    return "d. M. y";
   }
 
   @Override
@@ -114,17 +129,17 @@ public class DateTimeFormatInfoImpl_sk extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "M.y";
+    return "M/y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d.M.y";
+    return "d. M. y";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, d. MMM y";
+    return "EEE d. M. y";
   }
 
   @Override
@@ -255,13 +270,13 @@ public class DateTimeFormatInfoImpl_sk extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "N",
-        "P",
-        "U",
-        "S",
-        "Š",
-        "P",
-        "S"
+        "n",
+        "p",
+        "u",
+        "s",
+        "š",
+        "p",
+        "s"
     };
   }
 

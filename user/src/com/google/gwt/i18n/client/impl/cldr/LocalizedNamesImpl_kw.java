@@ -100,8 +100,8 @@ public class LocalizedNamesImpl_kw extends LocalizedNamesImpl {
         "ER",
         "ES",
         "ET",
-        "EU",
         "IN",
+        "EZ",
         "FI",
         "FJ",
         "FK",
@@ -146,6 +146,7 @@ public class LocalizedNamesImpl_kw extends LocalizedNamesImpl {
         "JM",
         "JO",
         "KE",
+        "UN",
         "KG",
         "KH",
         "KI",
@@ -268,6 +269,7 @@ public class LocalizedNamesImpl_kw extends LocalizedNamesImpl {
         "UA",
         "UG",
         "UM",
+        "EU",
         "UY",
         "UZ",
         "VA",
@@ -279,6 +281,8 @@ public class LocalizedNamesImpl_kw extends LocalizedNamesImpl {
         "VU",
         "WF",
         "WS",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "YT",
@@ -291,13 +295,21 @@ public class LocalizedNamesImpl_kw extends LocalizedNamesImpl {
   @Override
   protected void loadNameMapJava() {
     super.loadNameMapJava();
+    namesMap.put("001", "An Bys");
+    namesMap.put("002", "Afrika");
+    namesMap.put("003", "Amerika Gledh");
+    namesMap.put("019", "An Amerikas");
+    namesMap.put("142", "Asi");
+    namesMap.put("150", "Europa");
     namesMap.put("BR", "Brasil");
     namesMap.put("DE", "Almayn");
+    namesMap.put("EU", "Unyans Europek");
     namesMap.put("FR", "Pow Frenk");
     namesMap.put("GB", "Rywvaneth Unys");
     namesMap.put("IN", "Eynda");
     namesMap.put("IT", "Itali");
     namesMap.put("RU", "Russi");
+    namesMap.put("UN", "Kenedhlow Unys");
     namesMap.put("US", "Statys Unys");
   }
 
@@ -308,13 +320,21 @@ public class LocalizedNamesImpl_kw extends LocalizedNamesImpl {
 
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
+        "001": "An Bys",
+        "002": "Afrika",
+        "003": "Amerika Gledh",
+        "019": "An Amerikas",
+        "142": "Asi",
+        "150": "Europa",
         "BR": "Brasil",
         "DE": "Almayn",
+        "EU": "Unyans Europek",
         "FR": "Pow Frenk",
         "GB": "Rywvaneth Unys",
         "IN": "Eynda",
         "IT": "Itali",
         "RU": "Russi",
+        "UN": "Kenedhlow Unys",
         "US": "Statys Unys"
     };
   }-*/;

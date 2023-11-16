@@ -21,6 +21,10 @@ import static javaemul.internal.InternalPreconditions.checkElementIndex;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+
+import jsinterop.annotations.JsNonNull;
 
 /**
  * Utility methods that operate on collections.
@@ -184,6 +188,7 @@ public class Collections {
     }
 
     @Override
+    @JsNonNull
     public Set keySet() {
       return EMPTY_SET;
     }
@@ -290,6 +295,62 @@ public class Collections {
   }
 
   /*
+   * Returns the input collection as it is.
+   */
+  public static <T> Collection<T> synchronizedCollection(Collection<T> c) {
+    return c;
+  }
+
+  /*
+   * Returns the input list as it is.
+   */
+  public static <T> List<T> synchronizedList(List<T> list) {
+    return list;
+  }
+
+  /*
+   * Returns the input map as it is.
+   */
+  public static <K, V> Map<K, V> synchronizedMap(Map<K, V> m) {
+    return m;
+  }
+
+  /*
+   * Returns the input map as it is.
+   */
+  public static <K, V> NavigableMap<K, V> synchronizedNavigableMap(NavigableMap<K, V> m) {
+    return m;
+  }
+
+  /*
+   * Returns the input set as it is.
+   */
+  public static <T> NavigableSet<T> synchronizedNavigableSet(NavigableSet<T> s) {
+    return s;
+  }
+
+  /*
+   * Returns the input set as it is.
+   */
+  public static <T> Set<T> synchronizedSet(Set<T> s) {
+    return s;
+  }
+
+  /*
+   * Returns the input map as it is.
+   */
+  public static <K, V> SortedMap<K, V> synchronizedSortedMap(SortedMap<K, V> m) {
+    return m;
+  }
+
+  /*
+   * Returns the input set as it is.
+   */
+  public static <T> SortedSet<T> synchronizedSortedSet(SortedSet<T> s) {
+    return s;
+  }
+
+  /*
    * TODO: make the unmodifiable collections serializable.
    */
 
@@ -347,6 +408,11 @@ public class Collections {
 
     @Override
     public boolean retainAll(Collection<?> c) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean removeIf(Predicate<? super T> p) {
       throw new UnsupportedOperationException();
     }
 
@@ -431,6 +497,16 @@ public class Collections {
     }
 
     @Override
+    public void replaceAll(UnaryOperator<T> operator) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void sort(Comparator<? super T> c) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
     public T remove(int index) {
       throw new UnsupportedOperationException();
     }
@@ -441,6 +517,7 @@ public class Collections {
     }
 
     @Override
+    @JsNonNull
     public List<T> subList(int fromIndex, int toIndex) {
       return new UnmodifiableList<T>(list.subList(fromIndex, toIndex));
     }
@@ -609,6 +686,7 @@ public class Collections {
     }
 
     @Override
+    @JsNonNull
     public Set<K> keySet() {
       if (keySet == null) {
         keySet = new UnmodifiableSet<K>(map.keySet());

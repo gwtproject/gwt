@@ -22,14 +22,6 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_os extends DateTimeFormatInfoImpl {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "ӕмбисбоны размӕ",
-        "ӕмбисбоны фӕстӕ"
-    };
-  }
-
-  @Override
   public String dateFormatFull() {
     return "EEEE, d MMMM, y 'аз'";
   }
@@ -86,58 +78,58 @@ public class DateTimeFormatInfoImpl_os extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
+  }
+
+  @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
+    return "cccc, d MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M/d";
+    return "dd.MM";
   }
 
   @Override
   public String formatYearMonthAbbrev() {
-    return "MMM y";
+    return "LLL y";
   }
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "MMM d, y";
-  }
-
-  @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
+    return "d MMM, y 'аз'";
   }
 
   @Override
   public String formatYearMonthFullDay() {
-    return "MMMM d, y";
+    return "d MMMM, y 'аз'";
   }
 
   @Override
   public String formatYearMonthNum() {
-    return "M/y";
+    return "MM.y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "M/d/y";
+    return "d.M.y";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
+    return "EEE, d MMM y";
   }
 
   @Override
   public String formatYearQuarterFull() {
-    return "QQQQ y";
+    return "y-'ӕм' 'азы' QQQQ";
   }
 
   @Override
   public String formatYearQuarterShort() {
-    return "Q y";
+    return "y-'ӕм' 'азы' Q";
   }
 
   @Override
@@ -201,7 +193,7 @@ public class DateTimeFormatInfoImpl_os extends DateTimeFormatInfoImpl {
         "фев.",
         "мар.",
         "апр.",
-        "мая",
+        "майы",
         "июны",
         "июлы",
         "авг.",
@@ -217,7 +209,7 @@ public class DateTimeFormatInfoImpl_os extends DateTimeFormatInfoImpl {
     return new String[] {
         "Янв.",
         "Февр.",
-        "Март",
+        "Март.",
         "Апр.",
         "Май",
         "Июнь",

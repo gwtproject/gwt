@@ -16,12 +16,10 @@
 package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.testing.TestUtils;
-
+import java.io.IOException;
 import jsinterop.annotations.JsType;
 
-/**
- * Unit tests for the GWT emulation of java.lang.Throwable class.
- */
+/** Unit tests for the GWT emulation of java.lang.Throwable class. */
 public class ThrowableTest extends ThrowableTestBase {
 
   @Override
@@ -74,7 +72,7 @@ public class ThrowableTest extends ThrowableTestBase {
     }
     Throwable e = new Throwable("<my msg>");
     Object caughtNative = catchNative(createThrower(e));
-    assertTrue(caughtNative instanceof Error);
+    assertTrue(caughtNative instanceof JsError);
     assertTrue(caughtNative.toString().contains("<my msg>"));
     assertTrue(caughtNative.toString().contains(Throwable.class.getName()));
   }
@@ -91,9 +89,18 @@ public class ThrowableTest extends ThrowableTestBase {
     };
 
     Object caughtNative = catchNative(createThrower(e));
-    assertTrue(caughtNative instanceof Error);
+    assertTrue(caughtNative instanceof JsError);
     assertTrue(caughtNative.toString().contains("<my msg>"));
     assertTrue(caughtNative.toString().contains(e.getClass().getName()));
+  }
+
+  public void testCatchNativeWithNewlineInMesssage() {
+    if (TestUtils.isJvm()) {
+      return;
+    }
+    Throwable e = new Throwable("my\nmsg");
+    Object caughtNative = catchNative(createThrower(e));
+    assertTrue(caughtNative.toString().contains("my\nmsg"));
   }
 
   public void testJavaNativeJavaSandwichCatch() {
@@ -104,6 +111,72 @@ public class ThrowableTest extends ThrowableTestBase {
     assertSame(e, javaNativeJavaSandwich(e));
   }
 
-  @JsType(isNative = true, namespace = "<window>")
-  private static class Error { }
+  public void testLinkedBackingObjects() {
+    if (TestUtils.isJvm()) {
+      return;
+    }
+    Throwable rootCause = new Throwable("Root cause");
+    Throwable subError = new Throwable("Sub-error", rootCause);
+
+    assertEquals(getBackingJsObject(rootCause), getBackingJsObject(subError).getCause());
+  }
+
+  public void testLinkedBackingObjects_initCause() {
+    if (TestUtils.isJvm()) {
+      return;
+    }
+    Throwable rootCause = new Throwable("Root cause");
+    Throwable subError = new Throwable("Sub-error");
+    subError.initCause(rootCause);
+
+    assertEquals(getBackingJsObject(rootCause), getBackingJsObject(subError).getCause());
+  }
+
+  public void testLinkedBackingObjects_noCause() {
+    if (TestUtils.isJvm()) {
+      return;
+    }
+    Throwable subError = new Throwable("Sub-error");
+
+    assertNull(getBackingJsObject(subError).getCause());
+  }
+
+  public void testLinkedSuppressedErrors_suppressedAddedViaInit() {
+    if (TestUtils.isJvm()) {
+      return;
+    }
+    final Throwable suppressed = new Throwable();
+    Throwable e =
+        new Throwable() {
+          {
+            addSuppressed(suppressed);
+          }
+        };
+
+    assertEquals(getBackingJsObject(suppressed), getBackingJsObject(e).getSuppressed()[0]);
+  }
+
+  public void testLinkedSuppressedErrors_tryWithResources() {
+    if (TestUtils.isJvm()) {
+      return;
+    }
+
+    class FailingResource implements AutoCloseable {
+      @Override
+      public void close() throws IOException {
+        throw new IOException("onClose");
+      }
+    }
+
+    RuntimeException e = new RuntimeException("try");
+    try (FailingResource r = new FailingResource()) {
+      throw e;
+    } catch (Exception expected) { }
+
+    assertEquals(
+        getBackingJsObject(e.getSuppressed()[0]), getBackingJsObject(e).getSuppressed()[0]);
+  }
+
+  @JsType(isNative = true, name = "Error", namespace = "<window>")
+  private static class JsError { }
 }

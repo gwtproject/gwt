@@ -76,11 +76,6 @@ public class DateTimeFormatInfoImpl_mua extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatMonthFullDay() {
-    return "d MMMM";
-  }
-
-  @Override
   public String formatMonthFullWeekdayDay() {
     return "EEEE d MMMM";
   }
@@ -98,11 +93,6 @@ public class DateTimeFormatInfoImpl_mua extends DateTimeFormatInfoImpl {
   @Override
   public String formatYearMonthAbbrevDay() {
     return "d MMM y";
-  }
-
-  @Override
-  public String formatYearMonthFull() {
-    return "MMMM y";
   }
 
   @Override
@@ -195,7 +185,7 @@ public class DateTimeFormatInfoImpl_mua extends DateTimeFormatInfoImpl {
         "Tai fĩi sai ma tǝn kee zah",
         "Tai fĩi sai zah lǝn gwa ma kee",
         "Tai fĩi sai zah lǝn sai ma kee",
-        "Tai fĩi sai ma coo kee zah 'na"
+        "Tai fĩi sai ma coo kee zah ‘na"
     };
   }
 
@@ -212,7 +202,7 @@ public class DateTimeFormatInfoImpl_mua extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "Com'yakke",
+        "Com’yakke",
         "Comlaaɗii",
         "Comzyiiɗii",
         "Comkolle",

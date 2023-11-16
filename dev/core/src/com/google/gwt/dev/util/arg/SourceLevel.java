@@ -23,7 +23,10 @@ import com.google.gwt.util.tools.Utility;
  */
 public enum SourceLevel {
   // Source levels must appear in ascending order for the default setting logic to work.
-  JAVA8("1.8", "8");
+  JAVA8("1.8", "8"),
+  JAVA9("9", "1.9"),
+  JAVA10("10", "1.10"),
+  JAVA11("11", "1.11");
 
   /**
    * The default java sourceLevel.
@@ -75,7 +78,6 @@ public enum SourceLevel {
   }
 
   private static SourceLevel getJvmBestMatchingSourceLevel() {
-    // If everything fails set default to JAVA8.
     String javaSpecLevel = System.getProperty("java.specification.version");
     return getBestMatchingVersion(javaSpecLevel);
   }
@@ -83,7 +85,7 @@ public enum SourceLevel {
   @VisibleForTesting
   public static SourceLevel getBestMatchingVersion(String javaVersionString) {
     try {
-      // Find the first version that is less than or equal to javaSpecLevel by iterating in reverse
+      // Find the last version that is less than or equal to javaSpecLevel by iterating in reverse
       // order.
       SourceLevel[] sourceLevels = SourceLevel.values();
       for (int i = sourceLevels.length - 1; i >= 0; i--) {
@@ -97,6 +99,13 @@ public enum SourceLevel {
     }
     // If everything fails set default to JAVA8.
     return JAVA8;
+  }
+
+  /**
+   * Returns the highest supported version of the Java.
+   */
+  public static SourceLevel getHighest() {
+    return SourceLevel.values()[SourceLevel.values().length - 1];
   }
 }
 

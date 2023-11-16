@@ -30,11 +30,6 @@ public class DateTimeFormatInfoImpl_am extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String dateFormatFull() {
-    return "EEEE, d MMMM y";
-  }
-
-  @Override
   public String dateFormatLong() {
     return "d MMMM y";
   }
@@ -72,7 +67,7 @@ public class DateTimeFormatInfoImpl_am extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
+    return "EEEE፣ MMMM d";
   }
 
   @Override
@@ -137,24 +132,6 @@ public class DateTimeFormatInfoImpl_am extends DateTimeFormatInfoImpl {
         "ጁላይ",
         "ኦገስት",
         "ሴፕቴምበር",
-        "ኦክተውበር",
-        "ኖቬምበር",
-        "ዲሴምበር"
-    };
-  }
-
-  @Override
-  public String[] monthsFullStandalone() {
-    return new String[] {
-        "ጃንዩወሪ",
-        "ፌብሩወሪ",
-        "ማርች",
-        "ኤፕሪል",
-        "ሜይ",
-        "ጁን",
-        "ጁላይ",
-        "ኦገስት",
-        "ሴፕቴምበር",
         "ኦክቶበር",
         "ኖቬምበር",
         "ዲሴምበር"
@@ -191,24 +168,6 @@ public class DateTimeFormatInfoImpl_am extends DateTimeFormatInfoImpl {
         "ጁላይ",
         "ኦገስ",
         "ሴፕቴ",
-        "ኦክተ",
-        "ኖቬም",
-        "ዲሴም"
-    };
-  }
-
-  @Override
-  public String[] monthsShortStandalone() {
-    return new String[] {
-        "ጃንዩ",
-        "ፌብሩ",
-        "ማርች",
-        "ኤፕሪ",
-        "ሜይ",
-        "ጁን",
-        "ጁላይ",
-        "ኦገስ",
-        "ሴፕቴ",
         "ኦክቶ",
         "ኖቬም",
         "ዲሴም"
@@ -219,7 +178,7 @@ public class DateTimeFormatInfoImpl_am extends DateTimeFormatInfoImpl {
   public String[] quartersFull() {
     return new String[] {
         "1ኛው ሩብ",
-        "ሁለተኛው ሩብ",
+        "2ኛው ሩብ",
         "3ኛው ሩብ",
         "4ኛው ሩብ"
     };

@@ -27,6 +27,26 @@ public class DateTimeFormatInfoImpl_ta_LK extends DateTimeFormatInfoImpl_ta {
   }
 
   @Override
+  public String timeFormatFull() {
+    return "HH:mm:ss zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "HH:mm:ss z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "HH:mm:ss";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "HH:mm";
+  }
+
+  @Override
   public int weekendStart() {
     return 6;
   }

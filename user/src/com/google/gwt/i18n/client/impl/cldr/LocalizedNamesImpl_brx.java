@@ -33,10 +33,14 @@ public class LocalizedNamesImpl_brx extends LocalizedNamesImpl {
         "CW",
         "DG",
         "EA",
+        "EZ",
         "IC",
         "SS",
         "SX",
         "TA",
+        "UN",
+        "XA",
+        "XB",
         "XK",
         "AO",
         "AQ",
@@ -145,7 +149,6 @@ public class LocalizedNamesImpl_brx extends LocalizedNamesImpl {
         "NR",
         "NA",
         "NI",
-        "AN",
         "NU",
         "NL",
         "NP",
@@ -329,7 +332,6 @@ public class LocalizedNamesImpl_brx extends LocalizedNamesImpl {
     namesMap.put("AI", "एंगीला");
     namesMap.put("AL", "अल्बानिया");
     namesMap.put("AM", "आर्मेनिया");
-    namesMap.put("AN", "नीदरलैंड्स एंटिलीज़");
     namesMap.put("AO", "अंगोला");
     namesMap.put("AQ", "अंटार्कटिका");
     namesMap.put("AR", "अर्जेण्टिना");
@@ -617,7 +619,6 @@ public class LocalizedNamesImpl_brx extends LocalizedNamesImpl {
         "AI": "एंगीला",
         "AL": "अल्बानिया",
         "AM": "आर्मेनिया",
-        "AN": "नीदरलैंड्स एंटिलीज़",
         "AO": "अंगोला",
         "AQ": "अंटार्कटिका",
         "AR": "अर्जेण्टिना",

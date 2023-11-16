@@ -24,8 +24,8 @@ public class DateTimeFormatInfoImpl_lt extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "pr.p.",
-        "pop."
+        "priešpiet",
+        "popiet"
     };
   }
 
@@ -37,6 +37,11 @@ public class DateTimeFormatInfoImpl_lt extends DateTimeFormatInfoImpl {
   @Override
   public String dateFormatLong() {
     return "y 'm'. MMMM d 'd'.";
+  }
+
+  @Override
+  public String dateFormatMedium() {
+    return "y-MM-dd";
   }
 
   @Override
@@ -71,8 +76,43 @@ public class DateTimeFormatInfoImpl_lt extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthAbbrev() {
+    return "MM";
+  }
+
+  @Override
+  public String formatMonthAbbrevDay() {
+    return "MM-dd";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "MMMM d 'd'.";
+  }
+
+  @Override
+  public String formatMonthFullWeekdayDay() {
+    return "MMMM d 'd'., EEEE";
+  }
+
+  @Override
   public String formatMonthNumDay() {
     return "MM-d";
+  }
+
+  @Override
+  public String formatYearMonthAbbrev() {
+    return "y-MM";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "y-MM-dd";
+  }
+
+  @Override
+  public String formatYearMonthFull() {
+    return "y 'm'. LLLL";
   }
 
   @Override
@@ -81,7 +121,35 @@ public class DateTimeFormatInfoImpl_lt extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatYearMonthNumDay() {
+    return "y-MM-dd";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "y-MM-dd, EEE";
+  }
+
+  @Override
   public String[] monthsFull() {
+    return new String[] {
+        "sausio",
+        "vasario",
+        "kovo",
+        "balandžio",
+        "gegužės",
+        "birželio",
+        "liepos",
+        "rugpjūčio",
+        "rugsėjo",
+        "spalio",
+        "lapkričio",
+        "gruodžio"
+    };
+  }
+
+  @Override
+  public String[] monthsFullStandalone() {
     return new String[] {
         "sausis",
         "vasaris",

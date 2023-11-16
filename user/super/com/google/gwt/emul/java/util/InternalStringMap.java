@@ -15,10 +15,7 @@
  */
 package java.util;
 
-import static java.util.ConcurrentModificationDetector.structureChanged;
-
 import java.util.Map.Entry;
-
 import javaemul.internal.JsUtils;
 
 /**
@@ -56,7 +53,7 @@ class InternalStringMap<K, V> implements Iterable<Entry<K, V>> {
 
     if (JsUtils.isUndefined(oldValue)) {
       size++;
-      structureChanged(host);
+      host.structureChanged();
     } else {
       valueMod++;
     }
@@ -68,7 +65,7 @@ class InternalStringMap<K, V> implements Iterable<Entry<K, V>> {
     if (!JsUtils.isUndefined(value)) {
       backingMap.delete(key);
       size--;
-      structureChanged(host);
+      host.structureChanged();
     } else {
       valueMod++;
     }

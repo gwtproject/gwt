@@ -13,11 +13,7 @@
  */
 package com.google.gwt.emultest.java.lang;
 
-import static com.google.gwt.emultest.java.lang.JsExceptionViolator.createJsException;
-import static com.google.gwt.emultest.java.lang.JsExceptionViolator.getBackingJsObject;
-
 import com.google.gwt.testing.TestUtils;
-
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -43,19 +39,19 @@ public class JsExceptionTest extends ThrowableTestBase {
 
   public void testCatchJava() {
     Object obj = new Object();
-    Exception e = createJsException(obj);
+    Throwable e = createJsException(obj);
     assertJsException(obj, catchJava(createThrower(e)));
   }
 
   public void testCatchNative() {
     Object obj = new Object();
-    Exception e = createJsException(obj);
+    Throwable e = createJsException(obj);
     assertSame(obj, catchNative(createThrower(e)));
   }
 
   public void testCatchNativePropagatedFromFinally() {
     Object obj = new Object();
-    Exception e = createJsException(obj);
+    Throwable e = createJsException(obj);
     assertSame(obj, catchNative(wrapWithFinally(createThrower(e))));
     assertTrue(keepFinallyAlive);
   }
@@ -76,7 +72,7 @@ public class JsExceptionTest extends ThrowableTestBase {
 
   public void testJavaNativeJavaSandwichCatch() {
     Object obj = new Object();
-    Exception e = createJsException(obj);
+    Throwable e = createJsException(obj);
     assertJsException(obj, javaNativeJavaSandwich(e));
   }
 
@@ -126,16 +122,30 @@ public class JsExceptionTest extends ThrowableTestBase {
 
   private static void throwTypeError() {
     Object nullObject = null;
-    nullObject.toString();
+    nullObject.getClass();
   }
 
   @JsType(isNative = true, namespace = "<window>")
   private static class TypeError { }
 
-  protected static void assertTypeError(RuntimeException e) {
+  private static void assertTypeError(RuntimeException e) {
     assertTrue(getBackingJsObject(e) instanceof TypeError);
     assertTrue(e.toString().contains("TypeError"));
   }
+
+  public void testFrozenObject() {
+    try {
+      Object e = new TypeError();
+      freeze(e);
+      throwNative(e);
+      fail();
+    } catch (RuntimeException e) {
+      e = (RuntimeException) javaNativeJavaSandwich(e);
+    }
+  }
+
+  @JsMethod(name = "Object.freeze", namespace = JsPackage.GLOBAL)
+  private static native void freeze(Object o);
 
   public void testSvgError() {
     try {

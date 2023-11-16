@@ -22,14 +22,6 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_de extends DateTimeFormatInfoImpl {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "vorm.",
-        "nachm."
-    };
-  }
-
-  @Override
   public String dateFormatFull() {
     return "EEEE, d. MMMM y";
   }
@@ -47,6 +39,26 @@ public class DateTimeFormatInfoImpl_de extends DateTimeFormatInfoImpl {
   @Override
   public String dateFormatShort() {
     return "dd.MM.yy";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " 'um' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " 'um' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
   }
 
   @Override
@@ -159,7 +171,7 @@ public class DateTimeFormatInfoImpl_de extends DateTimeFormatInfoImpl {
         "Juni",
         "Juli",
         "Aug.",
-        "Sep.",
+        "Sept.",
         "Okt.",
         "Nov.",
         "Dez."

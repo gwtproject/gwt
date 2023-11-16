@@ -41,6 +41,7 @@ public class LocalizedNamesImpl_shi extends LocalizedNamesImpl {
         "EA",
         "EH",
         "EU",
+        "EZ",
         "FO",
         "GG",
         "GS",
@@ -60,6 +61,9 @@ public class LocalizedNamesImpl_shi extends LocalizedNamesImpl {
         "TA",
         "TF",
         "UM",
+        "UN",
+        "XA",
+        "XB",
         "XK",
         "PS",
         "AZ",
@@ -73,7 +77,6 @@ public class LocalizedNamesImpl_shi extends LocalizedNamesImpl {
         "ID",
         "AD",
         "AG",
-        "AN",
         "AR",
         "AM",
         "AW",
@@ -299,7 +302,6 @@ public class LocalizedNamesImpl_shi extends LocalizedNamesImpl {
     namesMap.put("AI", "ⴰⵏⴳⵉⵍⴰ");
     namesMap.put("AL", "ⴰⵍⴱⴰⵏⵢⴰ");
     namesMap.put("AM", "ⴰⵔⵎⵉⵏⵢⴰ");
-    namesMap.put("AN", "ⴰⵏⵜⵉⵢ ⵏ ⵀⵓⵍⴰⵏⴷⴰ");
     namesMap.put("AO", "ⴰⵏⴳⵓⵍⴰ");
     namesMap.put("AR", "ⴰⵔⵊⴰⵏⵜⵉⵏ");
     namesMap.put("AS", "ⵙⴰⵎⵡⴰ ⵜⴰⵎⵉⵔⵉⴽⴰⵏⵉⵜ");
@@ -533,7 +535,6 @@ public class LocalizedNamesImpl_shi extends LocalizedNamesImpl {
         "AI": "ⴰⵏⴳⵉⵍⴰ",
         "AL": "ⴰⵍⴱⴰⵏⵢⴰ",
         "AM": "ⴰⵔⵎⵉⵏⵢⴰ",
-        "AN": "ⴰⵏⵜⵉⵢ ⵏ ⵀⵓⵍⴰⵏⴷⴰ",
         "AO": "ⴰⵏⴳⵓⵍⴰ",
         "AR": "ⴰⵔⵊⴰⵏⵜⵉⵏ",
         "AS": "ⵙⴰⵎⵡⴰ ⵜⴰⵎⵉⵔⵉⴽⴰⵏⵉⵜ",

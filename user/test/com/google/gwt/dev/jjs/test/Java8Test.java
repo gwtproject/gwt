@@ -22,7 +22,7 @@ import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * Dummy test case. Java8Test is super sourced so that GWT can be compiled by Java 6.
+ * Dummy test case. Java8Test was historically super sourced so that GWT can be compiled by Java 6.
  *
  * NOTE: Make sure this class has the same test methods of its supersourced variant.
  */
@@ -109,6 +109,10 @@ public class Java8Test extends GWTTestCase {
   }
 
   public void testSuperReferenceExpression() {
+    assertFalse(isGwtSourceLevel8());
+  }
+
+  public void testQualifiedSuperReferenceExpression() {
     assertFalse(isGwtSourceLevel8());
   }
 
@@ -337,6 +341,18 @@ public class Java8Test extends GWTTestCase {
   }
 
   public void testLambdaBoxing() {
+    assertFalse(isGwtSourceLevel8());
+  }
+
+  public void testImproperMethodResolution() {
+    assertFalse(isGwtSourceLevel8());
+  }
+
+  public void testIntersectionCastLambda() {
+    assertFalse(isGwtSourceLevel8());
+  }
+
+  public void testIntersectionCastMethodReference() {
     assertFalse(isGwtSourceLevel8());
   }
 

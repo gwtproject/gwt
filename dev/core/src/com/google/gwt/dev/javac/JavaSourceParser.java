@@ -123,6 +123,9 @@ public class JavaSourceParser {
   private static List<AbstractMethodDeclaration> findNamedMethods(
       TypeDeclaration type, String name) {
     List<AbstractMethodDeclaration> matching = new ArrayList<AbstractMethodDeclaration>();
+    if (type.methods == null) {
+      return matching;
+    }
     boolean isCtor = "<init>".equals(name);
     char[] nameArray = name.toCharArray();
     for (AbstractMethodDeclaration method : type.methods) {
@@ -163,6 +166,9 @@ public class JavaSourceParser {
    * @return matching type or null if not found
    */
   private static TypeDeclaration findType(TypeDeclaration[] types, char[] name) {
+    if (types == null) {
+      return null;
+    }
     for (TypeDeclaration type : types) {
       if (Arrays.equals(name, type.name)) {
         return type;

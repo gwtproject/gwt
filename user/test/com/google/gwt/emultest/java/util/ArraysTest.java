@@ -299,6 +299,10 @@ public class ArraysTest extends EmulTestBase {
     assertEquals(2, ret);
     ret = Arrays.binarySearch(a3, 1, 4, -71);
     assertEquals(-2, ret);
+
+    assertEquals(-2, Arrays.binarySearch(new float[] {-0.0f}, 0.0f));
+    assertEquals(-2, Arrays.binarySearch(new float[] {0.0f}, Float.NaN));
+    assertEquals(1, Arrays.binarySearch(new float[] {0.0f, Float.NaN}, Float.NaN));
   }
 
   /**
@@ -336,6 +340,10 @@ public class ArraysTest extends EmulTestBase {
     assertEquals(2, ret);
     ret = Arrays.binarySearch(a3, 1, 4, -71);
     assertEquals(-2, ret);
+
+    assertEquals(-2, Arrays.binarySearch(new float[] {-0.0f}, 0.0f));
+    assertEquals(-2, Arrays.binarySearch(new float[] {0.0f}, Float.NaN));
+    assertEquals(1, Arrays.binarySearch(new float[] {0.0f, Float.NaN}, Float.NaN));
   }
 
   /**
@@ -446,6 +454,18 @@ public class ArraysTest extends EmulTestBase {
     assertEquals(2, ret);
     ret = Arrays.binarySearch(a3, 1, 4, "b");
     assertEquals(-2, ret);
+  }
+
+  public void testBinarySearchBoxed() {
+    assertEquals(1, Arrays.binarySearch(new Double[] {-0.0d, -0.0d, -0.0d}, -0.0d));
+    assertEquals(-4, Arrays.binarySearch(new Double[] {-0.0d, -0.0d, -0.0d}, 0.0d));
+    assertEquals(0, Arrays.binarySearch(new Double[] {Double.NaN}, Double.NaN));
+    assertEquals(-2, Arrays.binarySearch(new Double[] {0.0d}, Double.NaN));
+
+    assertEquals(1, Arrays.binarySearch(new Float[] {-0.0f, -0.0f, -0.0f}, -0.0f));
+    assertEquals(-4, Arrays.binarySearch(new Float[] {-0.0f, -0.0f, -0.0f}, 0.0f));
+    assertEquals(0, Arrays.binarySearch(new Float[] {Float.NaN}, Float.NaN));
+    assertEquals(-2, Arrays.binarySearch(new Float[] {0.0f}, Float.NaN));
   }
 
   /**

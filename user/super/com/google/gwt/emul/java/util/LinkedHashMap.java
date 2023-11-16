@@ -15,9 +15,7 @@
  */
 package java.util;
 
-import static java.util.ConcurrentModificationDetector.checkStructuralChange;
-import static java.util.ConcurrentModificationDetector.recordLastKnownStructure;
-
+import static javaemul.internal.InternalPreconditions.checkConcurrentModification;
 import static javaemul.internal.InternalPreconditions.checkCriticalElement;
 import static javaemul.internal.InternalPreconditions.checkState;
 
@@ -93,9 +91,11 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
       // The next entry to return from this iterator.
       private ChainEntry next;
 
+      private int lastModCount;
+
       public EntryIterator() {
         next = head.next;
-        recordLastKnownStructure(map, this);
+        lastModCount = map.modCount;
       }
 
       @Override
@@ -105,7 +105,7 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
 
       @Override
       public Map.Entry<K, V> next() {
-        checkStructuralChange(map, this);
+        checkConcurrentModification(map.modCount, lastModCount);
         checkCriticalElement(hasNext());
 
         last = next;
@@ -116,11 +116,11 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
       @Override
       public void remove() {
         checkState(last != null);
-        checkStructuralChange(map, this);
+        checkConcurrentModification(map.modCount, lastModCount);
 
         last.remove();
         map.remove(last.getKey());
-        recordLastKnownStructure(map, this);
+        lastModCount = map.modCount;
         last = null;
       }
     }

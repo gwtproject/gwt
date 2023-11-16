@@ -109,6 +109,7 @@ public class LocalizedNamesImpl_ig extends LocalizedNamesImpl {
         "ES",
         "ET",
         "EU",
+        "EZ",
         "FI",
         "FJ",
         "FK",
@@ -200,11 +201,11 @@ public class LocalizedNamesImpl_ig extends LocalizedNamesImpl {
         "MY",
         "MZ",
         "NA",
+        "NG",
         "NC",
         "NE",
         "NF",
         "NI",
-        "NG",
         "NL",
         "NO",
         "NP",
@@ -274,6 +275,7 @@ public class LocalizedNamesImpl_ig extends LocalizedNamesImpl {
         "UA",
         "UG",
         "UM",
+        "UN",
         "US",
         "UY",
         "UZ",
@@ -286,6 +288,8 @@ public class LocalizedNamesImpl_ig extends LocalizedNamesImpl {
         "VU",
         "WF",
         "WS",
+        "XA",
+        "XB",
         "XK",
         "YE",
         "YT",
@@ -305,6 +309,7 @@ public class LocalizedNamesImpl_ig extends LocalizedNamesImpl {
     namesMap.put("KM", "Comorosu");
     namesMap.put("LY", "Libyia");
     namesMap.put("MV", "Maldivesa");
+    namesMap.put("NG", "Naịjịrịa");
   }
 
   @Override
@@ -320,7 +325,8 @@ public class LocalizedNamesImpl_ig extends LocalizedNamesImpl {
         "HT": "Hati",
         "KM": "Comorosu",
         "LY": "Libyia",
-        "MV": "Maldivesa"
+        "MV": "Maldivesa",
+        "NG": "Naịjịrịa"
     };
   }-*/;
 }

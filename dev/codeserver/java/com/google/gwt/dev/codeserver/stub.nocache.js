@@ -18,8 +18,6 @@
  * This startup script is used when we run superdevmode from an app server.
  */
 (function($wnd, $doc){
-  // document.head does not exist in IE8
-  var $head = $doc.head || $doc.getElementsByTagName('head')[0];
   // Compute some codeserver urls so as the user does not need bookmarklets
   var hostName = $wnd.location.hostname;
   var serverUrl = 'http://' + hostName + ':__SUPERDEV_PORT__';
@@ -51,7 +49,7 @@
   }
 
   var injectScriptTag = function(){
-    $head.insertBefore(devModeScript, $head.firstElementChild || $head.children[0]);
+    $doc.head.insertBefore(devModeScript, $doc.head.firstElementChild || $doc.head.children[0]);
   };
 
   if (/loaded|complete/.test($doc.readyState)) {

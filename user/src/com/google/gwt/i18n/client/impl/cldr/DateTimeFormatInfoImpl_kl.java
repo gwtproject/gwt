@@ -61,6 +61,16 @@ public class DateTimeFormatInfoImpl_kl extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatHour24Minute() {
+    return "HH.mm";
+  }
+
+  @Override
+  public String formatHour24MinuteSecond() {
+    return "HH.mm.ss";
+  }
+
+  @Override
   public String[] monthsFull() {
     return new String[] {
         "januari",
@@ -118,28 +128,28 @@ public class DateTimeFormatInfoImpl_kl extends DateTimeFormatInfoImpl {
 
   @Override
   public String timeFormatFull() {
-    return "h:mm:ss a zzzz";
+    return "HH.mm.ss zzzz";
   }
 
   @Override
   public String timeFormatLong() {
-    return "h:mm:ss a z";
+    return "HH.mm.ss z";
   }
 
   @Override
   public String timeFormatMedium() {
-    return "h:mm:ss a";
+    return "HH.mm.ss";
   }
 
   @Override
   public String timeFormatShort() {
-    return "h:mm a";
+    return "HH.mm";
   }
 
   @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "sabaat",
+        "sapaat",
         "ataasinngorneq",
         "marlunngorneq",
         "pingasunngorneq",
@@ -165,7 +175,7 @@ public class DateTimeFormatInfoImpl_kl extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "sab",
+        "sap",
         "ata",
         "mar",
         "pin",

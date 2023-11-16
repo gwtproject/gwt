@@ -82,7 +82,7 @@ public class DateTimeFormatInfoImpl_ig extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "d MMM y";
+    return "MMM d, y";
   }
 
   @Override
@@ -102,7 +102,7 @@ public class DateTimeFormatInfoImpl_ig extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d/M/y";
+    return "y-MM-dd";
   }
 
   @Override
@@ -192,26 +192,6 @@ public class DateTimeFormatInfoImpl_ig extends DateTimeFormatInfoImpl {
         "Ọ3",
         "Ọ4"
     };
-  }
-
-  @Override
-  public String timeFormatFull() {
-    return "h:mm:ss a zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "h:mm:ss a z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "h:mm:ss a";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "h:mm a";
   }
 
   @Override

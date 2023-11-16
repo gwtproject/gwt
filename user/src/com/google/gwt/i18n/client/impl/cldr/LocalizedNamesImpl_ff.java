@@ -38,7 +38,6 @@ public class LocalizedNamesImpl_ff extends LocalizedNamesImpl {
         "AI",
         "AO",
         "AG",
-        "AN",
         "AQ",
         "SA",
         "AR",
@@ -101,6 +100,7 @@ public class LocalizedNamesImpl_ff extends LocalizedNamesImpl {
         "ES",
         "EE",
         "EU",
+        "EZ",
         "FR",
         "FI",
         "FJ",
@@ -277,6 +277,7 @@ public class LocalizedNamesImpl_ff extends LocalizedNamesImpl {
         "TV",
         "UA",
         "UM",
+        "UN",
         "UG",
         "UY",
         "UZ",
@@ -284,6 +285,8 @@ public class LocalizedNamesImpl_ff extends LocalizedNamesImpl {
         "VU",
         "VE",
         "VN",
+        "XA",
+        "XB",
         "XK",
         "YE",
     };
@@ -299,7 +302,6 @@ public class LocalizedNamesImpl_ff extends LocalizedNamesImpl {
     namesMap.put("AI", "Anngiyaa");
     namesMap.put("AL", "Albanii");
     namesMap.put("AM", "Armenii");
-    namesMap.put("AN", "Antiiye Nederlanndeeje");
     namesMap.put("AO", "Anngolaa");
     namesMap.put("AR", "Arjantiin");
     namesMap.put("AS", "Samowa Amerik");
@@ -381,7 +383,7 @@ public class LocalizedNamesImpl_ff extends LocalizedNamesImpl {
     namesMap.put("HU", "Onngiri");
     namesMap.put("ID", "Enndonesii");
     namesMap.put("IE", "Irlannda");
-    namesMap.put("IL", "Israa'iila");
+    namesMap.put("IL", "Israa’iila");
     namesMap.put("IN", "Enndo");
     namesMap.put("IO", "Keeriindi britaani to maayo enndo");
     namesMap.put("IQ", "Iraak");
@@ -531,7 +533,6 @@ public class LocalizedNamesImpl_ff extends LocalizedNamesImpl {
         "AI": "Anngiyaa",
         "AL": "Albanii",
         "AM": "Armenii",
-        "AN": "Antiiye Nederlanndeeje",
         "AO": "Anngolaa",
         "AR": "Arjantiin",
         "AS": "Samowa Amerik",
@@ -613,7 +614,7 @@ public class LocalizedNamesImpl_ff extends LocalizedNamesImpl {
         "HU": "Onngiri",
         "ID": "Enndonesii",
         "IE": "Irlannda",
-        "IL": "Israa'iila",
+        "IL": "Israa’iila",
         "IN": "Enndo",
         "IO": "Keeriindi britaani to maayo enndo",
         "IQ": "Iraak",

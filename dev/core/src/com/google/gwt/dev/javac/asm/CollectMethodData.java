@@ -58,7 +58,7 @@ public class CollectMethodData extends MethodVisitor {
   // for new List[]
   public CollectMethodData(CollectClassData.ClassType classType, int access,
       String name, String desc, String signature, String[] exceptions) {
-    super(Opcodes.ASM7);
+    super(Opcodes.ASM9);
     this.access = access;
     this.name = name;
     this.desc = desc;

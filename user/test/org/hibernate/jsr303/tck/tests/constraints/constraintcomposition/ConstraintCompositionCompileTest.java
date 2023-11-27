@@ -46,7 +46,7 @@ public class ConstraintCompositionCompileTest extends TckCompileTestCase {
         Pattern.compile(
             "No \\@org\\.hibernate\\.jsr303\\.tck\\.tests\\.constraints\\.constraintcomposition"
                 + "\\.NotEmpty\\("
-                + "((\\s)*(message=\\{constraint\\.notEmpty\\}|payload=\\[\\]|groups=\\[\\])(,)?){3}"
+                + "((\\s)*(message=\"?\\{constraint\\.notEmpty\\}\"?|payload=(\\[\\]|\\{\\})|groups=(\\[\\]|\\{\\}))(,)?){3}"
                 + "\\) ConstraintValidator for type int"));
   }
 

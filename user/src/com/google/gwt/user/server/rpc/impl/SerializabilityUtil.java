@@ -21,7 +21,6 @@ import com.google.gwt.user.client.rpc.GwtTransient;
 import com.google.gwt.user.client.rpc.SerializationException;
 import com.google.gwt.user.client.rpc.SerializationStreamReader;
 import com.google.gwt.user.client.rpc.SerializationStreamWriter;
-import com.google.gwt.user.server.rpc.RPCServletUtils;
 import com.google.gwt.user.server.rpc.SerializationPolicy;
 import com.google.gwt.user.server.rpc.ServerCustomFieldSerializer;
 
@@ -34,6 +33,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -896,7 +896,7 @@ public class SerializabilityUtil {
 
   private static void generateSerializationSignature(Class<?> instanceType, CRC32 crc,
       SerializationPolicy policy) throws UnsupportedEncodingException {
-    crc.update(getSerializedTypeName(instanceType).getBytes(RPCServletUtils.CHARSET_UTF8));
+    crc.update(getSerializedTypeName(instanceType).getBytes(StandardCharsets.UTF_8));
 
     if (excludeImplementationFromSerializationSignature(instanceType)) {
       return;
@@ -913,7 +913,7 @@ public class SerializabilityUtil {
       }
       Enum<?>[] constants = instanceType.asSubclass(Enum.class).getEnumConstants();
       for (Enum<?> constant : constants) {
-        crc.update(constant.name().getBytes(RPCServletUtils.CHARSET_UTF8));
+        crc.update(constant.name().getBytes(StandardCharsets.UTF_8));
       }
     } else if (!instanceType.isPrimitive()) {
       Field[] fields = applyFieldSerializationPolicy(instanceType, policy);
@@ -925,8 +925,8 @@ public class SerializabilityUtil {
          * generate the signature. Otherwise, use all known fields.
          */
         if ((clientFieldNames == null) || clientFieldNames.contains(field.getName())) {
-          crc.update(field.getName().getBytes(RPCServletUtils.CHARSET_UTF8));
-          crc.update(getSerializedTypeName(field.getType()).getBytes(RPCServletUtils.CHARSET_UTF8));
+          crc.update(field.getName().getBytes(StandardCharsets.UTF_8));
+          crc.update(getSerializedTypeName(field.getType()).getBytes(StandardCharsets.UTF_8));
         }
       }
 

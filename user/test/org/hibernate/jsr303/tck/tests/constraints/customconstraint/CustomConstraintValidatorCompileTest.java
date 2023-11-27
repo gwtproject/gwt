@@ -43,7 +43,7 @@ public class CustomConstraintValidatorCompileTest extends TckCompileTestCase {
         UnexpectedTypeException.class, Pattern.compile(
         "No \\@org\\.hibernate\\.jsr303\\.tck\\.tests\\.constraints\\.customconstraint\\"
             + ".Positive\\("
-            + "((\\s)*(message=\\{validation\\.positive\\}|payload=\\[\\]|groups=\\[\\])(,)?){3}"
+            + "((\\s)*(message=\"?\\{validation\\.positive\\}\"?|payload=(\\[\\]|\\{\\})|groups=(\\[\\]|\\{\\}))(,)?){3}"
             + "\\) ConstraintValidator for type class java\\.lang\\.String"));
   }
 

@@ -170,6 +170,38 @@ public final class Collectors {
         downstream.finisher());
   }
 
+  public static <T, U, A, R> Collector<T, ?, R> flatMapping(Function<? super T,? extends Stream<?
+      extends U>> mapper, Collector<? super U, A, R> downstream) {
+    return new CollectorImpl<>(
+        downstream.supplier(),
+        (A a, T t) -> {
+            Stream<? extends U> stream = mapper.apply(t);
+            if (stream == null) {
+              return;
+            }
+            stream.forEach(u -> {
+              downstream.accumulator().accept(a, u);
+            });
+        },
+        downstream.combiner(),
+        downstream.finisher()
+    );
+  }
+
+  public static <T, A, R> Collector<T, ?, R> filtering(Predicate<? super T> predicate,
+                                                        Collector<? super T, A, R> downstream) {
+    return new CollectorImpl<>(
+        downstream.supplier(),
+        (a, t) -> {
+          if (predicate.test(t)) {
+            downstream.accumulator().accept(a, t);
+          }
+        },
+        downstream.combiner(),
+        downstream.finisher()
+    );
+  }
+
   public static <T> Collector<T,?,Optional<T>> maxBy(Comparator<? super T> comparator) {
     return reducing(BinaryOperator.maxBy(comparator));
   }

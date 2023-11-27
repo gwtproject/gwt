@@ -36,7 +36,7 @@ public class CollectFieldData extends FieldVisitor {
 
   public CollectFieldData(int access, String name, String desc,
       String signature, Object value) {
-    super(Opcodes.ASM7);
+    super(Opcodes.ASM9);
     this.access = access;
     this.name = name;
     this.desc = desc;

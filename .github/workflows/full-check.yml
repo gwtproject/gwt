@@ -1,7 +1,7 @@
-# Run all tests and builds all aspects of GWT using Java 8. Runs nightly (plus
-# or minus timzeones) on the main branch, and will also run right away on a
-# push to a release branch. Release zips are uploaded as part of the build,
-# though maven snapshots are not yet deployed.
+# Run all tests and builds all aspects of GWT using Java 8, 11, and 17. Runs
+# nightly (plus or minus timzeones) on the main branch, and will also run right
+# away on a push to a release branch. Release zips are uploaded as part of the
+# build, though maven snapshots are not yet deployed.
 name: Full build
 on:
   schedule:
@@ -18,6 +18,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java-version: [ '8', '11', '17' ]
     steps:
       - name: Checkout GWT itself into one directory
         uses: actions/checkout@v2
@@ -28,11 +31,11 @@ jobs:
         with:
           repository: 'gwtproject/tools'
           path: 'tools'
-      - name: Set up JDK 8
-        # GWT presently requires Java8 to build, but can run on newer Java versions
+      - name: Set up JDK ${{ matrix.java-version }}
+        # GWT presently requires Java8 to build just the SDK and some tests, or 11 to build everything, but can run on newer Java versions
         uses: actions/setup-java@v3
         with:
-          java-version: '8'
+          java-version: ${{ matrix.java-version }}
           distribution: 'temurin'
 
       - name: Build, style/api checks, test, produce docs
@@ -62,27 +65,27 @@ jobs:
         uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: checkstyle-reports
+          name: checkstyle-reports-java${{ matrix.java-version }}
           path: 'gwt/build/out/**/checkstyle*.xml'
       - name: Upload test xml files for manual review in its own artifact
         uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: junit-reports
+          name: junit-reports-java${{ matrix.java-version }}
           path: 'gwt/build/out/**/test/**/reports/TEST-*.xml'
 
       - name: On success, upload the release zip
         uses: actions/upload-artifact@v2
         with:
-          name: gwt
+          name: gwt-java${{ matrix.java-version }}
           path: 'gwt/build/dist/gwt-*.zip'
 
       - name: Set up sonatype credentials
         # Using the same java version as above, set up a settings.xml file
         uses: actions/setup-java@v3
-        if: github.event_name == 'schedule' && github.repository_owner == 'gwtproject'
+        if: ${{ github.event_name == 'schedule' && github.repository_owner == 'gwtproject' && matrix.java-version == '17' }}
         with:
-          java-version: '8'
+          java-version: ${{ matrix.java-version }}
           distribution: 'temurin'
           # Define the ID for the server to put in settings.xml, and the env vars that will contain the secrets
           server-id: sonatype-snapshots
@@ -90,7 +93,7 @@ jobs:
           server-password: SONATYPE_PASSWORD
 
       - name: Nightly builds should be deployed as snapshots to sonatype
-        if: github.event_name == 'schedule' && github.repository_owner == 'gwtproject'
+        if: ${{ github.event_name == 'schedule' && github.repository_owner == 'gwtproject' && matrix.java-version == '17' }}
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}

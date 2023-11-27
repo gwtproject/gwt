@@ -30,7 +30,6 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.eclipse.jetty.servlets.GzipFilter;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -125,7 +124,7 @@ public class WebServer {
     connector.setReuseAddress(false);
     newServer.addConnector(connector);
 
-    ServletContextHandler newHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
+    ServletContextHandler newHandler = new ServletContextHandler(ServletContextHandler.GZIP);
     newHandler.setContextPath("/");
     newHandler.addServlet(new ServletHolder(new HttpServlet() {
       @Override
@@ -134,7 +133,6 @@ public class WebServer {
         handleRequest(request.getPathInfo(), request, response, logger);
       }
     }), "/*");
-    newHandler.addFilter(GzipFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
     newServer.setHandler(newHandler);
     try {
       newServer.start();

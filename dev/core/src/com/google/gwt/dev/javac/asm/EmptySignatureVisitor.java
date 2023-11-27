@@ -34,7 +34,7 @@ public class EmptySignatureVisitor extends SignatureVisitor {
   protected static EmptySignatureVisitor ignore = new EmptySignatureVisitor();
 
   public EmptySignatureVisitor() {
-    super(Opcodes.ASM7);
+    super(Opcodes.ASM9);
   }
 
   /**

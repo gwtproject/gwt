@@ -28,10 +28,6 @@
 
    `$ ant clean dist-dev`
 
-   or if you don't have `python` and `g++` just run
-
-   `$ ant clean dist-dev`
-
    Then you will get all `.jar` files in the folder `build/lib` and
    the redistributable file will be: `build/dist/gwt-0.0.0.zip`
 
@@ -42,6 +38,8 @@
  - To compile everything including examples you have to run
 
    `$ ant clean dist`
+   
+ - To create maven artifacts (after building .jar using ant), use [following guide](./maven/README.txt).
 
 ### How to verify GWT code conventions:
 

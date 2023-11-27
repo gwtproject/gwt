@@ -28,11 +28,11 @@
 
   <!-- Global Properties -->
   <!--
-  Now that Java8 is the baseline, this property indicates that the build should target the
-  baseline, excluding 11+ tests, etc. This is temporary, to remove Java7 support, but not yet
-  remove the various places that version may matter, while Java 9+ support is pending.
+  Indicate if we are running in Java8, and so cannot run java9+ tests or generate Javadoc.
   -->
-  <property name="isJava8" value="true" />
+  <condition property="isJava8">
+    <equals arg1="${ant.java.version}" arg2="1.8" />
+  </condition>
   <property environment="env"/>
   <condition property="gwt.version" value="${env.GWT_VERSION}" else="0.0.0">
     <isset property="env.GWT_VERSION"/>
@@ -62,8 +62,7 @@
   <property name="javac.debug" value="true"/>
   <property name="javac.debuglevel" value="lines,vars,source"/>
   <property name="javac.encoding" value="utf-8"/>
-  <property name="javac.source" value="8"/>
-  <property name="javac.target" value="8"/>
+  <property name="javac.release" value="8"/>
   <property name="javac.nowarn" value="true"/>
 
   <!-- javac and errorprone instructions from https://errorprone.info/docs/installation#ant -->
@@ -158,8 +157,7 @@
   <macrodef name="gwt.javac">
     <attribute name="srcdir" default="src" />
     <attribute name="destdir" default="${javac.out}" />
-    <attribute name="source" default="${javac.source}" />
-    <attribute name="target" default="${javac.target}" />
+    <attribute name="release" default="${javac.release}" />
     <attribute name="excludes" default="" />
     <attribute name="processorpath" default="" />
     <attribute name="errorprone.args" default="" />
@@ -172,7 +170,7 @@
       </path>
       <mkdir dir="@{destdir}"/>
       <javac srcdir="@{srcdir}" sourcepath="@{srcdir}" destdir="@{destdir}" debug="${javac.debug}"
-             debuglevel="${javac.debuglevel}" source="@{source}" target="@{target}"
+             debuglevel="${javac.debuglevel}" source="@{release}" target="@{release}" release="@{release}"
              nowarn="${javac.nowarn}" encoding="${javac.encoding}" includeantruntime="false"
              fork="true" compiler="modern" excludes="@{excludes}">
         <compilerarg value="-J-Xbootclasspath/p:${errorprone.javac.jar}" if:true="${isJava8}"/>
@@ -251,6 +249,7 @@
         <jvmarg value="-Demma.coverage.out.merge=true"/>
         <jvmarg value="-Dcom.google.gwt.junit.reportPath=reports"/>
         <jvmarg line="@{test.jvmargs}"/>
+        <jvmarg line="--add-opens=java.base/java.lang=ALL-UNNAMED" unless:true="${isJava8}"/>
         <sysproperty key="gwt.args" value="@{test.args}"/>
         <sysproperty key="java.awt.headless" value="true"/>
         <classpath>
@@ -273,6 +272,7 @@
           <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
           <pathelement location="${gwt.tools.lib}/w3c/sac/sac-1.3.jar"/>
           <pathelement location="${gwt.tools.lib}/w3c/flute/flute-1.3-gg2.jar"/>
+          <pathelement location="${gwt.tools.lib}/jaxb/jaxb-api-2.3.3.jar"/>
           <extraclasspaths/>
         </classpath>
 

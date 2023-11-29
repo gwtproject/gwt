@@ -27,26 +27,20 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import org.eclipse.jetty.http.HttpField;
 import org.eclipse.jetty.http.HttpFields;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
-import org.eclipse.jetty.server.HttpConfiguration;
-import org.eclipse.jetty.server.HttpConnectionFactory;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.RequestLog;
 import org.eclipse.jetty.server.Response;
-import org.eclipse.jetty.server.SecureRequestCustomizer;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
-import org.eclipse.jetty.server.SslConnectionFactory;
 import org.eclipse.jetty.server.handler.RequestLogHandler;
 import org.eclipse.jetty.servlet.ErrorPageErrorHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.util.component.AbstractLifeCycle;
 import org.eclipse.jetty.util.log.Log;
-import org.eclipse.jetty.util.log.Logger;
 import org.eclipse.jetty.util.preventers.AppContextLeakPreventer;
 import org.eclipse.jetty.util.preventers.DOMLeakPreventer;
 import org.eclipse.jetty.util.preventers.GCThreadLeakPreventer;
 import org.eclipse.jetty.util.preventers.SecurityProviderLeakPreventer;
-import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.webapp.ClasspathPattern;
 import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
@@ -63,12 +57,17 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
 
 /**
  * A {@link ServletContainerLauncher} for an embedded Jetty server.
+ * <p></p>
+ * @deprecated please migrate to {@link com.google.gwt.dev.shell.StaticResourceServer},
+ * or provide your own implementation.
  */
+@Deprecated
 public class JettyLauncher extends ServletContainerLauncher {
   private static final AtomicBoolean hasLoggedDeprecationWarning = new AtomicBoolean(false);
 
@@ -184,120 +183,15 @@ public class JettyLauncher extends ServletContainerLauncher {
   }
 
   /**
-   * An adapter for the Jetty logging system to GWT's TreeLogger. This
-   * implementation class is only public to allow {@link Log} to instantiate it.
-   *
-   * The weird static data / default construction setup is a game we play with
-   * {@link Log}'s static initializer to prevent the initial log message from
-   * going to stderr.
+   * An adapter for the Jetty logging system to GWT's TreeLogger.
+   * @deprecated use {@link com.google.gwt.dev.shell.jetty.JettyTreeLogger} instead.
    */
-  public static class JettyTreeLogger implements Logger {
-    private final TreeLogger logger;
-
+  @Deprecated
+  public static class JettyTreeLogger extends com.google.gwt.dev.shell.jetty.JettyTreeLogger {
     public JettyTreeLogger(TreeLogger logger) {
-      if (logger == null) {
-        throw new NullPointerException();
-      }
-      this.logger = logger;
-    }
-
-    public void debug(String msg, long arg) {
-      logger.log(TreeLogger.SPAM, format(msg, arg));
-    }
-
-    public void debug(String msg, Object... args) {
-      if (logger.isLoggable(TreeLogger.SPAM)) {
-        logger.log(TreeLogger.SPAM, format(msg, args));
-      }
-    }
-
-    public void debug(String msg, Throwable th) {
-      logger.log(TreeLogger.SPAM, msg, th);
-    }
-
-    public void debug(Throwable th) {
-      logger.log(TreeLogger.SPAM, "", th);
-    }
-
-    public Logger getLogger(String name) {
-      return this;
-    }
-
-    public String getName() {
-      return "";
-    }
-
-    public void info(String msg, Object... args) {
-      if (logger.isLoggable(TreeLogger.TRACE)) {
-        logger.log(TreeLogger.TRACE, format(msg, args));
-      }
-    }
-
-    public void info(String msg, Throwable th) {
-      logger.log(TreeLogger.TRACE, msg, th);
-    }
-
-    public void info(Throwable th) {
-      logger.log(TreeLogger.TRACE, "", th);
-    }
-
-    public boolean isDebugEnabled() {
-      return logger.isLoggable(TreeLogger.SPAM);
-    }
-
-    public void setDebugEnabled(boolean enabled) {
-      // ignored
-    }
-
-    public void warn(String msg, Object... args) {
-      if (logger.isLoggable(TreeLogger.WARN)) {
-        logger.log(TreeLogger.WARN, format(msg, args));
-      }
-    }
-
-    public void warn(String msg, Throwable th) {
-      logger.log(TreeLogger.WARN, msg, th);
-    }
-
-    public void warn(Throwable th) {
-      logger.log(TreeLogger.WARN, "", th);
-    }
-
-    public void ignore(Throwable th) {
-      logger.log(TreeLogger.SPAM, "IGNORE", th);
-    }
-
-    /**
-     * Copied from org.eclipse.log.StdErrLog.
-     */
-    private String format(String msg, Object... args) {
-      if (msg == null) {
-        msg = "";
-        for (int i = 0; i < args.length; i++) {
-          msg += "{} ";
-        }
-      }
-      String braces = "{}";
-      int start = 0;
-      StringBuilder builder = new StringBuilder();
-      for (Object arg : args) {
-        int bracesIndex = msg.indexOf(braces, start);
-        if (bracesIndex < 0) {
-          builder.append(msg.substring(start));
-          builder.append(" ");
-          builder.append(arg);
-          start = msg.length();
-        } else {
-          builder.append(msg.substring(start, bracesIndex));
-          builder.append(String.valueOf(arg));
-          start = bracesIndex + braces.length();
-        }
-      }
-      builder.append(msg.substring(start));
-      return builder.toString();
+      super(logger);
     }
   }
-
   /**
    * The resulting {@link ServletContainer} this is launched.
    */
@@ -625,15 +519,6 @@ public class JettyLauncher extends ServletContainerLauncher {
   }
 
   /**
-   * Represents the type of SSL client certificate authentication desired.
-   */
-  private enum ClientAuth {
-    NONE,
-    WANT,
-    REQUIRE,
-  }
-
-  /**
    * System property to suppress warnings about loading web app classes from the
    * system classpath.
    */
@@ -648,13 +533,7 @@ public class JettyLauncher extends ServletContainerLauncher {
    */
   private static void setupConnector(ServerConnector connector,
       String bindAddress, int port) {
-    if (bindAddress != null) {
-      connector.setHost(bindAddress.toString());
-    }
-    connector.setPort(port);
-
-    // Allow binding to a port even if it's still in state TIME_WAIT.
-    connector.setReuseAddress(true);
+    JettyLauncherUtils.setupConnector(connector, bindAddress, port);
   }
 
   // default value used if setBaseLogLevel isn't called
@@ -662,15 +541,10 @@ public class JettyLauncher extends ServletContainerLauncher {
 
   private String bindAddress = null;
 
-  private ClientAuth clientAuth;
-
-  private String keyStore;
-
-  private String keyStorePassword;
+  private SslConfiguration sslConfig = new SslConfiguration(ClientAuthType.NONE, null, null, false);
 
   private final Object privateInstanceLock = new Object();
 
-  private boolean useSsl;
 
   @Override
   public String getName() {
@@ -679,71 +553,17 @@ public class JettyLauncher extends ServletContainerLauncher {
 
   @Override
   public boolean isSecure() {
-    return useSsl;
+    return sslConfig.isUseSsl();
   }
 
   @Override
   public boolean processArguments(TreeLogger logger, String arguments) {
     if (arguments != null && arguments.length() > 0) {
-      // TODO(jat): better parsing of the args
-      for (String arg : arguments.split(",")) {
-        int equals = arg.indexOf('=');
-        String tag;
-        String value = null;
-        if (equals < 0) {
-          tag = arg;
-        } else {
-          tag = arg.substring(0, equals);
-          value = arg.substring(equals + 1);
-        }
-        if ("ssl".equals(tag)) {
-          useSsl = true;
-          URL keyStoreUrl = getClass().getResource("localhost.keystore");
-          if (keyStoreUrl == null) {
-            logger.log(TreeLogger.ERROR, "Default GWT keystore not found");
-            return false;
-          }
-          keyStore = keyStoreUrl.toExternalForm();
-          keyStorePassword = "localhost";
-        } else if ("keystore".equals(tag)) {
-          useSsl = true;
-          keyStore = value;
-        } else if ("password".equals(tag)) {
-          useSsl = true;
-          keyStorePassword = value;
-        } else if ("pwfile".equals(tag)) {
-          useSsl = true;
-          keyStorePassword = Util.readFileAsString(new File(value));
-          if (keyStorePassword == null) {
-            logger.log(TreeLogger.ERROR,
-                "Unable to read keystore password from '" + value + "'");
-            return false;
-          }
-          keyStorePassword = keyStorePassword.trim();
-        } else if ("clientAuth".equals(tag)) {
-          useSsl = true;
-          try {
-            clientAuth = ClientAuth.valueOf(value);
-          } catch (IllegalArgumentException e) {
-            logger.log(TreeLogger.WARN, "Ignoring invalid clientAuth of '"
-                + value + "'");
-          }
-        } else {
-          logger.log(TreeLogger.ERROR, "Unexpected argument to "
-              + JettyLauncher.class.getSimpleName() + ": " + arg);
-          return false;
-        }
-      }
-      if (useSsl) {
-        if (keyStore == null) {
-          logger.log(TreeLogger.ERROR, "A keystore is required to use SSL");
-          return false;
-        }
-        if (keyStorePassword == null) {
-          logger.log(TreeLogger.ERROR,
-              "A keystore password is required to use SSL");
-          return false;
-        }
+      Optional<SslConfiguration> parsed = SslConfiguration.parseArgs(arguments.split(","), logger);
+      if (parsed.isPresent()) {
+        sslConfig = parsed.get();
+      } else {
+        return false;
       }
     }
     return true;
@@ -856,51 +676,7 @@ public class JettyLauncher extends ServletContainerLauncher {
   }
 
   protected ServerConnector getConnector(Server server, TreeLogger logger) {
-    HttpConfiguration config = defaultConfig();
-    if (useSsl) {
-      TreeLogger sslLogger = logger.branch(TreeLogger.INFO,
-          "Listening for SSL connections");
-      if (sslLogger.isLoggable(TreeLogger.TRACE)) {
-        sslLogger.log(TreeLogger.TRACE, "Using keystore " + keyStore);
-      }
-      SslContextFactory ssl = new SslContextFactory();
-      if (clientAuth != null) {
-        switch (clientAuth) {
-          case NONE:
-            ssl.setWantClientAuth(false);
-            ssl.setNeedClientAuth(false);
-            break;
-          case WANT:
-            sslLogger.log(TreeLogger.TRACE, "Requesting client certificates");
-            ssl.setWantClientAuth(true);
-            ssl.setNeedClientAuth(false);
-            break;
-          case REQUIRE:
-            sslLogger.log(TreeLogger.TRACE, "Requiring client certificates");
-            ssl.setWantClientAuth(true);
-            ssl.setNeedClientAuth(true);
-            break;
-        }
-      }
-      ssl.setKeyStorePath(keyStore);
-      ssl.setTrustStorePath(keyStore);
-      ssl.setKeyStorePassword(keyStorePassword);
-      ssl.setTrustStorePassword(keyStorePassword);
-      config.addCustomizer(new SecureRequestCustomizer());
-      return new ServerConnector(server,
-          null, null, null, 0, 2,
-          new SslConnectionFactory(ssl, "http/1.1"),
-          new HttpConnectionFactory(config));
-    }
-    return new ServerConnector(server, new HttpConnectionFactory(config));
-  }
-
-  protected HttpConfiguration defaultConfig() {
-     HttpConfiguration config = new HttpConfiguration();
-     config.setRequestHeaderSize(16386);
-     config.setSendServerVersion(false);
-     config.setSendDateHeader(true);
-     return config;
+    return JettyLauncherUtils.getConnector(server, sslConfig, logger);
   }
 
   private void addPreventers(Server server) {

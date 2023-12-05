@@ -43,7 +43,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Tests Miscelaneous fixes.
+ * Tests Miscellaneous fixes.
  */
 public class CompilerMiscRegressionTest extends GWTTestCase {
 
@@ -67,11 +67,11 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
 
   /**
    * The array {@code map.get("one")[0]} gets normalized (by {@link ImplementCastsAndTypeChecks}) to
-   * {@code Cast.dynamicCast(map.get("one"), ...)[0]}. The expression resulting from dynamiCast
+   * {@code Cast.dynamicCast(map.get("one"), ...)[0]}. The expression resulting from dynamicCast
    * would have type Object and that would not be a valid type for an array access operation.
    */
   public void testOverridingReturnType() {
-    Map<String, String[]> map = new HashMap();
+    Map<String, String[]> map = new HashMap<>();
     map.put("one", new String[10]);
 
     map.get("one")[0] = "one";
@@ -429,11 +429,11 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
     return ctor();
   }-*/;
 
-  private static native boolean isNan(double number) /*-{
+  private static native boolean jsniIsNan(double number) /*-{
     return @Global::isNan(D)(number);
   }-*/;
 
-  private static native double getNan() /*-{
+  private static native double jsniGetNan() /*-{
     return @Global::Nan;
   }-*/;
 
@@ -453,8 +453,17 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
     assertTrue(nativeArray instanceof NativeArray);
     assertEquals(2, arrayLength(nativeArray));
     assertTrue(newArrayThroughCtorReference() instanceof NativeArray);
-    assertTrue(Double.isNaN(getNan()));
-    assertTrue(isNan(Double.NaN));
+    assertTrue(Double.isNaN(jsniGetNan()));
+    assertTrue(jsniIsNan(Double.NaN));
+  }
+
+  @JsMethod(namespace = "<window>", name = "isNaN")
+  public static native boolean isNaN(double number);
+
+  // Regression tests for issue #9573
+  public void testTopLevelNameClash() {
+    boolean isNaN = isNaN(Global.Nan);
+    assertTrue(isNaN);
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
@@ -466,7 +475,7 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
     }
   }
 
-  public void testOveralyDispatchOnNull() {
+  public void testOverlayDispatchOnNull() {
     // Define a variable where the compiler can not statically determine that it is actually null.
     NativeObjectWithOverlay objectWithOverlay =
         Math.random() > 1000 ? new NativeObjectWithOverlay() : null;

@@ -258,8 +258,7 @@ public class JsniReferenceResolver {
         // method description including actual signature) so that dispatch everywhere is consistent
         // with the one resolved here.
         ident = jsniRef.getResolvedReference();
-        JsNameRef newRef = new JsNameRef(x.getSourceInfo(), ident);
-        newRef.setQualifier(x.getQualifier());
+        JsNameRef newRef = new JsNameRef(x.getSourceInfo(), ident, x.getQualifier());
         ctx.replaceMe(newRef);
       }
       if (binding != null) {

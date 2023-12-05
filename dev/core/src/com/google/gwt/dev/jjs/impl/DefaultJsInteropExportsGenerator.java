@@ -79,8 +79,8 @@ class DefaultJsInteropExportsGenerator implements JsInteropExportsGenerator {
     ensureProvideNamespace(x, null);
 
     // _.memberName = RHS
-    JsNameRef lhs = new JsNameRef(x.getSourceInfo(), x.getJsName());
-    lhs.setQualifier(globalTemp.makeRef(x.getSourceInfo()));
+    JsNameRef lhs = new JsNameRef(x.getSourceInfo(), x.getJsName(),
+            globalTemp.makeRef(x.getSourceInfo()));
     exportStmts.add(createAssignment(lhs, bridgeMethodOrAlias).makeStmt());
   }
 

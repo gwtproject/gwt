@@ -127,8 +127,7 @@ public class CoverageInstrumentor {
   }
 
   private void addBeforeUnloadListener(SourceInfo info) {
-    JsNameRef onbeforeunload = new JsNameRef(info, "onbeforeunload");
-    onbeforeunload.setQualifier(new JsNameRef(info, "window"));
+    JsNameRef onbeforeunload = new JsNameRef(info, "onbeforeunload", new JsNameRef(info, "window"));
     JsNameRef handler = onBeforeUnloadFnName.makeRef(info);
     JsBinaryOperation assignment = new JsBinaryOperation(info, JsBinaryOperator.ASG,
         onbeforeunload, handler);

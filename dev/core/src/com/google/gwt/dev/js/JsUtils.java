@@ -158,9 +158,7 @@ public class JsUtils {
       SourceInfo info, JsExpression base, String... names) {
     JsExpression result = base;
     for (String name : names) {
-      JsNameRef nameRef = new JsNameRef(info, name);
-      nameRef.setQualifier(result);
-      result = nameRef;
+      result = new JsNameRef(info, name, result);
     }
     return result;
   }
@@ -284,8 +282,7 @@ public class JsUtils {
     }
 
     JsArrayLiteral argumentsArray = new JsArrayLiteral(sourceInfo, nonVarargsArguments);
-    JsNameRef argumentsConcat = new JsNameRef(sourceInfo,"concat");
-    argumentsConcat.setQualifier(argumentsArray);
+    JsNameRef argumentsConcat = new JsNameRef(sourceInfo,"concat", argumentsArray);
     return new JsInvocation(sourceInfo, argumentsConcat, varargsArgument);
   }
 

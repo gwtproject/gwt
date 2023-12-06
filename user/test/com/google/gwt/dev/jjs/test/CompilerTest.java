@@ -583,6 +583,9 @@ public class CompilerTest extends GWTTestCase {
     assertFalse(FALSE ? TRUE : false);
     assertFalse(TRUE ? FALSE : true);
     assertTrue(FALSE ? FALSE : true);
+
+    assertEquals("abc", "ab" + (TRUE ? "c" : 'z'));
+    assertEquals("abz", "ab" + (FALSE ? "c" : 'z'));
   }
 
   /**

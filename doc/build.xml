@@ -18,6 +18,8 @@
     <pathelement location="${gwt.root}/user/super" />
     <pathelement location="${gwt.root}/dev/core/src" />
     <pathelement location="${gwt.root}/dev/core/super" />
+    <pathelement location="${project.build}/../user/jakarta-src" />
+    <pathelement location="${project.build}/jakarta-src" />
   </path>
 
   <path id="USER_CLASS_PATH">
@@ -27,6 +29,7 @@
     <pathelement location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA.jar" />
     <pathelement location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA-sources.jar" />
     <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar" />
+    <pathelement location="${gwt.tools.lib}/jakarta-servlet/jakarta.servlet-api-5.0.0/jakarta.servlet-api-5.0.0.jar" />
   </path>
 
   <path id="DOC_PATH">
@@ -35,11 +38,27 @@
     <path refid="USER_SOURCE_PATH" />
   </path>
 
+  <!-- Make an extra copy of this example just for javadocs, so that it can be modified to use jakarta, and the rewriting of the RPC class can point at it -->
+  <target name="jakartaJavadocSources">
+    <copy file="${gwt.root}/user/javadoc/com/google/gwt/examples/rpc/server/AdvancedExample.java" todir="${project.build}/jakarta-src/com/google/gwt/examples/rpc/server/jakarta/" encoding="${javac.encoding}">
+      <filterchain>
+        <tokenfilter>
+          <replacestring from="package com.google.gwt.examples.rpc.server" to="package com.google.gwt.examples.rpc.server.jakarta"/>
+          <replacestring from="com.google.gwt.user.server.rpc.RPC" to="com.google.gwt.user.server.rpc.jakarta.RPC"/>
+          <replacestring from="javax.servlet" to="jakarta.servlet"/>
+        </tokenfilter>
+      </filterchain>
+    </copy>
+  </target>
+
   <!-- Rebuild the javadoc if a source file is newer than the index-->
-  <target name="javadoc">
+  <target name="javadoc" depends="jakartaJavadocSources">
     <outofdate>
       <sourcefiles>
         <fileset file="./src/gwt-user.html" />
+        <fileset dir="${project.build}/../user/jakarta-src">
+          <include name="**/*.java" />
+        </fileset>
         <fileset dir="${gwt.root}/user/src">
           <include name="**/*.java" />
         </fileset>

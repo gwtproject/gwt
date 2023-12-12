@@ -480,7 +480,7 @@ public class JsUtils {
   /**
    * A JavaScript identifier contains only letters, numbers, _, $ and does not begin with a number.
    * There are actually other valid identifiers, such as ones that contain escaped Unicode
-   * characters but we disallow those for the time being.
+   * characters, but we disallow those for the time being.
    */
   public static boolean isValidJsIdentifier(String name) {
     return JAVASCRIPT_VALID_IDENTIFIER_PATTERN.matcher(name).matches();

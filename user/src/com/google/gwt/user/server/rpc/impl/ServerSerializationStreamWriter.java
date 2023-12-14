@@ -503,7 +503,7 @@ public final class ServerSerializationStreamWriter extends
     // We take a guess at how big to make to buffer to avoid numerous resizes.
     //
     int capacityGuess = 2 * tokenListCharCount + 2 * tokenList.size();
-    StringBuffer buffer = new StringBuffer(capacityGuess);
+    StringBuilder buffer = new StringBuilder(capacityGuess);
     writePayload(buffer);
     writeStringTable(buffer);
     writeHeader(buffer);
@@ -744,27 +744,27 @@ public final class ServerSerializationStreamWriter extends
    * Notice that the field are written in reverse order that the client can just
    * pop items out of the stream.
    */
-  private void writeHeader(StringBuffer buffer) {
+  private void writeHeader(StringBuilder buffer) {
     addToken(buffer, getFlags());
     addToken(buffer, getVersion());
   }
 
-  private void writePayload(StringBuffer buffer) {
+  private void writePayload(StringBuilder buffer) {
     ListIterator<String> tokenIterator = tokenList.listIterator(tokenList.size());
     while (tokenIterator.hasPrevious()) {
       addToken(buffer, tokenIterator.previous());
     }
   }
 
-  private void writeStringTable(StringBuffer buffer) {
-    StringBuffer tableBuffer = new StringBuffer();
+  private void writeStringTable(StringBuilder buffer) {
+    StringBuilder tableBuffer = new StringBuilder();
     for (String s : getStringTable()) {
       addEscapedToken(tableBuffer, s);
     }
     addToken(buffer, "[" + tableBuffer + "]");
   }
 
-  public void addToken(StringBuffer buffer, CharSequence token) {
+  public void addToken(StringBuilder buffer, CharSequence token) {
     if (buffer.length() > 0) {
       buffer.append(",");
     }
@@ -772,11 +772,11 @@ public final class ServerSerializationStreamWriter extends
     buffer.append(token);
   }
 
-  public void addEscapedToken(StringBuffer buffer, String token) {
+  public void addEscapedToken(StringBuilder buffer, String token) {
     addToken(buffer, escapeString(token));
   }
 
-  public void addToken(StringBuffer buffer, int i) {
+  public void addToken(StringBuilder buffer, int i) {
     addToken(buffer, String.valueOf(i));
   }
 }

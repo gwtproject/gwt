@@ -321,13 +321,11 @@ public final class ServerSerializationStreamWriter extends
     int i = 0;
     while (i < length) {
 
-      while (i < length) {
-        char c = toEscape.charAt(i++);
-        if (needsUnicodeEscape(c)) {
-          unicodeEscape(c, charVector);
-        } else {
-          charVector.add(c);
-        }
+      char c = toEscape.charAt(i++);
+      if (needsUnicodeEscape(c)) {
+        unicodeEscape(c, charVector);
+      } else {
+        charVector.add(c);
       }
     }
 

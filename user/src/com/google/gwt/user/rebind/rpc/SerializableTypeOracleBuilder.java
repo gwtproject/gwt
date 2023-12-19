@@ -869,6 +869,10 @@ public class SerializableTypeOracleBuilder {
 
       if (tic.maybeEnhanced()
           || (enhancedClasses != null && enhancedClasses.contains(type.getQualifiedSourceName()))) {
+        logger.log(TreeLogger.WARN, "The class " + type.getQualifiedSourceName() + " is both " +
+                "referenced from configuration as rpc.enhancedClasses and has JPA annotations. " +
+                "This makes the server vulnerable to an issue with deserialization of unsafe " +
+                "data. See https://github.com/gwtproject/gwt/issues/9709 for more information.");
         type.setEnhanced();
       }
     }

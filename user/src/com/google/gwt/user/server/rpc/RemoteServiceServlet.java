@@ -98,12 +98,12 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
                 null);
             if (serializationPolicy.hasClientFields()) {
               if (ENABLE_ENHANCED_CLASSES) {
-                servlet.log("WARNING: Enhanced JPA client fields are in use for this " +
-                        "application. See https://github.com/gwtproject/gwt/issues/9709 for " +
-                        "more detail. on the vulnerability that this presents.");
+                servlet.log("WARNING: Service deserializes enhanced JPA/JDO classes, which is " +
+                        "unsafe. See https://github.com/gwtproject/gwt/issues/9709 for more " +
+                        "detail on the vulnerability that this presents.");
               } else {
-                servlet.log("ERROR: Service uses enhanced classes, which are unsafe. Review " +
-                        "build logs to see where this can be fixed, or set " +
+                servlet.log("ERROR: Service deserializes enhanced JPA/JDO classes, which is " +
+                        "unsafe. Review build logs to see which classes are affected, or set " +
                         ENABLE_GWT_ENHANCED_CLASSES_PROPERTY + " to true to allow using this " +
                         "service. See https://github.com/gwtproject/gwt/issues/9709 for more " +
                         "detail.");

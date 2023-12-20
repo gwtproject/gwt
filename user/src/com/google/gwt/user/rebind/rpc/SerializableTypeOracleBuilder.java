@@ -320,7 +320,7 @@ public class SerializableTypeOracleBuilder {
       JPA_ENTITY_ANNOTATION =
           Class.forName("javax.persistence.Entity").asSubclass(Annotation.class);
     } catch (ClassNotFoundException e) {
-      // Ignore, JPA_ENTITY_CAPABLE_ANNOTATION will be null
+      // Ignore, JPA_ENTITY_CAPABLE_ANNOTATION will be null
     }
   }
 
@@ -869,10 +869,11 @@ public class SerializableTypeOracleBuilder {
 
       if (tic.maybeEnhanced()
           || (enhancedClasses != null && enhancedClasses.contains(type.getQualifiedSourceName()))) {
-        logger.log(TreeLogger.WARN, "The class " + type.getQualifiedSourceName() + " is both " +
-                "referenced from configuration as rpc.enhancedClasses and has JPA annotations. " +
-                "This makes the server vulnerable to an issue with deserialization of unsafe " +
-                "data. See https://github.com/gwtproject/gwt/issues/9709 for more information.");
+        logger.log(TreeLogger.WARN, "The class " + type.getQualifiedSourceName() + " has JPA " +
+                "annotations or is explicitly configured as an enhanced class using the " +
+                "configuration property rpc.enhancedClasses. This makes the server vulnerable " +
+                "to an issue with deserialization of unsafe data. See " +
+                "https://github.com/gwtproject/gwt/issues/9709 for more information.");
         type.setEnhanced();
       }
     }

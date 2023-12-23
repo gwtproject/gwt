@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.gwtproject.web.bindery</groupId>
+        <artifactId>requestfactory</artifactId>
+        <version>${gwtVersion}</version>
+    </parent>
+    <groupId>org.gwtproject.web.bindery</groupId>
+    <artifactId>requestfactory-server-jakarta</artifactId>
+    <packaging>jar</packaging>
+    <version>${gwtVersion}</version>
+    <dependencies>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <!-- Used for source-mapping in stacktrace deobfuscation for logging -->
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+</project>

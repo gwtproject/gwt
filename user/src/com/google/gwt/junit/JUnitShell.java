@@ -17,7 +17,6 @@ package com.google.gwt.junit;
 
 import com.google.gwt.core.ext.Linker;
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.impl.StandardLinkerContext;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -1092,7 +1091,8 @@ public class JUnitShell extends DevMode {
     try {
       success = Compiler.compile(getTopLogger(), options, module);
     } catch (Exception e) {
-      getTopLogger().log(Type.ERROR, "Compiler aborted with an exception ", e);
+      // noinspection ThrowableNotThrown
+      CompilationProblemReporter.logAndTranslateException(getTopLogger(), e);
     }
     if (!success) {
       throw new UnableToCompleteException();

@@ -93,15 +93,21 @@ function __MODULE_FUNC__() {
     ,markerId = "__gwt_marker___MODULE_NAME__"
     ,markerScript;
 
-    $doc.write('<script id="' + markerId + '"></script>');
-    markerScript = $doc.getElementById(markerId);
+    if ($doc.currentScript) {
+      // document.currentScript is not supported by IE 11.
+      thisScript = $doc.currentScript;
+    } else {
+      // may fail in extension or anywhere else with inability to use document.write
+      $doc.write('<script id="' + markerId + '"></script>');
+      markerScript = $doc.getElementById(markerId);
 
-    // Our script element is assumed to be the closest previous script element
-    // to the marker, so start at the marker and walk backwards until we find
-    // a script.
-    thisScript = markerScript && markerScript.previousSibling;
-    while (thisScript && thisScript.tagName != 'SCRIPT') {
-      thisScript = thisScript.previousSibling;
+      // Our script element is assumed to be the closest previous script element
+      // to the marker, so start at the marker and walk backwards until we find
+      // a script.
+      thisScript = markerScript && markerScript.previousSibling;
+      while (thisScript && thisScript.tagName != 'SCRIPT') {
+        thisScript = thisScript.previousSibling;
+      }
     }
 
     // Gets the part of a url up to and including the 'path' portion.

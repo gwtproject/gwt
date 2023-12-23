@@ -21,17 +21,24 @@
   <!-- Build a jar file containing a subset of requestfactory -->
   <macrodef name="requestfactory-jar">
     <!--
-         "target" should be one of {client,server,all}[(+|-)src] or test[-src].
+         "target" should be one of {client,server,all,apt}[(+|-)src] or test[-src].
          -src includes .java files only, +src includes .java and .class files
     -->
     <attribute name="target" default="client"/>
+    <!--
+         "main" defaults to the javax.servlet extractor type, but should be set to
+         the jakarta variant to correctly package jakarta server .class and .java
+         files.
+     -->
+    <attribute name="main" default="com.google.web.bindery.requestfactory.server.RequestFactoryJarExtractor" />
     <sequential>
-      <java failonerror="true" fork="true"
-            classname="com.google.web.bindery.requestfactory.server.RequestFactoryJarExtractor">
+      <java failonerror="true" fork="true" classname="@{main}">
         <classpath>
           <fileset dir="${gwt.build.lib}" includes="gwt-user.jar,gwt-dev.jar" />
+          <pathelement location="${gwt.tools.lib}/jakarta-servlet/jakarta.servlet-api-5.0.0/jakarta.servlet-api-5.0.0.jar" />
           <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar" />
           <pathelement path="${gwt.build.out}/user/bin" />
+          <pathelement path="${gwt.build.out}/user/bin-jakarta" />
           <pathelement path="${gwt.build.out}/dev/bin-test" />
           <pathelement path="${gwt.build.out}/user/bin-test" />
         </classpath>
@@ -81,6 +88,18 @@
     <requestfactory-jar target="server+src"/>
   </target>
 
+  <target name="requestfactory-server-jakarta" description="Build RequestFactory server jar for jakarta.servlet">
+    <requestfactory-jar target="server-jakarta" main="com.google.web.bindery.requestfactory.server.jakarta.RequestFactoryJarExtractor"/>
+  </target>
+
+  <target name="requestfactory-server-jakarta-src" description="Build RequestFactory server source jar for jakarta.servlet">
+    <requestfactory-jar target="server-jakarta-src" main="com.google.web.bindery.requestfactory.server.jakarta.RequestFactoryJarExtractor"/>
+  </target>
+
+  <target name="requestfactory-server-jakarta+src" description="Build RequestFactory server source/class jar for jakarta.servlet">
+    <requestfactory-jar target="server-jakarta+src" main="com.google.web.bindery.requestfactory.server.jakarta.RequestFactoryJarExtractor"/>
+  </target>
+
   <!-- This target requires classes from ../build/{dev,user}/bin-test -->
   <target name="requestfactory-test"
           unless="test.requestfactory.disable"
@@ -93,7 +112,7 @@
   <target name="clientjars" depends="requestfactory-apt,requestfactory-apt-src,requestfactory-client,requestfactory-client-src,requestfactory-client+src" description="Build requestfactory client jars" />
 
   <!-- Build all server jars -->
-  <target name="serverjars" depends="requestfactory-server,requestfactory-server-src,requestfactory-server+src" description="Build requestfactory server jars" />
+  <target name="serverjars" depends="requestfactory-server,requestfactory-server-src,requestfactory-server+src,requestfactory-server-jakarta,requestfactory-server-jakarta-src,requestfactory-server-jakarta+src" description="Build requestfactory server jars" />
 
   <!-- Default target, build client and server jars.
        Assumes the 'user' target has been built in the trunk directory

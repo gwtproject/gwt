@@ -82,4 +82,14 @@ public abstract class SerializationPolicy {
    */
   public abstract void validateSerialize(Class<?> clazz)
       throws SerializationException;
+
+  /**
+   * Returns true if there may be any unsafe client fields in the serialization policy. The default
+   * implementation returns true to ensure that custom implementations validate accordingly.
+   *
+   * @return true if the client may send unsafely serialized data, false otherwise
+   */
+  public boolean hasClientFields() {
+    return true;
+  }
 }

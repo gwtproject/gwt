@@ -38,13 +38,13 @@ public class CollectorsTest extends EmulTestBase {
     try {
       c.remove(existingSample);
       return false;
-    } catch (Exception ignore) {
+    } catch (UnsupportedOperationException ignore) {
       // expected
     }
     try {
       c.add(newSample);
       return false;
-    } catch (Exception ignore) {
+    } catch (UnsupportedOperationException ignore) {
       // expected
     }
     Iterator<T> itr = c.iterator();
@@ -52,23 +52,19 @@ public class CollectorsTest extends EmulTestBase {
     try {
       itr.remove();
       return false;
-    } catch (Exception e) {
+    } catch (UnsupportedOperationException e) {
       // expected
     }
     return true;
   }
 
   public void testToUnmodifiableList() {
-    applyItems(List.of("a", "b"), toUnmodifiableList(), "a", "b", (a, b) -> {
-      if (!a.equals(b)) {
+    applyItems(List.of("a", "b"), toUnmodifiableList(), "a", "b", (expected, actual) -> {
+      if (!expected.equals(actual)) {
         return false;
       }
 
-      // check both, so it is obvious we got the right one
-      if (!unmodifiableCollection(a, "a", "z")) {
-        return false;
-      }
-      if (!unmodifiableCollection(b, "a", "z")) {
+      if (!unmodifiableCollection(actual, "a", "z")) {
         return false;
       }
 
@@ -87,23 +83,20 @@ public class CollectorsTest extends EmulTestBase {
   public void testToUnmodifiableMap() {
     // verify simple cases copy all values and results are unmodifiable
     applyItems(Map.of("a", 0, "b", 1), toUnmodifiableMap(Function.identity(),
-        k -> k.charAt(0) - 'a'), "a", "b", (a, b) -> {
-      if (!a.equals(b)) {
+        k -> k.charAt(0) - 'a'), "a", "b", (expected, actual) -> {
+      if (!expected.equals(actual)) {
         return false;
       }
 
-      // check both, so it is obvious we got the right one
-      if (!unmodifiableMap(a, "a", 0, "z", 100)) {
-        return false;
-      }
-      if (!unmodifiableMap(b, "a", 0, "z", 100)) {
+      if (!unmodifiableMap(actual, "a", 0, "z", 100)) {
         return false;
       }
 
       return true;
     });
 
-    // verify merge works with only one key (but this is just passing through to the toMap func anyway...)
+    // verify merge works with only one key (but this is just passing through to the toMap func
+    // anyway...)
     applyItems(Map.of("a", 2), toUnmodifiableMap(Function.identity(), ignore -> 1, Integer::sum),
         "a", "a");
 
@@ -123,7 +116,7 @@ public class CollectorsTest extends EmulTestBase {
   }
 
   private <K, V> boolean unmodifiableMap(Map<K, V> a, K existingKey, V existingValue, K newKey,
-                                         V newValue) {
+      V newValue) {
     if (!unmodifiableCollection(a.keySet(), existingKey, newKey)) {
       return false;
     }
@@ -148,14 +141,11 @@ public class CollectorsTest extends EmulTestBase {
   }
 
   public void testToUnmodifiableSet() {
-    applyItems(Set.of("a", "b"), toUnmodifiableSet(), "a", "b", (a, b) -> {
-      if (!a.equals(b)) {
+    applyItems(Set.of("a", "b"), toUnmodifiableSet(), "a", "b", (expected, actual) -> {
+      if (!expected.equals(actual)) {
         return false;
       }
-      if (!unmodifiableCollection(a, "a", "z")) {
-        return false;
-      }
-      if (!unmodifiableCollection(b, "a", "z")) {
+      if (!unmodifiableCollection(actual, "a", "z")) {
         return false;
       }
       return true;

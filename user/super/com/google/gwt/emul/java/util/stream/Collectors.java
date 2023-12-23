@@ -364,17 +364,19 @@ public final class Collectors {
     return toMap(keyMapper, valueMapper, mergeFunction, HashMap::new);
   }
 
-  public static <T, K, U> Collector<T, ?, Map<K, U>> toUnmodifiableMap(Function<? super T, ?
-      extends K> keyMapper, Function<? super T, ? extends U> valueMapper) {
+  public static <T, K, U> Collector<T, ?, Map<K, U>> toUnmodifiableMap(
+      Function<? super T, ? extends K> keyMapper,
+      Function<? super T, ? extends U> valueMapper) {
     return collectingAndThen(
             toMap(disallowNulls(keyMapper), disallowNulls(valueMapper)),
             Collections::unmodifiableMap
     );
   }
 
-  public static <T, K, U> Collector<T, ?, Map<K, U>> toUnmodifiableMap(Function<? super T, ?
-      extends K> keyMapper, Function<? super T, ? extends U> valueMapper, BinaryOperator<U>
-                                                                            mergeFunction) {
+  public static <T, K, U> Collector<T, ?, Map<K, U>> toUnmodifiableMap(
+      Function<? super T, ? extends K> keyMapper,
+      Function<? super T, ? extends U> valueMapper,
+      BinaryOperator<U> mergeFunction) {
     return collectingAndThen(
             toMap(disallowNulls(keyMapper), disallowNulls(valueMapper), mergeFunction),
             Collections::unmodifiableMap

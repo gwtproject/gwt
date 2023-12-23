@@ -174,4 +174,9 @@ public class LegacySerializationPolicy extends SerializationPolicy implements
     }
     return SerializabilityUtil.hasCustomFieldSerializer(clazz) != null;
   }
+
+  @Override
+  public boolean hasClientFields() {
+    return false;
+  }
 }

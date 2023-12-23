@@ -131,6 +131,11 @@ public class StandardSerializationPolicy extends SerializationPolicy implements
     return fieldNames == null ? null : Collections.unmodifiableSet(fieldNames);
   }
 
+  @Override
+  public boolean hasClientFields() {
+    return clientFields != null && !clientFields.isEmpty();
+  }
+
   public final String getTypeIdForClass(Class<?> clazz)
       throws SerializationException {
     return typeIds.get(clazz);

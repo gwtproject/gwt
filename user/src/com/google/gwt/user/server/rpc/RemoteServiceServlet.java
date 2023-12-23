@@ -16,6 +16,8 @@
 package com.google.gwt.user.server.rpc;
 
 import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADER;
+import static com.google.gwt.user.server.rpc.SerializationPolicyLoader.ENABLE_ENHANCED_CLASSES;
+import static com.google.gwt.user.server.rpc.SerializationPolicyLoader.ENABLE_GWT_ENHANCED_CLASSES_PROPERTY;
 
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.gwt.user.client.rpc.RpcTokenException;
@@ -94,6 +96,20 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
           try {
             serializationPolicy = SerializationPolicyLoader.loadFromStream(is,
                 null);
+            if (serializationPolicy.hasClientFields()) {
+              if (ENABLE_ENHANCED_CLASSES) {
+                servlet.log("WARNING: Service deserializes enhanced JPA/JDO classes, which is " +
+                        "unsafe. See https://github.com/gwtproject/gwt/issues/9709 for more " +
+                        "detail on the vulnerability that this presents.");
+              } else {
+                servlet.log("ERROR: Service deserializes enhanced JPA/JDO classes, which is " +
+                        "unsafe. Review build logs to see which classes are affected, or set " +
+                        ENABLE_GWT_ENHANCED_CLASSES_PROPERTY + " to true to allow using this " +
+                        "service. See https://github.com/gwtproject/gwt/issues/9709 for more " +
+                        "detail.");
+                serializationPolicy = null;
+              }
+            }
           } catch (ParseException e) {
             servlet.log("ERROR: Failed to parse the policy file '"
                 + serializationPolicyFilePath + "'", e);

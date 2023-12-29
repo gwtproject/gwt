@@ -248,6 +248,7 @@ public class JUnitShell extends DevMode {
        * ----- Options from DevMode -------
        */
       // Hard code the server.
+      JettyLauncher.suppressDeprecationWarningForTests();
       options.setServletContainerLauncher(shell.new MyJettyLauncher());
       // DISABLE: ArgHandlerStartupURLs
       registerHandler(new ArgHandlerWarDir(options) {

@@ -456,6 +456,10 @@ public final class WebAppCreator {
   }
 
   public static void main(String[] args) {
+    System.err.println("WebAppCreator is deprecated - please refer to " +
+            "https://www.gwtproject.org/gettingstarted.html for other ways to create a new " +
+            "application with GWT, including with Maven archetypes. These encourage better " +
+            "separation of classpaths, and do not need IDE-specific setup.");
     System.exit(doMain(args) ? 0 : 1);
   }
 

@@ -22,7 +22,7 @@
     </licenses>
     <properties>
       <jetty.version>9.4.44.v20210927</jetty.version>
-      <asm.version>9.2</asm.version>
+      <asm.version>9.6</asm.version>
     </properties>
     <dependencyManagement>
         <dependencies>

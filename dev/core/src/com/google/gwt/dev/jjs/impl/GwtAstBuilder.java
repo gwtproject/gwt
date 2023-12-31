@@ -537,13 +537,25 @@ public class GwtAstBuilder {
 
     @Override
     public void endVisit(CaseStatement x, BlockScope scope) {
+      if(x.isExpr){
+        InternalCompilerException excption =
+            new InternalCompilerException("Switch expressions not yet supported");
+        excption.addNode(new JCaseStatement(makeSourceInfo(x), null));
+        throw excption;
+      }
       try {
         SourceInfo info = makeSourceInfo(x);
-        JExpression caseExpression = pop(x.constantExpression);
-        if (caseExpression != null && x.constantExpression.resolvedType.isEnum()) {
-          caseExpression = synthesizeCallToOrdinal(scope, info, caseExpression);
+        if (x.constantExpressions == null) {
+          push(new JCaseStatement(info, null));
+        } else {
+          for (Expression constantExpression : x.constantExpressions) {
+            JExpression caseExpression = pop(constantExpression);
+            if (caseExpression != null && caseExpression.getType().isEnumOrSubclass() != null) {
+              caseExpression = synthesizeCallToOrdinal(scope, info, caseExpression);
+            }
+            push(new JCaseStatement(info, caseExpression));
+          }
         }
-        push(new JCaseStatement(info, caseExpression));
       } catch (Throwable e) {
         throw translateException(x, e);
       }

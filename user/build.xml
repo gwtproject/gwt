@@ -373,8 +373,6 @@
       <fileset dir="src" excludes="**/package.html"/>
       <fileset dir="super" excludes="**/package.html"/>
       <fileset dir="${javac.out}"/>
-      <!-- Copy jakarta-only sources as well, as gwt-user's sources are used for all other jars as well -->
-      <fileset dir="${project.build}/jakarta-src" />
       <zipfileset src="${gwt.tools.lib}/tomcat/tomcat-servlet-api-8.0.28.jar"
                   excludes="**/*.java"/>
       <zipfileset src="${gwt.tools.lib}/w3c/sac/sac-1.3.jar"/>

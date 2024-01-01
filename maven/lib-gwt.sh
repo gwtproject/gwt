@@ -115,14 +115,10 @@ function maven-gwt() {
     gwtPomFile=$pomDir/gwt/gwt-$i/pom.xml
     SOURCES_FILE=gwt-${i}-sources.jar
     SOURCES_PATH_FILE=$GWT_EXTRACT_DIR/$SOURCES_FILE
-    # If there are no sources, use gwt-user sources.
-    # This is a bit hacky but Sonatype requires a
-    # source jar for Central, and lack of sources
-    # should only happen for gwt-servlet and
-    # gwt-servlet-jakarta, which are basically a
-    # subset of gwt-user.
+    # If there are no sources, fail, this is a requirement of maven central
     if [ ! -f $SOURCES_PATH_FILE ]; then
-      SOURCES_PATH_FILE=$GWT_EXTRACT_DIR/gwt-user-sources.jar
+      echo "ERROR: sources jar not found for $i"
+      exit 1
     fi
 
     maven-deploy-file $mavenRepoUrl $mavenRepoId "$CUR_FILE" $gwtPomFile "$JAVADOC_FILE_PATH" "$SOURCES_PATH_FILE" || die

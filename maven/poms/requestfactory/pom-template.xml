@@ -53,11 +53,6 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.google.web.bindery</groupId>
-                <artifactId>requestfactory-server-jakarta</artifactId>
-                <version>2.10.0</version>
-            </dependency>
-            <dependency>
                 <groupId>org.gwtproject.web.bindery</groupId>
                 <artifactId>requestfactory-server-jakarta</artifactId>
                 <version>${project.version}</version>

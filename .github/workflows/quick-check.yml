@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java-version: ['11', '17']
+        java-version: ['11', '17', '21']
     steps:
       - name: Checkout GWT itself into one directory
         uses: actions/checkout@v4
@@ -44,8 +44,8 @@ jobs:
             ANT_OPTS=-Xmx2g
           ant clean dist doc checkstyle apicheck
 
-      - name: Create pull request comments/annotations for checkstyle from the java 17 build, even on failure
-        if: ${{ always() && github.event_name == 'pull_request' && matrix.java-version == '17' }}
+      - name: Create pull request comments/annotations for checkstyle from the java 21 build, even on failure
+        if: ${{ always() && github.event_name == 'pull_request' && matrix.java-version == '21' }}
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -58,7 +58,7 @@ jobs:
           done
       - name: Upload checkstyle xml for manual review
         uses: actions/upload-artifact@v4
-        if: ${{ matrix.java-version == '17' }}
+        if: ${{ matrix.java-version == '21' }}
         with:
           name: checkstyle-reports-java${{ matrix.java-version }}
           path: 'gwt/build/out/**/checkstyle*.xml'

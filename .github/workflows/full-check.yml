@@ -1,4 +1,4 @@
-# Run all tests and builds all aspects of GWT using Java 11 and 17. Runs
+# Run all tests and builds all aspects of GWT using Java 8, 11, and 17. Runs
 # nightly (plus or minus timzeones) on the main branch, and will also run right
 # away on a push to a release branch. Release zips are uploaded as part of the
 # build, though maven snapshots are not yet deployed.
@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java-version: [ '11', '17' ]
+        java-version: [ '11', '17', '21' ]
     steps:
       - name: Checkout GWT itself into one directory
         uses: actions/checkout@v4
@@ -83,7 +83,7 @@ jobs:
       - name: Set up sonatype credentials
         # Using the same java version as above, set up a settings.xml file
         uses: actions/setup-java@v4
-        if: ${{ github.event_name == 'schedule' && github.repository_owner == 'gwtproject' && matrix.java-version == '17' }}
+        if: ${{ github.event_name == 'schedule' && github.repository_owner == 'gwtproject' && matrix.java-version == '21' }}
         with:
           java-version: ${{ matrix.java-version }}
           distribution: 'temurin'
@@ -93,7 +93,7 @@ jobs:
           server-password: SONATYPE_PASSWORD
 
       - name: Nightly builds should be deployed as snapshots to sonatype
-        if: ${{ github.event_name == 'schedule' && github.repository_owner == 'gwtproject' && matrix.java-version == '17' }}
+        if: ${{ github.event_name == 'schedule' && github.repository_owner == 'gwtproject' && matrix.java-version == '21' }}
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}

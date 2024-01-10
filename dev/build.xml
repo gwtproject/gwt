@@ -216,6 +216,7 @@
                                     -Xep:FallThrough:OFF
                                     -Xep:ReturnValueIgnored:OFF
                                     -Xep:EqualsIncompatibleType:OFF
+                                    -Xep:ReturnValueIgnored:OFF
                                   ">
       <include name="com/google/gwt/core/ext/**"/>
       <include name="com/google/gwt/core/linker/**"/>

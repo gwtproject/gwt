@@ -90,7 +90,7 @@
   </target>
 
   <!-- Really rebuild the javadoc -->
-  <target name="makeJavadoc" unless="isJava8">
+  <target name="makeJavadoc">
     <java classpathref="DOC_PATH" classname="com.google.doctool.custom.FindPackages" fork="yes" failonerror="true">
       <arg value="${gwt.root}" />
     </java>
@@ -124,7 +124,7 @@
     </javadoc>
   </target>
 
-  <target name="emul-doc" unless="isJava8">
+  <target name="emul-doc">
     <outofdate>
       <sourcefiles>
         <fileset dir="${gwt.root}/user/super/com/google/gwt/emul">

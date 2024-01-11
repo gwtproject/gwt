@@ -123,6 +123,7 @@ public abstract class DefaultSelectionModel<T> extends AbstractSelectionModel<T>
     return output;
   }
 
+  @SuppressWarnings("BoxedPrimitiveEquality")
   private void resolveChanges() {
     boolean changed = false;
     for (Map.Entry<Object, SelectionChange<T>> entry : selectionChanges.entrySet()) {

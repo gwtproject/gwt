@@ -651,6 +651,7 @@ public class StringTest extends GWTTestCase {
     }
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testRegionMatches() {
     String test = String.valueOf(new char[] {'a', 'b', 'c', 'd', 'e', 'f'});
     assertTrue(test.regionMatches(1, "bcd", 0, 3));

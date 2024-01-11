@@ -22,15 +22,7 @@
 
   <target name="compile.tests" depends="build, compile.emma.if.enabled, build.alldeps.jar"
           description="Compiles the test code for this project">
-    <gwt.javac srcdir="" destdir="${javac.junit.out}" errorprone.args="
-                                                         -Xep:MissingCasesInEnumSwitch:OFF
-                                                         -Xep:FallThrough:OFF
-                                                         -Xep:ReturnValueIgnored:OFF
-                                                         -Xep:EqualsIncompatibleType:OFF
-                                                         -Xep:SelfComparison:OFF
-                                                         -Xep:SelfEquals:OFF
-                                                         -Xep:ComparableType:OFF
-                                                       ">
+    <gwt.javac srcdir="" destdir="${javac.junit.out}">
         <src path="core/src"/>
         <src path="core/test"/>
       <classpath>
@@ -40,13 +32,7 @@
       </classpath>
     </gwt.javac>
     <gwt.javac srcdir="" destdir="${javac.junit.out}"
-               excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java"
-               errorprone.args="
-                 -Xep:MissingCasesInEnumSwitch:OFF
-                 -Xep:FallThrough:OFF
-                 -Xep:ReturnValueIgnored:OFF
-                 -Xep:EqualsIncompatibleType:OFF
-               ">
+               excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java">
       <src path="${gwt.root}/user/src" />
       <src path="${gwt.root}/user/super/com/google/gwt/emul/javaemul/internal"/>
       <classpath>
@@ -211,13 +197,7 @@
           description="Validates that the standalone gwt-compiler project can build.">
     <mkdir dir="${javac.out}"/>
     <gwt.javac srcdir="core/super" excludes="com/google/gwt/dev/jjs/intrinsic/"/>
-    <gwt.javac srcdir="core/src" errorprone.args="
-                                    -Xep:MissingCasesInEnumSwitch:OFF
-                                    -Xep:FallThrough:OFF
-                                    -Xep:ReturnValueIgnored:OFF
-                                    -Xep:EqualsIncompatibleType:OFF
-                                    -Xep:ReturnValueIgnored:OFF
-                                  ">
+    <gwt.javac srcdir="core/src">
       <include name="com/google/gwt/core/ext/**"/>
       <include name="com/google/gwt/core/linker/**"/>
       <include name="com/google/gwt/dev/About.java"/>
@@ -260,12 +240,7 @@
 
   <target name="compile" depends="compiler.standalone, build.alldeps.jar"
           description="Compiles this project">
-    <gwt.javac srcdir="core/src" excludes="${filter.pattern}" errorprone.args="
-                                                                 -Xep:MissingCasesInEnumSwitch:OFF
-                                                                 -Xep:FallThrough:OFF
-                                                                 -Xep:ReturnValueIgnored:OFF
-                                                                 -Xep:EqualsIncompatibleType:OFF
-                                                               ">
+    <gwt.javac srcdir="core/src" excludes="${filter.pattern}">
       <classpath>
         <pathelement location="${alldeps.jar}"/>
       </classpath>

@@ -588,6 +588,7 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    *
    * @see java.util.Set#contains(Object)
    */
+  @SuppressWarnings("ReturnValueIgnored")
   public void testContains_throwsClassCastException() {
     Set<E> set = createSet();
     set.add(getKeys()[0]);

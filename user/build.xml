@@ -2,7 +2,7 @@
   <property name="gwt.root" location=".."/>
   <property name="project.tail" value="user"/>
   <property name="test.args" value="-ea -sourceLevel auto"/>
-  <property name="test.jvmargs" value="-ea"/>
+  <property name="test.jvmargs" value="-ea -noverify"/>
 
   <!-- support old variables names -->
   <condition property="gwt.hosts.web.selenium" value="${gwt.selenium.hosts}">
@@ -96,17 +96,7 @@
   <target name="compile" description="Compile all class files"
           unless="compile.complete">
     <gwt.javac
-            excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java"
-            errorprone.args="
-              -Xep:MissingCasesInEnumSwitch:OFF
-              -Xep:SelfComparison:OFF
-              -Xep:SelfEquals:OFF
-              -Xep:FallThrough:OFF
-              -Xep:ReturnValueIgnored:OFF
-              -Xep:EqualsIncompatibleType:OFF
-              -Xep:BoxedPrimitiveEquality:OFF
-              -Xep:DoubleBraceInitialization:OFF
-            ">
+            excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java">
       <src path="super/com/google/gwt/emul/javaemul/internal" />
       <classpath>
         <pathelement location="${gwt.tools.lib}/gss/2015-11-04/closure-stylesheets-library-20151104-rebased.jar"/>
@@ -236,17 +226,7 @@
       <gwt.javac
               srcdir="${project.build}/jakarta-src"
               destdir="${javac.out}-jakarta"
-              excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java,**/junit/**"
-              errorprone.args="
-              -Xep:MissingCasesInEnumSwitch:OFF
-              -Xep:SelfComparison:OFF
-              -Xep:SelfEquals:OFF
-              -Xep:FallThrough:OFF
-              -Xep:ReturnValueIgnored:OFF
-              -Xep:EqualsIncompatibleType:OFF
-              -Xep:BoxedPrimitiveEquality:OFF
-              -Xep:DoubleBraceInitialization:OFF
-            ">
+              excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java,**/junit/**">
         <src path="${project.build}/no-servlet-src" />
         <src path="super/com/google/gwt/emul/javaemul/internal" />
         <classpath>
@@ -293,24 +273,7 @@
     <gwt.javac srcdir="test" destdir="${javac.junit.out}"
                excludes="com/google/gwt/langtest/**,**/super/**"
                processorpath="test.extraclasspath"
-               errorprone.args="
-                 -Xep:SelfAssignment:OFF
-                 -Xep:MissingCasesInEnumSwitch:OFF
-                 -Xep:SelfComparison:OFF
-                 -Xep:SelfEquals:OFF
-                 -Xep:FallThrough:OFF
-                 -Xep:ReturnValueIgnored:OFF
-                 -Xep:EqualsIncompatibleType:OFF
-                 -Xep:IdentityBinaryExpression:OFF
-                 -Xep:LoopConditionChecker:OFF
-                 -Xep:JUnitAssertSameCheck:OFF
-                 -Xep:CollectionIncompatibleType:OFF
-                 -Xep:DeadThread:OFF
-                 -Xep:ComplexBooleanConstant:OFF
-                 -Xep:ComparableType:OFF
-                 -Xep:DoNotCall:OFF
-                 -Xep:BadAnnotationImplementation:OFF
-               ">
+               release="11">
       <classpath>
         <pathelement location="${javac.out}"/>
         <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar"/>

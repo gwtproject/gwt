@@ -139,6 +139,7 @@ public class OptionalTest extends GWTTestCase {
     assertFalse(filtered.isPresent());
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testMap() {
     // empty case
     try {
@@ -167,6 +168,7 @@ public class OptionalTest extends GWTTestCase {
     assertEquals(REFERENCE.toString(), mapped.get());
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testFlatMap() {
     // empty case
     try {

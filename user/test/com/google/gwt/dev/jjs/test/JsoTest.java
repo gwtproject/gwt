@@ -639,6 +639,7 @@ public class JsoTest extends GWTTestCase {
     assertEquals(stringHashCode, o.hashCode());
   }
 
+  @SuppressWarnings("JUnitAssertSameCheck")
   public void testIdentity() {
     JavaScriptObject jso = makeJSO();
     assertSame(jso, jso);

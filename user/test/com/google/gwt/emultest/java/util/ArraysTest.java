@@ -67,6 +67,7 @@ public class ArraysTest extends EmulTestBase {
    * embedded null references works properly (and most importantly doesn't
    * throw an NPE).
    */
+  @SuppressWarnings("ReturnValueIgnored")
   public void testArraysHashCodeWithNullElements() {
     String[] a = new String[] { "foo", null, "bar", "baz" };
     Arrays.hashCode(a);

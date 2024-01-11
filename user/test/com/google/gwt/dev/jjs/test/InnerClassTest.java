@@ -26,6 +26,7 @@ import java.util.List;
 public class InnerClassTest extends GWTTestCase {
 
   static class OuterRefFromSuperCtorBase {
+    @SuppressWarnings("ReturnValueIgnored")
     OuterRefFromSuperCtorBase(Object o) {
       o.toString();
     }

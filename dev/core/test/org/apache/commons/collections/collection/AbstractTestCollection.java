@@ -805,6 +805,7 @@ public abstract class AbstractTestCollection extends AbstractTestObject {
     /**
      *  Tests removals from {@link Collection#iterator()}.
      */
+    @SuppressWarnings("ReturnValueIgnored")
     public void testCollectionIteratorRemove() {
         if (!isRemoveSupported()) return;
 

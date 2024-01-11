@@ -28,6 +28,7 @@ import java.util.Map;
  * Tests coverage instrumentation.
  */
 public class CoverageTest extends GWTTestCase {
+  @SuppressWarnings("DoubleBraceInitialization")
   private static final Map<String, Double> EXPECTED_COVERAGE = new HashMap<String, Double>() { {
       put("25", 1.0);
       put("26", 1.0);

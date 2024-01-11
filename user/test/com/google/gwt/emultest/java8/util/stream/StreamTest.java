@@ -243,6 +243,7 @@ public class StreamTest extends EmulTestBase {
     assertEquals(asList(values), collectedList);
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testFilter() {
     // unconsumed stream never runs filter
     boolean[] data = {false};
@@ -277,6 +278,7 @@ public class StreamTest extends EmulTestBase {
         Stream.of("a", "b", "c", "d", "c").filter(a -> true).collect(Collectors.toList()));
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testMap() {
     // unconsumed stream never runs map
     boolean[] data = {false};
@@ -288,6 +290,7 @@ public class StreamTest extends EmulTestBase {
         Stream.of(1, 2, 3).map(i -> "#" + i).collect(Collectors.toList()));
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testPeek() {
     // unconsumed stream never peeks
     boolean[] data = {false};
@@ -471,6 +474,7 @@ public class StreamTest extends EmulTestBase {
   // This frustrating test was written first on the JVM stream to discover the basic behavior before
   // trying to implement it in GWT. As far as I can tell, none of this is clearly described in
   // javadoc. Also note that it is *not* required to use the returned stream from calling onClose
+  @SuppressWarnings("ReturnValueIgnored")
   public void testCloseQuirks() {
     // all subclasses use the same close()/onClose(...) impl, just test once with Stream.empty()
 
@@ -562,6 +566,7 @@ public class StreamTest extends EmulTestBase {
     assertEquals(1, calledCount[0]);
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testCloseException() {
     // Try a single exception, confirm we catch it
     Stream<Object> s = Stream.of(1, 2, 3);

@@ -32,7 +32,7 @@ public class ObjectsTest extends GWTTestCase {
 
   public void testCompare() {
     Comparator<Integer> intComparator = new Comparator<Integer>() {
-      @SuppressWarnings("NumberEquality")
+      @SuppressWarnings({"NumberEquality", "BoxedPrimitiveEquality"})
       @Override
       public int compare(Integer a, Integer b) {
         if (a == b) {

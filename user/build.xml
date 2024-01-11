@@ -2,7 +2,7 @@
   <property name="gwt.root" location=".."/>
   <property name="project.tail" value="user"/>
   <property name="test.args" value="-ea -sourceLevel auto"/>
-  <property name="test.jvmargs" value="-ea"/>
+  <property name="test.jvmargs" value="-ea -noverify"/>
 
   <!-- support old variables names -->
   <condition property="gwt.hosts.web.selenium" value="${gwt.selenium.hosts}">

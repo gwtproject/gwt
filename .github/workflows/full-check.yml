@@ -29,7 +29,8 @@ jobs:
       - name: Checkout GWT tools into a sibling directory
         uses: actions/checkout@v4
         with:
-          repository: 'gwtproject/tools'
+          repository: 'Vertispan/tools'
+          ref: 'errorprone-2.23'
           path: 'tools'
       - name: Set up JDK ${{ matrix.java-version }}
         # GWT requires Java 11+ to build

@@ -267,15 +267,11 @@
   <!--
       Compiles the test code for this project
   -->
-  <target name="compile.tests"
-          depends="-compile.tests.java8,-compile.tests.java11"
-          unless="compile.tests.complete">
-  </target>
-
-  <target name="-compile.tests.java8" depends="compile.dev.tests, compile.emma.if.enabled">
+  <target name="-compile.tests" depends="compile.dev.tests, compile.emma.if.enabled">
     <gwt.javac srcdir="test" destdir="${javac.junit.out}"
-               excludes="com/google/gwt/langtest/**,**/super/**,**/java9/**,**/*Java9*.java,**/java10/**,**/*Java10*.java,**/java11/**,**/*Java11*.java"
-               processorpath="test.extraclasspath">
+               excludes="com/google/gwt/langtest/**,**/super/**"
+               processorpath="test.extraclasspath"
+               release="11">
       <classpath>
         <pathelement location="${javac.out}"/>
         <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar"/>
@@ -285,21 +281,6 @@
       <compilerarg value="-processor"/>
       <compilerarg value="com.google.web.bindery.requestfactory.apt.RfValidator"/>
     </gwt.javac>
-  </target>
-  <target name="-compile.tests.java11" unless="isJava8" depends="-compile.tests.java8">
-    <gwt.javac srcdir="test" destdir="${javac.junit.out}"
-               excludes="com/google/gwt/langtest/**,**/super/**"
-               processorpath="test.extraclasspath"
-               release="11">
-      <classpath>
-        <pathelement location="${javac.junit.out}"/>
-        <pathelement location="${javac.out}"/>
-        <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar"/>
-        <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
-        <path refid="test.extraclasspath"/>
-      </classpath>
-    </gwt.javac>
-
   </target>
 
   <target name="build" depends="compile, compile-jakarta"

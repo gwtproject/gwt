@@ -267,7 +267,7 @@
   <!--
       Compiles the test code for this project
   -->
-  <target name="-compile.tests" depends="compile.dev.tests, compile.emma.if.enabled">
+  <target name="compile.tests" depends="compile.dev.tests, compile.emma.if.enabled">
     <gwt.javac srcdir="test" destdir="${javac.junit.out}"
                excludes="com/google/gwt/langtest/**,**/super/**"
                processorpath="test.extraclasspath"

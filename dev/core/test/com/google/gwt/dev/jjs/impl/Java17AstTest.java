@@ -91,7 +91,7 @@ public class Java17AstTest extends FullCompileTestBase {
           "}");
       compileSnippet("void", "Shape rectangle = new Rectangle();");
       fail("Compile should have failed but succeeded.");
-    }catch (Exception e) {
+    } catch (Exception e) {
       if (!(e.getCause() instanceof UnableToCompleteException)
           && !(e instanceof UnableToCompleteException)) {
         e.printStackTrace();
@@ -100,7 +100,7 @@ public class Java17AstTest extends FullCompileTestBase {
     }
   }
 
-  public void testSwitchExpressionsNotSupported(){
+  public void testSwitchExpressionsNotSupported() {
     try {
       compileSnippet("void", "var month = Months.JUNE;" +
           "var result = switch(month) {\n" +
@@ -110,7 +110,7 @@ public class Java17AstTest extends FullCompileTestBase {
           "    default -> 0;" +
           "};");
       fail("Compile should have failed but succeeded, switch expression is not supported.");
-    }catch (Exception e){
+    } catch (Exception e) {
       if (!(e.getCause() instanceof InternalCompilerException)
           && !(e instanceof InternalCompilerException)) {
         e.printStackTrace();
@@ -118,7 +118,6 @@ public class Java17AstTest extends FullCompileTestBase {
       }
       assertEquals("Switch expressions not yet supported", e.getMessage());
     }
-
   }
 
   @Override

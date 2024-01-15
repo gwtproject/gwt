@@ -537,7 +537,7 @@ public class GwtAstBuilder {
 
     @Override
     public void endVisit(CaseStatement x, BlockScope scope) {
-      if(x.isExpr){
+      if (x.isExpr) {
         InternalCompilerException excption =
             new InternalCompilerException("Switch expressions not yet supported");
         excption.addNode(new JCaseStatement(makeSourceInfo(x), null));
@@ -3717,7 +3717,6 @@ public class GwtAstBuilder {
         return new JType[] {typeMap.get(type)};
       }
     }
-
 
     private boolean isFunctionalInterfaceWithMethod(ReferenceBinding referenceBinding, Scope scope,
         String samSignature) {

@@ -1,4 +1,4 @@
-# Run all tests and builds all aspects of GWT using Java 8, 11, and 17. Runs
+# Run all tests and builds all aspects of GWT using Java 11, 17, and 21. Runs
 # nightly (plus or minus timzeones) on the main branch, and will also run right
 # away on a push to a release branch. Release zips are uploaded as part of the
 # build, though maven snapshots are not yet deployed.
@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java-version: [ '11', '17' ]
+        java-version: [ '11', '17', '21' ]
     steps:
       - name: Checkout GWT itself into one directory
         uses: actions/checkout@v4
@@ -29,8 +29,7 @@ jobs:
       - name: Checkout GWT tools into a sibling directory
         uses: actions/checkout@v4
         with:
-          repository: 'vegegoku/tools'
-          ref: 'java-17-support'
+          repository: 'gwtproject/tools'
           path: 'tools'
       - name: Set up JDK ${{ matrix.java-version }}
         # GWT requires Java 11+ to build
@@ -52,7 +51,7 @@ jobs:
             GWT_VERSION=HEAD-SNAPSHOT
           # Run the ant tasks, disabling watchFileChanges to work around a github actions limitation
           ant clean test dist doc \
-            -Dtest.jvmargs='-ea -noverify -Dgwt.watchFileChanges=false' \
+            -Dtest.jvmargs='-ea -Dgwt.watchFileChanges=false' \
             -Dtest.web.htmlunit.disable=true \
             -Dtest.nometa.htmlunit.disable=true \
             -Dtest.emma.htmlunit.disable=true

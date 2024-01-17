@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google Inc.
+ * Copyright 2024 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -100,6 +100,20 @@ public class Java17AstTest extends FullCompileTestBase {
     }
   }
 
+  public void testRecordsNotSupported() {
+    try {
+      addSnippetClassDecl("public record Point(int x, int y) {}");
+      compileSnippet("void", "Point rectangle = new Point(0, 0);");
+      fail("Compile should have failed but succeeded.");
+    } catch (Exception e) {
+      if (!(e.getCause() instanceof UnableToCompleteException)
+          && !(e instanceof UnableToCompleteException)) {
+        e.printStackTrace();
+        fail();
+      }
+    }
+  }
+
   public void testSwitchExpressionsNotSupported() {
     try {
       compileSnippet("void", "var month = Months.JUNE;" +
@@ -110,6 +124,25 @@ public class Java17AstTest extends FullCompileTestBase {
           "    default -> 0;" +
           "};");
       fail("Compile should have failed but succeeded, switch expression is not supported.");
+    } catch (Exception e) {
+      if (!(e.getCause() instanceof InternalCompilerException)
+          && !(e instanceof InternalCompilerException)) {
+        e.printStackTrace();
+        fail();
+      }
+      assertEquals("Switch expressions not yet supported", e.getMessage());
+    }
+  }
+
+  public void testSwitchExpressionsInitializerShouldFail() {
+    try {
+      compileSnippet("void", "    int i = switch(1) {\n" +
+          "      case 1:\n" +
+          "        yield 2;\n" +
+          "      default:\n" +
+          "        yield 7;\n" +
+          "    };");
+      fail("Compile should have failed but succeeded, switch expressions as initializer should fail.");
     } catch (Exception e) {
       if (!(e.getCause() instanceof InternalCompilerException)
           && !(e instanceof InternalCompilerException)) {

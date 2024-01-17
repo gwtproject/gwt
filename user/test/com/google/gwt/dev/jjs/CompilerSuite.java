@@ -29,6 +29,7 @@ import com.google.gwt.dev.jjs.test.InnerClassTest;
 import com.google.gwt.dev.jjs.test.InnerOuterSuperTest;
 import com.google.gwt.dev.jjs.test.Java10Test;
 import com.google.gwt.dev.jjs.test.Java11Test;
+import com.google.gwt.dev.jjs.test.Java17Test;
 import com.google.gwt.dev.jjs.test.Java7Test;
 import com.google.gwt.dev.jjs.test.Java8Test;
 import com.google.gwt.dev.jjs.test.Java9Test;
@@ -77,6 +78,7 @@ public class CompilerSuite {
     suite.addTestSuite(Java9Test.class);
     suite.addTestSuite(Java10Test.class);
     suite.addTestSuite(Java11Test.class);
+    suite.addTestSuite(Java17Test.class);
     suite.addTestSuite(JavaAccessFromJavaScriptTest.class);
     suite.addTestSuite(JsniConstructorTest.class);
     suite.addTestSuite(JsniDispatchTest.class);

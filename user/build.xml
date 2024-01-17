@@ -2,11 +2,7 @@
   <property name="gwt.root" location=".."/>
   <property name="project.tail" value="user"/>
   <property name="test.args" value="-ea -sourceLevel auto"/>
-  <!--
-  Adding "-noverify" is a workaround for https://bugs.openjdk.org/browse/JDK-8323657
-  so that tests can be compiled under Java9+.
-  -->
-  <property name="test.jvmargs" value="-ea -noverify"/>
+  <property name="test.jvmargs" value="-ea"/>
 
   <!-- support old variables names -->
   <condition property="gwt.hosts.web.selenium" value="${gwt.selenium.hosts}">

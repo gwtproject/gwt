@@ -487,7 +487,12 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public boolean isBlank() {
-    return isBlank(this);
+    return asNativeString().isBlank();
+  }
+
+  public String lines() {
+    String str = asNativeString();
+    return str.lines();
   }
 
   public int lastIndexOf(int codePoint) {

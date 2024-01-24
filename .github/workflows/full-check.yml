@@ -1,4 +1,4 @@
-# Run all tests and builds all aspects of GWT using Java 17, 11, and 21. Runs
+# Run all tests and builds all aspects of GWT using Java 11 and 17. Runs
 # nightly (plus or minus timzeones) on the main branch, and will also run right
 # away on a push to a release branch. Release zips are uploaded as part of the
 # build, though maven snapshots are not yet deployed.
@@ -52,7 +52,7 @@ jobs:
             GWT_VERSION=HEAD-SNAPSHOT
           # Run the ant tasks, disabling watchFileChanges to work around a github actions limitation
           ant clean test dist doc \
-            -Dtest.jvmargs='-ea -noverify -Dgwt.watchFileChanges=false' \
+            -Dtest.jvmargs='-ea -Dgwt.watchFileChanges=false' \
             -Dtest.web.htmlunit.disable=true \
             -Dtest.nometa.htmlunit.disable=true \
             -Dtest.emma.htmlunit.disable=true
@@ -84,7 +84,7 @@ jobs:
       - name: Set up sonatype credentials
         # Using the same java version as above, set up a settings.xml file
         uses: actions/setup-java@v4
-        if: ${{ github.event_name == 'schedule' && github.repository_owner == 'gwtproject' && matrix.java-version == '21' }}
+        if: ${{ github.event_name == 'schedule' && github.repository_owner == 'gwtproject' && matrix.java-version == '17' }}
         with:
           java-version: ${{ matrix.java-version }}
           distribution: 'temurin'
@@ -94,7 +94,7 @@ jobs:
           server-password: SONATYPE_PASSWORD
 
       - name: Nightly builds should be deployed as snapshots to sonatype
-        if: ${{ github.event_name == 'schedule' && github.repository_owner == 'gwtproject' && matrix.java-version == '21' }}
+        if: ${{ github.event_name == 'schedule' && github.repository_owner == 'gwtproject' && matrix.java-version == '17' }}
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}

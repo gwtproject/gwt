@@ -2,11 +2,7 @@
   <property name="gwt.root" location=".."/>
   <property name="project.tail" value="user"/>
   <property name="test.args" value="-ea -sourceLevel auto"/>
-  <!--
-  Adding "-noverify" is a workaround for https://bugs.openjdk.org/browse/JDK-8323657
-  so that tests can be compiled under Java9+.
-  -->
-  <property name="test.jvmargs" value="-ea -noverify"/>
+  <property name="test.jvmargs" value="-ea"/>
 
   <!-- support old variables names -->
   <condition property="gwt.hosts.web.selenium" value="${gwt.selenium.hosts}">
@@ -282,6 +278,9 @@
         <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
         <path refid="test.extraclasspath"/>
       </classpath>
+      <!-- Disable Java 9+ string concat feature, it breaks a JDT regression test,
+           see https://bugs.openjdk.org/browse/JDK-8323657 -->
+      <compilerarg value="-XDstringConcat=inline"/>
       <compilerarg value="-processor"/>
       <compilerarg value="com.google.web.bindery.requestfactory.apt.RfValidator"/>
     </gwt.javac>

@@ -45,8 +45,8 @@ jobs:
             ANT_OPTS=-Xmx2g
           ant clean dist doc checkstyle apicheck
 
-      - name: Create pull request comments/annotations for checkstyle from the java 21 build, even on failure
-        if: ${{ always() && github.event_name == 'pull_request' && matrix.java-version == '21' }}
+      - name: Create pull request comments/annotations for checkstyle from the java 17 build, even on failure
+        if: ${{ always() && github.event_name == 'pull_request' && matrix.java-version == '17' }}
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -59,7 +59,7 @@ jobs:
           done
       - name: Upload checkstyle xml for manual review
         uses: actions/upload-artifact@v4
-        if: ${{ matrix.java-version == '21' }}
+        if: ${{ matrix.java-version == '17' }}
         with:
           name: checkstyle-reports-java${{ matrix.java-version }}
           path: 'gwt/build/out/**/checkstyle*.xml'

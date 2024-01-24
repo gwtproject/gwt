@@ -76,4 +76,13 @@ public class Java17Test extends GWTTestCase {
     assertTrue(square instanceof Square);
     assertTrue(circle instanceof Circle);
   }
+
+  record InnerRecord {}
+  public void testRecordClasses() {
+    record LocalRecord() {}
+
+    new InnerRecord();
+    new LocalRecord();
+    new TopLevelRecord();
+  }
 }

@@ -40,6 +40,7 @@ public class OptionalTest extends EmulTestBase {
     assertEquals(1, called[0]);
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testOr() {
     Optional<String> or = Optional.of("value").or(() -> Optional.of("replacement"));
     assertTrue(or.isPresent());

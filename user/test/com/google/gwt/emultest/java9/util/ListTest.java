@@ -25,6 +25,7 @@ import java.util.List;
  */
 public class ListTest extends EmulTestBase {
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testOf() {
     assertIsImmutableListOf(List.of());
     assertIsImmutableListOf(List.of("a"), "a");

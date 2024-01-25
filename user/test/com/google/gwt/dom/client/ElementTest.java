@@ -184,6 +184,7 @@ public class ElementTest extends GWTTestCase {
    * not return a numeric attribute based on the element property. See issue
    * 3238.
    */
+  @SuppressWarnings("ReturnValueIgnored")
   public void testElementAttributeNumeric() {
     DivElement div = Document.get().createDivElement();
     Document.get().getBody().appendChild(div);

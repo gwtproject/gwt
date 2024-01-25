@@ -27,6 +27,7 @@ public class MethodCallTest extends GWTTestCase {
 
   private static Object field;
 
+  @SuppressWarnings("ReturnValueIgnored")
   private static void clobberFieldNoInline() {
     try {
       field = null;
@@ -102,6 +103,7 @@ public class MethodCallTest extends GWTTestCase {
    * <code>o</code> will have been replaced by a direct reference to
    * {@link #field}. Both the Java and JS inliners must not inline this.
    */
+  @SuppressWarnings("ReturnValueIgnored")
   private static void shouldNotInline(Object o) {
     field = null;
     o.toString();
@@ -111,6 +113,7 @@ public class MethodCallTest extends GWTTestCase {
    * Same as {@link #shouldNotInline(Object)}, except the field clobber is done
    * indirectly in a non-inlinable method.
    */
+  @SuppressWarnings("ReturnValueIgnored")
   private static void shouldNotInline2(Object o) {
     clobberFieldNoInline();
     o.toString();

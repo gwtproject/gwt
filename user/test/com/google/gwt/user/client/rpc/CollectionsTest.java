@@ -559,6 +559,7 @@ public class CollectionsTest extends RpcTestBase {
           }
 
           @Override
+          @SuppressWarnings("CollectionIncompatibleType")
           public void onSuccess(
               LinkedHashMap<MarkerTypeLinkedHashMapKey, MarkerTypeLinkedHashMapValue> result) {
             assertNotNull(result);
@@ -586,6 +587,7 @@ public class CollectionsTest extends RpcTestBase {
           }
 
           @Override
+          @SuppressWarnings("CollectionIncompatibleType")
           public void onSuccess(
               LinkedHashMap<MarkerTypeLinkedHashMapKey, MarkerTypeLinkedHashMapValue> actual) {
             assertNotNull(actual);

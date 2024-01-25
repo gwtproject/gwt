@@ -24,6 +24,7 @@ import java.util.Map;
  */
 public class MapTest extends EmulTestBase {
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testOf() {
     assertIsImmutableMapOf(Map.of());
     assertIsImmutableMapOf(Map.of("a", 1), "a");
@@ -151,6 +152,7 @@ public class MapTest extends EmulTestBase {
     }
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testEntry() {
     Map.Entry<String, String> entry = Map.entry("a", "b");
 
@@ -172,7 +174,7 @@ public class MapTest extends EmulTestBase {
     });
   }
 
-  @SuppressWarnings("DuplicateMapKeys")
+  @SuppressWarnings({"DuplicateMapKeys", "ReturnValueIgnored"})
   public void testOfEntries() {
     Map<String, Integer> map = Map.ofEntries(
         Map.entry("a", 1),

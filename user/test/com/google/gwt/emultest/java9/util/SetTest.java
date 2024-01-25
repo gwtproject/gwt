@@ -26,6 +26,7 @@ import java.util.Set;
  */
 public class SetTest extends EmulTestBase {
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testOf() {
     assertIsImmutableSetOf(Set.of());
     assertIsImmutableSetOf(Set.of("a"), "a");

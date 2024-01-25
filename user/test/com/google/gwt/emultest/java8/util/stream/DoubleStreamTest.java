@@ -181,6 +181,7 @@ public class DoubleStreamTest extends EmulTestBase {
     assertFalse(maybe.isPresent());
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testFilter() {
     // unconsumed stream never runs filter
     boolean[] data = {false};
@@ -210,6 +211,7 @@ public class DoubleStreamTest extends EmulTestBase {
         DoubleStream.of(1d, 2d, 3d, 4d, 3d).filter(a -> true).toArray());
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testMap() {
     // unconsumed stream never runs map
     int[] data = {0};
@@ -219,6 +221,7 @@ public class DoubleStreamTest extends EmulTestBase {
     assertEquals(new double[] {2d, 4d, 6d}, DoubleStream.of(1d, 2d, 3d).map(i -> i * 2).toArray());
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testPeek() {
     // unconsumed stream never peeks
     boolean[] data = {false};

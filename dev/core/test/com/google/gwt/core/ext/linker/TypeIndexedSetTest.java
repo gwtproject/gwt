@@ -52,6 +52,7 @@ public class TypeIndexedSetTest extends TestCase {
     }
 
     @Override
+    @SuppressWarnings("BoxedPrimitiveEquality")
     public boolean equals(Object o) {
       return (o instanceof RootComparable) && (((RootComparable) o).value == this.value);
     }

@@ -27,12 +27,6 @@
         message="This build file is in an inconsistent state (${ant.file} != ${test.ant.file})."/>
 
   <!-- Global Properties -->
-  <!--
-  Indicate if we are running in Java8, and so cannot run java9+ tests or generate Javadoc.
-  -->
-  <condition property="isJava8">
-    <equals arg1="${ant.java.version}" arg2="1.8" />
-  </condition>
   <property environment="env"/>
   <condition property="gwt.version" value="${env.GWT_VERSION}" else="0.0.0">
     <isset property="env.GWT_VERSION"/>
@@ -66,11 +60,9 @@
   <property name="javac.nowarn" value="true"/>
 
   <!-- javac and errorprone instructions from https://errorprone.info/docs/installation#ant -->
-  <property name="errorprone.javac.jar" location="${gwt.tools.lib}/errorprone/javac-9+181-r4173-1.jar"/>
   <path id="errorprone.processorpath.ref">
-    <pathelement location="${gwt.tools.lib}/errorprone/error_prone_core-2.9.0-with-dependencies.jar"/>
-    <pathelement location="${gwt.tools.lib}/errorprone/jFormatString-3.0.0.jar"/>
-    <pathelement location="${gwt.tools.lib}/errorprone/dataflow-errorprone-3.15.0.jar"/>
+    <pathelement location="${gwt.tools.lib}/errorprone/error_prone_core-2.23.0-with-dependencies.jar"/>
+    <pathelement location="${gwt.tools.lib}/errorprone/dataflow-errorprone-3.34.0-eisop1.jar"/>
   </path>
 
   <property name="junit.out" location="${project.build}/test"/>
@@ -170,20 +162,19 @@
       </path>
       <mkdir dir="@{destdir}"/>
       <javac srcdir="@{srcdir}" sourcepath="@{srcdir}" destdir="@{destdir}" debug="${javac.debug}"
-             debuglevel="${javac.debuglevel}" source="@{release}" target="@{release}" release="@{release}"
+             debuglevel="${javac.debuglevel}" release="@{release}"
              nowarn="${javac.nowarn}" encoding="${javac.encoding}" includeantruntime="false"
-             fork="true" compiler="modern" excludes="@{excludes}">
-        <compilerarg value="-J-Xbootclasspath/p:${errorprone.javac.jar}" if:true="${isJava8}"/>
-        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED" unless:true="${isJava8}"/>
+             fork="true" excludes="@{excludes}">
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED" />
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED" />
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED" />
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED" />
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED" />
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED" />
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED" />
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED" />
+        <compilerarg value="-J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED" />
+        <compilerarg value="-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED" />
         <compilerarg value="-XDcompilePolicy=simple"/>
         <compilerarg value="-processorpath"/>
         <compilerarg pathref="mergedprocessorpath.ref"/>
@@ -249,7 +240,7 @@
         <jvmarg value="-Demma.coverage.out.merge=true"/>
         <jvmarg value="-Dcom.google.gwt.junit.reportPath=reports"/>
         <jvmarg line="@{test.jvmargs}"/>
-        <jvmarg line="--add-opens=java.base/java.lang=ALL-UNNAMED" unless:true="${isJava8}"/>
+        <jvmarg line="--add-opens=java.base/java.lang=ALL-UNNAMED" />
         <sysproperty key="gwt.args" value="@{test.args}"/>
         <sysproperty key="java.awt.headless" value="true"/>
         <classpath>

@@ -194,6 +194,7 @@ public class IntStreamTest extends EmulTestBase {
     assertFalse(maybe.isPresent());
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testFilter() {
     // unconsumed stream never runs filter
     boolean[] data = {false};
@@ -219,6 +220,7 @@ public class IntStreamTest extends EmulTestBase {
         new int[] {1, 2, 3, 4, 3}, IntStream.of(1, 2, 3, 4, 3).filter(a -> true).toArray());
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testMap() {
     // unconsumed stream never runs map
     int[] data = {0};
@@ -228,6 +230,7 @@ public class IntStreamTest extends EmulTestBase {
     assertEquals(new int[] {2, 4, 6}, IntStream.of(1, 2, 3).map(i -> i * 2).toArray());
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testPeek() {
     // unconsumed stream never peeks
     boolean[] data = {false};

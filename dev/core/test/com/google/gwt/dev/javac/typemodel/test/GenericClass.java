@@ -28,6 +28,7 @@ import java.util.List;
  * follows: class GenericClass<T extends Serializable & Comparable<T>>
  * implements Comparable<T> { ... }
  */
+@SuppressWarnings("ComparableType")
 public class GenericClass<T extends Serializable> implements Comparable<T>,
     Serializable {
   /**

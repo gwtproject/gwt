@@ -39,6 +39,7 @@ public class GwtVersionTest extends TestCase {
   /**
    * Test that GwtVersion.compareTo produced expected results.
    */
+  @SuppressWarnings("SelfComparison")
   public void testCompareTo() {
     GwtVersion v1 = new GwtVersion("0.0.0");
     assertEquals(0, v1.compareTo(v1));

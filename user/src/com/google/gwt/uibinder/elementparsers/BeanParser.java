@@ -46,6 +46,7 @@ public class BeanParser implements ElementParser {
    * methods that extend the normal bean naming pattern. So, that implementations of
    * {@link IsWidget} behave like UIObjects, they have to be translated.
    */
+  @SuppressWarnings("DoubleBraceInitialization")
   private static final Map<String, String> ADD_PROPERTY_TO_SETTER_MAP =
       new HashMap<String, String>() { {
         put("addStyleNames", "addStyleName");

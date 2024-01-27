@@ -77,6 +77,7 @@ public class JStaticEvalTest extends GWTTestCase {
    * Test "true == booleanField" and permutations, as well as "true == false"
    * and permutations.
    */
+  @SuppressWarnings("IdentityBinaryExpression")
   public void testEqualsBool() {
     assertTrue(fieldTrue == returnTrue());
     assertTrue(returnTrue() == fieldTrue);
@@ -127,6 +128,7 @@ public class JStaticEvalTest extends GWTTestCase {
   /**
    * Tests constant folding.
    */
+  @SuppressWarnings("IdentityBinaryExpression")
   public void testOpsOnLiterals() {
     assertEquals(10, returnIntFive() + returnIntFive());
     assertEquals(0, returnIntFive() - returnIntFive());

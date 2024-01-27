@@ -193,6 +193,7 @@ public class LongStreamTest extends EmulTestBase {
     assertFalse(maybe.isPresent());
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testFilter() {
     // unconsumed stream never runs filter
     boolean[] data = {false};
@@ -220,6 +221,7 @@ public class LongStreamTest extends EmulTestBase {
         LongStream.of(1L, 2L, 3L, 4L, 3L).filter(a -> true).toArray());
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testMap() {
     // unconsumed stream never runs map
     int[] data = {0};
@@ -229,6 +231,7 @@ public class LongStreamTest extends EmulTestBase {
     assertEquals(new long[] {2L, 4L, 6L}, LongStream.of(1L, 2L, 3L).map(i -> i * 2).toArray());
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testPeek() {
     // unconsumed stream never peeks
     boolean[] data = {false};

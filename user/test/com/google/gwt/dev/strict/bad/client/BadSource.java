@@ -19,6 +19,7 @@ package com.google.gwt.dev.strict.bad.client;
  * Used by {@link com.google.gwt.dev.StrictModeTest}.
  */
 public class BadSource {
+  @SuppressWarnings("DeadThread")
   public void useThread() {
     new Thread();
   }

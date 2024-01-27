@@ -598,6 +598,7 @@ abstract class TestCollection extends TestObject {
   }
 
   /** Tests removals from {@link Collection#iterator()}. */
+  @SuppressWarnings("ReturnValueIgnored")
   public void testCollectionIteratorRemove() {
     if (!isRemoveSupported()) {
       return;

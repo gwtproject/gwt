@@ -120,6 +120,7 @@ public class JsExceptionTest extends ThrowableTestBase {
     }
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   private static void throwTypeError() {
     Object nullObject = null;
     nullObject.getClass();

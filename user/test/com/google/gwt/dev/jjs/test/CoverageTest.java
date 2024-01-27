@@ -333,7 +333,7 @@ public class CoverageTest extends CoverageBase {
       assertEquals(15, i);
     }
 
-    @SuppressWarnings("cast")
+    @SuppressWarnings({"cast", "SelfAssignment"})
     private void testCastExpression() {
       // CastExpression
       o = (Super) o;

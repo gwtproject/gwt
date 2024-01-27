@@ -172,6 +172,7 @@ public class MenuItemParserTest extends TestCase {
    * Containers method to reference types referenced only from JavaDoc, used to
    * prevent CheckStyle errors.
    */
+  @SuppressWarnings("ReturnValueIgnored")
   public void unusedReferences(XMLElement p1, MenuBar p2) {
     p1.hashCode();
     p2.hashCode();

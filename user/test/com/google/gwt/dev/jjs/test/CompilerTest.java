@@ -36,6 +36,7 @@ public class CompilerTest extends GWTTestCase {
 
   interface Silly { }
 
+  @SuppressWarnings("ComparableType")
   interface SillyComparable<T extends Silly> extends Comparable<T> {
     @Override
     int compareTo(T obj);
@@ -418,6 +419,7 @@ public class CompilerTest extends GWTTestCase {
       }
     }
 
+    @SuppressWarnings("ComparableType")
     class MyFoo extends AbstractFoo implements Comparable<AbstractFoo> {
     }
 
@@ -752,6 +754,7 @@ public class CompilerTest extends GWTTestCase {
     };
   }
 
+  @SuppressWarnings({"ReturnValueIgnored", "IdentityBinaryExpression"})
   public void testDeadTypes() {
     if (false) {
       new Object() {
@@ -771,7 +774,7 @@ public class CompilerTest extends GWTTestCase {
    * Development Mode or Production Mode, but the important thing is that the
    * compiler does not crash.
    */
-  @SuppressWarnings({"divzero", "ConstantOverflow"})
+  @SuppressWarnings({"divzero", "ConstantOverflow", "IdentityBinaryExpression"})
   public void testDivByZero() {
     assertTrue(Double.isNaN(0.0 / 0.0));
 
@@ -806,6 +809,7 @@ public class CompilerTest extends GWTTestCase {
     }
   }
 
+  @SuppressWarnings({"IdentityBinaryExpression", "LoopConditionChecker"})
   public void testEmptyBlockStatements() {
     boolean b = false;
     while (b) {
@@ -864,7 +868,7 @@ public class CompilerTest extends GWTTestCase {
 
   // CHECKSTYLE_OFF
 
-  @SuppressWarnings("empty")
+  @SuppressWarnings({"empty", "LoopConditionChecker"})
   public void testEmptyStatements() {
     boolean b = false;
 

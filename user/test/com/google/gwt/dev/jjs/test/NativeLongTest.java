@@ -162,6 +162,7 @@ public class NativeLongTest extends GWTTestCase {
     assertEquals(3L, LONG_ONE | LONG_THREE);
   }
 
+  @SuppressWarnings("IdentityBinaryExpression")
   public void testLogicalXor() {
     assertTrue((255L ^ LONG_5DEECE66D) != 0);
 

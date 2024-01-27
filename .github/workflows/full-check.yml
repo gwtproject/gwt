@@ -1,4 +1,4 @@
-# Run all tests and builds all aspects of GWT using Java 8, 11, and 17. Runs
+# Run all tests and builds all aspects of GWT using Java 11 and 17. Runs
 # nightly (plus or minus timzeones) on the main branch, and will also run right
 # away on a push to a release branch. Release zips are uploaded as part of the
 # build, though maven snapshots are not yet deployed.
@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java-version: [ '8', '11', '17' ]
+        java-version: [ '11', '17' ]
     steps:
       - name: Checkout GWT itself into one directory
         uses: actions/checkout@v4
@@ -32,7 +32,7 @@ jobs:
           repository: 'gwtproject/tools'
           path: 'tools'
       - name: Set up JDK ${{ matrix.java-version }}
-        # GWT presently requires Java8 to build just the SDK and some tests, or 11 to build everything, but can run on newer Java versions
+        # GWT requires Java 11+ to build
         uses: actions/setup-java@v4
         with:
           java-version: ${{ matrix.java-version }}

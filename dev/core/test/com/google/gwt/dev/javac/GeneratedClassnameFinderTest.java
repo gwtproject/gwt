@@ -260,6 +260,7 @@ class JavacWeirdnessTester {
     assertEquals(g, a);
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   private void testDeadTypes() {
     if (false) {
       new Object() {

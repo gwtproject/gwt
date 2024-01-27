@@ -133,6 +133,7 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
     }
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   protected final boolean supportsValuesHashCode(Map<K, V> map) {
     // get the first non-null value
     Collection<V> values = map.values();
@@ -274,6 +275,7 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
     assertInvariants(map);
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testContainsKey() {
     final Map<K, V> map;
     final K unmappedKey;
@@ -297,6 +299,7 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
     assertInvariants(map);
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testContainsValue() {
     final Map<K, V> map;
     final V unmappedValue;

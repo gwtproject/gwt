@@ -28,11 +28,13 @@ public class TypeCheckedObjectsTestSetValidator {
   public static final Integer markerKey = 12345;
   public static final String markerValue = "Marker";
 
+  @SuppressWarnings("DoubleBraceInitialization")
   public static final HashSet<Integer> invalidMarkerKey = new HashSet<Integer>() {
     {
       add(12345);
     }
   };
+  @SuppressWarnings("DoubleBraceInitialization")
   public static final HashSet<String> invalidMarkerValue = new HashSet<String>() {
     {
       add("Marker");

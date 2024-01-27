@@ -58,6 +58,7 @@ public class MiscellaneousTest extends GWTTestCase {
     private static native void clinitInNative() /*-{
     }-*/;
 
+    @SuppressWarnings("ReturnValueIgnored")
     private int foo() {
       this.toString();
       return 3;
@@ -216,7 +217,7 @@ public class MiscellaneousTest extends GWTTestCase {
     assertEquals(100, result);
   }
 
-  @SuppressWarnings("cast")
+  @SuppressWarnings({"cast", "SelfAssignment"})
   public void testCasts() {
     Object o = FALSE ? (Object) new PolyA() : (Object) new PolyB();
     assertTrue(o instanceof I);

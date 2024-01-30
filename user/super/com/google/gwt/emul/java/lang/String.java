@@ -28,6 +28,7 @@ import java.nio.charset.UnsupportedCharsetException;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.StringJoiner;
+
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.Coercions;
 import javaemul.internal.EmulatedCharset;
@@ -44,9 +45,9 @@ import jsinterop.annotations.JsType;
  * Intrinsic string class.
  */
 // Needed to have constructors not fail compilation internally at Google
-@SuppressWarnings({ "ReturnValueIgnored", "unusable-by-js" })
+@SuppressWarnings({"ReturnValueIgnored", "unusable-by-js"})
 public final class String implements Comparable<String>, CharSequence,
-    Serializable {
+  Serializable {
   /* TODO(jat): consider whether we want to support the following methods;
    *
    * <ul>
@@ -106,131 +107,6 @@ public final class String implements Comparable<String>, CharSequence,
     }
   };
 
-  public static String copyValueOf(char[] v) {
-    return valueOf(v);
-  }
-
-  public static String copyValueOf(char[] v, int offset, int count) {
-    return valueOf(v, offset, count);
-  }
-
-  public static String join(CharSequence delimiter, CharSequence... elements) {
-    StringJoiner joiner = new StringJoiner(delimiter);
-    for (CharSequence e : elements) {
-      joiner.add(e);
-    }
-    return joiner.toString();
-  }
-
-  public static String join(CharSequence delimiter, Iterable<? extends CharSequence> elements) {
-    StringJoiner joiner = new StringJoiner(delimiter);
-    for (CharSequence e : elements) {
-      joiner.add(e);
-    }
-    return joiner.toString();
-  }
-
-  public static String valueOf(boolean x) {
-    return "" + x;
-  }
-
-  public static String valueOf(char x) {
-    return NativeString.fromCharCode(x);
-  }
-
-  public static String valueOf(char x[], int offset, int count) {
-    int end = offset + count;
-    checkCriticalStringBounds(offset, end, x.length);
-    // Work around function.prototype.apply call stack size limits:
-    // https://code.google.com/p/v8/issues/detail?id=2896
-    // Performance: http://jsperf.com/string-fromcharcode-test/13
-    int batchSize = ArrayHelper.ARRAY_PROCESS_BATCH_SIZE;
-    String s = "";
-    for (int batchStart = offset; batchStart < end;) {
-      int batchEnd = Math.min(batchStart + batchSize, end);
-      s += fromCharCode(ArrayHelper.unsafeClone(x, batchStart, batchEnd));
-      batchStart = batchEnd;
-    }
-    return s;
-  }
-
-  private static String fromCharCode(Object[] array) {
-    return getFromCharCodeFunction().apply(null, array);
-  }
-
-  @JsType(isNative = true, name = "Function", namespace = JsPackage.GLOBAL)
-  private static class NativeFunction {
-    public native String apply(String thisContext, Object[] argsArray);
-  }
-
-  @JsProperty(name = "String.fromCharCode", namespace = "<window>")
-  private static native NativeFunction getFromCharCodeFunction();
-
-  public static String valueOf(char[] x) {
-    return valueOf(x, 0, x.length);
-  }
-
-  public static String valueOf(double x) {
-    return "" + x;
-  }
-
-  public static String valueOf(float x) {
-    return "" + x;
-  }
-
-  public static String valueOf(int x) {
-    return "" + x;
-  }
-
-  public static String valueOf(long x) {
-    return "" + x;
-  }
-
-  // valueOf needs to be treated special:
-  // J2cl uses it for String concat and thus it can not use string concatenation itself.
-  public static @JsNonNull String valueOf(Object x) {
-    return x == null ? "null" : x.toString();
-  }
-
-  /**
-   * This method converts Java-escaped dollar signs "\$" into JavaScript-escaped
-   * dollar signs "$$", and removes all other lone backslashes, which serve as
-   * escapes in Java but are passed through literally in JavaScript.
-   *
-   * @skip
-   */
-  private static String translateReplaceString(String replaceStr) {
-    int pos = 0;
-    while (0 <= (pos = replaceStr.indexOf("\\", pos))) {
-      if (replaceStr.charAt(pos + 1) == '$') {
-        replaceStr = replaceStr.substring(0, pos) + "$"
-            + replaceStr.substring(++pos);
-      } else {
-        replaceStr = replaceStr.substring(0, pos) + replaceStr.substring(++pos);
-      }
-    }
-    return replaceStr;
-  }
-
-  private static Charset getCharset(String charsetName) throws UnsupportedEncodingException {
-    try {
-      return Charset.forName(charsetName);
-    } catch (UnsupportedCharsetException e) {
-      throw new UnsupportedEncodingException(charsetName);
-    }
-  }
-
-  static String fromCodePoint(int codePoint) {
-    if (codePoint >= Character.MIN_SUPPLEMENTARY_CODE_POINT) {
-      char hiSurrogate = Character.getHighSurrogate(codePoint);
-      char loSurrogate = Character.getLowSurrogate(codePoint);
-      return String.valueOf(hiSurrogate)
-          + String.valueOf(loSurrogate);
-    } else {
-      return String.valueOf((char) codePoint);
-    }
-  }
-
   public String() {
     /*
      * Call to $create(args) must be here so that the method is referenced and not
@@ -259,7 +135,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public String(byte[] bytes, int ofs, int len, String charsetName)
-      throws UnsupportedEncodingException {
+    throws UnsupportedEncodingException {
     /*
      * Call to $create(args) must be here so that the method is referenced and not
      * pruned before new String(args) is replaced by $create(args) by
@@ -278,7 +154,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public String(byte[] bytes, String charsetName)
-      throws UnsupportedEncodingException {
+    throws UnsupportedEncodingException {
     /*
      * Call to $create(args) must be here so that the method is referenced and not
      * pruned before new String(args) is replaced by $create(args) by
@@ -348,6 +224,190 @@ public final class String implements Comparable<String>, CharSequence,
      * RewriteConstructorCallsForUnboxedTypes.
      */
     $create(sb);
+  }
+
+  public static String copyValueOf(char[] v) {
+    return valueOf(v);
+  }
+
+  public static String copyValueOf(char[] v, int offset, int count) {
+    return valueOf(v, offset, count);
+  }
+
+  public static String join(CharSequence delimiter, CharSequence... elements) {
+    StringJoiner joiner = new StringJoiner(delimiter);
+    for (CharSequence e : elements) {
+      joiner.add(e);
+    }
+    return joiner.toString();
+  }
+
+  public static String join(CharSequence delimiter, Iterable<? extends CharSequence> elements) {
+    StringJoiner joiner = new StringJoiner(delimiter);
+    for (CharSequence e : elements) {
+      joiner.add(e);
+    }
+    return joiner.toString();
+  }
+
+  public static String valueOf(boolean x) {
+    return "" + x;
+  }
+
+  public static String valueOf(char x) {
+    return NativeString.fromCharCode(x);
+  }
+
+  public static String valueOf(char x[], int offset, int count) {
+    int end = offset + count;
+    checkCriticalStringBounds(offset, end, x.length);
+    // Work around function.prototype.apply call stack size limits:
+    // https://code.google.com/p/v8/issues/detail?id=2896
+    // Performance: http://jsperf.com/string-fromcharcode-test/13
+    int batchSize = ArrayHelper.ARRAY_PROCESS_BATCH_SIZE;
+    String s = "";
+    for (int batchStart = offset; batchStart < end; ) {
+      int batchEnd = Math.min(batchStart + batchSize, end);
+      s += fromCharCode(ArrayHelper.unsafeClone(x, batchStart, batchEnd));
+      batchStart = batchEnd;
+    }
+    return s;
+  }
+
+  private static String fromCharCode(Object[] array) {
+    return getFromCharCodeFunction().apply(null, array);
+  }
+
+  @JsProperty(name = "String.fromCharCode", namespace = "<window>")
+  private static native NativeFunction getFromCharCodeFunction();
+
+  public static String valueOf(char[] x) {
+    return valueOf(x, 0, x.length);
+  }
+
+  public static String valueOf(double x) {
+    return "" + x;
+  }
+
+  public static String valueOf(float x) {
+    return "" + x;
+  }
+
+  public static String valueOf(int x) {
+    return "" + x;
+  }
+
+  public static String valueOf(long x) {
+    return "" + x;
+  }
+
+  // valueOf needs to be treated special:
+  // J2cl uses it for String concat and thus it can not use string concatenation itself.
+  public static @JsNonNull String valueOf(Object x) {
+    return x == null ? "null" : x.toString();
+  }
+
+  /**
+   * This method converts Java-escaped dollar signs "\$" into JavaScript-escaped
+   * dollar signs "$$", and removes all other lone backslashes, which serve as
+   * escapes in Java but are passed through literally in JavaScript.
+   *
+   * @skip
+   */
+  private static String translateReplaceString(String replaceStr) {
+    int pos = 0;
+    while (0 <= (pos = replaceStr.indexOf("\\", pos))) {
+      if (replaceStr.charAt(pos + 1) == '$') {
+        replaceStr = replaceStr.substring(0, pos) + "$"
+          + replaceStr.substring(++pos);
+      } else {
+        replaceStr = replaceStr.substring(0, pos) + replaceStr.substring(++pos);
+      }
+    }
+    return replaceStr;
+  }
+
+  private static Charset getCharset(String charsetName) throws UnsupportedEncodingException {
+    try {
+      return Charset.forName(charsetName);
+    } catch (UnsupportedCharsetException e) {
+      throw new UnsupportedEncodingException(charsetName);
+    }
+  }
+
+  static String fromCodePoint(int codePoint) {
+    if (codePoint >= Character.MIN_SUPPLEMENTARY_CODE_POINT) {
+      char hiSurrogate = Character.getHighSurrogate(codePoint);
+      char loSurrogate = Character.getLowSurrogate(codePoint);
+      return String.valueOf(hiSurrogate)
+        + String.valueOf(loSurrogate);
+    } else {
+      return String.valueOf((char) codePoint);
+    }
+  }
+
+  protected static String $create() {
+    return "";
+  }
+
+  protected static String $create(byte[] bytes) {
+    return $create(bytes, 0, bytes.length);
+  }
+
+  protected static String $create(byte[] bytes, int ofs, int len) {
+    return $create(bytes, ofs, len, EmulatedCharset.UTF_8);
+  }
+
+  protected static String $create(byte[] bytes, int ofs, int len, String charsetName)
+    throws UnsupportedEncodingException {
+    return $create(bytes, ofs, len, String.getCharset(charsetName));
+  }
+
+  protected static String $create(byte[] bytes, int ofs, int len, Charset charset) {
+    return String.valueOf(((EmulatedCharset) charset).decodeString(bytes, ofs, len));
+  }
+
+  protected static String $create(byte[] bytes, String charsetName)
+    throws UnsupportedEncodingException {
+    return $create(bytes, 0, bytes.length, charsetName);
+  }
+
+  protected static String $create(byte[] bytes, Charset charset) {
+    return $create(bytes, 0, bytes.length, charset);
+  }
+
+  protected static String $create(char value[]) {
+    return String.valueOf(value);
+  }
+
+  protected static String $create(char value[], int offset, int count) {
+    return String.valueOf(value, offset, count);
+  }
+
+  protected static String $create(int[] codePoints, int offset, int count) {
+    char[] chars = new char[count * 2];
+    int charIdx = 0;
+    while (count-- > 0) {
+      charIdx += Character.toChars(codePoints[offset++], chars, charIdx);
+    }
+    return String.valueOf(chars, 0, charIdx);
+  }
+
+  protected static String $create(String other) {
+    return checkNotNull(other);
+  }
+
+  protected static String $create(StringBuffer sb) {
+    return sb.toString();
+  }
+
+  protected static String $create(StringBuilder sb) {
+    return sb.toString();
+  }
+
+  @JsMethod
+  protected static boolean $isInstance(Object instance) {
+    return "string".equals(JsUtils.typeOf(instance));
   }
 
   private NativeString asNativeString() {
@@ -486,6 +546,15 @@ public final class String implements Comparable<String>, CharSequence,
     return length() == 0;
   }
 
+  public boolean isBlank() {
+    return asNativeString().isBlank();
+  }
+
+  public String lines() {
+    String str = asNativeString();
+    return str.lines();
+  }
+
   public int lastIndexOf(int codePoint) {
     return lastIndexOf(fromCodePoint(codePoint));
   }
@@ -512,7 +581,7 @@ public final class String implements Comparable<String>, CharSequence,
    * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
    * regular expression. For consistency, use only the subset of regular
    * expression syntax common to both Java and JavaScript.
-   *
+   * <p>
    * TODO(jat): properly handle Java regex syntax
    */
   public boolean matches(String regex) {
@@ -525,7 +594,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public boolean regionMatches(boolean ignoreCase, int toffset, String other,
-      int ooffset, int len) {
+                               int ooffset, int len) {
     checkNotNull(other);
     if (toffset < 0 || ooffset < 0) {
       return false;
@@ -565,7 +634,7 @@ public final class String implements Comparable<String>, CharSequence,
 
     // Escape regex special characters from literal replacement string.
     String regex =
-        from.toString().replaceAll("([/\\\\\\.\\*\\+\\?\\|\\(\\)\\[\\]\\{\\}$^])", "\\\\$1");
+      from.toString().replaceAll("([/\\\\\\.\\*\\+\\?\\|\\(\\)\\[\\]\\{\\}$^])", "\\\\$1");
     // Escape $ since it is for match backrefs and \ since it is used to escape
     // $.
     String replacement = to.toString().replaceAll("\\\\", "\\\\\\\\").replaceAll("\\$", "\\\\$");
@@ -578,7 +647,7 @@ public final class String implements Comparable<String>, CharSequence,
    * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
    * regular expression. For consistency, use only the subset of regular
    * expression syntax common to both Java and JavaScript.
-   *
+   * <p>
    * TODO(jat): properly handle Java regex syntax
    */
   public String replaceAll(String regex, String replace) {
@@ -595,7 +664,7 @@ public final class String implements Comparable<String>, CharSequence,
    * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
    * regular expression. For consistency, use only the subset of regular
    * expression syntax common to both Java and JavaScript.
-   *
+   * <p>
    * TODO(jat): properly handle Java regex syntax
    */
   public String replaceFirst(String regex, String replace) {
@@ -619,7 +688,7 @@ public final class String implements Comparable<String>, CharSequence,
    * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
    * regular expression. For consistency, use only the subset of regular
    * expression syntax common to both Java and JavaScript.
-   *
+   * <p>
    * TODO(jat): properly handle Java regex syntax
    */
   public String[] split(String regex, int maxMatch) {
@@ -673,6 +742,8 @@ public final class String implements Comparable<String>, CharSequence,
     return out;
   }
 
+  // CHECKSTYLE_OFF: Utility Methods for unboxed String.
+
   public boolean startsWith(String prefix) {
     return startsWith(prefix, 0);
   }
@@ -723,7 +794,7 @@ public final class String implements Comparable<String>, CharSequence,
    */
   public String toLowerCase(Locale locale) {
     return locale == Locale.getDefault()
-        ? asNativeString().toLocaleLowerCase() : asNativeString().toLowerCase();
+      ? asNativeString().toLocaleLowerCase() : asNativeString().toLowerCase();
   }
 
   // See the notes in lowerCase pair.
@@ -734,7 +805,7 @@ public final class String implements Comparable<String>, CharSequence,
   // See the notes in lowerCase pair.
   public String toUpperCase(Locale locale) {
     return locale == Locale.getDefault()
-        ? asNativeString().toLocaleUpperCase() : asNativeString().toUpperCase();
+      ? asNativeString().toLocaleUpperCase() : asNativeString().toUpperCase();
   }
 
   @Override
@@ -755,88 +826,40 @@ public final class String implements Comparable<String>, CharSequence,
     return start > 0 || end < length ? substring(start, end) : this;
   }
 
+  @JsType(isNative = true, name = "Function", namespace = JsPackage.GLOBAL)
+  private static class NativeFunction {
+    public native String apply(String thisContext, Object[] argsArray);
+  }
+
   @JsType(isNative = true, name = "String", namespace = "<window>")
   private static class NativeString {
-    public static native String fromCharCode(char x);
     public int length;
+
+    public static native String fromCharCode(char x);
+
     public native char charCodeAt(int index);
+
     public native int indexOf(String str);
+
     public native int indexOf(String str, int startIndex);
+
     public native int lastIndexOf(String str);
+
     public native int lastIndexOf(String str, int start);
+
     public native String replace(NativeRegExp regex, String replace);
+
     public native String substr(int beginIndex);
+
     public native String substr(int beginIndex, int len);
+
     public native String toLocaleLowerCase();
+
     public native String toLocaleUpperCase();
+
     public native String toLowerCase();
+
     public native String toUpperCase();
-  }
-
-  // CHECKSTYLE_OFF: Utility Methods for unboxed String.
-
-  protected static String $create() {
-    return "";
-  }
-
-  protected static String $create(byte[] bytes) {
-    return $create(bytes, 0, bytes.length);
-  }
-
-  protected static String $create(byte[] bytes, int ofs, int len) {
-    return $create(bytes, ofs, len, EmulatedCharset.UTF_8);
-  }
-
-  protected static String $create(byte[] bytes, int ofs, int len, String charsetName)
-      throws UnsupportedEncodingException {
-    return $create(bytes, ofs, len, String.getCharset(charsetName));
-  }
-
-  protected static String $create(byte[] bytes, int ofs, int len, Charset charset) {
-    return String.valueOf(((EmulatedCharset) charset).decodeString(bytes, ofs, len));
-  }
-
-  protected static String $create(byte[] bytes, String charsetName)
-      throws UnsupportedEncodingException {
-    return $create(bytes, 0, bytes.length, charsetName);
-  }
-
-  protected static String $create(byte[] bytes, Charset charset) {
-    return $create(bytes, 0, bytes.length, charset);
-  }
-
-  protected static String $create(char value[]) {
-    return String.valueOf(value);
-  }
-
-  protected static String $create(char value[], int offset, int count) {
-    return String.valueOf(value, offset, count);
-  }
-
-  protected static String $create(int[] codePoints, int offset, int count) {
-    char[] chars = new char[count * 2];
-    int charIdx = 0;
-    while (count-- > 0) {
-      charIdx += Character.toChars(codePoints[offset++], chars, charIdx);
-    }
-    return String.valueOf(chars, 0, charIdx);
-  }
-
-  protected static String $create(String other) {
-    return checkNotNull(other);
-  }
-
-  protected static String $create(StringBuffer sb) {
-    return sb.toString();
-  }
-
-  protected static String $create(StringBuilder sb) {
-    return sb.toString();
-  }
-
-  @JsMethod
-  protected static boolean $isInstance(Object instance) {
-    return "string".equals(JsUtils.typeOf(instance));
   }
   // CHECKSTYLE_ON: end utility methods
 }

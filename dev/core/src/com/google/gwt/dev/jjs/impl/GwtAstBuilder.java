@@ -2700,13 +2700,12 @@ public class GwtAstBuilder {
           List<JExpression> args = new ArrayList<>();
 
           // note that we don't append this, but will start the reduce with it
-          JStringLiteral start = new JStringLiteral(info, type.getName() + " { ", javaLangString);
+          JStringLiteral start = new JStringLiteral(info, type.getSimpleName() + "[", javaLangString);
           // alternative impl to consider, so that type metadata obf works
           //JMethod getClassMethod = type.getMethods().get(GET_CLASS_METHOD_INDEX);
           //JMethod classGetSimpleName = typeMap.get(curCud.scope.getJavaLangClass().getExactMethod("getSimpleName".toCharArray(), Binding.NO_TYPES, curCud.scope));
           //JMethodCall start = new JMethodCall(info, new JMethodCall(info, new JThisRef(info, type), getClassMethod), classGetSimpleName);
 
-          args.add(new JStringLiteral(info, " { ", javaLangString));
           List<JField> fields = type.getFields();
           for (int i = 0; i < fields.size(); i++) {
             if (i != 0) {
@@ -2716,7 +2715,7 @@ public class GwtAstBuilder {
             args.add(new JStringLiteral(info, field.getName() + "=", javaLangString));
             args.add(new JFieldRef(info, new JThisRef(info, type), field, type));
           }
-          args.add(new JStringLiteral(info, "}", javaLangString));
+          args.add(new JStringLiteral(info, "]", javaLangString));
           JExpression entireExpression = args.stream().reduce(start, (left, right) -> new JBinaryOperation(info, javaLangString, JBinaryOperator.CONCAT, left, right));
 
           JMethodBody body = new JMethodBody(info);
@@ -2730,7 +2729,7 @@ public class GwtAstBuilder {
           // also to ensure that other isn't null. Then MyRecord.class == other.getClass(), and now we know
           // they're the same type and can cast safely to access fields for the rest.
           JBinaryOperation eq = new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.EQ, new JThisRef(info, type), otherParam.createRef(info));
-          body.getBlock().addStmt(new JIfStatement(info, eq, JBooleanLiteral.FALSE.makeReturnStatement(), null));
+          body.getBlock().addStmt(new JIfStatement(info, eq, JBooleanLiteral.TRUE.makeReturnStatement(), null));
 
           // This is wrong and not optimized automatically, but it is resolvable without waiting for a later visitor
           //TODO replace with Object.getClass instead of Cast.getClass()
@@ -2752,6 +2751,7 @@ public class GwtAstBuilder {
         } else if (method.getName().equals(HASHCODE_METHOD_NAME) && method.getParams().isEmpty()) {
           List<JExpression> fields = type.getFields().stream().map(field -> new JFieldRef(info, new JThisRef(info, type), field, type)).collect(Collectors.toList());
 
+          // TODO this isn't quite right, this doesn't box primitives
           JMethodCall invoke = new JMethodCall(info, null, OBJECTS_HASH_METHOD, fields);
 
           JMethodBody body = new JMethodBody(info);
@@ -2874,12 +2874,6 @@ public class GwtAstBuilder {
     }
 
     protected boolean visit(TypeDeclaration x) {
-      if (x.isRecord()) {
-        InternalCompilerException exception =
-            new InternalCompilerException("Records not yet supported");
-        exception.addNode(new JClassType(makeSourceInfo(x), intern(x.name), false, false));
-        throw exception;
-      }
       JDeclaredType type = (JDeclaredType) typeMap.get(x.binding);
       assert !type.isExternal();
       classStack.push(curClass);

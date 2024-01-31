@@ -15,5 +15,5 @@
 <!-- Contains tests for breaking out of the client source path  -->
 <module>
   <inherits name="com.google.gwt.core.Core" />
-  <super-source path='super' />
+  <source path='test' />
 </module>

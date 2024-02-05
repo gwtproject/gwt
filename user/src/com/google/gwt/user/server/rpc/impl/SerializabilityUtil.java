@@ -915,6 +915,19 @@ public class SerializabilityUtil {
       for (Enum<?> constant : constants) {
         crc.update(constant.name().getBytes(StandardCharsets.UTF_8));
       }
+    } else if (Enum.class.equals(instanceType)) {
+      // Edge case around Java 21 where a new non-final field was added to Enum. While the Enum
+      // class is rarely serialized itself (see the block above to deal with enum types), it can
+      // happen - this code ensures that the server always treats the Enum type the same way,
+      // regardless of JRE changes.
+      // See https://github.com/gwtproject/gwt/issues/9912
+      if (policy.shouldSerializeFinalFields()) {
+        crc.update("name".getBytes(StandardCharsets.UTF_8));
+        crc.update(getSerializedTypeName(String.class).getBytes(StandardCharsets.UTF_8));
+        crc.update("ordinal".getBytes(StandardCharsets.UTF_8));
+        crc.update(getSerializedTypeName(int.class).getBytes(StandardCharsets.UTF_8));
+      }
+      generateSerializationSignature(Object.class, crc, policy);
     } else if (!instanceType.isPrimitive()) {
       Field[] fields = applyFieldSerializationPolicy(instanceType, policy);
       Set<String> clientFieldNames = policy.getClientFieldNamesForEnhancedClass(instanceType);

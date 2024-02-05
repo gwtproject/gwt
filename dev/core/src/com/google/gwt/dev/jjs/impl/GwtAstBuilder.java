@@ -194,6 +194,7 @@ import org.eclipse.jdt.internal.compiler.ast.Statement;
 import org.eclipse.jdt.internal.compiler.ast.StringLiteral;
 import org.eclipse.jdt.internal.compiler.ast.StringLiteralConcatenation;
 import org.eclipse.jdt.internal.compiler.ast.SuperReference;
+import org.eclipse.jdt.internal.compiler.ast.SwitchExpression;
 import org.eclipse.jdt.internal.compiler.ast.SwitchStatement;
 import org.eclipse.jdt.internal.compiler.ast.SynchronizedStatement;
 import org.eclipse.jdt.internal.compiler.ast.ThisReference;
@@ -537,13 +538,25 @@ public class GwtAstBuilder {
 
     @Override
     public void endVisit(CaseStatement x, BlockScope scope) {
+      if (x.isExpr) {
+        InternalCompilerException exception =
+            new InternalCompilerException("Switch expressions not yet supported");
+        exception.addNode(new JCaseStatement(makeSourceInfo(x), null));
+        throw exception;
+      }
       try {
         SourceInfo info = makeSourceInfo(x);
-        JExpression caseExpression = pop(x.constantExpression);
-        if (caseExpression != null && x.constantExpression.resolvedType.isEnum()) {
-          caseExpression = synthesizeCallToOrdinal(scope, info, caseExpression);
+        if (x.constantExpressions == null) {
+          push(new JCaseStatement(info, null));
+        } else {
+          for (Expression constantExpression : x.constantExpressions) {
+            JExpression caseExpression = pop(constantExpression);
+            if (caseExpression != null && caseExpression.getType().isEnumOrSubclass() != null) {
+              caseExpression = synthesizeCallToOrdinal(scope, info, caseExpression);
+            }
+            push(new JCaseStatement(info, caseExpression));
+          }
         }
-        push(new JCaseStatement(info, caseExpression));
       } catch (Throwable e) {
         throw translateException(x, e);
       }
@@ -2535,6 +2548,14 @@ public class GwtAstBuilder {
     }
 
     @Override
+    public boolean visit(SwitchExpression x, BlockScope blockScope) {
+      InternalCompilerException exception =
+          new InternalCompilerException("Switch expressions not yet supported");
+      exception.addNode(new JCaseStatement(makeSourceInfo(x), null));
+      throw exception;
+    }
+
+    @Override
     public boolean visit(LocalDeclaration x, BlockScope scope) {
       try {
         createLocal(x);
@@ -2752,6 +2773,12 @@ public class GwtAstBuilder {
     }
 
     protected boolean visit(TypeDeclaration x) {
+      if (x.isRecord()) {
+        InternalCompilerException exception =
+            new InternalCompilerException("Records not yet supported");
+        exception.addNode(new JClassType(makeSourceInfo(x), intern(x.name), false, false));
+        throw exception;
+      }
       JDeclaredType type = (JDeclaredType) typeMap.get(x.binding);
       assert !type.isExternal();
       classStack.push(curClass);
@@ -3705,7 +3732,6 @@ public class GwtAstBuilder {
         return new JType[] {typeMap.get(type)};
       }
     }
-
 
     private boolean isFunctionalInterfaceWithMethod(ReferenceBinding referenceBinding, Scope scope,
         String samSignature) {

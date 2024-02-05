@@ -37,6 +37,7 @@ import org.eclipse.jdt.internal.compiler.env.IBinaryMethod;
 import org.eclipse.jdt.internal.compiler.env.IBinaryNestedType;
 import org.eclipse.jdt.internal.compiler.env.IBinaryType;
 import org.eclipse.jdt.internal.compiler.env.IBinaryTypeAnnotation;
+import org.eclipse.jdt.internal.compiler.env.IRecordComponent;
 import org.eclipse.jdt.internal.compiler.env.ITypeAnnotationWalker;
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
 import org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding;
@@ -180,6 +181,16 @@ public class BinaryTypeReferenceRestrictionsCheckerTest extends TestCase {
     @Override
     public ExternalAnnotationStatus getExternalAnnotationStatus() {
       return null;
+    }
+
+    @Override
+    public IRecordComponent[] getRecordComponents() {
+      return null;
+    }
+
+    @Override
+    public boolean isRecord() {
+      return false;
     }
   }
 

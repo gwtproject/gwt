@@ -16,12 +16,16 @@ package com.google.gwt.dev.jjs.impl;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.jjs.InternalCompilerException;
+import com.google.gwt.dev.jjs.ast.JAbstractMethodBody;
+import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
+import com.google.gwt.dev.jjs.ast.JType;
 
 import java.util.Arrays;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Tests that {@link GwtAstBuilder} correctly builds the AST for
@@ -46,18 +50,33 @@ public class Java17AstTest extends FullCompileTestBase {
     addAll(JavaResourceBase.createMockJavaResource("test.Shape",
         "package test;",
         "public sealed class Shape permits Square, Circle {",
+        "private static int count = 0;",
+        "public static Shape returnAndIncrement(Shape shape) {",
+        "count++;",
+        "return shape;",
+        "}",
         "}"
     ));
 
     addAll(JavaResourceBase.createMockJavaResource("test.Square",
         "package test;",
         "public final class Square extends Shape {",
+
+        "public int getLength() {",
+        "return 10;",
+        "}",
+        "public double getSide() {",
+        "return 0;",
+        "}",
         "}"
     ));
 
     addAll(JavaResourceBase.createMockJavaResource("test.Circle",
         "package test;",
         "public final class Circle extends Shape {",
+        "public double getDiameter() {",
+        "return 0;",
+        "}",
         "}"
     ));
 
@@ -65,6 +84,20 @@ public class Java17AstTest extends FullCompileTestBase {
         "package test;",
         "public enum Months {",
         "JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER;",
+        "}"
+    ));
+
+    addAll(JavaResourceBase.createMockJavaResource("test.TestSupplier",
+        "package test;",
+        "public interface TestSupplier {",
+        "  boolean run();",
+        "}"
+    ));
+
+    addAll(JavaResourceBase.createMockJavaResource("test.Polygon",
+        "package test;",
+        "public class Polygon {",
+        "  public int sides;",
         "}"
     ));
   }
@@ -135,6 +168,95 @@ public class Java17AstTest extends FullCompileTestBase {
     }
   }
 
+  public void testInstanceOfPatternMatching() throws UnableToCompleteException {
+    JProgram program = compileSnippet("void", "Shape shape1 = new Circle();" +
+        "if(shape1 instanceof Circle circle) {" +
+        "double diameter = circle.getDiameter();" +
+        "}"
+    );
+
+    JAbstractMethodBody onModuleLoadMethod = findMethod(program, "onModuleLoad")
+        .getBody();
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains("Circle circle;"));
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains("Shape $instanceOfExpr_3;"));
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains(
+            "($instanceOfExpr_3 = shape1) instanceof Circle && null != (circle = (Circle) $instanceOfExpr_3)"));
+  }
+
+  public void testInstanceOfPatternMatchingWithSideEffectsExpression()
+      throws UnableToCompleteException {
+    JProgram program = compileSnippet("void", "Shape shape1 = new Circle();" +
+        "if(Shape.returnAndIncrement(shape1) instanceof Circle circle) {" +
+        "double diameter = circle.getDiameter();" +
+        "}"
+    );
+
+    JAbstractMethodBody onModuleLoadMethod = findMethod(program, "onModuleLoad")
+        .getBody();
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains("Circle circle;"));
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains("Shape $instanceOfExpr_3;"));
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains(
+            "($instanceOfExpr_3 = Shape.returnAndIncrement(shape1)) instanceof Circle && null != (circle = (Circle) $instanceOfExpr_3)"));
+  }
+
+  public void testInstanceOfPatternMatchingWithAnd() throws UnableToCompleteException {
+    JProgram program = compileSnippet("void",
+        "Shape shape1 = new Circle();\n" +
+        "Shape shape2 = new Square();\n" +
+        "if(shape1 instanceof Circle circle && shape2 instanceof Square square) {\n" +
+        "double diameter = circle.getDiameter();\n" +
+        "}\n"
+    );
+
+    JAbstractMethodBody onModuleLoadMethod = findMethod(program, "onModuleLoad")
+        .getBody();
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains("Circle circle;"));
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains("Shape $instanceOfExpr_4;"));
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains("Square square;"));
+
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains("Shape $instanceOfExpr_6"));
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains(
+            "($instanceOfExpr_4 = shape1) instanceof Circle && null != (circle = (Circle) $instanceOfExpr_4)"));
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains(
+            "($instanceOfExpr_6 = shape2) instanceof Square && null != (square = (Square) $instanceOfExpr_6)"));
+  }
+
   public void testSwitchExpressionsInitializerShouldFail() {
     try {
       compileSnippet("void", "    int i = switch(1) {\n" +
@@ -152,6 +274,157 @@ public class Java17AstTest extends FullCompileTestBase {
       }
       assertEquals("Switch expressions not yet supported", e.getMessage());
     }
+  }
+
+  public void testInstanceOfPatternMatchingWithCondition() throws UnableToCompleteException {
+    JProgram program = compileSnippet("void",
+        "Shape shape2 = new Square();\n" +
+        "if(shape2 instanceof Square square && square.getLength() > 0) {\n" +
+        "double diameter = square.getSide();\n" +
+        "}\n"
+    );
+
+    JAbstractMethodBody onModuleLoadMethod = findMethod(program, "onModuleLoad")
+        .getBody();
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains("Square square;"));
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains("Shape $instanceOfExpr_3;"));
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains(
+            "($instanceOfExpr_3 = shape2) instanceof Square && null != (square = (Square) $instanceOfExpr_3)"));
+  }
+
+  public void testInstanceOfPatternMatchingWithAsNotCondition() throws UnableToCompleteException {
+    JProgram program = compileSnippet("void",
+        "Shape shape1 = new Square();\n" +
+        "if(!(shape1 instanceof Square square && square.getLength() > 0)) {\n" +
+        "}\n"
+    );
+
+    JAbstractMethodBody onModuleLoadMethod = findMethod(program, "onModuleLoad")
+        .getBody();
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains("Square square;"));
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains("Shape $instanceOfExpr_3;"));
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains(
+            "($instanceOfExpr_3 = shape1) instanceof Square && null != (square = (Square) $instanceOfExpr_3)"));
+  }
+
+  public void testMultipleInstanceOfPatternMatchingWithSameVariableName() throws UnableToCompleteException {
+    JProgram program = compileSnippet("void",
+        "Shape shape1 = new Square();\n" +
+        "Shape shape2 = new Square();\n" +
+        "if(shape1 instanceof Square square && square.getLength() > 0) {\n" +
+        "}\n" +
+        "if(shape2 instanceof Square square && square.getLength() > 0) {\n" +
+        "}\n"
+    );
+
+    JAbstractMethodBody onModuleLoadMethod = findMethod(program, "onModuleLoad")
+        .getBody();
+
+    assertEquals(1, StringUtils.countMatches(onModuleLoadMethod.toSource(), "Square square;"));
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains("Shape $instanceOfExpr_4;"));
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains("Shape $instanceOfExpr_6;"));
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains(
+            "($instanceOfExpr_4 = shape1) instanceof Square && null != (square = (Square) $instanceOfExpr_4)"));
+
+    assertTrue(onModuleLoadMethod
+        .toSource()
+        .contains(
+            "($instanceOfExpr_6 = shape2) instanceof Square && null != (square = (Square) $instanceOfExpr_6)"));
+  }
+
+  public void testInstanceOfPatternMatchingInLambda() throws UnableToCompleteException {
+    addSnippetClassDecl("public class Foo {\n" +
+        "private Shape shape;\n" +
+        "public Foo(){\n" +
+        "shape = new Square();\n" +
+        "}\n" +
+        "public TestSupplier isSquare(){\n" +
+        "return () -> shape instanceof Square square && square.getLength() > 0;\n" +
+        "}\n" +
+        "}");
+
+    JProgram program = compileSnippet("void", "Foo foo = new Foo();");
+    JType foo = findType(program, "test.EntryPoint.Foo");
+    JAbstractMethodBody lambda = findMethod((JDeclaredType) foo, "lambda$0")
+        .getBody();
+
+    assertTrue(lambda
+        .toSource()
+        .contains("Square square;"));
+
+    assertTrue(lambda
+        .toSource()
+        .contains("Shape $instanceOfExpr_2;"));
+
+    assertTrue(lambda
+        .toSource()
+        .contains(
+            "($instanceOfExpr_2 = this.shape) instanceof Square && null != (square = (Square) $instanceOfExpr_2)"));
+  }
+
+  public void testInstanceOfPatternMatchingAsReturn() throws UnableToCompleteException {
+
+    addSnippetClassDecl("public class Foo {\n" +
+        "private Shape shape;\n" +
+        "public Foo(){\n" +
+        "shape = new Square();\n" +
+        "}\n" +
+        "public boolean isSquare(){\n" +
+        "return shape instanceof Square square && square.getLength() > 0;\n" +
+        "}\n" +
+        "}");
+    JProgram program = compileSnippet("void", "Foo foo = new Foo();");
+    JType foo = findType(program, "test.EntryPoint.Foo");
+    JAbstractMethodBody isSquare = findMethod((JDeclaredType) foo, "isSquare")
+        .getBody();
+
+    assertTrue(isSquare
+        .toSource()
+        .contains("Square square;"));
+
+    assertTrue(isSquare
+        .toSource()
+        .contains("Shape $instanceOfExpr_2;"));
+
+    assertTrue(isSquare
+        .toSource()
+        .contains(
+            "($instanceOfExpr_2 = this.shape) instanceof Square && null != (square = (Square) $instanceOfExpr_2)"));
+  }
+
+  public void testInstanceOfPatternMatchingWithConditionalOperator()
+      throws UnableToCompleteException {
+      compileSnippet("void", "var a = true ? \"a\":'a';\n" +
+          "if(a instanceof CharSequence p) {\n" +
+          "     int b= p.length();\n" +
+          "}");
   }
 
   @Override

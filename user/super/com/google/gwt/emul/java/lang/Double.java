@@ -219,5 +219,5 @@ public final class Double extends Number implements Comparable<Double> {
   protected static boolean $isInstance(Object instance) {
     return "number".equals(JsUtils.typeOf(instance));
   }
-  //CHECKSTYLE_ON: End utility methods
+  // CHECKSTYLE_ON: End utility methods
 }

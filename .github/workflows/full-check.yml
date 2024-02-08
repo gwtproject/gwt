@@ -29,9 +29,8 @@ jobs:
       - name: Checkout GWT tools into a sibling directory
         uses: actions/checkout@v4
         with:
-          repository: 'Vertispan/tools'
+          repository: 'gwtproject/tools'
           path: 'tools'
-          ref: 'checkstyle-10.13.0'
       - name: Set up JDK ${{ matrix.java-version }}
         # GWT requires Java 11+ to build
         uses: actions/setup-java@v4

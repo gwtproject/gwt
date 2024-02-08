@@ -91,10 +91,12 @@ Description:
             <property name="allowMissingReturnTag" value="true"/>
             <property name="tokens" value="METHOD_DEF"/>
         </module>
-        <module name="CustomImportOrder">
-            <property name="sortImportsInGroupAlphabetically" value="true"/>
-            <property name="separateLineBetweenGroups" value="true"/>
-            <property name="customImportOrderRules" value="STATIC###THIRD_PARTY_PACKAGE"/>
+        <module name="ImportOrder">
+            <property name="groups" value="/^com\.google\./, /^cern\./, /^com\./, /^junit\./, /^net\./, /^org\./, /^(java|javaemul|jsinterop)\./, /^javax\./" />
+            <property name="option" value="top" />
+            <property name="separated" value="true" />
+            <property name="separatedStaticGroups" value="true" />
+            <property name="sortStaticImportsAlphabetically" value="true" />
         </module>
         <module name="DefaultComesLast">
             <property name="severity" value="error"/>

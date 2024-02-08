@@ -19,6 +19,7 @@ import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import com.google.gwt.core.client.JavaScriptObject;
+
 import java.io.Serializable;
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsNonNull;

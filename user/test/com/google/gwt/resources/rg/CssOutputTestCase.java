@@ -15,6 +15,11 @@
  */
 package com.google.gwt.resources.rg;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.GeneratedResource;
@@ -24,11 +29,6 @@ import com.google.gwt.dev.util.UnitTestTreeLogger;
 import com.google.gwt.resources.ext.ResourceContext;
 
 import junit.framework.TestCase;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;

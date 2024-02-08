@@ -21,7 +21,6 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Iterator;
-
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;

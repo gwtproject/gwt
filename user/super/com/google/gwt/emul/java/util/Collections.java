@@ -23,7 +23,6 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import java.io.Serializable;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
-
 import jsinterop.annotations.JsNonNull;
 
 /**

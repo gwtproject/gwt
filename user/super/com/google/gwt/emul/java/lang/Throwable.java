@@ -21,9 +21,7 @@ import static javaemul.internal.InternalPreconditions.checkState;
 
 import java.io.PrintStream;
 import java.io.Serializable;
-
 import javaemul.internal.annotations.DoNotInline;
-
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsPackage;

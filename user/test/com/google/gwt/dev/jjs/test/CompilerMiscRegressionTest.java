@@ -34,7 +34,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;

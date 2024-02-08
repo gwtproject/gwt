@@ -18,6 +18,7 @@ package com.google.gwt.emultest.java.io;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.gwt.junit.client.GWTTestCase;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

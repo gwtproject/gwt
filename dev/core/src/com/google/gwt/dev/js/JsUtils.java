@@ -47,7 +47,6 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.Collections;
 import java.util.List;
-
 import java.util.regex.Pattern;
 
 /**

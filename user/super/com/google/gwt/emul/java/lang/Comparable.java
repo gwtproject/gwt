@@ -16,7 +16,6 @@
 package java.lang;
 
 import javaemul.internal.JsUtils;
-
 import jsinterop.annotations.JsMethod;
 
 /**

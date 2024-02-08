@@ -51,7 +51,7 @@ public class Java10Test extends GWTTestCase {
 
     Supplier<String> initializer = () -> "37";
     var s2 = initializer.get();
-    //to be sure that s2 was inferred as a string and not an Object
+    // to be sure that s2 was inferred as a string and not an Object
     String s3 = s2;
     assertEquals("37", s3);
   }

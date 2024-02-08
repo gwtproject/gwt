@@ -125,5 +125,5 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
   protected static boolean $isInstance(Object instance) {
     return "boolean".equals(JsUtils.typeOf(instance));
   }
-  //CHECKSTYLE_ON: End utility methods
+  // CHECKSTYLE_ON: End utility methods
 }

@@ -2700,12 +2700,10 @@ public class GwtAstBuilder {
           List<JExpression> args = new ArrayList<>();
 
           // note that we don't append this, but will start the reduce with it
-          JStringLiteral start = new JStringLiteral(info, type.getSimpleName() + "[", javaLangString);
-          // alternative impl to consider, so that type metadata obf works
-          //JMethod getClassMethod = type.getMethods().get(GET_CLASS_METHOD_INDEX);
-          //JMethod classGetSimpleName = typeMap.get(curCud.scope.getJavaLangClass().getExactMethod("getSimpleName".toCharArray(), Binding.NO_TYPES, curCud.scope));
-          //JMethodCall start = new JMethodCall(info, new JMethodCall(info, new JThisRef(info, type), getClassMethod), classGetSimpleName);
+          JMethod classGetSimpleName = typeMap.get(curCud.scope.getJavaLangClass().getExactMethod("getSimpleName".toCharArray(), Binding.NO_TYPES, curCud.scope));
+          JMethodCall start = new JMethodCall(info, new JClassLiteral(info, type), classGetSimpleName);
 
+          args.add(new JStringLiteral(info, "[", javaLangString));
           List<JField> fields = type.getFields();
           for (int i = 0; i < fields.size(); i++) {
             if (i != 0) {
@@ -2732,7 +2730,7 @@ public class GwtAstBuilder {
           body.getBlock().addStmt(new JIfStatement(info, eq, JBooleanLiteral.TRUE.makeReturnStatement(), null));
 
           // This is wrong and not optimized automatically, but it is resolvable without waiting for a later visitor
-          //TODO replace with Object.getClass instead of Cast.getClass()
+          // TODO replace with Object.getClass instead of Cast.getClass()
           JBinaryOperation sameTypeCheck = new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.EQ, new JClassLiteral(info, type), new JMethodCall(info, null, CAST_GET_CLASS_METHOD, otherParam.createRef(info)));
           body.getBlock().addStmt(new JIfStatement(info, sameTypeCheck, JBooleanLiteral.FALSE.makeReturnStatement(), null));
 
@@ -2781,7 +2779,6 @@ public class GwtAstBuilder {
           }
         }
       }
-
     }
 
     protected JBlock pop(Block x) {
@@ -4286,9 +4283,9 @@ public class GwtAstBuilder {
         }
       }
 
-      if(x.isRecord()){
+      if (x.isRecord()) {
         // build implicit record component accessor methods, JDT doesn't declare them
-        for (JField field : type.getFields()){
+        for (JField field : type.getFields()) {
           // create a method binding that corresponds to the method we are creating, jdt won't offer us one unless
           // it was defined in source
           MethodBinding recordComponentAccessor = binding.getExactMethod(field.getName().toCharArray(), new TypeBinding[0], curCud.scope);

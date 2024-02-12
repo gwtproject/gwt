@@ -22,6 +22,7 @@ import java.io.File;
 /**
  * Provides information about work directories.
  */
+@Deprecated
 public interface WorkDirs {
   /**
    * Gets the compiler output directory for a particular module.

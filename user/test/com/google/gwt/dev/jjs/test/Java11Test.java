@@ -15,42 +15,41 @@
  */
 package com.google.gwt.dev.jjs.test;
 
-import com.google.gwt.dev.util.arg.SourceLevel;
 import com.google.gwt.junit.DoNotRunWith;
-import com.google.gwt.junit.JUnitShell;
 import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
- * Dummy test case. Java11Test is super sourced so that GWT can be compiled by Java 8.
- *
- * NOTE: Make sure this class has the same test methods of its supersourced variant.
+ * Tests Java 11 features.
  */
 @DoNotRunWith(Platform.Devel)
 public class Java11Test extends GWTTestCase {
+
+  @interface NotNull {
+  }
+
+  interface Lambda<T> {
+    T run(T a, T b);
+  }
 
   @Override
   public String getModuleName() {
     return "com.google.gwt.dev.jjs.Java11Test";
   }
 
-  @Override
-  public void runTest() throws Throwable {
-    // Only run these tests if -sourceLevel 11 (or greater) is enabled.
-    if (isGwtSourceLevel11()) {
-      super.runTest();
-    }
-  }
-
   public void testLambdaParametersVarType() {
-    assertFalse(isGwtSourceLevel11());
+    Lambda<String> l = (@NotNull var x, var y) -> x + y;
+    assertEquals("12", l.run("1", "2"));
   }
 
   public void testLambdaParametersVarType_function() {
-    assertFalse(isGwtSourceLevel11());
-  }
-
-  private boolean isGwtSourceLevel11() {
-    return JUnitShell.getCompilerOptions().getSourceLevel().compareTo(SourceLevel.JAVA11) >= 0;
+    List<String> l = Arrays.asList("a", "b");
+    l = l.stream().map((var s) -> s.toUpperCase()).collect(Collectors.toList());
+    assertEquals("A", l.get(0));
+    assertEquals("B", l.get(1));
   }
 }

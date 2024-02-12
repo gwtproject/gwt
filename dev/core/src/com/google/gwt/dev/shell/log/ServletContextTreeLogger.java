@@ -22,6 +22,7 @@ import javax.servlet.ServletContext;
 /**
  * Tree logger that logs servlet context information.
  */
+@Deprecated
 public class ServletContextTreeLogger extends AbstractTreeLogger {
 
   private final ServletContext ctx;

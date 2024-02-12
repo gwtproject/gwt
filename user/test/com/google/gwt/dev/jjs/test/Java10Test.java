@@ -19,10 +19,9 @@ import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.function.Supplier;
-
-import java.io.Serializable;
 
 /**
  * Tests Java 10 features.

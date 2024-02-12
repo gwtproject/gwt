@@ -30,7 +30,6 @@ import java.util.function.BiFunction;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -45,7 +44,9 @@ public class Java8Test extends GWTTestCase {
   int local = 42;
 
   static abstract class SameClass {
-    public int method1() { return 10; }
+    public int method1() {
+      return 10;
+    }
     public abstract int method2();
   }
 
@@ -77,7 +78,7 @@ public class Java8Test extends GWTTestCase {
     private final int x;
     private final int y;
 
-    public Pojo(int x, int y) {
+    Pojo(int x, int y) {
       this.x = x;
       this.y = y;
     }
@@ -164,7 +165,9 @@ public class Java8Test extends GWTTestCase {
     static {
       staticField = 99;
     }
-    static Integer staticMethod(int x, int y) { return x + y + staticField; }
+    static Integer staticMethod(int x, int y) {
+      return x + y + staticField;
+    }
   }
 
   private static void throwInClinit() {
@@ -793,7 +796,9 @@ public class Java8Test extends GWTTestCase {
     return clickHandler.onClick(1);
   }
   private int addClickHandler(int a) {
-    return addClickHandler(x -> { int temp = a; return temp; });
+    return addClickHandler(x -> {
+      int temp = a; return temp;
+    });
   }
   public void testLambdaCaptureParameter() {
     assertEquals(2, addClickHandler(2));
@@ -810,7 +815,11 @@ public class Java8Test extends GWTTestCase {
   }
   public void testLambdaNestingCaptureLocal() {
     int[] success = new int[] {0};
-    testLambda_call(sam1 -> { testLambda_call(sam2 -> { success[0] = 10; }); });
+    testLambda_call(sam1 -> {
+      testLambda_call(sam2 -> {
+        success[0] = 10;
+      });
+    });
     assertEquals(10, success[0]);
   }
 
@@ -1024,7 +1033,11 @@ public class Java8Test extends GWTTestCase {
 
   public void testLambdaNestingCaptureField() {
     TestLambda_Class a = new TestLambda_Class();
-    a.call(sam1 -> { a.call(sam2 -> { a.s[0] = 20; }); });
+    a.call(sam1 -> {
+      a.call(sam2 -> {
+        a.s[0] = 20;
+      });
+    });
     assertEquals(20, a.s[0]);
   }
 
@@ -1032,7 +1045,13 @@ public class Java8Test extends GWTTestCase {
     TestLambda_Class a = new TestLambda_Class();
     TestLambda_Class b = new TestLambda_Class();
     int [] s = new int [] {0};
-    b.call(sam0 -> a.call(sam1 -> { a.call(sam2 -> { a.s[0] = 20; b.s[0] = 30; s[0] = 40; }); }));
+    b.call(sam0 -> a.call(sam1 -> {
+      a.call(sam2 -> {
+        a.s[0] = 20;
+        b.s[0] = 30;
+        s[0] = 40;
+      });
+    }));
     assertEquals(20, a.s[0]);
     assertEquals(30, b.s[0]);
     assertEquals(40, s[0]);
@@ -2007,9 +2026,9 @@ public class Java8Test extends GWTTestCase {
     assertTrue(p.test(null));
   }
 
-  interface I2<T> { public T foo(T arg); }
+  interface I2<T> { T foo(T arg); }
 
-  interface I1 extends I2<String> { public String foo(String arg0); }
+  interface I1 extends I2<String> { String foo(String arg0); }
 
   @SuppressWarnings({"rawtypes", "unchecked"})
   public void testIntersectionCastLambda() {
@@ -2025,7 +2044,11 @@ public class Java8Test extends GWTTestCase {
     assertEquals("#2", lambda.foo("2"));
   }
 
-  static class C2 { public static String append(String str) { return "#" + str; } }
+  static class C2 {
+    public static String append(String str) {
+      return "#" + str;
+    }
+  }
   @SuppressWarnings({"rawtypes", "unchecked"})
   public void testIntersectionCastMethodReference() {
 

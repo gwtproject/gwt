@@ -20,7 +20,6 @@ import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
 
 import java.util.Random;
-
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 

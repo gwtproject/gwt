@@ -19,6 +19,7 @@ import static java.util.Arrays.asList;
 
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.testing.TestUtils;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;

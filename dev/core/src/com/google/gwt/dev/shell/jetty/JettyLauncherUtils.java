@@ -16,6 +16,7 @@
 package com.google.gwt.dev.shell.jetty;
 
 import com.google.gwt.core.ext.TreeLogger;
+
 import org.eclipse.jetty.server.HttpConfiguration;
 import org.eclipse.jetty.server.HttpConnectionFactory;
 import org.eclipse.jetty.server.SecureRequestCustomizer;

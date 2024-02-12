@@ -16,10 +16,9 @@
 package com.google.gwt.dev.resource.impl;
 
 import com.google.gwt.dev.resource.impl.DefaultFilters.FilterFileType;
+import com.google.gwt.thirdparty.apache.ant.types.ZipScanner;
 
 import junit.framework.TestCase;
-
-import com.google.gwt.thirdparty.apache.ant.types.ZipScanner;
 
 import java.util.ArrayList;
 import java.util.Arrays;

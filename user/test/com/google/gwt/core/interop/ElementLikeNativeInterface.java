@@ -15,7 +15,6 @@
  */
 package com.google.gwt.core.interop;
 
-
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 

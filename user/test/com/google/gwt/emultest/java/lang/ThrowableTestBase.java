@@ -16,6 +16,7 @@
 package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
+
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;

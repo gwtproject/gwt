@@ -18,7 +18,6 @@ package java.lang;
 import com.google.gwt.core.client.JavaScriptObject;
 
 import java.lang.reflect.Type;
-
 import javaemul.internal.annotations.DoNotInline;
 
 /**

@@ -16,6 +16,7 @@
 package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.testing.TestUtils;
+
 import java.io.IOException;
 import jsinterop.annotations.JsType;
 

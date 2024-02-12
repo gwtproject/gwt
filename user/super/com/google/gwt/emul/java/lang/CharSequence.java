@@ -22,9 +22,7 @@ import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
-
 import javaemul.internal.JsUtils;
-
 import jsinterop.annotations.JsMethod;
 
 /**

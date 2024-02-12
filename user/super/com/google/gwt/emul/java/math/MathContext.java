@@ -38,7 +38,6 @@ import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
-
 import javaemul.internal.NativeRegExp;
 
 /**

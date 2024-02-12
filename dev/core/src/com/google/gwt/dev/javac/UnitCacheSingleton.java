@@ -17,7 +17,6 @@ package com.google.gwt.dev.javac;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-
 import com.google.gwt.dev.jjs.JJSOptions;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.util.tools.shared.Md5Utils;

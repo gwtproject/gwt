@@ -16,6 +16,7 @@
 package com.google.gwt.dev.shell.jetty;
 
 import com.google.gwt.core.ext.TreeLogger;
+
 import org.eclipse.jetty.util.log.Logger;
 
 /**

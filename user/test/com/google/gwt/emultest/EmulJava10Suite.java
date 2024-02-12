@@ -15,14 +15,15 @@
  */
 package com.google.gwt.emultest;
 
+import com.google.gwt.emultest.java10.util.ListTest;
+import com.google.gwt.emultest.java10.util.MapTest;
 import com.google.gwt.emultest.java10.util.OptionalDoubleTest;
 import com.google.gwt.emultest.java10.util.OptionalIntTest;
 import com.google.gwt.emultest.java10.util.OptionalLongTest;
 import com.google.gwt.emultest.java10.util.OptionalTest;
-import com.google.gwt.emultest.java10.util.ListTest;
-import com.google.gwt.emultest.java10.util.MapTest;
 import com.google.gwt.emultest.java10.util.SetTest;
 import com.google.gwt.emultest.java10.util.stream.CollectorsTest;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;

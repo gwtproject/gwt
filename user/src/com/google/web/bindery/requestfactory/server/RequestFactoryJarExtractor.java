@@ -18,7 +18,6 @@ package com.google.web.bindery.requestfactory.server;
 import com.google.gwt.dev.util.Name;
 import com.google.gwt.dev.util.Name.SourceOrBinaryName;
 import com.google.gwt.dev.util.Util;
-
 import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.google.web.bindery.requestfactory.apt.RfValidator;
 import com.google.web.bindery.requestfactory.apt.ValidationTool;

@@ -62,6 +62,7 @@ import com.google.gwt.emultest.java.util.ComparatorTest;
 import com.google.gwt.emultest.java.util.DateTest;
 import com.google.gwt.emultest.java.util.ObjectsTest;
 import com.google.gwt.emultest.java.util.RandomTest;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;

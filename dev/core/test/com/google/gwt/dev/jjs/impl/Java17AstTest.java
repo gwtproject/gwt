@@ -104,7 +104,6 @@ public class Java17AstTest extends FullCompileTestBase {
   public void testRecordsNotSupported() throws UnableToCompleteException {
     addSnippetClassDecl("public record Point(int x, int y) {}");
     compileSnippet("void", "Point rectangle = new Point(0, 0);");
-
   }
 
   public void testSwitchExpressionsNotSupported() {

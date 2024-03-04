@@ -22,6 +22,7 @@ import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JVariable;
@@ -31,6 +32,7 @@ import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -46,7 +48,10 @@ public class JChangeTrackingVisitorTest extends JJSTestBase {
 
     @Override
     public boolean enter(JMethod x, Context ctx) {
-      x.createParameter(SourceOrigin.UNKNOWN, "_newParam_enter", JPrimitiveType.INT);
+      // Don't add args at the end of varargs methods
+      if (isNotVarargs(x)) {
+        x.createParameter(SourceOrigin.UNKNOWN, "_newParam_enter", JPrimitiveType.INT);
+      }
       return true;
     }
   }
@@ -58,8 +63,16 @@ public class JChangeTrackingVisitorTest extends JJSTestBase {
 
     @Override
     public void exit(JMethod x, Context ctx) {
-      x.createParameter(SourceOrigin.UNKNOWN, "_newParam_exit", JPrimitiveType.INT);
+      // Don't add args at the end of varargs methods
+      if (isNotVarargs(x)) {
+        x.createParameter(SourceOrigin.UNKNOWN, "_newParam_exit", JPrimitiveType.INT);
+      }
     }
+  }
+
+  private static boolean isNotVarargs(JMethod x) {
+    List<JParameter> params = x.getParams();
+    return params.isEmpty() || !params.get(params.size() - 1).isVarargs();
   }
 
   private static final class AddParamsWhenEnterAndExitMethodVisitor extends JChangeTrackingVisitor {
@@ -69,13 +82,19 @@ public class JChangeTrackingVisitorTest extends JJSTestBase {
 
     @Override
     public boolean enter(JMethod x, Context ctx) {
-      x.createParameter(SourceOrigin.UNKNOWN, "_newParam_enter", JPrimitiveType.INT);
+      // Don't add args at the end of varargs methods
+      if (isNotVarargs(x)) {
+        x.createParameter(SourceOrigin.UNKNOWN, "_newParam_enter", JPrimitiveType.INT);
+      }
       return true;
     }
 
     @Override
     public void exit(JMethod x, Context ctx) {
-      x.createParameter(SourceOrigin.UNKNOWN, "_newParam_exit", JPrimitiveType.INT);
+      // Don't add args at the end of varargs methods
+      if (isNotVarargs(x)) {
+        x.createParameter(SourceOrigin.UNKNOWN, "_newParam_exit", JPrimitiveType.INT);
+      }
     }
   }
 
@@ -87,7 +106,10 @@ public class JChangeTrackingVisitorTest extends JJSTestBase {
 
     @Override
     public boolean enter(JMethod x, Context ctx) {
-      x.createParameter(SourceOrigin.UNKNOWN, "_newParam_enter", JPrimitiveType.INT);
+      // Don't add args at the end of varargs methods
+      if (isNotVarargs(x)) {
+        x.createParameter(SourceOrigin.UNKNOWN, "_newParam_enter", JPrimitiveType.INT);
+      }
       return true;
     }
 
@@ -105,7 +127,10 @@ public class JChangeTrackingVisitorTest extends JJSTestBase {
 
     @Override
     public void exit(JMethod x, Context ctx) {
-      x.createParameter(SourceOrigin.UNKNOWN, "_newParam_exit", JPrimitiveType.INT);
+      // Don't add args at the end of varargs methods
+      if (isNotVarargs(x)) {
+        x.createParameter(SourceOrigin.UNKNOWN, "_newParam_exit", JPrimitiveType.INT);
+      }
     }
 
     @Override

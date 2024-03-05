@@ -155,6 +155,7 @@ public class JavaAstConstructor {
           "  static boolean isClassMetadataEnabled() { return true; }",
           "  public boolean desiredAssertionStatus() { return true; }",
           "  public String getName() { return null; }",
+          "  public String getSimpleName() { return null; }",
           "}"
       );
     }

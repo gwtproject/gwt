@@ -24,11 +24,11 @@
     <mkdir dir="${gwt.build.lib}" />
     <gwt.jar>
       <!-- Rebased dependencies go in gwt-servlet too -->
-      <zipfileset src="${gwt.tools.lib}/guava/guava-19.0/guava-19.0-rebased.jar" />
-      <zipfileset src="${gwt.tools.lib}/jscomp/20160315/sourcemap-rebased.jar" />
+      <zipfileset src="${gwt.tools.lib}/guava/guava-33.0/guava-33.0.0-jre-rebased.jar" />
+      <zipfileset src="${gwt.tools.lib}/guava/guava-33.0/failureaccess-1.0.2-rebased.jar" />
+      <zipfileset src="${gwt.tools.lib}/jscomp/20231112/sourcemap-rebased.jar" />
       <zipfileset src="${gwt.tools.lib}/json/android-sdk-19.1/json-android-rebased.jar" />
       <zipfileset src="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar" />
-      <zipfileset src="${gwt.tools.lib}/protobuf/protobuf-2.5.0/protobuf-java-rebased-2.5.0.jar" />
       <fileset dir="${gwt.dev.bin}">
         <include name="com/google/gwt/dev/util/Name*.class" />
         <include name="com/google/gwt/dev/util/StringKey.class" />
@@ -70,11 +70,11 @@
     <mkdir dir="${gwt.build.lib}" />
     <gwt.jar destfile="${gwt.build.lib}/gwt-servlet-jakarta.jar">
       <!-- Rebased dependencies go in gwt-servlet too -->
-      <zipfileset src="${gwt.tools.lib}/guava/guava-19.0/guava-19.0-rebased.jar" />
-      <zipfileset src="${gwt.tools.lib}/jscomp/20160315/sourcemap-rebased.jar" />
+      <zipfileset src="${gwt.tools.lib}/guava/guava-33.0/guava-33.0.0-jre-rebased.jar" />
+      <zipfileset src="${gwt.tools.lib}/guava/guava-33.0/failureaccess-1.0.2-rebased.jar" />
+      <zipfileset src="${gwt.tools.lib}/jscomp/20231112/sourcemap-rebased.jar" />
       <zipfileset src="${gwt.tools.lib}/json/android-sdk-19.1/json-android-rebased.jar" />
       <zipfileset src="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar" />
-      <zipfileset src="${gwt.tools.lib}/protobuf/protobuf-2.5.0/protobuf-java-rebased-2.5.0.jar" />
       <fileset dir="${gwt.dev.bin}">
         <include name="com/google/gwt/dev/util/Name*.class" />
         <include name="com/google/gwt/dev/util/StringKey.class" />

@@ -97,6 +97,12 @@
   <set-property name="compiler.useSourceMaps" value="false"/>
 
   <!--
+     Specifies whether java sources will be embedded as sourceContent in sourcemaps json file.
+  -->
+  <define-configuration-property name="compiler.embedSourceMaps" is-multi-valued="false"/>
+  <set-configuration-property name="compiler.embedSourceMaps" value="false"/>
+
+  <!--
      Specifies whether a given permutation has symbol map support enabled.
   -->
   <define-property name="compiler.useSymbolMaps" values="true,false"/>

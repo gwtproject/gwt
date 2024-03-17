@@ -2742,8 +2742,7 @@ public class GwtAstBuilder {
                   .map(field -> new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.EQ, new JFieldRef(info, new JThisRef(info, type), field, type), new JFieldRef(info, typedOther.createRef(info), field, type)))
                   .collect(Collectors.toList());
 
-          // TODO don't add an extra TRUE at the beginning of this expression
-          JExpression and = andedFieldChecks.stream().reduce(JBooleanLiteral.TRUE, (left, right) -> new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.AND, left, right));
+          JExpression and = andedFieldChecks.stream().reduce((left, right) -> new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.AND, left, right)).orElse(JBooleanLiteral.TRUE);
           body.getBlock().addStmt(and.makeReturnStatement());
           method.setBody(body);
         } else if (method.getName().equals(HASHCODE_METHOD_NAME) && method.getParams().isEmpty()) {

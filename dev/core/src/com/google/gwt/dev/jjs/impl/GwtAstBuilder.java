@@ -2746,14 +2746,17 @@ public class GwtAstBuilder {
           body.getBlock().addStmt(and.makeReturnStatement());
           method.setBody(body);
         } else if (method.getName().equals(HASHCODE_METHOD_NAME) && method.getParams().isEmpty()) {
-          List<JExpression> fields = type.getFields().stream().map(field -> new JFieldRef(info, new JThisRef(info, type), field, type)).collect(Collectors.toList());
           final JExpression hashcodeStatement;
-          if (fields.isEmpty()) {
+          if (type.getFields().isEmpty()) {
             // No fields, just hashcode 0
             hashcodeStatement = new JIntLiteral(info, 0);
           } else {
-            // TODO this isn't quite right, this doesn't box primitives
-            hashcodeStatement = new JMethodCall(info, null, OBJECTS_HASH_METHOD, fields);
+            List<JExpression> exprs = Lists.newArrayListWithCapacity(type.getFields().size());
+            for (JField field : type.getFields()) {
+              JFieldRef jFieldRef = new JFieldRef(info, new JThisRef(info, type), field, type);
+              exprs.add(maybeInsertCasts(jFieldRef, javaLangObject));
+            }
+            hashcodeStatement = new JMethodCall(info, null, OBJECTS_HASH_METHOD, exprs);
           }
           JMethodBody body = new JMethodBody(info);
           body.getBlock().addStmt(hashcodeStatement.makeReturnStatement());

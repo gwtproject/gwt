@@ -233,8 +233,11 @@ public class PrecompileOnePerm {
       return false;
     }
 
+    boolean embedSourcesContent = compilerContext.getModule()
+        .isEmbedSourcesContent();
+
     // TODO: precompile should do this after we get the parameter passing refactored.
-    if (!options.shouldSaveSource()) {
+    if (!options.shouldSaveSource() && embedSourcesContent) {
       precompilation.removeSourceArtifacts(logger);
     }
 

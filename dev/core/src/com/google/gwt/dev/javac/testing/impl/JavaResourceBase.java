@@ -275,6 +275,31 @@ public class JavaResourceBase {
           "  public Class<?> getClass() { return ___clazz; }",
           "}");
 
+  // This class must exist for JDT to be able to compile record types.
+  public static final MockJavaResource OBJECTMETHODS =
+      createMockJavaResource("java.lang.runtime.ObjectMethods",
+          "package java.lang.runtime;",
+          "public class ObjectMethods {}");
+
+  // We only need Objects.hash() for Records - the real JRE would synthesize these methods on the
+  // fly using ObjectMethods, but we need to generate the code up front. This implementation is
+  // wrong, but the important thing is only that it exists for these tests.
+  public static final MockJavaResource OBJECTS =
+      createMockJavaResource("java.util.Objects",
+          "package java.util;",
+          "public class Objects {",
+          "  public static int hash(Object... values) { return values.hashCode(); }",
+          "}");
+
+  public static final MockJavaResource RECORD =
+      createMockJavaResource("java.lang.Record",
+          "package java.lang;",
+          "public abstract class Record {",
+          "  protected Record(){}",
+          "  public abstract int hashCode();",
+          "  public abstract boolean equals(Object other);",
+          "  public abstract String toString();",
+          "}");
   public static final MockJavaResource RUNTIME_EXCEPTION =
       createMockJavaResource("java.lang.RuntimeException",
           "package java.lang;",
@@ -442,10 +467,11 @@ public class JavaResourceBase {
         AUTOCLOSEABLE, ANNOTATION, ARRAY_LIST, BYTE, BOOLEAN, CHARACTER, CHAR_SEQUENCE, CLASS,
         CLASS_NOT_FOUND_EXCEPTION, CLONEABLE, COLLECTION, COMPARABLE, DOUBLE, ENUM, EXCEPTION,
         ERROR, FUNCTIONALINTERFACE, FLOAT, INTEGER, IS_SERIALIZABLE, JAVASCRIPTEXCEPTION,
-        JAVASCRIPTOBJECT, LIST, LONG, MAP, NO_CLASS_DEF_FOUND_ERROR, NUMBER, OBJECT,
-        RUNTIME_EXCEPTION, SERIALIZABLE, SHORT, STRING, STRING_BUILDER, SUPPRESS_WARNINGS, SYSTEM,
-        THROWABLE, SPECIALIZE_METHOD, DO_NOT_AUTOBOX, JSTYPE, JSCONSTRUCTOR, JSPACKAGE, JSPROPERTY,
-        JSMETHOD, JSIGNORE, JSFUNCTION, JSOVERLAY, JSOPTIONAL};
+        JAVASCRIPTOBJECT, LIST, LONG, MAP, NO_CLASS_DEF_FOUND_ERROR, NUMBER, OBJECT, OBJECTMETHODS,
+        OBJECTS, RECORD, RUNTIME_EXCEPTION, SERIALIZABLE, SHORT, STRING, STRING_BUILDER,
+        SUPPRESS_WARNINGS, SYSTEM, THROWABLE, SPECIALIZE_METHOD, DO_NOT_AUTOBOX, JSTYPE,
+        JSCONSTRUCTOR, JSPACKAGE, JSPROPERTY, JSMETHOD, JSIGNORE, JSFUNCTION, JSOVERLAY,
+        JSOPTIONAL};
   }
 
   /**

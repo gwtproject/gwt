@@ -25,6 +25,7 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 
 import java.io.PrintStream;
 
+@Deprecated
 class SignatureDumper {
 
   public interface Filter {

@@ -39,12 +39,12 @@ public class ServerSerializationStreamWriterTest extends TestCase {
   }
 
   public void testEscapeStringSplitNodes() {
-    String escaped = ServerSerializationStreamWriter.escapeStringSplitNodes("test");
+    String escaped = ServerSerializationStreamWriter.escapeString("test");
     assertEquals("\"test\"", escaped);
   }
 
   public void testEscapeStringSplitNodes_unicodeEscape() {
-    String escaped = ServerSerializationStreamWriter.escapeStringSplitNodes(
+    String escaped = ServerSerializationStreamWriter.escapeString(
         "测试"  // Unicode characters
         + "\"" // JS quote char
         + "\\" // JS escape char
@@ -75,11 +75,11 @@ public class ServerSerializationStreamWriterTest extends TestCase {
       secondNodeBuilder.append('2');
     }
 
-    String escaped = ServerSerializationStreamWriter.escapeStringSplitNodes(
+    String escaped = ServerSerializationStreamWriter.escapeString(
         firstNodeBuilder.toString() + secondNodeBuilder.toString());
 
     assertEquals(
-        "\"" + firstNodeBuilder.toString() + "\"+\"" + secondNodeBuilder.toString() + "\"",
+        "\"" + firstNodeBuilder.toString() + secondNodeBuilder.toString() + "\"",
         escaped);
   }
 
@@ -104,12 +104,11 @@ public class ServerSerializationStreamWriterTest extends TestCase {
     }
     String secondNode = secondNodeBuilder.toString();
 
-    String escaped = ServerSerializationStreamWriter.escapeStringSplitNodes(
+    String escaped = ServerSerializationStreamWriter.escapeString(
         firstNodeBuilder.toString() + secondNode);
 
     assertEquals(
         "\"" + firstNodeNoUnicode + "\\u2011" // first node (including escaped unicode character)
-        + "\"+\""
         + secondNode + "\"",  // second node
         escaped);
   }
@@ -120,30 +119,6 @@ public class ServerSerializationStreamWriterTest extends TestCase {
     writer.writeDouble(Double.POSITIVE_INFINITY);
     writer.writeDouble(Double.NaN);
     assertEquals("[\"NaN\",\"Infinity\",\"-Infinity\",[],0,8]", writer.toString());
-  }
-
-  public void testVersion8Fallbacks() {
-    StringBuilder longString = new StringBuilder(66000);
-    for (int i = 0; i < 660000; i++) {
-      longString.append("a");
-    }
-
-    // Fallbacks to 7 if string gets concatenated
-    ServerSerializationStreamWriter writer = new ServerSerializationStreamWriter(null, 8);
-    writer.writeString(longString.toString());
-    String encoded = writer.toString();
-    assertEquals("7", encoded.substring(encoded.lastIndexOf(",") + 1, encoded.lastIndexOf("]")));
-
-    // Fallbacks to 7 if array size reached maximum
-    int maxArrayLength =
-        ServerSerializationStreamWriter.LengthConstrainedArray.MAXIMUM_ARRAY_LENGTH + 100;
-    writer = new ServerSerializationStreamWriter(null, 8);
-    for (int i = 0; i < maxArrayLength; i++) {
-      writer.writeInt(i);
-    }
-
-    encoded = writer.toString();
-    assertEquals("7", encoded.substring(encoded.lastIndexOf(",") + 1, encoded.lastIndexOf("]")));
   }
 
 }

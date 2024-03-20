@@ -43,78 +43,6 @@ public final class ServerSerializationStreamWriter extends
     AbstractSerializationStreamWriter {
 
   /**
-   * Builds a string that evaluates into an array containing the given elements.
-   * This class exists to work around a bug in IE6/7 that limits the size of
-   * array literals.
-   */
-  public static class LengthConstrainedArray {
-    public static final int MAXIMUM_ARRAY_LENGTH = 1 << 15;
-    private static final String POSTLUDE = "])";
-    private static final String PRELUDE = "].concat([";
-
-    private final StringBuffer buffer;
-    private int count = 0;
-    private boolean needsComma = false;
-    private int total = 0;
-    private boolean javascript = false;
-
-    public LengthConstrainedArray() {
-      buffer = new StringBuffer();
-    }
-
-    public LengthConstrainedArray(int capacityGuess) {
-      buffer = new StringBuffer(capacityGuess);
-    }
-
-    public void addToken(CharSequence token) {
-      total++;
-      if (count++ == MAXIMUM_ARRAY_LENGTH) {
-        if (total == MAXIMUM_ARRAY_LENGTH + 1) {
-          buffer.append(PRELUDE);
-          javascript = true;
-        } else {
-          buffer.append("],[");
-        }
-        count = 0;
-        needsComma = false;
-      }
-
-      if (needsComma) {
-        buffer.append(",");
-      } else {
-        needsComma = true;
-      }
-
-      buffer.append(token);
-    }
-
-    public void addEscapedToken(String token) {
-      addToken(escapeString(token, true, this));
-    }
-
-    public void addToken(int i) {
-      addToken(String.valueOf(i));
-    }
-
-    public boolean isJavaScript() {
-      return javascript;
-    }
-
-    public void setJavaScript(boolean javascript) {
-      this.javascript = javascript;
-    }
-
-    @Override
-    public String toString() {
-      if (total > MAXIMUM_ARRAY_LENGTH) {
-        return "[" + buffer.toString() + POSTLUDE;
-      } else {
-        return "[" + buffer.toString() + "]";
-      }
-    }
-  }
-
-  /**
    * Enumeration used to provided typed instance writers.
    */
   private enum ValueWriter {
@@ -337,14 +265,6 @@ public final class ServerSerializationStreamWriter extends
 
   private static final char NON_BREAKING_HYPHEN = '\u2011';
 
-  /**
-   * Maximum length of a string node in RPC responses, not including surrounding
-   * quote characters (2 ^ 16 - 1) = 65535.
-   * This exists to work around a Rhino parser bug in the hosted mode client
-   * that limits string node lengths to 64KB.
-   */
-  private static final int MAX_STRING_NODE_LENGTH = 0xFFFF;
-
   static {
     /*
      * NOTE: The JS VM in IE6 & IE7 do not interpret \v correctly. They convert
@@ -386,32 +306,11 @@ public final class ServerSerializationStreamWriter extends
    * This method takes a string and outputs a JavaScript string literal. The
    * data is surrounded with quotes, and any contained characters that need to
    * be escaped are mapped onto their escape sequence.
-   * 
+   *
    * Assumptions: We are targeting a version of JavaScript that that is later
    * than 1.3 that supports unicode strings.
    */
   public static String escapeString(String toEscape) {
-    return escapeString(toEscape, false, null);
-  }
-
-  /**
-   * This method takes a string and outputs a JavaScript string literal. The
-   * data is surrounded with quotes, and any contained characters that need to
-   * be escaped are mapped onto their escape sequence.
-   *
-   * This splits strings into 64KB chunks to workaround an issue with the hosted mode client where
-   * the Rhino parser can't handle string nodes larger than 64KB, e.g. {@code "longstring"} is
-   * converted to {@code "long" + "string"}.
-   *
-   * Assumptions: We are targeting a version of JavaScript that that is later
-   * than 1.3 that supports unicode strings.
-   */
-  public static String escapeStringSplitNodes(String toEscape) {
-    return escapeString(toEscape, true, null);
-  }
-
-  private static String escapeString(String toEscape, boolean splitNodes,
-      LengthConstrainedArray array) {
     // Since escaped characters will increase the output size, allocate extra room to start.
     int length = toEscape.length();
     int capacityIncrement = Math.max(length, 16);
@@ -422,29 +321,11 @@ public final class ServerSerializationStreamWriter extends
     int i = 0;
     while (i < length) {
 
-      // Add one segment at a time, up to maxNodeLength characters. Note this always leave room
-      // for at least 6 characters at the end (maximum unicode escaped character size).
-      int maxSegmentVectorSize = splitNodes
-          ? (charVector.getSize() + MAX_STRING_NODE_LENGTH - 5)
-          : Integer.MAX_VALUE;
-
-      while (i < length && charVector.getSize() < maxSegmentVectorSize) {
-        char c = toEscape.charAt(i++);
-        if (needsUnicodeEscape(c)) {
-          unicodeEscape(c, charVector);
-        } else {
-          charVector.add(c);
-        }
-      }
-
-      // If there's another segment left, insert a '+' operator.
-      if (splitNodes && i < length) {
-        charVector.add(JS_QUOTE_CHAR);
-        charVector.add('+');
-        charVector.add(JS_QUOTE_CHAR);
-        if (array != null) {
-          array.setJavaScript(true);
-        }
+      char c = toEscape.charAt(i++);
+      if (needsUnicodeEscape(c)) {
+        unicodeEscape(c, charVector);
+      } else {
+        charVector.add(c);
       }
     }
 
@@ -502,7 +383,7 @@ public final class ServerSerializationStreamWriter extends
    * <li>Total Characters Escaped: 2082</li></li>
    * </ul> </li>
    * </ol>
-   * 
+   *
    * @param ch character to check
    * @return <code>true</code> if the character requires the \\uXXXX unicode
    *         character escape
@@ -557,7 +438,7 @@ public final class ServerSerializationStreamWriter extends
    * Writes a safe escape sequence for a character. Some characters have a short
    * form, such as \n for U+000D, while others are represented as \\xNN or
    * \\uNNNN.
-   * 
+   *
    * @param ch character to unicode escape
    * @param charVector char vector to receive the unicode escaped representation
    */
@@ -610,7 +491,7 @@ public final class ServerSerializationStreamWriter extends
   /**
    * Build an array of JavaScript string literals that can be decoded by the
    * client via the eval function.
-   * 
+   *
    * NOTE: We build the array in reverse so the client can simply use the pop
    * function to remove the next item from the list.
    */
@@ -620,14 +501,14 @@ public final class ServerSerializationStreamWriter extends
     // We take a guess at how big to make to buffer to avoid numerous resizes.
     //
     int capacityGuess = 2 * tokenListCharCount + 2 * tokenList.size();
-    LengthConstrainedArray stream = new LengthConstrainedArray(capacityGuess);
-    writePayload(stream);
-    writeStringTable(stream);
-    writeHeader(stream);
+    StringBuilder buffer = new StringBuilder(capacityGuess);
+    writePayload(buffer);
+    writeStringTable(buffer);
+    writeHeader(buffer);
 
-    return stream.toString();
+    return "[" + buffer.toString() + "]";
   }
-  
+
   @Override
   public void writeLong(long value) {
     if (getVersion() == SERIALIZATION_STREAM_MIN_VERSION) {
@@ -702,7 +583,7 @@ public final class ServerSerializationStreamWriter extends
    * Serialize an instance that is an array. Will default to serializing the
    * instance as an Object vector if the instance is not a vector of primitives,
    * Strings or Object.
-   * 
+   *
    * @param instanceClass
    * @param instance
    * @throws SerializationException
@@ -735,14 +616,14 @@ public final class ServerSerializationStreamWriter extends
       List<Field> serverFields = new ArrayList<Field>();
       for (Field declField : serializableFields) {
         assert (declField != null);
-        
+
         // Identify server-only fields
         if (!clientFieldNames.contains(declField.getName())) {
           serverFields.add(declField);
           continue;
         }
       }
-      
+
       // Serialize the server-only fields into a byte array and encode as a String
       try {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -765,7 +646,7 @@ public final class ServerSerializationStreamWriter extends
         throw new SerializationException(e);
       }
     }
-    
+
     // Write the client-visible field data
     for (Field declField : serializableFields) {
       if ((clientFieldNames != null) && !clientFieldNames.contains(declField.getName())) {
@@ -861,29 +742,39 @@ public final class ServerSerializationStreamWriter extends
    * Notice that the field are written in reverse order that the client can just
    * pop items out of the stream.
    */
-  private void writeHeader(LengthConstrainedArray stream) {
-    stream.addToken(getFlags());
-    if (stream.isJavaScript() && getVersion() >= SERIALIZATION_STREAM_JSON_VERSION) {
-      // Ensure we are not using the JSON supported version if stream is Javascript instead of JSON
-      stream.addToken(SERIALIZATION_STREAM_JSON_VERSION - 1);
-    } else {
-      stream.addToken(getVersion());
-    }
+  private void writeHeader(StringBuilder buffer) {
+    addToken(buffer, getFlags());
+    addToken(buffer, getVersion());
   }
 
-  private void writePayload(LengthConstrainedArray stream) {
+  private void writePayload(StringBuilder buffer) {
     ListIterator<String> tokenIterator = tokenList.listIterator(tokenList.size());
     while (tokenIterator.hasPrevious()) {
-      stream.addToken(tokenIterator.previous());
+      addToken(buffer, tokenIterator.previous());
     }
   }
 
-  private void writeStringTable(LengthConstrainedArray stream) {
-    LengthConstrainedArray tableStream = new LengthConstrainedArray();
+  private void writeStringTable(StringBuilder buffer) {
+    StringBuilder tableBuffer = new StringBuilder();
     for (String s : getStringTable()) {
-      tableStream.addEscapedToken(s);
+      addEscapedToken(tableBuffer, s);
     }
-    stream.addToken(tableStream.toString());
-    stream.setJavaScript(stream.isJavaScript() || tableStream.isJavaScript());
+    addToken(buffer, "[" + tableBuffer + "]");
+  }
+
+  public void addToken(StringBuilder buffer, CharSequence token) {
+    if (buffer.length() > 0) {
+      buffer.append(",");
+    }
+
+    buffer.append(token);
+  }
+
+  public void addEscapedToken(StringBuilder buffer, String token) {
+    addToken(buffer, escapeString(token));
+  }
+
+  public void addToken(StringBuilder buffer, int i) {
+    addToken(buffer, String.valueOf(i));
   }
 }

@@ -23,6 +23,7 @@ import com.google.gwt.core.ext.linker.impl.StandardLinkerContext;
 import com.google.gwt.dev.DevMode.HostedModeOptions;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
+import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Stopwatch;
 import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
@@ -61,6 +62,11 @@ public class SuperDevListener implements CodeServerListener {
   @Override
   public int getSocketPort() {
     return codeServerPort;
+  }
+
+  @VisibleForTesting
+  List<String> getCodeServerArgs() {
+    return codeServerArgs;
   }
 
   @Override

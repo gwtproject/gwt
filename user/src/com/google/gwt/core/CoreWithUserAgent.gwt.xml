@@ -12,22 +12,13 @@
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
 
-<!-- Deferred binding rules for core classes based on user agent. -->
+<!-- Deferred binding rules for core classes. -->
 <module>
   <inherits name="com.google.gwt.core.Core"/>
-
-  <!-- Disable source maps for non-Chrome browsers -->
-  <!-- TODO(goktug): enable source maps for non-Chrome browsers -->
-  <set-property name="compiler.useSourceMaps" value="false">
-    <none> 
-      <when-property-is name="user.agent" value="safari"/>
-    </none> 
-  </set-property>
 
   <replace-with class="com.google.gwt.core.client.impl.StackTraceCreator.CollectorModern">
     <when-type-is class="com.google.gwt.core.client.impl.StackTraceCreator.Collector" />
     <when-property-is name="compiler.stackMode" value="native" />
-    <when-property-is name="user.agent" value="safari" />
     <when-property-is name="compiler.useSourceMaps" value="true"/>
   </replace-with>
 

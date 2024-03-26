@@ -30,12 +30,9 @@
   </set-property>
 
   <!-- when stack trace stripping is enabled, we need to replace the Null collector 
-       with one that does something for Chrome -->
+       with one that does something -->
   <replace-with class="com.google.gwt.core.client.impl.StackTraceCreator.CollectorChrome">
     <when-type-is class="com.google.gwt.core.client.impl.StackTraceCreator.Collector" />
-    <!-- For now, only Chrome provides Error.stack support, so we hijack the
-         entire WebKit permutation -->
-    <when-property-is name="user.agent" value="safari" />
     <when-property-is name="compiler.useSourceMaps" value="true" />
   </replace-with>
 

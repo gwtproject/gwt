@@ -2729,9 +2729,11 @@ public class GwtAstBuilder {
           JBinaryOperation eq = new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.EQ, new JThisRef(info, type), otherParam.createRef(info));
           body.getBlock().addStmt(new JIfStatement(info, eq, JBooleanLiteral.TRUE.makeReturnStatement(), null));
 
-          // This is wrong and not optimized automatically, but it is resolvable without waiting for a later visitor
-          // TODO replace with Object.getClass instead of Cast.getClass()
-          JBinaryOperation sameTypeCheck = new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.EQ, new JClassLiteral(info, type), new JMethodCall(info, null, CAST_GET_CLASS_METHOD, otherParam.createRef(info)));
+          JMethod getClass = javaLangObject.getMethods().get(GET_CLASS_METHOD_INDEX);
+          JBinaryOperation sameTypeCheck = new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.EQ,
+                  new JClassLiteral(info, type),
+                  new JMethodCall(info, otherParam.createRef(info), getClass)
+          );
           body.getBlock().addStmt(new JIfStatement(info, sameTypeCheck, JBooleanLiteral.FALSE.makeReturnStatement(), null));
 
           JLocal typedOther = JProgram.createLocal(info, "other", type, true, body);

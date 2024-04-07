@@ -82,6 +82,7 @@ import com.google.gwt.dev.jjs.ast.JPostfixOperation;
 import com.google.gwt.dev.jjs.ast.JPrefixOperation;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.ast.JRecordType;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JStatement;
@@ -240,7 +241,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -2672,152 +2672,12 @@ public class GwtAstBuilder {
         processEnumType((JEnumType) type);
       }
 
-      if (x.isRecord()) {
-        writeRecordMethods(type);
-      }
-
       if (type instanceof JClassType && type.isJsNative()) {
         maybeImplementJavaLangObjectMethodsOnNativeClass(type);
       }
       addBridgeMethods(x.binding);
 
       curClass = classStack.pop();
-    }
-
-    private void writeRecordMethods(JDeclaredType type) {
-      // This is a record type, and any methods that were declared but not referenced now need
-      // to be defined. These include the field-named method accessors, equals/hashCode and
-      // toString. If not defined, we'll synthesize them based on the record components.
-      SourceInfo info = type.getSourceInfo();
-      for (JMethod method : type.getMethods()) {
-        if (method.getBody() != null) {
-          // If there is a body, that means the record has its own declaration of this method, and
-          // we should not re-declare it.
-          continue;
-        }
-
-        if (method.getName().equals(TO_STRING_METHOD_NAME) && method.getParams().isEmpty()) {
-          List<JExpression> args = new ArrayList<>();
-
-          // Concatenate type with []s and component values
-          MethodBinding getSimpleMethod = curCud.scope.getJavaLangClass()
-                  .getExactMethod("getSimpleName".toCharArray(), Binding.NO_TYPES, curCud.scope);
-          JMethod classGetSimpleName = typeMap.get(getSimpleMethod);
-          JExpression toStrExpr = new JMethodCall(info, new JClassLiteral(info, type),
-                  classGetSimpleName);
-
-          args.add(new JStringLiteral(info, "[", javaLangString));
-          List<JField> fields = type.getFields();
-          for (int i = 0; i < fields.size(); i++) {
-            if (i != 0) {
-              args.add(new JStringLiteral(info, ", ", javaLangString));
-            }
-            JField field = fields.get(i);
-            args.add(new JStringLiteral(info, field.getName() + "=", javaLangString));
-            args.add(new JFieldRef(info, new JThisRef(info, type), field, type));
-          }
-          args.add(new JStringLiteral(info, "]", javaLangString));
-          for (JExpression arg : args) {
-            toStrExpr = new JBinaryOperation(info, javaLangString, JBinaryOperator.CONCAT,
-                    toStrExpr,
-                    arg);
-          }
-
-          JMethodBody body = new JMethodBody(info);
-          body.getBlock().addStmt(toStrExpr.makeReturnStatement());
-          method.setBody(body);
-        } else if (method.getName().equals(EQUALS_METHOD_NAME) && method.getParams().size() == 1
-                && method.getParams().get(0).getType().equals(javaLangObject)) {
-          JMethodBody body = new JMethodBody(info);
-          JParameter otherParam = method.getParams().get(0);
-
-          // Equals is built from first == check between this and other, as a fast path for the
-          // same object and also to ensure that other isn't null. Then
-          // MyRecord.class == other.getClass(), and now we know they're the same type and can cast
-          // safely to access fields for the rest.
-          JBinaryOperation eq =
-                  new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.EQ,
-                          new JThisRef(info, type),
-                          otherParam.createRef(info));
-          body.getBlock().addStmt(new JIfStatement(info, eq,
-                  JBooleanLiteral.TRUE.makeReturnStatement(), null));
-
-          JMethod getClass = javaLangObject.getMethods().get(GET_CLASS_METHOD_INDEX);
-          JBinaryOperation sameTypeCheck =
-                  new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.EQ,
-                          new JClassLiteral(info, type),
-                          new JMethodCall(info, otherParam.createRef(info), getClass)
-          );
-          body.getBlock().addStmt(new JIfStatement(info, sameTypeCheck,
-                  JBooleanLiteral.FALSE.makeReturnStatement(), null));
-
-          // Create a local to assign to and compare each component
-          JLocal typedOther = JProgram.createLocal(info, "other", type, true, body);
-          // We can use an unsafe cast since we know the check will succeed
-          JUnsafeTypeCoercion uncheckedCast =
-                  new JUnsafeTypeCoercion(info, type, otherParam.createRef(info));
-          JBinaryOperation uncheckedAssign = new JBinaryOperation(info, type, JBinaryOperator.ASG,
-                  typedOther.createRef(info), uncheckedCast);
-          body.getBlock().addStmt(uncheckedAssign.makeStatement());
-
-          JExpression componentCheck = JBooleanLiteral.TRUE;
-          for (JField field : type.getFields()) {
-            if (!field.isStatic()) {
-              JBinaryOperation jBinaryOperation = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,
-                      JBinaryOperator.EQ,
-                      new JFieldRef(info, new JThisRef(info, type), field, type),
-                      new JFieldRef(info, typedOther.createRef(info), field, type));
-              if (componentCheck != JBooleanLiteral.TRUE) {
-                componentCheck = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,
-                        JBinaryOperator.AND,
-                        componentCheck,
-                        jBinaryOperation);
-              } else {
-                componentCheck = jBinaryOperation;
-              }
-            }
-          }
-
-          body.getBlock().addStmt(componentCheck.makeReturnStatement());
-          method.setBody(body);
-        } else if (method.getName().equals(HASHCODE_METHOD_NAME) && method.getParams().isEmpty()) {
-          final JExpression hashcodeStatement;
-          if (type.getFields().isEmpty()) {
-            // No fields, just hashcode 0
-            hashcodeStatement = new JIntLiteral(info, 0);
-          } else {
-            List<JExpression> exprs = Lists.newArrayListWithCapacity(type.getFields().size());
-            for (JField field : type.getFields()) {
-              JFieldRef jFieldRef = new JFieldRef(info, new JThisRef(info, type), field, type);
-              exprs.add(maybeInsertCasts(jFieldRef, javaLangObject));
-            }
-            hashcodeStatement = new JMethodCall(info, null, OBJECTS_HASH_METHOD, exprs);
-          }
-          JMethodBody body = new JMethodBody(info);
-          body.getBlock().addStmt(hashcodeStatement.makeReturnStatement());
-
-          method.setBody(body);
-        } else if (method.getParams().isEmpty()) {
-          // Check if it has the same name+type as a field
-          Optional<JField> matchingField = type.getFields().stream()
-                  .filter(f -> f.getName().equals(method.getName()))
-                  .filter(f -> f.getType().equals(method.getType()))
-                  .findFirst();
-          if (matchingField.isPresent()) {
-            JField field = matchingField.get();
-            // We can pick a more specific source for this than the others, use the "field" itself
-            SourceInfo sourceInfo = field.getSourceInfo();
-
-            // Create a simple accessor method and bind it, so it can be used anywhere outside this
-            // type.
-            JFieldRef fieldReference = new JFieldRef(sourceInfo, new JThisRef(sourceInfo, type),
-                    field, type);
-            JMethodBody body = new JMethodBody(sourceInfo);
-            body.getBlock().addStmt(fieldReference.makeReturnStatement());
-            method.setBody(body);
-          }
-        }
-      }
     }
 
     protected JBlock pop(Block x) {
@@ -4135,10 +3995,6 @@ public class GwtAstBuilder {
       JMethod.getExternalizedMethod("com.google.gwt.lang.Cast",
       "getClass(Ljava/lang/Object;)Ljava/lang/Class;", true);
 
-  private static JMethod OBJECTS_HASH_METHOD =
-          JMethod.getExternalizedMethod("java.util.Objects",
-          "hash([Ljava/lang/Object;)I", true);
-
   private List<JDeclaredType> processImpl() {
     CompilationUnitDeclaration cud = curCud.cud;
     if (cud.types == null) {
@@ -4580,8 +4436,12 @@ public class GwtAstBuilder {
 
       JDeclaredType type;
       if (binding.isClass()) {
-        type = new JClassType(
-            info, name, binding.isAbstract(), binding.isFinal() || binding.isAnonymousType());
+        if (binding.isRecord()) {
+          type = new JRecordType(info, name);
+        } else {
+          type = new JClassType(
+                  info, name, binding.isAbstract(), binding.isFinal() || binding.isAnonymousType());
+        }
       } else if (binding.isInterface() || binding.isAnnotationType()) {
         type = new JInterfaceType(info, name);
       } else if (binding.isEnum()) {

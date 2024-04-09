@@ -161,7 +161,7 @@ public class ImplementRecordComponents {
             JBooleanLiteral.TRUE.makeReturnStatement(), null));
 
     JBinaryOperation sameTypeCheck =
-            new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.EQ,
+            new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.NEQ,
                     new JClassLiteral(info, type),
                     new JMethodCall(info, otherParam.createRef(info), getClassMethod));
     body.getBlock().addStmt(new JIfStatement(info, sameTypeCheck,

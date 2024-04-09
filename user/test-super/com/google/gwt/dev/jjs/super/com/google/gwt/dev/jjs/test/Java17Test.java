@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google Inc.
+ * Copyright 2024 GWT Project Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -77,12 +77,47 @@ public class Java17Test extends GWTTestCase {
     assertTrue(circle instanceof Circle);
   }
 
-  record InnerRecord() {}
-  public void testRecordClasses() {
-    record LocalRecord() {}
+  /**
+   * Sample nested record. Has no components. Implements a single interface
+   */
+  record InnerRecord() implements Comparable<InnerRecord> {
+    /**
+     * Simple accessor-looking method to ensure it doesn't participate in hashcode/tostring.
+     */
+    public String value() {
+      return "Hello";
+    }
 
-    new InnerRecord();
-    new LocalRecord();
-    new TopLevelRecord("Banana", 7);
+    @Override
+    public int compareTo(InnerRecord other) {
+      return 0;
+    }
+  }
+  public void testRecordClasses() {
+    /**
+     * Sample local record.
+     */
+    record LocalRecord() {
+      @Override
+      public String toString() {
+        return "Example";
+      }
+    }
+
+    assertTrue(new InnerRecord() instanceof Record);
+    assertTrue(new InnerRecord() instanceof Comparable);
+
+    assertFalse(new InnerRecord().toString().contains("Hello"));
+    assertTrue(new InnerRecord().toString().startsWith("InnerRecord"));
+    assertEquals(0, new InnerRecord().hashCode());
+    assertEquals(new InnerRecord(), new InnerRecord());
+
+    assertEquals("Example", new LocalRecord().toString());
+
+    TopLevelRecord withValues = new TopLevelRecord("Banana", 7);
+    assertTrue(withValues.toString().contains("7"));
+    assertTrue(withValues.toString().contains("Banana"));
+    assertEquals("Banana", withValues.name());
+    assertEquals(7, withValues.count());
   }
 }

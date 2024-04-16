@@ -177,7 +177,7 @@ public final class Collectors {
     return new CollectorImpl<>(
         downstream.supplier(),
         (A a, T t) -> {
-          try(Stream<? extends U> stream = mapper.apply(t)) {
+          try (Stream<? extends U> stream = mapper.apply(t)) {
             if (stream == null) {
               return;
             }

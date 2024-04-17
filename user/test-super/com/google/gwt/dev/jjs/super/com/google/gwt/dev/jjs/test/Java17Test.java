@@ -21,6 +21,8 @@ import com.google.gwt.junit.client.GWTTestCase;
 import java.util.Arrays;
 import java.util.List;
 
+import jsinterop.annotations.*;
+
 /**
  * Tests Java 17 features. It is super sourced so that gwt can be compiles under Java 11.
  *
@@ -119,5 +121,65 @@ public class Java17Test extends GWTTestCase {
     assertTrue(withValues.toString().contains("Banana"));
     assertEquals("Banana", withValues.name());
     assertEquals(7, withValues.count());
+  }
+
+  /**
+   * Simple record with default exports.
+   */
+  @JsType(namespace = "java17")
+  public record JsRecord1(String name, int value) { }
+
+  /**
+   * Simple native type to verify JsRecord1.
+   */
+  @JsType(name = "JsRecord1", namespace = "java17", isNative = true)
+  public static class JsObject1 {
+    public String name;
+    public int value;
+    public JsObject1(String name, int value) { }
+  }
+
+  /**
+   * Record with explicit method accessors
+   */
+  @JsType(namespace = "java17")
+  public record JsRecord2(@JsMethod String name, @JsMethod int value) { }
+  /**
+   * Simple native type to verify JsRecord2.
+   */
+  @JsType(name = "JsRecord2", namespace = "java17", isNative = true)
+  public static class JsObject2 {
+    public JsObject2(String name, int value) { }
+
+    public native String name();
+    public native int value();
+  }
+
+  public void testJsTypeRecords() {
+    JsRecord1 r1 = new JsRecord1("foo", 7);
+    assertEquals("foo", r1.name());
+    assertEquals(7, r1.value());
+    assertEquals(new JsRecord1("foo", 7), r1);
+
+    // Create an instance from JS, verify it is the same
+    JsObject1 o1 = new JsObject1("foo", 7);
+    assertEquals("foo", r1.name);
+    assertEquals(7, r1.value);
+    assertEquals(o1.toString(), r1.toString());
+    assertEquals(o1, r1);
+
+    // Repeat the test with methods for accessors
+    JsRecord2 r2 = new JsRecord2("foo", 7);
+    assertEquals("foo", r2.name());
+    assertEquals(7, r2.value());
+    assertEquals(new JsRecord2("foo", 7), r2);
+
+    // Create an instance from JS, verify it is the same
+    JsObject2 o2 = new JsObject2("foo", 7);
+    assertEquals("foo", r2.name);
+    assertEquals(7, r2.value);
+    assertEquals(o2.toString(), r2.toString());
+    assertEquals(o2, r2);
+
   }
 }

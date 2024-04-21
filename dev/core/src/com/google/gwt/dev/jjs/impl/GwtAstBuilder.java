@@ -2213,10 +2213,15 @@ public class GwtAstBuilder {
           // synthesize a call to ordinal().
           expression = synthesizeCallToOrdinal(scope, info, expression);
         }
-        push(new JSwitchStatement(info, expression, block));
+        push(new JSwitchStatement(info, expression, block, JPrimitiveType.VOID).makeStatement());
       } catch (Throwable e) {
         throw translateException(x, e);
       }
+    }
+
+    @Override
+    public void endVisit(SwitchExpression x, BlockScope scope) {
+
     }
 
     @Override
@@ -2611,14 +2616,6 @@ public class GwtAstBuilder {
     }
 
     @Override
-    public boolean visit(SwitchExpression x, BlockScope blockScope) {
-      InternalCompilerException exception =
-          new InternalCompilerException("Switch expressions not yet supported");
-      exception.addNode(new JCaseStatement(makeSourceInfo(x), null));
-      throw exception;
-    }
-
-    @Override
     public boolean visit(LocalDeclaration x, BlockScope scope) {
       try {
         createLocal(x);
@@ -2673,6 +2670,16 @@ public class GwtAstBuilder {
     public boolean visit(SwitchStatement x, BlockScope scope) {
       x.statements = reduceToReachable(x.statements);
       return true;
+    }
+
+    @Override
+    public boolean visit(SwitchExpression x, BlockScope blockScope) {
+      InternalCompilerException exception =
+              new InternalCompilerException("Switch expressions not yet supported");
+      exception.addNode(new JCaseStatement(makeSourceInfo(x), null));
+      throw exception;
+//      x.statements = reduceToReachable(x.statements);
+//      return true;
     }
 
     @Override

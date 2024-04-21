@@ -305,7 +305,7 @@ public class JTransformer<T> {
   }
 
   public T transformSwitchStatement(JSwitchStatement x) {
-    return transformStatement(x);
+    return transformExpression(x);
   }
 
   public T transformThisRef(JThisRef x) {

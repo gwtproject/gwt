@@ -454,7 +454,7 @@ public class JVisitor {
   }
 
   public void endVisit(JSwitchStatement x, Context ctx) {
-    endVisit((JStatement) x, ctx);
+    endVisit((JExpression) x, ctx);
   }
 
   public void endVisit(JThisRef x, Context ctx) {
@@ -774,7 +774,7 @@ public class JVisitor {
   }
 
   public boolean visit(JSwitchStatement x, Context ctx) {
-    return visit((JStatement) x, ctx);
+    return visit((JExpression) x, ctx);
   }
 
   public boolean visit(JThisRef x, Context ctx) {

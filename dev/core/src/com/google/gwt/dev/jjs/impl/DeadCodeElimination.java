@@ -1225,7 +1225,12 @@ public class DeadCodeElimination {
       if (matchingCase == null) {
         // the switch has no default and no matching cases
         // the expression is a value literal, so it can go away completely
-        removeMe(s, ctx);
+        assert s.getType() == JPrimitiveType.VOID : "switch expressions must always have all matching cases";
+        if (ctx.canRemove()) {
+          ctx.removeMe();
+        } else {
+          ctx.replaceMe(new JMultiExpression(s.getSourceInfo()));
+        }
         return true;
       }
 
@@ -1936,7 +1941,7 @@ public class DeadCodeElimination {
         if (caseStatement.getExpr() != null) {
           // Create an if statement equivalent to the single-case switch.
           JBinaryOperation compareOperation =
-              new JBinaryOperation(x.getSourceInfo(), program.getTypePrimitiveBoolean(),
+              new JBinaryOperation(x.getSourceInfo(), JPrimitiveType.BOOLEAN,
                   JBinaryOperator.EQ, x.getExpr(), caseStatement.getExpr());
           JBlock block = new JBlock(x.getSourceInfo());
           block.addStmt(statement);

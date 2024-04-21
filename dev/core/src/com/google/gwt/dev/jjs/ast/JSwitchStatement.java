@@ -20,15 +20,17 @@ import com.google.gwt.dev.jjs.SourceInfo;
 /**
  * Java switch statement.
  */
-public class JSwitchStatement extends JStatement {
+public class JSwitchStatement extends JExpression {
 
-  private final JBlock body;
+  private JBlock body;
   private JExpression expr;
+  private JType type;
 
-  public JSwitchStatement(SourceInfo info, JExpression expr, JBlock body) {
+  public JSwitchStatement(SourceInfo info, JExpression expr, JBlock body, JType type) {
     super(info);
     this.expr = expr;
     this.body = body;
+    this.type = type;
   }
 
   public JBlock getBody() {
@@ -40,12 +42,21 @@ public class JSwitchStatement extends JStatement {
   }
 
   @Override
+  public boolean hasSideEffects() {
+    return true;
+  }
+
+  @Override
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {
       expr = visitor.accept(expr);
-      visitor.accept(body);
+      body = (JBlock) visitor.accept(body);
     }
     visitor.endVisit(this, ctx);
   }
 
+  @Override
+  public JType getType() {
+    return type;
+  }
 }

@@ -32,6 +32,7 @@ import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JPermutationDependentValue;
+import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
@@ -260,14 +261,14 @@ public class ResolvePermutationDependentValues {
 
     // switch (CollapsedPropertyHolder.getPermutationId()) { ... }
     JSwitchStatement sw =
-        new JSwitchStatement(info, new JMethodCall(info, null, permutationIdMethod), switchBody);
+        new JSwitchStatement(info, new JMethodCall(info, null, permutationIdMethod), switchBody, JPrimitiveType.VOID);
 
     // return new FallbackImpl(); at the very end.
     assert mostUsedExpression != null : "No most-used expression";
     JReturnStatement fallbackReturn = mostUsedExpression.makeReturnStatement();
 
     JMethodBody body = (JMethodBody) toReturn.getBody();
-    body.getBlock().addStmt(sw);
+    body.getBlock().addStmt(sw.makeStatement());
     body.getBlock().addStmt(fallbackReturn);
 
     return toReturn;

@@ -115,30 +115,37 @@
     return dialog;
   }
 
-  function makeBookmarklet(name, javascript) {
+  function makeBookmarklet(name, javascript, javascriptFunction) {
     var result = makeTextElt('a', '12pt', name);
     result.style.fontFamily = 'sans';
     result.style.textDecoration = 'none';
     result.style.background = '#ddd';
     result.style.border = '2px outset #ddd';
     result.style.padding = '3pt';
-    result.onclick = javascript;
+    result.onclick = javascriptFunction; // used in CSP case (clicking the button)
+	result.setAttribute('href', 'javascript:' + encodeURIComponent(javascript)); // used in bookmarklet case
     result.title = 'Tip: drag this button to the bookmark bar';
     return result;
   }
 
   function makeCompileBookmarklet(codeserver_url, module_name) {
     var bookmarklets_js = codeserver_url + 'dev_mode_on.js';
-    var javascript = function() { 
-	  window.__gwt_bookmarklet_params = {
+	var javascript = '{ window.__gwt_bookmarklet_params = {'
+        + 'server_url:\'' + codeserver_url + '\','
+        + 'module_name:\'' + module_name + '\'};'
+        + ' var s = document.createElement(\'script\');'
+        + ' s.src = \'' + bookmarklets_js + '\';'
+        + ' void(document.getElementsByTagName(\'head\')[0].appendChild(s));}';
+    var javascriptFunction = function() { 
+      window.__gwt_bookmarklet_params = {
         server_url: codeserver_url,
         module_name: module_name
-	  };
-       var s = document.createElement('script');
-       s.src = bookmarklets_js;
-       void(document.getElementsByTagName('head')[0].appendChild(s));
+      };
+      var s = document.createElement('script');
+      s.src = bookmarklets_js;
+      void(document.getElementsByTagName('head')[0].appendChild(s));
 	};
-    return makeBookmarklet('Compile', javascript);
+    return makeBookmarklet('Compile', javascript, javascriptFunction);
   }
 
   /**

@@ -97,6 +97,7 @@ import com.google.gwt.dev.jjs.ast.JUnsafeTypeCoercion;
 import com.google.gwt.dev.jjs.ast.JVariable;
 import com.google.gwt.dev.jjs.ast.JVariableRef;
 import com.google.gwt.dev.jjs.ast.JWhileStatement;
+import com.google.gwt.dev.jjs.ast.JYieldStatement;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
 import com.google.gwt.dev.jjs.ast.js.JsniClassLiteral;
 import com.google.gwt.dev.jjs.ast.js.JsniFieldRef;
@@ -544,9 +545,7 @@ public class GwtAstBuilder {
       try {
         SourceInfo info = makeSourceInfo(x);
         JExpression expression = pop(x.expression);
-//        push(new JYieldStatement(info, expression));
-        // TODO remove this when we have the right solution
-        push(expression.makeStatement());
+        push(new JYieldStatement(info, expression));
       } catch (Throwable e) {
         throw translateException(x, e);
       }

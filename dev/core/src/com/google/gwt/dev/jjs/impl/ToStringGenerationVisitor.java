@@ -827,6 +827,11 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   }
 
   @Override
+  public boolean visit(JSwitchExpression x, Context ctx) {
+    return super.visit(x, ctx);
+  }
+
+  @Override
   public boolean visit(JSwitchStatement x, Context ctx) {
     print(CHARS_SWITCH);
     lparen();
@@ -895,6 +900,11 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
       nestedStatementPop(x.getBody());
     }
     return false;
+  }
+
+  @Override
+  public boolean visit(JYieldStatement x, Context ctx) {
+    return super.visit(x, ctx);
   }
 
   protected void closeBlock() {

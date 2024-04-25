@@ -352,6 +352,10 @@ public class JTransformer<T> {
     return transformStatement(x);
   }
 
+  public T transformYieldStatement(JYieldStatement x) {
+    return transformStatement(x);
+  }
+
   private class JRewriterVisitor extends JVisitor {
     T result = null;
 
@@ -560,6 +564,10 @@ public class JTransformer<T> {
     public final void endVisit(JStringLiteral x, Context ctx) {
     }
 
+    @Override
+    public void endVisit(JSwitchExpression x, Context ctx) {
+    }
+
     public final void endVisit(JSwitchStatement x, Context ctx) {
     }
 
@@ -578,6 +586,10 @@ public class JTransformer<T> {
     public final void endVisit(JUnaryOperation x, Context ctx) {
     }
 
+    @Override
+    public void endVisit(JUnsafeTypeCoercion x, Context ctx) {
+    }
+
     public final void endVisit(JValueLiteral x, Context ctx) {
     }
 
@@ -588,6 +600,10 @@ public class JTransformer<T> {
     }
 
     public final void endVisit(JWhileStatement x, Context ctx) {
+    }
+
+    @Override
+    public void endVisit(JYieldStatement x, Context ctx) {
     }
 
     public final boolean visit(JAbstractMethodBody x, Context ctx) {
@@ -1065,6 +1081,13 @@ public class JTransformer<T> {
     public final boolean visit(JWhileStatement x, Context ctx) {
       assert result == null;
       result = transformWhileStatement(x);
+      return false;
+    }
+
+    @Override
+    public boolean visit(JYieldStatement x, Context ctx) {
+      assert result == null;
+      result = transformYieldStatement(x);
       return false;
     }
   }

@@ -501,6 +501,10 @@ public class JVisitor {
     endVisit((JStatement) x, ctx);
   }
 
+  public void endVisit(JYieldStatement x, Context ctx) {
+    endVisit((JStatement) x, ctx);
+  }
+
   public boolean visit(JAbstractMethodBody x, Context ctx) {
     return visit((JNode) x, ctx);
   }
@@ -825,4 +829,7 @@ public class JVisitor {
     return visit((JStatement) x, ctx);
   }
 
+  public boolean visit(JYieldStatement x, Context ctx) {
+    return visit((JStatement) x, ctx);
+  }
 }

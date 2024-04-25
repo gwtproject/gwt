@@ -390,6 +390,8 @@ public class CfgBuilder {
       return false;
     }
 
+    //TODO add yield?
+
     @Override
     public boolean visit(JCaseStatement x, Context ctx) {
       pushNode(new CfgStatementNode<JStatement>(parent, x));

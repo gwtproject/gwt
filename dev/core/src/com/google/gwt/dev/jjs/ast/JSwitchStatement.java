@@ -15,48 +15,38 @@
  */
 package com.google.gwt.dev.jjs.ast;
 
+import com.google.gwt.dev.javac.testing.Source;
 import com.google.gwt.dev.jjs.SourceInfo;
 
 /**
- * Java switch statement.
+ * Wrapper to represent a Java switch statement as a JStatement.
  */
-public class JSwitchStatement extends JExpression {
+public class JSwitchStatement extends JStatement {
 
-  private JBlock body;
-  private JExpression expr;
-  private JType type;
+  private final JSwitchExpression expr;
 
-  public JSwitchStatement(SourceInfo info, JExpression expr, JBlock body, JType type) {
-    super(info);
+  public JSwitchStatement(SourceInfo info, JExpression expr, JBlock block) {
+    this(new JSwitchExpression(info, expr, block, JPrimitiveType.VOID));
+  }
+
+  public JSwitchStatement(JSwitchExpression expr) {
+    super(expr.getSourceInfo());
     this.expr = expr;
-    this.body = body;
-    this.type = type;
   }
 
   public JBlock getBody() {
-    return body;
+    return expr.getBody();
   }
 
   public JExpression getExpr() {
-    return expr;
-  }
-
-  @Override
-  public boolean hasSideEffects() {
-    return true;
+    return expr.getExpr();
   }
 
   @Override
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {
-      expr = visitor.accept(expr);
-      body = (JBlock) visitor.accept(body);
+      visitor.accept(expr);
     }
     visitor.endVisit(this, ctx);
-  }
-
-  @Override
-  public JType getType() {
-    return type;
   }
 }

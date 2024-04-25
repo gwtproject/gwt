@@ -261,14 +261,14 @@ public class ResolvePermutationDependentValues {
 
     // switch (CollapsedPropertyHolder.getPermutationId()) { ... }
     JSwitchStatement sw =
-        new JSwitchStatement(info, new JMethodCall(info, null, permutationIdMethod), switchBody, JPrimitiveType.VOID);
+        new JSwitchStatement(info, new JMethodCall(info, null, permutationIdMethod), switchBody);
 
     // return new FallbackImpl(); at the very end.
     assert mostUsedExpression != null : "No most-used expression";
     JReturnStatement fallbackReturn = mostUsedExpression.makeReturnStatement();
 
     JMethodBody body = (JMethodBody) toReturn.getBody();
-    body.getBlock().addStmt(sw.makeStatement());
+    body.getBlock().addStmt(sw);
     body.getBlock().addStmt(fallbackReturn);
 
     return toReturn;

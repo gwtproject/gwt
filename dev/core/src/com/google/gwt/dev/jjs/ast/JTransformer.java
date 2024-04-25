@@ -304,8 +304,12 @@ public class JTransformer<T> {
     return transformValueLiteral(x);
   }
 
-  public T transformSwitchStatement(JSwitchStatement x) {
+  public T transformSwitchExpression(JSwitchExpression x) {
     return transformExpression(x);
+  }
+
+  public T transformSwitchStatement(JSwitchStatement x) {
+    return transformStatement(x);
   }
 
   public T transformThisRef(JThisRef x) {
@@ -989,6 +993,12 @@ public class JTransformer<T> {
     public final boolean visit(JStringLiteral x, Context ctx) {
       assert result == null;
       result = transformStringLiteral(x);
+      return false;
+    }
+
+    public final boolean visit(JSwitchExpression x, Context ctx) {
+      assert result == null;
+      result = transformSwitchExpression(x);
       return false;
     }
 

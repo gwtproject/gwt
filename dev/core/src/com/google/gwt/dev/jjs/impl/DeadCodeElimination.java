@@ -1192,7 +1192,7 @@ public class DeadCodeElimination {
     }
 
     /**
-     * Tries to removes cases and statements from switches whose expression is a
+     * Tries to remove cases and statements from switches whose expression is a
      * constant value.
      *
      * @return true, if the switch was completely eliminated
@@ -1225,12 +1225,7 @@ public class DeadCodeElimination {
       if (matchingCase == null) {
         // the switch has no default and no matching cases
         // the expression is a value literal, so it can go away completely
-        assert s.getType() == JPrimitiveType.VOID : "switch expressions must always have all matching cases";
-        if (ctx.canRemove()) {
-          ctx.removeMe();
-        } else {
-          ctx.replaceMe(new JMultiExpression(s.getSourceInfo()));
-        }
+        removeMe(s, ctx);
         return true;
       }
 

@@ -86,6 +86,7 @@ import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
 import com.google.gwt.dev.jjs.ast.JStatement;
+import com.google.gwt.dev.jjs.ast.JSwitchExpression;
 import com.google.gwt.dev.jjs.ast.JSwitchStatement;
 import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JThrowStatement;
@@ -697,9 +698,9 @@ public class GenerateJavaScriptAST {
 
     @Override
     public JsNode transformExpressionStatement(JExpressionStatement statement) {
-      if (statement.getExpr() instanceof JSwitchStatement) {
+      if (statement.getExpr() instanceof JSwitchExpression) {
         if (statement.getExpr().getType() == JPrimitiveType.VOID) {
-          return transformSwitchStatement((JSwitchStatement) statement.getExpr());
+          return transformSwitchStatement(new JSwitchStatement((JSwitchExpression) statement.getExpr()));
         } else {
           throw new IllegalStateException("top-level switch expr");
         }
@@ -707,6 +708,8 @@ public class GenerateJavaScriptAST {
         return transform(statement.getExpr()).makeStmt();
       }
     }
+
+
 
     @Override
     public JsNode transformFieldRef(JFieldRef fieldRef) {

@@ -647,7 +647,7 @@ public class CfgBuilder {
 
     @Override
     public boolean visit(JSwitchStatement x, Context ctx) {
-      pushNode(new CfgStatementNode<JStatement>(parent, x.makeStatement()));
+      pushNode(new CfgStatementNode<JStatement>(parent, x));
       accept(x.getExpr());
 
       JSwitchStatement oldSwitchStatement = switchStatement;

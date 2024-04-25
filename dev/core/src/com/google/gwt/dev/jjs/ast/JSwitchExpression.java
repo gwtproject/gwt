@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2024 GWT Project Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -17,44 +17,45 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
 /**
- * Java case statement.
+ * Java switch statement/expression.
  */
-public class JCaseStatement extends JStatement {
+public class JSwitchExpression extends JExpression {
+  private JBlock body;
+  private JExpression expr;
+  private JType type;
 
-  private List<JExpression> exprs;
-
-  public JCaseStatement(SourceInfo info, JExpression expr) {
-    this(info, Collections.singletonList(expr));
-    assert exprs != null;
-  }
-
-  public JCaseStatement(SourceInfo info, Collection<JExpression> exprs) {
+  public JSwitchExpression(SourceInfo info, JExpression expr, JBlock body, JType type) {
     super(info);
-    this.exprs = Collections.unmodifiableList(new ArrayList<>(exprs));
+    this.expr = expr;
+    this.body = body;
+    this.type = type;
   }
 
-  @Deprecated
+  public JBlock getBody() {
+    return body;
+  }
+
   public JExpression getExpr() {
-    assert exprs.size() <= 1 : exprs;
-    return exprs.isEmpty() ? null : exprs.get(0);
+    return expr;
   }
 
-  public List<JExpression> getExprs() {
-    return exprs;
+  @Override
+  public boolean hasSideEffects() {
+    return true;
   }
 
   @Override
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {
-      exprs = visitor.acceptImmutable(exprs);
+      expr = visitor.accept(expr);
+      body = (JBlock) visitor.accept(body);
     }
     visitor.endVisit(this, ctx);
   }
 
+  @Override
+  public JType getType() {
+    return type;
+  }
 }

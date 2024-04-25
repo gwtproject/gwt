@@ -46,7 +46,7 @@ import com.google.gwt.dev.jjs.ast.JPostfixOperation;
 import com.google.gwt.dev.jjs.ast.JPrefixOperation;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
-import com.google.gwt.dev.jjs.ast.JSwitchStatement;
+import com.google.gwt.dev.jjs.ast.JSwitchExpression;
 import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JUnsafeTypeCoercion;
 import com.google.gwt.dev.jjs.ast.JVisitor;
@@ -257,9 +257,8 @@ public class CloneExpressionVisitor extends JVisitor {
   }
 
   @Override
-  public boolean visit(JSwitchStatement x, Context ctx) {
-    throw new UnsupportedOperationException("clone switch expression");
-//    expression = new JSwitchStatement(x.getSourceInfo(), cloneExpression(x.getExpr()), );
+  public boolean visit(JSwitchExpression x, Context ctx) {
+    throw new UnsupportedOperationException("switch expression cannot be cloned");
   }
 
   @Override

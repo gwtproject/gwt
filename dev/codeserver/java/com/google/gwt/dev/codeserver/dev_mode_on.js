@@ -123,7 +123,7 @@
     result.style.border = '2px outset #ddd';
     result.style.padding = '3pt';
     result.onclick = javascriptFunction; // used in CSP case (clicking the button)
-	result.setAttribute('href', 'javascript:' + encodeURIComponent(javascript)); // used in bookmarklet case
+    result.setAttribute('href', 'javascript:' + encodeURIComponent(javascript)); // used in bookmarklet case
     result.title = 'Tip: drag this button to the bookmark bar';
     return result;
   }
@@ -144,7 +144,7 @@
       var s = document.createElement('script');
       s.src = bookmarklets_js;
       void(document.getElementsByTagName('head')[0].appendChild(s));
-	};
+    };
     return makeBookmarklet('Compile', javascript, javascriptFunction);
   }
 

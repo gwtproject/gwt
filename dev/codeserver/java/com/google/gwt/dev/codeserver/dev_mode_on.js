@@ -130,7 +130,7 @@
 
   function makeCompileBookmarklet(codeserver_url, module_name) {
     var bookmarklets_js = codeserver_url + 'dev_mode_on.js';
-	var javascript = '{ window.__gwt_bookmarklet_params = {'
+    var javascript = '{ window.__gwt_bookmarklet_params = {'
         + 'server_url:\'' + codeserver_url + '\','
         + 'module_name:\'' + module_name + '\'};'
         + ' var s = document.createElement(\'script\');'

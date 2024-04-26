@@ -77,6 +77,9 @@ public class Java17Test extends GWTTestCase {
   public void testInstanceOfPatternMatchingAsReturn() {
     assertFalse(isGwtSourceLevel17());
   }
+  public void testSwitchExpression() {
+    assertFalse(isGwtSourceLevel17());
+  }
 
   private boolean isGwtSourceLevel17() {
     return JUnitShell.getCompilerOptions().getSourceLevel().compareTo(SourceLevel.JAVA17) >= 0;

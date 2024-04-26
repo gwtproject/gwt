@@ -212,4 +212,11 @@ public class Java17Test extends GWTTestCase {
     Bar bar = new Bar();
     assertTrue(bar.isSquare());
   }
+
+  public void testSwitchExpression() {
+    int value = switch(0) {
+      default -> 17;
+    };
+    assertEquals(17, value);
+  }
 }

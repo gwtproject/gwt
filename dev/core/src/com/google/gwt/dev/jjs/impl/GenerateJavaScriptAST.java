@@ -31,74 +31,8 @@ import com.google.gwt.dev.jjs.HasSourceInfo;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
-import com.google.gwt.dev.jjs.ast.Context;
-import com.google.gwt.dev.jjs.ast.HasEnclosingType;
+import com.google.gwt.dev.jjs.ast.*;
 import com.google.gwt.dev.jjs.ast.HasJsInfo.JsMemberType;
-import com.google.gwt.dev.jjs.ast.HasName;
-import com.google.gwt.dev.jjs.ast.JAbstractMethodBody;
-import com.google.gwt.dev.jjs.ast.JArrayLength;
-import com.google.gwt.dev.jjs.ast.JArrayRef;
-import com.google.gwt.dev.jjs.ast.JArrayType;
-import com.google.gwt.dev.jjs.ast.JBinaryOperation;
-import com.google.gwt.dev.jjs.ast.JBinaryOperator;
-import com.google.gwt.dev.jjs.ast.JBlock;
-import com.google.gwt.dev.jjs.ast.JBreakStatement;
-import com.google.gwt.dev.jjs.ast.JCaseStatement;
-import com.google.gwt.dev.jjs.ast.JCastMap;
-import com.google.gwt.dev.jjs.ast.JCastOperation;
-import com.google.gwt.dev.jjs.ast.JClassLiteral;
-import com.google.gwt.dev.jjs.ast.JClassType;
-import com.google.gwt.dev.jjs.ast.JConditional;
-import com.google.gwt.dev.jjs.ast.JConstructor;
-import com.google.gwt.dev.jjs.ast.JContinueStatement;
-import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
-import com.google.gwt.dev.jjs.ast.JDeclaredType;
-import com.google.gwt.dev.jjs.ast.JDoStatement;
-import com.google.gwt.dev.jjs.ast.JExpression;
-import com.google.gwt.dev.jjs.ast.JExpressionStatement;
-import com.google.gwt.dev.jjs.ast.JField;
-import com.google.gwt.dev.jjs.ast.JFieldRef;
-import com.google.gwt.dev.jjs.ast.JForStatement;
-import com.google.gwt.dev.jjs.ast.JIfStatement;
-import com.google.gwt.dev.jjs.ast.JInterfaceType;
-import com.google.gwt.dev.jjs.ast.JLabel;
-import com.google.gwt.dev.jjs.ast.JLabeledStatement;
-import com.google.gwt.dev.jjs.ast.JLiteral;
-import com.google.gwt.dev.jjs.ast.JLocal;
-import com.google.gwt.dev.jjs.ast.JLocalRef;
-import com.google.gwt.dev.jjs.ast.JMember;
-import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
-import com.google.gwt.dev.jjs.ast.JMethodCall;
-import com.google.gwt.dev.jjs.ast.JNameOf;
-import com.google.gwt.dev.jjs.ast.JNewInstance;
-import com.google.gwt.dev.jjs.ast.JNode;
-import com.google.gwt.dev.jjs.ast.JNullLiteral;
-import com.google.gwt.dev.jjs.ast.JNumericEntry;
-import com.google.gwt.dev.jjs.ast.JParameter;
-import com.google.gwt.dev.jjs.ast.JParameterRef;
-import com.google.gwt.dev.jjs.ast.JPermutationDependentValue;
-import com.google.gwt.dev.jjs.ast.JPostfixOperation;
-import com.google.gwt.dev.jjs.ast.JPrefixOperation;
-import com.google.gwt.dev.jjs.ast.JPrimitiveType;
-import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.jjs.ast.JReferenceType;
-import com.google.gwt.dev.jjs.ast.JReturnStatement;
-import com.google.gwt.dev.jjs.ast.JRunAsync;
-import com.google.gwt.dev.jjs.ast.JStatement;
-import com.google.gwt.dev.jjs.ast.JSwitchExpression;
-import com.google.gwt.dev.jjs.ast.JSwitchStatement;
-import com.google.gwt.dev.jjs.ast.JThisRef;
-import com.google.gwt.dev.jjs.ast.JThrowStatement;
-import com.google.gwt.dev.jjs.ast.JTransformer;
-import com.google.gwt.dev.jjs.ast.JTryStatement;
-import com.google.gwt.dev.jjs.ast.JType;
-import com.google.gwt.dev.jjs.ast.JUnaryOperator;
-import com.google.gwt.dev.jjs.ast.JUnsafeTypeCoercion;
-import com.google.gwt.dev.jjs.ast.JVariable;
-import com.google.gwt.dev.jjs.ast.JVisitor;
-import com.google.gwt.dev.jjs.ast.JWhileStatement;
-import com.google.gwt.dev.jjs.ast.RuntimeConstants;
 import com.google.gwt.dev.jjs.ast.js.JDebuggerStatement;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
 import com.google.gwt.dev.jjs.ast.js.JsniClassLiteral;
@@ -1695,6 +1629,44 @@ public class GenerateJavaScriptAST {
     }
 
     @Override
+    public JsNode transformSwitchExpression(JSwitchExpression x) {
+      SourceInfo info = x.getSourceInfo();
+      // Any remaining switch expression that couldn't be rewritten to a switch statement must be
+      // wrapped in a JsFunction, with yields replaced by returns:
+      //
+      // foo(switch(bar) {
+      //   case 123 -> "abc"
+      // });
+      //
+      // would be written as
+      // foo((function() {
+      //   switch(bar) {
+      //     case 123:
+      //       return "abc";
+      //   }
+      // })());
+      //
+
+      // We need a scope for the wrapper - we're just going to use the enclosing method for that,
+      // since all java locals are declared at the top level any way. This prevents us from needing
+      // to maintain a stack of nested JsFunctions (in case of nested switch expressions), and
+      // potentially lets the compiler reuse locals.
+      JsScope scope = getJsFunctionFor(currentMethod).getScope();
+      JsFunction wrapper = new JsFunction(info, scope);
+
+      // Write out the switch expression as if it was a statement - every case must have returns
+      // already built in
+      JsStatement switchStatement = transformSwitchStatement(new JSwitchStatement(x));
+
+      wrapper.setBody(new JsBlock(info));
+      wrapper.getBody().getStatements().add(switchStatement);
+
+      wrapper.setName(scope.declareName("switch_" + info.getStartLine() + "_" + info.getStartPos()));
+
+      return JsUtils.createCommaExpression(wrapper, new JsInvocation(info, wrapper));
+    }
+
+    @Override
     public JsStatement transformSwitchStatement(JSwitchStatement switchStatement) {
       /*
        * What a pain.. JSwitchStatement and JsSwitch are modeled completely
@@ -2612,6 +2584,11 @@ public class GenerateJavaScriptAST {
      */
     private <T extends JsExpression> T transform(JExpression expression) {
       return transform((JNode) expression);
+    }
+
+    @Override
+    public JsNode transformYieldStatement(JYieldStatement x) {
+      return new JsReturn(x.getSourceInfo(), transform(x.getExpr()));
     }
 
     private <T extends JsStatement> T transform(JStatement statement) {

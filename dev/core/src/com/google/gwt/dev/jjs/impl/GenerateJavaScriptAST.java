@@ -1652,6 +1652,8 @@ public class GenerateJavaScriptAST {
       // to maintain a stack of nested JsFunctions (in case of nested switch expressions), and
       // potentially lets the compiler reuse locals.
       JsScope scope = getJsFunctionFor(currentMethod).getScope();
+
+      // TODO we must bind(this) or .apply(this), or use an arrow expression instead
       JsFunction wrapper = new JsFunction(info, scope);
 
       // Write out the switch expression as if it was a statement - every case must have returns

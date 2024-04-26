@@ -75,12 +75,14 @@ import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JRuntimeTypeReference;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
+import com.google.gwt.dev.jjs.ast.JSwitchExpression;
 import com.google.gwt.dev.jjs.ast.JSwitchStatement;
 import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JThrowStatement;
 import com.google.gwt.dev.jjs.ast.JTryStatement;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JWhileStatement;
+import com.google.gwt.dev.jjs.ast.JYieldStatement;
 import com.google.gwt.dev.jjs.ast.js.JDebuggerStatement;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
 import com.google.gwt.dev.jjs.ast.js.JsniFieldRef;
@@ -142,6 +144,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   protected static final char[] CHARS_TRUE = "true".toCharArray();
   protected static final char[] CHARS_TRY = "try ".toCharArray();
   protected static final char[] CHARS_WHILE = "while ".toCharArray();
+  protected static final char[] CHARS_YIELD = "yield ".toCharArray();
 
   private boolean needSemi = true;
 
@@ -828,20 +831,24 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
 
   @Override
   public boolean visit(JSwitchExpression x, Context ctx) {
-    return super.visit(x, ctx);
+    return writeSwitch(x.getExpr(), x.getBody());
+  }
+
+  private boolean writeSwitch(JExpression expr, JBlock body) {
+    print(CHARS_SWITCH);
+    lparen();
+    accept(expr);
+    rparen();
+    space();
+    nestedStatementPush(body);
+    accept(body);
+    nestedStatementPop(body);
+    return false;
   }
 
   @Override
   public boolean visit(JSwitchStatement x, Context ctx) {
-    print(CHARS_SWITCH);
-    lparen();
-    accept(x.getExpr());
-    rparen();
-    space();
-    nestedStatementPush(x.getBody());
-    accept(x.getBody());
-    nestedStatementPop(x.getBody());
-    return false;
+    return writeSwitch(x.getExpr(), x.getBody());
   }
 
   @Override
@@ -904,7 +911,10 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
 
   @Override
   public boolean visit(JYieldStatement x, Context ctx) {
-    return super.visit(x, ctx);
+    print(CHARS_YIELD);
+    space();
+    accept(x.getExpr());
+    return false;
   }
 
   protected void closeBlock() {

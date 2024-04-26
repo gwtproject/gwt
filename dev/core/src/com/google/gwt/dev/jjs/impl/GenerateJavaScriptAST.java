@@ -1632,19 +1632,24 @@ public class GenerateJavaScriptAST {
     public JsNode transformSwitchExpression(JSwitchExpression x) {
       SourceInfo info = x.getSourceInfo();
       // Any remaining switch expression that couldn't be rewritten to a switch statement must be
-      // wrapped in a JsFunction, with yields replaced by returns:
+      // wrapped in a JsFunction, with yields replaced by returns. The function is invoked with
+      // Function.prototype.call, so that "this" is correctly applied to the contents of the
+      // function, and to avoid making the function appear in the local scope (avoiding the need
+      // for a name for the function, and thus allowing more than one switch, or nested switches,
+      // etc). That is,
       //
       // foo(switch(bar) {
       //   case 123 -> "abc"
       // });
       //
       // would be written as
+      //
       // foo((function() {
       //   switch(bar) {
       //     case 123:
       //       return "abc";
       //   }
-      // })());
+      // }).call(this));
       //
 
       // We need a scope for the wrapper - we're just going to use the enclosing method for that,
@@ -1653,19 +1658,18 @@ public class GenerateJavaScriptAST {
       // potentially lets the compiler reuse locals.
       JsScope scope = getJsFunctionFor(currentMethod).getScope();
 
-      // TODO we must bind(this) or .apply(this), or use an arrow expression instead
-      JsFunction wrapper = new JsFunction(info, scope);
+      JsFunction fnWrapper = new JsFunction(info, scope);
 
       // Write out the switch expression as if it was a statement - every case must have returns
       // already built in
       JsStatement switchStatement = transformSwitchStatement(new JSwitchStatement(x));
 
-      wrapper.setBody(new JsBlock(info));
-      wrapper.getBody().getStatements().add(switchStatement);
+      fnWrapper.setBody(new JsBlock(info));
+      fnWrapper.getBody().getStatements().add(switchStatement);
 
-      wrapper.setName(scope.declareName("switch_" + info.getStartLine() + "_" + info.getStartPos()));
+      JsNameRef call = new JsNameRef(info, "call", fnWrapper);
 
-      return JsUtils.createCommaExpression(wrapper, new JsInvocation(info, wrapper));
+      return new JsInvocation(info, call, new JsThisRef(info));
     }
 
     @Override

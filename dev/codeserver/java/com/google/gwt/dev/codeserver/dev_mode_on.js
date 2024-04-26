@@ -130,13 +130,14 @@
 
   function makeCompileBookmarklet(codeserver_url, module_name) {
     var bookmarklets_js = codeserver_url + 'dev_mode_on.js';
-    var javascript = '{ window.__gwt_bookmarklet_params = {'
+	var javascript = '{ window.__gwt_bookmarklet_params = {'
         + 'server_url:\'' + codeserver_url + '\','
         + 'module_name:\'' + module_name + '\'};'
         + ' var s = document.createElement(\'script\');'
         + ' s.src = \'' + bookmarklets_js + '\';'
         + ' void(document.getElementsByTagName(\'head\')[0].appendChild(s));}';
-    var javascriptFunction = function() { 
+    var javascriptFunction = function(e) {
+      e.preventDefault(); // avoid CSP warning
       window.__gwt_bookmarklet_params = {
         server_url: codeserver_url,
         module_name: module_name

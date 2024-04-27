@@ -1996,7 +1996,7 @@ public class DeadCodeElimination {
    * labeled break break to another context.
    */
   public static class FindBreakContinueStatementsVisitor extends JVisitor {
-    //TODO add yield support?
+    // TODO add yield support?
     private boolean hasBreakContinueStatements = false;
 
     @Override

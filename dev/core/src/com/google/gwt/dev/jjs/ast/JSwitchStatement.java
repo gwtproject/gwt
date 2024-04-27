@@ -15,7 +15,6 @@
  */
 package com.google.gwt.dev.jjs.ast;
 
-import com.google.gwt.dev.javac.testing.Source;
 import com.google.gwt.dev.jjs.SourceInfo;
 
 /**

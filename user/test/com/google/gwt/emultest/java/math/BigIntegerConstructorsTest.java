@@ -189,6 +189,134 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
   }
 
   /**
+   * Create a negative number from an array of bytes with offset and length.
+   * The number fits in an array of integers.
+   */
+  public void testConstructorBytesOffsetLengthNegative1() {
+    byte aBytes[] = {0, 0, -12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, 3, 91};
+    byte rBytes[] = {-12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, 3, 91};
+    BigInteger aNumber = new BigInteger(aBytes, 2, 14);
+    byte resBytes[] = new byte[rBytes.length];
+    resBytes = aNumber.toByteArray();
+    for (int i = 0; i < resBytes.length; i++) {
+      assertTrue(resBytes[i] == rBytes[i]);
+    }
+    assertEquals("incorrect sign", -1, aNumber.signum());
+  }
+
+  /**
+   * Create a negative number from an array of bytes with offset and length.
+   * The number fits in an integer.
+   */
+  public void testConstructorBytesOffsetLengthNegative2() {
+    byte aBytes[] = {127, 127, -12, 56, 100};
+    byte rBytes[] = {-12, 56, 100};
+    BigInteger aNumber = new BigInteger(aBytes, 2, 3);
+    byte resBytes[] = new byte[rBytes.length];
+    resBytes = aNumber.toByteArray();
+    for (int i = 0; i < resBytes.length; i++) {
+      assertTrue(resBytes[i] == rBytes[i]);
+    }
+    assertEquals("incorrect sign", -1, aNumber.signum());
+  }
+
+  /**
+   * Create a negative number from an array of bytes with offset and length.
+   * The number of bytes is 4.
+   */
+  public void testConstructorBytesOffsetLengthNegative3() {
+    byte aBytes[] = {0, 0, -128, -12, 56, 100};
+    byte rBytes[] = {-128, -12, 56, 100};
+    BigInteger aNumber = new BigInteger(aBytes, 2, 4);
+    byte resBytes[] = new byte[rBytes.length];
+    resBytes = aNumber.toByteArray();
+    for (int i = 0; i < resBytes.length; i++) {
+      assertTrue(resBytes[i] == rBytes[i]);
+    }
+    assertEquals("incorrect sign", -1, aNumber.signum());
+  }
+
+  /**
+   * Create a negative number from an array of bytes with offset and length.
+   * The number of bytes is multiple of 4.
+   */
+  public void testConstructorBytesOffsetLengthNegative4() {
+    byte aBytes[] = {127, 127, -128, -12, 56, 100, -13, 56, 93, -78};
+    byte rBytes[] = {-128, -12, 56, 100, -13, 56, 93, -78};
+    BigInteger aNumber = new BigInteger(aBytes, 2, 8);
+    byte resBytes[] = new byte[rBytes.length];
+    resBytes = aNumber.toByteArray();
+    for (int i = 0; i < resBytes.length; i++) {
+      assertTrue(resBytes[i] == rBytes[i]);
+    }
+    assertEquals("incorrect sign", -1, aNumber.signum());
+  }
+
+  /**
+   * Create a positive number from an array of bytes with offset and length.
+   * The number of bytes is multiple of 4.
+   */
+  public void testConstructorBytesOffsetLengthPositive() {
+    byte aBytes[] = {0, 0, 127, 56, 100, -1, 14, 75, -24, -100};
+    byte rBytes[] = {127, 56, 100, -1, 14, 75, -24, -100};
+    BigInteger aNumber = new BigInteger(aBytes, 2, 8);
+    byte resBytes[] = new byte[rBytes.length];
+    resBytes = aNumber.toByteArray();
+    for (int i = 0; i < resBytes.length; i++) {
+      assertTrue(resBytes[i] == rBytes[i]);
+    }
+    assertEquals("incorrect sign", 1, aNumber.signum());
+  }
+
+  /**
+   * Create a positive number from an array of bytes with offset and length.
+   * The number fits in an array of integers.
+   */
+  public void testConstructorBytesOffsetLengthPositive1() {
+    byte aBytes[] = {127, 127, 12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, 3, 91};
+    byte rBytes[] = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, 3, 91};
+    BigInteger aNumber = new BigInteger(aBytes, 2, 14);
+    byte resBytes[] = new byte[rBytes.length];
+    resBytes = aNumber.toByteArray();
+    for (int i = 0; i < resBytes.length; i++) {
+      assertTrue(resBytes[i] == rBytes[i]);
+    }
+    assertEquals("incorrect sign", 1, aNumber.signum());
+  }
+
+  /**
+   * Create a positive number from an array of bytes with offset and length.
+   * The number fits in an integer.
+   */
+  public void testConstructorBytesOffsetLengthPositive2() {
+    byte aBytes[] = {0, 0, 12, 56, 100};
+    byte rBytes[] = {12, 56, 100};
+    BigInteger aNumber = new BigInteger(aBytes, 2, 3);
+    byte resBytes[] = new byte[rBytes.length];
+    resBytes = aNumber.toByteArray();
+    for (int i = 0; i < resBytes.length; i++) {
+      assertTrue(resBytes[i] == rBytes[i]);
+    }
+    assertEquals("incorrect sign", 1, aNumber.signum());
+  }
+
+  /**
+   * Create a positive number from an array of bytes with offset and length.
+   * The number of bytes is 4.
+   */
+  public void testConstructorBytesOffsetLengthPositive3() {
+    byte aBytes[] = {127, 127, 127, 56, 100, -1};
+    byte rBytes[] = {127, 56, 100, -1};
+    BigInteger aNumber = new BigInteger(aBytes, 2, 4);
+    byte resBytes[] = new byte[rBytes.length];
+    resBytes = aNumber.toByteArray();
+    for (int i = 0; i < resBytes.length; i++) {
+      assertTrue(resBytes[i] == rBytes[i]);
+    }
+    assertEquals("incorrect sign", 1, aNumber.signum());
+  }
+
+  /**
    * Create a zero number from an array of zero bytes.
    */
   public void testConstructorBytesZero() {
@@ -603,6 +731,56 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
       assertTrue(resBytes[i] == rBytes[i]);
     }
     assertEquals("incorrect sign", 0, aNumber.signum());
+  }
+
+  public void testConstructorWithZeroBytes_Offset_Length() {
+    byte[] aByte = {};
+    try {
+      new BigInteger(aByte, 2, 4);
+      fail("NumberFormatException has not been caught");
+    } catch (NumberFormatException e) {
+    }
+  }
+
+  public void testConstructorBytes_Offset_ZeroLength() {
+    byte[] aByte = {127, 127, 12, 34, 56, 78, 0, 0};
+    assertEquals(BigInteger.ZERO, new BigInteger(aByte, 2, 0));
+  }
+
+  public void testConstructorWithBytes_NegativeOffset_Length() {
+    byte[] aByte = {0, 0, 12, 34, 56, 78, 0, 0};
+    try {
+      new BigInteger(aByte, -1, 4);
+      fail("IndexOutOfBoundsException has not been caught");
+    } catch (IndexOutOfBoundsException e) {
+    }
+  }
+
+  public void testConstructorWithBytes_OffsetOutSideArray_Length() {
+    byte[] aByte = {0, 0, 12, 34, 56, 78, 0, 0};
+    try {
+      new BigInteger(aByte, 8, 4);
+      fail("IndexOutOfBoundsException has not been caught");
+    } catch (IndexOutOfBoundsException e) {
+    }
+  }
+
+  public void testConstructorWithBytes_Offset_NegativeLength() {
+    byte[] aByte = {0, 0, 12, 34, 56, 78, 0, 0};
+    try {
+      new BigInteger(aByte, 2, -4);
+      fail("IndexOutOfBoundsException has not been caught");
+    } catch (IndexOutOfBoundsException e) {
+    }
+  }
+
+  public void testConstructorWithBytes_Offset_Length_exceedingSize() {
+    byte[] aByte = {0, 0, 12, 34, 56, 78};
+    try {
+      new BigInteger(aByte, 2, 5);
+      fail("IndexOutOfBoundsException has not been caught");
+    } catch (IndexOutOfBoundsException e) {
+    }
   }
 
   /**

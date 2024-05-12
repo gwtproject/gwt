@@ -179,7 +179,7 @@ public class LoggingRPCTest extends GWTTestCase {
                   break;
                 }
               }
-              assertTrue(found);
+              assertTrue("expected frame found in stack trace", found);
               finishTest();
             }
           });

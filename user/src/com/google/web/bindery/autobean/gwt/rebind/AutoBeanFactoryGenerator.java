@@ -383,7 +383,7 @@ public class AutoBeanFactoryGenerator extends Generator {
           .getQualifiedSourceName(), entry.getKey().getName(), entry.getValue());
 
       enumPerMethodCount++;
-      if(enumPerMethodCount >= maxEnumsPerMethod) {
+      if (enumPerMethodCount >= maxEnumsPerMethod) {
         sw.outdent();
         sw.println("}");
         enumPerMethodCount = 0;
@@ -419,7 +419,7 @@ public class AutoBeanFactoryGenerator extends Generator {
       }
       sw.println("stringsToEnumsMap.put(\"%s\", %s);", entry.getKey(), listExpr);
       enumPerMethodCount++;
-      if(enumPerMethodCount >= maxEnumsPerMethod) {
+      if (enumPerMethodCount >= maxEnumsPerMethod) {
         sw.outdent();
         sw.println("}");
         enumPerMethodCount = 0;
@@ -433,8 +433,7 @@ public class AutoBeanFactoryGenerator extends Generator {
 
     sw.println("@Override protected void initializeEnumMap() {");
     sw.indent();
-    for (int i = 0; i <= methodCount; i++)
-    {
+    for (int i = 0; i <= methodCount; i++) {
       sw.println("initializeEnumMap_%d();", i);
     }
     sw.outdent();

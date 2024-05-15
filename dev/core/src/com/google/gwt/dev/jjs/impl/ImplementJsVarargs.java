@@ -462,8 +462,8 @@ public class ImplementJsVarargs {
       // Passed as an array to varargs method will result in an apply call, in which case hoist the
       // qualifier to make sure it is only evaluated once.
       JExpression instance = x.getInstance();
-      if (x.getTarget().needsDynamicDispatch() && !x.isStaticDispatchOnly()
-          && instance != null && !(instance instanceof JVariableRef && !instance.hasSideEffects())) {
+      if (x.getTarget().needsDynamicDispatch() && !x.isStaticDispatchOnly() && instance != null
+              && !(instance instanceof JVariableRef && !instance.hasSideEffects())) {
         // Move the potentially sideffecting qualifier to a temporary variable so that
         // the code generation for calls that need .apply don't need to hande the case.
         SourceInfo sourceInfo = x.getSourceInfo();

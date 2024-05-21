@@ -270,6 +270,8 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
    * BigInteger} instance. The given array must not be empty.
    *
    * @param val two's complement representation of the new {@code BigInteger}.
+   * @param offset the start offset of the binary representation.
+   * @param length the number of bytes to use.
    * @throws NullPointerException if {@code val == null}.
    * @throws NumberFormatException if the length of {@code val} is zero.
    */
@@ -313,27 +315,53 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
    *           sign is zero and the magnitude contains non-zero entries.
    */
   public BigInteger(int signum, byte[] magnitude) {
+    this(signum, magnitude, 0, magnitude.length);
+  }
+
+  /**
+   * Constructs a new {@code BigInteger} instance with the given sign and the
+   * given magnitude. The sign is given as an integer (-1 for negative, 0 for
+   * zero, 1 for positive). The magnitude is specified as a byte array. The most
+   * significant byte is the entry at index 0.
+   *
+   * @param signum sign of the new {@code BigInteger} (-1 for negative, 0 for
+   *          zero, 1 for positive).
+   * @param magnitude magnitude of the new {@code BigInteger} with the most
+   *          significant byte first.
+   * @param offset the start offset of the binary representation.
+   * @param length the number of bytes to use.
+   * @throws NullPointerException if {@code magnitude == null}.
+   * @throws NumberFormatException if the sign is not one of -1, 0, 1 or if the
+   *           sign is zero and the magnitude contains non-zero entries.
+   */
+  public BigInteger(int signum, byte[] magnitude, int offset, int length) {
     checkNotNull(magnitude);
+
+    if (length < 0 || offset < 0 || magnitude.length < 0 || length > magnitude.length - offset) {
+      throw new IndexOutOfBoundsException("Range check failed: offset=" + offset + ", length="
+          + length + ", val.length=" + magnitude.length);
+    }
 
     if ((signum < -1) || (signum > 1)) {
       // math.13=Invalid signum value
       throw new NumberFormatException("Invalid signum value"); //$NON-NLS-1$
     }
     if (signum == 0) {
-      for (byte element : magnitude) {
+      for (int index = offset; index < offset + length; index++) {
+        byte element = magnitude[index];
         if (element != 0) {
           // math.14=signum-magnitude mismatch
           throw new NumberFormatException("signum-magnitude mismatch"); //$NON-NLS-1$
         }
       }
     }
-    if (magnitude.length == 0) {
+    if (length == 0) {
       sign = 0;
       numberLength = 1;
       digits = new int[] {0};
     } else {
       sign = signum;
-      putBytesPositiveToIntegers(magnitude, 0, magnitude.length);
+      putBytesPositiveToIntegers(magnitude, offset, length);
       cutOffLeadingZeroes();
     }
   }

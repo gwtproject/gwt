@@ -1115,7 +1115,7 @@ public class GwtAstBuilder {
           // X $instanceof_1;
           // (($instanceof_1 = <expr>) instanceof Foo && null != (foo = (Foo) $instanceof_1))
           //
-          // to avoid wrong behavior if o is a method call with side effects
+          // to avoid side effects from evaluating the original expression twice
 
           // Foo foo;
           String patternDeclarationName = jDeclarationStatement.getVariableRef().getTarget().getName();

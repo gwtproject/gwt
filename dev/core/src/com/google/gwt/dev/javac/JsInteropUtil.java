@@ -23,7 +23,6 @@ import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
-import com.google.gwt.dev.jjs.ast.JRecordType;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
@@ -136,25 +135,10 @@ public final class JsInteropUtil {
     if (member instanceof JConstructor) {
       return JsMemberType.CONSTRUCTOR;
     }
-    if (isRecordAccessor((JMethod) member)) {
-      return JsMemberType.PROPERTY;
-    }
     if (isPropertyAccessor) {
       return getJsPropertyAccessorType((JMethod) member);
     }
     return JsMemberType.METHOD;
-  }
-
-  private static boolean isRecordAccessor(JMethod method) {
-    if (!method.getParams().isEmpty()) {
-      return false;
-    }
-    if (!(method.getEnclosingType() instanceof JRecordType)) {
-      return false;
-    }
-    return method.getEnclosingType().getFields().stream()
-            .anyMatch(f -> f.getName().equals(method.getName())
-                    && f.getType().equals(method.getType()));
   }
 
   private static JsMemberType getJsPropertyAccessorType(JMethod method) {

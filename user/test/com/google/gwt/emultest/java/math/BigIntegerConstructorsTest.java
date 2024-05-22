@@ -1113,8 +1113,8 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
     try {
       int aSign = -1;
       new BigInteger(aSign , aByte, 2, 4);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
+      fail("IndexOutOfBoundsException has not been caught");
+    } catch (IndexOutOfBoundsException e) {
     }
   }
 
@@ -1126,8 +1126,8 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
     try {
       int aSign = 0;
       new BigInteger(aSign , aByte, 2, 4);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
+      fail("IndexOutOfBoundsException has not been caught");
+    } catch (IndexOutOfBoundsException e) {
     }
   }
 
@@ -1139,8 +1139,8 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
     try {
       int aSign = 1;
       new BigInteger(aSign , aByte, 2, 4);
-      fail("NumberFormatException has not been caught");
-    } catch (NumberFormatException e) {
+      fail("IndexOutOfBoundsException has not been caught");
+    } catch (IndexOutOfBoundsException e) {
     }
   }
 

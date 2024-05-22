@@ -189,13 +189,13 @@ public class Java17Test extends GWTTestCase {
     if (shape1 instanceof Square shp && shp.getLength() > 0) {
       a = true;
     }
-    if (shape2 instanceof Circle shp && shp.getLength() > 0) {
+    if (shape2 instanceof Circle shp && shp.getDiameter() > 0) {
       b = true;
     }
     assertTrue(a && b);
   }
 
-  public void testMultipleInstanceOfPatternMatchingWithSameVariableNameWithDifferentTypes() {
+  public void testInstanceOfPatternMatchingIsFalse() {
     Shape shape1 = new Square();
     if (shape1 instanceof Circle shp) {
       fail("Should have not reached this point.");

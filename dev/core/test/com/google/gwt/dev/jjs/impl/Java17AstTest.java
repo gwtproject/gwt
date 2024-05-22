@@ -23,9 +23,10 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.jjs.ast.JType;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Arrays;
 import java.util.List;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Tests that {@link GwtAstBuilder} correctly builds the AST for
@@ -240,7 +241,6 @@ public class Java17AstTest extends FullCompileTestBase {
     assertTrue(onModuleLoadMethod
         .toSource()
         .contains("Square square;"));
-
 
     assertTrue(onModuleLoadMethod
         .toSource()

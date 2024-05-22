@@ -1118,7 +1118,8 @@ public class GwtAstBuilder {
           // to avoid side effects from evaluating the original expression twice
 
           // Foo foo;
-          String patternDeclarationName = jDeclarationStatement.getVariableRef().getTarget().getName();
+          String patternDeclarationName = jDeclarationStatement.getVariableRef().getTarget()
+              .getName();
           if (!curMethod.instanceOfDeclarations.containsKey(patternDeclarationName)) {
             curMethod.body.getBlock().addStmt(0, jDeclarationStatement);
             curMethod.instanceOfDeclarations.put(patternDeclarationName, jDeclarationStatement);
@@ -3911,7 +3912,7 @@ public class GwtAstBuilder {
     public final MethodScope scope;
     public final Map<String, JStatement> instanceOfDeclarations = Maps.newHashMap();
 
-    public MethodInfo(JMethod method, JMethodBody methodBody, MethodScope methodScope) {
+    MethodInfo(JMethod method, JMethodBody methodBody, MethodScope methodScope) {
       this.method = method;
       this.body = methodBody;
       this.scope = methodScope;

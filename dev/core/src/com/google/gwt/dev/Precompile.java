@@ -442,7 +442,10 @@ public class Precompile {
             branch.log(TreeLogger.ERROR, "Precompilation failed");
             return false;
           }
-
+          // TODO: move to precompile() after params are refactored
+          if (!options.shouldSaveSource() && !module.shouldEmbedSourceMapContents()) {
+            precompilation.removeSourceArtifacts(logger);
+          }
           Util.writeObjectAsFile(logger, precompilationFile, precompilation);
 
           int permsPrecompiled = precompilation.getPermutations().length;

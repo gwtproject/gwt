@@ -280,7 +280,7 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
       // math.12=Zero length BigInteger
       throw new NumberFormatException("Zero length BigInteger"); //$NON-NLS-1$
     }
-    if (length < 0 || offset < 0 || val.length < 0 || length > val.length - offset) {
+    if (length < 0 || offset < 0 || length > val.length - offset) {
       throw new IndexOutOfBoundsException("Range check failed: offset=" + offset + ", length="
           + length + ", val.length=" + val.length);
     }
@@ -337,7 +337,7 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
   public BigInteger(int signum, byte[] magnitude, int offset, int length) {
     checkNotNull(magnitude);
 
-    if (length < 0 || offset < 0 || magnitude.length < 0 || length > magnitude.length - offset) {
+    if (length < 0 || offset < 0 || length > magnitude.length - offset) {
       throw new IndexOutOfBoundsException("Range check failed: offset=" + offset + ", length="
           + length + ", val.length=" + magnitude.length);
     }

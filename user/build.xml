@@ -1,7 +1,7 @@
 <project name="user" default="build" basedir=".">
   <property name="gwt.root" location=".."/>
   <property name="project.tail" value="user"/>
-  <property name="test.args" value="-ea"/>
+  <property name="test.args" value="-ea -sourceLevel auto"/>
   <property name="test.jvmargs" value="-ea"/>
 
   <!-- support old variables names -->
@@ -14,21 +14,16 @@
   <property name="test.timeout" value="5"/>
   <property name="emma.merged.out" value="${junit.out}/emma-coverage"/>
 
-  <property name="gwt.junit.testcase.web.includes" value="${gwt.junit.testcase.includes}"/>
-  <!-- TODO once we compile with Java >8, update this to exclude tests based on running JDK version -->
-  <condition property="gwt.junit.testcase.web.excludes"
-            value="**/*JreSuite.class,**/OptimizedOnly*,**/*Java8Suite.class"
-            else="**/*JreSuite.class,**/OptimizedOnly*,**/*Java8Suite.class">
-    <isfalse value="${isJava8}" />
-  </condition>
+  <property name="gwt.junit.testcase.web.includes" value="${gwt.junit.testcase.includes}" />
+  <property name="gwt.junit.testcase.web.excludes" value="**/*JreSuite.class,**/OptimizedOnly*" />
+
+  <!-- Disable legacy dev mode test on Java 9 and above -->
+  <property name="test.dev.htmlunit.disable" value="true" />
+  <property name="test.dev.selenium.disable" value="true "/>
 
   <property name="gwt.junit.testcase.dev.includes" value="${gwt.junit.testcase.includes}"/>
-  <!-- TODO once we compile with Java >8, update this to exclude tests based on running JDK version -->
-  <condition property="gwt.junit.testcase.dev.excludes"
-            value="**/EmulSuite.class,**/JSONSuite.class,**/RunAsyncSuite.class,**/*CompilerSuite.class,**/*JsInteropSuite.class,**/*JreSuite.class,**/OptimizedOnly*,**/*Java8Suite.class"
-            else="**/EmulSuite.class,**/JSONSuite.class,**/RunAsyncSuite.class,**/*CompilerSuite.class,**/*JsInteropSuite.class,**/*JreSuite.class,**/OptimizedOnly*,**/*Java8Suite.class">
-    <isfalse value="${isJava8}" />
-  </condition>
+  <property name="gwt.junit.testcase.dev.excludes"
+            value="**/EmulSuite.class,**/JSONSuite.class,**/RunAsyncSuite.class,**/*CompilerSuite.class,**/*JsInteropSuite.class,**/*JreSuite.class,**/OptimizedOnly*" />
 
   <property name="gwt.tck.testcase.dev.includes"
             value="com/google/gwt/validation/tck/**/*GwtSuite.class"/>
@@ -53,7 +48,6 @@
    -->
   <property name="gwt.i18n.test.InnerClassChar" value="dollar"/>
 
-  <!-- Platform shouldn't matter here, just picking one -->
   <property.ensure name="gwt.dev.jar" location="${gwt.build.lib}/gwt-dev.jar"/>
 
   <!--
@@ -67,8 +61,8 @@
     <pathelement location="${gwt.tools.lib}/cglib/cglib-3.1.jar"/>
     <pathelement location="${gwt.tools.lib}/mockito/1.9.5/mockito-all-1.9.5.jar"/>
     <pathelement location="${gwt.tools.lib}/objenesis/objenesis-1.2.jar"/>
-    <pathelement location="${gwt.tools.lib}/objectweb/asm-7.1/asm-7.1.jar"/>
-    <pathelement location="${gwt.tools.lib}/objectweb/asm-7.1/asm-commons-7.1.jar"/>
+    <pathelement location="${gwt.tools.lib}/objectweb/asm-9.6/asm-9.6.jar"/>
+    <pathelement location="${gwt.tools.lib}/objectweb/asm-9.6/asm-commons-9.6.jar"/>
     <pathelement location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA.jar"/>
     <pathelement location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA-sources.jar"/>
     <pathelement
@@ -102,20 +96,10 @@
   <target name="compile" description="Compile all class files"
           unless="compile.complete">
     <gwt.javac
-            excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java"
-            errorprone.args="
-              -Xep:MissingCasesInEnumSwitch:OFF
-              -Xep:SelfComparison:OFF
-              -Xep:SelfEquals:OFF
-              -Xep:FallThrough:OFF
-              -Xep:ReturnValueIgnored:OFF
-              -Xep:EqualsIncompatibleType:OFF
-            ">
+            excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java">
       <src path="super/com/google/gwt/emul/javaemul/internal" />
       <classpath>
-        <pathelement location="${gwt.tools.lib}/gss/2015-10-07/closure-stylesheets-library-20151007-rebased.jar"/>
         <pathelement location="${gwt.tools.lib}/gss/2015-11-04/closure-stylesheets-library-20151104-rebased.jar"/>
-        <pathelement location="${gwt.tools.lib}/tomcat/tomcat-servlet-api-8.0.28.jar"/>
         <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar"/>
         <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
         <pathelement location="${gwt.tools.lib}/w3c/sac/sac-1.3.jar"/>
@@ -138,6 +122,140 @@
     </gwt.javac>
   </target>
 
+  <target name="compile-jakarta" description="Compile all class files for jakarta servlets"
+          unless="compile.complete">
+    <sequential>
+      <!-- Start by copying all sources as-is to a new directory - Note that despite the name, there will be a small bit of servlet-specific code left in here, mostly for the junit runner which will not be updated at this time. -->
+      <copy todir="${project.build}/no-servlet-src" encoding="${javac.encoding}">
+        <!-- Exclude example log handler, not shipped as part of requestfactory-client or shared -->
+        <fileset dir="src" excludes="**/RequestFactoryLogHandler.java" />
+      </copy>
+
+      <!-- Move any server-side code that uses servlets to a separate directory, and refactor to replace javax with jakarta -->
+      <move todir="${project.build}/jakarta-src/com/google/gwt/core/server/jakarta">
+        <filelist dir="${project.build}/no-servlet-src/com/google/gwt/core/server">
+          <file name="GwtServletBase.java"/>
+        </filelist>
+        <filterchain>
+          <tokenfilter>
+            <replacestring from="javax.servlet" to="jakarta.servlet"/>
+            <replacestring from="package com.google.gwt.core.server" to="package com.google.gwt.core.server.jakarta"/>
+            <replaceregex pattern="^/\*\*" replace="import com.google.gwt.core.server.ServerGwtBridge;${line.separator}${line.separator}/**" />
+          </tokenfilter>
+        </filterchain>
+      </move>
+      <!-- Relocate specific classes that directly or indirectly use the servlet api, rewriting imports and packages as needed -->
+      <move file="${project.build}/no-servlet-src/com/google/gwt/logging/server/RemoteLoggingServiceImpl.java" todir="${project.build}/jakarta-src/com/google/gwt/logging/server/jakarta">
+        <filterchain>
+          <tokenfilter>
+            <replaceregex pattern="^/\*\*" replace="import com.google.gwt.logging.server.RemoteLoggingServiceUtil;${line.separator}${line.separator}/**" />
+            <replacestring from="package com.google.gwt.logging.server" to="package com.google.gwt.logging.server.jakarta"/>
+            <replacestring from="com.google.gwt.user.server.rpc.RemoteServiceServlet" to="com.google.gwt.user.server.rpc.jakarta.RemoteServiceServlet"/>
+            <replacestring from="javax.servlet" to="jakarta.servlet"/>
+          </tokenfilter>
+        </filterchain>
+      </move>
+      <move file="${project.build}/no-servlet-src/com/google/gwt/user/server/Util.java" tofile="${project.build}/jakarta-src/com/google/gwt/user/server/jakarta/Util.java">
+        <filterchain>
+          <tokenfilter>
+            <replacestring from="com.google.gwt.user.server" to="com.google.gwt.user.server.jakarta"/>
+            <replacestring from="javax.servlet" to="jakarta.servlet"/>
+          </tokenfilter>
+        </filterchain>
+      </move>
+      <move todir="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/jakarta">
+        <filelist dir="${project.build}/no-servlet-src/com/google/gwt/user/server/rpc">
+          <file name="AbstractRemoteServiceServlet.java"/>
+          <file name="AbstractXsrfProtectedServiceServlet.java"/>
+          <file name="RemoteServiceServlet.java"/>
+          <file name="RPCServletUtils.java"/>
+          <file name="RPC.java"/>
+          <file name="SerializationPolicyClient.java"/>
+          <file name="XsrfProtectedServiceServlet.java"/>
+          <file name="XsrfTokenServiceServlet.java"/>
+        </filelist>
+        <filterchain>
+          <tokenfilter>
+            <replacestring from="package com.google.gwt.user.server.rpc" to="package com.google.gwt.user.server.rpc.jakarta"/>
+            <replacestring from="com.google.gwt.user.server.Util" to="com.google.gwt.user.server.jakarta.Util"/>
+            <replacestring from="javax.servlet" to="jakarta.servlet"/>
+          </tokenfilter>
+        </filterchain>
+      </move>
+      <move todir="${project.build}/jakarta-src/com/google/web/bindery/requestfactory/server/jakarta">
+        <filelist dir="${project.build}/no-servlet-src/com/google/web/bindery/requestfactory/server">
+          <file name="Logging.java"/>
+          <file name="RequestFactoryJarExtractor.java"/>
+          <file name="RequestFactoryServlet.java"/>
+        </filelist>
+        <filterchain>
+          <tokenfilter>
+            <replacestring from="package com.google.web.bindery.requestfactory.server" to="package com.google.web.bindery.requestfactory.server.jakarta"/>
+            <replacestring from="com.google.gwt.user.server.rpc.RPCServletUtils" to="com.google.gwt.user.server.rpc.jakarta.RPCServletUtils"/>
+            <replacestring from="com.google.web.bindery.requestfactory.shared.LoggingRequest" to="com.google.web.bindery.requestfactory.shared.jakarta.LoggingRequest"/>
+            <replaceregex pattern="^/\*\*" replace="import com.google.web.bindery.requestfactory.server.*;${line.separator}${line.separator}/**" />
+          </tokenfilter>
+          <tokenfilter>
+            <replacestring from="javax.servlet" to="jakarta.servlet"/>
+          </tokenfilter>
+        </filterchain>
+      </move>
+      <move todir="${project.build}/jakarta-src/com/google/web/bindery/requestfactory/shared/jakarta">
+        <filelist dir="${project.build}/no-servlet-src/com/google/web/bindery/requestfactory/shared">
+          <file name="LoggingRequest.java"/>
+        </filelist>
+        <filterchain>
+          <tokenfilter>
+            <replacestring from="package com.google.web.bindery.requestfactory.shared" to="package com.google.web.bindery.requestfactory.shared.jakarta"/>
+            <replacestring from="com.google.web.bindery.requestfactory.server.Logging" to="com.google.web.bindery.requestfactory.server.jakarta.Logging"/>
+            <replaceregex pattern="^/\*\*" replace="import com.google.web.bindery.requestfactory.shared.*;${line.separator}${line.separator}/**" />
+          </tokenfilter>
+        </filterchain>
+      </move>
+
+      <!-- add an extra wildcard import to relocated rpc/rf classes that need to reference existing types -->
+      <replace file="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/jakarta/AbstractXsrfProtectedServiceServlet.java" token="${line.separator}/**" value="import com.google.gwt.user.server.rpc.*;${line.separator}${line.separator}/**" />
+      <replace file="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/jakarta/RPC.java" token="${line.separator}/**" value="import com.google.gwt.user.server.rpc.*;${line.separator}${line.separator}/**" />
+      <replace file="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/jakarta/RPC.java" token="com.google.gwt.examples.rpc.server.AdvancedExample" value="com.google.gwt.examples.rpc.server.jakarta.AdvancedExample" />
+      <replace file="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/jakarta/RemoteServiceServlet.java" token="${line.separator}/**" value="import com.google.gwt.user.server.rpc.*;${line.separator}${line.separator}/**" />
+      <replace file="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/jakarta/SerializationPolicyClient.java" token="${line.separator}/**" value="import com.google.gwt.user.server.rpc.*;${line.separator}${line.separator}/**" />
+      <replace file="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/jakarta/AbstractRemoteServiceServlet.java" token="${line.separator}/**" value="import com.google.gwt.user.server.rpc.*;${line.separator}${line.separator}/**" />
+      <replace file="${project.build}/jakarta-src/com/google/web/bindery/requestfactory/server/jakarta/RequestFactoryServlet.java" token="${line.separator}/**" value="import com.google.web.bindery.requestfactory.server.*;${line.separator}${line.separator}/**"/>
+
+      <!-- Compile a specific gwt-user jar just for jakarta, which will be only used then to produce gwt-servlet-jakarta.jar -->
+      <gwt.javac
+              srcdir="${project.build}/jakarta-src"
+              destdir="${javac.out}-jakarta"
+              excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java,**/junit/**">
+        <src path="${project.build}/no-servlet-src" />
+        <src path="super/com/google/gwt/emul/javaemul/internal" />
+        <classpath>
+          <pathelement location="${gwt.tools.lib}/gss/2015-11-04/closure-stylesheets-library-20151104-rebased.jar"/>
+          <!--        <pathelement location="${gwt.tools.lib}/tomcat/tomcat-servlet-api-8.0.28.jar"/>-->
+          <pathelement location="${gwt.tools.lib}/jakarta-servlet/jakarta.servlet-api-5.0.0/jakarta.servlet-api-5.0.0.jar" />
+          <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar"/>
+          <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
+          <pathelement location="${gwt.tools.lib}/w3c/sac/sac-1.3.jar"/>
+          <pathelement location="${gwt.tools.lib}/w3c/flute/flute-1.3-gg2.jar"/>
+          <pathelement location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA.jar"/>
+          <!-- The source is included so validation is available from client code -->
+          <pathelement
+                  location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA-sources.jar"/>
+          <!-- Hibernate is included until we can provide the super source as an third party jar" -->
+          <pathelement
+                  location="${gwt.tools.lib}/hibernate/validator/hibernate-validator-4.1.0.Final.jar"/>
+          <pathelement
+                  location="${gwt.tools.lib}/hibernate/validator/hibernate-validator-4.1.0.Final-sources.jar"/>
+          <pathelement
+                  location="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar"/>
+          <pathelement
+                  location="${gwt.tools.lib}/jsinterop/jsinterop-annotations-2.0.0.jar"/>
+          <pathelement location="${gwt.dev.jar}"/>
+        </classpath>
+      </gwt.javac>
+    </sequential>
+  </target>
+
   <!--
     Compile test code for dev to pick up TypeOracleTestUtils and others.
     Compiles test dependencies in dev/core
@@ -149,45 +267,26 @@
   <!--
       Compiles the test code for this project
   -->
-  <target name="compile.tests"
-          depends="-compile.tests.java8"
-          unless="compile.tests.complete">
-  </target>
-
-  <target name="-compile.tests.java8" if="isJava8" depends="compile.dev.tests, compile.emma.if.enabled">
+  <target name="compile.tests" depends="compile.dev.tests, compile.emma.if.enabled">
     <gwt.javac srcdir="test" destdir="${javac.junit.out}"
                excludes="com/google/gwt/langtest/**,**/super/**"
                processorpath="test.extraclasspath"
-               errorprone.args="
-                 -Xep:SelfAssignment:OFF
-                 -Xep:MissingCasesInEnumSwitch:OFF
-                 -Xep:SelfComparison:OFF
-                 -Xep:SelfEquals:OFF
-                 -Xep:FallThrough:OFF
-                 -Xep:ReturnValueIgnored:OFF
-                 -Xep:EqualsIncompatibleType:OFF
-                 -Xep:IdentityBinaryExpression:OFF
-                 -Xep:LoopConditionChecker:OFF
-                 -Xep:JUnitAssertSameCheck:OFF
-                 -Xep:CollectionIncompatibleType:OFF
-                 -Xep:DeadThread:OFF
-                 -Xep:ComplexBooleanConstant:OFF
-                 -Xep:ComparableType:OFF
-                 -Xep:DoNotCall:OFF
-                 -Xep:BadAnnotationImplementation:OFF
-               ">
+               release="11">
       <classpath>
         <pathelement location="${javac.out}"/>
         <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar"/>
         <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
         <path refid="test.extraclasspath"/>
       </classpath>
+      <!-- Disable Java 9+ string concat feature, it breaks a JDT regression test,
+           see https://bugs.openjdk.org/browse/JDK-8323657 -->
+      <compilerarg value="-XDstringConcat=inline"/>
       <compilerarg value="-processor"/>
       <compilerarg value="com.google.web.bindery.requestfactory.apt.RfValidator"/>
     </gwt.javac>
   </target>
 
-  <target name="build" depends="compile"
+  <target name="build" depends="compile, compile-jakarta"
           description="Build and package this project">
     <mkdir dir="${gwt.build.lib}"/>
     <gwt.jar>

@@ -20,7 +20,6 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
-
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsType;
 

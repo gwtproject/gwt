@@ -18,6 +18,7 @@ package java.util.stream;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.DoubleSummaryStatistics;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.LongSummaryStatistics;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.StringJoiner;
@@ -170,6 +172,39 @@ public final class Collectors {
         downstream.finisher());
   }
 
+  public static <T, U, A, R> Collector<T, ?, R> flatMapping(Function<? super T,? extends Stream<?
+      extends U>> mapper, Collector<? super U, A, R> downstream) {
+    return new CollectorImpl<>(
+        downstream.supplier(),
+        (A a, T t) -> {
+          try (Stream<? extends U> stream = mapper.apply(t)) {
+            if (stream == null) {
+              return;
+            }
+            stream.forEach(u -> {
+              downstream.accumulator().accept(a, u);
+            });
+          }
+        },
+        downstream.combiner(),
+        downstream.finisher()
+    );
+  }
+
+  public static <T, A, R> Collector<T, ?, R> filtering(Predicate<? super T> predicate,
+                                                        Collector<? super T, A, R> downstream) {
+    return new CollectorImpl<>(
+        downstream.supplier(),
+        (a, t) -> {
+          if (predicate.test(t)) {
+            downstream.accumulator().accept(a, t);
+          }
+        },
+        downstream.combiner(),
+        downstream.finisher()
+    );
+  }
+
   public static <T> Collector<T,?,Optional<T>> maxBy(Comparator<? super T> comparator) {
     return reducing(BinaryOperator.maxBy(comparator));
   }
@@ -307,6 +342,11 @@ public final class Collectors {
     return toCollection(ArrayList::new);
   }
 
+  public static <T> Collector<T, ?, List<T>> toUnmodifiableList() {
+    Collector<T, ?, List<T>> mapping = mapping(Objects::requireNonNull, toList());
+    return collectingAndThen(mapping, Collections::unmodifiableList);
+  }
+
   public static <T, K, U> Collector<T, ?, Map<K, U>> toMap(
       final Function<? super T, ? extends K> keyMapper,
       final Function<? super T, ? extends U> valueMapper) {
@@ -323,6 +363,29 @@ public final class Collectors {
       Function<? super T, ? extends U> valueMapper,
       BinaryOperator<U> mergeFunction) {
     return toMap(keyMapper, valueMapper, mergeFunction, HashMap::new);
+  }
+
+  public static <T, K, U> Collector<T, ?, Map<K, U>> toUnmodifiableMap(
+      Function<? super T, ? extends K> keyMapper,
+      Function<? super T, ? extends U> valueMapper) {
+    return collectingAndThen(
+            toMap(disallowNulls(keyMapper), disallowNulls(valueMapper)),
+            Collections::unmodifiableMap
+    );
+  }
+
+  public static <T, K, U> Collector<T, ?, Map<K, U>> toUnmodifiableMap(
+      Function<? super T, ? extends K> keyMapper,
+      Function<? super T, ? extends U> valueMapper,
+      BinaryOperator<U> mergeFunction) {
+    return collectingAndThen(
+            toMap(disallowNulls(keyMapper), disallowNulls(valueMapper), mergeFunction),
+            Collections::unmodifiableMap
+    );
+  }
+
+  private static <T, R> Function<T, R> disallowNulls(Function<T, R> func) {
+    return func.andThen(Objects::requireNonNull);
   }
 
   public static <T, K, U, M extends Map<K, U>> Collector<T, ?, M> toMap(
@@ -355,6 +418,11 @@ public final class Collectors {
         s -> s,
         Collector.Characteristics.UNORDERED, Collector.Characteristics.IDENTITY_FINISH
     );
+  }
+
+  public static <T> Collector<T, ?, Set<T>> toUnmodifiableSet() {
+    Collector<T, ?, Set<T>> mapping = mapping(Objects::requireNonNull, toSet());
+    return collectingAndThen(mapping, Collections::unmodifiableSet);
   }
 
   private static <T, D, A> D streamAndCollect(Collector<? super T, A, D> downstream, List<T> list) {

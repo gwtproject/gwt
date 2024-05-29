@@ -18,6 +18,7 @@ package com.google.gwt.emultest.java.lang;
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.testing.TestUtils;
+
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
@@ -651,6 +652,7 @@ public class StringTest extends GWTTestCase {
     }
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testRegionMatches() {
     String test = String.valueOf(new char[] {'a', 'b', 'c', 'd', 'e', 'f'});
     assertTrue(test.regionMatches(1, "bcd", 0, 3));

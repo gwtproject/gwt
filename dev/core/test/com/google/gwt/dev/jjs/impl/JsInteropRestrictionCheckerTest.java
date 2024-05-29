@@ -17,7 +17,6 @@ package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.MinimalRebuildCache;
-import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
 
@@ -1265,6 +1264,77 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}"
     );
 
+    assertBuggySucceeds();
+  }
+
+  public void testJsMethodWithDollarsign() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetImport("jsinterop.annotations.JsProperty");
+    addSnippetImport("jsinterop.annotations.JsPackage");
+    addSnippetClassDecl(
+            "@JsType public static class Buggy {",
+            "  public void $() {",
+            "  }",
+            "  public void $method(String l) {",
+            "  }",
+            "  public void method$(String l) {",
+            "  }",
+            "  public void method$name(String l) {",
+            "  }",
+            "}");
+    assertBuggySucceeds();
+  }
+
+  public void testJsFieldWithDollarsign() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetImport("jsinterop.annotations.JsProperty");
+    addSnippetImport("jsinterop.annotations.JsPackage");
+    addSnippetClassDecl(
+            "@JsType public static class Buggy {",
+            "  public String $;",
+            "  public String $field;",
+            "  public String field$;",
+            "  public String field$name;",
+            "}");
+    assertBuggySucceeds();
+  }
+
+  public void testJsPropertyWithDollarsign() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetImport("jsinterop.annotations.JsProperty");
+    addSnippetClassDecl(
+            "@JsType public static class Buggy {",
+            "  @JsProperty",
+            "  public String get$() {",
+            "    return null;",
+            "  }",
+            "  @JsProperty",
+            "  public void set$(String value) {",
+            "  }",
+            "  @JsProperty",
+            "  public String get$1() {",
+            "    return null;",
+            "  }",
+            "  @JsProperty",
+            "  public void set$1(String value) {",
+            "  }",
+            "  @JsProperty",
+            "  public String getVal$() {",
+            "    return null;",
+            "  }",
+            "  @JsProperty",
+            "  public void setVal$(String value) {",
+            "  }",
+            "  @JsProperty",
+            "  public String getVal$1() {",
+            "    return null;",
+            "  }",
+            "  @JsProperty",
+            "  public void setVal$1(String value) {",
+            "  }",
+            "}");
     assertBuggySucceeds();
   }
 
@@ -2554,20 +2624,6 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
     assertBuggySucceeds();
   }
-
-  private static final MockJavaResource jsFunctionInterface = new MockJavaResource(
-      "test.MyJsFunctionInterface") {
-    @Override
-    public CharSequence getContent() {
-      StringBuilder code = new StringBuilder();
-      code.append("package test;\n");
-      code.append("import jsinterop.annotations.JsFunction;\n");
-      code.append("@JsFunction public interface MyJsFunctionInterface {\n");
-      code.append("int foo(int x);\n");
-      code.append("}\n");
-      return code;
-    }
-  };
 
   public final void assertBuggySucceeds(String... expectedWarnings)
       throws Exception {

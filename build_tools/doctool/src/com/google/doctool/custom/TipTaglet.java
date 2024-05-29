@@ -15,80 +15,52 @@
  */
 package com.google.doctool.custom;
 
-import com.sun.javadoc.Tag;
-import com.sun.tools.doclets.Taglet;
+import com.sun.source.doctree.DocTree;
 
-import java.util.Map;
+import javax.lang.model.element.Element;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * A taglet for including GWT tip tags in javadoc output.
  */
-public class TipTaglet implements Taglet {
+public class TipTaglet extends AbstractTaglet {
 
-  public static void register(Map tagletMap) {
-    TipTaglet tag = new TipTaglet();
-    Taglet t = (Taglet) tagletMap.get(tag.getName());
-    if (t != null) {
-      tagletMap.remove(tag.getName());
-    }
-    tagletMap.put(tag.getName(), tag);
-  }
-
-  public TipTaglet() {
-  }
-
+  @Override
   public String getName() {
     return "tip";
   }
 
-  public boolean inConstructor() {
-    return true;
+  @Override
+  public Set<Location> getAllowedLocations() {
+    return EnumSet.allOf(Location.class);
   }
 
-  public boolean inField() {
-    return true;
-  }
-
-  public boolean inMethod() {
-    return true;
-  }
-
-  public boolean inOverview() {
-    return true;
-  }
-
-  public boolean inPackage() {
-    return true;
-  }
-
-  public boolean inType() {
-    return true;
-  }
-
-  public boolean isInlineTag() {
-    return false;
-  }
-
-  public String toString(Tag tag) {
-    return null;
-  }
-
-  public String toString(Tag[] tags) {
-    if (tags == null || tags.length == 0) {
+  @Override
+  public String toString(List<? extends DocTree> list, Element element) {
+    if (list == null || list.size() == 0) {
       return null;
     }
-    String result = "<DT><B>Tip:</B></DT><DD>";
-    if (tags.length == 1) {
-      result += tags[0].text();
+    StringBuilder result = new StringBuilder("<DT><B>Tip:</B></DT><DD>");
+    if (list.size() == 1) {
+      result.append(getHtmlContent(list.get(0)));
     } else {
-      result += "<UL>";
-      for (int i = 0; i < tags.length; i++) {
-        result += "<LI>" + tags[i].text() + "</LI>";
+      result.append("<UL>");
+      for (int i = 0; i < list.size(); i++) {
+        result.append("<LI>");
+        result.append(getHtmlContent(list.get(i)));
+        result.append("</LI>");
       }
-      result += "</UL>";
+      result.append("</UL>");
     }
-    result += "</DD>";
-    return result;
+    result.append("</DD>");
+    return result.toString();
+  }
+
+  @Override
+  public boolean isInlineTag() {
+    return false;
   }
 
 }

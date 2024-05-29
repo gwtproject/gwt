@@ -16,10 +16,10 @@
 
 package com.google.gwt.emultest.java8.util;
 
-import com.google.gwt.emultest.java.util.EmulTestBase;
-
 import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.MIN_VALUE;
+
+import com.google.gwt.emultest.java.util.EmulTestBase;
 
 import java.util.IntSummaryStatistics;
 

@@ -27,6 +27,7 @@ import java.util.SortedSet;
  */
 public class ArtifactSetTest extends TestCase {
 
+  @SuppressWarnings("SelfComparison")
   public void testScriptOrder() {
     StandardScriptReference fooScript = new StandardScriptReference("foo", 0);
     StandardScriptReference barScript = new StandardScriptReference("bar", 1);
@@ -65,6 +66,7 @@ public class ArtifactSetTest extends TestCase {
     }
   }
 
+  @SuppressWarnings("SelfComparison")
   public void testStyleOrder() {
     StandardStylesheetReference fooStyle = new StandardStylesheetReference(
         "foo", 0);

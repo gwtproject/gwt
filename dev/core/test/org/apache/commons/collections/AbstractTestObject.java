@@ -120,6 +120,7 @@ public abstract class AbstractTestObject extends BulkTest {
         assertEquals("hashCode should be repeatable", obj.hashCode(), obj.hashCode());
     }
 
+    @SuppressWarnings("SelfEquals")
     public void testObjectHashCodeEqualsContract() {
         Object obj1 = makeObject();
         if (obj1.equals(obj1)) {

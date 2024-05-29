@@ -4,11 +4,11 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.google.gwt</groupId>
+        <groupId>org.gwtproject</groupId>
         <artifactId>gwt</artifactId>
         <version>${gwtVersion}</version>
     </parent>
-    <groupId>com.google.gwt</groupId>
+    <groupId>org.gwtproject</groupId>
     <artifactId>gwt-user</artifactId>
     <packaging>jar</packaging>
     <version>${gwtVersion}</version>

@@ -237,7 +237,7 @@ public final class Long extends Number implements Comparable<Long> {
 
     int highBits = LongUtils.getHighBits(value);
     if (highBits == 0) {
-      return Integer.toString((int) value, radix);
+      return Integer.toUnsignedString((int) value, radix);
     }
 
     final int mask = radix - 1;

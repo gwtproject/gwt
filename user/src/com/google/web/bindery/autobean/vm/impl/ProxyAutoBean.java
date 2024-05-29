@@ -112,34 +112,38 @@ public class ProxyAutoBean<T> extends AbstractAutoBean<T> {
       if (toReturn == null) {
         Map<String, Data> getters = new HashMap<String, Data>();
         List<Method> setters = new ArrayList<Method>();
-        for (Method method : beanType.getMethods()) {
-          if (BeanMethod.GET.matches(method)) {
-            // match methods on their name for now, to find the most specific
-            // override
-            String name = method.getName();
+        if (!(Collection.class.isAssignableFrom(beanType)
+            || Map.class.isAssignableFrom(beanType))) {
+          for (Method method : beanType.getMethods()) {
+            if (BeanMethod.GET.matches(method)) {
+              // match methods on their name for now, to find the most specific
+              // override
+              String name = method.getName();
 
-            Type genericReturnType = TypeUtils.resolveGenerics(beanType, method.getGenericReturnType());
-            Class<?> returnType = TypeUtils.ensureBaseType(genericReturnType);
+              Type genericReturnType = TypeUtils.resolveGenerics(beanType,
+                  method.getGenericReturnType());
+              Class<?> returnType = TypeUtils.ensureBaseType(genericReturnType);
 
-            Data data = getters.get(name);
-            if (data == null || data.type.isAssignableFrom(returnType)) {
-              // no getter seen yet for the property, or a less specific one
-              PropertyType propertyType;
-              if (TypeUtils.isValueType(returnType)) {
-                propertyType = PropertyType.VALUE;
-              } else if (Collection.class.isAssignableFrom(returnType)) {
-                propertyType = PropertyType.COLLECTION;
-              } else if (Map.class.isAssignableFrom(returnType)) {
-                propertyType = PropertyType.MAP;
-              } else {
-                propertyType = PropertyType.REFERENCE;
+              Data data = getters.get(name);
+              if (data == null || data.type.isAssignableFrom(returnType)) {
+                // no getter seen yet for the property, or a less specific one
+                PropertyType propertyType;
+                if (TypeUtils.isValueType(returnType)) {
+                  propertyType = PropertyType.VALUE;
+                } else if (Collection.class.isAssignableFrom(returnType)) {
+                  propertyType = PropertyType.COLLECTION;
+                } else if (Map.class.isAssignableFrom(returnType)) {
+                  propertyType = PropertyType.MAP;
+                } else {
+                  propertyType = PropertyType.REFERENCE;
+                }
+                data = new Data(method, genericReturnType, returnType, propertyType);
+
+                getters.put(name, data);
               }
-              data = new Data(method, genericReturnType, returnType, propertyType);
-
-              getters.put(name, data);
+            } else if (BeanMethod.SET.matches(method) || BeanMethod.SET_BUILDER.matches(method)) {
+              setters.add(method);
             }
-          } else if (BeanMethod.SET.matches(method) || BeanMethod.SET_BUILDER.matches(method)) {
-            setters.add(method);
           }
         }
 

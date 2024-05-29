@@ -8,12 +8,12 @@
   <property.ensure name="gwt.user.build" location="${gwt.build.out}/user" />
   <property.ensure name="gwt.dev.bin" location="${gwt.dev.build}/bin" />
   <property.ensure name="gwt.user.bin" location="${gwt.user.build}/bin" />
-
+  <property.ensure name="gwt.user-jakarta.bin" location="${gwt.user.build}/bin-jakarta" />
   <property name="project.lib.deps"
       location="${gwt.build.lib}/gwt-${ant.project.name}-deps.jar" />
 
   <target name="build" description="Packages this project into a jar"
-      depends="-servlet, -deps" />
+      depends="-servlet, -servlet-jakarta, -servlet-sources, -servlet-jakarta-sources, -deps" />
 
   <target name="clean" description="Cleans this project's intermediate and output files">
     <delete file="${project.lib}" />
@@ -30,7 +30,6 @@
       <zipfileset src="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar" />
       <zipfileset src="${gwt.tools.lib}/protobuf/protobuf-2.5.0/protobuf-java-rebased-2.5.0.jar" />
       <fileset dir="${gwt.dev.bin}">
-        <include name="com/google/gwt/dev/asm/**" />
         <include name="com/google/gwt/dev/util/Name*.class" />
         <include name="com/google/gwt/dev/util/StringKey.class" />
         <include name="com/google/gwt/util/tools/shared/**" />
@@ -43,13 +42,74 @@
         <exclude name="com/google/gwt/json/**" />
         <exclude name="com/google/gwt/junit/*" />
         <exclude name="com/google/gwt/junit/client/GWTTestCase.*" />
-        <exclude name="com/google/gwt/junit/remote/**" />
         <exclude name="com/google/gwt/junit/server/**" />
-        <exclude name="com/google/gwt/benchmarks/*" />
-        <exclude name="**/*.gwtar" />
       </fileset>
-
-      <!-- additional dependencies (used by scripts). -->
+    </gwt.jar>
+  </target>
+  <target name="-servlet-sources" description="Packages sources found in gwt-servlet">
+    <mkdir dir="${gwt.build.lib}" />
+    <gwt.jar destfile="${gwt.build.lib}/gwt-servlet-sources.jar">
+      <fileset dir="${gwt.root}/dev/core/src">
+        <include name="com/google/gwt/dev/util/Name.java" />
+        <include name="com/google/gwt/dev/util/StringKey.java" />
+        <include name="com/google/gwt/util/tools/shared/**" />
+        <include name="com/google/gwt/core/shared/**" />
+      </fileset>
+      <fileset dir="${gwt.root}/user/src">
+        <exclude name="**/rebind/**" />
+        <exclude name="**/tools/**" />
+        <exclude name="**/super/**" />
+        <exclude name="com/google/gwt/json/**" />
+        <exclude name="com/google/gwt/junit/*" />
+        <exclude name="com/google/gwt/junit/client/GWTTestCase.*" />
+        <exclude name="com/google/gwt/junit/server/**" />
+      </fileset>
+    </gwt.jar>
+  </target>
+  <target name="-servlet-jakarta" description="Packages this project into a jar for use with modern jakarta apis">
+    <mkdir dir="${gwt.build.lib}" />
+    <gwt.jar destfile="${gwt.build.lib}/gwt-servlet-jakarta.jar">
+      <!-- Rebased dependencies go in gwt-servlet too -->
+      <zipfileset src="${gwt.tools.lib}/guava/guava-19.0/guava-19.0-rebased.jar" />
+      <zipfileset src="${gwt.tools.lib}/jscomp/20160315/sourcemap-rebased.jar" />
+      <zipfileset src="${gwt.tools.lib}/json/android-sdk-19.1/json-android-rebased.jar" />
+      <zipfileset src="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar" />
+      <zipfileset src="${gwt.tools.lib}/protobuf/protobuf-2.5.0/protobuf-java-rebased-2.5.0.jar" />
+      <fileset dir="${gwt.dev.bin}">
+        <include name="com/google/gwt/dev/util/Name*.class" />
+        <include name="com/google/gwt/dev/util/StringKey.class" />
+        <include name="com/google/gwt/util/tools/shared/**" />
+        <include name="com/google/gwt/core/shared/**" />
+      </fileset>
+      <fileset dir="${gwt.user-jakarta.bin}">
+        <exclude name="**/rebind/**" />
+        <exclude name="**/tools/**" />
+        <exclude name="**/super/**" />
+        <exclude name="com/google/gwt/json/**" />
+        <exclude name="com/google/gwt/junit/*" />
+        <exclude name="com/google/gwt/junit/client/GWTTestCase.*" />
+        <exclude name="com/google/gwt/junit/server/**" />
+      </fileset>
+    </gwt.jar>
+  </target>
+  <target name="-servlet-jakarta-sources" description="Packages sources found in gwt-servlet-jakarta">
+    <mkdir dir="${gwt.build.lib}" />
+    <gwt.jar destfile="${gwt.build.lib}/gwt-servlet-jakarta-sources.jar">
+      <fileset dir="${gwt.root}/dev/core/src">
+        <include name="com/google/gwt/dev/util/Name.java" />
+        <include name="com/google/gwt/dev/util/StringKey.java" />
+        <include name="com/google/gwt/util/tools/shared/**" />
+        <include name="com/google/gwt/core/shared/**" />
+      </fileset>
+      <fileset dir="${project.build}/../user/jakarta-src">
+        <exclude name="**/rebind/**" />
+        <exclude name="**/tools/**" />
+        <exclude name="**/super/**" />
+        <exclude name="com/google/gwt/json/**" />
+        <exclude name="com/google/gwt/junit/*" />
+        <exclude name="com/google/gwt/junit/client/GWTTestCase.*" />
+        <exclude name="com/google/gwt/junit/server/**" />
+      </fileset>
     </gwt.jar>
   </target>
 

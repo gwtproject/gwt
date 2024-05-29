@@ -17,65 +17,54 @@ package com.google.doctool.custom;
 
 import com.google.doctool.ResourceIncluder;
 
-import com.sun.javadoc.Tag;
-import com.sun.tools.doclets.Taglet;
+import com.sun.source.doctree.DocTree;
 
-import java.util.Map;
+import javax.lang.model.element.Element;
+import javax.tools.Diagnostic;
+import java.io.IOException;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * A taglet for slurping in the content of artbitrary files appearing on the
  * classpath into javadoc.
  */
-public class IncludeTaglet implements Taglet {
+public class IncludeTaglet extends AbstractTaglet {
 
-  public static void register(Map tagletMap) {
-    IncludeTaglet tag = new IncludeTaglet();
-    Taglet t = (Taglet) tagletMap.get(tag.getName());
-    if (t != null) {
-      tagletMap.remove(tag.getName());
-    }
-    tagletMap.put(tag.getName(), tag);
-  }
-
+  @Override
   public String getName() {
     return "gwt.include";
   }
 
-  public boolean inConstructor() {
-    return true;
+  @Override
+  public String toString(List<? extends DocTree> list, Element element) {
+    StringBuilder results = new StringBuilder();
+    for (DocTree docTree : list) {
+      String text = getHtmlContent(docTree);
+
+      try {
+        String contents = ResourceIncluder.getResourceFromClasspathScrubbedForHTML(text);
+        results.append("<blockquote><pre>").append(contents).append("</pre></blockquote>");
+      } catch (IOException e) {
+        e.printStackTrace();
+        printMessage(Diagnostic.Kind.ERROR, "Error in reading file: " + e.getMessage(), element,
+                docTree);
+        // return empty to let javadoc report this
+        return "";
+      }
+    }
+    return results.toString();
   }
 
-  public boolean inField() {
-    return true;
+  @Override
+  public Set<Location> getAllowedLocations() {
+    return EnumSet.allOf(Location.class);
   }
 
-  public boolean inMethod() {
-    return true;
-  }
-
-  public boolean inOverview() {
-    return true;
-  }
-
-  public boolean inPackage() {
-    return true;
-  }
-
-  public boolean inType() {
-    return true;
-  }
-
+  @Override
   public boolean isInlineTag() {
     return true;
-  }
-
-  public String toString(Tag tag) {
-    String contents = ResourceIncluder.getResourceFromClasspathScrubbedForHTML(tag);
-    return "<blockquote><pre>" + contents + "</pre></blockquote>";
-  }
-
-  public String toString(Tag[] tags) {
-    return null;
   }
 
 }

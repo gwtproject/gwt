@@ -45,9 +45,14 @@
     <when-property-is name="compiler.stackMode" value="native" />
   </replace-with>
 
-
   <replace-with class="com.google.gwt.core.client.impl.StackTraceCreator.CollectorNull">
     <when-type-is class="com.google.gwt.core.client.impl.StackTraceCreator.Collector" />
     <when-property-is name="compiler.stackMode" value="strip" />
+  </replace-with>
+
+  <replace-with class="com.google.gwt.core.client.impl.StackTraceCreator.CollectorModern">
+    <when-type-is class="com.google.gwt.core.client.impl.StackTraceCreator.Collector" />
+    <when-property-is name="compiler.stackMode" value="native" />
+    <when-property-is name="compiler.useSourceMaps" value="true"/>
   </replace-with>
 </module>

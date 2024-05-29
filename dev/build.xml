@@ -22,15 +22,7 @@
 
   <target name="compile.tests" depends="build, compile.emma.if.enabled, build.alldeps.jar"
           description="Compiles the test code for this project">
-    <gwt.javac srcdir="" destdir="${javac.junit.out}" errorprone.args="
-                                                         -Xep:MissingCasesInEnumSwitch:OFF
-                                                         -Xep:FallThrough:OFF
-                                                         -Xep:ReturnValueIgnored:OFF
-                                                         -Xep:EqualsIncompatibleType:OFF
-                                                         -Xep:SelfComparison:OFF
-                                                         -Xep:SelfEquals:OFF
-                                                         -Xep:ComparableType:OFF
-                                                       ">
+    <gwt.javac srcdir="" destdir="${javac.junit.out}">
         <src path="core/src"/>
         <src path="core/test"/>
       <classpath>
@@ -40,13 +32,7 @@
       </classpath>
     </gwt.javac>
     <gwt.javac srcdir="" destdir="${javac.junit.out}"
-               excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java"
-               errorprone.args="
-                 -Xep:MissingCasesInEnumSwitch:OFF
-                 -Xep:FallThrough:OFF
-                 -Xep:ReturnValueIgnored:OFF
-                 -Xep:EqualsIncompatibleType:OFF
-               ">
+               excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java">
       <src path="${gwt.root}/user/src" />
       <src path="${gwt.root}/user/super/com/google/gwt/emul/javaemul/internal"/>
       <classpath>
@@ -77,46 +63,48 @@
           <include name="apache/tapestry-util-text-4.0.2.jar"/>
           <include name="apache/ant-zipscanner/ant-zipscanner-1.6.5-1-rebased.jar"/>
           <include name="colt/colt-1.2.jar"/>
-          <include name="eclipse/org.eclipse.jdt.core_3.17.0.v20190306-2240.jar"/>
-          <include name="eclipse/jdtCompilerAdapter_3.17.0.v20190306-2240.jar"/>
-          <include name="objectweb/asm-7.1/asm-7.1.jar"/>
-          <include name="objectweb/asm-7.1/asm-commons-7.1.jar"/>
-          <include name="objectweb/asm-7.1/asm-util-7.1.jar"/>
+          <include name="eclipse/org.eclipse.jdt.core_3.32.0.v20221108-1853.jar"/>
+          <include name="eclipse/jdtCompilerAdapter_3.32.0.v20221108-1853.jar"/>
+          <include name="objectweb/asm-9.6/asm-9.6.jar"/>
+          <include name="objectweb/asm-9.6/asm-commons-9.6.jar"/>
+          <include name="objectweb/asm-9.6/asm-util-9.6.jar"/>
           <include name="guava/guava-19.0/guava-19.0-rebased.jar"/>
           <include name="icu4j/63.1/icu4j.jar"/>
-          <include name="jetty/jetty-9.2.14.v20151106/jetty-all-9.2.14.v20151106.jar"/>
+          <include name="jetty/jetty-9.4.44.v20210927/jetty-all-9.4.44.v20210927.jar"/>
           <include name="gson/gson-2.6.2.jar"/>
           <include name="jscomp/20160315/sourcemap-rebased.jar"/>
           <include name="jsr305/jsr305.jar"/>
           <include name="protobuf/protobuf-2.5.0/protobuf-java-rebased-2.5.0.jar"/>
           <!-- dependencies needed for JSP support in DevMode: BEGIN -->
-          <include name="jetty/jetty-9.2.14.v20151106/mortbay-apache-jsp-8.0.9.M3.jar"/>
-          <include name="jetty/jetty-9.2.14.v20151106/mortbay-apache-el-8.0.9.M3.jar"/>
-          <include name="jetty/jetty-9.2.14.v20151106/jetty-apache-jsp-9.2.14.v20151106.jar"/>
+          <include name="jetty/jetty-9.4.44.v20210927/mortbay-apache-jsp-8.5.70.jar"/>
+          <include name="jetty/jetty-9.4.44.v20210927/mortbay-apache-el-8.5.70.jar"/>
+          <include name="jetty/jetty-9.4.44.v20210927/jetty-apache-jsp-9.4.44.v20210927.jar"/>
           <!-- dependencies needed for JSP support in DevMode: END -->
           <include name="tomcat/tomcat-servlet-api-8.0.28.jar"/>
           <include name="tomcat/tomcat-websocket-api-8.0.28.jar"/>
           <include name="tomcat/tomcat-annotations-api-8.0.28.jar"/>
           <include name="apache/commons/commons-collections-3.2.2.jar"/>
           <!-- htmlunit dependencies not already included: BEGIN -->
-          <include name="apache/http/httpclient-4.5.1.jar"/>
-          <include name="apache/http/httpcore-4.4.4.jar"/>
-          <include name="apache/http/httpmime-4.5.1.jar"/>
+          <include name="apache/http/httpclient-4.5.13.jar"/>
+          <include name="apache/http/httpcore-4.4.13.jar"/>
+          <include name="apache/http/httpmime-4.5.13.jar"/>
           <include name="apache/james/apache-mime4j-0.6.jar"/>
           <include name="apache/commons/commons-codec-1.10.jar"/>
           <include name="apache/commons/commons-io-2.4.jar"/>
           <include name="apache/commons/commons-lang3-3.4.jar"/>
           <include name="apache/commons/commons-logging-1.2.jar"/>
-          <include name="cssparser/cssparser-0.9.18.jar"/>
-         <include name="htmlunit/htmlunit-2.19/htmlunit-2.19.jar"/>
-         <include name="htmlunit/htmlunit-2.19/htmlunit-core-js-2.15.jar"/>
-          <include name="nekohtml/nekohtml-1.9.22.jar"/>
+          <include name="htmlunit/htmlunit-2.55.0/htmlunit-cssparser-1.10.0.jar"/>
+          <include name="htmlunit/htmlunit-2.55.0/htmlunit-2.55.0.jar"/>
+          <include name="htmlunit/htmlunit-2.55.0/htmlunit-core-js-2.55.0.jar"/>
+          <include name="htmlunit/htmlunit-2.55.0/neko-htmlunit-2.55.0.jar"/>
+          <include name="htmlunit/htmlunit-2.55.0/salvation2-3.0.0.jar"/>
           <include name="cup/java-cup-11a.jar"/>
           <include name="xalan/xalan-2.7.1-nocup.jar"/>
           <include name="xerces/xerces-2_11_0/serializer-2.7.1.jar"/>
           <include name="xerces/xerces-2_11_0/xercesImpl-2.11.0.jar"/>
           <include name="xerces/xerces-2_11_0/xml-apis-1.4.01.jar"/>
           <include name="w3c/sac/sac-1.3.jar"/>
+          <include name="brotli/dec-0.1.2.jar"/>
           <!-- htmlunit dependencies not already included: END -->
           <include name="json/android-sdk-19.1/json-android-rebased.jar"/>
         </fileset>
@@ -131,29 +119,35 @@
             <provider classname="org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainerInitializer"/>
             <provider classname="org.eclipse.jetty.apache.jsp.JettyJasperInitializer"/>
           </service>
-          <zipfileset src="${gwt.tools.lib}/objectweb/asm-7.1/asm-7.1.jar"/>
-          <zipfileset src="${gwt.tools.lib}/objectweb/asm-7.1/asm-commons-7.1.jar"/>
-          <zipfileset src="${gwt.tools.lib}/objectweb/asm-7.1/asm-util-7.1.jar"/>
+          <zipfileset src="${gwt.tools.lib}/objectweb/asm-9.6/asm-9.6.jar"/>
+          <zipfileset src="${gwt.tools.lib}/objectweb/asm-9.6/asm-commons-9.6.jar"/>
+          <zipfileset src="${gwt.tools.lib}/objectweb/asm-9.6/asm-util-9.6.jar"/>
           <zipfileset src="${gwt.tools.lib}/apache/tapestry-util-text-4.0.2.jar"/>
           <zipfileset src="${gwt.tools.lib}/apache/ant-zipscanner/ant-zipscanner-1.6.5-1-rebased.jar"/>
           <zipfileset src="${gwt.tools.lib}/colt/colt-1.2.jar"/>
           <zipfileset
-              src="${gwt.tools.lib}/eclipse/org.eclipse.jdt.core_3.17.0.v20190306-2240.jar"/>
+              src="${gwt.tools.lib}/eclipse/org.eclipse.jdt.core_3.32.0.v20221108-1853.jar"/>
           <zipfileset
-              src="${gwt.tools.lib}/eclipse/jdtCompilerAdapter_3.17.0.v20190306-2240.jar"/>
+              src="${gwt.tools.lib}/eclipse/jdtCompilerAdapter_3.32.0.v20221108-1853.jar"/>
           <zipfileset src="${gwt.tools.lib}/guava/guava-19.0/guava-19.0-rebased.jar"/>
           <zipfileset src="${gwt.tools.lib}/icu4j/63.1/icu4j.jar"/>
           <zipfileset
-              src="${gwt.tools.lib}/jetty/jetty-9.2.14.v20151106/jetty-all-9.2.14.v20151106.jar"/>
+              src="${gwt.tools.lib}/jetty/jetty-9.4.44.v20210927/jetty-all-9.4.44.v20210927.jar">
+            <!--
+            Don't add jetty auth implementation from jetty-jaspi, as we would also need to package jetty's
+            javax.security.auth.message implementation as well as geronimo-jaspi.
+             -->
+            <exclude name="META-INF/services/org.eclipse.jetty.security.Authenticator$Factory"/>
+          </zipfileset>
           <zipfileset src="${gwt.tools.lib}/gson/gson-2.6.2.jar"/>
           <zipfileset src="${gwt.tools.lib}/jscomp/20160315/sourcemap-rebased.jar"/>
           <zipfileset src="${gwt.tools.lib}/jsr305/jsr305.jar"/>
           <zipfileset
               src="${gwt.tools.lib}/protobuf/protobuf-2.5.0/protobuf-java-rebased-2.5.0.jar"/>
           <!-- dependencies needed for JSP support in DevMode: BEGIN -->
-          <zipfileset src="${gwt.tools.lib}/jetty/jetty-9.2.14.v20151106/mortbay-apache-jsp-8.0.9.M3.jar"/>
-          <zipfileset src="${gwt.tools.lib}/jetty/jetty-9.2.14.v20151106/mortbay-apache-el-8.0.9.M3.jar"/>
-          <zipfileset src="${gwt.tools.lib}/jetty/jetty-9.2.14.v20151106/jetty-apache-jsp-9.2.14.v20151106.jar"/>
+          <zipfileset src="${gwt.tools.lib}/jetty/jetty-9.4.44.v20210927/mortbay-apache-jsp-8.5.70.jar"/>
+          <zipfileset src="${gwt.tools.lib}/jetty/jetty-9.4.44.v20210927/mortbay-apache-el-8.5.70.jar"/>
+          <zipfileset src="${gwt.tools.lib}/jetty/jetty-9.4.44.v20210927/jetty-apache-jsp-9.4.44.v20210927.jar"/>
           <!-- dependencies needed for JSP support in DevMode: END -->
           <zipfileset src="${gwt.tools.lib}/tomcat/tomcat-servlet-api-8.0.28.jar"/>
           <zipfileset src="${gwt.tools.lib}/tomcat/tomcat-websocket-api-8.0.28.jar"/>
@@ -161,25 +155,27 @@
           <zipfileset
               src="${gwt.tools.lib}/apache/commons/commons-collections-3.2.2.jar"/>
           <!-- htmlunit dependencies not already included: BEGIN -->
-          <zipfileset src="${gwt.tools.lib}/apache/http/httpclient-4.5.1.jar"/>
-          <zipfileset src="${gwt.tools.lib}/apache/http/httpcore-4.4.4.jar"/>
-          <zipfileset src="${gwt.tools.lib}/apache/http/httpmime-4.5.1.jar"/>
+          <zipfileset src="${gwt.tools.lib}/apache/http/httpclient-4.5.13.jar"/>
+          <zipfileset src="${gwt.tools.lib}/apache/http/httpcore-4.4.13.jar"/>
+          <zipfileset src="${gwt.tools.lib}/apache/http/httpmime-4.5.13.jar"/>
           <zipfileset src="${gwt.tools.lib}/apache/james/apache-mime4j-0.6.jar"/>
           <zipfileset src="${gwt.tools.lib}/apache/commons/commons-codec-1.10.jar"/>
           <zipfileset src="${gwt.tools.lib}/apache/commons/commons-io-2.4.jar"/>
           <zipfileset src="${gwt.tools.lib}/apache/commons/commons-lang3-3.4.jar"/>
           <zipfileset src="${gwt.tools.lib}/apache/commons/commons-logging-1.2.jar"/>
-          <zipfileset src="${gwt.tools.lib}/cssparser/cssparser-0.9.18.jar"/>
-          <zipfileset src="${gwt.tools.lib}/htmlunit/htmlunit-2.19/htmlunit-2.19.jar"/>
+          <zipfileset src="${gwt.tools.lib}/htmlunit/htmlunit-2.55.0/htmlunit-cssparser-1.10.0.jar"/>
+          <zipfileset src="${gwt.tools.lib}/htmlunit/htmlunit-2.55.0/htmlunit-2.55.0.jar"/>
           <zipfileset
-              src="${gwt.tools.lib}/htmlunit/htmlunit-2.19/htmlunit-core-js-2.15.jar"/>
-          <zipfileset src="${gwt.tools.lib}/nekohtml/nekohtml-1.9.22.jar"/>
+              src="${gwt.tools.lib}/htmlunit/htmlunit-2.55.0/htmlunit-core-js-2.55.0.jar"/>
+          <zipfileset src="${gwt.tools.lib}/htmlunit/htmlunit-2.55.0/neko-htmlunit-2.55.0.jar"/>
+          <zipfileset src="${gwt.tools.lib}/htmlunit/htmlunit-2.55.0/salvation2-3.0.0.jar"/>
           <zipfileset src="${gwt.tools.lib}/cup/java-cup-11a.jar"/>
           <zipfileset src="${gwt.tools.lib}/xalan/xalan-2.7.1-nocup.jar"/>
           <zipfileset src="${gwt.tools.lib}/xerces/xerces-2_11_0/serializer-2.7.1.jar"/>
           <zipfileset src="${gwt.tools.lib}/xerces/xerces-2_11_0/xercesImpl-2.11.0.jar"/>
           <zipfileset src="${gwt.tools.lib}/xerces/xerces-2_11_0/xml-apis-1.4.01.jar"/>
           <zipfileset src="${gwt.tools.lib}/w3c/sac/sac-1.3.jar"/>
+          <zipfileset src="${gwt.tools.lib}/brotli/dec-0.1.2.jar"/>
           <!-- htmlunit dependencies not already included: END -->
           <zipfileset src="${gwt.tools.lib}/json/android-sdk-19.1/json-android-rebased.jar"/>
         </gwt.jar>
@@ -201,12 +197,7 @@
           description="Validates that the standalone gwt-compiler project can build.">
     <mkdir dir="${javac.out}"/>
     <gwt.javac srcdir="core/super" excludes="com/google/gwt/dev/jjs/intrinsic/"/>
-    <gwt.javac srcdir="core/src" errorprone.args="
-                                    -Xep:MissingCasesInEnumSwitch:OFF
-                                    -Xep:FallThrough:OFF
-                                    -Xep:ReturnValueIgnored:OFF
-                                    -Xep:EqualsIncompatibleType:OFF
-                                  ">
+    <gwt.javac srcdir="core/src">
       <include name="com/google/gwt/core/ext/**"/>
       <include name="com/google/gwt/core/linker/**"/>
       <include name="com/google/gwt/dev/About.java"/>
@@ -226,15 +217,15 @@
       <classpath>
         <pathelement location="${gwt.tools.lib}/apache/ant-zipscanner/ant-zipscanner-1.6.5-1-rebased.jar"/>
         <pathelement location="${gwt.tools.lib}/colt/colt-1.2.jar"/>
-        <pathelement location="${gwt.tools.lib}/objectweb/asm-7.1/asm-7.1.jar"/>
-        <pathelement location="${gwt.tools.lib}/objectweb/asm-7.1/asm-commons-7.1.jar"/>
-        <pathelement location="${gwt.tools.lib}/objectweb/asm-7.1/asm-util-7.1.jar"/>
+        <pathelement location="${gwt.tools.lib}/objectweb/asm-9.6/asm-9.6.jar"/>
+        <pathelement location="${gwt.tools.lib}/objectweb/asm-9.6/asm-commons-9.6.jar"/>
+        <pathelement location="${gwt.tools.lib}/objectweb/asm-9.6/asm-util-9.6.jar"/>
         <pathelement
             location="${gwt.tools.lib}/apache/commons/commons-collections-3.2.2.jar"/>
         <pathelement
-            location="${gwt.tools.lib}/eclipse/org.eclipse.jdt.core_3.17.0.v20190306-2240.jar"/>
+            location="${gwt.tools.lib}/eclipse/org.eclipse.jdt.core_3.32.0.v20221108-1853.jar"/>
         <pathelement
-            location="${gwt.tools.lib}/eclipse/jdtCompilerAdapter_3.17.0.v20190306-2240.jar"/>
+            location="${gwt.tools.lib}/eclipse/jdtCompilerAdapter_3.32.0.v20221108-1853.jar"/>
         <pathelement
             location="${gwt.tools.lib}/guava/guava-19.0/guava-19.0-rebased.jar"/>
         <pathelement location="${gwt.tools.lib}/gson/gson-2.6.2.jar"/>
@@ -249,12 +240,7 @@
 
   <target name="compile" depends="compiler.standalone, build.alldeps.jar"
           description="Compiles this project">
-    <gwt.javac srcdir="core/src" excludes="${filter.pattern}" errorprone.args="
-                                                                 -Xep:MissingCasesInEnumSwitch:OFF
-                                                                 -Xep:FallThrough:OFF
-                                                                 -Xep:ReturnValueIgnored:OFF
-                                                                 -Xep:EqualsIncompatibleType:OFF
-                                                               ">
+    <gwt.javac srcdir="core/src" excludes="${filter.pattern}">
       <classpath>
         <pathelement location="${alldeps.jar}"/>
       </classpath>

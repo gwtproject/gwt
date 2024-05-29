@@ -27,6 +27,10 @@ import java.util.logging.LogRecord;
 
 /**
  * A Handler that does remote logging for applications using RequestFactory.
+ * <p>To use this in a project with {@code jakarta.servlet}, a copy will need to be made,
+ * referencing {@link com.google.web.bindery.requestfactory.shared.jakarta.LoggingRequest
+ * com.google.web.bindery.requestfactory.shared.jakarta.LoggingRequest} instead of the non-jakarta
+ * LoggingFactory that this was originally written for.</p>
  */
 public class RequestFactoryLogHandler extends RemoteLogHandlerBase {
 

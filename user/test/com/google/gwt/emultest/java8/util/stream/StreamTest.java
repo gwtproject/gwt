@@ -19,7 +19,6 @@ package com.google.gwt.emultest.java8.util.stream;
 import static java.util.Arrays.asList;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
-
 import com.google.gwt.testing.TestUtils;
 
 import java.util.ArrayList;
@@ -132,6 +131,22 @@ public class StreamTest extends EmulTestBase {
     assertEquals(
         new Integer[] {10, 11, 12, 13, 14},
         Stream.iterate(0, i -> i + 1).skip(10).limit(5).toArray(Integer[]::new));
+
+    // Infinite stream, verify that it is correctly limited by a downstream step
+    assertEquals(
+            new Integer[] {0, 1, 2, 3, 4},
+            Stream.iterate(0, i -> i + 1).limit(5).toArray());
+
+    // Check that the function is called the correct number of times
+    int[] calledCount = {0};
+    Integer[] array = Stream.iterate(0, val -> {
+      calledCount[0]++;
+      return val + 1;
+    }).limit(5).toArray(Integer[]::new);
+    // Verify that the function was called for each value after the seed
+    assertEquals(array.length - 1, calledCount[0]);
+    // Sanity check the values returned
+    assertEquals(new Integer[] {0, 1, 2, 3, 4}, array);
   }
 
   public void testGenerate() {
@@ -227,6 +242,7 @@ public class StreamTest extends EmulTestBase {
     assertEquals(asList(values), collectedList);
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testFilter() {
     // unconsumed stream never runs filter
     boolean[] data = {false};
@@ -261,6 +277,7 @@ public class StreamTest extends EmulTestBase {
         Stream.of("a", "b", "c", "d", "c").filter(a -> true).collect(Collectors.toList()));
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testMap() {
     // unconsumed stream never runs map
     boolean[] data = {false};
@@ -272,6 +289,7 @@ public class StreamTest extends EmulTestBase {
         Stream.of(1, 2, 3).map(i -> "#" + i).collect(Collectors.toList()));
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testPeek() {
     // unconsumed stream never peeks
     boolean[] data = {false};
@@ -455,6 +473,7 @@ public class StreamTest extends EmulTestBase {
   // This frustrating test was written first on the JVM stream to discover the basic behavior before
   // trying to implement it in GWT. As far as I can tell, none of this is clearly described in
   // javadoc. Also note that it is *not* required to use the returned stream from calling onClose
+  @SuppressWarnings("ReturnValueIgnored")
   public void testCloseQuirks() {
     // all subclasses use the same close()/onClose(...) impl, just test once with Stream.empty()
 
@@ -546,6 +565,7 @@ public class StreamTest extends EmulTestBase {
     assertEquals(1, calledCount[0]);
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testCloseException() {
     // Try a single exception, confirm we catch it
     Stream<Object> s = Stream.of(1, 2, 3);

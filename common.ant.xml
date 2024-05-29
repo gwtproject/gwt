@@ -27,12 +27,6 @@
         message="This build file is in an inconsistent state (${ant.file} != ${test.ant.file})."/>
 
   <!-- Global Properties -->
-  <!--
-  Now that Java8 is the baseline, this property indicates that the build should target the
-  baseline, excluding 11+ tests, etc. This is temporary, to remove Java7 support, but not yet
-  remove the various places that version may matter, while Java 9+ support is pending.
-  -->
-  <property name="isJava8" value="true" />
   <property environment="env"/>
   <condition property="gwt.version" value="${env.GWT_VERSION}" else="0.0.0">
     <isset property="env.GWT_VERSION"/>
@@ -47,7 +41,6 @@
   <property name="gwt.build" location="${gwt.root}/build"/>
   <property name="gwt.build.out" location="${gwt.build}/out"/>
   <property name="gwt.build.lib" location="${gwt.build}/lib"/>
-  <property name="gwt.build.jni" location="${gwt.build}/jni"/>
   <property name="gwt.build.staging" location="${gwt.build}/staging"/>
   <property name="gwt.build.dist" location="${gwt.build}/dist"/>
   <!-- gwt.threadsPerProcessor supercedes gwt.threadCount unless set to 0 -->
@@ -55,23 +48,19 @@
   <property name="gwt.threadCount" value="1"/>
   <property name="project.build" location="${gwt.build.out}/${project.tail}"/>
   <property name="project.lib" location="${gwt.build.lib}/gwt-${ant.project.name}.jar"/>
-  <property name="project.jni" location="${gwt.build}/${project.tail}"/>
   <property name="javac.out" location="${project.build}/bin"/>
   <property name="javac.junit.out" location="${project.build}/bin-test"/>
   <property name="javac.emma.out" location="${project.build}/bin-emma"/>
   <property name="javac.debug" value="true"/>
   <property name="javac.debuglevel" value="lines,vars,source"/>
   <property name="javac.encoding" value="utf-8"/>
-  <property name="javac.source" value="8"/>
-  <property name="javac.target" value="8"/>
+  <property name="javac.release" value="8"/>
   <property name="javac.nowarn" value="true"/>
 
   <!-- javac and errorprone instructions from https://errorprone.info/docs/installation#ant -->
-  <property name="errorprone.javac.jar" location="${gwt.tools.lib}/errorprone/javac-9+181-r4173-1.jar"/>
   <path id="errorprone.processorpath.ref">
-    <pathelement location="${gwt.tools.lib}/errorprone/error_prone_core-2.9.0-with-dependencies.jar"/>
-    <pathelement location="${gwt.tools.lib}/errorprone/jFormatString-3.0.0.jar"/>
-    <pathelement location="${gwt.tools.lib}/errorprone/dataflow-errorprone-3.15.0.jar"/>
+    <pathelement location="${gwt.tools.lib}/errorprone/error_prone_core-2.23.0-with-dependencies.jar"/>
+    <pathelement location="${gwt.tools.lib}/errorprone/dataflow-errorprone-3.34.0-eisop1.jar"/>
   </path>
 
   <property name="junit.out" location="${project.build}/test"/>
@@ -158,8 +147,7 @@
   <macrodef name="gwt.javac">
     <attribute name="srcdir" default="src" />
     <attribute name="destdir" default="${javac.out}" />
-    <attribute name="source" default="${javac.source}" />
-    <attribute name="target" default="${javac.target}" />
+    <attribute name="release" default="${javac.release}" />
     <attribute name="excludes" default="" />
     <attribute name="processorpath" default="" />
     <attribute name="errorprone.args" default="" />
@@ -172,20 +160,19 @@
       </path>
       <mkdir dir="@{destdir}"/>
       <javac srcdir="@{srcdir}" sourcepath="@{srcdir}" destdir="@{destdir}" debug="${javac.debug}"
-             debuglevel="${javac.debuglevel}" source="@{source}" target="@{target}"
+             debuglevel="${javac.debuglevel}" release="@{release}"
              nowarn="${javac.nowarn}" encoding="${javac.encoding}" includeantruntime="false"
-             fork="true" compiler="modern" excludes="@{excludes}">
-        <compilerarg value="-J-Xbootclasspath/p:${errorprone.javac.jar}" if:true="${isJava8}"/>
-        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED" unless:true="${isJava8}"/>
-        <compilerarg value="-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED" unless:true="${isJava8}"/>
+             fork="true" excludes="@{excludes}">
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED" />
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED" />
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED" />
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED" />
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED" />
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED" />
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED" />
+        <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED" />
+        <compilerarg value="-J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED" />
+        <compilerarg value="-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED" />
         <compilerarg value="-XDcompilePolicy=simple"/>
         <compilerarg value="-processorpath"/>
         <compilerarg pathref="mergedprocessorpath.ref"/>
@@ -251,6 +238,7 @@
         <jvmarg value="-Demma.coverage.out.merge=true"/>
         <jvmarg value="-Dcom.google.gwt.junit.reportPath=reports"/>
         <jvmarg line="@{test.jvmargs}"/>
+        <jvmarg line="--add-opens=java.base/java.lang=ALL-UNNAMED" />
         <sysproperty key="gwt.args" value="@{test.args}"/>
         <sysproperty key="java.awt.headless" value="true"/>
         <classpath>
@@ -273,6 +261,7 @@
           <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
           <pathelement location="${gwt.tools.lib}/w3c/sac/sac-1.3.jar"/>
           <pathelement location="${gwt.tools.lib}/w3c/flute/flute-1.3-gg2.jar"/>
+          <pathelement location="${gwt.tools.lib}/jaxb/jaxb-api-2.3.3.jar"/>
           <extraclasspaths/>
         </classpath>
 
@@ -346,8 +335,8 @@
     <attribute name="outputdirectory" default="${project.build}"/>
     <element name="sourcepath" implicit="yes" optional="true"/>
     <sequential>
-      <taskdef resource="checkstyletask.properties"
-               classpath="${gwt.tools.antlib}/checkstyle-6.0-all.jar"/>
+      <taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties"
+               classpath="${gwt.tools.antlib}/checkstyle-10.13.0-all.jar"/>
       <mkdir dir="@{outputdirectory}"/>
       <checkstyle config="${gwt.root}/eclipse/settings/code-style/gwt-checkstyle.xml" maxErrors="0"
                   failOnViolation="false" failureProperty="gwt.checkstyle.failed">
@@ -366,8 +355,8 @@
     <attribute name="outputdirectory" default="${project.build}"/>
     <element name="sourcepath" implicit="yes" optional="true"/>
     <sequential>
-      <taskdef resource="checkstyletask.properties"
-               classpath="${gwt.tools.antlib}/checkstyle-6.0-all.jar"/>
+      <taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties"
+               classpath="${gwt.tools.antlib}/checkstyle-10.13.0-all.jar"/>
       <mkdir dir="@{outputdirectory}"/>
       <checkstyle config="${gwt.root}/eclipse/settings/code-style/gwt-checkstyle-tests.xml"
                   maxErrors="0" failOnViolation="false"

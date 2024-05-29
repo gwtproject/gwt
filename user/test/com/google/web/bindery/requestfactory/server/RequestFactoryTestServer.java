@@ -42,7 +42,7 @@ public class RequestFactoryTestServer {
     handler.addFilter(GzipFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
 
     SessionHandler sessionHandler = new SessionHandler();
-    sessionHandler.getSessionManager().setMaxInactiveInterval(5);
+    sessionHandler.setMaxInactiveInterval(5);
     handler.setSessionHandler(sessionHandler);
     server.setHandler(handler);
 

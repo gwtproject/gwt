@@ -169,16 +169,13 @@ public class StoryRecorder {
       assert info != null;
 
       // Infer dependency information
-      if (!dependencyScope.isEmpty()) {
-
+      while (!dependencyScope.isEmpty() && !dependencyScope.peek().range.contains(range)) {
         /*
          * Pop frames until we get back to a container, using this as a chance
          * to build up our list of non-overlapping Ranges to report back to the
          * user.
          */
-        while (!dependencyScope.peek().range.contains(range)) {
-          popAndRecord(dependencyScope, fragment);
-        }
+        popAndRecord(dependencyScope, fragment);
       }
 
       // Possibly create and record Members
@@ -271,7 +268,7 @@ public class StoryRecorder {
       builder.append("\"/>\n</story>\n");
     } else {
       builder.append("\">");
-      SizeMapRecorder.escapeXml(jsCode, start, end, false, builder);
+      SizeMapRecorder.escapeXml(jsCode, start, Math.min(end,jsCode.length()), false, builder);
       builder.append("</storyref>\n</story>\n");
     }
   }
@@ -297,7 +294,7 @@ public class StoryRecorder {
      * Make a new Range for the gap between the popped Range and whatever we
      * last stored.
      */
-    if (lastEnd < toStore.getStart()) {
+    if (lastEnd < toStore.getStart() && !dependencyScope.isEmpty()) {
       Range newRange = new Range(lastEnd, toStore.getStart());
       assert !dependencyScope.isEmpty();
 
@@ -351,7 +348,9 @@ public class StoryRecorder {
       theStory = new StoryImpl(storyCache.get(info), length);
     }
 
-    emitStory(theStory, range);
+    if (range.getStart() < js[curHighestFragment].length()) {
+      emitStory(theStory, range);
+    }
   }
 
 }

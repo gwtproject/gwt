@@ -194,6 +194,7 @@ import org.eclipse.jdt.internal.compiler.ast.Statement;
 import org.eclipse.jdt.internal.compiler.ast.StringLiteral;
 import org.eclipse.jdt.internal.compiler.ast.StringLiteralConcatenation;
 import org.eclipse.jdt.internal.compiler.ast.SuperReference;
+import org.eclipse.jdt.internal.compiler.ast.SwitchExpression;
 import org.eclipse.jdt.internal.compiler.ast.SwitchStatement;
 import org.eclipse.jdt.internal.compiler.ast.SynchronizedStatement;
 import org.eclipse.jdt.internal.compiler.ast.ThisReference;
@@ -537,13 +538,25 @@ public class GwtAstBuilder {
 
     @Override
     public void endVisit(CaseStatement x, BlockScope scope) {
+      if (x.isExpr) {
+        InternalCompilerException exception =
+            new InternalCompilerException("Switch expressions not yet supported");
+        exception.addNode(new JCaseStatement(makeSourceInfo(x), null));
+        throw exception;
+      }
       try {
         SourceInfo info = makeSourceInfo(x);
-        JExpression caseExpression = pop(x.constantExpression);
-        if (caseExpression != null && x.constantExpression.resolvedType.isEnum()) {
-          caseExpression = synthesizeCallToOrdinal(scope, info, caseExpression);
+        if (x.constantExpressions == null) {
+          push(new JCaseStatement(info, null));
+        } else {
+          for (Expression constantExpression : x.constantExpressions) {
+            JExpression caseExpression = pop(constantExpression);
+            if (caseExpression != null && caseExpression.getType().isEnumOrSubclass() != null) {
+              caseExpression = synthesizeCallToOrdinal(scope, info, caseExpression);
+            }
+            push(new JCaseStatement(info, caseExpression));
+          }
         }
-        push(new JCaseStatement(info, caseExpression));
       } catch (Throwable e) {
         throw translateException(x, e);
       }
@@ -638,7 +651,14 @@ public class GwtAstBuilder {
     public void endVisit(ConditionalExpression x, BlockScope scope) {
       try {
         SourceInfo info = makeSourceInfo(x);
-        JType type = typeMap.get(x.resolvedType);
+        JType type;
+        if (x.resolvedType instanceof IntersectionTypeBinding18) {
+          type = typeMap.get(
+                  getFirstNonObjectInIntersection((IntersectionTypeBinding18) x.resolvedType)
+          );
+        } else {
+          type = typeMap.get(x.resolvedType);
+        }
         JExpression valueIfFalse = pop(x.valueIfFalse);
         JExpression valueIfTrue = pop(x.valueIfTrue);
         JExpression condition = pop(x.condition);
@@ -646,6 +666,27 @@ public class GwtAstBuilder {
       } catch (Throwable e) {
         throw translateException(x, e);
       }
+    }
+
+    /**
+     * Returns the first non-Object type in the intersection. As intersections can only contain one
+     * class, and that class must be first, this ensures that if there is a class it will be the
+     * returned type, but if there are only interfaces, the first interface will be selected.
+     * <p></p>
+     * This behavior is consistent with ReferenceMapper.get() with assertions disabled - that is,
+     * where {@code referenceMapper.get(foo)} would fail due to an assertion, if assertions are
+     * disabled then {@code
+     * referenceMapper.get(foo).equals(referenceMapper.get(getFirstNonObjectInIntersection(foo))
+     * } will be true.
+     */
+    private TypeBinding getFirstNonObjectInIntersection(IntersectionTypeBinding18 resolvedType) {
+      for (ReferenceBinding type : resolvedType.intersectingTypes) {
+        if (type != curCud.cud.scope.getJavaLangObject()) {
+          return type;
+        }
+      }
+      throw new IllegalStateException("Type doesn't have a non-java.lang.Object it intersects "
+              + resolvedType);
     }
 
     @Override
@@ -2507,6 +2548,14 @@ public class GwtAstBuilder {
     }
 
     @Override
+    public boolean visit(SwitchExpression x, BlockScope blockScope) {
+      InternalCompilerException exception =
+          new InternalCompilerException("Switch expressions not yet supported");
+      exception.addNode(new JCaseStatement(makeSourceInfo(x), null));
+      throw exception;
+    }
+
+    @Override
     public boolean visit(LocalDeclaration x, BlockScope scope) {
       try {
         createLocal(x);
@@ -2724,6 +2773,12 @@ public class GwtAstBuilder {
     }
 
     protected boolean visit(TypeDeclaration x) {
+      if (x.isRecord()) {
+        InternalCompilerException exception =
+            new InternalCompilerException("Records not yet supported");
+        exception.addNode(new JClassType(makeSourceInfo(x), intern(x.name), false, false));
+        throw exception;
+      }
       JDeclaredType type = (JDeclaredType) typeMap.get(x.binding);
       assert !type.isExternal();
       classStack.push(curClass);
@@ -2941,7 +2996,13 @@ public class GwtAstBuilder {
       TypeBinding resolvedType = x.type.resolvedType;
       JType localType;
       if (resolvedType.constantPoolName() != null) {
-        localType = typeMap.get(resolvedType);
+        if (resolvedType instanceof IntersectionTypeBinding18) {
+          localType = typeMap.get(
+                  getFirstNonObjectInIntersection((IntersectionTypeBinding18) resolvedType)
+          );
+        } else {
+          localType = typeMap.get(resolvedType);
+        }
       } else {
         // Special case, a statically unreachable local type.
         localType = JReferenceType.NULL_TYPE;
@@ -3671,7 +3732,6 @@ public class GwtAstBuilder {
         return new JType[] {typeMap.get(type)};
       }
     }
-
 
     private boolean isFunctionalInterfaceWithMethod(ReferenceBinding referenceBinding, Scope scope,
         String samSignature) {

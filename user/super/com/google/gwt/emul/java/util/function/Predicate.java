@@ -15,9 +15,9 @@
  */
 package java.util.function;
 
-import java.util.Objects;
-
 import static javaemul.internal.InternalPreconditions.checkCriticalNotNull;
+
+import java.util.Objects;
 
 /**
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html">
@@ -46,5 +46,10 @@ public interface Predicate<T> {
   default Predicate<T> or(Predicate<? super T> other) {
     checkCriticalNotNull(other);
     return t -> test(t) || other.test(t);
+  }
+
+  @SuppressWarnings("unchecked")
+  static <T> Predicate<T> not(Predicate<? super T> other) {
+    return (Predicate<T>) other.negate();
   }
 }

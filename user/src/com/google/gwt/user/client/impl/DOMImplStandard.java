@@ -245,6 +245,7 @@ public abstract class DOMImplStandard extends DOMImpl {
     foreach(captureEvents, function(e, fn) { $wnd.addEventListener(e, fn, true); });
   }-*/;
 
+  @SuppressWarnings("deprecation")
   protected native void sinkBitlessEventImpl(Element elem, String eventTypeName) /*-{
     var dispatchMap = @com.google.gwt.user.client.impl.DOMImplStandard::bitlessEventDispatchers;
     var dispatcher = dispatchMap[eventTypeName] || dispatchMap['_default_'];
@@ -355,6 +356,7 @@ public abstract class DOMImplStandard extends DOMImpl {
     }
   }
 
+  @SuppressWarnings("deprecation")
   private static native EventMap getBitlessEventDispatchers() /*-{
     return {
       _default_: @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent(*),
@@ -363,6 +365,7 @@ public abstract class DOMImplStandard extends DOMImpl {
     };
   }-*/;
 
+  @SuppressWarnings("deprecation")
   private static native EventMap getCaptureEventDispatchers() /*-{
     return {
       // Mouse events

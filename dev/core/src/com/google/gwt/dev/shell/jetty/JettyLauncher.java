@@ -26,20 +26,21 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import org.eclipse.jetty.http.HttpField;
 import org.eclipse.jetty.http.HttpFields;
-import org.eclipse.jetty.server.HttpConfiguration;
-import org.eclipse.jetty.server.HttpConnectionFactory;
+import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.RequestLog;
 import org.eclipse.jetty.server.Response;
-import org.eclipse.jetty.server.SecureRequestCustomizer;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
-import org.eclipse.jetty.server.SslConnectionFactory;
 import org.eclipse.jetty.server.handler.RequestLogHandler;
+import org.eclipse.jetty.servlet.ErrorPageErrorHandler;
+import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.util.component.AbstractLifeCycle;
 import org.eclipse.jetty.util.log.Log;
-import org.eclipse.jetty.util.log.Logger;
-import org.eclipse.jetty.util.ssl.SslContextFactory;
+import org.eclipse.jetty.util.preventers.AppContextLeakPreventer;
+import org.eclipse.jetty.util.preventers.DOMLeakPreventer;
+import org.eclipse.jetty.util.preventers.GCThreadLeakPreventer;
+import org.eclipse.jetty.util.preventers.SecurityProviderLeakPreventer;
 import org.eclipse.jetty.webapp.ClasspathPattern;
 import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
@@ -56,15 +57,46 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.imageio.ImageIO;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Stream;
 
 /**
  * A {@link ServletContainerLauncher} for an embedded Jetty server.
+ * <p></p>
+ * @deprecated please migrate to {@link com.google.gwt.dev.shell.StaticResourceServer},
+ * or provide your own implementation.
  */
+@Deprecated
 public class JettyLauncher extends ServletContainerLauncher {
+  private static final AtomicBoolean hasLoggedDeprecationWarning = new AtomicBoolean(false);
+
+  /**
+   * Disable warning about JettyLauncher being deprecated when running tests, as this only is
+   * intended to apply to DevMode - The test runner can be updated at the same time as any other
+   * changes are made to JettyLauncher.
+   */
+  public static void suppressDeprecationWarningForTests() {
+    hasLoggedDeprecationWarning.set(true);
+  }
+
+  /**
+   * Warns, only once, that JettyLauncher is deprecated for removal. Call when it is clear that
+   * the developer is actively deploying code to, or loading resources from, the embedded Jetty
+   * instance.
+   *
+   * @param log existing TreeLogger to append warning to
+   */
+  private static void maybeLogDeprecationWarning(TreeLogger log) {
+    if (hasLoggedDeprecationWarning.compareAndSet(false, true)) {
+      log.log(TreeLogger.Type.WARN, "DevMode will default to -noserver in a future release, and " +
+              "JettyLauncher may be removed or changed. Please consider running your own " +
+              "application server and either passing -noserver to DevMode or migrating to " +
+              "CodeServer. Alternatively, consider implementing your own " +
+              "ServletContainerLauncher to continue running your application server from " +
+              "DevMode.");
+    }
+  }
 
   /**
    * Log jetty requests/responses to TreeLogger.
@@ -89,6 +121,10 @@ public class JettyLauncher extends ServletContainerLauncher {
       if (status < 0) {
         // Copied from NCSARequestLog
         status = 404;
+      }
+      if (status != 404) {
+        // Ignore 404 errors, log the first other call to the server if we haven't logged yet
+        maybeLogDeprecationWarning(logger);
       }
       TreeLogger.Type logStatus, logHeaders;
       if (status >= 500) {
@@ -127,7 +163,7 @@ public class JettyLauncher extends ServletContainerLauncher {
       }
       if (logger.isLoggable(logStatus)) {
         TreeLogger branch = logger.branch(logStatus, String.valueOf(status)
-            + " - " + request.getMethod() + ' ' + request.getUri() + " ("
+            + " - " + request.getMethod() + ' ' + request.getRequestURI() + " ("
             + userString + request.getRemoteHost() + ')' + bytesString);
         if (branch.isLoggable(logHeaders)) {
           logHeaders(branch.branch(logHeaders, "Request headers"), logHeaders,
@@ -147,120 +183,15 @@ public class JettyLauncher extends ServletContainerLauncher {
   }
 
   /**
-   * An adapter for the Jetty logging system to GWT's TreeLogger. This
-   * implementation class is only public to allow {@link Log} to instantiate it.
-   *
-   * The weird static data / default construction setup is a game we play with
-   * {@link Log}'s static initializer to prevent the initial log message from
-   * going to stderr.
+   * An adapter for the Jetty logging system to GWT's TreeLogger.
+   * @deprecated use {@link com.google.gwt.dev.shell.jetty.JettyTreeLogger} instead.
    */
-  public static class JettyTreeLogger implements Logger {
-    private final TreeLogger logger;
-
+  @Deprecated
+  public static class JettyTreeLogger extends com.google.gwt.dev.shell.jetty.JettyTreeLogger {
     public JettyTreeLogger(TreeLogger logger) {
-      if (logger == null) {
-        throw new NullPointerException();
-      }
-      this.logger = logger;
-    }
-
-    public void debug(String msg, long arg) {
-      logger.log(TreeLogger.SPAM, format(msg, arg));
-    }
-
-    public void debug(String msg, Object... args) {
-      if (logger.isLoggable(TreeLogger.SPAM)) {
-        logger.log(TreeLogger.SPAM, format(msg, args));
-      }
-    }
-
-    public void debug(String msg, Throwable th) {
-      logger.log(TreeLogger.SPAM, msg, th);
-    }
-
-    public void debug(Throwable th) {
-      logger.log(TreeLogger.SPAM, "", th);
-    }
-
-    public Logger getLogger(String name) {
-      return this;
-    }
-
-    public String getName() {
-      return "";
-    }
-
-    public void info(String msg, Object... args) {
-      if (logger.isLoggable(TreeLogger.TRACE)) {
-        logger.log(TreeLogger.TRACE, format(msg, args));
-      }
-    }
-
-    public void info(String msg, Throwable th) {
-      logger.log(TreeLogger.TRACE, msg, th);
-    }
-
-    public void info(Throwable th) {
-      logger.log(TreeLogger.TRACE, "", th);
-    }
-
-    public boolean isDebugEnabled() {
-      return logger.isLoggable(TreeLogger.SPAM);
-    }
-
-    public void setDebugEnabled(boolean enabled) {
-      // ignored
-    }
-
-    public void warn(String msg, Object... args) {
-      if (logger.isLoggable(TreeLogger.WARN)) {
-        logger.log(TreeLogger.WARN, format(msg, args));
-      }
-    }
-
-    public void warn(String msg, Throwable th) {
-      logger.log(TreeLogger.WARN, msg, th);
-    }
-
-    public void warn(Throwable th) {
-      logger.log(TreeLogger.WARN, "", th);
-    }
-
-    public void ignore(Throwable th) {
-      logger.log(TreeLogger.SPAM, "IGNORE", th);
-    }
-
-    /**
-     * Copied from org.eclipse.log.StdErrLog.
-     */
-    private String format(String msg, Object... args) {
-      if (msg == null) {
-        msg = "";
-        for (int i = 0; i < args.length; i++) {
-          msg += "{} ";
-        }
-      }
-      String braces = "{}";
-      int start = 0;
-      StringBuilder builder = new StringBuilder();
-      for (Object arg : args) {
-        int bracesIndex = msg.indexOf(braces, start);
-        if (bracesIndex < 0) {
-          builder.append(msg.substring(start));
-          builder.append(" ");
-          builder.append(arg);
-          start = msg.length();
-        } else {
-          builder.append(msg.substring(start, bracesIndex));
-          builder.append(String.valueOf(arg));
-          start = bracesIndex + braces.length();
-        }
-      }
-      builder.append(msg.substring(start));
-      return builder.toString();
+      super(logger);
     }
   }
-
   /**
    * The resulting {@link ServletContainer} this is launched.
    */
@@ -350,6 +281,7 @@ public class JettyLauncher extends ServletContainerLauncher {
       private final ClasspathPattern systemClassesFromWebappFirst = new ClasspathPattern(new String[] {
           "-javax.servlet.",
           "-javax.el.",
+          "-javax.websocket.",
           "javax.",
       });
       private final ClasspathPattern allowedFromSystemClassLoader = new ClasspathPattern(new String[] {
@@ -371,11 +303,13 @@ public class JettyLauncher extends ServletContainerLauncher {
 
       @Override
       public Enumeration<URL> getResources(String name) throws IOException {
-        // Logic copied from Jetty's WebAppClassLoader
-        List<URL> fromParent = isServerClass(name)
+        // Logic copied from Jetty's WebAppClassLoader, modified to use the system classloader
+        // instead of the parent classloader for server classes
+        List<URL> fromParent = WebAppContextWithReload.this.isServerClass(name)
             ? Collections.<URL>emptyList()
             : Lists.newArrayList(Iterators.forEnumeration(systemClassLoader.getResources(name)));
-        Iterator<URL> fromWebapp = isSystemClass(name) && !fromParent.isEmpty()
+        Iterator<URL> fromWebapp = WebAppContextWithReload.this.isSystemClass(name)
+                && !fromParent.isEmpty()
             ? Collections.<URL>emptyIterator()
             : Iterators.forEnumeration(findResources(name));
         return Iterators.asEnumeration(Iterators.concat(fromWebapp, fromParent.iterator()));
@@ -394,7 +328,8 @@ public class JettyLauncher extends ServletContainerLauncher {
         // Note: bootstrap has already been searched, so javax. classes should be
         // tried from the webapp first (except for javax.servlet and javax.el).
         URL found;
-        if (isSystemClass(checkName) && !systemClassesFromWebappFirst.match(checkName)) {
+        if (WebAppContextWithReload.this.isSystemClass(checkName)
+                && !systemClassesFromWebappFirst.match(checkName)) {
           found = systemClassLoader.getResource(name);
           if (found != null) {
             return found;
@@ -409,7 +344,7 @@ public class JettyLauncher extends ServletContainerLauncher {
 
         // See if the outside world has it.
         found = systemClassLoader.getResource(name);
-        if (found == null || isServerClass(checkName)) {
+        if (found == null || WebAppContextWithReload.this.isServerClass(checkName)) {
           return null;
         }
 
@@ -431,22 +366,27 @@ public class JettyLauncher extends ServletContainerLauncher {
       }
 
       @Override
-      protected Class<?> findClass(String name) throws ClassNotFoundException {
+      protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
         // For system path, always prefer the outside world.
         // Note: bootstrap has already been searched, so javax. classes should be
         // tried from the webapp first (except for javax.servlet).
-        if (isSystemClass(name) && !systemClassesFromWebappFirst.match(name)) {
+        if (WebAppContextWithReload.this.isSystemClass(name)
+                && !systemClassesFromWebappFirst.match(name)) {
           try {
-            return systemClassLoader.loadClass(name);
+            Class<?> loaded = systemClassLoader.loadClass(name);
+            if (resolve) {
+              resolveClass(loaded);
+            }
+            return loaded;
           } catch (ClassNotFoundException e) {
           }
         }
 
         try {
-          return super.findClass(name);
+          return super.loadClass(name, resolve);
         } catch (ClassNotFoundException e) {
           // Don't allow server classes to be loaded from the outside.
-          if (isServerClass(name)) {
+          if (WebAppContextWithReload.this.isServerClass(name)) {
             throw e;
           }
         }
@@ -455,7 +395,7 @@ public class JettyLauncher extends ServletContainerLauncher {
         String resourceName = name.replace('.', '/') + ".class";
         URL found = systemClassLoader.getResource(resourceName);
         if (found == null) {
-          return null;
+          throw new ClassNotFoundException(name);
         }
 
         // Special-case JDBCUnloader; it should always be loaded in the webapp classloader
@@ -467,17 +407,21 @@ public class JettyLauncher extends ServletContainerLauncher {
         // Those classes are allowed to be loaded right from the systemClassLoader
         // Note: Jetty classes here are not "server classes", handled above.
         if (allowedFromSystemClassLoader.match(name)) {
-          return systemClassLoader.loadClass(name);
+          Class<?> loaded = systemClassLoader.loadClass(name);
+          if (resolve) {
+            resolveClass(loaded);
+          }
+          return loaded;
         }
 
         // Warn, add containing URL to our own ClassLoader, and retry the call.
         String warnMessage = "Server class '"
-            + name
-            + "' could not be found in the web app, but was found on the system classpath";
+                + name
+                + "' could not be found in the web app, but was found on the system classpath";
         if (!addContainingClassPathEntry(warnMessage, found, resourceName)) {
           throw new ClassNotFoundException(name);
         }
-        return super.findClass(name);
+        return super.loadClass(name, resolve);
       }
 
       private boolean addContainingClassPathEntry(String warnMessage,
@@ -533,7 +477,9 @@ public class JettyLauncher extends ServletContainerLauncher {
 
     private WebAppContextWithReload(TreeLogger logger, String webApp,
         String contextPath) {
-      super(webApp, contextPath);
+      super(null, contextPath, null, null, null, new ErrorPageErrorHandler(),
+              ServletContextHandler.SESSIONS);
+      this.setWar(webApp);
       this.logger = logger;
 
       // Prevent file locking on Windows; pick up file changes.
@@ -548,6 +494,15 @@ public class JettyLauncher extends ServletContainerLauncher {
     protected void doStart() throws Exception {
       setClassLoader(new WebAppClassLoaderExtension());
       super.doStart();
+
+      // After start, warn if a servlet/filter was configured other than those provided by Jetty
+      boolean hasNonJettyFiltersOrServlets = Stream.concat(
+              getServletContext().getServletRegistrations().values().stream(),
+              getServletContext().getFilterRegistrations().values().stream()
+      ).anyMatch(r -> !r.getClassName().startsWith("org.eclipse.jetty"));
+      if (hasNonJettyFiltersOrServlets) {
+        maybeLogDeprecationWarning(logger);
+      }
     }
 
     @Override
@@ -561,15 +516,6 @@ public class JettyLauncher extends ServletContainerLauncher {
 
       setClassLoader(null);
     }
-  }
-
-  /**
-   * Represents the type of SSL client certificate authentication desired.
-   */
-  private enum ClientAuth {
-    NONE,
-    WANT,
-    REQUIRE,
   }
 
   /**
@@ -587,16 +533,7 @@ public class JettyLauncher extends ServletContainerLauncher {
    */
   private static void setupConnector(ServerConnector connector,
       String bindAddress, int port) {
-    if (bindAddress != null) {
-      connector.setHost(bindAddress.toString());
-    }
-    connector.setPort(port);
-
-    // Allow binding to a port even if it's still in state TIME_WAIT.
-    connector.setReuseAddress(true);
-
-    // Linux keeps the port blocked after shutdown if we don't disable this.
-    connector.setSoLingerTime(0);
+    JettyLauncherUtils.setupConnector(connector, bindAddress, port);
   }
 
   // default value used if setBaseLogLevel isn't called
@@ -604,15 +541,10 @@ public class JettyLauncher extends ServletContainerLauncher {
 
   private String bindAddress = null;
 
-  private ClientAuth clientAuth;
-
-  private String keyStore;
-
-  private String keyStorePassword;
+  private SslConfiguration sslConfig = new SslConfiguration(ClientAuthType.NONE, null, null, false);
 
   private final Object privateInstanceLock = new Object();
 
-  private boolean useSsl;
 
   @Override
   public String getName() {
@@ -621,71 +553,17 @@ public class JettyLauncher extends ServletContainerLauncher {
 
   @Override
   public boolean isSecure() {
-    return useSsl;
+    return sslConfig.isUseSsl();
   }
 
   @Override
   public boolean processArguments(TreeLogger logger, String arguments) {
     if (arguments != null && arguments.length() > 0) {
-      // TODO(jat): better parsing of the args
-      for (String arg : arguments.split(",")) {
-        int equals = arg.indexOf('=');
-        String tag;
-        String value = null;
-        if (equals < 0) {
-          tag = arg;
-        } else {
-          tag = arg.substring(0, equals);
-          value = arg.substring(equals + 1);
-        }
-        if ("ssl".equals(tag)) {
-          useSsl = true;
-          URL keyStoreUrl = getClass().getResource("localhost.keystore");
-          if (keyStoreUrl == null) {
-            logger.log(TreeLogger.ERROR, "Default GWT keystore not found");
-            return false;
-          }
-          keyStore = keyStoreUrl.toExternalForm();
-          keyStorePassword = "localhost";
-        } else if ("keystore".equals(tag)) {
-          useSsl = true;
-          keyStore = value;
-        } else if ("password".equals(tag)) {
-          useSsl = true;
-          keyStorePassword = value;
-        } else if ("pwfile".equals(tag)) {
-          useSsl = true;
-          keyStorePassword = Util.readFileAsString(new File(value));
-          if (keyStorePassword == null) {
-            logger.log(TreeLogger.ERROR,
-                "Unable to read keystore password from '" + value + "'");
-            return false;
-          }
-          keyStorePassword = keyStorePassword.trim();
-        } else if ("clientAuth".equals(tag)) {
-          useSsl = true;
-          try {
-            clientAuth = ClientAuth.valueOf(value);
-          } catch (IllegalArgumentException e) {
-            logger.log(TreeLogger.WARN, "Ignoring invalid clientAuth of '"
-                + value + "'");
-          }
-        } else {
-          logger.log(TreeLogger.ERROR, "Unexpected argument to "
-              + JettyLauncher.class.getSimpleName() + ": " + arg);
-          return false;
-        }
-      }
-      if (useSsl) {
-        if (keyStore == null) {
-          logger.log(TreeLogger.ERROR, "A keystore is required to use SSL");
-          return false;
-        }
-        if (keyStorePassword == null) {
-          logger.log(TreeLogger.ERROR,
-              "A keystore password is required to use SSL");
-          return false;
-        }
+      Optional<SslConfiguration> parsed = SslConfiguration.parseArgs(arguments.split(","), logger);
+      if (parsed.isPresent()) {
+        sslConfig = parsed.get();
+      } else {
+        return false;
       }
     }
     return true;
@@ -729,6 +607,7 @@ public class JettyLauncher extends ServletContainerLauncher {
     ServerConnector connector = getConnector(server, logger);
     setupConnector(connector, bindAddress, port);
     server.addConnector(connector);
+    addPreventers(server);
 
     Configuration.ClassList cl = Configuration.ClassList.setServerDefault(server);
     try {
@@ -751,7 +630,8 @@ public class JettyLauncher extends ServletContainerLauncher {
     }
 
     // Create a new web app in the war directory.
-      WebAppContext wac = createWebAppContext(logger, appRootDir);
+    WebAppContext wac = createWebAppContext(logger, appRootDir);
+    wac.setSecurityHandler(new ConstraintSecurityHandler());
 
     RequestLogHandler logHandler = new RequestLogHandler();
     logHandler.setRequestLog(new JettyRequestLogger(logger, getBaseLogLevel()));
@@ -796,51 +676,38 @@ public class JettyLauncher extends ServletContainerLauncher {
   }
 
   protected ServerConnector getConnector(Server server, TreeLogger logger) {
-    HttpConfiguration config = defaultConfig();
-    if (useSsl) {
-      TreeLogger sslLogger = logger.branch(TreeLogger.INFO,
-          "Listening for SSL connections");
-      if (sslLogger.isLoggable(TreeLogger.TRACE)) {
-        sslLogger.log(TreeLogger.TRACE, "Using keystore " + keyStore);
-      }
-      SslContextFactory ssl = new SslContextFactory();
-      if (clientAuth != null) {
-        switch (clientAuth) {
-          case NONE:
-            ssl.setWantClientAuth(false);
-            ssl.setNeedClientAuth(false);
-            break;
-          case WANT:
-            sslLogger.log(TreeLogger.TRACE, "Requesting client certificates");
-            ssl.setWantClientAuth(true);
-            ssl.setNeedClientAuth(false);
-            break;
-          case REQUIRE:
-            sslLogger.log(TreeLogger.TRACE, "Requiring client certificates");
-            ssl.setWantClientAuth(true);
-            ssl.setNeedClientAuth(true);
-            break;
-        }
-      }
-      ssl.setKeyStorePath(keyStore);
-      ssl.setTrustStorePath(keyStore);
-      ssl.setKeyStorePassword(keyStorePassword);
-      ssl.setTrustStorePassword(keyStorePassword);
-      config.addCustomizer(new SecureRequestCustomizer());
-      return new ServerConnector(server,
-          null, null, null, 0, 2,
-          new SslConnectionFactory(ssl, "http/1.1"),
-          new HttpConnectionFactory(config));
-    }
-    return new ServerConnector(server, new HttpConnectionFactory(config));
+    return JettyLauncherUtils.getConnector(server, sslConfig, logger);
   }
 
-  protected HttpConfiguration defaultConfig() {
-     HttpConfiguration config = new HttpConfiguration();
-     config.setRequestHeaderSize(16386);
-     config.setSendServerVersion(false);
-     config.setSendDateHeader(true);
-     return config;
+  private void addPreventers(Server server) {
+    // Trigger a call to sun.awt.AppContext.getAppContext(). This will
+    // pin the common class loader in memory but that shouldn't be an
+    // issue.
+    server.addBean(new AppContextLeakPreventer());
+
+    /*
+     * Several components end up calling: sun.misc.GC.requestLatency(long)
+     *
+     * Those libraries / components known to trigger memory leaks due to 
+     * eventual calls to requestLatency(long) are:
+     * - javax.management.remote.rmi.RMIConnectorServer.start()
+     */
+    server.addBean(new GCThreadLeakPreventer());
+
+    /*
+     * Creating a MessageDigest during web application startup initializes the 
+     * Java Cryptography Architecture. Under certain conditions this starts a 
+     * Token poller thread with TCCL equal to the web application class loader.
+     *
+     * Instead we initialize JCA right now.
+     */
+    server.addBean(new SecurityProviderLeakPreventer());
+
+    /*
+     * Haven't got to the root of what is going on with this leak but if a web app is the first to
+     * make the calls below the web application class loader will be pinned in memory.
+     */
+    server.addBean(new DOMLeakPreventer());
   }
 
   private void checkStartParams(TreeLogger logger, int port, File appRootDir) {
@@ -883,37 +750,6 @@ public class JettyLauncher extends ServletContainerLauncher {
    * (http://www.apache.org/).
    */
   private void jreLeakPrevention(TreeLogger logger) {
-    // Trigger a call to sun.awt.AppContext.getAppContext(). This will
-    // pin the common class loader in memory but that shouldn't be an
-    // issue.
-    ImageIO.getCacheDirectory();
-
-    /*
-     * Several components end up calling: sun.misc.GC.requestLatency(long)
-     *
-     * Those libraries / components known to trigger memory leaks due to
-     * eventual calls to requestLatency(long) are: -
-     * javax.management.remote.rmi.RMIConnectorServer.start()
-     */
-    try {
-      Class<?> clazz = Class.forName("sun.misc.GC");
-      Method method = clazz.getDeclaredMethod("requestLatency",
-          new Class[]{long.class});
-      method.invoke(null, Long.valueOf(3600000));
-    } catch (ClassNotFoundException e) {
-      logger.log(TreeLogger.ERROR, "jreLeakPrevention.gcDaemonFail", e);
-    } catch (SecurityException e) {
-      logger.log(TreeLogger.ERROR, "jreLeakPrevention.gcDaemonFail", e);
-    } catch (NoSuchMethodException e) {
-      logger.log(TreeLogger.ERROR, "jreLeakPrevention.gcDaemonFail", e);
-    } catch (IllegalArgumentException e) {
-      logger.log(TreeLogger.ERROR, "jreLeakPrevention.gcDaemonFail", e);
-    } catch (IllegalAccessException e) {
-      logger.log(TreeLogger.ERROR, "jreLeakPrevention.gcDaemonFail", e);
-    } catch (InvocationTargetException e) {
-      logger.log(TreeLogger.ERROR, "jreLeakPrevention.gcDaemonFail", e);
-    }
-
     /*
      * Calling getPolicy retains a static reference to the context class loader.
      */
@@ -938,15 +774,6 @@ public class JettyLauncher extends ServletContainerLauncher {
     }
 
     /*
-     * Creating a MessageDigest during web application startup initializes the
-     * Java Cryptography Architecture. Under certain conditions this starts a
-     * Token poller thread with TCCL equal to the web application class loader.
-     *
-     * Instead we initialize JCA right now.
-     */
-    java.security.Security.getProviders();
-
-    /*
      * Several components end up opening JarURLConnections without first
      * disabling caching. This effectively locks the file. Whilst more
      * noticeable and harder to ignore on Windows, it affects all operating
@@ -967,18 +794,6 @@ public class JettyLauncher extends ServletContainerLauncher {
       logger.log(TreeLogger.ERROR, "jreLeakPrevention.jarUrlConnCacheFail", e);
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "jreLeakPrevention.jarUrlConnCacheFail", e);
-    }
-
-    /*
-     * Haven't got to the root of what is going on with this leak but if a web
-     * app is the first to make the calls below the web application class loader
-     * will be pinned in memory.
-     */
-    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    try {
-      factory.newDocumentBuilder();
-    } catch (ParserConfigurationException e) {
-      logger.log(TreeLogger.ERROR, "jreLeakPrevention.xmlParseFail", e);
     }
   }
 }

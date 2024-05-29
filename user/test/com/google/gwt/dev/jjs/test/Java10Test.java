@@ -15,70 +15,143 @@
  */
 package com.google.gwt.dev.jjs.test;
 
-import com.google.gwt.dev.util.arg.SourceLevel;
 import com.google.gwt.junit.DoNotRunWith;
-import com.google.gwt.junit.JUnitShell;
 import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.function.Supplier;
+
 /**
- * Dummy test case. Java10Test is super sourced so that GWT can be compiled by Java 8.
- *
- * NOTE: Make sure this class has the same test methods of its supersourced variant.
+ * Tests Java 10 features.
  */
 @DoNotRunWith(Platform.Devel)
 public class Java10Test extends GWTTestCase {
+
+  interface VarArgsFunction<T, R> {
+    R apply(T... args);
+  }
 
   @Override
   public String getModuleName() {
     return "com.google.gwt.dev.jjs.Java10Test";
   }
 
-  @Override
-  public void runTest() throws Throwable {
-    // Only run these tests if -sourceLevel 10 (or greater) is enabled.
-    if (isGwtSourceLevel10()) {
-      super.runTest();
-    }
-  }
-
   public void testLocalVarType_DenotableTypes() {
-    assertFalse(isGwtSourceLevel10());
+    var i = 42;
+    assertEquals(42, i);
+    var s = "42";
+    assertEquals("42", s);
+
+    Supplier<String> initializer = () -> "37";
+    var s2 = initializer.get();
+    // to be sure that s2 was inferred as a string and not an Object
+    String s3 = s2;
+    assertEquals("37", s3);
   }
 
   public void testLocalVarType_Anonymous() {
-    assertFalse(isGwtSourceLevel10());
+    var o = new Object() {
+      int i;
+      String s;
+    };
+    o.i = 42;
+    o.s = "42";
+    assertEquals(42, o.i);
+    assertEquals("42", o.s);
+  }
+
+  public void testLocalVarType_Ternary() {
+    var value = true ? "a" : 'c';
+    checkSerializableDispatch(value);
+    checkComparableDispatch(value);
+    assertEquals("a", value.toString());
+  }
+
+  private void checkSerializableDispatch(Object fail) {
+    fail("should not be treated as object");
+  }
+
+  private void checkSerializableDispatch(Serializable pass) {
+    // pass
+  }
+
+  private void checkComparableDispatch(Object fail) {
+    fail("should not be treated as object");
+  }
+
+  private void checkComparableDispatch(Comparable<?> pass) {
+    // pass
   }
 
   public void testLocalVarType_LambdaCapture() {
-    assertFalse(isGwtSourceLevel10());
+    var s = "42";
+    Supplier<String> supplier = () -> s;
+    assertEquals("42", supplier.get());
   }
 
   public void testLocalVarType_VarArg() {
-    assertFalse(isGwtSourceLevel10());
+    var args = new String[] {"4", "2"};
+    VarArgsFunction<String, String> f = arr -> arr[0] + arr[1];
+    assertEquals("42", f.apply(args));
   }
 
   public void testLocalVarType_LocalClass() {
-    assertFalse(isGwtSourceLevel10());
+    var i = 37;
+    class Local {
+      int m() {
+        var i = 40;
+        return i + 2;
+      }
+
+      int fromOuterScope() {
+        return i;
+      }
+    }
+
+    var l = new Local();
+    assertEquals(37, l.fromOuterScope());
+    assertEquals(42, l.m());
   }
 
   public void testLocalVarType_ForLoop() {
-    assertFalse(isGwtSourceLevel10());
+    var a = new String[] {"4", "2"};
+    var s = "";
+    for (var i = 0; i < a.length; i++) {
+      s += a[i];
+    }
+    assertEquals("42", s);
   }
 
   public void testLocalVarType_EnhancedForLoopArray() {
-    assertFalse(isGwtSourceLevel10());
+    var a = new String[] {"4", "2"};
+    var str = "";
+    for (var s : a) {
+      str += s;
+    }
+    assertEquals("42", str);
   }
 
   public void testLocalVarType_EnhancedNestedForLoopArray() {
-    assertFalse(isGwtSourceLevel10());
+    var m = new int[][] {{1, 2}, {3, 4}};
+    var summ = 0;
+    for (var row : m) {
+      for (var cell : row) {
+        summ += cell;
+      }
+    }
+    assertEquals(10, summ);
   }
 
   public void testLocalVarType_EnhancedForLoopIterable() {
-    assertFalse(isGwtSourceLevel10());
-  }
-
-  private boolean isGwtSourceLevel10() {
-    return JUnitShell.getCompilerOptions().getSourceLevel().compareTo(SourceLevel.JAVA10) >= 0;
+    var list = new ArrayList<String>();
+    list.add("4");
+    list.add("2");
+    var str = "";
+    for (var s : list) {
+      str += s;
+    }
+    assertEquals("42", str);
   }
 }

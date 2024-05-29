@@ -16,13 +16,14 @@
 
 package com.google.gwt.emultest.java8.util;
 
-import com.google.gwt.emultest.java.util.EmulTestBase;
 
 import static java.lang.Double.MAX_VALUE;
 import static java.lang.Double.MIN_VALUE;
 import static java.lang.Double.NEGATIVE_INFINITY;
 import static java.lang.Double.NaN;
 import static java.lang.Double.POSITIVE_INFINITY;
+
+import com.google.gwt.emultest.java.util.EmulTestBase;
 
 import java.util.Arrays;
 import java.util.DoubleSummaryStatistics;

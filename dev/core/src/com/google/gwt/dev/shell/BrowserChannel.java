@@ -198,6 +198,8 @@ public abstract class BrowserChannel {
 
   /**
    * Hook interface for responding to messages.
+   *
+   * @param <T> the BrowserChannel type this implementation is built to handle.
    */
   public abstract static class SessionHandler<T extends BrowserChannel> {
 

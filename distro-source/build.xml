@@ -31,9 +31,8 @@
       <!-- jars -->
       <zipfileset file="${gwt.build.lib}/gwt-dev.jar" prefix="${project.distname}" />
       <zipfileset file="${gwt.build.lib}/gwt-user.jar" prefix="${project.distname}" />
-      <zipfileset file="${gwt.build.lib}/gwt-servlet.jar" prefix="${project.distname}" />
+      <zipfileset file="${gwt.build.lib}/gwt-servlet*.jar" prefix="${project.distname}" />
       <zipfileset file="${gwt.build.lib}/gwt-codeserver.jar" prefix="${project.distname}" />
-      <zipfileset file="${gwt.build.lib}/gwt-servlet-deps.jar" prefix="${project.distname}" />
       <zipfileset file="${gwt.build.lib}/gwt-api-checker.jar" prefix="${project.distname}" />
       <zipfileset file="${gwt.build.lib}/requestfactory*.jar" prefix="${project.distname}" />
 

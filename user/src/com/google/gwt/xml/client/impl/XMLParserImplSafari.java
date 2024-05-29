@@ -69,6 +69,7 @@ public class XMLParserImplSafari extends XMLParserImplStandard {
    * @return parsed JavaScript object
    * @see com.google.gwt.xml.client.impl.XMLParserImpl#parseImpl(java.lang.String)
    */
+  @SuppressWarnings("deprecation")
   @Override
   protected native JavaScriptObject parseImpl(String contents) /*-{
     var domParser =

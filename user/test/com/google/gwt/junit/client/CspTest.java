@@ -31,7 +31,7 @@ public class CspTest extends GWTTestCase {
     return "com.google.gwt.junit.JUnitTest";
   }
 
-  @DoNotRunWith(Platform.HtmlUnitLayout)
+  @DoNotRunWith(Platform.HtmlUnitBug)
   public void testCsp() {
     initClickDidFire();
 

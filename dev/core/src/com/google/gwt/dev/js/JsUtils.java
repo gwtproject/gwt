@@ -47,7 +47,6 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.Collections;
 import java.util.List;
-
 import java.util.regex.Pattern;
 
 /**
@@ -158,9 +157,7 @@ public class JsUtils {
       SourceInfo info, JsExpression base, String... names) {
     JsExpression result = base;
     for (String name : names) {
-      JsNameRef nameRef = new JsNameRef(info, name);
-      nameRef.setQualifier(result);
-      result = nameRef;
+      result = new JsNameRef(info, name, result);
     }
     return result;
   }
@@ -284,8 +281,7 @@ public class JsUtils {
     }
 
     JsArrayLiteral argumentsArray = new JsArrayLiteral(sourceInfo, nonVarargsArguments);
-    JsNameRef argumentsConcat = new JsNameRef(sourceInfo,"concat");
-    argumentsConcat.setQualifier(argumentsArray);
+    JsNameRef argumentsConcat = new JsNameRef(sourceInfo,"concat", argumentsArray);
     return new JsInvocation(sourceInfo, argumentsConcat, varargsArgument);
   }
 
@@ -483,7 +479,7 @@ public class JsUtils {
   /**
    * A JavaScript identifier contains only letters, numbers, _, $ and does not begin with a number.
    * There are actually other valid identifiers, such as ones that contain escaped Unicode
-   * characters but we disallow those for the time being.
+   * characters, but we disallow those for the time being.
    */
   public static boolean isValidJsIdentifier(String name) {
     return JAVASCRIPT_VALID_IDENTIFIER_PATTERN.matcher(name).matches();

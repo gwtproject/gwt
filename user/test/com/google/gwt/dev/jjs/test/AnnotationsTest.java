@@ -24,6 +24,7 @@ import java.lang.annotation.Annotation;
  */
 public class AnnotationsTest extends GWTTestCase {
 
+  @SuppressWarnings("BadAnnotationImplementation")
   private static class Foo implements IFoo {
     @Override
     public Class<? extends Annotation> annotationType() {

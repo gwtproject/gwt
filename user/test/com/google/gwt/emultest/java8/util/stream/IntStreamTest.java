@@ -17,6 +17,8 @@
 package com.google.gwt.emultest.java8.util.stream;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -112,10 +114,30 @@ public class IntStreamTest extends EmulTestBase {
     assertEquals(Arrays.asList("first", "second"), closed);
   }
 
+  // Java8 has the same bug that GWT previously had here, so we're excluding Java8 from running
+  // this test. Presently, legacy dev mode is the only way to actually run this test using the
+  // JVM's own implementation, so marking this DoNotRunWith(Devel) is sufficient to avoid this.
+  @DoNotRunWith(Platform.Devel)
   public void testIterate() {
     assertEquals(
         new int[] {10, 11, 12, 13, 14},
         IntStream.iterate(0, i -> i + 1).skip(10).limit(5).toArray());
+
+    // Infinite stream, verify that it is correctly limited by a downstream step
+    assertEquals(
+            new int[] {0, 1, 2, 3, 4},
+            IntStream.iterate(0, i -> i + 1).limit(5).toArray());
+
+    // Check that the function is called the correct number of times
+    int[] calledCount = {0};
+    int[] array = IntStream.iterate(0, val -> {
+      calledCount[0]++;
+      return val + 1;
+    }).limit(5).toArray();
+    // Verify that the function was called for each value after the seed
+    assertEquals(array.length - 1, calledCount[0]);
+    // Sanity check the values returned
+    assertEquals(new int[] {0, 1, 2, 3, 4}, array);
   }
 
   public void testGenerate() {
@@ -172,6 +194,7 @@ public class IntStreamTest extends EmulTestBase {
     assertFalse(maybe.isPresent());
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testFilter() {
     // unconsumed stream never runs filter
     boolean[] data = {false};
@@ -197,6 +220,7 @@ public class IntStreamTest extends EmulTestBase {
         new int[] {1, 2, 3, 4, 3}, IntStream.of(1, 2, 3, 4, 3).filter(a -> true).toArray());
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testMap() {
     // unconsumed stream never runs map
     int[] data = {0};
@@ -206,6 +230,7 @@ public class IntStreamTest extends EmulTestBase {
     assertEquals(new int[] {2, 4, 6}, IntStream.of(1, 2, 3).map(i -> i * 2).toArray());
   }
 
+  @SuppressWarnings("ReturnValueIgnored")
   public void testPeek() {
     // unconsumed stream never peeks
     boolean[] data = {false};

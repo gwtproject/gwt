@@ -39,6 +39,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.io.Files;
 import com.google.gwt.util.tools.Utility;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -957,9 +958,9 @@ public class CompilerTest extends ArgProcessorTestBase {
 
     assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.7"));
     assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.8"));
-    assertEquals(SourceLevel.JAVA9, SourceLevel.getBestMatchingVersion("1.9"));
-    assertEquals(SourceLevel.JAVA10, SourceLevel.getBestMatchingVersion("1.10"));
-    assertEquals(SourceLevel.JAVA11, SourceLevel.getBestMatchingVersion("1.11"));
+    assertEquals(SourceLevel.JAVA9, SourceLevel.getBestMatchingVersion("9"));
+    assertEquals(SourceLevel.JAVA10, SourceLevel.getBestMatchingVersion("10"));
+    assertEquals(SourceLevel.JAVA11, SourceLevel.getBestMatchingVersion("11"));
 
     // not proper version strings => default to JAVA8.
     assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.6u3"));

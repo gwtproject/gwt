@@ -15,13 +15,15 @@ package com.google.gwt.dev.resource.impl;
 
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
-import com.google.gwt.thirdparty.guava.common.io.Files;
 
 import junit.framework.TestCase;
 
-import java.io.File;
+import org.apache.commons.lang3.SystemUtils;
+
 import java.io.IOException;
 import java.nio.file.FileSystemException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -33,11 +35,11 @@ import java.util.Set;
 public class ResourceAccumulatorTest extends TestCase {
 
   public void testAddFile() throws Exception {
-    File rootDirectory = Files.createTempDir();
-    File subDirectory = createDirectoryIn("subdir", rootDirectory);
+    Path rootDirectory = Files.createTempDirectory(null);
+    Path subDirectory = createDirectoryIn("subdir", rootDirectory);
 
     ResourceAccumulator resourceAccumulator =
-        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
+        new ResourceAccumulator(rootDirectory, createInclusivePathPrefixSet());
 
     assertTrue(getResources(resourceAccumulator).isEmpty());
 
@@ -52,18 +54,18 @@ public class ResourceAccumulatorTest extends TestCase {
   }
 
   public void testDeleteFile() throws Exception {
-    File rootDirectory = Files.createTempDir();
-    File subDirectory = createDirectoryIn("subdir", rootDirectory);
-    File originalFile = createFileIn("SomeFile.java", subDirectory);
+    Path rootDirectory = Files.createTempDirectory(null);
+    Path subDirectory = createDirectoryIn("subdir", rootDirectory);
+    Path originalFile = createFileIn("SomeFile.java", subDirectory);
 
     ResourceAccumulator resourceAccumulator =
-        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
+        new ResourceAccumulator(rootDirectory, createInclusivePathPrefixSet());
 
     List<AbstractResource> resources = getResources(resourceAccumulator);
     assertEquals(1, resources.size());
     assertTrue(resources.get(0).getPath().endsWith("SomeFile.java"));
 
-    originalFile.delete();
+    Files.delete(originalFile);
     waitForFileEvents();
 
     assertTrue(getResources(resourceAccumulator).isEmpty());
@@ -72,16 +74,16 @@ public class ResourceAccumulatorTest extends TestCase {
   }
 
   public void testListensInNewDirectories() throws Exception {
-    File rootDirectory = Files.createTempDir();
+    Path rootDirectory = Files.createTempDirectory(null);
 
     ResourceAccumulator resourceAccumulator =
-        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
+        new ResourceAccumulator(rootDirectory, createInclusivePathPrefixSet());
 
     assertTrue(getResources(resourceAccumulator).isEmpty());
 
     // Create a new directory and contained file AFTER the root directory has started being listened
     // to.
-    File subDirectory = createDirectoryIn("subdir", rootDirectory);
+    Path subDirectory = createDirectoryIn("subdir", rootDirectory);
     createFileIn("New.java", subDirectory);
     waitForFileEvents();
 
@@ -93,13 +95,13 @@ public class ResourceAccumulatorTest extends TestCase {
   }
 
   public void testMultipleListeners() throws Exception {
-    File rootDirectory = Files.createTempDir();
-    File subDirectory = createDirectoryIn("subdir", rootDirectory);
+    Path rootDirectory = Files.createTempDirectory(null);
+    Path subDirectory = createDirectoryIn("subdir", rootDirectory);
 
     ResourceAccumulator resourceAccumulator1 =
-        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
+        new ResourceAccumulator(rootDirectory, createInclusivePathPrefixSet());
     ResourceAccumulator resourceAccumulator2 =
-        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
+        new ResourceAccumulator(rootDirectory, createInclusivePathPrefixSet());
 
     assertTrue(getResources(resourceAccumulator1).isEmpty());
     assertTrue(getResources(resourceAccumulator2).isEmpty());
@@ -120,19 +122,19 @@ public class ResourceAccumulatorTest extends TestCase {
   }
 
   public void testRenameFile() throws Exception {
-    File rootDirectory = Files.createTempDir();
-    File subDirectory = createDirectoryIn("subdir", rootDirectory);
-    File originalFile = createFileIn("OriginalName.java", subDirectory);
-    File renamedFile = new File(subDirectory, "Renamed.java");
+    Path rootDirectory = Files.createTempDirectory(null);
+    Path subDirectory = createDirectoryIn("subdir", rootDirectory);
+    Path originalFile = createFileIn("OriginalName.java", subDirectory);
+    Path renamedFile = subDirectory.resolve("Renamed.java");
 
     ResourceAccumulator resourceAccumulator =
-        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
+        new ResourceAccumulator(rootDirectory, createInclusivePathPrefixSet());
 
     List<AbstractResource> resources = getResources(resourceAccumulator);
     assertEquals(1, resources.size());
     assertTrue(resources.get(0).getPath().endsWith("OriginalName.java"));
 
-    originalFile.renameTo(renamedFile);
+    Files.move(originalFile, renamedFile);
     waitForFileEvents();
 
     resources = getResources(resourceAccumulator);
@@ -143,21 +145,21 @@ public class ResourceAccumulatorTest extends TestCase {
   }
 
   public void testRenameDirectory() throws Exception {
-    File rootDirectory = Files.createTempDir();
-    File subDirectory = createDirectoryIn("original_dir", rootDirectory);
+    Path rootDirectory = Files.createTempDirectory(null);
+    Path subDirectory = createDirectoryIn("original_dir", rootDirectory);
     createFileIn("Name1.java", subDirectory);
     createFileIn("Name2.java", subDirectory);
-    File renamedSubDirectory = new File(rootDirectory, "new_dir");
+    Path renamedSubDirectory = rootDirectory.resolve("new_dir");
 
     ResourceAccumulator resourceAccumulator =
-        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
+        new ResourceAccumulator(rootDirectory, createInclusivePathPrefixSet());
 
     List<AbstractResource> resources = getResources(resourceAccumulator);
     assertEquals(2, resources.size());
     assertTrue(resources.get(0).getPath().endsWith("original_dir/Name1.java"));
     assertTrue(resources.get(1).getPath().endsWith("original_dir/Name2.java"));
 
-    subDirectory.renameTo(renamedSubDirectory);
+    Files.move(subDirectory, renamedSubDirectory);
     waitForFileEvents();
 
     resources = getResources(resourceAccumulator);
@@ -169,22 +171,25 @@ public class ResourceAccumulatorTest extends TestCase {
   }
 
   public void testRenameParentDirectory() throws Exception {
-    File rootDirectory = Files.createTempDir();
-    File parentDirectory = createDirectoryIn("original_dir", rootDirectory);
-    File subDirectory = createDirectoryIn("subdir", parentDirectory);
+    if (SystemUtils.IS_OS_WINDOWS) {
+      return; // moving a directory while WatchService is running -> access denied
+    }
+    Path rootDirectory = Files.createTempDirectory(null);
+    Path parentDirectory = createDirectoryIn("original_dir", rootDirectory);
+    Path subDirectory = createDirectoryIn("subdir", parentDirectory);
     createFileIn("Name1.java", subDirectory);
     createFileIn("Name2.java", subDirectory);
-    File renamedParentDirectory = new File(rootDirectory, "new_dir");
+    Path renamedParentDirectory = rootDirectory.resolve("new_dir");
 
     ResourceAccumulator resourceAccumulator =
-        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
+        new ResourceAccumulator(rootDirectory, createInclusivePathPrefixSet());
 
     List<AbstractResource> resources = getResources(resourceAccumulator);
     assertEquals(2, resources.size());
     assertTrue(resources.get(0).getPath().endsWith("original_dir/subdir/Name1.java"));
     assertTrue(resources.get(1).getPath().endsWith("original_dir/subdir/Name2.java"));
 
-    parentDirectory.renameTo(renamedParentDirectory);
+    Files.move(parentDirectory, renamedParentDirectory);
     waitForFileEvents();
 
     resources = getResources(resourceAccumulator);
@@ -196,19 +201,22 @@ public class ResourceAccumulatorTest extends TestCase {
   }
 
   public void testSymlinkInfiniteLoop() throws Exception {
-    File rootDirectory = Files.createTempDir();
-    File subDirectory = Files.createTempDir();
+    if (SystemUtils.IS_OS_WINDOWS) {
+      return; // symlinks not working on Windows
+    }
+    Path rootDirectory = Files.createTempDirectory(null);
+    Path subDirectory = Files.createTempDirectory(null);
 
     ResourceAccumulator resourceAccumulator =
-        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
+        new ResourceAccumulator(rootDirectory, createInclusivePathPrefixSet());
 
     assertTrue(getResources(resourceAccumulator).isEmpty());
 
     // Symlink in a loop
-    java.nio.file.Files.createSymbolicLink(new File(rootDirectory, "sublink").toPath(),
-        subDirectory.toPath()).toFile();
-    java.nio.file.Files.createSymbolicLink(new File(subDirectory, "sublink").toPath(),
-        rootDirectory.toPath()).toFile();
+    java.nio.file.Files.createSymbolicLink(rootDirectory.resolve("sublink"),
+        subDirectory);
+    java.nio.file.Files.createSymbolicLink(subDirectory.resolve("sublink"),
+        rootDirectory);
     createFileIn("New.java", subDirectory);
     waitForFileEvents();
 
@@ -224,21 +232,24 @@ public class ResourceAccumulatorTest extends TestCase {
   }
 
   public void testSymlinks() throws Exception {
-    File scratchDirectory = Files.createTempDir();
-    File newFile = createFileIn("New.java", scratchDirectory);
-    File rootDirectory = Files.createTempDir();
-    File subDirectory = Files.createTempDir();
+    if (SystemUtils.IS_OS_WINDOWS) {
+      return; // symlinks not working on Windows
+    }
+    Path scratchDirectory = Files.createTempDirectory(null);
+    Path newFile = createFileIn("New.java", scratchDirectory);
+    Path rootDirectory = Files.createTempDirectory(null);
+    Path subDirectory = Files.createTempDirectory(null);
 
     ResourceAccumulator resourceAccumulator =
-        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
+        new ResourceAccumulator(rootDirectory, createInclusivePathPrefixSet());
 
     assertTrue(getResources(resourceAccumulator).isEmpty());
 
     // Symlink in a subdirectory and then symlink in a contained file.
-    java.nio.file.Files.createSymbolicLink(new File(rootDirectory, "sublink").toPath(),
-        subDirectory.toPath()).toFile();
-    java.nio.file.Files.createSymbolicLink(new File(subDirectory, "New.java").toPath(),
-        newFile.toPath()).toFile();
+    Files.createSymbolicLink(rootDirectory.resolve("sublink"),
+        subDirectory);
+    Files.createSymbolicLink(subDirectory.resolve("New.java"),
+        newFile);
     waitForFileEvents();
 
     List<AbstractResource> resources = getResources(resourceAccumulator);
@@ -248,16 +259,14 @@ public class ResourceAccumulatorTest extends TestCase {
     resourceAccumulator.shutdown();
   }
 
-  private static File createDirectoryIn(String fileName, File inDirectory) {
-    File newDirectory = new File(inDirectory, fileName);
-    newDirectory.mkdir();
-    return newDirectory;
+  private static Path createDirectoryIn(String fileName, Path inDirectory) throws IOException {
+    Path newDirectory = inDirectory.resolve(fileName);
+    return Files.createDirectory(newDirectory);
   }
 
-  private static File createFileIn(String fileName, File inDirectory) throws IOException {
-    File newFile = new File(inDirectory, fileName);
-    newFile.createNewFile();
-    return newFile;
+  private static Path createFileIn(String fileName, Path inDirectory) throws IOException {
+    Path newFile = inDirectory.resolve(fileName);
+    return Files.createFile(newFile);
   }
 
   private List<AbstractResource> getResources(ResourceAccumulator resourceAccumulator)
@@ -284,7 +293,7 @@ public class ResourceAccumulatorTest extends TestCase {
     PathPrefixSet pathPrefixSet = new PathPrefixSet();
     pathPrefixSet.add(new PathPrefix("", null));
 
-    // Keep the the reference until the end of the test to create a strong reference, otherwise
+    // Keep the reference until the end of the test to create a strong reference, otherwise
     // will get GCed as ResourceAccumulator refers to it weakly.
     pathPrefixes.add(pathPrefixSet);
     return pathPrefixSet;

@@ -62,6 +62,7 @@ public abstract class Linker {
    * intended to support linkers that must compile against older versions of
    * GWT.
    */
+  @SuppressWarnings("ReturnValueIgnored")
   public final boolean isShardable() {
     if (getClass().isAnnotationPresent(Shardable.class)) {
       return true;

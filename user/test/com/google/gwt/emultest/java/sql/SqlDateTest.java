@@ -16,6 +16,7 @@
 package com.google.gwt.emultest.java.sql;
 
 import com.google.gwt.junit.client.GWTTestCase;
+
 import java.sql.Date;
 
 /**

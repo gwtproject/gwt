@@ -7,13 +7,13 @@ Checkstyle-Configuration: GWT Checks for Tests
 Description:
 A more lenient set of style checks for test cases, needed because test often need to do funkier stuff.
 -->
-<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.2//EN" "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+<!DOCTYPE module PUBLIC "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN" "https://checkstyle.org/dtds/configuration_1_3.dtd">
 <module name="Checker">
     <property name="severity" value="warning"/>
     <module name="RegexpHeader">
        <property name="fileExtensions" value="java"/> 
        <property name="severity" value="error"/>
-       <property name="header" value="^/\*[ ]*$\n^ \* Copyright 20(0[6789]|[12][0-9]) Google Inc\.$\n^ \*[ ]*$\n^ \* Licensed under the Apache License, Version 2\.0 \(the &quot;License&quot;\); you may not( use this file except)?$\n^ \* (use this file except )?in compliance with the License\. You may obtain a copy of( the License at)?$\n^ \* the License at$\n^ \*[ ]*$\n^ \* http://www\.apache\.org/licenses/LICENSE-2\.0$\n^ \*[ ]*\n \* Unless required by applicable law or agreed to in writing, software( distributed under the License)?$\n^ \* (distributed under the License )?is distributed on an &quot;AS IS&quot; BASIS, WITHOUT( WARRANTIES OR CONDITIONS OF ANY KIND, either express)?$\n^ \* (WARRANTIES OR CONDITIONS OF ANY KIND, either express )?or implied\. See the( License for the specific language governing permissions and limitations under)?$\n^ \* License for the specific language governing permissions and limitations under$\n^ \* the License\.$\n^ \*/$"/>
+       <property name="header" value="^/\*[ ]*$\n^ \* Copyright 20(0[6789]|[12][0-9]) (Google Inc\.|GWT Project Authors)$\n^ \*[ ]*$\n^ \* Licensed under the Apache License, Version 2\.0 \(the &quot;License&quot;\); you may not( use this file except)?$\n^ \* (use this file except )?in compliance with the License\. You may obtain a copy of( the License at)?$\n^ \* the License at$\n^ \*[ ]*$\n^ \* http://www\.apache\.org/licenses/LICENSE-2\.0$\n^ \*[ ]*\n \* Unless required by applicable law or agreed to in writing, software( distributed under the License)?$\n^ \* (distributed under the License )?is distributed on an &quot;AS IS&quot; BASIS, WITHOUT( WARRANTIES OR CONDITIONS OF ANY KIND, either express)?$\n^ \* (WARRANTIES OR CONDITIONS OF ANY KIND, either express )?or implied\. See the( License for the specific language governing permissions and limitations under)?$\n^ \* License for the specific language governing permissions and limitations under$\n^ \* the License\.$\n^ \*/$"/>
        <property name="multiLines" value="6,13"/>
     </module>
     <module name="FileTabCharacter">
@@ -23,7 +23,6 @@ A more lenient set of style checks for test cases, needed because test often nee
     </module>
     <module name="TreeWalker">
         <property name="fileExtensions" value="java"/> 
-        <module name="FileContentsHolder"/>
         <module name="InterfaceIsType">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="error"/>
             <property name="severity" value="ignore"/>
@@ -90,20 +89,17 @@ A more lenient set of style checks for test cases, needed because test often nee
         <module name="JavadocMethod">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="info"/>
             <property name="severity" value="info"/>
-            <property name="scope" value="protected"/>
-            <property name="allowUndeclaredRTE" value="true"/>
+            <property name="accessModifiers" value="public, protected"/>
             <property name="allowMissingParamTags" value="true"/>
-            <property name="allowMissingThrowsTags" value="true"/>
             <property name="allowMissingReturnTag" value="true"/>
-            <property name="allowMissingJavadoc" value="true"/>
-            <property name="allowMissingPropertyJavadoc" value="true"/>
-            <property name="logLoadErrors" value="true"/>
             <property name="tokens" value="METHOD_DEF"/>
         </module>
-        <module name="CustomImportOrder">
-            <property name="sortImportsInGroupAlphabetically" value="true"/>
-            <property name="separateLineBetweenGroups" value="true"/>
-            <property name="customImportOrderRules" value="STATIC###THIRD_PARTY_PACKAGE"/>
+        <module name="ImportOrder">
+            <property name="groups" value="/^com\.google\./, /^cern\./, /^com\./, /^junit\./, /^net\./, /^org\./, /^(java|javaemul|jsinterop)\./, /^javax\./" />
+            <property name="option" value="top" />
+            <property name="separated" value="true" />
+            <property name="separatedStaticGroups" value="true" />
+            <property name="sortStaticImportsAlphabetically" value="true" />
         </module>
         <module name="DefaultComesLast">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="error"/>
@@ -215,33 +211,30 @@ A more lenient set of style checks for test cases, needed because test often nee
         </module>
         <module name="RedundantModifier"/>
         <module name="EqualsHashCode"/>
+        <module name="SuppressionCommentFilter">
+            <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
+            <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
+            <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
+            <property name="checkFormat" value="MethodName"/>
+        </module>
+        <module name="SuppressionCommentFilter">
+            <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
+            <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
+            <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
+            <property name="checkFormat" value="MemberName"/>
+        </module>
+        <module name="SuppressionCommentFilter">
+            <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
+            <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
+            <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
+            <property name="checkFormat" value="ParameterName"/>
+        </module>
     </module>
-    <module name="JavadocPackage">
-        <property name="severity" value="ignore"/>
-    </module>
-    <module name="SuppressionCommentFilter">
+    <module name="SuppressWithPlainTextCommentFilter">
         <property name="offCommentFormat" value="CHECKSTYLE_OFF"/>
         <property name="onCommentFormat" value="CHECKSTYLE_ON"/>
     </module>
-    <module name="SuppressionCommentFilter">
-       <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
-      <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
-      <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
-      <property name="checkFormat" value="MethodName"/>
-    </module>
-    <module name="SuppressionCommentFilter">
-       <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
-      <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
-      <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
-      <property name="checkFormat" value="MemberName"/>
-    </module>
-    <module name="SuppressionCommentFilter">
-       <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
-      <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
-      <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
-      <property name="checkFormat" value="ParameterName"/>
-    </module>
-    <module name="SuppressionFilter">
-        <property name="file" value="eclipse/settings/code-style/gwt-checkstyle-suppressions.xml"/>
+    <module name="JavadocPackage">
+        <property name="severity" value="ignore"/>
     </module>
 </module>

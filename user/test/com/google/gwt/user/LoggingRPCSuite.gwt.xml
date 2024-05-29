@@ -19,24 +19,16 @@
   <servlet path='/loggingrpc'
     class='com.google.gwt.user.server.rpc.LoggingRPCTestServiceImpl' />
 
+  <!-- Enabling sourcemaps will stop JUnit.gwt.xml from using emulated stack mode -->
   <set-property name="compiler.useSourceMaps" value="true"/>
+  <!-- This is the default, set explicitly to ensure we are set correctly -->
+  <set-property name="compiler.stackMode" value="native"/>
 
-
-  <!-- Turn off emulation to test non-sourcemap mode -->
-  <set-property name="compiler.stackMode" value="native"/> 
-  <!-- when Chrome is enabled, turn off stack trace emulation -->
-  <set-property name="compiler.stackMode" value="strip"> 
-    <when-property-is name="user.agent" value="safari"/>
-  </set-property>
-
-  <!-- when stack trace stripping is enabled, we need to replace the Null collector 
-       with one that does something for Chrome -->
-  <replace-with class="com.google.gwt.core.client.impl.StackTraceCreator.CollectorChrome">
+  <!-- When stack trace stripping is enabled, we need to replace the Null collector with one that
+       does something. Not currently in use, see https://github.com/gwtproject/gwt/issues/9956 for
+       more information. -->
+  <replace-with class="com.google.gwt.core.client.impl.StackTraceCreator.CollectorModern">
     <when-type-is class="com.google.gwt.core.client.impl.StackTraceCreator.Collector" />
-    <!-- For now, only Chrome provides Error.stack support, so we hijack the
-         entire WebKit permutation -->
-    <when-property-is name="user.agent" value="safari" />
-    <when-property-is name="compiler.useSourceMaps" value="true" />
+    <when-property-is name="compiler.stackMode" value="strip" />
   </replace-with>
-
 </module>

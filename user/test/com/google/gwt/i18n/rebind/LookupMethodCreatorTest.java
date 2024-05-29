@@ -15,6 +15,8 @@
  */
 package com.google.gwt.i18n.rebind;
 
+import static org.mockito.Mockito.mock;
+
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -34,8 +36,6 @@ import com.google.gwt.user.rebind.SourceWriter;
 import com.google.gwt.user.rebind.StringSourceWriter;
 
 import junit.framework.TestCase;
-
-import static org.mockito.Mockito.mock;
 
 import java.util.List;
 

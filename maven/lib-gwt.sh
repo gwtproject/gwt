@@ -76,7 +76,7 @@ function maven-gwt() {
     popd > /dev/null
   done
 
-  gwtLibs='dev user servlet codeserver'
+  gwtLibs='dev user servlet servlet-jakarta codeserver'
 
   echo "Removing bundled third-parties from gwt-dev"
   zip -q $GWT_EXTRACT_DIR/gwt-dev.jar --copy --out $GWT_EXTRACT_DIR/gwt-dev-trimmed.jar \
@@ -115,13 +115,10 @@ function maven-gwt() {
     gwtPomFile=$pomDir/gwt/gwt-$i/pom.xml
     SOURCES_FILE=gwt-${i}-sources.jar
     SOURCES_PATH_FILE=$GWT_EXTRACT_DIR/$SOURCES_FILE
-    # If there are no sources, use gwt-user sources.
-    # This is a bit hacky but Sonatype requires a
-    # source jar for Central, and lack of sources
-    # should only happen for gwt-servlet which is
-    # basically a subset of gwt-user.
+    # If there are no sources, fail, this is a requirement of maven central
     if [ ! -f $SOURCES_PATH_FILE ]; then
-      SOURCES_PATH_FILE=$GWT_EXTRACT_DIR/gwt-user-sources.jar
+      echo "ERROR: sources jar not found for $i"
+      exit 1
     fi
 
     maven-deploy-file $mavenRepoUrl $mavenRepoId "$CUR_FILE" $gwtPomFile "$JAVADOC_FILE_PATH" "$SOURCES_PATH_FILE" || die
@@ -130,7 +127,7 @@ function maven-gwt() {
   # Deploy RequestFactory jars
   maven-deploy-file $mavenRepoUrl $mavenRepoId $pomDir/requestfactory/pom.xml $pomDir/requestfactory/pom.xml || die
 
-  for i in client server apt
+  for i in client server apt server-jakarta
   do
     maven-deploy-file $mavenRepoUrl $mavenRepoId $GWT_EXTRACT_DIR/requestfactory-${i}.jar $pomDir/requestfactory/${i}/pom.xml \
         $JAVADOC_FILE_PATH $GWT_EXTRACT_DIR/requestfactory-${i}-src.jar \

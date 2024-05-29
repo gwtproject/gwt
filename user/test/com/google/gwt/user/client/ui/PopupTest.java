@@ -20,6 +20,8 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
@@ -145,7 +147,11 @@ public class PopupTest extends GWTTestCase {
   /**
    * Tests that a large PopupPanel is not positioned off the top or left edges
    * of the browser window, making part of the panel unreachable.
+   *
+   * <p>This test is broken in HtmlUnit 2.55.0, see
+   * https://github.com/HtmlUnit/htmlunit/issues/382.</p>
    */
+  @DoNotRunWith(Platform.HtmlUnitLayout)
   public void testCenterLargePopup() {
     PopupPanel popup = new PopupPanel();
     popup.setHeight("4096px");
@@ -318,6 +324,11 @@ public class PopupTest extends GWTTestCase {
     }
   }
 
+  /**
+   * This test is broken in HtmlUnit 2.55.0, see
+   * https://github.com/HtmlUnit/htmlunit/issues/382.
+   */
+  @DoNotRunWith(Platform.HtmlUnitLayout)
   public void testPopup() {
     // Get rid of window margins so we can test absolute position.
     Window.setMargin("0px");

@@ -117,7 +117,7 @@ public interface HasJsInfo extends HasJsName, CanBeJsNative {
 
     private static boolean startsWithCamelCase(String string, String prefix) {
       return string.length() > prefix.length() && string.startsWith(prefix)
-          && Character.isUpperCase(string.charAt(prefix.length()));
+          && !Character.isLowerCase(string.charAt(prefix.length()));
     }
   }
 

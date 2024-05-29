@@ -26,7 +26,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
- * Used by trunk/doc/build.xml to generate the packages.properties file.
+ * Used by doc/build.xml to generate the packages.properties file.
  */
 public class FindPackages {
 
@@ -55,13 +55,20 @@ public class FindPackages {
   private static final String[] JAVA_PKGS = {
     "java.beans",
     "java.io",
-    "java.lang", "java.lang.annotation", "java.lang.reflect",
+    "java.lang",
+    "java.lang.annotation",
+    "java.lang.reflect",
     "java.math",
     "java.nio.charset",
     "java.security",
     "java.sql",
     "java.text",
-    "java.util", "java.util.concurrent", "java.util.concurrent.atomic", "java.util.function", "java.util.logging", "java.util.stream"
+    "java.util",
+    "java.util.concurrent",
+    "java.util.concurrent.atomic",
+    "java.util.function",
+    "java.util.logging",
+    "java.util.stream"
   };
 
   /**
@@ -78,7 +85,7 @@ public class FindPackages {
    */
   private static final String[] SOURCE_DIRS = {
       "user/src", "user/javadoc", "user/super", "dev/core/src",
-      "dev/core/super"};
+      "dev/core/super", "build/out/user/jakarta-src"};
 
   /**
    * Individual user classes to include, even if the rest of their packages
@@ -90,14 +97,14 @@ public class FindPackages {
       "user/src/com/google/gwt/i18n/server/GwtLocaleFactoryImpl.java",
       "user/src/com/google/gwt/i18n/server/GwtLocaleImpl.java"};
 
-  private static Pattern exclusions;
+  private static final Pattern exclusions;
   static {
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < EXCLUSIONS.length; i++) {
       String ex = EXCLUSIONS[i];
       ex = ex.replace(".", "\\.");
       if (i < EXCLUSIONS.length - 1) {
-        sb.append(ex + "|");
+        sb.append(ex).append("|");
       } else {
         sb.append(ex);
       }
@@ -128,14 +135,16 @@ public class FindPackages {
       out.println("JAVA_PKGS=\\");
       for (int i = 0; i < JAVA_PKGS.length; i++) {
         if (i < JAVA_PKGS.length - 1) {
-          out.println(JAVA_PKGS[i] + ";\\");
+          out.println(JAVA_PKGS[i] + ",\\");
         } else {
           out.println(JAVA_PKGS[i]);
         }
       }
       out.println("# The last package should not have a trailing semicolon");
-      out.println("");
-      out.println("# Individual classes to include when we don't want to include an entire package");
+      out.println();
+      out.println(
+              "# Individual classes to include when we don't want to include an entire package"
+      );
       out.println("USER_CLASSES=\\");
 
       // Output a package-info.java once for each package
@@ -145,15 +154,15 @@ public class FindPackages {
         String classPath = className.substring(0, className.lastIndexOf('/'));
         if (!classPaths.contains(classPath)) {
           classPaths.add(classPath);
-          out.println("${gwt.root}/" + classPath + "/package-info.java" + ":\\");
+          out.println("${gwt.root}/" + classPath + "/package-info.java" + ",\\");
         }
         if (i < USER_CLASSES.length - 1) {
-          out.println("${gwt.root}/" + className + ":\\");
+          out.println("${gwt.root}/" + className + ",\\");
         } else {
           out.println("${gwt.root}/" + className);
         }
       }
-      out.println("");
+      out.println();
       out.println("# Packages to include");
       out.println("USER_PKGS=\\");
 
@@ -171,7 +180,7 @@ public class FindPackages {
 
       for (int i = 0; i < packages.size(); i++) {
         if (i < packages.size() - 1) {
-          out.println(packageList.get(i) + ";\\");
+          out.println(packageList.get(i) + ",\\");
         } else {
           out.println(packageList.get(i));
         }

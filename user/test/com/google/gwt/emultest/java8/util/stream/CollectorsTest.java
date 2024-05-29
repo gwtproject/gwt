@@ -466,7 +466,7 @@ public class CollectorsTest extends EmulTestBase {
    * This method attempts to apply a collector to items as a stream might do, so that we can simply
    * verify the output. Taken from the Collector class's javadoc.
    */
-  private static <T, A, R> void applyItems(
+  public static <T, A, R> void applyItems(
       R expected, Collector<T, A, R> collector, T t1, T t2, BiPredicate<R, R> equals) {
     assertTrue(
         "failed without splitting",
@@ -479,7 +479,7 @@ public class CollectorsTest extends EmulTestBase {
    * This method attempts to apply a collector to items as a stream might do, so that we
    * can simply verify the output. Taken from the Collector class's javadoc.
    */
-  private static <T, A, R> void applyItems(R expected, Collector<T, A, R> collector, T t1, T t2) {
+  public static <T, A, R> void applyItems(R expected, Collector<T, A, R> collector, T t1, T t2) {
     applyItems(expected, collector, t1, t2, Object::equals);
   }
 

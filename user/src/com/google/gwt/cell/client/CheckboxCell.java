@@ -46,6 +46,7 @@ public class CheckboxCell extends AbstractEditableCell<Boolean, Boolean> {
   /**
    * Construct a new {@link CheckboxCell}.
    */
+  @SuppressWarnings("BoxedPrimitiveEquality")
   public CheckboxCell() {
     this(false);
   }
@@ -91,7 +92,8 @@ public class CheckboxCell extends AbstractEditableCell<Boolean, Boolean> {
   }
 
   @Override
-  public void onBrowserEvent(Context context, Element parent, Boolean value, 
+  @SuppressWarnings("BoxedPrimitiveEquality")
+  public void onBrowserEvent(Context context, Element parent, Boolean value,
       NativeEvent event, ValueUpdater<Boolean> valueUpdater) {
     String type = event.getType();
 

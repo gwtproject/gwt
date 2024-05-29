@@ -243,6 +243,7 @@ public class GWTTestCaseTest extends GWTTestCaseTestBase {
     assertNull("msg", "Hello");
   }
 
+  @SuppressWarnings("JUnitAssertSameCheck")
   public void testAssertSame() {
     assertSame(obj1, obj1);
     assertSame("msg", obj1, obj1);

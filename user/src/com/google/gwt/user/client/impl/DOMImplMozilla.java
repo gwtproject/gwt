@@ -26,6 +26,7 @@ class DOMImplMozilla extends DOMImplStandard {
     addMozillaCaptureEventDispatchers();
   }
 
+  @SuppressWarnings("deprecation")
   private static native void addMozillaCaptureEventDispatchers() /*-{
     @com.google.gwt.user.client.impl.DOMImplStandard::captureEventDispatchers['DOMMouseScroll'] =
         @com.google.gwt.user.client.impl.DOMImplStandard::dispatchCapturedMouseEvent(*);
@@ -50,6 +51,7 @@ class DOMImplMozilla extends DOMImplStandard {
     initSyntheticMouseUpEvents();
   }
 
+  @SuppressWarnings("deprecation")
   private native void initSyntheticMouseUpEvents() /*-{
     $wnd.addEventListener(
       'mouseout',

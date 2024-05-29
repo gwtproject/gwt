@@ -8,7 +8,7 @@
         <version>4</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.google.web.bindery</groupId>
+    <groupId>org.gwtproject.web.bindery</groupId>
     <artifactId>requestfactory</artifactId>
     <packaging>pom</packaging>
     <name>RequestFactory</name>
@@ -25,16 +25,36 @@
             <dependency>
                 <groupId>com.google.web.bindery</groupId>
                 <artifactId>requestfactory-apt</artifactId>
+                <version>2.10.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.gwtproject.web.bindery</groupId>
+                <artifactId>requestfactory-apt</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.web.bindery</groupId>
+                <artifactId>requestfactory-client</artifactId>
+                <version>2.10.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.gwtproject.web.bindery</groupId>
                 <artifactId>requestfactory-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.web.bindery</groupId>
                 <artifactId>requestfactory-server</artifactId>
+                <version>2.10.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.gwtproject.web.bindery</groupId>
+                <artifactId>requestfactory-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.gwtproject.web.bindery</groupId>
+                <artifactId>requestfactory-server-jakarta</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

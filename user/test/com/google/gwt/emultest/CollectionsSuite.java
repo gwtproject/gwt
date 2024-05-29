@@ -40,6 +40,7 @@ import com.google.gwt.emultest.java.util.TreeMapStringStringWithComparatorTest;
 import com.google.gwt.emultest.java.util.TreeSetIntegerTest;
 import com.google.gwt.emultest.java.util.TreeSetIntegerWithComparatorTest;
 import com.google.gwt.emultest.java.util.VectorTest;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;

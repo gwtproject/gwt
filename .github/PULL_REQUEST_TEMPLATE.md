@@ -1,11 +1,10 @@
-!!! GWT DOES NOT ACCEPT PULL REQUESTS ON GITHUB !!!
+Thanks for your contribution to the GWT Project!
 
-Thank you for creating a patch for GWT. This project uses Gerrit
-to sign CLAs (Contributor License Agreement) and to review
-code contributions. For that reason we can not accept pull requests
-on Github.
+Please make sure your pull request has a short, concise title, and a
+clear description that can be used as a commit message for the entire
+pull request when it is squashed into a single commit.
 
-
-If you want your patch to be accepted please follow the instructions on
-
-http://www.gwtproject.org/makinggwtbetter.html
+The message should end with a reference to the github issue being
+addressed in this pull request, e.g. "Fixes #42" to close the linked
+issue, or "Partial #42" to indicate that this merge will address it,
+but that it isn't ready to be closed yet.

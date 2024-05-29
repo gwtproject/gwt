@@ -3,12 +3,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-	<groupId>org.sonatype.oss</groupId>
-	<artifactId>oss-parent</artifactId>
-	<version>4</version>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>4</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.google.gwt</groupId>
+    <groupId>org.gwtproject</groupId>
     <artifactId>gwt</artifactId>
     <packaging>pom</packaging>
     <name>GWT</name>
@@ -21,33 +21,58 @@
         </license>
     </licenses>
     <properties>
-      <jetty.version>9.2.14.v20151106</jetty.version>
-      <asm.version>7.1</asm.version>
+      <jetty.version>9.4.44.v20210927</jetty.version>
+      <asm.version>9.6</asm.version>
     </properties>
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwt-user</artifactId>
+                <version>2.10.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.gwtproject</groupId>
+                <artifactId>gwt-user</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-dev</artifactId>
+                <version>2.10.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.gwtproject</groupId>
                 <artifactId>gwt-dev</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwt-codeserver</artifactId>
+                <version>2.10.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.gwtproject</groupId>
+                <artifactId>gwt-codeserver</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwt-servlet</artifactId>
+                <version>2.10.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.gwtproject</groupId>
+                <artifactId>gwt-servlet</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.google.web.bindery</groupId>
+                <groupId>org.gwtproject</groupId>
+                <artifactId>gwt-servlet-jakarta</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.gwtproject.web.bindery</groupId>
                 <artifactId>requestfactory</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>
@@ -118,7 +143,7 @@
             <dependency>
                 <groupId>net.sourceforge.htmlunit</groupId>
                 <artifactId>htmlunit</artifactId>
-                <version>2.19</version>
+                <version>2.55.0</version>
             </dependency>
             <dependency>
                 <groupId>org.w3c.css</groupId>

@@ -19,29 +19,15 @@ function installScript(filename) {
     var doc = getInstallLocationDoc();
     var docbody = doc.body;
     var script;
-    // for sourcemaps, we inject textNodes into the script element on Chrome
-    if (navigator.userAgent.indexOf("Chrome") > -1 && window.JSON) {
-      var scriptFrag = doc.createDocumentFragment()
-      // surround code with eval until crbug #90707 
-      scriptFrag.appendChild(doc.createTextNode("eval(\""));
-      for (var i = 0; i < code.length; i++) {
-        // escape newlines, backslashes, and quotes with JSON.stringify
-        // rather than create multiple script tags which mess up line numbers, we use 1 tag, multiple text nodes
-        var c = window.JSON.stringify(code[i]); 
-        // trim beginning/end quotes
-        scriptFrag.appendChild(doc.createTextNode(c.substring(1, c.length - 1)));
-      }
-      // close the eval
-      scriptFrag.appendChild(doc.createTextNode("\");"));
+    // for sourcemaps, we inject the code as a single string for Chrome
+    if (navigator.userAgent.indexOf("Chrome") > -1) {
       script = doc.createElement('script');
-      script.language='javascript';
-      script.appendChild(scriptFrag);
+      script.text = code.join('');
       docbody.appendChild(script);
       removeScript(docbody, script);
     } else {
       for (var i = 0; i < code.length; i++) {
         script = doc.createElement('script');
-        script.language='javascript';
         script.text = code[i];
         docbody.appendChild(script);
         removeScript(docbody, script);

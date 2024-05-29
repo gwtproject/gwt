@@ -16,7 +16,6 @@
 package java.util;
 
 import java.io.Serializable;
-
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 

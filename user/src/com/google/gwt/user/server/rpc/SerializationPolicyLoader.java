@@ -51,6 +51,19 @@ public final class SerializationPolicyLoader {
    */
   public static final String SERIALIZATION_POLICY_FILE_ENCODING = "UTF-8";
 
+  /**
+   * System property to enable gwt-rpc enhanced classes. To use this, set the JVM system property
+   * with name {@value ENABLE_GWT_ENHANCED_CLASSES_PROPERTY} to {@code true}, any other value will
+   * leave this feature disabled in the server at runtime.
+   */
+  public static final String ENABLE_GWT_ENHANCED_CLASSES_PROPERTY = "gwt.enhancedClasses.enabled";
+
+  /**
+   * Flag to enable using enhanced classes, for applications that need them and are taking
+   * appropriate steps to secure them. Defaults to false.
+   */
+  public static final boolean ENABLE_ENHANCED_CLASSES = "true".equals(System.getProperty(ENABLE_GWT_ENHANCED_CLASSES_PROPERTY));
+
   private static final String FORMAT_ERROR_MESSAGE = "Expected: className, "
       + "[true | false], [true | false], [true | false], [true | false], typeId, signature";
   

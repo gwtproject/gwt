@@ -1,6 +1,7 @@
 ## GWT
 
-  [![nightly](https://img.shields.io/jenkins/s/http/build.gwtproject.org/gwt.svg?label=nightly)](http://build.gwtproject.org/job/gwt/)
+  [![latest release](https://img.shields.io/github/v/release/gwtproject/gwt)](https://github.com/gwtproject/gwt/releases)
+  [![nightly](https://github.com/gwtproject/gwt/actions/workflows/full-check.yml/badge.svg)](https://github.com/gwtproject/gwt/actions/workflows/full-check.yml)
   [![gitter](https://img.shields.io/badge/gitter.im-Join%20Chat-green.svg)](https://gitter.im/gwtproject/gwt/)
   [![irc](https://img.shields.io/badge/irc:%20chat.freenode.net-%23%23gwt-green.svg)](https://webchat.freenode.net/)
 
@@ -27,10 +28,6 @@
 
    `$ ant clean dist-dev`
 
-   or if you don't have `python` and `g++` just run
-
-   `$ ant clean dist-dev`
-
    Then you will get all `.jar` files in the folder `build/lib` and
    the redistributable file will be: `build/dist/gwt-0.0.0.zip`
 
@@ -41,6 +38,8 @@
  - To compile everything including examples you have to run
 
    `$ ant clean dist`
+   
+ - To create maven artifacts (after building .jar using ant), use [following guide](./maven/README.txt).
 
 ### How to verify GWT code conventions:
 
@@ -51,7 +50,7 @@
    everything including tests, to check APIs, and to verify code style.
    It shouldn't take longer than 3-4 minutes.
 
-   `$ ant compile.tests apicheck checkstyle
+   `$ ant compile.tests apicheck checkstyle`
 
 ### How to run GWT tests
 
@@ -110,14 +109,14 @@
     Module         | Task                                  | Properties                           | Default
     ---------------|---------------------------------------|--------------------------------------|-------------------
     dev/core       | test                                  | gwt.junit.testcase.dev.core.includes | `**/com/google/**/*Test.class`
-                   |                                       | gwt.junit.testcase.dev.core.excludes |
+    &nbsp;         |                                       | gwt.junit.testcase.dev.core.excludes |
     user           | test                                  | gwt.junit.testcase.includes          | `**/*Suite.class`
     user           | test.nongwt                           | gwt.nongwt.testcase.includes         | `**/*JreSuite.class`
-                   |                                       | gwt.nongwt.testcase.excludes         |
+    &nbsp;         |                                       | gwt.nongwt.testcase.excludes         |
     user           | test.web.* test.draft.* test.nometa.* | gwt.junit.testcase.web.includes      | `**/*Suite.class`
-                   |                                       | gwt.junit.testcase.web.excludes      | `**/*JsInteropSuite.class,**/*JreSuite.class,***/OptimizedOnly*`
+    &nbsp;         |                                       | gwt.junit.testcase.web.excludes      | `**/*JsInteropSuite.class,**/*JreSuite.class,***/OptimizedOnly*`
     user           | test.dev.* test.emma.*                | gwt.junit.testcase.dev.includes      | `**/*Suite.class`
-                   |                                       | gwt.junit.testcase.dev.excludes      | `**/*JsInteropSuite.class,**/*JreSuite.class,***/OptimizedOnly*`
+    &nbsp;         |                                       | gwt.junit.testcase.dev.excludes      | `**/*JsInteropSuite.class,**/*JreSuite.class,***/OptimizedOnly*`
 
 ### Examples
 

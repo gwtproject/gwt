@@ -805,6 +805,7 @@ public abstract class AbstractTestCollection extends AbstractTestObject {
     /**
      *  Tests removals from {@link Collection#iterator()}.
      */
+    @SuppressWarnings("ReturnValueIgnored")
     public void testCollectionIteratorRemove() {
         if (!isRemoveSupported()) return;
 
@@ -1120,7 +1121,7 @@ public abstract class AbstractTestCollection extends AbstractTestObject {
         verify();
 
         try {
-            array = collection.toArray(null);
+            array = collection.toArray((Object[]) null);
             fail("toArray(null) should raise NPE");
         } catch (NullPointerException e) {
             // expected

@@ -136,7 +136,7 @@ public class ServerSerializationStreamWriterTest extends TestCase {
 
     // Fallbacks to 7 if array size reached maximum
     int maxArrayLength =
-        ServerSerializationStreamWriter.LengthConstrainedArray.MAXIMUM_ARRAY_LENGTH + 100;
+        ServerSerializationStreamWriter.LengthConstrainedArray.MAXIMUM_ARRAY_LENGTH_DEFAULT + 100;
     writer = new ServerSerializationStreamWriter(null, 8);
     for (int i = 0; i < maxArrayLength; i++) {
       writer.writeInt(i);

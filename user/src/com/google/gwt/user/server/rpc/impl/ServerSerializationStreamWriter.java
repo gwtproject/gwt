@@ -48,11 +48,13 @@ public final class ServerSerializationStreamWriter extends
    * array literals.
    */
   public static class LengthConstrainedArray {
+    public static final int MAXIMUM_ARRAY_LENGTH_DEFAULT = 1 << 15;
     private static final String POSTLUDE = "])";
     private static final String PRELUDE = "].concat([";
 
     private final StringBuffer buffer;
-    private final int maximumArrayLength = Integer.getInteger("gwt.rpc.maxPayloadChunkSize", 1 << 15);
+    private final int maximumArrayLength = Integer.getInteger("gwt.rpc.maxPayloadChunkSize",
+            MAXIMUM_ARRAY_LENGTH_DEFAULT);
     private int count = 0;
     private boolean needsComma = false;
     private int total = 0;

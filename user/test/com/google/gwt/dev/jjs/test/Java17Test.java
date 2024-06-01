@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google Inc.
+ * Copyright 2024 GWT Project Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -47,6 +47,14 @@ public class Java17Test extends GWTTestCase {
   }
 
   public void testSealedClassesPermitted() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testRecordClasses() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testJsTypeRecords() {
     assertFalse(isGwtSourceLevel17());
   }
 

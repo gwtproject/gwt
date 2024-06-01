@@ -37,6 +37,7 @@ import com.google.gwt.dev.jjs.ast.JNullLiteral;
 import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.ast.JRecordType;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JRuntimeTypeReference;
 import com.google.gwt.dev.jjs.ast.JType;
@@ -87,6 +88,7 @@ public class ImplementClassLiteralsAsFields {
       literalFactoryMethodByTypeClass  = new ImmutableMap.Builder()
           .put(JEnumType.class, ClassLiteralFactoryMethod.CREATE_FOR_ENUM)
           .put(JClassType.class, ClassLiteralFactoryMethod.CREATE_FOR_CLASS)
+          .put(JRecordType.class, ClassLiteralFactoryMethod.CREATE_FOR_CLASS)
           .put(JInterfaceType.class, ClassLiteralFactoryMethod.CREATE_FOR_INTERFACE)
           .put(JPrimitiveType.class, ClassLiteralFactoryMethod.CREATE_FOR_PRIMITIVE)
           .build();

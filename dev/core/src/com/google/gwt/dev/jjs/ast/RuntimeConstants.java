@@ -43,6 +43,8 @@ public class RuntimeConstants {
   public static final String CLASS_CREATE_FOR_PRIMITIVE = "Class.createForPrimitive";
   public static final String CLASS_CREATE_FOR_INTERFACE = "Class.createForInterface";
 
+  public static final String CLASS_GET_SIMPLE_NAME = "Class.getSimpleName";
+
   public static final String COLLAPSED_PROPERTY_HOLDER_GET_PERMUTATION_ID
       = "CollapsedPropertyHolder.getPermutationId";
 
@@ -97,4 +99,6 @@ public class RuntimeConstants {
   public static final String RUNTIME_UNIQUE_ID = "Runtime.uniqueId";
 
   public static final String UTIL_MAKE_ENUM_NAME = "Util.makeEnumName";
+
+  public static final String OBJECTS_HASH = "Objects.hash";
 }

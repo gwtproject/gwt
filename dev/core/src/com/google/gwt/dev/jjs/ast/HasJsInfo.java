@@ -60,6 +60,9 @@ public interface HasJsInfo extends HasJsName, CanBeJsNative {
       @Override
       public String computeName(JMember member) {
         String methodName = member.getName();
+        if (member.getEnclosingType() instanceof JRecordType) {
+          return methodName;
+        }
         if (startsWithCamelCase(methodName, "get")) {
           return Introspector.decapitalize(methodName.substring(3));
         }

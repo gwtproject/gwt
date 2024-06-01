@@ -84,6 +84,7 @@ import com.google.gwt.dev.jjs.impl.HandleCrossFragmentReferences;
 import com.google.gwt.dev.jjs.impl.ImplementCastsAndTypeChecks;
 import com.google.gwt.dev.jjs.impl.ImplementClassLiteralsAsFields;
 import com.google.gwt.dev.jjs.impl.ImplementJsVarargs;
+import com.google.gwt.dev.jjs.impl.ImplementRecordComponents;
 import com.google.gwt.dev.jjs.impl.JavaAstVerifier;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.jjs.impl.JjsUtils;
@@ -1155,6 +1156,8 @@ public final class JavaToJavaScriptCompiler {
       DevirtualizeDefaultMethodForwarding.exec(jprogram);
       // Replace calls to native overrides of object methods.
       ReplaceCallsToNativeJavaLangObjectOverrides.exec(jprogram);
+
+      ImplementRecordComponents.exec(jprogram);
 
       FixAssignmentsToUnboxOrCast.exec(jprogram);
       if (options.isEnableAssertions()) {

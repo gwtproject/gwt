@@ -1267,7 +1267,8 @@ public class JProgram extends JNode implements ArrayTypeCreator {
         JAVASCRIPTOBJECT, CLASS_LITERAL_HOLDER, "com.google.gwt.core.client.RunAsyncCallback",
         "com.google.gwt.core.client.impl.AsyncFragmentLoader",
         "com.google.gwt.core.client.impl.Impl",
-        "com.google.gwt.core.client.prefetch.RunAsyncCode"));
+        "com.google.gwt.core.client.prefetch.RunAsyncCode",
+        "java.util.Objects"));
     typeNamesToIndex.addAll(CODEGEN_TYPES_SET);
     return typeNamesToIndex;
   }

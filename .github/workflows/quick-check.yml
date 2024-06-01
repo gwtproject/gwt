@@ -42,7 +42,7 @@ jobs:
             TZ=America/Los_Angeles \
             ANT_OPTS=-Dfile.encoding=UTF8 \
             ANT_OPTS=-Xmx2g
-          ant clean dist doc checkstyle apicheck
+          ant clean compile.tests dist doc checkstyle apicheck
 
       - name: Create pull request comments/annotations for checkstyle from the java 21 build, even on failure
         if: ${{ always() && github.event_name == 'pull_request' && matrix.java-version == '21' }}

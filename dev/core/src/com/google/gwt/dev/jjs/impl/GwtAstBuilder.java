@@ -222,6 +222,7 @@ import org.eclipse.jdt.internal.compiler.lookup.MethodBinding;
 import org.eclipse.jdt.internal.compiler.lookup.MethodScope;
 import org.eclipse.jdt.internal.compiler.lookup.MethodVerifier;
 import org.eclipse.jdt.internal.compiler.lookup.NestedTypeBinding;
+import org.eclipse.jdt.internal.compiler.lookup.RecordComponentBinding;
 import org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding;
 import org.eclipse.jdt.internal.compiler.lookup.Scope;
 import org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding;
@@ -4113,8 +4114,14 @@ public class GwtAstBuilder {
               getFieldDisposition(binding), AccessModifier.fromFieldBinding(binding));
     }
     enclosingType.addField(field);
-    JsInteropUtil.maybeSetJsInteropProperties(field, shouldExport(field), x.annotations);
-    processSuppressedWarnings(field, x.annotations);
+    if (x.isARecordComponent) {
+      // Skip setting jsinterop properties on record component fields
+      RecordComponentBinding component = ((SourceTypeBinding) binding.declaringClass).getRecordComponent(x.name);
+      processSuppressedWarnings(field, component.sourceRecordComponent().annotations);
+    } else {
+      JsInteropUtil.maybeSetJsInteropProperties(field, shouldExport(field), x.annotations);
+      processSuppressedWarnings(field, x.annotations);
+    }
     typeMap.setField(binding, field);
   }
 
@@ -4183,9 +4190,14 @@ public class GwtAstBuilder {
         for (JField field : type.getFields()) {
           // Create a method binding that corresponds to the method we are creating, jdt won't
           // offer us one unless it was defined in source.
+          char[] fieldName = field.getName().toCharArray();
           MethodBinding recordComponentAccessor = binding.getExactMethod(
-                  field.getName().toCharArray(), new TypeBinding[0], curCud.scope);
-          typeMap.get(recordComponentAccessor);
+                  fieldName, new TypeBinding[0], curCud.scope);
+
+          // Get the record component, and pass on any annotations meant for the method
+          JMethod componentMethod = typeMap.get(recordComponentAccessor);
+          RecordComponentBinding component = binding.getRecordComponent(fieldName);
+          processAnnotations(component.sourceRecordComponent().annotations, componentMethod);
         }
 
         // At this time, we need to be sure a binding exists, either because the record declared
@@ -4308,17 +4320,16 @@ public class GwtAstBuilder {
     }
 
     enclosingType.addMethod(method);
-    processAnnotations(x, method);
+    processAnnotations(x.annotations, method);
     typeMap.setMethod(b, method);
   }
 
-  private void processAnnotations(AbstractMethodDeclaration x,
-      JMethod method) {
-    maybeAddMethodSpecialization(x, method);
-    maybeSetInliningMode(x, method);
-    maybeSetHasNoSideEffects(x, method);
-    JsInteropUtil.maybeSetJsInteropProperties(method, shouldExport(method), x.annotations);
-    processSuppressedWarnings(method, x.annotations);
+  private void processAnnotations(Annotation[] annotations, JMethod method) {
+    maybeAddMethodSpecialization(annotations, method);
+    maybeSetInliningMode(annotations, method);
+    maybeSetHasNoSideEffects(annotations, method);
+    JsInteropUtil.maybeSetJsInteropProperties(method, shouldExport(method), annotations);
+    processSuppressedWarnings(method, annotations);
   }
 
   private void processAnnotations(JParameter parameter, Annotation... annotations) {
@@ -4326,7 +4337,7 @@ public class GwtAstBuilder {
     processSuppressedWarnings(parameter, annotations);
   }
 
-  private void processSuppressedWarnings(CanHaveSuppressedWarnings x, Annotation... annotations) {
+  private static void processSuppressedWarnings(CanHaveSuppressedWarnings x, Annotation... annotations) {
     x.setSuppressedWarnings(JdtUtil.getSuppressedWarnings(annotations));
   }
 
@@ -4338,26 +4349,26 @@ public class GwtAstBuilder {
     return false;
   }
 
-  private static void maybeSetInliningMode(AbstractMethodDeclaration x, JMethod method) {
+  private static void maybeSetInliningMode(Annotation[] annotations, JMethod method) {
     if (JdtUtil.getAnnotationByName(
-        x.annotations, "javaemul.internal.annotations.DoNotInline") != null) {
+        annotations, "javaemul.internal.annotations.DoNotInline") != null) {
       method.setInliningMode(InliningMode.DO_NOT_INLINE);
     } else if (JdtUtil.getAnnotationByName(
-        x.annotations, "javaemul.internal.annotations.ForceInline") != null) {
+        annotations, "javaemul.internal.annotations.ForceInline") != null) {
       method.setInliningMode(InliningMode.FORCE_INLINE);
     }
   }
 
-  private static void maybeSetHasNoSideEffects(AbstractMethodDeclaration x, JMethod method) {
+  private static void maybeSetHasNoSideEffects(Annotation[] annotations, JMethod method) {
     if (JdtUtil.getAnnotationByName(
-        x.annotations, "javaemul.internal.annotations.HasNoSideEffects") != null) {
+        annotations, "javaemul.internal.annotations.HasNoSideEffects") != null) {
       method.setHasSideEffects(false);
     }
   }
 
-  private void maybeAddMethodSpecialization(AbstractMethodDeclaration x, JMethod method) {
+  private void maybeAddMethodSpecialization(Annotation[] annotations, JMethod method) {
     AnnotationBinding specializeAnnotation = JdtUtil.getAnnotationByName(
-        x.annotations, "javaemul.internal.annotations.SpecializeMethod");
+        annotations, "javaemul.internal.annotations.SpecializeMethod");
     if (specializeAnnotation == null) {
       return;
     }

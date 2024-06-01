@@ -124,10 +124,10 @@ public class Java17Test extends GWTTestCase {
   }
 
   /**
-   * Simple record with default exports.
+   * Simple record with one property accessor, one default method accessor
    */
   @JsType(namespace = "java17")
-  public record JsRecord1(String name, int value) { }
+  public record JsRecord1(@JsProperty String name, int value) { }
 
   /**
    * Simple native type to verify JsRecord1.
@@ -135,15 +135,16 @@ public class Java17Test extends GWTTestCase {
   @JsType(name = "JsRecord1", namespace = "java17", isNative = true)
   public static class JsObject1 {
     public String name;
-    public int value;
+    public native int value();
     public JsObject1(String name, int value) { }
   }
 
   /**
-   * Record with explicit method accessors
+   * Record with explicit method accessor
    */
   @JsType(namespace = "java17")
-  public record JsRecord2(@JsMethod String name, @JsMethod int value) { }
+  public record JsRecord2(@JsMethod String name, int value) { }
+
   /**
    * Simple native type to verify JsRecord2.
    */
@@ -155,7 +156,32 @@ public class Java17Test extends GWTTestCase {
     public native int value();
   }
 
+  /**
+   * Record with exported properties and methods.
+   */
+  public record JsRecord3(String red, JsRecord1 green, JsRecord2 blue) {
+    @JsProperty
+    public String getFlavor() {
+      return "grape";
+    }
+    @JsMethod
+    public int countBeans() {
+      return 7;
+    }
+  }
+
+  /**
+   * Represented as an interface since there is no constructor to call or use to type check.
+   */
+  @JsType(isNative = true)
+  public interface JsObject3 {
+    @JsProperty
+    String getFlavor();
+    int countBeans();
+  }
+
   public void testJsTypeRecords() {
+    // Test with default accessor (method) and a property accessor
     JsRecord1 r1 = new JsRecord1("foo", 7);
     assertEquals("foo", r1.name());
     assertEquals(7, r1.value());
@@ -163,12 +189,12 @@ public class Java17Test extends GWTTestCase {
 
     // Create an instance from JS, verify it is the same
     JsObject1 o1 = new JsObject1("foo", 7);
-    assertEquals("foo", r1.name);
-    assertEquals(7, r1.value);
+    assertEquals("foo", o1.name);
+    assertEquals(7, o1.value());
     assertEquals(o1.toString(), r1.toString());
     assertEquals(o1, r1);
 
-    // Repeat the test with methods for accessors
+    // Repeat the test with methods explicitly configured for accessors
     JsRecord2 r2 = new JsRecord2("foo", 7);
     assertEquals("foo", r2.name());
     assertEquals(7, r2.value());
@@ -176,10 +202,19 @@ public class Java17Test extends GWTTestCase {
 
     // Create an instance from JS, verify it is the same
     JsObject2 o2 = new JsObject2("foo", 7);
-    assertEquals("foo", r2.name);
-    assertEquals(7, r2.value);
+    assertEquals("foo", o2.name());
+    assertEquals(7, o2.value());
     assertEquals(o2.toString(), r2.toString());
     assertEquals(o2, r2);
 
+    // Test an object with exposed properties and methods
+    JsRecord3 r3 = new JsRecord3("fork", r1, r2);
+    assertEquals("grape", r3.getFlavor());
+    assertEquals(7, r3.countBeans());
+
+    // Cast the instance to JS, verify it is the same
+    JsObject3 o3 = (JsObject3) (Object) r3;
+    assertEquals("grape", r3.getFlavor());
+    assertEquals(7, r3.countBeans());
   }
 }

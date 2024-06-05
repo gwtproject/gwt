@@ -15,9 +15,9 @@
  */
 package com.google.gwt.core.server;
 
+import com.google.gwt.thirdparty.debugging.sourcemap.OriginalMapping;
 import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapConsumerFactory;
 import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapping;
-import com.google.gwt.thirdparty.debugging.sourcemap.proto.Mapping;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -299,13 +299,13 @@ public abstract class StackTraceDeobfuscator {
     if (sourceMapCapable && fragmentId != -1 && column != -1) {
       SourceMapping sourceMapping = loadSourceMap(strongName, fragmentId);
       if (sourceMapping != null && ste.getLineNumber() > -1) {
-        Mapping.OriginalMapping mappingForLine = sourceMapping
+        OriginalMapping mappingForLine = sourceMapping
             .getMappingForLine(jsLineNumber, column);
         if (mappingForLine != null) {
 
           if (declaringClass == null || declaringClass.equals(ste.getClassName())) {
             declaringClass = mappingForLine.getOriginalFile();
-            methodName = mappingForLine.getIdentifier();
+            methodName = mappingForLine.getIdentifier().orElse(null);
           }
           fileName = mappingForLine.getOriginalFile();
           lineNumber = mappingForLine.getLineNumber();

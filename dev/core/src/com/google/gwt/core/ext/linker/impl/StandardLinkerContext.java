@@ -131,6 +131,7 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
   private ResourceOracle publicResourceOracle;
 
   private final SortedSet<SelectionProperty> selectionProperties;
+  private final ModuleDef module;
 
   public StandardLinkerContext(TreeLogger logger, ModuleDef module,
       ResourceOracle publicResourceOracle, JsOutputOption outputOption)
@@ -143,6 +144,7 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
     this.moduleLastModified = module.lastModified();
     this.publicResourceOracle = publicResourceOracle;
     this.outputOption = outputOption;
+    this.module = module;
 
     // Sort the linkers into the order they should actually run.
     linkerClasses = new ArrayList<Class<? extends Linker>>();
@@ -535,6 +537,10 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
         Utility.close(artifactStream);
       }
     }
+  }
+
+  public ModuleDef getModule() {
+    return module;
   }
 
   /**

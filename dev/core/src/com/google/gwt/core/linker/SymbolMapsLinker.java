@@ -15,6 +15,9 @@
  */
 package com.google.gwt.core.linker;
 
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
+
 import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -31,17 +34,27 @@ import com.google.gwt.core.ext.linker.Shardable;
 import com.google.gwt.core.ext.linker.SoftPermutation;
 import com.google.gwt.core.ext.linker.SymbolData;
 import com.google.gwt.core.ext.linker.SyntheticArtifact;
+import com.google.gwt.core.ext.linker.impl.StandardLinkerContext;
+import com.google.gwt.dev.cfg.ResourceLoader;
+import com.google.gwt.dev.cfg.ResourceLoaders;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.HashMap;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapConsumerV3;
 import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapGeneratorV3;
-import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapGeneratorV3.ExtensionMergeAction;
+import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapParseException;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.util.tools.Utility;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -162,7 +175,8 @@ public class SymbolMapsLinker extends AbstractLinker {
     private final String sourceRoot;
 
     public SourceMapArtifact(int permutationId, int fragment, byte[] js, String sourceRoot) {
-      super(SymbolMapsLinker.class, permutationId + '/' + sourceMapFilenameForFragment(fragment), js);
+      super(SymbolMapsLinker.class, permutationId + '/' +
+          sourceMapFilenameForFragment(fragment), js);
       this.permutationId = permutationId;
       this.fragment = fragment;
       this.js = js;
@@ -277,6 +291,7 @@ public class SymbolMapsLinker extends AbstractLinker {
 
       Event writeSourceMapsEvent =
           SpeedTracerLogger.start(CompilerEventType.WRITE_SOURCE_MAPS);
+      StandardLinkerContext stdContext = (StandardLinkerContext) context;
       for (SourceMapArtifact se : artifacts.find(SourceMapArtifact.class)) {
         // filename is permutation_id/sourceMap<fragmentNumber>.json
         String sourceMapString = Util.readStreamAsString(se.getContents(logger));
@@ -312,14 +327,16 @@ public class SymbolMapsLinker extends AbstractLinker {
                 totalPrefixLines += op.getNumLines();
               }
             }
+
             // TODO(cromwellian): apply insert and remove edits
-            sourceMapGenerator.mergeMapSection(totalPrefixLines, 0, sourceMapString,
-                new ExtensionMergeAction() {
-                  @Override
-                  public Object merge(String extKey, Object oldVal, Object newVal) {
-                    return newVal;
-                  }
-                });
+            if (stdContext.getModule().shouldEmbedSourceMapContents()) {
+              embedSourcesInSourceMaps(logger, stdContext, artifacts, sourceMapGenerator,
+                  totalPrefixLines, sourceMapString, partialPath);
+            } else {
+              sourceMapGenerator.mergeMapSection(totalPrefixLines, 0, sourceMapString,
+                  (extKey, oldVal, newVal) -> newVal);
+            }
+
             StringWriter stringWriter = new StringWriter();
             sourceMapGenerator.appendTo(stringWriter, "sourceMap");
             emArt = emitSourceMapString(logger, stringWriter.toString(), partialPath);
@@ -333,6 +350,68 @@ public class SymbolMapsLinker extends AbstractLinker {
       writeSourceMapsEvent.end();
     }
     return artifacts;
+  }
+
+  private static void embedSourcesInSourceMaps(TreeLogger logger, StandardLinkerContext context,
+                                               ArtifactSet artifacts,
+                                               SourceMapGeneratorV3 sourceMapGenerator,
+                                               int totalPrefixLines, String sourceMapString,
+                                               String partialPath)
+      throws SourceMapParseException {
+    sourceMapGenerator.setStartingPosition(totalPrefixLines, 0);
+    SourceMapConsumerV3 section = new SourceMapConsumerV3();
+    section.parse(sourceMapString);
+    section.visitMappings(sourceMapGenerator::addMapping);
+
+    for (Entry<String, Object> entry : section.getExtensions().entrySet()) {
+      String extensionKey = entry.getKey();
+      sourceMapGenerator.addExtension(extensionKey, entry.getValue());
+    }
+
+    ResourceLoader resourceLoader = ResourceLoaders.fromContextClassLoader();
+
+    Map<String, EmittedArtifact> generatedSources = Maps.newHashMap();
+    artifacts.find(EmittedArtifact.class)
+        .forEach(emittedArtifact -> {
+            if (Visibility.Source == emittedArtifact.getVisibility()) {
+              generatedSources.put(emittedArtifact.getPartialPath(), emittedArtifact);
+            }
+        });
+
+    for (String sourceFileName : section.getOriginalSources()) {
+      String content;
+      InputStream cis = null;
+      try {
+        cis = loadSource(logger, sourceFileName, generatedSources,
+            resourceLoader);
+        if (isNull(cis)) {
+          cis = context.getModule().findSourceFile(sourceFileName).openContents();
+        }
+        content = Util.readStreamAsString(cis);
+        sourceMapGenerator.addSourcesContent(sourceFileName, content);
+      } catch (UnableToCompleteException | URISyntaxException | IOException e) {
+        logger.log(TreeLogger.Type.WARN, "Can't write source map " +
+            partialPath, e);
+      } finally {
+        Utility.close(cis);
+      }
+    }
+  }
+
+  private static InputStream loadSource(TreeLogger logger, String sourceFileName,
+                                            Map<String, EmittedArtifact> generatedSources,
+                                        ResourceLoader resourceLoader)
+      throws UnableToCompleteException, URISyntaxException, IOException {
+    if (generatedSources.containsKey(sourceFileName)) {
+      return generatedSources.get(sourceFileName).getContents(logger);
+    } else {
+      // ask the resourceOracle for the file contents and add it
+      URL resource = resourceLoader.getResource(sourceFileName);
+      if (nonNull(resource)) {
+        return resource.openStream();
+      }
+    }
+    return null;
   }
 
   /**

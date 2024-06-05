@@ -67,6 +67,9 @@ import java.util.Set;
  * XML for unit tests.
  */
 public class ModuleDef implements DepsInfoProvider {
+
+  public static final String EMBED_SOURCE_MAPS = "compiler.embedSourceMaps";
+
   private static final ResourceFilter NON_JAVA_RESOURCES = new ResourceFilter() {
     @Override
     public boolean allows(String path) {
@@ -626,6 +629,22 @@ public class ModuleDef implements DepsInfoProvider {
    */
   public synchronized void setNameOverride(String nameOverride) {
     this.nameOverride = nameOverride;
+  }
+
+  /**
+   * Checks if embedding sources content inside sourceMaps json is enabled or not.
+   * @return the boolean value true/false of <code>compiler.embedSourceMaps</code>
+   * configuration property
+   */
+  public boolean shouldEmbedSourceMapContents() {
+    return getProperties()
+        .getConfigurationProperties()
+        .stream()
+        .filter(configurationProperty -> EMBED_SOURCE_MAPS.equals(
+            configurationProperty.getName()))
+        .findFirst()
+        .map(configurationProperty -> Boolean.valueOf(configurationProperty.getValue()))
+        .orElse(false);
   }
 
   void addBindingPropertyDefinedValue(BindingProperty bindingProperty, String token) {

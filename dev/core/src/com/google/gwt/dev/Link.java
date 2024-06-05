@@ -415,7 +415,10 @@ public class Link {
     linkerContext.produceOutput(logger, artifacts, Visibility.Private,
         extraFileSet);
 
-    if (saveSources) {
+    boolean embedSourcesContent = linkerContext.getModule()
+        .shouldEmbedSourceMapContents();
+
+    if (saveSources && !embedSourcesContent) {
       // Assume that all source code is available in the compiler's classpath.
       // (This will have to be adjusted to work with Super Dev Mode.)
       ResourceLoader loader = ResourceLoaders.fromContextClassLoader();

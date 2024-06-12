@@ -31,6 +31,7 @@ import java.io.PrintWriter;
 /**
  * Entry point that outputs the GWT JRE support.
  */
+@Deprecated
 public class GetJreEmulation {
 
   /**
@@ -68,6 +69,10 @@ public class GetJreEmulation {
       PrintWriterTreeLogger logger = new PrintWriterTreeLogger(new PrintWriter(
           System.err, true));
       logger.setMaxDetail(TreeLogger.WARN);
+      logger.log(TreeLogger.Type.WARN,
+              "GetJreEmulation is deprecated for removal, please consider other options to get " +
+                      "this information from the GWT jar. See https://github.com/gwtproject/gwt/issues/9923 " +
+                      "to discuss other options.");
       CompilerContext.Builder compilerContextBuilder = new CompilerContext.Builder();
       CompilerContext compilerContext = compilerContextBuilder.build();
       ModuleDef module =

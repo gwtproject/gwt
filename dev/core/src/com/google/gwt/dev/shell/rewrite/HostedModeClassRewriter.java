@@ -245,11 +245,6 @@ public class HostedModeClassRewriter {
 
     v = new RewriteJsniMethods(v, anonymousClassMap);
 
-    if (Double.parseDouble(System.getProperty("java.class.version")) < Opcodes.V1_8) {
-      // TODO(cromwellian) implement Retrolambda?
-      v = new ForceClassVersion15(v);
-    }
-
     new ClassReader(classBytes).accept(v, 0);
     classBytesRewriteEvent.end();
     return writer.toByteArray();

@@ -3256,13 +3256,13 @@ public class GwtAstBuilder {
       List<JExpression> args = pop(arguments);
       for (int i = 0; i < args.size(); i++) {
         // Account for varargs parameter.
-        int parameterIndex = Math.min(i, methodBinding.parameters.length - 1);
+        int parameterIndex = Math.min(i, methodBinding.original().parameters.length - 1);
         args.set(i, maybeBoxOrUnbox(
             args.get(i),
             arguments[i].implicitConversion,
             isDoNotAutoBoxParameter(methodBinding, parameterIndex)));
       }
-      if (!methodBinding.isVarargs()) {
+      if (!methodBinding.original().isVarargs()) {
         return args;
       }
 
@@ -3272,7 +3272,8 @@ public class GwtAstBuilder {
         args = Lists.newArrayListWithCapacity(1);
       }
 
-      TypeBinding[] params = methodBinding.parameters;
+      TypeBinding[] params = methodBinding.isVarargs() ? methodBinding.parameters :
+              methodBinding.original().parameters;
       int varArg = params.length - 1;
 
       // See if there's a single varArg which is already an array.

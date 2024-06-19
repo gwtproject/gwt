@@ -1206,7 +1206,7 @@ public class DeadCodeElimination {
 
       // Find the matching case
       JCaseStatement matchingCase = null;
-      for (JStatement subStatement : s.getBody().getStatements()) {
+      statements: for (JStatement subStatement : s.getBody().getStatements()) {
         if (subStatement instanceof JCaseStatement) {
           JCaseStatement caseStatement = (JCaseStatement) subStatement;
           if (caseStatement.isDefault()) {
@@ -1218,7 +1218,7 @@ public class DeadCodeElimination {
                 JValueLiteral caseValue = (JValueLiteral) expr;
                 if (caseValue.getValueObj().equals(targetValue.getValueObj())) {
                   matchingCase = caseStatement;
-                  break;
+                  break statements;
                 }
               }
             }

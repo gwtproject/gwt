@@ -143,13 +143,17 @@ public final class JsSafeCloner {
      */
     @Override
     public void endVisit(JsNameRef x, JsContext ctx) {
-      if (x.getQualifier() == null && x.getIdent() == "arguments") {
+      if (x.getQualifier() == null && "arguments".equals(x.getIdent())) {
         // References to the arguments object can not be hoisted.
         successful = false;
         stack.push(null);
       }
-      JsNameRef toReturn = new JsNameRef(x.getSourceInfo(), x.getName());
-
+      final JsNameRef toReturn;
+      if (x.getName() == null) {
+        toReturn = new JsNameRef(x.getSourceInfo(), x.getIdent(), x.getQualifier());
+      } else {
+        toReturn = new JsNameRef(x.getSourceInfo(), x.getName());
+      }
       if (x.getQualifier() != null) {
         toReturn.setQualifier(stack.pop());
       }

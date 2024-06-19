@@ -24,6 +24,7 @@ import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
@@ -321,4 +322,31 @@ public class JsTypeVarargsTest extends GWTTestCase {
   public native void testVarargsCall_uninstantiatedVararg() /*-{
     @GWTTestCase::assertEquals(II)(0, $global.varargJsMethodUninstantiatedVararg());
   }-*/;
+
+  // https://github.com/gwtproject/gwt/issues/9932
+  public void testVarargsFromJavaToJsinterop() {
+    assertEquals(3, nonNativeMethod("A", "B", "C"));
+  }
+
+  // Java declaration of globally available instance method that takes varargs
+  @JsType(namespace = JsPackage.GLOBAL)
+  public static class VarArgsQualifiedInstanceMethod {
+    @JsProperty(namespace = JsPackage.GLOBAL)
+    public static VarArgsQualifiedInstanceMethod INSTANCE = new VarArgsQualifiedInstanceMethod();
+    public int getLength(Object... values) {
+      return values.length;
+    }
+  }
+  // Declaring this type lets us use jsinterop to call the above method.
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "VarArgsQualifiedInstanceMethod")
+  public static class VarArgsFromJava {
+    @JsProperty(namespace = JsPackage.GLOBAL)
+    public static VarArgsFromJava INSTANCE;
+    public native int getLength(Object... values);
+  }
+
+  // This plain Java method accepts varargs, and tries to pass them into jsinterop.
+  private static int nonNativeMethod(Object... values) {
+    return VarArgsFromJava.INSTANCE.getLength(values);
+  }
 }

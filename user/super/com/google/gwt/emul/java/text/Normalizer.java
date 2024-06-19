@@ -1,5 +1,5 @@
 /*
- * Copyright GWT Project Authors
+ * Copyright 2024 GWT Project Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,35 +19,33 @@ import javaemul.internal.JsUtils;
 import jsinterop.annotations.JsType;
 
 /**
- * Emulation of {@code java.text.Normalizer}.
+ * Emulation of <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/Normalizer.html"> java.text.Normalizer</a>.
  */
 public final class Normalizer {
 
-    private final int errorOffset;
+  public enum Form {
+    /** Canonical decomposition. */
+    NFD,
+    /** Canonical decomposition followed by composition. */
+    NFC,
+    /** Compatibility decomposition. */
+    NFKD,
+    /** Compatibility decomposition followed by composition. */
+    NFKC
+  }
 
-    public enum Form {
-        /** Canonical decomposition */
-        NFD,
-        /** Canonical decomposition followed by composition */
-        NFC,
-        /** Compatibility decomposition */
-        NFKD,
-        /** Compatibility decomposition followed by composition */
-        NFKC
-    }
+  public static String normalize(CharSequence input, Form form) {
+    return JsUtils.<NativeString>uncheckedCast(input.toString()).normalize(form.name());
+  }
 
-    public static String normalize(CharSequence input, Form form) {
-        return JsUtils.<NativeString>uncheckedCast(input.toString()).normalize(form.name());
-    }
+  public static boolean isNormalized(CharSequence input, Form form) {
+    String str = input.toString();
+    return str.equals(normalize(str, form));
+  }
 
-    public static boolean isNormalized(CharSequence input, Form form) {
-        String str = input.toString();
-        return str.equals(normalize(str, form));
-    }
-
-    @JsType(isNative = true, name = "String", namespace = "<window>")
-    private static class NativeString {
-        public native String normalize(String form);
-    }
+  @JsType(isNative = true, name = "String", namespace = "<window>")
+  private static class NativeString {
+    public native String normalize(String form);
+  }
 }
 

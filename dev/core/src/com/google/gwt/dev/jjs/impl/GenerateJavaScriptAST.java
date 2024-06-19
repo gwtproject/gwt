@@ -702,7 +702,8 @@ public class GenerateJavaScriptAST {
     public JsNode transformExpressionStatement(JExpressionStatement statement) {
       if (statement.getExpr() instanceof JSwitchExpression) {
         if (statement.getExpr().getType() == JPrimitiveType.VOID) {
-          return transformSwitchStatement(new JSwitchStatement((JSwitchExpression) statement.getExpr()));
+          return transformSwitchStatement(new JSwitchStatement((JSwitchExpression)
+                  statement.getExpr()));
         } else {
           throw new IllegalStateException("top-level switch expr");
         }

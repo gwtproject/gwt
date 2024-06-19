@@ -2212,7 +2212,6 @@ public class GwtAstBuilder {
       }
     }
 
-
     @Override
     public void endVisit(SwitchExpression x, BlockScope scope) {
       try {

@@ -15,35 +15,10 @@
  */
 package com.google.gwt.user.client.impl;
 
-import com.google.gwt.dom.client.Element;
-
 /**
  * Mozilla implementation of StandardBrowser.
  */
 class DOMImplMozilla extends DOMImplStandard {
-
-  static {
-    addMozillaCaptureEventDispatchers();
-  }
-
-  @SuppressWarnings("deprecation")
-  private static native void addMozillaCaptureEventDispatchers() /*-{
-    @com.google.gwt.user.client.impl.DOMImplStandard::captureEventDispatchers['DOMMouseScroll'] =
-        @com.google.gwt.user.client.impl.DOMImplStandard::dispatchCapturedMouseEvent(*);
-  }-*/;
-
-  @Override
-  public void sinkEvents(Element elem, int bits) {
-    super.sinkEvents(elem, bits);
-    sinkEventsMozilla(elem, bits);
-  }
-
-  @SuppressWarnings("deprecation")
-  public native void sinkEventsMozilla(Element elem, int bits) /*-{
-    if (bits & 0x20000) {
-      elem.addEventListener('DOMMouseScroll', @com.google.gwt.user.client.impl.DOMImplStandard::dispatchEvent, false);
-    }
-  }-*/;
 
   @Override
   protected void initEventSystem() {

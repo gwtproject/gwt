@@ -27,16 +27,7 @@ public class MouseWheelEvent extends MouseEvent<MouseWheelHandler> {
    * this event.
    */
   private static final Type<MouseWheelHandler> TYPE = new Type<MouseWheelHandler>(
-      BrowserEvents.MOUSEWHEEL, new MouseWheelEvent());
-
-  static {
-    /**
-     * Hidden type used to ensure DOMMouseScroll gets registered in the type map.
-     * This is the special name used on Mozilla browsers for what everyone else
-     * calls 'mousewheel'.
-     */
-    new Type<MouseWheelHandler>("DOMMouseScroll", new MouseWheelEvent());
-  }
+      BrowserEvents.WHEEL, new MouseWheelEvent());
 
   /**
    * Gets the event type associated with mouse wheel events.
@@ -61,16 +52,28 @@ public class MouseWheelEvent extends MouseEvent<MouseWheelHandler> {
   }
 
   /**
-   * Get the change in the mouse wheel position along the Y-axis; negative if
-   * the mouse wheel is moving north (toward the top of the screen) or positive
+   * Get the sign of the change in the mouse wheel position along the Y-axis; -1 if
+   * the mouse wheel is moving north (toward the top of the screen) or 1
    * if the mouse wheel is moving south (toward the bottom of the screen).
    * 
-   * Note that delta values are not normalized across browsers or OSes.
-   * 
-   * @return the delta of the mouse wheel along the y axis
+   * @return the sign of the delta of the mouse wheel along the y axis
+   * @deprecated use getNativeDeltaY() instead
    */
+  @Deprecated
   public int getDeltaY() {
     return getNativeEvent().getMouseWheelVelocityY();
+  }
+
+  /**
+   * Get the change in the mouse wheel position along the Y-axis; -1 if
+   * the mouse wheel is moving north (toward the top of the screen) or 1
+   * if the mouse wheel is moving south (toward the bottom of the screen).
+   * Note that the return values are not normalized for browsers and OSs.
+   *
+   * @return the sign of the delta of the mouse wheel along the y axis
+   */
+  public double getNativeDeltaY() {
+    return getNativeEvent().getDeltaY();
   }
 
   /**
@@ -81,7 +84,7 @@ public class MouseWheelEvent extends MouseEvent<MouseWheelHandler> {
    * @return true if the velocity is directed toward the top of the screen
    */
   public boolean isNorth() {
-    return getDeltaY() < 0;
+    return getNativeDeltaY() < 0;
   }
 
   /**
@@ -92,7 +95,7 @@ public class MouseWheelEvent extends MouseEvent<MouseWheelHandler> {
    * @return true if the velocity is directed toward the bottom of the screen
    */
   public boolean isSouth() {
-    return getDeltaY() > 0;
+    return getNativeDeltaY() > 0;
   }
 
   @Override

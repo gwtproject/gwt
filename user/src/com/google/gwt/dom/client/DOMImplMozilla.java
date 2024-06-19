@@ -125,11 +125,6 @@ class DOMImplMozilla extends DOMImplStandard {
   }
 
   @Override
-  public native int eventGetMouseWheelVelocityY(NativeEvent evt) /*-{
-    return evt.detail || 0;
-  }-*/;
-
-  @Override
   public native EventTarget eventGetRelatedTarget(NativeEvent evt) /*-{
     // Hack around Mozilla bug 497780 (relatedTarget sometimes returns XUL
     // elements). Trying to access relatedTarget.nodeName will throw an

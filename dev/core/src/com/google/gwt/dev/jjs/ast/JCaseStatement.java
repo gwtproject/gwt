@@ -41,7 +41,9 @@ public class JCaseStatement extends JStatement {
 
   @Deprecated
   public JExpression getExpr() {
-    assert exprs.size() <= 1 : exprs;
+    if (exprs.size() > 1) {
+      throw new IllegalStateException("JCaseStatement.getExpr() called on a node with multiple expressions " + exprs);
+    }
     return exprs.isEmpty() ? null : exprs.get(0);
   }
 

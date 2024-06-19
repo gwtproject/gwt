@@ -593,11 +593,12 @@ public class GenerateJavaScriptAST {
 
     @Override
     public JsNode transformCaseStatement(JCaseStatement caseStatement) {
-      if (caseStatement.getExpr() == null) {
+      if (caseStatement.isDefault()) {
         return new JsDefault(caseStatement.getSourceInfo());
       } else {
+        assert caseStatement.getExprs().size() == 1 : "case must be normalized " + caseStatement;
         JsCase jsCase = new JsCase(caseStatement.getSourceInfo());
-        jsCase.setCaseExpr(transform(caseStatement.getExpr()));
+        jsCase.setCaseExpr(transform(caseStatement.getExprs().get(0)));
         return jsCase;
       }
     }
@@ -709,8 +710,6 @@ public class GenerateJavaScriptAST {
         return transform(statement.getExpr()).makeStmt();
       }
     }
-
-
 
     @Override
     public JsNode transformFieldRef(JFieldRef fieldRef) {

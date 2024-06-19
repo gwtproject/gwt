@@ -39,6 +39,10 @@ public class JCaseStatement extends JStatement {
     this.exprs = Collections.unmodifiableList(new ArrayList<>(exprs));
   }
 
+  public boolean isDefault() {
+    return exprs.isEmpty();
+  }
+
   @Deprecated
   public JExpression getExpr() {
     if (exprs.size() > 1) {
@@ -49,6 +53,25 @@ public class JCaseStatement extends JStatement {
 
   public List<JExpression> getExprs() {
     return exprs;
+  }
+
+  public JBinaryOperation convertToCompareExpression(JExpression value) {
+    if (isDefault()) {
+      throw new IllegalStateException("Can't replace a default statement with a comparison");
+    }
+    JBinaryOperation compareOperation = null;
+    for (JExpression expr : getExprs()) {
+      JBinaryOperation caseComparison = new JBinaryOperation(getSourceInfo(),
+              JPrimitiveType.BOOLEAN, JBinaryOperator.EQ, value, expr);
+      if (compareOperation == null) {
+        compareOperation = caseComparison;
+      } else {
+        compareOperation = new JBinaryOperation(getSourceInfo(), JPrimitiveType.BOOLEAN,
+                JBinaryOperator.OR, compareOperation, caseComparison);
+      }
+    }
+    assert compareOperation != null : this;
+    return compareOperation;
   }
 
   @Override

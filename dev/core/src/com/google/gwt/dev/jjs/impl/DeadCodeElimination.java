@@ -1209,14 +1209,18 @@ public class DeadCodeElimination {
       for (JStatement subStatement : s.getBody().getStatements()) {
         if (subStatement instanceof JCaseStatement) {
           JCaseStatement caseStatement = (JCaseStatement) subStatement;
-          if (caseStatement.getExpr() == null) {
+          if (caseStatement.isDefault()) {
             // speculatively put the default case into the matching case
             matchingCase = caseStatement;
-          } else if (caseStatement.getExpr() instanceof JValueLiteral) {
-            JValueLiteral caseValue = (JValueLiteral) caseStatement.getExpr();
-            if (caseValue.getValueObj().equals(targetValue.getValueObj())) {
-              matchingCase = caseStatement;
-              break;
+          } else {
+            for (JExpression expr : caseStatement.getExprs()) {
+              if (expr instanceof JValueLiteral) {
+                JValueLiteral caseValue = (JValueLiteral) expr;
+                if (caseValue.getValueObj().equals(targetValue.getValueObj())) {
+                  matchingCase = caseStatement;
+                  break;
+                }
+              }
             }
           }
         }
@@ -1264,7 +1268,7 @@ public class DeadCodeElimination {
       for (JStatement statement : body.getStatements()) {
         if (statement instanceof JCaseStatement) {
           JCaseStatement caseStmt = (JCaseStatement) statement;
-          if (caseStmt.getExpr() == null) {
+          if (caseStmt.isDefault()) {
             inDefault = true;
           }
         } else if (isUnconditionalUnlabeledBreak(statement)) {
@@ -1900,7 +1904,7 @@ public class DeadCodeElimination {
 
     private void tryRemoveSwitch(JSwitchStatement x, Context ctx) {
       JBlock body = x.getBody();
-      if (body.getStatements().size() == 0) {
+      if (body.getStatements().isEmpty()) {
         // Empty switch; just run the switch condition.
         replaceMe(x.getExpr().makeStatement(), ctx);
       } else if (body.getStatements().size() == 2) {
@@ -1933,22 +1937,20 @@ public class DeadCodeElimination {
           return;
         }
 
-        if (caseStatement.getExpr() != null) {
-          // Create an if statement equivalent to the single-case switch.
-          JBinaryOperation compareOperation =
-              new JBinaryOperation(x.getSourceInfo(), JPrimitiveType.BOOLEAN,
-                  JBinaryOperator.EQ, x.getExpr(), caseStatement.getExpr());
-          JBlock block = new JBlock(x.getSourceInfo());
-          block.addStmt(statement);
-          JIfStatement ifStatement =
-              new JIfStatement(x.getSourceInfo(), compareOperation, block, null);
-          replaceMe(ifStatement, ctx);
-        } else {
+        if (caseStatement.isDefault()) {
           // All we have is a default case; convert to a JBlock.
           JBlock block = new JBlock(x.getSourceInfo());
           block.addStmt(x.getExpr().makeStatement());
           block.addStmt(statement);
           replaceMe(block, ctx);
+        } else {
+          // Create an if statement equivalent to the single-case switch.
+          JBinaryOperation compareOperation = caseStatement.convertToCompareExpression(x.getExpr());
+          JBlock block = new JBlock(x.getSourceInfo());
+          block.addStmt(statement);
+          JIfStatement ifStatement =
+              new JIfStatement(x.getSourceInfo(), compareOperation, block, null);
+          replaceMe(ifStatement, ctx);
         }
       }
     }

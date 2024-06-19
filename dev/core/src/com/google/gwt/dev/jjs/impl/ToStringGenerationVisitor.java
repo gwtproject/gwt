@@ -249,11 +249,19 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
 
   @Override
   public boolean visit(JCaseStatement x, Context ctx) {
-    if (x.getExpr() != null) {
-      print(CHARS_CASE);
-      accept(x.getExpr());
-    } else {
+    if (x.isDefault()) {
       print(CHARS_DEFAULT);
+    } else {
+      print(CHARS_CASE);
+      boolean first = true;
+      for (JExpression expr : x.getExprs()) {
+        if (!first) {
+          print(',');
+          space();
+        }
+        first = false;
+        accept(expr);
+      }
     }
     print(':');
     space();

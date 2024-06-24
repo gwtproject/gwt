@@ -57,6 +57,7 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
+import com.google.gwt.dev.jjs.ast.JSwitchExpression;
 import com.google.gwt.dev.jjs.ast.JSwitchStatement;
 import com.google.gwt.dev.jjs.ast.JTryStatement;
 import com.google.gwt.dev.jjs.ast.JType;
@@ -678,6 +679,13 @@ public class DeadCodeElimination {
       tryRemoveSwitch(x, ctx);
     }
 
+    @Override
+    public void endVisit(JSwitchExpression x, Context ctx) {
+      switchBlocks.remove(x.getBody());
+
+      // TODO apply other switch optimizations, if they work with switch exprs
+    }
+
     /**
      * 1) Remove catch blocks whose exception type is not instantiable. 2) Prune
      * try statements with no body. 3) Hoist up try statements with no catches
@@ -815,6 +823,12 @@ public class DeadCodeElimination {
 
     @Override
     public boolean visit(JSwitchStatement x, Context ctx) {
+      switchBlocks.add(x.getBody());
+      return true;
+    }
+
+    @Override
+    public boolean visit(JSwitchExpression x, Context ctx) {
       switchBlocks.add(x.getBody());
       return true;
     }

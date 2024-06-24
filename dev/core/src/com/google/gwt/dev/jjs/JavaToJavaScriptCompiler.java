@@ -118,6 +118,7 @@ import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.TypeOrder;
 import com.google.gwt.dev.jjs.impl.RewriteConstructorCallsForUnboxedTypes;
 import com.google.gwt.dev.jjs.impl.SameParameterValueOptimizer;
 import com.google.gwt.dev.jjs.impl.SourceInfoCorrelator;
+import com.google.gwt.dev.jjs.impl.SplitCaseStatementValues;
 import com.google.gwt.dev.jjs.impl.TypeCoercionNormalizer;
 import com.google.gwt.dev.jjs.impl.TypeReferencesRecorder;
 import com.google.gwt.dev.jjs.impl.TypeTightener;
@@ -492,6 +493,7 @@ public final class JavaToJavaScriptCompiler {
       LongCastNormalizer.exec(jprogram);
       LongEmulationNormalizer.exec(jprogram);
       TypeCoercionNormalizer.exec(jprogram);
+      SplitCaseStatementValues.exec(jprogram);
 
       if (options.isIncrementalCompileEnabled()) {
         // Per file compilation reuses type JS even as references (like casts) in other files

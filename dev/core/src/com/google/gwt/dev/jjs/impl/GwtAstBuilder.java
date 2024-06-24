@@ -2224,7 +2224,7 @@ public class GwtAstBuilder {
           // synthesize a call to ordinal().
           expression = synthesizeCallToOrdinal(scope, info, expression);
         }
-        push(new JSwitchExpression(info, expression, block, typeMap.get(x.expectedType())));
+        push(new JSwitchExpression(info, expression, block, typeMap.get(x.resolvedType)));
       } catch (Throwable e) {
         throw translateException(x, e);
       }

@@ -30,8 +30,8 @@ public class JCaseStatement extends JStatement {
   private List<JExpression> exprs;
 
   public JCaseStatement(SourceInfo info, JExpression expr) {
-    this(info, Collections.singletonList(expr));
-    assert exprs != null;
+    super(info);
+    this.exprs = Collections.singletonList(expr);
   }
 
   public JCaseStatement(SourceInfo info, Collection<JExpression> exprs) {
@@ -78,7 +78,7 @@ public class JCaseStatement extends JStatement {
   @Override
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {
-      exprs = visitor.acceptImmutable(exprs);
+      exprs = Collections.unmodifiableList(visitor.acceptImmutable(exprs));
     }
     visitor.endVisit(this, ctx);
   }

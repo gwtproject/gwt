@@ -19,7 +19,7 @@ import javaemul.internal.JsUtils;
 import jsinterop.annotations.JsType;
 
 /**
- * Emulation of <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/Normalizer.html"> java.text.Normalizer</a>.
+ * Emulation of <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/Normalizer.html">java.text.Normalizer</a>.
  */
 public final class Normalizer {
 

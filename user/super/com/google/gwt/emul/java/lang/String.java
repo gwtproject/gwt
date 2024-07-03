@@ -27,7 +27,12 @@ import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.Comparator;
 import java.util.Locale;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.StringJoiner;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.Coercions;
 import javaemul.internal.EmulatedCharset;
@@ -755,6 +760,82 @@ public final class String implements Comparable<String>, CharSequence,
     return start > 0 || end < length ? substring(start, end) : this;
   }
 
+  public String strip() {
+    int length = length();
+    int start = getLeadingWhitespaceLength();
+    if (start == length) {
+      return "";
+    }
+    return substring(start, length - getTrailingWhitespaceLength());
+  }
+
+  public String stripLeading() {
+    return substring(getLeadingWhitespaceLength());
+  }
+
+  public String stripTrailing() {
+    return substring(0, length() - getTrailingWhitespaceLength());
+  }
+
+  public boolean isBlank() {
+    return length() == getLeadingWhitespaceLength();
+  }
+
+  public Stream<String> lines() {
+    return StreamSupport.stream(new LinesSpliterator(this), false);
+  }
+
+  public String repeat(int count) {
+    if (count < 0) {
+      throw new IllegalArgumentException("count is negative: " + count);
+    }
+    return asNativeString().repeat(count);
+  }
+
+  private int getLeadingWhitespaceLength() {
+    int length = length();
+    for (int i = 0; i < length; i++) {
+      if (!Character.isWhitespace(charAt(i))) {
+        return i;
+      }
+    }
+    return length;
+  }
+
+  private int getTrailingWhitespaceLength() {
+    int length = length();
+    for (int i = length - 1; i >= 0; i--) {
+      if (!Character.isWhitespace(charAt(i))) {
+        return length - 1 - i;
+      }
+    }
+    return length;
+  }
+
+  private static class LinesSpliterator extends Spliterators.AbstractSpliterator<String> {
+    private int processed = 0;
+    private String content;
+
+    private LinesSpliterator(String content) {
+      super(Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED);
+      this.content = content;
+    }
+
+    @Override
+    public boolean tryAdvance(Consumer<? super String> action) {
+      int rPosition = content.indexOf('\r', processed);
+      int nPosition = content.indexOf('\n', processed);
+      int lineEnd = nPosition == -1 ? rPosition : Math.min(nPosition, rPosition);
+      action.accept(lineEnd == -1 ? content.substring(processed)
+              : content.substring(processed, lineEnd));
+      processed = lineEnd + 1;
+      if (nPosition == rPosition + 1 && rPosition != -1) {
+        processed++;
+      }
+      return lineEnd != -1 && processed < content.length();
+    }
+  }
+
   @JsType(isNative = true, name = "String", namespace = "<window>")
   private static class NativeString {
     public static native String fromCharCode(char x);
@@ -771,6 +852,7 @@ public final class String implements Comparable<String>, CharSequence,
     public native String toLocaleUpperCase();
     public native String toLowerCase();
     public native String toUpperCase();
+    public native String repeat(int count);
   }
 
   // CHECKSTYLE_OFF: Utility Methods for unboxed String.

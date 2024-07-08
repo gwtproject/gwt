@@ -813,8 +813,10 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   private static class LinesSpliterator extends Spliterators.AbstractSpliterator<String> {
-    private int processed = 0;
+    private int nextIndex = 0;
     private String content;
+    int rPosition = -2;
+    int nPosition = -2;
 
     private LinesSpliterator(String content) {
       super(Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED);
@@ -823,16 +825,24 @@ public final class String implements Comparable<String>, CharSequence,
 
     @Override
     public boolean tryAdvance(Consumer<? super String> action) {
-      int rPosition = content.indexOf('\r', processed);
-      int nPosition = content.indexOf('\n', processed);
-      int lineEnd = nPosition == -1 ? rPosition : Math.min(nPosition, rPosition);
-      action.accept(lineEnd == -1 ? content.substring(processed)
-              : content.substring(processed, lineEnd));
-      processed = lineEnd + 1;
-      if (nPosition == rPosition + 1 && rPosition != -1) {
-        processed++;
+      if (rPosition < nextIndex) {
+        rPosition = cappedIndexOf('\r');
       }
-      return lineEnd != -1 && processed < content.length();
+      if (nPosition < nextIndex) {
+        nPosition = cappedIndexOf('\n');
+      }
+      int lineEnd = Math.min(nPosition, rPosition);
+      action.accept(content.substring(nextIndex, lineEnd));
+      nextIndex = lineEnd + 1;
+      if (nPosition == rPosition + 1) {
+        nextIndex++;
+      }
+      return nextIndex < content.length();
+    }
+
+    private int cappedIndexOf(char c) {
+      int index = content.indexOf(c);
+      return index == -1 ? content.length() : index;
     }
   }
 

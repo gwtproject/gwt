@@ -32,14 +32,6 @@ public final class Math {
   //   public static int getExponent (double d)
   //   public static int getExponent (float f)
   //   public static double IEEEremainder(double f1, double f2)
-  //   public static double nextAfter(double start, double direction)
-  //   public static float nextAfter(float start, float direction)
-  //   public static double nextUp(double start) {
-  //     return nextAfter(start, 1.0d);
-  //   }
-  //   public static float nextUp(float start) {
-  //     return nextAfter(start,1.0f);
-  //   }
 
   public static final double E = 2.7182818284590452354;
   public static final double PI = 3.14159265358979323846;
@@ -342,6 +334,75 @@ public final class Math {
 
   public static double toRadians(double x) {
     return x * PI_OVER_180;
+  }
+
+  public static double nextAfter(double start, double direction) {
+    // Simple case described by Javadoc:
+    if (start == direction) {
+      return direction;
+    }
+
+    // NaN special case, if either is NaN, return NaN.
+    if (Double.isNaN(start) || Double.isNaN(direction)) {
+      return Double.NaN;
+    }
+
+    // The javadoc 'special cases' for infinities and min_value are handled already by manipulating
+    // the bits of the start value below. However, that approach used below doesn't work around
+    // zeros - we have two zero values to deal with (positive and negative) with very different bit
+    // representations (zero and Long.MIN_VALUE respectively).
+    if (start == 0) {
+      return direction > start ? Double.MIN_VALUE : -Double.MIN_VALUE;
+    }
+
+    // Convert to int bits and increment or decrement - the fact that two positive ieee754 float
+    // values can be compared as ints (or two negative values, with the comparison inverted) means
+    // that this trick works as naturally as A + 1 > A. NaNs and zeros were already handled above.
+    long bits = Double.doubleToLongBits(start);
+    bits += (direction > start) == (bits >= 0) ? 1 : -1;
+    return Double.longBitsToDouble(bits);
+  }
+
+  public static float nextAfter(float start, double direction) {
+    // Simple case described by Javadoc:
+    if (start == direction) {
+      return (float) direction;
+    }
+
+    // NaN special case, if either is NaN, return NaN.
+    if (Float.isNaN(start) || Double.isNaN(direction)) {
+      return Float.NaN;
+    }
+    // The javadoc 'special cases' for INFINITYs, MIN_VALUE, and MAX_VALUE are handled already by
+    // manipulating the bits of the start value below. However, that approach used below doesn't
+    // work around zeros - we have two zero values to deal with (positive and negative) with very
+    // different bit representations (zero and Integer.MIN_VALUE respectively).
+    if (start == 0) {
+      return direction > start ? Float.MIN_VALUE : -Float.MIN_VALUE;
+    }
+
+    // Convert to int bits and increment or decrement - the fact that two positive ieee754 float
+    // values can be compared as ints (or two negative values, with the comparison inverted) means
+    // that this trick works as naturally as A + 1 > A. NaNs and zeros were already handled above.
+    int bits = Float.floatToIntBits(start);
+    bits += (direction > start) == (bits >= 0) ? 1 : -1;
+    return Float.intBitsToFloat(bits);
+  }
+
+  public static double nextUp(double start) {
+    return nextAfter(start, Double.POSITIVE_INFINITY);
+  }
+
+  public static float nextUp(float start) {
+    return nextAfter(start, Double.POSITIVE_INFINITY);
+  }
+
+  public static double nextDown(double start) {
+    return nextAfter(start, Double.NEGATIVE_INFINITY);
+  }
+
+  public static float nextDown(float start) {
+    return nextAfter(start, Double.NEGATIVE_INFINITY);
   }
 
   private static boolean isSafeIntegerRange(double value) {

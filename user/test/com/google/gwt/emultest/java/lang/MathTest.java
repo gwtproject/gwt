@@ -638,11 +638,11 @@ public class MathTest extends GWTTestCase {
   public void testNextAfterFloat() {
     // Test the five "special cases" described by the Javadoc, with both Float and Double
     // "direction" values.
-    assertEquals(Float.NaN, Math.nextAfter(Float.NaN, Float.NaN));
-    assertEquals(Float.NaN, Math.nextAfter(Float.NaN, Double.NaN));
-    assertEquals(Float.NaN, Math.nextAfter(Float.NaN, 0));
-    assertEquals(Float.NaN, Math.nextAfter(0, Float.NaN));
-    assertEquals(Float.NaN, Math.nextAfter(0, Double.NaN));
+    assertNaN(Math.nextAfter(Float.NaN, Float.NaN));
+    assertNaN(Math.nextAfter(Float.NaN, Double.NaN));
+    assertNaN(Math.nextAfter(Float.NaN, 0));
+    assertNaN(Math.nextAfter(0, Float.NaN));
+    assertNaN(Math.nextAfter(0, Double.NaN));
 
     assertNegativeZero(Math.nextAfter(0.0f, -0.0f));
     assertNegativeZero(Math.nextAfter(0.0f, -0.0d));
@@ -721,7 +721,7 @@ public class MathTest extends GWTTestCase {
 
   public void testNextUpFloat() {
     // Special cases from javadoc
-    assertEquals(Float.NaN, Math.nextUp(Float.NaN));
+    assertNaN(Math.nextUp(Float.NaN));
     assertEquals(Float.POSITIVE_INFINITY, Math.nextUp(Float.POSITIVE_INFINITY));
     assertEquals(Float.MIN_VALUE, Math.nextUp(0.0f));
     assertEquals(Float.MIN_VALUE, Math.nextUp(-0.0f));
@@ -737,7 +737,7 @@ public class MathTest extends GWTTestCase {
 
   public void testNextDownFloat() {
     // Special cases from javadoc
-    assertEquals(Float.NaN, Math.nextDown(Float.NaN));
+    assertNaN(Math.nextDown(Float.NaN));
     assertEquals(Float.NEGATIVE_INFINITY, Math.nextDown(Float.NEGATIVE_INFINITY));
     assertEquals(-Float.MIN_VALUE, Math.nextDown(0.0f));
     assertEquals(-Float.MIN_VALUE, Math.nextDown(-0.0f));
@@ -753,9 +753,9 @@ public class MathTest extends GWTTestCase {
 
   public void testNextAfterDouble() {
     // Test the five "special cases" described by the Javadoc
-    assertEquals(Double.NaN, Math.nextAfter(Double.NaN, Double.NaN));
-    assertEquals(Double.NaN, Math.nextAfter(Double.NaN, 0));
-    assertEquals(Double.NaN, Math.nextAfter(0d, Double.NaN));
+    assertNaN(Math.nextAfter(Double.NaN, Double.NaN));
+    assertNaN(Math.nextAfter(Double.NaN, 0));
+    assertNaN(Math.nextAfter(0d, Double.NaN));
 
     assertNegativeZero(Math.nextAfter(0.0d, -0.0d));
     assertNegativeZero(Math.nextAfter(-0.0d, -0.0d));
@@ -816,7 +816,7 @@ public class MathTest extends GWTTestCase {
 
   public void testNextUpDouble() {
     // Special cases from javadoc
-    assertEquals(Double.NaN, Math.nextUp(Double.NaN));
+    assertNaN(Math.nextUp(Double.NaN));
     assertEquals(Double.POSITIVE_INFINITY, Math.nextUp(Double.POSITIVE_INFINITY));
     assertEquals(Double.MIN_VALUE, Math.nextUp(0.0));
     assertEquals(Double.MIN_VALUE, Math.nextUp(-0.0));
@@ -844,7 +844,7 @@ public class MathTest extends GWTTestCase {
 
   public void testNextDownDouble() {
     // Special cases from javadoc
-    assertEquals(Double.NaN, Math.nextDown(Double.NaN));
+    assertNaN(Math.nextDown(Double.NaN));
     assertEquals(Double.NEGATIVE_INFINITY, Math.nextDown(Double.NEGATIVE_INFINITY));
     assertEquals(-Double.MIN_VALUE, Math.nextDown(0.0d));
     assertEquals(-Double.MIN_VALUE, Math.nextDown(-0.0d));

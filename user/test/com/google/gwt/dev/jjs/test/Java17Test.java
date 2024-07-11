@@ -50,6 +50,34 @@ public class Java17Test extends GWTTestCase {
     assertFalse(isGwtSourceLevel17());
   }
 
+  public void testInstanceOfPatternMatching() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testInstanceOfPatternMatchingWithAnd() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testInstanceOfPatternMatchingWithCondition() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testInstanceOfPatternMatchingWithAsNotCondition() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testMultipleInstanceOfPatternMatchingWithSameVariableName() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testInstanceOfPatternMatchingInLambda() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testInstanceOfPatternMatchingAsReturn() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
   private boolean isGwtSourceLevel17() {
     return JUnitShell.getCompilerOptions().getSourceLevel().compareTo(SourceLevel.JAVA17) >= 0;
   }

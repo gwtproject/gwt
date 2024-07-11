@@ -41,17 +41,54 @@ public class Java17Test extends GWTTestCase {
   }
 
   public sealed class Shape permits Square, Circle {
+    public static int count = 0;
+
+    public static Shape returnAndIncrement(Shape shape){
+      count++;
+      return shape;
+    }
 
   }
 
   public final class Square extends Shape {
-
+    public int getLength() {
+      return 10;
+    }
   }
 
   public final class Circle extends Shape {
-
+    public int getDiameter() {
+      return 10;
+    }
   }
 
+  public interface TestSupplier {
+    boolean run();
+  }
+
+  public class Foo {
+    private Shape shape;
+
+    public Foo() {
+      shape = new Square();
+    }
+
+    public TestSupplier isSquare() {
+      return () -> shape instanceof Square square && square.getLength() > 0;
+    }
+  }
+
+  public class Bar {
+    private Shape shape;
+
+    public Bar() {
+      shape = new Square();
+    }
+
+    public boolean isSquare() {
+      return shape instanceof Square square && square.getLength() > 0;
+    }
+  }
   @Override
   public String getModuleName() {
     return "com.google.gwt.dev.jjs.test.Java17Test";
@@ -75,5 +112,104 @@ public class Java17Test extends GWTTestCase {
   private void checkIfCompiled(Shape square, Shape circle) {
     assertTrue(square instanceof Square);
     assertTrue(circle instanceof Circle);
+  }
+
+  public void testInstanceOfPatternMatching() {
+    Shape shape1 = new Circle();
+    if (shape1 instanceof Circle circle) {
+      circle.getDiameter();
+      assertTrue(true);
+      return;
+    }
+    fail();
+  }
+
+  public void testInstanceOfPatternMatchingWithSideEffectExpression() {
+    Shape shape1 = new Circle();
+    if (Shape.returnAndIncrement(shape1) instanceof Circle circle) {
+      circle.getDiameter();
+      assertTrue(true);
+      assertEquals(1, Shape.count);
+      return;
+    }
+    fail();
+  }
+
+  public void testInstanceOfPatternMatchingWithAnd() {
+    Shape shape1 = new Circle();
+    Shape shape2 = new Square();
+
+    if (shape1 instanceof Circle circle && shape2 instanceof Square square) {
+      circle.getDiameter();
+      square.getLength();
+      assertTrue(true);
+      return;
+    }
+    fail();
+  }
+
+  public void testInstanceOfPatternMatchingWithCondition() {
+    Shape shape2 = new Square();
+    if (shape2 instanceof Square square && square.getLength() > 0) {
+      square.getLength();
+      assertTrue(true);
+      return;
+    }
+    fail();
+  }
+
+  public void testInstanceOfPatternMatchingWithAsNotCondition() {
+    Shape shape1 = new Square();
+    if (!(shape1 instanceof Square square && square.getLength() > 10)) {
+      assertTrue(true);
+      return;
+    }
+    fail();
+  }
+
+  public void testMultipleInstanceOfPatternMatchingWithSameVariableName() {
+    Shape shape1 = new Square();
+    Shape shape2 = new Square();
+    boolean a = false;
+    boolean b = false;
+    if (shape1 instanceof Square square && square.getLength() > 0) {
+      a = true;
+    }
+    if (shape2 instanceof Square square && square.getLength() > 0) {
+      b = true;
+    }
+    assertTrue(a && b);
+  }
+
+  public void testMultipleInstanceOfPatternMatchingWithSameVariableNameWithDifferentTypes() {
+    Shape shape1 = new Square();
+    Shape shape2 = new Circle();
+    boolean a = false;
+    boolean b = false;
+    if (shape1 instanceof Square shp && shp.getLength() > 0) {
+      a = true;
+    }
+    if (shape2 instanceof Circle shp && shp.getDiameter() > 0) {
+      b = true;
+    }
+    assertTrue(a && b);
+  }
+
+  public void testInstanceOfPatternMatchingIsFalse() {
+    Shape shape1 = new Square();
+    if (shape1 instanceof Circle shp) {
+      fail("Should have not reached this point.");
+    }
+    assertTrue(true);
+  }
+
+  public void testInstanceOfPatternMatchingInLambda() {
+    Foo foo = new Foo();
+    assertTrue(foo.isSquare().run());
+  }
+
+  public void testInstanceOfPatternMatchingAsReturn() {
+    Bar bar = new Bar();
+    assertTrue(bar.isSquare());
   }
 }

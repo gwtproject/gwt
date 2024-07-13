@@ -337,6 +337,7 @@ public class JsTypeVarargsTest extends GWTTestCase {
       return values.length;
     }
   }
+
   // Declaring this type lets us use jsinterop to call the above method.
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "VarArgsQualifiedInstanceMethod")
   public static class VarArgsFromJava {

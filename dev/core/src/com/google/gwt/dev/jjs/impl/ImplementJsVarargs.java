@@ -296,7 +296,7 @@ public class ImplementJsVarargs {
       varargsParameter = Iterables.getLast(x.getParams());
       varargsIndex = x.getParams().size() - 1;
 
-      // JsVarargs parameter can be assumend not null in the implementing method
+      // JsVarargs parameter can be assumed not null in the implementing method
       varargsParameter.setType(varargsParameter.getType().strengthenToNonNull());
 
       argumentsCopyVariable = null;

@@ -27,6 +27,8 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
+import java.util.Objects;
+
 /**
  * Tests JsType functionality.
  */
@@ -349,5 +351,84 @@ public class JsTypeVarargsTest extends GWTTestCase {
   // This plain Java method accepts varargs, and tries to pass them into jsinterop.
   private static int nonNativeMethod(Object... values) {
     return VarArgsFromJava.INSTANCE.getLength(values);
+  }
+
+  public void testVarargsObjects() {
+    assertEquals(new VarargsSummary<>(1, null, null),
+            varargInstance().acceptsObjects((Object) null));
+    assertEquals(new VarargsSummary<>(0, null, null),
+            varargInstance().acceptsObjects());
+    assertEquals(new VarargsSummary<>(1, String.class, null),
+            varargInstance().acceptsObjects("hello"));
+    assertEquals(new VarargsSummary<>(2, String.class, null),
+            varargInstance().acceptsObjects("hello", "world"));
+    // noinspection ConfusingArgumentToVarargsMethod
+    assertEquals(new VarargsSummary<>(2, String.class, null),
+            varargInstance().acceptsObjects(new String[]{"hello", "world"}));
+    assertEquals(new VarargsSummary<>(2, String.class, null),
+            varargInstance().acceptsObjects(new Object[]{"hello", "world"}));
+  }
+
+    private static VarargMethodHolderFromJava varargInstance() {
+    return new VarargMethodHolderFromJava();
+  }
+
+  // Java impl of the jsinterop type we'll call below.
+  @JsType(namespace = JsPackage.GLOBAL)
+  public static class VarargMethodHolder {
+    public VarargsSummary<Void> acceptsObjects(Object... values) {
+      // Note that unlike the VarargsTest version, values can never be null, and the values
+      // array is always Object[] since it is spliced from js's "arguments".
+      assertNotNull(values);
+      return new VarargsSummary<>(
+              values.length,
+              (values.length == 0 || values[0] == null) ? null : values[0].getClass(),
+              null);
+    }
+  }
+
+  // Declaring this type lets us use jsinterop to call the above method.
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "VarargMethodHolder")
+  public static class VarargMethodHolderFromJava {
+    public native VarargsSummary<Void> acceptsObjects(Object... values);
+  }
+
+  @JsType
+  public static final class VarargsSummary<T> {
+    private final int count;
+    private final Class<?> firstItemType;
+    private final T value;
+
+    public VarargsSummary(int count, Class<?> firstItemType, T value) {
+      this.count = count;
+      this.firstItemType = firstItemType;
+      this.value = value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) {
+        return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+        return false;
+      }
+      VarargsSummary<?> that = (VarargsSummary<?>) o;
+      return count == that.count
+              && Objects.equals(firstItemType, that.firstItemType)
+              && Objects.equals(value, that.value);
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(count, firstItemType, value);
+    }
+
+    @Override
+    public String toString() {
+      return "count=" + count +
+              ", firstItemType=" + firstItemType +
+              ", value=" + value;
+    }
   }
 }

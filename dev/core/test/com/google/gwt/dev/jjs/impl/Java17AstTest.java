@@ -246,7 +246,7 @@ public class Java17AstTest extends FullCompileTestBase {
             "($instanceOfExpr_6 = shape2) instanceof Square && null != (square = (Square) $instanceOfExpr_6)"));
   }
 
-  public void testSwitchExpressionsInitializerShouldFail() throws UnableToCompleteException {
+  public void testSwitchExpressionsWithYield() throws UnableToCompleteException {
     compileSnippet("void", "    int i = switch(1) {\n" +
         "      case 1:\n" +
         "        yield 2;\n" +

@@ -77,7 +77,16 @@ public class Java17Test extends GWTTestCase {
   public void testInstanceOfPatternMatchingAsReturn() {
     assertFalse(isGwtSourceLevel17());
   }
-  public void testSwitchExpression() {
+
+  public void testSwitchExpressionOnConstant() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testSwitchWithMultipleCaseValues() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testSwitchInSubExpr() {
     assertFalse(isGwtSourceLevel17());
   }
 

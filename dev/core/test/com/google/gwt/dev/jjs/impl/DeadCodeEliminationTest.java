@@ -165,7 +165,6 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
             "  }",
             "}",
             "return -1;");
-
   }
 
   public void testSwitchOverConstant_NonConstant() throws Exception {

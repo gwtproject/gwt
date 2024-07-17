@@ -15,7 +15,11 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
-import com.google.gwt.dev.jjs.ast.*;
+import com.google.gwt.dev.jjs.ast.Context;
+import com.google.gwt.dev.jjs.ast.JCaseStatement;
+import com.google.gwt.dev.jjs.ast.JExpression;
+import com.google.gwt.dev.jjs.ast.JModVisitor;
+import com.google.gwt.dev.jjs.ast.JProgram;
 
 /**
  * Breaks up Java 14 case statements so that each has exactly one value, allowing them to be

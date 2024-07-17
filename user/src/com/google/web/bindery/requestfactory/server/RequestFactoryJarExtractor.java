@@ -98,7 +98,11 @@ import javax.annotation.processing.Processor;
 
 /**
  * Used to extract RequestFactory client jars from {@code gwt-user.jar}.
+ *
+ * @deprecated Will not be deleted from source, but will no longer be included in GWT artifacts, as
+ * this is only intended for use as a build tool.
  */
+@Deprecated
 public class RequestFactoryJarExtractor {
   /*
    * The FooProcessor types are ASM visitors that traverse the bytecode, calling
@@ -842,6 +846,12 @@ public class RequestFactoryJarExtractor {
         System.err.println("  " + target);
       }
       System.exit(1);
+    }
+    if (args.length != 3 || !"used-to-build-gwt".equals(args[2])) {
+      // Test for magic sentinel, warn if not present
+      System.err.println("RequestFactoryJarExtractor is deprecated for removal from build " +
+              "artifacts, if you have a use case that requires it please discuss at " +
+              "https://github.com/gwtproject/gwt/issues/9923.");
     }
     String target = args[0];
     List<Class<?>> seeds = SEEDS.get(target);

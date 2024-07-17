@@ -260,16 +260,42 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
    * @throws NumberFormatException if the length of {@code val} is zero.
    */
   public BigInteger(byte[] val) {
+    this(val, 0, val.length);
+  }
+
+  /**
+   * Constructs a new {@code BigInteger} from the given two's complement
+   * representation. The most significant byte is the entry at index 0. The most
+   * significant bit of this entry determines the sign of the new {@code
+   * BigInteger} instance. The given array must not be empty.
+   *
+   * @param val two's complement representation of the new {@code BigInteger}.
+   * @param offset the start offset of the binary representation.
+   * @param length the number of bytes to use.
+   * @throws NullPointerException if {@code val == null}.
+   * @throws NumberFormatException if the length of {@code val} is zero.
+   */
+  public BigInteger(byte[] val, int offset, int length) {
     if (val.length == 0) {
       // math.12=Zero length BigInteger
       throw new NumberFormatException("Zero length BigInteger"); //$NON-NLS-1$
     }
-    if (val[0] < 0) {
+    if (length < 0 || offset < 0 || length > val.length - offset) {
+      throw new IndexOutOfBoundsException("Range check failed: offset=" + offset + ", length="
+          + length + ", val.length=" + val.length);
+    }
+    if (length == 0) {
+      sign = 0;
+      numberLength = 1;
+      digits = new int[] {0};
+      return;
+    }
+    if (val[offset] < 0) {
       sign = -1;
-      putBytesNegativeToIntegers(val);
+      putBytesNegativeToIntegers(val, offset, length);
     } else {
       sign = 1;
-      putBytesPositiveToIntegers(val);
+      putBytesPositiveToIntegers(val, offset, length);
     }
     cutOffLeadingZeroes();
   }
@@ -289,27 +315,53 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
    *           sign is zero and the magnitude contains non-zero entries.
    */
   public BigInteger(int signum, byte[] magnitude) {
+    this(signum, magnitude, 0, magnitude.length);
+  }
+
+  /**
+   * Constructs a new {@code BigInteger} instance with the given sign and the
+   * given magnitude. The sign is given as an integer (-1 for negative, 0 for
+   * zero, 1 for positive). The magnitude is specified as a byte array. The most
+   * significant byte is the entry at index 0.
+   *
+   * @param signum sign of the new {@code BigInteger} (-1 for negative, 0 for
+   *          zero, 1 for positive).
+   * @param magnitude magnitude of the new {@code BigInteger} with the most
+   *          significant byte first.
+   * @param offset the start offset of the binary representation.
+   * @param length the number of bytes to use.
+   * @throws NullPointerException if {@code magnitude == null}.
+   * @throws NumberFormatException if the sign is not one of -1, 0, 1 or if the
+   *           sign is zero and the magnitude contains non-zero entries.
+   */
+  public BigInteger(int signum, byte[] magnitude, int offset, int length) {
     checkNotNull(magnitude);
+
+    if (length < 0 || offset < 0 || length > magnitude.length - offset) {
+      throw new IndexOutOfBoundsException("Range check failed: offset=" + offset + ", length="
+          + length + ", val.length=" + magnitude.length);
+    }
 
     if ((signum < -1) || (signum > 1)) {
       // math.13=Invalid signum value
       throw new NumberFormatException("Invalid signum value"); //$NON-NLS-1$
     }
     if (signum == 0) {
-      for (byte element : magnitude) {
+      for (int index = offset; index < offset + length; index++) {
+        byte element = magnitude[index];
         if (element != 0) {
           // math.14=signum-magnitude mismatch
           throw new NumberFormatException("signum-magnitude mismatch"); //$NON-NLS-1$
         }
       }
     }
-    if (magnitude.length == 0) {
+    if (length == 0) {
       sign = 0;
       numberLength = 1;
       digits = new int[] {0};
     } else {
       sign = signum;
-      putBytesPositiveToIntegers(magnitude);
+      putBytesPositiveToIntegers(magnitude, offset, length);
       cutOffLeadingZeroes();
     }
   }
@@ -1477,8 +1529,8 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
   /**
    * Puts a big-endian byte array into a little-endian applying two complement.
    */
-  private void putBytesNegativeToIntegers(byte[] byteValues) {
-    int bytesLen = byteValues.length;
+  private void putBytesNegativeToIntegers(byte[] byteValues, int offset, int length) {
+    int bytesLen = length;
     int highBytes = bytesLen & 3;
     numberLength = (bytesLen >> 2) + ((highBytes == 0) ? 0 : 1);
     digits = new int[numberLength];
@@ -1487,19 +1539,19 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
     digits[numberLength - 1] = -1;
     // Put bytes to the int array starting from the end of the byte array
     while (bytesLen > highBytes) {
-      digits[i] = (byteValues[--bytesLen] & 0xFF)
-          | (byteValues[--bytesLen] & 0xFF) << 8
-          | (byteValues[--bytesLen] & 0xFF) << 16
-          | (byteValues[--bytesLen] & 0xFF) << 24;
+      digits[i] = (byteValues[--bytesLen + offset] & 0xFF)
+          | (byteValues[--bytesLen + offset] & 0xFF) << 8
+          | (byteValues[--bytesLen + offset] & 0xFF) << 16
+          | (byteValues[--bytesLen + offset] & 0xFF) << 24;
       if (digits[i] != 0) {
         digits[i] = -digits[i];
         firstNonzeroDigit = i;
         i++;
         while (bytesLen > highBytes) {
-          digits[i] = (byteValues[--bytesLen] & 0xFF)
-              | (byteValues[--bytesLen] & 0xFF) << 8
-              | (byteValues[--bytesLen] & 0xFF) << 16
-              | (byteValues[--bytesLen] & 0xFF) << 24;
+          digits[i] = (byteValues[--bytesLen + offset] & 0xFF)
+              | (byteValues[--bytesLen + offset] & 0xFF) << 8
+              | (byteValues[--bytesLen + offset] & 0xFF) << 16
+              | (byteValues[--bytesLen + offset] & 0xFF) << 24;
           digits[i] = ~digits[i];
           i++;
         }
@@ -1510,12 +1562,12 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
     if (highBytes != 0) {
       // Put the first bytes in the highest element of the int array
       if (firstNonzeroDigit != -2) {
-        for (int j = 0; j < bytesLen; j++) {
+        for (int j = offset; j < bytesLen + offset; j++) {
           digits[i] = (digits[i] << 8) | (byteValues[j] & 0xFF);
         }
         digits[i] = ~digits[i];
       } else {
-        for (int j = 0; j < bytesLen; j++) {
+        for (int j = offset; j < bytesLen + offset; j++) {
           digits[i] = (digits[i] << 8) | (byteValues[j] & 0xFF);
         }
         digits[i] = -digits[i];
@@ -1526,21 +1578,21 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
   /**
    * Puts a big-endian byte array into a little-endian int array.
    */
-  private void putBytesPositiveToIntegers(byte[] byteValues) {
-    int bytesLen = byteValues.length;
+  private void putBytesPositiveToIntegers(byte[] byteValues, int offset, int length) {
+    int bytesLen = length;
     int highBytes = bytesLen & 3;
     numberLength = (bytesLen >> 2) + ((highBytes == 0) ? 0 : 1);
     digits = new int[numberLength];
     int i = 0;
     // Put bytes to the int array starting from the end of the byte array
     while (bytesLen > highBytes) {
-      digits[i++] = (byteValues[--bytesLen] & 0xFF)
-          | (byteValues[--bytesLen] & 0xFF) << 8
-          | (byteValues[--bytesLen] & 0xFF) << 16
-          | (byteValues[--bytesLen] & 0xFF) << 24;
+      digits[i++] = (byteValues[--bytesLen + offset] & 0xFF)
+          | (byteValues[--bytesLen + offset] & 0xFF) << 8
+          | (byteValues[--bytesLen + offset] & 0xFF) << 16
+          | (byteValues[--bytesLen + offset] & 0xFF) << 24;
     }
     // Put the first bytes in the highest element of the int array
-    for (int j = 0; j < bytesLen; j++) {
+    for (int j = offset; j < bytesLen + offset; j++) {
       digits[i] = (digits[i] << 8) | (byteValues[j] & 0xFF);
     }
   }

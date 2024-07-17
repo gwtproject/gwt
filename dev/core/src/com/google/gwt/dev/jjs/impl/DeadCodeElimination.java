@@ -84,6 +84,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -1247,11 +1248,18 @@ public class DeadCodeElimination {
         return true;
       }
 
-      Iterator<JStatement> it = s.getBody().getStatements().iterator();
+      ListIterator<JStatement> it = s.getBody().getStatements().listIterator();
 
       // Remove things until we find the matching case
       while (it.hasNext() && (it.next() != matchingCase)) {
         it.remove();
+        madeChanges();
+      }
+
+      // If the matching case had more than one value, rewrite to only the matching value
+      if (matchingCase.getExprs().size() > 1) {
+        it.remove();
+        it.add(new JCaseStatement(matchingCase.getSourceInfo(), targetValue));
         madeChanges();
       }
 
@@ -1263,6 +1271,7 @@ public class DeadCodeElimination {
           break;
         } else if (statement instanceof JCaseStatement) {
           it.remove();
+          madeChanges();
         }
       }
 

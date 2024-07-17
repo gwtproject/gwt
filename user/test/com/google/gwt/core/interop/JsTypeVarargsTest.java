@@ -20,14 +20,13 @@ import static jsinterop.annotations.JsPackage.GLOBAL;
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.junit.client.GWTTestCase;
 
+import java.util.Objects;
 import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-
-import java.util.Objects;
 
 /**
  * Tests JsType functionality.

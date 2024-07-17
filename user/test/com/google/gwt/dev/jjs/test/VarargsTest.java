@@ -89,7 +89,6 @@ public class VarargsTest extends GWTTestCase {
     return args;
   }
 
-
   public void testVarargsObjects() {
     assertEquals(new VarargsSummary<>(1, Object[].class, null),
             acceptsObjects((Object) null));

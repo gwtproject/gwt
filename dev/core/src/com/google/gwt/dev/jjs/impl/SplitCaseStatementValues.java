@@ -16,7 +16,6 @@
 package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.jjs.ast.*;
-import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 /**
  * Breaks up Java 14 case statements so that each has exactly one value, allowing them to be
@@ -27,9 +26,8 @@ public class SplitCaseStatementValues {
     @Override
     public void endVisit(JCaseStatement x, Context ctx) {
       if (x.getExprs().size() > 1) {
-        // If more than one value is present in a case, append each in its own case by inserting
-        // them in reverse order.
-        for (JExpression expr : Lists.reverse(x.getExprs())) {
+        // If more than one value is present in a case, append each in its own case
+        for (JExpression expr : x.getExprs()) {
           ctx.insertBefore(new JCaseStatement(x.getSourceInfo(), expr));
         }
         ctx.removeMe();

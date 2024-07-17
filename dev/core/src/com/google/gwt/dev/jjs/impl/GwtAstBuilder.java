@@ -565,7 +565,7 @@ public class GwtAstBuilder {
             if (caseExpression != null && caseExpression.getType().isEnumOrSubclass() != null) {
               caseExpression = synthesizeCallToOrdinal(scope, info, caseExpression);
             }
-            cases.add(caseExpression);
+            cases.add(0, caseExpression);
           }
           push(new JCaseStatement(info, cases));
         }

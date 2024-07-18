@@ -18,13 +18,10 @@ package com.google.gwt.user.client.ui;
 import com.google.gwt.dom.client.BodyElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.logical.shared.CloseEvent;
-import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.i18n.client.BidiUtils;
 import com.google.gwt.i18n.client.HasDirection;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.Window;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -188,8 +185,6 @@ public class RootPanel extends AbsolutePanel {
     // on the first RootPanel.get(String) or RootPanel.get()
     // call.
     if (rootPanels.size() == 0) {
-      hookWindowClosing();
-
       // If we're in a RTL locale, set the RTL directionality
       // on the entire document.
       if (LocaleInfo.getCurrentLocale().isRTL()) {
@@ -257,15 +252,6 @@ public class RootPanel extends AbsolutePanel {
   private static native Element getRootElement() /*-{
     return $doc;
   }-*/;
-
-  private static void hookWindowClosing() {
-    // Catch the window closing event.
-    Window.addCloseHandler(new CloseHandler<Window>() {
-      public void onClose(CloseEvent<Window> closeEvent) {
-        detachWidgets();
-      }
-    });
-  }
 
   /*
    * Checks to see whether the given element has any parent element that

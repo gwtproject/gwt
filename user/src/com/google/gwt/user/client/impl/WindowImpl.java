@@ -29,11 +29,30 @@ public class WindowImpl {
   public native String getQueryString() /*-{
     return $wnd.location.search;
   }-*/;
-  
-  public native void initWindowCloseHandler() /*-{
+
+  @Deprecated
+  public void initWindowCloseHandler() {
+    initWindowUnloadHandler();
+    initWindowBeforeUnloadHandler();
+  }
+
+  @Deprecated
+  public native void initWindowUnloadHandler() /*-{
+    var oldOnUnload = $wnd.onunload;
+
+    $wnd.onunload = $entry(function(evt) {
+      try {
+        @com.google.gwt.user.client.Window::onClosed()();
+      } finally {
+        oldOnUnload && oldOnUnload(evt);
+        $wnd.onunload = null;
+      }
+    });
+  }-*/;
+
+  public native void initWindowBeforeUnloadHandler() /*-{
     var oldOnBeforeUnload = $wnd.onbeforeunload;
-    var oldOnUnload =  $wnd.onunload;
-    
+
     // Old mozilla doesn't like $entry's explicit return statement and
     // will always pop up a confirmation dialog.  This is worked around by
     // just wrapping the call to onClosing(), which still has the semantics
@@ -43,7 +62,9 @@ public class WindowImpl {
       try {
         ret = $entry(@com.google.gwt.user.client.Window::onClosing())();
       } finally {
-        oldRet = oldOnBeforeUnload && oldOnBeforeUnload(evt);
+        try {
+          oldRet = oldOnBeforeUnload && oldOnBeforeUnload(evt);
+        } catch (ignored) {}
       }
       // Avoid returning null as IE6 will coerce it into a string.
       // Ensure that "" gets returned properly.
@@ -55,18 +76,6 @@ public class WindowImpl {
       }
       // returns undefined.
     };
-    
-    $wnd.onunload = $entry(function(evt) {
-      try {
-        @com.google.gwt.user.client.Window::onClosed()();
-      } finally {
-        oldOnUnload && oldOnUnload(evt);
-        $wnd.onresize = null;
-        $wnd.onscroll = null;
-        $wnd.onbeforeunload = null;
-        $wnd.onunload = null;
-      }
-    });
   }-*/;
 
   public native void initWindowResizeHandler() /*-{

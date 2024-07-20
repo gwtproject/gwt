@@ -33,27 +33,40 @@ public class StringTest extends EmulTestBase {
   }
 
   public void testStrip() {
-    assertEquals("", "".strip());
-    assertEquals("", "  ".strip());
-    assertEquals("x", " x ".strip());
-    assertEquals("x", "\u001cx\u001c".strip());
-    assertEquals("\u00a0x\u00a0", "\u00a0x\u00a0 ".strip());
+    stripRightAsssertEquals("", "");
+    stripRightAsssertEquals("", "  ");
+    stripRightAsssertEquals("x", " x ");
+    stripRightAsssertEquals("x", "\u001cx\u001c");
+    stripRightAsssertEquals("\u00a0x\u00a0", "\u00a0x\u00a0 ");
+    stripRightAsssertEquals("\uffefx\u180e", "\uffefx\u180e ");
   }
 
   public void testStripLeading() {
-    assertEquals("", "".stripLeading());
-    assertEquals("", "  ".stripLeading());
-    assertEquals("x ", " x ".stripLeading());
-    assertEquals("x\u001c", "\u001cx\u001c".stripLeading());
-    assertEquals("\u00a0x\u00a0", "\u00a0x\u00a0".stripLeading());
+    stripRightLeadingAsssertEquals("", "");
+    stripRightLeadingAsssertEquals("", "  ");
+    stripRightLeadingAsssertEquals("x ", " x ");
+    stripRightLeadingAsssertEquals("x\u001c", "\u001cx\u001c");
+    stripRightLeadingAsssertEquals("\u00a0x\u00a0", "\u00a0x\u00a0");
   }
 
   public void testStripTrailing() {
-    assertEquals("", "".stripTrailing());
-    assertEquals("", "  ".stripTrailing());
-    assertEquals(" x", " x ".stripTrailing());
-    assertEquals("\u001cx", "\u001cx\u001c".stripTrailing());
-    assertEquals("\u00a0x\u00a0", "\u00a0x\u00a0 ".stripTrailing());
+    stripRightTrailingAsssertEquals("", "");
+    stripRightTrailingAsssertEquals("", "  ");
+    stripRightTrailingAsssertEquals(" x", " x ");
+    stripRightTrailingAsssertEquals("\u001cx", "\u001cx\u001c");
+    stripRightTrailingAsssertEquals("\u00a0x\u00a0", "\u00a0x\u00a0 ");
+  }
+
+  private void stripRightAsssertEquals(String expected, String arg) {
+    assertEquals(expected, arg.strip())
+  }
+
+  private void stripRightLeadingAsssertEquals(String expected, String arg) {
+    assertEquals(expected, arg.stripLeading())
+  }
+
+  private void stripRightTrailingAsssertEquals(String expected, String arg) {
+    assertEquals(expected, arg.stripTrailing())
   }
 
   public void testRepeat() {

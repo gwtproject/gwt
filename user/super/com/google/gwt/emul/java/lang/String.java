@@ -16,6 +16,7 @@
 
 package java.lang;
 
+import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkCriticalStringBounds;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.checkStringBounds;
@@ -782,13 +783,11 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public Stream<String> lines() {
-    return StreamSupport.stream(new LinesSpliterator(this), false);
+    return StreamSupport.stream(new LinesSpliterator(), false);
   }
 
   public String repeat(int count) {
-    if (count < 0) {
-      throw new IllegalArgumentException("count is negative: " + count);
-    }
+    checkArgument(count >= 0, "count is negative: " + count);
     return asNativeString().repeat(count);
   }
 
@@ -812,15 +811,13 @@ public final class String implements Comparable<String>, CharSequence,
     return length;
   }
 
-  private static class LinesSpliterator extends Spliterators.AbstractSpliterator<String> {
+  private class LinesSpliterator extends Spliterators.AbstractSpliterator<String> {
     private int nextIndex = 0;
-    private String content;
-    int rPosition = -2;
-    int nPosition = -2;
+    private int rPosition = -1;
+    private int nPosition = -1;
 
-    private LinesSpliterator(String content) {
+    private LinesSpliterator() {
       super(Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED);
-      this.content = content;
     }
 
     @Override
@@ -832,17 +829,17 @@ public final class String implements Comparable<String>, CharSequence,
         nPosition = cappedIndexOf('\n');
       }
       int lineEnd = Math.min(nPosition, rPosition);
-      action.accept(content.substring(nextIndex, lineEnd));
+      action.accept(substring(nextIndex, lineEnd));
       nextIndex = lineEnd + 1;
       if (nPosition == rPosition + 1) {
         nextIndex++;
       }
-      return nextIndex < content.length();
+      return nextIndex < length();
     }
 
     private int cappedIndexOf(char c) {
-      int index = content.indexOf(c);
-      return index == -1 ? content.length() : index;
+      int index = indexOf(c);
+      return index == -1 ? length() : index;
     }
   }
 

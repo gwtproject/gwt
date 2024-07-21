@@ -25,11 +25,11 @@ import java.util.stream.Collectors;
  */
 public class StringTest extends EmulTestBase {
   public void testIsBlank() {
-    assertTrue("".isBlank());
-    assertTrue("  ".isBlank());
-    assertFalse("x ".isBlank());
-    assertTrue("\u001c".isBlank());
-    assertFalse("\u00a0".isBlank());
+    assertTrue(hideFromCompiler("").isBlank());
+    assertTrue(hideFromCompiler("  ").isBlank());
+    assertFalse(hideFromCompiler("x ").isBlank());
+    assertTrue(hideFromCompiler("\u001c").isBlank());
+    assertFalse(hideFromCompiler("\u00a0").isBlank());
   }
 
   public void testStrip() {
@@ -58,23 +58,23 @@ public class StringTest extends EmulTestBase {
   }
 
   private void stripRightAsssertEquals(String expected, String arg) {
-    assertEquals(expected, arg.strip())
+    assertEquals(expected, hideFromCompiler(arg).strip());
   }
 
   private void stripRightLeadingAsssertEquals(String expected, String arg) {
-    assertEquals(expected, arg.stripLeading())
+    assertEquals(expected, hideFromCompiler(arg).stripLeading());
   }
 
   private void stripRightTrailingAsssertEquals(String expected, String arg) {
-    assertEquals(expected, arg.stripTrailing())
+    assertEquals(expected, hideFromCompiler(arg).stripTrailing());
   }
 
   public void testRepeat() {
-    assertEquals("", "foo".repeat(0));
-    assertEquals("foo", "foo".repeat(1));
-    assertEquals("foofoofoo", "foo".repeat(3));
+    assertEquals("", hideFromCompiler("foo").repeat(0));
+    assertEquals("foo", hideFromCompiler("foo").repeat(1));
+    assertEquals("foofoofoo", hideFromCompiler("foo").repeat(3));
     try {
-      String noFoo = "foo".repeat(-1);
+      String noFoo = hideFromCompiler("foo").repeat(-1);
       throw new Error("Should fail with negative arg");
     } catch (IllegalArgumentException ex) {
       assertEquals("count is negative: -1", ex.getMessage());
@@ -98,5 +98,13 @@ public class StringTest extends EmulTestBase {
         "\n\r\n".lines().collect(Collectors.toList()));
     assertEquals(Arrays.asList("", "", "c"),
         "\n\r\nc".lines().collect(Collectors.toList()));
+  }
+
+  private <T> T hideFromCompiler(T value) {
+    if (Math.random() < -1) {
+      // Can never happen, but fools the compiler enough not to optimize this call.
+      fail();
+    }
+    return value;
   }
 }

@@ -822,6 +822,9 @@ public final class String implements Comparable<String>, CharSequence,
 
     @Override
     public boolean tryAdvance(Consumer<? super String> action) {
+      if (isEmpty()) {
+        return false;
+      }
       if (rPosition < nextIndex) {
         rPosition = cappedIndexOf('\r');
       }
@@ -838,7 +841,7 @@ public final class String implements Comparable<String>, CharSequence,
     }
 
     private int cappedIndexOf(char c) {
-      int index = indexOf(c);
+      int index = indexOf(c, nextIndex);
       return index == -1 ? length() : index;
     }
   }

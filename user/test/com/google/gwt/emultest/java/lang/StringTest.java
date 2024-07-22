@@ -24,13 +24,6 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Locale;
 
-/**
- * TODO: COMPILER OPTIMIZATIONS HAVE MADE THIS TEST NOT ACTUALLY TEST ANYTHING!
- * NEED A VERSION THAT DOESN'T USE STATICALLY DETERMINABLE STRINGS!
- *
- * See individual method TODOs for ones that still need work -- the ones without
- * comments are already protected against optimization.
- */
 public class StringTest extends GWTTestCase {
 
   @Override
@@ -862,9 +855,6 @@ public class StringTest extends GWTTestCase {
     assertSame("s same as s.toString()", s, s.toString());
   }
 
-  /*
-   * TODO: needs rewriting to avoid compiler optimizations.
-   */
   public void testTrim() {
     trimRightAssertEquals("abc", "   \t abc \n  ");
     trimRightAssertEquals("abc", "abc");
@@ -911,40 +901,33 @@ public class StringTest extends GWTTestCase {
     assertEquals("", hideFromCompiler("").toUpperCase(Locale.getDefault()));
   }
 
-  /*
-   * TODO: needs rewriting to avoid compiler optimizations.
-   */
   public void testValueOf() {
-    assertTrue(String.valueOf(C.FLOAT_VALUE).startsWith(C.FLOAT_STRING));
-    assertEquals(C.INT_STRING, String.valueOf(C.INT_VALUE));
-    assertEquals(C.LONG_STRING, String.valueOf(C.LONG_VALUE));
-    assertTrue(String.valueOf(C.DOUBLE_VALUE).startsWith(C.DOUBLE_STRING));
-    assertEquals(C.CHAR_STRING, String.valueOf(C.CHAR_VALUE));
-    assertEquals(C.CHAR_ARRAY_STRING, String.valueOf(C.CHAR_ARRAY_VALUE));
+    assertTrue(String.valueOf(hideFromCompiler(C.FLOAT_VALUE)).startsWith(C.FLOAT_STRING));
+    assertEquals(C.INT_STRING, String.valueOf(hideFromCompiler(C.INT_VALUE)));
+    assertEquals(C.LONG_STRING, String.valueOf(hideFromCompiler(C.LONG_VALUE)));
+    assertTrue(String.valueOf(C.DOUBLE_VALUE).startsWith(hideFromCompiler(C.DOUBLE_STRING)));
+    assertEquals(C.CHAR_STRING, String.valueOf(hideFromCompiler(C.CHAR_VALUE)));
+    assertEquals(C.CHAR_ARRAY_STRING, String.valueOf(hideFromCompiler(C.CHAR_ARRAY_VALUE)));
     assertEquals(
-        C.CHAR_ARRAY_STRING_SUB, String.valueOf(C.CHAR_ARRAY_VALUE, 1,
+        C.CHAR_ARRAY_STRING_SUB, String.valueOf(hideFromCompiler(C.CHAR_ARRAY_VALUE), 1,
         4));
-    assertEquals(C.FALSE_STRING, String.valueOf(C.FALSE_VALUE));
-    assertEquals(C.TRUE_STRING, String.valueOf(C.TRUE_VALUE));
+    assertEquals(C.FALSE_STRING, String.valueOf(hideFromCompiler(C.FALSE_VALUE)));
+    assertEquals(C.TRUE_STRING, String.valueOf(hideFromCompiler(C.TRUE_VALUE)));
     assertEquals(C.getLargeCharArrayString(), String.valueOf(C.getLargeCharArrayValue()));
   }
 
   /**
    * Helper method for testTrim to avoid compiler optimizations.
-   *
-   * TODO: insufficient, compiler now inlines.
    */
   public void trimRightAssertEquals(String left, String right) {
-    assertEquals(left, right.trim());
+    assertEquals(left, hideFromCompiler(right).trim());
   }
 
   /**
    * Helper method for testTrim to avoid compiler optimizations.
-   *
-   * TODO: insufficient, compiler now inlines.
    */
   public void trimRightAssertSame(String left, String right) {
-    assertSame(left, right.trim());
+    assertSame(left, hideFromCompiler(right).trim());
   }
 
   private void compareList(String category, String[] desired, String[] got) {

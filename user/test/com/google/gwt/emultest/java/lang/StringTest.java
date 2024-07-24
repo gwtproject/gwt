@@ -885,6 +885,7 @@ public class StringTest extends GWTTestCase {
 
     // JavaScript would trim \u2029 and other unicode whitespace type characters; but Java wont
     trimRightAssertEquals("\u2029abc\u00a0","\u2029abc\u00a0");
+    trimRightAssertEquals("\uffefx\u180e", "\uffefx\u180e ");
   }
 
   public void testUpperCase() {

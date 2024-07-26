@@ -25,12 +25,13 @@ import com.google.gwt.junit.client.GWTTestCase;
 public class MathTest extends GWTTestCase {
 
   private static void assertNegativeZero(double x) {
-    assertTrue(isNegativeZero(x));
+    assertEquals(0.0, x);
+    assertTrue(String.valueOf(x), isNegativeZero(x));
   }
 
   private static void assertPositiveZero(double x) {
     assertEquals(0.0, x);
-    assertFalse(isNegativeZero(x));
+    assertFalse(String.valueOf(x), isNegativeZero(x));
   }
 
   private static void assertNaN(double x) {
@@ -632,5 +633,240 @@ public class MathTest extends GWTTestCase {
     assertEquals(2147483648.0f, Math.scalb(1f, 31));
     assertEquals(4294967296.0f, Math.scalb(1f, 32));
     assertEquals(2.3283064e-10f, Math.scalb(1f, -32), 1e-7f);
+  }
+
+  public void testNextAfterFloat() {
+    // Test the five "special cases" described by the Javadoc, with both Float and Double
+    // "direction" values.
+    assertNaN(Math.nextAfter(Float.NaN, Float.NaN));
+    assertNaN(Math.nextAfter(Float.NaN, Double.NaN));
+    assertNaN(Math.nextAfter(Float.NaN, 0));
+    assertNaN(Math.nextAfter(0, Float.NaN));
+    assertNaN(Math.nextAfter(0, Double.NaN));
+
+    assertNegativeZero(Math.nextAfter(0.0f, -0.0f));
+    assertNegativeZero(Math.nextAfter(0.0f, -0.0d));
+    assertNegativeZero(Math.nextAfter(-0.0f, -0.0f));
+    assertNegativeZero(Math.nextAfter(-0.0f, -0.0d));
+    assertPositiveZero(Math.nextAfter(0.0f, 0.0f));
+    assertPositiveZero(Math.nextAfter(0.0f, 0.0d));
+    assertPositiveZero(Math.nextAfter(-0.0f, 0.0f));
+    assertPositiveZero(Math.nextAfter(-0.0f, 0.0d));
+
+    assertNegativeZero(Math.nextAfter(-Float.MIN_VALUE, 1));
+    assertPositiveZero(Math.nextAfter(Float.MIN_VALUE, -1));
+
+    assertEquals(Float.MAX_VALUE, Math.nextAfter(Float.POSITIVE_INFINITY, -1));
+    assertEquals(Float.MAX_VALUE,
+            Math.nextAfter(Float.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY));
+    assertEquals(Float.MAX_VALUE,
+            Math.nextAfter(Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY));
+    assertEquals(-Float.MAX_VALUE,
+            Math.nextAfter(Float.NEGATIVE_INFINITY, 1));
+    assertEquals(-Float.MAX_VALUE,
+            Math.nextAfter(Float.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY));
+    assertEquals(-Float.MAX_VALUE,
+            Math.nextAfter(Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY));
+
+    assertEquals(Float.POSITIVE_INFINITY,
+            Math.nextAfter(Float.MAX_VALUE, Float.POSITIVE_INFINITY));
+    assertEquals(Float.POSITIVE_INFINITY,
+            Math.nextAfter(Float.MAX_VALUE, Double.POSITIVE_INFINITY));
+    assertEquals(Float.NEGATIVE_INFINITY,
+            Math.nextAfter(-Float.MAX_VALUE, Float.NEGATIVE_INFINITY));
+    assertEquals(Float.NEGATIVE_INFINITY,
+            Math.nextAfter(-Float.MAX_VALUE, Double.NEGATIVE_INFINITY));
+
+    // General rules: if values compare as equal, return "direction" (exceptions covered above)
+    assertEquals(Float.POSITIVE_INFINITY,
+            Math.nextAfter(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY));
+    assertEquals(Float.POSITIVE_INFINITY,
+            Math.nextAfter(Float.POSITIVE_INFINITY, Double.POSITIVE_INFINITY));
+    assertEquals(Float.NEGATIVE_INFINITY,
+            Math.nextAfter(Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY));
+    assertEquals(Float.NEGATIVE_INFINITY,
+            Math.nextAfter(Float.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY));
+    assertEquals(Float.MAX_VALUE, Math.nextAfter(Float.MAX_VALUE, Float.MAX_VALUE));
+
+    // Return number adjacent to "start" in the relative direction of "direction". Using hex to
+    // easily see bit patterns in the sample data.
+    assertEquals(0x1.fffffcp127f, Math.nextAfter(Float.MAX_VALUE, 0));
+    assertEquals(0x1.fffffcp127f,
+            Math.nextAfter(Float.MAX_VALUE, Float.NEGATIVE_INFINITY));
+    assertEquals(-0x1.fffffcp127f, Math.nextAfter(-Float.MAX_VALUE, 0));
+    assertEquals(-0x1.fffffcp127f,
+            Math.nextAfter(-Float.MAX_VALUE, Float.POSITIVE_INFINITY));
+    assertEquals(0x1.fffffep124f, Math.nextAfter(0x1.0p125f, 0));
+    assertEquals(0x1.0p125f,
+            Math.nextAfter(0x1.fffffep124f, Float.POSITIVE_INFINITY));
+
+    // Test near zero (minvalue -> zero is tested above), mantissa sign flips positive/negative
+    assertEquals(Float.MIN_VALUE, Math.nextAfter(0.0f, 1));
+    assertEquals(Float.MIN_VALUE, Math.nextAfter(-0.0f, 1));
+    assertEquals(-Float.MIN_VALUE, Math.nextAfter(0.0f, -1));
+    assertEquals(-Float.MIN_VALUE, Math.nextAfter(-0.0f, -1));
+
+    // Test near 1, where exponent sign flips positive/negative
+    assertEquals(0x1.000002p0f, Math.nextAfter(1.0f, 2));
+    assertEquals(0x1.fffffep-1f, Math.nextAfter(1.0f, 0));
+    assertEquals(1.0f, Math.nextAfter(0x1.fffffep-1f, 2));
+    assertEquals(1.0f, Math.nextAfter(0x1.000002p0f, 0));
+
+    // Repeat near -1
+    assertEquals(-0x1.000002p0f, Math.nextAfter(-1.0f, -2));
+    assertEquals(-0x1.fffffep-1f, Math.nextAfter(-1.0f, 0));
+    assertEquals(-1.0f, Math.nextAfter(-0x1.fffffep-1f, -2));
+    assertEquals(-1.0f, Math.nextAfter(-0x1.000002p0f, 0));
+  }
+
+  public void testNextUpFloat() {
+    // Special cases from javadoc
+    assertNaN(Math.nextUp(Float.NaN));
+    assertEquals(Float.POSITIVE_INFINITY, Math.nextUp(Float.POSITIVE_INFINITY));
+    assertEquals(Float.MIN_VALUE, Math.nextUp(0.0f));
+    assertEquals(Float.MIN_VALUE, Math.nextUp(-0.0f));
+
+    assertEquals(Float.POSITIVE_INFINITY, Math.nextUp(Float.MAX_VALUE));
+    assertEquals(-Float.MAX_VALUE, Math.nextUp(Float.NEGATIVE_INFINITY));
+
+    assertNegativeZero(Math.nextUp(-Float.MIN_VALUE));
+
+    assertEquals(0x1.0p2f, Math.nextUp(0x1.fffffep1f));
+    assertEquals(0x1.000002p2f, Math.nextUp(0x1.0p2f));
+  }
+
+  public void testNextDownFloat() {
+    // Special cases from javadoc
+    assertNaN(Math.nextDown(Float.NaN));
+    assertEquals(Float.NEGATIVE_INFINITY, Math.nextDown(Float.NEGATIVE_INFINITY));
+    assertEquals(-Float.MIN_VALUE, Math.nextDown(0.0f));
+    assertEquals(-Float.MIN_VALUE, Math.nextDown(-0.0f));
+
+    assertEquals(Float.NEGATIVE_INFINITY, Math.nextDown(-Float.MAX_VALUE));
+    assertEquals(Float.MAX_VALUE, Math.nextDown(Float.POSITIVE_INFINITY));
+
+    assertPositiveZero(Math.nextDown(Float.MIN_VALUE));
+
+    assertEquals(0x1.fffffep1f, Math.nextDown(0x1.0p2f));
+    assertEquals(0x1.fffffcp1f, Math.nextDown(0x1.fffffep1f));
+  }
+
+  public void testNextAfterDouble() {
+    // Test the five "special cases" described by the Javadoc
+    assertNaN(Math.nextAfter(Double.NaN, Double.NaN));
+    assertNaN(Math.nextAfter(Double.NaN, 0));
+    assertNaN(Math.nextAfter(0d, Double.NaN));
+
+    assertNegativeZero(Math.nextAfter(0.0d, -0.0d));
+    assertNegativeZero(Math.nextAfter(-0.0d, -0.0d));
+    assertPositiveZero(Math.nextAfter(0.0d, 0.0d));
+    assertPositiveZero(Math.nextAfter(-0.0d, 0.0d));
+
+    assertNegativeZero(Math.nextAfter(-Double.MIN_VALUE, 1));
+    assertPositiveZero(Math.nextAfter(Double.MIN_VALUE, -1));
+
+    assertEquals(Double.MAX_VALUE, Math.nextAfter(Double.POSITIVE_INFINITY, -1));
+    assertEquals(Double.MAX_VALUE,
+            Math.nextAfter(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY));
+    assertEquals(-Double.MAX_VALUE, Math.nextAfter(Double.NEGATIVE_INFINITY, 1));
+    assertEquals(-Double.MAX_VALUE,
+            Math.nextAfter(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY));
+
+    assertEquals(Double.POSITIVE_INFINITY,
+            Math.nextAfter(Double.MAX_VALUE, Double.POSITIVE_INFINITY));
+    assertEquals(Double.NEGATIVE_INFINITY,
+            Math.nextAfter(-Double.MAX_VALUE, Double.NEGATIVE_INFINITY));
+
+    // General rules: if values compare as equal, return "direction" (exceptions covered above)
+    assertEquals(Double.POSITIVE_INFINITY,
+            Math.nextAfter(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY));
+    assertEquals(Double.NEGATIVE_INFINITY,
+            Math.nextAfter(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY));
+    assertEquals(Double.MAX_VALUE, Math.nextAfter(Double.MAX_VALUE, Double.MAX_VALUE));
+
+    // Return number adjacent to "start" in the relative direction of "direction". Using hex to
+    // easily see bit patterns in the sample data.
+    assertEquals(0x1.ffffffffffffep1023, Math.nextAfter(Double.MAX_VALUE, 0));
+    assertEquals(0x1.ffffffffffffep1023,
+            Math.nextAfter(Double.MAX_VALUE, Double.NEGATIVE_INFINITY));
+    assertEquals(-0x1.ffffffffffffep1023, Math.nextAfter(-Double.MAX_VALUE, 0));
+    assertEquals(-0x1.ffffffffffffep1023,
+            Math.nextAfter(-Double.MAX_VALUE, Double.POSITIVE_INFINITY));
+    assertEquals(0x1.fffffffffffffp124, Math.nextAfter(0x1.0p125, 0));
+    assertEquals(0x1.0p125, Math.nextAfter(0x1.fffffffffffffp124, Double.POSITIVE_INFINITY));
+
+    // Test near zero (minvalue -> zero is tested above), mantissa sign flips positive/negative
+    assertEquals(Double.MIN_VALUE, Math.nextAfter(0.0d, 1));
+    assertEquals(Double.MIN_VALUE, Math.nextAfter(-0.0d, 1));
+    assertEquals(-Double.MIN_VALUE, Math.nextAfter(0.0d, -1));
+    assertEquals(-Double.MIN_VALUE, Math.nextAfter(-0.0d, -1));
+
+    // Test near 1, where exponent sign flips positive/negative
+    assertEquals(0x1.0000000000001p0d, Math.nextAfter(1.0d, 2));
+    assertEquals(0x1.fffffffffffffp-1d, Math.nextAfter(1.0d, 0));
+    assertEquals(1.0d, Math.nextAfter(0x1.fffffffffffffp-1d, 2));
+    assertEquals(1.0d, Math.nextAfter(0x1.0000000000001p0d, 0));
+
+    // Repeat near -1
+    assertEquals(-0x1.0000000000001p0d, Math.nextAfter(-1.0d, -2));
+    assertEquals(-0x1.fffffffffffffp-1d, Math.nextAfter(-1.0d, 0));
+    assertEquals(-1.0d, Math.nextAfter(-0x1.fffffffffffffp-1d, -2));
+    assertEquals(-1.0d, Math.nextAfter(-0x1.0000000000001p0d, 0));
+  }
+
+  public void testNextUpDouble() {
+    // Special cases from javadoc
+    assertNaN(Math.nextUp(Double.NaN));
+    assertEquals(Double.POSITIVE_INFINITY, Math.nextUp(Double.POSITIVE_INFINITY));
+    assertEquals(Double.MIN_VALUE, Math.nextUp(0.0));
+    assertEquals(Double.MIN_VALUE, Math.nextUp(-0.0));
+
+    assertEquals(Double.POSITIVE_INFINITY, Math.nextUp(Double.MAX_VALUE));
+    assertEquals(-Double.MAX_VALUE, Math.nextUp(Double.NEGATIVE_INFINITY));
+
+    assertNegativeZero(Math.nextUp(-Double.MIN_VALUE));
+
+    assertEquals(0x1.0p2d, Math.nextUp(0x1.fffffffffffffp1d));
+    assertEquals(0x1.0000000000001p2d, Math.nextUp(0x1.0p2d));
+
+    // Test near zero (minvalue -> zero is tested above), mantissa sign flips positive/negative
+    assertEquals(Double.MIN_VALUE, Math.nextUp(0.0d));
+    assertEquals(Double.MIN_VALUE, Math.nextUp(-0.0d));
+
+    // Test near 1, where exponent sign flips positive/negative
+    assertEquals(0x1.0000000000001p0d, Math.nextUp(1.0d));
+    assertEquals(1.0d, Math.nextUp(0x1.fffffffffffffp-1d));
+
+    // Repeat near -1
+    assertEquals(-0x1.fffffffffffffp-1d, Math.nextUp(-1.0d));
+    assertEquals(-1.0d, Math.nextUp(-0x1.0000000000001p0d));
+  }
+
+  public void testNextDownDouble() {
+    // Special cases from javadoc
+    assertNaN(Math.nextDown(Double.NaN));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.nextDown(Double.NEGATIVE_INFINITY));
+    assertEquals(-Double.MIN_VALUE, Math.nextDown(0.0d));
+    assertEquals(-Double.MIN_VALUE, Math.nextDown(-0.0d));
+
+    assertEquals(Double.NEGATIVE_INFINITY, Math.nextDown(-Double.MAX_VALUE));
+    assertEquals(Double.MAX_VALUE, Math.nextDown(Double.POSITIVE_INFINITY));
+
+    assertPositiveZero(Math.nextDown(Double.MIN_VALUE));
+
+    assertEquals(0x1.fffffffffffffp1d, Math.nextDown(0x1.0p2d));
+    assertEquals(0x1.ffffffffffffep1d, Math.nextDown(0x1.fffffffffffffp1d));
+
+    // Test near zero (minvalue -> zero is tested above), mantissa sign flips positive/negative
+    assertEquals(-Double.MIN_VALUE, Math.nextDown(0.0d));
+    assertEquals(-Double.MIN_VALUE, Math.nextDown(-0.0d));
+
+    // Test near 1, where exponent sign flips positive/negative
+    assertEquals(0x1.fffffffffffffp-1d, Math.nextDown(1.0d));
+    assertEquals(1.0d, Math.nextDown(0x1.0000000000001p0d));
+
+    // Repeat near -1
+    assertEquals(-0x1.0000000000001p0d, Math.nextDown(-1.0d));
+    assertEquals(-1.0d, Math.nextDown(-0x1.fffffffffffffp-1d));
   }
 }

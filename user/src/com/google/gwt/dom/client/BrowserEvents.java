@@ -53,7 +53,9 @@ public class BrowserEvents {
   public static final String MOUSEOUT = "mouseout";
   public static final String MOUSEOVER = "mouseover";
   public static final String MOUSEUP = "mouseup";
+  @Deprecated
   public static final String MOUSEWHEEL = "mousewheel";
+  public static final String WHEEL = "wheel";
   public static final String PROGRESS = "progress";
   public static final String SCROLL = "scroll";
   public static final String TOUCHCANCEL = "touchcancel";

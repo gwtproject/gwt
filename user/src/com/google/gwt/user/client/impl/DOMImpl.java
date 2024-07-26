@@ -102,7 +102,7 @@ public abstract class DOMImpl {
     case "scroll": return 0x04000;
     case "error": return 0x10000;
     case "mousewheel": return 0x20000;
-    case "DOMMouseScroll": return 0x20000;
+    case "wheel": return 0x20000;
     case "contextmenu": return 0x40000;
     case "paste": return 0x80000;
     case "touchstart": return 0x100000;

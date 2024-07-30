@@ -18,9 +18,7 @@ package java.lang;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
-
 import javaemul.internal.JsUtils;
-
 import jsinterop.annotations.JsMethod;
 
 /**
@@ -125,5 +123,5 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
   protected static boolean $isInstance(Object instance) {
     return "boolean".equals(JsUtils.typeOf(instance));
   }
-  //CHECKSTYLE_ON: End utility methods
+  // CHECKSTYLE_ON: End utility methods
 }

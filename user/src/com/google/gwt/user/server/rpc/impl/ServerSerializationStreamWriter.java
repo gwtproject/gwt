@@ -48,11 +48,13 @@ public final class ServerSerializationStreamWriter extends
    * array literals.
    */
   public static class LengthConstrainedArray {
-    public static final int MAXIMUM_ARRAY_LENGTH = 1 << 15;
+    public static final int MAXIMUM_ARRAY_LENGTH_DEFAULT = 1 << 15;
     private static final String POSTLUDE = "])";
     private static final String PRELUDE = "].concat([";
 
     private final StringBuffer buffer;
+    private final int maximumArrayLength = Integer.getInteger("gwt.rpc.maxPayloadChunkSize",
+            MAXIMUM_ARRAY_LENGTH_DEFAULT);
     private int count = 0;
     private boolean needsComma = false;
     private int total = 0;
@@ -68,8 +70,8 @@ public final class ServerSerializationStreamWriter extends
 
     public void addToken(CharSequence token) {
       total++;
-      if (count++ == MAXIMUM_ARRAY_LENGTH) {
-        if (total == MAXIMUM_ARRAY_LENGTH + 1) {
+      if (count++ == maximumArrayLength) {
+        if (total == maximumArrayLength + 1) {
           buffer.append(PRELUDE);
           javascript = true;
         } else {
@@ -106,7 +108,7 @@ public final class ServerSerializationStreamWriter extends
 
     @Override
     public String toString() {
-      if (total > MAXIMUM_ARRAY_LENGTH) {
+      if (total > maximumArrayLength) {
         return "[" + buffer.toString() + POSTLUDE;
       } else {
         return "[" + buffer.toString() + "]";

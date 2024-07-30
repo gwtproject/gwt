@@ -121,7 +121,7 @@ public class WebServer {
     ServerConnector connector = new ServerConnector(newServer);
     connector.setHost(bindAddress);
     connector.setPort(port);
-    connector.setReuseAddress(false);
+    connector.setReuseAddress(true);
     newServer.addConnector(connector);
 
     ServletContextHandler newHandler = new ServletContextHandler(ServletContextHandler.GZIP);

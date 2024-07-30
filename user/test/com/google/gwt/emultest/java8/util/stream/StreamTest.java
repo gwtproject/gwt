@@ -19,7 +19,6 @@ package com.google.gwt.emultest.java8.util.stream;
 import static java.util.Arrays.asList;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
-
 import com.google.gwt.testing.TestUtils;
 
 import java.util.ArrayList;

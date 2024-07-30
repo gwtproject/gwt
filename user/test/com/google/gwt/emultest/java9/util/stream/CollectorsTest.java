@@ -27,6 +27,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collector;
+import java.util.stream.Stream;
 
 /**
  * Tests for java.util.stream.Collectors Java 9 API emulation.
@@ -49,6 +50,14 @@ public class CollectorsTest extends EmulTestBase {
       return items.stream();
     }, toList());
     applyItems(Arrays.asList("a"), flatMappingToNull, Arrays.asList("a"), Arrays.asList("b", "c"));
+  }
+
+  @SuppressWarnings("ReturnValueIgnored")
+  public void testFlatMappingClose() {
+    int[] calledCount = {0};
+    Stream<String> mapped = Stream.of("x").onClose(() -> calledCount[0]++);
+    Stream.of(1).collect(flatMapping(x -> mapped, toList()));
+    assertEquals(1, calledCount[0]);
   }
 
   public void testFiltering() {

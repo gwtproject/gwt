@@ -26,7 +26,8 @@ public enum SourceLevel {
   JAVA8("1.8", "8"),
   JAVA9("9", "1.9"),
   JAVA10("10", "1.10"),
-  JAVA11("11", "1.11");
+  JAVA11("11", "1.11"),
+  JAVA17("17", "1.17");
 
   /**
    * The default java sourceLevel.

@@ -29,6 +29,7 @@ import com.google.gwt.dev.jjs.test.InnerClassTest;
 import com.google.gwt.dev.jjs.test.InnerOuterSuperTest;
 import com.google.gwt.dev.jjs.test.Java10Test;
 import com.google.gwt.dev.jjs.test.Java11Test;
+import com.google.gwt.dev.jjs.test.Java17Test;
 import com.google.gwt.dev.jjs.test.Java7Test;
 import com.google.gwt.dev.jjs.test.Java8Test;
 import com.google.gwt.dev.jjs.test.Java9Test;
@@ -71,12 +72,13 @@ public class CompilerSuite {
     suite.addTestSuite(InnerClassTest.class);
     suite.addTestSuite(InnerOuterSuperTest.class);
     suite.addTestSuite(Java7Test.class);
-    // Java8Test cannot be the first one in a suite. It uses a hack
-    // to avoid executing if not in a Java 8+ environment.
     suite.addTestSuite(Java8Test.class);
     suite.addTestSuite(Java9Test.class);
     suite.addTestSuite(Java10Test.class);
     suite.addTestSuite(Java11Test.class);
+    // Java17Test cannot be the first one in a suite. It uses a hack
+    // to avoid executing if not in a Java 17+ environment.
+    suite.addTestSuite(Java17Test.class);
     suite.addTestSuite(JavaAccessFromJavaScriptTest.class);
     suite.addTestSuite(JsniConstructorTest.class);
     suite.addTestSuite(JsniDispatchTest.class);

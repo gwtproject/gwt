@@ -787,7 +787,8 @@ public class JdtCompiler {
           SourceLevel.JAVA8, ClassFileConstants.JDK1_8,
           SourceLevel.JAVA9, ClassFileConstants.JDK9,
           SourceLevel.JAVA10, ClassFileConstants.JDK10,
-          SourceLevel.JAVA11, ClassFileConstants.JDK11);
+          SourceLevel.JAVA11, ClassFileConstants.JDK11,
+          SourceLevel.JAVA17, ClassFileConstants.JDK17);
 
   public JdtCompiler(CompilerContext compilerContext, UnitProcessor processor) {
     this.compilerContext = compilerContext;

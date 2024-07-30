@@ -16,6 +16,7 @@
 package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.testing.TestUtils;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;

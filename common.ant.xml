@@ -41,7 +41,6 @@
   <property name="gwt.build" location="${gwt.root}/build"/>
   <property name="gwt.build.out" location="${gwt.build}/out"/>
   <property name="gwt.build.lib" location="${gwt.build}/lib"/>
-  <property name="gwt.build.jni" location="${gwt.build}/jni"/>
   <property name="gwt.build.staging" location="${gwt.build}/staging"/>
   <property name="gwt.build.dist" location="${gwt.build}/dist"/>
   <!-- gwt.threadsPerProcessor supercedes gwt.threadCount unless set to 0 -->
@@ -49,7 +48,6 @@
   <property name="gwt.threadCount" value="1"/>
   <property name="project.build" location="${gwt.build.out}/${project.tail}"/>
   <property name="project.lib" location="${gwt.build.lib}/gwt-${ant.project.name}.jar"/>
-  <property name="project.jni" location="${gwt.build}/${project.tail}"/>
   <property name="javac.out" location="${project.build}/bin"/>
   <property name="javac.junit.out" location="${project.build}/bin-test"/>
   <property name="javac.emma.out" location="${project.build}/bin-emma"/>
@@ -337,8 +335,8 @@
     <attribute name="outputdirectory" default="${project.build}"/>
     <element name="sourcepath" implicit="yes" optional="true"/>
     <sequential>
-      <taskdef resource="checkstyletask.properties"
-               classpath="${gwt.tools.antlib}/checkstyle-6.0-all.jar"/>
+      <taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties"
+               classpath="${gwt.tools.antlib}/checkstyle-10.13.0-all.jar"/>
       <mkdir dir="@{outputdirectory}"/>
       <checkstyle config="${gwt.root}/eclipse/settings/code-style/gwt-checkstyle.xml" maxErrors="0"
                   failOnViolation="false" failureProperty="gwt.checkstyle.failed">
@@ -357,8 +355,8 @@
     <attribute name="outputdirectory" default="${project.build}"/>
     <element name="sourcepath" implicit="yes" optional="true"/>
     <sequential>
-      <taskdef resource="checkstyletask.properties"
-               classpath="${gwt.tools.antlib}/checkstyle-6.0-all.jar"/>
+      <taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties"
+               classpath="${gwt.tools.antlib}/checkstyle-10.13.0-all.jar"/>
       <mkdir dir="@{outputdirectory}"/>
       <checkstyle config="${gwt.root}/eclipse/settings/code-style/gwt-checkstyle-tests.xml"
                   maxErrors="0" failOnViolation="false"

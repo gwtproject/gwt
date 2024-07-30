@@ -18,7 +18,6 @@ package com.google.gwt.emultest.java.internal;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Random;
-
 import javaemul.internal.Coercions;
 
 /**

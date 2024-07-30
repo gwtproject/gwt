@@ -58,10 +58,12 @@ import com.google.gwt.emultest.java.security.MessageDigestTest;
 import com.google.gwt.emultest.java.sql.SqlDateTest;
 import com.google.gwt.emultest.java.sql.SqlTimeTest;
 import com.google.gwt.emultest.java.sql.SqlTimestampTest;
+import com.google.gwt.emultest.java.text.NormalizerTest;
 import com.google.gwt.emultest.java.util.ComparatorTest;
 import com.google.gwt.emultest.java.util.DateTest;
 import com.google.gwt.emultest.java.util.ObjectsTest;
 import com.google.gwt.emultest.java.util.RandomTest;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -133,6 +135,9 @@ import org.junit.runners.Suite.SuiteClasses;
   DateTest.class,
   ObjectsTest.class,
   RandomTest.class,
+
+  // -- java.text
+  NormalizerTest.class,
 
   // Put last to reduce number of times the test framework switches modules
   MathContextWithObfuscatedEnumsTest.class,

@@ -58,6 +58,8 @@ public class ResolveRuntimeTypeReferences {
 
   /**
    * Maps a type into a type id literal.
+   *
+   * @param <T> the runtime type to use when replacing a type id
    */
   public interface TypeMapper<T extends JExpression> {
     T getOrCreateTypeId(JType type);

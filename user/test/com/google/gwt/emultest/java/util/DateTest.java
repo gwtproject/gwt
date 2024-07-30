@@ -17,6 +17,7 @@ package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.testing.TestUtils;
+
 import java.util.ArrayList;
 import java.util.Date;
 

@@ -94,6 +94,7 @@ import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JUnaryOperator;
 import com.google.gwt.dev.jjs.ast.JUnsafeTypeCoercion;
 import com.google.gwt.dev.jjs.ast.JVariable;
+import com.google.gwt.dev.jjs.ast.JVariableRef;
 import com.google.gwt.dev.jjs.ast.JWhileStatement;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
 import com.google.gwt.dev.jjs.ast.js.JsniClassLiteral;
@@ -194,6 +195,7 @@ import org.eclipse.jdt.internal.compiler.ast.Statement;
 import org.eclipse.jdt.internal.compiler.ast.StringLiteral;
 import org.eclipse.jdt.internal.compiler.ast.StringLiteralConcatenation;
 import org.eclipse.jdt.internal.compiler.ast.SuperReference;
+import org.eclipse.jdt.internal.compiler.ast.SwitchExpression;
 import org.eclipse.jdt.internal.compiler.ast.SwitchStatement;
 import org.eclipse.jdt.internal.compiler.ast.SynchronizedStatement;
 import org.eclipse.jdt.internal.compiler.ast.ThisReference;
@@ -537,13 +539,25 @@ public class GwtAstBuilder {
 
     @Override
     public void endVisit(CaseStatement x, BlockScope scope) {
+      if (x.isExpr) {
+        InternalCompilerException exception =
+            new InternalCompilerException("Switch expressions not yet supported");
+        exception.addNode(new JCaseStatement(makeSourceInfo(x), null));
+        throw exception;
+      }
       try {
         SourceInfo info = makeSourceInfo(x);
-        JExpression caseExpression = pop(x.constantExpression);
-        if (caseExpression != null && x.constantExpression.resolvedType.isEnum()) {
-          caseExpression = synthesizeCallToOrdinal(scope, info, caseExpression);
+        if (x.constantExpressions == null) {
+          push(new JCaseStatement(info, null));
+        } else {
+          for (Expression constantExpression : x.constantExpressions) {
+            JExpression caseExpression = pop(constantExpression);
+            if (caseExpression != null && caseExpression.getType().isEnumOrSubclass() != null) {
+              caseExpression = synthesizeCallToOrdinal(scope, info, caseExpression);
+            }
+            push(new JCaseStatement(info, caseExpression));
+          }
         }
-        push(new JCaseStatement(info, caseExpression));
       } catch (Throwable e) {
         throw translateException(x, e);
       }
@@ -1082,9 +1096,71 @@ public class GwtAstBuilder {
     public void endVisit(InstanceOfExpression x, BlockScope scope) {
       try {
         SourceInfo info = makeSourceInfo(x);
-        JExpression expr = pop(x.expression);
+        JExpression expr;
+        JDeclarationStatement jDeclarationStatement = null;
+        if (x.pattern != null) {
+          jDeclarationStatement = (JDeclarationStatement) pop();
+        }
+        expr = pop(x.expression);
         JReferenceType testType = (JReferenceType) typeMap.get(x.type.resolvedType);
-        push(new JInstanceOf(info, testType, expr));
+
+        if (jDeclarationStatement == null) {
+          push(new JInstanceOf(info, testType, expr));
+        } else {
+          // If <expr> is of type X, then
+          //
+          // rewrite (<expr> instanceof Foo foo)
+          // to
+          // Foo foo;
+          // X $instanceof_1;
+          // (($instanceof_1 = <expr>) instanceof Foo && null != (foo = (Foo) $instanceof_1))
+          //
+          // to avoid side effects from evaluating the original expression twice
+
+          // Foo foo;
+          String patternDeclarationName = jDeclarationStatement.getVariableRef().getTarget()
+              .getName();
+          if (!curMethod.instanceOfDeclarations.containsKey(patternDeclarationName)) {
+            curMethod.body.getBlock().addStmt(0, jDeclarationStatement);
+            curMethod.instanceOfDeclarations.put(patternDeclarationName, jDeclarationStatement);
+          }
+
+          // X $instanceof_1;
+          JType expressionType = typeMap.get(x.expression.resolvedType);
+          JLocal local =
+              createLocal(info, "$instanceOfExpr", expressionType);
+          JDeclarationStatement expressionDeclaration =
+              makeDeclaration(info, local, null);
+          curMethod.body.getBlock().addStmt(0, expressionDeclaration);
+          curMethod.instanceOfDeclarations.put(local.getName(), expressionDeclaration);
+
+          // (Foo) $instanceof_1
+          JVariableRef variableRef = jDeclarationStatement.getVariableRef();
+          JCastOperation jCastOperation =
+              new JCastOperation(info, variableRef.getType(), local.createRef(info));
+
+          // foo = (Foo) $instanceof_1
+          JBinaryOperation assignOperation =
+              new JBinaryOperation(info, variableRef.getType(), JBinaryOperator.ASG, variableRef,
+                  jCastOperation);
+
+          // null != (foo = (Foo) $instanceof_1)
+          JBinaryOperation nullCheckOperation =
+              new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.NEQ,
+                  JNullLiteral.INSTANCE, assignOperation);
+
+          // $instanceof_1 = o
+          JBinaryOperation assignLocalOperation =
+              new JBinaryOperation(info, expressionType, JBinaryOperator.ASG, local.createRef(info),
+                  expr);
+
+          // (($instanceof_1 = o) instanceof Foo && null != (foo = (Foo) $instanceof_1))
+          JBinaryOperation rewrittenSwitch =
+              new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.AND,
+                  new JInstanceOf(info, testType, assignLocalOperation), nullCheckOperation);
+
+          push(rewrittenSwitch);
+        }
       } catch (Throwable e) {
         throw translateException(x, e);
       }
@@ -2535,6 +2611,14 @@ public class GwtAstBuilder {
     }
 
     @Override
+    public boolean visit(SwitchExpression x, BlockScope blockScope) {
+      InternalCompilerException exception =
+          new InternalCompilerException("Switch expressions not yet supported");
+      exception.addNode(new JCaseStatement(makeSourceInfo(x), null));
+      throw exception;
+    }
+
+    @Override
     public boolean visit(LocalDeclaration x, BlockScope scope) {
       try {
         createLocal(x);
@@ -2752,6 +2836,12 @@ public class GwtAstBuilder {
     }
 
     protected boolean visit(TypeDeclaration x) {
+      if (x.isRecord()) {
+        InternalCompilerException exception =
+            new InternalCompilerException("Records not yet supported");
+        exception.addNode(new JClassType(makeSourceInfo(x), intern(x.name), false, false));
+        throw exception;
+      }
       JDeclaredType type = (JDeclaredType) typeMap.get(x.binding);
       assert !type.isExternal();
       classStack.push(curClass);
@@ -3706,7 +3796,6 @@ public class GwtAstBuilder {
       }
     }
 
-
     private boolean isFunctionalInterfaceWithMethod(ReferenceBinding referenceBinding, Scope scope,
         String samSignature) {
       if (!referenceBinding.isInterface()) {
@@ -3821,8 +3910,9 @@ public class GwtAstBuilder {
     public final Map<LocalVariableBinding, JVariable> locals = Maps.newIdentityHashMap();
     public final JMethod method;
     public final MethodScope scope;
+    public final Map<String, JStatement> instanceOfDeclarations = Maps.newHashMap();
 
-    public MethodInfo(JMethod method, JMethodBody methodBody, MethodScope methodScope) {
+    MethodInfo(JMethod method, JMethodBody methodBody, MethodScope methodScope) {
       this.method = method;
       this.body = methodBody;
       this.scope = methodScope;

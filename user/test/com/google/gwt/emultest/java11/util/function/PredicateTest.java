@@ -16,6 +16,7 @@
 package com.google.gwt.emultest.java11.util.function;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
+
 import java.util.function.Predicate;
 
 /**

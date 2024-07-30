@@ -115,14 +115,15 @@
     return dialog;
   }
 
-  function makeBookmarklet(name, javascript) {
+  function makeBookmarklet(name, javascript, javascriptFunction) {
     var result = makeTextElt('a', '12pt', name);
     result.style.fontFamily = 'sans';
     result.style.textDecoration = 'none';
     result.style.background = '#ddd';
     result.style.border = '2px outset #ddd';
     result.style.padding = '3pt';
-    result.setAttribute('href', 'javascript:' + encodeURIComponent(javascript));
+    result.onclick = javascriptFunction; // used in CSP case (clicking the button)
+    result.setAttribute('href', 'javascript:' + encodeURIComponent(javascript)); // used in bookmarklet case
     result.title = 'Tip: drag this button to the bookmark bar';
     return result;
   }
@@ -135,7 +136,17 @@
         + ' var s = document.createElement(\'script\');'
         + ' s.src = \'' + bookmarklets_js + '\';'
         + ' void(document.getElementsByTagName(\'head\')[0].appendChild(s));}';
-    return makeBookmarklet('Compile', javascript);
+    var javascriptFunction = function(e) {
+      e.preventDefault(); // avoid CSP warning
+      window.__gwt_bookmarklet_params = {
+        server_url: codeserver_url,
+        module_name: module_name
+      };
+      var s = document.createElement('script');
+      s.src = bookmarklets_js;
+      void(document.getElementsByTagName('head')[0].appendChild(s));
+    };
+    return makeBookmarklet('Compile', javascript, javascriptFunction);
   }
 
   /**

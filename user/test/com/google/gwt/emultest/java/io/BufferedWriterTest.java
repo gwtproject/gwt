@@ -16,6 +16,7 @@
 package com.google.gwt.emultest.java.io;
 
 import com.google.gwt.junit.client.GWTTestCase;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;

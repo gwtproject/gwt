@@ -62,14 +62,13 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Double value of a small negative BigDecimal.
    */
-  // TODO(jat): add back after Double.doubleToLongBits is implemented
-//  public void testDoubleValueMinusZero() {
-//    String a = "-123809648392384754573567356745735.63567890295784902768787678287E-400";
-//    BigDecimal aNumber = new BigDecimal(a);
-//    long minusZero = -9223372036854775808L;
-//    double result = aNumber.doubleValue();
-//    assertTrue("incorrect value", Double.doubleToLongBits(result) == minusZero);
-//  }
+  public void testDoubleValueMinusZero() {
+    String a = "-123809648392384754573567356745735.63567890295784902768787678287E-400";
+    BigDecimal aNumber = new BigDecimal(a);
+    long minusZero = -9223372036854775808L;
+    double result = aNumber.doubleValue();
+    assertTrue("incorrect value", Double.doubleToLongBits(result) == minusZero);
+  }
 
   /**
    * Double value of a negative BigDecimal.
@@ -94,14 +93,13 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Double value of a small positive BigDecimal.
    */
-  // TODO(jat): add back after Double.doubleToLongBits is implemented
-//  public void testDoubleValuePlusZero() {
-//    String a = "123809648392384754573567356745735.63567890295784902768787678287E-400";
-//    BigDecimal aNumber = new BigDecimal(a);
-//    long zero = 0;
-//    double result = aNumber.doubleValue();
-//    assertTrue("incorrect value", Double.doubleToLongBits(result) == zero);
-//  }
+  public void testDoubleValuePlusZero() {
+    String a = "123809648392384754573567356745735.63567890295784902768787678287E-400";
+    BigDecimal aNumber = new BigDecimal(a);
+    long zero = 0;
+    double result = aNumber.doubleValue();
+    assertTrue("incorrect value", Double.doubleToLongBits(result) == zero);
+  }
 
   /**
    * Double value of a positive BigDecimal.
@@ -126,14 +124,13 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Float value of a small negative BigDecimal.
    */
-  // TODO(jat): add back after Float.floatToIntBits is implemented
-//  public void testFloatValueMinusZero() {
-//    String a = "-123809648392384754573567356745735.63567890295784902768787678287E-400";
-//    BigDecimal aNumber = new BigDecimal(a);
-//    int minusZero = -2147483648;
-//    float result = aNumber.floatValue();
-//    assertTrue("incorrect value", Float.floatToIntBits(result) == minusZero);
-//  }
+  public void testFloatValueMinusZero() {
+    String a = "-123809648392384754573567356745735.63567890295784902768787678287E-400";
+    BigDecimal aNumber = new BigDecimal(a);
+    int minusZero = -2147483648;
+    float result = aNumber.floatValue();
+    assertTrue("incorrect value", Float.floatToIntBits(result) == minusZero);
+  }
 
   /**
    * Float value of a negative BigDecimal.
@@ -159,14 +156,13 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Float value of a small positive BigDecimal.
    */
-  // TODO(jat): add back after Float.floatToIntBits is implemented
-//  public void testFloatValuePlusZero() {
-//    String a = "123809648392384754573567356745735.63567890295784902768787678287E-400";
-//    BigDecimal aNumber = new BigDecimal(a);
-//    int zero = 0;
-//    float result = aNumber.floatValue();
-//    assertTrue("incorrect value", Float.floatToIntBits(result) == zero);
-//  }
+  public void testFloatValuePlusZero() {
+    String a = "123809648392384754573567356745735.63567890295784902768787678287E-400";
+    BigDecimal aNumber = new BigDecimal(a);
+    int zero = 0;
+    float result = aNumber.floatValue();
+    assertTrue("incorrect value", Float.floatToIntBits(result) == zero);
+  }
 
   /**
    * Float value of a positive BigDecimal.

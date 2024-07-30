@@ -107,35 +107,41 @@ public class GeneratedClassnameFinderTest extends TestCase {
 
   public void testJavacWeirdness() {
     List<String> classNames = new JavacWeirdnessTester().getGeneratedClasses();
-    if (classNames.size() == 3) {
-      // javac7 - JavacWeirdnessTester$1 doesn't verify, so it's excluded
-      assertTrue(classNames.get(0) + " should not contain Foo",
-          classNames.get(0).indexOf("Foo") == -1);
-      assertTrue(classNames.get(1) + " should contain Foo",
-          classNames.get(1).indexOf("Foo") != -1);
-      assertTrue(classNames.get(2) + " should contain Foo",
-          classNames.get(2).indexOf("Foo") != -1);
-    } else if (classNames.size() == 4) {
+    if (classNames.size() == 4) {
       // javac8:
       // JavacWeirdnessTester$1
       // JavacWeirdnessTester$2
       // JavacWeirdnessTester$2Foo
       // JavacWeirdnessTester$3Foo
-      assertTrue(classNames.get(0) + " should not contain Foo",
-        classNames.get(0).indexOf("Foo") == -1);
-      assertTrue(classNames.get(1) + " should not contain Foo",
-        classNames.get(1).indexOf("Foo") == -1);
-      assertTrue(classNames.get(2) + " should contain Foo",
-          classNames.get(2).indexOf("Foo") != -1);
-      assertTrue(classNames.get(3) + " should contain Foo",
-        classNames.get(3).indexOf("Foo") != -1);
+      assertFalse(classNames.get(0) + " should not contain Foo",
+              classNames.get(0).contains("Foo"));
+      assertFalse(classNames.get(1) + " should not contain Foo",
+              classNames.get(1).contains("Foo"));
+      assertTrue(classNames.get(2) + " should contain Foo", classNames.get(2).contains("Foo"));
+      assertTrue(classNames.get(3) + " should contain Foo", classNames.get(3).contains("Foo"));
+    } else if (classNames.size() == 5) {
+      // javac22:
+      // JavacWeirdnessTester$1
+      // JavacWeirdnessTester$2
+      // JavacWeirdnessTester$1Foo
+      // JavacWeirdnessTester$2Foo
+      // JavacWeirdnessTester$3Foo
+      assertFalse(classNames.get(0) + " should not contain Foo",
+              classNames.get(0).contains("Foo"));
+      assertFalse(classNames.get(1) + " should not contain Foo",
+              classNames.get(1).contains("Foo"));
+      assertTrue(classNames.get(2) + " should contain Foo", classNames.get(2).contains("Foo"));
+      assertTrue(classNames.get(3) + " should contain Foo", classNames.get(2).contains("Foo"));
+      assertTrue(classNames.get(4) + " should contain Foo", classNames.get(3).contains("Foo"));
     } else {
-      fail();
+      fail("Expected 4 or 5 classes, found " + classNames);
     }
   }
 
   public void testNamedLocal() {
-    assertEquals(2, new NamedLocalTester().getGeneratedClasses().size());
+    List<String> generatedClasses = new NamedLocalTester().getGeneratedClasses();
+    assertTrue(generatedClasses.toString(),
+            generatedClasses.size() == 2 || generatedClasses.size() == 3);
   }
 
   public void testNested() {

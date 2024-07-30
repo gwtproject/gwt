@@ -24,11 +24,10 @@ import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.arg.SourceLevel;
 import com.google.gwt.dev.util.log.AbstractTreeLogger;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
+import com.google.gwt.thirdparty.apache.ant.types.ZipScanner;
 import com.google.gwt.util.tools.ArgHandlerFlag;
 import com.google.gwt.util.tools.ArgHandlerString;
 import com.google.gwt.util.tools.ToolBase;
-
-import com.google.gwt.thirdparty.apache.ant.types.ZipScanner;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;

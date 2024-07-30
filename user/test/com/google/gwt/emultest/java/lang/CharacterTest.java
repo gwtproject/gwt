@@ -16,6 +16,7 @@
 package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
+
 import java.util.Arrays;
 
 /**
@@ -359,7 +360,8 @@ public class CharacterTest extends GWTTestCase {
     char[] nonBreakingSpaceSeparators = {
         '\u00A0', // NO-BREAK SPACE.
         '\u2007', // FIGURE SPACE.
-        '\u202F' // NARROW NO-BREAK SPACE.
+        '\u202F', // NARROW NO-BREAK SPACE.
+        '\uFFEF'  // ZERO WIDTH NO-BREAK SPACE.
     };
 
     char[] specialCases = {
@@ -378,7 +380,8 @@ public class CharacterTest extends GWTTestCase {
         'a', // LATIN SMALL LETTER A.
         'B', // LATIN CAPITAL LETTER B.
         '_', // LOW LINE.
-        '\u2500' // BOX DRAWINGS LIGHT HORIZONTAL.
+        '\u2500', // BOX DRAWINGS LIGHT HORIZONTAL.
+        '\u180E', // MONGOLIAN VOWEL SEPARATOR, was considered whitespace in Java 8.
     };
 
     int[] supplementaryCounterExamples = {

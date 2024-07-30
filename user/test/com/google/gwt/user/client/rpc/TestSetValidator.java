@@ -15,6 +15,11 @@
  */
 package com.google.gwt.user.client.rpc;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertSame;
+
 import com.google.gwt.event.shared.UmbrellaException;
 import com.google.gwt.user.client.rpc.FinalFieldsTestService.FinalFieldsNode;
 import com.google.gwt.user.client.rpc.TestSetFactory.MarkerTypeEmptyKey;
@@ -32,11 +37,6 @@ import com.google.gwt.user.client.rpc.TestSetFactory.SerializableDoublyLinkedNod
 import com.google.gwt.user.client.rpc.TestSetFactory.SerializableGraphWithCFS;
 import com.google.gwt.user.client.rpc.TestSetFactory.SerializablePrivateNoArg;
 import com.google.gwt.user.client.rpc.TestSetFactory.SerializableWithTwoArrays;
-
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertSame;
 
 import java.util.ArrayList;
 import java.util.EnumMap;

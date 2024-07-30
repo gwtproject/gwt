@@ -15,9 +15,9 @@
  */
 package java.util.function;
 
-import java.util.Comparator;
-
 import static javaemul.internal.InternalPreconditions.checkCriticalNotNull;
+
+import java.util.Comparator;
 
 /**
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/BinaryOperator.html">

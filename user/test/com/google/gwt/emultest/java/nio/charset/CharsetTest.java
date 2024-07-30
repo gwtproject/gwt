@@ -17,6 +17,7 @@
 package com.google.gwt.emultest.java.nio.charset;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
+
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.UnsupportedCharsetException;

@@ -24,7 +24,6 @@ import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.user.tools.util.ArgHandlerIgnore;
 import com.google.gwt.user.tools.util.ArgHandlerOverwrite;
-import com.google.gwt.user.tools.util.CreatorUtilities;
 import com.google.gwt.util.tools.ArgHandlerExtra;
 import com.google.gwt.util.tools.ArgHandlerFlag;
 import com.google.gwt.util.tools.ArgHandlerOutDir;
@@ -180,7 +179,7 @@ public final class WebAppCreator {
         return false;
       }
 
-      if (!CreatorUtilities.isValidModuleName(arg)) {
+      if (!isValidModuleName(arg)) {
         System.err.println("'"
             + arg
             + "' does not appear to be a valid fully-qualified Java class name.");
@@ -665,16 +664,8 @@ public final class WebAppCreator {
     return replacements;
   }
 
-  /**
-   * Create the sample app.
-   * 
-   * @throws IOException if any disk write fails
-   * @throws WebAppCreatorException if any tag expansion of template processing fails
-   * @deprecated as of GWT 2.1, replaced by {@link #doRun(String)}
-   */
-  @Deprecated
-  protected void doRun() throws IOException, WebAppCreatorException {
-    doRun(Utility.getInstallPath());
+  private static boolean isValidModuleName(String moduleName) {
+    return moduleName.matches("[\\w]+(\\.[\\w]+)+");
   }
 
   /**

@@ -132,6 +132,12 @@ public class Java17Test extends GWTTestCase {
       return 0;
     }
   }
+
+  /**
+   * Record type that takes a record as a component
+   */
+  record RecordWithReferenceType(TopLevelRecord refType){}
+
   public void testRecordClasses() {
     /**
      * Sample local record.
@@ -158,6 +164,26 @@ public class Java17Test extends GWTTestCase {
     assertTrue(withValues.toString().contains("Banana"));
     assertEquals("Banana", withValues.name());
     assertEquals(7, withValues.count());
+    // Under the current implementation this next line would fail - this is not inconsistent with the spec,
+    // but it is different than what the JVM does.
+//    assertEquals(0, new TopLevelRecord("", 0).hashCode());
+    assertFalse(0 == new TopLevelRecord("", 7).hashCode());
+    assertFalse(0 == new TopLevelRecord("Pear", 0).hashCode());
+
+    assertFalse(new InnerRecord().equals(new LocalRecord()));
+
+    RecordWithReferenceType sameA = new RecordWithReferenceType(new TopLevelRecord("a", 1));
+    RecordWithReferenceType sameB = new RecordWithReferenceType(new TopLevelRecord("a", 1));
+    RecordWithReferenceType different = new RecordWithReferenceType(new TopLevelRecord("a", 2));
+    // check that an instance is equal to itself
+    assertEquals(sameA, sameA);
+    assertEquals(sameA.hashCode(), sameA.hashCode());
+    //check that an instance is equal to a different record instance with same values
+    assertEquals(sameA, sameB);
+    assertEquals(sameA.hashCode(), sameB.hashCode());
+
+    assertFalse(sameA.equals(different));
+    assertFalse(sameA.hashCode() == different.hashCode());
   }
 
   /**

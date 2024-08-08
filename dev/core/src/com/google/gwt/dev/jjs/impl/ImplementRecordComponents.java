@@ -31,6 +31,7 @@ import com.google.gwt.dev.jjs.ast.JLocal;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
+import com.google.gwt.dev.jjs.ast.JNewArray;
 import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
@@ -137,8 +138,9 @@ public class ImplementRecordComponents {
           exprs.add(jFieldRef);
         }
       }
+      JNewArray varargsWrapper = JNewArray.createArrayWithInitializers(info, program.getTypeJavaLangObjectArray(), exprs);
       JMethod hash = program.getIndexedMethod(RuntimeConstants.OBJECTS_HASH);
-      hashcodeStatement = new JMethodCall(info, null, hash, exprs);
+      hashcodeStatement = new JMethodCall(info, null, hash, varargsWrapper);
     }
     JMethodBody body = new JMethodBody(info);
     body.getBlock().addStmt(hashcodeStatement.makeReturnStatement());

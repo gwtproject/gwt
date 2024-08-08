@@ -32,6 +32,7 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JNewArray;
+import com.google.gwt.dev.jjs.ast.JNullLiteral;
 import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
@@ -138,7 +139,8 @@ public class ImplementRecordComponents {
           exprs.add(jFieldRef);
         }
       }
-      JNewArray varargsWrapper = JNewArray.createArrayWithInitializers(info, program.getTypeJavaLangObjectArray(), exprs);
+      JNewArray varargsWrapper = JNewArray.createArrayWithInitializers(info,
+              program.getTypeJavaLangObjectArray(), exprs);
       JMethod hash = program.getIndexedMethod(RuntimeConstants.OBJECTS_HASH);
       hashcodeStatement = new JMethodCall(info, null, hash, varargsWrapper);
     }
@@ -179,19 +181,33 @@ public class ImplementRecordComponents {
     body.getBlock().addStmt(uncheckedAssign.makeStatement());
 
     JExpression componentCheck = JBooleanLiteral.TRUE;
+    JMethod objectEquals = program.getIndexedMethod(RuntimeConstants.OBJECT_EQUALS);
     for (JField field : type.getFields()) {
       if (!field.isStatic()) {
-        JBinaryOperation jBinaryOperation = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,
-                JBinaryOperator.EQ,
-                new JFieldRef(info, new JThisRef(info, type), field, type),
-                new JFieldRef(info, typedOther.createRef(info), field, type));
+        JFieldRef myField = new JFieldRef(info, new JThisRef(info, type), field, type);
+        JFieldRef otherField = new JFieldRef(info, typedOther.createRef(info), field, type);
+        final JBinaryOperation equals;
+        if (field.getType().isPrimitiveType()) {
+          equals = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,
+                  JBinaryOperator.EQ,
+                  myField,
+                  otherField);
+        } else {
+          // we would like to use Objects.equals here to be more consise, but we would need
+          // to look up the right impl based on the field - just as simple to insert a null check
+          // and get it a little closer to all being inlined away
+          equals = new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.AND,
+                  new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.NEQ,
+                          myField, JNullLiteral.INSTANCE),
+                  new JMethodCall(info, myField, objectEquals, otherField));
+        }
         if (componentCheck != JBooleanLiteral.TRUE) {
           componentCheck = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,
                   JBinaryOperator.AND,
                   componentCheck,
-                  jBinaryOperation);
+                  equals);
         } else {
-          componentCheck = jBinaryOperation;
+          componentCheck = equals;
         }
       }
     }

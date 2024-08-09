@@ -443,7 +443,7 @@ public class Precompile {
             return false;
           }
           // TODO: move to precompile() after params are refactored
-          if (!options.shouldSaveSource()) {
+          if (!options.shouldSaveSource() && !module.shouldEmbedSourceMapContents()) {
             precompilation.removeSourceArtifacts(logger);
           }
           Util.writeObjectAsFile(logger, precompilationFile, precompilation);

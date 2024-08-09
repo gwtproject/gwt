@@ -380,8 +380,12 @@ public class CompilePerms {
       if (precompilation == null) {
         return false;
       }
+
+      boolean embedSourcesContent = compilerContext.getModule()
+          .shouldEmbedSourceMapContents();
+
       // TODO: move to precompile() after params are refactored
-      if (!options.shouldSaveSource()) {
+      if (!options.shouldSaveSource() && !embedSourcesContent) {
         precompilation.removeSourceArtifacts(logger);
       }
 

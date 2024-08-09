@@ -42,6 +42,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -79,13 +80,18 @@ public class JavaEmulSummaryDoclet implements Doclet {
                 pw.println("</ol>\n");
 
                 getSpecifiedPackages(env).forEach(pack -> {
+                    Optional<Module> matchingModuleName = ModuleLayer.boot().modules().stream()
+                            .filter(m -> m.getPackages().contains(pack.getQualifiedName().toString()))
+                            .findFirst();
+
                     pw.format("<h2 id=\"Package_%s\">Package %s</h2>\n",
                             pack.getQualifiedName().toString().replace('.', '_'),
                             pack.getQualifiedName().toString());
                     pw.println("<dl>");
 
-                    String packURL = JAVADOC_URL + pack.getQualifiedName().toString()
-                            .replace(".", "/") + "/";
+                    String packURL = JAVADOC_URL
+                            + matchingModuleName.map(m -> m.getName() + "/").orElse("")
+                            + pack.getQualifiedName().toString().replace(".", "/") + "/";
 
                     Iterator<? extends Element> classesIterator = pack.getEnclosedElements()
                             .stream()

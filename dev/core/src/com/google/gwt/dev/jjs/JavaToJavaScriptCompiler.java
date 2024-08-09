@@ -1204,6 +1204,7 @@ public final class JavaToJavaScriptCompiler {
     }
 
     EntryMethodHolderGenerator entryMethodHolderGenerator = new EntryMethodHolderGenerator();
+    context.setCurrentGenerator(EntryMethodHolderGenerator.class);
     String entryMethodHolderTypeName =
         entryMethodHolderGenerator.generate(logger, context, module.getCanonicalName());
     context.finish(logger);

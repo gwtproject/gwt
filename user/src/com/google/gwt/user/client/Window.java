@@ -506,6 +506,7 @@ public class Window {
   // Package protected for testing.
   static WindowHandlers handlers;
   private static boolean closeHandlersInitialized;
+  private static boolean beforeCloseHandlersInitialized;
   private static boolean scrollHandlersInitialized;
   private static boolean resizeHandlersInitialized;
   private static int lastResizeWidth;
@@ -518,7 +519,10 @@ public class Window {
    *
    * @param handler the handler
    * @return returns the handler registration
+   * @deprecated This method requires the use of the {@code unload} browser event, which is
+   * deprecated in all browsers.
    */
+  @Deprecated
   public static HandlerRegistration addCloseHandler(CloseHandler<Window> handler) {
     maybeInitializeCloseHandlers();
     return addHandler(CloseEvent.getType(), handler);
@@ -531,7 +535,6 @@ public class Window {
    * @return returns the handler registration
    */
   public static HandlerRegistration addResizeHandler(ResizeHandler handler) {
-    maybeInitializeCloseHandlers();
     maybeInitializeResizeHandlers();
     return addHandler(ResizeEvent.getType(), handler);
   }
@@ -556,7 +559,7 @@ public class Window {
    */
   public static HandlerRegistration addWindowClosingHandler(
       ClosingHandler handler) {
-    maybeInitializeCloseHandlers();
+    maybeInitializeBeforeCloseHandlers();
     return addHandler(Window.ClosingEvent.getType(), handler);
   }
 
@@ -579,7 +582,6 @@ public class Window {
    */
   public static HandlerRegistration addWindowScrollHandler(
       Window.ScrollHandler handler) {
-    maybeInitializeCloseHandlers();
     maybeInitializeScrollHandlers();
     return addHandler(Window.ScrollEvent.getType(), handler);
   }
@@ -910,10 +912,18 @@ public class Window {
     return handlers;
   }
 
+  @Deprecated
   private static void maybeInitializeCloseHandlers() {
     if (GWT.isClient() && !closeHandlersInitialized) {
-      impl.initWindowCloseHandler();
+      impl.initWindowUnloadHandler();
       closeHandlersInitialized = true;
+    }
+  }
+
+  private static void maybeInitializeBeforeCloseHandlers() {
+    if (GWT.isClient() && !beforeCloseHandlersInitialized) {
+      impl.initWindowBeforeUnloadHandler();
+      beforeCloseHandlersInitialized = true;
     }
   }
 

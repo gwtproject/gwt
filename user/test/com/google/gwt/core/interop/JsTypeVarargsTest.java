@@ -20,10 +20,12 @@ import static jsinterop.annotations.JsPackage.GLOBAL;
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.junit.client.GWTTestCase;
 
+import java.util.Objects;
 import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
@@ -321,4 +323,111 @@ public class JsTypeVarargsTest extends GWTTestCase {
   public native void testVarargsCall_uninstantiatedVararg() /*-{
     @GWTTestCase::assertEquals(II)(0, $global.varargJsMethodUninstantiatedVararg());
   }-*/;
+
+  // https://github.com/gwtproject/gwt/issues/9932
+  public void testVarargsFromJavaToJsinterop() {
+    assertEquals(3, nonNativeMethod("A", "B", "C"));
+  }
+
+  // Java declaration of globally available instance method that takes varargs
+  @JsType(namespace = JsPackage.GLOBAL)
+  public static class VarArgsQualifiedInstanceMethod {
+    @JsProperty(namespace = JsPackage.GLOBAL)
+    public static VarArgsQualifiedInstanceMethod INSTANCE = new VarArgsQualifiedInstanceMethod();
+    public int getLength(Object... values) {
+      return values.length;
+    }
+  }
+
+  // Declaring this type lets us use jsinterop to call the above method.
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "VarArgsQualifiedInstanceMethod")
+  public static class VarArgsFromJava {
+    @JsProperty(namespace = JsPackage.GLOBAL)
+    public static VarArgsFromJava INSTANCE;
+    public native int getLength(Object... values);
+  }
+
+  // This plain Java method accepts varargs, and tries to pass them into jsinterop.
+  private static int nonNativeMethod(Object... values) {
+    return VarArgsFromJava.INSTANCE.getLength(values);
+  }
+
+  public void testVarargsObjects() {
+    assertEquals(new VarargsSummary<>(1, null, null),
+            varargInstance().acceptsObjects((Object) null));
+    assertEquals(new VarargsSummary<>(0, null, null),
+            varargInstance().acceptsObjects());
+    assertEquals(new VarargsSummary<>(1, String.class, null),
+            varargInstance().acceptsObjects("hello"));
+    assertEquals(new VarargsSummary<>(2, String.class, null),
+            varargInstance().acceptsObjects("hello", "world"));
+    // noinspection ConfusingArgumentToVarargsMethod
+    assertEquals(new VarargsSummary<>(2, String.class, null),
+            varargInstance().acceptsObjects(new String[]{"hello", "world"}));
+    assertEquals(new VarargsSummary<>(2, String.class, null),
+            varargInstance().acceptsObjects(new Object[]{"hello", "world"}));
+  }
+
+    private static VarargMethodHolderFromJava varargInstance() {
+    return new VarargMethodHolderFromJava();
+  }
+
+  // Java impl of the jsinterop type we'll call below.
+  @JsType(namespace = JsPackage.GLOBAL)
+  public static class VarargMethodHolder {
+    public VarargsSummary<Void> acceptsObjects(Object... values) {
+      // Note that unlike the VarargsTest version, values can never be null, and the values
+      // array is always Object[] since it is spliced from js's "arguments".
+      assertNotNull(values);
+      return new VarargsSummary<>(
+              values.length,
+              (values.length == 0 || values[0] == null) ? null : values[0].getClass(),
+              null);
+    }
+  }
+
+  // Declaring this type lets us use jsinterop to call the above method.
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "VarargMethodHolder")
+  public static class VarargMethodHolderFromJava {
+    public native VarargsSummary<Void> acceptsObjects(Object... values);
+  }
+
+  @JsType
+  public static final class VarargsSummary<T> {
+    private final int count;
+    private final Class<?> firstItemType;
+    private final T value;
+
+    public VarargsSummary(int count, Class<?> firstItemType, T value) {
+      this.count = count;
+      this.firstItemType = firstItemType;
+      this.value = value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) {
+        return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+        return false;
+      }
+      VarargsSummary<?> that = (VarargsSummary<?>) o;
+      return count == that.count
+              && Objects.equals(firstItemType, that.firstItemType)
+              && Objects.equals(value, that.value);
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(count, firstItemType, value);
+    }
+
+    @Override
+    public String toString() {
+      return "count=" + count +
+              ", firstItemType=" + firstItemType +
+              ", value=" + value;
+    }
+  }
 }

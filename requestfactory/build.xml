@@ -48,6 +48,7 @@
         <jvmarg value="-ea"/>
         <arg value="@{target}"/>
         <arg file="${gwt.build.lib}/requestfactory-@{target}.jar"/>
+        <arg value="used-to-build-gwt" />
       </java>
     </sequential>
   </macrodef>

@@ -98,12 +98,19 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
   public void testSwitchOverConstant_noMatchingCase() throws Exception {
     optimize("int", "switch (0) { case 1: return 1; } return 0;")
         .into("return 0;");
+
+    optimize("int", "switch (0) { case 1, 2, 3: return 1; } return 0;")
+        .into("return 0;");
   }
 
   public void testSwitchOverConstant_MatchingCase() throws Exception {
     optimize("int",
         "switch (1) { case 1: return 1; } return 0;")
         .into("return 1;");
+
+    optimize("int",
+            "switch (1) { case 1, 2, 3: return 1; } return 0;")
+            .into("return 1;");
 
     // The if isn't really the focus of the optimization, but the `into`
     // string will not compile if it is invalid Java.  It makes the opt form
@@ -115,6 +122,31 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         "    case 0:",
         "    case 1:",
         "    case 2:",
+        "      j = 5;",
+        "    case 3:",
+        "      return 1;",
+        "    default:",
+        "      return j;",
+        "  }",
+        "}",
+        "return -1;")
+        .into(
+            "int j = 1;",
+            "if (b) {",
+            "  switch (1) {",
+            "    case 1:",  // All of the other cases and the default are gone
+            "      j = 5;", // this is a dead-store but is currently retained
+            "      return 1;",
+            "  }",
+            "}",
+            "return -1;");
+
+    // Same as before, but a multi-expr case, to ensure we only retain the one value
+    optimize("int",
+        "int j = 1;",
+        "if (b) {",
+        "  switch (1) {",
+        "    case 0, 1, 2:",
         "      j = 5;",
         "    case 3:",
         "      return 1;",
@@ -145,13 +177,32 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
       "  case 1: ",
       "  case 2: ",
       "    j = 5; ",
-      "  case 3: ",
+      "  case 3,4: ",
       "    return 1; ",
       "  default: ",
       "    return j; ",
       "}"
     };
     optimize("int", nonConstantSwitch).into(nonConstantSwitch);
+  }
+
+  public void testSwitchExprNotOptimized() throws Exception {
+    // At this time, switch expressions are not optimized in the same way as switch statements
+    String[] switchExprWithDeadCode = new String[] {
+      "return switch(0) {",
+      "  case 0:",
+      "    yield 1;",
+      "  default:",
+      "    yield 2;",
+      "};"
+    };
+    optimize("int", switchExprWithDeadCode).into(switchExprWithDeadCode);
+
+    // Also verify that switch exprs (and their nested case statements) do not interfere with
+    // outer switch statements from being optimized
+    optimize("int",
+            "switch (1) { case 1, 2, 3: return switch(0) { case 1 -> 4; default -> 100; }; } return 0;")
+            .into("return switch(0) { case 1 -> 4; default -> 100; };");
   }
 
   public void testIfOptimizations() throws Exception {

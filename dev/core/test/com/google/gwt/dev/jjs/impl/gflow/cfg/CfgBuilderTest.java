@@ -1442,6 +1442,12 @@ public class CfgBuilderTest extends JJSTestBase {
         "      case 1: k = 6; break;",
         "    }",
         "    break;",
+        "  case 4: ",
+        "    k = switch (j) {",
+        "      case 0 -> 7;",
+        "      default -> 8;",
+        "    };",
+        "    break;",
         "}"
         ).is(
         "BLOCK -> [*]",
@@ -1466,7 +1472,7 @@ public class CfgBuilderTest extends JJSTestBase {
         "STMT -> [*]",
         "GOTO -> [*]",
         "2: STMT -> [*]",
-        "GOTO -> [9]",
+        "GOTO -> [10]",
         "3: STMT -> [*]",
         "COND (EntryPoint.i == 2) -> [THEN=*, ELSE=6]",
         "STMT -> [*]",
@@ -1485,7 +1491,7 @@ public class CfgBuilderTest extends JJSTestBase {
         "STMT -> [*]",
         "GOTO -> [*]",
         "5: STMT -> [*]",
-        "GOTO -> [9]",
+        "GOTO -> [10]",
         "6: STMT -> [*]",
         "COND (EntryPoint.i == 3) -> [THEN=*, ELSE=9]",
         "STMT -> [*]",
@@ -1504,8 +1510,19 @@ public class CfgBuilderTest extends JJSTestBase {
         "STMT -> [*]",
         "GOTO -> [*]",
         "8: STMT -> [*]",
+        "GOTO -> [10]",
+        "9: STMT -> [*]",
+        "COND (EntryPoint.i == 4) -> [THEN=*, ELSE=10]",
+        "STMT -> [*]",
+        "WRITE(k, switch (EntryPoint.j)  {",
+        "  case 0: ",
+        "  yield  7;",
+        "  default: ",
+        "  yield  8;",
+        "}) -> [*]",
+        "STMT -> [*]",
         "GOTO -> [*]",
-        "9: END"
+        "10: END"
     );
   }
 

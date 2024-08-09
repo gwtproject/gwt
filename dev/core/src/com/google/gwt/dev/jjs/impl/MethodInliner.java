@@ -37,6 +37,7 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JStatement;
+import com.google.gwt.dev.jjs.ast.JSwitchExpression;
 import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
@@ -250,6 +251,11 @@ public class MethodInliner {
         } else if (stmt instanceof JExpressionStatement) {
           JExpressionStatement exprStmt = (JExpressionStatement) stmt;
           JExpression expr = exprStmt.getExpr();
+          if (expr instanceof JSwitchExpression) {
+            // Switch expressions can't be cloned in this way, though we wouldn't want to inline
+            // such a large block anyway.
+            return null;
+          }
           JExpression clone = cloner.cloneExpression(expr);
           expressions.add(clone);
         } else if (stmt instanceof JReturnStatement) {

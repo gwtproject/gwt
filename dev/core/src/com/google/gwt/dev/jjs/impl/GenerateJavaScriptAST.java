@@ -86,6 +86,7 @@ import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
 import com.google.gwt.dev.jjs.ast.JStatement;
+import com.google.gwt.dev.jjs.ast.JSwitchExpression;
 import com.google.gwt.dev.jjs.ast.JSwitchStatement;
 import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JThrowStatement;
@@ -97,6 +98,7 @@ import com.google.gwt.dev.jjs.ast.JUnsafeTypeCoercion;
 import com.google.gwt.dev.jjs.ast.JVariable;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.JWhileStatement;
+import com.google.gwt.dev.jjs.ast.JYieldStatement;
 import com.google.gwt.dev.jjs.ast.RuntimeConstants;
 import com.google.gwt.dev.jjs.ast.js.JDebuggerStatement;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
@@ -591,11 +593,12 @@ public class GenerateJavaScriptAST {
 
     @Override
     public JsNode transformCaseStatement(JCaseStatement caseStatement) {
-      if (caseStatement.getExpr() == null) {
+      if (caseStatement.isDefault()) {
         return new JsDefault(caseStatement.getSourceInfo());
       } else {
+        assert caseStatement.getExprs().size() == 1 : "case must be normalized " + caseStatement;
         JsCase jsCase = new JsCase(caseStatement.getSourceInfo());
-        jsCase.setCaseExpr(transform(caseStatement.getExpr()));
+        jsCase.setCaseExpr(transform(caseStatement.getExprs().get(0)));
         return jsCase;
       }
     }
@@ -697,7 +700,16 @@ public class GenerateJavaScriptAST {
 
     @Override
     public JsNode transformExpressionStatement(JExpressionStatement statement) {
-      return transform(statement.getExpr()).makeStmt();
+      if (statement.getExpr() instanceof JSwitchExpression) {
+        if (statement.getExpr().getType() == JPrimitiveType.VOID) {
+          return transformSwitchStatement(new JSwitchStatement((JSwitchExpression)
+                  statement.getExpr()));
+        } else {
+          throw new IllegalStateException("top-level switch expr");
+        }
+      } else {
+        return transform(statement.getExpr()).makeStmt();
+      }
     }
 
     @Override
@@ -1684,6 +1696,50 @@ public class GenerateJavaScriptAST {
     }
 
     @Override
+    public JsNode transformSwitchExpression(JSwitchExpression x) {
+      SourceInfo info = x.getSourceInfo();
+      // Any remaining switch expression that couldn't be rewritten to a switch statement must be
+      // wrapped in a JsFunction, with yields replaced by returns. The function is invoked with
+      // Function.prototype.call, so that "this" is correctly applied to the contents of the
+      // function, and to avoid making the function appear in the local scope (avoiding the need
+      // for a name for the function, and thus allowing more than one switch, or nested switches,
+      // etc). That is,
+      //
+      // foo(switch(bar) {
+      //   case 123 -> "abc"
+      // });
+      //
+      // would be written as
+      //
+      // foo((function() {
+      //   switch(bar) {
+      //     case 123:
+      //       return "abc";
+      //   }
+      // }).call(this));
+      //
+
+      // We need a scope for the wrapper - we're just going to use the enclosing method for that,
+      // since all java locals are declared at the top level any way. This prevents us from needing
+      // to maintain a stack of nested JsFunctions (in case of nested switch expressions), and
+      // potentially lets the compiler reuse locals.
+      JsScope scope = getJsFunctionFor(currentMethod).getScope();
+
+      JsFunction fnWrapper = new JsFunction(info, scope);
+
+      // Write out the switch expression as if it was a statement - every case must have returns
+      // already built in
+      JsStatement switchStatement = transformSwitchStatement(new JSwitchStatement(x));
+
+      fnWrapper.setBody(new JsBlock(info));
+      fnWrapper.getBody().getStatements().add(switchStatement);
+
+      JsNameRef call = new JsNameRef(info, "call", fnWrapper);
+
+      return new JsInvocation(info, call, new JsThisRef(info));
+    }
+
+    @Override
     public JsStatement transformSwitchStatement(JSwitchStatement switchStatement) {
       /*
        * What a pain.. JSwitchStatement and JsSwitch are modeled completely
@@ -2601,6 +2657,11 @@ public class GenerateJavaScriptAST {
      */
     private <T extends JsExpression> T transform(JExpression expression) {
       return transform((JNode) expression);
+    }
+
+    @Override
+    public JsNode transformYieldStatement(JYieldStatement x) {
+      return new JsReturn(x.getSourceInfo(), transform(x.getExpr()));
     }
 
     private <T extends JsStatement> T transform(JStatement statement) {

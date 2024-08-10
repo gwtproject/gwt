@@ -382,7 +382,7 @@ public class Java17Test extends GWTTestCase {
 
   public void testNegativeInstanceOfPatternOutsideIfScope() {
     Object bar = new Bar();
-    if(!(bar instanceof Bar b)) {
+    if (!(bar instanceof Bar b)) {
      throw new RuntimeException();
     }
     assertTrue(b.isSquare());

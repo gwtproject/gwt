@@ -62,6 +62,10 @@ public class Java17Test extends GWTTestCase {
     assertFalse(isGwtSourceLevel17());
   }
 
+  public void testInstanceOfPatternMatchingWithSideEffectExpression() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
   public void testInstanceOfPatternMatchingWithAnd() {
     assertFalse(isGwtSourceLevel17());
   }
@@ -78,11 +82,23 @@ public class Java17Test extends GWTTestCase {
     assertFalse(isGwtSourceLevel17());
   }
 
+  public void testMultipleInstanceOfPatternMatchingWithSameVariableNameWithDifferentTypes() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testInstanceOfPatternMatchingIsFalse() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
   public void testInstanceOfPatternMatchingInLambda() {
     assertFalse(isGwtSourceLevel17());
   }
 
   public void testInstanceOfPatternMatchingAsReturn() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testNegativeInstanceOfPatternOutsideIfScope() {
     assertFalse(isGwtSourceLevel17());
   }
 

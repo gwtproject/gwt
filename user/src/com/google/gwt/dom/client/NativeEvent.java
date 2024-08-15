@@ -161,7 +161,7 @@ public class NativeEvent extends JavaScriptObject {
    * Gets the sign of the velocity of the mouse wheel associated with the event along the Y
    * axis.
    * <p>
-   * In previous versions of GWT this returne the velocity normalized to a small integer.
+   * In previous versions of GWT this returned the velocity normalized to a small integer.
    * Unfortunately for some devices such normalization rounded non-trivial velocities to 0.
    * To maintain compatibility with that implementation, this still returns an integer,
    * but using the sign function

@@ -134,18 +134,9 @@ public class Java17AstTest extends FullCompileTestBase {
     }
   }
 
-  public void testRecordsNotSupported() {
-    try {
-      addSnippetClassDecl("public record Point(int x, int y) {}");
-      compileSnippet("void", "Point rectangle = new Point(0, 0);");
-      fail("Compile should have failed but succeeded.");
-    } catch (Exception e) {
-      if (!(e.getCause() instanceof UnableToCompleteException)
-          && !(e instanceof UnableToCompleteException)) {
-        e.printStackTrace();
-        fail();
-      }
-    }
+  public void testRecordSyntax() throws UnableToCompleteException {
+    addSnippetClassDecl("public record Point(int x, int y) {}");
+    compileSnippet("void", "Point rectangle = new Point(0, 0);");
   }
 
   public void testSwitchExpressions() throws UnableToCompleteException {

@@ -41,6 +41,9 @@
           <pathelement path="${gwt.build.out}/user/bin-jakarta" />
           <pathelement path="${gwt.build.out}/dev/bin-test" />
           <pathelement path="${gwt.build.out}/user/bin-test" />
+          <pathelement path="${gwt.build.out}/user/bin-test" />
+          <pathelement location="${gwt.tools.lib}/errorprone/error_prone_core-2.23.0-with-dependencies.jar"/>
+          <pathelement location="${gwt.tools.lib}/errorprone/dataflow-errorprone-3.34.0-eisop1.jar"/>
         </classpath>
         <jvmarg value="-ea"/>
         <arg value="@{target}"/>

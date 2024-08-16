@@ -84,6 +84,7 @@ import com.google.gwt.dev.jjs.impl.HandleCrossFragmentReferences;
 import com.google.gwt.dev.jjs.impl.ImplementCastsAndTypeChecks;
 import com.google.gwt.dev.jjs.impl.ImplementClassLiteralsAsFields;
 import com.google.gwt.dev.jjs.impl.ImplementJsVarargs;
+import com.google.gwt.dev.jjs.impl.ImplementRecordComponents;
 import com.google.gwt.dev.jjs.impl.JavaAstVerifier;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.jjs.impl.JjsUtils;
@@ -1158,6 +1159,8 @@ public final class JavaToJavaScriptCompiler {
       // Replace calls to native overrides of object methods.
       ReplaceCallsToNativeJavaLangObjectOverrides.exec(jprogram);
 
+      ImplementRecordComponents.exec(jprogram);
+
       FixAssignmentsToUnboxOrCast.exec(jprogram);
       if (options.isEnableAssertions()) {
         AssertionNormalizer.exec(jprogram);
@@ -1203,6 +1206,7 @@ public final class JavaToJavaScriptCompiler {
     }
 
     EntryMethodHolderGenerator entryMethodHolderGenerator = new EntryMethodHolderGenerator();
+    context.setCurrentGenerator(EntryMethodHolderGenerator.class);
     String entryMethodHolderTypeName =
         entryMethodHolderGenerator.generate(logger, context, module.getCanonicalName());
     context.finish(logger);

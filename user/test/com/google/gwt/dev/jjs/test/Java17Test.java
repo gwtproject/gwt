@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google Inc.
+ * Copyright 2024 GWT Project Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -50,7 +50,19 @@ public class Java17Test extends GWTTestCase {
     assertFalse(isGwtSourceLevel17());
   }
 
+  public void testRecordClasses() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testJsTypeRecords() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
   public void testInstanceOfPatternMatching() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testInstanceOfPatternMatchingWithSideEffectExpression() {
     assertFalse(isGwtSourceLevel17());
   }
 
@@ -70,11 +82,23 @@ public class Java17Test extends GWTTestCase {
     assertFalse(isGwtSourceLevel17());
   }
 
+  public void testMultipleInstanceOfPatternMatchingWithSameVariableNameWithDifferentTypes() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testInstanceOfPatternMatchingIsFalse() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
   public void testInstanceOfPatternMatchingInLambda() {
     assertFalse(isGwtSourceLevel17());
   }
 
   public void testInstanceOfPatternMatchingAsReturn() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testNegativeInstanceOfPatternOutsideIfScope() {
     assertFalse(isGwtSourceLevel17());
   }
 

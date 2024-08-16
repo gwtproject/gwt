@@ -15,6 +15,7 @@
  */
 package com.google.gwt.emultest;
 
+import com.google.gwt.emultest.java11.lang.StringTest;
 import com.google.gwt.emultest.java11.util.OptionalDoubleTest;
 import com.google.gwt.emultest.java11.util.OptionalIntTest;
 import com.google.gwt.emultest.java11.util.OptionalLongTest;
@@ -32,6 +33,7 @@ import org.junit.runners.Suite;
         OptionalLongTest.class,
         OptionalTest.class,
         PredicateTest.class,
+        StringTest.class,
 })
 public class EmulJava11Suite {
 }

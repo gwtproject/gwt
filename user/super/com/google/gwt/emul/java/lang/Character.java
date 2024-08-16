@@ -322,7 +322,7 @@ public final class Character implements Comparable<Character>, Serializable {
       // the Java definition includes separators.
       whitespaceRegex =
           new NativeRegExp(
-              "[\\u1680\\u180E\\u2000-\\u2006\\u2008-\\u200A\\u2028\\u2029\\u205F\\u3000\\uFEFF]"
+              "[\\u1680\\u2000-\\u2006\\u2008-\\u200A\\u2028\\u2029\\u205F\\u3000]"
                   + "|[\\t-\\r ]"
                   + "|[\\x1C-\\x1F]");
     }

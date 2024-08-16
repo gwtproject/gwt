@@ -16,6 +16,7 @@
 
 package java.lang;
 
+import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkCriticalStringBounds;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.checkStringBounds;
@@ -27,7 +28,12 @@ import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.Comparator;
 import java.util.Locale;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.StringJoiner;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.Coercions;
 import javaemul.internal.EmulatedCharset;
@@ -755,6 +761,91 @@ public final class String implements Comparable<String>, CharSequence,
     return start > 0 || end < length ? substring(start, end) : this;
   }
 
+  public String strip() {
+    int length = length();
+    int start = getLeadingWhitespaceLength();
+    if (start == length) {
+      return "";
+    }
+    return substring(start, length - getTrailingWhitespaceLength());
+  }
+
+  public String stripLeading() {
+    return substring(getLeadingWhitespaceLength());
+  }
+
+  public String stripTrailing() {
+    return substring(0, length() - getTrailingWhitespaceLength());
+  }
+
+  public boolean isBlank() {
+    return length() == getLeadingWhitespaceLength();
+  }
+
+  public Stream<String> lines() {
+    return StreamSupport.stream(new LinesSpliterator(), false);
+  }
+
+  public String repeat(int count) {
+    checkArgument(count >= 0, "count is negative: " + count);
+    return asNativeString().repeat(count);
+  }
+
+  private int getLeadingWhitespaceLength() {
+    int length = length();
+    for (int i = 0; i < length; i++) {
+      if (!Character.isWhitespace(charAt(i))) {
+        return i;
+      }
+    }
+    return length;
+  }
+
+  private int getTrailingWhitespaceLength() {
+    int length = length();
+    for (int i = length - 1; i >= 0; i--) {
+      if (!Character.isWhitespace(charAt(i))) {
+        return length - 1 - i;
+      }
+    }
+    return length;
+  }
+
+  private class LinesSpliterator extends Spliterators.AbstractSpliterator<String> {
+    private int nextIndex = 0;
+    private int rPosition = -1;
+    private int nPosition = -1;
+
+    private LinesSpliterator() {
+      super(Long.MAX_VALUE, Spliterator.IMMUTABLE | Spliterator.ORDERED);
+    }
+
+    @Override
+    public boolean tryAdvance(Consumer<? super String> action) {
+      if (isEmpty()) {
+        return false;
+      }
+      if (rPosition < nextIndex) {
+        rPosition = cappedIndexOf('\r');
+      }
+      if (nPosition < nextIndex) {
+        nPosition = cappedIndexOf('\n');
+      }
+      int lineEnd = Math.min(nPosition, rPosition);
+      action.accept(substring(nextIndex, lineEnd));
+      nextIndex = lineEnd + 1;
+      if (nPosition == rPosition + 1) {
+        nextIndex++;
+      }
+      return nextIndex < length();
+    }
+
+    private int cappedIndexOf(char c) {
+      int index = indexOf(c, nextIndex);
+      return index == -1 ? length() : index;
+    }
+  }
+
   @JsType(isNative = true, name = "String", namespace = "<window>")
   private static class NativeString {
     public static native String fromCharCode(char x);
@@ -771,6 +862,7 @@ public final class String implements Comparable<String>, CharSequence,
     public native String toLocaleUpperCase();
     public native String toLowerCase();
     public native String toUpperCase();
+    public native String repeat(int count);
   }
 
   // CHECKSTYLE_OFF: Utility Methods for unboxed String.

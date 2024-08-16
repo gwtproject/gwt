@@ -377,9 +377,7 @@ public class CfgBuilder {
     @Override
     public boolean visit(JCaseStatement x, Context ctx) {
       pushNode(new CfgStatementNode<JStatement>(parent, x));
-      if (x.isDefault()) {
-        // default label
-      } else {
+      if (!x.isDefault()) {
         // case label
         JExpression condition = x.convertToCompareExpression(switchStatement.getExpr());
         CfgCaseNode node = addNode(new CfgCaseNode(parent, x, condition));

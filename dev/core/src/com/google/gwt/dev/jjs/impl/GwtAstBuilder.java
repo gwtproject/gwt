@@ -2698,10 +2698,6 @@ public class GwtAstBuilder {
 
     @Override
     public boolean visit(SwitchExpression x, BlockScope blockScope) {
-//      InternalCompilerException exception =
-//              new InternalCompilerException("Switch expressions not yet supported");
-//      exception.addNode(new JCaseStatement(makeSourceInfo(x), null));
-//      throw exception;
       x.statements = reduceToReachable(x.statements);
       return true;
     }

@@ -18,7 +18,7 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 
 /**
- * Wrapper to represent a Java switch statement as a JStatement.
+ * Wrapper to represent a Java switch expression as a JStatement.
  */
 public class JSwitchStatement extends JStatement {
 

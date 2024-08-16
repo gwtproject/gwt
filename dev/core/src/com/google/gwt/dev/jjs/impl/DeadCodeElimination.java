@@ -1221,21 +1221,26 @@ public class DeadCodeElimination {
 
       // Find the matching case
       JCaseStatement matchingCase = null;
-      statements: for (JStatement subStatement : s.getBody().getStatements()) {
+      for (JStatement subStatement : s.getBody().getStatements()) {
         if (subStatement instanceof JCaseStatement) {
           JCaseStatement caseStatement = (JCaseStatement) subStatement;
           if (caseStatement.isDefault()) {
             // speculatively put the default case into the matching case
             matchingCase = caseStatement;
           } else {
+            JCaseStatement found = null;
+            // If there is an exact match of the literal being switched on, identify it
             for (JExpression expr : caseStatement.getExprs()) {
               if (expr instanceof JValueLiteral) {
                 JValueLiteral caseValue = (JValueLiteral) expr;
                 if (caseValue.getValueObj().equals(targetValue.getValueObj())) {
-                  matchingCase = caseStatement;
-                  break statements;
+                  found = caseStatement;
+                  break;
                 }
               }
+            }
+            if (found != null) {
+              matchingCase = found;
             }
           }
         }
@@ -2021,7 +2026,6 @@ public class DeadCodeElimination {
    * labeled break break to another context.
    */
   public static class FindBreakContinueStatementsVisitor extends JVisitor {
-    // TODO add yield support?
     private boolean hasBreakContinueStatements = false;
 
     @Override

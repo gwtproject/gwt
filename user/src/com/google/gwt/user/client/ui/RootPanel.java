@@ -89,11 +89,18 @@ public class RootPanel extends AbsolutePanel {
    * This method may only be called per widget, and only for widgets that were
    * originally passed to {@link #detachOnWindowClose(Widget)}.
    * </p>
-   * 
+   * <p>
+   * Note that modern browsers do not have the memory leaks that originally required use of this
+   * feature - it is retained only to support application-specific detach events.
+   * </p>
+   *
    * @param widget the widget that no longer needs to be cleaned up when the
    *          page closes
    * @see #detachOnWindowClose(Widget)
+   * @deprecated Instead, prefer to use the {@code bfcache}, {@code pagehide},
+   * {@code visibilitychange} events, etc.
    */
+  @Deprecated
   public static void detachNow(Widget widget) {
     assert widgetsToDetach.contains(widget) : "detachNow() called on a widget "
         + "not currently in the detach list";
@@ -123,10 +130,17 @@ public class RootPanel extends AbsolutePanel {
    * contained in another widget. This is to ensure that the DOM and Widget
    * hierarchies cannot get into an inconsistent state.
    * </p>
-   * 
+   * <p>
+   * Note that modern browsers do not have the memory leaks that originally required use of this
+   * feature - it is retained only to support application-specific detach events.
+   * </p>
+   *
    * @param widget the widget to be cleaned up when the page closes
    * @see #detachNow(Widget)
+   * @deprecated Instead, prefer to use the {@code bfcache}, {@code pagehide},
+   * {@code visibilitychange} events, etc.
    */
+  @Deprecated
   public static void detachOnWindowClose(Widget widget) {
     assert !widgetsToDetach.contains(widget) : "detachOnUnload() called twice "
         + "for the same widget";
@@ -218,16 +232,36 @@ public class RootPanel extends AbsolutePanel {
 
   /**
    * Determines whether the given widget is in the detach list.
-   * 
+   * <p>
+   * Note that modern browsers do not have the memory leaks that originally required use of this
+   * feature - it is retained only to support application-specific detach events.
+   * </p>
+   *
    * @param widget the widget to be checked
    * @return <code>true</code> if the widget is in the detach list
+   * @deprecated Instead, prefer to use the {@code bfcache}, {@code pagehide},
+   * {@code visibilitychange} events, etc.
    */
+  @Deprecated
   public static boolean isInDetachList(Widget widget) {
     return widgetsToDetach.contains(widget);
   }
 
-  // Package-protected for use by unit tests. Do not call this method directly.
-  static void detachWidgets() {
+  /**
+   * Detaches all widgets that were set to be detached on window close by a call to
+   * {@link #detachOnWindowClose}. Formerly was package-protected, now can be called by projects
+   * that required the old behavior and are willing to set up their own onclose handler on the
+   * window.
+   * <p>
+   * Note that modern browsers do not have the memory leaks that originally required use of this
+   * feature - it is retained only to support application-specific detach events.
+   * </p>
+   *
+   * @deprecated Instead, prefer to use the {@code bfcache}, {@code pagehide},
+   * {@code visibilitychange} events, etc.
+   */
+  @Deprecated
+  public static void detachWidgets() {
     // When the window is closing, detach all widgets that need to be
     // cleaned up. This will cause all of their event listeners
     // to be unhooked, which will avoid potential memory leaks.

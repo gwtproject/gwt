@@ -1241,6 +1241,7 @@ public class DeadCodeElimination {
             }
             if (found != null) {
               matchingCase = found;
+              break;
             }
           }
         }

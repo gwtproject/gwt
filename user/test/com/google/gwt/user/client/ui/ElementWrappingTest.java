@@ -79,6 +79,25 @@ public class ElementWrappingTest extends GWTTestCase {
   }
 
   /**
+   * Tests that {@link Widget#removeFromParent()} can be called more than once and successfully
+   * detaches wrapped widgets.
+   */
+  public void testRemoveFromParentDuplicateSucceeds() {
+    // Testing hosted-mode-only assertion.
+    if (!GWT.isScript()) {
+      // Trying to pass the same widget to RootPanel.detachNow() twice
+      // should fail an assertion.
+      ensureDiv().setInnerHTML(
+          "<a id='foo' href='" + TEST_URL + "'>myAnchor</a>");
+      Anchor a = Anchor.wrap(Document.get().getElementById("foo"));
+      a.removeFromParent(); // success
+      assertFalse(RootPanel.isInDetachList(a));
+      a.removeFromParent(); // no-op
+      assertFalse(RootPanel.isInDetachList(a));
+    }
+  }
+
+  /**
    * Tests that {@link RootPanel#detachOnWindowClose(Widget)} can only be called
    * once per widget.
    */

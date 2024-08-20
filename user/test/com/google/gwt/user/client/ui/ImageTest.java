@@ -795,6 +795,23 @@ public class ImageTest extends GWTTestCase {
   }
 
   /**
+   * Same test, but with removeFromParent
+   */
+  public void testRemoveFromParent() {
+    String uid = Document.get().createUniqueId();
+    DivElement div = Document.get().createDivElement();
+    div.setInnerHTML("<img id='" + uid + "' src='counting-forwards.png'>");
+    Document.get().getBody().appendChild(div);
+
+    final TestImage image = TestImage.wrap(Document.get().getElementById(uid));
+    assertNotNull(image);
+
+    // Cleanup.
+    Document.get().getBody().appendChild(div);
+    image.removeFromParent();
+  }
+
+  /**
    * Tests that wrapping an existing DOM element works if you call
    * setUrlAndVisibleRect() on it.
    */

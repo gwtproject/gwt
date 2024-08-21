@@ -139,7 +139,7 @@ abstract class DOMImpl {
   }-*/;
 
   public int eventGetMouseWheelVelocityY(NativeEvent evt) {
-    return evt.getDeltaY() == 0.0 ? 0 : (evt.getDeltaY() > 0 ? 1 : -1);
+    return (int) Math.signum(evt.getDeltaY());
   }
 
   public abstract EventTarget eventGetRelatedTarget(NativeEvent nativeEvent);

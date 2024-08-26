@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2024 GWT Project Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,34 +18,44 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 
 /**
- * Wrapper to represent a Java switch expression as a JStatement.
+ * Java switch statement/expression.
  */
-public class JSwitchStatement extends JStatement {
+public class JSwitchExpression extends JExpression {
+  private JBlock body;
+  private JExpression expr;
+  private JType type;
 
-  private final JSwitchExpression expr;
-
-  public JSwitchStatement(SourceInfo info, JExpression expr, JBlock block) {
-    this(new JSwitchExpression(info, expr, block, JPrimitiveType.VOID));
-  }
-
-  public JSwitchStatement(JSwitchExpression expr) {
-    super(expr.getSourceInfo());
+  public JSwitchExpression(SourceInfo info, JExpression expr, JBlock body, JType type) {
+    super(info);
     this.expr = expr;
+    this.body = body;
+    this.type = type;
   }
 
   public JBlock getBody() {
-    return expr.getBody();
+    return body;
   }
 
   public JExpression getExpr() {
-    return expr.getExpr();
+    return expr;
+  }
+
+  @Override
+  public boolean hasSideEffects() {
+    return true;
   }
 
   @Override
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {
-      visitor.accept(expr);
+      expr = visitor.accept(expr);
+      body = (JBlock) visitor.accept(body);
     }
     visitor.endVisit(this, ctx);
+  }
+
+  @Override
+  public JType getType() {
+    return type;
   }
 }

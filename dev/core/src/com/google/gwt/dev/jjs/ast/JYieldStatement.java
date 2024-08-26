@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2024 GWT Project Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,34 +18,33 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 
 /**
- * Wrapper to represent a Java switch expression as a JStatement.
+ * Java yield statement for switch statement/expressions.
  */
-public class JSwitchStatement extends JStatement {
+public class JYieldStatement extends JStatement {
 
-  private final JSwitchExpression expr;
+  private JExpression expr;
 
-  public JSwitchStatement(SourceInfo info, JExpression expr, JBlock block) {
-    this(new JSwitchExpression(info, expr, block, JPrimitiveType.VOID));
-  }
-
-  public JSwitchStatement(JSwitchExpression expr) {
-    super(expr.getSourceInfo());
+  public JYieldStatement(SourceInfo info, JExpression expr) {
+    super(info);
     this.expr = expr;
   }
 
-  public JBlock getBody() {
-    return expr.getBody();
-  }
-
   public JExpression getExpr() {
-    return expr.getExpr();
+    return expr;
   }
 
   @Override
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {
-      visitor.accept(expr);
+      if (expr != null) {
+        expr = visitor.accept(expr);
+      }
     }
     visitor.endVisit(this, ctx);
+  }
+
+  @Override
+  public boolean unconditionalControlBreak() {
+    return true;
   }
 }

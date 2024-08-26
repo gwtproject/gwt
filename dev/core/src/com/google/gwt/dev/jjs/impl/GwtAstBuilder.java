@@ -87,6 +87,7 @@ import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
+import com.google.gwt.dev.jjs.ast.JSwitchExpression;
 import com.google.gwt.dev.jjs.ast.JSwitchStatement;
 import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JThrowStatement;
@@ -97,6 +98,7 @@ import com.google.gwt.dev.jjs.ast.JUnsafeTypeCoercion;
 import com.google.gwt.dev.jjs.ast.JVariable;
 import com.google.gwt.dev.jjs.ast.JVariableRef;
 import com.google.gwt.dev.jjs.ast.JWhileStatement;
+import com.google.gwt.dev.jjs.ast.JYieldStatement;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
 import com.google.gwt.dev.jjs.ast.js.JsniClassLiteral;
 import com.google.gwt.dev.jjs.ast.js.JsniFieldRef;
@@ -208,6 +210,7 @@ import org.eclipse.jdt.internal.compiler.ast.TypeReference;
 import org.eclipse.jdt.internal.compiler.ast.UnaryExpression;
 import org.eclipse.jdt.internal.compiler.ast.UnionTypeReference;
 import org.eclipse.jdt.internal.compiler.ast.WhileStatement;
+import org.eclipse.jdt.internal.compiler.ast.YieldStatement;
 import org.eclipse.jdt.internal.compiler.impl.Constant;
 import org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding;
 import org.eclipse.jdt.internal.compiler.lookup.BaseTypeBinding;
@@ -540,25 +543,33 @@ public class GwtAstBuilder {
     }
 
     @Override
-    public void endVisit(CaseStatement x, BlockScope scope) {
-      if (x.isExpr) {
-        InternalCompilerException exception =
-            new InternalCompilerException("Switch expressions not yet supported");
-        exception.addNode(new JCaseStatement(makeSourceInfo(x), null));
-        throw exception;
+    public void endVisit(YieldStatement x, BlockScope scope) {
+      try {
+        SourceInfo info = makeSourceInfo(x);
+        JExpression expression = pop(x.expression);
+        push(new JYieldStatement(info, expression));
+      } catch (Throwable e) {
+        throw translateException(x, e);
       }
+    }
+
+    @Override
+    public void endVisit(CaseStatement x, BlockScope scope) {
       try {
         SourceInfo info = makeSourceInfo(x);
         if (x.constantExpressions == null) {
-          push(new JCaseStatement(info, null));
+          push(new JCaseStatement(info, Collections.emptyList()));
         } else {
+          List<JExpression> cases = new ArrayList<>();
+
           for (Expression constantExpression : x.constantExpressions) {
             JExpression caseExpression = pop(constantExpression);
             if (caseExpression != null && caseExpression.getType().isEnumOrSubclass() != null) {
               caseExpression = synthesizeCallToOrdinal(scope, info, caseExpression);
             }
-            push(new JCaseStatement(info, caseExpression));
+            cases.add(0, caseExpression);
           }
+          push(new JCaseStatement(info, cases));
         }
       } catch (Throwable e) {
         throw translateException(x, e);
@@ -2204,6 +2215,24 @@ public class GwtAstBuilder {
     }
 
     @Override
+    public void endVisit(SwitchExpression x, BlockScope scope) {
+      try {
+        SourceInfo info = makeSourceInfo(x);
+
+        JBlock block = popBlock(info, x.statements);
+        JExpression expression = pop(x.expression);
+
+        if (x.expression.resolvedType.isEnum()) {
+          // synthesize a call to ordinal().
+          expression = synthesizeCallToOrdinal(scope, info, expression);
+        }
+        push(new JSwitchExpression(info, expression, block, typeMap.get(x.resolvedType)));
+      } catch (Throwable e) {
+        throw translateException(x, e);
+      }
+    }
+
+    @Override
     public void endVisit(SwitchStatement x, BlockScope scope) {
       try {
         SourceInfo info = makeSourceInfo(x);
@@ -2613,14 +2642,6 @@ public class GwtAstBuilder {
     }
 
     @Override
-    public boolean visit(SwitchExpression x, BlockScope blockScope) {
-      InternalCompilerException exception =
-          new InternalCompilerException("Switch expressions not yet supported");
-      exception.addNode(new JCaseStatement(makeSourceInfo(x), null));
-      throw exception;
-    }
-
-    @Override
     public boolean visit(LocalDeclaration x, BlockScope scope) {
       try {
         createLocal(x);
@@ -2673,6 +2694,12 @@ public class GwtAstBuilder {
 
     @Override
     public boolean visit(SwitchStatement x, BlockScope scope) {
+      x.statements = reduceToReachable(x.statements);
+      return true;
+    }
+
+    @Override
+    public boolean visit(SwitchExpression x, BlockScope blockScope) {
       x.statements = reduceToReachable(x.statements);
       return true;
     }

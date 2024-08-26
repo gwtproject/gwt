@@ -57,6 +57,7 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
+import com.google.gwt.dev.jjs.ast.JSwitchExpression;
 import com.google.gwt.dev.jjs.ast.JSwitchStatement;
 import com.google.gwt.dev.jjs.ast.JTryStatement;
 import com.google.gwt.dev.jjs.ast.JType;
@@ -83,6 +84,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -678,6 +680,13 @@ public class DeadCodeElimination {
       tryRemoveSwitch(x, ctx);
     }
 
+    @Override
+    public void endVisit(JSwitchExpression x, Context ctx) {
+      switchBlocks.remove(x.getBody());
+
+      // TODO apply other switch optimizations, if they work with switch exprs
+    }
+
     /**
      * 1) Remove catch blocks whose exception type is not instantiable. 2) Prune
      * try statements with no body. 3) Hoist up try statements with no catches
@@ -815,6 +824,12 @@ public class DeadCodeElimination {
 
     @Override
     public boolean visit(JSwitchStatement x, Context ctx) {
+      switchBlocks.add(x.getBody());
+      return true;
+    }
+
+    @Override
+    public boolean visit(JSwitchExpression x, Context ctx) {
       switchBlocks.add(x.getBody());
       return true;
     }
@@ -1192,7 +1207,7 @@ public class DeadCodeElimination {
     }
 
     /**
-     * Tries to removes cases and statements from switches whose expression is a
+     * Tries to remove cases and statements from switches whose expression is a
      * constant value.
      *
      * @return true, if the switch was completely eliminated
@@ -1209,13 +1224,23 @@ public class DeadCodeElimination {
       for (JStatement subStatement : s.getBody().getStatements()) {
         if (subStatement instanceof JCaseStatement) {
           JCaseStatement caseStatement = (JCaseStatement) subStatement;
-          if (caseStatement.getExpr() == null) {
+          if (caseStatement.isDefault()) {
             // speculatively put the default case into the matching case
             matchingCase = caseStatement;
-          } else if (caseStatement.getExpr() instanceof JValueLiteral) {
-            JValueLiteral caseValue = (JValueLiteral) caseStatement.getExpr();
-            if (caseValue.getValueObj().equals(targetValue.getValueObj())) {
-              matchingCase = caseStatement;
+          } else {
+            JCaseStatement found = null;
+            // If there is an exact match of the literal being switched on, identify it
+            for (JExpression expr : caseStatement.getExprs()) {
+              if (expr instanceof JValueLiteral) {
+                JValueLiteral caseValue = (JValueLiteral) expr;
+                if (caseValue.getValueObj().equals(targetValue.getValueObj())) {
+                  found = caseStatement;
+                  break;
+                }
+              }
+            }
+            if (found != null) {
+              matchingCase = found;
               break;
             }
           }
@@ -1229,11 +1254,18 @@ public class DeadCodeElimination {
         return true;
       }
 
-      Iterator<JStatement> it = s.getBody().getStatements().iterator();
+      ListIterator<JStatement> it = s.getBody().getStatements().listIterator();
 
       // Remove things until we find the matching case
       while (it.hasNext() && (it.next() != matchingCase)) {
         it.remove();
+        madeChanges();
+      }
+
+      // If the matching case had more than one value, rewrite to only the matching value
+      if (matchingCase.getExprs().size() > 1) {
+        it.remove();
+        it.add(new JCaseStatement(matchingCase.getSourceInfo(), targetValue));
         madeChanges();
       }
 
@@ -1245,6 +1277,7 @@ public class DeadCodeElimination {
           break;
         } else if (statement instanceof JCaseStatement) {
           it.remove();
+          madeChanges();
         }
       }
 
@@ -1264,7 +1297,7 @@ public class DeadCodeElimination {
       for (JStatement statement : body.getStatements()) {
         if (statement instanceof JCaseStatement) {
           JCaseStatement caseStmt = (JCaseStatement) statement;
-          if (caseStmt.getExpr() == null) {
+          if (caseStmt.isDefault()) {
             inDefault = true;
           }
         } else if (isUnconditionalUnlabeledBreak(statement)) {
@@ -1900,7 +1933,7 @@ public class DeadCodeElimination {
 
     private void tryRemoveSwitch(JSwitchStatement x, Context ctx) {
       JBlock body = x.getBody();
-      if (body.getStatements().size() == 0) {
+      if (body.getStatements().isEmpty()) {
         // Empty switch; just run the switch condition.
         replaceMe(x.getExpr().makeStatement(), ctx);
       } else if (body.getStatements().size() == 2) {
@@ -1933,22 +1966,20 @@ public class DeadCodeElimination {
           return;
         }
 
-        if (caseStatement.getExpr() != null) {
-          // Create an if statement equivalent to the single-case switch.
-          JBinaryOperation compareOperation =
-              new JBinaryOperation(x.getSourceInfo(), program.getTypePrimitiveBoolean(),
-                  JBinaryOperator.EQ, x.getExpr(), caseStatement.getExpr());
-          JBlock block = new JBlock(x.getSourceInfo());
-          block.addStmt(statement);
-          JIfStatement ifStatement =
-              new JIfStatement(x.getSourceInfo(), compareOperation, block, null);
-          replaceMe(ifStatement, ctx);
-        } else {
+        if (caseStatement.isDefault()) {
           // All we have is a default case; convert to a JBlock.
           JBlock block = new JBlock(x.getSourceInfo());
           block.addStmt(x.getExpr().makeStatement());
           block.addStmt(statement);
           replaceMe(block, ctx);
+        } else {
+          // Create an if statement equivalent to the single-case switch.
+          JBinaryOperation compareOperation = caseStatement.convertToCompareExpression(x.getExpr());
+          JBlock block = new JBlock(x.getSourceInfo());
+          block.addStmt(statement);
+          JIfStatement ifStatement =
+              new JIfStatement(x.getSourceInfo(), compareOperation, block, null);
+          replaceMe(ifStatement, ctx);
         }
       }
     }

@@ -453,6 +453,10 @@ public class JVisitor {
     endVisit((JValueLiteral) x, ctx);
   }
 
+  public void endVisit(JSwitchExpression x, Context ctx) {
+    endVisit((JExpression) x, ctx);
+  }
+
   public void endVisit(JSwitchStatement x, Context ctx) {
     endVisit((JStatement) x, ctx);
   }
@@ -494,6 +498,10 @@ public class JVisitor {
   }
 
   public void endVisit(JWhileStatement x, Context ctx) {
+    endVisit((JStatement) x, ctx);
+  }
+
+  public void endVisit(JYieldStatement x, Context ctx) {
     endVisit((JStatement) x, ctx);
   }
 
@@ -773,6 +781,10 @@ public class JVisitor {
     return visit((JValueLiteral) x, ctx);
   }
 
+  public boolean visit(JSwitchExpression x, Context ctx) {
+    return visit((JExpression) x, ctx);
+  }
+
   public boolean visit(JSwitchStatement x, Context ctx) {
     return visit((JStatement) x, ctx);
   }
@@ -817,4 +829,7 @@ public class JVisitor {
     return visit((JStatement) x, ctx);
   }
 
+  public boolean visit(JYieldStatement x, Context ctx) {
+    return visit((JStatement) x, ctx);
+  }
 }

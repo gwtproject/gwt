@@ -383,8 +383,60 @@ public class Java17Test extends GWTTestCase {
   public void testNegativeInstanceOfPatternOutsideIfScope() {
     Object bar = new Bar();
     if (!(bar instanceof Bar b)) {
-     throw new RuntimeException();
+      throw new RuntimeException();
     }
     assertTrue(b.isSquare());
+  }
+
+  public void testSwitchExpressionOnConstant() {
+    int value = switch(0) {
+      default -> 17;
+    };
+    assertEquals(17, value);
+  }
+
+  public void testSwitchWithMultipleCaseValues() {
+    for (int i = 0; i < 5; i++) {
+      boolean reachedDefault = false;
+      boolean isEven = switch(i) {
+        case 0, 2:
+          yield true;
+        case 1, 3, 5:
+          yield false;
+        default:// default is required for switch exprs, and we will hit it for 4
+          reachedDefault = true;
+          yield true;
+      };
+      assertEquals(i == 4, reachedDefault);
+      assertEquals("" + i, i % 2 == 0, isEven);
+    }
+  }
+
+  public void testSwitchInSubExpr() {
+    double value = Math.random();// non-constant value between 0 and 1
+    boolean notCalled = true;
+    if ((int) value % 5 == 3 && switch ((int) value / 5) {
+      case 4:
+        notCalled = false;
+        yield true;
+      default:
+        notCalled = false;
+        yield false;
+    }) {
+      fail("should not be reached");
+    }
+    assertTrue(notCalled);
+
+    double result = (int) value % 7 == 2 ?
+            switch((int)value / 7) {
+              case 1:
+                notCalled = false;
+                yield 1.0;
+              default:
+                notCalled = false;
+                yield 2.0;
+            }
+            : 4.0;
+    assertTrue(notCalled);
   }
 }

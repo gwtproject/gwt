@@ -40,6 +40,7 @@ import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JStatement;
+import com.google.gwt.dev.jjs.ast.JSwitchExpression;
 import com.google.gwt.dev.jjs.ast.JSwitchStatement;
 import com.google.gwt.dev.jjs.ast.JThrowStatement;
 import com.google.gwt.dev.jjs.ast.JTryStatement;
@@ -50,7 +51,6 @@ import com.google.gwt.dev.jjs.ast.JVariableRef;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.JWhileStatement;
 import com.google.gwt.dev.jjs.ast.js.JDebuggerStatement;
-import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -311,22 +311,6 @@ public class CfgBuilder {
       return graph;
     }
 
-    /**
-     * Build cfg for codeblock. Resulting graph will have one incoming edge
-     * and no outgoing edges.
-     */
-    public Cfg build(JExpression expression) {
-      accept(expression);
-      addNode(endNode);
-
-      for (Exit.Reason reason : Exit.Reason.values()) {
-        Preconditions.checkArgument(currentExitsByReason.get(reason).isEmpty(),
-          "Unhandled exits %s", reason);
-      }
-
-      return graph;
-    }
-
     @Override
     public boolean visit(JBinaryOperation x, Context ctx) {
       if (x.isAssignment()) {
@@ -393,16 +377,12 @@ public class CfgBuilder {
     @Override
     public boolean visit(JCaseStatement x, Context ctx) {
       pushNode(new CfgStatementNode<JStatement>(parent, x));
-      if (x.getExpr() != null) {
+      if (!x.isDefault()) {
         // case label
-        JExpression condition = new JBinaryOperation(x.getSourceInfo(),
-            program.getTypePrimitiveBoolean(),
-            JBinaryOperator.EQ, switchStatement.getExpr(), x.getExpr());
+        JExpression condition = x.convertToCompareExpression(switchStatement.getExpr());
         CfgCaseNode node = addNode(new CfgCaseNode(parent, x, condition));
         addExit(Exit.createCaseThen(node));
         addExit(Exit.createCaseElse(node));
-      } else {
-        // default label
       }
       popNode();
       return false;
@@ -646,6 +626,16 @@ public class CfgBuilder {
     }
 
     @Override
+    public boolean visit(JSwitchExpression x, Context ctx) {
+      // Switch expressions are not supported at this time, return false to avoid their nested
+      // yield/etc statements. Flow control is of course possible within case statements, but we'll
+      // avoid visiting those until the switch itself is handled.
+
+      // TODO add an exit node for exceptions within the switch?
+      return false;
+    }
+
+    @Override
     public boolean visit(JSwitchStatement x, Context ctx) {
       pushNode(new CfgStatementNode<JStatement>(parent, x));
       accept(x.getExpr());
@@ -670,7 +660,7 @@ public class CfgBuilder {
 
       for (JStatement s : statements) {
         if (s instanceof JCaseStatement) {
-          if (((JCaseStatement) s).getExpr() != null) {
+          if (!((JCaseStatement) s).isDefault()) {
             // case label
 
             fallThroughExits.addAll(removeExits(Exit.Reason.NORMAL));

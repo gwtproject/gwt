@@ -138,7 +138,9 @@ abstract class DOMImpl {
     return !!evt.metaKey;
   }-*/;
 
-  public abstract int eventGetMouseWheelVelocityY(NativeEvent evt);
+  public int eventGetMouseWheelVelocityY(NativeEvent evt) {
+    return (int) Math.signum(evt.getDeltaY());
+  }
 
   public abstract EventTarget eventGetRelatedTarget(NativeEvent nativeEvent);
 

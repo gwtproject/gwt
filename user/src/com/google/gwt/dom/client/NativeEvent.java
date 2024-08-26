@@ -158,22 +158,39 @@ public class NativeEvent extends JavaScriptObject {
   }
 
   /**
-   * Gets the velocity of the mouse wheel associated with the event along the Y
+   * Gets the sign of the velocity of the mouse wheel associated with the event along the Y
    * axis.
    * <p>
-   * The velocity of the event is an artificial measurement for relative
-   * comparisons of wheel activity. It is affected by some non-browser factors,
-   * including choice of input hardware and mouse acceleration settings. The
-   * sign of the velocity measurement agrees with the screen coordinate system;
-   * negative values are towards the origin and positive values are away from
-   * the origin. Standard scrolling speed is approximately ten units per event.
+   * In previous versions of GWT this returned the velocity normalized to a small integer.
+   * Unfortunately for some devices such normalization rounded non-trivial velocities to 0.
+   * To maintain compatibility with that implementation, this still returns an integer,
+   * but using the sign function
    * </p>
    * 
-   * @return The velocity of the mouse wheel.
+   * @return The velocity of the mouse wheel: -1 for scrolling up, 1 for scrolling down,
+   *         0 if not scrolled at all
+   * @deprecated use getDeltaY() instead
    */
+  @Deprecated
   public final int getMouseWheelVelocityY() {
     return DOMImpl.impl.eventGetMouseWheelVelocityY(this);
   }
+
+  /**
+   * Gets the native velocity of the mouse wheel in Y direction.
+   * @return The velocity of the mouse wheel
+   */
+  public final native double getDeltaY() /*-{
+    return this.deltaY;
+  }-*/;
+
+  /**
+   * Gets the native velocity of the mouse wheel in X direction.
+   * @return The velocity of the mouse wheel
+   */
+  public final native double getDeltaX() /*-{
+    return this.deltaX;
+  }-*/;
 
   /**
    * Gets the related target for this event.

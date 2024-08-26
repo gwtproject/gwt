@@ -205,11 +205,6 @@ class DOMImplStandardBase extends DOMImplStandard {
   }-*/;
 
   @Override
-  public native int eventGetMouseWheelVelocityY(NativeEvent evt) /*-{
-    return Math.round(-evt.wheelDelta / 40) || 0;
-  }-*/;
-
-  @Override
   public int getAbsoluteLeft(Element elem) {
     ClientRect rect = getBoundingClientRect(elem);
     double left = rect != null ? rect.getSubPixelLeft()

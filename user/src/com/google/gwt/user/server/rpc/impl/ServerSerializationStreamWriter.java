@@ -345,7 +345,7 @@ public final class ServerSerializationStreamWriter extends
    * This exists to work around a Rhino parser bug in the hosted mode client
    * that limits string node lengths to 64KB.
    */
-  private static final int MAX_STRING_NODE_LENGTH =  = Integer.getInteger("gwt.rpc.maxStringNodeLength", 0xFFFF);
+  private static final int MAX_STRING_NODE_LENGTH =  Integer.getInteger("gwt.rpc.maxStringNodeLength", 0xFFFF);
 
   static {
     /*

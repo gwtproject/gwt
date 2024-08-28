@@ -64,7 +64,10 @@ public class WindowImpl {
       } finally {
         try {
           oldRet = oldOnBeforeUnload && oldOnBeforeUnload(evt);
-        } catch (ignored) {}
+        } catch (unhandled) {
+          // Pass to uncaught exception handler, if registered
+          $wnd.onerror(unhandled);
+        }
       }
       // Avoid returning null as IE6 will coerce it into a string.
       // Ensure that "" gets returned properly.

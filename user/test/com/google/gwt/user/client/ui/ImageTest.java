@@ -790,7 +790,6 @@ public class ImageTest extends GWTTestCase {
     assertNotNull(image);
 
     // Cleanup.
-    Document.get().getBody().appendChild(div);
     RootPanel.detachNow(image);
   }
 
@@ -807,7 +806,6 @@ public class ImageTest extends GWTTestCase {
     assertNotNull(image);
 
     // Cleanup.
-    Document.get().getBody().appendChild(div);
     image.removeFromParent();
   }
 

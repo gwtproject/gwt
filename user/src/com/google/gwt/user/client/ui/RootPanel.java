@@ -89,16 +89,11 @@ public class RootPanel extends AbsolutePanel {
    * This method may only be called per widget, and only for widgets that were
    * originally passed to {@link #detachOnWindowClose(Widget)}.
    * </p>
-   * <p>
-   * Note that modern browsers do not have the memory leaks that originally required use of this
-   * feature - it is retained only to support application-specific detach events.
-   * </p>
    *
    * @param widget the widget that no longer needs to be cleaned up when the
    *          page closes
    * @see #detachOnWindowClose(Widget)
-   * @deprecated Instead, prefer to use the {@code bfcache}, {@code pagehide},
-   * {@code visibilitychange} events, etc.
+   * @deprecated Instead, use {@link Widget#removeFromParent()}.
    */
   @Deprecated
   public static void detachNow(Widget widget) {
@@ -115,30 +110,28 @@ public class RootPanel extends AbsolutePanel {
   /**
    * Adds a widget to the detach list. This is the list of widgets to be
    * detached when the page unloads.
-   * 
+   *
    * <p>
    * This method must be called for all widgets that have no parent widgets.
    * These are most commonly {@link RootPanel RootPanels}, but can also be any
    * widget used to wrap an existing element on the page. Failing to do this may
    * cause these widgets to leak memory. This method is called automatically by
    * widgets' wrap methods (e.g.
-   * {@link Button#wrap(com.google.gwt.dom.client.Element)}).
+   * {@link Button#wrap(Element)}).
    * </p>
-   * 
+   *
    * <p>
    * This method may <em>not</em> be called on any widget whose element is
    * contained in another widget. This is to ensure that the DOM and Widget
    * hierarchies cannot get into an inconsistent state.
    * </p>
-   * <p>
-   * Note that modern browsers do not have the memory leaks that originally required use of this
-   * feature - it is retained only to support application-specific detach events.
-   * </p>
    *
    * @param widget the widget to be cleaned up when the page closes
    * @see #detachNow(Widget)
-   * @deprecated Instead, prefer to use the {@code bfcache}, {@code pagehide},
-   * {@code visibilitychange} events, etc.
+   * @deprecated While originally introduced to combat memory leaks in old browsers, this is no
+   * longer necessary, and the unload event used by this method is being removed from browsers.
+   * Additionally, it is unreliable as a means to ensure calls to {@link Widget#onUnload()}. See
+   * <a href="https://github.com/gwtproject/gwt/issues/9908">Issue 9908</a> for more information.
    */
   @Deprecated
   public static void detachOnWindowClose(Widget widget) {
@@ -239,8 +232,9 @@ public class RootPanel extends AbsolutePanel {
    *
    * @param widget the widget to be checked
    * @return <code>true</code> if the widget is in the detach list
-   * @deprecated Instead, prefer to use the {@code bfcache}, {@code pagehide},
-   * {@code visibilitychange} events, etc.
+   * @deprecated Use of the detach list requires the unload event, which is planned to be removed
+   * in future browser updates. See notice on {@link #detachOnWindowClose(Widget)} and
+   * <a href="https://github.com/gwtproject/gwt/issues/9908">Issue 9908</a> for more information.
    */
   @Deprecated
   public static boolean isInDetachList(Widget widget) {
@@ -257,8 +251,8 @@ public class RootPanel extends AbsolutePanel {
    * feature - it is retained only to support application-specific detach events.
    * </p>
    *
-   * @deprecated Instead, prefer to use the {@code bfcache}, {@code pagehide},
-   * {@code visibilitychange} events, etc.
+   * @deprecated See notice on {@link #detachOnWindowClose(Widget)} and
+   * <a href="https://github.com/gwtproject/gwt/issues/9908">Issue 9908</a> for more information.
    */
   @Deprecated
   public static void detachWidgets() {

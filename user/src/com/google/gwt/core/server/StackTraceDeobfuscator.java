@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -186,9 +187,9 @@ public abstract class StackTraceDeobfuscator {
       return null;
     }
     // Warm the symbol cache for all symbols in this stack trace.
-    Set<String> requiredSymbols = new HashSet<String>();
+    Set<String> requiredSymbols = new HashSet<>();
     for (StackTraceElement ste : st) {
-      requiredSymbols.add(ste.getMethodName());
+      requiredSymbols.add(normalizeSymbol(ste.getMethodName()));
     }
     loadSymbolMap(strongName, requiredSymbols);
 
@@ -197,6 +198,17 @@ public abstract class StackTraceDeobfuscator {
       newSt[i] = resymbolize(st[i], strongName);
     }
     return newSt;
+  }
+
+  /**
+   * Helper to clean up client-provided symbols.
+   */
+  private static String normalizeSymbol(String symbol) {
+    // Chrome prefixes "new " for constructor calls, eliminate the prefix
+    if (symbol.startsWith("new ")) {
+      symbol = symbol.substring(4);
+    }
+    return symbol;
   }
 
   /**
@@ -305,7 +317,13 @@ public abstract class StackTraceDeobfuscator {
 
           if (declaringClass == null || declaringClass.equals(ste.getClassName())) {
             declaringClass = mappingForLine.getOriginalFile();
-            methodName = mappingForLine.getIdentifier().orElse(null);
+            if (mappingForLine.getIdentifier().isPresent()) {
+              // Only overwrite the name if the sourcemap had an explicit identifier
+              methodName = mappingForLine.getIdentifier().get();
+            } else if (methodName == null) {
+              // No other name was provided by symbolMaps, fall back to JS name
+              methodName = ste.getMethodName();
+            }
           }
           fileName = mappingForLine.getOriginalFile();
           lineNumber = mappingForLine.getLineNumber();
@@ -366,9 +384,8 @@ public abstract class StackTraceDeobfuscator {
   }
 
   private String loadOneSymbol(String strongName, String symbol) {
-    Set<String> symbolSet = new HashSet<String>();
-    symbolSet.add(symbol);
-    Map<String, String> symbolMap = loadSymbolMap(strongName, symbolSet);
+    symbol = normalizeSymbol(symbol);
+    Map<String, String> symbolMap = loadSymbolMap(strongName, Collections.singleton(symbol));
     return symbolMap.get(symbol);
   }
 

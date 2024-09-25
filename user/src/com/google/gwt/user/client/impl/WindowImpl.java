@@ -62,12 +62,7 @@ public class WindowImpl {
       try {
         ret = $entry(@com.google.gwt.user.client.Window::onClosing())();
       } finally {
-        try {
-          oldRet = oldOnBeforeUnload && oldOnBeforeUnload(evt);
-        } catch (unhandled) {
-          // Pass to uncaught exception handler, if registered
-          $wnd.onerror(unhandled);
-        }
+        oldRet = oldOnBeforeUnload && oldOnBeforeUnload(evt);
       }
       // Avoid returning null as IE6 will coerce it into a string.
       // Ensure that "" gets returned properly.

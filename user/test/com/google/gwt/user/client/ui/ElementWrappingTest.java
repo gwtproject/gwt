@@ -64,13 +64,13 @@ public class ElementWrappingTest extends GWTTestCase {
   public void testDetachNowTwiceFails() {
     // Testing hosted-mode-only assertion.
     if (!GWT.isScript()) {
+      // Trying to pass the same widget to RootPanel.detachNow() twice
+      // should fail an assertion.
+      ensureDiv().setInnerHTML(
+              "<a id='foo' href='" + TEST_URL + "'>myAnchor</a>");
+      Anchor a = Anchor.wrap(Document.get().getElementById("foo"));
+      RootPanel.detachNow(a); // pass
       try {
-        // Trying to pass the same widget to RootPanel.detachNow() twice
-        // should fail an assertion.
-        ensureDiv().setInnerHTML(
-            "<a id='foo' href='" + TEST_URL + "'>myAnchor</a>");
-        Anchor a = Anchor.wrap(Document.get().getElementById("foo"));
-        RootPanel.detachNow(a); // pass
         RootPanel.detachNow(a); // fail
         throw new Error("Expected assertion failure calling detachNow() twice");
       } catch (AssertionError e) {

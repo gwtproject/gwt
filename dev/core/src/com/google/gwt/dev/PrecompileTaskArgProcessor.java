@@ -70,7 +70,7 @@ class PrecompileTaskArgProcessor extends CompileArgProcessor {
     registerHandler(new ArgHandlerDumpSignatures());
     registerHandler(new ArgHandlerEnableAssertions(options));
     registerHandler(new ArgHandlerFragmentCount(options));
-    registerHandler(new ArgHandlerFragmentMerge(options));
+    registerHandler(new ArgHandlerFragmentMerge());
     registerHandler(new ArgHandlerGenDir(options));
     registerHandler(new ArgHandlerGenerateJsInteropExports(options));
     registerHandler(new ArgHandlerFilterJsInteropExports(options));

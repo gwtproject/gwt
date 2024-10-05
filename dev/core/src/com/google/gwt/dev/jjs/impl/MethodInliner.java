@@ -288,10 +288,11 @@ public class MethodInliner {
         } else if (stmt instanceof JReturnStatement) {
           JReturnStatement returnStatement = (JReturnStatement) stmt;
           JExpression expr = returnStatement.getExpr();
-          if (!CannotBeInlinedVisitor.check(expr)) {
-            return null;
-          }
+
           if (expr != null) {
+            if (!CannotBeInlinedVisitor.check(expr)) {
+              return null;
+            }
             JExpression clone = cloner.cloneExpression(expr);
             clone = maybeCast(clone, body.getMethod().getType());
             expressions.add(clone);

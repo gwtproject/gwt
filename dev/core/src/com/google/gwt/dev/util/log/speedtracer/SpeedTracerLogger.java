@@ -54,6 +54,7 @@ import java.util.logging.Logger;
  * </p>
  *
  */
+@Deprecated
 public final class SpeedTracerLogger {
 
   private static final Logger log = Logger.getLogger(SpeedTracerLogger.class.getName());

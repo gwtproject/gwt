@@ -45,7 +45,7 @@ public class ValueLabel<T> extends LabelBase<T> implements TakesValue<T>,
    * <p>
    * This element must already be attached to the document. If the element is
    * removed from the document, you must call
-   * {@link RootPanel#detachNow(Widget)}.
+   * {@link Widget#removeFromParent()}.
    * 
    * @param element the element to be wrapped
    * @param renderer the renderer used to render values into the element
@@ -72,7 +72,7 @@ public class ValueLabel<T> extends LabelBase<T> implements TakesValue<T>,
    * <p>
    * This element must already be attached to the document. If the element is
    * removed from the document, you must call
-   * {@link RootPanel#detachNow(Widget)}.
+   * {@link Widget#removeFromParent()}.
    * 
    * @param element the element to be wrapped
    * @param renderer the renderer used to render values into the element

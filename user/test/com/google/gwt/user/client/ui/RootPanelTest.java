@@ -96,6 +96,21 @@ public class RootPanelTest extends GWTTestCase {
     assertFalse(RootPanel.isInDetachList(w));
   }
 
+  public void testRemoveFromParentWithErrorOnDetach() {
+    BadWidget w = BadWidget.wrap(createAttachedDivElement());
+    w.setFailOnUnload(true);
+    assertTrue(RootPanel.isInDetachList(w));
+    assertTrue(RootPanel.getBodyElement().isOrHasChild(w.getElement()));
+
+    try {
+      w.removeFromParent();
+      fail("Expected IllegalArgumentException");
+    } catch (IllegalArgumentException e) {
+      // Expected.
+    }
+    assertFalse(RootPanel.isInDetachList(w));
+  }
+
   public void testDetachWidgetsWithErrorOnDetach() {
     BadWidget bad0 = BadWidget.wrap(createAttachedDivElement());
     bad0.setFailOnUnload(true);

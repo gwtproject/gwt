@@ -35,7 +35,6 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   private boolean disableClassMetadata = false;
   private boolean enableAssertions;
   private int fragmentCount = -1;
-  private int fragmentsMerge = -1;
   private boolean inlineLiteralParameters = true;
   private boolean jsonSoycEnabled = false;
   private JsNamespaceOption namespace = JsNamespaceOption.NONE;
@@ -97,7 +96,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
 
   @Override
   public int getFragmentsMerge() {
-    return fragmentsMerge;
+    return -1;
   }
 
   @Override
@@ -210,7 +209,6 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
 
   @Override
   public void setFragmentsMerge(int numFragments) {
-    this.fragmentsMerge = numFragments;
   }
 
   @Override

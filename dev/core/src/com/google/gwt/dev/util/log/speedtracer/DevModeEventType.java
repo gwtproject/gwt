@@ -21,6 +21,7 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.EventType;
  * Represents a type of event whose performance is tracked while running
  * {@link com.google.gwt.dev.DevMode}
  */
+@Deprecated
 public enum DevModeEventType implements EventType {
   CLASS_BYTES_REWRITE("Class bytes rewrite", "DarkBlue"), //
   CREATE_UI("Create UI", "BlueViolet"), //

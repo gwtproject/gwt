@@ -21,6 +21,7 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.EventType;
  * Represents a type of event whose performance is tracked while running
  * {@link com.google.gwt.dev.DevMode}
  */
+@Deprecated
 public enum SpeedTracerEventType implements EventType {
   GC("Garbage Collection", "Plum"),
   OVERHEAD("Speedtracer Overhead","Black");

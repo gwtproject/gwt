@@ -707,6 +707,9 @@ public final class SpeedTracerLogger {
     enabled = fileLoggingEnabled || DashboardNotifierFactory.areNotificationsEnabled();
 
     if (enabled) {
+      System.err.println("SpeedTracerLogging is deprecated, and may be removed in a future " +
+              "release. Please see https://github.com/gwtproject/gwt/issues/10007 for more " +
+              "information.");
       if (fileLoggingEnabled) {
         // Allow a system property to override the default output format
         Format format = Format.HTML;

@@ -193,13 +193,16 @@ public class ImplementRecordComponents {
                   myField,
                   otherField);
         } else {
-          // we would like to use Objects.equals here to be more consise, but we would need
+          // We would like to use Objects.equals here to be more concise, but we would need
           // to look up the right impl based on the field - just as simple to insert a null check
           // and get it a little closer to all being inlined away
+
+          // Make another field ref to call equals() on
+          JFieldRef myField2 = new JFieldRef(info, new JThisRef(info, type), field, type);
           equals = new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.AND,
                   new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.NEQ,
                           myField, JNullLiteral.INSTANCE),
-                  new JMethodCall(info, myField, objectEquals, otherField));
+                  new JMethodCall(info, myField2, objectEquals, otherField));
         }
         if (componentCheck != JBooleanLiteral.TRUE) {
           componentCheck = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,

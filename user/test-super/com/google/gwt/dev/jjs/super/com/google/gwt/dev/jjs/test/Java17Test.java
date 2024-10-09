@@ -439,4 +439,32 @@ public class Java17Test extends GWTTestCase {
             : 4.0;
     assertTrue(notCalled);
   }
+
+  public void testSwitchExprInlining() {
+    enum HasSwitchMethod {
+      A, RED, SUNDAY, JANUARY, ZERO;
+      public static final int which(HasSwitchMethod whichSwitch) {
+        return switch(whichSwitch) {
+          case A -> 1;
+          case RED -> 2;
+          case SUNDAY -> 3;
+          case JANUARY -> 4;
+          case ZERO -> 5;
+        };
+      }
+      public static final int pick(HasSwitchMethod whichSwitch) {
+        return 2 * switch(whichSwitch) {
+          case A -> 1;
+          case RED -> 2;
+          case SUNDAY -> 3;
+          case JANUARY -> 4;
+          case ZERO -> 5;
+        };
+      }
+    }
+
+    HasSwitchMethod uninlinedValue = Math.random() > 2 ? HasSwitchMethod.A : HasSwitchMethod.RED;
+    assertEquals(2, HasSwitchMethod.which(uninlinedValue));
+    assertEquals(4, HasSwitchMethod.pick(uninlinedValue));
+  }
 }

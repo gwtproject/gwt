@@ -253,7 +253,7 @@ public class FormPanel extends SimplePanel implements FiresFormEvents, FormPanel
    *
    * This element must already be attached to the document. If the element is
    * removed from the document, you must call
-   * {@link RootPanel#detachNow(Widget)}.
+   * {@link Widget#removeFromParent()}.
    *
    * <p>
    * The specified form element's target attribute will not be set, and the
@@ -280,7 +280,7 @@ public class FormPanel extends SimplePanel implements FiresFormEvents, FormPanel
    *
    * This element must already be attached to the document. If the element is
    * removed from the document, you must call
-   * {@link RootPanel#detachNow(Widget)}.
+   * {@link Widget#removeFromParent()}.
    *
    * <p>
    * If the createIFrame parameter is set to <code>true</code>, then the wrapped

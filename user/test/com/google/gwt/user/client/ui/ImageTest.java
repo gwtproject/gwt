@@ -790,8 +790,58 @@ public class ImageTest extends GWTTestCase {
     assertNotNull(image);
 
     // Cleanup.
-    Document.get().getBody().appendChild(div);
+    Document.get().getBody().removeChild(div);
     RootPanel.detachNow(image);
+  }
+
+  /**
+   * Same test, but don't remove from the dom first
+   */
+  public void testWrapOfSubclassWithoutRemove() {
+    String uid = Document.get().createUniqueId();
+    DivElement div = Document.get().createDivElement();
+    div.setInnerHTML("<img id='" + uid + "' src='counting-forwards.png'>");
+    Document.get().getBody().appendChild(div);
+
+    final TestImage image = TestImage.wrap(Document.get().getElementById(uid));
+    assertNotNull(image);
+
+    // Cleanup.
+    RootPanel.detachNow(image);
+  }
+
+  /**
+   * Same test, but with removeFromParent instead of detachNow
+   */
+  public void testRemoveFromParent() {
+    String uid = Document.get().createUniqueId();
+    DivElement div = Document.get().createDivElement();
+    div.setInnerHTML("<img id='" + uid + "' src='counting-forwards.png'>");
+    Document.get().getBody().appendChild(div);
+
+    final TestImage image = TestImage.wrap(Document.get().getElementById(uid));
+    assertNotNull(image);
+
+    // Cleanup.
+    Document.get().getBody().removeChild(div);
+    image.removeFromParent();
+  }
+
+  /**
+   * Same test, but with removeFromParent isntead of detachNow, and don't remove the dom manually
+   * first.
+   */
+  public void testRemoveFromParentWithoutRemove() {
+    String uid = Document.get().createUniqueId();
+    DivElement div = Document.get().createDivElement();
+    div.setInnerHTML("<img id='" + uid + "' src='counting-forwards.png'>");
+    Document.get().getBody().appendChild(div);
+
+    final TestImage image = TestImage.wrap(Document.get().getElementById(uid));
+    assertNotNull(image);
+
+    // Cleanup.
+    image.removeFromParent();
   }
 
   /**

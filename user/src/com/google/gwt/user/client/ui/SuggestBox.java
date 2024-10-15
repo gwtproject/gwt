@@ -635,7 +635,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
    *
    * This element must already be attached to the document. If the element is
    * removed from the document, you must call
-   * {@link RootPanel#detachNow(Widget)}.
+   * {@link Widget#removeFromParent()}.
    *
    * @param oracle the suggest box oracle to use
    * @param element the element to be wrapped

@@ -61,7 +61,7 @@ public class HTML extends Label
    *
    * This element must already be attached to the document. If the element is
    * removed from the document, you must call
-   * {@link RootPanel#detachNow(Widget)}.
+   * {@link Widget#removeFromParent()}.
    *
    * @param element the element to be wrapped
    */

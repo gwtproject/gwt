@@ -53,6 +53,9 @@ import java.util.logging.Logger;
  * the output file path.
  * </p>
  *
+ * @deprecated This class is deprecated for removal, see
+ * <a href="https://github.com/gwtproject/gwt/issues/10007">issue 10007</a> for discussion of plans
+ * to replace it.
  */
 @Deprecated
 public final class SpeedTracerLogger {

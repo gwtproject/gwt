@@ -17,6 +17,8 @@ package com.google.gwt.dev.util.arg;
 
 /**
  * Enable the new code splitter that auto-partitions.
+ *
+ * @deprecated Use {@link OptionFragmentCount} instead.
  */
 @Deprecated
 public interface OptionFragmentsMerge {

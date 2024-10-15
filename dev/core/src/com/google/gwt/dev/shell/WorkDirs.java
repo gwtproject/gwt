@@ -20,7 +20,7 @@ import com.google.gwt.dev.cfg.ModuleDef;
 import java.io.File;
 
 /**
- * Provides information about work directories.
+ * Deprecated for removal, the compiler no longer uses this to create work directories.
  */
 @Deprecated
 public interface WorkDirs {

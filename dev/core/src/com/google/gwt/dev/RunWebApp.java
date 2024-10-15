@@ -34,6 +34,8 @@ import java.util.List;
 /**
  * An utility class for running web apps with Jetty and launching the default
  * browser.
+ *
+ * @deprecated This class is deprecated for removal, with no replacement.
  */
 @Deprecated
 public class RunWebApp {

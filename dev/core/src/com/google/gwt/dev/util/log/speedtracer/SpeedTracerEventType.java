@@ -19,7 +19,11 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.EventType;
 
 /**
  * Represents a type of event whose performance is tracked while running
- * {@link com.google.gwt.dev.DevMode}
+ * {@link com.google.gwt.dev.DevMode}.
+ *
+ * @deprecated This class is deprecated for removal, see
+ * <a href="https://github.com/gwtproject/gwt/issues/10007">issue 10007</a> for discussion of plans
+ * to replace it.
  */
 @Deprecated
 public enum SpeedTracerEventType implements EventType {

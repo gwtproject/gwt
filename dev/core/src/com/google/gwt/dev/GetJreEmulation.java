@@ -30,6 +30,8 @@ import java.io.PrintWriter;
 
 /**
  * Entry point that outputs the GWT JRE support.
+ *
+ * @deprecated This class is deprecated for removal, with no replacement.
  */
 @Deprecated
 public class GetJreEmulation {

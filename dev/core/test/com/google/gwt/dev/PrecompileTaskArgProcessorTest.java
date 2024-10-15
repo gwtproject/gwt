@@ -41,8 +41,8 @@ public class PrecompileTaskArgProcessorTest extends TestCase {
         "-XdisableClassMetadata", "-XdisableClusterSimilarFunctions",
         "-XdisableInlineLiteralParameters", "-XoptimizeDataflow", "-XdisableOrdinalizeEnums",
         "-XdisableRemoveDuplicateFunctions", "-XdisableRunAsync", "-XdisableSoycHtml",
-        "-XdisableUpdateCheck", "-ea", "-soyc", "-XsoycDetailed",
-        "-XenableJsonSoyc", "-strict", "com.google.gwt.dev.DevModule");
+        "-ea", "-soyc", "-XsoycDetailed", "-XenableJsonSoyc", "-strict",
+        "com.google.gwt.dev.DevModule");
 
     // Show that the flags were recognized and ended up modifying options.
     assertNotEquals(

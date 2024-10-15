@@ -53,7 +53,11 @@ import java.util.logging.Logger;
  * the output file path.
  * </p>
  *
+ * @deprecated This class is deprecated for removal, see
+ * <a href="https://github.com/gwtproject/gwt/issues/10007">issue 10007</a> for discussion of plans
+ * to replace it.
  */
+@Deprecated
 public final class SpeedTracerLogger {
 
   private static final Logger log = Logger.getLogger(SpeedTracerLogger.class.getName());
@@ -706,6 +710,9 @@ public final class SpeedTracerLogger {
     enabled = fileLoggingEnabled || DashboardNotifierFactory.areNotificationsEnabled();
 
     if (enabled) {
+      System.err.println("SpeedTracerLogging is deprecated, and may be removed in a future " +
+              "release. Please see https://github.com/gwtproject/gwt/issues/10007 for more " +
+              "information.");
       if (fileLoggingEnabled) {
         // Allow a system property to override the default output format
         Format format = Format.HTML;

@@ -38,7 +38,6 @@ import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.shell.jetty.JettyLauncher;
 import com.google.gwt.dev.util.arg.ArgHandlerClosureFormattedOutput;
 import com.google.gwt.dev.util.arg.ArgHandlerDeployDir;
-import com.google.gwt.dev.util.arg.ArgHandlerDeprecatedDisableUpdateCheck;
 import com.google.gwt.dev.util.arg.ArgHandlerDeprecatedOptimizeDataflow;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableCastChecking;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableClassMetadata;
@@ -291,7 +290,6 @@ public class JUnitShell extends DevMode {
       registerHandler(new ArgHandlerDisableOrdinalizeEnums(options));
       registerHandler(new ArgHandlerDisableRemoveDuplicateFunctions(options));
       registerHandler(new ArgHandlerDisableRunAsync(options));
-      registerHandler(new ArgHandlerDeprecatedDisableUpdateCheck());
       registerHandler(new ArgHandlerDraftCompile(options));
       registerHandler(new ArgHandlerLocalWorkers(options));
       registerHandler(new ArgHandlerNamespace(options));

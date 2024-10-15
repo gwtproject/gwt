@@ -20,7 +20,12 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.EventType;
 /**
  * Represents a type of event whose performance is tracked while running the
  * {@link com.google.gwt.dev.Compiler}
+ *
+ * @deprecated This class is deprecated for removal, see
+ * <a href="https://github.com/gwtproject/gwt/issues/10007">issue 10007</a> for discussion of plans
+ * to replace it.
  */
+@Deprecated
 public enum CompilerEventType implements EventType {
   CODE_SPLITTER("CodeSplitter", "Yellow"), //
   COMPILE("Compiler", "DarkBlue"), //

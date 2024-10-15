@@ -16,12 +16,10 @@ package com.google.gwt.dev.util.arg;
 import com.google.gwt.dev.cfg.Properties;
 
 /**
- * Option providing a set of properties representing the final property state that will be reached
- * at the root of a library compile tree.
- * <p>
- * Library compilation uses this as a guide for how long it must delay generator execution to avoid
- * having to rerun the same generator again later when properties it depends on change.
+ * Deprecated for removal, no longer read by the compiler since the remainder of the
+ * library feature was removed.
  */
+@Deprecated
 public interface OptionFinalProperties {
 
   /**

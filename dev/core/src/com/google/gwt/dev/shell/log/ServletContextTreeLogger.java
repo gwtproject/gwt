@@ -21,7 +21,10 @@ import javax.servlet.ServletContext;
 
 /**
  * Tree logger that logs servlet context information.
+ *
+ * @deprecated This class is deprecated for removal, with no replacement.
  */
+@Deprecated
 public class ServletContextTreeLogger extends AbstractTreeLogger {
 
   private final ServletContext ctx;

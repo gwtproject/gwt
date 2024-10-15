@@ -34,7 +34,10 @@ import java.util.List;
 /**
  * An utility class for running web apps with Jetty and launching the default
  * browser.
+ *
+ * @deprecated This class is deprecated for removal, with no replacement.
  */
+@Deprecated
 public class RunWebApp {
 
   interface RunWebAppOptions extends OptionStartupURLs, OptionPort {
@@ -130,6 +133,9 @@ public class RunWebApp {
 
   protected void run() {
     PrintWriterTreeLogger logger = new PrintWriterTreeLogger();
+    logger.log(TreeLogger.Type.WARN,
+            "RunWebApp is deprecated for removal, please run your server directly. Visit " +
+                    "https://github.com/gwtproject/gwt/issues/9923 to discuss other options.");
     logger.setMaxDetail(TreeLogger.WARN);
     int port = options.getPort();
     try {

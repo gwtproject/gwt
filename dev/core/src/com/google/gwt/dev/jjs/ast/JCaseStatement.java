@@ -37,7 +37,7 @@ public class JCaseStatement extends JStatement {
 
   public JCaseStatement(SourceInfo info, Collection<JExpression> exprs) {
     super(info);
-    this.exprs = Collections.unmodifiableList(new ArrayList<>(exprs));
+    this.exprs = Lists.newArrayList(exprs);
   }
 
   public boolean isDefault() {
@@ -45,7 +45,7 @@ public class JCaseStatement extends JStatement {
   }
 
   public List<JExpression> getExprs() {
-    return exprs;
+    return Collections.unmodifiableList(exprs);
   }
 
   public JBinaryOperation convertToCompareExpression(JExpression value) {

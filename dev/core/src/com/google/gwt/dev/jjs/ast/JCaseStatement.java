@@ -16,6 +16,7 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,12 +32,12 @@ public class JCaseStatement extends JStatement {
 
   public JCaseStatement(SourceInfo info, JExpression expr) {
     super(info);
-    this.exprs = Collections.singletonList(expr);
+    this.exprs = Lists.newArrayList(expr);
   }
 
   public JCaseStatement(SourceInfo info, Collection<JExpression> exprs) {
     super(info);
-    this.exprs = Collections.unmodifiableList(new ArrayList<>(exprs));
+    this.exprs = Lists.newArrayList(exprs);
   }
 
   public boolean isDefault() {
@@ -44,7 +45,7 @@ public class JCaseStatement extends JStatement {
   }
 
   public List<JExpression> getExprs() {
-    return exprs;
+    return Collections.unmodifiableList(exprs);
   }
 
   public JBinaryOperation convertToCompareExpression(JExpression value) {
@@ -69,7 +70,7 @@ public class JCaseStatement extends JStatement {
   @Override
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {
-      exprs = Collections.unmodifiableList(visitor.acceptImmutable(exprs));
+      exprs = visitor.acceptWithInsertRemoveImmutable(exprs);
     }
     visitor.endVisit(this, ctx);
   }

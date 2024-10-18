@@ -36,15 +36,6 @@ public class RequestBuilderTest extends RequestTestBase {
   }
 
   /**
-   * HACK: Part of a work around for IE's failure to throw an exception when an
-   * XmlHttpRequest that violates the same origin policy is made.
-   */
-  private static native boolean isIE() /*-{
-    var ua = navigator.userAgent.toLowerCase();
-    return ua.indexOf("msie") != -1; 
-  }-*/;
-
-  /**
    * HACK: Part of a work around for Safari 2.0.4's failure to throw an
    * exception when an XmlHttpRequest that violates the same origin policy is
    * made.
@@ -138,7 +129,7 @@ public class RequestBuilderTest extends RequestTestBase {
         }
       });
 
-      if (isIE() || isSafari() || isFirefox35()) {
+      if (isSafari() || isFirefox35()) {
         /*
          * HACK: Safari 2.0.4 will not throw an exception for XHR's that violate
          * the same-origin policy. It appears to silently ignore them so we do

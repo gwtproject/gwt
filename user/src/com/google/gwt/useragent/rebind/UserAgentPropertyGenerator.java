@@ -37,12 +37,10 @@ public class UserAgentPropertyGenerator implements PropertyProviderGenerator {
    * {@code UserAgent.gwt.xml}.
    * <p>Note that the order of enums matter as the script selection is based on running
    * these predicates in order and matching the first one that returns {@code true}.
-   * <p> Also note that, {@code docMode < 11} in predicates for older IEs exists to
-   * ensures we never choose them for IE11 (we know that they will not work for IE11).
    */
   private enum UserAgent {
     safari("return (ua.indexOf('webkit') != -1);"),
-    gecko1_8("return (ua.indexOf('gecko') != -1 || docMode >= 11);");
+    gecko1_8("return (ua.indexOf('gecko') != -1);");
 
     private final String predicateBlock;
 
@@ -70,7 +68,6 @@ public class UserAgentPropertyGenerator implements PropertyProviderGenerator {
 
     // write preamble
     body.println("var ua = navigator.userAgent.toLowerCase();");
-    body.println("var docMode = $doc.documentMode;");
 
     for (UserAgent userAgent : UserAgent.values()) {
       // write only selected user agents

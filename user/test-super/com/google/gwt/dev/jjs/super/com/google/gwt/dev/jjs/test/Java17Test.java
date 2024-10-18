@@ -447,8 +447,7 @@ public class Java17Test extends GWTTestCase {
         return switch(whichSwitch) {
           case A -> 1;
           case RED -> 2;
-          case SUNDAY -> 3;
-          case JANUARY -> 4;
+          case SUNDAY, JANUARY -> 4;
           case ZERO -> 5;
         };
       }
@@ -456,9 +455,19 @@ public class Java17Test extends GWTTestCase {
         return 2 * switch(whichSwitch) {
           case A -> 1;
           case RED -> 2;
-          case SUNDAY -> 3;
-          case JANUARY -> 4;
+          case SUNDAY, JANUARY -> 4;
           case ZERO -> 5;
+        };
+      }
+      public static final String select(HasSwitchMethod whichSwitch) {
+        if (Math.random() > 2) {
+          return "none";
+        }
+        return switch(whichSwitch) {
+          case A -> "1";
+          case RED -> "2";
+          case SUNDAY, JANUARY -> "4";
+          case ZERO -> "5";
         };
       }
     }
@@ -466,5 +475,19 @@ public class Java17Test extends GWTTestCase {
     HasSwitchMethod uninlinedValue = Math.random() > 2 ? HasSwitchMethod.A : HasSwitchMethod.RED;
     assertEquals(2, HasSwitchMethod.which(uninlinedValue));
     assertEquals(4, HasSwitchMethod.pick(uninlinedValue));
+    assertEquals("hello 2", "hello " + HasSwitchMethod.select(uninlinedValue));
+  }
+
+  private static final String ONE = "1";
+  private static final String TWO = "2";
+  private static final String FOUR = "4";
+
+  public void testInlinedStringConstantsInCase() {
+    int value = switch(Math.random() > 2 ? "2" : "4") {
+      case ONE, TWO -> 2;
+      case FOUR -> 4;
+      default -> 0;
+    };
+    assertEquals(4, value);
   }
 }

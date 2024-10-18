@@ -64,6 +64,7 @@ import com.google.gwt.dev.jjs.ast.JPermutationDependentValue;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
+import com.google.gwt.dev.jjs.ast.JSwitchExpression;
 import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JTryStatement;
 import com.google.gwt.dev.jjs.ast.JType;
@@ -340,6 +341,11 @@ public class UnifyAst {
       JClassType stringType = program.getTypeJavaLangString();
       x.resolve(stringType);
       instantiate(stringType);
+    }
+
+    @Override
+    public void endVisit(JSwitchExpression x, Context ctx) {
+      x.setType(translate(x.getType()));
     }
 
     @Override

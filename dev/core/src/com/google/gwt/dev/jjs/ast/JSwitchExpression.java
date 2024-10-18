@@ -45,6 +45,10 @@ public class JSwitchExpression extends JExpression {
     return true;
   }
 
+  public void setType(JType type) {
+    this.type = type;
+  }
+
   @Override
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {

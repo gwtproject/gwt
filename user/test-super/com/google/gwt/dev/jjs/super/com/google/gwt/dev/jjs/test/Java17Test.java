@@ -459,11 +459,23 @@ public class Java17Test extends GWTTestCase {
           case ZERO -> 5;
         };
       }
+      public static final String select(HasSwitchMethod whichSwitch) {
+        if (Math.random() > 2) {
+          return "none";
+        }
+        return switch(whichSwitch) {
+          case A -> "1";
+          case RED -> "2";
+          case SUNDAY, JANUARY -> "4";
+          case ZERO -> "5";
+        };
+      }
     }
 
     HasSwitchMethod uninlinedValue = Math.random() > 2 ? HasSwitchMethod.A : HasSwitchMethod.RED;
     assertEquals(2, HasSwitchMethod.which(uninlinedValue));
     assertEquals(4, HasSwitchMethod.pick(uninlinedValue));
+    assertEquals("hello 2", "hello " + HasSwitchMethod.select(uninlinedValue));
   }
 
   private static final String ONE = "1";

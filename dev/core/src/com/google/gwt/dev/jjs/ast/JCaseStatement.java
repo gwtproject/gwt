@@ -27,7 +27,7 @@ import java.util.List;
  */
 public class JCaseStatement extends JStatement {
 
-  private List<JExpression> exprs;
+  private final List<JExpression> exprs;
 
   public JCaseStatement(SourceInfo info, JExpression expr) {
     super(info);
@@ -69,7 +69,7 @@ public class JCaseStatement extends JStatement {
   @Override
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {
-      exprs = visitor.acceptWithInsertRemoveImmutable(exprs);
+      visitor.accept(exprs);
     }
     visitor.endVisit(this, ctx);
   }

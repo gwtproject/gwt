@@ -21,22 +21,6 @@ package com.google.gwt.dom.client;
 class DOMImplWebkit extends DOMImplStandardBase {
 
   /**
-   * Return true if using Webkit 525.x (Safari 3) or earlier.
-   * 
-   * @return true if using Webkit 525.x (Safari 3) or earlier.
-   */
-  private static native boolean isWebkit525OrBefore() /*-{
-    var result = /safari\/([\d.]+)/.exec(navigator.userAgent.toLowerCase());
-    if (result) {
-      var version = (parseFloat(result[1]));
-      if (version < 526) {
-        return true;
-      }
-    }
-    return false;
-  }-*/;
-
-  /**
    * Webkit events sometimes target the text node inside of the element instead
    * of the element itself, so we need to get the parent of the text node.
    */

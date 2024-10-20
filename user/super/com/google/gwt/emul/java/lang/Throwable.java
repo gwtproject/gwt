@@ -141,15 +141,10 @@ public class Throwable implements Serializable {
   }
 
   private native void linkBack(Object error) /*-{
-
     if (error instanceof Object) {
       try {
         // This may throw exception in strict mode.
         error.__java$exception = this;
-
-        if (navigator.userAgent.toLowerCase().indexOf("msie") != -1 && $doc.documentMode < 9) {
-          return;
-        }
 
         var throwable = this;
         Object.defineProperties(error, {

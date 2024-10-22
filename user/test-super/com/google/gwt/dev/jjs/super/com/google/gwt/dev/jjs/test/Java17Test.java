@@ -171,6 +171,8 @@ public class Java17Test extends GWTTestCase {
     assertFalse(0 == new TopLevelRecord("Pear", 0).hashCode());
 
     assertFalse(new InnerRecord().equals(new LocalRecord()));
+    assertFalse(new InnerRecord().equals(null));
+    assertFalse(new LocalRecord().equals(null));
 
     RecordWithReferenceType sameA = new RecordWithReferenceType(new TopLevelRecord("a", 1));
     RecordWithReferenceType sameB = new RecordWithReferenceType(new TopLevelRecord("a", 1));
@@ -184,6 +186,8 @@ public class Java17Test extends GWTTestCase {
 
     assertFalse(sameA.equals(different));
     assertFalse(sameA.hashCode() == different.hashCode());
+
+    assertFalse(sameA.equals(null));
   }
 
   /**

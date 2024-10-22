@@ -154,9 +154,7 @@ public class ImplementRecordComponents {
     JMethodBody body = new JMethodBody(info);
     JParameter otherParam = method.getParams().get(0);
 
-    // Equals is built from first == check between this and other, as a fast path for the same
-    // object and also to ensure that other isn't null. Then MyRecord.class == other.getClass(),
-    // and now we know they're the same type and can cast safely to access fields for the rest.
+    // if (this == other) return true;
     JBinaryOperation eq =
             new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.EQ,
                     new JThisRef(info, type),
@@ -164,11 +162,22 @@ public class ImplementRecordComponents {
     body.getBlock().addStmt(new JIfStatement(info, eq,
             JBooleanLiteral.TRUE.makeReturnStatement(), null));
 
+    // other == null
+    JBinaryOperation nonNullCheck =
+            new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.EQ,
+                    otherParam.createRef(info), JNullLiteral.INSTANCE);
+    // MyRecordType.class != other.getClass()
     JBinaryOperation sameTypeCheck =
             new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.NEQ,
                     new JClassLiteral(info, type),
                     new JMethodCall(info, otherParam.createRef(info), getClassMethod));
-    body.getBlock().addStmt(new JIfStatement(info, sameTypeCheck,
+    // other == null || MyRecordType.class != other.getClass()
+    JBinaryOperation nullAndTypeCheck =
+            new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.OR,
+                    nonNullCheck, sameTypeCheck);
+
+    // if (other == null || MyRecordType.class != other.getClass()) return false;
+    body.getBlock().addStmt(new JIfStatement(info, nullAndTypeCheck,
             JBooleanLiteral.FALSE.makeReturnStatement(), null));
 
     // Create a local to assign to and compare each component

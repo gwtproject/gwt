@@ -15,8 +15,8 @@
     <!-- Setting maven.compiler.source to something different to 1.8
          needs that you configure the sourceLevel in gwt-maven-plugin since
          GWT compiler 2.8 and above requires 1.8 (see gwt-maven-plugin block below) -->
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
 
     <!-- Don't let your Mac use a crazy non-standard encoding -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -85,7 +85,7 @@
           <failOnError>true</failOnError>
           <!-- GWT compiler 2.8 and above requires 1.8, hence define sourceLevel here if you use
                a different source language for java compilation -->
-          <sourceLevel>1.8</sourceLevel>
+          <sourceLevel>11</sourceLevel>
           <!-- Compiler configuration -->
           <compilerArgs>
             <!-- Ask GWT to create the Story of Your Compile (SOYC) (gwt:compile) -->

@@ -32,16 +32,6 @@ public class ClientSupportTest extends GWTTestCase {
   public void testSupported() {
     boolean isSupported = TypedArrays.isSupported();
     String ua = getUserAgent();
-    if (ua.contains("msie")) {
-      if (getIeDocumentMode() <= 9) {
-        assertFalse("IE9 and below do not support typed array", isSupported);
-      } else {
-        // TODO(dankurka) change this once we get type array support in for ie10
-        assertFalse("IE10 does support typed array, but GWT still uses old implementation",
-            isSupported);
-      }
-      return;
-    }
     if (ua.contains("firefox/")) {
       int idx = ua.indexOf("firefox/") + 8;
       int endIdx = idx;
@@ -60,12 +50,6 @@ public class ClientSupportTest extends GWTTestCase {
       return;
     }
 
-    // IE11 - choosing the gecko permutation
-    if (ua.contains("trident/7.0")) {
-      assertTrue(isSupported);
-      return;
-    }
-
     assertFalse("Unknown browser (" + ua + ") assumed not to support typed arrays",
         isSupported);
   }
@@ -74,7 +58,4 @@ public class ClientSupportTest extends GWTTestCase {
     return navigator.userAgent.toLowerCase();
   }-*/;
 
-  private static native int getIeDocumentMode() /*-{
-    return $doc.documentMode || 0;
-  }-*/;
 }

@@ -2,7 +2,7 @@
 
   [![latest release](https://img.shields.io/github/v/release/gwtproject/gwt)](https://github.com/gwtproject/gwt/releases)
   [![nightly](https://github.com/gwtproject/gwt/actions/workflows/full-check.yml/badge.svg)](https://github.com/gwtproject/gwt/actions/workflows/full-check.yml)
-  [![gitter](https://img.shields.io/badge/gitter.im-Join%20Chat-green.svg)](https://gitter.im/gwtproject/gwt/)
+  [![gitter](https://img.shields.io/badge/gitter.im-Join%20Chat-green.svg)](https://gitter.im/gwtproject/gwt)
   [![irc](https://img.shields.io/badge/irc:%20chat.freenode.net-%23%23gwt-green.svg)](https://webchat.freenode.net/)
 
   GWT is the official open source project for GWT releases 2.5 and onwards.

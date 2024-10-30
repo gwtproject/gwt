@@ -94,7 +94,7 @@
       </exclusions>
     </dependency>
 
-     <!-- Required by Hibernate validator because slf4j-log4j is
+    <!-- Required by Hibernate validator because slf4j-log4j is
          optional in the hibernate-validator POM  -->
     <dependency>
       <groupId>org.slf4j</groupId>

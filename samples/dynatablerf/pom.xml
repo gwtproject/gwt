@@ -93,18 +93,6 @@
         </exclusion>
       </exclusions>
     </dependency>
-
-    <!-- added to work with GWT 2.11.0 and newer --> 
-    <dependency>
-      <groupId>javax.xml.bind</groupId>
-      <artifactId>jaxb-api</artifactId>
-      <version>2.4.0-b180830.0359</version>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.xml.bind</groupId>
-      <artifactId>jaxb-impl</artifactId>
-      <version>4.0.4</version>
-    </dependency>
     
     <!-- Required by Hibernate validator because slf4j-log4j is
          optional in the hibernate-validator POM  -->

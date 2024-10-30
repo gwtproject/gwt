@@ -28,15 +28,6 @@ public abstract class StorageTest extends GWTTestCase {
   protected StorageEvent.Handler handler;
   protected StorageEvent.Handler handler2;
 
-  private native boolean isFirefox35OrLater() /*-{
-    var geckoVersion = @com.google.gwt.dom.client.DOMImplMozilla::getGeckoVersion()();
-    return (geckoVersion != -1) && (geckoVersion >= 1009001);
-  }-*/;
-
-  private native boolean isSafari3OrBefore() /*-{
-    return @com.google.gwt.dom.client.DOMImplWebkit::isWebkit525OrBefore()();
-  }-*/;
-
   @Override
   public String getModuleName() {
     return "com.google.gwt.storage.Storage";
@@ -400,18 +391,9 @@ public abstract class StorageTest extends GWTTestCase {
   }
 
   public void testSupported() {
-    // test the isxxxSupported() call
-    if (isFirefox35OrLater()) {
-      assertNotNull(storage);
-      assertTrue(Storage.isLocalStorageSupported());
-      assertTrue(Storage.isSessionStorageSupported());
-      assertTrue(Storage.isSupported());
-    }
-    if (isSafari3OrBefore()) {
-      assertNull(storage);
-      assertFalse(Storage.isLocalStorageSupported());
-      assertFalse(Storage.isSessionStorageSupported());
-      assertFalse(Storage.isSupported());
-    }
+    assertNotNull(storage);
+    assertTrue(Storage.isLocalStorageSupported());
+    assertTrue(Storage.isSessionStorageSupported());
+    assertTrue(Storage.isSupported());
   }
 }

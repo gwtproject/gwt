@@ -41,14 +41,6 @@ public class Context2dTest extends GWTTestCase {
   protected Canvas canvas1;
   protected Canvas canvas2;
 
-  native boolean isGecko190OrBefore() /*-{
-    return @com.google.gwt.dom.client.DOMImplMozilla::isGecko190OrBefore()();
-  }-*/;
-
-  native boolean isWebkit525OrBefore() /*-{
-    return @com.google.gwt.dom.client.DOMImplWebkit::isWebkit525OrBefore()();
-  }-*/;
-
   @Override
   public String getModuleName() {
     return "com.google.gwt.canvas.Canvas";
@@ -100,12 +92,6 @@ public class Context2dTest extends GWTTestCase {
   public void testFillRect() {
     if (canvas1 == null) {
       return; // don't continue if not supported
-    }
-
-    // Safari 3.0 does not support getImageData(), so the following tests are disabled for
-    // Safari 3.0 and before.
-    if (isWebkit525OrBefore()) {
-      return;
     }
 
     canvas1.setHeight("40px");
@@ -232,12 +218,6 @@ public class Context2dTest extends GWTTestCase {
       return; // don't continue if not supported
     }
 
-    // Safari 3.0 does not support getImageData(), so the following tests are disabled for
-    // Safari 3.0 and before.
-    if (isWebkit525OrBefore()) {
-      return;
-    }
-
     canvas1.setHeight("40px");
     canvas1.setWidth("60px");
     canvas1.setCoordinateSpaceHeight(40);
@@ -276,18 +256,6 @@ public class Context2dTest extends GWTTestCase {
   public void testImageData() {
     if (canvas1 == null) {
       return; // don't continue if not supported
-    }
-    
-    // Firefox 3.0 does not support createImageData(), so the following tests are disabled
-    // for FF 3.0 and before.
-    if (isGecko190OrBefore()) {
-      return;
-    }
-
-    // Safari 3.0 does not support getImageData(), so the following tests are disabled for
-    // Safari 3.0 and before.
-    if (isWebkit525OrBefore()) {
-      return;
     }
 
     canvas1.setHeight("40px");
@@ -406,12 +374,6 @@ public class Context2dTest extends GWTTestCase {
       return; // don't continue if not supported
     }
 
-    // Safari 3.0 does not support getImageData(), so the following tests are disabled for
-    // Safari 3.0 and before.
-    if (isWebkit525OrBefore()) {
-      return;
-    }
-
     canvas1.setHeight("40px");
     canvas1.setWidth("60px");
     canvas1.setCoordinateSpaceHeight(40);
@@ -435,12 +397,6 @@ public class Context2dTest extends GWTTestCase {
   public void testShadows() {
     if (canvas1 == null) {
       return; // don't continue if not supported
-    }
-    
-    // Firefox 3.0 returns the incorrect shadowBlur value so the following tests are disabled
-    // for FF 3.0 and before.
-    if (isGecko190OrBefore()) {
-      return;
     }
 
     canvas1.setHeight("40px");

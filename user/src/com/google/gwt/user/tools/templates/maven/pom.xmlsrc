@@ -15,8 +15,7 @@
     <!-- Setting maven.compiler.source to something different to 11
          needs that you configure the sourceLevel in gwt-maven-plugin since
          GWT compiler 2.12.0 and above requires 11 (see gwt-maven-plugin block below) -->
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.release>11</maven.compiler.release>
 
     <!-- Don't let your Mac use a crazy non-standard encoding -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -27,7 +27,7 @@
     <mkdir dir="@warFolder/WEB-INF/classes"/>
     <javac srcdir="@srcFolder" includes="**" encoding="utf-8"
         destdir="@warFolder/WEB-INF/classes"
-        source="1.7" target="1.7" nowarn="true"
+        source="11" target="11" nowarn="true"
         debug="true" debuglevel="lines,vars,source">
       <classpath refid="project.class.path"/>
     </javac>
@@ -70,7 +70,7 @@
 @testTargetsBegin
   <target name="javac.tests" depends="javac" description="Compiles test code">
     <javac srcdir="@testFolder" includes="**" encoding="utf-8"
-      source="1.7" target="1.7" nowarn="true"
+      source="11" target="11" nowarn="true"
       destdir="@warFolder/WEB-INF/classes"
       debug="true" debuglevel="lines,vars,source">
       <classpath location="@junitJar"/>

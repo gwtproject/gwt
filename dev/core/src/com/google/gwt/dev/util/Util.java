@@ -20,6 +20,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.io.Closeables;
 import com.google.gwt.util.tools.Utility;
 import com.google.gwt.util.tools.shared.StringUtils;
 
@@ -132,7 +133,7 @@ public final class Util {
     try {
       copyNoClose(is, os);
     } finally {
-      Utility.close(is);
+      Closeables.closeQuietly(is);
       Utility.close(os);
     }
   }
@@ -436,7 +437,7 @@ public final class Util {
     } catch (IOException e) {
       return null;
     } finally {
-      Utility.close(fileInputStream);
+      Closeables.closeQuietly(fileInputStream);
     }
   }
 
@@ -447,7 +448,7 @@ public final class Util {
       fileInputStream = new FileInputStream(file);
       return readStreamAsObject(fileInputStream, type);
     } finally {
-      Utility.close(fileInputStream);
+      Closeables.closeQuietly(fileInputStream);
     }
   }
 
@@ -480,7 +481,7 @@ public final class Util {
       objectInputStream = new StringInterningObjectInputStream(inputStream);
       return type.cast(objectInputStream.readObject());
     } finally {
-      Utility.close(objectInputStream);
+      Closeables.closeQuietly(objectInputStream);
     }
   }
 
@@ -555,7 +556,7 @@ public final class Util {
     } catch (IOException e) {
       return null;
     } finally {
-      Utility.close(input);
+      Closeables.closeQuietly(input);
     }
   }
 

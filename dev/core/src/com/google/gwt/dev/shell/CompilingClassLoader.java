@@ -47,8 +47,8 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
+import com.google.gwt.thirdparty.guava.common.io.Closeables;
 import com.google.gwt.thirdparty.guava.common.primitives.Primitives;
-import com.google.gwt.util.tools.Utility;
 
 import java.beans.Beans;
 import java.io.File;
@@ -893,7 +893,7 @@ public final class CompilingClassLoader extends ClassLoader implements
       }
       return classBytes;
     } finally {
-      Utility.close(is);
+      Closeables.closeQuietly(is);
     }
   }
 

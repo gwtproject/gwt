@@ -18,6 +18,7 @@ package com.google.gwt.dev.shell;
 import com.google.gwt.dev.shell.BrowserChannel.SessionHandler.ExceptionOrReturnValue;
 import com.google.gwt.dev.shell.BrowserChannel.SessionHandler.SpecialDispatchId;
 import com.google.gwt.dev.shell.BrowserChannel.Value.ValueType;
+import com.google.gwt.thirdparty.guava.common.io.Closeables;
 import com.google.gwt.util.tools.Utility;
 
 import java.io.BufferedInputStream;
@@ -1508,7 +1509,7 @@ public abstract class BrowserChannel {
   }
 
   public void endSession() {
-    Utility.close(streamFromOtherSide);
+    Closeables.closeQuietly(streamFromOtherSide);
     Utility.close(streamToOtherSide);
     Utility.close(socket);
   }

@@ -19,6 +19,7 @@ import com.google.gwt.dev.util.CompilerVersion;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.cache.Cache;
 import com.google.gwt.thirdparty.guava.common.cache.CacheBuilder;
+import com.google.gwt.thirdparty.guava.common.io.Closeables;
 import com.google.gwt.thirdparty.guava.common.util.concurrent.Futures;
 import com.google.gwt.thirdparty.guava.common.util.concurrent.MoreExecutors;
 import com.google.gwt.util.tools.Utility;
@@ -177,15 +178,15 @@ public class MinimalRebuildCacheManager {
           } catch (IOException e) {
             logger.log(TreeLogger.WARN,
                 "Unable to read the rebuild cache in " + minimalRebuildCacheFile + ".");
-            Utility.close(objectInputStream);
+            Closeables.closeQuietly(objectInputStream);
             minimalRebuildCacheFile.delete();
           } catch (ClassNotFoundException e) {
             logger.log(TreeLogger.WARN,
                 "Unable to read the rebuild cache in " + minimalRebuildCacheFile + ".");
-            Utility.close(objectInputStream);
+            Closeables.closeQuietly(objectInputStream);
             minimalRebuildCacheFile.delete();
           } finally {
-            Utility.close(objectInputStream);
+            Closeables.closeQuietly(objectInputStream);
           }
         }
         return null;

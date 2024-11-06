@@ -26,7 +26,6 @@ import java.io.InputStream;
 import java.io.LineNumberReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.io.Reader;
 import java.io.StringReader;
 import java.net.URI;
 import java.net.URL;
@@ -65,16 +64,6 @@ public final class Utility {
       }
     } catch (Exception e) {
     }
-  }
-
-  @Deprecated
-  public static void close(InputStream is) {
-    Closeables.closeQuietly(is);
-  }
-
-  @Deprecated
-  public static void close(Reader reader) {
-    Closeables.closeQuietly(reader);
   }
 
   /**
@@ -177,7 +166,7 @@ public final class Utility {
       streamOut(in, os, 1024);
       return new String(os.toByteArray(), "UTF-8");
     } finally {
-      close(in);
+      Closeables.closeQuietly(in);
     }
   }
 

@@ -57,6 +57,7 @@ public final class Utility {
    * Helper that ignores exceptions during close, because what are you going to
    * do?
    */
+  @Deprecated
   public static void close(AutoCloseable closeable) {
     try {
       if (closeable != null) {
@@ -232,10 +233,9 @@ public final class Utility {
   }
 
   public static void writeTemplateBinaryFile(File file, byte[] contents) throws IOException {
-
-    FileOutputStream o = new FileOutputStream(file);
-    o.write(contents);
-    close(o);
+    try (FileOutputStream o = new FileOutputStream(file)) {
+      o.write(contents);
+    }
   }
 
   public static void writeTemplateFile(File file, String contents,
@@ -252,12 +252,12 @@ public final class Utility {
       replacedContents = replacedContents.replaceAll(replaceThis, withThis);
     }
 
-    PrintWriter pw = new PrintWriter(file);
-    LineNumberReader lnr = new LineNumberReader(new StringReader(replacedContents));
-    for (String line = lnr.readLine(); line != null; line = lnr.readLine()) {
-      pw.println(line);
+    try (PrintWriter pw = new PrintWriter(file)) {
+      LineNumberReader lnr = new LineNumberReader(new StringReader(replacedContents));
+      for (String line = lnr.readLine(); line != null; line = lnr.readLine()) {
+        pw.println(line);
+      }
     }
-    close(pw);
   }
 
   private static void computeInstallationPath() {

@@ -20,13 +20,14 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
 import com.google.gwt.dev.jjs.impl.codesplitter.FragmentPartitioningResult;
 import com.google.gwt.dev.util.HtmlTextOutput;
-import com.google.gwt.util.tools.Utility;
 
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.zip.GZIPOutputStream;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Records split points to a file for Compile Reports.
@@ -41,76 +42,74 @@ public class SplitPointRecorder {
         logger.branch(TreeLogger.TRACE, "Creating split point map file for the compile report");
 
     try {
-      OutputStreamWriter writer = new OutputStreamWriter(new GZIPOutputStream(out), "UTF-8");
-      PrintWriter pw = new PrintWriter(writer);
-      HtmlTextOutput htmlOut = new HtmlTextOutput(pw, false);
-      String curLine = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-      htmlOut.printRaw(curLine);
-      htmlOut.newline();
+      try (OutputStreamWriter writer = new OutputStreamWriter(new GZIPOutputStream(out), UTF_8);
+           PrintWriter pw = new PrintWriter(writer)) {
+        HtmlTextOutput htmlOut = new HtmlTextOutput(pw, false);
+        String curLine = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+        htmlOut.printRaw(curLine);
+        htmlOut.newline();
 
-      curLine = "<soyc>";
-      htmlOut.printRaw(curLine);
-      htmlOut.newline();
-      htmlOut.indentIn();
-      htmlOut.indentIn();
-
-      List<JRunAsync> runAsyncs = jprogram.getRunAsyncs();
-      FragmentPartitioningResult partitionResult = jprogram.getFragmentPartitioningResult();
-      if (runAsyncs.size() > 0) {
-        curLine = "<splitpoints>";
+        curLine = "<soyc>";
         htmlOut.printRaw(curLine);
         htmlOut.newline();
         htmlOut.indentIn();
         htmlOut.indentIn();
-        for (JRunAsync runAsync : runAsyncs) {
-          int sp = runAsync.getRunAsyncId();
-          if (partitionResult != null) {
-            sp = partitionResult.getFragmentForRunAsync(sp);
-          }
-          String name = runAsync.getName();
-          curLine = "<splitpoint id=\"" + sp + "\" location=\"" + name + "\"/>";
+
+        List<JRunAsync> runAsyncs = jprogram.getRunAsyncs();
+        FragmentPartitioningResult partitionResult = jprogram.getFragmentPartitioningResult();
+        if (runAsyncs.size() > 0) {
+          curLine = "<splitpoints>";
           htmlOut.printRaw(curLine);
           htmlOut.newline();
-          if (logger.isLoggable(TreeLogger.TRACE)) {
-            logger.log(TreeLogger.TRACE, "Assigning split point #" + sp + " for '" + name + "'");
+          htmlOut.indentIn();
+          htmlOut.indentIn();
+          for (JRunAsync runAsync : runAsyncs) {
+            int sp = runAsync.getRunAsyncId();
+            if (partitionResult != null) {
+              sp = partitionResult.getFragmentForRunAsync(sp);
+            }
+            String name = runAsync.getName();
+            curLine = "<splitpoint id=\"" + sp + "\" location=\"" + name + "\"/>";
+            htmlOut.printRaw(curLine);
+            htmlOut.newline();
+            if (logger.isLoggable(TreeLogger.TRACE)) {
+              logger.log(TreeLogger.TRACE, "Assigning split point #" + sp + " for '" + name + "'");
+            }
           }
-        }
-        htmlOut.indentOut();
-        htmlOut.indentOut();
-        curLine = "</splitpoints>";
-        htmlOut.printRaw(curLine);
-        htmlOut.newline();
-      }
-
-      if (!jprogram.getInitialFragmentIdSequence().isEmpty()) {
-        curLine = "<initialseq>";
-        htmlOut.printRaw(curLine);
-        htmlOut.newline();
-        htmlOut.indentIn();
-
-        for (int sp : jprogram.getInitialFragmentIdSequence()) {
-          if (partitionResult != null) {
-            sp = partitionResult.getFragmentForRunAsync(sp);
-          }
-          curLine = "<splitpointref id=\"" + sp + "\"/>";
+          htmlOut.indentOut();
+          htmlOut.indentOut();
+          curLine = "</splitpoints>";
           htmlOut.printRaw(curLine);
           htmlOut.newline();
         }
 
+        if (!jprogram.getInitialFragmentIdSequence().isEmpty()) {
+          curLine = "<initialseq>";
+          htmlOut.printRaw(curLine);
+          htmlOut.newline();
+          htmlOut.indentIn();
+
+          for (int sp : jprogram.getInitialFragmentIdSequence()) {
+            if (partitionResult != null) {
+              sp = partitionResult.getFragmentForRunAsync(sp);
+            }
+            curLine = "<splitpointref id=\"" + sp + "\"/>";
+            htmlOut.printRaw(curLine);
+            htmlOut.newline();
+          }
+
+          htmlOut.indentOut();
+          curLine = "</initialseq>";
+          htmlOut.printRaw(curLine);
+          htmlOut.newline();
+        }
+
         htmlOut.indentOut();
-        curLine = "</initialseq>";
+        htmlOut.indentOut();
+        curLine = "</soyc>";
         htmlOut.printRaw(curLine);
         htmlOut.newline();
       }
-
-      htmlOut.indentOut();
-      htmlOut.indentOut();
-      curLine = "</soyc>";
-      htmlOut.printRaw(curLine);
-      htmlOut.newline();
-
-      Utility.close(writer);
-      pw.close();
 
       logger.log(TreeLogger.DEBUG, "Done");
 

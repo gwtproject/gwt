@@ -19,7 +19,6 @@ import com.google.gwt.dev.shell.BrowserChannel.SessionHandler.ExceptionOrReturnV
 import com.google.gwt.dev.shell.BrowserChannel.SessionHandler.SpecialDispatchId;
 import com.google.gwt.dev.shell.BrowserChannel.Value.ValueType;
 import com.google.gwt.thirdparty.guava.common.io.Closeables;
-import com.google.gwt.util.tools.Utility;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -1510,8 +1509,18 @@ public abstract class BrowserChannel {
 
   public void endSession() {
     Closeables.closeQuietly(streamFromOtherSide);
-    Utility.close(streamToOtherSide);
-    Utility.close(socket);
+    try {
+      streamToOtherSide.close();
+    } catch (IOException ignored) {
+      // ignore exception, we just want to close everything regardless of errors
+    }
+    if (socket != null) {
+      try {
+        socket.close();
+      } catch (IOException ignored) {
+        // ignore exception, we just want to close everything regardless of errors
+      }
+    }
   }
 
   /**

@@ -15,8 +15,6 @@
  */
 package com.google.gwt.dev;
 
-import com.google.gwt.util.tools.Utility;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -69,22 +67,22 @@ class ServletWriter {
       return;
     }
     webXml.getParentFile().mkdirs();
-    FileWriter xmlWriter = new FileWriter(webXml);
-    xmlWriter.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-    xmlWriter.write("<web-app>\n");
+    try (FileWriter xmlWriter = new FileWriter(webXml)) {
+      xmlWriter.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+      xmlWriter.write("<web-app>\n");
 
-    for (Entry<String, String> entry : mappings.entrySet()) {
-      String servletClass = entry.getKey();
-      String servletPath = entry.getValue();
-      String servletName = servletClass.replace('.', '_');
-      xmlWriter.write('\n');
-      xmlWriter.write(generateServletTag(servletName, servletClass));
-      xmlWriter.write('\n');
-      xmlWriter.write(generateServletMappingTag(servletName, servletPath));
-      xmlWriter.write('\n');
+      for (Entry<String, String> entry : mappings.entrySet()) {
+        String servletClass = entry.getKey();
+        String servletPath = entry.getValue();
+        String servletName = servletClass.replace('.', '_');
+        xmlWriter.write('\n');
+        xmlWriter.write(generateServletTag(servletName, servletClass));
+        xmlWriter.write('\n');
+        xmlWriter.write(generateServletMappingTag(servletName, servletPath));
+        xmlWriter.write('\n');
+      }
+
+      xmlWriter.write("\n</web-app>\n");
     }
-
-    xmlWriter.write("\n</web-app>\n");
-    Utility.close(xmlWriter);
   }
 }

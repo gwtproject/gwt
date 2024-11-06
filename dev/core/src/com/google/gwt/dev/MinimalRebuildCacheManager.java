@@ -22,7 +22,6 @@ import com.google.gwt.thirdparty.guava.common.cache.CacheBuilder;
 import com.google.gwt.thirdparty.guava.common.io.Closeables;
 import com.google.gwt.thirdparty.guava.common.util.concurrent.Futures;
 import com.google.gwt.thirdparty.guava.common.util.concurrent.MoreExecutors;
-import com.google.gwt.util.tools.Utility;
 import com.google.gwt.util.tools.shared.Md5Utils;
 import com.google.gwt.util.tools.shared.StringUtils;
 
@@ -222,12 +221,11 @@ public class MinimalRebuildCacheManager {
         oldMinimalRebuildCacheFile.getParentFile().mkdirs();
 
         // Write the new cache to disk.
-        ObjectOutputStream objectOutputStream = null;
         try {
-          objectOutputStream = new ObjectOutputStream(
-              new BufferedOutputStream(new FileOutputStream(newMinimalRebuildCacheFile)));
-          objectOutputStream.writeObject(minimalRebuildCache);
-          Utility.close(objectOutputStream);
+          try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+              new BufferedOutputStream(new FileOutputStream(newMinimalRebuildCacheFile)))) {
+            objectOutputStream.writeObject(minimalRebuildCache);
+          }
 
           // Replace the old cache file with the new one.
           oldMinimalRebuildCacheFile.delete();
@@ -236,10 +234,6 @@ public class MinimalRebuildCacheManager {
           logger.log(TreeLogger.WARN,
               "Unable to update the cache in " + oldMinimalRebuildCacheFile + ".");
           newMinimalRebuildCacheFile.delete();
-        } finally {
-          if (objectOutputStream != null) {
-            Utility.close(objectOutputStream);
-          }
         }
         return null;
       }

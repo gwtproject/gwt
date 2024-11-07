@@ -36,7 +36,6 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -331,14 +330,7 @@ public class ResourceOracleImpl extends AbstractResourceOracle {
           classPath.add(entry);
         }
         continue;
-      } catch (AccessControlException e) {
-        if (logger.isLoggable(TreeLogger.DEBUG)) {
-          logger.log(TreeLogger.DEBUG, "Skipping URL due to access restrictions: " + url);
-        }
-        continue;
-      } catch (URISyntaxException e) {
-        caught = e;
-      } catch (IOException e) {
+      } catch (URISyntaxException | IOException e) {
         caught = e;
       }
       logger.log(TreeLogger.WARN, "Error processing classpath URL '" + url + "'", caught);

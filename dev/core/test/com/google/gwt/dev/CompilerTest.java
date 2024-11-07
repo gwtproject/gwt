@@ -944,7 +944,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     SourceLevel[] sourceLevels = SourceLevel.values();
     SourceLevel previousSourceLevel = sourceLevels[0];
     for (int i = 1; i < sourceLevels.length; i++) {
-      assertTrue(Utility.versionCompare(previousSourceLevel.getStringValue(),
+      assertTrue(SourceLevel.versionCompare(previousSourceLevel.getStringValue(),
           sourceLevels[i].getStringValue()) < 0);
       previousSourceLevel = sourceLevels[i];
     }

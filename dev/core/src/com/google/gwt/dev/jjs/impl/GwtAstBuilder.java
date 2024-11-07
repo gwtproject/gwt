@@ -2812,26 +2812,31 @@ public class GwtAstBuilder {
 
     protected JStatement pop(Statement x) {
       JNode pop = (x == null) ? null : pop();
-      if (x instanceof Expression) {
+      if (x instanceof Expression && pop instanceof JExpression) {
         return maybeBoxOrUnbox((JExpression) pop, (Expression) x).makeStatement();
       }
       return (JStatement) pop;
     }
 
-    @SuppressWarnings("unchecked")
     protected <T extends JStatement> List<T> pop(Statement[] statements) {
       if (statements == null) {
         return Collections.emptyList();
       }
-      List<T> result = (List<T>) popList(statements.length);
+      List<T> result = Lists.newArrayList();
+      List<? extends JNode> stack = popList(statements.length);
       int i = 0;
-      for (ListIterator<T> it = result.listIterator(); it.hasNext(); ++i) {
+      for (ListIterator<? extends JNode> it = stack.listIterator(); it.hasNext(); ++i) {
         Object element = it.next();
-        if (element == null) {
-          it.remove();
-        } else if (element instanceof JExpression) {
-          it.set((T)
-              maybeBoxOrUnbox((JExpression) element, (Expression) statements[i]).makeStatement());
+        if (element != null) {
+          if (element instanceof JExpression) {
+            JExpression unboxed = maybeBoxOrUnbox((JExpression) element, (Expression) statements[i]);
+            result.add((T) unboxed.makeStatement());
+          } else if (element instanceof JStatement) {
+            result.add((T) element);
+          } else {
+            throw new IllegalStateException(
+                "Unexpected element type, expected statement or expression: " + element);
+          }
         }
       }
       return result;

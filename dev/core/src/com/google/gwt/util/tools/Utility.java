@@ -204,6 +204,7 @@ public final class Utility {
             + baseDir.getAbsolutePath());
   }
 
+  @Deprecated
   public static void streamOut(InputStream in, OutputStream out, int bufferSize)
       throws IOException {
     assert (bufferSize >= 0);

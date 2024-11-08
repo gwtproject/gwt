@@ -45,7 +45,7 @@ public class JUnitShellTest extends TestCase {
   public void testArgOptimize() throws Exception {
     parseGoodArgs("-optimize", "8", "-XdisableInlineLiteralParameters",
         "-XdisableRemoveDuplicateFunctions", "-XdisableClusterSimilarFunctions",
-        "-XdisableOrdinalizeEnums", "-XdisableOptimizeDataflow");
+        "-XdisableOrdinalizeEnums", "-XdisableOptimizeDataflow", "-strict");
   }
 
   private void parseGoodArgs(String... argsToUse) {

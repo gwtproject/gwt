@@ -38,7 +38,6 @@ import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.io.Files;
-import com.google.gwt.util.tools.Utility;
 
 import java.io.File;
 import java.io.IOException;
@@ -2491,7 +2490,7 @@ public class CompilerTest extends ArgProcessorTestBase {
 
   private void assertCompileSucceeds(CompilerOptions options, String moduleName,
       List<MockResource> applicationResources) throws Exception {
-    File compileWorkDir = Utility.makeTemporaryDirectory(null, moduleName);
+    File compileWorkDir = java.nio.file.Files.createTempDirectory(moduleName).toFile();
     final CompilerOptionsImpl compilerOptions = new CompilerOptionsImpl(options);
     PrintWriterTreeLogger logger = new PrintWriterTreeLogger();
     logger.setMaxDetail(TreeLogger.ERROR);
@@ -2553,8 +2552,8 @@ public class CompilerTest extends ArgProcessorTestBase {
     final CompilerOptionsImpl options = new CompilerOptionsImpl();
     options.setOptimizationLevel(optimizationLevel);
 
-    File firstCompileWorkDir = Utility.makeTemporaryDirectory(null, "hellowork");
-    File secondCompileWorkDir = Utility.makeTemporaryDirectory(null, "hellowork");
+    File firstCompileWorkDir = java.nio.file.Files.createTempDirectory("hellowork").toFile();
+    File secondCompileWorkDir = java.nio.file.Files.createTempDirectory("hellowork").toFile();
     String oldPersistentUnitCacheValue =
         System.setProperty(UnitCacheSingleton.GWT_PERSISTENTUNITCACHE, "false");
     try {

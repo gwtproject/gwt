@@ -30,6 +30,7 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.net.URI;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -178,30 +179,9 @@ public final class Utility {
    * @return a newly-created temporary directory; the caller must delete this
    *          directory (either when done or on VM exit)
    */
-  public static File makeTemporaryDirectory(File baseDir, String prefix)
-      throws IOException {
-    if (baseDir == null) {
-      baseDir = new File(System.getProperty("java.io.tmpdir"));
-    }
-    // No need to check the result of this mkdirs call because
-    // we will detect the subsequent failure
-    baseDir.mkdirs();
-
-    // Try this a few times due to non-atomic delete+mkdir operations.
-    for (int tries = 0; tries < 3; ++tries) {
-      File result = File.createTempFile(prefix, null, baseDir);
-      if (!result.delete()) {
-        throw new IOException("Couldn't delete temporary file "
-            + result.getAbsolutePath() + " to replace with a directory.");
-      }
-      if (result.mkdirs()) {
-        // Success.
-        return result;
-      }
-    }
-    throw new IOException(
-        "Couldn't create temporary directory after 3 tries in "
-            + baseDir.getAbsolutePath());
+  @Deprecated
+  public static File makeTemporaryDirectory(File baseDir, String prefix) throws IOException {
+    return Files.createTempDirectory(baseDir.toPath(), prefix).toFile();
   }
 
   @Deprecated

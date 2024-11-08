@@ -38,9 +38,11 @@ import java.util.Set;
 
 /**
  * A smattering of useful functions.
+ *
+ * @deprecated In a future release this class will be package protected.
  */
+@Deprecated
 public final class Utility {
-
 
   private static String sInstallPath = null;
 
@@ -48,7 +50,6 @@ public final class Utility {
    * Helper that ignores exceptions during close, because what are you going to
    * do?
    */
-  @Deprecated
   public static void close(AutoCloseable closeable) {
     try {
       if (closeable != null) {
@@ -179,12 +180,10 @@ public final class Utility {
    * @return a newly-created temporary directory; the caller must delete this
    *          directory (either when done or on VM exit)
    */
-  @Deprecated
   public static File makeTemporaryDirectory(File baseDir, String prefix) throws IOException {
     return Files.createTempDirectory(baseDir.toPath(), prefix).toFile();
   }
 
-  @Deprecated
   public static void streamOut(InputStream in, OutputStream out, int bufferSize)
       throws IOException {
     assert (bufferSize >= 0);
@@ -291,7 +290,6 @@ public final class Utility {
    *                                  with the following regular expression
    *                                  [0-9]+(.[0-9]+)*(_[a-zA-Z0-9]+)?
    */
-  @Deprecated
   public static int versionCompare(String v1, String v2) {
     return SourceLevel.versionCompare(v1, v2);
   }

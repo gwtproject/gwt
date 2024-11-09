@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2024 GWT Project Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,30 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.dev.util;
-
-import com.google.gwt.dev.util.arg.SourceLevel;
+package com.google.gwt.dev.util.arg;
 
 import junit.framework.TestCase;
 
-import java.net.URL;
-
-/** Pure junit test of Utility functionality*/
-public class UtilityTest extends TestCase {
-
-  /** Tests that URLAsChars correctly processes unicode*/
-  public void testUnicode() {
-    URL r = this.getClass().getResource("unicodeTest.txt");
-    assertNotNull(r);
-
-    char[] x = Util.readURLAsChars(r);
-    assertEquals(2,x.length);
-    char a = '\u4F60';
-    assertEquals(x[0],a);
-    assertEquals(x[1],'\u597D');
-  }
-
-
+public class SourceLevelTest extends TestCase {
   public void testVersionNumberComparisons() {
     assertTrue(SourceLevel.versionCompare("1.4.3.22", "1.04.3.22") == 0);
     assertTrue(SourceLevel.versionCompare("1.4.3.22.1", "1.4.3.22") > 0);
@@ -49,12 +30,12 @@ public class UtilityTest extends TestCase {
 
     try {
       SourceLevel.versionCompare("1.4.3.22.1.dodo", "1.4.3.22.1");
-      fail("Should have trown a IllegalArgumentException");
+      fail("Should have thrown a IllegalArgumentException");
     } catch (IllegalArgumentException e) {
     }
     try {
       SourceLevel.versionCompare("1.4.3.22.1", "1.4.3.22.1.dodo");
-      fail("Should have trown a IllegalArgumentException");
+      fail("Should have thrown a IllegalArgumentException");
     } catch (IllegalArgumentException e) {
     }
   }

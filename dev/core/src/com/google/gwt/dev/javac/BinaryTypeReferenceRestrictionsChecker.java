@@ -25,6 +25,7 @@ import org.eclipse.jdt.internal.compiler.ast.SingleMemberAnnotation;
 import org.eclipse.jdt.internal.compiler.impl.Constant;
 import org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
+import org.eclipse.jdt.internal.compiler.lookup.ClassScope;
 import org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding;
 
 import java.util.ArrayList;
@@ -80,7 +81,19 @@ public class BinaryTypeReferenceRestrictionsChecker {
     }
 
     @Override
+    public boolean visit(MarkerAnnotation annotation, ClassScope scope) {
+      // Ignore annotations
+      return false;
+    }
+
+    @Override
     public boolean visit(NormalAnnotation annotation, BlockScope scope) {
+      // Ignore annotations
+      return false;
+    }
+
+    @Override
+    public boolean visit(NormalAnnotation annotation, ClassScope scope) {
       // Ignore annotations
       return false;
     }
@@ -92,14 +105,19 @@ public class BinaryTypeReferenceRestrictionsChecker {
     }
 
     @Override
+    public boolean visit(SingleMemberAnnotation annotation, ClassScope scope) {
+      // Ignore annotations
+      return false;
+    }
+
+    @Override
     protected void onBinaryTypeRef(BinaryTypeBinding binding,
         CompilationUnitDeclaration unitOfReferrer, Expression expression) {
       if (expression.constant != null && expression.constant != Constant.NotAConstant) {
         // Allow compile time constants from classes provided only in binary form.
         return;
       }
-      binaryTypeReferenceSites.add(new BinaryTypeReferenceSite(expression,
-          binding));
+      binaryTypeReferenceSites.add(new BinaryTypeReferenceSite(expression, binding));
     }
 
     @Override

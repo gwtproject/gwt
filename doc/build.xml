@@ -144,7 +144,7 @@
                  sourcepath="${gwt.root}/user/super/com/google/gwt/emul:${gwt.root}/dev/core/super/com/google/gwt/dev/jjs/intrinsic"
                  encoding="UTF-8"
                  access="public"
-                 source="${javac.release}"
+                 source="8"
                  packagenames="${JAVA_PKGS}"
                  docletpath="${project.build}/../build_tools/doctool/bin"
                  doclet="com.google.doctool.custom.JavaEmulSummaryDoclet">

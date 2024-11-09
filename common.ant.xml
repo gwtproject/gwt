@@ -54,7 +54,7 @@
   <property name="javac.debug" value="true"/>
   <property name="javac.debuglevel" value="lines,vars,source"/>
   <property name="javac.encoding" value="utf-8"/>
-  <property name="javac.release" value="8"/>
+  <property name="javac.release" value="11"/>
   <property name="javac.nowarn" value="true"/>
 
   <!-- javac and errorprone instructions from https://errorprone.info/docs/installation#ant -->

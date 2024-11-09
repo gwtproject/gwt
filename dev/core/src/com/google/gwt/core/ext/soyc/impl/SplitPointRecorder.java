@@ -15,6 +15,8 @@
  */
 package com.google.gwt.core.ext.soyc.impl;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
@@ -27,7 +29,6 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.zip.GZIPOutputStream;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Records split points to a file for Compile Reports.

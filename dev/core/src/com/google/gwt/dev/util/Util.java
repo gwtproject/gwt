@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dev.util;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
@@ -58,8 +60,6 @@ import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * A smattering of useful methods. Methods in this class are candidates for

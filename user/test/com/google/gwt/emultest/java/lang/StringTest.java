@@ -789,11 +789,8 @@ public class StringTest extends GWTTestCase {
   }
 
   public void testSplit_emptyExpr() {
-    // TODO(rluble):  implement JDK8 string.split semantics and fix test.
-    String[] expected = (TestUtils.getJdkVersion() > 7) ?
-        new String[] {"a", "b", "c", "x", "x", "d", "e", "x", "f", "x"} :
-        new String[] {"", "a", "b", "c", "x", "x", "d", "e", "x", "f", "x"};
-    compareList("emptyRegexSplit", expected, "abcxxdexfx".split(""));
+    String[] expected = new String[] {"a", "b", "c", "x", "x", "d", "e", "x", "f", "x"};
+    compareList("emptyRegexSplit", expected, hideFromCompiler("abcxxdexfx").split(""));
   }
 
   public void testStartsWith() {

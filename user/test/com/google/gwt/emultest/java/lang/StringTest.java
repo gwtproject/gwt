@@ -781,20 +781,30 @@ public class StringTest extends GWTTestCase {
 
     // Splitting an empty string should result in an array containing a single
     // empty string.
-    String[] s = "".split(",");
+    String[] s = hideFromCompiler("").split(",");
     assertTrue(s != null);
     assertTrue(s.length == 1);
     assertTrue(s[0] != null);
     assertTrue(s[0].length() == 0);
+
+    s = hideFromCompiler("abcada").split("a");
+    assertTrue(s != null);
+    assertEquals(3, s.length);
+    assertEquals("", s[0]);
+    assertEquals("bc", s[1]);
+    assertEquals("d", s[2]);
   }
 
   public void testSplit_emptyExpr() {
     String[] expected = new String[] {"a", "b", "c", "x", "x", "d", "e", "x", "f", "x"};
     compareList("emptyRegexSplit", expected, hideFromCompiler("abcxxdexfx").split(""));
+
+    String[] arr = hideFromCompiler(",").split(",");
+    assertEquals(0, arr.length);
   }
 
   public void testStartsWith() {
-    String haystack = "abcdefghi";
+    String haystack = hideFromCompiler("abcdefghi");
     assertTrue(haystack.startsWith("abc"));
     assertTrue(haystack.startsWith("bc", 1));
     assertTrue(haystack.startsWith(haystack));

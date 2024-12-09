@@ -654,7 +654,7 @@ public final class String implements Comparable<String>, CharSequence,
       } else {
         int matchIndex = matchObj.getIndex();
 
-        if (lastTrail == null && matchIndex == 0) {
+        if (lastTrail == null && matchIndex == 0 && matchObj.asArray()[0].length() == 0) {
           // As of Java 8, we should discard the first zero-length match if it is the beginning of
           // the string. Do not increment the count, and do not add to the output array.
           trail = trail.substring(matchIndex + matchObj.asArray()[0].length(), trail.length());

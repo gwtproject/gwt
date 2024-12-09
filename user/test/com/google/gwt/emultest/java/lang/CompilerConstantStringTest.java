@@ -245,15 +245,30 @@ public class CompilerConstantStringTest extends GWTTestCase {
         "b", "", ":and:f"});
     compareList("0:", "boo:and:foo".split(":", 0), new String[] {
         "boo", "and", "foo"});
-  }
+    // issue 2742
+    compareList("issue2742", new String[] {}, "/".split("/", 0));
+
+    // Splitting an empty string should result in an array containing a single
+    // empty string.
+    String[] s = "".split(",");
+    assertTrue(s != null);
+    assertTrue(s.length == 1);
+    assertTrue(s[0] != null);
+    assertTrue(s[0].length() == 0);
+
+    s = "abcada".split("a");
+    assertTrue(s != null);
+    assertEquals(3, s.length);
+    assertEquals("", s[0]);
+    assertEquals("bc", s[1]);
+    assertEquals("d", s[2]);  }
 
   public void testSplit_emptyExpr() {
-    // TODO(rluble):  implement JDK8 string.split semantics and fix test.
-    // See issue 8913.
-    String[] expected = (TestUtils.getJdkVersion() > 7) ?
-        new String[] {"a", "b", "c", "x", "x", "d", "e", "x", "f", "x"} :
-        new String[] {"", "a", "b", "c", "x", "x", "d", "e", "x", "f", "x"};
+    String[] expected = new String[] {"a", "b", "c", "x", "x", "d", "e", "x", "f", "x"};
     compareList("emptyRegexSplit", expected, "abcxxdexfx".split(""));
+
+    String[] arr = ",".split(",");
+    assertEquals(0, arr.length);
   }
 
   public void testStartsWith() {

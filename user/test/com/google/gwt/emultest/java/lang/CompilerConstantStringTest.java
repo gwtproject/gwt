@@ -16,7 +16,6 @@
 package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.testing.TestUtils;
 
 import java.util.Locale;
 

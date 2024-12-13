@@ -494,4 +494,50 @@ public class Java17Test extends GWTTestCase {
     };
     assertEquals(4, value);
   }
+
+  // https://github.com/gwtproject/gwt/issues/10044
+  public void testCaseArrowLabelsVoidExpression() {
+    // Each switch is extracted to its own method to avoid the early return bug.
+    assertEquals("success", arrowWithVoidExpr());
+
+    // Arrow with non-void expr
+    assertEquals("success", arrowWithStringExpr());
+    assertEquals("success", arrowWithIntExpr());
+
+    // Arrow with a statement - doesn't fail as part of this bug. This exists to verify
+    // that JDT won't give us a yield with a statement somehow.
+    assertEquals("success", arrowWithStatement());
+  }
+
+  private static String arrowWithVoidExpr() {
+    switch(0) {
+      case 0 -> assertTrue(true);
+    };
+    return "success";
+  }
+
+  private static String arrowWithStringExpr() {
+    switch(0) {
+      case 0 -> new Object().toString();
+    };
+    return "success";
+  }
+
+  private static String arrowWithIntExpr() {
+    switch(0) {
+      case 0 -> new Object().hashCode();
+    };
+    return "success";
+  }
+
+  private static String arrowWithStatement() {
+    switch(0) {
+      case 0 -> {
+        if (true) {
+          new Object().toString();
+        }
+      }
+    };
+    return "success";
+  }
 }

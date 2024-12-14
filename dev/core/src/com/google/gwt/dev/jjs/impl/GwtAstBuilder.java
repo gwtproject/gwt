@@ -545,15 +545,13 @@ public class GwtAstBuilder {
     @Override
     public void endVisit(YieldStatement x, BlockScope scope) {
       try {
+        SourceInfo info = makeSourceInfo(x);
+        JExpression expression = pop(x.expression);
         if (x.switchExpression == null) {
           // This is an implicit 'yield' in a case with an arrow - synthesize a break instead and
           // wrap with a block so that the child count in JDT and GWT matches.
-          SourceInfo info = makeSourceInfo(x);
-          JExpression pop = pop(x.expression);
-          push(new JBlock(info, pop.makeStatement(), new JBreakStatement(info, null)));
+          push(new JBlock(info, expression.makeStatement(), new JBreakStatement(info, null)));
         } else {
-          SourceInfo info = makeSourceInfo(x);
-          JExpression expression = pop(x.expression);
           push(new JYieldStatement(info, expression));
         }
       } catch (Throwable e) {

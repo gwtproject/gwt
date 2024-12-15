@@ -32,7 +32,7 @@ import javaemul.internal.JsUtils;
  */
 class InternalHashCodeMap<K, V> implements Iterable<Entry<K, V>> {
 
-  private final InternalJsMap<Object> backingMap = InternalJsMapFactory.newJsMap();
+  private final InternalJsMap<Object> backingMap = new InternalJsMap<>();
   private AbstractHashMap<K, V> host;
   private int size;
 

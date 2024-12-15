@@ -22,7 +22,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 @JsType(isNative = true, name = "Map", namespace = JsPackage.GLOBAL)
-interface InternalJsMap<V> {
+class InternalJsMap<V> {
 
   @JsType(isNative = true, name = "IteratorIterable", namespace = JsPackage.GLOBAL)
   interface Iterator<V> {
@@ -47,31 +47,14 @@ interface InternalJsMap<V> {
     default V getValue() { return JsUtils.uncheckedCast(getValueInternal()[1]); }
   }
 
-  V get(int key);
-  V get(String key);
-  void set(int key, V value);
-  void set(String key, V value);
-  Iterator<V> entries();
-
-  @JsOverlay
-  default void delete(int key) {
-    // Calls delete without map.delete in order to be compatible with old browsers where delete is a
-    // keyword.
-    DeleteFunction fn = JsUtils.getProperty(this, "delete");
-    fn.call(this, key);
+  InternalJsMap() {
   }
 
-  @JsOverlay
-  default void delete(String key) {
-    // Calls delete without map.delete in order to be compatible with old browsers where delete is a
-    // keyword.
-    DeleteFunction fn = JsUtils.getProperty(this, "delete");
-    fn.call(this, key);
-  }
-
-  @JsType(isNative = true, name = "Function", namespace = JsPackage.GLOBAL)
-  interface DeleteFunction {
-    void call(InternalJsMap<?> thisArg, String key);
-    void call(InternalJsMap<?> thisArg, int key);
-  }
+  native V get(int key);
+  native V get(String key);
+  native void set(int key, V value);
+  native void set(String key, V value);
+  native Iterator<V> entries();
+  native void delete(String key);
+  native void delete(int key);
 }

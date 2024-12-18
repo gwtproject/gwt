@@ -65,7 +65,7 @@ public class FieldReferenceConverter {
   interface Delegate {
     /**
      * Returns the types any parsed field references are expected to return.
-     * Multiple values indicates an overload. E.g., in <a href={...}> either a
+     * Multiple values indicates an overload. E.g., in <code>&lt;a href={...}&gt;</code> either a
      * String or a SafeUri is allowed.
      */
     JType[] getTypes();

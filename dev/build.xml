@@ -125,8 +125,10 @@
           <zipfileset src="${gwt.tools.lib}/apache/tapestry-util-text-4.0.2.jar"/>
           <zipfileset src="${gwt.tools.lib}/apache/ant-zipscanner/ant-zipscanner-1.6.5-1-rebased.jar"/>
           <zipfileset src="${gwt.tools.lib}/colt/colt-1.2.jar"/>
-          <zipfileset
-              src="${gwt.tools.lib}/eclipse/original/org.eclipse.jdt.core-3.32.0.jar"/>
+          <zipfileset src="${gwt.tools.lib}/eclipse/original/org.eclipse.jdt.core-3.32.0.jar">
+            <exclude name="META-INF/*.RSA"/>
+            <exclude name="META-INF/*.SF"/>
+          </zipfileset>
           <zipfileset src="${gwt.tools.lib}/guava/guava-33.0/guava-33.0.0-jre-rebased.jar"/>
           <zipfileset src="${gwt.tools.lib}/guava/guava-33.0/failureaccess-1.0.2-rebased.jar" />
           <zipfileset src="${gwt.tools.lib}/icu4j/63.1/icu4j.jar"/>

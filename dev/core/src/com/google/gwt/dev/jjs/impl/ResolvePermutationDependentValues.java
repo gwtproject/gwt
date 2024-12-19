@@ -47,6 +47,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -76,7 +77,14 @@ public class ResolvePermutationDependentValues {
     private JExpression propertyValueExpression(JPermutationDependentValue x) {
       List<String> propertyValues = props.getConfigurationProperties().getStrings(x.getRequestedValue());
 
-      String propertyValue = propertyValues.isEmpty() ? null : Joiner.on(",").join(propertyValues);
+      if (!propertyValues.isEmpty() && propertyValues.stream().allMatch(Objects::isNull)) {
+        if (x.getDefaultValueExpression() != null) {
+          return x.getDefaultValueExpression();
+        }
+        throw new InternalCompilerException("No default set for configuration property '"
+            + x.getRequestedValue() + "'");
+      }
+      String propertyValue = propertyValues.isEmpty() ? null : Joiner.on(",").skipNulls().join(propertyValues);
 
       if (propertyValue != null) {
         // It is a configuration property.

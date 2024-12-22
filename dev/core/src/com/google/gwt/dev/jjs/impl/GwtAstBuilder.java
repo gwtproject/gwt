@@ -3612,7 +3612,7 @@ public class GwtAstBuilder {
         // Synthetic locals for local classes
         if (targetBinding.syntheticOuterLocalVariables() != null) {
           for (SyntheticArgumentBinding arg : targetBinding.syntheticOuterLocalVariables()) {
-            LocalVariableBinding targetVariable = arg.actualOuterLocalVariable;
+            LocalVariableBinding targetVariable = arg.actualOuterLocalVariable;// this may be wrong too
             VariableBinding[] path = scope.getEmulationPath(targetVariable);
             assert path.length == 1;
             if (curMethod.scope.isInsideInitializer()

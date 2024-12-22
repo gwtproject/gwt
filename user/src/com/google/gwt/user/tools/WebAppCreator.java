@@ -31,7 +31,9 @@ import com.google.gwt.util.tools.ArgHandlerString;
 import com.google.gwt.util.tools.Utility;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -728,8 +730,9 @@ public final class WebAppCreator {
         continue;
       }
       if (fileCreator.isBinary) {
-        byte[] data = Util.readURLAsBytes(url);
-        Utility.writeTemplateBinaryFile(file, data);
+        try (FileOutputStream o = new FileOutputStream(file); InputStream i = url.openStream()) {
+          i.transferTo(o);
+        }
       } else {
         String data = Util.readURLAsString(url);
         Utility.writeTemplateFile(file, data, replacements);

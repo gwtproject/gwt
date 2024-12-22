@@ -16,9 +16,7 @@
 package com.google.gwt.util.tools;
 
 import com.google.gwt.dev.util.arg.SourceLevel;
-import com.google.gwt.thirdparty.guava.common.io.Closeables;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -30,6 +28,7 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.net.URI;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Iterator;
 import java.util.Map;
@@ -149,17 +148,12 @@ public final class Utility {
    */
   public static String getFileFromClassPath(String partialPath)
       throws IOException {
-    InputStream in = Utility.class.getClassLoader().getResourceAsStream(
-        partialPath);
-    try {
+    try (InputStream in = Utility.class.getClassLoader().getResourceAsStream(
+        partialPath)) {
       if (in == null) {
         throw new FileNotFoundException(partialPath);
       }
-      ByteArrayOutputStream os = new ByteArrayOutputStream();
-      streamOut(in, os, 1024);
-      return new String(os.toByteArray(), "UTF-8");
-    } finally {
-      Closeables.closeQuietly(in);
+      return new String(in.readAllBytes(), StandardCharsets.UTF_8);
     }
   }
 

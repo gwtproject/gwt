@@ -547,7 +547,13 @@ public class GwtAstBuilder {
       try {
         SourceInfo info = makeSourceInfo(x);
         JExpression expression = pop(x.expression);
-        push(new JYieldStatement(info, expression));
+        if (x.switchExpression == null) {
+          // This is an implicit 'yield' in a case with an arrow - synthesize a break instead and
+          // wrap with a block so that the child count in JDT and GWT matches.
+          push(new JBlock(info, expression.makeStatement(), new JBreakStatement(info, null)));
+        } else {
+          push(new JYieldStatement(info, expression));
+        }
       } catch (Throwable e) {
         throw translateException(x, e);
       }

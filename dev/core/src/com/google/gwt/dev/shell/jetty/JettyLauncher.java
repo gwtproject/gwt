@@ -295,6 +295,7 @@ public class JettyLauncher extends ServletContainerLauncher {
           // Xerces
           "org.apache.xerces.",
           "javax.xml.", // Used by Jetty for jetty-web.xml parsing
+          "javax.sql.*",
       });
 
       public WebAppClassLoaderExtension() throws IOException {

@@ -853,7 +853,7 @@ public class Window {
   }
 
   static String onClosing() {
-    if (closeHandlersInitialized) {
+    if (beforeCloseHandlersInitialized) {
       Window.ClosingEvent event = new Window.ClosingEvent();
       fireEvent(event);
       return event.getMessage();

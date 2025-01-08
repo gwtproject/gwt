@@ -105,36 +105,39 @@ public class GeneratedClassnameFinderTest extends TestCase {
     assertEquals(0, new EnumTester().getGeneratedClasses().size());
   }
 
+  /**
+   * This test requires a lot of care and feeding to keep track of which version of Java the test
+   * classes were built with, and what the current release version is.
+   */
   public void testJavacWeirdness() {
     List<String> classNames = new JavacWeirdnessTester().getGeneratedClasses();
-    if (classNames.size() == 4) {
-      // javac8:
-      // JavacWeirdnessTester$1
+    if (classNames.size() == 3) {
+      // javac 11 with --release=11:
+      // javac 17 with --release=11:
+      // javac 21 with --release=11:
       // JavacWeirdnessTester$2
       // JavacWeirdnessTester$2Foo
       // JavacWeirdnessTester$3Foo
       assertFalse(classNames.get(0) + " should not contain Foo",
               classNames.get(0).contains("Foo"));
-      assertFalse(classNames.get(1) + " should not contain Foo",
-              classNames.get(1).contains("Foo"));
+      assertTrue(classNames.get(1) + " should contain Foo", classNames.get(1).contains("Foo"));
       assertTrue(classNames.get(2) + " should contain Foo", classNames.get(2).contains("Foo"));
-      assertTrue(classNames.get(3) + " should contain Foo", classNames.get(3).contains("Foo"));
     } else if (classNames.size() == 5) {
-      // javac22:
+      // javac 22 with --release=11:
       // JavacWeirdnessTester$1
       // JavacWeirdnessTester$2
       // JavacWeirdnessTester$1Foo
       // JavacWeirdnessTester$2Foo
       // JavacWeirdnessTester$3Foo
       assertFalse(classNames.get(0) + " should not contain Foo",
-              classNames.get(0).contains("Foo"));
+          classNames.get(0).contains("Foo"));
       assertFalse(classNames.get(1) + " should not contain Foo",
-              classNames.get(1).contains("Foo"));
+          classNames.get(1).contains("Foo"));
       assertTrue(classNames.get(2) + " should contain Foo", classNames.get(2).contains("Foo"));
       assertTrue(classNames.get(3) + " should contain Foo", classNames.get(2).contains("Foo"));
       assertTrue(classNames.get(4) + " should contain Foo", classNames.get(3).contains("Foo"));
     } else {
-      fail("Expected 4 or 5 classes, found " + classNames);
+      fail("Expected 3 classes, found " + classNames);
     }
   }
 

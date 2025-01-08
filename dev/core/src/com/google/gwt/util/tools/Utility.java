@@ -19,7 +19,6 @@ import com.google.gwt.dev.util.arg.SourceLevel;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.LineNumberReader;
@@ -30,6 +29,9 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.Path;
+import java.nio.file.attribute.FileAttribute;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -40,7 +42,7 @@ import java.util.Set;
  *
  * @deprecated In a future release this class will be package protected.
  */
-@Deprecated
+@Deprecated(forRemoval = true, since = "2.13")
 public final class Utility {
 
   private static String sInstallPath = null;
@@ -48,6 +50,9 @@ public final class Utility {
   /**
    * Helper that ignores exceptions during close, because what are you going to
    * do?
+   *
+   * @deprecated Instead, use try-with-resources, or Guava's
+   * {@link com.google.gwt.thirdparty.guava.common.io.Closeables} to close quietly.
    */
   public static void close(AutoCloseable closeable) {
     try {
@@ -65,6 +70,8 @@ public final class Utility {
    * @return Handle to the file
    * @throws IOException If the file cannot be created, or if the file already
    *           existed and overwrite was false.
+   * @deprecated Consider using {@link Files#createFile(Path, FileAttribute[])} instead - if logging
+   * or errors are expected, consider inlining this method, as there is no exact replacement.
    */
   public static File createNormalFile(File parent, String fileName,
       boolean overwrite, boolean ignore) throws IOException {
@@ -99,6 +106,8 @@ public final class Utility {
    * @param create Create the directory if it does not already exist?
    * @return A {@link File} representing a directory that now exists.
    * @throws IOException If the directory is not found and/or cannot be created.
+   * @deprecated Consider using {@link Files#createDirectories(Path, FileAttribute[])} instead - if
+   * logging or errors are expected, consider inlining this method, as there is no exact replacement.
    */
   public static File getDirectory(File parent, String dirName, boolean create)
       throws IOException {
@@ -130,6 +139,8 @@ public final class Utility {
    * @param create Create the directory if it does not already exist?
    * @return A {@link File} representing a directory that now exists.
    * @throws IOException If the directory is not found and/or cannot be created.
+   * @deprecated Consider using {@link Files#createDirectories(Path, FileAttribute[])} instead - if
+   * logging or errors are expected, consider inlining this method, as there is no exact replacement.
    */
   public static File getDirectory(String dirPath, boolean create)
       throws IOException {
@@ -145,6 +156,7 @@ public final class Utility {
    * @return the contents of the file
    * @throws IOException if the file could not be found or an error occurred
    *           while reading it
+   * @deprecated If writing a linker, use {@link com.google.gwt.core.ext.linker.LinkerUtils#readClasspathFileAsString(String)} instead.
    */
   public static String getFileFromClassPath(String partialPath)
       throws IOException {
@@ -157,6 +169,9 @@ public final class Utility {
     }
   }
 
+  /**
+   * @deprecated There is no replacement for this method, many usages of GWT have no install path.
+   */
   public static String getInstallPath() {
     if (sInstallPath == null) {
       computeInstallationPath();
@@ -173,11 +188,15 @@ public final class Utility {
    * @param prefix the initial characters of the new directory name
    * @return a newly-created temporary directory; the caller must delete this
    *          directory (either when done or on VM exit)
+   * @deprecated use {@link Files#createTempDirectory(Path, String, FileAttribute[])} instead.
    */
   public static File makeTemporaryDirectory(File baseDir, String prefix) throws IOException {
     return Files.createTempDirectory(baseDir.toPath(), prefix).toFile();
   }
 
+  /**
+   * @deprecated use {@link InputStream#transferTo(OutputStream)} instead, letting it buffer internally.
+   */
   public static void streamOut(InputStream in, OutputStream out, int bufferSize)
       throws IOException {
     assert (bufferSize >= 0);
@@ -196,12 +215,17 @@ public final class Utility {
     }
   }
 
+  /**
+   * @deprecated use {@link Files#write(Path, byte[], OpenOption...)}.
+   */
   public static void writeTemplateBinaryFile(File file, byte[] contents) throws IOException {
-    try (FileOutputStream o = new FileOutputStream(file)) {
-      o.write(contents);
-    }
+    Files.write(file.toPath(), contents);
   }
 
+  /**
+   * @deprecated There is no replacement for this, inline the method or use a template library of
+   * your choice.
+   */
   public static void writeTemplateFile(File file, String contents,
       Map<String, String> replacements) throws IOException {
 
@@ -283,6 +307,7 @@ public final class Utility {
    * @throws IllegalArgumentException if the version number are not proper (i.e. the do not comply
    *                                  with the following regular expression
    *                                  [0-9]+(.[0-9]+)*(_[a-zA-Z0-9]+)?
+   * @deprecated use {@link SourceLevel#versionCompare(String, String)} instead.
    */
   public static int versionCompare(String v1, String v2) {
     return SourceLevel.versionCompare(v1, v2);

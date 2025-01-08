@@ -1267,7 +1267,12 @@ public class GwtAstBuilder {
       if (syntheticArguments != null) {
         MethodScope scope = x.getScope();
         for (SyntheticArgumentBinding sa : syntheticArguments) {
-          VariableBinding[] path = scope.getEmulationPath(sa);
+          VariableBinding[] path;
+          if (sa.actualOuterLocalVariable == null) {
+            path = scope.getEmulationPath(sa);
+          } else {
+            path = scope.getEmulationPath(sa.actualOuterLocalVariable);
+          }
           assert path.length == 1 && path[0] instanceof LocalVariableBinding;
           JParameter param = it.next();
           curMethod.locals.put((LocalVariableBinding) path[0], param);

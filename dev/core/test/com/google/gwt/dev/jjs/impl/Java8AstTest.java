@@ -257,6 +257,88 @@ public class Java8AstTest extends FullCompileTestBase {
         formatSource(samMethod.toSource()));
   }
 
+  public void testCompileLambdaOuterFieldCaptureInConstructor() throws Exception {
+    addSnippetClassDecl("int y = 22;");
+    addSnippetClassDecl("class Foo {" +
+        "Foo(Runnable r) {}" +
+        "Foo() {" +
+            "this(() -> {y = 42;});" +
+        "}" +
+    "}");
+
+    JProgram program = compileSnippet("void", "new Foo();", false);
+    JDeclaredType entrypointType = program.getFromTypeMap("test.EntryPoint");
+
+    JMethod lambda = findMethod(program.getFromTypeMap("test.EntryPoint$Foo"), "lambda$0");
+    assertNotNull(lambda);
+    assertEquals("{{this$0.y=42;}}", formatSource(lambda.getBody().toSource()));
+
+    // Lambda closes over inner class's this$0 reference - lambda type constructor takes that
+    // parameter and assigns to a field.
+    JClassType lambdaInnerClass = (JClassType) getType(program, "test.EntryPoint$Foo$lambda$0$Type");
+    assertNotNull(lambdaInnerClass);
+
+    JMethod ctor = findMethod(lambdaInnerClass, "EntryPoint$Foo$lambda$0$Type");
+    assertTrue(ctor instanceof JConstructor);
+    System.out.println(ctor.getOriginalParamTypes());
+    assertEquals(1, ctor.getParams().size());
+    assertEquals(entrypointType, ctor.getOriginalParamTypes().get(0));
+
+    assertEquals(1, lambdaInnerClass.getFields().size());
+    assertEquals(entrypointType, lambdaInnerClass.getFields().get(0).getType());
+
+    // interface impl passes this.this$0 to the actual lambda method as a parameter
+    assertEquals("{this.this$0=this$0;}", formatSource(ctor.getBody().toSource()));
+
+    // abstract method implementation passes field to lambda method
+    JMethod samMethod = findMethod(lambdaInnerClass, "run");
+    assertNotNull(samMethod);
+    assertEquals("{EntryPoint$Foo.lambda$0(this.this$0);}", formatSource(samMethod.getBody().toSource()));
+  }
+
+  public void testCompileLambdaOuterFieldCaptureInConstructorSuper() throws Exception {
+    addSnippetClassDecl("int y = 22;");
+    addSnippetClassDecl("class Foo {" +
+        "Foo(Runnable r) {}" +
+    "}" +
+    "class Bar extends Foo {" +
+        "Bar() {" +
+            "super(() -> {y = 42;});" +
+        "}" +
+    "}");
+
+    JProgram program = compileSnippet("void", "new Bar();", false);
+    JDeclaredType entrypointType = program.getFromTypeMap("test.EntryPoint");
+
+    JMethod lambda = findMethod(program.getFromTypeMap("test.EntryPoint$Bar"), "lambda$0");
+    assertNotNull(lambda);
+    assertEquals(1, lambda.getParams().size());
+    assertEquals(entrypointType, lambda.getOriginalParamTypes().get(0));
+    assertEquals("{{this$0.y=42;}}", formatSource(lambda.getBody().toSource()));
+
+    // Lambda closes over inner class's this$0 reference - lambda type constructor takes that
+    // parameter and assigns to a field.
+    JClassType lambdaInnerClass = (JClassType) getType(program, "test.EntryPoint$Bar$lambda$0$Type");
+    assertNotNull(lambdaInnerClass);
+
+    JMethod ctor = findMethod(lambdaInnerClass, "EntryPoint$Bar$lambda$0$Type");
+    assertTrue(ctor instanceof JConstructor);
+    System.out.println(ctor.getOriginalParamTypes());
+    assertEquals(1, ctor.getParams().size());
+    assertEquals(entrypointType, ctor.getOriginalParamTypes().get(0));
+
+    assertEquals(1, lambdaInnerClass.getFields().size());
+    assertEquals(entrypointType, lambdaInnerClass.getFields().get(0).getType());
+
+    // interface impl passes this.this$0 to the actual lambda method as a parameter
+    assertEquals("{this.this$0=this$0;}", formatSource(ctor.getBody().toSource()));
+
+    // abstract method implementation passes field to lambda method
+    JMethod samMethod = findMethod(lambdaInnerClass, "run");
+    assertNotNull(samMethod);
+    assertEquals("{EntryPoint$Bar.lambda$0(this.this$0);}", formatSource(samMethod.getBody().toSource()));
+  }
+
   // make sure nested scoping of identically named variables works
   public void testCompileLambdaCaptureOuterInnerField() throws Exception {
     addSnippetClassDecl("private int y = 22;");

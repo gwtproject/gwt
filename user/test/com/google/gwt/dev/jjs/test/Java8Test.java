@@ -252,6 +252,39 @@ public class Java8Test extends GWTTestCase {
     assertEquals(82, new AcceptsLambda<Integer>().accept(l).intValue());
   }
 
+  class CtorAcceptsLambda {
+    CtorAcceptsLambda() {
+      this(() -> local = -1);
+    }
+    CtorAcceptsLambda(Runnable lambda) {
+      lambda.run();
+    }
+  }
+
+  public void testCompileLambdaOuterFieldCaptureInConstructor() {
+    assertEquals(42, local);
+    new CtorAcceptsLambda();
+    assertEquals(-1, local);
+  }
+
+  abstract class AbstractCtorAcceptsLambda {
+    AbstractCtorAcceptsLambda(Runnable lambda) {
+      lambda.run();
+    }
+  }
+
+  class CtorAcceptsLambdaSubtype extends AbstractCtorAcceptsLambda {
+    CtorAcceptsLambdaSubtype() {
+      super(() -> local = -1);
+    }
+  }
+
+  public void testCompileLambdaOuterFieldCaptureInConstructorSuper() throws Exception {
+    assertEquals(42, local);
+    new CtorAcceptsLambdaSubtype();
+    assertEquals(-1, local);
+  }
+
   public void testCompileLambdaCaptureOuterInnerField() throws Exception {
     new Inner().run();
   }

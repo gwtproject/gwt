@@ -1237,31 +1237,27 @@ public class GwtAstBuilder {
 
     @Override
     public boolean visit(LambdaExpression x, BlockScope blockScope) {
-      try {
-        // Fetch the variables 'captured' by this lambda
-        SyntheticArgumentBinding[] synthArgs = x.outerLocalVariables;
-        // Get the parameter names, captured locals + lambda arguments
-        String paramNames[] = computeCombinedParamNames(x, synthArgs);
-        SourceInfo info = makeSourceInfo(x);
-        // JDT synthesizes a method lambda$n(capture1, capture2, ..., lambda_arg1, lambda_arg2, ...)
-        // Here we create a JMethod from this
-        JMethod lambdaMethod = createMethodFromBinding(info, x.binding, paramNames);
-        // Because the lambda implementations is synthesized as a static method in the
-        // enclosing class, it needs to be adjusted if that class happens to be a JsType.
-        lambdaMethod.setJsMemberInfo(JsMemberType.NONE, null, null, false);
-        if (curClass.type.isJsNative()) {
-          lambdaMethod.setJsOverlay();
-        }
-        JMethodBody methodBody = new JMethodBody(info);
-        lambdaMethod.setBody(methodBody);
-        // We need to push this method  on the stack as it introduces a scope, and
-        // expressions in the body need to lookup variable refs like parameters from it
-        pushMethodInfo(new MethodInfo(lambdaMethod, methodBody, x.scope));
-        pushLambdaExpressionLocalsIntoMethodScope(x, synthArgs, lambdaMethod);
-        // now the body of the lambda is processed
-      } catch (Throwable e) {
-        throw translateException(x, e);
+      // Fetch the variables 'captured' by this lambda
+      SyntheticArgumentBinding[] synthArgs = x.outerLocalVariables;
+      // Get the parameter names, captured locals + lambda arguments
+      String paramNames[] = computeCombinedParamNames(x, synthArgs);
+      SourceInfo info = makeSourceInfo(x);
+      // JDT synthesizes a method lambda$n(capture1, capture2, ..., lambda_arg1, lambda_arg2, ...)
+      // Here we create a JMethod from this
+      JMethod lambdaMethod = createMethodFromBinding(info, x.binding, paramNames);
+      // Because the lambda implementations is synthesized as a static method in the
+      // enclosing class, it needs to be adjusted if that class happens to be a JsType.
+      lambdaMethod.setJsMemberInfo(HasJsInfo.JsMemberType.NONE, null, null, false);
+      if (curClass.type.isJsNative()) {
+        lambdaMethod.setJsOverlay();
       }
+      JMethodBody methodBody = new JMethodBody(info);
+      lambdaMethod.setBody(methodBody);
+      // We need to push this method  on the stack as it introduces a scope, and
+      // expressions in the body need to lookup variable refs like parameters from it
+      pushMethodInfo(new MethodInfo(lambdaMethod, methodBody, x.scope));
+      pushLambdaExpressionLocalsIntoMethodScope(x, synthArgs, lambdaMethod);
+      // now the body of the lambda is processed
       return true;
     }
 

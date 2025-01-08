@@ -23,7 +23,7 @@ import javaemul.internal.JsUtils;
  */
 class InternalStringMap<K, V> implements Iterable<Entry<K, V>> {
 
-  private final InternalJsMap<V> backingMap = InternalJsMapFactory.newJsMap();
+  private final InternalJsMap<V> backingMap = new InternalJsMap<>();
   private AbstractHashMap<K, V> host;
   private int size;
 

@@ -19,8 +19,8 @@ import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.ArtifactSet;
+import com.google.gwt.core.ext.linker.LinkerUtils;
 import com.google.gwt.core.ext.linker.Shardable;
-import com.google.gwt.util.tools.Utility;
 
 import java.io.IOException;
 
@@ -32,7 +32,7 @@ import java.io.IOException;
 public final class HostedModeLinker extends SelectionScriptLinker {
 
   public static String getHostedHtml() throws IOException {
-    return Utility.getFileFromClassPath("com/google/gwt/core/ext/linker/impl/hosted.html");
+    return LinkerUtils.readClasspathFileAsString("com/google/gwt/core/ext/linker/impl/hosted.html");
   }
 
   /**

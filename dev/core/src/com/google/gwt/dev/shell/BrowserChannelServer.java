@@ -412,27 +412,8 @@ public class BrowserChannelServer extends BrowserChannel
         moduleName = oldLoadModule.getModuleName();
         userAgent = oldLoadModule.getUserAgent();
         protocolVersion = 1;
-        HelpInfo helpInfo = new HelpInfo() {
-          @Override
-          public String getAnchorText() {
-            return "UsingOOPHM wiki page";
-          }
-
-          @Override
-          public URL getURL() {
-            try {
-              // TODO(jat): better landing page for more info
-              return new URL(
-                  "http://code.google.com/p/google-web-toolkit/wiki/UsingOOPHM");
-            } catch (MalformedURLException e) {
-              // can't happen
-              return null;
-            }
-          }
-        };
         logger.log(TreeLogger.WARN, "Connection from old browser plugin -- "
-            + "please upgrade to a later version for full functionality", null,
-            helpInfo);
+            + "please upgrade to a later version for full functionality");
         break;
       case CHECK_VERSIONS:
         String connectError = null;

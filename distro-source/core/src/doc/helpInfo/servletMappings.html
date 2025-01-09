@@ -9,11 +9,8 @@
 tags. These define Java Servlets that implement the server-side
 component of a GWT-enabled web application.</p>
 
-<p>Prior to GWT 1.6, these GWT module servlet tags controlled the set of
-servlets were actually instantiated during hosted mode. But as of GWT 1.6, this
-is no longer true.  Instead, the web application's <code>WEB-INF/web.xml</code>
-configuration file controls what servlets are instantiated. A GWT module
-specifies only what servlets are <i>expected</i>.
+<p>In modern GWT applications, these are only used for testing, and it is
+discouraged to use them in application code.</p>
 
 <p>During hosted mode startup, the set of expected servlets (from GWT module
 <code>&lt;servlet&gt;</code> tags) is validated against the set of actual

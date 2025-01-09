@@ -294,6 +294,7 @@ public final class Util {
    *
    * @param relativePath relative path within the install directory
    * @return the contents of the file, or null if an error occurred
+   * @deprecated Removed without replacement, many usages of GWT have no install path.
    */
   public static String getFileFromInstallPath(String relativePath) {
     String installPath = Utility.getInstallPath();

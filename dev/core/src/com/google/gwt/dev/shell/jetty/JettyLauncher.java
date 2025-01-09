@@ -19,7 +19,8 @@ import com.google.gwt.core.ext.ServletContainer;
 import com.google.gwt.core.ext.ServletContainerLauncher;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.util.InstalledHelpInfo;
+import com.google.gwt.dev.util.GwtprojectOrgHelpInfo;
+import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.collect.Iterators;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
@@ -452,7 +453,7 @@ public class JettyLauncher extends ServletContainerLauncher {
         }
         branch = branch.branch(logLevel, "Adding classpath entry '"
             + classPathURL + "' to the web app classpath for this session",
-            null, new InstalledHelpInfo("webAppClassPath.html"));
+            null, new GwtprojectOrgHelpInfo("/doc/latest/gwt-dev-help/webAppClassPath.html"));
         try {
           addClassPath(classPathURL);
           return true;

@@ -28,13 +28,13 @@ import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.thirdparty.guava.common.base.Charsets;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
-import com.google.gwt.thirdparty.guava.common.io.Files;
 
 import junit.framework.TestCase;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -68,7 +68,7 @@ public class RecompilerTest extends TestCase {
       File resourceFile =
           new File(dir.getAbsolutePath() + File.separator + applicationResource.getPath());
       resourceFile.getParentFile().mkdirs();
-      Files.write(applicationResource.getContent(), resourceFile, Charsets.UTF_8);
+      Files.write(resourceFile.toPath(), List.of(applicationResource.getContent()), Charsets.UTF_8);
     }
   }
 
@@ -163,7 +163,7 @@ public class RecompilerTest extends TestCase {
     PrintWriterTreeLogger logger = new PrintWriterTreeLogger();
     logger.setMaxDetail(TreeLogger.ERROR);
 
-    File sourcePath = Files.createTempDir();
+    File sourcePath = createTempDir();
     // Setup options to perform a per-file compile and compile the given module.
     Options options = new Options();
     options.parseArgs(new String[] {
@@ -175,12 +175,12 @@ public class RecompilerTest extends TestCase {
         fooResource);
     writeResourcesTo(originalResources, sourcePath);
 
-    File baseCacheDir = Files.createTempDir();
+    File baseCacheDir = createTempDir();
     UnitCache unitCache = UnitCacheSingleton.get(
         logger, null, baseCacheDir, new CompilerOptionsImpl(options));
     MinimalRebuildCacheManager minimalRebuildCacheManager =
         new MinimalRebuildCacheManager(logger, baseCacheDir, ImmutableMap.<String, String>of());
-    Recompiler recompiler = new Recompiler(OutboxDir.create(Files.createTempDir(), logger), null,
+    Recompiler recompiler = new Recompiler(OutboxDir.create(createTempDir(), logger), null,
         moduleName, options, unitCache, minimalRebuildCacheManager);
     Outbox outbox = new Outbox("Transactional Cache", recompiler, options, logger);
     OutboxTable outboxTable = new OutboxTable();
@@ -211,7 +211,7 @@ public class RecompilerTest extends TestCase {
     PrintWriterTreeLogger logger = new PrintWriterTreeLogger();
     logger.setMaxDetail(TreeLogger.ERROR);
 
-    File sourcePath = Files.createTempDir();
+    File sourcePath = createTempDir();
     // Setup options to perform a per-file compile and compile the given module.
     Options options = new Options();
     options.parseArgs(new String[] {
@@ -223,12 +223,12 @@ public class RecompilerTest extends TestCase {
         fooResource);
     writeResourcesTo(originalResources, sourcePath);
 
-    File baseCacheDir = Files.createTempDir();
+    File baseCacheDir = createTempDir();
     UnitCache unitCache = UnitCacheSingleton.get(
         logger, null, baseCacheDir, new CompilerOptionsImpl(options));
     MinimalRebuildCacheManager minimalRebuildCacheManager =
         new MinimalRebuildCacheManager(logger, baseCacheDir, ImmutableMap.<String, String>of());
-    Recompiler recompiler = new Recompiler(OutboxDir.create(Files.createTempDir(), logger), null,
+    Recompiler recompiler = new Recompiler(OutboxDir.create(createTempDir(), logger), null,
         moduleName, options, unitCache, minimalRebuildCacheManager);
     Outbox outbox = new Outbox("Transactional Cache", recompiler, options, logger);
     OutboxTable outboxTable = new OutboxTable();
@@ -275,5 +275,9 @@ public class RecompilerTest extends TestCase {
     Job job = outbox.makeJob(bindingProperties, logger);
     runner.submit(job);
     return job.waitForResult();
+  }
+
+  private static File createTempDir() throws IOException {
+    return Files.createTempDirectory("RecompilerTest").toFile();
   }
 }

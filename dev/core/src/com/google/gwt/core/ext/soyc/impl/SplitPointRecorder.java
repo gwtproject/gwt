@@ -29,7 +29,6 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.zip.GZIPOutputStream;
 
-
 /**
  * Records split points to a file for Compile Reports.
  */

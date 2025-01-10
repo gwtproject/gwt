@@ -107,7 +107,8 @@ public final class Utility {
    * @return A {@link File} representing a directory that now exists.
    * @throws IOException If the directory is not found and/or cannot be created.
    * @deprecated Consider using {@link Files#createDirectories(Path, FileAttribute[])} instead - if
-   * logging or errors are expected, consider inlining this method, as there is no exact replacement.
+   * logging or errors are expected, consider inlining this method, as there is no exact
+   * replacement.
    */
   public static File getDirectory(File parent, String dirName, boolean create)
       throws IOException {
@@ -140,7 +141,8 @@ public final class Utility {
    * @return A {@link File} representing a directory that now exists.
    * @throws IOException If the directory is not found and/or cannot be created.
    * @deprecated Consider using {@link Files#createDirectories(Path, FileAttribute[])} instead - if
-   * logging or errors are expected, consider inlining this method, as there is no exact replacement.
+   * logging or errors are expected, consider inlining this method, as there is no exact
+   * replacement.
    */
   public static File getDirectory(String dirPath, boolean create)
       throws IOException {
@@ -156,7 +158,8 @@ public final class Utility {
    * @return the contents of the file
    * @throws IOException if the file could not be found or an error occurred
    *           while reading it
-   * @deprecated If writing a linker, use {@link com.google.gwt.core.ext.linker.LinkerUtils#readClasspathFileAsString(String)} instead.
+   * @deprecated If writing a linker, use
+   * {@link com.google.gwt.core.ext.linker.LinkerUtils#readClasspathFileAsString(String)} instead.
    */
   public static String getFileFromClassPath(String partialPath)
       throws IOException {
@@ -195,7 +198,8 @@ public final class Utility {
   }
 
   /**
-   * @deprecated use {@link InputStream#transferTo(OutputStream)} instead, letting it buffer internally.
+   * @deprecated use {@link InputStream#transferTo(OutputStream)} instead, letting it buffer
+   * internally.
    */
   public static void streamOut(InputStream in, OutputStream out, int bufferSize)
       throws IOException {

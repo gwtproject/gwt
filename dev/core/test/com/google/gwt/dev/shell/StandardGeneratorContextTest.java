@@ -37,6 +37,7 @@ import junit.framework.TestCase;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -305,7 +306,10 @@ public class StandardGeneratorContextTest extends TestCase {
     assertTrue(artifactSet.contains(res));
 
     // Read the file.
-    byte[] arrayRead = Util.readStreamAsBytes(res.getContents(mockLogger));
+    byte[] arrayRead;
+    try (InputStream contents = res.getContents(mockLogger)) {
+      arrayRead = contents.readAllBytes();
+    }
     assertTrue(Arrays.equals(arrayWritten, arrayRead));
   }
 

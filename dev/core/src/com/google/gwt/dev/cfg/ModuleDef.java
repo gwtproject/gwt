@@ -332,7 +332,8 @@ public class ModuleDef implements DepsInfoProvider {
   public synchronized String findServletForPath(String actual) {
     // Walk in backwards sorted order to find the longest path match first.
     Set<Entry<String, String>> entrySet = servletClassNamesByPath.entrySet();
-    Entry<String, String>[] entries = Util.toArray(Entry.class, entrySet);
+    //noinspection unchecked
+    Entry<String, String>[] entries = entrySet.toArray(Entry[]::new);
     Arrays.sort(entries, REV_NAME_CMP);
     for (int i = 0, n = entries.length; i < n; ++i) {
       String mapping = entries[i].getKey();

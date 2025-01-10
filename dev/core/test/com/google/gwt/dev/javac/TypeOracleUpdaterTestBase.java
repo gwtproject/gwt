@@ -121,15 +121,16 @@ public abstract class TypeOracleUpdaterTestBase extends TestCase {
    * A mutable Java resource.
    */
   protected static abstract class MutableJavaResource extends MockJavaResource {
-    private static byte[] getByteCode(Class<?> aClass) {
+    private static byte[] getByteCode(Class<?> aClass) throws IOException {
       String resourcePath = aClass.getName().replace(".", "/") + ".class";
       ClassLoader loader = aClass.getClassLoader();
       if (loader == null && aClass.getName().startsWith("java.")) {
         loader = Thread.currentThread().getContextClassLoader();
       }
-      InputStream istream = loader.getResourceAsStream(resourcePath);
-      assertNotNull(istream);
-      return Util.readStreamAsBytes(istream);
+      try (InputStream istream = loader.getResourceAsStream(resourcePath)) {
+        assertNotNull(istream);
+        return istream.readAllBytes();
+      }
     }
 
     // For building the type oracle from bytecode

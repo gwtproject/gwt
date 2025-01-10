@@ -24,6 +24,7 @@ import org.eclipse.jdt.core.compiler.CategorizedProblem;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
 
@@ -151,7 +152,7 @@ public abstract class CompilationUnitBuilder {
       }
       byte[] content = out.toByteArray();
       contentId = new ContentId(getTypeName(), Util.computeStrongName(content));
-      return Util.toString(content);
+      return new String(content, StandardCharsets.UTF_8);
     }
 
     @Override

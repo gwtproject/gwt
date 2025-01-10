@@ -14,7 +14,6 @@
 package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
-import com.google.gwt.dev.util.Util;
 
 import java.util.Objects;
 
@@ -37,7 +36,7 @@ public final class JsRegExp extends JsValueLiteral {
     if (!(that instanceof JsRegExp)) {
       return false;
     }
-    if (!Util.equalsNullCheck(flags, ((JsRegExp) that).flags)) return false;
+    if (!Objects.equals(flags, ((JsRegExp) that).flags)) return false;
     return Objects.equals(pattern, ((JsRegExp) that).pattern);
   }
 

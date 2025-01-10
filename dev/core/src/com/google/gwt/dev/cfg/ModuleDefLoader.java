@@ -28,6 +28,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.io.Closeables;
 
 import java.io.File;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -308,20 +309,16 @@ public class ModuleDefLoader {
 
     // Parse it.
     //
-    Reader r = null;
-    try {
-      r = Util.createReader(logger, moduleURL);
+    try (Reader r = new InputStreamReader(moduleURL.openStream())) {
       ModuleDefSchema schema =
           new ModuleDefSchema(logger, this, moduleName, moduleURL, moduleDir, moduleDef);
       ReflectiveParser.parse(logger, schema, r);
     } catch (UnableToCompleteException e) {
       // The error has already been logged.
-      throw  e;
+      throw e;
     } catch (Throwable e) {
       logger.log(TreeLogger.ERROR, "Unexpected error while processing XML", e);
       throw new UnableToCompleteException();
-    } finally {
-      Closeables.closeQuietly(r);
     }
   }
 

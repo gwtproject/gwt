@@ -88,7 +88,7 @@ class PrecompilationContextCreator {
               // Record the correct answer into each permutation.
               permutations[i].putRebindAnswer(requestTypeName, resultTypeName);
             }
-            String[] result = Util.toArray(String.class, answers);
+            String[] result = answers.toArray(String[]::new);
             getAllRebindsEvent.end();
             return result;
           }

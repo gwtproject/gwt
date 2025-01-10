@@ -111,7 +111,7 @@ public class DiskCache {
    * @return the String that was written
    */
   public String readString(long token) {
-    return Util.toString(readByteArray(token));
+    return new String(readByteArray(token), UTF_8);
   }
 
   /**

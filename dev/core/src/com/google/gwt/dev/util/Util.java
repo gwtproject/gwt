@@ -26,7 +26,6 @@ import com.google.gwt.util.tools.shared.StringUtils;
 
 import javax.lang.model.SourceVersion;
 import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -138,8 +137,8 @@ public final class Util {
    */
   public static void copy(TreeLogger logger, InputStream is, OutputStream os)
       throws UnableToCompleteException {
-    try {
-      copy(is, os);
+    try (is; os) {
+      is.transferTo(os);
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Error during copy", e);
       throw new UnableToCompleteException();
@@ -425,9 +424,7 @@ public final class Util {
    */
   public static byte[] readStreamAsBytes(InputStream in) {
     try {
-      ByteArrayOutputStream out = new ByteArrayOutputStream(1024);
-      copy(in, out);
-      return out.toByteArray();
+      return in.readAllBytes();
     } catch (IOException e) {
       return null;
     }
@@ -449,12 +446,7 @@ public final class Util {
    */
   public static String readStreamAsString(InputStream in) {
     try {
-      ByteArrayOutputStream out = new ByteArrayOutputStream(1024);
-      copy(in, out);
-      return out.toString(DEFAULT_ENCODING);
-    } catch (UnsupportedEncodingException e) {
-      throw new RuntimeException(
-          "The JVM does not support the compiler's default encoding.", e);
+      return new String(in.readAllBytes(), StandardCharsets.UTF_8);
     } catch (IOException e) {
       // TODO(zundel): Consider allowing this exception out. The pattern in this
       // file is to convert IOException to null, but in references to this
@@ -483,7 +475,7 @@ public final class Util {
   public static char[] readURLAsChars(URL url) {
     byte[] bytes = readURLAsBytes(url);
     if (bytes != null) {
-      return toString(bytes, DEFAULT_ENCODING).toCharArray();
+      return new String(bytes, StandardCharsets.UTF_8).toCharArray();
     }
 
     return null;
@@ -495,7 +487,7 @@ public final class Util {
   public static String readURLAsString(URL url) {
     byte[] bytes = readURLAsBytes(url);
     if (bytes != null) {
-      return toString(bytes, DEFAULT_ENCODING);
+      return new String(bytes, StandardCharsets.UTF_8);
     }
 
     return null;
@@ -614,8 +606,8 @@ public final class Util {
    * size. You can definitely downcast the result to T[] if T is the specified
    * component type.
    *
-   * Class<? super T> is used to allow creation of generic types, such as
-   * Map.Entry<K,V> since we can only pass in Map.Entry.class.
+   * Class&lt;? super T> is used to allow creation of generic types, such as
+   * Map.Entry&lt;K,V> since we can only pass in Map.Entry.class.
    */
   @SuppressWarnings("unchecked")
   public static <T> T[] toArray(Class<? super T> componentType,
@@ -630,7 +622,7 @@ public final class Util {
    * must be encoded using the compiler's default encoding.
    */
   public static String toString(byte[] bytes) {
-    return toString(bytes, DEFAULT_ENCODING);
+    return new String(bytes, StandardCharsets.UTF_8);
   }
 
   /**

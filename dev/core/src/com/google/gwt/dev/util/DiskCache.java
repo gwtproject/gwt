@@ -23,6 +23,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 /**
  * A nifty class that lets you squirrel away data on the file system. Write
  * once, read many times. Instance of this are thread-safe by way of internal
@@ -213,7 +215,7 @@ public class DiskCache {
    * @return a token to retrieve the data later
    */
   public long writeString(String str) {
-    return writeByteArray(Util.getBytes(str));
+    return writeByteArray(str.getBytes(UTF_8));
   }
 
   /**

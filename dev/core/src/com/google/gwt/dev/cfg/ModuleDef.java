@@ -45,6 +45,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
+import javax.lang.model.SourceVersion;
 import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -97,7 +98,7 @@ public class ModuleDef implements DepsInfoProvider {
     String[] parts = moduleName.split("\\.");
     for (int i = 0; i < parts.length - 1; i++) {
       String part = parts[i];
-      if (!Util.isValidJavaIdent(part)) {
+      if (!SourceVersion.isIdentifier(part)) {
         return false;
       }
     }

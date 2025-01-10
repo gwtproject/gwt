@@ -15,8 +15,6 @@
  */
 package com.google.gwt.dev.util;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
@@ -26,14 +24,7 @@ import com.google.gwt.thirdparty.guava.common.io.Closeables;
 import com.google.gwt.util.tools.Utility;
 import com.google.gwt.util.tools.shared.StringUtils;
 
-import org.w3c.dom.Attr;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.Text;
-
+import javax.lang.model.SourceVersion;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -47,7 +38,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -57,16 +47,19 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * A smattering of useful methods. Methods in this class are candidates for
  * being moved to {@link com.google.gwt.util.tools.Utility} if they would be
  * generally useful to tool writers, and don't involve TreeLogger.
  */
-// TODO: remove stream functions and replace with Guava.
+@Deprecated
 public final class Util {
 
   public static String DEFAULT_ENCODING = "UTF-8";
@@ -132,7 +125,7 @@ public final class Util {
 
   public static void copy(InputStream is, OutputStream os) throws IOException {
     try {
-      copyNoClose(is, os);
+      is.transferTo(os);
     } finally {
       Closeables.closeQuietly(is);
       os.close();
@@ -159,15 +152,7 @@ public final class Util {
    */
   public static void copyNoClose(InputStream is, OutputStream os)
       throws IOException {
-    byte[] buf = takeThreadLocalBuf();
-    try {
-      int i;
-      while ((i = is.read(buf)) != -1) {
-        os.write(buf, 0, i);
-      }
-    } finally {
-      releaseThreadLocalBuf(buf);
-    }
+    is.transferTo(os);
   }
 
   public static Reader createReader(TreeLogger logger, URL url)
@@ -184,10 +169,7 @@ public final class Util {
    * Equality check through equals() that is also satisfied if both objects are null.
    */
   public static boolean equalsNullCheck(Object thisObject, Object thatObject) {
-    if (thisObject == null) {
-      return thatObject == null;
-    }
-    return thisObject.equals(thatObject);
+    return Objects.equals(thisObject, thatObject);
   }
 
   /**
@@ -273,12 +255,7 @@ public final class Util {
    * Returns a byte-array representing the default encoding for a String.
    */
   public static byte[] getBytes(String s) {
-    try {
-      return s.getBytes(DEFAULT_ENCODING);
-    } catch (UnsupportedEncodingException e) {
-      throw new RuntimeException(
-          "The JVM does not support the compiler's default encoding.", e);
-    }
+    return s.getBytes(StandardCharsets.UTF_8);
   }
 
   /**
@@ -357,21 +334,7 @@ public final class Util {
   }
 
   public static boolean isValidJavaIdent(String token) {
-    if (token.length() == 0) {
-      return false;
-    }
-
-    if (!Character.isJavaIdentifierStart(token.charAt(0))) {
-      return false;
-    }
-
-    for (int i = 1, n = token.length(); i < n; i++) {
-      if (!Character.isJavaIdentifierPart(token.charAt(i))) {
-        return false;
-      }
-    }
-
-    return true;
+    return SourceVersion.isIdentifier(token);
   }
 
   /**
@@ -431,15 +394,10 @@ public final class Util {
   }
 
   public static byte[] readFileAsBytes(File file) {
-    FileInputStream fileInputStream = null;
     try {
-      fileInputStream = new FileInputStream(file);
-      int length = (int) file.length();
-      return readBytesFromInputStream(fileInputStream, length);
+      return Files.readAllBytes(file.toPath());
     } catch (IOException e) {
       return null;
-    } finally {
-      Closeables.closeQuietly(fileInputStream);
     }
   }
 
@@ -455,12 +413,11 @@ public final class Util {
   }
 
   public static String readFileAsString(File file) {
-    byte[] bytes = readFileAsBytes(file);
-    if (bytes != null) {
-      return toString(bytes, DEFAULT_ENCODING);
+    try {
+      return Files.readString(file.toPath(), StandardCharsets.UTF_8);
+    } catch (IOException e) {
+      return null;
     }
-
-    return null;
   }
 
   /**
@@ -752,7 +709,7 @@ public final class Util {
     // No need to check mkdirs result because an IOException will occur anyway
     file.getParentFile().mkdirs();
     try (FileOutputStream stream = new FileOutputStream(file);
-         BufferedWriter buffered = new BufferedWriter(new OutputStreamWriter(stream, UTF_8))) {
+         BufferedWriter buffered = new BufferedWriter(new OutputStreamWriter(stream, StandardCharsets.UTF_8))) {
       buffered.write(string);
     } catch (IOException e) {
       return false;
@@ -765,7 +722,7 @@ public final class Util {
     // No need to check mkdirs result because an IOException will occur anyway
     file.getParentFile().mkdirs();
     try (FileOutputStream stream = new FileOutputStream(file);
-         BufferedWriter buffered = new BufferedWriter(new OutputStreamWriter(stream, UTF_8))) {
+         BufferedWriter buffered = new BufferedWriter(new OutputStreamWriter(stream, StandardCharsets.UTF_8))) {
       buffered.write(string);
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to write file: " + file.getAbsolutePath(), e);
@@ -838,7 +795,6 @@ public final class Util {
       start = end;
     }
   }
-
   /**
    * Reads the specified number of bytes from the {@link InputStream}.
    *
@@ -890,107 +846,6 @@ public final class Util {
     return null;
   }
 
-  private static void writeAttribute(PrintWriter w, Attr attr, int depth)
-      throws IOException {
-    w.write(attr.getName());
-    w.write('=');
-    Node c = attr.getFirstChild();
-    while (c != null) {
-      w.write('"');
-      writeNode(w, c, depth);
-      w.write('"');
-      c = c.getNextSibling();
-    }
-  }
-
-  private static void writeDocument(PrintWriter w, Document d)
-      throws IOException {
-    w.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-    Node c = d.getFirstChild();
-    while (c != null) {
-      writeNode(w, c, 0);
-      c = c.getNextSibling();
-    }
-  }
-
-  private static void writeElement(PrintWriter w, Element el, int depth)
-      throws IOException {
-    String tagName = el.getTagName();
-
-    writeIndent(w, depth);
-    w.write('<');
-    w.write(tagName);
-    NamedNodeMap attrs = el.getAttributes();
-    for (int i = 0, n = attrs.getLength(); i < n; ++i) {
-      w.write(' ');
-      writeNode(w, attrs.item(i), depth);
-    }
-
-    Node c = el.getFirstChild();
-    if (c != null) {
-      // There is at least one child.
-      //
-      w.println('>');
-
-      // Write the children.
-      //
-      while (c != null) {
-        writeNode(w, c, depth + 1);
-        w.println();
-        c = c.getNextSibling();
-      }
-
-      // Write the closing tag.
-      //
-      writeIndent(w, depth);
-      w.write("</");
-      w.write(tagName);
-      w.print('>');
-    } else {
-      // There are no children, so just write the short form close.
-      //
-      w.print("/>");
-    }
-  }
-
-  private static void writeIndent(PrintWriter w, int depth) {
-    for (int i = 0; i < depth; ++i) {
-      w.write('\t');
-    }
-  }
-
-  private static void writeNode(PrintWriter w, Node node, int depth)
-      throws IOException {
-    short nodeType = node.getNodeType();
-    switch (nodeType) {
-      case Node.ELEMENT_NODE:
-        writeElement(w, (Element) node, depth);
-        break;
-      case Node.ATTRIBUTE_NODE:
-        writeAttribute(w, (Attr) node, depth);
-        break;
-      case Node.DOCUMENT_NODE:
-        writeDocument(w, (Document) node);
-        break;
-      case Node.TEXT_NODE:
-        writeText(w, (Text) node);
-        break;
-
-      case Node.COMMENT_NODE:
-      case Node.CDATA_SECTION_NODE:
-      case Node.ENTITY_REFERENCE_NODE:
-      case Node.ENTITY_NODE:
-      case Node.PROCESSING_INSTRUCTION_NODE:
-      default:
-        throw new RuntimeException("Unsupported DOM node type: " + nodeType);
-    }
-  }
-
-  private static void writeText(PrintWriter w, Text text) throws DOMException {
-    String nodeValue = text.getNodeValue();
-    String escaped = escapeXml(nodeValue);
-    w.write(escaped);
-  }
 
   /**
    * Not instantiable.

@@ -109,7 +109,7 @@ public class Precompilation implements PrecompilationResult {
       ClassNotFoundException {
     stream.defaultReadObject();
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    Util.copyNoClose(stream, baos);
+    stream.transferTo(baos);
     generatedArtifactsSerialized = baos.toByteArray();
   }
 

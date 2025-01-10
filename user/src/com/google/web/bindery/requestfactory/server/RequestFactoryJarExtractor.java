@@ -96,6 +96,8 @@ import java.util.zip.ZipEntry;
 
 import javax.annotation.processing.Processor;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 /**
  * Used to extract RequestFactory client jars from {@code gwt-user.jar}.
  *
@@ -508,7 +510,7 @@ public class RequestFactoryJarExtractor {
         String destPath = getPackagePath(state.type) + state.source;
         if (sources.add(sourcePath) && loader.exists(sourcePath)) {
           String contents = Util.readStreamAsString(loader.getResourceAsStream(sourcePath));
-          emitter.emit(destPath, new ByteArrayInputStream(Util.getBytes(contents)));
+          emitter.emit(destPath, new ByteArrayInputStream(contents.getBytes(UTF_8)));
         }
       }
       return null;

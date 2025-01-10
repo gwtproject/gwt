@@ -41,6 +41,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 /**
  * Adds {@link ExternalTextResourcePrototype} objects to the bundle.
  */
@@ -105,7 +107,7 @@ public final class ExternalTextResourceGenerator extends
 
     urlExpression = context.deploy(
         context.getClientBundleType().getQualifiedSourceName().replace('.', '_')
-            + "_jsonbundle.txt", "text/plain", Util.getBytes(wrappedData.toString()), true);
+            + "_jsonbundle.txt", "text/plain", wrappedData.toString().getBytes(UTF_8), true);
 
     TypeOracle typeOracle = context.getGeneratorContext().getTypeOracle();
     JClassType stringType = typeOracle.findType(String.class.getName());
@@ -171,7 +173,7 @@ public final class ExternalTextResourceGenerator extends
   }
 
   private String getMd5HashOfData() {
-    return Util.computeStrongName(Util.getBytes(data.toString()));
+    return Util.computeStrongName(data.toString().getBytes(UTF_8));
   }
 
   private boolean shouldUseJsonp(ResourceContext context, TreeLogger logger) {

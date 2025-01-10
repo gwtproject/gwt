@@ -16,6 +16,8 @@ package com.google.gwt.dev.js.ast;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.util.Util;
 
+import java.util.Objects;
+
 /**
  * A JavaScript regular expression.
  */
@@ -35,8 +37,8 @@ public final class JsRegExp extends JsValueLiteral {
     if (!(that instanceof JsRegExp)) {
       return false;
     }
-    return Util.equalsNullCheck(flags,((JsRegExp) that).flags) &&
-        Util.equalsNullCheck(pattern,((JsRegExp) that).pattern);
+    if (!Util.equalsNullCheck(flags, ((JsRegExp) that).flags)) return false;
+    return Objects.equals(pattern, ((JsRegExp) that).pattern);
   }
 
   public String getFlags() {

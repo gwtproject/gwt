@@ -51,6 +51,7 @@ import com.google.gwt.resources.rg.BundleResourceGenerator;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
+import javax.lang.model.SourceVersion;
 import java.beans.Beans;
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -151,7 +152,7 @@ public abstract class AbstractClientBundleGenerator extends IncrementalGenerator
     public String define(JType type, String name, String initializer,
         boolean isStatic, boolean isFinal) {
 
-      assert Util.isValidJavaIdent(name) : name
+      assert SourceVersion.isIdentifier(name) : name
           + " is not a valid Java identifier";
 
       String ident = factory.createName(name);

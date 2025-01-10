@@ -24,6 +24,8 @@ import com.google.gwt.core.ext.typeinfo.TypeOracleException;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.resources.ext.ClientBundleRequirements;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 /**
  * Generates Multipart HTML files.
  */
@@ -74,7 +76,7 @@ public class MhtmlClientBundleGenerator extends AbstractClientBundleGenerator {
   protected void doCreateBundleForPermutation(TreeLogger logger,
       GeneratorContext generatorContext, FieldsImpl fields,
       String generatedSimpleSourceName) throws UnableToCompleteException {
-    String partialPath = Util.computeStrongName(Util.getBytes(generatedSimpleSourceName))
+    String partialPath = Util.computeStrongName(generatedSimpleSourceName.getBytes(UTF_8))
         + BUNDLE_EXTENSION;
     resourceContext.setPartialPath(partialPath);
     fields.setInitializer(bundleBaseIdent,

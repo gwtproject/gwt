@@ -18,7 +18,6 @@ package com.google.gwt.core.ext.linker;
 import com.google.gwt.core.ext.Linker;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.io.Closeables;
 
 import java.io.BufferedInputStream;
@@ -199,7 +198,7 @@ public abstract class EmittedArtifact extends Artifact<EmittedArtifact> {
     InputStream in = null;
     try {
       in = new BufferedInputStream(getContents(logger));
-      Util.copyNoClose(in, out);
+      in.transferTo(out);
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to copy artifact: " + getPartialPath(), e);
       throw new UnableToCompleteException();

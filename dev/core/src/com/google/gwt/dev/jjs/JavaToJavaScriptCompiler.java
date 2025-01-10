@@ -206,6 +206,8 @@ import java.util.zip.GZIPInputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 /**
  * A base for classes that compile Java <code>JProgram</code> representations into corresponding Js
  * source.<br />
@@ -1527,7 +1529,7 @@ public final class JavaToJavaScriptCompiler {
         SymbolData[] symbolMap, StatementRanges[] statementRanges) {
       byte[][] bytes = new byte[jsFragments.length][];
       for (int i = 0; i < jsFragments.length; ++i) {
-        bytes[i] = Util.getBytes(jsFragments[i]);
+        bytes[i] = jsFragments[i].getBytes(UTF_8);
       }
       this.js = bytes;
       this.jsStrongName = Util.computeStrongName(bytes);

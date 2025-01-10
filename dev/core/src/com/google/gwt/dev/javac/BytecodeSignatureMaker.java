@@ -28,6 +28,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 /**
  * Creates string hashes for various purposes from walking bytecode.
  */
@@ -60,7 +62,8 @@ public class BytecodeSignatureMaker {
     }
 
     public String getSignature() {
-      return Util.computeStrongName(Util.getBytes(getRawString()));
+      String s = getRawString();
+      return Util.computeStrongName(s.getBytes(UTF_8));
     }
 
     @Override

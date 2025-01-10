@@ -16,11 +16,12 @@
 package com.google.gwt.dev.javac.testing.impl;
 
 import com.google.gwt.dev.resource.Resource;
-import com.google.gwt.dev.util.Util;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.concurrent.atomic.AtomicLong;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * An in-memory {@link Resource}.
@@ -71,7 +72,8 @@ public abstract class MockResource extends Resource {
 
   @Override
   public InputStream openContents() {
-    return new ByteArrayInputStream(Util.getBytes(getContent().toString()));
+    String s = getContent().toString();
+    return new ByteArrayInputStream(s.getBytes(UTF_8));
   }
 
   @Override

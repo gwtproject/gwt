@@ -63,6 +63,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedSet;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 /**
  * Manages generators and generated units during a single compilation.
  */
@@ -149,7 +151,7 @@ public class StandardGeneratorContext implements GeneratorContext {
     @Override
     public void commit(TreeLogger logger) {
       String source = sw.toString();
-      strongHash = Util.computeStrongName(Util.getBytes(source));
+      strongHash = Util.computeStrongName(source.getBytes(UTF_8));
       sourceToken = diskCache.writeString(source);
       sw = null;
       creationTime = System.currentTimeMillis();

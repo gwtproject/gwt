@@ -34,6 +34,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 /**
  * Base class for tests that need a mock type compilation state and everything
  * that goes with it (compilation units, type oracle, resources, ...).
@@ -80,7 +82,8 @@ public abstract class CompilationStateTestBase extends TestCase {
 
         @Override
         public String getStrongHash() {
-          return Util.computeStrongName(Util.getBytes(getSource()));
+          String s = getSource();
+          return Util.computeStrongName(s.getBytes(UTF_8));
         }
 
         @Override

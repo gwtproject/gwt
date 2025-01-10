@@ -23,6 +23,8 @@ import com.google.gwt.dev.util.Util;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 /**
  * Provides basic functions common to all Linker implementations.
  */
@@ -100,7 +102,7 @@ public abstract class AbstractLinker extends Linker {
    */
   protected final SyntheticArtifact emitString(TreeLogger logger, String what,
       String partialPath) throws UnableToCompleteException {
-    return emitBytes(logger, Util.getBytes(what), partialPath);
+    return emitBytes(logger, what.getBytes(UTF_8), partialPath);
   }
 
   /**
@@ -114,7 +116,7 @@ public abstract class AbstractLinker extends Linker {
    */
   protected final SyntheticArtifact emitString(TreeLogger logger, String what,
       String partialPath, long lastModified) throws UnableToCompleteException {
-    return emitBytes(logger, Util.getBytes(what), partialPath, lastModified);
+    return emitBytes(logger, what.getBytes(UTF_8), partialPath, lastModified);
   }
 
   /**

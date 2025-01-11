@@ -1,11 +1,13 @@
-push-gwt.sh packages and deploys GWT to a local or remote Maven
-repository
+The `push-gwtproject.sh` script packages and deploys GWT to a local or
+remote Maven repository.
  
 To build GWT from main and deploy to your local repo:
 
+```bash
 > git switch main
 > ant clean dist-dev
 > maven/push-gwtproject.sh
+```
 
 Follow the prompts to set the GWT version # and path to the
 distribution ZIP (it will automatically find it in build/dist if
@@ -19,11 +21,14 @@ script. If the remote repo requires a username and password, define
 the repo in your ~/.m2/settings.xml as below and set GWT_MAVEN_REPO_ID
 = server id. In this example, GWT_MAVEN_REPO_ID would be "sonatype".
 
+```bash
 > git switch main
 > ant clean dist # must be dist, not dist-dev, to generate Javadocs
 > maven/push-gwtproject.sh
+```
 
 ~/.m2/settings.xml:
+```xml
 <settings>
   <localRepository>${env.M2_REPO}</localRepository>
   <servers>
@@ -34,6 +39,7 @@ the repo in your ~/.m2/settings.xml as below and set GWT_MAVEN_REPO_ID
     </server>
   </servers>
 </settings>
+```
 
 If the remote repo requires jar signing as does Sonatype (Maven
 Central), set up GPG on your local machine then enter the passphrase

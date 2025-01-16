@@ -36,5 +36,6 @@ public class SystemGetPropertyTest extends GWTTestCase {
     String expectedResult = "safari".equals(System.getProperty("user.agent")) ?
         "InSafari" : "NotInSafari";
     assertEquals(expectedResult, System.getProperty("someDynamicProperty"));
+    assertEquals("foo", System.getProperty("configPropertyUnset", "foo"));
   }
 }

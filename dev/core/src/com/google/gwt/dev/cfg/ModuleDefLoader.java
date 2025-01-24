@@ -25,7 +25,7 @@ import com.google.gwt.dev.util.xml.ReflectiveParser;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
-import com.google.gwt.util.tools.Utility;
+import com.google.gwt.thirdparty.guava.common.io.Closeables;
 
 import java.io.File;
 import java.io.Reader;
@@ -321,7 +321,7 @@ public class ModuleDefLoader {
       logger.log(TreeLogger.ERROR, "Unexpected error while processing XML", e);
       throw new UnableToCompleteException();
     } finally {
-      Utility.close(r);
+      Closeables.closeQuietly(r);
     }
   }
 

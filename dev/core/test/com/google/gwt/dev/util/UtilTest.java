@@ -13,9 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.core.ext.util;
-
-import com.google.gwt.dev.util.Util;
+package com.google.gwt.dev.util;
 
 import junit.framework.TestCase;
 
@@ -23,6 +21,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.URL;
 
 /**
  * Tests for some com.google.gwt.dev.util.Util methods.
@@ -103,5 +102,17 @@ public class UtilTest extends TestCase {
     } catch (IOException e) {
       fail("Got IOException");
     }
+  }
+
+  /** Tests that URLAsChars correctly processes unicode. */
+  public void testUnicode() {
+    URL r = this.getClass().getResource("unicodeTest.txt");
+    assertNotNull(r);
+
+    char[] x = Util.readURLAsChars(r);
+    assertEquals(2,x.length);
+    char a = '\u4F60';
+    assertEquals(x[0],a);
+    assertEquals(x[1],'\u597D');
   }
 }

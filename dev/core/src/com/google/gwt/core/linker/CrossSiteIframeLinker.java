@@ -26,6 +26,7 @@ import com.google.gwt.core.ext.linker.EmittedArtifact;
 import com.google.gwt.core.ext.linker.EmittedArtifact.Visibility;
 import com.google.gwt.core.ext.linker.LinkerOrder;
 import com.google.gwt.core.ext.linker.LinkerOrder.Order;
+import com.google.gwt.core.ext.linker.LinkerUtils;
 import com.google.gwt.core.ext.linker.ScriptReference;
 import com.google.gwt.core.ext.linker.Shardable;
 import com.google.gwt.core.ext.linker.impl.PropertiesMappingArtifact;
@@ -37,7 +38,6 @@ import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.TextOutput;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.base.Splitter;
-import com.google.gwt.util.tools.Utility;
 import com.google.gwt.util.tools.shared.StringUtils;
 
 import java.io.IOException;
@@ -548,7 +548,7 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     String js;
     if (jsSource.endsWith(".js")) {
       try {
-        js = Utility.getFileFromClassPath(jsSource);
+        js = LinkerUtils.readClasspathFileAsString(jsSource);
       } catch (IOException e) {
         logger.log(TreeLogger.ERROR, "Unable to read file: " + jsSource, e);
         throw new UnableToCompleteException();

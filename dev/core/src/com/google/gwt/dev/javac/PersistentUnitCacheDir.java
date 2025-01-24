@@ -26,7 +26,7 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
-import com.google.gwt.util.tools.Utility;
+import com.google.gwt.thirdparty.guava.common.io.Closeables;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -37,6 +37,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
 
@@ -259,9 +260,9 @@ class PersistentUnitCacheDir {
       logger.log(TreeLogger.TRACE, "Ignoring and deleting cache log "
           + cacheFile.getAbsolutePath() + " due to deserialization error.", e);
     } finally {
-      Utility.close(inputStream);
-      Utility.close(bis);
-      Utility.close(fis);
+      Closeables.closeQuietly(inputStream);
+      Closeables.closeQuietly(bis);
+      Closeables.closeQuietly(fis);
     }
 
     if (ok) {
@@ -380,13 +381,17 @@ class PersistentUnitCacheDir {
     }
 
     /**
-     * Closes the current file and deletes it if it's empty. If no file is open, does nothing.
+     * Closes the current file and deletes it if it's empty.
      */
     void close(TreeLogger logger) {
       logger.log(Type.TRACE,
           "Closing cache file: " + file + " (" + unitsWritten + " units written)");
 
-      Utility.close(stream);
+      try {
+        stream.close();
+      } catch (IOException e) {
+        logger.log(Type.WARN, "Error closing compilation unit cache file " + file, e);
+      }
 
       if (unitsWritten == 0) {
         // Remove useless empty file.
@@ -407,7 +412,16 @@ class PersistentUnitCacheDir {
         return new ObjectOutputStream(new BufferedOutputStream(fstream));
       } catch (IOException e) {
         logger.log(Type.ERROR, "Can't open persistent unit cache file", e);
-        Utility.close(fstream);
+        try {
+          if (fstream != null) {
+            fstream.close();
+            if (file.exists()) {
+              Files.delete(file.toPath());
+            }
+          }
+        } catch (IOException ignored) {
+          // We can't handle this, and already logged an error
+        }
         throw new UnableToCompleteException();
       }
     }

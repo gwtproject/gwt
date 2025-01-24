@@ -22,7 +22,6 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
 import com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer;
 import com.google.gwt.dev.jjs.impl.codesplitter.MultipleDependencyGraphRecorder;
-import com.google.gwt.util.tools.Utility;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -108,7 +107,10 @@ public class DependencyRecorder implements MultipleDependencyGraphRecorder {
 
   /**
    * Used to record dependencies of a program.
+   *
+   * @deprecated this method is unused internally, and may be removed in a future release.
    */
+  @Deprecated
   protected void recordDependenciesImpl(TreeLogger logger, JProgram jprogram) {
 
     logger = logger.branch(TreeLogger.DEBUG, "Creating dependencies file for the compile report");
@@ -129,7 +131,7 @@ public class DependencyRecorder implements MultipleDependencyGraphRecorder {
       printPost();
 
       flushOutput();
-      Utility.close(writer);
+      writer.close();
 
     } catch (Throwable e) {
       logger.log(TreeLogger.WARN, "Could not write dependency file; proceeding anyway.", e);

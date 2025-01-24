@@ -647,10 +647,22 @@ public final class String implements Comparable<String>, CharSequence,
       // subgroup handling
       NativeRegExp.Match matchObj = compiled.exec(trail);
       if (matchObj == null || trail == "" || (count == (maxMatch - 1) && maxMatch > 0)) {
+        // At the end of the string, or we have performed the maximum number of matches,
+        // record the remaining string and break
         out[count] = trail;
         break;
       } else {
         int matchIndex = matchObj.getIndex();
+
+        if (lastTrail == null && matchIndex == 0 && matchObj.asArray()[0].length() == 0) {
+          // As of Java 8, we should discard the first zero-length match if it is the beginning of
+          // the string. Do not increment the count, and do not add to the output array.
+          trail = trail.substring(matchIndex + matchObj.asArray()[0].length(), trail.length());
+          compiled.lastIndex = 0;
+          lastTrail = trail;
+          continue;
+        }
+
         out[count] = trail.substring(0, matchIndex);
         trail = trail.substring(matchIndex + matchObj.asArray()[0].length(), trail.length());
         // Force the compiled pattern to reset internal state

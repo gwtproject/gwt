@@ -36,6 +36,10 @@ import com.google.gwt.resources.ext.SupportsGeneratorResultCaching;
 import com.google.gwt.resources.rg.ImageBundleBuilder.Arranger;
 import com.google.gwt.resources.rg.ImageBundleBuilder.ImageRect;
 import com.google.gwt.safehtml.shared.UriUtils;
+import com.google.gwt.thirdparty.guava.common.hash.Funnels;
+import com.google.gwt.thirdparty.guava.common.hash.Hasher;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
+import com.google.gwt.thirdparty.guava.common.io.ByteStreams;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.gwt.user.rebind.StringSourceWriter;
 import com.google.gwt.util.tools.Utility;
@@ -43,9 +47,11 @@ import com.google.gwt.util.tools.Utility;
 import java.awt.geom.AffineTransform;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -420,23 +426,31 @@ public final class ImageResourceGenerator extends AbstractResourceGenerator
 
       URL resource = resources[0];
 
-      LocalizedImage toReturn = new LocalizedImage(image, resource);
-      return toReturn;
+      try {
+        return new LocalizedImage(image, resource);
+      } catch (IOException e) {
+        logger.log(TreeLogger.ERROR, "Unable to read image data", e);
+        throw new UnableToCompleteException();
+      }
     }
 
-    private static String key(ImageResourceDeclaration image, URL url) {
-      return Util.computeStrongName(Util.readURLAsBytes(url)) + ":"
-          + image.getScaleHeight() + ":" + image.getScaleWidth();
+    private static String key(ImageResourceDeclaration image, URL url) throws IOException {
+      try (InputStream inputStream = url.openStream()) {
+        Hasher hasher = Hashing.murmur3_128().newHasher();
+        ByteStreams.copy(inputStream, Funnels.asOutputStream(hasher));
+        String hash = hasher.hash().toString().toUpperCase(Locale.ROOT);
+        return hash + ":" + image.getScaleHeight() + ":" + image.getScaleWidth();
+      }
     }
 
     private final ImageResourceDeclaration image;
     private final URL url;
 
-    public LocalizedImage(LocalizedImage other, URL alternateUrl) {
+    public LocalizedImage(LocalizedImage other, URL alternateUrl) throws IOException {
       this(other.image, alternateUrl);
     }
 
-    private LocalizedImage(ImageResourceDeclaration image, URL url) {
+    private LocalizedImage(ImageResourceDeclaration image, URL url) throws IOException {
       super(key(image, url));
       this.image = image;
       this.url = url;

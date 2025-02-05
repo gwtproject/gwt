@@ -15,6 +15,8 @@
  */
 package com.google.gwt.resources.rebind.context;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -26,8 +28,6 @@ import com.google.gwt.thirdparty.guava.common.hash.HashCode;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import java.util.Locale;
-
-import static java.nio.charset.StandardCharsets.*;
 
 /**
  * Generates Multipart HTML files.

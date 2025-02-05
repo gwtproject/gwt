@@ -22,7 +22,6 @@ import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import java.io.IOException;

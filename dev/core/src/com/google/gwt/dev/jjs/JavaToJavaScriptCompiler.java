@@ -184,9 +184,9 @@ import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
-
 import com.google.gwt.thirdparty.guava.common.hash.Hasher;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
+
 import org.xml.sax.SAXException;
 
 import java.io.BufferedInputStream;

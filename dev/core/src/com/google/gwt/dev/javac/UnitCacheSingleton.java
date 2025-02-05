@@ -18,9 +18,7 @@ package com.google.gwt.dev.javac;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.jjs.JJSOptions;
-import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
-import com.google.gwt.util.tools.shared.StringUtils;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;

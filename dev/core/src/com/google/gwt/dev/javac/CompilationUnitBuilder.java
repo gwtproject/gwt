@@ -18,9 +18,9 @@ package com.google.gwt.dev.javac;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.Util;
-
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 import com.google.gwt.thirdparty.guava.common.hash.HashingOutputStream;
+
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 
 import java.io.ByteArrayOutputStream;

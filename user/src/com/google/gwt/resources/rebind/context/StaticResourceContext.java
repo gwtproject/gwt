@@ -23,9 +23,11 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.dev.util.Util;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Locale;
 
 class StaticResourceContext extends AbstractResourceContext {
   /**
@@ -59,7 +61,7 @@ class StaticResourceContext extends AbstractResourceContext {
     // Determine the final filename for the resource's file
     String outputName;
     if (Boolean.parseBoolean(enableRenaming)) {
-      String strongName = Util.computeStrongName(data);
+      String strongName = Hashing.murmur3_128().hashBytes(data).toString().toUpperCase(Locale.ROOT);
 
       // Determine the extension of the original file
       String extension;

@@ -40,6 +40,11 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
+import com.google.gwt.thirdparty.guava.common.hash.Funnels;
+import com.google.gwt.thirdparty.guava.common.hash.Hasher;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
+import com.google.gwt.thirdparty.guava.common.hash.HashingOutputStream;
+import com.google.gwt.thirdparty.guava.common.io.ByteStreams;
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.ImportReference;
@@ -55,6 +60,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -553,9 +559,7 @@ public class CompilationStateBuilder {
   }
 
   private ContentId getResourceContentId(Resource resource) {
-    ByteArrayOutputStream out = new ByteArrayOutputStream(1024);
-    try {
-      InputStream in = resource.openContents();
+    try (InputStream in = resource.openContents()) {
       /**
        * In most cases openContents() will throw an exception, however in the case of a
        * ZipFileResource it might return null causing an NPE in Util.copyNoClose(), see issue 4359.
@@ -563,13 +567,13 @@ public class CompilationStateBuilder {
       if (in == null) {
         throw new RuntimeException("Unexpected error reading resource '" + resource + "'");
       }
-      // TODO: deprecate com.google.gwt.dev.util.Util and use Guava.
-      Util.copy(in, out);
+      Hasher hasher = Hashing.murmur3_128().newHasher();
+      ByteStreams.copy(in, Funnels.asOutputStream(hasher));
+      String hash = hasher.hash().toString().toUpperCase(Locale.ROOT);
+      return new ContentId(Shared.getTypeName(resource), hash);
     } catch (IOException e) {
       throw new RuntimeException("Unexpected error reading resource '" + resource + "'", e);
     }
-    byte[] content = out.toByteArray();
-    return new ContentId(Shared.getTypeName(resource), Util.computeStrongName(content));
   }
 
   /**

@@ -19,9 +19,11 @@ import com.google.gwt.core.ext.Linker;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.Util;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.Locale;
 
 /**
  * Provides basic functions common to all Linker implementations.
@@ -132,7 +134,8 @@ public abstract class AbstractLinker extends Linker {
   protected final SyntheticArtifact emitWithStrongName(TreeLogger logger,
       byte[] what, String prefix, String suffix)
       throws UnableToCompleteException {
-    String strongName = prefix + Util.computeStrongName(what) + suffix;
+    String hash = Hashing.murmur3_128().hashBytes(what).toString().toUpperCase(Locale.ROOT);
+    String strongName = prefix + hash + suffix;
     return emitBytes(logger, what, strongName);
   }
 
@@ -152,7 +155,8 @@ public abstract class AbstractLinker extends Linker {
   protected final SyntheticArtifact emitWithStrongName(TreeLogger logger,
       byte[] what, String prefix, String suffix, long lastModified)
       throws UnableToCompleteException {
-    String strongName = prefix + Util.computeStrongName(what) + suffix;
+    String hash = Hashing.murmur3_128().hashBytes(what).toString().toUpperCase(Locale.ROOT);
+    String strongName = prefix + hash + suffix;
     return emitBytes(logger, what, strongName, lastModified);
   }
 }

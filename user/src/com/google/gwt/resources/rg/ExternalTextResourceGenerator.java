@@ -34,11 +34,14 @@ import com.google.gwt.resources.ext.ResourceContext;
 import com.google.gwt.resources.ext.ResourceGeneratorUtil;
 import com.google.gwt.resources.ext.SupportsGeneratorResultCaching;
 import com.google.gwt.safehtml.shared.UriUtils;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.gwt.user.rebind.StringSourceWriter;
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -80,7 +83,7 @@ public final class ExternalTextResourceGenerator extends
     sw.println(externalTextCacheIdent + ", ");
     sw.println(offsets.get(method.getName()).toString());
     if (shouldUseJsonp(context, logger)) {
-      sw.println(", \"" + getMd5HashOfData() + "\"");
+      sw.println(", \"" + getMurmurHashOfData() + "\"");
     }
     sw.outdent();
     sw.print(")");
@@ -95,7 +98,7 @@ public final class ExternalTextResourceGenerator extends
     StringBuffer wrappedData = new StringBuffer();
     if (shouldUseJsonp(context, logger)) {
       wrappedData.append(JSONP_CALLBACK_PREFIX);
-      wrappedData.append(getMd5HashOfData());
+      wrappedData.append(getMurmurHashOfData());
       wrappedData.append(".onSuccess(\n");
       wrappedData.append(data.toString());
       wrappedData.append(")");
@@ -170,8 +173,8 @@ public final class ExternalTextResourceGenerator extends
     offsets.put(method.getName(), hashes.get(toWrite));
   }
 
-  private String getMd5HashOfData() {
-    return Util.computeStrongName(Util.getBytes(data.toString()));
+  private String getMurmurHashOfData() {
+    return Hashing.murmur3_128().hashString(data, StandardCharsets.UTF_8).toString();
   }
 
   private boolean shouldUseJsonp(ResourceContext context, TreeLogger logger) {

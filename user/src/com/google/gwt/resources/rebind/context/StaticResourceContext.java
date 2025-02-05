@@ -72,7 +72,7 @@ class StaticResourceContext extends AbstractResourceContext {
         extension = "noext";
       }
 
-      // The name will be MD5.cache.ext
+      // The name will be <hash>.cache.ext
       outputName = strongName + ".cache." + extension;
     } else {
       outputName = suggestedFileName.substring(suggestedFileName.lastIndexOf('/') + 1);

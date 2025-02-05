@@ -19,10 +19,10 @@ import com.google.gwt.dev.util.CompilerVersion;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.cache.Cache;
 import com.google.gwt.thirdparty.guava.common.cache.CacheBuilder;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 import com.google.gwt.thirdparty.guava.common.util.concurrent.Futures;
 import com.google.gwt.thirdparty.guava.common.util.concurrent.MoreExecutors;
 import com.google.gwt.util.tools.Utility;
-import com.google.gwt.util.tools.shared.StringUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -32,6 +32,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -274,23 +275,26 @@ public class MinimalRebuildCacheManager {
     String currentWorkingDirectory = System.getProperty("user.dir");
     String compilerVersionHash = CompilerVersion.getHash();
     String permutationDescriptionString = permutationDescription.toString();
-    String optionsDescriptionString = " Options [";
+    StringBuilder optionsDescriptionString = new StringBuilder(" Options [");
     String separator = "";
-    for (Map.Entry entry : options.entrySet()) {
-      optionsDescriptionString +=
-          String.format("%s%s = %s", separator, entry.getKey(), entry.getValue());
+    for (Map.Entry<String, String> entry : options.entrySet()) {
+      optionsDescriptionString.append(String.format("%s%s = %s", separator, entry.getKey(), entry.getValue()));
       separator = ",";
     }
-    optionsDescriptionString += "]";
+    optionsDescriptionString.append("]");
 
-
-    String consistentHash = StringUtils.toHexString(Md5Utils.getMd5Digest((
-        compilerVersionHash
-            + moduleName
-            + currentWorkingDirectory
-            + permutationDescriptionString
-            + optionsDescriptionString)
-        .getBytes()));
+    String consistentHash = Hashing.murmur3_128().newHasher()
+        // Compiler hash is constant length, no need to write length
+        .putString(compilerVersionHash, StandardCharsets.UTF_8)
+        .putInt(moduleName.length())
+        .putString(moduleName, StandardCharsets.UTF_8)
+        .putInt(currentWorkingDirectory.length())
+        .putString(currentWorkingDirectory, StandardCharsets.UTF_8)
+        // permutationDescriptionString has start/end delimiter
+        .putString(permutationDescriptionString, StandardCharsets.UTF_8)
+        // optionsDescriptionString has start/end delimiter
+        .putString(optionsDescriptionString, StandardCharsets.UTF_8)
+        .hash().toString();
     return REBUILD_CACHE_PREFIX + "-" + consistentHash;
   }
 

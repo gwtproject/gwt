@@ -22,7 +22,6 @@ import com.google.gwt.thirdparty.guava.common.cache.CacheBuilder;
 import com.google.gwt.thirdparty.guava.common.util.concurrent.Futures;
 import com.google.gwt.thirdparty.guava.common.util.concurrent.MoreExecutors;
 import com.google.gwt.util.tools.Utility;
-import com.google.gwt.util.tools.shared.Md5Utils;
 import com.google.gwt.util.tools.shared.StringUtils;
 
 import java.io.BufferedInputStream;
@@ -283,6 +282,7 @@ public class MinimalRebuildCacheManager {
       separator = ",";
     }
     optionsDescriptionString += "]";
+
 
     String consistentHash = StringUtils.toHexString(Md5Utils.getMd5Digest((
         compilerVersionHash

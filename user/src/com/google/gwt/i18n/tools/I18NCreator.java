@@ -19,13 +19,13 @@ import com.google.gwt.i18n.client.Constants;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.i18n.client.Localizable;
 import com.google.gwt.i18n.client.Messages;
+import com.google.gwt.user.tools.CommandLineCreatorUtils;
 import com.google.gwt.user.tools.util.ArgHandlerEclipse;
 import com.google.gwt.user.tools.util.ArgHandlerIgnore;
 import com.google.gwt.user.tools.util.ArgHandlerOverwrite;
 import com.google.gwt.util.tools.ArgHandlerExtra;
 import com.google.gwt.util.tools.ArgHandlerOutDir;
 import com.google.gwt.util.tools.ToolBase;
-import com.google.gwt.util.tools.Utility;
 
 import java.io.File;
 import java.io.IOException;
@@ -131,7 +131,7 @@ public final class I18NCreator extends ToolBase {
       Class<? extends Localizable> interfaceToCreate) throws IOException {
 
     // Figure out the installation directory
-    String installPath = Utility.getInstallPath();
+    String installPath = CommandLineCreatorUtils.getInstallPath();
     String gwtUserPath = installPath + '/' + "gwt-user.jar";
     String gwtDevPath = installPath + '/' + "gwt-dev.jar";
 
@@ -163,10 +163,10 @@ public final class I18NCreator extends ToolBase {
     // Compute module name and directories
     //
     pos = clientPackageName.lastIndexOf('.');
-    File clientDir = Utility.getDirectory(outDir, "src", true);
+    File clientDir = CommandLineCreatorUtils.getDirectory(outDir, "src", true);
     if (pos >= 0) {
       String clientPackage = clientPackageName.replace('.', '/');
-      clientDir = Utility.getDirectory(clientDir, clientPackage, true);
+      clientDir = CommandLineCreatorUtils.getDirectory(clientDir, clientPackage, true);
     }
 
     // Create a map of replacements
@@ -185,7 +185,7 @@ public final class I18NCreator extends ToolBase {
 
     if (Messages.class == interfaceToCreate) {
       replacements.put("@createMessages", "-createMessages");
-      templateData = Utility.getFileFromClassPath(PACKAGE_PATH
+      templateData = CommandLineCreatorUtils.getFileFromClassPath(PACKAGE_PATH
           + "i18nMessages.propertiessrc");
     } else {
       if (ConstantsWithLookup.class == interfaceToCreate) {
@@ -199,26 +199,26 @@ public final class I18NCreator extends ToolBase {
       }
       // This same template works for both Constants and ConstantsWithLookup
       // classes
-      templateData = Utility.getFileFromClassPath(PACKAGE_PATH
+      templateData = CommandLineCreatorUtils.getFileFromClassPath(PACKAGE_PATH
           + "i18nConstants.propertiessrc");
     }
 
     // Populate the file from the template
-    File i18nPropertiesFile = Utility.createNormalFile(clientDir, interfaceName
+    File i18nPropertiesFile = CommandLineCreatorUtils.createNormalFile(clientDir, interfaceName
         + ".properties", overwrite, ignore);
     if (i18nPropertiesFile != null && templateData != null) {
-      Utility.writeTemplateFile(i18nPropertiesFile, templateData, replacements);
+      CommandLineCreatorUtils.writeTemplateFile(i18nPropertiesFile, templateData, replacements);
     }
 
     if (eclipse != null) {
       // Create an eclipse localizable creator launch config
       replacements.put("@projectName", eclipse);
-      File updateLaunchConfig = Utility.createNormalFile(outDir, interfaceName
+      File updateLaunchConfig = CommandLineCreatorUtils.createNormalFile(outDir, interfaceName
           + "-i18n" + ".launch", overwrite, ignore);
       if (updateLaunchConfig != null) {
-        String out = Utility.getFileFromClassPath(PACKAGE_PATH
+        String out = CommandLineCreatorUtils.getFileFromClassPath(PACKAGE_PATH
             + "I18N-update.launchsrc");
-        Utility.writeTemplateFile(updateLaunchConfig, out, replacements);
+        CommandLineCreatorUtils.writeTemplateFile(updateLaunchConfig, out, replacements);
       }
     }
 
@@ -229,12 +229,12 @@ public final class I18NCreator extends ToolBase {
     } else {
       extension = "";
     }
-    File gwti18n = Utility.createNormalFile(outDir, interfaceName + "-i18n"
+    File gwti18n = CommandLineCreatorUtils.createNormalFile(outDir, interfaceName + "-i18n"
         + extension, overwrite, ignore);
     if (gwti18n != null) {
-      String out = Utility.getFileFromClassPath(PACKAGE_PATH + "gwti18n"
+      String out = CommandLineCreatorUtils.getFileFromClassPath(PACKAGE_PATH + "gwti18n"
           + extension + "src");
-      Utility.writeTemplateFile(gwti18n, out, replacements);
+      CommandLineCreatorUtils.writeTemplateFile(gwti18n, out, replacements);
       if (extension.length() == 0) {
         Runtime.getRuntime().exec("chmod u+x " + gwti18n.getAbsolutePath());
       }

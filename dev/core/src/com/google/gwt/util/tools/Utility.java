@@ -15,10 +15,10 @@
  */
 package com.google.gwt.util.tools;
 
-import java.io.ByteArrayOutputStream;
+import com.google.gwt.dev.util.arg.SourceLevel;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.LineNumberReader;
@@ -27,33 +27,32 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.net.URI;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.Path;
+import java.nio.file.attribute.FileAttribute;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * A smattering of useful functions.
+ *
+ * @deprecated In a future release this class will be package protected.
  */
+@Deprecated(forRemoval = true, since = "2.13")
 public final class Utility {
 
-
   private static String sInstallPath = null;
-  /**
-   * A pattern that expresses version strings. It has two groups the prefix (a dotted integer
-   * sequence) and a suffix (a regular string)
-   *
-   * Examples: 1.6.7, 1.2_b10
-   *
-   */
-  private static Pattern versionPattern =
-      Pattern.compile("([0-9]+(?:\\.[0-9]+)*)((?:_[a-zA-Z0-9]+)?)");
 
   /**
    * Helper that ignores exceptions during close, because what are you going to
    * do?
+   *
+   * @deprecated Instead, use try-with-resources, or Guava's
+   * {@link com.google.gwt.thirdparty.guava.common.io.Closeables} to close quietly.
    */
   public static void close(AutoCloseable closeable) {
     try {
@@ -71,6 +70,8 @@ public final class Utility {
    * @return Handle to the file
    * @throws IOException If the file cannot be created, or if the file already
    *           existed and overwrite was false.
+   * @deprecated Consider using {@link Files#createFile(Path, FileAttribute[])} instead - if logging
+   * or errors are expected, consider inlining this method, as there is no exact replacement.
    */
   public static File createNormalFile(File parent, String fileName,
       boolean overwrite, boolean ignore) throws IOException {
@@ -105,6 +106,9 @@ public final class Utility {
    * @param create Create the directory if it does not already exist?
    * @return A {@link File} representing a directory that now exists.
    * @throws IOException If the directory is not found and/or cannot be created.
+   * @deprecated Consider using {@link Files#createDirectories(Path, FileAttribute[])} instead - if
+   * logging or errors are expected, consider inlining this method, as there is no exact
+   * replacement.
    */
   public static File getDirectory(File parent, String dirName, boolean create)
       throws IOException {
@@ -136,6 +140,9 @@ public final class Utility {
    * @param create Create the directory if it does not already exist?
    * @return A {@link File} representing a directory that now exists.
    * @throws IOException If the directory is not found and/or cannot be created.
+   * @deprecated Consider using {@link Files#createDirectories(Path, FileAttribute[])} instead - if
+   * logging or errors are expected, consider inlining this method, as there is no exact
+   * replacement.
    */
   public static File getDirectory(String dirPath, boolean create)
       throws IOException {
@@ -151,23 +158,23 @@ public final class Utility {
    * @return the contents of the file
    * @throws IOException if the file could not be found or an error occurred
    *           while reading it
+   * @deprecated If writing a linker, use
+   * {@link com.google.gwt.core.ext.linker.LinkerUtils#readClasspathFileAsString(String)} instead.
    */
   public static String getFileFromClassPath(String partialPath)
       throws IOException {
-    InputStream in = Utility.class.getClassLoader().getResourceAsStream(
-        partialPath);
-    try {
+    try (InputStream in = Utility.class.getClassLoader().getResourceAsStream(
+        partialPath)) {
       if (in == null) {
         throw new FileNotFoundException(partialPath);
       }
-      ByteArrayOutputStream os = new ByteArrayOutputStream();
-      streamOut(in, os, 1024);
-      return new String(os.toByteArray(), "UTF-8");
-    } finally {
-      close(in);
+      return new String(in.readAllBytes(), StandardCharsets.UTF_8);
     }
   }
 
+  /**
+   * @deprecated There is no replacement for this method, many usages of GWT have no install path.
+   */
   public static String getInstallPath() {
     if (sInstallPath == null) {
       computeInstallationPath();
@@ -184,33 +191,16 @@ public final class Utility {
    * @param prefix the initial characters of the new directory name
    * @return a newly-created temporary directory; the caller must delete this
    *          directory (either when done or on VM exit)
+   * @deprecated use {@link Files#createTempDirectory(Path, String, FileAttribute[])} instead.
    */
-  public static File makeTemporaryDirectory(File baseDir, String prefix)
-      throws IOException {
-    if (baseDir == null) {
-      baseDir = new File(System.getProperty("java.io.tmpdir"));
-    }
-    // No need to check the result of this mkdirs call because
-    // we will detect the subsequent failure
-    baseDir.mkdirs();
-
-    // Try this a few times due to non-atomic delete+mkdir operations.
-    for (int tries = 0; tries < 3; ++tries) {
-      File result = File.createTempFile(prefix, null, baseDir);
-      if (!result.delete()) {
-        throw new IOException("Couldn't delete temporary file "
-            + result.getAbsolutePath() + " to replace with a directory.");
-      }
-      if (result.mkdirs()) {
-        // Success.
-        return result;
-      }
-    }
-    throw new IOException(
-        "Couldn't create temporary directory after 3 tries in "
-            + baseDir.getAbsolutePath());
+  public static File makeTemporaryDirectory(File baseDir, String prefix) throws IOException {
+    return Files.createTempDirectory(baseDir.toPath(), prefix).toFile();
   }
 
+  /**
+   * @deprecated use {@link InputStream#transferTo(OutputStream)} instead, letting it buffer
+   * internally.
+   */
   public static void streamOut(InputStream in, OutputStream out, int bufferSize)
       throws IOException {
     assert (bufferSize >= 0);
@@ -229,13 +219,17 @@ public final class Utility {
     }
   }
 
+  /**
+   * @deprecated use {@link Files#write(Path, byte[], OpenOption...)}.
+   */
   public static void writeTemplateBinaryFile(File file, byte[] contents) throws IOException {
-
-    FileOutputStream o = new FileOutputStream(file);
-    o.write(contents);
-    close(o);
+    Files.write(file.toPath(), contents);
   }
 
+  /**
+   * @deprecated There is no replacement for this, inline the method or use a template library of
+   * your choice.
+   */
   public static void writeTemplateFile(File file, String contents,
       Map<String, String> replacements) throws IOException {
 
@@ -250,12 +244,12 @@ public final class Utility {
       replacedContents = replacedContents.replaceAll(replaceThis, withThis);
     }
 
-    PrintWriter pw = new PrintWriter(file);
-    LineNumberReader lnr = new LineNumberReader(new StringReader(replacedContents));
-    for (String line = lnr.readLine(); line != null; line = lnr.readLine()) {
-      pw.println(line);
+    try (PrintWriter pw = new PrintWriter(file)) {
+      LineNumberReader lnr = new LineNumberReader(new StringReader(replacedContents));
+      for (String line = lnr.readLine(); line != null; line = lnr.readLine()) {
+        pw.println(line);
+      }
     }
-    close(pw);
   }
 
   private static void computeInstallationPath() {
@@ -317,33 +311,9 @@ public final class Utility {
    * @throws IllegalArgumentException if the version number are not proper (i.e. the do not comply
    *                                  with the following regular expression
    *                                  [0-9]+(.[0-9]+)*(_[a-zA-Z0-9]+)?
+   * @deprecated use {@link SourceLevel#versionCompare(String, String)} instead.
    */
   public static int versionCompare(String v1, String v2) {
-    Matcher v1Matcher = versionPattern.matcher(v1);
-    Matcher v2Matcher = versionPattern.matcher(v2);
-    if (!v1Matcher.matches() || !v2Matcher.matches()) {
-      throw new IllegalArgumentException(v1Matcher.matches() ? v2 : v1 + " is not a proper version"
-          + " string");
-    }
-
-    String[] v1Prefix = v1Matcher.group(1).split("\\.");
-    String[] v2Prefix = v2Matcher.group(1).split("\\.");
-    for (int i = 0; i < v1Prefix.length; i++) {
-      if (v2Prefix.length <= i) {
-        return 1; // v1 > v2
-      }
-      int compare = Integer.parseInt(v1Prefix[i]) - Integer.parseInt(v2Prefix[i]);
-      if (compare != 0) {
-        return compare;
-      }
-    }
-    // So far they are equal (or v2 is longer than v1)
-    if (v2Prefix.length == v1Prefix.length) {
-      // then it is up to the suffixes
-      return v1Matcher.group(2).compareTo(v2Matcher.group(2));
-    }
-
-    // v2 is greater than v1,
-    return -1;
+    return SourceLevel.versionCompare(v1, v2);
   }
 }

@@ -27,7 +27,6 @@ import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
-import com.google.gwt.util.tools.Utility;
 
 import junit.framework.TestCase;
 
@@ -36,6 +35,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
@@ -209,7 +209,7 @@ public class SymbolMapTest extends TestCase {
     String benchmark = "hello";
     String module = "com.google.gwt.sample.hello.Hello";
 
-    File work = Utility.makeTemporaryDirectory(null, benchmark + "work");
+    File work = Files.createTempDirectory(benchmark + "work").toFile();
     try {
       CompilerOptionsImpl options = new CompilerOptionsImpl();
       options.addModuleName(module);

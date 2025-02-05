@@ -46,7 +46,6 @@ import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.io.Files;
-import com.google.gwt.util.tools.Utility;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -215,15 +214,11 @@ public class StandardGeneratorContext implements GeneratorContext {
     @Override
     public void commit(TreeLogger logger) {
       super.commit(logger);
-      FileOutputStream fos = null;
-      try {
-        fos = new FileOutputStream(file);
+      try (FileOutputStream fos = new FileOutputStream(file)) {
         diskCache.transferToStream(sourceToken, fos);
       } catch (IOException e) {
         logger.log(TreeLogger.WARN, "Error writing out generated unit at '"
             + file.getAbsolutePath() + "': " + e);
-      } finally {
-        Utility.close(fos);
       }
     }
 

@@ -18,7 +18,7 @@ package com.google.gwt.dev.resource.impl;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.util.tools.Utility;
+import com.google.gwt.thirdparty.guava.common.io.Closeables;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -577,7 +577,7 @@ public class ResourceOracleImplTest extends AbstractResourceOrientedTestBase {
           && line.indexOf("package com.google.gwt.dev.resource.impl.testdata." + expectedPackage
               + ";") >= 0);
     } finally {
-      Utility.close(rdr);
+      Closeables.closeQuietly(rdr);
     }
   }
 

@@ -15,7 +15,6 @@
  */
 package com.google.doctool;
 
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,18 +25,6 @@ import java.nio.charset.StandardCharsets;
  */
 public class ResourceIncluder {
 
-  /**
-   * Copied from {@link com.google.gwt.util.tools.Utility#close(AutoCloseable)}.
-   */
-  public static void close(AutoCloseable is) {
-    try {
-      if (is != null) {
-        is.close();
-      }
-    } catch (Exception e) {
-    }
-  }
-
   public static String getResourceFromClasspathScrubbedForHTML(String partialPath)
           throws IOException {
     String contents;
@@ -46,35 +33,14 @@ public class ResourceIncluder {
     return contents;
   }
 
-  /**
-   * Copied from
-   * {@link com.google.gwt.util.tools.Utility#getFileFromClassPath(String)}.
-   */
   private static String getFileFromClassPath(String partialPath)
       throws IOException {
-    InputStream in = ResourceIncluder.class.getClassLoader().getResourceAsStream(
-        partialPath);
-    try {
+    try (InputStream in = ResourceIncluder.class.getClassLoader().getResourceAsStream(
+        partialPath)) {
       if (in == null) {
         throw new FileNotFoundException(partialPath);
       }
-      ByteArrayOutputStream os = new ByteArrayOutputStream();
-      byte[] buffer = new byte[1024];
-      int bytesRead;
-      while (true) {
-        bytesRead = in.read(buffer);
-        if (bytesRead >= 0) {
-          // Copy the bytes out.
-          os.write(buffer, 0, bytesRead);
-        } else {
-          // End of input stream.
-          break;
-        }
-      }
-
-      return os.toString(StandardCharsets.UTF_8);
-    } finally {
-      close(in);
+      return new String(in.readAllBytes(), StandardCharsets.UTF_8);
     }
   }
 

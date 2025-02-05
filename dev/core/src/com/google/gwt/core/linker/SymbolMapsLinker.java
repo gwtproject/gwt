@@ -46,7 +46,7 @@ import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapConsumerV3;
 import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapGeneratorV3;
 import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapParseException;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
-import com.google.gwt.util.tools.Utility;
+import com.google.gwt.thirdparty.guava.common.io.Closeables;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -393,7 +393,7 @@ public class SymbolMapsLinker extends AbstractLinker {
         logger.log(TreeLogger.Type.WARN, "Can't write source map " +
             partialPath, e);
       } finally {
-        Utility.close(cis);
+        Closeables.closeQuietly(cis);
       }
     }
   }

@@ -28,7 +28,6 @@ import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
-import com.google.gwt.util.tools.Utility;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -145,7 +144,7 @@ public class StoryRecorder {
       storyCache = null;
 
       Util.writeUtf8(builder, gzipStream);
-      Utility.close(gzipStream);
+      gzipStream.close();
 
       logger.log(TreeLogger.INFO, "Done");
     } catch (Throwable e) {

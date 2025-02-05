@@ -16,7 +16,7 @@
 
 package com.google.gwt.core.ext.linker.impl;
 
-import com.google.gwt.util.tools.Utility;
+import com.google.gwt.core.ext.linker.LinkerUtils;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -50,7 +50,7 @@ public class SelectionScriptJavaScriptTest extends TestCase {
     code.append("__gwt_getMetaProperty = function(name) { "
                  + "var value = metaProps[name];"
                  + "return (value == null) ? null : value; }");
-    code.append(Utility.getFileFromClassPath(SelectionScriptLinker.COMPUTE_SCRIPT_BASE_JS));
+    code.append(LinkerUtils.readClasspathFileAsString(SelectionScriptLinker.COMPUTE_SCRIPT_BASE_JS));
     code.append("computeScriptBase();\n");
     return code.toString();
   }
@@ -62,7 +62,7 @@ public class SelectionScriptJavaScriptTest extends TestCase {
   private static String loadProcessMetas() throws IOException {
     StringBuilder code = new StringBuilder();
     code.append("var metaProps = { }, propertyErrorFunc, onLoadErrorFunc;\n");
-    code.append(Utility.getFileFromClassPath(SelectionScriptLinker.PROCESS_METAS_JS));
+    code.append(LinkerUtils.readClasspathFileAsString(SelectionScriptLinker.PROCESS_METAS_JS));
     code.append("processMetas();\n");
     return code.toString().replaceAll("__MODULE_NAME__", TEST_MODULE_NAME);
   }

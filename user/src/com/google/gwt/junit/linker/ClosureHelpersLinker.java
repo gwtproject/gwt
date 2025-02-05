@@ -24,11 +24,11 @@ import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.core.ext.linker.CompilationResult;
 import com.google.gwt.core.ext.linker.DelegatingCompilationResult;
 import com.google.gwt.core.ext.linker.LinkerOrder;
+import com.google.gwt.core.ext.linker.LinkerUtils;
 import com.google.gwt.core.ext.linker.Shardable;
 import com.google.gwt.core.ext.linker.StatementRanges;
 import com.google.gwt.core.ext.linker.impl.StatementRangesBuilder;
 import com.google.gwt.core.linker.SymbolMapsLinker;
-import com.google.gwt.util.tools.Utility;
 
 import java.io.IOException;
 
@@ -96,7 +96,7 @@ public class ClosureHelpersLinker extends AbstractLinker {
 
   private String getClosureHelpers(TreeLogger logger) throws UnableToCompleteException {
     try {
-      return Utility.getFileFromClassPath("com/google/gwt/junit/linker/closurehelpers.js");
+      return LinkerUtils.readClasspathFileAsString("com/google/gwt/junit/linker/closurehelpers.js");
     } catch (IOException e) {
       logger.log(Type.ERROR, "Can't load closurehelpers.js", e);
       throw new UnableToCompleteException();

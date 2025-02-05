@@ -38,11 +38,9 @@ import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.json.JSONArray;
 import com.google.gwt.thirdparty.json.JSONException;
 import com.google.gwt.thirdparty.json.JSONObject;
-import com.google.gwt.util.tools.Utility;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -170,14 +168,9 @@ public class EntityRecorder {
   }
 
   private String addArtifactFromJson(Object value, String named) throws IOException {
-    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    PrintWriter writer = new PrintWriter(baos);
-    writer.write(value.toString());
-    Utility.close(writer);
-
     // TODO(ocallau) Must be updated with the correct/final linker
     SyntheticArtifact artifact = new SyntheticArtifact(
-        SoycReportLinker.class, named, baos.toByteArray());
+        SoycReportLinker.class, named, value.toString().getBytes(StandardCharsets.UTF_8));
     artifact.setVisibility(Visibility.LegacyDeploy);
 
     toReturn.add(artifact);

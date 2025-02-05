@@ -1371,14 +1371,16 @@ public class GwtAstBuilder {
             createLambdaConstructor(x, info, innerLambdaClass, ctor, locals, synthArgs);
 
         // the method containing the lambda expression that the anonymous inner class delegates to,
-        // it corresponds directly to the lambda expression itself, produced by JDT as a helper method
+        // it corresponds directly to the lambda expression itself, produced by JDT as a helper
+        // method
         JMethod lambdaMethod = createLambdaMethod(x);
 
         // Now that we've added an implementation method for the lambda, we must create the inner
-        // class method that implements the target interface type that delegates to the target lambda
-        // method
+        // class method that implements the target interface type that delegates to the target
+        // lambda method
         JMethod samMethod = new JMethod(info, interfaceMethod.getName(), innerLambdaClass,
-            interfaceMethod.getType(), false, false, true, interfaceMethod.getAccess());
+            interfaceMethod.getType(), false, false, true,
+            interfaceMethod.getAccess());
         samMethod.setSynthetic();
 
         // implements the SAM, e.g. Callback.onCallback(), Runnable.run(), etc
@@ -1902,8 +1904,8 @@ public class GwtAstBuilder {
          * [x] denotes optional, depending on context of whether outer this scope is needed.
          */
 
-        // Resolve the reference expression to make sure the declaring class of the method is resolved
-        // to the right type.
+        // Resolve the reference expression to make sure the declaring class of the method is
+        // resolved to the right type.
         x.resolve(blockScope);
         // Calculate what type this reference is going to bind to, and what single abstract method
         TypeBinding binding = x.expectedType();

@@ -16,7 +16,6 @@
 package com.google.gwt.soyc;
 
 import com.google.gwt.soyc.io.OutputDirectory;
-import com.google.gwt.util.tools.Utility;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,15 +42,27 @@ public class StaticResources {
         + "/resources/";
     ClassLoader loader = StaticResources.class.getClassLoader();
     for (String resourceName : resourceNames) {
-      InputStream in = loader.getResourceAsStream(prefix + resourceName);
-      if (in == null) {
-        throw new Error("Could not find resource via my class loader: "
-            + prefix + resourceName);
+
+      try (InputStream in = loader.getResourceAsStream(prefix + resourceName);
+           OutputStream out = outDir.getOutputStream(resourceName)) {
+        if (in == null) {
+          throw new Error("Could not find resource via my class loader: "
+              + prefix + resourceName);
+        }
+
+        byte[] buffer = new byte[10240];
+        int bytesRead = 0;
+        while (true) {
+          bytesRead = in.read(buffer);
+          if (bytesRead >= 0) {
+            // Copy the bytes out.
+            out.write(buffer, 0, bytesRead);
+          } else {
+            // End of input stream.
+            break;
+          }
+        }
       }
-      OutputStream out = outDir.getOutputStream(resourceName);
-      Utility.streamOut(in, out, 10240);
-      in.close();
-      out.close();
     }
   }
 }

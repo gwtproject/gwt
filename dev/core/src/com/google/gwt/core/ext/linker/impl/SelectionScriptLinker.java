@@ -25,12 +25,12 @@ import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.core.ext.linker.CompilationResult;
 import com.google.gwt.core.ext.linker.ConfigurationProperty;
 import com.google.gwt.core.ext.linker.EmittedArtifact;
+import com.google.gwt.core.ext.linker.LinkerUtils;
 import com.google.gwt.core.ext.linker.SelectionProperty;
 import com.google.gwt.core.ext.linker.SoftPermutation;
 import com.google.gwt.core.ext.linker.StatementRanges;
 import com.google.gwt.core.linker.SymbolMapsLinker;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.util.tools.Utility;
 
 import java.io.File;
 import java.io.IOException;
@@ -323,8 +323,8 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
     String computeScriptBase;
     String processMetas;
     try {
-      computeScriptBase = Utility.getFileFromClassPath(COMPUTE_SCRIPT_BASE_JS);
-      processMetas = Utility.getFileFromClassPath(PROCESS_METAS_JS);
+      computeScriptBase = LinkerUtils.readClasspathFileAsString(COMPUTE_SCRIPT_BASE_JS);
+      processMetas = LinkerUtils.readClasspathFileAsString(PROCESS_METAS_JS);
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to read selection script template",
           e);
@@ -566,7 +566,7 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
       TreeLogger logger) throws UnableToCompleteException {
     StringBuffer buffer;
     try {
-      buffer = new StringBuffer(Utility.getFileFromClassPath(filename));
+      buffer = new StringBuffer(LinkerUtils.readClasspathFileAsString(filename));
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to read file: " + filename, e);
       throw new UnableToCompleteException();

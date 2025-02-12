@@ -18,7 +18,7 @@ package com.google.gwt.dev.util.xml;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.util.tools.Utility;
+import com.google.gwt.thirdparty.guava.common.io.Closeables;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
@@ -365,7 +365,7 @@ public final class ReflectiveParser {
       } catch (IOException e) {
         caught = e;
       } finally {
-        Utility.close(reader);
+        Closeables.closeQuietly(reader);
       }
 
       if (caught instanceof UnableToCompleteException) {

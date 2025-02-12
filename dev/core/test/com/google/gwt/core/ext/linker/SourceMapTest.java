@@ -36,7 +36,6 @@ import com.google.gwt.thirdparty.guava.common.primitives.Ints;
 import com.google.gwt.thirdparty.json.JSONArray;
 import com.google.gwt.thirdparty.json.JSONException;
 import com.google.gwt.thirdparty.json.JSONObject;
-import com.google.gwt.util.tools.Utility;
 
 import junit.framework.TestCase;
 
@@ -51,6 +50,7 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -512,7 +512,7 @@ public class SourceMapTest extends TestCase {
     String benchmark = "hello";
     String module = "com.google.gwt.sample.hello.Hello";
 
-    File work = Utility.makeTemporaryDirectory(null, benchmark + "work");
+    File work = Files.createTempDirectory(benchmark + "work").toFile();
     try {
       options.setSoycEnabled(true);
       options.setJsonSoycEnabled(true);

@@ -52,13 +52,13 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.util.tools.ArgHandlerFlag;
 import com.google.gwt.util.tools.ArgHandlerString;
-import com.google.gwt.util.tools.Utility;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.BindException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -502,7 +502,7 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
     tempWorkDir = options.getWorkDir() == null;
     if (tempWorkDir) {
       try {
-        options.setWorkDir(Utility.makeTemporaryDirectory(null, "gwtc"));
+        options.setWorkDir(Files.createTempDirectory("gwtc").toFile());
       } catch (IOException e) {
         System.err.println("Unable to create hosted mode work directory");
         e.printStackTrace();

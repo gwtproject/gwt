@@ -36,9 +36,9 @@ import com.google.gwt.resources.ext.SupportsGeneratorResultCaching;
 import com.google.gwt.resources.rg.ImageBundleBuilder.Arranger;
 import com.google.gwt.resources.rg.ImageBundleBuilder.ImageRect;
 import com.google.gwt.safehtml.shared.UriUtils;
+import com.google.gwt.thirdparty.guava.common.io.Closeables;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.gwt.user.rebind.StringSourceWriter;
-import com.google.gwt.util.tools.Utility;
 
 import java.awt.geom.AffineTransform;
 import java.io.File;
@@ -620,7 +620,7 @@ public final class ImageResourceGenerator extends AbstractResourceGenerator
     try {
       return conn.getContentLength();
     } finally {
-      Utility.close(conn.getInputStream());
+      Closeables.closeQuietly(conn.getInputStream());
     }
   }
 

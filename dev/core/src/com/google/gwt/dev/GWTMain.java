@@ -15,7 +15,6 @@
  */
 package com.google.gwt.dev;
 
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.base.Strings;
 
 /**
@@ -25,12 +24,7 @@ import com.google.gwt.thirdparty.guava.common.base.Strings;
 public class GWTMain {
 
   public static void main(String args[]) {
-    String aboutText = Util.getFileFromInstallPath("about.txt");
-    if (aboutText != null) {
-      System.err.println(aboutText);
-    } else {
-      System.err.println(About.getGwtVersion());
-    }
+    System.err.println(About.getGwtVersion());
     System.err.println("Available main classes:");
     System.err.println(Strings.padEnd(DevMode.class.getName(), 40, ' ') +
         "runs the development shell");

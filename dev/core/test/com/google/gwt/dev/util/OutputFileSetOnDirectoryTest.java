@@ -13,14 +13,13 @@
  */
 package com.google.gwt.dev.util;
 
-import com.google.gwt.util.tools.Utility;
-
 import junit.framework.TestCase;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
 
 /**
  * Tests for {@link OutputFileSetOnDirectory}.
@@ -28,7 +27,7 @@ import java.io.OutputStream;
 public class OutputFileSetOnDirectoryTest extends TestCase {
 
   public void testCreateNewOutputStream() throws IOException {
-    File work = Utility.makeTemporaryDirectory(null, "outputfileset");
+    File work = Files.createTempDirectory("outputfileset").toFile();
     try {
 
       OutputFileSetOnDirectory output = new OutputFileSetOnDirectory(work, "test/");
@@ -49,7 +48,7 @@ public class OutputFileSetOnDirectoryTest extends TestCase {
   }
 
   public void testNewFileEqualTimestampOverwrites() throws IOException {
-    File work = Utility.makeTemporaryDirectory(null, "outputfileset");
+    File work = Files.createTempDirectory("outputfileset").toFile();
     try {
       OutputFileSetOnDirectory output = new OutputFileSetOnDirectory(work, "test/");
 
@@ -66,7 +65,7 @@ public class OutputFileSetOnDirectoryTest extends TestCase {
   }
 
   public void testNewFileOlderTimestampDies() throws IOException {
-    File work = Utility.makeTemporaryDirectory(null, "outputfileset");
+    File work = Files.createTempDirectory("outputfileset").toFile();
     try {
       OutputFileSetOnDirectory output = new OutputFileSetOnDirectory(work, "test/");
 

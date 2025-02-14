@@ -142,6 +142,17 @@ public class ConfigurationProperties implements Serializable {
   }
 
   /**
+   * Returns all the values of a multi-valued configuration property, or null
+   * if not found.
+   *
+   * <p>A single-valued and unset configuration property will be returned as a list
+   * containing one null.
+   */
+  public List<String> getStringsOrNull(String key) {
+     return properties.get(key);
+  }
+
+  /**
    * Reads a configuration property as a comma-separated list of strings.
    * It may be a single-valued or multi-valued property. If multi-valued,
    * each value will be split on commas and all items concatenated.

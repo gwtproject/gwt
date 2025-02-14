@@ -37,5 +37,8 @@ public class SystemGetPropertyTest extends GWTTestCase {
         "InSafari" : "NotInSafari";
     assertEquals(expectedResult, System.getProperty("someDynamicProperty"));
     assertEquals("foo", System.getProperty("configPropertyUnset", "foo"));
+    assertNull(System.getProperty("configPropertyUnset"));
+    assertEquals("foo", System.getProperty("multivaluedConfigPropertyUnset", "foo"));
+    assertNull(System.getProperty("multivaluedConfigPropertyUnset"));
   }
 }

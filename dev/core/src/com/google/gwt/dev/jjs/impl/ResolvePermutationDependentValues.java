@@ -75,20 +75,20 @@ public class ResolvePermutationDependentValues {
     }
 
     private JExpression propertyValueExpression(JPermutationDependentValue x) {
-      List<String> propertyValues = props.getConfigurationProperties().getStrings(x.getRequestedValue());
-
-      if (!propertyValues.isEmpty() && propertyValues.stream().allMatch(Objects::isNull)) {
+      List<String> propertyValues = props.getConfigurationProperties()
+          .getStringsOrNull(x.getRequestedValue());
+      if (propertyValues != null) {
+        // It is a configuration property.
+        // If no values are set, propertyValues is either empty (multivalued properties)
+        // or contains a single null (other properties).
+        if (propertyValues.stream().anyMatch(Objects::nonNull)) {
+          return program.getLiteral(x.getSourceInfo(),
+              Joiner.on(",").skipNulls().join(propertyValues));
+        }
         if (x.getDefaultValueExpression() != null) {
           return x.getDefaultValueExpression();
         }
-        throw new InternalCompilerException("No default set for configuration property '"
-            + x.getRequestedValue() + "'");
-      }
-      String propertyValue = propertyValues.isEmpty() ? null : Joiner.on(",").skipNulls().join(propertyValues);
-
-      if (propertyValue != null) {
-        // It is a configuration property.
-        return program.getLiteral(x.getSourceInfo(), propertyValue);
+        return program.getLiteralNull();
       }
 
       if (isSoftPermutationProperty(x.getRequestedValue())) {
@@ -96,7 +96,7 @@ public class ResolvePermutationDependentValues {
         return new JMethodCall(x.getSourceInfo(), null, method);
       }
 
-      propertyValue = commonPropertyAndBindingInfo.getPropertyValue(x.getRequestedValue());
+      String propertyValue = commonPropertyAndBindingInfo.getPropertyValue(x.getRequestedValue());
 
       if (propertyValue != null) {
         return program.getLiteral(x.getSourceInfo(), propertyValue);

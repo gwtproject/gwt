@@ -37,6 +37,10 @@ public interface CharSequence {
 
   @Override
   String toString();
+  
+  default boolean isEmpty() {
+    return length() == 0;
+  }
 
   default IntStream chars() {
     return  StreamSupport.intStream(() -> {

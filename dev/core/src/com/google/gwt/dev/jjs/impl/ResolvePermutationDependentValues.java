@@ -47,7 +47,6 @@ import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -75,20 +74,13 @@ public class ResolvePermutationDependentValues {
     }
 
     private JExpression propertyValueExpression(JPermutationDependentValue x) {
-      List<String> propertyValues = props.getConfigurationProperties()
-          .getStringsOrNull(x.getRequestedValue());
-      if (propertyValues != null) {
+      List<String> propertyValues = props.getConfigurationProperties().getStrings(x.getRequestedValue());
+
+      String propertyValue = propertyValues.isEmpty() ? null : Joiner.on(",").join(propertyValues);
+
+      if (propertyValue != null) {
         // It is a configuration property.
-        // If no values are set, propertyValues is either empty (multivalued properties)
-        // or contains a single null (other properties).
-        if (propertyValues.stream().anyMatch(Objects::nonNull)) {
-          return program.getLiteral(x.getSourceInfo(),
-              Joiner.on(",").skipNulls().join(propertyValues));
-        }
-        if (x.getDefaultValueExpression() != null) {
-          return x.getDefaultValueExpression();
-        }
-        return program.getLiteralNull();
+        return program.getLiteral(x.getSourceInfo(), propertyValue);
       }
 
       if (isSoftPermutationProperty(x.getRequestedValue())) {
@@ -96,7 +88,7 @@ public class ResolvePermutationDependentValues {
         return new JMethodCall(x.getSourceInfo(), null, method);
       }
 
-      String propertyValue = commonPropertyAndBindingInfo.getPropertyValue(x.getRequestedValue());
+      propertyValue = commonPropertyAndBindingInfo.getPropertyValue(x.getRequestedValue());
 
       if (propertyValue != null) {
         return program.getLiteral(x.getSourceInfo(), propertyValue);

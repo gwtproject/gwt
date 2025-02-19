@@ -19,6 +19,7 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.jdt.TypeRefVisitor;
+import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.util.arg.SourceLevel;
 import com.google.gwt.dev.util.collect.Lists;
@@ -197,11 +198,17 @@ public class JdtCompiler {
     @Override
     public CompilationUnitDeclaration parse(ICompilationUnit sourceUnit,
         CompilationResult compilationResult) {
-      // Never dietParse(), otherwise GwtIncompatible annotations in anonymoous inner classes
+      // Never dietParse(), otherwise GwtIncompatible annotations in anonymous inner classes
       // would be ignored.
       boolean saveDiet = this.diet;
       this.diet = false;
-      CompilationUnitDeclaration decl = super.parse(sourceUnit, compilationResult);
+      CompilationUnitDeclaration decl;
+      try {
+        decl = super.parse(sourceUnit, compilationResult);
+      } catch (RuntimeException ex) {
+        throw new InternalCompilerException("Problem parsing "
+            + new String(sourceUnit.getFileName()), ex);
+      }
       this.diet = saveDiet;
       // Remove @GwtIncompatible classes and members.
       // It is safe to remove @GwtIncompatible types, fields and methods on incomplete ASTs due

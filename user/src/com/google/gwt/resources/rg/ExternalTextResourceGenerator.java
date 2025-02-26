@@ -57,12 +57,14 @@ public final class ExternalTextResourceGenerator extends
   // This string must stay in sync with the values in JsonpRequest.java
   static final String JSONP_CALLBACK_PREFIX = "__gwt_jsonp__.P";
 
-  private StringBuffer data;
+  private StringBuilder data;
   private boolean first;
   private String urlExpression;
   private Map<String, Integer> hashes;
   private Map<String, Integer> offsets;
   private int currentIndex;
+
+  private String hash;
 
   private String externalTextUrlIdent;
 
@@ -94,12 +96,12 @@ public final class ExternalTextResourceGenerator extends
   public void createFields(TreeLogger logger, ResourceContext context,
       ClientBundleFields fields) throws UnableToCompleteException {
     data.append(']');
-    StringBuffer wrappedData = new StringBuffer();
+    StringBuilder wrappedData = new StringBuilder();
     if (shouldUseJsonp(context, logger)) {
       wrappedData.append(JSONP_CALLBACK_PREFIX);
       wrappedData.append(getMurmurHashOfData());
       wrappedData.append(".onSuccess(\n");
-      wrappedData.append(data.toString());
+      wrappedData.append(data);
       wrappedData.append(")");
     } else {
       wrappedData = data;
@@ -128,7 +130,7 @@ public final class ExternalTextResourceGenerator extends
   @Override
   public void init(TreeLogger logger, ResourceContext context)
       throws UnableToCompleteException {
-    data = new StringBuffer("[\n");
+    data = new StringBuilder("[\n");
     first = true;
     urlExpression = null;
     hashes = new HashMap<String, Integer>();
@@ -173,7 +175,10 @@ public final class ExternalTextResourceGenerator extends
   }
 
   private String getMurmurHashOfData() {
-    return Hashing.murmur3_128().hashString(data, StandardCharsets.UTF_8).toString();
+    if (hash == null) {
+      hash = Hashing.murmur3_128().hashString(data, StandardCharsets.UTF_8).toString();
+    }
+    return hash;
   }
 
   private boolean shouldUseJsonp(ResourceContext context, TreeLogger logger) {

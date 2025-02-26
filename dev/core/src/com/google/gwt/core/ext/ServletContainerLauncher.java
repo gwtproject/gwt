@@ -17,6 +17,7 @@ package com.google.gwt.core.ext;
 
 import java.io.File;
 import java.net.BindException;
+import java.util.regex.Pattern;
 
 /**
  * Defines the service provider interface for launching servlet containers that
@@ -25,8 +26,21 @@ import java.net.BindException;
  * Subclasses should be careful about calling any methods defined on this class
  * or else they risk failing when used with a version of GWT that did not have
  * those methods.
+ * <p>
+ * As of GWT 2.13, launcher implementations can be discovered by a service loader. Launchers that
+ * specify a name can be selected by the user via the {@code -server} argument to DevMode using
+ * that name instead of their fully qualified class name. Additionally, if only one launcher type
+ * is present on the classpath, it will be used automatically without the need to specify it. As a
+ * result, names should be unique, and projects may wish to take care to avoid allowing more than
+ * one provider at a time on the classpath.
  */
 public abstract class ServletContainerLauncher {
+  /**
+   * Allowed names for ServletContainerLauncher instances, to be able to be used with a
+   * ServiceLoader. If not registered as a service, the "-server" argument can be used with the
+   * class's fully qualified name, and the name property need not follow this pattern.
+   */
+  public static final Pattern SERVICE_NAME_PATTERN = Pattern.compile("[a-zA-Z][a-zA-Z0-9_$.]+");
   /*
    * NOTE: Any new methods must have default implementations, and any users of
    * this class must be prepared to handle LinkageErrors when calling new
@@ -46,13 +60,14 @@ public abstract class ServletContainerLauncher {
    *     if no name should be displayed.
    */
   public String getName() {
-    return "Web Server";
+    return "Default Web Server";
   }
+
   /**
    * Return true if this servlet container launcher is configured for secure
    * operation (ie, HTTPS).  This value is only queried after arguments, if any,
    * have been processed.
-   *
+   * <p>
    * The default implementation just returns false.
    *
    * @return true if HTTPS is in use
@@ -74,6 +89,17 @@ public abstract class ServletContainerLauncher {
   public boolean processArguments(TreeLogger logger, String arguments) {
     logger.log(TreeLogger.ERROR, getName() + " does not accept any arguments");
     return false;
+  }
+
+  /**
+   * Specifies the default log level. Presently DevMode (and JUnitShell) will set this to TRACE
+   * when using a RemoteUI implementation, INFO for other implementations.
+   * <p>
+   * Default implementation does nothing, subclasses are encouraged to use this to configure their
+   * own logggers.
+   */
+  public void setBaseRequestLogLevel(TreeLogger.Type baseLogLevel) {
+    // Do nothing by default.
   }
 
   /**

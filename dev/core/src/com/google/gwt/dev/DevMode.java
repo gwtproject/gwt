@@ -26,8 +26,8 @@ import com.google.gwt.dev.resource.impl.ResourceOracleImpl;
 import com.google.gwt.dev.shell.BrowserListener;
 import com.google.gwt.dev.shell.CodeServerListener;
 import com.google.gwt.dev.shell.OophmSessionHandler;
+import com.google.gwt.dev.shell.StaticResourceServer;
 import com.google.gwt.dev.shell.SuperDevListener;
-import com.google.gwt.dev.shell.jetty.JettyLauncher;
 import com.google.gwt.dev.ui.RestartServerCallback;
 import com.google.gwt.dev.ui.RestartServerEvent;
 import com.google.gwt.dev.util.InstalledHelpInfo;
@@ -56,12 +56,15 @@ import com.google.gwt.util.tools.ArgHandlerString;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.BindException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.ServiceLoader;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * The main executable class for the hosted mode shell. NOTE: the public API for
@@ -122,16 +125,32 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
   }
 
   /**
-   * Handles the -server command line flag.
+   * Handles the -server command line flag. If unspecified, tries to find a single SCL defined in
+   * the service loader, or else defaults to StaticResourceServer.
    */
   protected static class ArgHandlerServer extends ArgHandlerString {
 
-    private static final String DEFAULT_SCL = JettyLauncher.class.getName();
+    private static final String DEFAULT_SCL = StaticResourceServer.class.getName();
 
-    private HostedModeOptions options;
-
+    private final HostedModeOptions options;
+    private final Map<String, ServletContainerLauncher> registered;
     public ArgHandlerServer(HostedModeOptions options) {
       this.options = options;
+      registered = ServiceLoader.load(ServletContainerLauncher.class).stream()
+          .map(ServiceLoader.Provider::get)
+          .filter(scl -> {
+            if (!ServletContainerLauncher.SERVICE_NAME_PATTERN.matcher(scl.getName()).matches()) {
+              System.err.println("Server class '" + scl.getClass().getName() +
+                  "' has an invalid name '" + scl.getName() +
+                  "'. To be used from the service loader, this name must match " +
+                  ServletContainerLauncher.SERVICE_NAME_PATTERN.pattern() + ". Skipping.");
+              return false;
+            }
+            return true;
+          })
+          .collect(Collectors.toMap(
+              ServletContainerLauncher::getName,
+              scl -> scl));
     }
 
     @Override
@@ -139,7 +158,15 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
       if (options.isNoServer()) {
         return null;
       } else {
-        return new String[] {getTag(), DEFAULT_SCL};
+        if (registered.size() == 1) {
+          // Exactly one registered SCL, use it as the default, by fully qualified class name
+          return new String[] {
+              getTag(),
+              registered.values().iterator().next().getClass().getName()
+          };
+        }
+        // Use the default SCL
+        return new String[] { getTag(), DEFAULT_SCL };
       }
     }
 
@@ -162,38 +189,50 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
     public boolean setString(String arg) {
       // Supercedes -noserver.
       options.setNoServer(false);
-      String sclClassName;
-      String sclArgs;
+      String sclName;
       int idx = arg.indexOf(':');
       if (idx >= 0) {
-        sclArgs = arg.substring(idx + 1);
-        sclClassName = arg.substring(0, idx);
+        options.setServletContainerLauncherArgs(arg.substring(idx + 1));
+        sclName = arg.substring(0, idx);
       } else {
-        sclArgs = null;
-        sclClassName = arg;
+        sclName = arg;
       }
-      if (sclClassName.length() == 0) {
-        sclClassName = DEFAULT_SCL;
+      if (sclName.isEmpty()) {
+        sclName = DEFAULT_SCL;
       }
+      // Try to load the class by name
       Throwable t;
       try {
         Class<?> clazz =
-            Class.forName(sclClassName, true, Thread.currentThread().getContextClassLoader());
+            Class.forName(sclName, true, Thread.currentThread().getContextClassLoader());
         Class<? extends ServletContainerLauncher> sclClass =
             clazz.asSubclass(ServletContainerLauncher.class);
-        options.setServletContainerLauncher(sclClass.newInstance());
-        options.setServletContainerLauncherArgs(sclArgs);
+        options.setServletContainerLauncher(sclClass.getDeclaredConstructor().newInstance());
         return true;
-      } catch (ClassCastException e) {
-        t = e;
-      } catch (ClassNotFoundException e) {
-        t = e;
-      } catch (InstantiationException e) {
-        t = e;
-      } catch (IllegalAccessException e) {
+      } catch (ClassCastException | ClassNotFoundException | InstantiationException |
+               IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        // Don't log any error until we've tried the service loader too
         t = e;
       }
-      System.err.println("Unable to load server class '" + sclClassName + "'");
+
+      if (registered.containsKey(sclName)) {
+        options.setServletContainerLauncher(registered.get(sclName));
+        return true;
+      }
+      System.err.println("Failed to find a server class with name '" + sclName +
+          "' in the service loader:");
+      if (registered.isEmpty()) {
+        System.err.println("No server classes found in the service loader.");
+      } else {
+        System.err.println("Available server classes:");
+        for (ServletContainerLauncher servletContainerLauncher : registered.values()) {
+          System.err.println("  * " + servletContainerLauncher.getName() + " - " +
+              servletContainerLauncher.getClass().getName());
+        }
+      }
+
+      System.err.println("Unable to load server class '" + sclName +
+          "' by fully qualified name or from the service loader");
       t.printStackTrace();
       return false;
     }
@@ -618,14 +657,7 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
         ui.setWebServerSecure(serverLogger);
       }
 
-      /*
-       * TODO: This is a hack to pass the base log level to the SCL. We'll have
-       * to figure out a better way to do this for SCLs in general.
-       */
-      if (scl instanceof JettyLauncher) {
-        JettyLauncher jetty = (JettyLauncher) scl;
-        jetty.setBaseRequestLogLevel(getBaseLogLevelForUI());
-      }
+      scl.setBaseRequestLogLevel(getBaseLogLevelForUI());
       scl.setBindAddress(options.getBindAddress());
 
       if (serverLogger.isLoggable(TreeLogger.TRACE)) {

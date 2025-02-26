@@ -19,12 +19,12 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
-import com.google.gwt.util.tools.Utility;
 
 import junit.framework.TestCase;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 /**
  * Test for {@link Compiler} with option -soyc.
@@ -34,7 +34,7 @@ public class SoycTest extends TestCase {
   private final CompilerOptionsImpl options = new CompilerOptionsImpl();
 
   public void testSoyc() throws UnableToCompleteException, IOException {
-    File work = Utility.makeTemporaryDirectory(null, "hellowork");
+    File work = Files.createTempDirectory("hellowork").toFile();
     try {
       options.setSoycEnabled(true);
       options.addModuleName("com.google.gwt.sample.hello.Hello");

@@ -40,10 +40,10 @@ import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
-import com.google.gwt.util.tools.Utility;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -154,7 +154,7 @@ public class Compiler {
     boolean tempWorkDir = false;
     try {
       if (options.getWorkDir() == null) {
-        options.setWorkDir(Utility.makeTemporaryDirectory(null, "gwtc"));
+        options.setWorkDir(Files.createTempDirectory("gwtc").toFile());
         tempWorkDir = true;
       }
       if ((options.isSoycEnabled() || options.isJsonSoycEnabled())

@@ -46,7 +46,6 @@ public class JavaCompilationSuite {
     suite.addTestSuite(CompilationUnitFileReferenceTest.class);
     suite.addTestSuite(CompiledClassTest.class);
     suite.addTestSuite(GWTProblemTest.class);
-    suite.addTestSuite(JavaSourceParserTest.class);
     suite.addTestSuite(JdtBehaviorTest.class);
     suite.addTestSuite(JdtCompilerTest.class);
     suite.addTestSuite(Java7JdtCompilerTest.class);

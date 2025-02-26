@@ -15,12 +15,15 @@
  */
 package com.google.gwt.dev.util;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
+import com.google.gwt.thirdparty.guava.common.io.Closeables;
 import com.google.gwt.util.tools.Utility;
 import com.google.gwt.util.tools.shared.StringUtils;
 
@@ -37,7 +40,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -136,8 +138,8 @@ public final class Util {
     try {
       copyNoClose(is, os);
     } finally {
-      Utility.close(is);
-      Utility.close(os);
+      Closeables.closeQuietly(is);
+      os.close();
     }
   }
 
@@ -296,6 +298,7 @@ public final class Util {
    *
    * @param relativePath relative path within the install directory
    * @return the contents of the file, or null if an error occurred
+   * @deprecated Removed without replacement, many usages of GWT have no install path.
    */
   public static String getFileFromInstallPath(String relativePath) {
     String installPath = Utility.getInstallPath();
@@ -440,7 +443,7 @@ public final class Util {
     } catch (IOException e) {
       return null;
     } finally {
-      Utility.close(fileInputStream);
+      Closeables.closeQuietly(fileInputStream);
     }
   }
 
@@ -451,7 +454,7 @@ public final class Util {
       fileInputStream = new FileInputStream(file);
       return readStreamAsObject(fileInputStream, type);
     } finally {
-      Utility.close(fileInputStream);
+      Closeables.closeQuietly(fileInputStream);
     }
   }
 
@@ -484,7 +487,7 @@ public final class Util {
       objectInputStream = new StringInterningObjectInputStream(inputStream);
       return type.cast(objectInputStream.readObject());
     } finally {
-      Utility.close(objectInputStream);
+      Closeables.closeQuietly(objectInputStream);
     }
   }
 
@@ -559,7 +562,7 @@ public final class Util {
     } catch (IOException e) {
       return null;
     } finally {
-      Utility.close(input);
+      Closeables.closeQuietly(input);
     }
   }
 
@@ -701,22 +704,16 @@ public final class Util {
    */
   public static void writeBytesToFile(TreeLogger logger, File where,
       byte[][] what) throws UnableToCompleteException {
-    FileOutputStream f = null;
     Throwable caught;
-    try {
-      // No need to check mkdirs result because an IOException will occur anyway
-      where.getParentFile().mkdirs();
-      f = new FileOutputStream(where);
+    // No need to check mkdirs result because an IOException will occur anyway
+    where.getParentFile().mkdirs();
+    try (FileOutputStream f = new FileOutputStream(where)) {
       for (int i = 0; i < what.length; i++) {
         f.write(what[i]);
       }
       return;
-    } catch (FileNotFoundException e) {
-      caught = e;
     } catch (IOException e) {
       caught = e;
-    } finally {
-      Utility.close(f);
     }
     String msg = "Unable to write file '" + where + "'";
     logger.log(TreeLogger.ERROR, msg, caught);
@@ -729,18 +726,15 @@ public final class Util {
   public static void writeObjectAsFile(TreeLogger logger, File file,
       Object... objects) throws UnableToCompleteException {
     Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
-    FileOutputStream stream = null;
-    try {
-      // No need to check mkdirs result because an IOException will occur anyway
-      file.getParentFile().mkdirs();
-      stream = new FileOutputStream(file);
+    // No need to check mkdirs result because an IOException will occur anyway
+    file.getParentFile().mkdirs();
+    try (FileOutputStream stream = new FileOutputStream(file)) {
       writeObjectToStream(stream, objects);
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to write file: "
           + file.getAbsolutePath(), e);
       throw new UnableToCompleteException();
     } finally {
-      Utility.close(stream);
       writeObjectAsFileEvent.end();
     }
   }
@@ -759,46 +753,27 @@ public final class Util {
   }
 
   public static boolean writeStringAsFile(File file, String string) {
-    FileOutputStream stream = null;
-    OutputStreamWriter writer = null;
-    BufferedWriter buffered = null;
-    try {
-      // No need to check mkdirs result because an IOException will occur anyway
-      file.getParentFile().mkdirs();
-      stream = new FileOutputStream(file);
-      writer = new OutputStreamWriter(stream, DEFAULT_ENCODING);
-      buffered = new BufferedWriter(writer);
+    // No need to check mkdirs result because an IOException will occur anyway
+    file.getParentFile().mkdirs();
+    try (FileOutputStream stream = new FileOutputStream(file);
+         BufferedWriter buffered = new BufferedWriter(new OutputStreamWriter(stream, UTF_8))) {
       buffered.write(string);
     } catch (IOException e) {
       return false;
-    } finally {
-      Utility.close(buffered);
-      Utility.close(writer);
-      Utility.close(stream);
     }
     return true;
   }
 
   public static void writeStringAsFile(TreeLogger logger, File file,
       String string) throws UnableToCompleteException {
-    FileOutputStream stream = null;
-    OutputStreamWriter writer = null;
-    BufferedWriter buffered = null;
-    try {
-      stream = new FileOutputStream(file);
-      writer = new OutputStreamWriter(stream, DEFAULT_ENCODING);
-      buffered = new BufferedWriter(writer);
-      // No need to check mkdirs result because an IOException will occur anyway
-      file.getParentFile().mkdirs();
+    // No need to check mkdirs result because an IOException will occur anyway
+    file.getParentFile().mkdirs();
+    try (FileOutputStream stream = new FileOutputStream(file);
+         BufferedWriter buffered = new BufferedWriter(new OutputStreamWriter(stream, UTF_8))) {
       buffered.write(string);
     } catch (IOException e) {
-      logger.log(TreeLogger.ERROR, "Unable to write file: "
-          + file.getAbsolutePath(), e);
+      logger.log(TreeLogger.ERROR, "Unable to write file: " + file.getAbsolutePath(), e);
       throw new UnableToCompleteException();
-    } finally {
-      Utility.close(buffered);
-      Utility.close(writer);
-      Utility.close(stream);
     }
   }
 

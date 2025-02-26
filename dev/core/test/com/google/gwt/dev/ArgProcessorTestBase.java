@@ -15,8 +15,6 @@
  */
 package com.google.gwt.dev;
 
-import com.google.gwt.util.tools.Utility;
-
 import junit.framework.TestCase;
 
 import java.io.ByteArrayOutputStream;
@@ -26,19 +24,6 @@ import java.io.PrintStream;
  * Base class for argument processor testing.
  */
 public abstract class ArgProcessorTestBase extends TestCase {
-  /*
-   * The "compute installation directory" dance.
-   */
-  static {
-    String oldValue = System.getProperty("gwt.devjar");
-    System.setProperty("gwt.devjar", "gwt-dev-windows.jar");
-    Utility.getInstallPath();
-    if (oldValue == null) {
-      System.getProperties().remove("gwt.devjar");
-    } else {
-      System.setProperty("gwt.devjar", oldValue);
-    }
-  }
 
   protected static void assertProcessFailure(ArgProcessorBase argProcessor,
       String stringContainedInErrorMessage, String[] args) {

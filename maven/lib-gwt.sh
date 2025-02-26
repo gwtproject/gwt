@@ -80,7 +80,7 @@ function maven-gwt() {
 
   echo "Removing bundled third-parties from gwt-dev"
   zip -q $GWT_EXTRACT_DIR/gwt-dev.jar --copy --out $GWT_EXTRACT_DIR/gwt-dev-trimmed.jar \
-      "com/google/gwt/*" "org/eclipse/jdt/*"
+      "com/google/gwt/*"
   mv $GWT_EXTRACT_DIR/gwt-dev-trimmed.jar $GWT_EXTRACT_DIR/gwt-dev.jar
   echo "Removing bundled third-parties from gwt-user"
   zip -q $GWT_EXTRACT_DIR/gwt-user.jar --copy --out $GWT_EXTRACT_DIR/gwt-user-trimmed.jar \

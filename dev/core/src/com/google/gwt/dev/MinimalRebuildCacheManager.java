@@ -22,7 +22,7 @@ import com.google.gwt.thirdparty.guava.common.cache.CacheBuilder;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 import com.google.gwt.thirdparty.guava.common.util.concurrent.Futures;
 import com.google.gwt.thirdparty.guava.common.util.concurrent.MoreExecutors;
-import com.google.gwt.util.tools.Utility;
+import com.google.gwt.thirdparty.guava.common.io.Closeables;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -177,15 +177,15 @@ public class MinimalRebuildCacheManager {
           } catch (IOException e) {
             logger.log(TreeLogger.WARN,
                 "Unable to read the rebuild cache in " + minimalRebuildCacheFile + ".");
-            Utility.close(objectInputStream);
+            Closeables.closeQuietly(objectInputStream);
             minimalRebuildCacheFile.delete();
           } catch (ClassNotFoundException e) {
             logger.log(TreeLogger.WARN,
                 "Unable to read the rebuild cache in " + minimalRebuildCacheFile + ".");
-            Utility.close(objectInputStream);
+            Closeables.closeQuietly(objectInputStream);
             minimalRebuildCacheFile.delete();
           } finally {
-            Utility.close(objectInputStream);
+            Closeables.closeQuietly(objectInputStream);
           }
         }
         return null;
@@ -221,12 +221,11 @@ public class MinimalRebuildCacheManager {
         oldMinimalRebuildCacheFile.getParentFile().mkdirs();
 
         // Write the new cache to disk.
-        ObjectOutputStream objectOutputStream = null;
         try {
-          objectOutputStream = new ObjectOutputStream(
-              new BufferedOutputStream(new FileOutputStream(newMinimalRebuildCacheFile)));
-          objectOutputStream.writeObject(minimalRebuildCache);
-          Utility.close(objectOutputStream);
+          try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+              new BufferedOutputStream(new FileOutputStream(newMinimalRebuildCacheFile)))) {
+            objectOutputStream.writeObject(minimalRebuildCache);
+          }
 
           // Replace the old cache file with the new one.
           oldMinimalRebuildCacheFile.delete();
@@ -235,10 +234,6 @@ public class MinimalRebuildCacheManager {
           logger.log(TreeLogger.WARN,
               "Unable to update the cache in " + oldMinimalRebuildCacheFile + ".");
           newMinimalRebuildCacheFile.delete();
-        } finally {
-          if (objectOutputStream != null) {
-            Utility.close(objectOutputStream);
-          }
         }
         return null;
       }

@@ -557,7 +557,7 @@ public class CompilationStateBuilder {
 
   private ContentId getResourceContentId(Resource resource) {
     try (InputStream in = resource.openContents()) {
-      /**
+      /*
        * In most cases openContents() will throw an exception, however in the case of a
        * ZipFileResource it might return null causing an NPE in Util.copyNoClose(), see issue 4359.
        */

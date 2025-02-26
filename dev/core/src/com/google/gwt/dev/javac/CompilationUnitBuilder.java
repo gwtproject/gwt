@@ -141,7 +141,7 @@ public abstract class CompilationUnitBuilder {
       HashingOutputStream hasher = new HashingOutputStream(Hashing.murmur3_128(), out);
       try {
         InputStream in = resource.openContents();
-        /**
+        /*
          * In most cases openContents() will throw an exception, however in the case of a
          * ZipFileResource it might return null causing an NPE in Util.copyNoClose(),
          * see issue 4359.

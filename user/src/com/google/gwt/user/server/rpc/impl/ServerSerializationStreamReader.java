@@ -55,7 +55,6 @@ public final class ServerSerializationStreamReader extends AbstractSerialization
    * A basic sanity check for strong names. Only allow certain characters to protect serialization
    * policy providers that use it blindly to load files. (This is normally a hex string, but we
    * allow a few more safe characters in case it's useful for testing.)
-   * @see com.google.gwt.dev.util.Util#computeStrongName
    */
   private static final Pattern ALLOWED_STRONG_NAME = Pattern.compile("[a-zA-Z0-9_]+");
 

@@ -18,11 +18,10 @@ package com.google.gwt.dev.javac;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.jjs.JJSOptions;
-import com.google.gwt.thirdparty.guava.common.base.Joiner;
-import com.google.gwt.util.tools.shared.Md5Utils;
-import com.google.gwt.util.tools.shared.StringUtils;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Lazily creates a singleton cache for {@link CompilationUnit} instances.
@@ -52,13 +51,11 @@ public class UnitCacheSingleton {
   }
 
   public static String getRelevantOptionsHash(JJSOptions options) {
-    return StringUtils.toHexString(
-        Md5Utils.getMd5Digest(
-            Joiner.on('-').join(
-                options.getJsInteropExportFilter(),
-                options.shouldGenerateJsInteropExports(),
-                options.getSourceLevel()
-        ).getBytes()));
+    return Hashing.murmur3_128().newHasher()
+        .putString(options.getJsInteropExportFilter().toString(), StandardCharsets.UTF_8)
+        .putBoolean(options.shouldGenerateJsInteropExports())
+        .putInt(options.getSourceLevel().ordinal())
+        .hash().toString();
   }
 
   /**

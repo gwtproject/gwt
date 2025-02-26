@@ -455,7 +455,7 @@ public class ModuleDef implements DepsInfoProvider {
    * For example, consider a glob that matches fewer files than before because a file was
    * deleted.
    */
-  public long getInputFilenameHash() {
+  public String getInputFilenameHash() {
     List<String> filenames = new ArrayList<>(gwtXmlPathByModuleName.values());
 
     for (Resource resource : getResourcesNewerThan(Integer.MIN_VALUE)) {
@@ -472,7 +472,7 @@ public class ModuleDef implements DepsInfoProvider {
       hasher.putInt(filename.length());
       hasher.putString(filename, StandardCharsets.UTF_8);
     }
-    return hasher.hash().asLong();
+    return hasher.hash().toString();
   }
 
   public Class<? extends Linker> getLinker(String name) {

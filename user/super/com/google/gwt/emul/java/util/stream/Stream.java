@@ -246,6 +246,10 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
     return StreamSupport.stream(spliterator, false);
   }
 
+  default List<T> toList() {
+    return Collections.unmodifiableList(this.collect(Collectors.toList()));
+  }
+
   Stream<T> filter(Predicate<? super T> predicate);
 
   Optional<T> findAny();

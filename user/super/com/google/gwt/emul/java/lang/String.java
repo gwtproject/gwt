@@ -791,6 +791,10 @@ public final class String implements Comparable<String>, CharSequence,
     return asNativeString().repeat(count);
   }
 
+  public <R> R transform(Function<? super String,? extends R> f) {
+    return f.apply(this);
+  }
+
   private int getLeadingWhitespaceLength() {
     int length = length();
     for (int i = 0; i < length; i++) {

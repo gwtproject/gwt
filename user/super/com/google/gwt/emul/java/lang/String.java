@@ -815,6 +815,20 @@ public final class String implements Comparable<String>, CharSequence,
     return length;
   }
 
+  public String indent(int spaces) {
+    if (spaces  == 0) {
+      return this;
+    }
+    if (spaces > 0) {
+      return " ".repeat(spaces) + this;
+    }
+    int prefixLength = 0;
+    while (prefixLength < length() && charAt(prefixLength) == ' ') {
+      prefixLength++;
+    }
+    return substring(prefixLength);
+  }
+
   private class LinesSpliterator extends Spliterators.AbstractSpliterator<String> {
     private int nextIndex = 0;
     private int rPosition = -1;

@@ -13,30 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.emultest.java12.lang;
+package com.google.gwt.emultest.java17.util.stream;
 
 import com.google.gwt.dev.util.arg.SourceLevel;
 import com.google.gwt.emultest.java.util.EmulTestBase;
+import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.JUnitShell;
+import com.google.gwt.junit.Platform;
 
-/**
- * Tests for java.lang.String Java 12 API emulation.
- */
-public class StringTest extends EmulTestBase {
+@DoNotRunWith(Platform.Devel)
+public class IntStreamTest extends EmulTestBase {
 
-  @Override
-  public void runTest() throws Throwable {
-    // Only run these tests if -sourceLevel 17 (or greater) is enabled.
-    if (isGwtSourceLevel17()) {
-      super.runTest();
-    }
-  }
-
-  public void testTransform() {
-    assertFalse(isGwtSourceLevel17());
-  }
-
-  public void testIndent() {
+  public void testMapMulti() {
     assertFalse(isGwtSourceLevel17());
   }
 

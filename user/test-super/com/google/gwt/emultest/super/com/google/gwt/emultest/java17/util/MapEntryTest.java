@@ -13,21 +13,22 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.emultest.java12.util.stream;
+package com.google.gwt.emultest.java17.util;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.AbstractMap;
+import java.util.Map;
 
-/**
- * Tests for java.lang.String Java 12 API emulation.
- */
-public class CollectorsTest extends EmulTestBase {
+public class MapEntryTest extends EmulTestBase {
 
-  public void testTeeing() {
-    assertEquals(4, Stream.of(2, 4, 6).teeing(Collectors.summingToDouble(n -> n),
-        Collectors.counting(), (sum, count) -> sum / count));
+  public void testCopyOf() {
+    AbstractMap.SimpleEntry<String, Integer> mutableEntry = new AbstractMap.SimpleEntry<>("a", 4);
+    Map.Entry<String, Integer> copy = Map.Entry.copyOf(mutableEntry);
+    assertEquals(mutableEntry.getKey(), copy.getKey());
+    assertEquals(mutableEntry.getValue(), copy.getValue());
+    assertNotSame(mutableEntry, copy);
+    Map.Entry<String, Integer> otherCopy = Map.Entry.copyOf(copy);
+    assertSame(copy, otherCopy);
   }
-
 }

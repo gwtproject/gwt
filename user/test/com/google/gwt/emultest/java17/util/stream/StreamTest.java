@@ -13,34 +13,41 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.emultest.java12.util.stream;
+package com.google.gwt.emultest.java17.util.stream;
 
 import com.google.gwt.dev.util.arg.SourceLevel;
 import com.google.gwt.emultest.java.util.EmulTestBase;
+import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.JUnitShell;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import com.google.gwt.junit.Platform;
 
 /**
- * Tests for java.lang.String Java 12 API emulation.
+ * Tests for java.util.stream.Stream Java 12 - 17 API emulation.
  */
-public class CollectorsTest extends EmulTestBase {
+@DoNotRunWith(Platform.Devel)
+public class StreamTest extends EmulTestBase {
 
-  @Override
-  public void runTest() throws Throwable {
-    // Only run these tests if -sourceLevel 17 (or greater) is enabled.
-    if (isGwtSourceLevel17()) {
-      super.runTest();
-    }
+  public void testToList() {
+    assertFalse(isGwtSourceLevel17());
   }
 
-  public void testTeeing() {
+  public void testMapMulti() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testMapMultiToInt() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testMapMultiToLong() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testMapMultiToDouble() {
     assertFalse(isGwtSourceLevel17());
   }
 
   private boolean isGwtSourceLevel17() {
     return JUnitShell.getCompilerOptions().getSourceLevel().compareTo(SourceLevel.JAVA17) >= 0;
   }
-
 }

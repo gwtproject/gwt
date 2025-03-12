@@ -21,6 +21,10 @@ import static javaemul.internal.InternalPreconditions.checkArraySize;
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.LongUtils;
 
+import java.util.function.IntConsumer;
+import java.util.stream.IntStream;
+import java.util.stream.StreamSupport;
+
 /**
  * This implementation uses a dense array holding bit groups of size 31 to keep track of when bits
  * are set to true or false. Using 31 bits keeps our implementation within the range of V8's
@@ -36,6 +40,36 @@ public class BitSet {
   private static final int BITS_PER_WORD = 31;
 
   private final int[] array;
+
+  private class BitSetSpliterator implements Spliterator.OfInt {
+    int nextBitIndex = 0;
+
+    @Override
+    public boolean tryAdvance(IntConsumer action) {
+      int nextBit = nextSetBit(nextBitIndex);
+      if (nextBit >= 0) {
+        nextBitIndex = nextBit + 1;
+        action.accept(nextBit);
+        return true;
+      }
+      return false;
+    }
+
+    @Override
+    public Spliterator.OfInt trySplit() {
+      return null;
+    }
+
+    @Override
+    public long estimateSize() {
+      return size();
+    }
+
+    @Override
+    public int characteristics() {
+      return Spliterator.SIZED | Spliterator.ORDERED | Spliterator.DISTINCT | Spliterator.SORTED;
+    }
+  }
 
   public BitSet() {
     array = new int[0];
@@ -602,6 +636,11 @@ public class BitSet {
       word = wordAt(array, index);
     }
     return bitIndex(index) + Integer.numberOfTrailingZeros(word);
+  }
+
+  public IntStream stream() {
+    Spliterator.OfInt spliterator = new BitSetSpliterator();
+    return StreamSupport.intStream(spliterator, false);
   }
 
   public int previousClearBit(int fromIndex) {

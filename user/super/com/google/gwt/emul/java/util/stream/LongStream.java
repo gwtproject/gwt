@@ -17,8 +17,10 @@ package java.util.stream;
 
 import static javaemul.internal.InternalPreconditions.checkState;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.LongSummaryStatistics;
 import java.util.OptionalDouble;
 import java.util.OptionalLong;
@@ -59,6 +61,15 @@ public interface LongStream extends BaseStream<Long, LongStream> {
     }
 
     LongStream build();
+  }
+
+  /**
+   * See <a
+   * href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/stream/LongStream.LongMapMultiConsumer.html">
+   * the official Java API doc</a> for details.
+   */
+  interface LongMapMultiConsumer {
+    void accept(long value, LongConsumer consumer);
   }
 
   static Builder builder() {
@@ -362,6 +373,14 @@ public interface LongStream extends BaseStream<Long, LongStream> {
           }
         };
     return StreamSupport.longStream(spliterator, false);
+  }
+
+  default LongStream mapMulti(LongStream.LongMapMultiConsumer mapper) {
+    return flatMap(element -> {
+      List<Long> buffer = new ArrayList<>();
+      mapper.accept(element, (LongConsumer) buffer::add);
+      return buffer.stream().mapToLong(n -> n);
+    });
   }
 
   long[] toArray();

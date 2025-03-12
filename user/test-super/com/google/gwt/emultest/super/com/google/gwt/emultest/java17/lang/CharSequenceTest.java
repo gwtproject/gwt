@@ -13,17 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.emultest;
+package com.google.gwt.emultest.java17.lang;
 
-import com.google.gwt.emultest.java12.lang.StringTest;
+import com.google.gwt.emultest.java.util.EmulTestBase;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
+public class CharSequenceTest extends EmulTestBase {
 
-/** Test JRE emulations. */
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
-    StringTest.class,
-})
-public class EmulJava12Suite {
+  public void testIsEmpty() {
+    assertTrue(hideFromCompiler(new StringBuilder()).isEmpty());
+    assertFalse(hideFromCompiler(new StringBuilder("foo")).isEmpty());
+    assertTrue(hideFromCompiler("").isEmpty());
+    assertFalse(hideFromCompiler("foo").isEmpty());
+  }
 }

@@ -58,6 +58,38 @@ public interface CharSequence {
     }, Spliterator.SIZED | Spliterator.SUBSIZED | Spliterator.ORDERED, false);
   }
 
+  default IntStream codePoints() {
+    return  StreamSupport.intStream(() -> {
+      PrimitiveIterator.OfInt it = new PrimitiveIterator.OfInt() {
+        int cursor;
+
+        @Override
+        public int nextInt() {
+          checkElement(hasNext());
+          int codePoint = CharSequence.this.toString().codePointAt(cursor++);
+          if (codePoint >= 1 << 16) {
+            cursor++;
+          }
+          return codePoint;
+        }
+
+        @Override
+        public boolean hasNext() {
+          return cursor < length();
+        }
+      };
+      return Spliterators.spliterator(it, length(), Spliterator.ORDERED);
+    }, Spliterator.SIZED | Spliterator.SUBSIZED | Spliterator.ORDERED, false);
+  }
+
+  default boolean isEmpty() {
+    return length() == 0;
+  }
+
+  static int compare(CharSequence cs1, CharSequence cs2) {
+    return cs1.toString().compareTo(cs2.toString());
+  }
+
   // CHECKSTYLE_OFF: Utility methods.
   @JsMethod
   static boolean $isInstance(HasCharSequenceTypeMarker instance) {

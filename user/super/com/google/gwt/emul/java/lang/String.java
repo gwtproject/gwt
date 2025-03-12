@@ -27,11 +27,14 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.StringJoiner;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import javaemul.internal.ArrayHelper;
@@ -488,6 +491,7 @@ public final class String implements Comparable<String>, CharSequence,
     return checkNotNull(this);
   }
 
+  @Override
   public boolean isEmpty() {
     return length() == 0;
   }
@@ -815,6 +819,126 @@ public final class String implements Comparable<String>, CharSequence,
     return length;
   }
 
+  public String indent(int spaces) {
+    if (spaces  == 0) {
+      return this;
+    }
+    Stream<String> indentedLines;
+    if (spaces > 0) {
+      String spaceString = " ".repeat(spaces);
+      indentedLines = lines().map(line -> spaceString + line);
+    } else {
+      indentedLines = lines().map(
+          line -> line.substring(Math.min(-spaces, line.getLeadingWhitespaceLength())));
+    }
+    return indentedLines.collect(Collectors.joining("\n", "", "\n"));
+  }
+
+  public String stripIndent() {
+    if (isEmpty()) {
+      return "";
+    }
+    List<String> lines = lines().collect(Collectors.toList());
+    int minIndent;
+    char lastChar = charAt(length() - 1);
+    String suffix = "";
+    if (lastChar != '\r' && lastChar != '\n') {
+      minIndent = Integer.MAX_VALUE;
+      for (int i = 0; i < lines.size() - 1; i++) {
+        String line = lines.get(i);
+        int leadingWhitespace = line.getLeadingWhitespaceLength();
+        // only update minIndent if not blank
+        if (leadingWhitespace < line.length()) {
+          minIndent = Math.min(minIndent, leadingWhitespace);
+        }
+      }
+      // the last line affects minIndent even if blank
+      minIndent = Math.min(minIndent, lines.get(lines.size() - 1).getLeadingWhitespaceLength());
+      suffix = "\n";
+    } else {
+      minIndent = 0;
+    }
+    final int outdent = minIndent;
+    return lines.stream().map(line -> {
+          if (line.isBlank()) {
+            return "";
+          }
+          return line.substring(outdent).stripTrailing();
+        })
+        .collect(Collectors.joining("\n", "", suffix));
+  }
+
+  public String translateEscapes() {
+    StringBuilder result = new StringBuilder();
+    int translated = 0;
+    while (translated < length()) {
+      int nextBackslash = indexOf("\\", translated);
+      if (nextBackslash == -1) {
+        result.append(substring(translated));
+        return result.toString();
+      }
+      if (nextBackslash == length() - 1) {
+        throw new IllegalArgumentException();
+      }
+      result.append(substring(translated, nextBackslash));
+      char currentChar = charAt(nextBackslash + 1);
+      translated = nextBackslash + 2;
+      switch (currentChar) {
+        case 'b':
+          result.append('\b');
+          break;
+        case 's':
+          result.append(' ');
+          break;
+        case 't':
+          result.append('\t');
+          break;
+        case 'n':
+          result.append('\n');
+          break;
+        case 'f':
+          result.append('\f');
+          break;
+        case 'r':
+          result.append('\r');
+          break;
+        case '\n':
+        case '\r':
+          // discard
+          break;
+        case '"':
+          result.append('"');
+          break;
+        case '\'':
+          result.append('\'');
+          break;
+        case '\\':
+          result.append('\\');
+          break;
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+          int unicode = currentChar - '0';
+          char nextChar = charAt(translated);
+          while (nextChar >= '0' && nextChar < '8' && unicode < 32) {
+            unicode = (unicode << 3) + (nextChar - '0');
+            translated++;
+            nextChar = translated < length() ? charAt(translated) : 0;
+          }
+          result.append((char) unicode);
+          break;
+        default:
+          throw new IllegalArgumentException();
+      }
+    }
+    return result.toString();
+  }
+
   private class LinesSpliterator extends Spliterators.AbstractSpliterator<String> {
     private int nextIndex = 0;
     private int rPosition = -1;
@@ -830,10 +954,10 @@ public final class String implements Comparable<String>, CharSequence,
         return false;
       }
       if (rPosition < nextIndex) {
-        rPosition = cappedIndexOf('\r');
+        rPosition = cappedIndexOf('\r', nextIndex);
       }
       if (nPosition < nextIndex) {
-        nPosition = cappedIndexOf('\n');
+        nPosition = cappedIndexOf('\n', nextIndex);
       }
       int lineEnd = Math.min(nPosition, rPosition);
       action.accept(substring(nextIndex, lineEnd));
@@ -843,11 +967,11 @@ public final class String implements Comparable<String>, CharSequence,
       }
       return nextIndex < length();
     }
+  }
 
-    private int cappedIndexOf(char c) {
-      int index = indexOf(c, nextIndex);
-      return index == -1 ? length() : index;
-    }
+  private int cappedIndexOf(char c, int nextIndex) {
+    int index = indexOf(c, nextIndex);
+    return index == -1 ? length() : index;
   }
 
   @JsType(isNative = true, name = "String", namespace = "<window>")

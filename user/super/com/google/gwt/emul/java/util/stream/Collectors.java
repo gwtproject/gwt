@@ -88,7 +88,7 @@ public final class Collectors {
           downstream1.accumulator().accept(a.getKey(), b);
           downstream2.accumulator().accept(a.getValue(), b);
         },
-        (a,b)-> {
+        (a,b) -> {
           X part = downstream1.combiner().apply(a.getKey(), b.getKey());
           Y part2 = downstream2.combiner().apply(a.getValue(), b.getValue());
           return new AbstractMap.SimpleEntry<>(part, part2);

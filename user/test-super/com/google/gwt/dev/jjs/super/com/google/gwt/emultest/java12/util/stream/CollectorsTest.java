@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 GWT Project Authors
+ * Copyright 2025 GWT Project Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 public class CollectorsTest extends EmulTestBase {
 
   public void testTeeing() {
-    assertEquals(4, Stram.of(2, 4, 6).teeing(Collectors.summingToDouble(n -> n),
+    assertEquals(4, Stream.of(2, 4, 6).teeing(Collectors.summingToDouble(n -> n),
         Collectors.counting(), (sum, count) -> sum / count));
   }
 

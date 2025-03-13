@@ -14,11 +14,11 @@
 package com.google.gwt.dev.util;
 
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.thirdparty.guava.common.base.Joiner;
-import com.google.gwt.util.tools.shared.Md5Utils;
-import com.google.gwt.util.tools.shared.StringUtils;
+import com.google.gwt.thirdparty.guava.common.hash.Hasher;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -37,8 +37,15 @@ public class DiskCachingUtil {
       TreeLogger logger) {
     String tempDir = System.getProperty("java.io.tmpdir");
     String currentWorkingDirectory = System.getProperty("user.dir");
-    String preferredCacheDirName = "gwt-cache-" + StringUtils.toHexString(
-        Md5Utils.getMd5Digest(currentWorkingDirectory + Joiner.on(", ").join(moduleNames)));
+
+    Hasher hasher = Hashing.murmur3_128().newHasher()
+        .putInt(currentWorkingDirectory.length())
+        .putString(currentWorkingDirectory, StandardCharsets.UTF_8);
+    for (String moduleName : moduleNames) {
+      hasher.putInt(moduleName.length())
+          .putString(moduleName, StandardCharsets.UTF_8);
+    }
+    String preferredCacheDirName = "gwt-cache-" + hasher.hash();
 
     File preferredCacheDir = new File(tempDir, preferredCacheDirName);
     if (!preferredCacheDir.exists() && !preferredCacheDir.mkdir()) {

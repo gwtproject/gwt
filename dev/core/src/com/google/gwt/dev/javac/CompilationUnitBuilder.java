@@ -18,6 +18,8 @@ package com.google.gwt.dev.javac;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.Util;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
+import com.google.gwt.thirdparty.guava.common.hash.HashingOutputStream;
 
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 
@@ -26,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Builds a {@link CompilationUnit}.
@@ -135,9 +138,10 @@ public abstract class CompilationUnitBuilder {
        */
       lastModifed = resource.getLastModified();
       ByteArrayOutputStream out = new ByteArrayOutputStream(1024);
+      HashingOutputStream hasher = new HashingOutputStream(Hashing.murmur3_128(), out);
       try {
         InputStream in = resource.openContents();
-        /**
+        /*
          * In most cases openContents() will throw an exception, however in the case of a
          * ZipFileResource it might return null causing an NPE in Util.copyNoClose(),
          * see issue 4359.
@@ -145,12 +149,12 @@ public abstract class CompilationUnitBuilder {
         if (in == null) {
           throw new RuntimeException("Unexpected error reading resource '" + resource + "'");
         }
-        Util.copy(in, out);
+        Util.copy(in, hasher);
       } catch (IOException e) {
         throw new RuntimeException("Unexpected error reading resource '" + resource + "'", e);
       }
       byte[] content = out.toByteArray();
-      contentId = new ContentId(getTypeName(), Util.computeStrongName(content));
+      contentId = new ContentId(getTypeName(), hasher.hash().toString().toUpperCase(Locale.ROOT));
       return Util.toString(content);
     }
 

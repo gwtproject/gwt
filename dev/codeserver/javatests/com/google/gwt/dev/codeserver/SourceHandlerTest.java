@@ -15,16 +15,19 @@
  */
 package com.google.gwt.dev.codeserver;
 
-import com.google.gwt.dev.util.Util;
-
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 import junit.framework.TestCase;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 /**
  * Tests for {@link SourceHandler}
  */
 public class SourceHandlerTest extends TestCase {
 
-  private static final String VALID_STRONG_NAME = Util.computeStrongName("foo-bar".getBytes());
+  private static final String VALID_STRONG_NAME = Hashing.murmur3_128()
+      .hashString("foo-bar", StandardCharsets.UTF_8).toString().toUpperCase(Locale.ROOT);
 
   public void testIsSourceMapRequest() {
     checkSourceMapRequest("/sourcemaps/myModule/");

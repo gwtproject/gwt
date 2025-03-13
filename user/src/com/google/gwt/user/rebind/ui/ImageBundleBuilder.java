@@ -18,9 +18,10 @@ package com.google.gwt.user.rebind.ui;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
+import com.google.gwt.thirdparty.guava.common.hash.HashingOutputStream;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -318,23 +319,20 @@ class ImageBundleBuilder {
   public String writeBundledImage(TreeLogger logger, GeneratorContext context)
       throws UnableToCompleteException {
 
-    // Create the bundled image from all of the constituent images.
+    // Create the bundled image from the constituent images.
     BufferedImage bundledImage = drawBundledImage();
 
-    // Write the bundled image into a byte array, so that we can compute
-    // its strong name.
-    byte[] imageBytes;
-
+    ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
+    HashingOutputStream hashingOutputStream = new HashingOutputStream(Hashing.murmur3_128(),
+        byteOutputStream);
     try {
-      ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
-      boolean writerAvailable = ImageIO.write(bundledImage, BUNDLE_FILE_TYPE,
-          byteOutputStream);
+      boolean writerAvailable = ImageIO.write(bundledImage, BUNDLE_FILE_TYPE, hashingOutputStream);
+
       if (!writerAvailable) {
         logger.log(TreeLogger.ERROR, "No " + BUNDLE_FILE_TYPE
             + " writer available");
         throw new UnableToCompleteException();
       }
-      imageBytes = byteOutputStream.toByteArray();
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR,
           "An error occurred while trying to write the image bundle.", e);
@@ -344,8 +342,8 @@ class ImageBundleBuilder {
     // Compute the file name. The strong name is generated from the bytes of
     // the bundled image. The '.cache' part indicates that it can be
     // permanently cached.
-    String bundleFileName = Util.computeStrongName(imageBytes) + ".cache."
-        + BUNDLE_FILE_TYPE;
+    String strongName = hashingOutputStream.hash().toString().toUpperCase(Locale.ROOT);
+    String bundleFileName = strongName + ".cache." + BUNDLE_FILE_TYPE;
 
     // Try and write the file to disk. If a file with bundleFileName already
     // exists, then the file will not be written.
@@ -354,7 +352,7 @@ class ImageBundleBuilder {
     if (outStream != null) {
       try {
         // Write the image bytes from the byte array to the pending stream.
-        outStream.write(imageBytes);
+        outStream.write(byteOutputStream.toByteArray());
 
         // Commit the stream.
         context.commitResource(logger, outStream);

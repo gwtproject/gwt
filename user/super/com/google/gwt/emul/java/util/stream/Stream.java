@@ -17,8 +17,10 @@ package java.util.stream;
 
 import static javaemul.internal.InternalPreconditions.checkState;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.Spliterator;
@@ -28,8 +30,11 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
+import java.util.function.DoubleConsumer;
 import java.util.function.Function;
+import java.util.function.IntConsumer;
 import java.util.function.IntFunction;
+import java.util.function.LongConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleFunction;
@@ -246,6 +251,10 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
     return StreamSupport.stream(spliterator, false);
   }
 
+  default List<T> toList() {
+    return Collections.unmodifiableList(this.collect(Collectors.toList()));
+  }
+
   Stream<T> filter(Predicate<? super T> predicate);
 
   Optional<T> findAny();
@@ -321,6 +330,41 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
           }
         };
     return StreamSupport.stream(spliterator, false);
+  }
+
+  default public <R> Stream<R> mapMulti(BiConsumer<T, Consumer<? super R>> mapper) {
+    return flatMap(element -> {
+      List<R> buffer = new ArrayList<>();
+      mapper.accept(element, buffer::add);
+      return buffer.stream();
+    });
+  }
+
+  default DoubleStream mapMultiToDouble(BiConsumer<? super T, ? super DoubleConsumer> mapper) {
+    return flatMapToDouble(element -> {
+      List<Double> buffer = new ArrayList<>();
+      DoubleConsumer consumer = buffer::add;
+      mapper.accept(element, consumer);
+      return buffer.stream().mapToDouble(n -> n);
+    });
+  }
+
+  default IntStream mapMultiToInt(BiConsumer<? super T, ? super IntConsumer> mapper) {
+    return flatMapToInt(element -> {
+      List<Integer> buffer = new ArrayList<>();
+      IntConsumer consumer = buffer::add;
+      mapper.accept(element, consumer);
+      return buffer.stream().mapToInt(n -> n);
+    });
+  }
+
+  default LongStream mapMultiToLong(BiConsumer<? super T, ? super LongConsumer> mapper) {
+    return flatMapToLong(element -> {
+      List<Long> buffer = new ArrayList<>();
+      LongConsumer consumer = buffer::add;
+      mapper.accept(element, consumer);
+      return buffer.stream().mapToLong(n -> n);
+    });
   }
 
   Object[] toArray();

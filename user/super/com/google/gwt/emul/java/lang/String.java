@@ -791,6 +791,10 @@ public final class String implements Comparable<String>, CharSequence,
     return asNativeString().repeat(count);
   }
 
+  public <R> R transform(Function<? super String,? extends R> f) {
+    return f.apply(this);
+  }
+
   private int getLeadingWhitespaceLength() {
     int length = length();
     for (int i = 0; i < length; i++) {
@@ -809,6 +813,20 @@ public final class String implements Comparable<String>, CharSequence,
       }
     }
     return length;
+  }
+
+  public String indent(int spaces) {
+    if (spaces  == 0) {
+      return this;
+    }
+    if (spaces > 0) {
+      return " ".repeat(spaces) + this;
+    }
+    int prefixLength = 0;
+    while (prefixLength < length() && charAt(prefixLength) == ' ') {
+      prefixLength++;
+    }
+    return substring(prefixLength);
   }
 
   private class LinesSpliterator extends Spliterators.AbstractSpliterator<String> {

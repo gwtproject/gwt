@@ -61,6 +61,15 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
     IntStream build();
   }
 
+  /**
+   * See <a
+   * href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/stream/IntStream.IntMapMultiConsumer.html">
+   * the official Java API doc</a> for details.
+   */
+  public interface IntMapMultiConsumer {
+    void accept(int value, IntConsumer ic);
+  }
+
   static Builder builder() {
     return new Builder() {
       private int[] items = new int[0];
@@ -364,6 +373,15 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
           }
         };
     return StreamSupport.intStream(spliterator, false);
+  }
+
+  default IntStream mapMulti(IntMapMultiConsumer mapper) {
+    return flatMap(element -> {
+      List<Integer> buffer = new ArrayList<>();
+      IntConsumer consumer = buffer::add;
+      mapper.accept(element, consumer);
+      return buffer.stream().mapToInt(n -> n);
+    });
   }
 
   int[] toArray();

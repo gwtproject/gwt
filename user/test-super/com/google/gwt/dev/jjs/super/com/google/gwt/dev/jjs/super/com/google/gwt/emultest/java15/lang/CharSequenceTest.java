@@ -24,7 +24,7 @@ public class CharSequenceTest extends EmulTestBase {
 	
   public void testIsEmpty() {
     assertTrue("".isEmpty());
-	  assertFalse("hi".isEmpty());
+    assertFalse("hi".isEmpty());
   }
 
 }

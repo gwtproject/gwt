@@ -488,10 +488,6 @@ public final class String implements Comparable<String>, CharSequence,
     return checkNotNull(this);
   }
 
-  public boolean isEmpty() {
-    return length() == 0;
-  }
-
   public int lastIndexOf(int codePoint) {
     return lastIndexOf(fromCodePoint(codePoint));
   }

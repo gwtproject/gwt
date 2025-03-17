@@ -82,6 +82,7 @@ public class JavaResourceBase {
           "public interface CharSequence {",
           "  char charAt(int index);",
           "  int length();",
+		  "  boolean isEmpty();",
           "  String toString();",
           "}");
 

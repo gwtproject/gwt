@@ -139,22 +139,22 @@ public final class Objects {
 
   public static int checkIndex(int index, int length) {
     if (index < 0 || index >= length) {
-      new IndexOutOfBoundsException("Index " + index + " out of bounds for length " + length);
+      throw new IndexOutOfBoundsException("Index " + index + " out of bounds for length " + length);
     }
     return index;
   }
 
   public static int checkFromToIndex(int fromIndex, int toIndex, int length) {
     if (fromIndex < 0 || fromIndex > toIndex || toIndex > length) {
-      new IndexOutOfBoundsException("Range [" + fromIndex + ", " + toIndex
+      throw new IndexOutOfBoundsException("Range [" + fromIndex + ", " + toIndex
           + ") out of bounds for length " + length);
     }
     return fromIndex;
   }
 
-  public static int checkFromIndexSize(long fromIndex, long size, long length) {
+  public static int checkFromIndexSize(int fromIndex, int size, int length) {
     if (fromIndex < 0 || size < 0 || fromIndex + size > length) {
-      new IndexOutOfBoundsException("Range [" + fromIndex + ", " + (fromIndex + size)
+      throw new IndexOutOfBoundsException("Range [" + fromIndex + ", " + (fromIndex + size)
           + ") out of bounds for length " + length);
     }
     return fromIndex;

@@ -129,6 +129,37 @@ public final class Objects {
     return obj;
   }
 
+  public static <T> T requireNonNullElse(T obj, T defaultObj) {
+    return obj != null ? obj : requireNonNull(defaultObj);
+  }
+
+  public static <T> T requireNonNullElseGet(T obj, Supplier<? extends T> supplier) {
+    return obj != null ? obj : requireNonNull(supplier.get());
+  }
+
+  public static int checkIndex(int index, int length) {
+    if (index < 0 || index >= length) {
+      new IndexOutOfBoundsException("Index " + index + " out of bounds for length " + length);
+    }
+    return index;
+  }
+
+  public static int checkFromToIndex(int fromIndex, int toIndex, int length) {
+    if (fromIndex < 0 || fromIndex > toIndex || toIndex > length) {
+      new IndexOutOfBoundsException("Range [" + fromIndex + ", " + toIndex
+          + ") out of bounds for length " + length);
+    }
+    return fromIndex;
+  }
+
+  public static int checkFromIndexSize(long fromIndex, long size, long length) {
+    if (fromIndex < 0 || size < 0 || fromIndex + size > length) {
+      new IndexOutOfBoundsException("Range [" + fromIndex + ", " + (fromIndex + size)
+          + ") out of bounds for length " + length);
+    }
+    return fromIndex;
+  }
+
   public static String toString(Object o) {
     return String.valueOf(o);
   }

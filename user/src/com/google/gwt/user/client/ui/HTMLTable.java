@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.aria.client.Roles;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Document;
@@ -788,8 +789,8 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    */
   public HTMLTable() {
     tableElem = DOM.createTable();
-    //aria role to indicate it is a plain layout table
-    tableElem.setAttribute("role", "presentation");
+    // aria role to indicate it is a plain layout table
+    Roles.getPresentationRole().set(tableElem);
     bodyElem = DOM.createTBody();
     DOM.appendChild(tableElem, bodyElem);
     setElement(tableElem);

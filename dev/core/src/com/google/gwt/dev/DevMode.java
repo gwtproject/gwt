@@ -30,7 +30,7 @@ import com.google.gwt.dev.shell.SuperDevListener;
 import com.google.gwt.dev.shell.jetty.JettyLauncher;
 import com.google.gwt.dev.ui.RestartServerCallback;
 import com.google.gwt.dev.ui.RestartServerEvent;
-import com.google.gwt.dev.util.InstalledHelpInfo;
+import com.google.gwt.dev.util.GwtprojectOrgHelpInfo;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.arg.ArgHandlerDeployDir;
 import com.google.gwt.dev.util.arg.ArgHandlerExtraDir;
@@ -723,7 +723,7 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
 
     TreeLogger servletLogger =
         logger.branch(TreeLogger.DEBUG, "Validating <servlet> tags for module '" + module.getName()
-            + "'", null, new InstalledHelpInfo("servletMappings.html"));
+            + "'", null, new GwtprojectOrgHelpInfo("/doc/latest/gwt-dev-help/servletMappings.html"));
     for (String servletPath : servletPaths) {
       String servletClass = module.findServletForPath(servletPath);
       assert (servletClass != null);

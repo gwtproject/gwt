@@ -63,6 +63,8 @@ public class StackPanel extends ComplexPanel implements InsertPanel.ForIsWidget 
    */
   public StackPanel() {
     Element table = DOM.createTable();
+    //aria role to indicate it is a plain layout table
+    table.setAttribute("role", "presentation");
     setElement(table);
 
     body = DOM.createTBody();

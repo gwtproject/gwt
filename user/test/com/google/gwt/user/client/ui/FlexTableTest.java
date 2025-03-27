@@ -150,5 +150,11 @@ public class FlexTableTest extends HTMLTableTestBase {
     cellFormatter.setHeight(3, 1, "300px");
     cellFormatter.setColSpan(3, 1, 2);
   }
+  
+  public void testPresentationRole() {
+    FlexTable t = new FlexTable();
+    assertNotNull(t.getElement());
+    assertEquals("presentation", t.getElement().getAttribute("role"));
+  }
 
 }

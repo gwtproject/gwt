@@ -91,6 +91,12 @@ public class DecoratorPanelTest extends SimplePanelTestBase<DecoratorPanel> {
     // Check the container element
     assertTrue(panel.getCellElement(1, 1) == panel.getContainerElement());
   }
+  
+  public void testPresentationRole() {
+    DecoratorPanel panel = createPanel();
+    assertNotNull(panel.getElement());
+    assertEquals("presentation", panel.getElement().getAttribute("role"));
+  }
 
   @Override
   protected DecoratorPanel createPanel() {

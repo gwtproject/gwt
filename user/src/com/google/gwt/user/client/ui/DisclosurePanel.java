@@ -230,6 +230,9 @@ public final class DisclosurePanel extends Composite implements
 
       // I do not need any Widgets here, just a DOM structure.
       Element root = DOM.createTable();
+      //aria role to indicate it is a plain layout table
+      root.setAttribute("role", "presentation");
+      
       Element tbody = DOM.createTBody();
       Element tr = DOM.createTR();
       final Element imageTD = DOM.createTD();

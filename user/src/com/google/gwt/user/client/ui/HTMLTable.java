@@ -788,6 +788,8 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    */
   public HTMLTable() {
     tableElem = DOM.createTable();
+    //aria role to indicate it is a plain layout table
+    tableElem.setAttribute("role", "presentation");
     bodyElem = DOM.createTBody();
     DOM.appendChild(tableElem, bodyElem);
     setElement(tableElem);

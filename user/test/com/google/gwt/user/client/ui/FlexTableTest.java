@@ -150,4 +150,5 @@ public class FlexTableTest extends HTMLTableTestBase {
     cellFormatter.setHeight(3, 1, "300px");
     cellFormatter.setColSpan(3, 1, 2);
   }
+
 }

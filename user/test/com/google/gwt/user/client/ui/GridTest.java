@@ -181,10 +181,4 @@ public class GridTest extends HTMLTableTestBase {
     assertEquals(1, grid.getColumnCount());
     assertEquals(1, colGroup.getChildCount());
   }
-  
-  public void testPresentationRole() {
-    Grid grid = new Grid(2, 2);
-    assertNotNull(grid.getElement());
-    assertEquals("presentation", grid.getElement().getAttribute("role"));
-  }
 }

@@ -18,9 +18,9 @@ package com.google.gwt.emultest.java17.lang;
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
 /**
- * Test stub for java.lang.CharSequence Java 15 API emulation.
+ * Test stub for java.lang.CharSequence Java 17 API emulation.
  * Implementation can be found here:
- * user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/emultest/java15/lang/CharSequenceTest.java
+ * user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/emultest/java17/lang/CharSequenceTest.java
  */
 public class CharSequenceTest extends EmulTestBase {
 	

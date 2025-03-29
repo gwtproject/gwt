@@ -18,14 +18,14 @@ package com.google.gwt.emultest.java17.lang;
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
 /**
- * Tests for java.lang.CharSequence Java 15 API emulation.
+ * Tests for java.lang.CharSequence Java 17 API emulation.
  */
 public class CharSequenceTest extends EmulTestBase {
 	
   public void testIsEmpty() {
     assertTrue("".isEmpty());
     assertFalse("hi".isEmpty());
-    assertTrue("hi".isEmpty());
+    assertTrue("hi".isEmpty()); // this should fail but it does not
   }
 
 }

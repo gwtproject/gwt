@@ -153,6 +153,7 @@ public final class Objects {
   }
 
   public static int checkFromIndexSize(int fromIndex, int size, int length) {
+    // in JS fromIndex + size cannot overflow because int is not limited to 32 bits
     if (fromIndex < 0 || size < 0 || fromIndex + size > length) {
       throw new IndexOutOfBoundsException("Range [" + fromIndex + ", " + (fromIndex + size)
           + ") out of bounds for length " + length);

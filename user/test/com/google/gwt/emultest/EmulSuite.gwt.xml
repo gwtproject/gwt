@@ -20,7 +20,7 @@
   <source path='java9' />
   <source path='java10' />
   <source path='java11' />
-  <source path='java15' />
+  <source path='java17' />
 
   <define-configuration-property name="someConfigurationProperty" is-multi-valued='false'/>
   <set-configuration-property name="someConfigurationProperty" value="conf"/>

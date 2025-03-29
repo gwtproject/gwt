@@ -13,19 +13,19 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.emultest.java15.lang;
+package com.google.gwt.emultest.java17.lang;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
 /**
- * Test stub for java.lang.CharSequence Java 15 API emulation.
- * Implementation can be found here:
- * user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/emultest/java15/lang/CharSequenceTest.java
+ * Tests for java.lang.CharSequence Java 15 API emulation.
  */
 public class CharSequenceTest extends EmulTestBase {
 	
   public void testIsEmpty() {
-    // empty stub
+    assertTrue("".isEmpty());
+    assertFalse("hi".isEmpty());
+    assertTrue("hi".isEmpty());
   }
 
 }

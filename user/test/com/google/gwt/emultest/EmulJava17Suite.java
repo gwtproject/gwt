@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 GWT Project Authors
+ * Copyright 2023 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,19 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.emultest.java.lang;
+package com.google.gwt.emultest;
 
-import com.google.gwt.emultest.java.util.EmulTestBase;
+import com.google.gwt.emultest.java17.lang.CharSequenceTest;
 
-/**
- * Test stub for java.lang.CharSequence Java 15 API emulation.
- * Implementation can be found here:
- * user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/emultest/java15/lang/CharSequenceTest.java
- */
-public class CharSequenceTest extends EmulTestBase {
-	
-  public void testIsEmpty() {
-    // empty stub
-  }
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
+/** Test JRE emulations. */
+@RunWith(Suite.class)
+@Suite.SuiteClasses({
+        CharSequenceTest.class,
+})
+public class EmulJava17Suite {
 }

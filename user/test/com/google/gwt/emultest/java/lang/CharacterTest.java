@@ -29,11 +29,11 @@ public class CharacterTest extends GWTTestCase {
     private int start;
     private int end;
 
-    public CharSequenceAdapter(char[] charArray) {
+    CharSequenceAdapter(char[] charArray) {
       this(charArray, 0, charArray.length);
     }
     
-    public CharSequenceAdapter(char[] charArray, int start, int end) {
+    CharSequenceAdapter(char[] charArray, int start, int end) {
       this.charArray = charArray;
       this.start = start;
       this.end = end;
@@ -102,7 +102,7 @@ public class CharacterTest extends GWTTestCase {
   }
 
   class LowerCaseJudge extends Judge {
-    public LowerCaseJudge(String s) {
+    LowerCaseJudge(String s) {
       super(s);
     }
 
@@ -113,7 +113,7 @@ public class CharacterTest extends GWTTestCase {
   }
 
   class UpperCaseJudge extends Judge {
-    public UpperCaseJudge(String s) {
+    UpperCaseJudge(String s) {
       super(s);
     }
 
@@ -174,6 +174,11 @@ public class CharacterTest extends GWTTestCase {
     }
   };
   Judge upperCaseJudge = new UpperCaseJudge(allChars);
+
+  int[] letters = {'a', 'z', 'A', 'Z', 0x2c6, 0x2d1, 0x10380, 0x1039d};
+  int[] digits = {'0', '9', 0x660, 0x669, 0x10a40, 0x10a49};
+  int[] others = {'@', ' ', -1, Character.MAX_CODE_POINT + 1, 0x2c5, 0x659, 0x10a39,
+      0x10379};
 
   @Override
   public String getModuleName() {
@@ -479,5 +484,78 @@ public class CharacterTest extends GWTTestCase {
   
   public void testValueOf() {
     assertEquals('A', Character.valueOf('A').charValue());
+  }
+
+  public void testIsLetterInt() {
+    for (int codePoint : letters) {
+      assertTrue(Character.isLetter(codePoint));
+    }
+    for (int codePoint : digits) {
+      assertFalse(Character.isLetter(codePoint));
+    }
+    for (int codePoint : others) {
+      assertFalse(Character.isLetter(codePoint));
+    }
+  }
+
+  public void testIsDigitInt() {
+    for (int codePoint : letters) {
+      assertFalse(Character.isDigit(codePoint));
+    }
+    for (int codePoint : digits) {
+      assertTrue(Character.isDigit(codePoint));
+    }
+    for (int codePoint : others) {
+      assertFalse(Character.isDigit(codePoint));
+    }
+  }
+
+  public void testIsDefined() {
+    assertFalse(Character.isDefined(hideFromCompiler(-1)));
+    assertTrue(Character.isDefined(hideFromCompiler(0)));
+    assertTrue(Character.isDefined(hideFromCompiler(0x377)));
+    assertFalse(Character.isDefined(hideFromCompiler(0x378)));
+    assertTrue(Character.isDefined(hideFromCompiler(0xfffd)));
+    assertFalse(Character.isDefined(hideFromCompiler(0xfffe)));
+    assertTrue(Character.isDefined(hideFromCompiler(0x10000)));
+    assertTrue(Character.isDefined(hideFromCompiler(0x10fffd)));
+    assertFalse(Character.isDefined(hideFromCompiler(Character.MAX_CODE_POINT + 1)));
+  }
+
+  public void testIsISOControl() {
+    assertTrue(Character.isISOControl(hideFromCompiler((char) 0)));
+    assertTrue(Character.isISOControl(hideFromCompiler((char) 0x1f)));
+    assertFalse(Character.isISOControl(hideFromCompiler((char) 0x20)));
+    assertFalse(Character.isISOControl(hideFromCompiler((char) 0x7E)));
+    assertTrue(Character.isISOControl(hideFromCompiler((char) 0x7F)));
+    assertTrue(Character.isISOControl(hideFromCompiler((char) 0x9F)));
+    assertFalse(Character.isISOControl(hideFromCompiler((char) 0xA0)));
+  }
+
+  public void testIsISOControlInt() {
+    assertTrue(Character.isISOControl(hideFromCompiler(0)));
+    assertTrue(Character.isISOControl(hideFromCompiler(0x1f)));
+    assertFalse(Character.isISOControl(hideFromCompiler(0x20)));
+    assertFalse(Character.isISOControl(hideFromCompiler(0x7E)));
+    assertTrue(Character.isISOControl(hideFromCompiler(0x7F)));
+    assertTrue(Character.isISOControl(hideFromCompiler(0x9F)));
+    assertFalse(Character.isISOControl(hideFromCompiler(0xA0)));
+  }
+
+  public void testIsSurrogate() {
+    assertFalse(Character.isSurrogate(hideFromCompiler((char) 0)));
+    assertTrue(Character.isSurrogate(hideFromCompiler(Character.MIN_HIGH_SURROGATE)));
+    assertTrue(Character.isSurrogate(hideFromCompiler(Character.MAX_HIGH_SURROGATE)));
+    assertTrue(Character.isSurrogate(hideFromCompiler(Character.MIN_LOW_SURROGATE)));
+    assertTrue(Character.isSurrogate(hideFromCompiler(Character.MAX_LOW_SURROGATE)));
+    assertTrue(Character.isSurrogate(hideFromCompiler((char) (Character.MAX_LOW_SURROGATE + 1))));
+  }
+
+  protected <T> T hideFromCompiler(T value) {
+    if (Math.random() < -1) {
+      // Can never happen, but fools the compiler enough not to optimize this call.
+      fail();
+    }
+    return value;
   }
 }

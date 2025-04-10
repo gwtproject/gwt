@@ -26,7 +26,8 @@ import javaemul.internal.annotations.HasNoSideEffects;
  *
  * TODO(jat): many of the classification methods implemented here are not
  * correct in that they only handle ASCII characters, and many other methods
- * are not currently implemented.  I think the proper approach is to introduce * a deferred binding parameter which substitutes an implementation using
+ * are not currently implemented.  I think the proper approach is to introduce
+ * a deferred binding parameter which substitutes an implementation using
  * a fully-correct Unicode character database, at the expense of additional
  * data being downloaded.  That way developers that need the functionality
  * can get it without those who don't need it paying for it.
@@ -34,16 +35,13 @@ import javaemul.internal.annotations.HasNoSideEffects;
  * <pre>
  * The following methods are still not implemented -- most would require Unicode
  * character db to be useful:
- *  - digit / is* / to*(int codePoint)
- *  - isDefined(char)
+ *  - digit(int codePoint)
  *  - isIdentifierIgnorable(char)
  *  - isJavaIdentifierPart(char)
  *  - isJavaIdentifierStart(char)
  *  - isJavaLetter(char) -- deprecated, so probably not
  *  - isJavaLetterOrDigit(char) -- deprecated, so probably not
- *  - isISOControl(char)
  *  - isMirrored(char)
- *  - isSpaceChar(char)
  *  - isUnicodeIdentifierPart(char)
  *  - isUnicodeIdentifierStart(char)
  *  - getDirectionality(*)
@@ -55,9 +53,6 @@ import javaemul.internal.annotations.HasNoSideEffects;
  *
  * The following do not properly handle characters outside of ASCII:
  *  - digit(char c, int radix)
- *  - isDigit(char c)
- *  - isLetter(char c)
- *  - isLetterOrDigit(char c)
  *  - isLowerCase(char c)
  *  - isUpperCase(char c)
  * </pre>
@@ -72,11 +67,11 @@ public final class Character implements Comparable<Character>, Serializable {
     private int start;
     private int end;
 
-    public CharSequenceAdapter(char[] charArray) {
+    CharSequenceAdapter(char[] charArray) {
       this(charArray, 0, charArray.length);
     }
 
-    public CharSequenceAdapter(char[] charArray, int start, int end) {
+    CharSequenceAdapter(char[] charArray, int start, int end) {
       this.charArray = charArray;
       this.start = start;
       this.end = end;
@@ -234,14 +229,39 @@ public final class Character implements Comparable<Character>, Serializable {
     return codePoint >= MIN_VALUE && codePoint <= MAX_VALUE;
   }
 
+  private static NativeRegExp unassignedRegex;
+
+  public static boolean isDefined(char c) {
+    return isDefined(String.valueOf(c));
+  }
+
+  public static boolean isDefined(int codePoint) {
+    return isValidCodePoint(codePoint)
+        && isDefined(String.NativeString.fromCodePoint(codePoint));
+  }
+
+  public static boolean isDefined(String c) {
+    if (unassignedRegex == null) {
+      unassignedRegex = new NativeRegExp("\\p{Cn}", "u");
+    }
+    return !unassignedRegex.test(c);
+  }
+
   private static NativeRegExp digitRegex;
 
-  /*
-   * TODO: correct Unicode handling.
-   */
   public static boolean isDigit(char c) {
+    return isDigit(String.valueOf(c));
+  }
+
+  // Known differences between Java 17 and Chrome 135
+  // 11f50 .. 11f59, 16ac0 .. 16ac9, 1e4f0 .. 1e4f9, 1fbf0 .. 1fbf9
+  public static boolean isDigit(int codePoint) {
+    return isValidCodePoint(codePoint) && isDigit(String.NativeString.fromCodePoint(codePoint));
+  }
+
+  private static boolean isDigit(String c) {
     if (digitRegex == null) {
-      digitRegex = new NativeRegExp("\\d");
+      digitRegex = new NativeRegExp("\\p{Nd}", "u");
     }
     return digitRegex.test(String.valueOf(c));
   }
@@ -252,24 +272,27 @@ public final class Character implements Comparable<Character>, Serializable {
 
   private static NativeRegExp leterRegex;
 
-  /*
-   * TODO: correct Unicode handling.
-   */
   public static boolean isLetter(char c) {
+    return isLetter(String.valueOf(c));
+  }
+
+  public static boolean isLetter(int codePoint) {
+    return isValidCodePoint(codePoint)
+        && isLetter(String.NativeString.fromCodePoint(codePoint));
+  }
+
+  public static boolean isLetter(String c) {
     if (leterRegex == null) {
-      leterRegex = new NativeRegExp("[A-Z]", "i");
+      leterRegex = new NativeRegExp("\\p{L}", "u");
     }
-    return leterRegex.test(String.valueOf(c));
+    return leterRegex.test(c);
   }
 
   private static NativeRegExp isLeterOrDigitRegex;
 
-  /*
-   * TODO: correct Unicode handling.
-   */
   public static boolean isLetterOrDigit(char c) {
     if (isLeterOrDigitRegex == null) {
-      isLeterOrDigitRegex = new NativeRegExp("[A-Z\\d]", "i");
+      isLeterOrDigitRegex = new NativeRegExp("[\\p{Nd}\\p{L}]", "u");
     }
     return isLeterOrDigitRegex.test(String.valueOf(c));
   }
@@ -285,25 +308,49 @@ public final class Character implements Comparable<Character>, Serializable {
     return ch >= MIN_LOW_SURROGATE && ch <= MAX_LOW_SURROGATE;
   }
 
+  public static boolean isISOControl(char ch) {
+    return ch <= '\u001F' || (ch >= '\u007F' && ch <= '\u009F');
+  }
+
+  public static boolean isISOControl(int codePoint) {
+    return codePoint <= '\u001F' || (codePoint >= '\u007F' && codePoint <= '\u009F');
+  }
+
   /**
    * Deprecated - see isWhitespace(char).
    */
   @Deprecated
   public static boolean isSpace(char c) {
     switch (c) {
-      case ' ':
-        return true;
-      case '\n':
-        return true;
-      case '\t':
-        return true;
-      case '\f':
-        return true;
-      case '\r':
-        return true;
-      default:
-        return false;
+      case ' ': return true;
+      case '\n': return true;
+      case '\t': return true;
+      case '\f': return true;
+      case '\r': return true;
+      default: return false;
     }
+  }
+
+  private static NativeRegExp spaceRegex;
+
+  public static boolean isSpaceChar(char c) {
+    return isSpaceChar(String.valueOf(c));
+  }
+
+  public static boolean isSpaceChar(int codePoint) {
+    return isValidCodePoint(codePoint)
+        && isSpaceChar(String.NativeString.fromCodePoint(codePoint));
+  }
+
+  public static boolean isSpaceChar(String c) {
+    if (spaceRegex == null) {
+      spaceRegex = new NativeRegExp("\\p{Z}", "u");
+    }
+    return spaceRegex.test(c);
+  }
+
+  public static boolean isSurrogate(char ch) {
+    return ch >= MIN_SURROGATE && ch <= MAX_SURROGATE;
   }
 
   public static boolean isWhitespace(char ch) {
@@ -311,7 +358,8 @@ public final class Character implements Comparable<Character>, Serializable {
   }
 
   public static boolean isWhitespace(int codePoint) {
-    return isWhitespace(String.fromCodePoint(codePoint));
+    return isValidCodePoint(codePoint)
+        && isWhitespace(String.NativeString.fromCodePoint(codePoint));
   }
 
   private static NativeRegExp whitespaceRegex;
@@ -390,8 +438,8 @@ public final class Character implements Comparable<Character>, Serializable {
 
     if (codePoint >= MIN_SUPPLEMENTARY_CODE_POINT) {
       return new char[] {
-          getHighSurrogate(codePoint),
-          getLowSurrogate(codePoint),
+          highSurrogate(codePoint),
+          lowSurrogate(codePoint),
       };
     } else {
       return new char[] {
@@ -404,8 +452,8 @@ public final class Character implements Comparable<Character>, Serializable {
     checkCriticalArgument(codePoint >= 0 && codePoint <= MAX_CODE_POINT);
 
     if (codePoint >= MIN_SUPPLEMENTARY_CODE_POINT) {
-      dst[dstIndex++] = getHighSurrogate(codePoint);
-      dst[dstIndex] = getLowSurrogate(codePoint);
+      dst[dstIndex++] = highSurrogate(codePoint);
+      dst[dstIndex] = lowSurrogate(codePoint);
       return 2;
     } else {
       dst[dstIndex] = (char) codePoint;
@@ -426,12 +474,34 @@ public final class Character implements Comparable<Character>, Serializable {
     return CaseMapper.charToLowerCase(c);
   }
 
+  public static int toLowerCase(int codePoint) {
+    if (codePoint > MAX_CODE_POINT) {
+      return codePoint;
+    }
+    return String.NativeString.fromCodePoint(codePoint).toLowerCase().codePointAt(0);
+  }
+
   public static String toString(char x) {
     return String.valueOf(x);
   }
 
+  public static String toString(int codePoint) {
+    if (isValidCodePoint(codePoint)) {
+      return String.NativeString.fromCodePoint(codePoint);
+    } else {
+      throw new IllegalArgumentException("Invalid code point: " + codePoint);
+    }
+  }
+
   public static char toUpperCase(char c) {
     return CaseMapper.charToUpperCase(c);
+  }
+
+  public static int toUpperCase(int codePoint) {
+    if (codePoint > MAX_CODE_POINT) {
+      return codePoint;
+    }
+    return String.NativeString.fromCodePoint(codePoint).toUpperCase().codePointAt(0);
   }
 
   public static Character valueOf(char c) {
@@ -473,26 +543,26 @@ public final class Character implements Comparable<Character>, Serializable {
 
   /**
    * Computes the high surrogate character of the UTF16 representation of a
-   * non-BMP code point. See {@link getLowSurrogate}.
+   * non-BMP code point. See {@link #lowSurrogate}.
    *
    * @param codePoint requested codePoint, required to be >=
    *          MIN_SUPPLEMENTARY_CODE_POINT
    * @return high surrogate character
    */
-  static char getHighSurrogate(int codePoint) {
+  public static char highSurrogate(int codePoint) {
     return (char) (MIN_HIGH_SURROGATE
         + (((codePoint - MIN_SUPPLEMENTARY_CODE_POINT) >> 10) & 1023));
   }
 
   /**
    * Computes the low surrogate character of the UTF16 representation of a
-   * non-BMP code point. See {@link getHighSurrogate}.
+   * non-BMP code point. See {@link #highSurrogate}.
    *
    * @param codePoint requested codePoint, required to be >=
    *          MIN_SUPPLEMENTARY_CODE_POINT
    * @return low surrogate character
    */
-  static char getLowSurrogate(int codePoint) {
+  public static char lowSurrogate(int codePoint) {
     return (char) (MIN_LOW_SURROGATE + ((codePoint - MIN_SUPPLEMENTARY_CODE_POINT) & 1023));
   }
 

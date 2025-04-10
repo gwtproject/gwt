@@ -22,7 +22,6 @@ import com.google.gwt.user.client.DOM;
 /**
  * Tests the DockPanel widget.
  */
-@SuppressWarnings("deprecation")
 public class DockPanelTest extends GWTTestCase {
 
   static class Adder implements HasWidgetsTester.WidgetAdder {
@@ -123,6 +122,12 @@ public class DockPanelTest extends GWTTestCase {
     
     assertLogicalPaternity(panel,widget);
     assertPhysicalPaternity(panel,widget);
+  }
+  
+  public void testPresentationRole() {
+    DockPanel panel = createDockPanel();
+    assertNotNull(panel.getElement());
+    assertEquals("presentation", panel.getElement().getAttribute("role"));
   }
   
   public void testAttachDetachOrder() {

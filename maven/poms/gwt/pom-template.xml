@@ -141,9 +141,9 @@
                 <version>63.1</version>
             </dependency>
             <dependency>
-                <groupId>net.sourceforge.htmlunit</groupId>
+                <groupId>org.htmlunit</groupId>
                 <artifactId>htmlunit</artifactId>
-                <version>2.55.0</version>
+                <version>4.11.1</version>
             </dependency>
             <dependency>
                 <groupId>org.w3c.css</groupId>

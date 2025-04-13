@@ -20,28 +20,26 @@ import com.google.gwt.dev.shell.HostedModePluginObject;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
-import com.gargoylesoftware.htmlunit.AlertHandler;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.IncorrectnessListener;
-import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.util.WebClientUtils;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.htmlunit.AlertHandler;
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.FailingHttpStatusCodeException;
+import org.htmlunit.IncorrectnessListener;
+import org.htmlunit.OnbeforeunloadHandler;
+import org.htmlunit.Page;
+import org.htmlunit.ScriptException;
+import org.htmlunit.WebClient;
+import org.htmlunit.WebWindow;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.JavaScriptException;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.JavaScriptErrorListener;
+import org.htmlunit.javascript.host.Window;
+import org.htmlunit.util.WebClientUtils;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -52,6 +50,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 
 /**
  * Launches a web-mode test via HTMLUnit.
@@ -105,6 +104,7 @@ public class RunStyleHtmlUnit extends RunStyle {
       webClient.setAlertHandler(this);
       webClient.setIncorrectnessListener(this);
       webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+      webClient.getOptions().setFetchPolyfillEnabled(true);
       // To receive exceptions from js side in the development mode, we need set this to 'true'.
       // However, as htmlunit dies after throwing the exception, we still want it to be 'false'
       // for web mode.
@@ -197,7 +197,7 @@ public class RunStyleHtmlUnit extends RunStyle {
     private final WebClient webClient;
     private final TreeLogger logger;
 
-    public HostedJavaScriptEngine(WebClient webClient, TreeLogger logger) {
+    HostedJavaScriptEngine(WebClient webClient, TreeLogger logger) {
       super(webClient);
       this.webClient = webClient;
       this.logger = logger;
@@ -223,7 +223,7 @@ public class RunStyleHtmlUnit extends RunStyle {
     private static final Log LOG = LogFactory.getLog(JavaScriptEngine.class);
     private final WebClient webClient;
 
-    public WebJavaScriptEngine(WebClient webClient) {
+    WebJavaScriptEngine(WebClient webClient) {
       super(webClient);
       this.webClient = webClient;
     }
@@ -290,14 +290,16 @@ public class RunStyleHtmlUnit extends RunStyle {
   private static final Map<BrowserVersion, String> USER_AGENT_MAP  = Maps.newHashMap();
 
   static {
-    // “Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36 Edge/12.0″
+    // “Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)
+    // Chrome/39.0.2171.71 Safari/537.36 Edge/12.0″
     addBrowser(BrowserVersion.EDGE, "safari");
     addBrowser(BrowserVersion.FIREFOX, "gecko1_8");
     addBrowser(BrowserVersion.CHROME, "safari");
-    addBrowser(BrowserVersion.INTERNET_EXPLORER, "gecko1_8");
   }
 
-  private static void addBrowser(BrowserVersion browser, String userAgent) {
+  private static void addBrowser(BrowserVersion baseBrowser, String userAgent) {
+    BrowserVersion browser = new BrowserVersion.BrowserVersionBuilder(baseBrowser)
+        .setSystemTimezone(TimeZone.getDefault()).build();
     BROWSER_MAP.put(browser.getNickname(), browser);
     USER_AGENT_MAP.put(browser, userAgent);
   }

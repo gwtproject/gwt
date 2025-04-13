@@ -20,8 +20,6 @@ import com.google.gwt.dev.shell.HostedModePluginObject;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.htmlunit.AlertHandler;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.FailingHttpStatusCodeException;
@@ -31,9 +29,6 @@ import org.htmlunit.Page;
 import org.htmlunit.ScriptException;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
-import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -177,7 +172,7 @@ public class RunStyleHtmlUnit extends RunStyle {
             treeLogger);
         webClient.setJavaScriptEngine(hostedEngine);
       } else {
-        JavaScriptEngine webEngine = new WebJavaScriptEngine(webClient);
+        JavaScriptEngine webEngine = new JavaScriptEngine(webClient);
         webClient.setJavaScriptEngine(webEngine);
       }
       if (System.getProperty("gwt.htmlunit.debug") != null) {
@@ -207,82 +202,9 @@ public class RunStyleHtmlUnit extends RunStyle {
     public void initialize(WebWindow webWindow, Page page) {
       // Hook in the hosted-mode plugin after initializing the JS engine.
       super.initialize(webWindow, page);
-      Window window = (Window) webWindow.getScriptableObject();
+      Window window = webWindow.getScriptableObject();
       window.defineProperty("__gwt_HostedModePlugin",
           new HostedModePluginObject(this, webClient, logger), ScriptableObject.READONLY);
-    }
-  }
-
-  /**
-   * JavaScriptEngine subclass that fixes a bug when calling {@code window.onerror}.
-   * Make sure to remove when updating HtmlUnit.
-   *
-   * @see <a href="https://sourceforge.net/p/htmlunit/bugs/1924/">HtmlUnit bug #1924</a>
-   */
-  private static class WebJavaScriptEngine extends JavaScriptEngine {
-    private static final Log LOG = LogFactory.getLog(JavaScriptEngine.class);
-    private final WebClient webClient;
-
-    WebJavaScriptEngine(WebClient webClient) {
-      super(webClient);
-      this.webClient = webClient;
-    }
-
-    @Override
-    protected void handleJavaScriptException(ScriptException scriptException,
-        boolean triggerOnError) {
-      // XXX(tbroyer): copied from JavaScriptEngine to call below triggerOnError
-      // instead of Window's triggerOnError.
-
-      // Trigger window.onerror, if it has been set.
-      final HtmlPage page = scriptException.getPage();
-      if (triggerOnError && page != null) {
-        final WebWindow window = page.getEnclosingWindow();
-        if (window != null) {
-          final Window w = (Window) window.getScriptableObject();
-          if (w != null) {
-            try {
-              triggerOnError(w, scriptException);
-            } catch (final Exception e) {
-              handleJavaScriptException(new ScriptException(page, e, null), false);
-            }
-          }
-        }
-      }
-      final JavaScriptErrorListener javaScriptErrorListener =
-              webClient.getJavaScriptErrorListener();
-      if (javaScriptErrorListener != null) {
-        javaScriptErrorListener.scriptException(page, scriptException);
-      }
-      // Throw a Java exception if the user wants us to.
-      if (webClient.getOptions().isThrowExceptionOnScriptError()) {
-        throw scriptException;
-      }
-      // Log the error; ScriptException instances provide good debug info.
-      LOG.info("Caught script exception", scriptException);
-    }
-
-    private void triggerOnError(Window w, ScriptException e) {
-      // XXX(tbroyer): copied from HtmlUnit's javascript.host.Window
-      // with fix unwrapping the JS exception before passing it back to JS.
-      final Object o = w.getOnerror();
-      if (o instanceof Function) {
-        final Function f = (Function) o;
-        final String msg = e.getMessage();
-        final String url = e.getPage().getUrl().toExternalForm();
-        final int line = e.getFailingLineNumber();
-
-        final int column = e.getFailingColumnNumber();
-
-        Object jsError = null;
-        if (e.getCause() instanceof JavaScriptException) {
-          jsError = ((JavaScriptException) e.getCause()).getValue();
-        }
-
-        Object[] args = new Object[]{msg, url, line, column, jsError};
-
-        f.call(Context.getCurrentContext(), w, w, args);
-      }
     }
   }
 

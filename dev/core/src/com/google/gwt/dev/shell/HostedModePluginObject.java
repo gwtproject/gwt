@@ -185,15 +185,6 @@ public class HostedModePluginObject extends ScriptableObject {
       return false;
     }
     // TODO: add whitelist and default-port support?
-
-    // We know that legacy dev mode is running, we need to tell HtmlUnit that it is safe
-    // to permit plain Java objects to leak into JS - the JavaObject type will return a
-    // Object[] with a success boolean and a value, and HtmlUnit will guard against this.
-    // The simplest way to do that here is to mark java.lang.Object as the java equivalent
-    // of some JS type - the name of the type doesn't matter.
-    // webClient.setActiveXObjectMap(Collections.singletonMap(
-    //        "GwtLegacyDevModeExceptionOrReturnValue", "java.lang.Object"));
-
     try {
       HtmlUnitSessionHandler htmlUnitSessionHandler = new HtmlUnitSessionHandler(
           window, jsEngine, webClient);

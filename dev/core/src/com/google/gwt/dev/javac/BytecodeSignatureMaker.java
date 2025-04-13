@@ -15,7 +15,7 @@
  */
 package com.google.gwt.dev.javac;
 
-import com.google.gwt.dev.util.Util;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.Attribute;
@@ -24,6 +24,7 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Opcodes;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,7 +61,7 @@ public class BytecodeSignatureMaker {
     }
 
     public String getSignature() {
-      return Util.computeStrongName(Util.getBytes(getRawString()));
+      return Hashing.murmur3_128().hashString(getRawString(), StandardCharsets.UTF_8).toString();
     }
 
     @Override
@@ -203,7 +204,7 @@ public class BytecodeSignatureMaker {
    * methods in a class.
    *
    * @param byteCode byte code for class to analyze.
-   * @return a hex string representing an MD5 digest.
+   * @return a hex string representing a murmur3 hash.
    */
   public static String getCompileDependencySignature(byte[] byteCode) {
     CompileDependencyVisitor v = visitCompileDependenciesInBytecode(byteCode);

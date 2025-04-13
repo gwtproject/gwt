@@ -18,7 +18,7 @@ package com.google.web.bindery.requestfactory.vm.impl;
 import com.google.gwt.dev.util.StringKey;
 import com.google.gwt.user.server.Base64Utils;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -42,12 +42,10 @@ public class OperationKey extends StringKey {
   public static String hash(String raw) {
     try {
       MessageDigest md = MessageDigest.getInstance("SHA1");
-      byte[] data = md.digest(raw.getBytes("UTF-8"));
+      byte[] data = md.digest(raw.getBytes(StandardCharsets.UTF_8));
       return Base64Utils.toBase64(data);
     } catch (NoSuchAlgorithmException e) {
-      throw new RuntimeException("No MD5 algorithm", e);
-    } catch (UnsupportedEncodingException e) {
-      throw new RuntimeException("No UTF-8", e);
+      throw new RuntimeException("No SHA1 algorithm", e);
     }
   }
 

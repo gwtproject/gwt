@@ -19,13 +19,14 @@ import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.dev.util.Util;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -66,7 +67,7 @@ public class MhtmlResourceContext extends StaticResourceContext {
   public String deploy(String suggestedFileName, String mimeType, byte[] data,
       boolean forceExternal) throws UnableToCompleteException {
 
-    String strongName = Util.computeStrongName(data);
+    String strongName = Hashing.murmur3_128().hashBytes(data).toString().toUpperCase(Locale.ROOT);
     String toReturn = strongNameToExpressions.get(strongName);
     if (toReturn != null) {
       return toReturn;

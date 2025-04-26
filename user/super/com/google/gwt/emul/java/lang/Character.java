@@ -301,10 +301,19 @@ public final class Character implements Comparable<Character>, Serializable {
   private static NativeRegExp isLeterOrDigitRegex;
 
   public static boolean isLetterOrDigit(char c) {
+    return isLetterOrDigit(String.valueOf(c));
+  }
+
+  public static boolean isLetterOrDigit(int codePoint) {
+    return isValidCodePoint(codePoint)
+        && isLetterOrDigit(String.NativeString.fromCodePoint(codePoint));
+  }
+
+  private static boolean isLetterOrDigit(String str) {
     if (isLeterOrDigitRegex == null) {
       isLeterOrDigitRegex = new NativeRegExp("[\\p{Nd}\\p{L}]", "u");
     }
-    return isLeterOrDigitRegex.test(String.valueOf(c));
+    return isLeterOrDigitRegex.test(str);
   }
 
   private static NativeRegExp lowerCaseRegex;

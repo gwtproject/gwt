@@ -48,7 +48,7 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
  * @see InputStream
  *
  * <p>The implementation provided by this class behaves as described in the Java
- * API documentation except for {@link write(int)} which throws an exception of
+ * API documentation except for {@link #write(int)} which throws an exception of
  * type {@link java.lang.UnsupportedOperationException} instead of being
  * abstract.
  */
@@ -130,4 +130,29 @@ public abstract class OutputStream implements Closeable, Flushable {
      *             if an error occurs while writing to this stream.
      */
     public abstract void write(int oneByte) throws IOException;
+
+    public static OutputStream nullOutputStream() {
+        return new OutputStream() {
+            private boolean closed;
+
+            @Override
+            public void write(int b) throws IOException {
+                if (closed) {
+                    throw new IOException();
+                }
+            }
+
+            public void write(byte[] buffer, int offset, int count) throws IOException {
+                IOUtils.checkOffsetAndCount(buffer, offset, count);
+                if (closed) {
+                    throw new IOException();
+                }
+            }
+
+            @Override
+            public void close() {
+                closed = true;
+            }
+        };
+    }
 }

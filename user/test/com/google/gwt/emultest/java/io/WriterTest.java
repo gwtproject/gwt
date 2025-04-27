@@ -247,4 +247,31 @@ public class WriterTest extends GWTTestCase {
     writer.write(str, 1, 2);
     assertTrue(Arrays.equals("ol".toCharArray(), writer.toCharArray()));
   }
+
+  public void testNullWriter() throws IOException {
+    Writer nullWriter = Writer.nullWriter();
+    nullWriter.write(42);
+    nullWriter.append('a');
+    nullWriter.write("hola", 1, 2);
+    assertThrows(IOException.class, () -> nullWriter.write(42));
+    assertThrows(IOException.class, () -> nullWriter.append('a'));
+    assertThrows(IOException.class, () -> nullWriter.append("hola", 1, 2));
+    assertThrows(IndexOutOfBoundsException.class,
+        () -> nullWriter.write("hola", 1, 10));
+    assertThrows(IndexOutOfBoundsException.class,
+        () -> nullWriter.write(new char[]{'h', 'o', 'l', 'a'}, 1, 10));
+  }
+
+  private void assertThrows(Class<? extends Exception> ex, Throwing toTest) {
+    try {
+      toTest.run();
+      fail("should have failed");
+    } catch (Exception expected) {
+      assertEquals(ex, expected.getClass());
+    }
+  }
+
+  private interface Throwing {
+    void run() throws Exception;
+  }
 }

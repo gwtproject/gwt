@@ -16,7 +16,6 @@
 package com.google.gwt.dev;
 
 import com.google.gwt.core.ext.TreeLogger.Type;
-import com.google.gwt.dev.cfg.Properties;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,7 +26,6 @@ import java.util.List;
  */
 class CompileTaskOptionsImpl implements CompileTaskOptions {
 
-  private Properties finalProperties;
   private Type logLevel;
   private final List<String> moduleNames = new ArrayList<String>();
   private File workDir;
@@ -44,16 +42,10 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
     setLogLevel(other.getLogLevel());
     setModuleNames(other.getModuleNames());
     setWorkDir(other.getWorkDir());
-    setFinalProperties(other.getFinalProperties());
   }
 
   public File getCompilerWorkDir(String moduleName) {
     return new File(new File(getWorkDir(), moduleName), "compiler");
-  }
-
-  @Override
-  public Properties getFinalProperties() {
-    return finalProperties;
   }
 
   @Override
@@ -69,11 +61,6 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
   @Override
   public File getWorkDir() {
     return workDir;
-  }
-
-  @Override
-  public void setFinalProperties(Properties finalProperties) {
-    this.finalProperties = finalProperties;
   }
 
   @Override

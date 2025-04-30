@@ -64,7 +64,6 @@ class Job {
   // Listeners
 
   private final Outbox outbox;
-  private final RecompileListener recompileListener;
   private final JobChangeListener jobChangeListener;
   private final LogSupplier logSupplier;
 
@@ -100,7 +99,6 @@ class Job {
     // TODO: we will use the binding properties to find or create the outbox,
     // then take binding properties from the outbox here.
     this.bindingProperties = ImmutableSortedMap.copyOf(bindingProperties);
-    this.recompileListener = Preconditions.checkNotNull(options.getRecompileListener());
     this.jobChangeListener = Preconditions.checkNotNull(options.getJobChangeListener());
     this.args = Preconditions.checkNotNull(options.getArgs());
     this.tags = Preconditions.checkNotNull(options.getTags());
@@ -210,13 +208,6 @@ class Job {
     this.compileId = compileId;
     this.compileDir = compileDir;
 
-    try {
-      recompileListener.startedCompile(inputModuleName, compileId, compileDir);
-    } catch (Exception e) {
-      getLogger().log(TreeLogger.Type.WARN, "recompile listener threw exception", e);
-      listenerFailure = e;
-    }
-
     publish(makeEvent(Status.COMPILING));
   }
 
@@ -248,16 +239,7 @@ class Job {
       throw new IllegalStateException("compile job is not active: " + id);
     }
 
-    // Report that we finished unless the listener messed up already.
-    if (listenerFailure == null) {
-      try {
-        recompileListener.finishedCompile(inputModuleName, compileId, newResult.isOk());
-      } catch (Exception e) {
-        getLogger().log(TreeLogger.Type.WARN, "recompile listener threw exception", e);
-        listenerFailure = e;
-      }
-    }
-
+    // Report that we finished
     result.set(newResult);
     outputModuleName = newResult.outputModuleName;
     if (newResult.isOk()) {

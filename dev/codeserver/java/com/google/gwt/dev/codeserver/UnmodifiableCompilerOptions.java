@@ -18,7 +18,6 @@ package com.google.gwt.dev.codeserver;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.CompilerOptions;
-import com.google.gwt.dev.cfg.Properties;
 import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.js.JsNamespaceOption;
 import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
@@ -85,17 +84,7 @@ abstract class UnmodifiableCompilerOptions implements CompilerOptions {
   }
 
   @Override
-  public final void setFinalProperties(Properties finalProperties) {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
   public void setFragmentCount(int numFragments) {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
-  public void setFragmentsMerge(int numFragments) {
     throw new UnsupportedOperationException();
   }
 

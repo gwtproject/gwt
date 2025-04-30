@@ -185,7 +185,7 @@ public final class Character implements Comparable<Character>, Serializable {
       return -1;
     }
     int digit;
-    if (Character.isDigit(codepoint)) {
+    if (isDigit(codepoint)) {
       if (codepoint >= 2406 && codepoint <= 3567
           || codepoint >= 6470 && codepoint <= 6479
           || codepoint >= 69734 && codepoint <= 69871

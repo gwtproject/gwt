@@ -540,4 +540,46 @@ public class Java17Test extends GWTTestCase {
     };
     return "success";
   }
+
+
+  // https://github.com/gwtproject/gwt/issues/10121
+  public void testUnusedSwitchExprResult() {
+    // When the result of a switch expression is unused, the switch expression is made into
+    // a statement. When this is done by wrapping the SwitchExpression in an ExpressionStatement,
+    // it causes an error when generating JavaScript.
+    int unused1 = switch(0) {
+      case 0 -> 1;
+      case 1 -> 2;
+      default -> 3;
+    };
+    boolean called = false;
+    int unused2 = switch(0) {
+      case 0 -> {
+        called = true;
+        assertTrue(true);
+        yield 1;
+      }
+      case 1 -> {
+        fail();
+        yield 2;
+      }
+      default -> {
+        fail();
+        yield 3;
+      }
+    };
+    assertTrue(called);
+
+    Void unused3 = switch(0) {
+      case 0 -> throwIfFalse(true);
+      case 1 -> throwIfFalse(false);
+      default -> throwIfFalse(false);
+    };
+  }
+  private static Void throwIfFalse(boolean condition) {
+    if (!condition) {
+      fail();
+    }
+    return null;
+  }
 }

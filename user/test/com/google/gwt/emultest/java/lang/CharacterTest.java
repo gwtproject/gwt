@@ -15,25 +15,33 @@
  */
 package com.google.gwt.emultest.java.lang;
 
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Arrays;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * Tests for java.lang.Character.
  */
+@DoNotRunWith(Platform.HtmlUnitBug)
 public class CharacterTest extends GWTTestCase {
+
+  private static final char NUM_CHARS_HANDLED = 127;
 
   private static class CharSequenceAdapter implements CharSequence {
     private char[] charArray;
     private int start;
     private int end;
 
-    public CharSequenceAdapter(char[] charArray) {
+    CharSequenceAdapter(char[] charArray) {
       this(charArray, 0, charArray.length);
     }
     
-    public CharSequenceAdapter(char[] charArray, int start, int end) {
+    CharSequenceAdapter(char[] charArray, int start, int end) {
       this.charArray = charArray;
       this.start = start;
       this.end = end;
@@ -57,123 +65,49 @@ public class CharacterTest extends GWTTestCase {
   }
 
   /**
-   * Helper class which applies some arbitrary char mutation function
-   * to a string and returns it.
+   * Helper method which counts ASCII characters matching a predicate.
    */
-  public abstract class Changer {
-    String original;
-
-    public Changer(String o) {
-      original = o;
-    }
-
-    public abstract char change(char c);
-
-    public String changed() {
-      StringBuffer buf = new StringBuffer();
-      for (int i = 0; i < original.length(); i++) {
-        buf.append(change(original.charAt(i)));
+  public static int countAscii(Predicate<Character> test) {
+    int count = 0;
+    for (char ch = 0; ch < NUM_CHARS_HANDLED; ch++) {
+      if (test.test(ch)) {
+        count++;
       }
-      return buf.toString();
     }
+    return count;
   }
-  /**
-   * Helper class which collects the set of characters which pass some
-   * arbitrary boolean function. 
-   */
-  public abstract class Judge {
-    String original;
 
-    public Judge(String o) {
-      original = o;
-    }
-
-    public String allPass() {
-      StringBuffer buf = new StringBuffer();
-      for (int i = 0; i < original.length(); i++) {
-        if (pass(original.charAt(i))) {
-          buf.append(original.charAt(i));
-        }
+  public static int countAscii(Function<Character, Character> transformer,
+                               Predicate<Character> test) {
+    int count = 0;
+    for (char ch = 0; ch < NUM_CHARS_HANDLED; ch++) {
+      if (test.test(transformer.apply(ch))) {
+        count++;
       }
-      return buf.toString();
     }
-
-    public abstract boolean pass(char c);
+    return count;
   }
 
-  class LowerCaseJudge extends Judge {
-    public LowerCaseJudge(String s) {
-      super(s);
+  public static int countUnicode(int[] codePoints, Predicate<Integer> test) {
+    int c = 0;
+    for (int i: codePoints) {
+      if (test.test(i)) {
+        c++;
+      }
     }
-
-    @Override
-    public boolean pass(char c) {
-      return Character.isLowerCase(c);
-    }
+    return c;
   }
 
-  class UpperCaseJudge extends Judge {
-    public UpperCaseJudge(String s) {
-      super(s);
-    }
-
-    @Override
-    public boolean pass(char c) {
-      return Character.isUpperCase(c);
-    }
-  }
-
-  public static String allChars;
-
-  public static final int NUM_CHARS_HANDLED = 127;
-
-  static {
-    StringBuffer b = new StringBuffer();
-    for (char c = 0; c < NUM_CHARS_HANDLED; c++) {
-      b.append(c);
-    }
-    allChars = b.toString();
-  }
-
-  Judge digitJudge = new Judge(allChars) {
-    @Override
-    public boolean pass(char c) {
-      return Character.isDigit(c);
-    }
-  };
-  Judge letterJudge = new Judge(allChars) {
-    @Override
-    public boolean pass(char c) {
-      return Character.isLetter(c);
-    }
-  };
-  Judge letterOrDigitJudge = new Judge(allChars) {
-    @Override
-    public boolean pass(char c) {
-      return Character.isLetterOrDigit(c);
-    }
-  };
-  Changer lowerCaseChanger = new Changer(allChars) {
-    @Override
-    public char change(char c) {
-      return Character.toLowerCase(c);
-    }
-  };
-  Judge lowerCaseJudge = new LowerCaseJudge(allChars);
-  Judge spaceJudge = new Judge(allChars) {
-    @Override
-    @SuppressWarnings("deprecation") // Character.isSpace()
-    public boolean pass(char c) {
-      return Character.isSpace(c); // suppress deprecation
-    }
-  };
-  Changer upperCaseChanger = new Changer(allChars) {
-    @Override
-    public char change(char c) {
-      return Character.toUpperCase(c);
-    }
-  };
-  Judge upperCaseJudge = new UpperCaseJudge(allChars);
+  int[] letters = {'a', 'z', 'A', 'Z', 0x2c6, 0x2d1, 0x10380, 0x1039d};
+  int[] digits = {'0', '9', 0x660, 0x669, 0x104a0, 0x104a9};
+  int[] spaces = {' ', '\u00a0', '\u2028'};
+  int[] controls = {0, 9, 0xa, 0xb, 0xc, 0xd, 0xe, 0x1f, 0x7f, 0x9f};
+  int[] punctuation = {'@', '.'};
+  int[] symbols = {0x2c5};
+  int[] marks = {0x659, 0x10a39, 0x10379};
+  int[] others = {-1, Character.MAX_CODE_POINT + 1};
+  int[] allCodePoints = Stream.of(letters, digits, spaces, controls, punctuation, marks,
+          symbols, others).flatMapToInt(Arrays::stream).toArray();
 
   @Override
   public String getModuleName() {
@@ -267,7 +201,7 @@ public class CharacterTest extends GWTTestCase {
   }
 
   public void testDigit() {
-    assertEquals("wrong number of digits", 10, digitJudge.allPass().length());
+    assertEquals("wrong number of digits", 10, countAscii(Character::isDigit));
   }
   
   public void testSurrogates() {
@@ -298,34 +232,52 @@ public class CharacterTest extends GWTTestCase {
   }
 
   public void testLetter() {
-    assertEquals("wrong number of letters", 52, letterJudge.allPass().length());
+    assertEquals("wrong number of letters", 52, countAscii(Character::isLetter));
   }
 
   public void testLetterOrDigit() {
-    assertEquals("wrong number of letters", 62,
-        letterOrDigitJudge.allPass().length());
+    assertEquals("wrong number of letters + digits", 62,
+        countAscii(Character::isLetterOrDigit));
   }
 
   public void testLowerCase() {
     assertEquals("wrong number of lowercase letters", 26,
-        lowerCaseJudge.allPass().length());
+        countAscii(Character::isLowerCase));
     assertEquals("wrong number of lowercase letters after toLowerCase", 52,
-        new LowerCaseJudge(lowerCaseChanger.changed()).allPass().length());
+        countAscii(Character::toLowerCase, Character::isLowerCase));
   }
 
+  @SuppressWarnings("deprecation")
   public void testSpace() {
-    assertEquals("wrong number of spaces", 5, spaceJudge.allPass().length());
+    assertEquals("wrong number of spaces", 5, countAscii(Character::isSpace));
   }
 
   public void testToFromDigit() {
     for (int i = 0; i < 16; i++) {
       assertEquals(i, Character.digit(Character.forDigit(i, 16), 16));
     }
-    assertEquals(1, Character.digit('1', 10));
-    assertEquals('9', Character.forDigit(9, 10));
-    assertEquals(-1, Character.digit('7', 6));
-    assertEquals(-1, Character.digit('8', 8));
-    assertEquals(-1, Character.digit('A', 10));
+    assertEquals(1, Character.digit(hideFromCompiler('1'), 10));
+    assertEquals('9', Character.forDigit(hideFromCompiler(9), 10));
+    assertEquals(-1, Character.digit(hideFromCompiler('7'), 6));
+    assertEquals(-1, Character.digit(hideFromCompiler('8'), 8));
+    assertEquals(-1, Character.digit(hideFromCompiler('A'), 10));
+    assertEquals(35, Character.digit(hideFromCompiler('Z'), 36));
+  }
+
+  public void testToFromDigitInt() {
+    int[] zeros = {48, 1632, 1776, 1984, 2406, 2534, 2662, 2790,
+        2918, 3046, 3174, 3302, 3430, 3558, 3664, 3792, 3872, 4160, 4240, 6112, 6160, 6470, 6608,
+        6784, 6800, 6992, 7088, 7232, 7248, 42528, 43216, 43264, 43472, 43504, 43600, 44016,
+        65296, 66720, 69734, 69872, 69942, 70096, 70384, 70736, 70864, 71248, 71360, 71472,
+        71904, 72784, 73040, 92768, 93008, 120782, 120792, 120802, 120812, 120822, 125264};
+
+    for (int zero: zeros) {
+      assertEquals(0, Character.digit(zero, 10));
+    }
+    assertEquals(35, Character.digit(hideFromCompiler(65338), 36));
+    assertEquals(35, Character.digit(hideFromCompiler(65370), 36));
+    assertEquals("only letters and digits have numeric value", 0,
+        countUnicode(punctuation, c -> Character.digit(c, 10) != -1));
   }
 
   @SuppressWarnings("deprecation")
@@ -472,12 +424,90 @@ public class CharacterTest extends GWTTestCase {
 
   public void testUpperCase() {
     assertEquals("wrong number of uppercase letters", 26,
-        upperCaseJudge.allPass().length());
+        countAscii(Character::isUpperCase));
     assertEquals("wrong number of uppercase letters after toUpperCase", 52,
-        new UpperCaseJudge(upperCaseChanger.changed()).allPass().length());
+        countAscii(Character::toUpperCase, Character::isUpperCase));
   }
   
   public void testValueOf() {
     assertEquals('A', Character.valueOf('A').charValue());
+  }
+
+  public void testIsLetterInt() {
+    assertEquals("No other characters should be letters",
+        letters.length, countUnicode(allCodePoints, Character::isLetter));
+    assertEquals("Unicode letters should be recognized",
+        letters.length, countUnicode(letters, Character::isLetter));
+  }
+
+  public void testIsDigitInt() {
+    assertEquals("Unicode digits should be recognized",
+        digits.length, countUnicode(digits, Character::isDigit));
+    assertEquals("No other characters should be digits",
+        digits.length, countUnicode(allCodePoints, Character::isDigit));
+  }
+
+  public void testIsDigitOrLetterInt() {
+    assertEquals("Unicode digits should be recognized",
+        digits.length, countUnicode(digits, Character::isLetterOrDigit));
+    assertEquals("Unicode letters should be recognized",
+        digits.length, countUnicode(digits, Character::isLetterOrDigit));
+    assertEquals("No other characters should match letter or digit",
+        digits.length + letters.length,
+        countUnicode(allCodePoints, Character::isLetterOrDigit));
+  }
+
+  public void testIsSpaceCharInt() {
+    assertEquals("Unicode spaces should be recognized",
+        spaces.length, countUnicode(spaces, Character::isSpaceChar));
+    assertEquals("No other characters should match space",
+        spaces.length,
+        countUnicode(allCodePoints, Character::isSpaceChar));
+  }
+
+  public void testIsDefined() {
+    assertEquals("Should recognize defined characters",
+        allCodePoints.length - others.length,
+        countUnicode(allCodePoints, Character::isDefined));
+    assertEquals("No other characters should be defined",
+        0,
+        countUnicode(others, Character::isDefined));
+  }
+
+  public void testIsISOControl() {
+    assertTrue(Character.isISOControl(hideFromCompiler((char) 0)));
+    assertTrue(Character.isISOControl(hideFromCompiler((char) 0x1f)));
+    assertFalse(Character.isISOControl(hideFromCompiler((char) 0x20)));
+    assertFalse(Character.isISOControl(hideFromCompiler((char) 0x7E)));
+    assertTrue(Character.isISOControl(hideFromCompiler((char) 0x7F)));
+    assertTrue(Character.isISOControl(hideFromCompiler((char) 0x9F)));
+    assertFalse(Character.isISOControl(hideFromCompiler((char) 0xA0)));
+  }
+
+  public void testIsISOControlInt() {
+    assertTrue(Character.isISOControl(hideFromCompiler(0)));
+    assertTrue(Character.isISOControl(hideFromCompiler(0x1f)));
+    assertFalse(Character.isISOControl(hideFromCompiler(0x20)));
+    assertFalse(Character.isISOControl(hideFromCompiler(0x7E)));
+    assertTrue(Character.isISOControl(hideFromCompiler(0x7F)));
+    assertTrue(Character.isISOControl(hideFromCompiler(0x9F)));
+    assertFalse(Character.isISOControl(hideFromCompiler(0xA0)));
+  }
+
+  public void testIsSurrogate() {
+    assertFalse(Character.isSurrogate(hideFromCompiler((char) 0)));
+    assertTrue(Character.isSurrogate(hideFromCompiler(Character.MIN_HIGH_SURROGATE)));
+    assertTrue(Character.isSurrogate(hideFromCompiler(Character.MAX_HIGH_SURROGATE)));
+    assertTrue(Character.isSurrogate(hideFromCompiler(Character.MIN_LOW_SURROGATE)));
+    assertTrue(Character.isSurrogate(hideFromCompiler(Character.MAX_LOW_SURROGATE)));
+    assertFalse(Character.isSurrogate(hideFromCompiler((char) (Character.MAX_LOW_SURROGATE + 1))));
+  }
+
+  protected <T> T hideFromCompiler(T value) {
+    if (Math.random() < -1) {
+      // Can never happen, but fools the compiler enough not to optimize this call.
+      fail();
+    }
+    return value;
   }
 }

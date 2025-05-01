@@ -36,7 +36,7 @@ public class ClientSupportTest extends GWTTestCase {
       int idx = ua.indexOf("firefox/") + 8;
       int endIdx = idx;
       int len = ua.length();
-      while (endIdx < len && Character.isDigit(ua.charAt(endIdx))) {
+      while (endIdx < len && '0' <= ua.charAt(endIdx) && '9' >= ua.charAt(endIdx)) {
         endIdx++;
       }
       int majorVers = Integer.parseInt(ua.substring(idx, endIdx), 10);

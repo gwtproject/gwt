@@ -18,14 +18,25 @@ package java.lang;
 import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 
 import java.io.Serializable;
+import java.util.Arrays;
+
 import javaemul.internal.NativeRegExp;
 import javaemul.internal.annotations.HasNoSideEffects;
 
 /**
  * Wraps a native <code>char</code> as an object.
  *
- * Some methods are not possible to implement without a Unicode database,
- * which would blow up the code size.
+ * <p>Some methods are not possible to implement without a Unicode database,
+ * which would blow up the code size.</p>
+ *
+ * <p>Methods such as isLetter, isDigit, ... use the JS native API for Unicode.
+ * Their output is only consistent with JVMs that have the same Unicode support
+ * as the target browser. As of 2025, most browsers provide Unicode 16.0 support
+ * which is on par with OpenJDK 24.</p>
+ *
+ * <a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/Character.html#conformance">
+ *   See the conformance table for details.
+ * </a>
  *
  * <pre>
  * The following methods are still not implemented -- most would require Unicode
@@ -173,32 +184,27 @@ public final class Character implements Comparable<Character>, Serializable {
     return x - y;
   }
 
-  /*
-   * TODO: correct Unicode handling.
-   */
   public static int digit(char c, int radix) {
     return digit((int) c, radix);
   }
 
-  public static int digit(int codepoint, int radix) {
+  public static int digit(int codePoint, int radix) {
     if (radix < MIN_RADIX || radix > MAX_RADIX) {
       return -1;
     }
     int digit;
-    if (isDigit(codepoint)) {
-      if (codepoint >= 2406 && codepoint <= 3567
-          || codepoint >= 6470 && codepoint <= 6479
-          || codepoint >= 69734 && codepoint <= 69871
-          || codepoint >= 69882 && codepoint <= 69951) {
-        digit = (codepoint - 6) & 15;
-      } else if (codepoint >= 120782 && codepoint <= 120831) {
-        digit = (codepoint - 2) % 10;
-      } else {
-        digit = codepoint & 15;
-      }
-    } else if (codepoint >= 'a' && codepoint <= 'z' || codepoint >= 'A' && codepoint <= 'Z'
-        || codepoint >= 65313 && codepoint <= 65338 || codepoint >= 65345 && codepoint <= 65370) {
-      digit = (codepoint & 31) + 9;
+    if (isDigit(codePoint)) {
+      // we don't have to list all representations of 0, if two consecutive ones are the same
+      // mod 16 we only list the first one
+      int[] zeros = {0x30, 0x966, 0xe50, 0x1946, 0x19d0, 0x11066, 0x110f0, 0x11136,
+          0x111d0, 0x116da, 0x11730, 0x1d7ce, 0x1d7d8, 0x1d7e2, 0x1d7ec, 0x1d7f6, 0x1e140,
+          0x1e5f1, 0x1e950};
+      int pos = Arrays.binarySearch(zeros, codePoint);
+      digit = pos >= 0 ? 0 : ((codePoint - zeros[-pos - 2]) & 0xf);
+    } else if (codePoint >= 'a' && codePoint <= 'z' || codePoint >= 'A' && codePoint <= 'Z'
+        || codePoint >= 0xff21 && codePoint <= 0xff3a
+        || codePoint >= 0xff41 && codePoint <= 0xff5a) {
+      digit = (codePoint & 0x1f) + 9;
     } else {
       return -1;
     }
@@ -249,8 +255,6 @@ public final class Character implements Comparable<Character>, Serializable {
     return isDigit(String.valueOf(c));
   }
 
-  // Known differences between Java 17 and Chrome 135
-  // 11f50 .. 11f59, 16ac0 .. 16ac9, 1e4f0 .. 1e4f9, 1fbf0 .. 1fbf9
   public static boolean isDigit(int codePoint) {
     return isValidCodePoint(codePoint) && isDigit(String.NativeString.fromCodePoint(codePoint));
   }

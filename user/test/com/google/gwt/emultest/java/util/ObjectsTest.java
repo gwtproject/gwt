@@ -173,7 +173,7 @@ public class ObjectsTest extends GWTTestCase {
       toTest.run();
       fail("Should have failed");
     } catch (Exception ex) {
-      assertEquals(ex.getClass(), thrownCheck);
+      assertEquals(thrownCheck, ex.getClass());
     }
   }
 }

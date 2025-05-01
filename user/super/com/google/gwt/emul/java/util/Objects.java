@@ -134,7 +134,7 @@ public final class Objects {
   }
 
   public static <T> T requireNonNullElseGet(T obj, Supplier<? extends T> supplier) {
-    return obj != null ? obj : requireNonNull(supplier.get());
+    return obj != null ? obj : requireNonNull(requireNonNull(supplier, "supplier").get());
   }
 
   public static int checkIndex(int index, int length) {

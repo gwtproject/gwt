@@ -52,10 +52,10 @@ public class UiBinderUtil {
       // Put the panel's element back where it was.
       if (origParent != null) {
         origParent.insertBefore(element, origSibling);
-        removeHiddenDiv();
       } else {
         orphan(element);
       }
+      removeHiddenDiv();
     }
   }
 
@@ -88,6 +88,7 @@ public class UiBinderUtil {
     hiddenDiv.setInnerHTML(html);
     Element newbie = hiddenDiv.getFirstChildElement();
     orphan(newbie);
+    removeHiddenDiv();
     return newbie;
   }
 
@@ -109,7 +110,6 @@ public class UiBinderUtil {
 
   private static void orphan(Node node) {
     node.getParentNode().removeChild(node);
-    removeHiddenDiv();
   }
 
   /**

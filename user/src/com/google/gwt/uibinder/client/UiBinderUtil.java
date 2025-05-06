@@ -55,7 +55,7 @@ public class UiBinderUtil {
       } else {
         orphan(element);
       }
-      removeHiddenDiv();
+      orphan(hiddenDiv);
     }
   }
 
@@ -88,7 +88,7 @@ public class UiBinderUtil {
     hiddenDiv.setInnerHTML(html);
     Element newbie = hiddenDiv.getFirstChildElement();
     orphan(newbie);
-    removeHiddenDiv();
+    orphan(hiddenDiv);
     return newbie;
   }
 
@@ -97,15 +97,8 @@ public class UiBinderUtil {
     if (hiddenDiv == null) {
       hiddenDiv = Document.get().createDivElement();
       UIObject.setVisible(hiddenDiv, false);
-      RootPanel.getBodyElement().appendChild(hiddenDiv);
     }
-  }
-
-  private static void removeHiddenDiv() {
-    if (hiddenDiv != null) {
-      hiddenDiv.removeFromParent();
-      hiddenDiv = null;
-    }
+    RootPanel.getBodyElement().appendChild(hiddenDiv);
   }
 
   private static void orphan(Node node) {

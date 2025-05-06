@@ -355,5 +355,4 @@ public class HTMLPanel extends ComplexPanel {
     hiddenDiv.removeFromParent();
     return child;
   }
-
 }

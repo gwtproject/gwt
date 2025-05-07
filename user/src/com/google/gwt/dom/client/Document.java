@@ -227,6 +227,16 @@ public class Document extends Node {
   }
 
   /**
+   * Creates a DOM comment
+   *
+   * @param comment
+   * @return the comment node
+   */
+  public final Node createComment(String comment) {
+    return DOMImpl.impl.createComment(this, comment);
+  }
+
+  /**
    * Creates a 'contextmenu' event.
    * 
    * Note: Contextmenu events will not dispatch properly on Firefox 2 and

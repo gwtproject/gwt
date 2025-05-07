@@ -51,6 +51,10 @@ abstract class DOMImpl {
     return e;
   }-*/;
 
+  public native Node createComment(Document doc, String comment) /*-{
+    return doc.createComment(comment);
+  }-*/;
+
   public native Element createElement(Document doc, String tag) /*-{
     return doc.createElement(tag);
   }-*/;

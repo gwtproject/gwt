@@ -95,6 +95,7 @@ public class UiBinderUtil {
     if (hiddenDiv == null) {
       hiddenDiv = Document.get().createDivElement();
       UIObject.setVisible(hiddenDiv, false);
+      RootPanel.getBodyElement().appendChild(Document.get().createComment("Hidden element used internally by UiBinder."));
       RootPanel.getBodyElement().appendChild(hiddenDiv);
     }
   }

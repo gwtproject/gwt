@@ -253,9 +253,12 @@ public class WriterTest extends GWTTestCase {
     nullWriter.write(42);
     nullWriter.append('a');
     nullWriter.write("hola", 1, 2);
+    nullWriter.close();
+    // writing to closed stream fails
     assertThrows(IOException.class, () -> nullWriter.write(42));
     assertThrows(IOException.class, () -> nullWriter.append('a'));
     assertThrows(IOException.class, () -> nullWriter.append("hola", 1, 2));
+    // bounds check takes precedence over closed stream check
     assertThrows(IndexOutOfBoundsException.class,
         () -> nullWriter.write("hola", 1, 10));
     assertThrows(IndexOutOfBoundsException.class,

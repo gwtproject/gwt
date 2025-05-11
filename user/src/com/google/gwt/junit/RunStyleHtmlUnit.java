@@ -29,14 +29,17 @@ import org.htmlunit.Page;
 import org.htmlunit.ScriptException;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
+import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.JavaScriptErrorListener;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.util.WebClientUtils;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -133,7 +136,7 @@ public class RunStyleHtmlUnit extends RunStyle {
         @Override
         public void scriptException(HtmlPage htmlPage,
             ScriptException scriptException) {
-          treeLogger.log(TreeLogger.DEBUG,
+          treeLogger.log(TreeLogger.ERROR,
               "Script Exception: " + scriptException.getLocalizedMessage() +
                ", line " + scriptException.getFailingLine());
         }
@@ -191,11 +194,31 @@ public class RunStyleHtmlUnit extends RunStyle {
     private static final long serialVersionUID = 3594816610842448691L;
     private final WebClient webClient;
     private final TreeLogger logger;
+    private final HtmlUnitContextFactory htmlUnitContextFactory;
 
     HostedJavaScriptEngine(WebClient webClient, TreeLogger logger) {
       super(webClient);
       this.webClient = webClient;
       this.logger = logger;
+      this.htmlUnitContextFactory = new HtmlUnitContextFactory(webClient) {
+        protected Context makeContext() {
+          Context ctx = super.makeContext();
+          try {
+            Field hasShutter = Context.class.getDeclaredField("hasClassShutter");
+            hasShutter.setAccessible(true);
+            hasShutter.setBoolean(ctx, false);
+          } catch (IllegalAccessException | NoSuchFieldException e) {
+            throw new RuntimeException(e);
+          }
+          ctx.setClassShutter(any -> true);
+          return ctx;
+        }
+      };
+    }
+
+    @Override
+    public HtmlUnitContextFactory getContextFactory() {
+      return htmlUnitContextFactory;
     }
 
     @Override

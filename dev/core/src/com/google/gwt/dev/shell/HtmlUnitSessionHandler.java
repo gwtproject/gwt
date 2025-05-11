@@ -35,6 +35,7 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.HtmlUnitScriptableProxy;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.host.Window;
 
@@ -182,11 +183,14 @@ public class HtmlUnitSessionHandler extends SessionHandlerClient {
       jsThis = window;
     } else {
       Object obj = makeJsvalFromValue(jsContext, thisObj);
+      if (obj instanceof HtmlUnitScriptableProxy) {
+        obj = ((HtmlUnitScriptableProxy<?>) obj).getDelegee();
+      }
       if (obj instanceof ScriptableObject) {
         jsThis = (ScriptableObject) obj;
       } else {
         logger.log(TreeLogger.ERROR, "Unable to convert " + obj + " to either "
-            + " ScriptableObject or SimpleScriptableProxy");
+            + " ScriptableObject or HtmlUnitScriptableProxy");
         return new ExceptionOrReturnValue(true, new Value(null));
       }
     }
@@ -284,6 +288,15 @@ public class HtmlUnitSessionHandler extends SessionHandlerClient {
       return returnVal;
     }
     if (value instanceof Scriptable) {
+      if (value instanceof HtmlUnitScriptableProxy) {
+        // HtmlUnit will return proxies to java for the window/document objects,
+        // so that those objects can work after navigating away from the page.
+        // However, GWTTestCase operates inside a single page session, so we
+        // can unwrap these proxies to get the real instance. Without doing
+        // this, the refToJsObject mapping would indicate that an object might
+        // not equal itself
+        value = ((HtmlUnitScriptableProxy<?>) value).getDelegee();
+      }
       if (value instanceof ScriptableObject) {
         /*
          * HACK: check for native types like NativeString. NativeString is

@@ -82,7 +82,7 @@ public class Timestamp extends java.util.Date {
    */
   private int nanos;
 
-  @Deprecated
+  @Deprecated(since = "1.2")
   public Timestamp(int year, int month, int date, int hour, int minute,
       int second, int nano) {
     super(year, month, date, hour, minute, second);

@@ -208,6 +208,12 @@ public class StackPanelTest extends PanelTestBase<StackPanel> {
     assertFalse("Style name '" + styleName + "' was found in '" + element.getClassName() + "'",
         element.hasClassName(styleName));
   }
+  
+  public void testPresentationRole() {
+    StackPanel stackpanel = createStackPanel();
+    assertNotNull(stackpanel.getElement());
+    assertEquals("presentation", stackpanel.getElement().getAttribute("role"));
+  }
 
   /**
    * Create a new stack panel.

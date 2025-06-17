@@ -608,6 +608,7 @@ public class MenuBarTest extends WidgetTestBase {
   public void testPresentationRole() {
     MenuBar menu = new MenuBar();
     assertNotNull(menu.getElement());
-    assertEquals("presentation", menu.getElement().getAttribute("role"));
+    assertEquals("presentation",
+        Element.as(menu.getElement().getChild(1)).getAttribute("role"));
   }
 }

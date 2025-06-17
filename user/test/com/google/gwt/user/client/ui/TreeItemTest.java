@@ -264,7 +264,9 @@ public class TreeItemTest extends GWTTestCase {
   
   public void testPresentationRole() {
     TreeItem item = new TreeItem();
+    item.addItem(new TreeItem());
     assertNotNull(item.getElement());
-    assertEquals("presentation", item.getElement().getAttribute("role"));
+    assertEquals("presentation",
+        item.getElement().getFirstChildElement().getAttribute("role"));
   }
 }

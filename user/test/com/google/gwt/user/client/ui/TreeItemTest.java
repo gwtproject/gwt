@@ -15,7 +15,6 @@
  */
 package com.google.gwt.user.client.ui;
 
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 
@@ -265,12 +264,7 @@ public class TreeItemTest extends GWTTestCase {
   
   public void testPresentationRole() {
     TreeItem item = new TreeItem();
-    item.addTextItem("Child");
-
-    Element tableElement = item.getElement().getFirstChildElement();
-    assertNotNull("Table element must exist but is null!", tableElement);
-
-    String role = tableElement.getAttribute("role");
-    assertEquals("presentation", role);
+    assertNotNull(item.getElement());
+    assertEquals("presentation", item.getElement().getAttribute("role"));
   }
 }

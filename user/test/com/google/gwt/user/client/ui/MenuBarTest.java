@@ -20,7 +20,6 @@ import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.NativeEvent;
-import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.Command;
@@ -607,20 +606,8 @@ public class MenuBarTest extends WidgetTestBase {
   }
   
   public void testPresentationRole() {
-	  MenuBar menu = new MenuBar();
-	  menu.addItem("Item1", BLANK_COMMAND);
-	  RootPanel.get().add(menu);
-	  
-	  Element outer = menu.getElement();
-	  
-	  NodeList<Element> tables = outer.getElementsByTagName("table");
-	  boolean found = false;
-	  for (int i = 0; i < tables.getLength(); i++) {
-	      if ("presentation".equals(tables.getItem(i).getAttribute("role"))) {
-	          found = true;
-	          break;
-	      }
-	  }
-	  assertTrue("There should be a table with role='presentation'", found);
-	}
+    MenuBar menu = new MenuBar();
+    assertNotNull(menu.getElement());
+    assertEquals("presentation", menu.getElement().getAttribute("role"));
+  }
 }

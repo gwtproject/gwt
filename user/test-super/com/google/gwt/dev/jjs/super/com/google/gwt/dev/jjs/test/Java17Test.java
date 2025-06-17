@@ -134,6 +134,13 @@ public class Java17Test extends GWTTestCase {
   }
 
   /**
+   * Record with a single static field.
+   */
+  record RecordWithStaticField() {
+    public static String foo = "bar";
+  }
+
+  /**
    * Record type that takes a record as a component
    */
   record RecordWithReferenceType(TopLevelRecord refType){}
@@ -164,6 +171,7 @@ public class Java17Test extends GWTTestCase {
     assertTrue(withValues.toString().contains("Banana"));
     assertEquals("Banana", withValues.name());
     assertEquals(7, withValues.count());
+    assertEquals("bar", RecordWithStaticField.foo);
     // Under the current implementation this next line would fail - this is not inconsistent with the spec,
     // but it is different than what the JVM does.
 //    assertEquals(0, new TopLevelRecord("", 0).hashCode());

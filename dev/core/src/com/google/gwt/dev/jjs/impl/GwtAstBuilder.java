@@ -4337,18 +4337,21 @@ public class GwtAstBuilder {
 
       if (x.isRecord()) {
         // build implicit record component accessor methods, JDT doesn't declare them
-        for (JField field : type.getFields()) {
+        type.getFields().stream().filter(f -> !f.isStatic()).forEach(field -> {
           // Create a method binding that corresponds to the method we are creating, jdt won't
           // offer us one unless it was defined in source.
           char[] fieldName = field.getName().toCharArray();
           MethodBinding recordComponentAccessor = binding.getExactMethod(
                   fieldName, new TypeBinding[0], curCud.scope);
-
+          if (recordComponentAccessor == null) {
+            throw new InternalCompilerException(
+                "Missing method " + field.getName() + " for record type " + type.getName());
+          }
           // Get the record component, and pass on any annotations meant for the method
           JMethod componentMethod = typeMap.get(recordComponentAccessor);
           RecordComponentBinding component = binding.getRecordComponent(fieldName);
           processAnnotations(component.sourceRecordComponent().annotations, componentMethod);
-        }
+        });
 
         // At this time, we need to be sure a binding exists, either because the record declared
         // its own, or we make one specifically for it.

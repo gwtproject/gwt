@@ -21,12 +21,13 @@ import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.testing.impl.MockResource;
 import com.google.gwt.dev.javac.testing.impl.MockResourceOracle;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.AbstractTreeLogger;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 import junit.framework.TestCase;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -80,7 +81,7 @@ public abstract class CompilationStateTestBase extends TestCase {
 
         @Override
         public String getStrongHash() {
-          return Util.computeStrongName(Util.getBytes(getSource()));
+          return Hashing.murmur3_128().hashString(getSource(), StandardCharsets.UTF_8).toString();
         }
 
         @Override

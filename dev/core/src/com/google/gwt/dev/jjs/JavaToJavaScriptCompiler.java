@@ -184,6 +184,8 @@ import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.hash.Hasher;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import org.xml.sax.SAXException;
 
@@ -193,12 +195,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.management.ManagementFactory;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -1526,11 +1530,15 @@ public final class JavaToJavaScriptCompiler {
     public PermutationResultImpl(String[] jsFragments, Permutation permutation,
         SymbolData[] symbolMap, StatementRanges[] statementRanges) {
       byte[][] bytes = new byte[jsFragments.length][];
+      Hasher h = Hashing.murmur3_128().newHasher();
+      h.putInt(jsFragments.length);
       for (int i = 0; i < jsFragments.length; ++i) {
-        bytes[i] = Util.getBytes(jsFragments[i]);
+        bytes[i] = jsFragments[i].getBytes(StandardCharsets.UTF_8);
+        h.putInt(bytes[i].length);
+        h.putBytes(bytes[i]);
       }
       this.js = bytes;
-      this.jsStrongName = Util.computeStrongName(bytes);
+      this.jsStrongName = h.hash().toString().toUpperCase(Locale.ROOT);
       this.permutation = permutation;
       try {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

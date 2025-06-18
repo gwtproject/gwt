@@ -209,7 +209,7 @@ public class JProgram extends JNode implements ArrayTypeCreator {
   /**
    * Helper to create an assignment, used to initialize fields, etc.
    */
-  public static JExpressionStatement createAssignmentStmt(SourceInfo info, JExpression lhs,
+  public static JStatement createAssignmentStmt(SourceInfo info, JExpression lhs,
       JExpression rhs) {
     return createAssignment(info, lhs, rhs).makeStatement();
   }

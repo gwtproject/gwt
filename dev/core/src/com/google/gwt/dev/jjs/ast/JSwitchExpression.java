@@ -62,4 +62,9 @@ public class JSwitchExpression extends JExpression {
   public JType getType() {
     return type;
   }
+
+  @Override
+  public JStatement makeStatement() {
+    return new JSwitchStatement(this);
+  }
 }

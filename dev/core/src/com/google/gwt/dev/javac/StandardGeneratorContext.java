@@ -66,8 +66,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedSet;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 /**
  * Manages generators and generated units during a single compilation.
  */

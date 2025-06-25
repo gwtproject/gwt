@@ -36,8 +36,8 @@ public final class JsRegExp extends JsValueLiteral {
     if (!(that instanceof JsRegExp)) {
       return false;
     }
-    if (!Objects.equals(flags, ((JsRegExp) that).flags)) return false;
-    return Objects.equals(pattern, ((JsRegExp) that).pattern);
+    return Objects.equals(flags, ((JsRegExp) that).flags) &&
+        Objects.equals(pattern, ((JsRegExp) that).pattern);
   }
 
   public String getFlags() {

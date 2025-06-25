@@ -29,8 +29,6 @@ import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import java.util.Locale;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 /**
  * Generates Multipart HTML files.
  */

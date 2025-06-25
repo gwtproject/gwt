@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dev.util;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -22,8 +24,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * A nifty class that lets you squirrel away data on the file system. Write

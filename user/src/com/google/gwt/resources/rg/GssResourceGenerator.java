@@ -15,6 +15,8 @@
  */
 package com.google.gwt.resources.rg;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.Generator;
@@ -147,8 +149,6 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.Adler32;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * This generator parses and compiles a GSS file to a css string and generates the implementation

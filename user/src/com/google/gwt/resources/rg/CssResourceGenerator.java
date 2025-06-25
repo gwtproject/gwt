@@ -15,6 +15,8 @@
  */
 package com.google.gwt.resources.rg;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.Generator;
@@ -94,8 +96,6 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.zip.Adler32;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Provides implementations of CSSResources.

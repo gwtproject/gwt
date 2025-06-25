@@ -35,7 +35,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Base class for tests that need a mock type compilation state and everything

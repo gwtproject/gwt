@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dev.javac;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
@@ -26,8 +28,6 @@ import org.eclipse.jdt.core.compiler.CategorizedProblem;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Used by {@link MemoryUnitCacheTest} and {@link PersistentUnitCacheTest}.

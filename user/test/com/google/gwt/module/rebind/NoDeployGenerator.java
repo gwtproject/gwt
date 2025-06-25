@@ -15,6 +15,8 @@
  */
 package com.google.gwt.module.rebind;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
@@ -23,8 +25,6 @@ import com.google.gwt.core.ext.linker.EmittedArtifact.Visibility;
 
 import java.io.IOException;
 import java.io.OutputStream;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Creates three files in the generated output directory with different

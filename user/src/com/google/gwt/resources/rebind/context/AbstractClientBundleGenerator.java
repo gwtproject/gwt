@@ -51,7 +51,6 @@ import com.google.gwt.resources.rg.BundleResourceGenerator;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
-import javax.lang.model.SourceVersion;
 import java.beans.Beans;
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -65,6 +64,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import javax.lang.model.SourceVersion;
 
 /**
  * The base class for creating new ClientBundle implementations.

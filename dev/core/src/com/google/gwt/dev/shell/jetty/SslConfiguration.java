@@ -16,9 +16,7 @@
 package com.google.gwt.dev.shell.jetty;
 
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.dev.util.Util;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -77,7 +75,7 @@ public class SslConfiguration {
           keyStorePassword = Files.readString(Paths.get(value), StandardCharsets.UTF_8);
         } catch (IOException e) {
           logger.log(TreeLogger.ERROR,
-              "Unable to read keystore password from '" + value + "'");
+                  "Unable to read keystore password from '" + value + "'");
           return Optional.empty();
         }
         keyStorePassword = keyStorePassword.trim();

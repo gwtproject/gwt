@@ -15,6 +15,8 @@
  */
 package com.google.gwt.core.ext.linker.impl;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
@@ -43,8 +45,6 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * A base class for Linkers that use an external script to boostrap the GWT module. This

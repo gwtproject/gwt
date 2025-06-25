@@ -29,8 +29,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 /**
  * Creates string hashes for various purposes from walking bytecode.
  */

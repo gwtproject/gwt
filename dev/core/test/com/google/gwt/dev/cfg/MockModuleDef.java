@@ -15,14 +15,14 @@
  */
 package com.google.gwt.dev.cfg;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.javac.testing.impl.MockResourceOracle;
 import com.google.gwt.dev.resource.Resource;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Mock for {@link ModuleDef}.

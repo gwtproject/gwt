@@ -19,10 +19,10 @@ import com.google.gwt.dev.util.CompilerVersion;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.cache.Cache;
 import com.google.gwt.thirdparty.guava.common.cache.CacheBuilder;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 import com.google.gwt.thirdparty.guava.common.io.Closeables;
 import com.google.gwt.thirdparty.guava.common.util.concurrent.Futures;
 import com.google.gwt.thirdparty.guava.common.util.concurrent.MoreExecutors;
-import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

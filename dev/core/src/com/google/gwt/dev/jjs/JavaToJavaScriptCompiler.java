@@ -13,6 +13,8 @@
  */
 package com.google.gwt.dev.jjs;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.Artifact;
@@ -208,8 +210,6 @@ import java.util.TreeMap;
 import java.util.zip.GZIPInputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * A base for classes that compile Java <code>JProgram</code> representations into corresponding Js

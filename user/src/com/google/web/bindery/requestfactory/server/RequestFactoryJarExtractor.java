@@ -15,6 +15,8 @@
  */
 package com.google.web.bindery.requestfactory.server;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.dev.util.Name;
 import com.google.gwt.dev.util.Name.SourceOrBinaryName;
 import com.google.gwt.dev.util.Util;
@@ -95,8 +97,6 @@ import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 
 import javax.annotation.processing.Processor;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Used to extract RequestFactory client jars from {@code gwt-user.jar}.

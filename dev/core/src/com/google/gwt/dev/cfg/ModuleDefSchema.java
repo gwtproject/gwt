@@ -31,7 +31,6 @@ import com.google.gwt.dev.util.Empty;
 import com.google.gwt.dev.util.xml.AttributeConverter;
 import com.google.gwt.dev.util.xml.Schema;
 
-import javax.lang.model.SourceVersion;
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URL;
@@ -41,6 +40,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
+import javax.lang.model.SourceVersion;
 
 // CHECKSTYLE_NAMING_OFF
 

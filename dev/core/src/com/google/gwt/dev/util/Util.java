@@ -27,7 +27,6 @@ import com.google.gwt.thirdparty.guava.common.io.Closeables;
 import com.google.gwt.util.tools.Utility;
 import com.google.gwt.util.tools.shared.StringUtils;
 
-import javax.lang.model.SourceVersion;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
@@ -54,8 +53,9 @@ import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
-import java.util.Objects;
 import java.util.Locale;
+import java.util.Objects;
+import javax.lang.model.SourceVersion;
 
 /**
  * A smattering of useful methods. Methods in this class are candidates for

@@ -38,9 +38,12 @@ import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -373,10 +376,20 @@ public class Precompile {
   public boolean run(TreeLogger logger) throws UnableToCompleteException {
     for (String moduleName : options.getModuleNames()) {
       File compilerWorkDir = options.getCompilerWorkDir(moduleName);
-      Util.recursiveDelete(compilerWorkDir, true);
+      try {
+        MoreFiles.deleteDirectoryContents(compilerWorkDir.toPath());
+      } catch (IOException e) {
+        logger.log(TreeLogger.ERROR, "Unable to delete contents of " + compilerWorkDir, e);
+        throw new UnableToCompleteException();
+      }
       // No need to check mkdirs result because an IOException will occur
       // anyway.
-      compilerWorkDir.mkdirs();
+      try {
+        Files.createDirectories(compilerWorkDir.toPath());
+      } catch (IOException e) {
+        logger.log(TreeLogger.ERROR, "Unable to create directory " + compilerWorkDir, e);
+        throw new UnableToCompleteException();
+      }
 
       File precompilationFile = new File(compilerWorkDir, PRECOMPILE_FILENAME);
 
@@ -418,8 +431,14 @@ public class Precompile {
         int numPermutations =
             new PropertyCombinations(module.getProperties(), module.getActiveLinkerNames())
                 .collapseProperties().size();
-        Util.writeStringAsFile(logger, new File(compilerWorkDir, PERM_COUNT_FILENAME), String
-            .valueOf(numPermutations));
+        try {
+          Files.writeString(new File(compilerWorkDir, PERM_COUNT_FILENAME).toPath(),
+              String.valueOf(numPermutations));
+        } catch (IOException e) {
+          logger.log(TreeLogger.ERROR, "Unable to write permutation count to "
+              + PERM_COUNT_FILENAME, e);
+          throw new UnableToCompleteException();
+        }
         if (branch.isLoggable(TreeLogger.INFO)) {
           branch.log(TreeLogger.INFO,
               "Precompilation (minimal) succeeded, number of permutations: " + numPermutations);
@@ -449,8 +468,14 @@ public class Precompile {
           Util.writeObjectAsFile(logger, precompilationFile, precompilation);
 
           int permsPrecompiled = precompilation.getPermutations().length;
-          Util.writeStringAsFile(logger, new File(compilerWorkDir, PERM_COUNT_FILENAME), String
-              .valueOf(permsPrecompiled));
+          try {
+            Files.writeString(new File(compilerWorkDir, PRECOMPILE_FILENAME).toPath(),
+                String.valueOf(permsPrecompiled));
+          } catch (IOException e) {
+            branch.log(TreeLogger.ERROR, "Unable to write precompilation count to "
+                + PRECOMPILE_FILENAME, e);
+            throw new UnableToCompleteException();
+          }
           if (branch.isLoggable(TreeLogger.INFO)) {
             branch.log(TreeLogger.INFO, "Precompilation succeeded, number of permutations: "
                 + permsPrecompiled);

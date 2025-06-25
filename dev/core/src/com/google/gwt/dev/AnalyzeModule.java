@@ -26,9 +26,11 @@ import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 /**
  * Performs the first phase of compilation, generating the set of permutations
@@ -141,8 +143,18 @@ public class AnalyzeModule {
     for (String moduleName : options.getModuleNames()) {
       File compilerWorkDir = options.getCompilerWorkDir(moduleName);
       Util.recursiveDelete(compilerWorkDir, true);
-      // No need to check mkdirs result because an IOException will occur anyway
-      compilerWorkDir.mkdirs();
+      try {
+        MoreFiles.deleteDirectoryContents(compilerWorkDir.toPath());
+      } catch (IOException e) {
+        logger.log(TreeLogger.ERROR, "Unable to delete contents of " + compilerWorkDir, e);
+        throw new UnableToCompleteException();
+      }
+      try {
+        Files.createDirectories(compilerWorkDir.toPath());
+      } catch (IOException e) {
+        logger.log(TreeLogger.ERROR, "Unable to create directory " + compilerWorkDir, e);
+        throw new UnableToCompleteException();
+      }
 
       ModuleDef module = ModuleDefLoader.loadFromClassPath(logger, moduleName);
       if (logger.isLoggable(TreeLogger.INFO)) {
@@ -155,8 +167,14 @@ public class AnalyzeModule {
        */
       int numPermutations = new PropertyCombinations(module.getProperties(),
           module.getActiveLinkerNames()).collapseProperties().size();
-      Util.writeStringAsFile(logger, new File(compilerWorkDir,
-          AnalyzeModule.PERM_COUNT_FILENAME), String.valueOf(numPermutations));
+      try {
+        Files.writeString(new File(compilerWorkDir, AnalyzeModule.PERM_COUNT_FILENAME).toPath(),
+            String.valueOf(numPermutations));
+      } catch (IOException e) {
+        logger.log(TreeLogger.ERROR, "Unable to write permutation count to " +
+            AnalyzeModule.PERM_COUNT_FILENAME, e);
+        throw new UnableToCompleteException();
+      }
       Util.writeObjectAsFile(logger, new File(compilerWorkDir,
           AnalyzeModule.OPTIONS_FILENAME), options);
 

@@ -41,7 +41,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
 import java.net.JarURLConnection;
 import java.net.URISyntaxException;
@@ -542,7 +541,20 @@ public final class Util {
    *          directory
    */
   public static void recursiveDelete(File file, boolean childrenOnly) {
-    recursiveDelete(file, childrenOnly, null);
+    if (file.isDirectory()) {
+      File[] children = file.listFiles();
+      if (children != null) {
+        for (int i = 0; i < children.length; i++) {
+          recursiveDelete(children[i], false);
+        }
+      }
+      if (childrenOnly) {
+        // Do not delete the specified directory itself.
+        return;
+      }
+    }
+
+    file.delete();
   }
 
   /**
@@ -723,6 +735,7 @@ public final class Util {
     objectStream.flush();
   }
 
+  @Deprecated
   public static boolean writeStringAsFile(File file, String string) {
     // No need to check mkdirs result because an IOException will occur anyway
     file.getParentFile().mkdirs();
@@ -735,6 +748,7 @@ public final class Util {
     return true;
   }
 
+  @Deprecated
   public static void writeStringAsFile(TreeLogger logger, File file,
       String string) throws UnableToCompleteException {
     // No need to check mkdirs result because an IOException will occur anyway

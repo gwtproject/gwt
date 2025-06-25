@@ -33,6 +33,7 @@ import org.eclipse.jdt.core.compiler.CategorizedProblem;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -372,7 +373,7 @@ public class CompilationProblemReporter {
         typeName = "_" + typeName;
       }
       tmpSrc = File.createTempFile(typeName, ".java");
-      Util.writeStringAsFile(tmpSrc, source);
+      Files.writeString(tmpSrc.toPath(), source);
       String dumpPath = tmpSrc.getAbsolutePath();
       if (logger.isLoggable(TreeLogger.INFO)) {
         logger.log(TreeLogger.INFO, "See snapshot: " + dumpPath, null);

@@ -128,6 +128,7 @@ public final class Util {
     return StringUtils.toHexString(md5.digest());
   }
 
+  @Deprecated
   public static void copy(InputStream is, OutputStream os) throws IOException {
     try {
       is.transferTo(os);

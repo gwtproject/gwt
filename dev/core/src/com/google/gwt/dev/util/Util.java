@@ -264,6 +264,7 @@ public final class Util {
   /**
    * Returns a byte-array representing the default encoding for a String.
    */
+  @Deprecated
   public static byte[] getBytes(String s) {
     return s.getBytes(StandardCharsets.UTF_8);
   }
@@ -283,6 +284,7 @@ public final class Util {
    * @return the contents of the file, or null if an error occurred
    * @deprecated Removed without replacement, many usages of GWT have no install path.
    */
+  @Deprecated
   public static String getFileFromInstallPath(String relativePath) {
     String installPath = Utility.getInstallPath();
     File file = new File(installPath + '/' + relativePath);
@@ -343,6 +345,7 @@ public final class Util {
     return lastModified;
   }
 
+  @Deprecated
   public static boolean isValidJavaIdent(String token) {
     return SourceVersion.isIdentifier(token);
   }
@@ -398,11 +401,13 @@ public final class Util {
     return relativeFile;
   }
 
+  @Deprecated
   public static String makeRelativePath(File from, File to) {
     File f = makeRelativeFile(from, to);
     return (f != null ? f.getPath() : null);
   }
 
+  @Deprecated
   public static byte[] readFileAsBytes(File file) {
     try {
       return Files.readAllBytes(file.toPath());
@@ -422,6 +427,7 @@ public final class Util {
     }
   }
 
+  @Deprecated
   public static String readFileAsString(File file) {
     try {
       return Files.readString(file.toPath(), StandardCharsets.UTF_8);
@@ -433,6 +439,7 @@ public final class Util {
   /**
    * Reads an entire input stream as bytes. Closes the input stream.
    */
+  @Deprecated
   public static byte[] readStreamAsBytes(InputStream in) {
     try {
       return in.readAllBytes();
@@ -483,6 +490,7 @@ public final class Util {
   /**
    * @return null if the file could not be read
    */
+  @Deprecated
   public static char[] readURLAsChars(URL url) {
     byte[] bytes = readURLAsBytes(url);
     if (bytes != null) {
@@ -550,6 +558,7 @@ public final class Util {
    *          directory
    * @param filter only files matching this filter will be deleted
    */
+  @Deprecated
   public static void recursiveDelete(File file, boolean childrenOnly,
       FileFilter filter) {
     if (file.isDirectory()) {
@@ -620,6 +629,7 @@ public final class Util {
    * Class&lt;? super T> is used to allow creation of generic types, such as
    * Map.Entry&lt;K,V> since we can only pass in Map.Entry.class.
    */
+  @Deprecated
   @SuppressWarnings("unchecked")
   public static <T> T[] toArray(Class<? super T> componentType,
       Collection<? extends T> coll) {
@@ -632,6 +642,7 @@ public final class Util {
    * Returns a String representing the character content of the bytes; the bytes
    * must be encoded using the compiler's default encoding.
    */
+  @Deprecated
   public static String toString(byte[] bytes) {
     return new String(bytes, StandardCharsets.UTF_8);
   }
@@ -642,6 +653,7 @@ public final class Util {
    * @return the canonical version of the file path, if it could be computed;
    *         otherwise, the original file is returned unmodified
    */
+  @Deprecated
   public static File tryMakeCanonical(File file) {
     try {
       return file.getCanonicalFile();
@@ -658,6 +670,7 @@ public final class Util {
   /**
    * Gathering write.
    */
+  @Deprecated
   public static void writeBytesToFile(TreeLogger logger, File where,
       byte[][] what) throws UnableToCompleteException {
     Throwable caught;
@@ -829,26 +842,6 @@ public final class Util {
 
     return null;
   }
-
-  /**
-   * Creates a string from the bytes using the specified character set name.
-   *
-   * @param bytes bytes to convert
-   * @param charsetName the name of the character set to use
-   *
-   * @return String for the given bytes and character set or <code>null</code>
-   *         if the character set is not supported
-   */
-  private static String toString(byte[] bytes, String charsetName) {
-    try {
-      return new String(bytes, charsetName);
-    } catch (UnsupportedEncodingException e) {
-      // Ignored.
-    }
-
-    return null;
-  }
-
 
   /**
    * Not instantiable.

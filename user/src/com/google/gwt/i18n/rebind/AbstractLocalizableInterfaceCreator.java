@@ -237,7 +237,7 @@ public abstract class AbstractLocalizableInterfaceCreator {
   void generateFromPropertiesFile() throws IOException {
     InputStream propStream = new FileInputStream(resourceFile);
     LocalizedProperties p = new LocalizedProperties();
-    p.load(propStream, StandardCharsets.UTF_8);
+    p.load(propStream, "UTF-8");
     addFormatters();
     // TODO: Look for a generic version of Tapestry's LocalizedProperties class
     Set<String> keySet = p.getPropertyMap().keySet();

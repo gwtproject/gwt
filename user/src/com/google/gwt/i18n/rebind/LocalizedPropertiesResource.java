@@ -21,7 +21,6 @@ import org.apache.tapestry.util.text.LocalizedProperties;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -53,7 +52,7 @@ class LocalizedPropertiesResource extends AbstractResource {
     super(locale);
     LocalizedProperties props = new LocalizedProperties();
     try {
-      props.load(m, StandardCharsets.UTF_8);
+      props.load(m, "UTF-8");
     } catch (IOException e) {
       throw new RuntimeException("Failed to load " + this.getPath(), e);
     }

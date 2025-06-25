@@ -142,6 +142,7 @@ public final class Util {
    * Copies an input stream out to an output stream. Closes the input steam and
    * output stream.
    */
+  @Deprecated
   public static void copy(TreeLogger logger, InputStream is, OutputStream os)
       throws UnableToCompleteException {
     try (is; os) {
@@ -156,11 +157,13 @@ public final class Util {
    * Copies all of the bytes from the input stream to the output stream until
    * the input stream is EOF. Does not close either stream.
    */
+  @Deprecated
   public static void copyNoClose(InputStream is, OutputStream os)
       throws IOException {
     is.transferTo(os);
   }
 
+  @Deprecated
   public static Reader createReader(TreeLogger logger, URL url)
       throws UnableToCompleteException {
     try {
@@ -174,6 +177,7 @@ public final class Util {
   /**
    * Equality check through equals() that is also satisfied if both objects are null.
    */
+  @Deprecated
   public static boolean equalsNullCheck(Object thisObject, Object thatObject) {
     return Objects.equals(thisObject, thatObject);
   }

@@ -18,11 +18,12 @@ package com.google.gwt.core.ext.linker;
 import com.google.gwt.core.ext.Linker;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Locale;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -71,9 +72,12 @@ public abstract class AbstractLinker extends Linker {
    */
   protected final SyntheticArtifact emitInputStream(TreeLogger logger,
       InputStream what, String partialPath) throws UnableToCompleteException {
-    ByteArrayOutputStream out = new ByteArrayOutputStream();
-    Util.copy(logger, what, out);
-    return emitBytes(logger, out.toByteArray(), partialPath);
+    try (what) {
+      return emitBytes(logger, what.readAllBytes(), partialPath);
+    } catch (IOException e) {
+      logger.log(TreeLogger.ERROR, "Error during copy", e);
+      throw new UnableToCompleteException();
+    }
   }
 
   /**
@@ -89,9 +93,12 @@ public abstract class AbstractLinker extends Linker {
   protected final SyntheticArtifact emitInputStream(TreeLogger logger,
       InputStream what, String partialPath, long lastModified)
       throws UnableToCompleteException {
-    ByteArrayOutputStream out = new ByteArrayOutputStream();
-    Util.copy(logger, what, out);
-    return emitBytes(logger, out.toByteArray(), partialPath, lastModified);
+    try (what) {
+      return emitBytes(logger, what.readAllBytes(), partialPath, lastModified);
+    } catch (IOException e) {
+      logger.log(TreeLogger.ERROR, "Error during copy", e);
+      throw new UnableToCompleteException();
+    }
   }
 
   /**

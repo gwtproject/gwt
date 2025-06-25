@@ -583,6 +583,7 @@ public final class Util {
    * Release a buffer previously returned from {@link #takeThreadLocalBuf()}.
    * The released buffer may then be reused.
    */
+  @Deprecated
   public static void releaseThreadLocalBuf(byte[] buf) {
     assert buf.length == THREAD_LOCAL_BUF_SIZE;
     threadLocalBuf.set(buf);
@@ -611,6 +612,7 @@ public final class Util {
    * subsequent callers to reuse the buffer later, avoiding unncessary
    * allocations and GC.
    */
+  @Deprecated
   public static byte[] takeThreadLocalBuf() {
     byte[] buf = threadLocalBuf.get();
     if (buf == null) {

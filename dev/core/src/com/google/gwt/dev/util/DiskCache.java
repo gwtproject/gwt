@@ -46,6 +46,18 @@ public class DiskCache {
    */
 
   /**
+   * The size of a {@link #threadLocalBuf}, which should be large enough for
+   * efficient data transfer but small enough to fit easily into the L2 cache of
+   * most modern processors.
+   */
+  private static final int THREAD_LOCAL_BUF_SIZE = 16 * 1024;
+
+  /**
+   * Stores reusable thread local buffers for efficient data transfer.
+   */
+  private static final ThreadLocal<byte[]> threadLocalBuf = ThreadLocal.withInitial(() -> new byte[THREAD_LOCAL_BUF_SIZE]);
+
+  /**
    * A global shared Disk cache.
    */
   public static DiskCache INSTANCE = new DiskCache();
@@ -124,7 +136,7 @@ public class DiskCache {
    */
   public synchronized long transferFromStream(InputStream in) throws IOException {
     assert in != null;
-    byte[] buf = Util.takeThreadLocalBuf();
+    byte[] buf = takeThreadLocalBuf();
     try {
       long position = moveToEndPosition();
 
@@ -146,8 +158,25 @@ public class DiskCache {
       atEnd = false;
       return position;
     } finally {
-      Util.releaseThreadLocalBuf(buf);
+      releaseThreadLocalBuf(buf);
     }
+  }
+
+  /**
+   * Returns a thread-local buffer for efficient data transfer. Usages should be non-reentrant,
+   * resulting in a max of one buffer per thread.
+   */
+  private static byte[] takeThreadLocalBuf() {
+    byte[] buf = threadLocalBuf.get();
+    if (buf == null) {
+      throw new IllegalStateException("Reentrant usage, or failed to return!");
+    }
+    threadLocalBuf.set(null);
+    return buf;
+  }
+
+  private static void releaseThreadLocalBuf(byte[] buf) {
+    threadLocalBuf.set(buf);
   }
 
   /**

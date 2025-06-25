@@ -40,6 +40,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -145,7 +146,7 @@ public class StandardGeneratorContextTest extends TestCase {
       throws UnableToCompleteException, IOException {
     String path = "testTryCreateResource/commitCalledTwice";
     OutputStream os = genCtx.tryCreateResource(mockLogger, path);
-    os.write("going to call commit twice after this...".getBytes(Util.DEFAULT_ENCODING));
+    os.write("going to call commit twice after this...".getBytes(StandardCharsets.UTF_8));
     genCtx.setCurrentGenerator(MockGenerator.class);
     GeneratedResource res = genCtx.commitResource(mockLogger, os);
     assertEquals(path, res.getPartialPath());
@@ -218,7 +219,7 @@ public class StandardGeneratorContextTest extends TestCase {
       IOException {
     String path = "testTryCreateResource/duplicateCreationAfterCommit";
     OutputStream os1 = genCtx.tryCreateResource(mockLogger, path);
-    os1.write("going to call commit twice after this...".getBytes(Util.DEFAULT_ENCODING));
+    os1.write("going to call commit twice after this...".getBytes(StandardCharsets.UTF_8));
     genCtx.commitResource(mockLogger, os1);
     assertEquals(1, artifactSet.size());
 

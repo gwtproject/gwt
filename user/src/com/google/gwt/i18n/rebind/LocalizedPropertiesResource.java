@@ -15,13 +15,13 @@
  */
 package com.google.gwt.i18n.rebind;
 
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.i18n.shared.GwtLocale;
 
 import org.apache.tapestry.util.text.LocalizedProperties;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -53,7 +53,7 @@ class LocalizedPropertiesResource extends AbstractResource {
     super(locale);
     LocalizedProperties props = new LocalizedProperties();
     try {
-      props.load(m, Util.DEFAULT_ENCODING);
+      props.load(m, StandardCharsets.UTF_8);
     } catch (IOException e) {
       throw new RuntimeException("Failed to load " + this.getPath(), e);
     }

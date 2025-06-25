@@ -22,6 +22,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 
@@ -108,10 +110,9 @@ public class DiskCache {
     try {
       byte[] bytes = readByteArray(token);
       ByteArrayInputStream in = new ByteArrayInputStream(bytes);
-      return Util.readStreamAsObject(in, type);
-    } catch (ClassNotFoundException e) {
-      throw new RuntimeException("Unexpected exception deserializing from disk cache", e);
-    } catch (IOException e) {
+      ObjectInputStream objectInputStream = new StringInterningObjectInputStream(in);
+      return type.cast(objectInputStream.readObject());
+    } catch (ClassNotFoundException | IOException e) {
       throw new RuntimeException("Unexpected exception deserializing from disk cache", e);
     }
   }
@@ -229,13 +230,13 @@ public class DiskCache {
    * @return a token to retrieve the data later
    */
   public long writeObject(Object object) {
-    try {
-      ByteArrayOutputStream out = new ByteArrayOutputStream();
-      Util.writeObjectToStream(out, object);
-      return writeByteArray(out.toByteArray());
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    try (ObjectOutputStream objectStream = new ObjectOutputStream(out)) {
+      objectStream.writeObject(object);
     } catch (IOException e) {
       throw new RuntimeException("Unexpected IOException on in-memory stream", e);
     }
+    return writeByteArray(out.toByteArray());
   }
 
   /**

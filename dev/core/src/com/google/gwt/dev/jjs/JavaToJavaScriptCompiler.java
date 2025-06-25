@@ -174,7 +174,6 @@ import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.Memory;
 import com.google.gwt.dev.util.Name.SourceName;
 import com.google.gwt.dev.util.Pair;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.arg.OptionOptimize;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
@@ -195,6 +194,7 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
@@ -1541,13 +1541,13 @@ public final class JavaToJavaScriptCompiler {
       this.js = bytes;
       this.jsStrongName = h.hash().toString().toUpperCase(Locale.ROOT);
       this.permutation = permutation;
-      try {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Util.writeObjectToStream(baos, (Object) symbolMap);
-        this.serializedSymbolMap = baos.toByteArray();
+      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      try (ObjectOutputStream objectStream = new ObjectOutputStream(baos)) {
+        objectStream.writeObject(symbolMap);
       } catch (IOException e) {
         throw new RuntimeException("Should never happen with in-memory stream", e);
       }
+      this.serializedSymbolMap = baos.toByteArray();
       this.statementRanges = statementRanges;
     }
 

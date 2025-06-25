@@ -42,6 +42,7 @@ import com.google.gwt.dev.util.OutputFileSet;
 import com.google.gwt.dev.util.OutputFileSetOnDirectory;
 import com.google.gwt.dev.util.OutputFileSetOnJar;
 import com.google.gwt.dev.util.PersistenceBackedObject;
+import com.google.gwt.dev.util.StringInterningObjectInputStream;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.arg.ArgHandlerDeployDir;
 import com.google.gwt.dev.util.arg.ArgHandlerExtraDir;
@@ -60,6 +61,9 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -243,7 +247,11 @@ public class Link {
             ze.setTime(0);
           }
           jar.putNextEntry(ze);
-          Util.writeObjectToStream(jar, art);
+          ObjectOutputStream objectStream = new ObjectOutputStream(jar);
+          objectStream.writeObject(art);
+          // Explicitly not closing, only flushing, so that closeEntry() can close
+          objectStream.flush();
+
           jar.closeEntry();
         }
       }
@@ -569,8 +577,10 @@ public class Link {
         String entryName = entry.getName();
         if (entryName.startsWith("arts/")) {
           try {
-            artForEntry = Util.readStreamAsObject(new BufferedInputStream(
-                jarFile.getInputStream(entry)), Artifact.class);
+            try (InputStream inputStream = new BufferedInputStream(jarFile.getInputStream(entry));
+                 ObjectInputStream objectInputStream = new StringInterningObjectInputStream(inputStream)) {
+              artForEntry = (Artifact<?>) objectInputStream.readObject();
+            }
             assert artForEntry.isTransferableFromShards();
           } catch (ClassNotFoundException e) {
             logger.log(TreeLogger.ERROR,

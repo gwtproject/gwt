@@ -447,6 +447,7 @@ public final class Util {
     }
   }
 
+  @Deprecated
   public static <T> T readStreamAsObject(InputStream inputStream, Class<T> type)
       throws ClassNotFoundException, IOException {
     ObjectInputStream objectInputStream = null;
@@ -711,8 +712,11 @@ public final class Util {
     Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
     // No need to check mkdirs result because an IOException will occur anyway
     file.getParentFile().mkdirs();
-    try (FileOutputStream stream = new FileOutputStream(file)) {
-      writeObjectToStream(stream, objects);
+    try (FileOutputStream stream = new FileOutputStream(file);
+         ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
+      for (Object object : objects) {
+        objectStream.writeObject(object);
+      }
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to write file: "
           + file.getAbsolutePath(), e);
@@ -725,6 +729,7 @@ public final class Util {
   /**
    * Serializes an object and writes it to a stream.
    */
+  @Deprecated
   public static void writeObjectToStream(OutputStream stream, Object... objects)
       throws IOException {
     ObjectOutputStream objectStream = null;

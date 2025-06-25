@@ -186,7 +186,7 @@ public class DiskCache {
    * @param out the stream to write into
    */
   public synchronized void transferToStream(long token, OutputStream out) throws IOException {
-    byte[] buf = Util.takeThreadLocalBuf();
+    byte[] buf = takeThreadLocalBuf();
     try {
       atEnd = false;
       file.seek(token);
@@ -203,7 +203,7 @@ public class DiskCache {
         out.write(buf, 0, read);
       }
     } finally {
-      Util.releaseThreadLocalBuf(buf);
+      releaseThreadLocalBuf(buf);
     }
   }
 

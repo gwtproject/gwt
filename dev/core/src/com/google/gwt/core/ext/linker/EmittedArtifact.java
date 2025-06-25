@@ -195,15 +195,11 @@ public abstract class EmittedArtifact extends Artifact<EmittedArtifact> {
    */
   public void writeTo(TreeLogger logger, OutputStream out)
       throws UnableToCompleteException {
-    InputStream in = null;
-    try {
-      in = new BufferedInputStream(getContents(logger));
+    try (InputStream in = new BufferedInputStream(getContents(logger))) {
       in.transferTo(out);
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to copy artifact: " + getPartialPath(), e);
       throw new UnableToCompleteException();
-    } finally {
-      Closeables.closeQuietly(in);
     }
   }
 

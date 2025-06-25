@@ -20,16 +20,16 @@ import com.google.gwt.core.ext.linker.CompilationMetricsArtifact;
 import com.google.gwt.core.ext.linker.ModuleMetricsArtifact;
 import com.google.gwt.core.ext.linker.PrecompilationMetricsArtifact;
 import com.google.gwt.core.ext.soyc.impl.SizeMapRecorder;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.soyc.io.OutputDirectory;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -646,11 +646,7 @@ public class MakeTopLevelHtmlForPerm {
    * implementation simply hashes the long name.
    */
   private static String hashedFilenameFragment(String longFileName) {
-    try {
-      return Util.computeStrongName(longFileName.getBytes(Util.DEFAULT_ENCODING));
-    } catch (UnsupportedEncodingException e) {
-      throw new RuntimeException(e);
-    }
+    return Hashing.murmur3_128().hashString(longFileName, StandardCharsets.UTF_8).toString();
   }
 
   private static String headerLineForBreakdown(SizeBreakdown breakdown) {

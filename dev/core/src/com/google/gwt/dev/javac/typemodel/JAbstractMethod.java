@@ -39,8 +39,6 @@ public abstract class JAbstractMethod implements
 
   private List<JParameter> params = Lists.create();
 
-  private String[] realParameterNames = null;
-
   private List<JClassType> thrownTypes = Lists.create();
 
   private List<JTypeParameter> typeParams = Lists.create();
@@ -255,20 +253,11 @@ public abstract class JAbstractMethod implements
 
   // Called only by a JParameter, passing itself as a reference for lookup.
   String getRealParameterName(JParameter parameter) {
-    if (realParameterNames == null) {
-      fetchRealParameterNames();
-    }
     int n = params.size();
     for (int i = 0; i < n; ++i) {
       // Identity tests are ok since identity is durable within an oracle.
       if (params.get(i) == parameter) {
-        String realParameterName;
-        if (realParameterNames == null) {
-          realParameterName = StringInterner.get().intern("arg" + i);
-        } else {
-          realParameterName = StringInterner.get().intern(realParameterNames[i]);
-        }
-        return realParameterName;
+        return StringInterner.get().intern("arg" + i);
       }
     }
     // TODO: report error if we are asked for an unknown JParameter?
@@ -293,10 +282,5 @@ public abstract class JAbstractMethod implements
 
   void setVarArgs() {
     isVarArgs = true;
-  }
-
-  private void fetchRealParameterNames() {
-    realParameterNames = getEnclosingType().getOracle().getJavaSourceParser().getArguments(
-        this);
   }
 }

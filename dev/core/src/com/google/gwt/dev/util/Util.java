@@ -15,11 +15,14 @@
  */
 package com.google.gwt.dev.util;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 import com.google.gwt.thirdparty.guava.common.io.Closeables;
 import com.google.gwt.util.tools.Utility;
 import com.google.gwt.util.tools.shared.StringUtils;
@@ -52,6 +55,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Locale;
 
 /**
  * A smattering of useful methods. Methods in this class are candidates for
@@ -84,8 +88,9 @@ public final class Util {
    * @return a big fat string encoding of the MD5 for the content, suitably
    *         formatted for use as a file name
    */
+  @Deprecated
   public static String computeStrongName(byte[] content) {
-    return computeStrongName(new byte[][] {content});
+    return Hashing.murmur3_128().hashBytes(content).toString().toUpperCase(Locale.ROOT);
   }
 
   /**
@@ -94,6 +99,7 @@ public final class Util {
    * @return a big fat string encoding of the MD5 for the content, suitably
    *         formatted for use as a file name
    */
+  @Deprecated
   public static String computeStrongName(byte[][] contents) {
     MessageDigest md5;
     try {
@@ -701,7 +707,7 @@ public final class Util {
     // No need to check mkdirs result because an IOException will occur anyway
     file.getParentFile().mkdirs();
     try (FileOutputStream stream = new FileOutputStream(file);
-         BufferedWriter buffered = new BufferedWriter(new OutputStreamWriter(stream, StandardCharsets.UTF_8))) {
+         BufferedWriter buffered = new BufferedWriter(new OutputStreamWriter(stream, UTF_8))) {
       buffered.write(string);
     } catch (IOException e) {
       return false;
@@ -714,7 +720,7 @@ public final class Util {
     // No need to check mkdirs result because an IOException will occur anyway
     file.getParentFile().mkdirs();
     try (FileOutputStream stream = new FileOutputStream(file);
-         BufferedWriter buffered = new BufferedWriter(new OutputStreamWriter(stream, StandardCharsets.UTF_8))) {
+         BufferedWriter buffered = new BufferedWriter(new OutputStreamWriter(stream, UTF_8))) {
       buffered.write(string);
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to write file: " + file.getAbsolutePath(), e);

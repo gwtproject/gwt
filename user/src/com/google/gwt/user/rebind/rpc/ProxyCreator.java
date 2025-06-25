@@ -40,12 +40,13 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.generator.NameFactory;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
+import com.google.gwt.thirdparty.guava.common.hash.HashingOutputStream;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.google.gwt.user.client.rpc.RpcToken;
@@ -77,6 +78,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -743,8 +745,9 @@ public class ProxyCreator {
       throws UnableToCompleteException {
     try {
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      HashingOutputStream hashStream = new HashingOutputStream(Hashing.murmur3_128(), baos);
       OutputStreamWriter osw =
-          new OutputStreamWriter(baos, SerializationPolicyLoader.SERIALIZATION_POLICY_FILE_ENCODING);
+          new OutputStreamWriter(hashStream, SerializationPolicyLoader.SERIALIZATION_POLICY_FILE_ENCODING);
       PrintWriter pw = new PrintWriter(osw);
 
       JType[] serializableTypes =
@@ -805,7 +808,7 @@ public class ProxyCreator {
       pw.close();
 
       byte[] serializationPolicyFileContents = baos.toByteArray();
-      String serializationPolicyName = Util.computeStrongName(serializationPolicyFileContents);
+      String serializationPolicyName = hashStream.hash().toString().toUpperCase(Locale.ROOT);
 
       String serializationPolicyFileName =
           SerializationPolicyLoader.getSerializationPolicyFileName(serializationPolicyName);
@@ -901,9 +904,10 @@ public class ProxyCreator {
       writer.close();
 
       byte[] manifestBytes = baos.toByteArray();
-      String md5 = Util.computeStrongName(manifestBytes);
+      String hash = Hashing.murmur3_128().hashBytes(manifestBytes)
+          .toString().toUpperCase(Locale.ROOT);
       OutputStream os =
-          context.tryCreateResource(logger, MANIFEST_ARTIFACT_DIR + "/" + md5 + ".txt");
+          context.tryCreateResource(logger, MANIFEST_ARTIFACT_DIR + "/" + hash + ".txt");
       os.write(manifestBytes);
 
       GeneratedResource resource = context.commitResource(logger, os);

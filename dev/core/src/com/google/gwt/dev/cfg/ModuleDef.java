@@ -37,18 +37,18 @@ import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
-import com.google.gwt.thirdparty.guava.common.base.Charsets;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.Iterators;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.hash.Hasher;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import javax.lang.model.SourceVersion;
 import java.io.File;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -457,31 +457,24 @@ public class ModuleDef implements DepsInfoProvider {
    * For example, consider a glob that matches fewer files than before because a file was
    * deleted.
    */
-  public int getInputFilenameHash() {
-    List<String> filenames = new ArrayList<String>();
-
-    filenames.addAll(gwtXmlPathByModuleName.values());
+  public String getInputFilenameHash() {
+    List<String> filenames = new ArrayList<>(gwtXmlPathByModuleName.values());
 
     for (Resource resource : getResourcesNewerThan(Integer.MIN_VALUE)) {
       filenames.add(resource.getLocation());
     }
 
-    // Take the first four bytes of the SHA-1 hash.
+    // Take the first eight bytes of the murmur3 hash.
 
     Collections.sort(filenames);
 
-    MessageDigest digest;
-    try {
-      digest = MessageDigest.getInstance("SHA-1");
-    } catch (NoSuchAlgorithmException e) {
-      throw new RuntimeException("SHA-1 unavailable", e);
-    }
+    Hasher hasher = Hashing.murmur3_128().newHasher();
+    hasher.putInt(filenames.size());
     for (String filename : filenames) {
-      digest.update(filename.getBytes(Charsets.UTF_8));
+      hasher.putInt(filename.length());
+      hasher.putString(filename, StandardCharsets.UTF_8);
     }
-    byte[] bytes = digest.digest();
-
-    return (bytes[0] << 24) | (bytes[1] << 16) | (bytes[2] << 8) | bytes[3];
+    return hasher.hash().toString();
   }
 
   public Class<? extends Linker> getLinker(String name) {

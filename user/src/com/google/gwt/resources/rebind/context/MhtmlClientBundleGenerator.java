@@ -15,14 +15,19 @@
  */
 package com.google.gwt.resources.rebind.context;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracleException;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.resources.ext.ClientBundleRequirements;
+import com.google.gwt.thirdparty.guava.common.hash.HashCode;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
+
+import java.util.Locale;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -76,8 +81,8 @@ public class MhtmlClientBundleGenerator extends AbstractClientBundleGenerator {
   protected void doCreateBundleForPermutation(TreeLogger logger,
       GeneratorContext generatorContext, FieldsImpl fields,
       String generatedSimpleSourceName) throws UnableToCompleteException {
-    String partialPath = Util.computeStrongName(generatedSimpleSourceName.getBytes(UTF_8))
-        + BUNDLE_EXTENSION;
+    HashCode hash = Hashing.murmur3_128().hashString(generatedSimpleSourceName, UTF_8);
+    String partialPath = hash.toString().toUpperCase(Locale.ROOT) + BUNDLE_EXTENSION;
     resourceContext.setPartialPath(partialPath);
     fields.setInitializer(bundleBaseIdent,
         "\"mhtml:\" + GWT.getModuleBaseURL() + \"" + partialPath + "!cid:\"");

@@ -116,7 +116,7 @@
   <target name="-deps" description="Packages this project's dependencies into a jar">
     <mkdir dir="${gwt.build.lib}" />
     <gwt.jar destfile="${project.lib.deps}">
-      <zipfileset src="${gwt.tools.lib}/gson/gson-2.6.2.jar"/>
+      <zipfileset src="${gwt.tools.lib}/gson/gson-2.11.0.jar"/>
       <!-- The following jar satisfies RequestFactory dependencies. -->
       <zipfileset src="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA.jar" />
     </gwt.jar>

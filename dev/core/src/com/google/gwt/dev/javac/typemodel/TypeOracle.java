@@ -22,7 +22,6 @@ import com.google.gwt.core.ext.typeinfo.JWildcardType.BoundType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.ParseException;
 import com.google.gwt.core.ext.typeinfo.TypeOracleException;
-import com.google.gwt.dev.javac.JavaSourceParser;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.util.Name;
 import com.google.gwt.dev.util.collect.HashMap;
@@ -247,8 +246,6 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
    * Cached singleton type representing <code>com.google.gwt.core.client.JavaScriptObject</code>.
    */
   private JClassType javaScriptObject;
-
-  private final JavaSourceParser javaSourceParser = new JavaSourceParser();
 
   /**
    * Maps SingleJsoImpl interfaces to the implementing JSO subtype.
@@ -663,10 +660,6 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
     computeSingleJsoImplData();
     computeDualJsoImplData();
     recentTypes.clear();
-  }
-
-  JavaSourceParser getJavaSourceParser() {
-    return javaSourceParser;
   }
 
   private List<JClassType> classChain(JClassType cls) {

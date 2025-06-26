@@ -22,16 +22,21 @@ import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.ModuleDefLoader;
 import com.google.gwt.dev.cfg.PropertyCombinations;
 import com.google.gwt.dev.util.Memory;
+import com.google.gwt.dev.util.StringInterningObjectInputStream;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
@@ -120,10 +125,9 @@ public class AnalyzeModule {
   public static PrecompileTaskOptions readAnalyzeModuleOptionsFile(
       TreeLogger logger, File compilerWorkDir) {
     File optionsFile = new File(compilerWorkDir, AnalyzeModule.OPTIONS_FILENAME);
-    PrecompileTaskOptions precompilationOptions = null;
-    try {
-      precompilationOptions = Util.readFileAsObject(optionsFile,
-          PrecompileTaskOptions.class);
+    try (InputStream is = new BufferedInputStream(new FileInputStream(optionsFile));
+         ObjectInputStream objectInputStream = new StringInterningObjectInputStream(is)) {
+      return (PrecompileTaskOptions) objectInputStream.readObject();
     } catch (IOException e) {
       if (logger.isLoggable(TreeLogger.DEBUG)) {
         logger.log(TreeLogger.DEBUG, "Failed to read " + optionsFile
@@ -134,7 +138,6 @@ public class AnalyzeModule {
       logger.log(TreeLogger.ERROR, "Failed to read " + optionsFile, e);
       return null;
     }
-    return precompilationOptions;
   }
 
   private final AnalyzeModuleOptionsImpl options;

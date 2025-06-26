@@ -20,10 +20,8 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Locale;
 
 import static java.nio.charset.StandardCharsets.UTF_8;

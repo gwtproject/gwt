@@ -15,8 +15,6 @@
  */
 package com.google.gwt.dev.resource.impl;
 
-import com.google.gwt.dev.util.Util;
-
 import junit.framework.TestCase;
 
 import java.io.File;

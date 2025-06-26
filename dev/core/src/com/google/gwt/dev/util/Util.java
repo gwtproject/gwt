@@ -27,6 +27,7 @@ import com.google.gwt.thirdparty.guava.common.io.Closeables;
 import com.google.gwt.util.tools.Utility;
 import com.google.gwt.util.tools.shared.StringUtils;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -416,14 +417,12 @@ public final class Util {
     }
   }
 
+  @Deprecated
   public static <T extends Serializable> T readFileAsObject(File file,
       Class<T> type) throws ClassNotFoundException, IOException {
-    FileInputStream fileInputStream = null;
-    try {
-      fileInputStream = new FileInputStream(file);
-      return readStreamAsObject(fileInputStream, type);
-    } finally {
-      Closeables.closeQuietly(fileInputStream);
+    try (InputStream is = new BufferedInputStream(new FileInputStream(file));
+         ObjectInputStream objectInputStream = new StringInterningObjectInputStream(is)) {
+      return type.cast(objectInputStream.readObject());
     }
   }
 

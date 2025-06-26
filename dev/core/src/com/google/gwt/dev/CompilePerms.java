@@ -28,14 +28,18 @@ import com.google.gwt.dev.util.FileBackedObject;
 import com.google.gwt.dev.util.MemoryBackedObject;
 import com.google.gwt.dev.util.PerfCounter;
 import com.google.gwt.dev.util.PersistenceBackedObject;
-import com.google.gwt.dev.util.Util;
+import com.google.gwt.dev.util.StringInterningObjectInputStream;
 import com.google.gwt.dev.util.arg.ArgHandlerLocalWorkers;
 import com.google.gwt.dev.util.arg.OptionLocalWorkers;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.util.tools.ArgHandlerString;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedSet;
@@ -262,18 +266,18 @@ public class CompilePerms {
 
   static PrecompilationResult readPrecompilationFile(TreeLogger logger,
       File precompilationFile) {
-    PrecompilationResult precompileResults = null;
-    try {
-      precompileResults = Util.readFileAsObject(precompilationFile,
-          PrecompilationResult.class);
+    try (InputStream is = new BufferedInputStream(new FileInputStream(precompilationFile));
+         ObjectInputStream objectInputStream = new StringInterningObjectInputStream(is)) {
+      return (PrecompilationResult) objectInputStream.readObject();
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Failed to read "
           + precompilationFile + "\nHas Precompile been run?");
+      return null;
     } catch (ClassNotFoundException e) {
       logger.log(TreeLogger.ERROR, "Failed to read "
           + precompilationFile, e);
+      return null;
     }
-    return precompileResults;
   }
 
   /**

@@ -311,6 +311,7 @@ public final class Util {
    *         Jan 1, 1970), or 0L on failure, such as a SecurityException or
    *         IOException.
    */
+  @Deprecated
   public static long getResourceModifiedTime(URL url) {
     long lastModified = 0L;
     try {

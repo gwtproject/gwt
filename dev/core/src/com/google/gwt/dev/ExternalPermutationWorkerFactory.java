@@ -362,13 +362,9 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
       astFile = File.createTempFile("externalPermutationWorkerFactory", ".ser");
       astFile.deleteOnExit();
       SpeedTracerLogger.Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
-      // No need to check mkdirs result because an IOException will occur anyway
-      astFile.getParentFile().mkdirs();
       try (OutputStream stream = new FileOutputStream(astFile);
            ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
-        for (Object object : new Object[]{unifiedAst}) {
-          objectStream.writeObject(object);
-        }
+        objectStream.writeObject(unifiedAst);
       } catch (IOException e) {
         logger.log(TreeLogger.ERROR, "Unable to write file: "
             + astFile.getAbsolutePath(), e);

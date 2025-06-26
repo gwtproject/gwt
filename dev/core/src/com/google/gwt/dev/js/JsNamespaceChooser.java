@@ -35,7 +35,6 @@ import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.js.ast.JsVars;
 import com.google.gwt.dev.js.ast.JsVars.JsVar;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
@@ -243,9 +242,12 @@ public class JsNamespaceChooser {
   }
 
   private static String findPackage(JDeclaredType type) {
-    String packageName = Util.getPackageName(type.getName());
-    // Return null for the default package.
-    return packageName.isEmpty() ? null : packageName;
+    String qualifiedName = type.getName();
+    if (qualifiedName.lastIndexOf('.') <= 0) {
+      // default package means return null
+      return null;
+    }
+    return qualifiedName.substring(0, qualifiedName.lastIndexOf('.'));
   }
 
   /**

@@ -250,7 +250,7 @@ public class PrecompileOnePerm {
     // as it will start a second OOS stream to handle generated artifacts
     Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
 
-    try (OutputStream out = new BufferedOutputStream(new FileOutputStream(precompilationFile));
+    try (OutputStream out = new FileOutputStream(precompilationFile);
          ObjectOutputStream objectStream = new ObjectOutputStream(out)) {
       objectStream.writeObject(precompilation);
     } catch (IOException e) {

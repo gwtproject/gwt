@@ -364,7 +364,7 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
       SpeedTracerLogger.Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
       // No need to check mkdirs result because an IOException will occur anyway
       astFile.getParentFile().mkdirs();
-      try (OutputStream stream = new BufferedOutputStream(new FileOutputStream(astFile));
+      try (OutputStream stream = new FileOutputStream(astFile);
            ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
         for (Object object : new Object[]{unifiedAst}) {
           objectStream.writeObject(object);

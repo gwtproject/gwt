@@ -716,7 +716,7 @@ public final class Util {
     Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
     // No need to check mkdirs result because an IOException will occur anyway
     file.getParentFile().mkdirs();
-    try (OutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
+    try (OutputStream stream = new FileOutputStream(file);
          ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
       for (Object object : objects) {
         objectStream.writeObject(object);

@@ -27,6 +27,7 @@ import com.google.gwt.thirdparty.guava.common.io.Closeables;
 import com.google.gwt.util.tools.Utility;
 import com.google.gwt.util.tools.shared.StringUtils;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
@@ -707,12 +708,13 @@ public final class Util {
   /**
    * Serializes an object and writes it to a file.
    */
+  @Deprecated
   public static void writeObjectAsFile(TreeLogger logger, File file,
       Object... objects) throws UnableToCompleteException {
     Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
     // No need to check mkdirs result because an IOException will occur anyway
     file.getParentFile().mkdirs();
-    try (FileOutputStream stream = new FileOutputStream(file);
+    try (OutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
          ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
       for (Object object : objects) {
         objectStream.writeObject(object);

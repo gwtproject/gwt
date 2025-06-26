@@ -33,15 +33,18 @@ import com.google.gwt.dev.jjs.PrecompilationContext;
 import com.google.gwt.dev.jjs.UnifiedAst;
 import com.google.gwt.dev.util.CollapsedPropertyKey;
 import com.google.gwt.dev.util.Memory;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.lang.management.ManagementFactory;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -382,8 +385,7 @@ public class Precompile {
         logger.log(TreeLogger.ERROR, "Unable to delete contents of " + compilerWorkDir, e);
         throw new UnableToCompleteException();
       }
-      // No need to check mkdirs result because an IOException will occur
-      // anyway.
+
       try {
         Files.createDirectories(compilerWorkDir.toPath());
       } catch (IOException e) {
@@ -427,7 +429,17 @@ public class Precompile {
          */
         TreeLogger branch =
             logger.branch(TreeLogger.INFO, "Precompiling (minimal) module " + module.getName());
-        Util.writeObjectAsFile(logger, precompilationFile, options);
+        Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
+        try (OutputStream stream = new BufferedOutputStream(new FileOutputStream(precompilationFile));
+             ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
+          objectStream.writeObject(options);
+        } catch (IOException e1) {
+          logger.log(TreeLogger.ERROR, "Unable to write file: "
+              + precompilationFile.getAbsolutePath(), e1);
+          throw new UnableToCompleteException();
+        } finally {
+          writeObjectAsFileEvent.end();
+        }
         int numPermutations =
             new PropertyCombinations(module.getProperties(), module.getActiveLinkerNames())
                 .collapseProperties().size();
@@ -465,7 +477,17 @@ public class Precompile {
           if (!options.shouldSaveSource() && !module.shouldEmbedSourceMapContents()) {
             precompilation.removeSourceArtifacts(logger);
           }
-          Util.writeObjectAsFile(logger, precompilationFile, precompilation);
+          Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
+          try (OutputStream stream = new BufferedOutputStream(new FileOutputStream(precompilationFile));
+               ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
+            objectStream.writeObject(precompilation);
+          } catch (IOException e1) {
+            logger.log(TreeLogger.ERROR, "Unable to write file: "
+                + precompilationFile.getAbsolutePath(), e1);
+            throw new UnableToCompleteException();
+          } finally {
+            writeObjectAsFileEvent.end();
+          }
 
           int permsPrecompiled = precompilation.getPermutations().length;
           try {

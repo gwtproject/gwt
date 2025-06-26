@@ -28,8 +28,12 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 
 /**
@@ -175,8 +179,18 @@ public class AnalyzeModule {
             AnalyzeModule.PERM_COUNT_FILENAME, e);
         throw new UnableToCompleteException();
       }
-      Util.writeObjectAsFile(logger, new File(compilerWorkDir,
-          AnalyzeModule.OPTIONS_FILENAME), options);
+
+      File optFile = new File(compilerWorkDir, AnalyzeModule.OPTIONS_FILENAME);
+      Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
+      try (OutputStream stream = new BufferedOutputStream(new FileOutputStream(optFile));
+           ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
+        objectStream.writeObject(options);
+      } catch (IOException e) {
+        logger.log(TreeLogger.ERROR, "Unable to write file: " + optFile.getAbsolutePath(), e);
+        throw new UnableToCompleteException();
+      } finally {
+        writeObjectAsFileEvent.end();
+      }
 
       // TODO(zundel): Serializing the ModuleDef structure would save time in
       // subsequent steps.

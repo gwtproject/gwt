@@ -29,10 +29,12 @@ import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 /**
@@ -247,8 +249,9 @@ public class PrecompileOnePerm {
     // The Precompilation instance must be the only, top-level object written to the stream here,
     // as it will start a second OOS stream to handle generated artifacts
     Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
-    try (ObjectOutputStream objectStream =
-             new ObjectOutputStream(new FileOutputStream(precompilationFile))) {
+
+    try (OutputStream out = new BufferedOutputStream(new FileOutputStream(precompilationFile));
+         ObjectOutputStream objectStream = new ObjectOutputStream(out)) {
       objectStream.writeObject(precompilation);
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to write file: "

@@ -30,6 +30,8 @@ import java.net.URL;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -44,6 +46,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class RemoteServiceServlet extends AbstractRemoteServiceServlet
     implements SerializationPolicyProvider {
+
+  private static final Logger logger = Logger.getLogger(RemoteServiceServlet.class.getName());
 
   /**
    * Loads a serialization policy stored as a servlet resource in the same
@@ -62,7 +66,7 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
         modulePath = new URL(moduleBaseURL).getPath();
       } catch (MalformedURLException ex) {
         // log the information, we will default
-        servlet.log("Malformed moduleBaseURL: " + moduleBaseURL, ex);
+        logger.log(Level.SEVERE, "Malformed moduleBaseURL: " + moduleBaseURL, ex);
       }
     }
 
@@ -74,12 +78,12 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
      * this method.
      */
     if (modulePath == null || !modulePath.startsWith(contextPath)) {
-      String message = "ERROR: The module path requested, "
+      String message = "The module path requested, "
           + modulePath
           + ", is not in the same web application as this servlet, "
           + contextPath
           + ".  Your module may not be properly configured or your client and server code maybe out of date.";
-      servlet.log(message);
+      logger.log(Level.SEVERE, message);
     } else {
       // Strip off the context path from the module base URL. It should be a
       // strict prefix.
@@ -98,11 +102,13 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
                 null);
             if (serializationPolicy.hasClientFields()) {
               if (ENABLE_ENHANCED_CLASSES) {
-                servlet.log("WARNING: Service deserializes enhanced JPA/JDO classes, which is " +
+                logger.log(Level.WARNING,
+                    "Service deserializes enhanced JPA/JDO classes, which is " +
                         "unsafe. See https://github.com/gwtproject/gwt/issues/9709 for more " +
                         "detail on the vulnerability that this presents.");
               } else {
-                servlet.log("ERROR: Service deserializes enhanced JPA/JDO classes, which is " +
+                logger.log(Level.SEVERE,
+                    "Service deserializes enhanced JPA/JDO classes, which is " +
                         "unsafe. Review build logs to see which classes are affected, or set " +
                         ENABLE_GWT_ENHANCED_CLASSES_PROPERTY + " to true to allow using this " +
                         "service. See https://github.com/gwtproject/gwt/issues/9709 for more " +
@@ -111,17 +117,19 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
               }
             }
           } catch (ParseException e) {
-            servlet.log("ERROR: Failed to parse the policy file '"
+            logger.log(Level.SEVERE,
+                "Failed to parse the policy file '"
                 + serializationPolicyFilePath + "'", e);
           } catch (IOException e) {
-            servlet.log("ERROR: Could not read the policy file '"
+            logger.log(Level.SEVERE,
+                "Could not read the policy file '"
                 + serializationPolicyFilePath + "'", e);
           }
         } else {
-          String message = "ERROR: The serialization policy file '"
+          String message = "The serialization policy file '"
               + serializationPolicyFilePath
               + "' was not found; did you forget to include it in this deployment?";
-          servlet.log(message);
+          logger.log(Level.SEVERE, message);
         }
       } finally {
         if (is != null) {
@@ -260,8 +268,8 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
 
     if (serializationPolicy == null) {
       // Failed to get the requested serialization policy; use the default
-      log(
-          "WARNING: Failed to get the SerializationPolicy '"
+      logger.log(Level.WARNING,
+          "Failed to get the SerializationPolicy '"
               + strongName
               + "' for module '"
               + moduleBaseURL
@@ -311,7 +319,8 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
     try {
       rpcRequest = RPC.decodeRequest(payload, delegate.getClass(), this);
     } catch (IncompatibleRemoteServiceException ex) {
-      log(
+      logger.log(
+          Level.SEVERE,
           "An IncompatibleRemoteServiceException was thrown while processing this call.",
           ex);
       return RPC.encodeResponseForFailedRequest(null, ex);
@@ -350,12 +359,13 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
           rpcRequest.getParameters(), rpcRequest.getSerializationPolicy(),
           rpcRequest.getFlags());
     } catch (IncompatibleRemoteServiceException ex) {
-      log(
+      logger.log(Level.SEVERE,
           "An IncompatibleRemoteServiceException was thrown while processing this call.",
           ex);
       return RPC.encodeResponseForFailedRequest(rpcRequest, ex);
     } catch (RpcTokenException tokenException) {
-      log("An RpcTokenException was thrown while processing this call.",
+      logger.log(Level.SEVERE,
+          "An RpcTokenException was thrown while processing this call.",
           tokenException);
       return RPC.encodeResponseForFailedRequest(rpcRequest, tokenException);
     }
@@ -364,9 +374,8 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
   /**
    * Standard HttpServlet method: handle the POST.
    * 
-   * This doPost method swallows ALL exceptions, logs them in the
-   * ServletContext, and returns a GENERIC_FAILURE_MSG response with status code
-   * 500.
+   * This doPost method swallows ALL exceptions, logs them,
+   * and returns a GENERIC_FAILURE_MSG response with status code 500.
    * 
    * @throws ServletException
    * @throws SerializationException
@@ -469,12 +478,12 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
 
       @Override
       public void logInfo(String message) {
-        RemoteServiceServlet.this.log(message);
+        logger.log(Level.INFO, message);
       }
 
       @Override
       public void logError(String message, Throwable throwable) {
-        RemoteServiceServlet.this.log(message, throwable);
+        logger.log(Level.SEVERE, message, throwable);
       }
     };
     return CODE_SERVER_CLIENT.loadPolicy(url, adapter);
@@ -541,7 +550,6 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
     boolean gzipEncode = RPCServletUtils.acceptsGzipEncoding(request)
         && shouldCompressResponse(request, response, responsePayload);
 
-    RPCServletUtils.writeResponse(getServletContext(), response,
-        responsePayload, gzipEncode);
+    RPCServletUtils.writeResponse(response, responsePayload, gzipEncode);
   }
 }

@@ -16,7 +16,7 @@
 package com.google.gwt.dev.javac;
 
 import com.google.gwt.dev.jdt.SafeASTVisitor;
-import com.google.gwt.dev.util.InstalledHelpInfo;
+import com.google.gwt.dev.util.GwtprojectOrgHelpInfo;
 import com.google.gwt.dev.util.collect.Stack;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
@@ -43,16 +43,14 @@ import java.util.Map;
  * Check a compilation unit for violations of
  * {@link com.google.gwt.core.client.JavaScriptObject JavaScriptObject} (JSO)
  * restrictions. The restrictions are summarized in
- * <code>jsoRestrictions.html</code>.
- *
- *
+ * @see <a href="https://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html">jsoRestrictions.html</a>.
  * Any violations found are attached as errors on the
  * CompilationUnitDeclaration.
  *
  * @see <a
  *      href="http://code.google.com/p/google-web-toolkit/wiki/OverlayTypes">Overlay
  *      types design doc</a>
- * @see jsoRestrictions.html
+ * @see <a href="https://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html">jsoRestrictions.html</a>
  */
 public class JSORestrictionsChecker {
 
@@ -288,8 +286,8 @@ public class JSORestrictionsChecker {
 
   private static void errorOn(ASTNode node, CompilationUnitDeclaration cud,
       String error) {
-    GWTProblem.recordError(node, cud, error, new InstalledHelpInfo(
-        "jsoRestrictions.html"));
+    GWTProblem.recordError(node, cud, error, new GwtprojectOrgHelpInfo(
+        "/doc/latest/DevGuideCodingBasicsJSNI.html"));
   }
 
   private final CompilationUnitDeclaration cud;

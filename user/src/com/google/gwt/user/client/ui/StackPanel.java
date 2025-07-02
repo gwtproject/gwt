@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.aria.client.Roles;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.annotations.IsSafeHtml;
@@ -63,6 +64,8 @@ public class StackPanel extends ComplexPanel implements InsertPanel.ForIsWidget 
    */
   public StackPanel() {
     Element table = DOM.createTable();
+    // aria role to indicate it is a plain layout table
+    Roles.getPresentationRole().set(table);
     setElement(table);
 
     body = DOM.createTBody();

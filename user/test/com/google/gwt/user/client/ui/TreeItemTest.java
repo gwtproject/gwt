@@ -261,4 +261,12 @@ public class TreeItemTest extends GWTTestCase {
     // Detach the panel.
     RootPanel.get().remove(tree);
   }
+  
+  public void testPresentationRole() {
+    TreeItem item = new TreeItem();
+    item.addItem(new TreeItem());
+    assertNotNull(item.getElement());
+    assertEquals("presentation",
+        item.getElement().getFirstChildElement().getAttribute("role"));
+  }
 }

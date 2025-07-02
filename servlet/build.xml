@@ -43,6 +43,7 @@
         <exclude name="com/google/gwt/junit/*" />
         <exclude name="com/google/gwt/junit/client/GWTTestCase.*" />
         <exclude name="com/google/gwt/junit/server/**" />
+        <exclude name="com/google/web/bindery/requestfactory/server/RequestFactoryJarExtractor*" />
       </fileset>
     </gwt.jar>
   </target>
@@ -63,6 +64,7 @@
         <exclude name="com/google/gwt/junit/*" />
         <exclude name="com/google/gwt/junit/client/GWTTestCase.*" />
         <exclude name="com/google/gwt/junit/server/**" />
+        <exclude name="com/google/web/bindery/requestfactory/server/RequestFactoryJarExtractor*" />
       </fileset>
     </gwt.jar>
   </target>
@@ -89,6 +91,7 @@
         <exclude name="com/google/gwt/junit/*" />
         <exclude name="com/google/gwt/junit/client/GWTTestCase.*" />
         <exclude name="com/google/gwt/junit/server/**" />
+        <exclude name="com/google/web/bindery/requestfactory/server/jakarta/RequestFactoryJarExtractor*" />
       </fileset>
     </gwt.jar>
   </target>
@@ -109,6 +112,7 @@
         <exclude name="com/google/gwt/junit/*" />
         <exclude name="com/google/gwt/junit/client/GWTTestCase.*" />
         <exclude name="com/google/gwt/junit/server/**" />
+        <exclude name="com/google/web/bindery/requestfactory/server/jakarta/RequestFactoryJarExtractor*" />
       </fileset>
     </gwt.jar>
   </target>

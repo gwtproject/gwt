@@ -19,6 +19,8 @@
 
 package java.io;
 
+import java.nio.charset.Charset;
+
 /**
  * A specialized {@link OutputStream} for class for writing content to an
  * (internal) byte array. As bytes are written to this stream, the byte array
@@ -176,6 +178,18 @@ public class ByteArrayOutputStream extends OutputStream {
     }
 
     /**
+     * Returns the contents of this ByteArrayOutputStream as a string converted
+     * according to the encoding declared in {@code charsetName}.
+     *
+     * @param charset
+     *            the encoding to use when translating this stream to a string.
+     * @return this stream's current contents as an encoded string.
+     */
+    public String toString(Charset charset) {
+        return new String(buf, 0, count, charset);
+    }
+
+    /**
      * Writes {@code count} bytes from the byte array {@code buffer} starting at
      * offset {@code index} to this stream.
      *
@@ -201,6 +215,18 @@ public class ByteArrayOutputStream extends OutputStream {
         expand(len);
         System.arraycopy(buffer, offset, buf, this.count, len);
         this.count += len;
+    }
+
+    /**
+     * Writes all bytes from the byte array {@code buffer} to this stream.
+     *
+     * @param buffer
+     *            the buffer to be written.
+     * @throws NullPointerException
+     *             if {@code buffer} is {@code null}.
+     */
+    public void writeBytes(byte[] buffer) {
+        write(buffer, 0, buffer.length);
     }
 
     /**

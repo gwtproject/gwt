@@ -78,7 +78,8 @@ public class ConsoleLogHandler extends Handler {
   }-*/;
 
   private native void logVerbose(String message) /*-{
-    // use console.debug to show FINE and FINEST messages only when "Verbose" is enabled in inspector
+    // use console.debug to show FINE and FINEST messages
+    // only when "Verbose" is enabled in inspector
     window.console.debug(message);
   }-*/;
 }

@@ -37,9 +37,13 @@ import com.google.gwt.resources.ext.ResourceGeneratorUtil;
 import com.google.gwt.resources.ext.SupportsGeneratorResultCaching;
 import com.google.gwt.safehtml.shared.UriUtils;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
+import com.google.gwt.thirdparty.guava.common.io.CharStreams;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.gwt.user.rebind.StringSourceWriter;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -153,9 +157,13 @@ public final class ExternalTextResourceGenerator extends
       throw new UnableToCompleteException();
     }
 
-    URL resource = urls[0];
-
-    String toWrite = Util.readURLAsString(resource);
+    String toWrite;
+    try (InputStream in = urls[0].openStream()) {
+      toWrite = CharStreams.toString(new InputStreamReader(in, StandardCharsets.UTF_8));
+    } catch (IOException e) {
+      logger.log(TreeLogger.Type.ERROR, "Unable to read resource: " + urls[0], e);
+      throw new UnableToCompleteException();
+    }
 
     // This de-duplicates strings in the bundle.
     if (!hashes.containsKey(toWrite)) {

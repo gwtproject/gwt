@@ -30,6 +30,7 @@ import org.objectweb.asm.Opcodes;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.net.URL;
@@ -201,9 +202,8 @@ public abstract class CompilationUnit implements Serializable {
       }
 
       // url != null, we found it on the class path.
-      try {
-        URLConnection conn = url.openConnection();
-        return Util.readURLConnectionAsBytes(conn);
+      try (InputStream inputStream = url.openStream()) {
+        return inputStream.readAllBytes();
       } catch (IOException ignored) {
         if (logger.isLoggable(TreeLogger.DEBUG)) {
           logger.log(TreeLogger.DEBUG, "Unable to load " + urlStr + ", in trying to load "

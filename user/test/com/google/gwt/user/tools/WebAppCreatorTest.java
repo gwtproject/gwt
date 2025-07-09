@@ -15,13 +15,19 @@
  */
 package com.google.gwt.user.tools;
 
-import com.google.gwt.dev.util.Util;
+import com.google.gwt.thirdparty.guava.common.io.CharStreams;
 import com.google.gwt.user.tools.WebAppCreator.ArgProcessor;
 
 import junit.framework.TestCase;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.regex.Pattern;
 
 /**
@@ -293,7 +299,7 @@ public class WebAppCreatorTest extends TestCase {
 
     assertFileExists(".classpath");
     File classpathFile = new File(projectFolder + File.separatorChar + ".classpath");
-    String classpathContents = Util.readURLAsString(classpathFile.toURI().toURL());
+    String classpathContents = Files.readString(classpathFile.toPath(), StandardCharsets.UTF_8);
     String canonicalLibJarName = libJarName.replaceAll(Pattern.quote(File.separator), "/");
     assertTrue(".classpath does not contain " + canonicalLibJarName + ". .classpath contents:"
         + classpathContents,

@@ -19,6 +19,7 @@ import com.google.gwt.dev.util.Util;
 
 import junit.framework.TestCase;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
@@ -54,12 +55,15 @@ public abstract class AsmTestCase extends TestCase {
    * @return bytes from class file or null if not found
    */
   protected byte[] getClassBytes(String className) {
-    URL resource = CLASSLOADER.getResource(className.replace('.', '/')
-        + ".class");
-    if (resource == null) {
-      return null;
+    String classPath = className.replace('.', '/')
+        + ".class";
+    try (InputStream is = CLASSLOADER.getResourceAsStream(classPath)) {
+      if (is != null) {
+        return is.readAllBytes();
+      }
+    } catch (IOException ignored) {
     }
-    return Util.readURLAsBytes(resource);
+    return null;
   }
 
   /**

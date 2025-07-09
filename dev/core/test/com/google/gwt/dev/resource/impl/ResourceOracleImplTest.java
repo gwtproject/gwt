@@ -17,7 +17,7 @@ package com.google.gwt.dev.resource.impl;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.resource.Resource;
-import com.google.gwt.dev.util.Util;
+import com.google.gwt.thirdparty.guava.common.io.CharStreams;
 import com.google.gwt.thirdparty.guava.common.io.Closeables;
 
 import java.io.BufferedReader;
@@ -27,6 +27,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -134,11 +135,12 @@ public class ResourceOracleImplTest extends AbstractResourceOrientedTestBase {
         InputStream is = resource.openContents();
         assertNotNull(is);
 
-        String urlString = Util.readURLAsString(url);
-        String inputString = Util.readStreamAsString(is);
+        String urlString;
+        try (InputStream in = url.openStream()) {
+          urlString = CharStreams.toString(new InputStreamReader(in, StandardCharsets.UTF_8));
+        }
+        String inputString = new String(is.readAllBytes(), StandardCharsets.UTF_8);
         assertEquals(urlString, inputString);
-        assertNotNull(urlString);
-        assertNotNull(inputString);
       }
     }
   }

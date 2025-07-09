@@ -23,12 +23,12 @@ import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
+import com.google.gwt.thirdparty.guava.common.io.CharStreams;
 import com.google.gwt.thirdparty.guava.common.io.Closeables;
 import com.google.gwt.util.tools.Utility;
 import com.google.gwt.util.tools.shared.StringUtils;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
@@ -63,7 +63,7 @@ import javax.lang.model.SourceVersion;
  * being moved to {@link com.google.gwt.util.tools.Utility} if they would be
  * generally useful to tool writers, and don't involve TreeLogger.
  */
-@Deprecated
+@Deprecated(since = "2.13", forRemoval = true)
 public final class Util {
 
   public static String DEFAULT_ENCODING = "UTF-8";
@@ -362,6 +362,7 @@ public final class Util {
    *          'from'
    * @return the relative path, if possible; null otherwise
    */
+  @Deprecated
   public static File makeRelativeFile(File from, File to) {
 
     // Keep ripping off directories from the 'from' path until the 'from' path
@@ -480,6 +481,7 @@ public final class Util {
   /**
    * @return null if the file could not be read
    */
+  @Deprecated
   public static byte[] readURLAsBytes(URL url) {
     try {
       URLConnection conn = url.openConnection();
@@ -506,30 +508,27 @@ public final class Util {
   /**
    * @return null if the file could not be read
    */
+  @Deprecated
   public static String readURLAsString(URL url) {
-    byte[] bytes = readURLAsBytes(url);
-    if (bytes != null) {
-      return new String(bytes, StandardCharsets.UTF_8);
+    try (InputStream in = url.openStream()) {
+      return CharStreams.toString(new InputStreamReader(in, StandardCharsets.UTF_8));
+    } catch (IOException e) {
+      return null;
     }
-
-    return null;
   }
 
+  @Deprecated
   public static byte[] readURLConnectionAsBytes(URLConnection connection) {
     // ENH: add a weak cache that has an additional check against the file date
-    InputStream input = null;
-    try {
-      input = connection.getInputStream();
+    try (InputStream input = connection.getInputStream()) {
       int contentLength = connection.getContentLength();
       if (contentLength < 0) {
         return null;
       }
 
-      return readBytesFromInputStream(input, contentLength);
+      return input.readAllBytes();
     } catch (IOException e) {
       return null;
-    } finally {
-      Closeables.closeQuietly(input);
     }
   }
 
@@ -836,37 +835,6 @@ public final class Util {
       out.write(outBuf, 0, index);
       start = end;
     }
-  }
-  /**
-   * Reads the specified number of bytes from the {@link InputStream}.
-   *
-   * @param byteLength number of bytes to read
-   * @return byte array containing the bytes read or <code>null</code> if
-   *         there is an {@link IOException} or if the requested number of bytes
-   *         cannot be read from the {@link InputStream}
-   */
-  private static byte[] readBytesFromInputStream(InputStream input,
-      int byteLength) {
-
-    try {
-      byte[] bytes = new byte[byteLength];
-      int byteOffset = 0;
-      while (byteOffset < byteLength) {
-        int bytesReadCount = input.read(bytes, byteOffset, byteLength
-            - byteOffset);
-        if (bytesReadCount == -1) {
-          return null;
-        }
-
-        byteOffset += bytesReadCount;
-      }
-
-      return bytes;
-    } catch (IOException e) {
-      // Ignored.
-    }
-
-    return null;
   }
 
   /**

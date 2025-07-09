@@ -366,7 +366,12 @@ public final class CompilingClassLoader extends ClassLoader implements
       if (url == null) {
         throw new ClassNotFoundException();
       }
-      byte[] bytes = Util.readURLAsBytes(url);
+      byte[] bytes;
+      try (InputStream inputStream = url.openStream()) {
+        bytes = inputStream.readAllBytes();
+      } catch (IOException ex) {
+        throw new ClassNotFoundException("Could not read class " + name, ex);
+      }
       return defineClass(name, bytes, 0, bytes.length);
     }
 

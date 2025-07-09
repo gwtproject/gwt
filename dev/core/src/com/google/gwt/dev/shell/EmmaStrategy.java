@@ -47,11 +47,7 @@ abstract class EmmaStrategy {
           URLConnection conn = url.openConnection();
           if (conn.getLastModified() >= unitLastModified) {
             // It's as new as the source file, let's use it.
-            byte[] result = Util.readURLConnectionAsBytes(conn);
-            if (result != null) {
-              return result;
-            }
-            // Fall through.
+            return conn.getInputStream().readAllBytes();
           }
           // Fall through.
         } catch (IOException ignored) {

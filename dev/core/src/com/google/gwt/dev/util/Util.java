@@ -544,6 +544,7 @@ public final class Util {
    *          directory is also deleted; ignored if <code>file</code> is not a
    *          directory
    */
+  @Deprecated
   public static void recursiveDelete(File file, boolean childrenOnly) {
     if (file.isDirectory()) {
       File[] children = file.listFiles();

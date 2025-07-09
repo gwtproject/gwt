@@ -43,7 +43,6 @@ import com.google.gwt.dev.util.OutputFileSetOnDirectory;
 import com.google.gwt.dev.util.OutputFileSetOnJar;
 import com.google.gwt.dev.util.PersistenceBackedObject;
 import com.google.gwt.dev.util.StringInterningObjectInputStream;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.arg.ArgHandlerDeployDir;
 import com.google.gwt.dev.util.arg.ArgHandlerExtraDir;
 import com.google.gwt.dev.util.arg.ArgHandlerSaveSourceOutput;
@@ -56,6 +55,7 @@ import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -343,7 +343,7 @@ public class Link {
         || name.endsWith(".jar") || name.endsWith(".zip"))) {
       return new OutputFileSetOnJar(dirOrJar, pathPrefix);
     } else {
-      Util.recursiveDelete(new File(dirOrJar, pathPrefix), true);
+      MoreFiles.deleteDirectoryContents(dirOrJar.toPath().resolve(pathPrefix));
       return new OutputFileSetOnDirectory(dirOrJar, pathPrefix);
     }
   }

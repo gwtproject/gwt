@@ -30,8 +30,8 @@ import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.CompilationStateBuilder;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.resource.Resource;
-import com.google.gwt.dev.util.Util;
 
+import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
 import junit.framework.TestCase;
 
 import java.io.ByteArrayOutputStream;
@@ -291,7 +291,7 @@ public class StandardGeneratorContextTest extends TestCase {
   protected void tearDown() throws Exception {
     for (int i = toDelete.size() - 1; i >= 0; --i) {
       File f = toDelete.get(i);
-      Util.recursiveDelete(f, false);
+      MoreFiles.deleteRecursively(f.toPath());
       assertFalse("Unable to delete " + f.getAbsolutePath(), f.exists());
     }
   }

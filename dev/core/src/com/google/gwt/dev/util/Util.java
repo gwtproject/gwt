@@ -186,6 +186,7 @@ public final class Util {
   /**
    * Escapes '&', '<', '>', '"', and '\'' to their XML entity equivalents.
    */
+  @Deprecated
   public static String escapeXml(String unescaped) {
     StringBuilder builder = new StringBuilder();
     escapeXml(unescaped, 0, unescaped.length(), true, builder);
@@ -205,6 +206,7 @@ public final class Util {
    *     &amp;apos;
    * @param builder a StringBuilder to be appended with the output.
    */
+  @Deprecated
   public static void escapeXml(String code, int start, int end,
       boolean quoteApostrophe, StringBuilder builder) {
     int lastIndex = 0;

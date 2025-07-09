@@ -679,6 +679,7 @@ public final class Util {
     }
   }
 
+  @Deprecated
   public static void writeBytesToFile(TreeLogger logger, File where, byte[] what)
       throws UnableToCompleteException {
     writeBytesToFile(logger, where, new byte[][] {what});

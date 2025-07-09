@@ -50,6 +50,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Files;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -475,7 +476,7 @@ public final class ImageResourceGenerator extends AbstractResourceGenerator
 
       File file = File.createTempFile(ImageResourceGenerator.class.getSimpleName(), ".png");
       file.deleteOnExit();
-      Util.writeBytesToFile(logger, file, imageBytes);
+      Files.write(file.toPath(), imageBytes);
       return file.toURI().toURL();
     } catch (IOException ex) {
       logger.log(TreeLogger.ERROR, "Unable to write re-encoded PNG", ex);
@@ -693,7 +694,7 @@ public final class ImageResourceGenerator extends AbstractResourceGenerator
 
       File file = File.createTempFile(ImageResourceGenerator.class.getSimpleName(), ".png");
       file.deleteOnExit();
-      Util.writeBytesToFile(logger, file, imageBytes);
+      Files.write(file.toPath(), imageBytes);
       return file.toURI().toURL();
     } catch (IOException ex) {
       logger.log(TreeLogger.ERROR, "Unable to write re-encoded PNG", ex);

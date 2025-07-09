@@ -343,7 +343,10 @@ public class Link {
         || name.endsWith(".jar") || name.endsWith(".zip"))) {
       return new OutputFileSetOnJar(dirOrJar, pathPrefix);
     } else {
-      MoreFiles.deleteDirectoryContents(dirOrJar.toPath().resolve(pathPrefix));
+      File target = new File(dirOrJar, pathPrefix);
+      if (target.exists()) {
+        MoreFiles.deleteDirectoryContents(target.toPath());
+      }
       return new OutputFileSetOnDirectory(dirOrJar, pathPrefix);
     }
   }

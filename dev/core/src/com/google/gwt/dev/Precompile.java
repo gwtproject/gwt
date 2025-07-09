@@ -37,7 +37,6 @@ import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
-import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -377,20 +376,7 @@ public class Precompile {
 
   public boolean run(TreeLogger logger) throws UnableToCompleteException {
     for (String moduleName : options.getModuleNames()) {
-      File compilerWorkDir = options.getCompilerWorkDir(moduleName);
-      try {
-        MoreFiles.deleteDirectoryContents(compilerWorkDir.toPath());
-      } catch (IOException e) {
-        logger.log(TreeLogger.ERROR, "Unable to delete contents of " + compilerWorkDir, e);
-        throw new UnableToCompleteException();
-      }
-
-      try {
-        Files.createDirectories(compilerWorkDir.toPath());
-      } catch (IOException e) {
-        logger.log(TreeLogger.ERROR, "Unable to create directory " + compilerWorkDir, e);
-        throw new UnableToCompleteException();
-      }
+      File compilerWorkDir = options.createCompilerWorkDir(logger, moduleName);
 
       File precompilationFile = new File(compilerWorkDir, PRECOMPILE_FILENAME);
 

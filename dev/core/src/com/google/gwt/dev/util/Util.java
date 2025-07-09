@@ -248,6 +248,7 @@ public final class Util {
     builder.append(c, lastIndex, len - lastIndex);
   }
 
+  @Deprecated
   public static URL findSourceInClassPath(ClassLoader cl, String sourceTypeName) {
     String toTry = sourceTypeName.replace('.', '/') + ".java";
     URL foundURL = cl.getResource(toTry);

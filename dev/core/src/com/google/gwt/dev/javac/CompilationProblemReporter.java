@@ -25,7 +25,6 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.InternalCompilerException.NodeInfo;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.util.Messages;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
@@ -311,9 +310,7 @@ public class CompilationProblemReporter {
   }
 
   private static void logHints(TreeLogger logger, String typeSourceName) {
-    ClassLoader cl = Thread.currentThread().getContextClassLoader();
-
-    URL sourceURL = Util.findSourceInClassPath(cl, typeSourceName);
+    URL sourceURL = findSourceInClassPath(typeSourceName);
     if (sourceURL != null) {
       if (typeSourceName.indexOf(".client.") != -1) {
         Messages.HINT_CHECK_MODULE_INHERITANCE.log(logger, null);
@@ -334,6 +331,20 @@ public class CompilationProblemReporter {
       Messages.HINT_CHECK_INHERIT_CORE.log(logger, null);
     } else if (typeSourceName.indexOf("com.google.gwt.user.") == 0) {
       Messages.HINT_CHECK_INHERIT_USER.log(logger, null);
+    }
+  }
+
+  private static URL findSourceInClassPath(String sourceTypeName) {
+    String toTry = sourceTypeName.replace('.', '/') + ".java";
+    URL foundURL = Thread.currentThread().getContextClassLoader().getResource(toTry);
+    if (foundURL != null) {
+      return foundURL;
+    }
+    int i = sourceTypeName.lastIndexOf('.');
+    if (i != -1) {
+      return findSourceInClassPath(sourceTypeName.substring(0, i));
+    } else {
+      return null;
     }
   }
 

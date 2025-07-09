@@ -2505,7 +2505,7 @@ public class CompilerTest extends ArgProcessorTestBase {
       // is clean to avoid confusion when returning the output JS.
       File outputDir = new File(applicationDir.getPath() + File.separator + moduleName);
       if (outputDir.exists()) {
-        Util.recursiveDelete(outputDir, true);
+        MoreFiles.deleteDirectoryContents(outputDir.toPath());
       }
 
       // Fake out the resource loader to read resources both from the normal classpath as well as
@@ -2689,7 +2689,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     // clean to avoid confusion when returning the output JS.
     File outputDir = new File(applicationDir.getPath() + File.separator + moduleName);
     if (outputDir.exists()) {
-      Util.recursiveDelete(outputDir, true);
+      MoreFiles.deleteDirectoryContents(outputDir.toPath());
     }
 
     // Fake out the resource loader to read resources both from the normal classpath as well as this

@@ -43,7 +43,6 @@ import com.google.web.bindery.requestfactory.shared.ValueProxy;
 
 import junit.framework.TestCase;
 
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.HashSet;

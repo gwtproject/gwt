@@ -776,6 +776,7 @@ public final class Util {
    * each character using the UTF-* encoding.  Unicode characters between
    * U+0000 and U+10FFFF are supported.
    */
+  @Deprecated
   public static void writeUtf8(StringBuilder builder, OutputStream out)
       throws IOException {
     // Rolling our own converter avoids the following:

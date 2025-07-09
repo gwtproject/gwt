@@ -60,7 +60,6 @@ import com.google.gwt.dev.javac.mediatortest.ReferencesParameterizedTypeBeforeIt
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.javac.testing.impl.StaticJavaResource;
 import com.google.gwt.dev.resource.Resource;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.AbstractTreeLogger;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
@@ -70,6 +69,8 @@ import junit.framework.TestCase;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -174,11 +175,14 @@ public abstract class TypeOracleUpdaterTestBase extends TestCase {
       assertFalse(clazz.getName().startsWith("java."));
       ClassLoader loader = clazz.getClassLoader();
       String resourcePath = clazz.getName().replace(".", "/") + ".java";
-      InputStream istream = loader.getResourceAsStream(resourcePath);
-      if (istream == null) {
-        fail("Could not read " + resourcePath + " from classloader.");
+      try (InputStream istream = loader.getResourceAsStream(resourcePath)) {
+        if (istream == null) {
+          fail("Could not read " + resourcePath + " from classloader.");
+        }
+        return new String(istream.readAllBytes(), StandardCharsets.UTF_8);
+      } catch (IOException e) {
+        throw new UncheckedIOException("Failed while reading " + resourcePath, e);
       }
-      return Util.readStreamAsString(istream);
     }
 
     public TypeData[] getTypeData() throws IOException {

@@ -15,8 +15,6 @@
  */
 package com.google.gwt.dev.javac.asm;
 
-import com.google.gwt.dev.util.Util;
-
 import junit.framework.TestCase;
 
 import java.io.IOException;
@@ -31,20 +29,6 @@ public abstract class AsmTestCase extends TestCase {
 
   public AsmTestCase() {
     super();
-  }
-
-  public AsmTestCase(String name) {
-    super(name);
-  }
-
-  /**
-   * Read the bytes of a class.
-   *
-   * @param clazz class literal of the class to read
-   * @return bytes from class file or null if not found
-   */
-  protected byte[] getClassBytes(Class<?> clazz) {
-    return getClassBytes(clazz.getName());
   }
 
   /**
@@ -63,31 +47,5 @@ public abstract class AsmTestCase extends TestCase {
     } catch (IOException ignored) {
     }
     return null;
-  }
-
-  /**
-   * Reads the source for a class.
-   *
-   * @param clazz class literal of the class to read
-   * @return source from .java file or null if not found
-   */
-  protected String getClassSource(Class<?> clazz) {
-    return getClassSource(clazz.getName());
-  }
-
-  /**
-   * Reads the source for a class.
-   *
-   * @param className binary name (ie com.Foo$Bar) of the class to read
-   * @return source from .java file or null if not found
-   */
-  protected String getClassSource(String className) {
-    InputStream str = CLASSLOADER.getResourceAsStream(className.replace('.',
-        '/')
-        + ".java");
-    if (str == null) {
-      return null;
-    }
-    return Util.readStreamAsString(str);
   }
 }

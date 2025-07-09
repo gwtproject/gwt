@@ -466,8 +466,9 @@ public final class Util {
   /**
    * Reads an entire input stream as String. Closes the input stream.
    */
+  @Deprecated
   public static String readStreamAsString(InputStream in) {
-    try {
+    try (in) {
       return new String(in.readAllBytes(), StandardCharsets.UTF_8);
     } catch (IOException e) {
       // TODO(zundel): Consider allowing this exception out. The pattern in this

@@ -51,21 +51,29 @@ import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.function.IntFunction;
 import javax.lang.model.SourceVersion;
 
 /**
  * A smattering of useful methods. Methods in this class are candidates for
  * being moved to {@link com.google.gwt.util.tools.Utility} if they would be
  * generally useful to tool writers, and don't involve TreeLogger.
+ *
+ * @deprecated In a future release this class will be package protected or removed.
  */
 @Deprecated(since = "2.13", forRemoval = true)
 public final class Util {
 
+  /**
+   * @deprecated Use {@link StandardCharsets#UTF_8} instead.
+   */
   public static String DEFAULT_ENCODING = "UTF-8";
 
   private static final String FILE_PROTOCOL = "file";
@@ -88,8 +96,8 @@ public final class Util {
    *
    * @return a big fat string encoding of the MD5 for the content, suitably
    *         formatted for use as a file name
+   * @deprecated Consider using the Guava Hashing class instead.
    */
-  @Deprecated
   public static String computeStrongName(byte[] content) {
     return Hashing.murmur3_128().hashBytes(content).toString().toUpperCase(Locale.ROOT);
   }
@@ -99,8 +107,8 @@ public final class Util {
    *
    * @return a big fat string encoding of the MD5 for the content, suitably
    *         formatted for use as a file name
+   * @deprecated Consider using the Guava Hashing class instead.
    */
-  @Deprecated
   public static String computeStrongName(byte[][] contents) {
     MessageDigest md5;
     try {
@@ -129,21 +137,21 @@ public final class Util {
     return StringUtils.toHexString(md5.digest());
   }
 
-  @Deprecated
+  /**
+   * @deprecated Consider using {@link InputStream#transferTo} with try-with-resources.
+   */
   public static void copy(InputStream is, OutputStream os) throws IOException {
-    try {
+    try (is; os) {
       is.transferTo(os);
-    } finally {
-      Closeables.closeQuietly(is);
-      os.close();
     }
   }
 
   /**
    * Copies an input stream out to an output stream. Closes the input steam and
    * output stream.
+   *
+   * @deprecated Consider using {@link InputStream#transferTo} with try-with-resources.
    */
-  @Deprecated
   public static void copy(TreeLogger logger, InputStream is, OutputStream os)
       throws UnableToCompleteException {
     try (is; os) {
@@ -157,14 +165,17 @@ public final class Util {
   /**
    * Copies all of the bytes from the input stream to the output stream until
    * the input stream is EOF. Does not close either stream.
+   *
+   * @deprecated Consider using {@link InputStream#transferTo}.
    */
-  @Deprecated
   public static void copyNoClose(InputStream is, OutputStream os)
       throws IOException {
     is.transferTo(os);
   }
 
-  @Deprecated
+  /**
+   * @deprecated Consider creating an {@link InputStreamReader} directly.
+   */
   public static Reader createReader(TreeLogger logger, URL url)
       throws UnableToCompleteException {
     try {
@@ -177,16 +188,19 @@ public final class Util {
 
   /**
    * Equality check through equals() that is also satisfied if both objects are null.
+   *
+   * @deprecated Use {@link Objects#equals(Object, Object)} instead.
    */
-  @Deprecated
   public static boolean equalsNullCheck(Object thisObject, Object thatObject) {
     return Objects.equals(thisObject, thatObject);
   }
 
   /**
    * Escapes '&', '<', '>', '"', and '\'' to their XML entity equivalents.
+   *
+   * @deprecated No direct replacement, but consider using
+   * {@link com.google.gwt.safehtml.shared.SafeHtmlUtils#htmlEscape(String)} for HTML escaping.
    */
-  @Deprecated
   public static String escapeXml(String unescaped) {
     StringBuilder builder = new StringBuilder();
     escapeXml(unescaped, 0, unescaped.length(), true, builder);
@@ -199,14 +213,15 @@ public final class Util {
    * end (exclusive) is scanned.  The output is appended to the given
    * StringBuilder.
    *
+   * {@link com.google.gwt.safehtml.shared.SafeHtmlUtils#htmlEscape(String)} for HTML escaping.
    * @param code the input String
    * @param start the first character position to scan.
    * @param end the character position following the last character to scan.
    * @param quoteApostrophe if true, the &apos; character is quoted as
    *     &amp;apos;
    * @param builder a StringBuilder to be appended with the output.
+   * @deprecated No direct replacement, but consider using
    */
-  @Deprecated
   public static void escapeXml(String code, int start, int end,
       boolean quoteApostrophe, StringBuilder builder) {
     int lastIndex = 0;
@@ -250,7 +265,9 @@ public final class Util {
     builder.append(c, lastIndex, len - lastIndex);
   }
 
-  @Deprecated
+  /**
+   * @deprecated No direct replacement, consider copying this method.
+   */
   public static URL findSourceInClassPath(ClassLoader cl, String sourceTypeName) {
     String toTry = sourceTypeName.replace('.', '/') + ".java";
     URL foundURL = cl.getResource(toTry);
@@ -267,8 +284,9 @@ public final class Util {
 
   /**
    * Returns a byte-array representing the default encoding for a String.
+   *
+   * @deprecated Use {@link String#getBytes(java.nio.charset.Charset)} instead.
    */
-  @Deprecated
   public static byte[] getBytes(String s) {
     return s.getBytes(StandardCharsets.UTF_8);
   }
@@ -276,8 +294,8 @@ public final class Util {
   /**
    * @param className A fully-qualified class name whose name you want.
    * @return The base name for the specified class.
+   * @deprecated No direct replacement, consider inlining this method.
    */
-  @Deprecated
   public static String getClassName(String className) {
     return className.substring(className.lastIndexOf('.') + 1);
   }
@@ -289,7 +307,6 @@ public final class Util {
    * @return the contents of the file, or null if an error occurred
    * @deprecated Removed without replacement, many usages of GWT have no install path.
    */
-  @Deprecated
   public static String getFileFromInstallPath(String relativePath) {
     String installPath = Utility.getInstallPath();
     File file = new File(installPath + '/' + relativePath);
@@ -299,8 +316,8 @@ public final class Util {
   /**
    * @param qualifiedName A fully-qualified class name whose package name you want.
    * @return The package name for the specified class, empty string if default package.
+   * @deprecated No direct replacement, consider inlining this method.
    */
-  @Deprecated
   public static String getPackageName(String qualifiedName) {
     int idx = qualifiedName.lastIndexOf('.');
     if (idx > 0) {
@@ -315,8 +332,8 @@ public final class Util {
    * @return a positive value indicating milliseconds since the epoch (00:00:00
    *         Jan 1, 1970), or 0L on failure, such as a SecurityException or
    *         IOException.
+   * @deprecated No direct replacement, consider copying this method.
    */
-  @Deprecated
   public static long getResourceModifiedTime(URL url) {
     long lastModified = 0L;
     try {
@@ -352,7 +369,9 @@ public final class Util {
     return lastModified;
   }
 
-  @Deprecated
+  /**
+   * @deprecated Use {@link SourceVersion#isIdentifier(CharSequence)} instead.
+   */
   public static boolean isValidJavaIdent(String token) {
     return SourceVersion.isIdentifier(token);
   }
@@ -364,8 +383,8 @@ public final class Util {
    * @param to an absolute path which will be returned so that it is relative to
    *          'from'
    * @return the relative path, if possible; null otherwise
+   * @deprecated Use {@link java.nio.file.Path#relativize(java.nio.file.Path)} instead.
    */
-  @Deprecated
   public static File makeRelativeFile(File from, File to) {
 
     // Keep ripping off directories from the 'from' path until the 'from' path
@@ -409,13 +428,17 @@ public final class Util {
     return relativeFile;
   }
 
-  @Deprecated
+  /**
+   * @deprecated Use {@link java.nio.file.Path#relativize(java.nio.file.Path)} instead.
+   */
   public static String makeRelativePath(File from, File to) {
     File f = makeRelativeFile(from, to);
     return (f != null ? f.getPath() : null);
   }
 
-  @Deprecated
+  /**
+   * @deprecated Use {@link java.nio.file.Files#readAllBytes(java.nio.file.Path)} instead.
+   */
   public static byte[] readFileAsBytes(File file) {
     try {
       return Files.readAllBytes(file.toPath());
@@ -424,16 +447,22 @@ public final class Util {
     }
   }
 
-  @Deprecated
+  /**
+   * @deprecated No direct replacement, consider inlining this method or using
+   * {@link StringInterningObjectInputStream} directly.
+   */
   public static <T extends Serializable> T readFileAsObject(File file,
       Class<T> type) throws ClassNotFoundException, IOException {
-    try (InputStream is = new BufferedInputStream(new FileInputStream(file));
+    try (InputStream is = new FileInputStream(file);
          ObjectInputStream objectInputStream = new StringInterningObjectInputStream(is)) {
       return type.cast(objectInputStream.readObject());
     }
   }
 
-  @Deprecated
+  /**
+   * @deprecated Use {@link java.nio.file.Files#readString(java.nio.file.Path, java.nio.charset.Charset)}
+   * instead.
+   */
   public static String readFileAsString(File file) {
     try {
       return Files.readString(file.toPath(), StandardCharsets.UTF_8);
@@ -444,17 +473,20 @@ public final class Util {
 
   /**
    * Reads an entire input stream as bytes. Closes the input stream.
+   * @deprecated Use {@link InputStream#readAllBytes()} instead, and close the stream.
    */
-  @Deprecated
   public static byte[] readStreamAsBytes(InputStream in) {
-    try {
+    try (in) {
       return in.readAllBytes();
     } catch (IOException e) {
       return null;
     }
   }
 
-  @Deprecated
+  /**
+   * @deprecated No direct replacement, consider inlining or using
+   * {@link StringInterningObjectInputStream#readObject()} directly.
+   */
   public static <T> T readStreamAsObject(InputStream inputStream, Class<T> type)
       throws ClassNotFoundException, IOException {
     ObjectInputStream objectInputStream = null;
@@ -468,8 +500,9 @@ public final class Util {
 
   /**
    * Reads an entire input stream as String. Closes the input stream.
+   *
+   * @deprecated Use {@link InputStream#readAllBytes()} and convert to String
    */
-  @Deprecated
   public static String readStreamAsString(InputStream in) {
     try (in) {
       return new String(in.readAllBytes(), StandardCharsets.UTF_8);
@@ -484,8 +517,8 @@ public final class Util {
 
   /**
    * @return null if the file could not be read
+   * @deprecated No direct replacement, consider copying this method.
    */
-  @Deprecated
   public static byte[] readURLAsBytes(URL url) {
     try {
       URLConnection conn = url.openConnection();
@@ -498,8 +531,8 @@ public final class Util {
 
   /**
    * @return null if the file could not be read
+   * @deprecated No direct replacement, consider copying this method.
    */
-  @Deprecated
   public static char[] readURLAsChars(URL url) {
     byte[] bytes = readURLAsBytes(url);
     if (bytes != null) {
@@ -511,8 +544,8 @@ public final class Util {
 
   /**
    * @return null if the file could not be read
+   * @deprecated No direct replacement, consider copying this method.
    */
-  @Deprecated
   public static String readURLAsString(URL url) {
     try (InputStream in = url.openStream()) {
       return CharStreams.toString(new InputStreamReader(in, StandardCharsets.UTF_8));
@@ -521,7 +554,9 @@ public final class Util {
     }
   }
 
-  @Deprecated
+  /**
+   * @deprecated No direct replacement, consider copying this method.
+   */
   public static byte[] readURLConnectionAsBytes(URLConnection connection) {
     // ENH: add a weak cache that has an additional check against the file date
     try (InputStream input = connection.getInputStream()) {
@@ -546,8 +581,9 @@ public final class Util {
    *          itself is spared; if <code>false</code>, the specified
    *          directory is also deleted; ignored if <code>file</code> is not a
    *          directory
+   * @deprecated Consider Guava's MoreFiles, with either deleteRecursively or
+   * deleteDirectoryContents as a replacement.
    */
-  @Deprecated
   public static void recursiveDelete(File file, boolean childrenOnly) {
     if (file.isDirectory()) {
       File[] children = file.listFiles();
@@ -577,8 +613,8 @@ public final class Util {
    *          directory is also deleted; ignored if <code>file</code> is not a
    *          directory
    * @param filter only files matching this filter will be deleted
+   * @deprecated No direct replacement, consider copying this method.
    */
-  @Deprecated
   public static void recursiveDelete(File file, boolean childrenOnly,
       FileFilter filter) {
     if (file.isDirectory()) {
@@ -602,8 +638,10 @@ public final class Util {
   /**
    * Release a buffer previously returned from {@link #takeThreadLocalBuf()}.
    * The released buffer may then be reused.
+   *
+   * @deprecated No direct replacement, consider using a ThreadLocal or pool to help avoid
+   * allocations.
    */
-  @Deprecated
   public static void releaseThreadLocalBuf(byte[] buf) {
     assert buf.length == THREAD_LOCAL_BUF_SIZE;
     threadLocalBuf.set(buf);
@@ -611,10 +649,12 @@ public final class Util {
 
   /**
    * Remove leading file:jar:...!/ prefix from source paths for source located in jars.
+   *
    * @param absolutePath an absolute JAR file URL path
    * @return the location of the file within the JAR
+   * @deprecated Consider {@link String#replaceAll(String, String)} with pattern
+   * "^file:jar:[^!]+!/" to remove the prefix.
    */
-  @Deprecated
   public static String stripJarPathPrefix(String absolutePath) {
     if (absolutePath != null) {
       int bang = absolutePath.lastIndexOf('!');
@@ -632,8 +672,10 @@ public final class Util {
    * {@link #releaseThreadLocalBuf(byte[])} on the returned buffer allows
    * subsequent callers to reuse the buffer later, avoiding unncessary
    * allocations and GC.
+   *
+   * @deprecated No direct replacement, consider using a ThreadLocal or pool to help avoid
+   * allocations.
    */
-  @Deprecated
   public static byte[] takeThreadLocalBuf() {
     byte[] buf = threadLocalBuf.get();
     if (buf == null) {
@@ -651,8 +693,9 @@ public final class Util {
    *
    * Class&lt;? super T> is used to allow creation of generic types, such as
    * Map.Entry&lt;K,V> since we can only pass in Map.Entry.class.
+   *
+   * @deprecated Consider using {@link java.util.Collection#toArray(IntFunction)}.
    */
-  @Deprecated
   @SuppressWarnings("unchecked")
   public static <T> T[] toArray(Class<? super T> componentType,
       Collection<? extends T> coll) {
@@ -664,8 +707,9 @@ public final class Util {
   /**
    * Returns a String representing the character content of the bytes; the bytes
    * must be encoded using the compiler's default encoding.
+   *
+   * @deprecated Use {@link String#String(byte[], java.nio.charset.Charset)} instead.
    */
-  @Deprecated
   public static String toString(byte[] bytes) {
     return new String(bytes, StandardCharsets.UTF_8);
   }
@@ -675,8 +719,8 @@ public final class Util {
    *
    * @return the canonical version of the file path, if it could be computed;
    *         otherwise, the original file is returned unmodified
+   * @deprecated No direct replacement, consider inlining this method.
    */
-  @Deprecated
   public static File tryMakeCanonical(File file) {
     try {
       return file.getCanonicalFile();
@@ -685,7 +729,10 @@ public final class Util {
     }
   }
 
-  @Deprecated
+  /**
+   * @deprecated Consider using {@link java.nio.file.Files#write(Path, byte[], OpenOption...)}
+   * instead.
+   */
   public static void writeBytesToFile(TreeLogger logger, File where, byte[] what)
       throws UnableToCompleteException {
     writeBytesToFile(logger, where, new byte[][] {what});
@@ -693,8 +740,9 @@ public final class Util {
 
   /**
    * Gathering write.
+   *
+   * @deprecated No direct replacement, consider copying this method.
    */
-  @Deprecated
   public static void writeBytesToFile(TreeLogger logger, File where,
       byte[][] what) throws UnableToCompleteException {
     Throwable caught;
@@ -715,8 +763,9 @@ public final class Util {
 
   /**
    * Serializes an object and writes it to a file.
+   *
+   * @deprecated No direct replacement, consider copying this method or using ObjectOutputStream.
    */
-  @Deprecated
   public static void writeObjectAsFile(TreeLogger logger, File file,
       Object... objects) throws UnableToCompleteException {
     Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
@@ -738,8 +787,9 @@ public final class Util {
 
   /**
    * Serializes an object and writes it to a stream.
+   *
+   * @deprecated No direct replacement, consider copying this method or using ObjectOutputStream.
    */
-  @Deprecated
   public static void writeObjectToStream(OutputStream stream, Object... objects)
       throws IOException {
     ObjectOutputStream objectStream = null;
@@ -750,7 +800,9 @@ public final class Util {
     objectStream.flush();
   }
 
-  @Deprecated
+  /**
+   * @deprecated Consider {@link Files#writeString(Path, CharSequence, OpenOption...)}.
+   */
   public static boolean writeStringAsFile(File file, String string) {
     // No need to check mkdirs result because an IOException will occur anyway
     file.getParentFile().mkdirs();
@@ -763,7 +815,9 @@ public final class Util {
     return true;
   }
 
-  @Deprecated
+  /**
+   * @deprecated Consider {@link Files#writeString(Path, CharSequence, OpenOption...)}.
+   */
   public static void writeStringAsFile(TreeLogger logger, File file,
       String string) throws UnableToCompleteException {
     // No need to check mkdirs result because an IOException will occur anyway
@@ -781,8 +835,9 @@ public final class Util {
    * Writes the contents of a StringBuilder to an OutputStream, encoding
    * each character using the UTF-* encoding.  Unicode characters between
    * U+0000 and U+10FFFF are supported.
+   *
+   * @deprecated No direct replacement, consider copying the method if required.
    */
-  @Deprecated
   public static void writeUtf8(StringBuilder builder, OutputStream out)
       throws IOException {
     // Rolling our own converter avoids the following:

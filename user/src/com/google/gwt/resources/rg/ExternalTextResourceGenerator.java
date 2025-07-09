@@ -26,7 +26,6 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.resources.client.impl.ExternalTextResourcePrototype;
 import com.google.gwt.resources.ext.AbstractResourceGenerator;

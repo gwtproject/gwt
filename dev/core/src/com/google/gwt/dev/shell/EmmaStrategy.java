@@ -15,8 +15,6 @@
  */
 package com.google.gwt.dev.shell;
 
-import com.google.gwt.dev.util.Util;
-
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;

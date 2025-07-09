@@ -30,7 +30,6 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

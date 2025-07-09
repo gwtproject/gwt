@@ -21,7 +21,6 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.dev.util.StringKey;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.Maps;
 import com.google.gwt.dev.util.collect.Sets;
 import com.google.gwt.resources.client.ImageResource.ImageOptions;

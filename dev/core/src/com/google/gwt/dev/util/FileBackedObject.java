@@ -22,7 +22,6 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

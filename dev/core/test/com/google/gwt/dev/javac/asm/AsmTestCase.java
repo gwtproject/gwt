@@ -21,7 +21,6 @@ import junit.framework.TestCase;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 
 /**
  * Base class for ASM unit tests that defines some useful methods.

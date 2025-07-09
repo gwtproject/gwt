@@ -20,7 +20,6 @@ import com.google.gwt.core.ext.ServletContainerLauncher;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.InstalledHelpInfo;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.collect.Iterators;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 

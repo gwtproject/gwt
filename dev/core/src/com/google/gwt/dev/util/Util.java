@@ -609,6 +609,7 @@ public final class Util {
    * @param absolutePath an absolute JAR file URL path
    * @return the location of the file within the JAR
    */
+  @Deprecated
   public static String stripJarPathPrefix(String absolutePath) {
     if (absolutePath != null) {
       int bang = absolutePath.lastIndexOf('!');

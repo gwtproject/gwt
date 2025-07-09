@@ -25,7 +25,6 @@ import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.util.tools.shared.StringUtils;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.File;

@@ -21,7 +21,6 @@ import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.util.DiskCache;
 import com.google.gwt.dev.util.StringInterningObjectInputStream;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.HashMap;
 
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
@@ -34,7 +33,6 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;

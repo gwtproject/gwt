@@ -40,7 +40,6 @@ import com.google.gwt.dev.util.JsniRef;
 import com.google.gwt.dev.util.Name;
 import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.dev.util.Name.SourceOrBinaryName;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;

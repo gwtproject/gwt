@@ -15,17 +15,12 @@
  */
 package com.google.gwt.user.tools;
 
-import com.google.gwt.thirdparty.guava.common.io.CharStreams;
 import com.google.gwt.user.tools.WebAppCreator.ArgProcessor;
 
 import junit.framework.TestCase;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.regex.Pattern;

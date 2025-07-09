@@ -56,7 +56,7 @@ public class FooResourceGenerator extends Generator {
     try {
       try (InputStream is = context.getResourcesOracle().getResource(
           "com/foo/generatedClassName.txt").openContents()) {
-        generatedClassName = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+        generatedClassName = new String(is.readAllBytes(), StandardCharsets.UTF_8).trim();
       }
 
       // Custom class name with stable content.

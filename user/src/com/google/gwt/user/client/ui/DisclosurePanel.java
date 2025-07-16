@@ -16,6 +16,7 @@
 package com.google.gwt.user.client.ui;
 
 import com.google.gwt.animation.client.Animation;
+import com.google.gwt.aria.client.Roles;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.logical.shared.CloseEvent;
@@ -230,6 +231,9 @@ public final class DisclosurePanel extends Composite implements
 
       // I do not need any Widgets here, just a DOM structure.
       Element root = DOM.createTable();
+      // aria role to indicate it is a plain layout table
+      Roles.getPresentationRole().set(root);
+      
       Element tbody = DOM.createTBody();
       Element tr = DOM.createTR();
       final Element imageTD = DOM.createTD();

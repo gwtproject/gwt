@@ -15,7 +15,6 @@
  */
 package com.google.gwt.dev.javac.testing.impl;
 
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
@@ -36,7 +35,8 @@ public class RealJavaResource extends MockJavaResource {
   @Override
   public CharSequence getContent() {
     String resourceName = getTypeName().replace('.', '/') + ".java";
-    try (InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourceName)) {
+    try (InputStream stream = Thread.currentThread().getContextClassLoader()
+        .getResourceAsStream(resourceName)) {
       if (stream == null) {
         return null;
       }

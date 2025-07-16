@@ -102,7 +102,8 @@ public class FileBackedObject<T extends Serializable> implements PersistenceBack
     Preconditions.checkState(!alreadyWritten);
     alreadyWritten = true;
     backingFile.getParentFile().mkdirs();
-    SpeedTracerLogger.Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
+    SpeedTracerLogger.Event writeObjectAsFileEvent = SpeedTracerLogger.start(
+        CompilerEventType.WRITE_OBJECT_AS_FILE);
     try (OutputStream stream = new FileOutputStream(backingFile);
          ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
       objectStream.writeObject(object);

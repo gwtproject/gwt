@@ -57,7 +57,8 @@ public class DiskCache {
   /**
    * Stores reusable thread local buffers for efficient data transfer.
    */
-  private static final ThreadLocal<byte[]> threadLocalBuf = ThreadLocal.withInitial(() -> new byte[THREAD_LOCAL_BUF_SIZE]);
+  private static final ThreadLocal<byte[]> threadLocalBuf = ThreadLocal.withInitial(
+      () -> new byte[THREAD_LOCAL_BUF_SIZE]);
 
   /**
    * A global shared Disk cache.

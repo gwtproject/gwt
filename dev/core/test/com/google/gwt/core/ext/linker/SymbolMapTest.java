@@ -25,8 +25,8 @@ import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
-
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
+
 import junit.framework.TestCase;
 
 import java.io.BufferedReader;

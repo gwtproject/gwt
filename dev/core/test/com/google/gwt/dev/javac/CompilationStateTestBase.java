@@ -35,7 +35,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-
 /**
  * Base class for tests that need a mock type compilation state and everything
  * that goes with it (compilation units, type oracle, resources, ...).

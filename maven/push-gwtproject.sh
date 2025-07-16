@@ -8,7 +8,7 @@
 # Sonatype staging repo (promotes to Maven Central)
 #   GWT_MAVEN_REPO_URL=https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/
 #
-# Sonatype Google SNAPSHOTs repo (can only deploy SNAPSHOTs here, and they are immediately public)
+# Sonatype SNAPSHOTs repo (can only deploy SNAPSHOTs here, and they are immediately public)
 #   GWT_MAVEN_REPO_URL=https://central.sonatype.com/repository/maven-snapshots/
 
 pushd $(dirname $0) >/dev/null 2>&1

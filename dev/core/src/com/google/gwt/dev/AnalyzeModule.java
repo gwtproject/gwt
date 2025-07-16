@@ -168,7 +168,8 @@ public class AnalyzeModule {
       }
 
       File optFile = new File(compilerWorkDir, AnalyzeModule.OPTIONS_FILENAME);
-      Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
+      Event writeObjectAsFileEvent = SpeedTracerLogger.start(
+          CompilerEventType.WRITE_OBJECT_AS_FILE);
       try (OutputStream stream = new FileOutputStream(optFile);
            ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
         objectStream.writeObject(options);

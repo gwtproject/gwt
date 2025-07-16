@@ -56,7 +56,8 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
     return new File(new File(getWorkDir(), moduleName), "compiler");
   }
 
-  public File createCompilerWorkDir(TreeLogger logger, String moduleName) throws UnableToCompleteException {
+  public File createCompilerWorkDir(TreeLogger logger, String moduleName)
+      throws UnableToCompleteException {
     File compilerWorkDir = getCompilerWorkDir(moduleName);
     if (compilerWorkDir.exists()) {
       try {
@@ -75,7 +76,6 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
     }
     return compilerWorkDir;
   }
-
 
   @Override
   public Properties getFinalProperties() {

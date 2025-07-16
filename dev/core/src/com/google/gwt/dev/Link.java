@@ -581,7 +581,8 @@ public class Link {
         if (entryName.startsWith("arts/")) {
           try {
             try (InputStream inputStream = new BufferedInputStream(jarFile.getInputStream(entry));
-                 ObjectInputStream objectInputStream = new StringInterningObjectInputStream(inputStream)) {
+                 ObjectInputStream objectInputStream =
+                     new StringInterningObjectInputStream(inputStream)) {
               artForEntry = (Artifact<?>) objectInputStream.readObject();
             }
             assert artForEntry.isTransferableFromShards();

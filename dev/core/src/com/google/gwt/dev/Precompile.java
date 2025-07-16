@@ -414,7 +414,8 @@ public class Precompile {
          */
         TreeLogger branch =
             logger.branch(TreeLogger.INFO, "Precompiling (minimal) module " + module.getName());
-        Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
+        Event writeObjectAsFileEvent = SpeedTracerLogger.start(
+            CompilerEventType.WRITE_OBJECT_AS_FILE);
         try (OutputStream stream = new FileOutputStream(precompilationFile);
              ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
           objectStream.writeObject(options);
@@ -462,7 +463,8 @@ public class Precompile {
           if (!options.shouldSaveSource() && !module.shouldEmbedSourceMapContents()) {
             precompilation.removeSourceArtifacts(logger);
           }
-          Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
+          Event writeObjectAsFileEvent = SpeedTracerLogger.start(
+              CompilerEventType.WRITE_OBJECT_AS_FILE);
           try (OutputStream stream = new FileOutputStream(precompilationFile);
                ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
             objectStream.writeObject(precompilation);

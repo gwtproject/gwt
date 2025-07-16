@@ -15,6 +15,8 @@
  */
 package com.google.gwt.core.ext.linker;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.Linker;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -23,8 +25,6 @@ import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Provides basic functions common to all Linker implementations.

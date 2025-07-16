@@ -360,7 +360,8 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
     try {
       astFile = File.createTempFile("externalPermutationWorkerFactory", ".ser");
       astFile.deleteOnExit();
-      SpeedTracerLogger.Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
+      SpeedTracerLogger.Event writeObjectAsFileEvent = SpeedTracerLogger.start(
+          CompilerEventType.WRITE_OBJECT_AS_FILE);
       try (OutputStream stream = new FileOutputStream(astFile);
            ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
         objectStream.writeObject(unifiedAst);

@@ -6,10 +6,10 @@
 # GWT_MAVEN_REPO_ID = a server id in your .m2/settings.xml with remote repo username and password
 #
 # Sonatype staging repo (promotes to Maven Central)
-#   GWT_MAVEN_REPO_URL=https://oss.sonatype.org/service/local/staging/deploy/maven2/
+#   GWT_MAVEN_REPO_URL=https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/
 #
-# Sonatype Google SNAPSHOTs repo (can only deploy SNAPSHOTs here, and they are immediately public)
-#   GWT_MAVEN_REPO_URL=https://oss.sonatype.org/content/repositories/snapshots/
+# Sonatype SNAPSHOTs repo (can only deploy SNAPSHOTs here, and they are immediately public)
+#   GWT_MAVEN_REPO_URL=https://central.sonatype.com/repository/maven-snapshots/
 
 pushd $(dirname $0) >/dev/null 2>&1
 

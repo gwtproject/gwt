@@ -7,6 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         java-version: ['11', '17', '21', '22']
     steps:
@@ -55,7 +56,7 @@ jobs:
           cd gwt
           for f in build/out/**/checkstyle*.xml ; do
             echo $f
-            reviewdog -f=checkstyle -filter-mode=diff_context -reporter=github-pr-review -level=info < $f
+            reviewdog -f=checkstyle -filter-mode=diff_context -reporter=github-pr-annotations -level=info < $f
           done
       - name: Upload checkstyle xml for manual review
         uses: actions/upload-artifact@v4

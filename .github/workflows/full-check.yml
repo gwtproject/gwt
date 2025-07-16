@@ -103,7 +103,7 @@ jobs:
           set -eux
           # Set the version to deploy (it was also set in the build step above)
           export GWT_VERSION=HEAD-SNAPSHOT
-          export GWT_MAVEN_REPO_URL=https://oss.sonatype.org/content/repositories/snapshots/
+          export GWT_MAVEN_REPO_URL=https://central.sonatype.com/repository/maven-snapshots/
           export GWT_MAVEN_REPO_ID=sonatype-snapshots
           cd gwt
           # With no user input, run the push-gwtproject.sh script to deploy org.gwtproject artifacts

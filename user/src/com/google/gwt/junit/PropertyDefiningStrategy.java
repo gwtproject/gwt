@@ -24,11 +24,12 @@ import com.google.gwt.junit.client.WithProperties.Property;
 
 import junit.framework.TestCase;
 
-import javax.lang.model.SourceVersion;
 import java.lang.reflect.Method;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
+
+import javax.lang.model.SourceVersion;
 
 /**
  * A {@link JUnitShell.Strategy} that will alter the module the tests are run

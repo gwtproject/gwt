@@ -30,8 +30,8 @@ import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.CompilationStateBuilder;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.resource.Resource;
-
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
+
 import junit.framework.TestCase;
 
 import java.io.ByteArrayOutputStream;

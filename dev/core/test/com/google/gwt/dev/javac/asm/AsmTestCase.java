@@ -15,12 +15,10 @@
  */
 package com.google.gwt.dev.javac.asm;
 
-import com.google.gwt.dev.util.Util;
-
 import junit.framework.TestCase;
 
+import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 
 /**
  * Base class for ASM unit tests that defines some useful methods.
@@ -33,20 +31,6 @@ public abstract class AsmTestCase extends TestCase {
     super();
   }
 
-  public AsmTestCase(String name) {
-    super(name);
-  }
-
-  /**
-   * Read the bytes of a class.
-   *
-   * @param clazz class literal of the class to read
-   * @return bytes from class file or null if not found
-   */
-  protected byte[] getClassBytes(Class<?> clazz) {
-    return getClassBytes(clazz.getName());
-  }
-
   /**
    * Read the bytes of a class.
    *
@@ -54,37 +38,14 @@ public abstract class AsmTestCase extends TestCase {
    * @return bytes from class file or null if not found
    */
   protected byte[] getClassBytes(String className) {
-    URL resource = CLASSLOADER.getResource(className.replace('.', '/')
-        + ".class");
-    if (resource == null) {
-      return null;
+    String classPath = className.replace('.', '/')
+        + ".class";
+    try (InputStream is = CLASSLOADER.getResourceAsStream(classPath)) {
+      if (is != null) {
+        return is.readAllBytes();
+      }
+    } catch (IOException ignored) {
     }
-    return Util.readURLAsBytes(resource);
-  }
-
-  /**
-   * Reads the source for a class.
-   *
-   * @param clazz class literal of the class to read
-   * @return source from .java file or null if not found
-   */
-  protected String getClassSource(Class<?> clazz) {
-    return getClassSource(clazz.getName());
-  }
-
-  /**
-   * Reads the source for a class.
-   *
-   * @param className binary name (ie com.Foo$Bar) of the class to read
-   * @return source from .java file or null if not found
-   */
-  protected String getClassSource(String className) {
-    InputStream str = CLASSLOADER.getResourceAsStream(className.replace('.',
-        '/')
-        + ".java");
-    if (str == null) {
-      return null;
-    }
-    return Util.readStreamAsString(str);
+    return null;
   }
 }

@@ -19,16 +19,20 @@ import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JMethod;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.resources.ext.AbstractResourceGenerator;
 import com.google.gwt.resources.ext.ResourceContext;
 import com.google.gwt.resources.ext.ResourceGeneratorUtil;
 import com.google.gwt.resources.ext.SupportsGeneratorResultCaching;
+import com.google.gwt.thirdparty.guava.common.io.CharStreams;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.gwt.user.rebind.StringSourceWriter;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Provides implementations of TextResource.
@@ -69,7 +73,13 @@ public final class TextResourceGenerator extends AbstractResourceGenerator
     sw.println("public String getText() {");
     sw.indent();
 
-    String toWrite = Util.readURLAsString(resource);
+    String toWrite;
+    try (InputStream in = resource.openStream()) {
+      toWrite = CharStreams.toString(new InputStreamReader(in, StandardCharsets.UTF_8));
+    } catch (IOException e) {
+      logger.log(TreeLogger.ERROR, "Unable to read resource: " + resource, e);
+      throw new UnableToCompleteException();
+    }
 
     if (toWrite.length() > MAX_STRING_CHUNK) {
       writeLongString(sw, toWrite);

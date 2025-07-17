@@ -31,7 +31,6 @@ import com.google.gwt.dev.jdt.RebindOracle;
 import com.google.gwt.dev.jdt.RebindPermutationOracle;
 import com.google.gwt.dev.jjs.PrecompilationContext;
 import com.google.gwt.dev.shell.StandardRebindOracle;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -88,7 +87,7 @@ class PrecompilationContextCreator {
               // Record the correct answer into each permutation.
               permutations[i].putRebindAnswer(requestTypeName, resultTypeName);
             }
-            String[] result = Util.toArray(String.class, answers);
+            String[] result = answers.toArray(String[]::new);
             getAllRebindsEvent.end();
             return result;
           }

@@ -15,12 +15,13 @@
  */
 package com.google.gwt.module.rebind;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.EmittedArtifact.Visibility;
-import com.google.gwt.dev.util.Util;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -57,7 +58,7 @@ public class NoDeployGenerator extends Generator {
       return;
     }
 
-    out.write(Util.getBytes(path));
+    out.write(path.getBytes(UTF_8));
     context.commitResource(logger, out).setVisibility(visibility);
   }
 }

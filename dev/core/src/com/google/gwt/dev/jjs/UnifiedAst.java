@@ -22,7 +22,6 @@ import com.google.gwt.dev.PrecompileTaskOptionsImpl;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.util.DiskCache;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.IOException;
@@ -202,8 +201,10 @@ public class UnifiedAst implements Serializable {
       // Copy the bytes.
       diskCache.transferToStream(serializedAstToken, stream);
     } else if (initialAst != null) {
-      // Serialize into raw bytes.
-      Util.writeObjectToStream(stream, initialAst);
+      // Serialize into raw bytes. Only flush, don't close
+      ObjectOutputStream objectStream = new ObjectOutputStream(stream);
+      objectStream.writeObject(initialAst);
+      objectStream.flush();
     } else {
       throw new IllegalStateException("No serialized AST was cached and AST was already consumed.");
     }

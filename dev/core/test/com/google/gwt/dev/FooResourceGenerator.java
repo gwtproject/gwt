@@ -18,12 +18,13 @@ import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.EmittedArtifact.Visibility;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.base.Charsets;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 
 /**
  * A Generator that creates a bar.txt resource and a class whose name depends on an input resource.
@@ -53,8 +54,10 @@ public class FooResourceGenerator extends Generator {
     // resource.
     String generatedClassName;
     try {
-      generatedClassName = Util.readStreamAsString(context.getResourcesOracle().getResource(
-          "com/foo/generatedClassName.txt").openContents()).trim();
+      try (InputStream is = context.getResourcesOracle().getResource(
+          "com/foo/generatedClassName.txt").openContents()) {
+        generatedClassName = new String(is.readAllBytes(), StandardCharsets.UTF_8).trim();
+      }
 
       // Custom class name with stable content.
       PrintWriter customNameClassPw = context.tryCreate(logger, "com.foo", generatedClassName);

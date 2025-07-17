@@ -25,7 +25,6 @@ import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.resource.ResourceOracle;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.resources.rg.GssResourceGenerator;
 import com.google.gwt.resources.rg.GssResourceGenerator.GssOptions;
 import com.google.gwt.uibinder.client.UiTemplate;
@@ -36,7 +35,9 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXParseException;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -203,7 +204,9 @@ public class UiBinderGenerator extends Generator {
     try {
       String content = designTime.getTemplateContent(templatePath);
       if (content == null) {
-        content = Util.readStreamAsString(resource.openContents());
+        try (InputStream in = resource.openContents()) {
+          content = new String(in.readAllBytes(), StandardCharsets.UTF_8);
+        }
       }
       doc = new W3cDomHelper(logger.getTreeLogger(), resourceOracle).documentFor(content,
           resource.getPath());

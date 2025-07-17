@@ -16,11 +16,39 @@
 package com.google.gwt.dev.util;
 
 import java.io.PrintWriter;
+import java.util.regex.Pattern;
 
 /**
  * An implementation of TextOutput that will produce HTML-escaped output.
  */
 public class HtmlTextOutput extends AbstractTextOutput {
+  private static final Pattern ESCAPE_PATTERN = Pattern.compile("[&<>'\"]");
+
+  /**
+   * Escapes any characters that need to be escaped for HTML output - &, <>, ', and ".
+   */
+  private static String escapeHtml(String s) {
+    if (s == null) {
+      return null;
+    }
+    return ESCAPE_PATTERN.matcher(s).replaceAll(match -> {
+      switch (match.group()) {
+        case "&":
+          return "&amp;";
+        case "<":
+          return "&lt;";
+        case ">":
+          return "&gt;";
+        case "'":
+          return "&apos;";
+        case "\"":
+          return "&quot;";
+        default:
+          throw new IllegalStateException("Unexpected match: " + match.group());
+      }
+    });
+  }
+
   public HtmlTextOutput(PrintWriter out, boolean compact) {
     super(compact);
     setPrintWriter(out);
@@ -38,7 +66,7 @@ public class HtmlTextOutput extends AbstractTextOutput {
 
   @Override
   public void print(String s) {
-    super.print(Util.escapeXml(s));
+    super.print(escapeHtml(s));
   }
 
   @Override
@@ -53,7 +81,7 @@ public class HtmlTextOutput extends AbstractTextOutput {
 
   @Override
   public void printOpt(String s) {
-    super.printOpt(Util.escapeXml(s));
+    super.printOpt(escapeHtml(s));
   }
 
   /**

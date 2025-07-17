@@ -16,10 +16,12 @@
 package com.google.gwt.dev.shell.jetty;
 
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.dev.util.Util;
 
-import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 /**
@@ -69,8 +71,9 @@ public class SslConfiguration {
         keyStorePassword = value;
       } else if ("pwfile".equals(tag)) {
         useSsl = true;
-        keyStorePassword = Util.readFileAsString(new File(value));
-        if (keyStorePassword == null) {
+        try {
+          keyStorePassword = Files.readString(Paths.get(value), StandardCharsets.UTF_8);
+        } catch (IOException e) {
           logger.log(TreeLogger.ERROR,
                   "Unable to read keystore password from '" + value + "'");
           return Optional.empty();

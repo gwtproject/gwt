@@ -21,10 +21,9 @@ import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.core.ext.linker.EmittedArtifact;
 import com.google.gwt.core.ext.linker.EmittedArtifact.Visibility;
 import com.google.gwt.dev.jjs.UnifiedAst;
-import com.google.gwt.dev.util.Util;
+import com.google.gwt.dev.util.StringInterningObjectInputStream;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -76,13 +75,11 @@ public class Precompilation implements PrecompilationResult {
     if (generatedArtifacts == null) {
       try {
         assert generatedArtifactsSerialized != null;
-        generatedArtifacts = Util.readStreamAsObject(new ByteArrayInputStream(
-            generatedArtifactsSerialized), ArtifactSet.class);
+        ObjectInputStream objectInputStream = new StringInterningObjectInputStream(
+            new ByteArrayInputStream(generatedArtifactsSerialized));
+        generatedArtifacts = (ArtifactSet) objectInputStream.readObject();
         generatedArtifactsSerialized = null;
-      } catch (ClassNotFoundException e) {
-        throw new RuntimeException(
-            "Unexpected exception deserializing from memory stream", e);
-      } catch (IOException e) {
+      } catch (ClassNotFoundException | IOException e) {
         throw new RuntimeException(
             "Unexpected exception deserializing from memory stream", e);
       }
@@ -108,14 +105,20 @@ public class Precompilation implements PrecompilationResult {
   private void readObject(ObjectInputStream stream) throws IOException,
       ClassNotFoundException {
     stream.defaultReadObject();
-    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    Util.copyNoClose(stream, baos);
-    generatedArtifactsSerialized = baos.toByteArray();
+
+    // Read to the end of the stream, all remaining bytes will be read as needed
+    generatedArtifactsSerialized = stream.readAllBytes();
   }
 
   private void writeObject(ObjectOutputStream stream) throws IOException {
     stream.defaultWriteObject();
-    Util.writeObjectToStream(stream, generatedArtifacts);
+
+    // Start a new OOS just for the generated artifacts, so it can be decoded later, ensuring
+    // that no data is shared with the outer stream. Don't close, only flush - though the
+    // outer stream must not write more, or reading will be corrupted.
+    ObjectOutputStream objectStream = new ObjectOutputStream(stream);
+    objectStream.writeObject(generatedArtifacts);
+    objectStream.flush();
   }
 
   /**

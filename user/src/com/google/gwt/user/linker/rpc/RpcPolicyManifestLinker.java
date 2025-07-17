@@ -27,13 +27,13 @@ import com.google.gwt.core.ext.linker.LinkerOrder.Order;
 import com.google.gwt.core.ext.linker.Shardable;
 import com.google.gwt.core.ext.linker.SyntheticArtifact;
 import com.google.gwt.dev.jjs.InternalCompilerException;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.user.rebind.rpc.ProxyCreator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -98,7 +98,7 @@ public class RpcPolicyManifestLinker extends AbstractLinker {
     Map<String, String> entries = new HashMap<String, String>();
     try {
       BufferedReader reader = new BufferedReader(new InputStreamReader(
-          manifestStream, Util.DEFAULT_ENCODING));
+          manifestStream, StandardCharsets.UTF_8));
       String line;
       while ((line = reader.readLine()) != null) {
         int idx = line.indexOf(':');

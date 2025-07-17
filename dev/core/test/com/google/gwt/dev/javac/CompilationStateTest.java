@@ -28,12 +28,14 @@ import com.google.gwt.dev.js.ast.JsRootScope;
 import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.util.DefaultTextOutput;
+import com.google.gwt.dev.util.StringInterningObjectInputStream;
 import com.google.gwt.dev.util.TextOutput;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.Lists;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.StringReader;
 import java.util.Arrays;
 import java.util.Collections;
@@ -341,17 +343,18 @@ public class CompilationStateTest extends CompilationStateTestBase {
 
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     for (CompilationUnit unit : unitMap.values()) {
-      Util.writeObjectToStream(outputStream, unitMap.get(unit.getTypeName()));
+      try (ObjectOutputStream objectStream = new ObjectOutputStream(outputStream)) {
+        objectStream.writeObject(unitMap.get(unit.getTypeName()));
+      }
     }
 
     int numUnits = unitMap.size();
     byte[] streamData = outputStream.toByteArray();
     ByteArrayInputStream inputStream = new ByteArrayInputStream(streamData);
-    Map<String, CompilationUnit> newUnitMap =
-        new HashMap<String, CompilationUnit>();
+    Map<String, CompilationUnit> newUnitMap = new HashMap<>();
     for (int i = 0; i < numUnits; i++) {
-      CompilationUnit unit =
-          Util.readStreamAsObject(inputStream, CompilationUnit.class);
+      ObjectInputStream objectInputStream = new StringInterningObjectInputStream(inputStream);
+      CompilationUnit unit = (CompilationUnit) objectInputStream.readObject();
       newUnitMap.put(unit.getTypeName(), unit);
     }
 

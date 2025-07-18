@@ -17,8 +17,10 @@ package java.util.stream;
 
 import static javaemul.internal.InternalPreconditions.checkState;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.DoubleSummaryStatistics;
+import java.util.List;
 import java.util.OptionalDouble;
 import java.util.PrimitiveIterator;
 import java.util.Spliterator;
@@ -56,6 +58,15 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
     }
 
     DoubleStream build();
+  }
+
+  /**
+   * See <a
+   * href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/stream/DoubleStream.DoubleMapMultiConsumer.html">
+   * the official Java API doc</a> for details.
+   */
+  interface DoubleMapMultiConsumer {
+    void accept(double value, DoubleConsumer consumer);
   }
 
   static Builder builder() {
@@ -315,6 +326,14 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
           }
         };
     return StreamSupport.doubleStream(spliterator, false);
+  }
+
+  default DoubleStream mapMulti(DoubleStream.DoubleMapMultiConsumer mapper) {
+    return flatMap(element -> {
+      List<Double> buffer = new ArrayList<>();
+      mapper.accept(element, (DoubleConsumer) buffer::add);
+      return buffer.stream().mapToDouble(n -> n);
+    });
   }
 
   double[] toArray();

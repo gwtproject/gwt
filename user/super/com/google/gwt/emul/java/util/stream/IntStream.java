@@ -17,9 +17,11 @@ package java.util.stream;
 
 import static javaemul.internal.InternalPreconditions.checkState;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.IntSummaryStatistics;
+import java.util.List;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 import java.util.PrimitiveIterator;
@@ -59,6 +61,15 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
     }
 
     IntStream build();
+  }
+
+  /**
+   * See <a
+   * href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/stream/IntStream.IntMapMultiConsumer.html">
+   * the official Java API doc</a> for details.
+   */
+  interface IntMapMultiConsumer {
+    void accept(int value, IntConsumer consumer);
   }
 
   static Builder builder() {
@@ -364,6 +375,14 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
           }
         };
     return StreamSupport.intStream(spliterator, false);
+  }
+
+  default IntStream mapMulti(IntMapMultiConsumer mapper) {
+    return flatMap(element -> {
+      List<Integer> buffer = new ArrayList<>();
+      mapper.accept(element, (IntConsumer) buffer::add);
+      return buffer.stream().mapToInt(n -> n);
+    });
   }
 
   int[] toArray();

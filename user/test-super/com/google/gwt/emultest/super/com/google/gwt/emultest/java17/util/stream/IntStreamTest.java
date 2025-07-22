@@ -28,11 +28,10 @@ public class IntStreamTest extends EmulTestBase {
       callback.accept(num + num);
     };
     assertEquals(new int[0],
-        hideFromCompiler(IntStream.of()).mapMulti(doubling).toArray());
+        IntStream.of().mapMulti(doubling).toArray());
     assertEquals(new int[]{1, 2, 3, 6},
-        hideFromCompiler(IntStream.of(1, 3)).mapMulti(doubling).toArray());
+        IntStream.of(1, 3).mapMulti(doubling).toArray());
     assertEquals(new int[0],
-        hideFromCompiler(IntStream.of(1, 3)).mapMulti((a, b) -> {
-        }).toArray());
+        IntStream.of(1, 3).mapMulti((a, b) -> {}).toArray());
   }
 }

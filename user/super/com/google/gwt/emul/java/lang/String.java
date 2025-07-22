@@ -854,8 +854,8 @@ public final class String implements Comparable<String>, CharSequence,
       }
       // the last line affects minIndent even if blank
       minIndent = Math.min(minIndent, lines.get(lines.size() - 1).getLeadingWhitespaceLength());
-      suffix = "\n";
     } else {
+      suffix = "\n";
       minIndent = 0;
     }
     final int outdent = minIndent;

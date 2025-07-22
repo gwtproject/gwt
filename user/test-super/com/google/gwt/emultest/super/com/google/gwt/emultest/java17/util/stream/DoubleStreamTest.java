@@ -27,11 +27,10 @@ public class DoubleStreamTest extends EmulTestBase {
       callback.accept(num + num);
     };
     assertEquals(new double[0],
-        hideFromCompiler(DoubleStream.of()).mapMulti(doubling).toArray());
+        DoubleStream.of().mapMulti(doubling).toArray());
     assertEquals(new double[]{1.0, 2.0, 3.0, 6.0},
-        hideFromCompiler(DoubleStream.of(1.0, 3.0)).mapMulti(doubling).toArray());
+        DoubleStream.of(1.0, 3.0).mapMulti(doubling).toArray());
     assertEquals(new double[0],
-        hideFromCompiler(DoubleStream.of(1.0, 2.0)).mapMulti((a, b) -> {
-        }).toArray());
+        DoubleStream.of(1.0, 2.0).mapMulti((a, b) -> {}).toArray());
   }
 }

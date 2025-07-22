@@ -27,11 +27,10 @@ public class LongStreamTest extends EmulTestBase {
       callback.accept(num + num);
     };
     assertEquals(new long[0],
-        hideFromCompiler(LongStream.of()).mapMulti(doubling).toArray());
+        LongStream.of().mapMulti(doubling).toArray());
     assertEquals(new long[]{1L, 2L, 3L, 6L},
-        hideFromCompiler(LongStream.of(1L, 3L)).mapMulti(doubling).toArray());
+        LongStream.of(1L, 3L).mapMulti(doubling).toArray());
     assertEquals(new long[0],
-        hideFromCompiler(LongStream.of(1L, 2L)).mapMulti((a, b) -> {
-        }).toArray());
+        LongStream.of(1L, 2L).mapMulti((a, b) -> {}).toArray());
   }
 }

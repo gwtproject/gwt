@@ -17,10 +17,8 @@ package java.util.stream;
 
 import static javaemul.internal.InternalPreconditions.checkState;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 import java.util.LongSummaryStatistics;
 import java.util.OptionalDouble;
 import java.util.OptionalLong;
@@ -377,9 +375,9 @@ public interface LongStream extends BaseStream<Long, LongStream> {
 
   default LongStream mapMulti(LongStream.LongMapMultiConsumer mapper) {
     return flatMap(element -> {
-      List<Long> buffer = new ArrayList<>();
-      mapper.accept(element, (LongConsumer) buffer::add);
-      return buffer.stream().mapToLong(n -> n);
+      Builder builder = builder();
+      mapper.accept(element, (LongConsumer) builder::add);
+      return builder.build();
     });
   }
 

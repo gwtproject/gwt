@@ -17,6 +17,7 @@ package com.google.gwt.emultest;
 
 import com.google.gwt.emultest.java17.lang.CharSequenceTest;
 import com.google.gwt.emultest.java17.lang.StringTest;
+import com.google.gwt.emultest.java17.util.MapEntryTest;
 import com.google.gwt.emultest.java17.util.stream.CollectorsTest;
 import com.google.gwt.emultest.java17.util.stream.DoubleStreamTest;
 import com.google.gwt.emultest.java17.util.stream.IntStreamTest;
@@ -35,7 +36,8 @@ import org.junit.runners.Suite;
     StreamTest.class,
     DoubleStreamTest.class,
     IntStreamTest.class,
-    LongStreamTest.class
+    LongStreamTest.class,
+    MapEntryTest.class
 })
 public class EmulJava17Suite {
 }

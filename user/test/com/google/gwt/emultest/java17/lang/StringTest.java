@@ -35,6 +35,10 @@ public class StringTest extends EmulTestBase {
     assertFalse(isGwtSourceLevel17());
   }
 
+  public void testStripIndent() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
   public void testTranslateEscapes() {
     assertFalse(isGwtSourceLevel17());
   }

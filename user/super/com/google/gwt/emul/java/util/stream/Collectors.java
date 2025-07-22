@@ -74,16 +74,15 @@ public final class Collectors {
   }
 
   public static <T,R1,R2,R> Collector<T,?,R> teeing(Collector<? super T,?,R1> downstream1,
-                                                         Collector<? super T,?,R2> downstream2,
-                                                         BiFunction<? super R1,? super R2,R> merger) {
+      Collector<? super T,?,R2> downstream2, BiFunction<? super R1,? super R2,R> merger) {
     return teeing2(downstream1, downstream2, merger);
   }
 
   private static <T,R1,R2,R,X,Y> Collector<T,?,R> teeing2(Collector<? super T,X,R1> downstream1,
-                                                    Collector<? super T,Y,R2> downstream2,
-                                                    BiFunction<? super R1,? super R2,R> merger) {
+      Collector<? super T,Y,R2> downstream2, BiFunction<? super R1,? super R2,R> merger) {
      return Collector.of(
-        () -> new AbstractMap.SimpleEntry<>(downstream1.supplier().get(), downstream2.supplier().get()),
+        () -> new AbstractMap.SimpleEntry<>(downstream1.supplier().get(),
+            downstream2.supplier().get()),
         (a,b) -> {
           downstream1.accumulator().accept(a.getKey(), b);
           downstream2.accumulator().accept(a.getValue(), b);
@@ -97,7 +96,6 @@ public final class Collectors {
             downstream2.finisher().apply(e.getValue()))
      );
   }
-
 
   public static <T> Collector<T,?,Long> counting() {
     // Using Long::sum here fails in JDT

@@ -28,7 +28,7 @@ import java.io.Serializable;
  * @param <K> key type
  * @param <V> value type
  */
-public class TreeMap<K, V> extends AbstractNavigableMap<K, V> implements Serializable {
+public class TreeMap<K, V> extends AbstractNavigableMap<K, V> implements Serializable, Cloneable {
   /*
    * Implementation derived from public domain C implementation as of 5
    * September 2007 at:
@@ -500,6 +500,10 @@ public class TreeMap<K, V> extends AbstractNavigableMap<K, V> implements Seriali
   public void clear() {
     root = null;
     size = 0;
+  }
+
+  public Object clone() {
+    return new TreeMap<K, V>(this);
   }
 
   @Override

@@ -281,21 +281,28 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
 
   /** Test method for 'java.lang.Object.clone()'. */
   public void testClone() {
-    // Map<K, V> map = createMap();
+    TreeMap<K, V> map = createTreeMap();
     // Check empty clone behavior
-    // TODO (rlo) having .clone() in the code kills the test
-    // SortedMap<K, V> clone = (SortedMap<K, V>)
-    // map.clone();
-    // assertNotNull(clone);
-    // testEquivalent(map, clone);
-    //
-    // // Check non-empty clone behavior
-    // map.put(KEY_1, getValues()[0]);
-    // map.put(KEY_2, getValues()[1]);
-    // map.put(KEY_3, getValues()[2]);
-    // clone = (SortedMap<K, V>) map.clone();
-    // assertNotNull(clone);
-    // testEquivalent(map, clone);
+    SortedMap<K, V> clone = (SortedMap<K, V>) map.clone();
+    assertNotNull(clone);
+    _assertEquals(map, clone);
+    assertSame(map.comparator(), clone.comparator());
+
+    // Check non-empty clone behavior
+    K[] keys = getKeys();
+    V[] values = getValues();
+    map.put(keys[0], values[0]);
+    map.put(keys[1], values[1]);
+    map.put(keys[2], values[2]);
+
+    // Ensure no shared state between original and clone
+    assertFalse(map.equals(clone));
+
+    // Clone the non-empty map
+    clone = (SortedMap<K, V>) map.clone();
+    assertNotNull(clone);
+    _assertEquals(map, clone);
+    assertSame(map.comparator(), clone.comparator());
   }
 
   /**

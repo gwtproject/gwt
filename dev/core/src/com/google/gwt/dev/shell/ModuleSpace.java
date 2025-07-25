@@ -19,7 +19,6 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.Name;
 import com.google.gwt.dev.util.Name.BinaryName;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -34,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.regex.Pattern;
 
 /**
  * The interface to the low-level browser, this class serves as a 'domain' for a
@@ -617,18 +617,45 @@ public abstract class ModuleSpace implements ShellJavaScriptHost {
       String summary, String entryPointTypeName, Throwable e) throws Throwable {
     StringWriter writer = new StringWriter();
     e.printStackTrace(new PrintWriter(writer));
-    String stackTrace = Util.escapeXml(writer.toString()).replaceFirst(
+    String stackTrace = escapeHtml(writer.toString()).replaceFirst(
         // (?ms) for regex pattern modifiers MULTILINE and DOTALL
         "(?ms)(Caused by:.+)", "<b>$1</b>");
     String details = "<p>Exception while loading module <b>"
-        + Util.escapeXml(entryPointTypeName) + "</b>."
+        + escapeHtml(entryPointTypeName) + "</b>."
         + " See Development Mode for details.</p>"
         + "<div style='overflow:visible;white-space:pre;'>" + stackTrace
         + "</div>";
 
     invokeNativeVoid("__gwt_displayGlassMessage", null,
         new Class[] { String.class, String.class },
-        new Object[] { Util.escapeXml(summary), details });
+        new Object[] { escapeHtml(summary), details });
+  }
+
+  private static final Pattern ESCAPE_PATTERN = Pattern.compile("[&<>'\"]");
+
+  /**
+   * Escapes any characters that need to be escaped for HTML output - &, <>, ', and ".
+   */
+  private static String escapeHtml(String s) {
+    if (s == null) {
+      return null;
+    }
+    return ESCAPE_PATTERN.matcher(s).replaceAll(match -> {
+      switch (match.group()) {
+        case "&":
+          return "&amp;";
+        case "<":
+          return "&lt;";
+        case ">":
+          return "&gt;";
+        case "'":
+          return "&apos;";
+        case "\"":
+          return "&quot;";
+        default:
+          throw new IllegalStateException("Unexpected match: " + match.group());
+      }
+    });
   }
 
   private boolean isUserFrame(StackTraceElement element) {

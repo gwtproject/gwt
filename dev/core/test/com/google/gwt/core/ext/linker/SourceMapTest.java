@@ -25,13 +25,13 @@ import com.google.gwt.core.ext.soyc.coderef.EntityRecorder;
 import com.google.gwt.core.ext.soyc.coderef.MethodDescriptor;
 import com.google.gwt.dev.Compiler;
 import com.google.gwt.dev.CompilerOptionsImpl;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.thirdparty.debugging.sourcemap.FilePosition;
 import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapConsumerV3;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
 import com.google.gwt.thirdparty.guava.common.primitives.Ints;
 import com.google.gwt.thirdparty.json.JSONArray;
 import com.google.gwt.thirdparty.json.JSONException;
@@ -528,7 +528,7 @@ public class SourceMapTest extends TestCase {
       testSoycCorrespondence(new File(parentDir + "/soycReport/"));
 
     } finally {
-      Util.recursiveDelete(work, false);
+      MoreFiles.deleteRecursively(work.toPath());
     }
   }
 }

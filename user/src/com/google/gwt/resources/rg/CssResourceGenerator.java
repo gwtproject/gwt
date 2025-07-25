@@ -15,6 +15,8 @@
  */
 package com.google.gwt.resources.rg;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.Generator;
@@ -29,7 +31,6 @@ import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.util.DefaultTextOutput;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.CssResource.ClassName;
@@ -225,7 +226,7 @@ public class CssResourceGenerator extends AbstractCssResourceGenerator
     String conflict = stringStartsWithAny(obfuscatedClassName, reservedPrefixes);
     while (conflict != null) {
       Adler32 hash = new Adler32();
-      hash.update(Util.getBytes(conflict));
+      hash.update(conflict.getBytes(UTF_8));
       /*
        * Compute a new prefix for the identifier to mask the prefix and add the
        * reserved identifier character to prevent conflicts with makeIdent().
@@ -743,7 +744,8 @@ public class CssResourceGenerator extends AbstractCssResourceGenerator
        */
       Adler32 checksum = new Adler32();
       for (JClassType type : cssResourceSubtypes) {
-        checksum.update(Util.getBytes(type.getQualifiedSourceName()));
+        String s = type.getQualifiedSourceName();
+        checksum.update(s.getBytes(UTF_8));
       }
 
       final int seed = Math.abs((int) checksum.getValue());

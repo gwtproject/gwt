@@ -15,12 +15,14 @@
  */
 package com.google.gwt.dev.javac;
 
-import com.google.gwt.dev.util.Util;
+import com.google.gwt.dev.util.StringInterningObjectInputStream;
 
 import junit.framework.TestCase;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * Test for {@link CompiledClass}.
@@ -34,9 +36,13 @@ public class CompiledClassTest extends TestCase {
     CompiledClass writeObject = new CompiledClass(dummyByteCode, null, false,
         "com/example/DeadBeef", "com.example.DeadBeef");
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    Util.writeObjectToStream(outputStream, writeObject);
+    try (ObjectOutputStream objectStream = new ObjectOutputStream(outputStream)) {
+      objectStream.writeObject(writeObject);
+    }
+
     ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-    CompiledClass readObject = Util.readStreamAsObject(inputStream, CompiledClass.class);
+    ObjectInputStream objectInputStream = new StringInterningObjectInputStream(inputStream);
+    CompiledClass readObject = (CompiledClass) objectInputStream.readObject();
     assertEquals(4, readObject.getBytes().length);
     byte[] readBytes = readObject.getBytes();
     for (int i = 0; i < 4; ++i) {

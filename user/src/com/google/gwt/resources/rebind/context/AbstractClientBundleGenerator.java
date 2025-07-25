@@ -36,7 +36,6 @@ import com.google.gwt.core.ext.typeinfo.JRealClassType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.generator.NameFactory;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ClientBundleWithLookup;
 import com.google.gwt.resources.client.ResourcePrototype;
@@ -52,8 +51,12 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
 import java.beans.Beans;
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.net.JarURLConnection;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -64,6 +67,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import javax.lang.model.SourceVersion;
 
 /**
  * The base class for creating new ClientBundle implementations.
@@ -130,6 +135,49 @@ public abstract class AbstractClientBundleGenerator extends IncrementalGenerator
    * by a version of this generator with a different version id.
    */
   private static final long GENERATOR_VERSION_ID = 1L;
+  private static final String FILE_PROTOCOL = "file";
+  private static final String JAR_PROTOCOL = "jar";
+
+  /**
+   * Retrieves the last modified time of a provided URL.
+   *
+   * @return a positive value indicating milliseconds since the epoch (00:00:00
+   *         Jan 1, 1970), or 0L on failure, such as a SecurityException or
+   *         IOException.
+   */
+  private static long getResourceModifiedTime(URL url) {
+    long lastModified = 0L;
+    try {
+      if (url.getProtocol().equals(JAR_PROTOCOL)) {
+        /*
+         * If this resource is contained inside a jar file, such as can happen
+         * if it's bundled in a 3rd-party library, we use the jar file itself to
+         * test whether it's up to date. We don't want to call
+         * JarURLConnection.getLastModified(), as this is much slower than using
+         * the jar File resource directly.
+         */
+        JarURLConnection jarConn = (JarURLConnection) url.openConnection();
+        url = jarConn.getJarFileURL();
+      }
+      if (url.getProtocol().equals(FILE_PROTOCOL)) {
+        /*
+         * Need to handle possibly wonky syntax in a file URL resource. Modeled
+         * after suggestion in this blog entry:
+         * http://weblogs.java.net/blog/2007
+         * /04/25/how-convert-javaneturl-javaiofile
+         */
+        File file;
+        try {
+          file = new File(url.toURI());
+        } catch (URISyntaxException uriEx) {
+          file = new File(url.getPath());
+        }
+        lastModified = file.lastModified();
+      }
+    } catch (IOException | RuntimeException ignored) {
+    }
+    return lastModified;
+  }
 
   /**
    * An implementation of ClientBundleFields.
@@ -151,7 +199,7 @@ public abstract class AbstractClientBundleGenerator extends IncrementalGenerator
     public String define(JType type, String name, String initializer,
         boolean isStatic, boolean isFinal) {
 
-      assert Util.isValidJavaIdent(name) : name
+      assert SourceVersion.isIdentifier(name) : name
           + " is not a valid Java identifier";
 
       String ident = factory.createName(name);
@@ -614,7 +662,7 @@ public abstract class AbstractClientBundleGenerator extends IncrementalGenerator
       }
 
       // Check whether the resource referenced by the provided URL is up to date
-      long modifiedTime = Util.getResourceModifiedTime(resolvedUrl);
+      long modifiedTime = getResourceModifiedTime(resolvedUrl);
       if (modifiedTime == 0L || modifiedTime > lastTimeGenerated) {
         logger.log(TreeLogger.TRACE, "Found dependent resource that has changed: " + resourceName);
         return false;

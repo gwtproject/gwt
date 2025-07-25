@@ -18,7 +18,6 @@ package com.google.gwt.junit;
 import com.google.gwt.dev.cfg.BindingProperty;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.Properties;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.junit.JUnitShell.Strategy;
 import com.google.gwt.junit.client.WithProperties;
 import com.google.gwt.junit.client.WithProperties.Property;
@@ -29,6 +28,8 @@ import java.lang.reflect.Method;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
+
+import javax.lang.model.SourceVersion;
 
 /**
  * A {@link JUnitShell.Strategy} that will alter the module the tests are run
@@ -76,13 +77,13 @@ public class PropertyDefiningStrategy implements Strategy {
   private Property checkProperty(Property property) {
     String[] tokens = (property.name() + ". ").split("\\.");
     for (int i = 0; i < tokens.length - 1; i++) {
-      if (!Util.isValidJavaIdent(tokens[i])) {
+      if (!SourceVersion.isIdentifier(tokens[i])) {
         throw new AssertionError(
             "Property name invalid: " + property.name());
       }
     }
 
-    if (!Util.isValidJavaIdent(property.value())) {
+    if (!SourceVersion.isIdentifier(property.value())) {
       throw new AssertionError(
           "Property value invalid: " + property.value());
     }

@@ -15,6 +15,8 @@
  */
 package com.google.gwt.resources.rg;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.Generator;
@@ -29,7 +31,6 @@ import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.resources.client.ClientBundle.Source;
 import com.google.gwt.resources.client.CssResource;
@@ -737,7 +738,8 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
     Adler32 checksum = new Adler32();
 
     for (JClassType type : gssResources) {
-      checksum.update(Util.getBytes(type.getQualifiedSourceName()));
+      String s = type.getQualifiedSourceName();
+      checksum.update(s.getBytes(UTF_8));
     }
 
     int seed = Math.abs((int) checksum.getValue());

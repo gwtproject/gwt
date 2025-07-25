@@ -15,7 +15,6 @@
  */
 package com.google.gwt.i18n.rebind;
 
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.i18n.shared.GwtLocale;
 
 import org.apache.tapestry.util.text.LocalizedProperties;
@@ -53,7 +52,7 @@ class LocalizedPropertiesResource extends AbstractResource {
     super(locale);
     LocalizedProperties props = new LocalizedProperties();
     try {
-      props.load(m, Util.DEFAULT_ENCODING);
+      props.load(m, "UTF-8");
     } catch (IOException e) {
       throw new RuntimeException("Failed to load " + this.getPath(), e);
     }

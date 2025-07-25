@@ -15,6 +15,8 @@
  */
 package com.google.gwt.resources.rg;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.Generator;
@@ -24,7 +26,6 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.resources.client.impl.ExternalTextResourcePrototype;
 import com.google.gwt.resources.ext.AbstractResourceGenerator;
@@ -35,9 +36,13 @@ import com.google.gwt.resources.ext.ResourceGeneratorUtil;
 import com.google.gwt.resources.ext.SupportsGeneratorResultCaching;
 import com.google.gwt.safehtml.shared.UriUtils;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
+import com.google.gwt.thirdparty.guava.common.io.CharStreams;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.gwt.user.rebind.StringSourceWriter;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -109,7 +114,7 @@ public final class ExternalTextResourceGenerator extends
 
     urlExpression = context.deploy(
         context.getClientBundleType().getQualifiedSourceName().replace('.', '_')
-            + "_jsonbundle.txt", "text/plain", Util.getBytes(wrappedData.toString()), true);
+            + "_jsonbundle.txt", "text/plain", wrappedData.toString().getBytes(UTF_8), true);
 
     TypeOracle typeOracle = context.getGeneratorContext().getTypeOracle();
     JClassType stringType = typeOracle.findType(String.class.getName());
@@ -151,9 +156,13 @@ public final class ExternalTextResourceGenerator extends
       throw new UnableToCompleteException();
     }
 
-    URL resource = urls[0];
-
-    String toWrite = Util.readURLAsString(resource);
+    String toWrite;
+    try (InputStream in = urls[0].openStream()) {
+      toWrite = CharStreams.toString(new InputStreamReader(in, StandardCharsets.UTF_8));
+    } catch (IOException e) {
+      logger.log(TreeLogger.Type.ERROR, "Unable to read resource: " + urls[0], e);
+      throw new UnableToCompleteException();
+    }
 
     // This de-duplicates strings in the bundle.
     if (!hashes.containsKey(toWrite)) {

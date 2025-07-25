@@ -40,7 +40,6 @@ import com.google.gwt.dev.util.JsniRef;
 import com.google.gwt.dev.util.Name;
 import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.dev.util.Name.SourceOrBinaryName;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
@@ -366,7 +365,12 @@ public final class CompilingClassLoader extends ClassLoader implements
       if (url == null) {
         throw new ClassNotFoundException();
       }
-      byte[] bytes = Util.readURLAsBytes(url);
+      byte[] bytes;
+      try (InputStream inputStream = url.openStream()) {
+        bytes = inputStream.readAllBytes();
+      } catch (IOException ex) {
+        throw new ClassNotFoundException("Could not read class " + name, ex);
+      }
       return defineClass(name, bytes, 0, bytes.length);
     }
 

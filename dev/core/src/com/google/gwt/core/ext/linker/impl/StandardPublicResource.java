@@ -19,10 +19,8 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.PublicResource;
 import com.google.gwt.dev.resource.Resource;
-import com.google.gwt.dev.util.Util;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -99,10 +97,8 @@ public class StandardPublicResource extends PublicResource {
       return this;
     }
     // Resource is not serializable, must replace myself.
-    try {
-      ByteArrayOutputStream baos = new ByteArrayOutputStream();
-      Util.copy(resource.openContents(), baos);
-      return new SerializedPublicResource(getPartialPath(), baos.toByteArray(),
+    try (InputStream is = resource.openContents()) {
+      return new SerializedPublicResource(getPartialPath(), is.readAllBytes(),
           getLastModified());
     } catch (IOException e) {
       throw new RuntimeException(e);

@@ -121,7 +121,12 @@ public class Java17Test extends GWTTestCase {
   public void testInlinedStringConstantsInCase() {
     assertFalse(isGwtSourceLevel17());
   }
+
   public void testCaseArrowLabelsVoidExpression() {
+    assertFalse(isGwtSourceLevel17());
+  }
+
+  public void testUnusedSwitchExprResult() {
     assertFalse(isGwtSourceLevel17());
   }
 

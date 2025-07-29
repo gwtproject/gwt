@@ -60,5 +60,9 @@ public class StringTest extends EmulTestBase {
         hideFromCompiler("\\377\\378\\400").translateEscapes());
     assertEquals("ab",
         hideFromCompiler("a\\\nb").translateEscapes());
+    assertEquals("",
+        hideFromCompiler("\\\r\n").translateEscapes());
+    assertEquals("",
+        hideFromCompiler("\\\r\\\n").translateEscapes());
   }
 }

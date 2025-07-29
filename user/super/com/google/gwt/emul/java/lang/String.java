@@ -491,11 +491,6 @@ public final class String implements Comparable<String>, CharSequence,
     return checkNotNull(this);
   }
 
-  @Override
-  public boolean isEmpty() {
-    return length() == 0;
-  }
-
   public int lastIndexOf(int codePoint) {
     return lastIndexOf(fromCodePoint(codePoint));
   }
@@ -903,8 +898,13 @@ public final class String implements Comparable<String>, CharSequence,
           result.append('\r');
           break;
         case '\n':
-        case '\r':
           // discard
+          break;
+        case '\r':
+          // discard \r and possibly \n that comes right after
+          if (translated < length() && charAt(translated) == '\n') {
+            translated++;
+          }
           break;
         case '"':
           result.append('"');

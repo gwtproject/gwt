@@ -18,12 +18,11 @@ package java.util;
 
 import static javaemul.internal.InternalPreconditions.checkArraySize;
 
-import javaemul.internal.ArrayHelper;
-import javaemul.internal.LongUtils;
-
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
+import javaemul.internal.ArrayHelper;
+import javaemul.internal.LongUtils;
 
 /**
  * This implementation uses a dense array holding bit groups of size 31 to keep track of when bits
@@ -67,7 +66,8 @@ public class BitSet {
 
     @Override
     public int characteristics() {
-      return Spliterator.SIZED | Spliterator.ORDERED | Spliterator.DISTINCT | Spliterator.SORTED;
+      return Spliterator.SIZED | Spliterator.SUBSIZED | Spliterator.ORDERED
+          | Spliterator.DISTINCT | Spliterator.SORTED;
     }
   }
 

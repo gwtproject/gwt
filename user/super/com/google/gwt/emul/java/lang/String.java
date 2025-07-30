@@ -954,10 +954,10 @@ public final class String implements Comparable<String>, CharSequence,
         return false;
       }
       if (rPosition < nextIndex) {
-        rPosition = cappedIndexOf('\r', nextIndex);
+        rPosition = cappedIndexOf('\r');
       }
       if (nPosition < nextIndex) {
-        nPosition = cappedIndexOf('\n', nextIndex);
+        nPosition = cappedIndexOf('\n');
       }
       int lineEnd = Math.min(nPosition, rPosition);
       action.accept(substring(nextIndex, lineEnd));
@@ -967,11 +967,11 @@ public final class String implements Comparable<String>, CharSequence,
       }
       return nextIndex < length();
     }
-  }
 
-  private int cappedIndexOf(char c, int nextIndex) {
-    int index = indexOf(c, nextIndex);
-    return index == -1 ? length() : index;
+    private int cappedIndexOf(char c) {
+      int index = indexOf(c, nextIndex);
+      return index == -1 ? length() : index;
+    }
   }
 
   @JsType(isNative = true, name = "String", namespace = "<window>")

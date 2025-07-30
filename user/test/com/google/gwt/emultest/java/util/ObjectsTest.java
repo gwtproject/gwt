@@ -102,4 +102,78 @@ public class ObjectsTest extends GWTTestCase {
     Object obj = new Object();
     assertEquals(obj.hashCode(), Objects.hashCode(obj));
   }
+
+  public void testRequireNonNull() {
+    assertEquals("foo", Objects.requireNonNull(hideFromCompiler("foo")));
+    assertThrows(NullPointerException.class,
+        () -> Objects.requireNonNull(hideFromCompiler(null)));
+  }
+
+  public void testRequireNonNullElse() {
+    assertEquals("foo", Objects.requireNonNullElse(hideFromCompiler("foo"), "bar"));
+    assertEquals("bar", Objects.requireNonNullElse(hideFromCompiler(null), "bar"));
+    assertThrows(NullPointerException.class,
+        () -> Objects.requireNonNullElse(hideFromCompiler(null), null));
+  }
+
+  public void testRequireNonNullElseGet() {
+    assertEquals("foo",
+        Objects.requireNonNullElseGet(hideFromCompiler("foo"), () -> "bar"));
+    assertEquals("bar",
+        Objects.requireNonNullElseGet(hideFromCompiler(null), () -> "bar"));
+    assertThrows(NullPointerException.class,
+        () -> Objects.requireNonNullElseGet(hideFromCompiler(null), null));
+    assertThrows(NullPointerException.class,
+        () -> Objects.requireNonNullElseGet(hideFromCompiler(null), () -> null));
+  }
+
+  private String hideFromCompiler(String value) {
+    if (Math.random() > 2) {
+      return "unreachable";
+    }
+    return value;
+  }
+
+  public void testCheckIndex() {
+    assertEquals(5, Objects.checkIndex(5, 10));
+    assertThrows(IndexOutOfBoundsException.class,
+        () -> Objects.checkIndex(-5, 5));
+    assertThrows(IndexOutOfBoundsException.class,
+        () -> Objects.checkIndex(10, 5));
+    assertThrows(IndexOutOfBoundsException.class,
+        () -> Objects.checkIndex(5, 5));
+  }
+
+  public void testCheckFromToIndex() {
+    assertEquals(5, Objects.checkFromToIndex(5, 7, 10));
+    assertEquals(0, Objects.checkFromToIndex(0, 10, 10));
+    assertThrows(IndexOutOfBoundsException.class,
+        () -> Objects.checkFromToIndex(-5, 1, 5));
+    assertThrows(IndexOutOfBoundsException.class,
+        () -> Objects.checkFromToIndex(10, 1,  5));
+    assertThrows(IndexOutOfBoundsException.class,
+        () -> Objects.checkFromToIndex(1, 10,  5));
+  }
+
+  public void testCheckFromIndexSize() {
+    assertEquals(5, Objects.checkFromIndexSize(5, 2, 10));
+    assertEquals(0, Objects.checkFromIndexSize(0, 10, 10));
+    assertThrows(IndexOutOfBoundsException.class,
+        () -> Objects.checkFromIndexSize(-5, 1, 5));
+    assertThrows(IndexOutOfBoundsException.class,
+        () -> Objects.checkFromIndexSize(10, 1,  5));
+    assertThrows(IndexOutOfBoundsException.class,
+        () -> Objects.checkFromIndexSize(1, 10,  5));
+    assertThrows(IndexOutOfBoundsException.class,
+        () -> Objects.checkFromIndexSize(1, -5,  5));
+  }
+
+  private void assertThrows(Class<? extends Exception> thrownCheck, Runnable toTest) {
+    try {
+      toTest.run();
+      fail("Should have failed");
+    } catch (Exception ex) {
+      assertEquals(thrownCheck, ex.getClass());
+    }
+  }
 }

@@ -13,22 +13,21 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.place.rebind;
+package com.google.gwt.dev.javac.testing.impl;
 
-import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
-import com.google.gwt.dev.util.Util;
-
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Loads the actual source of a type. This should be used only for types
  * directly tested by this package's tests. Note that use of this class
  * requires your source files to be on your classpath.
  * <p>
- * Copied from {@link com.google.gwt.editor.rebind.model.EditorModelTest}
- * pending a public API.
+ * Subject to change/removal in the future.
  */
-class RealJavaResource extends MockJavaResource {
+public class RealJavaResource extends MockJavaResource {
   public RealJavaResource(Class<?> clazz) {
     super(clazz.getName());
   }
@@ -36,8 +35,14 @@ class RealJavaResource extends MockJavaResource {
   @Override
   public CharSequence getContent() {
     String resourceName = getTypeName().replace('.', '/') + ".java";
-    InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(
-        resourceName);
-    return Util.readStreamAsString(stream);
+    try (InputStream stream = Thread.currentThread().getContextClassLoader()
+        .getResourceAsStream(resourceName)) {
+      if (stream == null) {
+        return null;
+      }
+      return new String(stream.readAllBytes(), StandardCharsets.UTF_8);
+    } catch (IOException e) {
+      throw new UncheckedIOException(e);
+    }
   }
 }

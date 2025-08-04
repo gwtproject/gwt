@@ -15,12 +15,11 @@
  */
 package com.google.gwt.dev.resource.impl;
 
-import com.google.gwt.dev.util.Util;
-
 import junit.framework.TestCase;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 /**
  * Tests related FileResources.
@@ -79,7 +78,7 @@ public class FileResourceTest extends TestCase {
     try {
       f = File.createTempFile("com.google.gwt.dev.javac.impl.FileResourceTest", ".tmp");
       f.deleteOnExit();
-      Util.writeStringAsFile(f, "contents 1");
+      Files.writeString(f.toPath(), "contents 1");
     } catch (IOException e) {
       fail("Failed to create test file");
     }

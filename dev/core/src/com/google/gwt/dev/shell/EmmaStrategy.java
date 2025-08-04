@@ -15,8 +15,6 @@
  */
 package com.google.gwt.dev.shell;
 
-import com.google.gwt.dev.util.Util;
-
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -47,11 +45,7 @@ abstract class EmmaStrategy {
           URLConnection conn = url.openConnection();
           if (conn.getLastModified() >= unitLastModified) {
             // It's as new as the source file, let's use it.
-            byte[] result = Util.readURLConnectionAsBytes(conn);
-            if (result != null) {
-              return result;
-            }
-            // Fall through.
+            return conn.getInputStream().readAllBytes();
           }
           // Fall through.
         } catch (IOException ignored) {

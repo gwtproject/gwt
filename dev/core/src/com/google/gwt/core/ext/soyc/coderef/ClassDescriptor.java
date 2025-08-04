@@ -18,7 +18,6 @@ package com.google.gwt.core.ext.soyc.coderef;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.Collection;
@@ -35,9 +34,11 @@ public class ClassDescriptor extends EntityDescriptor {
    * Creates a class descriptor from a JDeclaredType.
    */
   public static ClassDescriptor from(JDeclaredType classType) {
-    return new ClassDescriptor(Util.getClassName(classType.getName()),
-                               Util.getPackageName(classType.getName()),
-                               classType);
+    String name = classType.getName();
+    int lastDot = name.lastIndexOf('.');
+    String className = name.substring(lastDot + 1);
+    final String packageName = lastDot > 0 ? name.substring(0, lastDot) : "";
+    return new ClassDescriptor(className, packageName, classType);
   }
 
   private final String packageName;

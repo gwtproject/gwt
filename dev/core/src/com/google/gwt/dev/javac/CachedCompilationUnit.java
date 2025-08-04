@@ -17,7 +17,6 @@ package com.google.gwt.dev.javac;
 
 import com.google.gwt.dev.jjs.impl.GwtAstBuilder;
 import com.google.gwt.dev.util.DiskCacheToken;
-import com.google.gwt.dev.util.Util;
 
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 
@@ -69,7 +68,7 @@ public class CachedCompilationUnit extends CompilationUnit {
     this.contentId = unit.getContentId();
     this.dependencies = unit.getDependencies();
     this.resourcePath = unit.getResourcePath();
-    this.resourceLocation = Util.stripJarPathPrefix(resourceLocation);
+    this.resourceLocation = resourceLocation.replaceAll("^file:jar:[^!]+!/", "");
     this.jsniMethods = unit.getJsniMethods();
     this.methodArgNamesLookup = unit.getMethodArgs();
     this.typeName = unit.getTypeName();
@@ -100,7 +99,8 @@ public class CachedCompilationUnit extends CompilationUnit {
     this.contentId = unit.getContentId();
     this.dependencies = unit.getDependencies();
     this.resourcePath = unit.getResourcePath();
-    this.resourceLocation = Util.stripJarPathPrefix(unit.getResourceLocation());
+    this.resourceLocation = unit.getResourceLocation()
+        .replaceAll("^file:jar:[^!]+!/", "");
     this.jsniMethods = unit.getJsniMethods();
     this.lastModified = normalizeTimestamps ? 0 : unit.getLastModified();
     this.methodArgNamesLookup = unit.getMethodArgs();

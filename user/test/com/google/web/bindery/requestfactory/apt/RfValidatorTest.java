@@ -15,7 +15,6 @@
  */
 package com.google.web.bindery.requestfactory.apt;
 
-import com.google.gwt.dev.util.Util;
 import com.google.web.bindery.requestfactory.gwt.client.RequestFactoryPolymorphicTest;
 import com.google.web.bindery.requestfactory.shared.LoggingRequest;
 import com.google.web.bindery.requestfactory.shared.SimpleRequestFactory;
@@ -26,10 +25,12 @@ import junit.framework.TestCase;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -79,7 +80,9 @@ public class RfValidatorTest extends TestCase {
 
     @Override
     public CharSequence getCharContent(boolean ignored) throws IOException {
-      return Util.readStreamAsString(contents.openStream());
+      try (InputStream is = contents.openStream()) {
+        return new String(is.readAllBytes(), StandardCharsets.UTF_8);
+      }
     }
   }
 

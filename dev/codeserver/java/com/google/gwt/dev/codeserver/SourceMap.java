@@ -19,11 +19,12 @@ package com.google.gwt.dev.codeserver;
 import com.google.gwt.dev.json.JsonArray;
 import com.google.gwt.dev.json.JsonException;
 import com.google.gwt.dev.json.JsonObject;
-import com.google.gwt.dev.util.Util;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -37,21 +38,19 @@ class SourceMap {
   private final JsonObject json;
 
   /**
-   *@see #load
+   * @see #load
    */
   private SourceMap(JsonObject json) {
     this.json = json;
   }
 
   static SourceMap load(File file) {
-    String sourceMapJson = Util.readFileAsString(file);
 
     JsonObject json;
     try {
+      String sourceMapJson = Files.readString(file.toPath(), StandardCharsets.UTF_8);
       json = JsonObject.parse(new StringReader(sourceMapJson));
-    } catch (JsonException e) {
-      throw new RuntimeException("can't parse sourcemap as json", e);
-    } catch (IOException e) {
+    } catch (JsonException | IOException e) {
       throw new RuntimeException("can't parse sourcemap as json", e);
     }
 

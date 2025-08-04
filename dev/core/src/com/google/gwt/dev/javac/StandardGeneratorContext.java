@@ -39,7 +39,6 @@ import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.dev.resource.impl.AbstractResourceOracle;
 import com.google.gwt.dev.util.DiskCache;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.dev.util.collect.IdentityHashMap;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
@@ -228,7 +227,9 @@ public class StandardGeneratorContext implements GeneratorContext {
 
     @Override
     public String optionalFileLocation() {
-      return file.exists() ? Util.stripJarPathPrefix(file.getAbsolutePath()) : null;
+      return file.exists()
+          ? file.getAbsolutePath().replaceAll("^file:jar:[^!]+!/", "")
+          : null;
     }
   }
 

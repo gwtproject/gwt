@@ -22,10 +22,10 @@ import com.google.gwt.core.ext.linker.StatementRanges;
 import com.google.gwt.core.ext.linker.SymbolData;
 import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.util.DiskCache;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.Lists;
 
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -124,7 +124,7 @@ public class StandardCompilationResult extends CompilationResult {
 
     String[] jsStrings = new String[applicationFragmentCount];
     for (int fragmentIndex = 0; fragmentIndex < applicationFragmentCount; fragmentIndex++) {
-      jsStrings[fragmentIndex] = Util.toString(applicationJs[fragmentIndex]);
+      jsStrings[fragmentIndex] = new String(applicationJs[fragmentIndex], StandardCharsets.UTF_8);
     }
     return jsStrings;
   }

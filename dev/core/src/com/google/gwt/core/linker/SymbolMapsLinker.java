@@ -37,7 +37,6 @@ import com.google.gwt.core.ext.linker.SyntheticArtifact;
 import com.google.gwt.core.ext.linker.impl.StandardLinkerContext;
 import com.google.gwt.dev.cfg.ResourceLoader;
 import com.google.gwt.dev.cfg.ResourceLoaders;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.HashMap;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
@@ -55,6 +54,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -294,7 +294,13 @@ public class SymbolMapsLinker extends AbstractLinker {
       StandardLinkerContext stdContext = (StandardLinkerContext) context;
       for (SourceMapArtifact se : artifacts.find(SourceMapArtifact.class)) {
         // filename is permutation_id/sourceMap<fragmentNumber>.json
-        String sourceMapString = Util.readStreamAsString(se.getContents(logger));
+        final String sourceMapString;
+        try (InputStream in = se.getContents(logger)) {
+          sourceMapString = new String(in.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException ex) {
+          logger.log(TreeLogger.ERROR, "Error reading source map from cache", ex);
+          throw new UnableToCompleteException();
+        }
         String strongName = permMap.get(se.getPermutationId());
         String partialPath = strongName + "_sourceMap" + se.getFragment() + ".json";
 
@@ -379,19 +385,16 @@ public class SymbolMapsLinker extends AbstractLinker {
         });
 
     for (String sourceFileName : section.getOriginalSources()) {
-      String content;
       InputStream cis = null;
       try {
-        cis = loadSource(logger, sourceFileName, generatedSources,
-            resourceLoader);
+        cis = loadSource(logger, sourceFileName, generatedSources, resourceLoader);
         if (isNull(cis)) {
           cis = context.getModule().findSourceFile(sourceFileName).openContents();
         }
-        content = Util.readStreamAsString(cis);
+        String content = new String(cis.readAllBytes(), StandardCharsets.UTF_8);
         sourceMapGenerator.addSourcesContent(sourceFileName, content);
       } catch (UnableToCompleteException | URISyntaxException | IOException e) {
-        logger.log(TreeLogger.Type.WARN, "Can't write source map " +
-            partialPath, e);
+        logger.log(TreeLogger.Type.WARN, "Can't write source map " + partialPath, e);
       } finally {
         Closeables.closeQuietly(cis);
       }

@@ -17,11 +17,20 @@ package com.google.gwt.dev.util;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
+import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InvalidClassException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 
 /**
@@ -70,8 +79,9 @@ public class FileBackedObject<T extends Serializable> implements PersistenceBack
 
   @Override
   public T newInstance(TreeLogger logger) throws UnableToCompleteException {
-    try {
-      return Util.readFileAsObject(backingFile, clazz);
+    try (InputStream is = new BufferedInputStream(new FileInputStream(backingFile));
+         ObjectInputStream objectInputStream = new StringInterningObjectInputStream(is)) {
+      return clazz.cast(objectInputStream.readObject());
     } catch (ClassNotFoundException e) {
       logger.log(TreeLogger.ERROR, "Missing class definition", e);
       throw new UnableToCompleteException();
@@ -91,7 +101,19 @@ public class FileBackedObject<T extends Serializable> implements PersistenceBack
     assert clazz.isInstance(object);
     Preconditions.checkState(!alreadyWritten);
     alreadyWritten = true;
-    Util.writeObjectAsFile(logger, backingFile, object);
+    backingFile.getParentFile().mkdirs();
+    SpeedTracerLogger.Event writeObjectAsFileEvent = SpeedTracerLogger.start(
+        CompilerEventType.WRITE_OBJECT_AS_FILE);
+    try (OutputStream stream = new FileOutputStream(backingFile);
+         ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
+      objectStream.writeObject(object);
+    } catch (IOException e) {
+      logger.log(TreeLogger.ERROR, "Unable to write file: "
+          + backingFile.getAbsolutePath(), e);
+      throw new UnableToCompleteException();
+    } finally {
+      writeObjectAsFileEvent.end();
+    }
   }
 
   @Override

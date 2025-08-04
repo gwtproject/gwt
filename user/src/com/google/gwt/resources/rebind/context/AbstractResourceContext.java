@@ -19,7 +19,6 @@ import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.resources.ext.ClientBundleRequirements;
 import com.google.gwt.resources.ext.ResourceContext;
 import com.google.gwt.resources.ext.ResourceGenerator;
@@ -28,6 +27,7 @@ import com.google.gwt.thirdparty.guava.common.io.BaseEncoding;
 
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * Defines base methods for ResourceContext implementations.
@@ -69,14 +69,13 @@ public abstract class AbstractResourceContext implements ResourceContext {
   public String deploy(URL resource, String mimeType, boolean forceExternal)
       throws UnableToCompleteException {
     String fileName = ResourceGeneratorUtil.baseName(resource);
-    byte[] bytes = Util.readURLAsBytes(resource);
     try {
-      String finalMimeType = (mimeType != null)
-          ? mimeType : resource.openConnection().getContentType();
+      URLConnection urlConnection = resource.openConnection();
+      byte[] bytes = urlConnection.getInputStream().readAllBytes();
+      String finalMimeType = (mimeType != null) ? mimeType : urlConnection.getContentType();
       return deploy(fileName, finalMimeType, bytes, forceExternal);
     } catch (IOException e) {
-      getLogger().log(TreeLogger.ERROR,
-          "Unable to determine mime type of resource", e);
+      getLogger().log(TreeLogger.ERROR, "Unable to determine mime type of resource", e);
       throw new UnableToCompleteException();
     }
   }

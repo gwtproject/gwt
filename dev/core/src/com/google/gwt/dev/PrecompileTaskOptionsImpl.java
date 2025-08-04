@@ -79,11 +79,6 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
-  public int getFragmentsMerge() {
-    return jjsOptions.getFragmentsMerge();
-  }
-
-  @Override
   public File getGenDir() {
     return genDir;
   }
@@ -230,11 +225,6 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   @Override
   public void setFragmentCount(int numFragments) {
     jjsOptions.setFragmentCount(numFragments);
-  }
-
-  @Override
-  public void setFragmentsMerge(int numFragments) {
-    jjsOptions.setFragmentsMerge(numFragments);
   }
 
   @Override

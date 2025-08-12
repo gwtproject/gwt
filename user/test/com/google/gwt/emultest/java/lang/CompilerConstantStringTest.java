@@ -137,7 +137,7 @@ public class CompilerConstantStringTest extends GWTTestCase {
       for (int j = 0; j < str.length(); ++j) {
         char ch = str.charAt(j);
         assertTrue("Bad character '" + ch + "' (U+0" + Integer.toHexString(ch)
-            + ")", ch == '-' || ch == ' ' || Character.isDigit(ch));
+            + ")", ch == '-' || ch == ' ' || (ch >= '0' && ch <= '9'));
       }
     }
     // verify the hash codes are constant for a given string

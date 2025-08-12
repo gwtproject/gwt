@@ -226,17 +226,6 @@ public final class String implements Comparable<String>, CharSequence,
     }
   }
 
-  static String fromCodePoint(int codePoint) {
-    if (codePoint >= Character.MIN_SUPPLEMENTARY_CODE_POINT) {
-      char hiSurrogate = Character.getHighSurrogate(codePoint);
-      char loSurrogate = Character.getLowSurrogate(codePoint);
-      return String.valueOf(hiSurrogate)
-          + String.valueOf(loSurrogate);
-    } else {
-      return String.valueOf((char) codePoint);
-    }
-  }
-
   public String() {
     /*
      * Call to $create(args) must be here so that the method is referenced and not
@@ -356,7 +345,7 @@ public final class String implements Comparable<String>, CharSequence,
     $create(sb);
   }
 
-  private NativeString asNativeString() {
+  NativeString asNativeString() {
     return JsUtils.uncheckedCast(this);
   }
 
@@ -469,11 +458,17 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public int indexOf(int codePoint) {
-    return indexOf(fromCodePoint(codePoint));
+    if (codePoint > Character.MAX_CODE_POINT) {
+      return -1;
+    }
+    return indexOf(NativeString.fromCodePoint(codePoint));
   }
 
   public int indexOf(int codePoint, int startIndex) {
-    return indexOf(fromCodePoint(codePoint), startIndex);
+    if (codePoint > Character.MAX_CODE_POINT) {
+      return -1;
+    }
+    return indexOf(NativeString.fromCodePoint(codePoint), startIndex);
   }
 
   public int indexOf(String str) {
@@ -493,11 +488,17 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public int lastIndexOf(int codePoint) {
-    return lastIndexOf(fromCodePoint(codePoint));
+    if (codePoint > Character.MAX_CODE_POINT) {
+      return -1;
+    }
+    return lastIndexOf(NativeString.fromCodePoint(codePoint));
   }
 
   public int lastIndexOf(int codePoint, int startIndex) {
-    return lastIndexOf(fromCodePoint(codePoint), startIndex);
+    if (codePoint > Character.MAX_CODE_POINT) {
+      return -1;
+    }
+    return lastIndexOf(NativeString.fromCodePoint(codePoint), startIndex);
   }
 
   public int lastIndexOf(String str) {
@@ -847,10 +848,12 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   @JsType(isNative = true, name = "String", namespace = "<window>")
-  private static class NativeString {
+  static class NativeString {
     public static native String fromCharCode(char x);
+    public static native String fromCodePoint(int codePoint);
     public int length;
     public native char charCodeAt(int index);
+    public native int codePointAt(int index);
     public native int indexOf(String str);
     public native int indexOf(String str, int startIndex);
     public native int lastIndexOf(String str);

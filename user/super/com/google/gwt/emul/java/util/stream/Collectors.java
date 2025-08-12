@@ -16,6 +16,7 @@
 
 package java.util.stream;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -33,6 +34,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.StringJoiner;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -69,6 +71,30 @@ public final class Collectors {
         downstream.accumulator(),
         downstream.combiner(),
         downstream.finisher().andThen(finisher));
+  }
+
+  public static <T,R1,R2,R> Collector<T,?,R> teeing(Collector<? super T,?,R1> downstream1,
+      Collector<? super T,?,R2> downstream2, BiFunction<? super R1,? super R2,R> merger) {
+    return teeing2(downstream1, downstream2, merger);
+  }
+
+  private static <T,R1,R2,R,X,Y> Collector<T,?,R> teeing2(Collector<? super T,X,R1> downstream1,
+      Collector<? super T,Y,R2> downstream2, BiFunction<? super R1,? super R2,R> merger) {
+     return Collector.of(
+        () -> new AbstractMap.SimpleEntry<>(downstream1.supplier().get(),
+            downstream2.supplier().get()),
+        (a,b) -> {
+          downstream1.accumulator().accept(a.getKey(), b);
+          downstream2.accumulator().accept(a.getValue(), b);
+        },
+        (a,b) -> {
+          X part = downstream1.combiner().apply(a.getKey(), b.getKey());
+          Y part2 = downstream2.combiner().apply(a.getValue(), b.getValue());
+          return new AbstractMap.SimpleEntry<>(part, part2);
+        },
+        (e) -> merger.apply(downstream1.finisher().apply(e.getKey()),
+            downstream2.finisher().apply(e.getValue()))
+     );
   }
 
   public static <T> Collector<T,?,Long> counting() {

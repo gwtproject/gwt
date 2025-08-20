@@ -132,9 +132,9 @@ public class JdtCompilerTest extends JdtCompilerTestBase {
     // and confirm they can compile
     assertUnitCompilesWithNoErrors("com.example.JrtPackageReference",
         "package com.example;",
-        "import javax.annotation.processor.Generated;",
+        "import javax.annotation.processing.Generated;",
         "import jdk.jfr.Label;",
-        "@Generated",
+        "@Generated(\"foo\")",
         "@Label(\"asdf\")",
         "public class JrtPackageReference {",
         "}");

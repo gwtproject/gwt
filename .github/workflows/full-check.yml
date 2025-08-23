@@ -4,10 +4,6 @@
 # build, though maven snapshots are not yet deployed.
 name: Full build
 on:
-  schedule:
-    # This time is selected to be early in the morning in NA/SA/EU/ME. This
-    # only runs on the default branch.
-    - cron:  '0 6 * * *'
   push:
     # Build on pushes to main and release branches. For forks, the -test may
     # be helpful to run tests when preparing a merge.
@@ -17,8 +13,11 @@ on:
       - '*-test'
   workflow_dispatch:
     # Allow running manually
+  pull_request:
+    types: [ labeled, synchronized ]  
 jobs:
   build:
+    if: ${{ !github.event.pull_request || contains(github.event.pull_request.labels.*.name, 'ready') }}
     runs-on: ubuntu-latest
     strategy:
       matrix:

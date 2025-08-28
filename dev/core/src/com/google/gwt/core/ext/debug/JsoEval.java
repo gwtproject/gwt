@@ -43,6 +43,7 @@ import java.util.Map;
  *     "gamma");
  * </pre></code>
  */
+@Deprecated
 public class JsoEval {
 
   /* TODO: Error messages generated from JsoEval are reported with mangled

@@ -23,7 +23,7 @@ import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsModVisitor;
 import com.google.gwt.dev.js.ast.JsNameRef;
-import com.google.gwt.dev.util.InstalledHelpInfo;
+import com.google.gwt.dev.util.GwtprojectOrgHelpInfo;
 import com.google.gwt.dev.util.JsniRef;
 import com.google.gwt.dev.util.collect.Stack;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
@@ -824,8 +824,8 @@ public class JsniReferenceResolver {
   }
 
   private void longAccessError(ASTNode node, String message) {
-    GWTProblem.recordError(node, cud, message, new InstalledHelpInfo(
-        "longJsniRestriction.html"));
+    GWTProblem.recordError(node, cud, message, new GwtprojectOrgHelpInfo(
+        "/doc/latest/gwt-dev-help/longJsniRestriction.html"));
   }
 
   private static void resolveJsniRef(JsniRef jsniRef, FieldBinding fieldBinding) {

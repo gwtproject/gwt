@@ -12,13 +12,13 @@ jobs:
         java-version: ['11', '17', '21', '22']
     steps:
       - name: Checkout GWT itself into one directory
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           path: 'gwt'
           # we need depth=2 to see which style violations overlap with the current changes
           fetch-depth: 2
       - name: Checkout GWT tools into a sibling directory
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: 'gwtproject/tools'
           path: 'tools'

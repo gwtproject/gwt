@@ -102,7 +102,7 @@ public class HtmlLogFormatter extends FormatterImpl {
   private String getEscaped(String text) {
     text = text.replaceAll("<", "&lt;");
     text = text.replaceAll(">", "&gt;");
-    text = text.replaceAll("\t", "&#xA0;&#xA0;&#xA0;");
+    text = text.replaceAll("\t", "&#xA0;&#xA0;&#xA0;"); // ePub/XHTML friendly &nbsp;'s
     return text;
   }
 

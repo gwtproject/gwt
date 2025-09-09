@@ -40,7 +40,7 @@ import java.util.Set;
 /**
  * A smattering of useful functions.
  *
- * @deprecated In a future release this class will be package protected.
+ * @deprecated In a future release this class will be package protected or removed.
  */
 @Deprecated(forRemoval = true, since = "2.13")
 public final class Utility {

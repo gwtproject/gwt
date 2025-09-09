@@ -13,6 +13,8 @@
  */
 package com.google.gwt.dev.util;
 
+import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
+
 import junit.framework.TestCase;
 
 import java.io.File;
@@ -43,7 +45,7 @@ public class OutputFileSetOnDirectoryTest extends TestCase {
       assertTrue(new File(work, "to/file").exists());
 
     } finally {
-      Util.recursiveDelete(work, false);
+      MoreFiles.deleteRecursively(work.toPath());
     }
   }
 
@@ -60,7 +62,7 @@ public class OutputFileSetOnDirectoryTest extends TestCase {
       assertTrue(secondStream instanceof FileOutputStream);
       secondStream.close();
     } finally {
-      Util.recursiveDelete(work, false);
+      MoreFiles.deleteRecursively(work.toPath());
     }
   }
 
@@ -77,7 +79,7 @@ public class OutputFileSetOnDirectoryTest extends TestCase {
       assertFalse(secondStream instanceof FileOutputStream);
       secondStream.close();
     } finally {
-      Util.recursiveDelete(work, false);
+      MoreFiles.deleteRecursively(work.toPath());
     }
   }
 }

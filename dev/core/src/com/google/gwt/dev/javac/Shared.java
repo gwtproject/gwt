@@ -16,10 +16,10 @@
 package com.google.gwt.dev.javac;
 
 import com.google.gwt.dev.resource.Resource;
-import com.google.gwt.dev.util.Util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 /**
  * A grab bag of utility functions useful for dealing with java files.
@@ -75,8 +75,9 @@ public class Shared {
   }
 
   public static String readSource(Resource sourceFile) throws IOException {
-    InputStream contents = sourceFile.openContents();
-    return Util.readStreamAsString(contents);
+    try (InputStream in = sourceFile.openContents()) {
+      return new String(in.readAllBytes(), StandardCharsets.UTF_8);
+    }
   }
 
   public static String toPath(String qualifiedTypeName) {

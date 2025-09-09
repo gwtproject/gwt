@@ -15,7 +15,6 @@
  */
 package com.google.gwt.i18n.rebind;
 
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.i18n.client.Localizable;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
@@ -32,6 +31,7 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -237,7 +237,7 @@ public abstract class AbstractLocalizableInterfaceCreator {
   void generateFromPropertiesFile() throws IOException {
     InputStream propStream = new FileInputStream(resourceFile);
     LocalizedProperties p = new LocalizedProperties();
-    p.load(propStream, Util.DEFAULT_ENCODING);
+    p.load(propStream, "UTF-8");
     addFormatters();
     // TODO: Look for a generic version of Tapestry's LocalizedProperties class
     Set<String> keySet = p.getPropertyMap().keySet();
@@ -298,7 +298,7 @@ public abstract class AbstractLocalizableInterfaceCreator {
         File.separatorChar, '/')));
     factory.addImplementedInterface(interfaceClass.getName());
     FileOutputStream file = new FileOutputStream(targetLocation);
-    Writer underlying = new OutputStreamWriter(file, Util.DEFAULT_ENCODING);
+    Writer underlying = new OutputStreamWriter(file, StandardCharsets.UTF_8);
     writer = new PrintWriter(underlying);
     composer = factory.createSourceWriter(writer);
     resourceFile = resourceBundle;

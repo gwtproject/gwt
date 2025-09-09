@@ -25,9 +25,9 @@ import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.dev.util.Util;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -258,7 +258,7 @@ public class SerializationUtils {
     }
 
     String serializedTypeName = getRpcTypeName(type);
-    crc.update(serializedTypeName.getBytes(Util.DEFAULT_ENCODING));
+    crc.update(serializedTypeName.getBytes(StandardCharsets.UTF_8));
 
     if (excludeImplementationFromSerializationSignature(type)) {
       return;
@@ -289,7 +289,7 @@ public class SerializationUtils {
         }
       });
       for (JEnumConstant constant : constants) {
-        crc.update(constant.getName().getBytes(Util.DEFAULT_ENCODING));
+        crc.update(constant.getName().getBytes(StandardCharsets.UTF_8));
       }
     } else if (type.isClassOrInterface() != null) {
       JClassType isClassOrInterface = type.isClassOrInterface();
@@ -297,8 +297,8 @@ public class SerializationUtils {
       for (JField field : fields) {
         assert (field != null);
 
-        crc.update(field.getName().getBytes(Util.DEFAULT_ENCODING));
-        crc.update(getRpcTypeName(field.getType()).getBytes(Util.DEFAULT_ENCODING));
+        crc.update(field.getName().getBytes(StandardCharsets.UTF_8));
+        crc.update(getRpcTypeName(field.getType()).getBytes(StandardCharsets.UTF_8));
       }
 
       JClassType superClass = isClassOrInterface.getSuperclass();

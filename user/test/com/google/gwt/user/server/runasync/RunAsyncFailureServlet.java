@@ -15,12 +15,11 @@
  */
 package com.google.gwt.user.server.runasync;
 
-import com.google.gwt.dev.util.Util;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -108,9 +107,10 @@ public class RunAsyncFailureServlet extends HttpServlet {
     debug("Fetching: " + realUrl);
 
     URL url = new URL(realUrl);
-    InputStream is = url.openStream();
-    String data = Util.readStreamAsString(is);
-    is.close();
+    String data;
+    try (InputStream is = url.openStream()) {
+      data = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+    }
 
     realContentsCache.put(uri, data);
     return data;

@@ -18,7 +18,7 @@ package com.google.gwt.dev.javac;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.util.Util;
+import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
 import com.google.gwt.thirdparty.guava.common.util.concurrent.Futures;
 
 import junit.framework.TestCase;
@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.io.UncheckedIOException;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
@@ -67,7 +68,11 @@ public class PersistentUnitCacheTest extends TestCase {
   @Override
   public void tearDown() {
     if (lastParentDir != null) {
-      Util.recursiveDelete(lastParentDir, false);
+      try {
+        MoreFiles.deleteRecursively(lastParentDir.toPath());
+      } catch (IOException e) {
+        throw new UncheckedIOException(e);
+      }
     }
     lastParentDir = null;
   }

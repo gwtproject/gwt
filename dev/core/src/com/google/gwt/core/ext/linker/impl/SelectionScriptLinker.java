@@ -15,6 +15,8 @@
  */
 package com.google.gwt.core.ext.linker.impl;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
@@ -30,7 +32,6 @@ import com.google.gwt.core.ext.linker.SelectionProperty;
 import com.google.gwt.core.ext.linker.SoftPermutation;
 import com.google.gwt.core.ext.linker.StatementRanges;
 import com.google.gwt.core.linker.SymbolMapsLinker;
-import com.google.gwt.dev.util.Util;
 
 import java.io.File;
 import java.io.IOException;
@@ -257,8 +258,9 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
     primary = null;
 
     for (int i = 1; i < js.length; i++) {
-      byte[] bytes = Util.getBytes(generateDeferredFragment(logger, context, i, js[i], artifacts,
-          result));
+      String s = generateDeferredFragment(logger, context, i, js[i], artifacts,
+          result);
+      byte[] bytes = s.getBytes(UTF_8);
       toReturn.add(emitBytes(logger, bytes, FRAGMENT_SUBDIR + File.separator
           + result.getStrongName() + File.separator + i + FRAGMENT_EXTENSION));
     }
@@ -384,7 +386,7 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
         charsPerChunk(context, logger), getScriptChunkSeparator(logger, context), context);
     String primaryFragmentString =
         generatePrimaryFragmentString(logger, context, result, temp, js.length, artifacts);
-    return Util.getBytes(primaryFragmentString);
+    return primaryFragmentString.getBytes(UTF_8);
   }
 
   protected String generatePrimaryFragmentString(TreeLogger logger,

@@ -33,7 +33,6 @@ import com.google.gwt.dev.resource.impl.PathPrefixSet;
 import com.google.gwt.dev.resource.impl.ResourceFilter;
 import com.google.gwt.dev.resource.impl.ResourceOracleImpl;
 import com.google.gwt.dev.util.Empty;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -61,6 +60,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import javax.lang.model.SourceVersion;
 
 /**
  * Represents a module specification. In principle, this could be built without
@@ -97,7 +98,7 @@ public class ModuleDef implements DepsInfoProvider {
     String[] parts = moduleName.split("\\.");
     for (int i = 0; i < parts.length - 1; i++) {
       String part = parts[i];
-      if (!Util.isValidJavaIdent(part)) {
+      if (!SourceVersion.isIdentifier(part)) {
         return false;
       }
     }
@@ -331,7 +332,8 @@ public class ModuleDef implements DepsInfoProvider {
   public synchronized String findServletForPath(String actual) {
     // Walk in backwards sorted order to find the longest path match first.
     Set<Entry<String, String>> entrySet = servletClassNamesByPath.entrySet();
-    Entry<String, String>[] entries = Util.toArray(Entry.class, entrySet);
+    // noinspection unchecked
+    Entry<String, String>[] entries = entrySet.toArray(Entry[]::new);
     Arrays.sort(entries, REV_NAME_CMP);
     for (int i = 0, n = entries.length; i < n; ++i) {
       String mapping = entries[i].getKey();

@@ -15,11 +15,12 @@
  */
 package com.google.gwt.dev.javac;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.util.DiskCache;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
@@ -57,7 +58,7 @@ public class MockCompilationUnit extends CompilationUnit {
   @Override
   public CachedCompilationUnit asCachedCompilationUnit() {
     DiskCache diskCache = DiskCache.INSTANCE;
-    long astToken = diskCache.writeByteArray(Util.getBytes("Dummy AST data"));
+    long astToken = diskCache.writeByteArray("Dummy AST data".getBytes(UTF_8));
     return new CachedCompilationUnit(this, astToken);
   }
 

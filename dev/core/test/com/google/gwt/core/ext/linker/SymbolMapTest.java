@@ -16,10 +16,8 @@
 package com.google.gwt.core.ext.linker;
 
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.Compiler;
 import com.google.gwt.dev.CompilerOptionsImpl;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.arg.OptionOptimize;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.thirdparty.guava.common.base.Function;
@@ -27,6 +25,7 @@ import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
+import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
 
 import junit.framework.TestCase;
 
@@ -204,8 +203,7 @@ public class SymbolMapTest extends TestCase {
   /**
    * Tests for the presence of some elements.
    */
-  private void assertSymbolMapSanity(int optimizeLevel) throws IOException,
-      UnableToCompleteException, Exception {
+  private void assertSymbolMapSanity(int optimizeLevel) throws Exception {
     String benchmark = "hello";
     String module = "com.google.gwt.sample.hello.Hello";
 
@@ -244,7 +242,7 @@ public class SymbolMapTest extends TestCase {
         assertSymbolUniquenessForMethods(symbolDataByJsniIdentifier);
       }
     } finally {
-      Util.recursiveDelete(work, false);
+      MoreFiles.deleteRecursively(work.toPath());
     }
   }
 

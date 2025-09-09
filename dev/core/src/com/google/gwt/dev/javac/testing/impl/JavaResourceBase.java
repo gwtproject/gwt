@@ -82,6 +82,7 @@ public class JavaResourceBase {
           "public interface CharSequence {",
           "  char charAt(int index);",
           "  int length();",
+          "  default boolean isEmpty() { return length() == 0; }",
           "  String toString();",
           "}");
 
@@ -346,7 +347,6 @@ public class JavaResourceBase {
           "  private native boolean equals(String obj) /*-{ return false; }-*/;",
           "  public boolean equalsIgnoreCase(String str) { return false; }",
           "  public native boolean isEmpty() /*-{ return true; }-*/;",
-          "  public int length() { return 0; }",
           "  public static String valueOf(int i) { return \"\" + i; }",
           "  public static String valueOf(char c) { return \"\" + c; }",
           "  public int hashCode() { return 0; }",

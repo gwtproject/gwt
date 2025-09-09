@@ -55,11 +55,6 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
   private static final int SMALL_VALUE_BITS = 54;
 
   /**
-   * The constant one as a {@code BigDecimal}.
-   */
-  public static final BigDecimal ONE = new BigDecimal(1, 0);
-
-  /**
    * Rounding mode to round towards positive infinity. For positive values this
    * rounding mode behaves as {@link #ROUND_UP}, for negative values as
    * {@link #ROUND_DOWN}.
@@ -126,14 +121,24 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
   public static final int ROUND_UP = 0;
 
   /**
-   * The constant ten as a {@code BigDecimal}.
-   */
-  public static final BigDecimal TEN = new BigDecimal(10, 0);
-
-  /**
    * The constant zero as a {@code BigDecimal}.
    */
   public static final BigDecimal ZERO = new BigDecimal(0, 0);
+
+  /**
+   * The constant one as a {@code BigDecimal}.
+   */
+  public static final BigDecimal ONE = new BigDecimal(1, 0);
+
+  /**
+   * The constant two as a {@code BigDecimal}.
+   */
+  public static final BigDecimal TWO = new BigDecimal(2, 0);
+
+  /**
+   * The constant ten as a {@code BigDecimal}.
+   */
+  public static final BigDecimal TEN = new BigDecimal(10, 0);
 
   /**
    * Stores a regular expression object to verify the format of unscaled bigdecimal values.

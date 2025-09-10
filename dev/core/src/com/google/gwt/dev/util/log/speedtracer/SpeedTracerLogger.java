@@ -20,6 +20,7 @@ import com.google.gwt.dev.json.JsonObject;
 import com.google.gwt.dev.shell.DevModeSession;
 import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.log.dashboard.DashboardNotifierFactory;
+import com.sun.management.OperatingSystemMXBean;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -27,7 +28,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.lang.management.GarbageCollectorMXBean;
 import java.lang.management.ManagementFactory;
-import java.lang.management.OperatingSystemMXBean;
 import java.lang.management.ThreadMXBean;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -415,21 +415,12 @@ public final class SpeedTracerLogger {
    */
   private class ProcessNormalizedTimeKeeper {
     private final OperatingSystemMXBean osMXBean;
-    private final Method getProcessCpuTimeMethod;
     private final long zeroTimeNanos;
 
     public ProcessNormalizedTimeKeeper() {
       try {
-        osMXBean = ManagementFactory.getOperatingSystemMXBean();
-        /*
-         * Find this method by reflection, since it's part of the Sun
-         * implementation for OperatingSystemMXBean, and we can't always assume
-         * that com.sun.management.OperatingSystemMXBean will be available.
-         */
-        getProcessCpuTimeMethod =
-          osMXBean.getClass().getMethod("getProcessCpuTime");
-        getProcessCpuTimeMethod.setAccessible(true);
-        zeroTimeNanos = (Long) getProcessCpuTimeMethod.invoke(osMXBean);
+        osMXBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+        zeroTimeNanos = osMXBean.getProcessCpuTime();
       } catch (Exception ex) {
         throw new RuntimeException(ex);
       }
@@ -437,7 +428,7 @@ public final class SpeedTracerLogger {
 
     public long normalizedTimeNanos() {
       try {
-        return (Long) getProcessCpuTimeMethod.invoke(osMXBean) - zeroTimeNanos;
+        return osMXBean.getProcessCpuTime() - zeroTimeNanos;
       } catch (Exception ex) {
         throw new RuntimeException(ex);
       }

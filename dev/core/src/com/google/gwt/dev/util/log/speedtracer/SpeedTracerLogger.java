@@ -153,6 +153,12 @@ public final class SpeedTracerLogger {
     /**
      * @param data key/value pairs to add to JSON object.
      */
+    public void addData(String key, String value) {
+      this.data = Lists.addAll(this.data, key, value);
+    }
+    public void addData(String key1, String value1, String key2, String value2) {
+      this.data = Lists.addAll(this.data, key1, value1, key2, value2);
+    }
     public void addData(String... data) {
       if (data != null) {
         assert (data.length % 2 == 0);
@@ -163,6 +169,12 @@ public final class SpeedTracerLogger {
     /**
      * Signals the end of the current event.
      */
+    public void end() {
+      endImpl(this);
+    }
+    public void end(String key, String value) {
+      endImpl(this, key, value);
+    }
     public void end(String... data) {
       endImpl(this, data);
     }
@@ -596,6 +608,17 @@ public final class SpeedTracerLogger {
    *          that contain additional information about the event
    * @return an Event object to be ended by the caller
    */
+  public static Event start(EventType type) {
+    return SpeedTracerLogger.get().startImpl(DevModeSession.getSessionForCurrentThread(), type);
+  }
+  public static Event start(EventType type, String fieldName, String fieldValue) {
+    return SpeedTracerLogger.get().startImpl(DevModeSession.getSessionForCurrentThread(), type,
+        fieldName, fieldValue);
+  }
+  public static Event start(EventType type, String fieldName1, String fieldValue1, String fieldName2, String fieldValue2) {
+    return SpeedTracerLogger.get().startImpl(DevModeSession.getSessionForCurrentThread(), type,
+        fieldName1, fieldValue1, fieldName2, fieldValue2);
+  }
   public static Event start(EventType type, String... data) {
     return SpeedTracerLogger.get().startImpl(DevModeSession.getSessionForCurrentThread(), type,
         data);
@@ -612,6 +635,12 @@ public final class SpeedTracerLogger {
    *       contain additional information about the event
    * @return an Event object to be ended by the caller
    */
+  public static Event start(DevModeSession session, EventType type) {
+    return SpeedTracerLogger.get().startImpl(session, type);
+  }
+  public static Event start(DevModeSession session, EventType type, String key, String value) {
+    return SpeedTracerLogger.get().startImpl(session, type, key, value);
+  }
   public static Event start(DevModeSession session, EventType type, String... data) {
     return SpeedTracerLogger.get().startImpl(session, type, data);
   }

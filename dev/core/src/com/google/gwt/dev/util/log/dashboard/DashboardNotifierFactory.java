@@ -20,6 +20,7 @@ package com.google.gwt.dev.util.log.dashboard;
  * Gets an instance of {@link DashboardNotifier} for sending data to a GWT
  * dashboard.
  */
+@Deprecated
 public class DashboardNotifierFactory {
   private static final NoOpDashboardNotifier defaultNotifier = new NoOpDashboardNotifier();
   private static DashboardNotifier theNotifier;

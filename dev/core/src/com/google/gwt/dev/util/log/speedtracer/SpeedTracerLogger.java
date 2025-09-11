@@ -20,6 +20,8 @@ import com.google.gwt.dev.json.JsonObject;
 import com.google.gwt.dev.shell.DevModeSession;
 import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.log.dashboard.DashboardNotifierFactory;
+import com.google.gwt.dev.util.log.perf.GwtJfrEvent;
+import com.google.gwt.dev.util.log.perf.PerfLogging;
 import com.sun.management.OperatingSystemMXBean;
 
 import java.io.BufferedWriter;
@@ -101,6 +103,16 @@ public final class SpeedTracerLogger {
     }
   }
 
+  // Quick and dirty tool to try to hunt down abandoned events
+  public static void exit() {
+    Stack<Event> events = get().pendingEvents.get();
+    while (!events.isEmpty()) {
+      Event event = events.pop();
+      log.log(Level.WARNING, "Unended event: " + event);
+      event.end();
+    }
+  }
+
   /**
    * Represents a node in a tree of SpeedTracer events.
    */
@@ -119,6 +131,8 @@ public final class SpeedTracerLogger {
     long threadCpuDurationNanos;
     long threadCpuStartTimeNanos;
 
+    private GwtJfrEvent jfrEvent;
+
     Event() {
       if (enabled) {
         if (logThreadCpuTime) {
@@ -135,6 +149,9 @@ public final class SpeedTracerLogger {
         this.children = null;
       }
       this.type = null;
+
+      jfrEvent = PerfLogging.start(SpeedTracerEventType.NOOP);
+      jfrEvent.close();
     }
 
     Event(DevModeSession session, Event parent, EventType type, String... data) {
@@ -148,6 +165,8 @@ public final class SpeedTracerLogger {
       this.data = Lists.create(data);
       this.children = Lists.create();
       this.devModeSession = session;
+
+      jfrEvent = PerfLogging.start(type);
     }
 
     /**
@@ -155,14 +174,21 @@ public final class SpeedTracerLogger {
      */
     public void addData(String key, String value) {
       this.data = Lists.addAll(this.data, key, value);
+      assign(jfrEvent, key, value);
     }
     public void addData(String key1, String value1, String key2, String value2) {
       this.data = Lists.addAll(this.data, key1, value1, key2, value2);
+      assign(jfrEvent, key1, value1);
+      assign(jfrEvent, key2, value2);
+
     }
     public void addData(String... data) {
       if (data != null) {
         assert (data.length % 2 == 0);
         this.data = Lists.addAll(this.data, data);
+        for (int i = 0; i < data.length; i += 2) {
+          assign(jfrEvent, data[i], data[i + 1]);
+        }
       }
     }
 
@@ -173,9 +199,15 @@ public final class SpeedTracerLogger {
       endImpl(this);
     }
     public void end(String key, String value) {
+      assign(jfrEvent, key, value);
       endImpl(this, key, value);
     }
     public void end(String... data) {
+      if (data != null) {
+        for (int i = 0; i < data.length; i += 2) {
+          assign(jfrEvent, data[i], data[i + 1]);
+        }
+      }
       endImpl(this, data);
     }
 
@@ -612,17 +644,23 @@ public final class SpeedTracerLogger {
     return SpeedTracerLogger.get().startImpl(DevModeSession.getSessionForCurrentThread(), type);
   }
   public static Event start(EventType type, String fieldName, String fieldValue) {
-    return SpeedTracerLogger.get().startImpl(DevModeSession.getSessionForCurrentThread(), type,
+    Event event = SpeedTracerLogger.get().startImpl(DevModeSession.getSessionForCurrentThread(), type,
         fieldName, fieldValue);
+    assign(event.jfrEvent, fieldName, fieldValue);
+    return event;
   }
   public static Event start(EventType type, String fieldName1, String fieldValue1, String fieldName2, String fieldValue2) {
-    return SpeedTracerLogger.get().startImpl(DevModeSession.getSessionForCurrentThread(), type,
+    Event event = SpeedTracerLogger.get().startImpl(DevModeSession.getSessionForCurrentThread(), type,
         fieldName1, fieldValue1, fieldName2, fieldValue2);
+    assign(event.jfrEvent, fieldName1, fieldValue1);
+    assign(event.jfrEvent, fieldName2, fieldValue2);
+    return event;
   }
-  public static Event start(EventType type, String... data) {
-    return SpeedTracerLogger.get().startImpl(DevModeSession.getSessionForCurrentThread(), type,
-        data);
-  }
+//  public static Event start(EventType type, String... data) {
+//    throw new UnsupportedOperationException();
+//    //    return SpeedTracerLogger.get().startImpl(DevModeSession.getSessionForCurrentThread(), type,
+////        data);
+//  }
 
   /**
    * Signals that a new event has started. You must end each event for each
@@ -639,14 +677,67 @@ public final class SpeedTracerLogger {
     return SpeedTracerLogger.get().startImpl(session, type);
   }
   public static Event start(DevModeSession session, EventType type, String key, String value) {
-    return SpeedTracerLogger.get().startImpl(session, type, key, value);
+    Event event = SpeedTracerLogger.get().startImpl(session, type, key, value);
+    assign(event.jfrEvent, key, value);
+    return event;
   }
   public static Event start(DevModeSession session, EventType type, String... data) {
-    return SpeedTracerLogger.get().startImpl(session, type, data);
+    throw new UnsupportedOperationException();
+//    for (int i = 0; i < data.length; i += 2) {
+//      assign(null, data[i], data[i + 1]);
+//    }
+//    return SpeedTracerLogger.get().startImpl(session, type, data);
+  }
+
+  private static void assign(GwtJfrEvent event, String key, String value) {
+    switch (key) {
+      case "moduleName":
+        event.moduleName = value;
+        break;
+      case "phase":
+        event.phase = value;
+        break;
+      case "optimizer":
+        event.optimizer = value;
+        break;
+      case "class":
+        event.clazz = value;
+        break;
+      case "type":
+        event.type = value;
+        break;
+      case "argument":
+        event.argument = value;
+        break;
+      case "caller":
+        event.caller = value;
+        break;
+      case "didChange":
+        event.didChange = Boolean.valueOf(value);
+        break;
+      case "java.awt.headless":
+        // ignore, this is present in JFR already
+        break;
+      case "baseTime":
+        // ignore for now, assume JFR can do better than this
+        break;
+      case "# new generated units":
+        event.generatedUnits = Integer.parseInt(value);
+        break;
+      case "Requested Class":
+      case "Result Name":
+        // ignore, legacy dev mode
+        break;
+      case "properties":
+        event.properties = value;
+        break;
+      default:
+        throw new IllegalStateException("Unknown key " + key);
+    }
   }
 
   private static double convertToMilliseconds(long nanos) {
-    return nanos / 1000000.0d;
+    return TimeUnit.NANOSECONDS.toMillis(nanos);
   }
 
   /**
@@ -772,6 +863,7 @@ public final class SpeedTracerLogger {
     currentEvent.addData(data);
   }
 
+  // This is never used in GWT, except in tests
   public void markTimelineImpl(String message) {
     Stack<Event> threadPendingEvents = pendingEvents.get();
     Event parent = null;
@@ -783,6 +875,7 @@ public final class SpeedTracerLogger {
     newEvent.end("message", message);
   }
 
+  // We can rely on JFR itself to record these
   void addGcEvents(Event refEvent) {
     // we're not sending GC events to the dashboard, so we only record them
     // to file
@@ -827,6 +920,8 @@ public final class SpeedTracerLogger {
     if (data.length % 2 == 1) {
       throw new IllegalArgumentException("Unmatched data argument");
     }
+
+    event.jfrEvent.close();
 
     Stack<Event> threadPendingEvents = pendingEvents.get();
     if (threadPendingEvents.isEmpty()) {
@@ -935,7 +1030,7 @@ public final class SpeedTracerLogger {
     Writer writer = null;
     if (enabled) {
       try {
-        writer = new BufferedWriter(new FileWriter(logFile));
+        writer = new FileWriter(logFile);
         return openLogWriter(writer, logFile);
       } catch (IOException e) {
         log.log(Level.SEVERE, "Unable to open gwt.speedtracerlog '" + logFile + "'", e);

@@ -113,10 +113,13 @@ public class Compiler {
       };
       if (CompileTaskRunner.runWithAppropriateLogger(options, task)) {
         // Exit w/ success code.
+
+        SpeedTracerLogger.exit();
         System.exit(0);
       }
     }
     // Exit w/ non-success code.
+    SpeedTracerLogger.exit();
     System.exit(1);
   }
 

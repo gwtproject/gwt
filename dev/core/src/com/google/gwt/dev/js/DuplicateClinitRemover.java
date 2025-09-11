@@ -55,7 +55,7 @@ import java.util.Set;
  * and is simple to verify.
  */
 public class DuplicateClinitRemover extends JsModVisitor {
-  private static final String NAME = JsInliner.class.getSimpleName();
+  private static final String NAME = DuplicateClinitRemover.class.getSimpleName();
 
   /*
    * TODO: Most of the special casing below can be removed if complex
@@ -252,7 +252,7 @@ public class DuplicateClinitRemover extends JsModVisitor {
    */
   public static OptimizerStats exec(JsProgram program) {
     Event optimizeJsEvent = SpeedTracerLogger.start(
-        CompilerEventType.OPTIMIZE_JS, "duplicateXOremover", NAME);
+        CompilerEventType.OPTIMIZE_JS, "optimizer", NAME);
     OptimizerStats stats = execImpl(program);
     optimizeJsEvent.end("didChange", "" + stats.didChange());
     return stats;

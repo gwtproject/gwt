@@ -173,6 +173,8 @@ import com.google.gwt.dev.util.Memory;
 import com.google.gwt.dev.util.Name.SourceName;
 import com.google.gwt.dev.util.Pair;
 import com.google.gwt.dev.util.arg.OptionOptimize;
+import com.google.gwt.dev.util.log.perf.GwtJfrEvent;
+import com.google.gwt.dev.util.log.perf.PerfLogging;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -310,7 +312,7 @@ public final class JavaToJavaScriptCompiler {
   private PermutationResult compilePermutation(Permutation permutation, UnifiedAst unifiedAst)
       throws UnableToCompleteException {
     Event jjsCompilePermutationEvent = SpeedTracerLogger.start(
-        CompilerEventType.JJS_COMPILE_PERMUTATION, "name", permutation.getProperties().prettyPrint()
+        CompilerEventType.JJS_COMPILE_PERMUTATION, "properties", permutation.getProperties().prettyPrint()
     );
     /*
      * Do not introduce any new pass here unless it is logically a part of one of the 9 defined
@@ -1411,47 +1413,45 @@ public final class JavaToJavaScriptCompiler {
   }
 
   private void optimizeJavaToFixedPoint() throws InterruptedException {
-    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE);
+    try (GwtJfrEvent optimizeEvent = PerfLogging.start(CompilerEventType.OPTIMIZE)) {
 
-    List<OptimizerStats> allOptimizerStats = Lists.newArrayList();
-    int passCount = 0;
-    int nodeCount = jprogram.getNodeCount();
-    int lastNodeCount;
+      List<OptimizerStats> allOptimizerStats = Lists.newArrayList();
+      int passCount = 0;
+      int nodeCount = jprogram.getNodeCount();
+      int lastNodeCount;
 
-    boolean atMaxLevel = options.getOptimizationLevel() == OptionOptimize.OPTIMIZE_LEVEL_MAX;
-    int passLimit = atMaxLevel ? MAX_PASSES : options.getOptimizationLevel();
-    float minChangeRate = atMaxLevel ? FIXED_POINT_CHANGE_RATE : EFFICIENT_CHANGE_RATE;
-    OptimizerContext optimizerCtx = new FullOptimizerContext(jprogram);
-    while (true) {
-      passCount++;
-      if (passCount > passLimit) {
-        break;
+      boolean atMaxLevel = options.getOptimizationLevel() == OptionOptimize.OPTIMIZE_LEVEL_MAX;
+      int passLimit = atMaxLevel ? MAX_PASSES : options.getOptimizationLevel();
+      float minChangeRate = atMaxLevel ? FIXED_POINT_CHANGE_RATE : EFFICIENT_CHANGE_RATE;
+      OptimizerContext optimizerCtx = new FullOptimizerContext(jprogram);
+      while (true) {
+        passCount++;
+        if (passCount > passLimit) {
+          break;
+        }
+        if (Thread.interrupted()) {
+          throw new InterruptedException();
+        }
+        AstDumper.maybeDumpAST(jprogram);
+        OptimizerStats stats = optimizeJavaOneTime("Pass " + passCount, nodeCount, optimizerCtx);
+        allOptimizerStats.add(stats);
+        lastNodeCount = nodeCount;
+        nodeCount = jprogram.getNodeCount();
+
+        float nodeChangeRate = stats.getNumMods() / (float) lastNodeCount;
+        float sizeChangeRate = (lastNodeCount - nodeCount) / (float) lastNodeCount;
+        if (nodeChangeRate <= minChangeRate && sizeChangeRate <= minChangeRate) {
+          break;
+        }
       }
-      if (Thread.interrupted()) {
-        optimizeEvent.end();
-        throw new InterruptedException();
-      }
-      AstDumper.maybeDumpAST(jprogram);
-      OptimizerStats stats = optimizeJavaOneTime("Pass " + passCount, nodeCount, optimizerCtx);
-      allOptimizerStats.add(stats);
-      lastNodeCount = nodeCount;
-      nodeCount = jprogram.getNodeCount();
 
-      float nodeChangeRate = stats.getNumMods() / (float) lastNodeCount;
-      float sizeChangeRate = (lastNodeCount - nodeCount) / (float) lastNodeCount;
-      if (nodeChangeRate <= minChangeRate && sizeChangeRate <= minChangeRate) {
-        break;
+      if (options.shouldOptimizeDataflow()) {
+        logger.log(TreeLogger.Type.WARN,
+            "Unsafe dataflow optimization enabled, disable with -XdisableOptimizeDataflow.");
+        // Just run it once, because it is very time consuming
+        allOptimizerStats.add(DataflowOptimizer.exec(jprogram));
       }
     }
-
-    if (options.shouldOptimizeDataflow()) {
-      logger.log(TreeLogger.Type.WARN,
-          "Unsafe dataflow optimization enabled, disable with -XdisableOptimizeDataflow.");
-      // Just run it once, because it is very time consuming
-      allOptimizerStats.add(DataflowOptimizer.exec(jprogram));
-    }
-
-    optimizeEvent.end();
   }
 
   private boolean shouldOptimize() {

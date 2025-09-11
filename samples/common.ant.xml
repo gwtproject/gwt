@@ -9,7 +9,7 @@
     if this default isn't good for you.  Ideally, it should approximate
     the number of CPU cores in your machine.
   -->
-  <property name="gwt.samples.localworkers" value="2" />
+  <property name="gwt.samples.localworkers" value="1" />
 
   <property name="sample.lower" value="${sample.root}" />
   <property name="sample.upper" value="${sample.module}" />
@@ -149,6 +149,9 @@
             <pathelement location="${gwt.dev.jar}" />
           </classpath>
           <jvmarg value="-Xmx1g" />
+          <jvmarg value="-XX:StartFlightRecording=duration=200s,filename=flight.jfr" />
+          <jvmarg value="-Dgwt.speedtracerlog=${sample.build}/st.log" />
+<!--          <jvmarg value="-Dgwt.speedtracer.logProcessCpuTime=true" />-->
           <arg value="-localWorkers" />
           <arg value="${gwt.samples.localworkers}" />
           <arg value="-war" />

@@ -186,7 +186,7 @@ public class OophmSessionHandler extends SessionHandlerServer {
       String sessionKey, byte[] userAgentIcon) {
     Event moduleInit =
         SpeedTracerLogger.start(channel.getDevModeSession(), DevModeEventType.MODULE_INIT,
-            "Module Name", moduleName);
+            "moduleName", moduleName);
     ModuleHandle moduleHandle = host.createModuleLogger(moduleName, userAgent,
         url, tabKey, sessionKey, channel, userAgentIcon);
     TreeLogger logger = moduleHandle.getLogger();

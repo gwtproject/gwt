@@ -738,7 +738,7 @@ public class ModuleDef implements DepsInfoProvider {
     resourcesScanned = true;
 
     Event moduleDefEvent = SpeedTracerLogger.start(
-        CompilerEventType.MODULE_DEF, "phase", "refresh", "module", getName());
+        CompilerEventType.MODULE_DEF, "phase", "refresh", "moduleName", getName());
     if (lazyResourcesOracle != null) {
       lazyResourcesOracle.scanResources(TreeLogger.NULL);
     }

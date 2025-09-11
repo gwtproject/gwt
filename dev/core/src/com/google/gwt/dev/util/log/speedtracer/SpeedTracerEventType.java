@@ -28,7 +28,8 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.EventType;
 @Deprecated
 public enum SpeedTracerEventType implements EventType {
   GC("Garbage Collection", "Plum"),
-  OVERHEAD("Speedtracer Overhead","Black");
+  OVERHEAD("Speedtracer Overhead","Black"),
+  NOOP("No-op","Gray"),;
 
   final String cssColor;
   final String name;

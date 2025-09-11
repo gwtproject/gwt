@@ -20,9 +20,9 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JType;
+import com.google.gwt.dev.util.log.perf.GwtJfrEvent;
+import com.google.gwt.dev.util.log.perf.PerfLogging;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 
 import java.util.List;
@@ -92,11 +92,12 @@ public class MethodCallSpecializer {
   }
 
   public static OptimizerStats exec(JProgram program, OptimizerContext optimizerCtx) {
-    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new MethodCallSpecializer(program).execImpl(optimizerCtx);
-    optimizerCtx.incOptimizationStep();
-    optimizeEvent.end("didChange", "" + stats.didChange());
-    return stats;
+    try (GwtJfrEvent optimizeEvent = PerfLogging.start(CompilerEventType.OPTIMIZE)) {
+      OptimizerStats stats = new MethodCallSpecializer(program).execImpl(optimizerCtx);
+      optimizerCtx.incOptimizationStep();
+      optimizeEvent.didChange = stats.didChange();
+      return stats;
+    }
   }
 
   private final JProgram program;

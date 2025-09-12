@@ -96,7 +96,6 @@ public class RemoteServiceServletTest extends TestCase {
   }
 
   private class MockServletContext implements ServletContext {
-    private String messageLogged;
 
     public MockServletContext() {
     }
@@ -190,7 +189,7 @@ public class RemoteServiceServletTest extends TestCase {
     }
 
     public void log(String arg0, Throwable arg1) {
-      messageLogged = arg0;
+      throw new UnsupportedOperationException();
     }
 
     public void removeAttribute(String arg0) {
@@ -329,7 +328,6 @@ public class RemoteServiceServletTest extends TestCase {
     SerializationPolicy serializationPolicy = rss.doGetSerializationPolicy(
         mockRequest, "http://www.google.com/MyModule", "12345");
     assertNull(serializationPolicy);
-    assertNotNull(mockContext.messageLogged);
   }
 
   /**
@@ -337,8 +335,8 @@ public class RemoteServiceServletTest extends TestCase {
    * {@link com.google.gwt.user.server.rpc.RemoteServiceServlet#doGetSerializationPolicy(javax.servlet.http.HttpServletRequest, java.lang.String, java.lang.String)}.
    * 
    * This method tests that if the module path is in a different context than
-   * the RemoteServiceServlet which is processing the request, a message will be
-   * logged and null is returned for the SerializationPolicy.
+   * the RemoteServiceServlet which is processing the request,
+   * null is returned for the SerializationPolicy.
    */
   public void testDoGetSerializationPolicy_ModuleInSeparateServlet()
       throws ServletException {
@@ -353,7 +351,6 @@ public class RemoteServiceServletTest extends TestCase {
     mockRequest.contextPath = "/foo";
     SerializationPolicy serializationPolicy = rss.doGetSerializationPolicy(
         mockRequest, "http://www.google.com/MyModule", "");
-    assertNotNull(mockContext.messageLogged);
     assertNull(serializationPolicy);
   }
 

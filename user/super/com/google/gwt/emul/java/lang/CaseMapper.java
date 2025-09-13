@@ -23,7 +23,23 @@ final class CaseMapper {
   }
 
   public static char charToUpperCase(char c) {
-    return String.valueOf(c).toUpperCase().charAt(0);
+    String upper = String.valueOf(c).toUpperCase();
+    return hasExtraCodePoints(upper) ? c : upper.charAt(0);
+  }
+
+  public static int intToLowerCase(int codePoint) {
+    return String.NativeString.fromCodePoint(codePoint).toLowerCase().codePointAt(0);
+  }
+
+  public static int intToUpperCase(int codePoint) {
+    String upper = String.NativeString.fromCodePoint(codePoint).toUpperCase();
+    return hasExtraCodePoints(upper) ? codePoint : upper.codePointAt(0);
+  }
+
+  // If String.toUpperCase produces more than 1 codepoint, Character.toUpperCase should
+  // act either as identity or title-case conversion (not supported in GWT).
+  private static boolean hasExtraCodePoints(String str) {
+    return str.asNativeString().codePointAt(1) > 0;
   }
 
   private CaseMapper() {}

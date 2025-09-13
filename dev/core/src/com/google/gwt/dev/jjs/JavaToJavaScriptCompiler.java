@@ -13,8 +13,6 @@
  */
 package com.google.gwt.dev.jjs;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.Artifact;
@@ -197,6 +195,7 @@ import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.lang.management.ManagementFactory;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -1534,7 +1533,7 @@ public final class JavaToJavaScriptCompiler {
       Hasher h = Hashing.murmur3_128().newHasher();
       h.putInt(jsFragments.length);
       for (int i = 0; i < jsFragments.length; ++i) {
-        bytes[i] = jsFragments[i].getBytes(UTF_8);
+        bytes[i] = jsFragments[i].getBytes(StandardCharsets.UTF_8);
         h.putInt(bytes[i].length);
         h.putBytes(bytes[i]);
       }

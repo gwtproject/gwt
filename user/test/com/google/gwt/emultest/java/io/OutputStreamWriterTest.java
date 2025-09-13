@@ -15,8 +15,6 @@
  */
 package com.google.gwt.emultest.java.io;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.io.ByteArrayOutputStream;
@@ -24,6 +22,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 /**
@@ -31,7 +30,7 @@ import java.util.Arrays;
  */
 public class OutputStreamWriterTest extends GWTTestCase {
 
-  private final Charset encodingUTF8Charset = UTF_8;
+  private final Charset encodingUTF8Charset = StandardCharsets.UTF_8;
 
   /** String containing unicode characters. */
   private static final String UNICODE_STRING = "ËÛëŶǾȜϞ";

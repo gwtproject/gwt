@@ -15,8 +15,6 @@
  */
 package com.google.gwt.dev.javac;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
@@ -25,6 +23,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -58,7 +57,7 @@ public class MockCompilationUnit extends CompilationUnit {
   @Override
   public CachedCompilationUnit asCachedCompilationUnit() {
     DiskCache diskCache = DiskCache.INSTANCE;
-    long astToken = diskCache.writeByteArray("Dummy AST data".getBytes(UTF_8));
+    long astToken = diskCache.writeByteArray("Dummy AST data".getBytes(StandardCharsets.UTF_8));
     return new CachedCompilationUnit(this, astToken);
   }
 

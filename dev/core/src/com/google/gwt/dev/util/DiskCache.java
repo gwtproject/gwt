@@ -15,8 +15,6 @@
  */
 package com.google.gwt.dev.util;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -26,6 +24,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.nio.charset.StandardCharsets;
 
 /**
  * A nifty class that lets you squirrel away data on the file system. Write
@@ -125,7 +124,7 @@ public class DiskCache {
    * @return the String that was written
    */
   public String readString(long token) {
-    return new String(readByteArray(token), UTF_8);
+    return new String(readByteArray(token), StandardCharsets.UTF_8);
   }
 
   /**
@@ -246,7 +245,7 @@ public class DiskCache {
    * @return a token to retrieve the data later
    */
   public long writeString(String str) {
-    return writeByteArray(str.getBytes(UTF_8));
+    return writeByteArray(str.getBytes(StandardCharsets.UTF_8));
   }
 
   /**

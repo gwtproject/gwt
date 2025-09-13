@@ -15,12 +15,11 @@
  */
 package com.google.gwt.dev.javac.testing.impl;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import com.google.gwt.dev.resource.Resource;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -73,7 +72,7 @@ public abstract class MockResource extends Resource {
   @Override
   public InputStream openContents() {
     String s = getContent().toString();
-    return new ByteArrayInputStream(s.getBytes(UTF_8));
+    return new ByteArrayInputStream(s.getBytes(StandardCharsets.UTF_8));
   }
 
   @Override

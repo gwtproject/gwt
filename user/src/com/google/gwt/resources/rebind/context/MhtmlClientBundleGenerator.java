@@ -15,8 +15,6 @@
  */
 package com.google.gwt.resources.rebind.context;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -27,6 +25,7 @@ import com.google.gwt.resources.ext.ClientBundleRequirements;
 import com.google.gwt.thirdparty.guava.common.hash.HashCode;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 /**
@@ -79,7 +78,8 @@ public class MhtmlClientBundleGenerator extends AbstractClientBundleGenerator {
   protected void doCreateBundleForPermutation(TreeLogger logger,
       GeneratorContext generatorContext, FieldsImpl fields,
       String generatedSimpleSourceName) throws UnableToCompleteException {
-    HashCode hash = Hashing.murmur3_128().hashString(generatedSimpleSourceName, UTF_8);
+    HashCode hash = Hashing.murmur3_128().hashString(generatedSimpleSourceName,
+        StandardCharsets.UTF_8);
     String partialPath = hash.toString().toUpperCase(Locale.ROOT) + BUNDLE_EXTENSION;
     resourceContext.setPartialPath(partialPath);
     fields.setInitializer(bundleBaseIdent,

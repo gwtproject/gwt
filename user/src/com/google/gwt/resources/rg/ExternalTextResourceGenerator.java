@@ -15,8 +15,6 @@
  */
 package com.google.gwt.resources.rg;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.Generator;
@@ -114,7 +112,8 @@ public final class ExternalTextResourceGenerator extends
 
     urlExpression = context.deploy(
         context.getClientBundleType().getQualifiedSourceName().replace('.', '_')
-            + "_jsonbundle.txt", "text/plain", wrappedData.toString().getBytes(UTF_8), true);
+            + "_jsonbundle.txt", "text/plain",
+        wrappedData.toString().getBytes(StandardCharsets.UTF_8), true);
 
     TypeOracle typeOracle = context.getGeneratorContext().getTypeOracle();
     JClassType stringType = typeOracle.findType(String.class.getName());

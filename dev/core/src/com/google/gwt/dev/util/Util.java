@@ -15,8 +15,6 @@
  */
 package com.google.gwt.dev.util;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
@@ -808,7 +806,8 @@ public final class Util {
     // No need to check mkdirs result because an IOException will occur anyway
     file.getParentFile().mkdirs();
     try (FileOutputStream stream = new FileOutputStream(file);
-         BufferedWriter buffered = new BufferedWriter(new OutputStreamWriter(stream, UTF_8))) {
+         BufferedWriter buffered = new BufferedWriter(
+             new OutputStreamWriter(stream, StandardCharsets.UTF_8))) {
       buffered.write(string);
     } catch (IOException e) {
       return false;
@@ -824,7 +823,8 @@ public final class Util {
     // No need to check mkdirs result because an IOException will occur anyway
     file.getParentFile().mkdirs();
     try (FileOutputStream stream = new FileOutputStream(file);
-         BufferedWriter buffered = new BufferedWriter(new OutputStreamWriter(stream, UTF_8))) {
+         BufferedWriter buffered = new BufferedWriter(
+             new OutputStreamWriter(stream, StandardCharsets.UTF_8))) {
       buffered.write(string);
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to write file: " + file.getAbsolutePath(), e);

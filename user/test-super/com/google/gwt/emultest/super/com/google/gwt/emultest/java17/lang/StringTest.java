@@ -28,8 +28,23 @@ public class StringTest extends EmulTestBase {
   }
 
   public void testIndent() {
+    assertEquals("", hideFromCompiler("").indent(0));
+    assertEquals("", hideFromCompiler("").indent(2));
+    assertEquals("", hideFromCompiler("").indent(-2));
+    assertEquals(" \n", hideFromCompiler(" ").indent(0));
+    assertEquals("   \n", hideFromCompiler(" ").indent(2));
+    assertEquals("\n", hideFromCompiler(" ").indent(-2));
+    assertEquals("x\n", hideFromCompiler("x").indent(0));
     assertEquals("  x\n", hideFromCompiler("x").indent(2));
+    assertEquals("x\n", hideFromCompiler("x").indent(-2));
+    assertEquals(" x \n", hideFromCompiler(" x ").indent(0));
+    assertEquals("   x \n", hideFromCompiler(" x ").indent(2));
+    assertEquals("x \n", hideFromCompiler(" x ").indent(-2));
     assertEquals("x\n", hideFromCompiler("  x").indent(-2));
+    assertEquals(" x \n", hideFromCompiler(" \t x ").indent(-2));
+    assertEquals("x\ny\n", hideFromCompiler("x\ny").indent(0));
+    assertEquals("x\ny\n", hideFromCompiler("x\r\ny").indent(0));
+    assertEquals("x\ny\n", hideFromCompiler("x\ry").indent(0));
     assertEquals("  x\n  y\n", hideFromCompiler("x\ny").indent(2));
     assertEquals("  x\n  y\n", hideFromCompiler("x\r\ny").indent(2));
     assertEquals("  x\n  y\n", hideFromCompiler("x\ry").indent(2));

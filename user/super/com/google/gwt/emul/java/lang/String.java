@@ -815,11 +815,11 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public String indent(int spaces) {
-    if (spaces  == 0) {
-      return this;
+    if (isEmpty()) {
+      return "";
     }
     Stream<String> indentedLines;
-    if (spaces > 0) {
+    if (spaces >= 0) {
       String spaceString = " ".repeat(spaces);
       indentedLines = lines().map(line -> spaceString + line);
     } else {

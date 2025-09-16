@@ -58,12 +58,16 @@ public class StringTest extends EmulTestBase {
     assertEquals("x", hideFromCompiler("x").stripIndent());
     assertEquals("x", hideFromCompiler("  x").stripIndent());
     assertEquals("x\n", hideFromCompiler("x\r\n").stripIndent());
+    assertEquals("x\n", hideFromCompiler("  x\n  ").stripIndent());
+    assertEquals("  x\n", hideFromCompiler("    x\n  ").stripIndent());
+    assertEquals("  x\n", hideFromCompiler("  x\n").stripIndent());
     assertEquals("x\ny", hideFromCompiler("  x\n  y").stripIndent());
     assertEquals("x\ny", hideFromCompiler("  x\r\n  y").stripIndent());
     assertEquals(" x\ny", hideFromCompiler("  x\n y").stripIndent());
     assertEquals("x\n y", hideFromCompiler(" x\n  y").stripIndent());
     assertEquals("x\n\ny", hideFromCompiler("  x\n      \n  y").stripIndent());
     assertEquals(" x\ny", hideFromCompiler("\t x\r\n y").stripIndent());
+    assertEquals("x\n\ny", hideFromCompiler("  x\n\n  y").stripIndent());
   }
 
   public void testTranslateEscapes() {

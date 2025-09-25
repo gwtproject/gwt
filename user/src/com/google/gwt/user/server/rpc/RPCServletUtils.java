@@ -16,6 +16,9 @@
 package com.google.gwt.user.server.rpc;
 
 
+import com.google.gwt.user.server.rpc.logging.LogManager;
+import com.google.gwt.user.server.rpc.logging.Logger;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,8 +27,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.zip.GZIPOutputStream;
 
 import javax.servlet.ServletContext;
@@ -39,7 +40,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class RPCServletUtils {
 
-  private static final Logger logger = Logger.getLogger(RPCServletUtils.class.getName());
+  private static final Logger logger = LogManager.getLogger(RPCServletUtils.class);
 
   public static final String CHARSET_UTF8_NAME = "UTF-8";
 
@@ -374,7 +375,7 @@ public class RPCServletUtils {
       }
 
       if (caught != null) {
-        logger.log(Level.SEVERE, "Unable to compress response", caught);
+        logger.error("Unable to compress response", caught);
         response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         return;
       }
@@ -405,7 +406,7 @@ public class RPCServletUtils {
    */
   public static void writeResponseForUnexpectedFailure(
       HttpServletResponse response, Throwable failure) {
-    logger.log(Level.SEVERE, "Exception while dispatching incoming RPC call", failure);
+    logger.error("Exception while dispatching incoming RPC call", failure);
 
     // Send GENERIC_FAILURE_MSG with 500 status.
     //
@@ -419,7 +420,7 @@ public class RPCServletUtils {
         response.getWriter().write(GENERIC_FAILURE_MSG);
       }
     } catch (IOException ex) {
-      logger.log(Level.SEVERE,
+      logger.error(
           "respondWithUnexpectedFailure failed while sending the previous failure to the client",
           ex);
     }

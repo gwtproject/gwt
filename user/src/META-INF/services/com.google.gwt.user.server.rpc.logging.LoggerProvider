@@ -1,0 +1,4 @@
+com.google.gwt.user.server.rpc.logging.JulLoggerProvider
+com.google.gwt.user.server.rpc.logging.Log4jProvider
+com.google.gwt.user.server.rpc.logging.PlatformLoggerProvider
+# No no-args constructor: com.google.gwt.user.server.rpc.logging.ServletContextLoggerProvider

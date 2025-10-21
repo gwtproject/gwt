@@ -15,8 +15,6 @@
  */
 package com.google.gwt.core.ext.linker;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import com.google.gwt.core.ext.Linker;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -24,6 +22,7 @@ import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 /**
@@ -109,7 +108,7 @@ public abstract class AbstractLinker extends Linker {
    */
   protected final SyntheticArtifact emitString(TreeLogger logger, String what,
       String partialPath) throws UnableToCompleteException {
-    return emitBytes(logger, what.getBytes(UTF_8), partialPath);
+    return emitBytes(logger, what.getBytes(StandardCharsets.UTF_8), partialPath);
   }
 
   /**
@@ -123,7 +122,7 @@ public abstract class AbstractLinker extends Linker {
    */
   protected final SyntheticArtifact emitString(TreeLogger logger, String what,
       String partialPath, long lastModified) throws UnableToCompleteException {
-    return emitBytes(logger, what.getBytes(UTF_8), partialPath, lastModified);
+    return emitBytes(logger, what.getBytes(StandardCharsets.UTF_8), partialPath, lastModified);
   }
 
   /**

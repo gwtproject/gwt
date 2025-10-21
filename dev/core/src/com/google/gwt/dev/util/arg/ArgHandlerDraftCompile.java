@@ -63,7 +63,7 @@ public class ArgHandlerDraftCompile extends ArgHandlerFlag {
 
     clusterSimilarFunctionsOption.setClusterSimilarFunctions(!value);
     inlineLiteralParametersOption.setInlineLiteralParameters(!value);
-    namespaceOption.setNamespace(JsNamespaceOption.PACKAGE);
+    namespaceOption.setNamespace(value ? JsNamespaceOption.PACKAGE : JsNamespaceOption.NONE);
     if (value) {
       optimizeDataflowOption.setOptimizeDataflow(false);
     }

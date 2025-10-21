@@ -4,10 +4,6 @@
 # build, though maven snapshots are not yet deployed.
 name: Full build
 on:
-  schedule:
-    # This time is selected to be early in the morning in NA/SA/EU/ME. This
-    # only runs on the default branch.
-    - cron:  '0 6 * * *'
   push:
     # Build on pushes to main and release branches. For forks, the -test may
     # be helpful to run tests when preparing a merge.
@@ -17,8 +13,11 @@ on:
       - '*-test'
   workflow_dispatch:
     # Allow running manually
+  pull_request:
+    types: [ labeled, synchronize ]
 jobs:
   build:
+    if: ${{ !github.event.pull_request || contains(github.event.pull_request.labels.*.name, 'ready') }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -85,7 +84,7 @@ jobs:
       - name: Set up sonatype credentials
         # Using the same java version as above, set up a settings.xml file
         uses: actions/setup-java@v4
-        if: ${{ github.event_name == 'schedule' && github.repository_owner == 'gwtproject' && matrix.java-version == '21' }}
+        if: ${{ github.event_name == 'push' && github.ref_name == 'main' && github.repository_owner == 'gwtproject' && matrix.java-version == '21' }}
         with:
           java-version: ${{ matrix.java-version }}
           distribution: 'temurin'
@@ -95,7 +94,7 @@ jobs:
           server-password: SONATYPE_PASSWORD
 
       - name: Nightly builds should be deployed as snapshots to sonatype
-        if: ${{ github.event_name == 'schedule' && github.repository_owner == 'gwtproject' && matrix.java-version == '21' }}
+        if: ${{ github.event_name == 'push' && github.ref_name == 'main' && github.repository_owner == 'gwtproject' && matrix.java-version == '21' }}
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}

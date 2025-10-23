@@ -166,7 +166,7 @@ public class MessagesInterfaceCreator extends
     composer.print("@AlternateMessage({");
     String[] keys = plurals.keySet().toArray(new String[] {});
     if (keys.length > 1) {
-      composer.println("");
+      composer.println();
       composer.indent();
     }
     for (int i = 0; i < keys.length; i++) {
@@ -174,10 +174,11 @@ public class MessagesInterfaceCreator extends
       if (i > 0) {
         composer.println(",");
       }
-      composer.print(makeJavaString("\"" +
-              key.substring(key.indexOf('[') + 1, key.length() - 1) +
-              "\", "));
-      composer.print(makeJavaString("\"" + plurals.get(key) + "\""));
+      composer.print("\"");
+      composer.print(key.substring(key.indexOf('[') + 1, key.length() - 1));
+      composer.print("\", \"");
+      composer.print(makeJavaString(plurals.get(key)));
+      composer.println("\"");
     }
     if (keys.length > 1) {
       composer.println();

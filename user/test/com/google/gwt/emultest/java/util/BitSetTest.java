@@ -1421,4 +1421,15 @@ public class BitSetTest extends EmulTestBase {
         "565, 566, 567, 568, 569, 570, 571, 572, 573, 574, 575, 584, 640, 641, 642, 643, 644, 645, " +
         "646, 711}", set.toString());
   }
+
+  public void testStream() {
+    BitSet bitSet = new BitSet();
+    assertEquals(new int[]{}, bitSet.stream().toArray());
+    bitSet.set(2);
+    assertEquals(new int[]{2}, bitSet.stream().toArray());
+    bitSet.set(5);
+    assertEquals(new int[]{2, 5}, bitSet.stream().toArray());
+    bitSet.set(100);
+    assertEquals(new int[]{2, 5, 100}, bitSet.stream().toArray());
+  }
 }

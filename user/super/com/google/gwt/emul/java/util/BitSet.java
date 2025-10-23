@@ -18,6 +18,9 @@ package java.util;
 
 import static javaemul.internal.InternalPreconditions.checkArraySize;
 
+import java.util.function.IntConsumer;
+import java.util.stream.IntStream;
+import java.util.stream.StreamSupport;
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.LongUtils;
 
@@ -36,6 +39,37 @@ public class BitSet {
   private static final int BITS_PER_WORD = 31;
 
   private final int[] array;
+
+  private class BitSetSpliterator implements Spliterator.OfInt {
+    int nextBitIndex = 0;
+
+    @Override
+    public boolean tryAdvance(IntConsumer action) {
+      int nextBit = nextSetBit(nextBitIndex);
+      if (nextBit >= 0) {
+        nextBitIndex = nextBit + 1;
+        action.accept(nextBit);
+        return true;
+      }
+      return false;
+    }
+
+    @Override
+    public Spliterator.OfInt trySplit() {
+      return null;
+    }
+
+    @Override
+    public long estimateSize() {
+      return size();
+    }
+
+    @Override
+    public int characteristics() {
+      return Spliterator.SIZED | Spliterator.SUBSIZED | Spliterator.ORDERED
+          | Spliterator.DISTINCT | Spliterator.SORTED;
+    }
+  }
 
   public BitSet() {
     array = new int[0];
@@ -602,6 +636,11 @@ public class BitSet {
       word = wordAt(array, index);
     }
     return bitIndex(index) + Integer.numberOfTrailingZeros(word);
+  }
+
+  public IntStream stream() {
+    Spliterator.OfInt spliterator = new BitSetSpliterator();
+    return StreamSupport.intStream(spliterator, false);
   }
 
   public int previousClearBit(int fromIndex) {

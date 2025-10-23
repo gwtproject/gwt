@@ -87,6 +87,11 @@ public class I18NSyncTest_ extends TestCase {
     I18NSync.createMessagesInterfaceFromClassName(className, CLIENT_SOURCE_DIR);
   }
 
+  public void testMessagesArgTypes() throws IOException  {
+    String className = CLIENT_SOURCE_PACKAGE + "TestMessagesArgTypes";
+    I18NSync.createMessagesInterfaceFromClassName(className, CLIENT_SOURCE_DIR);
+  }
+
   public void testMethodRenaming() throws IOException {
     String className = CLIENT_SOURCE_PACKAGE + "TestBadKeys";
     I18NSync.createConstantsWithLookupInterfaceFromClassName(className,

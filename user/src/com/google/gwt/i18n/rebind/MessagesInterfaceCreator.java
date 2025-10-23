@@ -145,7 +145,7 @@ public class MessagesInterfaceCreator extends
       case "currency":
       case "percent":
       default:
-        if(subFormat.contains(".")) {
+        if (subFormat.contains(".")) {
           composer.print("Double");
         } else {
           composer.print("Integer");

@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
+import com.google.gwt.dev.jjs.ast.AccessModifier;
 import com.google.gwt.dev.jjs.ast.CanBeAbstract;
 import com.google.gwt.dev.jjs.ast.CanBeFinal;
 import com.google.gwt.dev.jjs.ast.CanBeStatic;
@@ -81,6 +82,7 @@ import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JThrowStatement;
 import com.google.gwt.dev.jjs.ast.JTryStatement;
 import com.google.gwt.dev.jjs.ast.JType;
+import com.google.gwt.dev.jjs.ast.JUnsafeTypeCoercion;
 import com.google.gwt.dev.jjs.ast.JWhileStatement;
 import com.google.gwt.dev.jjs.ast.JYieldStatement;
 import com.google.gwt.dev.jjs.ast.js.JDebuggerStatement;
@@ -143,6 +145,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   protected static final char[] CHARS_THROW = "throw".toCharArray();
   protected static final char[] CHARS_TRUE = "true".toCharArray();
   protected static final char[] CHARS_TRY = "try ".toCharArray();
+  protected static final char[] CHARS_UNCHECKED_CAST = "(/* @unchecked cast to ".toCharArray();
   protected static final char[] CHARS_WHILE = "while ".toCharArray();
   protected static final char[] CHARS_YIELD = "yield ".toCharArray();
 
@@ -284,6 +287,17 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   }
 
   @Override
+  public boolean visit(JUnsafeTypeCoercion x, Context ctx) {
+    lparen();
+    print(CHARS_UNCHECKED_CAST);
+    printType(x);
+    space();
+    accept(x.getExpression());
+    rparen();
+    return false;
+  }
+
+  @Override
   public boolean visit(JCastMap x, Context ctx) {
     print('[');
     visitCollectionWithCommas(x.getCanCastToTypes().iterator());
@@ -363,11 +377,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   @Override
   public boolean visit(JConstructor x, Context ctx) {
     // Modifiers
-    if (x.isPrivate()) {
-      print(CHARS_PRIVATE);
-    } else {
-      print(CHARS_PUBLIC);
-    }
+    printAccess(x.getAccess());
     printName(x);
 
     // Parameters
@@ -1024,7 +1034,9 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
         print("\\\\");
         break;
       default:
-        if (Character.isISOControl(c)) {
+        if (' ' <= c && c <= '~') {
+          print(c);
+        } else {
           print("\\u");
           if (c < 0x1000) {
             print('0');
@@ -1038,8 +1050,6 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
             print('0');
           }
           print(Integer.toHexString(c));
-        } else {
-          print(c);
         }
     }
   }
@@ -1067,19 +1077,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
 
   protected void printMethodHeader(JMethod x) {
     // Modifiers
-    switch (x.getAccess()) {
-      case PUBLIC:
-        print(CHARS_PUBLIC);
-        break;
-      case PROTECTED:
-        print(CHARS_PROTECTED);
-        break;
-      case PRIVATE:
-        print(CHARS_PRIVATE);
-        break;
-      case DEFAULT:
-        break;
-    }
+    printAccess(x.getAccess());
     printStaticFlag(x);
     printAbstractFlag(x);
     printNativeFlag(x);
@@ -1092,12 +1090,28 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
     printParameterList(x);
   }
 
+  private void printAccess(AccessModifier access) {
+    switch (access) {
+      case PUBLIC:
+        print(CHARS_PUBLIC);
+        break;
+      case PROTECTED:
+        print(CHARS_PROTECTED);
+        break;
+      case PRIVATE:
+        print(CHARS_PRIVATE);
+        break;
+      case DEFAULT:
+        break;
+    }
+  }
+
   protected void printName(HasName x) {
     print(x.getName());
   }
 
   protected void printNativeFlag(JMethod x) {
-    if (x.isJsniMethod()) {
+    if (x.isJsniMethod() || x.isJsNative()) {
       print(CHARS_NATIVE);
     }
   }

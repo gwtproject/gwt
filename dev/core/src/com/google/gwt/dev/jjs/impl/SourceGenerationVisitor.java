@@ -52,6 +52,7 @@ public class SourceGenerationVisitor extends ToStringGenerationVisitor {
     printAbstractFlag(x);
     printFinalFlag(x);
     print(CHARS_CLASS);
+    printTypeName(x);
     space();
     if (x.getSuperClass() != null) {
       print(CHARS_EXTENDS);
@@ -73,6 +74,7 @@ public class SourceGenerationVisitor extends ToStringGenerationVisitor {
 
     for (JField field : x.getFields()) {
       accept(field);
+      semi();
       newline();
       newline();
     }

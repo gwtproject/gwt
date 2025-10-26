@@ -162,7 +162,7 @@ public class PrunerTest extends OptimizerTestBase {
         ((JsniMethodBody) result.findMethod("usedNativeMethod").getBody())
             .getJsniFieldRefs().toString());
     assertEquals(
-        "[public final null nullMethod(), public void method2()]",
+        "[public native final null nullMethod(), public void method2()]",
         ((JsniMethodBody) result.findMethod("usedNativeMethod").getBody())
             .getJsniMethodRefs().toString());
 

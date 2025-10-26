@@ -40,6 +40,7 @@ import javaemul.internal.EmulatedCharset;
 import javaemul.internal.JsUtils;
 import javaemul.internal.NativeRegExp;
 import javaemul.internal.annotations.DoNotInline;
+import javaemul.internal.annotations.SpecializeMethod;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsPackage;
@@ -140,6 +141,8 @@ public final class String implements Comparable<String>, CharSequence,
     return "" + x;
   }
 
+  // Do not inline so we can statically eval this, and don't pay extra for the inlined method name
+  @DoNotInline
   public static String valueOf(char x) {
     return NativeString.fromCharCode(x);
   }
@@ -226,6 +229,7 @@ public final class String implements Comparable<String>, CharSequence,
     }
   }
 
+  @SpecializeMethod(target = "valueOf", params = {char.class})
   static String fromCodePoint(int codePoint) {
     if (codePoint >= Character.MIN_SUPPLEMENTARY_CODE_POINT) {
       char hiSurrogate = Character.getHighSurrogate(codePoint);
@@ -233,7 +237,7 @@ public final class String implements Comparable<String>, CharSequence,
       return String.valueOf(hiSurrogate)
           + String.valueOf(loSurrogate);
     } else {
-      return String.valueOf((char) codePoint);
+      return valueOf((char) codePoint);
     }
   }
 
@@ -396,7 +400,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public boolean contains(CharSequence s) {
-    return indexOf(s.toString()) != -1;
+    return asNativeString().includes(s.toString());
   }
 
   public boolean contentEquals(CharSequence cs) {
@@ -468,18 +472,36 @@ public final class String implements Comparable<String>, CharSequence,
     return h;
   }
 
+  @SpecializeMethod(target = "indexOfChar", params = {char.class})
   public int indexOf(int codePoint) {
-    return indexOf(fromCodePoint(codePoint));
+    if (codePoint >= Character.MIN_SUPPLEMENTARY_CODE_POINT) {
+      return indexOf(fromCodePoint(codePoint));
+    }
+    return indexOfChar((char) codePoint);
   }
 
+  private int indexOfChar(char codePoint) {
+    return indexOf(String.valueOf(codePoint));
+  }
+
+  @SpecializeMethod(target = "indexOfChar", params = {char.class, int.class})
   public int indexOf(int codePoint, int startIndex) {
-    return indexOf(fromCodePoint(codePoint), startIndex);
+    if (codePoint >= Character.MIN_SUPPLEMENTARY_CODE_POINT) {
+      return indexOf(fromCodePoint(codePoint), startIndex);
+    }
+    return indexOfChar((char) codePoint, startIndex);
   }
 
+  private int indexOfChar(char codePoint, int startIndex) {
+    return indexOf(String.valueOf(codePoint), startIndex);
+  }
+
+  @DoNotInline
   public int indexOf(String str) {
     return asNativeString().indexOf(str);
   }
 
+  @DoNotInline
   public int indexOf(String str, int startIndex) {
     return asNativeString().indexOf(str, startIndex);
   }
@@ -492,12 +514,27 @@ public final class String implements Comparable<String>, CharSequence,
     return length() == 0;
   }
 
+  @SpecializeMethod(target = "lastIndexOfChar", params = {char.class})
   public int lastIndexOf(int codePoint) {
-    return lastIndexOf(fromCodePoint(codePoint));
+    if (codePoint >= Character.MIN_SUPPLEMENTARY_CODE_POINT) {
+      return lastIndexOf(fromCodePoint(codePoint));
+    }
+    return lastIndexOfChar((char) codePoint);
   }
 
+  private int lastIndexOfChar(char codePoint) {
+    return lastIndexOf(String.valueOf(codePoint));
+  }
+  @SpecializeMethod(target = "lastIndexOfChar", params = {char.class, int.class})
   public int lastIndexOf(int codePoint, int startIndex) {
-    return lastIndexOf(fromCodePoint(codePoint), startIndex);
+    if (codePoint >= Character.MIN_SUPPLEMENTARY_CODE_POINT) {
+      return lastIndexOf(fromCodePoint(codePoint), startIndex);
+    }
+    return lastIndexOfChar((char) codePoint, startIndex);
+  }
+
+  private int lastIndexOfChar(char codePoint, int startIndex) {
+    return lastIndexOf(String.valueOf(codePoint), startIndex);
   }
 
   public int lastIndexOf(String str) {
@@ -865,6 +902,8 @@ public final class String implements Comparable<String>, CharSequence,
     public native char charCodeAt(int index);
     public native int indexOf(String str);
     public native int indexOf(String str, int startIndex);
+    public native boolean includes(String str);
+    public native boolean includes(String str, int startIndex);
     public native int lastIndexOf(String str);
     public native int lastIndexOf(String str, int start);
     public native String replace(NativeRegExp regex, String replace);

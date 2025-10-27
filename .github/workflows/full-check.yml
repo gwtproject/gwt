@@ -15,6 +15,9 @@ on:
     # Allow running manually
   pull_request:
     types: [ labeled, synchronize ]
+permissions:
+  # allow publishing JUnit report for PRs
+  checks: write 
 jobs:
   build:
     if: ${{ !github.event.pull_request || contains(github.event.pull_request.labels.*.name, 'ready') }}

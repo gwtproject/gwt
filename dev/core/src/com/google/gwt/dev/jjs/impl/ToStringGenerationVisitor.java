@@ -116,6 +116,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   protected static final char[] CHARS_DO = "do".toCharArray();
   protected static final char[] CHARS_DOTCLASS = ".class".toCharArray();
   protected static final char[] CHARS_ELSE = "else".toCharArray();
+  protected static final char[] CHARS_ENUM = "enum ".toCharArray();
   protected static final char[] CHARS_EXTENDS = "extends ".toCharArray();
   protected static final char[] CHARS_FALSE = "false".toCharArray();
   protected static final char[] CHARS_FINAL = "final ".toCharArray();
@@ -133,6 +134,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   protected static final char[] CHARS_PRIVATE = "private ".toCharArray();
   protected static final char[] CHARS_PROTECTED = "protected ".toCharArray();
   protected static final char[] CHARS_PUBLIC = "public ".toCharArray();
+  protected static final char[] CHARS_RECORD = "record ".toCharArray();
   protected static final char[] CHARS_RETURN = "return".toCharArray();
   protected static final char[] CHARS_RUNTIMETYPEREFERENCE =
       " JRuntimeTypeReference ".toCharArray();

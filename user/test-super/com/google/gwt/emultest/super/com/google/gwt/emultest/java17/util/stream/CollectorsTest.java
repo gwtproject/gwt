@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Tests for java.lang.String Java 12 API emulation.
+ * Tests for java.util.stream.Collectors Java 12 API emulation.
  */
 public class CollectorsTest extends EmulTestBase {
 

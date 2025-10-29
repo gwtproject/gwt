@@ -21,6 +21,9 @@ import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.JUnitShell;
 import com.google.gwt.junit.Platform;
 
+/**
+ * Tests for Java 17 java.lang.CharSequence emulation.
+ */
 @DoNotRunWith(Platform.Devel)
 public class CharSequenceTest extends EmulTestBase {
 

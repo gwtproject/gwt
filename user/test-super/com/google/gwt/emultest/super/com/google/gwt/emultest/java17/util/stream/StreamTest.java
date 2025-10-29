@@ -25,6 +25,9 @@ import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
 import java.util.stream.Stream;
 
+/**
+ * Tests for Java 17 java.util.stream.Stream emulation.
+ */
 public class StreamTest extends EmulTestBase {
 
   public void testToList() {

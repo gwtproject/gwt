@@ -19,6 +19,9 @@ import com.google.gwt.emultest.java.util.EmulTestBase;
 
 import java.util.stream.DoubleStream;
 
+/**
+ * Tests for Java 17 java.util.stream.DoubleStream emulation.
+ */
 public class DoubleStreamTest extends EmulTestBase {
 
   public void testMapMulti() {

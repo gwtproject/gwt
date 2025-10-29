@@ -21,6 +21,9 @@ import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.JUnitShell;
 import com.google.gwt.junit.Platform;
 
+/**
+ * Tests for Java 17 java.util.Map.Entry emulation.
+ */
 @DoNotRunWith(Platform.Devel)
 public class MapEntryTest extends EmulTestBase {
 

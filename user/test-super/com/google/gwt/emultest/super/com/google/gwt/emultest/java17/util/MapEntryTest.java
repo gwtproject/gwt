@@ -20,6 +20,9 @@ import com.google.gwt.emultest.java.util.EmulTestBase;
 import java.util.AbstractMap;
 import java.util.Map;
 
+/**
+ * Tests for Java 17 java.util.Map.Entry emulation.
+ */
 public class MapEntryTest extends EmulTestBase {
 
   public void testCopyOf() {

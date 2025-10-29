@@ -17,6 +17,9 @@ package com.google.gwt.emultest.java17.lang;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
+/**
+ * Tests for Java 17 java.lang.CharSequence emulation.
+ */
 public class CharSequenceTest extends EmulTestBase {
 
   public void testIsEmpty() {

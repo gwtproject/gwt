@@ -21,6 +21,9 @@ import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.JUnitShell;
 import com.google.gwt.junit.Platform;
 
+/**
+ * Tests for java.util.stream.Collectors Java 17 emulation.
+ */
 @DoNotRunWith(Platform.Devel)
 public class DoubleStreamTest extends EmulTestBase {
 

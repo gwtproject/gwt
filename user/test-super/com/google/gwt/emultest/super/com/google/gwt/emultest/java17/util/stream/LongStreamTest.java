@@ -19,6 +19,9 @@ import com.google.gwt.emultest.java.util.EmulTestBase;
 
 import java.util.stream.LongStream;
 
+/**
+ * Tests for Java 17 java.util.stream.LongStream emulation.
+ */
 public class LongStreamTest extends EmulTestBase {
 
   public void testMapMulti() {

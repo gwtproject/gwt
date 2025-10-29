@@ -20,6 +20,9 @@ import com.google.gwt.emultest.java.util.EmulTestBase;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Tests for Java 17 java.lang.CharSequence emulation.
+ */
 public class CharSequenceTest extends EmulTestBase {
 
   public void testCompare() {

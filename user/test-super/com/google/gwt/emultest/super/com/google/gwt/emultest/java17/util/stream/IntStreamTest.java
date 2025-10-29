@@ -20,6 +20,9 @@ import com.google.gwt.emultest.java.util.EmulTestBase;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+/**
+ * Tests for Java 17 java.util.stream.IntStream emulation.
+ */
 public class IntStreamTest extends EmulTestBase {
 
   public void testMapMulti() {

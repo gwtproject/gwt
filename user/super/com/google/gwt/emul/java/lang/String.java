@@ -690,7 +690,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public boolean startsWith(String prefix) {
-    return startsWith(prefix, 0);
+    return asNativeString().startsWith(prefix);
   }
 
   public boolean startsWith(String prefix, int toffset) {

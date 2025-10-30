@@ -82,9 +82,9 @@ public final class JsUtils {
   }-*/;
 
   @UncheckedCast
-  public static native <T> T uncheckedCast(@DoNotAutobox Object o) /*-{
-    return o;
-  }-*/;
+  public static <T> T uncheckedCast(@DoNotAutobox Object o) {
+    return (T) o;
+  }
 
   @UncheckedCast
   public static native <T> T getProperty(Object map, String key) /*-{

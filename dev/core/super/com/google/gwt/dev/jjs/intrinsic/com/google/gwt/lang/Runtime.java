@@ -77,23 +77,20 @@ public class Runtime {
     }
   }-*/;
 
-  private static native JavaScriptObject portableObjCreate(JavaScriptObject obj) /*-{
-    function F() {};
-    F.prototype = obj || {};
-    return new F();
-  }-*/;
-
   /**
    * Create a subclass prototype.
    */
   private static native JavaScriptObject createSubclassPrototype(
       JavaScriptObject superTypeIdOrPrototype) /*-{
-    var superPrototype = superTypeIdOrPrototype && superTypeIdOrPrototype.prototype;
-    if (!superPrototype) {
-      // If it is not a prototype, then it should be a type id.
-      superPrototype = @Runtime::prototypesByTypeId[superTypeIdOrPrototype];
+    var superPrototype = null;
+    if (superTypeIdOrPrototype != null) {
+      superPrototype = superTypeIdOrPrototype && superTypeIdOrPrototype.prototype;
+      if (!superPrototype) {
+        // If it is not a prototype, then it should be a type id.
+        superPrototype = @Runtime::prototypesByTypeId[superTypeIdOrPrototype];
+      }
     }
-    return @Runtime::portableObjCreate(*)(superPrototype);
+    return Object.create(superPrototype);
   }-*/;
 
   public static native void copyObjectProperties(JavaScriptObject from, JavaScriptObject to) /*-{

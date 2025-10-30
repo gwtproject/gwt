@@ -28,6 +28,7 @@ import com.google.gwt.emultest.java.io.PrintStreamTest;
 import com.google.gwt.emultest.java.io.WriterTest;
 import com.google.gwt.emultest.java.lang.BooleanTest;
 import com.google.gwt.emultest.java.lang.ByteTest;
+import com.google.gwt.emultest.java.lang.CharSequenceTest;
 import com.google.gwt.emultest.java.lang.CharacterTest;
 import com.google.gwt.emultest.java.lang.CompilerConstantStringTest;
 import com.google.gwt.emultest.java.lang.DoubleEqualsSemanticsTest;
@@ -88,6 +89,7 @@ import org.junit.runners.Suite.SuiteClasses;
   // -- java.lang
   BooleanTest.class,
   ByteTest.class,
+  CharSequenceTest.class,
   CharacterTest.class,
   CompilerConstantStringTest.class,
   DoubleTest.class,

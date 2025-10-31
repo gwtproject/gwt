@@ -20,30 +20,26 @@ import com.google.gwt.dev.shell.HostedModePluginObject;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
-import com.gargoylesoftware.htmlunit.AlertHandler;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.IncorrectnessListener;
-import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.util.WebClientUtils;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.htmlunit.AlertHandler;
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.FailingHttpStatusCodeException;
+import org.htmlunit.IncorrectnessListener;
+import org.htmlunit.OnbeforeunloadHandler;
+import org.htmlunit.Page;
+import org.htmlunit.ScriptException;
+import org.htmlunit.WebClient;
+import org.htmlunit.WebWindow;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.HtmlUnitContextFactory;
+import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.JavaScriptErrorListener;
+import org.htmlunit.javascript.host.Window;
+import org.htmlunit.util.WebClientUtils;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -52,6 +48,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 
 /**
  * Launches a web-mode test via HTMLUnit.
@@ -105,6 +102,7 @@ public class RunStyleHtmlUnit extends RunStyle {
       webClient.setAlertHandler(this);
       webClient.setIncorrectnessListener(this);
       webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+      webClient.getOptions().setFetchPolyfillEnabled(true);
       // To receive exceptions from js side in the development mode, we need set this to 'true'.
       // However, as htmlunit dies after throwing the exception, we still want it to be 'false'
       // for web mode.
@@ -138,7 +136,7 @@ public class RunStyleHtmlUnit extends RunStyle {
         @Override
         public void scriptException(HtmlPage htmlPage,
             ScriptException scriptException) {
-          treeLogger.log(TreeLogger.DEBUG,
+          treeLogger.log(TreeLogger.ERROR,
               "Script Exception: " + scriptException.getLocalizedMessage() +
                ", line " + scriptException.getFailingLine());
         }
@@ -177,7 +175,7 @@ public class RunStyleHtmlUnit extends RunStyle {
             treeLogger);
         webClient.setJavaScriptEngine(hostedEngine);
       } else {
-        JavaScriptEngine webEngine = new WebJavaScriptEngine(webClient);
+        JavaScriptEngine webEngine = new JavaScriptEngine(webClient);
         webClient.setJavaScriptEngine(webEngine);
       }
       if (System.getProperty("gwt.htmlunit.debug") != null) {
@@ -196,93 +194,40 @@ public class RunStyleHtmlUnit extends RunStyle {
     private static final long serialVersionUID = 3594816610842448691L;
     private final WebClient webClient;
     private final TreeLogger logger;
+    private final HtmlUnitContextFactory htmlUnitContextFactory;
 
-    public HostedJavaScriptEngine(WebClient webClient, TreeLogger logger) {
+    HostedJavaScriptEngine(WebClient webClient, TreeLogger logger) {
       super(webClient);
       this.webClient = webClient;
       this.logger = logger;
+      this.htmlUnitContextFactory = new HtmlUnitContextFactory(webClient) {
+        protected Context makeContext() {
+          Context ctx = super.makeContext();
+          try {
+            Field hasShutter = Context.class.getDeclaredField("hasClassShutter");
+            hasShutter.setAccessible(true);
+            hasShutter.setBoolean(ctx, false);
+          } catch (IllegalAccessException | NoSuchFieldException e) {
+            throw new RuntimeException(e);
+          }
+          ctx.setClassShutter(any -> true);
+          return ctx;
+        }
+      };
+    }
+
+    @Override
+    public HtmlUnitContextFactory getContextFactory() {
+      return htmlUnitContextFactory;
     }
 
     @Override
     public void initialize(WebWindow webWindow, Page page) {
       // Hook in the hosted-mode plugin after initializing the JS engine.
       super.initialize(webWindow, page);
-      Window window = (Window) webWindow.getScriptableObject();
+      Window window = webWindow.getScriptableObject();
       window.defineProperty("__gwt_HostedModePlugin",
           new HostedModePluginObject(this, webClient, logger), ScriptableObject.READONLY);
-    }
-  }
-
-  /**
-   * JavaScriptEngine subclass that fixes a bug when calling {@code window.onerror}.
-   * Make sure to remove when updating HtmlUnit.
-   *
-   * @see <a href="https://sourceforge.net/p/htmlunit/bugs/1924/">HtmlUnit bug #1924</a>
-   */
-  private static class WebJavaScriptEngine extends JavaScriptEngine {
-    private static final Log LOG = LogFactory.getLog(JavaScriptEngine.class);
-    private final WebClient webClient;
-
-    public WebJavaScriptEngine(WebClient webClient) {
-      super(webClient);
-      this.webClient = webClient;
-    }
-
-    @Override
-    protected void handleJavaScriptException(ScriptException scriptException,
-        boolean triggerOnError) {
-      // XXX(tbroyer): copied from JavaScriptEngine to call below triggerOnError
-      // instead of Window's triggerOnError.
-
-      // Trigger window.onerror, if it has been set.
-      final HtmlPage page = scriptException.getPage();
-      if (triggerOnError && page != null) {
-        final WebWindow window = page.getEnclosingWindow();
-        if (window != null) {
-          final Window w = (Window) window.getScriptableObject();
-          if (w != null) {
-            try {
-              triggerOnError(w, scriptException);
-            } catch (final Exception e) {
-              handleJavaScriptException(new ScriptException(page, e, null), false);
-            }
-          }
-        }
-      }
-      final JavaScriptErrorListener javaScriptErrorListener =
-              webClient.getJavaScriptErrorListener();
-      if (javaScriptErrorListener != null) {
-        javaScriptErrorListener.scriptException(page, scriptException);
-      }
-      // Throw a Java exception if the user wants us to.
-      if (webClient.getOptions().isThrowExceptionOnScriptError()) {
-        throw scriptException;
-      }
-      // Log the error; ScriptException instances provide good debug info.
-      LOG.info("Caught script exception", scriptException);
-    }
-
-    private void triggerOnError(Window w, ScriptException e) {
-      // XXX(tbroyer): copied from HtmlUnit's javascript.host.Window
-      // with fix unwrapping the JS exception before passing it back to JS.
-      final Object o = w.getOnerror();
-      if (o instanceof Function) {
-        final Function f = (Function) o;
-        final String msg = e.getMessage();
-        final String url = e.getPage().getUrl().toExternalForm();
-        final int line = e.getFailingLineNumber();
-
-        final int column = e.getFailingColumnNumber();
-
-        Object jsError = null;
-        if (e.getCause() instanceof JavaScriptException) {
-          jsError = ((JavaScriptException) e.getCause()).getValue();
-        }
-
-        Object[] args = new Object[]{msg, url, line, column, jsError};
-
-        f.call(Context.getCurrentContext(), w, w, args);
-      }
     }
   }
 
@@ -290,14 +235,16 @@ public class RunStyleHtmlUnit extends RunStyle {
   private static final Map<BrowserVersion, String> USER_AGENT_MAP  = Maps.newHashMap();
 
   static {
-    // “Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36 Edge/12.0″
+    // “Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)
+    // Chrome/39.0.2171.71 Safari/537.36 Edge/12.0″
     addBrowser(BrowserVersion.EDGE, "safari");
     addBrowser(BrowserVersion.FIREFOX, "gecko1_8");
     addBrowser(BrowserVersion.CHROME, "safari");
-    addBrowser(BrowserVersion.INTERNET_EXPLORER, "gecko1_8");
   }
 
-  private static void addBrowser(BrowserVersion browser, String userAgent) {
+  private static void addBrowser(BrowserVersion baseBrowser, String userAgent) {
+    BrowserVersion browser = new BrowserVersion.BrowserVersionBuilder(baseBrowser)
+        .setSystemTimezone(TimeZone.getDefault()).build();
     BROWSER_MAP.put(browser.getNickname(), browser);
     USER_AGENT_MAP.put(browser, userAgent);
   }

@@ -17,6 +17,7 @@ package java.lang;
 
 import static javaemul.internal.InternalPreconditions.checkCriticalArithmetic;
 
+import javaemul.internal.JsUtils;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -31,7 +32,6 @@ public final class Math {
   //   public static float ulp (float x)
   //   public static int getExponent (double d)
   //   public static int getExponent (float f)
-  //   public static double IEEEremainder(double f1, double f2)
 
   public static final double E = 2.7182818284590452354;
   public static final double PI = 3.14159265358979323846;
@@ -50,6 +50,16 @@ public final class Math {
 
   public static long abs(long x) {
     return x < 0 ? -x : x;
+  }
+
+  public static int absExact(int v) {
+    checkCriticalArithmetic(v != Integer.MIN_VALUE);
+    return abs(v);
+  }
+
+  public static long absExact(long v) {
+    checkCriticalArithmetic(v != Long.MIN_VALUE);
+    return abs(v);
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.acos")
@@ -116,9 +126,8 @@ public final class Math {
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.exp")
   public static native double exp(double x);
 
-  public static double expm1(double d) {
-    return d == 0 ? d : exp(d) - 1;
-  }
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.expm1")
+  public static native double expm1(double d);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.floor")
   public static native double floor(double x);
@@ -145,10 +154,29 @@ public final class Math {
     return ((dividend % divisor) + divisor) % divisor;
   }
 
-  public static double hypot(double x, double y) {
-    return Double.isInfinite(x) || Double.isInfinite(y) ?
-        Double.POSITIVE_INFINITY : sqrt(x * x + y * y);
+  @SuppressWarnings("CheckStyle.MethodName")
+  public static double IEEEremainder(double v, double m) {
+    double ratio = v / m;
+    double closest = Math.ceil(ratio);
+    double frac = Math.abs(closest - ratio);
+    if (frac > 0.5 || frac == 0.5 && (closest % 2 != 0)) {
+      closest = Math.floor(ratio);
+    }
+    // if closest == 0 and m == inf, avoid multiplication
+    return closest == 0 ? v : v - m * closest;
   }
+
+  public static int getExponent(double v) {
+    int[] intBits = JsUtils.doubleToRawIntBits(v);
+    return ((intBits[1] >> 20) & 2047) - Double.MAX_EXPONENT;
+  }
+
+  public static int getExponent(float v) {
+    return ((JsUtils.floatToRawIntBits(v) >> 23) & 255) - Float.MAX_EXPONENT;
+  }
+
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.hypot")
+  public static native double hypot(double x, double y);
 
   public static int incrementExact(int x) {
     checkCriticalArithmetic(x != Integer.MAX_VALUE);
@@ -167,9 +195,8 @@ public final class Math {
     return log(x) * NativeMath.LOG10E;
   }
 
-  public static double log1p(double x) {
-    return x == 0 ? x : log(x + 1);
-  }
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.log1p")
+  public static native double log1p(double x);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.max")
   public static native double max(double x, double y);

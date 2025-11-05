@@ -28,6 +28,7 @@ public class MathTest extends GWTTestCase {
 
   private static final Integer[] ALL_INTEGER_CANDIDATES = getAllIntegerCandidates();
   private static final Long[] ALL_LONG_CANDIDATES = getAllLongCandidates();
+  private static final double EPS = 1E-15;
 
   @Override
   public String getModuleName() {
@@ -291,6 +292,172 @@ public class MathTest extends GWTTestCase {
       } catch (ArithmeticException e) {
         assertFalse(expectedSuccess);
       }
+    }
+  }
+
+  public void testLog1p() {
+    assertEquals(Math.log(2), Math.log1p(1), EPS);
+    assertEquals(1, Math.log1p(1E-30) * 1E30, EPS);
+    assertEquals(-1, Math.log1p(-1E-30) * 1E30, EPS);
+
+    assertEquals(Math.log(2), Math.log1p(hideFromCompiler(1)), EPS);
+    assertEquals(1, Math.log1p(hideFromCompiler(1E-30)) * 1E30, EPS);
+    assertEquals(-1, Math.log1p(hideFromCompiler(-1E-30)) * 1E30, EPS);
+  }
+
+  public void testExpM1() {
+    assertEquals(Math.E - 1, Math.expm1(1), EPS);
+    assertEquals(1, Math.expm1(1E-30) * 1E30, EPS);
+    assertEquals(-1, Math.expm1(-1E-30) * 1E30, EPS);
+
+    assertEquals(Math.E - 1, Math.expm1(hideFromCompiler(1)), EPS);
+    assertEquals(1, Math.expm1(hideFromCompiler(1E-30)) * 1E30, EPS);
+    assertEquals(-1, Math.expm1(hideFromCompiler(-1E-30)) * 1E30, EPS);
+  }
+
+  public void testIEEEremainderWithFolding() {
+    assertEquals(1.0, Math.IEEEremainder(7.0, 3.0), EPS);
+    assertEquals(-1.0, Math.IEEEremainder(8.0, 3.0), EPS);
+    assertEquals(0.0, Math.IEEEremainder(6.0, 3.0), EPS);
+    assertEquals(0.0, Math.IEEEremainder(9.0, 3.0), EPS);
+    assertEquals(-1.0, Math.IEEEremainder(-7.0, 3.0), EPS);
+    assertEquals(1.0, Math.IEEEremainder(7.0, -3.0), EPS);
+    assertEquals(-1.0, Math.IEEEremainder(-7.0, -3.0), EPS);
+    assertEquals(0.5, Math.IEEEremainder(2.5, 1.0), EPS);
+    assertEquals(0.5, Math.IEEEremainder(2.5, 2.0), EPS);
+    assertEquals(0.2, Math.IEEEremainder(5.2, 1.0), EPS);
+
+    assertEquals(0.0, Math.IEEEremainder(4.5, 1.5), EPS);
+    assertEquals(1.5, Math.IEEEremainder(7.5, 3.0), EPS);
+    assertEquals(-1.5, Math.IEEEremainder(-7.5, -3.0), EPS);
+    assertEquals(1.5, Math.IEEEremainder(7.5, -3.0), EPS);
+    assertEquals(-1.5, Math.IEEEremainder(-7.5, 3.0), EPS);
+    // Remainder with 0 divisor is NaN
+    assertTrue(Double.isNaN(Math.IEEEremainder(5.0, 0.0)));
+    // 0 divided by anything is 0
+    assertEquals(0.0, Math.IEEEremainder(0.0, 2.0), EPS);
+    // Infinity cases produce NaN
+    assertTrue(Double.isNaN(Math.IEEEremainder(Double.POSITIVE_INFINITY, 2.0)));
+    assertTrue(Double.isNaN(Math.IEEEremainder(Double.NEGATIVE_INFINITY, 2.0)));
+    assertEquals(2, Math.IEEEremainder(2, Double.POSITIVE_INFINITY), EPS);
+    assertEquals(2, Math.IEEEremainder(2, Double.NEGATIVE_INFINITY), EPS);
+    // Any finite number divided by infinity -> same number
+    assertEquals(5.0, Math.IEEEremainder(5.0, Double.POSITIVE_INFINITY), EPS);
+    assertTrue(Double.isNaN(Math.IEEEremainder(Double.NaN, 2.0)));
+    assertTrue(Double.isNaN(Math.IEEEremainder(5.0, Double.NaN)));
+    assertTrue(Double.isNaN(Math.IEEEremainder(Double.NaN, Double.NaN)));
+  }
+
+  public void testIEEEremainder() {
+    assertEquals(1.0, Math.IEEEremainder(hideFromCompiler(7.0), 3.0), EPS);
+    assertEquals(-1.0, Math.IEEEremainder(hideFromCompiler(8.0), 3.0), EPS);
+    assertEquals(0.0, Math.IEEEremainder(hideFromCompiler(6.0), 3.0), EPS);
+    assertEquals(0.0, Math.IEEEremainder(hideFromCompiler(9.0), 3.0), EPS);
+    assertEquals(-1.0, Math.IEEEremainder(hideFromCompiler(-7.0), 3.0), EPS);
+    assertEquals(1.0, Math.IEEEremainder(hideFromCompiler(7.0), -3.0), EPS);
+    assertEquals(-1.0, Math.IEEEremainder(hideFromCompiler(-7.0), -3.0), EPS);
+    assertEquals(0.5, Math.IEEEremainder(hideFromCompiler(2.5), 1.0), EPS);
+    assertEquals(0.5, Math.IEEEremainder(hideFromCompiler(2.5), 2.0), EPS);
+    assertEquals(0.2, Math.IEEEremainder(hideFromCompiler(5.2), 1.0), EPS);
+
+    assertEquals(0.0, Math.IEEEremainder(hideFromCompiler(4.5), 1.5), EPS);
+    assertEquals(1.5, Math.IEEEremainder(hideFromCompiler(7.5), 3.0), EPS);
+    assertEquals(-1.5, Math.IEEEremainder(hideFromCompiler(-7.5), -3.0), EPS);
+    assertEquals(1.5, Math.IEEEremainder(hideFromCompiler(7.5), -3.0), EPS);
+    assertEquals(-1.5, Math.IEEEremainder(hideFromCompiler(-7.5), 3.0), EPS);
+    // Remainder with 0 divisor is NaN
+    assertTrue(Double.isNaN(Math.IEEEremainder(hideFromCompiler(5.0), 0.0)));
+    // 0 divided by anything is 0
+    assertEquals(0.0, Math.IEEEremainder(hideFromCompiler(0.0), 2.0), EPS);
+    // Infinity cases produce NaN
+    assertTrue(Double.isNaN(Math.IEEEremainder(hideFromCompiler(Double.POSITIVE_INFINITY), 2.0)));
+    assertTrue(Double.isNaN(Math.IEEEremainder(hideFromCompiler(Double.NEGATIVE_INFINITY), 2.0)));
+    assertEquals(2, Math.IEEEremainder(hideFromCompiler(2), Double.POSITIVE_INFINITY), EPS);
+    assertEquals(2, Math.IEEEremainder(hideFromCompiler(2), Double.NEGATIVE_INFINITY), EPS);
+    // Any finite number divided by infinity -> same number
+    assertEquals(5.0, Math.IEEEremainder(hideFromCompiler(5.0), Double.POSITIVE_INFINITY), EPS);
+    assertTrue(Double.isNaN(Math.IEEEremainder(hideFromCompiler(Double.NaN), 2.0)));
+    assertTrue(Double.isNaN(Math.IEEEremainder(hideFromCompiler(5.0), Double.NaN)));
+    assertTrue(Double.isNaN(Math.IEEEremainder(hideFromCompiler(Double.NaN), Double.NaN)));
+  }
+
+  public void testHypot() {
+    assertEquals(5.0, Math.hypot(3.0, 4.0), EPS);
+    assertEquals(Double.POSITIVE_INFINITY, Math.hypot(1, Double.NEGATIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY, Math.hypot(Double.POSITIVE_INFINITY, 1));
+    assertEquals(Double.POSITIVE_INFINITY, Math.hypot(Double.NaN, Double.NEGATIVE_INFINITY));
+
+    assertEquals(5.0, Math.hypot(hideFromCompiler(3.0), 4.0), EPS);
+    assertEquals(Double.POSITIVE_INFINITY, Math.hypot(hideFromCompiler(-1),
+        Double.NEGATIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY, Math.hypot(hideFromCompiler(Double.POSITIVE_INFINITY),
+        1));
+    assertEquals(Double.POSITIVE_INFINITY, Math.hypot(hideFromCompiler(Double.NaN),
+        Double.NEGATIVE_INFINITY));
+  }
+
+  public void testGetExponentWithFolding() {
+    assertEquals(1, Math.getExponent(2d));
+    assertEquals(1, Math.getExponent(3d));
+    assertEquals(2, Math.getExponent(4d));
+    assertEquals(-1023, Math.getExponent(0d));
+    assertEquals(1023, Math.getExponent(Math.pow(2, 1023)));
+    assertEquals(-1023, Math.getExponent(Math.pow(2, -1023)));
+    assertEquals(1023, Math.getExponent(-Math.pow(2, 1023)));
+    assertEquals(-1023, Math.getExponent(-Math.pow(2, -1023)));
+    assertEquals(1024, Math.getExponent(Double.POSITIVE_INFINITY));
+    assertEquals(1024, Math.getExponent(Double.NEGATIVE_INFINITY));
+    assertEquals(1024, Math.getExponent(Double.NaN));
+
+    assertEquals(2, Math.getExponent(4f));
+    assertEquals(-127, Math.getExponent(0f));
+
+    assertEquals(126, Math.getExponent((float) Math.pow(2, 126)));
+    assertEquals(-126, Math.getExponent((float) Math.pow(2, -126)));
+    assertEquals(126, Math.getExponent((float) -Math.pow(2, 126)));
+    assertEquals(-126, Math.getExponent((float) -Math.pow(2, -126)));
+    assertEquals(128, Math.getExponent((float) Math.pow(2, 500)));
+    assertEquals(-127, Math.getExponent((float) Math.pow(2, -500)));
+  }
+
+  public void testGetExponent() {
+    assertEquals(1, Math.getExponent(hideFromCompiler(2d)));
+    assertEquals(1, Math.getExponent(hideFromCompiler(3d)));
+    assertEquals(2, Math.getExponent(hideFromCompiler(4d)));
+    assertEquals(-1023, Math.getExponent(hideFromCompiler(0d)));
+    assertEquals(1023, Math.getExponent(hideFromCompiler(Math.pow(2, 1023))));
+    assertEquals(-1023, Math.getExponent(hideFromCompiler(Math.pow(2, -1023))));
+    assertEquals(1023, Math.getExponent(hideFromCompiler(-Math.pow(2, 1023))));
+    assertEquals(-1023, Math.getExponent(hideFromCompiler(-Math.pow(2, -1023))));
+    assertEquals(1024, Math.getExponent(hideFromCompiler(Double.POSITIVE_INFINITY)));
+    assertEquals(1024, Math.getExponent(hideFromCompiler(Double.NEGATIVE_INFINITY)));
+    assertEquals(1024, Math.getExponent(hideFromCompiler(Double.NaN)));
+
+    assertEquals(2, Math.getExponent(hideFromCompiler(4f)));
+    assertEquals(-127, Math.getExponent(hideFromCompiler(0f)));
+
+    assertEquals(126, Math.getExponent(hideFromCompiler((float) Math.pow(2, 126))));
+    assertEquals(-126, Math.getExponent(hideFromCompiler((float) Math.pow(2, -126))));
+    assertEquals(126, Math.getExponent(hideFromCompiler((float) -Math.pow(2, 126))));
+    assertEquals(-126, Math.getExponent(hideFromCompiler((float) -Math.pow(2, -126))));
+    assertEquals(128, Math.getExponent(hideFromCompiler((float) Math.pow(2, 500))));
+    assertEquals(-127, Math.getExponent(hideFromCompiler((float) Math.pow(2, -500))));
+  }
+
+  private <T> T hideFromCompiler(T value) {
+    if (Math.random() < -1) {
+      // Can never happen, but fools the compiler enough not to optimize this call.
+      fail();
+    }
+    return value;
+  }
+
+  private void assertThrowsArithmetic(Runnable check) {
+    try {
+      check.run();
+      fail("Should have failed");
+    } catch (ArithmeticException ex) {
+      // good
     }
   }
 

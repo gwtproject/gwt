@@ -61,6 +61,15 @@ public interface LongStream extends BaseStream<Long, LongStream> {
     LongStream build();
   }
 
+  /**
+   * See <a
+   * href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/stream/LongStream.LongMapMultiConsumer.html">
+   * the official Java API doc</a> for details.
+   */
+  interface LongMapMultiConsumer {
+    void accept(long value, LongConsumer consumer);
+  }
+
   static Builder builder() {
     return new Builder() {
       private long[] items = new long[0];
@@ -362,6 +371,14 @@ public interface LongStream extends BaseStream<Long, LongStream> {
           }
         };
     return StreamSupport.longStream(spliterator, false);
+  }
+
+  default LongStream mapMulti(LongStream.LongMapMultiConsumer mapper) {
+    return flatMap(element -> {
+      Builder builder = builder();
+      mapper.accept(element, (LongConsumer) builder::add);
+      return builder.build();
+    });
   }
 
   long[] toArray();

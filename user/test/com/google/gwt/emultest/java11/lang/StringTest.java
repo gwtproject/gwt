@@ -99,12 +99,4 @@ public class StringTest extends EmulTestBase {
     assertEquals(Arrays.asList("", "", "c"),
         "\n\r\nc".lines().collect(Collectors.toList()));
   }
-
-  private <T> T hideFromCompiler(T value) {
-    if (Math.random() < -1) {
-      // Can never happen, but fools the compiler enough not to optimize this call.
-      fail();
-    }
-    return value;
-  }
 }

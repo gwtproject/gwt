@@ -58,6 +58,15 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
     DoubleStream build();
   }
 
+  /**
+   * See <a
+   * href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/stream/DoubleStream.DoubleMapMultiConsumer.html">
+   * the official Java API doc</a> for details.
+   */
+  interface DoubleMapMultiConsumer {
+    void accept(double value, DoubleConsumer consumer);
+  }
+
   static Builder builder() {
     return new Builder() {
       private double[] items = new double[0];
@@ -315,6 +324,14 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
           }
         };
     return StreamSupport.doubleStream(spliterator, false);
+  }
+
+  default DoubleStream mapMulti(DoubleStream.DoubleMapMultiConsumer mapper) {
+    return flatMap(element -> {
+      Builder builder = builder();
+      mapper.accept(element, (DoubleConsumer) builder::add);
+      return builder.build();
+    });
   }
 
   double[] toArray();

@@ -31,8 +31,7 @@ import com.google.gwt.dev.js.ast.JsNode;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsSuperVisitor;
 import com.google.gwt.dev.js.ast.JsVisitor;
-import com.google.gwt.dev.util.AbstractTextOutput;
-import com.google.gwt.dev.util.TextOutput;
+import com.google.gwt.dev.util.PrintWriterTextOutput;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -42,13 +41,17 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * A simple utility to dump a JProgram to a temp file, which can be called
- * sequentially during a compilation/optimization run, so intermediate steps can
- * be compared.
+ * A simple utility to dump a JProgram or JsProgram to a temp file, which can be called
+ * sequentially during a compilation/optimization run, so intermediate steps can be compared.
+ * <p>
+ * Uses the system property {@code gwt.jjs.dumpAst} to determine the name (or prefix) of the file
+ * to dump the AST to. Output can be filtered to specific source files with the system property
+ * {@code gwt.jjs.dumpAst.filter}, which is a comma-separated list of source file names, optionally
+ * suffixed with {@code :{startLine}-{endLine}} to only include lines in that range. Those lines
+ * will then be printed, regardless of which method/type they are migrated to during the course of
+ * compilation.
  *
- * It uses the system property "gwt.jjs.dumpAst" to determine the name (or
- * prefix) of the file to dump the AST to.
- *
+ * <p>
  * TODO(jbrosenberg): Add proper logging and/or exception handling for the
  * potential IOException that might occur when writing the file.
  */
@@ -57,13 +60,15 @@ public class AstDumper {
   private static int autoVersionNumber = 0;
 
   /**
-   * Appends a new version of the AST at the end of the file, each time it's
-   * called.
+   * Appends a new version of the Java AST at the end of the file, each time its called.
    */
   public static void maybeDumpAST(JProgram jprogram) {
     maybeDumpAST(jprogram, null, true);
   }
 
+  /**
+   * Appends a new version of the JS AST to the end of the file each time its called.
+   */
   public static void maybeDumpAST(JsProgram jsProgram) {
     maybeDumpAST(jsProgram, null, true);
   }
@@ -101,34 +106,63 @@ public class AstDumper {
 
   private static void maybeDumpAST(JProgram jprogram, String fileExtension, boolean append) {
     String dumpFile = System.getProperty("gwt.jjs.dumpAst");
-    String dumpFilter = System.getProperty("gwt.jjs.dumpAst.filter");
-    if (dumpFile != null) {
-      if (fileExtension != null) {
-        dumpFile += fileExtension;
-      }
-      try {
-        FileOutputStream os = new FileOutputStream(dumpFile, append);
-        final PrintWriter pw = new PrintWriter(os);
-        TextOutput out = new AbstractTextOutput(false) {
-          {
-            setPrintWriter(pw);
-          }
-        };
-        JVisitor v = new SourceGenerationVisitor(out);
-        if (dumpFilter != null) {
-          Set<FilterRange> files = Arrays.stream(dumpFilter.split(","))
-              .map(s -> s.trim())
-              .map(FilterRange::new)
-              .collect(Collectors.toSet());
-          v = new JFilteredAstVisitor(v, files);
-        }
-        v.accept(jprogram);
-        pw.close();
-      } catch (IOException e) {
-        System.out.println("Could not dump AST");
-        e.printStackTrace();
-      }
+    if (dumpFile == null) {
+      return;
     }
+    final Set<FilterRange> files = getFilter();
+    try (PrintWriterTextOutput out = createWriter(dumpFile, fileExtension, append)) {
+      JVisitor v = new SourceGenerationVisitor(out);
+      if (files != null) {
+        v = new JFilteredAstVisitor(v, files);
+      }
+
+      v.accept(jprogram);
+    } catch (Exception e) {
+      System.out.println("Could not dump AST");
+      e.printStackTrace();
+    }
+  }
+
+  private static void maybeDumpAST(JsProgram jsProgram, String fileExtension, boolean append) {
+    String dumpFile = System.getProperty("gwt.jjs.dumpAst");
+    if (dumpFile == null) {
+      return;
+    }
+    final Set<FilterRange> files = getFilter();
+    try (PrintWriterTextOutput out = createWriter(dumpFile, fileExtension, append)) {
+      JsVisitor v = new JsSourceGenerationVisitor(out);
+      if (files != null) {
+        v = new JsFilteredAstVisitor(v, files);
+      }
+
+      v.accept(jsProgram);
+    } catch (Exception e) {
+      System.out.println("Could not dump AST");
+      e.printStackTrace();
+    }
+  }
+
+  private static Set<FilterRange> getFilter() {
+    String dumpFilter = System.getProperty("gwt.jjs.dumpAst.filter");
+    final Set<FilterRange> files;
+    if (dumpFilter != null) {
+      files = Arrays.stream(dumpFilter.split(","))
+          .map(String::trim)
+          .map(FilterRange::new)
+          .collect(Collectors.toSet());
+    } else {
+      files = null;
+    }
+    return files;
+  }
+
+  private static PrintWriterTextOutput createWriter(String dumpFile, String fileExtension, boolean append) throws IOException {
+    if (fileExtension != null) {
+      dumpFile += fileExtension;
+    }
+    final FileOutputStream os = new FileOutputStream(dumpFile, append);
+    final PrintWriter pw = new PrintWriter(os);
+    return new PrintWriterTextOutput(pw, false);
   }
 
   private static class FilterRange {
@@ -136,11 +170,6 @@ public class AstDumper {
     private final int startLine;
     private final int endLine;
 
-    private FilterRange(String fileName, int startLine, int endLine) {
-      this.fileName = fileName;
-      this.startLine = startLine;
-      this.endLine = endLine;
-    }
     private FilterRange(String directive) {
       if (directive.contains(":")) {
         String[] parts = directive.split(":");
@@ -158,6 +187,7 @@ public class AstDumper {
         this.endLine = Integer.MAX_VALUE;
       }
     }
+
     public boolean matches(HasSourceInfo node) {
       String nodeFile = node.getSourceInfo().getFileName();
       int nodeLine = node.getSourceInfo().getStartLine();
@@ -169,7 +199,8 @@ public class AstDumper {
    * Filters the AST by type, method to determine what the delegate can see, by checking if any
    * code is present from the requested files. Any class/interface that needs to be written will be
    * visited directly (only via visit/endVisit, not accept/traverse), and only after at least one
-   * member is found that needs to be visited.
+   * member is found that needs to be visited, and members will be then be handled by accept() to
+   * limit the type to only those members which match the specified filter.
    */
   private static class JFilteredAstVisitor extends JVisitor {
     private final JVisitor delegate;
@@ -261,6 +292,11 @@ public class AstDumper {
     }
   }
 
+  /**
+   * Filters the AST by top-level node to determine what the delegate can see, by checking if any
+   * code is present from the requested files. Top level nodes are usually functions are class
+   * declaration code.
+   */
   private static class JsFilteredAstVisitor extends JsSuperVisitor {
     private final JsVisitor delegate;
     private final Set<FilterRange> sourceFiles;
@@ -307,39 +343,6 @@ public class AstDumper {
         return false;
       }
       return test(x);
-    }
-  }
-
-  private static void maybeDumpAST(JsProgram jsProgram, String fileExtension, boolean append) {
-    String dumpFile = System.getProperty("gwt.jjs.dumpAst");
-    String dumpFilter = System.getProperty("gwt.jjs.dumpAst.filter");
-    if (dumpFile != null) {
-      if (fileExtension != null) {
-        dumpFile += fileExtension;
-      }
-      try {
-        FileOutputStream os = new FileOutputStream(dumpFile, append);
-        final PrintWriter pw = new PrintWriter(os);
-        TextOutput out = new AbstractTextOutput(false) {
-          {
-            setPrintWriter(pw);
-          }
-        };
-        JsVisitor v = new JsSourceGenerationVisitor(out);
-        if (dumpFilter != null) {
-          Set<FilterRange> files = Arrays.stream(dumpFilter.split(","))
-              .map(s -> s.trim())
-              .map(FilterRange::new)
-              .collect(Collectors.toSet());
-          v = new JsFilteredAstVisitor(v, files);
-        }
-
-        v.accept(jsProgram);
-        pw.close();
-      } catch (IOException e) {
-        System.out.println("Could not dump AST");
-        e.printStackTrace();
-      }
     }
   }
 }

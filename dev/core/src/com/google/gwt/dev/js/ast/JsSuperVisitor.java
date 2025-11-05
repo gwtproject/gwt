@@ -393,7 +393,6 @@ public class JsSuperVisitor extends JsVisitor {
     return visit((JsExpression) x, ctx);
   }
 
-  @SuppressWarnings("unused")
   public boolean visit(JsNode x, JsContext ctx) {
     return true;
   }

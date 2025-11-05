@@ -25,53 +25,12 @@ import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.js.JsSourceGenerationVisitor;
-import com.google.gwt.dev.js.ast.JsArrayAccess;
-import com.google.gwt.dev.js.ast.JsArrayLiteral;
-import com.google.gwt.dev.js.ast.JsBinaryOperation;
 import com.google.gwt.dev.js.ast.JsBlock;
-import com.google.gwt.dev.js.ast.JsBooleanLiteral;
-import com.google.gwt.dev.js.ast.JsBreak;
-import com.google.gwt.dev.js.ast.JsCase;
-import com.google.gwt.dev.js.ast.JsCatch;
-import com.google.gwt.dev.js.ast.JsConditional;
 import com.google.gwt.dev.js.ast.JsContext;
-import com.google.gwt.dev.js.ast.JsContinue;
-import com.google.gwt.dev.js.ast.JsDebugger;
-import com.google.gwt.dev.js.ast.JsDefault;
-import com.google.gwt.dev.js.ast.JsDoWhile;
-import com.google.gwt.dev.js.ast.JsEmpty;
-import com.google.gwt.dev.js.ast.JsExprStmt;
-import com.google.gwt.dev.js.ast.JsFor;
-import com.google.gwt.dev.js.ast.JsForIn;
-import com.google.gwt.dev.js.ast.JsFunction;
-import com.google.gwt.dev.js.ast.JsIf;
-import com.google.gwt.dev.js.ast.JsInvocation;
-import com.google.gwt.dev.js.ast.JsLabel;
-import com.google.gwt.dev.js.ast.JsNameOf;
-import com.google.gwt.dev.js.ast.JsNameRef;
-import com.google.gwt.dev.js.ast.JsNew;
 import com.google.gwt.dev.js.ast.JsNode;
-import com.google.gwt.dev.js.ast.JsNullLiteral;
-import com.google.gwt.dev.js.ast.JsNumberLiteral;
-import com.google.gwt.dev.js.ast.JsNumericEntry;
-import com.google.gwt.dev.js.ast.JsObjectLiteral;
-import com.google.gwt.dev.js.ast.JsParameter;
-import com.google.gwt.dev.js.ast.JsPositionMarker;
-import com.google.gwt.dev.js.ast.JsPostfixOperation;
-import com.google.gwt.dev.js.ast.JsPrefixOperation;
 import com.google.gwt.dev.js.ast.JsProgram;
-import com.google.gwt.dev.js.ast.JsProgramFragment;
-import com.google.gwt.dev.js.ast.JsPropertyInitializer;
-import com.google.gwt.dev.js.ast.JsRegExp;
-import com.google.gwt.dev.js.ast.JsReturn;
-import com.google.gwt.dev.js.ast.JsStringLiteral;
-import com.google.gwt.dev.js.ast.JsSwitch;
-import com.google.gwt.dev.js.ast.JsThisRef;
-import com.google.gwt.dev.js.ast.JsThrow;
-import com.google.gwt.dev.js.ast.JsTry;
-import com.google.gwt.dev.js.ast.JsVars;
+import com.google.gwt.dev.js.ast.JsSuperVisitor;
 import com.google.gwt.dev.js.ast.JsVisitor;
-import com.google.gwt.dev.js.ast.JsWhile;
 import com.google.gwt.dev.util.AbstractTextOutput;
 import com.google.gwt.dev.util.TextOutput;
 
@@ -302,7 +261,7 @@ public class AstDumper {
     }
   }
 
-  private static class JsFilteredAstVisitor extends JsVisitor {
+  private static class JsFilteredAstVisitor extends JsSuperVisitor {
     private final JsVisitor delegate;
     private final Set<FilterRange> sourceFiles;
 
@@ -312,6 +271,11 @@ public class AstDumper {
     public JsFilteredAstVisitor(JsVisitor delegate, Set<FilterRange> sourceFiles) {
       this.delegate = delegate;
       this.sourceFiles = sourceFiles;
+    }
+
+    @Override
+    public boolean visit(JsNode x, JsContext ctx) {
+      return test(x);
     }
 
     /**
@@ -326,28 +290,13 @@ public class AstDumper {
     }
 
     @Override
-    public boolean visit(JsArrayAccess x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsArrayLiteral x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsBinaryOperation x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
     public boolean visit(JsBlock x, JsContext ctx) {
       if (x.isGlobalBlock()) {
         // Iterate children directly, so we can track what is top-level or not
         for (JsNode child : x.getStatements()) {
           accept(child);
 
-          // If any part of the node should be visited, handle it all
+          // If any part of that node should be visited, pass to the delegate and reset
           if (shouldVisitCurrentTopLevelStatement) {
             delegate.accept(child);
 
@@ -357,196 +306,6 @@ public class AstDumper {
         }
         return false;
       }
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsBooleanLiteral x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsBreak x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsCase x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsCatch x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsConditional x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsContinue x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsDebugger x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsDefault x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsDoWhile x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsEmpty x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsExprStmt x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsFor x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsForIn x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsFunction x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsIf x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsInvocation x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsLabel x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsNameOf x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsNameRef x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsNew x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsNullLiteral x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsNumberLiteral x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsNumericEntry x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsObjectLiteral x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsParameter x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsPostfixOperation x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsPrefixOperation x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsPropertyInitializer x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsRegExp x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsReturn x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsStringLiteral x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsSwitch x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsThisRef x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsThrow x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsTry x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsVars.JsVar x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsVars x, JsContext ctx) {
-      return test(x);
-    }
-
-    @Override
-    public boolean visit(JsWhile x, JsContext ctx) {
       return test(x);
     }
   }

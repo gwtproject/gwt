@@ -54,12 +54,12 @@ public abstract class JNode implements HasSourceInfo, Serializable {
   public abstract void traverse(JVisitor visitor, Context ctx);
 
   // Causes source generation to delegate to the one visitor
-  // toSource should be customized in ToStringGenerationVisitor, do not remove final.
+  // toSource should be customized in SourceGenerationVisitor, do not remove final.
   public final String toSource() {
     DefaultTextOutput out = new DefaultTextOutput(false);
     SourceGenerationVisitor v = new SourceGenerationVisitor(out);
     v.accept(this);
-    return out.toString();
+    return out.toString().trim();
   }
 
   // Causes source generation to delegate to the one visitor.

@@ -32,7 +32,7 @@ import com.google.gwt.dev.util.TextOutput;
  * relatively short toString() results, for easy viewing in a debugger. This
  * subclass delves into the bodies of classes, interfaces, and methods to
  * produce the whole source tree.
- *
+ * <p>
  * The goal is not to generate the input source tree, or even properly compilable sources.
  * Instead, this provides a way to log the AST in a human-readable way.
  */

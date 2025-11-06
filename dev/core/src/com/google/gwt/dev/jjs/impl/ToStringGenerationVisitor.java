@@ -414,6 +414,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   @Override
   public boolean visit(JDeclarationStatement x, Context ctx) {
     if (!(x.getVariableRef().getTarget() instanceof JField)) {
+      printFinalFlag(x.getVariableRef().getTarget());
       printType(x.getVariableRef().getTarget());
       space();
     }

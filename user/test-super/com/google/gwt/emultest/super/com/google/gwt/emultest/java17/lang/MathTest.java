@@ -20,7 +20,7 @@ import com.google.gwt.emultest.java.util.EmulTestBase;
 /**
  * Tests for java.lang.String Java 12 API emulation.
  */
-public class StringTest extends EmulTestBase {
+public class MathTest extends EmulTestBase {
 
   public void testAbsExact() {
     assertEquals(Integer.MAX_VALUE, Math.absExact(hideFromCompiler(Integer.MAX_VALUE)));
@@ -42,5 +42,22 @@ public class StringTest extends EmulTestBase {
     assertEquals(0, Math.absExact(0L));
     assertEquals(1, Math.absExact(-1L));
     assertThrowsArithmetic(() -> Math.absExact(Long.MIN_VALUE));
+  }
+
+  private <T> T hideFromCompiler(T value) {
+    if (Math.random() < -1) {
+      // Can never happen, but fools the compiler enough not to optimize this call.
+      fail();
+    }
+    return value;
+  }
+
+  private void assertThrowsArithmetic(Runnable check) {
+    try {
+      check.run();
+      fail("Should have failed");
+    } catch (ArithmeticException ex) {
+      // good
+    }
   }
 }

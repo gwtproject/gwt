@@ -175,7 +175,7 @@ public final class Double extends Number implements Comparable<Double> {
 
   @Override
   public boolean equals(Object o) {
-    return checkNotNull(this) == o;
+    return JsUtils.objectIs(checkNotNull(this), o);
   }
 
   @Override
@@ -187,7 +187,7 @@ public final class Double extends Number implements Comparable<Double> {
    * Performance caution: using Double objects as map keys is not recommended.
    * Using double values as keys is generally a bad idea due to difficulty
    * determining exact equality. In addition, there is no efficient JavaScript
-   * equivalent of <code>doubleToIntBits</code>. As a result, this method
+   * equivalent of <code>doubleToLongBits</code>. As a result, this method
    * computes a hash code by truncating the whole number portion of the double,
    * which may lead to poor performance for certain value sets if Doubles are
    * used as keys in a {@link java.util.HashMap}.

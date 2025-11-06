@@ -39,6 +39,9 @@ public final class JsUtils {
   @JsMethod(namespace = "<window>", name = "typeof")
   public static native String typeOf(Object obj);
 
+  @JsMethod(namespace = "<window>", name = "Object.is")
+  public static native boolean objectIs(Object a, Object b);
+
   public static String toPrecision(double value, int precision) {
     NativeNumber number = JsUtils.uncheckedCast(value);
     return number.toPrecision(precision);

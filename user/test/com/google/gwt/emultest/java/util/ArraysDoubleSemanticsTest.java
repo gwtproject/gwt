@@ -15,27 +15,17 @@
  */
 package com.google.gwt.emultest.java.util;
 
-import com.google.gwt.testing.TestUtils;
-
 import java.util.Arrays;
 
 /** Tests {@link Arrays} (incorrect) Double semantics. */
 public class ArraysDoubleSemanticsTest extends EmulTestBase {
 
   public void testEquals() throws Exception {
-    // Semantics don't match JVM.
-    if (TestUtils.isJvm()) {
-      return;
-    }
 
-    // Should be assertFalse(Arrays.equals(new Double[] {-0.0d}, new Double[] {0.0d}));
+    assertFalse(Arrays.equals(new Double[] {-0.0d}, new Double[] {0.0d}));
     assertTrue(Arrays.equals(new Double[] {-0.0d}, new Double[] {0.0d}));
-    // Should be assertTrue(Arrays.equals(new Double[] {-0.0d}, new Double[] {0.0d}));
-    assertFalse(Arrays.equals(new Double[] {Double.NaN}, new Double[] {Double.NaN}));
 
-    // Should be assertFalse(Arrays.equals(new double[] {-0.0d}, new double[] {0.0d}));
-    assertTrue(Arrays.equals(new double[] {-0.0d}, new double[] {0.0d}));
-    // Should be assertTrue(Arrays.equals(new double[] {Double.NaN}, new double[] {Double.NaN}));
-    assertFalse(Arrays.equals(new double[] {Double.NaN}, new double[] {Double.NaN}));
+    assertFalse(Arrays.equals(new double[] {-0.0d}, new double[] {0.0d}));
+    assertTrue(Arrays.equals(new double[] {Double.NaN}, new double[] {Double.NaN}));
   }
 }

@@ -17,6 +17,7 @@ package java.util;
 
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
+import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -87,4 +88,12 @@ public interface Collection<E> extends Iterable<E> {
 
   @JsIgnore
   <T> T[] toArray(T[] a);
+
+  @JsIgnore
+  default <T> T[] toArray(IntFunction<T[]> factory) {
+    // This differs from the JDK's default implementation, which according to Javadoc
+    // will call the function with zero, as this then requires GWT to clone the array
+    // again before using it.
+    return toArray(factory.apply(size()));
+  }
 }

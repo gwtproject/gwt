@@ -17,6 +17,7 @@ package com.google.gwt.emultest.java11.util;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -37,15 +38,10 @@ public class CollectionTest extends EmulTestBase {
   }
 
   public void testSetArrayOfMethodRef() {
-    String[] arr = Set.of("a", "b").toArray(String[]::new);
+    Set<String> ab = Set.of("a", "b");
+    String[] arr = ab.toArray(String[]::new);
     assertEquals(2, arr.length);
     assertTrue(arr instanceof String[]);
-
-    // Order isn't guaranteed in a Set, so we compare against a known array, which will use the
-    // same traversal as long as nothing else has changed
-    Object[] objArr = Set.of("a", "b").toArray();
-    for (int i = 0; i < arr.length; i++) {
-      assertEquals(objArr[i], arr[i]);
-    }
+    assertTrue(ab.containsAll(Arrays.asList(arr)));
   }
 }

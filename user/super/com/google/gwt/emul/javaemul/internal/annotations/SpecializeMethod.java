@@ -22,6 +22,10 @@ import java.lang.annotation.Target;
  * An annotation to mark a given method as being specialized. If the specified
  * parameters and return context match of a JMethodCall, then the call
  * is retargeted at the specialized version.
+ * <p/>
+ * The annotated method must call the target method directly, and the compiler
+ * must not inline the target method to prevent it from being pruned while it
+ * still might be used.
  */
 @Target(ElementType.METHOD)
 @CompilerHint

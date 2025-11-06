@@ -128,7 +128,7 @@ public class SourceGenerationVisitor extends ToStringGenerationVisitor {
 
     openBlock();
 
-    return false;
+    return true;
   }
 
   @Override

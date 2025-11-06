@@ -413,11 +413,11 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
 
   @Override
   public boolean visit(JDeclarationStatement x, Context ctx) {
-    if (!suppressType) {
-      accept(x.getVariableRef().getTarget());
-    } else {
-      accept(x.getVariableRef());
+    if (!(x.getVariableRef().getTarget() instanceof JField)) {
+      printType(x.getVariableRef().getTarget());
+      space();
     }
+    printName(x.getVariableRef().getTarget());
     JExpression initializer = x.getInitializer();
     if (initializer != null) {
       print(" = ");

@@ -20,6 +20,7 @@ import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.cfg.Properties;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
+import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
 
 import java.io.File;
 import java.io.IOException;
@@ -61,7 +62,8 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
     File compilerWorkDir = getCompilerWorkDir(moduleName);
     if (compilerWorkDir.exists()) {
       try {
-        MoreFiles.deleteDirectoryContents(compilerWorkDir.toPath());
+        MoreFiles.deleteDirectoryContents(compilerWorkDir.toPath(),
+            RecursiveDeleteOption.ALLOW_INSECURE);
       } catch (IOException e) {
         logger.log(TreeLogger.ERROR, "Unable to delete contents of " + compilerWorkDir, e);
         throw new UnableToCompleteException();

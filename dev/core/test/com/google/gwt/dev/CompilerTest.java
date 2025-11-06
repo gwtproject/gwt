@@ -37,6 +37,7 @@ import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
+import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
 
 import java.io.File;
 import java.io.IOException;
@@ -2505,7 +2506,7 @@ public class CompilerTest extends ArgProcessorTestBase {
       // is clean to avoid confusion when returning the output JS.
       File outputDir = new File(applicationDir.getPath() + File.separator + moduleName);
       if (outputDir.exists()) {
-        MoreFiles.deleteDirectoryContents(outputDir.toPath());
+        MoreFiles.deleteDirectoryContents(outputDir.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
       }
 
       // Fake out the resource loader to read resources both from the normal classpath as well as
@@ -2537,7 +2538,7 @@ public class CompilerTest extends ArgProcessorTestBase {
       // Run the compiler once here.
       Compiler.compile(logger, options);
     } finally {
-      MoreFiles.deleteRecursively(compileWorkDir.toPath());
+      MoreFiles.deleteRecursively(compileWorkDir.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
       if (oldPersistentUnitCacheValue == null) {
         System.clearProperty(UnitCacheSingleton.GWT_PERSISTENTUNITCACHE);
       } else {
@@ -2584,8 +2585,8 @@ public class CompilerTest extends ArgProcessorTestBase {
       } else {
         System.setProperty(UnitCacheSingleton.GWT_PERSISTENTUNITCACHE, oldPersistentUnitCacheValue);
       }
-      MoreFiles.deleteRecursively(firstCompileWorkDir.toPath());
-      MoreFiles.deleteRecursively(secondCompileWorkDir.toPath());
+      MoreFiles.deleteRecursively(firstCompileWorkDir.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
+      MoreFiles.deleteRecursively(secondCompileWorkDir.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
     }
   }
 
@@ -2689,7 +2690,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     // clean to avoid confusion when returning the output JS.
     File outputDir = new File(applicationDir.getPath() + File.separator + moduleName);
     if (outputDir.exists()) {
-      MoreFiles.deleteDirectoryContents(outputDir.toPath());
+      MoreFiles.deleteDirectoryContents(outputDir.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
     }
 
     // Fake out the resource loader to read resources both from the normal classpath as well as this

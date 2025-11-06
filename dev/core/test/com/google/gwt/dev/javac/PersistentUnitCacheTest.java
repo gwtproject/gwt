@@ -19,6 +19,7 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
+import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
 import com.google.gwt.thirdparty.guava.common.util.concurrent.Futures;
 
 import junit.framework.TestCase;
@@ -69,7 +70,7 @@ public class PersistentUnitCacheTest extends TestCase {
   public void tearDown() {
     if (lastParentDir != null) {
       try {
-        MoreFiles.deleteRecursively(lastParentDir.toPath());
+        MoreFiles.deleteRecursively(lastParentDir.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
       } catch (IOException e) {
         throw new UncheckedIOException(e);
       }

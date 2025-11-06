@@ -19,8 +19,8 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
-
 import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
+
 import junit.framework.TestCase;
 
 import java.io.File;

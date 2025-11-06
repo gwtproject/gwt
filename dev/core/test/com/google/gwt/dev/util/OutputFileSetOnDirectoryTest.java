@@ -14,8 +14,8 @@
 package com.google.gwt.dev.util;
 
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
-
 import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
+
 import junit.framework.TestCase;
 
 import java.io.File;

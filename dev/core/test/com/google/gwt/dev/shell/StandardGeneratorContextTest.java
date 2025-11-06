@@ -31,8 +31,8 @@ import com.google.gwt.dev.javac.CompilationStateBuilder;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
-
 import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
+
 import junit.framework.TestCase;
 
 import java.io.ByteArrayOutputStream;

@@ -56,6 +56,7 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
+import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -345,7 +346,7 @@ public class Link {
     } else {
       File target = new File(dirOrJar, pathPrefix);
       if (target.exists()) {
-        MoreFiles.deleteDirectoryContents(target.toPath());
+        MoreFiles.deleteDirectoryContents(target.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
       }
       return new OutputFileSetOnDirectory(dirOrJar, pathPrefix);
     }

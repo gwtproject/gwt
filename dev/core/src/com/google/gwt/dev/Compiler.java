@@ -40,6 +40,7 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
+import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
 
 import java.io.File;
 import java.io.IOException;
@@ -247,7 +248,8 @@ public class Compiler {
     } finally {
       if (tempWorkDir) {
         try {
-          MoreFiles.deleteRecursively(options.getWorkDir().toPath());
+          MoreFiles.deleteRecursively(options.getWorkDir().toPath(),
+              RecursiveDeleteOption.ALLOW_INSECURE);
         } catch (IOException e) {
           logger.log(TreeLogger.WARN, "Unable to delete temporary work directory: "
               + options.getWorkDir(), e);

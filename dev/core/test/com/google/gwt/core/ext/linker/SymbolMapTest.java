@@ -26,6 +26,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
+import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
 
 import junit.framework.TestCase;
 
@@ -242,7 +243,7 @@ public class SymbolMapTest extends TestCase {
         assertSymbolUniquenessForMethods(symbolDataByJsniIdentifier);
       }
     } finally {
-      MoreFiles.deleteRecursively(work.toPath());
+      MoreFiles.deleteRecursively(work.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
     }
   }
 

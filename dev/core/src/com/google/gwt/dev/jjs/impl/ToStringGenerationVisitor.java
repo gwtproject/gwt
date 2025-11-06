@@ -35,6 +35,7 @@ import com.google.gwt.dev.jjs.ast.JCastMap;
 import com.google.gwt.dev.jjs.ast.JCastOperation;
 import com.google.gwt.dev.jjs.ast.JCharLiteral;
 import com.google.gwt.dev.jjs.ast.JClassLiteral;
+import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConditional;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JContinueStatement;
@@ -145,6 +146,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   protected static final char[] CHARS_SWITCH = "switch ".toCharArray();
   protected static final char[] CHARS_THIS = "this".toCharArray();
   protected static final char[] CHARS_THROW = "throw".toCharArray();
+  protected static final char[] CHARS_THROWS = "throws ".toCharArray();
   protected static final char[] CHARS_TRUE = "true".toCharArray();
   protected static final char[] CHARS_TRY = "try ".toCharArray();
   protected static final char[] CHARS_UNCHECKED_CAST = "(/* @unchecked cast to ".toCharArray();
@@ -1091,6 +1093,16 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
 
     // Parameters
     printParameterList(x);
+
+    // Declared exceptions
+    if (!x.getThrownExceptions().isEmpty()) {
+      space();
+      print(CHARS_THROWS);
+      for (JClassType thrownException : x.getThrownExceptions()) {
+        printTypeName(thrownException);
+        space();
+      }
+    }
   }
 
   private void printAccess(AccessModifier access) {

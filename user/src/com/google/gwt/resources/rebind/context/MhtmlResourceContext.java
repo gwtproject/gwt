@@ -64,6 +64,7 @@ public class MhtmlResourceContext extends StaticResourceContext {
   }
 
   @Override
+  @SuppressWarnings("checkstyle:SpaceAfterColon")
   public String deploy(String suggestedFileName, String mimeType, byte[] data,
       boolean forceExternal) throws UnableToCompleteException {
 
@@ -104,9 +105,7 @@ public class MhtmlResourceContext extends StaticResourceContext {
 
     pw.println("--" + BOUNDARY);
     pw.println("Content-Id:<" + location + ">");
-    // CHECKSTYLE_OFF
     pw.println("Content-Type:" + mimeType);
-    // CHECKSTYLE_ON
     pw.println("Content-Transfer-Encoding:base64");
     pw.println();
     pw.println(base64);

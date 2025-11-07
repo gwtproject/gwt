@@ -32,6 +32,7 @@ class InlineResourceContext extends StaticResourceContext {
   }
 
   @Override
+  @SuppressWarnings("checkstyle:SpaceAfterColon")
   public String deploy(String suggestedFileName, String mimeType, byte[] data,
       boolean forceExternal) throws UnableToCompleteException {
     TreeLogger logger = getLogger();
@@ -42,10 +43,8 @@ class InlineResourceContext extends StaticResourceContext {
 
       String base64Contents = toBase64(data);
 
-      // CHECKSTYLE_OFF
       String encoded = "\"data:" + mimeType.replaceAll("\"", "\\\\\"")
           + ";base64," + base64Contents + "\"";
-      // CHECKSTYLE_ON
 
       /*
        * We know that the encoded format will be one byte per character, since

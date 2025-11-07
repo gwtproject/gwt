@@ -106,17 +106,15 @@ public class JsDate extends JavaScriptObject {
     return Date.parse(dateString);
   }-*/;
 
-  // CHECKSTYLE_OFF: Matching the spec.
   /**
    * Returns the internal millisecond representation of the specified UTC date
    * and time.
    */
+  @SuppressWarnings("checkstyle:MethodName")
   public static native double UTC(int year, int month, int dayOfMonth, int hours,
       int minutes, int seconds, int millis) /*-{
     return Date.UTC(year, month, dayOfMonth, hours, minutes, seconds, millis);
   }-*/;
-
-  // CHECKSTYLE_ON
 
   /**
    * Non directly instantiable, use one of the {@link #create()} methods.

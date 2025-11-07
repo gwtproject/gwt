@@ -118,7 +118,6 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
         }
       }
       if (failIfScriptTags) {
-        // CHECKSTYLE_OFF
         String msg =
             "The " + getDescription()
                 + " linker does not support <script> tags in the gwt.xml files, but the"
@@ -129,7 +128,6 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
                 + " this error, you will need to remove the script tags from the"
                 + " gwt.xml file, or add this property to the gwt.xml file:"
                 + " <set-configuration-property name='xsiframe.failIfScriptTag' value='FALSE'/>";
-        // CHECKSTYLE_ON
         logger.log(TreeLogger.ERROR, msg);
         throw new UnableToCompleteException();
       } else {
@@ -602,6 +600,7 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
 
   // Output compilation-mappings.txt
   @Override
+  @SuppressWarnings("checkstyle:SpaceAfterColon")
   protected void maybeOutputPropertyMap(TreeLogger logger, LinkerContext context,
       ArtifactSet toReturn) {
     if (permutationsUtil.getPermutationsMap() == null
@@ -617,9 +616,7 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     EmittedArtifact serializedMap;
     try {
       String mappings = mappingArtifact.getSerialized();
-      // CHECKSTYLE_OFF
       mappings = mappings.concat("Devmode:" + getHostedFilename());
-      // CHECKSTYLE_ON
       serializedMap = emitString(logger, mappings, "compilation-mappings.txt");
       // TODO(unnurg): make this Deploy
       serializedMap.setVisibility(Visibility.Public);
@@ -681,7 +678,6 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
       // only needed in SSSS, breaks WebWorker linker if done all the time
       out.append("if (" + context.getModuleFunctionName() + ".succeeded) {\n");
     }
-
 
     if (shouldInstallCode(context)) {
       // Rewrite the code so it can be installed with

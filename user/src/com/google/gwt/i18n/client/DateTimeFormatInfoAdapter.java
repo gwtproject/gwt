@@ -32,8 +32,6 @@ class DateTimeFormatInfoAdapter extends DefaultDateTimeFormatInfo {
     this.dtc = dtc;
   }
 
-  // CHECKSTYLE_OFF
-
   @Override
   public String[] ampms() {
     return dtc.ampms();

@@ -49,6 +49,7 @@ import java.util.regex.Pattern;
 /**
  * A utility to make all the HTML files for one permutation.
  */
+@SuppressWarnings("checkstyle:SpaceAfterColon")
 public class MakeTopLevelHtmlForPerm {
   /**
    * A dependency linker for the initial code download. It links to the
@@ -376,7 +377,8 @@ public class MakeTopLevelHtmlForPerm {
           + "See why it's live</a></li>\");");
       outFile.println("    for (var sp = 1; sp <= "
           + globalInformation.getNumFragments() + "; sp++) {");
-      outFile.println("      var d2 = 'methodDependencies-sp' + sp + '-" + getPermutationId() + ".html';");
+      outFile.println("      var d2 = 'methodDependencies-sp' + sp + '-"
+          + getPermutationId() + ".html';");
       outFile.println("      document.write(\"<li><a href='\" + d2 + \"#\" + className +\"'>"
           + " See why it's not exclusive to s.p. #\" + sp + \" (\" + spl[sp - 1] + \")"
           + "</a></li>\");");
@@ -786,10 +788,8 @@ public class MakeTopLevelHtmlForPerm {
           outFile.println("<td>" + className + "</a></td>");
           outFile.println("<td class=\"soyc-bargraph-col\">");
           outFile.println("<div class=\"soyc-bar-graph goog-inline-block\">");
-          // CHECKSTYLE_OFF
           outFile.println("<div style=\"width:" + (perc * 100.0)
               + "%;\" class=\"soyc-bar-graph-fill goog-inline-block\"></div>");
-          // CHECKSTYLE_ON
           outFile.println("</div>");
           outFile.println("</td>");
           outFile.println("<td class=\"soyc-numerical-col\">");
@@ -1137,10 +1137,8 @@ public class MakeTopLevelHtmlForPerm {
             }
             outFile.println("<td class=\"soyc-bargraph-col\">");
             outFile.println("<div class=\"soyc-bar-graph goog-inline-block\">");
-            // CHECKSTYLE_OFF
             outFile.println("<div style=\"width:" + (perc * 100.0)
                 + "%;\" class=\"soyc-bar-graph-fill goog-inline-block\"></div>");
-            // CHECKSTYLE_ON
             outFile.println("</div>");
             outFile.println("</td>");
             outFile.println("<td class=\"soyc-numerical-col\">");
@@ -1314,10 +1312,8 @@ public class MakeTopLevelHtmlForPerm {
             + "</a></td>");
         outFile.println("<td class=\"soyc-bargraph-col\">");
         outFile.println("<div class=\"soyc-bar-graph goog-inline-block\">");
-        // CHECKSTYLE_OFF
         outFile.println("<div style=\"width:" + (perc * 100.0)
             + "%;\" class=\"soyc-bar-graph-fill goog-inline-block\"></div>");
-        // CHECKSTYLE_ON
         outFile.println("</div>");
         outFile.println("</td>");
         outFile.println("<td class=\"soyc-numerical-col\">");
@@ -1391,7 +1387,8 @@ public class MakeTopLevelHtmlForPerm {
   private String[] getUnreferencedTypes(
       PrecompilationMetricsArtifact precompilationMetrics) {
     List<String> astTypes = Lists.newArrayList(precompilationMetrics.getAstTypes());
-    Set<String> unreferencedTypes = Sets.newHashSet(precompilationMetrics.getFinalTypeOracleTypes());
+    Set<String> unreferencedTypes = Sets.newHashSet(
+        precompilationMetrics.getFinalTypeOracleTypes());
     unreferencedTypes.removeAll(astTypes);
     String[] results = unreferencedTypes.toArray(new String[unreferencedTypes.size()]);
     Arrays.sort(results);
@@ -1515,10 +1512,8 @@ public class MakeTopLevelHtmlForPerm {
             + "\" target=\"_top\">" + codeType + "</a></td>");
         outFile.println("<td class=\"soyc-bargraph-col\">");
         outFile.println("<div class=\"soyc-bar-graph goog-inline-block\">");
-        // CHECKSTYLE_OFF
         outFile.println("<div style=\"width:" + (perc * 100.0)
             + "%;\" class=\"soyc-bar-graph-fill goog-inline-block\"></div>");
-        // CHECKSTYLE_ON
         outFile.println("</div>");
         outFile.println("</td>");
         outFile.println("<td class=\"soyc-numerical-col\">");
@@ -1814,10 +1809,8 @@ public class MakeTopLevelHtmlForPerm {
             + "\" target=\"_top\">" + packageName + "</a></td>");
         outFile.println("<td class=\"soyc-bargraph-col\">");
         outFile.println("<div class=\"soyc-bar-graph goog-inline-block\">");
-        // CHECKSTYLE_OFF
         outFile.println("<div style=\"width:" + (perc * 100.0)
             + "%;\" class=\"soyc-bar-graph-fill goog-inline-block\"></div>");
-        // CHECKSTYLE_ON
         outFile.println("</div>");
         outFile.println("</td>");
         outFile.println("<td class=\"soyc-numerical-col\">");

@@ -43,11 +43,10 @@ import java.util.regex.Pattern;
 
 import javax.lang.model.SourceVersion;
 
-// CHECKSTYLE_NAMING_OFF
-
 /**
  * Configures a module definition object using XML.
  */
+@SuppressWarnings({"checkstyle:MemberName", "checkstyle:MethodName"})
 public class ModuleDefSchema extends Schema {
 
   private final class BodySchema extends Schema {
@@ -299,7 +298,7 @@ public class ModuleDefSchema extends Schema {
       return null;
     }
 
-    @SuppressWarnings("unused") // called reflectively
+    @SuppressWarnings({"unused", "checkstyle:ParameterName"}) // called reflectively
     protected Schema __define_configuration_property_begin(PropertyName name,
         String is_multi_valued) throws UnableToCompleteException {
       boolean isMultiValued = toPrimitiveBoolean(is_multi_valued);
@@ -1513,4 +1512,3 @@ public class ModuleDefSchema extends Schema {
     return fn;
   }
 }
-// CHECKSTYLE_NAMING_ON

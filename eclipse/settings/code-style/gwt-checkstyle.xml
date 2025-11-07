@@ -117,6 +117,7 @@ Description:
             <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="check that a space is left after a colon with an assembled error message"/>
             <property name="severity" value="info"/>
             <property name="id" value="SpaceAfterColon"/>
+            <property name="ignoreComments" value="true"/>
             <property name="format" value="[^:^&quot;]:&quot; .*+"/>
             <property name="message" value="check that a space is left after a colon on an assembled error message"/>
             <property name="illegalPattern" value="true"/>

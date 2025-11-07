@@ -32,7 +32,6 @@ class InlineResourceContext extends StaticResourceContext {
   }
 
   @Override
-  @SuppressWarnings("checkstyle:SpaceAfterColon")
   public String deploy(String suggestedFileName, String mimeType, byte[] data,
       boolean forceExternal) throws UnableToCompleteException {
     TreeLogger logger = getLogger();
@@ -42,7 +41,7 @@ class InlineResourceContext extends StaticResourceContext {
       logger.log(TreeLogger.DEBUG, "Inlining", null);
 
       String base64Contents = toBase64(data);
-
+      @SuppressWarnings("checkstyle:SpaceAfterColon")
       String encoded = "\"data:" + mimeType.replaceAll("\"", "\\\\\"")
           + ";base64," + base64Contents + "\"";
 

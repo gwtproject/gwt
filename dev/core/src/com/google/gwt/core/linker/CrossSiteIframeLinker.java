@@ -434,13 +434,15 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     out.print("function __gwtStartLoadingFragment(frag) {");
     out.newlineOpt();
     String fragDir = getFragmentSubdir(logger, context) + '/';
-    out.print("var fragFile = '" + fragDir + "' + $strongName + '/' + frag + '" + FRAGMENT_EXTENSION + "';");
+    out.print("var fragFile = '" + fragDir + "' + $strongName + '/' + frag + '"
+        + FRAGMENT_EXTENSION + "';");
     out.newlineOpt();
     out.print("return __gwtModuleFunction.__startLoadingFragment(fragFile);");
     out.newlineOpt();
     out.print("}");
     out.newlineOpt();
-    out.print("function __gwtInstallCode(code) {return __gwtModuleFunction.__installRunAsyncCode(code);}");
+    out.print("function __gwtInstallCode(code) {"
+        + "return __gwtModuleFunction.__installRunAsyncCode(code);}");
     out.newlineOpt();
 
     // The functions for property access are set up in the bootstrap script however
@@ -600,7 +602,6 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
 
   // Output compilation-mappings.txt
   @Override
-  @SuppressWarnings("checkstyle:SpaceAfterColon")
   protected void maybeOutputPropertyMap(TreeLogger logger, LinkerContext context,
       ArtifactSet toReturn) {
     if (permutationsUtil.getPermutationsMap() == null
@@ -616,7 +617,9 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     EmittedArtifact serializedMap;
     try {
       String mappings = mappingArtifact.getSerialized();
-      mappings = mappings.concat("Devmode:" + getHostedFilename());
+      @SuppressWarnings("checkstyle:SpaceAfterColon")
+      String str = "Devmode:" + getHostedFilename();
+      mappings = mappings.concat(str);
       serializedMap = emitString(logger, mappings, "compilation-mappings.txt");
       // TODO(unnurg): make this Deploy
       serializedMap.setVisibility(Visibility.Public);

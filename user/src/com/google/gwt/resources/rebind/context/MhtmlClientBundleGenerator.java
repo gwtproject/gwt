@@ -49,7 +49,6 @@ public class MhtmlClientBundleGenerator extends AbstractClientBundleGenerator {
   }
 
   @Override
-  @SuppressWarnings("checkstyle:SpaceAfterColon")
   protected void doAddFieldsAndRequirements(TreeLogger logger,
       GeneratorContext generatorContext, FieldsImpl fields,
       ClientBundleRequirements requirements) throws UnableToCompleteException {

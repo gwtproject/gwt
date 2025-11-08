@@ -44,13 +44,11 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
     return (long) parsed;
   }
 
-  // CHECKSTYLE_OFF: Matching the spec.
+  @SuppressWarnings("checkstyle:MethodName")
   public static long UTC(int year, int month, int date, int hrs, int min,
       int sec) {
     return (long) NativeDate.UTC(year + 1900, month, date, hrs, min, sec, 0);
   }
-
-  // CHECKSTYLE_ON
 
   /**
    * Ensure a number is displayed with two digits.
@@ -299,10 +297,9 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
 
   @JsType(isNative = true, name = "Date", namespace = JsPackage.GLOBAL)
   private static class NativeDate {
-    // CHECKSTYLE_OFF: Matching the spec.
+    @SuppressWarnings("checkstyle:MethodName")
     public static native double UTC(int year, int month, int dayOfMonth, int hours,
         int minutes, int seconds, int millis);
-    // CHECKSTYLE_ON
     public static native double parse(String dateString);
     public NativeDate() { }
     public NativeDate(double milliseconds) { }

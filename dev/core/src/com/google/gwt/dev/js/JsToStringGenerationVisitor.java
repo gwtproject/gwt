@@ -84,6 +84,7 @@ import java.util.Set;
 /**
  * Produces text output from a JavaScript AST.
  */
+@SuppressWarnings("checkstyle:MethodName")
 public class JsToStringGenerationVisitor extends JsVisitor {
 
   private static final char[] CHARS_BREAK = "break".toCharArray();
@@ -888,8 +889,6 @@ public class JsToStringGenerationVisitor extends JsVisitor {
     return false;
   }
 
-//CHECKSTYLE_NAMING_OFF
-
   protected void _newline() {
     p.newline();
   }
@@ -1307,8 +1306,6 @@ public class JsToStringGenerationVisitor extends JsVisitor {
   private void _while() {
     p.print(CHARS_WHILE);
   }
-
-// CHECKSTYLE_NAMING_ON
 
   private void indent() {
     p.indentIn();

@@ -14,7 +14,5 @@
  * the License.
  */
 
-// CHECKSTYLE_OFF
-
 package com.google.gwt.dev.jjs.test.unusedimports;
 

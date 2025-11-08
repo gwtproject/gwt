@@ -11,7 +11,7 @@ A more lenient set of style checks for test cases, needed because test often nee
 <module name="Checker">
     <property name="severity" value="warning"/>
     <module name="RegexpHeader">
-       <property name="fileExtensions" value="java"/> 
+       <property name="fileExtensions" value="java"/>
        <property name="severity" value="error"/>
        <property name="header" value="^/\*[ ]*$\n^ \* Copyright 20(0[6789]|[12][0-9]) (Google Inc\.|GWT Project Authors)$\n^ \*[ ]*$\n^ \* Licensed under the Apache License, Version 2\.0 \(the &quot;License&quot;\); you may not( use this file except)?$\n^ \* (use this file except )?in compliance with the License\. You may obtain a copy of( the License at)?$\n^ \* the License at$\n^ \*[ ]*$\n^ \* http://www\.apache\.org/licenses/LICENSE-2\.0$\n^ \*[ ]*\n \* Unless required by applicable law or agreed to in writing, software( distributed under the License)?$\n^ \* (distributed under the License )?is distributed on an &quot;AS IS&quot; BASIS, WITHOUT( WARRANTIES OR CONDITIONS OF ANY KIND, either express)?$\n^ \* (WARRANTIES OR CONDITIONS OF ANY KIND, either express )?or implied\. See the( License for the specific language governing permissions and limitations under)?$\n^ \* License for the specific language governing permissions and limitations under$\n^ \* the License\.$\n^ \*/$"/>
        <property name="multiLines" value="6,13"/>
@@ -22,7 +22,8 @@ A more lenient set of style checks for test cases, needed because test often nee
         <property name="severity" value="error"/>
     </module>
     <module name="TreeWalker">
-        <property name="fileExtensions" value="java"/> 
+        <property name="fileExtensions" value="java"/>
+        <module name="SuppressWarningsHolder" />
         <module name="InterfaceIsType">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="error"/>
             <property name="severity" value="ignore"/>
@@ -53,7 +54,7 @@ A more lenient set of style checks for test cases, needed because test often nee
         <module name="LocalVariableName">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="error"/>
             <property name="severity" value="ignore"/>
-            <property name="tokens" value="PARAMETER_DEF,VARIABLE_DEF"/>
+            <property name="tokens" value="VARIABLE_DEF"/>
         </module>
         <module name="LeftCurly"/>
         <module name="RightCurly"/>
@@ -118,13 +119,6 @@ A more lenient set of style checks for test cases, needed because test often nee
             <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="error"/>
             <property name="severity" value="ignore"/>
             <property name="classes" value="Boolean"/>
-        </module>
-        <module name="Regexp">
-            <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="check that a space is left after a colon with an assembled error message"/>
-            <property name="severity" value="info"/>
-            <property name="format" value="[^:^&quot;]:&quot; .*+"/>
-            <property name="message" value="check that a space is left after a colon on an assembled error message"/>
-            <property name="illegalPattern" value="true"/>
         </module>
         <module name="Regexp">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="more than one blank line"/>
@@ -211,24 +205,6 @@ A more lenient set of style checks for test cases, needed because test often nee
         </module>
         <module name="RedundantModifier"/>
         <module name="EqualsHashCode"/>
-        <module name="SuppressionCommentFilter">
-            <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
-            <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
-            <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
-            <property name="checkFormat" value="MethodName"/>
-        </module>
-        <module name="SuppressionCommentFilter">
-            <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
-            <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
-            <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
-            <property name="checkFormat" value="MemberName"/>
-        </module>
-        <module name="SuppressionCommentFilter">
-            <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
-            <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
-            <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
-            <property name="checkFormat" value="ParameterName"/>
-        </module>
     </module>
     <module name="SuppressWithPlainTextCommentFilter">
         <property name="offCommentFormat" value="CHECKSTYLE_OFF"/>
@@ -237,4 +213,5 @@ A more lenient set of style checks for test cases, needed because test often nee
     <module name="JavadocPackage">
         <property name="severity" value="ignore"/>
     </module>
+    <module name="SuppressWarningsFilter" />
 </module>

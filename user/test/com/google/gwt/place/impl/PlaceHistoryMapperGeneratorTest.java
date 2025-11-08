@@ -113,7 +113,7 @@ public class PlaceHistoryMapperGeneratorTest extends GWTTestCase {
    * When asked to GWT.create a concrete implementation of PlaceHistoryMapper,
    * the generator politely instantiates it. This is to make life easier
    * for GIN users. See 
-   * http://code.google.com/p/google-web-toolkit/issues/detail?id=5563
+   * <a href="https://github.com/gwtproject/gwt/issues/5562">GitHub issue</a>.
    */
   public void testNotAnInterface() {
     PlaceHistoryMapper subject = GWT.create(LocalConcreteClass.class);
@@ -122,7 +122,7 @@ public class PlaceHistoryMapperGeneratorTest extends GWTTestCase {
   }
 
   /**
-   * See https://code.google.com/p/google-web-toolkit/issues/detail?id=8036
+   * See <a href="https://github.com/gwtproject/gwt/issues/8033">GitHub issue</a>.
    */
   public void testSortOrder() {
     PlaceHistoryMapper subject = GWT.create(SortOrder.class);
@@ -131,7 +131,6 @@ public class PlaceHistoryMapperGeneratorTest extends GWTTestCase {
     assertEquals("Place3:" + place3.content, subject.getToken(place3));
   }
 
-  // CHECKSTYLE_OFF
   private void doTest(AbstractPlaceHistoryMapper<?> subject,
       TokenizerFactory factory) {
     String history1 = subject.getPrefixAndToken(place1).toString();
@@ -179,5 +178,4 @@ public class PlaceHistoryMapperGeneratorTest extends GWTTestCase {
     assertNull(subject.getPrefixAndToken(place));
     assertNull(subject.getTokenizer("snot"));
   }
-  // CHECKSTYLE_ON
 }

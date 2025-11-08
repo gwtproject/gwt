@@ -90,8 +90,8 @@ public interface CharSequence {
     return cs1.toString().compareTo(cs2.toString());
   }
 
-  // CHECKSTYLE_OFF: Utility methods.
   @JsMethod
+  @SuppressWarnings("checkstyle:MethodName")
   static boolean $isInstance(HasCharSequenceTypeMarker instance) {
     if (JsUtils.typeOf(instance).equals("string")) {
       return true;
@@ -99,5 +99,4 @@ public interface CharSequence {
 
     return instance != null && instance.getTypeMarker() == true;
   }
-  // CHECKSTYLE_ON: end utility methods
 }

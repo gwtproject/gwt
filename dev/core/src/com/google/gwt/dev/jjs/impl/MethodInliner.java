@@ -439,9 +439,8 @@ public class MethodInliner {
               return InlineResult.DO_NOT_BLACKLIST;
             }
           }
-          // CHECKSTYLE_OFF: Fall through!
+          // fall through!
         case CORRECT_ORDER:
-          // CHECKSTYLE_ON
         default:
           if (!x.hasSideEffects()) {
             markCallsAsSideEffectFree(bodyAsExpressionList);

@@ -24,6 +24,7 @@ import jsinterop.annotations.JsType;
 /**
  * Abstract base class for numeric wrapper classes.
  */
+@SuppressWarnings("checkstyle:MethodName")
 public abstract class Number implements Serializable {
 
   /**
@@ -31,9 +32,8 @@ public abstract class Number implements Serializable {
    */
   private static NativeRegExp floatRegex;
 
-  // CHECKSTYLE_OFF: A special need to use unusual identifiers to avoid
-  // introducing name collisions.
-
+  // A special need to use unusual identifiers to avoid introducing name collisions.
+  @SuppressWarnings("checkstyle:ClassName")
   static class __Decode {
     public final String payload;
     public final int radix;
@@ -289,7 +289,7 @@ public abstract class Number implements Serializable {
     if (head > 0) {
       // accumulate negative numbers, as -Long.MAX_VALUE == Long.MIN_VALUE + 1
       // (in other words, -Long.MIN_VALUE overflows, see issue 7308)
-      toReturn = - JsUtils.parseInt(s.substring(0, head), radix);
+      toReturn = -JsUtils.parseInt(s.substring(0, head), radix);
       s = s.substring(head);
       length -= head;
       firstTime = false;
@@ -340,8 +340,6 @@ public abstract class Number implements Serializable {
     }
     return floatRegex.test(str);
   }
-
-  // CHECKSTYLE_ON
 
   public byte byteValue() {
     return (byte) intValue();

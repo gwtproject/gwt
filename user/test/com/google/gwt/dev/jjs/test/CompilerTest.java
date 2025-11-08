@@ -866,9 +866,8 @@ public class CompilerTest extends GWTTestCase {
     }
   }-*/;
 
-  // CHECKSTYLE_OFF
-
-  @SuppressWarnings({"empty", "LoopConditionChecker"})
+  @SuppressWarnings({"empty", "LoopConditionChecker",
+      "checkstyle.NeedBraces", "checkstyle.WhitespaceAround", "checkstyle.EmptyStatement"})
   public void testEmptyStatements() {
     boolean b = false;
 
@@ -900,8 +899,6 @@ public class CompilerTest extends GWTTestCase {
     else
       ;
   }
-
-  // CHECKSTYLE_ON
 
   public native void testEmptyStatementsNative() /*-{
     var b = false;

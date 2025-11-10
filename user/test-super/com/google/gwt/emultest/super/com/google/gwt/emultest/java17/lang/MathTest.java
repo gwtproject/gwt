@@ -44,14 +44,6 @@ public class MathTest extends EmulTestBase {
     assertThrowsArithmetic(() -> Math.absExact(Long.MIN_VALUE));
   }
 
-  private <T> T hideFromCompiler(T value) {
-    if (Math.random() < -1) {
-      // Can never happen, but fools the compiler enough not to optimize this call.
-      fail();
-    }
-    return value;
-  }
-
   private void assertThrowsArithmetic(Runnable check) {
     try {
       check.run();

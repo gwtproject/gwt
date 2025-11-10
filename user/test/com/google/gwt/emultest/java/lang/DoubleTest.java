@@ -161,10 +161,8 @@ public class DoubleTest extends GWTTestCase {
     assertTrue(Double.MIN_VALUE < Double.MAX_VALUE);
     assertFalse(Double.NaN == Double.NaN);
     assertEquals(64, Double.SIZE);
-    // jdk1.6 assertEquals(Math.getExponent(Double.MAX_VALUE),
-    // Double.MAX_EXPONENT);
-    // jdk1.6 assertEquals(Math.getExponent(Double.MIN_NORMAL),
-    // Double.MIN_EXPONENT);
+    assertEquals(Math.getExponent(Double.MAX_VALUE), Double.MAX_EXPONENT);
+    assertEquals(Math.getExponent(Double.MIN_NORMAL), Double.MIN_EXPONENT);
     // issue 8073 - used to fail in prod mode
     assertFalse(Double.isInfinite(Double.NaN));
   }

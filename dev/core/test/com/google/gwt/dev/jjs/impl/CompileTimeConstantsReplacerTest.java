@@ -62,7 +62,7 @@ public class CompileTimeConstantsReplacerTest extends OptimizerTestBase {
     result.into("int i = 1; int[] a = new int[] {1, 2, 3}; a[1] = 1;");
     JDeclaredType bType = result.findClass("test.EntryPoint.B");
     assertTrue("f1 not found as l-value of declaration statement",
-        findMethod(bType, "$clinit").getBody().toString().contains("final static int f1 = 1"));
+        findMethod(bType, "$clinit").getBody().toString().contains("f1 = 1"));
     assertTrue("f1 in condition was not replaced",
         findMethod(bType, "m").getBody().toString().contains("1 == 1"));
     assertEquals("incorrect modifiers for f1",

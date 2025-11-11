@@ -629,14 +629,11 @@ public class MethodInliner {
 
   public static String NAME = MethodInliner.class.getSimpleName();
 
-  public static OptimizerStats exec(JProgram program, OptimizerContext optimizerCtx) {
-    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new MethodInliner(program).execImpl(optimizerCtx);
-    optimizeEvent.end("didChange", "" + stats.didChange());
-    return stats;
+  public static int exec(JProgram program, OptimizerContext optimizerCtx) {
+    return new MethodInliner(program).execImpl(optimizerCtx);
   }
 
-  public static OptimizerStats exec(JProgram program) {
+  public static int exec(JProgram program) {
     return exec(program, new FullOptimizerContext(program));
   }
 
@@ -646,31 +643,31 @@ public class MethodInliner {
     this.program = program;
   }
 
-  private OptimizerStats execImpl(OptimizerContext optimizerCtx) {
-    OptimizerStats stats = new OptimizerStats(NAME);
-    while (true) {
-      InliningVisitor inliner = new InliningVisitor(optimizerCtx);
+  private int execImpl(OptimizerContext optimizerCtx) {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      while (true) {
+        InliningVisitor inliner = new InliningVisitor(optimizerCtx);
 
-      Set<JMethod> modifiedMethods =
-          optimizerCtx.getModifiedMethodsSince(optimizerCtx.getLastStepFor(NAME));
-      Set<JMethod> affectedMethods = affectedMethods(modifiedMethods, optimizerCtx);
-      optimizerCtx.traverse(inliner, affectedMethods);
+        Set<JMethod> modifiedMethods =
+            optimizerCtx.getModifiedMethodsSince(optimizerCtx.getLastStepFor(NAME));
+        Set<JMethod> affectedMethods = affectedMethods(modifiedMethods, optimizerCtx);
+        optimizerCtx.traverse(inliner, affectedMethods);
 
-      stats.recordModified(inliner.getNumMods());
-      optimizerCtx.setLastStepFor(NAME, optimizerCtx.getOptimizationStep());
+        stats.recordModified(inliner.getNumMods());
+        optimizerCtx.setLastStepFor(NAME, optimizerCtx.getOptimizationStep());
 
-      optimizerCtx.incOptimizationStep();
+        optimizerCtx.incOptimizationStep();
 
-      if (!inliner.didChange()) {
-        break;
+        if (!inliner.didChange()) {
+          break;
+        }
+
+        // Run a cleanup on the methods we just modified
+        stats.recordModified(DeadCodeElimination.exec(program, optimizerCtx));
       }
-
-      // Run a cleanup on the methods we just modified
-      OptimizerStats dceStats = DeadCodeElimination.exec(program, optimizerCtx);
-      stats.recordModified(dceStats.getNumMods());
+      JavaAstVerifier.assertProgramIsConsistent(program);
+      return stats.getNumMods();
     }
-    JavaAstVerifier.assertProgramIsConsistent(program);
-    return stats;
   }
 
   /**

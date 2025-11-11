@@ -711,14 +711,9 @@ public class EnumOrdinalizer {
     trackerEnabled = true;
   }
 
-  public static OptimizerStats exec(JProgram program, OptimizerContext optimizerCtx) {
-    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-
+  public static int exec(JProgram program, OptimizerContext optimizerCtx) {
     startTracker();
-    OptimizerStats stats = new EnumOrdinalizer(program).execImpl(optimizerCtx);
-    optimizerCtx.incOptimizationStep();
-    optimizeEvent.end("didChange", "" + stats.didChange());
-    return stats;
+    return new EnumOrdinalizer(program).execImpl(optimizerCtx);
   }
 
   public static Tracker getTracker() {
@@ -759,52 +754,55 @@ public class EnumOrdinalizer {
     this.enumSuperConstructor = program.getIndexedMethod(RuntimeConstants.ENUM_ENUM);
   }
 
-  private OptimizerStats execImpl(OptimizerContext optimizerCtx) {
-    OptimizerStats stats = new OptimizerStats(NAME);
+  private int execImpl(OptimizerContext optimizerCtx) {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
 
-    if (tracker != null) {
-      tracker.incrementRunCount();
-      tracker.maybeDumpAST(program, 0);
-    }
-
-    // Create black list of enum refs which can't be converted to an ordinal ref
-    CannotBeOrdinalAnalyzer ordinalAnalyzer = new CannotBeOrdinalAnalyzer(program);
-    ordinalAnalyzer.accept(program);
-
-    // Bail if we don't need to do any ordinalization
-    if (enumsVisited.size() == ordinalizationBlackList.size()) {
-      // Update tracker stats
       if (tracker != null) {
-        for (JEnumType type : enumsVisited) {
+        tracker.incrementRunCount();
+        tracker.maybeDumpAST(program, 0);
+      }
+
+      // Create black list of enum refs which can't be converted to an ordinal ref
+      CannotBeOrdinalAnalyzer ordinalAnalyzer = new CannotBeOrdinalAnalyzer(program);
+      ordinalAnalyzer.accept(program);
+
+      // Bail if we don't need to do any ordinalization
+      if (enumsVisited.size() == ordinalizationBlackList.size()) {
+        // Update tracker stats
+        if (tracker != null) {
+          for (JEnumType type : enumsVisited) {
+            tracker.addVisited(type.getName());
+          }
+        }
+        return stats.getNumMods();
+      }
+
+      // Replace enum type refs
+      ReplaceOrdinalizedEnumTypes replaceEnums = new ReplaceOrdinalizedEnumTypes(optimizerCtx);
+      replaceEnums.accept(program);
+      stats.recordModified(replaceEnums.getNumMods());
+
+      if (tracker != null) {
+        tracker.maybeDumpAST(program, 1);
+      }
+
+      // Update enums ordinalized, and tracker stats
+      for (JEnumType type : enumsVisited) {
+        if (tracker != null) {
           tracker.addVisited(type.getName());
         }
-      }
-      return stats;
-    }
-
-    // Replace enum type refs
-    ReplaceOrdinalizedEnumTypes replaceEnums = new ReplaceOrdinalizedEnumTypes(optimizerCtx);
-    replaceEnums.accept(program);
-    stats.recordModified(replaceEnums.getNumMods());
-
-    if (tracker != null) {
-      tracker.maybeDumpAST(program, 1);
-    }
-
-    // Update enums ordinalized, and tracker stats
-    for (JEnumType type : enumsVisited) {
-      if (tracker != null) {
-        tracker.addVisited(type.getName());
-      }
-      if (!ordinalizationBlackList.contains(type)) {
-        if (tracker != null) {
-          tracker.addOrdinalized(type.getName());
+        if (!ordinalizationBlackList.contains(type)) {
+          if (tracker != null) {
+            tracker.addOrdinalized(type.getName());
+          }
+          type.setOrdinalized();
         }
-        type.setOrdinalized();
       }
+      JavaAstVerifier.assertProgramIsConsistent(program);
+      optimizerCtx.incOptimizationStep();
+
+      return stats.getNumMods();
     }
-    JavaAstVerifier.assertProgramIsConsistent(program);
-    return stats;
   }
 
   private JEnumType getEnumTypeFromArrayLeafType(JType type) {

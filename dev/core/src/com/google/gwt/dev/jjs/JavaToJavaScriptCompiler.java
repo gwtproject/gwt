@@ -1418,7 +1418,6 @@ public final class JavaToJavaScriptCompiler {
       List<OptimizerStats> allOptimizerStats = Lists.newArrayList();
       int passCount = 0;
       int nodeCount = jprogram.getNodeCount();
-      int lastNodeCount;
 
       boolean atMaxLevel = options.getOptimizationLevel() == OptionOptimize.OPTIMIZE_LEVEL_MAX;
       int passLimit = atMaxLevel ? MAX_PASSES : options.getOptimizationLevel();
@@ -1433,16 +1432,18 @@ public final class JavaToJavaScriptCompiler {
           throw new InterruptedException();
         }
         AstDumper.maybeDumpAST(jprogram);
-        OptimizerStats stats = optimizeJavaOneTime("Pass " + passCount, nodeCount, optimizerCtx);
-        allOptimizerStats.add(stats);
-        lastNodeCount = nodeCount;
+        int mods = optimizeJavaOneTime(passCount, nodeCount, optimizerCtx);
+        int lastNodeCount = nodeCount;
         nodeCount = jprogram.getNodeCount();
+        stats.endNodeCount(nodeCount);
+        allOptimizerStats.add(stats);
 
-        float nodeChangeRate = stats.getNumMods() / (float) lastNodeCount;
+        float nodeChangeRate = mods / (float) lastNodeCount;
         float sizeChangeRate = (lastNodeCount - nodeCount) / (float) lastNodeCount;
         if (nodeChangeRate <= minChangeRate && sizeChangeRate <= minChangeRate) {
           break;
         }
+
       }
 
       if (options.shouldOptimizeDataflow()) {
@@ -1487,31 +1488,33 @@ public final class JavaToJavaScriptCompiler {
         : TypeOrder.FREQUENCY;
   }
 
-  private OptimizerStats optimizeJavaOneTime(String passName, int numNodes,
+  private boolean optimizeJavaOneTime(int passCount, int numNodes,
       OptimizerContext optimizerCtx) {
-    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "phase", "loop");
-    // Clinits might have become empty become empty.
+    // Clinits might have become empty
     jprogram.typeOracle.recomputeAfterOptimizations(jprogram.getDeclaredTypes());
-    OptimizerStats stats = new OptimizerStats(passName);
-    JavaAstVerifier.assertProgramIsConsistent(jprogram);
-    stats.add(Pruner.exec(jprogram, true, optimizerCtx).recordVisits(numNodes));
-    stats.add(Finalizer.exec(jprogram, optimizerCtx).recordVisits(numNodes));
-    stats.add(MakeCallsStatic.exec(jprogram, options.shouldAddRuntimeChecks(), optimizerCtx)
-        .recordVisits(numNodes));
-    stats.add(TypeTightener.exec(jprogram, optimizerCtx).recordVisits(numNodes));
-    stats.add(MethodCallTightener.exec(jprogram, optimizerCtx).recordVisits(numNodes));
-    // Note: Specialization should be done before inlining.
-    stats.add(MethodCallSpecializer.exec(jprogram, optimizerCtx).recordVisits(numNodes));
-    stats.add(DeadCodeElimination.exec(jprogram, optimizerCtx).recordVisits(numNodes));
-    stats.add(MethodInliner.exec(jprogram, optimizerCtx).recordVisits(numNodes));
-    if (options.shouldInlineLiteralParameters()) {
-      stats.add(SameParameterValueOptimizer.exec(jprogram, optimizerCtx).recordVisits(numNodes));
+
+    try (OptimizerStats stats = OptimizerStats.javaPass(passCount)) {
+      JavaAstVerifier.assertProgramIsConsistent(jprogram);
+      stats.recordModified(Pruner.exec(jprogram, true, optimizerCtx));
+      stats.recordModified(Finalizer.exec(jprogram, optimizerCtx));
+      stats.recordModified(MakeCallsStatic.exec(jprogram, options.shouldAddRuntimeChecks(), optimizerCtx));
+      stats.recordModified(TypeTightener.exec(jprogram, optimizerCtx));
+      stats.recordModified(MethodCallTightener.exec(jprogram, optimizerCtx));
+      // Note: Specialization should be done before inlining.
+      stats.recordModified(MethodCallSpecializer.exec(jprogram, optimizerCtx));
+      stats.recordModified(DeadCodeElimination.exec(jprogram, optimizerCtx));
+      stats.recordModified(MethodInliner.exec(jprogram, optimizerCtx));
+      if (options.shouldInlineLiteralParameters()) {
+        stats.recordModified(SameParameterValueOptimizer.exec(jprogram, optimizerCtx));
+      }
+      if (options.shouldOrdinalizeEnums()) {
+        stats.recordModified(EnumOrdinalizer.exec(jprogram, optimizerCtx));
+      }
+
+      stats.endNodeCount(jprogram.getNodeCount());
+
+      return stats;
     }
-    if (options.shouldOrdinalizeEnums()) {
-      stats.add(EnumOrdinalizer.exec(jprogram, optimizerCtx).recordVisits(numNodes));
-    }
-    optimizeEvent.end();
-    return stats;
   }
 
   private MinimalRebuildCache getMinimalRebuildCache() {

@@ -8,7 +8,4 @@ public class OptimizationStepEvent extends GwtJfrEvent {
 
   @Label("Number of Modifications")
   int numMods;
-
-  @Label("Number of Visits")
-  int numVisits;
 }

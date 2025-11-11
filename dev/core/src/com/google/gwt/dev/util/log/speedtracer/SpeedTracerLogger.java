@@ -131,7 +131,7 @@ public final class SpeedTracerLogger {
     long threadCpuDurationNanos;
     long threadCpuStartTimeNanos;
 
-    private GwtJfrEvent jfrEvent;
+    private final GwtJfrEvent jfrEvent;
 
     Event() {
       if (enabled) {

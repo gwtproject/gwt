@@ -79,8 +79,8 @@ public class ArrayNormalizerTest extends OptimizerTestBase {
     // TODO(jbrosenberg): remove loop when Pruner/CFA interaction is perfect.
 
     do {
-      didChange &= TypeTightener.exec(program).didChange();
-      didChange &= MethodCallTightener.exec(program).didChange();
+      didChange &= TypeTightener.exec(program) > 0;
+      didChange &= MethodCallTightener.exec(program) > 0;
     } while (didChange);
     ArrayNormalizer.exec(program);
     return true;

@@ -525,12 +525,9 @@ public class Pruner {
 
   private static final String NAME = Pruner.class.getSimpleName();
 
-  public static OptimizerStats exec(JProgram program, boolean noSpecialTypes,
+  public static int exec(JProgram program, boolean noSpecialTypes,
       OptimizerContext optimizerCtx) {
-    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new Pruner(program, noSpecialTypes).execImpl(optimizerCtx);
-    optimizeEvent.end("didChange", "" + stats.didChange());
-    return stats;
+    return new Pruner(program, noSpecialTypes).execImpl(optimizerCtx);
   }
 
   public static OptimizerStats exec(JProgram program, boolean noSpecialTypes) {
@@ -645,45 +642,46 @@ public class Pruner {
     this.saveCodeGenTypes = saveCodeGenTypes;
   }
 
-  private OptimizerStats execImpl(OptimizerContext optimizerCtx) {
-    OptimizerStats stats = new OptimizerStats(NAME);
+  private int execImpl(OptimizerContext optimizerCtx) {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
 
-    ControlFlowAnalyzer livenessAnalyzer = new ControlFlowAnalyzer(program);
-    livenessAnalyzer.setForPruning();
+      ControlFlowAnalyzer livenessAnalyzer = new ControlFlowAnalyzer(program);
+      livenessAnalyzer.setForPruning();
 
-    // SPECIAL: Immortal codegen types are never pruned
-    traverseTypes(livenessAnalyzer, program.immortalCodeGenTypes);
+      // SPECIAL: Immortal codegen types are never pruned
+      traverseTypes(livenessAnalyzer, program.immortalCodeGenTypes);
 
-    if (saveCodeGenTypes) {
-      /*
-       * SPECIAL: Some classes contain methods used by code generation later.
-       * Unless those transforms have already been performed, we must rescue all
-       * contained methods for later user.
-       */
-      traverseTypes(livenessAnalyzer, program.codeGenTypes);
+      if (saveCodeGenTypes) {
+        /*
+         * SPECIAL: Some classes contain methods used by code generation later.
+         * Unless those transforms have already been performed, we must rescue all
+         * contained methods for later user.
+         */
+        traverseTypes(livenessAnalyzer, program.codeGenTypes);
+      }
+      livenessAnalyzer.traverseEverything();
+
+      program.typeOracle.setInstantiatedTypes(livenessAnalyzer.getInstantiatedTypes());
+
+      PruneVisitor pruner =
+          new PruneVisitor(livenessAnalyzer.getReferencedTypes(), livenessAnalyzer
+              .getLiveFieldsAndMethods(), optimizerCtx);
+      pruner.accept(program);
+      stats.recordModified(pruner.getNumMods());
+
+      if (!pruner.didChange()) {
+        return 0;
+      }
+      CleanupRefsVisitor cleaner =
+          new CleanupRefsVisitor(livenessAnalyzer.getLiveFieldsAndMethods(), pruner
+              .getPriorParametersByMethod(), optimizerCtx);
+      cleaner.accept(program.getDeclaredTypes());
+      optimizerCtx.incOptimizationStep();
+      optimizerCtx.syncDeletedSubCallGraphsSince(optimizerCtx.getLastStepFor(NAME) + 1,
+          prunedMethods);
+      JavaAstVerifier.assertProgramIsConsistent(program);
+      return stats.getNumMods();
     }
-    livenessAnalyzer.traverseEverything();
-
-    program.typeOracle.setInstantiatedTypes(livenessAnalyzer.getInstantiatedTypes());
-
-    PruneVisitor pruner =
-        new PruneVisitor(livenessAnalyzer.getReferencedTypes(), livenessAnalyzer
-            .getLiveFieldsAndMethods(), optimizerCtx);
-    pruner.accept(program);
-    stats.recordModified(pruner.getNumMods());
-
-    if (!pruner.didChange()) {
-      return stats;
-    }
-    CleanupRefsVisitor cleaner =
-        new CleanupRefsVisitor(livenessAnalyzer.getLiveFieldsAndMethods(), pruner
-            .getPriorParametersByMethod(), optimizerCtx);
-    cleaner.accept(program.getDeclaredTypes());
-    optimizerCtx.incOptimizationStep();
-    optimizerCtx.syncDeletedSubCallGraphsSince(optimizerCtx.getLastStepFor(NAME) + 1,
-        prunedMethods);
-    JavaAstVerifier.assertProgramIsConsistent(program);
-    return stats;
   }
 
   /**

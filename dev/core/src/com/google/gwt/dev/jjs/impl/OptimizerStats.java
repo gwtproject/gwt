@@ -16,22 +16,47 @@
 
 package com.google.gwt.dev.jjs.impl;
 
+import com.google.gwt.dev.util.log.perf.OptimizationLoopEvent;
+import com.google.gwt.dev.util.log.perf.OptimizationStepEvent;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
+import jdk.jfr.Event;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
- * Stores statistics on the results of running an optimizer pass.
+ * Stores statistics on the results of running an optimizer pass, and emits as a JFR event.
+ * Starts recording when it is created, and stops recording when closed. Can still be used
+ * after close to pass statistics to a parent instance, for the purpose of tracking changes.
  */
-public class OptimizerStats {
+public class OptimizerStats implements AutoCloseable {
   private final List<OptimizerStats> children = new ArrayList<OptimizerStats>();
   private final String name;
+  private final Event jfrEvent;
   private int numMods = 0;
   private int numVisits = 0;
 
-  public OptimizerStats(String name) {
+  public static OptimizerStats javaPass(int passCount) {
+    return new OptimizerStats("JavaPass#" + passCount, new OptimizationLoopEvent(passCount, "Java"));
+  }
+
+  public static OptimizerStats jsPass(int passCount) {
+    return new OptimizerStats("JsPass#" + passCount, new OptimizationLoopEvent(passCount, "JavaScript"));
+  }
+
+  public static OptimizerStats optimization(String name) {
+    return new OptimizerStats(name, new OptimizationStepEvent());
+  }
+
+  private OptimizerStats(String name, Event jfrEvent) {
     this.name = name;
+    this.jfrEvent = jfrEvent;
+  }
+
+  @Override
+  public void close() {
+    jfrEvent.commit();
   }
 
   /**
@@ -57,10 +82,10 @@ public class OptimizerStats {
   }
 
   /**
-   * Retrieves an immutable list of child stats objects. Don't modify this list.
+   * Retrieves an immutable list of child stats objects.
    */
   public List<OptimizerStats> getChildren() {
-    return children;
+    return Collections.unmodifiableList(children);
   }
 
   public String getName() {
@@ -163,6 +188,13 @@ public class OptimizerStats {
       for (OptimizerStats child : children) {
         child.prettyPrint(builder, ++level);
       }
+    }
+  }
+
+  public void endNodeCount(int nodeCount) {
+    if (jfrEvent instanceof OptimizationLoopEvent) {
+      OptimizationLoopEvent event = (OptimizationLoopEvent) jfrEvent;
+      event.loopComplete(nodeCount);
     }
   }
 }

@@ -2047,14 +2047,14 @@ public class DeadCodeElimination {
   public static final String NAME = DeadCodeElimination.class.getSimpleName();
 
   @VisibleForTesting
-  public static OptimizerStats exec(JProgram program) {
+  public static int exec(JProgram program) {
     return new DeadCodeElimination(program).execImpl(Collections.singleton(program),
         OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
   }
 
   // TODO(leafwang): Mark this as @VisibleForTesting eventually; this code path is also used
   // by DataflowOptimizer for now.
-  public static OptimizerStats exec(JProgram program, JMethod method) {
+  public static int exec(JProgram program, JMethod method) {
     return new DeadCodeElimination(program).execImpl(Collections.singleton(method),
         OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
   }
@@ -2063,13 +2063,9 @@ public class DeadCodeElimination {
    * Apply DeadCodeElimination on the set of newly modified methods (obtained from the optimzer
    * context).
    */
-  public static OptimizerStats exec(JProgram program, OptimizerContext optimizerCtx) {
+  public static int exec(JProgram program, OptimizerContext optimizerCtx) {
     Set<JMethod> affectedMethods = affectedMethods(optimizerCtx);
-    OptimizerStats stats = new DeadCodeElimination(program).execImpl(affectedMethods, optimizerCtx);
-    optimizerCtx.setLastStepFor(NAME, optimizerCtx.getOptimizationStep());
-    optimizerCtx.incOptimizationStep();
-    JavaAstVerifier.assertProgramIsConsistent(program);
-    return stats;
+    return new DeadCodeElimination(program).execImpl(affectedMethods, optimizerCtx);
   }
 
   /**
@@ -2107,17 +2103,20 @@ public class DeadCodeElimination {
         .build();
   }
 
-  private OptimizerStats execImpl(Iterable<? extends JNode> nodes, OptimizerContext optimizerCtx) {
-    OptimizerStats stats = new OptimizerStats(NAME);
-    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
+  private int execImpl(Iterable<? extends JNode> nodes, OptimizerContext optimizerCtx) {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      DeadCodeVisitor deadCodeVisitor = new DeadCodeVisitor(optimizerCtx);
+      for (JNode node : nodes) {
+        deadCodeVisitor.accept(node);
+      }
+      stats.recordModified(deadCodeVisitor.getNumMods());
 
-    DeadCodeVisitor deadCodeVisitor = new DeadCodeVisitor(optimizerCtx);
-    for (JNode node : nodes) {
-      deadCodeVisitor.accept(node);
+      optimizerCtx.setLastStepFor(NAME, optimizerCtx.getOptimizationStep());
+      optimizerCtx.incOptimizationStep();
+      JavaAstVerifier.assertProgramIsConsistent(program);
+
+      return stats.getNumMods();
     }
-    stats.recordModified(deadCodeVisitor.getNumMods());
-    optimizeEvent.end("didChange", "" + stats.didChange());
-    return stats;
   }
 
   private enum AnalysisResult { TRUE, FALSE, UNKNOWN }

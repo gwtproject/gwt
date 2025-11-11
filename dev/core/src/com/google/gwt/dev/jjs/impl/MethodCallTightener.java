@@ -156,17 +156,12 @@ public class MethodCallTightener {
   public static final String NAME = MethodCallTightener.class.getSimpleName();
 
   @VisibleForTesting
-  static OptimizerStats exec(JProgram program) {
+  static int exec(JProgram program) {
     return exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
   }
 
-  public static OptimizerStats exec(JProgram program, OptimizerContext optimizerCtx) {
-    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new MethodCallTightener(program).execImpl(optimizerCtx);
-    optimizerCtx.incOptimizationStep();
-    optimizeEvent.end("didChange", "" + stats.didChange());
-    JavaAstVerifier.assertProgramIsConsistent(program);
-    return stats;
+  public static int exec(JProgram program, OptimizerContext optimizerCtx) {
+    return new MethodCallTightener(program).execImpl(optimizerCtx);
   }
 
   private final JProgram program;
@@ -175,9 +170,16 @@ public class MethodCallTightener {
     this.program = program;
   }
 
-  private OptimizerStats execImpl(OptimizerContext optimizerCtx) {
-    MethodCallTighteningVisitor tightener = new MethodCallTighteningVisitor(optimizerCtx);
-    tightener.accept(program);
-    return new OptimizerStats(NAME).recordModified(tightener.getNumMods());
+  private int execImpl(OptimizerContext optimizerCtx) {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      MethodCallTighteningVisitor tightener = new MethodCallTighteningVisitor(optimizerCtx);
+      tightener.accept(program);
+      stats.recordModified(tightener.getNumMods());
+
+      JavaAstVerifier.assertProgramIsConsistent(program);
+      optimizerCtx.incOptimizationStep();
+
+      return stats.getNumMods();
+    }
   }
 }

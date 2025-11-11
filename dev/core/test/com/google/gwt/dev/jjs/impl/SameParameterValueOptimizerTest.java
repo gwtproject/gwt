@@ -162,6 +162,6 @@ public class SameParameterValueOptimizerTest extends OptimizerTestBase {
   @Override
   protected boolean doOptimizeMethod(TreeLogger logger, JProgram program, JMethod method) {
     MakeCallsStatic.exec(program, false);
-    return SameParameterValueOptimizer.exec(program).didChange();
+    return SameParameterValueOptimizer.exec(program) > 0;
   }
 }

@@ -1847,13 +1847,6 @@ public class DeadCodeElimination {
         return;
       }
 
-      if (method.getName().endsWith("hashCode")) {
-        // This cannot be computed at compile time because our implementation
-        // differs from the JRE.
-        // TODO: actually, I think it DOES match now, so we can remove this?
-        return;
-      }
-
       boolean isStaticImplMethod = program.isStaticImpl(method);
       JExpression instance = isStaticImplMethod ? x.getArgs().get(0) : x.getInstance();
       // drop the instance argument if the call was devirtualized as the compile time evaluation

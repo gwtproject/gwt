@@ -36,10 +36,11 @@ public class Runtime {
    * Otherwise it creates the prototype for the class by calling {@code createSubclassPrototype()}.
    * It also assigns the castable type map and sets the constructors prototype field to the
    * current prototype.
-   * Finally adds the class literal if it was created before the call to {@code defineClass}.
+   * <p>
+   * Finally, adds the class literal if it was created before the call to {@code defineClass}.
    * Class literals might be created before the call to {@code defineClass} if they are in separate
-   * code-split fragments. In that case Class.createFor* methods will have created a placeholder and
-   * stored in {@code prototypesByTypeId} the class literal.
+   * code-split fragments. In that case, Class.createFor* methods will call have called
+   * Class.maybeSetClassLiteral to create a placeholder and stored it in {@code prototypesByTypeId}.
    * <p>
    * As a prerequisite if superTypeIdOrPrototype is not null, it is assumed that defineClass for the
    * supertype has already been called.

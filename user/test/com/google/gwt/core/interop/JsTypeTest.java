@@ -374,6 +374,31 @@ public class JsTypeTest extends GWTTestCase {
     assertEquals(1, callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen.C));
   }
 
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
+  public static class DoesntExist {}
+
+  @JsType
+  public static class SubtypeOfDoesntExist extends DoesntExist {
+    public static boolean test() {
+      return true;
+    }
+  }
+
+  public void testMissingClassHierarchy() {
+    // The class itself can be created and referenced, static members will work
+    assertTrue(SubtypeOfDoesntExist.test());
+
+    // Creating a new instance will fail, something like "Cannot call method "call" of undefined"
+    try {
+      new SubtypeOfDoesntExist();
+      fail("Should not be able to create instance");
+    } catch (Exception expected) {
+      // ignore, expected
+    }
+
+    assertFalse(new Object() instanceof SubtypeOfDoesntExist);
+  }
+
   private static native int callIntFunction(Object object, String functionName) /*-{
     return object[functionName]();
   }-*/;

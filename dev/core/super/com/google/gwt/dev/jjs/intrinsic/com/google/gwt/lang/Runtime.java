@@ -82,7 +82,7 @@ public class Runtime {
    */
   private static native JavaScriptObject createSubclassPrototype(
       JavaScriptObject superTypeIdOrPrototype) /*-{
-    var superPrototype = null;
+    var superPrototype = {};
     if (superTypeIdOrPrototype != null) {
       superPrototype = superTypeIdOrPrototype && superTypeIdOrPrototype.prototype;
       if (!superPrototype) {
@@ -106,7 +106,7 @@ public class Runtime {
    */
   private static native JavaScriptObject maybeGetClassLiteralFromPlaceHolder(
       JavaScriptObject entry) /*-{
-    // TODO(rluble): Relies on Class.createFor*() storing the class literal wrapped as an array
+    // TODO(rluble): Relies on Class.maybeSetClassLiteral() storing the class literal wrapped as an array
     // to distinguish it from an actual prototype.
     return (entry instanceof Array) ? entry[0] : null;
   }-*/;

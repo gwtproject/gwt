@@ -17,13 +17,13 @@ package com.google.gwt.emultest.java.util;
 
 import java.util.Arrays;
 
-/** Tests {@link Arrays} (incorrect) Double semantics. */
+/** Tests {@link Arrays} Double semantics. */
 public class ArraysDoubleSemanticsTest extends EmulTestBase {
 
   public void testEquals() throws Exception {
 
     assertFalse(Arrays.equals(new Double[] {-0.0d}, new Double[] {0.0d}));
-    assertTrue(Arrays.equals(new Double[] {-0.0d}, new Double[] {0.0d}));
+    assertTrue(Arrays.equals(new Double[] {Double.NaN}, new Double[] {Double.NaN}));
 
     assertFalse(Arrays.equals(new double[] {-0.0d}, new double[] {0.0d}));
     assertTrue(Arrays.equals(new double[] {Double.NaN}, new double[] {Double.NaN}));

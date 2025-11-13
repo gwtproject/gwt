@@ -16,6 +16,7 @@
 package java.util;
 
 import java.util.function.Supplier;
+import javaemul.internal.JsUtils;
 
 /**
  * See <a
@@ -84,7 +85,7 @@ public final class Objects {
   }
 
   public static boolean equals(Object a, Object b) {
-    return (a == b) || (a != null && a.equals(b));
+    return (JsUtils.objectIs(a, b)) || (a != null && a.equals(b));
   }
 
   @SuppressWarnings("StringEquality")

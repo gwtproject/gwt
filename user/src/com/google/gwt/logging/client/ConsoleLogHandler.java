@@ -57,7 +57,7 @@ public class ConsoleLogHandler extends Handler {
     } else if (val >= Level.INFO.intValue()) {
       info(msg);
     } else {
-      logVerbose(msg);
+      debug(msg);
     }
   }
 
@@ -77,9 +77,7 @@ public class ConsoleLogHandler extends Handler {
     window.console.info(message);
   }-*/;
 
-  private native void logVerbose(String message) /*-{
-    // use console.debug to show FINE and FINEST messages
-    // only when "Verbose" is enabled in inspector
+  private native void debug(String message) /*-{
     window.console.debug(message);
   }-*/;
 }

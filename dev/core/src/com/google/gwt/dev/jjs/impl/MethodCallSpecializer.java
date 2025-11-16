@@ -20,7 +20,6 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JType;
-import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 
 import java.util.List;
 
@@ -82,11 +81,6 @@ public class MethodCallSpecializer {
   }
 
   public static final String NAME = MethodCallSpecializer.class.getSimpleName();
-
-  @VisibleForTesting
-  static int exec(JProgram program) {
-    return exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
-  }
 
   public static int exec(JProgram program, OptimizerContext optimizerCtx) {
       return new MethodCallSpecializer(program).execImpl(optimizerCtx);

@@ -661,7 +661,7 @@ public class JsStackEmulator {
 
       qualifier.setQualifier(recordAfter(qualifier.getQualifier(), locationToRecord));
       setLastLocation(locationToRecord);
-      didChange = true;
+      numMods++;
     }
 
     @Override
@@ -851,7 +851,7 @@ public class JsStackEmulator {
       JsExpression last = args.get(args.size() - 1);
       args.set(args.size() - 1, recordAfter(last, locationToRecord));
       setLastLocation(locationToRecord);
-      didChange = true;
+      numMods++;
     }
 
     /**

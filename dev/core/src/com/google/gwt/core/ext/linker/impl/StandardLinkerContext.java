@@ -80,10 +80,9 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
    */
   private static class TopFunctionStringInterner extends JsModVisitor {
 
-    public static boolean exec(JsProgram program) {
+    public static void exec(JsProgram program) {
       TopFunctionStringInterner v = new TopFunctionStringInterner(program);
       v.accept(program);
-      return v.didChange();
     }
 
     private final JsProgram program;
@@ -94,7 +93,7 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
 
     @Override
     public boolean visit(JsFunction x, JsContext ctx) {
-      didChange |= JsLiteralInterner.exec(program, x.getBody(), x.getScope(), true);
+      JsLiteralInterner.exec(program, x.getBody(), x.getScope(), true);
       return false;
     }
   }

@@ -50,10 +50,6 @@ import com.google.gwt.dev.jjs.ast.JVariableRef;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.js.JsniFieldRef;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
-import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
 import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
@@ -724,11 +720,6 @@ public class TypeTightener {
 
   public static int exec(JProgram program, OptimizerContext optimizerCtx) {
     return new TypeTightener(program).execImpl(optimizerCtx);
-  }
-
-  @VisibleForTesting
-  static int exec(JProgram program) {
-    return exec(program, new FullOptimizerContext(program));
   }
 
   private static <T, V> void add(T key, V value, Map<T, Collection<V>> map) {

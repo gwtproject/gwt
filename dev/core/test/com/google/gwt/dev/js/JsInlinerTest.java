@@ -19,7 +19,6 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.common.InliningMode;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
-import com.google.gwt.dev.jjs.impl.OptimizerStats;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsModVisitor;
@@ -436,7 +435,7 @@ public class JsInlinerTest extends OptimizerTestBase {
     /**
      * Static entry point used by JavaToJavaScriptCompiler.
      */
-    public static OptimizerStats exec(JsProgram program) {
+    public static void exec(JsProgram program) {
       final List<JsNode> inlineableFunctions = Lists.newArrayList();
       new JsVisitor() {
         @Override
@@ -453,7 +452,7 @@ public class JsInlinerTest extends OptimizerTestBase {
           }
         }
       }.accept(program);
-      return JsInliner.exec(program, inlineableFunctions);
+      JsInliner.exec(program, inlineableFunctions);
     }
   }
 

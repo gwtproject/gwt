@@ -31,10 +31,6 @@ import com.google.gwt.dev.jjs.ast.JValueLiteral;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
-import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
@@ -181,11 +177,6 @@ public class SameParameterValueOptimizer {
   }
 
   private static final String NAME = SameParameterValueOptimizer.class.getSimpleName();
-
-  @VisibleForTesting
-  static int exec(JProgram program) {
-    return exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
-  }
 
   public static int exec(JProgram program, OptimizerContext optimizerCtx) {
     return new SameParameterValueOptimizer(program).execImpl(program, optimizerCtx);

@@ -494,9 +494,8 @@ public class JsLiteralInterner {
    * @param block the block to visit.
    * @param scope the JsScope in which to reserve the new identifiers.
    * @param alwaysIntern whether to intern all literals regardless of their occurrence count.
-   * @return {@code true} if any changes were made to the block.
    */
-  public static boolean exec(JsProgram program, JsBlock block, JsScope scope,
+  public static void exec(JsProgram program, JsBlock block, JsScope scope,
       boolean alwaysIntern) {
 
     Multiset<JsLiteral> occurrencesPerLiteral = null;
@@ -510,8 +509,6 @@ public class JsLiteralInterner {
 
     createVars(program, block, v.variableNameForInternedLiteral.keySet(),
         v.variableNameForInternedLiteral);
-
-    return v.didChange();
   }
 
   /**

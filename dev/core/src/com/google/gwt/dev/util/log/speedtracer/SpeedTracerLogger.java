@@ -24,14 +24,12 @@ import com.google.gwt.dev.util.log.perf.GwtJfrEvent;
 import com.google.gwt.dev.util.log.perf.PerfLogging;
 import com.sun.management.OperatingSystemMXBean;
 
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.management.GarbageCollectorMXBean;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -180,8 +178,8 @@ public final class SpeedTracerLogger {
       this.data = Lists.addAll(this.data, key1, value1, key2, value2);
       assign(jfrEvent, key1, value1);
       assign(jfrEvent, key2, value2);
-
     }
+
     public void addData(String... data) {
       if (data != null) {
         assert (data.length % 2 == 0);
@@ -198,10 +196,12 @@ public final class SpeedTracerLogger {
     public void end() {
       endImpl(this);
     }
+
     public void end(String key, String value) {
       assign(jfrEvent, key, value);
       endImpl(this, key, value);
     }
+
     public void end(String... data) {
       if (data != null) {
         for (int i = 0; i < data.length; i += 2) {
@@ -369,7 +369,27 @@ public final class SpeedTracerLogger {
    */
   private class DummyEvent extends Event {
     @Override
+    public void addData(String key, String value) {
+      // do nothing
+    }
+
+    @Override
+    public void addData(String key1, String value1, String key2, String value2) {
+      // do nothing
+    }
+
+    @Override
     public void addData(String... data) {
+      // do nothing
+    }
+
+    @Override
+    public void end() {
+      // do nothing
+    }
+
+    @Override
+    public void end(String key, String value) {
       // do nothing
     }
 

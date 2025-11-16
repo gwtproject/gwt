@@ -37,9 +37,6 @@ import com.google.gwt.dev.js.ast.JsNode;
 import com.google.gwt.dev.js.ast.JsNullLiteral;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsWhile;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 
 import java.util.HashSet;
 import java.util.List;
@@ -250,41 +247,36 @@ public class DuplicateClinitRemover extends JsModVisitor {
   /**
    * Static entry point used by JavaToJavaScriptCompiler.
    */
-  public static OptimizerStats exec(JsProgram program) {
-    Event optimizeJsEvent = SpeedTracerLogger.start(
-        CompilerEventType.OPTIMIZE_JS, "optimizer", NAME);
-    OptimizerStats stats = execImpl(program);
-    optimizeJsEvent.end("didChange", "" + stats.didChange());
-    return stats;
+  public static int exec(JsProgram program) {
+    return execImpl(program);
   }
 
+  private static int execImpl(JsProgram program) {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      DuplicateClinitRemover r = new DuplicateClinitRemover(program);
+      r.accept(program);
+      stats.recordModified(r.getNumMods());
 
-  private static OptimizerStats execImpl(JsProgram program) {
-    OptimizerStats stats = new OptimizerStats(NAME);
-    DuplicateClinitRemover r = new DuplicateClinitRemover(program);
-    r.accept(program);
-    if (r.didChange()) {
-      stats.recordModified();
+      return stats.getNumMods();
     }
-    return stats;
   }
 
   private <T extends JsNode> void branch(List<T> x) {
     DuplicateClinitRemover dup = new DuplicateClinitRemover(program, called);
     dup.acceptWithInsertRemove(x);
-    didChange |= dup.didChange();
+    numMods += dup.getNumMods();
   }
 
   private <T extends JsNode> T branch(T x) {
     DuplicateClinitRemover dup = new DuplicateClinitRemover(program, called);
     T toReturn = dup.accept(x);
 
-    if ((toReturn != x) && !dup.didChange()) {
+    if ((toReturn != x) && dup.getNumMods() == 0) {
       throw new InternalCompilerException(
-          "node replacement should imply didChange()");
+          "node replacement should imply getNumMods() > 0");
     }
 
-    didChange |= dup.didChange();
+    numMods += dup.getNumMods();
     return toReturn;
   }
 

@@ -108,6 +108,6 @@ public class FinalizerTest extends OptimizerTestBase {
 
   @Override
   protected boolean doOptimizeMethod(TreeLogger logger, JProgram program, JMethod method) {
-    return Finalizer.exec(program) > 0;
+    return Finalizer.exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT) > 0;
   }
 }

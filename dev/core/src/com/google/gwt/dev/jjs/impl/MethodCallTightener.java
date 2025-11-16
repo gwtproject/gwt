@@ -24,10 +24,6 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
 import com.google.gwt.dev.jjs.ast.JType;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
-import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 
 /**
  * Update polymorphic method calls to tighter bindings based on the type of the
@@ -154,11 +150,6 @@ public class MethodCallTightener {
   }
 
   public static final String NAME = MethodCallTightener.class.getSimpleName();
-
-  @VisibleForTesting
-  static int exec(JProgram program) {
-    return exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
-  }
 
   public static int exec(JProgram program, OptimizerContext optimizerCtx) {
     return new MethodCallTightener(program).execImpl(optimizerCtx);

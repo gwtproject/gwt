@@ -545,7 +545,7 @@ public final class JavaToJavaScriptCompiler {
     try {
       if (shouldOptimize()) {
         RemoveSpecializations.exec(jprogram);
-        Pruner.exec(jprogram, false);
+        Pruner.exec(jprogram, false, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
         // Last Java optimization step, update type oracle accordingly.
         jprogram.typeOracle.recomputeAfterOptimizations(jprogram.getDeclaredTypes());
       }
@@ -981,7 +981,6 @@ public final class JavaToJavaScriptCompiler {
 
   private void optimizeJsLoop(Collection<JsNode> toInline) throws InterruptedException {
     int optimizationLevel = options.getOptimizationLevel();
-    List<OptimizerStats> allOptimizerStats = Lists.newArrayList();
     int counter = 0;
     while (true) {
       counter++;
@@ -990,22 +989,20 @@ public final class JavaToJavaScriptCompiler {
       }
       Event optimizeJsEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE_JS);
 
-      OptimizerStats stats = new OptimizerStats("Pass " + counter);
+      try (OptimizerStats stats = OptimizerStats.jsPass(counter)) {
 
-      // Remove unused functions if possible.
-      stats.add(JsStaticEval.exec(jsProgram));
-      // Inline Js function invocations
-      stats.add(JsInliner.exec(jsProgram, toInline));
-      // Remove unused functions if possible.
-      stats.add(JsUnusedFunctionRemover.exec(jsProgram));
+        // Remove unused functions if possible.
+        stats.recordModified(JsStaticEval.exec(jsProgram));
+        // Inline Js function invocations
+        stats.recordModified(JsInliner.exec(jsProgram, toInline));
+        // Remove unused functions if possible.
+        stats.recordModified(JsUnusedFunctionRemover.exec(jsProgram));
 
-      // Save the stats to print out after optimizers finish.
-      allOptimizerStats.add(stats);
-
-      optimizeJsEvent.end();
-      if ((optimizationLevel < OptionOptimize.OPTIMIZE_LEVEL_MAX && counter > optimizationLevel)
-          || !stats.didChange()) {
-        break;
+        optimizeJsEvent.end();
+        if ((optimizationLevel < OptionOptimize.OPTIMIZE_LEVEL_MAX && counter > optimizationLevel)
+            || !stats.didChange()) {
+          break;
+        }
       }
     }
 
@@ -1415,7 +1412,6 @@ public final class JavaToJavaScriptCompiler {
   private void optimizeJavaToFixedPoint() throws InterruptedException {
     try (GwtJfrEvent optimizeEvent = PerfLogging.start(CompilerEventType.OPTIMIZE)) {
 
-      List<OptimizerStats> allOptimizerStats = Lists.newArrayList();
       int passCount = 0;
       int nodeCount = jprogram.getNodeCount();
 
@@ -1432,25 +1428,47 @@ public final class JavaToJavaScriptCompiler {
           throw new InterruptedException();
         }
         AstDumper.maybeDumpAST(jprogram);
-        int mods = optimizeJavaOneTime(passCount, nodeCount, optimizerCtx);
+        // Clinits might have become empty
+        jprogram.typeOracle.recomputeAfterOptimizations(jprogram.getDeclaredTypes());
+
         int lastNodeCount = nodeCount;
-        nodeCount = jprogram.getNodeCount();
-        stats.endNodeCount(nodeCount);
-        allOptimizerStats.add(stats);
+        int mods;
+
+        try (OptimizerStats stats = OptimizerStats.javaPass(passCount)) {
+          JavaAstVerifier.assertProgramIsConsistent(jprogram);
+          stats.recordModified(Pruner.exec(jprogram, true, optimizerCtx));
+          stats.recordModified(Finalizer.exec(jprogram, optimizerCtx));
+          stats.recordModified(MakeCallsStatic.exec(jprogram, options.shouldAddRuntimeChecks(), optimizerCtx));
+          stats.recordModified(TypeTightener.exec(jprogram, optimizerCtx));
+          stats.recordModified(MethodCallTightener.exec(jprogram, optimizerCtx));
+          // Note: Specialization should be done before inlining.
+          stats.recordModified(MethodCallSpecializer.exec(jprogram, optimizerCtx));
+          stats.recordModified(DeadCodeElimination.exec(jprogram, optimizerCtx));
+          stats.recordModified(MethodInliner.exec(jprogram, optimizerCtx));
+          if (options.shouldInlineLiteralParameters()) {
+            stats.recordModified(SameParameterValueOptimizer.exec(jprogram, optimizerCtx));
+          }
+          if (options.shouldOrdinalizeEnums()) {
+            stats.recordModified(EnumOrdinalizer.exec(jprogram, optimizerCtx));
+          }
+
+          nodeCount = jprogram.getNodeCount();
+          mods = stats.getNumMods();
+          stats.endNodeCount(nodeCount);
+        }
 
         float nodeChangeRate = mods / (float) lastNodeCount;
         float sizeChangeRate = (lastNodeCount - nodeCount) / (float) lastNodeCount;
         if (nodeChangeRate <= minChangeRate && sizeChangeRate <= minChangeRate) {
           break;
         }
-
       }
 
       if (options.shouldOptimizeDataflow()) {
         logger.log(TreeLogger.Type.WARN,
             "Unsafe dataflow optimization enabled, disable with -XdisableOptimizeDataflow.");
         // Just run it once, because it is very time consuming
-        allOptimizerStats.add(DataflowOptimizer.exec(jprogram));
+        DataflowOptimizer.exec(jprogram);
       }
     }
   }
@@ -1459,7 +1477,7 @@ public final class JavaToJavaScriptCompiler {
     return options.getOptimizationLevel() > OptionOptimize.OPTIMIZE_LEVEL_DRAFT;
   }
 
-  private TypeMapper getTypeMapper() {
+  private TypeMapper<?> getTypeMapper() {
 
     // Used to stabilize output for DeltaJS
     if (JjsUtils.closureStyleLiteralsNeeded(this.options)) {
@@ -1486,35 +1504,6 @@ public final class JavaToJavaScriptCompiler {
     }
     return this.options.isIncrementalCompileEnabled() ? TypeOrder.ALPHABETICAL
         : TypeOrder.FREQUENCY;
-  }
-
-  private boolean optimizeJavaOneTime(int passCount, int numNodes,
-      OptimizerContext optimizerCtx) {
-    // Clinits might have become empty
-    jprogram.typeOracle.recomputeAfterOptimizations(jprogram.getDeclaredTypes());
-
-    try (OptimizerStats stats = OptimizerStats.javaPass(passCount)) {
-      JavaAstVerifier.assertProgramIsConsistent(jprogram);
-      stats.recordModified(Pruner.exec(jprogram, true, optimizerCtx));
-      stats.recordModified(Finalizer.exec(jprogram, optimizerCtx));
-      stats.recordModified(MakeCallsStatic.exec(jprogram, options.shouldAddRuntimeChecks(), optimizerCtx));
-      stats.recordModified(TypeTightener.exec(jprogram, optimizerCtx));
-      stats.recordModified(MethodCallTightener.exec(jprogram, optimizerCtx));
-      // Note: Specialization should be done before inlining.
-      stats.recordModified(MethodCallSpecializer.exec(jprogram, optimizerCtx));
-      stats.recordModified(DeadCodeElimination.exec(jprogram, optimizerCtx));
-      stats.recordModified(MethodInliner.exec(jprogram, optimizerCtx));
-      if (options.shouldInlineLiteralParameters()) {
-        stats.recordModified(SameParameterValueOptimizer.exec(jprogram, optimizerCtx));
-      }
-      if (options.shouldOrdinalizeEnums()) {
-        stats.recordModified(EnumOrdinalizer.exec(jprogram, optimizerCtx));
-      }
-
-      stats.endNodeCount(jprogram.getNodeCount());
-
-      return stats;
-    }
   }
 
   private MinimalRebuildCache getMinimalRebuildCache() {

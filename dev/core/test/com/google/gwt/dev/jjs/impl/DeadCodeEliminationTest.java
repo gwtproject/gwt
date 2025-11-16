@@ -507,10 +507,12 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
       MethodInliner.exec(program);
     }
     if (runSpecializer) {
-      Finalizer.exec(program); // required so that method is marked final
+      // required so that method is marked final
+      Finalizer.exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
       MakeCallsStatic.exec(program, false); // required so that method is static
-      TypeTightener.exec(program); // required so that the parameter types are tightened
-      MethodCallSpecializer.exec(program);
+      // required so that the parameter types are tightened
+      TypeTightener.exec(program, new FullOptimizerContext(program));
+      MethodCallSpecializer.exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
     }
 
     int mods = DeadCodeElimination.exec(program, method);

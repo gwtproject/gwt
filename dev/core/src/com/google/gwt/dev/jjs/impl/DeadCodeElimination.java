@@ -69,10 +69,6 @@ import com.google.gwt.dev.jjs.ast.JWhileStatement;
 import com.google.gwt.dev.jjs.ast.RuntimeConstants;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
 import com.google.gwt.dev.util.Ieee754_64_Arithmetic;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
-import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
@@ -2045,12 +2041,6 @@ public class DeadCodeElimination {
   }
 
   public static final String NAME = DeadCodeElimination.class.getSimpleName();
-
-  @VisibleForTesting
-  public static int exec(JProgram program) {
-    return new DeadCodeElimination(program).execImpl(Collections.singleton(program),
-        OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
-  }
 
   // TODO(leafwang): Mark this as @VisibleForTesting eventually; this code path is also used
   // by DataflowOptimizer for now.

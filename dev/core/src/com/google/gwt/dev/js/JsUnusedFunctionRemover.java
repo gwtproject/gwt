@@ -26,9 +26,6 @@ import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.util.collect.IdentityHashSet;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 
 import java.util.Set;
 
@@ -75,12 +72,8 @@ public class JsUnusedFunctionRemover {
 
   public static final String NAME = JsUnusedFunctionRemover.class.getSimpleName();
 
-  public static OptimizerStats exec(JsProgram program) {
-    Event optimizeJsEvent =
-        SpeedTracerLogger.start(CompilerEventType.OPTIMIZE_JS, "optimizer", NAME);
-    OptimizerStats stats = new JsUnusedFunctionRemover(program).execImpl();
-    optimizeJsEvent.end("didChange", "" + stats.didChange());
-    return stats;
+  public static int exec(JsProgram program) {
+    return new JsUnusedFunctionRemover(program).execImpl();
   }
 
   private final JsProgram program;
@@ -90,19 +83,19 @@ public class JsUnusedFunctionRemover {
     this.program = program;
   }
 
-  public OptimizerStats execImpl() {
-    OptimizerStats stats = new OptimizerStats(NAME);
+  public int execImpl() {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
 
-    // Rescue all referenced functions.
-    new RescueVisitor().accept(program);
+      // Rescue all referenced functions.
+      new RescueVisitor().accept(program);
 
-    // Remove the unused functions from the JsProgram
-    RemovalVisitor removalVisitor = new RemovalVisitor();
-    removalVisitor.accept(program);
+      // Remove the unused functions from the JsProgram
+      RemovalVisitor removalVisitor = new RemovalVisitor();
+      removalVisitor.accept(program);
 
-    if (removalVisitor.didChange()) {
-      stats.recordModified();
+      stats.recordModified(removalVisitor.getNumMods());
+
+      return stats.getNumMods();
     }
-    return stats;
   }
 }

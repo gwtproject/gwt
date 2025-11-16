@@ -169,8 +169,8 @@ public class ImplementJsVarargsTest extends OptimizerTestBase {
     program.addEntryMethod(findMainMethod(program));
     boolean didChange = true;
     do {
-      didChange &= TypeTightener.exec(program).didChange();
-      didChange &= MethodCallTightener.exec(program).didChange();
+      didChange &= TypeTightener.exec(program, new FullOptimizerContext(program)) > 0;
+      didChange &= MethodCallTightener.exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT) > 0;
     } while (didChange);
     ImplementJsVarargs.exec(program);
     return true;

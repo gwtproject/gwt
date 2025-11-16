@@ -49,9 +49,6 @@ import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
 import com.google.gwt.dev.jjs.ast.js.JsniFieldRef;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.util.collect.Stack;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
 import com.google.gwt.thirdparty.guava.common.collect.ArrayListMultimap;
@@ -528,10 +525,6 @@ public class Pruner {
   public static int exec(JProgram program, boolean noSpecialTypes,
       OptimizerContext optimizerCtx) {
     return new Pruner(program, noSpecialTypes).execImpl(optimizerCtx);
-  }
-
-  public static OptimizerStats exec(JProgram program, boolean noSpecialTypes) {
-    return exec(program, noSpecialTypes, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
   }
 
   /**

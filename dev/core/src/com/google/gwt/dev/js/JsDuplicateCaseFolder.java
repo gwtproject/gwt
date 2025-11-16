@@ -77,7 +77,7 @@ public class JsDuplicateCaseFolder {
 
     @Override
     public boolean visit(JsSwitch x, JsContext ctx) {
-      boolean modified = false;
+      int modified = 0;
 
       // A map from case body source code to the original case label
       // in which they appeared
@@ -120,15 +120,15 @@ public class JsDuplicateCaseFolder {
           // Empty the case body and insert the case label into the output
           member.getStmts().clear();
           newCases.add(index, member);
-          modified = true;
+          modified++;
         }
 
         hasPreviousFallthrough = false;
       }
 
       // Rewrite the AST if any cases have changed
-      if (modified) {
-        didChange = true;
+      if (modified > 0) {
+        numMods += modified;
         cases.clear();
         cases.addAll(newCases);
       }
@@ -158,17 +158,15 @@ public class JsDuplicateCaseFolder {
     }
   }
 
-  // Needed for OptimizerTestBase
-  public static boolean exec(JsProgram program) {
-    return new JsDuplicateCaseFolder().execImpl(program.getFragmentBlock(0));
+  public static void exec(JsProgram program) {
+    new JsDuplicateCaseFolder().execImpl(program.getFragmentBlock(0));
   }
 
   public JsDuplicateCaseFolder() {
   }
 
-  private boolean execImpl(JsBlock fragment) {
+  private void execImpl(JsBlock fragment) {
     DuplicateCaseFolder dcf = new DuplicateCaseFolder();
     dcf.accept(fragment);
-    return dcf.didChange();
   }
 }

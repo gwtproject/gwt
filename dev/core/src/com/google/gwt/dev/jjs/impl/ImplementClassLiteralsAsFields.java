@@ -325,7 +325,7 @@ public class ImplementClassLiteralsAsFields {
         }
       };
       replaceJsniClassLiteralVisitor.accept(jsniMethodBody.getFunc());
-      if (!replaceJsniClassLiteralVisitor.didChange()) {
+      if (replaceJsniClassLiteralVisitor.getNumMods() == 0) {
         // Nothing was changed, no need to replace JsniMethodBody.
         return;
       }

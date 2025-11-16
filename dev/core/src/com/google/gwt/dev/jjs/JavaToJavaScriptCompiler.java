@@ -981,15 +981,24 @@ public final class JavaToJavaScriptCompiler {
 
   private void optimizeJsLoop(Collection<JsNode> toInline) throws InterruptedException {
     int optimizationLevel = options.getOptimizationLevel();
-    int counter = 0;
+    int passCount = 0;
+    int nodeCount = jsProgram.getNodeCount();
+
+    boolean atMaxLevel = options.getOptimizationLevel() == OptionOptimize.OPTIMIZE_LEVEL_MAX;
+    int passLimit = atMaxLevel ? MAX_PASSES : options.getOptimizationLevel();
+    float minChangeRate = atMaxLevel ? FIXED_POINT_CHANGE_RATE : EFFICIENT_CHANGE_RATE;
     while (true) {
-      counter++;
+      passCount++;
+      if (passCount > passLimit) {
+        break;
+      }
       if (Thread.interrupted()) {
         throw new InterruptedException();
       }
-      Event optimizeJsEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE_JS);
 
-      try (OptimizerStats stats = OptimizerStats.jsPass(counter)) {
+      int lastNodeCount = nodeCount;
+      int mods;
+      try (OptimizerStats stats = OptimizerStats.jsPass(passCount)) {
 
         // Remove unused functions if possible.
         stats.recordModified(JsStaticEval.exec(jsProgram));
@@ -998,11 +1007,15 @@ public final class JavaToJavaScriptCompiler {
         // Remove unused functions if possible.
         stats.recordModified(JsUnusedFunctionRemover.exec(jsProgram));
 
-        optimizeJsEvent.end();
-        if ((optimizationLevel < OptionOptimize.OPTIMIZE_LEVEL_MAX && counter > optimizationLevel)
-            || !stats.didChange()) {
-          break;
-        }
+        nodeCount = jsProgram.getNodeCount();
+        mods = stats.getNumMods();
+        stats.endNodeCount(nodeCount);
+      }
+
+      float nodeChangeRate = mods / (float) lastNodeCount;
+      float sizeChangeRate = (lastNodeCount - nodeCount) / (float) lastNodeCount;
+      if (nodeChangeRate <= minChangeRate && sizeChangeRate <= minChangeRate) {
+        break;
       }
     }
 

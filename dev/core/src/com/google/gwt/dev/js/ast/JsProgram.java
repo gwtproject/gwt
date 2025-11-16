@@ -122,4 +122,23 @@ public final class JsProgram extends JsNode {
     }
     v.endVisit(this, ctx);
   }
+
+  private static final class JsTreeStats extends JsSuperVisitor {
+    private int nodeCount = 0;
+
+    @Override
+    public void endVisit(JsNode x, JsContext ctx) {
+      nodeCount++;
+    }
+
+    public int getNodeCount() {
+      return nodeCount;
+    }
+  }
+
+  public int getNodeCount() {
+    JsTreeStats stats = new JsTreeStats();
+    stats.accept(this);
+    return stats.getNodeCount();
+  }
 }

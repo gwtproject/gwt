@@ -380,7 +380,7 @@ public final class Collectors {
         keyMapper,
         valueMapper,
         (m1, m2) -> {
-          throw new IllegalStateException("Can't assign multiple values to the same key");
+          throw new IllegalStateException("Duplicate key " + m1);
         });
   }
 

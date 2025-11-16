@@ -419,6 +419,7 @@ public class CollectorsTest extends EmulTestBase {
       applyItemsWithoutSplitting(c, "a", "a");
       fail("expected IllegalStateException");
     } catch (IllegalStateException expected) {
+      assertEquals("Duplicate key a", expected.getMessage());
     }
     try {
       applyItemsWithSplitting(c, "a", "a");

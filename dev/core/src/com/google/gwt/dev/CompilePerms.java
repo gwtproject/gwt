@@ -26,7 +26,6 @@ import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.jjs.UnifiedAst;
 import com.google.gwt.dev.util.FileBackedObject;
 import com.google.gwt.dev.util.MemoryBackedObject;
-import com.google.gwt.dev.util.PerfCounter;
 import com.google.gwt.dev.util.PersistenceBackedObject;
 import com.google.gwt.dev.util.StringInterningObjectInputStream;
 import com.google.gwt.dev.util.arg.ArgHandlerLocalWorkers;
@@ -238,7 +237,6 @@ public class CompilePerms {
         exitCode = 0;
       }
     }
-    PerfCounter.print();
     System.exit(exitCode);
   }
 

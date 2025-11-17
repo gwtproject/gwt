@@ -22,6 +22,7 @@ import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.ModuleDefLoader;
 import com.google.gwt.dev.jjs.JavaToJavaScriptCompiler;
 import com.google.gwt.dev.jjs.PermutationResult;
+import com.google.gwt.dev.util.PerfCounter;
 import com.google.gwt.dev.util.arg.ArgHandlerPerm;
 import com.google.gwt.dev.util.arg.OptionPerm;
 
@@ -104,6 +105,7 @@ public class CompileOnePerm {
         exitCode = 0;
       }
     }
+    PerfCounter.print();
     System.exit(exitCode);
   }
 

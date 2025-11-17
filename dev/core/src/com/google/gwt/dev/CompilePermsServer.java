@@ -20,6 +20,7 @@ import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.jjs.UnifiedAst;
+import com.google.gwt.dev.util.PerfCounter;
 import com.google.gwt.dev.util.PersistenceBackedObject;
 import com.google.gwt.dev.util.StringInterningObjectInputStream;
 import com.google.gwt.dev.util.arg.ArgHandlerLogLevel;
@@ -240,6 +241,7 @@ public class CompilePermsServer {
       }
     }
 
+    PerfCounter.print();
     System.exit(exitCode);
   }
 

@@ -184,16 +184,14 @@ public final class Integer extends Number implements Comparable<Integer> {
   }
 
   public static int rotateLeft(int i, int distance) {
-    int rotateValue = distance % SIZE;
-    int lowerBits = i >>> (SIZE - rotateValue);
-    int upperBits = i << rotateValue;
+    int lowerBits = i >>> (SIZE - distance);
+    int upperBits = i << distance;
     return upperBits | lowerBits;
   }
 
   public static int rotateRight(int i, int distance) {
-    int rotateValue = distance % SIZE;
-    int upperBits = i << (SIZE - rotateValue);
-    int lowerBits = i >>> rotateValue;
+    int upperBits = i << (SIZE - distance);
+    int lowerBits = i >>> distance;
     return upperBits | lowerBits;
   }
 

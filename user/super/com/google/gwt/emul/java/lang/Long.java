@@ -128,16 +128,14 @@ public final class Long extends Number implements Comparable<Long> {
   }
 
   public static long rotateLeft(long i, int distance) {
-    int rotateValue = distance % SIZE;
-    long lowerBits = i >>> (SIZE - rotateValue);
-    long upperBits = i << rotateValue;
+    long lowerBits = i >>> (SIZE - distance);
+    long upperBits = i << distance;
     return upperBits | lowerBits;
   }
 
   public static long rotateRight(long i, int distance) {
-    int rotateValue = distance % SIZE;
-    long upperBits = i << (SIZE - rotateValue);
-    long lowerBits = i >>> rotateValue;
+    long upperBits = i << (SIZE - distance);
+    long lowerBits = i >>> distance;
     return upperBits | lowerBits;
   }
 

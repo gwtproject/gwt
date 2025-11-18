@@ -518,6 +518,7 @@ public final class String implements Comparable<String>, CharSequence,
    *
    * TODO(jat): properly handle Java regex syntax
    */
+  @SuppressWarnings("checkstyle:SpaceAfterColon")
   public boolean matches(String regex) {
     // We surround the regex with '^' and '$' because it must match the entire string.
     return new NativeRegExp("^(?:" + regex + ")$").test(this);

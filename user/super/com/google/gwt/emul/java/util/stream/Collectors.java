@@ -376,12 +376,31 @@ public final class Collectors {
   public static <T, K, U> Collector<T, ?, Map<K, U>> toMap(
       final Function<? super T, ? extends K> keyMapper,
       final Function<? super T, ? extends U> valueMapper) {
-    return toMap(
-        keyMapper,
-        valueMapper,
+    return Collector.of(
+        HashMap::new,
+        (map, item) -> {
+          K key = keyMapper.apply(item);
+          U newValue = Objects.requireNonNull(valueMapper.apply(item));
+          if (map.containsKey(key)) {
+            throw getDuplicateKeyException(key);
+          } else {
+            map.put(key, newValue);
+          }
+        },
         (m1, m2) -> {
-          throw new IllegalStateException("Duplicate key " + m1);
-        });
+          for (Map.Entry<K, U> entry : m2.entrySet()) {
+            if (m1.get(entry.getKey()) != null) {
+              throw getDuplicateKeyException(entry.getKey());
+            }
+            m1.put(entry.getKey(), entry.getValue());
+          }
+          return m1;
+        },
+        Collector.Characteristics.IDENTITY_FINISH);
+  }
+
+  private static RuntimeException getDuplicateKeyException(Object key) {
+    return new IllegalStateException("Duplicate key: " + key);
   }
 
   public static <T, K, U> Collector<T, ?, Map<K, U>> toMap(
@@ -423,7 +442,7 @@ public final class Collectors {
         mapSupplier,
         (map, item) -> {
           K key = keyMapper.apply(item);
-          U newValue = valueMapper.apply(item);
+          U newValue = Objects.requireNonNull(valueMapper.apply(item));
           if (map.containsKey(key)) {
             map.put(key, mergeFunction.apply(map.get(key), newValue));
           } else {

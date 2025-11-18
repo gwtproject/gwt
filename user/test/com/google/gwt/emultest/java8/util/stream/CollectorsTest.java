@@ -49,6 +49,7 @@ import java.util.HashSet;
 import java.util.IntSummaryStatistics;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.LongSummaryStatistics;
 import java.util.Map;
 import java.util.Optional;
@@ -406,12 +407,13 @@ public class CollectorsTest extends EmulTestBase {
   }
 
   public void testMap() {
-    Collector<String, ?, Map<String, String>> c = toMap(Function.identity(), Function.identity());
+    Function<String, String> toUpper = s -> s.toUpperCase(Locale.ROOT);
+    Collector<String, ?, Map<String, String>> c = toMap(Function.identity(), toUpper);
 
     // two distinct items
     Map<String, String> map = new HashMap<>();
-    map.put("a", "a");
-    map.put("b", "b");
+    map.put("a", "A");
+    map.put("b", "B");
     applyItems(map, c, "a", "b");
 
     // inline applyItems and test each to confirm failure for duplicates
@@ -425,10 +427,11 @@ public class CollectorsTest extends EmulTestBase {
       applyItemsWithSplitting(c, "a", "a");
       fail("expected IllegalStateException");
     } catch (IllegalStateException expected) {
+      assertEquals("Duplicate key a", expected.getMessage());
     }
 
     assertZeroItemsCollectedAs(Collections.emptyMap(), c);
-    assertSingleItemCollectedAs(Collections.singletonMap("a", "a"), c, "a");
+    assertSingleItemCollectedAs(Collections.singletonMap("a", "A"), c, "a");
 
     List<String> seen = new ArrayList<>();
     c = toMap(Function.identity(), Function.identity(), (s, s2) -> {
@@ -440,6 +443,24 @@ public class CollectorsTest extends EmulTestBase {
     map.put("a", "a,a");
     applyItems(map, c, "a", "a");
     assertEquals(Arrays.asList("first: a", "second: a", "first: a", "second: a"), seen);
+  }
+
+  public void testMapInvalid() {
+    Collector<String, ?, Map<String, String>> c = toMap(Function.identity(), ignore -> null);
+
+    // inline applyItems and test each to confirm failure for duplicates
+    try {
+      applyItemsWithoutSplitting(c, "a", "b");
+      fail("expected NullPointerException");
+    } catch (NullPointerException expected) {
+      assertEquals("Duplicate key a", expected.getMessage());
+    }
+    try {
+      applyItemsWithSplitting(c, "a", "a");
+      fail("expected NullPointerException");
+    } catch (NullPointerException expected) {
+      assertEquals("Duplicate key a", expected.getMessage());
+    }
   }
 
   public void testSet() {

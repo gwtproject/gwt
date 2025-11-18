@@ -502,7 +502,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public int lastIndexOf(String str, int start) {
-    return asNativeString().lastIndexOf(str, start);
+    return start < 0 ? -1 : asNativeString().lastIndexOf(str, start);
   }
 
   @Override

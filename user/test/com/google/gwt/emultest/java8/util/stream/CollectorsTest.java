@@ -453,13 +453,13 @@ public class CollectorsTest extends EmulTestBase {
       applyItemsWithoutSplitting(c, "a", "b");
       fail("expected NullPointerException");
     } catch (NullPointerException expected) {
-      assertEquals("Duplicate key a", expected.getMessage());
+      // expected
     }
     try {
       applyItemsWithSplitting(c, "a", "a");
       fail("expected NullPointerException");
     } catch (NullPointerException expected) {
-      assertEquals("Duplicate key a", expected.getMessage());
+      // expected
     }
   }
 

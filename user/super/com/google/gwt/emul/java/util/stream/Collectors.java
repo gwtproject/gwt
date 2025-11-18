@@ -376,31 +376,11 @@ public final class Collectors {
   public static <T, K, U> Collector<T, ?, Map<K, U>> toMap(
       final Function<? super T, ? extends K> keyMapper,
       final Function<? super T, ? extends U> valueMapper) {
-    return Collector.of(
-        HashMap::new,
-        (map, item) -> {
-          K key = keyMapper.apply(item);
-          U newValue = Objects.requireNonNull(valueMapper.apply(item));
-          if (map.containsKey(key)) {
-            throw getDuplicateKeyException(key);
-          } else {
-            map.put(key, newValue);
-          }
-        },
-        (m1, m2) -> {
-          for (Map.Entry<K, U> entry : m2.entrySet()) {
-            if (m1.get(entry.getKey()) != null) {
-              throw getDuplicateKeyException(entry.getKey());
-            }
-            m1.put(entry.getKey(), entry.getValue());
-          }
-          return m1;
-        },
-        Collector.Characteristics.IDENTITY_FINISH);
+    return toMap(keyMapper, valueMapper, null, HashMap::new, true);
   }
 
   private static RuntimeException getDuplicateKeyException(Object key) {
-    return new IllegalStateException("Duplicate key: " + key);
+    return new IllegalStateException("Duplicate key " + key);
   }
 
   public static <T, K, U> Collector<T, ?, Map<K, U>> toMap(
@@ -438,18 +418,32 @@ public final class Collectors {
       final Function<? super T, ? extends U> valueMapper,
       final BinaryOperator<U> mergeFunction,
       final Supplier<M> mapSupplier) {
+    return toMap(keyMapper, valueMapper, mergeFunction, mapSupplier, false);
+  }
+
+  /*
+   * If unique flag is true, mergeFunction can safely be null.
+   */
+  private static <T, K, U, M extends Map<K, U>> Collector<T, ?, M> toMap(
+      final Function<? super T, ? extends K> keyMapper,
+      final Function<? super T, ? extends U> valueMapper,
+      final BinaryOperator<U> mergeFunction,
+      final Supplier<M> mapSupplier, final boolean unique) {
     return Collector.of(
         mapSupplier,
         (map, item) -> {
           K key = keyMapper.apply(item);
           U newValue = Objects.requireNonNull(valueMapper.apply(item));
           if (map.containsKey(key)) {
+            if (unique) {
+              throw getDuplicateKeyException(key);
+            }
             map.put(key, mergeFunction.apply(map.get(key), newValue));
           } else {
             map.put(key, newValue);
           }
         },
-        (m1, m2) -> mergeAll(m1, m2, mergeFunction),
+        (m1, m2) -> unique ? mergeAllUnique(m1, m2) : mergeAll(m1, m2, mergeFunction),
         Collector.Characteristics.IDENTITY_FINISH);
   }
 
@@ -482,6 +476,17 @@ public final class Collectors {
       M m1, M m2, BinaryOperator<V> mergeFunction) {
     for (Map.Entry<K, V> entry : m2.entrySet()) {
       m1.merge(entry.getKey(), entry.getValue(), mergeFunction);
+    }
+    return m1;
+  }
+
+  private static <K, V, M extends Map<K, V>> M mergeAllUnique(
+      M m1, M m2) {
+    for (Map.Entry<K, V> entry : m2.entrySet()) {
+      if (m1.get(entry.getKey()) != null) {
+        throw getDuplicateKeyException(entry.getKey());
+      }
+      m1.put(entry.getKey(), entry.getValue());
     }
     return m1;
   }

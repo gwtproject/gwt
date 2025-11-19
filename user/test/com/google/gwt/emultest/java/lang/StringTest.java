@@ -623,6 +623,8 @@ public class StringTest extends GWTTestCase {
     assertFalse("11f.1", hideFromCompiler("ab").matches("|none"));
     assertFalse("11f.2", hideFromCompiler("anoneb").matches("|none"));
     assertTrue("12t", hideFromCompiler("none").matches("^|none$"));
+    assertTrue("13t", hideFromCompiler("abccd").matches(".*(.)\\1.*"));
+    assertFalse("13t", hideFromCompiler("abcd").matches(".*(.)\\1.*"));
   }
 
   public void testNull() {

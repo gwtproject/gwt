@@ -23,9 +23,7 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.util.arg.SourceLevel;
 import com.google.gwt.dev.util.collect.Lists;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.thirdparty.guava.common.collect.ArrayListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
@@ -660,15 +658,11 @@ public class JdtCompiler {
    */
   public static List<CompilationUnit> compile(TreeLogger logger, CompilerContext compilerContext,
       Collection<CompilationUnitBuilder> builders) throws UnableToCompleteException {
-    Event jdtCompilerEvent = SpeedTracerLogger.start(CompilerEventType.JDT_COMPILER);
-
-    try {
+    try (SimpleEvent ignored = new SimpleEvent("Jdt Compiler")){
       DefaultUnitProcessor processor = new DefaultUnitProcessor();
       JdtCompiler compiler = new JdtCompiler(compilerContext, processor);
       compiler.doCompile(logger, builders);
       return processor.getResults();
-    } finally {
-      jdtCompilerEvent.end();
     }
   }
 

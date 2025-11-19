@@ -17,7 +17,9 @@ package com.google.gwt.dev.util.log.perf;
 
 import jdk.jfr.Description;
 import jdk.jfr.Label;
+import jdk.jfr.Name;
 
+@Name("gwt.compiler.OptimizationLoop")
 @Label("Optimization Loop")
 public class OptimizationLoopEvent extends AbstractOptimizationEvent {
   @Label("Optimization iteration")

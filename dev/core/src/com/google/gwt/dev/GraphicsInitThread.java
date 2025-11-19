@@ -15,8 +15,7 @@
  */
 package com.google.gwt.dev;
 
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 
 import java.awt.GraphicsEnvironment;
 
@@ -33,10 +32,8 @@ class GraphicsInitThread extends Thread {
 
   @Override
   public void run() {
-    SpeedTracerLogger.Event createGraphicsEvent =
-        SpeedTracerLogger.start(CompilerEventType.GRAPHICS_INIT, "java.awt.headless", System
-            .getProperty("java.awt.headless"));
-    GraphicsEnvironment.getLocalGraphicsEnvironment();
-    createGraphicsEvent.end();
+    try (SimpleEvent ignored = new SimpleEvent("Graphics2d")) {
+      GraphicsEnvironment.getLocalGraphicsEnvironment();
+    }
   }
 }

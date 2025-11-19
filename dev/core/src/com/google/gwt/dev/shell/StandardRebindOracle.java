@@ -33,6 +33,7 @@ import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import jdk.jfr.Name;
 
 import java.util.Deque;
 import java.util.Map;
@@ -41,10 +42,12 @@ import java.util.Map;
  * Implements rebind logic in terms of a variety of other well-known oracles.
  */
 public class StandardRebindOracle implements RebindOracle {
+  @Name("gwt.compiler.Rebind")
   public static class RebindEvent extends AbstractJfrEvent {
     String typeName;
     String resultTypeName;
   }
+
   /**
    * Makes the actual deferred binding decision by examining rules.
    */

@@ -32,6 +32,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Label("GWT Performance Event")
 @Category({"GWT"})
 @StackTrace(false)
+@Deprecated
 public class GwtJfrEvent extends Event implements AutoCloseable {
   @MetadataDefinition
   @Name("gwt.EventId")

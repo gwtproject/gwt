@@ -174,9 +174,7 @@ import com.google.gwt.dev.util.Name.SourceName;
 import com.google.gwt.dev.util.Pair;
 import com.google.gwt.dev.util.arg.OptionOptimize;
 import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.soyc.SoycDashboard;
 import com.google.gwt.soyc.io.ArtifactsOutputDirectory;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
@@ -187,6 +185,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.hash.Hasher;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
+import jdk.jfr.Name;
 import org.xml.sax.SAXException;
 
 import java.io.BufferedInputStream;
@@ -279,6 +278,7 @@ public final class JavaToJavaScriptCompiler {
     return javaToJavaScriptCompiler.compilePermutation(permutation, unifiedAst);
   }
 
+  @Name("gwt.compiler.Permutation")
   public static class PermutationEvent extends AbstractJfrEvent {
     String properties;
   }
@@ -320,140 +320,147 @@ public final class JavaToJavaScriptCompiler {
      */
 
     long permStartMs = System.currentTimeMillis();
+    int permutationId = permutation.getId();
+    PermutationProperties properties = permutation.getProperties();
     try (PermutationEvent event = new PermutationEvent()) {
-      event.properties = permutation.getProperties().prettyPrint();
-      Event javaEvent = SpeedTracerLogger.start(CompilerEventType.PERMUTATION_JAVA);
-
-      // (1) Initialize local state.
       long startTimeMs = System.currentTimeMillis();
-      PermutationProperties properties = permutation.getProperties();
-      int permutationId = permutation.getId();
-      AST ast = unifiedAst.getFreshAst();
-      jprogram = ast.getJProgram();
-      jsProgram = ast.getJsProgram();
-      Map<StandardSymbolData, JsName> symbolTable =
-          new TreeMap<StandardSymbolData, JsName>(new SymbolData.ClassIdentComparator());
+      event.properties = properties.prettyPrint();
 
-      // TODO(stalcup): hide metrics gathering in a callback or subclass
-      logger.log(TreeLogger.INFO, "Compiling permutation " + permutationId + "...");
-
-      // (2) Transform unresolved Java AST to resolved Java AST
-      ResolvePermutationDependentValues
-          .exec(jprogram, properties, permutation.getPropertyAndBindingInfos());
-
-      // TODO(stalcup): hide metrics gathering in a callback or subclass
-      // This has to happen before optimizations because functions might
-      // be optimized out; we want those marked as "not executed", not "not
-      // instrumentable".
+      TypeMapper<?> typeMapper;
       Multimap<String, Integer> instrumentableLines = null;
-      if (CoverageInstrumentor.isCoverageEnabled()) {
-        instrumentableLines = BaselineCoverageGatherer.exec(jprogram);
-      }
+      try (SimpleEvent ignored = new SimpleEvent("Permutation Java")) {
+        // (1) Initialize local state.
+        AST ast = unifiedAst.getFreshAst();
+        jprogram = ast.getJProgram();
+        jsProgram = ast.getJsProgram();
 
-      // Record initial set of type->type references.
-      // type->type references need to be collected in two phases, 1) before any process to the
-      // AST has happened (to record for example reference to types declaring compile-time
-      // constants) and 2) after all normalizations to collect synthetic references (e.g. to
-      // record references to runtime classes like LongLib).
-      maybeRecordReferencesAndControlFlow(false);
 
-      // Rewrite calls to from boxed constructor types to specialized unboxed methods
-      RewriteConstructorCallsForUnboxedTypes.exec(jprogram);
+        // TODO(stalcup): hide metrics gathering in a callback or subclass
+        logger.log(TreeLogger.INFO, "Compiling permutation " + permutationId + "...");
 
-      // Replace compile time constants by their values.
-      // TODO(rluble): eventually move to normizeSemantics.
-      CompileTimeConstantsReplacer.exec(jprogram);
+        // (2) Transform unresolved Java AST to resolved Java AST
+        ResolvePermutationDependentValues
+            .exec(jprogram, properties, permutation.getPropertyAndBindingInfos());
 
-      // TODO(stalcup): move to after normalize.
-      // (3) Optimize the resolved Java AST
-      optimizeJava();
-
-      // TODO(stalcup): move to before optimize.
-      // (4) Normalize the resolved Java AST
-      TypeMapper<?> typeMapper = normalizeSemantics();
-
-      // TODO(stalcup): this stage shouldn't exist, move into optimize.
-      postNormalizationOptimizeJava();
-
-      // Now that the AST has stopped mutating update with the final references.
-      maybeRecordReferencesAndControlFlow(true);
-
-      javaEvent.end();
-
-      Event javaScriptEvent = SpeedTracerLogger.start(CompilerEventType.PERMUTATION_JAVASCRIPT);
-
-      // (5) Construct the Js AST
-      Pair<? extends JavaToJavaScriptMap, Set<JsNode>> jjsMapAndInlineableFunctions =
-          GenerateJavaScriptAST.exec(logger, jprogram, jsProgram,
-              compilerContext, typeMapper, symbolTable, properties);
-      JavaToJavaScriptMap jjsmap = jjsMapAndInlineableFunctions.getLeft();
-
-      // TODO(stalcup): hide metrics gathering in a callback or subclass
-      if (CoverageInstrumentor.isCoverageEnabled()) {
-        CoverageInstrumentor.exec(jprogram, jsProgram, jjsmap, instrumentableLines);
-      }
-
-      // (6) Normalize the Js AST
-      JsNormalizer.exec(jsProgram);
-
-      // TODO(stalcup): move to AST construction
-      JsSymbolResolver.exec(jsProgram);
-
-      if (options.getNamespace() == JsNamespaceOption.PACKAGE) {
-        if (!jprogram.getRunAsyncs().isEmpty()) {
-          options.setNamespace(JsNamespaceOption.NONE);
-          logger.log(TreeLogger.Type.WARN,
-              "Namespace option is not compatible with CodeSplitter, turning it off.");
-        } else {
-          JsNamespaceChooser.exec(jprogram, jsProgram, jjsmap);
+        // TODO(stalcup): hide metrics gathering in a callback or subclass
+        // This has to happen before optimizations because functions might
+        // be optimized out; we want those marked as "not executed", not "not
+        // instrumentable".
+        if (CoverageInstrumentor.isCoverageEnabled()) {
+          instrumentableLines = BaselineCoverageGatherer.exec(jprogram);
         }
+
+        // Record initial set of type->type references.
+        // type->type references need to be collected in two phases, 1) before any process to the
+        // AST has happened (to record for example reference to types declaring compile-time
+        // constants) and 2) after all normalizations to collect synthetic references (e.g. to
+        // record references to runtime classes like LongLib).
+        maybeRecordReferencesAndControlFlow(false);
+
+        // Rewrite calls to from boxed constructor types to specialized unboxed methods
+        RewriteConstructorCallsForUnboxedTypes.exec(jprogram);
+
+        // Replace compile time constants by their values.
+        // TODO(rluble): eventually move to normizeSemantics.
+        CompileTimeConstantsReplacer.exec(jprogram);
+
+        // TODO(stalcup): move to after normalize.
+        // (3) Optimize the resolved Java AST
+        optimizeJava();
+
+        // TODO(stalcup): move to before optimize.
+        // (4) Normalize the resolved Java AST
+        typeMapper = normalizeSemantics();
+
+        // TODO(stalcup): this stage shouldn't exist, move into optimize.
+        postNormalizationOptimizeJava();
+
+        // Now that the AST has stopped mutating update with the final references.
+        maybeRecordReferencesAndControlFlow(true);
       }
 
-      // TODO(stalcup): move to normalization
-      Pair<SyntheticArtifact, MultipleDependencyGraphRecorder> dependenciesAndRecorder =
-          splitJsIntoFragments(properties, permutationId, jjsmap);
+      final Map<StandardSymbolData, JsName> symbolTable =
+          new TreeMap<>(new SymbolData.ClassIdentComparator());
+      final JavaToJavaScriptMap jjsmap;
+      final Pair<SyntheticArtifact, MultipleDependencyGraphRecorder> dependenciesAndRecorder;
+      final Map<JsName, JsLiteral> internedLiteralByVariableName;
+      final List<JsSourceMap> sourceInfoMaps = new ArrayList<>();
+      final boolean isSourceMapsEnabled;
+      final String[] jsFragments;
+      final StatementRanges[] ranges;
+      final SizeBreakdown[] sizeBreakdowns;
+      try (SimpleEvent ignored = new SimpleEvent("Permutation JavaScript")) {
 
-      // TODO(stalcup): move to normalization
-      EvalFunctionsAtTopScope.exec(jsProgram, jjsmap);
+        // (5) Construct the Js AST
 
-      // (7) Optimize the JS AST.
-      final Set<JsNode> inlinableJsFunctions = jjsMapAndInlineableFunctions.getRight();
-      optimizeJs(inlinableJsFunctions);
-      if (options.getOptimizationLevel() > OptionOptimize.OPTIMIZE_LEVEL_DRAFT) {
-        JsForceInliningChecker.check(logger, jjsmap, jsProgram);
+        Pair<? extends JavaToJavaScriptMap, Set<JsNode>> jjsMapAndInlineableFunctions =
+            GenerateJavaScriptAST.exec(logger, jprogram, jsProgram,
+                compilerContext, typeMapper, symbolTable, properties);
+        jjsmap = jjsMapAndInlineableFunctions.getLeft();
+
+        // TODO(stalcup): hide metrics gathering in a callback or subclass
+        if (CoverageInstrumentor.isCoverageEnabled()) {
+          CoverageInstrumentor.exec(jprogram, jsProgram, jjsmap, instrumentableLines);
+        }
+
+        // (6) Normalize the Js AST
+        JsNormalizer.exec(jsProgram);
+
+        // TODO(stalcup): move to AST construction
+        JsSymbolResolver.exec(jsProgram);
+
+        if (options.getNamespace() == JsNamespaceOption.PACKAGE) {
+          if (!jprogram.getRunAsyncs().isEmpty()) {
+            options.setNamespace(JsNamespaceOption.NONE);
+            logger.log(TreeLogger.Type.WARN,
+                "Namespace option is not compatible with CodeSplitter, turning it off.");
+          } else {
+            JsNamespaceChooser.exec(jprogram, jsProgram, jjsmap);
+          }
+        }
+
+        // TODO(stalcup): move to normalization
+        dependenciesAndRecorder = splitJsIntoFragments(properties, permutationId, jjsmap);
+
+        // TODO(stalcup): move to normalization
+        EvalFunctionsAtTopScope.exec(jsProgram, jjsmap);
+
+        // (7) Optimize the JS AST.
+        final Set<JsNode> inlinableJsFunctions = jjsMapAndInlineableFunctions.getRight();
+        optimizeJs(inlinableJsFunctions);
+        if (options.getOptimizationLevel() > OptionOptimize.OPTIMIZE_LEVEL_DRAFT) {
+          JsForceInliningChecker.check(logger, jjsmap, jsProgram);
+        }
+
+        // TODO(stalcup): move to normalization
+        // Must run before code splitter and namer.
+        JsStackEmulator.exec(jprogram, jsProgram, properties, jjsmap);
+
+        // TODO(stalcup): move to optimize.
+        internedLiteralByVariableName = renameJsSymbols(properties, jjsmap);
+
+        // No new JsNames or references to JSNames can be introduced after this
+        // point.
+        HandleCrossFragmentReferences.exec(jsProgram, properties);
+
+        // TODO(stalcup): move to normalization
+        JsBreakUpLargeVarStatements.exec(jsProgram, properties.getConfigurationProperties());
+
+        if (!options.isIncrementalCompileEnabled()) {
+          // Verifies consistency between jsProgram and jjsmap if assertions are enabled.
+          // TODO(rluble): make it work for incremental compiles.
+          JavaScriptVerifier.verify(jsProgram, jjsmap);
+        }
+
+        // (8) Generate Js source
+        isSourceMapsEnabled = properties.isTrueInAnyPermutation("compiler.useSourceMaps");
+        jsFragments = new String[jsProgram.getFragmentCount()];
+        ranges = new StatementRanges[jsFragments.length];
+        sizeBreakdowns = options.isJsonSoycEnabled() || options.isSoycEnabled()
+            || options.isCompilerMetricsEnabled() ? new SizeBreakdown[jsFragments.length] : null;
+        generateJavaScriptCode(jjsmap, jsFragments, ranges, sizeBreakdowns, sourceInfoMaps,
+            isSourceMapsEnabled || options.isJsonSoycEnabled());
       }
-
-      // TODO(stalcup): move to normalization
-      // Must run before code splitter and namer.
-      JsStackEmulator.exec(jprogram, jsProgram, properties, jjsmap);
-
-      // TODO(stalcup): move to optimize.
-      Map<JsName, JsLiteral> internedLiteralByVariableName = renameJsSymbols(properties, jjsmap);
-
-      // No new JsNames or references to JSNames can be introduced after this
-      // point.
-      HandleCrossFragmentReferences.exec(jsProgram, properties);
-
-      // TODO(stalcup): move to normalization
-      JsBreakUpLargeVarStatements.exec(jsProgram, properties.getConfigurationProperties());
-
-      if (!options.isIncrementalCompileEnabled()) {
-        // Verifies consistency between jsProgram and jjsmap if assertions are enabled.
-        // TODO(rluble): make it work for incremental compiles.
-        JavaScriptVerifier.verify(jsProgram, jjsmap);
-      }
-
-      // (8) Generate Js source
-      List<JsSourceMap> sourceInfoMaps = new ArrayList<JsSourceMap>();
-      boolean isSourceMapsEnabled = properties.isTrueInAnyPermutation("compiler.useSourceMaps");
-      String[] jsFragments = new String[jsProgram.getFragmentCount()];
-      StatementRanges[] ranges = new StatementRanges[jsFragments.length];
-      SizeBreakdown[] sizeBreakdowns = options.isJsonSoycEnabled() || options.isSoycEnabled()
-          || options.isCompilerMetricsEnabled() ? new SizeBreakdown[jsFragments.length] : null;
-      generateJavaScriptCode(jjsmap, jsFragments, ranges, sizeBreakdowns, sourceInfoMaps,
-          isSourceMapsEnabled || options.isJsonSoycEnabled());
-
-      javaScriptEvent.end();
 
       // (9) Construct and return a value
       PermutationResult permutationResult =
@@ -492,8 +499,7 @@ public final class JavaToJavaScriptCompiler {
    * These passes can not be reordering because of subtle interdependencies.
    */
   private TypeMapper<?> normalizeSemantics() {
-    Event event = SpeedTracerLogger.start(CompilerEventType.JAVA_NORMALIZERS);
-    try {
+    try (SimpleEvent ignored = new SimpleEvent("Java Normalizers")) {
       Devirtualizer.exec(jprogram);
       CatchBlockNormalizer.exec(jprogram);
       PostOptimizationCompoundAssignmentNormalizer.exec(jprogram);
@@ -521,8 +527,6 @@ public final class JavaToJavaScriptCompiler {
       ResolveRuntimeTypeReferences.exec(jprogram, typeMapper, getTypeOrder());
 
       return typeMapper;
-    } finally {
-      event.end();
     }
   }
 
@@ -541,8 +545,7 @@ public final class JavaToJavaScriptCompiler {
   }
 
   private void postNormalizationOptimizeJava() {
-    Event event = SpeedTracerLogger.start(CompilerEventType.JAVA_POST_NORMALIZER_OPTIMIZERS);
-    try {
+    try (SimpleEvent ignored = new SimpleEvent("Post-Normalization Java Optimizers")) {
       if (shouldOptimize()) {
         RemoveSpecializations.exec(jprogram);
         Pruner.exec(jprogram, false, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
@@ -550,8 +553,6 @@ public final class JavaToJavaScriptCompiler {
         jprogram.typeOracle.recomputeAfterOptimizations(jprogram.getDeclaredTypes());
       }
       ReplaceGetClassOverrides.exec(jprogram);
-    } finally {
-      event.end();
     }
   }
 
@@ -721,19 +722,18 @@ public final class JavaToJavaScriptCompiler {
 
     assert internedLiteralByVariableName != null;
 
-    Event event = SpeedTracerLogger.start(CompilerEventType.PERMUTATION_ARTIFACTS);
-
-    CompilationMetricsArtifact compilationMetrics = addCompilerMetricsArtifact(
-        unifiedAst, permutation, startTimeMs, sizeBreakdowns, permutationResult);
-    addSoycArtifacts(unifiedAst, permutationId, jjsmap, dependenciesAndRecorder,
-        internedLiteralByVariableName, jsFragments, sizeBreakdowns, sourceInfoMaps,
-        permutationResult, compilationMetrics);
-    addSourceMapArtifacts(permutationId, jjsmap, dependenciesAndRecorder, isSourceMapsEnabled,
-        sizeBreakdowns, sourceInfoMaps, permutationResult);
-    maybeAddGeneratedArtifacts(permutationResult);
-
-    event.end();
+    try (SimpleEvent ignored = new SimpleEvent("Permutation Artifacts")) {
+      CompilationMetricsArtifact compilationMetrics = addCompilerMetricsArtifact(
+          unifiedAst, permutation, startTimeMs, sizeBreakdowns, permutationResult);
+      addSoycArtifacts(unifiedAst, permutationId, jjsmap, dependenciesAndRecorder,
+          internedLiteralByVariableName, jsFragments, sizeBreakdowns, sourceInfoMaps,
+          permutationResult, compilationMetrics);
+      addSourceMapArtifacts(permutationId, jjsmap, dependenciesAndRecorder, isSourceMapsEnabled,
+          sizeBreakdowns, sourceInfoMaps, permutationResult);
+      maybeAddGeneratedArtifacts(permutationResult);
+    }
   }
+
 
   /**
    * Generate Js code from the given Js ASTs. Also produces information about that transformation.
@@ -742,59 +742,56 @@ public final class JavaToJavaScriptCompiler {
       StatementRanges[] ranges, SizeBreakdown[] sizeBreakdowns,
       List<JsSourceMap> sourceInfoMaps, boolean sourceMapsEnabled) {
 
-    Event generateJavascriptEvent =
-        SpeedTracerLogger.start(CompilerEventType.GENERATE_JAVASCRIPT);
+    try (SimpleEvent ignored = new SimpleEvent("Generate JavaScript")) {
+      for (int i = 0; i < jsFragments.length; i++) {
+        DefaultTextOutput out = new DefaultTextOutput(!options.isIncrementalCompileEnabled() &&
+            options.getOutput().shouldMinimize());
+        JsReportGenerationVisitor v = new JsReportGenerationVisitor(out, jjsMap,
+            options.isJsonSoycEnabled());
+        v.accept(jsProgram.getFragmentBlock(i));
 
-    for (int i = 0; i < jsFragments.length; i++) {
-      DefaultTextOutput out = new DefaultTextOutput(!options.isIncrementalCompileEnabled() &&
-          options.getOutput().shouldMinimize());
-      JsReportGenerationVisitor v = new JsReportGenerationVisitor(out, jjsMap,
-          options.isJsonSoycEnabled());
-      v.accept(jsProgram.getFragmentBlock(i));
+        StatementRanges statementRanges = v.getStatementRanges();
+        String code = out.toString();
+        JsSourceMap infoMap = (sourceInfoMaps != null) ? v.getSourceInfoMap() : null;
 
-      StatementRanges statementRanges = v.getStatementRanges();
-      String code = out.toString();
-      JsSourceMap infoMap = (sourceInfoMaps != null) ? v.getSourceInfoMap() : null;
+        JsAbstractTextTransformer transformer =
+            new JsNoopTransformer(code, statementRanges, infoMap);
 
-      JsAbstractTextTransformer transformer =
-          new JsNoopTransformer(code, statementRanges, infoMap);
+        /*
+         * Cut generated JS up on class boundaries and re-link the source (possibly making use of
+         * source from previous compiles, thus making it possible to perform partial recompiles).
+         */
+        if (options.isIncrementalCompileEnabled()) {
+          transformer = new JsTypeLinker(logger, transformer, v.getClassRanges(),
+              v.getProgramClassRange(), getMinimalRebuildCache(), jprogram.typeOracle);
+          transformer.exec();
+        }
 
-      /**
-       * Cut generated JS up on class boundaries and re-link the source (possibly making use of
-       * source from previous compiles, thus making it possible to perform partial recompiles).
-       */
-      if (options.isIncrementalCompileEnabled()) {
-        transformer = new JsTypeLinker(logger, transformer, v.getClassRanges(),
-            v.getProgramClassRange(), getMinimalRebuildCache(), jprogram.typeOracle);
-        transformer.exec();
-      }
+        /*
+         * Reorder function decls to improve compression ratios. Also restructures the top level
+         * blocks into sub-blocks if they exceed 32767 statements.
+         */
+        // TODO(cromwellian) move to the Js AST optimization, re-enable sourcemaps + clustering
+        if (!sourceMapsEnabled && !options.isClosureCompilerFormatEnabled()
+            && options.shouldClusterSimilarFunctions()
+            && options.getNamespace() == JsNamespaceOption.NONE
+            && options.getOutput() == JsOutputOption.OBFUSCATED) {
+          try (SimpleEvent ignored2 = new SimpleEvent("Function Clusterer")) {
+            transformer = new JsFunctionClusterer(transformer);
+            transformer.exec();
+          }
+        }
 
-      /**
-       * Reorder function decls to improve compression ratios. Also restructures the top level
-       * blocks into sub-blocks if they exceed 32767 statements.
-       */
-      Event functionClusterEvent = SpeedTracerLogger.start(CompilerEventType.FUNCTION_CLUSTER);
-      // TODO(cromwellian) move to the Js AST optimization, re-enable sourcemaps + clustering
-      if (!sourceMapsEnabled && !options.isClosureCompilerFormatEnabled()
-          && options.shouldClusterSimilarFunctions()
-          && options.getNamespace() == JsNamespaceOption.NONE
-          && options.getOutput() == JsOutputOption.OBFUSCATED) {
-        transformer = new JsFunctionClusterer(transformer);
-        transformer.exec();
-      }
-      functionClusterEvent.end();
-
-      jsFragments[i] = transformer.getJs();
-      ranges[i] = transformer.getStatementRanges();
-      if (sizeBreakdowns != null) {
-        sizeBreakdowns[i] = v.getSizeBreakdown();
-      }
-      if (sourceInfoMaps != null) {
-        sourceInfoMaps.add(transformer.getSourceInfoMap());
+        jsFragments[i] = transformer.getJs();
+        ranges[i] = transformer.getStatementRanges();
+        if (sizeBreakdowns != null) {
+          sizeBreakdowns[i] = v.getSizeBreakdown();
+        }
+        if (sourceInfoMaps != null) {
+          sourceInfoMaps.add(transformer.getSourceInfoMap());
+        }
       }
     }
-
-    generateJavascriptEvent.end();
   }
 
   private Collection<? extends Artifact<?>> makeSoycArtifacts(int permutationId, String[] js,
@@ -806,88 +803,78 @@ public final class JavaToJavaScriptCompiler {
       CompilationMetricsArtifact compilationMetrics, boolean htmlReportsDisabled)
       throws IOException, UnableToCompleteException {
     Memory.maybeDumpMemory("makeSoycArtifactsStart");
-    List<SyntheticArtifact> soycArtifacts = new ArrayList<SyntheticArtifact>();
+    List<SyntheticArtifact> soycArtifacts = new ArrayList<>();
 
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-    Event soycEvent = SpeedTracerLogger.start(CompilerEventType.MAKE_SOYC_ARTIFACTS);
-
-    Event recordSplitPoints = SpeedTracerLogger.start(
-        CompilerEventType.MAKE_SOYC_ARTIFACTS, "phase", "recordSplitPoints");
-    SplitPointRecorder.recordSplitPoints(jprogram, baos, logger);
-    SyntheticArtifact splitPoints = new SyntheticArtifact(
-        SoycReportLinker.class, "splitPoints" + permutationId + ".xml.gz", baos.toByteArray());
-    soycArtifacts.add(splitPoints);
-    recordSplitPoints.end();
-
-    SyntheticArtifact sizeMaps = null;
-    if (sizeBreakdowns != null) {
-      Event recordSizeMap = SpeedTracerLogger.start(
-          CompilerEventType.MAKE_SOYC_ARTIFACTS, "phase", "recordSizeMap");
-      baos.reset();
-      SizeMapRecorder.recordMap(logger, baos, sizeBreakdowns, jjsmap,
-          internedLiteralByVariableName);
-      sizeMaps = new SyntheticArtifact(
-          SoycReportLinker.class, "stories" + permutationId + ".xml.gz", baos.toByteArray());
-      soycArtifacts.add(sizeMaps);
-      recordSizeMap.end();
-    }
-
-    if (sourceInfoMaps != null) {
-      Event recordStories = SpeedTracerLogger.start(
-          CompilerEventType.MAKE_SOYC_ARTIFACTS, "phase", "recordStories");
-      baos.reset();
-      StoryRecorder.recordStories(logger, baos, sourceInfoMaps, js);
-      soycArtifacts.add(new SyntheticArtifact(
-          SoycReportLinker.class, "detailedStories" + permutationId + ".xml.gz",
-          baos.toByteArray()));
-      recordStories.end();
-    }
-
-    if (dependencies != null) {
-      soycArtifacts.add(dependencies);
-    }
-
-    // Set all of the main SOYC artifacts private.
-    for (SyntheticArtifact soycArtifact : soycArtifacts) {
-      soycArtifact.setVisibility(Visibility.Private);
-    }
-
-    if (!htmlReportsDisabled && sizeBreakdowns != null) {
-      Event generateCompileReport = SpeedTracerLogger.start(
-          CompilerEventType.MAKE_SOYC_ARTIFACTS, "phase", "generateCompileReport");
-      ArtifactsOutputDirectory outDir = new ArtifactsOutputDirectory();
-      SoycDashboard dashboard = new SoycDashboard(outDir);
-      dashboard.startNewPermutation(Integer.toString(permutationId));
-      try {
-        dashboard.readSplitPoints(openWithGunzip(splitPoints));
-        if (sizeMaps != null) {
-          dashboard.readSizeMaps(openWithGunzip(sizeMaps));
-        }
-        if (dependencies != null) {
-          dashboard.readDependencies(openWithGunzip(dependencies));
-        }
-        Memory.maybeDumpMemory("soycReadDependenciesEnd");
-      } catch (ParserConfigurationException e) {
-        throw new InternalCompilerException(
-            "Error reading compile report information that was just generated", e);
-      } catch (SAXException e) {
-        throw new InternalCompilerException(
-            "Error reading compile report information that was just generated", e);
+    try (SimpleEvent ignored = new SimpleEvent("Make SOYC Artifacts")) {
+      final SyntheticArtifact splitPoints;
+      try (SimpleEvent ignored2 = new SimpleEvent("SOYC: recordSplitPoints")) {
+        SplitPointRecorder.recordSplitPoints(jprogram, baos, logger);
+        splitPoints = new SyntheticArtifact(
+            SoycReportLinker.class, "splitPoints" + permutationId + ".xml.gz", baos.toByteArray());
+        soycArtifacts.add(splitPoints);
       }
-      dashboard.generateForOnePermutation();
-      if (moduleMetricsArtifact != null && precompilationMetricsArtifact != null
-          && compilationMetrics != null) {
-        dashboard.generateCompilerMetricsForOnePermutation(
-            moduleMetricsArtifact, precompilationMetricsArtifact, compilationMetrics);
+
+      SyntheticArtifact sizeMaps = null;
+      if (sizeBreakdowns != null) {
+        baos.reset();
+        try (SimpleEvent ignored2 = new SimpleEvent("SOYC: recordSizeMap")) {
+          SizeMapRecorder.recordMap(logger, baos, sizeBreakdowns, jjsmap,
+              internedLiteralByVariableName);
+          sizeMaps = new SyntheticArtifact(
+              SoycReportLinker.class, "stories" + permutationId + ".xml.gz", baos.toByteArray());
+          soycArtifacts.add(sizeMaps);
+        }
       }
-      soycArtifacts.addAll(outDir.getArtifacts());
-      generateCompileReport.end();
+
+      if (sourceInfoMaps != null) {
+        baos.reset();
+        try (SimpleEvent ignored2 = new SimpleEvent("SOYC: recordStories")) {
+          StoryRecorder.recordStories(logger, baos, sourceInfoMaps, js);
+          soycArtifacts.add(new SyntheticArtifact(
+              SoycReportLinker.class, "detailedStories" + permutationId + ".xml.gz",
+              baos.toByteArray()));
+        }
+      }
+
+      if (dependencies != null) {
+        soycArtifacts.add(dependencies);
+      }
+
+      // Set all of the main SOYC artifacts private.
+      for (SyntheticArtifact soycArtifact : soycArtifacts) {
+        soycArtifact.setVisibility(Visibility.Private);
+      }
+
+      if (!htmlReportsDisabled && sizeBreakdowns != null) {
+        try (SimpleEvent ignored2 = new SimpleEvent("SOYC: generateCompileReport")) {
+          ArtifactsOutputDirectory outDir = new ArtifactsOutputDirectory();
+          SoycDashboard dashboard = new SoycDashboard(outDir);
+          dashboard.startNewPermutation(Integer.toString(permutationId));
+          try {
+            dashboard.readSplitPoints(openWithGunzip(splitPoints));
+            dashboard.readSizeMaps(openWithGunzip(sizeMaps));
+            if (dependencies != null) {
+              dashboard.readDependencies(openWithGunzip(dependencies));
+            }
+            Memory.maybeDumpMemory("soycReadDependenciesEnd");
+          } catch (ParserConfigurationException | SAXException e) {
+            throw new InternalCompilerException(
+                "Error reading compile report information that was just generated", e);
+          }
+          dashboard.generateForOnePermutation();
+          if (moduleMetricsArtifact != null && precompilationMetricsArtifact != null
+              && compilationMetrics != null) {
+            dashboard.generateCompilerMetricsForOnePermutation(
+                moduleMetricsArtifact, precompilationMetricsArtifact, compilationMetrics);
+          }
+          soycArtifacts.addAll(outDir.getArtifacts());
+        }
+      }
+
+      return soycArtifacts;
     }
-
-    soycEvent.end();
-
-    return soycArtifacts;
   }
 
   private SymbolData[] makeSymbolMap(Map<StandardSymbolData, JsName> symbolTable) {
@@ -1174,8 +1161,7 @@ public final class JavaToJavaScriptCompiler {
       }
       if (module != null && options.isRunAsyncEnabled()) {
         ReplaceRunAsyncs.exec(logger, jprogram);
-        ConfigurationProperties config = new ConfigurationProperties(module);
-        CodeSplitters.pickInitialLoadSequence(logger, jprogram, config);
+        CodeSplitters.pickInitialLoadSequence(logger, jprogram, configurationProperties);
       }
       ImplementClassLiteralsAsFields.exec(jprogram, shouldOptimize());
 
@@ -1183,11 +1169,10 @@ public final class JavaToJavaScriptCompiler {
       logAstTypeMetrics(precompilationMetrics);
 
       // (4) Construct and return a value.
-      Event createUnifiedAstEvent = SpeedTracerLogger.start(CompilerEventType.CREATE_UNIFIED_AST);
-      UnifiedAst result = new UnifiedAst(
-          options, new AST(jprogram, jsProgram), singlePermutation, RecordRebinds.exec(jprogram));
-      createUnifiedAstEvent.end();
-      return result;
+      try (SimpleEvent ignored = new SimpleEvent("Create Unified AST")) {
+        return new UnifiedAst(
+            options, new AST(jprogram, jsProgram), singlePermutation, RecordRebinds.exec(jprogram));
+      }
     } catch (Throwable e) {
       throw CompilationProblemReporter.logAndTranslateException(logger, e);
     }
@@ -1230,7 +1215,9 @@ public final class JavaToJavaScriptCompiler {
     CompilationState compilationState = rpo.getCompilationState();
     Memory.maybeDumpMemory("CompStateBuilt");
     recordJsoTypes(compilationState.getTypeOracle());
-    unifyJavaAst(precompilationContext);
+    try (SimpleEvent ignored = new SimpleEvent("Unify AST")) {
+      unifyJavaAst(precompilationContext);
+    }
     if (options.isSoycEnabled() || options.isJsonSoycEnabled()) {
       SourceInfoCorrelator.exec(jprogram);
     }
@@ -1389,8 +1376,6 @@ public final class JavaToJavaScriptCompiler {
   private void unifyJavaAst(PrecompilationContext precompilationContext)
       throws UnableToCompleteException {
 
-    Event event = SpeedTracerLogger.start(CompilerEventType.UNIFY_AST);
-
     RebindPermutationOracle rpo = precompilationContext.getRebindPermutationOracle();
     String[] entryPointTypeNames = precompilationContext.getEntryPoints();
     String[] additionalRootTypes = precompilationContext.getAdditionalRootTypes();
@@ -1419,8 +1404,6 @@ public final class JavaToJavaScriptCompiler {
           SourceName.getShortClassName(entryMethodHolderTypeName) + ".init"));
     }
     unifyAst.exec();
-
-    event.end();
   }
 
   private void optimizeJavaToFixedPoint() throws InterruptedException {

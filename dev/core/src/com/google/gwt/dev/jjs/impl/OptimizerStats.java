@@ -18,7 +18,7 @@ package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.util.log.perf.AbstractOptimizationEvent;
 import com.google.gwt.dev.util.log.perf.OptimizationLoopEvent;
-import com.google.gwt.dev.util.log.perf.OptimizationStepEvent;
+import com.google.gwt.dev.util.log.perf.CompilerPassEvent;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 
 import java.util.ArrayList;
@@ -57,11 +57,11 @@ public class OptimizerStats implements AutoCloseable {
   }
 
   public static OptimizerStats normalizer(String name) {
-    return new OptimizerStats(name, new OptimizationStepEvent(name));
+    return new OptimizerStats(name, new CompilerPassEvent(name));
   }
 
   public static OptimizerStats optimization(String name) {
-    return new OptimizerStats(name, new OptimizationStepEvent(name));
+    return new OptimizerStats(name, new CompilerPassEvent(name));
   }
 
   private OptimizerStats(String name, AbstractOptimizationEvent jfrEvent) {

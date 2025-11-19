@@ -42,9 +42,6 @@ import com.google.gwt.dev.javac.typemodel.TypeOracle;
 import com.google.gwt.dev.javac.typemodel.TypeOracleUpdater;
 import com.google.gwt.dev.util.Name;
 import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.collect.Collections2;
@@ -462,6 +459,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     RESOLVE_UNRESOLVED_TYPES,
     FINISH
   }
+  @jdk.jfr.Name("gwt.compiler.java.TypeOracleUpdate")
   public static class TypeOracleUpdateEvent extends AbstractJfrEvent {
     String phase;
     public TypeOracleUpdateEvent(CUTOUPhase phase) {

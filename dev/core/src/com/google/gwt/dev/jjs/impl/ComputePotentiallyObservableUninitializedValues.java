@@ -30,8 +30,7 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
@@ -71,30 +70,28 @@ public class ComputePotentiallyObservableUninitializedValues {
   }
 
   private Predicate<JField> analyzeImpl() {
-    SpeedTracerLogger.Event optimizeEvent =
-        SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    CanObserveSubclassUninitializedFieldsVisitor visitor =
-        new CanObserveSubclassUninitializedFieldsVisitor();
-    visitor.accept(program);
-    Set<JType> classesThatCanPotentiallyObserveUninitializedSubclassFields =
-        visitor.classesThatCanPotentiallyObserveUninitializedSubclassFields;
+    try (SimpleEvent ignored = new SimpleEvent(NAME)) {
+      CanObserveSubclassUninitializedFieldsVisitor visitor =
+          new CanObserveSubclassUninitializedFieldsVisitor();
+      visitor.accept(program);
+      Set<JType> classesThatCanPotentiallyObserveUninitializedSubclassFields =
+          visitor.classesThatCanPotentiallyObserveUninitializedSubclassFields;
 
-    for (JType type : classesThatCanPotentiallyObserveUninitializedSubclassFields) {
-      if (classesWhoseFieldsCanBeObservedUninitialized.contains(type)) {
-        // Already processed.
-        continue;
+      for (JType type : classesThatCanPotentiallyObserveUninitializedSubclassFields) {
+        if (classesWhoseFieldsCanBeObservedUninitialized.contains(type)) {
+          // Already processed.
+          continue;
+        }
+        classesWhoseFieldsCanBeObservedUninitialized.addAll(program.getSubclasses(type));
       }
-      classesWhoseFieldsCanBeObservedUninitialized.addAll(program.getSubclasses(type));
+
+      return new Predicate<JField>() {
+        @Override
+        public boolean apply(JField field) {
+          return isUninitializedValueObservable(field);
+        }
+      };
     }
-
-    optimizeEvent.end();
-
-    return new Predicate<JField>() {
-      @Override
-      public boolean apply(JField field) {
-        return isUninitializedValueObservable(field);
-      }
-    };
   }
 
   private boolean isUninitializedValueObservable(JField x) {

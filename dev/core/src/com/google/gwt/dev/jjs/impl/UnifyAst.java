@@ -85,9 +85,7 @@ import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.log.MetricName;
 import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.BooleanSettingControl;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
@@ -97,6 +95,10 @@ import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.collect.Sets.SetView;
+import jdk.jfr.Description;
+import jdk.jfr.Label;
+import jdk.jfr.Name;
+import jdk.jfr.SettingDefinition;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -169,9 +171,19 @@ public class UnifyAst {
     }
   }
 
+  @Name("gwt.compiler.GwtCreate")
   public static class GwtCreateEvent extends AbstractJfrEvent {
+    @Description("GWT.create type literal")
     String typeName;
+    @Description("The source file that called GWT.create()")
     String caller;
+
+    @SettingDefinition
+    @Label("Enable recording GWT.create() calls")
+    @Description("Enables logging of GWT.create() calls, which will include source info in the output")
+    public boolean filter(BooleanSettingControl enabled) {
+      return enabled.get();
+    }
   }
 
   private class UnifyVisitor extends JModVisitor {

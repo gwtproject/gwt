@@ -15,14 +15,18 @@
  */
 package com.google.gwt.dev.util.log.perf;
 
+import jdk.jfr.Description;
 import jdk.jfr.Label;
+import jdk.jfr.Name;
 
+@Name("gwt.compiler.CompilerPass")
 @Label("Optimization Step")
-public class OptimizationStepEvent extends AbstractOptimizationEvent {
-  @Label("Optimization Name")
+@Description("A single step that the compiler takes, visiting some/all AST nodes to normalize, analyze, or optimize them.")
+public class CompilerPassEvent extends AbstractOptimizationEvent {
+  @Label("Pass Name")
   String name;
 
-  public OptimizationStepEvent(String name) {
+  public CompilerPassEvent(String name) {
     this.name = name;
   }
 }

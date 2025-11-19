@@ -51,9 +51,7 @@ import com.google.gwt.dev.util.arg.OptionDeployDir;
 import com.google.gwt.dev.util.arg.OptionExtraDir;
 import com.google.gwt.dev.util.arg.OptionSaveSourceOutput;
 import com.google.gwt.dev.util.arg.OptionWarDir;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
 import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
@@ -266,27 +264,27 @@ public class Link {
 
   public static void main(String[] args) {
     boolean success = false;
-    Event linkEvent = SpeedTracerLogger.start(CompilerEventType.LINK);
-    /*
-     * NOTE: main always exits with a call to System.exit to terminate any
-     * non-daemon threads that were started in Generators. Typically, this is to
-     * shutdown AWT related threads, since the contract for their termination is
-     * still implementation-dependent.
-     */
-    final LinkOptions options = new LinkOptionsImpl();
+    try (SimpleEvent ignored = new SimpleEvent("Link")) {
+      /*
+       * NOTE: main always exits with a call to System.exit to terminate any
+       * non-daemon threads that were started in Generators. Typically, this is to
+       * shutdown AWT related threads, since the contract for their termination is
+       * still implementation-dependent.
+       */
+      final LinkOptions options = new LinkOptionsImpl();
 
-    if (new ArgProcessor(options).processArgs(args)) {
-      CompileTask task = new CompileTask() {
-        @Override
-        public boolean run(TreeLogger logger) throws UnableToCompleteException {
-          return new Link(options).run(logger);
+      if (new ArgProcessor(options).processArgs(args)) {
+        CompileTask task = new CompileTask() {
+          @Override
+          public boolean run(TreeLogger logger) throws UnableToCompleteException {
+            return new Link(options).run(logger);
+          }
+        };
+        if (CompileTaskRunner.runWithAppropriateLogger(options, task)) {
+          success = true;
         }
-      };
-      if (CompileTaskRunner.runWithAppropriateLogger(options, task)) {
-        success = true;
       }
     }
-    linkEvent.end();
     System.exit(success ? 0 : 1);
   }
 

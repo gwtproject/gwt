@@ -126,7 +126,7 @@ public final class JsProgram extends JsNode {
     v.endVisit(this, ctx);
   }
 
-  @Name("gwt.js.CountEvent")
+  @Name("gwt.compiler.js.Count")
   @Label("Count JS nodes")
   public static class JsCountEvent extends AbstractJfrEvent {
     @Label("Number of JS nodes")

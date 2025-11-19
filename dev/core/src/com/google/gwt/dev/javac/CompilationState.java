@@ -21,9 +21,6 @@ import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.javac.CompilationStateBuilder.CompileMoreLater;
 import com.google.gwt.dev.javac.typemodel.TypeOracle;
 import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
-import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
@@ -114,7 +111,7 @@ public class CompilationState {
     assimilateUnits(logger, units);
   }
 
-  @Name("gwt.java.AddGeneratedCompilationUnits")
+  @Name("gwt.compiler.java.AddGeneratedCompilationUnits")
   public static class AddGeneratedCompilationUnitsEvent extends AbstractJfrEvent {
     @Label("Number of Generated Units Added")
     public int numberOfGeneratedUnitsAdded;

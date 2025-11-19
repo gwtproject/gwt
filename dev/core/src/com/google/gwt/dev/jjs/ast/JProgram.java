@@ -115,7 +115,7 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     }
   }
 
-  @Name("gwt.java.CountEvent")
+  @Name("gwt.compiler.java.Count")
   @Label("Count Java nodes")
   public static class JavaCountEvent extends AbstractJfrEvent {
     @Label("Number of Java nodes")

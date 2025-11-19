@@ -174,13 +174,13 @@ public final class SpeedTracerLogger {
       this.data = Lists.addAll(this.data, key, value);
       assign(jfrEvent, key, value);
     }
-    public void addData(String key1, String value1, String key2, String value2) {
-      this.data = Lists.addAll(this.data, key1, value1, key2, value2);
-      assign(jfrEvent, key1, value1);
-      assign(jfrEvent, key2, value2);
-    }
+//    public void addData(String key1, String value1, String key2, String value2) {
+//      this.data = Lists.addAll(this.data, key1, value1, key2, value2);
+//      assign(jfrEvent, key1, value1);
+//      assign(jfrEvent, key2, value2);
+//    }
 
-    public void addData(String... data) {
+    protected void addData(String... data) {
       if (data != null) {
         assert (data.length % 2 == 0);
         this.data = Lists.addAll(this.data, data);
@@ -197,12 +197,12 @@ public final class SpeedTracerLogger {
       endImpl(this);
     }
 
-    public void end(String key, String value) {
+    protected void end(String key, String value) {
       assign(jfrEvent, key, value);
       endImpl(this, key, value);
     }
 
-    public void end(String... data) {
+    private void end(String... data) {
       if (data != null) {
         for (int i = 0; i < data.length; i += 2) {
           assign(jfrEvent, data[i], data[i + 1]);
@@ -220,7 +220,7 @@ public final class SpeedTracerLogger {
      * on system properties, this will measured in elapsed time, process CPU
      * time, or thread CPU time.
      */
-    public long getDurationNanos() {
+    protected long getDurationNanos() {
       return logProcessCpuTime ? processCpuDurationNanos : (logThreadCpuTime
           ? threadCpuDurationNanos : elapsedDurationNanos);
     }
@@ -374,12 +374,7 @@ public final class SpeedTracerLogger {
     }
 
     @Override
-    public void addData(String key1, String value1, String key2, String value2) {
-      // do nothing
-    }
-
-    @Override
-    public void addData(String... data) {
+    protected void addData(String... data) {
       // do nothing
     }
 
@@ -389,12 +384,7 @@ public final class SpeedTracerLogger {
     }
 
     @Override
-    public void end(String key, String value) {
-      // do nothing
-    }
-
-    @Override
-    public void end(String... data) {
+    protected void end(String key, String value) {
       // do nothing
     }
 

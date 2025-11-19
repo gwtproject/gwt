@@ -17,6 +17,9 @@ import com.google.gwt.dev.jjs.CorrelationFactory;
 import com.google.gwt.dev.jjs.CorrelationFactory.DummyCorrelationFactory;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
+import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
+import jdk.jfr.Label;
+import jdk.jfr.Name;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -123,6 +126,13 @@ public final class JsProgram extends JsNode {
     v.endVisit(this, ctx);
   }
 
+  @Name("gwt.js.CountEvent")
+  @Label("Count JS nodes")
+  public static class JsCountEvent extends AbstractJfrEvent {
+    @Label("Number of JS nodes")
+    public long nodeCount;
+  }
+
   private static final class JsTreeStats extends JsSuperVisitor {
     private int nodeCount = 0;
 
@@ -137,8 +147,12 @@ public final class JsProgram extends JsNode {
   }
 
   public int getNodeCount() {
-    JsTreeStats stats = new JsTreeStats();
-    stats.accept(this);
-    return stats.getNodeCount();
+    try (JsCountEvent event = new JsCountEvent()) {
+      JsTreeStats stats = new JsTreeStats();
+      stats.accept(this);
+      int nodeCount = stats.getNodeCount();
+      event.nodeCount = nodeCount;
+      return nodeCount;
+    }
   }
 }

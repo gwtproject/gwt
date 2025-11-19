@@ -18,11 +18,8 @@ package com.google.gwt.dev.util.log.perf;
 import jdk.jfr.Description;
 import jdk.jfr.Label;
 
-public class OptimizationLoopEvent extends GwtJfrEvent {
-  @Label("Node count")
-  @Description("Number of AST nodes in the program at the start of the optimization loop")
-  int nodeCount;
-
+@Label("Optimization Loop")
+public class OptimizationLoopEvent extends AbstractOptimizationEvent {
   @Label("Optimization iteration")
   @Description("The iteration number of the optimization loop")
   final int optimizationIteration;
@@ -30,6 +27,10 @@ public class OptimizationLoopEvent extends GwtJfrEvent {
   @Label("Size change rate")
   @Description("Rate of change of the AST size (number of nodes) per iteration of the optimization loop. Only measured for the whole loop, too expensive to measure at each step.")
   float sizeChangeRate;
+
+  @Label("Node modified rate")
+  @Description("Percent of all AST nodes modified in this optimization loop iteration")
+  float nodeChangeRate;
 
   @Label("Language")
   @Description("Language being optimized (Java or JavaScript)")
@@ -41,6 +42,8 @@ public class OptimizationLoopEvent extends GwtJfrEvent {
   }
 
   public void loopComplete(int afterNodeCount) {
+    assert numMods > -1;
     this.sizeChangeRate = (nodeCount - afterNodeCount) / (float) nodeCount;
+    this.nodeChangeRate = numMods / (float) nodeCount;
   }
 }

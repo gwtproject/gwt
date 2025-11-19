@@ -149,7 +149,7 @@
             <pathelement location="${gwt.dev.jar}" />
           </classpath>
           <jvmarg value="-Xmx1g" />
-          <jvmarg value="-XX:StartFlightRecording=duration=200s,filename=flight.jfr" />
+          <jvmarg value="-XX:StartFlightRecording=duration=200s,filename=${sample.lower}.jfr" />
           <jvmarg value="-Dgwt.speedtracerlog=${sample.build}/st.log" />
 <!--          <jvmarg value="-Dgwt.speedtracer.logProcessCpuTime=true" />-->
           <arg value="-localWorkers" />

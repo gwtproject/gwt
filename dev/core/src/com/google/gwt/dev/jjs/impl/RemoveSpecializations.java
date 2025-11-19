@@ -44,16 +44,14 @@ public class RemoveSpecializations extends JModVisitor {
 
   private static final String NAME = RemoveSpecializations.class.getSimpleName();
 
-  private int execImpl() {
+  private void execImpl() {
     try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
       accept(program);
       stats.recordModified(numMods);
-
-      return stats.getNumMods();
     }
   }
 
-  public static int exec(JProgram program) {
-    return new RemoveSpecializations(program).execImpl();
+  public static void exec(JProgram program) {
+    new RemoveSpecializations(program).execImpl();
   }
 }

@@ -17,10 +17,12 @@ package com.google.gwt.dev.util.log.perf;
 
 import jdk.jfr.Label;
 
-public class OptimizationStepEvent extends GwtJfrEvent {
+@Label("Optimization Step")
+public class OptimizationStepEvent extends AbstractOptimizationEvent {
   @Label("Optimization Name")
   String name;
 
-  @Label("Number of Modifications")
-  int numMods;
+  public OptimizationStepEvent(String name) {
+    this.name = name;
+  }
 }

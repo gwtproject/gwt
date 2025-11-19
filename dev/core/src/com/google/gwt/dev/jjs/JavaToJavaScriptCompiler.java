@@ -173,8 +173,7 @@ import com.google.gwt.dev.util.Memory;
 import com.google.gwt.dev.util.Name.SourceName;
 import com.google.gwt.dev.util.Pair;
 import com.google.gwt.dev.util.arg.OptionOptimize;
-import com.google.gwt.dev.util.log.perf.GwtJfrEvent;
-import com.google.gwt.dev.util.log.perf.PerfLogging;
+import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -280,6 +279,10 @@ public final class JavaToJavaScriptCompiler {
     return javaToJavaScriptCompiler.compilePermutation(permutation, unifiedAst);
   }
 
+  public static class PermutationEvent extends AbstractJfrEvent {
+    String properties;
+  }
+
   /**
    * Takes as input an unresolved Java AST (a Java AST wherein all rebind result classes are
    * available and have not yet been pruned down to the set applicable for a particular permutation)
@@ -311,16 +314,14 @@ public final class JavaToJavaScriptCompiler {
    */
   private PermutationResult compilePermutation(Permutation permutation, UnifiedAst unifiedAst)
       throws UnableToCompleteException {
-    Event jjsCompilePermutationEvent = SpeedTracerLogger.start(
-        CompilerEventType.JJS_COMPILE_PERMUTATION, "properties", permutation.getProperties().prettyPrint()
-    );
     /*
      * Do not introduce any new pass here unless it is logically a part of one of the 9 defined
      * stages and is physically located in that stage.
      */
 
     long permStartMs = System.currentTimeMillis();
-    try {
+    try (PermutationEvent event = new PermutationEvent()) {
+      event.properties = permutation.getProperties().prettyPrint();
       Event javaEvent = SpeedTracerLogger.start(CompilerEventType.PERMUTATION_JAVA);
 
       // (1) Initialize local state.
@@ -466,7 +467,6 @@ public final class JavaToJavaScriptCompiler {
     } catch (Throwable e) {
       throw CompilationProblemReporter.logAndTranslateException(logger, e);
     } finally {
-      jjsCompilePermutationEvent.end();
       if (logger.isLoggable(TreeLogger.TRACE)) {
         logger.log(TreeLogger.TRACE,
             "Permutation took " + (System.currentTimeMillis() - permStartMs) + " ms");
@@ -491,7 +491,7 @@ public final class JavaToJavaScriptCompiler {
    *
    * These passes can not be reordering because of subtle interdependencies.
    */
-  protected TypeMapper<?> normalizeSemantics() {
+  private TypeMapper<?> normalizeSemantics() {
     Event event = SpeedTracerLogger.start(CompilerEventType.JAVA_NORMALIZERS);
     try {
       Devirtualizer.exec(jprogram);
@@ -999,6 +999,7 @@ public final class JavaToJavaScriptCompiler {
       int lastNodeCount = nodeCount;
       int mods;
       try (OptimizerStats stats = OptimizerStats.jsPass(passCount)) {
+        stats.recordVisits(nodeCount);
 
         // Remove unused functions if possible.
         stats.recordModified(JsStaticEval.exec(jsProgram));
@@ -1423,66 +1424,64 @@ public final class JavaToJavaScriptCompiler {
   }
 
   private void optimizeJavaToFixedPoint() throws InterruptedException {
-    try (GwtJfrEvent optimizeEvent = PerfLogging.start(CompilerEventType.OPTIMIZE)) {
+    int passCount = 0;
+    int nodeCount = jprogram.getNodeCount();
 
-      int passCount = 0;
-      int nodeCount = jprogram.getNodeCount();
+    boolean atMaxLevel = options.getOptimizationLevel() == OptionOptimize.OPTIMIZE_LEVEL_MAX;
+    int passLimit = atMaxLevel ? MAX_PASSES : options.getOptimizationLevel();
+    float minChangeRate = atMaxLevel ? FIXED_POINT_CHANGE_RATE : EFFICIENT_CHANGE_RATE;
+    OptimizerContext optimizerCtx = new FullOptimizerContext(jprogram);
+    while (true) {
+      passCount++;
+      if (passCount > passLimit) {
+        break;
+      }
+      if (Thread.interrupted()) {
+        throw new InterruptedException();
+      }
+      AstDumper.maybeDumpAST(jprogram);
+      // Clinits might have become empty
+      jprogram.typeOracle.recomputeAfterOptimizations(jprogram.getDeclaredTypes());
 
-      boolean atMaxLevel = options.getOptimizationLevel() == OptionOptimize.OPTIMIZE_LEVEL_MAX;
-      int passLimit = atMaxLevel ? MAX_PASSES : options.getOptimizationLevel();
-      float minChangeRate = atMaxLevel ? FIXED_POINT_CHANGE_RATE : EFFICIENT_CHANGE_RATE;
-      OptimizerContext optimizerCtx = new FullOptimizerContext(jprogram);
-      while (true) {
-        passCount++;
-        if (passCount > passLimit) {
-          break;
+      int lastNodeCount = nodeCount;
+      int mods;
+
+      try (OptimizerStats stats = OptimizerStats.javaPass(passCount)) {
+        stats.recordVisits(nodeCount);
+        JavaAstVerifier.assertProgramIsConsistent(jprogram);
+        stats.recordModified(Pruner.exec(jprogram, true, optimizerCtx));
+        stats.recordModified(Finalizer.exec(jprogram, optimizerCtx));
+        stats.recordModified(MakeCallsStatic.exec(jprogram, options.shouldAddRuntimeChecks(), optimizerCtx));
+        stats.recordModified(TypeTightener.exec(jprogram, optimizerCtx));
+        stats.recordModified(MethodCallTightener.exec(jprogram, optimizerCtx));
+        // Note: Specialization should be done before inlining.
+        stats.recordModified(MethodCallSpecializer.exec(jprogram, optimizerCtx));
+        stats.recordModified(DeadCodeElimination.exec(jprogram, optimizerCtx));
+        stats.recordModified(MethodInliner.exec(jprogram, optimizerCtx));
+        if (options.shouldInlineLiteralParameters()) {
+          stats.recordModified(SameParameterValueOptimizer.exec(jprogram, optimizerCtx));
         }
-        if (Thread.interrupted()) {
-          throw new InterruptedException();
-        }
-        AstDumper.maybeDumpAST(jprogram);
-        // Clinits might have become empty
-        jprogram.typeOracle.recomputeAfterOptimizations(jprogram.getDeclaredTypes());
-
-        int lastNodeCount = nodeCount;
-        int mods;
-
-        try (OptimizerStats stats = OptimizerStats.javaPass(passCount)) {
-          JavaAstVerifier.assertProgramIsConsistent(jprogram);
-          stats.recordModified(Pruner.exec(jprogram, true, optimizerCtx));
-          stats.recordModified(Finalizer.exec(jprogram, optimizerCtx));
-          stats.recordModified(MakeCallsStatic.exec(jprogram, options.shouldAddRuntimeChecks(), optimizerCtx));
-          stats.recordModified(TypeTightener.exec(jprogram, optimizerCtx));
-          stats.recordModified(MethodCallTightener.exec(jprogram, optimizerCtx));
-          // Note: Specialization should be done before inlining.
-          stats.recordModified(MethodCallSpecializer.exec(jprogram, optimizerCtx));
-          stats.recordModified(DeadCodeElimination.exec(jprogram, optimizerCtx));
-          stats.recordModified(MethodInliner.exec(jprogram, optimizerCtx));
-          if (options.shouldInlineLiteralParameters()) {
-            stats.recordModified(SameParameterValueOptimizer.exec(jprogram, optimizerCtx));
-          }
-          if (options.shouldOrdinalizeEnums()) {
-            stats.recordModified(EnumOrdinalizer.exec(jprogram, optimizerCtx));
-          }
-
-          nodeCount = jprogram.getNodeCount();
-          mods = stats.getNumMods();
-          stats.endNodeCount(nodeCount);
+        if (options.shouldOrdinalizeEnums()) {
+          stats.recordModified(EnumOrdinalizer.exec(jprogram, optimizerCtx));
         }
 
-        float nodeChangeRate = mods / (float) lastNodeCount;
-        float sizeChangeRate = (lastNodeCount - nodeCount) / (float) lastNodeCount;
-        if (nodeChangeRate <= minChangeRate && sizeChangeRate <= minChangeRate) {
-          break;
-        }
+        nodeCount = jprogram.getNodeCount();
+        mods = stats.getNumMods();
+        stats.endNodeCount(nodeCount);
       }
 
-      if (options.shouldOptimizeDataflow()) {
-        logger.log(TreeLogger.Type.WARN,
-            "Unsafe dataflow optimization enabled, disable with -XdisableOptimizeDataflow.");
-        // Just run it once, because it is very time consuming
-        DataflowOptimizer.exec(jprogram);
+      float nodeChangeRate = mods / (float) lastNodeCount;
+      float sizeChangeRate = (lastNodeCount - nodeCount) / (float) lastNodeCount;
+      if (nodeChangeRate <= minChangeRate && sizeChangeRate <= minChangeRate) {
+        break;
       }
+    }
+
+    if (options.shouldOptimizeDataflow()) {
+      logger.log(TreeLogger.Type.WARN,
+          "Unsafe dataflow optimization enabled, disable with -XdisableOptimizeDataflow.");
+      // Just run it once, because it is very time consuming
+      DataflowOptimizer.exec(jprogram);
     }
   }
 

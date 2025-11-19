@@ -50,9 +50,6 @@ import com.google.gwt.dev.js.ast.JsInvocation;
 import com.google.gwt.dev.js.ast.JsModVisitor;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsNumberLiteral;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.collect.ArrayListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
@@ -84,6 +81,7 @@ import java.util.Set;
  * <p>
  */
 public class ImplementClassLiteralsAsFields {
+  public static final String NAME = ImplementClassLiteralsAsFields.class.getSimpleName();
   private static Map<Class<? extends JType>, ClassLiteralFactoryMethod>
       literalFactoryMethodByTypeClass  = new ImmutableMap.Builder()
           .put(JEnumType.class, ClassLiteralFactoryMethod.CREATE_FOR_ENUM)
@@ -345,9 +343,7 @@ public class ImplementClassLiteralsAsFields {
   }
 
   public static void exec(JProgram program, boolean shouldOptimize) {
-    Event normalizerEvent = SpeedTracerLogger.start(CompilerEventType.NORMALIZER);
     new ImplementClassLiteralsAsFields(program, shouldOptimize).execImpl();
-    normalizerEvent.end();
   }
 
   private final Map<JType, JField> classLiteralFields = Maps.newIdentityHashMap();
@@ -389,18 +385,22 @@ public class ImplementClassLiteralsAsFields {
   }
 
   private void execImpl() {
-    if (!shouldOptimize) {
-      // Create all class literals regardless of whether they are referenced or not.
-      for (JPrimitiveType type : JPrimitiveType.types) {
-        resolveClassLiteralField(type);
+    try (OptimizerStats stats = OptimizerStats.normalizer(NAME)) {
+      if (!shouldOptimize) {
+        // Create all class literals regardless of whether they are referenced or not.
+        for (JPrimitiveType type : JPrimitiveType.types) {
+          resolveClassLiteralField(type);
+        }
+        for (JType type : program.getDeclaredTypes()) {
+          resolveClassLiteralField(type);
+        }
       }
-      for (JType type : program.getDeclaredTypes()) {
-        resolveClassLiteralField(type);
-      }
+      NormalizeVisitor visitor = new NormalizeVisitor();
+      visitor.accept(program);
+      program.recordClassLiteralFields(classLiteralFields);
+
+      stats.recordModified(visitor.getNumMods());
     }
-    NormalizeVisitor visitor = new NormalizeVisitor();
-    visitor.accept(program);
-    program.recordClassLiteralFields(classLiteralFields);
   }
 
   /**

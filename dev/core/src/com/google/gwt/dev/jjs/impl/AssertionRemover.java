@@ -21,14 +21,13 @@ import com.google.gwt.dev.jjs.ast.JBlock;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JStatement;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 
 /**
  * Removes all assertion statements from the AST.
  */
 public class AssertionRemover {
+
+  public static final String NAME = AssertionRemover.class.getSimpleName();
 
   /**
    * Removes all asserts.
@@ -51,9 +50,7 @@ public class AssertionRemover {
   }
 
   public static void exec(JProgram program) {
-    Event assertionRemoverEvent = SpeedTracerLogger.start(CompilerEventType.ASSERTION_REMOVER);
     new AssertionRemover(program).execImpl();
-    assertionRemoverEvent.end();
   }
 
   private final JProgram program;
@@ -63,7 +60,10 @@ public class AssertionRemover {
   }
 
   private void execImpl() {
-    AssertRemoveVisitor assertRemover = new AssertRemoveVisitor();
-    assertRemover.accept(program);
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      AssertRemoveVisitor assertRemover = new AssertRemoveVisitor();
+      assertRemover.accept(program);
+      stats.recordModified(assertRemover.getNumMods());
+    }
   }
 }

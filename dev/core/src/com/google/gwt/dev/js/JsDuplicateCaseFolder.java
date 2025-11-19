@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.js;
 
+import com.google.gwt.dev.jjs.impl.OptimizerStats;
 import com.google.gwt.dev.js.ast.JsBlock;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsModVisitor;
@@ -69,6 +70,7 @@ import java.util.Map;
  * it can account for a significant amount of space in generated code.
  */
 public class JsDuplicateCaseFolder {
+  private static final String NAME = JsDuplicateCaseFolder.class.getSimpleName();
 
   private class DuplicateCaseFolder extends JsModVisitor {
 
@@ -166,7 +168,10 @@ public class JsDuplicateCaseFolder {
   }
 
   private void execImpl(JsBlock fragment) {
-    DuplicateCaseFolder dcf = new DuplicateCaseFolder();
-    dcf.accept(fragment);
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      DuplicateCaseFolder dcf = new DuplicateCaseFolder();
+      dcf.accept(fragment);
+      stats.recordModified(dcf.getNumMods());
+    }
   }
 }

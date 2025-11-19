@@ -20,6 +20,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.javac.CompilationStateBuilder.CompileMoreLater;
 import com.google.gwt.dev.javac.typemodel.TypeOracle;
+import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
 import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -27,6 +28,8 @@ import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
 import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
+import jdk.jfr.Label;
+import jdk.jfr.Name;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -111,6 +114,12 @@ public class CompilationState {
     assimilateUnits(logger, units);
   }
 
+  @Name("gwt.java.AddGeneratedCompilationUnits")
+  public static class AddGeneratedCompilationUnitsEvent extends AbstractJfrEvent {
+    @Label("Number of Generated Units Added")
+    public int numberOfGeneratedUnitsAdded;
+  }
+
   /**
    * Compiles the given source files (unless cached) and adds them to the
    * CompilationState.
@@ -118,17 +127,13 @@ public class CompilationState {
    */
   public void addGeneratedCompilationUnits(TreeLogger logger,
       Collection<GeneratedUnit> generatedUnits) throws UnableToCompleteException {
-    Event generatedUnitsAddEvent = SpeedTracerLogger.start(
-        DevModeEventType.COMP_STATE_ADD_GENERATED_UNITS);
-    try {
+    try (AddGeneratedCompilationUnitsEvent event = new AddGeneratedCompilationUnitsEvent()) {
       logger = logger.branch(TreeLogger.DEBUG, "Adding '"
           + generatedUnits.size() + "' new generated units");
-      generatedUnitsAddEvent.addData("# new generated units", "" + generatedUnits.size());
+      event.numberOfGeneratedUnitsAdded = generatedUnits.size();
       Collection<CompilationUnit> newUnits = compileMoreLater.addGeneratedTypes(
           logger, generatedUnits, this);
       assimilateUnits(logger, newUnits);
-    } finally {
-      generatedUnitsAddEvent.end();
     }
   }
 

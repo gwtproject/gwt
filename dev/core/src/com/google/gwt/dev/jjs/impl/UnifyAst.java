@@ -84,6 +84,7 @@ import com.google.gwt.dev.util.Name.BinaryName;
 import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.log.MetricName;
+import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -166,6 +167,11 @@ public class UnifyAst {
     protected boolean sourceCompilationUnitIsAvailable(String typeName) {
       return compiledClassesByTypeName.containsKey(typeName);
     }
+  }
+
+  public static class GwtCreateEvent extends AbstractJfrEvent {
+    String typeName;
+    String caller;
   }
 
   private class UnifyVisitor extends JModVisitor {
@@ -486,13 +492,10 @@ public class UnifyAst {
         return null;
       }
 
-      Event event = SpeedTracerLogger.start(CompilerEventType.VISIT_GWT_CREATE,
-          "argument", classLiteral.getRefType().getName(),
-          "caller", gwtCreateCall.getSourceInfo().getFileName());
-      try {
+      try (GwtCreateEvent event = new GwtCreateEvent()) {
+        event.typeName = classLiteral.getRefType().getName();
+        event.caller = gwtCreateCall.getSourceInfo().getFileName();
         return createStaticRebindExpression(gwtCreateCall, classLiteral);
-      } finally {
-        event.end();
       }
     }
 

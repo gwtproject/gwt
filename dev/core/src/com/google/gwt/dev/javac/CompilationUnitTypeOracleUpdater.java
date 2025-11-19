@@ -41,6 +41,7 @@ import com.google.gwt.dev.javac.typemodel.JWildcardType;
 import com.google.gwt.dev.javac.typemodel.TypeOracle;
 import com.google.gwt.dev.javac.typemodel.TypeOracleUpdater;
 import com.google.gwt.dev.util.Name;
+import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -347,81 +348,71 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
    */
   void addNewTypesDontIndex(
       TreeLogger logger, Collection<TypeData> typeDataList, MethodArgNamesLookup argsLookup) {
-    Event typeOracleUpdaterEvent = SpeedTracerLogger.start(CompilerEventType.TYPE_ORACLE_UPDATER);
+    final TypeOracleBuildContext context;
+    try (TypeOracleUpdateEvent ignored = new TypeOracleUpdateEvent(CUTOUPhase.VISIT_CLASS_FILES)) {
+      // First collect all class data.
+      context = getContext(argsLookup);
 
-    // First collect all class data.
-    Event visitClassFileEvent = SpeedTracerLogger.start(
-        CompilerEventType.TYPE_ORACLE_UPDATER, "phase", "Visit Class Files");
-    TypeOracleBuildContext context = getContext(argsLookup);
-
-    for (TypeData typeData : typeDataList) {
-      CollectClassData classData = typeData.getCollectClassData();
-      // skip any classes that can't be referenced by name outside of
-      // their local scope, such as anonymous classes and method-local classes
-      if (classData.hasNoExternalName()) {
-        continue;
-      }
-      // skip classes that have been previously added
-      if (typesByInternalName.containsKey(classData.getInternalName())) {
-        continue;
-      }
-      context.classDataByInternalName.put(typeData.internalName, classData);
-    }
-    visitClassFileEvent.end();
-
-    Event identityEvent = SpeedTracerLogger.start(
-        CompilerEventType.TYPE_ORACLE_UPDATER, "phase", "Establish Identity");
-    // Perform a shallow pass to establish identity for new and old types.
-    Set<JRealClassType> unresolvedTypes = Sets.newLinkedHashSet();
-    for (TypeData typeData : typeDataList) {
-      CollectClassData classData = context.classDataByInternalName.get(typeData.internalName);
-      if (classData == null) {
-        // ignore classes that were skipped earlier
-        continue;
-      }
-      if (typesByInternalName.containsKey(classData.getInternalName())) {
+      for (TypeData typeData : typeDataList) {
+        CollectClassData classData = typeData.getCollectClassData();
+        // skip any classes that can't be referenced by name outside of
+        // their local scope, such as anonymous classes and method-local classes
+        if (classData.hasNoExternalName()) {
+          continue;
+        }
         // skip classes that have been previously added
-        continue;
-      }
-      JRealClassType type = createType(typeData, unresolvedTypes, context);
-      if (type != null) {
-        assert Name.isInternalName(typeData.internalName);
-        typesByInternalName.put(typeData.internalName, type);
-        context.classDataByType.put(type, classData);
+        if (typesByInternalName.containsKey(classData.getInternalName())) {
+          continue;
+        }
+        context.classDataByInternalName.put(typeData.internalName, classData);
       }
     }
-    identityEvent.end();
 
-    Event resolveEnclosingEvent = SpeedTracerLogger.start(
-        CompilerEventType.TYPE_ORACLE_UPDATER, "phase", "Resolve Enclosing Classes");
-    // Hook up enclosing types
+    Set<JRealClassType> unresolvedTypes = Sets.newLinkedHashSet();
+    try (TypeOracleUpdateEvent ignored = new TypeOracleUpdateEvent(CUTOUPhase.ESTABLISH_IDENTITY)) {
+      // Perform a shallow pass to establish identity for new and old types.
+      for (TypeData typeData : typeDataList) {
+        CollectClassData classData = context.classDataByInternalName.get(typeData.internalName);
+        if (classData == null) {
+          // ignore classes that were skipped earlier
+          continue;
+        }
+        if (typesByInternalName.containsKey(classData.getInternalName())) {
+          // skip classes that have been previously added
+          continue;
+        }
+        JRealClassType type = createType(typeData, unresolvedTypes, context);
+        if (type != null) {
+          assert Name.isInternalName(typeData.internalName);
+          typesByInternalName.put(typeData.internalName, type);
+          context.classDataByType.put(type, classData);
+        }
+      }
+    }
+
     TreeLogger branch = logger.branch(TreeLogger.SPAM, "Resolving enclosing classes");
-    for (Iterator<JRealClassType> unresolvedTypesIterator = unresolvedTypes.iterator();
-        unresolvedTypesIterator.hasNext();) {
-      JRealClassType unresolvedType = unresolvedTypesIterator.next();
-      if (!resolveEnclosingClass(branch, unresolvedType, context)) {
-        // already logged why it failed, don't try and use it further
-        unresolvedTypesIterator.remove();
+    try (TypeOracleUpdateEvent ignored = new TypeOracleUpdateEvent(CUTOUPhase.RESOLVE_ENCLOSING_CLASSES)) {
+      // Hook up enclosing types
+      for (Iterator<JRealClassType> unresolvedTypesIterator = unresolvedTypes.iterator();
+          unresolvedTypesIterator.hasNext();) {
+        JRealClassType unresolvedType = unresolvedTypesIterator.next();
+        if (!resolveEnclosingClass(branch, unresolvedType, context)) {
+          // already logged why it failed, don't try and use it further
+          unresolvedTypesIterator.remove();
+        }
       }
     }
-    resolveEnclosingEvent.end();
-
-    Event resolveUnresolvedEvent = SpeedTracerLogger.start(
-        CompilerEventType.TYPE_ORACLE_UPDATER, "phase", "Resolve Unresolved Types");
-    // Resolve unresolved types.
-    for (JRealClassType unresolvedType : unresolvedTypes) {
-      branch =
-          logger.branch(TreeLogger.SPAM, "Resolving " + unresolvedType.getQualifiedSourceName());
-      if (!resolveClass(branch, unresolvedType, context)) {
-        // already logged why it failed.
-        // TODO: should we do anything else here?
+    try (TypeOracleUpdateEvent ignored = new TypeOracleUpdateEvent(CUTOUPhase.RESOLVE_UNRESOLVED_TYPES)) {
+      // Resolve unresolved types.
+      for (JRealClassType unresolvedType : unresolvedTypes) {
+        branch =
+            logger.branch(TreeLogger.SPAM, "Resolving " + unresolvedType.getQualifiedSourceName());
+        if (!resolveClass(branch, unresolvedType, context)) {
+          // already logged why it failed.
+          // TODO: should we do anything else here?
+        }
       }
     }
-    resolveUnresolvedEvent.end();
-
-    // no longer needed
-    context = null;
-    typeOracleUpdaterEvent.end();
   }
 
   private static void prefechTypeData(Collection<TypeData> typeDataList) {
@@ -459,10 +450,23 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
 
   @VisibleForTesting
   void indexTypes() {
-    Event finishEvent =
-        SpeedTracerLogger.start(CompilerEventType.TYPE_ORACLE_UPDATER, "phase", "Finish");
-    super.finish();
-    finishEvent.end();
+    try (TypeOracleUpdateEvent ignored = new TypeOracleUpdateEvent(CUTOUPhase.FINISH)) {
+      super.finish();
+    }
+  }
+
+  private enum CUTOUPhase {
+    VISIT_CLASS_FILES,
+    ESTABLISH_IDENTITY,
+    RESOLVE_ENCLOSING_CLASSES,
+    RESOLVE_UNRESOLVED_TYPES,
+    FINISH
+  }
+  public static class TypeOracleUpdateEvent extends AbstractJfrEvent {
+    String phase;
+    public TypeOracleUpdateEvent(CUTOUPhase phase) {
+      this.phase = phase.name();
+    }
   }
 
   protected void addNewTypesDontIndex(TreeLogger logger,

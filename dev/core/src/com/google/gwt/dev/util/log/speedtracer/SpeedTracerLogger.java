@@ -105,7 +105,7 @@ public final class SpeedTracerLogger {
   public static void exit() {
     Stack<Event> events = get().pendingEvents.get();
     while (!events.isEmpty()) {
-      Event event = events.pop();
+      Event event = events.peek();
       log.log(Level.WARNING, "Unended event: " + event);
       event.end();
     }

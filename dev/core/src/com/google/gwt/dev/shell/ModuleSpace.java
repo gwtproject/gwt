@@ -19,6 +19,7 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.Name;
 import com.google.gwt.dev.util.Name.BinaryName;
+import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
 import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -464,6 +465,14 @@ public abstract class ModuleSpace implements ShellJavaScriptHost {
     }
   }
 
+  public static class RebindEvent extends AbstractJfrEvent {
+    @jdk.jfr.Name("Requested Class")
+    String requestedClass;
+
+    @jdk.jfr.Name("Result Name")
+    String resultName;
+  }
+
   @Override
   @SuppressWarnings("unchecked")
   public <T> T rebindAndCreate(String requestedClassName)
@@ -474,15 +483,13 @@ public abstract class ModuleSpace implements ShellJavaScriptHost {
     String resultName = null;
     Class<?> resolvedClass = null;
 
-    Event moduleSpaceRebindAndCreate =
-        SpeedTracerLogger.start(DevModeEventType.MODULE_SPACE_REBIND_AND_CREATE);
-    try {
+    try (RebindEvent event = new RebindEvent()){
       // Rebind operates on source-level names.
       //
       String sourceName = BinaryName.toSourceName(requestedClassName);
       resultName = rebind(sourceName);
-      moduleSpaceRebindAndCreate.addData(
-          "Requested Class", requestedClassName, "Result Name", resultName);
+      event.requestedClass = requestedClassName;
+      event.resultName = resultName;
       resolvedClass = loadClassFromSourceName(resultName);
       if (Modifier.isAbstract(resolvedClass.getModifiers())) {
         msg = "Deferred binding result type '" + resultName
@@ -516,8 +523,6 @@ public abstract class ModuleSpace implements ShellJavaScriptHost {
       caught = e;
     } catch (InvocationTargetException e) {
       caught = e.getTargetException();
-    } finally {
-      moduleSpaceRebindAndCreate.end();
     }
 
     // Always log here because sometimes this method gets called from static

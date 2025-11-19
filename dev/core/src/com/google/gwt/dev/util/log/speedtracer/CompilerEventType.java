@@ -30,8 +30,8 @@ public enum CompilerEventType implements EventType {
   CODE_SPLITTER("CodeSplitter", "Yellow"), //
   COMPILE("Compiler", "DarkBlue"), //
   COMPILE_PERMUTATIONS("CompilePermutations", "BurlyWood"), //
-  JJS_COMPILE_PERMUTATION("JjsCompilePermutation", "Moccasin"), //
-  DRAFT_OPTIMIZE("DraftOptimizer", "Blue"), //
+//  JJS_COMPILE_PERMUTATION("JjsCompilePermutation", "Moccasin"), //
+//  DRAFT_OPTIMIZE("DraftOptimizer", "Blue"), //
   GENERATOR_CLIENT_BUNDLE("Generator ClientBundle", "#CCCC33"), //
   GENERATOR_I18N("Generator I18N", "#FF00CC"), //
   GENERATOR_RPC("Generator RPC", "#3300CC"), //
@@ -50,34 +50,34 @@ public enum CompilerEventType implements EventType {
   MAKE_SOYC_ARTIFACTS("MakeSoycArtifacts", "Chartreuse"), //
   MODULE_DEF("ModuleDef", "BlueViolet"), //
   OPTIMIZE("Optimize", "LightSlateGray"), //
-  OPTIMIZE_JS("OptimizeJs", "#8b8bab"), //
+//  OPTIMIZE_JS("OptimizeJs", "#8b8bab"), //
   PRECOMPILE("Precompile", "CornflowerBlue"), //
   RESOURCE_ORACLE("ResourceOracle", "GoldenRod"), //
-  TYPE_ORACLE_UPDATER("TypeOracleUpdater", "LightSteelBlue"), //
-  PRECOMPILE_CORE("CoreCompiler", "Crimson"), //
+//  TYPE_ORACLE_UPDATER("TypeOracleUpdater", "LightSteelBlue"), //
+//  PRECOMPILE_CORE("CoreCompiler", "Crimson"), //
   WRITE_OBJECT_AS_FILE("WriteObjectAsFile", "Magenta"), //
-  BUILD_AST("BuildAST", "DarkGoldenRod"), //
+//  BUILD_AST("BuildAST", "DarkGoldenRod"), //
   FUNCTION_CLUSTER("JsFunctionClusterer", "Cornflower"), //
   BLOCKED("Blocked", "FloralWhite"), //
-  GET_ALL_REBINDS("GetAllPossibleRebindAnswers", "Brown"), //
-  FIND_ENTRY_POINTS("FindEntryPoints", "SlateGray"), //
+//  GET_ALL_REBINDS("GetAllPossibleRebindAnswers", "Brown"), //
+//  FIND_ENTRY_POINTS("FindEntryPoints", "SlateGray"), //
   VALIDATE("Validate", "YellowGreen"), //
-  NORMALIZER("Normalizer", "Peru"), //
+//  NORMALIZER("Normalizer", "Peru"), //
   RECORD_REBINDS("RecordRebinds", "Chocolate"), //
   BUILD_TYPE_MAP_FOR_AST("BuildTypeMapForAST", "LightSeaGreen"), //
-  GET_COMPILATION_UNITS("GetCompilationUnitDeclarations", "Gainsboro"), //
-  GENERATE_JAVA_AST("GenerateJavaAST", "DodgerBlue"), //
-  FIX_ASSIGNMENT_TO_UNBOX("FixAssignmentsToUnboxOrCast", "Orange"), //
-  ASSERTION_NORMALIZER("AssertionNormalizer", "LightPink"), //
-  ASSERTION_REMOVER("AssertionRemover", "LightSalmon"), //
-  REPLACE_REBINDS("ReplaceRebinds", "Snow"), //
+//  GET_COMPILATION_UNITS("GetCompilationUnitDeclarations", "Gainsboro"), //
+//  GENERATE_JAVA_AST("GenerateJavaAST", "DodgerBlue"), //
+//  FIX_ASSIGNMENT_TO_UNBOX("FixAssignmentsToUnboxOrCast", "Orange"), //
+//  ASSERTION_NORMALIZER("AssertionNormalizer", "LightPink"), //
+//  ASSERTION_REMOVER("AssertionRemover", "LightSalmon"), //
+//  REPLACE_REBINDS("ReplaceRebinds", "Snow"), //
   CREATE_UNIFIED_AST("CreateUnifiedAST", "BlueViolet"), //
   CHECK_FOR_ERRORS("CheckForErrors", "DimGrey"), //
   GRAPHICS_INIT("Graphics2D.createGraphics()", "Blue"), //
   ANALYZE_MODULE("AnalyzeModule", "LightBlue"), //
 
   UNIFY_AST("UnifyAst", "Blue"),
-  VISIT_GWT_CREATE("VisitGwtCreate", "LightBlue"),
+//  VISIT_GWT_CREATE("VisitGwtCreate", "LightBlue"),
 
   PERMUTATION_JAVA("PermutationJava", "Blue"),
   JAVA_NORMALIZERS("JavaNormalizers", "Blue"),

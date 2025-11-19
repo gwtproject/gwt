@@ -16,24 +16,35 @@
 
 package com.google.gwt.dev.jjs.impl;
 
+import com.google.gwt.dev.util.log.perf.AbstractOptimizationEvent;
 import com.google.gwt.dev.util.log.perf.OptimizationLoopEvent;
 import com.google.gwt.dev.util.log.perf.OptimizationStepEvent;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
-import jdk.jfr.Event;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Stores statistics on the results of running an optimizer pass, and emits as a JFR event.
  * Starts recording when it is created, and stops recording when closed. Can still be used
  * after close to pass statistics to a parent instance, for the purpose of tracking changes.
+ * <p>
+ * OptimizerStats are intended to be created and closed within a single method using
+ * try-with-resources blocks. They can be updated to indicate modifications during that time, and
+ * will emit a JFR event when closed. Any currently open event on the stack will be registered as a
+ * threadlocal, and so doesn't need to be passed as an argument for its nodecount (aka numVisits)
+ * to be shared.
+ * <p>
+ * On the other hand, if an "end node count" is recorded, that must be called before the stats
+ * instance is closed.
  */
 public class OptimizerStats implements AutoCloseable {
-  private final List<OptimizerStats> children = new ArrayList<OptimizerStats>();
+  private final ThreadLocal<Stack<OptimizerStats>> stack = ThreadLocal.withInitial(Stack::new);
+  private final List<OptimizerStats> children = new ArrayList<>();
   private final String name;
-  private final Event jfrEvent;
+  private final AbstractOptimizationEvent jfrEvent;
   private int numMods = 0;
   private int numVisits = 0;
 
@@ -45,18 +56,30 @@ public class OptimizerStats implements AutoCloseable {
     return new OptimizerStats("JsPass#" + passCount, new OptimizationLoopEvent(passCount, "JavaScript"));
   }
 
-  public static OptimizerStats optimization(String name) {
-    return new OptimizerStats(name, new OptimizationStepEvent());
+  public static OptimizerStats normalizer(String name) {
+    return new OptimizerStats(name, new OptimizationStepEvent(name));
   }
 
-  private OptimizerStats(String name, Event jfrEvent) {
+  public static OptimizerStats optimization(String name) {
+    return new OptimizerStats(name, new OptimizationStepEvent(name));
+  }
+
+  private OptimizerStats(String name, AbstractOptimizationEvent jfrEvent) {
     this.name = name;
     this.jfrEvent = jfrEvent;
+    if (!stack.get().isEmpty()) {
+      this.numVisits = stack.get().peek().numVisits;
+    }
+    stack.get().push(this);
   }
 
   @Override
   public void close() {
+    jfrEvent.numMods = getNumMods();
     jfrEvent.commit();
+
+    OptimizerStats prev = stack.get().pop();
+    assert prev == this;
   }
 
   /**
@@ -192,6 +215,8 @@ public class OptimizerStats implements AutoCloseable {
   }
 
   public void endNodeCount(int nodeCount) {
+    //TODO make a single method in the event type for this
+    jfrEvent.numMods = getNumMods();
     if (jfrEvent instanceof OptimizationLoopEvent) {
       OptimizationLoopEvent event = (OptimizationLoopEvent) jfrEvent;
       event.loopComplete(nodeCount);

@@ -20,6 +20,7 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import java.util.Optional;
 import java.util.Stack;
 
+@Deprecated
 public final class PerfLogging {
   private PerfLogging() {
     // Not instantiable

@@ -25,9 +25,7 @@ import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.Rule;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
-import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 
 import java.io.File;
 import java.util.Deque;
@@ -95,8 +93,7 @@ public class ShellModuleSpaceHost implements ModuleSpaceHost {
       throws UnableToCompleteException {
     this.space = readySpace;
 
-    Event moduleSpaceHostReadyEvent = SpeedTracerLogger.start(DevModeEventType.MODULE_SPACE_HOST_READY);
-    try {
+    try (SimpleEvent ignored = new SimpleEvent("ModuleSpaceHost ready")) {
       // Establish an environment for JavaScript property providers to run.
       //
       ModuleSpacePropertyOracle propOracle = new ModuleSpacePropertyOracle(
@@ -131,8 +128,6 @@ public class ShellModuleSpaceHost implements ModuleSpaceHost {
       // class loader (the one that loaded the shell itself).
       //
       classLoader = new CompilingClassLoader(logger, compilationState, readySpace);
-    } finally {
-      moduleSpaceHostReadyEvent.end();
     }
   }
 

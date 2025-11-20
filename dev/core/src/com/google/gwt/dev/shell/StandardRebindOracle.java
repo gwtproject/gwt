@@ -29,9 +29,6 @@ import com.google.gwt.dev.javac.CachedGeneratorResultImpl;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.jdt.RebindOracle;
 import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
-import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import jdk.jfr.Name;
 

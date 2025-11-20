@@ -20,9 +20,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.Name;
 import com.google.gwt.dev.util.Name.BinaryName;
 import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
-import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -346,122 +344,116 @@ public abstract class ModuleSpace implements ShellJavaScriptHost {
    * Runs the module's user startup code.
    */
   public final void onLoad(TreeLogger logger) throws UnableToCompleteException {
-    Event moduleSpaceLoadEvent = SpeedTracerLogger.start(DevModeEventType.MODULE_SPACE_LOAD);
+    try (SimpleEvent ignore = new SimpleEvent("ModuleSpace onLoad")) {
+      // Tell the host we're ready for business.
+      //
+      host.onModuleReady(this);
 
-    // Tell the host we're ready for business.
-    //
-    host.onModuleReady(this);
+      // Make sure we can resolve JSNI references to static Java names.
+      //
+      try {
+        createStaticDispatcher(logger);
+        Object staticDispatch = getStaticDispatcher();
+        invokeNativeVoid("__defineStatic", null, new Class[]{Object.class},
+            new Object[]{staticDispatch});
+      } catch (Throwable e) {
+        logger.log(TreeLogger.ERROR, "Unable to initialize static dispatcher", e);
+        throw new UnableToCompleteException();
+      }
 
-    // Make sure we can resolve JSNI references to static Java names.
-    //
-    try {
-      createStaticDispatcher(logger);
-      Object staticDispatch = getStaticDispatcher();
-      invokeNativeVoid("__defineStatic", null, new Class[] {Object.class},
-          new Object[] {staticDispatch});
-    } catch (Throwable e) {
-      logger.log(TreeLogger.ERROR, "Unable to initialize static dispatcher", e);
-      throw new UnableToCompleteException();
-    }
+      // Actually run user code.
+      //
+      String entryPointTypeName = null;
+      try {
+        // Set up GWT-entry code
+        Class<?> implClass = loadClassFromSourceName("com.google.gwt.core.client.impl.Impl");
+        Method registerEntry = implClass.getDeclaredMethod("registerEntry");
+        registerEntry.setAccessible(true);
+        registerEntry.invoke(null);
 
-    // Actually run user code.
-    //
-    String entryPointTypeName = null;
-    try {
-      // Set up GWT-entry code
-      Class<?> implClass = loadClassFromSourceName("com.google.gwt.core.client.impl.Impl");
-      Method registerEntry = implClass.getDeclaredMethod("registerEntry");
-      registerEntry.setAccessible(true);
-      registerEntry.invoke(null);
+        Method enter = implClass.getDeclaredMethod("enter");
+        enter.setAccessible(true);
+        enter.invoke(null);
 
-      Method enter = implClass.getDeclaredMethod("enter");
-      enter.setAccessible(true);
-      enter.invoke(null);
+        String[] entryPoints = host.getEntryPointTypeNames();
+        if (entryPoints.length > 0) {
+          try {
+            for (int i = 0; i < entryPoints.length; i++) {
+              entryPointTypeName = entryPoints[i];
+              Method onModuleLoad = null;
+              Object module;
 
-      String[] entryPoints = host.getEntryPointTypeNames();
-      if (entryPoints.length > 0) {
-        try {
-          for (int i = 0; i < entryPoints.length; i++) {
-            entryPointTypeName = entryPoints[i];
-            Method onModuleLoad = null;
-            Object module;
-
-            // Try to initialize EntryPoint, else throw up glass panel
-            try {
-              Class<?> clazz = loadClassFromSourceName(entryPointTypeName);
+              // Try to initialize EntryPoint, else throw up glass panel
               try {
-                onModuleLoad = clazz.getMethod("onModuleLoad");
-                if (!Modifier.isStatic(onModuleLoad.getModifiers())) {
-                  // it's non-static, so we need to rebind the class
-                  onModuleLoad = null;
+                Class<?> clazz = loadClassFromSourceName(entryPointTypeName);
+                try {
+                  onModuleLoad = clazz.getMethod("onModuleLoad");
+                  if (!Modifier.isStatic(onModuleLoad.getModifiers())) {
+                    // it's non-static, so we need to rebind the class
+                    onModuleLoad = null;
+                  }
+                } catch (NoSuchMethodException e) {
+                  // okay, try rebinding it; maybe the rebind result will have one
                 }
-              } catch (NoSuchMethodException e) {
-                // okay, try rebinding it; maybe the rebind result will have one
+                module = null;
+                if (onModuleLoad == null) {
+                  module = rebindAndCreate(entryPointTypeName);
+                  onModuleLoad = module.getClass().getMethod("onModuleLoad");
+                  // Record the rebound name of the class for stats (below).
+                  entryPointTypeName = module.getClass().getName().replace(
+                      '$', '.');
+                }
+              } catch (Throwable e) {
+                displayErrorGlassPanel(
+                    "EntryPoint initialization exception", entryPointTypeName, e);
+                throw e;
               }
-              module = null;
-              if (onModuleLoad == null) {
-                module = rebindAndCreate(entryPointTypeName);
-                onModuleLoad = module.getClass().getMethod("onModuleLoad");
-                // Record the rebound name of the class for stats (below).
-                entryPointTypeName = module.getClass().getName().replace(
-                    '$', '.');
-              }
-            } catch (Throwable e) {
-              displayErrorGlassPanel(
-                  "EntryPoint initialization exception", entryPointTypeName, e);
-              throw e;
-            }
 
-            // Try to invoke onModuleLoad, else throw up glass panel
-            try {
-              onModuleLoad.setAccessible(true);
-              invokeNativeVoid("fireOnModuleLoadStart", null,
-                  new Class[]{String.class}, new Object[]{entryPointTypeName});
-
-              Event onModuleLoadEvent = SpeedTracerLogger.start(
-                  DevModeEventType.ON_MODULE_LOAD);
+              // Try to invoke onModuleLoad, else throw up glass panel
               try {
-                onModuleLoad.invoke(module);
-              } finally {
-                onModuleLoadEvent.end();
+                onModuleLoad.setAccessible(true);
+                invokeNativeVoid("fireOnModuleLoadStart", null,
+                    new Class[]{String.class}, new Object[]{entryPointTypeName});
+
+                try (SimpleEvent ignore2 = new SimpleEvent("onModuleLoad")) {
+                  onModuleLoad.invoke(module);
+                }
+              } catch (Throwable e) {
+                displayErrorGlassPanel(
+                    "onModuleLoad() threw an exception", entryPointTypeName, e);
+                throw e;
               }
-            } catch (Throwable e) {
-              displayErrorGlassPanel(
-                  "onModuleLoad() threw an exception", entryPointTypeName, e);
-              throw e;
             }
+          } finally {
+            Method exit = implClass.getDeclaredMethod("exit", boolean.class);
+            exit.setAccessible(true);
+            exit.invoke(null, true);
           }
-        } finally {
-          Method exit = implClass.getDeclaredMethod("exit", boolean.class);
-          exit.setAccessible(true);
-          exit.invoke(null, true);
+        } else {
+          logger.log(
+              TreeLogger.WARN,
+              "The module has no entry points defined, so onModuleLoad() will never be called",
+              null);
         }
-      } else {
-        logger.log(
-            TreeLogger.WARN,
-            "The module has no entry points defined, so onModuleLoad() will never be called",
-            null);
-      }
-    } catch (Throwable e) {
-      Throwable caught = e;
+      } catch (Throwable e) {
+        Throwable caught = e;
 
-      if (e instanceof InvocationTargetException) {
-        caught = ((InvocationTargetException) e).getTargetException();
-      }
+        if (e instanceof InvocationTargetException) {
+          caught = ((InvocationTargetException) e).getTargetException();
+        }
 
-      if (caught instanceof ExceptionInInitializerError) {
-        caught = ((ExceptionInInitializerError) caught).getException();
-      }
+        if (caught instanceof ExceptionInInitializerError) {
+          caught = ((ExceptionInInitializerError) caught).getException();
+        }
 
-      String unableToLoadMessage = "Unable to load module entry point class "
-          + entryPointTypeName;
-      if (caught != null) {
-        unableToLoadMessage += " (see associated exception for details)";
+        String unableToLoadMessage = "Unable to load module entry point class "
+            + entryPointTypeName;
+        if (caught != null) {
+          unableToLoadMessage += " (see associated exception for details)";
+        }
+        logger.log(TreeLogger.ERROR, unableToLoadMessage, caught);
+        throw new UnableToCompleteException();
       }
-      logger.log(TreeLogger.ERROR, unableToLoadMessage, caught);
-      throw new UnableToCompleteException();
-    } finally {
-      moduleSpaceLoadEvent.end();
     }
   }
 
@@ -691,9 +683,7 @@ public abstract class ModuleSpace implements ShellJavaScriptHost {
    */
   private Class<?> loadClassFromSourceName(String sourceName)
       throws ClassNotFoundException {
-    Event moduleSpaceClassLoad = SpeedTracerLogger.start(
-        DevModeEventType.MODULE_SPACE_CLASS_LOAD, "Source Name", sourceName);
-    try {
+    try (SimpleEvent ignore = new SimpleEvent("ModuleSpace loadClassFromSourceName")) {
       String toTry = sourceName;
       while (true) {
         try {
@@ -709,8 +699,6 @@ public abstract class ModuleSpace implements ShellJavaScriptHost {
           toTry = toTry.substring(0, i) + "$" + toTry.substring(i + 1);
         }
       }
-    } finally {
-      moduleSpaceClassLoad.end();
     }
   }
 

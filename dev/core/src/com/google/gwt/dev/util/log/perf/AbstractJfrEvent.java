@@ -2,7 +2,6 @@ package com.google.gwt.dev.util.log.perf;
 
 import jdk.jfr.Category;
 import jdk.jfr.Event;
-import jdk.jfr.Experimental;
 import jdk.jfr.StackTrace;
 
 /**
@@ -10,7 +9,6 @@ import jdk.jfr.StackTrace;
  */
 @Category("GWT")
 @StackTrace(false)
-@Experimental
 public class AbstractJfrEvent extends Event implements AutoCloseable {
   protected AbstractJfrEvent() {
     begin();

@@ -281,7 +281,6 @@ public class ResourceOracleImpl extends AbstractResourceOracle {
       exposedResources = Collections.unmodifiableSet(Sets.newHashSet(resourcesByPath.values()));
       exposedResourceMap = Collections.unmodifiableMap(resourcesByPath);
       exposedPathNames = Collections.unmodifiableSet(resourcesByPath.keySet());
-
     }
   }
 

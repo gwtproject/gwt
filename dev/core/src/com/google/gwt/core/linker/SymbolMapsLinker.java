@@ -259,7 +259,7 @@ public class SymbolMapsLinker extends AbstractLinker {
       artifacts = new ArtifactSet(artifacts);
       Map<Integer, String> permMap = new HashMap<Integer, String>();
 
-      try (SimpleEvent ignored = new SimpleEvent("Write SymbolMaps")){
+      try (SimpleEvent ignored = new SimpleEvent("Write SymbolMaps")) {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         for (CompilationResult result : artifacts.find(CompilationResult.class)) {
 

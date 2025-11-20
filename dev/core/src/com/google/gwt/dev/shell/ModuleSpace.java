@@ -457,7 +457,6 @@ public abstract class ModuleSpace implements ShellJavaScriptHost {
     }
   }
 
-  //TODO revert, just use standard Event since this is legacy dev mode?
   public static class RebindEvent extends AbstractJfrEvent {
     @jdk.jfr.Name("Requested Class")
     String requestedClass;
@@ -476,7 +475,7 @@ public abstract class ModuleSpace implements ShellJavaScriptHost {
     String resultName = null;
     Class<?> resolvedClass = null;
 
-    try (RebindEvent event = new RebindEvent()){
+    try (RebindEvent event = new RebindEvent()) {
       // Rebind operates on source-level names.
       //
       String sourceName = BinaryName.toSourceName(requestedClassName);

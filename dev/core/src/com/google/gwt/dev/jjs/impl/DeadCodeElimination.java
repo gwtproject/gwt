@@ -2063,7 +2063,7 @@ public class DeadCodeElimination {
    * given set functions.
    */
   private static Set<JMethod> affectedMethods(OptimizerContext optimizerCtx) {
-    //TODO cover this with another event?
+    // TODO cover this with another event?
     Set<JMethod> modifiedMethods =
         optimizerCtx.getModifiedMethodsSince(optimizerCtx.getLastStepFor(NAME));
     Set<JMethod> affectedMethods = Sets.newLinkedHashSet();

@@ -2926,7 +2926,7 @@ public class GenerateJavaScriptAST {
       JsProgram jsProgram, CompilerContext compilerContext, TypeMapper<?> typeMapper,
       Map<StandardSymbolData, JsName> symbolTable, PermutationProperties props) {
 
-    try (SimpleEvent ignored = new SimpleEvent("Generate JS AST")){
+    try (SimpleEvent ignored = new SimpleEvent("Generate JS AST")) {
       GenerateJavaScriptAST generateJavaScriptAST = new GenerateJavaScriptAST(logger, program,
           jsProgram, compilerContext, typeMapper, symbolTable, props);
       return generateJavaScriptAST.execImpl();

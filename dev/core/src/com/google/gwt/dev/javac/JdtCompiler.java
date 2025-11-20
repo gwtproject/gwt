@@ -658,7 +658,7 @@ public class JdtCompiler {
    */
   public static List<CompilationUnit> compile(TreeLogger logger, CompilerContext compilerContext,
       Collection<CompilationUnitBuilder> builders) throws UnableToCompleteException {
-    try (SimpleEvent ignored = new SimpleEvent("Jdt Compiler")){
+    try (SimpleEvent ignored = new SimpleEvent("Jdt Compiler")) {
       DefaultUnitProcessor processor = new DefaultUnitProcessor();
       JdtCompiler compiler = new JdtCompiler(compilerContext, processor);
       compiler.doCompile(logger, builders);

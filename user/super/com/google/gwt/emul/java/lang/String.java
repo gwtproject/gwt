@@ -551,31 +551,16 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public String replace(char from, char to) {
-    // Translate 'from' into unicode escape sequence (\\u and a four-digit hexadecimal number).
-    // Escape sequence replacement is used instead of a string literal replacement
-    // in order to escape regexp special characters (e.g. '.').
-    String hex = Integer.toHexString(from);
-    String regex = "\\u" + "0000".substring(hex.length()) + hex;
-    String replace = NativeString.fromCharCode(to);
-    return nativeReplaceAll(regex, replace);
+    return replace(String.valueOf(from), String.valueOf(to));
   }
 
   public String replace(CharSequence from, CharSequence to) {
-    // Implementation note: This uses a regex replacement instead of
-    // a string literal replacement because Safari does not
-    // follow the spec for "$$" in the replacement string: it
-    // will insert a literal "$$". IE and Firefox, meanwhile,
-    // treat "$$" as "$".
-
-    // Escape regex special characters from literal replacement string.
-    String regex =
-        from.toString().replaceAll("([/\\\\\\.\\*\\+\\?\\|\\(\\)\\[\\]\\{\\}$^])", "\\\\$1");
-    // Escape $ since it is for match backrefs and \ since it is used to escape
-    // $.
-    String replacement = to.toString().replaceAll("\\\\", "\\\\\\\\").replaceAll("\\$", "\\\\$");
-
-    return replaceAll(regex, replacement);
+    return replace(from.toString(), to.toString());
   }
+	
+  public native String replace(String from, String to) /*-{
+    return this.replaceAll(from, function() {return to});
+  }-*/;
 
   /**
    * Regular expressions vary from the standard implementation. The

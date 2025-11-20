@@ -557,7 +557,7 @@ public final class String implements Comparable<String>, CharSequence,
   public String replace(CharSequence from, CharSequence to) {
     return replace(from.toString(), to.toString());
   }
-	
+
   public native String replace(String from, String to) /*-{
     return this.replaceAll(from, function() {return to});
   }-*/;

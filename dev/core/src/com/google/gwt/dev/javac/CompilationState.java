@@ -25,13 +25,14 @@ import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
 import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
-import jdk.jfr.Label;
-import jdk.jfr.Name;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import jdk.jfr.Label;
+import jdk.jfr.Name;
 
 /**
  * Encapsulates the state of active compilation units in a particular module.

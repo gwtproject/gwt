@@ -44,8 +44,6 @@ import com.google.gwt.dev.util.collect.IdentityHashMap;
 import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 import com.google.gwt.thirdparty.guava.common.io.Files;
-import jdk.jfr.Label;
-import jdk.jfr.Name;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -64,6 +62,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedSet;
+
+import jdk.jfr.Label;
+import jdk.jfr.Name;
 
 /**
  * Manages generators and generated units during a single compilation.

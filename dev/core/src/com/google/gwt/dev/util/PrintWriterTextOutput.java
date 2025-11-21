@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Copyright 2025 GWT Project Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,24 +16,21 @@
 package com.google.gwt.dev.util;
 
 import java.io.PrintWriter;
-import java.io.StringWriter;
 
 /**
- * Adapts {@link TextOutput} to an internal text buffer.
+ * TextOutput implementation that writes to a provided PrintWriter.
  */
-public class DefaultTextOutput extends AbstractTextOutput {
-
-  private final StringWriter sw = new StringWriter();
+public class PrintWriterTextOutput extends AbstractTextOutput implements AutoCloseable {
   private final PrintWriter out;
 
-  public DefaultTextOutput(boolean compact) {
+  public PrintWriterTextOutput(PrintWriter out, boolean compact) {
     super(compact);
-    setPrintWriter(out = new PrintWriter(sw));
+    this.out = out;
+    setPrintWriter(out);
   }
 
   @Override
-  public String toString() {
-    out.flush();
-    return sw.toString();
+  public void close() throws Exception {
+    out.close();
   }
 }

@@ -18,7 +18,6 @@ package com.google.gwt.dev.cfg;
 import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
 import jdk.jfr.Description;
 import jdk.jfr.Label;
-import jdk.jfr.SettingDefinition;
 
 public class ModuleDefEvent extends AbstractJfrEvent {
   @Label("Phase")

@@ -95,9 +95,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.collect.Sets.SetView;
 import jdk.jfr.Description;
-import jdk.jfr.Label;
 import jdk.jfr.Name;
-import jdk.jfr.SettingDefinition;
 
 import java.util.Arrays;
 import java.util.Collection;

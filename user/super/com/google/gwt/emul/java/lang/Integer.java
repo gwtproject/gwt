@@ -15,6 +15,9 @@
  */
 package java.lang;
 
+import static javaemul.internal.Coercions.ensureInt;
+import static javaemul.internal.Coercions.toUnsignedInt;
+
 import javaemul.internal.JsUtils;
 import javaemul.internal.annotations.HasNoSideEffects;
 
@@ -34,7 +37,7 @@ public final class Integer extends Number implements Comparable<Integer> {
    */
   private static class BoxedValues {
     // Box values according to JLS - between -128 and 127
-    private static Integer[] boxedValues = new Integer[256];
+    private static final Integer[] boxedValues = new Integer[256];
 
     @HasNoSideEffects
     private static Integer get(int i) {
@@ -81,8 +84,16 @@ public final class Integer extends Number implements Comparable<Integer> {
     }
   }
 
+  public static int compareUnsigned(int a, int b) {
+    return compare(a ^ MIN_VALUE, b ^ MIN_VALUE);
+  }
+
   public static Integer decode(String s) throws NumberFormatException {
     return Integer.valueOf(__decodeAndValidateInt(s, MIN_VALUE, MAX_VALUE));
+  }
+
+  public static int divideUnsigned(int dividend, int divisor) {
+    return ensureInt(toUnsignedInt(dividend) / toUnsignedInt(divisor));
   }
 
   public static int hashCode(int i) {
@@ -170,6 +181,37 @@ public final class Integer extends Number implements Comparable<Integer> {
     return __parseAndValidateInt(s, radix, MIN_VALUE, MAX_VALUE);
   }
 
+  public static int parseUnsignedInt(String s) throws NumberFormatException {
+    return parseUnsignedInt(s, 10);
+  }
+
+  public static int parseUnsignedInt(String s, int radix) throws NumberFormatException {
+    if (s == null) {
+      throw NumberFormatException.forNullInputString();
+    }
+
+    int len = s.length();
+    if (len == 0 || s.charAt(0) == '-') {
+      throw NumberFormatException.forInputString(s);
+    }
+
+    // Integer.MAX_VALUE in Character.MAX_RADIX is 6 digits
+    // Integer.MAX_VALUE in base 10 is 10 digits
+    if (len <= 5 || (radix == 10 && len <= 9)) {
+      return parseInt(s, radix);
+    }
+
+    long value = Long.parseLong(s, radix);
+    if (!Long.fitsInUint(value)) {
+      throw NumberFormatException.forInputString(s);
+    }
+    return (int) value;
+  }
+
+  public static int remainderUnsigned(int dividend, int divisor) {
+    return ensureInt(toUnsignedInt(dividend) % toUnsignedInt(divisor));
+  }
+
   public static int reverse(int i) {
     int[] nibbles = ReverseNibbles.reverseNibbles;
     return (nibbles[i >>> 28]) | (nibbles[(i >> 24) & 0xf] << 4)
@@ -249,13 +291,20 @@ public final class Integer extends Number implements Comparable<Integer> {
     return new Integer(i);
   }
 
+  public static long toUnsignedLong(int x) {
+    return x & 0xffff_ffffL;
+  }
+
+  public static String toUnsignedString(int x) {
+    return toUnsignedString(x, 10);
+  }
+
   public static Integer valueOf(String s) throws NumberFormatException {
     return valueOf(s, 10);
   }
 
-  public static Integer valueOf(String s, int radix)
-      throws NumberFormatException {
-    return Integer.valueOf(Integer.parseInt(s, radix));
+  public static Integer valueOf(String s, int radix) throws NumberFormatException {
+    return valueOf(parseInt(s, radix));
   }
 
   private final transient int value;

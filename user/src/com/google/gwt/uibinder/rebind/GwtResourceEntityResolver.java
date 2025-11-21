@@ -20,6 +20,7 @@ import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.dev.util.collect.Sets;
 
+import com.google.gwt.thirdparty.guava.common.io.ByteStreams;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 
@@ -75,7 +76,7 @@ class GwtResourceEntityResolver implements EntityResolver {
     if (resource != null) {
       String content;
       try (InputStream is = resource.openContents()) {
-        content = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+        content = new String(ByteStreams.toByteArray(is), StandardCharsets.UTF_8);
       } catch (IOException ex) {
         logger.log(TreeLogger.ERROR, "Error reading resource: " + resource.getLocation());
         throw new RuntimeException(ex);

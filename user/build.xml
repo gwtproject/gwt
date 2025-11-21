@@ -96,6 +96,7 @@
   <target name="compile" description="Compile all class files"
           unless="compile.complete">
     <gwt.javac
+            release="8"
             excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java">
       <src path="super/com/google/gwt/emul/javaemul/internal" />
       <classpath>
@@ -224,6 +225,7 @@
 
       <!-- Compile a specific gwt-user jar just for jakarta, which will be only used then to produce gwt-servlet-jakarta.jar -->
       <gwt.javac
+              release="8"
               srcdir="${project.build}/jakarta-src"
               destdir="${javac.out}-jakarta"
               excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java,**/junit/**">

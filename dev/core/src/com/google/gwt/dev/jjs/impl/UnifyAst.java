@@ -85,7 +85,6 @@ import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.log.MetricName;
 import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
-import com.google.gwt.dev.util.log.perf.BooleanSettingControl;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
@@ -177,13 +176,6 @@ public class UnifyAst {
     String typeName;
     @Description("The source file that called GWT.create()")
     String caller;
-
-    @SettingDefinition
-    @Label("Enable recording GWT.create() calls")
-    @Description("Enables logging of GWT.create() calls, which will include source info in the output")
-    public boolean filter(BooleanSettingControl enabled) {
-      return enabled.get();
-    }
   }
 
   private class UnifyVisitor extends JModVisitor {

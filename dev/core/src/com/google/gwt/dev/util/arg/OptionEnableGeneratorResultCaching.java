@@ -16,8 +16,9 @@
 package com.google.gwt.dev.util.arg;
 
 /**
- * Encapsulates a compiler option to enable generator result caching.
+ * Unused, deprecated for removal.
  */
+@Deprecated
 public interface OptionEnableGeneratorResultCaching {
   boolean isGeneratorResultCachingEnabled();
   void setGeneratorResultCachingEnabled(boolean enabled);

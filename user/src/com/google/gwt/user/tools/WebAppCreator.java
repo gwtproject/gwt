@@ -21,6 +21,7 @@ import com.google.gwt.dev.Compiler;
 import com.google.gwt.dev.DevMode;
 import com.google.gwt.dev.GwtVersion;
 import com.google.gwt.dev.util.collect.HashSet;
+import com.google.gwt.thirdparty.guava.common.io.ByteStreams;
 import com.google.gwt.thirdparty.guava.common.io.CharStreams;
 import com.google.gwt.user.tools.util.ArgHandlerIgnore;
 import com.google.gwt.user.tools.util.ArgHandlerOverwrite;
@@ -731,7 +732,7 @@ public final class WebAppCreator {
       }
       if (fileCreator.isBinary) {
         try (FileOutputStream o = new FileOutputStream(file); InputStream i = url.openStream()) {
-          i.transferTo(o);
+          ByteStreams.copy(i, o);
         }
       } else {
         try (InputStream i = url.openStream()) {

@@ -32,9 +32,7 @@ import java.util.List;
  * {@code gwt.perflog=true}.
  * </p>
  *
- * @deprecated Will be removed in a future release.
  */
-@Deprecated(forRemoval = true, since = "2.13.0")
 public class PerfLogger {
 
   private static class Timing {

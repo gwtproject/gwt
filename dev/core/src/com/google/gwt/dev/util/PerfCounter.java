@@ -27,10 +27,7 @@ import java.util.Map;
  * A counter which records bunch of statistics for frequently occuring
  * operations. Calculates: count, total time, average time, maximum time
  * & slow operations.
- *
- * @deprecated Will be removed in a future release.
  */
-@Deprecated(forRemoval = true, since = "2.13.0")
 public class PerfCounter {
   private static class OperationStats {
     private long count = 0;
@@ -134,7 +131,6 @@ public class PerfCounter {
       return;
     }
     System.out.println("------------- Perf Counters -------------");
-    System.out.println(" DEPRECATED in 2.13, and will be removed in a future release");
     synchronized (operationStats) {
       List<String> keys = new ArrayList<String>(operationStats.keySet());
       Collections.sort(keys);

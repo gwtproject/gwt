@@ -1141,22 +1141,22 @@ public class EnumOrdinalizerTest extends OptimizerTestBase {
 
     OptimizerContext optimizerContext = new FullOptimizerContext(program);
     if (runMakeCallsStatic) {
-      didChange = MakeCallsStatic.exec(program, false, optimizerContext).didChange() || didChange;
+      didChange = MakeCallsStatic.exec(program, false, optimizerContext) > 0 || didChange;
     }
     if (runTypeTightener) {
-      didChange = TypeTightener.exec(program, optimizerContext).didChange() || didChange;
+      didChange = TypeTightener.exec(program, optimizerContext) > 0 || didChange;
     }
     if (runMethodCallTightener) {
-      didChange = MethodCallTightener.exec(program, optimizerContext).didChange() || didChange;
+      didChange = MethodCallTightener.exec(program, optimizerContext) > 0 || didChange;
     }
     if (runMethodInliner) {
-      didChange = MethodInliner.exec(program, optimizerContext).didChange() || didChange;
+      didChange = MethodInliner.exec(program, optimizerContext) > 0 || didChange;
     }
     if (runPruner) {
-      didChange = Pruner.exec(program, true, optimizerContext).didChange() || didChange;
+      didChange = Pruner.exec(program, true, optimizerContext) > 0 || didChange;
     }
 
-    didChange = EnumOrdinalizer.exec(program, optimizerContext).didChange() || didChange;
+    didChange = EnumOrdinalizer.exec(program, optimizerContext) > 0 || didChange;
 
     /*
      * Run these normalizers to sanity check the AST.  If there are any

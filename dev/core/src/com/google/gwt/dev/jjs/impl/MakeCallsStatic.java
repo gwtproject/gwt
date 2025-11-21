@@ -42,9 +42,6 @@ import com.google.gwt.dev.js.ast.JsModVisitor;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsParameter;
 import com.google.gwt.dev.js.ast.JsThisRef;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
@@ -443,18 +440,13 @@ public class MakeCallsStatic {
 
   private static final String NAME = MakeCallsStatic.class.getSimpleName();
 
-  public static OptimizerStats exec(JProgram program, boolean addRuntimeChecks,
+  public static int exec(JProgram program, boolean addRuntimeChecks,
       OptimizerContext optimizerCtx) {
-    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new MakeCallsStatic(program, addRuntimeChecks).execImpl(optimizerCtx);
-    optimizerCtx.setLastStepFor(NAME, optimizerCtx.getOptimizationStep());
-    optimizerCtx.incOptimizationStep();
-    optimizeEvent.end("didChange", "" + stats.didChange());
-    return stats;
+    return new MakeCallsStatic(program, addRuntimeChecks).execImpl(optimizerCtx);
   }
 
   @VisibleForTesting
-  static OptimizerStats exec(JProgram program,  boolean addRuntimeChecks) {
+  static int exec(JProgram program,  boolean addRuntimeChecks) {
     return exec(program, addRuntimeChecks, new FullOptimizerContext(program));
   }
 
@@ -468,44 +460,49 @@ public class MakeCallsStatic {
     this.converter = new StaticCallConverter(program, addRuntimeChecks);
   }
 
-  private OptimizerStats execImpl(OptimizerContext optimizerCtx) {
-    OptimizerStats stats = new OptimizerStats(NAME);
-    FindStaticDispatchSitesVisitor finder = new FindStaticDispatchSitesVisitor();
-    Set<JMethod> modifiedMethods =
-        optimizerCtx.getModifiedMethodsSince(optimizerCtx.getLastStepFor(NAME));
-    Set<JMethod> affectedMethods = affectedMethods(modifiedMethods, optimizerCtx);
-    optimizerCtx.traverse(finder, affectedMethods);
+  private int execImpl(OptimizerContext optimizerCtx) {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      FindStaticDispatchSitesVisitor finder = new FindStaticDispatchSitesVisitor();
+      Set<JMethod> modifiedMethods =
+          optimizerCtx.getModifiedMethodsSince(optimizerCtx.getLastStepFor(NAME));
+      Set<JMethod> affectedMethods = affectedMethods(modifiedMethods, optimizerCtx);
+      optimizerCtx.traverse(finder, affectedMethods);
 
-    CreateStaticImplsVisitor creator = new CreateStaticImplsVisitor(program, optimizerCtx);
-    for (JMethod method : toBeMadeStatic) {
-      creator.accept(method);
-    }
-    for (JMethod method : toBeMadeStatic) {
-      // if method has specialization, add it to the static method
-      Specialization specialization = method.getSpecialization();
-      if (specialization != null) {
-        JMethod staticMethod = program.getStaticImpl(method);
-        List<JType> params = Lists.newArrayList(specialization.getParams());
-        params.add(0, staticMethod.getParams().get(0).getType());
-        staticMethod.setSpecialization(params, specialization.getReturns(),
-            staticMethod.getName());
-        staticMethod.getSpecialization().resolve(params,
-            specialization.getReturns(), program.getStaticImpl(specialization
-                .getTargetMethod()));
+      CreateStaticImplsVisitor creator = new CreateStaticImplsVisitor(program, optimizerCtx);
+      for (JMethod method : toBeMadeStatic) {
+        creator.accept(method);
       }
-    }
+      for (JMethod method : toBeMadeStatic) {
+        // if method has specialization, add it to the static method
+        Specialization specialization = method.getSpecialization();
+        if (specialization != null) {
+          JMethod staticMethod = program.getStaticImpl(method);
+          List<JType> params = Lists.newArrayList(specialization.getParams());
+          params.add(0, staticMethod.getParams().get(0).getType());
+          staticMethod.setSpecialization(params, specialization.getReturns(),
+              staticMethod.getName());
+          staticMethod.getSpecialization().resolve(params,
+              specialization.getReturns(), program.getStaticImpl(specialization
+                  .getTargetMethod()));
+        }
+      }
 
-    /*
-     * Run the rewriter even if we didn't make any new static methods; other
-     * optimizations can unlock devirtualizations even if no more static impls
-     * are created.
-     */
-    RewriteCallSites rewriter = new RewriteCallSites(optimizerCtx);
-    rewriter.accept(program);
-    stats.recordModified(rewriter.getNumMods());
-    assert (rewriter.didChange() || toBeMadeStatic.isEmpty());
-    JavaAstVerifier.assertProgramIsConsistent(program);
-    return stats;
+      /*
+       * Run the rewriter even if we didn't make any new static methods; other
+       * optimizations can unlock devirtualizations even if no more static impls
+       * are created.
+       */
+      RewriteCallSites rewriter = new RewriteCallSites(optimizerCtx);
+      rewriter.accept(program);
+      stats.recordModified(rewriter.getNumMods());
+      assert (rewriter.didChange() || toBeMadeStatic.isEmpty());
+      JavaAstVerifier.assertProgramIsConsistent(program);
+
+      optimizerCtx.setLastStepFor(NAME, optimizerCtx.getOptimizationStep());
+      optimizerCtx.incOptimizationStep();
+
+      return stats.getNumMods();
+    }
   }
 
   /**

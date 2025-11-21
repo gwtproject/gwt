@@ -33,9 +33,6 @@ import com.google.gwt.dev.resource.impl.PathPrefixSet;
 import com.google.gwt.dev.resource.impl.ResourceFilter;
 import com.google.gwt.dev.resource.impl.ResourceOracleImpl;
 import com.google.gwt.dev.util.Empty;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.Iterators;
@@ -662,9 +659,6 @@ public class ModuleDef implements DepsInfoProvider {
    * @param logger Logs the activity.
    */
   synchronized void normalize(TreeLogger logger) {
-    Event moduleDefNormalize =
-        SpeedTracerLogger.start(CompilerEventType.MODULE_DEF, "phase", "normalize");
-
     // Normalize property providers.
     //
     for (BindingProperty prop : properties.getBindingProperties()) {
@@ -696,8 +690,6 @@ public class ModuleDef implements DepsInfoProvider {
     branch = Messages.SOURCE_PATH_LOCATIONS.branch(logger, null);
     lazySourceOracle = new ResourceOracleImpl(branch, resources);
     lazySourceOracle.setPathPrefixes(sourcePrefixSet);
-
-    moduleDefNormalize.end();
   }
 
   void setConfigurationPropertyValue(ConfigurationProperty configurationProperty, String value) {
@@ -737,14 +729,13 @@ public class ModuleDef implements DepsInfoProvider {
     }
     resourcesScanned = true;
 
-    Event moduleDefEvent = SpeedTracerLogger.start(
-        CompilerEventType.MODULE_DEF, "phase", "refresh", "module", getName());
-    if (lazyResourcesOracle != null) {
-      lazyResourcesOracle.scanResources(TreeLogger.NULL);
+    try (ModuleDefEvent ignored = new ModuleDefEvent("refresh", getName())) {
+      if (lazyResourcesOracle != null) {
+        lazyResourcesOracle.scanResources(TreeLogger.NULL);
+      }
+      lazyPublicOracle.scanResources(TreeLogger.NULL);
+      lazySourceOracle.scanResources(TreeLogger.NULL);
     }
-    lazyPublicOracle.scanResources(TreeLogger.NULL);
-    lazySourceOracle.scanResources(TreeLogger.NULL);
-    moduleDefEvent.end();
   }
 
   private String getCurrentLibraryModuleName() {

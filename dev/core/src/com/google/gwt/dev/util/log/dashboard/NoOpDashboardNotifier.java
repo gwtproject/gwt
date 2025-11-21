@@ -21,6 +21,7 @@ import com.google.gwt.dev.shell.DevModeSession;
  * Implements the {@code DashboardNotifier} interface but does not actually
  * do anything.
  */
+@Deprecated
 public class NoOpDashboardNotifier implements DashboardNotifier {
 
   @Override

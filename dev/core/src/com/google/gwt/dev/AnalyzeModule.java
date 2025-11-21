@@ -23,9 +23,7 @@ import com.google.gwt.dev.cfg.ModuleDefLoader;
 import com.google.gwt.dev.cfg.PropertyCombinations;
 import com.google.gwt.dev.util.Memory;
 import com.google.gwt.dev.util.StringInterningObjectInputStream;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -98,19 +96,18 @@ public class AnalyzeModule {
    */
   public static void main(String[] args) {
     Memory.initialize();
-    SpeedTracerLogger.init();
-    Event analyzeModuleEvent = SpeedTracerLogger.start(CompilerEventType.ANALYZE_MODULE);
-    final AnalyzeModuleOptions options = new AnalyzeModuleOptionsImpl();
-    if (new ArgProcessor(options).processArgs(args)) {
-      CompileTask task = new CompileTask() {
-        @Override
-        public boolean run(TreeLogger logger) throws UnableToCompleteException {
-          return new AnalyzeModule(options).run(logger);
-        }
-      };
-      CompileTaskRunner.runWithAppropriateLogger(options, task);
+    try (SimpleEvent ignored = new SimpleEvent("AnalyzeModule")) {
+      final AnalyzeModuleOptions options = new AnalyzeModuleOptionsImpl();
+      if (new ArgProcessor(options).processArgs(args)) {
+        CompileTask task = new CompileTask() {
+          @Override
+          public boolean run(TreeLogger logger) throws UnableToCompleteException {
+            return new AnalyzeModule(options).run(logger);
+          }
+        };
+        CompileTaskRunner.runWithAppropriateLogger(options, task);
+      }
     }
-    analyzeModuleEvent.end();
   }
 
   /**
@@ -139,7 +136,7 @@ public class AnalyzeModule {
 
   private final AnalyzeModuleOptionsImpl options;
 
-  public AnalyzeModule(AnalyzeModuleOptions options) {
+  private AnalyzeModule(AnalyzeModuleOptions options) {
     this.options = new AnalyzeModuleOptionsImpl(options);
   }
 
@@ -168,16 +165,13 @@ public class AnalyzeModule {
       }
 
       File optFile = new File(compilerWorkDir, AnalyzeModule.OPTIONS_FILENAME);
-      Event writeObjectAsFileEvent = SpeedTracerLogger.start(
-          CompilerEventType.WRITE_OBJECT_AS_FILE);
-      try (OutputStream stream = new FileOutputStream(optFile);
+      try (SimpleEvent ignored = new SimpleEvent("Write analyze module options to file");
+           OutputStream stream = new FileOutputStream(optFile);
            ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
         objectStream.writeObject(options);
       } catch (IOException e) {
         logger.log(TreeLogger.ERROR, "Unable to write file: " + optFile.getAbsolutePath(), e);
         throw new UnableToCompleteException();
-      } finally {
-        writeObjectAsFileEvent.end();
       }
 
       // TODO(zundel): Serializing the ModuleDef structure would save time in

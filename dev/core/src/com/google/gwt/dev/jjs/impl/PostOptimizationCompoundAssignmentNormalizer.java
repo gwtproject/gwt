@@ -30,8 +30,12 @@ import com.google.gwt.dev.jjs.ast.JType;
  * and operations on longs need to be broken up.
  */
 public class PostOptimizationCompoundAssignmentNormalizer extends CompoundAssignmentNormalizer {
+  private static final String NAME = PostOptimizationCompoundAssignmentNormalizer.class.getSimpleName();
   public static void exec(JProgram program) {
-    new PostOptimizationCompoundAssignmentNormalizer().accept(program);
+    try (OptimizerStats stats = OptimizerStats.normalizer(NAME)) {
+      int mods = new PostOptimizationCompoundAssignmentNormalizer().accept(program);
+      stats.recordModified(mods);
+    }
   }
 
   protected PostOptimizationCompoundAssignmentNormalizer() {

@@ -22,6 +22,7 @@ import com.google.gwt.dev.shell.DevModeSession;
  * Sends information to a dashboard service. The dashboard service collects
  * information from GWT runtime and compiler instrumentation.
  */
+@Deprecated
 public interface DashboardNotifier {
 
   /**

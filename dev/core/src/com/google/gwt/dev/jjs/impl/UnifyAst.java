@@ -84,9 +84,7 @@ import com.google.gwt.dev.util.Name.BinaryName;
 import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.log.MetricName;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
@@ -96,6 +94,8 @@ import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.collect.Sets.SetView;
+import jdk.jfr.Description;
+import jdk.jfr.Name;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -166,6 +166,14 @@ public class UnifyAst {
     protected boolean sourceCompilationUnitIsAvailable(String typeName) {
       return compiledClassesByTypeName.containsKey(typeName);
     }
+  }
+
+  @Name("gwt.compiler.GwtCreate")
+  public static class GwtCreateEvent extends AbstractJfrEvent {
+    @Description("GWT.create type literal")
+    String typeName;
+    @Description("The source file that called GWT.create()")
+    String caller;
   }
 
   private class UnifyVisitor extends JModVisitor {
@@ -486,13 +494,10 @@ public class UnifyAst {
         return null;
       }
 
-      Event event = SpeedTracerLogger.start(CompilerEventType.VISIT_GWT_CREATE,
-          "argument", classLiteral.getRefType().getName(),
-          "caller", gwtCreateCall.getSourceInfo().getFileName());
-      try {
+      try (GwtCreateEvent event = new GwtCreateEvent()) {
+        event.typeName = classLiteral.getRefType().getName();
+        event.caller = gwtCreateCall.getSourceInfo().getFileName();
         return createStaticRebindExpression(gwtCreateCall, classLiteral);
-      } finally {
-        event.end();
       }
     }
 

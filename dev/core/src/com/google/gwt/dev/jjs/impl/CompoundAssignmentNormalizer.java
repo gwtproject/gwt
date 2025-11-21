@@ -266,10 +266,11 @@ public abstract class CompoundAssignmentNormalizer {
 
   private final CloneExpressionVisitor cloner = new CloneExpressionVisitor();
 
-  public void accept(JNode node) {
+  public int accept(JNode node) {
     BreakupAssignOpsVisitor breaker =
         new BreakupAssignOpsVisitor(OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
     breaker.accept(node);
+    return breaker.getNumMods();
   }
 
   // Name to assign to temporaries. All temporaries are created with the same name, which is

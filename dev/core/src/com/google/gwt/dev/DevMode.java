@@ -46,9 +46,7 @@ import com.google.gwt.dev.util.arg.ArgHandlerStrict;
 import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
 import com.google.gwt.dev.util.arg.ArgHandlerWorkDirOptional;
 import com.google.gwt.dev.util.arg.OptionModulePathPrefix;
-import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
 import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
 import com.google.gwt.util.tools.ArgHandlerFlag;
@@ -519,8 +517,7 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
     }
 
     TreeLogger branch = getTopLogger().branch(TreeLogger.TRACE, "Linking modules");
-    Event slowStartupEvent = SpeedTracerLogger.start(DevModeEventType.SLOW_STARTUP);
-    try {
+    try (SimpleEvent ignore = new SimpleEvent("Slow startup")) {
       for (ModuleDef module : startupModules.values()) {
         TreeLogger loadLogger =
             branch.branch(TreeLogger.DEBUG, "Bootstrap link for command-line module '"
@@ -530,8 +527,6 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
     } catch (UnableToCompleteException e) {
       // Already logged.
       return false;
-    } finally {
-      slowStartupEvent.end();
     }
     return true;
   }
@@ -603,9 +598,8 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
       return -1;
     }
 
-    Event jettyStartupEvent = SpeedTracerLogger.start(DevModeEventType.JETTY_STARTUP);
     boolean clearCallback = true;
-    try {
+    try (SimpleEvent ignore = new SimpleEvent("Start web server")) {
       ui.setCallback(RestartServerEvent.getType(), this);
 
       ServletContainerLauncher scl = options.getServletContainerLauncher();
@@ -650,7 +644,6 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
       System.err.println("Unable to start embedded HTTP server");
       e.printStackTrace();
     } finally {
-      jettyStartupEvent.end();
       if (clearCallback) {
         // Clear the callback if we failed to start the server
         ui.setCallback(RestartServerEvent.getType(), null);

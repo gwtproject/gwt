@@ -18,8 +18,7 @@ package com.google.gwt.user.rebind.ui;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 import com.google.gwt.thirdparty.guava.common.hash.HashingOutputStream;
 
@@ -454,11 +453,10 @@ class ImageBundleBuilder {
     // Create the bundled image.
     BufferedImage bundledImage = new BufferedImage(size.width, size.height,
         BufferedImage.TYPE_INT_ARGB_PRE);
-    SpeedTracerLogger.Event createGraphicsEvent =
-      SpeedTracerLogger.start(CompilerEventType.GRAPHICS_INIT,
-          "java.awt.headless", System.getProperty("java.awt.headless"));
-    Graphics2D g2d = bundledImage.createGraphics();
-    createGraphicsEvent.end();
+    final Graphics2D g2d;
+    try (SimpleEvent ignore = new SimpleEvent("Graphics2d")) {
+      g2d = bundledImage.createGraphics();
+    }
 
     for (ImageRect imageRect : imageRects) {
 

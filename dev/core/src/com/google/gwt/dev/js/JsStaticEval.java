@@ -50,9 +50,6 @@ import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.js.ast.JsWhile;
 import com.google.gwt.dev.js.rhino.ScriptRuntime;
 import com.google.gwt.dev.util.Ieee754_64_Arithmetic;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -225,7 +222,7 @@ public class JsStaticEval {
           stmts.remove(i);
           stmts.addAll(i, block.getStatements());
           i--;
-          didChange = true;
+          numMods++;
           continue;
         }
 
@@ -239,13 +236,13 @@ public class JsStaticEval {
           JsStatement toReplace = ensureDeclarations(toRemove);
           if (toReplace == null) {
             stmts.remove(j);
-            didChange = true;
+            numMods++;
           } else if (toReplace == toRemove) {
             ++j;
           } else {
             stmts.set(j, toReplace);
             ++j;
-            didChange = true;
+            numMods++;
           }
         }
       }
@@ -253,6 +250,7 @@ public class JsStaticEval {
       if (ctx.canRemove() && stmts.size() == 0) {
         // Remove blocks with no effect
         ctx.removeMe();
+        numMods++;
       }
     }
 
@@ -601,12 +599,8 @@ public class JsStaticEval {
       JsBinaryOperator.OR, JsBinaryOperator.AND, JsBinaryOperator.BIT_AND,
       JsBinaryOperator.BIT_OR, JsBinaryOperator.COMMA);
 
-  public static OptimizerStats exec(JsProgram program) {
-    Event optimizeJsEvent = SpeedTracerLogger.start(
-        CompilerEventType.OPTIMIZE_JS, "optimizer", NAME);
-    OptimizerStats stats = new JsStaticEval(program).execImpl();
-    optimizeJsEvent.end("didChange", "" + stats.didChange());
-    return stats;
+  public static int exec(JsProgram program) {
+    return new JsStaticEval(program).execImpl();
   }
 
   /**
@@ -840,13 +834,13 @@ public class JsStaticEval {
     this.program = program;
   }
 
-  public OptimizerStats execImpl() {
-    StaticEvalVisitor sev = new StaticEvalVisitor();
-    sev.accept(program);
-    OptimizerStats stats = new OptimizerStats(NAME);
-    if (sev.didChange()) {
-      stats.recordModified();
+  public int execImpl() {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      StaticEvalVisitor sev = new StaticEvalVisitor();
+      sev.accept(program);
+      stats.recordModified(sev.getNumMods());
+
+      return stats.getNumMods();
     }
-    return stats;
   }
 }

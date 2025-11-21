@@ -21,9 +21,7 @@ import com.google.gwt.dev.shell.BrowserChannel.Value;
 import com.google.gwt.dev.shell.BrowserChannelServer.SessionHandlerServer;
 import com.google.gwt.dev.shell.JsValue.DispatchMethod;
 import com.google.gwt.dev.shell.JsValue.DispatchObject;
-import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 
 import java.lang.reflect.Member;
 import java.util.Collections;
@@ -101,98 +99,84 @@ public class OophmSessionHandler extends SessionHandlerServer {
   @Override
   public ExceptionOrReturnValue invoke(BrowserChannelServer channel,
       Value thisVal, int methodDispatchId, Value[] args) {
-    Event jsToJavaCallEvent =
-        SpeedTracerLogger.start(channel.getDevModeSession(), DevModeEventType.JS_TO_JAVA_CALL);
-    ServerObjectsTable localObjects = channel.getJavaObjectsExposedInBrowser();
-    ModuleSpace moduleSpace = moduleMap.get(channel);
-    ModuleHandle moduleHandle = moduleHandleMap.get(channel);
-    assert moduleSpace != null && moduleHandle != null;
-    TreeLogger logger = moduleHandle.getLogger();
-    CompilingClassLoader cl = moduleSpace.getIsolatedClassLoader();
+    try (SimpleEvent ignored = new SimpleEvent("JS to Java call")) {
+      ServerObjectsTable localObjects = channel.getJavaObjectsExposedInBrowser();
+      ModuleSpace moduleSpace = moduleMap.get(channel);
+      ModuleHandle moduleHandle = moduleHandleMap.get(channel);
+      assert moduleSpace != null && moduleHandle != null;
+      TreeLogger logger = moduleHandle.getLogger();
+      CompilingClassLoader cl = moduleSpace.getIsolatedClassLoader();
 
-    // Treat dispatch id 0 as toString()
-    if (methodDispatchId == 0) {
-      methodDispatchId = cl.getDispId("java.lang.Object::toString()");
-    }
-
-    JsValueOOPHM jsThis = new JsValueOOPHM();
-    channel.convertToJsValue(cl, localObjects, thisVal, jsThis);
-
-    if (SpeedTracerLogger.jsniCallLoggingEnabled()) {
-      DispatchClassInfo clsInfo = cl.getClassInfoByDispId(methodDispatchId);
-      if (clsInfo != null) {
-        Member member = clsInfo.getMember(methodDispatchId);
-        if (member != null) {
-          jsToJavaCallEvent.addData("name", member.toString());
-        }
+      // Treat dispatch id 0 as toString()
+      if (methodDispatchId == 0) {
+        methodDispatchId = cl.getDispId("java.lang.Object::toString()");
       }
-    }
 
-    TreeLogger branch = TreeLogger.NULL;
-    if (logger.isLoggable(TreeLogger.SPAM)) {
-      StringBuffer logMsg = new StringBuffer();
-      logMsg.append("Client invoke of ");
-      logMsg.append(methodDispatchId);
-      DispatchClassInfo classInfo = cl.getClassInfoByDispId(methodDispatchId);
-      if (classInfo != null) {
-        Member member = classInfo.getMember(methodDispatchId);
-        if (member != null) {
-          logMsg.append(" (");
-          logMsg.append(member.getName());
-          logMsg.append(")");
-        }
-      }
-      logMsg.append(" on ");
-      logMsg.append(jsThis.toString());
-      branch = logger.branch(TreeLogger.SPAM, logMsg.toString(), null);
-    }
-    JsValueOOPHM[] jsArgs = new JsValueOOPHM[args.length];
-    for (int i = 0; i < args.length; ++i) {
-      jsArgs[i] = new JsValueOOPHM();
-      channel.convertToJsValue(cl, localObjects, args[i], jsArgs[i]);
+      JsValueOOPHM jsThis = new JsValueOOPHM();
+      channel.convertToJsValue(cl, localObjects, thisVal, jsThis);
+
+      TreeLogger branch = TreeLogger.NULL;
       if (logger.isLoggable(TreeLogger.SPAM)) {
-        branch.log(TreeLogger.SPAM, " arg " + i + " = " + jsArgs[i].toString(),
-            null);
+        StringBuffer logMsg = new StringBuffer();
+        logMsg.append("Client invoke of ");
+        logMsg.append(methodDispatchId);
+        DispatchClassInfo classInfo = cl.getClassInfoByDispId(methodDispatchId);
+        if (classInfo != null) {
+          Member member = classInfo.getMember(methodDispatchId);
+          if (member != null) {
+            logMsg.append(" (");
+            logMsg.append(member.getName());
+            logMsg.append(")");
+          }
+        }
+        logMsg.append(" on ");
+        logMsg.append(jsThis.toString());
+        branch = logger.branch(TreeLogger.SPAM, logMsg.toString(), null);
       }
+      JsValueOOPHM[] jsArgs = new JsValueOOPHM[args.length];
+      for (int i = 0; i < args.length; ++i) {
+        jsArgs[i] = new JsValueOOPHM();
+        channel.convertToJsValue(cl, localObjects, args[i], jsArgs[i]);
+        if (logger.isLoggable(TreeLogger.SPAM)) {
+          branch.log(TreeLogger.SPAM, " arg " + i + " = " + jsArgs[i].toString(),
+              null);
+        }
+      }
+      JsValueOOPHM jsRetVal = new JsValueOOPHM();
+      JsValueOOPHM jsMethod;
+      DispatchObject dispObj;
+      if (jsThis.isWrappedJavaObject()) {
+        // If this is a wrapped object, get get the method off it.
+        dispObj = jsThis.getJavaObjectWrapper();
+      } else {
+        // Look it up on the static dispatcher.
+        dispObj = (DispatchObject) moduleSpace.getStaticDispatcher();
+      }
+      jsMethod = (JsValueOOPHM) dispObj.getField(methodDispatchId);
+      DispatchMethod dispMethod = jsMethod.getWrappedJavaFunction();
+      boolean exception;
+      try {
+        exception = dispMethod.invoke(jsThis, jsArgs, jsRetVal);
+      } catch (Throwable t) {
+        exception = true;
+        JsValueGlue.set(jsRetVal, moduleSpace.getIsolatedClassLoader(),
+            t.getClass(), t);
+      }
+      Value retVal = channel.convertFromJsValue(localObjects, jsRetVal);
+      return new ExceptionOrReturnValue(exception, retVal);
     }
-    JsValueOOPHM jsRetVal = new JsValueOOPHM();
-    JsValueOOPHM jsMethod;
-    DispatchObject dispObj;
-    if (jsThis.isWrappedJavaObject()) {
-      // If this is a wrapped object, get get the method off it.
-      dispObj = jsThis.getJavaObjectWrapper();
-    } else {
-      // Look it up on the static dispatcher.
-      dispObj = (DispatchObject) moduleSpace.getStaticDispatcher();
-    }
-    jsMethod = (JsValueOOPHM) dispObj.getField(methodDispatchId);
-    DispatchMethod dispMethod = jsMethod.getWrappedJavaFunction();
-    boolean exception;
-    try {
-      exception = dispMethod.invoke(jsThis, jsArgs, jsRetVal);
-    } catch (Throwable t) {
-      exception = true;
-      JsValueGlue.set(jsRetVal, moduleSpace.getIsolatedClassLoader(),
-          t.getClass(), t);
-    }
-    Value retVal = channel.convertFromJsValue(localObjects, jsRetVal);
-    jsToJavaCallEvent.end();
-    return new ExceptionOrReturnValue(exception, retVal);
   }
 
   @Override
   public synchronized TreeLogger loadModule(BrowserChannelServer channel,
       String moduleName, String userAgent, String url, String tabKey,
       String sessionKey, byte[] userAgentIcon) {
-    Event moduleInit =
-        SpeedTracerLogger.start(channel.getDevModeSession(), DevModeEventType.MODULE_INIT,
-            "Module Name", moduleName);
     ModuleHandle moduleHandle = host.createModuleLogger(moduleName, userAgent,
         url, tabKey, sessionKey, channel, userAgentIcon);
     TreeLogger logger = moduleHandle.getLogger();
     moduleHandleMap.put(channel, moduleHandle);
     ModuleSpace moduleSpace = null;
-    try {
+    try (SimpleEvent ignored = new SimpleEvent("Module init " + moduleName)) {
       // Attach a new ModuleSpace to make it programmable.
       ModuleSpaceHost msh = host.createModuleSpaceHost(moduleHandle, moduleName);
       moduleSpace = new ModuleSpaceOOPHM(msh, moduleName, channel);
@@ -218,9 +202,8 @@ public class OophmSessionHandler extends SessionHandlerServer {
       moduleMap.remove(channel);
       moduleHandleMap.remove(channel);
       return null;
-    } finally {
-      moduleInit.end();
     }
+
     return moduleHandle.getLogger();
   }
 

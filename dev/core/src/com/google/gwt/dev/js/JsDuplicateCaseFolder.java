@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.js;
 
+import com.google.gwt.dev.jjs.impl.OptimizerStats;
 import com.google.gwt.dev.js.ast.JsBlock;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsModVisitor;
@@ -69,6 +70,7 @@ import java.util.Map;
  * it can account for a significant amount of space in generated code.
  */
 public class JsDuplicateCaseFolder {
+  private static final String NAME = JsDuplicateCaseFolder.class.getSimpleName();
 
   private class DuplicateCaseFolder extends JsModVisitor {
 
@@ -77,7 +79,7 @@ public class JsDuplicateCaseFolder {
 
     @Override
     public boolean visit(JsSwitch x, JsContext ctx) {
-      boolean modified = false;
+      int modified = 0;
 
       // A map from case body source code to the original case label
       // in which they appeared
@@ -120,15 +122,15 @@ public class JsDuplicateCaseFolder {
           // Empty the case body and insert the case label into the output
           member.getStmts().clear();
           newCases.add(index, member);
-          modified = true;
+          modified++;
         }
 
         hasPreviousFallthrough = false;
       }
 
       // Rewrite the AST if any cases have changed
-      if (modified) {
-        didChange = true;
+      if (modified > 0) {
+        numMods += modified;
         cases.clear();
         cases.addAll(newCases);
       }
@@ -158,17 +160,18 @@ public class JsDuplicateCaseFolder {
     }
   }
 
-  // Needed for OptimizerTestBase
-  public static boolean exec(JsProgram program) {
-    return new JsDuplicateCaseFolder().execImpl(program.getFragmentBlock(0));
+  public static void exec(JsProgram program) {
+    new JsDuplicateCaseFolder().execImpl(program.getFragmentBlock(0));
   }
 
   public JsDuplicateCaseFolder() {
   }
 
-  private boolean execImpl(JsBlock fragment) {
-    DuplicateCaseFolder dcf = new DuplicateCaseFolder();
-    dcf.accept(fragment);
-    return dcf.didChange();
+  private void execImpl(JsBlock fragment) {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      DuplicateCaseFolder dcf = new DuplicateCaseFolder();
+      dcf.accept(fragment);
+      stats.recordModified(dcf.getNumMods());
+    }
   }
 }

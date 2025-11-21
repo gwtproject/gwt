@@ -41,9 +41,7 @@ import com.google.gwt.dev.util.Name;
 import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.dev.util.Name.SourceOrBinaryName;
 import com.google.gwt.dev.util.collect.Lists;
-import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
 import com.google.gwt.thirdparty.guava.common.io.Closeables;
@@ -1406,13 +1404,9 @@ public final class CompilingClassLoader extends ClassLoader implements
     if (unit == null || unit.getJsniMethods() == null) {
       return;
     }
-    Event event = SpeedTracerLogger.start(DevModeEventType.LOAD_JSNI, "unit",
-        unit.getTypeName());
-    try {
+    try (SimpleEvent ignore = new SimpleEvent("Load JSNI for " + unit.getTypeName())) {
       shellJavaScriptHost.createNativeMethods(logger, unit.getJsniMethods(),
           this);
-    } finally {
-      event.end();
     }
   }
 

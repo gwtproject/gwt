@@ -19,6 +19,8 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
 
+import java.util.Locale;
+
 /**
  * Tests {@link DeadCodeElimination}.
  */
@@ -255,8 +257,22 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         "EntryPoint.b && (EntryPoint.i = 1);");
   }
 
+  public void testForOptimizations() {
+    // We need a helper to inline the false from, so JDT doesn't alert us to unreachable code and fail
+    runMethodInliner = true;
+    addSnippetClassDecl(
+        "static class B  { "
+            + "static boolean isFalse() { return false; } "
+            + "}");
+
+    optimize("void", "for (i = 1; B.isFalse(); i++) { i = 2; }")
+        .intoString("EntryPoint.i = 1;");
+    optimize("void", "for (i = 1; i < 5; i++) { i = 2; }")
+        .intoString("for (EntryPoint.i = 1; EntryPoint.i < 5; EntryPoint.i++) {\n  EntryPoint.i = 2;\n}");
+  }
+
   /**
-   * BUG: JInstance was marked as not having side effects whereas it all depends on the
+   * BUG: JInstanceOf was marked as not having side effects whereas it all depends on
    * whether the expression on the left has side effects.
    *
    * Reproduces Issue:7818.
@@ -309,7 +325,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         "  final static String s4 = null;",
         "}");
 
-    // TODO(rluble): This test is not 100% meaninful as the JDT performs some optimizations for us.
+    // TODO(rluble): This test is not 100% meaningful as the JDT performs some optimizations for us.
     optimizeExpressions(false, "boolean", "\"a\".equals(\"a\")")
         .into("return true;");
     optimizeExpressions(false, "boolean", "\"a\" == \"a\"")
@@ -334,11 +350,10 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         .into("return true;");
     optimizeExpressions(false, "boolean", "A.s1.equals(A.s2)")
         .into("return true;");
-    // Next two are not directly optimizable because of inserted clinits.
-    // optimizeExpressions(false, "boolean", "\"a\" != A.s4")
-    //     .into("return true;");
-    // optimizeExpressions(false, "boolean", "A.s4 == null")
-    //    .into("return true;");
+     optimizeExpressions(false, "boolean", "\"a\" != A.s4")
+         .intoString("return (EntryPoint$A.$clinit(), true);");
+     optimizeExpressions(false, "boolean", "A.s4 == null")
+        .intoString("return (EntryPoint$A.$clinit(), true);");
   }
 
   public void testStringOptimizations_withSpecializer() throws Exception {
@@ -419,7 +434,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
 
   public void testOptimizeStringCalls() throws Exception {
     // Note: we're limited here by the methods declared in the mock String in
-    // JJSTestBase#addBuiltinClasses
+    // JavaResourceBase#getStandardResources().
 
     // String.length
     optimize("int", "return \"abc\".length();").intoString("return 3;");
@@ -434,8 +449,8 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
     optimize("String", "return s.toString();").intoString("return EntryPoint.s.toString();");
     optimize("String", "return o.toString();").intoString("return EntryPoint.o.toString();");
 
-    // String.hashCode: never optimized
-    optimize("int", "return \"abc\".hashCode();").intoString("return \"abc\".hashCode();");
+    // String.hashCode
+    optimize("int", "return \"abc\".hashCode();").intoString("return 96354;");
     optimize("int", "return s.hashCode();").intoString("return EntryPoint.s.hashCode();");
 
     // String.equals
@@ -464,9 +479,9 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
 
   public void testFloatingPoint() throws Exception {
     // Internally we represent float literals as double, so here we make sure that 1.1f is
-    // is printed as a double with the right precision.
-    optimize("float", "return 1.1f;").intoString("return " + String.format("%.16g", (double) 1.1f) +
-        ";");
+    // printed as a double with the right precision.
+    optimize("float", "return 1.1f;").intoString("return "
+        + String.format(Locale.ROOT, "%.16g", (double) 1.1f) + ";");
     optimize("boolean", "return 2d > 1;").intoString("return true;");
     optimize("boolean", "return 1 < 2d;").intoString("return true;");
   }

@@ -123,10 +123,14 @@ public final class JsUtils {
     return JsUtils.<float[]>uncheckedCast(new Float32Array(buf))[0];
   }
 
-  public static long doubleToRawLongBits(double value) {
+  public static int[] doubleToRawIntBits(double value) {
     ArrayBuffer buf = new ArrayBuffer(8);
     JsUtils.<double[]>uncheckedCast(new Float64Array(buf))[0] = value;
-    int[] intBits = JsUtils.<int[]>uncheckedCast(new Uint32Array(buf));
+    return JsUtils.<int[]>uncheckedCast(new Uint32Array(buf));
+  }
+
+  public static long doubleToRawLongBits(double value) {
+    int[] intBits = doubleToRawIntBits(value);
     return LongUtils.fromBits(intBits[0] | 0, intBits[1] | 0);
   }
 

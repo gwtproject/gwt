@@ -502,7 +502,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public int lastIndexOf(String str, int start) {
-    return asNativeString().lastIndexOf(str, start);
+    return start < 0 ? -1 : asNativeString().lastIndexOf(str, start);
   }
 
   @Override
@@ -518,9 +518,10 @@ public final class String implements Comparable<String>, CharSequence,
    *
    * TODO(jat): properly handle Java regex syntax
    */
+  @SuppressWarnings("checkstyle:SpaceAfterColon")
   public boolean matches(String regex) {
     // We surround the regex with '^' and '$' because it must match the entire string.
-    return new NativeRegExp("^(" + regex + ")$").test(this);
+    return new NativeRegExp("^(?:" + regex + ")$").test(this);
   }
 
   public int offsetByCodePoints(int index, int codePointOffset) {

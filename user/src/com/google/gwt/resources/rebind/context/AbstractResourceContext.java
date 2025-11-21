@@ -24,8 +24,10 @@ import com.google.gwt.resources.ext.ResourceContext;
 import com.google.gwt.resources.ext.ResourceGenerator;
 import com.google.gwt.resources.ext.ResourceGeneratorUtil;
 import com.google.gwt.thirdparty.guava.common.io.BaseEncoding;
+import com.google.gwt.thirdparty.guava.common.io.ByteStreams;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -71,7 +73,10 @@ public abstract class AbstractResourceContext implements ResourceContext {
     String fileName = ResourceGeneratorUtil.baseName(resource);
     try {
       URLConnection urlConnection = resource.openConnection();
-      byte[] bytes = urlConnection.getInputStream().readAllBytes();
+      final byte[] bytes;
+      try (InputStream inputStream = urlConnection.getInputStream()) {
+        bytes = ByteStreams.toByteArray(inputStream);
+      }
       String finalMimeType = (mimeType != null) ? mimeType : urlConnection.getContentType();
       return deploy(fileName, finalMimeType, bytes, forceExternal);
     } catch (IOException e) {

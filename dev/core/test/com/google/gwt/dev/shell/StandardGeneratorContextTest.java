@@ -30,15 +30,18 @@ import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.CompilationStateBuilder;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.resource.Resource;
-import com.google.gwt.dev.util.Util;
+import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
+import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
 
 import junit.framework.TestCase;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -144,7 +147,7 @@ public class StandardGeneratorContextTest extends TestCase {
       throws UnableToCompleteException, IOException {
     String path = "testTryCreateResource/commitCalledTwice";
     OutputStream os = genCtx.tryCreateResource(mockLogger, path);
-    os.write("going to call commit twice after this...".getBytes(Util.DEFAULT_ENCODING));
+    os.write("going to call commit twice after this...".getBytes(StandardCharsets.UTF_8));
     genCtx.setCurrentGenerator(MockGenerator.class);
     GeneratedResource res = genCtx.commitResource(mockLogger, os);
     assertEquals(path, res.getPartialPath());
@@ -217,7 +220,7 @@ public class StandardGeneratorContextTest extends TestCase {
       IOException {
     String path = "testTryCreateResource/duplicateCreationAfterCommit";
     OutputStream os1 = genCtx.tryCreateResource(mockLogger, path);
-    os1.write("going to call commit twice after this...".getBytes(Util.DEFAULT_ENCODING));
+    os1.write("going to call commit twice after this...".getBytes(StandardCharsets.UTF_8));
     genCtx.commitResource(mockLogger, os1);
     assertEquals(1, artifactSet.size());
 
@@ -289,7 +292,7 @@ public class StandardGeneratorContextTest extends TestCase {
   protected void tearDown() throws Exception {
     for (int i = toDelete.size() - 1; i >= 0; --i) {
       File f = toDelete.get(i);
-      Util.recursiveDelete(f, false);
+      MoreFiles.deleteRecursively(f.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
       assertFalse("Unable to delete " + f.getAbsolutePath(), f.exists());
     }
   }
@@ -305,7 +308,10 @@ public class StandardGeneratorContextTest extends TestCase {
     assertTrue(artifactSet.contains(res));
 
     // Read the file.
-    byte[] arrayRead = Util.readStreamAsBytes(res.getContents(mockLogger));
+    byte[] arrayRead;
+    try (InputStream contents = res.getContents(mockLogger)) {
+      arrayRead = contents.readAllBytes();
+    }
     assertTrue(Arrays.equals(arrayWritten, arrayRead));
   }
 

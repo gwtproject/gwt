@@ -79,4 +79,12 @@ public class EmulTestBase extends GWTTestCase {
   public String getModuleName() {
     return "com.google.gwt.emultest.EmulSuite";
   }
+
+  protected <T> T hideFromCompiler(T value) {
+    if (Math.random() < -1) {
+      // Can never happen, but fools the compiler enough not to optimize this call.
+      fail();
+    }
+    return value;
+  }
 }

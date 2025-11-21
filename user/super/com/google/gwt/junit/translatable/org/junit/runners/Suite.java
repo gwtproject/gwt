@@ -21,10 +21,5 @@ import org.junit.runner.Runner;
  * Translatable version of JUnit's {@code Suite}.
  */
 public class Suite extends Runner {
-    /**
-     * Translatable version of JUnit's {@code SuiteClasses}.
-     */
-    public @interface SuiteClasses {
-        Class<?>[] value();
-    }
+
 }

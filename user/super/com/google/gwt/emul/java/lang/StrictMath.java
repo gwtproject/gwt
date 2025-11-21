@@ -54,7 +54,7 @@ public final class StrictMath {
   }
 
   public static double atan2(double y, double x) {
-    return Math.atan(x);
+    return Math.atan2(y, x);
   }
 
   public static double ceil(double x) {
@@ -235,5 +235,106 @@ public final class StrictMath {
 
   public static double toRadians(double x) {
     return Math.toRadians(x);
+  }
+
+  public static long abs(long x) {
+    return Math.abs(x);
+  }
+
+  public static int decrementExact(int x) {
+    return Math.decrementExact(x);
+  }
+
+  public static long decrementExact(long x) {
+    return Math.decrementExact(x);
+  }
+
+  public static int incrementExact(int x) {
+    return Math.incrementExact(x);
+  }
+
+  public static long incrementExact(long x) {
+    return Math.incrementExact(x);
+  }
+
+  public static long multiplyExact(long x, int y) {
+    return Math.multiplyExact(x, y);
+  }
+
+  public static long negateExact(long x) {
+    return Math.negateExact(x);
+  }
+
+  public static int negateExact(int x) {
+    return Math.negateExact(x);
+  }
+
+  public static int getExponent(float x) {
+    return Math.getExponent(x);
+  }
+
+  public static int getExponent(double x) {
+    return Math.getExponent(x);
+  }
+
+  public static int floorMod(long x, int y) {
+    return Math.floorMod(x, y);
+  }
+
+  public static double cbrt(double x) {
+    return Math.cbrt(x);
+  }
+
+  @SuppressWarnings("CheckStyle.MethodName")
+  public static double IEEEremainder(double x, double y) {
+    return Math.IEEEremainder(x, y);
+  }
+
+  public static long floorDiv(long x, int y) {
+    return Math.floorDiv(x, y);
+  }
+
+  public static long multiplyFull(int x, int y) {
+    return Math.multiplyFull(x, y);
+  }
+
+  public static int absExact(int x) {
+    return Math.absExact(x);
+  }
+
+  public static long absExact(long x) {
+    return Math.absExact(x);
+  }
+
+  public static double ulp(double x) {
+    return Math.ulp(x);
+  }
+
+  public static float ulp(float x) {
+    return Math.ulp(x);
+  }
+
+  public static double nextAfter(double x, double direction) {
+    return Math.nextAfter(x, direction);
+  }
+
+  public static float nextAfter(float x, double direction) {
+    return Math.nextAfter(x, direction);
+  }
+
+  public static double nextUp(double x) {
+    return Math.nextUp(x);
+  }
+
+  public static float nextUp(float x) {
+    return Math.nextUp(x);
+  }
+
+  public static double nextDown(double x) {
+    return Math.nextDown(x);
+  }
+
+  public static float nextDown(float x) {
+    return Math.nextDown(x);
   }
 }

@@ -33,21 +33,20 @@ import com.google.gwt.dev.resource.impl.PathPrefixSet;
 import com.google.gwt.dev.resource.impl.ResourceFilter;
 import com.google.gwt.dev.resource.impl.ResourceOracleImpl;
 import com.google.gwt.dev.util.Empty;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
-import com.google.gwt.thirdparty.guava.common.base.Charsets;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.Iterators;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.hash.Hasher;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import java.io.File;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -61,6 +60,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import javax.lang.model.SourceVersion;
 
 /**
  * Represents a module specification. In principle, this could be built without
@@ -97,7 +98,7 @@ public class ModuleDef implements DepsInfoProvider {
     String[] parts = moduleName.split("\\.");
     for (int i = 0; i < parts.length - 1; i++) {
       String part = parts[i];
-      if (!Util.isValidJavaIdent(part)) {
+      if (!SourceVersion.isIdentifier(part)) {
         return false;
       }
     }
@@ -331,7 +332,8 @@ public class ModuleDef implements DepsInfoProvider {
   public synchronized String findServletForPath(String actual) {
     // Walk in backwards sorted order to find the longest path match first.
     Set<Entry<String, String>> entrySet = servletClassNamesByPath.entrySet();
-    Entry<String, String>[] entries = Util.toArray(Entry.class, entrySet);
+    // noinspection unchecked
+    Entry<String, String>[] entries = entrySet.toArray(Entry[]::new);
     Arrays.sort(entries, REV_NAME_CMP);
     for (int i = 0, n = entries.length; i < n; ++i) {
       String mapping = entries[i].getKey();
@@ -455,31 +457,24 @@ public class ModuleDef implements DepsInfoProvider {
    * For example, consider a glob that matches fewer files than before because a file was
    * deleted.
    */
-  public int getInputFilenameHash() {
-    List<String> filenames = new ArrayList<String>();
-
-    filenames.addAll(gwtXmlPathByModuleName.values());
+  public String getInputFilenameHash() {
+    List<String> filenames = new ArrayList<>(gwtXmlPathByModuleName.values());
 
     for (Resource resource : getResourcesNewerThan(Integer.MIN_VALUE)) {
       filenames.add(resource.getLocation());
     }
 
-    // Take the first four bytes of the SHA-1 hash.
+    // Take the first eight bytes of the murmur3 hash.
 
     Collections.sort(filenames);
 
-    MessageDigest digest;
-    try {
-      digest = MessageDigest.getInstance("SHA-1");
-    } catch (NoSuchAlgorithmException e) {
-      throw new RuntimeException("SHA-1 unavailable", e);
-    }
+    Hasher hasher = Hashing.murmur3_128().newHasher();
+    hasher.putInt(filenames.size());
     for (String filename : filenames) {
-      digest.update(filename.getBytes(Charsets.UTF_8));
+      hasher.putInt(filename.length());
+      hasher.putString(filename, StandardCharsets.UTF_8);
     }
-    byte[] bytes = digest.digest();
-
-    return (bytes[0] << 24) | (bytes[1] << 16) | (bytes[2] << 8) | bytes[3];
+    return hasher.hash().toString();
   }
 
   public Class<? extends Linker> getLinker(String name) {

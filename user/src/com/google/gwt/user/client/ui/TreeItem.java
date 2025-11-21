@@ -88,6 +88,8 @@ public class TreeItem extends UIObject implements IsTreeItem, HasTreeItems,
       if (GWT.isClient()) {
         // Create the base table element that will be cloned.
         BASE_INTERNAL_ELEM = DOM.createTable();
+        // aria role to indicate it is a plain layout table
+        Roles.getPresentationRole().set(BASE_INTERNAL_ELEM);
         Element contentElem = DOM.createDiv();
         Element tbody = DOM.createTBody(), tr = DOM.createTR();
         Element tdImg = DOM.createTD(), tdContent = DOM.createTD();

@@ -17,7 +17,6 @@ package com.google.gwt.core.client.impl;
 
 import static com.google.gwt.core.client.impl.StackTraceExamples.TYPE_ERROR;
 
-import com.google.gwt.core.client.impl.StackTraceCreator.CollectorLegacy;
 import com.google.gwt.core.client.impl.StackTraceCreator.CollectorModern;
 import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
@@ -49,7 +48,7 @@ public class StackTraceNativeTest extends StackTraceTestBase {
   @Override
   protected String[] getTraceRecursion() {
     // First two frames are optional as they are automatically stripped by EDGE.
-    final String[] expectedModern = {
+    return new String[]{
         "?" + Impl.getNameOf("@java.lang.Throwable::new(Ljava/lang/String;)"),
         "?" + Impl.getNameOf("@java.lang.Exception::new(Ljava/lang/String;)"),
         Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwException2(*)"),
@@ -62,16 +61,6 @@ public class StackTraceNativeTest extends StackTraceTestBase {
         Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::getLiveException(*)"),
         Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceTestBase::testTraceRecursion()"),
     };
-
-    final String[] expectedLegacy = {
-        Impl.getNameOf("@java.lang.Throwable::new(Ljava/lang/String;)"),
-        Impl.getNameOf("@java.lang.Exception::new(Ljava/lang/String;)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwException2(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwException1(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwRecursive(*)"),
-    };
-
-    return isLegacyCollector() ? expectedLegacy : expectedModern;
   }
 
   @Override
@@ -87,12 +76,6 @@ public class StackTraceNativeTest extends StackTraceTestBase {
         Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceTestBase::assertJse(*)"),
     };
 
-    final String[] limited_wrap = {
-        Impl.getNameOf("@com.google.gwt.lang.Exceptions::toJava(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::getLiveException(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceTestBase::assertJse(*)"),
-    };
-
     final String[] limited_fillInStackTrace = {
         Impl.getNameOf("@java.lang.Throwable::fillInStackTrace()"),
         Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::getLiveException(*)"),
@@ -101,28 +84,14 @@ public class StackTraceNativeTest extends StackTraceTestBase {
 
     // For legacy browsers and non-error javascript exceptions (e.g. throw "string"), we can only
     // construct stack trace from the catch block and below.
-    return isLegacyCollector()
-        ? limited_wrap : (thrown != TYPE_ERROR ? limited_fillInStackTrace : full);
+    return thrown != TYPE_ERROR ? limited_fillInStackTrace : full;
   }
 
   public void testCollectorType() {
-    if (isSafari5()) {
-      assertTrue(isLegacyCollector());
-    } else {
-      assertTrue(isModernCollector());
-    }
-  }
-
-  private static boolean isLegacyCollector() {
-    return StackTraceCreator.collector instanceof CollectorLegacy;
+    assertTrue(isModernCollector());
   }
 
   private static boolean isModernCollector() {
-    return StackTraceCreator.collector instanceof CollectorModern;
+    return StackTraceCreator.getCollector() instanceof CollectorModern;
   }
-
-  private static native boolean isSafari5() /*-{
-    return navigator.userAgent.match(' Safari/') && !navigator.userAgent.match(' Chrom')
-        && !!navigator.userAgent.match(' Version/5.');
-  }-*/;
 }

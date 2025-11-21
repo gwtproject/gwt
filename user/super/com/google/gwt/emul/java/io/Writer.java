@@ -78,4 +78,54 @@ public abstract class Writer implements Appendable, Closeable, Flushable {
     write(csq.subSequence(start, end).toString());
     return this;
   }
+
+  public static Writer nullWriter() {
+    return new Writer() {
+      private boolean closed;
+
+      @Override
+      public void write(char[] buffer, int off, int len) throws IOException {
+        IOUtils.checkOffsetAndCount(buffer, off, len);
+        ensureOpen();
+      }
+
+      public void write(int oneChar) throws IOException {
+        ensureOpen();
+      }
+
+      public void write(String str, int offset, int count) throws IOException {
+        IOUtils.checkOffsetAndCount(str, offset, count);
+        ensureOpen();
+      }
+
+      public Writer append(CharSequence csq) throws IOException {
+        ensureOpen();
+        return this;
+      }
+
+      public Writer append(CharSequence csq, int start, int end) throws IOException {
+        ensureOpen();
+        if (csq != null) {
+          IOUtils.checkOffsetAndCount(csq.toString(), start, end - start);
+        }
+        return this;
+      }
+
+      @Override
+      public void flush() throws IOException {
+        ensureOpen();
+      }
+
+      @Override
+      public void close() {
+        closed = true;
+      }
+
+      private void ensureOpen() throws IOException {
+        if (closed) {
+          throw new IOException();
+        }
+      }
+    };
+  }
 }

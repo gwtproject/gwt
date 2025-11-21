@@ -33,39 +33,39 @@ public class StringTest extends EmulTestBase {
   }
 
   public void testStrip() {
-    stripRightAsssertEquals("", "");
-    stripRightAsssertEquals("", "  ");
-    stripRightAsssertEquals("x", " x ");
-    stripRightAsssertEquals("x", "\u001cx\u001c");
-    stripRightAsssertEquals("\u00a0x\u00a0", "\u00a0x\u00a0 ");
-    stripRightAsssertEquals("\uffefx\u180e", "\uffefx\u180e ");
+    stripRightAssertEquals("", "");
+    stripRightAssertEquals("", "  ");
+    stripRightAssertEquals("x", " x ");
+    stripRightAssertEquals("x", "\u001cx\u001c");
+    stripRightAssertEquals("\u00a0x\u00a0", "\u00a0x\u00a0 ");
+    stripRightAssertEquals("\uffefx\u180e", "\uffefx\u180e ");
   }
 
   public void testStripLeading() {
-    stripRightLeadingAsssertEquals("", "");
-    stripRightLeadingAsssertEquals("", "  ");
-    stripRightLeadingAsssertEquals("x ", " x ");
-    stripRightLeadingAsssertEquals("x\u001c", "\u001cx\u001c");
-    stripRightLeadingAsssertEquals("\u00a0x\u00a0", "\u00a0x\u00a0");
+    stripRightLeadingAssertEquals("", "");
+    stripRightLeadingAssertEquals("", "  ");
+    stripRightLeadingAssertEquals("x ", " x ");
+    stripRightLeadingAssertEquals("x\u001c", "\u001cx\u001c");
+    stripRightLeadingAssertEquals("\u00a0x\u00a0", "\u00a0x\u00a0");
   }
 
   public void testStripTrailing() {
-    stripRightTrailingAsssertEquals("", "");
-    stripRightTrailingAsssertEquals("", "  ");
-    stripRightTrailingAsssertEquals(" x", " x ");
-    stripRightTrailingAsssertEquals("\u001cx", "\u001cx\u001c");
-    stripRightTrailingAsssertEquals("\u00a0x\u00a0", "\u00a0x\u00a0 ");
+    stripRightTrailingAssertEquals("", "");
+    stripRightTrailingAssertEquals("", "  ");
+    stripRightTrailingAssertEquals(" x", " x ");
+    stripRightTrailingAssertEquals("\u001cx", "\u001cx\u001c");
+    stripRightTrailingAssertEquals("\u00a0x\u00a0", "\u00a0x\u00a0 ");
   }
 
-  private void stripRightAsssertEquals(String expected, String arg) {
+  private void stripRightAssertEquals(String expected, String arg) {
     assertEquals(expected, hideFromCompiler(arg).strip());
   }
 
-  private void stripRightLeadingAsssertEquals(String expected, String arg) {
+  private void stripRightLeadingAssertEquals(String expected, String arg) {
     assertEquals(expected, hideFromCompiler(arg).stripLeading());
   }
 
-  private void stripRightTrailingAsssertEquals(String expected, String arg) {
+  private void stripRightTrailingAssertEquals(String expected, String arg) {
     assertEquals(expected, hideFromCompiler(arg).stripTrailing());
   }
 
@@ -98,13 +98,5 @@ public class StringTest extends EmulTestBase {
         "\n\r\n".lines().collect(Collectors.toList()));
     assertEquals(Arrays.asList("", "", "c"),
         "\n\r\nc".lines().collect(Collectors.toList()));
-  }
-
-  private <T> T hideFromCompiler(T value) {
-    if (Math.random() < -1) {
-      // Can never happen, but fools the compiler enough not to optimize this call.
-      fail();
-    }
-    return value;
   }
 }

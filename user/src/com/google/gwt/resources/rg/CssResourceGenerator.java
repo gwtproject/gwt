@@ -29,7 +29,6 @@ import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.util.DefaultTextOutput;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.CssResource.ClassName;
@@ -81,6 +80,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -225,7 +225,7 @@ public class CssResourceGenerator extends AbstractCssResourceGenerator
     String conflict = stringStartsWithAny(obfuscatedClassName, reservedPrefixes);
     while (conflict != null) {
       Adler32 hash = new Adler32();
-      hash.update(Util.getBytes(conflict));
+      hash.update(conflict.getBytes(StandardCharsets.UTF_8));
       /*
        * Compute a new prefix for the identifier to mask the prefix and add the
        * reserved identifier character to prevent conflicts with makeIdent().
@@ -743,7 +743,8 @@ public class CssResourceGenerator extends AbstractCssResourceGenerator
        */
       Adler32 checksum = new Adler32();
       for (JClassType type : cssResourceSubtypes) {
-        checksum.update(Util.getBytes(type.getQualifiedSourceName()));
+        String s = type.getQualifiedSourceName();
+        checksum.update(s.getBytes(StandardCharsets.UTF_8));
       }
 
       final int seed = Math.abs((int) checksum.getValue());
@@ -1025,11 +1026,6 @@ public class CssResourceGenerator extends AbstractCssResourceGenerator
   /**
    * Create a Java expression that evaluates to the string representation of the
    * stylesheet resource.
-   *
-   * @param actualReplacements An out parameter that will be populated by the
-   *          obfuscated class names that should be used for the particular
-   *          instance of the CssResource, based on any substitution
-   *          modifications encoded in the source CSS file
    */
   private String makeExpression(TreeLogger logger, ResourceContext context,
       CssStylesheet sheet)

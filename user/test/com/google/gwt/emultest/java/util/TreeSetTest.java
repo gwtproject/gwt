@@ -682,6 +682,18 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     assertFalse(set0.equals(set1));
   }
 
+  public void testSetClone() {
+    TreeSet<E> set = createTreeSet();
+    TreeSet<E> clone = (TreeSet<E>) set.clone();
+    assertEquals(set, clone);
+
+    set.add(getKeys()[0]);
+    assertFalse(set.equals(clone));
+
+    clone = (TreeSet<E>) set.clone();
+    assertEquals(set, clone);
+  }
+
   /**
    * Test method for 'java.util.SortedSet.first()'.
    *

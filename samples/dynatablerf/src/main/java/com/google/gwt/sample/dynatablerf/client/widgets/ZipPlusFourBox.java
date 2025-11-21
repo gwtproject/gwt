@@ -52,12 +52,9 @@ public class ZipPlusFourBox extends ValueBox<String> {
       switch (text.length()) {
         case 9:
           text = text.subSequence(0, 5) + "-" + text.subSequence(5, 9);
-          // Fall-though intentional
-          // CHECKSTYLE_OFF
+          /* fall-through intentional */
         case 5:
-          // Fall-through intentional
         case 10:
-          // CHECKSTYLE_ON
           if (PATTERN.test(text.toString())) {
             return text.toString();
           } else {

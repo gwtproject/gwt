@@ -276,6 +276,13 @@ public interface Map<K, V> {
       return (Comparator<Map.Entry<K, V>> & Serializable)
           (a, b) -> cmp.compare(a.getValue(), b.getValue());
     }
+
+    static <K,V> Map.Entry<K,V> copyOf(Map.Entry<? extends K,? extends V> e) {
+      if (e instanceof AbstractMap.SimpleImmutableEntry) {
+        return (Entry<K, V>) e;
+      }
+      return entry(e.getKey(), e.getValue());
+    }
   }
 
   void clear();

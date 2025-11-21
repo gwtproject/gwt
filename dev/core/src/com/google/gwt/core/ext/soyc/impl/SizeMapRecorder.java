@@ -24,12 +24,12 @@ import com.google.gwt.dev.js.SizeBreakdown;
 import com.google.gwt.dev.js.ast.JsLiteral;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsStringLiteral;
-import com.google.gwt.dev.util.Util;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -177,7 +177,7 @@ public class SizeMapRecorder {
   public static void recordMap(TreeLogger logger, OutputStream out, SizeBreakdown[] sizeBreakdowns,
       JavaToJavaScriptMap jjsmap, Map<JsName, JsLiteral> internedLiteralByVariableName) throws IOException {
     out = new GZIPOutputStream(out);
-    Writer writer = new OutputStreamWriter(out, Util.DEFAULT_ENCODING);
+    Writer writer = new OutputStreamWriter(out, StandardCharsets.UTF_8);
 
     writer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
     writer.append("<sizemaps>\n");

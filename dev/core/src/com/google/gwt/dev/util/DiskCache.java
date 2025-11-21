@@ -20,8 +20,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.nio.charset.StandardCharsets;
 
 /**
  * A nifty class that lets you squirrel away data on the file system. Write
@@ -42,6 +45,19 @@ public class DiskCache {
    * design. At any rate, I measured the current performance of this design to
    * be so fast relative to what I'm using it for, I didn't pursue this further.
    */
+
+  /**
+   * The size of a {@link #threadLocalBuf}, which should be large enough for
+   * efficient data transfer but small enough to fit easily into the L2 cache of
+   * most modern processors.
+   */
+  private static final int THREAD_LOCAL_BUF_SIZE = 16 * 1024;
+
+  /**
+   * Stores reusable thread local buffers for efficient data transfer.
+   */
+  private static final ThreadLocal<byte[]> threadLocalBuf = ThreadLocal.withInitial(
+      () -> new byte[THREAD_LOCAL_BUF_SIZE]);
 
   /**
    * A global shared Disk cache.
@@ -94,10 +110,9 @@ public class DiskCache {
     try {
       byte[] bytes = readByteArray(token);
       ByteArrayInputStream in = new ByteArrayInputStream(bytes);
-      return Util.readStreamAsObject(in, type);
-    } catch (ClassNotFoundException e) {
-      throw new RuntimeException("Unexpected exception deserializing from disk cache", e);
-    } catch (IOException e) {
+      ObjectInputStream objectInputStream = new StringInterningObjectInputStream(in);
+      return type.cast(objectInputStream.readObject());
+    } catch (ClassNotFoundException | IOException e) {
       throw new RuntimeException("Unexpected exception deserializing from disk cache", e);
     }
   }
@@ -109,7 +124,7 @@ public class DiskCache {
    * @return the String that was written
    */
   public String readString(long token) {
-    return Util.toString(readByteArray(token));
+    return new String(readByteArray(token), StandardCharsets.UTF_8);
   }
 
   /**
@@ -122,7 +137,7 @@ public class DiskCache {
    */
   public synchronized long transferFromStream(InputStream in) throws IOException {
     assert in != null;
-    byte[] buf = Util.takeThreadLocalBuf();
+    byte[] buf = takeThreadLocalBuf();
     try {
       long position = moveToEndPosition();
 
@@ -144,8 +159,25 @@ public class DiskCache {
       atEnd = false;
       return position;
     } finally {
-      Util.releaseThreadLocalBuf(buf);
+      releaseThreadLocalBuf(buf);
     }
+  }
+
+  /**
+   * Returns a thread-local buffer for efficient data transfer. Usages should be non-reentrant,
+   * resulting in a max of one buffer per thread.
+   */
+  private static byte[] takeThreadLocalBuf() {
+    byte[] buf = threadLocalBuf.get();
+    if (buf == null) {
+      throw new IllegalStateException("Reentrant usage, or failed to return!");
+    }
+    threadLocalBuf.set(null);
+    return buf;
+  }
+
+  private static void releaseThreadLocalBuf(byte[] buf) {
+    threadLocalBuf.set(buf);
   }
 
   /**
@@ -155,7 +187,7 @@ public class DiskCache {
    * @param out the stream to write into
    */
   public synchronized void transferToStream(long token, OutputStream out) throws IOException {
-    byte[] buf = Util.takeThreadLocalBuf();
+    byte[] buf = takeThreadLocalBuf();
     try {
       atEnd = false;
       file.seek(token);
@@ -172,7 +204,7 @@ public class DiskCache {
         out.write(buf, 0, read);
       }
     } finally {
-      Util.releaseThreadLocalBuf(buf);
+      releaseThreadLocalBuf(buf);
     }
   }
 
@@ -198,13 +230,13 @@ public class DiskCache {
    * @return a token to retrieve the data later
    */
   public long writeObject(Object object) {
-    try {
-      ByteArrayOutputStream out = new ByteArrayOutputStream();
-      Util.writeObjectToStream(out, object);
-      return writeByteArray(out.toByteArray());
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    try (ObjectOutputStream objectStream = new ObjectOutputStream(out)) {
+      objectStream.writeObject(object);
     } catch (IOException e) {
       throw new RuntimeException("Unexpected IOException on in-memory stream", e);
     }
+    return writeByteArray(out.toByteArray());
   }
 
   /**
@@ -213,7 +245,7 @@ public class DiskCache {
    * @return a token to retrieve the data later
    */
   public long writeString(String str) {
-    return writeByteArray(Util.getBytes(str));
+    return writeByteArray(str.getBytes(StandardCharsets.UTF_8));
   }
 
   /**

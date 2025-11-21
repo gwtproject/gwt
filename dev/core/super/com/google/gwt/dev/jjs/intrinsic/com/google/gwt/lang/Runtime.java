@@ -36,10 +36,11 @@ public class Runtime {
    * Otherwise it creates the prototype for the class by calling {@code createSubclassPrototype()}.
    * It also assigns the castable type map and sets the constructors prototype field to the
    * current prototype.
-   * Finally adds the class literal if it was created before the call to {@code defineClass}.
+   * <p>
+   * Finally, adds the class literal if it was created before the call to {@code defineClass}.
    * Class literals might be created before the call to {@code defineClass} if they are in separate
-   * code-split fragments. In that case Class.createFor* methods will have created a placeholder and
-   * stored in {@code prototypesByTypeId} the class literal.
+   * code-split fragments. In that case, Class.createFor* methods will call have called
+   * Class.maybeSetClassLiteral to create a placeholder and stored it in {@code prototypesByTypeId}.
    * <p>
    * As a prerequisite if superTypeIdOrPrototype is not null, it is assumed that defineClass for the
    * supertype has already been called.
@@ -77,23 +78,20 @@ public class Runtime {
     }
   }-*/;
 
-  private static native JavaScriptObject portableObjCreate(JavaScriptObject obj) /*-{
-    function F() {};
-    F.prototype = obj || {};
-    return new F();
-  }-*/;
-
   /**
    * Create a subclass prototype.
    */
   private static native JavaScriptObject createSubclassPrototype(
       JavaScriptObject superTypeIdOrPrototype) /*-{
-    var superPrototype = superTypeIdOrPrototype && superTypeIdOrPrototype.prototype;
-    if (!superPrototype) {
-      // If it is not a prototype, then it should be a type id.
-      superPrototype = @Runtime::prototypesByTypeId[superTypeIdOrPrototype];
+    var superPrototype = {};
+    if (superTypeIdOrPrototype != null) {
+      superPrototype = superTypeIdOrPrototype && superTypeIdOrPrototype.prototype;
+      if (!superPrototype) {
+        // If it is not a prototype, then it should be a type id.
+        superPrototype = @Runtime::prototypesByTypeId[superTypeIdOrPrototype];
+      }
     }
-    return @Runtime::portableObjCreate(*)(superPrototype);
+    return Object.create(superPrototype);
   }-*/;
 
   public static native void copyObjectProperties(JavaScriptObject from, JavaScriptObject to) /*-{
@@ -109,7 +107,7 @@ public class Runtime {
    */
   private static native JavaScriptObject maybeGetClassLiteralFromPlaceHolder(
       JavaScriptObject entry) /*-{
-    // TODO(rluble): Relies on Class.createFor*() storing the class literal wrapped as an array
+    // TODO(rluble): Relies on Class.maybeSetClassLiteral() storing the class literal wrapped as an array
     // to distinguish it from an actual prototype.
     return (entry instanceof Array) ? entry[0] : null;
   }-*/;

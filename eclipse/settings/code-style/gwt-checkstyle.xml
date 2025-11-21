@@ -27,7 +27,8 @@ Description:
     </module>
     <module name="TreeWalker">
         <property name="fileExtensions" value="java"/>
-       <module name="InterfaceIsType">
+        <module name="SuppressWarningsHolder" />
+        <module name="InterfaceIsType">
             <property name="severity" value="ignore"/>
         </module>
         <module name="RedundantImport">
@@ -115,6 +116,8 @@ Description:
         <module name="Regexp">
             <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="check that a space is left after a colon with an assembled error message"/>
             <property name="severity" value="info"/>
+            <property name="id" value="SpaceAfterColon"/>
+            <property name="ignoreComments" value="true"/>
             <property name="format" value="[^:^&quot;]:&quot; .*+"/>
             <property name="message" value="check that a space is left after a colon on an assembled error message"/>
             <property name="illegalPattern" value="true"/>
@@ -195,25 +198,6 @@ Description:
         </module>
         <module name="RedundantModifier"/>
         <module name="EqualsHashCode"/>
-
-        <module name="SuppressionCommentFilter">
-            <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
-            <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
-            <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
-            <property name="checkFormat" value="MethodName"/>
-        </module>
-        <module name="SuppressionCommentFilter">
-            <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
-            <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
-            <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
-            <property name="checkFormat" value="MemberName"/>
-        </module>
-        <module name="SuppressionCommentFilter">
-            <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="Avoid name checking"/>
-            <property name="offCommentFormat" value="CHECKSTYLE_NAMING_OFF"/>
-            <property name="onCommentFormat" value="CHECKSTYLE_NAMING_ON"/>
-            <property name="checkFormat" value="ParameterName"/>
-        </module>
     </module>
     <module name="SuppressWithPlainTextCommentFilter">
         <property name="offCommentFormat" value="CHECKSTYLE_OFF"/>
@@ -222,4 +206,5 @@ Description:
     <module name="JavadocPackage">
         <property name="severity" value="ignore"/>
     </module>
+    <module name="SuppressWarningsFilter" />
 </module>

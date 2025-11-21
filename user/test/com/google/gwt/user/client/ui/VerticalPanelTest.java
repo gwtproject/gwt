@@ -78,6 +78,12 @@ public class VerticalPanelTest extends AbstractCellPanelTest<VerticalPanel> {
     assertEquals(0, p.getWidgetIndex(tb));
     assertEquals(1, p.getWidgetIndex(l));
   }
+  
+  public void testPresentationRole() {
+    CellPanel panel = createCellPanel();
+    assertNotNull(panel.getElement());
+    assertEquals("presentation", panel.getElement().getAttribute("role"));
+  }
 
   @Override
   protected CellPanel createCellPanel() {

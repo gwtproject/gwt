@@ -15,8 +15,6 @@
  */
 package com.google.gwt.core.ext.soyc.impl;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
@@ -26,6 +24,7 @@ import com.google.gwt.dev.util.HtmlTextOutput;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.zip.GZIPOutputStream;
 
@@ -42,7 +41,8 @@ public class SplitPointRecorder {
         logger.branch(TreeLogger.TRACE, "Creating split point map file for the compile report");
 
     try {
-      try (OutputStreamWriter writer = new OutputStreamWriter(new GZIPOutputStream(out), UTF_8);
+      try (OutputStreamWriter writer = new OutputStreamWriter(
+              new GZIPOutputStream(out), StandardCharsets.UTF_8);
            PrintWriter pw = new PrintWriter(writer)) {
         HtmlTextOutput htmlOut = new HtmlTextOutput(pw, false);
         String curLine = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";

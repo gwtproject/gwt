@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.aria.client.Roles;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.DOM;
@@ -164,6 +165,9 @@ public class DecoratorPanel extends SimplePanel {
 
     // Add a tbody
     Element table = getElement();
+    // aria role to indicate it is a plain layout table
+    Roles.getPresentationRole().set(table);
+    
     tbody = DOM.createTBody();
     DOM.appendChild(table, tbody);
     table.setPropertyInt("cellSpacing", 0);

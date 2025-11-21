@@ -105,10 +105,10 @@ public abstract class GWTTestCase extends TestCase {
     setName(testName);
   }
 
-  // CHECKSTYLE_OFF
   /**
    * Actually run the user's test. Called from {@link GWTRunner}.
    */
+  @SuppressWarnings("checkstyle:MethodName")
   public void __doRunTest() {
     if (shouldCatchExceptions()) {
       try {
@@ -132,7 +132,6 @@ public abstract class GWTTestCase extends TestCase {
       reportResultsAndRunNextMethod(synchronousException);
     } // else Test is still running; wait for asynchronous completion.
   }
-  // CHECKSTYLE_ON
 
   public boolean catchExceptions() {
     return true;

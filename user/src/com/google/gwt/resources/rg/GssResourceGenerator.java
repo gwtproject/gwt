@@ -29,7 +29,6 @@ import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.resources.client.ClientBundle.Source;
 import com.google.gwt.resources.client.CssResource;
@@ -108,7 +107,6 @@ import com.google.gwt.thirdparty.common.css.compiler.passes.SplitRulesetNodes;
 import com.google.gwt.thirdparty.common.css.compiler.passes.UnrollLoops;
 import com.google.gwt.thirdparty.common.css.compiler.passes.ValidatePropertyValues;
 import com.google.gwt.thirdparty.guava.common.base.CaseFormat;
-import com.google.gwt.thirdparty.guava.common.base.Charsets;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
@@ -132,6 +130,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -226,7 +225,7 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
     try {
       ByteSource byteSource = Resources.asByteSource(fileUrl);
       // default charset
-      Charset charset = Charsets.UTF_8;
+      Charset charset = StandardCharsets.UTF_8;
 
       // check if the stylesheet doesn't include a @charset at-rule
       String styleSheetCharset = extractCharset(byteSource);
@@ -737,7 +736,8 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
     Adler32 checksum = new Adler32();
 
     for (JClassType type : gssResources) {
-      checksum.update(Util.getBytes(type.getQualifiedSourceName()));
+      String s = type.getQualifiedSourceName();
+      checksum.update(s.getBytes(StandardCharsets.UTF_8));
     }
 
     int seed = Math.abs((int) checksum.getValue());
@@ -1118,7 +1118,7 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
   }
 
   private static String extractCharset(ByteSource byteSource) throws IOException {
-    String firstLine = byteSource.asCharSource(Charsets.UTF_8).readFirstLine();
+    String firstLine = byteSource.asCharSource(StandardCharsets.UTF_8).readFirstLine();
 
     if (firstLine != null) {
       Matcher matcher = CHARSET.matcher(firstLine);
@@ -1185,7 +1185,7 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
     StringBuffer buffer = new StringBuffer();
     for (URL stylesheet : resources) {
       try {
-        String fileContent = Resources.asByteSource(stylesheet).asCharSource(Charsets.UTF_8)
+        String fileContent = Resources.asByteSource(stylesheet).asCharSource(StandardCharsets.UTF_8)
             .read();
         buffer.append(fileContent);
         buffer.append("\n");

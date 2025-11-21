@@ -44,7 +44,7 @@ public abstract class ArgProcessorTestBase extends TestCase {
   }
 
   protected static void assertProcessSuccess(ArgProcessorBase argProcessor,
-      String[] args) {
+      String... args) {
     PrintStream oldErrStream = System.err;
     ByteArrayOutputStream myErrStream = new ByteArrayOutputStream();
     try {

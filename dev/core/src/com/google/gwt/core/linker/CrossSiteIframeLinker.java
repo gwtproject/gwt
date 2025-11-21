@@ -118,7 +118,6 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
         }
       }
       if (failIfScriptTags) {
-        // CHECKSTYLE_OFF
         String msg =
             "The " + getDescription()
                 + " linker does not support <script> tags in the gwt.xml files, but the"
@@ -129,7 +128,6 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
                 + " this error, you will need to remove the script tags from the"
                 + " gwt.xml file, or add this property to the gwt.xml file:"
                 + " <set-configuration-property name='xsiframe.failIfScriptTag' value='FALSE'/>";
-        // CHECKSTYLE_ON
         logger.log(TreeLogger.ERROR, msg);
         throw new UnableToCompleteException();
       } else {
@@ -436,13 +434,15 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     out.print("function __gwtStartLoadingFragment(frag) {");
     out.newlineOpt();
     String fragDir = getFragmentSubdir(logger, context) + '/';
-    out.print("var fragFile = '" + fragDir + "' + $strongName + '/' + frag + '" + FRAGMENT_EXTENSION + "';");
+    out.print("var fragFile = '" + fragDir + "' + $strongName + '/' + frag + '"
+        + FRAGMENT_EXTENSION + "';");
     out.newlineOpt();
     out.print("return __gwtModuleFunction.__startLoadingFragment(fragFile);");
     out.newlineOpt();
     out.print("}");
     out.newlineOpt();
-    out.print("function __gwtInstallCode(code) {return __gwtModuleFunction.__installRunAsyncCode(code);}");
+    out.print("function __gwtInstallCode(code) {"
+        + "return __gwtModuleFunction.__installRunAsyncCode(code);}");
     out.newlineOpt();
 
     // The functions for property access are set up in the bootstrap script however
@@ -617,9 +617,9 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     EmittedArtifact serializedMap;
     try {
       String mappings = mappingArtifact.getSerialized();
-      // CHECKSTYLE_OFF
-      mappings = mappings.concat("Devmode:" + getHostedFilename());
-      // CHECKSTYLE_ON
+      @SuppressWarnings("checkstyle:SpaceAfterColon")
+      String str = "Devmode:" + getHostedFilename();
+      mappings = mappings.concat(str);
       serializedMap = emitString(logger, mappings, "compilation-mappings.txt");
       // TODO(unnurg): make this Deploy
       serializedMap.setVisibility(Visibility.Public);
@@ -681,7 +681,6 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
       // only needed in SSSS, breaks WebWorker linker if done all the time
       out.append("if (" + context.getModuleFunctionName() + ".succeeded) {\n");
     }
-
 
     if (shouldInstallCode(context)) {
       // Rewrite the code so it can be installed with

@@ -31,7 +31,7 @@ public abstract class JExpression extends JNode implements HasType {
   /**
    * Returns a statement that executes this expression.
    */
-  public final JExpressionStatement makeStatement() {
+  public JStatement makeStatement() {
     return new JExpressionStatement(getSourceInfo(), this);
   }
 

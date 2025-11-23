@@ -16,16 +16,33 @@
 package com.google.gwt.dev.util.log.perf;
 
 import jdk.jfr.Description;
+import jdk.jfr.Label;
+import jdk.jfr.Name;
 
 /**
- * Simple JFR event impl that logs a name and timestamp/duration.
+ * Simple JFR event wrapper that logs a name and timestamp/duration. Wraps the actual jfr event to
+ * let this class be used as in code compiled with javac --release=8.
  */
-@Description("General event for measuring time taken by a named task")
-public class SimpleEvent extends AbstractJfrEvent {
-  @Description("Name of the task being measured")
-  public final String name;
+public class SimpleEvent implements AutoCloseable {
+  @Description("General event for measuring time taken by a named task")
+  @Name("gwt.SimpleEvent")
+  private static class SimpleEventInternal extends AbstractJfrEvent {
+    @Description("Name of the task being measured")
+    @Label("Name")
+    public final String name;
+
+    public SimpleEventInternal(String name) {
+      this.name = name;
+    }
+  }
+  private final SimpleEventInternal event;
 
   public SimpleEvent(String name) {
-    this.name = name;
+    this.event = new SimpleEventInternal(name);
+  }
+
+  @Override
+  public void close() {
+    event.close();
   }
 }

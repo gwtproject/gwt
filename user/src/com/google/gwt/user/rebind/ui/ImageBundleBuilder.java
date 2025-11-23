@@ -454,9 +454,9 @@ class ImageBundleBuilder {
     BufferedImage bundledImage = new BufferedImage(size.width, size.height,
         BufferedImage.TYPE_INT_ARGB_PRE);
     final Graphics2D g2d;
-//    try (SimpleEvent ignore = new SimpleEvent("Graphics2d")) {
+    try (SimpleEvent ignore = new SimpleEvent("Graphics2d")) {
       g2d = bundledImage.createGraphics();
-//    }
+    }
 
     for (ImageRect imageRect : imageRects) {
 

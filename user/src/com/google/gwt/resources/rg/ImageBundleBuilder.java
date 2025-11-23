@@ -535,9 +535,9 @@ class ImageBundleBuilder {
         rect.getHeight(), BufferedImage.TYPE_INT_ARGB_PRE);
 
     final Graphics2D g2d;
-//    try (SimpleEvent ignored = new SimpleEvent("Graphics2d")) {
+    try (SimpleEvent ignored = new SimpleEvent("Graphics2d")) {
       g2d = bundledImage.createGraphics();
-//    }
+    }
 
     setBetterRenderingQuality(g2d);
 
@@ -824,11 +824,11 @@ class ImageBundleBuilder {
         BufferedImage.TYPE_INT_ARGB_PRE);
 
     final Graphics2D g2d;
-//    try (SimpleEvent ignored = new SimpleEvent("Graphics2d")) {
+    try (SimpleEvent ignored = new SimpleEvent("Graphics2d")) {
       g2d = bundledImage.createGraphics();
 
       setBetterRenderingQuality(g2d);
-//    }
+    }
 
     for (ImageRect imageRect : imageRects) {
       g2d.drawImage(imageRect.getImage(), imageRect.transform(), null);

@@ -115,7 +115,7 @@ public class CompilationState {
   @Name("gwt.compiler.java.AddGeneratedCompilationUnits")
   public static class AddGeneratedCompilationUnitsEvent extends AbstractJfrEvent {
     @Label("Number of Generated Units Added")
-    public int numberOfGeneratedUnitsAdded;
+    int numberOfGeneratedUnitsAdded;
   }
 
   /**

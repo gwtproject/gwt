@@ -292,7 +292,9 @@ public class StandardGeneratorContext implements GeneratorContext {
   @Name("gwt.ext.Generator")
   @Label("Generator Event")
   static class GeneratorEvent extends AbstractJfrEvent {
+    @Label("Generator Class")
     String generatorClass;
+    @Label("Type Name")
     String typeName;
   }
 

@@ -33,6 +33,8 @@ import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.Deque;
 import java.util.Map;
+
+import jdk.jfr.Label;
 import jdk.jfr.Name;
 
 /**
@@ -41,7 +43,9 @@ import jdk.jfr.Name;
 public class StandardRebindOracle implements RebindOracle {
   @Name("gwt.compiler.Rebind")
   public static class RebindEvent extends AbstractJfrEvent {
+    @Label("Type Name")
     String typeName;
+    @Label("Result Type Name")
     String resultTypeName;
   }
 

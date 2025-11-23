@@ -454,6 +454,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
 
   @jdk.jfr.Name("gwt.compiler.java.TypeOracleUpdate")
   public static class TypeOracleUpdateEvent extends AbstractJfrEvent {
+    @jdk.jfr.Name("Phase")
     String phase;
     public TypeOracleUpdateEvent(String phase) {
       this.phase = phase;

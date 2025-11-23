@@ -346,7 +346,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
   void addNewTypesDontIndex(
       TreeLogger logger, Collection<TypeData> typeDataList, MethodArgNamesLookup argsLookup) {
     final TypeOracleBuildContext context;
-    try (TypeOracleUpdateEvent ignored = new TypeOracleUpdateEvent(CUTOUPhase.VISIT_CLASS_FILES)) {
+    try (TypeOracleUpdateEvent ignored = new TypeOracleUpdateEvent("Visit class files")) {
       // First collect all class data.
       context = getContext(argsLookup);
 
@@ -366,7 +366,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     }
 
     Set<JRealClassType> unresolvedTypes = Sets.newLinkedHashSet();
-    try (TypeOracleUpdateEvent ignored = new TypeOracleUpdateEvent(CUTOUPhase.ESTABLISH_IDENTITY)) {
+    try (TypeOracleUpdateEvent ignored = new TypeOracleUpdateEvent("Establish Identity")) {
       // Perform a shallow pass to establish identity for new and old types.
       for (TypeData typeData : typeDataList) {
         CollectClassData classData = context.classDataByInternalName.get(typeData.internalName);
@@ -388,7 +388,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     }
 
     TreeLogger branch = logger.branch(TreeLogger.SPAM, "Resolving enclosing classes");
-    try (TypeOracleUpdateEvent ignored = new TypeOracleUpdateEvent(CUTOUPhase.RESOLVE_ENCLOSING_CLASSES)) {
+    try (TypeOracleUpdateEvent ignored = new TypeOracleUpdateEvent("Resolve enclosing classes")) {
       // Hook up enclosing types
       for (Iterator<JRealClassType> unresolvedTypesIterator = unresolvedTypes.iterator();
           unresolvedTypesIterator.hasNext();) {
@@ -399,7 +399,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
         }
       }
     }
-    try (TypeOracleUpdateEvent ignored = new TypeOracleUpdateEvent(CUTOUPhase.RESOLVE_UNRESOLVED_TYPES)) {
+    try (TypeOracleUpdateEvent ignored = new TypeOracleUpdateEvent("Resolve unresolved types")) {
       // Resolve unresolved types.
       for (JRealClassType unresolvedType : unresolvedTypes) {
         branch =
@@ -447,23 +447,16 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
 
   @VisibleForTesting
   void indexTypes() {
-    try (TypeOracleUpdateEvent ignored = new TypeOracleUpdateEvent(CUTOUPhase.FINISH)) {
+    try (TypeOracleUpdateEvent ignored = new TypeOracleUpdateEvent("Finish")) {
       super.finish();
     }
   }
 
-  private enum CUTOUPhase {
-    VISIT_CLASS_FILES,
-    ESTABLISH_IDENTITY,
-    RESOLVE_ENCLOSING_CLASSES,
-    RESOLVE_UNRESOLVED_TYPES,
-    FINISH
-  }
   @jdk.jfr.Name("gwt.compiler.java.TypeOracleUpdate")
   public static class TypeOracleUpdateEvent extends AbstractJfrEvent {
     String phase;
-    public TypeOracleUpdateEvent(CUTOUPhase phase) {
-      this.phase = phase.name();
+    public TypeOracleUpdateEvent(String phase) {
+      this.phase = phase;
     }
   }
 

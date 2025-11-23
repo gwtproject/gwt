@@ -18,11 +18,11 @@ import com.google.gwt.dev.jjs.CorrelationFactory.DummyCorrelationFactory;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
-import jdk.jfr.Label;
-import jdk.jfr.Name;
 
 import java.util.Arrays;
 import java.util.Collection;
+import jdk.jfr.Label;
+import jdk.jfr.Name;
 
 /**
  * A JavaScript program.

@@ -41,8 +41,6 @@ import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
-import jdk.jfr.Label;
-import jdk.jfr.Name;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -57,6 +55,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import jdk.jfr.Label;
+import jdk.jfr.Name;
 
 /**
  * Root for the AST representing an entire Java program.

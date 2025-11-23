@@ -334,7 +334,6 @@ public final class JavaToJavaScriptCompiler {
         jprogram = ast.getJProgram();
         jsProgram = ast.getJsProgram();
 
-
         // TODO(stalcup): hide metrics gathering in a callback or subclass
         logger.log(TreeLogger.INFO, "Compiling permutation " + permutationId + "...");
 
@@ -733,7 +732,6 @@ public final class JavaToJavaScriptCompiler {
       maybeAddGeneratedArtifacts(permutationResult);
     }
   }
-
 
   /**
    * Generate Js code from the given Js ASTs. Also produces information about that transformation.
@@ -1434,7 +1432,8 @@ public final class JavaToJavaScriptCompiler {
         JavaAstVerifier.assertProgramIsConsistent(jprogram);
         stats.recordModified(Pruner.exec(jprogram, true, optimizerCtx));
         stats.recordModified(Finalizer.exec(jprogram, optimizerCtx));
-        stats.recordModified(MakeCallsStatic.exec(jprogram, options.shouldAddRuntimeChecks(), optimizerCtx));
+        stats.recordModified(MakeCallsStatic.exec(jprogram, options.shouldAddRuntimeChecks(),
+            optimizerCtx));
         stats.recordModified(TypeTightener.exec(jprogram, optimizerCtx));
         stats.recordModified(MethodCallTightener.exec(jprogram, optimizerCtx));
         // Note: Specialization should be done before inlining.

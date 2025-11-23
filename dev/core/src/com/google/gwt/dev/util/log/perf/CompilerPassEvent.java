@@ -21,7 +21,8 @@ import jdk.jfr.Name;
 
 @Name("gwt.compiler.CompilerPass")
 @Label("Optimization Step")
-@Description("A single step that the compiler takes, visiting some/all AST nodes to normalize, analyze, or optimize them.")
+@Description("A single step that the compiler takes, visiting some/all AST nodes to normalize, " +
+    "analyze, or optimize them.")
 public class CompilerPassEvent extends AbstractOptimizationEvent {
   @Label("Pass Name")
   String name;

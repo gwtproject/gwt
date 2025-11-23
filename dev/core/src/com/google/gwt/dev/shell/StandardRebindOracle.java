@@ -30,10 +30,10 @@ import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.jdt.RebindOracle;
 import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
-import jdk.jfr.Name;
 
 import java.util.Deque;
 import java.util.Map;
+import jdk.jfr.Name;
 
 /**
  * Implements rebind logic in terms of a variety of other well-known oracles.

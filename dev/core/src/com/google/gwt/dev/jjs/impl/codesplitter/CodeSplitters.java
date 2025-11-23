@@ -67,7 +67,8 @@ public class CodeSplitters {
       for (String runAsyncReference : initialSequence) {
         JRunAsync runAsync = findRunAsync(runAsyncReference, program, branch);
         if (asyncsInInitialLoadSequence.contains(runAsync)) {
-          branch.log(TreeLogger.ERROR, "Split point specified more than once: " + runAsyncReference);
+          branch.log(TreeLogger.ERROR,
+              "Split point specified more than once: " + runAsyncReference);
         }
         asyncsInInitialLoadSequence.add(runAsync);
       }

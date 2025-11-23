@@ -94,8 +94,6 @@ import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.collect.Sets.SetView;
-import jdk.jfr.Description;
-import jdk.jfr.Name;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -103,6 +101,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import jdk.jfr.Description;
+import jdk.jfr.Name;
 
 /**
  * Take independently-compiled types and merge them into a single AST.

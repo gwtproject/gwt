@@ -91,10 +91,12 @@ public class FixAssignmentsToUnboxOrCast extends JModVisitor {
 
   public static void exec(JProgram program) {
     try (OptimizerStats stats = OptimizerStats.normalizer(NAME)) {
-      CompoundAssignmentsToUnboxOrCastNormalizer fixLhs = new CompoundAssignmentsToUnboxOrCastNormalizer(program);
+      CompoundAssignmentsToUnboxOrCastNormalizer fixLhs =
+          new CompoundAssignmentsToUnboxOrCastNormalizer(program);
       int numMods = fixLhs.accept(program);
       stats.recordModified(numMods);
-      FixAssignmentsToUnboxOrCast fixAssignmentsToUnboxOrCast = new FixAssignmentsToUnboxOrCast(program);
+      FixAssignmentsToUnboxOrCast fixAssignmentsToUnboxOrCast =
+          new FixAssignmentsToUnboxOrCast(program);
       fixAssignmentsToUnboxOrCast.accept(program);
       stats.recordModified(fixAssignmentsToUnboxOrCast.getNumMods());
     }

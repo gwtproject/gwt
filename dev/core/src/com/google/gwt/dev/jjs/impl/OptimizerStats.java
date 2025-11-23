@@ -69,19 +69,23 @@ public class OptimizerStats implements AutoCloseable {
   private OptimizerStats(String name, AbstractOptimizationEvent jfrEvent) {
     this.name = name;
     this.jfrEvent = jfrEvent;
-    if (!stack.get().isEmpty()) {
-      this.numVisits = stack.get().peek().numVisits;
-    }
+
     stack.get().push(this);
   }
 
   @Override
   public void close() {
-    jfrEvent.numMods = getNumMods();
-    jfrEvent.commit();
-
     OptimizerStats prev = stack.get().pop();
     assert prev == this;
+
+    // If numVisits wasn't explicitly set, inherit from parent
+    if (!stack.get().isEmpty() && this.numVisits == 0) {
+      this.numVisits = stack.get().peek().numVisits;
+    }
+
+    jfrEvent.nodeCount = getNumVisits();
+    jfrEvent.numMods = getNumMods();
+    jfrEvent.commit();
   }
 
   /**

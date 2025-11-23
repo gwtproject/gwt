@@ -233,7 +233,7 @@ public class TypeSerializerCreator {
    * serializer.
    */
   private void createFieldSerializer(TreeLogger logger, GeneratorContext ctx, JType type) {
-    try (SimpleEvent ignore = new SimpleEvent("RPC: generate FieldSerializer")) {
+//    try (SimpleEvent ignore = new SimpleEvent("RPC: generate FieldSerializer")) {
       assert (type != null);
       assert (serializationOracle.isSerializable(type) || deserializationOracle
           .isSerializable(type));
@@ -278,7 +278,7 @@ public class TypeSerializerCreator {
           new FieldSerializerCreator(logger, context, serializationOracle, deserializationOracle,
               (JClassType) type, customFieldSerializer);
       creator.realize(logger, ctx);
-    }
+//    }
   }
 
   /*

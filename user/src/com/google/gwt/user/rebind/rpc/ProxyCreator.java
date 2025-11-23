@@ -285,7 +285,7 @@ public class ProxyCreator {
     SerializableTypeOracle typesSentFromBrowser;
     SerializableTypeOracle typesSentToBrowser;
     String rpcLog = null;
-    try (SimpleEvent ignore = new SimpleEvent("RPC STOB")) {
+//    try (SimpleEvent ignore = new SimpleEvent("RPC STOB")) {
       SerializableTypeOracleBuilder typesSentFromBrowserBuilder =
           new SerializableTypeOracleBuilder(logger, context);
       typesSentFromBrowserBuilder.setTypeFilter(blacklistTypeFilter);
@@ -323,7 +323,7 @@ public class ProxyCreator {
           typesSentFromBrowser = typesSentFromBrowserBuilder.build(logger);
           typesSentToBrowser = typesSentToBrowserBuilder.build(logger);
         }
-      }
+//      }
     }
 
     // Check previous cached result, to see if we can return now
@@ -697,12 +697,12 @@ public class ProxyCreator {
       SerializableTypeOracle typesSentFromBrowser, SerializableTypeOracle typesSentToBrowser)
       throws UnableToCompleteException {
     final TypeSerializerCreator tsc;
-    try (SimpleEvent ignore = new SimpleEvent("RPC TypeSerializerCreator")) {
+//    try (SimpleEvent ignore = new SimpleEvent("RPC TypeSerializerCreator")) {
       tsc = new TypeSerializerCreator(logger, typesSentFromBrowser, typesSentToBrowser, context,
           SerializationUtils.getTypeSerializerQualifiedName(serviceIntf), SerializationUtils
           .getTypeSerializerSimpleName(serviceIntf));
       tsc.realize(logger);
-    }
+//    }
 
     typeStrings = new HashMap<>(tsc.getTypeStrings());
     typeStrings.put(serviceIntf, TypeNameObfuscator.SERVICE_INTERFACE_ID);

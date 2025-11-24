@@ -1147,9 +1147,14 @@ public class SerializableTypeOracleBuilder {
           checkAllSubtypesOfObject(fieldLogger.branch(TreeLogger.WARN,
               "Object was reached from a manually serializable type", null), path, problems);
         } else {
-          allSucceeded &=
-              computeTypeInstantiability(fieldLogger, fieldType, path, problems)
-                  .hasInstantiableSubtypes();
+          boolean fieldTypeHasInstantiableSubtypes = computeTypeInstantiability(fieldLogger, fieldType, path, problems)
+              .hasInstantiableSubtypes();
+          allSucceeded &= fieldTypeHasInstantiableSubtypes;
+          if (!fieldTypeHasInstantiableSubtypes) {
+            fieldLogger.log(TreeLogger.DEBUG, "Field's type "
+                + fieldType.getQualifiedSourceName()
+                + " has no instantiable subtypes");
+          }
         }
       }
     }

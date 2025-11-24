@@ -255,7 +255,7 @@ public class TypeTightener {
       if (!x.hasInitializer() || canUninitializedValueBeObserved.apply(x)) {
         addAssignment(x, x.getType().getDefaultValue());
       }
-      currentMethod = null;
+      assert currentMethod == null;
     }
 
     @Override

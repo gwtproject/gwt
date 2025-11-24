@@ -155,8 +155,6 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
 
   private boolean needSemi = true;
 
-  private boolean suppressType = false;
-
   public ToStringGenerationVisitor(TextOutput textOutput) {
     super(textOutput);
   }
@@ -505,13 +503,11 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
       JStatement stmt = iter.next();
       accept(stmt);
     }
-    suppressType = true;
     while (iter.hasNext()) {
       print(CHARS_COMMA);
       JStatement stmt = iter.next();
       accept(stmt);
     }
-    suppressType = false;
 
     semi();
     space();

@@ -61,7 +61,7 @@ jobs:
             -Dtest.emma.htmlunit.disable=true
 
       - name: Report test results
-        uses: mikepenz/action-junit-report@v6.0.0
+        uses: mikepenz/action-junit-report@v6.0.1
         if: always()
         with:
           report_paths: 'gwt/build/out/**/test/**/reports/TEST-*.xml'

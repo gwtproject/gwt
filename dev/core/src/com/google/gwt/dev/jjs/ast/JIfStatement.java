@@ -22,18 +22,18 @@ import com.google.gwt.dev.jjs.SourceInfo;
  */
 public class JIfStatement extends JStatement {
 
-  private JStatement elseStmt;
+  private JBlock elseStmt;
   private JExpression ifExpr;
-  private JStatement thenStmt;
+  private JBlock thenStmt;
 
-  public JIfStatement(SourceInfo info, JExpression ifExpr, JStatement thenStmt, JStatement elseStmt) {
+  public JIfStatement(SourceInfo info, JExpression ifExpr, JBlock thenStmt, JBlock elseStmt) {
     super(info);
     this.ifExpr = ifExpr;
-    this.thenStmt = thenStmt;
-    this.elseStmt = elseStmt;
+    this.thenStmt = thenStmt == null ? new JBlock(info) : thenStmt;
+    this.elseStmt = elseStmt == null ? new JBlock(info) : elseStmt;
   }
 
-  public JStatement getElseStmt() {
+  public JBlock getElseStmt() {
     return elseStmt;
   }
 
@@ -41,7 +41,7 @@ public class JIfStatement extends JStatement {
     return ifExpr;
   }
 
-  public JStatement getThenStmt() {
+  public JBlock getThenStmt() {
     return thenStmt;
   }
 
@@ -49,14 +49,25 @@ public class JIfStatement extends JStatement {
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {
       ifExpr = visitor.accept(ifExpr);
-      if (thenStmt != null) {
-        thenStmt = visitor.accept(thenStmt, true);
-      }
-      if (elseStmt != null) {
-        elseStmt = visitor.accept(elseStmt, true);
-      }
+//      if (thenStmt != null) {
+        thenStmt = ensureBlock(visitor.accept(thenStmt, true));
+//      }
+//      if (elseStmt != null) {
+        elseStmt = ensureBlock(visitor.accept(elseStmt, true));
+//      }
     }
     visitor.endVisit(this, ctx);
+  }
+
+  private JBlock ensureBlock(JStatement statement) {
+    if (statement == null) {
+      return new JBlock(getSourceInfo());
+    }
+    if (statement instanceof JBlock) {
+      return (JBlock) statement;
+    }
+
+    return new JBlock(statement.getSourceInfo(), statement);
   }
 
   @Override

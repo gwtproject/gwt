@@ -1093,8 +1093,8 @@ public class GwtAstBuilder {
     public void endVisit(IfStatement x, BlockScope scope) {
       try {
         SourceInfo info = makeSourceInfo(x);
-        JStatement elseStatement = pop(x.elseStatement);
-        JStatement thenStatement = pop(x.thenStatement);
+        JBlock elseStatement = popBlock(info, x.elseStatement);
+        JBlock thenStatement = popBlock(info, x.thenStatement);
         JExpression condition = pop(x.condition);
         push(new JIfStatement(info, condition, thenStatement, elseStatement));
       } catch (Throwable e) {
@@ -2454,7 +2454,7 @@ public class GwtAstBuilder {
       JExpression exceptionNotNull = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,
           JBinaryOperator.NEQ, exceptionVar.makeRef(info), JNullLiteral.INSTANCE);
       finallyBlock.addStmt(new JIfStatement(info, exceptionNotNull,
-          new JThrowStatement(info, exceptionVar.makeRef(info)), null));
+          new JBlock(info, new JThrowStatement(info, exceptionVar.makeRef(info))), null));
 
       // Stitch all together into a inner try block
       outerTryBlock.addStmt(new JTryStatement(info, tryBlock, catchClauses,

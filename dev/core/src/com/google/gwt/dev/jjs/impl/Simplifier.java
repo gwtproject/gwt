@@ -240,8 +240,8 @@ public class Simplifier {
   public static JStatement simplifyIfStatement(JIfStatement ifStatement, JType methodReturnType) {
     SourceInfo info = ifStatement.getSourceInfo();
     JExpression conditionExpression = ifStatement.getIfExpr();
-    JStatement thenStmt = ifStatement.getThenStmt();
-    JStatement elseStmt = ifStatement.getElseStmt();
+    JBlock thenStmt = ifStatement.getThenStmt();
+    JBlock elseStmt = ifStatement.getElseStmt();
     if (conditionExpression instanceof JMultiExpression) {
       // if(a,b,c) d else e -> {a; b; if(c) d else e; }
       JMultiExpression condMulti = (JMultiExpression) conditionExpression;
@@ -279,10 +279,14 @@ public class Simplifier {
       JExpression negationArugment =
           Simplifier.maybeGetNegatedExpressionArgument(conditionExpression);
       if (negationArugment != null) {
+
+
         // Force sub-parts to blocks, otherwise we break else-if chains.
         // TODO: this goes away when we normalize the Java AST properly.
-        thenStmt = ensureBlock(thenStmt);
-        elseStmt = ensureBlock(elseStmt);
+
+
+//        thenStmt = ensureBlock(thenStmt);
+//        elseStmt = ensureBlock(elseStmt);
         return simplifyIfStatement(
             new JIfStatement(info, negationArugment, elseStmt, thenStmt), methodReturnType);
       }

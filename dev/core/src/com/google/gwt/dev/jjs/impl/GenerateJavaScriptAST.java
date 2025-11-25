@@ -574,7 +574,7 @@ public class GenerateJavaScriptAST {
     }
 
     @Override
-    public JsStatement transformBlock(JBlock block) {
+    public JsBlock transformBlock(JBlock block) {
       JsBlock jsBlock = new JsBlock(block.getSourceInfo());
       List<JsStatement> stmts = jsBlock.getStatements();
 
@@ -753,10 +753,17 @@ public class GenerateJavaScriptAST {
 
       result.setIfExpr(transform(ifStatement.getIfExpr()));
       result.setThenStmt(jsEmptyIfNull(ifStatement.getSourceInfo(),
-          transform(ifStatement.getThenStmt())));
-      result.setElseStmt(transform(ifStatement.getElseStmt()));
+          unwrapSingleStatement(transformBlock(ifStatement.getThenStmt()))));
+      result.setElseStmt(unwrapSingleStatement(transformBlock(ifStatement.getElseStmt())));
 
       return result;
+    }
+
+    private JsStatement unwrapSingleStatement(JsBlock block) {
+      if (block.getStatements().size() == 1) {
+        return block.getStatements().get(0);
+      }
+      return block;
     }
 
     @Override

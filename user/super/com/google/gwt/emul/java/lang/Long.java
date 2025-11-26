@@ -24,7 +24,7 @@ public final class Long extends Number implements Comparable<Long> {
   /** Use nested class to avoid clinit on outer. */
   static class BoxedValues {
     // Box values according to JLS - between -128 and 127
-    static Long[] boxedValues = new Long[256];
+    static final Long[] boxedValues = new Long[256];
 
     @HasNoSideEffects
     private static Long get(long l) {
@@ -59,9 +59,42 @@ public final class Long extends Number implements Comparable<Long> {
     }
   }
 
+  public static int compareUnsigned(long a, long b) {
+    return compare(a ^ MIN_VALUE, b ^ MIN_VALUE);
+  }
+
   public static Long decode(String s) throws NumberFormatException {
     __Decode decode = __decodeNumberString(s);
     return valueOf(decode.payload, decode.radix);
+  }
+
+  public static long divideUnsigned(long dividend, long divisor) {
+    if (divisor < 0) { // i.e., divisor >= 2^63:
+      if (compare(dividend, divisor) < 0) {
+        return 0; // dividend < divisor
+      } else {
+        return 1; // dividend >= divisor
+      }
+    }
+
+    // Optimization - use signed division if dividend < 2^63
+    if (dividend >= 0) {
+      return dividend / divisor;
+    }
+
+    /*
+     * Otherwise, approximate the quotient, check, and correct if necessary. Our approximation is
+     * guaranteed to be either exact or one less than the correct value. This follows from fact
+     * that floor(floor(x)/i) == floor(x/i) for any real x and integer i != 0. The proof is not
+     * quite trivial.
+     */
+    long quotient = ((dividend >>> 1) / divisor) << 1;
+    long rem = dividend - quotient * divisor;
+    if (compare(rem, divisor) >= 0) {
+      return quotient + 1;
+    } else {
+      return quotient;
+    }
   }
 
   public static int hashCode(long l) {
@@ -121,6 +154,43 @@ public final class Long extends Number implements Comparable<Long> {
     return LongUtils.fromBits(Integer.reverse(high), Integer.reverse(low));
   }
 
+  public static long parseUnsignedLong(String s) throws NumberFormatException {
+    return parseUnsignedLong(s, 10);
+  }
+
+  public static long parseUnsignedLong(String s, int radix) throws NumberFormatException {
+    return __parseAndValidateUnsignedLong(s, radix);
+  }
+
+  public static long remainderUnsigned(long dividend, long divisor) {
+    if (divisor < 0) { // i.e., divisor >= 2^63:
+      if (compare(dividend, divisor) < 0) {
+        return dividend; // dividend < divisor
+      } else {
+        return dividend - divisor; // dividend >= divisor
+      }
+    }
+
+    // Optimization - use signed modulus if dividend < 2^63
+    if (dividend >= 0) {
+      return dividend % divisor;
+    }
+
+    /*
+     * Otherwise, approximate the quotient, check, and correct if necessary. Our approximation is
+     * guaranteed to be either exact or one less than the correct value. This follows from fact
+     * that floor(floor(x)/i) == floor(x/i) for any real x and integer i != 0. The proof is not
+     * quite trivial.
+     */
+    long quotient = ((dividend >>> 1) / divisor) << 1;
+    long rem = dividend - quotient * divisor;
+    if (compare(rem, divisor) >= 0) {
+      return rem - divisor;
+    } else {
+      return rem;
+    }
+  }
+
   public static long reverseBytes(long l) {
     int high = LongUtils.getHighBits(l);
     int low = (int) l;
@@ -163,15 +233,15 @@ public final class Long extends Number implements Comparable<Long> {
   }
 
   public static String toBinaryString(long value) {
-    return toPowerOfTwoUnsignedString(value, 1);
+    return toUnsignedString(value, 2);
   }
 
   public static String toHexString(long value) {
-    return toPowerOfTwoUnsignedString(value, 4);
+    return toUnsignedString(value, 16);
   }
 
   public static String toOctalString(long value) {
-    return toPowerOfTwoUnsignedString(value, 3);
+    return toUnsignedString(value, 8);
   }
 
   public static String toString(long value) {
@@ -219,17 +289,59 @@ public final class Long extends Number implements Comparable<Long> {
 
   public static Long valueOf(long l) {
     if (l > -129 && l < 128) {
-      return BoxedValues.get(l);
+        return BoxedValues.get(l);
     }
     return new Long(l);
   }
 
-  public static Long valueOf(String s) throws NumberFormatException {
-    return valueOf(s, 10);
+  public static String toUnsignedString(long value) {
+    return toUnsignedString(value, 10);
   }
 
-  public static Long valueOf(String s, int radix) throws NumberFormatException {
-    return valueOf(parseLong(s, radix));
+  public static String toUnsignedString(long value, int intRadix) {
+    if (fitsInUint(value)) {
+      return Integer.toUnsignedString((int) value, intRadix);
+    }
+
+    if (intRadix < Character.MIN_RADIX || intRadix > Character.MAX_RADIX) {
+      intRadix = 10;
+    }
+
+    if (isPowerOfTwo(intRadix)) {
+      return toPowerOfTwoUnsignedString(value, intRadix);
+    }
+
+    if (value >= 0) {
+      return toString(value, intRadix);
+    }
+
+    // Convert radix to long before hand to avoid costly conversion on each iteration.
+    long radix = intRadix;
+    if (intRadix == 10) {
+      long quotient = divideUnsigned(value, radix);
+      int rem = (int) (value - quotient * radix);
+      return toString(quotient) + rem;
+    }
+
+    int bufLen = intRadix < 8 ? 65 : 23; // Max chars in result (conservative)
+    char[] buf = new char[bufLen];
+    int cursor = bufLen;
+    if (value < 0) {
+      // Separate off the last digit using unsigned division. That will leave
+      // a number that is nonnegative as a signed integer.
+      long quotient = divideUnsigned(value, radix);
+      int rem = (int) (value - quotient * radix);
+      buf[--cursor] = Character.forDigit(rem, intRadix);
+      value = quotient;
+    }
+
+    // Simple modulo/division approach
+    while (value > 0) {
+      buf[--cursor] = Character.forDigit((int) (value % radix), intRadix);
+      value /= radix;
+    }
+
+    return new String(buf, cursor, buf.length - cursor);
   }
 
   private static String toPowerOfTwoUnsignedString(long value, int shift) {
@@ -250,6 +362,27 @@ public final class Long extends Number implements Comparable<Long> {
     } while (value != 0);
 
     return String.valueOf(buf, pos, bufSize - pos);
+  }
+
+  private static boolean isPowerOfTwo(int x) {
+    return (x & (x - 1)) == 0;
+  }
+
+  private static int log2(int x) {
+    return (Integer.SIZE - 1) - Integer.numberOfLeadingZeros(x);
+  }
+
+  static boolean fitsInUint(long value) {
+    int highBits = (int) (value >> 32);
+    return highBits == 0;
+  }
+
+  public static Long valueOf(String s) throws NumberFormatException {
+    return valueOf(s, 10);
+  }
+
+  public static Long valueOf(String s, int radix) throws NumberFormatException {
+    return valueOf(parseLong(s, radix));
   }
 
   private final transient long value;

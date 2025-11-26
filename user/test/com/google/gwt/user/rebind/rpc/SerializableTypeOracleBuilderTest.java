@@ -1531,8 +1531,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     stob.addRootType(logger, a);
     SerializableTypeOracle sto = stob.build(logger);
     TypeInfo[] expected = new TypeInfo[] {
-        new TypeInfo(makeSourceName(NotAllSubtypesAreSerializable.A.class.getName()), true),
-        new TypeInfo(makeSourceName(NotAllSubtypesAreSerializable.B.class.getName()), true)};
+        new TypeInfo(makeSourceName(RecursiveTypeGraphInstantiability.B.class.getName()), true)};
     validateSTO(sto, expected);
   }
 

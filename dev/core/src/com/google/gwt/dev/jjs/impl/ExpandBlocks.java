@@ -81,6 +81,22 @@ public class ExpandBlocks {
        * If we hit a statement that is immovable, we need to pop the latest item off the stack (if present and non-null).
        */
       private final Stack<JBlock> acceptor = new Stack<>();
+
+      @Override
+      public boolean visit(JStatement x, Context ctx) {
+        attemptRelocate(x, ctx);
+        return true;
+      }
+
+      @Override
+      public boolean visit(JIfStatement x, Context ctx) {
+        // Attempt to move the entire if
+        attemptRelocate(x, ctx);
+        // While inside the if blocks, don't move statements out of it
+        acceptor.push(null);
+        return true;
+      }
+
       @Override
       public void endVisit(JIfStatement x, Context ctx) {
         acceptor.pop();
@@ -96,6 +112,15 @@ public class ExpandBlocks {
             acceptor.push(x.getElseStmt());
           }
         }
+      }
+
+      @Override
+      public boolean visit(JTryStatement x, Context ctx) {
+        // Attempt to move the entire try
+        attemptRelocate(x, ctx);
+        // While inside the try block, don't move statements out of it
+        acceptor.push(null);
+        return true;
       }
 
       @Override
@@ -120,39 +145,66 @@ public class ExpandBlocks {
       }
 
       @Override
-      public void endVisit(JSwitchStatement x, Context ctx) {
-        acceptor.pop();
-        //TODO handle switch case, necessary for correctness, else we have to skip any method with a
-        //     switch/case statement in it. Note that we already skip any method with a switch expr,
-        //     as we never anticipate statements in expressions.
+      public boolean visit(JWhileStatement x, Context ctx) {
+        // Attempt to move the entire while
+        attemptRelocate(x, ctx);
+        // While inside the while block, don't move statements out of it
         acceptor.push(null);
-      }
-
-      @Override
-      public void endVisit(JForStatement x, Context ctx) {
-
-        acceptor.pop();
-        // Interrupts moving statements to the last acceptor block
-        acceptor.push(null);
+        return true;
       }
 
       @Override
       public void endVisit(JWhileStatement x, Context ctx) {
         acceptor.pop();
-        // Interrupts moving statements to the last acceptor block
+      }
+
+      @Override
+      public boolean visit(JSwitchStatement x, Context ctx) {
+        // Attempt to move the entire switch
+        attemptRelocate(x, ctx);
+
+        // Don't descend (at this time) - in the future we could either try to work around cases,
+        // or could wait until we hit some child block and instantiate a new visitor for local
+        // changes.
+        return false;
+      }
+
+
+      @Override
+      public void endVisit(JSwitchStatement x, Context ctx) {
+        // No endVisit for switch, since we didn't push anything or descend
+        // acceptor.pop();
+      }
+
+      @Override
+      public boolean visit(JForStatement x, Context ctx) {
+        // Attempt to move the entire for
+        attemptRelocate(x, ctx);
+        // While inside the for block, don't move statements out of it
         acceptor.push(null);
+        return true;
+      }
+
+      @Override
+      public void endVisit(JForStatement x, Context ctx) {
+        acceptor.pop();
+      }
+
+      @Override
+      public boolean visit(JDoStatement x, Context ctx) {
+        // Attempt to move the entire do
+        attemptRelocate(x, ctx);
+        // While inside the do block, don't move statements out of it
+        acceptor.push(null);
+        return true;
       }
 
       @Override
       public void endVisit(JDoStatement x, Context ctx) {
         acceptor.pop();
-        // Interrupts moving statements to the last acceptor block
-        acceptor.push(null);
       }
 
-
-      @Override
-      public boolean visit(JStatement x, Context ctx) {
+      private void attemptRelocate(JStatement x, Context ctx) {
         if (!acceptor.isEmpty() && acceptor.peek() != null) {
           // If there is a block ready to accept this, any statement should be moved.
           // Any visit(<statement>) override must call super before it does its own work
@@ -161,75 +213,12 @@ public class ExpandBlocks {
           acceptor.peek().addStmt(x);
           // Moved the item itself, continue to see if it needs to adopt later statements
         }
-        return super.visit(x, ctx);
-      }
-
-      @Override
-      public boolean visit(JIfStatement x, Context ctx) {
-        // Attempt to move the entire if
-        super.visit(x, ctx);
-        // While inside the if blocks, don't move statements out of it
-        acceptor.push(null);
-        return true;
-      }
-
-      @Override
-      public boolean visit(JTryStatement x, Context ctx) {
-        // Attempt to move the entire try
-        super.visit(x, ctx);
-        // While inside the try block, don't move statements out of it
-        acceptor.push(null);
-        return true;
-      }
-
-      @Override
-      public boolean visit(JForStatement x, Context ctx) {
-        // Attempt to move the entire for
-        super.visit(x, ctx);
-        // While inside the for block, don't move statements out of it
-        acceptor.push(null);
-        return true;
-      }
-
-      @Override
-      public boolean visit(JWhileStatement x, Context ctx) {
-        // Attempt to move the entire while
-        super.visit(x, ctx);
-        // While inside the while block, don't move statements out of it
-        acceptor.push(null);
-        return true;
-      }
-
-      @Override
-      public boolean visit(JDoStatement x, Context ctx) {
-        // Attempt to move the entire do
-        super.visit(x, ctx);
-        // While inside the do block, don't move statements out of it
-        acceptor.push(null);
-        return true;
-      }
-
-      @Override
-      public boolean visit(JSwitchStatement x, Context ctx) {
-//        // Attempt to move the entire switch
-//        super.visit(x, ctx);
-//        // While inside the switch block, don't move statements out of it
-//        acceptor.push(null);
-//        return true;
-        // Disable switch/case for now - immovable object means we pop the last block
-        if (!acceptor.isEmpty() && acceptor.peek() != null) {
-          acceptor.pop();
-        }
-        // Don't descend (at this time) - in the future we could either try to work around cases,
-        // or could wait until we hit some child block and instantiate a new visitor for local
-        // changes.
-        return false;
       }
 
       @Override
       public boolean visit(JBlock x, Context ctx) {
         // Attempt to move the entire block
-        super.visit(x, ctx);
+        attemptRelocate(x, ctx);
         // While inside the block, don't move statements out of it
         acceptor.push(null);
         return true;
@@ -238,23 +227,7 @@ public class ExpandBlocks {
       @Override
       public void endVisit(JBlock x, Context ctx) {
         acceptor.pop();
-        // Can't move statements into a block unless we know it was a statement and not part
-        // of a statement (like try/if/switch/etc). If we're part of an if/etc, after exiting
-        // the block, we'll exit the "if" and push that instead.
-//        acceptor.push(null);
       }
-
-//      @Override
-//      public boolean visit(JCaseStatement x, Context ctx) {
-//        // unlike other statements, can never be moved
-//        acceptor.push(null);
-//        return true;
-//      }
-//
-//      @Override
-//      public void endVisit(JCaseStatement x, Context ctx) {
-//        acceptor.pop();
-//      }
 
       @Override
       public void endVisit(JMethodBody x, Context ctx) {

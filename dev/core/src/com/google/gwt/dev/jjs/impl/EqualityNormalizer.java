@@ -65,6 +65,7 @@ import java.util.Map;
  * JS type.
  */
 public class EqualityNormalizer {
+  private static final String NAME = EqualityNormalizer.class.getSimpleName();
 
   /**
    * Breaks apart certain complex assignments.
@@ -242,8 +243,11 @@ public class EqualityNormalizer {
   }
 
   private void execImpl() {
-    BreakupAssignOpsVisitor breaker = new BreakupAssignOpsVisitor();
-    breaker.accept(program);
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      BreakupAssignOpsVisitor breaker = new BreakupAssignOpsVisitor();
+      breaker.accept(program);
+      stats.recordModified(breaker.getNumMods());
+    }
   }
 
 }

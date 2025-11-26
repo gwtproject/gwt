@@ -48,6 +48,7 @@ import java.util.Map.Entry;
  * Assigns and replaces JRuntimeTypeReference nodes with a type id literal.
  */
 public class ResolveRuntimeTypeReferences {
+  private static final String NAME = ResolveRuntimeTypeReferences.class.getSimpleName();
 
   /**
    * Identifies a way of sorting types when generating ids.
@@ -256,30 +257,34 @@ public class ResolveRuntimeTypeReferences {
   }
 
   private void execImpl() {
-    RuntimeTypeCollectorVisitor runtimeTypeCollector = new RuntimeTypeCollectorVisitor();
-    // Collects runtime type references visible from types in the program that are part of the
-    // current compile.
-    runtimeTypeCollector.accept(program);
-    // Collects runtime type references that are missed (inside of annotations) in a normal AST
-    // traversal.
-    runtimeTypeCollector.accept(Lists.newArrayList(program.getCastMap().values()));
-    // Collects runtime type references in the ClassLiteralHolder even if the ClassLiteralHolder
-    // isn't part of the current compile.
-    runtimeTypeCollector.accept(program.getIndexedType("ClassLiteralHolder"));
-    // TODO(stalcup): each module should have it's own ClassLiteralHolder or some agreed upon
-    // location that is default accessible to all.
+    try (OptimizerStats stats = OptimizerStats.normalizer(NAME)) {
+      RuntimeTypeCollectorVisitor runtimeTypeCollector = new RuntimeTypeCollectorVisitor();
+      // Collects runtime type references visible from types in the program that are part of the
+      // current compile.
+      runtimeTypeCollector.accept(program);
+      // Collects runtime type references that are missed (inside of annotations) in a normal AST
+      // traversal.
+      runtimeTypeCollector.accept(Lists.newArrayList(program.getCastMap().values()));
+      // Collects runtime type references in the ClassLiteralHolder even if the ClassLiteralHolder
+      // isn't part of the current compile.
+      runtimeTypeCollector.accept(program.getTypeClassLiteralHolder());
+      // TODO(stalcup): each module should have it's own ClassLiteralHolder or some agreed upon
+      // location that is default accessible to all.
 
-    assignTypes(runtimeTypeCollector.typesRequiringRuntimeIds);
+      assignTypes(runtimeTypeCollector.typesRequiringRuntimeIds);
 
-    ReplaceRuntimeTypeReferencesVisitor replaceTypeIdsVisitor = new ReplaceRuntimeTypeReferencesVisitor();
-    replaceTypeIdsVisitor.accept(program);
-    replaceTypeIdsVisitor.accept(program.getIndexedType("ClassLiteralHolder"));
-    // TODO(rluble): Improve the code so that things are not scattered all over; here cast maps
-    // that appear as parameters to soon to be generated
-    // {@link JavaClassHierarchySetup::defineClass()} are NOT traversed when traversing the program.
-    for (Entry<JReferenceType, JCastMap> entry : program.getCastMap().entrySet()) {
-      JCastMap castMap = entry.getValue();
-      replaceTypeIdsVisitor.accept(castMap);
+      ReplaceRuntimeTypeReferencesVisitor replaceTypeIdsVisitor = new ReplaceRuntimeTypeReferencesVisitor();
+      replaceTypeIdsVisitor.accept(program);
+      replaceTypeIdsVisitor.accept(program.getTypeClassLiteralHolder());
+      // TODO(rluble): Improve the code so that things are not scattered all over; here cast maps
+      // that appear as parameters to soon to be generated
+      // {@link Runtime::defineClass()} are NOT traversed when traversing the program.
+      for (Entry<JReferenceType, JCastMap> entry : program.getCastMap().entrySet()) {
+        JCastMap castMap = entry.getValue();
+        replaceTypeIdsVisitor.accept(castMap);
+      }
+
+      stats.recordModified(replaceTypeIdsVisitor.getNumMods());
     }
   }
 

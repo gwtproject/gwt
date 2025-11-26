@@ -18,8 +18,7 @@ package com.google.gwt.resources.rg;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 
 import org.w3c.dom.Node;
 
@@ -535,19 +534,17 @@ class ImageBundleBuilder {
     BufferedImage bundledImage = new BufferedImage(rect.getWidth(),
         rect.getHeight(), BufferedImage.TYPE_INT_ARGB_PRE);
 
-    SpeedTracerLogger.Event createGraphicsEvent =
-      SpeedTracerLogger.start(CompilerEventType.GRAPHICS_INIT,
-          "java.awt.headless", System.getProperty("java.awt.headless"));
-    Graphics2D g2d = bundledImage.createGraphics();
-    createGraphicsEvent.end();
+    final Graphics2D g2d;
+    try (SimpleEvent ignored = new SimpleEvent("Graphics2d")) {
+      g2d = bundledImage.createGraphics();
+    }
 
     setBetterRenderingQuality(g2d);
 
     g2d.drawImage(rect.getImage(), rect.transform(), null);
     g2d.dispose();
 
-    byte[] imageBytes = createImageBytes(logger, bundledImage);
-    return imageBytes;
+    return createImageBytes(logger, bundledImage);
   }
 
   /**
@@ -826,13 +823,12 @@ class ImageBundleBuilder {
     BufferedImage bundledImage = new BufferedImage(size.width, size.height,
         BufferedImage.TYPE_INT_ARGB_PRE);
 
-    SpeedTracerLogger.Event graphicsEvent = SpeedTracerLogger.start(CompilerEventType.GRAPHICS_INIT,
-        "java.awt.headless", System.getProperty("java.awt.headless"));
-    Graphics2D g2d = bundledImage.createGraphics();
+    final Graphics2D g2d;
+    try (SimpleEvent ignored = new SimpleEvent("Graphics2d")) {
+      g2d = bundledImage.createGraphics();
 
-    setBetterRenderingQuality(g2d);
-
-    graphicsEvent.end();
+      setBetterRenderingQuality(g2d);
+    }
 
     for (ImageRect imageRect : imageRects) {
       g2d.drawImage(imageRect.getImage(), imageRect.transform(), null);

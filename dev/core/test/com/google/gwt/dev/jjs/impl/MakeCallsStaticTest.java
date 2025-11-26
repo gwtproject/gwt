@@ -49,6 +49,6 @@ public class MakeCallsStaticTest extends OptimizerTestBase {
 
   @Override
   protected boolean doOptimizeMethod(TreeLogger logger, JProgram program, JMethod method) {
-    return MakeCallsStatic.exec(program, addNullCheck).didChange();
+    return MakeCallsStatic.exec(program, addNullCheck) > 0;
   }
 }

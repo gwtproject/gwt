@@ -40,9 +40,7 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.generator.NameFactory;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
@@ -284,11 +282,10 @@ public class ProxyCreator {
     TypeFilter blacklistTypeFilter = new BlacklistTypeFilter(logger, propertyOracle);
 
     // Determine the set of serializable types
-    Event event = SpeedTracerLogger.start(CompilerEventType.GENERATOR_RPC_STOB);
     SerializableTypeOracle typesSentFromBrowser;
     SerializableTypeOracle typesSentToBrowser;
     String rpcLog = null;
-    try {
+    try (SimpleEvent ignore = new SimpleEvent("RPC STOB")) {
       SerializableTypeOracleBuilder typesSentFromBrowserBuilder =
           new SerializableTypeOracleBuilder(logger, context);
       typesSentFromBrowserBuilder.setTypeFilter(blacklistTypeFilter);
@@ -327,9 +324,6 @@ public class ProxyCreator {
           typesSentToBrowser = typesSentToBrowserBuilder.build(logger);
         }
       }
-
-    } finally {
-      event.end();
     }
 
     // Check previous cached result, to see if we can return now
@@ -702,15 +696,15 @@ public class ProxyCreator {
   protected void generateTypeHandlers(TreeLogger logger, GeneratorContext context,
       SerializableTypeOracle typesSentFromBrowser, SerializableTypeOracle typesSentToBrowser)
       throws UnableToCompleteException {
-    Event event = SpeedTracerLogger.start(CompilerEventType.GENERATOR_RPC_TYPE_SERIALIZER);
-    TypeSerializerCreator tsc =
-        new TypeSerializerCreator(logger, typesSentFromBrowser, typesSentToBrowser, context,
-            SerializationUtils.getTypeSerializerQualifiedName(serviceIntf), SerializationUtils
-                .getTypeSerializerSimpleName(serviceIntf));
-    tsc.realize(logger);
-    event.end();
+    final TypeSerializerCreator tsc;
+    try (SimpleEvent ignore = new SimpleEvent("RPC TypeSerializerCreator")) {
+      tsc = new TypeSerializerCreator(logger, typesSentFromBrowser, typesSentToBrowser, context,
+          SerializationUtils.getTypeSerializerQualifiedName(serviceIntf), SerializationUtils
+          .getTypeSerializerSimpleName(serviceIntf));
+      tsc.realize(logger);
+    }
 
-    typeStrings = new HashMap<JType, String>(tsc.getTypeStrings());
+    typeStrings = new HashMap<>(tsc.getTypeStrings());
     typeStrings.put(serviceIntf, TypeNameObfuscator.SERVICE_INTERFACE_ID);
 
     customSerializersUsed = tsc.getCustomSerializersUsed();

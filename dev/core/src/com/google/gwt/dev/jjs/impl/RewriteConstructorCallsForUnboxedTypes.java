@@ -25,9 +25,6 @@ import com.google.gwt.dev.jjs.ast.JNewInstance;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
@@ -110,17 +107,16 @@ public class RewriteConstructorCallsForUnboxedTypes extends JModVisitor {
   private static final String NAME = RewriteConstructorCallsForUnboxedTypes.class
       .getSimpleName();
 
-  private OptimizerStats execImpl() {
-    OptimizerStats stats = new OptimizerStats(NAME);
-    accept(program);
-    return stats;
+  private int execImpl() {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      accept(program);
+      stats.recordModified(getNumMods());
+
+      return stats.getNumMods();
+    }
   }
 
-  public static OptimizerStats exec(JProgram program) {
-    Event optimizeEvent = SpeedTracerLogger
-        .start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new RewriteConstructorCallsForUnboxedTypes(program).execImpl();
-    optimizeEvent.end("didChange", "" + stats.didChange());
-    return stats;
+  public static int exec(JProgram program) {
+    return new RewriteConstructorCallsForUnboxedTypes(program).execImpl();
   }
 }

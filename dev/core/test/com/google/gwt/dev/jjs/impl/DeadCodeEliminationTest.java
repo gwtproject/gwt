@@ -522,14 +522,16 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
       MethodInliner.exec(program);
     }
     if (runSpecializer) {
-      Finalizer.exec(program); // required so that method is marked final
+      // required so that method is marked final
+      Finalizer.exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
       MakeCallsStatic.exec(program, false); // required so that method is static
-      TypeTightener.exec(program); // required so that the parameter types are tightened
-      MethodCallSpecializer.exec(program);
+      // required so that the parameter types are tightened
+      TypeTightener.exec(program, new FullOptimizerContext(program));
+      MethodCallSpecializer.exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
     }
 
-    OptimizerStats result = DeadCodeElimination.exec(program, method);
-    if (result.didChange()) {
+    int mods = DeadCodeElimination.exec(program, method);
+    if (mods > 0) {
       // Make sure we converge in one pass.
       //
       // TODO(rluble): It does not appear to be true in general unless we iterate until a
@@ -543,8 +545,8 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
       // If m is processed first, it will see the constructor as having side effects.
       // Then the constructor will become empty enabling m() become empty in the next round.
       //
-      assertFalse(DeadCodeElimination.exec(program, method).didChange());
+      assertEquals(0, DeadCodeElimination.exec(program, method));
     }
-    return result.didChange();
+    return mods > 0;
   }
 }

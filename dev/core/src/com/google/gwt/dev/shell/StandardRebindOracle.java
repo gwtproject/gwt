@@ -28,18 +28,22 @@ import com.google.gwt.dev.cfg.Rule;
 import com.google.gwt.dev.javac.CachedGeneratorResultImpl;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.jdt.RebindOracle;
-import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.Deque;
 import java.util.Map;
+import jdk.jfr.Name;
 
 /**
  * Implements rebind logic in terms of a variety of other well-known oracles.
  */
 public class StandardRebindOracle implements RebindOracle {
+  @Name("gwt.compiler.Rebind")
+  public static class RebindEvent extends AbstractJfrEvent {
+    String typeName;
+    String resultTypeName;
+  }
 
   /**
    * Makes the actual deferred binding decision by examining rules.
@@ -59,8 +63,8 @@ public class StandardRebindOracle implements RebindOracle {
 
     public String rebind(TreeLogger logger, String typeName, ArtifactAcceptor artifactAcceptor)
         throws UnableToCompleteException {
-      Event rebindEvent = SpeedTracerLogger.start(DevModeEventType.REBIND, "Type Name", typeName);
-      try {
+      try (RebindEvent event = new RebindEvent()) {
+        event.typeName = typeName;
         genCtx.setPropertyOracle(propOracle);
         genCtx.setRebindRuleResolver(this);
         Rule rule = getRebindRule(logger, typeName);
@@ -93,9 +97,8 @@ public class StandardRebindOracle implements RebindOracle {
         }
 
         assert (resultTypeName != null);
+        event.resultTypeName = resultTypeName;
         return resultTypeName;
-      } finally {
-        rebindEvent.end();
       }
     }
 

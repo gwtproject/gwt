@@ -30,8 +30,7 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
 import com.google.gwt.dev.jjs.impl.JsniRefLookup;
 import com.google.gwt.dev.util.JsniRef;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.collect.Collections2;
@@ -59,26 +58,25 @@ public class CodeSplitters {
    */
   public static void pickInitialLoadSequence(TreeLogger logger,
       JProgram program, ConfigurationProperties config) throws UnableToCompleteException {
-    SpeedTracerLogger.Event codeSplitterEvent =
-        SpeedTracerLogger
-            .start(CompilerEventType.CODE_SPLITTER, "phase", "pickInitialLoadSequence");
-    TreeLogger branch =
-        logger.branch(TreeLogger.TRACE, "Looking up initial load sequence for split points");
-    LinkedHashSet<JRunAsync> asyncsInInitialLoadSequence = new LinkedHashSet<JRunAsync>();
+    try (SimpleEvent ignored = new SimpleEvent("CodeSplitter: pickInitialLoadSequence")) {
+      TreeLogger branch =
+          logger.branch(TreeLogger.TRACE, "Looking up initial load sequence for split points");
+      LinkedHashSet<JRunAsync> asyncsInInitialLoadSequence = new LinkedHashSet<JRunAsync>();
 
-    List<String> initialSequence = config.getStrings(PROP_INITIAL_SEQUENCE);
-    for (String runAsyncReference : initialSequence) {
-      JRunAsync runAsync = findRunAsync(runAsyncReference, program, branch);
-      if (asyncsInInitialLoadSequence.contains(runAsync)) {
-        branch.log(TreeLogger.ERROR, "Split point specified more than once: " + runAsyncReference);
+      List<String> initialSequence = config.getStrings(PROP_INITIAL_SEQUENCE);
+      for (String runAsyncReference : initialSequence) {
+        JRunAsync runAsync = findRunAsync(runAsyncReference, program, branch);
+        if (asyncsInInitialLoadSequence.contains(runAsync)) {
+          branch.log(TreeLogger.ERROR,
+              "Split point specified more than once: " + runAsyncReference);
+        }
+        asyncsInInitialLoadSequence.add(runAsync);
       }
-      asyncsInInitialLoadSequence.add(runAsync);
-    }
 
-    logInitialLoadSequence(logger, asyncsInInitialLoadSequence);
-    installInitialLoadSequenceField(program, asyncsInInitialLoadSequence);
-    program.setInitialAsyncSequence(asyncsInInitialLoadSequence);
-    codeSplitterEvent.end();
+      logInitialLoadSequence(logger, asyncsInInitialLoadSequence);
+      installInitialLoadSequenceField(program, asyncsInInitialLoadSequence);
+      program.setInitialAsyncSequence(asyncsInInitialLoadSequence);
+    }
   }
 
   /**
@@ -87,71 +85,70 @@ public class CodeSplitters {
    */
   public static JRunAsync findRunAsync(String refString, JProgram program, TreeLogger branch)
       throws UnableToCompleteException {
-    SpeedTracerLogger.Event codeSplitterEvent =
-        SpeedTracerLogger.start(CompilerEventType.CODE_SPLITTER, "phase", "findRunAsync");
-    Multimap<String, JRunAsync> splitPointsByRunAsyncName =
-        computeRunAsyncsByName(program.getRunAsyncs(), false);
+    try (SimpleEvent ignored = new SimpleEvent("CodeSplitter: findRunAsync")) {
+      Multimap<String, JRunAsync> splitPointsByRunAsyncName =
+          computeRunAsyncsByName(program.getRunAsyncs(), false);
 
-    if (refString.startsWith("@")) {
-      JsniRef jsniRef = JsniRef.parse(refString);
-      if (jsniRef == null) {
-        branch.log(TreeLogger.ERROR, "Badly formatted JSNI reference in " + PROP_INITIAL_SEQUENCE
-            + ": " + refString);
-        throw new UnableToCompleteException();
-      }
-      final String lookupErrorHolder[] = new String[1];
-      JNode referent =
-          JsniRefLookup.findJsniRefTarget(jsniRef, program, new JsniRefLookup.ErrorReporter() {
-            @Override
-            public void reportError(String error) {
-              lookupErrorHolder[0] = error;
-            }
-          });
-      if (referent == null) {
-        TreeLogger resolveLogger =
-            branch.branch(TreeLogger.ERROR, "Could not resolve JSNI reference: " + jsniRef);
-        resolveLogger.log(TreeLogger.ERROR, lookupErrorHolder[0]);
-        throw new UnableToCompleteException();
+      if (refString.startsWith("@")) {
+        JsniRef jsniRef = JsniRef.parse(refString);
+        if (jsniRef == null) {
+          branch.log(TreeLogger.ERROR, "Badly formatted JSNI reference in " + PROP_INITIAL_SEQUENCE
+              + ": " + refString);
+          throw new UnableToCompleteException();
+        }
+        final String lookupErrorHolder[] = new String[1];
+        JNode referent =
+            JsniRefLookup.findJsniRefTarget(jsniRef, program, new JsniRefLookup.ErrorReporter() {
+              @Override
+              public void reportError(String error) {
+                lookupErrorHolder[0] = error;
+              }
+            });
+        if (referent == null) {
+          TreeLogger resolveLogger =
+              branch.branch(TreeLogger.ERROR, "Could not resolve JSNI reference: " + jsniRef);
+          resolveLogger.log(TreeLogger.ERROR, lookupErrorHolder[0]);
+          throw new UnableToCompleteException();
+        }
+
+        if (!(referent instanceof JMethod)) {
+          branch.log(TreeLogger.ERROR, "Not a method: " + referent);
+          throw new UnableToCompleteException();
+        }
+
+        JMethod method = (JMethod) referent;
+        String canonicalName = ReplaceRunAsyncs.getImplicitName(method);
+        Collection<JRunAsync> splitPoints = splitPointsByRunAsyncName.get(canonicalName);
+        if (splitPoints == null) {
+          branch.log(TreeLogger.ERROR, "Method does not enclose a runAsync call: " + jsniRef);
+          throw new UnableToCompleteException();
+        }
+        if (splitPoints.size() > 1) {
+          branch.log(TreeLogger.ERROR, "Method includes multiple runAsync calls, "
+              + "so it's ambiguous which one is meant: " + jsniRef);
+          throw new UnableToCompleteException();
+        }
+
+        assert splitPoints.size() == 1;
+        return splitPoints.iterator().next();
       }
 
-      if (!(referent instanceof JMethod)) {
-        branch.log(TreeLogger.ERROR, "Not a method: " + referent);
-        throw new UnableToCompleteException();
-      }
-
-      JMethod method = (JMethod) referent;
-      String canonicalName = ReplaceRunAsyncs.getImplicitName(method);
-      Collection<JRunAsync> splitPoints = splitPointsByRunAsyncName.get(canonicalName);
-      if (splitPoints == null) {
-        branch.log(TreeLogger.ERROR, "Method does not enclose a runAsync call: " + jsniRef);
+      // Assume it's a raw class name
+      Collection<JRunAsync> splitPoints = splitPointsByRunAsyncName.get(refString);
+      if (splitPoints == null || splitPoints.size() == 0) {
+        branch.log(TreeLogger.ERROR, "No runAsync call is labelled with class " + refString);
         throw new UnableToCompleteException();
       }
       if (splitPoints.size() > 1) {
-        branch.log(TreeLogger.ERROR, "Method includes multiple runAsync calls, "
-            + "so it's ambiguous which one is meant: " + jsniRef);
+        branch.log(TreeLogger.ERROR, "More than one runAsync call is labelled with class "
+            + refString);
         throw new UnableToCompleteException();
       }
-
       assert splitPoints.size() == 1;
-      return splitPoints.iterator().next();
-    }
+      JRunAsync result = splitPoints.iterator().next();
 
-    // Assume it's a raw class name
-    Collection<JRunAsync> splitPoints = splitPointsByRunAsyncName.get(refString);
-    if (splitPoints == null || splitPoints.size() == 0) {
-      branch.log(TreeLogger.ERROR, "No runAsync call is labelled with class " + refString);
-      throw new UnableToCompleteException();
+      return result;
     }
-    if (splitPoints.size() > 1) {
-      branch.log(TreeLogger.ERROR, "More than one runAsync call is labelled with class "
-          + refString);
-      throw new UnableToCompleteException();
-    }
-    assert splitPoints.size() == 1;
-    JRunAsync result = splitPoints.iterator().next();
-    codeSplitterEvent.end();
-
-    return result;
   }
 
   /**

@@ -6,7 +6,11 @@
 	<classpathentry kind="src" path="core/javadoc"/>
 	<classpathentry excluding="**/super/**" kind="src" path="core/test"/>
 	<classpathentry excluding="**/EmulatedCharset.java" including="javaemul/internal/**/*.java" kind="src" path="core/super/com/google/gwt/emul"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/apache/tapestry-util-text-4.0.2.jar" sourcepath="/GWT_TOOLS/lib/apache/tapestry-util-text-4.0.2-src.zip"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/junit/junit-4.8.2.jar" sourcepath="/GWT_TOOLS/lib/junit/junit-4.8.2-src.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/jsr305/jsr305.jar"/>
@@ -61,9 +65,9 @@
 	<classpathentry kind="var" path="GWT_TOOLS/lib/testng/testng-5.14.1-nojunit.jar" sourcepath="/GWT_TOOLS/lib/testng/testng-5.14.1-sources.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/protobuf/protobuf-2.5.0/protobuf-java-rebased-2.5.0.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/jscomp/20160315/sourcemap-rebased.jar"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/org.eclipse.jdt.core_3.17.0.v20190306-2240.jar"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/jdtCompilerAdapter_3.17.0.v20190306-2240.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-7.1/asm-7.1.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-7.1/asm-commons-7.1.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/jdtCompilerAdapter_3.32.0.v20221108-1853.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/org.eclipse.jdt.core_3.32.0.v20221108-1853.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

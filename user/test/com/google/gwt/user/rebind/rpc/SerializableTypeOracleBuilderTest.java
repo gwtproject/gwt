@@ -49,6 +49,7 @@ import com.google.gwt.user.rebind.rpc.testcases.client.NoSerializableTypes;
 import com.google.gwt.user.rebind.rpc.testcases.client.NotAllSubtypesAreSerializable;
 import com.google.gwt.user.rebind.rpc.testcases.client.ParameterizedTypeInList;
 import com.google.gwt.user.rebind.rpc.testcases.client.RawTypeInList;
+import com.google.gwt.user.rebind.rpc.testcases.client.RecursiveTypeGraphInstantiability;
 import com.google.gwt.user.rebind.rpc.testcases.client.SubclassUsedInArray;
 
 import junit.framework.TestCase;
@@ -1518,6 +1519,20 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
         new TypeInfo[] {
             new TypeInfo(makeSourceName(NotAllSubtypesAreSerializable.B.class.getName()), true),
             new TypeInfo(makeSourceName(NotAllSubtypesAreSerializable.D.class.getName()), true)};
+    validateSTO(sto, expected);
+  }
+
+  public void testInstantiabilityDetectionOnRecursiveTypeGraph() throws UnableToCompleteException,
+      NotFoundException {
+    TreeLogger logger = createLogger();
+    TypeOracle typeOracle = getTestTypeOracle();
+    JClassType a = typeOracle.getType(RecursiveTypeGraphInstantiability.A.class.getCanonicalName());
+    SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(logger, typeOracle);
+    stob.addRootType(logger, a);
+    SerializableTypeOracle sto = stob.build(logger);
+    TypeInfo[] expected = new TypeInfo[] {
+        new TypeInfo(makeSourceName(NotAllSubtypesAreSerializable.A.class.getName()), true),
+        new TypeInfo(makeSourceName(NotAllSubtypesAreSerializable.B.class.getName()), true)};
     validateSTO(sto, expected);
   }
 

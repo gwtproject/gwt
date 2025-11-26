@@ -2,16 +2,16 @@
 <classpath>
 	<classpathentry kind="src" path="core/src"/>
 	<classpathentry excluding="**/public/**|com/google/gwt/dev/javac/typemodel/test/package-info.java" kind="src" path="core/test"/>
-	<classpathentry excluding="com/google/gwt/dev/jjs/intrinsic/" kind="src" path="core/super"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/apache/ant-1.6.5.jar" sourcepath="/GWT_TOOLS/lib/apache/ant-1.6.5-src.zip"/>
+	<classpathentry kind="src" path="core/super"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/apache/tapestry-util-text-4.0.2.jar" sourcepath="/GWT_TOOLS/lib/apache/tapestry-util-text-4.0.2-src.zip"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/org.eclipse.jdt.core_3.17.0.v20190306-2240.jar" sourcepath="/GWT_TOOLS/lib/eclipse/org.eclipse.jdt.core.source_3.17.0.v20190306-2240.jar"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/jdtCompilerAdapter_3.17.0.v20190306-2240.jar"/>
 	<classpathentry exported="true" kind="var" path="GWT_TOOLS/lib/jetty/jetty-9.2.14.v20151106/jetty-all-9.2.14.v20151106.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/jsr305/jsr305.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/junit/junit-4.8.2.jar" sourcepath="/GWT_TOOLS/lib/junit/junit-4.8.2-src.zip"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-7.1/asm-7.1.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/tomcat/ant-launcher-1.6.5.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/tomcat/catalina-1.0.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/tomcat/catalina-optional-1.0.jar"/>
@@ -30,7 +30,12 @@
 	<classpathentry exported="true" kind="var" path="GWT_TOOLS/lib/tomcat/tomcat-websocket-api-8.0.28.jar"/>
 	<classpathentry exported="true" kind="var" path="GWT_TOOLS/lib/tomcat/tomcat-annotations-api-8.0.28.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/colt/colt-1.2.jar" sourcepath="/GWT_TOOLS/lib/colt/colt-1.2-src.jar"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-7.1/asm-commons-7.1.jar"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-7.1/asm-util-7.1.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/jdtCompilerAdapter_3.32.0.v20221108-1853.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/org.eclipse.jdt.core_3.32.0.v20221108-1853.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-9.6/asm-9.6.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-9.6/asm-commons-9.6.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-9.6/asm-util-9.6.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/apache/ant-1.7.1.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/apache/ant-zipscanner/ant-zipscanner-1.6.5-1-rebased.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

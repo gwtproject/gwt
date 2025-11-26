@@ -1272,9 +1272,7 @@ public class SerializableTypeOracleBuilder {
       boolean instantiable =
           checkSubtype(subtypeLogger, candidate, originalType, subtypePath, problems);
       anySubtypes |= instantiable;
-      if (instantiable) {
-        tic.setInstantiable(true);
-      }
+      tic.setInstantiable(instantiable);
 
       if (instantiable) {
         subtypeLogger.branch(TreeLogger.DEBUG, "Is instantiable");
@@ -1286,9 +1284,6 @@ public class SerializableTypeOracleBuilder {
       if (instantiable) {
         instSubtypes.add(candidate);
       }
-    }
-    if (!anySubtypes) {
-      tic.setInstantiable(false);
     }
 
     return anySubtypes;

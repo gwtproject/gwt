@@ -245,22 +245,7 @@ public interface RecursiveTypeGraphInstantiability extends IsSerializable {
 
     @Override
     public int getLevelIndexForValue(double speed) {
-      int result = -1;
-      for (int i = 0; i < levels.length - 1; i++) {
-        double threshold = levels[i] + ((levels[i + 1] - levels[i]) / 2.);
-        if (speed < threshold) {
-          if (threshold - speed <= maxDistance * 2) {
-            result = i;
-          }
-          break;
-        }
-      }
-      if (result == -1) {
-        if (Math.abs(levels[levels.length - 1] - speed) <= maxDistance) {
-          result = levels.length - 1;
-        }
-      }
-      return result;
+      return -1;
     }
 
     public double getMaxDistance() {

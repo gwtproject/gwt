@@ -543,7 +543,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
       nestedStatementPop(x.getThenStmt());
     }
 
-    if (x.getElseStmt() != null) {
+    if (x.getElseStmt() != null && !x.getElseStmt().isEmpty()) {
       if (needSemi) {
         semi();
         newline();
@@ -552,16 +552,9 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
         needSemi = true;
       }
       print(CHARS_ELSE);
-//      boolean elseIf = x.getElseStmt() instanceof JIfStatement;
-//      if (!elseIf) {
-        nestedStatementPush(x.getElseStmt());
-//      } else {
-//        space();
-//      }
+      nestedStatementPush(x.getElseStmt());
       accept(x.getElseStmt());
-//      if (!elseIf) {
-        nestedStatementPop(x.getElseStmt());
-//      }
+      nestedStatementPop(x.getElseStmt());
     }
 
     return false;

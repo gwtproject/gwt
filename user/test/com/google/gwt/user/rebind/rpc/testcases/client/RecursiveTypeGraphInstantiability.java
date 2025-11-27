@@ -8,18 +8,17 @@ import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public interface RecursiveTypeGraphInstantiability extends IsSerializable {
-  public interface StoredDataMiningReportDTO extends NamedWithUUID, Renamable {
+  public static interface StoredDataMiningReportDTO extends NamedWithStringID, Renamable {
     DataMiningReportDTO getReport();
   }
 
-  public static interface NamedWithUUID extends NamedWithID {
+  public static interface NamedWithStringID extends NamedWithID {
     @Override
-    UUID getId();
+    String getId();
   }
 
   public static interface NamedWithID extends Named, WithID {
@@ -71,7 +70,7 @@ public interface RecursiveTypeGraphInstantiability extends IsSerializable {
       StoredDataMiningReportDTO {
     private static final long serialVersionUID = 9218620680326470175L;
 
-    private UUID id;
+    private String id;
     private DataMiningReportDTO report;
 
     @Deprecated // for GWT serialization only
@@ -79,14 +78,14 @@ public interface RecursiveTypeGraphInstantiability extends IsSerializable {
       super(null);
     }
 
-    public StoredDataMiningReportDTOImpl(UUID id, String name, DataMiningReportDTO report) {
+    public StoredDataMiningReportDTOImpl(String id, String name, DataMiningReportDTO report) {
       super(name);
       this.id = id;
       this.report = report;
     }
 
     @Override
-    public UUID getId() {
+    public String getId() {
       return id;
     }
 
@@ -96,7 +95,7 @@ public interface RecursiveTypeGraphInstantiability extends IsSerializable {
     }
   }
 
-  public static interface FilterDimensionParameter extends NamedWithUUID {
+  public static interface FilterDimensionParameter extends NamedWithStringID {
   }
 
   public static interface StatisticQueryDefinitionDTO extends Serializable {

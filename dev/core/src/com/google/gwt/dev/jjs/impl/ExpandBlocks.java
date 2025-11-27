@@ -218,7 +218,7 @@ public class ExpandBlocks {
       @Override
       public boolean visit(JBlock x, Context ctx) {
         // Attempt to move the entire block
-        attemptRelocate(x, ctx);
+//        attemptRelocate(x, ctx);
         // While inside the block, don't move statements out of it
         acceptor.push(null);
         return true;

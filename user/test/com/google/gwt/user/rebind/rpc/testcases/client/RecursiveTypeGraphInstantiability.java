@@ -9,7 +9,11 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Set;
 
+import com.google.gwt.user.client.rpc.CustomFieldSerializer;
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.google.gwt.user.client.rpc.SerializationException;
+import com.google.gwt.user.client.rpc.SerializationStreamReader;
+import com.google.gwt.user.client.rpc.SerializationStreamWriter;
 
 public interface RecursiveTypeGraphInstantiability extends IsSerializable {
   public static interface StoredDataMiningReportDTO extends NamedWithStringID, Renamable {
@@ -27,6 +31,7 @@ public interface RecursiveTypeGraphInstantiability extends IsSerializable {
   public static interface Named extends Serializable {
     String getName();
   }
+
   public static interface WithID {
     /**
      * Something that uniquely identifies this object beyond its name
@@ -96,12 +101,109 @@ public interface RecursiveTypeGraphInstantiability extends IsSerializable {
   }
 
   public static interface FilterDimensionParameter extends NamedWithStringID {
+    String getTypeName();
+  }
+
+  public abstract class AbstractParameterizedDimensionFilter extends RenamableImpl implements
+      FilterDimensionParameter {
+    private static final long serialVersionUID = 3853015601496471357L;
+
+    private String typeName;
+    private String id;
+
+    @Deprecated // GWT serialization only
+    AbstractParameterizedDimensionFilter() {
+      super(null);
+    }
+
+    public AbstractParameterizedDimensionFilter(String name, String typeName) {
+      super(name);
+      this.id = "abc";
+      this.typeName = typeName;
+    }
+
+    @Override
+    public String getId() {
+      return id;
+    }
+
+    @Override
+    public String getTypeName() {
+      return typeName;
+    }
+  }
+
+  public class ValueListFilterParameter extends AbstractParameterizedDimensionFilter {
+    private static final long serialVersionUID = -8440835683986197499L;
+
+    private HashSet<? extends Serializable> values;
+
+    private transient Set<ParameterModelListener> parameterModelListeners;
+
+    private HashSet<ParameterModelListener> nonTransientParameterModelListeners;
+
+    @Deprecated // GWT serialization only
+    ValueListFilterParameter() {
+    }
+
+    public <T extends Serializable> ValueListFilterParameter(String name, String typeName,
+        Iterable<T> values) {
+      super(name, typeName);
+      final HashSet<T> set = new HashSet<>();
+      this.values = set;
+      this.parameterModelListeners = new HashSet<>();
+      this.nonTransientParameterModelListeners = new HashSet<>();
+    }
+
+    public Iterable<? extends Serializable> getValues() {
+      return new HashSet<>(values);
+    }
+
+    public Set<ParameterModelListener> getParameterModelListeners() {
+      return parameterModelListeners;
+    }
+
+    public void setParameterModelListeners(Set<ParameterModelListener> parameterModelListeners) {
+      this.parameterModelListeners = parameterModelListeners;
+    }
+
+    public HashSet<ParameterModelListener> getNonTransientParameterModelListeners() {
+      return nonTransientParameterModelListeners;
+    }
+
+    public void setNonTransientParameterModelListeners(
+        HashSet<ParameterModelListener> nonTransientParameterModelListeners) {
+      this.nonTransientParameterModelListeners = nonTransientParameterModelListeners;
+    }
   }
 
   public static interface StatisticQueryDefinitionDTO extends Serializable {
   }
 
   public interface ParameterModelListener {
+  }
+
+  public class ParameterValueChangeListener implements ParameterModelListener, Serializable {
+    private static final long serialVersionUID = 402977347893177440L;
+
+    private ModifiableDataMiningReportDTO report;
+    
+    @Deprecated // for GWT serialization only
+    ParameterValueChangeListener() {
+    }
+    
+    public ParameterValueChangeListener(ModifiableDataMiningReportDTO report) {
+      super();
+      this.report = report;
+    }
+
+    public ModifiableDataMiningReportDTO getReport() {
+      return report;
+    }
+
+    public void setReport(ModifiableDataMiningReportDTO report) {
+      this.report = report;
+    }
   }
 
   public class LocalizedTypeDTO implements Serializable {
@@ -253,14 +355,6 @@ public interface RecursiveTypeGraphInstantiability extends IsSerializable {
     }
   }
   public class PolarDataMiningSettingsImpl extends PolarDataMiningSettings {
-
-    public static PolarDataMiningSettingsImpl createStandardPolarSettings() {
-      double[] levels = {4., 6., 8., 10., 12., 14., 16., 20., 25., 30.};
-      WindSpeedSteppingWithMaxDistance windStepping = new WindSpeedSteppingWithMaxDistance(levels,
-          2.5);
-      return new PolarDataMiningSettingsImpl(1000, 0.01, true, 100, 20, true, true, windStepping);
-    }
-
     private static final long serialVersionUID = 2731616509404813790L;
     private Integer minimumDataCountPerGraph;
     private double minimumWindConfidence;
@@ -509,7 +603,6 @@ public interface RecursiveTypeGraphInstantiability extends IsSerializable {
         IdentityHashMap<StatisticQueryDefinitionDTO, HashMap<FilterDimensionIdentifier, FilterDimensionParameter>> parameterUsages) {
       this.parameterUsages = parameterUsages;
     }
-
   }
 
   public class DataRetrieverChainDefinitionDTO implements Serializable,
@@ -895,6 +988,56 @@ public interface RecursiveTypeGraphInstantiability extends IsSerializable {
     @Override
     public int compareTo(FunctionDTO f) {
       return Integer.compare(this.getOrdinal(), f.getOrdinal());
+    }
+  }
+
+  public class FunctionDTO_CustomFieldSerializer extends CustomFieldSerializer<FunctionDTO> {
+    @Override
+    public void serializeInstance(SerializationStreamWriter streamWriter, FunctionDTO instance)
+        throws SerializationException {
+      serialize(streamWriter, instance);
+    }
+
+    public static void serialize(SerializationStreamWriter streamWriter, FunctionDTO instance)
+        throws SerializationException {
+      streamWriter.writeBoolean(instance.isDimension());
+      streamWriter.writeString(instance.getFunctionName());
+      streamWriter.writeString(instance.getSourceTypeName());
+      streamWriter.writeString(instance.getReturnTypeName());
+      streamWriter.writeObject(instance.getParameterTypeNames());
+      streamWriter.writeString(instance.getDisplayName());
+      streamWriter.writeInt(instance.getOrdinal());
+    }
+
+    @Override
+    public boolean hasCustomInstantiateInstance() {
+      return true;
+    }
+
+    @Override
+    public FunctionDTO instantiateInstance(SerializationStreamReader streamReader)
+        throws SerializationException {
+      return instantiate(streamReader);
+    }
+
+    @SuppressWarnings("unchecked") // the cast to List<String> is the problem here
+    public static FunctionDTO instantiate(SerializationStreamReader streamReader)
+        throws SerializationException {
+      return new FunctionDTO(/* isDimension */ streamReader.readBoolean(),
+          /* function name */ streamReader.readString(), /* source type name */ streamReader
+              .readString(), /* return type name */ streamReader.readString(),
+          /* parameter type names */ (List<String>) streamReader.readObject(),
+          /* display name */ streamReader.readString(), /* ordinal */ streamReader.readInt());
+    }
+
+    @Override
+    public void deserializeInstance(SerializationStreamReader streamReader, FunctionDTO instance)
+        throws SerializationException {
+      deserialize(streamReader, instance);
+    }
+
+    public static void deserialize(SerializationStreamReader streamReader, FunctionDTO instance) {
+      // Done by instantiateInstance
     }
   }
 

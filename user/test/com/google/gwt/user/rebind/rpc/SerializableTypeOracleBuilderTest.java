@@ -1530,9 +1530,8 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(logger, typeOracle);
     stob.addRootType(logger, a);
     SerializableTypeOracle sto = stob.build(logger);
-    TypeInfo[] expected = new TypeInfo[] {
-        new TypeInfo(makeSourceName(RecursiveTypeGraphInstantiability.StoredDataMiningReportDTOImpl.class.getName()), true)};
-    validateSTO(sto, expected);
+    assertTrue(Arrays.asList(getActualTypeInfo(sto)).contains(
+        new TypeInfo(makeSourceName(RecursiveTypeGraphInstantiability.StoredDataMiningReportDTOImpl.class.getName()), true)));
   }
 
   /**

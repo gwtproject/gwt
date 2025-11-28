@@ -292,9 +292,13 @@
           description="Build and package this project">
     <mkdir dir="${gwt.build.lib}"/>
     <gwt.jar>
-      <fileset dir="src" excludes="**/package.html"/>
+      <fileset dir="src" excludes="**/package.html">
+        <exclude name="com/google/web/bindery/requestfactory/server/RequestFactoryJarExtractor*" />
+      </fileset>
       <fileset dir="super" excludes="**/package.html"/>
-      <fileset dir="${javac.out}"/>
+      <fileset dir="${javac.out}">
+        <exclude name="com/google/web/bindery/requestfactory/server/RequestFactoryJarExtractor*" />
+      </fileset>
       <zipfileset src="${gwt.tools.lib}/tomcat/tomcat-servlet-api-8.0.28.jar"
                   excludes="**/*.java"/>
       <zipfileset src="${gwt.tools.lib}/w3c/sac/sac-1.3.jar"/>

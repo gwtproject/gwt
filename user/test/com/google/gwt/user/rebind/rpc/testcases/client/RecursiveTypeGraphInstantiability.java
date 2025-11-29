@@ -180,10 +180,31 @@ public interface RecursiveTypeGraphInstantiability extends IsSerializable {
   public static interface StatisticQueryDefinitionDTO extends Serializable {
   }
 
-  public interface ParameterModelListener {
+  public static interface ParameterModelListener {
+  }
+  
+  /** an intentionally non-serializable implementation of ParameterModelListener */
+  public static class PMLImpl implements ParameterModelListener {
+    private Object nonSerializableField = new Object();
+
+    /**
+     * Only a non-default constructor
+     */
+    public PMLImpl(Object nonSerializableField) {
+      super();
+      this.nonSerializableField = nonSerializableField;
+    }
+
+    public Object getNonSerializableField() {
+      return nonSerializableField;
+    }
+
+    public void setNonSerializableField(Object nonSerializableField) {
+      this.nonSerializableField = nonSerializableField;
+    }
   }
 
-  public class ParameterValueChangeListener implements ParameterModelListener, Serializable {
+  public static class ParameterValueChangeListener implements ParameterModelListener, Serializable {
     private static final long serialVersionUID = 402977347893177440L;
 
     private ModifiableDataMiningReportDTO report;

@@ -258,10 +258,10 @@ public class Simplifier {
 
     if (conditionExpression instanceof JBooleanLiteral) {
       boolean conditionValue = ((JBooleanLiteral) conditionExpression).getValue();
-      if (conditionValue && !JjsUtils.isEmptyBlock(thenStmt)) {
+      if (conditionValue && !thenStmt.isEmpty()) {
         // If true, replace myself with then statement
         return thenStmt;
-      } else if (!conditionValue && !JjsUtils.isEmptyBlock(elseStmt)) {
+      } else if (!conditionValue && !elseStmt.isEmpty()) {
         // If false, replace myself with else statement
         return elseStmt;
       } else {
@@ -270,23 +270,15 @@ public class Simplifier {
       }
     }
 
-    if (JjsUtils.isEmptyBlock(thenStmt) && JjsUtils.isEmptyBlock(elseStmt)) {
+    if (thenStmt.isEmpty() && elseStmt.isEmpty()) {
       return conditionExpression.makeStatement();
     }
 
-    if (!JjsUtils.isEmptyBlock(elseStmt)) {
+    if (!elseStmt.isEmpty()) {
       // if (!cond) foo else bar -> if (cond) bar else foo
       JExpression negationArugment =
           Simplifier.maybeGetNegatedExpressionArgument(conditionExpression);
       if (negationArugment != null) {
-
-
-        // Force sub-parts to blocks, otherwise we break else-if chains.
-        // TODO: this goes away when we normalize the Java AST properly.
-
-
-//        thenStmt = ensureBlock(thenStmt);
-//        elseStmt = ensureBlock(elseStmt);
         return simplifyIfStatement(
             new JIfStatement(info, negationArugment, elseStmt, thenStmt), methodReturnType);
       }
@@ -520,6 +512,9 @@ public class Simplifier {
   private static JStatement extractSingleStatement(JStatement statement) {
     if (statement instanceof JBlock) {
       JBlock block = (JBlock) statement;
+      if (block.isEmpty()) {
+        return null;
+      }
       if (block.getStatements().size() == 1) {
         return extractSingleStatement(block.getStatements().get(0));
       }

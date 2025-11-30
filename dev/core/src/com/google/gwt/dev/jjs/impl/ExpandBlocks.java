@@ -22,6 +22,7 @@ import com.google.gwt.dev.jjs.ast.JForStatement;
 import com.google.gwt.dev.jjs.ast.JIfStatement;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
+import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JSwitchStatement;
@@ -67,6 +68,14 @@ import java.util.Stack;
  *
  */
 public class ExpandBlocks {
+  private static class Acceptor {
+    JBlock acceptingBlock;
+    final JNode currentNode;
+
+    private Acceptor(JNode currentNode) {
+      this.currentNode = currentNode;
+    }
+  }
   /**
    * Normalize the program's nested blocks.
    */
@@ -77,10 +86,12 @@ public class ExpandBlocks {
        * The location in which statements can be moved to is represented by a stack - it isn't quite the usual use of a stack in a visitor, as it doesn't represent
        * the path from the root, but instead the most recent block that can accept statements. Nulls are added to the stack as well to indicate that there is currently
        * no position to move statements to. Testing to see if a statement can be moved then is just checking if the stack is non-empty and the top is non-null.
-       * <p>
-       * If we hit a statement that is immovable, we need to pop the latest item off the stack (if present and non-null).
        */
       private final Stack<JBlock> acceptor = new Stack<>();
+      /**
+       * Represents the current node we're visiting - will not necessarily be the same depth as the acceptor stack.
+       */
+      private final Stack<JNode> nodeStack = new Stack<>();
 
       @Override
       public boolean visit(JStatement x, Context ctx) {
@@ -94,24 +105,72 @@ public class ExpandBlocks {
         attemptRelocate(x, ctx);
         // While inside the if blocks, don't move statements out of it
         acceptor.push(null);
+        nodeStack.push(x);
         return true;
       }
 
       @Override
       public void endVisit(JIfStatement x, Context ctx) {
-        acceptor.pop();
+        // problematic case:
+//        if (a) {
+//          if (b) {
+//            return;
+//          } else {
+//            //1
+//          }
+//          return;
+//        } else {
+//          //2
+//        }
+//        // at the end, we must use 2, as 1 isn't suitable (it was in the branch with the unconditional return)
+
+        //TODO try to use a more nested if structure to accept more statements - need to be sure it
+        //     was from the same branch as we use below, else we have to go with "current". Without
+        //     this, we can't solve this in a single pass.
+        //     It may be necessary to implement this via accepting each then/else directly, and
+        //     tracking which branch we came from to be able to do this correctly.
+
+
+        JBlock nested = popUntilNode(x);
+        JBlock current = acceptor.isEmpty() ? null : acceptor.peek();
 
         if (x.getThenStmt().unconditionalControlBreak()) {
           if (!x.getElseStmt().unconditionalControlBreak()) {
             // else can handle rest of parent block
             acceptor.push(x.getElseStmt());
+          } else {
+            // both break, can use the same block (if any) that we relocated the current node to
+            acceptor.push(current);
           }
         } else {
           if (x.getThenStmt().unconditionalControlBreak()) {
             // else can handle rest of parent block
             acceptor.push(x.getElseStmt());
+          } else {
+            // neither breaks, use the same block (if any) that we relocated the current node to
+            acceptor.push(current);
           }
         }
+      }
+
+      /**
+       * Walks up the stack of acceptors until we get the one in use before we started the current
+       * node. Returns the first non-null block found, or null if none - can be used in cases where
+       * we aren't deliberately clearing out the stack (e.g. after leaving a while/do/etc to discard
+       * nested ifs), so that nested if/elses where only one block doesn't return can have the
+       * innermost acceptor used.
+       * @param x
+       * @return
+       */
+      private JBlock popUntilNode(JNode x) {
+        JBlock nonNull = null;
+        do {
+          JBlock seen = acceptor.pop();
+          if (seen != null && nonNull == null) {
+            nonNull = seen;
+          }
+        } while (nodeStack.pop() != x);
+        return nonNull;
       }
 
       @Override
@@ -120,12 +179,14 @@ public class ExpandBlocks {
         attemptRelocate(x, ctx);
         // While inside the try block, don't move statements out of it
         acceptor.push(null);
+        nodeStack.push(x);
         return true;
       }
 
       @Override
       public void endVisit(JTryStatement x, Context ctx) {
-        acceptor.pop();
+        //TODO try to find a more deeply nested block
+        popUntilNode(x);
 
         if (x.getFinallyBlock() != null) {
           // Cannot optimize if there is a finally block, as finally executes after catch and before remainder
@@ -150,12 +211,13 @@ public class ExpandBlocks {
         attemptRelocate(x, ctx);
         // While inside the while block, don't move statements out of it
         acceptor.push(null);
+        nodeStack.push(x);
         return true;
       }
 
       @Override
       public void endVisit(JWhileStatement x, Context ctx) {
-        acceptor.pop();
+        popUntilNode(x);
       }
 
       @Override
@@ -173,7 +235,7 @@ public class ExpandBlocks {
       @Override
       public void endVisit(JSwitchStatement x, Context ctx) {
         // No endVisit for switch, since we didn't push anything or descend
-        // acceptor.pop();
+        //         popUntilNode(x);
       }
 
       @Override
@@ -182,12 +244,13 @@ public class ExpandBlocks {
         attemptRelocate(x, ctx);
         // While inside the for block, don't move statements out of it
         acceptor.push(null);
+        nodeStack.push(x);
         return true;
       }
 
       @Override
       public void endVisit(JForStatement x, Context ctx) {
-        acceptor.pop();
+        popUntilNode(x);
       }
 
       @Override
@@ -196,12 +259,13 @@ public class ExpandBlocks {
         attemptRelocate(x, ctx);
         // While inside the do block, don't move statements out of it
         acceptor.push(null);
+        nodeStack.push(x);
         return true;
       }
 
       @Override
       public void endVisit(JDoStatement x, Context ctx) {
-        acceptor.pop();
+        popUntilNode(x);
       }
 
       private void attemptRelocate(JStatement x, Context ctx) {
@@ -221,12 +285,13 @@ public class ExpandBlocks {
 //        attemptRelocate(x, ctx);
         // While inside the block, don't move statements out of it
         acceptor.push(null);
+        nodeStack.push(x);
         return true;
       }
 
       @Override
       public void endVisit(JBlock x, Context ctx) {
-        acceptor.pop();
+        popUntilNode(x);
       }
 
       @Override

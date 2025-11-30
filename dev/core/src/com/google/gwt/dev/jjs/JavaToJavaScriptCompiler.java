@@ -369,7 +369,7 @@ public final class JavaToJavaScriptCompiler {
         // TODO(rluble): eventually move to normizeSemantics.
         CompileTimeConstantsReplacer.exec(jprogram);
 
-//        ExpandBlocks.exec(jprogram);
+        ExpandBlocks.exec(jprogram);
 
         // TODO(stalcup): move to after normalize.
         // (3) Optimize the resolved Java AST

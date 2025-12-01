@@ -16,8 +16,12 @@
 package com.google.gwt.dev;
 
 import com.google.gwt.dev.jjs.JJSOptionsImpl;
+import com.google.gwt.dev.jjs.JsOutputOption;
+import com.google.gwt.dev.js.JsNamespaceOption;
 import com.google.gwt.dev.util.arg.ArgHandlerDraftCompile;
 import com.google.gwt.dev.util.arg.ArgHandlerOptimize;
+import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
+import com.google.gwt.dev.util.arg.SourceLevel;
 
 /**
  * Test for {@link ArgProcessorBase}.
@@ -44,17 +48,58 @@ public class ArgProcessorBaseTest extends ArgProcessorTestBase {
   }
 
   public void testOptionOrderIsPrecedenceArgs() {
-    assertProcessSuccess(argProcessor, new String[0]);
+    assertProcessSuccess(argProcessor);
     assertEquals(9, options.getOptimizationLevel());
 
-    assertProcessSuccess(argProcessor, new String[] {"-optimize", "5"});
+    assertProcessSuccess(argProcessor, "-optimize", "5");
     assertEquals(5, options.getOptimizationLevel());
 
-    assertProcessSuccess(argProcessor, new String[] {"-optimize", "5", "-draftCompile"});
+    assertProcessSuccess(argProcessor, "-optimize", "5", "-draftCompile");
     assertEquals(0, options.getOptimizationLevel());
 
     assertProcessSuccess(argProcessor,
-        new String[] {"-optimize", "5", "-draftCompile", "-optimize", "9"});
+        "-optimize", "5", "-draftCompile", "-optimize", "9");
     assertEquals(9, options.getOptimizationLevel());
+  }
+
+  public void testNoDraftMeansDefaults() {
+    assertProcessSuccess(argProcessor);
+    assertDefaults();
+
+    assertProcessSuccess(argProcessor, "-nodraftCompile");
+    assertDefaults();
+  }
+
+  /**
+   * For each field in JJSOptionsImpl, verify it is set to the default value.
+   */
+  private void assertDefaults() {
+    assertEquals(false, options.shouldAddRuntimeChecks());
+    assertEquals(true, options.shouldClusterSimilarFunctions());
+    assertEquals(false, options.isIncrementalCompileEnabled());
+    assertEquals(false, options.isCompilerMetricsEnabled());
+    assertEquals(false, options.isClassMetadataDisabled());
+    assertEquals(false, options.isEnableAssertions());
+    assertEquals(-1, options.getFragmentCount());
+    assertEquals(true, options.shouldInlineLiteralParameters());
+    assertEquals(false, options.isJsonSoycEnabled());
+    assertEquals(JsNamespaceOption.NONE, options.getNamespace());
+    assertEquals(9, options.getOptimizationLevel());
+    assertEquals(false, options.shouldOptimizeDataflow());
+    assertEquals(true, options.shouldOrdinalizeEnums());
+    assertEquals(JsOutputOption.OBFUSCATED, options.getOutput());
+    assertEquals(true, options.shouldRemoveDuplicateFunctions());
+    assertEquals(true, options.isRunAsyncEnabled());
+    assertEquals(SourceLevel.DEFAULT_SOURCE_LEVEL, options.getSourceLevel());
+    assertEquals(false, options.isSoycEnabled());
+    assertEquals(false, options.isSoycExtra());
+    assertEquals(false, options.isSoycHtmlDisabled());
+    assertEquals(false, options.isStrict());
+    assertEquals(false, options.shouldGenerateJsInteropExports());
+    assertEquals(false, options.useDetailedTypeIds());
+    assertEquals(OptionMethodNameDisplayMode.Mode.NONE,
+        options.getMethodNameDisplayMode());
+    // deliberately skipping the jsInteropExportFilter field, empty state isn't exposed
+    assertEquals(false, options.isClosureCompilerFormatEnabled());
   }
 }

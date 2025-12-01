@@ -22,9 +22,9 @@ import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.CompilationStateBuilder;
 import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
+import com.google.gwt.dev.javac.testing.impl.RealJavaResource;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.UnitTestTreeLogger;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.web.bindery.autobean.shared.Splittable;
 import com.google.web.bindery.requestfactory.server.TestContextImpl;
@@ -43,7 +43,6 @@ import com.google.web.bindery.requestfactory.shared.ValueProxy;
 
 import junit.framework.TestCase;
 
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -89,27 +88,6 @@ public class RequestFactoryModelTest extends TestCase {
     @Override
     public CharSequence getContent() {
       return code;
-    }
-  }
-
-  /**
-   * Loads the actual source of a type. This should be used only for types
-   * directly tested by this test. Note that use of this class requires your
-   * source files to be on your classpath.
-   */
-  private static class RealJavaResource extends MockJavaResource {
-
-    public RealJavaResource(Class<?> clazz) {
-      super(clazz.getName());
-    }
-
-    @Override
-    public CharSequence getContent() {
-      String resourceName = getTypeName().replace('.', '/') + ".java";
-      InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(
-          resourceName);
-      assertNotNull("Could not open " + resourceName, stream);
-      return Util.readStreamAsString(stream);
     }
   }
 

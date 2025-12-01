@@ -54,7 +54,8 @@ class LayoutImpl {
 
   protected static DivElement createRuler(Unit widthUnit, Unit heightUnit) {
     DivElement ruler = Document.get().createDivElement();
-    ruler.setInnerHTML("&nbsp;");
+    // use ePub/XHTML friendly &nbsp;
+    ruler.setInnerHTML("&#xA0;");
     Style style = ruler.getStyle();
     style.setPosition(Position.ABSOLUTE);
     style.setZIndex(-32767);

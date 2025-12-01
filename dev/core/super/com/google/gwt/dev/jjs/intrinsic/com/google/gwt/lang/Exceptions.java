@@ -23,6 +23,7 @@ import javaemul.internal.annotations.DoNotInline;
 /**
  * This is a magic class the compiler uses to throw and check exceptions.
  */
+@SuppressWarnings("checkstyle:MethodName")
 final class Exceptions {
 
   @DoNotInline // This frame can be useful in understanding the native stack
@@ -59,7 +60,6 @@ final class Exceptions {
    * We use nonstandard naming here so it's easy for the compiler to map to
    * method names based on primitive type name.
    */
-  // CHECKSTYLE_OFF
   static AssertionError makeAssertionError_boolean(boolean message) {
     return new AssertionError(message);
   }
@@ -131,5 +131,4 @@ final class Exceptions {
     }
     return mainException;
   }
-  // CHECKSTYLE_ON
 }

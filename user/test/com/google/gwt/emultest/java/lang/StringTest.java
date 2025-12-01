@@ -568,10 +568,12 @@ public class StringTest extends GWTTestCase {
   }
 
   public void testLastIndexOf() {
-    String x = "abcdeabcdef";
+    String x = hideFromCompiler("abcdeabcdef");
     assertEquals(9, x.lastIndexOf("e"));
     assertEquals(10, x.lastIndexOf("f"));
     assertEquals(-1, x.lastIndexOf("f", 1));
+    assertEquals(-1, x.lastIndexOf("a", -1));
+    assertEquals(-1, x.lastIndexOf('a', -1));
   }
 
   public void testLength() {
@@ -621,6 +623,8 @@ public class StringTest extends GWTTestCase {
     assertFalse("11f.1", hideFromCompiler("ab").matches("|none"));
     assertFalse("11f.2", hideFromCompiler("anoneb").matches("|none"));
     assertTrue("12t", hideFromCompiler("none").matches("^|none$"));
+    assertTrue("13t", hideFromCompiler("abccd").matches(".*(.)\\1.*"));
+    assertFalse("13t", hideFromCompiler("abcd").matches(".*(.)\\1.*"));
   }
 
   public void testNull() {
@@ -781,23 +785,30 @@ public class StringTest extends GWTTestCase {
 
     // Splitting an empty string should result in an array containing a single
     // empty string.
-    String[] s = "".split(",");
+    String[] s = hideFromCompiler("").split(",");
     assertTrue(s != null);
     assertTrue(s.length == 1);
     assertTrue(s[0] != null);
     assertTrue(s[0].length() == 0);
+
+    s = hideFromCompiler("abcada").split("a");
+    assertTrue(s != null);
+    assertEquals(3, s.length);
+    assertEquals("", s[0]);
+    assertEquals("bc", s[1]);
+    assertEquals("d", s[2]);
   }
 
   public void testSplit_emptyExpr() {
-    // TODO(rluble):  implement JDK8 string.split semantics and fix test.
-    String[] expected = (TestUtils.getJdkVersion() > 7) ?
-        new String[] {"a", "b", "c", "x", "x", "d", "e", "x", "f", "x"} :
-        new String[] {"", "a", "b", "c", "x", "x", "d", "e", "x", "f", "x"};
-    compareList("emptyRegexSplit", expected, "abcxxdexfx".split(""));
+    String[] expected = new String[] {"a", "b", "c", "x", "x", "d", "e", "x", "f", "x"};
+    compareList("emptyRegexSplit", expected, hideFromCompiler("abcxxdexfx").split(""));
+
+    String[] arr = hideFromCompiler(",").split(",");
+    assertEquals(0, arr.length);
   }
 
   public void testStartsWith() {
-    String haystack = "abcdefghi";
+    String haystack = hideFromCompiler("abcdefghi");
     assertTrue(haystack.startsWith("abc"));
     assertTrue(haystack.startsWith("bc", 1));
     assertTrue(haystack.startsWith(haystack));

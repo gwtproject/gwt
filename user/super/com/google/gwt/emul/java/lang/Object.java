@@ -29,9 +29,8 @@ public class Object {
   /**
    * Holds class literal for subtypes of Object.
    */
-  // CHECKSTYLE_OFF
+  @SuppressWarnings("checkstyle:MemberName")
   private transient Class<?> ___clazz;
-  // CHECKSTYLE_ON
 
   /**
    * Used by {@link com.google.gwt.core.client.impl.WeakMapping} in web mode

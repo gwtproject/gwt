@@ -639,7 +639,7 @@ public class Recompiler {
     private final ImmutableMap<String, String> bindingProperties;
     private final long moduleLastModified;
     private final long resourcesLastModified;
-    private final long filenameHash;
+    private final String filenameHash;
 
     InputSummary(Map<String, String> bindingProperties, ModuleDef module) {
       this.bindingProperties = ImmutableMap.copyOf(bindingProperties);
@@ -655,7 +655,7 @@ public class Recompiler {
         return bindingProperties.equals(other.bindingProperties) &&
             moduleLastModified == other.moduleLastModified &&
             resourcesLastModified == other.resourcesLastModified &&
-            filenameHash == other.filenameHash;
+            filenameHash.equals(other.filenameHash);
       }
       return false;
     }

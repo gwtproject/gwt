@@ -15,8 +15,6 @@
  */
 package com.google.gwt.emultest.java.io;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.io.ByteArrayOutputStream;
@@ -24,6 +22,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 /**
@@ -31,9 +30,7 @@ import java.util.Arrays;
  */
 public class OutputStreamWriterTest extends GWTTestCase {
 
-  private final Charset encodingUTF8Charset = UTF_8;
-
-  /** String containing unicode characters. */
+    /** String containing unicode characters. */
   private static final String UNICODE_STRING = "ËÛëŶǾȜϞ";
 
   /** Array of characters that contains ASCII characters. */
@@ -57,7 +54,7 @@ public class OutputStreamWriterTest extends GWTTestCase {
   protected void gwtSetUp() throws Exception {
     super.gwtSetUp();
     baos = new ByteArrayOutputStream();
-    writer = new OutputStreamWriter(baos, encodingUTF8Charset);
+    writer = new OutputStreamWriter(baos, StandardCharsets.UTF_8);
   }
 
   public void testNullCharset() throws UnsupportedEncodingException {
@@ -71,7 +68,7 @@ public class OutputStreamWriterTest extends GWTTestCase {
 
   public void testNullOutputStream() throws UnsupportedEncodingException {
     try {
-      new OutputStreamWriter(/* out = */ null, encodingUTF8Charset);
+      new OutputStreamWriter(/* out = */ null, StandardCharsets.UTF_8);
       fail("should have thrown NullPointerException");
     } catch (NullPointerException expected) {
     }
@@ -80,7 +77,7 @@ public class OutputStreamWriterTest extends GWTTestCase {
   public void testWriteUnicodeChar() throws IOException {
     writer.write(UNICODE_STRING, 0, UNICODE_STRING.length());
     writer.close();
-    assertTrue(Arrays.equals(UNICODE_STRING.getBytes(encodingUTF8Charset), baos.toByteArray()));
+    assertTrue(Arrays.equals(UNICODE_STRING.getBytes(StandardCharsets.UTF_8), baos.toByteArray()));
   }
 
   public void testWriteASCIIChar() throws IOException {
@@ -88,7 +85,7 @@ public class OutputStreamWriterTest extends GWTTestCase {
     writer.close();
     assertTrue(
         Arrays.equals(
-            new String(ASCII_CHAR_ARRAY).getBytes(encodingUTF8Charset), baos.toByteArray()));
+            new String(ASCII_CHAR_ARRAY).getBytes(StandardCharsets.UTF_8), baos.toByteArray()));
   }
 
   public void testWriteArrayUsingNullArray() throws IOException {

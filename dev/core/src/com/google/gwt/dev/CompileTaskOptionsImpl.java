@@ -15,10 +15,16 @@
  */
 package com.google.gwt.dev;
 
+import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
+import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.cfg.Properties;
+import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
+import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +55,28 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
 
   public File getCompilerWorkDir(String moduleName) {
     return new File(new File(getWorkDir(), moduleName), "compiler");
+  }
+
+  public File createCompilerWorkDir(TreeLogger logger, String moduleName)
+      throws UnableToCompleteException {
+    File compilerWorkDir = getCompilerWorkDir(moduleName);
+    if (compilerWorkDir.exists()) {
+      try {
+        MoreFiles.deleteDirectoryContents(compilerWorkDir.toPath(),
+            RecursiveDeleteOption.ALLOW_INSECURE);
+      } catch (IOException e) {
+        logger.log(TreeLogger.ERROR, "Unable to delete contents of " + compilerWorkDir, e);
+        throw new UnableToCompleteException();
+      }
+    } else {
+      try {
+        Files.createDirectories(compilerWorkDir.toPath());
+      } catch (IOException e) {
+        logger.log(TreeLogger.ERROR, "Unable to create directory " + compilerWorkDir, e);
+        throw new UnableToCompleteException();
+      }
+    }
+    return compilerWorkDir;
   }
 
   @Override

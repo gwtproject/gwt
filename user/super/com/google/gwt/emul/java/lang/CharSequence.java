@@ -58,8 +58,40 @@ public interface CharSequence {
     }, Spliterator.SIZED | Spliterator.SUBSIZED | Spliterator.ORDERED, false);
   }
 
-  // CHECKSTYLE_OFF: Utility methods.
+  default IntStream codePoints() {
+    return  StreamSupport.intStream(() -> {
+      PrimitiveIterator.OfInt it = new PrimitiveIterator.OfInt() {
+        int cursor;
+
+        @Override
+        public int nextInt() {
+          checkElement(hasNext());
+          int codePoint = CharSequence.this.toString().codePointAt(cursor++);
+          if (codePoint >= 1 << 16) {
+            cursor++;
+          }
+          return codePoint;
+        }
+
+        @Override
+        public boolean hasNext() {
+          return cursor < length();
+        }
+      };
+      return Spliterators.spliterator(it, length(), Spliterator.ORDERED);
+    }, Spliterator.SIZED | Spliterator.SUBSIZED | Spliterator.ORDERED, false);
+  }
+
+  default boolean isEmpty() {
+    return length() == 0;
+  }
+
+  static int compare(CharSequence cs1, CharSequence cs2) {
+    return cs1.toString().compareTo(cs2.toString());
+  }
+
   @JsMethod
+  @SuppressWarnings("checkstyle:MethodName")
   static boolean $isInstance(HasCharSequenceTypeMarker instance) {
     if (JsUtils.typeOf(instance).equals("string")) {
       return true;
@@ -67,5 +99,4 @@ public interface CharSequence {
 
     return instance != null && instance.getTypeMarker() == true;
   }
-  // CHECKSTYLE_ON: end utility methods
 }

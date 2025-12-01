@@ -21,16 +21,19 @@ import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.jjs.UnifiedAst;
 import com.google.gwt.dev.util.PersistenceBackedObject;
 import com.google.gwt.dev.util.StringInterningObjectInputStream;
-import com.google.gwt.dev.util.Util;
+import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
+import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.util.tools.shared.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.lang.management.ManagementFactory;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -357,7 +360,18 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
     try {
       astFile = File.createTempFile("externalPermutationWorkerFactory", ".ser");
       astFile.deleteOnExit();
-      Util.writeObjectAsFile(logger, astFile, unifiedAst);
+      SpeedTracerLogger.Event writeObjectAsFileEvent = SpeedTracerLogger.start(
+          CompilerEventType.WRITE_OBJECT_AS_FILE);
+      try (OutputStream stream = new FileOutputStream(astFile);
+           ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
+        objectStream.writeObject(unifiedAst);
+      } catch (IOException e) {
+        logger.log(TreeLogger.ERROR, "Unable to write file: "
+            + astFile.getAbsolutePath(), e);
+        throw new UnableToCompleteException();
+      } finally {
+        writeObjectAsFileEvent.end();
+      }
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to create temporary file", e);
       throw new UnableToCompleteException();

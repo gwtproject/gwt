@@ -19,7 +19,8 @@ package com.google.gwt.dev.codeserver;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.util.Util;
+import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
+import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
 
 import java.io.File;
 import java.io.IOException;
@@ -87,7 +88,7 @@ class OutboxDir {
     // (This is not guaranteed to delete all directories on Windows if a directory is locked.)
     for (File candidate : children) {
       if (candidate.getName().startsWith(COMPILE_DIR_PREFIX)) {
-        Util.recursiveDelete(candidate, false);
+        MoreFiles.deleteRecursively(candidate.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
         if (candidate.exists()) {
           logger.log(Type.WARN, "unable to delete '" + candidate + "' (skipped)");
         }

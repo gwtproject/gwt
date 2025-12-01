@@ -48,15 +48,13 @@ public class DoubleSummaryStatisticsTest extends EmulTestBase {
     double initial = 1.0d;
     long count = 100000;
 
-    // 'precision' is the hardcoded result of Math.ulp(initial) in JVM,
-    // since GWT does not emulate Math.ulp().
-    // This value represents the distance from 'initial' (1.0d) to the
+    // The value of 'precision' represents the distance from 'initial' (1.0d) to the
     // previous/next double. If we add half or less of that distance/precision
     // to 'initial' then the result will be truncated to 'initial' again due to
     // floating point arithmetic rounding.
     // With Kahan summation such rounding errors are detected and compensated
     // so the summation result should (nearly) equal the expected sum.
-    double precision = 2.220446049250313E-16;
+    double precision = Math.ulp(initial);
     double value = precision / 2;
     double expectedSum = initial + (count * value);
     long expectedCount = count + 1;

@@ -15,11 +15,12 @@
  */
 package com.google.gwt.user.tools;
 
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapConsumerFactory;
 import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapping;
 
-import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Command-line utility for querying source maps.
@@ -31,7 +32,8 @@ public class QuerySourceMap {
     int line = Integer.valueOf(args[1]);
     int col = Integer.valueOf(args[2]);
 
-    SourceMapping consumer = SourceMapConsumerFactory.parse(Util.readFileAsString(new File(filename)));
+    SourceMapping consumer = SourceMapConsumerFactory.parse(
+        new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8));
     System.out.println(consumer.getMappingForLine(line, col));
   }
 }

@@ -20,7 +20,6 @@ import com.google.gwt.core.ext.ServletContainerLauncher;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.InstalledHelpInfo;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.collect.Iterators;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
@@ -48,6 +47,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -400,7 +400,12 @@ public class JettyLauncher extends ServletContainerLauncher {
 
         // Special-case JDBCUnloader; it should always be loaded in the webapp classloader
         if (JDBCUnloader.class.getName().equals(name)) {
-          byte[] jdbcUnloader = Util.readURLAsBytes(found);
+          byte[] jdbcUnloader;
+          try (InputStream inputStream = found.openStream()) {
+            jdbcUnloader = inputStream.readAllBytes();
+          } catch (IOException e) {
+            throw new ClassNotFoundException("Could not read class " + name, e);
+          }
           return defineClass(name, jdbcUnloader, 0, jdbcUnloader.length);
         }
 

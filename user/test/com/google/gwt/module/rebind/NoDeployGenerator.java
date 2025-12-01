@@ -20,10 +20,10 @@ import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.EmittedArtifact.Visibility;
-import com.google.gwt.dev.util.Util;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Creates three files in the generated output directory with different
@@ -57,7 +57,7 @@ public class NoDeployGenerator extends Generator {
       return;
     }
 
-    out.write(Util.getBytes(path));
+    out.write(path.getBytes(StandardCharsets.UTF_8));
     context.commitResource(logger, out).setVisibility(visibility);
   }
 }

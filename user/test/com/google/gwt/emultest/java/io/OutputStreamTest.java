@@ -62,4 +62,16 @@ public class OutputStreamTest extends OutputStreamBaseTest {
     // should do nothing (including not throwing an exception).
     outputStream.flush();
   }
+
+  public void testNullOutputStream() throws IOException {
+    OutputStream nullStream = OutputStream.nullOutputStream();
+    nullStream.write(42);
+    nullStream.close();
+    try {
+      nullStream.write(1);
+      fail("Writing to a closed stream should fail.");
+    } catch (IOException expected) {
+      // expected
+    }
+  }
 }

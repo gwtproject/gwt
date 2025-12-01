@@ -87,11 +87,12 @@ public class ExpandBlocks {
        * the path from the root, but instead the most recent block that can accept statements. Nulls are added to the stack as well to indicate that there is currently
        * no position to move statements to. Testing to see if a statement can be moved then is just checking if the stack is non-empty and the top is non-null.
        */
-      private final Stack<JBlock> acceptor = new Stack<>();
-      /**
-       * Represents the current node we're visiting - will not necessarily be the same depth as the acceptor stack.
-       */
-      private final Stack<JNode> nodeStack = new Stack<>();
+      private final Stack<Acceptor> acceptorStack = new Stack<>();
+
+      private JBlock acceptBlockWithoutPush(JBlock block) {
+        acceptWithInsertRemove(block.getStatements());
+        return block;
+      }
 
       @Override
       public boolean visit(JStatement x, Context ctx) {
@@ -101,76 +102,59 @@ public class ExpandBlocks {
 
       @Override
       public boolean visit(JIfStatement x, Context ctx) {
+        // We do our own visiting here, rather than delegate to super, so
+        // we control then vs else.
+
         // Attempt to move the entire if
         attemptRelocate(x, ctx);
         // While inside the if blocks, don't move statements out of it
-        acceptor.push(null);
-        nodeStack.push(x);
-        return true;
-      }
+        Acceptor self = new Acceptor(x);
+        acceptorStack.push(self);
 
-      @Override
-      public void endVisit(JIfStatement x, Context ctx) {
-        // problematic case:
-//        if (a) {
-//          if (b) {
-//            return;
-//          } else {
-//            //1
-//          }
-//          return;
-//        } else {
-//          //2
-//        }
-//        // at the end, we must use 2, as 1 isn't suitable (it was in the branch with the unconditional return)
+        // Ignore condition, visit then and else
+        acceptBlockWithoutPush(x.getThenStmt());
+        JBlock thenAcceptor = self.acceptingBlock;
+        acceptBlockWithoutPush(x.getElseStmt());
+        JBlock elseAcceptor = self.acceptingBlock;
 
-        //TODO try to use a more nested if structure to accept more statements - need to be sure it
-        //     was from the same branch as we use below, else we have to go with "current". Without
-        //     this, we can't solve this in a single pass.
-        //     It may be necessary to implement this via accepting each then/else directly, and
-        //     tracking which branch we came from to be able to do this correctly.
+        // Pop the local node, and look to see if we should edit the parent
+        acceptorStack.pop();
+        Acceptor parent = acceptorStack.peek();
 
-
-        JBlock nested = popUntilNode(x);
-        JBlock current = acceptor.isEmpty() ? null : acceptor.peek();
-
+        // Mark where (if any) we accept later statements
         if (x.getThenStmt().unconditionalControlBreak()) {
           if (!x.getElseStmt().unconditionalControlBreak()) {
             // else can handle rest of parent block
-            acceptor.push(x.getElseStmt());
+            if (elseAcceptor != null) {
+              // Use the acceptor that we found while visiting else
+              parent.acceptingBlock = elseAcceptor;
+            } else {
+              parent.acceptingBlock = x.getElseStmt();
+            }
           } else {
             // both break, can use the same block (if any) that we relocated the current node to
-            acceptor.push(current);
           }
         } else {
           if (x.getThenStmt().unconditionalControlBreak()) {
             // else can handle rest of parent block
-            acceptor.push(x.getElseStmt());
+            if (thenAcceptor != null) {
+              // Use the acceptor that we found while visiting then
+              parent.acceptingBlock = thenAcceptor;
+            } else {
+              parent.acceptingBlock = x.getThenStmt();
+            }
           } else {
             // neither breaks, use the same block (if any) that we relocated the current node to
-            acceptor.push(current);
           }
         }
+
+        // Already visited children
+        return false;
       }
 
-      /**
-       * Walks up the stack of acceptors until we get the one in use before we started the current
-       * node. Returns the first non-null block found, or null if none - can be used in cases where
-       * we aren't deliberately clearing out the stack (e.g. after leaving a while/do/etc to discard
-       * nested ifs), so that nested if/elses where only one block doesn't return can have the
-       * innermost acceptor used.
-       * @param x
-       * @return
-       */
-      private JBlock popUntilNode(JNode x) {
-        JBlock nonNull = null;
-        do {
-          JBlock seen = acceptor.pop();
-          if (seen != null && nonNull == null) {
-            nonNull = seen;
-          }
-        } while (nodeStack.pop() != x);
-        return nonNull;
+      @Override
+      public void endVisit(JIfStatement x, Context ctx) {
+        // Do nothing, handled in visit(if)
       }
 
       @Override
@@ -178,31 +162,56 @@ public class ExpandBlocks {
         // Attempt to move the entire try
         attemptRelocate(x, ctx);
         // While inside the try block, don't move statements out of it
-        acceptor.push(null);
-        nodeStack.push(x);
-        return true;
-      }
+        Acceptor self = new Acceptor(x);
+        acceptorStack.push(self);
 
-      @Override
-      public void endVisit(JTryStatement x, Context ctx) {
-        //TODO try to find a more deeply nested block
-        popUntilNode(x);
+        // Visit each child statement (ignore exprs), though we only need to track changes to "self"
+        // for the catch block if there is exactly one
+        JBlock catchExceptor = null;
+        accept(x.getTryBlock());
+        for (int i = 0; i < x.getCatchClauses().size(); i++) {
+          JTryStatement.CatchClause clause = x.getCatchClauses().get(i);
+          acceptBlockWithoutPush(clause.getBlock());
+          // If there is exactly one catch, we may be able to move later statements into it
+          if (x.getCatchClauses().size() == 1) {
+            catchExceptor = self.acceptingBlock;
+          }
+        }
+        if (x.getFinallyBlock() != null) {
+          accept(x.getFinallyBlock());
+        }
+
+        acceptorStack.pop();
+        Acceptor parent = acceptorStack.peek();
 
         if (x.getFinallyBlock() != null) {
           // Cannot optimize if there is a finally block, as finally executes after catch and before remainder
-          return;
+          return false;
         }
 
         if (!x.getTryBlock().unconditionalControlBreak()) {
           // Try must unconditionally break to optimize, else we may catch the wrong exceptions
-          return;
+          return false;
         }
 
-        if (x.getCatchClauses().size() != 1) {
+        if (x.getCatchClauses().size() != 1 || x.getCatchClauses().get(0).getBlock().unconditionalControlBreak()) {
           // Only can optimize exactly one catch, and unconditional return try
-          return;
+          return false;
         }
-        acceptor.push(x.getCatchClauses().get(0).getBlock());
+        // This is a valid case to rewrite, move later statements into the catch block, or nested
+        // if available
+        if (catchExceptor != null) {
+          // Use the acceptor that we found while visiting the catch
+          parent.acceptingBlock = catchExceptor;
+        } else {
+          parent.acceptingBlock = x.getCatchClauses().get(0).getBlock();
+        }
+        return false;
+      }
+
+      @Override
+      public void endVisit(JTryStatement x, Context ctx) {
+        // Do nothing, handled in visit(try)
       }
 
       @Override
@@ -210,14 +219,13 @@ public class ExpandBlocks {
         // Attempt to move the entire while
         attemptRelocate(x, ctx);
         // While inside the while block, don't move statements out of it
-        acceptor.push(null);
-        nodeStack.push(x);
+        acceptorStack.push(new Acceptor(x));
         return true;
       }
 
       @Override
       public void endVisit(JWhileStatement x, Context ctx) {
-        popUntilNode(x);
+        acceptorStack.pop();
       }
 
       @Override
@@ -235,7 +243,7 @@ public class ExpandBlocks {
       @Override
       public void endVisit(JSwitchStatement x, Context ctx) {
         // No endVisit for switch, since we didn't push anything or descend
-        //         popUntilNode(x);
+        //         acceptorStack.pop();
       }
 
       @Override
@@ -243,14 +251,13 @@ public class ExpandBlocks {
         // Attempt to move the entire for
         attemptRelocate(x, ctx);
         // While inside the for block, don't move statements out of it
-        acceptor.push(null);
-        nodeStack.push(x);
+        acceptorStack.push(new Acceptor(x));
         return true;
       }
 
       @Override
       public void endVisit(JForStatement x, Context ctx) {
-        popUntilNode(x);
+        acceptorStack.pop();
       }
 
       @Override
@@ -258,23 +265,22 @@ public class ExpandBlocks {
         // Attempt to move the entire do
         attemptRelocate(x, ctx);
         // While inside the do block, don't move statements out of it
-        acceptor.push(null);
-        nodeStack.push(x);
+        acceptorStack.push(new Acceptor(x));
         return true;
       }
 
       @Override
       public void endVisit(JDoStatement x, Context ctx) {
-        popUntilNode(x);
+        acceptorStack.pop();
       }
 
       private void attemptRelocate(JStatement x, Context ctx) {
-        if (!acceptor.isEmpty() && acceptor.peek() != null) {
+        if (!acceptorStack.isEmpty() && acceptorStack.peek().acceptingBlock != null) {
           // If there is a block ready to accept this, any statement should be moved.
           // Any visit(<statement>) override must call super before it does its own work
           // to ensure that it is relocated
           ctx.removeMe();
-          acceptor.peek().addStmt(x);
+          acceptorStack.peek().acceptingBlock.addStmt(x);
           // Moved the item itself, continue to see if it needs to adopt later statements
         }
       }
@@ -284,20 +290,20 @@ public class ExpandBlocks {
         // Attempt to move the entire block
 //        attemptRelocate(x, ctx);
         // While inside the block, don't move statements out of it
-        acceptor.push(null);
-        nodeStack.push(x);
+        acceptorStack.push(new Acceptor(x));
         return true;
       }
 
       @Override
       public void endVisit(JBlock x, Context ctx) {
-        popUntilNode(x);
+        acceptorStack.pop();
       }
 
       @Override
       public void endVisit(JMethodBody x, Context ctx) {
         // Clear any acceptor at end of method body
-        acceptor.clear();
+        assert acceptorStack.isEmpty();
+        acceptorStack.clear();
       }
     }.accept(program);
   }

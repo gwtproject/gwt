@@ -15,6 +15,18 @@
  */
 package com.google.gwt.user.rebind.rpc;
 
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
 import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.StubGeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
@@ -53,18 +65,6 @@ import com.google.gwt.user.rebind.rpc.testcases.client.RecursiveTypeGraphInstant
 import com.google.gwt.user.rebind.rpc.testcases.client.SubclassUsedInArray;
 
 import junit.framework.TestCase;
-
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Used to test the {@link SerializableTypeOracleBuilder}.
@@ -1526,18 +1526,18 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
       NotFoundException {
     TreeLogger logger = createLogger();
     TypeOracle typeOracle = getTestTypeOracle();
-    JClassType a = typeOracle.getType(
-        RecursiveTypeGraphInstantiability.B.class.getCanonicalName());
+    JClassType a = typeOracle.getType(RecursiveTypeGraphInstantiability.B.class.getCanonicalName());
     SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(logger, typeOracle);
     stob.addRootType(logger, a);
     SerializableTypeOracle sto = stob.build(logger);
-    TypeInfo[] expected =
-        new TypeInfo[] {
-            new TypeInfo(makeSourceName(NotAllSubtypesAreSerializable.B.class.getName()), true),
-            new TypeInfo(makeSourceName(NotAllSubtypesAreSerializable.C.class.getName()), true)};
+    assertTrue("Expected type info for B to be present and marked instantiable but found " + Arrays
+        .asList(getActualTypeInfo(sto)) + ".", Arrays.asList(getActualTypeInfo(sto)).contains(
+            new TypeInfo(makeSourceName(RecursiveTypeGraphInstantiability.B.class.getName()),
+                true)));
+    TypeInfo[] expected = new TypeInfo[] {
+        new TypeInfo(makeSourceName(NotAllSubtypesAreSerializable.B.class.getName()), true),
+        new TypeInfo(makeSourceName(NotAllSubtypesAreSerializable.C.class.getName()), true)};
     validateSTO(sto, expected);
-//    assertTrue(Arrays.asList(getActualTypeInfo(sto)).contains(new TypeInfo(makeSourceName(
-//        RecursiveTypeGraphInstantiability.ParameterValueChangeListener.class.getName()), true)));
   }
 
   /**

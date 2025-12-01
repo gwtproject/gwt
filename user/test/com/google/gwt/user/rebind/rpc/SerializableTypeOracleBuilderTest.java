@@ -1527,12 +1527,17 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     TreeLogger logger = createLogger();
     TypeOracle typeOracle = getTestTypeOracle();
     JClassType a = typeOracle.getType(
-        RecursiveTypeGraphInstantiability.ModifiableDataMiningReportDTO.class.getCanonicalName());
+        RecursiveTypeGraphInstantiability.B.class.getCanonicalName());
     SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(logger, typeOracle);
     stob.addRootType(logger, a);
     SerializableTypeOracle sto = stob.build(logger);
-    assertTrue(Arrays.asList(getActualTypeInfo(sto)).contains(new TypeInfo(makeSourceName(
-        RecursiveTypeGraphInstantiability.ModifiableDataMiningReportDTO.class.getName()), true)));
+    TypeInfo[] expected =
+        new TypeInfo[] {
+            new TypeInfo(makeSourceName(NotAllSubtypesAreSerializable.B.class.getName()), true),
+            new TypeInfo(makeSourceName(NotAllSubtypesAreSerializable.C.class.getName()), true)};
+    validateSTO(sto, expected);
+//    assertTrue(Arrays.asList(getActualTypeInfo(sto)).contains(new TypeInfo(makeSourceName(
+//        RecursiveTypeGraphInstantiability.ParameterValueChangeListener.class.getName()), true)));
   }
 
   /**

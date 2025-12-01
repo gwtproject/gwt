@@ -1526,12 +1526,13 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
       NotFoundException {
     TreeLogger logger = createLogger();
     TypeOracle typeOracle = getTestTypeOracle();
-    JClassType a = typeOracle.getType(RecursiveTypeGraphInstantiability.StoredDataMiningReportDTO.class.getCanonicalName());
+    JClassType a = typeOracle.getType(
+        RecursiveTypeGraphInstantiability.ModifiableDataMiningReportDTO.class.getCanonicalName());
     SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(logger, typeOracle);
     stob.addRootType(logger, a);
     SerializableTypeOracle sto = stob.build(logger);
-    assertTrue(Arrays.asList(getActualTypeInfo(sto)).contains(
-        new TypeInfo(makeSourceName(RecursiveTypeGraphInstantiability.StoredDataMiningReportDTOImpl.class.getName()), true)));
+    assertTrue(Arrays.asList(getActualTypeInfo(sto)).contains(new TypeInfo(makeSourceName(
+        RecursiveTypeGraphInstantiability.ModifiableDataMiningReportDTO.class.getName()), true)));
   }
 
   /**

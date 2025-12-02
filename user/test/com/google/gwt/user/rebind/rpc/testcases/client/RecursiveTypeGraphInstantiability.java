@@ -22,33 +22,9 @@ public interface RecursiveTypeGraphInstantiability extends IsSerializable {
    * helps reproduce issue 10181.
    */
   class B implements A, D {
-    private A a;
-    private B b;
-    private C c;
-
-    public A getA() {
-      return a;
-    }
-
-    public void setA(A a) {
-      this.a = a;
-    }
-
-    public B getB() {
-      return b;
-    }
-
-    public void setB(B b) {
-      this.b = b;
-    }
-
-    public C getC() {
-      return c;
-    }
-
-    public void setC(C c) {
-      this.c = c;
-    }
+    A a;
+    B b;
+    C c;
   }
 
   /**
@@ -60,15 +36,7 @@ public interface RecursiveTypeGraphInstantiability extends IsSerializable {
    * the test case to fail prior to a fix for issue 10181.
    */
   class C implements IsSerializable {
-    private D d;
-
-    public D getD() {
-      return d;
-    }
-
-    public void setD(D d) {
-      this.d = d;
-    }
+    D d;
   }
 
   A getA();

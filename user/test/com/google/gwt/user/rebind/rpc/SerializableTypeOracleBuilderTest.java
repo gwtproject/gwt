@@ -1526,7 +1526,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
       NotFoundException {
     TreeLogger logger = createLogger();
     TypeOracle typeOracle = getTestTypeOracle();
-    JClassType a = typeOracle.getType(RecursiveTypeGraphInstantiability.B.class.getCanonicalName());
+    JClassType a = typeOracle.getType(RecursiveTypeGraphInstantiability.A.class.getCanonicalName());
     SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(logger, typeOracle);
     stob.addRootType(logger, a);
     SerializableTypeOracle sto = stob.build(logger);
@@ -1535,8 +1535,8 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
             new TypeInfo(makeSourceName(RecursiveTypeGraphInstantiability.B.class.getName()),
                 true)));
     TypeInfo[] expected = new TypeInfo[] {
-        new TypeInfo(makeSourceName(NotAllSubtypesAreSerializable.B.class.getName()), true),
-        new TypeInfo(makeSourceName(NotAllSubtypesAreSerializable.C.class.getName()), true)};
+        new TypeInfo(makeSourceName(RecursiveTypeGraphInstantiability.B.class.getName()), true),
+        new TypeInfo(makeSourceName(RecursiveTypeGraphInstantiability.C.class.getName()), true)};
     validateSTO(sto, expected);
   }
 

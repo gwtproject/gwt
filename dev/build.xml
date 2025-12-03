@@ -70,15 +70,15 @@
           <include name="guava/guava-33.0/guava-33.0.0-jre-rebased.jar"/>
           <include name="guava/guava-33.0/failureaccess-1.0.2-rebased.jar"/>
           <include name="icu4j/63.1/icu4j.jar"/>
-          <include name="jetty/jetty-9.4.44.v20210927/jetty-all-9.4.44.v20210927.jar"/>
+          <include name="jetty/jetty-9.4.58.v20250814/jetty-all-9.4.58.v20250814.jar"/>
           <include name="gson/gson-2.11.0.jar"/>
           <include name="jscomp/20231112/sourcemap-rebased.jar"/>
           <include name="jsr305/jsr305.jar"/>
           <include name="protobuf/protobuf-2.5.0/protobuf-java-rebased-2.5.0.jar"/>
           <!-- dependencies needed for JSP support in DevMode: BEGIN -->
-          <include name="jetty/jetty-9.4.44.v20210927/mortbay-apache-jsp-8.5.70.jar"/>
-          <include name="jetty/jetty-9.4.44.v20210927/mortbay-apache-el-8.5.70.jar"/>
-          <include name="jetty/jetty-9.4.44.v20210927/jetty-apache-jsp-9.4.44.v20210927.jar"/>
+          <include name="jetty/jetty-9.4.58.v20250814/mortbay-apache-jsp-8.5.100.jar"/>
+          <include name="jetty/jetty-9.4.58.v20250814/mortbay-apache-el-8.5.100.jar"/>
+          <include name="jetty/jetty-9.4.58.v20250814/jetty-apache-jsp-9.4.58.v20250814.jar"/>
           <!-- dependencies needed for JSP support in DevMode: END -->
           <include name="tomcat/tomcat-servlet-api-8.0.28.jar"/>
           <include name="tomcat/tomcat-websocket-api-8.0.28.jar"/>
@@ -132,7 +132,7 @@
           <zipfileset src="${gwt.tools.lib}/guava/guava-33.0/failureaccess-1.0.2-rebased.jar" />
           <zipfileset src="${gwt.tools.lib}/icu4j/63.1/icu4j.jar"/>
           <zipfileset
-              src="${gwt.tools.lib}/jetty/jetty-9.4.44.v20210927/jetty-all-9.4.44.v20210927.jar">
+              src="${gwt.tools.lib}/jetty/jetty-9.4.58.v20250814/jetty-all-9.4.58.v20250814.jar">
             <!--
             Don't add jetty auth implementation from jetty-jaspi, as we would also need to package jetty's
             javax.security.auth.message implementation as well as geronimo-jaspi.
@@ -145,9 +145,9 @@
           <zipfileset
               src="${gwt.tools.lib}/protobuf/protobuf-2.5.0/protobuf-java-rebased-2.5.0.jar"/>
           <!-- dependencies needed for JSP support in DevMode: BEGIN -->
-          <zipfileset src="${gwt.tools.lib}/jetty/jetty-9.4.44.v20210927/mortbay-apache-jsp-8.5.70.jar"/>
-          <zipfileset src="${gwt.tools.lib}/jetty/jetty-9.4.44.v20210927/mortbay-apache-el-8.5.70.jar"/>
-          <zipfileset src="${gwt.tools.lib}/jetty/jetty-9.4.44.v20210927/jetty-apache-jsp-9.4.44.v20210927.jar"/>
+          <zipfileset src="${gwt.tools.lib}/jetty/jetty-9.4.58.v20250814/mortbay-apache-jsp-8.5.100.jar"/>
+          <zipfileset src="${gwt.tools.lib}/jetty/jetty-9.4.58.v20250814/mortbay-apache-el-8.5.100.jar"/>
+          <zipfileset src="${gwt.tools.lib}/jetty/jetty-9.4.58.v20250814/jetty-apache-jsp-9.4.58.v20250814.jar"/>
           <!-- dependencies needed for JSP support in DevMode: END -->
           <zipfileset src="${gwt.tools.lib}/tomcat/tomcat-servlet-api-8.0.28.jar"/>
           <zipfileset src="${gwt.tools.lib}/tomcat/tomcat-websocket-api-8.0.28.jar"/>

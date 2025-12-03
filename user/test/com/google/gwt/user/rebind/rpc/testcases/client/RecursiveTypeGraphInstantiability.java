@@ -16,7 +16,7 @@ public interface RecursiveTypeGraphInstantiability extends IsSerializable {
   }
 
   /**
-   * Auto serializable, but with back-reference to A for which the question of instantiable subtypes
+   * Default-serializable, but with back-reference to A for which the question of instantiable subtypes
    * depends on the serializability of this class. The reference to {@link C} which
    * has a back-reference to {@link B} and B being its only subtypes candidate
    * helps reproduce issue 10181.
@@ -28,7 +28,7 @@ public interface RecursiveTypeGraphInstantiability extends IsSerializable {
   }
 
   /**
-   * Auto-serializable with back-reference to B through D, a different interface, triggering another
+   * Default-serializable with back-reference to B through D, a different interface, triggering another
    * descent through checkSubtypes, finding an already "done" TIC for {@link B} with
    * {@code instantiable==false}. Being "done", it is used to decide instantiability of the only
    * subclass candidate of {@link D}, which is {@link B}, resulting in {@code false} for

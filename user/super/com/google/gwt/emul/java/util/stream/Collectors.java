@@ -111,7 +111,7 @@ public final class Collectors {
 
   public static <T, K, A, D> Collector<T, ?, Map<K, D>> groupingBy(
       Function<? super T, ? extends K> classifier, Collector<? super T, A, D> downstream) {
-    return groupingBy(classifier, hashMapSupplier(), downstream);
+    return groupingBy(classifier, hashMap(), downstream);
   }
 
   public static <T, K, D, A, M extends Map<K, D>> Collector<T, ?, M> groupingBy(
@@ -172,12 +172,8 @@ public final class Collectors {
         return sb1.append(sb2);
       }
     }
-    return Collector.of(
-        StringBuilder::new,
-        new Appender(),
-        new Appender(),
-        StringBuilder::toString
-    );
+    Appender a = new Appender();
+    return Collector.of(StringBuilder::new, a, a, StringBuilder::toString);
   }
 
   public static Collector<CharSequence,?,String> joining(CharSequence delimiter) {
@@ -254,7 +250,7 @@ public final class Collectors {
 
   public static <T, D, A> Collector<T, ?, Map<Boolean, D>> partitioningBy(
       Predicate<? super T> predicate, Collector<? super T, A, D> downstream) {
-    return groupingBy0(partitionSupplier(), predicate::test, hashMapSupplier(), downstream);
+    return groupingBy0(partitionSupplier(), predicate::test, hashMap(), downstream);
   }
 
   private static <T> Supplier<Map<Boolean, List<T>>> partitionSupplier() {
@@ -383,7 +379,7 @@ public final class Collectors {
   public static <T, K, U> Collector<T, ?, Map<K, U>> toMap(
       final Function<? super T, ? extends K> keyMapper,
       final Function<? super T, ? extends U> valueMapper) {
-    return toMapInternal(keyMapper, valueMapper, null, hashMapSupplier());
+    return toMapInternal(keyMapper, valueMapper, null, hashMap());
   }
 
   private static RuntimeException getDuplicateKeyException(Object key) {
@@ -394,7 +390,7 @@ public final class Collectors {
       Function<? super T, ? extends K> keyMapper,
       Function<? super T, ? extends U> valueMapper,
       BinaryOperator<U> mergeFunction) {
-    return toMap(keyMapper, valueMapper, mergeFunction, hashMapSupplier());
+    return toMap(keyMapper, valueMapper, mergeFunction, hashMap());
   }
 
   public static <T, K, U> Collector<T, ?, Map<K, U>> toUnmodifiableMap(
@@ -429,7 +425,7 @@ public final class Collectors {
   }
 
   /*
-   * If unique flag is true, mergeFunction can safely be null.
+   * Allow for mergeFunction to be null - if so, disallow duplicate keys.
    */
   private static <T, K, U, M extends Map<K, U>> Collector<T, ?, M> toMapInternal(
       final Function<? super T, ? extends K> keyMapper,
@@ -458,7 +454,7 @@ public final class Collectors {
     return Collector.<T, HashSet<T>, Set<T>>of(
         HashSet::new,
         HashSet::add,
-        Collectors.<T, HashSet<T>>addAll(),
+        Collectors.addAll(),
         // this is Function.identity, but Java doesn't like it here to change types.
         s -> s,
         Collector.Characteristics.UNORDERED, Collector.Characteristics.IDENTITY_FINISH
@@ -511,7 +507,7 @@ public final class Collectors {
     return Objects::requireNonNull;
   }
 
-  private static <K, V> Supplier<Map<K, V>> hashMapSupplier() {
+  private static <K, V> Supplier<Map<K, V>> hashMap() {
     return HashMap::new;
   }
 

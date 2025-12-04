@@ -20,8 +20,10 @@ jobs:
       - name: Checkout GWT tools into a sibling directory
         uses: actions/checkout@v6
         with:
-          repository: 'gwtproject/tools'
+          repository: 'Lonzak/gwt-tools'   # linked other PR
+          ref: 'main'                      
           path: 'tools'
+          fetch-depth: 0                   
       - name: Set up JDK ${{ matrix.java-version }}
         # GWT presently requires Java 11+ to build
         uses: actions/setup-java@v5

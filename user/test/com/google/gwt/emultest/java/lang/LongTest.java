@@ -224,6 +224,9 @@ public class LongTest extends GWTTestCase {
     assertEquals(-1, Long.rotateLeft(-1, 4));
     assertEquals(Long.MIN_VALUE, Long.rotateLeft(0x4000000000000000L, 1));
     assertEquals(1, Long.rotateLeft(Long.MIN_VALUE, 1));
+    assertEquals(Long.MIN_VALUE, Long.rotateLeft(Long.MIN_VALUE, 0));
+    assertEquals(Long.MIN_VALUE, Long.rotateLeft(1, -1));
+    assertEquals(-1, Long.rotateLeft(-1, 1000));
   }
 
   public void testRotateRight() {
@@ -231,6 +234,9 @@ public class LongTest extends GWTTestCase {
     assertEquals(Long.MIN_VALUE, Long.rotateRight(1, 1));
     assertEquals(0x1000000000000000L, Long.rotateRight(1, 4));
     assertEquals(-1, Long.rotateRight(-1, 4));
+    assertEquals(Long.MIN_VALUE, Long.rotateRight(Long.MIN_VALUE, 0));
+    assertEquals(1, Long.rotateRight(Long.MIN_VALUE, -1));
+    assertEquals(-1, Long.rotateRight(-1, 1000));
   }
 
   public void testSignum() {

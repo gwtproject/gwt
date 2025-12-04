@@ -19,13 +19,13 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public interface RecursiveTypeGraphInstantiability extends IsSerializable {
   /**
-   * Not serializable; interface only
+   * Not serializable; interface only.
    */
   interface A extends IsSerializable {
   }
   
   /**
-   * Not serializable; interface only, the second interface implemented by {@link B}
+   * Not serializable; interface only, the second interface implemented by {@link B}.
    */
   interface D extends IsSerializable {
   }

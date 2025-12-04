@@ -142,7 +142,7 @@ public final class Collectors {
           l.add(o);
 
         },
-        (m1, m2) -> mergeAll(m1, m2, Collectors::addAll),
+        makeMergeAll(addAll()),
         m -> {
           M result = mapFactory.get();
           for (Map.Entry<K, List<T>> entry : m.entrySet()) {
@@ -348,8 +348,7 @@ public final class Collectors {
     return Collector.of(
         collectionFactory,
         Collection::add,
-        // TODO switch to a lambda reference once #9333 is fixed
-        (c1, c2) -> addAll(c1, c2),
+        addAll(),
         Collector.Characteristics.IDENTITY_FINISH
     );
   }
@@ -376,7 +375,7 @@ public final class Collectors {
   public static <T, K, U> Collector<T, ?, Map<K, U>> toMap(
       final Function<? super T, ? extends K> keyMapper,
       final Function<? super T, ? extends U> valueMapper) {
-    return toMap(keyMapper, valueMapper, null, HashMap::new, true);
+    return toMapInternal(keyMapper, valueMapper, null, HashMap::new);
   }
 
   private static RuntimeException getDuplicateKeyException(Object key) {
@@ -418,24 +417,24 @@ public final class Collectors {
       final Function<? super T, ? extends U> valueMapper,
       final BinaryOperator<U> mergeFunction,
       final Supplier<M> mapSupplier) {
-    return toMap(keyMapper, valueMapper, mergeFunction, mapSupplier, false);
+    return toMapInternal(keyMapper, valueMapper, mergeFunction, mapSupplier);
   }
 
   /*
    * If unique flag is true, mergeFunction can safely be null.
    */
-  private static <T, K, U, M extends Map<K, U>> Collector<T, ?, M> toMap(
+  private static <T, K, U, M extends Map<K, U>> Collector<T, ?, M> toMapInternal(
       final Function<? super T, ? extends K> keyMapper,
       final Function<? super T, ? extends U> valueMapper,
       final BinaryOperator<U> mergeFunction,
-      final Supplier<M> mapSupplier, final boolean unique) {
+      final Supplier<M> mapSupplier) {
     return Collector.of(
         mapSupplier,
         (map, item) -> {
           K key = keyMapper.apply(item);
           U newValue = Objects.requireNonNull(valueMapper.apply(item));
           if (map.containsKey(key)) {
-            if (unique) {
+            if (mergeFunction == null) {
               throw getDuplicateKeyException(key);
             }
             map.put(key, mergeFunction.apply(map.get(key), newValue));
@@ -443,7 +442,7 @@ public final class Collectors {
             map.put(key, newValue);
           }
         },
-        (m1, m2) -> unique ? mergeAllUnique(m1, m2) : mergeAll(m1, m2, mergeFunction),
+        makeMergeAll(mergeFunction),
         Collector.Characteristics.IDENTITY_FINISH);
   }
 
@@ -451,8 +450,7 @@ public final class Collectors {
     return Collector.<T, HashSet<T>, Set<T>>of(
         HashSet::new,
         HashSet::add,
-        // TODO switch to a lambda reference once #9333 is fixed
-        (c1, c2) -> addAll(c1, c2),
+        Collectors.<T, HashSet<T>>addAll(),
         // this is Function.identity, but Java doesn't like it here to change types.
         s -> s,
         Collector.Characteristics.UNORDERED, Collector.Characteristics.IDENTITY_FINISH
@@ -472,28 +470,33 @@ public final class Collectors {
     return downstream.finisher().apply(a);
   }
 
-  private static <K, V, M extends Map<K, V>> M mergeAll(
-      M m1, M m2, BinaryOperator<V> mergeFunction) {
-    for (Map.Entry<K, V> entry : m2.entrySet()) {
-      m1.merge(entry.getKey(), entry.getValue(), mergeFunction);
+  private static <K, V, M extends Map<K, V>> BinaryOperator<M> makeMergeAll(
+      BinaryOperator<V> mergeFunction) {
+    if (mergeFunction == null) {
+      return (m1, m2) -> {
+        for (Map.Entry<K, V> entry : m2.entrySet()) {
+          if (m1.get(entry.getKey()) != null) {
+            throw getDuplicateKeyException(entry.getKey());
+          }
+          m1.put(entry.getKey(), entry.getValue());
+        }
+        return m1;
+      };
+    } else {
+      return (m1, m2) -> {
+        for (Map.Entry<K, V> entry : m2.entrySet()) {
+          m1.merge(entry.getKey(), entry.getValue(), mergeFunction);
+        }
+        return m1;
+      };
     }
-    return m1;
   }
 
-  private static <K, V, M extends Map<K, V>> M mergeAllUnique(
-      M m1, M m2) {
-    for (Map.Entry<K, V> entry : m2.entrySet()) {
-      if (m1.get(entry.getKey()) != null) {
-        throw getDuplicateKeyException(entry.getKey());
-      }
-      m1.put(entry.getKey(), entry.getValue());
-    }
-    return m1;
-  }
-
-  private static <T, C extends Collection<T>> C addAll(C collection, Collection<T> items) {
-    collection.addAll(items);
-    return collection;
+  private static <T, C extends Collection<T>> BinaryOperator<C> addAll() {
+    return (c1, c2) -> {
+      c1.addAll(c2);
+      return c1;
+    };
   }
 
   private Collectors() { }

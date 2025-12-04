@@ -16,7 +16,6 @@
 package com.google.gwt.dev.shell;
 
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.core.ext.TreeLogger.HelpInfo;
 import com.google.gwt.dev.shell.BrowserChannel.SessionHandler.ExceptionOrReturnValue;
 import com.google.gwt.dev.shell.JsValue.DispatchObject;
 import com.google.gwt.dev.util.log.dashboard.DashboardNotifier;
@@ -25,9 +24,7 @@ import com.google.gwt.dev.util.log.dashboard.DashboardNotifierFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.Socket;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;

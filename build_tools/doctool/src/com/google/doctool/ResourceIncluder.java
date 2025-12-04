@@ -40,23 +40,7 @@ public class ResourceIncluder {
       if (in == null) {
         throw new FileNotFoundException(partialPath);
       }
-      ByteArrayOutputStream os = new ByteArrayOutputStream();
-      byte[] buffer = new byte[1024];
-      int bytesRead;
-      while (true) {
-        bytesRead = in.read(buffer);
-        if (bytesRead >= 0) {
-          // Copy the bytes out.
-          os.write(buffer, 0, bytesRead);
-        } else {
-          // End of input stream.
-          break;
-        }
-      }
-
-      return os.toString(StandardCharsets.UTF_8);
-    } finally {
-      close(in);
+      return new String(in.readAllBytes(), StandardCharsets.UTF_8);
     }
   }
 

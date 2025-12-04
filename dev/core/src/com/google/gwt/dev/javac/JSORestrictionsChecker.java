@@ -43,14 +43,14 @@ import java.util.Map;
  * Check a compilation unit for violations of
  * {@link com.google.gwt.core.client.JavaScriptObject JavaScriptObject} (JSO)
  * restrictions. The restrictions are summarized in
- * @see <a href="https://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html">jsoRestrictions.html</a>.
+ * @see <a href="https://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html#important">Important Notes</a>.
  * Any violations found are attached as errors on the
  * CompilationUnitDeclaration.
  *
  * @see <a
  *      href="http://code.google.com/p/google-web-toolkit/wiki/OverlayTypes">Overlay
  *      types design doc</a>
- * @see <a href="https://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html">jsoRestrictions.html</a>
+ * @see <a href="https://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html#important">Important Notes</a>
  */
 public class JSORestrictionsChecker {
 

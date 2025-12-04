@@ -825,7 +825,7 @@ public class JsniReferenceResolver {
 
   private void longAccessError(ASTNode node, String message) {
     GWTProblem.recordError(node, cud, message, new GwtprojectOrgHelpInfo(
-        "/doc/latest/gwt-dev-help/longJsniRestriction.html"));
+        "longJsniRestriction.html"));
   }
 
   private static void resolveJsniRef(JsniRef jsniRef, FieldBinding fieldBinding) {

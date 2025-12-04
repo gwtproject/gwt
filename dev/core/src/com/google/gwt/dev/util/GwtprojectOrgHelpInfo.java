@@ -28,7 +28,7 @@ public class GwtprojectOrgHelpInfo extends TreeLogger.HelpInfo {
 
   public GwtprojectOrgHelpInfo(String relativeUrl) {
     try {
-      url = new URL("https://gwtproject.org" + relativeUrl);
+      url = new URL("https://gwtproject.org/doc/latest/gwt-dev-help/" + relativeUrl);
     } catch (MalformedURLException ignored) {
       // ignore, url will be null
     }

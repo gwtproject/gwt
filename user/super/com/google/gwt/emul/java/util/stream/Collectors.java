@@ -111,7 +111,7 @@ public final class Collectors {
 
   public static <T, K, A, D> Collector<T, ?, Map<K, D>> groupingBy(
       Function<? super T, ? extends K> classifier, Collector<? super T, A, D> downstream) {
-    return groupingBy(classifier, HashMap::new, downstream);
+    return groupingBy(classifier, hashMapSupplier(), downstream);
   }
 
   public static <T, K, D, A, M extends Map<K, D>> Collector<T, ?, M> groupingBy(
@@ -164,10 +164,18 @@ public final class Collectors {
   public static Collector<CharSequence,?,String> joining() {
     // specific implementation rather than calling joining("") since we don't need to worry about
     // appending delimiters between empty strings
+    class Appender implements BiConsumer<StringBuilder, CharSequence>, BinaryOperator<StringBuilder> {
+      public void accept(StringBuilder sb, CharSequence s) {
+        sb.append(s);
+      }
+      public StringBuilder apply(StringBuilder sb1, StringBuilder sb2) {
+        return sb1.append(sb2);
+      }
+    }
     return Collector.of(
         StringBuilder::new,
-        StringBuilder::append,
-        StringBuilder::append,
+        new Appender(),
+        new Appender(),
         StringBuilder::toString
     );
   }
@@ -246,7 +254,7 @@ public final class Collectors {
 
   public static <T, D, A> Collector<T, ?, Map<Boolean, D>> partitioningBy(
       Predicate<? super T> predicate, Collector<? super T, A, D> downstream) {
-    return groupingBy0(partitionSupplier(), predicate::test, HashMap::new, downstream);
+    return groupingBy0(partitionSupplier(), predicate::test, hashMapSupplier(), downstream);
   }
 
   private static <T> Supplier<Map<Boolean, List<T>>> partitionSupplier() {
@@ -368,14 +376,14 @@ public final class Collectors {
   }
 
   public static <T> Collector<T, ?, List<T>> toUnmodifiableList() {
-    Collector<T, ?, List<T>> mapping = mapping(Objects::requireNonNull, toList());
+    Collector<T, ?, List<T>> mapping = mapping(nonNull(), toList());
     return collectingAndThen(mapping, Collections::unmodifiableList);
   }
 
   public static <T, K, U> Collector<T, ?, Map<K, U>> toMap(
       final Function<? super T, ? extends K> keyMapper,
       final Function<? super T, ? extends U> valueMapper) {
-    return toMapInternal(keyMapper, valueMapper, null, HashMap::new);
+    return toMapInternal(keyMapper, valueMapper, null, hashMapSupplier());
   }
 
   private static RuntimeException getDuplicateKeyException(Object key) {
@@ -386,7 +394,7 @@ public final class Collectors {
       Function<? super T, ? extends K> keyMapper,
       Function<? super T, ? extends U> valueMapper,
       BinaryOperator<U> mergeFunction) {
-    return toMap(keyMapper, valueMapper, mergeFunction, HashMap::new);
+    return toMap(keyMapper, valueMapper, mergeFunction, hashMapSupplier());
   }
 
   public static <T, K, U> Collector<T, ?, Map<K, U>> toUnmodifiableMap(
@@ -394,7 +402,7 @@ public final class Collectors {
       Function<? super T, ? extends U> valueMapper) {
     return collectingAndThen(
             toMap(disallowNulls(keyMapper), disallowNulls(valueMapper)),
-            Collections::unmodifiableMap
+            unmodifiableMap()
     );
   }
 
@@ -404,12 +412,12 @@ public final class Collectors {
       BinaryOperator<U> mergeFunction) {
     return collectingAndThen(
             toMap(disallowNulls(keyMapper), disallowNulls(valueMapper), mergeFunction),
-            Collections::unmodifiableMap
+            unmodifiableMap()
     );
   }
 
   private static <T, R> Function<T, R> disallowNulls(Function<T, R> func) {
-    return func.andThen(Objects::requireNonNull);
+    return func.andThen(nonNull());
   }
 
   public static <T, K, U, M extends Map<K, U>> Collector<T, ?, M> toMap(
@@ -458,7 +466,7 @@ public final class Collectors {
   }
 
   public static <T> Collector<T, ?, Set<T>> toUnmodifiableSet() {
-    Collector<T, ?, Set<T>> mapping = mapping(Objects::requireNonNull, toSet());
+    Collector<T, ?, Set<T>> mapping = mapping(nonNull(), toSet());
     return collectingAndThen(mapping, Collections::unmodifiableSet);
   }
 
@@ -497,6 +505,18 @@ public final class Collectors {
       c1.addAll(c2);
       return c1;
     };
+  }
+
+  private static <T> Function<? super T, ? extends T> nonNull() {
+    return Objects::requireNonNull;
+  }
+
+  private static <K, V> Supplier<Map<K, V>> hashMapSupplier() {
+    return HashMap::new;
+  }
+
+  private static <K, V> Function<Map<K, V>, Map<K, V>> unmodifiableMap() {
+    return Collections::unmodifiableMap;
   }
 
   private Collectors() { }

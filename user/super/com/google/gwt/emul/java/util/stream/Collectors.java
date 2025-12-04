@@ -182,12 +182,40 @@ public final class Collectors {
 
   public static Collector<CharSequence, ?, String> joining(
       final CharSequence delimiter, CharSequence prefix, CharSequence suffix) {
-    return Collector.of(
-        () -> new StringJoiner(delimiter, prefix, suffix),
-        StringJoiner::add,
-        StringJoiner::merge,
-        StringJoiner::toString
-    );
+    JoiningCollector c = new JoiningCollector(delimiter, prefix, suffix);
+    return Collector.of(c, c, c, c);
+  }
+
+  private static class JoiningCollector implements
+      Supplier<StringJoiner>,
+      BiConsumer<StringJoiner, CharSequence>,
+      BinaryOperator<StringJoiner>,
+      Function<StringJoiner, String> {
+    private final CharSequence delimiter;
+    private final CharSequence prefix;
+    private final CharSequence suffix;
+    public JoiningCollector(CharSequence delimiter, CharSequence prefix, CharSequence suffix) {
+      this.delimiter = delimiter;
+      this.prefix = prefix;
+      this.suffix = suffix;
+    }
+
+    @Override
+    public StringJoiner get() {
+      return new StringJoiner(delimiter, prefix, suffix);
+    }
+    @Override
+    public void accept(StringJoiner sj, CharSequence cs) {
+      sj.add(cs);
+    }
+    @Override
+    public StringJoiner apply(StringJoiner sj1, StringJoiner sj2) {
+      return sj1.merge(sj2);
+    }
+    @Override
+    public String apply(StringJoiner sj) {
+      return sj.toString();
+    }
   }
 
   public static <T, U, A, R> Collector<T, ?, R> mapping(

@@ -266,7 +266,7 @@ public abstract class AbstractLocalizableInterfaceCreator {
     return key;
   }
 
-  private void genMethodDecl(String defaultValue, String key) {
+  private void genMethodDecl(String key, String defaultValue) {
     composer.beginJavaDocComment();
     String escaped = makeJavaString(defaultValue);
     composer.println("Translated " + escaped + ".\n");

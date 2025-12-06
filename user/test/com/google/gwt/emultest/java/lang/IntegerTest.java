@@ -234,6 +234,9 @@ public class IntegerTest extends GWTTestCase {
     assertEquals(-1, Integer.rotateLeft(-1, 4));
     assertEquals(Integer.MIN_VALUE, Integer.rotateLeft(0x40000000, 1));
     assertEquals(1, Integer.rotateLeft(Integer.MIN_VALUE, 1));
+    assertEquals(Integer.MIN_VALUE, Integer.rotateLeft(Integer.MIN_VALUE, 0));
+    assertEquals(Integer.MIN_VALUE, Integer.rotateLeft(1, -1));
+    assertEquals(-1, Integer.rotateLeft(-1, 1000));
   }
 
   public void testRotateRight() {
@@ -241,6 +244,9 @@ public class IntegerTest extends GWTTestCase {
     assertEquals(Integer.MIN_VALUE, Integer.rotateRight(1, 1));
     assertEquals(0x10000000, Integer.rotateRight(1, 4));
     assertEquals(-1, Integer.rotateRight(-1, 4));
+    assertEquals(Integer.MIN_VALUE, Integer.rotateLeft(Integer.MIN_VALUE, 0));
+    assertEquals(1, Integer.rotateRight(Integer.MIN_VALUE, -1));
+    assertEquals(-1, Integer.rotateRight(-1, 1000));
   }
 
   public void testSignum() {

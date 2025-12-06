@@ -104,9 +104,9 @@ public class MhtmlResourceContext extends StaticResourceContext {
 
     pw.println("--" + BOUNDARY);
     pw.println("Content-Id:<" + location + ">");
-    // CHECKSTYLE_OFF
-    pw.println("Content-Type:" + mimeType);
-    // CHECKSTYLE_ON
+    @SuppressWarnings("checkstyle:SpaceAfterColon")
+    String contentTypeHeader = "Content-Type:" + mimeType;
+    pw.println(contentTypeHeader);
     pw.println("Content-Transfer-Encoding:base64");
     pw.println();
     pw.println(base64);

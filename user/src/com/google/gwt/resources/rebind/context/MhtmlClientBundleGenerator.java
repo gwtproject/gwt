@@ -67,9 +67,7 @@ public class MhtmlClientBundleGenerator extends AbstractClientBundleGenerator {
         "GWT.getModuleBaseURL().startsWith(\"https\")", true, true);
     resourceContext.setIsHttpsIdent(isHttpsIdent);
 
-    // CHECKSTYLE_OFF
     // "mhtml:" + GWT.getModuleBaseURL() + "partialPath!cid:"
-    // CHECKSTYLE_ON
     bundleBaseIdent = fields.define(stringType, "bundleBase", null, true, true);
     resourceContext.setBundleBaseIdent(bundleBaseIdent);
   }

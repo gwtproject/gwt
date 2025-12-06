@@ -50,6 +50,7 @@ import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
+import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
 import com.google.gwt.util.tools.ArgHandlerFlag;
 import com.google.gwt.util.tools.ArgHandlerString;
 
@@ -494,7 +495,8 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
 
     if (tempWorkDir) {
       try {
-        MoreFiles.deleteRecursively(options.getWorkDir().toPath());
+        MoreFiles.deleteRecursively(options.getWorkDir().toPath(),
+            RecursiveDeleteOption.ALLOW_INSECURE);
       } catch (IOException e) {
         getTopLogger().log(TreeLogger.ERROR,
             "Unable to delete temporary work directory " + options.getWorkDir().getAbsolutePath(),

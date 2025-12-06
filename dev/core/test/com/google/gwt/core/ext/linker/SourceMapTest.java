@@ -32,6 +32,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
+import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
 import com.google.gwt.thirdparty.guava.common.primitives.Ints;
 import com.google.gwt.thirdparty.json.JSONArray;
 import com.google.gwt.thirdparty.json.JSONException;
@@ -528,7 +529,7 @@ public class SourceMapTest extends TestCase {
       testSoycCorrespondence(new File(parentDir + "/soycReport/"));
 
     } finally {
-      MoreFiles.deleteRecursively(work.toPath());
+      MoreFiles.deleteRecursively(work.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
     }
   }
 }

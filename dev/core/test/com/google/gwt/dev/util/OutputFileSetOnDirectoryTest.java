@@ -14,6 +14,7 @@
 package com.google.gwt.dev.util;
 
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
+import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
 
 import junit.framework.TestCase;
 
@@ -45,7 +46,7 @@ public class OutputFileSetOnDirectoryTest extends TestCase {
       assertTrue(new File(work, "to/file").exists());
 
     } finally {
-      MoreFiles.deleteRecursively(work.toPath());
+      MoreFiles.deleteRecursively(work.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
     }
   }
 
@@ -62,7 +63,7 @@ public class OutputFileSetOnDirectoryTest extends TestCase {
       assertTrue(secondStream instanceof FileOutputStream);
       secondStream.close();
     } finally {
-      MoreFiles.deleteRecursively(work.toPath());
+      MoreFiles.deleteRecursively(work.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
     }
   }
 
@@ -79,7 +80,7 @@ public class OutputFileSetOnDirectoryTest extends TestCase {
       assertFalse(secondStream instanceof FileOutputStream);
       secondStream.close();
     } finally {
-      MoreFiles.deleteRecursively(work.toPath());
+      MoreFiles.deleteRecursively(work.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
     }
   }
 }

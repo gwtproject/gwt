@@ -28,7 +28,7 @@ public final class Void {
   private Void() {
   }
 
-  // CHECKSTYLE_OFF: Utility Methods for unboxed Void.
+  @SuppressWarnings("checkstyle:MethodName")
   protected static Void $create() {
     throw new AssertionError();
   }

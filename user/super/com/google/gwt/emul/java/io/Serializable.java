@@ -25,8 +25,9 @@ import jsinterop.annotations.JsMethod;
  * The Java serialization protocol is explicitly not supported.
  */
 public interface Serializable {
-  // CHECKSTYLE_OFF: Utility methods.
+
   @JsMethod
+  @SuppressWarnings("checkstyle:MethodName")
   static boolean $isInstance(HasSerializableTypeMarker instance) {
     if (instance == null) {
       return false;
@@ -40,5 +41,4 @@ public interface Serializable {
         // Arrays are implicitly instances of Serializable (JLS 10.7).
         || ArrayHelper.isArray(instance);
   }
-  // CHECKSTYLE_ON: end utility methods
 }

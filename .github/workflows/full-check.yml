@@ -27,11 +27,11 @@ jobs:
         java-version: [ '11', '17', '21', '22' ]
     steps:
       - name: Checkout GWT itself into one directory
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           path: 'gwt'
       - name: Checkout GWT tools into a sibling directory
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: 'gwtproject/tools'
           path: 'tools'

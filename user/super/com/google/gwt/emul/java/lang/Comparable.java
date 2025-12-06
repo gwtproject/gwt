@@ -28,8 +28,8 @@ import jsinterop.annotations.JsMethod;
 public interface Comparable<T> {
   int compareTo(T other);
 
-  // CHECKSTYLE_OFF: Utility methods.
   @JsMethod
+  @SuppressWarnings("checkstyle:MethodName")
   static boolean $isInstance(HasComparableTypeMarker instance) {
     String type = JsUtils.typeOf(instance);
     if (type.equals("boolean") || type.equals("number") || type.equals("string")) {
@@ -38,5 +38,4 @@ public interface Comparable<T> {
 
     return instance != null && instance.getTypeMarker() == true;
   }
-  // CHECKSTYLE_ON: end utility methods
 }

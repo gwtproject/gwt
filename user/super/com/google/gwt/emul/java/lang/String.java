@@ -399,7 +399,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public boolean contains(CharSequence s) {
-    return indexOf(s.toString()) != -1;
+    return asNativeString().includes(s.toString());
   }
 
   public boolean contentEquals(CharSequence cs) {
@@ -411,9 +411,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public boolean endsWith(String suffix) {
-    // If IE8 supported negative start index, we could have just used "-suffixlength".
-    int suffixlength = suffix.length();
-    return asNativeString().substr(length() - suffixlength, suffixlength).equals(suffix);
+    return asNativeString().endsWith(suffix);
   }
 
   // Marked with @DoNotInline because we don't have static eval for "==" yet.
@@ -504,7 +502,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public int lastIndexOf(String str, int start) {
-    return asNativeString().lastIndexOf(str, start);
+    return start < 0 ? -1 : asNativeString().lastIndexOf(str, start);
   }
 
   @Override
@@ -520,9 +518,10 @@ public final class String implements Comparable<String>, CharSequence,
    *
    * TODO(jat): properly handle Java regex syntax
    */
+  @SuppressWarnings("checkstyle:SpaceAfterColon")
   public boolean matches(String regex) {
     // We surround the regex with '^' and '$' because it must match the entire string.
-    return new NativeRegExp("^(" + regex + ")$").test(this);
+    return new NativeRegExp("^(?:" + regex + ")$").test(this);
   }
 
   public int offsetByCodePoints(int index, int codePointOffset) {
@@ -691,11 +690,11 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public boolean startsWith(String prefix) {
-    return startsWith(prefix, 0);
+    return asNativeString().startsWith(prefix);
   }
 
   public boolean startsWith(String prefix, int toffset) {
-    return toffset >= 0 && asNativeString().substr(toffset, prefix.length()).equals(prefix);
+    return asNativeString().startsWith(prefix, toffset);
   }
 
   @Override
@@ -991,11 +990,16 @@ public final class String implements Comparable<String>, CharSequence,
     public static native String fromCharCode(char x);
     public int length;
     public native char charCodeAt(int index);
+    public native boolean endsWith(String suffix);
     public native int indexOf(String str);
     public native int indexOf(String str, int startIndex);
+    public native boolean includes(String str);
+    public native boolean includes(String str, int startIndex);
     public native int lastIndexOf(String str);
     public native int lastIndexOf(String str, int start);
     public native String replace(NativeRegExp regex, String replace);
+    public native boolean startsWith(String prefix);
+    public native boolean startsWith(String prefix, int toffset);
     public native String substr(int beginIndex);
     public native String substr(int beginIndex, int len);
     public native String toLocaleLowerCase();

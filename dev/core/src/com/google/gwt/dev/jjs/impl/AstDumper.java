@@ -156,7 +156,8 @@ public class AstDumper {
     return files;
   }
 
-  private static PrintWriterTextOutput createWriter(String dumpFile, String fileExtension, boolean append) throws IOException {
+  private static PrintWriterTextOutput createWriter(String dumpFile, String fileExtension,
+                                                    boolean append) throws IOException {
     if (fileExtension != null) {
       dumpFile += fileExtension;
     }
@@ -303,8 +304,7 @@ public class AstDumper {
 
     private boolean shouldVisitCurrentTopLevelStatement = false;
 
-
-    public JsFilteredAstVisitor(JsVisitor delegate, Set<FilterRange> sourceFiles) {
+    private JsFilteredAstVisitor(JsVisitor delegate, Set<FilterRange> sourceFiles) {
       this.delegate = delegate;
       this.sourceFiles = sourceFiles;
     }

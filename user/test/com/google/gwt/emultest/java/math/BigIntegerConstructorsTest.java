@@ -1365,4 +1365,11 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
     }
     assertEquals("incorrect sign", 1, aNumber.signum());
   }
+
+  public void testConstants() {
+    assertEquals(0, BigInteger.ZERO.intValue());
+    assertEquals(1, BigInteger.ONE.intValue());
+    assertEquals(2, BigInteger.TWO.intValue());
+    assertEquals(10, BigInteger.TEN.intValue());
+  }
 }

@@ -31,7 +31,7 @@ public final class Byte extends Number implements Comparable<Byte> {
    */
   private static class BoxedValues {
     // Box all values according to JLS
-    private static Byte[] boxedValues = new Byte[256];
+    private static final Byte[] boxedValues = new Byte[256];
 
     // This method should be marked with @HasNoSideEffects but it seems to trigger a bug
     // in the optimizing pipeling and breaks one test.
@@ -68,6 +68,14 @@ public final class Byte extends Number implements Comparable<Byte> {
 
   public static String toString(byte b) {
     return String.valueOf(b);
+  }
+
+  public static int toUnsignedInt(byte b) {
+    return b & 0xff;
+  }
+
+  public static long toUnsignedLong(byte b) {
+    return toUnsignedInt(b);
   }
 
   public static Byte valueOf(byte b) {

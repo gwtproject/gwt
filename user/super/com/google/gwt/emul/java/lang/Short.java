@@ -33,7 +33,7 @@ public final class Short extends Number implements Comparable<Short> {
    */
   private static class BoxedValues {
     // Box values according to JLS - between -128 and 127
-    private static Short[] boxedValues = new Short[256];
+    private static final Short[] boxedValues = new Short[256];
 
     @HasNoSideEffects
     private static Short get(short s) {
@@ -73,6 +73,14 @@ public final class Short extends Number implements Comparable<Short> {
 
   public static String toString(short b) {
     return String.valueOf(b);
+  }
+
+  public static int toUnsignedInt(short s) {
+    return s & 0xffff;
+  }
+
+  public static long toUnsignedLong(short s) {
+    return toUnsignedInt(s);
   }
 
   public static Short valueOf(short s) {

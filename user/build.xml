@@ -163,7 +163,7 @@
           </tokenfilter>
         </filterchain>
       </move>
-      <move file="${project.build}/no-servlet-src/META-INF/services/com.google.gwt.user.server.rpc.logging.LoggerProvider" tofile="${project.build}/jakarta-src/META-INF/services/com.google.gwt.user.server.rpc.logging.jakarta.LoggerProvider">
+      <move file="${project.build}/no-servlet-src/META-INF/services/com.google.gwt.user.server.rpc.logging.RpcLoggerProvider" tofile="${project.build}/jakarta-src/META-INF/services/com.google.gwt.user.server.rpc.logging.jakarta.RpcLoggerProvider">
         <filterchain>
           <tokenfilter>
             <replacestring from="com.google.gwt.user.server.rpc.logging" to="com.google.gwt.user.server.rpc.logging.jakarta"/>

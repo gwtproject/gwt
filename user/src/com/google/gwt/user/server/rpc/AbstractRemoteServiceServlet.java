@@ -19,6 +19,7 @@ import static com.google.gwt.user.client.rpc.RpcRequestBuilder.STRONG_NAME_HEADE
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -104,7 +105,9 @@ public abstract class AbstractRemoteServiceServlet extends HttpServlet {
        */
       throw new RuntimeException("Unable to report failure", e);
     }
-    RPCServletUtils.writeResponseForUnexpectedFailure(getThreadLocalResponse(), e);
+    ServletContext servletContext = getServletContext();
+    RPCServletUtils.writeResponseForUnexpectedFailure(servletContext,
+        getThreadLocalResponse(), e);
   }
 
   /**

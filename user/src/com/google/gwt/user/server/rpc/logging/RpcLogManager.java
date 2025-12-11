@@ -67,13 +67,8 @@ public class RpcLogManager {
   static RpcLoggerProvider getLoggerProvider() {
     RpcLoggerProvider result = loggerProvider.get();
     if (result == null) {
-      synchronized (initLock) {
-        result = loggerProvider.get();
-        if (result == null) {
-          initialize();
-          result = loggerProvider.get();
-        }
-      }
+      initialize();
+      result = loggerProvider.get();
     }
     return result;
   }

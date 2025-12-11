@@ -52,7 +52,7 @@ public class ServletContextLoggerProvider implements RpcLoggerProvider {
 
     @Override
     public void error(String message, Throwable throwable, ServletContext servletContext) {
-      servletContext.log(message, throwable);
+      servletContext.log("ERROR: " + message, throwable);
     }
   }
 

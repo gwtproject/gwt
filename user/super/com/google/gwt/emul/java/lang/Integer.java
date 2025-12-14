@@ -170,6 +170,11 @@ public final class Integer extends Number implements Comparable<Integer> {
     return __parseAndValidateInt(s, radix, MIN_VALUE, MAX_VALUE);
   }
 
+  public static int parseInt(CharSequence s, int beginIndex, int endIndex, int radix)
+      throws NumberFormatException {
+    return parseInt(s.subSequence(beginIndex, endIndex).toString(), radix);
+  }
+
   public static int reverse(int i) {
     int[] nibbles = ReverseNibbles.reverseNibbles;
     return (nibbles[i >>> 28]) | (nibbles[(i >> 24) & 0xf] << 4)

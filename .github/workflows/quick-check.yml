@@ -59,7 +59,7 @@ jobs:
             reviewdog -f=checkstyle -filter-mode=diff_context -reporter=github-pr-annotations -level=info < $f
           done
       - name: Upload checkstyle xml for manual review
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         if: ${{ matrix.java-version == '21' }}
         with:
           name: checkstyle-reports-java${{ matrix.java-version }}

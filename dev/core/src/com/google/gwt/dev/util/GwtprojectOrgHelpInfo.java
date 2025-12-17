@@ -16,6 +16,7 @@
 package com.google.gwt.dev.util;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.dev.About;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -28,6 +29,20 @@ public class GwtprojectOrgHelpInfo extends TreeLogger.HelpInfo {
 
   public GwtprojectOrgHelpInfo(String relativeUrl) {
     try {
+      String gwtVersion  = About.getGwtVersion();
+      int hashIndex = relativeUrl.indexOf('#');
+
+      if (hashIndex < 0) {
+        relativeUrl = relativeUrl + '#' + gwtVersion;
+      } else {
+        String base = relativeUrl.substring(0, hashIndex + 1);
+        String existingFragment = relativeUrl.substring(hashIndex + 1);
+        if (existingFragment.isEmpty()) {
+          relativeUrl =  base + gwtVersion;
+        } else {
+          relativeUrl = base + existingFragment + '/' + gwtVersion;
+        }
+      }
       url = new URL("https://gwtproject.org/doc/latest/gwt-dev-help/" + relativeUrl);
     } catch (MalformedURLException ignored) {
       // ignore, url will be null

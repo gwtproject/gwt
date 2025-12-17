@@ -66,20 +66,20 @@ jobs:
         with:
           report_paths: 'gwt/build/out/**/test/**/reports/TEST-*.xml'
       - name: Upload checkstyle xml for manual review in its own artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: checkstyle-reports-java${{ matrix.java-version }}
           path: 'gwt/build/out/**/checkstyle*.xml'
       - name: Upload test xml files for manual review in its own artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: junit-reports-java${{ matrix.java-version }}
           path: 'gwt/build/out/**/test/**/reports/TEST-*.xml'
 
       - name: On success, upload the release zip
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: gwt-java${{ matrix.java-version }}
           path: 'gwt/build/dist/gwt-*.zip'

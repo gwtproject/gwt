@@ -134,6 +134,22 @@ public class MethodInliner {
         return;
       }
 
+      JMethod.Specialization specialization = getCurrentMethod().getSpecialization();
+      // If we have a specialization, don't inline that away - specializations must be called
+      // so they aren't pruned or type tightened into uselessness.
+      if (specialization != null) {
+        if (specialization.getTargetMethod() == method) {
+          return;
+        }
+        // We might have had a static impl that in turn will have a specialization - ensure we
+        // also don't inline that specialization away. Note that this check looks for it "backwards"
+        // by checking if the inlinable method has an instance method, since current method might
+        // have once had a static method, but it was already removed.
+        if (specialization.getTargetMethod() == program.instanceMethodForStaticImpl(method)) {
+          return;
+        }
+      }
+
       if (tryInlineMethodCall(x, ctx) == InlineResult.BLACKLIST) {
         // Do not try to inline this method again
         cannotInline.add(method);
@@ -423,9 +439,8 @@ public class MethodInliner {
               return InlineResult.DO_NOT_BLACKLIST;
             }
           }
-          // CHECKSTYLE_OFF: Fall through!
+          // fall through!
         case CORRECT_ORDER:
-          // CHECKSTYLE_ON
         default:
           if (!x.hasSideEffects()) {
             markCallsAsSideEffectFree(bodyAsExpressionList);

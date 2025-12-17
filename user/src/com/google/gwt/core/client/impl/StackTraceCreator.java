@@ -65,6 +65,7 @@ public class StackTraceCreator {
    * This legacy {@link Collector} simply crawls <code>arguments.callee.caller</code> for browsers
    * that doesn't support {@code Error.stack} property.
    */
+  @Deprecated
   static class CollectorLegacy extends Collector {
 
     @Override
@@ -306,11 +307,11 @@ public class StackTraceCreator {
    * Collect necessary information to construct stack trace trace later in time.
    */
   public static void captureStackTrace(Object error) {
-    collector.collect(error);
+    getCollector().collect(error);
   }
 
   public static StackTraceElement[] constructJavaStackTrace(Throwable thrown) {
-    StackTraceElement[] stackTrace = collector.getStackTrace(thrown);
+    StackTraceElement[] stackTrace = getCollector().getStackTrace(thrown);
     return dropInternalFrames(stackTrace);
   }
 
@@ -338,25 +339,9 @@ public class StackTraceCreator {
     }
   }
 
-  // Visible for testing
-  static final Collector collector;
-
-  static {
-    // Ensure old Safari falls back to legacy Collector implementation.
-    boolean enforceLegacy = !supportsErrorStack();
-    Collector c = GWT.create(Collector.class);
-    collector = (c instanceof CollectorModern && enforceLegacy) ? new CollectorLegacy() : c;
+  static Collector getCollector() {
+    return GWT.create(Collector.class);
   }
-
-  private static native boolean supportsErrorStack() /*-{
-    // Error.stackTraceLimit is cheaper to check and available in both IE and Chrome
-    if (Error.stackTraceLimit > 0) {
-      $wnd.Error.stackTraceLimit = Error.stackTraceLimit = 64;
-      return true;
-    }
-
-    return "stack" in new Error();
-  }-*/;
 
   private static native JsArrayString getFnStack(Object e) /*-{
     return (e && e["fnStack"]) ? e["fnStack"] : [];

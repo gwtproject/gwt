@@ -75,7 +75,8 @@ public class Grid extends HTMLTable {
    */
   private static native void addRows(Element table, int rows, int columns) /*-{
      var td = $doc.createElement("td");
-     td.innerHTML = "&nbsp;";
+     // use ePub/XHTML friendly &nbsp;
+     td.innerHTML = "&#xA0;";
      var row = $doc.createElement("tr");
      for(var cellNum = 0; cellNum < columns; cellNum++) {
        var cell = td.cloneNode(true);
@@ -130,7 +131,8 @@ public class Grid extends HTMLTable {
   public boolean clearCell(int row, int column) {
     Element td = getCellFormatter().getElement(row, column);
     boolean b = internalClearCell(td, false);
-    td.setInnerHTML("&nbsp;");
+    // use ePub/XHTML friendly &nbsp;
+    td.setInnerHTML("&#xA0;");
     return b;
   }
 
@@ -269,9 +271,9 @@ public class Grid extends HTMLTable {
   protected com.google.gwt.user.client.Element createCell() {
     Element td = super.createCell();
 
-    // Add a non-breaking space to the TD. This ensures that the cell is
-    // displayed.
-    td.setInnerHTML("&nbsp;");
+    // Add an ePub/XHTML friendly non-breaking space to the TD. This ensures that
+    // the cell is displayed.
+    td.setInnerHTML("&#xA0;");
     return DOM.asOld(td);
   }
 

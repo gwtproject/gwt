@@ -127,6 +127,19 @@ public class JdtCompilerTest extends JdtCompilerTestBase {
         "com.google.Outer.Inner", "com.google.Outer.Inner.Deep$est", "com.google.Pseudo$Inner")));
   }
 
+  public void testReferencesToJrtPackages() throws UnableToCompleteException {
+    // Pick two different annotations from different java modules, with no emulation in GWT,
+    // and confirm they can compile
+    assertUnitCompilesWithNoErrors("com.example.JrtPackageReference",
+        "package com.example;",
+        "import javax.annotation.processing.Generated;",
+        "import jdk.jfr.Label;",
+        "@Generated(\"foo\")",
+        "@Label(\"asdf\")",
+        "public class JrtPackageReference {",
+        "}");
+  }
+
   private void assertUnitCompilesWithNoErrors(String sourceName, String... sourceLines)
       throws UnableToCompleteException {
     CompilationUnit unit = compileUnit(sourceName, sourceLines);

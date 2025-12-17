@@ -232,6 +232,12 @@ public class DisclosurePanelTest extends GWTTestCase {
     panel.remove(widget);
     // ta da...
   }
+  
+  public void testPresentationRole() {
+    DisclosurePanel panel = createEmptyDisclourePanel();
+    assertNotNull(panel.getElement());
+    assertEquals("presentation", panel.getElement().getAttribute("role"));
+  }
 
   private DisclosurePanel createEmptyDisclourePanel() {
     return new DisclosurePanel();

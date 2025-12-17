@@ -20,16 +20,16 @@ import com.google.gwt.core.ext.linker.CompilationMetricsArtifact;
 import com.google.gwt.core.ext.linker.ModuleMetricsArtifact;
 import com.google.gwt.core.ext.linker.PrecompilationMetricsArtifact;
 import com.google.gwt.core.ext.soyc.impl.SizeMapRecorder;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.soyc.io.OutputDirectory;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -376,7 +376,8 @@ public class MakeTopLevelHtmlForPerm {
           + "See why it's live</a></li>\");");
       outFile.println("    for (var sp = 1; sp <= "
           + globalInformation.getNumFragments() + "; sp++) {");
-      outFile.println("      var d2 = 'methodDependencies-sp' + sp + '-" + getPermutationId() + ".html';");
+      outFile.println("      var d2 = 'methodDependencies-sp' + sp + '-"
+          + getPermutationId() + ".html';");
       outFile.println("      document.write(\"<li><a href='\" + d2 + \"#\" + className +\"'>"
           + " See why it's not exclusive to s.p. #\" + sp + \" (\" + spl[sp - 1] + \")"
           + "</a></li>\");");
@@ -646,11 +647,7 @@ public class MakeTopLevelHtmlForPerm {
    * implementation simply hashes the long name.
    */
   private static String hashedFilenameFragment(String longFileName) {
-    try {
-      return Util.computeStrongName(longFileName.getBytes(Util.DEFAULT_ENCODING));
-    } catch (UnsupportedEncodingException e) {
-      throw new RuntimeException(e);
-    }
+    return Hashing.murmur3_128().hashString(longFileName, StandardCharsets.UTF_8).toString();
   }
 
   private static String headerLineForBreakdown(SizeBreakdown breakdown) {
@@ -790,10 +787,7 @@ public class MakeTopLevelHtmlForPerm {
           outFile.println("<td>" + className + "</a></td>");
           outFile.println("<td class=\"soyc-bargraph-col\">");
           outFile.println("<div class=\"soyc-bar-graph goog-inline-block\">");
-          // CHECKSTYLE_OFF
-          outFile.println("<div style=\"width:" + (perc * 100.0)
-              + "%;\" class=\"soyc-bar-graph-fill goog-inline-block\"></div>");
-          // CHECKSTYLE_ON
+          outFile.println(getProgressBarHtml(perc));
           outFile.println("</div>");
           outFile.println("</td>");
           outFile.println("<td class=\"soyc-numerical-col\">");
@@ -1141,10 +1135,7 @@ public class MakeTopLevelHtmlForPerm {
             }
             outFile.println("<td class=\"soyc-bargraph-col\">");
             outFile.println("<div class=\"soyc-bar-graph goog-inline-block\">");
-            // CHECKSTYLE_OFF
-            outFile.println("<div style=\"width:" + (perc * 100.0)
-                + "%;\" class=\"soyc-bar-graph-fill goog-inline-block\"></div>");
-            // CHECKSTYLE_ON
+            outFile.println(getProgressBarHtml(perc));
             outFile.println("</div>");
             outFile.println("</td>");
             outFile.println("<td class=\"soyc-numerical-col\">");
@@ -1318,10 +1309,7 @@ public class MakeTopLevelHtmlForPerm {
             + "</a></td>");
         outFile.println("<td class=\"soyc-bargraph-col\">");
         outFile.println("<div class=\"soyc-bar-graph goog-inline-block\">");
-        // CHECKSTYLE_OFF
-        outFile.println("<div style=\"width:" + (perc * 100.0)
-            + "%;\" class=\"soyc-bar-graph-fill goog-inline-block\"></div>");
-        // CHECKSTYLE_ON
+        outFile.println(getProgressBarHtml(perc));
         outFile.println("</div>");
         outFile.println("</td>");
         outFile.println("<td class=\"soyc-numerical-col\">");
@@ -1337,6 +1325,12 @@ public class MakeTopLevelHtmlForPerm {
     outFile.println("</div>");
     addStandardHtmlEnding(outFile);
     outFile.close();
+  }
+
+  @SuppressWarnings("checkstyle:SpaceAfterColon")
+  private String getProgressBarHtml(float perc) {
+    return "<div style=\"width:" + (perc * 100.0)
+        + "%;\" class=\"soyc-bar-graph-fill goog-inline-block\"></div>";
   }
 
   private void addPopup(PrintWriter outFile, String popupName,
@@ -1395,7 +1389,8 @@ public class MakeTopLevelHtmlForPerm {
   private String[] getUnreferencedTypes(
       PrecompilationMetricsArtifact precompilationMetrics) {
     List<String> astTypes = Lists.newArrayList(precompilationMetrics.getAstTypes());
-    Set<String> unreferencedTypes = Sets.newHashSet(precompilationMetrics.getFinalTypeOracleTypes());
+    Set<String> unreferencedTypes = Sets.newHashSet(
+        precompilationMetrics.getFinalTypeOracleTypes());
     unreferencedTypes.removeAll(astTypes);
     String[] results = unreferencedTypes.toArray(new String[unreferencedTypes.size()]);
     Arrays.sort(results);
@@ -1519,10 +1514,7 @@ public class MakeTopLevelHtmlForPerm {
             + "\" target=\"_top\">" + codeType + "</a></td>");
         outFile.println("<td class=\"soyc-bargraph-col\">");
         outFile.println("<div class=\"soyc-bar-graph goog-inline-block\">");
-        // CHECKSTYLE_OFF
-        outFile.println("<div style=\"width:" + (perc * 100.0)
-            + "%;\" class=\"soyc-bar-graph-fill goog-inline-block\"></div>");
-        // CHECKSTYLE_ON
+        outFile.println(getProgressBarHtml(perc));
         outFile.println("</div>");
         outFile.println("</td>");
         outFile.println("<td class=\"soyc-numerical-col\">");
@@ -1818,10 +1810,7 @@ public class MakeTopLevelHtmlForPerm {
             + "\" target=\"_top\">" + packageName + "</a></td>");
         outFile.println("<td class=\"soyc-bargraph-col\">");
         outFile.println("<div class=\"soyc-bar-graph goog-inline-block\">");
-        // CHECKSTYLE_OFF
-        outFile.println("<div style=\"width:" + (perc * 100.0)
-            + "%;\" class=\"soyc-bar-graph-fill goog-inline-block\"></div>");
-        // CHECKSTYLE_ON
+        outFile.println(getProgressBarHtml(perc));
         outFile.println("</div>");
         outFile.println("</td>");
         outFile.println("<td class=\"soyc-numerical-col\">");

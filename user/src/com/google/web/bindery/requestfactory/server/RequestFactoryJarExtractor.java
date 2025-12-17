@@ -17,7 +17,6 @@ package com.google.web.bindery.requestfactory.server;
 
 import com.google.gwt.dev.util.Name;
 import com.google.gwt.dev.util.Name.SourceOrBinaryName;
-import com.google.gwt.dev.util.Util;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.google.web.bindery.requestfactory.apt.RfValidator;
 import com.google.web.bindery.requestfactory.apt.ValidationTool;
@@ -507,8 +506,9 @@ public class RequestFactoryJarExtractor {
         String sourcePath = getPackagePath(state.originalType) + state.source;
         String destPath = getPackagePath(state.type) + state.source;
         if (sources.add(sourcePath) && loader.exists(sourcePath)) {
-          String contents = Util.readStreamAsString(loader.getResourceAsStream(sourcePath));
-          emitter.emit(destPath, new ByteArrayInputStream(Util.getBytes(contents)));
+          try (InputStream is = loader.getResourceAsStream(sourcePath)) {
+            emitter.emit(destPath, is);
+          }
         }
       }
       return null;

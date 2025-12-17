@@ -18,10 +18,10 @@ package com.google.gwt.dev.cfg;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.javac.testing.impl.MockResourceOracle;
 import com.google.gwt.dev.resource.Resource;
-import com.google.gwt.dev.util.Util;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Mock for {@link ModuleDef}.
@@ -47,7 +47,7 @@ public class MockModuleDef extends ModuleDef {
 
     @Override
     public InputStream openContents() {
-      return new ByteArrayInputStream(Util.getBytes("w00t!"));
+      return new ByteArrayInputStream("w00t!".getBytes(StandardCharsets.UTF_8));
     }
 
     @Override

@@ -18,6 +18,7 @@ package com.google.gwt.emultest.java.io;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 /**
@@ -137,8 +138,17 @@ public class ByteArrayOutputStreamTest extends OutputStreamBaseTest {
     assertEquals(expectedString, actualString);
   }
 
+  public void testToStringWithCharsetAndNonEmptyStream() throws IOException {
+    final ByteArrayOutputStream outputStream = new ByteArrayOutputStream(1);
+    final String expectedString = "Hello";
+
+    outputStream.write(expectedString.getBytes(StandardCharsets.UTF_8));
+    final String actualString = outputStream.toString(StandardCharsets.UTF_8);
+    assertEquals(expectedString, actualString);
+  }
+
   public void testWriteSingleValues() throws IOException {
-    final ByteArrayOutputStream outputStream = new ByteArrayOutputStream(2);
+    outputStream = new ByteArrayOutputStream(2);
     assertEquals(0, outputStream.size());
 
     for (int i = 0; i < 3; i++) {
@@ -148,5 +158,16 @@ public class ByteArrayOutputStreamTest extends OutputStreamBaseTest {
     final byte[] expectedBytes = Arrays.copyOf(TEST_ARRAY, 3);
     final byte[] actualBytes = outputStream.toByteArray();
     assertTrue(Arrays.equals(expectedBytes, actualBytes));
+  }
+
+  public void testWriteBytes() throws IOException {
+    outputStream = new ByteArrayOutputStream(2);
+    assertEquals(0, outputStream.size());
+    outputStream.writeBytes(TEST_ARRAY);
+    final byte[] actualBytes = outputStream.toByteArray();
+    assertTrue(Arrays.equals(TEST_ARRAY, actualBytes));
+    outputStream.writeBytes(new byte[0]);
+    final byte[] actualBytes2 = outputStream.toByteArray();
+    assertTrue(Arrays.equals(TEST_ARRAY, actualBytes));
   }
 }

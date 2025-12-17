@@ -550,7 +550,6 @@ public class MenuBarTest extends WidgetTestBase {
     MenuItem item1 = bar.addItem("item1", BLANK_COMMAND);
     RootPanel.get().add(bar);
 
-
     bar.itemOver(item1, true);
     assertNotNull(bar.getSelectedItem());
 
@@ -604,5 +603,12 @@ public class MenuBarTest extends WidgetTestBase {
     assertNull(l0.getPopup());
     assertNull(l0.getSelectedItem());
     assertNull(l1.getPopup());
+  }
+  
+  public void testPresentationRole() {
+    MenuBar menu = new MenuBar();
+    assertNotNull(menu.getElement());
+    assertEquals("presentation",
+        Element.as(menu.getElement().getChild(1)).getAttribute("role"));
   }
 }

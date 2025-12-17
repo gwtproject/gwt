@@ -24,7 +24,6 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.resources.client.impl.ExternalTextResourcePrototype;
 import com.google.gwt.resources.ext.AbstractResourceGenerator;
@@ -34,10 +33,16 @@ import com.google.gwt.resources.ext.ResourceContext;
 import com.google.gwt.resources.ext.ResourceGeneratorUtil;
 import com.google.gwt.resources.ext.SupportsGeneratorResultCaching;
 import com.google.gwt.safehtml.shared.UriUtils;
+import com.google.gwt.thirdparty.guava.common.hash.Hashing;
+import com.google.gwt.thirdparty.guava.common.io.CharStreams;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.gwt.user.rebind.StringSourceWriter;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,12 +60,14 @@ public final class ExternalTextResourceGenerator extends
   // This string must stay in sync with the values in JsonpRequest.java
   static final String JSONP_CALLBACK_PREFIX = "__gwt_jsonp__.P";
 
-  private StringBuffer data;
+  private StringBuilder data;
   private boolean first;
   private String urlExpression;
   private Map<String, Integer> hashes;
   private Map<String, Integer> offsets;
   private int currentIndex;
+
+  private String hash;
 
   private String externalTextUrlIdent;
 
@@ -80,7 +87,7 @@ public final class ExternalTextResourceGenerator extends
     sw.println(externalTextCacheIdent + ", ");
     sw.println(offsets.get(method.getName()).toString());
     if (shouldUseJsonp(context, logger)) {
-      sw.println(", \"" + getMd5HashOfData() + "\"");
+      sw.println(", \"" + getMurmurHashOfData() + "\"");
     }
     sw.outdent();
     sw.print(")");
@@ -92,12 +99,12 @@ public final class ExternalTextResourceGenerator extends
   public void createFields(TreeLogger logger, ResourceContext context,
       ClientBundleFields fields) throws UnableToCompleteException {
     data.append(']');
-    StringBuffer wrappedData = new StringBuffer();
+    StringBuilder wrappedData = new StringBuilder();
     if (shouldUseJsonp(context, logger)) {
       wrappedData.append(JSONP_CALLBACK_PREFIX);
-      wrappedData.append(getMd5HashOfData());
+      wrappedData.append(getMurmurHashOfData());
       wrappedData.append(".onSuccess(\n");
-      wrappedData.append(data.toString());
+      wrappedData.append(data);
       wrappedData.append(")");
     } else {
       wrappedData = data;
@@ -105,7 +112,8 @@ public final class ExternalTextResourceGenerator extends
 
     urlExpression = context.deploy(
         context.getClientBundleType().getQualifiedSourceName().replace('.', '_')
-            + "_jsonbundle.txt", "text/plain", Util.getBytes(wrappedData.toString()), true);
+            + "_jsonbundle.txt", "text/plain",
+        wrappedData.toString().getBytes(StandardCharsets.UTF_8), true);
 
     TypeOracle typeOracle = context.getGeneratorContext().getTypeOracle();
     JClassType stringType = typeOracle.findType(String.class.getName());
@@ -126,7 +134,7 @@ public final class ExternalTextResourceGenerator extends
   @Override
   public void init(TreeLogger logger, ResourceContext context)
       throws UnableToCompleteException {
-    data = new StringBuffer("[\n");
+    data = new StringBuilder("[\n");
     first = true;
     urlExpression = null;
     hashes = new HashMap<String, Integer>();
@@ -147,9 +155,13 @@ public final class ExternalTextResourceGenerator extends
       throw new UnableToCompleteException();
     }
 
-    URL resource = urls[0];
-
-    String toWrite = Util.readURLAsString(resource);
+    String toWrite;
+    try (InputStream in = urls[0].openStream()) {
+      toWrite = CharStreams.toString(new InputStreamReader(in, StandardCharsets.UTF_8));
+    } catch (IOException e) {
+      logger.log(TreeLogger.Type.ERROR, "Unable to read resource: " + urls[0], e);
+      throw new UnableToCompleteException();
+    }
 
     // This de-duplicates strings in the bundle.
     if (!hashes.containsKey(toWrite)) {
@@ -170,8 +182,11 @@ public final class ExternalTextResourceGenerator extends
     offsets.put(method.getName(), hashes.get(toWrite));
   }
 
-  private String getMd5HashOfData() {
-    return Util.computeStrongName(Util.getBytes(data.toString()));
+  private String getMurmurHashOfData() {
+    if (hash == null) {
+      hash = Hashing.murmur3_128().hashString(data, StandardCharsets.UTF_8).toString();
+    }
+    return hash;
   }
 
   private boolean shouldUseJsonp(ResourceContext context, TreeLogger logger) {

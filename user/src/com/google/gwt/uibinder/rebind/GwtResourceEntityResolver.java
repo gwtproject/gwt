@@ -18,15 +18,16 @@ package com.google.gwt.uibinder.rebind;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.resource.ResourceOracle;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.Sets;
 
+import com.google.gwt.thirdparty.guava.common.io.ByteStreams;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Set;
 
@@ -74,9 +75,8 @@ class GwtResourceEntityResolver implements EntityResolver {
 
     if (resource != null) {
       String content;
-      try {
-        InputStream resourceStream = resource.openContents();
-        content = Util.readStreamAsString(resourceStream);
+      try (InputStream is = resource.openContents()) {
+        content = new String(ByteStreams.toByteArray(is), StandardCharsets.UTF_8);
       } catch (IOException ex) {
         logger.log(TreeLogger.ERROR, "Error reading resource: " + resource.getLocation());
         throw new RuntimeException(ex);

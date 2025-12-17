@@ -17,8 +17,9 @@ package com.google.gwt.dev;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
+import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
+import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
 
 import junit.framework.TestCase;
 
@@ -52,7 +53,7 @@ public class SoycTest extends TestCase {
 
       assertFalse(new File(options.getExtraDir() + "/hello/soycReport/compile-report/index2.html").exists());
     } finally {
-      Util.recursiveDelete(work, false);
+      MoreFiles.deleteRecursively(work.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
     }
   }
 }

@@ -17,6 +17,7 @@ package java.lang;
 
 import static javaemul.internal.InternalPreconditions.checkCriticalArithmetic;
 
+import javaemul.internal.JsUtils;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -25,13 +26,6 @@ import jsinterop.annotations.JsType;
  * Math utility methods and constants.
  */
 public final class Math {
-  // The following methods are not implemented because JS doesn't provide the
-  // necessary pieces:
-  //   public static double ulp (double x)
-  //   public static float ulp (float x)
-  //   public static int getExponent (double d)
-  //   public static int getExponent (float f)
-  //   public static double IEEEremainder(double f1, double f2)
 
   public static final double E = 2.7182818284590452354;
   public static final double PI = 3.14159265358979323846;
@@ -50,6 +44,16 @@ public final class Math {
 
   public static long abs(long x) {
     return x < 0 ? -x : x;
+  }
+
+  public static int absExact(int v) {
+    checkCriticalArithmetic(v != Integer.MIN_VALUE);
+    return abs(v);
+  }
+
+  public static long absExact(long v) {
+    checkCriticalArithmetic(v != Long.MIN_VALUE);
+    return abs(v);
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.acos")
@@ -77,9 +81,8 @@ public final class Math {
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.atan2")
   public static native double atan2(double y, double x);
 
-  public static double cbrt(double x) {
-    return x == 0 || !Double.isFinite(x) ? x : pow(x, 1.0 / 3.0);
-  }
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.cbrt")
+  public static native double cbrt(double x);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.ceil")
   public static native double ceil(double x);
@@ -99,9 +102,8 @@ public final class Math {
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.cos")
   public static native double cos(double x);
 
-  public static double cosh(double x) {
-    return (exp(x) + exp(-x)) / 2;
-  }
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.cosh")
+  public static native double cosh(double x);
 
   public static int decrementExact(int x) {
     checkCriticalArithmetic(x != Integer.MIN_VALUE);
@@ -116,9 +118,8 @@ public final class Math {
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.exp")
   public static native double exp(double x);
 
-  public static double expm1(double d) {
-    return d == 0 ? d : exp(d) - 1;
-  }
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.expm1")
+  public static native double expm1(double d);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.floor")
   public static native double floor(double x);
@@ -135,6 +136,10 @@ public final class Math {
     return ((dividend ^ divisor) >= 0 ? dividend / divisor : ((dividend + 1) / divisor) - 1);
   }
 
+  public static long floorDiv(long dividend, int divisor) {
+    return floorDiv(dividend, (long) divisor);
+  }
+
   public static int floorMod(int dividend, int divisor) {
     checkCriticalArithmetic(divisor != 0);
     return ((dividend % divisor) + divisor) % divisor;
@@ -145,10 +150,52 @@ public final class Math {
     return ((dividend % divisor) + divisor) % divisor;
   }
 
-  public static double hypot(double x, double y) {
-    return Double.isInfinite(x) || Double.isInfinite(y) ?
-        Double.POSITIVE_INFINITY : sqrt(x * x + y * y);
+  public static int floorMod(long dividend, int divisor) {
+    return (int) floorMod(dividend, (long) divisor);
   }
+
+  @SuppressWarnings("CheckStyle.MethodName")
+  public static double IEEEremainder(double v, double m) {
+    double ratio = v / m;
+    double closest = Math.ceil(ratio);
+    double frac = Math.abs(closest - ratio);
+    if (frac > 0.5 || frac == 0.5 && (closest % 2 != 0)) {
+      closest = Math.floor(ratio);
+    }
+    // if closest == 0 and m == inf, avoid multiplication
+    return closest == 0 ? v : v - m * closest;
+  }
+
+  public static int getExponent(double v) {
+    int[] intBits = JsUtils.doubleToRawIntBits(v);
+    return ((intBits[1] >> 20) & 2047) - Double.MAX_EXPONENT;
+  }
+
+  public static int getExponent(float v) {
+    return ((JsUtils.floatToRawIntBits(v) >> 23) & 255) - Float.MAX_EXPONENT;
+  }
+
+  public static double ulp(double v) {
+    if (!Double.isFinite(v)) {
+      return Math.abs(v);
+    }
+    int exponent = Math.getExponent(v);
+    if (exponent == -1023) {
+      return Double.MIN_VALUE;
+    }
+    return Math.pow(2, exponent - 52);
+  }
+
+  public static float ulp(float v) {
+    int exponent = Math.getExponent(v);
+    if (exponent == -Float.MAX_EXPONENT) {
+      return Float.MIN_VALUE;
+    }
+    return (float) Math.pow(2, exponent - 23);
+  }
+
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.hypot")
+  public static native double hypot(double x, double y);
 
   public static int incrementExact(int x) {
     checkCriticalArithmetic(x != Integer.MAX_VALUE);
@@ -163,13 +210,11 @@ public final class Math {
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.log")
   public static native double log(double x);
 
-  public static double log10(double x) {
-    return log(x) * NativeMath.LOG10E;
-  }
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.log10")
+  public static native double log10(double x);
 
-  public static double log1p(double x) {
-    return x == 0 ? x : log(x + 1);
-  }
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.log1p")
+  public static native double log1p(double x);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.max")
   public static native double max(double x, double y);
@@ -197,10 +242,26 @@ public final class Math {
     return x < y ? x : y;
   }
 
+  public static long multiplyFull(int x, int y) {
+    return (long) x * (long) y;
+  }
+
   public static int multiplyExact(int x, int y) {
     double r = (double) x * (double) y;
     checkCriticalArithmetic(isSafeIntegerRange(r));
     return (int) r;
+  }
+
+  public static long multiplyExact(long x, int y) {
+    if (y == -1) {
+      return negateExact(x);
+    }
+    if (y == 0) {
+      return 0;
+    }
+    long r = x * y;
+    checkCriticalArithmetic(r / y == x);
+    return r;
   }
 
   public static long multiplyExact(long x, long y) {
@@ -284,13 +345,8 @@ public final class Math {
     return (float) scalb((double) f, scaleFactor);
   }
 
-  public static double signum(double d) {
-    if (d == 0 || Double.isNaN(d)) {
-      return d;
-    } else {
-      return d < 0 ? -1 : 1;
-    }
-  }
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.sign")
+  public static native double signum(double d);
 
   public static float signum(float f) {
     return (float) signum((double) f);
@@ -299,9 +355,8 @@ public final class Math {
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.sin")
   public static native double sin(double x);
 
-  public static double sinh(double x) {
-    return x == 0.0 ? x : (exp(x) - exp(-x)) / 2;
-  }
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.sinh")
+  public static native double sinh(double x);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.sqrt")
   public static native double sqrt(double x);
@@ -309,18 +364,8 @@ public final class Math {
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.tan")
   public static native double tan(double x);
 
-  public static double tanh(double x) {
-    if (x == 0.0) {
-      // -0.0 should return -0.0.
-      return x;
-    }
-
-    double e2x = exp(2 * x);
-    if (Double.isInfinite(e2x)) {
-      return 1;
-    }
-    return (e2x - 1) / (e2x + 1);
-  }
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.tanh")
+  public static native double tanh(double x);
 
   public static double toDegrees(double x) {
     return x * PI_UNDER_180;
@@ -411,7 +456,6 @@ public final class Math {
 
   @JsType(isNative = true, name = "Math", namespace = JsPackage.GLOBAL)
   private static class NativeMath {
-    public static double LOG10E;
     public static native double round(double x);
   }
 }

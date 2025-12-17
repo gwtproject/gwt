@@ -17,11 +17,13 @@
 package com.google.gwt.dev.codeserver;
 
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapConsumerV3;
 import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapParseException;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 /**
  * A mapping from Java lines to JavaScript.
@@ -39,10 +41,13 @@ class ReverseSourceMap {
    */
   static ReverseSourceMap load(TreeLogger logger, File sourceMapFile) {
     SourceMapConsumerV3 consumer = new SourceMapConsumerV3();
-    String unparsed = Util.readFileAsString(sourceMapFile);
     try {
+      String unparsed = Files.readString(sourceMapFile.toPath(), StandardCharsets.UTF_8);
       consumer.parse(unparsed);
       return new ReverseSourceMap(consumer);
+    } catch (IOException ex) {
+      logger.log(TreeLogger.Type.WARN, "can't read source map", ex);
+      return new ReverseSourceMap(null);
     } catch (SourceMapParseException e) {
       logger.log(TreeLogger.WARN, "can't parse source map", e);
       return new ReverseSourceMap(null);

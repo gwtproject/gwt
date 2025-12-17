@@ -16,6 +16,7 @@
 
 package java.util.stream;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -33,6 +34,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.StringJoiner;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -69,6 +71,30 @@ public final class Collectors {
         downstream.accumulator(),
         downstream.combiner(),
         downstream.finisher().andThen(finisher));
+  }
+
+  public static <T,R1,R2,R> Collector<T,?,R> teeing(Collector<? super T,?,R1> downstream1,
+      Collector<? super T,?,R2> downstream2, BiFunction<? super R1,? super R2,R> merger) {
+    return teeing2(downstream1, downstream2, merger);
+  }
+
+  private static <T,R1,R2,R,X,Y> Collector<T,?,R> teeing2(Collector<? super T,X,R1> downstream1,
+      Collector<? super T,Y,R2> downstream2, BiFunction<? super R1,? super R2,R> merger) {
+     return Collector.of(
+        () -> new AbstractMap.SimpleEntry<>(downstream1.supplier().get(),
+            downstream2.supplier().get()),
+        (a,b) -> {
+          downstream1.accumulator().accept(a.getKey(), b);
+          downstream2.accumulator().accept(a.getValue(), b);
+        },
+        (a,b) -> {
+          X part = downstream1.combiner().apply(a.getKey(), b.getKey());
+          Y part2 = downstream2.combiner().apply(a.getValue(), b.getValue());
+          return new AbstractMap.SimpleEntry<>(part, part2);
+        },
+        (e) -> merger.apply(downstream1.finisher().apply(e.getKey()),
+            downstream2.finisher().apply(e.getValue()))
+     );
   }
 
   public static <T> Collector<T,?,Long> counting() {
@@ -350,12 +376,11 @@ public final class Collectors {
   public static <T, K, U> Collector<T, ?, Map<K, U>> toMap(
       final Function<? super T, ? extends K> keyMapper,
       final Function<? super T, ? extends U> valueMapper) {
-    return toMap(
-        keyMapper,
-        valueMapper,
-        (m1, m2) -> {
-          throw new IllegalStateException("Can't assign multiple values to the same key");
-        });
+    return toMap(keyMapper, valueMapper, null, HashMap::new, true);
+  }
+
+  private static RuntimeException getDuplicateKeyException(Object key) {
+    return new IllegalStateException("Duplicate key " + key);
   }
 
   public static <T, K, U> Collector<T, ?, Map<K, U>> toMap(
@@ -393,18 +418,32 @@ public final class Collectors {
       final Function<? super T, ? extends U> valueMapper,
       final BinaryOperator<U> mergeFunction,
       final Supplier<M> mapSupplier) {
+    return toMap(keyMapper, valueMapper, mergeFunction, mapSupplier, false);
+  }
+
+  /*
+   * If unique flag is true, mergeFunction can safely be null.
+   */
+  private static <T, K, U, M extends Map<K, U>> Collector<T, ?, M> toMap(
+      final Function<? super T, ? extends K> keyMapper,
+      final Function<? super T, ? extends U> valueMapper,
+      final BinaryOperator<U> mergeFunction,
+      final Supplier<M> mapSupplier, final boolean unique) {
     return Collector.of(
         mapSupplier,
         (map, item) -> {
           K key = keyMapper.apply(item);
-          U newValue = valueMapper.apply(item);
+          U newValue = Objects.requireNonNull(valueMapper.apply(item));
           if (map.containsKey(key)) {
+            if (unique) {
+              throw getDuplicateKeyException(key);
+            }
             map.put(key, mergeFunction.apply(map.get(key), newValue));
           } else {
             map.put(key, newValue);
           }
         },
-        (m1, m2) -> mergeAll(m1, m2, mergeFunction),
+        (m1, m2) -> unique ? mergeAllUnique(m1, m2) : mergeAll(m1, m2, mergeFunction),
         Collector.Characteristics.IDENTITY_FINISH);
   }
 
@@ -437,6 +476,17 @@ public final class Collectors {
       M m1, M m2, BinaryOperator<V> mergeFunction) {
     for (Map.Entry<K, V> entry : m2.entrySet()) {
       m1.merge(entry.getKey(), entry.getValue(), mergeFunction);
+    }
+    return m1;
+  }
+
+  private static <K, V, M extends Map<K, V>> M mergeAllUnique(
+      M m1, M m2) {
+    for (Map.Entry<K, V> entry : m2.entrySet()) {
+      if (m1.get(entry.getKey()) != null) {
+        throw getDuplicateKeyException(entry.getKey());
+      }
+      m1.put(entry.getKey(), entry.getValue());
     }
     return m1;
   }

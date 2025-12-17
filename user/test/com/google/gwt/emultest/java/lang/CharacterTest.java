@@ -337,7 +337,7 @@ public class CharacterTest extends GWTTestCase {
     assertTrue(Character.isSpace('\n'));
   }
 
-  public void testIsWhitepace() {
+  public void testIsWhitespace() {
     char[] separators = {
         '\u0020', // SPACE.
         '\u1680', // OGHAM SPACE MARK.

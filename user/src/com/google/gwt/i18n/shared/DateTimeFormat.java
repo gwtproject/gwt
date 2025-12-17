@@ -1906,10 +1906,9 @@ public class DateTimeFormat {
           cal.setTzOffset(0);
           return true;
         }
-        // CHECKSTYLE_OFF: Fall through
+        // fall through
       case 'z': // time zone offset
       case 'v': // time zone generic
-        // CHECKSTYLE_ON
         return subParseTimeZoneInGMT(text, start, pos, cal);
       default:
         return false;

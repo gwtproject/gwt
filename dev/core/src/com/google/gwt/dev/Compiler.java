@@ -27,7 +27,6 @@ import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.js.JsNamespaceOption;
 import com.google.gwt.dev.util.Memory;
 import com.google.gwt.dev.util.PersistenceBackedObject;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.arg.ArgHandlerDeployDir;
 import com.google.gwt.dev.util.arg.ArgHandlerExtraDir;
 import com.google.gwt.dev.util.arg.ArgHandlerIncrementalCompile;
@@ -40,6 +39,8 @@ import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
+import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
 
 import java.io.File;
 import java.io.IOException;
@@ -242,12 +243,17 @@ public class Compiler {
       }
 
     } catch (IOException e) {
-      logger.log(TreeLogger.ERROR, "Unable to create compiler work directory",
-          e);
+      logger.log(TreeLogger.ERROR, "Unable to create compiler work directory", e);
       return false;
     } finally {
       if (tempWorkDir) {
-        Util.recursiveDelete(options.getWorkDir(), false);
+        try {
+          MoreFiles.deleteRecursively(options.getWorkDir().toPath(),
+              RecursiveDeleteOption.ALLOW_INSECURE);
+        } catch (IOException e) {
+          logger.log(TreeLogger.WARN, "Unable to delete temporary work directory: "
+              + options.getWorkDir(), e);
+        }
       }
     }
     return true;

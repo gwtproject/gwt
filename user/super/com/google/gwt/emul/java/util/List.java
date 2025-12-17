@@ -90,19 +90,18 @@ public interface List<E> extends Collection<E> {
     return __ofInternal((E[]) new Object[] {e1, e2, e3, e4, e5, e6, e7, e8, e9, e10});
   }
 
-  // CHECKSTYLE_OFF: Internal only method that cannot collide with future JRE changes
   /**
    * Internal-only helper to avoid copying the incoming array, and instead just wrap it with an
    * immutable List after checking there are no nulls.
    */
   @JsIgnore
+  @SuppressWarnings("checkstyle:MethodName")
   static <E> List<E> __ofInternal(E[] elements) {
     for (int i = 0; i < elements.length; i++) {
       checkNotNull(elements[i]);
     }
     return Collections.unmodifiableList(Arrays.asList(elements));
   }
-  // CHECKSTYLE_ON
 
   @JsIgnore
   static <E> List<E> of(E... elements) {

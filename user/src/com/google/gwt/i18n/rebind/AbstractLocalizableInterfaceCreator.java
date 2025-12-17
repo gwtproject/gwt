@@ -15,7 +15,6 @@
  */
 package com.google.gwt.i18n.rebind;
 
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.i18n.client.Localizable;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
@@ -32,6 +31,7 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -175,16 +175,6 @@ public abstract class AbstractLocalizableInterfaceCreator {
   }
 
   /**
-   * Create a String method declaration from a Dictionary/value pair.
-   * 
-   * @param key Dictionary
-   * @param defaultValue default value
-   */
-  public void genSimpleMethodDecl(String key, String defaultValue) {
-    genMethodDecl("String", defaultValue, key);
-  }
-
-  /**
    * Create method args based upon the default value.
    * 
    * @param defaultValue
@@ -237,7 +227,7 @@ public abstract class AbstractLocalizableInterfaceCreator {
   void generateFromPropertiesFile() throws IOException {
     InputStream propStream = new FileInputStream(resourceFile);
     LocalizedProperties p = new LocalizedProperties();
-    p.load(propStream, Util.DEFAULT_ENCODING);
+    p.load(propStream, "UTF-8");
     addFormatters();
     // TODO: Look for a generic version of Tapestry's LocalizedProperties class
     Set<String> keySet = p.getPropertyMap().keySet();
@@ -250,11 +240,15 @@ public abstract class AbstractLocalizableInterfaceCreator {
               + resourceFile
               + "' cannot be used to generate message classes, as it has no key/value pairs defined.");
     }
-    for (String key : keys) {
-      String value = p.getProperty(key);
-      genSimpleMethodDecl(key, value);
-    }
+    generateMethods(p, keys);
     composer.commit(new PrintWriterTreeLogger());
+  }
+
+  void generateMethods(LocalizedProperties properties, String[] keys) {
+    for (String key : keys) {
+      String value = properties.getProperty(key);
+      genMethodDecl(key, value);
+    }
   }
 
   private void addFormatters() {
@@ -265,14 +259,14 @@ public abstract class AbstractLocalizableInterfaceCreator {
     formatters.add(new RenameDuplicates());
   }
 
-  private String formatKey(String key) {
+  protected String formatKey(String key) {
     for (ResourceKeyFormatter formatter : formatters) {
       key = formatter.format(key);
     }
     return key;
   }
 
-  private void genMethodDecl(String type, String defaultValue, String key) {
+  private void genMethodDecl(String defaultValue, String key) {
     composer.beginJavaDocComment();
     String escaped = makeJavaString(defaultValue);
     composer.println("Translated " + escaped + ".\n");
@@ -281,7 +275,7 @@ public abstract class AbstractLocalizableInterfaceCreator {
     genValueAnnotation(defaultValue);
     composer.println("@Key(" + makeJavaString(key) + ")");
     String methodName = formatKey(key);
-    composer.print(type + " " + methodName);
+    composer.print("String " + methodName);
     composer.print("(");
     genMethodArgs(defaultValue);
     composer.print(");\n");
@@ -298,7 +292,7 @@ public abstract class AbstractLocalizableInterfaceCreator {
         File.separatorChar, '/')));
     factory.addImplementedInterface(interfaceClass.getName());
     FileOutputStream file = new FileOutputStream(targetLocation);
-    Writer underlying = new OutputStreamWriter(file, Util.DEFAULT_ENCODING);
+    Writer underlying = new OutputStreamWriter(file, StandardCharsets.UTF_8);
     writer = new PrintWriter(underlying);
     composer = factory.createSourceWriter(writer);
     resourceFile = resourceBundle;

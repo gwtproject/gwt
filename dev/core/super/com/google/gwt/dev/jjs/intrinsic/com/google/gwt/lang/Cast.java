@@ -21,8 +21,6 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 import javaemul.internal.annotations.HasNoSideEffects;
 
-// CHECKSTYLE_NAMING_OFF: Uses legacy conventions of underscore prefixes.
-
 /**
  * This is a magic class the compiler uses to perform any cast operations that require code.<br />
  *
@@ -30,6 +28,7 @@ import javaemul.internal.annotations.HasNoSideEffects;
  * be used directly by user code. The compiler takes care to record most cast operations in user
  * code so that it can build limited but accurate castableTypeMaps.
  */
+@SuppressWarnings("checkstyle:MethodName")
 final class Cast {
 
   /**
@@ -393,5 +392,3 @@ final class Cast {
         || @JavaScriptObject::class;
   }-*/;
 }
-
-// CHECKSTYLE_NAMING_ON

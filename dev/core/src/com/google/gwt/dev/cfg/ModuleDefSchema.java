@@ -28,7 +28,6 @@ import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.util.Empty;
-import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.xml.AttributeConverter;
 import com.google.gwt.dev.util.xml.Schema;
 
@@ -42,11 +41,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-// CHECKSTYLE_NAMING_OFF
+import javax.lang.model.SourceVersion;
 
 /**
  * Configures a module definition object using XML.
  */
+@SuppressWarnings({"checkstyle:MemberName", "checkstyle:MethodName"})
 public class ModuleDefSchema extends Schema {
 
   private final class BodySchema extends Schema {
@@ -298,7 +298,7 @@ public class ModuleDefSchema extends Schema {
       return null;
     }
 
-    @SuppressWarnings("unused") // called reflectively
+    @SuppressWarnings({"unused", "checkstyle:ParameterName"}) // called reflectively
     protected Schema __define_configuration_property_begin(PropertyName name,
         String is_multi_valued) throws UnableToCompleteException {
       boolean isMultiValued = toPrimitiveBoolean(is_multi_valued);
@@ -1017,7 +1017,7 @@ public class ModuleDefSchema extends Schema {
     public Object convertToArg(Schema schema, int line, String elem,
         String attr, String value) throws UnableToCompleteException {
       // Ensure the value is a valid Java identifier
-      if (!Util.isValidJavaIdent(value)) {
+      if (!SourceVersion.isIdentifier(value)) {
         Messages.LINKER_NAME_INVALID.log(logger, line, value, null);
         throw new UnableToCompleteException();
       }
@@ -1056,7 +1056,7 @@ public class ModuleDefSchema extends Schema {
       String[] tokens = (value + ". ").split("\\.");
       for (int i = 0; i < tokens.length - 1; i++) {
         String token = tokens[i];
-        if (!Util.isValidJavaIdent(token)) {
+        if (!SourceVersion.isIdentifier(token)) {
           Messages.NAME_INVALID.log(logger, line, value, null);
           throw new UnableToCompleteException();
         }
@@ -1208,7 +1208,7 @@ public class ModuleDefSchema extends Schema {
     String[] tokens = (value + ". ").split("\\.");
     for (int i = 0; i < tokens.length - 1; i++) {
       String token = tokens[i];
-      if (!Util.isValidJavaIdent(token)) {
+      if (!SourceVersion.isIdentifier(token)) {
         isValid = false;
       }
     }
@@ -1261,7 +1261,7 @@ public class ModuleDefSchema extends Schema {
         String attr, String value) throws UnableToCompleteException {
 
       String token = value.trim();
-      if (Util.isValidJavaIdent(token)) {
+      if (SourceVersion.isIdentifier(token)) {
         return new PropertyValue(token);
       } else {
         Messages.PROPERTY_VALUE_INVALID.log(logger, line, token, null);
@@ -1290,7 +1290,7 @@ public class ModuleDefSchema extends Schema {
     public Object convertToArg(Schema schema, int line, String elem,
         String attr, String value) throws UnableToCompleteException {
       String token = value.trim();
-      if (Util.isValidJavaIdent(token)) {
+      if (SourceVersion.isIdentifier(token)) {
         return new PropertyFallbackValue(token);
       } else {
         Messages.PROPERTY_VALUE_INVALID.log(logger, line, token, null);
@@ -1332,7 +1332,7 @@ public class ModuleDefSchema extends Schema {
       String tokenNoStar = token.replaceAll(
           Pattern.quote(BindingProperty.GLOB_STAR), "");
       if (BindingProperty.GLOB_STAR.equals(token)
-          || Util.isValidJavaIdent(tokenNoStar)) {
+          || SourceVersion.isIdentifier(tokenNoStar)) {
         return new PropertyValueGlob(token);
       } else {
         Messages.PROPERTY_VALUE_INVALID.log(logger, line, token, null);
@@ -1512,4 +1512,3 @@ public class ModuleDefSchema extends Schema {
     return fn;
   }
 }
-// CHECKSTYLE_NAMING_ON

@@ -31,8 +31,10 @@ import java.util.regex.Pattern;
 
 /**
  * Runs via browsers managed by Selenium.
+ *
+ * @deprecated This class is deprecated as of 2.13, and will be removed in a future release.
  */
-@Deprecated(since = "2.13", forRemoval = true)
+@Deprecated
 public class RunStyleSelenium extends RunStyle {
 
   /**

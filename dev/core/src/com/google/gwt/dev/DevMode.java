@@ -159,21 +159,16 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
       if (options.isNoServer()) {
         return null;
       } else {
-        if (registered.size() == 1) {
-          // Exactly one registered SCL, use it as the default, by fully qualified class name
-          return new String[] {
-              getTag(),
-              registered.values().iterator().next().getClass().getName()
-          };
-        }
         // Use the default SCL
-        return new String[] { getTag(), DEFAULT_SCL };
+        return new String[] { getTag(), "" };
       }
     }
 
     @Override
     public String getPurpose() {
-      return "Specify a different embedded web server to run (must implement ServletContainerLauncher)";
+      return "Specify a different embedded web server to run (must implement " +
+          "ServletContainerLauncher). May be specified by fully qualified class name, or if " +
+          "provided by a ServiceLoader, by the service name.";
     }
 
     @Override
@@ -199,7 +194,20 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
         sclName = arg;
       }
       if (sclName.isEmpty()) {
-        sclName = DEFAULT_SCL;
+        if (registered.size() == 1) {
+          // Exactly one registered SCL, use it as the default, by fully qualified class name
+          sclName = registered.values().iterator().next().getClass().getName();
+        } else {
+          if (!registered.isEmpty()) {
+            System.err.println("Multiple server classes found in the service loader, but none " +
+                "specified on the command line");
+            for (String s : registered.keySet()) {
+              System.err.println("  * " + s + "- " +
+                  registered.get(s).getClass().getName());
+            }
+          }
+          sclName = DEFAULT_SCL;
+        }
       }
       // Try to load the class by name
       Throwable t;

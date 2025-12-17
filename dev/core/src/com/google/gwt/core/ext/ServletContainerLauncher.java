@@ -56,8 +56,9 @@ public abstract class ServletContainerLauncher {
   }
 
   /**
-   * @return a short human-readable name of this servlet container, or null
-   *     if no name should be displayed.
+   * @return a short human-readable name of this servlet container, or null if no name
+   *     should be displayed. Must match {@link #SERVICE_NAME_PATTERN} to be used when
+   *     loading this server by name.
    */
   public String getName() {
     return "Default Web Server";

@@ -185,6 +185,8 @@ import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.hash.Hasher;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
+import jdk.jfr.Description;
+import jdk.jfr.Label;
 import jdk.jfr.Name;
 import org.xml.sax.SAXException;
 
@@ -280,6 +282,8 @@ public final class JavaToJavaScriptCompiler {
 
   @Name("gwt.compiler.Permutation")
   public static class PermutationEvent extends AbstractJfrEvent {
+    @Label("Properties")
+    @Description("All property values set for this permutation")
     String properties;
   }
 

@@ -457,11 +457,12 @@ public abstract class ModuleSpace implements ShellJavaScriptHost {
     }
   }
 
+  @jdk.jfr.Name("gwt.compiler.RebindEvent")
   public static class RebindEvent extends AbstractJfrEvent {
-    @jdk.jfr.Name("Requested Class")
+    @jdk.jfr.Label("Requested Class")
     String requestedClass;
 
-    @jdk.jfr.Name("Result Name")
+    @jdk.jfr.Label("Result Name")
     String resultName;
   }
 

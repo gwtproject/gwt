@@ -19,7 +19,9 @@ import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
 
 import jdk.jfr.Description;
 import jdk.jfr.Label;
+import jdk.jfr.Name;
 
+@Name("gwt.compiler.ModuleDefEvent")
 public class ModuleDefEvent extends AbstractJfrEvent {
   @Label("Phase")
   @Description("The phase of module loading")

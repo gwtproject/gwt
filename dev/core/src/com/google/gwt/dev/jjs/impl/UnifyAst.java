@@ -102,6 +102,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import jdk.jfr.Description;
+import jdk.jfr.Label;
 import jdk.jfr.Name;
 
 /**
@@ -170,8 +171,10 @@ public class UnifyAst {
 
   @Name("gwt.compiler.GwtCreate")
   public static class GwtCreateEvent extends AbstractJfrEvent {
+    @Label("Type Name")
     @Description("GWT.create type literal")
     String typeName;
+    @Label("Caller")
     @Description("The source file that called GWT.create()")
     String caller;
   }

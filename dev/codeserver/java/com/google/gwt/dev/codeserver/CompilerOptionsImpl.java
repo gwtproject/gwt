@@ -17,7 +17,6 @@
 package com.google.gwt.dev.codeserver;
 
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.dev.cfg.Properties;
 import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.js.JsNamespaceOption;
 import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
@@ -80,17 +79,7 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   }
 
   @Override
-  public Properties getFinalProperties() {
-    return null; // handling this in a different way
-  }
-
-  @Override
   public int getFragmentCount() {
-    return -1;
-  }
-
-  @Override
-  public int getFragmentsMerge() {
     return -1;
   }
 

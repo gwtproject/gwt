@@ -162,15 +162,15 @@ public class PrunerTest extends OptimizerTestBase {
         ((JsniMethodBody) result.findMethod("usedNativeMethod").getBody())
             .getJsniFieldRefs().toString());
     assertEquals(
-        "[public final null nullMethod(), public void method2()]",
+        "[public native final null nullMethod(), public void method2()]",
         ((JsniMethodBody) result.findMethod("usedNativeMethod").getBody())
             .getJsniMethodRefs().toString());
 
     assertEquals(
         "interface EntryPoint$UsedInterface {\n" +
-        "  final static int usedConstant\n\n" +
+        "  final static int usedConstant;\n\n" +
         "  private static final void $clinit(){\n" +
-        "    final static int usedConstant = 3;\n" +
+        "    usedConstant = 3;\n" +
         "  }\n" +
         "\n" +
         "}",

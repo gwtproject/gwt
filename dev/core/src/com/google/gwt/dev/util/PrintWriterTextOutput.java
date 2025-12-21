@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Copyright 2025 GWT Project Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,18 +13,24 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.dev;
+package com.google.gwt.dev.util;
+
+import java.io.PrintWriter;
 
 /**
- * Legacy ApplicationCreator that will let users know where the new class can be
- * found.
+ * TextOutput implementation that writes to a provided PrintWriter.
  */
-public final class ApplicationCreator {
+public class PrintWriterTextOutput extends AbstractTextOutput implements AutoCloseable {
+  private final PrintWriter out;
 
-  public static void main(String[] args) {
-    System.err.println("This application has moved!");
-    System.err.println("Please run com.google.gwt.user.tools.ApplicationCreator in gwt-user.jar");
-    System.exit(1);
+  public PrintWriterTextOutput(PrintWriter out, boolean compact) {
+    super(compact);
+    this.out = out;
+    setPrintWriter(out);
   }
 
+  @Override
+  public void close() throws Exception {
+    out.close();
+  }
 }

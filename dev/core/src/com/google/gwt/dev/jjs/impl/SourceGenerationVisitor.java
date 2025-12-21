@@ -18,11 +18,13 @@ package com.google.gwt.dev.jjs.impl;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
+import com.google.gwt.dev.jjs.ast.JEnumType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.ast.JRecordType;
 import com.google.gwt.dev.util.TextOutput;
 
 /**
@@ -30,16 +32,9 @@ import com.google.gwt.dev.util.TextOutput;
  * relatively short toString() results, for easy viewing in a debugger. This
  * subclass delves into the bodies of classes, interfaces, and methods to
  * produce the whole source tree.
- *
- * The goal is not to generate the input source tree. Rather, the goal is to
- * produce a set of classes that can be pasted into an enclosing class and
- * compiled with a standard Java compiler. In practice, there are cases that
- * require hand-editing to actually get a full compilation, due to Java's
- * built-in reliance on particular built-in types.
- *
- * Known to be broken: Our generated String, Class, and Throwable are not
- * compatible with the real ones, which breaks string literals, class literals,
- * try/catch/throw, and overrides of Object methods.
+ * <p>
+ * The goal is not to generate the input source tree, or even properly compilable sources.
+ * Instead, this provides a way to log the AST in a human-readable way.
  */
 public class SourceGenerationVisitor extends ToStringGenerationVisitor {
 
@@ -51,7 +46,14 @@ public class SourceGenerationVisitor extends ToStringGenerationVisitor {
   public boolean visit(JClassType x, Context ctx) {
     printAbstractFlag(x);
     printFinalFlag(x);
-    print(CHARS_CLASS);
+    if (x instanceof JEnumType) {
+      print(CHARS_ENUM);
+    } else if (x instanceof JRecordType) {
+      print(CHARS_RECORD);
+    } else {
+      print(CHARS_CLASS);
+    }
+    printTypeName(x);
     space();
     if (x.getSuperClass() != null) {
       print(CHARS_EXTENDS);
@@ -71,26 +73,40 @@ public class SourceGenerationVisitor extends ToStringGenerationVisitor {
     }
     openBlock();
 
-    for (JField field : x.getFields()) {
-      accept(field);
-      newline();
-      newline();
-    }
-    for (JMethod method : x.getMethods()) {
-      if (JProgram.isClinit(method)) {
-        // Suppress empty clinit.
-        JMethodBody body = (JMethodBody) method.getBody();
-        if (body.getBlock().getStatements().isEmpty()) {
-          continue;
-        }
-      }
-      accept(method);
-      newline();
-      newline();
-    }
+    return true;
+  }
 
+  @Override
+  public void endVisit(JDeclaredType x, Context ctx) {
     closeBlock();
-    return false;
+
+    newline();
+    newline();
+  }
+
+  @Override
+  public void endVisit(JField x, Context ctx) {
+    semi();
+    newline();
+    newline();
+  }
+
+  @Override
+  public boolean visit(JMethod x, Context ctx) {
+    if (JProgram.isClinit(x)) {
+      // Suppress empty clinit.
+      JMethodBody body = (JMethodBody) x.getBody();
+      if (body.getBlock().getStatements().isEmpty()) {
+        return false;
+      }
+    }
+    return super.visit(x, ctx);
+  }
+
+  @Override
+  public void endVisit(JMethod x, Context ctx) {
+    newline();
+    newline();
   }
 
   @Override
@@ -112,26 +128,7 @@ public class SourceGenerationVisitor extends ToStringGenerationVisitor {
 
     openBlock();
 
-    for (JField field : x.getFields()) {
-      accept(field);
-      newline();
-      newline();
-    }
-    for (JMethod method : x.getMethods()) {
-      if (JProgram.isClinit(method)) {
-        // Suppress empty clinit.
-        JMethodBody body = (JMethodBody) method.getBody();
-        if (body.getBlock().getStatements().isEmpty()) {
-          continue;
-        }
-      }
-      accept(method);
-      newline();
-      newline();
-    }
-
-    closeBlock();
-    return false;
+    return true;
   }
 
   @Override
@@ -139,8 +136,6 @@ public class SourceGenerationVisitor extends ToStringGenerationVisitor {
     for (int i = 0; i < x.getDeclaredTypes().size(); ++i) {
       JDeclaredType type = x.getDeclaredTypes().get(i);
       accept(type);
-      newline();
-      newline();
     }
     return false;
   }

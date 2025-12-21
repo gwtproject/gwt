@@ -1002,6 +1002,8 @@ public final class JavaToJavaScriptCompiler {
         stats.endNodeCount(nodeCount);
       }
 
+      AstDumper.maybeDumpAST(jsProgram);
+
       float nodeChangeRate = mods / (float) lastNodeCount;
       float sizeChangeRate = (lastNodeCount - nodeCount) / (float) lastNodeCount;
       if (nodeChangeRate <= minChangeRate && sizeChangeRate <= minChangeRate) {

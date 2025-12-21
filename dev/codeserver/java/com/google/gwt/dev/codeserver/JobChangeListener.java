@@ -17,8 +17,6 @@ package com.google.gwt.dev.codeserver;
 
 /**
  * A callback for receiving events when a GWT compile job changes status.
- *
- * This interface replaces {@link RecompileListener}.
  */
 public interface JobChangeListener {
   void onJobChange(JobEvent event);

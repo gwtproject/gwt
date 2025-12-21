@@ -67,7 +67,6 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
     setCompilerMetricsEnabled(other.isCompilerMetricsEnabled());
     setEnableAssertions(other.isEnableAssertions());
     setFragmentCount(other.getFragmentCount());
-    setFragmentsMerge(other.getFragmentsMerge());
     setInlineLiteralParameters(other.shouldInlineLiteralParameters());
     setOptimizationLevel(other.getOptimizationLevel());
     setOptimizeDataflow(other.shouldOptimizeDataflow());
@@ -92,11 +91,6 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   @Override
   public int getFragmentCount() {
     return fragmentCount;
-  }
-
-  @Override
-  public int getFragmentsMerge() {
-    return -1;
   }
 
   @Override
@@ -205,10 +199,6 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   @Override
   public void setFragmentCount(int numFragments) {
     this.fragmentCount = numFragments;
-  }
-
-  @Override
-  public void setFragmentsMerge(int numFragments) {
   }
 
   @Override

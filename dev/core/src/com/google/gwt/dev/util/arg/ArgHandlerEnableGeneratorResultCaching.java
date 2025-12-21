@@ -15,48 +15,19 @@
  */
 package com.google.gwt.dev.util.arg;
 
-import com.google.gwt.util.tools.ArgHandlerFlag;
+import com.google.gwt.util.tools.ArgHandlerNoopDeprecatedFlag;
 
 /**
- * Caches results of generators with stable output.
- *
- * Note: This is no longer needed since generator result caching is now enabled by default.
- * It's left here for an interim period, so that uses of the flag can be removed.
- * TODO(jbrosenberg): remove this after interim period.
+ * Unused, deprecated for removal.
  */
-public class ArgHandlerEnableGeneratorResultCaching extends ArgHandlerFlag {
-
+@Deprecated
+public class ArgHandlerEnableGeneratorResultCaching extends ArgHandlerNoopDeprecatedFlag {
   public ArgHandlerEnableGeneratorResultCaching() {
-    addTagValue("-XenableGeneratorResultCaching", true);
-  }
-
-  @Override
-  public String getPurposeSnippet() {
-    return "Cache results of generators with stable output.";
-  }
-
-  @Override
-  public String getLabel() {
-    return "cacheGeneratorResults";
-  }
-
-  @Override
-  public boolean isUndocumented() {
-    return true;
-  }
-
-  @Override
-  public boolean setFlag(boolean value) {
-    return true;
+    super(0, "enableGeneratorResultCaching");
   }
 
   @Override
   public boolean isExperimental() {
-    return true;
-  }
-
-  @Override
-  public boolean getDefaultValue() {
     return true;
   }
 }

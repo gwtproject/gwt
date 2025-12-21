@@ -16,14 +16,12 @@
 
 package com.google.doctool.custom;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UncheckedIOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -65,16 +63,23 @@ import jdk.javadoc.doclet.Reporter;
  */
 public class JavaEmulSummaryDoclet implements Doclet {
 
-  public static final String OPT_OUTFILE = "-outfile";
+  public static final String OPT_OUT_FILE = "-outFile";
+  public static final String OPT_MISSING_FILE = "-missingFile";
+  public static final String OPT_TRIAGE_FILE = "-triageFile";
+  public static final String OPT_MISSING_PROPERTIES_DIR = "-missingProperties";
   // should be aligned with the latest version that's tested by CI
   private static final int MAX_JRE_VERSION = 22;
+  // Lowest version for which missing method detection is reliable.
+  // The tool can run with older versions, but will ignore missing methods.
+  private static final int MIN_JRE_VERSION = 17;
   private static final int CURRENT_JRE_VERSION = Runtime.version().feature();
   private static final String JAVADOC_URL = "https://docs.oracle.com/en/java/javase/"
       + CURRENT_JRE_VERSION + "/docs/api/";
   private static final List<String> DEPRECATED = List.of(
       "java.lang.Character#isJavaLetter(char)",
       "java.lang.Character#isJavaLetterOrDigit(char)",
-      "java.lang.String#getBytes(int, int, byte[], int)"
+      "java.lang.String#getBytes(int, int, byte[], int)",
+      "java.lang.Class#isUnnamedClass()" // exists in 21 as a preview, removed
   );
   private enum Status {
     OPEN("\u23F3", "Planned to be implemented, patches or reviews welcome"),
@@ -91,6 +96,9 @@ public class JavaEmulSummaryDoclet implements Doclet {
 
   private Reporter reporter;
   private String outputFile;
+  private String missingFile;
+  private String triageFile;
+  private String missingPropertiesDir;
 
   private final Map<String, String> issueToSignatures = new HashMap<>();
   private final Map<String, String> issueToTitle = new HashMap<>();
@@ -99,32 +107,9 @@ public class JavaEmulSummaryDoclet implements Doclet {
 
   @Override
   public boolean run(DocletEnvironment env) {
-    final Properties properties = new Properties();
-    Path missingDir = Path.of("build_tools/doctool/src/com/google/doctool/custom/missing");
-    try (Stream<Path> str = Files.list(missingDir)) {
-      str.filter(file -> !file.getFileName().toString().startsWith("triage")).forEach(file -> {
-        try {
-          properties.clear();
-          properties.load(Files.newInputStream(file));
-          String issue = file.getFileName().toString().replaceAll("gh|\\.properties", "");
-          issueToSignatures.put(issue, (String) properties.get("members"));
-          issueToTitle.put(issue, (String) properties.get("title"));
-          issueStatus.put(issue, (String) properties.getOrDefault("status", "open"));
-        } catch (IOException ex) {
-          throw new UncheckedIOException(ex);
-        }
-      });
-    } catch (IOException ex) {
-      throw new UncheckedIOException(ex);
-    }
-    File outFilePresent = new File(outputFile);
-    File outFileMissing = new File(outputFile.replace(".html", "-missing.html"));
-    outFilePresent.getParentFile().mkdirs();
-    try (FileWriter fwPresent = new FileWriter(outFilePresent, StandardCharsets.UTF_8);
-      PrintWriter pwPresent = new PrintWriter(fwPresent, true);
-      FileWriter fwMissing = new FileWriter(outFileMissing, StandardCharsets.UTF_8);
-      PrintWriter pwMissing = new PrintWriter(fwMissing, true)) {
-
+    loadMissingMemberLists();
+    try (PrintWriter pwPresent = createPrintWriter(outputFile);
+         PrintWriter pwMissing = createPrintWriter(missingFile)) {
       pwPresent.println("<ol class=\"toc\" id=\"pageToc\">");
       getSpecifiedPackages(env)
           .forEach(pack ->
@@ -142,49 +127,67 @@ public class JavaEmulSummaryDoclet implements Doclet {
             .filter(m -> m.getPackages().contains(pack.getQualifiedName().toString()))
             .findFirst();
 
-        pwPresent.format("<h2 id=\"Package_%s\">Package %s</h2>\n",
+        pwPresent.format("<h2 id=\"Package_%s\">Package %s</h2>%n<dl>%n",
             pack.getQualifiedName().toString().replace('.', '_'),
             pack.getQualifiedName().toString());
-        pwMissing.format("<h2 id=\"Package_%s\">Package %s</h2>\n",
-          pack.getQualifiedName().toString().replace('.', '_'),
-          pack.getQualifiedName().toString());
-        pwPresent.println("<dl>");
+        pwMissing.format("<h2 id=\"Package_%s\">Package %s</h2>%n<dl>%n",
+            pack.getQualifiedName().toString().replace('.', '_'),
+            pack.getQualifiedName().toString());
 
         String packURL = JAVADOC_URL
             + matchingModuleName.map(m -> m.getName() + "/").orElse("")
             + pack.getQualifiedName().toString().replace(".", "/") + "/";
 
-        Iterator<? extends Element> classesIterator = pack.getEnclosedElements()
+        pack.getEnclosedElements()
             .stream()
             .filter(element -> env.isSelected(element) && env.isIncluded(element))
             .filter(element -> element.getModifiers().contains(Modifier.PUBLIC))
             .sorted(Comparator.comparing((Element o) -> o.getSimpleName()
                 .toString()))
-            .iterator();
-
-        while (classesIterator.hasNext()) {
-          Element cls = classesIterator.next();
-          // Each class links to Oracle's main JavaDoc
-          emitClassDocs(env, pwPresent, pwMissing, packURL, cls,
-              pack.getQualifiedName().toString() + ".", allClasses);
-          if (classesIterator.hasNext()) {
-            pwPresent.print("\n");
-          }
-        }
+            .forEach(cls -> emitClassDocs(env, pwPresent, pwMissing,
+                packURL, cls, pack.getQualifiedName().toString() + ".", allClasses));
 
         pwPresent.println("</dl>\n");
+        pwMissing.println("</dl>\n");
       });
-      if (!triage.isEmpty()) {
-        System.out.println("Missing methods found, check triage.properties " +
-            "and split it into gh*.properties files");
-        Files.writeString(missingDir.resolve("triage.properties"),
+      if (!triage.isEmpty() && CURRENT_JRE_VERSION >= MIN_JRE_VERSION) {
+        Files.writeString(Path.of(triageFile),
             "members=" + String.join("\\\n", triage));
+        throw new IllegalStateException("Missing methods found, check triage.properties " +
+            "and split it into gh*.properties files");
       }
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
 
     return true;
+  }
+
+  private PrintWriter createPrintWriter(String filePath) throws IOException {
+    Path path = Path.of(filePath);
+    Files.createDirectories(path.getParent());
+    OutputStream fwPresent = Files.newOutputStream(path);
+    return new PrintWriter(fwPresent, true);
+  }
+
+  private void loadMissingMemberLists() {
+    final Properties properties = new Properties();
+    try (Stream<Path> str = Files.list(Path.of(missingPropertiesDir))) {
+      str.filter(file -> !file.getFileName().toString().startsWith("triage")).forEach(file -> {
+        try {
+          properties.clear();
+          properties.load(Files.newInputStream(file));
+          String issue = file.getFileName().toString().replaceAll("gh|\\.properties", "");
+          issueToSignatures.put(issue, (String) properties.get("members"));
+          issueToTitle.put(issue, (String) properties.get("title"));
+          issueStatus.put(issue, (String) properties.getOrDefault("status", "open"));
+        } catch (IOException ex) {
+          throw new UncheckedIOException(ex);
+        }
+      });
+    } catch (IOException ex) {
+      throw new UncheckedIOException(ex);
+    }
   }
 
   private Stream<String> withInnerClasses(Element clazz, PackageElement pack) {
@@ -195,10 +198,10 @@ public class JavaEmulSummaryDoclet implements Doclet {
           + "." + clazz.getSimpleName() + "$" + inner.getSimpleName()));
   }
 
-  private void emitClassDocs(DocletEnvironment env, PrintWriter pwpPresent,
+  private void emitClassDocs(DocletEnvironment env, PrintWriter pwPresent,
                  PrintWriter pwMissing, String packURL, Element cls,
                  String pack, Set<String> allClasses) {
-    pwpPresent.format("  <dt><a href=\"%s%s.html\">%s</a></dt>\n", packURL,
+    pwPresent.format("%n  <dt><a href=\"%s%s.html\">%s</a></dt>\n", packURL,
         qualifiedSimpleName(cls), qualifiedSimpleName(cls));
     if ("JsException".equals(cls.getSimpleName().toString())) {
       return;
@@ -212,7 +215,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
         .collect(Collectors.toList());
 
     if (!fields.isEmpty()) {
-      pwpPresent.format("  <dd style='margin-bottom: 0.5em;'><strong>Fields:</strong> %s</dd>\n",
+      pwPresent.format("  <dd style='margin-bottom: 0.5em;'><strong>Fields:</strong> %s</dd>\n",
           String.join(", ", fields));
     }
 
@@ -230,12 +233,12 @@ public class JavaEmulSummaryDoclet implements Doclet {
     List<String> erasedMethods = getMethodNames(cls, t -> erasedParamName(env, t));
 
     if (!constructors.isEmpty()) {
-      pwpPresent.format("  <dd><strong>Constructors:</strong> %s</dd>\n",
+      pwPresent.format("  <dd><strong>Constructors:</strong> %s</dd>\n",
         createMemberList(constructors));
     }
     // Print out all constructors and methods
     if (!methods.isEmpty()) {
-      pwpPresent.format("  <dd><strong>Methods:</strong> %s</dd>\n",
+      pwPresent.format("  <dd><strong>Methods:</strong> %s</dd>\n",
         createMemberList(methods));
     }
     String[] parts = (pack + cls.getSimpleName()).split("\\$");
@@ -316,15 +319,15 @@ public class JavaEmulSummaryDoclet implements Doclet {
         .sorted(Comparator.comparing((Element o) -> o.getSimpleName().toString()))
         .iterator();
     if (classesIterator.hasNext()) {
-      pwpPresent.print("\n");
+      pwPresent.print("\n");
     }
     while (classesIterator.hasNext()) {
       Element innerCls = classesIterator.next();
       // Each class links to Sun's main JavaDoc
-      emitClassDocs(env, pwpPresent, pwMissing, packURL, innerCls,
+      emitClassDocs(env, pwPresent, pwMissing, packURL, innerCls,
         pack + cls.getSimpleName() + "$", allClasses);
       if (classesIterator.hasNext()) {
-        pwpPresent.print("\n");
+        pwPresent.print("\n");
       }
     }
   }
@@ -388,16 +391,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
   }
 
   private String createMemberList(Collection<String> members) {
-    StringBuilder sb = new StringBuilder();
-    Iterator<String> iter = members.iterator();
-    while (iter.hasNext()) {
-      String member = iter.next();
-      sb.append(member);
-      if (iter.hasNext()) {
-        sb.append(", ");
-      }
-    }
-    return sb.toString();
+    return String.join(", ", members);
   }
 
   private String qualifiedSimpleName(Element element) {
@@ -475,7 +469,8 @@ public class JavaEmulSummaryDoclet implements Doclet {
 
           @Override
           public List<String> getNames() {
-            return List.of(OPT_OUTFILE);
+            return List.of(OPT_OUT_FILE, OPT_MISSING_FILE, OPT_TRIAGE_FILE,
+                OPT_MISSING_PROPERTIES_DIR);
           }
 
           @Override
@@ -487,14 +482,28 @@ public class JavaEmulSummaryDoclet implements Doclet {
           public boolean process(String opt, List<String> arguments) {
             if (arguments.isEmpty()) {
               reporter.print(Diagnostic.Kind.ERROR,
-                  "You must specify an output filepath with "
-                      + OPT_OUTFILE);
+                  "Argument must be a path: " + opt);
               return false;
             }
+            String value = arguments.get(0);
             reporter.print(Diagnostic.Kind.NOTE,
-                "JRE emulation summary Doclet Option : "
-                + arguments.get(0));
-            outputFile = arguments.get(0);
+              "JRE emulation summary Doclet Option " + opt + ":" + value);
+            switch (opt) {
+              case OPT_OUT_FILE:
+                outputFile = value;
+                break;
+              case OPT_MISSING_FILE:
+                missingFile = value;
+                break;
+              case OPT_TRIAGE_FILE:
+                triageFile = value;
+                break;
+              case OPT_MISSING_PROPERTIES_DIR:
+                missingPropertiesDir = value;
+                break;
+              default:
+                throw new IllegalArgumentException("Invalid option " + opt);
+            }
             return true;
           }
         }

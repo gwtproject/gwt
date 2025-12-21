@@ -22,7 +22,6 @@ jobs:
         with:
           repository: 'gwtproject/tools'                      
           path: 'tools'
-          fetch-depth: 0                   
       - name: Set up JDK ${{ matrix.java-version }}
         # GWT presently requires Java 11+ to build
         uses: actions/setup-java@v5

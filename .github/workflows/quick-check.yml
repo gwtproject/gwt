@@ -20,8 +20,7 @@ jobs:
       - name: Checkout GWT tools into a sibling directory
         uses: actions/checkout@v6
         with:
-          repository: 'Lonzak/gwt-tools'   # linked other PR
-          ref: 'main'                      
+          repository: 'gwtproject/tools'                      
           path: 'tools'
           fetch-depth: 0                   
       - name: Set up JDK ${{ matrix.java-version }}

@@ -260,11 +260,13 @@ public class ResourceOracleImpl extends AbstractResourceOracle {
 
           // In case of collision.
           if (resourceDescriptionsByPath.containsKey(resourcePath)) {
-            ResourceDescription oldResourceDescription = resourceDescriptionsByPath.get(resourcePath);
+            ResourceDescription oldResourceDescription =
+                resourceDescriptionsByPath.get(resourcePath);
             if (resourceDescription.isPreferredOver(oldResourceDescription)) {
               resourceDescriptionsByPath.put(resourcePath, resourceDescription);
             } else {
-              Messages.IGNORING_SHADOWED_RESOURCE.log(branchForClassPathEntry, resourcePath, null);
+              Messages.IGNORING_SHADOWED_RESOURCE
+                  .log(branchForClassPathEntry, resourcePath, null);
             }
           } else {
             resourceDescriptionsByPath.put(resourcePath, resourceDescription);

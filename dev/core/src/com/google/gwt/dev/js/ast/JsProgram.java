@@ -21,6 +21,7 @@ import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
 
 import java.util.Arrays;
 import java.util.Collection;
+
 import jdk.jfr.Label;
 import jdk.jfr.Name;
 

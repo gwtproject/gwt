@@ -273,7 +273,8 @@ public class ResolveRuntimeTypeReferences {
 
       assignTypes(runtimeTypeCollector.typesRequiringRuntimeIds);
 
-      ReplaceRuntimeTypeReferencesVisitor replaceTypeIdsVisitor = new ReplaceRuntimeTypeReferencesVisitor();
+      ReplaceRuntimeTypeReferencesVisitor replaceTypeIdsVisitor =
+          new ReplaceRuntimeTypeReferencesVisitor();
       replaceTypeIdsVisitor.accept(program);
       replaceTypeIdsVisitor.accept(program.getTypeClassLiteralHolder());
       // TODO(rluble): Improve the code so that things are not scattered all over; here cast maps

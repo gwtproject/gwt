@@ -185,9 +185,6 @@ import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.hash.Hasher;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 
-import jdk.jfr.Description;
-import jdk.jfr.Label;
-import jdk.jfr.Name;
 import org.xml.sax.SAXException;
 
 import java.io.BufferedInputStream;
@@ -211,6 +208,10 @@ import java.util.TreeMap;
 import java.util.zip.GZIPInputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
+
+import jdk.jfr.Description;
+import jdk.jfr.Label;
+import jdk.jfr.Name;
 
 /**
  * A base for classes that compile Java <code>JProgram</code> representations into corresponding Js

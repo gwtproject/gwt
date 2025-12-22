@@ -31,7 +31,7 @@ public class SimpleEvent implements AutoCloseable {
     @Label("Name")
     public final String name;
 
-    public SimpleEventInternal(String name) {
+    SimpleEventInternal(String name) {
       this.name = name;
     }
   }

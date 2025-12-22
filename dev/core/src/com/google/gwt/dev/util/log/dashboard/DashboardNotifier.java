@@ -21,6 +21,8 @@ import com.google.gwt.dev.shell.DevModeSession;
 /**
  * Sends information to a dashboard service. The dashboard service collects
  * information from GWT runtime and compiler instrumentation.
+ *
+ * @deprecated Use JFR streaming events instead, or raise an issue to request a new API for this.
  */
 @Deprecated
 public interface DashboardNotifier {

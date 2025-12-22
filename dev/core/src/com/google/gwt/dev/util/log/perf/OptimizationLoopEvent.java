@@ -27,8 +27,8 @@ public class OptimizationLoopEvent extends AbstractOptimizationEvent {
   final int optimizationIteration;
 
   @Label("Size change rate")
-  @Description("Rate of change of the AST size (number of nodes) per iteration of the optimization " +
-      "loop. Only measured for the whole loop, too expensive to measure at each step.")
+  @Description("Rate of change of the AST size (number of nodes) per iteration of the " +
+      "optimization loop. Only measured for the whole loop, too expensive to measure at each step.")
   float sizeChangeRate;
 
   @Label("Node modified rate")

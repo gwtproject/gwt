@@ -1000,6 +1000,8 @@ public final class JavaToJavaScriptCompiler {
       // Save the stats to print out after optimizers finish.
       allOptimizerStats.add(stats);
 
+      AstDumper.maybeDumpAST(jsProgram);
+
       optimizeJsEvent.end();
       if ((optimizationLevel < OptionOptimize.OPTIMIZE_LEVEL_MAX && counter > optimizationLevel)
           || !stats.didChange()) {

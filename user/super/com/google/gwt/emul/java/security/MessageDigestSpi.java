@@ -36,6 +36,10 @@ public abstract class MessageDigestSpi {
     System.arraycopy(digest, 0, buf, offset, digest.length);
     return digest.length;
   }
+
+  public Object clone() throws CloneNotSupportedException {
+    throw new CloneNotSupportedException();
+  }
   
   protected int engineGetDigestLength() {
     return 0;

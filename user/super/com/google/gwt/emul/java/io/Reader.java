@@ -99,4 +99,31 @@ public abstract class Reader {
     }
     return n - remaining;
   }
+
+  public void transferTo(Writer writer) throws IOException {
+    char[] buffer = new char[1024];
+    int read;
+    while ((read = read(buffer)) > 0) {
+      writer.write(buffer, 0, read);
+    }
+  }
+
+  public static Reader nullReader() {
+    return new Reader() {
+      private boolean closed;
+
+      @Override
+      public int read(char[] cbuf, int off, int len) throws IOException {
+        if (closed) {
+          throw new IOException("Already closed");
+        }
+        return 0;
+      }
+
+      @Override
+      public void close() throws IOException {
+        closed = true;
+      }
+    };
+  }
 }

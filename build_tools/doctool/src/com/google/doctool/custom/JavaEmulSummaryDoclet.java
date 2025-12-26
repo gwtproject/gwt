@@ -100,6 +100,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
   private String triageFile;
   private String missingPropertiesDir;
 
+  // the key in the following maps is the full URL of an issue
   private final Map<String, String> issueToSignatures = new HashMap<>();
   private final Map<String, String> issueToTitle = new HashMap<>();
   private final Map<String, String> issueStatus = new HashMap<>();
@@ -177,7 +178,8 @@ public class JavaEmulSummaryDoclet implements Doclet {
         try {
           properties.clear();
           properties.load(Files.newInputStream(file));
-          String issue = file.getFileName().toString().replaceAll("gh|\\.properties", "");
+          String issue = (String) properties.computeIfAbsent(
+              "link", ignore -> extractIssueLink(file.getFileName().toString()));
           issueToSignatures.put(issue, (String) properties.get("members"));
           issueToTitle.put(issue, (String) properties.get("title"));
           issueStatus.put(issue, (String) properties.getOrDefault("status", "open"));
@@ -188,6 +190,10 @@ public class JavaEmulSummaryDoclet implements Doclet {
     } catch (IOException ex) {
       throw new UncheckedIOException(ex);
     }
+  }
+
+  private String extractIssueLink(String filename) {
+    return "https://github.com/gwtproject/gwt/issues/" + filename.replaceAll("gh|\\.properties", "");
   }
 
   private Stream<String> withInnerClasses(Element clazz, PackageElement pack) {
@@ -304,7 +310,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
       pwMissing.format("%n  <dt><a href=\"%s%s.html\">%s</a></dt>%n", packURL,
         qualifiedSimpleName(cls), qualifiedSimpleName(cls));
       for (Map.Entry<String, List<String>> entry: missingMemberGroups.entrySet()) {
-        pwMissing.format("  <dd><strong><a href=\"https://github.com/gwtproject/gwt/issues/%s\">%s</a>:</strong> %s</dd>%n",
+        pwMissing.format("  <dd><strong><a href=\"%s\">%s</a>:</strong> %s</dd>%n",
           entry.getKey(),
           getIssueTitle(entry.getKey()),
           createMemberList(entry.getValue()));
@@ -338,7 +344,8 @@ public class JavaEmulSummaryDoclet implements Doclet {
     String title = issueToTitle.get(key);
     Status status = Status.valueOf(issueStatus.get(key).toUpperCase(Locale.ROOT));
     return "<span class=\"issueStatus\" aria-label=\"" + status.title + "\">" + status.icon
-        + "</span>#" + key + (title == null ? "" : " (" + title + ")");
+        + "</span>#" + key.replaceFirst("^.*/(\\d+)$", "$1")
+        + (title == null ? "" : " (" + title + ")");
   }
 
   private boolean isFieldFromSuper(Field field, Class<?> c) {

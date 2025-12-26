@@ -337,7 +337,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
     }
     String title = issueToTitle.get(key);
     Status status = Status.valueOf(issueStatus.get(key).toUpperCase(Locale.ROOT));
-    return "<span title=\"" + status.title + "\">" + status.icon
+    return "<span class=\"issueStatus\" aria-label=\"" + status.title + "\">" + status.icon
         + "</span>#" + key + (title == null ? "" : " (" + title + ")");
   }
 

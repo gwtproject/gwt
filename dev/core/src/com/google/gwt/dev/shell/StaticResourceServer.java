@@ -24,13 +24,10 @@ import com.google.gwt.dev.shell.jetty.JettyLauncherUtils;
 import com.google.gwt.dev.shell.jetty.JettyTreeLogger;
 import com.google.gwt.dev.shell.jetty.SslConfiguration;
 
-import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
-import org.eclipse.jetty.servlet.ErrorPageErrorHandler;
-import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.util.log.Log;
-import org.eclipse.jetty.webapp.WebAppContext;
 
 import java.io.File;
 import java.util.Optional;
@@ -105,12 +102,9 @@ public class StaticResourceServer extends ServletContainerLauncher {
     JettyLauncherUtils.setupConnector(connector, bindAddress, port);
     server.addConnector(connector);
 
-    WebAppContext webAppContext = new WebAppContext(null, "/", null, null, null,
-            new ErrorPageErrorHandler(), ServletContextHandler.NO_SECURITY);
-    webAppContext.setWar(appRootDir.getAbsolutePath());
-    webAppContext.setSecurityHandler(new ConstraintSecurityHandler());
-
-    server.setHandler(webAppContext);
+    ResourceHandler resourceHander = new ResourceHandler();
+    resourceHander.setResourceBase(appRootDir.getAbsolutePath());
+    server.setHandler(resourceHander);
 
     server.start();
     server.setStopAtShutdown(true);

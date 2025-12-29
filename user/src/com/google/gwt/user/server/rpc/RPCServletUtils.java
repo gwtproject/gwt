@@ -15,6 +15,8 @@
  */
 package com.google.gwt.user.server.rpc;
 
+import com.google.gwt.user.server.rpc.logging.RpcLogManager;
+import com.google.gwt.user.server.rpc.logging.RpcLogger;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -36,6 +38,8 @@ import javax.servlet.http.HttpServletResponse;
  * the RPC system.
  */
 public class RPCServletUtils {
+
+  private static final RpcLogger logger = RpcLogManager.getLogger(RPCServletUtils.class);
 
   public static final String CHARSET_UTF8_NAME = "UTF-8";
 
@@ -62,9 +66,11 @@ public class RPCServletUtils {
 
   private static final String CONTENT_ENCODING_GZIP = "gzip";
 
-  private static final String CONTENT_TYPE_APPLICATION_JSON_UTF8 = "application/json; charset=utf-8";
+  private static final String CONTENT_TYPE_APPLICATION_JSON_UTF8 =
+      "application/json; charset=utf-8";
 
-  private static final String GENERIC_FAILURE_MSG = "The call failed on the server; see server log for details";
+  private static final String GENERIC_FAILURE_MSG =
+      "The call failed on the server; see server log for details";
 
   private static final String GWT_RPC_CONTENT_TYPE = "text/x-gwt-rpc";
 
@@ -324,7 +330,6 @@ public class RPCServletUtils {
    * <code>gzipResponse</code> is <code>true</code>, the response content will
    * be gzipped prior to being written into the response.
    *
-   * @param servletContext servlet context for this response
    * @param response response instance
    * @param responseContent a string containing the response content
    * @param gzipResponse if <code>true</code> the response content will be gzip
@@ -363,7 +368,7 @@ public class RPCServletUtils {
       }
 
       if (caught != null) {
-        servletContext.log("Unable to compress response", caught);
+        logger.error("Unable to compress response", caught, servletContext);
         response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         return;
       }
@@ -382,14 +387,13 @@ public class RPCServletUtils {
    * Called when the servlet itself has a problem, rather than the invoked
    * third-party method. It writes a simple 500 message back to the client.
    *
-   * @param servletContext
    * @param response
    * @param failure
    */
   public static void writeResponseForUnexpectedFailure(
       ServletContext servletContext, HttpServletResponse response,
       Throwable failure) {
-    servletContext.log("Exception while dispatching incoming RPC call", failure);
+    logger.error("Exception while dispatching incoming RPC call", failure, servletContext);
 
     // Send GENERIC_FAILURE_MSG with 500 status.
     //
@@ -403,9 +407,9 @@ public class RPCServletUtils {
         response.getWriter().write(GENERIC_FAILURE_MSG);
       }
     } catch (IOException ex) {
-      servletContext.log(
+      logger.error(
           "respondWithUnexpectedFailure failed while sending the previous failure to the client",
-          ex);
+          ex, servletContext);
     }
   }
 
@@ -431,7 +435,8 @@ public class RPCServletUtils {
        * properly parsed character encoding string if we decide to make this
        * change.
        */
-      if (characterEncoding.toLowerCase(Locale.ROOT).contains(expectedCharSet.toLowerCase(Locale.ROOT))) {
+      if (characterEncoding.toLowerCase(Locale.ROOT)
+          .contains(expectedCharSet.toLowerCase(Locale.ROOT))) {
         encodingOkay = true;
       }
     }

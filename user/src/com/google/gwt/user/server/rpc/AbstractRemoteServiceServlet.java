@@ -41,9 +41,8 @@ public abstract class AbstractRemoteServiceServlet extends HttpServlet {
    * Standard HttpServlet method: handle the POST. Delegates to
    * {@link #processPost(HttpServletRequest, HttpServletResponse)}.
    * 
-   * This doPost method swallows ALL exceptions, logs them in the
-   * ServletContext, and returns a GENERIC_FAILURE_MSG response with status code
-   * 500.
+   * This doPost method swallows ALL exceptions, logs them,
+   * and returns a GENERIC_FAILURE_MSG response with status code 500.
    */
   @Override
   public final void doPost(HttpServletRequest request,

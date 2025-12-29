@@ -22,6 +22,8 @@ import static com.google.gwt.user.server.rpc.SerializationPolicyLoader.ENABLE_GW
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.gwt.user.client.rpc.RpcTokenException;
 import com.google.gwt.user.client.rpc.SerializationException;
+import com.google.gwt.user.server.rpc.logging.RpcLogManager;
+import com.google.gwt.user.server.rpc.logging.RpcLogger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,6 +47,8 @@ import javax.servlet.http.HttpServletResponse;
 public class RemoteServiceServlet extends AbstractRemoteServiceServlet
     implements SerializationPolicyProvider {
 
+  private static final RpcLogger logger = RpcLogManager.getLogger(RemoteServiceServlet.class);
+
   /**
    * Loads a serialization policy stored as a servlet resource in the same
    * ServletContext as this servlet. Returns null if not found.
@@ -62,7 +66,7 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
         modulePath = new URL(moduleBaseURL).getPath();
       } catch (MalformedURLException ex) {
         // log the information, we will default
-        servlet.log("Malformed moduleBaseURL: " + moduleBaseURL, ex);
+        logger.error("Malformed moduleBaseURL: " + moduleBaseURL, ex, servlet.getServletContext());
       }
     }
 
@@ -74,19 +78,20 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
      * this method.
      */
     if (modulePath == null || !modulePath.startsWith(contextPath)) {
-      String message = "ERROR: The module path requested, "
+      String message = "The module path requested, "
           + modulePath
           + ", is not in the same web application as this servlet, "
           + contextPath
-          + ".  Your module may not be properly configured or your client and server code maybe out of date.";
-      servlet.log(message);
+          + ".  Your module may not be properly configured " +
+          "or your client and server code maybe out of date.";
+      logger.error(message, servlet.getServletContext());
     } else {
       // Strip off the context path from the module base URL. It should be a
       // strict prefix.
       String contextRelativePath = modulePath.substring(contextPath.length());
 
-      String serializationPolicyFilePath = SerializationPolicyLoader.getSerializationPolicyFileName(contextRelativePath
-          + strongName);
+      String serializationPolicyFilePath = SerializationPolicyLoader.getSerializationPolicyFileName(
+          contextRelativePath + strongName);
 
       // Open the RPC resource file and read its contents.
       InputStream is = servlet.getServletContext().getResourceAsStream(
@@ -98,30 +103,32 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
                 null);
             if (serializationPolicy.hasClientFields()) {
               if (ENABLE_ENHANCED_CLASSES) {
-                servlet.log("WARNING: Service deserializes enhanced JPA/JDO classes, which is " +
-                        "unsafe. See https://github.com/gwtproject/gwt/issues/9709 for more " +
-                        "detail on the vulnerability that this presents.");
+                logger.warn("Service deserializes enhanced JPA/JDO classes, which is " +
+                       "unsafe. See https://github.com/gwtproject/gwt/issues/9709 for more " +
+                       "detail on the vulnerability that this presents.",
+                    servlet.getServletContext());
               } else {
-                servlet.log("ERROR: Service deserializes enhanced JPA/JDO classes, which is " +
-                        "unsafe. Review build logs to see which classes are affected, or set " +
-                        ENABLE_GWT_ENHANCED_CLASSES_PROPERTY + " to true to allow using this " +
-                        "service. See https://github.com/gwtproject/gwt/issues/9709 for more " +
-                        "detail.");
+                logger.error("Service deserializes enhanced JPA/JDO classes, which is " +
+                       "unsafe. Review build logs to see which classes are affected, or set " +
+                       ENABLE_GWT_ENHANCED_CLASSES_PROPERTY + " to true to allow using this " +
+                       "service. See https://github.com/gwtproject/gwt/issues/9709 for more " +
+                       "detail.",
+                    servlet.getServletContext());
                 serializationPolicy = null;
               }
             }
           } catch (ParseException e) {
-            servlet.log("ERROR: Failed to parse the policy file '"
-                + serializationPolicyFilePath + "'", e);
+            logger.error("Failed to parse the policy file '"
+                + serializationPolicyFilePath + "'", e, servlet.getServletContext());
           } catch (IOException e) {
-            servlet.log("ERROR: Could not read the policy file '"
-                + serializationPolicyFilePath + "'", e);
+            logger.error("Could not read the policy file '"
+                + serializationPolicyFilePath + "'", e, servlet.getServletContext());
           }
         } else {
-          String message = "ERROR: The serialization policy file '"
+          String message = "The serialization policy file '"
               + serializationPolicyFilePath
               + "' was not found; did you forget to include it in this deployment?";
-          servlet.log(message);
+          logger.error(message, servlet.getServletContext());
         }
       } finally {
         if (is != null) {
@@ -144,7 +151,8 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
    * A cache of moduleBaseURL and serialization policy strong name to
    * {@link SerializationPolicy}.
    */
-  private final Map<String, SerializationPolicy> serializationPolicyCache = new HashMap<String, SerializationPolicy>();
+  private final Map<String, SerializationPolicy> serializationPolicyCache =
+      new HashMap<String, SerializationPolicy>();
 
   /**
    * The implementation of the service.
@@ -177,11 +185,14 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
   }
 
   /**
-   * Overridden to load the gwt.codeserver.port system property.
+   * Overridden to load the gwt.codeserver.port system property and initialize the
+   * {@link RpcLogManager} with a provider name from system properties or the servlet config.
    */
   @Override
   public void init(ServletConfig config) throws ServletException {
     super.init(config);
+    String providerName = RpcLogManager.getProviderName(config);
+    RpcLogManager.initialize(providerName);
     codeServerPort = getCodeServerPort();
   }
 
@@ -260,12 +271,13 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
 
     if (serializationPolicy == null) {
       // Failed to get the requested serialization policy; use the default
-      log(
-          "WARNING: Failed to get the SerializationPolicy '"
+      logger.warn("Failed to get the SerializationPolicy '"
               + strongName
               + "' for module '"
               + moduleBaseURL
-              + "'; a legacy, 1.3.3 compatible, serialization policy will be used.  You may experience SerializationExceptions as a result.");
+              + "'; a legacy, 1.3.3 compatible, serialization policy will be used.  " +
+              "You may experience SerializationExceptions as a result.",
+              getServletContext());
       serializationPolicy = RPC.getDefaultSerializationPolicy();
     }
 
@@ -311,9 +323,9 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
     try {
       rpcRequest = RPC.decodeRequest(payload, delegate.getClass(), this);
     } catch (IncompatibleRemoteServiceException ex) {
-      log(
+      logger.error(
           "An IncompatibleRemoteServiceException was thrown while processing this call.",
-          ex);
+          ex, getServletContext());
       return RPC.encodeResponseForFailedRequest(null, ex);
     }
     return processCall(rpcRequest);
@@ -350,13 +362,14 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
           rpcRequest.getParameters(), rpcRequest.getSerializationPolicy(),
           rpcRequest.getFlags());
     } catch (IncompatibleRemoteServiceException ex) {
-      log(
+      logger.error(
           "An IncompatibleRemoteServiceException was thrown while processing this call.",
-          ex);
+          ex,
+          getServletContext());
       return RPC.encodeResponseForFailedRequest(rpcRequest, ex);
     } catch (RpcTokenException tokenException) {
-      log("An RpcTokenException was thrown while processing this call.",
-          tokenException);
+      logger.error("An RpcTokenException was thrown while processing this call.",
+          tokenException, getServletContext());
       return RPC.encodeResponseForFailedRequest(rpcRequest, tokenException);
     }
   }
@@ -364,9 +377,8 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
   /**
    * Standard HttpServlet method: handle the POST.
    * 
-   * This doPost method swallows ALL exceptions, logs them in the
-   * ServletContext, and returns a GENERIC_FAILURE_MSG response with status code
-   * 500.
+   * This doPost method swallows ALL exceptions, logs them,
+   * and returns a GENERIC_FAILURE_MSG response with status code 500.
    * 
    * @throws ServletException
    * @throws SerializationException
@@ -465,19 +477,7 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
    * no authentication. It should only be used during development.</p>
    */
   protected SerializationPolicy loadPolicyFromCodeServer(String url) {
-    SerializationPolicyClient.Logger adapter = new SerializationPolicyClient.Logger() {
-
-      @Override
-      public void logInfo(String message) {
-        RemoteServiceServlet.this.log(message);
-      }
-
-      @Override
-      public void logError(String message, Throwable throwable) {
-        RemoteServiceServlet.this.log(message, throwable);
-      }
-    };
-    return CODE_SERVER_CLIENT.loadPolicy(url, adapter);
+    return CODE_SERVER_CLIENT.loadPolicy(url, getServletContext());
   }
 
   /**
@@ -541,7 +541,6 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
     boolean gzipEncode = RPCServletUtils.acceptsGzipEncoding(request)
         && shouldCompressResponse(request, response, responsePayload);
 
-    RPCServletUtils.writeResponse(getServletContext(), response,
-        responsePayload, gzipEncode);
+    RPCServletUtils.writeResponse(getServletContext(), response, responsePayload, gzipEncode);
   }
 }

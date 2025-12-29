@@ -61,9 +61,10 @@
       <arg value="@startupUrl"/>
       <arg line="-war"/>
       <arg value="@warFolder"/>
+      <arg line="-server"/>
+      <arg value="@server"/>
       <!-- Additional arguments like -style PRETTY, -logLevel DEBUG or -nosuperDevMode -->
       <arg line="${gwt.args}"/>
-      <arg value="@moduleName"/>
       <arg value="@moduleName"/>
     </java>
   </target>@antEclipseRule

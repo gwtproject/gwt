@@ -179,6 +179,7 @@
             <sysproperty key="gwt.devjar" value="../../gwt-dev.jar" />
             <arg value="-XnoEclipse" />
             <arg value="-overwrite" />
+            <arg value="-useLegacyJetty" />
             <arg value="-out" />
             <arg file="${samples.scripts}/${sample.upper}" />
             <arg value="com.google.gwt.sample.${sample.lower}.${sample.upper}" />

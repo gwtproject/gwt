@@ -647,7 +647,7 @@ public final class WebAppCreator {
     replacements.put("@startupUrl", moduleShortName + ".html");
     replacements.put("@renameTo", moduleShortName.toLowerCase(Locale.ROOT));
     replacements.put("@moduleNameJUnit", theModuleName + "JUnit");
-    replacements.put("@server", server);
+    replacements.put("@serverFQCN", server);
 
     // Add command to copy gwt-servlet-deps.jar into libs, unless this is a
     // maven project. Maven projects should include libs as maven dependencies.

@@ -145,7 +145,7 @@ public final class WebAppCreator {
   private final class ArgHandlerLegacyJetty extends ArgHandlerFlag {
     @Override
     public String getPurposeSnippet() {
-      return "DEPRECATED: Use deprecated JettyLauncher instead of an external server provided server impl";
+      return "DEPRECATED: Use deprecated JettyLauncher instead of an external server.";
     }
 
     @Override

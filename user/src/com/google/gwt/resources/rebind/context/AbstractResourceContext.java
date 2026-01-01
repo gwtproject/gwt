@@ -74,10 +74,11 @@ public abstract class AbstractResourceContext implements ResourceContext {
     try {
       URLConnection urlConnection = resource.openConnection();
       final byte[] bytes;
+      final String finalMimeType;
       try (InputStream inputStream = urlConnection.getInputStream()) {
         bytes = ByteStreams.toByteArray(inputStream);
+        finalMimeType = (mimeType != null) ? mimeType : urlConnection.getContentType();
       }
-      String finalMimeType = (mimeType != null) ? mimeType : urlConnection.getContentType();
       return deploy(fileName, finalMimeType, bytes, forceExternal);
     } catch (IOException e) {
       getLogger().log(TreeLogger.ERROR, "Unable to determine mime type of resource", e);

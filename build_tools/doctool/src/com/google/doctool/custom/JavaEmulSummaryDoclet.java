@@ -271,7 +271,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
     Class<?> superclass = c.getSuperclass() != null ? c.getSuperclass() : Object.class;
     List<Method> superMethods = new ArrayList<>(Arrays.asList(superclass.getMethods()));
 
-    for (Class<?> parentInterface: c.getInterfaces()) {
+    for (Class<?> parentInterface : c.getInterfaces()) {
       if (!allClasses.contains(parentInterface.getTypeName())) {
         System.out.println("Missing interface for " + c + ": " + parentInterface.getTypeName());
       }
@@ -309,7 +309,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
       }
       pwMissing.format("%n  <dt><a href=\"%s%s.html\">%s</a></dt>%n", packURL,
         qualifiedSimpleName(cls), qualifiedSimpleName(cls));
-      for (Map.Entry<String, List<String>> entry: missingMemberGroups.entrySet()) {
+      for (Map.Entry<String, List<String>> entry : missingMemberGroups.entrySet()) {
         pwMissing.format("  <dd><strong><a href=\"%s\">%s</a>:</strong> %s</dd>%n",
           entry.getKey(),
           getIssueTitle(entry.getKey()),
@@ -349,7 +349,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
   }
 
   private boolean isFieldFromSuper(Field field, Class<?> c) {
-    for (Class<?> parentInterface: c.getInterfaces()) {
+    for (Class<?> parentInterface : c.getInterfaces()) {
       for (Field parent : parentInterface.getFields()) {
         if (parent.equals(field)) {
           return true;

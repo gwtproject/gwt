@@ -56,7 +56,7 @@ public class SslConfiguration {
       }
       if ("ssl".equals(tag)) {
         useSsl = true;
-        URL keyStoreUrl = JettyLauncher.class.getResource("localhost.keystore");
+        URL keyStoreUrl = SslConfiguration.class.getResource("localhost.keystore");
         if (keyStoreUrl == null) {
           logger.log(TreeLogger.ERROR, "Default GWT keystore not found");
           return Optional.empty();
@@ -88,8 +88,7 @@ public class SslConfiguration {
                   + value + "'");
         }
       } else {
-        logger.log(TreeLogger.ERROR, "Unexpected argument to "
-                + JettyLauncher.class.getSimpleName() + ": " + arg);
+        logger.log(TreeLogger.ERROR, "Unexpected SSL argument: " + arg);
         return Optional.empty();
       }
     }

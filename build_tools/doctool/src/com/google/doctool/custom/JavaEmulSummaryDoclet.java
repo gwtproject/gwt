@@ -22,6 +22,7 @@ import java.io.PrintWriter;
 import java.io.UncheckedIOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -30,7 +31,6 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -79,7 +79,8 @@ public class JavaEmulSummaryDoclet implements Doclet {
       "java.lang.Character#isJavaLetter(char)",
       "java.lang.Character#isJavaLetterOrDigit(char)",
       "java.lang.String#getBytes(int, int, byte[], int)",
-      "java.lang.Class#isUnnamedClass()" // exists in 21 as a preview, removed
+      "java.lang.Class#isUnnamedClass()", // exists in 21 as a preview, removed
+      "java.lang.Enum#finalize()" // finalizers are ignored by GWT and to be removed from JVM
   );
   private enum Status {
     OPEN("\u23F3", "Planned to be implemented, patches or reviews welcome"),
@@ -101,10 +102,20 @@ public class JavaEmulSummaryDoclet implements Doclet {
   private String missingPropertiesDir;
 
   // the key in the following maps is the full URL of an issue
-  private final Map<String, String> issueToSignatures = new HashMap<>();
-  private final Map<String, String> issueToTitle = new HashMap<>();
-  private final Map<String, String> issueStatus = new HashMap<>();
+  private final Map<String, Meta> issueDescriptions = new HashMap<>();
   private final List<String> triage = new ArrayList<>();
+
+  private static class Meta {
+    public final String title;
+    public final String status;
+    public final String members;
+
+      private Meta(String title, String status, String members) {
+          this.title = title;
+          this.status = status;
+          this.members = members;
+      }
+  }
 
   @Override
   public boolean run(DocletEnvironment env) {
@@ -121,7 +132,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
       pwPresent.println("</ol>\n");
       Set<String> allClasses = getSpecifiedPackages(env)
         .flatMap(pack -> pack.getEnclosedElements().stream()
-        .flatMap(clazz -> withInnerClasses(clazz, pack)))
+        .flatMap(clazz -> withInnerClasses(clazz, pack, null)))
         .collect(Collectors.toSet());
       getSpecifiedPackages(env).forEach(pack -> {
         Optional<Module> matchingModuleName = ModuleLayer.boot().modules().stream()
@@ -142,7 +153,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
         pack.getEnclosedElements()
             .stream()
             .filter(element -> env.isSelected(element) && env.isIncluded(element))
-            .filter(element -> element.getModifiers().contains(Modifier.PUBLIC))
+            .filter(JavaEmulSummaryDoclet::isMemberVisible)
             .sorted(Comparator.comparing((Element o) -> o.getSimpleName()
                 .toString()))
             .forEach(cls -> emitClassDocs(env, pwPresent, pwMissing,
@@ -168,7 +179,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
     Path path = Path.of(filePath);
     Files.createDirectories(path.getParent());
     OutputStream fwPresent = Files.newOutputStream(path);
-    return new PrintWriter(fwPresent, true);
+    return new PrintWriter(fwPresent, true, StandardCharsets.UTF_8);
   }
 
   private void loadMissingMemberLists() {
@@ -180,9 +191,10 @@ public class JavaEmulSummaryDoclet implements Doclet {
           properties.load(Files.newInputStream(file));
           String issue = (String) properties.computeIfAbsent(
               "link", ignore -> extractIssueLink(file.getFileName().toString()));
-          issueToSignatures.put(issue, (String) properties.get("members"));
-          issueToTitle.put(issue, (String) properties.get("title"));
-          issueStatus.put(issue, (String) properties.getOrDefault("status", "open"));
+          issueDescriptions.put(issue, new Meta(
+              (String) properties.get("title"),
+              (String) properties.getOrDefault("status", "open"),
+              (String) properties.get("members")));
         } catch (IOException ex) {
           throw new UncheckedIOException(ex);
         }
@@ -196,18 +208,27 @@ public class JavaEmulSummaryDoclet implements Doclet {
     return "https://github.com/gwtproject/gwt/issues/" + filename.replaceAll("gh|\\.properties", "");
   }
 
-  private Stream<String> withInnerClasses(Element clazz, PackageElement pack) {
+  private Stream<String> withInnerClasses(Element clazz, PackageElement pack, String parentName) {
     return Stream.concat(
-      Stream.of(pack.getQualifiedName() + "." + clazz.getSimpleName().toString()),
+      Stream.of(pack.getQualifiedName() + "." + getFullName(clazz, parentName)),
       clazz.getEnclosedElements().stream()
-        .map(inner -> pack.getQualifiedName()
-          + "." + clazz.getSimpleName() + "$" + inner.getSimpleName()));
+          .filter(JavaEmulSummaryDoclet::isType)
+          .flatMap(inner -> withInnerClasses(inner, pack,
+              getFullName(clazz, parentName))));
+  }
+
+  private static boolean isType(Element element) {
+    return element.getKind().isClass() || element.getKind().isInterface();
+  }
+
+  private String getFullName(Element clazz, String parentName) {
+    return (parentName == null ? "" : parentName + "$") + clazz.getSimpleName();
   }
 
   private void emitClassDocs(DocletEnvironment env, PrintWriter pwPresent,
                  PrintWriter pwMissing, String packURL, Element cls,
                  String pack, Set<String> allClasses) {
-    pwPresent.format("%n  <dt><a href=\"%s%s.html\">%s</a></dt>\n", packURL,
+    pwPresent.format("%n  <dt><a href=\"%s%s.html\">%s</a></dt>%n", packURL,
         qualifiedSimpleName(cls), qualifiedSimpleName(cls));
     if ("JsException".equals(cls.getSimpleName().toString())) {
       return;
@@ -216,7 +237,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
     List<String> fields = cls.getEnclosedElements()
         .stream()
         .filter(element -> element.getKind().isField())
-        .filter(field -> field.getModifiers().contains(Modifier.PUBLIC))
+        .filter(JavaEmulSummaryDoclet::isMemberVisible)
         .map(field -> field.getSimpleName().toString())
         .collect(Collectors.toList());
 
@@ -228,7 +249,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
     List<String> constructors = cls.getEnclosedElements()
         .stream()
         .filter(element -> ElementKind.CONSTRUCTOR == element.getKind())
-        .filter(member -> member.getModifiers().contains(Modifier.PUBLIC))
+        .filter(JavaEmulSummaryDoclet::isMemberVisible)
         .map(member -> (ExecutableElement) member)
         .map(executableElement ->
             flatSignature(t -> simpleParamName(env, t), cls, executableElement))
@@ -247,24 +268,19 @@ public class JavaEmulSummaryDoclet implements Doclet {
       pwPresent.format("  <dd><strong>Methods:</strong> %s</dd>\n",
         createMemberList(methods));
     }
-    String[] parts = (pack + cls.getSimpleName()).split("\\$");
+    String fullName = pack + cls.getSimpleName();
     List<String> missingMembers = new ArrayList<>();
     Class<?> c;
     try {
-      c = Class.forName(parts[0]);
+      c = Class.forName(fullName);
     } catch (ClassNotFoundException e) {
       c = null;
     }
-    if (c != null && parts.length > 1) {
-      c = Arrays.stream(c.getDeclaredClasses())
-        .filter(inner -> inner.getSimpleName().equals(cls.getSimpleName().toString()))
-        .findFirst().orElse(null);
-    }
     if (c == null) {
       if (CURRENT_JRE_VERSION >= MAX_JRE_VERSION) {
-        throw new RuntimeException("Class does not exist in JRE: " + parts[0]);
+        throw new RuntimeException("Class does not exist in JRE: " + fullName);
       } else {
-        System.out.format("Class %s not supported in Java %s%n", parts[0], CURRENT_JRE_VERSION);
+        System.out.format("Class %s not supported in Java %s%n", fullName, CURRENT_JRE_VERSION);
         return;
       }
     }
@@ -273,25 +289,25 @@ public class JavaEmulSummaryDoclet implements Doclet {
 
     for (Class<?> parentInterface : c.getInterfaces()) {
       if (!allClasses.contains(parentInterface.getTypeName())) {
-        System.out.println("Missing interface for " + c + ": " + parentInterface.getTypeName());
+        System.out.format("Missing interface for %s: %s%n", c, parentInterface.getTypeName());
       }
       superMethods.addAll(Arrays.asList(parentInterface.getMethods()));
     }
     for (Method method: c.getDeclaredMethods()) {
       String reflectionSignature = getReflectionSignature(method);
-      if (java.lang.reflect.Modifier.isPublic(method.getModifiers())
+      if (isModifierVisible(method.getModifiers())
           && !erasedMethods.contains(reflectionSignature)
-          && !DEPRECATED.contains(pack + cls.getSimpleName() + "#" + reflectionSignature)
+          && !DEPRECATED.contains(fullName + "#" + reflectionSignature)
           && !reflectionSignature.matches("of\\(Enum(, Enum)+\\)")
           && superMethods.stream().noneMatch(m ->
               nameAndParamCount(m).equals(nameAndParamCount(method)))) {
         missingMembers.add(reflectionSignature);
-      } else if (!"".equals(getStatus(pack + cls.getSimpleName() + "#" + reflectionSignature))) {
-        System.out.println("No longer missing: " + reflectionSignature);
+      } else if (!"".equals(getStatus(fullName + "#" + reflectionSignature))) {
+        System.out.format("No longer missing: %s%n", reflectionSignature);
       }
     }
     for (Field field: c.getFields()) {
-      if (java.lang.reflect.Modifier.isPublic(field.getModifiers())
+      if (isModifierVisible(field.getModifiers())
           && !fields.contains(field.getName())
           && !isFieldFromSuper(field, c)) {
         missingMembers.add(field.getName());
@@ -316,33 +332,53 @@ public class JavaEmulSummaryDoclet implements Doclet {
           createMemberList(entry.getValue()));
       }
     }
-    Iterator<? extends Element> classesIterator = cls.getEnclosedElements()
-        .stream()
-        .filter(element -> element.getKind().isClass()
-            || element.getKind().isInterface()
-            || ElementKind.ENUM == element.getKind())
-        .filter(element -> element.getModifiers().contains(Modifier.PUBLIC))
-        .sorted(Comparator.comparing((Element o) -> o.getSimpleName().toString()))
-        .iterator();
-    if (classesIterator.hasNext()) {
-      pwPresent.print("\n");
-    }
-    while (classesIterator.hasNext()) {
-      Element innerCls = classesIterator.next();
-      // Each class links to Sun's main JavaDoc
-      emitClassDocs(env, pwPresent, pwMissing, packURL, innerCls,
-        pack + cls.getSimpleName() + "$", allClasses);
-      if (classesIterator.hasNext()) {
-        pwPresent.print("\n");
+    for (Class<?> inner: c.getClasses()) {
+      if (c.getSuperclass() != null && List.of(c.getSuperclass().getClasses()).contains(inner)) {
+        continue;
+      }
+      if (isModifierVisible(inner.getModifiers())) {
+        if (cls.getEnclosedElements().stream().noneMatch(
+            el -> el.getSimpleName().toString().equals(inner.getSimpleName()))) {
+          String fullInnerName = qualifiedSimpleName(cls) + "." + inner.getSimpleName();
+          addMissingClass(fullInnerName, pack, packURL, pwMissing);
+        }
       }
     }
+   cls.getEnclosedElements()
+        .stream()
+        .filter(JavaEmulSummaryDoclet::isType)
+        .filter(JavaEmulSummaryDoclet::isMemberVisible)
+        .sorted(Comparator.comparing((Element o) -> o.getSimpleName().toString()))
+        .forEach(innerCls ->
+            emitClassDocs(env, pwPresent, pwMissing, packURL, innerCls,
+           pack + cls.getSimpleName() + "$", allClasses));
   }
+
+  private void addMissingClass(String fullInnerName, String pack, String packURL,
+      PrintWriter pwMissing) {
+    pwMissing.format("%n  <dt><a href=\"%s%s.html\">%s</a></dt>%n",
+        packURL, fullInnerName, fullInnerName);
+    String status = getStatus(fullInnerName);
+    pwMissing.format(
+        "  <dd><strong><a href=\"%s\">%s</a>:</strong> Inner class missing</dd>%n",
+        status, getIssueTitle(status));
+    if (status.isEmpty()) {
+      triage.add(pack + fullInnerName);
+    }
+  }
+
+  private boolean isModifierVisible(int modifiers) {
+    return java.lang.reflect.Modifier.isPublic(modifiers)
+        || java.lang.reflect.Modifier.isProtected(modifiers);
+  }
+
   private Object getIssueTitle(String key) {
     if (key.isEmpty()) {
       return "Needs triage";
     }
-    String title = issueToTitle.get(key);
-    Status status = Status.valueOf(issueStatus.get(key).toUpperCase(Locale.ROOT));
+    Meta meta = issueDescriptions.get(key);
+    String title = meta.title;
+    Status status = Status.valueOf(meta.status.toUpperCase(Locale.ROOT));
     return "<span class=\"issueStatus\" aria-label=\"" + status.title + "\">" + status.icon
         + "</span>#" + key.replaceFirst("^.*/(\\d+)$", "$1")
         + (title == null ? "" : " (" + title + ")");
@@ -369,8 +405,8 @@ public class JavaEmulSummaryDoclet implements Doclet {
   }
 
   private String getStatus(String methodRef) {
-    for (String category: issueToSignatures.keySet()) {
-      if (issueToSignatures.get(category).contains(methodRef)) {
+    for (String category: issueDescriptions.keySet()) {
+      if (issueDescriptions.get(category).members.contains(methodRef)) {
         return category;
       }
     }
@@ -381,10 +417,15 @@ public class JavaEmulSummaryDoclet implements Doclet {
     return cls.getEnclosedElements()
       .stream()
       .filter(element -> ElementKind.METHOD == element.getKind())
-      .filter(member -> member.getModifiers().contains(Modifier.PUBLIC))
+      .filter(JavaEmulSummaryDoclet::isMemberVisible)
       .map(member -> (ExecutableElement) member)
       .map(executableElement -> flatSignature(typeNamer, cls, executableElement))
       .collect(Collectors.toList());
+  }
+
+  private static boolean isMemberVisible(Element member) {
+    return member.getModifiers().contains(Modifier.PUBLIC)
+        || member.getModifiers().contains(Modifier.PROTECTED);
   }
 
   private String nameAndParamCount(Method m) {

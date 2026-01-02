@@ -475,7 +475,7 @@ public abstract class OptimizerTestBase extends JJSTestBase {
     // Finally optimize.
     boolean madeChanges = doOptimizeMethod(TreeLogger.NULL, program, method);
     if (madeChanges && runDeadCodeElimination) {
-      DeadCodeElimination.exec(program);
+      DeadCodeElimination.exec(program, new FullOptimizerContext(program));
     }
 
     return new Result(program, returnType, MAIN_METHOD_NAME, snippet, madeChanges);
@@ -498,7 +498,7 @@ public abstract class OptimizerTestBase extends JJSTestBase {
     JMethod method = findMethod(program, methodName);
     boolean madeChanges = doOptimizeMethod(logger, program, method);
     if (madeChanges && runDeadCodeElimination) {
-      DeadCodeElimination.exec(program);
+      DeadCodeElimination.exec(program, new FullOptimizerContext(program));
     }
     return new Result(program, mainMethodReturnType, methodName, snippet, madeChanges);
   }

@@ -58,9 +58,6 @@ import com.google.gwt.dev.js.ast.JsVars;
 import com.google.gwt.dev.js.ast.JsVars.JsVar;
 import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.util.collect.Stack;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.collect.HashMultiset;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
@@ -201,7 +198,7 @@ public class JsInliner {
         JsBinaryOperation inner = isComma(x.getArg1());
         if (inner != null && !inner.getArg2().hasSideEffects()) {
           x.setArg1(inner.getArg1());
-          didChange = true;
+          numMods++;
         }
 
         /*
@@ -1555,12 +1552,8 @@ public class JsInliner {
   /**
    * Static entry point used by JavaToJavaScriptCompiler.
    */
-  public static OptimizerStats exec(JsProgram program, Collection<JsNode> toInline) {
-    Event optimizeJsEvent = SpeedTracerLogger.start(
-        CompilerEventType.OPTIMIZE_JS, "optimizer", NAME);
-    OptimizerStats stats = execImpl(program, toInline);
-    optimizeJsEvent.end("didChange", "" + stats.didChange());
-    return stats;
+  public static int exec(JsProgram program, Collection<JsNode> toInline) {
+    return execImpl(program, toInline);
   }
 
   /**
@@ -1601,35 +1594,35 @@ public class JsInliner {
     return v.containsNestedFunctions();
   }
 
-  private static OptimizerStats execImpl(JsProgram program, Collection<JsNode> toInline) {
-    OptimizerStats stats = new OptimizerStats(NAME);
+  private static int execImpl(JsProgram program, Collection<JsNode> toInline) {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
 
-    // We are not covering the whole AST, hence we will try to inline functions with a single call
-    // site as well as those produced by native methods and their callers.
-    SingleInvocationVisitor s = new SingleInvocationVisitor();
-    s.accept(program);
-    Set<JsNode> candidates = Sets.newLinkedHashSet(toInline);
-    candidates.addAll(s.inliningCandidates());
+      // We are not covering the whole AST, hence we will try to inline functions with a single call
+      // site as well as those produced by native methods and their callers.
+      SingleInvocationVisitor s = new SingleInvocationVisitor();
+      s.accept(program);
+      Set<JsNode> candidates = Sets.newLinkedHashSet(toInline);
+      candidates.addAll(s.inliningCandidates());
 
-    RedefinedFunctionCollector d = new RedefinedFunctionCollector();
-    d.accept(program);
+      RedefinedFunctionCollector d = new RedefinedFunctionCollector();
+      d.accept(program);
 
-    RecursionCollector rc = new RecursionCollector();
-    for (JsNode fn : candidates) {
-      rc.accept(fn);
+      RecursionCollector rc = new RecursionCollector();
+      for (JsNode fn : candidates) {
+        rc.accept(fn);
+      }
+
+      InliningVisitor v = new InliningVisitor(program, candidates);
+      v.blacklist(d.getRedefined());
+      v.blacklist(rc.getRecursive());
+      // Do not accept among candidates as the list might get stale and contain nodes that are not
+      // reachable from the AST. Instead filter within InliningVisitor.
+      v.accept(program);
+
+      stats.recordModified(v.getNumMods());
+
+      return stats.getNumMods();
     }
-
-    InliningVisitor v = new InliningVisitor(program, candidates);
-    v.blacklist(d.getRedefined());
-    v.blacklist(rc.getRecursive());
-    // Do not accept among candidates as the list might get stale and contain nodes that are not
-    // reachable from the AST. Instead filter within InliningVisitor.
-    v.accept(program);
-
-    if (v.didChange()) {
-      stats.recordModified();
-    }
-    return stats;
   }
 
   /**

@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.js;
 
+import com.google.gwt.dev.jjs.impl.OptimizerStats;
 import com.google.gwt.dev.js.ast.JsBlock;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsFunction;
@@ -38,6 +39,8 @@ import java.util.Set;
  * stripping is enabled.
  */
 public class JsDuplicateFunctionRemover {
+
+  private static final String NAME = JsDuplicateFunctionRemover.class.getSimpleName();
 
   private class DuplicateFunctionBodyRecorder extends JsVisitor {
 
@@ -216,10 +219,9 @@ public class JsDuplicateFunctionRemover {
    * @param program the program to optimize
    * @param nameGenerator a freshNameGenerator to assign fresh names to deduped functions that are
    *                      lifted to the global scope
-   * @return {@code true} if it made any changes; {@code false} otherwise.
    */
-  public static boolean exec(JsProgram program, FreshNameGenerator nameGenerator) {
-    return new JsDuplicateFunctionRemover(program, nameGenerator).execImpl();
+  public static void exec(JsProgram program, FreshNameGenerator nameGenerator) {
+    new JsDuplicateFunctionRemover(program, nameGenerator).execImpl();
   }
 
   private final JsProgram program;
@@ -236,43 +238,44 @@ public class JsDuplicateFunctionRemover {
     this.freshNameGenerator = freshNameGenerator;
   }
 
-  private boolean execImpl() {
-    boolean changed = false;
-    for (int i = 0; i < program.getFragmentCount(); i++) {
-      JsBlock fragment = program.getFragmentBlock(i);
+  private void execImpl() {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      for (int i = 0; i < program.getFragmentCount(); i++) {
+        JsBlock fragment = program.getFragmentBlock(i);
 
-      DuplicateFunctionBodyRecorder dfbr = new DuplicateFunctionBodyRecorder();
-      dfbr.accept(fragment);
-      Map<JsFunction, JsName> newNamesByHoistedFunction = Maps.newHashMap();
-      // Hoist all anonymous duplicate functions.
-      Map<JsFunction, JsFunction> dupMethodMap = dfbr.getDuplicateMethodMap();
-      for (JsFunction dupMethod : dupMethodMap.values()) {
-        if (newNamesByHoistedFunction.containsKey(dupMethod)) {
-          continue;
+        DuplicateFunctionBodyRecorder dfbr = new DuplicateFunctionBodyRecorder();
+        dfbr.accept(fragment);
+        Map<JsFunction, JsName> newNamesByHoistedFunction = Maps.newHashMap();
+        // Hoist all anonymous duplicate functions.
+        Map<JsFunction, JsFunction> dupMethodMap = dfbr.getDuplicateMethodMap();
+        for (JsFunction dupMethod : dupMethodMap.values()) {
+          if (newNamesByHoistedFunction.containsKey(dupMethod)) {
+            continue;
+          }
+          // move function to top scope and re-declaring it with a unique name
+          JsName newName = program.getScope().declareName(freshNameGenerator.getFreshName());
+          JsFunction newFunc = new JsFunction(dupMethod.getSourceInfo(),
+              program.getScope(), newName, dupMethod.isFromJava());
+          // we're not using the old function anymore, we can use reuse the body
+          // instead of cloning it
+          newFunc.setBody(dupMethod.getBody());
+          // also copy the parameters from the old function
+          newFunc.getParameters().addAll(dupMethod.getParameters());
+          // add the new function to the top level list of statements
+          fragment.getStatements().add(newFunc.makeStmt());
+          newNamesByHoistedFunction.put(dupMethod, newName);
+          stats.recordModified();
         }
-        // move function to top scope and re-declaring it with a unique name
-        JsName newName = program.getScope().declareName(freshNameGenerator.getFreshName());
-        JsFunction newFunc = new JsFunction(dupMethod.getSourceInfo(),
-            program.getScope(), newName, dupMethod.isFromJava());
-        // we're not using the old function anymore, we can use reuse the body
-        // instead of cloning it
-        newFunc.setBody(dupMethod.getBody());
-        // also copy the parameters from the old function
-        newFunc.getParameters().addAll(dupMethod.getParameters());
-        // add the new function to the top level list of statements
-        fragment.getStatements().add(newFunc.makeStmt());
-        newNamesByHoistedFunction.put(dupMethod, newName);
+
+        ReplaceDuplicateInvocationNameRefs rdup = new ReplaceDuplicateInvocationNameRefs(
+            dfbr.getDuplicateMap(), dfbr.getBlacklist(), dupMethodMap, newNamesByHoistedFunction);
+        rdup.accept(fragment);
+        stats.recordModified(rdup.getNumMods());
       }
 
-      ReplaceDuplicateInvocationNameRefs rdup = new ReplaceDuplicateInvocationNameRefs(
-          dfbr.getDuplicateMap(), dfbr.getBlacklist(), dupMethodMap, newNamesByHoistedFunction);
-      rdup.accept(fragment);
-      changed = changed || rdup.didChange();
+      if (stats.getNumMods() > 0) {
+        JsUnusedFunctionRemover.exec(program);
+      }
     }
-
-    if (changed) {
-      JsUnusedFunctionRemover.exec(program);
-    }
-    return changed;
   }
 }

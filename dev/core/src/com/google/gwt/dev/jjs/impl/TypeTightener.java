@@ -50,10 +50,6 @@ import com.google.gwt.dev.jjs.ast.JVariableRef;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.js.JsniFieldRef;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
-import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
 import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
@@ -722,17 +718,8 @@ public class TypeTightener {
 
   private static final String NAME = TypeTightener.class.getSimpleName();
 
-  public static OptimizerStats exec(JProgram program, OptimizerContext optimizerCtx) {
-    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new TypeTightener(program).execImpl(optimizerCtx);
-    optimizerCtx.incOptimizationStep();
-    optimizeEvent.end("didChange", "" + stats.didChange());
-    return stats;
-  }
-
-  @VisibleForTesting
-  static OptimizerStats exec(JProgram program) {
-    return exec(program, new FullOptimizerContext(program));
+  public static int exec(JProgram program, OptimizerContext optimizerCtx) {
+    return new TypeTightener(program).execImpl(optimizerCtx);
   }
 
   private static <T, V> void add(T key, V value, Map<T, Collection<V>> map) {
@@ -811,50 +798,52 @@ public class TypeTightener {
     this.program = program;
   }
 
-  private OptimizerStats execImpl(OptimizerContext optimizerCtx) {
-    OptimizerStats stats = new OptimizerStats(NAME);
-    RecordVisitor recorder = new RecordVisitor();
-    recorder.record(program);
+  private int execImpl(OptimizerContext optimizerCtx) {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      RecordVisitor recorder = new RecordVisitor();
+      recorder.record(program);
 
-    /*
-     * We must iterate multiple times because each way point we tighten creates
-     * more opportunities to do additional tightening for the things that depend
-     * on it.
-     *
-     * TODO(zundel): See if we can remove this loop, or otherwise run to less
-     * than completion if we compile with an option for less than 100% optimized
-     * output.
-     */
-    int lastStep = optimizerCtx.getLastStepFor(NAME);
-    /*
-     * Set the last step to the step at which TypeTightener does the first iteration. Since the
-     * RecordVisitor is run only once, the information in {@code assignments} etc. is not updated.
-     * So it is still possible for the type tightened methods/fields to be type tightened for the
-     * next time.
-     */
-    optimizerCtx.setLastStepFor(NAME, optimizerCtx.getOptimizationStep());
-    while (true) {
-      TightenTypesVisitor tightener = new TightenTypesVisitor(optimizerCtx);
+      /*
+       * We must iterate multiple times because each way point we tighten creates
+       * more opportunities to do additional tightening for the things that depend
+       * on it.
+       *
+       * TODO(zundel): See if we can remove this loop, or otherwise run to less
+       * than completion if we compile with an option for less than 100% optimized
+       * output.
+       */
+      int lastStep = optimizerCtx.getLastStepFor(NAME);
+      /*
+       * Set the last step to the step at which TypeTightener does the first iteration. Since the
+       * RecordVisitor is run only once, the information in {@code assignments} etc. is not updated.
+       * So it is still possible for the type tightened methods/fields to be type tightened for the
+       * next time.
+       */
+      optimizerCtx.setLastStepFor(NAME, optimizerCtx.getOptimizationStep());
+      while (true) {
+        TightenTypesVisitor tightener = new TightenTypesVisitor(optimizerCtx);
 
-      Set<JMethod> affectedMethods = computeAffectedMethods(optimizerCtx, lastStep);
-      Set<JField> affectedFields = computeAffectedFields(optimizerCtx, lastStep);
-      optimizerCtx.traverse(tightener, affectedFields);
-      optimizerCtx.traverse(tightener, affectedMethods);
-      stats.recordModified(tightener.getNumMods());
-      lastStep = optimizerCtx.getOptimizationStep();
-      optimizerCtx.incOptimizationStep();
-      if (!tightener.didChange()) {
-        break;
+        Set<JMethod> affectedMethods = computeAffectedMethods(optimizerCtx, lastStep);
+        Set<JField> affectedFields = computeAffectedFields(optimizerCtx, lastStep);
+        optimizerCtx.traverse(tightener, affectedFields);
+        optimizerCtx.traverse(tightener, affectedMethods);
+        stats.recordModified(tightener.getNumMods());
+        lastStep = optimizerCtx.getOptimizationStep();
+        optimizerCtx.incOptimizationStep();
+        if (!tightener.didChange()) {
+          break;
+        }
       }
-    }
 
-    if (stats.didChange()) {
-      FixDanglingRefsVisitor fixer = new FixDanglingRefsVisitor(optimizerCtx);
-      fixer.accept(program);
-      optimizerCtx.incOptimizationStep();
-      JavaAstVerifier.assertProgramIsConsistent(program);
+      if (stats.didChange()) {
+        FixDanglingRefsVisitor fixer = new FixDanglingRefsVisitor(optimizerCtx);
+        fixer.accept(program);
+        optimizerCtx.incOptimizationStep();
+        JavaAstVerifier.assertProgramIsConsistent(program);
+      }
+
+      return stats.getNumMods();
     }
-    return stats;
   }
 
   private Set<JMethod> computeAffectedMethods(OptimizerContext optimizerCtx, int lastStep) {

@@ -38,9 +38,7 @@ import com.google.gwt.dev.util.arg.ArgHandlerEnableGeneratorResultCaching;
 import com.google.gwt.dev.util.arg.ArgHandlerGenDir;
 import com.google.gwt.dev.util.arg.ArgHandlerLogLevel;
 import com.google.gwt.dev.util.arg.OptionBindAddress;
-import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.util.tools.ArgHandlerFlag;
 import com.google.gwt.util.tools.ArgHandlerString;
 
@@ -84,12 +82,9 @@ public abstract class DevModeBase implements DoneCallback {
     @Override
     public ModuleSpaceHost createModuleSpaceHost(ModuleHandle module, String moduleName)
         throws UnableToCompleteException {
-      Event moduleSpaceHostCreateEvent =
-          SpeedTracerLogger.start(DevModeEventType.MODULE_SPACE_HOST_CREATE, "Module Name",
-              moduleName);
       // TODO(jat): add support for closing an active module
       TreeLogger logger = module.getLogger();
-      try {
+      try (SimpleEvent ignore = new SimpleEvent("Create ModuleSpaceHost")) {
         // Try to find an existing loaded version of the module def.
         ModuleDef moduleDef = loadModule(logger, moduleName, true);
         assert (moduleDef != null);
@@ -102,8 +97,6 @@ public abstract class DevModeBase implements DoneCallback {
         logger.log(TreeLogger.ERROR, "Exception initializing module", e);
         module.unload();
         throw e;
-      } finally {
-        moduleSpaceHostCreateEvent.end();
       }
     }
   }
@@ -878,8 +871,7 @@ public abstract class DevModeBase implements DoneCallback {
       throw new IllegalStateException("Startup code has already been run");
     }
 
-    Event startupEvent = SpeedTracerLogger.start(DevModeEventType.STARTUP);
-    try {
+    try (SimpleEvent ignore = new SimpleEvent("Startup")) {
       // See if there was a UI specified by command-line args
       ui = createUI();
 
@@ -931,8 +923,6 @@ public abstract class DevModeBase implements DoneCallback {
       }
 
       return true;
-    } finally {
-      startupEvent.end();
     }
   }
 
@@ -960,34 +950,33 @@ public abstract class DevModeBase implements DoneCallback {
   private DevModeUI createUI() {
     DevModeUI newUI = null;
 
-    Event createUIEvent = SpeedTracerLogger.start(DevModeEventType.CREATE_UI);
-
-    if (headlessMode) {
-      newUI = new HeadlessUI(options);
-    } else {
-      if (options.useRemoteUI()) {
-        try {
-          newUI =
-              new RemoteUI(options.getRemoteUIHost(), options.getRemoteUIHostPort(), options
-                  .getClientId());
-          baseLogLevelForUI = TreeLogger.Type.TRACE;
-        } catch (Throwable t) {
-          System.err.println("Could not connect to remote UI listening at "
-              + options.getRemoteUIHost() + ":" + options.getRemoteUIHostPort()
-              + ". Using default UI instead.");
+    try (SimpleEvent ignore = new SimpleEvent("Create DevMode UI")) {
+      if (headlessMode) {
+        newUI = new HeadlessUI(options);
+      } else {
+        if (options.useRemoteUI()) {
+          try {
+            newUI =
+                new RemoteUI(options.getRemoteUIHost(), options.getRemoteUIHostPort(), options
+                    .getClientId());
+            baseLogLevelForUI = TreeLogger.Type.TRACE;
+          } catch (Throwable t) {
+            System.err.println("Could not connect to remote UI listening at "
+                + options.getRemoteUIHost() + ":" + options.getRemoteUIHostPort()
+                + ". Using default UI instead.");
+          }
         }
+      }
+
+      if (newUI == null) {
+        newUI = new SwingUI(options);
+      }
+
+      if (baseLogLevelForUI == null) {
+        baseLogLevelForUI = TreeLogger.Type.INFO;
       }
     }
 
-    if (newUI == null) {
-      newUI = new SwingUI(options);
-    }
-
-    if (baseLogLevelForUI == null) {
-      baseLogLevelForUI = TreeLogger.Type.INFO;
-    }
-
-    createUIEvent.end();
     return newUI;
   }
 

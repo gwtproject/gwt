@@ -20,6 +20,7 @@ import com.google.gwt.dev.util.log.perf.AbstractOptimizationEvent;
 import com.google.gwt.dev.util.log.perf.CompilerPassEvent;
 import com.google.gwt.dev.util.log.perf.OptimizationLoopEvent;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,7 +42,7 @@ import java.util.Stack;
  * instance is closed.
  */
 public class OptimizerStats implements AutoCloseable {
-  private final ThreadLocal<Stack<OptimizerStats>> stack = ThreadLocal.withInitial(Stack::new);
+  private static final ThreadLocal<Stack<OptimizerStats>> stack = ThreadLocal.withInitial(Stack::new);
   private final List<OptimizerStats> children = new ArrayList<>();
   private final String name;
   private final AbstractOptimizationEvent jfrEvent;
@@ -78,9 +79,14 @@ public class OptimizerStats implements AutoCloseable {
     OptimizerStats prev = stack.get().pop();
     assert prev == this;
 
-    // If numVisits wasn't explicitly set, inherit from parent
-    if (!stack.get().isEmpty() && this.numVisits == 0) {
-      this.numVisits = stack.get().peek().numVisits;
+    // If numVisits wasn't explicitly set, inherit from nearest parent
+    if (this.numVisits == 0) {
+      for (OptimizerStats parent : Lists.reverse(stack.get())) {
+        if (parent.numVisits > 0) {
+          this.numVisits = parent.numVisits;
+          break;
+        }
+      }
     }
 
     jfrEvent.nodeCount = getNumVisits();

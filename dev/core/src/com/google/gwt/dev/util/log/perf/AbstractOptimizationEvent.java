@@ -23,6 +23,8 @@ public class AbstractOptimizationEvent extends AbstractJfrEvent {
   public int numMods;
 
   @Label("Node Count")
-  @Description("Number of AST nodes in the program at the start of the optimization loop")
+  @Description("Number of AST nodes in the program at the start of the optimization loop. Unset" +
+      "in cases where the compiler hasn't taken the time to measure the nodes, such as where the" +
+      "pass isn't part of a loop.")
   public int nodeCount;
 }

@@ -79,7 +79,7 @@ public class JsUnusedFunctionRemover {
   private final JsProgram program;
   private final Set<JsName> seen = new IdentityHashSet<JsName>();
 
-  public JsUnusedFunctionRemover(JsProgram program) {
+  private JsUnusedFunctionRemover(JsProgram program) {
     this.program = program;
   }
 

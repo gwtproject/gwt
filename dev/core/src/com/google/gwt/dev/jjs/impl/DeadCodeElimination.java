@@ -2043,7 +2043,7 @@ public class DeadCodeElimination {
   }
 
   /**
-   * Apply DeadCodeElimination on the set of newly modified methods (obtained from the optimzer
+   * Apply DeadCodeElimination on the set of newly modified methods (obtained from the optimizer
    * context).
    */
   public static int exec(JProgram program, OptimizerContext optimizerCtx) {
@@ -2056,7 +2056,6 @@ public class DeadCodeElimination {
    * given set functions.
    */
   private static Set<JMethod> affectedMethods(OptimizerContext optimizerCtx) {
-    // TODO cover this with another event?
     Set<JMethod> modifiedMethods =
         optimizerCtx.getModifiedMethodsSince(optimizerCtx.getLastStepFor(NAME));
     Set<JMethod> affectedMethods = Sets.newLinkedHashSet();

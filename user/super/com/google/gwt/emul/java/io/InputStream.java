@@ -21,6 +21,8 @@ package java.io;
 
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
+import java.util.Arrays;
+
 /**
  * A readable source of bytes.
  *
@@ -203,6 +205,69 @@ public abstract class InputStream extends Object implements Closeable {
         return byteCount;
     }
 
+    public byte[] readAllBytes() throws IOException {
+        return readNBytes(0, Integer.MAX_VALUE);
+    }
+
+    public byte[] readNBytes(int len) throws IOException {
+        return readNBytes(0, len);
+    }
+
+    public byte[] readNBytes(int off, int len) throws IOException {
+        if (len == 0) {
+            return new byte[0];
+        }
+        skipNBytes(off);
+        int capacity = Math.min(len, Math.max(2048, available()));
+        byte[] buffer = new byte[capacity];
+        int pos = 0;
+        while (pos <= len) {
+            int chunk = read(buffer, pos, capacity - pos);
+            if (chunk == 0) {
+                break;
+            }
+            pos += chunk;
+            if (pos == capacity) {
+                capacity = Math.min(len, 2 * capacity);
+                buffer = Arrays.copyOf(buffer, capacity);
+            }
+        }
+
+        return pos < len ? Arrays.copyOf(buffer, pos) : buffer;
+    }
+
+    public int readNBytes(byte[] buffer, int off, int len) throws IOException {
+        if (len == 0) {
+            return 0;
+        }
+        skipNBytes(off);
+        int pos = 0;
+        while (pos <= len) {
+            int chunk = read(buffer, pos, len);
+            if (chunk == 0) {
+                break;
+            }
+            pos += chunk;
+        }
+
+        return pos;
+    }
+
+    public void skipNBytes(long n) throws IOException {
+        long skipped = 0;
+        while (skipped < n) {
+            long chunk = skip(n);
+            if (chunk == 0) {
+                if (read() >= 0) {
+                    skipped++;
+                } else {
+                    throw new IOException("End of stream reached");
+                }
+            }
+            skipped += chunk;
+        }
+    }
+
     /**
      * Resets this stream to the last marked location. Throws an
      * {@code IOException} if the number of bytes read since the mark has been
@@ -255,5 +320,32 @@ public abstract class InputStream extends Object implements Closeable {
             }
         }
         return skipped;
+    }
+
+    public void transferTo(OutputStream writer) throws IOException {
+        byte[] buffer = new byte[2048];
+        int read;
+        while ((read = read(buffer)) > 0) {
+            writer.write(buffer, 0, read);
+        }
+    }
+
+    public static InputStream nullInputStream() {
+        return new InputStream() {
+            private boolean closed;
+
+            @Override
+            public int read() throws IOException {
+                if (closed) {
+                    throw new IOException("Already closed");
+                }
+                return -1;
+            }
+
+            @Override
+            public void close() {
+                closed = true;
+            }
+        };
     }
 }

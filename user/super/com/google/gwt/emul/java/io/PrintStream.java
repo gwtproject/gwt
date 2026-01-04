@@ -145,6 +145,10 @@ public class PrintStream extends FilterOutputStream {
     }
   }
 
+  public void writeBytes(byte[] buffer) {
+    write(buffer, 0, buffer.length);
+  }
+
   @Override
   public void write(byte[] buffer, int offset, int length) {
     // Force buffer null check first!

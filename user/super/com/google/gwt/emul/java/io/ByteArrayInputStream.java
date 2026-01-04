@@ -184,7 +184,7 @@ public class ByteArrayInputStream extends InputStream {
             return 0;
         }
         int temp = pos;
-        pos = this.count - pos < byteCount ? this.count : (int) (pos + byteCount);
+        pos = this.count < pos + byteCount ? this.count : (int) (pos + byteCount);
         return pos - temp;
     }
 }

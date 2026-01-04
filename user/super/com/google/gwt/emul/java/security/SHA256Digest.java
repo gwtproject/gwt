@@ -20,7 +20,7 @@ import java.util.Arrays;
 /**
  * SHA256 implementation for GWT.
  */
-public class SHA256Digest extends MessageDigest {
+class SHA256Digest extends MessageDigest {
 
   private static final int WORD_LENGTH = 32;
   private static final int[] K = {
@@ -64,6 +64,16 @@ public class SHA256Digest extends MessageDigest {
     wordOff = 0;
     blockOff = 0;
     byteCounter = 0;
+  }
+
+  public Object clone() {
+    SHA256Digest copy = new SHA256Digest();
+    copy.wordBuffer = Arrays.copyOf(wordBuffer, wordBuffer.length);
+    copy.blockBuffer = Arrays.copyOf(blockBuffer, blockBuffer.length);
+    copy.wordOff = wordOff;
+    copy.byteCounter = byteCounter;
+    copy.blockOff = blockOff;
+    return copy;
   }
 
   @Override

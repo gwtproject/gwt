@@ -1000,7 +1000,6 @@ public final class JavaToJavaScriptCompiler {
 
         nodeCount = jsProgram.getNodeCount();
         mods = stats.getNumMods();
-        stats.endNodeCount(nodeCount);
       }
 
       AstDumper.maybeDumpAST(jsProgram);
@@ -1456,7 +1455,6 @@ public final class JavaToJavaScriptCompiler {
 
         nodeCount = jprogram.getNodeCount();
         mods = stats.getNumMods();
-        stats.endNodeCount(nodeCount);
       }
 
       float nodeChangeRate = mods / (float) lastNodeCount;

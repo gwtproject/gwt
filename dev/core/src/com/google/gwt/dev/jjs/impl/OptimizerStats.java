@@ -219,13 +219,4 @@ public class OptimizerStats implements AutoCloseable {
       }
     }
   }
-
-  public void endNodeCount(int nodeCount) {
-    // TODO make a single method in the event type for this
-    jfrEvent.numMods = getNumMods();
-    if (jfrEvent instanceof OptimizationLoopEvent) {
-      OptimizationLoopEvent event = (OptimizationLoopEvent) jfrEvent;
-      event.loopComplete(nodeCount);
-    }
-  }
 }

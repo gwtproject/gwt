@@ -20,7 +20,7 @@ import jdk.jfr.Label;
 
 public class AbstractOptimizationEvent extends AbstractJfrEvent {
   @Label("Number of Modifications")
-  public int numMods = -1;
+  public int numMods;
 
   @Label("Node Count")
   @Description("Number of AST nodes in the program at the start of the optimization loop")

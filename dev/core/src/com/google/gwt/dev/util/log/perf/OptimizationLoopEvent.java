@@ -26,15 +26,6 @@ public class OptimizationLoopEvent extends AbstractOptimizationEvent {
   @Description("The iteration number of the optimization loop")
   final int optimizationIteration;
 
-  @Label("Size change rate")
-  @Description("Rate of change of the AST size (number of nodes) per iteration of the " +
-      "optimization loop. Only measured for the whole loop, too expensive to measure at each step.")
-  float sizeChangeRate;
-
-  @Label("Node modified rate")
-  @Description("Percent of all AST nodes modified in this optimization loop iteration")
-  float nodeChangeRate;
-
   @Label("Language")
   @Description("Language being optimized (Java or JavaScript)")
   final String language;
@@ -42,11 +33,5 @@ public class OptimizationLoopEvent extends AbstractOptimizationEvent {
   public OptimizationLoopEvent(int loopCount, String language) {
     this.optimizationIteration = loopCount;
     this.language = language;
-  }
-
-  public void loopComplete(int afterNodeCount) {
-    assert numMods > -1;
-    this.sizeChangeRate = (nodeCount - afterNodeCount) / (float) nodeCount;
-    this.nodeChangeRate = numMods / (float) nodeCount;
   }
 }

@@ -463,7 +463,7 @@ public final class JavaToJavaScriptCompiler {
         sizeBreakdowns = options.isJsonSoycEnabled() || options.isSoycEnabled()
             || options.isCompilerMetricsEnabled() ? new SizeBreakdown[jsFragments.length] : null;
         generateJavaScriptCode(jjsmap, jsFragments, ranges, sizeBreakdowns, sourceInfoMaps,
-            isSourceMapsEnabled || options.isJsonSoycEnabled());
+            isSourceMapsEnabled || options.isJsonSoycEnabled(), permutationId);
       }
 
       // (9) Construct and return a value
@@ -738,60 +738,83 @@ public final class JavaToJavaScriptCompiler {
     }
   }
 
+  @Name("gwt.compiler.js.Fragment")
+  private static final class JsFragmentEvent extends AbstractJfrEvent {
+
+    @Label("Permutation ID")
+    public final int permutationId;
+
+    @Label("Fragment Index")
+    public final int fragmentIndex;
+
+    @Label("JS Size in Bytes")
+    public int jsBytes;
+
+    public JsFragmentEvent(int permutationId, int fragmentIndex) {
+      this.permutationId = permutationId;
+      this.fragmentIndex = fragmentIndex;
+    }
+  }
+
+
   /**
    * Generate Js code from the given Js ASTs. Also produces information about that transformation.
    */
   private void generateJavaScriptCode(JavaToJavaScriptMap jjsMap, String[] jsFragments,
       StatementRanges[] ranges, SizeBreakdown[] sizeBreakdowns,
-      List<JsSourceMap> sourceInfoMaps, boolean sourceMapsEnabled) {
+      List<JsSourceMap> sourceInfoMaps, boolean sourceMapsEnabled,
+      int permutationId) {
 
     try (SimpleEvent ignored = new SimpleEvent("Generate JavaScript")) {
       for (int i = 0; i < jsFragments.length; i++) {
-        DefaultTextOutput out = new DefaultTextOutput(!options.isIncrementalCompileEnabled() &&
-            options.getOutput().shouldMinimize());
-        JsReportGenerationVisitor v = new JsReportGenerationVisitor(out, jjsMap,
-            options.isJsonSoycEnabled());
-        v.accept(jsProgram.getFragmentBlock(i));
+        try (JsFragmentEvent event = new JsFragmentEvent(permutationId, i)) {
+          DefaultTextOutput out = new DefaultTextOutput(!options.isIncrementalCompileEnabled() &&
+              options.getOutput().shouldMinimize());
+          JsReportGenerationVisitor v = new JsReportGenerationVisitor(out, jjsMap,
+              options.isJsonSoycEnabled());
+          v.accept(jsProgram.getFragmentBlock(i));
 
-        StatementRanges statementRanges = v.getStatementRanges();
-        String code = out.toString();
-        JsSourceMap infoMap = (sourceInfoMaps != null) ? v.getSourceInfoMap() : null;
+          StatementRanges statementRanges = v.getStatementRanges();
+          String code = out.toString();
+          JsSourceMap infoMap = (sourceInfoMaps != null) ? v.getSourceInfoMap() : null;
 
-        JsAbstractTextTransformer transformer =
-            new JsNoopTransformer(code, statementRanges, infoMap);
+          JsAbstractTextTransformer transformer =
+              new JsNoopTransformer(code, statementRanges, infoMap);
 
-        /*
-         * Cut generated JS up on class boundaries and re-link the source (possibly making use of
-         * source from previous compiles, thus making it possible to perform partial recompiles).
-         */
-        if (options.isIncrementalCompileEnabled()) {
-          transformer = new JsTypeLinker(logger, transformer, v.getClassRanges(),
-              v.getProgramClassRange(), getMinimalRebuildCache(), jprogram.typeOracle);
-          transformer.exec();
-        }
-
-        /*
-         * Reorder function decls to improve compression ratios. Also restructures the top level
-         * blocks into sub-blocks if they exceed 32767 statements.
-         */
-        // TODO(cromwellian) move to the Js AST optimization, re-enable sourcemaps + clustering
-        if (!sourceMapsEnabled && !options.isClosureCompilerFormatEnabled()
-            && options.shouldClusterSimilarFunctions()
-            && options.getNamespace() == JsNamespaceOption.NONE
-            && options.getOutput() == JsOutputOption.OBFUSCATED) {
-          try (SimpleEvent ignored2 = new SimpleEvent("Function Clusterer")) {
-            transformer = new JsFunctionClusterer(transformer);
+          /*
+           * Cut generated JS up on class boundaries and re-link the source (possibly making use of
+           * source from previous compiles, thus making it possible to perform partial recompiles).
+           */
+          if (options.isIncrementalCompileEnabled()) {
+            transformer = new JsTypeLinker(logger, transformer, v.getClassRanges(),
+                v.getProgramClassRange(), getMinimalRebuildCache(), jprogram.typeOracle);
             transformer.exec();
           }
-        }
 
-        jsFragments[i] = transformer.getJs();
-        ranges[i] = transformer.getStatementRanges();
-        if (sizeBreakdowns != null) {
-          sizeBreakdowns[i] = v.getSizeBreakdown();
-        }
-        if (sourceInfoMaps != null) {
-          sourceInfoMaps.add(transformer.getSourceInfoMap());
+          /*
+           * Reorder function decls to improve compression ratios. Also restructures the top level
+           * blocks into sub-blocks if they exceed 32767 statements.
+           */
+          // TODO(cromwellian) move to the Js AST optimization, re-enable sourcemaps + clustering
+          if (!sourceMapsEnabled && !options.isClosureCompilerFormatEnabled()
+              && options.shouldClusterSimilarFunctions()
+              && options.getNamespace() == JsNamespaceOption.NONE
+              && options.getOutput() == JsOutputOption.OBFUSCATED) {
+            try (SimpleEvent ignored2 = new SimpleEvent("Function Clusterer")) {
+              transformer = new JsFunctionClusterer(transformer);
+              transformer.exec();
+            }
+          }
+
+          jsFragments[i] = transformer.getJs();
+          event.jsBytes = jsFragments[i].getBytes(StandardCharsets.UTF_8).length;
+          ranges[i] = transformer.getStatementRanges();
+          if (sizeBreakdowns != null) {
+            sizeBreakdowns[i] = v.getSizeBreakdown();
+          }
+          if (sourceInfoMaps != null) {
+            sourceInfoMaps.add(transformer.getSourceInfoMap());
+          }
         }
       }
     }

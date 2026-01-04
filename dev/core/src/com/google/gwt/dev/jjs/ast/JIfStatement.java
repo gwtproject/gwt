@@ -49,12 +49,8 @@ public class JIfStatement extends JStatement {
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {
       ifExpr = visitor.accept(ifExpr);
-//      if (thenStmt != null) {
-        thenStmt = ensureBlock(visitor.accept(thenStmt, true));
-//      }
-//      if (elseStmt != null) {
-        elseStmt = ensureBlock(visitor.accept(elseStmt, true));
-//      }
+      thenStmt = ensureBlock(visitor.accept(thenStmt, true));
+      elseStmt = ensureBlock(visitor.accept(elseStmt, true));
     }
     visitor.endVisit(this, ctx);
   }

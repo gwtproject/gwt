@@ -32,8 +32,14 @@ import com.google.gwt.dev.jjs.ast.RuntimeConstants;
  * The Devirtualizer pass needs to run before this pass.
  */
 public class ReplaceGetClassOverrides {
+  private static final String NAME = ReplaceGetClassOverrides.class.getSimpleName();
+
   public static void exec(JProgram program) {
-    new GetClassInlinerRemover(program).accept(program);
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      GetClassInlinerRemover remover = new GetClassInlinerRemover(program);
+      remover.accept(program);
+      stats.recordModified(remover.getNumMods());
+    }
   }
 
   private static class GetClassInlinerRemover extends JModVisitor {

@@ -362,7 +362,7 @@ public class PrunerTest extends OptimizerTestBase {
     program.addEntryMethod(findMainMethod(program));
     boolean didChange = false;
     // TODO(jbrosenberg): remove loop when Pruner/CFA interaction is perfect.
-    while (Pruner.exec(program, true).didChange()) {
+    while (Pruner.exec(program, true, OptimizerContext.NULL_OPTIMIZATION_CONTEXT) > 0) {
       didChange = true;
     }
     return didChange;

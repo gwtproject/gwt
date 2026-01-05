@@ -25,12 +25,9 @@ import com.google.gwt.dev.jjs.ast.JPostfixOperation;
 import com.google.gwt.dev.jjs.ast.JPrefixOperation;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 
 /**
- * Most autoboxing is handled by {@link GenerateJavaAST}. The only cases it does
+ * Most autoboxing is handled by {@link GwtAstBuilder}. The only cases it does
  * not handle are <code>++</code>, <code>--</code>, and compound assignment
  * operations (<code>+=</code>, etc.) when applied to a boxed type. This class
  * fixes such cases in two steps. First, an internal subclass of
@@ -40,13 +37,14 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
  * the underlying box (<code>x = box(unbox(x) + 1)</code>).
  *
  * <p>
- * Update: GenerateJavaAST can also leave invalid AST structures of the form
+ * Update: GwtAstBuilder can also leave invalid AST structures of the form
  * <code>(Foo) x = foo</code> due to the way generics are handled. This can
  * happen when assigning into a field of a generic type. We'll go ahead and
  * resolve that case here as well.
  * </p>
  */
 public class FixAssignmentsToUnboxOrCast extends JModVisitor {
+  private static final String NAME = FixAssignmentsToUnboxOrCast.class.getSimpleName();
   /**
    * Normalize compound assignments where the lhs is an unbox operation.
    */
@@ -92,11 +90,16 @@ public class FixAssignmentsToUnboxOrCast extends JModVisitor {
   }
 
   public static void exec(JProgram program) {
-    Event fixAssignmentToUnboxEvent =
-        SpeedTracerLogger.start(CompilerEventType.FIX_ASSIGNMENT_TO_UNBOX);
-    new CompoundAssignmentsToUnboxOrCastNormalizer(program).accept(program);
-    new FixAssignmentsToUnboxOrCast(program).accept(program);
-    fixAssignmentToUnboxEvent.end();
+    try (OptimizerStats stats = OptimizerStats.normalizer(NAME)) {
+      CompoundAssignmentsToUnboxOrCastNormalizer fixLhs =
+          new CompoundAssignmentsToUnboxOrCastNormalizer(program);
+      int numMods = fixLhs.accept(program);
+      stats.recordModified(numMods);
+      FixAssignmentsToUnboxOrCast fixAssignmentsToUnboxOrCast =
+          new FixAssignmentsToUnboxOrCast(program);
+      fixAssignmentsToUnboxOrCast.accept(program);
+      stats.recordModified(fixAssignmentsToUnboxOrCast.getNumMods());
+    }
   }
 
   private final AutoboxUtils autoboxUtils;

@@ -42,7 +42,8 @@ import java.util.Stack;
  * instance is closed.
  */
 public class OptimizerStats implements AutoCloseable {
-  private static final ThreadLocal<Stack<OptimizerStats>> stack = ThreadLocal.withInitial(Stack::new);
+  private static final ThreadLocal<Stack<OptimizerStats>> stack =
+      ThreadLocal.withInitial(Stack::new);
   private final List<OptimizerStats> children = new ArrayList<>();
   private final String name;
   private final AbstractOptimizationEvent jfrEvent;

@@ -738,24 +738,25 @@ public final class JavaToJavaScriptCompiler {
     }
   }
 
+  @Label("Generate JS Fragment")
   @Name("gwt.compiler.js.Fragment")
-  private static final class JsFragmentEvent extends AbstractJfrEvent {
+  public static final class JsFragmentEvent extends AbstractJfrEvent {
 
     @Label("Permutation ID")
     public final int permutationId;
 
     @Label("Fragment Index")
+    @Description("Zero represents the 'initial download', largest value indicates 'leftovers'")
     public final int fragmentIndex;
 
     @Label("JS Size in Bytes")
     public int jsBytes;
 
-    public JsFragmentEvent(int permutationId, int fragmentIndex) {
+    JsFragmentEvent(int permutationId, int fragmentIndex) {
       this.permutationId = permutationId;
       this.fragmentIndex = fragmentIndex;
     }
   }
-
 
   /**
    * Generate Js code from the given Js ASTs. Also produces information about that transformation.

@@ -624,7 +624,7 @@ class ImageBundleBuilder {
    *
    * @param logger a hierarchical logger which logs to the hosted console
    * @param imageName the name of an image that can be found on the classpath
-   * @param resource the URL from which the image data wil be loaded
+   * @param resource the URL from which the image data will be loaded
    * @throws UnableToCompleteException if the image with name
    *           <code>imageName</code> cannot be added to the master composite
    *           image

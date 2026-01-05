@@ -351,7 +351,7 @@ public class CodeSplitter {
    *     it in the code splitter.
    *   - initial fragments: some runAsyncs are forced to be in the initial download by listing them
    *     in the {@link CodeSplitters.PROP_INITIAL_SEQUENCE} property. A separate fragment (Type.INITIAL)
-   *     is created for each of there splitpoints and each contains only one splitpoit.
+   *     is created for each of there splitpoints and each contains only one splitpoint.
    *   - exclusive fragments: the remaining runAsyncs are assigned to some exclusive fragment. Many
    *     splitpoints may be in the same fragment but each of these splitpoints is in one and only
    *     one fragment. The fragmentation strategy assigns splitpoints to fragments.
@@ -514,8 +514,8 @@ public class CodeSplitter {
    * <p>Initially GWT.runAsyncs are replaced in the {@link ReplaceRunAsyncs} pass and some code
    * is added to the AST that references the fragment for a runAsync. At that stage (before any
    * code splitting has occurred) each unique runAsync id and the number of runAsyncs are embedded
-   * in the AST as "tagged" JsNumbericEntry. After code splitting those entries need to be replaced
-   * by the frament ids associatied with each runAsync and the total number of fragments.
+   * in the AST as "tagged" JsNumericEntry. After code splitting those entries need to be replaced
+   * by the fragment ids associated with each runAsync and the total number of fragments.
    * </p>
    */
   private void replaceFragmentId() {

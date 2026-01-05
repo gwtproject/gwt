@@ -368,9 +368,9 @@ public class TypeTightener {
     }
 
     private void addInterfacesImplementorRecursive(JDeclaredType target, JClassType implementor) {
-      for (JInterfaceType implment : target.getImplements()) {
-        addImplementor(implment, implementor);
-        addInterfacesImplementorRecursive(implment, implementor);
+      for (JInterfaceType implement : target.getImplements()) {
+        addImplementor(implement, implementor);
+        addInterfacesImplementorRecursive(implement, implementor);
       }
     }
 

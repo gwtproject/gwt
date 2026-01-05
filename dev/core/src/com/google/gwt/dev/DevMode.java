@@ -181,7 +181,7 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
 
     @Override
     public boolean setString(String arg) {
-      // Supercedes -noserver.
+      // Supersedes -noserver.
       options.setNoServer(false);
       String sclName;
       int idx = arg.indexOf(':');

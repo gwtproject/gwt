@@ -28,7 +28,7 @@ import com.google.gwt.dev.jjs.ast.JType;
 /**
  * Update polymorphic method calls to tighter bindings based on the type of the
  * qualifier. For a given polymorphic method call to a non-final target, see if
- * the static type of the qualifer would let us target an override instead.
+ * the static type of the qualifier would let us target an override instead.
  *
  * This is possible because the qualifier might have been tightened by
  * {@link com.google.gwt.dev.jjs.impl.TypeTightener}.

@@ -51,7 +51,7 @@ public class FileBackedObject<T extends Serializable> implements PersistenceBack
    * @throws IOException if the temporary file could not be created
    */
   public FileBackedObject(Class<T> clazz) throws IOException {
-    this(clazz, File.createTempFile("fileBackedObject", ".ser"));
+    this(clazz, File.createTempFile("fileBackedObject", ".set"));
     backingFile.deleteOnExit();
   }
 

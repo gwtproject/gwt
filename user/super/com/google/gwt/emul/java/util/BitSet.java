@@ -34,7 +34,7 @@ import javaemul.internal.LongUtils;
  * public static BitSet valueOf(ByteBuffer)
  * public static BitSet valueOf(LongBuffer)
  */
-public class BitSet {
+public class BitSet implements Cloneable {
   private static final int WORD_MASK = 0x7fffffff;
   private static final int BITS_PER_WORD = 31;
 

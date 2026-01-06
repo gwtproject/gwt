@@ -18,7 +18,7 @@ package java.io;
 /**
  * Reads a stream of characters.
  */
-public abstract class Reader {
+public abstract class Reader implements Closeable {
   /**
    * The maximum buffer size to incrementally read in {@link #skip}.
    */
@@ -27,6 +27,7 @@ public abstract class Reader {
   /**
    * Closes the reader, and releases any associated resources.
    */
+  @Override
   public abstract void close() throws IOException;
 
   /**

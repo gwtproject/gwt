@@ -28,7 +28,7 @@ import javaemul.internal.ArrayHelper;
  * @param <K> key type
  * @param <V> value type
  */
-public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
+public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> implements Cloneable {
 
   private final class EntrySet extends AbstractSet<Entry<K, V>> {
 

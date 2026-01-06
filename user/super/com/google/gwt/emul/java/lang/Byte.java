@@ -15,10 +15,12 @@
  */
 package java.lang;
 
+import java.lang.constant.Constable;
+
 /**
  * Wraps native <code>byte</code> as an object.
  */
-public final class Byte extends Number implements Comparable<Byte> {
+public final class Byte extends Number implements Comparable<Byte>, Constable {
 
   public static final byte MIN_VALUE = (byte) 0x80;
   public static final byte MAX_VALUE = (byte) 0x7F;

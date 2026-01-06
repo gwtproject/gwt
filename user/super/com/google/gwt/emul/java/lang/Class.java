@@ -17,6 +17,7 @@ package java.lang;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+import java.lang.constant.Constable;
 import java.lang.reflect.Type;
 import javaemul.internal.annotations.DoNotInline;
 
@@ -29,7 +30,7 @@ import javaemul.internal.annotations.DoNotInline;
  *
  * @param <T> the type of the object
  */
-public final class Class<T> implements Type {
+public final class Class<T> implements Type, Constable {
 
   private static final int PRIMITIVE = 0x00000001;
   private static final int INTERFACE = 0x00000002;

@@ -49,6 +49,7 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.PackageElement;
+import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.ArrayType;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
@@ -156,18 +157,13 @@ public class JavaEmulSummaryDoclet implements Doclet {
     loadMissingMemberLists();
     try (HTMLWriter pwPresent = createPrintWriter(outputFile);
          HTMLWriter pwMissing = createPrintWriter(missingFile)) {
-      pwPresent.formatLine("<ol class=\"toc\" id=\"pageToc\">");
-      getSpecifiedPackages(env)
-          .forEach(pack ->
-              pwPresent.formatLine("  <li><a href=\"#Package_%s\">%s</a></li>",
-                  pack.getQualifiedName().toString().replace('.', '_'),
-                  pack.getQualifiedName().toString()));
-
-      pwPresent.formatLine("</ol>\n");
-      Set<String> allClasses = getSpecifiedPackages(env)
-        .flatMap(pack -> pack.getEnclosedElements().stream()
-        .flatMap(clazz -> withInnerClasses(clazz, pack, null)))
-        .collect(Collectors.toSet());
+      printTableOfContents(pwPresent, env);
+      printTableOfContents(pwMissing, env);
+      Set<TypeElement> allClasses = getSpecifiedPackages(env)
+          .flatMap(pack -> pack.getEnclosedElements().stream()
+          .flatMap(this::withInnerClasses))
+          .map(el -> (TypeElement) el)
+          .collect(Collectors.toSet());
       getSpecifiedPackages(env).forEach(pack -> {
         Optional<Module> matchingModuleName = ModuleLayer.boot().modules().stream()
             .filter(m -> m.getPackages().contains(pack.getQualifiedName().toString()))
@@ -211,6 +207,17 @@ public class JavaEmulSummaryDoclet implements Doclet {
     return true;
   }
 
+  private void printTableOfContents(HTMLWriter htmlWriter, DocletEnvironment env) {
+    htmlWriter.formatLine("<ol class=\"toc\" id=\"pageToc\">");
+    getSpecifiedPackages(env)
+        .forEach(pack ->
+            htmlWriter.formatLine("  <li><a href=\"#Package_%s\">%s</a></li>",
+                pack.getQualifiedName().toString().replace('.', '_'),
+                pack.getQualifiedName().toString()));
+
+    htmlWriter.formatLine("</ol>\n");
+  }
+
   private HTMLWriter createPrintWriter(String filePath) throws IOException {
     Path path = Path.of(filePath);
     Files.createDirectories(path.getParent());
@@ -249,26 +256,21 @@ public class JavaEmulSummaryDoclet implements Doclet {
     return "https://github.com/gwtproject/gwt/issues/" + filename.replaceAll("\\D", "");
   }
 
-  private Stream<String> withInnerClasses(Element clazz, PackageElement pack, String parentName) {
+  private Stream<Element> withInnerClasses(Element clazz) {
     return Stream.concat(
-      Stream.of(pack.getQualifiedName() + "." + getFullName(clazz, parentName)),
+      Stream.of(clazz),
       clazz.getEnclosedElements().stream()
           .filter(JavaEmulSummaryDoclet::isType)
-          .flatMap(inner -> withInnerClasses(inner, pack,
-              getFullName(clazz, parentName))));
+          .flatMap(this::withInnerClasses));
   }
 
   private static boolean isType(Element element) {
     return element.getKind().isClass() || element.getKind().isInterface();
   }
 
-  private String getFullName(Element clazz, String parentName) {
-    return (parentName == null ? "" : parentName + "$") + clazz.getSimpleName();
-  }
-
   private void emitClassDocs(DocletEnvironment env, HTMLWriter pwPresent,
                  HTMLWriter pwMissing, String packURL, Element cls,
-                 String pack, Set<String> allClasses) {
+                 String pack, Set<TypeElement> allClasses) {
     pwPresent.skipLine();
     pwPresent.formatLine("  <dt><a href=\"%s%s.html\">%s</a></dt>", packURL,
         qualifiedSimpleName(cls), qualifiedSimpleName(cls));
@@ -294,9 +296,14 @@ public class JavaEmulSummaryDoclet implements Doclet {
             flatSignature(t -> simpleParamName(env, t), cls, executableElement))
         .collect(Collectors.toList());
 
-    List<String> methods = getMethodNames(cls, t -> simpleParamName(env, t));
+    List<ExecutableElement> methodElements = cls.getEnclosedElements()
+        .stream()
+        .filter(element -> ElementKind.METHOD == element.getKind())
+        .filter(JavaEmulSummaryDoclet::isMemberVisible)
+        .map(member -> (ExecutableElement) member).collect(Collectors.toList());
+    List<String> methods = getMethodNames(methodElements, cls, t -> simpleParamName(env, t));
 
-    List<String> erasedMethods = getMethodNames(cls, t -> erasedParamName(env, t));
+    List<String> erasedMethods = getMethodNames(methodElements, cls, t -> erasedParamName(env, t));
 
     if (!constructors.isEmpty()) {
       pwPresent.formatLine("  <dd><strong>Constructors:</strong> %s</dd>",
@@ -328,7 +335,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
     List<Method> superMethods = new ArrayList<>(Arrays.asList(superclass.getMethods()));
 
     for (Class<?> parentInterface : jreClass.getInterfaces()) {
-      if (!allClasses.contains(parentInterface.getTypeName())) {
+      if (isMissingInterface((TypeElement) cls, allClasses, parentInterface)) {
         System.out.format("Missing interface for %s: %s%n",
             jreClass, parentInterface.getTypeName());
       }
@@ -397,6 +404,25 @@ public class JavaEmulSummaryDoclet implements Doclet {
            pack + cls.getSimpleName() + "$", allClasses));
   }
 
+  private boolean isMatching(TypeMirror iface, Class<?> parentInterface) {
+    return iface.toString().split("<")[0].equals(
+        parentInterface.getTypeName().replace('$', '.'));
+  }
+
+  private boolean isMissingInterface(TypeElement cls, Set<TypeElement> allClasses,
+                                     Class<?> parentInterface) {
+    if (cls.getInterfaces().stream().anyMatch(iface -> isMatching(iface, parentInterface))) {
+      return false;
+    }
+    String superclassName = cls.getSuperclass().toString().split("<")[0];
+    TypeElement superclass = allClasses.stream().filter(other ->
+            other.getQualifiedName().toString().equals(superclassName)).findFirst().orElse(null);
+    if (superclass != null) {
+      return isMissingInterface(superclass, allClasses, parentInterface);
+    }
+    return true;
+  }
+
   private void addMissingClass(String fullInnerName, String pack, String packURL,
       HTMLWriter pwMissing) {
     pwMissing.skipLine();
@@ -456,14 +482,11 @@ public class JavaEmulSummaryDoclet implements Doclet {
     return "";
   }
 
-  private List<String> getMethodNames(Element cls, Function<TypeMirror, String> typeNamer) {
-    return cls.getEnclosedElements()
-      .stream()
-      .filter(element -> ElementKind.METHOD == element.getKind())
-      .filter(JavaEmulSummaryDoclet::isMemberVisible)
-      .map(member -> (ExecutableElement) member)
-      .map(executableElement -> flatSignature(typeNamer, cls, executableElement))
-      .collect(Collectors.toList());
+  private List<String> getMethodNames(List<ExecutableElement> methods, Element cls,
+      Function<TypeMirror, String> typeNamer) {
+    return methods.stream()
+        .map(executableElement -> flatSignature(typeNamer, cls, executableElement))
+        .collect(Collectors.toList());
   }
 
   private static boolean isMemberVisible(Element member) {

@@ -31,7 +31,7 @@ import javaemul.internal.annotations.SpecializeMethod;
  *
  * @param <E> enumeration type
  */
-public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
+public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> implements Cloneable {
 
   /**
    * Implemented via sparse array since the set size is finite. Iteration takes

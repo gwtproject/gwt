@@ -17,9 +17,7 @@ package com.google.gwt.dev.util;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 import com.google.gwt.thirdparty.guava.common.io.CharStreams;
 import com.google.gwt.thirdparty.guava.common.io.Closeables;
@@ -767,10 +765,10 @@ public final class Util {
    */
   public static void writeObjectAsFile(TreeLogger logger, File file,
       Object... objects) throws UnableToCompleteException {
-    Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
     // No need to check mkdirs result because an IOException will occur anyway
     file.getParentFile().mkdirs();
-    try (OutputStream stream = new FileOutputStream(file);
+    try (SimpleEvent ignored = new SimpleEvent("Write Object as file");
+         OutputStream stream = new FileOutputStream(file);
          ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
       for (Object object : objects) {
         objectStream.writeObject(object);
@@ -779,8 +777,6 @@ public final class Util {
       logger.log(TreeLogger.ERROR, "Unable to write file: "
           + file.getAbsolutePath(), e);
       throw new UnableToCompleteException();
-    } finally {
-      writeObjectAsFileEvent.end();
     }
   }
 

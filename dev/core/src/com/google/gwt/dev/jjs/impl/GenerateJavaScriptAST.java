@@ -170,9 +170,7 @@ import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
 import com.google.gwt.dev.util.arg.OptionOptimize;
 import com.google.gwt.dev.util.collect.Stack;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
@@ -2928,13 +2926,10 @@ public class GenerateJavaScriptAST {
       JsProgram jsProgram, CompilerContext compilerContext, TypeMapper<?> typeMapper,
       Map<StandardSymbolData, JsName> symbolTable, PermutationProperties props) {
 
-    Event event = SpeedTracerLogger.start(CompilerEventType.GENERATE_JS_AST);
-    try {
+    try (SimpleEvent ignored = new SimpleEvent("Generate JS AST")) {
       GenerateJavaScriptAST generateJavaScriptAST = new GenerateJavaScriptAST(logger, program,
           jsProgram, compilerContext, typeMapper, symbolTable, props);
       return generateJavaScriptAST.execImpl();
-    } finally {
-      event.end();
     }
   }
 

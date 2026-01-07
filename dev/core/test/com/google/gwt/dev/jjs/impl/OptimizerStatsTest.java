@@ -25,7 +25,7 @@ import java.util.List;
 public class OptimizerStatsTest extends TestCase {
 
   public void testOptimizerStats() {
-    OptimizerStats stats = new OptimizerStats("foo");
+    OptimizerStats stats = OptimizerStats.optimization("foo");
     assertEquals("foo", stats.getName());
     assertEquals(0, stats.getNumMods());
     assertEquals(0, stats.getNumVisits());
@@ -52,7 +52,7 @@ public class OptimizerStatsTest extends TestCase {
     assertEquals(6, stats.getNumVisits());
     assertEquals(11, stats.getNumMods());
 
-    OptimizerStats childStats = new OptimizerStats("bar");
+    OptimizerStats childStats = OptimizerStats.optimization("bar");
     childStats.recordModified(9).recordVisits(24);
     assertEquals(9, childStats.getNumMods());
     assertEquals(24, childStats.getNumVisits());
@@ -68,11 +68,13 @@ public class OptimizerStatsTest extends TestCase {
   }
 
   public void testOptimizerStatsChangeChildOnly() {
-    OptimizerStats stats = new OptimizerStats("foo");
-    OptimizerStats childStats = new OptimizerStats("bar");
-    stats.add(childStats);
-    assertFalse(stats.didChange());
-    childStats.recordModified();
-    assertTrue(stats.didChange());
+    try (OptimizerStats stats = OptimizerStats.optimization("foo")) {
+      try (OptimizerStats childStats = OptimizerStats.optimization("bar")) {
+        stats.add(childStats);
+        assertFalse(stats.didChange());
+        childStats.recordModified();
+      }
+      assertTrue(stats.didChange());
+    }
   }
 }

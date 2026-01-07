@@ -31,10 +31,6 @@ import com.google.gwt.dev.jjs.ast.JValueLiteral;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
-import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
@@ -182,17 +178,8 @@ public class SameParameterValueOptimizer {
 
   private static final String NAME = SameParameterValueOptimizer.class.getSimpleName();
 
-  @VisibleForTesting
-  static OptimizerStats exec(JProgram program) {
-    return exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
-  }
-
-  public static OptimizerStats exec(JProgram program, OptimizerContext optimizerCtx) {
-    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new SameParameterValueOptimizer(program).execImpl(program, optimizerCtx);
-    optimizerCtx.incOptimizationStep();
-    optimizeEvent.end("didChange", "" + stats.didChange());
-    return stats;
+  public static int exec(JProgram program, OptimizerContext optimizerCtx) {
+    return new SameParameterValueOptimizer(program).execImpl(program, optimizerCtx);
   }
 
   /**
@@ -216,15 +203,19 @@ public class SameParameterValueOptimizer {
     this.program = program;
   }
 
-  private OptimizerStats execImpl(JNode node, OptimizerContext optimizerCtx) {
-    OptimizerStats stats = new OptimizerStats(NAME);
-    new AnalysisVisitor().accept(node);
-    SubstituteParameterVisitor substituteParameterVisitor =
-        new SubstituteParameterVisitor(optimizerCtx);
-    substituteParameterVisitor.accept(node);
-    stats.recordModified(substituteParameterVisitor.getNumMods());
+  private int execImpl(JNode node, OptimizerContext optimizerCtx) {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME);) {
+      new AnalysisVisitor().accept(node);
+      SubstituteParameterVisitor substituteParameterVisitor =
+          new SubstituteParameterVisitor(optimizerCtx);
+      substituteParameterVisitor.accept(node);
+      stats.recordModified(substituteParameterVisitor.getNumMods());
 
-    JavaAstVerifier.assertProgramIsConsistent(program);
-    return stats;
+      JavaAstVerifier.assertProgramIsConsistent(program);
+
+      optimizerCtx.incOptimizationStep();
+
+      return stats.getNumMods();
+    }
   }
 }

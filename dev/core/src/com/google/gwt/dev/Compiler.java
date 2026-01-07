@@ -35,9 +35,7 @@ import com.google.gwt.dev.util.arg.ArgHandlerSaveSourceOutput;
 import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
 import com.google.gwt.dev.util.arg.ArgHandlerWorkDirOptional;
 import com.google.gwt.dev.util.arg.OptionOptimize;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
 import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
@@ -94,8 +92,6 @@ public class Compiler {
       System.out.println("Will dump AST to: "
           + System.getProperty("gwt.jjs.dumpAst"));
     }
-
-    SpeedTracerLogger.init();
 
     /*
      * NOTE: main always exits with a call to System.exit to terminate any
@@ -202,15 +198,15 @@ public class Compiler {
           precompilation.removeSourceArtifacts(branch);
         }
 
-        Event compilePermutationsEvent =
-            SpeedTracerLogger.start(CompilerEventType.COMPILE_PERMUTATIONS);
-        Permutation[] allPerms = precompilation.getPermutations();
-        List<PersistenceBackedObject<PermutationResult>> resultFiles =
-            CompilePerms.makeResultFiles(
-                options.getCompilerWorkDir(moduleName), allPerms, options);
-        CompilePerms.compile(branch, compilerContext, precompilation, allPerms,
-            options.getLocalWorkers(), resultFiles);
-        compilePermutationsEvent.end();
+        Permutation[] allPerms;
+        List<PersistenceBackedObject<PermutationResult>> resultFiles;
+        try (SimpleEvent ignored = new SimpleEvent("Compile Permutations")) {
+          allPerms = precompilation.getPermutations();
+          resultFiles = CompilePerms.makeResultFiles(
+              options.getCompilerWorkDir(moduleName), allPerms, options);
+          CompilePerms.compile(branch, compilerContext, precompilation, allPerms,
+              options.getLocalWorkers(), resultFiles);
+        }
 
         ArtifactSet generatedArtifacts = precompilation.getGeneratedArtifacts();
         PrecompileTaskOptions precompileOptions = precompilation.getUnifiedAst().getOptions();
@@ -222,21 +218,21 @@ public class Compiler {
             String.format("Compilation succeeded -- %.3fs", compileSeconds));
 
         long beforeLinkMs = System.currentTimeMillis();
-        Event linkEvent = SpeedTracerLogger.start(CompilerEventType.LINK);
-        File absPath = new File(options.getWarDir(), moduleDef.getName());
-        absPath = absPath.getAbsoluteFile();
+        try (SimpleEvent ignored = new SimpleEvent("Link")) {
+          File absPath = new File(options.getWarDir(), moduleDef.getName());
+          absPath = absPath.getAbsoluteFile();
 
-        String logMessage = "Linking into " + absPath;
-        if (options.getExtraDir() != null) {
-          File absExtrasPath = new File(options.getExtraDir(),
-              moduleDef.getName());
-          absExtrasPath = absExtrasPath.getAbsoluteFile();
-          logMessage += "; Writing extras to " + absExtrasPath;
+          String logMessage = "Linking into " + absPath;
+          if (options.getExtraDir() != null) {
+            File absExtrasPath = new File(options.getExtraDir(),
+                moduleDef.getName());
+            absExtrasPath = absExtrasPath.getAbsoluteFile();
+            logMessage += "; Writing extras to " + absExtrasPath;
+          }
+          Link.link(logger.branch(TreeLogger.TRACE, logMessage), moduleDef,
+              moduleDef.getPublicResourceOracle(), generatedArtifacts, allPerms, resultFiles,
+              Sets.<PermutationResult>newHashSet(), precompileOptions, options);
         }
-        Link.link(logger.branch(TreeLogger.TRACE, logMessage), moduleDef,
-            moduleDef.getPublicResourceOracle(), generatedArtifacts, allPerms, resultFiles,
-            Sets.<PermutationResult>newHashSet(), precompileOptions, options);
-        linkEvent.end();
         long afterLinkMs = System.currentTimeMillis();
         double linkSeconds = (afterLinkMs - beforeLinkMs) / 1000d;
         branch.log(TreeLogger.INFO, String.format("Linking succeeded -- %.3fs", linkSeconds));

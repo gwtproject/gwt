@@ -128,7 +128,7 @@ public class ImplicitUpcastAnalyzerTest extends OptimizerTestBase {
   @Override
   protected boolean doOptimizeMethod(TreeLogger logger, JProgram program, JMethod method) {
     program.addEntryMethod(findMainMethod(program));
-    TypeTightener.exec(program);
+    TypeTightener.exec(program, new FullOptimizerContext(program));
     return false;
   }
 }

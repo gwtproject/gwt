@@ -20,10 +20,6 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JType;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
-import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 
 import java.util.List;
 
@@ -86,17 +82,8 @@ public class MethodCallSpecializer {
 
   public static final String NAME = MethodCallSpecializer.class.getSimpleName();
 
-  @VisibleForTesting
-  static OptimizerStats exec(JProgram program) {
-    return exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
-  }
-
-  public static OptimizerStats exec(JProgram program, OptimizerContext optimizerCtx) {
-    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new MethodCallSpecializer(program).execImpl(optimizerCtx);
-    optimizerCtx.incOptimizationStep();
-    optimizeEvent.end("didChange", "" + stats.didChange());
-    return stats;
+  public static int exec(JProgram program, OptimizerContext optimizerCtx) {
+      return new MethodCallSpecializer(program).execImpl(optimizerCtx);
   }
 
   private final JProgram program;
@@ -105,10 +92,17 @@ public class MethodCallSpecializer {
     this.program = program;
   }
 
-  private OptimizerStats execImpl(OptimizerContext optimizerCtx) {
-    MethodCallSpecializingVisitor specializer = new MethodCallSpecializingVisitor(optimizerCtx);
-    specializer.accept(program);
-    JavaAstVerifier.assertProgramIsConsistent(program);
-    return new OptimizerStats(NAME).recordModified(specializer.getNumMods());
+  private int execImpl(OptimizerContext optimizerCtx) {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      MethodCallSpecializingVisitor specializer = new MethodCallSpecializingVisitor(optimizerCtx);
+      specializer.accept(program);
+      stats.recordModified(specializer.getNumMods());
+
+      JavaAstVerifier.assertProgramIsConsistent(program);
+
+      optimizerCtx.incOptimizationStep();
+
+      return stats.getNumMods();
+    }
   }
 }

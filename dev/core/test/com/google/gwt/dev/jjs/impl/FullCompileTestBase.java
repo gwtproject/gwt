@@ -95,8 +95,8 @@ public abstract class FullCompileTestBase extends JJSTestBase {
     ComputeCastabilityInformation.exec(jProgram, false);
     ImplementCastsAndTypeChecks.exec(jProgram, false);
     ArrayNormalizer.exec(jProgram);
-    TypeTightener.exec(jProgram);
-    MethodCallTightener.exec(jProgram);
+    TypeTightener.exec(jProgram, new FullOptimizerContext(jProgram));
+    MethodCallTightener.exec(jProgram, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
 
     IntTypeMapper typeMapper = new IntTypeMapper();
     ResolveRuntimeTypeReferences.exec(jProgram, typeMapper, TypeOrder.FREQUENCY);

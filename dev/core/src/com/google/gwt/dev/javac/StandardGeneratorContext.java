@@ -41,9 +41,7 @@ import com.google.gwt.dev.resource.impl.AbstractResourceOracle;
 import com.google.gwt.dev.util.DiskCache;
 import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.dev.util.collect.IdentityHashMap;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 import com.google.gwt.thirdparty.guava.common.io.Files;
 
@@ -64,6 +62,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedSet;
+
+import jdk.jfr.Label;
+import jdk.jfr.Name;
 
 /**
  * Manages generators and generated units during a single compilation.
@@ -288,26 +289,13 @@ public class StandardGeneratorContext implements GeneratorContext {
 
   private static DiskCache diskCache = DiskCache.INSTANCE;
 
-  private static final Map<String, CompilerEventType> eventsByGeneratorType =
-      new HashMap<String, CompilerEventType>();
-  static {
-    eventsByGeneratorType.put(
-        "com.google.gwt.resources.rebind.context.InlineClientBundleGenerator",
-        CompilerEventType.GENERATOR_CLIENT_BUNDLE);
-    eventsByGeneratorType.put("com.google.gwt.i18n.rebind.LocalizableGenerator",
-        CompilerEventType.GENERATOR_I18N);
-    eventsByGeneratorType.put("com.google.gwt.i18n.rebind.LocaleInfoGenerator",
-        CompilerEventType.GENERATOR_I18N);
-    eventsByGeneratorType.put("com.google.gwt.i18n.rebind.CurrencyListGenerator",
-        CompilerEventType.GENERATOR_I18N);
-    eventsByGeneratorType.put("com.google.gwt.i18n.rebind.CustomDateTimeFormatGenerator",
-        CompilerEventType.GENERATOR_I18N);
-    eventsByGeneratorType.put("com.google.gwt.user.rebind.rpc.ServiceInterfaceProxyGenerator",
-        CompilerEventType.GENERATOR_RPC);
-    eventsByGeneratorType.put("com.google.gwt.uibinder.rebind.UiBinderGenerator",
-        CompilerEventType.GENERATOR_UIBINDER);
-    eventsByGeneratorType.put("com.google.gwt.inject.rebind.GinjectorGenerator",
-        CompilerEventType.GENERATOR_GIN);
+  @Name("gwt.ext.Generator")
+  @Label("Generator Event")
+  static class GeneratorEvent extends AbstractJfrEvent {
+    @Label("Generator Class")
+    String generatorClass;
+    @Label("Type Name")
+    String typeName;
   }
 
   private final ArtifactSet allGeneratedArtifacts;
@@ -701,17 +689,12 @@ public class StandardGeneratorContext implements GeneratorContext {
     long before = loggable ? System.currentTimeMillis() : 0L;
 
     String generatorClassName = generator.getClass().getName();
-    CompilerEventType type = eventsByGeneratorType.get(generatorClassName);
-
-    if (type == null) {
-      type = CompilerEventType.GENERATOR_OTHER;
-    }
-
-    Event generatorEvent =
-        SpeedTracerLogger.start(type, "class", generatorClassName, "type", typeName);
 
     PropertyOracle originalPropertyOracle = propertyOracle;
-    try {
+    try (GeneratorEvent event = new GeneratorEvent()) {
+      event.generatorClass = generatorClassName;
+      event.typeName = typeName;
+
       RebindResult result;
       // TODO(stalcup): refactor the Generator/PropertyOracle system (in a potentially backwards
       // incompatible way) so that all Generators are forced to accurately declare the names of
@@ -764,7 +747,6 @@ public class StandardGeneratorContext implements GeneratorContext {
       throw new UnableToCompleteException();
     } finally {
       propertyOracle = originalPropertyOracle;
-      generatorEvent.end();
     }
   }
 

@@ -235,9 +235,9 @@ public class TypeTightenerTest extends OptimizerTestBase {
   protected boolean doOptimizeMethod(TreeLogger logger, JProgram program, JMethod method) {
     program.addEntryMethod(findMainMethod(program));
     boolean didChange = false;
-    while (TypeTightener.exec(program).didChange()) {
-      MethodCallTightener.exec(program);
-      DeadCodeElimination.exec(program);
+    while (TypeTightener.exec(program, new FullOptimizerContext(program)) > 0) {
+      MethodCallTightener.exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
+      DeadCodeElimination.exec(program, new FullOptimizerContext(program));
       didChange = true;
     }
     return didChange;

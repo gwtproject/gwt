@@ -30,9 +30,7 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.user.client.rpc.SerializationStreamReader;
 import com.google.gwt.user.client.rpc.SerializationStreamWriter;
 import com.google.gwt.user.client.rpc.impl.SerializerBase;
@@ -235,8 +233,7 @@ public class TypeSerializerCreator {
    * serializer.
    */
   private void createFieldSerializer(TreeLogger logger, GeneratorContext ctx, JType type) {
-    Event event = SpeedTracerLogger.start(CompilerEventType.GENERATOR_RPC_FIELD_SERIALIZER);
-    try {
+    try (SimpleEvent ignore = new SimpleEvent("RPC: generate FieldSerializer")) {
       assert (type != null);
       assert (serializationOracle.isSerializable(type) || deserializationOracle
           .isSerializable(type));
@@ -281,8 +278,6 @@ public class TypeSerializerCreator {
           new FieldSerializerCreator(logger, context, serializationOracle, deserializationOracle,
               (JClassType) type, customFieldSerializer);
       creator.realize(logger, ctx);
-    } finally {
-      event.end();
     }
   }
 

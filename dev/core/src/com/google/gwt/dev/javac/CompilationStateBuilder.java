@@ -27,11 +27,7 @@ import com.google.gwt.dev.jjs.impl.GwtAstBuilder;
 import com.google.gwt.dev.js.ast.JsRootScope;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.StringInterner;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.EventType;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.Interner;
@@ -84,8 +80,7 @@ public class CompilationStateBuilder {
       public void process(CompilationUnitBuilder builder, CompilationUnitDeclaration cud,
           List<ImportReference> cudOriginaImports,
           List<CompiledClass> compiledClasses) {
-        Event event = SpeedTracerLogger.start(DevModeEventType.CSB_PROCESS);
-        try {
+        try (SimpleEvent ignored = new SimpleEvent("CSB process")) {
           // Collect parameter method names event when the compilation unit has errors.
 
           List<JDeclaredType> types = ImmutableList.of();
@@ -178,8 +173,6 @@ public class CompilationStateBuilder {
               .setProblems(cud.compilationResult().getProblems());
 
           buildQueue.add(builder);
-        } finally {
-          event.end();
         }
       }
     }
@@ -223,12 +216,9 @@ public class CompilationStateBuilder {
     public Collection<CompilationUnit> addGeneratedTypes(TreeLogger logger,
         Collection<GeneratedUnit> generatedUnits, CompilationState compilationState)
         throws UnableToCompleteException {
-      Event event = SpeedTracerLogger.start(DevModeEventType.CSB_ADD_GENERATED_TYPES);
-      try {
+      try (SimpleEvent ignored = new SimpleEvent("CSB addGeneratedTypes")) {
         return doBuildGeneratedTypes(logger, compilerContext, generatedUnits, compilationState,
             this);
-      } finally {
-        event.end();
       }
     }
 
@@ -267,7 +257,7 @@ public class CompilationStateBuilder {
      */
     Collection<CompilationUnit> compile(TreeLogger logger, CompilerContext compilerContext,
         Collection<CompilationUnitBuilder> builders,
-        Map<CompilationUnitBuilder, CompilationUnit> cachedUnits, EventType eventType)
+        Map<CompilationUnitBuilder, CompilationUnit> cachedUnits, String caller)
         throws UnableToCompleteException {
       UnitCache unitCache = compilerContext.getUnitCache();
       // Initialize the set of valid classes to the initially cached units.
@@ -319,12 +309,9 @@ public class CompilationStateBuilder {
         };
         buildThread.setName("CompilationUnitBuilder");
         buildThread.start();
-        Event jdtCompilerEvent = SpeedTracerLogger.start(eventType);
         long compilationStartNanos = System.nanoTime();
-        try {
+        try (SimpleEvent ignored = new SimpleEvent("JdtCompiler " + caller)) {
           compiler.doCompile(branch, builders);
-        } finally {
-          jdtCompilerEvent.end();
         }
         buildQueue.add(sentinel);
         try {
@@ -462,11 +449,8 @@ public class CompilationStateBuilder {
   public static CompilationState buildFrom(TreeLogger logger, CompilerContext compilerContext,
       Set<Resource> resources)
       throws UnableToCompleteException {
-    Event event = SpeedTracerLogger.start(DevModeEventType.CSB_BUILD_FROM_ORACLE);
-    try {
+    try (SimpleEvent ignored = new SimpleEvent("CSB build from oracle")) {
       return instance.doBuildFrom(logger, compilerContext, resources);
-    } finally {
-      event.end();
     }
   }
 
@@ -534,7 +518,7 @@ public class CompilationStateBuilder {
 
     Collection<CompilationUnit> resultUnits = compileMoreLater.compile(
         logger, compilerContext, builders, cachedUnits,
-        CompilerEventType.JDT_COMPILER_CSB_FROM_ORACLE);
+        "Source Oracle");
 
     TypeOracle typeOracle = new TypeOracle();
     CompilationUnitTypeOracleUpdater typeOracleUpdater =
@@ -615,6 +599,6 @@ public class CompilationStateBuilder {
     compilationState.incrementGeneratedSourceCount(builders.size() + cachedUnits.size());
     compilationState.incrementCachedGeneratedSourceCount(cachedUnits.size());
     return compileMoreLater.compile(logger, compilerContext, builders,
-        cachedUnits, CompilerEventType.JDT_COMPILER_CSB_GENERATED);
+        cachedUnits, "CSB Generated");
   }
 }

@@ -27,9 +27,7 @@ import com.google.gwt.dev.jjs.impl.TypeCategory;
 import com.google.gwt.dev.jjs.impl.codesplitter.FragmentPartitioningResult;
 import com.google.gwt.dev.js.CoverageInstrumentor;
 import com.google.gwt.dev.util.StringInterner;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.AbstractJfrEvent;
 import com.google.gwt.thirdparty.guava.common.base.CaseFormat;
 import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
@@ -57,6 +55,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import jdk.jfr.Label;
+import jdk.jfr.Name;
 
 /**
  * Root for the AST representing an entire Java program.
@@ -113,6 +114,13 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     public String getClassName() {
       return className;
     }
+  }
+
+  @Name("gwt.compiler.java.Count")
+  @Label("Count Java nodes")
+  public static class JavaCountEvent extends AbstractJfrEvent {
+    @Label("Number of Java nodes")
+    public long nodeCount;
   }
 
   private static final class TreeStatistics extends JVisitor {
@@ -973,12 +981,13 @@ public class JProgram extends JNode implements ArrayTypeCreator {
   }
 
   public int getNodeCount() {
-    Event countEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "phase", "countNodes");
-    TreeStatistics treeStats = new TreeStatistics();
-    treeStats.accept(this);
-    int numNodes = treeStats.getNodeCount();
-    countEvent.end();
-    return numNodes;
+    try (JavaCountEvent event = new JavaCountEvent()) {
+      TreeStatistics treeStats = new TreeStatistics();
+      treeStats.accept(this);
+      int numNodes = treeStats.getNodeCount();
+      event.nodeCount = numNodes;
+      return numNodes;
+    }
   }
 
   public JField getNullField() {

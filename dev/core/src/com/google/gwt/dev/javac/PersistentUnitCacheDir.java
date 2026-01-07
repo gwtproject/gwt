@@ -21,9 +21,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.jjs.impl.GwtAstBuilder;
 import com.google.gwt.dev.util.CompilerVersion;
 import com.google.gwt.dev.util.StringInterningObjectInputStream;
-import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.io.Closeables;
@@ -121,19 +119,15 @@ class PersistentUnitCacheDir {
    * Load everything cached on disk into memory.
    */
   synchronized void loadUnitMap(PersistentUnitCache destination) {
-    Event loadPersistentUnitEvent =
-        SpeedTracerLogger.start(DevModeEventType.LOAD_PERSISTENT_UNIT_CACHE);
     if (logger.isLoggable(TreeLogger.TRACE)) {
       logger.log(TreeLogger.TRACE, "Looking for previously cached Compilation Units in "
           + getPath());
     }
-    try {
+    try (SimpleEvent ignored = new SimpleEvent("PersistentUnitCacheDir.loadUnitMap")) {
       List<File> files = selectClosedFiles(listFiles(filePrefix));
       for (File cacheFile : files) {
         loadOrDeleteCacheFile(cacheFile, destination);
       }
-    } finally {
-      loadPersistentUnitEvent.end();
     }
   }
 
@@ -141,20 +135,20 @@ class PersistentUnitCacheDir {
    * Delete all cache files in the directory except for the currently open file.
    */
   synchronized void deleteClosedCacheFiles() {
-    SpeedTracerLogger.Event deleteEvent = SpeedTracerLogger.start(DevModeEventType.DELETE_CACHE);
     logger.log(TreeLogger.TRACE, "Deleting cache files from " + dir);
 
-    // We want to delete cache files from previous versions as well.
-    List<File> allVersionsList = listFiles(CACHE_FILE_PREFIX);
-    int deleteCount = 0;
-    for (File candidate : allVersionsList) {
-      if (deleteUnlessOpen(candidate)) {
-        deleteCount++;
+    try (SimpleEvent ignored = new SimpleEvent("PersistentUnitCacheDir.deleteClosedCacheFiles")) {
+      // We want to delete cache files from previous versions as well.
+      List<File> allVersionsList = listFiles(CACHE_FILE_PREFIX);
+      int deleteCount = 0;
+      for (File candidate : allVersionsList) {
+        if (deleteUnlessOpen(candidate)) {
+          deleteCount++;
+        }
       }
-    }
 
-    logger.log(TreeLogger.TRACE, "Deleted " + deleteCount + " cache files from " + dir);
-    deleteEvent.end();
+      logger.log(TreeLogger.TRACE, "Deleted " + deleteCount + " cache files from " + dir);
+    }
   }
 
   /**

@@ -13,16 +13,9 @@
     <!-- Convenience property to set the GWT version -->
     <gwt.version>HEAD-SNAPSHOT</gwt.version>
 
-    <!-- Setting maven.compiler.source to something different to 1.8
-         needs that you configure the sourceLevel in gwt-maven-plugin since
-         GWT 2.8 and above requires 1.8 (see gwt-maven-plugin block below) -->
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.release>11</maven.compiler.release>
 
-    <!-- Don't let your Mac use a crazy non-standard encoding -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
   </properties>
 
   <dependencyManagement>

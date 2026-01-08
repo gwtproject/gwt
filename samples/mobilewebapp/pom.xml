@@ -13,21 +13,13 @@
     <!-- Convenience property to set the GWT version -->
     <gwt.version>HEAD-SNAPSHOT</gwt.version>
 
-    <!-- Setting maven.compiler.source to something different to 1.8
-         needs that you configure the sourceLevel in gwt-maven-plugin since
-         GWT 2.8 requires 1.8 (see gwt-maven-plugin block below) -->
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <!-- This is an appengine webapp, so it must generate Java 7 classes
-         https://cloud.google.com/appengine/docs/java/tools/maven#java_requirements -->
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.release>11</maven.compiler.release>
 
     <!-- App Engine properties -->
     <appengine.version>1.9.40</appengine.version>
     <appengine.application.version>1</appengine.application.version>
 
-    <!-- Don't let your Mac use a crazy non-standard encoding -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
   <!-- App Engine Goals -->

@@ -3,43 +3,39 @@
   <property name="project.tail" value="samples" />
   <import file="${gwt.root}/common.ant.xml" />
 
-  <!-- "build" is the default when subprojects are directly targetted -->
+  <!-- "build" is the default when subprojects are directly targeted -->
   <property name="target" value="build" />
 
   <target name="dynatable" description="Build dynatable">
-    <gwt.ant dir="dynatable" />
+    <gwt.mvn dir="dynatable" />
   </target>
 
   <target name="dynatablerf" description="Build dynatablerf">
-    <gwt.ant dir="dynatablerf" />
+    <gwt.mvn dir="dynatablerf" />
   </target>
 
   <target name="hello" description="Build hello">
-    <gwt.ant dir="hello" />
+    <gwt.mvn dir="hello" />
   </target>
 
   <target name="json" description="Build json">
-    <gwt.ant dir="json" />
+    <gwt.mvn dir="json" />
   </target>
 
   <target name="mail" description="Build mail">
-    <gwt.ant dir="mail" />
+    <gwt.mvn dir="mail" />
   </target>
 
   <target name="mobilewebapp" description="Build mobile web app">
-    <gwt.ant dir="mobilewebapp" />
+    <gwt.mvn dir="mobilewebapp" />
   </target>
 
   <target name="showcase" description="Build showcase">
-    <gwt.ant dir="showcase" />
+    <gwt.mvn dir="showcase" />
   </target>
 
   <target name="validation" description="Build validation">
-    <gwt.ant dir="validation" />
-  </target>
-
-  <target name="validationtck" description="Build validation TCK">
-    <gwt.ant dir="validationtck" />
+    <gwt.mvn dir="validation" />
   </target>
 
   <target name="-do" description="Run all subprojects" >
@@ -51,15 +47,14 @@
     <antcall target="mobilewebapp" />
     <antcall target="showcase" />
     <antcall target="validation" />
-    <!-- don't include validationtck, it is not really a sample -->
   </target>
 
   <target name="build" description="Builds GWT">
-    <antcall target="-do">
-      <param name="target" value="build" />
-    </antcall>
+<!--    <antcall target="-do">-->
+<!--      <param name="target" value="build" />-->
+<!--    </antcall>-->
     <length property="gwt.sample.length">
-      <fileset dir="${gwt.build.out}/samples" includes="*/war/*/*.cache.html,*/war/*/*.cache.js"/>
+      <fileset dir="." includes="*/target/*/*/*.cache.js"/>
     </length>
     <echo message="compiled size of all samples is ${gwt.sample.length} bytes." level="info"/>
   </target>

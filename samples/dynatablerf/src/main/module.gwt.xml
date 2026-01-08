@@ -12,9 +12,27 @@
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
 
-<module rename-to="dynatable">
+<module>
+  <source path="client"/>
+  <source path="shared"/>
+
   <inherits name='com.google.gwt.user.User' />
-  <entry-point class='com.google.gwt.sample.dynatable.client.DynaTable' />
-  <servlet path='/calendar'
-    class='com.google.gwt.sample.dynatable.server.SchoolCalendarServiceImpl' />
+  <inherits name='com.google.gwt.editor.Editor' />
+  <inherits name='com.google.gwt.logging.Logging'/>
+  <inherits name='com.google.web.bindery.requestfactory.RequestFactory' />
+
+  <!-- Uncomment if you are enabling server-side deobfuscation of StackTraces
+  <set-property name="compiler.stackMode" value="emulated" />
+  <set-configuration-property name="compiler.emulatedStack.recordLineNumbers" value="true" />
+  <set-configuration-property name="compiler.emulatedStack.recordFileNames" value="true" />
+  -->
+  
+  <entry-point class='com.google.gwt.sample.dynatablerf.client.DynaTableRf' />
+  
+  <set-configuration-property name="CssResource.obfuscationPrefix" value="empty" />
+  
+  <set-configuration-property name="CssResource.enableGss" value="true" />
+  <set-configuration-property name="CssResource.gssDefaultInUiBinder" value="true" />
+  <!-- CSS to GSS Conversion -->
+  <set-configuration-property name="CssResource.conversionMode" value="strict" />
 </module>

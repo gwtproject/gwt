@@ -126,7 +126,6 @@
         </executions>
         <configuration>
           <moduleName>com.google.gwt.sample.validation.Validation</moduleName>
-          <moduleShortName>Validation</moduleShortName>
           <failOnError>true</failOnError>
           <!-- GWT compiler 2.8 and above requires 1.8, hence define sourceLevel here if you use
                a different source language for java compilation -->

@@ -48,7 +48,6 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -119,7 +118,7 @@
                 </executions>
                 <configuration>
                     <moduleName>com.google.gwt.sample.dynatablerf.DynaTableRf</moduleName>
-                    <moduleShortName>DynaTableRf</moduleShortName>
+                    <moduleShortName>dynatablerf</moduleShortName>
                     <failOnError>true</failOnError>
                     <!-- Compiler configuration -->
                     <compilerArgs>

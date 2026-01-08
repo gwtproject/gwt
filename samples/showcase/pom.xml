@@ -7,6 +7,7 @@
     <groupId>org.gwtproject.samples.showcase</groupId>
     <artifactId>showcase</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>gwt-app</packaging>
 
     <properties>
         <!-- Convenience property to set the GWT version -->
@@ -56,6 +57,7 @@
                 <groupId>net.ltgt.gwt.maven</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
                 <version>1.0.1</version>
+                <extensions>true</extensions>
                 <executions>
                     <execution>
                         <goals>
@@ -65,7 +67,7 @@
                 </executions>
                 <configuration>
                     <moduleName>com.google.gwt.sample.showcase.Showcase</moduleName>
-                    <moduleShortName>Showcase</moduleShortName>
+                    <moduleShortName>showcase</moduleShortName>
                     <failOnError>true</failOnError>
                     <sourceLevel>1.8</sourceLevel>
                     <startupUrls>

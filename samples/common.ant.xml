@@ -37,12 +37,6 @@
   <!-- Use the uppercase name rather than the lowercase name -->
   <property name="sample.build" value="${gwt.build.out}/samples/${sample.upper}" />
 
-  <path id="gae.extraclasspath">
-    <pathelement location="${gwt.tools.lib}/appengine/appengine-api-1.0-sdk-1.3.4.jar"/>
-    <pathelement location="${gwt.tools.lib}/appengine/geronimo-jpa_3.0_spec-1.1.1.jar"/>
-    <pathelement location="${gwt.tools.lib}/appengine/datanucleus-appengine-1.0.7.final.jar"/>
-  </path>
-
   <!-- The libraries required by the server that will be copied into WEB-INF/lib. -->
   <fileset id="sample.server.libs" dir="${gwt.tools.lib}">
     <include name="" />

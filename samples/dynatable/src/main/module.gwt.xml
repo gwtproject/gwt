@@ -12,9 +12,9 @@
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
 
-<module rename-to="json">
-  <inherits name='com.google.gwt.user.User'/>
-  <inherits name='com.google.gwt.http.HTTP'/>
-  <inherits name='com.google.gwt.json.JSON'/>
-  <entry-point class='com.google.gwt.sample.json.client.JSON'/>
+<module>
+  <inherits name='com.google.gwt.user.User' />
+  <entry-point class='com.google.gwt.sample.dynatable.client.DynaTable' />
+  <servlet path='/calendar'
+    class='com.google.gwt.sample.dynatable.server.SchoolCalendarServiceImpl' />
 </module>

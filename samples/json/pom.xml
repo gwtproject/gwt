@@ -7,6 +7,7 @@
     <groupId>org.gwtproject.samples</groupId>
     <artifactId>json</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>gwt-app</packaging>
 
     <properties>
         <!-- Convenience property to set the GWT version -->
@@ -53,6 +54,7 @@
                 <groupId>net.ltgt.gwt.maven</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
                 <version>1.2.0</version>
+                <extensions>true</extensions>
                 <executions>
                     <execution>
                         <goals>
@@ -62,7 +64,7 @@
                 </executions>
                 <configuration>
                     <moduleName>com.google.gwt.sample.json.JSON</moduleName>
-                    <moduleShortName>Hello</moduleShortName>
+                    <moduleShortName>json</moduleShortName>
                     <failOnError>true</failOnError>
                     <startupUrls>
                         <startupUrl>JSON.html</startupUrl>

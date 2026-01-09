@@ -75,6 +75,15 @@ public class EmulTestBase extends GWTTestCase {
     }
   }
 
+  public static void assertThrows(Class<? extends Exception> thrownCheck, Runnable toTest) {
+    try {
+      toTest.run();
+      fail("Should have failed");
+    } catch (Exception ex) {
+      assertEquals(thrownCheck, ex.getClass());
+    }
+  }
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.emultest.EmulSuite";

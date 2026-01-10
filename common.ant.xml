@@ -145,9 +145,10 @@
   </presetdef>
 
   <macrodef name="gwt.mvn">
-    <attribute name="args" default="verify" />
+    <attribute name="args" default="${mvn.args}" />
     <attribute name="dir" />
     <sequential>
+      <echo message="Running 'mvn @{args}' in @{dir}"/>
       <exec dir="${basedir}" executable="mvn" failonerror="true">
         <arg line="@{args} --file @{dir}" />
       </exec>

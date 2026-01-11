@@ -57,7 +57,10 @@ final class ReflectiveServiceLayer extends ServiceLayerDecorator {
   static {
     Validator found;
     try {
-      ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+      ValidatorFactory validatorFactory = Validation.byDefaultProvider()
+          .configure()
+          .ignoreXmlConfiguration()
+          .buildValidatorFactory();
       found = validatorFactory.getValidator();
     } catch (ValidationException e) {
       log.log(Level.INFO, "Unable to initialize a JSR 303 Bean Validator", e);

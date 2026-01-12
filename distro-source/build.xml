@@ -59,9 +59,6 @@
         <include name="samples/*/README.txt" />
         <include name="samples/**/src/**" />
       </zipfileset>
-      <zipfileset dir="${gwt.build.out}/samples" prefix="${project.distname}/samples">
-        <include name="*/*" />
-      </zipfileset>
     </zip>
 
     <!--

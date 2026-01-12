@@ -17,10 +17,10 @@ package com.google.gwt.sample.validation.server;
 
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.sample.validation.client.GreetingService;
+import com.google.gwt.sample.validation.shared.GreetingService;
 import com.google.gwt.sample.validation.shared.Person;
 import com.google.gwt.sample.validation.shared.ServerGroup;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.google.gwt.user.server.rpc.jakarta.RemoteServiceServlet;
 
 import org.hibernate.validator.engine.ValidationSupport;
 
@@ -40,7 +40,11 @@ import javax.validation.groups.Default;
 public class GreetingServiceImpl extends RemoteServiceServlet implements
     GreetingService {
 
-  private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+  private final Validator validator = Validation.byDefaultProvider()
+      .configure()
+      .ignoreXmlConfiguration()
+      .buildValidatorFactory()
+      .getValidator();
 
   public SafeHtml greetServer(Person person) throws IllegalArgumentException,
       ConstraintViolationException {

@@ -46,12 +46,6 @@ public class ExampleValidatorFactory extends AbstractGwtValidatorFactory {
   public interface GwtValidator extends Validator {
   }
 
-  /**
-   * Marks constraints that should run on the server.
-   */
-  public interface ServerGroup {
-  }
-
   @Override
   public AbstractGwtValidator createValidator() {
     return GWT.create(GwtValidator.class);

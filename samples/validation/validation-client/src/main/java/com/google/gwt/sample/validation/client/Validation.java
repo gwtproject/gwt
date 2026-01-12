@@ -17,6 +17,8 @@ package com.google.gwt.sample.validation.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.sample.validation.shared.GreetingService;
+import com.google.gwt.sample.validation.shared.GreetingServiceAsync;
 import com.google.gwt.sample.validation.shared.Person;
 import com.google.gwt.user.client.ui.RootPanel;
 

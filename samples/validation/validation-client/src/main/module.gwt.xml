@@ -23,24 +23,24 @@
 
   <source path='client' />
   <source path='shared' />
-  <!-- The super source files are in src/main/resources --> 
+  <!-- The super source files are in src/main/resources -->
   <super-source path="super" />
 
   <!-- Specify the Validator for the Validation bootstrap to use. -->
   <replace-with
-    class="com.google.gwt.sample.validation.client.SampleValidatorFactory">
+          class="com.google.gwt.sample.validation.client.SampleValidatorFactory">
     <when-type-is class="javax.validation.ValidatorFactory" />
   </replace-with>
-  
+
   <!-- TODO(nchalko) figure out how to make this a attribute of the GwtValidation
        annotation -->
   <!--  specify the ValidationMessageResolver to use for your custom validation messages -->
   <replace-with
-    class="com.google.gwt.sample.validation.client.CustomValidationMessagesResolver">
+          class="com.google.gwt.sample.validation.client.CustomValidationMessagesResolver">
     <when-type-is
-      class="com.google.gwt.validation.client.UserValidationMessagesResolver" />
+            class="com.google.gwt.validation.client.UserValidationMessagesResolver" />
   </replace-with>
-  
+
   <set-configuration-property name="CssResource.enableGss" value="true" />
   <set-configuration-property name="CssResource.gssDefaultInUiBinder" value="true" />
 </module>

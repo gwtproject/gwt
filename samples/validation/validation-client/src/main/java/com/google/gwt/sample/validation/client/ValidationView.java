@@ -22,6 +22,7 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.sample.validation.shared.ClientGroup;
+import com.google.gwt.sample.validation.shared.GreetingServiceAsync;
 import com.google.gwt.sample.validation.shared.Person;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;

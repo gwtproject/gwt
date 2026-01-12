@@ -99,7 +99,7 @@
     </gwt.checkstyle>
     <gwt.checkstyle outputdirectory="${project.build}/validation/">
       <fileset dir="validation/">
-        <include name="src/**/*.java" />
+        <include name="*/src/**/*.java" />
         <!-- ValidationMessages is generated and has funny method names -->
         <exclude name="**/ValidationMessages.java" />
       </fileset>

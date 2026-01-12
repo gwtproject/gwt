@@ -24,7 +24,6 @@ import com.google.gwt.sample.dynatablerf.client.widgets.DayFilterWidget;
 import com.google.gwt.sample.dynatablerf.client.widgets.FavoritesWidget;
 import com.google.gwt.sample.dynatablerf.client.widgets.SummaryWidget;
 import com.google.gwt.sample.dynatablerf.shared.DynaTableRequestFactory;
-import com.google.gwt.sample.dynatablerf.shared.LoggingRequest;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.RootLayoutPanel;

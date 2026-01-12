@@ -69,7 +69,7 @@
     </gwt.checkstyle>
     <gwt.checkstyle outputdirectory="${project.build}/dynatablerf/">
       <fileset dir="dynatablerf/">
-        <include name="src/**/*.java" />
+        <include name="*/src/**/*.java" />
       </fileset>
     </gwt.checkstyle>
     <gwt.checkstyle outputdirectory="${project.build}/hello/">

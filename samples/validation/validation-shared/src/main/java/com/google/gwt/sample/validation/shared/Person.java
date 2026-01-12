@@ -17,6 +17,7 @@ package com.google.gwt.sample.validation.shared;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.sample.validation.server.ServerConstraint;
+import com.google.gwt.sample.validation.server.ServerGroup;
 
 import java.util.Map;
 

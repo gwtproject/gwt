@@ -19,7 +19,6 @@ import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.sample.validation.shared.GreetingService;
 import com.google.gwt.sample.validation.shared.Person;
-import com.google.gwt.sample.validation.shared.ServerGroup;
 import com.google.gwt.user.server.rpc.jakarta.RemoteServiceServlet;
 
 import org.hibernate.validator.engine.ValidationSupport;

@@ -16,7 +16,7 @@
 package com.google.gwt.sample.validation.shared;
 
 /**
- * Marks constraints that should run on the server.
+ * Server Validation Group.
  */
 public interface ServerGroup {
 }

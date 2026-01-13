@@ -158,6 +158,7 @@
     <java failonerror="true" fork="true"
       classname="com.google.web.bindery.requestfactory.vm.RequestFactoryJreSuite">
       <jvmarg value="-Xss8m" />
+      <jvmarg value="-Dgwt.validation.ignoreXml=true"/>
       <classpath>
         <fileset dir="${gwt.tools.lib}" includes="tomcat/tomcat-servlet-api-8.0.28.jar" />
         <fileset dir="${gwt.tools.lib}" includes="apache/log4j/log4j-1.2.17.jar" />

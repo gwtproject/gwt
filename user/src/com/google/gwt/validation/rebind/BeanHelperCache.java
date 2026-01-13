@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Configuration;
 import javax.validation.Validation;
 import javax.validation.ValidationException;
 import javax.validation.Validator;
@@ -52,7 +53,11 @@ public class BeanHelperCache { // public for testing
    */
   public BeanHelperCache() {
     cache = new HashMap<JClassType, BeanHelper>();
-    serverSideValidator = Validation.buildDefaultValidatorFactory().getValidator();
+    Configuration<?> config = Validation.byDefaultProvider().configure();
+    if ("true".equals(System.getProperty("gwt.validation.ignoreXml"))) {
+      config = config.ignoreXmlConfiguration();
+    }
+    serverSideValidator = config.buildValidatorFactory().getValidator();
   }
 
   /**

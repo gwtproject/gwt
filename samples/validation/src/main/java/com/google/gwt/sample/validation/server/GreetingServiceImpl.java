@@ -27,6 +27,7 @@ import org.hibernate.validator.engine.ValidationSupport;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.Configuration;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
@@ -40,7 +41,15 @@ import javax.validation.groups.Default;
 public class GreetingServiceImpl extends RemoteServiceServlet implements
     GreetingService {
 
-  private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+  private final Validator validator;
+
+  public GreetingServiceImpl() {
+    Configuration<?> config = Validation.byDefaultProvider().configure();
+    if ("true".equals(System.getProperty("gwt.validation.ignoreXml"))) {
+      config = config.ignoreXmlConfiguration();
+    }
+    validator = config.buildValidatorFactory().getValidator();
+  }
 
   public SafeHtml greetServer(Person person) throws IllegalArgumentException,
       ConstraintViolationException {

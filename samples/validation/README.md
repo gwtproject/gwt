@@ -3,7 +3,7 @@
 A slightly more complex GWT application, demonstrating primarily how to use Bean Validation (JSR 380) on shared
 client/server types.
 
-The application's structure and build is generated with the help of the `modular-requestfactory` archetype from
+The application's structure and build is generated with the help of the `modular-webapp` archetype from
 https://github.com/tbroyer/gwt-maven-archetypes/.
 
 ### Development mode

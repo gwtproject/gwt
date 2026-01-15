@@ -17,6 +17,8 @@ package java.security;
 
 import static javaemul.internal.Coercions.ensureInt;
 
+import java.util.Arrays;
+
 /**
  * Message Digest algorithm - <a href=
  * "http://java.sun.com/j2se/1.4.2/docs/api/java/security/MessageDigest.html"
@@ -263,6 +265,15 @@ public abstract class MessageDigest extends MessageDigestSpi {
 
       counter = 0;
       remainder = 64;
+    }
+
+    public Object clone() {
+      Md5Digest copy = new Md5Digest();
+      copy.buffer = Arrays.copyOf(buffer, buffer.length);
+      copy.state = Arrays.copyOf(state, state.length);
+      copy.counter = counter;
+      copy.remainder = remainder;
+      return copy;
     }
 
     @Override

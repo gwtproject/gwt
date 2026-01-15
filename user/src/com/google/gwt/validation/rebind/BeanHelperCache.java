@@ -52,7 +52,11 @@ public class BeanHelperCache { // public for testing
    */
   public BeanHelperCache() {
     cache = new HashMap<JClassType, BeanHelper>();
-    serverSideValidator = Validation.buildDefaultValidatorFactory().getValidator();
+    serverSideValidator = Validation.byDefaultProvider()
+        .configure()
+        .ignoreXmlConfiguration()
+        .buildValidatorFactory()
+        .getValidator();
   }
 
   /**

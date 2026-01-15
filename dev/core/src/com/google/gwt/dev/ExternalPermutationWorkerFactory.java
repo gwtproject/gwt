@@ -34,6 +34,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.lang.management.ManagementFactory;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -118,6 +120,12 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
            * connects back.
            */
           workerSocket = serverSocket.accept();
+
+          if (!workerSocket.getInetAddress().isLoopbackAddress()) {
+            throw new TransientWorkerException(
+                "Rejected non-loopback worker connection from "
+                    + workerSocket.getRemoteSocketAddress(), null);
+          }
 
           in = new StringInterningObjectInputStream(workerSocket.getInputStream());
           out = new ObjectOutputStream(workerSocket.getOutputStream());
@@ -405,7 +413,7 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
        * prevents dead-head behavior.
        */
       sock.setSoTimeout(60000);
-      sock.bind(null);
+      sock.bind(new InetSocketAddress(InetAddress.getLoopbackAddress(), 0));
       if (logger.isLoggable(TreeLogger.SPAM)) {
         logger.log(TreeLogger.SPAM, "Listening for external workers on port "
             + sock.getLocalPort());

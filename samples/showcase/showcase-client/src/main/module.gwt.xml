@@ -8,7 +8,7 @@
 
   <!-- Enable debug ID. -->
   <inherits name="com.google.gwt.user.Debug"/>
-  <set-property name="gwt.enableDebugId" value="true"/> 
+  <set-property name="gwt.enableDebugId" value="true"/>
 
   <!-- Use a generator to create the source code -->
   <generate-with class="com.google.gwt.sample.showcase.generator.ShowcaseGenerator">

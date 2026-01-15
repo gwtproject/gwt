@@ -1,6 +1,7 @@
 # Hello
 
 A simple GWT application, showing how to compile a simple application to JS and run it without a dedicated server.
+This example serves to show that an application server isn't always necessary to quickly get a simple example going.
 
 ### Development mode
 To run the application in development mode, we can run the DevMode server to serve the static app:

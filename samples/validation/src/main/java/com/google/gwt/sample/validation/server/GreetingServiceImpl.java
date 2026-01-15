@@ -40,7 +40,15 @@ import javax.validation.groups.Default;
 public class GreetingServiceImpl extends RemoteServiceServlet implements
     GreetingService {
 
-  private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+  private final Validator validator;
+
+  public GreetingServiceImpl() {
+    validator = Validation.byDefaultProvider()
+        .configure()
+        .ignoreXmlConfiguration()
+        .buildValidatorFactory()
+        .getValidator();
+  }
 
   public SafeHtml greetServer(Person person) throws IllegalArgumentException,
       ConstraintViolationException {

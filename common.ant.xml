@@ -237,6 +237,7 @@
         <jvmarg value="-Demma.coverage.out.file=@{test.emma.coverage}/coverage.emma"/>
         <jvmarg value="-Demma.coverage.out.merge=true"/>
         <jvmarg value="-Dcom.google.gwt.junit.reportPath=reports"/>
+        <jvmarg value="-Dgwt.validation.ignoreXml=true"/>
         <jvmarg line="@{test.jvmargs}"/>
         <jvmarg line="--add-opens=java.base/java.lang=ALL-UNNAMED" />
         <sysproperty key="gwt.args" value="@{test.args}"/>
@@ -261,7 +262,6 @@
           <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
           <pathelement location="${gwt.tools.lib}/w3c/sac/sac-1.3.jar"/>
           <pathelement location="${gwt.tools.lib}/w3c/flute/flute-1.3-gg2.jar"/>
-          <pathelement location="${gwt.tools.lib}/jaxb/jaxb-api-2.3.3.jar"/>
           <extraclasspaths/>
         </classpath>
 

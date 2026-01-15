@@ -191,9 +191,7 @@
           <moduleName>com.google.gwt.sample.mobilewebapp.MobileWebApp</moduleName>
           <moduleShortName>MobileWebApp</moduleShortName>
           <failOnError>true</failOnError>
-          <!-- GWT 2.8 requires 1.8, hence define sourceLevel here if you use
-               a different source language for java compilation -->
-          <sourceLevel>1.8</sourceLevel>
+          <sourceLevel>17</sourceLevel>
           <!-- Compiler configuration -->
           <compilerArgs>
             <!-- Ask GWT to create the Story of Your Compile (SOYC) (gwt:compile) -->

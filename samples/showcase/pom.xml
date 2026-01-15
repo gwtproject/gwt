@@ -33,20 +33,11 @@
     <dependencies>
         <dependency>
             <groupId>org.gwtproject</groupId>
-            <artifactId>compiler</artifactId>
-            <version>${project.version}</version>
+            <artifactId>gwt-dev</artifactId>
         </dependency>
         <dependency>
             <groupId>org.gwtproject</groupId>
             <artifactId>gwt-user</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -56,7 +47,7 @@
             <plugin>
                 <groupId>net.ltgt.gwt.maven</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
-                <version>1.0.1</version>
+                <version>1.2.0</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -69,7 +60,7 @@
                     <moduleName>com.google.gwt.sample.showcase.Showcase</moduleName>
                     <moduleShortName>showcase</moduleShortName>
                     <failOnError>true</failOnError>
-                    <sourceLevel>1.8</sourceLevel>
+                    <sourceLevel>17</sourceLevel>
                     <startupUrls>
                         <startupUrl>Showcase.html</startupUrl>
                     </startupUrls>

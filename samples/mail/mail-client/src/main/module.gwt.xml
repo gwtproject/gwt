@@ -12,7 +12,7 @@
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
 
-<module rename-to="mail">
+<module>
   <inherits name='com.google.gwt.user.User' />
 
   <!-- This will give us shorter obfuscated CSS class names. We guarantee
@@ -21,7 +21,7 @@
 
   <entry-point class='com.google.gwt.sample.mail.client.Mail' />
 
-    <set-configuration-property name="CssResource.enableGss" value="true" />
-    <set-configuration-property name="CssResource.gssDefaultInUiBinder" value="true" />
+  <set-configuration-property name="CssResource.enableGss" value="true" />
+  <set-configuration-property name="CssResource.gssDefaultInUiBinder" value="true" />
 
 </module>

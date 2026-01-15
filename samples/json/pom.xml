@@ -101,4 +101,17 @@
     <module>json-client</module>
     <module>json-server</module>
   </modules>
+
+  <repositories>
+    <repository>
+      <id>sonatype-snapshots</id>
+      <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
 </project>

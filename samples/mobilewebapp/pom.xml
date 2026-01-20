@@ -13,10 +13,10 @@
     <!-- Convenience property to set the GWT version -->
     <gwt.version>HEAD-SNAPSHOT</gwt.version>
 
-    <maven.compiler.release>11</maven.compiler.release>
+    <maven.compiler.release>8</maven.compiler.release>
 
     <!-- App Engine properties -->
-    <appengine.version>1.9.40</appengine.version>
+    <appengine.version>1.9.84</appengine.version>
     <appengine.application.version>1</appengine.application.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -201,6 +201,11 @@
           <!-- DevMode configuration -->
           <launcherDir>${project.build.directory}/${project.build.finalName}</launcherDir>
           <classpathScope>compile+runtime</classpathScope>
+          <codeserverArgs>
+            <!-- Uncomment the snippet below to bind to all IPs instead of just localhost -->
+            <!-- <codeserverArg>-bindAddress</codeserverArg> -->
+            <!-- <codeserverArg>0.0.0.0</codeserverArg> -->
+          </codeserverArgs>
           <!-- URL(s) that should be opened by DevMode (gwt:devmode). -->
           <startupUrls>
             <startupUrl>MobileWebApp.html</startupUrl>
@@ -219,10 +224,14 @@
           <version>${appengine.application.version}</version>
           <enableJarClasses>false</enableJarClasses>
           <!-- Uncomment the snippet below to bind to all IPs instead of just localhost -->
-          <!-- <address>0.0.0.0</address> <port>8080</port> -->
-          <!-- Uncomment the snippet below to enable local debugging with a remove debugger like those included with Eclipse 
-            or IntelliJ -->
-          <!-- <jvmFlags><jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag></jvmFlags> -->
+          <!-- <address>0.0.0.0</address> -->
+
+          <jvmFlags>
+            <jvmFlag>-Dgwt.validation.ignoreXml=true</jvmFlag>
+            <!-- Uncomment the snippet below to enable local debugging with a remove debugger like those included with Eclipse
+              or IntelliJ -->
+            <!--<jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag>-->
+          </jvmFlags>
         </configuration>
       </plugin>
 

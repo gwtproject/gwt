@@ -51,7 +51,7 @@
           <moduleName>com.google.gwt.sample.mobilewebapp.MobileWebApp</moduleName>
           <moduleShortName>MobileWebApp</moduleShortName>
           <failOnError>true</failOnError>
-          <sourceLevel>17</sourceLevel>
+          <sourceLevel>11</sourceLevel>
           <!-- Compiler configuration -->
           <compilerArgs>
             <!-- Ask GWT to create the Story of Your Compile (SOYC) (gwt:compile) -->

@@ -82,7 +82,7 @@
           <version>1.2.0</version>
           <extensions>true</extensions>
           <configuration>
-            <sourceLevel>17</sourceLevel>
+            <sourceLevel>11</sourceLevel>
             <failOnError>true</failOnError>
           </configuration>
         </plugin>

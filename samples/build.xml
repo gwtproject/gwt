@@ -84,17 +84,17 @@
     </gwt.checkstyle>
     <gwt.checkstyle outputdirectory="${project.build}/mail/">
       <fileset dir="mail/">
-        <include name="src/**/*.java" />
+        <include name="*/src/**/*.java" />
       </fileset>
     </gwt.checkstyle>
     <gwt.checkstyle outputdirectory="${project.build}/mobilewebapp/">
       <fileset dir="mobilewebapp/">
-        <include name="src/**/*.java" />
+        <include name="*/src/**/*.java" />
       </fileset>
     </gwt.checkstyle>
     <gwt.checkstyle outputdirectory="${project.build}/showcase/">
       <fileset dir="showcase/">
-        <include name="src/**/*.java" />
+        <include name="*/src/**/*.java" />
       </fileset>
     </gwt.checkstyle>
     <gwt.checkstyle outputdirectory="${project.build}/validation/">

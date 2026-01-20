@@ -15,16 +15,15 @@
  */
 package com.google.gwt.sample.mobilewebapp.shared;
 
-import com.google.gwt.sample.mobilewebapp.server.domain.Task;
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
-import com.google.web.bindery.requestfactory.shared.ProxyFor;
+import com.google.web.bindery.requestfactory.shared.ProxyForName;
 
 import java.util.Date;
 
 /**
  * A task used in the task list.
  */
-@ProxyFor(Task.class)
+@ProxyForName("com.google.gwt.sample.mobilewebapp.server.domain.Task")
 public interface TaskProxy extends EntityProxy {
 
   Date getDueDate();

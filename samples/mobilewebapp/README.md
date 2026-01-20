@@ -7,9 +7,10 @@ This is a sample mobile webapp demonstrating a variety of features:
  * `<audio>` and `<video>` tags
  * Device formfactor detection resulting in different views through rebind rules
  * Cache manifest feature through the use of a linker - no longer supported in modern browsers (replaced largely by service workers)
+ * Custom RequestFactory transport for authentication headers
 
-It also serves at this point as an example of a legacy application that cannot run on modern Java - it is limited to Java
-11 without additional JVM args to allow reflection on JDK internals. 
+It also serves at this point as an example of a legacy application that cannot run on modern Java - as presently implemented,
+it seems to be limited to being built and run on Java 11.
 
 ### Development mode
 First, build the whole application

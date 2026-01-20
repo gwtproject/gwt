@@ -15,18 +15,17 @@
  */
 package com.google.gwt.sample.mobilewebapp.shared;
 
-import com.google.gwt.sample.mobilewebapp.server.domain.Task;
 import com.google.web.bindery.requestfactory.shared.InstanceRequest;
 import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.RequestContext;
-import com.google.web.bindery.requestfactory.shared.Service;
+import com.google.web.bindery.requestfactory.shared.ServiceName;
 
 import java.util.List;
 
 /**
  * Remote request for {@link Task}.
  */
-@Service(Task.class)
+@ServiceName("com.google.gwt.sample.mobilewebapp.server.domain.Task")
 public interface TaskRequest extends RequestContext {
 
   /**

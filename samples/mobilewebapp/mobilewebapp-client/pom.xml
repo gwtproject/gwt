@@ -31,6 +31,14 @@
       <groupId>org.gwtproject</groupId>
       <artifactId>gwt-dev</artifactId>
     </dependency>
+
+    <!-- Unit tests -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -62,6 +70,9 @@
           <startupUrls>
             <startupUrl>MobileWebApp.html</startupUrl>
           </startupUrls>
+          <includes>
+            <include>**/*Test.java</include>
+          </includes>
         </configuration>
       </plugin>
     </plugins>

@@ -91,7 +91,7 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.14.1</version>
           <configuration>
-            <release>17</release>
+            <release>11</release>
           </configuration>
         </plugin>
         <plugin>
@@ -120,7 +120,7 @@
           <version>1.2.0</version>
           <extensions>true</extensions>
           <configuration>
-            <sourceLevel>17</sourceLevel>
+            <sourceLevel>11</sourceLevel>
             <failOnError>true</failOnError>
           </configuration>
         </plugin>

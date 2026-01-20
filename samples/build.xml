@@ -40,7 +40,7 @@
 
   <target name="-do" description="Run all subprojects" >
     <antcall target="dynatable" />
-<!--    <antcall target="dynatablerf" />-->
+    <antcall target="dynatablerf" />
     <antcall target="hello" />
     <antcall target="json" />
     <antcall target="mail" />

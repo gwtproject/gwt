@@ -56,7 +56,8 @@
         <include name="samples" />
         <include name="samples/*" />
         <include name="samples/**/pom.xml" />
-        <include name="samples/*/README.txt" />
+        <include name="samples/*/README.md" />
+        <include name="samples/*/COPYING" />
         <include name="samples/**/src/**" />
       </zipfileset>
     </zip>

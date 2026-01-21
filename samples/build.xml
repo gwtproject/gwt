@@ -111,7 +111,8 @@
       <fileset dir=".">
         <include name="**/src/**" />
         <include name="**/pom.xml" />
-        <include name="*/README.txt" />
+        <include name="*/README.md" />
+        <include name="*/COPYING" />
       </fileset>
     </copy>
   </target>

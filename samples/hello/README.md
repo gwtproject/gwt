@@ -3,6 +3,9 @@
 A simple GWT application, showing how to compile a simple application to JS and run it without a dedicated server.
 This example serves to show that an application server isn't always necessary to quickly get a simple example going.
 
+The sample is built to use latest GWT from the snapshot server. To change to a specific GWT version, adjust
+the `gwt.version` property to your desired release, and optionally remove the snapshot repository from the pom.xml.
+
 ### Development mode
 To run the application in development mode, we can run the DevMode server to serve the static app:
 ```shell

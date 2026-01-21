@@ -6,6 +6,9 @@ in this example only hosts the static application, but could be imagined to be m
 The application's structure and build is generated with the help of the `modular-webapp` archetype from
 https://github.com/tbroyer/gwt-maven-archetypes/.
 
+The sample is built to use latest GWT from the snapshot server. To change to a specific GWT version, adjust
+the `gwt.version` property to your desired release, and optionally remove the snapshot repository from the pom.xml.
+
 ### Development mode
 To run the application in development mode, first run the GWT codeserver to set up the bootstrap JS file:
 

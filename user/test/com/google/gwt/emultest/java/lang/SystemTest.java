@@ -332,5 +332,9 @@ public class SystemTest extends GWTTestCase {
   public void testCurrentTimeMillis() {
     assertTrue(System.currentTimeMillis() > Date.parse("1/1/2021"));
   }
+
+  public void testLineSeparator() {
+    assertEquals("\n", System.lineSeparator());
+  }
 }
 

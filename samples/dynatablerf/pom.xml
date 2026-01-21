@@ -5,8 +5,10 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <gwt.version>HEAD-SNAPSHOT</gwt.version>
+
+    <maven.compiler.release>11</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -46,9 +48,6 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.14.1</version>
-          <configuration>
-            <release>11</release>
-          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -108,6 +107,7 @@
     <module>dynatablerf-server</module>
   </modules>
 
+  <!-- Add support to fetch GWT's HEAD-SNAPSHOT builds -->
   <repositories>
     <repository>
       <id>sonatype-snapshots</id>

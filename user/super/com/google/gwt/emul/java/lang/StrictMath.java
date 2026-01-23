@@ -285,7 +285,7 @@ public final class StrictMath {
     return Math.cbrt(x);
   }
 
-  @SuppressWarnings("MethodName")
+  @SuppressWarnings("checkstyle:MethodName")
   public static double IEEEremainder(double x, double y) {
     return Math.IEEEremainder(x, y);
   }

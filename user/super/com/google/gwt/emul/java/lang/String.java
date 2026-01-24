@@ -382,6 +382,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   @Override
+  @ConstantFoldCandidate
   public int compareTo(String other) {
     // Trick compiler into thinking that these are double so what we could do arithmetic comparison
     // which is supported on underlying JavaScript strings.
@@ -528,6 +529,7 @@ public final class String implements Comparable<String>, CharSequence,
     return Character.offsetByCodePoints(this, index, codePointOffset);
   }
 
+  @ConstantFoldCandidate
   public boolean regionMatches(boolean ignoreCase, int toffset, String other,
       int ooffset, int len) {
     checkNotNull(other);
@@ -550,6 +552,7 @@ public final class String implements Comparable<String>, CharSequence,
     return regionMatches(false, toffset, other, ooffset, len);
   }
 
+  @ConstantFoldCandidate
   public String replace(char from, char to) {
     // Translate 'from' into unicode escape sequence (\\u and a four-digit hexadecimal number).
     // Escape sequence replacement is used instead of a string literal replacement
@@ -560,6 +563,7 @@ public final class String implements Comparable<String>, CharSequence,
     return nativeReplaceAll(regex, replace);
   }
 
+  @ConstantFoldCandidate
   public String replace(CharSequence from, CharSequence to) {
     // Implementation note: This uses a regex replacement instead of
     // a string literal replacement because Safari does not
@@ -585,6 +589,7 @@ public final class String implements Comparable<String>, CharSequence,
    *
    * TODO(jat): properly handle Java regex syntax
    */
+  @ConstantFoldCandidate
   public String replaceAll(String regex, String replace) {
     replace = translateReplaceString(replace);
     return nativeReplaceAll(regex, replace);
@@ -602,6 +607,7 @@ public final class String implements Comparable<String>, CharSequence,
    *
    * TODO(jat): properly handle Java regex syntax
    */
+  @ConstantFoldCandidate
   public String replaceFirst(String regex, String replace) {
     replace = translateReplaceString(replace);
     NativeRegExp jsRegEx = new NativeRegExp(regex);
@@ -689,14 +695,17 @@ public final class String implements Comparable<String>, CharSequence,
     return out;
   }
 
+  @ConstantFoldCandidate
   public boolean startsWith(String prefix) {
     return asNativeString().startsWith(prefix);
   }
 
+  @ConstantFoldCandidate
   public boolean startsWith(String prefix, int toffset) {
     return asNativeString().startsWith(prefix, toffset);
   }
 
+  @ConstantFoldCandidate
   @Override
   public CharSequence subSequence(int beginIndex, int endIndex) {
     return substring(beginIndex, endIndex);
@@ -727,6 +736,7 @@ public final class String implements Comparable<String>, CharSequence,
    * a transformation based on native locale of the browser, you can do
    * {@code toLowerCase(Locale.getDefault())} instead.
    */
+  @ConstantFoldCandidate
   public String toLowerCase() {
     return asNativeString().toLowerCase();
   }
@@ -737,27 +747,32 @@ public final class String implements Comparable<String>, CharSequence,
    * to {@code toLowerCase} which performs the right thing for the limited set of Locale's
    * predefined in GWT Locale emulation.
    */
+  @ConstantFoldCandidate
   public String toLowerCase(Locale locale) {
     return locale == Locale.getDefault()
         ? asNativeString().toLocaleLowerCase() : asNativeString().toLowerCase();
   }
 
   // See the notes in lowerCase pair.
+  @ConstantFoldCandidate
   public String toUpperCase() {
     return asNativeString().toUpperCase();
   }
 
   // See the notes in lowerCase pair.
+  @ConstantFoldCandidate
   public String toUpperCase(Locale locale) {
     return locale == Locale.getDefault()
         ? asNativeString().toLocaleUpperCase() : asNativeString().toUpperCase();
   }
 
   @Override
+  @ConstantFoldCandidate
   public String toString() {
     return checkNotNull(this);
   }
 
+  @ConstantFoldCandidate
   public String trim() {
     int length = length();
     int start = 0;
@@ -771,6 +786,7 @@ public final class String implements Comparable<String>, CharSequence,
     return start > 0 || end < length ? substring(start, end) : this;
   }
 
+  @ConstantFoldCandidate
   public String strip() {
     int length = length();
     int start = getLeadingWhitespaceLength();
@@ -780,14 +796,17 @@ public final class String implements Comparable<String>, CharSequence,
     return substring(start, length - getTrailingWhitespaceLength());
   }
 
+  @ConstantFoldCandidate
   public String stripLeading() {
     return substring(getLeadingWhitespaceLength());
   }
 
+  @ConstantFoldCandidate
   public String stripTrailing() {
     return substring(0, length() - getTrailingWhitespaceLength());
   }
 
+  @ConstantFoldCandidate
   public boolean isBlank() {
     return length() == getLeadingWhitespaceLength();
   }
@@ -796,6 +815,7 @@ public final class String implements Comparable<String>, CharSequence,
     return StreamSupport.stream(new LinesSpliterator(), false);
   }
 
+  @ConstantFoldCandidate
   public String repeat(int count) {
     checkArgument(count >= 0, "count is negative: " + count);
     return asNativeString().repeat(count);
@@ -825,6 +845,7 @@ public final class String implements Comparable<String>, CharSequence,
     return length;
   }
 
+  @ConstantFoldCandidate
   public String indent(int spaces) {
     if (isEmpty()) {
       return "";

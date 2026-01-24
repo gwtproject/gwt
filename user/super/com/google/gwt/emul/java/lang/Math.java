@@ -18,6 +18,7 @@ package java.lang;
 import static javaemul.internal.InternalPreconditions.checkCriticalArithmetic;
 
 import javaemul.internal.JsUtils;
+import javaemul.internal.annotations.ConstantFoldCandidate;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -87,6 +88,7 @@ public final class Math {
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.ceil")
   public static native double ceil(double x);
 
+  @ConstantFoldCandidate
   public static double copySign(double magnitude, double sign) {
     return isNegative(sign) ? -abs(magnitude) : abs(magnitude);
   }
@@ -154,6 +156,7 @@ public final class Math {
     return (int) floorMod(dividend, (long) divisor);
   }
 
+  @ConstantFoldCandidate
   @SuppressWarnings("CheckStyle.MethodName")
   public static double IEEEremainder(double v, double m) {
     double ratio = v / m;
@@ -166,11 +169,13 @@ public final class Math {
     return closest == 0 ? v : v - m * closest;
   }
 
+  @ConstantFoldCandidate
   public static int getExponent(double v) {
     int[] intBits = JsUtils.doubleToRawIntBits(v);
     return ((intBits[1] >> 20) & 2047) - Double.MAX_EXPONENT;
   }
 
+  @ConstantFoldCandidate
   public static int getExponent(float v) {
     return ((JsUtils.floatToRawIntBits(v) >> 23) & 255) - Float.MAX_EXPONENT;
   }

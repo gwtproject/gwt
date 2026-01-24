@@ -19,7 +19,8 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
 /**
- * An annotation to mark a given method as not inlineable.
+ * An annotation to mark a given method as not inlineable. If the method
+ * cannot be inlined for any reason, the compiler will fail.
  * <p>
  * Internal SDK use only, might change or disappear at any time.
  */

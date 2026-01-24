@@ -490,7 +490,7 @@ public class DeadCodeElimination {
       if (targetType == program.getTypeJavaLangString() ||
           (instance != null &&
               instance.getType().getUnderlyingType() == program.getTypeJavaLangString())) {
-        tryOptimizeStringCall(x, ctx, target);
+        tryFoldMethodCall(x, ctx, target);
       } else if (JProgram.isClinit(target)) {
         // Eliminate the call if the target is now empty.
         if (!targetType.hasClinit()) {
@@ -1832,7 +1832,7 @@ public class DeadCodeElimination {
     /**
      * Replace String methods having literal args with the static result.
      */
-    private void tryOptimizeStringCall(JMethodCall x, Context ctx, JMethod method) {
+    private void tryFoldMethodCall(JMethodCall x, Context ctx, JMethod method) {
 
       if (method.getType() == program.getTypeVoid()) {
         return;

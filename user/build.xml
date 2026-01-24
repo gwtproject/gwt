@@ -15,7 +15,7 @@
   <property name="emma.merged.out" value="${junit.out}/emma-coverage"/>
 
   <property name="gwt.junit.testcase.web.includes" value="${gwt.junit.testcase.includes}" />
-  <property name="gwt.junit.testcase.web.excludes" value="**/*JreSuite.class,**/OptimizedOnly*" />
+  <property name="gwt.junit.testcase.web.excludes" value="**/*JreSuite.class" />
 
   <!-- Disable legacy dev mode test on Java 9 and above -->
   <property name="test.dev.htmlunit.disable" value="true" />
@@ -432,7 +432,7 @@
               value="${test.args.web.selenium} -draftCompile"/>
     <fileset id="test.draft.selenium.tests" dir="${javac.junit.out}"
              includes="${gwt.junit.testcase.web.includes}"
-             excludes="${gwt.junit.testcase.web.excludes}"/>
+             excludes="${gwt.junit.testcase.web.excludes},**/OptimizedOnly*"/>
     <gwt.junit test.name="test.draft.selenium"
                test.args='${test.draft.selenium.args}'
                test.jvmargs="${test.jvmargs}"
@@ -523,7 +523,7 @@
           unless="test.draft.htmlunit.disable">
     <fileset id="test.draft.htmlunit.tests" dir="${javac.junit.out}"
              includes="${gwt.junit.testcase.web.includes}"
-             excludes="${gwt.junit.testcase.web.excludes}"/>
+             excludes="${gwt.junit.testcase.web.excludes},**/OptimizedOnly*"/>
     <gwt.junit test.name="test.draft.htmlunit"
                test.args="${test.args.web.htmlunit} -draftCompile"
                test.jvmargs="${test.jvmargs}"

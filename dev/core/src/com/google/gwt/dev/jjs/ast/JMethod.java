@@ -59,6 +59,7 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
   private boolean preventDevirtualization = false;
   private boolean hasSideEffects = true;
   private boolean defaultMethod = false;
+  private boolean allowConstantFolding = false;
   private boolean syntheticAccidentalOverride = false;
   private Set<String> suppressedWarnings;
 
@@ -322,6 +323,15 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
     JParameter lastParameter = Iterables.getLast(getParams());
     return lastParameter.isVarargs();
   }
+
+  public boolean isConstantFoldingAllowed() {
+    return allowConstantFolding;
+  }
+
+  public void allowConstantFolding() {
+    this.allowConstantFolding = true;
+  }
+
   /**
    * AST representation of @SpecializeMethod.
    */

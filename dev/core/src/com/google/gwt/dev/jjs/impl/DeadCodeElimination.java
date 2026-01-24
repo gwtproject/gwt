@@ -487,9 +487,7 @@ public class DeadCodeElimination {
 
       // Normal optimizations.
       JDeclaredType targetType = target.getEnclosingType();
-      if (targetType == program.getTypeJavaLangString() ||
-          (instance != null &&
-              instance.getType().getUnderlyingType() == program.getTypeJavaLangString())) {
+      if (target.isConstantFoldingAllowed()) {
         tryFoldMethodCall(x, ctx, target);
       } else if (JProgram.isClinit(target)) {
         // Eliminate the call if the target is now empty.
@@ -1835,6 +1833,7 @@ public class DeadCodeElimination {
     private void tryFoldMethodCall(JMethodCall x, Context ctx, JMethod method) {
 
       if (method.getType() == program.getTypeVoid()) {
+        // TODO should warn, this shouldn't even be decorated
         return;
       }
 
@@ -1851,23 +1850,30 @@ public class DeadCodeElimination {
           ? x.getArgs().subList(1, x.getArgs().size())
           : x.getArgs();
 
-      // Handle toString specially to make sure it is a noop on non null string objects.
-      if (method.getName().endsWith("toString")) {
-        // replaces s.toString() with s
-        if (!instance.getType().canBeNull()) {
-          // Only replace when it known to be non null, otherwise it should follow the normal path
-          // and throw an NPE if null at runtime.
-          ctx.replaceMe(instance);
+      Class<?> methodEnclosingType = classObjectForType(method.getEnclosingType());
+
+      final Object instanceLiteral;
+      if (instance != null) {
+        // Handle toString specially to make sure it is a noop on non-null string objects.
+        if (method.getName().endsWith("toString") && instance.getType() == program.getTypeJavaLangString()) {
+          // replaces s.toString() with s
+          if (!instance.getType().canBeNull()) {
+            // Only replace when it is known to be non-null, otherwise it should follow the normal path
+            // and throw an NPE if null at runtime.
+            ctx.replaceMe(instance);
+          }
+          return;
         }
-        return;
-      }
 
-      Object instanceLiteral = tryTranslateLiteral(instance, String.class);
-      method = isStaticImplMethod ? program.instanceMethodForStaticImpl(method) : method;
+        instanceLiteral = tryTranslateLiteral(instance, methodEnclosingType);
+        method = isStaticImplMethod ? program.instanceMethodForStaticImpl(method) : method;
 
-      if (instanceLiteral == null && !method.isStatic()) {
-        // Instance method on an instance that was not a literal.
-        return;
+        if (instanceLiteral == null && !method.isStatic()) {
+          // Instance method on an instance that was not a literal.
+          return;
+        }
+      } else {
+        instanceLiteral = null;
       }
 
       // Extract constant values from arguments or bail out if not possible, and also extract the
@@ -1885,20 +1891,20 @@ public class DeadCodeElimination {
       }
 
       // Finally invoke the method statically.
-      JLiteral resultValue = staticallyInvokeStringMethod(
-          method.getName(), instanceLiteral, parametersClasses, argumentConstantValues);
+      JLiteral resultValue = staticallyInvokeMethod(
+          method.getName(), methodEnclosingType, instanceLiteral, parametersClasses, argumentConstantValues);
       if (resultValue != null) {
         ctx.replaceMe(resultValue);
       }
     }
 
-    private JLiteral staticallyInvokeStringMethod(
-        String methodName, Object instance, Class<?>[] parameterClasses, Object[] argumentValues) {
-      Method actualMethod = getMethod(methodName, String.class, parameterClasses);
+    private JLiteral staticallyInvokeMethod(
+        String methodName, Class<?> methodEnclosingType, Object instance, Class<?>[] parameterClasses, Object[] argumentValues) {
+      Method actualMethod = getMethod(methodName, methodEnclosingType, parameterClasses);
       if (actualMethod == null) {
         // Convert all parameters types to Object to find a more generic applicable method.
         Arrays.fill(parameterClasses, Object.class);
-        actualMethod = getMethod(methodName, String.class, parameterClasses);
+        actualMethod = getMethod(methodName, methodEnclosingType, parameterClasses);
       }
       if (actualMethod == null) {
         return null;
@@ -1979,22 +1985,22 @@ public class DeadCodeElimination {
       }
       // TODO: make this way better by a mile
       if (type == boolean.class && maybeLiteral instanceof JBooleanLiteral) {
-        return Boolean.valueOf(((JBooleanLiteral) maybeLiteral).getValue());
+        return ((JBooleanLiteral) maybeLiteral).getValue();
       }
       if (type == char.class && maybeLiteral instanceof JCharLiteral) {
-        return Character.valueOf(((JCharLiteral) maybeLiteral).getValue());
+        return ((JCharLiteral) maybeLiteral).getValue();
       }
       if (type == double.class && maybeLiteral instanceof JFloatLiteral) {
-        return new Double(((JFloatLiteral) maybeLiteral).getValue());
+        return ((JFloatLiteral) maybeLiteral).getValue();
       }
       if (type == double.class && maybeLiteral instanceof JDoubleLiteral) {
-        return new Double(((JDoubleLiteral) maybeLiteral).getValue());
+        return ((JDoubleLiteral) maybeLiteral).getValue();
       }
       if (type == int.class && maybeLiteral instanceof JIntLiteral) {
-        return Integer.valueOf(((JIntLiteral) maybeLiteral).getValue());
+        return ((JIntLiteral) maybeLiteral).getValue();
       }
       if (type == long.class && maybeLiteral instanceof JLongLiteral) {
-        return Long.valueOf(((JLongLiteral) maybeLiteral).getValue());
+        return ((JLongLiteral) maybeLiteral).getValue();
       }
       if (type == String.class && maybeLiteral instanceof JStringLiteral) {
         return ((JStringLiteral) maybeLiteral).getValue();
@@ -2076,13 +2082,21 @@ public class DeadCodeElimination {
         .put(program.getTypeJavaLangObject(), Object.class)
         .put(program.getTypeJavaLangString(), String.class)
         .put(program.getTypePrimitiveBoolean(), boolean.class)
+        .put(program.getTypePrimitiveBoolean().getWrapperTypeName(), Boolean.class)
         .put(program.getTypePrimitiveByte(), byte.class)
+        .put(program.getTypePrimitiveByte().getWrapperTypeName(), Byte.class)
         .put(program.getTypePrimitiveChar(), char.class)
+        .put(program.getTypePrimitiveChar().getWrapperTypeName(), Character.class)
         .put(program.getTypePrimitiveDouble(), double.class)
+        .put(program.getTypePrimitiveDouble().getWrapperTypeName(), Double.class)
         .put(program.getTypePrimitiveFloat(), float.class)
+        .put(program.getTypePrimitiveFloat().getWrapperTypeName(), Float.class)
         .put(program.getTypePrimitiveInt(), int.class)
+        .put(program.getTypePrimitiveInt().getWrapperTypeName(), Integer.class)
         .put(program.getTypePrimitiveLong(), long.class)
+        .put(program.getTypePrimitiveLong().getWrapperTypeName(), Long.class)
         .put(program.getTypePrimitiveShort(), short.class)
+        .put(program.getTypePrimitiveShort().getWrapperTypeName(), Short.class)
         .build();
   }
 

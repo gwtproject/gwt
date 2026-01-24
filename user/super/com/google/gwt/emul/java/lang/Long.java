@@ -16,6 +16,7 @@
 package java.lang;
 
 import javaemul.internal.LongUtils;
+import javaemul.internal.annotations.ConstantFoldCandidate;
 import javaemul.internal.annotations.HasNoSideEffects;
 
 /** Wraps a primitive <code>long</code> as an object. */
@@ -43,6 +44,7 @@ public final class Long extends Number implements Comparable<Long> {
   public static final int BYTES = SIZE / Byte.SIZE;
   public static final Class<Long> TYPE = long.class;
 
+  @ConstantFoldCandidate
   public static int bitCount(long l) {
     int high = LongUtils.getHighBits(l);
     int low = (int) l;
@@ -89,6 +91,7 @@ public final class Long extends Number implements Comparable<Long> {
     return Math.min(a, b);
   }
 
+  @ConstantFoldCandidate
   public static int numberOfLeadingZeros(long l) {
     int high = LongUtils.getHighBits(l);
     if (high != 0) {
@@ -98,6 +101,7 @@ public final class Long extends Number implements Comparable<Long> {
     }
   }
 
+  @ConstantFoldCandidate
   public static int numberOfTrailingZeros(long l) {
     int low = (int) l;
     if (low != 0) {
@@ -111,10 +115,12 @@ public final class Long extends Number implements Comparable<Long> {
     return parseLong(s, 10);
   }
 
+  @ConstantFoldCandidate
   public static long parseLong(String s, int radix) throws NumberFormatException {
     return __parseAndValidateLong(s, radix);
   }
 
+  @ConstantFoldCandidate
   public static long reverse(long l) {
     int high = LongUtils.getHighBits(l);
     int low = (int) l;

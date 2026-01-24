@@ -4479,6 +4479,7 @@ public class GwtAstBuilder {
 
   private void processAnnotations(Annotation[] annotations, JMethod method) {
     maybeAddMethodSpecialization(annotations, method);
+    maybeMarkConstantFoldCandidate(annotations, method);
     maybeSetInliningMode(annotations, method);
     maybeSetHasNoSideEffects(annotations, method);
     JsInteropUtil.maybeSetJsInteropProperties(method, shouldExport(method), annotations);
@@ -4539,6 +4540,13 @@ public class GwtAstBuilder {
     assert targetMethod != null : "target is a mandatory parameter";
 
     method.setSpecialization(paramTypes, returnsType, targetMethod);
+  }
+
+  private void maybeMarkConstantFoldCandidate(Annotation[] annotations, JMethod method) {
+    if (JdtUtil.getAnnotationByName(
+        annotations, "javaemul.internal.annotations.ConstantFoldCandidate") != null) {
+      method.allowConstantFolding();
+    }
   }
 
   private void createParameter(SourceInfo info, LocalVariableBinding binding, boolean isVarargs,

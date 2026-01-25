@@ -365,19 +365,23 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   @Override
+  @ConstantFoldCandidate
   public char charAt(int index) {
     checkStringElementIndex(index, length());
     return asNativeString().charCodeAt(index);
   }
 
+  @ConstantFoldCandidate
   public int codePointAt(int index) {
     return Character.codePointAt(this, index, length());
   }
 
+  @ConstantFoldCandidate
   public int codePointBefore(int index) {
     return Character.codePointBefore(this, index, 0);
   }
 
+  @ConstantFoldCandidate
   public int codePointCount(int beginIndex, int endIndex) {
     return Character.codePointCount(this, beginIndex, endIndex);
   }
@@ -392,6 +396,7 @@ public final class String implements Comparable<String>, CharSequence,
     return a == b ? 0 : (a < b ? -1 : 1);
   }
 
+  @ConstantFoldCandidate
   public int compareToIgnoreCase(String other) {
     return toLowerCase().compareTo(other.toLowerCase());
   }
@@ -479,38 +484,47 @@ public final class String implements Comparable<String>, CharSequence,
     return h;
   }
 
+  @ConstantFoldCandidate
   public int indexOf(int codePoint) {
     return indexOf(fromCodePoint(codePoint));
   }
 
+  @ConstantFoldCandidate
   public int indexOf(int codePoint, int startIndex) {
     return indexOf(fromCodePoint(codePoint), startIndex);
   }
 
+  @ConstantFoldCandidate
   public int indexOf(String str) {
     return asNativeString().indexOf(str);
   }
 
+  @ConstantFoldCandidate
   public int indexOf(String str, int startIndex) {
     return asNativeString().indexOf(str, startIndex);
   }
 
+  @ConstantFoldCandidate
   public String intern() {
     return checkNotNull(this);
   }
 
+  @ConstantFoldCandidate
   public int lastIndexOf(int codePoint) {
     return lastIndexOf(fromCodePoint(codePoint));
   }
 
+  @ConstantFoldCandidate
   public int lastIndexOf(int codePoint, int startIndex) {
     return lastIndexOf(fromCodePoint(codePoint), startIndex);
   }
 
+  @ConstantFoldCandidate
   public int lastIndexOf(String str) {
     return asNativeString().lastIndexOf(str);
   }
 
+  @ConstantFoldCandidate
   public int lastIndexOf(String str, int start) {
     return start < 0 ? -1 : asNativeString().lastIndexOf(str, start);
   }
@@ -721,11 +735,13 @@ public final class String implements Comparable<String>, CharSequence,
     return substring(beginIndex, endIndex);
   }
 
+  @ConstantFoldCandidate
   public String substring(int beginIndex) {
     checkStringElementIndex(beginIndex, length() + 1);
     return asNativeString().substr(beginIndex);
   }
 
+  @ConstantFoldCandidate
   public String substring(int beginIndex, int endIndex) {
     checkStringBounds(beginIndex, endIndex, length());
     return asNativeString().substr(beginIndex, endIndex - beginIndex);
@@ -871,6 +887,7 @@ public final class String implements Comparable<String>, CharSequence,
     return indentedLines.collect(Collectors.joining("\n", "", "\n"));
   }
 
+  @ConstantFoldCandidate
   public String stripIndent() {
     if (isEmpty()) {
       return "";

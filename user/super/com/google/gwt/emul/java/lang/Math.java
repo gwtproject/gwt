@@ -350,6 +350,7 @@ public final class Math {
     return (float) scalb((double) f, scaleFactor);
   }
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.sign")
   public static native double signum(double d);
 
@@ -357,18 +358,23 @@ public final class Math {
     return (float) signum((double) f);
   }
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.sin")
   public static native double sin(double x);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.sinh")
   public static native double sinh(double x);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.sqrt")
   public static native double sqrt(double x);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.tan")
   public static native double tan(double x);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.tanh")
   public static native double tanh(double x);
 
@@ -376,6 +382,7 @@ public final class Math {
     return x * PI_UNDER_180;
   }
 
+  @ConstantFoldCandidate
   public static int toIntExact(long x) {
     int ix = (int) x;
     checkCriticalArithmetic(ix == x);
@@ -386,6 +393,7 @@ public final class Math {
     return x * PI_OVER_180;
   }
 
+  @ConstantFoldCandidate
   public static double nextAfter(double start, double direction) {
     // Simple case described by Javadoc:
     if (start == direction) {

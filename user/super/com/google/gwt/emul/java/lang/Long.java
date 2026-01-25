@@ -70,6 +70,7 @@ public final class Long extends Number implements Comparable<Long> {
     return LongUtils.getHighBits(l) ^ (int) l;
   }
 
+  @ConstantFoldCandidate
   public static long highestOneBit(long l) {
     int high = LongUtils.getHighBits(l);
     if (high != 0) {
@@ -127,18 +128,21 @@ public final class Long extends Number implements Comparable<Long> {
     return LongUtils.fromBits(Integer.reverse(high), Integer.reverse(low));
   }
 
+  @ConstantFoldCandidate
   public static long reverseBytes(long l) {
     int high = LongUtils.getHighBits(l);
     int low = (int) l;
     return LongUtils.fromBits(Integer.reverseBytes(high), Integer.reverseBytes(low));
   }
 
+  @ConstantFoldCandidate
   public static long rotateLeft(long i, int distance) {
     long lowerBits = i >>> (SIZE - distance);
     long upperBits = i << distance;
     return upperBits | lowerBits;
   }
 
+  @ConstantFoldCandidate
   public static long rotateRight(long i, int distance) {
     long upperBits = i << (SIZE - distance);
     long lowerBits = i >>> distance;
@@ -159,14 +163,17 @@ public final class Long extends Number implements Comparable<Long> {
     return a + b;
   }
 
+  @ConstantFoldCandidate
   public static String toBinaryString(long value) {
     return toPowerOfTwoUnsignedString(value, 1);
   }
 
+  @ConstantFoldCandidate
   public static String toHexString(long value) {
     return toPowerOfTwoUnsignedString(value, 4);
   }
 
+  @ConstantFoldCandidate
   public static String toOctalString(long value) {
     return toPowerOfTwoUnsignedString(value, 3);
   }

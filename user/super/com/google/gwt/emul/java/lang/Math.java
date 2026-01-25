@@ -34,12 +34,15 @@ public final class Math {
   private static final double PI_OVER_180 = PI / 180.0;
   private static final double PI_UNDER_180 = 180.0 / PI;
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.abs")
   public static native double abs(double x);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.abs")
   public static native float abs(float x);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.abs")
   public static native int abs(int x);
 
@@ -47,28 +50,34 @@ public final class Math {
     return x < 0 ? -x : x;
   }
 
+  @ConstantFoldCandidate
   public static int absExact(int v) {
     checkCriticalArithmetic(v != Integer.MIN_VALUE);
     return abs(v);
   }
 
+  @ConstantFoldCandidate
   public static long absExact(long v) {
     checkCriticalArithmetic(v != Long.MIN_VALUE);
     return abs(v);
   }
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.acos")
   public static native double acos(double x);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.asin")
   public static native double asin(double x);
 
+  @ConstantFoldCandidate
   public static int addExact(int x, int y) {
     double r = (double) x + (double) y;
     checkCriticalArithmetic(isSafeIntegerRange(r));
     return (int) r;
   }
 
+  @ConstantFoldCandidate
   public static long addExact(long x, long y) {
     long r = x + y;
     // "Hacker's Delight" 2-12 Overflow if both arguments have the opposite sign of the result
@@ -76,15 +85,19 @@ public final class Math {
     return r;
   }
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.atan")
   public static native double atan(double x);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.atan2")
   public static native double atan2(double y, double x);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.cbrt")
   public static native double cbrt(double x);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.ceil")
   public static native double ceil(double x);
 
@@ -107,46 +120,56 @@ public final class Math {
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.cosh")
   public static native double cosh(double x);
 
+  @ConstantFoldCandidate
   public static int decrementExact(int x) {
     checkCriticalArithmetic(x != Integer.MIN_VALUE);
     return x - 1;
   }
 
+  @ConstantFoldCandidate
   public static long decrementExact(long x) {
     checkCriticalArithmetic(x != Long.MIN_VALUE);
     return x - 1;
   }
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.exp")
   public static native double exp(double x);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.expm1")
   public static native double expm1(double d);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.floor")
   public static native double floor(double x);
 
+  @ConstantFoldCandidate
   public static int floorDiv(int dividend, int divisor) {
     checkCriticalArithmetic(divisor != 0);
     // round down division if the signs are different and modulo not zero
     return ((dividend ^ divisor) >= 0 ? dividend / divisor : ((dividend + 1) / divisor) - 1);
   }
 
+  @ConstantFoldCandidate
   public static long floorDiv(long dividend, long divisor) {
     checkCriticalArithmetic(divisor != 0);
     // round down division if the signs are different and modulo not zero
     return ((dividend ^ divisor) >= 0 ? dividend / divisor : ((dividend + 1) / divisor) - 1);
   }
 
+  @ConstantFoldCandidate
   public static long floorDiv(long dividend, int divisor) {
     return floorDiv(dividend, (long) divisor);
   }
 
+  @ConstantFoldCandidate
   public static int floorMod(int dividend, int divisor) {
     checkCriticalArithmetic(divisor != 0);
     return ((dividend % divisor) + divisor) % divisor;
   }
 
+  @ConstantFoldCandidate
   public static long floorMod(long dividend, long divisor) {
     checkCriticalArithmetic(divisor != 0);
     return ((dividend % divisor) + divisor) % divisor;
@@ -199,34 +222,43 @@ public final class Math {
     return (float) Math.pow(2, exponent - 23);
   }
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.hypot")
   public static native double hypot(double x, double y);
 
+  @ConstantFoldCandidate
   public static int incrementExact(int x) {
     checkCriticalArithmetic(x != Integer.MAX_VALUE);
     return x + 1;
   }
 
+  @ConstantFoldCandidate
   public static long incrementExact(long x) {
     checkCriticalArithmetic(x != Long.MAX_VALUE);
     return x + 1;
   }
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.log")
   public static native double log(double x);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.log10")
   public static native double log10(double x);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.log1p")
   public static native double log1p(double x);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.max")
   public static native double max(double x, double y);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.max")
   public static native float max(float x, float y);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.max")
   public static native int max(int x, int y);
 
@@ -234,12 +266,15 @@ public final class Math {
     return x > y ? x : y;
   }
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.min")
   public static native double min(double x, double y);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.min")
   public static native float min(float x, float y);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.min")
   public static native int min(int x, int y);
 
@@ -291,9 +326,11 @@ public final class Math {
     return -x;
   }
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.pow")
   public static native double pow(double x, double exp);
 
+  @ConstantFoldCandidate
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.random")
   public static native double random();
 

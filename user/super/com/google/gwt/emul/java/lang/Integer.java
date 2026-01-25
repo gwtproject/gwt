@@ -16,6 +16,7 @@
 package java.lang;
 
 import javaemul.internal.JsUtils;
+import javaemul.internal.annotations.ConstantFoldCandidate;
 import javaemul.internal.annotations.HasNoSideEffects;
 
 /**
@@ -81,6 +82,7 @@ public final class Integer extends Number implements Comparable<Integer> {
     }
   }
 
+  @ConstantFoldCandidate
   public static Integer decode(String s) throws NumberFormatException {
     return Integer.valueOf(__decodeAndValidateInt(s, MIN_VALUE, MAX_VALUE));
   }

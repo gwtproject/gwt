@@ -1850,23 +1850,33 @@ public class DeadCodeElimination {
           ? x.getArgs().subList(1, x.getArgs().size())
           : x.getArgs();
 
-      Class<?> methodEnclosingType = classObjectForType(method.getEnclosingType());
+      Class<?> methodEnclosingType;
+      try {
+        methodEnclosingType = Class.forName(method.getEnclosingType().getName());
+      } catch (ClassNotFoundException e) {
+        // Fall back to built-in types only
+        methodEnclosingType = classObjectForType(method.getEnclosingType());
+      }
+      if (methodEnclosingType == null) {
+        // Can't find a type to invoke the method on, give up
+        return;
+      }
 
       final Object instanceLiteral;
       if (instance != null) {
+        instanceLiteral = tryTranslateLiteral(instance, methodEnclosingType);
+        method = isStaticImplMethod ? program.instanceMethodForStaticImpl(method) : method;
+
         // Handle toString specially to make sure it is a noop on non-null string objects.
-        if (method.getName().endsWith("toString") && instance.getType() == program.getTypeJavaLangString()) {
+        if (method.getName().equals("toString") && method.getOriginalParamTypes().isEmpty()) {
           // replaces s.toString() with s
-          if (!instance.getType().canBeNull()) {
+          if (!instance.getType().canBeNull() && instance.getType() == program.getTypeJavaLangString().strengthenToNonNull()) {
             // Only replace when it is known to be non-null, otherwise it should follow the normal path
             // and throw an NPE if null at runtime.
             ctx.replaceMe(instance);
           }
           return;
         }
-
-        instanceLiteral = tryTranslateLiteral(instance, methodEnclosingType);
-        method = isStaticImplMethod ? program.instanceMethodForStaticImpl(method) : method;
 
         if (instanceLiteral == null && !method.isStatic()) {
           // Instance method on an instance that was not a literal.

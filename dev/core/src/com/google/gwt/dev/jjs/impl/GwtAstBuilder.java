@@ -4545,7 +4545,7 @@ public class GwtAstBuilder {
   private void maybeMarkConstantFoldCandidate(Annotation[] annotations, JMethod method) {
     if (JdtUtil.getAnnotationByName(
         annotations, "javaemul.internal.annotations.ConstantFoldCandidate") != null) {
-      method.allowConstantFolding();
+      method.setAllowConstantFolding(true);
     }
   }
 

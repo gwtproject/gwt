@@ -165,9 +165,7 @@ public class MakeCallsStatic {
               .getAccess());
       newMethod.setInliningMode(x.getInliningMode());
       newMethod.setHasSideEffects(x.hasSideEffects());
-      if (x.isConstantFoldingAllowed()) {
-        newMethod.allowConstantFolding();
-      }
+      newMethod.setAllowConstantFolding(x.isConstantFoldingAllowed());
       newMethod.setSynthetic();
       newMethod.addThrownExceptions(x.getThrownExceptions());
       if (x.isJsOverlay()) {

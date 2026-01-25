@@ -34,8 +34,16 @@ public class RemoveSpecializations extends JModVisitor {
 
   @Override
   public boolean visit(JMethod x, Context ctx) {
+    boolean modified = false;
     if (x.getSpecialization() != null) {
       x.removeSpecialization();
+      modified = true;
+    }
+    if (x.isConstantFoldingAllowed()) {
+      x.setAllowConstantFolding(false);
+      modified = true;
+    }
+    if (modified) {
       numMods++;
     }
 

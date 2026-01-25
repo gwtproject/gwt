@@ -328,8 +328,8 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
     return allowConstantFolding;
   }
 
-  public void allowConstantFolding() {
-    this.allowConstantFolding = true;
+  public void setAllowConstantFolding(boolean allowConstantFolding) {
+    this.allowConstantFolding = allowConstantFolding;
   }
 
   /**

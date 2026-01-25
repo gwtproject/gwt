@@ -42,6 +42,7 @@ import javaemul.internal.Coercions;
 import javaemul.internal.EmulatedCharset;
 import javaemul.internal.JsUtils;
 import javaemul.internal.NativeRegExp;
+import javaemul.internal.annotations.ConstantFoldCandidate;
 import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
@@ -395,27 +396,33 @@ public final class String implements Comparable<String>, CharSequence,
     return toLowerCase().compareTo(other.toLowerCase());
   }
 
+  @ConstantFoldCandidate
   public String concat(String str) {
     return checkNotNull(this) + checkNotNull(str);
   }
 
+  @ConstantFoldCandidate
   public boolean contains(CharSequence s) {
     return asNativeString().includes(s.toString());
   }
 
+  @ConstantFoldCandidate
   public boolean contentEquals(CharSequence cs) {
     return equals(cs.toString());
   }
 
+  @ConstantFoldCandidate
   public boolean contentEquals(StringBuffer sb) {
     return equals(sb.toString());
   }
 
+  @ConstantFoldCandidate
   public boolean endsWith(String suffix) {
     return asNativeString().endsWith(suffix);
   }
 
   // Marked with @DoNotInline because we don't have static eval for "==" yet.
+  @ConstantFoldCandidate
   @DoNotInline
   @Override
   public boolean equals(Object other) {
@@ -424,6 +431,7 @@ public final class String implements Comparable<String>, CharSequence,
     return checkNotNull(this) == other;
   }
 
+  @ConstantFoldCandidate
   public boolean equalsIgnoreCase(String other) {
     checkNotNull(this);
     if (other == null) {
@@ -461,6 +469,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   @Override
+  @ConstantFoldCandidate
   public int hashCode() {
     int h = 0;
     for (int i = 0; i < length(); i++) {
@@ -506,6 +515,7 @@ public final class String implements Comparable<String>, CharSequence,
     return start < 0 ? -1 : asNativeString().lastIndexOf(str, start);
   }
 
+  @ConstantFoldCandidate
   @Override
   public int length() {
     return asNativeString().length;

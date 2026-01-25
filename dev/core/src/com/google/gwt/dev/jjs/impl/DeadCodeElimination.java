@@ -2005,11 +2005,8 @@ public class DeadCodeElimination {
       if (type == String.class && maybeLiteral instanceof JStringLiteral) {
         return ((JStringLiteral) maybeLiteral).getValue();
       }
-      if (type == Object.class) {
-        // We already know it is a JValueLiteral instance
-        return ((JValueLiteral) maybeLiteral).getValueObj();
-      }
-      return null;
+      // We already know it is a JValueLiteral instance
+      return ((JValueLiteral) maybeLiteral).getValueObj();
     }
   }
 
@@ -2078,9 +2075,11 @@ public class DeadCodeElimination {
 
   public DeadCodeElimination(JProgram program) {
     this.program = program;
+    // TODO try to start with the root types were concerned with and work upwards?
     classObjectsByType = new ImmutableMap.Builder()
         .put(program.getTypeJavaLangObject(), Object.class)
         .put(program.getTypeJavaLangString(), String.class)
+        .put(program.getIndexedType("CharSequence"), CharSequence.class)
         .put(program.getTypePrimitiveBoolean(), boolean.class)
         .put(program.getTypePrimitiveBoolean().getWrapperTypeName(), Boolean.class)
         .put(program.getTypePrimitiveByte(), byte.class)

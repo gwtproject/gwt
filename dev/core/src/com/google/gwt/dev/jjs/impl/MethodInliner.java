@@ -131,6 +131,11 @@ public class MethodInliner {
         return;
       }
 
+      if (method.isConstantFoldingAllowed()) {
+        // Can't inline this method while it might still be constant-folded.
+        return;
+      }
+
       JMethod.Specialization specialization = getCurrentMethod().getSpecialization();
       // If we have a specialization, don't inline that away - specializations must be called
       // so they aren't pruned or type tightened into uselessness.

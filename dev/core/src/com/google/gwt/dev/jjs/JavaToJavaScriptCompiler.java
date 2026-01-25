@@ -538,6 +538,8 @@ public final class JavaToJavaScriptCompiler {
     if (shouldOptimize()) {
       optimizeJavaToFixedPoint();
       RemoveEmptySuperCalls.exec(jprogram);
+      RemoveSpecializations.exec(jprogram);
+      MethodInliner.exec(jprogram);
     }
   }
 
@@ -551,7 +553,6 @@ public final class JavaToJavaScriptCompiler {
   private void postNormalizationOptimizeJava() {
     try (SimpleEvent ignored = new SimpleEvent("Post-Normalization Java Optimizers")) {
       if (shouldOptimize()) {
-        RemoveSpecializations.exec(jprogram);
         Pruner.exec(jprogram, false, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
         // Last Java optimization step, update type oracle accordingly.
         jprogram.typeOracle.recomputeAfterOptimizations(jprogram.getDeclaredTypes());

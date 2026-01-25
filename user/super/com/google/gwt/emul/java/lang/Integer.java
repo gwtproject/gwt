@@ -208,6 +208,10 @@ public final class Integer extends Number implements Comparable<Integer> {
     return (int) value;
   }
 
+  public int parseUnsignedInt(CharSequence str, int beginIndex, int endIndex, int radix) {
+    return parseUnsignedInt(str.subSequence(beginIndex, endIndex).toString(), radix);
+  }
+
   public static int remainderUnsigned(int dividend, int divisor) {
     return ensureInt(toUnsignedInt(dividend) % toUnsignedInt(divisor));
   }
@@ -263,7 +267,7 @@ public final class Integer extends Number implements Comparable<Integer> {
     return toUnsignedString(value, 8);
   }
 
-  static String toUnsignedString(int value, int radix) {
+  public static String toUnsignedString(int value, int radix) {
     return JsUtils.uintToString(value, radix);
   }
 

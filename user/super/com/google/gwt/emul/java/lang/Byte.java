@@ -78,6 +78,10 @@ public final class Byte extends Number implements Comparable<Byte> {
     return toUnsignedInt(b);
   }
 
+  public static int compareUnsigned(byte a, byte b) {
+    return Integer.compare(a ^ MIN_VALUE, b ^ MIN_VALUE);
+  }
+
   public static Byte valueOf(byte b) {
     return BoxedValues.get(b);
   }

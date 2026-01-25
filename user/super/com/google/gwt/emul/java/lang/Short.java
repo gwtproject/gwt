@@ -83,6 +83,10 @@ public final class Short extends Number implements Comparable<Short> {
     return toUnsignedInt(s);
   }
 
+  public static int compareUnsigned(short a, short b) {
+    return Integer.compare(a ^ MIN_VALUE, b ^ MIN_VALUE);
+  }
+
   public static Short valueOf(short s) {
     if (s > -129 && s < 128) {
       return BoxedValues.get(s);

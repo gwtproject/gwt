@@ -74,4 +74,14 @@ public class ShortTest extends GWTTestCase {
       assertEquals((long) a, Short.toUnsignedLong((short) a));
     }
   }
+
+  public void testCompareUnsigned() {
+    for (int a : UNSIGNED_INTS) {
+      for (int b : UNSIGNED_INTS) {
+        int cmpAsInts = Integer.compare(a, b);
+        int cmpAsUnsignedBytes = Short.compareUnsigned((short) a, (short) b);
+        assertEquals(Integer.signum(cmpAsInts), Integer.signum(cmpAsUnsignedBytes));
+      }
+    }
+  }
 }

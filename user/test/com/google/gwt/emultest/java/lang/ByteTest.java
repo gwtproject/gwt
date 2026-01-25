@@ -71,4 +71,14 @@ public class ByteTest extends GWTTestCase {
       assertEquals((long) a, Byte.toUnsignedLong((byte) a));
     }
   }
+
+  public void testCompareUnsigned() {
+    for (int a : UNSIGNED_INTS) {
+      for (int b : UNSIGNED_INTS) {
+        int cmpAsInts = Integer.compare(a, b);
+        int cmpAsUnsignedBytes = Byte.compareUnsigned((byte) a, (byte) b);
+        assertEquals(Integer.signum(cmpAsInts), Integer.signum(cmpAsUnsignedBytes));
+      }
+    }
+  }
 }

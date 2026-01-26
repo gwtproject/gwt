@@ -148,8 +148,14 @@
                  packagenames="${JAVA_PKGS}"
                  docletpath="${project.build}/../build_tools/doctool/bin"
                  doclet="com.google.doctool.custom.JavaEmulSummaryDoclet">
-          <arg value="-outfile" />
+          <arg value="-outFile" />
           <arg value="${project.build}/emul-ezt/fragment.html" />
+          <arg value="-missingFile" />
+          <arg value="${project.build}/emul-ezt/fragment-missing.html" />
+          <arg value="-triageFile" />
+          <arg value="${project.build}/emul-ezt/triage.properties" />
+          <arg value="-missingProperties" />
+          <arg value="${gwt.root}/build_tools/doctool/src/com/google/doctool/custom/missing" />
         </javadoc>
       </sequential>
     </outofdate>

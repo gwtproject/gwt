@@ -283,20 +283,18 @@
         <filename name="com/google/gwt/dev/shell/remoteui/RemoteMessageProto.java"
                   negate="yes"/>
         <filename name="com/google/gwt/dev/js/rhino/**/*.java" negate="yes"/>
-        <filename name="org/eclipse/**/*.java" negate="yes"/>
-        <filename name="org/apache/**/*.java" negate="yes"/>
       </fileset>
       <fileset dir="core/super"/>
+      <fileset dir="codeserver/java"/>
     </gwt.checkstyle>
   </target>
 
   <target name="checkstyle-tests" description="Static analysis of tests">
     <gwt.checkstyle.tests>
       <fileset dir="core/test">
-        <filename name="com/google/gwt/dev/js/rhino/**/*.java" negate="yes"/>
-        <filename name="org/eclipse/**/*.java" negate="yes"/>
         <filename name="org/apache/**/*.java" negate="yes"/>
       </fileset>
+      <fileset dir="codeserver/javatests" />
     </gwt.checkstyle.tests>
   </target>
 

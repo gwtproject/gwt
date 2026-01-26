@@ -16,31 +16,36 @@ The sample is built to use latest GWT from the snapshot server. To change to a s
 the `gwt.version` property to your desired release, and optionally remove the snapshot repositories from the pom.xml.
 
 ### Development mode
-First, build the whole application
+To run the application in development mode, first we need to build once - the appengine-maven-plugin wants to run on
+every module in the project, so when we start it, it needs to be specifically on the server module. Build and install 
+the project:
 ```shell
-mvn clean package
+mvn install
 ```
-Start the App Engine dev server in the background:
+
+Next run the GWT codeserver to set up the bootstrap JS file:
 ```shell
-mvn appengine:devserver_start
+mvn gwt:codeserver -pl mobilewebapp-client -am
+```
+
+Then, in a separate terminal, run the App Engine dev server:
+```shell
+mvn appengine:devserver -pl mobilewebapp-server -Denv=dev 
+```
+Note that this will not build the shared project (as `-am` is omitted to only run this on the server), but that should
+be built by the first step.
+
+Alternatively, you can start the devserver in the background, once the codeserver has created its basic bootstrap file:
+```shell
+mvn appengine:devserver_start -pl mobilewebapp-server -Denv=dev
+
 ```
 To stop this, run:
 ```shell
-mvn appengine:devserver_stop
+mvn appengine:devserver_stop -pl mobilewebapp-server -Denv=dev
 ```
 
-You can also start the devserver in the foreground in a separate shell - this approach lets you tail the logs
-to look for errors:
-```shell
-mvn appengine:devserver
-```
-
-Next, run the GWT codeserver:
-```shell
-mvn gwt:codeserver
-```
-
-And connect your browser to http://localhost:8080/ to view the application.
+Connect your browser to http://localhost:8080/ to view the application.
 
 ## Mobile device testing
 To test on a mobile device, first ensure that your development machine and mobile device

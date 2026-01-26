@@ -37,9 +37,9 @@
         <artifactId>gwt-maven-plugin</artifactId>
         <inherited>false</inherited>
         <configuration>
-          <launcherDir>${basedir}/mobilewebapp-server/target/gwt/launcherDir</launcherDir>
+          <launcherDir>${basedir}/mobilewebapp-server/target/mobilewebapp-server-${project.version}</launcherDir>
           <!-- To be able to use gwt:devmode (useful on Windows where Ctrl+C won't kill gwt:codeserver)-->
-          <warDir>${basedir}/mobilewebapp-server/target/gwt/launcherDir</warDir>
+          <warDir>${basedir}/mobilewebapp-server/target/mobilewebapp-server-${project.version}</warDir>
           <devmodeArgs>
             <arg>-noserver</arg>
           </devmodeArgs>

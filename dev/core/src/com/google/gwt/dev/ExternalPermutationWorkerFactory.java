@@ -37,6 +37,8 @@ import java.lang.management.ManagementFactory;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -44,7 +46,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 /**
@@ -61,47 +62,53 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
    * before closing the socket.
    */
   private static class CountedServerSocket {
-    private int accepts;
-    private ServerSocket sock;
+    private final ServerSocket sock;
+    private final Set<String> validCookies;
+    private final TreeLogger logger;
 
-    public CountedServerSocket(ServerSocket sock, int maxAccepts) {
+    public CountedServerSocket(TreeLogger logger, ServerSocket sock, Set<String> validCookies) {
       assert sock != null;
-      assert maxAccepts >= 1;
+      assert !validCookies.isEmpty();
 
-      this.accepts = maxAccepts;
+      this.logger = logger;
       this.sock = sock;
+      this.validCookies = validCookies;
     }
 
+    /**
+     * Returns an authenticated Socket connection.
+     * @return the next connecting socket to present a valid unused cookie
+     * @throws IOException if there is an error with the socket
+     */
     public synchronized Socket accept() throws IOException {
-      assert accepts >= 0;
-
-      if (accepts == 0) {
-        throw new IllegalStateException("Too many calls to accept()");
-      }
-
-      try {
-        return sock.accept();
-      } finally {
-        if (--accepts == 0) {
-          sock.close();
-          sock = null;
+      while (!validCookies.isEmpty()) {
+        Socket s = sock.accept();
+        byte[] bytes = s.getInputStream().readNBytes(32);
+        String cookie = new String(bytes, StandardCharsets.US_ASCII);
+        if (validCookies.remove(cookie)) {
+          if (validCookies.isEmpty()) {
+            // We've removed the final cookie, no further connections are expected
+            sock.close();
+          }
+          return s;
         }
+        s.close();
+        logger.log(TreeLogger.WARN, "Rejected connection from "
+            + s.getRemoteSocketAddress() + " with invalid cookie: " + cookie);
       }
+      throw new IllegalStateException("No more cookies, too many calls to accept()");
     }
   }
 
   private static class ExternalPermutationWorker implements PermutationWorker {
     private final File astFile;
-    private final Set<String> cookies;
     private ObjectInputStream in;
     private ObjectOutputStream out;
     private final CountedServerSocket serverSocket;
     private Socket workerSocket;
 
-    public ExternalPermutationWorker(CountedServerSocket sock, File astFile,
-        Set<String> cookies) {
+    public ExternalPermutationWorker(CountedServerSocket sock, File astFile) {
       this.astFile = astFile;
-      this.cookies = cookies;
       this.serverSocket = sock;
     }
 
@@ -121,14 +128,6 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
 
           in = new StringInterningObjectInputStream(workerSocket.getInputStream());
           out = new ObjectOutputStream(workerSocket.getOutputStream());
-
-          // Verify we're talking to the right worker
-          String c = in.readUTF();
-          if (!cookies.contains(c)) {
-            throw new TransientWorkerException("Received unknown cookie " + c,
-                null);
-          }
-
           out.writeObject(astFile);
 
           // Get the remote worker's estimate of memory use
@@ -220,13 +219,12 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
   /**
    * Random number generator used for keys to worker threads.
    */
-  private static Random random = new Random();
+  private static final SecureRandom random = new SecureRandom();
 
   /**
-   * Launches an external worker and returns the cookie that worker should
-   * return via the network connection.
+   * Launches an external worker, with a port to connect to and a cookie to authenticate with.
    */
-  private static String launchExternalWorker(TreeLogger logger, int port)
+  private static void launchExternalWorker(TreeLogger logger, String cookie, int port)
       throws UnableToCompleteException {
 
     String javaCommand = System.getProperty(JAVA_COMMAND_PROPERTY,
@@ -257,10 +255,6 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
         break;
       }
     }
-
-    byte[] cookieBytes = new byte[16];
-    random.nextBytes(cookieBytes);
-    String cookie = StringUtils.toHexString(cookieBytes);
 
     // Cook up the classpath, main class, and extra args
     args.addAll(Arrays.asList(
@@ -342,7 +336,6 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
         }
       }));
 
-      return cookie;
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to start external process", e);
       throw new UnableToCompleteException();
@@ -375,15 +368,22 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
 
     Set<String> cookies = Collections.synchronizedSet(new HashSet<String>(
         numWorkers));
-    CountedServerSocket countedSock = new CountedServerSocket(sock, numWorkers);
+    for (int i = 0; i < numWorkers; i++) {
+      byte[] cookieBytes = new byte[16];
+      random.nextBytes(cookieBytes);
+      cookies.add(StringUtils.toHexString(cookieBytes));
+    }
+    CountedServerSocket countedSock = new CountedServerSocket(logger, sock, cookies);
     List<PermutationWorker> toReturn = new ArrayList<PermutationWorker>(
         numWorkers);
 
+    // Copy the cookies to a list so we can guarantee we never have a race with removals
+    List<String> cookieList = new ArrayList<>(cookies);
+
     // TODO(spoon): clean up already-launched processes if we get an exception?
     for (int i = 0; i < numWorkers; i++) {
-      String cookie = launchExternalWorker(logger, sock.getLocalPort());
-      cookies.add(cookie);
-      toReturn.add(new ExternalPermutationWorker(countedSock, astFile, cookies));
+      launchExternalWorker(logger, cookieList.get(i), sock.getLocalPort());
+      toReturn.add(new ExternalPermutationWorker(countedSock, astFile));
     }
 
     return toReturn;

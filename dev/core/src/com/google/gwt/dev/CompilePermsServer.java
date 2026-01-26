@@ -33,8 +33,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * An out-of-process implementation of CompilePerms that will connect back to an
@@ -246,16 +248,16 @@ public class CompilePermsServer {
   }
 
   public static boolean run(CompileServerOptions options, TreeLogger logger) {
-    try {
-      Socket s = new Socket(options.getCompileHost(), options.getCompilePort());
+    try (Socket s = new Socket(options.getCompileHost(), options.getCompilePort())) {
       logger.log(TreeLogger.DEBUG, "Socket opened");
 
-      ObjectOutputStream out = new ObjectOutputStream(s.getOutputStream());
-      ObjectInputStream in = new StringInterningObjectInputStream(s.getInputStream());
-
       // Write my cookie
-      out.writeUTF(options.getCookie());
-      out.flush();
+      OutputStream rawOut = s.getOutputStream();
+      rawOut.write(options.getCookie().getBytes(StandardCharsets.US_ASCII));
+      rawOut.flush();
+
+      ObjectOutputStream out = new ObjectOutputStream(rawOut);
+      ObjectInputStream in = new StringInterningObjectInputStream(s.getInputStream());
 
       // Read the File that contains the serialized UnifiedAst
       File astFile = (File) in.readObject();

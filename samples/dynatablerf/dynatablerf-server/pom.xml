@@ -110,6 +110,9 @@
           <configuration>
             <scan>1</scan>
             <contextXml>${basedir}/src/main/jettyconf/context.xml</contextXml>
+            <systemProperties>
+              <gwt.validation.ignoreXml>true</gwt.validation.ignoreXml>
+            </systemProperties>
           </configuration>
         </plugin>
 				<!--This plugin's configuration is used to store Eclipse m2e settings 

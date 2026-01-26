@@ -49,7 +49,7 @@ public class ActionEvent extends Event<ActionEvent.Handler> {
   }
 
   /**
-   * Protected contructor to encourage the use of
+   * Protected constructor to encourage the use of
    * {@link #fire(EventBus, String)}.
    */
   protected ActionEvent() {

@@ -362,7 +362,7 @@ public class ProxyCreator {
     generateProxyFields(srcWriter, typesSentFromBrowser, serializationPolicyStrongName,
         remoteServiceInterfaceName);
 
-    generateProxyContructor(srcWriter);
+    generateProxyConstructor(srcWriter);
 
     generateProxyMethods(srcWriter, typesSentFromBrowser, typeOracle, syncMethToAsyncMethMap);
 
@@ -438,7 +438,7 @@ public class ProxyCreator {
     for (JClassType rpcTokenSubtype : rpcTokenSubtypes) {
       if (typesSentFromBrowser.isSerializable(rpcTokenSubtype)) {
         if (rpcTokenImplementation.length() > 0) {
-          // >1 implematation of RpcToken, bail
+          // >1 implementation of RpcToken, bail
           rpcTokenImplementation = "";
           break;
         } else {
@@ -466,7 +466,7 @@ public class ProxyCreator {
    * using the default address for the
    * {@link com.google.gwt.user.client.rpc.RemoteService RemoteService}.
    */
-  protected void generateProxyContructor(SourceWriter srcWriter) {
+  protected void generateProxyConstructor(SourceWriter srcWriter) {
     srcWriter.println("public " + getProxySimpleName() + "() {");
     srcWriter.indent();
     srcWriter.println("super(GWT.getModuleBaseURL(),");

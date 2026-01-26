@@ -26,11 +26,6 @@
       <artifactId>javax.servlet-api</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>org.gwtproject.web.bindery</groupId>
-      <artifactId>requestfactory-server</artifactId>
-    </dependency>
-
     <!-- RequestFactory will use JSR 303 javax.validation if you let it -->
     <dependency>
       <groupId>javax.validation</groupId>

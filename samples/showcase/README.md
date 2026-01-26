@@ -10,10 +10,14 @@ The sample is built to use latest GWT from the snapshot server. To change to a s
 the `gwt.version` property to your desired release, and optionally remove the snapshot repository from the pom.xml.
 
 ### Development mode
-To run the application in development mode, first run the GWT codeserver to set up the bootstrap JS file:
+To run the application in development mode, first run GWT DevMode to set up the bootstrap JS file.
+
+NOTE: This is not the usual gwt:codeserver, there seems to be a classpath issue in loading source files as resources
+through dev mode, which is part of how this demo functions. This is not a typical use case, but an issue specific to
+the Showcase sample.
 
 ```shell
-mvn gwt:codeserver -pl showcase-client -am
+mvn gwt:devmode -pl showcase-client -am
 ```
 Then, in a separate terminal, run the server:
 

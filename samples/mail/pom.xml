@@ -6,6 +6,12 @@
   <packaging>pom</packaging>
   <properties>
     <gwt.version>HEAD-SNAPSHOT</gwt.version>
+
+    <!--
+      Default Java version is 17, as required by Jetty 12.1.
+      This can be changed to 11 if a different server is used.
+    -->
+    <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencyManagement>
@@ -46,9 +52,6 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.14.1</version>
-          <configuration>
-            <release>11</release>
-          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -76,7 +79,7 @@
           <version>1.2.0</version>
           <extensions>true</extensions>
           <configuration>
-            <sourceLevel>11</sourceLevel>
+            <sourceLevel>17</sourceLevel>
             <failOnError>true</failOnError>
           </configuration>
         </plugin>

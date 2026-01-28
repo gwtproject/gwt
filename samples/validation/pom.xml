@@ -8,7 +8,11 @@
     <!-- Convenience property to set the GWT version -->
     <gwt.version>HEAD-SNAPSHOT</gwt.version>
 
-    <maven.compiler.release>11</maven.compiler.release>
+    <!--
+      Default Java version is 17, as required by Jetty 12.1.
+      This can be changed to 11 if a different server is used.
+    -->
+    <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencyManagement>
@@ -117,7 +121,7 @@
           <version>1.2.0</version>
           <extensions>true</extensions>
           <configuration>
-            <sourceLevel>11</sourceLevel>
+            <sourceLevel>17</sourceLevel>
             <failOnError>true</failOnError>
             <jvmArgs>
               <jvmArg>-Dgwt.validation.ignoreXml=true</jvmArg>

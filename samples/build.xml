@@ -1,16 +1,20 @@
-<project name="samples" default="build" basedir=".">
+<project name="samples" default="build" basedir="." xmlns:unless="ant:unless">
   <property name="gwt.root" location=".." />
   <property name="project.tail" value="samples" />
   <import file="${gwt.root}/common.ant.xml" />
 
+  <condition property="isJava11">
+    <matches string="${java.version}" pattern="^11.*" />
+  </condition>
+
   <!-- "verify" is the default maven command when subprojects are directly targeted -->
   <property name="mvn.args" value="verify" />
 
-  <target name="dynatable" description="Build dynatable">
+  <target name="dynatable" description="Build dynatable" unless="isJava11">
     <gwt.mvn dir="dynatable" />
   </target>
 
-  <target name="dynatablerf" description="Build dynatablerf">
+  <target name="dynatablerf" description="Build dynatablerf" unless="isJava11">
     <gwt.mvn dir="dynatablerf" />
   </target>
 
@@ -18,11 +22,11 @@
     <gwt.mvn dir="hello" />
   </target>
 
-  <target name="json" description="Build json">
+  <target name="json" description="Build json" unless="isJava11">
     <gwt.mvn dir="json" />
   </target>
 
-  <target name="mail" description="Build mail">
+  <target name="mail" description="Build mail" unless="isJava11">
     <gwt.mvn dir="mail" />
   </target>
 
@@ -30,15 +34,15 @@
     <gwt.mvn dir="mobilewebapp" />
   </target>
 
-  <target name="showcase" description="Build showcase">
+  <target name="showcase" description="Build showcase" unless="isJava11">
     <gwt.mvn dir="showcase" />
   </target>
 
-  <target name="validation" description="Build validation">
+  <target name="validation" description="Build validation" unless="isJava11">
     <gwt.mvn dir="validation" />
   </target>
 
-  <target name="-do" description="Run all subprojects" >
+  <target name="-do" description="Run all subprojects">
     <antcall target="dynatable" />
     <antcall target="dynatablerf" />
     <antcall target="hello" />

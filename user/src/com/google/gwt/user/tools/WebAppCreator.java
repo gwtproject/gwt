@@ -76,7 +76,6 @@ public final class WebAppCreator {
       registerHandler(new ArgHandlerJUnitPath());
       registerHandler(new ArgHandlerCreateMavenProject());
       registerHandler(new ArgHandlerCreateAntFile());
-      registerHandler(new ArgHandlerLegacyJetty());
     }
 
     @Override
@@ -139,29 +138,6 @@ public final class WebAppCreator {
       }
       junitPath = str;
       return true;
-    }
-  }
-
-  private final class ArgHandlerLegacyJetty extends ArgHandlerFlag {
-    @Override
-    public String getPurposeSnippet() {
-      return "DEPRECATED: Use deprecated JettyLauncher instead of an external server.";
-    }
-
-    @Override
-    public String getLabel() {
-      return "useLegacyJetty";
-    }
-
-    @Override
-    public boolean setFlag(boolean value) {
-      server = "com.google.gwt.dev.shell.jetty.JettyLauncher";
-      return true;
-    }
-
-    @Override
-    public boolean getDefaultValue() {
-      return false;
     }
   }
 
@@ -529,7 +505,6 @@ public final class WebAppCreator {
   private boolean onlyEclipse;
   private File outDir;
   private boolean overwrite = false;
-  private String server = "";
 
   private HashSet<String> templates = new HashSet<String>();
 
@@ -647,7 +622,6 @@ public final class WebAppCreator {
     replacements.put("@startupUrl", moduleShortName + ".html");
     replacements.put("@renameTo", moduleShortName.toLowerCase(Locale.ROOT));
     replacements.put("@moduleNameJUnit", theModuleName + "JUnit");
-    replacements.put("@serverFQCN", server);
 
     // Add command to copy gwt-servlet-deps.jar into libs, unless this is a
     // maven project. Maven projects should include libs as maven dependencies.

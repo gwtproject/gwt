@@ -19,9 +19,6 @@
         <configuration>
           <moduleName>com.google.gwt.sample.validation.App</moduleName>
           <moduleShortName>validation</moduleShortName>
-          <jvmArgs>
-            <jvmArg>-Dgwt.validation.ignoreXml=true</jvmArg>
-          </jvmArgs>
         </configuration>
       </plugin>
     </plugins>

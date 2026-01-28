@@ -10,7 +10,7 @@ This is a sample mobile webapp demonstrating a variety of features:
  * Custom RequestFactory transport for authentication headers
 
 It also serves at this point as an example of a legacy application that cannot run on modern Java - as presently implemented,
-it seems to be limited to being built and run on Java 11.
+the App Engine plugin seems to be limited to being built and run on **Java 11**.
 
 The sample is built to use latest GWT from the snapshot server. To change to a specific GWT version, adjust
 the `gwt.version` property to your desired release, and optionally remove the snapshot repositories from the pom.xml.

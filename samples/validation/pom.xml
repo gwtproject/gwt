@@ -119,6 +119,9 @@
           <configuration>
             <sourceLevel>11</sourceLevel>
             <failOnError>true</failOnError>
+            <jvmArgs>
+              <jvmArg>-Dgwt.validation.ignoreXml=true</jvmArg>
+            </jvmArgs>
           </configuration>
         </plugin>
         <plugin>

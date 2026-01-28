@@ -552,7 +552,8 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
         needSemi = true;
       }
       print(CHARS_ELSE);
-      boolean elseIf = x.getElseStmt().getStatements().size() == 1 && x.getElseStmt().getStatements().get(0) instanceof JIfStatement;
+      boolean elseIf = x.getElseStmt().getStatements().size() == 1
+          && x.getElseStmt().getStatements().get(0) instanceof JIfStatement;
       if (!elseIf) {
         nestedStatementPush(x.getElseStmt());
         accept(x.getElseStmt());

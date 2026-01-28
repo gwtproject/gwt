@@ -15,7 +15,6 @@
  */
 package com.google.gwt.uibinder;
 
-import com.google.gwt.junit.TestSuiteWithOrder;
 import com.google.gwt.uibinder.attributeparsers.CssNameConverterTest;
 import com.google.gwt.uibinder.attributeparsers.FieldReferenceConverterTest;
 import com.google.gwt.uibinder.attributeparsers.HorizontalAlignmentConstantParserTest;
@@ -47,8 +46,6 @@ import com.google.gwt.uibinder.elementparsers.TabLayoutPanelParserTest;
 import com.google.gwt.uibinder.elementparsers.TabPanelParserTest;
 import com.google.gwt.uibinder.elementparsers.UIObjectParserTest;
 import com.google.gwt.uibinder.elementparsers.UiChildParserTest;
-import com.google.gwt.uibinder.elementparsers.UiSafeHtmlInterpreterTest;
-import com.google.gwt.uibinder.elementparsers.UiTextInterpreterTest;
 import com.google.gwt.uibinder.rebind.DesignTimeUtilsTest;
 import com.google.gwt.uibinder.rebind.FieldWriterOfExistingTypeTest;
 import com.google.gwt.uibinder.rebind.FieldWriterOfGeneratedCssResourceTest;

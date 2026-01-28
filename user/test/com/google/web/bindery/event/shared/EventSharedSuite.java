@@ -15,6 +15,7 @@
  */
 package com.google.web.bindery.event.shared;
 
+import com.google.web.bindery.event.shared.testing.CountingEventBusTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -25,9 +26,12 @@ public class EventSharedSuite {
   public static Test suite() {
     TestSuite suite = new TestSuite("Tests of shared Event code");
     
+    suite.addTestSuite(CountingEventBusTest.class);
+    suite.addTestSuite(HandlerRegistrationsTest.class);
     suite.addTestSuite(SimpleEventBusTest.class);
     suite.addTestSuite(ResettableEventBusTest.class);
-    
+    suite.addTestSuite(UmbrellaExceptionTest.class);
+
     return suite;
   }
   

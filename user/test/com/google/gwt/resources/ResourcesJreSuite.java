@@ -20,6 +20,7 @@ import com.google.gwt.resources.converter.Css2GssTest;
 import com.google.gwt.resources.converter.DefCollectorVisitorTest;
 import com.google.gwt.resources.converter.ElseNodeCreatorTest;
 import com.google.gwt.resources.converter.UndefinedConstantVisitorTest;
+import com.google.gwt.resources.css.AtCharsetRuleStrippingTest;
 import com.google.gwt.resources.css.CssExternalTest;
 import com.google.gwt.resources.css.CssNodeClonerTest;
 import com.google.gwt.resources.css.CssReorderTest;
@@ -53,6 +54,7 @@ public class ResourcesJreSuite {
   public static Test suite() {
 
     TestSuite suite = new TestSuite("JRE test for com.google.gwt.resources");
+    suite.addTestSuite(AtCharsetRuleStrippingTest.class);
     suite.addTestSuite(CssClassNamesTestCase.class);
     suite.addTestSuite(CssExternalTest.class);
     suite.addTestSuite(CssNodeClonerTest.class);

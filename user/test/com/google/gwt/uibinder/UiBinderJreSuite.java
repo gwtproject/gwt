@@ -132,8 +132,6 @@ public class UiBinderJreSuite {
     suite.addTestSuite(TabPanelParserTest.class);
     suite.addTestSuite(UiChildParserTest.class);
     suite.addTestSuite(UIObjectParserTest.class);
-    suite.addTest(new TestSuiteWithOrder(UiSafeHtmlInterpreterTest.class));
-    suite.addTest(new TestSuiteWithOrder(UiTextInterpreterTest.class));
 
     return suite;
   }

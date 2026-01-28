@@ -22,7 +22,8 @@ import junit.framework.TestCase;
 import org.xml.sax.SAXException;
 
 /**
- * Test for {@link UiTextInterpreter}.
+ * Test for {@link UiTextInterpreter}. Cannot be run in the same JVM as any other test, and methods
+ * must be run in order due to static state in {@link com.google.gwt.uibinder.rebind.Tokenator}.
  */
 public class UiTextInterpreterTest extends TestCase {
 
@@ -78,7 +79,7 @@ public class UiTextInterpreterTest extends TestCase {
     }
   }
   
-  public void testHappy() throws Exception {
+  public void testZHappy() throws Exception {
     String s = "<g:HTMLPanel>\n <ui:text from='{foo}'/>\n </g:HTMLPanel>\n";
 
     String interpretedValue = new UiTextInterpreter(tester.writer)

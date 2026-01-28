@@ -76,7 +76,6 @@ import com.google.gwt.dev.jjs.impl.Devirtualizer;
 import com.google.gwt.dev.jjs.impl.EnumNameObfuscator;
 import com.google.gwt.dev.jjs.impl.EnumOrdinalizer;
 import com.google.gwt.dev.jjs.impl.EqualityNormalizer;
-import com.google.gwt.dev.jjs.impl.ExpandBlocks;
 import com.google.gwt.dev.jjs.impl.Finalizer;
 import com.google.gwt.dev.jjs.impl.FixAssignmentsToUnboxOrCast;
 import com.google.gwt.dev.jjs.impl.FullOptimizerContext;
@@ -368,8 +367,6 @@ public final class JavaToJavaScriptCompiler {
         // Replace compile time constants by their values.
         // TODO(rluble): eventually move to normizeSemantics.
         CompileTimeConstantsReplacer.exec(jprogram);
-
-        ExpandBlocks.exec(jprogram);
 
         // TODO(stalcup): move to after normalize.
         // (3) Optimize the resolved Java AST

@@ -753,17 +753,10 @@ public class GenerateJavaScriptAST {
 
       result.setIfExpr(transform(ifStatement.getIfExpr()));
       result.setThenStmt(jsEmptyIfNull(ifStatement.getSourceInfo(),
-          transform(ifStatement.getThenStmt())));
-      result.setElseStmt(transform(ifStatement.getElseStmt()));
+          transform(ifStatement.getThenStmt().singleStatement())));
+      result.setElseStmt(transform(ifStatement.getElseStmt().singleStatement()));
 
       return result;
-    }
-
-    private JsStatement unwrapSingleStatement(JsBlock block) {
-      if (block.getStatements().size() == 1) {
-        return block.getStatements().get(0);
-      }
-      return block;
     }
 
     @Override

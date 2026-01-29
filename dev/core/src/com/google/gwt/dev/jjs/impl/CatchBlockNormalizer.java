@@ -119,7 +119,7 @@ public class CatchBlockNormalizer {
             new JDeclarationStatement(catchInfo, arg, exceptionVariable.makeRef(catchInfo));
         block.addStmt(0, declaration);
         // nest the previous as an else for me
-        cur = new JIfStatement(catchInfo, ifTest, block, new JBlock(cur.getSourceInfo(), cur));
+        cur = new JIfStatement(catchInfo, ifTest, block, cur);
       }
 
       newCatchBlock.addStmt(cur);

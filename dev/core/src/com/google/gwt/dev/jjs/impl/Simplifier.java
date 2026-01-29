@@ -240,8 +240,8 @@ public class Simplifier {
   public static JStatement simplifyIfStatement(JIfStatement ifStatement, JType methodReturnType) {
     SourceInfo info = ifStatement.getSourceInfo();
     JExpression conditionExpression = ifStatement.getIfExpr();
-    JBlock thenStmt = ifStatement.getThenStmt();
-    JBlock elseStmt = ifStatement.getElseStmt();
+    final JBlock thenStmt = ifStatement.getThenStmt();
+    final JBlock elseStmt = ifStatement.getElseStmt();
     if (conditionExpression instanceof JMultiExpression) {
       // if(a,b,c) d else e -> {a; b; if(c) d else e; }
       JMultiExpression condMulti = (JMultiExpression) conditionExpression;
@@ -509,25 +509,11 @@ public class Simplifier {
     return null;
   }
 
-  private static JStatement extractSingleStatement(JStatement statement) {
-    if (statement instanceof JBlock) {
-      JBlock block = (JBlock) statement;
-      if (block.isEmpty()) {
-        return null;
-      }
-      if (block.getStatements().size() == 1) {
-        return extractSingleStatement(block.getStatements().get(0));
-      }
-    }
-
-    return statement;
-  }
-
   private static JStatement rewriteIfStatementAsExpression(SourceInfo sourceInfo,
-      JExpression conditionExpression, JStatement thenStmt, JStatement elseStmt,
+      JExpression conditionExpression, JBlock thenBlock, JBlock elseBlock,
       JType methodReturnType) {
-    thenStmt = extractSingleStatement(thenStmt);
-    elseStmt = extractSingleStatement(elseStmt);
+    JStatement thenStmt = thenBlock.singleStatement();
+    JStatement elseStmt = elseBlock.singleStatement();
 
     if (thenStmt instanceof JReturnStatement && elseStmt instanceof JReturnStatement
         && methodReturnType != null) {

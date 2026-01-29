@@ -18,7 +18,6 @@ package com.google.gwt.dev.jjs.impl;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.JBinaryOperation;
 import com.google.gwt.dev.jjs.ast.JBinaryOperator;
-import com.google.gwt.dev.jjs.ast.JBlock;
 import com.google.gwt.dev.jjs.ast.JBooleanLiteral;
 import com.google.gwt.dev.jjs.ast.JClassLiteral;
 import com.google.gwt.dev.jjs.ast.JClassType;
@@ -161,7 +160,7 @@ public class ImplementRecordComponents {
                     new JThisRef(info, type),
                     otherParam.createRef(info));
     body.getBlock().addStmt(new JIfStatement(info, eq,
-            new JBlock(info, JBooleanLiteral.TRUE.makeReturnStatement()), null));
+            JBooleanLiteral.TRUE.makeReturnStatement(), null));
 
     // other == null
     JBinaryOperation nonNullCheck =
@@ -179,7 +178,7 @@ public class ImplementRecordComponents {
 
     // if (other == null || MyRecordType.class != other.getClass()) return false;
     body.getBlock().addStmt(new JIfStatement(info, nullAndTypeCheck,
-            new JBlock(info, JBooleanLiteral.FALSE.makeReturnStatement()), null));
+            JBooleanLiteral.FALSE.makeReturnStatement(), null));
 
     // Create a local to assign to and compare each component
     JLocal typedOther = JProgram.createLocal(info, "other", type, true, body);

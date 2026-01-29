@@ -2454,7 +2454,7 @@ public class GwtAstBuilder {
       JExpression exceptionNotNull = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,
           JBinaryOperator.NEQ, exceptionVar.makeRef(info), JNullLiteral.INSTANCE);
       finallyBlock.addStmt(new JIfStatement(info, exceptionNotNull,
-          new JBlock(info, new JThrowStatement(info, exceptionVar.makeRef(info))), null));
+          new JThrowStatement(info, exceptionVar.makeRef(info)), null));
 
       // Stitch all together into a inner try block
       outerTryBlock.addStmt(new JTryStatement(info, tryBlock, catchClauses,

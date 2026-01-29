@@ -105,4 +105,18 @@ public class JBlock extends JStatement {
     }
     return false;
   }
+
+  public JStatement singleStatement() {
+    if (statements.isEmpty()) {
+      return null;
+    }
+    if (statements.size() == 1) {
+      JStatement jStatement = statements.get(0);
+      if (jStatement instanceof JBlock) {
+        return ((JBlock) jStatement).singleStatement();
+      }
+      return jStatement;
+    }
+    return this;
+  }
 }

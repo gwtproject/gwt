@@ -218,9 +218,8 @@ public class PrunerTest extends OptimizerTestBase {
         "return i;"
     )).intoString(
         "int i = 0;",
-        "if (null.nullField[i] == 0) {",
+        "if (null.nullField[i] == 0)",
         "  i = 2;",
-        "}",
         "return i;"
     );
 

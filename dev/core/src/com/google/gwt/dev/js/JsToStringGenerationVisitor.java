@@ -146,6 +146,11 @@ public class JsToStringGenerationVisitor extends JsVisitor {
   }
 
   /**
+   * Tracks if we are within an IF without a block to guard against dangling-else ambiguity.
+   */
+  private boolean inIfWithoutBraces = false;
+
+  /**
    * Generate the output string using short identifiers.
    */
   public JsToStringGenerationVisitor(TextOutput out) {
@@ -555,15 +560,26 @@ public class JsToStringGenerationVisitor extends JsVisitor {
 
   @Override
   public boolean visit(JsIf x, JsContext ctx) {
+    boolean outerBlock = false;
+    if (x.getElseStmt() != null && inIfWithoutBraces) {
+      // To avoid dangling-else ambiguity, if a nested IF with an ELSE must always be wrapped
+      // in a block
+      _blockOpen();
+      outerBlock = true;
+    }
     _if();
     _spaceOpt();
     _lparen();
     accept(x.getIfExpr());
     _rparen();
+
+    inIfWithoutBraces = true;
     JsStatement thenStmt = x.getThenStmt();
     _nestedPush(thenStmt, false);
     accept(thenStmt);
     _nestedPop(thenStmt);
+
+    inIfWithoutBraces = true;
     JsStatement elseStmt = x.getElseStmt();
     if (elseStmt != null) {
       if (needSemi) {
@@ -584,6 +600,12 @@ public class JsToStringGenerationVisitor extends JsVisitor {
       if (!elseIf) {
         _nestedPop(elseStmt);
       }
+    }
+
+    if (outerBlock) {
+      _blockClose();
+      // Restore flag for later calls
+      inIfWithoutBraces = true;
     }
     return false;
   }
@@ -948,6 +970,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
       // Open braces.
       //
       _blockOpen();
+      inIfWithoutBraces = false;
     }
 
     int count = 0;

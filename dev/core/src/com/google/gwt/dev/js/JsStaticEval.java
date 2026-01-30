@@ -53,7 +53,7 @@ import com.google.gwt.dev.util.Ieee754_64_Arithmetic;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
@@ -144,6 +144,11 @@ public class JsStaticEval {
     }
   }
 
+  private enum EvalMode {
+    BOOL,
+    VOID
+  }
+
   /**
    * Does static evals.
    *
@@ -153,12 +158,29 @@ public class JsStaticEval {
    */
   private class StaticEvalVisitor extends JsModVisitor {
 
-    private Set<JsExpression> evalBooleanContext = new HashSet<JsExpression>();
+    private Map<JsExpression, EvalMode> evalContext = new HashMap<>();
 
     /**
      * This is used by {@link #additionCoercesToString}.
      */
-    private Map<JsExpression, Boolean> coercesToStringMap = new IdentityHashMap<JsExpression, Boolean>();
+    private Map<JsExpression, Boolean> coercesToStringMap = new IdentityHashMap<>();
+
+    public boolean visit(JsExprStmt x, JsContext ctx) {
+      evalContext.put(x.getExpression(), EvalMode.VOID);
+      return true;
+    }
+
+    public boolean visit(JsBinaryOperation x, JsContext ctx) {
+      if (evalContext.containsKey(x)
+          && (x.getOperator() == JsBinaryOperator.AND || x.getOperator() == JsBinaryOperator.OR)) {
+        evalContext.put(x.getArg1(), EvalMode.BOOL);
+        evalContext.put(x.getArg2(), evalContext.get(x));
+      }
+      if (x.getOperator() == JsBinaryOperator.COMMA) {
+        evalContext.put(x.getArg1(), EvalMode.VOID);
+      }
+      return true;
+    }
 
     @Override
     public void endVisit(JsBinaryOperation x, JsContext ctx) {
@@ -167,13 +189,20 @@ public class JsStaticEval {
       JsExpression arg2 = x.getArg2();
 
       JsExpression result = x;
-
-      if (op == JsBinaryOperator.AND) {
-        result = shortCircuitAnd(x);
+      if (evalContext.get(x) == EvalMode.VOID
+            && !arg2.hasSideEffects() && !op.isAssignment()) {
+        result = arg1;
+      } else if (op == JsBinaryOperator.AND) {
+        result = shortCircuitAnd(x, evalContext);
+        evalContext.remove(arg1);
+        evalContext.remove(arg2);
       } else if (op == JsBinaryOperator.OR) {
-        result = shortCircuitOr(x);
+        result = shortCircuitOr(x, evalContext);
+        evalContext.remove(arg1);
+        evalContext.remove(arg2);
       } else if (op == JsBinaryOperator.COMMA) {
         result = trySimplifyComma(x);
+        evalContext.remove(x.getArg1());
       } else if (op == JsBinaryOperator.EQ || op == JsBinaryOperator.REF_EQ) {
         result = simplifyEqAndRefEq(x);
       } else if (op == JsBinaryOperator.NEQ || op == JsBinaryOperator.REF_NEQ) {
@@ -256,7 +285,7 @@ public class JsStaticEval {
 
     @Override
     public void endVisit(JsConditional x, JsContext ctx) {
-      evalBooleanContext.remove(x.getTestExpression());
+      evalContext.remove(x.getTestExpression());
 
       JsExpression condExpr = x.getTestExpression();
       JsExpression thenExpr = x.getThenExpression();
@@ -265,12 +294,12 @@ public class JsStaticEval {
         CanBooleanEval condEval = (CanBooleanEval) condExpr;
         if (condEval.isBooleanTrue()) {
           JsBinaryOperation binOp = new JsBinaryOperation(x.getSourceInfo(),
-              JsBinaryOperator.AND, condExpr, thenExpr);
+              JsBinaryOperator.COMMA, condExpr, thenExpr);
           ctx.replaceMe(accept(binOp));
         } else if (condEval.isBooleanFalse()) {
-          // e.g. (false() ? then : else) -> false() || else
+          // e.g. (false() ? then : else) -> (false() , else)
           JsBinaryOperation binOp = new JsBinaryOperation(x.getSourceInfo(),
-              JsBinaryOperator.OR, condExpr, elseExpr);
+              JsBinaryOperator.COMMA, condExpr, elseExpr);
           ctx.replaceMe(accept(binOp));
         }
       }
@@ -281,7 +310,7 @@ public class JsStaticEval {
      */
     @Override
     public void endVisit(JsDoWhile x, JsContext ctx) {
-      evalBooleanContext.remove(x.getCondition());
+      evalContext.remove(x.getCondition());
 
       JsExpression expr = x.getCondition();
       if (expr instanceof CanBooleanEval) {
@@ -304,6 +333,7 @@ public class JsStaticEval {
 
     @Override
     public void endVisit(JsExprStmt x, JsContext ctx) {
+      evalContext.remove(x.getExpression());
       if (!x.getExpression().hasSideEffects()) {
         if (ctx.canRemove()) {
           ctx.removeMe();
@@ -318,7 +348,7 @@ public class JsStaticEval {
      */
     @Override
     public void endVisit(JsFor x, JsContext ctx) {
-      evalBooleanContext.remove(x.getCondition());
+      evalContext.remove(x.getCondition());
 
       JsExpression expr = x.getCondition();
       if (expr instanceof CanBooleanEval) {
@@ -348,7 +378,7 @@ public class JsStaticEval {
      */
     @Override
     public void endVisit(JsIf x, JsContext ctx) {
-      evalBooleanContext.remove(x.getIfExpr());
+      evalContext.remove(x.getIfExpr());
 
       JsExpression condExpr = x.getIfExpr();
       if (condExpr instanceof CanBooleanEval) {
@@ -402,10 +432,10 @@ public class JsStaticEval {
     @Override
     public void endVisit(JsPrefixOperation x, JsContext ctx) {
       if (x.getOperator() == JsUnaryOperator.NOT) {
-        evalBooleanContext.remove(x.getArg());
+        evalContext.remove(x.getArg());
       }
 
-      if (evalBooleanContext.contains(x)) {
+      if (evalContext.containsKey(x)) {
         if ((x.getOperator() == JsUnaryOperator.NOT)
             && (x.getArg() instanceof JsPrefixOperation)) {
           JsPrefixOperation arg = (JsPrefixOperation) x.getArg();
@@ -422,7 +452,7 @@ public class JsStaticEval {
      */
     @Override
     public void endVisit(JsWhile x, JsContext ctx) {
-      evalBooleanContext.remove(x.getCondition());
+      evalContext.remove(x.getCondition());
 
       JsExpression expr = x.getCondition();
       if (expr instanceof CanBooleanEval) {
@@ -443,39 +473,39 @@ public class JsStaticEval {
 
     @Override
     public boolean visit(JsConditional x, JsContext ctx) {
-      evalBooleanContext.add(x.getTestExpression());
+      evalContext.put(x.getTestExpression(), EvalMode.BOOL);
       return true;
     }
 
     @Override
     public boolean visit(JsDoWhile x, JsContext ctx) {
-      evalBooleanContext.add(x.getCondition());
+      evalContext.put(x.getCondition(), EvalMode.BOOL);
       return true;
     }
 
     @Override
     public boolean visit(JsFor x, JsContext ctx) {
-      evalBooleanContext.add(x.getCondition());
+      evalContext.put(x.getCondition(), EvalMode.BOOL);
       return true;
     }
 
     @Override
     public boolean visit(JsIf x, JsContext ctx) {
-      evalBooleanContext.add(x.getIfExpr());
+      evalContext.put(x.getIfExpr(), EvalMode.BOOL);
       return true;
     }
 
     @Override
     public boolean visit(JsPrefixOperation x, JsContext ctx) {
       if (x.getOperator() == JsUnaryOperator.NOT) {
-        evalBooleanContext.add(x.getArg());
+        evalContext.put(x.getArg(), EvalMode.BOOL);
       }
       return true;
     }
 
     @Override
     public boolean visit(JsWhile x, JsContext ctx) {
-      evalBooleanContext.add(x.getCondition());
+      evalContext.put(x.getCondition(), EvalMode.BOOL);
       return true;
     }
 
@@ -607,11 +637,17 @@ public class JsStaticEval {
    * Simplify short circuit AND expressions.
    *
    * <pre>
-   * if (true && isWhatever()) -> if (isWhatever()), unless side effects
-   * if (false() && isWhatever()) -> if (false())
+   * return true() && isWhatever() -> return isWhatever(), unless true() has side effects
+   * return false() && isWhatever() -> return false()
+   * </pre>
+   * In boolean context also
+   * <pre>
+   * if (isWhatever() && true()) -> if (isWhatever()) unless true() has side effects
+   * if (isWhatever() && false()) -> if (false()) unless isWhatever() side effects
    * </pre>
    */
-  protected static JsExpression shortCircuitAnd(JsBinaryOperation expr) {
+  protected static JsExpression shortCircuitAnd(JsBinaryOperation expr,
+      Map<JsExpression, EvalMode> evalContext) {
     JsExpression arg1 = expr.getArg1();
     JsExpression arg2 = expr.getArg2();
     if (arg1 instanceof CanBooleanEval) {
@@ -622,6 +658,14 @@ public class JsStaticEval {
         return arg1;
       }
     }
+    if (arg2 instanceof CanBooleanEval && evalContext.containsKey(arg1)) {
+      CanBooleanEval eval2 = (CanBooleanEval) arg2;
+      if (eval2.isBooleanTrue() && !arg2.hasSideEffects()) {
+        return arg1;
+      } else if (eval2.isBooleanFalse() && !arg1.hasSideEffects()) {
+        return arg2;
+      }
+    }
     return expr;
   }
 
@@ -629,11 +673,17 @@ public class JsStaticEval {
    * Simplify short circuit OR expressions.
    *
    * <pre>
-   * if (true() || isWhatever()) -> if (true())
-   * if (false || isWhatever()) -> if (isWhatever()), unless side effects
+   * return false() || isWhatever() -> return isWhatever(), unless false() has side effects
+   * return true() && isWhatever() -> return true()
+   * </pre>
+   * In boolean context also
+   * <pre>
+   * if (isWhatever() || false()) -> if (isWhatever()) unless false() has side effects
+   * if (isWhatever() || true()) -> if (true()) unless isWhatever() side effects
    * </pre>
    */
-  protected static JsExpression shortCircuitOr(JsBinaryOperation expr) {
+  protected static JsExpression shortCircuitOr(JsBinaryOperation expr,
+      Map<JsExpression, EvalMode> evalContext) {
     JsExpression arg1 = expr.getArg1();
     JsExpression arg2 = expr.getArg2();
     if (arg1 instanceof CanBooleanEval) {
@@ -642,6 +692,14 @@ public class JsStaticEval {
         return arg1;
       } else if (eval1.isBooleanFalse() && !arg1.hasSideEffects()) {
         return arg2;
+      }
+    }
+    if (arg2 instanceof CanBooleanEval && evalContext.containsKey(arg1)) {
+      CanBooleanEval eval2 = (CanBooleanEval) arg2;
+      if (eval2.isBooleanTrue() && !arg1.hasSideEffects()) {
+        return arg2;
+      } else if (eval2.isBooleanFalse() && !arg2.hasSideEffects()) {
+        return arg1;
       }
     }
     return expr;

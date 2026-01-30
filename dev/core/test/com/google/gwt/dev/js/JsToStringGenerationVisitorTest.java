@@ -18,7 +18,6 @@ import com.google.gwt.core.ext.linker.impl.NamedRange;
 import com.google.gwt.dev.cfg.BindingProperty;
 import com.google.gwt.dev.cfg.ConditionNone;
 import com.google.gwt.dev.cfg.ConfigurationProperty;
-import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.impl.FullCompileTestBase;
 import com.google.gwt.dev.js.ast.JsExprStmt;
@@ -81,19 +80,6 @@ public class JsToStringGenerationVisitorTest extends FullCompileTestBase {
     assertTrue(programClassRange.getStartPosition() > 0);
     // Verifies there is an epilogue after the program class range.
     assertTrue(programClassRange.getEndPosition() < text.getPosition());
-  }
-  public class EntryPoint {
-    private void go(int i) {
-    }
-    public void onModuleLoad() {
-      boolean a = true, b = true, c = true;
-      if (a)
-        if (b)
-          go(1);
-        else
-          go(2);
-    }
-
   }
 
   public void testDanglingElse() throws Exception {

@@ -144,9 +144,12 @@ public class JsStaticEval {
     }
   }
 
+  /**
+   * Describes how is the result of evaluation used.
+   */
   private enum EvalMode {
-    BOOL,
-    VOID
+    BOOL, // result will be coerced to a boolean
+    VOID // result will be discarded
   }
 
   /**
@@ -158,7 +161,11 @@ public class JsStaticEval {
    */
   private class StaticEvalVisitor extends JsModVisitor {
 
-    private Map<JsExpression, EvalMode> evalContext = new HashMap<>();
+    /**
+     * Stores how are expression evaluations used.
+     * Missing entry = no coercion, difference between null and false matters.
+     */
+    private final Map<JsExpression, EvalMode> evalContext = new HashMap<>();
 
     /**
      * This is used by {@link #additionCoercesToString}.
@@ -175,9 +182,9 @@ public class JsStaticEval {
           && (x.getOperator() == JsBinaryOperator.AND || x.getOperator() == JsBinaryOperator.OR)) {
         evalContext.put(x.getArg1(), EvalMode.BOOL);
         evalContext.put(x.getArg2(), evalContext.get(x));
-      }
-      if (x.getOperator() == JsBinaryOperator.COMMA) {
+      } else if (x.getOperator() == JsBinaryOperator.COMMA) {
         evalContext.put(x.getArg1(), EvalMode.VOID);
+        evalContext.put(x.getArg2(), evalContext.get(x));
       }
       return true;
     }
@@ -194,15 +201,10 @@ public class JsStaticEval {
         result = arg1;
       } else if (op == JsBinaryOperator.AND) {
         result = shortCircuitAnd(x, evalContext);
-        evalContext.remove(arg1);
-        evalContext.remove(arg2);
       } else if (op == JsBinaryOperator.OR) {
         result = shortCircuitOr(x, evalContext);
-        evalContext.remove(arg1);
-        evalContext.remove(arg2);
       } else if (op == JsBinaryOperator.COMMA) {
         result = trySimplifyComma(x);
-        evalContext.remove(x.getArg1());
       } else if (op == JsBinaryOperator.EQ || op == JsBinaryOperator.REF_EQ) {
         result = simplifyEqAndRefEq(x);
       } else if (op == JsBinaryOperator.NEQ || op == JsBinaryOperator.REF_NEQ) {
@@ -224,7 +226,8 @@ public class JsStaticEval {
              break;
          }
       }
-
+      evalContext.remove(arg1);
+      evalContext.remove(arg2);
       result = maybeReorderOperations(result);
 
       if (result != x) {
@@ -290,7 +293,13 @@ public class JsStaticEval {
       JsExpression condExpr = x.getTestExpression();
       JsExpression thenExpr = x.getThenExpression();
       JsExpression elseExpr = x.getElseExpression();
-      if (condExpr instanceof CanBooleanEval) {
+      if (condExpr instanceof JsBinaryOperation
+          && ((JsBinaryOperation) condExpr).getOperator() == JsBinaryOperator.COMMA) {
+        JsBinaryOperation condition = (JsBinaryOperation) condExpr;
+        JsExpression newConditional = accept(new JsConditional(x.getSourceInfo(),
+            condition.getArg2(), thenExpr, elseExpr));
+        ctx.replaceMe(withSideEffect(newConditional, condition.getArg1(), x.getSourceInfo()));
+      } else if (condExpr instanceof CanBooleanEval) {
         CanBooleanEval condEval = (CanBooleanEval) condExpr;
         if (condEval.isBooleanTrue()) {
           JsBinaryOperation binOp = new JsBinaryOperation(x.getSourceInfo(),
@@ -652,8 +661,8 @@ public class JsStaticEval {
     JsExpression arg2 = expr.getArg2();
     if (arg1 instanceof CanBooleanEval) {
       CanBooleanEval eval1 = (CanBooleanEval) arg1;
-      if (eval1.isBooleanTrue() && !arg1.hasSideEffects()) {
-        return arg2;
+      if (eval1.isBooleanTrue()) {
+        return withSideEffect(arg2, arg1, expr.getSourceInfo());
       } else if (eval1.isBooleanFalse()) {
         return arg1;
       }
@@ -662,11 +671,17 @@ public class JsStaticEval {
       CanBooleanEval eval2 = (CanBooleanEval) arg2;
       if (eval2.isBooleanTrue() && !arg2.hasSideEffects()) {
         return arg1;
-      } else if (eval2.isBooleanFalse() && !arg1.hasSideEffects()) {
-        return arg2;
+      } else if (eval2.isBooleanFalse()) {
+        return withSideEffect(arg2, arg1, expr.getSourceInfo());
       }
     }
     return expr;
+  }
+
+  private static JsExpression withSideEffect(JsExpression main, JsExpression sideEffect,
+                                             SourceInfo sourceInfo) {
+    return !sideEffect.hasSideEffects() ? main
+        : new JsBinaryOperation(sourceInfo, JsBinaryOperator.COMMA, sideEffect, main);
   }
 
   /**
@@ -688,18 +703,18 @@ public class JsStaticEval {
     JsExpression arg2 = expr.getArg2();
     if (arg1 instanceof CanBooleanEval) {
       CanBooleanEval eval1 = (CanBooleanEval) arg1;
-      if (eval1.isBooleanTrue()) {
+      if (eval1.isBooleanFalse()) {
+        return withSideEffect(arg2, arg1, expr.getSourceInfo());
+      } else if (eval1.isBooleanTrue()) {
         return arg1;
-      } else if (eval1.isBooleanFalse() && !arg1.hasSideEffects()) {
-        return arg2;
       }
     }
     if (arg2 instanceof CanBooleanEval && evalContext.containsKey(arg1)) {
       CanBooleanEval eval2 = (CanBooleanEval) arg2;
-      if (eval2.isBooleanTrue() && !arg1.hasSideEffects()) {
-        return arg2;
-      } else if (eval2.isBooleanFalse() && !arg2.hasSideEffects()) {
+      if (eval2.isBooleanFalse() && !arg2.hasSideEffects()) {
         return arg1;
+      } else if (eval2.isBooleanTrue()) {
+        return withSideEffect(arg2, arg1, expr.getSourceInfo());
       }
     }
     return expr;

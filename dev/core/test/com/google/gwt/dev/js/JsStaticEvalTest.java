@@ -177,6 +177,32 @@ public class JsStaticEvalTest extends OptimizerTestBase {
     assertEquals("a&&b();", optimize("!!a && !!b()"));
     assertEquals("a();", optimize("a() && false && c();"));
     assertEquals("a(),e();", optimize("a() && false && c() ? d() : e();"));
+    assertEquals("a()&&c()?d():e();", optimize("a() && true && c() ? d() : e();"));
+  }
+
+  public void testShortCircuitOr() throws Exception {
+    assertEquals("alert(true);", optimize("alert(true || a)"));
+    assertEquals("alert(a);", optimize("alert(false || a)"));
+
+    // these can't be simplified to maintain type
+    assertEquals("alert(a||true);", optimize("alert(a || true)"));
+    assertEquals("alert(a||false);", optimize("alert(a || false)"));
+    assertEquals("alert(!!a||!!b);", optimize("alert(!!a || !!b)"));
+
+    // in boolean context we can simplify more
+    assertEquals("alert(a||b?c:d);", optimize("alert(!!a || !!b ? c :d)"));
+    assertEquals("alert(c);", optimize("alert(true || !!b ? c :d)"));
+    assertEquals("alert(b?c:d);", optimize("alert(false || !!b ? c :d)"));
+    assertEquals("alert(b?c:d1);", optimize("alert(b || false ? c :d1)"));
+    assertEquals("alert(c1);", optimize("alert(b || true ? c1 :d)"));
+    assertEquals("alert(c2);", optimize("alert(a || true || b ? c2 :d)"));
+  }
+
+  public void testShortCircuitOrWithSideEffects() throws Exception {
+    assertEquals("a||b();", optimize("!!a || !!b()"));
+    assertEquals("a();", optimize("a() || true || c();"));
+    assertEquals("a(),d();", optimize("a() || true || c() ? d() : e();"));
+    assertEquals("a()||c()?d():e();", optimize("a() || false || c() ? d() : e();"));
   }
 
   public void testLiteralEqNull() throws Exception {

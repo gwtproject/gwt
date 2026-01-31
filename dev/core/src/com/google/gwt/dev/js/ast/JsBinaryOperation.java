@@ -18,7 +18,7 @@ import com.google.gwt.dev.jjs.SourceInfo;
 /**
  * Represents a JavaScript binary operation.
  */
-public final class JsBinaryOperation extends JsExpression implements CanBooleanEval {
+public final class JsBinaryOperation extends JsExpression {
 
   private JsExpression arg1;
 
@@ -64,26 +64,6 @@ public final class JsBinaryOperation extends JsExpression implements CanBooleanE
   public boolean isDefinitelyNull() {
     if (op == JsBinaryOperator.AND) {
       return arg1.isDefinitelyNull();
-    }
-    return false;
-  }
-
-  @Override
-  public boolean isBooleanFalse() {
-    // assume false && x was already simplified, only check x && false
-    if (getOperator() == JsBinaryOperator.AND && getArg2() instanceof CanBooleanEval) {
-      CanBooleanEval eval = (CanBooleanEval) getArg2();
-      return eval.isBooleanFalse();
-    }
-    return false;
-  }
-
-  @Override
-  public boolean isBooleanTrue() {
-    // assume true || x was already simplified, only check for x || true
-    if (getOperator() == JsBinaryOperator.OR && getArg2() instanceof CanBooleanEval) {
-      CanBooleanEval eval = (CanBooleanEval) getArg2();
-      return eval.isBooleanTrue();
     }
     return false;
   }

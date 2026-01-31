@@ -60,7 +60,7 @@
       <param name="mvn.args" value="verify" />
     </antcall>
     <length property="gwt.sample.length">
-      <fileset dir="." includes="*/target/*/*/*.cache.js"/>
+      <fileset dir="." includes="*/target/*/*/*.cache.js,*/*-client/target/*/*/*.cache.js"/>
     </length>
     <echo message="compiled size of all samples is ${gwt.sample.length} bytes." level="info"/>
   </target>

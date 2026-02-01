@@ -8,15 +8,17 @@
         <artifactId>gwt</artifactId>
         <version>${gwtVersion}</version>
     </parent>
-    <groupId>org.gwtproject</groupId>
     <artifactId>gwt-codeserver</artifactId>
     <packaging>jar</packaging>
-    <version>${gwtVersion}</version>
+    <name>GWT Development CodeServer</name>
+    <description>
+        The GWT Super Dev Mode code server
+    </description>
 
     <dependencies>
-      <dependency>
-        <groupId>org.gwtproject</groupId>
-        <artifactId>gwt-dev</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-dev</artifactId>
+        </dependency>
     </dependencies>
 </project>

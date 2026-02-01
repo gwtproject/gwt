@@ -2,44 +2,43 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>4</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.gwtproject</groupId>
     <artifactId>gwt</artifactId>
     <packaging>pom</packaging>
-    <name>GWT</name>
-    <url>http://www.gwtproject.org/</url>
+    <name>GWT Web Toolkit</name>
+    <description>BOM for GWT</description>
+    <url>https://www.gwtproject.org/</url>
     <version>${gwtVersion}</version>
     <licenses>
         <license>
             <name>GWT Terms</name>
-            <url>http://www.gwtproject.org/terms.html</url>
+            <comments>GWT itself is Apache 2.0 licensed, but contains some elements with different licenses</comments>
+            <url>https://www.gwtproject.org/terms.html</url>
         </license>
     </licenses>
     <properties>
-      <jetty.version>9.4.58.v20250814</jetty.version>
-      <asm.version>9.6</asm.version>
+        <jetty.version>9.4.58.v20250814</jetty.version>
+        <asm.version>9.6</asm.version>
     </properties>
+    <developers>
+        <developer>
+            <name>GWT Project Contributors</name>
+            <organizationUrl>https://gwtproject.org</organizationUrl>
+            <email>google-web-toolkit-contributors@googlegroups.com</email>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:https://github.com/gwtproject/gwt.git</connection>
+        <developerConnection>scm:git:git@github.com/gwtproject/gwt.git</developerConnection>
+        <url>https://github.com/gwtproject/gwt</url>
+    </scm>
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.google.gwt</groupId>
-                <artifactId>gwt-user</artifactId>
-                <version>2.10.0</version>
-            </dependency>
-            <dependency>
                 <groupId>org.gwtproject</groupId>
                 <artifactId>gwt-user</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.gwt</groupId>
-                <artifactId>gwt-dev</artifactId>
-                <version>2.10.0</version>
             </dependency>
             <dependency>
                 <groupId>org.gwtproject</groupId>
@@ -47,19 +46,9 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.google.gwt</groupId>
-                <artifactId>gwt-codeserver</artifactId>
-                <version>2.10.0</version>
-            </dependency>
-            <dependency>
                 <groupId>org.gwtproject</groupId>
                 <artifactId>gwt-codeserver</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.gwt</groupId>
-                <artifactId>gwt-servlet</artifactId>
-                <version>2.10.0</version>
             </dependency>
             <dependency>
                 <groupId>org.gwtproject</groupId>
@@ -78,6 +67,29 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!-- List the final release of the old com.google.gwt groupId to help build tools correctly relocate -->
+            <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-user</artifactId>
+                <version>2.10.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-dev</artifactId>
+                <version>2.10.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-codeserver</artifactId>
+                <version>2.10.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-servlet</artifactId>
+                <version>2.10.0</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.google.jsinterop</groupId>
                 <artifactId>jsinterop-annotations</artifactId>

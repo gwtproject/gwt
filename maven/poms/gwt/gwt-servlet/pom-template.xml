@@ -8,10 +8,12 @@
         <artifactId>gwt</artifactId>
         <version>${gwtVersion}</version>
     </parent>
-    <groupId>org.gwtproject</groupId>
     <artifactId>gwt-servlet</artifactId>
     <packaging>jar</packaging>
-    <version>${gwtVersion}</version>
+    <name>GWT RPC/RF javax.servlet implementation</name>
+    <description>
+        GWT-RPC and RequestFactory implementations for use in javax.servlet environments
+    </description>
     <dependencies>
         <dependency>
             <groupId>javax.validation</groupId>

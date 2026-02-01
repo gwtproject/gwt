@@ -8,11 +8,12 @@
         <artifactId>gwt</artifactId>
         <version>${gwtVersion}</version>
     </parent>
-    <groupId>org.gwtproject</groupId>
     <artifactId>gwt-dev</artifactId>
     <packaging>jar</packaging>
-    <version>${gwtVersion}</version>
-
+    <name>GWT Developer Tools</name>
+    <description>
+        Compiler, Test runner, Development mode, and other tools for developing GWT applications
+    </description>
     <dependencies>
         <dependency>
             <groupId>com.google.code.findbugs</groupId>

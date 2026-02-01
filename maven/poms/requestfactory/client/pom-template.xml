@@ -8,10 +8,12 @@
         <artifactId>requestfactory</artifactId>
         <version>${gwtVersion}</version>
     </parent>
-    <groupId>org.gwtproject.web.bindery</groupId>
     <artifactId>requestfactory-client</artifactId>
     <packaging>jar</packaging>
-    <version>${gwtVersion}</version>
+    <name>GWT RequestFactory client implementation</name>
+    <description>
+        GWT client implementation of RequestFactory, including generator for use at compile time.
+    </description>
     <dependencies>
         <dependency>
             <groupId>javax.validation</groupId>

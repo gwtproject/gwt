@@ -8,10 +8,12 @@
         <artifactId>gwt</artifactId>
         <version>${gwtVersion}</version>
     </parent>
-    <groupId>org.gwtproject</groupId>
     <artifactId>gwt-user</artifactId>
     <packaging>jar</packaging>
-    <version>${gwtVersion}</version>
+    <name>GWT User packages</name>
+    <description>
+        GWT-compatible widgets, browser abstractions, and JRE implementations for use in client applications.
+    </description>
     <dependencies>
         <dependency>
             <groupId>com.google.jsinterop</groupId>

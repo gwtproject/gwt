@@ -545,7 +545,10 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
       // If m is processed first, it will see the constructor as having side effects.
       // Then the constructor will become empty enabling m() become empty in the next round.
       //
-      assertEquals(0, DeadCodeElimination.exec(program, method));
+      String before = method.toSource();
+      int moreMods = DeadCodeElimination.exec(program, method);
+      String after = method.toSource();
+      assertEquals("before: " + before + ", after: " + after, 0, moreMods);
     }
     return mods > 0;
   }

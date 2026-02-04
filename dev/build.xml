@@ -22,7 +22,7 @@
 
   <target name="compile.tests" depends="build, compile.emma.if.enabled, build.alldeps.jar"
           description="Compiles the test code for this project">
-    <gwt.javac srcdir="" destdir="${javac.junit.out}">
+    <gwt.javac srcdir="" destdir="${javac.junit.out}" release="17">
         <src path="core/src"/>
         <src path="core/test"/>
       <classpath>

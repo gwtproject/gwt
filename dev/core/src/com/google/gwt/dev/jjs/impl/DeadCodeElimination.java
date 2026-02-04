@@ -1964,10 +1964,8 @@ public class DeadCodeElimination {
         } else {
           // Create an if statement equivalent to the single-case switch.
           JBinaryOperation compareOperation = caseStatement.convertToCompareExpression(x.getExpr());
-          JBlock block = new JBlock(x.getSourceInfo());
-          block.addStmt(statement);
           JIfStatement ifStatement =
-              new JIfStatement(x.getSourceInfo(), compareOperation, block, null);
+              new JIfStatement(x.getSourceInfo(), compareOperation, statement, null);
           replaceMe(ifStatement, ctx);
         }
       }

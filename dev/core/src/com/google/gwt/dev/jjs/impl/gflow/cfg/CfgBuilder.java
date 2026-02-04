@@ -545,14 +545,14 @@ public class CfgBuilder {
       CfgIfNode node = addNode(new CfgIfNode(parent, x));
 
       addNormalExit(node, CfgConditionalNode.THEN);
-      if (x.getThenStmt() != null) {
-        accept(x.getThenStmt());
+      if (x.getThenStmt().singleStatement() != null) {
+        accept(x.getThenStmt().singleStatement());
       }
       List<Exit> thenExits = removeNormalExits();
 
       addNormalExit(node, CfgConditionalNode.ELSE);
-      if (x.getElseStmt() != null) {
-        accept(x.getElseStmt());
+      if (x.getElseStmt().singleStatement() != null) {
+        accept(x.getElseStmt().singleStatement());
       }
 
       addExits(thenExits);

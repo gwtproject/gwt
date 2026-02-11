@@ -18,7 +18,6 @@ package com.google.gwt.user.server.rpc.logging;
 import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.logging.Logger;
 
 import javax.servlet.ServletConfig;
 
@@ -40,8 +39,6 @@ import javax.servlet.ServletConfig;
  * <code>META-INF/services/com.google.gwt.user.server.rpc.logging.RpcLoggerProvider</code>
  */
 public class RpcLogManager {
-
-  private static final Logger logger = Logger.getLogger(RpcLogManager.class.getName());
 
   public static final String PROVIDER_PARAMETER_KEY = "gwt.rpc.logging";
   private static final ConcurrentHashMap<String, RpcLogger> loggers = new ConcurrentHashMap<>();
@@ -148,9 +145,6 @@ public class RpcLogManager {
   private static RpcLoggerProvider loadProvider(String name, RpcLoggerProvider fallback) {
     ServiceLoader<RpcLoggerProvider> loaderService = ServiceLoader.load(RpcLoggerProvider.class);
     for (RpcLoggerProvider provider : loaderService) {
-      logger.warning(provider.getClass().getName());
-      logger.warning(String.valueOf(provider.isAvailable()));
-      logger.warning(String.valueOf(provider.isDefault()));
       if (provider.isAvailable() && provider.getClass().getName().equals(name)) {
         return provider;
       }

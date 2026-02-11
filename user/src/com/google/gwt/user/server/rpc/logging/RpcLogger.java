@@ -15,50 +15,33 @@
  */
 package com.google.gwt.user.server.rpc.logging;
 
-import java.util.concurrent.atomic.AtomicReference;
-
 import javax.servlet.ServletContext;
 
 /**
  * A wrapper that lazily creates a {@link RpcLoggerDelegate} for a given name.
  */
-public class RpcLogger {
+public final class RpcLogger {
 
-  private final AtomicReference<RpcLoggerDelegate> delegate = new AtomicReference<>();
-  private final String name;
+  private final RpcLoggerDelegate delegate;
 
-  public RpcLogger(String name) {
-    this.name = name;
+  RpcLogger(String name, RpcLoggerProvider provider) {
+    delegate = provider.createLogger(name);
   }
 
   public void info(String message, ServletContext servletContext) {
-    getDelegate().info(message, servletContext);
+    delegate.info(message, servletContext);
   }
 
   public void warn(String message, ServletContext servletContext) {
-    getDelegate().warn(message, servletContext);
+    delegate.warn(message, servletContext);
   }
 
   public void error(String message, ServletContext servletContext) {
-    getDelegate().error(message, servletContext);
+    delegate.error(message, servletContext);
   }
 
   public void error(String message, Throwable throwable, ServletContext servletContext) {
-    getDelegate().error(message, throwable, servletContext);
-  }
-
-  /**
-   * Retrieves or creates a logger delegate.
-   * @return the delegate
-   */
-  private RpcLoggerDelegate getDelegate() {
-    RpcLoggerDelegate result = this.delegate.get();
-    if (result == null) {
-      RpcLoggerProvider provider = RpcLogManager.getLoggerProvider();
-      RpcLoggerDelegate newDelegate = provider.createLogger(name);
-      result = delegate.updateAndGet(old -> old == null ? newDelegate : old);
-    }
-    return result;
+    delegate.error(message, throwable, servletContext);
   }
 
 }

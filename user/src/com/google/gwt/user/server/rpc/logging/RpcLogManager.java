@@ -51,7 +51,8 @@ public class RpcLogManager {
    * @return a logger
    */
   public static RpcLogger getLogger(Class<?> clazz) {
-    return loggers.computeIfAbsent(clazz.getName(), RpcLogger::new);
+    return loggers.computeIfAbsent(clazz.getName(),
+            name -> new RpcLogger(name, getLoggerProvider()));
   }
 
   /**
@@ -61,7 +62,7 @@ public class RpcLogManager {
    * and returns the resulting instance.
    * @return the current instance of the LoggerProvider
    */
-  static RpcLoggerProvider getLoggerProvider() {
+  private static RpcLoggerProvider getLoggerProvider() {
     RpcLoggerProvider result = loggerProvider.get();
     if (result == null) {
       initialize();

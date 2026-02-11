@@ -16,6 +16,7 @@
 package com.google.web.bindery.event.shared;
 
 import com.google.web.bindery.event.shared.testing.CountingEventBusTest;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 

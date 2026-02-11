@@ -16,6 +16,7 @@
 package com.google.gwt.uibinder.elementparsers;
 
 import com.google.gwt.junit.TestSuiteWithOrder;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 

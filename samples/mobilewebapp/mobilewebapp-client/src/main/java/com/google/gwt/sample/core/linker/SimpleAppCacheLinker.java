@@ -118,7 +118,7 @@ public class SimpleAppCacheLinker extends AbstractLinker {
       ArtifactSet artifacts)
       throws UnableToCompleteException {
     StringBuilder publicSourcesSb = new StringBuilder();
-    StringBuilder staticResoucesSb = new StringBuilder();
+    StringBuilder staticResourcesSb = new StringBuilder();
 
     if (artifacts != null) {
       // Iterate over all emitted artifacts, and collect all cacheable artifacts
@@ -142,8 +142,8 @@ public class SimpleAppCacheLinker extends AbstractLinker {
 
       String[] cacheExtraFiles = getCacheExtraFiles(); 
       for (int i = 0; i < cacheExtraFiles.length; i++) {
-        staticResoucesSb.append(cacheExtraFiles[i]);
-        staticResoucesSb.append("\n");
+        staticResourcesSb.append(cacheExtraFiles[i]);
+        staticResourcesSb.append("\n");
       }
     }
 
@@ -157,7 +157,7 @@ public class SimpleAppCacheLinker extends AbstractLinker {
     sb.append("\n");
     sb.append("CACHE:\n");
     sb.append("# Static app files\n");
-    sb.append(staticResoucesSb.toString());
+    sb.append(staticResourcesSb.toString());
     sb.append("\n# Generated app files\n");
     sb.append(publicSourcesSb.toString());
     sb.append("\n\n");

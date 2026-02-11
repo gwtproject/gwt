@@ -30,7 +30,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * A task used in the task list. This is a monolothic implementation of a data object
+ * A task used in the task list. This is a monolithic implementation of a data object
  * for use with {@code RequestFactory}. Better patterns make use of Locators and
  * ServiceLocators to simplify the boilerplate required to expose a data object.
  * <p>

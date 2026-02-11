@@ -84,7 +84,7 @@ public class MobileWebAppShellTablet extends ResizeComposite implements MobileWe
   DockLayoutPanel splitPanel;
 
   /**
-   * The container that holds the tast list.
+   * The container that holds the task list.
    */
   @UiField
   SimplePanel taskListContainer;

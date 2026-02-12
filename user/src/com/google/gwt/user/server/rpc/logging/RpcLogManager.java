@@ -46,7 +46,7 @@ public class RpcLogManager {
    */
   public static RpcLogger getLogger(Class<?> clazz) {
     return loggers.computeIfAbsent(clazz.getName(),
-            name -> new RpcLogger(name, getLoggerProvider()));
+        name -> new RpcLogger(name, getLoggerProvider()));
   }
 
   /**

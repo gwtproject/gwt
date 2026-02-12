@@ -18,7 +18,7 @@ package com.google.gwt.user.server.rpc.logging;
 import javax.servlet.ServletContext;
 
 /**
- * A wrapper that lazily creates a {@link RpcLoggerDelegate} for a given name.
+ * A wrapper that creates a {@link RpcLoggerDelegate} for a given name.
  */
 public final class RpcLogger {
 

@@ -31,8 +31,6 @@ import java.util.concurrent.ConcurrentHashMap;
  *         <code>true</code></li>
  *     <li>The {@link ServletContextLoggerProvider}</li>
  * </ol>
- * Included providers can be found in
- * <code>META-INF/services/com.google.gwt.user.server.rpc.logging.RpcLoggerProvider</code>
  */
 public class RpcLogManager {
 

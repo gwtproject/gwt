@@ -19,17 +19,14 @@ import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
-import javax.servlet.ServletConfig;
-
 /**
  * Handles creation of {@link RpcLogger}s and the initialization of the {@link RpcLoggerProvider},
  * using {@link ServiceLoader} to discover available providers.
  * <br />
- * Can be manually initialized with a specific {@link RpcLoggerProvider} using an object or a fully
- * qualified class name. If not manually initialized, it will lazily initialize, using a provider
- * chosen in this order:
+ * The provider is initialized the first time a logger is requested. The provider is chosen in this
+ * order:
  * <ol>
- *     <li>The first provider with a class name that matches a system property
+ *     <li>The first provider with a fully-qualified class name that matches the system property
  *         <code>gwt.rpc.logging</code></li>
  *     <li>The first provider for which {@link RpcLoggerProvider#isDefault()} returns
  *         <code>true</code></li>
@@ -72,14 +69,7 @@ public class RpcLogManager {
   }
 
   /**
-   * Initializes the {@link RpcLoggerProvider} using the value of the system property.
-   */
-  public static void initialize() {
-    initialize(System.getProperty(PROVIDER_PARAMETER_KEY));
-  }
-
-  /**
-   * Initializes the {@link RpcLoggerProvider} with the given name.
+   * Initializes the {@link RpcLoggerProvider}, attempting to use a name from a system property.
    * <br />
    * If no name is supplied, it will use the first loaded provider for which
    * {@link RpcLoggerProvider#isDefault()} returns true.
@@ -87,9 +77,9 @@ public class RpcLogManager {
    * If no such provider is found, it will fall back to {@link ServletContextLoggerProvider}.
    * <br />
    * The provider will be initialized only once.
-   * @param providerName the fully qualified class name of the RpcLoggerProvider to use
    */
-  public static void initialize(String providerName) {
+  private static void initialize() {
+    String providerName = System.getProperty(PROVIDER_PARAMETER_KEY);
     if (loggerProvider.get() == null) {
       synchronized (initLock) {
         if (loggerProvider.get() == null) {
@@ -98,40 +88,6 @@ public class RpcLogManager {
           loggerProvider.set(provider);
         }
       }
-    }
-  }
-
-  /**
-   * Initializes the {@link RpcLoggerProvider} with the given provider.
-   * <br />
-   * The provider will be initialized only once.
-   * @param provider the logger provider to use
-   */
-  public static void initialize(RpcLoggerProvider provider) {
-    if (loggerProvider.get() == null) {
-      synchronized (initLock) {
-        if (loggerProvider.get() == null) {
-          loggerProvider.set(provider);
-        }
-      }
-    }
-  }
-
-  /**
-   * Attempts to retrieve a fully qualified class name for a
-   * {@link com.google.gwt.user.server.rpc.logging.RpcLoggerProvider}, checking system properties
-   * and init parameters for <code>gwt.rpc.logging</code>.
-   * @param config the servlet config
-   * @return the fully qualified class name of the provider, or <code>null</code> if none was found.
-   */
-  public static String getProviderName(ServletConfig config) {
-    String parameterName = RpcLogManager.PROVIDER_PARAMETER_KEY;
-    if (System.getProperty(parameterName) != null) {
-      return System.getProperty(parameterName);
-    } else if (config.getInitParameter(parameterName) != null) {
-      return config.getInitParameter(parameterName);
-    } else {
-      return config.getServletContext().getInitParameter(parameterName);
     }
   }
 
@@ -146,12 +102,12 @@ public class RpcLogManager {
   private static RpcLoggerProvider loadProvider(String name, RpcLoggerProvider fallback) {
     ServiceLoader<RpcLoggerProvider> loaderService = ServiceLoader.load(RpcLoggerProvider.class);
     for (RpcLoggerProvider provider : loaderService) {
-      if (provider.isAvailable() && provider.getClass().getName().equals(name)) {
+      if (provider.getClass().getName().equals(name)) {
         return provider;
       }
     }
     for (RpcLoggerProvider provider : loaderService) {
-      if (provider.isAvailable() && provider.isDefault()) {
+      if (provider.isDefault()) {
         return provider;
       }
     }

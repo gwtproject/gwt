@@ -30,12 +30,4 @@ public interface RpcLoggerProvider {
     return false;
   }
 
-  /**
-   * If <code>false</code>, this provider will not be used. Useful for reflective implementations.
-   * @return true if this provider can be used
-   */
-  default boolean isAvailable() {
-    return true;
-  }
-
 }

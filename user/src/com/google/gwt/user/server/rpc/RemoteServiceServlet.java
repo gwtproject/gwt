@@ -191,8 +191,6 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
   @Override
   public void init(ServletConfig config) throws ServletException {
     super.init(config);
-    String providerName = RpcLogManager.getProviderName(config);
-    RpcLogManager.initialize(providerName);
     codeServerPort = getCodeServerPort();
   }
 

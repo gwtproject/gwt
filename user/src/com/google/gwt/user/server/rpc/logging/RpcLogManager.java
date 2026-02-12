@@ -17,7 +17,6 @@ package com.google.gwt.user.server.rpc.logging;
 
 import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Handles creation of {@link RpcLogger}s and the initialization of the {@link RpcLoggerProvider},
@@ -39,7 +38,7 @@ public class RpcLogManager {
 
   public static final String PROVIDER_PARAMETER_KEY = "gwt.rpc.logging";
   private static final ConcurrentHashMap<String, RpcLogger> loggers = new ConcurrentHashMap<>();
-  private static final AtomicReference<RpcLoggerProvider> loggerProvider = new AtomicReference<>();
+  private static volatile RpcLoggerProvider loggerProvider;
   private static final Object initLock = new Object();
 
   /**
@@ -60,12 +59,10 @@ public class RpcLogManager {
    * @return the current instance of the LoggerProvider
    */
   private static RpcLoggerProvider getLoggerProvider() {
-    RpcLoggerProvider result = loggerProvider.get();
-    if (result == null) {
+    if (loggerProvider == null) {
       initialize();
-      result = loggerProvider.get();
     }
-    return result;
+    return loggerProvider;
   }
 
   /**
@@ -76,17 +73,14 @@ public class RpcLogManager {
    * <br />
    * If no such provider is found, it will fall back to {@link ServletContextLoggerProvider}.
    * <br />
-   * The provider will be initialized only once.
+   * If the provider is already initialized, no action is taken.
    */
   private static void initialize() {
     String providerName = System.getProperty(PROVIDER_PARAMETER_KEY);
-    if (loggerProvider.get() == null) {
-      synchronized (initLock) {
-        if (loggerProvider.get() == null) {
-          RpcLoggerProvider fallback = new ServletContextLoggerProvider();
-          RpcLoggerProvider provider = loadProvider(providerName, fallback);
-          loggerProvider.set(provider);
-        }
+    synchronized (initLock) {
+      if (loggerProvider == null) {
+        RpcLoggerProvider fallback = new ServletContextLoggerProvider();
+        loggerProvider = loadProvider(providerName, fallback);
       }
     }
   }

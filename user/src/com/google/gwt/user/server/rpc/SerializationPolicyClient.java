@@ -39,7 +39,8 @@ class SerializationPolicyClient {
   private final int readTimeout;
 
   /**
-   * Creates a client with the given configuration.
+   * Creates a client to load serialization policies from a dev mode server, with the given
+   * timeouts.
    * @param connectTimeoutMs see {@link URLConnection#setConnectTimeout}
    * @param readTimeoutMs see {@link URLConnection#setReadTimeout}
    */

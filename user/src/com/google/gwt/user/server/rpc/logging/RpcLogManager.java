@@ -18,6 +18,8 @@ package com.google.gwt.user.server.rpc.logging;
 import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.servlet.ServletContext;
+
 /**
  * Handles creation of {@link RpcLogger}s and the initialization of the {@link RpcLoggerProvider},
  * using {@link ServiceLoader} to discover available providers.
@@ -47,6 +49,17 @@ public class RpcLogManager {
   public static RpcLogger getLogger(Class<?> clazz) {
     return loggers.computeIfAbsent(clazz.getName(),
         name -> new RpcLogger(name, getLoggerProvider()));
+  }
+
+  /**
+   * Sets the servlet context of the {@link ServletContextLoggerProvider} to use for logging. Has no
+   * effect if the provider is not a {@link ServletContextLoggerProvider}.
+   * @param servletContext the servlet context to use
+   */
+  public static void setServletContext(ServletContext servletContext) {
+    if (loggerProvider instanceof ServletContextLoggerProvider) {
+      ((ServletContextLoggerProvider) loggerProvider).setServletContext(servletContext);
+    }
   }
 
   /**

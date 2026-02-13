@@ -15,8 +15,6 @@
  */
 package com.google.gwt.user.server.rpc.logging;
 
-import javax.servlet.ServletContext;
-
 /**
  * A wrapper that creates a {@link RpcLoggerDelegate} for a given name.
  */
@@ -28,20 +26,20 @@ public final class RpcLogger {
     delegate = provider.createLogger(name);
   }
 
-  public void info(String message, ServletContext servletContext) {
-    delegate.info(message, servletContext);
+  public void info(String message) {
+    delegate.info(message);
   }
 
-  public void warn(String message, ServletContext servletContext) {
-    delegate.warn(message, servletContext);
+  public void warn(String message) {
+    delegate.warn(message);
   }
 
-  public void error(String message, ServletContext servletContext) {
-    delegate.error(message, servletContext);
+  public void error(String message) {
+    delegate.error(message);
   }
 
-  public void error(String message, Throwable throwable, ServletContext servletContext) {
-    delegate.error(message, throwable, servletContext);
+  public void error(String message, Throwable throwable) {
+    delegate.error(message, throwable);
   }
 
 }

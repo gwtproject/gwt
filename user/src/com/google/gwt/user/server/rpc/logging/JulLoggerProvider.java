@@ -18,8 +18,6 @@ package com.google.gwt.user.server.rpc.logging;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.servlet.ServletContext;
-
 /**
  * A {@link RpcLoggerProvider} that delegates to {@link java.util.logging.Logger}.
  */
@@ -41,22 +39,22 @@ public class JulLoggerProvider implements RpcLoggerProvider {
     }
 
     @Override
-    public void info(String message, ServletContext servletContext) {
+    public void info(String message) {
       logger.log(Level.INFO, message);
     }
 
     @Override
-    public void warn(String message, ServletContext servletContext) {
+    public void warn(String message) {
       logger.log(Level.WARNING, message);
     }
 
     @Override
-    public void error(String message, ServletContext servletContext) {
+    public void error(String message) {
       logger.log(Level.SEVERE, message);
     }
 
     @Override
-    public void error(String message, Throwable throwable, ServletContext servletContext) {
+    public void error(String message, Throwable throwable) {
       logger.log(Level.SEVERE, message, throwable);
     }
   }

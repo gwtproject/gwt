@@ -25,12 +25,12 @@ import javax.servlet.ServletContext;
  */
 public interface RpcLoggerDelegate {
 
-  void info(String message, ServletContext servletContext);
+  void info(String message);
 
-  void warn(String message, ServletContext servletContext);
+  void warn(String message);
 
-  void error(String message, ServletContext servletContext);
+  void error(String message);
 
-  void error(String message, Throwable throwable, ServletContext servletContext);
+  void error(String message, Throwable throwable);
 
 }

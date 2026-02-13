@@ -326,6 +326,16 @@ public class RPCServletUtils {
   }
 
   /**
+   * @deprecated Use {@link #writeResponse(HttpServletResponse, String, boolean)} instead; the
+   * servlet context is no longer needed.
+   */
+  @Deprecated
+  public static void writeResponse(ServletContext ignored, HttpServletResponse response,
+      String responseContent, boolean gzipResponse) throws IOException {
+    writeResponse(response, responseContent, gzipResponse);
+  }
+
+  /**
    * Write the response content into the {@link HttpServletResponse}. If
    * <code>gzipResponse</code> is <code>true</code>, the response content will
    * be gzipped prior to being written into the response.
@@ -337,9 +347,8 @@ public class RPCServletUtils {
    * @throws IOException if reading, writing, or closing the response's output
    *           stream fails
    */
-  public static void writeResponse(ServletContext servletContext,
-      HttpServletResponse response, String responseContent, boolean gzipResponse)
-      throws IOException {
+  public static void writeResponse(HttpServletResponse response, String responseContent,
+      boolean gzipResponse) throws IOException {
 
     byte[] responseBytes = responseContent.getBytes(StandardCharsets.UTF_8);
     if (gzipResponse) {
@@ -368,7 +377,7 @@ public class RPCServletUtils {
       }
 
       if (caught != null) {
-        logger.error("Unable to compress response", caught, servletContext);
+        logger.error("Unable to compress response", caught);
         response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         return;
       }
@@ -384,16 +393,25 @@ public class RPCServletUtils {
   }
 
   /**
+   * @deprecated Use {@link #writeResponseForUnexpectedFailure(HttpServletResponse, Throwable)}
+   * instead; the servlet context is no longer needed.
+   */
+  @Deprecated
+  public static void writeResponseForUnexpectedFailure(ServletContext ignored,
+      HttpServletResponse response, Throwable failure) {
+    writeResponseForUnexpectedFailure(response, failure);
+  }
+
+  /**
    * Called when the servlet itself has a problem, rather than the invoked
    * third-party method. It writes a simple 500 message back to the client.
    *
    * @param response
    * @param failure
    */
-  public static void writeResponseForUnexpectedFailure(
-      ServletContext servletContext, HttpServletResponse response,
+  public static void writeResponseForUnexpectedFailure(HttpServletResponse response,
       Throwable failure) {
-    logger.error("Exception while dispatching incoming RPC call", failure, servletContext);
+    logger.error("Exception while dispatching incoming RPC call", failure);
 
     // Send GENERIC_FAILURE_MSG with 500 status.
     //
@@ -409,7 +427,7 @@ public class RPCServletUtils {
     } catch (IOException ex) {
       logger.error(
           "respondWithUnexpectedFailure failed while sending the previous failure to the client",
-          ex, servletContext);
+          ex);
     }
   }
 

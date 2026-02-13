@@ -28,8 +28,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-
 /**
  * A simple and relatively naive client for downloading serialization policies from a URL.
  * (Intended only for development.)
@@ -50,12 +48,12 @@ class SerializationPolicyClient {
     this.readTimeout = readTimeoutMs;
   }
 
-  SerializationPolicy loadPolicy(String url, ServletContext servletContext) {
+  SerializationPolicy loadPolicy(String url) {
     URL urlObj;
     try {
       urlObj = new URL(url);
     } catch (MalformedURLException e) {
-      logger.error("Can't parse serialization policy URL: " + url, e, servletContext);
+      logger.error("Can't parse serialization policy URL: " + url, e);
       return null;
     }
 
@@ -73,11 +71,11 @@ class SerializationPolicyClient {
       conn.connect();
       in = conn.getInputStream();
     } catch (IOException e) {
-      logger.error("Can't open serialization policy URL: " + url, e, servletContext);
+      logger.error("Can't open serialization policy URL: " + url, e);
       return null;
     }
 
-    return readPolicy(in, url, servletContext);
+    return readPolicy(in, url);
   }
 
   /**
@@ -86,35 +84,33 @@ class SerializationPolicyClient {
    * @param sourceName names the source of the input stream for log messages.
    * @return the policy or null if unavailable.
    */
-  private static SerializationPolicy readPolicy(InputStream in, String sourceName,
-      ServletContext servletContext) {
+  private static SerializationPolicy readPolicy(InputStream in, String sourceName) {
     try {
       List<ClassNotFoundException> errs = new ArrayList<ClassNotFoundException>();
       SerializationPolicy policy = SerializationPolicyLoader.loadFromStream(in, errs);
-      logger.info("Downloaded serialization policy from " + sourceName, servletContext);
+      logger.info("Downloaded serialization policy from " + sourceName);
 
       if (!errs.isEmpty()) {
-        logMissingClasses(errs, servletContext);
+        logMissingClasses(errs);
       }
       return policy;
 
     } catch (ParseException e) {
-      logger.error("Can't parse serialization policy from " + sourceName, e, servletContext);
+      logger.error("Can't parse serialization policy from " + sourceName, e);
       return null;
     } catch (IOException e) {
-      logger.error("Can't read serialization policy from " + sourceName, e, servletContext);
+      logger.error("Can't read serialization policy from " + sourceName, e);
       return null;
     } finally {
       try {
         in.close();
       } catch (IOException e) {
-        logger.error("Can't close serialization policy url: " + sourceName, e, servletContext);
+        logger.error("Can't close serialization policy url: " + sourceName, e);
       }
     }
   }
 
-  private static void logMissingClasses(List<ClassNotFoundException> errs,
-      ServletContext servletContext) {
+  private static void logMissingClasses(List<ClassNotFoundException> errs) {
     StringBuilder message = new StringBuilder();
     message.append("Unable to load server-side classes used by policy:\n");
 
@@ -126,7 +122,7 @@ class SerializationPolicyClient {
     if (omitted > 0) {
       message.append("  (omitted " + omitted + " more classes)\n");
     }
-    logger.info(message.toString(), servletContext);
+    logger.info(message.toString());
   }
 
 }

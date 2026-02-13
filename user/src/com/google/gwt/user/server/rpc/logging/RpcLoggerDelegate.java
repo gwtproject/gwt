@@ -15,13 +15,8 @@
  */
 package com.google.gwt.user.server.rpc.logging;
 
-import javax.servlet.ServletContext;
-
 /**
  * A very simplified interface for logging RPC events.
- * <br />
- * A {@link ServletContext} is passed for compatibility with the fallback
- * {@link ServletContextLoggerProvider}. It may be ignored for any other implementation.
  */
 public interface RpcLoggerDelegate {
 

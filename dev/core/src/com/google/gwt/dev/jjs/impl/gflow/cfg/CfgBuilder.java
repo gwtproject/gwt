@@ -465,8 +465,8 @@ public class CfgBuilder {
       pushNode(new CfgStatementNode<JStatement>(parent, x));
       int pos = nodes.size();
 
-      if (x.getBody() != null) {
-        accept(x.getBody());
+      if (!x.getBody().isEmpty()) {
+        accept(x.getBody().singleStatement());
       }
 
       if (x.getTestExpr() != null) {
@@ -510,8 +510,8 @@ public class CfgBuilder {
         addNormalExit(cond, CfgConditionalNode.THEN);
       }
 
-      if (x.getBody() != null) {
-        accept(x.getBody());
+      if (!x.getBody().isEmpty()) {
+        accept(x.getBody().singleStatement());
       }
       int incrementsPos = nodes.size();
       if (x.getIncrements() != null) {
@@ -545,13 +545,13 @@ public class CfgBuilder {
       CfgIfNode node = addNode(new CfgIfNode(parent, x));
 
       addNormalExit(node, CfgConditionalNode.THEN);
-      if (x.getThenStmt().singleStatement() != null) {
+      if (!x.getThenStmt().isEmpty()) {
         accept(x.getThenStmt().singleStatement());
       }
       List<Exit> thenExits = removeNormalExits();
 
       addNormalExit(node, CfgConditionalNode.ELSE);
-      if (x.getElseStmt().singleStatement() != null) {
+      if (!x.getElseStmt().isEmpty()) {
         accept(x.getElseStmt().singleStatement());
       }
 
@@ -1012,8 +1012,8 @@ public class CfgBuilder {
       CfgWhileNode node = addNode(new CfgWhileNode(parent, x));
 
       addNormalExit(node, CfgConditionalNode.THEN);
-      if (x.getBody() != null) {
-        accept(x.getBody());
+      if (!x.getBody().isEmpty()) {
+        accept(x.getBody().singleStatement());
       }
 
       List<Exit> thenExits = removeNormalExits();

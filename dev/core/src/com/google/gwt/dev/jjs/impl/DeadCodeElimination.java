@@ -328,7 +328,7 @@ public class DeadCodeElimination {
     }
 
     /**
-     * Convert do { } while (false); into a block.
+     * Convert do { } while (false); into a block, or do { } while (true); into while(true) { }.
      */
     @Override
     public void endVisit(JDoStatement x, Context ctx) {
@@ -336,9 +336,9 @@ public class DeadCodeElimination {
       if (expression instanceof JBooleanLiteral) {
         JBooleanLiteral booleanLiteral = (JBooleanLiteral) expression;
 
-        // If false, replace do with do's body
         if (!booleanLiteral.getValue()) {
-          if (JjsUtils.isEmptyBlock(x.getBody())) {
+          // If false, replace do with do's body
+          if (x.getBody().isEmpty()) {
             ctx.removeMe();
           } else { // Unless it contains break/continue statements
             FindBreakContinueStatementsVisitor visitor = new FindBreakContinueStatementsVisitor();
@@ -347,6 +347,11 @@ public class DeadCodeElimination {
               ctx.replaceMe(x.getBody());
             }
           }
+//        } else {
+//          // If true, replace with while(true) { body }
+//          JWhileStatement whileStatement = new JWhileStatement(x.getSourceInfo(), expression,
+//              x.getBody());
+//          ctx.replaceMe(whileStatement);
         }
       }
     }

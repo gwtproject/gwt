@@ -33,6 +33,17 @@ public class JBlock extends JStatement {
     this.statements.addAll(Arrays.asList(statements));
   }
 
+  public static JBlock ensureBlock(SourceInfo info, JStatement statement) {
+    if (statement == null) {
+      return new JBlock(info);
+    }
+    if (statement instanceof JBlock) {
+      return (JBlock) statement;
+    }
+
+    return new JBlock(statement.getSourceInfo(), statement);
+  }
+
   /**
    * Insert a statement into this block.
    */

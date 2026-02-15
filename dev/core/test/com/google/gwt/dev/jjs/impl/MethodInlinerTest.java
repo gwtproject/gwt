@@ -127,8 +127,8 @@ public class MethodInlinerTest extends OptimizerTestBase {
         + "else {switch(a) { case 1: a++; break; default: a=a+2; break; }; return a; }" + "}");
     addSnippetClassDecl("static int fun2(int a)" + "{return fun1(a);}");
     Result result = optimize("int", "return fun2(0);");
-    assertEquals("static int fun1(int a){ if (a > 1) return a;"
-        + " else { switch (a) { case 1: ++a;"
+    assertEquals("static int fun1(int a){ if (a > 1) { return a;"
+        + " } else { switch (a) { case 1: ++a;"
         + " break; default: a = a + 2; }"
         + " return a; } }", getCanonicalSource(result.findMethod("fun1")));
     assertEquals("static int fun2(int a){ return EntryPoint.fun1(a); }",

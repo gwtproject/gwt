@@ -539,6 +539,9 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
 
     JStatement then = x.getThenStmt().singleStatement();
     if (then != null) {
+      if (x.getElseStmt() != null && !(then instanceof JBlock)) {
+        then = new JBlock(then.getSourceInfo(), then);
+      }
       nestedStatementPush(then);
       accept(then);
       nestedStatementPop(then);

@@ -692,7 +692,7 @@ public class GenerateJavaScriptAST {
     public JsNode transformDoStatement(JDoStatement doStatement) {
       JsDoWhile stmt = new JsDoWhile(doStatement.getSourceInfo());
       stmt.setCondition(transform(doStatement.getTestExpr()));
-      stmt.setBody(jsEmptyIfNull(doStatement.getSourceInfo(), transform(doStatement.getBody())));
+      stmt.setBody(jsEmptyIfNull(doStatement.getSourceInfo(), transform(doStatement.getBody().singleStatement())));
       return stmt;
     }
 
@@ -742,7 +742,7 @@ public class GenerateJavaScriptAST {
       result.setInitExpr(initExpr);
       result.setCondition(transform(forStatement.getCondition()));
       result.setIncrExpr(transform(forStatement.getIncrements()));
-      result.setBody(jsEmptyIfNull(forStatement.getSourceInfo(), transform(forStatement.getBody())));
+      result.setBody(jsEmptyIfNull(forStatement.getSourceInfo(), transform(forStatement.getBody().singleStatement())));
 
       return result;
     }
@@ -1168,7 +1168,7 @@ public class GenerateJavaScriptAST {
       SourceInfo info = whileStatement.getSourceInfo();
       JsWhile stmt = new JsWhile(info);
       stmt.setCondition(transform(whileStatement.getTestExpr()));
-      stmt.setBody(jsEmptyIfNull(info, transform(whileStatement.getBody())));
+      stmt.setBody(jsEmptyIfNull(info, transform(whileStatement.getBody().singleStatement())));
       return stmt;
     }
 

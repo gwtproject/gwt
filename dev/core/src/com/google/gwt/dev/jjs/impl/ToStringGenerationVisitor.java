@@ -431,10 +431,11 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   public boolean visit(JDoStatement x, Context ctx) {
     print(CHARS_DO);
     needSemi = true;
-    if (x.getBody() != null) {
-      nestedStatementPush(x.getBody());
-      accept(x.getBody());
-      nestedStatementPop(x.getBody());
+    JStatement body = x.getBody().singleStatement();
+    if (body != null) {
+      nestedStatementPush(body);
+      accept(body);
+      nestedStatementPop(body);
     }
     if (needSemi) {
       semi();
@@ -522,10 +523,11 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
     }
     rparen();
 
-    if (x.getBody() != null) {
-      nestedStatementPush(x.getBody());
-      accept(x.getBody());
-      nestedStatementPop(x.getBody());
+    JStatement body = x.getBody().singleStatement();
+    if (body != null) {
+      nestedStatementPush(body);
+      accept(body);
+      nestedStatementPop(body);
     }
     return false;
   }
@@ -925,10 +927,11 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
     lparen();
     accept(x.getTestExpr());
     rparen();
-    if (x.getBody() != null) {
-      nestedStatementPush(x.getBody());
-      accept(x.getBody());
-      nestedStatementPop(x.getBody());
+    JStatement body = x.getBody().singleStatement();
+    if (body != null) {
+      nestedStatementPush(body);
+      accept(body);
+      nestedStatementPop(body);
     }
     return false;
   }

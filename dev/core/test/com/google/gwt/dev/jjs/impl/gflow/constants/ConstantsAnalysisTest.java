@@ -178,9 +178,8 @@ public class ConstantsAnalysisTest extends CfgAnalysisTestBase<ConstantsAssumpti
         "WRITE(j, 0) -> [* {j = 0}]",
         "STMT -> [* {j = 0}]",
         "1: READ(j) -> [* {j = 0}]",
-        "COND (j > 0) -> [THEN=* {j = 0}, ELSE=2 {j = 0}]",
-        "BLOCK -> [1 {j = 0}]",
-        "2: END");
+        "COND (j > 0) -> [THEN=1 {j = 0}, ELSE=* {j = 0}]",
+        "END");
   }
 
   public void testConditionalExpressions() throws Exception {

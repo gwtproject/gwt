@@ -29,8 +29,8 @@ public class JIfStatement extends JStatement {
   public JIfStatement(SourceInfo info, JExpression ifExpr, JStatement thenStmt, JStatement elseStmt) {
     super(info);
     this.ifExpr = ifExpr;
-    this.thenStmt = ensureBlock(info, thenStmt);
-    this.elseStmt = ensureBlock(info, elseStmt);
+    this.thenStmt = JBlock.ensureBlock(info, thenStmt);
+    this.elseStmt = JBlock.ensureBlock(info, elseStmt);
   }
 
   public JBlock getElseStmt() {
@@ -49,21 +49,10 @@ public class JIfStatement extends JStatement {
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {
       ifExpr = visitor.accept(ifExpr);
-      thenStmt = ensureBlock(getSourceInfo(), visitor.accept(thenStmt, false));
-      elseStmt = ensureBlock(getSourceInfo(), visitor.accept(elseStmt, false));
+      thenStmt = JBlock.ensureBlock(getSourceInfo(), visitor.accept(thenStmt, false));
+      elseStmt = JBlock.ensureBlock(getSourceInfo(), visitor.accept(elseStmt, false));
     }
     visitor.endVisit(this, ctx);
-  }
-
-  private static JBlock ensureBlock(SourceInfo info, JStatement statement) {
-    if (statement == null) {
-      return new JBlock(info);
-    }
-    if (statement instanceof JBlock) {
-      return (JBlock) statement;
-    }
-
-    return new JBlock(statement.getSourceInfo(), statement);
   }
 
   @Override

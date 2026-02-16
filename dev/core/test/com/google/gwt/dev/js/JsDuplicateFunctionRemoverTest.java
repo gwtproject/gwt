@@ -26,12 +26,8 @@ import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsScope;
 import com.google.gwt.dev.js.ast.JsStatement;
-import com.google.gwt.dev.js.ast.JsVisitor;
-import com.google.gwt.dev.util.DefaultTextOutput;
-import com.google.gwt.dev.util.TextOutput;
 
 import java.io.StringReader;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,44 +47,33 @@ public class JsDuplicateFunctionRemoverTest extends OptimizerTestBase {
     }
   }
 
-  // JsDuplicateFunctionRemover does not have a one parameter exec function. Test infrastructure
-  // call exec(JsProgram) reflectively.
-  private static class JsDuplicateFunctionRemoverProxy {
-    static public void exec(JsProgram program) {
-      JsDuplicateFunctionRemover.exec(program, new MockNameGenerator());
-    }
-  }
-
   public void testDontRemoveCtors() throws Exception {
     // As fieldref qualifier
-    assertEquals("function a(){}\n;function b(){}\nb.prototype={};a();b();",
-        optimize("function a(){};function b(){} b.prototype={}; a(); b();"));
+        optimize("function a(){};function b(){} b.prototype={}; a(); b();")
+            .into("function a(){}\n;function b(){}\nb.prototype={};a();b();");
     // As parameter
-    assertEquals(
-        "function defineClass(a,b){}\n;function a(){}\n;function b(){}\ndefineClass(a,b);a();b();",
-        optimize("function defineClass(a,b){};function a(){};function b(){}"
-            + " defineClass(a,b); a(); b();"));
+    optimize("function defineClass(a,b){};function a(){};function b(){}"
+        + " defineClass(a,b); a(); b();").into("function defineClass(a,b){}\n;function a(){}\n;function b(){}\ndefineClass(a,b);a();b();");
   }
 
   public void testRemoveDuplicates() throws Exception {
-    assertEquals("function a(){}\n;a();a();",
-        optimize("function a(){};function b(){} a(); b();"));
+    optimize("function a(){};function b(){} a(); b();")
+        .into("function a(){}\n;a();a();");
   }
 
   public void testVirtualRemoveDuplicates() throws Exception {
-    JsProgram program = new JsProgram();
-    String js = "_.method1=function(){};_.method2=function(){};_.method1();_.method2();";
-    List<JsStatement> input = JsParser.parse(SourceOrigin.UNKNOWN,
-      program.getScope(), new StringReader(js));
-    program.getGlobalBlock().getStatements().addAll(input);
+    JsProgram program = parseToProgram("_.method1=function(){};",
+        "_.method2=function(){};",
+        "_.method1();_.method2();");
 
     // Mark all functions as if they were translated from Java sources.
     setAllFromJava(program);
 
     String firstName = new MockNameGenerator().getFreshName();
-    assertEquals("_.method1=" + firstName + ";_.method2=" + firstName +
-        ";_.method1();_.method2();function " + firstName + "(){}\n",
-        optimize(program, JsSymbolResolver.class, JsDuplicateFunctionRemoverProxy.class));
+    optimize(program).into("_.method1=" + firstName + ";",
+        "_.method2=" + firstName + ";",
+        "_.method1();_.method2();",
+        "function " + firstName + "(){}");
   }
 
 
@@ -117,13 +102,14 @@ public class JsDuplicateFunctionRemoverTest extends OptimizerTestBase {
     // Mark all functions as if they were translated from Java sources.
     setAllFromJava(program);
 
-    optimize(program, JsSymbolResolver.class, JsDuplicateFunctionRemoverProxy.class);
+    doOptimize(program);
 
     // There should be two distinct dedupped functions here.
     MockNameGenerator tempFreshNameGenerator = new MockNameGenerator();
     String firstName = tempFreshNameGenerator.getFreshName();
     String secondName = tempFreshNameGenerator.getFreshName();
 
+    assertNotNull(program.getScope().findExistingName(firstName));
     assertNotNull(program.getScope().findExistingName(secondName));
   }
 
@@ -153,7 +139,6 @@ public class JsDuplicateFunctionRemoverTest extends OptimizerTestBase {
    * that had been assigned invalidating the irrevocable decision made by the deduper.
    */
   public void testRerunNamerError() throws Exception {
-    JsProgram program = new JsProgram();
     // Reference to a in _.b is to the top level scope a function where the one in _.c is to the
     // local a definition.
     //
@@ -164,11 +149,11 @@ public class JsDuplicateFunctionRemoverTest extends OptimizerTestBase {
     // but we use them to model functions that refer to names at different scopes. Because this
     // optimization only runs on JsFunctions that come from Java source this situation does not
     // happen.
-    String js = "var c; function a(){return f1;}; function f1() {_.b = function() {return a;} }; "
-        + "function f2() { var a = null; _.c = function() {return a;} };f1();f2();_.b();_.c();";
-    List<JsStatement> input = JsParser.parse(SourceOrigin.UNKNOWN,
-        program.getScope(), new StringReader(js));
-    program.getGlobalBlock().getStatements().addAll(input);
+    JsProgram program = parseToProgram("var c;",
+        "function a(){return f1;};",
+        "function f1() {_.b = function() {return a;} };",
+        "function f2() { var a = null; _.c = function() {return a;} };",
+        "f1();f2();_.b();_.c();");
 
     // Mark all functions as if they were translated from Java sources.
     setAllFromJava(program);
@@ -184,7 +169,7 @@ public class JsDuplicateFunctionRemoverTest extends OptimizerTestBase {
 
     assertTrue(topScope_a != f2_a);
 
-    optimize(program, JsSymbolResolver.class, JsDuplicateFunctionRemoverProxy.class);
+    doOptimize(program);
 
     // collect values assigned to some identifiers.
     final Map<String, JsName> assignments = AssignmentGatherer.exec(program);
@@ -206,30 +191,9 @@ public class JsDuplicateFunctionRemoverTest extends OptimizerTestBase {
     }.accept(program);
   }
 
-  private String optimize(String js) throws Exception {
-    return optimizeToSource(js, JsSymbolResolver.class,
-        JsDuplicateFunctionRemoverProxy.class);
-  }
-
-  /**
-   * Optimize a JS program.
-   *
-   * @param program the source program
-   * @param toExec a list of classes that implement
-   *          <code>static void exec(JsProgram)</code>
-   * @return optimized JS
-   */
-  protected String optimize(JsProgram program, Class<?>... toExec) throws Exception {
-
-    for (Class<?> clazz : toExec) {
-      Method m = clazz.getMethod("exec", JsProgram.class);
-      m.invoke(null, program);
-    }
-
-    TextOutput text = new DefaultTextOutput(true);
-    JsVisitor generator = new JsSourceGenerationVisitor(text);
-
-    generator.accept(program);
-    return text.toString();
+  @Override
+  protected void doOptimize(JsProgram program) throws Exception {
+    JsSymbolResolver.exec(program);
+    JsDuplicateFunctionRemover.exec(program, new MockNameGenerator());
   }
 }

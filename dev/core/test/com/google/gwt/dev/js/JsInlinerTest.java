@@ -37,16 +37,9 @@ import java.util.List;
  */
 public class JsInlinerTest extends OptimizerTestBase {
 
+  private boolean obfuscateSource = false;
+
   private static class FixStaticRefsVisitor extends JsModVisitor {
-
-    /**
-     * Called reflectively.
-     */
-    @SuppressWarnings("unused")
-    public static void exec(JsProgram program) {
-      (new FixStaticRefsVisitor()).accept(program);
-    }
-
     @Override
     public void endVisit(JsFunction x, JsContext ctx) {
       JsName name = x.getName();
@@ -396,26 +389,21 @@ public class JsInlinerTest extends OptimizerTestBase {
   }
 
   private void verifyNoChange(String input) throws Exception {
-    verifyOptimized(input, input);
+    optimize(input).into(input);
   }
 
   private void verifyOptimized(String expected, String input) throws Exception {
-    String actual = optimizeToSource(input, JsSymbolResolver.class, FixStaticRefsVisitor.class,
-        JsInlinerProxy.class, JsUnusedFunctionRemover.class);
-    String expectedAfterParse = optimizeToSource(expected);
-    assertEquals(expectedAfterParse, actual);
+    optimize(input).into(expected);
   }
 
   private void verifyOptimizedObfuscated(String expected, String input) throws Exception {
-    String actual = optimizeToSource(input, JsSymbolResolver.class, FixStaticRefsVisitor.class,
-        JsInlinerProxy.class, JsUnusedFunctionRemover.class, JsObfuscateNamer.class);
-    String expectedAfterParse = optimizeToSource(expected);
-    assertEquals(expectedAfterParse, actual);
+    obfuscateSource = true;
+    optimize(input).into(expected);
   }
 
   private void assertCheckerError(String input, String error) throws Exception {
-    JsProgram optimizedProgram = optimize(input, JsSymbolResolver.class, FixStaticRefsVisitor.class,
-        JsInlinerProxy.class, JsUnusedFunctionRemover.class);
+    JsProgram optimizedProgram = (parseToProgram(input));
+    doOptimize(optimizedProgram);
     UnitTestTreeLogger.Builder builder = new UnitTestTreeLogger.Builder();
     builder.setLowestLogLevel(TreeLogger.ERROR);
     builder.expectError(error, null);
@@ -428,32 +416,41 @@ public class JsInlinerTest extends OptimizerTestBase {
     testLogger.assertCorrectLogEntries();
   }
 
-  /**
-   * A Proxy class to call JsInlner, due to its lack of a single parameter exec method.
-   */
-  private static class JsInlinerProxy {
-    /**
-     * Static entry point used by JavaToJavaScriptCompiler.
-     */
-    public static void exec(JsProgram program) {
-      final List<JsNode> inlineableFunctions = Lists.newArrayList();
-      new JsVisitor() {
-        @Override
-        public void endVisit(JsFunction x, JsContext ctx) {
-          inlineableFunctions.add(x);
-          JsName functionName = x.getName();
-          if (functionName == null) {
-            return;
-          }
-          if (functionName.getIdent().endsWith("_forceInline")) {
-            x.setInliningMode(InliningMode.FORCE_INLINE);
-          } else if (functionName.getIdent().endsWith("_doNotInline")) {
-            x.setInliningMode(InliningMode.DO_NOT_INLINE);
-          }
-        }
-      }.accept(program);
-      JsInliner.exec(program, inlineableFunctions);
+  @Override
+  protected void doOptimize(JsProgram program) throws JsNamer.IllegalNameException {
+    JsSymbolResolver.exec(program);
+    new FixStaticRefsVisitor().accept(program);
+    doInline(program);
+    JsUnusedFunctionRemover.exec(program);
+    if (obfuscateSource) {
+      JsObfuscateNamer.exec(program);
     }
+  }
+
+  /**
+   * Helper to call JsInliner, and collect the functions we expect to be inlinable. For the purposes
+   * of this test, all functions are potentially inlinable, albit with different inlining modes
+   * based on their name.
+   * @param program the program to optimize
+   */
+  private static void doInline(JsProgram program) {
+    final List<JsNode> inlineableFunctions = Lists.newArrayList();
+    new JsVisitor() {
+      @Override
+      public void endVisit(JsFunction x, JsContext ctx) {
+        inlineableFunctions.add(x);
+        JsName functionName = x.getName();
+        if (functionName == null) {
+          return;
+        }
+        if (functionName.getIdent().endsWith("_forceInline")) {
+          x.setInliningMode(InliningMode.FORCE_INLINE);
+        } else if (functionName.getIdent().endsWith("_doNotInline")) {
+          x.setInliningMode(InliningMode.DO_NOT_INLINE);
+        }
+      }
+    }.accept(program);
+    JsInliner.exec(program, inlineableFunctions);
   }
 
 }

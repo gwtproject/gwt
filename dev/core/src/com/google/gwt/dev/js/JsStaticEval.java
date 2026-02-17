@@ -490,7 +490,7 @@ public class JsStaticEval {
 
       /*
        * Because the nodes passed into this method are visited on exit, it is
-       * worthwile to memoize the result for this function.
+       * worthwhile to memoize the result for this function.
        */
       Boolean toReturn = coercesToStringMap.get(expr);
       if (toReturn != null) {

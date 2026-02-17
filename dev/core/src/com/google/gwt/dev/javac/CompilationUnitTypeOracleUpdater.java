@@ -237,7 +237,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
   private static final boolean TRACE_CLASSES = false;
 
   /**
-   * Suppress some warnings related to missing valiation.jar on classpath.
+   * Suppress some warnings related to missing validation.jar on classpath.
    */
   private static boolean warnedMissingValidationJar = false;
 
@@ -412,7 +412,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     }
   }
 
-  private static void prefechTypeData(Collection<TypeData> typeDataList) {
+  private static void prefetchTypeData(Collection<TypeData> typeDataList) {
     // Parse bytecode in parallel by calling {@code TypeData.getCollectClassData()} in parallel.
     try {
       executor.<Void>invokeAll(Collections2.transform(typeDataList,
@@ -484,7 +484,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
       }
     }
 
-    prefechTypeData(typeDataList);
+    prefetchTypeData(typeDataList);
 
     // Add the new types to the type oracle build in progress.
     addNewTypesDontIndex(logger, typeDataList, argsLookup);

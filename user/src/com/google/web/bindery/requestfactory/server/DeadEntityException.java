@@ -21,7 +21,7 @@ package com.google.web.bindery.requestfactory.server;
  */
 class DeadEntityException extends RuntimeException {
   /**
-   * Contructs a new {@link DeadEntityException} with a given message.
+   * Constructs a new {@link DeadEntityException} with a given message.
    * 
    * @param message a message String
    */

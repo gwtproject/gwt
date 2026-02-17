@@ -203,7 +203,7 @@ public class JsniReferenceResolver {
 
     @Override
     public void endVisit(JsBinaryOperation x, JsContext ctx) {
-      // Look for the patern a.f = o.@C::m();
+      // Look for the pattern a.f = o.@C::m();
       if (!x.getOperator().isAssignment()) {
         return;
       }
@@ -277,7 +277,7 @@ public class JsniReferenceResolver {
       String originalName = jsniRef.className();
       String importedClassName = originalName;
       if (importedClassName.contains(".")) {
-        // Only retain up the first dot to support innerclasses. E.g. import c.g.A and reference
+        // Only retain up the first dot to support inner classes. E.g. import c.g.A and reference
         // @A.I::f.
         importedClassName = importedClassName.substring(0,importedClassName.indexOf("."));
       }
@@ -412,10 +412,10 @@ public class JsniReferenceResolver {
       if (isLvalue) {
         emitError(ERR_ILLEGAL_ASSIGNMENT_TO_METHOD, errorInfo, jsniRef);
       }
-      boolean needsQualifer = !target.isStatic() && !target.isConstructor();
-      if (!needsQualifer && hasQualifier) {
+      boolean needsQualifier = !target.isStatic() && !target.isConstructor();
+      if (!needsQualifier && hasQualifier) {
         emitError(ERR_UNNECESSARY_QUALIFIER_STATIC_METHOD, errorInfo, jsniRef);
-      } else if (needsQualifer && !hasQualifier) {
+      } else if (needsQualifier && !hasQualifier) {
         emitError(ERR_MISSING_QUALIFIER_INSTANCE_METHOD, errorInfo, jsniRef);
       }
 
@@ -556,8 +556,8 @@ public class JsniReferenceResolver {
      * <ul>
      * <li> %1$s -> full original jsni string </li>
      * <li> %2$s -> full original jsni classname </li>
-     * <li> %3$s -> full original jsni membername </li>
-     * <li> %4$s -> full original jsni memberspec </li>
+     * <li> %3$s -> full original jsni member name </li>
+     * <li> %4$s -> full original jsni member spec </li>
      * <li> %5$s -> full resolved jsni string </li>
      * <li> %6$s -> full resolved jsni classname </li>
      * <li> %7$s -> full resolved jsni member with signature </li>

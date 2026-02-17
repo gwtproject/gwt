@@ -162,7 +162,7 @@ public class DynaTableWidget extends Composite {
         errorDialog.setText("An RPC server could not be reached");
         errorDialog.setBody(NO_CONNECTION_MESSAGE);
       } else {
-        errorDialog.setText("Unexcepted Error processing remote call");
+        errorDialog.setText("Unexpected Error processing remote call");
         errorDialog.setBody(caught.getMessage());
       }
       errorDialog.center();

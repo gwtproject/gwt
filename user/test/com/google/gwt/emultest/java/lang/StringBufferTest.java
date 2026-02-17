@@ -112,7 +112,7 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * This method tests string creation and equality.
    */
-  public void testContructor() {
+  public void testConstructor() {
     String constant = "abcdef";
     assertEquals(new StringBuffer(constant).toString(), constant);
     assertEquals("", new StringBuffer().toString());

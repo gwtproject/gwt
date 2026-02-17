@@ -40,7 +40,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * The heart of the applicaiton, mainly concerned with bootstrapping.
+ * The heart of the application, mainly concerned with bootstrapping.
  */
 public class App {
   private static final String HISTORY_SAVE_KEY = "SAVEPLACE";

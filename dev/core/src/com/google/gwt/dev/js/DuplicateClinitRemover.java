@@ -24,8 +24,6 @@ import com.google.gwt.dev.js.ast.JsCase;
 import com.google.gwt.dev.js.ast.JsConditional;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsDefault;
-import com.google.gwt.dev.js.ast.JsEmpty;
-import com.google.gwt.dev.js.ast.JsExprStmt;
 import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsFor;
 import com.google.gwt.dev.js.ast.JsForIn;
@@ -78,52 +76,74 @@ public class DuplicateClinitRemover extends JsModVisitor {
   /**
    * Look for comma expressions that contain duplicate calls and handle the
    * conditional-evaluation case of logical and/or operations.
+   * <p>
+   * The comma case seems like it would be handled better by just visiting and removing/rewriting
+   * invocations, under the assumption that later passes would tidy up better, but the
+   * (clinit(), null) output case will leave behind the null as if it was going to be returned and
+   * thus can't be removed. Since to address that, we must handle both (xyz, clinit()) and
+   * (clinit(), clinit()) inputs, we might as well handle them all here.
    */
   @Override
   public boolean visit(JsBinaryOperation x, JsContext ctx) {
     if (x.getOperator() == JsBinaryOperator.COMMA) {
 
-      boolean left = isDuplicateCall(x.getArg1());
-      boolean right = isDuplicateCall(x.getArg2());
+      // This effectively visits any JsInvocation direct child on both sides, so take care to not
+      // encounter any clinit twice when descending further.
+      ClinitStatus left = isDuplicateCall(x.getArg1());
+      ClinitStatus right = isDuplicateCall(x.getArg2());
 
-      if (left && right) {
+      if (left == ClinitStatus.DUPLICATE_CLINIT && right == ClinitStatus.DUPLICATE_CLINIT) {
         /*
          * (clinit(), clinit()) --> delete or null.
-         *
-         * This construct is very unlikely since the InliningVisitor builds
-         * the comma expressions in a right-nested manner.
+         * Repeated inlining can cause this, if there is an earlier clinit statement/expr in the
+         * branch.
          */
         if (ctx.canRemove()) {
           ctx.removeMe();
-          return false;
         } else {
-          // The return value from an XO function is never used
+          // The return value from a clinit is never used
           ctx.replaceMe(JsNullLiteral.INSTANCE);
-          return false;
         }
-
-      } else if (left) {
-        // (clinit(), xyz) --> xyz
-        // This is the common case
-        ctx.replaceMe(accept(x.getArg2()));
         return false;
-
-      } else if (right) {
+      } else if (left == ClinitStatus.DUPLICATE_CLINIT) {
+        // (clinit(), xyz) --> xyz
+        // This is the common case for simply-inlined methods/fields.
+        if (right == ClinitStatus.NEW_CLINIT) {
+          // Don't re-visit, it was just a clinit and we already observed it
+          ctx.replaceMe(x.getArg2());
+        } else {
+          assert right == ClinitStatus.NOT_A_CLINIT;
+          // Save to re-visit, nested clinits could be removed
+          ctx.replaceMe(accept(x.getArg2()));
+        }
+        return false;
+      } else if (right == ClinitStatus.DUPLICATE_CLINIT) {
         // (xyz, clinit()) --> xyz
-        // Possible if a clinit() were the last element
-        ctx.replaceMe(accept(x.getArg1()));
+        // This can happen with multiple inlined methods, each adding a new clinit for
+        // the same class, where xyz might be the first clinit, or for a different class.
+        if (left == ClinitStatus.NEW_CLINIT) {
+          // Don't re-visit, it was just a clinit and we already observed it
+          ctx.replaceMe(x.getArg1());
+        } else {
+          assert left == ClinitStatus.NOT_A_CLINIT;
+          // Even though this is the left, it is safe to visit despite already looking at the right,
+          // since we know the right isn't a direct duplicate or supertype (we would have hit a
+          // different branch).
+          ctx.replaceMe(accept(x.getArg1()));
+        }
         return false;
       }
-
+      // Descend to both sides only if neither is a clinit at all
+      return right == ClinitStatus.NOT_A_CLINIT && left == ClinitStatus.NOT_A_CLINIT;
     } else if (x.getOperator().equals(JsBinaryOperator.AND)
         || x.getOperator().equals(JsBinaryOperator.OR)) {
       x.setArg1(accept(x.getArg1()));
       // Possibility of conditional evaluation of second parameter
       x.setArg2(branch(x.getArg2()));
       return false;
+    } else {
+      return true;
     }
-
-    return true;
   }
 
   /**
@@ -159,21 +179,6 @@ public class DuplicateClinitRemover extends JsModVisitor {
   }
 
   @Override
-  public boolean visit(JsExprStmt x, JsContext ctx) {
-    if (isDuplicateCall(x.getExpression())) {
-      if (ctx.canRemove()) {
-        ctx.removeMe();
-      } else {
-        ctx.replaceMe(new JsEmpty(x.getSourceInfo()));
-      }
-      return false;
-
-    } else {
-      return true;
-    }
-  }
-
-  @Override
   public boolean visit(JsFor x, JsContext ctx) {
     // The JsFor may have an expression xor a variable declaration.
     if (x.getInitExpr() != null) {
@@ -188,6 +193,7 @@ public class DuplicateClinitRemover extends JsModVisitor {
     }
 
     // The increment expression is optional
+    // TODO this always executes after the body, so could be a sub-branch of that
     if (x.getIncrExpr() != null) {
       x.setIncrExpr(branch(x.getIncrExpr()));
     }
@@ -227,10 +233,13 @@ public class DuplicateClinitRemover extends JsModVisitor {
    */
   @Override
   public boolean visit(JsInvocation x, JsContext ctx) {
-    JsFunction func = JsUtils.isExecuteOnce(x);
-    while (func != null) {
-      called.add(func);
-      func = func.getSuperClinit();
+    if (isDuplicateCall(x) == ClinitStatus.DUPLICATE_CLINIT) {
+      if (ctx.canRemove()) {
+        ctx.removeMe();
+      } else {
+        ctx.replaceMe(JsNullLiteral.INSTANCE);
+      }
+      return false;
     }
     return true;
   }
@@ -280,12 +289,31 @@ public class DuplicateClinitRemover extends JsModVisitor {
     return toReturn;
   }
 
-  private boolean isDuplicateCall(JsExpression x) {
+  private enum ClinitStatus {
+    NOT_A_CLINIT,
+    NEW_CLINIT,
+    DUPLICATE_CLINIT
+  }
+
+  /**
+   * If the expression is a clinit, mark it as seen, and return true if it should be removed.
+   */
+  private ClinitStatus isDuplicateCall(JsExpression x) {
     if (!(x instanceof JsInvocation)) {
-      return false;
+      return ClinitStatus.NOT_A_CLINIT;
     }
 
     JsFunction func = JsUtils.isExecuteOnce((JsInvocation) x);
-    return (func != null && called.contains(func));
+    if (func != null) {
+      if (called.contains(func)) {
+        return ClinitStatus.DUPLICATE_CLINIT;
+      }
+      while (func != null) {
+        called.add(func);
+        func = func.getSuperClinit();
+      }
+      return ClinitStatus.NEW_CLINIT;
+    }
+    return ClinitStatus.NOT_A_CLINIT;
   }
 }

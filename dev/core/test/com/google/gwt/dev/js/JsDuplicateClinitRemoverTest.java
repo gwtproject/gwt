@@ -44,7 +44,7 @@ public class JsDuplicateClinitRemoverTest extends OptimizerTestBase {
         "clinit_A()");
   }
 
-  public void ignore_testRemoveDupClinitsInExpr() throws Exception {
+  public void testRemoveDupClinitsInExpr() throws Exception {
     optimize(CLINIT_DECL,
         "value = (clinit_A(),clinit_A(), 1);")
         .into(CLINIT_DECL,

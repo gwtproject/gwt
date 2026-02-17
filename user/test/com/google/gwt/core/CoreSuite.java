@@ -15,6 +15,7 @@
  */
 package com.google.gwt.core;
 
+import com.google.gwt.core.client.EntryTest;
 import com.google.gwt.core.client.GWTTest;
 import com.google.gwt.core.client.GwtServletBaseTest;
 import com.google.gwt.core.client.JavaScriptExceptionTest;
@@ -45,6 +46,7 @@ public class CoreSuite {
   public static Test suite() {
     GWTTestSuite suite = new GWTTestSuite("All core tests");
 
+    suite.addTestSuite(EntryTest.class);
     suite.addTestSuite(GwtServletBaseTest.class);
     suite.addTestSuite(GWTTest.class);
     suite.addTestSuite(ImplTest.class);

@@ -18,7 +18,9 @@ package com.google.gwt.i18n;
 import com.google.gwt.i18n.rebind.ConstantsWithLookupImplCreatorTest;
 import com.google.gwt.i18n.rebind.LocaleUtilsTest;
 import com.google.gwt.i18n.rebind.LocalizableGeneratorTest;
+import com.google.gwt.i18n.rebind.LocalizableLinkageCreatorTest;
 import com.google.gwt.i18n.rebind.LookupMethodCreatorTest;
+import com.google.gwt.i18n.rebind.TypeOracleMessageTest;
 import com.google.gwt.i18n.server.GwtLocaleTest;
 import com.google.gwt.i18n.server.MessageFormatParserTest;
 import com.google.gwt.i18n.server.PropertyCatalogFactoryTest;
@@ -48,6 +50,7 @@ public class I18NJreSuite {
     suite.addTestSuite(GwtLocaleTest.class);
     suite.addTestSuite(LocaleUtilsTest.class);
     suite.addTestSuite(LocalizableGeneratorTest.class);
+    suite.addTestSuite(LocalizableLinkageCreatorTest.class);
     suite.addTestSuite(MessageFormatParserTest.class);
     suite.addTestSuite(com.google.gwt.i18n.rebind.MessageFormatParserTest.class);
     suite.addTestSuite(PropertyCatalogFactoryTest.class);
@@ -59,7 +62,7 @@ public class I18NJreSuite {
      * just what we want on the classpath. The test can be run manually from the
      * IDE with {dev,user}/{src,super} (no test) on the classpath.
      */
-    // suite.addTestSuite(TypeOracleMessageTest.class);
+    suite.addTestSuite(TypeOracleMessageTest.class);
     suite.addTestSuite(WordCountDirectionEstimatorTest.class);
     suite.addTestSuite(LookupMethodCreatorTest.class);
     suite.addTestSuite(ConstantsWithLookupImplCreatorTest.class);

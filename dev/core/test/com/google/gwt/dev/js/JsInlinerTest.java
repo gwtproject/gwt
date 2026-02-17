@@ -388,7 +388,7 @@ public class JsInlinerTest extends OptimizerTestBase {
     verifyOptimizedObfuscated(expected, code);
   }
 
-  private void verifyNoChange(String input) throws Exception {
+  protected void verifyNoChange(String input) throws Exception {
     optimize(input).into(input);
   }
 

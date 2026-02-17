@@ -15,20 +15,13 @@
  */
 package com.google.gwt.emultest.java.util;
 
-import com.google.gwt.junit.client.GWTTestCase;
-
 import java.util.Comparator;
 import java.util.Objects;
 
 /**
  * Tests {@link Objects}.
  */
-public class ObjectsTest extends GWTTestCase {
-
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
+public class ObjectsTest extends EmulTestBase {
 
   public void testCompare() {
     Comparator<Integer> intComparator = new Comparator<Integer>() {
@@ -166,14 +159,5 @@ public class ObjectsTest extends GWTTestCase {
         () -> Objects.checkFromIndexSize(1, 10,  5));
     assertThrows(IndexOutOfBoundsException.class,
         () -> Objects.checkFromIndexSize(1, -5,  5));
-  }
-
-  private void assertThrows(Class<? extends Exception> thrownCheck, Runnable toTest) {
-    try {
-      toTest.run();
-      fail("Should have failed");
-    } catch (Exception ex) {
-      assertEquals(thrownCheck, ex.getClass());
-    }
   }
 }

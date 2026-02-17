@@ -162,6 +162,22 @@ public class FloatTest extends GWTTestCase {
     }
   }
 
+  public void testToHexString() {
+    assertEquals("-0x1.0p0", Float.toHexString(-1.0f));
+    assertEquals("0x1.0p0", Float.toHexString(1.0f));
+    assertEquals("0x1.0p1", Float.toHexString(2.0f));
+    assertEquals("0x1.8p1", Float.toHexString(3.0f));
+    assertEquals("0x1.5p5", Float.toHexString(42.0f));
+    assertEquals("0x1.81c8p13", Float.toHexString(12345.0f));
+    assertEquals("0x0.0p0", Float.toHexString(0.0f));
+    assertEquals("-0x0.0p0", Float.toHexString(-0.0f));
+    assertEquals("Infinity", Float.toHexString(Float.POSITIVE_INFINITY));
+    assertEquals("-Infinity", Float.toHexString(Float.NEGATIVE_INFINITY));
+    assertEquals("NaN", Float.toHexString(Float.NaN));
+    assertEquals("0x1.0p-126", Float.toHexString(Float.MIN_NORMAL));
+    assertEquals("0x0.8p-126", Float.toHexString(Float.MIN_NORMAL / 2));
+  }
+
   public void testFloatBits() {
     compareFloatBits(0x1, 1.401298464324817E-45F);
     compareFloatBits(0x2, 1.401298464324817E-45F * 2.0F);

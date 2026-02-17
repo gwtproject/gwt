@@ -144,6 +144,10 @@ public final class System {
     System.out = out;
   }
 
+  public static String lineSeparator() {
+    return "\n";
+  }
+
   private static boolean arrayTypeMatch(Class<?> srcComp, Class<?> destComp) {
     if (srcComp.isPrimitive()) {
       return srcComp.equals(destComp);

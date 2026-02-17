@@ -121,6 +121,23 @@ public final class Double extends Number implements Comparable<Double> {
     return new Double(s);
   }
 
+  public static String toHexString(double d) {
+    if (!Double.isFinite(d)) {
+      return Double.toString(d);
+    }
+    int exp = Math.abs(d) == 0 ? -1 : Math.getExponent(d);
+    long allBits = Double.doubleToLongBits(d);
+    String sign = allBits < 0 ? "-" : "";
+    long significantBits = allBits & 0xfffffffffffffL;
+    String unsignedPrefix =  "0x1.";
+    if (Math.abs(d) < Double.MIN_NORMAL) {
+      unsignedPrefix = "0x0.";
+      exp++;
+    }
+    return sign + unsignedPrefix + Long.toString(significantBits,16)
+        .replaceFirst("(.)0+$", "$1") + "p" + exp;
+  }
+
   public Double(double value) {
     /*
      * Call to $create(value) must be here so that the method is referenced and not

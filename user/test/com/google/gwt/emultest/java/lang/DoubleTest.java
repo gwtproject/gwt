@@ -256,6 +256,25 @@ public class DoubleTest extends GWTTestCase {
     }
   }
 
+  public void testToHexString() {
+    assertEquals("-0x1.0p0", Double.toHexString(-1.0));
+    assertEquals("0x1.0p0", Double.toHexString(1.0));
+    assertEquals("0x1.0p1", Double.toHexString(2.0));
+    assertEquals("0x1.8p1", Double.toHexString(3.0));
+    assertEquals("0x1.81c8p13", Double.toHexString(12345.0));
+    assertEquals("0x1.0p-1022", Double.toHexString(Double.MIN_NORMAL));
+    assertEquals("0x0.8p-1022", Double.toHexString(Double.MIN_NORMAL / 2));
+    assertEquals("0x0.cp-1022", Double.toHexString(Double.MIN_NORMAL / 4 * 3));
+    assertEquals("0x1.7e43c8800759cp996", Double.toHexString(1.0E300));
+    assertEquals("-0x1.7e43c8800759cp996", Double.toHexString(-1.0E300));
+    assertEquals("0x1.0p-1021", Double.toHexString(4.450147717014403E-308));
+    assertEquals("0x0.0p0", Double.toHexString(0.0));
+    assertEquals("-0x0.0p0", Double.toHexString(-0.0));
+    assertEquals("Infinity", Double.toHexString(Double.POSITIVE_INFINITY));
+    assertEquals("-Infinity", Double.toHexString(Double.NEGATIVE_INFINITY));
+    assertEquals("NaN", Double.toHexString(Double.NaN));
+  }
+
   public void testDoubleBits() {
     // special values
     compareDoubleBits(0x0000000000000000L, 0.0);

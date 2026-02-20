@@ -43,7 +43,8 @@ public class JsStaticEvalTest extends OptimizerTestBase {
     assertEquals("alert(a&&b||c&&d);",
         optimize("alert((a && b) || ( c && d));"));
     assertEquals("a(),b&&c();", optimize("a(), b && c()"));
-    assertEquals("a()&&b,c();", optimize("a() && b, c()"));
+    assertEquals("a()&&b(),c();", optimize("a() && b(), c()"));
+    assertEquals("a(),c();", optimize("a() && b, c()"));
 
     // Don't damage math expressions
     assertEquals("alert(seconds/3600);",
@@ -53,8 +54,8 @@ public class JsStaticEvalTest extends OptimizerTestBase {
     assertEquals("alert(1-(1-foo));", optimize("alert(1 - (1 - foo))"));
 
     // Don't damage assignments
-    assertEquals("alert((a=0,b=foo));",
-        optimize("alert((a = 0, b = (bar, foo)))"));
+    assertEquals("alert((a=7,b=foo));",
+        optimize("alert((a = 7, b = (bar, foo)))"));
     assertEquals("alert(1+(a='2')+3+4);",
         optimize("alert(1 + (a = '2') + 3 + 4);"));
     assertEquals("alert(1+(a='2')+7);",
@@ -152,6 +153,63 @@ public class JsStaticEvalTest extends OptimizerTestBase {
     assertEquals("alert(true);", optimize("alert(\"a\" !== \"b\")"));
     assertEquals("alert(true);", optimize("alert(\"a\" != null)"));
     assertEquals("alert(true);", optimize("alert(\"a\" !== null)"));
+  }
+
+  public void testShortCircuitAnd() throws Exception {
+    assertEquals("alert(a);", optimize("alert(true && a)"));
+    assertEquals("alert(false);", optimize("alert(false && a)"));
+
+    // these can't be simplified to maintain type
+    assertEquals("alert(a&&true);", optimize("alert(a && true)"));
+    assertEquals("alert(a&&false);", optimize("alert(a && false)"));
+    assertEquals("alert(!!a&&!!b);", optimize("alert(!!a && !!b)"));
+    assertEquals("alert(c|(bits&&1));", optimize("alert(c | (a, bits && 1))"));
+
+    // in boolean context we can simplify more
+    assertEquals("alert(a&&b?c:d);", optimize("alert(!!a && !!b ? c :d)"));
+    assertEquals("alert(d);", optimize("alert(false && !!b ? c :d)"));
+    assertEquals("alert(b?c:d);", optimize("alert(true && !!b ? c :d)"));
+    assertEquals("alert(b?c:d1);", optimize("alert(b && true ? c :d1)"));
+    assertEquals("alert(d1);", optimize("alert(b && false ? c :d1)"));
+    assertEquals("alert(d2);", optimize("alert(a && false && b ? c :d2)"));
+  }
+
+  public void testShortCircuitAndWithSideEffects() throws Exception {
+    assertEquals("a&&b();", optimize("!!a && !!b()"));
+    assertEquals("a();", optimize("a() && false && c();"));
+    assertEquals("a(),e();", optimize("a() && false && c() ? d() : e();"));
+    assertEquals("a()&&c()?d():e();", optimize("a() && true && c() ? d() : e();"));
+  }
+
+  public void testSimplifyComma() throws Exception {
+    assertEquals("alert(!!a());", optimize("alert((true, !!a()))"));
+    assertEquals("alert((a(),true));", optimize("alert((!!a(), true))"));
+  }
+
+  public void testShortCircuitOr() throws Exception {
+    assertEquals("alert(true);", optimize("alert(true || a)"));
+    assertEquals("alert(a);", optimize("alert(false || a)"));
+
+    // these can't be simplified to maintain type
+    assertEquals("alert(a||true);", optimize("alert(a || true)"));
+    assertEquals("alert(a||false);", optimize("alert(a || false)"));
+    assertEquals("alert(!!a||!!b);", optimize("alert(!!a || !!b)"));
+    assertEquals("alert(c|(bits||0));", optimize("alert(c | (a, bits || 0))"));
+
+    // in boolean context we can simplify more
+    assertEquals("alert(a||b?c:d);", optimize("alert(!!a || !!b ? c :d)"));
+    assertEquals("alert(c);", optimize("alert(true || !!b ? c :d)"));
+    assertEquals("alert(b?c:d);", optimize("alert(false || !!b ? c :d)"));
+    assertEquals("alert(b?c:d1);", optimize("alert(b || false ? c :d1)"));
+    assertEquals("alert(c1);", optimize("alert(b || true ? c1 :d)"));
+    assertEquals("alert(c2);", optimize("alert(a || true || b ? c2 :d)"));
+  }
+
+  public void testShortCircuitOrWithSideEffects() throws Exception {
+    assertEquals("a||b();", optimize("!!a || !!b()"));
+    assertEquals("a();", optimize("a() || true || c();"));
+    assertEquals("a(),d();", optimize("a() || true || c() ? d() : e();"));
+    assertEquals("a()||c()?d():e();", optimize("a() || false || c() ? d() : e();"));
   }
 
   public void testLiteralEqNull() throws Exception {

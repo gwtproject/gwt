@@ -74,6 +74,18 @@ public class DuplicateClinitRemover extends JsModVisitor {
   }
 
   /**
+   * Given a JsInvocation, determine if it is invoking a JsFunction that is
+   * specified to be executed only once during the program's lifetime.
+   */
+  public static JsFunction isClinit(JsInvocation invocation) {
+    JsFunction f = JsUtils.isFunction(invocation.getQualifier());
+    if (f != null && f.isClinit()) {
+      return f;
+    }
+    return null;
+  }
+
+  /**
    * Look for comma expressions that contain duplicate calls and handle the
    * conditional-evaluation case of logical and/or operations.
    * <p>
@@ -303,7 +315,7 @@ public class DuplicateClinitRemover extends JsModVisitor {
       return ClinitStatus.NOT_A_CLINIT;
     }
 
-    JsFunction func = JsUtils.isExecuteOnce((JsInvocation) x);
+    JsFunction func = isClinit((JsInvocation) x);
     if (func != null) {
       if (called.contains(func)) {
         return ClinitStatus.DUPLICATE_CLINIT;

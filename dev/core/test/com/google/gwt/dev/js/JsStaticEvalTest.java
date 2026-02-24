@@ -88,7 +88,8 @@ public class JsStaticEvalTest extends OptimizerTestBase {
 
   /**
    * Test for issue 7088. JsStatic eval infinite loop in
-   * {@link JsStaticEval.StaticEvalVisitor#endVisit(JsBlock, JsContext)}
+   * {@link JsStaticEval.StaticEvalVisitor#endVisit(com.google.gwt.dev.js.ast.JsBlock,
+   * com.google.gwt.dev.js.ast.JsContext)}
    */
   public void testDeclareAfterReturn() throws Exception {
     // TODO(rluble):  Note that the source output has the wrong precedence for function definition
@@ -179,6 +180,7 @@ public class JsStaticEvalTest extends OptimizerTestBase {
     assertEquals("a();", optimize("a() && false && c();"));
     assertEquals("a(),e();", optimize("a() && false && c() ? d() : e();"));
     assertEquals("a()&&c()?d():e();", optimize("a() && true && c() ? d() : e();"));
+    assertEquals("a()&&b();", optimize("a()&&(b(),undefined)"));
   }
 
   public void testSimplifyComma() throws Exception {

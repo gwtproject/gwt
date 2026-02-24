@@ -50,6 +50,7 @@ import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.js.ast.JsWhile;
 import com.google.gwt.dev.js.rhino.ScriptRuntime;
 import com.google.gwt.dev.util.Ieee754_64_Arithmetic;
+import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -159,7 +160,8 @@ public class JsStaticEval {
    * {@link com.google.gwt.dev.jjs.impl.DeadCodeElimination}, such as ignored
    * expression results.
    */
-  private class StaticEvalVisitor extends JsModVisitor {
+  @VisibleForTesting
+  static class StaticEvalVisitor extends JsModVisitor {
 
     /**
      * Stores how are expression evaluations used.

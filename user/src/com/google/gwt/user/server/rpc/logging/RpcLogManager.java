@@ -39,7 +39,6 @@ public class RpcLogManager {
   public static final String PROVIDER_PARAMETER_KEY = "gwt.rpc.logging";
   private static final ConcurrentHashMap<String, RpcLogger> loggers = new ConcurrentHashMap<>();
   private static volatile RpcLoggerProvider loggerProvider;
-  private static final Object initLock = new Object();
 
   /**
    * Creates or retrieves a logger for the fully qualified name of the given class.
@@ -57,8 +56,8 @@ public class RpcLogManager {
    * @param servletContext the servlet context to use
    */
   public static void setServletContext(ServletContext servletContext) {
-    if (loggerProvider instanceof ServletContextLoggerProvider) {
-      ((ServletContextLoggerProvider) loggerProvider).setServletContext(servletContext);
+    if (getLoggerProvider() instanceof ServletContextLoggerProvider) {
+      ((ServletContextLoggerProvider) getLoggerProvider()).setServletContext(servletContext);
     }
   }
 
@@ -71,29 +70,15 @@ public class RpcLogManager {
    */
   private static RpcLoggerProvider getLoggerProvider() {
     if (loggerProvider == null) {
-      initialize();
-    }
-    return loggerProvider;
-  }
-
-  /**
-   * Initializes the {@link RpcLoggerProvider}, attempting to use a name from a system property.
-   * <br />
-   * If no name is supplied, it will use the first loaded provider for which
-   * {@link RpcLoggerProvider#isDefault()} returns true.
-   * <br />
-   * If no such provider is found, it will fall back to {@link ServletContextLoggerProvider}.
-   * <br />
-   * If the provider is already initialized, no action is taken.
-   */
-  private static void initialize() {
-    String providerName = System.getProperty(PROVIDER_PARAMETER_KEY);
-    synchronized (initLock) {
-      if (loggerProvider == null) {
-        RpcLoggerProvider fallback = new ServletContextLoggerProvider();
-        loggerProvider = loadProvider(providerName, fallback);
+      synchronized (RpcLogManager.class) {
+        if (loggerProvider == null) {
+          RpcLoggerProvider fallback = new ServletContextLoggerProvider();
+          String providerName = System.getProperty(PROVIDER_PARAMETER_KEY);
+          loggerProvider = loadProvider(providerName, fallback);
+        }
       }
     }
+    return loggerProvider;
   }
 
   /**

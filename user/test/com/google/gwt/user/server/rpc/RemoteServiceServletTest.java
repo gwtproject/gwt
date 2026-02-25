@@ -79,7 +79,7 @@ public class RemoteServiceServletTest extends TestCase {
     }
 
     public String getInitParameter(String arg0) {
-      return null;
+      throw new UnsupportedOperationException();
     }
 
     public Enumeration<String> getInitParameterNames() {
@@ -118,7 +118,7 @@ public class RemoteServiceServletTest extends TestCase {
     }
 
     public String getInitParameter(String arg0) {
-      return null;
+      throw new UnsupportedOperationException();
     }
 
     public Enumeration<String> getInitParameterNames() {
@@ -353,6 +353,7 @@ public class RemoteServiceServletTest extends TestCase {
     mockRequest.contextPath = "/foo";
     SerializationPolicy serializationPolicy = rss.doGetSerializationPolicy(
         mockRequest, "http://www.google.com/MyModule", "");
+    assertNotNull(mockContext.messageLogged);
     assertNull(serializationPolicy);
   }
 

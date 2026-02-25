@@ -164,6 +164,17 @@
           </tokenfilter>
         </filterchain>
       </move>
+      <move todir="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/logging/jakarta">
+	    <fileset dir="${project.build}/no-servlet-src/com/google/gwt/user/server/rpc/logging">
+	      <include name="**/*.java"/>
+	    </fileset>
+        <filterchain>
+          <tokenfilter>
+            <replacestring from="package com.google.gwt.user.server.rpc.logging" to="package com.google.gwt.user.server.rpc.logging.jakarta"/>
+            <replacestring from="javax.servlet" to="jakarta.servlet"/>
+          </tokenfilter>
+        </filterchain>
+      </move>
       <move todir="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/jakarta">
         <filelist dir="${project.build}/no-servlet-src/com/google/gwt/user/server/rpc">
           <file name="AbstractRemoteServiceServlet.java"/>
@@ -179,6 +190,7 @@
           <tokenfilter>
             <replacestring from="package com.google.gwt.user.server.rpc" to="package com.google.gwt.user.server.rpc.jakarta"/>
             <replacestring from="com.google.gwt.user.server.Util" to="com.google.gwt.user.server.jakarta.Util"/>
+            <replacestring from="com.google.gwt.user.server.rpc.logging" to="com.google.gwt.user.server.rpc.logging.jakarta"/>
             <replacestring from="javax.servlet" to="jakarta.servlet"/>
           </tokenfilter>
         </filterchain>

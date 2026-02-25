@@ -24,6 +24,8 @@ import static javaemul.internal.InternalPreconditions.checkStringElementIndex;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.lang.constant.Constable;
+import java.lang.constant.ConstantDesc;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.Comparator;
@@ -55,7 +57,7 @@ import jsinterop.annotations.JsType;
 // Needed to have constructors not fail compilation internally at Google
 @SuppressWarnings({ "ReturnValueIgnored", "unusable-by-js" })
 public final class String implements Comparable<String>, CharSequence,
-    Serializable {
+    Serializable, Constable, ConstantDesc {
   /* TODO(jat): consider whether we want to support the following methods;
    *
    * <ul>

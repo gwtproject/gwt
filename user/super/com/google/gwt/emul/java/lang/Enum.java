@@ -21,6 +21,7 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import com.google.gwt.core.client.JavaScriptObject;
 
 import java.io.Serializable;
+import java.lang.constant.Constable;
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsType;
@@ -31,7 +32,7 @@ import jsinterop.annotations.JsType;
  * @param <E>
  */
 @JsType
-public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializable {
+public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializable, Constable {
 
   @JsIgnore
   public static <T extends Enum<T>> T valueOf(Class<T> enumType, String name) {

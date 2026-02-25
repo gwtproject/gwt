@@ -15,12 +15,14 @@
  */
 package java.lang;
 
+import java.lang.constant.Constable;
+import java.lang.constant.ConstantDesc;
 import javaemul.internal.JsUtils;
 
 /**
  * Wraps a primitive <code>float</code> as an object.
  */
-public final class Float extends Number implements Comparable<Float> {
+public final class Float extends Number implements Comparable<Float>, Constable, ConstantDesc {
   public static final float MAX_VALUE = 3.4028235e+38f;
   public static final float MIN_VALUE = 1.4e-45f;
   public static final int MAX_EXPONENT = 127;

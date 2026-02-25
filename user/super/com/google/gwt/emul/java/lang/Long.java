@@ -15,11 +15,13 @@
  */
 package java.lang;
 
+import java.lang.constant.Constable;
+import java.lang.constant.ConstantDesc;
 import javaemul.internal.LongUtils;
 import javaemul.internal.annotations.HasNoSideEffects;
 
 /** Wraps a primitive <code>long</code> as an object. */
-public final class Long extends Number implements Comparable<Long> {
+public final class Long extends Number implements Comparable<Long>, Constable, ConstantDesc {
 
   /** Use nested class to avoid clinit on outer. */
   static class BoxedValues {

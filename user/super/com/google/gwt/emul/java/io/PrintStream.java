@@ -19,7 +19,7 @@ package java.io;
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html">the official Java
  * API doc</a> for details.
  */
-public class PrintStream extends FilterOutputStream {
+public class PrintStream extends FilterOutputStream implements Appendable {
 
   /** Indicates whether or not this PrintStream has incurred an error. */
   private boolean ioError = false;
@@ -194,5 +194,23 @@ public class PrintStream extends FilterOutputStream {
 
   private void newline() {
     print('\n');
+  }
+
+  @Override
+  public Appendable append(CharSequence csq) {
+    print(csq);
+    return this;
+  }
+
+  @Override
+  public Appendable append(CharSequence csq, int start, int end) {
+    print(csq.subSequence(start, end));
+    return this;
+  }
+
+  @Override
+  public Appendable append(char c) {
+    print(c);
+    return this;
   }
 }

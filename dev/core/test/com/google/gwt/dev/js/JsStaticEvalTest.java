@@ -180,7 +180,11 @@ public class JsStaticEvalTest extends OptimizerTestBase {
     assertEquals("a();", optimize("a() && false && c();"));
     assertEquals("a(),e();", optimize("a() && false && c() ? d() : e();"));
     assertEquals("a()&&c()?d():e();", optimize("a() && true && c() ? d() : e();"));
+  }
+
+  public void testSimplifyCommaInVoidContext() throws Exception {
     assertEquals("a()&&b();", optimize("a()&&(b(),undefined)"));
+    assertEquals("a()?b():c();", optimize("a()?(b(),undefined):(c(),undefined)"));
   }
 
   public void testSimplifyComma() throws Exception {

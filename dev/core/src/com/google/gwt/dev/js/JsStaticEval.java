@@ -293,6 +293,8 @@ public class JsStaticEval {
     @Override
     public void endVisit(JsConditional x, JsContext ctx) {
       evalContext.remove(x.getTestExpression());
+      evalContext.remove(x.getThenExpression());
+      evalContext.remove(x.getElseExpression());
 
       JsExpression condExpr = x.getTestExpression();
       JsExpression thenExpr = x.getThenExpression();
@@ -487,6 +489,11 @@ public class JsStaticEval {
     @Override
     public boolean visit(JsConditional x, JsContext ctx) {
       evalContext.put(x.getTestExpression(), EvalMode.BOOL);
+      EvalMode evalMode = evalContext.get(x);
+      if (evalMode != null) {
+        evalContext.put(x.getThenExpression(), evalMode);
+        evalContext.put(x.getElseExpression(), evalMode);
+      }
       return true;
     }
 

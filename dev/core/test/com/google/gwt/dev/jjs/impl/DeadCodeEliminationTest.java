@@ -298,6 +298,10 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
             + "static int f1;"
             + "static A createA() { A.f1 = 1; return new A(); } "
             + "static boolean booleanWithSideEffects() { createA(); return true;}"
+            + "@javaemul.internal.annotations.DoNotInline "
+            + "static boolean notInlinedBool1() { return true;}"
+            + "@javaemul.internal.annotations.DoNotInline "
+            + "static boolean notInlinedBool2() { return true;}"
             + "static boolean booleanWithoutSideEffects() { return true;}"
             + "static int arithmeticWithSideEffects() { createA(); return 4;}"
             + "}");
@@ -310,6 +314,28 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
 
     optimizeExpressions(false, "boolean", "false && A.booleanWithSideEffects()")
         .intoString("return false;");
+
+    optimizeExpressions(false, "boolean", "A.notInlinedBool1() && false")
+        .intoString("return (EntryPoint$A.notInlinedBool1(), false);");
+
+    optimizeExpressions(false, "int",
+        "A.notInlinedBool1() && (false && A.notInlinedBool2()) ? 1 : 2")
+        .intoString("return (EntryPoint$A.notInlinedBool1(), 2);");
+
+    optimizeExpressions(false, "int",
+        "(A.notInlinedBool1() && false) && A.notInlinedBool2() ? 1 : 2")
+        .intoString("return (EntryPoint$A.notInlinedBool1(), 2);");
+
+    optimizeExpressions(false, "boolean", "A.notInlinedBool1() || true")
+        .intoString("return (EntryPoint$A.notInlinedBool1(), true);");
+
+    optimizeExpressions(false, "int",
+        "A.notInlinedBool1() || (true || A.notInlinedBool2()) ? 1 : 2")
+        .intoString("return (EntryPoint$A.notInlinedBool1(), 1);");
+
+    optimizeExpressions(false, "int",
+        "(A.notInlinedBool1() || true) || A.notInlinedBool2() ? 1 : 2")
+        .intoString("return (EntryPoint$A.notInlinedBool1(), 1);");
 
     optimizeExpressions(false, "int", "3 + A.arithmeticWithSideEffects()")
         .intoString("return (EntryPoint$A.f1 = 1, new EntryPoint$A(), 7);");

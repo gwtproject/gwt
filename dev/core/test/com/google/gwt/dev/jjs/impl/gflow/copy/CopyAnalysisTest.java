@@ -79,7 +79,6 @@ public class CopyAnalysisTest extends CfgAnalysisTestBase<CopyAssumption> {
         "STMT -> [* {j = i}]",
         "READ(b) -> [* {j = i}]",
         "COND (EntryPoint.b) -> [THEN=* {j = i}, ELSE=1 {j = i}]",
-        "BLOCK -> [* {j = i}]",
         "STMT -> [* {j = i}]",
         "WRITE(j, 1) -> [* {j = T}]",
         "1: STMT -> [* {j = T}]",

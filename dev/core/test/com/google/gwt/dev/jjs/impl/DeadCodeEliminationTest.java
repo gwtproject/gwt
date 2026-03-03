@@ -268,7 +268,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
     optimize("void", "for (i = 1; B.isFalse(); i++) { i = 2; }")
         .intoString("EntryPoint.i = 1;");
     optimize("void", "for (i = 1; i < 5; i++) { i = 2; }")
-        .intoString("for (EntryPoint.i = 1; EntryPoint.i < 5; EntryPoint.i++) {\n  EntryPoint.i = 2;\n}");
+        .intoString("for (EntryPoint.i = 1; EntryPoint.i < 5; EntryPoint.i++)\n  EntryPoint.i = 2;");
   }
 
   /**
@@ -371,9 +371,9 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
     optimize("void", "do {} while (false);").intoString("");
     optimize("void", "do { i++; } while (false);").intoString("++EntryPoint.i;");
     optimize("void", "do { break; } while (false);").intoString(
-        "do {",
+        "do",
         "  break;",
-        "} while (false);");
+        "while (false);");
   }
 
   public void testNegationOptimizations() throws Exception {
@@ -545,7 +545,10 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
       // If m is processed first, it will see the constructor as having side effects.
       // Then the constructor will become empty enabling m() become empty in the next round.
       //
-      assertEquals(0, DeadCodeElimination.exec(program, method));
+      String before = method.toSource();
+      int moreMods = DeadCodeElimination.exec(program, method);
+      String after = method.toSource();
+      assertEquals("before: " + before + ", after: " + after, 0, moreMods);
     }
     return mods > 0;
   }

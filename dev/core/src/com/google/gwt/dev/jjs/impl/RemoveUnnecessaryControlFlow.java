@@ -1,8 +1,22 @@
+/*
+ * Copyright 2026 GWT Project Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
+ */
 package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JBlock;
 import com.google.gwt.dev.jjs.ast.JBreakStatement;
+import com.google.gwt.dev.jjs.ast.JContinueStatement;
 import com.google.gwt.dev.jjs.ast.JDoStatement;
 import com.google.gwt.dev.jjs.ast.JForStatement;
 import com.google.gwt.dev.jjs.ast.JIfStatement;
@@ -21,9 +35,16 @@ import java.util.List;
  * Finds return statements that are effectively at the end of a void method and removes them,
  * or replaces them with something shorter in compiled output (e.g. break instead of return in a
  * loop).
+ * <p>
+ * Additionally, finds "continue" statements (without labels) at the end of a loop (or in a non-loop
+ * block) and removes them as unnecessary.
+ * <p>
+ * Presently may require multiple passes to converge, but since it is unlikely to remove many such
+ * statements, this will be addressed by just allowing another loop to find the changes. Additional
+ * changes from other optimizations (mostly DCE) can expose other opportunities for this pass.
  */
 public class RemoveUnnecessaryControlFlow {
-  private static String NAME = RemoveUnnecessaryControlFlow.class.getSimpleName();
+  private static final String NAME = RemoveUnnecessaryControlFlow.class.getSimpleName();
 
   public static int exec(JProgram program, OptimizerContext optimizerCtx) {
     try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
@@ -38,6 +59,7 @@ public class RemoveUnnecessaryControlFlow {
 
   private static class RewriteUnnecessaryReturnsVisitor extends JModVisitor {
     private final OptimizerContext optimizerCtx;
+    private JMethod currentMethod;
 
     public RewriteUnnecessaryReturnsVisitor(OptimizerContext optimizerCtx) {
       this.optimizerCtx = optimizerCtx;
@@ -45,10 +67,32 @@ public class RemoveUnnecessaryControlFlow {
 
     @Override
     public boolean visit(JMethod x, Context ctx) {
+      currentMethod = x;
       if (x.getType() == JPrimitiveType.VOID && x.getBody() instanceof JMethodBody b) {
-        BlockLevel.BLOCK.update(x, b.getBlock(), optimizerCtx);
+        BlockLevel.BLOCK.updateReturns(x, b.getBlock(), optimizerCtx);
       }
-      return false;
+      return true;
+    }
+
+    @Override
+    public void endVisit(JMethod x, Context ctx) {
+      currentMethod = null;
+    }
+
+    @Override
+    public void endVisit(JForStatement x, Context ctx) {
+      assert currentMethod != null;
+      BlockLevel.LOOP.updateContinues(currentMethod, x.getBody(), optimizerCtx);
+    }
+
+    @Override
+    public void endVisit(JWhileStatement x, Context ctx) {
+      BlockLevel.LOOP.updateContinues(currentMethod, x.getBody(), optimizerCtx);
+    }
+
+    @Override
+    public void endVisit(JDoStatement x, Context ctx) {
+      BlockLevel.LOOP.updateContinues(currentMethod, x.getBody(), optimizerCtx);
     }
 
     private enum BlockLevel {
@@ -62,7 +106,7 @@ public class RemoveUnnecessaryControlFlow {
        */
       LOOP {
         @Override
-        protected void rewrite(List<JStatement> stmts, int lastIndex) {
+        protected void rewriteReturns(List<JStatement> stmts, int lastIndex) {
           stmts.set(lastIndex, new JBreakStatement(stmts.get(lastIndex).getSourceInfo(), null));
         }
       },
@@ -72,45 +116,73 @@ public class RemoveUnnecessaryControlFlow {
        */
       LOOP_IN_LOOP {
         @Override
-        public void update(JMethod containingMethod, JBlock block, OptimizerContext ctx) {
+        public void updateReturns(JMethod containingMethod, JBlock block, OptimizerContext ctx) {
           // no-op, we can't do anything
         }
       };
 
-      public void update(JMethod containingMethod, JBlock block, OptimizerContext ctx) {
+      public void updateReturns(JMethod containingMethod, JBlock block, OptimizerContext ctx) {
         List<JStatement> stmts = block.getStatements();
         if (stmts.isEmpty()) {
           return;
         }
         int lastIndex = stmts.size() - 1;
-        if (stmts.get(lastIndex) instanceof JReturnStatement ret && ret.getExpr() == null) {
-          rewrite(stmts, lastIndex);
+        JStatement lastStmt = stmts.get(lastIndex);
+        if (lastStmt instanceof JReturnStatement ret && ret.getExpr() == null) {
+          rewriteReturns(stmts, lastIndex);
           ctx.markModified(containingMethod);
 
           if (stmts.isEmpty()) {
             return;
           }
-          lastIndex = stmts.size() - 1;
+          lastStmt = stmts.get(stmts.size() - 1);
         }
         // Even if we already made a change, continue on, we could have an earlier return in a branch
         // or a loop. None of these will remove the statement in question, so we don't need to iterate.
+        if (lastStmt instanceof JBlock b) {
+          updateReturns(containingMethod, b, ctx);
+        } else if (lastStmt instanceof JIfStatement ifStmt) {
+          updateReturns(containingMethod, ifStmt.getThenStmt(), ctx);
+          updateReturns(containingMethod, ifStmt.getElseStmt(), ctx);
+        } else if (lastStmt instanceof JWhileStatement whileStmt) {
+          loop().updateReturns(containingMethod, whileStmt.getBody(), ctx);
+        } else if (lastStmt instanceof JForStatement forStmt) {
+          loop().updateReturns(containingMethod, forStmt.getBody(), ctx);
+        } else if (lastStmt instanceof JDoStatement doStmt) {
+          loop().updateReturns(containingMethod, doStmt.getBody(), ctx);
+        }
 
-        if (stmts.get(lastIndex) instanceof JBlock b) {
-          update(containingMethod, b, ctx);
-        } else if (stmts.get(lastIndex) instanceof JIfStatement ifStmt) {
-          update(containingMethod, ifStmt.getThenStmt(), ctx);
-          update(containingMethod, ifStmt.getElseStmt(), ctx);
-        } else if (stmts.get(lastIndex) instanceof JWhileStatement whileStmt) {
-          loop().update(containingMethod, whileStmt.getBody(), ctx);
-        } else if (stmts.get(lastIndex) instanceof JForStatement forStmt) {
-          loop().update(containingMethod, forStmt.getBody(), ctx);
-        } else if (stmts.get(lastIndex) instanceof JDoStatement doStmt) {
-          loop().update(containingMethod, doStmt.getBody(), ctx);
-        } // TODO handle switches, try/catch/finally
-
+        // TODO handle switches, try/catch/finally
       }
 
-      protected void rewrite(List<JStatement> stmts, int lastIndex) {
+      public void updateContinues(JMethod containingMethod, JBlock block, OptimizerContext ctx) {
+        if (block.isEmpty()) {
+          return;
+        }
+        List<JStatement> stmts = block.getStatements();
+        int lastIndex = stmts.size() - 1;
+        JStatement lastStmt = stmts.get(lastIndex);
+        if (stmts.get(lastIndex) instanceof JContinueStatement cont && cont.getLabel() == null) {
+          stmts.remove(lastIndex);
+          ctx.markModified(containingMethod);
+
+          if (stmts.isEmpty()) {
+            return;
+          }
+          lastStmt = stmts.get(stmts.size() - 1);
+        }
+
+        if (lastStmt instanceof JBlock b) {
+          updateContinues(containingMethod, b, ctx);
+        } else if (lastStmt instanceof JIfStatement ifStmt) {
+          updateContinues(containingMethod, ifStmt.getThenStmt(), ctx);
+          updateContinues(containingMethod, ifStmt.getElseStmt(), ctx);
+        } // Don't handle nested loops here, will be handled when visited.
+
+        // TODO handle switches, try/catch/finally
+      }
+
+      protected void rewriteReturns(List<JStatement> stmts, int lastIndex) {
         stmts.remove(lastIndex);
       }
 

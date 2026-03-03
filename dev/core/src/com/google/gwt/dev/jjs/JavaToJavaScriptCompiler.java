@@ -107,6 +107,7 @@ import com.google.gwt.dev.jjs.impl.Pruner;
 import com.google.gwt.dev.jjs.impl.RecordRebinds;
 import com.google.gwt.dev.jjs.impl.RemoveEmptySuperCalls;
 import com.google.gwt.dev.jjs.impl.RemoveSpecializations;
+import com.google.gwt.dev.jjs.impl.RemoveUnnecessaryControlFlow;
 import com.google.gwt.dev.jjs.impl.ReplaceCallsToNativeJavaLangObjectOverrides;
 import com.google.gwt.dev.jjs.impl.ReplaceGetClassOverrides;
 import com.google.gwt.dev.jjs.impl.ResolvePermutationDependentValues;
@@ -1471,6 +1472,7 @@ public final class JavaToJavaScriptCompiler {
         stats.recordModified(MethodCallTightener.exec(jprogram, optimizerCtx));
         // Note: Specialization should be done before inlining.
         stats.recordModified(MethodCallSpecializer.exec(jprogram, optimizerCtx));
+        stats.recordModified(RemoveUnnecessaryControlFlow.exec(jprogram, optimizerCtx));
         stats.recordModified(DeadCodeElimination.exec(jprogram, optimizerCtx));
         stats.recordModified(MethodInliner.exec(jprogram, optimizerCtx));
         if (options.shouldInlineLiteralParameters()) {

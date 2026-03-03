@@ -197,7 +197,7 @@
           description="Validates that the standalone gwt-compiler project can build.">
     <mkdir dir="${javac.out}"/>
     <gwt.javac srcdir="core/super" excludes="com/google/gwt/dev/jjs/intrinsic/"/>
-    <gwt.javac srcdir="core/src">
+    <gwt.javac srcdir="core/src" release="17">
       <include name="com/google/gwt/core/ext/**"/>
       <include name="com/google/gwt/core/linker/**"/>
       <include name="com/google/gwt/dev/About.java"/>

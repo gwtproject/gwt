@@ -37,6 +37,7 @@ import com.google.gwt.i18n.client.I18N_pa_Arab_Test;
 import com.google.gwt.i18n.client.I18N_pa_PK_Test;
 import com.google.gwt.i18n.client.LocaleInfoTest;
 import com.google.gwt.i18n.client.LocaleInfo_ar_Test;
+import com.google.gwt.i18n.client.LocaleInfo_en_Test;
 import com.google.gwt.i18n.client.LocalizedNames_default_Test;
 import com.google.gwt.i18n.client.LocalizedNames_en_Test;
 import com.google.gwt.i18n.client.NumberFormat_ar_Test;
@@ -83,6 +84,7 @@ public class I18NSuite {
     suite.addTestSuite(I18N_en_US_Test.class);
     suite.addTestSuite(I18N_nb_Test.class);
     suite.addTestSuite(LocaleInfo_ar_Test.class);
+    suite.addTestSuite(LocaleInfo_en_Test.class);
     suite.addTestSuite(LocaleInfoTest.class);
     suite.addTestSuite(LocalizedNames_default_Test.class);
     suite.addTestSuite(LocalizedNames_en_Test.class);

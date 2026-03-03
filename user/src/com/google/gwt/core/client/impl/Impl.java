@@ -387,7 +387,7 @@ public final class Impl {
   }-*/;
 
   private static native void watchdogEntryDepthCancel(int timerId) /*-{
-    $wnd.clearTimeout(timerId);
+    clearTimeout(timerId);
   }-*/;
 
   private static void watchdogEntryDepthRun() {
@@ -400,6 +400,6 @@ public final class Impl {
   }
 
   private static native int watchdogEntryDepthSchedule() /*-{
-    return $wnd.setTimeout(@Impl::watchdogEntryDepthRun(), 10);
+    return setTimeout(@Impl::watchdogEntryDepthRun(), 10);
   }-*/;
 }

@@ -73,11 +73,7 @@ public abstract class AbstractTextOutput implements TextOutput {
 
   @Override
   public void newline() {
-    if (compact) {
-      out.print('\n');
-    } else {
-      out.print('\n');
-    }
+    out.print('\n');
     position++;
     line++;
     column = 0;

@@ -151,6 +151,7 @@ import com.google.gwt.dev.js.JsReportGenerationVisitor;
 import com.google.gwt.dev.js.JsStackEmulator;
 import com.google.gwt.dev.js.JsStaticEval;
 import com.google.gwt.dev.js.JsSymbolResolver;
+import com.google.gwt.dev.js.JsToStringGenerationVisitor;
 import com.google.gwt.dev.js.JsUnusedFunctionRemover;
 import com.google.gwt.dev.js.JsVerboseNamer;
 import com.google.gwt.dev.js.SizeBreakdown;
@@ -772,7 +773,9 @@ public final class JavaToJavaScriptCompiler {
           DefaultTextOutput out = new DefaultTextOutput(!options.isIncrementalCompileEnabled() &&
               options.getOutput().shouldMinimize());
           JsReportGenerationVisitor v = new JsReportGenerationVisitor(out, jjsMap,
-              options.isJsonSoycEnabled());
+              options.isJsonSoycEnabled(),
+              new JsToStringGenerationVisitor.PrintOptions(false,
+                  options.getOutput() == JsOutputOption.OBFUSCATED));
           v.accept(jsProgram.getFragmentBlock(i));
 
           StatementRanges statementRanges = v.getStatementRanges();
@@ -1479,6 +1482,7 @@ public final class JavaToJavaScriptCompiler {
 
         nodeCount = jprogram.getNodeCount();
         mods = stats.getNumMods();
+        logger.log(TreeLogger.Type.TRACE, "Optimization pass " + passCount + " of " + passLimit + "\n" + stats);
       }
 
       float nodeChangeRate = mods / (float) lastNodeCount;

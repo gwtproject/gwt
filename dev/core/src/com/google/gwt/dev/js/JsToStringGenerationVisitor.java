@@ -115,9 +115,10 @@ public class JsToStringGenerationVisitor extends JsVisitor {
    * How many lines of code to print inside of a JsBlock when printing terse.
    */
   private static final int JSBLOCK_LINES_TO_PRINT = 3;
+  private static final long MAX_DECIMAL_VALUE = 999_999_999_999L;
 
   protected boolean needSemi = true;
-  private List<NamedRange> classRanges = new ArrayList<NamedRange>();
+  private final List<NamedRange> classRanges = new ArrayList<>();
   private NamedRange currentClassRange;
   private NamedRange programClassRange;
 
@@ -127,27 +128,39 @@ public class JsToStringGenerationVisitor extends JsVisitor {
    * because the statements designated by statementEnds and statementStarts are
    * those that appear directly within these global blocks.
    */
-  private Set<JsBlock> globalBlocks = new HashSet<JsBlock>();
+  private final Set<JsBlock> globalBlocks = new HashSet<>();
   private final TextOutput p;
-  private ArrayList<Integer> statementEnds = new ArrayList<Integer>();
-  private ArrayList<Integer> statementStarts = new ArrayList<Integer>();
+  private final ArrayList<Integer> statementEnds = new ArrayList<>();
+  private final ArrayList<Integer> statementStarts = new ArrayList<>();
   private final boolean useLongIdents;
+  private final boolean minifyLiterals;
+
+  public static class PrintOptions {
+    public final boolean useLongIdents;
+    public final boolean minifyLiterals;
+
+    public PrintOptions(boolean useLongIdents, boolean minifyLiterals) {
+      this.useLongIdents = useLongIdents;
+      this.minifyLiterals = minifyLiterals;
+    }
+  }
 
   /**
    * Generate the output string using short identifiers.
    */
   public JsToStringGenerationVisitor(TextOutput out) {
-    this(out, false);
+    this(out, new PrintOptions(false, false));
   }
 
   /**
    * Generate the output string using short or long identifiers.
    *
-   * @param useLongIdents if true, emit all identifiers in long form
+   * @param options settings for minification
    */
-  JsToStringGenerationVisitor(TextOutput out, boolean useLongIdents) {
+  JsToStringGenerationVisitor(TextOutput out, PrintOptions options) {
     this.p = out;
-    this.useLongIdents = useLongIdents;
+    this.useLongIdents = options.useLongIdents;
+    this.minifyLiterals = options.minifyLiterals;
   }
 
   public List<NamedRange> getClassRanges() {
@@ -183,8 +196,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
   public boolean visit(JsArrayLiteral x, JsContext ctx) {
     _lsquare();
     boolean sep = false;
-    for (Object element : x.getExpressions()) {
-      JsExpression arg = (JsExpression) element;
+    for (JsExpression arg : x.getExpressions()) {
       sep = _sepCommaOptSpace(sep);
       _parenPushIfCommaExpr(arg);
       accept(arg);
@@ -227,6 +239,10 @@ public class JsToStringGenerationVisitor extends JsVisitor {
 
   @Override
   public boolean visit(JsBooleanLiteral x, JsContext ctx) {
+    if (minifyLiterals) {
+      p.print(x.getValue() ? "!0" : "!1");
+      return false;
+    }
     if (x.getValue()) {
       _true();
     } else {
@@ -257,8 +273,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
     _newlineOpt();
 
     indent();
-    for (Object element : x.getStmts()) {
-      JsStatement stmt = (JsStatement) element;
+    for (JsStatement stmt : x.getStmts()) {
       needSemi = true;
       accept(stmt);
       if (needSemi) {
@@ -387,8 +402,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
     _colon();
 
     indent();
-    for (Object element : x.getStmts()) {
-      JsStatement stmt = (JsStatement) element;
+    for (JsStatement stmt : x.getStmts()) {
       needSemi = true;
       accept(stmt);
       if (needSemi) {
@@ -532,8 +546,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
 
     _lparen();
     boolean sep = false;
-    for (Object element : x.getParameters()) {
-      JsParameter param = (JsParameter) element;
+    for (JsParameter param : x.getParameters()) {
       sep = _sepCommaOptSpace(sep);
       accept(param);
     }
@@ -588,8 +601,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
 
     _lparen();
     boolean sep = false;
-    for (Object element : x.getArguments()) {
-      JsExpression arg = (JsExpression) element;
+    for (JsExpression arg : x.getArguments()) {
       sep = _sepCommaOptSpace(sep);
       _parenPushIfCommaExpr(arg);
       accept(arg);
@@ -626,7 +638,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
       _parenPush(x, q, false);
       accept(q);
       if (q instanceof JsNumberLiteral) {
-        /**
+        /*
          * Fix for Issue #3796. "42.foo" is not allowed, but "42 .foo" is.
          */
         _space();
@@ -681,20 +693,51 @@ public class JsToStringGenerationVisitor extends JsVisitor {
 
   @Override
   public boolean visit(JsNumberLiteral x, JsContext ctx) {
+    String val = stringifyNumber(x);
+    p.print(val);
+    return false;
+  }
+
+  private String stringifyNumber(JsNumberLiteral x) {
     double dvalue = x.getValue();
     if (dvalue == 0.0 && 1.0 / dvalue == Double.NEGATIVE_INFINITY) {
       // Negative zero is distinct from 0.0 and (integer) 0
-      p.print("-0.");
-      return false;
+      return "-0";
     }
 
     long lvalue = (long) dvalue;
     if (lvalue == dvalue) {
-      p.print(Long.toString(lvalue));
+      String longVal = Long.toString(lvalue);
+      if (minifyLiterals && lvalue != 0) {
+        int trailingZeros = numberOfTrailingDecZeros(longVal);
+        if (trailingZeros > 2) {
+          // print 1000 as 1e3, keep 100 as is
+          longVal = longVal.substring(0, longVal.length() - trailingZeros) + "e" + trailingZeros;
+        } else if (Math.abs(lvalue) > MAX_DECIMAL_VALUE) {
+          // from 1e12 we may save 1 or 2 bytes by using the hex code
+          longVal = (lvalue < 0 ? "-0x" : "0x") + Long.toString(Math.abs(lvalue), 16);
+        }
+      }
+      return longVal;
     } else {
-      p.print(Double.toString(dvalue));
+      String doubleVal = Double.toString(dvalue);
+      if (minifyLiterals) {
+        if (doubleVal.startsWith("0.")) {
+          doubleVal = doubleVal.substring(1);
+        } else if (doubleVal.startsWith("-0.")) {
+          doubleVal = "-" + doubleVal.substring(2);
+        }
+      }
+      return doubleVal;
     }
-    return false;
+  }
+
+  private int numberOfTrailingDecZeros(String longVal) {
+    int idx = longVal.length() - 1;
+    while (longVal.charAt(idx) == '0') {
+      idx--;
+    }
+    return longVal.length() - idx - 1;
   }
 
   @Override
@@ -790,7 +833,11 @@ public class JsToStringGenerationVisitor extends JsVisitor {
     _return();
     JsExpression expr = x.getExpr();
     if (expr != null) {
-      _space();
+      if (spaceReturn(expr)) {
+        _space();
+      } else {
+        _spaceOpt();
+      }
       accept(expr);
     }
     return false;
@@ -1273,6 +1320,20 @@ public class JsToStringGenerationVisitor extends JsVisitor {
           && (literal.getValue() < 0);
     }
     return false;
+  }
+
+  private boolean spaceReturn(JsExpression arg) {
+    if (arg instanceof JsBooleanLiteral) {
+      return !minifyLiterals;
+    }
+    if (arg instanceof JsPrefixOperation) {
+     return ((JsPrefixOperation) arg).getOperator().isKeyword();
+    }
+    if (arg instanceof JsNumberLiteral) {
+      String value = stringifyNumber((JsNumberLiteral) arg);
+      return value.charAt(0) != '-' && value.charAt(0) != '.';
+    }
+    return true;
   }
 
   private void _spaceOpt() {

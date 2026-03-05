@@ -196,6 +196,8 @@ public class Java17Test extends GWTTestCase {
     assertFalse(sameA.hashCode() == different.hashCode());
 
     assertFalse(sameA.equals(null));
+
+    assertTrue(new TopLevelRecord(null, 1).equals(new TopLevelRecord(null, 1)));
   }
 
   /**

@@ -87,11 +87,20 @@ public final class Objects {
 
   @SpecializeMethod(params = {String.class, String.class}, target = "stringEquals")
   public static boolean equals(Object a, Object b) {
+    if (a instanceof String && b instanceof String) {
+      return stringEquals((String) a, (String) b);
+    }
     return (a == b) || (a != null && a.equals(b));
   }
 
-  @SuppressWarnings("StringEquality")
-  public static boolean stringEquals(String a, String b) {
+  /**
+   * Specialied helper to avoid dispatch in cases we statically know both arguments are strings.
+   * Note that while the signature of this method specifies Object, calls made to
+   * {@link #equals(Object, Object)} will be redirected to this method if both args are strings.
+   * We still must mark its types as Object, as every method specialization must be called by its
+   * original method.
+   */
+  private static boolean stringEquals(String a, String b) {
     return a == b;
   }
 

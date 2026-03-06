@@ -198,6 +198,8 @@ public class Java17Test extends GWTTestCase {
     assertFalse(sameA.equals(null));
 
     assertTrue(new TopLevelRecord(null, 1).equals(new TopLevelRecord(null, 1)));
+    assertFalse(new TopLevelRecord("asdf", 2).equals(new TopLevelRecord(null, 2)));
+    assertFalse(new TopLevelRecord(null, 3).equals(new TopLevelRecord("abc", 3)));
   }
 
   /**

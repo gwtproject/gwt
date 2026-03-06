@@ -83,11 +83,7 @@ public abstract class AbstractTextOutput implements TextOutput {
   @Override
   public void newlineOpt() {
     if (!compact) {
-      out.print('\n');
-      position++;
-      line++;
-      column = 0;
-      justNewlined = true;
+      newline();
     }
   }
 

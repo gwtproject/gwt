@@ -43,7 +43,6 @@ public class JsToStringGenerationVisitorTest extends FullCompileTestBase {
     stackMode.addDefinedValue(new ConditionNone(), "STRIP");
     setProperties(new BindingProperty[] {stackMode}, new String[] {"STRIP"},
         new ConfigurationProperty[] {});
-    runDeadCodeElimination = false;
     super.setUp();
   }
 
@@ -98,6 +97,7 @@ public class JsToStringGenerationVisitorTest extends FullCompileTestBase {
   }
 
   public void testLiteralPrintWithDCE() throws UnableToCompleteException {
+    // negative numbers represented as unary operation before DCE and as a literal after DCE
     runDeadCodeElimination = true;
     TextOutput text = buildTextOutput(new JsToStringGenerationVisitor.PrintOptions(false, false));
     assertContains("_.negZero=function(){return-0}", text.toString());

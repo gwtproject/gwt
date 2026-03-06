@@ -693,12 +693,12 @@ public class JsToStringGenerationVisitor extends JsVisitor {
 
   @Override
   public boolean visit(JsNumberLiteral x, JsContext ctx) {
-    String val = stringifyNumber(x);
+    String val = _stringifyNumber(x);
     p.print(val);
     return false;
   }
 
-  private String stringifyNumber(JsNumberLiteral x) {
+  private String _stringifyNumber(JsNumberLiteral x) {
     double dvalue = x.getValue();
     if (dvalue == 0.0 && 1.0 / dvalue == Double.NEGATIVE_INFINITY) {
       // Negative zero is distinct from 0.0 and (integer) 0
@@ -833,12 +833,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
     _return();
     JsExpression expr = x.getExpr();
     if (expr != null) {
-      if (spaceReturn(expr)) {
-        _space();
-      } else {
-        _spaceOpt();
-      }
-      accept(expr);
+      _printReturnExpression(expr);
     }
     return false;
   }
@@ -1322,18 +1317,27 @@ public class JsToStringGenerationVisitor extends JsVisitor {
     return false;
   }
 
-  private boolean spaceReturn(JsExpression arg) {
+  private void _printReturnExpression(JsExpression arg) {
+    boolean space = false;
+    String value = null;
     if (arg instanceof JsBooleanLiteral) {
-      return !minifyLiterals;
+      space = !minifyLiterals;
+    } else if (arg instanceof JsPrefixOperation) {
+     space = ((JsPrefixOperation) arg).getOperator().isKeyword();
+    } else if (arg instanceof JsNumberLiteral) {
+      value = _stringifyNumber((JsNumberLiteral) arg);
+      space = value.charAt(0) != '-' && value.charAt(0) != '.';
     }
-    if (arg instanceof JsPrefixOperation) {
-     return ((JsPrefixOperation) arg).getOperator().isKeyword();
+    if (space) {
+      _space();
+    } else {
+      _spaceOpt();
     }
-    if (arg instanceof JsNumberLiteral) {
-      String value = stringifyNumber((JsNumberLiteral) arg);
-      return value.charAt(0) != '-' && value.charAt(0) != '.';
+    if (value != null) {
+      p.print(value);
+    } else {
+      accept(arg);
     }
-    return true;
   }
 
   private void _spaceOpt() {

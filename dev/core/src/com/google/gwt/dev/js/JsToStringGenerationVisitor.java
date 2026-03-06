@@ -87,30 +87,30 @@ import java.util.Set;
 @SuppressWarnings("checkstyle:MethodName")
 public class JsToStringGenerationVisitor extends JsVisitor {
 
-  private static final char[] CHARS_BREAK = "break".toCharArray();
-  private static final char[] CHARS_CASE = "case".toCharArray();
-  private static final char[] CHARS_CATCH = "catch".toCharArray();
-  private static final char[] CHARS_CONTINUE = "continue".toCharArray();
-  private static final char[] CHARS_DEBUGGER = "debugger".toCharArray();
-  private static final char[] CHARS_DEFAULT = "default".toCharArray();
-  private static final char[] CHARS_DO = "do".toCharArray();
-  private static final char[] CHARS_ELSE = "else".toCharArray();
-  private static final char[] CHARS_FALSE = "false".toCharArray();
-  private static final char[] CHARS_FINALLY = "finally".toCharArray();
-  private static final char[] CHARS_FOR = "for".toCharArray();
-  private static final char[] CHARS_FUNCTION = "function".toCharArray();
-  private static final char[] CHARS_IF = "if".toCharArray();
-  private static final char[] CHARS_IN = "in".toCharArray();
-  private static final char[] CHARS_NEW = "new".toCharArray();
-  private static final char[] CHARS_NULL = "null".toCharArray();
-  private static final char[] CHARS_RETURN = "return".toCharArray();
-  private static final char[] CHARS_SWITCH = "switch".toCharArray();
-  private static final char[] CHARS_THIS = "this".toCharArray();
-  private static final char[] CHARS_THROW = "throw".toCharArray();
-  private static final char[] CHARS_TRUE = "true".toCharArray();
-  private static final char[] CHARS_TRY = "try".toCharArray();
-  private static final char[] CHARS_VAR = "var".toCharArray();
-  private static final char[] CHARS_WHILE = "while".toCharArray();
+  private static final String BREAK = "break";
+  private static final String CASE = "case";
+  private static final String CATCH = "catch";
+  private static final String CONTINUE = "continue";
+  private static final String DEBUGGER = "debugger";
+  private static final String DEFAULT = "default";
+  private static final String DO = "do";
+  private static final String ELSE = "else";
+  private static final String FALSE = "false";
+  private static final String FINALLY = "finally";
+  private static final String FOR = "for";
+  private static final String FUNCTION = "function";
+  private static final String IF = "if";
+  private static final String IN = "in";
+  private static final String NEW = "new";
+  private static final String NULL = "null";
+  private static final String RETURN = "return";
+  private static final String SWITCH = "switch";
+  private static final String THIS = "this";
+  private static final String THROW = "throw";
+  private static final String TRUE = "true";
+  private static final String TRY = "try";
+  private static final String VAR = "var";
+  private static final String WHILE = "while";
   /**
    * How many lines of code to print inside of a JsBlock when printing terse.
    */
@@ -1050,15 +1050,15 @@ public class JsToStringGenerationVisitor extends JsVisitor {
   }
 
   private void _break() {
-    p.print(CHARS_BREAK);
+    p.print(BREAK);
   }
 
   private void _case() {
-    p.print(CHARS_CASE);
+    p.print(CASE);
   }
 
   private void _catch() {
-    p.print(CHARS_CATCH);
+    p.print(CATCH);
   }
 
   private void _colon() {
@@ -1066,19 +1066,19 @@ public class JsToStringGenerationVisitor extends JsVisitor {
   }
 
   private void _continue() {
-    p.print(CHARS_CONTINUE);
+    p.print(CONTINUE);
   }
 
   private void _debugger() {
-    p.print(CHARS_DEBUGGER);
+    p.print(DEBUGGER);
   }
 
   private void _default() {
-    p.print(CHARS_DEFAULT);
+    p.print(DEFAULT);
   }
 
   private void _do() {
-    p.print(CHARS_DO);
+    p.print(DO);
   }
 
   private void _dot() {
@@ -1086,31 +1086,31 @@ public class JsToStringGenerationVisitor extends JsVisitor {
   }
 
   private void _else() {
-    p.print(CHARS_ELSE);
+    p.print(ELSE);
   }
 
   private void _false() {
-    p.print(CHARS_FALSE);
+    p.print(FALSE);
   }
 
   private void _finally() {
-    p.print(CHARS_FINALLY);
+    p.print(FINALLY);
   }
 
   private void _for() {
-    p.print(CHARS_FOR);
+    p.print(FOR);
   }
 
   private void _function() {
-    p.print(CHARS_FUNCTION);
+    p.print(FUNCTION);
   }
 
   private void _if() {
-    p.print(CHARS_IF);
+    p.print(IF);
   }
 
   private void _in() {
-    p.print(CHARS_IN);
+    p.print(IN);
   }
 
   private void _lbrace() {
@@ -1168,11 +1168,11 @@ public class JsToStringGenerationVisitor extends JsVisitor {
   }
 
   private void _new() {
-    p.print(CHARS_NEW);
+    p.print(NEW);
   }
 
   private void _null() {
-    p.print(CHARS_NULL);
+    p.print(NULL);
   }
 
   private boolean _parenCalc(JsExpression parent, JsExpression child,
@@ -1249,7 +1249,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
   }
 
   private void _return() {
-    p.print(CHARS_RETURN);
+    p.print(RETURN);
   }
 
   private void _rparen() {
@@ -1341,31 +1341,31 @@ public class JsToStringGenerationVisitor extends JsVisitor {
   }
 
   private void _switch() {
-    p.print(CHARS_SWITCH);
+    p.print(SWITCH);
   }
 
   private void _this() {
-    p.print(CHARS_THIS);
+    p.print(THIS);
   }
 
   private void _throw() {
-    p.print(CHARS_THROW);
+    p.print(THROW);
   }
 
   private void _true() {
-    p.print(CHARS_TRUE);
+    p.print(TRUE);
   }
 
   private void _try() {
-    p.print(CHARS_TRY);
+    p.print(TRY);
   }
 
   private void _var() {
-    p.print(CHARS_VAR);
+    p.print(VAR);
   }
 
   private void _while() {
-    p.print(CHARS_WHILE);
+    p.print(WHILE);
   }
 
   private void indent() {

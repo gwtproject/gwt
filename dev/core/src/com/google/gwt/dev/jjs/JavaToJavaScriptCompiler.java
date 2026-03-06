@@ -1482,7 +1482,6 @@ public final class JavaToJavaScriptCompiler {
 
         nodeCount = jprogram.getNodeCount();
         mods = stats.getNumMods();
-        logger.log(TreeLogger.Type.TRACE, "Optimization pass " + passCount + " of " + passLimit + "\n" + stats);
       }
 
       float nodeChangeRate = mods / (float) lastNodeCount;

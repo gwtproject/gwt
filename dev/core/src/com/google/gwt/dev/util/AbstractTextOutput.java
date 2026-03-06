@@ -110,7 +110,7 @@ public abstract class AbstractTextOutput implements TextOutput {
   @Override
   public void print(String s) {
     maybeIndent();
-    printAndCount(s.toCharArray());
+    printAndCount(s);
     justNewlined = false;
   }
 
@@ -136,7 +136,7 @@ public abstract class AbstractTextOutput implements TextOutput {
   public void printOpt(String s) {
     if (!compact) {
       maybeIndent();
-      printAndCount(s.toCharArray());
+      printAndCount(s);
     }
   }
 
@@ -155,5 +155,11 @@ public abstract class AbstractTextOutput implements TextOutput {
     position += chars.length;
     column += chars.length;
     out.print(chars);
+  }
+
+  private void printAndCount(String str) {
+    position += str.length();
+    column += str.length();
+    out.print(str);
   }
 }

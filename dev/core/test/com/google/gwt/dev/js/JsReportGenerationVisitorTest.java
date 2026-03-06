@@ -253,7 +253,8 @@ public class JsReportGenerationVisitorTest extends TestCase {
       throws IOException, JsParserException {
     DefaultTextOutput text = new DefaultTextOutput(compact);
     JsReportGenerationVisitor generator = new JsReportGenerationVisitor(text,
-        JavaToJavaScriptMap.EMPTY, false) {
+        JavaToJavaScriptMap.EMPTY, false,
+        new JsToStringGenerationVisitor.PrintOptions(false, false)) {
       @Override
       boolean surroundsInJavaSource(SourceInfo parent, SourceInfo child) {
         // The Rhino-based JavaScript parser doesn't provide character ranges

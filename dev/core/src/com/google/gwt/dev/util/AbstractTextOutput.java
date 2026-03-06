@@ -73,11 +73,7 @@ public abstract class AbstractTextOutput implements TextOutput {
 
   @Override
   public void newline() {
-    if (compact) {
-      out.print('\n');
-    } else {
-      out.print('\n');
-    }
+    out.print('\n');
     position++;
     line++;
     column = 0;
@@ -87,11 +83,7 @@ public abstract class AbstractTextOutput implements TextOutput {
   @Override
   public void newlineOpt() {
     if (!compact) {
-      out.print('\n');
-      position++;
-      line++;
-      column = 0;
-      justNewlined = true;
+      newline();
     }
   }
 
@@ -114,7 +106,7 @@ public abstract class AbstractTextOutput implements TextOutput {
   @Override
   public void print(String s) {
     maybeIndent();
-    printAndCount(s.toCharArray());
+    printAndCount(s);
     justNewlined = false;
   }
 
@@ -140,7 +132,7 @@ public abstract class AbstractTextOutput implements TextOutput {
   public void printOpt(String s) {
     if (!compact) {
       maybeIndent();
-      printAndCount(s.toCharArray());
+      printAndCount(s);
     }
   }
 
@@ -159,5 +151,11 @@ public abstract class AbstractTextOutput implements TextOutput {
     position += chars.length;
     column += chars.length;
     out.print(chars);
+  }
+
+  private void printAndCount(String str) {
+    position += str.length();
+    column += str.length();
+    out.print(str);
   }
 }

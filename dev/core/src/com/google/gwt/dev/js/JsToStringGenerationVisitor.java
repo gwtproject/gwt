@@ -1333,11 +1333,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
     } else {
       _spaceOpt();
     }
-    if (value != null) {
-      p.print(value);
-    } else {
-      accept(arg);
-    }
+    accept(arg); // this may serialize numbers again, but needed for billing
   }
 
   private void _spaceOpt() {

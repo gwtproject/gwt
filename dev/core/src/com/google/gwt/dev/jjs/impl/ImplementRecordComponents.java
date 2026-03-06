@@ -190,28 +190,20 @@ public class ImplementRecordComponents {
     body.getBlock().addStmt(uncheckedAssign.makeStatement());
 
     JExpression componentCheck = JBooleanLiteral.TRUE;
-    JMethod objectEquals = program.getIndexedMethod(RuntimeConstants.OBJECT_EQUALS);
+    JMethod objectsEquals = program.getIndexedMethod(RuntimeConstants.OBJECTS_EQUALS);
+    assert objectsEquals.isStatic();
     for (JField field : type.getFields()) {
       if (!field.isStatic()) {
         JFieldRef myField = new JFieldRef(info, new JThisRef(info, type), field, type);
         JFieldRef otherField = new JFieldRef(info, typedOther.createRef(info), field, type);
-        final JBinaryOperation equals;
+        final JExpression equals;
         if (field.getType().isPrimitiveType()) {
           equals = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,
                   JBinaryOperator.EQ,
                   myField,
                   otherField);
         } else {
-          // We would like to use Objects.equals here to be more concise, but we would need
-          // to look up the right impl based on the field - just as simple to insert a null check
-          // and get it a little closer to all being inlined away
-
-          // Make another field ref to call equals() on
-          JFieldRef myField2 = new JFieldRef(info, new JThisRef(info, type), field, type);
-          equals = new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.AND,
-                  new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.NEQ,
-                          myField, JNullLiteral.INSTANCE),
-                  new JMethodCall(info, myField2, objectEquals, otherField));
+          equals = new JMethodCall(info, null, objectsEquals, myField, otherField);
         }
         if (componentCheck != JBooleanLiteral.TRUE) {
           componentCheck = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,

@@ -1318,14 +1318,13 @@ public class JsToStringGenerationVisitor extends JsVisitor {
   }
 
   private void _printReturnExpression(JsExpression arg) {
-    boolean space = false;
-    String value = null;
+    boolean space = true;
     if (arg instanceof JsBooleanLiteral) {
       space = !minifyLiterals;
     } else if (arg instanceof JsPrefixOperation) {
      space = ((JsPrefixOperation) arg).getOperator().isKeyword();
     } else if (arg instanceof JsNumberLiteral) {
-      value = _stringifyNumber((JsNumberLiteral) arg);
+      String value = _stringifyNumber((JsNumberLiteral) arg);
       space = value.charAt(0) != '-' && value.charAt(0) != '.';
     }
     if (space) {
@@ -1333,11 +1332,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
     } else {
       _spaceOpt();
     }
-    if (value != null) {
-      p.print(value);
-    } else {
-      accept(arg);
-    }
+    accept(arg); // this may serialize numbers again, but needed for billing
   }
 
   private void _spaceOpt() {

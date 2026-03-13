@@ -107,14 +107,14 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
     private final CountedServerSocket serverSocket;
     private Socket workerSocket;
 
-    public ExternalPermutationWorker(CountedServerSocket sock, File astFile) {
+    ExternalPermutationWorker(CountedServerSocket sock, File astFile) {
       this.astFile = astFile;
       this.serverSocket = sock;
     }
 
     @Override
-    public void compile(TreeLogger logger, CompilerContext compilerContext, Permutation permutation,
-        PersistenceBackedObject<PermutationResult> resultFile)
+    public void compile(TreeLogger logger, CompilerContext compilerContext,
+        Permutation permutation, PersistenceBackedObject<PermutationResult> resultFile)
         throws TransientWorkerException, UnableToCompleteException {
 
       // If we've just started, we need to get a connection from a subprocess

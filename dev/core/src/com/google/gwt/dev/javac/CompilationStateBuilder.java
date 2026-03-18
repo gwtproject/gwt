@@ -78,7 +78,7 @@ public class CompilationStateBuilder {
        */
       @Override
       public void process(CompilationUnitBuilder builder, CompilationUnitDeclaration cud,
-          List<ImportReference> cudOriginaImports,
+          List<ImportReference> cudOriginalImports,
           List<CompiledClass> compiledClasses) {
         try (SimpleEvent ignored = new SimpleEvent("CSB process")) {
           // Collect parameter method names event when the compilation unit has errors.
@@ -100,7 +100,7 @@ public class CompilationStateBuilder {
 
             // JSNI check + collect dependencies.
             JsniReferenceResolver
-                .resolve(cud, cudOriginaImports, jsniMethods, jsniRefs,
+                .resolve(cud, cudOriginalImports, jsniMethods, jsniRefs,
                     new JsniReferenceResolver.TypeResolver() {
                       @Override
                       public ReferenceBinding resolveType(String sourceOrBinaryName) {

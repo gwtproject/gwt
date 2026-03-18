@@ -212,7 +212,7 @@ public class GenerateJavaScriptAST {
 
     /**
      * Cache of computed Java source file names to URI strings for symbol
-     * export. By using a cache we also ensure the miminum number of String
+     * export. By using a cache we also ensure the minimum number of String
      * instances are serialized.
      */
     private final Map<String, String> fileNameToUriString = Maps.newHashMap();
@@ -1455,7 +1455,7 @@ public class GenerateJavaScriptAST {
 
     private void generateRemainingClassLiterals() {
       if (!incremental) {
-        // Emit classliterals that are references but whose classes are not live.
+        // Emit class literals that are references but whose classes are not live.
         generateClassLiterals(Iterables.filter(classLiteralDeclarationsByType.keySet(),
             Predicates.not(Predicates.<JType>in(alreadyRan))));
         return;
@@ -1839,7 +1839,7 @@ public class GenerateJavaScriptAST {
           var.setInitExpr(initializer);
           vars.add(var);
         } else if (initializer != null) {
-          // Instance field initilized at top.
+          // Instance field initialized at top.
           JsNameRef fieldRef =
               name.makeQualifiedRef(field.getSourceInfo(), getPrototypeQualifierOf(field));
           addTypeDefinitionStatement(type, createAssignment(fieldRef, initializer).makeStmt());
@@ -2068,7 +2068,7 @@ public class GenerateJavaScriptAST {
           assert field.isStatic() : "'" + field.getName()
               + "' is not static. Only static fields are allowed on immortal types";
           assert field.getInitializer() == field.getLiteralInitializer() : "'" + field.getName()
-              + "' is not initilialized to a literal."
+              + "' is not initialized to a literal."
               + " Only literal initializers are allowed on immortal types";
 
           JsVar var = new JsVar(x.getSourceInfo(), names.get(field));
@@ -2518,9 +2518,9 @@ public class GenerateJavaScriptAST {
      * Returns the package private JsName for {@code method}.
      */
     private JsName getPackagePrivateName(JMethod method) {
-      for (JMethod overridenMethod : method.getOverriddenMethods()) {
-        if (overridenMethod.isPackagePrivate()) {
-          JsName name = polymorphicNames.get(overridenMethod);
+      for (JMethod overriddenMethod : method.getOverriddenMethods()) {
+        if (overriddenMethod.isPackagePrivate()) {
+          JsName name = polymorphicNames.get(overriddenMethod);
           assert name != null;
           return name;
         }
@@ -2566,7 +2566,7 @@ public class GenerateJavaScriptAST {
 
     /**
      * Whether a method is a constructor that is actually newed. Note that in absence of whole
-     * world knowledge evey constructor is potentially live.
+     * world knowledge every constructor is potentially live.
      */
     private boolean isMethodPotentiallyALiveConstructor(JMethod method) {
       if (!(method instanceof JConstructor)) {
@@ -2674,7 +2674,7 @@ public class GenerateJavaScriptAST {
 
   /**
    * Return false if the method needs to be generated. Some methods do not need any output,
-   * in particular abstract methods and static intializers that are never called.
+   * in particular abstract methods and static initializers that are never called.
    */
   private static boolean doesNotHaveConcreteImplementation(JMethod method) {
     return method.isAbstract()
@@ -2813,7 +2813,7 @@ public class GenerateJavaScriptAST {
    */
   private class RecordCrossClassCallsAndConstructorLiveness extends JVisitor {
     // TODO(rluble): This analysis should be extracted from GenerateJavaScriptAST into its own
-    // JAVA optimization pass. Constructors that are not newed can be transformed into statified
+    // JAVA optimization pass. Constructors that are not newed can be transformed into statisfied
     // regular methods; and methods that are not called from outside the class boundary can be
     // privatized. Currently we do not use the private modifier to avoid emitting clinits, instead
     // we use the result of this analysis (private methods CAN be called from JSNI in an unrelated
@@ -3117,7 +3117,7 @@ public class GenerateJavaScriptAST {
   private final Map<JType, JDeclarationStatement> classLiteralDeclarationsByType =
       Maps.newLinkedHashMap();
 
-  private void contructTypeToClassLiteralDeclarationMap() {
+  private void constructTypeToClassLiteralDeclarationMap() {
       /*
        * Must execute in clinit statement order, NOT field order, so that back
        * refs to super classes are preserved.
@@ -3151,7 +3151,7 @@ public class GenerateJavaScriptAST {
     }
 
     // Map class literals to their respective types.
-    contructTypeToClassLiteralDeclarationMap();
+    constructTypeToClassLiteralDeclarationMap();
 
     new CreateNamesAndScopesVisitor().accept(program);
     new GenerateJavaScriptTransformer().transform(program);

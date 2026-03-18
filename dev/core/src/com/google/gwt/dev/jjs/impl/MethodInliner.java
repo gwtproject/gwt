@@ -574,7 +574,7 @@ public class MethodInliner {
   }
 
   /**
-   * Extrudes local variables from the body into the currect method.
+   * Extrudes local variables from the body into the current method.
    */
   private class LocalVariableExtruder extends JModVisitor {
     private final Map<JLocal, JLocal> newLocalsByOriginalLocal = Maps.newLinkedHashMap();

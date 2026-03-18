@@ -28,8 +28,8 @@ public class MathTest extends EmulTestBase {
     assertEquals(1, Math.absExact(hideFromCompiler(-1)));
     assertThrowsArithmetic(() -> Math.absExact(hideFromCompiler(Integer.MIN_VALUE)));
     assertEquals(Long.MAX_VALUE, Math.absExact(hideFromCompiler(Long.MAX_VALUE)));
-    assertEquals(0, Math.absExact(hideFromCompiler(0l)));
-    assertEquals(1, Math.absExact(hideFromCompiler(-1l)));
+    assertEquals(0, Math.absExact(hideFromCompiler(0L)));
+    assertEquals(1, Math.absExact(hideFromCompiler(-1L)));
     assertThrowsArithmetic(() -> Math.absExact(hideFromCompiler(Long.MIN_VALUE)));
   }
 

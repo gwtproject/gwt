@@ -47,7 +47,7 @@ public class StreamTest extends EmulTestBase {
     assertEquals(Arrays.asList("a", "aa", "b", "bb"),
         Stream.of("a", "b").<String>mapMulti(doubling).toList());
     assertEquals(Arrays.asList(),
-        Stream.of("a", "b").mapMulti((a, b) -> {}).toList());
+        Stream.of("a", "b").mapMulti((a, b) -> { }).toList());
   }
 
   public void testMapMultiToInt() {
@@ -60,7 +60,7 @@ public class StreamTest extends EmulTestBase {
     assertEquals(new int[0],
         Stream.<String>of().mapMultiToInt(doubling).toArray());
     assertEquals(new int[0],
-        Stream.of("a", "b").mapMultiToInt((a, b) -> {}).toArray());
+        Stream.of("a", "b").mapMultiToInt((a, b) -> { }).toArray());
   }
 
   public void testMapMultiToLong() {
@@ -87,6 +87,6 @@ public class StreamTest extends EmulTestBase {
     assertEquals(new double[0],
         Stream.<String>of().mapMultiToDouble(doubling).toArray());
     assertEquals(new double[0],
-        Stream.of("a", "b").mapMultiToDouble((a, b) -> {}).toArray());
+        Stream.of("a", "b").mapMultiToDouble((a, b) -> { }).toArray());
   }
 }

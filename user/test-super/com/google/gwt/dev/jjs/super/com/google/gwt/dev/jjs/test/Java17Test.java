@@ -20,8 +20,9 @@ import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Arrays;
 import java.util.List;
-
-import jsinterop.annotations.*;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * Tests Java 17 features. It is super sourced so that gwt can be compiles under Java 11.
@@ -45,11 +46,10 @@ public class Java17Test extends GWTTestCase {
   public sealed class Shape permits Square, Circle {
     public static int count = 0;
 
-    public static Shape returnAndIncrement(Shape shape){
+    public static Shape returnAndIncrement(Shape shape) {
       count++;
       return shape;
     }
-
   }
 
   public final class Square extends Shape {
@@ -174,7 +174,7 @@ public class Java17Test extends GWTTestCase {
     assertEquals("bar", RecordWithStaticField.foo);
     // Under the current implementation this next line would fail - this is not inconsistent with the spec,
     // but it is different than what the JVM does.
-//    assertEquals(0, new TopLevelRecord("", 0).hashCode());
+    // assertEquals(0, new TopLevelRecord("", 0).hashCode());
     assertFalse(0 == new TopLevelRecord("", 7).hashCode());
     assertFalse(0 == new TopLevelRecord("Pear", 0).hashCode());
 
@@ -188,7 +188,7 @@ public class Java17Test extends GWTTestCase {
     // check that an instance is equal to itself
     assertEquals(sameA, sameA);
     assertEquals(sameA.hashCode(), sameA.hashCode());
-    //check that an instance is equal to a different record instance with same values
+    // check that an instance is equal to a different record instance with same values
     assertEquals(sameA, sameB);
     assertEquals(sameA.hashCode(), sameB.hashCode());
 

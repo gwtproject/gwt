@@ -283,20 +283,18 @@
         <filename name="com/google/gwt/dev/shell/remoteui/RemoteMessageProto.java"
                   negate="yes"/>
         <filename name="com/google/gwt/dev/js/rhino/**/*.java" negate="yes"/>
-        <filename name="org/eclipse/**/*.java" negate="yes"/>
-        <filename name="org/apache/**/*.java" negate="yes"/>
       </fileset>
       <fileset dir="core/super"/>
+      <fileset dir="codeserver/java"/>
     </gwt.checkstyle>
   </target>
 
   <target name="checkstyle-tests" description="Static analysis of tests">
     <gwt.checkstyle.tests>
       <fileset dir="core/test">
-        <filename name="com/google/gwt/dev/js/rhino/**/*.java" negate="yes"/>
-        <filename name="org/eclipse/**/*.java" negate="yes"/>
         <filename name="org/apache/**/*.java" negate="yes"/>
       </fileset>
+      <fileset dir="codeserver/javatests" />
     </gwt.checkstyle.tests>
   </target>
 
@@ -327,7 +325,7 @@
         <pathelement location="${gwt.root}/user/src/"/>
         <pathelement location="${gwt.root}/user/super/"/>
         <!-- CompilerTest compiles the hello sample. -->
-        <pathelement location="${gwt.root}/samples/hello/src/"/>
+        <pathelement location="${gwt.root}/samples/hello/src/main/java"/>
         <!-- CompilerTest needs the dependecies to compile a project that uses UiBinder. -->
 	<pathelement location="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar"/>
         <pathelement location="${gwt.tools.lib}/gss/2015-11-04/closure-stylesheets-library-20151104-rebased.jar"/>

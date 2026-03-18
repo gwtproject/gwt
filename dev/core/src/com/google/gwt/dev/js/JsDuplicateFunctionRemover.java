@@ -178,7 +178,7 @@ public class JsDuplicateFunctionRemover {
    *
    * function f1() {return a;}
    *
-   * funcion f2() { var a; return function() {return a;}}
+   * function f2() { var a; return function() {return a;}}
    *
    * f1() and the return of f2() are not duplicates even though the have a syntacticaly identical
    * parameters and body. The reason is that a in f1() refers to some globally scoped variable a,

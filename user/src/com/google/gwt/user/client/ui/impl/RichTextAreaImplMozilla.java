@@ -40,6 +40,8 @@ public class RichTextAreaImplMozilla extends RichTextAreaImplStandard {
     var iframe = _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImpl::elem;
     _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplStandard::onElementInitializing()();
     _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplMozilla::isFirstFocus = true;
+    iframe.src = '';
+//      $wnd.console.log('set onload');
 
     iframe.onload = $entry(function() {
       // Some Mozillae have the nasty habit of calling onload again when you set
@@ -64,9 +66,10 @@ public class RichTextAreaImplMozilla extends RichTextAreaImplStandard {
       // mouseover event allows us to set design mode earlier. The focus event
       // is still needed to handle tab selection.
       iframe.contentWindow.onmouseover = iframe.contentWindow.onfocus;
+//      $wnd.console.log('before initialized');
 
-      // Send notification that the iframe has finished loading.
       _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplStandard::onElementInitialized()();
+//      $wnd.console.log('after initialized');
     });
   }-*/;
 

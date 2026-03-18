@@ -49,6 +49,11 @@ public class RichTextAreaTest extends GWTTestCase {
     return "com.google.gwt.user.User";
   }
 
+  @Override
+  protected void gwtTearDown() throws Exception {
+    RootPanel.get().clear();
+  }
+
   /**
    * Test that removing and re-adding an RTA doesn't destroy its contents (Only
    * IE actually preserves dynamically-created iframe contents across DOM
@@ -302,7 +307,7 @@ public class RichTextAreaTest extends GWTTestCase {
    */
   @DoNotRunWith(Platform.HtmlUnitUnknown)
   public void testSetHTMLAfterInit() {
-    final RichTextArea richTextArea = new RichTextArea();    
+    final RichTextArea richTextArea = new RichTextArea();
     delayTestFinish(RICH_TEXT_ASYNC_DELAY);
     richTextArea.addInitializeHandler(new InitializeHandler() {
       @Override

@@ -22,8 +22,8 @@ public class WindowImplMozilla extends WindowImpl {
 
   /**
    * For Mozilla, reading from $wnd.location.hash decodes the fragment.
-   * https://bugzilla.mozilla.org/show_bug.cgi?id=483304
-   * https://bugzilla.mozilla.org/show_bug.cgi?id=135309
+   * https://bugzilla.mozilla.org/show_bug.cgi?id=483304 fixed
+   * https://bugzilla.mozilla.org/show_bug.cgi?id=135309 fixed
    * To avoid this bug, we use location.href instead.
    */
   @Override

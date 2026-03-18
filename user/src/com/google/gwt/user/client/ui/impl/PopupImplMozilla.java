@@ -77,6 +77,7 @@ public class PopupImplMozilla extends PopupImpl {
   public Element createElement() {
     final Element outerElem = DOM.createDiv();
 
+    // TODO still applicable in 2026? I think not, we can remove this.
     if (isFF2Mac) {
       // To solve the scrollbar rendering problem on the Mac, we have to make
       // the PopupPanel a 'heavyweight' element by setting a style of

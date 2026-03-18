@@ -104,6 +104,7 @@ public class RequestBuilderTestServlet extends HttpServlet {
          * text the status message will be undefined. So, we make sure that the
          * post returns some data. See
          * http://bugs.webkit.org/show_bug.cgi?id=3810.
+         * //fixed
          */
         response.getWriter().print(RequestBuilderTest.SERVLET_POST_RESPONSE);
         response.setStatus(HttpServletResponse.SC_OK);

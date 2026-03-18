@@ -639,43 +639,13 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
   }
 
   /**
-   * Implementation of {@link CellTable} used by Firefox.
-   */
-  @SuppressWarnings("unused")
-  private static class ImplMozilla extends Impl {
-    /**
-     * Firefox 3.6 and earlier convert td elements to divs if the tbody is
-     * removed from the table element.
-     */
-    @Override
-    protected void detachSectionElement(TableSectionElement section) {
-      if (isGecko192OrBefore()) {
-        return;
-      }
-      super.detachSectionElement(section);
-    }
-
-    @Override
-    protected void reattachSectionElement(Element parent, TableSectionElement section,
-        Element nextSection) {
-      if (isGecko192OrBefore()) {
-        return;
-      }
-      super.reattachSectionElement(parent, section, nextSection);
-    }
-
-    /**
-     * Return true if using Gecko 1.9.2 (Firefox 3.6) or earlier.
-     */
-    private native boolean isGecko192OrBefore() /*-{
-      return @com.google.gwt.dom.client.DOMImplMozilla::isGecko192OrBefore()();
-    }-*/;
-  }
-
-  /**
    * Implementation of {@link AbstractCellTable} used by IE.
+   *
+   * @deprecated Unused since 2.10.0, left in place to permit downstream users to continue to
+   * use it in GWT module files.
    */
   @SuppressWarnings("unused")
+  @Deprecated
   private static class ImplTrident extends Impl {
 
     /**

@@ -27,6 +27,7 @@ import com.google.gwt.i18n.server.PropertyCatalogFactoryTest;
 import com.google.gwt.i18n.server.RegionInheritanceTest;
 import com.google.gwt.i18n.server.impl.ReflectionMessageInterfaceTest;
 import com.google.gwt.i18n.shared.AnyRtlDirectionEstimatorTest;
+import com.google.gwt.i18n.shared.BidiFormatterBaseTest;
 import com.google.gwt.i18n.shared.BidiFormatterTest;
 import com.google.gwt.i18n.shared.BidiUtilsTest;
 import com.google.gwt.i18n.shared.FirstStrongDirectionEstimatorTest;
@@ -45,6 +46,7 @@ public class I18NJreSuite {
     // $JUnit-BEGIN$
     suite.addTestSuite(AnyRtlDirectionEstimatorTest.class);
     suite.addTestSuite(BidiFormatterTest.class);
+    suite.addTestSuite(BidiFormatterBaseTest.class);
     suite.addTestSuite(BidiUtilsTest.class);
     suite.addTestSuite(FirstStrongDirectionEstimatorTest.class);
     suite.addTestSuite(GwtLocaleTest.class);

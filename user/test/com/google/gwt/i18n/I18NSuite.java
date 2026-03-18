@@ -51,6 +51,7 @@ import com.google.gwt.i18n.client.RussianPluralsTest;
 import com.google.gwt.i18n.client.TimeZoneInfoTest;
 import com.google.gwt.i18n.client.TimeZoneTest;
 import com.google.gwt.i18n.shared.GwtBidiUtilsTest;
+import com.google.gwt.i18n.shared.SafeHtmlBidiFormatterTest;
 import com.google.gwt.junit.tools.GWTTestSuite;
 
 import junit.framework.Test;
@@ -73,6 +74,7 @@ public class I18NSuite {
     suite.addTestSuite(DateTimeParse_en_Test.class);
     suite.addTestSuite(DateTimeParse_zh_CN_Test.class);
     suite.addTestSuite(GwtBidiUtilsTest.class);
+    suite.addTestSuite(SafeHtmlBidiFormatterTest.class);
     suite.addTestSuite(I18NTest.class);
     suite.addTestSuite(I18N2Test.class);
     suite.addTestSuite(I18N_pa_Arab_Test.class);

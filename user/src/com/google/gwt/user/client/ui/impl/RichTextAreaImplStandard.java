@@ -309,7 +309,6 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
   }
 
   protected native String getHTMLImpl() /*-{
-    $wnd.console.log(this.@com.google.gwt.user.client.ui.impl.RichTextAreaImpl::elem.contentWindow.document.body.innerHTML);
     return this.@com.google.gwt.user.client.ui.impl.RichTextAreaImpl::elem.contentWindow.document.body.innerHTML;
   }-*/;
 
@@ -366,7 +365,7 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
   @Override @SuppressIsSafeHtmlCastCheck
   protected void onElementInitialized() {
     // Issue 1897: This method is called after a timeout, during which time the
-    // element might by detached.
+    // element might be detached.
     if (!initializing) {
       return;
     }
@@ -408,9 +407,7 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
   }-*/;
 
   protected native void setHTMLImpl(@IsSafeHtml String html) /*-{
-    $wnd.console.log(html, this.@com.google.gwt.user.client.ui.impl.RichTextAreaImpl::elem.contentWindow.document.body.innerHTML);
     this.@com.google.gwt.user.client.ui.impl.RichTextAreaImpl::elem.contentWindow.document.body.innerHTML = html;
-    $wnd.console.log(this.@com.google.gwt.user.client.ui.impl.RichTextAreaImpl::elem.contentWindow.document.body.innerHTML);
   }-*/;
 
   protected native void setTextImpl(String text) /*-{

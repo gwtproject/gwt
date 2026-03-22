@@ -131,6 +131,24 @@ public class RichTextAreaTest extends GWTTestCase {
     final RichTextArea richTextArea = new RichTextArea();
     RootPanel.get().add(richTextArea);
     RootPanel.get().remove(richTextArea);
+
+    // Delay 100ms and confirm that initialization has not fired
+    boolean[] initFired = {false};
+    richTextArea.addInitializeHandler(new InitializeHandler() {
+      @Override
+      public void onInitialize(InitializeEvent event) {
+        initFired[0] = true;
+      }
+    });
+    new Timer() {
+      @Override
+      public void run() {
+        assertFalse(initFired[0]);
+        finishTest();
+      }
+    }.schedule(100);
+    delayTestFinish(RICH_TEXT_ASYNC_DELAY);
+
   }
 
   public void testFormatAfterAttach() {

@@ -145,7 +145,6 @@ public class RichTextAreaTest extends GWTTestCase {
       }
     }.schedule(100);
     delayTestFinish(RICH_TEXT_ASYNC_DELAY);
-
   }
 
   public void testFormatAfterAttach() {

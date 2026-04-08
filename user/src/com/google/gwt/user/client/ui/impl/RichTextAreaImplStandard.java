@@ -365,7 +365,7 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
   @Override @SuppressIsSafeHtmlCastCheck
   protected void onElementInitialized() {
     // Issue 1897: This method is called after a timeout, during which time the
-    // element might be detached.
+    // element might by detached.
     if (!initializing) {
       return;
     }

@@ -69,7 +69,6 @@
             <startupUrl>Hello.html</startupUrl>
           </startupUrls>
           <warDir>${project.build.directory}/${project.artifactId}-${project.version}</warDir>
-          <style>PRETTY</style>
         </configuration>
       </plugin>
 

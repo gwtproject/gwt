@@ -36,6 +36,8 @@ public class RichTextAreaImplMozilla extends RichTextAreaImplStandard {
   @Override
   public Element createElement() {
     Element element = super.createElement();
+    // Explicitly set empty src string to signal that we don't need the workaround from Firefox.
+    // See https://github.com/gwtproject/gwt/issues/10292
     element.setAttribute("src", "");
     return element;
   }

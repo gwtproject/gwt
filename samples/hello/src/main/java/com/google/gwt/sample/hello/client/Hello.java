@@ -19,37 +19,21 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.RichTextArea;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.Timer;
-import com.google.gwt.event.logical.shared.InitializeEvent;
-import com.google.gwt.event.logical.shared.InitializeHandler;
 
 /**
  * HelloWorld application.
  */
 public class Hello implements EntryPoint {
-  private final String html = "<b>hello</b><i>world</i>";
 
   public void onModuleLoad() {
-    RichTextArea rta = new RichTextArea();
-    rta.setHTML(html);
-
-    rta.addInitializeHandler(new InitializeHandler() {
-      @Override
-      public void onInitialize(InitializeEvent event) {
-        new Timer() {
-          @Override
-          public void run() {
-            if (html.equalsIgnoreCase(rta.getHTML())) {
-              Window.alert("pass");
-            } else {
-              Window.alert("fail, expected: " + html + ", actual: " + rta.getHTML());
-            }
-          }
-        }.schedule(100);
+    Button b = new Button("Click me", new ClickHandler() {
+      public void onClick(ClickEvent event) {
+        Window.alert("Hello, AJAX");
       }
     });
-    RootPanel.get().add(rta);
+
+    RootPanel.get().add(b);
   }
 }

@@ -35,6 +35,7 @@ import com.google.gwt.dev.util.arg.ArgHandlerSaveSourceOutput;
 import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
 import com.google.gwt.dev.util.arg.ArgHandlerWorkDirOptional;
 import com.google.gwt.dev.util.arg.OptionOptimize;
+import com.google.gwt.dev.util.log.perf.GwtStartupEvent;
 import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
@@ -101,6 +102,7 @@ public class Compiler {
      */
     final CompilerOptions options = new CompilerOptionsImpl();
     if (new ArgProcessor(options).processArgs(args)) {
+      new GwtStartupEvent(Compiler.class, args);
       CompileTask task = new CompileTask() {
         @Override
         public boolean run(TreeLogger logger) throws UnableToCompleteException {

@@ -35,7 +35,7 @@ public class About {
    */
   private static final String GWT_VERSION_TAG = "@GWT_" + "VERSION@";
 
-  private static final String gwtName = "Google Web Toolkit";
+  private static final String gwtName = "GWT Web Toolkit";
   private static final String gwtGitRev;
   private static final GwtVersion gwtVersion;
 

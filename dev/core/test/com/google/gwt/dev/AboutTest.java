@@ -32,6 +32,11 @@ public class AboutTest extends TestCase {
     assertFalse(result.length() == 0);
   }
 
+  public void testGwtGitRev() {
+    String result = About.getGwtGitRev();
+    assertFalse(result.length() == 0);
+  }
+
   public void testGwtVersion() {
     String result = About.getGwtVersion();
     assertFalse(result.length() == 0);

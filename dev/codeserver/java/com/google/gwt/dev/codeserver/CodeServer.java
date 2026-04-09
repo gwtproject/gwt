@@ -24,6 +24,7 @@ import com.google.gwt.dev.javac.UnitCache;
 import com.google.gwt.dev.javac.UnitCacheSingleton;
 import com.google.gwt.dev.util.DiskCachingUtil;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
+import com.google.gwt.dev.util.log.perf.GwtStartupEvent;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 
 import java.io.File;
@@ -51,6 +52,7 @@ public class CodeServer {
     if (!options.parseArgs(args)) {
       System.exit(1);
     }
+    new GwtStartupEvent(CodeServer.class, args);
 
     main(options);
   }

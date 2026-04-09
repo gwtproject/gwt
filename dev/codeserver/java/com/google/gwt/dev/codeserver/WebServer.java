@@ -85,6 +85,10 @@ public class WebServer {
 
   private static final Pattern CACHE_JS_FILE = Pattern.compile("/(" + STRONG_NAME + ").cache.js$");
 
+  private static final Pattern ACCEPT_ENCODING_SPEC = Pattern.compile(
+      "^\\s*([!#$%&'*+.^_`|~0-9A-Za-z-]+|\\*)\\s*(?:;\\s*q\\s*=\\s*"
+          + "(0(?:\\.\\d{0,3})?|1(?:\\.0{0,3})?))?\\s*$");
+
   private static final MimeTypes MIME_TYPES = new MimeTypes();
 
   private static final String TIME_IN_THE_PAST = "Mon, 01 Jan 1990 00:00:00 GMT";
@@ -374,8 +378,10 @@ public class WebServer {
 
         if (contentEncoding != null) {
           if (!acceptsGzipEncoding(request.getHeader("Accept-Encoding"))) {
-            response.sendError(HttpServletResponse.SC_NOT_IMPLEMENTED);
-            logger.log(TreeLogger.WARN, "client doesn't accept gzip; bailing");
+            response.setHeader("Accept-Encoding", "gzip");
+            response.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
+            logger.log(TreeLogger.WARN,
+                "client doesn't accept gzip and no uncompressed representation exists; bailing");
             return;
           }
           response.setHeader("Content-Encoding", "gzip");
@@ -546,7 +552,11 @@ public class WebServer {
 
   /* visible for testing */
   static boolean acceptsGzipEncoding(String acceptEncodingHeader) {
-    if (acceptEncodingHeader == null || acceptEncodingHeader.trim().isEmpty()) {
+    if (acceptEncodingHeader == null) {
+      // RFC 9110: if Accept-Encoding is absent, any content coding is acceptable.
+      return true;
+    }
+    if (acceptEncodingHeader.trim().isEmpty()) {
       return false;
     }
 
@@ -554,29 +564,14 @@ public class WebServer {
     Double wildcardQValue = null;
 
     for (String encodingSpec : acceptEncodingHeader.split(",")) {
-      String[] parts = encodingSpec.trim().split(";");
-      if (parts.length == 0) {
+      Matcher matcher = ACCEPT_ENCODING_SPEC.matcher(encodingSpec);
+      if (!matcher.matches()) {
         continue;
       }
 
-      String encoding = parts[0].trim().toLowerCase(Locale.ROOT);
-      if (encoding.isEmpty()) {
-        continue;
-      }
-
-      double qValue = 1.0;
-      for (int i = 1; i < parts.length; i++) {
-        String parameter = parts[i].trim().toLowerCase(Locale.ROOT);
-        if (parameter.startsWith("q=")) {
-          String qValueText = parameter.substring("q=".length()).trim();
-          try {
-            qValue = Double.parseDouble(qValueText);
-          } catch (NumberFormatException e) {
-            qValue = 0.0;
-          }
-          break;
-        }
-      }
+      String encoding = matcher.group(1).toLowerCase(Locale.ROOT);
+      String qValueText = matcher.group(2);
+      double qValue = qValueText == null ? 1.0 : Double.parseDouble(qValueText);
 
       if (encoding.equals("gzip")) {
         gzipQValue = qValue;

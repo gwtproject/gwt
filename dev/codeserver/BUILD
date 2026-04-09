@@ -64,7 +64,6 @@ test_suite(
     tests = [
         ":RecompilerTest",
         ":SourceHandlerTest",
-        ":WebServerSecurityTest",
     ],
 )
 
@@ -79,14 +78,6 @@ java_test(
 java_test(
     name = "RecompilerTest",
     test_class = "com.google.gwt.dev.codeserver.RecompilerTest",
-    runtime_deps = [
-        ":testlib",
-    ],
-)
-
-java_test(
-    name = "WebServerSecurityTest",
-    test_class = "com.google.gwt.dev.codeserver.WebServerSecurityTest",
     runtime_deps = [
         ":testlib",
     ],

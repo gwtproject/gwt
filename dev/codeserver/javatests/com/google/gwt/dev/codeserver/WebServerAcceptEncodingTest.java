@@ -1,5 +1,5 @@
 /*
- * Copyright 2026 Google Inc.
+ * Copyright 2026 The GWT Project Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,12 +18,15 @@ package com.google.gwt.dev.codeserver;
 import junit.framework.TestCase;
 
 /**
- * Security-focused tests for request header parsing in {@link WebServer}.
+ * Tests request Accept-Encoding parsing for serving gzip-compressed responses.
  */
-public class WebServerSecurityTest extends TestCase {
+public class WebServerAcceptEncodingTest extends TestCase {
 
-  public void testAcceptsGzipEncodingRejectsNullOrEmptyHeader() {
-    assertFalse(WebServer.acceptsGzipEncoding(null));
+  public void testAcceptsGzipEncodingWhenHeaderIsAbsent() {
+    assertTrue(WebServer.acceptsGzipEncoding(null));
+  }
+
+  public void testAcceptsGzipEncodingRejectsEmptyHeaderValue() {
     assertFalse(WebServer.acceptsGzipEncoding(""));
     assertFalse(WebServer.acceptsGzipEncoding("   "));
   }
@@ -32,6 +35,11 @@ public class WebServerSecurityTest extends TestCase {
     assertTrue(WebServer.acceptsGzipEncoding("gzip"));
     assertTrue(WebServer.acceptsGzipEncoding("deflate, gzip"));
     assertTrue(WebServer.acceptsGzipEncoding("GZIP"));
+  }
+
+  public void testAcceptsGzipEncodingRejectsSubstringMatches() {
+    assertFalse(WebServer.acceptsGzipEncoding("xgzip"));
+    assertFalse(WebServer.acceptsGzipEncoding("gzip-alt"));
   }
 
   public void testAcceptsGzipEncodingRejectsExplicitGzipZeroQValue() {
@@ -50,7 +58,13 @@ public class WebServerSecurityTest extends TestCase {
     assertTrue(WebServer.acceptsGzipEncoding("gzip;q=1, *;q=0"));
   }
 
-  public void testAcceptsGzipEncodingRejectsMalformedQValue() {
+  public void testAcceptsGzipEncodingRejectsInvalidQualityValues() {
     assertFalse(WebServer.acceptsGzipEncoding("gzip;q=not-a-number"));
+    assertFalse(WebServer.acceptsGzipEncoding("gzip;q=1.1"));
+    assertFalse(WebServer.acceptsGzipEncoding("gzip;q=0.1234"));
+  }
+
+  public void testAcceptsGzipEncodingRejectsUnsupportedParameters() {
+    assertFalse(WebServer.acceptsGzipEncoding("gzip;level=9"));
   }
 }

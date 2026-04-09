@@ -39,6 +39,7 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
@@ -372,7 +373,7 @@ public class WebServer {
         }
 
         if (contentEncoding != null) {
-          if (!request.getHeader("Accept-Encoding").contains("gzip")) {
+          if (!acceptsGzipEncoding(request.getHeader("Accept-Encoding"))) {
             response.sendError(HttpServletResponse.SC_NOT_IMPLEMENTED);
             logger.log(TreeLogger.WARN, "client doesn't accept gzip; bailing");
             return;
@@ -541,6 +542,54 @@ public class WebServer {
   static String guessMimeType(String filename) {
     String mimeType = MIME_TYPES.getMimeByExtension(filename);
     return mimeType != null ? mimeType : "";
+  }
+
+  /* visible for testing */
+  static boolean acceptsGzipEncoding(String acceptEncodingHeader) {
+    if (acceptEncodingHeader == null || acceptEncodingHeader.trim().isEmpty()) {
+      return false;
+    }
+
+    Double gzipQValue = null;
+    Double wildcardQValue = null;
+
+    for (String encodingSpec : acceptEncodingHeader.split(",")) {
+      String[] parts = encodingSpec.trim().split(";");
+      if (parts.length == 0) {
+        continue;
+      }
+
+      String encoding = parts[0].trim().toLowerCase(Locale.ROOT);
+      if (encoding.isEmpty()) {
+        continue;
+      }
+
+      double qValue = 1.0;
+      for (int i = 1; i < parts.length; i++) {
+        String parameter = parts[i].trim().toLowerCase(Locale.ROOT);
+        if (parameter.startsWith("q=")) {
+          String qValueText = parameter.substring("q=".length()).trim();
+          try {
+            qValue = Double.parseDouble(qValueText);
+          } catch (NumberFormatException e) {
+            qValue = 0.0;
+          }
+          break;
+        }
+      }
+
+      if (encoding.equals("gzip")) {
+        gzipQValue = qValue;
+      } else if (encoding.equals("*")) {
+        wildcardQValue = qValue;
+      }
+    }
+
+    if (gzipQValue != null) {
+      return gzipQValue > 0.0;
+    }
+
+    return wildcardQValue != null && wildcardQValue > 0.0;
   }
 
   /**

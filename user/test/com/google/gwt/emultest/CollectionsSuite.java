@@ -15,6 +15,7 @@
  */
 package com.google.gwt.emultest;
 
+import com.google.gwt.emultest.java.util.AbstractSequentialListTest;
 import com.google.gwt.emultest.java.util.ArrayDequeTest;
 import com.google.gwt.emultest.java.util.ArrayListTest;
 import com.google.gwt.emultest.java.util.ArraysDoubleSemanticsTest;
@@ -48,6 +49,7 @@ import org.junit.runners.Suite.SuiteClasses;
 /** Test JRE Collections emulation. */
 @RunWith(Suite.class)
 @SuiteClasses({
+  AbstractSequentialListTest.class,
   ArrayDequeTest.class,
   ArrayListTest.class,
   ArraysDoubleSemanticsTest.class,

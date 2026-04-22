@@ -88,9 +88,11 @@ class OutboxDir {
     // (This is not guaranteed to delete all directories on Windows if a directory is locked.)
     for (File candidate : children) {
       if (candidate.getName().startsWith(COMPILE_DIR_PREFIX)) {
-        MoreFiles.deleteRecursively(candidate.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
-        if (candidate.exists()) {
-          logger.log(Type.WARN, "unable to delete '" + candidate + "' (skipped)");
+        try {
+          MoreFiles.deleteRecursively(candidate.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
+        } catch (IOException e) {
+          // Developers on Windows may add a breakpoint here to see which file was still open
+          logger.log(Type.WARN, "Unable to delete '" + candidate + "' (skipped)");
         }
       }
     }

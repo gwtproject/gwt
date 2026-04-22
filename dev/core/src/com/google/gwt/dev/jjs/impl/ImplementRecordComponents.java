@@ -61,6 +61,7 @@ public class ImplementRecordComponents {
   private final JMethod getClassMethod;
   private final JMethod getSimpleNameMethod;
   private final JClassType javaLangString;
+  private final JMethod objectsEquals;
 
   private ImplementRecordComponents(JProgram program) {
     this.program = program;
@@ -69,6 +70,9 @@ public class ImplementRecordComponents {
     getClassMethod = program.getIndexedMethod(RuntimeConstants.OBJECT_GET_CLASS);
     getSimpleNameMethod = program.getIndexedMethod(RuntimeConstants.CLASS_GET_SIMPLE_NAME);
     javaLangString = program.getTypeJavaLangString();
+    objectsEquals = program.getIndexedType("Objects")
+        .findMethod("equals(Ljava/lang/Object;Ljava/lang/Object;)Z", false);
+    assert objectsEquals.isStatic();
   }
 
   private void execImpl() {
@@ -190,8 +194,6 @@ public class ImplementRecordComponents {
     body.getBlock().addStmt(uncheckedAssign.makeStatement());
 
     JExpression componentCheck = JBooleanLiteral.TRUE;
-    JMethod objectsEquals = program.getIndexedMethod(RuntimeConstants.OBJECTS_EQUALS);
-    assert objectsEquals.isStatic();
     for (JField field : type.getFields()) {
       if (!field.isStatic()) {
         JFieldRef myField = new JFieldRef(info, new JThisRef(info, type), field, type);

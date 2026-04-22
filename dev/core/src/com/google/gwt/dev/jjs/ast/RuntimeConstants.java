@@ -100,6 +100,5 @@ public class RuntimeConstants {
 
   public static final String UTIL_MAKE_ENUM_NAME = "Util.makeEnumName";
 
-  public static final String OBJECTS_EQUALS = "Objects.equals";
   public static final String OBJECTS_HASH = "Objects.hash";
 }

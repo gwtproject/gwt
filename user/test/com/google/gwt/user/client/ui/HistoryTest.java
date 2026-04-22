@@ -392,7 +392,6 @@ public class HistoryTest extends GWTTestCase {
   /**
    * Test to make sure that there is no double unescaping of hash values.
    * See https://bugzilla.mozilla.org/show_bug.cgi?id=483304
-   * fixed
    */
   @DoNotRunWith(Platform.HtmlUnitUnknown)
   public void testNoDoubleTokenUnEscaping() {

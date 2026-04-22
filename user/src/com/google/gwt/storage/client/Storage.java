@@ -259,10 +259,6 @@ public final class Storage {
    *      Storage - Storage.setItem(k,v)</a>
    */
   public void setItem(String key, String data) {
-    // prevent the empty string due to a Firefox bug:
-    // bugzilla.mozilla.org/show_bug.cgi?id=510849
-    // fixed
-    assert key.length() > 0;
     impl.setItem(storage, key, data);
   }
 }

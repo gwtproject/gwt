@@ -17,20 +17,10 @@ package com.google.gwt.user.client.impl;
 
 /**
  * Mozilla implementation of {@link com.google.gwt.user.client.impl.WindowImpl}.
+ * @deprecated This class is no longer used and has no differences from its superclass, and will
+ * be removed in a future release.
  */
+@Deprecated
 public class WindowImplMozilla extends WindowImpl {
-
-  /**
-   * For Mozilla, reading from $wnd.location.hash decodes the fragment.
-   * https://bugzilla.mozilla.org/show_bug.cgi?id=483304 fixed
-   * https://bugzilla.mozilla.org/show_bug.cgi?id=135309 fixed
-   * To avoid this bug, we use location.href instead.
-   */
-  @Override
-  public native String getHash() /*-{
-    var href = $wnd.location.href;
-    var hashLoc = href.indexOf("#");
-    return (hashLoc > 0) ? href.substring(hashLoc) : "";
-  }-*/;
 
 }

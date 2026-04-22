@@ -185,7 +185,6 @@ public final class HorizontalSplitPanel extends SplitPanel {
   /**
    * The Safari implementation which owes its existence entirely to a single
    * WebKit bug: http://bugs.webkit.org/show_bug.cgi?id=9137.
-   * fixed
    */
   @SuppressWarnings("unused")
   // will be used by Safari permutation

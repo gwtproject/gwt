@@ -56,24 +56,6 @@ class DOMImplMozilla extends DOMImplStandard {
   }
 
   @Override
-  public native EventTarget eventGetRelatedTarget(NativeEvent evt) /*-{
-//  fixed
-    // Hack around Mozilla bug 497780 (relatedTarget sometimes returns XUL
-    // elements). Trying to access relatedTarget.nodeName will throw an
-    // exception if it's a XUL element.
-    var relatedTarget = evt.relatedTarget;
-    if (!relatedTarget) {
-      return null;
-    }
-    try {
-      var nodeName = relatedTarget.nodeName;
-      return relatedTarget;
-    } catch (e) {
-      return null;
-    }
-  }-*/;
-
-  @Override
   public int getAbsoluteLeft(Element elem) {
     return getAbsoluteLeftImpl(elem.getOwnerDocument().getViewportElement(),
         elem);
@@ -88,22 +70,12 @@ class DOMImplMozilla extends DOMImplStandard {
   @Override
   public native int getBodyOffsetLeft(Document doc) /*-{
     var style = $wnd.getComputedStyle(doc.documentElement, null);
-    if (style == null) {
-    //fixed
-      // Works around https://bugzilla.mozilla.org/show_bug.cgi?id=548397
-      return 0;
-    }
     return parseInt(style.marginLeft, 10) + parseInt(style.borderLeftWidth, 10);
   }-*/;
 
   @Override
   public native int getBodyOffsetTop(Document doc) /*-{
     var style = $wnd.getComputedStyle(doc.documentElement, null);
-    if (style == null) {
-    //fixed
-      // Works around https://bugzilla.mozilla.org/show_bug.cgi?id=548397
-      return 0;
-    }
     return parseInt(style.marginTop, 10) + parseInt(style.borderTopWidth, 10);
   }-*/;
 
@@ -118,7 +90,7 @@ class DOMImplMozilla extends DOMImplStandard {
       //
       // See https://bugzilla.mozilla.org/show_bug.cgi?id=208427
       // and http://code.google.com/p/google-web-toolkit/issues/detail?id=1909
-      // fixed FF 148, reevaluate once ESR > 148
+      // Fixed FF 148, reevaluate once ESR > 148
       return 0;
     }
   }-*/;
@@ -128,30 +100,10 @@ class DOMImplMozilla extends DOMImplStandard {
     return super.getScrollLeft(elem);
   }
 
-//  @Override
-//  public native boolean isOrHasChild(Node parent, Node child) /*-{
-//    // For more information about compareDocumentPosition, see:
-//    // http://www.quirksmode.org/blog/archives/2006/01/contains_for_mo.html
-//    return (parent === child) || !!(parent.compareDocumentPosition(child) & 16);
-//  }-*/;
-
   @Override
   public void setScrollLeft(Element elem, int left) {
     super.setScrollLeft(elem, left);
   }
-
-//  @Override
-//  public native String toString(Element elem) /*-{
-//    // Basic idea is to use the innerHTML property by copying the node into a
-//    // div and getting the innerHTML
-//    var doc = elem.ownerDocument;
-//    var temp = elem.cloneNode(true);
-//    var tempDiv = doc.createElement("DIV");
-//    tempDiv.appendChild(temp);
-//    outer = tempDiv.innerHTML;
-//    temp.innerHTML = "";
-//    return outer;
-//  }-*/;
 
   private native NativeEvent createKeyEventImpl(Document doc, String type,
       boolean canBubble, boolean cancelable, boolean ctrlKey, boolean altKey,

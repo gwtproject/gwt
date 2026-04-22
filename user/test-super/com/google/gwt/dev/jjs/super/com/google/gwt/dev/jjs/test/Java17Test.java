@@ -185,6 +185,7 @@ public class Java17Test extends GWTTestCase {
     RecordWithReferenceType sameA = new RecordWithReferenceType(new TopLevelRecord("a", 1));
     RecordWithReferenceType sameB = new RecordWithReferenceType(new TopLevelRecord("a", 1));
     RecordWithReferenceType different = new RecordWithReferenceType(new TopLevelRecord("a", 2));
+    RecordWithReferenceType nullChild = new RecordWithReferenceType(null);
     // check that an instance is equal to itself
     assertEquals(sameA, sameA);
     assertEquals(sameA.hashCode(), sameA.hashCode());
@@ -196,6 +197,10 @@ public class Java17Test extends GWTTestCase {
     assertFalse(sameA.hashCode() == different.hashCode());
 
     assertFalse(sameA.equals(null));
+    assertFalse(nullChild.equals(sameA));
+    assertFalse(sameA.equals(nullChild));
+    assertTrue(new RecordWithReferenceType(null).equals(nullChild));
+    assertTrue(nullChild.equals(nullChild));
 
     assertTrue(new TopLevelRecord(null, 1).equals(new TopLevelRecord(null, 1)));
     assertFalse(new TopLevelRecord("asdf", 2).equals(new TopLevelRecord(null, 2)));

@@ -640,8 +640,12 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
 
   /**
    * Implementation of {@link AbstractCellTable} used by IE.
+   *
+   * @deprecated Unused since 2.10.0, left in place to permit downstream users to continue to
+   * use it in GWT module files.
    */
   @SuppressWarnings("unused")
+  @Deprecated
   private static class ImplTrident extends Impl {
 
     /**

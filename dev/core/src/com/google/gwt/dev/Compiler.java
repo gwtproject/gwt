@@ -102,7 +102,7 @@ public class Compiler {
      */
     final CompilerOptions options = new CompilerOptionsImpl();
     if (new ArgProcessor(options).processArgs(args)) {
-      new GwtStartupEvent(Compiler.class, args);
+      new GwtStartupEvent(Compiler.class);
       CompileTask task = new CompileTask() {
         @Override
         public boolean run(TreeLogger logger) throws UnableToCompleteException {

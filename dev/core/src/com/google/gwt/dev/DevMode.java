@@ -474,7 +474,7 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
      */
     DevMode hostedMode = new DevMode();
     if (new ArgProcessor(hostedMode.options).processArgs(args)) {
-      new GwtStartupEvent(DevMode.class, args);
+      new GwtStartupEvent(DevMode.class);
       hostedMode.run();
       // Exit w/ success code.
       System.exit(0);

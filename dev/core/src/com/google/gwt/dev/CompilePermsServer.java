@@ -235,7 +235,7 @@ public class CompilePermsServer {
     int exitCode = -1;
     final CompileServerOptions options = new CompileServerOptionsImpl();
     if (new ArgProcessor(options).processArgs(args)) {
-      new GwtStartupEvent(CompilePermsServer.class, args);
+      new GwtStartupEvent(CompilePermsServer.class);
       PrintWriterTreeLogger logger = new PrintWriterTreeLogger();
       logger.setMaxDetail(options.getLogLevel());
       if (run(options, logger)) {

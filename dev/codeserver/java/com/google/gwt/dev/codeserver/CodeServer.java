@@ -52,7 +52,7 @@ public class CodeServer {
     if (!options.parseArgs(args)) {
       System.exit(1);
     }
-    new GwtStartupEvent(CodeServer.class, args);
+    new GwtStartupEvent(CodeServer.class);
 
     main(options);
   }

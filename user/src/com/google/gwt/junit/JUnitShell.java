@@ -695,7 +695,7 @@ public class JUnitShell extends DevMode {
       if (!argProcessor.processArgs(args)) {
         throw new JUnitFatalLaunchException("Error processing shell arguments");
       }
-      new GwtStartupEvent(JUnitShell.class, args);
+      new GwtStartupEvent(JUnitShell.class);
 
       // Always bind to the wildcard address and substitute the host address in
       // URLs. Note that connectAddress isn't actually used here, as we

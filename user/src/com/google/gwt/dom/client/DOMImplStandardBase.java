@@ -146,7 +146,7 @@ class DOMImplStandardBase extends DOMImplStandard {
   }-*/;
 
   private static native ClientRect getBoundingClientRect(Element element) /*-{
-    return element.getBoundingClientRect && element.getBoundingClientRect();
+    return element.getBoundingClientRect();
   }-*/;
 
   /**
@@ -207,18 +207,16 @@ class DOMImplStandardBase extends DOMImplStandard {
   @Override
   public int getAbsoluteLeft(Element elem) {
     ClientRect rect = getBoundingClientRect(elem);
-    double left = rect != null ? rect.getSubPixelLeft()
-        + getScrollLeft(elem.getOwnerDocument())
-        : getAbsoluteLeftUsingOffsets(elem);
+    double left = rect.getSubPixelLeft()
+        + getScrollLeft(elem.getOwnerDocument());
     return toInt32(left);
   }
 
   @Override
   public int getAbsoluteTop(Element elem) {
     ClientRect rect = getBoundingClientRect(elem);
-    double top = rect != null ? rect.getSubPixelTop()
-        + getScrollTop(elem.getOwnerDocument())
-        : getAbsoluteTopUsingOffsets(elem);
+    double top = rect.getSubPixelTop()
+        + getScrollTop(elem.getOwnerDocument());
     return toInt32(top);
   }
 

@@ -24,7 +24,7 @@ import java.util.Properties;
  */
 public class About {
   /**
-   * Tag used for text replacement of the SVN version (split up to avoid
+   * Tag used for text replacement of the Git version (split up to avoid
    * replacing it here).
    */
   private static final String GWT_GITREV_TAG = "@GWT_" + "GITREV@";

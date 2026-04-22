@@ -95,43 +95,19 @@ class DOMImplMozilla extends DOMImplStandard {
     }
   }-*/;
 
-  @Override
-  public int getScrollLeft(Element elem) {
-    return super.getScrollLeft(elem);
-  }
-
-  @Override
-  public void setScrollLeft(Element elem, int left) {
-    super.setScrollLeft(elem, left);
-  }
-
   private native NativeEvent createKeyEventImpl(Document doc, String type,
       boolean canBubble, boolean cancelable, boolean ctrlKey, boolean altKey,
       boolean shiftKey, boolean metaKey, int keyCode, int charCode) /*-{
-    if (!!window.KeyboardEvent) {
-      return new KeyboardEvent(type, {
-        ctrlKey: ctrlKey,
-        altKey: altKey,
-        shiftKey: shiftKey,
-        metaKey: metaKey,
-        keyCode: keyCode,
-        charCode: charCode,
-        bubbles: canBubble,
-        cancelable: cancelable
-      });
-    }
-    var evt = doc.createEvent('KeyboardEvent');
-    if (evt.initKeyEvent) {
-      // Gecko
-      evt.initKeyEvent(type, canBubble, cancelable, null, ctrlKey, altKey,
-        shiftKey, metaKey, keyCode, charCode);
-    } else {
-      // This happens to be IE11+ as of today
-      if ($wnd.console) {
-        $wnd.console.error("Synthetic keyboard events are not supported in this browser");
-      }
-    }
-    return evt;
+    return new KeyboardEvent(type, {
+      ctrlKey: ctrlKey,
+      altKey: altKey,
+      shiftKey: shiftKey,
+      metaKey: metaKey,
+      keyCode: keyCode,
+      charCode: charCode,
+      bubbles: canBubble,
+      cancelable: cancelable
+    });
   }-*/;
 
   private native int getAbsoluteLeftImpl(Element viewport, Element elem) /*-{

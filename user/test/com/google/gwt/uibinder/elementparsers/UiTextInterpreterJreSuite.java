@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Google Inc.
+ * Copyright 2026 GWT Project Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,26 +13,22 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.core;
+package com.google.gwt.uibinder.elementparsers;
 
-import com.google.gwt.core.client.impl.AsyncFragmentLoaderTest;
-import com.google.gwt.core.client.testing.StubSchedulerTest;
-import com.google.gwt.core.server.ServerGwtBridgeTest;
-import com.google.gwt.dev.StrictModeTest;
+import com.google.gwt.junit.TestSuiteWithOrder;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * All core tests that don't need GWTTestCase.
+ * Standalone suite to run just UiTextInterpreterTest with methods in order.
  */
-public class CoreJreSuite {
+public class UiTextInterpreterJreSuite {
   public static Test suite() {
-    TestSuite suite = new TestSuite("All core tests");
-    suite.addTestSuite(AsyncFragmentLoaderTest.class);
-    suite.addTestSuite(ServerGwtBridgeTest.class);
-    suite.addTestSuite(StrictModeTest.class);
-    suite.addTestSuite(StubSchedulerTest.class);
+    TestSuite suite = new TestSuite("UiTextInterpreter JRE test");
+
+    suite.addTest(new TestSuiteWithOrder(UiTextInterpreterTest.class));
+
     return suite;
   }
 }

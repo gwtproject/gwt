@@ -21,6 +21,7 @@ import com.google.gwt.emultest.java.util.concurrent.atomic.AtomicIntegerTest;
 import com.google.gwt.emultest.java.util.concurrent.atomic.AtomicLongTest;
 import com.google.gwt.emultest.java.util.concurrent.atomic.AtomicReferenceArrayTest;
 
+import com.google.gwt.emultest.java.util.concurrent.atomic.AtomicReferenceTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -32,6 +33,7 @@ import org.junit.runners.Suite.SuiteClasses;
   TimeUnitTest.class,
   AtomicIntegerTest.class,
   AtomicLongTest.class,
+  AtomicReferenceTest.class,
   AtomicReferenceArrayTest.class,
 })
 public class ConcurrentSuite { }

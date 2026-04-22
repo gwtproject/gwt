@@ -18,6 +18,7 @@ package com.google.gwt.uibinder;
 import com.google.gwt.uibinder.attributeparsers.CssNameConverterTest;
 import com.google.gwt.uibinder.attributeparsers.FieldReferenceConverterTest;
 import com.google.gwt.uibinder.attributeparsers.HorizontalAlignmentConstantParserTest;
+import com.google.gwt.uibinder.attributeparsers.HorizontalAlignmentConstantParser_Test;
 import com.google.gwt.uibinder.attributeparsers.IntAttributeParserTest;
 import com.google.gwt.uibinder.attributeparsers.IntPairAttributeParserTest;
 import com.google.gwt.uibinder.attributeparsers.LengthAttributeParserTest;
@@ -26,12 +27,14 @@ import com.google.gwt.uibinder.attributeparsers.StrictAttributeParserTest;
 import com.google.gwt.uibinder.attributeparsers.StringAttributeParserTest;
 import com.google.gwt.uibinder.attributeparsers.TextAlignConstantParserTest;
 import com.google.gwt.uibinder.attributeparsers.VerticalAlignmentConstantParserTest;
+import com.google.gwt.uibinder.attributeparsers.VerticalAlignmentConstantParser_Test;
 import com.google.gwt.uibinder.elementparsers.AbsolutePanelParserTest;
 import com.google.gwt.uibinder.elementparsers.DateLabelParserTest;
 import com.google.gwt.uibinder.elementparsers.DialogBoxParserTest;
 import com.google.gwt.uibinder.elementparsers.DisclosurePanelParserTest;
 import com.google.gwt.uibinder.elementparsers.DockLayoutPanelParserTest;
 import com.google.gwt.uibinder.elementparsers.GridParserTest;
+import com.google.gwt.uibinder.elementparsers.HasAlignmentParserTest;
 import com.google.gwt.uibinder.elementparsers.HasTreeItemsParserTest;
 import com.google.gwt.uibinder.elementparsers.ImageParserTest;
 import com.google.gwt.uibinder.elementparsers.IsEmptyParserTest;
@@ -101,12 +104,14 @@ public class UiBinderJreSuite {
     suite.addTestSuite(IntAttributeParserTest.class);
     suite.addTestSuite(IntPairAttributeParserTest.class);
     suite.addTestSuite(HorizontalAlignmentConstantParserTest.class);
+    suite.addTestSuite(HorizontalAlignmentConstantParser_Test.class);
     suite.addTestSuite(LengthAttributeParserTest.class);
     suite.addTestSuite(SafeUriAttributeParserTest.class);
     suite.addTestSuite(StrictAttributeParserTest.class);
     suite.addTestSuite(StringAttributeParserTest.class);
     suite.addTestSuite(TextAlignConstantParserTest.class);
     suite.addTestSuite(VerticalAlignmentConstantParserTest.class);
+    suite.addTestSuite(VerticalAlignmentConstantParser_Test.class);
 
     // elementparsers
     suite.addTestSuite(AbsolutePanelParserTest.class);
@@ -115,6 +120,7 @@ public class UiBinderJreSuite {
     suite.addTestSuite(DisclosurePanelParserTest.class);
     suite.addTestSuite(DockLayoutPanelParserTest.class);
     suite.addTestSuite(GridParserTest.class);
+    suite.addTestSuite(HasAlignmentParserTest.class);
     suite.addTestSuite(HasTreeItemsParserTest.class);
     suite.addTestSuite(ImageParserTest.class);
     suite.addTestSuite(IsEmptyParserTest.class);

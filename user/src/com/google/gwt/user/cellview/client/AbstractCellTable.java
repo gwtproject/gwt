@@ -1916,7 +1916,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
           if (!skipRowHoverFloatElementCheck) {
             // Ignore events happening directly over the hovering row. If there are floating element
             // on top of the row, mouseout event should not be triggered. This is to avoid the
-            // flickring effect if the floating element is shown/hide based on hover event.
+            // flickering effect if the floating element is shown/hide based on hover event.
             int clientX = event.getClientX() + Window.getScrollLeft();
             int clientY = event.getClientY() + Window.getScrollTop();
             int rowLeft = hoveringRow.getAbsoluteLeft();

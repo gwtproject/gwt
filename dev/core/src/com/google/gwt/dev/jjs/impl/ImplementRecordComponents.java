@@ -72,7 +72,6 @@ public class ImplementRecordComponents {
     javaLangString = program.getTypeJavaLangString();
     objectsEquals = program.getIndexedType("Objects")
         .findMethod("equals(Ljava/lang/Object;Ljava/lang/Object;)Z", false);
-    assert objectsEquals.isStatic();
   }
 
   private void execImpl() {

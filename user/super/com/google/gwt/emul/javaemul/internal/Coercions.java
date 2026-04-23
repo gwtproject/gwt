@@ -30,5 +30,12 @@ public final class Coercions {
     return value | 0;
   }
 
+  /**
+   * Convert int into js unsigned int.
+   */
+  public static native int toUnsignedInt(int value) /*-{
+    return (value >>> 0);
+  }-*/;
+
   private Coercions() { }
 }

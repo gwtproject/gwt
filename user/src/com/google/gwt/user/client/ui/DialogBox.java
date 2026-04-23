@@ -15,7 +15,6 @@
  */
 package com.google.gwt.user.client.ui;
 
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.EventTarget;
 import com.google.gwt.dom.client.NativeEvent;
@@ -186,8 +185,8 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML,
   private boolean dragging;
   private int dragStartX, dragStartY;
   private int windowWidth;
-  private int clientLeft;
-  private int clientTop;
+  private final int clientLeft;
+  private final int clientTop;
 
   // Visible for Testing
   HandlerRegistration resizeHandlerRegistration;
@@ -265,8 +264,8 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML,
     setStyleName(DEFAULT_STYLENAME);
 
     windowWidth = Window.getClientWidth();
-    clientLeft = Document.get().getBodyOffsetLeft();
-    clientTop = Document.get().getBodyOffsetTop();
+    clientLeft = 0;
+    clientTop = 0;
 
     MouseHandler mouseHandler = new MouseHandler();
     addDomHandler(mouseHandler, MouseDownEvent.getType());

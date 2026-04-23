@@ -21,17 +21,6 @@ package com.google.gwt.dom.client;
 class DOMImplMozilla extends DOMImplStandard {
 
   @Override
-  public native void buttonClick(ButtonElement button) /*-{
-    var doc = button.ownerDocument;
-    if (doc != null) {
-      var evt = doc.createEvent('MouseEvents');
-      evt.initMouseEvent('click', true, true, null, 0, 0,
-        0, 0, 0, false, false, false, false, 0, null);
-      button.dispatchEvent(evt);
-    }
-  }-*/;
-
-  @Override
   public NativeEvent createKeyCodeEvent(Document doc, String type,
       boolean ctrlKey, boolean altKey, boolean shiftKey, boolean metaKey,
       int keyCode) {
@@ -66,18 +55,6 @@ class DOMImplMozilla extends DOMImplStandard {
     return getAbsoluteTopImpl(elem.getOwnerDocument().getViewportElement(),
         elem);
   }
-
-  @Override
-  public native int getBodyOffsetLeft(Document doc) /*-{
-    var style = $wnd.getComputedStyle(doc.documentElement, null);
-    return parseInt(style.marginLeft, 10) + parseInt(style.borderLeftWidth, 10);
-  }-*/;
-
-  @Override
-  public native int getBodyOffsetTop(Document doc) /*-{
-    var style = $wnd.getComputedStyle(doc.documentElement, null);
-    return parseInt(style.marginTop, 10) + parseInt(style.borderTopWidth, 10);
-  }-*/;
 
   @Override
   public native int getNodeType(Node node) /*-{

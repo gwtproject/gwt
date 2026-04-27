@@ -1943,11 +1943,13 @@ public class GwtAstBuilder {
         JMethod referredMethod = typeMap.get(referredMethodBinding);
         boolean hasQualifier = hasQualifier(x);
 
-        // Constructors, overloading and generics means that the safest approach is to consider
-        // each different member reference as a different lambda implementation.
+        // Use a positional counter for the synthetic class name (like lambdas) rather than
+        // embedding the method selector. The counter alone ensures uniqueness within the
+        // enclosing class, and a stable name is needed for incremental compilation: if the
+        // method reference target changes, the synthetic class name must stay the same so that
+        // the MinimalRebuildCache and IntTypeMapper can correctly track and invalidate it.
         String lambdaImplementationClassShortName =
-            String.valueOf(nextReferenceExpressionId++) + "methodref$"
-                + (x.binding.isConstructor() ? "ctor" : String.valueOf(x.binding.selector));
+            String.valueOf(nextReferenceExpressionId++) + "methodref";
         List<JExpression> enclosingThisRefs = Lists.newArrayList();
 
         // Create an inner class to hold the implementation of the interface

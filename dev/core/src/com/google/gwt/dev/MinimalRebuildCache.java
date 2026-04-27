@@ -33,6 +33,7 @@ import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Objects;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
+import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
@@ -300,6 +301,30 @@ public class MinimalRebuildCache implements Serializable {
 
     Set<String> modifiedTypeNames = computeModifiedTypeNames();
 
+    // DIAG: trace methodref types through the stale type computation pipeline
+    Set<String> methodrefTypes = Sets.newHashSet();
+    for (String name : modifiedTypeNames) {
+      if (name.contains("methodref")) {
+        methodrefTypes.add(name);
+      }
+    }
+    if (!methodrefTypes.isEmpty()) {
+      logger.log(TreeLogger.WARN, "DIAG: methodref types in modifiedTypeNames = " + methodrefTypes);
+    } else {
+      // Check if they exist in the nested types map at all
+      for (String cuName : modifiedCompilationUnitNames) {
+        Collection<String> nested = nestedTypeNamesByUnitTypeName.get(cuName);
+        for (String n : nested) {
+          if (n.contains("methodref")) {
+            logger.log(TreeLogger.WARN, "DIAG: methodref nested type '" + n
+                + "' found under CU '" + cuName + "' but NOT in modifiedTypeNames");
+          }
+        }
+      }
+      logger.log(TreeLogger.WARN, "DIAG: no methodref types in modifiedTypeNames. "
+          + "modifiedCompilationUnitNames = " + modifiedCompilationUnitNames);
+    }
+
     // Accumulate the names of stale types resulting from some known type or resource modifications,
     // using various patterns (sub types, referencing types, etc).
     {
@@ -321,7 +346,29 @@ public class MinimalRebuildCache implements Serializable {
       // probably make GWTRPC output incompatible with a server anyway (and thus already forces a
       // restart).
 
+      // DIAG: check if methodref types are being removed as synthetic
+      Set<String> methodrefInStale = Sets.newHashSet();
+      for (String name : staleTypeNames) {
+        if (name.contains("methodref")) {
+          methodrefInStale.add(name);
+        }
+      }
+      if (!methodrefInStale.isEmpty()) {
+        logger.log(TreeLogger.WARN, "DIAG: methodref types in staleTypeNames before synthetic removal = "
+            + methodrefInStale);
+        logger.log(TreeLogger.WARN, "DIAG: SYNTHETIC_TYPE_NAMES contains any? = "
+            + !Sets.intersection(JProgram.SYNTHETIC_TYPE_NAMES, methodrefInStale).isEmpty());
+      }
+
       staleTypeNames.removeAll(JProgram.SYNTHETIC_TYPE_NAMES);
+    }
+
+    // DIAG: check reachability filtering
+    Set<String> methodrefBeforeReachability = Sets.newHashSet();
+    for (String name : staleTypeNames) {
+      if (name.contains("methodref")) {
+        methodrefBeforeReachability.add(name);
+      }
     }
 
     /*
@@ -329,8 +376,52 @@ public class MinimalRebuildCache implements Serializable {
      * we don't want to artificially traverse them and unnecessarily reveal dependency problems. And
      * if they have become reachable, since they're missing JS, they will already be fully traversed
      * when seen in Unify.
+     *
+     * However, directly modified types must always remain stale regardless of reachability.
+     * Types with no runtime type ID (e.g. classes used only for static method calls) are not
+     * tracked by RapidTypeAnalyzer and would be incorrectly filtered out, causing their cached JS
+     * to never be cleared and stale output to be reused.
      */
-    copyCollection(filterUnreachableTypeNames(staleTypeNames), staleTypeNames);
+    Set<String> filteredStaleTypeNames = filterUnreachableTypeNames(staleTypeNames);
+    filteredStaleTypeNames.addAll(modifiedTypeNames);
+    copyCollection(filteredStaleTypeNames, staleTypeNames);
+
+    if (!methodrefBeforeReachability.isEmpty()) {
+      Set<String> methodrefAfterReachability = Sets.newHashSet();
+      for (String name : staleTypeNames) {
+        if (name.contains("methodref")) {
+          methodrefAfterReachability.add(name);
+        }
+      }
+      Set<String> filteredOut = Sets.difference(methodrefBeforeReachability, methodrefAfterReachability);
+      if (!filteredOut.isEmpty()) {
+        logger.log(TreeLogger.WARN, "DIAG: methodref types FILTERED as unreachable = " + filteredOut);
+        logger.log(TreeLogger.WARN, "DIAG: lastReachableTypeNames contains them? ");
+        for (String name : filteredOut) {
+          logger.log(TreeLogger.WARN, "DIAG:   " + name + " in lastReachableTypeNames = "
+              + lastReachableTypeNames.contains(name));
+        }
+      } else {
+        logger.log(TreeLogger.WARN, "DIAG: methodref types survived reachability filter = "
+            + methodrefAfterReachability);
+      }
+    }
+
+    // DIAG: log full stale types set and check for specific types
+    {
+      Set<String> appTypes = Sets.newHashSet();
+      for (String name : staleTypeNames) {
+        if (name.startsWith("com.foo.")) {
+          appTypes.add(name);
+        }
+      }
+      logger.log(TreeLogger.WARN, "DIAG: final staleTypeNames (com.foo.*) = " + appTypes);
+      logger.log(TreeLogger.WARN, "DIAG: Helper in staleTypeNames = " + staleTypeNames.contains("com.foo.Helper"));
+      logger.log(TreeLogger.WARN, "DIAG: Helper in lastReachableTypeNames = " + lastReachableTypeNames.contains("com.foo.Helper"));
+      // Check what references Helper
+      Collection<String> refsToHelper = typeNamesByReferencingTypeName.get("com.foo.Helper");
+      logger.log(TreeLogger.WARN, "DIAG: types referencing Helper = " + refsToHelper);
+    }
 
     // These log lines can be expensive.
     if (logger.isLoggable(TreeLogger.DEBUG)) {
@@ -663,10 +754,24 @@ public class MinimalRebuildCache implements Serializable {
     // For the root type in the compilation unit the source name and binary name are the same.
     String compilationUnitTypeName = compilationUnit.getTypeName();
 
+    // Clean up the reverse map for old nested type names before removing them.
+    Collection<String> oldNestedTypeNames = nestedTypeNamesByUnitTypeName.get(compilationUnitTypeName);
+    for (String oldNestedTypeName : oldNestedTypeNames) {
+      compilationUnitTypeNameByNestedTypeName.remove(oldNestedTypeName);
+      System.out.println("removed: " + oldNestedTypeName);
+    }
     nestedTypeNamesByUnitTypeName.removeAll(compilationUnitTypeName);
     for (CompiledClass compiledClass : compilationUnit.getCompiledClasses()) {
       String nestedTypeName = InternalName.toBinaryName(compiledClass.getInternalName());
       recordNestedTypeName(compilationUnitTypeName, nestedTypeName);
+    }
+    // Also record synthetic types created at the GWT AST level (e.g. lambda and method reference
+    // inner classes) that don't have corresponding CompiledClass entries from JDT.
+    for (JDeclaredType type : compilationUnit.getTypes()) {
+      String typeName = type.getName();
+      if (!nestedTypeNamesByUnitTypeName.containsEntry(compilationUnitTypeName, typeName)) {
+        recordNestedTypeName(compilationUnitTypeName, typeName);
+      }
     }
   }
 

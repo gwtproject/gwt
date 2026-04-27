@@ -928,6 +928,17 @@ public class UnifyAst {
             + "Generator has legitimately stopped creating these types.");
       }
       // Record the list of names of stale types that were processed, for test assertion purposes.
+      Set<String> methodrefInFullFlow = Sets.newHashSet();
+      for (String name : fullFlowTypes) {
+        if (name.contains("methodref")) {
+          methodrefInFullFlow.add(name);
+        }
+      }
+      if (methodrefInFullFlow.isEmpty()) {
+        logger.log(TreeLogger.WARN, "DIAG: setProcessedStaleTypeNames: NO methodref types in fullFlowTypes");
+      } else {
+        logger.log(TreeLogger.WARN, "DIAG: setProcessedStaleTypeNames: methodref in fullFlowTypes = " + methodrefInFullFlow);
+      }
       minimalRebuildCache.setProcessedStaleTypeNames(fullFlowTypes);
     }
 
@@ -962,15 +973,34 @@ public class UnifyAst {
    * temporarily ignored.
    */
   private void fullFlowIntoRemainingStaleTypes() {
-    for (String staleTypeName : computeRemainingStaleTypeNames()) {
+    Set<String> remaining = computeRemainingStaleTypeNames();
+    logger.log(TreeLogger.WARN, "DIAG: fullFlowIntoRemainingStaleTypes remaining = " + remaining);
+    for (String name : remaining) {
+      if (name.contains("methodref")) {
+        logger.log(TreeLogger.WARN, "DIAG: fullFlowIntoRemainingStaleTypes considering: " + name);
+      }
+    }
+    for (String staleTypeName : remaining) {
       JDeclaredType staleType =
           internalFindType(staleTypeName, binaryNameBasedTypeLocator, false);
       if (staleType == null) {
+        if (staleTypeName.contains("methodref") || staleTypeName.contains("Helper")) {
+          logger.log(TreeLogger.WARN, "DIAG: fullFlowIntoRemainingStaleTypes: " + staleTypeName
+              + " NOT FOUND by internalFindType");
+        }
         // The type is Generator output and so is not usually available in the list of types
         // provided from initial JDT compilation. The staleness marking process has already
         // handled this type by cascading the staleness marking onto the types that contain the
         // GWT.create() calls that process that create this type.
         continue;
+      }
+      if (staleTypeName.contains("methodref")) {
+        logger.log(TreeLogger.WARN, "DIAG: fullFlowIntoRemainingStaleTypes: " + staleTypeName
+            + " FOUND, calling fullFlowIntoType");
+      }
+      if (staleTypeName.contains("Helper")) {
+        logger.log(TreeLogger.WARN, "DIAG: fullFlowIntoRemainingStaleTypes: " + staleTypeName
+            + " FOUND, calling fullFlowIntoType");
       }
       // It's possible that the type was previously loaded before it was discovered to be stale (it
       // became stale as a result of a Generator execution). If this happens then the type will have
@@ -1040,8 +1070,17 @@ public class UnifyAst {
       program.addType(type);
       // If we're compiling per file and we already have currently valid output for this type.
       if (incrementalCompile && !needsNewJs(type)) {
+        if (type.getName().contains("methodref") || type.getName().contains("Helper")) {
+          logger.log(TreeLogger.WARN, "DIAG: assimilateSourceUnit: " + type.getName()
+              + " has cached JS, marking reference-only");
+        }
         // Then make sure we don't output new Js for this type.
         program.addReferenceOnlyType(type);
+      } else if (incrementalCompile) {
+        if (type.getName().contains("methodref") || type.getName().contains("Helper")) {
+          logger.log(TreeLogger.WARN, "DIAG: assimilateSourceUnit: " + type.getName()
+              + " needsNewJs=true (hasJs=" + minimalRebuildCache.hasJs(type.getName()) + ")");
+        }
       }
     }
     for (JDeclaredType type : types) {
@@ -1056,7 +1095,16 @@ public class UnifyAst {
         // Such a type won't have any cached JS and will need a full traversal to ensure it is
         // output (the full type with all fields and methods) as new JS.
         if (needsNewJs(type)) {
+          if (type.getName().contains("methodref")) {
+            logger.log(TreeLogger.WARN, "DIAG: assimilateSourceUnit: " + type.getName()
+                + " needsNewJs=true, calling fullFlowIntoType");
+          }
           fullFlowIntoType(type);
+        } else {
+          if (type.getName().contains("methodref")) {
+            logger.log(TreeLogger.WARN, "DIAG: assimilateSourceUnit: " + type.getName()
+                + " needsNewJs=false, NOT calling fullFlowIntoType");
+          }
         }
       }
     }
@@ -1156,6 +1204,9 @@ public class UnifyAst {
     String typeName = type.getName();
     if (fullFlowTypes.contains(typeName) || typeName.endsWith("package-info")) {
       return;
+    }
+    if (typeName.contains("Helper") || typeName.contains("methodref")) {
+      logger.log(TreeLogger.WARN, "DIAG: fullFlowIntoType ADDING: " + typeName);
     }
     // The traversal of this type will accumulate rebinder type to rebound type associations, but
     // the accumulation should start from scratch, so clear any existing associations that might

@@ -37,12 +37,15 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multiset;
 import com.google.gwt.thirdparty.guava.common.collect.Multisets;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * Assigns and replaces JRuntimeTypeReference nodes with a type id literal.
@@ -77,6 +80,7 @@ public class ResolveRuntimeTypeReferences {
 
     // NOTE: DO NOT STORE ANY AST REFERENCE. Objects of this type persist across compiles.
     private final Map<String, Integer> typeIdByTypeName = Maps.newHashMap();
+    private final List<Integer> recycledIds = Lists.newArrayList();
     private int nextAvailableId =  0;
 
     @Override
@@ -89,6 +93,8 @@ public class ResolveRuntimeTypeReferences {
       this.nextAvailableId = from.nextAvailableId;
       this.typeIdByTypeName.clear();
       this.typeIdByTypeName.putAll(from.typeIdByTypeName);
+      this.recycledIds.clear();
+      this.recycledIds.addAll(from.recycledIds);
     }
 
     @VisibleForTesting
@@ -107,11 +113,32 @@ public class ResolveRuntimeTypeReferences {
     public JIntLiteral getOrCreateTypeId(JType type) {
       String typeName = type.getName();
       if (!typeIdByTypeName.containsKey(typeName)) {
-        int nextId = nextAvailableId++;
+        int nextId;
+        if (!recycledIds.isEmpty()) {
+          nextId = recycledIds.remove(recycledIds.size() - 1);
+        } else {
+          nextId = nextAvailableId++;
+        }
         typeIdByTypeName.put(typeName, nextId);
       }
 
       return get(type);
+    }
+
+    /**
+     * Removes entries for types not in the given set and makes their IDs available for reuse.
+     * Existing live type IDs are not changed, preserving cached JS validity.
+     */
+    public void pruneDeadTypes(Set<String> liveTypeNames) {
+      Iterator<Map.Entry<String, Integer>> it = typeIdByTypeName.entrySet().iterator();
+      while (it.hasNext()) {
+        Map.Entry<String, Integer> entry = it.next();
+        if (!liveTypeNames.contains(entry.getKey())) {
+          recycledIds.add(entry.getValue());
+          it.remove();
+        }
+      }
+      Collections.sort(recycledIds);
     }
   }
 
@@ -270,6 +297,22 @@ public class ResolveRuntimeTypeReferences {
       runtimeTypeCollector.accept(program.getTypeClassLiteralHolder());
       // TODO(stalcup): each module should have it's own ClassLiteralHolder or some agreed upon
       // location that is default accessible to all.
+//
+//      // Prune dead type entries from the IntTypeMapper before assigning types. Dead entries
+//      // accumulate when types are removed between incremental compiles (e.g. renamed synthetic
+//      // method reference types). Their IDs are recycled for new types, preventing ID drift that
+//      // would cause incremental output to diverge from fresh compile output.
+//      if (typeMapper instanceof IntTypeMapper) {
+//        Set<String> liveTypeNames = Sets.newHashSet();
+//        for (JReferenceType type : runtimeTypeCollector.typesRequiringRuntimeIds.elementSet()) {
+//          liveTypeNames.add(type.getName());
+//        }
+//        // Include the special types that assignTypes always registers first.
+//        liveTypeNames.add(program.getJavaScriptObject().getName());
+//        liveTypeNames.add(program.getTypeJavaLangObject().getName());
+//        liveTypeNames.add(program.getTypeJavaLangString().getName());
+//        ((IntTypeMapper) typeMapper).pruneDeadTypes(liveTypeNames);
+//      }
 
       assignTypes(runtimeTypeCollector.typesRequiringRuntimeIds);
 

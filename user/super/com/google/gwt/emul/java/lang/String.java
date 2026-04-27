@@ -24,6 +24,8 @@ import static javaemul.internal.InternalPreconditions.checkStringElementIndex;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.lang.constant.Constable;
+import java.lang.constant.ConstantDesc;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.Comparator;
@@ -55,7 +57,7 @@ import jsinterop.annotations.JsType;
 // Needed to have constructors not fail compilation internally at Google
 @SuppressWarnings({ "ReturnValueIgnored", "unusable-by-js" })
 public final class String implements Comparable<String>, CharSequence,
-    Serializable {
+    Serializable, Constable, ConstantDesc {
   /* TODO(jat): consider whether we want to support the following methods;
    *
    * <ul>
@@ -502,7 +504,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public int lastIndexOf(String str, int start) {
-    return asNativeString().lastIndexOf(str, start);
+    return start < 0 ? -1 : asNativeString().lastIndexOf(str, start);
   }
 
   @Override
@@ -518,9 +520,10 @@ public final class String implements Comparable<String>, CharSequence,
    *
    * TODO(jat): properly handle Java regex syntax
    */
+  @SuppressWarnings("checkstyle:SpaceAfterColon")
   public boolean matches(String regex) {
     // We surround the regex with '^' and '$' because it must match the entire string.
-    return new NativeRegExp("^(" + regex + ")$").test(this);
+    return new NativeRegExp("^(?:" + regex + ")$").test(this);
   }
 
   public int offsetByCodePoints(int index, int codePointOffset) {

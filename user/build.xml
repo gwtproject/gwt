@@ -96,6 +96,7 @@
   <target name="compile" description="Compile all class files"
           unless="compile.complete">
     <gwt.javac
+            release="8"
             excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java">
       <src path="super/com/google/gwt/emul/javaemul/internal" />
       <classpath>
@@ -224,6 +225,7 @@
 
       <!-- Compile a specific gwt-user jar just for jakarta, which will be only used then to produce gwt-servlet-jakarta.jar -->
       <gwt.javac
+              release="8"
               srcdir="${project.build}/jakarta-src"
               destdir="${javac.out}-jakarta"
               excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java,**/junit/**">
@@ -290,9 +292,13 @@
           description="Build and package this project">
     <mkdir dir="${gwt.build.lib}"/>
     <gwt.jar>
-      <fileset dir="src" excludes="**/package.html"/>
+      <fileset dir="src" excludes="**/package.html">
+        <exclude name="com/google/web/bindery/requestfactory/server/RequestFactoryJarExtractor*" />
+      </fileset>
       <fileset dir="super" excludes="**/package.html"/>
-      <fileset dir="${javac.out}"/>
+      <fileset dir="${javac.out}">
+        <exclude name="com/google/web/bindery/requestfactory/server/RequestFactoryJarExtractor*" />
+      </fileset>
       <zipfileset src="${gwt.tools.lib}/tomcat/tomcat-servlet-api-8.0.28.jar"
                   excludes="**/*.java"/>
       <zipfileset src="${gwt.tools.lib}/w3c/sac/sac-1.3.jar"/>
@@ -307,23 +313,24 @@
   <target name="checkstyle-source" description="Static analysis of source">
     <gwt.checkstyle>
       <fileset dir="src">
+        <exclude name="org/hibernate/validator/ValidationMessages.java"/>
+      </fileset>
+      <fileset dir="super">
         <exclude name="javax/validation/super/javax/validation/constraints/Pattern.java"/>
         <exclude name="javax/validation/super/javax/validation/spi/ConfigurationState.java"/>
         <exclude name="javax/validation/super/javax/validation/MessageInterpolator.java"/>
         <exclude name="javax/validation/super/javax/validation/Configuration.java"/>
-        <exclude name="javax/validation/super/javax/validation/Validation.java"/>
-        <exclude name="org/hibernate/validator/super/org/hibernate/validator/**/*.java"/>
-        <exclude name="org/hibernate/validator/ValidationMessages.java"/>
+        <exclude name="org/hibernate/validator/super/org/hibernate/validator/engine/PathImpl.java"/>
       </fileset>
-      <fileset dir="super/com/google/gwt/emul"/>
-      <fileset dir="super/com/google/gwt/junit/translatable"/>
     </gwt.checkstyle>
   </target>
   <target name="checkstyle-tests" description="Static analysis of source">
     <gwt.checkstyle.tests>
       <fileset dir="test">
-        <include name="com/google/**/*.java"/>
-        <include name="test/**"/>
+        <exclude name="org/**" />
+      </fileset>
+      <fileset dir="test-super">
+        <exclude name="org/**" />
       </fileset>
     </gwt.checkstyle.tests>
   </target>

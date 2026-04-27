@@ -591,7 +591,7 @@ public abstract class AbstractTestCollection extends AbstractTestObject {
         resetEmpty();
         try {
             collection.add(new Object());
-            fail("Emtpy collection should not support add.");
+            fail("Empty collection should not support add.");
         } catch (UnsupportedOperationException e) {
             // expected
         }
@@ -601,7 +601,7 @@ public abstract class AbstractTestCollection extends AbstractTestObject {
 
         try {
             collection.addAll(Arrays.asList(getFullElements()));
-            fail("Emtpy collection should not support addAll.");
+            fail("Empty collection should not support addAll.");
         } catch (UnsupportedOperationException e) {
             // expected
         }
@@ -929,12 +929,12 @@ public abstract class AbstractTestCollection extends AbstractTestObject {
         if (!isRemoveSupported()) return;
 
         resetEmpty();
-        assertTrue("Emtpy collection removeAll should return false for " +
+        assertTrue("Empty collection removeAll should return false for " +
                    "empty input",
                    !collection.removeAll(Collections.EMPTY_SET));
         verify();
 
-        assertTrue("Emtpy collection removeAll should return false for " +
+        assertTrue("Empty collection removeAll should return false for " +
                    "nonempty input",
                    !collection.removeAll(new ArrayList(collection)));
         verify();

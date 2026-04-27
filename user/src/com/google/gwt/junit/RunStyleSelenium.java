@@ -31,7 +31,10 @@ import java.util.regex.Pattern;
 
 /**
  * Runs via browsers managed by Selenium.
+ *
+ * @deprecated This class is deprecated as of 2.13, and will be removed in a future release.
  */
+@Deprecated
 public class RunStyleSelenium extends RunStyle {
 
   /**
@@ -293,6 +296,9 @@ public class RunStyleSelenium extends RunStyle {
 
   public RunStyleSelenium(final JUnitShell shell) {
     super(shell);
+    shell.getTopLogger().log(TreeLogger.WARN, "The Selenium run style is deprecated for " +
+        "removal. The sources can be copied into your own project to continue using it. See " +
+        "https://github.com/gwtproject/gwt/issues/10222.");
   }
 
   @Override

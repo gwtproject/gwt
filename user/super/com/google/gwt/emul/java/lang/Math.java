@@ -150,11 +150,11 @@ public final class Math {
     return ((dividend % divisor) + divisor) % divisor;
   }
 
-  public static long floorMod(long dividend, int divisor) {
-    return floorMod(dividend, (long) divisor);
+  public static int floorMod(long dividend, int divisor) {
+    return (int) floorMod(dividend, (long) divisor);
   }
 
-  @SuppressWarnings("CheckStyle.MethodName")
+  @SuppressWarnings("checkstyle:MethodName")
   public static double IEEEremainder(double v, double m) {
     double ratio = v / m;
     double closest = Math.ceil(ratio);

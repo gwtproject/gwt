@@ -507,7 +507,7 @@ public class RequestFactoryJarExtractor {
         String destPath = getPackagePath(state.type) + state.source;
         if (sources.add(sourcePath) && loader.exists(sourcePath)) {
           try (InputStream is = loader.getResourceAsStream(sourcePath)) {
-            emitter.emit(destPath, new ByteArrayInputStream(is.readAllBytes()));
+            emitter.emit(destPath, is);
           }
         }
       }

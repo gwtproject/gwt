@@ -37,7 +37,7 @@ public class StackTraceEmulTest extends StackTraceNativeTest {
 
   @Override
   public void testCollectorType() {
-    assertTrue(StackTraceCreator.collector instanceof StackTraceCreator.CollectorEmulated);
+    assertTrue(StackTraceCreator.getCollector() instanceof StackTraceCreator.CollectorEmulated);
   }
 
   /**

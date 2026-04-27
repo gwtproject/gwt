@@ -53,7 +53,9 @@ import com.google.gwt.thirdparty.guava.common.io.Files;
 import com.google.gwt.thirdparty.guava.common.io.Resources;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
@@ -169,22 +171,27 @@ public class Recompiler {
     long startTime = System.currentTimeMillis();
     int compileId = ++compilesDone;
     CompileDir compileDir = outboxDir.makeCompileDir(job.getLogger());
-    TreeLogger compileLogger = makeCompileLogger(compileDir, job.getLogger());
-    try {
-      job.onStarted(compileId, compileDir);
-      boolean success = doCompile(compileLogger, compileDir, job);
-      if (!success) {
-        compileLogger.log(TreeLogger.Type.ERROR, "Compiler returned false");
-        throw new UnableToCompleteException();
+    try (FileWriter logWriter = new FileWriter(compileDir.getLogFile(), true)) {
+      TreeLogger compileLogger = makeCompileLogger(logWriter, job.getLogger());
+      try {
+        job.onStarted(compileId, compileDir);
+        boolean success = doCompile(compileLogger, compileDir, job);
+        if (!success) {
+          compileLogger.log(TreeLogger.Type.ERROR, "Compiler returned false");
+          throw new UnableToCompleteException();
+        }
+      } finally {
+        // Make the error log available no matter what happens
+        lastBuild.set(compileDir);
       }
-    } finally {
-      // Make the error log available no matter what happens
-      lastBuild.set(compileDir);
-    }
 
-    long elapsedTime = System.currentTimeMillis() - startTime;
-    compileLogger.log(TreeLogger.Type.INFO,
-        String.format("%.3fs total -- Compile completed", elapsedTime / 1000d));
+      long elapsedTime = System.currentTimeMillis() - startTime;
+      compileLogger.log(TreeLogger.Type.INFO,
+          String.format("%.3fs total -- Compile completed", elapsedTime / 1000d));
+    } catch (IOException e) {
+      job.getLogger().log(TreeLogger.Type.ERROR, "Unable to open compile log file", e);
+      throw new UnableToCompleteException();
+    }
 
     return new Result(publishedCompileDir, outputModuleName.get(), null);
   }
@@ -198,35 +205,40 @@ public class Recompiler {
 
     long startTime = System.currentTimeMillis();
     CompileDir compileDir = outboxDir.makeCompileDir(logger);
-    TreeLogger compileLogger = makeCompileLogger(compileDir, logger);
-    ModuleDef module;
-    try {
-      module = loadModule(compileLogger);
+    try (FileWriter logWriter = new FileWriter(compileDir.getLogFile(), true)) {
+      TreeLogger compileLogger = makeCompileLogger(logWriter, logger);
+      ModuleDef module;
+      try {
+        module = loadModule(compileLogger);
 
-      logger.log(TreeLogger.INFO, "Loading Java files in " + inputModuleName + ".");
-      CompilerOptions loadOptions = new CompilerOptionsImpl(compileDir, inputModuleName, options);
-      compilerContext = compilerContextBuilder.options(loadOptions).unitCache(unitCache).build();
+        logger.log(TreeLogger.INFO, "Loading Java files in " + inputModuleName + ".");
+        CompilerOptions loadOptions = new CompilerOptionsImpl(compileDir, inputModuleName, options);
+        compilerContext = compilerContextBuilder.options(loadOptions).unitCache(unitCache).build();
 
-      // Loads and parses all the Java files in the GWT application using the JDT.
-      // (This is warmup to make compiling faster later; we stop at this point to avoid
-      // needing to know the binding properties.)
-      module.getCompilationState(compileLogger, compilerContext);
+        // Loads and parses all the Java files in the GWT application using the JDT.
+        // (This is warmup to make compiling faster later; we stop at this point to avoid
+        // needing to know the binding properties.)
+        module.getCompilationState(compileLogger, compilerContext);
 
-      setUpCompileDir(compileDir, module, compileLogger);
-      if (launcherDir != null) {
-        launcherDir.update(module, compileDir, compileLogger);
+        setUpCompileDir(compileDir, module, compileLogger);
+        if (launcherDir != null) {
+          launcherDir.update(module, compileDir, compileLogger);
+        }
+
+        outputModuleName.set(module.getName());
+      } finally {
+        // Make the compile log available no matter what happens.
+        lastBuild.set(compileDir);
       }
 
-      outputModuleName.set(module.getName());
-    } finally {
-      // Make the compile log available no matter what happens.
-      lastBuild.set(compileDir);
+      long elapsedTime = System.currentTimeMillis() - startTime;
+      compileLogger.log(TreeLogger.Type.INFO, "Module setup completed in " + elapsedTime + " ms");
+
+      return new Result(compileDir, module.getName(), null);
+    } catch (IOException e) {
+      logger.log(TreeLogger.Type.ERROR, "Unable to open compile log file", e);
+      throw new UnableToCompleteException();
     }
-
-    long elapsedTime = System.currentTimeMillis() - startTime;
-    compileLogger.log(TreeLogger.Type.INFO, "Module setup completed in " + elapsedTime + " ms");
-
-    return new Result(compileDir, module.getName(), null);
   }
 
   /**
@@ -415,17 +427,12 @@ public class Recompiler {
     return resourceLoader.get();
   }
 
-  private TreeLogger makeCompileLogger(CompileDir compileDir, TreeLogger parent)
-      throws UnableToCompleteException {
-    try {
-      PrintWriterTreeLogger fileLogger =
-          new PrintWriterTreeLogger(compileDir.getLogFile());
-      fileLogger.setMaxDetail(options.getLogLevel());
-      return new CompositeTreeLogger(parent, fileLogger);
-    } catch (IOException e) {
-      parent.log(TreeLogger.ERROR, "unable to open log file: " + compileDir.getLogFile(), e);
-      throw new UnableToCompleteException();
-    }
+  private TreeLogger makeCompileLogger(FileWriter logWriter, TreeLogger parent)
+      throws IOException {
+    PrintWriterTreeLogger fileLogger =
+        new PrintWriterTreeLogger(new PrintWriter(logWriter, true));
+    fileLogger.setMaxDetail(options.getLogLevel());
+    return new CompositeTreeLogger(parent, fileLogger);
   }
 
   /**

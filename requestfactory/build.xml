@@ -158,6 +158,7 @@
     <java failonerror="true" fork="true"
       classname="com.google.web.bindery.requestfactory.vm.RequestFactoryJreSuite">
       <jvmarg value="-Xss8m" />
+      <jvmarg value="-Dgwt.validation.ignoreXml=true"/>
       <classpath>
         <fileset dir="${gwt.tools.lib}" includes="tomcat/tomcat-servlet-api-8.0.28.jar" />
         <fileset dir="${gwt.tools.lib}" includes="apache/log4j/log4j-1.2.17.jar" />
@@ -165,7 +166,6 @@
         <fileset dir="${gwt.tools.lib}" includes="slf4j/slf4j-log4j12/slf4j-log4j12-1.7.12.jar" />
         <fileset dir="${gwt.tools.lib}" includes="hibernate/validator/hibernate-validator-4.1.0.Final.jar" />
         <fileset dir="${gwt.tools.lib}" includes="javax/validation/validation-api-1.0.0.GA.jar" />
-        <fileset dir="${gwt.tools.lib}" includes="javax/xml/bind/jaxb-api-2.1.jar" />
         <fileset dir="${gwt.build.lib}" includes="requestfactory-test.jar" />
         <fileset dir="${gwt.build.lib}" includes="requestfactory-test-src.jar" />
         <fileset dir="${gwt.build.lib}" includes="requestfactory-test-validated.jar" />

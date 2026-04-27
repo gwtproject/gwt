@@ -15,11 +15,13 @@
  */
 package java.lang;
 
+import java.lang.constant.Constable;
+import java.lang.constant.ConstantDesc;
 import javaemul.internal.LongUtils;
 import javaemul.internal.annotations.HasNoSideEffects;
 
 /** Wraps a primitive <code>long</code> as an object. */
-public final class Long extends Number implements Comparable<Long> {
+public final class Long extends Number implements Comparable<Long>, Constable, ConstantDesc {
 
   /** Use nested class to avoid clinit on outer. */
   static class BoxedValues {
@@ -128,24 +130,15 @@ public final class Long extends Number implements Comparable<Long> {
   }
 
   public static long rotateLeft(long i, int distance) {
-    while (distance-- > 0) {
-      i = i << 1 | ((i < 0) ? 1 : 0);
-    }
-    return i;
+    long lowerBits = i >>> (SIZE - distance);
+    long upperBits = i << distance;
+    return upperBits | lowerBits;
   }
 
   public static long rotateRight(long i, int distance) {
-    long ui = i & MAX_VALUE; // avoid sign extension
-    long carry = (i < 0) ? 0x4000000000000000L : 0; // MIN_VALUE rightshifted 1
-    while (distance-- > 0) {
-      long nextcarry = ui & 1;
-      ui = carry | (ui >> 1);
-      carry = (nextcarry == 0) ? 0 : 0x4000000000000000L;
-    }
-    if (carry != 0) {
-      ui = ui | MIN_VALUE;
-    }
-    return ui;
+    long upperBits = i << (SIZE - distance);
+    long lowerBits = i >>> distance;
+    return upperBits | lowerBits;
   }
 
   public static int signum(long i) {

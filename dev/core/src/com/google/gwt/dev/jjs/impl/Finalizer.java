@@ -35,10 +35,6 @@ import com.google.gwt.dev.jjs.ast.JVariable;
 import com.google.gwt.dev.jjs.ast.JVariableRef;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.js.JsniFieldRef;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
-import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.Set;
@@ -196,17 +192,10 @@ public class Finalizer {
     this.program = program;
   }
 
-  @VisibleForTesting
-  static OptimizerStats exec(JProgram program) {
-    return exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
-  }
-
-  public static OptimizerStats exec(JProgram program, OptimizerContext optimizerCtx) {
-    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
+  public static int exec(JProgram program, OptimizerContext optimizerCtx) {
     OptimizerStats stats = new Finalizer(program).execImpl(optimizerCtx);
     optimizerCtx.incOptimizationStep();
-    optimizeEvent.end("didChange", "" + stats.didChange());
-    return stats;
+    return stats.getNumMods();
   }
 
   private final Set<JVariable> isReassigned = Sets.newHashSet();
@@ -214,14 +203,16 @@ public class Finalizer {
   private final JProgram program;
 
   private OptimizerStats execImpl(OptimizerContext optimizerCtx) {
-    MarkVisitor marker = new MarkVisitor();
-    marker.accept(program);
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      MarkVisitor marker = new MarkVisitor();
+      marker.accept(program);
 
-    FinalizeVisitor finalizer = new FinalizeVisitor(optimizerCtx);
-    finalizer.accept(program);
+      FinalizeVisitor finalizer = new FinalizeVisitor(optimizerCtx);
+      finalizer.accept(program);
 
-    JavaAstVerifier.assertProgramIsConsistent(program);
+      JavaAstVerifier.assertProgramIsConsistent(program);
 
-    return new OptimizerStats(NAME).recordModified(finalizer.getNumMods());
+      return stats.recordModified(finalizer.getNumMods());
+    }
   }
 }

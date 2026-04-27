@@ -568,10 +568,12 @@ public class StringTest extends GWTTestCase {
   }
 
   public void testLastIndexOf() {
-    String x = "abcdeabcdef";
+    String x = hideFromCompiler("abcdeabcdef");
     assertEquals(9, x.lastIndexOf("e"));
     assertEquals(10, x.lastIndexOf("f"));
     assertEquals(-1, x.lastIndexOf("f", 1));
+    assertEquals(-1, x.lastIndexOf("a", -1));
+    assertEquals(-1, x.lastIndexOf('a', -1));
   }
 
   public void testLength() {
@@ -621,6 +623,8 @@ public class StringTest extends GWTTestCase {
     assertFalse("11f.1", hideFromCompiler("ab").matches("|none"));
     assertFalse("11f.2", hideFromCompiler("anoneb").matches("|none"));
     assertTrue("12t", hideFromCompiler("none").matches("^|none$"));
+    assertTrue("13t", hideFromCompiler("abccd").matches(".*(.)\\1.*"));
+    assertFalse("13t", hideFromCompiler("abcd").matches(".*(.)\\1.*"));
   }
 
   public void testNull() {

@@ -162,15 +162,15 @@ public class PrunerTest extends OptimizerTestBase {
         ((JsniMethodBody) result.findMethod("usedNativeMethod").getBody())
             .getJsniFieldRefs().toString());
     assertEquals(
-        "[public final null nullMethod(), public void method2()]",
+        "[public native final null nullMethod(), public void method2()]",
         ((JsniMethodBody) result.findMethod("usedNativeMethod").getBody())
             .getJsniMethodRefs().toString());
 
     assertEquals(
         "interface EntryPoint$UsedInterface {\n" +
-        "  final static int usedConstant\n\n" +
+        "  final static int usedConstant;\n\n" +
         "  private static final void $clinit(){\n" +
-        "    final static int usedConstant = 3;\n" +
+        "    usedConstant = 3;\n" +
         "  }\n" +
         "\n" +
         "}",
@@ -362,7 +362,7 @@ public class PrunerTest extends OptimizerTestBase {
     program.addEntryMethod(findMainMethod(program));
     boolean didChange = false;
     // TODO(jbrosenberg): remove loop when Pruner/CFA interaction is perfect.
-    while (Pruner.exec(program, true).didChange()) {
+    while (Pruner.exec(program, true, OptimizerContext.NULL_OPTIMIZATION_CONTEXT) > 0) {
       didChange = true;
     }
     return didChange;

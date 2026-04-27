@@ -121,10 +121,6 @@ public class JsVisitor {
     doAcceptWithInsertRemove(collection);
   }
 
-  public boolean didChange() {
-    throw new UnsupportedOperationException();
-  }
-
   public void endVisit(JsArrayAccess x, JsContext ctx) {
   }
 

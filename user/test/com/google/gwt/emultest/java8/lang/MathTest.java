@@ -162,10 +162,10 @@ public class MathTest extends GWTTestCase {
   }
 
   public void testFloorModLongInt() {
-    assertEquals(0L, Math.floorMod(0L, 1L));
-    assertEquals(1L, Math.floorMod(4L, 3L));
-    assertEquals(0L, Math.floorMod(Long.MIN_VALUE, Integer.MIN_VALUE));
-    assertEquals(1L, Math.floorMod(Long.MAX_VALUE, Integer.MAX_VALUE));
+    assertEquals(0, Math.floorMod(0L, 1L));
+    assertEquals(1, Math.floorMod(4L, 3L));
+    assertEquals(0, Math.floorMod(Long.MIN_VALUE, Integer.MIN_VALUE));
+    assertEquals(1, Math.floorMod(Long.MAX_VALUE, Integer.MAX_VALUE));
     assertThrowsArithmetic(() -> Math.floorMod(1L, 0));
   }
 

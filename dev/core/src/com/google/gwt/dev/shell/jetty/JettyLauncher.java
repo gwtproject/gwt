@@ -19,7 +19,7 @@ import com.google.gwt.core.ext.ServletContainer;
 import com.google.gwt.core.ext.ServletContainerLauncher;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.util.InstalledHelpInfo;
+import com.google.gwt.dev.util.GwtprojectOrgHelpInfo;
 import com.google.gwt.thirdparty.guava.common.collect.Iterators;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
@@ -89,10 +89,9 @@ public class JettyLauncher extends ServletContainerLauncher {
    */
   private static void maybeLogDeprecationWarning(TreeLogger log) {
     if (hasLoggedDeprecationWarning.compareAndSet(false, true)) {
-      log.log(TreeLogger.Type.WARN, "DevMode will default to -noserver in a future release, and " +
-              "JettyLauncher may be removed or changed. Please consider running your own " +
-              "application server and either passing -noserver to DevMode or migrating to " +
-              "CodeServer. Alternatively, consider implementing your own " +
+      log.log(TreeLogger.Type.WARN, "JettyLauncher is deprecated for removal. Please consider" +
+              "running your own application server and either passing -noserver to DevMode or " +
+              "migrating to CodeServer. Alternatively, consider implementing your own " +
               "ServletContainerLauncher to continue running your application server from " +
               "DevMode.");
     }
@@ -447,12 +446,12 @@ public class JettyLauncher extends ServletContainerLauncher {
               - (2 + resourceName.length()));
         } else {
           branch.log(TreeLogger.ERROR,
-              "Found resouce but unrecognized URL format: '" + foundStr + '\'');
+              "Found resource but unrecognized URL format: '" + foundStr + '\'');
           return false;
         }
         branch = branch.branch(logLevel, "Adding classpath entry '"
             + classPathURL + "' to the web app classpath for this session",
-            null, new InstalledHelpInfo("webAppClassPath.html"));
+            null, new GwtprojectOrgHelpInfo("webAppClassPath.html"));
         try {
           addClassPath(classPathURL);
           return true;
@@ -548,12 +547,9 @@ public class JettyLauncher extends ServletContainerLauncher {
 
   private SslConfiguration sslConfig = new SslConfiguration(ClientAuthType.NONE, null, null, false);
 
-  private final Object privateInstanceLock = new Object();
-
-
   @Override
   public String getName() {
-    return "Jetty";
+    return "DeprecatedJettyLauncher";
   }
 
   @Override
@@ -574,15 +570,9 @@ public class JettyLauncher extends ServletContainerLauncher {
     return true;
   }
 
-  /*
-   * TODO: This is a hack to pass the base log level to the SCL. We'll have to
-   * figure out a better way to do this for SCLs in general. Please do not
-   * depend on this method, as it is subject to change.
-   */
+  @Override
   public void setBaseRequestLogLevel(TreeLogger.Type baseLogLevel) {
-    synchronized (privateInstanceLock) {
-      this.baseLogLevel = baseLogLevel;
-    }
+    this.baseLogLevel = baseLogLevel;
   }
 
   @Override
@@ -639,7 +629,7 @@ public class JettyLauncher extends ServletContainerLauncher {
     wac.setSecurityHandler(new ConstraintSecurityHandler());
 
     RequestLogHandler logHandler = new RequestLogHandler();
-    logHandler.setRequestLog(new JettyRequestLogger(logger, getBaseLogLevel()));
+    logHandler.setRequestLog(new JettyRequestLogger(logger, this.baseLogLevel));
     logHandler.setHandler(wac);
     server.setHandler(logHandler);
     server.start();
@@ -726,17 +716,7 @@ public class JettyLauncher extends ServletContainerLauncher {
     }
 
     if (appRootDir == null) {
-      throw new NullPointerException("app root direcotry cannot be null");
-    }
-  }
-
-  /*
-   * TODO: This is a hack to pass the base log level to the SCL. We'll have to
-   * figure out a better way to do this for SCLs in general.
-   */
-  private TreeLogger.Type getBaseLogLevel() {
-    synchronized (privateInstanceLock) {
-      return this.baseLogLevel;
+      throw new NullPointerException("app root directory cannot be null");
     }
   }
 

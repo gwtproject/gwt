@@ -15,13 +15,15 @@
  */
 package java.lang;
 
+import java.lang.constant.Constable;
+import java.lang.constant.ConstantDesc;
 import javaemul.internal.JsUtils;
 import javaemul.internal.annotations.HasNoSideEffects;
 
 /**
  * Wraps a primitive <code>int</code> as an object.
  */
-public final class Integer extends Number implements Comparable<Integer> {
+public final class Integer extends Number implements Comparable<Integer>, Constable, ConstantDesc {
 
   public static final int MAX_VALUE = 0x7fffffff;
   public static final int MIN_VALUE = 0x80000000;
@@ -189,24 +191,15 @@ public final class Integer extends Number implements Comparable<Integer> {
   }
 
   public static int rotateLeft(int i, int distance) {
-    while (distance-- > 0) {
-      i = i << 1 | ((i < 0) ? 1 : 0);
-    }
-    return i;
+    int lowerBits = i >>> (SIZE - distance);
+    int upperBits = i << distance;
+    return upperBits | lowerBits;
   }
 
   public static int rotateRight(int i, int distance) {
-    int ui = i & MAX_VALUE; // avoid sign extension
-    int carry = (i < 0) ? 0x40000000 : 0; // MIN_VALUE rightshifted 1
-    while (distance-- > 0) {
-      int nextcarry = ui & 1;
-      ui = carry | (ui >> 1);
-      carry = (nextcarry == 0) ? 0 : 0x40000000;
-    }
-    if (carry != 0) {
-      ui = ui | MIN_VALUE;
-    }
-    return ui;
+    int upperBits = i << (SIZE - distance);
+    int lowerBits = i >>> distance;
+    return upperBits | lowerBits;
   }
 
   public static int signum(int i) {

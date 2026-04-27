@@ -34,10 +34,6 @@ public class DefaultTextOutput extends AbstractTextOutput {
   @Override
   public String toString() {
     out.flush();
-    if (sw != null) {
-      return sw.toString();
-    } else {
-      return super.toString();
-    }
+    return sw.toString();
   }
 }

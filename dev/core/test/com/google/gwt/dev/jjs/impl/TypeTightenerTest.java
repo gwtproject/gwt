@@ -155,7 +155,7 @@ public class TypeTightenerTest extends OptimizerTestBase {
         "c.m1(c);",
         "c.m2(c);");
     assertParameterTypes(result, "EntryPoint$A.m1(Ljava/lang/Object;)Z", "Object");
-    // This one could be tighetened safely to EntryPoint$B but typetighener does not
+    // This one could be tightened safely to EntryPoint$B but TypeTightener does not
     // tighten parameters in polymorphic method calls.
     assertParameterTypes(result, "EntryPoint$B.m2(Ljava/lang/Object;)Z", "Object");
   }
@@ -200,7 +200,7 @@ public class TypeTightenerTest extends OptimizerTestBase {
     addSnippetClassDecl("static void fun1(A a) {if (a == null) return;}");
     addSnippetClassDecl("static A fun2() { return test(); }"); // tighten method return type
     Result result = optimize("void",
-        "A a = test();" // tighten local varialbe.
+        "A a = test();" // tighten local variable.
         + "C c = new C(); c.a = test();" // tighten field
         + "fun1(test());" // tighten parameter
         );
@@ -235,9 +235,9 @@ public class TypeTightenerTest extends OptimizerTestBase {
   protected boolean doOptimizeMethod(TreeLogger logger, JProgram program, JMethod method) {
     program.addEntryMethod(findMainMethod(program));
     boolean didChange = false;
-    while (TypeTightener.exec(program).didChange()) {
-      MethodCallTightener.exec(program);
-      DeadCodeElimination.exec(program);
+    while (TypeTightener.exec(program, new FullOptimizerContext(program)) > 0) {
+      MethodCallTightener.exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
+      DeadCodeElimination.exec(program, new FullOptimizerContext(program));
       didChange = true;
     }
     return didChange;

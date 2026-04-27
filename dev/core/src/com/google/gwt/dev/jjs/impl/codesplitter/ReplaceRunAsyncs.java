@@ -33,9 +33,7 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
 import com.google.gwt.dev.jjs.ast.RuntimeConstants;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -208,12 +206,11 @@ public class ReplaceRunAsyncs {
 
   public static void exec(TreeLogger logger, JProgram program)
       throws UnableToCompleteException {
-    Event codeSplitterEvent =
-        SpeedTracerLogger.start(CompilerEventType.CODE_SPLITTER, "phase", "ReplaceRunAsyncs");
-    TreeLogger branch =
-        logger.branch(TreeLogger.TRACE, "Replacing GWT.runAsync with island loader calls");
-    new ReplaceRunAsyncs(branch, program).execImpl();
-    codeSplitterEvent.end();
+    try (SimpleEvent ignored = new SimpleEvent("CodeSplitter: ReplaceRunAsyncs")) {
+      TreeLogger branch =
+          logger.branch(TreeLogger.TRACE, "Replacing GWT.runAsync with island loader calls");
+      new ReplaceRunAsyncs(branch, program).execImpl();
+    }
   }
 
   /**

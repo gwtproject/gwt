@@ -27,6 +27,7 @@ import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.resources.rg.GssResourceGenerator;
 import com.google.gwt.resources.rg.GssResourceGenerator.GssOptions;
+import com.google.gwt.thirdparty.guava.common.io.ByteStreams;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.uibinder.rebind.messages.MessagesWriter;
 import com.google.gwt.uibinder.rebind.model.ImplicitClientBundle;
@@ -205,7 +206,7 @@ public class UiBinderGenerator extends Generator {
       String content = designTime.getTemplateContent(templatePath);
       if (content == null) {
         try (InputStream in = resource.openContents()) {
-          content = new String(in.readAllBytes(), StandardCharsets.UTF_8);
+          content = new String(ByteStreams.toByteArray(in), StandardCharsets.UTF_8);
         }
       }
       doc = new W3cDomHelper(logger.getTreeLogger(), resourceOracle).documentFor(content,

@@ -22,6 +22,7 @@ Description:
         <property name="severity" value="error"/>
     </module>
     <module name="LineLength">
+        <property name="fileExtensions" value="java"/>
         <property name="max" value="100"/>
         <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
     </module>

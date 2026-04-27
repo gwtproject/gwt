@@ -15,6 +15,8 @@
  */
 package com.google.gwt.user.tools;
 
+import com.google.gwt.thirdparty.guava.common.io.ByteStreams;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -129,7 +131,7 @@ public class CommandLineCreatorUtils {
       if (in == null) {
         throw new FileNotFoundException(partialPath);
       }
-      return new String(in.readAllBytes(), StandardCharsets.UTF_8);
+      return new String(ByteStreams.toByteArray(in), StandardCharsets.UTF_8);
     }
   }
 

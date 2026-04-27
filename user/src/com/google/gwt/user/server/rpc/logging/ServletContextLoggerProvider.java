@@ -18,21 +18,31 @@ package com.google.gwt.user.server.rpc.logging;
 import javax.servlet.ServletContext;
 
 /**
- * A {@link RpcLoggerProvider} that delegates to the servlet context's logging. Used as the fallback
- * if no other logger provider is found.
- * <br />
+ * An {@link RpcLoggerProvider} that delegates to the servlet context's logging. Used as the
+ * fallback if no other logger provider is found.
+ * <p>
  * Servlet context logging does not support separate named loggers, so this reuses the same logger
  * instance. This reuse allows the servlet context to be easily set after the provider is
  * initialized, and normally the provider will be initialized before the servlet context is even
- * available.
+ * available. Logs are written to {@link System#out} and {@link System#err} until the servlet
+ * context is set.
+ *
+ * @see RpcLogManager
  */
 public class ServletContextLoggerProvider implements RpcLoggerProvider {
 
   private final ServletContextLogger logger = new ServletContextLogger();
 
+  /**
+   * Public for {@link java.util.ServiceLoader}; not intended for direct use outside this package.
+   */
   public ServletContextLoggerProvider() {
   }
 
+  /**
+   * Sets the {@link ServletContext} to which log messages will be written.
+   * @param servletContext the servlet context to use
+   */
   void setServletContext(ServletContext servletContext) {
     if (servletContext != null) {
       logger.servletContext = servletContext;

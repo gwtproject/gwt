@@ -19,10 +19,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * A {@link RpcLoggerProvider} that delegates to {@link java.util.logging.Logger}.
+ * An {@link RpcLoggerProvider} that delegates to {@link java.util.logging.Logger}.
+ *
+ * @see RpcLogManager
  */
 public class JulLoggerProvider implements RpcLoggerProvider {
 
+  /**
+   * Public for {@link java.util.ServiceLoader}; not intended for direct use outside this package.
+   */
   public JulLoggerProvider() {
   }
 

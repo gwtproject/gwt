@@ -16,14 +16,27 @@
 package com.google.gwt.user.server.rpc.logging;
 
 /**
- * A factory for {@link RpcLogger} instances.
+ * Service provider interface for obtaining {@link RpcLogger} instances.
+ * <p>
+ * A concrete instance can be obtained with {@link RpcLogManager#getLogger(Class)}, which discovers
+ * implementations with a service loader
+ *
+ * @see RpcLogManager
  */
 public interface RpcLoggerProvider {
 
+  /**
+   * Creates or retrieves a logger with the given name.
+   *
+   * @param name the name of the logger to create or retrieve
+   * @return the created or retrieved logger
+   */
   RpcLogger createLogger(String name);
 
   /**
-   * If no named provider is found, the first provider that returns <code>true</code> will be used.
+   * Indicates whether this provider should be used as the default in the absence of a provider
+   * explicitly selected with the {@link RpcLogManager#PROVIDER_PROPERTY_KEY} system property.
+   *
    * @return true if this provider should be used when no named provider is found
    */
   default boolean isDefault() {

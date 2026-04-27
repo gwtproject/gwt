@@ -21,11 +21,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.ServletContext;
 
 /**
- * Handles creation of {@link RpcLogger}s and the initialization of the {@link RpcLoggerProvider},
- * using {@link ServiceLoader} to discover available providers.
- * <br />
- * The provider is initialized the first time a logger is requested. The provider is chosen in this
- * order:
+ * Entry point for obtaining {@link RpcLogger}s. Initializes the {@link RpcLoggerProvider} on class
+ * load using {@link ServiceLoader} to discover available implementations.
+ * <p>
+ * The provider is chosen in this order:
  * <ol>
  *   <li>The first provider with a fully-qualified class name that matches the system property with
  *       the key {@link #PROVIDER_PROPERTY_KEY} (<code>gwt.rpc.logging</code>)</li>
@@ -45,6 +44,7 @@ public class RpcLogManager {
 
   /**
    * Creates or retrieves a logger for the fully-qualified name of the given class.
+   *
    * @param clazz the class for which to return a logger
    * @return a logger
    */
@@ -55,6 +55,7 @@ public class RpcLogManager {
   /**
    * Sets the servlet context of the {@link ServletContextLoggerProvider} to use for logging. Has no
    * effect if the provider is not a {@link ServletContextLoggerProvider}.
+   *
    * @param servletContext the servlet context to use
    */
   public static void setServletContext(ServletContext servletContext) {
@@ -67,7 +68,8 @@ public class RpcLogManager {
    * Loads available providers and chooses the first whose class matches the name given with the
    * {@link #PROVIDER_PROPERTY_KEY} system property, or, failing that, the first for which
    * {@link RpcLoggerProvider#isDefault()} returns <code>true</code>. If none found, returns a
-   * {@link ServletContextLoggerProvider} as fallback.
+   * {@link ServletContextLoggerProvider} as a fallback.
+   *
    * @return a logger provider
    */
   private static RpcLoggerProvider loadProvider() {

@@ -16,7 +16,13 @@
 package com.google.gwt.user.server.rpc.logging;
 
 /**
- * A very simplified interface for logging RPC events.
+ * A minimal logging facade used by GWT's server-side RPC package.
+ * <p>
+ * Instances can be obtained from {@link RpcLogManager#getLogger(Class)}. The logging system that
+ * this delegates to is selected by {@link RpcLogManager} at class-initialization.
+ *
+ * @see RpcLogManager
+ * @see RpcLoggerProvider
  */
 public interface RpcLogger {
 

@@ -239,10 +239,6 @@ public class JsToStringGenerationVisitor extends JsVisitor {
 
   @Override
   public boolean visit(JsBooleanLiteral x, JsContext ctx) {
-    if (minifyLiterals) {
-      p.print(x.getValue() ? "!0" : "!1");
-      return false;
-    }
     if (x.getValue()) {
       _true();
     } else {
@@ -1085,7 +1081,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
   }
 
   private void _false() {
-    p.print(FALSE);
+    p.print(minifyLiterals ? "!1" : FALSE);
   }
 
   private void _finally() {
@@ -1352,7 +1348,7 @@ public class JsToStringGenerationVisitor extends JsVisitor {
   }
 
   private void _true() {
-    p.print(TRUE);
+    p.print(minifyLiterals ? "!0" : TRUE);
   }
 
   private void _try() {

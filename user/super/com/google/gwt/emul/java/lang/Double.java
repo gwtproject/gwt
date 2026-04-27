@@ -129,12 +129,14 @@ public final class Double extends Number implements Comparable<Double> {
     long allBits = Double.doubleToLongBits(d);
     String sign = allBits < 0 ? "-" : "";
     long significantBits = allBits & 0xfffffffffffffL;
+    String sigBitsString = Long.toString(significantBits,16);
+    String zeros = "0".repeat(13 - sigBitsString.length());
     String unsignedPrefix =  "0x1.";
     if (Math.abs(d) < Double.MIN_NORMAL) {
       unsignedPrefix = "0x0.";
       exp++;
     }
-    return sign + unsignedPrefix + Long.toString(significantBits,16)
+    return sign + unsignedPrefix + (zeros + sigBitsString)
         .replaceFirst("(.)0+$", "$1") + "p" + exp;
   }
 

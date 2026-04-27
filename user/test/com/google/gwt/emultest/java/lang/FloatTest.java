@@ -176,6 +176,12 @@ public class FloatTest extends GWTTestCase {
     assertEquals("NaN", Float.toHexString(Float.NaN));
     assertEquals("0x1.0p-126", Float.toHexString(Float.MIN_NORMAL));
     assertEquals("0x0.8p-126", Float.toHexString(Float.MIN_NORMAL / 2));
+    assertEquals("0x1.0p-1", Float.toHexString(0.5f));
+    assertEquals("0x1.0p-2", Float.toHexString(0.25f));
+    assertEquals("0x1.fffffep127", Float.toHexString(Float.MAX_VALUE));
+    assertEquals("0x0.fffffep-126",
+        Float.toHexString(Float.MIN_NORMAL - Math.ulp(Float.MIN_NORMAL)));
+    assertEquals("0x0.000002p-126", Float.toHexString(Float.MIN_VALUE));
   }
 
   public void testFloatBits() {

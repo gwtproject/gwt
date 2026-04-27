@@ -261,6 +261,11 @@ public class DoubleTest extends GWTTestCase {
     assertEquals("0x1.0p0", Double.toHexString(1.0));
     assertEquals("0x1.0p1", Double.toHexString(2.0));
     assertEquals("0x1.8p1", Double.toHexString(3.0));
+    assertEquals("0x1.0p-1", Double.toHexString(0.5));
+    assertEquals("0x1.0p-2", Double.toHexString(0.25));
+    assertEquals("0x1.fffffffffffffp1023", Double.toHexString(Double.MAX_VALUE));
+    assertEquals("0x0.fffffffffffffp-1022", Double.toHexString(Math.nextDown(Double.MIN_NORMAL)));
+    assertEquals("0x0.0000000000001p-1022", Double.toHexString(Double.MIN_VALUE));
     assertEquals("0x1.81c8p13", Double.toHexString(12345.0));
     assertEquals("0x1.0p-1022", Double.toHexString(Double.MIN_NORMAL));
     assertEquals("0x0.8p-1022", Double.toHexString(Double.MIN_NORMAL / 2));

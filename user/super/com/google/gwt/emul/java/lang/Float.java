@@ -119,12 +119,14 @@ public final class Float extends Number implements Comparable<Float> {
     int allBits = Float.floatToIntBits(f);
     String sign = allBits < 0 ? "-" : "";
     int significantBits = allBits << 1 & 0xffffff;
+    String sigBitsString = Integer.toString(significantBits, 16);
     String unsignedPrefix =  "0x1.";
+    String zeros = "0".repeat(6 - sigBitsString.length());
     if (Math.abs(f) < Float.MIN_NORMAL) {
       unsignedPrefix = "0x0.";
       exp++;
     }
-    return sign + unsignedPrefix + Long.toString(significantBits,16)
+    return sign + unsignedPrefix + (zeros + sigBitsString)
         .replaceFirst("(.)0+$", "$1") + "p" + exp;
   }
 

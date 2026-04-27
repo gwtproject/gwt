@@ -40,11 +40,11 @@ public class ServletContextLoggerProvider implements RpcLoggerProvider {
   }
 
   @Override
-  public RpcLoggerDelegate createLogger(String ignored) {
+  public RpcLogger createLogger(String ignored) {
     return logger;
   }
 
-  private static final class ServletContextLogger implements RpcLoggerDelegate {
+  private static final class ServletContextLogger implements RpcLogger {
 
     private volatile ServletContext servletContext;
 

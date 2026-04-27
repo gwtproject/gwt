@@ -16,30 +16,16 @@
 package com.google.gwt.user.server.rpc.logging;
 
 /**
- * A wrapper that creates a {@link RpcLoggerDelegate} for a given name.
+ * A very simplified interface for logging RPC events.
  */
-public final class RpcLogger {
+public interface RpcLogger {
 
-  private final RpcLoggerDelegate delegate;
+  void info(String message);
 
-  RpcLogger(String name, RpcLoggerProvider provider) {
-    delegate = provider.createLogger(name);
-  }
+  void warn(String message);
 
-  public void info(String message) {
-    delegate.info(message);
-  }
+  void error(String message);
 
-  public void warn(String message) {
-    delegate.warn(message);
-  }
-
-  public void error(String message) {
-    delegate.error(message);
-  }
-
-  public void error(String message, Throwable throwable) {
-    delegate.error(message, throwable);
-  }
+  void error(String message, Throwable throwable);
 
 }

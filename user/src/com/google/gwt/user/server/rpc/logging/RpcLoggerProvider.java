@@ -20,7 +20,7 @@ package com.google.gwt.user.server.rpc.logging;
  */
 public interface RpcLoggerProvider {
 
-  RpcLoggerDelegate createLogger(String name);
+  RpcLogger createLogger(String name);
 
   /**
    * If no named provider is found, the first provider that returns <code>true</code> will be used.

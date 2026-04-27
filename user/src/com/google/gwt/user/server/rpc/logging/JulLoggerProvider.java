@@ -27,11 +27,11 @@ public class JulLoggerProvider implements RpcLoggerProvider {
   }
 
   @Override
-  public RpcLoggerDelegate createLogger(String name) {
+  public RpcLogger createLogger(String name) {
     return new JulLogger(Logger.getLogger(name));
   }
 
-  private static final class JulLogger implements RpcLoggerDelegate {
+  private static final class JulLogger implements RpcLogger {
     private final Logger logger;
 
     JulLogger(Logger logger) {

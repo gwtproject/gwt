@@ -41,6 +41,7 @@ public class ServletContextLoggerProvider implements RpcLoggerProvider {
 
   /**
    * Sets the {@link ServletContext} to which log messages will be written.
+   *
    * @param servletContext the servlet context to use
    */
   void setServletContext(ServletContext servletContext) {

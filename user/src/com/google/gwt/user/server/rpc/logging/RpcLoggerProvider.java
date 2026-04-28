@@ -18,8 +18,8 @@ package com.google.gwt.user.server.rpc.logging;
 /**
  * Service provider interface for obtaining {@link RpcLogger} instances.
  * <p>
- * A concrete instance can be obtained with {@link RpcLogManager#getLogger(Class)}, which discovers
- * implementations with a service loader
+ * This is not intended to be used directly, but through {@link RpcLogManager#getLogger(Class)},
+ * which discovers implementations with a service loader
  *
  * @see RpcLogManager
  */

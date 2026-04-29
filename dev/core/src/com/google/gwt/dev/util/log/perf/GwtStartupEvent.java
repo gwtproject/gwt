@@ -16,6 +16,7 @@
 package com.google.gwt.dev.util.log.perf;
 
 import com.google.gwt.dev.About;
+
 import jdk.jfr.Category;
 import jdk.jfr.Description;
 import jdk.jfr.Event;

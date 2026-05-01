@@ -1003,7 +1003,9 @@ public class SerializableTypeOracleBuilder {
     Set<JClassType> instantiableTypes = new HashSet<JClassType>();
     boolean anySubtypes =
         checkSubtypes(localLogger, originalType, instantiableTypes, path, problems);
-    if (!tic.isDone()) {
+    if (tic.isPendingInstantiable()) {
+      tic.setInstantiableSubtypes(anySubtypes);
+    } else if (!tic.isDone()) {
       tic.setInstantiableSubtypes(anySubtypes);
       tic.setInstantiable(false);
     }
@@ -1147,9 +1149,14 @@ public class SerializableTypeOracleBuilder {
           checkAllSubtypesOfObject(fieldLogger.branch(TreeLogger.WARN,
               "Object was reached from a manually serializable type", null), path, problems);
         } else {
-          allSucceeded &=
-              computeTypeInstantiability(fieldLogger, fieldType, path, problems)
-                  .hasInstantiableSubtypes();
+          boolean hasInstantiableSubtypes = computeTypeInstantiability(fieldLogger, fieldType, path,
+              problems).hasInstantiableSubtypes();
+          allSucceeded &= hasInstantiableSubtypes;
+          if (!hasInstantiableSubtypes) {
+            fieldLogger.branch(TreeLogger.WARN, "Field type '"
+                + fieldType.getParameterizedQualifiedSourceName()
+                + "' has no instantiable subtypes");
+          }
         }
       }
     }

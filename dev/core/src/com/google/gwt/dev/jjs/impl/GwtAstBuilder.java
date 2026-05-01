@@ -1093,8 +1093,8 @@ public class GwtAstBuilder {
     public void endVisit(IfStatement x, BlockScope scope) {
       try {
         SourceInfo info = makeSourceInfo(x);
-        JStatement elseStatement = pop(x.elseStatement);
-        JStatement thenStatement = pop(x.thenStatement);
+        JBlock elseStatement = popBlock(info, x.elseStatement);
+        JBlock thenStatement = popBlock(info, x.thenStatement);
         JExpression condition = pop(x.condition);
         push(new JIfStatement(info, condition, thenStatement, elseStatement));
       } catch (Throwable e) {

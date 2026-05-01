@@ -22,18 +22,18 @@ import com.google.gwt.dev.jjs.SourceInfo;
  */
 public class JIfStatement extends JStatement {
 
-  private JStatement elseStmt;
+  private JBlock elseStmt;
   private JExpression ifExpr;
-  private JStatement thenStmt;
+  private JBlock thenStmt;
 
   public JIfStatement(SourceInfo info, JExpression ifExpr, JStatement thenStmt, JStatement elseStmt) {
     super(info);
     this.ifExpr = ifExpr;
-    this.thenStmt = thenStmt;
-    this.elseStmt = elseStmt;
+    this.thenStmt = JBlock.ensureBlock(info, thenStmt);
+    this.elseStmt = JBlock.ensureBlock(info, elseStmt);
   }
 
-  public JStatement getElseStmt() {
+  public JBlock getElseStmt() {
     return elseStmt;
   }
 
@@ -41,7 +41,7 @@ public class JIfStatement extends JStatement {
     return ifExpr;
   }
 
-  public JStatement getThenStmt() {
+  public JBlock getThenStmt() {
     return thenStmt;
   }
 
@@ -49,12 +49,8 @@ public class JIfStatement extends JStatement {
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {
       ifExpr = visitor.accept(ifExpr);
-      if (thenStmt != null) {
-        thenStmt = visitor.accept(thenStmt, true);
-      }
-      if (elseStmt != null) {
-        elseStmt = visitor.accept(elseStmt, true);
-      }
+      thenStmt = JBlock.ensureBlock(getSourceInfo(), visitor.accept(thenStmt, false));
+      elseStmt = JBlock.ensureBlock(getSourceInfo(), visitor.accept(elseStmt, false));
     }
     visitor.endVisit(this, ctx);
   }

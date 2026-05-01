@@ -59,7 +59,8 @@ public abstract class JsNode implements JsVisitable, HasSourceInfo, Serializable
    */
   public final String toSource(boolean useLongIdents) {
     DefaultTextOutput out = new DefaultTextOutput(false);
-    JsSourceGenerationVisitor v = new JsSourceGenerationVisitor(out, useLongIdents);
+    JsSourceGenerationVisitor v = new JsSourceGenerationVisitor(out,
+        new JsToStringGenerationVisitor.PrintOptions(useLongIdents, false));
     v.accept(this);
     return out.toString();
   }

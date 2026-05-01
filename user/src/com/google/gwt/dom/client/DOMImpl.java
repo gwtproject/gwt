@@ -194,14 +194,6 @@ abstract class DOMImpl {
     return elem.getAttribute(name) || '';
   }-*/;
 
-  public native int getBodyOffsetLeft(Document doc) /*-{
-    return 0;
-  }-*/;
-
-  public native int getBodyOffsetTop(Document doc) /*-{
-    return 0;
-  }-*/;
-
   public native JsArray<Touch> getChangedTouches(NativeEvent evt) /*-{
     return evt.changedTouches;
   }-*/;

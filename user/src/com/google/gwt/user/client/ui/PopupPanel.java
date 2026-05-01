@@ -119,7 +119,7 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
    * <li>ROLL_DOWN - Expand from the top to the bottom, do not animate hiding</li>
    * </ul>
    */
-  public static enum AnimationType {
+  public enum AnimationType {
     CENTER, ONE_WAY_CORNER, ROLL_DOWN
   }
 
@@ -166,7 +166,7 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
      *
      * @param panel the panel to affect
      */
-    public ResizeAnimation(PopupPanel panel) {
+    ResizeAnimation(PopupPanel panel) {
       this.curPanel = panel;
     }
 
@@ -874,11 +874,6 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
     // Save the position of the popup
     leftPosition = left;
     topPosition = top;
-
-    // Account for the difference between absolute position and the
-    // body's positioning context.
-    left -= Document.get().getBodyOffsetLeft();
-    top -= Document.get().getBodyOffsetTop();
 
     // Set the popup's position manually, allowing setPopupPosition() to be
     // called before show() is called (so a popup can be positioned without it

@@ -24,7 +24,7 @@ public class AboutTest extends TestCase {
 
   public void testGwtName() {
     String result = About.getGwtName();
-    assertTrue("Google Web Toolkit".equals(result));
+    assertTrue("GWT Web Toolkit".equals(result));
   }
 
   public void testGwtSvnRev() {

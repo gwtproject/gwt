@@ -46,6 +46,7 @@ import com.google.gwt.dev.util.arg.ArgHandlerStrict;
 import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
 import com.google.gwt.dev.util.arg.ArgHandlerWorkDirOptional;
 import com.google.gwt.dev.util.arg.OptionModulePathPrefix;
+import com.google.gwt.dev.util.log.perf.GwtStartupEvent;
 import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.thirdparty.guava.common.io.MoreFiles;
 import com.google.gwt.thirdparty.guava.common.io.RecursiveDeleteOption;
@@ -473,6 +474,7 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
      */
     DevMode hostedMode = new DevMode();
     if (new ArgProcessor(hostedMode.options).processArgs(args)) {
+      new GwtStartupEvent(DevMode.class);
       hostedMode.run();
       // Exit w/ success code.
       System.exit(0);

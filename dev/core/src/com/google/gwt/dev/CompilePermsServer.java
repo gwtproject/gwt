@@ -26,6 +26,7 @@ import com.google.gwt.dev.util.StringInterningObjectInputStream;
 import com.google.gwt.dev.util.arg.ArgHandlerLogLevel;
 import com.google.gwt.dev.util.arg.OptionLogLevel;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
+import com.google.gwt.dev.util.log.perf.GwtStartupEvent;
 import com.google.gwt.util.tools.ArgHandlerString;
 
 import java.io.File;
@@ -234,6 +235,7 @@ public class CompilePermsServer {
     int exitCode = -1;
     final CompileServerOptions options = new CompileServerOptionsImpl();
     if (new ArgProcessor(options).processArgs(args)) {
+      new GwtStartupEvent(CompilePermsServer.class);
       PrintWriterTreeLogger logger = new PrintWriterTreeLogger();
       logger.setMaxDetail(options.getLogLevel());
       if (run(options, logger)) {

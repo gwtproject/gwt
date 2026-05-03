@@ -411,7 +411,8 @@ public class RPCTypeCheckArraysTest extends TestCase {
     } catch (IncompatibleRemoteServiceException e) {
       // Expected to get here
       assertEquals(SerializedTypeViolationException.class, e.getCause().getClass());
-      assertTrue(e.getCause().getMessage().matches(".*HashSet.*int.*"));
+      String message = e.getCause().getMessage();
+      assertTrue(message, message.matches(".*HashSet.*\\[I.*"));
     }
     try {
       RPC.decodeRequest(generateArrayGenericsB());
@@ -484,13 +485,16 @@ public class RPCTypeCheckArraysTest extends TestCase {
    * This checks that arrays cannot be used in place of primitives.
    */
   public void testArraysSpoofingObjects() {
+    Object decoded = null;
     try {
-      RPC.decodeRequest(generateIntArraySpoofingInt());
-      fail("Expected ArrayIndexOutOfBoundsException from testArraysSpoofingPrimitives (1)");
-    } catch (Exception e) {
-      // Expected to get here
-      assertTrue(e instanceof ArrayIndexOutOfBoundsException);
+      decoded = RPC.decodeRequest(generateIntArraySpoofingInt());
+    } catch (ArrayIndexOutOfBoundsException ignored) {
+      // Expected to get here if assertions are disabled
+    } catch (AssertionError e) {
+      // Expected to get here if assertions are enabled
     }
+    assertNull("Expected ArrayIndexOutOfBoundsException or AssertionError from " +
+        "testArraysSpoofingObjects (1)", decoded);
     try {
       RPCRequest result = RPC.decodeRequest(generateStringArraySpoofingString());
       assertTrue(result.getParameters()[1].toString().matches(".*\\[Ljava.lang.String.*"));
@@ -552,17 +556,19 @@ public class RPCTypeCheckArraysTest extends TestCase {
    * arguments of a primitive type with another primitive type.
    */
   public void testPrimitiveSpoofingArray() {
+    Object decoded = null;
     try {
+      // When the int array value is processed, it reads the integer value and tries to look
+      // it up as a class string, only to run out of bounds in the string table.
       RPC.decodeRequest(generateIntSpoofingIntArray());
-      fail("Expected IncompatibleRemoteServiceException from testPrimitiveSpoofingArray (1)");
-    } catch (Exception e) {
-      // Expected to get here. When the int array value is processed, it reads
-      // the
-      // integer value and tries to look it up as a class string, only to run
-      // out
-      // of bounds in the string table.
-      assertTrue(e instanceof ArrayIndexOutOfBoundsException);
+    } catch (ArrayIndexOutOfBoundsException ignored) {
+      // Expected to get here when assertions are disabled
+    } catch (AssertionError ignored) {
+      // Expected to get here when assertions are enabled
     }
+    assertNull("Expected ArrayIndexOutOfBoundsException or AssertionError from " +
+        "testPrimitiveSpoofingArray (1)", decoded);
+
     try {
       RPC.decodeRequest(generateStringSpoofingStringArray());
       fail("Expected IncompatibleRemoteServiceException from testPrimitiveSpoofingArray (2)");

@@ -23,7 +23,8 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
  * This class is an exact clone of {@link StringBuffer} except for the name.
  * Any change made to one should be mirrored in the other.
  */
-public final class StringBuilder extends AbstractStringBuilder {
+public final class StringBuilder extends AbstractStringBuilder
+    implements Comparable<StringBuilder> {
 
   public StringBuilder() {
     super("");
@@ -186,5 +187,10 @@ public final class StringBuilder extends AbstractStringBuilder {
   public StringBuilder reverse() {
     reverse0();
     return this;
+  }
+
+  @Override
+  public int compareTo(StringBuilder other) {
+    return toString().compareTo(other.toString());
   }
 }

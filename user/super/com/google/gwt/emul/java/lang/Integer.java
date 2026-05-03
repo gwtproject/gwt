@@ -15,13 +15,15 @@
  */
 package java.lang;
 
+import java.lang.constant.Constable;
+import java.lang.constant.ConstantDesc;
 import javaemul.internal.JsUtils;
 import javaemul.internal.annotations.HasNoSideEffects;
 
 /**
  * Wraps a primitive <code>int</code> as an object.
  */
-public final class Integer extends Number implements Comparable<Integer> {
+public final class Integer extends Number implements Comparable<Integer>, Constable, ConstantDesc {
 
   public static final int MAX_VALUE = 0x7fffffff;
   public static final int MIN_VALUE = 0x80000000;

@@ -24,11 +24,16 @@ public class AboutTest extends TestCase {
 
   public void testGwtName() {
     String result = About.getGwtName();
-    assertTrue("Google Web Toolkit".equals(result));
+    assertTrue("GWT Web Toolkit".equals(result));
   }
 
   public void testGwtSvnRev() {
     String result = About.getGwtSvnRev();
+    assertFalse(result.length() == 0);
+  }
+
+  public void testGwtGitRev() {
+    String result = About.getGwtGitRev();
     assertFalse(result.length() == 0);
   }
 

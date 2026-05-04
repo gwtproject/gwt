@@ -63,6 +63,7 @@ import com.google.gwt.dev.util.arg.ArgHandlerSourceLevel;
 import com.google.gwt.dev.util.arg.ArgHandlerStrict;
 import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
 import com.google.gwt.dev.util.arg.ArgHandlerWorkDirOptional;
+import com.google.gwt.dev.util.log.perf.GwtStartupEvent;
 import com.google.gwt.junit.JUnitMessageQueue.ClientStatus;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.junit.client.TimeoutException;
@@ -694,6 +695,8 @@ public class JUnitShell extends DevMode {
       if (!argProcessor.processArgs(args)) {
         throw new JUnitFatalLaunchException("Error processing shell arguments");
       }
+      new GwtStartupEvent(JUnitShell.class);
+
       // Always bind to the wildcard address and substitute the host address in
       // URLs. Note that connectAddress isn't actually used here, as we
       // override it from the runsStyle in getModuleUrl, but we set it to match

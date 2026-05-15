@@ -39,6 +39,7 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
@@ -83,6 +84,10 @@ public class WebServer {
   static final Pattern STRONG_NAME = Pattern.compile("[\\dA-F]{32}");
 
   private static final Pattern CACHE_JS_FILE = Pattern.compile("/(" + STRONG_NAME + ").cache.js$");
+
+  private static final Pattern ACCEPT_ENCODING_SPEC = Pattern.compile(
+      "^\\s*([!#$%&'*+.^_`|~0-9A-Za-z-]+|\\*)\\s*(?:;\\s*q\\s*=\\s*"
+          + "(0(?:\\.\\d{0,3})?|1(?:\\.0{0,3})?))?\\s*$");
 
   private static final MimeTypes MIME_TYPES = new MimeTypes();
 
@@ -372,9 +377,11 @@ public class WebServer {
         }
 
         if (contentEncoding != null) {
-          if (!request.getHeader("Accept-Encoding").contains("gzip")) {
-            response.sendError(HttpServletResponse.SC_NOT_IMPLEMENTED);
-            logger.log(TreeLogger.WARN, "client doesn't accept gzip; bailing");
+          if (!acceptsGzipEncoding(request.getHeader("Accept-Encoding"))) {
+            response.setHeader("Accept-Encoding", "gzip");
+            response.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
+            logger.log(TreeLogger.WARN,
+                "client doesn't accept gzip and no uncompressed representation exists; bailing");
             return;
           }
           response.setHeader("Content-Encoding", "gzip");
@@ -541,6 +548,43 @@ public class WebServer {
   static String guessMimeType(String filename) {
     String mimeType = MIME_TYPES.getMimeByExtension(filename);
     return mimeType != null ? mimeType : "";
+  }
+
+  /* visible for testing */
+  static boolean acceptsGzipEncoding(String acceptEncodingHeader) {
+    if (acceptEncodingHeader == null) {
+      // RFC 9110: if Accept-Encoding is absent, any content coding is acceptable.
+      return true;
+    }
+    if (acceptEncodingHeader.trim().isEmpty()) {
+      return false;
+    }
+
+    Double gzipQValue = null;
+    Double wildcardQValue = null;
+
+    for (String encodingSpec : acceptEncodingHeader.split(",")) {
+      Matcher matcher = ACCEPT_ENCODING_SPEC.matcher(encodingSpec);
+      if (!matcher.matches()) {
+        continue;
+      }
+
+      String encoding = matcher.group(1).toLowerCase(Locale.ROOT);
+      String qValueText = matcher.group(2);
+      double qValue = qValueText == null ? 1.0 : Double.parseDouble(qValueText);
+
+      if (encoding.equals("gzip")) {
+        gzipQValue = qValue;
+      } else if (encoding.equals("*")) {
+        wildcardQValue = qValue;
+      }
+    }
+
+    if (gzipQValue != null) {
+      return gzipQValue > 0.0;
+    }
+
+    return wildcardQValue != null && wildcardQValue > 0.0;
   }
 
   /**

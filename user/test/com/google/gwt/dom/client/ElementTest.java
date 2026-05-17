@@ -267,8 +267,8 @@ public class ElementTest extends GWTTestCase {
     elem.getStyle().setProperty("padding", padding + "px");
     elem.getStyle().setProperty("margin", margin + "px");
 
-    elem.getStyle().setPropertyPx("top", top - doc.getBodyOffsetLeft());
-    elem.getStyle().setPropertyPx("left", left - doc.getBodyOffsetTop());
+    elem.getStyle().setPropertyPx("top", top);
+    elem.getStyle().setPropertyPx("left", left);
     elem.getStyle().setPropertyPx("width", width);
     elem.getStyle().setPropertyPx("height", height);
 

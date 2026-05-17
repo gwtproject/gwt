@@ -639,43 +639,13 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
   }
 
   /**
-   * Implementation of {@link CellTable} used by Firefox.
-   */
-  @SuppressWarnings("unused")
-  private static class ImplMozilla extends Impl {
-    /**
-     * Firefox 3.6 and earlier convert td elements to divs if the tbody is
-     * removed from the table element.
-     */
-    @Override
-    protected void detachSectionElement(TableSectionElement section) {
-      if (isGecko192OrBefore()) {
-        return;
-      }
-      super.detachSectionElement(section);
-    }
-
-    @Override
-    protected void reattachSectionElement(Element parent, TableSectionElement section,
-        Element nextSection) {
-      if (isGecko192OrBefore()) {
-        return;
-      }
-      super.reattachSectionElement(parent, section, nextSection);
-    }
-
-    /**
-     * Return true if using Gecko 1.9.2 (Firefox 3.6) or earlier.
-     */
-    private native boolean isGecko192OrBefore() /*-{
-      return @com.google.gwt.dom.client.DOMImplMozilla::isGecko192OrBefore()();
-    }-*/;
-  }
-
-  /**
    * Implementation of {@link AbstractCellTable} used by IE.
+   *
+   * @deprecated Unused since 2.10.0, left in place to permit downstream users to continue to
+   * use it in GWT module files.
    */
   @SuppressWarnings("unused")
+  @Deprecated
   private static class ImplTrident extends Impl {
 
     /**
@@ -1664,7 +1634,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
    * Sets the skipRowHoverStyleUpdate flag. If set, the CellTable will not update
    * the row's style on row-level hover events (MOUSEOVER and MOUSEOUT).
    *
-   * @param skipRowHoverCheck the new flag value
+   * @param skipRowHoverStyleUpdate the new flag value
    */
   public void setSkipRowHoverStyleUpdate(boolean skipRowHoverStyleUpdate) {
     this.skipRowHoverStyleUpdate = skipRowHoverStyleUpdate;
@@ -1949,8 +1919,8 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
           boolean unhover = true;
           if (!skipRowHoverFloatElementCheck) {
             // Ignore events happening directly over the hovering row. If there are floating element
-            // on top of the row, mouseout event should not be triggered. This is to avoid the flickring
-            // effect if the floating element is shown/hide based on hover event.
+            // on top of the row, mouseout event should not be triggered. This is to avoid the
+            // flickering effect if the floating element is shown/hide based on hover event.
             int clientX = event.getClientX() + Window.getScrollLeft();
             int clientY = event.getClientY() + Window.getScrollTop();
             int rowLeft = hoveringRow.getAbsoluteLeft();
@@ -1959,7 +1929,8 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
             int rowHeight = hoveringRow.getOffsetHeight();
             int rowBottom = rowTop + rowHeight;
             int rowRight = rowLeft + rowWidth;
-            unhover = clientX < rowLeft || clientX > rowRight || clientY < rowTop || clientY > rowBottom;
+            unhover = clientX < rowLeft || clientX > rowRight
+                || clientY < rowTop || clientY > rowBottom;
           }
           if (unhover) {
             setRowHover(hoveringRow, event, false, isRowChange);
@@ -2587,7 +2558,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
   }
 
   /**
-   * Set a row's hovering style and fire a {@link RowHoverEvent}
+   * Set a row's hovering style and fire a {@link RowHoverEvent}.
    *
    * @param tr the row element
    * @param event the original event

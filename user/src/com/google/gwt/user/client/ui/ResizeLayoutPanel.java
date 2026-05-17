@@ -263,6 +263,7 @@ public class ResizeLayoutPanel extends SimplePanel implements ProvidesResize,
   /**
    * Implementation of resize event used by IE.
    */
+  @Deprecated
   static class ImplTrident extends Impl {
 
     @Override

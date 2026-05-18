@@ -5,6 +5,10 @@ name: Quick smoke test
 on: [push, pull_request]
 jobs:
   build:
+    permissions:
+      contents: write
+      checks: write
+      actions: read
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false

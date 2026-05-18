@@ -20,6 +20,10 @@ permissions:
   checks: write 
 jobs:
   build:
+    permissions:
+      contents: write
+      checks: write
+      actions: read
     if: ${{ !github.event.pull_request || contains(github.event.pull_request.labels.*.name, 'ready') }}
     runs-on: ubuntu-latest
     strategy:

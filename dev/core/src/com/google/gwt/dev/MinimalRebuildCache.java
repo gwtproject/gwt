@@ -301,30 +301,6 @@ public class MinimalRebuildCache implements Serializable {
 
     Set<String> modifiedTypeNames = computeModifiedTypeNames();
 
-    // DIAG: trace methodref types through the stale type computation pipeline
-    Set<String> methodrefTypes = Sets.newHashSet();
-    for (String name : modifiedTypeNames) {
-      if (name.contains("methodref")) {
-        methodrefTypes.add(name);
-      }
-    }
-    if (!methodrefTypes.isEmpty()) {
-      logger.log(TreeLogger.WARN, "DIAG: methodref types in modifiedTypeNames = " + methodrefTypes);
-    } else {
-      // Check if they exist in the nested types map at all
-      for (String cuName : modifiedCompilationUnitNames) {
-        Collection<String> nested = nestedTypeNamesByUnitTypeName.get(cuName);
-        for (String n : nested) {
-          if (n.contains("methodref")) {
-            logger.log(TreeLogger.WARN, "DIAG: methodref nested type '" + n
-                + "' found under CU '" + cuName + "' but NOT in modifiedTypeNames");
-          }
-        }
-      }
-      logger.log(TreeLogger.WARN, "DIAG: no methodref types in modifiedTypeNames. "
-          + "modifiedCompilationUnitNames = " + modifiedCompilationUnitNames);
-    }
-
     // Accumulate the names of stale types resulting from some known type or resource modifications,
     // using various patterns (sub types, referencing types, etc).
     {
@@ -346,29 +322,7 @@ public class MinimalRebuildCache implements Serializable {
       // probably make GWTRPC output incompatible with a server anyway (and thus already forces a
       // restart).
 
-      // DIAG: check if methodref types are being removed as synthetic
-      Set<String> methodrefInStale = Sets.newHashSet();
-      for (String name : staleTypeNames) {
-        if (name.contains("methodref")) {
-          methodrefInStale.add(name);
-        }
-      }
-      if (!methodrefInStale.isEmpty()) {
-        logger.log(TreeLogger.WARN, "DIAG: methodref types in staleTypeNames before synthetic removal = "
-            + methodrefInStale);
-        logger.log(TreeLogger.WARN, "DIAG: SYNTHETIC_TYPE_NAMES contains any? = "
-            + !Sets.intersection(JProgram.SYNTHETIC_TYPE_NAMES, methodrefInStale).isEmpty());
-      }
-
       staleTypeNames.removeAll(JProgram.SYNTHETIC_TYPE_NAMES);
-    }
-
-    // DIAG: check reachability filtering
-    Set<String> methodrefBeforeReachability = Sets.newHashSet();
-    for (String name : staleTypeNames) {
-      if (name.contains("methodref")) {
-        methodrefBeforeReachability.add(name);
-      }
     }
 
     /*
@@ -385,43 +339,6 @@ public class MinimalRebuildCache implements Serializable {
     Set<String> filteredStaleTypeNames = filterUnreachableTypeNames(staleTypeNames);
     filteredStaleTypeNames.addAll(modifiedTypeNames);
     copyCollection(filteredStaleTypeNames, staleTypeNames);
-
-    if (!methodrefBeforeReachability.isEmpty()) {
-      Set<String> methodrefAfterReachability = Sets.newHashSet();
-      for (String name : staleTypeNames) {
-        if (name.contains("methodref")) {
-          methodrefAfterReachability.add(name);
-        }
-      }
-      Set<String> filteredOut = Sets.difference(methodrefBeforeReachability, methodrefAfterReachability);
-      if (!filteredOut.isEmpty()) {
-        logger.log(TreeLogger.WARN, "DIAG: methodref types FILTERED as unreachable = " + filteredOut);
-        logger.log(TreeLogger.WARN, "DIAG: lastReachableTypeNames contains them? ");
-        for (String name : filteredOut) {
-          logger.log(TreeLogger.WARN, "DIAG:   " + name + " in lastReachableTypeNames = "
-              + lastReachableTypeNames.contains(name));
-        }
-      } else {
-        logger.log(TreeLogger.WARN, "DIAG: methodref types survived reachability filter = "
-            + methodrefAfterReachability);
-      }
-    }
-
-    // DIAG: log full stale types set and check for specific types
-    {
-      Set<String> appTypes = Sets.newHashSet();
-      for (String name : staleTypeNames) {
-        if (name.startsWith("com.foo.")) {
-          appTypes.add(name);
-        }
-      }
-      logger.log(TreeLogger.WARN, "DIAG: final staleTypeNames (com.foo.*) = " + appTypes);
-      logger.log(TreeLogger.WARN, "DIAG: Helper in staleTypeNames = " + staleTypeNames.contains("com.foo.Helper"));
-      logger.log(TreeLogger.WARN, "DIAG: Helper in lastReachableTypeNames = " + lastReachableTypeNames.contains("com.foo.Helper"));
-      // Check what references Helper
-      Collection<String> refsToHelper = typeNamesByReferencingTypeName.get("com.foo.Helper");
-      logger.log(TreeLogger.WARN, "DIAG: types referencing Helper = " + refsToHelper);
-    }
 
     // These log lines can be expensive.
     if (logger.isLoggable(TreeLogger.DEBUG)) {

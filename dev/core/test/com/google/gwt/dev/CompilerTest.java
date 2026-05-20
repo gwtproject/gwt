@@ -2453,6 +2453,7 @@ public class CompilerTest extends ArgProcessorTestBase {
             "package com.foo;",
             "public class Stream {",
             "  public static Stream generate(Producer p) {",
+            "    p.get();",
             "    return new Stream();",
             "  }",
             "}"
@@ -2497,6 +2498,7 @@ public class CompilerTest extends ArgProcessorTestBase {
             "package com.foo;",
             "public class Stream {",
             "  public static Stream generate(Producer p) {",
+            "    p.get();",
             "    return new Stream();",
             "  }",
             "}"
@@ -2549,6 +2551,7 @@ public class CompilerTest extends ArgProcessorTestBase {
             "package com.foo;",
             "public class Stream {",
             "  public static Stream generate(Producer p) {",
+            "    p.get();",
             "    return new Stream();",
             "  }",
             "}"
@@ -2599,6 +2602,7 @@ public class CompilerTest extends ArgProcessorTestBase {
             "package com.foo;",
             "public class Stream {",
             "  public static Stream generate(Producer p) {",
+            "    p.get();",
             "    return new Stream();",
             "  }",
             "}"
@@ -2647,6 +2651,7 @@ public class CompilerTest extends ArgProcessorTestBase {
             "package com.foo;",
             "public class Stream {",
             "  public static Stream generate(Producer p) {",
+            "    p.get();",
             "    return new Stream();",
             "  }",
             "}"

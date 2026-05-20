@@ -2051,38 +2051,38 @@ public class CompilerTest extends ArgProcessorTestBase {
 //    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.Hello",
 //        originalResources, relinkMinimalRebuildCache, emptySet, output);
 //  }
-//
-//  public void testIncrementalRecompile_ctorReferenceChange()
-//      throws InterruptedException, IOException, UnableToCompleteException {
-////    System.out.println("===== TEST: testIncrementalRecompile_ctorReferenceChange PRETTY =====");
-//    checkIncrementalRecompile_ctorReferenceChange(JsOutputOption.PRETTY);
-////    System.out.println("===== TEST: testIncrementalRecompile_ctorReferenceChange DETAILED =====");
-//    checkIncrementalRecompile_ctorReferenceChange(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_methodReferenceChange()
-//      throws InterruptedException, IOException, UnableToCompleteException {
-////    System.out.println("===== TEST: testIncrementalRecompile_methodReferenceChange PRETTY =====");
-//    checkIncrementalRecompile_methodReferenceChange(JsOutputOption.PRETTY);
-////    System.out.println("===== TEST: testIncrementalRecompile_methodReferenceChange DETAILED =====");
-//    checkIncrementalRecompile_methodReferenceChange(JsOutputOption.DETAILED);
-//  }
-//
-//  // passes
-//  public void testIncrementalRecompile_lambdaChange()
-//      throws InterruptedException, IOException, UnableToCompleteException {
-////    System.out.println("===== TEST: testIncrementalRecompile_lambdaChange OBFUSCATED =====");
-//    checkIncrementalRecompile_lambdaChange(JsOutputOption.OBFUSCATED);
-////    System.out.println("===== TEST: testIncrementalRecompile_lambdaChange DETAILED =====");
-//    checkIncrementalRecompile_lambdaChange(JsOutputOption.DETAILED);
-//  }
-//
-//  // Method reference to a static method on another class; the reference target changes.
-//  public void testIncrementalRecompile_externalMethodReferenceChange()
-//      throws InterruptedException, IOException, UnableToCompleteException {
-//    checkIncrementalRecompile_externalMethodReferenceChange(JsOutputOption.PRETTY);
-//    checkIncrementalRecompile_externalMethodReferenceChange(JsOutputOption.DETAILED);
-//  }
+
+  public void testIncrementalRecompile_ctorReferenceChange()
+      throws InterruptedException, IOException, UnableToCompleteException {
+//    System.out.println("===== TEST: testIncrementalRecompile_ctorReferenceChange PRETTY =====");
+    checkIncrementalRecompile_ctorReferenceChange(JsOutputOption.PRETTY);
+//    System.out.println("===== TEST: testIncrementalRecompile_ctorReferenceChange DETAILED =====");
+    checkIncrementalRecompile_ctorReferenceChange(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_methodReferenceChange()
+      throws InterruptedException, IOException, UnableToCompleteException {
+//    System.out.println("===== TEST: testIncrementalRecompile_methodReferenceChange PRETTY =====");
+    checkIncrementalRecompile_methodReferenceChange(JsOutputOption.PRETTY);
+//    System.out.println("===== TEST: testIncrementalRecompile_methodReferenceChange DETAILED =====");
+    checkIncrementalRecompile_methodReferenceChange(JsOutputOption.DETAILED);
+  }
+
+  // passes
+  public void testIncrementalRecompile_lambdaChange()
+      throws InterruptedException, IOException, UnableToCompleteException {
+//    System.out.println("===== TEST: testIncrementalRecompile_lambdaChange OBFUSCATED =====");
+    checkIncrementalRecompile_lambdaChange(JsOutputOption.OBFUSCATED);
+//    System.out.println("===== TEST: testIncrementalRecompile_lambdaChange DETAILED =====");
+    checkIncrementalRecompile_lambdaChange(JsOutputOption.DETAILED);
+  }
+
+  // Method reference to a static method on another class; the reference target changes.
+  public void testIncrementalRecompile_externalMethodReferenceChange()
+      throws InterruptedException, IOException, UnableToCompleteException {
+    checkIncrementalRecompile_externalMethodReferenceChange(JsOutputOption.PRETTY);
+    checkIncrementalRecompile_externalMethodReferenceChange(JsOutputOption.DETAILED);
+  }
 
   // Method reference to a static method on another class; that other class's implementation changes.
   public void testIncrementalRecompile_externalMethodReferenceTargetChange()

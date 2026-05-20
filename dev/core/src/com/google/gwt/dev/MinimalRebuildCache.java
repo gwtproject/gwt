@@ -22,6 +22,7 @@ import com.google.gwt.dev.javac.CompiledClass;
 import com.google.gwt.dev.javac.GeneratedUnit;
 import com.google.gwt.dev.javac.Shared;
 import com.google.gwt.dev.jjs.JsSourceMap;
+import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JTypeOracle;
 import com.google.gwt.dev.jjs.ast.JTypeOracle.ImmediateTypeRelations;
@@ -33,7 +34,6 @@ import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Objects;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
-import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
@@ -336,9 +336,10 @@ public class MinimalRebuildCache implements Serializable {
      * tracked by RapidTypeAnalyzer and would be incorrectly filtered out, causing their cached JS
      * to never be cleared and stale output to be reused.
      */
-    Set<String> filteredStaleTypeNames = filterUnreachableTypeNames(staleTypeNames);
-    filteredStaleTypeNames.addAll(modifiedTypeNames);
-    copyCollection(filteredStaleTypeNames, staleTypeNames);
+//    Set<String> filteredStaleTypeNames = filterUnreachableTypeNames(staleTypeNames);
+//    filteredStaleTypeNames.addAll(modifiedTypeNames);
+//    copyCollection(filteredStaleTypeNames, staleTypeNames);
+    copyCollection(filterUnreachableTypeNames(staleTypeNames), staleTypeNames);
 
     // These log lines can be expensive.
     if (logger.isLoggable(TreeLogger.DEBUG)) {

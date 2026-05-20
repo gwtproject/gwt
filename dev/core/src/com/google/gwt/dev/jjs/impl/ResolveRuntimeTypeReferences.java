@@ -80,7 +80,7 @@ public class ResolveRuntimeTypeReferences {
 
     // NOTE: DO NOT STORE ANY AST REFERENCE. Objects of this type persist across compiles.
     private final Map<String, Integer> typeIdByTypeName = Maps.newHashMap();
-    private final List<Integer> recycledIds = Lists.newArrayList();
+//    private final List<Integer> recycledIds = Lists.newArrayList();
     private int nextAvailableId =  0;
 
     @Override
@@ -93,8 +93,8 @@ public class ResolveRuntimeTypeReferences {
       this.nextAvailableId = from.nextAvailableId;
       this.typeIdByTypeName.clear();
       this.typeIdByTypeName.putAll(from.typeIdByTypeName);
-      this.recycledIds.clear();
-      this.recycledIds.addAll(from.recycledIds);
+//      this.recycledIds.clear();
+//      this.recycledIds.addAll(from.recycledIds);
     }
 
     @VisibleForTesting
@@ -113,33 +113,34 @@ public class ResolveRuntimeTypeReferences {
     public JIntLiteral getOrCreateTypeId(JType type) {
       String typeName = type.getName();
       if (!typeIdByTypeName.containsKey(typeName)) {
-        int nextId;
-        if (!recycledIds.isEmpty()) {
-          nextId = recycledIds.remove(recycledIds.size() - 1);
-        } else {
-          nextId = nextAvailableId++;
-        }
+//        int nextId;
+//        if (!recycledIds.isEmpty()) {
+//          nextId = recycledIds.remove(recycledIds.size() - 1);
+//        } else {
+//          nextId = nextAvailableId++;
+//        }
+        int nextId = nextAvailableId++;
         typeIdByTypeName.put(typeName, nextId);
       }
 
       return get(type);
     }
 
-    /**
-     * Removes entries for types not in the given set and makes their IDs available for reuse.
-     * Existing live type IDs are not changed, preserving cached JS validity.
-     */
-    public void pruneDeadTypes(Set<String> liveTypeNames) {
-      Iterator<Map.Entry<String, Integer>> it = typeIdByTypeName.entrySet().iterator();
-      while (it.hasNext()) {
-        Map.Entry<String, Integer> entry = it.next();
-        if (!liveTypeNames.contains(entry.getKey())) {
-          recycledIds.add(entry.getValue());
-          it.remove();
-        }
-      }
-      Collections.sort(recycledIds);
-    }
+//    /**
+//     * Removes entries for types not in the given set and makes their IDs available for reuse.
+//     * Existing live type IDs are not changed, preserving cached JS validity.
+//     */
+//    public void pruneDeadTypes(Set<String> liveTypeNames) {
+//      Iterator<Map.Entry<String, Integer>> it = typeIdByTypeName.entrySet().iterator();
+//      while (it.hasNext()) {
+//        Map.Entry<String, Integer> entry = it.next();
+//        if (!liveTypeNames.contains(entry.getKey())) {
+//          recycledIds.add(entry.getValue());
+//          it.remove();
+//        }
+//      }
+//      Collections.sort(recycledIds);
+//    }
   }
 
   /**

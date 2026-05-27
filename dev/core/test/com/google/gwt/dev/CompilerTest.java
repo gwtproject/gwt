@@ -853,6 +853,24 @@ public class CompilerTest extends ArgProcessorTestBase {
           "  }",
           "}");
 
+  private MockJavaResource producerResource = JavaResourceBase.createMockJavaResource(
+      "com.foo.Producer",
+      "package com.foo;",
+      "public interface Producer {",
+      "  Object get();",
+      "}"
+  );
+  private MockJavaResource streamResource = JavaResourceBase.createMockJavaResource(
+      "com.foo.Stream",
+      "package com.foo;",
+      "public class Stream {",
+      "  public static Stream generate(Producer p) {",
+      "    p.get();",
+      "    return new Stream();",
+      "  }",
+      "}"
+  );
+
   private Set<String> emptySet = stringSet();
   private boolean requireDeterministicJs = true;
 
@@ -2055,44 +2073,34 @@ public class CompilerTest extends ArgProcessorTestBase {
 
   public void testIncrementalRecompile_ctorReferenceChange()
       throws InterruptedException, IOException, UnableToCompleteException {
-//    System.out.println("===== TEST: testIncrementalRecompile_ctorReferenceChange PRETTY =====");
     checkIncrementalRecompile_ctorReferenceChange(JsOutputOption.PRETTY);
-//    System.out.println("===== TEST: testIncrementalRecompile_ctorReferenceChange DETAILED =====");
     checkIncrementalRecompile_ctorReferenceChange(JsOutputOption.DETAILED);
   }
 
   public void testIncrementalRecompile_methodReferenceChange()
       throws InterruptedException, IOException, UnableToCompleteException {
-//    System.out.println("===== TEST: testIncrementalRecompile_methodReferenceChange PRETTY =====");
     checkIncrementalRecompile_methodReferenceChange(JsOutputOption.PRETTY);
-//    System.out.println("===== TEST: testIncrementalRecompile_methodReferenceChange DETAILED =====");
     checkIncrementalRecompile_methodReferenceChange(JsOutputOption.DETAILED);
   }
 
-  // passes
   public void testIncrementalRecompile_lambdaChange()
       throws InterruptedException, IOException, UnableToCompleteException {
-//    System.out.println("===== TEST: testIncrementalRecompile_lambdaChange OBFUSCATED =====");
     checkIncrementalRecompile_lambdaChange(JsOutputOption.OBFUSCATED);
-//    System.out.println("===== TEST: testIncrementalRecompile_lambdaChange DETAILED =====");
     checkIncrementalRecompile_lambdaChange(JsOutputOption.DETAILED);
   }
 
-  // Method reference to a static method on another class; the reference target changes.
   public void testIncrementalRecompile_externalMethodReferenceChange()
       throws InterruptedException, IOException, UnableToCompleteException {
     checkIncrementalRecompile_externalMethodReferenceChange(JsOutputOption.PRETTY);
     checkIncrementalRecompile_externalMethodReferenceChange(JsOutputOption.DETAILED);
   }
 
-  // Method reference to a static method on another class; that other class's implementation changes.
   public void testIncrementalRecompile_externalMethodReferenceTargetChange()
       throws InterruptedException, IOException, UnableToCompleteException {
     checkIncrementalRecompile_externalMethodReferenceTargetChange(JsOutputOption.PRETTY);
     checkIncrementalRecompile_externalMethodReferenceTargetChange(JsOutputOption.DETAILED);
   }
 
-  // Adding or removing a method reference changes the type set; type IDs drift but compilation succeeds.
   public void testIncrementalRecompile_methodReferenceCountChange()
       throws InterruptedException, IOException, UnableToCompleteException {
     // Disable the requirement of deterministic JS, since this results in adding/removing types,
@@ -2439,14 +2447,8 @@ public class CompilerTest extends ArgProcessorTestBase {
         stringSet("com.foo.TestEntryPoint", "com.foo.ModelC", "com.foo.ModelD"), output);
   }
 
-  private void checkIncrementalRecompile_ctorReferenceChange(JsOutputOption output) throws InterruptedException, IOException, UnableToCompleteException {
-    MockResource samInterface = JavaResourceBase.createMockJavaResource(
-            "com.foo.Producer",
-            "package com.foo;",
-            "public interface Producer {",
-            "  Object get();",
-            "}"
-    );
+  private void checkIncrementalRecompile_ctorReferenceChange(JsOutputOption output)
+      throws InterruptedException, IOException, UnableToCompleteException {
     MockResource classA = JavaResourceBase.createMockJavaResource(
             "com.foo.A",
             "package com.foo;",
@@ -2461,16 +2463,7 @@ public class CompilerTest extends ArgProcessorTestBase {
             "  public B() {}",
             "}"
     );
-    MockResource staticMethod = JavaResourceBase.createMockJavaResource(
-            "com.foo.Stream",
-            "package com.foo;",
-            "public class Stream {",
-            "  public static Stream generate(Producer p) {",
-            "    p.get();",
-            "    return new Stream();",
-            "  }",
-            "}"
-    );
+
     MockJavaResource before = JavaResourceBase.createMockJavaResource(
             "com.foo.TestEntryPoint",
             "package com.foo;",
@@ -2495,27 +2488,16 @@ public class CompilerTest extends ArgProcessorTestBase {
             "  }",
             "}"
     );
-    checkRecompiledModifiedApp("com.foo.SimpleModule", Lists.newArrayList(simpleModuleResource, samInterface, classA, classB, staticMethod), before, after, stringSet("com.foo.TestEntryPoint", "com.foo.TestEntryPoint$0methodref$Type", getEntryMethodHolderTypeName("com.foo.SimpleModule")), output);
+    checkRecompiledModifiedApp("com.foo.SimpleModule",
+        Lists.newArrayList(simpleModuleResource, producerResource, classA, classB, streamResource),
+        before, after,
+        stringSet("com.foo.TestEntryPoint", "com.foo.TestEntryPoint$methodref$0$Type",
+            getEntryMethodHolderTypeName("com.foo.SimpleModule")),
+        output);
   }
 
-  private void checkIncrementalRecompile_methodReferenceChange(JsOutputOption output) throws InterruptedException, IOException, UnableToCompleteException {
-    MockResource samInterface = JavaResourceBase.createMockJavaResource(
-            "com.foo.Producer",
-            "package com.foo;",
-            "public interface Producer {",
-            "  Object get();",
-            "}"
-    );
-    MockResource staticMethod = JavaResourceBase.createMockJavaResource(
-            "com.foo.Stream",
-            "package com.foo;",
-            "public class Stream {",
-            "  public static Stream generate(Producer p) {",
-            "    p.get();",
-            "    return new Stream();",
-            "  }",
-            "}"
-    );
+  private void checkIncrementalRecompile_methodReferenceChange(JsOutputOption output)
+      throws InterruptedException, IOException, UnableToCompleteException {
     MockJavaResource before = JavaResourceBase.createMockJavaResource(
             "com.foo.TestEntryPoint",
             "package com.foo;",
@@ -2548,27 +2530,16 @@ public class CompilerTest extends ArgProcessorTestBase {
             "  }",
             "}"
     );
-    checkRecompiledModifiedApp("com.foo.SimpleModule", Lists.newArrayList(simpleModuleResource, samInterface, staticMethod), before, after, stringSet("com.foo.TestEntryPoint", "com.foo.TestEntryPoint$0methodref$Type", getEntryMethodHolderTypeName("com.foo.SimpleModule")), output);
+    checkRecompiledModifiedApp("com.foo.SimpleModule",
+        Lists.newArrayList(simpleModuleResource, producerResource, streamResource),
+        before, after,
+        stringSet("com.foo.TestEntryPoint", "com.foo.TestEntryPoint$methodref$0$Type",
+            getEntryMethodHolderTypeName("com.foo.SimpleModule")),
+        output);
   }
 
-  private void checkIncrementalRecompile_lambdaChange(JsOutputOption output) throws InterruptedException, IOException, UnableToCompleteException {
-    MockResource samInterface = JavaResourceBase.createMockJavaResource(
-            "com.foo.Producer",
-            "package com.foo;",
-            "public interface Producer {",
-            "  Object get();",
-            "}"
-    );
-    MockResource staticMethod = JavaResourceBase.createMockJavaResource(
-            "com.foo.Stream",
-            "package com.foo;",
-            "public class Stream {",
-            "  public static Stream generate(Producer p) {",
-            "    p.get();",
-            "    return new Stream();",
-            "  }",
-            "}"
-    );
+  private void checkIncrementalRecompile_lambdaChange(JsOutputOption output)
+      throws InterruptedException, IOException, UnableToCompleteException {
     MockJavaResource before = JavaResourceBase.createMockJavaResource(
             "com.foo.TestEntryPoint",
             "package com.foo;",
@@ -2589,35 +2560,23 @@ public class CompilerTest extends ArgProcessorTestBase {
             "  }",
             "}"
     );
-    checkRecompiledModifiedApp("com.foo.SimpleModule", Lists.newArrayList(simpleModuleResource, samInterface, staticMethod), before, after, stringSet("com.foo.TestEntryPoint", "com.foo.TestEntryPoint$lambda$0$Type", getEntryMethodHolderTypeName("com.foo.SimpleModule")), output);
+    checkRecompiledModifiedApp("com.foo.SimpleModule",
+        Lists.newArrayList(simpleModuleResource, producerResource, streamResource),
+        before, after,
+        stringSet("com.foo.TestEntryPoint", "com.foo.TestEntryPoint$lambda$0$Type",
+            getEntryMethodHolderTypeName("com.foo.SimpleModule")),
+        output);
   }
 
   // Method reference to a static method on another class; the reference target changes.
   private void checkIncrementalRecompile_externalMethodReferenceChange(JsOutputOption output)
       throws InterruptedException, IOException, UnableToCompleteException {
-    MockResource samInterface = JavaResourceBase.createMockJavaResource(
-            "com.foo.Producer",
-            "package com.foo;",
-            "public interface Producer {",
-            "  Object get();",
-            "}"
-    );
     MockResource helper = JavaResourceBase.createMockJavaResource(
             "com.foo.Helper",
             "package com.foo;",
             "public class Helper {",
             "  public static Object a() { return null; }",
             "  public static String b() { return null; }",
-            "}"
-    );
-    MockResource staticMethod = JavaResourceBase.createMockJavaResource(
-            "com.foo.Stream",
-            "package com.foo;",
-            "public class Stream {",
-            "  public static Stream generate(Producer p) {",
-            "    p.get();",
-            "    return new Stream();",
-            "  }",
             "}"
     );
     MockJavaResource before = JavaResourceBase.createMockJavaResource(
@@ -2641,10 +2600,10 @@ public class CompilerTest extends ArgProcessorTestBase {
             "}"
     );
     checkRecompiledModifiedApp("com.foo.SimpleModule",
-        Lists.newArrayList(simpleModuleResource, samInterface, helper, staticMethod),
+        Lists.newArrayList(simpleModuleResource, helper, producerResource, streamResource),
         before, after,
         stringSet("com.foo.TestEntryPoint",
-            "com.foo.TestEntryPoint$0methodref$Type",
+            "com.foo.TestEntryPoint$methodref$0$Type",
             getEntryMethodHolderTypeName("com.foo.SimpleModule")),
         output);
   }
@@ -2652,23 +2611,6 @@ public class CompilerTest extends ArgProcessorTestBase {
   // Method reference to a static method on another class; that other class's implementation changes.
   private void checkIncrementalRecompile_externalMethodReferenceTargetChange(JsOutputOption output)
       throws InterruptedException, IOException, UnableToCompleteException {
-    MockResource samInterface = JavaResourceBase.createMockJavaResource(
-            "com.foo.Producer",
-            "package com.foo;",
-            "public interface Producer {",
-            "  Object get();",
-            "}"
-    );
-    MockResource staticMethod = JavaResourceBase.createMockJavaResource(
-            "com.foo.Stream",
-            "package com.foo;",
-            "public class Stream {",
-            "  public static Stream generate(Producer p) {",
-            "    p.get();",
-            "    return new Stream();",
-            "  }",
-            "}"
-    );
     MockResource entryPoint = JavaResourceBase.createMockJavaResource(
             "com.foo.TestEntryPoint",
             "package com.foo;",
@@ -2694,32 +2636,14 @@ public class CompilerTest extends ArgProcessorTestBase {
             "}"
     );
     checkRecompiledModifiedApp("com.foo.SimpleModule",
-        Lists.newArrayList(simpleModuleResource, samInterface, staticMethod, entryPoint),
+        Lists.newArrayList(simpleModuleResource, producerResource, streamResource, entryPoint),
         before, after,
-        stringSet("com.foo.Helper",
-            "com.foo.TestEntryPoint$0methodref$Type"),
+        stringSet("com.foo.Helper", "com.foo.TestEntryPoint$methodref$0$Type"),
         output);
   }
 
   private void checkIncrementalRecompile_methodReferenceCountChange(JsOutputOption output)
       throws InterruptedException, IOException, UnableToCompleteException {
-    MockResource samInterface = JavaResourceBase.createMockJavaResource(
-            "com.foo.Producer",
-            "package com.foo;",
-            "public interface Producer {",
-            "  Object get();",
-            "}"
-    );
-    MockResource staticMethod = JavaResourceBase.createMockJavaResource(
-            "com.foo.Stream",
-            "package com.foo;",
-            "public class Stream {",
-            "  public static Stream generate(Producer p) {",
-            "    p.get();",
-            "    return new Stream();",
-            "  }",
-            "}"
-    );
     MockJavaResource oneRef = JavaResourceBase.createMockJavaResource(
             "com.foo.TestEntryPoint",
             "package com.foo;",
@@ -2745,20 +2669,21 @@ public class CompilerTest extends ArgProcessorTestBase {
             "  public String b() { return null; }",
             "}"
     );
-    List<MockResource> shared = Lists.newArrayList(simpleModuleResource, samInterface, staticMethod);
+    List<MockResource> shared = Lists.newArrayList(simpleModuleResource, producerResource,
+        streamResource);
 
     // Add a new method reference before the existing one, both methodref types change
     checkRecompiledModifiedApp("com.foo.SimpleModule", shared, oneRef, twoRefs,
         stringSet("com.foo.TestEntryPoint",
-            "com.foo.TestEntryPoint$0methodref$Type",
-            "com.foo.TestEntryPoint$1methodref$Type",
+            "com.foo.TestEntryPoint$methodref$0$Type",
+            "com.foo.TestEntryPoint$methodref$1$Type",
             getEntryMethodHolderTypeName("com.foo.SimpleModule")),
         output);
 
     // Remove an earlier method reference, only the retained methodref type exists anymore
     checkRecompiledModifiedApp("com.foo.SimpleModule", shared, twoRefs, oneRef,
         stringSet("com.foo.TestEntryPoint",
-            "com.foo.TestEntryPoint$0methodref$Type",
+            "com.foo.TestEntryPoint$methodref$0$Type",
             getEntryMethodHolderTypeName("com.foo.SimpleModule")),
         output);
   }

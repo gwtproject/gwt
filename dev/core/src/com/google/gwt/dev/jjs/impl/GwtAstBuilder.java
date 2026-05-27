@@ -1943,13 +1943,10 @@ public class GwtAstBuilder {
         JMethod referredMethod = typeMap.get(referredMethodBinding);
         boolean hasQualifier = hasQualifier(x);
 
-        // Use a positional counter for the synthetic class name (like lambdas) rather than
-        // embedding the method selector. The counter alone ensures uniqueness within the
-        // enclosing class, and a stable name is needed for incremental compilation: if the
-        // method reference target changes, the synthetic class name must stay the same so that
-        // the MinimalRebuildCache and IntTypeMapper can correctly track and invalidate it.
-        String lambdaImplementationClassShortName =
-            String.valueOf(nextReferenceExpressionId++) + "methodref";
+        // Give the methodref synthetic class a unique, consistent name. JDT names both lambdas and
+        // method references as "lambda$N" for the Nth lambda in the enclosing type - we add the
+        // string "methodref" instead to make it somewhat clearer which impl we're referencing.
+        String lambdaImplementationClassShortName = "methodref$" + nextReferenceExpressionId++;
         List<JExpression> enclosingThisRefs = Lists.newArrayList();
 
         // Create an inner class to hold the implementation of the interface

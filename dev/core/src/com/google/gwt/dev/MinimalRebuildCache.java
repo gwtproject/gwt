@@ -668,7 +668,6 @@ public class MinimalRebuildCache implements Serializable {
     Collection<String> oldNestedTypeNames = nestedTypeNamesByUnitTypeName.get(compilationUnitTypeName);
     for (String oldNestedTypeName : oldNestedTypeNames) {
       compilationUnitTypeNameByNestedTypeName.remove(oldNestedTypeName);
-      System.out.println("removed: " + oldNestedTypeName);
     }
     nestedTypeNamesByUnitTypeName.removeAll(compilationUnitTypeName);
     for (CompiledClass compiledClass : compilationUnit.getCompiledClasses()) {

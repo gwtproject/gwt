@@ -865,1193 +865,1193 @@ public class CompilerTest extends ArgProcessorTestBase {
     CauseShortRebindGenerator.runCount = 0;
   }
 
-//  public void testAllValidArgs() {
-//    CompilerOptionsImpl options = new CompilerOptionsImpl();
-//    Compiler.ArgProcessor argProcessor = new Compiler.ArgProcessor(options);
-//
-//    assertProcessSuccess(argProcessor, new String[] {"-logLevel", "DEBUG", "-style",
-//        "PRETTY", "-ea", "-gen", "myGen",
-//        "-war", "myWar", "-workDir", "myWork", "-extra", "myExtra", "-incremental",
-//        "-localWorkers", "2", "-sourceLevel", "1.8", "c.g.g.h.H", "my.Module"});
-//
-//    assertEquals(new File("myGen").getAbsoluteFile(),
-//        options.getGenDir().getAbsoluteFile());
-//    assertEquals(new File("myWar"), options.getWarDir());
-//    assertEquals(new File("myWork"), options.getWorkDir());
-//    assertEquals(new File("myExtra"), options.getExtraDir());
-//
-//    assertEquals(2, options.getLocalWorkers());
-//
-//    assertEquals(TreeLogger.DEBUG, options.getLogLevel());
-//    assertEquals(JsOutputOption.PRETTY, options.getOutput());
-//    assertTrue(options.isEnableAssertions());
-//    assertTrue(options.shouldClusterSimilarFunctions());
-//    assertTrue(options.shouldInlineLiteralParameters());
-//    assertFalse(options.shouldOptimizeDataflow());
-//    assertTrue(options.shouldOrdinalizeEnums());
-//    assertTrue(options.shouldRemoveDuplicateFunctions());
-//    assertTrue(options.isIncrementalCompileEnabled());
-//
-//    assertEquals(SourceLevel.JAVA8, options.getSourceLevel());
-//
-//    assertEquals(2, options.getModuleNames().size());
-//    assertEquals("c.g.g.h.H", options.getModuleNames().get(0));
-//    assertEquals("my.Module", options.getModuleNames().get(1));
-//  }
-//
-//  public void testDefaultArgs() {
-//    CompilerOptionsImpl options = new CompilerOptionsImpl();
-//    Compiler.ArgProcessor argProcessor = new Compiler.ArgProcessor(options);
-//
-//    assertProcessSuccess(argProcessor, new String[]{"c.g.g.h.H"});
-//
-//    assertEquals(null, options.getGenDir());
-//    assertEquals(new File("war").getAbsoluteFile(),
-//        options.getWarDir().getAbsoluteFile());
-//    assertEquals(null, options.getWorkDir());
-//    assertEquals(null, options.getExtraDir());
-//
-//    assertEquals(TreeLogger.INFO, options.getLogLevel());
-//    assertEquals(JsOutputOption.OBFUSCATED, options.getOutput());
-//    assertFalse(options.isEnableAssertions());
-//    assertTrue(options.shouldClusterSimilarFunctions());
-//    assertTrue(options.shouldInlineLiteralParameters());
-//    assertFalse(options.shouldOptimizeDataflow());
-//    assertTrue(options.shouldOrdinalizeEnums());
-//    assertTrue(options.shouldRemoveDuplicateFunctions());
-//    assertFalse(options.isIncrementalCompileEnabled());
-//
-//    assertEquals(1, options.getLocalWorkers());
-//
-//    assertEquals(1, options.getModuleNames().size());
-//    assertEquals("c.g.g.h.H", options.getModuleNames().get(0));
-//  }
-//
-//  public void testForbiddenArgs() {
-//    CompilerOptionsImpl options = new CompilerOptionsImpl();
-//    Compiler.ArgProcessor argProcessor = new Compiler.ArgProcessor(options);
-//
-//    assertProcessFailure(argProcessor, "Unknown argument", new String[]{"-out", "www"});
-//    assertProcessFailure(argProcessor, "Source level must be one of",
-//        new String[]{"-sourceLevel", "ssss"});
-//    assertProcessFailure(argProcessor, "Source level must be one of",
-//        new String[]{"-sourceLevel", "1.5"});
-//  }
-//
-//  /**
-//   * Tests ordering for emum {@link SourceLevel}.
-//   */
-//  public void testSourceLevelOrdering() {
-//    SourceLevel[] sourceLevels = SourceLevel.values();
-//    SourceLevel previousSourceLevel = sourceLevels[0];
-//    for (int i = 1; i < sourceLevels.length; i++) {
-//      assertTrue(SourceLevel.versionCompare(previousSourceLevel.getStringValue(),
-//          sourceLevels[i].getStringValue()) < 0);
-//      previousSourceLevel = sourceLevels[i];
-//    }
-//  }
-//
-//  public void testSourceLevelSelection() {
-//    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.4"));
-//    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.5"));
-//    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.6"));
-//    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.6_26"));
-//
-//    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.7"));
-//    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.8"));
-//    assertEquals(SourceLevel.JAVA9, SourceLevel.getBestMatchingVersion("9"));
-//    assertEquals(SourceLevel.JAVA10, SourceLevel.getBestMatchingVersion("10"));
-//    assertEquals(SourceLevel.JAVA11, SourceLevel.getBestMatchingVersion("11"));
-//
-//    // not proper version strings => default to JAVA8.
-//    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.6u3"));
-//    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.6b3"));
-//    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.7b3"));
-//  }
-//
-//  public void testSourceLevelHighestVersion() {
-//    assertEquals(SourceLevel.values()[SourceLevel.values().length - 1], SourceLevel.getHighest());
-//  }
-//
-//  /**
-//   * Verify that a compile with a @JsType at least compiles successfully.
-//   */
-//  public void testGwtCreateJsTypeRebindResult() throws Exception {
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//    compileToJs(compilerOptions, createTempDir(), "com.foo.SimpleModule",
-//        Lists.newArrayList(simpleModuleResource, gwtCreateEntryPointResource),
-//        new MinimalRebuildCache(), emptySet, JsOutputOption.OBFUSCATED);
-//  }
-//
-//   /**
-//   * Test that some lightly referenced interface through a @JsFunction is included in the output.
-//   */
-//  public void testReferenceThroughJsFunction() throws Exception {
-//    MockJavaResource someJsFunction =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.SomeJsFunction",
-//            "package com.foo;",
-//            "import jsinterop.annotations.JsFunction;",
-//            "@JsFunction",
-//            "public interface SomeJsFunction {",
-//            "  void m();",
-//            "}");
-//
-//    MockJavaResource jsFunctionInterfaceImplementation =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.Impl",
-//            "package com.foo;",
-//            "public final class Impl implements SomeJsFunction {",
-//            "  public void m() { SomeInterface.class.getName(); } ",
-//            "}");
-//
-//    MockJavaResource someInterface =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.SomeInterface",
-//            "package com.foo;",
-//            "public interface SomeInterface {",
-//            "}");
-//
-//    MockJavaResource testEntryPoint =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.TestEntryPoint",
-//            "package com.foo;",
-//            "import com.google.gwt.core.client.EntryPoint;",
-//            "public class TestEntryPoint implements EntryPoint {",
-//            "  private static native void f(SomeJsFunction f) /*-{}-*/;",
-//            "  public void onModuleLoad() {",
-//                // Create Impl and pass it to JS but do not explicitly call m
-//            "    f(new Impl());",
-//            "  }",
-//            "}");
-//
-//    MockResource moduleResource =
-//        JavaResourceBase.createMockResource(
-//            "com/foo/TestEntryPoint.gwt.xml",
-//            "<module>",
-//            "  <source path=''/>",
-//            "  <entry-point class='com.foo.TestEntryPoint'/>",
-//            "</module>");
-//
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//    String js = compileToJs(compilerOptions, createTempDir(), testEntryPoint.getTypeName(),
-//        Lists.newArrayList(moduleResource, testEntryPoint, someJsFunction,
-//            jsFunctionInterfaceImplementation, someInterface),
-//        new MinimalRebuildCache(), emptySet, JsOutputOption.DETAILED);
-//    // Make sure the referenced class literals ends up being included in the resulting JS.
-//    String classliteralHolderVarName =
-//        JjsUtils.mangleMemberName("com.google.gwt.lang.ClassLiteralHolder",
-//            JjsUtils.classLiteralFieldNameFromJavahTypeSignatureName(
-//                JjsUtils.javahSignatureFromName(someInterface.getTypeName())));
-//    assertTrue(js.contains("var " + classliteralHolderVarName + " = "));
-//  }
-//
-//  /**
-//   * Tests that changing Js namespace name on an exported method comes out accurately.
-//   *
-//   * <p>An unrelated and non-updated @JsType is also included in each compile to verify that updated
-//   * exports do not forget non-edited items in a recompile.
-//   */
-//  public void testChangeJsNamespaceOnMethod() throws Exception {
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//    compilerOptions.setUseDetailedTypeIds(true);
-//    compilerOptions.setGenerateJsInteropExports(true);
-//
-//    MockJavaResource jsNamespaceFooResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.Foo",
-//            "package com.foo;",
-//            "import jsinterop.annotations.JsMethod;",
-//            "import jsinterop.annotations.JsType;",
-//            "@JsType public class Foo {",
-//            "  @JsMethod(namespace=\"spazz\") public static void doStaticBar() {}",
-//            "}");
-//
-//    MockJavaResource regularFooResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.Foo",
-//            "package com.foo;",
-//            "import jsinterop.annotations.JsType;",
-//            "@JsType public class Foo {",
-//            "  public static void doStaticBar() {}",
-//            "}");
-//
-//    checkRecompiledModifiedApp(
-//        compilerOptions,
-//        "com.foo.SimpleModule",
-//        Lists.newArrayList(simpleModuleResource, emptyEntryPointResource, jsTypeBarResource),
-//        regularFooResource,
-//        jsNamespaceFooResource,
-//        stringSet("com.foo.Bar", "com.foo.Foo"),
-//        JsOutputOption.DETAILED);
-//  }
-//
-//  /**
-//   * Tests that changing Js namespace on a class comes out accurately.
-//   *
-//   * <p>An unrelated and non-updated @JsType is also included in each compile to verify that updated
-//   * exports do not forget non-edited items in a recompile.
-//   */
-//  public void testChangeJsNamespaceOnClass() throws Exception {
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//    compilerOptions.setUseDetailedTypeIds(true);
-//    compilerOptions.setGenerateJsInteropExports(true);
-//
-//    MockJavaResource jsNamespaceFooResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.Foo",
-//            "package com.foo;",
-//            "import jsinterop.annotations.JsType;",
-//            "@JsType(namespace=\"spazz\") public class Foo {",
-//            "  public static void doStaticBar() {}",
-//            "}");
-//
-//    MockJavaResource regularFooResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.Foo",
-//            "package com.foo;",
-//            "import jsinterop.annotations.JsType;",
-//            "@JsType public class Foo {",
-//            "  public static void doStaticBar() {}",
-//            "}");
-//
-//    checkRecompiledModifiedApp(
-//        compilerOptions,
-//        "com.foo.SimpleModule",
-//        Lists.newArrayList(simpleModuleResource, emptyEntryPointResource, jsTypeBarResource),
-//        regularFooResource,
-//        jsNamespaceFooResource,
-//        stringSet("com.foo.Bar", "com.foo.Foo"),
-//        JsOutputOption.DETAILED);
-//  }
-//
-//  /**
-//   * Tests that changing @JsFunction name on an interface comes out accurately.
-//   *
-//   * <p>An unrelated and non-updated @JsType is also included in each compile to verify that updated
-//   * exports do not forget non-edited items in a recompile.
-//   */
-//  public void testChangeJsFunction() throws Exception {
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//    compilerOptions.setUseDetailedTypeIds(true);
-//    compilerOptions.setGenerateJsInteropExports(true);
-//
-//    MockJavaResource jsFunctionIFooResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.IFoo",
-//            "package com.foo;",
-//            "import jsinterop.annotations.JsFunction;",
-//            "@JsFunction public interface IFoo {",
-//            "  int foo(int x);",
-//            "}");
-//
-//    MockJavaResource regularIFooResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.IFoo",
-//            "package com.foo;",
-//            "public interface IFoo {",
-//            "  int foo(int x);",
-//            "}");
-//
-//    MockJavaResource fooResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.Foo",
-//            "package com.foo;",
-//            "public final class Foo implements IFoo {",
-//            "  @Override public int foo(int x) { return 0; }",
-//            "}");
-//
-//    checkRecompiledModifiedApp(
-//        compilerOptions,
-//        "com.foo.SimpleModule",
-//        Lists.newArrayList(
-//            simpleModuleResource, entryPointResourceForFoo, fooResource, jsTypeBarResource),
-//        regularIFooResource,
-//        jsFunctionIFooResource,
-//        stringSet("com.foo.Bar", "com.foo.Foo", "com.foo.IFoo", "com.foo.TestEntryPoint"),
-//        JsOutputOption.DETAILED);
-//  }
-//
-//  /**
-//   * Tests that toggling JsProperty methods in an interface comes out accurately.
-//   *
-//   * <p>An unrelated and non-updated @JsType is also included in each compile to verify that updated
-//   * exports do not forget non-edited items in a recompile.
-//   */
-//  public void testChangeJsProperty() throws Exception {
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//    compilerOptions.setUseDetailedTypeIds(true);
-//    compilerOptions.setGenerateJsInteropExports(true);
-//
-//    MockJavaResource jsPropertyIFooResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.IFoo",
-//            "package com.foo;",
-//            "import jsinterop.annotations.JsProperty;",
-//            "import jsinterop.annotations.JsType;",
-//            "@JsType public interface IFoo {",
-//            "  @JsProperty int getX();",
-//            "  @JsProperty int getY();",
-//            "}");
-//
-//    MockJavaResource regularIFooResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.IFoo",
-//            "package com.foo;",
-//            "import jsinterop.annotations.JsType;",
-//            "@JsType public interface IFoo {",
-//            "  int getX();",
-//            "  int getY();",
-//            "}");
-//
-//    MockJavaResource fooResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.Foo",
-//            "package com.foo;",
-//            "public class Foo implements IFoo {",
-//            "  @Override public int getX() { return 0; }",
-//            "  @Override public int getY() { return 0; }",
-//            "}");
-//
-//    checkRecompiledModifiedApp(
-//        compilerOptions,
-//        "com.foo.SimpleModule",
-//        Lists.newArrayList(
-//            simpleModuleResource, entryPointResourceForFoo, fooResource, jsTypeBarResource),
-//        regularIFooResource,
-//        jsPropertyIFooResource,
-//        stringSet("com.foo.Bar", "com.foo.Foo", "com.foo.IFoo", "com.foo.TestEntryPoint"),
-//        JsOutputOption.DETAILED);
-//  }
-//
-//  /**
-//   * Tests that adding a @JsType annotation on a class comes out accurately and that removing it
-//   * comes out accurately as well.
-//   *
-//   * <p>An unrelated and non-updated @JsType is also included in each compile to verify that updated
-//   * exports do not forget non-edited items in a recompile.
-//   */
-//  public void testChangeJsType() throws Exception {
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//    compilerOptions.setUseDetailedTypeIds(true);
-//    compilerOptions.setGenerateJsInteropExports(true);
-//
-//    MockJavaResource jsTypeFooResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.Foo",
-//            "package com.foo;",
-//            "import jsinterop.annotations.JsType;",
-//            "@JsType public class Foo {",
-//            "  void doInstanceBar() {}",
-//            "  public static void doStaticBar() {}",
-//            "}");
-//
-//    MockJavaResource regularFooResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.Foo", "package com.foo;", "public class Foo {}");
-//
-//    checkRecompiledModifiedApp(
-//        compilerOptions,
-//        "com.foo.SimpleModule",
-//        Lists.newArrayList(simpleModuleResource, emptyEntryPointResource, jsTypeBarResource),
-//        regularFooResource,
-//        jsTypeFooResource,
-//        stringSet("com.foo.Bar", "com.foo.Foo"),
-//        JsOutputOption.DETAILED);
-//  }
-//
-//  /**
-//   * Tests that changing a prototype on a @JsType annotated class comes out accurately.
-//   *
-//   * <p>An unrelated and non-updated @JsType is also included in each compile to verify that updated
-//   * exports do not forget non-edited items in a recompile.
-//   */
-//  public void testChangeJsTypeNative() throws Exception {
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//    compilerOptions.setUseDetailedTypeIds(true);
-//    compilerOptions.setGenerateJsInteropExports(true);
-//
-//    MockJavaResource nativeFooResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.Foo",
-//            "package com.foo;",
-//            "import jsinterop.annotations.JsType;",
-//            "@JsType(isNative=true) public class Foo {",
-//            "  public static native void doStaticBar();",
-//            "}");
-//
-//    MockJavaResource regularFooResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.Foo",
-//            "package com.foo;",
-//            "import jsinterop.annotations.JsType;",
-//            "@JsType public class Foo {",
-//            "  public static void doStaticBar() {}",
-//            "}");
-//
-//    checkRecompiledModifiedApp(
-//        compilerOptions,
-//        "com.foo.SimpleModule",
-//        Lists.newArrayList(simpleModuleResource, emptyEntryPointResource, jsTypeBarResource),
-//        regularFooResource,
-//        nativeFooResource,
-//        stringSet("com.foo.Bar", "com.foo.Foo"),
-//        JsOutputOption.DETAILED);
-//  }
-//
-//  /**
-//   * Tests that adding a @JsIgnore annotation on a method comes out accurately and that removing
-//   * it comes out accurately as well.
-//   *
-//   * <p>An unrelated and non-updated @JsType is also included in each compile to verify that updated
-//   * exports do not forget non-edited items in a recompile.
-//   */
-//  public void testChangeJsIgnore() throws Exception {
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//    compilerOptions.setUseDetailedTypeIds(true);
-//    compilerOptions.setGenerateJsInteropExports(true);
-//
-//    MockJavaResource jsIgnoreFooResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.Foo",
-//            "package com.foo;",
-//            "import jsinterop.annotations.JsIgnore;",
-//            "import jsinterop.annotations.JsType;",
-//            "@JsType public class Foo {",
-//            "  @JsIgnore public static void doStaticBar() {}",
-//            "}");
-//
-//    MockJavaResource regularFooResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.Foo",
-//            "package com.foo;",
-//            "import jsinterop.annotations.JsType;",
-//            "@JsType public class Foo {",
-//            "  public static void doStaticBar() {}",
-//            "}");
-//
-//    checkRecompiledModifiedApp(
-//        compilerOptions,
-//        "com.foo.SimpleModule",
-//        Lists.newArrayList(simpleModuleResource, emptyEntryPointResource, jsTypeBarResource),
-//        regularFooResource,
-//        jsIgnoreFooResource,
-//        stringSet("com.foo.Bar", "com.foo.Foo"),
-//        JsOutputOption.DETAILED);
-//  }
-//
-//  public void testJsInteropNameCollision() throws Exception {
-//    MinimalRebuildCache minimalRebuildCache = new MinimalRebuildCache();
-//    File applicationDir = Files.createTempDirectory("JsInteropNameCollision").toFile();
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//    compilerOptions.setGenerateJsInteropExports(true);
-//
-//    // Simple compile with one dialog.alert() export succeeds.
-//    compileToJs(compilerOptions, applicationDir, "com.foo.SimpleModule", Lists.newArrayList(
-//        simpleModuleResource, dialogEntryPointResource, simpleDialogResourceWithExport,
-//        complexDialogResourceSansExport), minimalRebuildCache, emptySet, JsOutputOption.OBFUSCATED);
-//
-//    try {
-//      // Exporting a second dialog.alert() fails with an exported name collision.
-//      compileToJs(compilerOptions, applicationDir, "com.foo.SimpleModule",
-//          Lists.<MockResource> newArrayList(complexDialogResourceWithExport), minimalRebuildCache,
-//          emptySet, JsOutputOption.OBFUSCATED);
-//      fail("Compile should have failed");
-//    } catch (UnableToCompleteException e) {
-//      // success
-//    }
-//
-//    // Reverting to just a single dialog.alert() starts succeeding again.
-//    compileToJs(compilerOptions, applicationDir, "com.foo.SimpleModule",
-//        Lists.<MockResource>newArrayList(complexDialogResourceSansExport), minimalRebuildCache,
-//        stringSet("com.foo.SimpleDialog", "com.foo.ComplexDialog", "com.foo.TestEntryPoint"),
-//        JsOutputOption.OBFUSCATED);
-//  }
-//
-//  public void testGwtCreateJsoRebindResult() throws Exception {
-//    try {
-//      compileToJs(createTempDir(), "com.foo.SimpleModule",
-//          Lists.newArrayList(simpleModuleResource, brokenGwtCreateEntryPointResource),
-//          new MinimalRebuildCache(), emptySet, JsOutputOption.OBFUSCATED);
-//      fail("Compile should have failed");
-//    } catch (UnableToCompleteException e) {
-//      // success
-//    }
-//  }
-//
-//  public void testNonZeroArgConstructorEntryPoint() throws Exception {
-//    MockResource moduleResource =
-//        JavaResourceBase.createMockResource(
-//            "com/foo/NonZeroArgConstructor.gwt.xml",
-//            "<module>",
-//            "  <source path=''/>",
-//            "  <entry-point class='com.foo.NonZeroArgConstructorEntryPoint'/>",
-//            "</module>");
-//
-//    MockJavaResource entryPointResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.NonZeroArgConstructorEntryPoint",
-//            "package com.foo;",
-//            "import com.google.gwt.core.client.EntryPoint;",
-//            "public class NonZeroArgConstructorEntryPoint implements EntryPoint {",
-//            "  public NonZeroArgConstructorEntryPoint(String s) {",
-//            "  }",
-//            "  public void onModuleLoad() {",
-//            "  }",
-//            "}");
-//
-//    MinimalRebuildCache minimalRebuildCache = new MinimalRebuildCache();
-//    File applicationDir = createTempDir();
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//
-//    UnitTestTreeLogger.Builder builder = new UnitTestTreeLogger.Builder();
-//    builder.setLowestLogLevel(TreeLogger.ERROR);
-//    builder.expectError(Pattern.compile("Errors in .*"), null);
-//    builder.expectError("Line 3: Rebind result 'com.foo.NonZeroArgConstructorEntryPoint' "
-//        + "has no default (zero argument) constructors", null);
-//    UnitTestTreeLogger errorLogger = builder.createLogger();
-//    try {
-//      // Simple compile with one dialog.alert() export succeeds.
-//
-//      compileToJs(errorLogger, compilerOptions, applicationDir, "com.foo.NonZeroArgConstructor",
-//          Lists.newArrayList(moduleResource, entryPointResource), minimalRebuildCache,
-//          emptySet, JsOutputOption.OBFUSCATED);
-//      fail("Compile should have failed");
-//    } catch (UnableToCompleteException expected) {
-//      errorLogger.assertCorrectLogEntries();
-//    }
-//  }
-//
-//  public void testDeterministicBuild_Draft_StackModeStrip() throws
-//      UnableToCompleteException, IOException {
-//    assertDeterministicBuild(HELLO_MODULE_STACKMODE_STRIP, 0);
-//  }
-//
-//  public void testDeterministicBuild_Optimized_StackModeStrip() throws
-//      UnableToCompleteException, IOException {
-//    assertDeterministicBuild(HELLO_MODULE_STACKMODE_STRIP, 9);
-//  }
-//
-//  public void testDeterministicBuild_Draft() throws UnableToCompleteException, IOException {
-//    assertDeterministicBuild(HELLO_MODULE, 0);
-//  }
-//
-//  public void testDeterministicBuild_Optimized() throws UnableToCompleteException, IOException {
-//    assertDeterministicBuild(HELLO_MODULE, 9);
-//  }
-//
-//  public void testSuccessfulCompile_jsoClassLiteralOrder() throws Exception {
-//    // Crafted resource to make sure the a native subclass is compiled before the JSO class,
-//    // In the case of native sublcasses the class hierarchy does not match the class literal
-//    // hierarchy.
-//    MockJavaResource nativeClassAndSubclass =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.MyNativeSubclass",
-//            "package com.foo;",
-//            "import jsinterop.annotations.JsType;",
-//            "@JsType(isNative=true)",
-//            "class NativeClass {",
-//            "}",
-//            "public class MyNativeSubclass extends NativeClass {",
-//            "}");
-//
-//    MockJavaResource testEntryPoint =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.MyEntryPoint",
-//            "package com.foo;",
-//            "import com.foo.MyNativeSubclass;",
-//            "public class MyEntryPoint extends MyNativeSubclass {",
-//            "  public void onModuleLoad() {",
-//            "    Object o = new Object();",
-//            "    if (MyNativeSubclass.class.getName() == null) ",
-//            "      o = new MyNativeSubclass();",
-//            // Make .clazz reachable so that class literals are emmitted with the respective
-//            // classses.
-//            "    o.getClass();",
-//            "  }",
-//            "}");
-//
-//    MockResource moduleResource =
-//        JavaResourceBase.createMockResource(
-//            "com/foo/MyEntryPoint.gwt.xml",
-//            "<module>",
-//            "  <source path=''/>",
-//            "  <entry-point class='com.foo.MyEntryPoint'/>",
-//            "</module>");
-//
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//    // Make sure it compiles successfully with no assertions
-//    compilerOptions.setEnableAssertions(true);
-//    compilerOptions.setGenerateJsInteropExports(true);
-//    compilerOptions.setOutput(JsOutputOption.PRETTY);
-//    compilerOptions.setOptimizationLevel(9);
-//    assertCompileSucceeds(compilerOptions, testEntryPoint.getTypeName(),
-//        Lists.newArrayList(moduleResource, nativeClassAndSubclass, testEntryPoint));
-//  }
-//
-//  // TODO(stalcup): add recompile tests for file deletion.
-//
-//  public void testIncrementalRecompile_noop() throws UnableToCompleteException, IOException,
-//      InterruptedException {
-//    checkIncrementalRecompile_noop(JsOutputOption.OBFUSCATED);
-//    checkIncrementalRecompile_noop(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_dateStampChange() throws UnableToCompleteException,
-//      IOException, InterruptedException {
-//    checkIncrementalRecompile_dateStampChange(JsOutputOption.OBFUSCATED);
-//    checkIncrementalRecompile_dateStampChange(JsOutputOption.DETAILED);
-//  }
-//
-//  // Repro for bug #9518
-//  public void testIncrementalRecompile_jsPropertyConsistencyCheck()
-//      throws UnableToCompleteException,
-//      IOException, InterruptedException {
-//    // Supertype defines the getter.
-//    MockJavaResource superType =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.SuperType",
-//            "package com.foo;",
-//            "import jsinterop.annotations.JsProperty;",
-//            "public class SuperType {",
-//            "  @JsProperty String getString() { return null; }",
-//            "}");
-//
-//    // Subtype defines the setter.
-//    MockJavaResource subType =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.SubType",
-//            "package com.foo;",
-//            "import jsinterop.annotations.JsProperty;",
-//            "public class SubType extends SuperType {",
-//            "  @JsProperty void setString(String s) {}",
-//            "}");
-//
-//    MockJavaResource testEntryPoint =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.TestEntryPoint",
-//            "package com.foo;",
-//            "import com.google.gwt.core.client.EntryPoint;",
-//            "public class TestEntryPoint implements EntryPoint {",
-//            "  public void onModuleLoad() {",
-//            // Create Impl and pass it to JS but do not explicitly call m
-//            "    new SubType();",
-//            "  }",
-//            "}");
-//
-//    MockResource moduleResource =
-//        JavaResourceBase.createMockResource(
-//            "com/foo/TestModule.gwt.xml",
-//            "<module>",
-//            "  <source path=''/>",
-//            "  <entry-point class='com.foo.TestEntryPoint'/>",
-//            "</module>");
-//
-//    MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();
-//    File relinkApplicationDir = createTempDir();
-//
-//    // Perform a first compile.
-//    compileToJs(relinkApplicationDir, "com.foo.TestModule",
-//        Lists.newArrayList(moduleResource, testEntryPoint, subType, superType),
-//        relinkMinimalRebuildCache, null, JsOutputOption.OBFUSCATED);
-//
-//    // Invalidate ONLY the subtype. The types referred by the parameters of supertype methods are
-//    // going to be reference only which means that the supertype property will have a reference
-//    // to a JClassType for "java.lang.String" that isExternal() and is different from the
-//    // (non external) reference in the supertype.
-//    relinkMinimalRebuildCache.markSourceFileStale("com/foo/SubType.java");
-//    compileToJs(relinkApplicationDir, "com.foo.TestModule", Lists.<MockResource> newArrayList(),
-//        relinkMinimalRebuildCache, null, JsOutputOption.OBFUSCATED);
-//  }
-//
-//  public void testIncrementalRecompile_invalidatePreamble() throws UnableToCompleteException,
-//      IOException, InterruptedException {
-//    MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();
-//    File relinkApplicationDir = createTempDir();
-//
-//    // Perform a first compile.
-//    compileToJs(relinkApplicationDir, "com.foo.SimpleModule",
-//        Lists.newArrayList(simpleModuleResource, emptyEntryPointResource),
-//        relinkMinimalRebuildCache, null, JsOutputOption.OBFUSCATED);
-//    // On first compile nothing is explicitly stale, only implicitly stale.
-//    assertEquals(0, relinkMinimalRebuildCache.getStaleTypeNames().size());
-//
-//    // Recompile with a deep change that invalidates the preamble.
-//    relinkMinimalRebuildCache.markSourceFileStale("java/lang/Object.java");
-//    compileToJs(relinkApplicationDir, "com.foo.SimpleModule", Lists.<MockResource> newArrayList(),
-//        relinkMinimalRebuildCache, null, JsOutputOption.OBFUSCATED);
-//    // Show that preamble invalidation marks everything stale.
-//    assertTrue(relinkMinimalRebuildCache.getProcessedStaleTypeNames().size() > 100);
-//
-//    // Recompile again with a tiny change. Prove that it's not stuck repeatedly invalidating the
-//    // whole world.
-//    compileToJs(relinkApplicationDir, "com.foo.SimpleModule",
-//        Lists.<MockResource> newArrayList(emptyEntryPointResource), relinkMinimalRebuildCache, null,
-//        JsOutputOption.OBFUSCATED);
-//    // Show that only this little change is stale, not the whole world.
-//    assertEquals(2, getStaleTypeNames(relinkMinimalRebuildCache).size());
-//  }
-//
-//  public void testIncrementalRecompile_bridgeMethodOverrideChain()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();
-//    File relinkApplicationDir = createTempDir();
-//
-//    // Perform a first compile.
-//    compileToJs(relinkApplicationDir, "com.foo.SimpleModule", Lists.newArrayList(
-//        simpleModuleResource, overriddenMethodChainEntryPointResource, topResource, middleResource,
-//        bottomResource), relinkMinimalRebuildCache, null, JsOutputOption.OBFUSCATED);
-//    // On first compile nothing is explicitly stale, only implicitly stale.
-//    assertEquals(0, relinkMinimalRebuildCache.getStaleTypeNames().size());
-//
-//    // Recompile with a change to Bottom.
-//    relinkMinimalRebuildCache.markSourceFileStale("com/foo/Bottom.java");
-//    compileToJs(relinkApplicationDir, "com.foo.SimpleModule", Lists.<MockResource> newArrayList(),
-//        relinkMinimalRebuildCache, null, JsOutputOption.OBFUSCATED);
-//    // Show that the third level bridge method override of Top.run() is seen to be live and thus
-//    // makes type com.foo.Bottom$Value live.
-//    assertTrue(
-//        relinkMinimalRebuildCache.getProcessedStaleTypeNames().contains("com.foo.Bottom$Value"));
-//  }
-//
-//  public void testIncrementalRecompile_classLiteralNewReference()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    checkIncrementalRecompile_classLiteralNewReference(JsOutputOption.OBFUSCATED);
-//    checkIncrementalRecompile_classLiteralNewReference(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_primitiveClassLiteralReference()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    checkIncrementalRecompile_primitiveClassLiteralReference(JsOutputOption.OBFUSCATED);
-//    checkIncrementalRecompile_primitiveClassLiteralReference(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_superClassOrder()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    // Linked output is sorted alphabetically except that super-classes come before sub-classes. If
-//    // on recompile a sub-class -> super-class relationship is lost then a sub-class with an
-//    // alphabetically earlier name might start linking out before the super-class.
-//    checkIncrementalRecompile_superClassOrder(JsOutputOption.OBFUSCATED);
-//    checkIncrementalRecompile_superClassOrder(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_superFromStaleInner()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    checkIncrementalRecompile_superFromStaleInner(JsOutputOption.OBFUSCATED);
-//    checkIncrementalRecompile_superFromStaleInner(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_deterministicUiBinder() throws UnableToCompleteException,
-//      IOException, InterruptedException {
-//    checkIncrementalRecompile_deterministicUiBinder(JsOutputOption.OBFUSCATED);
-//    checkIncrementalRecompile_deterministicUiBinder(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_uiBinderCssChange() throws UnableToCompleteException,
-//      IOException, InterruptedException {
-//    checkIncrementalRecompile_uiBinderCssChange(JsOutputOption.OBFUSCATED);
-//    checkIncrementalRecompile_uiBinderCssChange(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_unstableGeneratorReferencesModifiedType()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    checkIncrementalRecompile_unstableGeneratorReferencesModifiedType(JsOutputOption.OBFUSCATED);
-//    checkIncrementalRecompile_unstableGeneratorReferencesModifiedType(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_withErrors()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    MockResource moduleResource =
-//        JavaResourceBase.createMockResource(
-//            "com/foo/Errors.gwt.xml",
-//            "<module>",
-//            "  <source path=''/>",
-//            "  <entry-point class='com.foo.ErrorsEntryPoint'/>",
-//            "</module>");
-//
-//    MockJavaResource entryPointResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.ErrorsEntryPoint",
-//            "package com.foo;",
-//            "import com.google.gwt.core.client.EntryPoint;",
-//            "public class ErrorsEntryPoint implements EntryPoint {",
-//            "  public void onModuleLoad() {",
-//            "    Foo.foo();",
-//            "  }",
-//            "}");
-//
-//    MockJavaResource fooResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.Foo",
-//            "package com.foo;",
-//            "public class Foo {",
-//            "  public static void foo() {",
-//            "  }",
-//            "}");
-//
-//    MockJavaResource fooResourceWithErrors =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.Foo",
-//            "package com.foo;",
-//            "public class Foo {",
-//            "  public static void foo() {",
-//            "    // x() method is not defined anywhere, should result in a compile error.",
-//            "    x();",
-//            "  }",
-//            "}");
-//
-//    MinimalRebuildCache minimalRebuildCache = new MinimalRebuildCache();
-//    File applicationDir = createTempDir();
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//    compilerOptions.setUseDetailedTypeIds(true);
-//    compilerOptions.setSourceLevel(SourceLevel.JAVA11);
-//
-//    // Compile the application with no errors.
-//    compileToJs(TreeLogger.NULL, compilerOptions, applicationDir, "com.foo.Errors",
-//        Lists.newArrayList(moduleResource, entryPointResource, fooResource), minimalRebuildCache,
-//        emptySet, JsOutputOption.OBFUSCATED);
-//
-//    // Recompile and expect error reporting.
-//    UnitTestTreeLogger.Builder builder = new UnitTestTreeLogger.Builder();
-//    builder.setLowestLogLevel(TreeLogger.ERROR);
-//    builder.expectError("Line 5: The method x() is undefined for the type Foo", null);
-//    UnitTestTreeLogger errorLogger = builder.createLogger();
-//    try {
-//      // Recompile but now the changed file has an error
-//      compileToJs(errorLogger, compilerOptions, applicationDir, "com.foo.Errors",
-//          Lists.newArrayList(moduleResource, entryPointResource, fooResourceWithErrors),
-//          minimalRebuildCache,
-//          emptySet, JsOutputOption.OBFUSCATED);
-//      fail("Compile should have failed");
-//    } catch (UnableToCompleteException expected) {
-//      errorLogger.assertLogEntriesContainExpected();
-//    }
-//  }
-//
-//  public void testIncrementalRecompile_representedAsNative()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    MockResource moduleResource =
-//        JavaResourceBase.createMockResource(
-//            "com/foo/RepresentedAsNative.gwt.xml",
-//            "<module>",
-//            "  <source path=''/>",
-//            "  <entry-point class='com.foo.RepresentedAsNativeEntryPoint'/>",
-//            "</module>");
-//
-//    MockResource entryPointResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.RepresentedAsNativeEntryPoint",
-//            "package com.foo;",
-//            "import com.google.gwt.core.client.EntryPoint;",
-//            "public class RepresentedAsNativeEntryPoint implements EntryPoint {",
-//            "  public void onModuleLoad() {",
-//            "  Double d = new Double(1d);",
-//            "  }",
-//            "}");
-//
-//    MockResource modifiedEntryPointResource =
-//        JavaResourceBase.createMockJavaResource(
-//            "com.foo.RepresentedAsNativeEntryPoint",
-//            "package com.foo;",
-//            "import com.google.gwt.core.client.EntryPoint;",
-//            "public class RepresentedAsNativeEntryPoint implements EntryPoint {",
-//            "  public void onModuleLoad() {",
-//            "  Double d = new Double(\"1\");",
-//            "  }",
-//            "}");
-//
-//    PrintWriterTreeLogger logger = new PrintWriterTreeLogger();
-//    logger.setMaxDetail(TreeLogger.ERROR);
-//
-//    MinimalRebuildCache minimalRebuildCache = new MinimalRebuildCache();
-//    File applicationDir = createTempDir();
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//    compilerOptions.setUseDetailedTypeIds(true);
-//    compilerOptions.setSourceLevel(SourceLevel.JAVA11);
-//    compilerOptions.setGenerateJsInteropExports(false);
-//
-//    // Compile the application with no errors.
-//    compileToJs(logger, compilerOptions, applicationDir, "com.foo.RepresentedAsNative",
-//        Lists.newArrayList(moduleResource, entryPointResource), minimalRebuildCache,
-//        emptySet, JsOutputOption.OBFUSCATED);
-//
-//    // Recompile but now the changed file has an error
-//    compileToJs(logger, compilerOptions, applicationDir, "com.foo.RepresentedAsNative",
-//        Lists.newArrayList(modifiedEntryPointResource),
-//        minimalRebuildCache,
-//        stringSet(
-//            "com.foo.RepresentedAsNativeEntryPoint",
-//            getEntryMethodHolderTypeName("com.foo.RepresentedAsNative")),
-//        JsOutputOption.OBFUSCATED);
-//  }
-//
-//  public void testIncrementalRecompile_functionSignatureChange() throws UnableToCompleteException,
-//      IOException, InterruptedException {
-//    // Not testing recompile equality with Pretty/Obfuscated output since the JsIncrementalNamer's
-//    // behavior is order dependent, and while still correct, will come out different in a recompile
-//    // with this change versus a from scratch compile with this change.
-//    checkIncrementalRecompile_functionSignatureChange(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_compileTimeConstantChange() throws UnableToCompleteException,
-//      IOException, InterruptedException {
-//    checkIncrementalRecompile_compileTimeConstantChange(JsOutputOption.DETAILED);
-//    checkIncrementalRecompile_compileTimeConstantChange(JsOutputOption.OBFUSCATED);
-//  }
-//
-//  public void testIncrementalRecompile_transitivelyFoldableConstant()
-//      throws UnableToCompleteException,
-//      IOException, InterruptedException {
-//    checkIncrementalRecompile_transitivelyFoldableConstant(JsOutputOption.DETAILED);
-//    checkIncrementalRecompile_transitivelyFoldableConstant(JsOutputOption.OBFUSCATED);
-//  }
-//
-//  public void testIncrementalRecompile_packagePrivateDispatch() throws UnableToCompleteException,
-//      IOException, InterruptedException {
-//    checkIncrementalRecompile_packagePrivateOverride(JsOutputOption.OBFUSCATED);
-//    checkIncrementalRecompile_packagePrivateOverride(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_prettyOutput()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    // Nominal tests for pretty output. Pretty and Obfuscated output share most of the same code
-//    // paths.
-//    checkIncrementalRecompile_typeHierarchyChange(JsOutputOption.PRETTY);
-//    checkIncrementalRecompile_unreachableIncompatibleChange(JsOutputOption.PRETTY);
-//  }
-//
-//  public void testIncrementalRecompile_regularClassMadeIntoJsoClass()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    // Not testing recompile equality with Pretty/Obfuscated output since the JsIncrementalNamer's
-//    // behavior is order dependent, and while still correct, will come out different in a recompile
-//    // with this change versus a from scratch compile with this change.
-//    checkIncrementalRecompile_regularClassMadeIntoJsoClass(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_unreachableIncompatibleChange()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    // Not testing recompile equality with Pretty/Obfuscated output since the JsIncrementalNamer's
-//    // behavior is order dependent, and while still correct, will come out different in a recompile
-//    // with this change versus a from scratch compile with this change.
-//    checkIncrementalRecompile_unreachableIncompatibleChange(JsOutputOption.OBFUSCATED);
-//    checkIncrementalRecompile_unreachableIncompatibleChange(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_typeHierarchyChange()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    checkIncrementalRecompile_typeHierarchyChange(JsOutputOption.OBFUSCATED);
-//    checkIncrementalRecompile_typeHierarchyChange(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_defaultMethod()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    // Tests that default method on superclasses are correctly constructed
-//    checkIncrementalRecompile_defaultMethod(JsOutputOption.OBFUSCATED);
-//    checkIncrementalRecompile_defaultMethod(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_devirtualizeUnchangedJso()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    // Tests that a JSO calls through interfaces are correctly devirtualized when compiling per file
-//    // and the JSOs nor their single impl interfaces are not stale.
-//    checkIncrementalRecompile_devirtualizeUnchangedJso(JsOutputOption.OBFUSCATED);
-//    checkIncrementalRecompile_devirtualizeUnchangedJso(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_devirtualizeString()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    // Tests that String calls through interfaces are correctly devirtualized when compiling per
-//    // file and neither String nor CharSequence interface are stale.
-//    checkIncrementalRecompile_devirtualizeString(JsOutputOption.OBFUSCATED);
-//    checkIncrementalRecompile_devirtualizeString(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_devirtualizeComparable()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    // Tests that Doublecalls through interfaces are correctly devirtualized when compiling per
-//    // file and neither String nor CharSequence interface are stale.
-//    checkIncrementalRecompile_devirtualizeComparable(JsOutputOption.OBFUSCATED);
-//    checkIncrementalRecompile_devirtualizeComparable(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_multipleClassGenerator()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    // Tests that a Generated type that is not directly referenced from the rebound GWT.create()
-//    // call is still marked stale, regenerated, retraversed and output as JS.
-//    checkIncrementalRecompile_multipleClassGenerator(JsOutputOption.OBFUSCATED);
-//    checkIncrementalRecompile_multipleClassGenerator(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_singleJsoIntfDispatchChange()
-//      throws UnableToCompleteException,
-//      IOException, InterruptedException {
-//    // Not testing recompile equality with Pretty/Obfuscated output since the JsIncrementalNamer's
-//    // behavior is order dependent, and while still correct, will come out different in a recompile
-//    // with this change versus a from scratch compile with this change.
-//    checkIncrementalRecompile_singleJsoIntfDispatchChange(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_dualJsoIntfDispatchChange() throws UnableToCompleteException,
-//      IOException, InterruptedException {
-//    // Not testing recompile equality with Pretty/Obfuscated output since the JsIncrementalNamer's
-//    // behavior is order dependent, and while still correct, will come out different in a recompile
-//    // with this change versus a from scratch compile with this change.
-//    checkIncrementalRecompile_dualJsoIntfDispatchChange(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_generatorInputResourceChange() throws IOException,
-//      UnableToCompleteException, InterruptedException {
-//    // Not testing recompile equality with Pretty/Obfuscated output since the JsIncrementalNamer's
-//    // behavior is order dependent, and while still correct, will come out different in a recompile
-//    // with this change versus a from scratch compile with this change.
-//    checkIncrementalRecompile_generatorInputResourceChange(JsOutputOption.DETAILED);
-//  }
-//
-//  public void testIncrementalRecompile_invalidatedGeneratorOutputRerunsGenerator()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    // BarReferencesFoo Generator hasn't run yet.
-//    assertEquals(0, BarReferencesFooGenerator.runCount);
-//
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//    List<MockResource> sharedResources =
-//        Lists.newArrayList(barReferencesFooGeneratorModuleResource, generatorEntryPointResource);
-//    JsOutputOption output = JsOutputOption.OBFUSCATED;
-//
-//    List<MockResource> originalResources = Lists.newArrayList(sharedResources);
-//    originalResources.add(fooResource);
-//
-//    // Compile the app with original files, modify a file and do a per-file recompile.
-//    MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();
-//    File relinkApplicationDir = createTempDir();
-//    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule", originalResources,
-//        relinkMinimalRebuildCache, emptySet, output);
-//
-//    // BarReferencesFoo Generator has now been run once.
-//    assertEquals(1, BarReferencesFooGenerator.runCount);
-//
-//    // Recompile with no changes, which should not trigger any Generator runs.
-//    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule",
-//        Lists.<MockResource>newArrayList(), relinkMinimalRebuildCache, emptySet, output);
-//
-//    // Since there were no changes BarReferencesFoo Generator was not run again.
-//    assertEquals(1, BarReferencesFooGenerator.runCount);
-//
-//    // Recompile with a modified Foo class, which should invalidate Bar which was generated by a
-//    // GWT.create() call in the entry point.
-//    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule",
-//        Lists.<MockResource>newArrayList(fooResource), relinkMinimalRebuildCache,
-//        stringSet("com.foo.TestEntryPoint", "com.foo.Foo", "com.foo.Bar"), output);
-//
-//    // BarReferencesFoo Generator was run again.
-//    assertEquals(2, BarReferencesFooGenerator.runCount);
-//  }
-//
-//  public void testIncrementalRecompile_invalidatedGeneratorOutputRerunsCascadedGenerators()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//    // Generators haven't run yet.
-//    assertEquals(0, CauseStringRebindGenerator.runCount);
-//    assertEquals(0, CauseShortRebindGenerator.runCount);
-//    assertEquals(0, FooResourceGenerator.runCount);
-//
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//    List<MockResource> sharedResources = Lists.newArrayList(cascadingGeneratorModuleResource,
-//        generatorEntryPointResource, classNameToGenerateResource);
-//    JsOutputOption output = JsOutputOption.OBFUSCATED;
-//
-//    List<MockResource> originalResources = Lists.newArrayList(sharedResources);
-//
-//    // Compile the app with original files.
-//    MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();
-//    File relinkApplicationDir = createTempDir();
-//    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule", originalResources,
-//        relinkMinimalRebuildCache, emptySet, output);
-//
-//    // Generators have now been run once.
-//    assertEquals(1, CauseStringRebindGenerator.runCount);
-//    assertEquals(1, CauseShortRebindGenerator.runCount);
-//    assertEquals(1, FooResourceGenerator.runCount);
-//
-//    // Recompile with no changes, which should not trigger any Generator runs.
-//    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule",
-//        Lists.<MockResource>newArrayList(), relinkMinimalRebuildCache, emptySet, output);
-//
-//    // Since there were no changes Generators were not run again.
-//    assertEquals(1, CauseStringRebindGenerator.runCount);
-//    assertEquals(1, CauseShortRebindGenerator.runCount);
-//    assertEquals(1, FooResourceGenerator.runCount);
-//
-//    // Recompile with a modified resource, which should invalidate the output of the
-//    // FooResourceGenerator and cascade the invalidate the Generators that triggered
-//    // FooResourceGenerator.
-//    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule",
-//        Lists.<MockResource>newArrayList(modifiedClassNameToGenerateResource),
-//        relinkMinimalRebuildCache, stringSet("com.foo.TestEntryPoint", "com.foo.Baz$InnerBaz",
-//            "com.foo.Bar", "com.foo.HasCustomContent", "com.foo.FooReplacementTwo"), output);
-//
-//    // Generators were run again.
-//    assertEquals(2, CauseStringRebindGenerator.runCount);
-//    assertEquals(2, CauseShortRebindGenerator.runCount);
-//    assertEquals(2, FooResourceGenerator.runCount);
-//  }
-//
-//  public void testIncrementalRecompile_carriesOverGeneratorArtifacts()
-//      throws UnableToCompleteException,
-//      IOException, InterruptedException {
-//    // Foo Generator hasn't run yet.
-//    assertEquals(0, FooResourceGenerator.runCount);
-//
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//    List<MockResource> sharedResources = Lists.newArrayList(resourceReadingGeneratorModuleResource,
-//        referencesBarAndGeneratorEntryPointResource, classNameToGenerateResource,
-//        barReferencesFooResource);
-//    JsOutputOption output = JsOutputOption.OBFUSCATED;
-//
-//    List<MockResource> originalResources = Lists.newArrayList(sharedResources);
-//    originalResources.add(fooResource);
-//
-//    // Compile the app with original files.
-//    MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();
-//    File relinkApplicationDir = createTempDir();
-//    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule", originalResources,
-//        relinkMinimalRebuildCache, emptySet, output);
-//
-//    // Foo Generator has now been run once.
-//    assertEquals(1, FooResourceGenerator.runCount);
-//    // The bar.txt artifact was output.
-//    File barFile = new File(relinkApplicationDir.getPath() + File.separator + "com.foo.SimpleModule"
-//        + File.separator + "bar.txt");
-//    assertTrue(barFile.exists());
-//
-//    // Recompile with just 1 file change, which should not trigger any Generator runs.
-//    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule",
-//        Lists.<MockResource> newArrayList(fooResource), relinkMinimalRebuildCache,
-//        stringSet("com.foo.Foo", "com.foo.Bar"), output);
-//
-//    // Foo Generator was not run again.
-//    assertEquals(1, FooResourceGenerator.runCount);
-//    // But the bar.txt artifact was still output.
-//    barFile = new File(relinkApplicationDir.getPath() + File.separator + "com.foo.SimpleModule"
-//        + File.separator + "bar.txt");
-//    assertTrue(barFile.exists());
-//  }
-//
-//  /**
-//   * Regression test for UnifyAST assertion failure problem in incremental SDM.
-//   */
-//  public void testIncrementalRecompile_unifyASTAssertionRegression()
-//      throws UnableToCompleteException, IOException, InterruptedException {
-//
-//    CompilerOptions compilerOptions = new CompilerOptionsImpl();
-//    List<MockResource> originalResources = Lists.newArrayList(helloEntryPointResource,
-//        helloModuleResource);
-//    JsOutputOption output = JsOutputOption.OBFUSCATED;
-//
-//    // Compile the app with original files.
-//    MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();
-//    File relinkApplicationDir = createTempDir();
-//    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.Hello",
-//        originalResources, relinkMinimalRebuildCache, emptySet, output);
-//  }
+  public void testAllValidArgs() {
+    CompilerOptionsImpl options = new CompilerOptionsImpl();
+    Compiler.ArgProcessor argProcessor = new Compiler.ArgProcessor(options);
+
+    assertProcessSuccess(argProcessor, new String[] {"-logLevel", "DEBUG", "-style",
+        "PRETTY", "-ea", "-gen", "myGen",
+        "-war", "myWar", "-workDir", "myWork", "-extra", "myExtra", "-incremental",
+        "-localWorkers", "2", "-sourceLevel", "1.8", "c.g.g.h.H", "my.Module"});
+
+    assertEquals(new File("myGen").getAbsoluteFile(),
+        options.getGenDir().getAbsoluteFile());
+    assertEquals(new File("myWar"), options.getWarDir());
+    assertEquals(new File("myWork"), options.getWorkDir());
+    assertEquals(new File("myExtra"), options.getExtraDir());
+
+    assertEquals(2, options.getLocalWorkers());
+
+    assertEquals(TreeLogger.DEBUG, options.getLogLevel());
+    assertEquals(JsOutputOption.PRETTY, options.getOutput());
+    assertTrue(options.isEnableAssertions());
+    assertTrue(options.shouldClusterSimilarFunctions());
+    assertTrue(options.shouldInlineLiteralParameters());
+    assertFalse(options.shouldOptimizeDataflow());
+    assertTrue(options.shouldOrdinalizeEnums());
+    assertTrue(options.shouldRemoveDuplicateFunctions());
+    assertTrue(options.isIncrementalCompileEnabled());
+
+    assertEquals(SourceLevel.JAVA8, options.getSourceLevel());
+
+    assertEquals(2, options.getModuleNames().size());
+    assertEquals("c.g.g.h.H", options.getModuleNames().get(0));
+    assertEquals("my.Module", options.getModuleNames().get(1));
+  }
+
+  public void testDefaultArgs() {
+    CompilerOptionsImpl options = new CompilerOptionsImpl();
+    Compiler.ArgProcessor argProcessor = new Compiler.ArgProcessor(options);
+
+    assertProcessSuccess(argProcessor, new String[]{"c.g.g.h.H"});
+
+    assertEquals(null, options.getGenDir());
+    assertEquals(new File("war").getAbsoluteFile(),
+        options.getWarDir().getAbsoluteFile());
+    assertEquals(null, options.getWorkDir());
+    assertEquals(null, options.getExtraDir());
+
+    assertEquals(TreeLogger.INFO, options.getLogLevel());
+    assertEquals(JsOutputOption.OBFUSCATED, options.getOutput());
+    assertFalse(options.isEnableAssertions());
+    assertTrue(options.shouldClusterSimilarFunctions());
+    assertTrue(options.shouldInlineLiteralParameters());
+    assertFalse(options.shouldOptimizeDataflow());
+    assertTrue(options.shouldOrdinalizeEnums());
+    assertTrue(options.shouldRemoveDuplicateFunctions());
+    assertFalse(options.isIncrementalCompileEnabled());
+
+    assertEquals(1, options.getLocalWorkers());
+
+    assertEquals(1, options.getModuleNames().size());
+    assertEquals("c.g.g.h.H", options.getModuleNames().get(0));
+  }
+
+  public void testForbiddenArgs() {
+    CompilerOptionsImpl options = new CompilerOptionsImpl();
+    Compiler.ArgProcessor argProcessor = new Compiler.ArgProcessor(options);
+
+    assertProcessFailure(argProcessor, "Unknown argument", new String[]{"-out", "www"});
+    assertProcessFailure(argProcessor, "Source level must be one of",
+        new String[]{"-sourceLevel", "ssss"});
+    assertProcessFailure(argProcessor, "Source level must be one of",
+        new String[]{"-sourceLevel", "1.5"});
+  }
+
+  /**
+   * Tests ordering for emum {@link SourceLevel}.
+   */
+  public void testSourceLevelOrdering() {
+    SourceLevel[] sourceLevels = SourceLevel.values();
+    SourceLevel previousSourceLevel = sourceLevels[0];
+    for (int i = 1; i < sourceLevels.length; i++) {
+      assertTrue(SourceLevel.versionCompare(previousSourceLevel.getStringValue(),
+          sourceLevels[i].getStringValue()) < 0);
+      previousSourceLevel = sourceLevels[i];
+    }
+  }
+
+  public void testSourceLevelSelection() {
+    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.4"));
+    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.5"));
+    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.6"));
+    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.6_26"));
+
+    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.7"));
+    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.8"));
+    assertEquals(SourceLevel.JAVA9, SourceLevel.getBestMatchingVersion("9"));
+    assertEquals(SourceLevel.JAVA10, SourceLevel.getBestMatchingVersion("10"));
+    assertEquals(SourceLevel.JAVA11, SourceLevel.getBestMatchingVersion("11"));
+
+    // not proper version strings => default to JAVA8.
+    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.6u3"));
+    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.6b3"));
+    assertEquals(SourceLevel.JAVA8, SourceLevel.getBestMatchingVersion("1.7b3"));
+  }
+
+  public void testSourceLevelHighestVersion() {
+    assertEquals(SourceLevel.values()[SourceLevel.values().length - 1], SourceLevel.getHighest());
+  }
+
+  /**
+   * Verify that a compile with a @JsType at least compiles successfully.
+   */
+  public void testGwtCreateJsTypeRebindResult() throws Exception {
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compileToJs(compilerOptions, createTempDir(), "com.foo.SimpleModule",
+        Lists.newArrayList(simpleModuleResource, gwtCreateEntryPointResource),
+        new MinimalRebuildCache(), emptySet, JsOutputOption.OBFUSCATED);
+  }
+
+   /**
+   * Test that some lightly referenced interface through a @JsFunction is included in the output.
+   */
+  public void testReferenceThroughJsFunction() throws Exception {
+    MockJavaResource someJsFunction =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.SomeJsFunction",
+            "package com.foo;",
+            "import jsinterop.annotations.JsFunction;",
+            "@JsFunction",
+            "public interface SomeJsFunction {",
+            "  void m();",
+            "}");
+
+    MockJavaResource jsFunctionInterfaceImplementation =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.Impl",
+            "package com.foo;",
+            "public final class Impl implements SomeJsFunction {",
+            "  public void m() { SomeInterface.class.getName(); } ",
+            "}");
+
+    MockJavaResource someInterface =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.SomeInterface",
+            "package com.foo;",
+            "public interface SomeInterface {",
+            "}");
+
+    MockJavaResource testEntryPoint =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.TestEntryPoint",
+            "package com.foo;",
+            "import com.google.gwt.core.client.EntryPoint;",
+            "public class TestEntryPoint implements EntryPoint {",
+            "  private static native void f(SomeJsFunction f) /*-{}-*/;",
+            "  public void onModuleLoad() {",
+                // Create Impl and pass it to JS but do not explicitly call m
+            "    f(new Impl());",
+            "  }",
+            "}");
+
+    MockResource moduleResource =
+        JavaResourceBase.createMockResource(
+            "com/foo/TestEntryPoint.gwt.xml",
+            "<module>",
+            "  <source path=''/>",
+            "  <entry-point class='com.foo.TestEntryPoint'/>",
+            "</module>");
+
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    String js = compileToJs(compilerOptions, createTempDir(), testEntryPoint.getTypeName(),
+        Lists.newArrayList(moduleResource, testEntryPoint, someJsFunction,
+            jsFunctionInterfaceImplementation, someInterface),
+        new MinimalRebuildCache(), emptySet, JsOutputOption.DETAILED);
+    // Make sure the referenced class literals ends up being included in the resulting JS.
+    String classliteralHolderVarName =
+        JjsUtils.mangleMemberName("com.google.gwt.lang.ClassLiteralHolder",
+            JjsUtils.classLiteralFieldNameFromJavahTypeSignatureName(
+                JjsUtils.javahSignatureFromName(someInterface.getTypeName())));
+    assertTrue(js.contains("var " + classliteralHolderVarName + " = "));
+  }
+
+  /**
+   * Tests that changing Js namespace name on an exported method comes out accurately.
+   *
+   * <p>An unrelated and non-updated @JsType is also included in each compile to verify that updated
+   * exports do not forget non-edited items in a recompile.
+   */
+  public void testChangeJsNamespaceOnMethod() throws Exception {
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setGenerateJsInteropExports(true);
+
+    MockJavaResource jsNamespaceFooResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.Foo",
+            "package com.foo;",
+            "import jsinterop.annotations.JsMethod;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType public class Foo {",
+            "  @JsMethod(namespace=\"spazz\") public static void doStaticBar() {}",
+            "}");
+
+    MockJavaResource regularFooResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.Foo",
+            "package com.foo;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType public class Foo {",
+            "  public static void doStaticBar() {}",
+            "}");
+
+    checkRecompiledModifiedApp(
+        compilerOptions,
+        "com.foo.SimpleModule",
+        Lists.newArrayList(simpleModuleResource, emptyEntryPointResource, jsTypeBarResource),
+        regularFooResource,
+        jsNamespaceFooResource,
+        stringSet("com.foo.Bar", "com.foo.Foo"),
+        JsOutputOption.DETAILED);
+  }
+
+  /**
+   * Tests that changing Js namespace on a class comes out accurately.
+   *
+   * <p>An unrelated and non-updated @JsType is also included in each compile to verify that updated
+   * exports do not forget non-edited items in a recompile.
+   */
+  public void testChangeJsNamespaceOnClass() throws Exception {
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setGenerateJsInteropExports(true);
+
+    MockJavaResource jsNamespaceFooResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.Foo",
+            "package com.foo;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(namespace=\"spazz\") public class Foo {",
+            "  public static void doStaticBar() {}",
+            "}");
+
+    MockJavaResource regularFooResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.Foo",
+            "package com.foo;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType public class Foo {",
+            "  public static void doStaticBar() {}",
+            "}");
+
+    checkRecompiledModifiedApp(
+        compilerOptions,
+        "com.foo.SimpleModule",
+        Lists.newArrayList(simpleModuleResource, emptyEntryPointResource, jsTypeBarResource),
+        regularFooResource,
+        jsNamespaceFooResource,
+        stringSet("com.foo.Bar", "com.foo.Foo"),
+        JsOutputOption.DETAILED);
+  }
+
+  /**
+   * Tests that changing @JsFunction name on an interface comes out accurately.
+   *
+   * <p>An unrelated and non-updated @JsType is also included in each compile to verify that updated
+   * exports do not forget non-edited items in a recompile.
+   */
+  public void testChangeJsFunction() throws Exception {
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setGenerateJsInteropExports(true);
+
+    MockJavaResource jsFunctionIFooResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.IFoo",
+            "package com.foo;",
+            "import jsinterop.annotations.JsFunction;",
+            "@JsFunction public interface IFoo {",
+            "  int foo(int x);",
+            "}");
+
+    MockJavaResource regularIFooResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.IFoo",
+            "package com.foo;",
+            "public interface IFoo {",
+            "  int foo(int x);",
+            "}");
+
+    MockJavaResource fooResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.Foo",
+            "package com.foo;",
+            "public final class Foo implements IFoo {",
+            "  @Override public int foo(int x) { return 0; }",
+            "}");
+
+    checkRecompiledModifiedApp(
+        compilerOptions,
+        "com.foo.SimpleModule",
+        Lists.newArrayList(
+            simpleModuleResource, entryPointResourceForFoo, fooResource, jsTypeBarResource),
+        regularIFooResource,
+        jsFunctionIFooResource,
+        stringSet("com.foo.Bar", "com.foo.Foo", "com.foo.IFoo", "com.foo.TestEntryPoint"),
+        JsOutputOption.DETAILED);
+  }
+
+  /**
+   * Tests that toggling JsProperty methods in an interface comes out accurately.
+   *
+   * <p>An unrelated and non-updated @JsType is also included in each compile to verify that updated
+   * exports do not forget non-edited items in a recompile.
+   */
+  public void testChangeJsProperty() throws Exception {
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setGenerateJsInteropExports(true);
+
+    MockJavaResource jsPropertyIFooResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.IFoo",
+            "package com.foo;",
+            "import jsinterop.annotations.JsProperty;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType public interface IFoo {",
+            "  @JsProperty int getX();",
+            "  @JsProperty int getY();",
+            "}");
+
+    MockJavaResource regularIFooResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.IFoo",
+            "package com.foo;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType public interface IFoo {",
+            "  int getX();",
+            "  int getY();",
+            "}");
+
+    MockJavaResource fooResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.Foo",
+            "package com.foo;",
+            "public class Foo implements IFoo {",
+            "  @Override public int getX() { return 0; }",
+            "  @Override public int getY() { return 0; }",
+            "}");
+
+    checkRecompiledModifiedApp(
+        compilerOptions,
+        "com.foo.SimpleModule",
+        Lists.newArrayList(
+            simpleModuleResource, entryPointResourceForFoo, fooResource, jsTypeBarResource),
+        regularIFooResource,
+        jsPropertyIFooResource,
+        stringSet("com.foo.Bar", "com.foo.Foo", "com.foo.IFoo", "com.foo.TestEntryPoint"),
+        JsOutputOption.DETAILED);
+  }
+
+  /**
+   * Tests that adding a @JsType annotation on a class comes out accurately and that removing it
+   * comes out accurately as well.
+   *
+   * <p>An unrelated and non-updated @JsType is also included in each compile to verify that updated
+   * exports do not forget non-edited items in a recompile.
+   */
+  public void testChangeJsType() throws Exception {
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setGenerateJsInteropExports(true);
+
+    MockJavaResource jsTypeFooResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.Foo",
+            "package com.foo;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType public class Foo {",
+            "  void doInstanceBar() {}",
+            "  public static void doStaticBar() {}",
+            "}");
+
+    MockJavaResource regularFooResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.Foo", "package com.foo;", "public class Foo {}");
+
+    checkRecompiledModifiedApp(
+        compilerOptions,
+        "com.foo.SimpleModule",
+        Lists.newArrayList(simpleModuleResource, emptyEntryPointResource, jsTypeBarResource),
+        regularFooResource,
+        jsTypeFooResource,
+        stringSet("com.foo.Bar", "com.foo.Foo"),
+        JsOutputOption.DETAILED);
+  }
+
+  /**
+   * Tests that changing a prototype on a @JsType annotated class comes out accurately.
+   *
+   * <p>An unrelated and non-updated @JsType is also included in each compile to verify that updated
+   * exports do not forget non-edited items in a recompile.
+   */
+  public void testChangeJsTypeNative() throws Exception {
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setGenerateJsInteropExports(true);
+
+    MockJavaResource nativeFooResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.Foo",
+            "package com.foo;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(isNative=true) public class Foo {",
+            "  public static native void doStaticBar();",
+            "}");
+
+    MockJavaResource regularFooResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.Foo",
+            "package com.foo;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType public class Foo {",
+            "  public static void doStaticBar() {}",
+            "}");
+
+    checkRecompiledModifiedApp(
+        compilerOptions,
+        "com.foo.SimpleModule",
+        Lists.newArrayList(simpleModuleResource, emptyEntryPointResource, jsTypeBarResource),
+        regularFooResource,
+        nativeFooResource,
+        stringSet("com.foo.Bar", "com.foo.Foo"),
+        JsOutputOption.DETAILED);
+  }
+
+  /**
+   * Tests that adding a @JsIgnore annotation on a method comes out accurately and that removing
+   * it comes out accurately as well.
+   *
+   * <p>An unrelated and non-updated @JsType is also included in each compile to verify that updated
+   * exports do not forget non-edited items in a recompile.
+   */
+  public void testChangeJsIgnore() throws Exception {
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setGenerateJsInteropExports(true);
+
+    MockJavaResource jsIgnoreFooResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.Foo",
+            "package com.foo;",
+            "import jsinterop.annotations.JsIgnore;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType public class Foo {",
+            "  @JsIgnore public static void doStaticBar() {}",
+            "}");
+
+    MockJavaResource regularFooResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.Foo",
+            "package com.foo;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType public class Foo {",
+            "  public static void doStaticBar() {}",
+            "}");
+
+    checkRecompiledModifiedApp(
+        compilerOptions,
+        "com.foo.SimpleModule",
+        Lists.newArrayList(simpleModuleResource, emptyEntryPointResource, jsTypeBarResource),
+        regularFooResource,
+        jsIgnoreFooResource,
+        stringSet("com.foo.Bar", "com.foo.Foo"),
+        JsOutputOption.DETAILED);
+  }
+
+  public void testJsInteropNameCollision() throws Exception {
+    MinimalRebuildCache minimalRebuildCache = new MinimalRebuildCache();
+    File applicationDir = Files.createTempDirectory("JsInteropNameCollision").toFile();
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setGenerateJsInteropExports(true);
+
+    // Simple compile with one dialog.alert() export succeeds.
+    compileToJs(compilerOptions, applicationDir, "com.foo.SimpleModule", Lists.newArrayList(
+        simpleModuleResource, dialogEntryPointResource, simpleDialogResourceWithExport,
+        complexDialogResourceSansExport), minimalRebuildCache, emptySet, JsOutputOption.OBFUSCATED);
+
+    try {
+      // Exporting a second dialog.alert() fails with an exported name collision.
+      compileToJs(compilerOptions, applicationDir, "com.foo.SimpleModule",
+          Lists.<MockResource> newArrayList(complexDialogResourceWithExport), minimalRebuildCache,
+          emptySet, JsOutputOption.OBFUSCATED);
+      fail("Compile should have failed");
+    } catch (UnableToCompleteException e) {
+      // success
+    }
+
+    // Reverting to just a single dialog.alert() starts succeeding again.
+    compileToJs(compilerOptions, applicationDir, "com.foo.SimpleModule",
+        Lists.<MockResource>newArrayList(complexDialogResourceSansExport), minimalRebuildCache,
+        stringSet("com.foo.SimpleDialog", "com.foo.ComplexDialog", "com.foo.TestEntryPoint"),
+        JsOutputOption.OBFUSCATED);
+  }
+
+  public void testGwtCreateJsoRebindResult() throws Exception {
+    try {
+      compileToJs(createTempDir(), "com.foo.SimpleModule",
+          Lists.newArrayList(simpleModuleResource, brokenGwtCreateEntryPointResource),
+          new MinimalRebuildCache(), emptySet, JsOutputOption.OBFUSCATED);
+      fail("Compile should have failed");
+    } catch (UnableToCompleteException e) {
+      // success
+    }
+  }
+
+  public void testNonZeroArgConstructorEntryPoint() throws Exception {
+    MockResource moduleResource =
+        JavaResourceBase.createMockResource(
+            "com/foo/NonZeroArgConstructor.gwt.xml",
+            "<module>",
+            "  <source path=''/>",
+            "  <entry-point class='com.foo.NonZeroArgConstructorEntryPoint'/>",
+            "</module>");
+
+    MockJavaResource entryPointResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.NonZeroArgConstructorEntryPoint",
+            "package com.foo;",
+            "import com.google.gwt.core.client.EntryPoint;",
+            "public class NonZeroArgConstructorEntryPoint implements EntryPoint {",
+            "  public NonZeroArgConstructorEntryPoint(String s) {",
+            "  }",
+            "  public void onModuleLoad() {",
+            "  }",
+            "}");
+
+    MinimalRebuildCache minimalRebuildCache = new MinimalRebuildCache();
+    File applicationDir = createTempDir();
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+
+    UnitTestTreeLogger.Builder builder = new UnitTestTreeLogger.Builder();
+    builder.setLowestLogLevel(TreeLogger.ERROR);
+    builder.expectError(Pattern.compile("Errors in .*"), null);
+    builder.expectError("Line 3: Rebind result 'com.foo.NonZeroArgConstructorEntryPoint' "
+        + "has no default (zero argument) constructors", null);
+    UnitTestTreeLogger errorLogger = builder.createLogger();
+    try {
+      // Simple compile with one dialog.alert() export succeeds.
+
+      compileToJs(errorLogger, compilerOptions, applicationDir, "com.foo.NonZeroArgConstructor",
+          Lists.newArrayList(moduleResource, entryPointResource), minimalRebuildCache,
+          emptySet, JsOutputOption.OBFUSCATED);
+      fail("Compile should have failed");
+    } catch (UnableToCompleteException expected) {
+      errorLogger.assertCorrectLogEntries();
+    }
+  }
+
+  public void testDeterministicBuild_Draft_StackModeStrip() throws
+      UnableToCompleteException, IOException {
+    assertDeterministicBuild(HELLO_MODULE_STACKMODE_STRIP, 0);
+  }
+
+  public void testDeterministicBuild_Optimized_StackModeStrip() throws
+      UnableToCompleteException, IOException {
+    assertDeterministicBuild(HELLO_MODULE_STACKMODE_STRIP, 9);
+  }
+
+  public void testDeterministicBuild_Draft() throws UnableToCompleteException, IOException {
+    assertDeterministicBuild(HELLO_MODULE, 0);
+  }
+
+  public void testDeterministicBuild_Optimized() throws UnableToCompleteException, IOException {
+    assertDeterministicBuild(HELLO_MODULE, 9);
+  }
+
+  public void testSuccessfulCompile_jsoClassLiteralOrder() throws Exception {
+    // Crafted resource to make sure the a native subclass is compiled before the JSO class,
+    // In the case of native sublcasses the class hierarchy does not match the class literal
+    // hierarchy.
+    MockJavaResource nativeClassAndSubclass =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.MyNativeSubclass",
+            "package com.foo;",
+            "import jsinterop.annotations.JsType;",
+            "@JsType(isNative=true)",
+            "class NativeClass {",
+            "}",
+            "public class MyNativeSubclass extends NativeClass {",
+            "}");
+
+    MockJavaResource testEntryPoint =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.MyEntryPoint",
+            "package com.foo;",
+            "import com.foo.MyNativeSubclass;",
+            "public class MyEntryPoint extends MyNativeSubclass {",
+            "  public void onModuleLoad() {",
+            "    Object o = new Object();",
+            "    if (MyNativeSubclass.class.getName() == null) ",
+            "      o = new MyNativeSubclass();",
+            // Make .clazz reachable so that class literals are emmitted with the respective
+            // classses.
+            "    o.getClass();",
+            "  }",
+            "}");
+
+    MockResource moduleResource =
+        JavaResourceBase.createMockResource(
+            "com/foo/MyEntryPoint.gwt.xml",
+            "<module>",
+            "  <source path=''/>",
+            "  <entry-point class='com.foo.MyEntryPoint'/>",
+            "</module>");
+
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    // Make sure it compiles successfully with no assertions
+    compilerOptions.setEnableAssertions(true);
+    compilerOptions.setGenerateJsInteropExports(true);
+    compilerOptions.setOutput(JsOutputOption.PRETTY);
+    compilerOptions.setOptimizationLevel(9);
+    assertCompileSucceeds(compilerOptions, testEntryPoint.getTypeName(),
+        Lists.newArrayList(moduleResource, nativeClassAndSubclass, testEntryPoint));
+  }
+
+  // TODO(stalcup): add recompile tests for file deletion.
+
+  public void testIncrementalRecompile_noop() throws UnableToCompleteException, IOException,
+      InterruptedException {
+    checkIncrementalRecompile_noop(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_noop(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_dateStampChange() throws UnableToCompleteException,
+      IOException, InterruptedException {
+    checkIncrementalRecompile_dateStampChange(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_dateStampChange(JsOutputOption.DETAILED);
+  }
+
+  // Repro for bug #9518
+  public void testIncrementalRecompile_jsPropertyConsistencyCheck()
+      throws UnableToCompleteException,
+      IOException, InterruptedException {
+    // Supertype defines the getter.
+    MockJavaResource superType =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.SuperType",
+            "package com.foo;",
+            "import jsinterop.annotations.JsProperty;",
+            "public class SuperType {",
+            "  @JsProperty String getString() { return null; }",
+            "}");
+
+    // Subtype defines the setter.
+    MockJavaResource subType =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.SubType",
+            "package com.foo;",
+            "import jsinterop.annotations.JsProperty;",
+            "public class SubType extends SuperType {",
+            "  @JsProperty void setString(String s) {}",
+            "}");
+
+    MockJavaResource testEntryPoint =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.TestEntryPoint",
+            "package com.foo;",
+            "import com.google.gwt.core.client.EntryPoint;",
+            "public class TestEntryPoint implements EntryPoint {",
+            "  public void onModuleLoad() {",
+            // Create Impl and pass it to JS but do not explicitly call m
+            "    new SubType();",
+            "  }",
+            "}");
+
+    MockResource moduleResource =
+        JavaResourceBase.createMockResource(
+            "com/foo/TestModule.gwt.xml",
+            "<module>",
+            "  <source path=''/>",
+            "  <entry-point class='com.foo.TestEntryPoint'/>",
+            "</module>");
+
+    MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();
+    File relinkApplicationDir = createTempDir();
+
+    // Perform a first compile.
+    compileToJs(relinkApplicationDir, "com.foo.TestModule",
+        Lists.newArrayList(moduleResource, testEntryPoint, subType, superType),
+        relinkMinimalRebuildCache, null, JsOutputOption.OBFUSCATED);
+
+    // Invalidate ONLY the subtype. The types referred by the parameters of supertype methods are
+    // going to be reference only which means that the supertype property will have a reference
+    // to a JClassType for "java.lang.String" that isExternal() and is different from the
+    // (non external) reference in the supertype.
+    relinkMinimalRebuildCache.markSourceFileStale("com/foo/SubType.java");
+    compileToJs(relinkApplicationDir, "com.foo.TestModule", Lists.<MockResource> newArrayList(),
+        relinkMinimalRebuildCache, null, JsOutputOption.OBFUSCATED);
+  }
+
+  public void testIncrementalRecompile_invalidatePreamble() throws UnableToCompleteException,
+      IOException, InterruptedException {
+    MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();
+    File relinkApplicationDir = createTempDir();
+
+    // Perform a first compile.
+    compileToJs(relinkApplicationDir, "com.foo.SimpleModule",
+        Lists.newArrayList(simpleModuleResource, emptyEntryPointResource),
+        relinkMinimalRebuildCache, null, JsOutputOption.OBFUSCATED);
+    // On first compile nothing is explicitly stale, only implicitly stale.
+    assertEquals(0, relinkMinimalRebuildCache.getStaleTypeNames().size());
+
+    // Recompile with a deep change that invalidates the preamble.
+    relinkMinimalRebuildCache.markSourceFileStale("java/lang/Object.java");
+    compileToJs(relinkApplicationDir, "com.foo.SimpleModule", Lists.<MockResource> newArrayList(),
+        relinkMinimalRebuildCache, null, JsOutputOption.OBFUSCATED);
+    // Show that preamble invalidation marks everything stale.
+    assertTrue(relinkMinimalRebuildCache.getProcessedStaleTypeNames().size() > 100);
+
+    // Recompile again with a tiny change. Prove that it's not stuck repeatedly invalidating the
+    // whole world.
+    compileToJs(relinkApplicationDir, "com.foo.SimpleModule",
+        Lists.<MockResource> newArrayList(emptyEntryPointResource), relinkMinimalRebuildCache, null,
+        JsOutputOption.OBFUSCATED);
+    // Show that only this little change is stale, not the whole world.
+    assertEquals(2, getStaleTypeNames(relinkMinimalRebuildCache).size());
+  }
+
+  public void testIncrementalRecompile_bridgeMethodOverrideChain()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();
+    File relinkApplicationDir = createTempDir();
+
+    // Perform a first compile.
+    compileToJs(relinkApplicationDir, "com.foo.SimpleModule", Lists.newArrayList(
+        simpleModuleResource, overriddenMethodChainEntryPointResource, topResource, middleResource,
+        bottomResource), relinkMinimalRebuildCache, null, JsOutputOption.OBFUSCATED);
+    // On first compile nothing is explicitly stale, only implicitly stale.
+    assertEquals(0, relinkMinimalRebuildCache.getStaleTypeNames().size());
+
+    // Recompile with a change to Bottom.
+    relinkMinimalRebuildCache.markSourceFileStale("com/foo/Bottom.java");
+    compileToJs(relinkApplicationDir, "com.foo.SimpleModule", Lists.<MockResource> newArrayList(),
+        relinkMinimalRebuildCache, null, JsOutputOption.OBFUSCATED);
+    // Show that the third level bridge method override of Top.run() is seen to be live and thus
+    // makes type com.foo.Bottom$Value live.
+    assertTrue(
+        relinkMinimalRebuildCache.getProcessedStaleTypeNames().contains("com.foo.Bottom$Value"));
+  }
+
+  public void testIncrementalRecompile_classLiteralNewReference()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    checkIncrementalRecompile_classLiteralNewReference(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_classLiteralNewReference(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_primitiveClassLiteralReference()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    checkIncrementalRecompile_primitiveClassLiteralReference(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_primitiveClassLiteralReference(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_superClassOrder()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    // Linked output is sorted alphabetically except that super-classes come before sub-classes. If
+    // on recompile a sub-class -> super-class relationship is lost then a sub-class with an
+    // alphabetically earlier name might start linking out before the super-class.
+    checkIncrementalRecompile_superClassOrder(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_superClassOrder(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_superFromStaleInner()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    checkIncrementalRecompile_superFromStaleInner(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_superFromStaleInner(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_deterministicUiBinder() throws UnableToCompleteException,
+      IOException, InterruptedException {
+    checkIncrementalRecompile_deterministicUiBinder(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_deterministicUiBinder(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_uiBinderCssChange() throws UnableToCompleteException,
+      IOException, InterruptedException {
+    checkIncrementalRecompile_uiBinderCssChange(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_uiBinderCssChange(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_unstableGeneratorReferencesModifiedType()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    checkIncrementalRecompile_unstableGeneratorReferencesModifiedType(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_unstableGeneratorReferencesModifiedType(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_withErrors()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    MockResource moduleResource =
+        JavaResourceBase.createMockResource(
+            "com/foo/Errors.gwt.xml",
+            "<module>",
+            "  <source path=''/>",
+            "  <entry-point class='com.foo.ErrorsEntryPoint'/>",
+            "</module>");
+
+    MockJavaResource entryPointResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.ErrorsEntryPoint",
+            "package com.foo;",
+            "import com.google.gwt.core.client.EntryPoint;",
+            "public class ErrorsEntryPoint implements EntryPoint {",
+            "  public void onModuleLoad() {",
+            "    Foo.foo();",
+            "  }",
+            "}");
+
+    MockJavaResource fooResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.Foo",
+            "package com.foo;",
+            "public class Foo {",
+            "  public static void foo() {",
+            "  }",
+            "}");
+
+    MockJavaResource fooResourceWithErrors =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.Foo",
+            "package com.foo;",
+            "public class Foo {",
+            "  public static void foo() {",
+            "    // x() method is not defined anywhere, should result in a compile error.",
+            "    x();",
+            "  }",
+            "}");
+
+    MinimalRebuildCache minimalRebuildCache = new MinimalRebuildCache();
+    File applicationDir = createTempDir();
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setSourceLevel(SourceLevel.JAVA11);
+
+    // Compile the application with no errors.
+    compileToJs(TreeLogger.NULL, compilerOptions, applicationDir, "com.foo.Errors",
+        Lists.newArrayList(moduleResource, entryPointResource, fooResource), minimalRebuildCache,
+        emptySet, JsOutputOption.OBFUSCATED);
+
+    // Recompile and expect error reporting.
+    UnitTestTreeLogger.Builder builder = new UnitTestTreeLogger.Builder();
+    builder.setLowestLogLevel(TreeLogger.ERROR);
+    builder.expectError("Line 5: The method x() is undefined for the type Foo", null);
+    UnitTestTreeLogger errorLogger = builder.createLogger();
+    try {
+      // Recompile but now the changed file has an error
+      compileToJs(errorLogger, compilerOptions, applicationDir, "com.foo.Errors",
+          Lists.newArrayList(moduleResource, entryPointResource, fooResourceWithErrors),
+          minimalRebuildCache,
+          emptySet, JsOutputOption.OBFUSCATED);
+      fail("Compile should have failed");
+    } catch (UnableToCompleteException expected) {
+      errorLogger.assertLogEntriesContainExpected();
+    }
+  }
+
+  public void testIncrementalRecompile_representedAsNative()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    MockResource moduleResource =
+        JavaResourceBase.createMockResource(
+            "com/foo/RepresentedAsNative.gwt.xml",
+            "<module>",
+            "  <source path=''/>",
+            "  <entry-point class='com.foo.RepresentedAsNativeEntryPoint'/>",
+            "</module>");
+
+    MockResource entryPointResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.RepresentedAsNativeEntryPoint",
+            "package com.foo;",
+            "import com.google.gwt.core.client.EntryPoint;",
+            "public class RepresentedAsNativeEntryPoint implements EntryPoint {",
+            "  public void onModuleLoad() {",
+            "  Double d = new Double(1d);",
+            "  }",
+            "}");
+
+    MockResource modifiedEntryPointResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.RepresentedAsNativeEntryPoint",
+            "package com.foo;",
+            "import com.google.gwt.core.client.EntryPoint;",
+            "public class RepresentedAsNativeEntryPoint implements EntryPoint {",
+            "  public void onModuleLoad() {",
+            "  Double d = new Double(\"1\");",
+            "  }",
+            "}");
+
+    PrintWriterTreeLogger logger = new PrintWriterTreeLogger();
+    logger.setMaxDetail(TreeLogger.ERROR);
+
+    MinimalRebuildCache minimalRebuildCache = new MinimalRebuildCache();
+    File applicationDir = createTempDir();
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setSourceLevel(SourceLevel.JAVA11);
+    compilerOptions.setGenerateJsInteropExports(false);
+
+    // Compile the application with no errors.
+    compileToJs(logger, compilerOptions, applicationDir, "com.foo.RepresentedAsNative",
+        Lists.newArrayList(moduleResource, entryPointResource), minimalRebuildCache,
+        emptySet, JsOutputOption.OBFUSCATED);
+
+    // Recompile but now the changed file has an error
+    compileToJs(logger, compilerOptions, applicationDir, "com.foo.RepresentedAsNative",
+        Lists.newArrayList(modifiedEntryPointResource),
+        minimalRebuildCache,
+        stringSet(
+            "com.foo.RepresentedAsNativeEntryPoint",
+            getEntryMethodHolderTypeName("com.foo.RepresentedAsNative")),
+        JsOutputOption.OBFUSCATED);
+  }
+
+  public void testIncrementalRecompile_functionSignatureChange() throws UnableToCompleteException,
+      IOException, InterruptedException {
+    // Not testing recompile equality with Pretty/Obfuscated output since the JsIncrementalNamer's
+    // behavior is order dependent, and while still correct, will come out different in a recompile
+    // with this change versus a from scratch compile with this change.
+    checkIncrementalRecompile_functionSignatureChange(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_compileTimeConstantChange() throws UnableToCompleteException,
+      IOException, InterruptedException {
+    checkIncrementalRecompile_compileTimeConstantChange(JsOutputOption.DETAILED);
+    checkIncrementalRecompile_compileTimeConstantChange(JsOutputOption.OBFUSCATED);
+  }
+
+  public void testIncrementalRecompile_transitivelyFoldableConstant()
+      throws UnableToCompleteException,
+      IOException, InterruptedException {
+    checkIncrementalRecompile_transitivelyFoldableConstant(JsOutputOption.DETAILED);
+    checkIncrementalRecompile_transitivelyFoldableConstant(JsOutputOption.OBFUSCATED);
+  }
+
+  public void testIncrementalRecompile_packagePrivateDispatch() throws UnableToCompleteException,
+      IOException, InterruptedException {
+    checkIncrementalRecompile_packagePrivateOverride(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_packagePrivateOverride(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_prettyOutput()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    // Nominal tests for pretty output. Pretty and Obfuscated output share most of the same code
+    // paths.
+    checkIncrementalRecompile_typeHierarchyChange(JsOutputOption.PRETTY);
+    checkIncrementalRecompile_unreachableIncompatibleChange(JsOutputOption.PRETTY);
+  }
+
+  public void testIncrementalRecompile_regularClassMadeIntoJsoClass()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    // Not testing recompile equality with Pretty/Obfuscated output since the JsIncrementalNamer's
+    // behavior is order dependent, and while still correct, will come out different in a recompile
+    // with this change versus a from scratch compile with this change.
+    checkIncrementalRecompile_regularClassMadeIntoJsoClass(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_unreachableIncompatibleChange()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    // Not testing recompile equality with Pretty/Obfuscated output since the JsIncrementalNamer's
+    // behavior is order dependent, and while still correct, will come out different in a recompile
+    // with this change versus a from scratch compile with this change.
+    checkIncrementalRecompile_unreachableIncompatibleChange(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_unreachableIncompatibleChange(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_typeHierarchyChange()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    checkIncrementalRecompile_typeHierarchyChange(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_typeHierarchyChange(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_defaultMethod()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    // Tests that default method on superclasses are correctly constructed
+    checkIncrementalRecompile_defaultMethod(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_defaultMethod(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_devirtualizeUnchangedJso()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    // Tests that a JSO calls through interfaces are correctly devirtualized when compiling per file
+    // and the JSOs nor their single impl interfaces are not stale.
+    checkIncrementalRecompile_devirtualizeUnchangedJso(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_devirtualizeUnchangedJso(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_devirtualizeString()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    // Tests that String calls through interfaces are correctly devirtualized when compiling per
+    // file and neither String nor CharSequence interface are stale.
+    checkIncrementalRecompile_devirtualizeString(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_devirtualizeString(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_devirtualizeComparable()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    // Tests that Doublecalls through interfaces are correctly devirtualized when compiling per
+    // file and neither String nor CharSequence interface are stale.
+    checkIncrementalRecompile_devirtualizeComparable(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_devirtualizeComparable(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_multipleClassGenerator()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    // Tests that a Generated type that is not directly referenced from the rebound GWT.create()
+    // call is still marked stale, regenerated, retraversed and output as JS.
+    checkIncrementalRecompile_multipleClassGenerator(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_multipleClassGenerator(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_singleJsoIntfDispatchChange()
+      throws UnableToCompleteException,
+      IOException, InterruptedException {
+    // Not testing recompile equality with Pretty/Obfuscated output since the JsIncrementalNamer's
+    // behavior is order dependent, and while still correct, will come out different in a recompile
+    // with this change versus a from scratch compile with this change.
+    checkIncrementalRecompile_singleJsoIntfDispatchChange(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_dualJsoIntfDispatchChange() throws UnableToCompleteException,
+      IOException, InterruptedException {
+    // Not testing recompile equality with Pretty/Obfuscated output since the JsIncrementalNamer's
+    // behavior is order dependent, and while still correct, will come out different in a recompile
+    // with this change versus a from scratch compile with this change.
+    checkIncrementalRecompile_dualJsoIntfDispatchChange(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_generatorInputResourceChange() throws IOException,
+      UnableToCompleteException, InterruptedException {
+    // Not testing recompile equality with Pretty/Obfuscated output since the JsIncrementalNamer's
+    // behavior is order dependent, and while still correct, will come out different in a recompile
+    // with this change versus a from scratch compile with this change.
+    checkIncrementalRecompile_generatorInputResourceChange(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_invalidatedGeneratorOutputRerunsGenerator()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    // BarReferencesFoo Generator hasn't run yet.
+    assertEquals(0, BarReferencesFooGenerator.runCount);
+
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    List<MockResource> sharedResources =
+        Lists.newArrayList(barReferencesFooGeneratorModuleResource, generatorEntryPointResource);
+    JsOutputOption output = JsOutputOption.OBFUSCATED;
+
+    List<MockResource> originalResources = Lists.newArrayList(sharedResources);
+    originalResources.add(fooResource);
+
+    // Compile the app with original files, modify a file and do a per-file recompile.
+    MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();
+    File relinkApplicationDir = createTempDir();
+    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule", originalResources,
+        relinkMinimalRebuildCache, emptySet, output);
+
+    // BarReferencesFoo Generator has now been run once.
+    assertEquals(1, BarReferencesFooGenerator.runCount);
+
+    // Recompile with no changes, which should not trigger any Generator runs.
+    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule",
+        Lists.<MockResource>newArrayList(), relinkMinimalRebuildCache, emptySet, output);
+
+    // Since there were no changes BarReferencesFoo Generator was not run again.
+    assertEquals(1, BarReferencesFooGenerator.runCount);
+
+    // Recompile with a modified Foo class, which should invalidate Bar which was generated by a
+    // GWT.create() call in the entry point.
+    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule",
+        Lists.<MockResource>newArrayList(fooResource), relinkMinimalRebuildCache,
+        stringSet("com.foo.TestEntryPoint", "com.foo.Foo", "com.foo.Bar"), output);
+
+    // BarReferencesFoo Generator was run again.
+    assertEquals(2, BarReferencesFooGenerator.runCount);
+  }
+
+  public void testIncrementalRecompile_invalidatedGeneratorOutputRerunsCascadedGenerators()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    // Generators haven't run yet.
+    assertEquals(0, CauseStringRebindGenerator.runCount);
+    assertEquals(0, CauseShortRebindGenerator.runCount);
+    assertEquals(0, FooResourceGenerator.runCount);
+
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    List<MockResource> sharedResources = Lists.newArrayList(cascadingGeneratorModuleResource,
+        generatorEntryPointResource, classNameToGenerateResource);
+    JsOutputOption output = JsOutputOption.OBFUSCATED;
+
+    List<MockResource> originalResources = Lists.newArrayList(sharedResources);
+
+    // Compile the app with original files.
+    MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();
+    File relinkApplicationDir = createTempDir();
+    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule", originalResources,
+        relinkMinimalRebuildCache, emptySet, output);
+
+    // Generators have now been run once.
+    assertEquals(1, CauseStringRebindGenerator.runCount);
+    assertEquals(1, CauseShortRebindGenerator.runCount);
+    assertEquals(1, FooResourceGenerator.runCount);
+
+    // Recompile with no changes, which should not trigger any Generator runs.
+    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule",
+        Lists.<MockResource>newArrayList(), relinkMinimalRebuildCache, emptySet, output);
+
+    // Since there were no changes Generators were not run again.
+    assertEquals(1, CauseStringRebindGenerator.runCount);
+    assertEquals(1, CauseShortRebindGenerator.runCount);
+    assertEquals(1, FooResourceGenerator.runCount);
+
+    // Recompile with a modified resource, which should invalidate the output of the
+    // FooResourceGenerator and cascade the invalidate the Generators that triggered
+    // FooResourceGenerator.
+    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule",
+        Lists.<MockResource>newArrayList(modifiedClassNameToGenerateResource),
+        relinkMinimalRebuildCache, stringSet("com.foo.TestEntryPoint", "com.foo.Baz$InnerBaz",
+            "com.foo.Bar", "com.foo.HasCustomContent", "com.foo.FooReplacementTwo"), output);
+
+    // Generators were run again.
+    assertEquals(2, CauseStringRebindGenerator.runCount);
+    assertEquals(2, CauseShortRebindGenerator.runCount);
+    assertEquals(2, FooResourceGenerator.runCount);
+  }
+
+  public void testIncrementalRecompile_carriesOverGeneratorArtifacts()
+      throws UnableToCompleteException,
+      IOException, InterruptedException {
+    // Foo Generator hasn't run yet.
+    assertEquals(0, FooResourceGenerator.runCount);
+
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    List<MockResource> sharedResources = Lists.newArrayList(resourceReadingGeneratorModuleResource,
+        referencesBarAndGeneratorEntryPointResource, classNameToGenerateResource,
+        barReferencesFooResource);
+    JsOutputOption output = JsOutputOption.OBFUSCATED;
+
+    List<MockResource> originalResources = Lists.newArrayList(sharedResources);
+    originalResources.add(fooResource);
+
+    // Compile the app with original files.
+    MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();
+    File relinkApplicationDir = createTempDir();
+    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule", originalResources,
+        relinkMinimalRebuildCache, emptySet, output);
+
+    // Foo Generator has now been run once.
+    assertEquals(1, FooResourceGenerator.runCount);
+    // The bar.txt artifact was output.
+    File barFile = new File(relinkApplicationDir.getPath() + File.separator + "com.foo.SimpleModule"
+        + File.separator + "bar.txt");
+    assertTrue(barFile.exists());
+
+    // Recompile with just 1 file change, which should not trigger any Generator runs.
+    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule",
+        Lists.<MockResource> newArrayList(fooResource), relinkMinimalRebuildCache,
+        stringSet("com.foo.Foo", "com.foo.Bar"), output);
+
+    // Foo Generator was not run again.
+    assertEquals(1, FooResourceGenerator.runCount);
+    // But the bar.txt artifact was still output.
+    barFile = new File(relinkApplicationDir.getPath() + File.separator + "com.foo.SimpleModule"
+        + File.separator + "bar.txt");
+    assertTrue(barFile.exists());
+  }
+
+  /**
+   * Regression test for UnifyAST assertion failure problem in incremental SDM.
+   */
+  public void testIncrementalRecompile_unifyASTAssertionRegression()
+      throws UnableToCompleteException, IOException, InterruptedException {
+
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    List<MockResource> originalResources = Lists.newArrayList(helloEntryPointResource,
+        helloModuleResource);
+    JsOutputOption output = JsOutputOption.OBFUSCATED;
+
+    // Compile the app with original files.
+    MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();
+    File relinkApplicationDir = createTempDir();
+    compileToJs(compilerOptions, relinkApplicationDir, "com.foo.Hello",
+        originalResources, relinkMinimalRebuildCache, emptySet, output);
+  }
 
   public void testIncrementalRecompile_ctorReferenceChange()
       throws InterruptedException, IOException, UnableToCompleteException {
@@ -3056,7 +3056,7 @@ public class CompilerTest extends ArgProcessorTestBase {
       JsOutputOption output) throws IOException, UnableToCompleteException, InterruptedException {
 
     PrintWriterTreeLogger logger = new PrintWriterTreeLogger();
-    logger.setMaxDetail(TreeLogger.WARN);
+    logger.setMaxDetail(TreeLogger.ERROR);
     return compileToJs(logger, compilerOptions, applicationDir, moduleName, applicationResources,
         minimalRebuildCache, expectedProcessedStaleTypeNames, output);
   }

@@ -330,15 +330,7 @@ public class MinimalRebuildCache implements Serializable {
      * we don't want to artificially traverse them and unnecessarily reveal dependency problems. And
      * if they have become reachable, since they're missing JS, they will already be fully traversed
      * when seen in Unify.
-     *
-     * However, directly modified types must always remain stale regardless of reachability.
-     * Types with no runtime type ID (e.g. classes used only for static method calls) are not
-     * tracked by RapidTypeAnalyzer and would be incorrectly filtered out, causing their cached JS
-     * to never be cleared and stale output to be reused.
      */
-//    Set<String> filteredStaleTypeNames = filterUnreachableTypeNames(staleTypeNames);
-//    filteredStaleTypeNames.addAll(modifiedTypeNames);
-//    copyCollection(filteredStaleTypeNames, staleTypeNames);
     copyCollection(filterUnreachableTypeNames(staleTypeNames), staleTypeNames);
 
     // These log lines can be expensive.

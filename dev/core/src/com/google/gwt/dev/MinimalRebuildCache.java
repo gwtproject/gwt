@@ -18,7 +18,6 @@ import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.core.ext.linker.StatementRanges;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.javac.CompilationUnit;
-import com.google.gwt.dev.javac.CompiledClass;
 import com.google.gwt.dev.javac.GeneratedUnit;
 import com.google.gwt.dev.javac.Shared;
 import com.google.gwt.dev.jjs.JsSourceMap;
@@ -30,7 +29,6 @@ import com.google.gwt.dev.jjs.impl.RapidTypeAnalyzer;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.IntTypeMapper;
 import com.google.gwt.dev.js.JsIncrementalNamer.JsIncrementalNamerState;
 import com.google.gwt.dev.resource.Resource;
-import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Objects;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
@@ -660,23 +658,19 @@ public class MinimalRebuildCache implements Serializable {
     compilationUnitTypeNameByNestedTypeName.put(nestedTypeName, compilationUnitTypeName);
   }
 
-  public void recordNestedTypeNamesPerType(CompilationUnit compilationUnit) {
+  public void recordNestedTypeNamesPerType(CompilationUnit compilationUnit, List<JDeclaredType> types) {
     // For the root type in the compilation unit the source name and binary name are the same.
     String compilationUnitTypeName = compilationUnit.getTypeName();
 
-    // Clean up the reverse map for old nested type names before removing them.
+    // Clean up the reverse map for old nested type names, then clear all entries
     Collection<String> oldNestedTypeNames = nestedTypeNamesByUnitTypeName.get(compilationUnitTypeName);
     for (String oldNestedTypeName : oldNestedTypeNames) {
       compilationUnitTypeNameByNestedTypeName.remove(oldNestedTypeName);
     }
     nestedTypeNamesByUnitTypeName.removeAll(compilationUnitTypeName);
-    for (CompiledClass compiledClass : compilationUnit.getCompiledClasses()) {
-      String nestedTypeName = InternalName.toBinaryName(compiledClass.getInternalName());
-      recordNestedTypeName(compilationUnitTypeName, nestedTypeName);
-    }
-    // Also record synthetic types created at the GWT AST level (e.g. lambda and method reference
-    // inner classes) that don't have corresponding CompiledClass entries from JDT.
-    for (JDeclaredType type : compilationUnit.getTypes()) {
+
+    // Record all GWT types that were derived from that compilation unit
+    for (JDeclaredType type : types) {
       String typeName = type.getName();
       if (!nestedTypeNamesByUnitTypeName.containsEntry(compilationUnitTypeName, typeName)) {
         recordNestedTypeName(compilationUnitTypeName, typeName);

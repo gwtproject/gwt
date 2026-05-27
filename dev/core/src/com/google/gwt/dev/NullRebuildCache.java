@@ -20,11 +20,13 @@ import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.javac.CompilationUnit;
 import com.google.gwt.dev.javac.GeneratedUnit;
 import com.google.gwt.dev.jjs.JsSourceMap;
+import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JTypeOracle;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.IntTypeMapper;
 import com.google.gwt.dev.js.JsIncrementalNamer.JsIncrementalNamerState;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -176,7 +178,7 @@ public class NullRebuildCache extends MinimalRebuildCache {
   }
 
   @Override
-  public void recordNestedTypeNamesPerType(CompilationUnit compilationUnit) {
+  public void recordNestedTypeNamesPerType(CompilationUnit compilationUnit, List<JDeclaredType> types) {
   }
 
   @Override

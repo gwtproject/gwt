@@ -2933,10 +2933,8 @@ public class CompilerTest extends ArgProcessorTestBase {
     // Compile the app with original files, modify a file and do a per-file recompile.
     MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();
     File relinkApplicationDir = createTempDir();
-    System.out.println("--- compile #1: original from-scratch ---");
     String originalAppFromScratchJs = compileToJs(compilerOptions, relinkApplicationDir, moduleName,
         originalResources, relinkMinimalRebuildCache, emptySet, output);
-    System.out.println("--- compile #2: incremental recompile ---");
     String modifiedAppRelinkedJs = compileToJs(compilerOptions, relinkApplicationDir, moduleName,
         Lists.<MockResource> newArrayList(modifiedResource), relinkMinimalRebuildCache,
         expectedStaleTypeNamesOnModify, output);
@@ -2944,7 +2942,6 @@ public class CompilerTest extends ArgProcessorTestBase {
     // Compile the app from scratch with the modified file.
     MinimalRebuildCache fromScratchMinimalRebuildCache = new MinimalRebuildCache();
     File fromScratchApplicationDir = createTempDir();
-    System.out.println("--- compile #3: modified from-scratch ---");
     String modifiedAppFromScratchJs = compileToJs(compilerOptions, fromScratchApplicationDir,
         moduleName, modifiedResources, fromScratchMinimalRebuildCache, emptySet, output);
 

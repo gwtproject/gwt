@@ -23,6 +23,7 @@ import com.google.gwt.i18n.server.Message;
  */
 public class FullyQualifiedMethodNameKeyGenerator implements KeyGenerator {
 
+  @Override
   public String generateKey(Message msg) {
     return msg.getMessageInterface().getQualifiedName() + "."
         + msg.getMethodName();

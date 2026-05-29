@@ -49,6 +49,7 @@ public class DOM {
       super(listener);
     }
 
+    @Override
     public void onPreviewNativeEvent(NativePreviewEvent event) {
       // The legacy EventHandler should only fire if it is on the top of the
       // stack (ie. the last one added).

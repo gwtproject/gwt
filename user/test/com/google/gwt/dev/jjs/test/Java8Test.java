@@ -222,7 +222,8 @@ public class Java8Test extends GWTTestCase {
   public void testLambdaCaptureLocalWithInnerClass() {
     int x = 10;
     Lambda<Integer> l = (a,b) -> new Lambda<Integer>() {
-      @Override public Integer run(int a, int b) {
+      @Override
+      public Integer run(int a, int b) {
         int t = x;
         return t + a + b;
       }
@@ -238,7 +239,8 @@ public class Java8Test extends GWTTestCase {
   public void testLambdaCaptureLocalAndFieldWithInnerClass() {
     int x = 10;
     Lambda<Integer> l = (a,b) -> new Lambda<Integer>() {
-      @Override public Integer run(int j, int k) {
+      @Override
+      public Integer run(int j, int k) {
         int t = x;
         int s = local;
         return t + s + a + b;

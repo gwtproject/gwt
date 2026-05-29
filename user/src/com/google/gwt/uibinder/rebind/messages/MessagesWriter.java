@@ -366,6 +366,7 @@ public class MessagesWriter {
   private Collection<XMLElement> getAttributeMessageChildren(
       final XMLElement elem) throws UnableToCompleteException {
     return elem.consumeChildElements(new XMLElement.Interpreter<Boolean>() {
+      @Override
       public Boolean interpretElement(XMLElement child)
           throws UnableToCompleteException {
         if (isAttributeMessage(child)) {

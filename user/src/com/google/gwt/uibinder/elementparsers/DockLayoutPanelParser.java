@@ -61,6 +61,7 @@ public class DockLayoutPanelParser implements ElementParser {
     DOCK_NAMES.put("center", "add");
   }
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
     // Generate instantiation (requires a 'unit' ctor param).

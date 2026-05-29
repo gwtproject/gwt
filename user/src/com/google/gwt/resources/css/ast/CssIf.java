@@ -38,6 +38,7 @@ public class CssIf extends CssNode implements CssSubstitution, HasNodes {
     return expression;
   }
 
+  @Override
   public List<CssNode> getNodes() {
     return nodes;
   }
@@ -78,6 +79,7 @@ public class CssIf extends CssNode implements CssSubstitution, HasNodes {
     this.propertyValues = propertyValues;
   }
 
+  @Override
   public void traverse(CssVisitor visitor, Context context) {
     if (visitor.visit(this, context)) {
       visitor.acceptWithInsertRemove(nodes);

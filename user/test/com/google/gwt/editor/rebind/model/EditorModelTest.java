@@ -96,6 +96,18 @@ public class EditorModelTest extends TestCase {
     }
   }
 
+  private static class OverrideStrippedJavaResource  extends RealJavaResource {
+
+    public OverrideStrippedJavaResource(Class<?> clazz) {
+      super(clazz);
+    }
+
+    @Override
+    public CharSequence getContent() {
+      return super.getContent().toString().replace("@Override", "");
+    }
+  }
+
   private static TreeLogger createCompileLogger() {
     PrintWriterTreeLogger logger = new PrintWriterTreeLogger(new PrintWriter(
         System.err, true));
@@ -967,7 +979,7 @@ public class EditorModelTest extends TestCase {
         new EmptyMockJavaResource(Iterable.class),
         new RealJavaResource(LeafValueEditor.class),
         new EmptyMockJavaResource(RequestFactory.class),
-        new RealJavaResource(RequestFactoryEditorDriver.class),
+        new OverrideStrippedJavaResource(RequestFactoryEditorDriver.class),
         new EmptyMockJavaResource(Request.class),
         new EmptyMockJavaResource(RequestContext.class),
         new RealJavaResource(SimpleEditor.class),

@@ -170,6 +170,7 @@ public class WidgetCollection implements Iterable<Widget> {
    * 
    * @return an iterator
    */
+  @Override
   public Iterator<Widget> iterator() {
     return new WidgetIterator();
   }

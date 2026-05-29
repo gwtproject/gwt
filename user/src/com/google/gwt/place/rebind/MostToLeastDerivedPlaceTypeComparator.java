@@ -25,6 +25,7 @@ import java.util.Comparator;
  * sorting.
  */
 class MostToLeastDerivedPlaceTypeComparator implements Comparator<JClassType> {
+  @Override
   public int compare(JClassType o1, JClassType o2) {
     if (o1.equals(o2)) {
       return 0;

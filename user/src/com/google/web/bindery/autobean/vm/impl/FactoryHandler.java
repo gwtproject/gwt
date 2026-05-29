@@ -45,6 +45,7 @@ public class FactoryHandler implements InvocationHandler {
    * Handles both declared factory methods as well as the dynamic create
    * methods.
    */
+  @Override
   public Object invoke(Object proxy, Method method, Object[] args)
       throws Throwable {
 

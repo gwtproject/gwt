@@ -323,6 +323,7 @@ public class Image extends Widget implements SourcesLoadEvents, HasLoadHandlers,
        * handler.
        */
       syntheticEventCommand = new ScheduledCommand() {
+        @Override
         public void execute() {
           /*
            * The state has been replaced, or another load event is already
@@ -605,6 +606,7 @@ public class Image extends Widget implements SourcesLoadEvents, HasLoadHandlers,
     changeState(new UnclippedState(element));
   }
 
+  @Override
   public HandlerRegistration addClickHandler(ClickHandler handler) {
     return addHandler(handler, ClickEvent.getType());
   }
@@ -617,54 +619,67 @@ public class Image extends Widget implements SourcesLoadEvents, HasLoadHandlers,
     ListenerWrapper.WrappedClickListener.add(this, listener);
   }
 
+  @Override
   public HandlerRegistration addDoubleClickHandler(DoubleClickHandler handler) {
     return addHandler(handler, DoubleClickEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragEndHandler(DragEndHandler handler) {
     return addBitlessDomHandler(handler, DragEndEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragEnterHandler(DragEnterHandler handler) {
     return addBitlessDomHandler(handler, DragEnterEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragHandler(DragHandler handler) {
     return addBitlessDomHandler(handler, DragEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragLeaveHandler(DragLeaveHandler handler) {
     return addBitlessDomHandler(handler, DragLeaveEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragOverHandler(DragOverHandler handler) {
     return addBitlessDomHandler(handler, DragOverEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragStartHandler(DragStartHandler handler) {
     return addBitlessDomHandler(handler, DragStartEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDropHandler(DropHandler handler) {
     return addBitlessDomHandler(handler, DropEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addErrorHandler(ErrorHandler handler) {
     return addHandler(handler, ErrorEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addGestureChangeHandler(GestureChangeHandler handler) {
     return addDomHandler(handler, GestureChangeEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addGestureEndHandler(GestureEndHandler handler) {
     return addDomHandler(handler, GestureEndEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addGestureStartHandler(GestureStartHandler handler) {
     return addDomHandler(handler, GestureStartEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addLoadHandler(LoadHandler handler) {
     return addHandler(handler, LoadEvent.getType());
   }
@@ -678,6 +693,7 @@ public class Image extends Widget implements SourcesLoadEvents, HasLoadHandlers,
     ListenerWrapper.WrappedLoadListener.add(this, listener);
   }
 
+  @Override
   public HandlerRegistration addMouseDownHandler(MouseDownHandler handler) {
     return addDomHandler(handler, MouseDownEvent.getType());
   }
@@ -692,22 +708,27 @@ public class Image extends Widget implements SourcesLoadEvents, HasLoadHandlers,
     ListenerWrapper.WrappedMouseListener.add(this, listener);
   }
 
+  @Override
   public HandlerRegistration addMouseMoveHandler(MouseMoveHandler handler) {
     return addDomHandler(handler, MouseMoveEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addMouseOutHandler(MouseOutHandler handler) {
     return addDomHandler(handler, MouseOutEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addMouseOverHandler(MouseOverHandler handler) {
     return addDomHandler(handler, MouseOverEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addMouseUpHandler(MouseUpHandler handler) {
     return addDomHandler(handler, MouseUpEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addMouseWheelHandler(MouseWheelHandler handler) {
     return addDomHandler(handler, MouseWheelEvent.getType());
   }
@@ -720,18 +741,22 @@ public class Image extends Widget implements SourcesLoadEvents, HasLoadHandlers,
     ListenerWrapper.WrappedMouseWheelListener.add(this, listener);
   }
 
+  @Override
   public HandlerRegistration addTouchCancelHandler(TouchCancelHandler handler) {
     return addDomHandler(handler, TouchCancelEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addTouchEndHandler(TouchEndHandler handler) {
     return addDomHandler(handler, TouchEndEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addTouchMoveHandler(TouchMoveHandler handler) {
     return addDomHandler(handler, TouchMoveEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addTouchStartHandler(TouchStartHandler handler) {
     return addDomHandler(handler, TouchStartEvent.getType());
   }

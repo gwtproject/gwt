@@ -47,6 +47,7 @@ class NamedNodeMapImpl extends NodeListImpl implements NamedNodeMap {
    * @param name - the name of the item 
    * @return the item retrieved from the name
    */
+  @Override
   public Node getNamedItem(String name) {
     return NodeImpl.build(XMLParserImpl.getNamedItem(this.getJsObject(), name));
   }

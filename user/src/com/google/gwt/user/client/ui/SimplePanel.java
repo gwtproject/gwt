@@ -74,10 +74,12 @@ public class SimplePanel extends Panel implements HasOneWidget {
    *
    * @return the child widget, or <code>null</code> if none is present
    */
+  @Override
   public Widget getWidget() {
     return widget;
   }
 
+  @Override
   public Iterator<Widget> iterator() {
     // Return a simple iterator that enumerates the 0 or 1 elements in this
     // panel.
@@ -85,10 +87,12 @@ public class SimplePanel extends Panel implements HasOneWidget {
       boolean hasElement = widget != null;
       Widget returned = null;
 
+      @Override
       public boolean hasNext() {
         return hasElement;
       }
 
+      @Override
       public Widget next() {
         if (!hasElement || (widget == null)) {
           throw new NoSuchElementException();
@@ -97,6 +101,7 @@ public class SimplePanel extends Panel implements HasOneWidget {
         return (returned = widget);
       }
 
+      @Override
       public void remove() {
         if (returned != null) {
           SimplePanel.this.remove(returned);
@@ -125,6 +130,7 @@ public class SimplePanel extends Panel implements HasOneWidget {
     return true;
   }
 
+  @Override
   public void setWidget(IsWidget w) {
     setWidget(asWidgetOrNull(w));
   }
@@ -134,6 +140,7 @@ public class SimplePanel extends Panel implements HasOneWidget {
    *
    * @param w the panel's new widget, or <code>null</code> to clear the panel
    */
+  @Override
   public void setWidget(Widget w) {
     // Validate
     if (w == widget) {

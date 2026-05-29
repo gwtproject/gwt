@@ -39,6 +39,7 @@ class TypePaths {
      */
     TypePath getParent();
 
+    @Override
     String toString();
   }
 
@@ -47,6 +48,7 @@ class TypePaths {
     assert (arrayType != null);
 
     return new TypePaths.TypePath() {
+      @Override
       public TypePaths.TypePath getParent() {
         return parent;
       }
@@ -62,6 +64,7 @@ class TypePaths {
 
   static TypePaths.TypePath createFieldPath(final TypePaths.TypePath parent, final JField field) {
     return new TypePaths.TypePath() {
+      @Override
       public TypePaths.TypePath getParent() {
         return parent;
       }
@@ -81,6 +84,7 @@ class TypePaths {
     assert (type != null);
 
     return new TypePaths.TypePath() {
+      @Override
       public TypePaths.TypePath getParent() {
         return null;
       }
@@ -98,6 +102,7 @@ class TypePaths {
     assert (supertype != null);
 
     return new TypePaths.TypePath() {
+      @Override
       public TypePaths.TypePath getParent() {
         return parent;
       }
@@ -116,6 +121,7 @@ class TypePaths {
     assert (subtype != null);
 
     return new TypePaths.TypePath() {
+      @Override
       public TypePaths.TypePath getParent() {
         return parent;
       }
@@ -134,6 +140,7 @@ class TypePaths {
     assert (typeArg != null);
 
     return new TypePaths.TypePath() {
+      @Override
       public TypePaths.TypePath getParent() {
         return parent;
       }
@@ -152,6 +159,7 @@ class TypePaths {
     assert (typeParameter != null);
 
     return new TypePaths.TypePath() {
+      @Override
       public TypePaths.TypePath getParent() {
         return parent;
       }

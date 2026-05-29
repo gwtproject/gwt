@@ -61,7 +61,8 @@ public class JsExceptionTest extends ThrowableTestBase {
 
   private static Thrower wrapWithFinally(final Thrower thrower) {
     return new Thrower() {
-      @Override public void throwException() throws Throwable {
+      @Override
+      public void throwException() throws Throwable {
         try {
           thrower.throwException();
         } finally {

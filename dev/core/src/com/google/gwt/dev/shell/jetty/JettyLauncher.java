@@ -115,6 +115,7 @@ public class JettyLauncher extends ServletContainerLauncher {
     /**
      * Log an HTTP request/response to TreeLogger.
      */
+    @Override
     public void log(Request request, Response response) {
       int status = response.getStatus();
       if (status < 0) {

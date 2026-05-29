@@ -593,7 +593,8 @@ public class HashMap<K, V> implements Map<K, V>, Serializable {
       }
       Arrays.sort(idx, new Comparator<Integer>() {
           @SuppressWarnings({"rawtypes", "unchecked"})
-          @Override public int compare(final Integer o1, final Integer o2) {
+          @Override
+          public int compare(final Integer o1, final Integer o2) {
               Comparable c1 = (Comparable)(keys[o1]);
               Comparable c2 = (Comparable)(keys[o2]);
               if (c1 == null) {

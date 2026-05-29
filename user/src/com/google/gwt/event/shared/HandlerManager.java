@@ -114,6 +114,7 @@ public class HandlerManager implements HasHandlers {
    * 
    * @param event the event
    */
+  @Override
   public void fireEvent(GwtEvent<?> event) {
     // If it not live we should revive it.
     if (!event.isLive()) {

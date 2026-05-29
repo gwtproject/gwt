@@ -59,6 +59,7 @@ import java.util.TreeSet;
 public class InterfaceGenerator extends ToolBase {
 
   private static final Comparator<String> NAME_COMPARATOR = new Comparator<String>() {
+    @Override
     public int compare(String o1, String o2) {
       return o1.compareToIgnoreCase(o2);
     }

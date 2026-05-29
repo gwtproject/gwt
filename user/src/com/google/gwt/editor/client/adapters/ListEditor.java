@@ -65,10 +65,12 @@ public class ListEditor<T, E extends Editor<? super T>> implements
    * 
    * @return an {@link Editor} of type E
    */
+  @Override
   public E createEditorForTraversal() {
     return editorSource.createEditorForTraversal();
   }
 
+  @Override
   public void flush() {
     if (list != null) {
       list.flush();
@@ -118,16 +120,20 @@ public class ListEditor<T, E extends Editor<? super T>> implements
     return list;
   }
 
+  @Override
   public String getPathElement(E subEditor) {
     return "[" + list.getEditors().indexOf(subEditor) + "]";
   }
 
+  @Override
   public void onPropertyChange(String... paths) {
   }
 
+  @Override
   public void setDelegate(EditorDelegate<List<T>> delegate) {
   }
 
+  @Override
   public void setEditorChain(CompositeEditor.EditorChain<T, E> chain) {
     this.chain = chain;
   }
@@ -140,6 +146,7 @@ public class ListEditor<T, E extends Editor<? super T>> implements
    * 
    * @param value a List of data objects of type T
    */
+  @Override
   public void setValue(List<T> value) {
     if (list == null && value == null) {
       // fast exit

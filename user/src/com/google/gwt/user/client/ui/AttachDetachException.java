@@ -30,6 +30,7 @@ public class AttachDetachException extends UmbrellaException {
    * The singleton command used to attach widgets.
    */
   static final AttachDetachException.Command attachCommand = new AttachDetachException.Command() {
+    @Override
     public void execute(Widget w) {
       w.onAttach();
     }
@@ -39,6 +40,7 @@ public class AttachDetachException extends UmbrellaException {
    * The singleton command used to detach widgets.
    */
   static final AttachDetachException.Command detachCommand = new AttachDetachException.Command() {
+    @Override
     public void execute(Widget w) {
       w.onDetach();
     }

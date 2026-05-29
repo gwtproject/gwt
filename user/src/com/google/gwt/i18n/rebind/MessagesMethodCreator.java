@@ -116,6 +116,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
    * Implements {x,date...} references in MessageFormat.
    */
   private static class DateFormatter implements ValueFormatter {
+    @Override
     public boolean format(TreeLogger logger, GwtLocale locale,
         StringGenerator out, Map<String, String> formatArgs, String subformat,
         String argName, JType argType, Parameters params) {
@@ -183,6 +184,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
       }
     }
 
+    @Override
     public int compare(String a, String b) {
       String[] aSplit = a.split("\\|");
       String[] bSplit = b.split("\\|");
@@ -379,10 +381,12 @@ class MessagesMethodCreator extends AbstractMethodCreator {
       this.listArgNum = listArgNum;
     }
 
+    @Override
     public String getElement(String element) {
       return "arg" + listArgNum + "[" + element + "]";
     }
 
+    @Override
     public String getSize() {
       return "arg" + listArgNum + ".length";
     }
@@ -399,10 +403,12 @@ class MessagesMethodCreator extends AbstractMethodCreator {
       this.listArgNum = listArgNum;
     }
 
+    @Override
     public String getElement(String element) {
       return "arg" + listArgNum + ".get(" + element + ")";
     }
 
+    @Override
     public String getSize() {
       return "arg" + listArgNum + ".size()";
     }
@@ -414,6 +420,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
   private static class LocalDateTimeFormatter implements ValueFormatter {
     private static final String PREDEF = "predef:";
 
+    @Override
     public boolean format(TreeLogger logger,
         GwtLocale locale,
         StringGenerator out,
@@ -488,6 +495,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
    */
   private static class NumberFormatter implements ValueFormatter {
 
+    @Override
     public boolean format(TreeLogger logger,
         GwtLocale locale,
         StringGenerator out,
@@ -645,14 +653,17 @@ class MessagesMethodCreator extends AbstractMethodCreator {
       }
     }
 
+    @Override
     public void enablePluralOffsets() {
       enablePluralOffsets = true;
     }
 
+    @Override
     public int getCount() {
       return params.length;
     }
 
+    @Override
     public JParameter getParameter(int i) {
       if (i < 0 || i >= params.length) {
         return null;
@@ -661,10 +672,12 @@ class MessagesMethodCreator extends AbstractMethodCreator {
       return params[i];
     }
 
+    @Override
     public JParameter getParameter(String name) {
       return getParameter(getParameterIndex(name));
     }
 
+    @Override
     public String getParameterExpression(int i) {
       if (i < 0 || i >= params.length) {
         return null;
@@ -683,6 +696,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
       return argName;
     }
 
+    @Override
     public int getParameterIndex(String name) {
       for (int i = 0; i < params.length; ++i) {
         if (params[i].getName().equals(name)) {
@@ -887,6 +901,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
    */
   private static class TimeFormatter implements ValueFormatter {
 
+    @Override
     public boolean format(TreeLogger logger,
         GwtLocale locale,
         StringGenerator out,

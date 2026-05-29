@@ -37,6 +37,7 @@ class SimpleBeanHandler<T> implements InvocationHandler {
   /**
    * Delegates most work to {@link BeanMethod}.
    */
+  @Override
   public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
     for (BeanMethod type : BeanMethod.values()) {
       if (type.matches(this, method)) {

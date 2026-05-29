@@ -100,6 +100,7 @@ public class PopupImplMozilla extends PopupImpl {
       // rendered,
       // the PopupPanel becomes the highest element in the stacking order.
       Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+        @Override
         public void execute() {
           outerElem.getStyle().setOverflow(Overflow.AUTO);
         }

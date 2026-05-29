@@ -27,10 +27,12 @@ public final class Message0 extends Message {
     super(type, fmt, 0);
   }
 
+  @Override
   public TreeLogger branch(TreeLogger logger, Throwable caught) {
     return super.branch(logger, caught);
   }
 
+  @Override
   public void log(TreeLogger logger, Throwable caught) {
     super.log(logger, caught);
   }

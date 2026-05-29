@@ -34,6 +34,7 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConst
  */
 
 public class HasAlignmentParser implements ElementParser {
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
 

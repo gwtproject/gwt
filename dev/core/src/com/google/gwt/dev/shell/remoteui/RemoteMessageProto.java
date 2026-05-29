@@ -3,6 +3,7 @@
 
 package com.google.gwt.dev.shell.remoteui;
 
+@SuppressWarnings("MissingOverride")
 public final class RemoteMessageProto {
   private RemoteMessageProto() {}
   public static void registerAllExtensions(

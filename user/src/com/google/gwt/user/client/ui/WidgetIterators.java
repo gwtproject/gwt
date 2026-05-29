@@ -63,10 +63,12 @@ class WidgetIterators {
         }
       }
 
+      @Override
       public boolean hasNext() {
         return (index < contained.length);
       }
 
+      @Override
       public Widget next() {
         if (!hasNext()) {
           throw new NoSuchElementException();
@@ -77,6 +79,7 @@ class WidgetIterators {
         return w;
       }
 
+      @Override
       public void remove() {
         if (last < 0) {
           throw new IllegalStateException();

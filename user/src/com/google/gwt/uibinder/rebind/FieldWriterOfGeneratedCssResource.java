@@ -40,14 +40,17 @@ class FieldWriterOfGeneratedCssResource extends AbstractFieldWriter {
     this.css = css;
   }
 
+  @Override
   public JClassType getAssignableType() {
     return css.getExtendedInterface();
   }
 
+  @Override
   public JClassType getInstantiableType() {
     return null;
   }
 
+  @Override
   public String getQualifiedSourceName() {
     return css.getQualifiedSourceName();
   }

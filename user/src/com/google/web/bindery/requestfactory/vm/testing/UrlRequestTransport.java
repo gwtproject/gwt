@@ -122,6 +122,7 @@ public class UrlRequestTransport implements RequestTransport {
       } else if ("deflate".equalsIgnoreCase(encoding)) {
         in = new InflaterInputStream(in);
       } else if (encoding != null) {
+        in.close();
         receiver.onTransportFailure(new ServerFailure("Unknown server encoding " + encoding));
         return;
       }

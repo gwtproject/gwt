@@ -35,6 +35,7 @@ import com.google.web.bindery.requestfactory.server.ServiceInheritanceJreTest;
 import com.google.web.bindery.requestfactory.server.ServiceLocatorTest;
 import com.google.web.bindery.requestfactory.shared.impl.SimpleEntityProxyIdTest;
 import com.google.web.bindery.requestfactory.vm.impl.ClassComparatorTest;
+import com.google.web.bindery.requestfactory.vm.testing.UrlRequestTransportTest;
 
 import junit.framework.Test;
 import junit.framework.TestResult;
@@ -68,6 +69,7 @@ public class RequestFactoryJreSuite {
     suite.addTestSuite(ServiceInheritanceJreTest.class);
     suite.addTestSuite(ServiceLocatorTest.class);
     suite.addTestSuite(SimpleEntityProxyIdTest.class);
+    suite.addTestSuite(UrlRequestTransportTest.class);
 
     return suite;
   }

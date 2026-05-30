@@ -19,12 +19,13 @@ import com.google.web.bindery.autobean.shared.impl.StringQuoter;
 
 import junit.framework.TestCase;
 
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -33,31 +34,25 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class StringQuoterJreTest extends TestCase {
 
-  private static final String ISO8601_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSz";
-  private static final String RFC2822_PATTERN = "EEE, d MMM yyyy HH:mm:ss Z";
+  // All inputs below resolve to the same instant: 2009-02-13T23:31:30.123 UTC.
+  private static final Date EXPECTED = new Date(1234567890123L);
 
   public void testTryParseDateMillis() {
-    Date d = new Date(1234567890123L);
-    assertEquals(d, StringQuoter.tryParseDate(Long.toString(d.getTime())));
+    assertEquals(EXPECTED, StringQuoter.tryParseDate("1234567890123"));
   }
 
   public void testTryParseDateIso8601() {
-    SimpleDateFormat fmt = new SimpleDateFormat(ISO8601_PATTERN, Locale.getDefault());
-    Date d = new Date(1234567890123L);
-    assertEquals(d, StringQuoter.tryParseDate(fmt.format(d)));
+    assertEquals(EXPECTED, StringQuoter.tryParseDate("2009-02-13T23:31:30.123+0000"));
   }
 
-  public void testTryParseDateZuluSuffix() throws Exception {
-    SimpleDateFormat fmt = new SimpleDateFormat(ISO8601_PATTERN, Locale.getDefault());
-    Date expected = fmt.parse("2024-01-15T10:30:00.000+0000");
-    assertEquals(expected, StringQuoter.tryParseDate("2024-01-15T10:30:00.000Z"));
+  public void testTryParseDateZuluSuffix() {
+    assertEquals(EXPECTED, StringQuoter.tryParseDate("2009-02-13T23:31:30.123Z"));
   }
 
   public void testTryParseDateRfc2822() {
     // RFC 2822 has second resolution.
-    SimpleDateFormat fmt = new SimpleDateFormat(RFC2822_PATTERN, Locale.getDefault());
-    Date d = new Date(1234567890000L);
-    assertEquals(d, StringQuoter.tryParseDate(fmt.format(d)));
+    assertEquals(new Date(1234567890000L),
+        StringQuoter.tryParseDate("Fri, 13 Feb 2009 23:31:30 +0000"));
   }
 
   public void testTryParseDateUnparseable() {
@@ -67,45 +62,53 @@ public class StringQuoterJreTest extends TestCase {
   /**
    * SimpleDateFormat is not thread-safe; sharing a single instance across
    * request threads on the server produced either ParseExceptions (returned as
-   * null) or silently wrong Dates. Hammer tryParseDate from many threads and
-   * make sure every call returns the expected value.
+   * null), other exceptions (e.g. NumberFormatException), or silently wrong
+   * Dates. Hammer tryParseDate from many threads at once and make sure every
+   * call returns the expected value and no worker threw.
    */
   public void testTryParseDateConcurrent() throws Exception {
-    SimpleDateFormat fmt = new SimpleDateFormat(ISO8601_PATTERN, Locale.getDefault());
-    final Date expected = new Date(1234567890123L);
-    final String input = fmt.format(expected);
+    final String input = "2009-02-13T23:31:30.123+0000";
 
     final int threads = 16;
     final int perThread = 2000;
+    final CountDownLatch ready = new CountDownLatch(threads);
     final CountDownLatch start = new CountDownLatch(1);
     final AtomicInteger nulls = new AtomicInteger();
     final AtomicInteger wrong = new AtomicInteger();
     ExecutorService pool = Executors.newFixedThreadPool(threads);
     try {
+      List<Future<?>> futures = new ArrayList<Future<?>>();
       for (int i = 0; i < threads; i++) {
-        pool.submit(new Runnable() {
+        futures.add(pool.submit(new Runnable() {
           @Override
           public void run() {
+            ready.countDown();
             try {
-              start.await();
+              if (!start.await(60, TimeUnit.SECONDS)) {
+                throw new AssertionError("worker was not released in time");
+              }
             } catch (InterruptedException e) {
-              Thread.currentThread().interrupt();
-              return;
+              throw new RuntimeException(e);
             }
             for (int j = 0; j < perThread; j++) {
               Date r = StringQuoter.tryParseDate(input);
               if (r == null) {
                 nulls.incrementAndGet();
-              } else if (!expected.equals(r)) {
+              } else if (!EXPECTED.equals(r)) {
                 wrong.incrementAndGet();
               }
             }
           }
-        });
+        }));
       }
+      assertTrue("worker threads did not start in time", ready.await(60, TimeUnit.SECONDS));
       start.countDown();
-      pool.shutdown();
-      assertTrue("threads did not finish in time", pool.awaitTermination(60, TimeUnit.SECONDS));
+      // get() each worker so that any exception thrown inside run() (including
+      // an InterruptedException that would otherwise leave the work undone) is
+      // rethrown here and fails the test instead of being swallowed.
+      for (Future<?> f : futures) {
+        f.get(60, TimeUnit.SECONDS);
+      }
     } finally {
       pool.shutdownNow();
     }

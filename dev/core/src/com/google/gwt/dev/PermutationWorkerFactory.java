@@ -22,6 +22,7 @@ import com.google.gwt.dev.jjs.UnifiedAst;
 import com.google.gwt.dev.util.PersistenceBackedObject;
 import com.google.gwt.dev.util.log.perf.SimpleEvent;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -44,7 +45,7 @@ public abstract class PermutationWorkerFactory {
    */
   private static class Manager {
 
-    private static enum Result {
+    private enum Result {
       SUCCESS, FAIL, WORKER_DEATH
     }
 
@@ -248,14 +249,14 @@ public abstract class PermutationWorkerFactory {
     }
 
     // Create the workers.
-    List<PermutationWorker> workers = new ArrayList<PermutationWorker>();
+    List<PermutationWorker> workers = new ArrayList<>();
+    Throwable caught = null;
     try {
       createWorkers(logger, precompilation.getUnifiedAst(), work.size(), localWorkers, workers);
 
       // Get it done!
       Manager.run(logger, work, workers);
     } finally {
-      Throwable caught = null;
       for (PermutationWorker worker : workers) {
         try {
           worker.shutdown();
@@ -263,10 +264,10 @@ public abstract class PermutationWorkerFactory {
           caught = e;
         }
       }
-      if (caught != null) {
-        throw new RuntimeException(
-            "One of the workers threw an exception while shutting down", caught);
-      }
+    }
+    if (caught != null) {
+      throw new RuntimeException(
+          "One of the workers threw an exception while shutting down", caught);
     }
   }
 
@@ -295,7 +296,7 @@ public abstract class PermutationWorkerFactory {
       try {
         Class<? extends PermutationWorkerFactory> clazz = Class.forName(
             className).asSubclass(PermutationWorkerFactory.class);
-        PermutationWorkerFactory factory = clazz.newInstance();
+        PermutationWorkerFactory factory = clazz.getDeclaredConstructor().newInstance();
         mutableFactories.add(factory);
         if (logger.isLoggable(TreeLogger.SPAM)) {
           logger.log(TreeLogger.SPAM, "Added PermutationWorkerFactory "
@@ -307,16 +308,14 @@ public abstract class PermutationWorkerFactory {
       } catch (ClassNotFoundException e) {
         logger.log(TreeLogger.ERROR,
             "Unable to find PermutationWorkerFactory named " + className);
-      } catch (InstantiationException e) {
-        logger.log(TreeLogger.ERROR,
-            "Unable to instantiate PermutationWorkerFactory " + className, e);
-      } catch (IllegalAccessException e) {
+      } catch (InstantiationException | NoSuchMethodException | IllegalAccessException |
+               InvocationTargetException e) {
         logger.log(TreeLogger.ERROR,
             "Unable to instantiate PermutationWorkerFactory " + className, e);
       }
     }
 
-    if (mutableFactories.size() == 0) {
+    if (mutableFactories.isEmpty()) {
       logger.log(TreeLogger.ERROR,
           "No usable PermutationWorkerFactories available");
       throw new UnableToCompleteException();

@@ -23,6 +23,7 @@ import com.google.gwt.util.tools.shared.Md5Utils;
 import com.google.gwt.util.tools.shared.StringUtils;
 
 import java.lang.reflect.Method;
+import java.security.MessageDigest;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -115,8 +116,10 @@ public class XsrfProtectedServiceServlet
     String expectedToken = StringUtils.toHexString(
         Md5Utils.getMd5Digest(sessionCookie.getValue().getBytes()));
     XsrfToken xsrfToken = (XsrfToken) token;
+    String providedToken = xsrfToken.getToken();
 
-    if (!expectedToken.equals(xsrfToken.getToken())) {
+    if (providedToken == null || !MessageDigest.isEqual(
+        expectedToken.getBytes(), providedToken.getBytes())) {
       throw new RpcTokenException("Invalid XSRF token");
     }
   }

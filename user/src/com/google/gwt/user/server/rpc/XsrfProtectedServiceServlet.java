@@ -23,6 +23,7 @@ import com.google.gwt.util.tools.shared.Md5Utils;
 import com.google.gwt.util.tools.shared.StringUtils;
 
 import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 import javax.servlet.ServletException;
@@ -119,7 +120,8 @@ public class XsrfProtectedServiceServlet
     String providedToken = xsrfToken.getToken();
 
     if (providedToken == null || !MessageDigest.isEqual(
-        expectedToken.getBytes(), providedToken.getBytes())) {
+        expectedToken.getBytes(StandardCharsets.UTF_8),
+        providedToken.getBytes(StandardCharsets.UTF_8))) {
       throw new RpcTokenException("Invalid XSRF token");
     }
   }

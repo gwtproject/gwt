@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Google Inc.
+ * Copyright 2026 GWT Project Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 package com.google.gwt.emultest.java.io;
 
 import com.google.gwt.junit.client.GWTTestCase;
@@ -35,10 +34,6 @@ public class StringWriterTest extends GWTTestCase {
   protected void gwtSetUp() throws Exception {
     super.gwtSetUp();
     sw = new StringWriter();
-  }
-
-  public void testConstructor() {
-    assertTrue("Used in tests", true);
   }
 
   public void testClose() {

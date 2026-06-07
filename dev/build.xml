@@ -322,10 +322,11 @@
         <pathelement location="${gwt.root}/user/super/"/>
         <!-- CompilerTest compiles the hello sample. -->
         <pathelement location="${gwt.root}/samples/hello/src/main/java"/>
-        <!-- CompilerTest needs the dependecies to compile a project that uses UiBinder. -->
-	<pathelement location="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar"/>
+        <!-- CompilerTest needs the dependencies to compile a project that uses UiBinder. -->
+        <pathelement location="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar"/>
         <pathelement location="${gwt.tools.lib}/gss/2015-11-04/closure-stylesheets-library-20151104-rebased.jar"/>
-       <pathelement  location="${gwt.tools.lib}/jsinterop/jsinterop-annotations-2.0.0.jar"/>
+        <pathelement location="${gwt.tools.lib}/jsinterop/jsinterop-annotations-2.0.0.jar"/>
+        <pathelement location="${gwt.tools.lib}/apache/commons/commons-collections-3.2.2.jar"/>
       </extraclasspaths>
     </gwt.junit>
   </target>

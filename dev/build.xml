@@ -29,6 +29,7 @@
         <pathelement location="${javac.out}"/>
         <pathelement location="${alldeps.jar}"/>
         <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar"/>
+        <pathelement location="${gwt.tools.lib}/apache/commons/commons-collections-3.2.2.jar"/>
       </classpath>
     </gwt.javac>
     <gwt.javac srcdir="" destdir="${javac.junit.out}"
@@ -83,7 +84,6 @@
           <include name="tomcat/tomcat-servlet-api-8.0.28.jar"/>
           <include name="tomcat/tomcat-websocket-api-8.0.28.jar"/>
           <include name="tomcat/tomcat-annotations-api-8.0.28.jar"/>
-          <include name="apache/commons/commons-collections-3.2.2.jar"/>
           <!-- htmlunit dependencies not already included: BEGIN -->
           <include name="apache/http/httpclient-4.5.13.jar"/>
           <include name="apache/http/httpcore-4.4.13.jar"/>
@@ -152,8 +152,6 @@
           <zipfileset src="${gwt.tools.lib}/tomcat/tomcat-servlet-api-8.0.28.jar"/>
           <zipfileset src="${gwt.tools.lib}/tomcat/tomcat-websocket-api-8.0.28.jar"/>
           <zipfileset src="${gwt.tools.lib}/tomcat/tomcat-annotations-api-8.0.28.jar"/>
-          <zipfileset
-              src="${gwt.tools.lib}/apache/commons/commons-collections-3.2.2.jar"/>
           <!-- htmlunit dependencies not already included: BEGIN -->
           <zipfileset src="${gwt.tools.lib}/apache/http/httpclient-4.5.13.jar"/>
           <zipfileset src="${gwt.tools.lib}/apache/http/httpcore-4.4.13.jar"/>
@@ -220,8 +218,6 @@
         <pathelement location="${gwt.tools.lib}/objectweb/asm-9.6/asm-9.6.jar"/>
         <pathelement location="${gwt.tools.lib}/objectweb/asm-9.6/asm-commons-9.6.jar"/>
         <pathelement location="${gwt.tools.lib}/objectweb/asm-9.6/asm-util-9.6.jar"/>
-        <pathelement
-            location="${gwt.tools.lib}/apache/commons/commons-collections-3.2.2.jar"/>
         <fileset dir="${gwt.tools.lib}/eclipse/3.33.0">
           <include name="**/*.jar"/>
         </fileset>

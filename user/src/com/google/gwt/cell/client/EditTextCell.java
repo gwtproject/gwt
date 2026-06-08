@@ -84,7 +84,7 @@ public class EditTextCell extends
 
     @Override
     public boolean equals(Object o) {
-      if (!(o instanceof  ViewData)) {
+      if (!(o instanceof ViewData)) {
         return false;
       }
       ViewData vd = (ViewData) o;

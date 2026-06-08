@@ -137,6 +137,7 @@ public class JsExportTest extends GWTTestCase {
       namespace = "$global.woo.StaticInitializerStaticField.InterfaceWithField", name = "STATIC")
   private static native Object getStaticInitializerStaticFieldInterfaceStatic();
 
+  @SuppressWarnings("ImpossibleNullComparison")
   public void testClinit_staticMethod() {
     assertNotNull(getStaticInitializerStaticMethod());
   }

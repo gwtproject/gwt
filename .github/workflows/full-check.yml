@@ -1,4 +1,4 @@
-# Run all tests and builds all aspects of GWT using Java 11, 17, and 21. Runs
+# Run all tests and builds all aspects of GWT using Java 17, 21, and 25. Runs
 # nightly (plus or minus timzeones) on the main branch, and will also run right
 # away on a push to a release branch. Release zips are uploaded as part of the
 # build, though maven snapshots are not yet deployed.
@@ -36,7 +36,7 @@ jobs:
           repository: 'gwtproject/tools'
           path: 'tools'
       - name: Set up JDK ${{ matrix.java-version }}
-        # GWT requires Java 11+ to build
+        # GWT requires Java 17+ to build
         uses: actions/setup-java@v5
         with:
           java-version: ${{ matrix.java-version }}

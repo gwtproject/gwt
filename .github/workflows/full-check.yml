@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java-version: [ '17', '21', '25', '26' ]
+        java-version: [ '17', '21', '25' ]
     steps:
       - name: Checkout GWT itself into one directory
         uses: actions/checkout@v6

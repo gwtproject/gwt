@@ -48,20 +48,18 @@ public class RemoveUnnecessaryControlFlow {
 
   public static int exec(JProgram program, OptimizerContext optimizerCtx) {
     try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
-
       new RewriteUnnecessaryReturnsVisitor(optimizerCtx).accept(program);
 
       optimizerCtx.incOptimizationStep();
       return stats.getNumMods();
     }
-
   }
 
   private static class RewriteUnnecessaryReturnsVisitor extends JModVisitor {
     private final OptimizerContext optimizerCtx;
     private JMethod currentMethod;
 
-    public RewriteUnnecessaryReturnsVisitor(OptimizerContext optimizerCtx) {
+    private RewriteUnnecessaryReturnsVisitor(OptimizerContext optimizerCtx) {
       this.optimizerCtx = optimizerCtx;
     }
 
@@ -137,8 +135,9 @@ public class RemoveUnnecessaryControlFlow {
           }
           lastStmt = stmts.get(stmts.size() - 1);
         }
-        // Even if we already made a change, continue on, we could have an earlier return in a branch
-        // or a loop. None of these will remove the statement in question, so we don't need to iterate.
+        // Even if we already made a change, continue on, we could have an earlier return in a
+        // branch or a loop. None of these will remove the statement in question, so we don't need
+        // to iterate.
         if (lastStmt instanceof JBlock b) {
           updateReturns(containingMethod, b, ctx);
         } else if (lastStmt instanceof JIfStatement ifStmt) {

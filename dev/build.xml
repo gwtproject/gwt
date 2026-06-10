@@ -22,7 +22,7 @@
 
   <target name="compile.tests" depends="build, compile.emma.if.enabled, build.alldeps.jar"
           description="Compiles the test code for this project">
-    <gwt.javac srcdir="" destdir="${javac.junit.out}" release="17">
+    <gwt.javac srcdir="" destdir="${javac.junit.out}">
         <src path="core/src"/>
         <src path="core/test"/>
       <classpath>
@@ -197,7 +197,7 @@
           description="Validates that the standalone gwt-compiler project can build.">
     <mkdir dir="${javac.out}"/>
     <gwt.javac srcdir="core/super" excludes="com/google/gwt/dev/jjs/intrinsic/"/>
-    <gwt.javac srcdir="core/src" release="17">
+    <gwt.javac srcdir="core/src">
       <include name="com/google/gwt/core/ext/**"/>
       <include name="com/google/gwt/core/linker/**"/>
       <include name="com/google/gwt/dev/About.java"/>

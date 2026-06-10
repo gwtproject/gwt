@@ -1,4 +1,4 @@
-# Run all tests and builds all aspects of GWT using Java 17, 21, and 25. Runs
+# Run all tests and builds all aspects of GWT using Java 17, 21, 25, and 26. Runs
 # nightly (plus or minus timzeones) on the main branch, and will also run right
 # away on a push to a release branch. Release zips are uploaded as part of the
 # build, though maven snapshots are not yet deployed.
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java-version: [ '17', '21', '25' ]
+        java-version: [ '17', '21', '25', '26' ]
     steps:
       - name: Checkout GWT itself into one directory
         uses: actions/checkout@v6

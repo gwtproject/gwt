@@ -20,8 +20,19 @@
 (function($wnd, $doc){
   // Compute some codeserver urls so as the user does not need bookmarklets
   var hostName = $wnd.location.hostname;
-  var serverUrl = 'http://' + hostName + ':__SUPERDEV_PORT__';
   var module = '__MODULE_NAME__';
+
+  // The default Super Dev Mode server url. The user may override it (and retry)
+  // through the prompt shown by the error handler below; the override is kept
+  // for the session so the reload picks up the new server.
+  var serverUrlKey = '__gwt_sdm__server_url';
+  var defaultServerUrl = 'http://' + hostName + ':__SUPERDEV_PORT__';
+  var serverUrl = defaultServerUrl;
+  try {
+    serverUrl = $wnd.sessionStorage.getItem(serverUrlKey) || defaultServerUrl;
+  } catch (e) {
+    // sessionStorage may be unavailable; fall back to the default url.
+  }
   var nocacheUrl = serverUrl + '/recompile-requester/' + module;
 
   // Insert the superdevmode nocache script in the first position of the head
@@ -32,15 +43,22 @@
   // This means that we do not detect a non running SDM with IE8.
   if (devModeScript.addEventListener) {
     var callback = function() {
-      // Don't show the confirmation dialogue twice (multimodule)
+      // Don't show the prompt twice (multimodule)
       if (!$wnd.__gwt__sdm__confirmed &&
            (!$wnd.__gwt_sdm__recompiler || !$wnd.__gwt_sdm__recompiler.loaded)) {
         $wnd.__gwt__sdm__confirmed = true;
-        if ($wnd.confirm(
+        var newServerUrl = $wnd.prompt(
             "Couldn't load " +  module + " from Super Dev Mode\n" +
             "server at " + serverUrl + ".\n" +
             "Please make sure this server is ready.\n" +
-            "Do you want to try again?")) {
+            "Press OK to try again:",
+            serverUrl);
+        if (newServerUrl) {
+          try {
+            $wnd.sessionStorage.setItem(serverUrlKey, newServerUrl);
+          } catch (e) {
+            // Without storage the reload falls back to the default url.
+          }
           $wnd.location.reload();
         }
       }

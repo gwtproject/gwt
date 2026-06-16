@@ -27,12 +27,7 @@
   // for the session so the reload picks up the new server.
   var serverUrlKey = '__gwt_sdm__server_url';
   var defaultServerUrl = 'http://' + hostName + ':__SUPERDEV_PORT__';
-  var serverUrl = defaultServerUrl;
-  try {
-    serverUrl = $wnd.sessionStorage.getItem(serverUrlKey) || defaultServerUrl;
-  } catch (e) {
-    // sessionStorage may be unavailable; fall back to the default url.
-  }
+  var serverUrl = $wnd.sessionStorage.getItem(serverUrlKey) || defaultServerUrl;
   var nocacheUrl = serverUrl + '/recompile-requester/' + module;
 
   // Insert the superdevmode nocache script in the first position of the head
@@ -54,11 +49,7 @@
             "Press OK to try again:",
             serverUrl);
         if (newServerUrl) {
-          try {
-            $wnd.sessionStorage.setItem(serverUrlKey, newServerUrl);
-          } catch (e) {
-            // Without storage the reload falls back to the default url.
-          }
+          $wnd.sessionStorage.setItem(serverUrlKey, newServerUrl);
           $wnd.location.reload();
         }
       }

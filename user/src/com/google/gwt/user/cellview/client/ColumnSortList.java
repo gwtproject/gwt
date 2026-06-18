@@ -17,6 +17,7 @@ package com.google.gwt.user.cellview.client;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * An ordered list containing the sort history of {@link Column}s in a table.
@@ -67,7 +68,7 @@ public class ColumnSortList {
       }
 
       ColumnSortInfo other = (ColumnSortInfo) obj;
-      return equalsOrBothNull(getColumn(), other.getColumn())
+      return Objects.equals(getColumn(), other.getColumn())
           && isAscending() == other.isAscending();
     }
 
@@ -92,10 +93,6 @@ public class ColumnSortList {
      */
     public boolean isAscending() {
       return ascending;
-    }
-
-    private boolean equalsOrBothNull(Object a, Object b) {
-      return a == null ? b == null : a.equals(b);
     }
   }
 

@@ -3,7 +3,9 @@
 
 package com.google.gwt.dev.shell.remoteui;
 
-@SuppressWarnings("MissingOverride")
+import javax.annotation.processing.Generated;
+
+@Generated("remotemessage.proto")
 public final class RemoteMessageProto {
   private RemoteMessageProto() {}
   public static void registerAllExtensions(

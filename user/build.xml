@@ -228,6 +228,7 @@
               release="8"
               srcdir="${project.build}/jakarta-src"
               destdir="${javac.out}-jakarta"
+              errorprone.args="-XepDisableAllWarnings"
               excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java,**/junit/**">
         <src path="${project.build}/no-servlet-src" />
         <src path="super/com/google/gwt/emul/javaemul/internal" />

@@ -92,7 +92,7 @@ public abstract class PermutationWorkerFactory {
           // Record why I died.
           try {
             resultsQueue.put(threadDeathResult);
-          } catch (InterruptedException ignored) {
+          } catch (InterruptedException stillIgnored) {
           }
         }
       }

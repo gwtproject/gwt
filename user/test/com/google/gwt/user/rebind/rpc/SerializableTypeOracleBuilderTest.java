@@ -49,6 +49,8 @@ import com.google.gwt.user.rebind.rpc.testcases.client.NoSerializableTypes;
 import com.google.gwt.user.rebind.rpc.testcases.client.NotAllSubtypesAreSerializable;
 import com.google.gwt.user.rebind.rpc.testcases.client.ParameterizedTypeInList;
 import com.google.gwt.user.rebind.rpc.testcases.client.RawTypeInList;
+import com.google.gwt.user.rebind.rpc.testcases.client.RecursiveTypeGraphInstantiability;
+import com.google.gwt.user.rebind.rpc.testcases.client.SimplifiedRecursiveTypeGraphInstantiability;
 import com.google.gwt.user.rebind.rpc.testcases.client.SubclassUsedInArray;
 
 import junit.framework.TestCase;
@@ -1518,6 +1520,78 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
         new TypeInfo[] {
             new TypeInfo(makeSourceName(NotAllSubtypesAreSerializable.B.class.getName()), true),
             new TypeInfo(makeSourceName(NotAllSubtypesAreSerializable.D.class.getName()), true)};
+    validateSTO(sto, expected);
+  }
+
+  public void testInstantiabilityDetectionOnRecursiveTypeGraphStartingAtA()
+      throws UnableToCompleteException, NotFoundException {
+    TreeLogger logger = createLogger();
+    TypeOracle typeOracle = getTestTypeOracle();
+    JClassType a = typeOracle.getType(RecursiveTypeGraphInstantiability.A.class.getCanonicalName());
+    SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(logger, typeOracle);
+    stob.addRootType(logger, a);
+    SerializableTypeOracle sto = stob.build(logger);
+    assertTrue("Expected type info for B to be present and marked instantiable but found " + Arrays
+        .asList(getActualTypeInfo(sto)) + ".", Arrays.asList(getActualTypeInfo(sto)).contains(
+            new TypeInfo(makeSourceName(RecursiveTypeGraphInstantiability.B.class.getName()),
+                true)));
+    TypeInfo[] expected = new TypeInfo[] {
+        new TypeInfo(makeSourceName(RecursiveTypeGraphInstantiability.B.class.getName()), true),
+        new TypeInfo(makeSourceName(RecursiveTypeGraphInstantiability.C.class.getName()), true)};
+    validateSTO(sto, expected);
+  }
+
+  public void testInstantiabilityDetectionOnRecursiveTypeGraphStartingAtB()
+      throws UnableToCompleteException, NotFoundException {
+    TreeLogger logger = createLogger();
+    TypeOracle typeOracle = getTestTypeOracle();
+    JClassType b = typeOracle.getType(RecursiveTypeGraphInstantiability.B.class.getCanonicalName());
+    SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(logger, typeOracle);
+    stob.addRootType(logger, b);
+    SerializableTypeOracle sto = stob.build(logger);
+    assertTrue("Expected type info for B to be present and marked instantiable but found " + Arrays
+        .asList(getActualTypeInfo(sto)) + ".", Arrays.asList(getActualTypeInfo(sto)).contains(
+            new TypeInfo(makeSourceName(RecursiveTypeGraphInstantiability.B.class.getName()),
+                true)));
+    TypeInfo[] expected = new TypeInfo[] {
+        new TypeInfo(makeSourceName(RecursiveTypeGraphInstantiability.B.class.getName()), true),
+        new TypeInfo(makeSourceName(RecursiveTypeGraphInstantiability.C.class.getName()), true)};
+    validateSTO(sto, expected);
+  }
+
+  public void testInstantiabilityDetectionOnSimplifiedRecursiveTypeGraphStartingAtA()
+      throws UnableToCompleteException, NotFoundException {
+    TreeLogger logger = createLogger();
+    TypeOracle typeOracle = getTestTypeOracle();
+    JClassType a = typeOracle.getType(SimplifiedRecursiveTypeGraphInstantiability.A.class.getCanonicalName());
+    SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(logger, typeOracle);
+    stob.addRootType(logger, a);
+    SerializableTypeOracle sto = stob.build(logger);
+    assertTrue("Expected type info for B to be present and marked instantiable but found " + Arrays
+        .asList(getActualTypeInfo(sto)) + ".", Arrays.asList(getActualTypeInfo(sto)).contains(
+            new TypeInfo(makeSourceName(SimplifiedRecursiveTypeGraphInstantiability.B.class.getName()),
+                true)));
+    TypeInfo[] expected = new TypeInfo[] {
+        new TypeInfo(makeSourceName(SimplifiedRecursiveTypeGraphInstantiability.B.class.getName()), true),
+        new TypeInfo(makeSourceName(SimplifiedRecursiveTypeGraphInstantiability.C.class.getName()), true)};
+    validateSTO(sto, expected);
+  }
+
+  public void testInstantiabilityDetectionOnSimplifiedRecursiveTypeGraphStartingAtB()
+      throws UnableToCompleteException, NotFoundException {
+    TreeLogger logger = createLogger();
+    TypeOracle typeOracle = getTestTypeOracle();
+    JClassType b = typeOracle.getType(SimplifiedRecursiveTypeGraphInstantiability.B.class.getCanonicalName());
+    SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(logger, typeOracle);
+    stob.addRootType(logger, b);
+    SerializableTypeOracle sto = stob.build(logger);
+    assertTrue("Expected type info for B to be present and marked instantiable but found " + Arrays
+        .asList(getActualTypeInfo(sto)) + ".", Arrays.asList(getActualTypeInfo(sto)).contains(
+            new TypeInfo(makeSourceName(SimplifiedRecursiveTypeGraphInstantiability.B.class.getName()),
+                true)));
+    TypeInfo[] expected = new TypeInfo[] {
+        new TypeInfo(makeSourceName(SimplifiedRecursiveTypeGraphInstantiability.B.class.getName()), true),
+        new TypeInfo(makeSourceName(SimplifiedRecursiveTypeGraphInstantiability.C.class.getName()), true)};
     validateSTO(sto, expected);
   }
 

@@ -26,7 +26,7 @@ import junit.framework.Assert;
 public class DefaultExceptionAsserter extends Assert implements ExceptionAsserter {
 
   @GwtIncompatible
-  @Override
+  @SuppressWarnings("MissingOverride")
   public void assertException(ExpectedFailure annotation, Throwable actual) {
     assertAssignable(annotation.withType(), getExceptionClass(actual));
     assertMessageContains(annotation.withMessage(), getExceptionMessage(actual));

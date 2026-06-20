@@ -113,6 +113,7 @@ public abstract class FullCompileTestBase extends JJSTestBase {
 
   abstract protected void optimizeJava();
 
+  @Override
   protected CompilerContext provideCompilerContext() {
     CompilerContext compilerContext = new CompilerContext.Builder().build();
     compilerContext.getOptions().setSourceLevel(sourceLevel);

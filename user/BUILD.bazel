@@ -1,5 +1,8 @@
 # Description:
 #   subset of bazel rules used by j2cl.
+
+load("@rules_java//java:defs.bzl", "java_library")
+
 package(default_visibility = ["//visibility:public"])
 
 licenses(["notice"]) # Apache2
@@ -9,7 +12,7 @@ filegroup(
     srcs = glob([
         "super/com/google/gwt/emul/java/**/*.java",
         "super/com/google/gwt/emul/javax/**/*.java",
-        ]),
+    ], allow_empty=True),
 )
 
 filegroup(

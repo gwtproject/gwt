@@ -1,0 +1,3 @@
+module(name = "org_gwtproject_gwt")
+
+bazel_dep(name = "rules_java", version = "9.6.1")

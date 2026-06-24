@@ -309,7 +309,7 @@ public abstract class AbstractHasDataTestBase extends GWTTestCase {
   /**
    * A mutable number, so that we can modify the value from within anonymous classes.
    */
-  protected static final class Counter {
+  static final class Counter {
     private int number = 0;
 
     protected void increment() {

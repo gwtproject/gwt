@@ -140,7 +140,7 @@ public abstract class RequestFactoryEditorDelegate<P, E extends Editor<P>>
       return object;
     }
     if (object instanceof BaseProxy) {
-      @SuppressWarnings("unchecked")
+      // noinspection unchecked
       T toReturn = (T) request.edit((BaseProxy) object);
       return toReturn;
     }

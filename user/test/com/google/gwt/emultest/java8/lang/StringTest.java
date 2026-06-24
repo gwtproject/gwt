@@ -29,6 +29,7 @@ public class StringTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @SuppressWarnings("StringJoin")
   public void testJoin() {
     assertEquals("", String.join("", ""));
     assertEquals("", String.join(",", ""));

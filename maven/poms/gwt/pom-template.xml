@@ -19,7 +19,7 @@
     </licenses>
     <properties>
         <jetty.version>9.4.58.v20250814</jetty.version>
-        <asm.version>9.6</asm.version>
+        <asm.version>9.10.1</asm.version>
     </properties>
     <developers>
         <developer>

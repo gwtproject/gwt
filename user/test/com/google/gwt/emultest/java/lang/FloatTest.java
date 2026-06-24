@@ -22,7 +22,6 @@ import com.google.gwt.junit.client.GWTTestCase;
  * Unit tests for the Javascript emulation of the Float/float autoboxed
  * fundamental type.
  */
-@SuppressWarnings("FloatingPointLiteralPrecision")
 public class FloatTest extends GWTTestCase {
 
   @Override

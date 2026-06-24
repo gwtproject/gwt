@@ -64,12 +64,17 @@ import javax.validation.ConstraintViolation;
 public class EditorModelTest extends TestCase {
 
   /**
-   * Constructs an empty interface representation of a type.
+   * Constructs an (almost) empty interface representation of a type.
+   * A subset of methods might be added to avoid issues with {@code @Override}.
    */
   private static class EmptyMockJavaResource extends MockJavaResource {
     private final StringBuilder code = new StringBuilder();
 
     public EmptyMockJavaResource(Class<?> clazz) {
+      this(clazz, "");
+    }
+
+    public EmptyMockJavaResource(Class<?> clazz, String mockedBody) {
       super(clazz.getName());
 
       code.append("package ").append(clazz.getPackage().getName()).append(";\n");
@@ -87,24 +92,12 @@ public class EditorModelTest extends TestCase {
         code.append(">");
       }
 
-      code.append("{}\n");
+      code.append("{\n").append(mockedBody).append("\n}\n");
     }
 
     @Override
     public CharSequence getContent() {
       return code;
-    }
-  }
-
-  private static class OverrideStrippedJavaResource  extends RealJavaResource {
-
-    public OverrideStrippedJavaResource(Class<?> clazz) {
-      super(clazz);
-    }
-
-    @Override
-    public CharSequence getContent() {
-      return super.getContent().toString().replace("@Override", "");
     }
   }
 
@@ -967,7 +960,7 @@ public class EditorModelTest extends TestCase {
         new RealJavaResource(CompositeEditor.class),
         new EmptyMockJavaResource(ConstraintViolation.class),
         new RealJavaResource(Editor.class),
-        new EmptyMockJavaResource(EditorDriver.class),
+        new EmptyMockJavaResource(EditorDriver.class, "T flush()"),
         new RealJavaResource(EditorError.class),
         new EmptyMockJavaResource(EntityProxy.class),
         new EmptyMockJavaResource(EventBus.class),
@@ -979,7 +972,7 @@ public class EditorModelTest extends TestCase {
         new EmptyMockJavaResource(Iterable.class),
         new RealJavaResource(LeafValueEditor.class),
         new EmptyMockJavaResource(RequestFactory.class),
-        new OverrideStrippedJavaResource(RequestFactoryEditorDriver.class),
+        new RealJavaResource(RequestFactoryEditorDriver.class),
         new EmptyMockJavaResource(Request.class),
         new EmptyMockJavaResource(RequestContext.class),
         new RealJavaResource(SimpleEditor.class),

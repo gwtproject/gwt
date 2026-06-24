@@ -223,7 +223,10 @@
       <replace file="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/jakarta/AbstractRemoteServiceServlet.java" token="${line.separator}/**" value="import com.google.gwt.user.server.rpc.*;${line.separator}${line.separator}/**" />
       <replace file="${project.build}/jakarta-src/com/google/web/bindery/requestfactory/server/jakarta/RequestFactoryServlet.java" token="${line.separator}/**" value="import com.google.web.bindery.requestfactory.server.*;${line.separator}${line.separator}/**"/>
 
-      <!-- Compile a specific gwt-user jar just for jakarta, which will be only used then to produce gwt-servlet-jakarta.jar -->
+      <!--
+      Compile a specific gwt-user jar just for jakarta, which will be only used then to produce gwt-servlet-jakarta.jar
+      Do not print any Error Prone warnings, those are identical to the other gwt-user compilation.
+      -->
       <gwt.javac
               release="8"
               srcdir="${project.build}/jakarta-src"

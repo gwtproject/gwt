@@ -50,58 +50,98 @@ public class Level implements Serializable {
 
   private static class LevelConfig extends Level {
     @Override
-    public String getName() { return "CONFIG"; }
+    public String getName() { 
+      return "CONFIG"; 
+    }
+
     @Override
-    public int intValue() { return 700; }
+    public int intValue() { 
+      return 700; 
+    }
   }
 
   private static class LevelFine extends Level {
     @Override
-    public String getName() { return "FINE"; }
+    public String getName() {
+      return "FINE";
+    }
+
     @Override
-    public int intValue() { return 500; }
+    public int intValue() {
+      return 500;
+    }
   }
 
   private static class LevelFiner extends Level {
     @Override
-    public String getName() { return "FINER"; }
+    public String getName() {
+      return "FINER";
+    }
+
     @Override
-    public int intValue() { return 400; }
+    public int intValue() {
+      return 400;
+    }
   }
 
   private static class LevelFinest extends Level {
     @Override
-    public String getName() { return "FINEST"; }
+    public String getName() {
+      return "FINEST";
+    }
+
     @Override
-    public int intValue() { return 300; }
+    public int intValue() {
+      return 300;
+    }
   }
 
   private static class LevelInfo extends Level {
     @Override
-    public String getName() { return "INFO"; }
+    public String getName() {
+      return "INFO";
+    }
+
     @Override
-    public int intValue() { return 800; }
+    public int intValue() {
+      return 800;
+    }
   }
 
   private static class LevelOff extends Level {
     @Override
-    public String getName() { return "OFF"; }
+    public String getName() {
+      return "OFF";
+    }
+
     @Override
-    public int intValue() { return Integer.MAX_VALUE; }
+    public int intValue() {
+      return Integer.MAX_VALUE;
+    }
   }
 
   private static class LevelSevere extends Level {
     @Override
-    public String getName() { return "SEVERE"; }
+    public String getName() {
+      return "SEVERE";
+    }
+
     @Override
-    public int intValue() { return 1000; }
+    public int intValue() {
+      return 1000;
+    }
   }
 
   private static class LevelWarning extends Level {
     @Override
-    public String getName() { return "WARNING"; }
+    public String getName() {
+      return "WARNING";
+    }
+
     @Override
-    public int intValue() { return 900; }
+    public int intValue() {
+      return 900;
+    }
   }
 
   public static Level parse(String name) {

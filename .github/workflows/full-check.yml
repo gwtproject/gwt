@@ -1,4 +1,4 @@
-# Run all tests and builds all aspects of GWT using Java 17, 21, 25, and 26. Runs
+# Run all tests and builds all aspects of GWT using Java 17, 21, and 25. Runs
 # nightly (plus or minus timzeones) on the main branch, and will also run right
 # away on a push to a release branch. Release zips are uploaded as part of the
 # build, though maven snapshots are not yet deployed.

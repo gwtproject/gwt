@@ -36,7 +36,6 @@ public class RemoveUnnecessaryControlFlowTest extends OptimizerTestBase {
     optimize("void", "{foo();return;}").into("{foo();}");
     optimize("void", "foo();{return;}").into("foo();{}");
 
-    // We could also remove these, resulting in returning undefined.
     optimize("String", "return null;").noChange();
     optimize("String", "{return null;}").noChange();
   }

@@ -782,6 +782,7 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
     assertInvariants(map);
   }
 
+  @SuppressWarnings("SelfAssertion")
   public void testEqualsForEqualMap() {
     final Map<K, V> map;
     try {
@@ -841,6 +842,7 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
     assertFalse(map.equals(smallerMap));
   }
 
+  @SuppressWarnings("SelfAssertion")
   public void testEqualsForEmptyMap() {
     final Map<K, V> map;
     try {

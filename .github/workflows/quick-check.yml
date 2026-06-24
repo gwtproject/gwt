@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java-version: ['11', '17', '21', '22']
+        java-version: ['17', '21', '25']
     steps:
       - name: Checkout GWT itself into one directory
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 #v7.0.0
@@ -23,7 +23,7 @@ jobs:
           repository: 'gwtproject/tools'
           path: 'tools'
       - name: Set up JDK ${{ matrix.java-version }}
-        # GWT presently requires Java 11+ to build
+        # GWT presently requires Java 17+ to build
         uses: actions/setup-java@ad2b38190b15e4d6bdf0c97fb4fca8412226d287 #v5.3.0
         with:
           java-version: ${{ matrix.java-version }}

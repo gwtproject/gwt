@@ -960,7 +960,7 @@ public class EditorModelTest extends TestCase {
         new RealJavaResource(CompositeEditor.class),
         new EmptyMockJavaResource(ConstraintViolation.class),
         new RealJavaResource(Editor.class),
-        new EmptyMockJavaResource(EditorDriver.class, "T flush()"),
+        new EmptyMockJavaResource(EditorDriver.class, "T0 flush();"),
         new RealJavaResource(EditorError.class),
         new EmptyMockJavaResource(EntityProxy.class),
         new EmptyMockJavaResource(EventBus.class),

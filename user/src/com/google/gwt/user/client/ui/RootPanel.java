@@ -41,26 +41,6 @@ import java.util.Set;
 public class RootPanel extends AbsolutePanel {
 
   /**
-   * A default RootPanel implementation that wraps the body element.
-   */
-  private static class DefaultRootPanel extends RootPanel {
-
-    public DefaultRootPanel() {
-      super(getBodyElement());
-    }
-
-    @Override
-    protected void setWidgetPositionImpl(Widget w, int left, int top) {
-      // Account for the difference between absolute position and the
-      // body's positioning context.
-      left -= Document.get().getBodyOffsetLeft();
-      top -= Document.get().getBodyOffsetTop();
-
-      super.setWidgetPositionImpl(w, left, top);
-    }
-  }
-
-  /**
    * The singleton command used to detach widgets.
    */
   private static final AttachDetachException.Command maybeDetachCommand = new AttachDetachException.Command() {
@@ -203,7 +183,7 @@ public class RootPanel extends AbsolutePanel {
     // Create the panel and put it in the map.
     if (elem == null) {
       // 'null' means use document's body element.
-      rp = new DefaultRootPanel();
+      rp = new RootPanel(getBodyElement());
     } else {
       // Otherwise, wrap the existing element.
       rp = new RootPanel(elem);

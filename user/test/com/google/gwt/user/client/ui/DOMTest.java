@@ -146,8 +146,8 @@ public class DOMTest extends GWTTestCase {
     DOM.setStyleAttribute(elem, "margin", margin + "px");
 
     Document doc = Document.get();
-    DOM.setStyleAttribute(elem, "top", (top - doc.getBodyOffsetLeft()) + "px");
-    DOM.setStyleAttribute(elem, "left", (left - doc.getBodyOffsetTop()) + "px");
+    DOM.setStyleAttribute(elem, "top", top + "px");
+    DOM.setStyleAttribute(elem, "left", left + "px");
 
     delayTestFinish(1000);
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
@@ -190,9 +190,8 @@ public class DOMTest extends GWTTestCase {
     assertTrue(DOM.getElementPropertyInt(outer, "scrollTop") > 0);
     assertTrue(DOM.getElementPropertyInt(outer, "scrollLeft") > 0);
 
-    Document doc = Document.get();
-    assertEquals(doc.getBodyOffsetLeft(), DOM.getAbsoluteLeft(outer));
-    assertEquals(doc.getBodyOffsetTop(), DOM.getAbsoluteTop(outer));
+    assertEquals(0, DOM.getAbsoluteLeft(outer));
+    assertEquals(0, DOM.getAbsoluteTop(outer));
   }
 
   /**

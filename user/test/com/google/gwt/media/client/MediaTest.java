@@ -47,18 +47,10 @@ public abstract class MediaTest extends GWTTestCase {
     return (geckoVersion != -1) && (geckoVersion >= 1009001);
   }-*/;
 
-  static native boolean isFirefox40OrEarlier() /*-{
-    return @com.google.gwt.dom.client.DOMImplMozilla::isGecko2OrBefore()();
-  }-*/;
-
   public void disabled_testPreload() {
     final MediaBase media = getMedia();
     if (media == null) {
       return; // don't continue if not supported
-    }
-
-    if (isFirefox40OrEarlier()) {
-      return; // don't continue on older versions of Firefox.
     }
 
     String state = media.getPreload();

@@ -1270,46 +1270,27 @@ public class Document extends Node {
   }-*/;
 
   /**
-   * Returns the left offset between the absolute coordinate system and the
-   * body's positioning context. This method is useful for positioning children
-   * of the body element in absolute coordinates.
+   * This used to account for the difference between absolute position of elements
+   * and client coordinates of mouse events, but those are the same in modern browsers.
+   * Kept for compatibility.
    * 
-   * <p>
-   * For example, to position an element directly under the mouse cursor
-   * (assuming you are handling a mouse event), do the following:
-   * </p>
-   * 
-   * <pre>
-   * Event event;
-   * Document doc;
-   * DivElement child;  // assume absolutely-positioned child of the body
-   * 
-   * // Get the event location in absolute coordinates.
-   * int absX = event.getClientX() + Window.getScrollLeft();
-   * int absY = event.getClientY() + Window.getScrollTop();
-   * 
-   * // Position the child element, adjusting for the difference between the
-   * // absolute coordinate system and the body's positioning coordinates.
-   * child.getStyle().setPropertyPx("left", absX - doc.getBodyOffsetLeft());
-   * child.getStyle().setPropertyPx("top", absY - doc.getBodyOffsetTop());
-   * </pre>
-   * 
-   * @return the left offset of the body's positioning coordinate system
+   * @return 0
+   * @deprecated can be replaced with constant 0
    */
+  @Deprecated
   public final int getBodyOffsetLeft() {
-    return DOMImpl.impl.getBodyOffsetLeft(this);
+    return 0;
   }
 
   /**
-   * Returns the top offset between the absolute coordinate system and the
-   * body's positioning context. This method is useful for positioning children
-   * of the body element in absolute coordinates.
+   * Kept for compatibility, analogous to {@link #getBodyOffsetLeft`()}.
    * 
-   * @return the top offset of the body's positioning coordinate system
-   * @see #getBodyOffsetLeft()
+   * @return 0
+   * @deprecated can be replaced with constant 0
    */
+  @Deprecated
   public final int getBodyOffsetTop() {
-    return DOMImpl.impl.getBodyOffsetTop(this);
+    return 0;
   }
 
   /**

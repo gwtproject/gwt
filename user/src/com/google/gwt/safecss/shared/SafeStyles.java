@@ -130,11 +130,13 @@ public interface SafeStyles extends Serializable {
    * 
    * @param anObject the object to compare to
    */
+  @Override
   boolean equals(Object anObject);
 
   /**
    * Returns a hash code for this string. Must be equal to
    * asString().hashCode().
    */
+  @Override
   int hashCode();
 }

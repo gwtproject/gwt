@@ -48,6 +48,7 @@ public class HeaderPanel extends Panel implements RequiresResize {
    */
   private class WidgetProviderImpl implements WidgetProvider {
 
+    @Override
     public Widget get(int index) {
       switch (index) {
         case 0:
@@ -70,6 +71,7 @@ public class HeaderPanel extends Panel implements RequiresResize {
   private final Element headerContainer;
   private final ResizeLayoutPanel.Impl headerImpl = GWT.create(ResizeLayoutPanel.Impl.class);
   private final ScheduledCommand layoutCmd = new ScheduledCommand() {
+    @Override
     public void execute() {
       layoutScheduled = false;
       forceLayout();
@@ -86,6 +88,7 @@ public class HeaderPanel extends Panel implements RequiresResize {
 
     // Create a delegate to handle resize from the header and footer.
     ResizeLayoutPanel.Impl.Delegate resizeDelegate = new ResizeLayoutPanel.Impl.Delegate() {
+      @Override
       public void onResize() {
         scheduledLayout();
       }
@@ -158,6 +161,7 @@ public class HeaderPanel extends Panel implements RequiresResize {
     return header;
   }
 
+  @Override
   public Iterator<Widget> iterator() {
     return new FiniteWidgetIterator(new WidgetProviderImpl(), 3);
   }
@@ -177,6 +181,7 @@ public class HeaderPanel extends Panel implements RequiresResize {
     footerImpl.onDetach();
   }
 
+  @Override
   public void onResize() {
     // Handle the outer element resizing.
     scheduledLayout();

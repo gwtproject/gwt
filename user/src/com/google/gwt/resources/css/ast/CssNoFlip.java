@@ -25,6 +25,7 @@ import java.util.List;
 public class CssNoFlip extends CssNode implements HasNodes {
   private List<CssNode> nodes = new ArrayList<CssNode>();
 
+  @Override
   public List<CssNode> getNodes() {
     return nodes;
   }
@@ -34,6 +35,7 @@ public class CssNoFlip extends CssNode implements HasNodes {
     return true;
   }
 
+  @Override
   public void traverse(CssVisitor visitor, Context context) {
     if (visitor.visit(this, context)) {
       visitor.acceptWithInsertRemove(nodes);

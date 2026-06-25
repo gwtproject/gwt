@@ -55,6 +55,7 @@ class SafeUriString implements SafeUri {
   /**
    * {@inheritDoc}
    */
+  @Override
   @IsSafeUri
   public String asString() {
     return uri;

@@ -41,12 +41,14 @@ public class MockSimpleBeanEditorDriver<T, E extends Editor<T>> implements
   /**
    * A no-op method.
    */
+  @Override
   public void accept(EditorVisitor visitor) {
   }
 
   /**
    * Records <code>object</code>.
    */
+  @Override
   public void edit(T object) {
     this.object = object;
   }
@@ -54,6 +56,7 @@ public class MockSimpleBeanEditorDriver<T, E extends Editor<T>> implements
   /**
    * Returns <code>null</code> or the last value provided to {@link #edit}.
    */
+  @Override
   public T flush() {
     return object;
   }
@@ -69,6 +72,7 @@ public class MockSimpleBeanEditorDriver<T, E extends Editor<T>> implements
   /**
    * Returns an empty list.
    */
+  @Override
   public List<EditorError> getErrors() {
     return Collections.emptyList();
   }
@@ -83,6 +87,7 @@ public class MockSimpleBeanEditorDriver<T, E extends Editor<T>> implements
   /**
    * Returns <code>false</code>.
    */
+  @Override
   public boolean hasErrors() {
     return false;
   }
@@ -90,6 +95,7 @@ public class MockSimpleBeanEditorDriver<T, E extends Editor<T>> implements
   /**
    * Records <code>editor</code>.
    */
+  @Override
   public void initialize(E editor) {
     this.editor = editor;
   }
@@ -97,6 +103,7 @@ public class MockSimpleBeanEditorDriver<T, E extends Editor<T>> implements
   /**
    * Returns {@code false}.
    */
+  @Override
   public boolean isDirty() {
     return false;
   }
@@ -104,6 +111,7 @@ public class MockSimpleBeanEditorDriver<T, E extends Editor<T>> implements
   /**
    * A no-op method that always returns false.
    */
+  @Override
   public boolean setConstraintViolations(
       Iterable<ConstraintViolation<?>> violations) {
     return false;

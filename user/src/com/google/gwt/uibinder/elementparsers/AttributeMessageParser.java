@@ -29,6 +29,7 @@ import com.google.gwt.uibinder.rebind.XMLElement;
  */
 public class AttributeMessageParser implements ElementParser {
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
     writer.getMessages().consumeAndStoreMessageAttributesFor(elem);

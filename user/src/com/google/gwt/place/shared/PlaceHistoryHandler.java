@@ -36,15 +36,18 @@ public class PlaceHistoryHandler {
    * Default implementation of {@link Historian}, based on {@link History}.
    */
   public static class DefaultHistorian implements Historian {
+    @Override
     public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(
         ValueChangeHandler<String> valueChangeHandler) {
       return History.addValueChangeHandler(valueChangeHandler);
     }
 
+    @Override
     public String getToken() {
       return History.getToken();
     }
 
+    @Override
     public void newItem(String token, boolean issueEvent) {
       History.newItem(token, issueEvent);
     }
@@ -141,6 +144,7 @@ public class PlaceHistoryHandler {
 
     final HandlerRegistration placeReg =
         eventBus.addHandler(PlaceChangeEvent.TYPE, new PlaceChangeEvent.Handler() {
+          @Override
           public void onPlaceChange(PlaceChangeEvent event) {
             Place newPlace = event.getNewPlace();
             historian.newItem(tokenForPlace(newPlace), false);
@@ -149,6 +153,7 @@ public class PlaceHistoryHandler {
 
     final HandlerRegistration historyReg =
         historian.addValueChangeHandler(new ValueChangeHandler<String>() {
+          @Override
           public void onValueChange(ValueChangeEvent<String> event) {
             String token = event.getValue();
             handleHistoryToken(token);
@@ -156,6 +161,7 @@ public class PlaceHistoryHandler {
         });
 
     return new HandlerRegistration() {
+      @Override
       public void removeHandler() {
         PlaceHistoryHandler.this.defaultPlace = Place.NOWHERE;
         PlaceHistoryHandler.this.placeController = null;

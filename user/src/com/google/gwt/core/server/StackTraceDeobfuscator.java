@@ -57,6 +57,7 @@ public abstract class StackTraceDeobfuscator {
     final String basePath = symbolMapsPath.endsWith("/") ? symbolMapsPath : symbolMapsPath + "/";
     final ClassLoader classLoader = StackTraceDeobfuscator.class.getClassLoader();
     return new StackTraceDeobfuscator() {
+      @Override
       protected InputStream openInputStream(String fileName) throws IOException {
         String filePath = basePath + fileName;
         InputStream inputStream = classLoader.getResourceAsStream(filePath);
@@ -73,6 +74,7 @@ public abstract class StackTraceDeobfuscator {
    */
   public static StackTraceDeobfuscator fromFileSystem(final String symbolMapsDirectory) {
     return new StackTraceDeobfuscator() {
+      @Override
       protected InputStream openInputStream(String fileName) throws IOException {
         return new FileInputStream(new File(symbolMapsDirectory, fileName));
       }
@@ -84,6 +86,7 @@ public abstract class StackTraceDeobfuscator {
    */
   public static StackTraceDeobfuscator fromUrl(final URL urlPath) {
     return new StackTraceDeobfuscator() {
+      @Override
       protected InputStream openInputStream(String fileName) throws IOException {
         return new URL(urlPath, fileName).openStream();
       }

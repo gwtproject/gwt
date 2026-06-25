@@ -80,24 +80,29 @@ public abstract class Receiver<V> {
     Set<Violation> converted = new HashSet<Violation>();
     for (final ConstraintViolation<?> v : violations) {
       converted.add(new Violation() {
+        @Override
         public BaseProxy getInvalidProxy() {
           return (BaseProxy) v.getRootBean();
         }
 
+        @Override
         public String getMessage() {
           return v.getMessage();
         }
 
+        @Override
         public BaseProxy getOriginalProxy() {
           AutoBean<? extends BaseProxy> parent =
               AutoBeanUtils.getAutoBean(v.getRootBean()).getTag(Constants.PARENT_OBJECT);
           return parent == null ? null : parent.as();
         }
 
+        @Override
         public String getPath() {
           return v.getPropertyPath().toString();
         }
 
+        @Override
         public EntityProxyId<?> getProxyId() {
           return v.getRootBean() instanceof EntityProxy ? ((EntityProxy) v.getRootBean())
               .stableId() : null;

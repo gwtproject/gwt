@@ -61,6 +61,7 @@ public interface AlternateMessageSelector {
       this.warnIfMissing = warnIfMissing;
     }
 
+    @Override
     public int compareTo(AlternateForm o) {
       return name.compareTo(o.name);
     }

@@ -29,6 +29,7 @@ public class AbsolutePanelParser implements ElementParser {
 
   private static final String AT = "at";
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
 

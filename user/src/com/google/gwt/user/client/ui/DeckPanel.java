@@ -272,10 +272,12 @@ public class DeckPanel extends ComplexPanel implements HasAnimation,
     return getWidgetIndex(visibleWidget);
   }
 
+  @Override
   public void insert(IsWidget w, int beforeIndex) {
     insert(asWidgetOrNull(w), beforeIndex);
   }
 
+  @Override
   public void insert(Widget w, int beforeIndex) {
     Element container = createWidgetContainer();
     DOM.insertChild(getElement(), container, beforeIndex);
@@ -285,6 +287,7 @@ public class DeckPanel extends ComplexPanel implements HasAnimation,
     finishWidgetInitialization(container, w);
   }
 
+  @Override
   public boolean isAnimationEnabled() {
     return isAnimationEnabled;
   }
@@ -304,6 +307,7 @@ public class DeckPanel extends ComplexPanel implements HasAnimation,
     return removed;
   }
 
+  @Override
   public void setAnimationEnabled(boolean enable) {
     isAnimationEnabled = enable;
   }

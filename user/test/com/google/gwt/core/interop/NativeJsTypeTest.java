@@ -264,6 +264,7 @@ public class NativeJsTypeTest extends GWTTestCase {
   }
 
   static final class SomeFunction implements SomeFunctionInterface {
+    @Override
     public void m() {
     }
   }

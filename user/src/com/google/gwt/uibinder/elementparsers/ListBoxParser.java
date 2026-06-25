@@ -27,6 +27,7 @@ public class ListBoxParser implements ElementParser {
   
   private static final String ITEM_TAG = "item";
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
     // Parse children.

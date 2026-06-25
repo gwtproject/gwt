@@ -155,12 +155,14 @@ public class MessageFormatUtils {
     /**
      * @throws VisitorAbortException  
      */
+    @Override
     public void visit(ArgumentChunk argChunk) throws VisitorAbortException {
     }
 
     /**
      * @throws VisitorAbortException  
      */
+    @Override
     public void visit(StaticArgChunk staticArgChunk)
         throws VisitorAbortException {
     }
@@ -168,6 +170,7 @@ public class MessageFormatUtils {
     /**
      * @throws VisitorAbortException  
      */
+    @Override
     public void visit(StringChunk stringChunk)
         throws VisitorAbortException {
     }

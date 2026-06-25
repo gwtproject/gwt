@@ -33,6 +33,7 @@ public class PluralRuleAdapter implements AlternateMessageSelector {
     pluralForms = pluralRule.pluralForms();
   }
 
+  @Override
   public boolean isFormAcceptable(String form) {
     if (form.startsWith("=")) {
       return true;

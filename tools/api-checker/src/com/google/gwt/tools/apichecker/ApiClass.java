@@ -81,6 +81,7 @@ final class ApiClass implements Comparable<ApiClass>, ApiElement {
     isInstantiableApiClass = apiContainer.isInstantiableApiClass(classType);
   }
 
+  @Override
   public int compareTo(ApiClass other) {
     return getName().compareTo(other.getName());
   }
@@ -93,6 +94,7 @@ final class ApiClass implements Comparable<ApiClass>, ApiElement {
     return this.getName().equals(((ApiClass) o).getName());
   }
 
+  @Override
   public String getRelativeSignature() {
     return classType.getQualifiedSourceName();
   }

@@ -34,6 +34,7 @@ class ProcessingInstructionImpl extends NodeImpl implements
    * This function delegates to the native method <code>getData</code> in
    * XMLParserImpl.
    */
+  @Override
   public String getData() {
     return XMLParserImpl.getData(this.getJsObject());
   }
@@ -42,6 +43,7 @@ class ProcessingInstructionImpl extends NodeImpl implements
    * This function delegates to the native method <code>getTarget</code> in
    * XMLParserImpl.
    */
+  @Override
   public String getTarget() {
     return XMLParserImpl.getTarget(this.getJsObject());
   }
@@ -50,6 +52,7 @@ class ProcessingInstructionImpl extends NodeImpl implements
    * This function delegates to the native method <code>setData</code> in
    * XMLParserImpl.
    */
+  @Override
   public void setData(String data) {
     try {
       XMLParserImpl.setData(this.getJsObject(), data);

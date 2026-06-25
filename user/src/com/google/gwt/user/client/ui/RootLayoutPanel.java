@@ -64,6 +64,7 @@ public class RootLayoutPanel extends LayoutPanel {
 
   private RootLayoutPanel() {
     Window.addResizeHandler(new ResizeHandler() {
+      @Override
       public void onResize(ResizeEvent event) {
         RootLayoutPanel.this.onResize();
       }

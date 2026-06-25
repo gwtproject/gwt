@@ -38,6 +38,7 @@ public class DoubleRenderer extends AbstractRenderer<Double> {
   protected DoubleRenderer() {
   }
 
+  @Override
   public String render(Double object) {
     if (object == null) {
       return "";

@@ -66,6 +66,7 @@ class ShimHandler<T> implements InvocationHandler {
     return bean.getWrapped().hashCode();
   }
 
+  @Override
   public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
     method.setAccessible(true);
     Object toReturn;

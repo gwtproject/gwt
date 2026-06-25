@@ -38,11 +38,13 @@ public class CssNodeCloner extends CssVisitor {
     CssNodeCloner cloner = new CssNodeCloner();
     cloner.curentNodes.push(topContext);
     cloner.currentHasProperties = new HasProperties() {
+      @Override
       public List<CssProperty> getProperties() {
         return topProperties;
       }
     };
     cloner.currentHasSelectors = new HasSelectors() {
+      @Override
       public List<CssSelector> getSelectors() {
         return topSelectors;
       }

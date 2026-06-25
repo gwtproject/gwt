@@ -24,47 +24,59 @@ import org.w3c.dom.Element;
 public class DesignTimeUtilsStub implements DesignTimeUtils {
   public static final DesignTimeUtils EMPTY = new DesignTimeUtilsStub();
 
+  @Override
   public void addDeclarations(IndentedWriter w) {
   }
 
+  @Override
   public String getImplName(String implName) {
     return implName;
   }
 
+  @Override
   public String getPath(Element element) {
     return null;
   }
 
+  @Override
   public String getProvidedFactory(String typeName, String methodName,
       String args) {
     return null;
   }
 
+  @Override
   public String getProvidedField(String typeName, String fieldName) {
     return null;
   }
 
+  @Override
   public String getTemplateContent(String path) {
     return null;
   }
 
+  @Override
   public void handleUIObject(Statements writer, XMLElement elem,
       String fieldName) {
   }
 
+  @Override
   public boolean isDesignTime() {
     return false;
   }
 
+  @Override
   public void putAttribute(XMLElement elem, String name, String value) {
   }
 
+  @Override
   public void putAttribute(XMLElement elem, String name, String[] values) {
   }
 
+  @Override
   public void rememberPathForElements(Document doc) {
   }
 
+  @Override
   public void writeAttributes(Statements writer) {
   }
 }

@@ -43,9 +43,9 @@ jobs:
             TZ=America/Los_Angeles \
             ANT_OPTS=-Dfile.encoding=UTF8 \
             ANT_OPTS=-Xmx2g
-          ant clean compile.tests dist doc checkstyle apicheck
+          ant clean compile.tests dist doc checkstyle apicheck | tee log.txt
 
-      - name: Create pull request comments/annotations for checkstyle from the java 21 build, even on failure
+      - name: Create pull request comments/annotations for Checkstyle and ErrorProne from the java 21 build, even on failure
         if: ${{ always() && github.event_name == 'pull_request' && matrix.java-version == '21' }}
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -56,8 +56,9 @@ jobs:
           cd gwt
           for f in build/out/**/checkstyle*.xml ; do
             echo $f
-            reviewdog -f=checkstyle -filter-mode=diff_context -reporter=github-pr-annotations -level=info < $f
+            reviewdog -f=checkstyle -filter-mode=diff_context -reporter=github-pr-annotations -level=info < $f || true
           done
+          reviewdog -efm="    [javac] %f:%l: warning: %m" -filter-mode=diff_context -reporter=github-pr-annotations -level=info < log.txt || true
       - name: Upload checkstyle xml for manual review
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
         if: ${{ matrix.java-version == '21' }}

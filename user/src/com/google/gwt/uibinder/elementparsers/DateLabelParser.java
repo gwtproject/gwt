@@ -36,6 +36,7 @@ public class DateLabelParser implements ElementParser {
   static final String AT_MOST_ONE_SPECIFIED_TIME_ZONE = "May have at most one of timezone and timezoneOffset.";
   static final String NO_TIMEZONE_WITHOUT_SPECIFIED_FORMAT = "May not specify a time zone if no format is given.";
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
     boolean supportsTimeZone = hasDateTimeFormatAndTimeZoneConstructor(

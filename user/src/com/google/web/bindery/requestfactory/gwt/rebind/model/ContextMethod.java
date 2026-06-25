@@ -76,6 +76,7 @@ public class ContextMethod implements AcceptsModelVisitor, HasExtraTypes {
   private ContextMethod() {
   }
 
+  @Override
   public void accept(ModelVisitor visitor) {
     if (visitor.visit(this)) {
       for (RequestMethod method : getRequestMethods()) {
@@ -89,6 +90,7 @@ public class ContextMethod implements AcceptsModelVisitor, HasExtraTypes {
     return dialect;
   }
 
+  @Override
   public List<EntityProxyModel> getExtraTypes() {
     return Collections.unmodifiableList(extraTypes);
   }

@@ -41,6 +41,7 @@ public class ResettableEventBus extends EventBus {
     real = new TestableResettableEventBus(wrappedBus);
   }
 
+  @Override
   public <H extends EventHandler> com.google.gwt.event.shared.HandlerRegistration addHandler(
       GwtEvent.Type<H> type, H handler) {
     return wrap(addHandler((Event.Type<H>) type, handler));
@@ -51,6 +52,7 @@ public class ResettableEventBus extends EventBus {
     return real.addHandler(type, handler);
   }
 
+  @Override
   public <H extends EventHandler> com.google.gwt.event.shared.HandlerRegistration addHandlerToSource(
       GwtEvent.Type<H> type, Object source, H handler) {
     return wrap(addHandlerToSource((Event.Type<H>) type, source, handler));

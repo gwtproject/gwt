@@ -71,7 +71,8 @@ public class JavaScriptExceptionTest extends GWTTestCase {
 
   public void testObject() {
     Object o = new Object() {
-      @Override public String toString() {
+      @Override
+      public String toString() {
         return "myLameObject";
       }
     };

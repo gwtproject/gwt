@@ -531,6 +531,7 @@ public class CssProperty extends CssNode implements CssSubstitution {
     }
   }
 
+  @Override
   public void traverse(CssVisitor visitor, Context context) {
     visitor.visit(this, context);
     visitor.endVisit(this, context);

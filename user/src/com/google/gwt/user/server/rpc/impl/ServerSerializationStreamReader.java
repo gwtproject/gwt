@@ -27,7 +27,10 @@ import com.google.gwt.user.server.rpc.ServerCustomFieldSerializer;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
+import java.io.ObjectStreamClass;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -39,6 +42,7 @@ import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -799,7 +803,8 @@ public final class ServerSerializationStreamReader extends AbstractSerialization
         if (encodedData != null) {
           byte[] serializedData = Base64Utils.fromBase64(encodedData);
           ByteArrayInputStream baos = new ByteArrayInputStream(serializedData);
-          ObjectInputStream ois = new ObjectInputStream(baos);
+          ObjectInputStream ois =
+              new EnhancedFieldDeserializer(baos, instanceClass, clientFieldNames);
 
           int count = ois.readInt();
           for (int i = 0; i < count; i++) {
@@ -861,6 +866,70 @@ public final class ServerSerializationStreamReader extends AbstractSerialization
           superClass, superClass, resolvedTypes);
       deserializeImpl(SerializabilityUtil.hasServerCustomFieldSerializer(superClass), superClass,
           instance, expectedType, superParameterTypes, resolvedTypes);
+    }
+  }
+
+  /**
+   * Reads the Java-serialized blob that carries the server-only fields of an enhanced class.
+   * The blob is produced by the server but round-trips through the client, so on the way back it
+   * is fully attacker-controlled. {@code resolveClass} is restricted to the field types declared
+   * by the enhanced class (plus strings and boxed primitives), which keeps a tampered blob from
+   * instantiating arbitrary classes and triggering a Java deserialization gadget chain. See
+   * https://github.com/gwtproject/gwt/issues/9709.
+   */
+  private static final class EnhancedFieldDeserializer extends ObjectInputStream {
+    private final Set<Class<?>> allowedTypes = new HashSet<Class<?>>();
+
+    EnhancedFieldDeserializer(InputStream in, Class<?> enhancedClass, Set<String> clientFieldNames)
+        throws IOException {
+      super(in);
+      // Field names are written as strings, and primitive field values arrive boxed.
+      allowedTypes.add(String.class);
+      allowedTypes.add(Boolean.class);
+      allowedTypes.add(Byte.class);
+      allowedTypes.add(Character.class);
+      allowedTypes.add(Short.class);
+      allowedTypes.add(Integer.class);
+      allowedTypes.add(Long.class);
+      allowedTypes.add(Float.class);
+      allowedTypes.add(Double.class);
+      for (Field field : enhancedClass.getDeclaredFields()) {
+        if (!clientFieldNames.contains(field.getName())) {
+          allow(field.getType());
+        }
+      }
+    }
+
+    private void allow(Class<?> type) {
+      while (type.isArray()) {
+        type = type.getComponentType();
+      }
+      if (!type.isPrimitive()) {
+        allowedTypes.add(type);
+      }
+    }
+
+    @Override
+    protected Class<?> resolveClass(ObjectStreamClass desc)
+        throws IOException, ClassNotFoundException {
+      Class<?> clazz = super.resolveClass(desc);
+      Class<?> element = clazz;
+      while (element.isArray()) {
+        element = element.getComponentType();
+      }
+      if (element.isPrimitive()) {
+        return clazz;
+      }
+      // A serialized value pulls in descriptors for its concrete class and every superclass, so
+      // accept a class that is a declared field type, a subtype of one (the actual value), or a
+      // supertype of one (a base class in the value's hierarchy).
+      for (Class<?> allowed : allowedTypes) {
+        if (allowed.isAssignableFrom(element) || element.isAssignableFrom(allowed)) {
+          return clazz;
+        }
+      }
+      throw new InvalidClassException(clazz.getName(),
+          "not an allowed type for an enhanced class' server-only fields");
     }
   }
 

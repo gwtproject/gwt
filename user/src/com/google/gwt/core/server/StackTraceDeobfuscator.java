@@ -148,6 +148,10 @@ public abstract class StackTraceDeobfuscator {
 
   private static final Pattern JsniRefPattern = Pattern.compile("@?([^:]+)::([^(]+)(\\((.*)\\))?");
   private static final Pattern fragmentIdPattern = Pattern.compile(".*(\\d+)\\.js");
+  // A permutation strong name is a compiler-generated hash; the same character set is enforced on
+  // the RPC path in ServerSerializationStreamReader. It arrives here from the client-supplied
+  // X-GWT-Permutation header, so it must be constrained before it is used to build a file name.
+  private static final Pattern STRONG_NAME_PATTERN = Pattern.compile("[a-zA-Z0-9_]+");
   private static final int LINE_NUMBER_UNKNOWN = -1;
   private static final String SYMBOL_DATA_UNKNOWN = "";
 
@@ -344,6 +348,7 @@ public abstract class StackTraceDeobfuscator {
 
   protected InputStream getSourceMapInputStream(String permutationStrongName, int fragmentNumber)
       throws IOException {
+    checkStrongName(permutationStrongName);
     return openInputStream(permutationStrongName + "_sourceMap" + fragmentNumber + ".json");
   }
 
@@ -356,7 +361,21 @@ public abstract class StackTraceDeobfuscator {
    * @return a new {@link InputStream}
    */
   protected InputStream getSymbolMapInputStream(String permutationStrongName) throws IOException {
+    checkStrongName(permutationStrongName);
     return openInputStream(permutationStrongName + ".symbolMap");
+  }
+
+  /**
+   * Rejects a permutation strong name that is not a bare compiler hash. The strong name reaches
+   * this class straight from the client-controlled X-GWT-Permutation header, and it is concatenated
+   * into the symbol/source map file name, so a value such as {@code ../../secret} would otherwise
+   * escape the configured symbolMaps location.
+   */
+  private static void checkStrongName(String permutationStrongName) throws IOException {
+    if (permutationStrongName == null
+        || !STRONG_NAME_PATTERN.matcher(permutationStrongName).matches()) {
+      throw new IOException("Invalid permutation strong name: " + permutationStrongName);
+    }
   }
 
   /**

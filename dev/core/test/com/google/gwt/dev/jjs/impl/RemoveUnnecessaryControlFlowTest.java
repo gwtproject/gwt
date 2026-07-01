@@ -64,16 +64,30 @@ public class RemoveUnnecessaryControlFlowTest extends OptimizerTestBase {
         .into("while (condition()) { break; }");
 
     optimize("void", "while (condition()) { return; } foo();").noChange();
+
+    // for, do/while
   }
+
+  // TODO test try/catches/finally
+  // switch/case/default
+  // loop in loop break/return
+  // loop, loop-in-loop continue (in other blocks)
+  // switch-in-loop break/return
+  // if/block/try in switch
+  //
+
+  // switch exprs, with loops in them, etc
+
+
 
   @Override
   protected boolean doOptimizeMethod(TreeLogger logger, JProgram program, JMethod method)
       throws UnableToCompleteException {
-    // Not presently guaranteed to converge in a single pass, so loop until it does.
-    int mods;
-    do {
-      mods = RemoveUnnecessaryControlFlow.exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
-    } while (mods > 0);
-    return false;
+    int mods = RemoveUnnecessaryControlFlow.exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
+    if (mods > 0) {
+      // verify we converged in a single pass
+      assert RemoveUnnecessaryControlFlow.exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT) == 0;
+    }
+    return mods > 0;
   }
 }

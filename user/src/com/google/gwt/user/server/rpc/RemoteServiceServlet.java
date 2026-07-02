@@ -26,6 +26,7 @@ import com.google.gwt.user.client.rpc.SerializationException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -59,7 +60,7 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
     String modulePath = null;
     if (moduleBaseURL != null) {
       try {
-        modulePath = new URL(moduleBaseURL).getPath();
+        modulePath = normalizeModulePath(new URL(moduleBaseURL).getPath());
       } catch (MalformedURLException ex) {
         // log the information, we will default
         servlet.log("Malformed moduleBaseURL: " + moduleBaseURL, ex);
@@ -135,6 +136,26 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
     }
 
     return serializationPolicy;
+  }
+
+  /**
+   * Collapses "." and ".." segments in a module base path. The path is derived
+   * from the client-supplied module base URL, which is later concatenated with
+   * the strong name and file suffix to locate a resource; normalizing here
+   * ensures a crafted URL such as {@code http://host/ctx/../../WEB-INF/foo}
+   * cannot walk outside the module directory before the "same web application"
+   * containment check is applied. Returns {@code null} if the path cannot be
+   * parsed.
+   */
+  private static String normalizeModulePath(String path) {
+    if (path == null) {
+      return null;
+    }
+    try {
+      return URI.create(path).normalize().getRawPath();
+    } catch (IllegalArgumentException ex) {
+      return null;
+    }
   }
 
   private static final SerializationPolicyClient CODE_SERVER_CLIENT =
@@ -226,7 +247,10 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
       if (header == null) {
         return null;
       }
-      String path = new URL(header).getPath();
+      String path = normalizeModulePath(new URL(header).getPath());
+      if (path == null) {
+        return null;
+      }
       String contextPath = getThreadLocalRequest().getContextPath();
       if (!path.startsWith(contextPath)) {
         return null;

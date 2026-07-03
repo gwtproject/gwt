@@ -25,9 +25,8 @@ import com.google.gwt.user.client.rpc.SerializationException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,8 +59,8 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
     String modulePath = null;
     if (moduleBaseURL != null) {
       try {
-        modulePath = normalizeModulePath(new URL(moduleBaseURL).getPath());
-      } catch (MalformedURLException ex) {
+        modulePath = normalizeModulePath(moduleBaseURL);
+      } catch (URISyntaxException ex) {
         // log the information, we will default
         servlet.log("Malformed moduleBaseURL: " + moduleBaseURL, ex);
       }
@@ -139,23 +138,17 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
   }
 
   /**
-   * Collapses "." and ".." segments in a module base path. The path is derived
-   * from the client-supplied module base URL, which is later concatenated with
-   * the strong name and file suffix to locate a resource; normalizing here
-   * ensures a crafted URL such as {@code http://host/ctx/../../WEB-INF/foo}
-   * cannot walk outside the module directory before the "same web application"
-   * containment check is applied. Returns {@code null} if the path cannot be
-   * parsed.
+   * Returns the path of a client-supplied module base URL with "." and ".."
+   * segments collapsed. The path is later concatenated with the strong name and
+   * file suffix to locate a resource; normalizing here ensures a crafted URL
+   * such as {@code http://host/ctx/../../WEB-INF/foo} cannot walk outside the
+   * module directory before the "same web application" containment check is
+   * applied. The returned path may be {@code null} for a URL without a path
+   * component.
    */
-  private static String normalizeModulePath(String path) {
-    if (path == null) {
-      return null;
-    }
-    try {
-      return URI.create(path).normalize().getRawPath();
-    } catch (IllegalArgumentException ex) {
-      return null;
-    }
+  private static String normalizeModulePath(String moduleBaseURL)
+      throws URISyntaxException {
+    return new URI(moduleBaseURL).normalize().getRawPath();
   }
 
   private static final SerializationPolicyClient CODE_SERVER_CLIENT =
@@ -247,7 +240,7 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
       if (header == null) {
         return null;
       }
-      String path = normalizeModulePath(new URL(header).getPath());
+      String path = normalizeModulePath(header);
       if (path == null) {
         return null;
       }
@@ -256,7 +249,7 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
         return null;
       }
       return path.substring(contextPath.length());
-    } catch (MalformedURLException e) {
+    } catch (URISyntaxException e) {
       return null;
     }
   }

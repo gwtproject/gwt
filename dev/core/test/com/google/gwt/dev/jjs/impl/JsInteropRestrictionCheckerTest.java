@@ -2522,7 +2522,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertBuggySucceeds();
   }
 
-  public void testUnusuableByJsWarns() throws Exception {
+  public void testUnusableByJsWarns() throws Exception {
     addSnippetImport("jsinterop.annotations.JsFunction");
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetImport("jsinterop.annotations.JsMethod");
@@ -2625,6 +2625,18 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertBuggySucceeds();
   }
 
+  public void testRecordSucceeds() throws Exception {
+    // override equals and hashCode so that we don't need the source for java.lang.Objects
+    addSnippetClassDecl("""
+        public class Hidden { }
+        public record Buggy(Hidden val) {
+          public boolean equals(Object o) {return o == this;}
+          public int hashCode() {return 1;}
+        }
+        """);
+    assertBuggySucceeds();
+  }
+
   public final void assertBuggySucceeds(String... expectedWarnings)
       throws Exception {
     Result result = assertCompileSucceeds("Buggy buggy = null;", expectedWarnings);
@@ -2639,6 +2651,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
   @Override
   protected boolean doOptimizeMethod(TreeLogger logger, JProgram program, JMethod method) {
     try {
+      ImplementRecordComponents.exec(program);
       JsInteropRestrictionChecker.exec(logger, program, new MinimalRebuildCache());
     } catch (Exception e) {
       throw new RuntimeException(e);

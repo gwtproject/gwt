@@ -141,7 +141,7 @@ public abstract class AbstractUiRenderer implements UiRenderer {
    *         a previously rendered element. In DevMode also when the root element is not
    *         attached to the DOM
    * @throws IllegalStateException parent does not contain an element matching
-   *         {@code filedName}
+   *         {@code fieldName}
    *
    * @throws RuntimeException if the root element is not attached to the DOM and not running in
    *         DevMode
@@ -204,10 +204,10 @@ public abstract class AbstractUiRenderer implements UiRenderer {
    * This method assumes that the {@code safeHtml} template begins with an open HTML tag.
    * {@code SafeHtml} templates produced by UiBinder always meet these conditions.
    * <p>
-   * This method does not attempt to ensure {@code atributeName} and {@code attributeValue}
+   * This method does not attempt to ensure {@code attributeName} and {@code attributeValue}
    * contain safe values.
    *
-   * @returns the {@code safeHtml} template with "{@code attributeName}={@code attributeValue}"
+   * @return the {@code safeHtml} template with "{@code attributeName}={@code attributeValue}"
    *          inserted as an attribute of the first tag found
    */
   protected static SafeHtml stampUiRendererAttribute(SafeHtml safeHtml, String attributeName,

@@ -20,7 +20,7 @@ package com.google.gwt.typedarrays.shared;
  * out-of-range values are mapped to valid values by taking the bottom 8 bits of
  * the value as an unassigned.
  * 
- * {@link "http://www.khronos.org/registry/typedarray/specs/latest/#7"}
+ * @see <a href="https://262.ecma-international.org/6.0/#sec-typedarray-objects">typed array specification</a>
  */
 public interface Uint8Array extends ArrayBufferView {
 

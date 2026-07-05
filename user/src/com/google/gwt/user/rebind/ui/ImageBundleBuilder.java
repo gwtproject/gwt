@@ -63,30 +63,37 @@ class ImageBundleBuilder {
       this.height = image.getHeight();
     }
 
+    @Override
     public int getHeight() {
       return height;
     }
 
+    @Override
     public int getLeft() {
       return left;
     }
 
+    @Override
     public String getName() {
       return name;
     }
 
+    @Override
     public int getTop() {
       return top;
     }
 
+    @Override
     public int getWidth() {
       return width;
     }
 
+    @Override
     public boolean hasBeenPositioned() {
       return hasBeenPositioned;
     }
 
+    @Override
     public void setPosition(int left, int top) {
       hasBeenPositioned = true;
       this.left = left;
@@ -128,6 +135,7 @@ class ImageBundleBuilder {
   }
 
   private static final Comparator<HasRect> decreasingHeightComparator = new Comparator<HasRect>() {
+    @Override
     public int compare(HasRect a, HasRect b) {
       final int c = b.getHeight() - a.getHeight();
       // If we encounter equal heights, use the name to keep things
@@ -137,6 +145,7 @@ class ImageBundleBuilder {
   };
 
   private static final Comparator<HasRect> decreasingWidthComparator = new Comparator<HasRect>() {
+    @Override
     public int compare(HasRect a, HasRect b) {
       final int c = b.getWidth() - a.getWidth();
       // If we encounter equal heights, use the name to keep things

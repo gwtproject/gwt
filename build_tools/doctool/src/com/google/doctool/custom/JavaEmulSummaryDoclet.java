@@ -71,7 +71,7 @@ public class JavaEmulSummaryDoclet implements Doclet {
   private static final String OPT_TRIAGE_FILE = "-triageFile";
   private static final String OPT_MISSING_PROPERTIES_DIR = "-missingProperties";
   // should be aligned with the latest version that's tested by CI
-  private static final int MAX_JRE_VERSION = 22;
+  private static final int MAX_JRE_VERSION = 26;
   // Lowest version for which missing method detection is reliable.
   // The tool can run with older versions, but will ignore missing methods.
   private static final int MIN_JRE_VERSION = 17;
@@ -83,7 +83,9 @@ public class JavaEmulSummaryDoclet implements Doclet {
       "java.lang.Character#isJavaLetterOrDigit(char)",
       "java.lang.String#getBytes(int, int, byte[], int)",
       "java.lang.Class#isUnnamedClass()", // exists in 21 as a preview, removed
-      "java.lang.Enum#finalize()" // finalizers are ignored by GWT and to be removed from JVM
+      "java.lang.Enum#finalize()", // finalizers are ignored by GWT and to be removed from JVM
+      "java.util.Map#ofLazy(Set, Function)", // exists in 26 as a preview only
+      "java.util.List#ofLazy(int, IntFunction)" // exists in 26 as a preview only
   );
   private static final List<String> EXCLUDED_CLASSES = List.of("JsException");
 

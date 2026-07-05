@@ -44,22 +44,27 @@ class StringMapMessageTranslation
     this.locale = locale;
   }
 
+  @Override
   public Iterable<AlternateFormMapping> getAllMessageForms() {
     return new Iterable<AlternateFormMapping>() {
       protected final Iterator<String> iter = forms.iterator();
 
+      @Override
       public Iterator<AlternateFormMapping> iterator() {
         return new Iterator<AlternateFormMapping>() {
+          @Override
           public boolean hasNext() {
             return iter.hasNext();
           }
 
+          @Override
           public AlternateFormMapping next() {
             String form = iter.next();
             return new AlternateFormMapping(Arrays.asList(new AlternateForm(
                 form, form)), map.get(form));
           }
 
+          @Override
           public void remove() {
             throw new UnsupportedOperationException();
           }
@@ -68,10 +73,12 @@ class StringMapMessageTranslation
     };
   }
 
+  @Override
   public String getDefaultMessage() {
     return defaultMessage;
   }
 
+  @Override
   public GwtLocale getMatchedLocale() {
     return locale;
   }

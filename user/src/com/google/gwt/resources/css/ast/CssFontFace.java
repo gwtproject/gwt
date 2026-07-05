@@ -25,6 +25,7 @@ import java.util.List;
 public class CssFontFace extends CssNode implements HasProperties {
   private final List<CssProperty> properties = new ArrayList<CssProperty>();
 
+  @Override
   public List<CssProperty> getProperties() {
     return properties;
   }
@@ -34,6 +35,7 @@ public class CssFontFace extends CssNode implements HasProperties {
     return true;
   }
 
+  @Override
   public void traverse(CssVisitor visitor, Context context) {
     if (visitor.visit(this, context)) {
       visitor.acceptWithInsertRemove(properties);

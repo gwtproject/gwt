@@ -406,6 +406,7 @@ public class RequestBuilder {
 
     // Must set the onreadystatechange handler before calling send().
     xmlHttpRequest.setOnReadyStateChange(new ReadyStateChangeHandler() {
+      @Override
       public void onReadyStateChange(XMLHttpRequest xhr) {
         if (xhr.getReadyState() == XMLHttpRequest.DONE) {
           xhr.clearOnReadyStateChange();

@@ -77,6 +77,7 @@ public class ScrollPanel extends SimplePanel implements SourcesScrollEvents,
     initialize();
   }
 
+  @Override
   public HandlerRegistration addScrollHandler(ScrollHandler handler) {
     /*
      * Sink the event on the scrollable element, which may not be the root
@@ -111,22 +112,27 @@ public class ScrollPanel extends SimplePanel implements SourcesScrollEvents,
    * 
    * @return the horizontal scroll position, in pixels
    */
+  @Override
   public int getHorizontalScrollPosition() {
     return getScrollableElement().getScrollLeft();
   }
 
+  @Override
   public int getMaximumHorizontalScrollPosition() {
     return ScrollImpl.get().getMaximumHorizontalScrollPosition(getScrollableElement());
   }
 
+  @Override
   public int getMaximumVerticalScrollPosition() {
     return getScrollableElement().getScrollHeight() - getScrollableElement().getClientHeight();
   }
 
+  @Override
   public int getMinimumHorizontalScrollPosition() {
     return ScrollImpl.get().getMinimumHorizontalScrollPosition(getScrollableElement());
   }
 
+  @Override
   public int getMinimumVerticalScrollPosition() {
     return 0;
   }
@@ -142,6 +148,7 @@ public class ScrollPanel extends SimplePanel implements SourcesScrollEvents,
     return getScrollableElement().getScrollTop();
   }
 
+  @Override
   public int getVerticalScrollPosition() {
     return getScrollPosition();
   }
@@ -156,6 +163,7 @@ public class ScrollPanel extends SimplePanel implements SourcesScrollEvents,
     return touchScroller == null;
   }
 
+  @Override
   public void onResize() {
     Widget child = getWidget();
     if ((child != null) && (child instanceof RequiresResize)) {
@@ -227,6 +235,7 @@ public class ScrollPanel extends SimplePanel implements SourcesScrollEvents,
    * 
    * @param position the new horizontal scroll position, in pixels
    */
+  @Override
   public void setHorizontalScrollPosition(int position) {
     getScrollableElement().setScrollLeft(position);
   }
@@ -281,6 +290,7 @@ public class ScrollPanel extends SimplePanel implements SourcesScrollEvents,
     return isTouchScrollingDisabled();
   }
 
+  @Override
   public void setVerticalScrollPosition(int position) {
     setScrollPosition(position);
   }

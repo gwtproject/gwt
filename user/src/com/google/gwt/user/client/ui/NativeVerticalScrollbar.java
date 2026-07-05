@@ -52,6 +52,7 @@ public class NativeVerticalScrollbar extends AbstractNativeScrollbar implements 
     /**
      * The styles used in this widget.
      */
+    @Override
     @Source(StyleTransparant.DEFAULT_CSS)
     Style nativeVerticalScrollbarStyle();
   }
@@ -156,10 +157,12 @@ public class NativeVerticalScrollbar extends AbstractNativeScrollbar implements 
     ScrollImpl.get().initialize(scrollable, contentDiv);
   }
 
+  @Override
   public int getMaximumVerticalScrollPosition() {
     return getScrollableElement().getScrollHeight() - getElement().getClientHeight();
   }
 
+  @Override
   public int getMinimumVerticalScrollPosition() {
     return 0;
   }
@@ -175,10 +178,12 @@ public class NativeVerticalScrollbar extends AbstractNativeScrollbar implements 
    * @return the scroll height
    * @see #setScrollHeight(int)
    */
+  @Override
   public int getScrollHeight() {
     return contentDiv.getOffsetHeight();
   }
 
+  @Override
   public int getVerticalScrollPosition() {
     return getScrollableElement().getScrollTop();
   }
@@ -193,10 +198,12 @@ public class NativeVerticalScrollbar extends AbstractNativeScrollbar implements 
    *
    * @param height the size height pixels
    */
+  @Override
   public void setScrollHeight(int height) {
     contentDiv.getStyle().setHeight(height, Unit.PX);
   }
 
+  @Override
   public void setVerticalScrollPosition(int position) {
     getScrollableElement().setScrollTop(position);
   }

@@ -28,6 +28,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class MD5KeyGenerator implements KeyGenerator {
 
+  @Override
   public String generateKey(Message msg) {
     String text = msg.getDefaultMessage();
     String meaning = msg.getMeaning();

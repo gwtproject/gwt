@@ -214,6 +214,7 @@ public class SplitLayoutPanelTest extends DockLayoutPanelTest {
   /**
    * Test that forcing layout will call onResize only once.
    */
+  @Override
   public void testForceLayoutNoRedundantOnResize() {
     final List<Boolean> called = new ArrayList<>();
     SplitLayoutPanel panel = new SplitLayoutPanel();

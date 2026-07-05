@@ -153,6 +153,7 @@ final class ParsedHtmlTemplate {
       chunk = new StringBuilder(literal);
     }
 
+    @Override
     public Kind getKind() {
       return Kind.LITERAL;
     }
@@ -198,6 +199,7 @@ final class ParsedHtmlTemplate {
       return context;
     }
 
+    @Override
     public Kind getKind() {
       return Kind.PARAMETER;
     }

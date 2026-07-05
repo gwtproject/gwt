@@ -182,11 +182,13 @@ public class ToggleButton extends CustomButton implements HasValue<Boolean>, IsE
     super(upText, downText, handler);
   }
 
+  @Override
   public HandlerRegistration addValueChangeHandler(
       ValueChangeHandler<Boolean> handler) {
     return addHandler(handler, ValueChangeEvent.getType());
   }
 
+  @Override
   public LeafValueEditor<Boolean> asEditor() {
     if (editor == null) {
       editor = TakesValueEditor.of(this);
@@ -200,6 +202,7 @@ public class ToggleButton extends CustomButton implements HasValue<Boolean>, IsE
    * @return <code>true</code> if the button is pressed, false otherwise. Will
    *         not return null
    */
+  @Override
   public Boolean getValue() {
     return isDown();
   }
@@ -226,6 +229,7 @@ public class ToggleButton extends CustomButton implements HasValue<Boolean>, IsE
    * @param value true to press the button, false otherwise; null value implies
    *          false
    */
+  @Override
   public void setValue(Boolean value) {
     setValue(value, false);
   }
@@ -239,6 +243,7 @@ public class ToggleButton extends CustomButton implements HasValue<Boolean>, IsE
    * @param fireEvents If true, and value has changed, fire a
    *          {@link ValueChangeEvent}
    */
+  @Override
   public void setValue(Boolean value, boolean fireEvents) {
     if (value == null) {
       value = Boolean.FALSE;

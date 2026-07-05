@@ -41,28 +41,35 @@ abstract class MethodPropertyContext implements CollectionPropertyContext, MapPr
     this.valueType = valueType;
   }
 
+  @Override
   public void accept(ParameterizationVisitor visitor) {
     traverse(visitor, genericType);
   }
 
+  @Override
   public abstract boolean canSet();
 
+  @Override
   public Class<?> getElementType() {
     return elementType;
   }
 
+  @Override
   public Class<?> getKeyType() {
     return keyType;
   }
 
+  @Override
   public Class<?> getType() {
     return type;
   }
 
+  @Override
   public Class<?> getValueType() {
     return valueType;
   }
 
+  @Override
   public abstract void set(Object value);
 
   private void traverse(ParameterizationVisitor visitor, Type type) {

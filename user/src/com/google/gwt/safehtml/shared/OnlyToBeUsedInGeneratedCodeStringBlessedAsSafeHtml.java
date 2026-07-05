@@ -45,6 +45,7 @@ public class OnlyToBeUsedInGeneratedCodeStringBlessedAsSafeHtml
   /**
    * {@inheritDoc}
    */
+  @Override
   @IsSafeHtml
   @SuppressIsSafeHtmlCastCheck
   public String asString() {

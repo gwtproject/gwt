@@ -322,6 +322,7 @@ public abstract class AbstractTreeLogger extends TreeLogger implements CanUpdate
   protected abstract void doLog(int indexOfLogEntryWithinParentLogger,
       TreeLogger.Type type, String msg, Throwable caught, HelpInfo helpInfo);
 
+  @Override
   public void setAmount(MetricName name, long amount) {
     metricMap.setAmount(name, amount);
   }

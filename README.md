@@ -17,7 +17,7 @@
 
 ### Building the GWT SDK:
 
- - In order to build GWT, `java` and `ant` are required in your system.
+ - In order to build GWT, `java` (minimum version 17) and `ant` are required in your system.
 
  - You need the [GWT tools repository](https://github.com/gwtproject/tools/)
    checked out and up-to-date. By default it is expected to be found at `../tools`.

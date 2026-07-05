@@ -52,6 +52,7 @@ class InterpreterPipe<T> implements PostProcessingInterpreter<T> {
    * @return The T or null returned by the last pipelined interpreter to run
    * @throws UnableToCompleteException on error
    */
+  @Override
   public T interpretElement(XMLElement elem) throws UnableToCompleteException {
     T rtn = null;
     for (XMLElement.Interpreter<T> i : pipe) {
@@ -69,6 +70,7 @@ class InterpreterPipe<T> implements PostProcessingInterpreter<T> {
    * text to be post processed to each pipe member that is instanceof
    * {@link PostProcessingInterpreter}.
    */
+  @Override
   public String postProcess(String consumedText) throws UnableToCompleteException {
     for (XMLElement.Interpreter<T> i : pipe) {
       if (i instanceof PostProcessingInterpreter<?>) {

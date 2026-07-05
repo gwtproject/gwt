@@ -155,6 +155,7 @@ public class AbsolutePanel extends ComplexPanel implements
         - getElement().getAbsoluteTop();
   }
 
+  @Override
   public void insert(Widget w, int beforeIndex) {
     insert(w, getElement(), beforeIndex, true);
   }
@@ -162,6 +163,7 @@ public class AbsolutePanel extends ComplexPanel implements
   /**
    * Convenience overload to allow {@link IsWidget} to be used directly.
    */
+  @Override
   public void insert(IsWidget w, int beforeIndex) {
     insert(asWidgetOrNull(w), beforeIndex);
   }

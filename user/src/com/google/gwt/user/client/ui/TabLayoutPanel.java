@@ -281,6 +281,7 @@ public class TabLayoutPanel extends ResizeComposite implements HasWidgets,
     add(asWidgetOrNull(w), text, asHtml);
   }
 
+  @Override
   public void add(Widget w) {
     insert(w, getWidgetCount());
   }
@@ -330,24 +331,29 @@ public class TabLayoutPanel extends ResizeComposite implements HasWidgets,
     insert(child, tab, getWidgetCount());
   }
 
+  @Override
   public HandlerRegistration addBeforeSelectionHandler(
       BeforeSelectionHandler<Integer> handler) {
     return addHandler(handler, BeforeSelectionEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addSelectionHandler(
       SelectionHandler<Integer> handler) {
     return addHandler(handler, SelectionEvent.getType());
   }
 
+  @Override
   public void animate(int duration) {
     animate(duration, null);
   }
 
+  @Override
   public void animate(int duration, AnimationCallback callback) {
     deckPanel.animate(duration, callback);
   }
 
+  @Override
   public void clear() {
     Iterator<Widget> it = iterator();
     while (it.hasNext()) {
@@ -356,6 +362,7 @@ public class TabLayoutPanel extends ResizeComposite implements HasWidgets,
     }
   }
 
+  @Override
   public void forceLayout() {
     deckPanel.forceLayout();
   }
@@ -410,6 +417,7 @@ public class TabLayoutPanel extends ResizeComposite implements HasWidgets,
   /**
    * Returns the widget at the given index.
    */
+  @Override
   public Widget getWidget(int index) {
     return deckPanel.getWidget(index);
   }
@@ -417,6 +425,7 @@ public class TabLayoutPanel extends ResizeComposite implements HasWidgets,
   /**
    * Returns the number of tabs and widgets.
    */
+  @Override
   public int getWidgetCount() {
     return deckPanel.getWidgetCount();
   }
@@ -424,6 +433,7 @@ public class TabLayoutPanel extends ResizeComposite implements HasWidgets,
   /**
    * Convenience overload to allow {@link IsWidget} to be used directly.
    */
+  @Override
   public int getWidgetIndex(IsWidget child) {
     return getWidgetIndex(asWidgetOrNull(child));
   }
@@ -431,6 +441,7 @@ public class TabLayoutPanel extends ResizeComposite implements HasWidgets,
   /**
    * Returns the index of the given child, or -1 if it is not a child.
    */
+  @Override
   public int getWidgetIndex(Widget child) {
     return deckPanel.getWidgetIndex(child);
   }
@@ -540,10 +551,12 @@ public class TabLayoutPanel extends ResizeComposite implements HasWidgets,
     return deckPanel.isAnimationVertical();
   }
 
+  @Override
   public Iterator<Widget> iterator() {
     return deckPanel.iterator();
   }
 
+  @Override
   public boolean remove(int index) {
     if ((index < 0) || (index >= getWidgetCount())) {
       return false;
@@ -572,6 +585,7 @@ public class TabLayoutPanel extends ResizeComposite implements HasWidgets,
     return true;
   }
 
+  @Override
   public boolean remove(Widget w) {
     int index = getWidgetIndex(w);
     if (index == -1) {
@@ -741,6 +755,7 @@ public class TabLayoutPanel extends ResizeComposite implements HasWidgets,
 
     tabBar.insert(tab, beforeIndex);
     tab.addClickHandler(new ClickHandler() {
+      @Override
       public void onClick(ClickEvent event) {
         selectTab(child);
       }

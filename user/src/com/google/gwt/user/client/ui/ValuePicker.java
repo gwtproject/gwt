@@ -64,6 +64,7 @@ public class ValuePicker<T> extends Composite
     initWidget(cellList);
     cellList.setSelectionModel(smodel);
     smodel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+      @Override
       public void onSelectionChange(SelectionChangeEvent event) {
         setValue(smodel.getSelectedObject(), true);
       }
@@ -78,6 +79,7 @@ public class ValuePicker<T> extends Composite
     this(ToStringRenderer.instance());
   }
 
+  @Override
   public HandlerRegistration addValueChangeHandler(ValueChangeHandler<T> handler) {
     return addHandler(handler, ValueChangeEvent.getType());
   }
@@ -85,6 +87,7 @@ public class ValuePicker<T> extends Composite
   /**
    * Returns a {@link TakesValueEditor} backed by the ValuePicker.
    */
+  @Override
   public LeafValueEditor<T> asEditor() {
     if (editor == null) {
       editor = TakesValueEditor.of(this);
@@ -104,10 +107,12 @@ public class ValuePicker<T> extends Composite
     return cellList.getPageSize();
   }
 
+  @Override
   public T getValue() {
     return value;
   }
 
+  @Override
   public void setAcceptableValues(Collection<T> values) {
     cellList.setRowData(new ArrayList<T>(values));
   }
@@ -116,10 +121,12 @@ public class ValuePicker<T> extends Composite
     cellList.setPageSize(size);
   }
 
+  @Override
   public void setValue(T value) {
     setValue(value, false);
   }
 
+  @Override
   public void setValue(T value, boolean fireEvents) {
     T current = getValue();
     if ((current == value) || (current != null && current.equals(value))) {

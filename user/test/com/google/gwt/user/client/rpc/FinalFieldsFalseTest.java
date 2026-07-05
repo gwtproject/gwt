@@ -30,10 +30,12 @@ public class FinalFieldsFalseTest extends RpcTestBase {
     FinalFieldsNode node = new FinalFieldsNode(4, "C", 9);
 
     service.transferObject(node, new AsyncCallback<FinalFieldsNode>() {
+      @Override
       public void onFailure(Throwable caught) {
         TestSetValidator.rethrowException(caught);
       }
 
+      @Override
       public void onSuccess(FinalFieldsNode result) {
         assertNotNull(result);
         assertTrue(TestSetValidator.isValidFinalFieldsObjectDefault(result));
@@ -41,10 +43,12 @@ public class FinalFieldsFalseTest extends RpcTestBase {
     });
 
     service.returnI(node, new AsyncCallback<Integer>() {
+      @Override
       public void onFailure(Throwable caught) {
         TestSetValidator.rethrowException(caught);
       }
 
+      @Override
       public void onSuccess(Integer i) {
         // since finalize is false, i should be 5
         assertEquals(new Integer(5), i);

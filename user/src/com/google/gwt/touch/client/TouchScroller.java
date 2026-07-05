@@ -121,6 +121,7 @@ public class TouchScroller {
        * current scrolling position.
        */
       windowResizeHandler = Window.addResizeHandler(new ResizeHandler() {
+        @Override
         public void onResize(ResizeEvent event) {
           finish();
         }

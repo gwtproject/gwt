@@ -33,6 +33,7 @@ public class MetricMap implements CanUpdateMetrics {
   MetricMap() {
   }
 
+  @Override
   public synchronized void setAmount(MetricName name, long amount) {
     map.put(name.key, amount);
   }

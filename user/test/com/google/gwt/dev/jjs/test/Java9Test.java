@@ -36,6 +36,7 @@ public class Java9Test extends GWTTestCase {
     class Resource implements AutoCloseable {
         boolean isOpen = true;
 
+        @Override
         public void close() {
             this.isOpen = false;
         }

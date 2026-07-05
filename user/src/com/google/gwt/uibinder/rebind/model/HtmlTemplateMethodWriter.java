@@ -177,6 +177,7 @@ public class HtmlTemplateMethodWriter {
     String rtn = Tokenator.detokenate(html, new Resolver() {
       int tokenId = 0;
 
+      @Override
       public String resolveToken(String token) {
         return "{" + tokenId++ + "}";
       }

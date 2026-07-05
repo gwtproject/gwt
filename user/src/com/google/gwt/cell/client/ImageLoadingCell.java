@@ -91,6 +91,7 @@ public class ImageLoadingCell extends AbstractCell<String> {
     public DefaultRenderers() {
       if (IMAGE_RENDERER == null) {
         IMAGE_RENDERER = new AbstractSafeHtmlRenderer<String>() {
+          @Override
           public SafeHtml render(String object) {
             return template.img(object);
           }
@@ -101,6 +102,7 @@ public class ImageLoadingCell extends AbstractCell<String> {
         ImageResource res = resources.loading();
         final SafeHtml loadingHtml = AbstractImagePrototype.create(res).getSafeHtml();
         LOADING_RENDERER = new AbstractSafeHtmlRenderer<String>() {
+          @Override
           public SafeHtml render(String object) {
             return loadingHtml;
           }
@@ -113,6 +115,7 @@ public class ImageLoadingCell extends AbstractCell<String> {
      *
      * @return a {@link SafeHtmlRenderer SafeHtmlRenderer<String>} instance
      */
+    @Override
     public SafeHtmlRenderer<String> getErrorRenderer() {
       // Show the broken image on error.
       return getImageRenderer();
@@ -123,6 +126,7 @@ public class ImageLoadingCell extends AbstractCell<String> {
      *
      * @return a {@link SafeHtmlRenderer SafeHtmlRenderer<String>} instance
      */
+    @Override
     public SafeHtmlRenderer<String> getImageRenderer() {
       return IMAGE_RENDERER;
     }
@@ -132,6 +136,7 @@ public class ImageLoadingCell extends AbstractCell<String> {
      *
      * @return a {@link SafeHtmlRenderer SafeHtmlRenderer<String>} instance
      */
+    @Override
     public SafeHtmlRenderer<String> getLoadingRenderer() {
       return LOADING_RENDERER;
     }

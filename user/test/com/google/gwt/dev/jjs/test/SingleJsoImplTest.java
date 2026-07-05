@@ -597,6 +597,7 @@ public class SingleJsoImplTest extends GWTTestCase {
       return function() { return 42; };
     }-*/;
 
+    @Override
     public native int call() /*-{
       return this();
     }-*/;

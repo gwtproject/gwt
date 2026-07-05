@@ -42,6 +42,7 @@ import java.util.zip.CRC32;
  */
 public class SerializationUtils {
   static final Comparator<JField> FIELD_COMPARATOR = new Comparator<JField>() {
+    @Override
     public int compare(JField f1, JField f2) {
       return f1.getName().compareTo(f2.getName());
     }

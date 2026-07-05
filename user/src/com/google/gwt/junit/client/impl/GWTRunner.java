@@ -30,6 +30,7 @@ import com.google.gwt.core.client.EntryPoint;
  */
 public class GWTRunner implements EntryPoint {
 
+  @Override
   public void onModuleLoad() {
   }
 

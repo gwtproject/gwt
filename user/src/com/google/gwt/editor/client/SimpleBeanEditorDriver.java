@@ -57,6 +57,7 @@ public interface SimpleBeanEditorDriver<T, E extends Editor<? super T>> extends
    * @return the object passed into {@link #edit(Object)}
    * @throws IllegalStateException if {@link #edit(Object)} has not been called
    */
+  @Override
   T flush();
 
   /**

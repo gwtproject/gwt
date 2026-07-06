@@ -2626,13 +2626,9 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
   }
 
   public void testRecordSucceeds() throws Exception {
-    // override equals and hashCode so that we don't need the source for java.lang.Objects
     addSnippetClassDecl("""
         public class Hidden { }
-        public record Buggy(Hidden val) {
-          public boolean equals(Object o) {return o == this;}
-          public int hashCode() {return 1;}
-        }
+        public record Buggy(Hidden val) { }
         """);
     assertBuggySucceeds();
   }

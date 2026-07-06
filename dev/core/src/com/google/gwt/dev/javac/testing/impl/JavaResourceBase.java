@@ -248,6 +248,54 @@ public class JavaResourceBase {
           "package java.util;",
           "public interface Map<K,V> { }");
 
+  public static final MockJavaResource METHOD_HANDLE =
+      createMockJavaResource("java.lang.invoke.MethodHandle",
+          """
+          package java.lang.invoke;
+          public abstract class MethodHandle { }
+          """);
+
+  public static final MockJavaResource METHOD_HANDLES =
+      createMockJavaResource("java.lang.invoke.MethodHandles",
+          """
+          package java.lang.invoke;
+          public class MethodHandles {
+            public static final class Lookup {
+              public MethodHandle findVirtual(Class<?> refc, String name,
+                                              MethodType type) {
+                return null;
+              }
+          
+              public MethodHandle findStatic(Class<?> refc, String name,
+                                             MethodType type) {
+                return null;
+              }
+            }
+          
+            public static Lookup lookup() {
+              return null;
+            }
+          }
+          """);
+
+  public static final MockJavaResource METHOD_TYPE =
+      createMockJavaResource("java.lang.invoke.MethodType",
+          """
+          package java.lang.invoke;
+          public final class MethodType {
+            public static MethodType methodType(Class<?> rtype, Class<?> ptype0,
+                Class<?>... ptypes) {
+              return null;
+            }
+            public static MethodType methodType(Class<?> rtype) {
+              return null;
+            }
+            public static MethodType genericMethodType(int objectArgCount) {
+              return null;
+            }
+          }
+          """);
+
   public static final MockJavaResource NO_CLASS_DEF_FOUND_ERROR =
       createMockJavaResource("java.lang.NoClassDefFoundError",
           "package java.lang;",
@@ -364,6 +412,13 @@ public class JavaResourceBase {
           "public final class StringBuilder {",
           "}");
 
+  public static final MockJavaResource STRING_CONCAT_FACTORY =
+      createMockJavaResource("java.lang.invoke.StringConcatFactory",
+          """
+          package java.lang.invoke;
+          public final class StringConcatFactory {}
+          """);
+
   public static final MockJavaResource SUPPRESS_WARNINGS =
       createMockJavaResource("java.lang.SuppressWarnings",
           "package java.lang;",
@@ -467,7 +522,8 @@ public class JavaResourceBase {
         AUTOCLOSEABLE, ANNOTATION, ARRAY_LIST, BYTE, BOOLEAN, CHARACTER, CHAR_SEQUENCE, CLASS,
         CLASS_NOT_FOUND_EXCEPTION, CLONEABLE, COLLECTION, COMPARABLE, DOUBLE, ENUM, EXCEPTION,
         ERROR, FUNCTIONALINTERFACE, FLOAT, INTEGER, IS_SERIALIZABLE, JAVASCRIPTEXCEPTION,
-        JAVASCRIPTOBJECT, LIST, LONG, MAP, NO_CLASS_DEF_FOUND_ERROR, NUMBER, OBJECT, OBJECTMETHODS,
+        JAVASCRIPTOBJECT, LIST, LONG, MAP, METHOD_HANDLES, NO_CLASS_DEF_FOUND_ERROR,
+        NUMBER, OBJECT, OBJECTMETHODS, METHOD_HANDLE, METHOD_TYPE, STRING_CONCAT_FACTORY,
         OBJECTS, RECORD, RUNTIME_EXCEPTION, SERIALIZABLE, SHORT, STRING, STRING_BUILDER,
         SUPPRESS_WARNINGS, SYSTEM, THROWABLE, SPECIALIZE_METHOD, DO_NOT_AUTOBOX, JSTYPE,
         JSCONSTRUCTOR, JSPACKAGE, JSPROPERTY, JSMETHOD, JSIGNORE, JSFUNCTION, JSOVERLAY,

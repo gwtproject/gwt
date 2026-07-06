@@ -154,7 +154,8 @@ public abstract class StackTraceDeobfuscator {
   private static final int LINE_NUMBER_UNKNOWN = -1;
   private static final String SYMBOL_DATA_UNKNOWN = "";
 
-  private final Map<String, SourceMapping> sourceMaps = new HashMap<String, SourceMapping>();
+  private final Map<String, SourceMapping> sourceMaps =
+      new ConcurrentHashMap<String, SourceMapping>();
   private final SymbolCache symbolCache = new SymbolCache();
   private boolean lazyLoad = false;
 

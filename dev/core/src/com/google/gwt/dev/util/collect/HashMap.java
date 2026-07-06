@@ -564,7 +564,7 @@ public class HashMap<K, V> implements Map<K, V>, Serializable {
   }
 
   /**
-   * Adapted from {@link org.apache.commons.collections.map.AbstractHashedMap}.
+   * Adapted from {@code org.apache.commons.collections.map.AbstractHashedMap}.
    */
   @SuppressWarnings("unchecked")
   protected void doReadObject(ObjectInputStream in) throws IOException,
@@ -580,7 +580,7 @@ public class HashMap<K, V> implements Map<K, V>, Serializable {
   }
 
   /**
-   * Adapted from {@link org.apache.commons.collections.map.AbstractHashedMap}.
+   * Adapted from {@code org.apache.commons.collections.map.AbstractHashedMap}.
    */
   protected void doWriteObject(ObjectOutputStream out) throws IOException {
     out.writeInt(keys.length);

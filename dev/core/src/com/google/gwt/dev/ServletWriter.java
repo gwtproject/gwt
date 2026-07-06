@@ -87,20 +87,23 @@ class ServletWriter {
         xmlWriter.write('\n');
       }
       if (jspLevel != null) {
+        if (!jspLevel.matches("[0-9.]*")) { // lenient, but ensures valid XML
+          throw new IllegalStateException("Invalid JSP Java level: " + jspLevel);
+        }
         xmlWriter.write(String.format("""
             <servlet>
                 <servlet-name>jsp</servlet-name>
                 <servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
                 <init-param>
                     <param-name>compilerSourceVM</param-name>
-                    <param-value>%s</param-value>
+                    <param-value>%1$s</param-value>
                 </init-param>
                 <init-param>
                     <param-name>compilerTargetVM</param-name>
-                    <param-value>%s</param-value>
+                    <param-value>%1$s</param-value>
                 </init-param>
                 <load-on-startup>3</load-on-startup>
-            </servlet>""", jspLevel, jspLevel));
+            </servlet>""", jspLevel));
       }
       xmlWriter.write("\n</web-app>\n");
     }

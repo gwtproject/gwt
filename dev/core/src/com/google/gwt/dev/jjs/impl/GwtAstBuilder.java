@@ -2270,7 +2270,7 @@ public class GwtAstBuilder {
 
     @Override
     public void endVisit(SwitchStatement x, BlockScope scope) {
-      if (x instanceof  SwitchExpression switchExpression) {
+      if (x instanceof SwitchExpression switchExpression) {
         endVisit(switchExpression, scope);
         return;
       }
@@ -2741,7 +2741,7 @@ public class GwtAstBuilder {
 
     @Override
     public boolean visit(SwitchStatement x, BlockScope scope) {
-      if (x instanceof  SwitchExpression switchExpression) {
+      if (x instanceof SwitchExpression switchExpression) {
         return visit(switchExpression, scope);
       }
       try {

@@ -123,7 +123,7 @@ public class RemoveUnnecessaryControlFlowTest extends OptimizerTestBase {
   public void testLoopInSwitchStatement() throws UnableToCompleteException {
     optimize("void", "switch(4) {case 1: for (int i = 0; i < 10; i++) { break; }}").noChange();
 
-     optimize("void", "switch(4) {case 0: foo(); case 1: for (int i = 0; i < 10; i++) { continue; } break; }")
+    optimize("void", "switch(4) {case 0: foo(); case 1: for (int i = 0; i < 10; i++) { continue; } break; }")
          .into("switch(4) {case 0: foo(); case 1: for (int i = 0; i < 10; i++) { }}");
   }
 

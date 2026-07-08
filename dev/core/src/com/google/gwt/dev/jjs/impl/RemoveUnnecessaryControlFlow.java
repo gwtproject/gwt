@@ -130,7 +130,8 @@ public class RemoveUnnecessaryControlFlow {
       LOOP {
         @Override
         protected boolean rewriteReturn(List<JStatement> stmts, int lastIndex) {
-          stmts.set(lastIndex, new JBreakStatement(stmts.get(lastIndex).getSourceInfo(), null));
+          stmts.set(lastIndex,
+              new JBreakStatement(stmts.get(lastIndex).getSourceInfo(), null));
           return true;
         }
       },
@@ -141,7 +142,8 @@ public class RemoveUnnecessaryControlFlow {
        */
       LOOP_IN_LOOP {
         @Override
-        public void updateLastStatement(JMethod containingMethod, JBlock block, OptimizerContext ctx) {
+        public void updateLastStatement(JMethod containingMethod, JBlock block,
+              OptimizerContext ctx) {
           // No-op, we can't remove either breaks or returns. Overriding this means we don't need
           // to descend further.
         }
@@ -185,7 +187,8 @@ public class RemoveUnnecessaryControlFlow {
        * @param block the block to check
        * @param ctx the current context
        */
-      public void updateLastStatement(JMethod containingMethod, JBlock block, OptimizerContext ctx) {
+      public void updateLastStatement(JMethod containingMethod, JBlock block,
+            OptimizerContext ctx) {
         List<JStatement> stmts = block.getStatements();
         if (stmts.isEmpty()) {
           return;

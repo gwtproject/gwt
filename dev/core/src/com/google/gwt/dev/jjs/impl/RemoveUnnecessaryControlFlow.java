@@ -230,7 +230,9 @@ public class RemoveUnnecessaryControlFlow {
           loop().updateLastStatement(containingMethod, doStmt.getBody(), ctx);
         } else if (lastStmt instanceof JTryStatement tryStmt) {
           updateLastStatement(containingMethod, tryStmt.getTryBlock(), ctx);
-          updateLastStatement(containingMethod, tryStmt.getFinallyBlock(), ctx);
+          if (tryStmt.getFinallyBlock() != null) {
+            updateLastStatement(containingMethod, tryStmt.getFinallyBlock(), ctx);
+          }
           for (JTryStatement.CatchClause catchBlock : tryStmt.getCatchClauses()) {
             updateLastStatement(containingMethod, catchBlock.getBlock(), ctx);
           }
@@ -275,7 +277,9 @@ public class RemoveUnnecessaryControlFlow {
           updateContinues(containingMethod, ifStmt.getElseStmt(), ctx);
         } else if (lastStmt instanceof JTryStatement tryStmt) {
           updateContinues(containingMethod, tryStmt.getTryBlock(), ctx);
-          updateContinues(containingMethod, tryStmt.getFinallyBlock(), ctx);
+          if (tryStmt.getFinallyBlock() != null) {
+            updateContinues(containingMethod, tryStmt.getFinallyBlock(), ctx);
+          }
           for (JTryStatement.CatchClause catchBlock : tryStmt.getCatchClauses()) {
             updateContinues(containingMethod, catchBlock.getBlock(), ctx);
           }

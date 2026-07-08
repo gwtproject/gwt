@@ -71,14 +71,17 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
     return $doc.createElement('iframe');
   }-*/;
 
+  @Override
   public void createLink(String url) {
     execCommand("CreateLink", url);
   }
 
+  @Override
   public String getBackColor() {
     return queryCommandValue("BackColor");
   }
 
+  @Override
   public String getForeColor() {
     return queryCommandValue("ForeColor");
   }
@@ -114,26 +117,32 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
     }), 1);
   }-*/;
 
+  @Override
   public void insertHorizontalRule() {
     execCommand("InsertHorizontalRule", null);
   }
 
+  @Override
   public void insertHTML(@IsSafeHtml String html) {
     execCommand("InsertHTML", html);
   }
 
+  @Override
   public void insertImage(String url) {
     execCommand("InsertImage", url);
   }
 
+  @Override
   public void insertOrderedList() {
     execCommand("InsertOrderedList", null);
   }
 
+  @Override
   public void insertUnorderedList() {
     execCommand("InsertUnorderedList", null);
   }
 
+  @Override
   public boolean isBold() {
     return queryCommandState("Bold");
   }
@@ -144,50 +153,62 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
         : !beforeInitPlaceholder.getPropertyBoolean("disabled");
   }
 
+  @Override
   public boolean isItalic() {
     return queryCommandState("Italic");
   }
 
+  @Override
   public boolean isStrikethrough() {
     return queryCommandState("Strikethrough");
   }
 
+  @Override
   public boolean isSubscript() {
     return queryCommandState("Subscript");
   }
 
+  @Override
   public boolean isSuperscript() {
     return queryCommandState("Superscript");
   }
 
+  @Override
   public boolean isUnderlined() {
     return queryCommandState("Underline");
   }
 
+  @Override
   public void leftIndent() {
     execCommand("Outdent", null);
   }
 
+  @Override
   public void redo() {
     execCommand("Redo", "false");
   }
 
+  @Override
   public void removeFormat() {
     execCommand("RemoveFormat", null);
   }
 
+  @Override
   public void removeLink() {
     execCommand("Unlink", "false");
   }
 
+  @Override
   public void rightIndent() {
     execCommand("Indent", null);
   }
 
+  @Override
   public void selectAll() {
     execCommand("SelectAll", null);
   }
 
+  @Override
   public void setBackColor(String color) {
     execCommand("BackColor", color);
   }
@@ -212,14 +233,17 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
     }
   }
 
+  @Override
   public void setFontName(String name) {
     execCommand("FontName", name);
   }
 
+  @Override
   public void setFontSize(FontSize fontSize) {
     execCommand("FontSize", Integer.toString(fontSize.getNumber()));
   }
 
+  @Override
   public void setForeColor(String color) {
     execCommand("ForeColor", color);
   }
@@ -233,6 +257,7 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
     }
   }
 
+  @Override
   public void setJustification(Justification justification) {
     if (justification == Justification.CENTER) {
       execCommand("JustifyCenter", null);
@@ -254,30 +279,37 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
     }
   }
 
+  @Override
   public void toggleBold() {
     execCommand("Bold", "false");
   }
 
+  @Override
   public void toggleItalic() {
     execCommand("Italic", "false");
   }
 
+  @Override
   public void toggleStrikethrough() {
     execCommand("Strikethrough", "false");
   }
 
+  @Override
   public void toggleSubscript() {
     execCommand("Subscript", "false");
   }
 
+  @Override
   public void toggleSuperscript() {
     execCommand("Superscript", "false");
   }
 
+  @Override
   public void toggleUnderline() {
     execCommand("Underline", "False");
   }
 
+  @Override
   public void undo() {
     execCommand("Undo", "false");
   }
@@ -362,7 +394,8 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
     return elem.contentWindow.document.designMode.toUpperCase() == 'ON';
   }-*/;
 
-  @Override @SuppressIsSafeHtmlCastCheck
+  @Override
+  @SuppressIsSafeHtmlCastCheck
   protected void onElementInitialized() {
     // Issue 1897: This method is called after a timeout, during which time the
     // element might by detached.

@@ -80,6 +80,7 @@ public class JUnitHostImpl extends RemoteServiceServlet implements JUnitHost, Re
 
   private StackTraceDeobfuscator deobfuscator;
 
+  @Override
   public InitialResponse getTestBlock(int blockIndex, ClientInfo clientInfo)
       throws TimeoutException {
     ClientInfoExt clientInfoExt;
@@ -95,6 +96,7 @@ public class JUnitHostImpl extends RemoteServiceServlet implements JUnitHost, Re
     return new InitialResponse(clientInfoExt.getSessionId(), initialTestBlock);
   }
 
+  @Override
   public TestBlock reportResultsAndGetTestBlock(
       HashMap<TestInfo, JUnitResult> results, int testBlock,
       ClientInfo clientInfo) throws TimeoutException {

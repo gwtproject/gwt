@@ -29,6 +29,7 @@ import com.google.gwt.uibinder.rebind.model.OwnerField;
  */
 public class HTMLPanelParser implements ElementParser {
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       final UiBinderWriter writer) throws UnableToCompleteException {
 
@@ -86,6 +87,7 @@ public class HTMLPanelParser implements ElementParser {
 
     PlaceholderInterpreterProvider placeholderInterpreterProvider =
         new PlaceholderInterpreterProvider() {
+      @Override
       public PlaceholderInterpreter get(MessageWriter message) {
         return new WidgetPlaceholderInterpreter(fieldName, uiWriter, message,
             ancestorExpression);

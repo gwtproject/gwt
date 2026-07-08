@@ -41,6 +41,7 @@ class DocumentImpl extends NodeImpl implements Document {
    * This function delegates to the native method
    * <code>createCDATASection</code> in XMLParserImpl.
    */
+  @Override
   public CDATASection createCDATASection(String data) {
     try {
       return (CDATASection) NodeImpl.build(XMLParserImpl.createCDATASection(
@@ -54,6 +55,7 @@ class DocumentImpl extends NodeImpl implements Document {
    * This function delegates to the native method <code>createComment</code>
    * in XMLParserImpl.
    */
+  @Override
   public Comment createComment(String data) {
     try {
       return (Comment) NodeImpl.build(XMLParserImpl.createComment(
@@ -67,6 +69,7 @@ class DocumentImpl extends NodeImpl implements Document {
    * This function delegates to the native method
    * <code>createDocumentFragment</code> in XMLParserImpl.
    */
+  @Override
   public DocumentFragment createDocumentFragment() {
     try {
       return (DocumentFragment) NodeImpl.build(XMLParserImpl.createDocumentFragment(this.getJsObject()));
@@ -79,6 +82,7 @@ class DocumentImpl extends NodeImpl implements Document {
    * This function delegates to the native method <code>createElement</code>
    * in XMLParserImpl.
    */
+  @Override
   public Element createElement(String tagName) {
     try {
       return (Element) NodeImpl.build(XMLParserImpl.createElement(
@@ -92,6 +96,7 @@ class DocumentImpl extends NodeImpl implements Document {
    * This function delegates to the native method
    * <code>createProcessingInstruction</code> in XMLParserImpl.
    */
+  @Override
   public ProcessingInstruction createProcessingInstruction(String target,
       String data) {
     try {
@@ -106,6 +111,7 @@ class DocumentImpl extends NodeImpl implements Document {
    * This function delegates to the native method <code>createTextNode</code>
    * in XMLParserImpl.
    */
+  @Override
   public Text createTextNode(String data) {
     try {
       return (Text) NodeImpl.build(XMLParserImpl.createTextNode(
@@ -119,6 +125,7 @@ class DocumentImpl extends NodeImpl implements Document {
    * This function delegates to the native method
    * <code>getDocumentElement</code> in XMLParserImpl.
    */
+  @Override
   public Element getDocumentElement() {
     return (Element) NodeImpl.build(XMLParserImpl.getDocumentElement(this.getJsObject()));
   }
@@ -127,6 +134,7 @@ class DocumentImpl extends NodeImpl implements Document {
    * This function delegates to the native method <code>getElementById</code>
    * in XMLParserImpl.
    */
+  @Override
   public Element getElementById(String elementId) {
     return (Element) NodeImpl.build(XMLParserImpl.getElementById(
         this.getJsObject(), elementId));
@@ -136,6 +144,7 @@ class DocumentImpl extends NodeImpl implements Document {
    * This function delegates to the native method
    * <code>getElementsByTagName</code> in XMLParserImpl.
    */
+  @Override
   public NodeList getElementsByTagName(String tagName) {
     return new NodeListImpl(XMLParserImpl.getElementsByTagName(
         this.getJsObject(), tagName));
@@ -145,6 +154,7 @@ class DocumentImpl extends NodeImpl implements Document {
    * This function delegates to the native method <code>importNode</code> in
    * XMLParserImpl.
    */
+  @Override
   public Node importNode(Node importedNode, boolean deep) {
     try {
       return NodeImpl.build(XMLParserImpl.importNode(this.getJsObject(),

@@ -30,12 +30,14 @@ public abstract class DefaultLocalizedNamesBase implements LocalizedNames {
 
   protected Map<String, String> namesMap = null;
 
+  @Override
   public final String[] getLikelyRegionCodes() {
     if (likelyRegionCodes == null) {
       likelyRegionCodes = loadLikelyRegionCodes();
     }
     return likelyRegionCodes;
   }
+  @Override
   public final String getRegionName(String regionCode) {
     if (needsNameMap()) {
       loadNameMap();
@@ -43,6 +45,7 @@ public abstract class DefaultLocalizedNamesBase implements LocalizedNames {
     return getRegionNameImpl(regionCode);
   }
 
+  @Override
   public final String[] getSortedRegionCodes() {
     if (sortedRegionCodes == null) {
       sortedRegionCodes = loadSortedRegionCodes();

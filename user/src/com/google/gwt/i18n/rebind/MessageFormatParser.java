@@ -156,13 +156,16 @@ public class MessageFormatParser {
   public static class DefaultTemplateChunkVisitor
       implements TemplateChunkVisitor {
 
+    @Override
     public void visit(ArgumentChunk argChunk) throws UnableToCompleteException {
     }
 
+    @Override
     public void visit(StaticArgChunk staticArgChunk)
         throws UnableToCompleteException {
     }
 
+    @Override
     public void visit(StringChunk stringChunk)
         throws UnableToCompleteException {
     }

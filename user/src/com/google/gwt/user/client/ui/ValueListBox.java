@@ -68,6 +68,7 @@ public class ValueListBox<T> extends Composite implements
     initWidget(new ListBox());
 
     getListBox().addChangeHandler(new ChangeHandler() {
+      @Override
       public void onChange(ChangeEvent event) {
         int selectedIndex = getListBox().getSelectedIndex();
 
@@ -80,6 +81,7 @@ public class ValueListBox<T> extends Composite implements
     });
   }
 
+  @Override
   public HandlerRegistration addValueChangeHandler(ValueChangeHandler<T> handler) {
     return addHandler(handler, ValueChangeEvent.getType());
   }
@@ -87,6 +89,7 @@ public class ValueListBox<T> extends Composite implements
   /**
    * Returns a {@link TakesValueEditor} backed by the ValueListBox.
    */
+  @Override
   public TakesValueEditor<T> asEditor() {
     if (editor == null) {
       editor = TakesValueEditor.of(this);
@@ -99,6 +102,7 @@ public class ValueListBox<T> extends Composite implements
     return getListBox().getTabIndex();
   }
 
+  @Override
   public T getValue() {
     return value;
   }
@@ -108,6 +112,7 @@ public class ValueListBox<T> extends Composite implements
     return getListBox().isEnabled();
   }
 
+  @Override
   public void setAcceptableValues(Collection<T> newValues) {
     values.clear();
     valueKeyToIndex.clear();
@@ -145,10 +150,12 @@ public class ValueListBox<T> extends Composite implements
    * Set the value and display it in the select element. Add the value to the
    * acceptable set if it is not already there.
    */
+  @Override
   public void setValue(T value) {
     setValue(value, false);
   }
 
+  @Override
   public void setValue(T value, boolean fireEvents) {
     if (value == this.value || (this.value != null && this.value.equals(value))) {
       return;

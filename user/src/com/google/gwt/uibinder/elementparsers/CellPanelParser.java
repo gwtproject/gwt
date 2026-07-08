@@ -79,6 +79,7 @@ public class CellPanelParser implements ElementParser {
     }
   }
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
     for (XMLElement child : elem.consumeChildElements()) {

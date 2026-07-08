@@ -27,6 +27,7 @@ public class SomeParentParent extends SomePackageConfusedParent {
     return "Method not live";
   }
 
+  @Override
   String m() {
     return "SomeParentParent";
    }

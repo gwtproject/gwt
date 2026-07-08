@@ -40,6 +40,7 @@ class StaticResourceContext extends AbstractResourceContext {
     super(logger, context, resourceBundleType, clientBundleCtx);
   }
 
+  @Override
   public String deploy(String suggestedFileName, String mimeType, byte[] data,
       boolean forceExternal) throws UnableToCompleteException {
     TreeLogger logger = getLogger();
@@ -106,6 +107,7 @@ class StaticResourceContext extends AbstractResourceContext {
     return "GWT.getModuleBaseForStaticFiles() + \"" + outputName + "\"";
   }
 
+  @Override
   public boolean supportsDataUrls() {
     return false;
   }

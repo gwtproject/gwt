@@ -29,6 +29,7 @@ public interface GwtLocale extends Comparable<GwtLocale> {
   /**
    * The default comparison is a lexical ordering.
    */
+  @Override
   int compareTo(GwtLocale o);
 
   /**
@@ -147,6 +148,7 @@ public interface GwtLocale extends Comparable<GwtLocale> {
   /**
    * Returns a human readable string -- "default" or the same as getAsString().
    */
+  @Override
   String toString();
 
   /**

@@ -138,6 +138,7 @@ public class AutoDirectionHandler implements KeyUpHandler,
   /**
    * Returns the DirectionEstimator object.
    */
+  @Override
   public DirectionEstimator getDirectionEstimator() {
     return directionEstimator;
   }
@@ -146,6 +147,7 @@ public class AutoDirectionHandler implements KeyUpHandler,
    * Automatically adjusts hasDirection's direction on KeyUpEvent events.
    * Implementation of KeyUpHandler interface method.
    */
+  @Override
   public void onKeyUp(KeyUpEvent event) {
     refreshDirection();
   }
@@ -166,6 +168,7 @@ public class AutoDirectionHandler implements KeyUpHandler,
   /**
    * Toggles direction estimation on (using a default estimator) and off.
    */
+  @Override
   public void setDirectionEstimator(boolean enabled) {
     setDirectionEstimator(enabled ? WordCountDirectionEstimator.get() : null);
   }
@@ -173,6 +176,7 @@ public class AutoDirectionHandler implements KeyUpHandler,
   /**
    * Sets the DirectionEstimator object.
    */
+  @Override
   public void setDirectionEstimator(DirectionEstimator directionEstimator) {
     this.directionEstimator = directionEstimator;
     if ((directionEstimator == null) != (handlerRegistration == null)) {

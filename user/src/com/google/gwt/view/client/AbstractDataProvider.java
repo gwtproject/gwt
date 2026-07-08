@@ -90,6 +90,7 @@ public abstract class AbstractDataProvider<T> implements ProvidesKey<T> {
     // Add a handler to the display.
     HandlerRegistration handler = display.addRangeChangeHandler(
         new RangeChangeEvent.Handler() {
+          @Override
           public void onRangeChange(RangeChangeEvent event) {
             AbstractDataProvider.this.onRangeChanged(display);
           }
@@ -121,6 +122,7 @@ public abstract class AbstractDataProvider<T> implements ProvidesKey<T> {
    * @param item the list item
    * @return the key that represents the item
    */
+  @Override
   public Object getKey(T item) {
     return keyProvider == null ? item : keyProvider.getKey(item);
   }

@@ -31,9 +31,11 @@ import java.util.logging.LogRecord;
  */
 public final class SimpleRemoteLogHandler extends RemoteLogHandlerBase {
   class DefaultCallback implements AsyncCallback<String> {
+    @Override
     public void onFailure(Throwable caught) {
       wireLogger.log(Level.SEVERE, "Remote logging failed: ", caught);
     }
+    @Override
     public void onSuccess(String result) {
       if (result != null) {
         wireLogger.severe("Remote logging failed: " + result);

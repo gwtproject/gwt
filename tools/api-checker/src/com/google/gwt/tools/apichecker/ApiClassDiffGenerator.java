@@ -86,11 +86,7 @@ final class ApiClassDiffGenerator implements Comparable<ApiClassDiffGenerator> {
     }
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see java.lang.Comparable#compareTo(java.lang.Object)
-   */
+  @Override
   public int compareTo(ApiClassDiffGenerator other) {
     return getName().compareTo(other.getName());
   }

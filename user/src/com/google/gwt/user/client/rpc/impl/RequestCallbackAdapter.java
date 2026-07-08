@@ -190,10 +190,12 @@ public class RequestCallbackAdapter<T> implements RequestCallback {
     this.tokenExceptionHandler = tokenExceptionHandler;
   }
 
+  @Override
   public void onError(Request request, Throwable exception) {
     callback.onFailure(exception);
   }
 
+  @Override
   @SuppressWarnings(value = {"unchecked", "unused"})
   public void onResponseReceived(Request request, Response response) {
     T result = null;

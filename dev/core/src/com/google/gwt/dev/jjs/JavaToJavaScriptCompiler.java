@@ -1165,7 +1165,7 @@ public final class JavaToJavaScriptCompiler {
       // (2) Construct and unify the unresolved Java AST
       CompilationState compilationState =
           constructJavaAst(precompilationContext);
-
+      ImplementRecordComponents.exec(jprogram);
       // TODO(stalcup): hide metrics gathering in a callback or subclass
       JsniRestrictionChecker.exec(logger, jprogram);
       JsInteropRestrictionChecker.exec(logger, jprogram, getMinimalRebuildCache());
@@ -1182,8 +1182,6 @@ public final class JavaToJavaScriptCompiler {
       DevirtualizeDefaultMethodForwarding.exec(jprogram);
       // Replace calls to native overrides of object methods.
       ReplaceCallsToNativeJavaLangObjectOverrides.exec(jprogram);
-
-      ImplementRecordComponents.exec(jprogram);
 
       FixAssignmentsToUnboxOrCast.exec(jprogram);
       if (options.isEnableAssertions()) {

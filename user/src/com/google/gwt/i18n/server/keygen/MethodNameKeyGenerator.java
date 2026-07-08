@@ -25,6 +25,7 @@ import com.google.gwt.i18n.server.Message;
  */
 public class MethodNameKeyGenerator implements KeyGenerator {
 
+  @Override
   public String generateKey(Message msg) {
     return msg.getMethodName();
   }

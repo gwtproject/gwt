@@ -28,6 +28,7 @@ public class PrettyObfuscationStyleTest extends RenamingClassNameTest {
     return "com.google.gwt.resources.GssPrettyStyle";
   }
 
+  @Override
   public void testClassesRenaming() {
     ClassNameAnnotation classNameAnnotation = res().classNameAnnotation();
     String renamedClass = classNameAnnotation.renamedClass();

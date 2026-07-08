@@ -90,6 +90,7 @@ public class ProblemReport {
    */
   public ProblemReport() {
     Comparator<JClassType> comparator = new Comparator<JClassType>() {
+      @Override
       public int compare(JClassType o1, JClassType o2) {
         assert o1 != null;
         assert o2 != null;

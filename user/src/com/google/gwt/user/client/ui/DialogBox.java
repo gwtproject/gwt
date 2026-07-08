@@ -156,22 +156,27 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML,
   private class MouseHandler implements MouseDownHandler, MouseUpHandler,
       MouseOutHandler, MouseOverHandler, MouseMoveHandler {
 
+    @Override
     public void onMouseDown(MouseDownEvent event) {
       beginDragging(event);
     }
 
+    @Override
     public void onMouseMove(MouseMoveEvent event) {
       continueDragging(event);
     }
 
+    @Override
     public void onMouseOut(MouseOutEvent event) {
       DialogBox.this.onMouseLeave(caption.asWidget());
     }
 
+    @Override
     public void onMouseOver(MouseOverEvent event) {
       DialogBox.this.onMouseEnter(caption.asWidget());
     }
 
+    @Override
     public void onMouseUp(MouseUpEvent event) {
       endDragging(event);
     }
@@ -285,10 +290,12 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML,
     return caption;
   }
 
+  @Override
   public String getHTML() {
     return caption.getHTML();
   }
 
+  @Override
   public String getText() {
     return caption.getText();
   }
@@ -391,6 +398,7 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML,
    *
    * @param html the object's new HTML
    */
+  @Override
   public void setHTML(SafeHtml html) {
     caption.setHTML(html);
   }
@@ -405,6 +413,7 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML,
    *
    * @param html the object's new HTML
    */
+  @Override
   public void setHTML(@IsSafeHtml String html) {
     caption.setHTML(SafeHtmlUtils.fromTrustedString(html));
   }
@@ -418,6 +427,7 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML,
    *
    * @param text the object's new text
    */
+  @Override
   public void setText(String text) {
     caption.setText(text);
   }
@@ -426,6 +436,7 @@ public class DialogBox extends DecoratedPopupPanel implements HasHTML,
   public void show() {
     if (resizeHandlerRegistration == null) {
       resizeHandlerRegistration = Window.addResizeHandler(new ResizeHandler() {
+        @Override
         public void onResize(ResizeEvent event) {
           windowWidth = event.getWidth();
         }

@@ -104,14 +104,17 @@ public class AnnotationsResource extends AbstractResource {
       this.entry = entry;
     }
 
+    @Override
     public String getForm(String form) {
       return form == null ? entry.text : entry.altText.get(form);
     }
 
+    @Override
     public Collection<String> getForms() {
       return entry.altText.keySet();
     }
 
+    @Override
     public String getKey() {
       return key;
     }

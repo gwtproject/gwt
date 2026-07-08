@@ -58,10 +58,12 @@ public abstract class BaseListenerWrapper<T> implements EventHandler {
       super(listener);
     }
 
+    @Override
     public void onClose(CloseEvent<Window> event) {
       listener.onWindowClosed();
     }
 
+    @Override
     public void onWindowClosing(Window.ClosingEvent event) {
       String message = listener.onWindowClosing();
       if (event.getMessage() == null) {
@@ -86,6 +88,7 @@ public abstract class BaseListenerWrapper<T> implements EventHandler {
       super(listener);
     }
 
+    @Override
     public void onResize(ResizeEvent event) {
       listener.onWindowResized(event.getWidth(), event.getHeight());
     }
@@ -107,6 +110,7 @@ public abstract class BaseListenerWrapper<T> implements EventHandler {
       super(listener);
     }
 
+    @Override
     public void onWindowScroll(Window.ScrollEvent event) {
       listener.onWindowScrolled(event.getScrollLeft(), event.getScrollTop());
     }

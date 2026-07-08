@@ -105,15 +105,18 @@ public class ValueBoxBase<T> extends FocusWidget implements
     this.parser = parser;
   }
 
+  @Override
   public HandlerRegistration addChangeHandler(ChangeHandler handler) {
     return addDomHandler(handler, ChangeEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addValueChangeHandler(ValueChangeHandler<T> handler) {
     // Initialization code
     if (!valueChangeHandlerInitialized) {
       valueChangeHandlerInitialized = true;
       addChangeHandler(new ChangeHandler() {
+        @Override
         public void onChange(ChangeEvent event) {
           ValueChangeEvent.fire(ValueBoxBase.this, getValue());
         }
@@ -128,6 +131,7 @@ public class ValueBoxBase<T> extends FocusWidget implements
    * may override this method to provide custom error-handling when using the
    * Editor framework.
    */
+  @Override
   public ValueBoxEditor<T> asEditor() {
     if (editor == null) {
       editor = ValueBoxEditor.of(this);
@@ -156,6 +160,7 @@ public class ValueBoxBase<T> extends FocusWidget implements
     return impl.getCursorPos(getElement());
   }
 
+  @Override
   public Direction getDirection() {
     return BidiUtils.getDirectionOnElement(getElement());
   }
@@ -163,10 +168,12 @@ public class ValueBoxBase<T> extends FocusWidget implements
   /**
    * Gets the direction estimation model of the auto-dir handler.
    */
+  @Override
   public DirectionEstimator getDirectionEstimator() {
     return autoDirHandler.getDirectionEstimator();
   }
 
+  @Override
   public String getName() {
     return getElement().getPropertyString("name");
   }
@@ -194,6 +201,7 @@ public class ValueBoxBase<T> extends FocusWidget implements
     return impl.getSelectionLength(getElement());
   }
 
+  @Override
   public String getText() {
     return getElement().getPropertyString("value");
   }
@@ -201,6 +209,7 @@ public class ValueBoxBase<T> extends FocusWidget implements
   /**
    * Return the parsed value, or null if the field is empty or parsing fails.
    */
+  @Override
   public T getValue() {
     try {
       return getValueOrThrow();
@@ -291,6 +300,7 @@ public class ValueBoxBase<T> extends FocusWidget implements
     setSelectionRange(pos, 0);
   }
 
+  @Override
   public void setDirection(Direction direction) {
     BidiUtils.setDirectionOnElement(getElement(), direction);
   }
@@ -298,6 +308,7 @@ public class ValueBoxBase<T> extends FocusWidget implements
   /**
    * Toggles on / off direction estimation.
    */
+  @Override
   public void setDirectionEstimator(boolean enabled) {
     autoDirHandler.setDirectionEstimator(enabled);
   }
@@ -305,6 +316,7 @@ public class ValueBoxBase<T> extends FocusWidget implements
   /**
    * Sets the direction estimation model of the auto-dir handler.
    */
+  @Override
   public void setDirectionEstimator(DirectionEstimator directionEstimator) {
     autoDirHandler.setDirectionEstimator(directionEstimator);
   }
@@ -325,6 +337,7 @@ public class ValueBoxBase<T> extends FocusWidget implements
     }
   }
 
+  @Override
   public void setName(String name) {
     getElement().setPropertyString("name", name);
   }
@@ -380,15 +393,18 @@ public class ValueBoxBase<T> extends FocusWidget implements
    * 
    * @param text the object's new text
    */
+  @Override
   public void setText(String text) {
     getElement().setPropertyString("value", text != null ? text : "");
     autoDirHandler.refreshDirection();
   }
 
+  @Override
   public void setValue(T value) {
     setValue(value, false);
   }
 
+  @Override
   public void setValue(T value, boolean fireEvents) {
     T oldValue = fireEvents ? getValue() : null;
     setText(renderer.render(value));

@@ -52,6 +52,7 @@ public class DateTimeFormatRenderer extends AbstractRenderer<Date> {
     this.timeZone = timeZone;
   }
 
+  @Override
   public String render(Date object) {
     if (object == null) {
       return "";

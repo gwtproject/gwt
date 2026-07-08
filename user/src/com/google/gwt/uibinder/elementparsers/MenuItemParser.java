@@ -29,6 +29,7 @@ import com.google.gwt.user.client.ui.MenuItem;
  */
 public class MenuItemParser implements ElementParser {
 
+  @Override
   public void parse(final XMLElement elem, String fieldName, JClassType type,
       final UiBinderWriter writer) throws UnableToCompleteException {
 
@@ -45,6 +46,7 @@ public class MenuItemParser implements ElementParser {
     class MenuBarInterpreter implements Interpreter<Boolean> {
       FieldWriter menuBarField = null;
 
+      @Override
       public Boolean interpretElement(XMLElement child)
           throws UnableToCompleteException {
 

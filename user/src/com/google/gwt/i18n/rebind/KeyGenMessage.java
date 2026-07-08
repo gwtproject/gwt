@@ -50,23 +50,28 @@ class KeyGenMessage implements Message {
     this.method = method;
   }
 
+  @Override
   public void accept(MessageVisitor v) throws MessageProcessingException {
     throw new MessageProcessingException("unsupported");
   }
 
+  @Override
   public void accept(MessageVisitor v, GwtLocale locale)
       throws MessageProcessingException {
     throw new MessageProcessingException("unsupported");
   }
 
+  @Override
   public int compareTo(Message o) {
     return 0;
   }
 
+  @Override
   public Iterable<AlternateFormMapping> getAllMessageForms() {
     return null;
   }
 
+  @Override
   public <A extends Annotation> A getAnnotation(Class<A> annotClass) {
     A annot = method.getAnnotation(annotClass);
     if (annot != null) {
@@ -75,6 +80,7 @@ class KeyGenMessage implements Message {
     return method.getEnclosingType().findAnnotationInTypeHierarchy(annotClass);
   }
 
+  @Override
   public String getDefaultMessage() {
     if (isAnnotationPresent(DefaultMessage.class)) {
       DefaultMessage annot = getAnnotation(DefaultMessage.class);
@@ -98,57 +104,70 @@ class KeyGenMessage implements Message {
     }
   }
 
+  @Override
   public String getDescription() {
     Description annot = getAnnotation(Description.class);
     return annot != null ? annot.value() : null;
   }
 
+  @Override
   public String getKey() {
     return null;
   }
 
+  @Override
   public GwtLocale getMatchedLocale() {
     return null;
   }
 
+  @Override
   public String getMeaning() {
     Meaning meaningAnnot = getAnnotation(Meaning.class);
     return meaningAnnot != null ? meaningAnnot.value() : null;
   }
 
+  @Override
   public MessageInterface getMessageInterface() {
     return new KeyGenMessageInterface(method.getEnclosingType());
   }
 
+  @Override
   public MessageStyle getMessageStyle() {
     return isAnnotationPresent(DefaultMessage.class) ?
       MessageStyle.MESSAGE_FORMAT : MessageStyle.PLAIN;
   }
 
+  @Override
   public String getMethodName() {
     return method.getName();
   }
 
+  @Override
   public List<Parameter> getParameters() {
     return null;
   }
 
+  @Override
   public Type getReturnType() {
     return null;
   }
 
+  @Override
   public int[] getSelectorParameterIndices() {
     return null;
   }
 
+  @Override
   public MessageTranslation getTranslation(GwtLocale locale) {
     return null;
   }
 
+  @Override
   public boolean isAnnotationPresent(Class<? extends Annotation> annotClass) {
     return getAnnotation(annotClass) != null;
   }
 
+  @Override
   public boolean isVarArgs() {
     return false;
   }

@@ -29,6 +29,7 @@ import java.security.NoSuchAlgorithmException;
 @Deprecated
 public class MD5KeyGenerator implements KeyGenerator {
 
+  @Override
   public String generateKey(String className, String methodName, String text,
       String meaning) {
     /*

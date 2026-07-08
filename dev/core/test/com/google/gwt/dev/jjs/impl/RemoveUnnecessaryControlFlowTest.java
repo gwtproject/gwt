@@ -57,7 +57,13 @@ public class RemoveUnnecessaryControlFlowTest extends OptimizerTestBase {
         .into("if (condition()) { if (condition()) { return; } foo(); }");
   }
 
+  public void testReturnInTry() throws UnableToCompleteException {
+    optimize("void", "try { return; } catch (Exception e) { return; } finally { return; }")
+        .into("try { } catch (Exception e) { } finally { }");
+  }
+
   public void testReturnInLoop() throws UnableToCompleteException {
+    // while, with various returns
     optimize("void", "while (condition()) { return; }")
         .into("while (condition()) { break; }");
     optimize("void", "while (condition()) { return; } return;")
@@ -65,12 +71,50 @@ public class RemoveUnnecessaryControlFlowTest extends OptimizerTestBase {
 
     optimize("void", "while (condition()) { return; } foo();").noChange();
 
-    // for, do/while
+    // for, do/while - add some nesting
+    optimize("void", "for (int i = 0; i < 10; i++) { return; }")
+        .into("for (int i = 0; i < 10; i++) { break; }");
+    optimize("void", "do { if (condition()) { return; } else { foo(); } } while(true);")
+        .into("do { if (condition()) { break; } else { foo(); } } while(true);");
   }
 
-  // TODO test try/catches/finally
-  // switch/case/default
-  // loop in loop break/return
+  public void testContinueInLoop() throws UnableToCompleteException {
+    // Same sorts of tests on each loop construct, with various other siblings/wrappings
+    optimize("void", "for (int i = 0; i < 10; i++) { continue; }")
+        .into("for (int i = 0; i < 10; i++) { }");
+    optimize("void", "do { if (condition()) { continue; } else { foo(); } } while(true);")
+        .into("do { if (condition()) { } else { foo(); } } while(true);");
+    optimize("void", "while(true) { foo(); continue; } ")
+        .into("while(true) { foo(); }");
+  }
+
+  public void testSwitchStmt() throws UnableToCompleteException {
+    // Final return/break removed
+    optimize("void", "switch (3) { case 1: return; case 2: default: return; }")
+        .into("switch (3) { case 1: return; case 2: default: }");
+    optimize("void", "switch (3) { case 1: break; case 2: default: break; }")
+        .into("switch (3) { case 1: break; case 2: default: }");
+  }
+
+  public void testLoopInLoop() throws UnableToCompleteException {
+    // Continue can be omitted even if the loop isn't the last statement
+    optimize("void", "while (condition()) { while (condition()) { foo(); continue; } continue; } foo();")
+        .into("while (condition()) { while (condition()) { foo(); } } foo();");
+    optimize("void", "while (condition()) { while (condition()) { foo(); continue; } }")
+        .into("while (condition()) { while (condition()) { foo(); } }");
+
+    // return cannot be omitted in a loop-in-loop
+    optimize("void", "while (condition()) { while (true) { foo(); return; } }")
+        .noChange();
+    // loop-in-loop structure doesn't impact return in the outer loop
+    optimize("void", "while (condition()) { while (condition()) { foo(); } return; }")
+        .into("while (condition()) { while (condition()) { foo(); } break; }");
+  }
+
+  public void testSwitchInLoop() {
+
+  }
+
   // loop, loop-in-loop continue (in other blocks)
   // switch-in-loop break/return
   // if/block/try in switch
@@ -84,10 +128,8 @@ public class RemoveUnnecessaryControlFlowTest extends OptimizerTestBase {
   protected boolean doOptimizeMethod(TreeLogger logger, JProgram program, JMethod method)
       throws UnableToCompleteException {
     int mods = RemoveUnnecessaryControlFlow.exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
-    if (mods > 0) {
-      // verify we converged in a single pass
-      assert RemoveUnnecessaryControlFlow.exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT) == 0;
-    }
+    // verify we converged in a single pass
+    assert RemoveUnnecessaryControlFlow.exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT) == 0;
     return mods > 0;
   }
 }

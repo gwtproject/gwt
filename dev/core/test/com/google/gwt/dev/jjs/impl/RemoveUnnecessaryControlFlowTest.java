@@ -111,18 +111,31 @@ public class RemoveUnnecessaryControlFlowTest extends OptimizerTestBase {
         .into("while (condition()) { while (condition()) { foo(); } break; }");
   }
 
-  public void testSwitchInLoop() {
-
+  public void testSwitchInLoop() throws UnableToCompleteException {
+    // validate that the break is treated as part of the switch and still removed
+    optimize("void", "for (int i = 0; i < 10; i++) { switch (i) { case 1: return; case 2: break; } }")
+        .into("for (int i = 0; i < 10; i++) { switch (i) { case 1: return; case 2: } }");
+    // Likewise, the continue inside the switch is part of the loop and removed as the final statement
+    optimize("void", "for (int i = 0; i < 10; i++) { switch (i) { case 1: return; case 2: continue; } }")
+        .into("for (int i = 0; i < 10; i++) { switch (i) { case 1: return; case 2: } }");
   }
 
-  // loop, loop-in-loop continue (in other blocks)
-  // switch-in-loop break/return
-  // if/block/try in switch
-  //
+  public void testLoopInSwitchStatement() throws UnableToCompleteException {
+    optimize("void", "switch(4) {case 1: for (int i = 0; i < 10; i++) { break; }}").noChange();
 
-  // switch exprs, with loops in them, etc
+     optimize("void", "switch(4) {case 0: foo(); case 1: for (int i = 0; i < 10; i++) { continue; } break; }")
+         .into("switch(4) {case 0: foo(); case 1: for (int i = 0; i < 10; i++) { }}");
+  }
 
+  public void testBlocksInSwitchStatement() throws UnableToCompleteException {
+    optimize("void", "switch(4) {case 0: {foo();} case 1: if (condition()) {return;} else {foo(); return;} }")
+        .into("switch(4) {case 0: {foo();} case 1: if (condition()) {} else {foo(); } }");
+  }
 
+  public void testContinuesInNonVoidMethod() throws UnableToCompleteException {
+    optimize("int", "while (condition()) { foo(); continue; } return 1;")
+        .into("while (condition()) { foo(); }; return 1;");
+  }
 
   @Override
   protected boolean doOptimizeMethod(TreeLogger logger, JProgram program, JMethod method)

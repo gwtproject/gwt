@@ -108,9 +108,8 @@ public class RemoveUnnecessaryControlFlow {
       // At this time, skip switch expressions entirely - break/continue within loops effectively
       // behave like they are in a different method, we should restart the whole "method" from
       // this node.
-      // Left for later work, since it won't be a regression, and rarely do switch expressions
-      // get this complex.
-      return false;
+      // However, if we see a void type, then we're actually just a regular switch statement
+      return x.getType() == JPrimitiveType.VOID;
     }
 
     /**

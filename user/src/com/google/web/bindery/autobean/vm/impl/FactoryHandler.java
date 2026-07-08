@@ -36,7 +36,7 @@ public class FactoryHandler implements InvocationHandler {
    * Constructor.
    * 
    * @param configuration provides collections of categories and
-   *     {@link com.google.web.bindery.autobean.shared.AutoBeanFactory.NoWrap} classes
+   *     classes that shouldn't be wrapped in autobean proxies
    */
   public FactoryHandler(Configuration configuration) {
     this.configuration = configuration;

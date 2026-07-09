@@ -112,6 +112,7 @@ public class StandardSerializationPolicy extends SerializationPolicy implements
     }
   }
 
+  @Override
   public final String getClassNameForTypeId(String id)
       throws SerializationException {
     Class<?> clazz = typeIdsToClasses.get(id);
@@ -136,6 +137,7 @@ public class StandardSerializationPolicy extends SerializationPolicy implements
     return clientFields != null && !clientFields.isEmpty();
   }
 
+  @Override
   public final String getTypeIdForClass(Class<?> clazz)
       throws SerializationException {
     return typeIds.get(clazz);

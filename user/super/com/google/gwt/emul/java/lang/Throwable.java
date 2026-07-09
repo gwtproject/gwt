@@ -103,7 +103,7 @@ public class Throwable implements Serializable {
   }
 
   private void initializeBackingError() {
-    setBackingJsObject(fixIE(createError(toString(detailMessage))));
+    setBackingJsObject(createError(toString(detailMessage)));
 
     captureStackTrace();
   }
@@ -116,15 +116,6 @@ public class Throwable implements Serializable {
 
   // Called by J2CL transpiler. Do not remove!
   void privateInitError(Object error) { }
-
-  @SuppressWarnings("unusable-by-js")
-  private static native Object fixIE(Object e) /*-{
-    // In IE -unlike every other browser-, the stack property is not defined until you throw it.
-    if (!("stack" in e)) {
-      try { throw e; } catch(ignored) {}
-    }
-    return e;
-  }-*/;
 
   @SuppressWarnings("unusable-by-js")
   private native void captureStackTrace() /*-{

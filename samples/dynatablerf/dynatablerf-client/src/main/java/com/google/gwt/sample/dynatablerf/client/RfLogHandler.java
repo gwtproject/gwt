@@ -41,12 +41,12 @@ public class RfLogHandler extends RemoteLogHandlerBase {
   private LoggingRequestProvider requestProvider;
 
   /**
-   * Since records from this handler go accross the wire, it should only be used
+   * Since records from this handler go across the wire, it should only be used
    * for important messages, and it's Level will often be higher than the Level
    * being used app-wide. This handler also takes string which it will use to
    * exclude the messages from some loggers. This usually includes the name of
    * the logger(s) which will be used to log acknowledgements of activity going
-   * accross the wire. If we did not exclude these loggers, an infinite loop
+   * across the wire. If we did not exclude these loggers, an infinite loop
    * would occur.
    *
    * @param requestProvider a {@link LoggingRequestProvider} instance

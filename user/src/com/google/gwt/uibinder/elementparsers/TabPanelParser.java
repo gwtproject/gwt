@@ -29,6 +29,7 @@ public class TabPanelParser implements ElementParser {
   private static final String TAG_TAB = "Tab";
   private static final String TAG_TABHTML = "TabHTML";
 
+  @Override
   public void parse(XMLElement panelElem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
     // Parse children.

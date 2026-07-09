@@ -425,8 +425,13 @@ public class Simplifier {
     if (rhs instanceof JBooleanLiteral) {
       if (((JBooleanLiteral) rhs).getValue()) {
         return lhs;
-      } else if (!lhs.hasSideEffects()) {
-        // Do not remove lhs if it had side effects
+      } else if (lhs.hasSideEffects()) {
+        // if side effect, rewrite a() && false to (a(), false)
+        // so that parent node can be simplified further
+        // e.g. (a() && false) && b() -> (a(), false) && b()
+        // -> (a(), false && b()) -> (a(), false)
+        return new JMultiExpression(info, lhs, rhs);
+      } else {
         return rhs;
       }
     }
@@ -478,7 +483,9 @@ public class Simplifier {
     if (rhs instanceof JBooleanLiteral) {
       if (!((JBooleanLiteral) rhs).getValue()) {
         return lhs;
-      } else if (!lhs.hasSideEffects()) {
+      } else if (lhs.hasSideEffects()) {
+        return new JMultiExpression(info, lhs, rhs);
+      } else {
         return rhs;
       }
     }

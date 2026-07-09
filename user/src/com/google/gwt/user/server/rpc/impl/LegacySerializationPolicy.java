@@ -98,6 +98,7 @@ public class LegacySerializationPolicy extends SerializationPolicy implements
   /**
    * Implemented to fail with a useful error message.
    */
+  @Override
   public final String getClassNameForTypeId(String id)
       throws SerializationException {
     throw new SerializationException(ELISION_ERROR);
@@ -106,6 +107,7 @@ public class LegacySerializationPolicy extends SerializationPolicy implements
   /**
    * Implemented to fail with a useful error message.
    */
+  @Override
   public final String getTypeIdForClass(Class<?> clazz)
       throws SerializationException {
     throw new SerializationException(ELISION_ERROR);

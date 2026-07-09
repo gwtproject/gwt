@@ -28,32 +28,38 @@ public class CssModVisitor extends CssVisitor {
     private boolean removed;
     private boolean replaced;
 
+    @Override
     public boolean canInsert() {
       return true;
     }
 
+    @Override
     public boolean canRemove() {
       return true;
     }
 
+    @Override
     public void insertAfter(CssNode node) {
       checkRemoved();
       list.add(index + 1, node);
       didChange = true;
     }
 
+    @Override
     public void insertBefore(CssNode node) {
       checkRemoved();
       list.add(index++, node);
       didChange = true;
     }
 
+    @Override
     public void removeMe() {
       checkState();
       list.remove(index--);
       didChange = removed = true;
     }
 
+    @Override
     public void replaceMe(CssNode node) {
       checkState();
       checkReplacement((CssNode) list.get(index), node);

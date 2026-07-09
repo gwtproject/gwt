@@ -68,6 +68,7 @@ public abstract class AbstractResourceContext implements ResourceContext {
     return deploy(resource, null, forceExternal);
   }
   
+  @Override
   public String deploy(URL resource, String mimeType, boolean forceExternal)
       throws UnableToCompleteException {
     String fileName = ResourceGeneratorUtil.baseName(resource);
@@ -86,18 +87,22 @@ public abstract class AbstractResourceContext implements ResourceContext {
     }
   }
 
+  @Override
   public <T> T getCachedData(String key, Class<T> clazz) {
     return clazz.cast(clientBundleCtx.getCachedData(currentResourceGeneratorType + ":" + key));
   }
 
+  @Override
   public JClassType getClientBundleType() {
     return resourceBundleType;
   }
 
+  @Override
   public GeneratorContext getGeneratorContext() {
     return context;
   }
 
+  @Override
   public String getImplementationSimpleSourceName() {
     if (simpleSourceName == null) {
       throw new IllegalStateException(
@@ -106,10 +111,12 @@ public abstract class AbstractResourceContext implements ResourceContext {
     return simpleSourceName;
   }
   
+  @Override
   public ClientBundleRequirements getRequirements() {
     return requirements;
   }
 
+  @Override
   public <T> boolean putCachedData(String key, T value) {
     key = currentResourceGeneratorType + ":" + key;
     return value != clientBundleCtx.putCachedData(key, value);

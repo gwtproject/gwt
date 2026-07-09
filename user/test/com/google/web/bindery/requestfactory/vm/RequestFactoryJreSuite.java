@@ -34,6 +34,7 @@ import com.google.web.bindery.requestfactory.server.RequestPayloadJreTest;
 import com.google.web.bindery.requestfactory.server.ServiceInheritanceJreTest;
 import com.google.web.bindery.requestfactory.server.ServiceLocatorTest;
 import com.google.web.bindery.requestfactory.shared.impl.SimpleEntityProxyIdTest;
+import com.google.web.bindery.requestfactory.vm.impl.ClassComparatorTest;
 
 import junit.framework.Test;
 import junit.framework.TestResult;
@@ -48,6 +49,7 @@ public class RequestFactoryJreSuite {
   public static Test suite() {
     TestSuite suite = new TestSuite("requestfactory package tests that require the JRE");
     suite.addTestSuite(BoxesAndPrimitivesJreTest.class);
+    suite.addTestSuite(ClassComparatorTest.class);
     suite.addTestSuite(ComplexKeysJreTest.class);
     suite.addTestSuite(FanoutReceiverJreTest.class);
     suite.addTestSuite(FindServiceJreTest.class);

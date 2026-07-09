@@ -32,6 +32,7 @@ public class StringSourceWriter implements SourceWriter {
   private boolean needsIndent;
   private final PrintWriter out = new PrintWriter(buffer);
 
+  @Override
   public void beginJavaDocComment() {
     println("/**");
     indent();
@@ -41,43 +42,52 @@ public class StringSourceWriter implements SourceWriter {
   /**
    * This is a no-op.
    */
+  @Override
   public void commit(TreeLogger logger) {
     out.flush();
   }
 
+  @Override
   public void endJavaDocComment() {
     out.println("*/");
     outdent();
     indentPrefix = "";
   }
 
+  @Override
   public void indent() {
     indentLevel++;
   }
 
+  @Override
   public void indentln(String s) {
     indent();
     println(s);
     outdent();
   }
 
+  @Override
   public void indentln(String s, Object... args) {
     indentln(String.format(s, args));
   }
 
+  @Override
   public void outdent() {
     indentLevel = Math.max(indentLevel - 1, 0);
   }
 
+  @Override
   public void print(String s) {
     maybeIndent();
     out.print(s);
   }
 
+  @Override
   public void print(String s, Object... args) {
     print(String.format(s, args));
   }
 
+  @Override
   public void println() {
     maybeIndent();
     // Unix-style line endings for consistent behavior across platforms.
@@ -85,11 +95,13 @@ public class StringSourceWriter implements SourceWriter {
     needsIndent = true;
   }
 
+  @Override
   public void println(String s) {
     print(s);
     println();
   }
 
+  @Override
   public void println(String s, Object... args) {
     println(String.format(s, args));
   }

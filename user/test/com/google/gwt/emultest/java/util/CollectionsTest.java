@@ -293,12 +293,14 @@ public class CollectionsTest extends EmulTestBase {
     }
     // Test optimized RandomAccess code path
     testRotateImpl(new ListImplProvider() {
+      @Override
       public List<Integer> copyOf(Collection<Integer> data) {
         return new ArrayList<>(data);
       }
     });
     // Test sequential List code path
     testRotateImpl(new ListImplProvider() {
+      @Override
       public List<Integer> copyOf(Collection<Integer> data) {
         return new LinkedList<>(data);
       }

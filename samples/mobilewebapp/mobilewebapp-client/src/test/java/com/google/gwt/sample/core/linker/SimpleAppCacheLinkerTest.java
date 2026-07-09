@@ -89,7 +89,7 @@ public class SimpleAppCacheLinkerTest extends TestCase {
     logger = TreeLogger.NULL;
   }
 
-  public void testAddCachableArtifacts() throws UnableToCompleteException {
+  public void testAddCacheableArtifacts() throws UnableToCompleteException {
     SimpleAppCacheLinker linker = new SimpleAppCacheLinker();
 
     // Some cacheable artifact
@@ -140,7 +140,7 @@ public class SimpleAppCacheLinkerTest extends TestCase {
     assertHasOneManifest(result);
   }
   
-  public void testNoNonCachableArtifacts() throws UnableToCompleteException {
+  public void testNoNonCacheableArtifacts() throws UnableToCompleteException {
     SimpleAppCacheLinker linker = new SimpleAppCacheLinker();
 
     // Some non-cacheable artifacts

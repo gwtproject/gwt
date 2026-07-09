@@ -667,7 +667,7 @@ public final class Util {
    * 16k buffer, which is small enough to fit into the L2 cache on modern
    * processors. The contents of the returned buffer are undefined. Calling
    * {@link #releaseThreadLocalBuf(byte[])} on the returned buffer allows
-   * subsequent callers to reuse the buffer later, avoiding unncessary
+   * subsequent callers to reuse the buffer later, avoiding unnecessary
    * allocations and GC.
    *
    * @deprecated No direct replacement, consider using a ThreadLocal or pool to help avoid

@@ -69,6 +69,7 @@ class ProxySerializerImpl extends AbstractRequestContext implements ProxySeriali
     this.store = store;
   }
 
+  @Override
   public <T extends BaseProxy> T deserialize(Class<T> proxyType, String key) {
     // Fast exit to prevent getOperation from throwing an exception
     if (store.get(key) == null) {
@@ -80,6 +81,7 @@ class ProxySerializerImpl extends AbstractRequestContext implements ProxySeriali
     return doDeserialize(id);
   }
 
+  @Override
   public <T extends EntityProxy> T deserialize(EntityProxyId<T> id) {
     return doDeserialize((SimpleEntityProxyId<T>) id);
   }
@@ -92,6 +94,7 @@ class ProxySerializerImpl extends AbstractRequestContext implements ProxySeriali
     return super.getSerializedProxyId(serializedId(stableId));
   }
 
+  @Override
   public String serialize(BaseProxy rootObject) {
     if (rootObject == null) {
       return "null";

@@ -30,6 +30,7 @@ public abstract class ResizeComposite extends Composite implements
     super.initWidget(widget);
   }
 
+  @Override
   public void onResize() {
     ((RequiresResize) getWidget()).onResize();
   }

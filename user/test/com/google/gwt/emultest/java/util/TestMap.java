@@ -223,7 +223,7 @@ abstract class TestMap extends TestObject {
 
   /**
    * Returns the set of values in the mappings used to test the map. This method must return an
-   * array with the same length as {@link #getSampleKeys()}. The default implementation contructs a
+   * array with the same length as {@link #getSampleKeys()}. The default implementation constructs a
    * set of String values and includes a single null value if {@link #useNullValue()} returns <code>
    * true</code>, and includes two values that are the same if {@link #useDuplicateValues()} returns
    * <code>true</code>.

@@ -115,28 +115,34 @@ public class IconCellDecorator<C> implements Cell<C> {
         SafeStylesUtils.fromTrustedString("padding-" + direction + ": " + imageWidth + "px;");
   }
 
+  @Override
   public boolean dependsOnSelection() {
     return cell.dependsOnSelection();
   }
 
+  @Override
   public Set<String> getConsumedEvents() {
     return cell.getConsumedEvents();
   }
 
+  @Override
   public boolean handlesSelection() {
     return cell.handlesSelection();
   }
 
+  @Override
   public boolean isEditing(Context context, Element parent, C value) {
     return cell.isEditing(context, getCellParent(parent), value);
   }
 
+  @Override
   public void onBrowserEvent(Context context, Element parent, C value,
       NativeEvent event, ValueUpdater<C> valueUpdater) {
     cell.onBrowserEvent(context, getCellParent(parent), value, event,
         valueUpdater);
   }
 
+  @Override
   public void render(Context context, C value, SafeHtmlBuilder sb) {
     SafeHtmlBuilder cellBuilder = new SafeHtmlBuilder();
     cell.render(context, value, cellBuilder);
@@ -144,10 +150,12 @@ public class IconCellDecorator<C> implements Cell<C> {
         : placeHolderHtml, cellBuilder.toSafeHtml()));
   }
 
+  @Override
   public boolean resetFocus(Context context, Element parent, C value) {
     return cell.resetFocus(context, getCellParent(parent), value);
   }
 
+  @Override
   public void setValue(Context context, Element parent, C value) {
     cell.setValue(context, getCellParent(parent), value);
   }

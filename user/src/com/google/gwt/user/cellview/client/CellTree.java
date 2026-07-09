@@ -76,19 +76,23 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
    */
   public interface BasicResources extends Resources {
 
+    @Override
     @ImageOptions(flipRtl = true)
     ImageResource cellTreeClosedItem();
 
+    @Override
     @ImageOptions(flipRtl = true)
     @Source("cellTreeLoadingBasic.gif")
     ImageResource cellTreeLoading();
 
+    @Override
     @ImageOptions(flipRtl = true)
     ImageResource cellTreeOpenItem();
 
     /**
      * The styles used in this widget.
      */
+    @Override
     @Source(BasicStyle.DEFAULT_CSS)
     BasicStyle cellTreeStyle();
   }
@@ -684,10 +688,12 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
     return rootNode.getTreeNode();
   }
 
+  @Override
   public int getTabIndex() {
     return tabIndex;
   }
 
+  @Override
   public boolean isAnimationEnabled() {
     return isAnimationEnabled;
   }
@@ -780,6 +786,7 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
    *
    * @see #getAccessKey()
    */
+  @Override
   public void setAccessKey(char key) {
     this.accessKey = key;
     keyboardSelectedNode.setKeyboardSelected(true, false);
@@ -798,6 +805,7 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
     this.animation = animation;
   }
 
+  @Override
   public void setAnimationEnabled(boolean enable) {
     this.isAnimationEnabled = enable;
     if (!enable && animation != null) {
@@ -818,6 +826,7 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
     this.defaultNodeSize = defaultNodeSize;
   }
 
+  @Override
   public void setFocus(boolean focused) {
     keyboardSelectedNode.setKeyboardSelected(true, true);
   }
@@ -838,6 +847,7 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
     keyboardSelect(nodeView.getChildNode(childIndex), stealFocus);
   }
 
+  @Override
   public void setTabIndex(int index) {
     this.tabIndex = index;
     keyboardSelectedNode.setKeyboardSelected(true, false);
@@ -967,6 +977,7 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
    */
   void resetFocus() {
     CellBasedWidgetImpl.get().resetFocus(new Scheduler.ScheduledCommand() {
+      @Override
       public void execute() {
         if (isFocused && !keyboardSelectedNode.isDestroyed()
             && !keyboardSelectedNode.resetFocusOnCell()) {

@@ -90,6 +90,7 @@ public class Tokenator {
    */
   public String detokenate(String betokened) {
     return detokenate(betokened, new Resolver() {
+      @Override
       public String resolveToken(String token) {
         return tokenToResolved.get(token);
       }
@@ -102,6 +103,7 @@ public class Tokenator {
    */
   public List<ValueAndInfo> getOrderedValues(String betokened) {
     return getOrderedValues(betokened, new Resolver() {
+      @Override
       public String resolveToken(String token) {
         return tokenToResolved.get(token);
       }

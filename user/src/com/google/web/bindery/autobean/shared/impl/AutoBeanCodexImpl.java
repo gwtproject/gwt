@@ -138,6 +138,7 @@ public class AutoBeanCodexImpl {
       this.type = type;
     }
 
+    @Override
     public Object decode(EncodeState state, Splittable data) {
       Collection<Object> collection;
       if (List.class.equals(type)) {
@@ -151,6 +152,7 @@ public class AutoBeanCodexImpl {
       return collection;
     }
 
+    @Override
     public void encode(EncodeState state, Object value) {
       if (value == null) {
         state.sb.append("null");
@@ -169,6 +171,7 @@ public class AutoBeanCodexImpl {
       state.sb.append("]");
     }
 
+    @Override
     public Splittable extractSplittable(EncodeState state, Object value) {
       return tryExtractSplittable(value);
     }
@@ -186,10 +189,12 @@ public class AutoBeanCodexImpl {
       this.type = type;
     }
 
+    @Override
     public Object decode(EncodeState state, Splittable data) {
       return state.enumMap.getEnum(type, data.asString());
     }
 
+    @Override
     public void encode(EncodeState state, Object value) {
       if (value == null) {
         state.sb.append("null");
@@ -198,6 +203,7 @@ public class AutoBeanCodexImpl {
       state.sb.append(StringQuoter.quote(state.enumMap.getToken((Enum<?>) value)));
     }
 
+    @Override
     public Splittable extractSplittable(EncodeState state, Object value) {
       return StringQuoter.split(StringQuoter.quote(state.enumMap.getToken((Enum<?>) value)));
     }
@@ -232,6 +238,7 @@ public class AutoBeanCodexImpl {
       this.valueDecoder = valueDecoder;
     }
 
+    @Override
     public Object decode(EncodeState state, Splittable data) {
       Map<Object, Object> toReturn;
       if (data.isIndexed()) {
@@ -243,6 +250,7 @@ public class AutoBeanCodexImpl {
       return toReturn;
     }
 
+    @Override
     public void encode(EncodeState state, Object value) {
       if (value == null) {
         state.sb.append("null");
@@ -293,6 +301,7 @@ public class AutoBeanCodexImpl {
       }
     }
 
+    @Override
     public Splittable extractSplittable(EncodeState state, Object value) {
       return tryExtractSplittable(value);
     }
@@ -308,11 +317,13 @@ public class AutoBeanCodexImpl {
       this.type = type;
     }
 
+    @Override
     public Object decode(EncodeState state, Splittable data) {
       AutoBean<?> bean = doDecode(state, type, data);
       return bean == null ? null : bean.as();
     }
 
+    @Override
     public void encode(EncodeState state, Object value) {
       if (value == null) {
         state.sb.append("null");
@@ -321,6 +332,7 @@ public class AutoBeanCodexImpl {
       doEncode(state, AutoBeanUtils.getAutoBean(value));
     }
 
+    @Override
     public Splittable extractSplittable(EncodeState state, Object value) {
       return tryExtractSplittable(value);
     }
@@ -457,10 +469,12 @@ public class AutoBeanCodexImpl {
   static class SplittableCoder implements Coder {
     static final Coder INSTANCE = new SplittableCoder();
 
+    @Override
     public Object decode(EncodeState state, Splittable data) {
       return data;
     }
 
+    @Override
     public void encode(EncodeState state, Object value) {
       if (value == null) {
         state.sb.append("null");
@@ -469,6 +483,7 @@ public class AutoBeanCodexImpl {
       state.sb.append(((Splittable) value).getPayload());
     }
 
+    @Override
     public Splittable extractSplittable(EncodeState state, Object value) {
       return (Splittable) value;
     }
@@ -485,6 +500,7 @@ public class AutoBeanCodexImpl {
       this.type = type;
     }
 
+    @Override
     public Object decode(EncodeState state, Splittable propertyValue) {
       if (propertyValue == null || propertyValue == Splittable.NULL) {
         return ValueCodex.getUninitializedFieldValue(type);
@@ -492,10 +508,12 @@ public class AutoBeanCodexImpl {
       return ValueCodex.decode(type, propertyValue);
     }
 
+    @Override
     public void encode(EncodeState state, Object value) {
       state.sb.append(ValueCodex.encode(type, value).getPayload());
     }
 
+    @Override
     public Splittable extractSplittable(EncodeState state, Object value) {
       return ValueCodex.encode(type, value);
     }

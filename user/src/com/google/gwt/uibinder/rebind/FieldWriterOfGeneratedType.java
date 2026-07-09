@@ -45,14 +45,17 @@ class FieldWriterOfGeneratedType extends AbstractFieldWriter {
     this.typePackage = typePackage;
   }
 
+  @Override
   public JClassType getAssignableType() {
     return assignableType;
   }
 
+  @Override
   public JClassType getInstantiableType() {
     return null;
   }
 
+  @Override
   public String getQualifiedSourceName() {
     if (typePackage.length() == 0) {
       return typeName;

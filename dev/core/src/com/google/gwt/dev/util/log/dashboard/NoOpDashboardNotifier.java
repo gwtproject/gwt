@@ -30,7 +30,7 @@ public class NoOpDashboardNotifier implements DashboardNotifier {
   }
 
   @Override
-  public void devModeEventEnd(DevModeSession sesion, String eventType, long startTimeNanos,
+  public void devModeEventEnd(DevModeSession session, String eventType, long startTimeNanos,
       long durationNanos) {
     // do nothing
   }

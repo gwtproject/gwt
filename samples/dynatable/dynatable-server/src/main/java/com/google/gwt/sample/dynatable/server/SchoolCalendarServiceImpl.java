@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * The implemenation of the RPC service which runs on the server.
+ * The implementation of the RPC service which runs on the server.
  */
 public class SchoolCalendarServiceImpl extends RemoteServiceServlet implements
     SchoolCalendarService {

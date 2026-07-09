@@ -34,10 +34,12 @@ public class FinalFieldsTest extends RpcTestBase {
     FinalFieldsNode node = new FinalFieldsNode(4, "C", 9);
 
     service.transferObject(node, new AsyncCallback<FinalFieldsNode>() {
+      @Override
       public void onFailure(Throwable caught) {
         TestSetValidator.rethrowException(caught);
       }
 
+      @Override
       public void onSuccess(FinalFieldsNode result) {
         assertNotNull(result);
         assertTrue(TestSetValidator.isValidFinalFieldsObjectFromServer(result));

@@ -114,7 +114,7 @@ public class JdtCompiler {
 
     @Override
     public void process(CompilationUnitBuilder builder, CompilationUnitDeclaration cud,
-        List<ImportReference> cudOriginaImports, List<CompiledClass> compiledClasses) {
+        List<ImportReference> cudOriginalImports, List<CompiledClass> compiledClasses) {
       builder.setClasses(compiledClasses).setTypes(Collections.<JDeclaredType> emptyList())
           .setDependencies(new Dependencies()).setJsniMethods(Collections.<JsniMethod> emptyList())
           .setMethodArgs(new MethodArgNamesLookup())
@@ -868,7 +868,7 @@ public class JdtCompiler {
 
       @Override
       public boolean visit(Block block, BlockScope scope) {
-        assert false : "Error in DepedencyVisitor; should never visit a block";
+        assert false : "Error in DependencyVisitor; should never visit a block";
         return false;
       }
 

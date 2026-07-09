@@ -211,10 +211,12 @@ public final class DisclosurePanel extends Composite implements
 
     private DefaultHeader(final DisclosurePanelImages images, String text) {
       this(new Imager() {
+        @Override
         public Image makeImage() {
           return images.disclosurePanelClosed().createImage();
         }
 
+        @Override
         public void updateImage(boolean open, Image image) {
           if (open) {
             images.disclosurePanelOpen().applyTo(image);
@@ -263,10 +265,12 @@ public final class DisclosurePanel extends Composite implements
     private DefaultHeader(final ImageResource openImage,
         final ImageResource closedImage, String text) {
       this(new Imager() {
+        @Override
         public Image makeImage() {
           return new Image(closedImage);
         }
 
+        @Override
         public void updateImage(boolean open, Image image) {
           if (open) {
             image.setResource(openImage);
@@ -277,18 +281,22 @@ public final class DisclosurePanel extends Composite implements
       }, text);
     }
 
+    @Override
     public final String getText() {
       return labelTD.getInnerText();
     }
 
+    @Override
     public final void onClose(CloseEvent<DisclosurePanel> event) {
       setStyle();
     }
 
+    @Override
     public final void onOpen(OpenEvent<DisclosurePanel> event) {
       setStyle();
     }
 
+    @Override
     public final void setText(String text) {
       labelTD.setInnerText(text);
     }
@@ -450,6 +458,7 @@ public final class DisclosurePanel extends Composite implements
     setOpen(isOpen);
   }
 
+  @Override
   public void add(Widget w) {
     if (this.getContent() == null) {
       setContent(w);
@@ -464,10 +473,12 @@ public final class DisclosurePanel extends Composite implements
    * 
    * @see #add(Widget)
    */
+  @Override
   public void add(IsWidget w) {
     this.add(asWidgetOrNull(w));
   }
 
+  @Override
   public HandlerRegistration addCloseHandler(
       CloseHandler<DisclosurePanel> handler) {
     return addHandler(handler, CloseEvent.getType());
@@ -486,10 +497,12 @@ public final class DisclosurePanel extends Composite implements
     ListenerWrapper.WrappedOldDisclosureHandler.add(this, handler);
   }
 
+  @Override
   public HandlerRegistration addOpenHandler(OpenHandler<DisclosurePanel> handler) {
     return addHandler(handler, OpenEvent.getType());
   }
 
+  @Override
   public void clear() {
     setContent(null);
   }
@@ -524,6 +537,7 @@ public final class DisclosurePanel extends Composite implements
     return (widget instanceof HasText) ? (HasText) widget : null;
   }
 
+  @Override
   public boolean isAnimationEnabled() {
     return isAnimationEnabled;
   }
@@ -537,11 +551,13 @@ public final class DisclosurePanel extends Composite implements
     return isOpen;
   }
 
+  @Override
   public Iterator<Widget> iterator() {
     return WidgetIterators.createWidgetIterator(this,
         new Widget[] {getContent()});
   }
 
+  @Override
   public boolean remove(Widget w) {
     if (w == getContent()) {
       setContent(null);
@@ -555,6 +571,7 @@ public final class DisclosurePanel extends Composite implements
    * 
    * @see #remove(Widget)
    */
+  @Override
   public boolean remove(IsWidget w) {
     return this.remove(asWidgetOrNull(w));
   }
@@ -571,6 +588,7 @@ public final class DisclosurePanel extends Composite implements
     ListenerWrapper.WrappedOldDisclosureHandler.remove(this, handler);
   }
 
+  @Override
   public void setAnimationEnabled(boolean enable) {
     isAnimationEnabled = enable;
   }

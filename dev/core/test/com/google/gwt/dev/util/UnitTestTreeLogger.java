@@ -150,6 +150,7 @@ public class UnitTestTreeLogger extends TreeLogger {
       return type;
     }
 
+    @Override
     public boolean equals(Object other) {
       if (!(other instanceof LogEntry)) {
         return false;
@@ -161,6 +162,7 @@ public class UnitTestTreeLogger extends TreeLogger {
       return this.msg == null ? this.msgPattern.toString() : this.msg;
     }
 
+    @Override
     public int hashCode() {
       return toString().hashCode();
     }

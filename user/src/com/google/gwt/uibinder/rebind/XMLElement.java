@@ -192,6 +192,7 @@ public class XMLElement {
    */
   public void assertNoBody() throws UnableToCompleteException {
     consumeChildElements(new Interpreter<Boolean>() {
+      @Override
       public Boolean interpretElement(XMLElement elem) throws UnableToCompleteException {
         logger.die(elem, "Found unexpected child element");
         return false; // unreachable

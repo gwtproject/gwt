@@ -90,6 +90,7 @@ public class Java7Test extends GWTTestCase {
       throw new E1(text + " in " + name);
     }
 
+    @Override
     public void close() throws Exception {
       log.add("Close " + name);
       if (throwsWhen == ThrowsWhen.ONCLOSE) {

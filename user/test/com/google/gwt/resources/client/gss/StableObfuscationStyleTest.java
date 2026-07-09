@@ -28,6 +28,7 @@ public class StableObfuscationStyleTest extends RenamingClassNameTest {
     return "com.google.gwt.resources.GssStableStyle";
   }
 
+  @Override
   public void testClassesRenaming() {
     ClassNameAnnotation classNameAnnotation = res().classNameAnnotation();
     String renamedClass = classNameAnnotation.renamedClass();

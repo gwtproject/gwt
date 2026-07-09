@@ -39,10 +39,12 @@ public class MockMessageCatalogContext implements Context {
     this.baos = baos;
   }
 
+  @Override
   public OutputStream createBinaryFile(String catalogName) {
     return baos;
   }
 
+  @Override
   public PrintWriter createTextFile(String catalogName, String charSet) {
     try {
       return new PrintWriter(new BufferedWriter(
@@ -52,22 +54,27 @@ public class MockMessageCatalogContext implements Context {
     }
   }
 
+  @Override
   public void error(String msg) {
     throw new RuntimeException("warning: " + msg);
   }
 
+  @Override
   public void error(String msg, Throwable cause) {
     throw new RuntimeException("warning: " + msg, cause);
   }
 
+  @Override
   public GwtLocaleFactory getLocaleFactory() {
     return factory;
   }
 
+  @Override
   public void warning(String msg) {
     throw new RuntimeException("warning: " + msg);
   }
 
+  @Override
   public void warning(String msg, Throwable cause) {
     throw new RuntimeException("warning: " + msg, cause);
   }

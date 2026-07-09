@@ -328,7 +328,7 @@ public class DeadCodeElimination {
     }
 
     /**
-     * Convert do { } while (false); into a block, or do { } while (true); into while(true) { }.
+     * Convert do { } while (false); into a block.
      */
     @Override
     public void endVisit(JDoStatement x, Context ctx) {
@@ -347,11 +347,6 @@ public class DeadCodeElimination {
               ctx.replaceMe(x.getBody());
             }
           }
-//        } else {
-//          // If true, replace with while(true) { body }
-//          JWhileStatement whileStatement = new JWhileStatement(x.getSourceInfo(), expression,
-//              x.getBody());
-//          ctx.replaceMe(whileStatement);
         }
       }
     }

@@ -58,7 +58,10 @@ import com.google.gwt.layout.client.Layout.Layer;
  * <p>
  * Each child can hold only widget, and there can be only one &lt;g:center>.
  * However, there can be any number of the directional children.
- *<p>
+ * <p>
+ * Directional children lineStart and lineEnd are dependent on locale rather than just being
+ * cardinal direction - lineStart will be west in LTR and east in RTL, lineEnd vice versa.
+ * <p>
  * (Note that the tags of the child elements are not
  * capitalized. This is meant to signal that they are not runtime objects, 
  * and so cannot have a <code>ui:field</code> attribute.) 

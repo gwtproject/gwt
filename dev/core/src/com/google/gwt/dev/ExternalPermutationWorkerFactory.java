@@ -37,6 +37,7 @@ import java.lang.management.ManagementFactory;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -44,7 +45,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 /**
@@ -220,7 +220,7 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
   /**
    * Random number generator used for keys to worker threads.
    */
-  private static Random random = new Random();
+  private static final SecureRandom random = new SecureRandom();
 
   /**
    * Launches an external worker and returns the cookie that worker should

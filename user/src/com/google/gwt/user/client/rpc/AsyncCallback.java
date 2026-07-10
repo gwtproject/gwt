@@ -53,13 +53,14 @@ package com.google.gwt.user.client.rpc;
  * A call with a typical use of <code>AsyncCallback</code> might look like
  * this:
  * 
- * <pre class="code">
+ * <pre>
+ * {@code
  * service.getShapes(dbName, new AsyncCallback<Shape[]>() {
  *   public void onSuccess(Shape[] result) {
  *     // It's always safe to downcast to the known return type. 
  *     controller.processShapes(result);
  *   }
- * 
+ *
  *   public void onFailure(Throwable caught) {
  *     // Convenient way to find out which exception was thrown.
  *     try {
@@ -77,7 +78,8 @@ package com.google.gwt.user.client.rpc;
  *       // last resort -- a very unexpected exception
  *     }
  *   }
- * });
+ * }
+ * }
  * </pre>
  * 
  * </p>

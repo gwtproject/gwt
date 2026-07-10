@@ -95,14 +95,17 @@ public class DefaultProxyStore implements ProxyStore {
     return AutoBeanCodex.encode(messageBean).getPayload();
   }
 
+  @Override
   public Splittable get(String key) {
     return map.get(key);
   }
 
+  @Override
   public int nextId() {
     return nextId++;
   }
 
+  @Override
   public void put(String key, Splittable value) {
     map.put(key, value);
   }

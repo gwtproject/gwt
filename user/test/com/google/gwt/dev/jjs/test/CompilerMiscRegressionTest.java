@@ -335,6 +335,7 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
 
   @JsType
   static class B extends A {
+    @Override
     public void m() {
       super.m();
     }

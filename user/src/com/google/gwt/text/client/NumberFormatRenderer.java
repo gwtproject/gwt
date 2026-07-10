@@ -38,6 +38,7 @@ public class NumberFormatRenderer extends AbstractRenderer<Number> {
     this.format = format;
   }
 
+  @Override
   public String render(Number object) {
     if (object == null) {
       return "";

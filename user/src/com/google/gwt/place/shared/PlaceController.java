@@ -32,10 +32,12 @@ public class PlaceController {
    * Default implementation of {@link Delegate}, based on {@link Window}.
    */
   public static class DefaultDelegate implements Delegate {
+    @Override
     public HandlerRegistration addWindowClosingHandler(ClosingHandler handler) {
       return Window.addWindowClosingHandler(handler);
     }
 
+    @Override
     public boolean confirm(String message) {
       return Window.confirm(message);
     }
@@ -113,6 +115,7 @@ public class PlaceController {
     this.eventBus = eventBus;
     this.delegate = delegate;
     delegate.addWindowClosingHandler(new ClosingHandler() {
+      @Override
       public void onWindowClosing(ClosingEvent event) {
         String warning = maybeGoTo(Place.NOWHERE);
         if (warning != null) {

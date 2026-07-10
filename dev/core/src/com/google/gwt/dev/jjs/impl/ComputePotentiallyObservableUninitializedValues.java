@@ -141,6 +141,7 @@ public class ComputePotentiallyObservableUninitializedValues {
       classesThatCanPotentiallyObserveUninitializedSubclassFields.add(currentClass);
     }
 
+    @Override
     public void endVisit(JParameterRef x, Context ctx) {
       if (x.getParameter() == devirtualizedThis) {
         // Seen a reference to devirtualized "this" that can potentially escape or be used as

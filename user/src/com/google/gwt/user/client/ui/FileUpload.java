@@ -91,6 +91,7 @@ public class FileUpload extends FocusWidget implements HasName, HasChangeHandler
     setElement(element);
   }
 
+  @Override
   public HandlerRegistration addChangeHandler(ChangeHandler handler) {
     return addDomHandler(handler, ChangeEvent.getType());
   }
@@ -105,6 +106,7 @@ public class FileUpload extends FocusWidget implements HasName, HasChangeHandler
     return getInputElement().getValue();
   }
 
+  @Override
   public String getName() {
     return getInputElement().getName();
   }
@@ -114,6 +116,7 @@ public class FileUpload extends FocusWidget implements HasName, HasChangeHandler
    * 
    * @return <code>true</code> if the widget is enabled
    */
+  @Override
   public boolean isEnabled() {
     return !getElement().getPropertyBoolean("disabled");
   }
@@ -124,10 +127,12 @@ public class FileUpload extends FocusWidget implements HasName, HasChangeHandler
    * @param enabled <code>true</code> to enable the widget, <code>false</code>
    *          to disable it
    */
+  @Override
   public void setEnabled(boolean enabled) {
     getElement().setPropertyBoolean("disabled", !enabled);
   }
 
+  @Override
   public void setName(String name) {
     getInputElement().setName(name);
   }

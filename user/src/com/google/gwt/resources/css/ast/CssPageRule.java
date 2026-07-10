@@ -25,6 +25,7 @@ public class CssPageRule extends CssNode implements HasProperties {
   private final List<CssProperty> nodes = new ArrayList<CssProperty>();
   private String pseudoPage;
 
+  @Override
   public List<CssProperty> getProperties() {
     return nodes;
   }
@@ -42,6 +43,7 @@ public class CssPageRule extends CssNode implements HasProperties {
     this.pseudoPage = pseudoPage;
   }
 
+  @Override
   public void traverse(CssVisitor visitor, Context context) {
     if (visitor.visit(this, context)) {
       visitor.acceptWithInsertRemove(nodes);

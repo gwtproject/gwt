@@ -6,3 +6,6 @@
 /build/
 # Generated poms
 /maven/poms/**/pom.xml
+
+# Maven build directories for samples
+samples/**/target/

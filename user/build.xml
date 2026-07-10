@@ -61,8 +61,8 @@
     <pathelement location="${gwt.tools.lib}/cglib/cglib-3.1.jar"/>
     <pathelement location="${gwt.tools.lib}/mockito/1.9.5/mockito-all-1.9.5.jar"/>
     <pathelement location="${gwt.tools.lib}/objenesis/objenesis-1.2.jar"/>
-    <pathelement location="${gwt.tools.lib}/objectweb/asm-9.6/asm-9.6.jar"/>
-    <pathelement location="${gwt.tools.lib}/objectweb/asm-9.6/asm-commons-9.6.jar"/>
+    <pathelement location="${gwt.tools.lib}/objectweb/asm-9.10.1/asm-9.10.1.jar"/>
+    <pathelement location="${gwt.tools.lib}/objectweb/asm-9.10.1/asm-commons-9.10.1.jar"/>
     <pathelement location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA.jar"/>
     <pathelement location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA-sources.jar"/>
     <pathelement
@@ -223,11 +223,15 @@
       <replace file="${project.build}/jakarta-src/com/google/gwt/user/server/rpc/jakarta/AbstractRemoteServiceServlet.java" token="${line.separator}/**" value="import com.google.gwt.user.server.rpc.*;${line.separator}${line.separator}/**" />
       <replace file="${project.build}/jakarta-src/com/google/web/bindery/requestfactory/server/jakarta/RequestFactoryServlet.java" token="${line.separator}/**" value="import com.google.web.bindery.requestfactory.server.*;${line.separator}${line.separator}/**"/>
 
-      <!-- Compile a specific gwt-user jar just for jakarta, which will be only used then to produce gwt-servlet-jakarta.jar -->
+      <!--
+      Compile a specific gwt-user jar just for jakarta, which will be only used then to produce gwt-servlet-jakarta.jar
+      Do not print any Error Prone warnings, those are identical to the other gwt-user compilation.
+      -->
       <gwt.javac
               release="8"
               srcdir="${project.build}/jakarta-src"
               destdir="${javac.out}-jakarta"
+              errorprone.args="-XepDisableAllWarnings"
               excludes="**/EmulatedCharset.java,**/HashCodes.java,**/ConsoleLogger.java,**/NativeRegExp.java,**/SuperDevModeLogger.java,**/junit/**">
         <src path="${project.build}/no-servlet-src" />
         <src path="super/com/google/gwt/emul/javaemul/internal" />
@@ -313,23 +317,24 @@
   <target name="checkstyle-source" description="Static analysis of source">
     <gwt.checkstyle>
       <fileset dir="src">
+        <exclude name="org/hibernate/validator/ValidationMessages.java"/>
+      </fileset>
+      <fileset dir="super">
         <exclude name="javax/validation/super/javax/validation/constraints/Pattern.java"/>
         <exclude name="javax/validation/super/javax/validation/spi/ConfigurationState.java"/>
         <exclude name="javax/validation/super/javax/validation/MessageInterpolator.java"/>
         <exclude name="javax/validation/super/javax/validation/Configuration.java"/>
-        <exclude name="javax/validation/super/javax/validation/Validation.java"/>
-        <exclude name="org/hibernate/validator/super/org/hibernate/validator/**/*.java"/>
-        <exclude name="org/hibernate/validator/ValidationMessages.java"/>
+        <exclude name="org/hibernate/validator/super/org/hibernate/validator/engine/PathImpl.java"/>
       </fileset>
-      <fileset dir="super/com/google/gwt/emul"/>
-      <fileset dir="super/com/google/gwt/junit/translatable"/>
     </gwt.checkstyle>
   </target>
   <target name="checkstyle-tests" description="Static analysis of source">
     <gwt.checkstyle.tests>
       <fileset dir="test">
-        <include name="com/google/**/*.java"/>
-        <include name="test/**"/>
+        <exclude name="org/**" />
+      </fileset>
+      <fileset dir="test-super">
+        <exclude name="org/**" />
       </fileset>
     </gwt.checkstyle.tests>
   </target>

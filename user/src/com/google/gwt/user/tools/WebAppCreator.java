@@ -76,7 +76,6 @@ public final class WebAppCreator {
       registerHandler(new ArgHandlerJUnitPath());
       registerHandler(new ArgHandlerCreateMavenProject());
       registerHandler(new ArgHandlerCreateAntFile());
-      registerHandler(new ArgHandlerLegacyJetty());
     }
 
     @Override
@@ -139,29 +138,6 @@ public final class WebAppCreator {
       }
       junitPath = str;
       return true;
-    }
-  }
-
-  private final class ArgHandlerLegacyJetty extends ArgHandlerFlag {
-    @Override
-    public String getPurposeSnippet() {
-      return "DEPRECATED: Use deprecated JettyLauncher instead of an external server.";
-    }
-
-    @Override
-    public String getLabel() {
-      return "useLegacyJetty";
-    }
-
-    @Override
-    public boolean setFlag(boolean value) {
-      server = "com.google.gwt.dev.shell.jetty.JettyLauncher";
-      return true;
-    }
-
-    @Override
-    public boolean getDefaultValue() {
-      return false;
     }
   }
 
@@ -250,7 +226,7 @@ public final class WebAppCreator {
     public boolean setFlag(final boolean value) {
       argProcessingToDos.add(new Procrastinator() {
         @Override
-        public void stopProcratinating() {
+        public void stopProcrastinating() {
           if (!value) {
             if (templates.contains("maven")) {
               System.err.println("-maven and -noant are redundant. Continuing.");
@@ -311,7 +287,7 @@ public final class WebAppCreator {
         noEclipse = true;
         argProcessingToDos.add(new Procrastinator() {
           @Override
-          public void stopProcratinating() {
+          public void stopProcrastinating() {
             if (noEclipse && templates.contains("eclipse")) {
               System.err.println("Removing eclipse template from generated output.");
               templates.remove("eclipse");
@@ -371,7 +347,7 @@ public final class WebAppCreator {
         onlyEclipse = true;
         argProcessingToDos.add(new Procrastinator() {
           @Override
-          public void stopProcratinating() {
+          public void stopProcrastinating() {
             if (onlyEclipse) {
               System.err.println("Removing all templates but 'eclipse' from generated output.");
               templates.clear();
@@ -423,7 +399,7 @@ public final class WebAppCreator {
 
     @Override
     public String getPurpose() {
-      return "Specifies the template(s) to use (comma separeted)."
+      return "Specifies the template(s) to use (comma separated)."
           + " Defaults to 'sample,ant,eclipse,readme'";
     }
 
@@ -478,7 +454,7 @@ public final class WebAppCreator {
   }
 
   private abstract static class Procrastinator {
-    public abstract void stopProcratinating();
+    public abstract void stopProcrastinating();
   }
 
   public static void main(String[] args) {
@@ -529,7 +505,6 @@ public final class WebAppCreator {
   private boolean onlyEclipse;
   private File outDir;
   private boolean overwrite = false;
-  private String server = "";
 
   private HashSet<String> templates = new HashSet<String>();
 
@@ -647,7 +622,6 @@ public final class WebAppCreator {
     replacements.put("@startupUrl", moduleShortName + ".html");
     replacements.put("@renameTo", moduleShortName.toLowerCase(Locale.ROOT));
     replacements.put("@moduleNameJUnit", theModuleName + "JUnit");
-    replacements.put("@serverFQCN", server);
 
     // Add command to copy gwt-servlet-deps.jar into libs, unless this is a
     // maven project. Maven projects should include libs as maven dependencies.
@@ -706,7 +680,7 @@ public final class WebAppCreator {
    */
   protected void doRun(String installPath) throws IOException, WebAppCreatorException {
     for (Procrastinator toDo : argProcessingToDos) {
-      toDo.stopProcratinating();
+      toDo.stopProcrastinating();
     }
 
     // Maven projects do not need Ant nor Eclipse files

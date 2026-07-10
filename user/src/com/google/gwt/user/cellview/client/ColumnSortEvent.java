@@ -59,6 +59,7 @@ public class ColumnSortEvent extends GwtEvent<ColumnSortEvent.Handler> {
       this.hasData = hasData;
     }
 
+    @Override
     public void onColumnSort(ColumnSortEvent event) {
       hasData.setVisibleRangeAndClearData(hasData.getVisibleRange(), true);
     }
@@ -100,6 +101,7 @@ public class ColumnSortEvent extends GwtEvent<ColumnSortEvent.Handler> {
       return list;
     }
 
+    @Override
     public void onColumnSort(ColumnSortEvent event) {
       // Get the sorted column.
       Column<?, ?> column = event.getColumn();
@@ -118,6 +120,7 @@ public class ColumnSortEvent extends GwtEvent<ColumnSortEvent.Handler> {
         Collections.sort(list, comparator);
       } else {
         Collections.sort(list, new Comparator<T>() {
+          @Override
           public int compare(T o1, T o2) {
             return -comparator.compare(o1, o2);
           }

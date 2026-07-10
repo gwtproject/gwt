@@ -48,6 +48,7 @@ final class ApiPackage implements Comparable<ApiPackage>, ApiElement {
     initialize();
   }
 
+  @Override
   public int compareTo(ApiPackage other) {
     return this.getName().compareTo(other.getName());
   }
@@ -60,6 +61,7 @@ final class ApiPackage implements Comparable<ApiPackage>, ApiElement {
     return this.getName().equals(((ApiPackage) o).getName());
   }
 
+  @Override
   public String getRelativeSignature() {
     return name;
   }

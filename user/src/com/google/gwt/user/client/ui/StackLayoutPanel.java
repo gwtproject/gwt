@@ -106,6 +106,7 @@ public class StackLayoutPanel extends ResizeComposite implements HasWidgets,
       initWidget(child);
     }
 
+    @Override
     public HandlerRegistration addClickHandler(ClickHandler handler) {
       return this.addDomHandler(handler, ClickEvent.getType());
     }
@@ -155,6 +156,7 @@ public class StackLayoutPanel extends ResizeComposite implements HasWidgets,
     setStyleName(WIDGET_STYLE);
   }
 
+  @Override
   public void add(Widget w) {
     assert false : "Single-argument add() is not supported for this widget";
   }
@@ -228,20 +230,24 @@ public class StackLayoutPanel extends ResizeComposite implements HasWidgets,
     this.add(widget.asWidget(), header.asWidget(), headerSize);
   }
   
+  @Override
   public HandlerRegistration addBeforeSelectionHandler(
       BeforeSelectionHandler<Integer> handler) {
     return addHandler(handler, BeforeSelectionEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addSelectionHandler(
       SelectionHandler<Integer> handler) {
     return addHandler(handler, SelectionEvent.getType());
   }
 
+  @Override
   public void animate(int duration) {
     animate(duration, null);
   }
 
+  @Override
   public void animate(int duration, AnimationCallback callback) {
     // Don't try to animate zero widgets.
     if (layoutData.size() == 0) {
@@ -281,12 +287,14 @@ public class StackLayoutPanel extends ResizeComposite implements HasWidgets,
     layoutPanel.animate(duration, callback);
   }
 
+  @Override
   public void clear() {
     layoutPanel.clear();
     layoutData.clear();
     selectedIndex = -1;
   }
 
+  @Override
   public void forceLayout() {
     layoutPanel.forceLayout();
   }
@@ -343,18 +351,22 @@ public class StackLayoutPanel extends ResizeComposite implements HasWidgets,
     return getWidget(selectedIndex);
   }
 
+  @Override
   public Widget getWidget(int index) {
     return layoutPanel.getWidget(index * 2 + 1);
   }
 
+  @Override
   public int getWidgetCount() {
     return layoutPanel.getWidgetCount() / 2;
   }
 
+  @Override
   public int getWidgetIndex(IsWidget child) {
     return getWidgetIndex(asWidgetOrNull(child));
   }
 
+  @Override
   public int getWidgetIndex(Widget child) {
     int index = layoutPanel.getWidgetIndex(child);
     if (index == -1) {
@@ -426,14 +438,17 @@ public class StackLayoutPanel extends ResizeComposite implements HasWidgets,
     insert(child, new Header(header), headerSize, beforeIndex);
   }
 
+  @Override
   public Iterator<Widget> iterator() {
     return new Iterator<Widget>() {
       int i = 0, last = -1;
 
+      @Override
       public boolean hasNext() {
         return i < layoutData.size();
       }
 
+      @Override
       public Widget next() {
         if (!hasNext()) {
           throw new NoSuchElementException();
@@ -441,6 +456,7 @@ public class StackLayoutPanel extends ResizeComposite implements HasWidgets,
         return layoutData.get(last = i++).widget;
       }
 
+      @Override
       public void remove() {
         if (last < 0) {
           throw new IllegalStateException();
@@ -458,10 +474,12 @@ public class StackLayoutPanel extends ResizeComposite implements HasWidgets,
     layoutPanel.onResize();
   }
 
+  @Override
   public boolean remove(int index) {
     return remove(getWidget(index));
   }
 
+  @Override
   public boolean remove(Widget child) {
     if (child.getParent() != layoutPanel) {
       return false;
@@ -632,18 +650,21 @@ public class StackLayoutPanel extends ResizeComposite implements HasWidgets,
     child.addStyleName(CONTENT_STYLE);
 
     header.addClickHandler(new ClickHandler() {
+      @Override
       public void onClick(ClickEvent event) {
         showWidget(child);
       }
     });
 
     header.addMouseOutHandler(new MouseOutHandler() {
+      @Override
       public void onMouseOut(MouseOutEvent event) {
         header.removeStyleName(HEADER_STYLE_HOVERING);
       }
     });
 
     header.addMouseOverHandler(new MouseOverHandler() {
+      @Override
       public void onMouseOver(MouseOverEvent event) {
         header.addStyleName(HEADER_STYLE_HOVERING);
       }

@@ -245,6 +245,7 @@ public class GwtLocaleImpl implements GwtLocale {
     this.variant = variant;
   }
 
+  @Override
   public int compareTo(GwtLocale o) {
     int c = stringCompare(language, o.getLanguage());
     if (c == 0) {
@@ -274,6 +275,7 @@ public class GwtLocaleImpl implements GwtLocale {
         && equalsNullCheck(variant, other.getVariant());
   }
 
+  @Override
   public List<GwtLocale> getAliases() {
     // TODO(jat): more locale aliases? better way to encode them?
     synchronized (cacheLock) {
@@ -318,6 +320,7 @@ public class GwtLocaleImpl implements GwtLocale {
     }
   }
 
+  @Override
   public String getAsString() {
     StringBuilder buf = new StringBuilder();
     if (language != null) {
@@ -346,6 +349,7 @@ public class GwtLocaleImpl implements GwtLocale {
    * 
    * @return GwtLocale instance 
    */
+  @Override
   public GwtLocale getCanonicalForm() {
     String canonLanguage = language;
     String canonScript = script;
@@ -408,6 +412,7 @@ public class GwtLocaleImpl implements GwtLocale {
         canonVariant);
   }
 
+  @Override
   public List<GwtLocale> getCompleteSearchList() {
     // TODO(jat): base order on distance from the initial locale, such as the
     // draft proposal at:
@@ -477,6 +482,7 @@ public class GwtLocaleImpl implements GwtLocale {
    * 
    * @return inheritance list
    */
+  @Override
   public List<GwtLocale> getInheritanceChain() {
     List<GwtLocale> inherits = new ArrayList<GwtLocale>();
     inherits.add(this);
@@ -501,34 +507,42 @@ public class GwtLocaleImpl implements GwtLocale {
     return inherits;
   }
 
+  @Override
   public String getLanguage() {
     return language;
   }
 
+  @Override
   public String getLanguageNotNull() {
     return language == null ? "" : language;
   }
 
+  @Override
   public String getRegion() {
     return region;
   }
 
+  @Override
   public String getRegionNotNull() {
     return region == null ? "" : region;
   }
 
+  @Override
   public String getScript() {
     return script;
   }
 
+  @Override
   public String getScriptNotNull() {
     return script == null ? "" : script;
   }
 
+  @Override
   public String getVariant() {
     return variant;
   }
 
+  @Override
   public String getVariantNotNull() {
     return variant == null ? "" : variant;
   }
@@ -550,6 +564,7 @@ public class GwtLocaleImpl implements GwtLocale {
    * @param parent locale to test against
    * @return true if parent is an ancestor of this locale
    */
+  @Override
   public boolean inheritsFrom(GwtLocale parent) {
     if (equals(parent)) {
       return false;
@@ -557,6 +572,7 @@ public class GwtLocaleImpl implements GwtLocale {
     return getInheritanceChain().contains(parent);
   }
 
+  @Override
   public boolean isDefault() {
     return language == null;
   }
@@ -576,6 +592,7 @@ public class GwtLocaleImpl implements GwtLocale {
    * @param other
    * @return true if the scripts are the same
    */
+  @Override
   public boolean usesSameScript(GwtLocale other) {
     String myScript = script != null ? script : DefaultLanguageScripts.getDefaultScript(language,
         region);

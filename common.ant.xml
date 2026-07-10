@@ -54,13 +54,13 @@
   <property name="javac.debug" value="true"/>
   <property name="javac.debuglevel" value="lines,vars,source"/>
   <property name="javac.encoding" value="utf-8"/>
-  <property name="javac.release" value="11"/>
-  <property name="javac.nowarn" value="true"/>
+  <property name="javac.release" value="17"/>
+  <property name="javac.nowarn" value="false"/>
 
   <!-- javac and errorprone instructions from https://errorprone.info/docs/installation#ant -->
   <path id="errorprone.processorpath.ref">
-    <pathelement location="${gwt.tools.lib}/errorprone/error_prone_core-2.23.0-with-dependencies.jar"/>
-    <pathelement location="${gwt.tools.lib}/errorprone/dataflow-errorprone-3.34.0-eisop1.jar"/>
+    <pathelement location="${gwt.tools.lib}/errorprone/error_prone_core-2.42.0-with-dependencies.jar"/>
+    <pathelement location="${gwt.tools.lib}/errorprone/dataflow-errorprone-3.41.0-eisop1.jar"/>
   </path>
 
   <property name="junit.out" location="${project.build}/test"/>
@@ -144,13 +144,24 @@
     </ant>
   </presetdef>
 
+  <macrodef name="gwt.mvn">
+    <attribute name="args" default="${mvn.args}" />
+    <attribute name="dir" />
+    <sequential>
+      <echo message="Running 'mvn @{args}' in @{dir}"/>
+      <exec dir="${basedir}" executable="mvn" failonerror="true">
+        <arg line="@{args} --file @{dir}" />
+      </exec>
+    </sequential>
+  </macrodef>
+
   <macrodef name="gwt.javac">
     <attribute name="srcdir" default="src" />
     <attribute name="destdir" default="${javac.out}" />
     <attribute name="release" default="${javac.release}" />
     <attribute name="excludes" default="" />
     <attribute name="processorpath" default="" />
-    <attribute name="errorprone.args" default="" />
+    <attribute name="errorprone.args" default="-XepDisableWarningsInGeneratedCode -Xep:MissingOverride:ERROR -Xep:UnrecognisedJavadocTag:OFF -Xep:InvalidBlockTag:OFF -Xep:AnnotateFormatMethod:OFF -Xep:ProtectedMembersInFinalClass:OFF -Xep:TypeParameterUnusedInFormals:OFF -Xep:InvalidLink:OFF -Xep:NotJavadoc:OFF -Xep:OperatorPrecedence:OFF -Xep:IdentityHashMapUsage:OFF -Xep:DefaultCharset:OFF -Xep:StringSplitter:OFF -Xep:BadImport:OFF -Xep:UnusedVariable:OFF -Xep:JdkObsolete:OFF -Xep:SameNameButDifferent:OFF -Xep:InlineMeSuggester:OFF -Xep:UnnecessaryParentheses:OFF -Xep:NonApiType:OFF -Xep:InvalidInlineTag:OFF -Xep:ReferenceEquality:OFF -Xep:JavaUtilDate:OFF -Xep:MissingSummary:OFF -Xep:EmptyBlockTag:OFF -Xep:BoxedPrimitiveConstructor:OFF -Xep:DateChecker:OFF" />
     <element name="javaccontents" implicit="true" optional="true" />
 
     <sequential>
@@ -173,9 +184,12 @@
         <compilerarg value="-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED" />
         <compilerarg value="-J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED" />
         <compilerarg value="-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED" />
+        <compilerarg value="-Xmaxwarns" />
+        <compilerarg value="99999" />
         <compilerarg value="-XDcompilePolicy=simple"/>
         <compilerarg value="-processorpath"/>
         <compilerarg pathref="mergedprocessorpath.ref"/>
+        <compilerarg value="--should-stop=ifError=FLOW"/>
         <compilerarg value="-Xplugin:ErrorProne @{errorprone.args}" />
         <javaccontents />
       </javac>

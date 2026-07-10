@@ -141,7 +141,8 @@ public class ByteArrayInputStream extends InputStream {
         return pos < count ? buf[pos++] & 0xFF : -1;
     }
 
-    @Override public int read(byte[] buffer, int byteOffset, int byteCount) {
+    @Override
+    public int read(byte[] buffer, int byteOffset, int byteCount) {
         IOUtils.checkOffsetAndCount(buffer, byteOffset, byteCount);
 
         // Are there any bytes available?

@@ -174,111 +174,138 @@ abstract class LogFilterServletContext implements ServletContext {
     realContext.setAttribute(name, object);
   }
 
+  @Override
   public Dynamic addFilter(String arg0, Class<? extends Filter> arg1) {
     return realContext.addFilter(arg0, arg1);
   }
 
+  @Override
   public Dynamic addFilter(String arg0, Filter arg1) {
     return realContext.addFilter(arg0, arg1);
   }
 
+  @Override
   public Dynamic addFilter(String arg0, String arg1) {
     return realContext.addFilter(arg0, arg1);
   }
 
+  @Override
   public void addListener(Class<? extends EventListener> arg0) {
     realContext.addListener(arg0);
   }
 
+  @Override
   public void addListener(String arg0) {
     realContext.addListener(arg0);
   }
 
+  @Override
   public <T extends EventListener> void addListener(T arg0) {
     realContext.addListener(arg0);
   }
 
+  @Override
   public javax.servlet.ServletRegistration.Dynamic addServlet(
       String arg0, Class<? extends Servlet> arg1) {
     return realContext.addServlet(arg0, arg1);
   }
 
+  @Override
   public javax.servlet.ServletRegistration.Dynamic addServlet(String arg0, Servlet arg1) {
     return realContext.addServlet(arg0, arg1);
   }
 
+  @Override
   public javax.servlet.ServletRegistration.Dynamic addServlet(String arg0, String arg1) {
     return realContext.addServlet(arg0, arg1);
   }
 
+  @Override
   public <T extends Filter> T createFilter(Class<T> arg0) throws ServletException {
     return realContext.createFilter(arg0);
   }
 
+  @Override
   public <T extends EventListener> T createListener(Class<T> arg0) throws ServletException {
     return realContext.createListener(arg0);
   }
 
+  @Override
   public <T extends Servlet> T createServlet(Class<T> arg0) throws ServletException {
     return realContext.createServlet(arg0);
   }
 
+  @Override
   public void declareRoles(String... arg0) {
     realContext.declareRoles(arg0);
   }
 
+  @Override
   public ClassLoader getClassLoader() {
     return realContext.getClassLoader();
   }
 
+  @Override
   public Set<SessionTrackingMode> getDefaultSessionTrackingModes() {
     return realContext.getDefaultSessionTrackingModes();
   }
 
+  @Override
   public int getEffectiveMajorVersion() {
     return realContext.getEffectiveMajorVersion();
   }
 
+  @Override
   public int getEffectiveMinorVersion() {
     return realContext.getEffectiveMinorVersion();
   }
 
+  @Override
   public Set<SessionTrackingMode> getEffectiveSessionTrackingModes() {
     return realContext.getEffectiveSessionTrackingModes();
   }
 
+  @Override
   public FilterRegistration getFilterRegistration(String arg0) {
     return realContext.getFilterRegistration(arg0);
   }
 
+  @Override
   public Map<String, ? extends FilterRegistration> getFilterRegistrations() {
     return realContext.getFilterRegistrations();
   }
 
+  @Override
   public JspConfigDescriptor getJspConfigDescriptor() {
     return realContext.getJspConfigDescriptor();
   }
 
+  @Override
   public ServletRegistration getServletRegistration(String arg0) {
     return realContext.getServletRegistration(arg0);
   }
 
+  @Override
   public Map<String, ? extends ServletRegistration> getServletRegistrations() {
     return realContext.getServletRegistrations();
   }
 
+  @Override
   public SessionCookieConfig getSessionCookieConfig() {
     return realContext.getSessionCookieConfig();
   }
 
+  @Override
   public boolean setInitParameter(String arg0, String arg1) {
     return realContext.setInitParameter(arg0, arg1);
   }
 
+  @Override
   public void setSessionTrackingModes(Set<SessionTrackingMode> arg0) {
     realContext.setSessionTrackingModes(arg0);
   }
 
+  @Override
   public String getVirtualServerName() {
     return realContext.getVirtualServerName();
   }

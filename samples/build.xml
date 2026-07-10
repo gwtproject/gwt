@@ -1,48 +1,48 @@
-<project name="samples" default="build" basedir=".">
+<project name="samples" default="build" basedir="." xmlns:unless="ant:unless">
   <property name="gwt.root" location=".." />
   <property name="project.tail" value="samples" />
   <import file="${gwt.root}/common.ant.xml" />
 
-  <!-- "build" is the default when subprojects are directly targetted -->
-  <property name="target" value="build" />
+  <condition property="isJava11">
+    <matches string="${java.version}" pattern="^11.*" />
+  </condition>
 
-  <target name="dynatable" description="Build dynatable">
-    <gwt.ant dir="dynatable" />
+  <!-- "verify" is the default maven command when subprojects are directly targeted -->
+  <property name="mvn.args" value="verify" />
+
+  <target name="dynatable" description="Build dynatable" unless="isJava11">
+    <gwt.mvn dir="dynatable" />
   </target>
 
-  <target name="dynatablerf" description="Build dynatablerf">
-    <gwt.ant dir="dynatablerf" />
+  <target name="dynatablerf" description="Build dynatablerf" unless="isJava11">
+    <gwt.mvn dir="dynatablerf" />
   </target>
 
   <target name="hello" description="Build hello">
-    <gwt.ant dir="hello" />
+    <gwt.mvn dir="hello" />
   </target>
 
-  <target name="json" description="Build json">
-    <gwt.ant dir="json" />
+  <target name="json" description="Build json" unless="isJava11">
+    <gwt.mvn dir="json" />
   </target>
 
-  <target name="mail" description="Build mail">
-    <gwt.ant dir="mail" />
+  <target name="mail" description="Build mail" unless="isJava11">
+    <gwt.mvn dir="mail" />
   </target>
 
   <target name="mobilewebapp" description="Build mobile web app">
-    <gwt.ant dir="mobilewebapp" />
+    <gwt.mvn dir="mobilewebapp" />
   </target>
 
-  <target name="showcase" description="Build showcase">
-    <gwt.ant dir="showcase" />
+  <target name="showcase" description="Build showcase" unless="isJava11">
+    <gwt.mvn dir="showcase" />
   </target>
 
-  <target name="validation" description="Build validation">
-    <gwt.ant dir="validation" />
+  <target name="validation" description="Build validation" unless="isJava11">
+    <gwt.mvn dir="validation" />
   </target>
 
-  <target name="validationtck" description="Build validation TCK">
-    <gwt.ant dir="validationtck" />
-  </target>
-
-  <target name="-do" description="Run all subprojects" >
+  <target name="-do" description="Run all subprojects">
     <antcall target="dynatable" />
     <antcall target="dynatablerf" />
     <antcall target="hello" />
@@ -51,39 +51,86 @@
     <antcall target="mobilewebapp" />
     <antcall target="showcase" />
     <antcall target="validation" />
-    <!-- don't include validationtck, it is not really a sample -->
   </target>
 
-  <target name="build" description="Builds GWT">
+  <target name="build" depends="source, gwtc, test" description="Build and package this project" />
+
+  <target name="gwtc" description="Builds GWT">
     <antcall target="-do">
-      <param name="target" value="build" />
+      <param name="mvn.args" value="verify" />
     </antcall>
     <length property="gwt.sample.length">
-      <fileset dir="${gwt.build.out}/samples" includes="*/war/*/*.cache.html,*/war/*/*.cache.js"/>
+      <fileset dir="." includes="hello/target/*/*/*.cache.js,*/*-client/target/*/*/*.cache.js,*/*-client/target/*/*/deferredjs/*/*.cache.js"/>
     </length>
     <echo message="compiled size of all samples is ${gwt.sample.length} bytes." level="info"/>
   </target>
 
   <target name="checkstyle" description="Static analysis of GWT source">
-    <antcall target="-do">
-      <param name="target" value="checkstyle" />
-    </antcall>
+    <gwt.checkstyle outputdirectory="${project.build}/dynatable/">
+      <fileset dir="dynatable/">
+        <include name="*/src/**/*.java" />
+      </fileset>
+    </gwt.checkstyle>
+    <gwt.checkstyle outputdirectory="${project.build}/dynatablerf/">
+      <fileset dir="dynatablerf/">
+        <include name="*/src/**/*.java" />
+      </fileset>
+    </gwt.checkstyle>
+    <gwt.checkstyle outputdirectory="${project.build}/hello/">
+      <fileset dir="hello/">
+        <include name="src/**/*.java" />
+      </fileset>
+    </gwt.checkstyle>
+    <gwt.checkstyle outputdirectory="${project.build}/json/">
+      <fileset dir="json/">
+        <include name="*/src/**/*.java" />
+      </fileset>
+    </gwt.checkstyle>
+    <gwt.checkstyle outputdirectory="${project.build}/mail/">
+      <fileset dir="mail/">
+        <include name="*/src/**/*.java" />
+      </fileset>
+    </gwt.checkstyle>
+    <gwt.checkstyle outputdirectory="${project.build}/mobilewebapp/">
+      <fileset dir="mobilewebapp/">
+        <include name="*/src/**/*.java" />
+      </fileset>
+    </gwt.checkstyle>
+    <gwt.checkstyle outputdirectory="${project.build}/showcase/">
+      <fileset dir="showcase/">
+        <include name="*/src/**/*.java" />
+      </fileset>
+    </gwt.checkstyle>
+    <gwt.checkstyle outputdirectory="${project.build}/validation/">
+      <fileset dir="validation/">
+        <include name="*/src/**/*.java" />
+        <!-- ValidationMessages is generated and has funny method names -->
+        <exclude name="**/ValidationMessages.java" />
+      </fileset>
+    </gwt.checkstyle>
   </target>
 
   <target name="source" description="Copy source to the output folder">
-    <antcall target="-do">
-      <param name="target" value="source" />
-    </antcall>
+    <copy todir="${project.build}">
+      <fileset dir=".">
+        <include name="**/src/**" />
+        <include name="**/pom.xml" />
+        <include name="*/README.md" />
+        <include name="*/COPYING" />
+      </fileset>
+    </copy>
   </target>
 
-  <target name="test" description="Test GWT">
+  <target name="test" description="Test GWT samples">
     <antcall target="-do">
-      <param name="target" value="test" />
+      <param name="mvn.args" value="test" />
     </antcall>
   </target>
 
   <target name="clean" description="Cleans this project's intermediate and output files">
     <delete dir="${project.build}" />
-    <delete dir="${gwt.build.out}/samples-scripts" />
+    <antcall target="-do">
+      <param name="mvn.args" value="clean" />
+    </antcall>
   </target>
 </project>

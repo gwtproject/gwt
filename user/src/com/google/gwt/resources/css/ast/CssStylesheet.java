@@ -43,6 +43,7 @@ public class CssStylesheet extends CssNode implements HasNodes {
     rules.addAll(CssNodeCloner.clone(CssNode.class, other.rules));
   }
 
+  @Override
   public List<CssNode> getNodes() {
     return rules;
   }
@@ -52,6 +53,7 @@ public class CssStylesheet extends CssNode implements HasNodes {
     return true;
   }
 
+  @Override
   public void traverse(CssVisitor visitor, Context context) {
     if (visitor.visit(this, context)) {
       visitor.acceptWithInsertRemove(rules);

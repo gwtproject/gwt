@@ -30,6 +30,7 @@ public abstract class AbstractSafeHtmlRenderer<T> implements
 
   private static final SafeHtml EMPTY_STRING = SafeHtmlUtils.fromSafeConstant("");
 
+  @Override
   public void render(T object, SafeHtmlBuilder appendable) {
     appendable.append(render(object));
   }

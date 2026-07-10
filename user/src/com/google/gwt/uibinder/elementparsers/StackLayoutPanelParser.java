@@ -37,6 +37,7 @@ public class StackLayoutPanelParser implements ElementParser {
   private static final String HEADER = "header";
   private static final String STACK = "stack";
 
+  @Override
   public void parse(XMLElement panelElem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
 
@@ -99,6 +100,7 @@ public class StackLayoutPanelParser implements ElementParser {
     final Children children = new Children();
 
     elem.consumeChildElements(new XMLElement.Interpreter<Boolean>() {
+      @Override
       public Boolean interpretElement(XMLElement child)
           throws UnableToCompleteException {
 

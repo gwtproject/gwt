@@ -76,14 +76,17 @@ public class RunStyleSelenium extends RunStyle {
       parseSpecifier();
     }
 
+    @Override
     public void createSelenium(String domain) {
       this.selenium = new DefaultSelenium(host, port, browser, domain);
     }
 
+    @Override
     public Selenium getSelenium() {
       return selenium;
     }
 
+    @Override
     public String getSpecifier() {
       return specifier;
     }

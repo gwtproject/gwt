@@ -52,6 +52,7 @@ public class NativeHorizontalScrollbar extends AbstractNativeScrollbar implement
     /**
      * The styles used in this widget.
      */
+    @Override
     @Source(StyleTransparant.DEFAULT_CSS)
     Style nativeHorizontalScrollbarStyle();
   }
@@ -135,14 +136,17 @@ public class NativeHorizontalScrollbar extends AbstractNativeScrollbar implement
     ScrollImpl.get().initialize(scrollable, contentDiv);
   }
 
+  @Override
   public int getHorizontalScrollPosition() {
     return getScrollableElement().getScrollLeft();
   }
 
+  @Override
   public int getMaximumHorizontalScrollPosition() {
     return ScrollImpl.get().getMaximumHorizontalScrollPosition(getScrollableElement());
   }
 
+  @Override
   public int getMinimumHorizontalScrollPosition() {
     return ScrollImpl.get().getMinimumHorizontalScrollPosition(getScrollableElement());
   }
@@ -158,10 +162,12 @@ public class NativeHorizontalScrollbar extends AbstractNativeScrollbar implement
    * @return the scroll width
    * @see #setScrollWidth(int)
    */
+  @Override
   public int getScrollWidth() {
     return contentDiv.getOffsetWidth();
   }
 
+  @Override
   public void setHorizontalScrollPosition(int position) {
     getScrollableElement().setScrollLeft(position);
   }
@@ -176,6 +182,7 @@ public class NativeHorizontalScrollbar extends AbstractNativeScrollbar implement
    * 
    * @param width the size width pixels
    */
+  @Override
   public void setScrollWidth(int width) {
     contentDiv.getStyle().setWidth(width, Unit.PX);
   }

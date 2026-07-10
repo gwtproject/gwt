@@ -76,7 +76,8 @@ public class CoverageInstrumentorTest extends TestCase {
       final SourceInfo info = program.createSourceInfo(++i, "Test.java");
       statement.setSourceInfo(info);
       new CoverageVisitor(instrumentableLines.keySet()) {
-        @Override public void endVisit(JsExpression x, JsContext ctx) {
+        @Override
+        public void endVisit(JsExpression x, JsContext ctx) {
           x.setSourceInfo(info);
         }
       }.accept(statement);

@@ -18,7 +18,6 @@ package com.google.gwt.emultest.java17.util.stream;
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * Tests for Java 17 java.util.stream.IntStream emulation.
@@ -35,6 +34,6 @@ public class IntStreamTest extends EmulTestBase {
     assertEquals(new int[]{1, 2, 3, 6},
         IntStream.of(1, 3).mapMulti(doubling).toArray());
     assertEquals(new int[0],
-        IntStream.of(1, 3).mapMulti((a, b) -> {}).toArray());
+        IntStream.of(1, 3).mapMulti((a, b) -> { }).toArray());
   }
 }

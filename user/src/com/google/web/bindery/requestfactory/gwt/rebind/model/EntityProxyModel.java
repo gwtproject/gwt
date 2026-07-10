@@ -97,6 +97,7 @@ public class EntityProxyModel implements AcceptsModelVisitor, HasExtraTypes {
   private EntityProxyModel() {
   }
 
+  @Override
   public void accept(ModelVisitor visitor) {
     if (visitor.visit(this)) {
       for (RequestMethod method : requestMethods) {
@@ -106,6 +107,7 @@ public class EntityProxyModel implements AcceptsModelVisitor, HasExtraTypes {
     visitor.endVisit(this);
   }
 
+  @Override
   public List<EntityProxyModel> getExtraTypes() {
     return Collections.unmodifiableList(extraTypes);
   }

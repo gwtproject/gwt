@@ -17,6 +17,7 @@ package com.google.gwt.validation;
 
 import com.google.gwt.validation.rebind.GwtSpecificValidatorCreatorTest;
 
+import com.google.gwt.validation.rebind.UtilTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -29,6 +30,7 @@ public class RebindJreSuite {
     TestSuite suite = new TestSuite(
         "Test suite for validation rebind code that does not require GWT.");
     suite.addTestSuite(GwtSpecificValidatorCreatorTest.class);
+    suite.addTestSuite(UtilTest.class);
     return suite;
   }
 }

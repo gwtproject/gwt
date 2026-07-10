@@ -43,6 +43,7 @@ public class CustomButtonParser implements ElementParser {
     faceNames.add("downDisabledFace");
   }
 
+  @Override
   public void parse(final XMLElement elem, final String fieldName,
       JClassType type, final UiBinderWriter writer)
       throws UnableToCompleteException {
@@ -52,6 +53,7 @@ public class CustomButtonParser implements ElementParser {
      * HasHTMLParser to find.
      */
     elem.consumeChildElements(new Interpreter<Boolean>() {
+      @Override
       public Boolean interpretElement(XMLElement child)
           throws UnableToCompleteException {
         // CustomButton can only contain Face elements.

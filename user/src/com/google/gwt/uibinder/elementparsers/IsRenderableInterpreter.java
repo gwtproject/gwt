@@ -38,6 +38,7 @@ class IsRenderableInterpreter implements XMLElement.Interpreter<String> {
     assert writer.useLazyWidgetBuilders();
   }
 
+  @Override
   public String interpretElement(XMLElement elem)
       throws UnableToCompleteException {
     if (!uiWriter.isRenderableElement(elem)) {

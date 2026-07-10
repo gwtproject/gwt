@@ -57,6 +57,7 @@ class SafeHtmlString implements SafeHtml {
   /**
    * {@inheritDoc}
    */
+  @Override
   @IsSafeHtml
   @SuppressIsSafeHtmlCastCheck
   public String asString() {

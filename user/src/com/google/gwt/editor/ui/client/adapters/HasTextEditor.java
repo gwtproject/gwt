@@ -45,10 +45,12 @@ public class HasTextEditor implements LeafValueEditor<String> {
     this.peer = peer;
   }
 
+  @Override
   public String getValue() {
     return peer.getText();
   }
 
+  @Override
   public void setValue(String value) {
     peer.setText(value);
   }

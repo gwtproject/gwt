@@ -69,7 +69,8 @@ public class BinaryTypeReferenceRestrictionsCheckerTest extends TestCase {
       return null;
     }
 
-    @Override public IBinaryTypeAnnotation[] getTypeAnnotations() {
+    @Override
+    public IBinaryTypeAnnotation[] getTypeAnnotations() {
       return new IBinaryTypeAnnotation[0];
     }
 

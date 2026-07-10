@@ -226,7 +226,7 @@ public class CodeSplitters {
     assert ((JNewArray) arg1).getArrayType() == arrayType;
     List<JExpression> initializers = new ArrayList<JExpression>(initialLoadSequence.size());
 
-    // RunAsyncFramentIndex will later be replaced by the fragment the async is in.
+    // RunAsyncFragmentIndex will later be replaced by the fragment the async is in.
     // TODO(rluble): this approach is not very clean, ideally the load sequence should be
     // installed AFTER code splitting when the fragment ids are known; rather than inserting
     // a placeholder in the AST and patching the ast later.

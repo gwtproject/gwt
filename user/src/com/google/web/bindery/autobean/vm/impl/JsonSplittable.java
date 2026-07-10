@@ -139,14 +139,17 @@ public class JsonSplittable implements Splittable, HasSplittable {
     this.string = string;
   }
 
+  @Override
   public boolean asBoolean() {
     return bool;
   }
 
+  @Override
   public double asNumber() {
     return number;
   }
 
+  @Override
   public void assign(Splittable parent, int index) {
     try {
       ((JsonSplittable) parent).array.put(index, value());
@@ -155,6 +158,7 @@ public class JsonSplittable implements Splittable, HasSplittable {
     }
   }
 
+  @Override
   public void assign(Splittable parent, String propertyName) {
     try {
       ((JsonSplittable) parent).obj.put(propertyName, value());
@@ -163,14 +167,17 @@ public class JsonSplittable implements Splittable, HasSplittable {
     }
   }
 
+  @Override
   public String asString() {
     return string;
   }
 
+  @Override
   public Splittable deepCopy() {
     return create(getPayload());
   }
 
+  @Override
   public Splittable get(int index) {
     try {
       return makeSplittable(array.get(index));
@@ -179,6 +186,7 @@ public class JsonSplittable implements Splittable, HasSplittable {
     }
   }
 
+  @Override
   public Splittable get(String key) {
     try {
       return makeSplittable(obj.get(key));
@@ -187,6 +195,7 @@ public class JsonSplittable implements Splittable, HasSplittable {
     }
   }
 
+  @Override
   public String getPayload() {
     if (isNull) {
       return "null";
@@ -209,6 +218,7 @@ public class JsonSplittable implements Splittable, HasSplittable {
     throw new RuntimeException("No data in this JsonSplittable");
   }
 
+  @Override
   public List<String> getPropertyKeys() {
     String[] names = getNames(obj);
     if (names == null) {
@@ -218,47 +228,58 @@ public class JsonSplittable implements Splittable, HasSplittable {
     }
   }
 
+  @Override
   public Object getReified(String key) {
     return reified.get(key);
   }
 
+  @Override
   public Splittable getSplittable() {
     return this;
   }
 
+  @Override
   public boolean isBoolean() {
     return bool != null;
   }
 
+  @Override
   public boolean isIndexed() {
     return array != null;
   }
 
+  @Override
   public boolean isKeyed() {
     return obj != null;
   }
 
+  @Override
   public boolean isNull(int index) {
     return array.isNull(index);
   }
 
+  @Override
   public boolean isNull(String key) {
     // Treat undefined and null as the same
     return !obj.has(key) || obj.isNull(key);
   }
 
+  @Override
   public boolean isNumber() {
     return number != null;
   }
 
+  @Override
   public boolean isReified(String key) {
     return reified.containsKey(key);
   }
 
+  @Override
   public boolean isString() {
     return string != null;
   }
 
+  @Override
   public boolean isUndefined(String key) {
     return !obj.has(key);
   }
@@ -268,10 +289,12 @@ public class JsonSplittable implements Splittable, HasSplittable {
     reified.remove(key);
   }
 
+  @Override
   public void setReified(String key, Object object) {
     reified.put(key, object);
   }
 
+  @Override
   public void setSize(int size) {
     // This is terrible, but there's no API support for resizing or splicing
     JSONArray newArray = new JSONArray();
@@ -285,6 +308,7 @@ public class JsonSplittable implements Splittable, HasSplittable {
     array = newArray;
   }
 
+  @Override
   public int size() {
     return array.length();
   }

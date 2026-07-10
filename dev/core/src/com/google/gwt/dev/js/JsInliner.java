@@ -1111,9 +1111,9 @@ public class JsInliner {
    */
   private static class SingleInvocationVisitor extends JsVisitor {
     // Keep track of functions that are invoked once.
-    // Invariant: singleInvokations(fn) = null => calls to fn have not been seen
-    //            singleInvokations(fn) = MULTIPLE =>  multiple callsites to fn have been seen.
-    //            singleInvokations(fn) = caller =>  one callsite has been seen an occurs in caller.
+    // Invariant: singleInvocations(fn) = null => calls to fn have not been seen
+    //            singleInvocations(fn) = MULTIPLE =>  multiple callsites to fn have been seen.
+    //            singleInvocations(fn) = caller =>  one callsite has been seen an occurs in caller.
     private final Map<JsFunction, JsFunction> singleInvocations = Maps.newLinkedHashMap();
 
     // Indicates multiple invocations were found (only identity is used).
@@ -1534,7 +1534,7 @@ public class JsInliner {
    * code to be inlined, but at a cost of larger JS output.
    *
    * The default value for this parameter is 1.0 which means that inlining only happens if it is
-   * estimated that it does not increase codesize.
+   * estimated that it does not increase code size.
    */
   private static final double MAX_COMPLEXITY_INCREASE = Double.parseDouble(System.getProperty(
       "gwt.jsinlinerRatio", "1.0"));

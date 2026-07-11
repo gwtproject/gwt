@@ -763,7 +763,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
       "Malformed HTML: The table section returned by HeaderBuilder or FooterBuilder must use the "
           + "tag name thead or tfoot, as appropriate, and cannot contain any attributes or styles.";
 
-  /*
+  /**
    * The table specific {@link Impl}.
    */
   private static Impl TABLE_IMPL;

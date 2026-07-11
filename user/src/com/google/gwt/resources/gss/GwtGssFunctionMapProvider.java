@@ -23,7 +23,7 @@ import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import java.util.Map;
 
 /**
- * {@link  com.google.gwt.thirdparty.common.css.GssFunctionMapProvider}
+ * {@link com.google.gwt.thirdparty.common.css.GssFunctionMapProvider}
  * that adds the mapping of GssFunction implemented for GWT.
  */
 public class GwtGssFunctionMapProvider extends DefaultGssFunctionMapProvider {

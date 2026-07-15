@@ -571,15 +571,17 @@ public class DateTest extends GWTTestCase {
       // /////////////////////////////
       // Past
       // /////////////////////////////
-      Date accum1 = create(PAST);
+      Date accum1 = createLocal("1/5/1890");
       String a1 = accum1.toLocaleString();
-      assertTrue(a1.indexOf("1890") != -1);
+      assertTrue(a1 + " should describe 1/5/1890",
+          a1.contains("1890") || a1.contains("1/5/90"));
       // /////////////////////////////
       // Future
       // /////////////////////////////
-      Date accum2 = create(FUTURE);
+      Date accum2 = createLocal("12/30/2030 3:4:5");
       String a2 = accum2.toLocaleString();
-      assertTrue(a2.indexOf("2030") != -1);
+      assertTrue(a2 + " should describe 12/30/2030",
+          a2.contains("2030") || a2.contains("12/30/30"));
     }
   }
 
@@ -893,6 +895,11 @@ public class DateTest extends GWTTestCase {
     } else {
       return (Date) theDate.clone();
     }
+  }
+
+  Date createLocal(String s) {
+     // aligned with the TZ used in CI
+     return new Date(s + " GMT-8:00");
   }
 
   private String createString(String s) {

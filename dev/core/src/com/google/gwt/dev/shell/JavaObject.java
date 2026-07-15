@@ -21,11 +21,11 @@ import com.google.gwt.dev.shell.BrowserChannel.ReturnMessage;
 import com.google.gwt.dev.shell.BrowserChannel.SessionHandler.ExceptionOrReturnValue;
 import com.google.gwt.dev.shell.BrowserChannel.Value;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.Undefined;
 
 import java.io.IOException;
 

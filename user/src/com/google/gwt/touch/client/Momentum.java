@@ -126,7 +126,7 @@ public interface Momentum {
     /**
      * Set the cumulative elapsed time in milliseconds since momentum took over.
      * 
-     * @return the elapsed time in milliseconds
+     * @param cumulativeElapsedMillis the elapsed time in milliseconds
      */
     void setCumulativeElapsedMillis(int cumulativeElapsedMillis) {
       this.cumulativeElapsedMillis = cumulativeElapsedMillis;
@@ -136,7 +136,7 @@ public interface Momentum {
      * Set the elapsed time in milliseconds since the last time the state was
      * updated.
      * 
-     * @return the elapsed time
+     * @param elapsedMillis the elapsed time
      */
     void setElapsedMillis(int elapsedMillis) {
       this.elapsedMillis = elapsedMillis;

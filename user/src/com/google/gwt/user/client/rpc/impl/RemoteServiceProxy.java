@@ -144,7 +144,7 @@ public abstract class RemoteServiceProxy implements SerializationStreamFactory,
   }
 
   /**
-   * @deprected use {@link RpcStatsContext}.
+   * @deprecated use {@link RpcStatsContext}.
    */
   @Deprecated
   protected static int getNextRequestId() {

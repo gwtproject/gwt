@@ -197,7 +197,7 @@ final class ResolverServiceLayer extends ServiceLayerDecorator {
 
   /**
    * Call {@link Class#forName(String)} and report any errors through
-   * {@link #die()}.
+   * {@link #die(Throwable, String, Object...)}.
    */
   private Class<?> forName(String name) {
     try {

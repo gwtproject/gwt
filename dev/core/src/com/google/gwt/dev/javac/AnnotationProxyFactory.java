@@ -32,7 +32,7 @@ class AnnotationProxyFactory {
   /**
    * {@link InvocationHandler} implementation used by all
    * {@link java.lang.annotation.Annotation Annotation} proxies created by the
-   * {@link TypeOracle}.
+   * {@link com.google.gwt.dev.javac.typemodel.TypeOracle}.
    */
   private static class AnnotationProxyInvocationHandler implements
       InvocationHandler {
@@ -211,12 +211,6 @@ class AnnotationProxyFactory {
       return sum;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object,
-     *      java.lang.reflect.Method, java.lang.Object[])
-     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args)
         throws Throwable {

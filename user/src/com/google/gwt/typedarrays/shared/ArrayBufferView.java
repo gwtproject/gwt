@@ -18,7 +18,7 @@ package com.google.gwt.typedarrays.shared;
 /**
  * Common information across all types of views of {@link ArrayBuffer}s.
  * 
- * {@link "http://www.khronos.org/registry/typedarray/specs/latest/#6"}
+ * @see <a href="https://262.ecma-international.org/6.0/#sec-typedarray-objects">typed array specification</a>
  */
 public interface ArrayBufferView {
 

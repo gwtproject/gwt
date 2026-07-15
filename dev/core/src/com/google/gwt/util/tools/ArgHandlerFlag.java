@@ -49,11 +49,14 @@ public abstract class ArgHandlerFlag extends ArgHandler {
   /**
    * The root String that will be munged into -label and -nolabel variants for flag value toggling.
    * Should follow the verb[Adjective]Noun naming pattern. For example:
-   *
+   * <pre>
+   * {@code
    * @Override
    * public String getLabel() {
    *   return "allowMissingSrc";
    * }
+   * }
+   * </pre>
    */
   public String getLabel() {
     return "";

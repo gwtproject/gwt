@@ -1052,7 +1052,7 @@ public class Document extends Node {
    * @param multiple <code>true</code> to allow multiple-selection
    * @return the newly created element
    *
-   * @deprecatred use {@link #createSelectElement()} and call
+   * @deprecated use {@link #createSelectElement()} and call
    *              {@link SelectElement#setMultiple(boolean)} to configure multiple-selection.
    */
   @Deprecated

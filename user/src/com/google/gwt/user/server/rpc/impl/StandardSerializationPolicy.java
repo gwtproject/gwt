@@ -143,25 +143,11 @@ public class StandardSerializationPolicy extends SerializationPolicy implements
     return typeIds.get(clazz);
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * com.google.gwt.user.server.rpc.SerializationPolicy#shouldDerializeFields
-   * (java.lang.String)
-   */
   @Override
   public boolean shouldDeserializeFields(Class<?> clazz) {
     return isFieldSerializable(clazz, deserializationWhitelist);
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * com.google.gwt.user.server.rpc.SerializationPolicy#shouldSerializeFields
-   * (java.lang.String)
-   */
   @Override
   public boolean shouldSerializeFields(Class<?> clazz) {
     return isFieldSerializable(clazz, serializationWhitelist);
@@ -172,13 +158,6 @@ public class StandardSerializationPolicy extends SerializationPolicy implements
     return shouldSerializeFinalFields;
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * com.google.gwt.user.server.rpc.SerializationPolicy#validateDeserialize(
-   * java.lang.String)
-   */
   @Override
   public void validateDeserialize(Class<?> clazz) throws SerializationException {
     if (!isInstantiable(clazz, deserializationWhitelist)) {
@@ -189,13 +168,6 @@ public class StandardSerializationPolicy extends SerializationPolicy implements
     }
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * com.google.gwt.user.server.rpc.SerializationPolicy#validateSerialize(java
-   * .lang.String)
-   */
   @Override
   public void validateSerialize(Class<?> clazz) throws SerializationException {
     if (!isInstantiable(clazz, serializationWhitelist)) {

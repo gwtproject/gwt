@@ -14,10 +14,12 @@
 package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
+import com.google.gwt.dev.jjs.ast.JUnsafeTypeCoercion;
 
 /**
  * Test for {@link MethodInliner}.
@@ -198,9 +200,17 @@ public class MethodInlinerTest extends OptimizerTestBase {
     JMethod box = result.findMethod("box");
     JReturnStatement returnStatement =
         (JReturnStatement) ((JMethodBody) box.getBody()).getStatements().get(0);
-    // After inlining uncheckedCast, the boxed result must not become provably non-null: the
-    // primitive input may be JS undefined when it originates in native JsInterop/JSNI code.
-    assertTrue(returnStatement.getExpr().getType().canBeNull());
+    // The inlined body is the unsafe coercion that autoboxes the primitive to Double. Pin that it
+    // is that coercion (so the test can't pass for an unrelated reason), but assert on its type
+    // rather than the sub-tree shape, which the optimizer may rearrange.
+    JExpression returned = returnStatement.getExpr();
+    assertTrue("inlined box() should return the unsafe coercion to Double",
+        returned instanceof JUnsafeTypeCoercion);
+    assertEquals("java.lang.Double", returned.getType().getName());
+    // The boxed result must not become provably non-null: the coerced primitive may be JS undefined
+    // when it originates in native JsInterop/JSNI code, so a later 'boxed == null' must not fold to
+    // false. This is false on the un-fixed 2.13 compiler and true once the strengthening is skipped.
+    assertTrue(returned.getType().canBeNull());
   }
 
   @Override

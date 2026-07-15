@@ -117,7 +117,6 @@ public class MessageTransport {
      * thread that is waiting on the response.
      *
      * @param responseMessage the server's response
-     * @throws InterruptedException
      */
     void setResponse(Response responseMessage) {
       assert (responseMessage != null);

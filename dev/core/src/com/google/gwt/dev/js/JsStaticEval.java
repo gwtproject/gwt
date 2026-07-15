@@ -134,7 +134,7 @@ public class JsStaticEval {
       }
     }
 
-    public List<JsStatement> getStatements() {
+    private List<JsStatement> getStatements() {
       return mustExec;
     }
 
@@ -174,11 +174,13 @@ public class JsStaticEval {
      */
     private Map<JsExpression, Boolean> coercesToStringMap = new IdentityHashMap<>();
 
+    @Override
     public boolean visit(JsExprStmt x, JsContext ctx) {
       evalContext.put(x.getExpression(), EvalMode.VOID);
       return true;
     }
 
+    @Override
     public boolean visit(JsBinaryOperation x, JsContext ctx) {
       if (evalContext.containsKey(x)
           && (x.getOperator() == JsBinaryOperator.AND || x.getOperator() == JsBinaryOperator.OR)) {

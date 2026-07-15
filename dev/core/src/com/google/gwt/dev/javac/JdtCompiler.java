@@ -555,7 +555,7 @@ public class JdtCompiler {
         try (InputStream openStream = resource.openStream()) {
 
           ClassFileReader classFileReader =
-              ClassFileReader.read(openStream, resource.toExternalForm(), true);
+              ClassFileReader.read(openStream, resource.toExternalForm());
           // In case-insensitive file systems we might have found a resource whose name is
           // different in case and should not be returned as an answer.
           if (internalName.equals(CharOperation.charToString(classFileReader.getName()))) {
@@ -674,7 +674,6 @@ public class JdtCompiler {
     };
 
     long jdtSourceLevel = jdtLevelByGwtLevel.get(SourceLevel.DEFAULT_SOURCE_LEVEL);
-    options.originalSourceLevel = jdtSourceLevel;
     options.complianceLevel = jdtSourceLevel;
     options.sourceLevel = jdtSourceLevel;
     options.targetJDK = jdtSourceLevel;
@@ -694,7 +693,6 @@ public class JdtCompiler {
     // Turn off all warnings, saves some memory / speed.
     options.reportUnusedDeclaredThrownExceptionIncludeDocCommentReference = false;
     options.reportUnusedDeclaredThrownExceptionExemptExceptionAndThrowable = false;
-    options.inlineJsrBytecode = true;
     return options;
   }
 
@@ -702,7 +700,6 @@ public class JdtCompiler {
     CompilerOptions options = getStandardCompilerOptions();
     long jdtSourceLevel = jdtLevelByGwtLevel.get(sourceLevel);
 
-    options.originalSourceLevel = jdtSourceLevel;
     options.complianceLevel = jdtSourceLevel;
     options.sourceLevel = jdtSourceLevel;
     options.targetJDK = jdtSourceLevel;

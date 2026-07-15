@@ -711,6 +711,9 @@ public class GwtAstBuilder {
 
     @Override
     public void endVisit(ConstructorDeclaration x, ClassScope scope) {
+      if (isOverriddenCanonicalConstructor(x)) {
+        return;
+      }
       try {
         List<JStatement> statements = pop(x.statements);
         JStatement constructorCall = pop(x.constructorCall);
@@ -2267,6 +2270,10 @@ public class GwtAstBuilder {
 
     @Override
     public void endVisit(SwitchStatement x, BlockScope scope) {
+      if (x instanceof SwitchExpression switchExpression) {
+        endVisit(switchExpression, scope);
+        return;
+      }
       try {
         SourceInfo info = makeSourceInfo(x);
 
@@ -2596,6 +2603,9 @@ public class GwtAstBuilder {
 
     @Override
     public boolean visit(ConstructorDeclaration x, ClassScope scope) {
+      if (isOverriddenCanonicalConstructor(x)) {
+        return false;
+      }
       try {
         JConstructor method = (JConstructor) typeMap.get(x.binding);
         assert !method.isExternal();
@@ -2731,6 +2741,9 @@ public class GwtAstBuilder {
 
     @Override
     public boolean visit(SwitchStatement x, BlockScope scope) {
+      if (x instanceof SwitchExpression switchExpression) {
+        return visit(switchExpression, scope);
+      }
       try {
         x.statements = reduceToReachable(x.statements);
         return true;
@@ -4331,6 +4344,9 @@ public class GwtAstBuilder {
 
       if (x.methods != null) {
         for (AbstractMethodDeclaration method : x.methods) {
+          if (isOverriddenCanonicalConstructor(method)) {
+            continue;
+          }
           createMethod(method);
         }
       }
@@ -4399,6 +4415,9 @@ public class GwtAstBuilder {
   private void createMethod(AbstractMethodDeclaration x) {
     if (x instanceof Clinit) {
       return;
+    }
+    if (x.binding == null) {
+      throw new IllegalArgumentException("Missing method binding for " + x);
     }
     SourceInfo info = makeSourceInfo(x);
     MethodBinding b = x.binding;
@@ -4630,7 +4649,7 @@ public class GwtAstBuilder {
       }
     } catch (Throwable e) {
       InternalCompilerException ice = translateException(null, e);
-      StringBuffer sb = new StringBuffer();
+      StringBuilder sb = new StringBuilder();
       x.printHeader(0, sb);
       ice.addNode(x.getClass().getName(), sb.toString(), info);
       throw ice;
@@ -4679,7 +4698,7 @@ public class GwtAstBuilder {
   private InternalCompilerException getInternalCompilerException(TypeDeclaration x, Throwable e) {
     JDeclaredType type = (JDeclaredType) typeMap.get(x.binding);
     InternalCompilerException ice = translateException(null, e);
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
     x.printHeader(0, sb);
     ice.addNode(x.getClass().getName(), sb.toString(), type.getSourceInfo());
     return ice;
@@ -4724,9 +4743,13 @@ public class GwtAstBuilder {
     return expression instanceof SuperReference || expression instanceof QualifiedSuperReference;
   }
 
+  private boolean isOverriddenCanonicalConstructor(AbstractMethodDeclaration method) {
+    return method.binding == null && method.isCanonicalConstructor();
+  }
+
   static class JdtPrivateHacks {
     /**
-     * Reflective access to {@link ForeachStatement#collectionElementType}.
+     * Reflective access to {@link ForeachStatement}'s {@code collectionElementType} field.
      */
     private static final Field collectionElementTypeField;
 

@@ -678,7 +678,9 @@ public class JsStaticEval {
         return arg1;
       }
     }
-    if (arg2 instanceof CanBooleanEval && evalContext.containsKey(expr)) {
+    // technically this operation works in VOID mode too,
+    // but void expressions are optimized early in endVisit
+    if (arg2 instanceof CanBooleanEval && evalContext.get(expr) == EvalMode.BOOL) {
       CanBooleanEval eval2 = (CanBooleanEval) arg2;
       if (eval2.isBooleanTrue() && !arg2.hasSideEffects()) {
         return arg1;
@@ -720,7 +722,9 @@ public class JsStaticEval {
         return arg1;
       }
     }
-    if (arg2 instanceof CanBooleanEval && evalContext.containsKey(expr)) {
+    // technically this operation works in VOID mode too,
+    // but void expressions are optimized early in endVisit
+    if (arg2 instanceof CanBooleanEval && evalContext.get(expr) == EvalMode.BOOL) {
       CanBooleanEval eval2 = (CanBooleanEval) arg2;
       if (eval2.isBooleanFalse() && !arg2.hasSideEffects()) {
         return arg1;

@@ -52,6 +52,23 @@ public class AbstractSelectionModelTest extends GWTTestCase {
     }
   }
 
+  static class AssertOneSelectionChangeEventOnlyHandler extends MockSelectionChangeHandler {
+
+    @Override
+    public void onSelectionChange(SelectionChangeEvent event) {
+      // We should only see one event fired.
+      assertEventFired(false);
+      super.onSelectionChange(event);
+    }
+  }
+
+  static class FailingSelectionChangeEventHandler implements SelectionChangeEvent.Handler {
+    @Override
+    public void onSelectionChange(SelectionChangeEvent event) {
+      fail();
+    }
+  }
+
   /**
    * A mock {@link SelectionModel} used for testing.
    *
@@ -112,14 +129,7 @@ public class AbstractSelectionModelTest extends GWTTestCase {
 
   public void testScheduleSelectionChangeEvent() {
     AbstractSelectionModel<String> model = createSelectionModel(null);
-    final MockSelectionChangeHandler handler = new MockSelectionChangeHandler() {
-      @Override
-      public void onSelectionChange(SelectionChangeEvent event) {
-        // We should only see one event fired.
-        assertEventFired(false);
-        super.onSelectionChange(event);
-      }
-    };
+    final MockSelectionChangeHandler handler = new AssertOneSelectionChangeEventOnlyHandler();
     model.addSelectionChangeHandler(handler);
 
     // Schedule the event multiple times.

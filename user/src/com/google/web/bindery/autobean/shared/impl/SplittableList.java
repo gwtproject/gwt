@@ -83,6 +83,7 @@ public class SplittableList<E> extends AbstractList<E> implements HasSplittable 
     return SplittableList.<E> reify(state, data, index, elementCoder);
   }
 
+  @Override
   public Splittable getSplittable() {
     return data;
   }

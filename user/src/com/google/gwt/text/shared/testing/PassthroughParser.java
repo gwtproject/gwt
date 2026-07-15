@@ -37,6 +37,7 @@ public class PassthroughParser implements Parser<String> {
   protected PassthroughParser() {
   }
 
+  @Override
   public String parse(CharSequence object) {
     return object.toString();
   }

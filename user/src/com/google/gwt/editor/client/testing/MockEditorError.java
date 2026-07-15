@@ -24,26 +24,32 @@ import com.google.gwt.editor.client.EditorError;
  */
 public class MockEditorError implements EditorError {
 
+  @Override
   public String getAbsolutePath() {
     return null;
   }
 
+  @Override
   public Editor<?> getEditor() {
     return null;
   }
 
+  @Override
   public String getMessage() {
     return null;
   }
 
+  @Override
   public String getPath() {
     return null;
   }
 
+  @Override
   public Object getUserData() {
     return null;
   }
 
+  @Override
   public Object getValue() {
     return null;
   }
@@ -51,6 +57,7 @@ public class MockEditorError implements EditorError {
   /**
    * Always returns <code>false</code>.
    */
+  @Override
   public boolean isConsumed() {
     return false;
   }
@@ -58,6 +65,7 @@ public class MockEditorError implements EditorError {
   /**
    * No-op.
    */
+  @Override
   public void setConsumed(boolean consumed) {
   }
 }

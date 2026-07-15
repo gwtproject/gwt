@@ -140,6 +140,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -695,7 +696,7 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
 
   @SuppressWarnings("unchecked")
   private void initReplacement(ResourceContext context) {
-    if (context.getCachedData(KEY_HAS_CACHED_DATA, Boolean.class) != Boolean.TRUE) {
+    if (!Objects.equals(context.getCachedData(KEY_HAS_CACHED_DATA, Boolean.class), Boolean.TRUE)) {
 
       context.putCachedData(KEY_SHARED_METHODS, new IdentityHashMap<JMethod, String>());
       context.putCachedData(KEY_BY_CLASS_AND_METHOD, new IdentityHashMap<JClassType, Map<String,

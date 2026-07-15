@@ -66,6 +66,7 @@ public class BeanParser implements ElementParser {
    *
    * @throws UnableToCompleteException
    */
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
 

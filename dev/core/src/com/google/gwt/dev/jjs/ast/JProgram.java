@@ -618,9 +618,9 @@ public class JProgram extends JNode implements ArrayTypeCreator {
       // result to NOT nullable.
       //
       // not_nullable(A) v not_nullable(B) = not_nullable(A v B)
-      JReferenceType nulllableGeneralizer =
+      JReferenceType nullableGeneralizer =
           generalizeTypes(thisType.weakenToNullable(), thatType.weakenToNullable());
-      return nulllableGeneralizer.strengthenToNonNull();
+      return nullableGeneralizer.strengthenToNonNull();
     }
     thisType = thisType.weakenToNullable();
     thatType = thatType.weakenToNullable();
@@ -1032,7 +1032,7 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     return arrayType;
   }
 
-  // TODO(dankurka): Why does JProgram synthezise array types on the fly
+  // TODO(dankurka): Why does JProgram synthesize array types on the fly
   // Look into refactoring JProgram to get rid of this responsibility
   @Override
   public JArrayType getOrCreateArrayType(JType leafType, int dimensions) {

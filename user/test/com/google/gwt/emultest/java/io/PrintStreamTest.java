@@ -38,7 +38,7 @@ public class PrintStreamTest extends GWTTestCase {
 
   private static class MockPrintStream extends PrintStream {
 
-    public MockPrintStream(OutputStream os) {
+    MockPrintStream(OutputStream os) {
       super(os);
     }
 
@@ -280,5 +280,12 @@ public class PrintStreamTest extends GWTTestCase {
     ps.clearError();
     assertFalse(ps.checkError());
     ps.close();
+  }
+
+  public void testAppend() {
+    ps.append('h');
+    ps.append("owd");
+    ps.append("xyz", 1, 2);
+    assertEquals("howdy", new String(baos.toByteArray(), UTF_8));
   }
 }

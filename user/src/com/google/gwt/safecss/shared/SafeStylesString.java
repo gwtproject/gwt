@@ -53,6 +53,7 @@ class SafeStylesString implements SafeStyles {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String asString() {
     return css;
   }

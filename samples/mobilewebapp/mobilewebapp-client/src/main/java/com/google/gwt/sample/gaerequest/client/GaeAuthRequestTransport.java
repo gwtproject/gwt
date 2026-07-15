@@ -43,7 +43,7 @@ public class GaeAuthRequestTransport extends DefaultRequestTransport {
     /*
      * Add the redirect URL in case the user is logged out.
      * 
-     * /MobileWebApp.html?parem0=value0&param1=value1#hash
+     * /MobileWebApp.html?param0=value0&param1=value1#hash
      */
     String redirectUrl = Location.getPath() + Location.getQueryString() + Location.getHash();
     builder.setHeader(GaeHelper.REDIRECT_URL_HTTP_HEADER_NAME, redirectUrl);

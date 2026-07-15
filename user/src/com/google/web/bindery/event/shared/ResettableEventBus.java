@@ -83,6 +83,7 @@ public class ResettableEventBus extends EventBus {
   private HandlerRegistration doRegisterHandler(final HandlerRegistration registration) {
     registrations.add(registration);
     return new HandlerRegistration() {
+      @Override
       public void removeHandler() {
         doUnregisterHandler(registration);
       }

@@ -65,6 +65,7 @@ public class DefaultRequestTransport implements RequestTransport {
     return requestUrl;
   }
 
+  @Override
   public void send(String payload, TransportReceiver receiver) {
     RequestBuilder builder = createRequestBuilder();
     configureRequestBuilder(builder);
@@ -124,11 +125,13 @@ public class DefaultRequestTransport implements RequestTransport {
   protected RequestCallback createRequestCallback(final TransportReceiver receiver) {
     return new RequestCallback() {
 
+      @Override
       public void onError(Request request, Throwable exception) {
         wireLogger.log(Level.SEVERE, SERVER_ERROR, exception);
         receiver.onTransportFailure(new ServerFailure(exception.getMessage()));
       }
 
+      @Override
       public void onResponseReceived(Request request, Response response) {
         wireLogger.finest("Response received");
         if (Response.SC_OK == response.getStatusCode()) {

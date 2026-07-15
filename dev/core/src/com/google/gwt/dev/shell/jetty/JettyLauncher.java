@@ -115,6 +115,7 @@ public class JettyLauncher extends ServletContainerLauncher {
     /**
      * Log an HTTP request/response to TreeLogger.
      */
+    @Override
     public void log(Request request, Response response) {
       int status = response.getStatus();
       if (status < 0) {
@@ -446,7 +447,7 @@ public class JettyLauncher extends ServletContainerLauncher {
               - (2 + resourceName.length()));
         } else {
           branch.log(TreeLogger.ERROR,
-              "Found resouce but unrecognized URL format: '" + foundStr + '\'');
+              "Found resource but unrecognized URL format: '" + foundStr + '\'');
           return false;
         }
         branch = branch.branch(logLevel, "Adding classpath entry '"
@@ -716,7 +717,7 @@ public class JettyLauncher extends ServletContainerLauncher {
     }
 
     if (appRootDir == null) {
-      throw new NullPointerException("app root direcotry cannot be null");
+      throw new NullPointerException("app root directory cannot be null");
     }
   }
 

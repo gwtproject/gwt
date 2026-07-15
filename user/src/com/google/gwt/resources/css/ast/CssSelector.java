@@ -46,6 +46,7 @@ public class CssSelector extends CssNode {
     this.selector = selector;
   }
 
+  @Override
   public void traverse(CssVisitor visitor, Context context) {
     visitor.visit(this, context);
     visitor.endVisit(this, context);

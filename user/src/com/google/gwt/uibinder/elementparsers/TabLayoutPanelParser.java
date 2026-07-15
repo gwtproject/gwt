@@ -38,6 +38,7 @@ public class TabLayoutPanelParser implements ElementParser {
   private static final String HEADER = "header";
   private static final String TAB = "tab";
 
+  @Override
   public void parse(XMLElement panelElem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
     // TabLayoutPanel requires tabBar size and unit ctor args.
@@ -103,6 +104,7 @@ public class TabLayoutPanelParser implements ElementParser {
     final Children children = new Children();
 
     elem.consumeChildElements(new XMLElement.Interpreter<Boolean>() {
+      @Override
       public Boolean interpretElement(XMLElement child)
           throws UnableToCompleteException {
 

@@ -32,15 +32,18 @@ class StringAttributeParser implements AttributeParser {
       this.types = new JType[] { type };
     }
 
+    @Override
     public JType[] getTypes() {
       return types;
     }
 
+    @Override
     public String handleFragment(String literal) {
       return "\"" + UiBinderWriter.escapeTextForJavaStringLiteral(literal)
           + "\"";
     }
 
+    @Override
     public String handleReference(String reference) {
       return String.format(" + %s + ", reference);
     }
@@ -55,6 +58,7 @@ class StringAttributeParser implements AttributeParser {
     this.stringType = stringType;
   }
 
+  @Override
   public String parse(XMLElement source, String value) {
     return converter.convert(source, value, new FieldReferenceDelegate(stringType));
   }

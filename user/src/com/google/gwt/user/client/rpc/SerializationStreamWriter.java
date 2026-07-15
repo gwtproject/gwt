@@ -24,6 +24,7 @@ public interface SerializationStreamWriter {
    * 
    * @return a string that is the serialization of the contents of this stream
    */
+  @Override
   String toString();
 
   void writeBoolean(boolean value) throws SerializationException;

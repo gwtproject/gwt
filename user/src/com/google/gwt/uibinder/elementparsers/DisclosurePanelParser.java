@@ -37,6 +37,7 @@ public class DisclosurePanelParser implements ElementParser {
   private static final String OPEN_IMAGE = "openImage";
   private static final String CLOSED_IMAGE = "closedImage";
 
+  @Override
   public void parse(final XMLElement panelElem, String panelField,
       JClassType type, final UiBinderWriter writer)
       throws UnableToCompleteException {
@@ -91,6 +92,7 @@ public class DisclosurePanelParser implements ElementParser {
     final Children children = new Children();
 
     elem.consumeChildElements(new XMLElement.Interpreter<Boolean>() {
+      @Override
       public Boolean interpretElement(XMLElement child)
           throws UnableToCompleteException {
 

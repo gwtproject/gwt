@@ -151,6 +151,7 @@ import com.google.gwt.dev.js.JsReportGenerationVisitor;
 import com.google.gwt.dev.js.JsStackEmulator;
 import com.google.gwt.dev.js.JsStaticEval;
 import com.google.gwt.dev.js.JsSymbolResolver;
+import com.google.gwt.dev.js.JsToStringGenerationVisitor;
 import com.google.gwt.dev.js.JsUnusedFunctionRemover;
 import com.google.gwt.dev.js.JsVerboseNamer;
 import com.google.gwt.dev.js.SizeBreakdown;
@@ -772,7 +773,9 @@ public final class JavaToJavaScriptCompiler {
           DefaultTextOutput out = new DefaultTextOutput(!options.isIncrementalCompileEnabled() &&
               options.getOutput().shouldMinimize());
           JsReportGenerationVisitor v = new JsReportGenerationVisitor(out, jjsMap,
-              options.isJsonSoycEnabled());
+              options.isJsonSoycEnabled(),
+              new JsToStringGenerationVisitor.PrintOptions(false,
+                  options.getOutput() == JsOutputOption.OBFUSCATED));
           v.accept(jsProgram.getFragmentBlock(i));
 
           StatementRanges statementRanges = v.getStatementRanges();
@@ -1161,7 +1164,7 @@ public final class JavaToJavaScriptCompiler {
       // (2) Construct and unify the unresolved Java AST
       CompilationState compilationState =
           constructJavaAst(precompilationContext);
-
+      ImplementRecordComponents.exec(jprogram);
       // TODO(stalcup): hide metrics gathering in a callback or subclass
       JsniRestrictionChecker.exec(logger, jprogram);
       JsInteropRestrictionChecker.exec(logger, jprogram, getMinimalRebuildCache());
@@ -1178,8 +1181,6 @@ public final class JavaToJavaScriptCompiler {
       DevirtualizeDefaultMethodForwarding.exec(jprogram);
       // Replace calls to native overrides of object methods.
       ReplaceCallsToNativeJavaLangObjectOverrides.exec(jprogram);
-
-      ImplementRecordComponents.exec(jprogram);
 
       FixAssignmentsToUnboxOrCast.exec(jprogram);
       if (options.isEnableAssertions()) {

@@ -30,12 +30,15 @@ public interface Statements {
    */
   class Empty implements Statements {
 
+    @Override
     public void addDetachStatement(String format, Object... args) {
     }
 
+    @Override
     public void addInitStatement(String format, Object... params) {
     }
 
+    @Override
     public void addStatement(String format, Object... args) {
     }
   };

@@ -30,6 +30,7 @@ import com.google.gwt.uibinder.rebind.XMLElement;
  */
 public class ImageParser implements ElementParser {
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
     if (hasImageResourceConstructor(writer.getOracle(), type)) {

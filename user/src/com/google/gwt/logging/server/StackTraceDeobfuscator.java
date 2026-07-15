@@ -95,6 +95,7 @@ public class StackTraceDeobfuscator extends com.google.gwt.core.server.StackTrac
     this.symbolMapsDirectory = new File(symbolMapsDirectory);
   }
 
+  @Override
   protected InputStream openInputStream(String fileName) throws IOException {
     return new FileInputStream(new File(symbolMapsDirectory, fileName));
   }

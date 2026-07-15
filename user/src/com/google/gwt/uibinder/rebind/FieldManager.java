@@ -57,6 +57,7 @@ public class FieldManager {
 
   private static final Comparator<FieldWriter> BUILD_DEFINITION_SORT =
       new Comparator<FieldWriter>() {
+    @Override
     public int compare(FieldWriter field1, FieldWriter field2) {
       // First get type precedence, if ties the field precedence is used.
       int precedence = field2.getFieldType().getBuildPrecedence()

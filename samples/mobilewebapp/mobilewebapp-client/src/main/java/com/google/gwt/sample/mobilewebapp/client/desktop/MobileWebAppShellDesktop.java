@@ -129,7 +129,7 @@ public class MobileWebAppShellDesktop extends ResizeComposite implements MobileW
   /**
    * The {@link DialogBox} used to display the tutorial.
    */
-  private PopupPanel tutoralPopup;
+  private PopupPanel tutorialPopup;
 
   /**
    * The video tutorial.
@@ -261,14 +261,14 @@ public class MobileWebAppShellDesktop extends ResizeComposite implements MobileW
    */
   private void showTutorial() {
     // Reuse the tutorial dialog if it is already created.
-    if (tutoralPopup != null) {
+    if (tutorialPopup != null) {
       // Reset the video.
       // TODO(jlabanca): Is cache-control=private making the video non-seekable?
       if (tutorialVideo != null) {
         tutorialVideo.setSrc(tutorialVideo.getCurrentSrc());
       }
 
-      tutoralPopup.center();
+      tutorialPopup.center();
       return;
     }
 
@@ -278,25 +278,25 @@ public class MobileWebAppShellDesktop extends ResizeComposite implements MobileW
      */
     tutorialVideo = Video.createIfSupported();
     if (tutorialVideo == null) {
-      Label label = new Label("Click the link below to view the tutoral:");
+      Label label = new Label("Click the link below to view the tutorial:");
       Anchor anchor = new Anchor(EXTERNAL_TUTORIAL_URL, EXTERNAL_TUTORIAL_URL);
       anchor.setTarget("_blank");
       FlowPanel panel = new FlowPanel();
       panel.add(label);
       panel.add(anchor);
 
-      tutoralPopup = new PopupPanel(true, false);
-      tutoralPopup.setWidget(panel);
-      tutoralPopup.setGlassEnabled(true);
+      tutorialPopup = new PopupPanel(true, false);
+      tutorialPopup.setWidget(panel);
+      tutorialPopup.setGlassEnabled(true);
 
       // Hide the popup when the user clicks the link.
       anchor.addClickHandler(new ClickHandler() {
         public void onClick(ClickEvent event) {
-          tutoralPopup.hide();
+          tutorialPopup.hide();
         }
       });
 
-      tutoralPopup.center();
+      tutorialPopup.center();
       return;
     }
 
@@ -320,7 +320,7 @@ public class MobileWebAppShellDesktop extends ResizeComposite implements MobileW
       }
     }));
     popup.setWidget(vPanel);
-    tutoralPopup = popup;
+    tutorialPopup = popup;
     popup.center();
   }
 }

@@ -363,6 +363,7 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
    * Window resize handler used to keep the glass the proper size.
    */
   private ResizeHandler glassResizer = new ResizeHandler() {
+    @Override
     public void onResize(ResizeEvent event) {
       Style style = glass.getStyle();
 
@@ -486,6 +487,7 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
     autoHidePartners.add(partner);
   }
 
+  @Override
   public HandlerRegistration addCloseHandler(CloseHandler<PopupPanel> handler) {
     return addHandler(handler, CloseEvent.getType());
   }
@@ -618,6 +620,7 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
     CloseEvent.fire(this, this, autoClosed);
   }
 
+  @Override
   public boolean isAnimationEnabled() {
     return isAnimationEnabled;
   }
@@ -772,6 +775,7 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
     ListenerWrapper.WrappedPopupListener.remove(this, listener);
   }
 
+  @Override
   public void setAnimationEnabled(boolean enable) {
     isAnimationEnabled = enable;
   }
@@ -1017,6 +1021,7 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
   public final void showRelativeTo(final UIObject target) {
     // Set the position of the popup right before it is shown.
     setPopupPositionAndShow(new PositionCallback() {
+      @Override
       public void setPosition(int offsetWidth, int offsetHeight) {
         position(target, offsetWidth, offsetHeight);
       }
@@ -1428,11 +1433,13 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
     // Create handlers if showing.
     if (showing) {
       nativePreviewHandlerRegistration = Event.addNativePreviewHandler(new NativePreviewHandler() {
+        @Override
         public void onPreviewNativeEvent(NativePreviewEvent event) {
           previewNativeEvent(event);
         }
       });
       historyHandlerRegistration = History.addValueChangeHandler(new ValueChangeHandler<String>() {
+        @Override
         public void onValueChange(ValueChangeEvent<String> event) {
           if (autoHideOnHistoryEvents) {
             hide();

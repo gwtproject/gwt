@@ -105,6 +105,7 @@ public abstract class AbstractTestObject extends BulkTest {
     }
 
     //-----------------------------------------------------------------------
+    @SuppressWarnings("SelfAssertion")
     public void testObjectEqualsSelf() {
         Object obj = makeObject();
         assertEquals("A Object should equal itself", obj, obj);

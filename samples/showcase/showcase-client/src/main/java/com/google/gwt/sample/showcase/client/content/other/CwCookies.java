@@ -158,7 +158,7 @@ public class CwCookies extends ContentWidget {
     // Add a handler to select an existing cookie
     existingCookiesBox.addChangeHandler(new ChangeHandler() {
       public void onChange(ChangeEvent event) {
-        updateExstingCookie();
+        updateExistingCookie();
       }
     });
 
@@ -171,7 +171,7 @@ public class CwCookies extends ContentWidget {
           String cookieName = existingCookiesBox.getValue(selectedIndex);
           Cookies.removeCookie(cookieName);
           existingCookiesBox.removeItem(selectedIndex);
-          updateExstingCookie();
+          updateExistingCookie();
         }
       }
     });
@@ -226,7 +226,7 @@ public class CwCookies extends ContentWidget {
         }
 
         // Display the selected cookie value
-        updateExstingCookie();
+        updateExistingCookie();
       }
     });
   }
@@ -235,7 +235,7 @@ public class CwCookies extends ContentWidget {
    * Retrieve the value of the existing cookie and put it into to value label.
    */
   @ShowcaseSource
-  private void updateExstingCookie() {
+  private void updateExistingCookie() {
     // Cannot update if there are no items
     if (existingCookiesBox.getItemCount() < 1) {
       cookieNameBox.setText("");

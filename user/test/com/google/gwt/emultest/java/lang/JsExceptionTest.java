@@ -31,6 +31,7 @@ public class JsExceptionTest extends ThrowableTestBase {
 
   // Override removed here to make the test compile in J2CL.
   // @Override
+  @Override
   public void runTest() throws Throwable {
     // Do not run  these tests in JVM.
     if (TestUtils.isJvm()) {
@@ -61,7 +62,8 @@ public class JsExceptionTest extends ThrowableTestBase {
 
   private static Thrower wrapWithFinally(final Thrower thrower) {
     return new Thrower() {
-      @Override public void throwException() throws Throwable {
+      @Override
+      public void throwException() throws Throwable {
         try {
           thrower.throwException();
         } finally {

@@ -87,7 +87,8 @@ public class AtomicInteger extends Number implements java.io.Serializable {
     return value;
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return Integer.toString(value);
   }
 

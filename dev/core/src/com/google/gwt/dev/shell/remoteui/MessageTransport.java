@@ -117,7 +117,6 @@ public class MessageTransport {
      * thread that is waiting on the response.
      *
      * @param responseMessage the server's response
-     * @throws InterruptedException
      */
     void setResponse(Response responseMessage) {
       assert (responseMessage != null);
@@ -218,8 +217,8 @@ public class MessageTransport {
    * @param outputStream an output stream for writing messages
    * @param requestProcessor a callback interface for handling remote client
    *          requests
-   * @param terminationCallback a callback that is invoked when the transport
-   *          terminates
+   * @param errorCallback a callback that is invoked when the transport
+   *          terminates or an error occurs
    */
   public MessageTransport(final InputStream inputStream,
       final OutputStream outputStream, RequestProcessor requestProcessor,

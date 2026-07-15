@@ -362,9 +362,8 @@ public class JsInlinerTest extends OptimizerTestBase {
     verifyOptimized(expected, input);
   }
 
-  /*
-   * This is inspired by issue 5936:
-   * @see http://code.google.com/p/google-web-toolkit/issues/detail?id=5936
+  /**
+   * This is inspired by <a href="https://github.com/gwtproject/gwt/issues/5935">issue 5935</a>.
    */
   public void testPreserveNameScopeWithDoubleInliningAndObfuscation() throws Exception {
     String code = Joiner.on('\n').join(

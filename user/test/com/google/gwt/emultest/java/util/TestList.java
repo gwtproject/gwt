@@ -30,7 +30,7 @@ import java.util.NoSuchElementException;
 /**
  * Tests base {@link java.util.List} methods and contracts.
  *
- * <p>To use, simply extend this class, and implement the {@link #makeList} method.
+ * <p>To use, simply extend this class, and implement the {@link #makeEmptyList} method.
  *
  * <p>If your {@link List} fails one of these tests by design, you may still use this base set of
  * cases. Simply override the test case (method) your {@link List} fails.
@@ -58,7 +58,7 @@ abstract class TestList extends TestCollection {
   }
 
   /**
-   * Returns {@link makeEmptyList()}.
+   * Returns {@link #makeEmptyList()}.
    *
    * @return an empty list to be used for testing
    */
@@ -68,7 +68,7 @@ abstract class TestList extends TestCollection {
   }
 
   /**
-   * Returns {@link makeFullList()}.
+   * Returns {@link #makeFullList()}.
    *
    * @return a full list to be used for testing
    */
@@ -96,7 +96,7 @@ abstract class TestList extends TestCollection {
   }
 
   /**
-   * Returns the {@link collection} field cast to a {@link List}.
+   * Returns the {@link #collection} field cast to a {@link List}.
    *
    * @return the collection field as a List
    */
@@ -105,7 +105,7 @@ abstract class TestList extends TestCollection {
   }
 
   /**
-   * Returns the {@link confirmed} field cast to a {@link List}.
+   * Returns the {@link #confirmed} field cast to a {@link List}.
    *
    * @return the confirmed field as a List
    */
@@ -517,7 +517,7 @@ abstract class TestList extends TestCollection {
     }
   }
 
-  /** Tests {@link List#indexOf()}. */
+  /** Tests {@link List#indexOf(Object)}. */
   public void testListIndexOf() {
     resetFull();
     List list1 = getList();
@@ -538,7 +538,7 @@ abstract class TestList extends TestCollection {
     }
   }
 
-  /** Tests {@link List#lastIndexOf()}. */
+  /** Tests {@link List#lastIndexOf(Object)}. */
   public void testListLastIndexOf() {
     resetFull();
     List list1 = getList();

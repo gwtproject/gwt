@@ -173,7 +173,7 @@ class ImageBundleBuilder {
     }
 
     /**
-     * Companion method to {@link #arrangeImages()}. This method does a best
+     * Companion method to {@link #arrangeImages(Collection)}. This method does a best
      * effort horizontal packing of a column after it was packed vertically.
      * This is the Decreasing Width part of Next-Fit Decreasing Height
      * Decreasing Width. The basic strategy is to sort the remaining rectangles
@@ -427,7 +427,7 @@ class ImageBundleBuilder {
 
   /**
    * Used to return the size of the resulting image from the method
-   * {@link ImageBundleBuilder#arrangeImages()}.
+   * {@link ImageBundleBuilder#arrangeImages(Collection)}.
    */
   static class Size {
     private final int width, height;
@@ -805,7 +805,7 @@ class ImageBundleBuilder {
    * images.
    *
    * In this particular implementation, we use NFDHDW (see
-   * {@link #arrangeImages()}) to get an approximate optimal image packing.
+   * {@link Arranger#arrangeImages(Collection)}) to get an approximate optimal image packing.
    *
    * The most important aspect of drawing the bundled image is that it be drawn
    * in a deterministic way. The drawing of the image should not rely on

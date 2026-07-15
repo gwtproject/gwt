@@ -91,7 +91,7 @@ class Dependencies implements Serializable {
 
   /**
    * Resolves unqualified dependencies against the global list of all valid
-   * classes. Must be called before {@link #validate(String, Map, Map)}.
+   * classes. Must be called before {@link #validate(TreeLogger, Map)}.
    */
   void resolve(Map<String, CompiledClass> allValidClasses) {
     for (Entry<String, Ref> entry : qualified.entrySet()) {

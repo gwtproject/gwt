@@ -126,7 +126,7 @@ public abstract class Header<H> {
    *
    * <p>
    * If you want to apply style names based on the header value, override
-   * {@link #getHeaderStyleNames(Object)} directly.
+   * {@link #getHeaderStyleNames()} directly.
    * </p>
    *
    * @param styleNames the extra style names to apply in a space-separated list,

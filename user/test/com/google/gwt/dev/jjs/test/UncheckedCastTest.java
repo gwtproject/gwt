@@ -45,4 +45,16 @@ public class UncheckedCastTest extends GWTTestCase {
     boolean unboxedBoolean = uncheckedCast(new Double(12));
     assertTrue(unboxedBoolean);
   }
+
+  private static native double undefinedDouble() /*-{
+    return undefined;
+  }-*/;
+
+  public void testBoxedUndefinedDoubleIsNull() {
+    // Autoboxing a JS undefined value typed as double must yield a Double that compares equal
+    // to null; the compiler must not statically conclude the boxed value is non-null.
+    Double d = undefinedDouble();
+    assertTrue(d == null);
+    assertFalse(d != null);
+  }
 }

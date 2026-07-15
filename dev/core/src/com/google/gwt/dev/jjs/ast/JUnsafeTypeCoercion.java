@@ -41,6 +41,10 @@ public class JUnsafeTypeCoercion extends JExpression {
 
   @Override
   public JType getType() {
+    if (expression.getType().isPrimitiveType()) {
+      // A primitive-typed value may be JS undefined (native JsInterop/JSNI), so keep it nullable.
+      return coercionType;
+    }
     if (!expression.getType().canBeNull() && !coercionType.isNullType()) {
       // Strengthen type to non null unless it has been determined that the type is not instantiable
       // (and that is reflected by replacing the coercion type by the null type).

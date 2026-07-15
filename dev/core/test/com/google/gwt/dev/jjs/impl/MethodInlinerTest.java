@@ -15,7 +15,9 @@ package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.ast.JReturnStatement;
 
 /**
  * Test for {@link MethodInliner}.
@@ -184,6 +186,21 @@ public class MethodInlinerTest extends OptimizerTestBase {
     assertEquals(
         "static int fun2(int a){ return a <= 0 ? a : EntryPoint.fun1(a - 1) + a; }",
         getCanonicalSource(result.findMethod("fun2")));
+  }
+
+  public void testInlinedUncheckedCastOfPrimitiveKeepsNullability() throws Exception {
+    addSnippetImport("javaemul.internal.annotations.UncheckedCast");
+    addSnippetImport("javaemul.internal.annotations.DoNotAutobox");
+    addSnippetClassDecl(
+        "@UncheckedCast static <T> T uncheckedCast(@DoNotAutobox Object o) { return (T) o; }");
+    addSnippetClassDecl("static Double box(double d) { return uncheckedCast(d); }");
+    Result result = optimize("void", "box(1);");
+    JMethod box = result.findMethod("box");
+    JReturnStatement returnStatement =
+        (JReturnStatement) ((JMethodBody) box.getBody()).getStatements().get(0);
+    // After inlining uncheckedCast, the boxed result must not become provably non-null: the
+    // primitive input may be JS undefined when it originates in native JsInterop/JSNI code.
+    assertTrue(returnStatement.getExpr().getType().canBeNull());
   }
 
   @Override

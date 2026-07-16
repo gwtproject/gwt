@@ -34,6 +34,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.lang.management.ManagementFactory;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -83,18 +85,30 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
     public synchronized Socket accept() throws IOException {
       while (!validCookies.isEmpty()) {
         Socket s = sock.accept();
-        byte[] bytes = s.getInputStream().readNBytes(32);
-        String cookie = new String(bytes, StandardCharsets.US_ASCII);
-        if (validCookies.remove(cookie)) {
-          if (validCookies.isEmpty()) {
-            // We've removed the final cookie, no further connections are expected
-            sock.close();
+        boolean authenticated = false;
+        try {
+          s.setSoTimeout(sock.getSoTimeout());
+          byte[] bytes = s.getInputStream().readNBytes(32);
+          String cookie = new String(bytes, StandardCharsets.US_ASCII);
+          if (validCookies.remove(cookie)) {
+            if (validCookies.isEmpty()) {
+              // We've removed the final cookie, no further connections are expected
+              sock.close();
+            }
+            s.setSoTimeout(0);
+            authenticated = true;
+            return s;
           }
-          return s;
+          logger.log(TreeLogger.WARN, "Rejected connection from "
+              + s.getRemoteSocketAddress() + " with invalid cookie: " + cookie);
+        } catch (SocketTimeoutException e) {
+          logger.log(TreeLogger.WARN, "Rejected connection from "
+              + s.getRemoteSocketAddress() + " after cookie timeout");
+        } finally {
+          if (!authenticated) {
+            s.close();
+          }
         }
-        s.close();
-        logger.log(TreeLogger.WARN, "Rejected connection from "
-            + s.getRemoteSocketAddress() + " with invalid cookie: " + cookie);
       }
       throw new IllegalStateException("No more cookies, too many calls to accept()");
     }
@@ -224,7 +238,8 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
   /**
    * Launches an external worker, with a port to connect to and a cookie to authenticate with.
    */
-  private static void launchExternalWorker(TreeLogger logger, String cookie, int port)
+  private static void launchExternalWorker(
+      TreeLogger logger, String cookie, String host, int port)
       throws UnableToCompleteException {
 
     String javaCommand = System.getProperty(JAVA_COMMAND_PROPERTY,
@@ -258,7 +273,7 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
 
     // Cook up the classpath, main class, and extra args
     args.addAll(Arrays.asList(
-        CompilePermsServer.class.getName(), "-host", "localhost", "-port",
+        CompilePermsServer.class.getName(), "-host", host, "-port",
         String.valueOf(port), "-logLevel", logLevel.toString(), "-cookie",
         cookie));
 
@@ -382,7 +397,8 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
 
     // TODO(spoon): clean up already-launched processes if we get an exception?
     for (int i = 0; i < numWorkers; i++) {
-      launchExternalWorker(logger, cookieList.get(i), sock.getLocalPort());
+      launchExternalWorker(logger, cookieList.get(i),
+          sock.getInetAddress().getHostAddress(), sock.getLocalPort());
       toReturn.add(new ExternalPermutationWorker(countedSock, astFile));
     }
 
@@ -405,7 +421,7 @@ public class ExternalPermutationWorkerFactory extends PermutationWorkerFactory {
        * prevents dead-head behavior.
        */
       sock.setSoTimeout(60000);
-      sock.bind(null);
+      sock.bind(new InetSocketAddress(InetAddress.getLoopbackAddress(), 0));
       if (logger.isLoggable(TreeLogger.SPAM)) {
         logger.log(TreeLogger.SPAM, "Listening for external workers on port "
             + sock.getLocalPort());

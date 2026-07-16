@@ -3,6 +3,14 @@
 # style guide violations. Presently, tests are not run on pull requests.
 name: Quick smoke test
 on: [push, pull_request]
+
+# Least-privilege token: this workflow only checks out the code and lets
+# reviewdog read the pull request diff to post checkstyle annotations
+# (the github-pr-annotations reporter needs no write access).
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   build:
     runs-on: ubuntu-latest

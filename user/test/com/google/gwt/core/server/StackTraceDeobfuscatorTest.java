@@ -41,6 +41,18 @@ public class StackTraceDeobfuscatorTest extends TestCase {
     return new StackTraceElement[] {new StackTraceElement("C", "m", "C.java", 1)};
   }
 
+  /**
+   * Builds a frame as the browser reports it for a fragment, whose file name comes from the
+   * "//# sourceURL=&lt;module&gt;-&lt;fragment&gt;.js" comment written by CrossSiteIframeLinker.
+   * The column marker makes the frame source map capable, and an unknown method symbol leaves
+   * the fragment id to be recovered from the file name.
+   */
+  private static StackTraceElement[] traceInFragmentFile(String fileName) {
+    return new StackTraceElement[] {new StackTraceElement("C", "unknown", fileName + "@1", 1)};
+  }
+
+  private static final String STRONG_NAME = "0F2C4A6E8B1D3F5709ABCDEF12345678";
+
   public void testTraversalStrongNameIsNotUsedToBuildPath() {
     RecordingDeobfuscator d = new RecordingDeobfuscator();
     d.resymbolize(trace(), "../../../../../../etc/passwd");
@@ -52,5 +64,26 @@ public class StackTraceDeobfuscatorTest extends TestCase {
     RecordingDeobfuscator d = new RecordingDeobfuscator();
     d.resymbolize(trace(), "0F2C4A6E8B1D3F5709ABCDEF12345678");
     assertEquals("0F2C4A6E8B1D3F5709ABCDEF12345678.symbolMap", d.opened.get(0));
+  }
+
+  public void testSingleDigitFragmentIdIsReadFromFileName() {
+    RecordingDeobfuscator d = new RecordingDeobfuscator();
+    d.resymbolize(traceInFragmentFile("app-5.js"), STRONG_NAME);
+    assertTrue("expected fragment 5 to be requested: " + d.opened,
+        d.opened.contains(STRONG_NAME + "_sourceMap5.json"));
+  }
+
+  public void testMultiDigitFragmentIdIsReadFromFileName() {
+    RecordingDeobfuscator d = new RecordingDeobfuscator();
+    d.resymbolize(traceInFragmentFile("app-12.js"), STRONG_NAME);
+    assertTrue("expected fragment 12 to be requested: " + d.opened,
+        d.opened.contains(STRONG_NAME + "_sourceMap12.json"));
+  }
+
+  public void testMultiDigitFragmentIdIsReadFromModuleNameEndingInDigit() {
+    RecordingDeobfuscator d = new RecordingDeobfuscator();
+    d.resymbolize(traceInFragmentFile("app2-104.js"), STRONG_NAME);
+    assertTrue("expected fragment 104 to be requested: " + d.opened,
+        d.opened.contains(STRONG_NAME + "_sourceMap104.json"));
   }
 }

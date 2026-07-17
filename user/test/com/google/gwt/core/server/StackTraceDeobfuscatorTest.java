@@ -76,14 +76,14 @@ public class StackTraceDeobfuscatorTest extends TestCase {
   public void testMultiDigitFragmentIdIsReadFromFileName() {
     RecordingDeobfuscator d = new RecordingDeobfuscator();
     d.resymbolize(traceInFragmentFile("app-12.js"), STRONG_NAME);
-    assertTrue("expected fragment 12, not its last digit: " + d.opened,
+    assertTrue("expected fragment 12 to be requested: " + d.opened,
         d.opened.contains(STRONG_NAME + "_sourceMap12.json"));
   }
 
   public void testMultiDigitFragmentIdIsReadFromModuleNameEndingInDigit() {
     RecordingDeobfuscator d = new RecordingDeobfuscator();
     d.resymbolize(traceInFragmentFile("app2-104.js"), STRONG_NAME);
-    assertTrue("expected fragment 104, not its last digit: " + d.opened,
+    assertTrue("expected fragment 104 to be requested: " + d.opened,
         d.opened.contains(STRONG_NAME + "_sourceMap104.json"));
   }
 }

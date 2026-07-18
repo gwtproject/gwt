@@ -336,9 +336,9 @@ public class DeadCodeElimination {
       if (expression instanceof JBooleanLiteral) {
         JBooleanLiteral booleanLiteral = (JBooleanLiteral) expression;
 
-        // If false, replace do with do's body
         if (!booleanLiteral.getValue()) {
-          if (JjsUtils.isEmptyBlock(x.getBody())) {
+          // If false, replace do with do's body
+          if (x.getBody().isEmpty()) {
             ctx.removeMe();
           } else { // Unless it contains break/continue statements
             FindBreakContinueStatementsVisitor visitor = new FindBreakContinueStatementsVisitor();
@@ -1964,10 +1964,8 @@ public class DeadCodeElimination {
         } else {
           // Create an if statement equivalent to the single-case switch.
           JBinaryOperation compareOperation = caseStatement.convertToCompareExpression(x.getExpr());
-          JBlock block = new JBlock(x.getSourceInfo());
-          block.addStmt(statement);
           JIfStatement ifStatement =
-              new JIfStatement(x.getSourceInfo(), compareOperation, block, null);
+              new JIfStatement(x.getSourceInfo(), compareOperation, statement, null);
           replaceMe(ifStatement, ctx);
         }
       }

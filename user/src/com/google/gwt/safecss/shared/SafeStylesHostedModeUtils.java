@@ -95,6 +95,8 @@ public class SafeStylesHostedModeUtils {
       return "Style property names cannot contain a semi-colon: " + name;
     } else if (name.indexOf(':') >= 0) {
       return "Style property names cannot contain a colon: " + name;
+    } else if (name.indexOf('<') >= 0 || name.indexOf('>') >= 0) {
+      return "Style property names cannot contain a bracket (< or >): " + name;
     }
 
     return null;
@@ -120,6 +122,14 @@ public class SafeStylesHostedModeUtils {
     // Empty value.
     if (value == null || value.length() == 0) {
       return "Style property values cannot be null or empty";
+    }
+
+    /*
+     * The HTML tokenizer runs before the CSS parser, so a bracket ends the
+     * enclosing style element even inside a quoted string or a url().
+     */
+    if (value.indexOf('<') >= 0 || value.indexOf('>') >= 0) {
+      return "Style property values cannot contain a bracket (< or >): " + value;
     }
 
     /*

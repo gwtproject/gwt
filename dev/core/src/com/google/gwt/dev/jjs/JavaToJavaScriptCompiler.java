@@ -1022,8 +1022,6 @@ public final class JavaToJavaScriptCompiler {
         stats.recordModified(JsStaticEval.exec(jsProgram));
         // Inline Js function invocations
         stats.recordModified(JsInliner.exec(jsProgram, toInline));
-        // After inlining, reduce clinit calls within each function
-        stats.recordModified(DuplicateClinitRemover.exec(jsProgram));
         // Remove unused functions if possible.
         stats.recordModified(JsUnusedFunctionRemover.exec(jsProgram));
 
@@ -1038,6 +1036,10 @@ public final class JavaToJavaScriptCompiler {
       if (nodeChangeRate <= minChangeRate && sizeChangeRate <= minChangeRate) {
         break;
       }
+    }
+
+    if (optimizationLevel > OptionOptimize.OPTIMIZE_LEVEL_DRAFT) {
+      DuplicateClinitRemover.exec(jsProgram);
     }
   }
 

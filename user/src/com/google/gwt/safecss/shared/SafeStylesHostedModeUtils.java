@@ -96,7 +96,7 @@ public class SafeStylesHostedModeUtils {
     } else if (name.indexOf(':') >= 0) {
       return "Style property names cannot contain a colon: " + name;
     } else if (name.indexOf('<') >= 0 || name.indexOf('>') >= 0) {
-      return "Style property names cannot contain a bracket (< or >): " + name;
+      return "Style property names cannot contain an angle bracket: " + name;
     }
 
     return null;
@@ -125,17 +125,9 @@ public class SafeStylesHostedModeUtils {
     }
 
     /*
-     * The HTML tokenizer runs before the CSS parser, so a bracket ends the
-     * enclosing style element even inside a quoted string or a url().
-     */
-    if (value.indexOf('<') >= 0 || value.indexOf('>') >= 0) {
-      return "Style property values cannot contain a bracket (< or >): " + value;
-    }
-
-    /*
      * A value can contain any token, but parenthesis, brackets, braces, and
-     * single/double quotes must be paired. Semi-colons are only allowed in
-     * strings, such as in a url.
+     * single/double quotes must be paired. Semi-colons and angle brackets are
+     * only allowed in strings, such as in a url.
      */
 
     // Create a map of pairable 'open' characters to 'close' characters.
@@ -222,6 +214,10 @@ public class SafeStylesHostedModeUtils {
       } else if (ch == ':') {
         // Contains an unescaped colon.
         return "Style property values cannot contain a colon (except within quotes): " + value;
+      } else if (ch == '<' || ch == '>') {
+        // Contains an unescaped angle bracket, which would end an enclosing style element.
+        return "Style property values cannot contain an angle bracket (except within quotes): "
+            + value;
       }
     }
 

@@ -48,8 +48,7 @@ public class GwtSafeStylesUtilsTest extends GWTTestCase {
       "almost-escaped\\\\;semi-colon", "almost-escaped\\\\:colon", "unmatched'singlequote",
       "unmatched\"doublequote", "url(http://withUnmatched(Paren)", "url(http://unterminated",
       "end-in-escape-character\\", "contains<open-bracket", "contains>close-bracket",
-      "red</style><script>alert(1)</script>", "url(http://endsStyleElement</style>)",
-      "'quoted</style><script>alert(1)</script>'"};
+      "red</style><script>alert(1)</script>"};
 
   static final String[] VALID_STYLE_NAMES = {
       "simple", "one-hyphen", "has-two-hyphens", "-starts-with-hyphen", "_startsWithUnderscore",
@@ -64,7 +63,8 @@ public class GwtSafeStylesUtilsTest extends GWTTestCase {
       "url('http://withSingleQuotes')", "url(\"http://withDoubleQuotes\")",
       "url(http://withSemiColon;)", "url(http://withUnmatchedBracket{[)",
       "url(http://withUnmatchedCloseBracket}])", "end-in-escaped-backslash\\\\", "u-near-end-u",
-      "url-near-end-url", "absolute"};
+      "url-near-end-url", "absolute", "\">\"", "angle-in'single<quote'",
+      "url(http://withAngleBracket>)"};
 
   private static Boolean isAssertionEnabled;
 

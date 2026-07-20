@@ -215,7 +215,7 @@ public class SafeStylesHostedModeUtils {
         // Contains an unescaped colon.
         return "Style property values cannot contain a colon (except within quotes): " + value;
       } else if (ch == '<' || ch == '>') {
-        // Contains an unescaped angle bracket, which would end an enclosing style element.
+        // Contains an unescaped angle bracket.
         return "Style property values cannot contain an angle bracket (except within quotes): "
             + value;
       }

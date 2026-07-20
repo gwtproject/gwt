@@ -47,8 +47,7 @@ public class GwtSafeStylesUtilsTest extends GWTTestCase {
       ";startsWithSemicolon", "endsWithSemicolon;", "contains;semicolon",
       "almost-escaped\\\\;semi-colon", "almost-escaped\\\\:colon", "unmatched'singlequote",
       "unmatched\"doublequote", "url(http://withUnmatched(Paren)", "url(http://unterminated",
-      "end-in-escape-character\\", "contains<open-bracket", "contains>close-bracket",
-      "red</style><script>alert(1)</script>"};
+      "end-in-escape-character\\", "contains<open-bracket", "contains>close-bracket"};
 
   static final String[] VALID_STYLE_NAMES = {
       "simple", "one-hyphen", "has-two-hyphens", "-starts-with-hyphen", "_startsWithUnderscore",

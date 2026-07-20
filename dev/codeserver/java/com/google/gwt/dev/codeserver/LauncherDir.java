@@ -132,7 +132,7 @@ class LauncherDir {
     // Copy the public resources to the output.
     ResourceOracleImpl publicResources = module.getPublicResourceOracle();
     for (String pathName : publicResources.getPathNames()) {
-      File file = new File(moduleOutputDir, pathName);
+      File file = pathToPublicResource(moduleOutputDir, pathName);
       File parent = file.getParentFile();
       if (!parent.isDirectory() && !parent.mkdirs()) {
         compileLogger.log(Type.ERROR, "cannot create directory: " + parent);
@@ -140,5 +140,23 @@ class LauncherDir {
       }
       Files.asByteSink(file).writeFrom(publicResources.getResourceAsStream(pathName));
     }
+  }
+
+  static File pathToPublicResource(File moduleOutputDir, String pathName) throws IOException {
+    File outputRoot = moduleOutputDir.getCanonicalFile();
+    File file = new File(outputRoot, pathName).getCanonicalFile();
+    if (!isDescendantOrSelf(outputRoot, file)) {
+      throw new IOException("Path escapes module output directory: " + pathName);
+    }
+    return file;
+  }
+
+  private static boolean isDescendantOrSelf(File root, File file) {
+    for (File current = file; current != null; current = current.getParentFile()) {
+      if (current.equals(root)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

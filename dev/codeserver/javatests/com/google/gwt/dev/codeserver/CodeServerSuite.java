@@ -23,6 +23,7 @@ import junit.framework.TestSuite;
 public class CodeServerSuite {
   public static Test suite() {
     TestSuite suite = new TestSuite("Tests of the code server package");
+    suite.addTestSuite(LauncherDirTest.class);
     suite.addTestSuite(CodeServerGwtTest.class);
     return suite;
   }

@@ -85,7 +85,8 @@ public class JsDuplicateCaseFolderTest extends OptimizerTestBase {
   }
 
   @Override
-  protected void doOptimize(JsProgram program) throws Exception {
+  protected boolean doOptimize(JsProgram program) throws Exception {
     JsDuplicateCaseFolder.exec(program);
+    return true;
   }
 }

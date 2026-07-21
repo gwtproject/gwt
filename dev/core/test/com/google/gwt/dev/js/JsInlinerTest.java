@@ -417,14 +417,15 @@ public class JsInlinerTest extends OptimizerTestBase {
   }
 
   @Override
-  protected void doOptimize(JsProgram program) throws JsNamer.IllegalNameException {
+  protected boolean doOptimize(JsProgram program) throws JsNamer.IllegalNameException {
     JsSymbolResolver.exec(program);
     new FixStaticRefsVisitor().accept(program);
-    doInline(program);
+    boolean madeChanges = doInline(program);
     JsUnusedFunctionRemover.exec(program);
     if (obfuscateSource) {
       JsObfuscateNamer.exec(program);
     }
+    return madeChanges;
   }
 
   /**
@@ -433,7 +434,7 @@ public class JsInlinerTest extends OptimizerTestBase {
    * based on their name.
    * @param program the program to optimize
    */
-  private static void doInline(JsProgram program) {
+  private static boolean doInline(JsProgram program) {
     final List<JsNode> inlineableFunctions = Lists.newArrayList();
     new JsVisitor() {
       @Override
@@ -450,7 +451,8 @@ public class JsInlinerTest extends OptimizerTestBase {
         }
       }
     }.accept(program);
-    JsInliner.exec(program, inlineableFunctions);
+    int changes = JsInliner.exec(program, inlineableFunctions);
+    return changes > 0;
   }
 
 }

@@ -180,11 +180,12 @@ public class JsStaticEvalTest extends OptimizerTestBase {
   }
 
   @Override
-  protected void doOptimize(JsProgram program) {
+  protected boolean doOptimize(JsProgram program) {
     int changes = JsStaticEval.exec(program);
     if (changes != 0) {
       // Try one more time, to ensure that it correctly converged in a single run
       assertEquals(0, JsStaticEval.exec(program));
     }
+    return changes != 0;
   }
 }

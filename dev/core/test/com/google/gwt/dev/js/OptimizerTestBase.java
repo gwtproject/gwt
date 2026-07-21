@@ -49,19 +49,21 @@ public abstract class OptimizerTestBase extends TestCase {
   protected Result optimize(JsProgram program) throws Exception {
     setupJsProgram(program);
 
-    doOptimize(program);
+    boolean madeChanges = doOptimize(program);
 
     TextOutput out = new DefaultTextOutput(true);
-    return new Result(out.toString(), program);
+    return new Result(out.toString(), program, madeChanges);
   }
 
   protected static class Result {
     private final String originalCode;
     private final JsProgram program;
+    private final boolean madeChanges;
 
-    private Result(String originalCode, JsProgram program) {
+    private Result(String originalCode, JsProgram program, boolean madeChanges) {
       this.originalCode = originalCode;
       this.program = program;
+      this.madeChanges = madeChanges;
     }
 
     /**
@@ -76,6 +78,10 @@ public abstract class OptimizerTestBase extends TestCase {
       expectedProgram.getGlobalBlock().getStatements().addAll(input);
 
       assertEquals(originalCode, expectedProgram.toSource(), program.toSource());
+    }
+
+    public void noChange() {
+      assertFalse(madeChanges);
     }
   }
 
@@ -108,9 +114,7 @@ public abstract class OptimizerTestBase extends TestCase {
     return program;
   }
 
-  protected void doOptimize(JsProgram program) throws Exception {
-
-  }
+  protected abstract boolean doOptimize(JsProgram program) throws Exception;
 
   /**
    * Override this method to provide additional pre-optimization setup of the js program.

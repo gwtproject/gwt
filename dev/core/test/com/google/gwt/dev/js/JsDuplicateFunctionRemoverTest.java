@@ -192,8 +192,9 @@ public class JsDuplicateFunctionRemoverTest extends OptimizerTestBase {
   }
 
   @Override
-  protected void doOptimize(JsProgram program) throws Exception {
+  protected boolean doOptimize(JsProgram program) throws Exception {
     JsSymbolResolver.exec(program);
     JsDuplicateFunctionRemover.exec(program, new MockNameGenerator());
+    return true;
   }
 }

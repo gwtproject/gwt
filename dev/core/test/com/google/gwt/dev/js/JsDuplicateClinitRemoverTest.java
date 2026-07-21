@@ -172,6 +172,7 @@ public class JsDuplicateClinitRemoverTest extends OptimizerTestBase {
         .into(CLINIT_DECL,
             "for(var i = 0; i < (clinit_A(), 10); i += x() + y){ b++; }"
             );
+
     // Fails, but increment always runs after the body (at least if there are no "continue"
     // statements).
     //    optimize(CLINIT_DECL,
@@ -179,6 +180,10 @@ public class JsDuplicateClinitRemoverTest extends OptimizerTestBase {
     //        .into(CLINIT_DECL,
     //            "for(var i = 0; i < 10; i += x() + y){ b++; clinit_A(); }"
     //            );
+    // For now, asserting that we can't improve these cases:
+    optimize(CLINIT_DECL,
+            "for(var i = 0; i < 10; i += x() + (clinit_A(), y)){ b++; clinit_A(); }")
+            .noChange();
   }
 
   public void testRemoveDupClinitsInDo() throws Exception {
@@ -203,13 +208,20 @@ public class JsDuplicateClinitRemoverTest extends OptimizerTestBase {
     //    )
     //        .into(CLINIT_DECL,
     //            "do { b++; clinit_A(); } while(x() + y > 0);");
+    // For now, asserting that we can't improve these cases:
+        optimize(CLINIT_DECL,
+            "do { b++; clinit_B(); } while(cond);",
+            "clinit_B();"
+            ).noChange();
+        optimize(CLINIT_DECL,
+            "do { b++; clinit_A(); } while(x() + (clinit_A(), y) > 0);"
+        ).noChange();
 
     optimize(CLINIT_DECL,
         "do { b++; } while(x() + y > (clinit_B(), z));",
         "clinit_B();"
     )
-        .into(CLINIT_DECL,
-            "do { b++; } while(x() + y > (clinit_B(), z));");
+        .noChange();
 
     optimize(CLINIT_DECL,
         "clinit_A();",
@@ -218,6 +230,18 @@ public class JsDuplicateClinitRemoverTest extends OptimizerTestBase {
         .into(CLINIT_DECL,
             "clinit_A();",
             "do { b++; } while(x() + y > (clinit_B(), z));");
+  }
+
+  public void testKeepClinitsAroundTry() throws Exception {
+    // Ensure we're careful with exceptions as flow control to avoid a clinit
+    optimize(CLINIT_DECL, """
+        try {
+          a();
+          clinit_A();
+        } catch (e) {
+          clinit_A();
+        }
+        """).noChange();
   }
 
   public void testRemoveDupClinitsInInvocation() throws Exception {
@@ -327,11 +351,12 @@ public class JsDuplicateClinitRemoverTest extends OptimizerTestBase {
   }
 
   @Override
-  protected void doOptimize(JsProgram program) {
+  protected boolean doOptimize(JsProgram program) {
     JsSymbolResolver.exec(program);
-    DuplicateClinitRemover.exec(program);
+    int changes = DuplicateClinitRemover.exec(program);
     // Duplicate clinits are replaced by nulls, so we need to run static eval to remove them
     JsStaticEval.exec(program);
+    return changes != 0;
   }
 
   @Override

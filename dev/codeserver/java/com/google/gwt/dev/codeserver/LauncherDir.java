@@ -21,6 +21,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.codeserver.CompileDir.PolicyFile;
 import com.google.gwt.dev.resource.impl.ResourceOracleImpl;
+import com.google.gwt.dev.util.OutputFileSet;
 import com.google.gwt.thirdparty.guava.common.base.Charsets;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 import com.google.gwt.thirdparty.guava.common.io.Files;
@@ -143,6 +144,9 @@ class LauncherDir {
   }
 
   static File pathToPublicResource(File moduleOutputDir, String pathName) throws IOException {
+    if (OutputFileSet.pathEscapesRoot(pathName)) {
+      throw new IOException("Path escapes module output directory: " + pathName);
+    }
     File outputRoot = moduleOutputDir.getCanonicalFile();
     File file = new File(outputRoot, pathName).getCanonicalFile();
     if (!isDescendantOrSelf(outputRoot, file)) {

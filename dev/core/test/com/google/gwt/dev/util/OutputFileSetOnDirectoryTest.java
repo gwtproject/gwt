@@ -29,6 +29,15 @@ import java.nio.file.Files;
  */
 public class OutputFileSetOnDirectoryTest extends TestCase {
 
+  public void testPathEscapesRoot() {
+    assertFalse(OutputFileSet.pathEscapesRoot("a/b"));
+    assertFalse(OutputFileSet.pathEscapesRoot("a/../b"));
+    assertFalse(OutputFileSet.pathEscapesRoot("path/../to/./file"));
+    assertTrue(OutputFileSet.pathEscapesRoot("../b"));
+    assertTrue(OutputFileSet.pathEscapesRoot("a/../../b"));
+    assertTrue(OutputFileSet.pathEscapesRoot("/../path/../to/./file"));
+  }
+
   public void testCreateNewOutputStream() throws IOException {
     File work = Files.createTempDirectory("outputfileset").toFile();
     try {

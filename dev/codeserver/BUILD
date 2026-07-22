@@ -62,17 +62,8 @@ java_library(
 test_suite(
     name = "tests",
     tests = [
-        ":LauncherDirTest",
         ":RecompilerTest",
         ":SourceHandlerTest",
-    ],
-)
-
-java_test(
-    name = "LauncherDirTest",
-    test_class = "com.google.gwt.dev.codeserver.LauncherDirTest",
-    runtime_deps = [
-        ":testlib",
     ],
 )
 

@@ -122,5 +122,4 @@ public abstract class OptimizerTestBase extends TestCase {
    */
   protected void setupJsProgram(JsProgram program) {
   }
-
-  }
+}

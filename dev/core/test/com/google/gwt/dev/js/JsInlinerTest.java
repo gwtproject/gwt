@@ -454,5 +454,4 @@ public class JsInlinerTest extends OptimizerTestBase {
     int changes = JsInliner.exec(program, inlineableFunctions);
     return changes > 0;
   }
-
 }

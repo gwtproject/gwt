@@ -100,66 +100,75 @@ public class DuplicateClinitRemover extends JsModVisitor {
   @Override
   public boolean visit(JsBinaryOperation x, JsContext ctx) {
     if (x.getOperator() == JsBinaryOperator.COMMA) {
-
-      // This effectively visits any JsInvocation direct child on both sides, so take care to not
-      // encounter any clinit twice when descending further. Important: if the right was a new
-      // clinit, we must not go back and re-check the left or we'll have changed the order of
-      // execution.
+      // This effectively visits any JsInvocation direct child, so take care to not encounter any
+      // clinit twice when descending further. Important: if the right was a new clinit, we must not
+      // go back and re-check the left or we'll have changed the order of execution. To ensure this,
+      // we shallowly check the left and based on that result decide to either visit the left or
+      // how to check the right.
       ClinitStatus left = isDuplicateCall(x.getArg1());
-      ClinitStatus right = isDuplicateCall(x.getArg2());
-
-      if (left == ClinitStatus.DUPLICATE_CLINIT && right == ClinitStatus.DUPLICATE_CLINIT) {
-        /*
-         * (clinit(), clinit()) --> delete or null.
-         * Repeated inlining can cause this, if there is an earlier clinit statement/expr in the
-         * branch.
-         */
-        if (ctx.canRemove()) {
-          ctx.removeMe();
-        } else {
-          // The return value from a clinit is never used
-          ctx.replaceMe(JsNullLiteral.INSTANCE);
-        }
-        return false;
-      } else if (left == ClinitStatus.DUPLICATE_CLINIT) {
-        // (clinit(), xyz) --> xyz
-        // This is the common case for simply-inlined methods/fields.
-        if (right == ClinitStatus.NEW_CLINIT) {
+      if (left == ClinitStatus.DUPLICATE_CLINIT) {
+        // We've already seen the left clinit and can remove it, decide how to replace the right
+        ClinitStatus right = isDuplicateCall(x.getArg2());
+        if (right == ClinitStatus.DUPLICATE_CLINIT) {
+          /*
+           * (clinit(), clinit()) --> delete or null.
+           * Repeated inlining can cause this, if there is an earlier clinit statement/expr in the
+           * branch.
+           */
+          if (ctx.canRemove()) {
+            ctx.removeMe();
+          } else {
+            // The return value from a clinit is never used
+            ctx.replaceMe(JsNullLiteral.INSTANCE);
+          }
+          return false;
+        } else if (right == ClinitStatus.NEW_CLINIT) {
           // Don't re-visit, it was just a clinit and we already observed it
           ctx.replaceMe(x.getArg2());
+          return false;
         } else {
           assert right == ClinitStatus.NOT_A_CLINIT;
-          // Save to re-visit, nested clinits could be removed
+          // Safe to re-visit, nested clinits could be removed
           ctx.replaceMe(accept(x.getArg2()));
+          return false;
         }
-        return false;
-      } else if (right == ClinitStatus.DUPLICATE_CLINIT) {
-        // (xyz, clinit()) --> xyz
-        // This can happen with multiple inlined methods, each adding a new clinit for
-        // the same class, where xyz might be the first clinit, or for a different class.
-        if (left == ClinitStatus.NEW_CLINIT) {
-          // Don't re-visit, it was just a clinit and we already observed it
+      } else if (left == ClinitStatus.NEW_CLINIT) {
+        // Don't visit the left, just keep it, decide how to handle the right
+        ClinitStatus right = isDuplicateCall(x.getArg2());
+
+        if (right == ClinitStatus.DUPLICATE_CLINIT) {
+          // Discard right, keep only left
           ctx.replaceMe(x.getArg1());
+          return false;
+        } else if (right == ClinitStatus.NEW_CLINIT) {
+          // Must keep both as-is
+          return false;
         } else {
-          assert left == ClinitStatus.NOT_A_CLINIT;
-          // Even though this is the left, it is safe to visit despite already looking at the right,
-          // since we know the right isn't a direct duplicate or supertype (we would have hit a
-          // different branch).
-          ctx.replaceMe(accept(x.getArg1()));
+          assert right == ClinitStatus.NOT_A_CLINIT;
+          // Safe to re-visit, nested clinits could be removed
+          x.setArg2(accept(x.getArg2()));
+          return false;
         }
-        return false;
-      }
-      // Descend to both sides only if neither is a clinit at all - if just the left is a clinit,
-      // we must still descend to the right manually
-      if (right == ClinitStatus.NOT_A_CLINIT) {
-        if (left == ClinitStatus.NOT_A_CLINIT) {
-          // descend into both, neither is a clinit
-          return true;
+      } else {
+        assert left == ClinitStatus.NOT_A_CLINIT;
+        // Visit left before proceeding
+        x.setArg1(accept(x.getArg1()));
+        // Now check right to see if we notice a duplicate
+        ClinitStatus right = isDuplicateCall(x.getArg2());
+        if (right == ClinitStatus.DUPLICATE_CLINIT) {
+          // Duplicate to remove, leaving only the left
+          ctx.replaceMe(x.getArg1());
+          return false;
+        } else if (right == ClinitStatus.NEW_CLINIT) {
+          // Keep as-is, both sides are necessary
+          return false;
+        } else {
+          assert right == ClinitStatus.NOT_A_CLINIT;
+          // Safe to revisit, nested clinits could be removed
+          x.setArg2(accept(x.getArg2()));
+          return false;
         }
-        x.setArg2(accept(x.getArg2()));
-        return false;
       }
-      return false;
     } else if (x.getOperator().equals(JsBinaryOperator.AND)
         || x.getOperator().equals(JsBinaryOperator.OR)) {
       x.setArg1(accept(x.getArg1()));

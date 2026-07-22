@@ -86,6 +86,24 @@ public class OutputFileSetOnDirectory extends OutputFileSet {
   }
 
   private File pathToFile(String path) throws IOException {
-    return new File(dir, prefix + path).getCanonicalFile();
+    File baseDir = dir.getCanonicalFile();
+    File outputRoot = new File(baseDir, prefix).getCanonicalFile();
+    if (!isDescendantOrSelf(baseDir, outputRoot)) {
+      throw new IOException("Prefix escapes output directory: " + prefix);
+    }
+    File file = new File(outputRoot, path).getCanonicalFile();
+    if (!isDescendantOrSelf(outputRoot, file)) {
+      throw new IOException("Path escapes output directory: " + path);
+    }
+    return file;
+  }
+
+  private static boolean isDescendantOrSelf(File root, File file) {
+    for (File current = file; current != null; current = current.getParentFile()) {
+      if (current.equals(root)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

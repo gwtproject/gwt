@@ -29,6 +29,15 @@ import java.nio.file.Files;
  */
 public class OutputFileSetOnDirectoryTest extends TestCase {
 
+  public void testPathEscapesRoot() {
+    assertFalse(OutputFileSet.pathEscapesRoot("a/b"));
+    assertFalse(OutputFileSet.pathEscapesRoot("a/../b"));
+    assertFalse(OutputFileSet.pathEscapesRoot("path/../to/./file"));
+    assertTrue(OutputFileSet.pathEscapesRoot("../b"));
+    assertTrue(OutputFileSet.pathEscapesRoot("a/../../b"));
+    assertTrue(OutputFileSet.pathEscapesRoot("/../path/../to/./file"));
+  }
+
   public void testCreateNewOutputStream() throws IOException {
     File work = Files.createTempDirectory("outputfileset").toFile();
     try {
@@ -42,9 +51,54 @@ public class OutputFileSetOnDirectoryTest extends TestCase {
       output.createNewOutputStream("path/../to/file", tstamp).close();
       assertTrue(new File(work, "test/to/file").exists());
 
-      output.createNewOutputStream("/../path/../to/./file", tstamp).close();
-      assertTrue(new File(work, "to/file").exists());
+      try {
+        output.createNewOutputStream("../to/file", tstamp).close();
+        fail("Expected path escaping the output prefix to be rejected");
+      } catch (IOException expected) {
+        assertTrue(expected.getMessage().contains("escapes output directory"));
+      }
+      assertFalse(new File(work, "to/file").exists());
 
+    } finally {
+      MoreFiles.deleteRecursively(work.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
+    }
+  }
+
+  public void testEscapingPrefixRejected() throws IOException {
+    File work = Files.createTempDirectory("outputfileset").toFile();
+    try {
+      String outsideName = work.getName() + "-outside";
+      OutputFileSetOnDirectory output = new OutputFileSetOnDirectory(work, "test/");
+
+      try {
+        output.createNewOutputStream("../../" + outsideName,
+            OutputFileSet.TIMESTAMP_UNAVAILABLE).close();
+        fail("Expected path escaping the output directory to be rejected");
+      } catch (IOException expected) {
+        assertTrue(expected.getMessage().contains("escapes output directory"));
+      }
+
+      assertFalse(new File(work.getParentFile(), outsideName).exists());
+    } finally {
+      MoreFiles.deleteRecursively(work.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
+    }
+  }
+
+  public void testEscapingConstructorPrefixRejected() throws IOException {
+    File work = Files.createTempDirectory("outputfileset").toFile();
+    try {
+      String outsideName = work.getName() + "-outside";
+      OutputFileSetOnDirectory output =
+          new OutputFileSetOnDirectory(work, "../" + outsideName + "/");
+
+      try {
+        output.createNewOutputStream("file", OutputFileSet.TIMESTAMP_UNAVAILABLE).close();
+        fail("Expected output prefix escaping the output directory to be rejected");
+      } catch (IOException expected) {
+        assertTrue(expected.getMessage().contains("escapes output directory"));
+      }
+
+      assertFalse(new File(work.getParentFile(), outsideName + "/file").exists());
     } finally {
       MoreFiles.deleteRecursively(work.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
     }

@@ -74,8 +74,44 @@ public abstract class OutputFileSet {
    */
   // TODO: revalidate whether any timestamp based overwrite prevention is needed.
   public OutputStream openForWrite(String path, long timeStampMillis) throws IOException {
+    if (pathEscapesRoot(path)) {
+      throw new IOException("Path escapes output directory: " + path);
+    }
     pathsSeen.add(path);
     return createNewOutputStream(path, timeStampMillis);
+  }
+
+  /**
+   * Returns true if resolving {@code path} against an output root would leave
+   * that root via {@code ..} segments. Harmless in-root normalization such as
+   * {@code a/../b} is allowed. A leading {@code /} is treated as the output-set
+   * root, not the filesystem root.
+   */
+  public static boolean pathEscapesRoot(String path) {
+    String normalized = path;
+    if (normalized.startsWith("/")) {
+      normalized = normalized.substring(1);
+    }
+    int depth = 0;
+    int start = 0;
+    while (start <= normalized.length()) {
+      int slash = normalized.indexOf('/', start);
+      String part = slash < 0 ? normalized.substring(start)
+          : normalized.substring(start, slash);
+      start = slash < 0 ? normalized.length() + 1 : slash + 1;
+      if (part.isEmpty() || ".".equals(part)) {
+        continue;
+      }
+      if ("..".equals(part)) {
+        depth--;
+        if (depth < 0) {
+          return true;
+        }
+      } else {
+        depth++;
+      }
+    }
+    return false;
   }
 
   protected abstract OutputStream createNewOutputStream(String path,

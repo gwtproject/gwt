@@ -132,10 +132,16 @@ public class DuplicateClinitRemover extends JsModVisitor {
           ctx.replaceMe(accept(x.getArg2()));
           return false;
         }
-      } else if (left == ClinitStatus.NEW_CLINIT) {
-        // Don't visit the left, just keep it, decide how to handle the right
-        ClinitStatus right = isDuplicateCall(x.getArg2());
+      } else {
+        if (left == ClinitStatus.NOT_A_CLINIT) {
+          // Visit left before proceeding, so we've fully checked that expression
+          x.setArg1(accept(x.getArg1()));
+        } else {
+          assert left == ClinitStatus.NEW_CLINIT;
+        }
 
+        // Shallow check of the right to decide how to proceed
+        ClinitStatus right = isDuplicateCall(x.getArg2());
         if (right == ClinitStatus.DUPLICATE_CLINIT) {
           // Discard right, keep only left
           ctx.replaceMe(x.getArg1());
@@ -146,25 +152,6 @@ public class DuplicateClinitRemover extends JsModVisitor {
         } else {
           assert right == ClinitStatus.NOT_A_CLINIT;
           // Safe to re-visit, nested clinits could be removed
-          x.setArg2(accept(x.getArg2()));
-          return false;
-        }
-      } else {
-        assert left == ClinitStatus.NOT_A_CLINIT;
-        // Visit left before proceeding
-        x.setArg1(accept(x.getArg1()));
-        // Now check right to see if we notice a duplicate
-        ClinitStatus right = isDuplicateCall(x.getArg2());
-        if (right == ClinitStatus.DUPLICATE_CLINIT) {
-          // Duplicate to remove, leaving only the left
-          ctx.replaceMe(x.getArg1());
-          return false;
-        } else if (right == ClinitStatus.NEW_CLINIT) {
-          // Keep as-is, both sides are necessary
-          return false;
-        } else {
-          assert right == ClinitStatus.NOT_A_CLINIT;
-          // Safe to revisit, nested clinits could be removed
           x.setArg2(accept(x.getArg2()));
           return false;
         }

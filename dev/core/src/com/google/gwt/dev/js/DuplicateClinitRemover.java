@@ -102,7 +102,9 @@ public class DuplicateClinitRemover extends JsModVisitor {
     if (x.getOperator() == JsBinaryOperator.COMMA) {
 
       // This effectively visits any JsInvocation direct child on both sides, so take care to not
-      // encounter any clinit twice when descending further.
+      // encounter any clinit twice when descending further. Important: if the right was a new
+      // clinit, we must not go back and re-check the left or we'll have changed the order of
+      // execution.
       ClinitStatus left = isDuplicateCall(x.getArg1());
       ClinitStatus right = isDuplicateCall(x.getArg2());
 
@@ -147,8 +149,17 @@ public class DuplicateClinitRemover extends JsModVisitor {
         }
         return false;
       }
-      // Descend to both sides only if neither is a clinit at all
-      return right == ClinitStatus.NOT_A_CLINIT && left == ClinitStatus.NOT_A_CLINIT;
+      // Descend to both sides only if neither is a clinit at all - if just the left is a clinit,
+      // we must still descend to the right manually
+      if (right == ClinitStatus.NOT_A_CLINIT) {
+        if (left == ClinitStatus.NOT_A_CLINIT) {
+          // descend into both, neither is a clinit
+          return true;
+        }
+        x.setArg2(accept(x.getArg2()));
+        return false;
+      }
+      return false;
     } else if (x.getOperator().equals(JsBinaryOperator.AND)
         || x.getOperator().equals(JsBinaryOperator.OR)) {
       x.setArg1(accept(x.getArg1()));

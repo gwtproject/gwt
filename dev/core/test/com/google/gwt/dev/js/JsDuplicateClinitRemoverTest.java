@@ -346,6 +346,12 @@ public class JsDuplicateClinitRemoverTest extends OptimizerTestBase {
             "clinit_B();");
   }
 
+  public void testRemoveClinitsInMultiExprs() throws Exception {
+    optimize(CLINIT_DECL,
+        "var val = (clinit_A(), cond?(clinit_A(), a()):(clinit_A(), b()));")
+        .into(CLINIT_DECL, "var val = (clinit_A(), cond?a():b());");
+  }
+
   protected void verifyNoChange(String... input) throws Exception {
     optimize(input).into(input);
   }

@@ -230,7 +230,8 @@ public final class ClientSerializationStreamReader extends
    */
   private static class StringConcatEvaler extends JsModVisitor {
 
-    @Override public boolean visit(JsBinaryOperation x, JsContext ctx) {
+    @Override
+    public boolean visit(JsBinaryOperation x, JsContext ctx) {
       if (x.getOperator() != JsBinaryOperator.ADD) {
         return super.visit(x, ctx);
       }

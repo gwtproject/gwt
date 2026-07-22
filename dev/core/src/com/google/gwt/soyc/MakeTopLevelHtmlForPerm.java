@@ -1426,8 +1426,8 @@ public class MakeTopLevelHtmlForPerm {
   /**
    * Returns whether a split point is initial or not.
    *
-   * @param splitPoint
-   * @returns true of the split point is initial, false otherwise
+   * @param splitPoint split point ID
+   * @return true of the split point is initial, false otherwise
    */
   private boolean isInitialSplitPoint(int splitPoint) {
     return globalInformation.getInitialFragmentLoadSequence().contains(

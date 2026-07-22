@@ -20,6 +20,7 @@ package com.google.gwt.uibinder.rebind;
  * @param <T> The type of null to return
  */
 public final class NullInterpreter<T> implements XMLElement.Interpreter<T> {
+  @Override
   public T interpretElement(XMLElement elem) {
     return null;
   }

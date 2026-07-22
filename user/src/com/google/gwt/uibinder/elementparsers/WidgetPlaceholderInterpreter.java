@@ -42,7 +42,8 @@ import java.util.Set;
  * E.g., this markup in an HTMLPanel:
  *
  * <pre>
- * <m:msg>Hello &lt;gwt:HyperLink&gt;click here&lt;/gwt:HyperLink&gt; thank you.</m:msg></pre>
+ * &lt;m:msg&gt;Hello &lt;gwt:HyperLink&gt;click here&lt;/gwt:HyperLink&gt; thank you.&lt;/m:msg&gt;
+ * </pre>
  *
  * becomes a message like this: <pre>
  * {@literal @}Default("Hello {0}click here{1} thank you.")

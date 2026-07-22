@@ -105,6 +105,7 @@ public class Frame extends Widget implements HasLoadHandlers {
    * @param handler the load handler
    * @return {@link HandlerRegistration} that can be used to remove this handler
    */
+  @Override
   public HandlerRegistration addLoadHandler(LoadHandler handler) {
     return addDomHandler(handler, LoadEvent.getType());
   }

@@ -33,6 +33,7 @@ import com.google.gwt.text.shared.SafeHtmlRenderer;
 import com.google.gwt.text.shared.SimpleSafeHtmlRenderer;
 
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * An editable text cell. Click to edit, escape to cancel, return to commit.
@@ -83,12 +84,12 @@ public class EditTextCell extends
 
     @Override
     public boolean equals(Object o) {
-      if (o == null) {
+      if (!(o instanceof ViewData)) {
         return false;
       }
       ViewData vd = (ViewData) o;
-      return equalsOrBothNull(original, vd.original)
-          && equalsOrBothNull(text, vd.text) && isEditing == vd.isEditing
+      return Objects.equals(original, vd.original)
+          && Objects.equals(text, vd.text) && isEditing == vd.isEditing
           && isEditingAgain == vd.isEditingAgain;
     }
 
@@ -128,10 +129,6 @@ public class EditTextCell extends
 
     public void setText(String text) {
       this.text = text;
-    }
-
-    private boolean equalsOrBothNull(Object o1, Object o2) {
-      return (o1 == null) ? o2 == null : o1.equals(o2);
     }
   }
 

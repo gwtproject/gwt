@@ -150,6 +150,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
     SelectElement.as(element);
   }
 
+  @Override
   public HandlerRegistration addChangeHandler(ChangeHandler handler) {
     return addDomHandler(handler, ChangeEvent.getType());
   }
@@ -221,6 +222,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
     getSelectElement().clear();
   }
 
+  @Override
   public DirectionEstimator getDirectionEstimator() {
     return estimator;
   }
@@ -257,6 +259,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
     return index == -1 ? null : getItemText(index);
   }
 
+  @Override
   public String getName() {
     return getSelectElement().getName();
   }
@@ -430,6 +433,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    * See note at
    * {@link #setDirectionEstimator(com.google.gwt.i18n.shared.DirectionEstimator)}.
    */
+  @Override
   public void setDirectionEstimator(boolean enabled) {
     setDirectionEstimator(enabled ? DEFAULT_DIRECTION_ESTIMATOR : null);
   }
@@ -438,6 +442,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    * {@inheritDoc}
    * Note: this does not affect the direction of already-existing content.
    */
+  @Override
   public void setDirectionEstimator(DirectionEstimator directionEstimator) {
     estimator = directionEstimator;
   }
@@ -496,6 +501,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
     getSelectElement().setMultiple(multiple);
   }
 
+  @Override
   public void setName(String name) {
     getSelectElement().setName(name);
   }

@@ -23,7 +23,7 @@ import com.google.gwt.safehtml.shared.annotations.SuppressIsSafeHtmlCastCheck;
  *
  * <p>
  * This class is package-private and intended for internal use by the
- * {@link com.google.gwt.safehtml} package.
+ * {@link com.google.gwt.safehtml.shared} package.
  *
  * <p>
  * All implementors must implement .equals and .hashCode so that they operate
@@ -57,6 +57,7 @@ class SafeHtmlString implements SafeHtml {
   /**
    * {@inheritDoc}
    */
+  @Override
   @IsSafeHtml
   @SuppressIsSafeHtmlCastCheck
   public String asString() {

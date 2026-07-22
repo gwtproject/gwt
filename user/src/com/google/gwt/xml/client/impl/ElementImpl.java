@@ -35,6 +35,7 @@ class ElementImpl extends NodeImpl implements Element {
    * This function delegates to the native method <code>getAttribute</code> in
    * XMLParserImpl.
    */
+  @Override
   public String getAttribute(String tagName) {
     return XMLParserImpl.getAttribute(this.getJsObject(), tagName);
   }
@@ -43,6 +44,7 @@ class ElementImpl extends NodeImpl implements Element {
    * This function delegates to the native method <code>getAttributeNode</code>
    * in XMLParserImpl.
    */
+  @Override
   public Attr getAttributeNode(String tagName) {
     return (Attr) NodeImpl.build(XMLParserImpl.getAttributeNode(
         this.getJsObject(), tagName));
@@ -52,6 +54,7 @@ class ElementImpl extends NodeImpl implements Element {
    * This function delegates to the native method
    * <code>getElementsByTagName</code> in XMLParserImpl.
    */
+  @Override
   public NodeList getElementsByTagName(String tagName) {
     return new NodeListImpl(XMLParserImpl.getElementsByTagName(
         this.getJsObject(), tagName));
@@ -61,6 +64,7 @@ class ElementImpl extends NodeImpl implements Element {
    * This function delegates to the native method <code>getTagName</code> in
    * XMLParserImpl.
    */
+  @Override
   public String getTagName() {
     return XMLParserImpl.getTagName(this.getJsObject());
   }
@@ -69,6 +73,7 @@ class ElementImpl extends NodeImpl implements Element {
    * This function delegates to the native method <code>hasAttribute</code> in
    * XMLParserImpl.
    */
+  @Override
   public boolean hasAttribute(String tagName) {
     return getAttribute(tagName) != null;
   }
@@ -77,6 +82,7 @@ class ElementImpl extends NodeImpl implements Element {
    * This function delegates to the native method <code>removeAttribute</code>
    * in XMLParserImpl.
    */
+  @Override
   public void removeAttribute(String name) throws DOMNodeException {
     try {
       XMLParserImpl.removeAttribute(this.getJsObject(), name);
@@ -89,6 +95,7 @@ class ElementImpl extends NodeImpl implements Element {
    * This function delegates to the native method <code>setAttribute</code> in
    * XMLParserImpl.
    */
+  @Override
   public void setAttribute(String name, String value) throws DOMNodeException {
     try {
       XMLParserImpl.setAttribute(this.getJsObject(), name, value);

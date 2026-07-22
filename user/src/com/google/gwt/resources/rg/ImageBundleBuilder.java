@@ -78,6 +78,7 @@ class ImageBundleBuilder {
    */
   static class BestFitArranger implements Arranger {
     private static final Comparator<ImageRect> decreasingHeightComparator = new Comparator<ImageRect>() {
+      @Override
       public int compare(ImageRect a, ImageRect b) {
         final int c = b.getHeight() - a.getHeight();
         // If we encounter equal heights, use the name to keep things
@@ -87,6 +88,7 @@ class ImageBundleBuilder {
     };
 
     private static final Comparator<ImageRect> decreasingWidthComparator = new Comparator<ImageRect>() {
+      @Override
       public int compare(ImageRect a, ImageRect b) {
         final int c = b.getWidth() - a.getWidth();
         // If we encounter equal heights, use the name to keep things
@@ -95,6 +97,7 @@ class ImageBundleBuilder {
       }
     };
 
+    @Override
     public Size arrangeImages(Collection<ImageRect> rects) {
       if (rects.size() == 0) {
         return new Size(0, 0);
@@ -170,7 +173,7 @@ class ImageBundleBuilder {
     }
 
     /**
-     * Companion method to {@link #arrangeImages()}. This method does a best
+     * Companion method to {@link #arrangeImages(Collection)}. This method does a best
      * effort horizontal packing of a column after it was packed vertically.
      * This is the Decreasing Width part of Next-Fit Decreasing Height
      * Decreasing Width. The basic strategy is to sort the remaining rectangles
@@ -223,6 +226,7 @@ class ImageBundleBuilder {
    * tiled vertically to fill to fill the full height of the image.
    */
   static class HorizontalArranger implements Arranger {
+    @Override
     public Size arrangeImages(Collection<ImageRect> rects) {
       int height = 1;
       int width = 0;
@@ -254,6 +258,7 @@ class ImageBundleBuilder {
    * canvas needed to hold the images in their current positions.
    */
   static class IdentityArranger implements Arranger {
+    @Override
     public Size arrangeImages(Collection<ImageRect> rects) {
       int height = 0;
       int width = 0;
@@ -422,7 +427,7 @@ class ImageBundleBuilder {
 
   /**
    * Used to return the size of the resulting image from the method
-   * {@link ImageBundleBuilder#arrangeImages()}.
+   * {@link ImageBundleBuilder#arrangeImages(Collection)}.
    */
   static class Size {
     private final int width, height;
@@ -438,6 +443,7 @@ class ImageBundleBuilder {
    * horizontally to fill the full width of the image.
    */
   static class VerticalArranger implements Arranger {
+    @Override
     public Size arrangeImages(Collection<ImageRect> rects) {
       int height = 0;
       int width = 1;
@@ -799,7 +805,7 @@ class ImageBundleBuilder {
    * images.
    *
    * In this particular implementation, we use NFDHDW (see
-   * {@link #arrangeImages()}) to get an approximate optimal image packing.
+   * {@link Arranger#arrangeImages(Collection)}) to get an approximate optimal image packing.
    *
    * The most important aspect of drawing the bundled image is that it be drawn
    * in a deterministic way. The drawing of the image should not rely on

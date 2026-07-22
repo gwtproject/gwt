@@ -50,6 +50,7 @@ final class ApiPackageDiffGenerator implements Comparable<ApiPackageDiffGenerato
     }
   }
 
+  @Override
   public int compareTo(ApiPackageDiffGenerator other) {
     return this.getName().compareTo(other.getName());
   }

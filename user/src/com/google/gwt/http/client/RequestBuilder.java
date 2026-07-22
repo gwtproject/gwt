@@ -360,9 +360,9 @@ public class RequestBuilder {
   }
 
   /**
-   * Sets whether the cross origin request will include credentials.
+   * Sets whether the cross-origin request will include credentials.
    *
-   * @param withCredentials whether to include credentials in XHR
+   * @param includeCredentials whether to include credentials in XHR
    */
   public void setIncludeCredentials(boolean includeCredentials) {
     this.includeCredentials = includeCredentials;
@@ -406,6 +406,7 @@ public class RequestBuilder {
 
     // Must set the onreadystatechange handler before calling send().
     xmlHttpRequest.setOnReadyStateChange(new ReadyStateChangeHandler() {
+      @Override
       public void onReadyStateChange(XMLHttpRequest xhr) {
         if (xhr.getReadyState() == XMLHttpRequest.DONE) {
           xhr.clearOnReadyStateChange();

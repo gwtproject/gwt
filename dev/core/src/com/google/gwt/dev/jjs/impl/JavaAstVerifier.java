@@ -156,6 +156,7 @@ public class JavaAstVerifier extends JVisitor {
     assertCalledMethodIsInAst(x);
   }
 
+  @Override
   public void endVisit(JThisRef x, Context ctx) {
     assert !currentMethod.isStatic() || currentMethod.isConstructor()
         : "JThisRef found in static method " + currentMethod;

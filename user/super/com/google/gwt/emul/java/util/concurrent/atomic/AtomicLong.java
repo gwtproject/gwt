@@ -87,7 +87,8 @@ public class AtomicLong extends Number implements java.io.Serializable {
     return value;
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return Long.toString(value);
   }
 

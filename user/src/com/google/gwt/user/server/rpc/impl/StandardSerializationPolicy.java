@@ -112,6 +112,7 @@ public class StandardSerializationPolicy extends SerializationPolicy implements
     }
   }
 
+  @Override
   public final String getClassNameForTypeId(String id)
       throws SerializationException {
     Class<?> clazz = typeIdsToClasses.get(id);
@@ -136,30 +137,17 @@ public class StandardSerializationPolicy extends SerializationPolicy implements
     return clientFields != null && !clientFields.isEmpty();
   }
 
+  @Override
   public final String getTypeIdForClass(Class<?> clazz)
       throws SerializationException {
     return typeIds.get(clazz);
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * com.google.gwt.user.server.rpc.SerializationPolicy#shouldDerializeFields
-   * (java.lang.String)
-   */
   @Override
   public boolean shouldDeserializeFields(Class<?> clazz) {
     return isFieldSerializable(clazz, deserializationWhitelist);
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * com.google.gwt.user.server.rpc.SerializationPolicy#shouldSerializeFields
-   * (java.lang.String)
-   */
   @Override
   public boolean shouldSerializeFields(Class<?> clazz) {
     return isFieldSerializable(clazz, serializationWhitelist);
@@ -170,13 +158,6 @@ public class StandardSerializationPolicy extends SerializationPolicy implements
     return shouldSerializeFinalFields;
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * com.google.gwt.user.server.rpc.SerializationPolicy#validateDeserialize(
-   * java.lang.String)
-   */
   @Override
   public void validateDeserialize(Class<?> clazz) throws SerializationException {
     if (!isInstantiable(clazz, deserializationWhitelist)) {
@@ -187,13 +168,6 @@ public class StandardSerializationPolicy extends SerializationPolicy implements
     }
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * com.google.gwt.user.server.rpc.SerializationPolicy#validateSerialize(java
-   * .lang.String)
-   */
   @Override
   public void validateSerialize(Class<?> clazz) throws SerializationException {
     if (!isInstantiable(clazz, serializationWhitelist)) {

@@ -32,7 +32,7 @@ import java.util.List;
  * warning which a user may choose to cancel. In that event, a
  * {@link CommandCanceledException} or an
  * {@link IncrementalCommandCanceledException} is reported through
- * {@link GWT#reportUncaughtException} depending on the type of command which
+ * {@link com.google.gwt.core.client.GWT#reportUncaughtException} depending on the type of command which
  * caused the warning. All other commands will continue to be executed.
  * </p>
  *
@@ -70,6 +70,7 @@ class CommandExecutor {
      * 
      * @return <code>true</code> if there are more commands in the queue.
      */
+    @Override
     public boolean hasNext() {
       return next < end;
     }
@@ -80,6 +81,7 @@ class CommandExecutor {
      * 
      * @return next command from the queue.
      */
+    @Override
     public Object next() {
       last = next;
       Object command = commands.get(next++);
@@ -94,6 +96,7 @@ class CommandExecutor {
      * Removes the command which was previously returned by {@link #next()}.
      * 
      */
+    @Override
     public void remove() {
       assert (last >= 0);
 

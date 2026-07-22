@@ -95,10 +95,12 @@ abstract class AbstractFieldWriter implements FieldWriter {
     return fieldType;
   }
 
+  @Override
   public String getHtml() {
     return html + ".asString()";
   }
 
+  @Override
   public String getInitializer() {
     return initializer;
   }
@@ -113,6 +115,7 @@ abstract class AbstractFieldWriter implements FieldWriter {
     return manager.convertFieldToGetter(name);
   }
 
+  @Override
   public JType getReturnType(String[] path, MonitoredLogger logger) {
     if (!name.equals(path[0])) {
       throw new RuntimeException(this
@@ -123,10 +126,12 @@ abstract class AbstractFieldWriter implements FieldWriter {
     return getReturnType(getAssignableType(), pathList, logger);
   }
 
+  @Override
   public String getSafeHtml() {
     return html;
   }
 
+  @Override
   public void needs(FieldWriter f) {
     needs.add(f);
   }
@@ -136,10 +141,12 @@ abstract class AbstractFieldWriter implements FieldWriter {
     this.buildPrecedence = precedence;
   }
 
+  @Override
   public void setHtml(String html) {
     this.html = html;
   }
 
+  @Override
   public void setInitializer(String initializer) {
     this.initializer = initializer;
   }
@@ -150,6 +157,7 @@ abstract class AbstractFieldWriter implements FieldWriter {
         initializer);
   }
 
+  @Override
   public void write(IndentedWriter w) throws UnableToCompleteException {
     if (written) {
       return;

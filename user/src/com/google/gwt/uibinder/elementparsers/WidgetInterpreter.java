@@ -69,6 +69,7 @@ class WidgetInterpreter implements XMLElement.Interpreter<String> {
     this.uiWriter = writer;
   }
 
+  @Override
   public String interpretElement(XMLElement elem)
       throws UnableToCompleteException {
     if (!uiWriter.isWidgetElement(elem)) {

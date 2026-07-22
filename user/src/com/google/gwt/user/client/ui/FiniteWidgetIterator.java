@@ -57,6 +57,7 @@ class FiniteWidgetIterator implements Iterator<Widget> {
     this.widgetCount = widgetCount;
   }
 
+  @Override
   public boolean hasNext() {
     // Iterate over the remaining widgets until we find one.
     for (int i = index + 1; i < widgetCount; i++) {
@@ -68,6 +69,7 @@ class FiniteWidgetIterator implements Iterator<Widget> {
     return false;
   }
 
+  @Override
   public Widget next() {
     // Iterate over the remaining widgets until we find one.
     for (int i = index + 1; i < widgetCount; i++) {
@@ -80,6 +82,7 @@ class FiniteWidgetIterator implements Iterator<Widget> {
     throw new NoSuchElementException();
   }
 
+  @Override
   public void remove() {
     if (index < 0 || index >= widgetCount) {
       throw new IllegalStateException();

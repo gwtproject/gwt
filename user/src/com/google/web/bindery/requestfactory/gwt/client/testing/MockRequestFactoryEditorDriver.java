@@ -48,12 +48,14 @@ public class MockRequestFactoryEditorDriver<P, E extends Editor<P>> implements
   /**
    * A no-op method.
    */
+  @Override
   public void accept(EditorVisitor visitor) {
   }
 
   /**
    * Records its arguments.
    */
+  @Override
   public void display(P proxy) {
     this.proxy = proxy;
   }
@@ -61,6 +63,7 @@ public class MockRequestFactoryEditorDriver<P, E extends Editor<P>> implements
   /**
    * Records its arguments.
    */
+  @Override
   public void edit(P proxy, RequestContext saveRequest) {
     this.proxy = proxy;
     this.saveRequest = saveRequest;
@@ -69,6 +72,7 @@ public class MockRequestFactoryEditorDriver<P, E extends Editor<P>> implements
   /**
    * Returns <code>null</code> or the last value recorded.
    */
+  @Override
   public RequestContext flush() {
     return saveRequest;
   }
@@ -83,6 +87,7 @@ public class MockRequestFactoryEditorDriver<P, E extends Editor<P>> implements
   /**
    * Returns an empty list.
    */
+  @Override
   public List<EditorError> getErrors() {
     return Collections.emptyList();
   }
@@ -97,6 +102,7 @@ public class MockRequestFactoryEditorDriver<P, E extends Editor<P>> implements
   /**
    * Returns a zero-length array.
    */
+  @Override
   public String[] getPaths() {
     return EMPTY_STRING;
   }
@@ -125,10 +131,12 @@ public class MockRequestFactoryEditorDriver<P, E extends Editor<P>> implements
   /**
    * Returns <code>false</code>.
    */
+  @Override
   public boolean hasErrors() {
     return false;
   }
 
+  @Override
   public void initialize(E editor) {
     initialize(null, editor);
   }
@@ -136,6 +144,7 @@ public class MockRequestFactoryEditorDriver<P, E extends Editor<P>> implements
   /**
    * Records its arguments.
    */
+  @Override
   public void initialize(EventBus eventBus, RequestFactory requestFactory,
       E editor) {
     this.eventBus = eventBus;
@@ -143,6 +152,7 @@ public class MockRequestFactoryEditorDriver<P, E extends Editor<P>> implements
     this.editor = editor;
   }
 
+  @Override
   public void initialize(RequestFactory requestFactory, E editor) {
     this.initialize(requestFactory.getEventBus(), requestFactory, editor);
   }
@@ -150,6 +160,7 @@ public class MockRequestFactoryEditorDriver<P, E extends Editor<P>> implements
   /**
    * Returns {@code false}.
    */
+  @Override
   public boolean isDirty() {
     return false;
   }
@@ -157,6 +168,7 @@ public class MockRequestFactoryEditorDriver<P, E extends Editor<P>> implements
   /**
    * A no-op method that always returns false.
    */
+  @Override
   public boolean setConstraintViolations(
       Iterable<ConstraintViolation<?>> violations) {
     return false;

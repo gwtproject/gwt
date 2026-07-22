@@ -54,6 +54,7 @@ public class UiChildParser implements ElementParser {
     this.uiBinderCtx = uiBinderCtx;
   }
 
+  @Override
   public void parse(final XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
     this.fieldName = fieldName;
@@ -66,6 +67,7 @@ public class UiChildParser implements ElementParser {
 
     // Parse children.
     elem.consumeChildElements(new Interpreter<Boolean>() {
+      @Override
       public Boolean interpretElement(XMLElement child)
           throws UnableToCompleteException {
         if (isValidChildElement(elem, child)) {

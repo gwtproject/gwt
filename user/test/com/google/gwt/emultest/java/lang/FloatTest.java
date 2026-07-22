@@ -22,6 +22,7 @@ import com.google.gwt.junit.client.GWTTestCase;
  * Unit tests for the Javascript emulation of the Float/float autoboxed
  * fundamental type.
  */
+@SuppressWarnings("FloatingPointLiteralPrecision")
 public class FloatTest extends GWTTestCase {
 
   @Override
@@ -160,6 +161,28 @@ public class FloatTest extends GWTTestCase {
       fail("Expected NumberFormatException");
     } catch (NumberFormatException expected) {
     }
+  }
+
+  public void testToHexString() {
+    assertEquals("-0x1.0p0", Float.toHexString(-1.0f));
+    assertEquals("0x1.0p0", Float.toHexString(1.0f));
+    assertEquals("0x1.0p1", Float.toHexString(2.0f));
+    assertEquals("0x1.8p1", Float.toHexString(3.0f));
+    assertEquals("0x1.5p5", Float.toHexString(42.0f));
+    assertEquals("0x1.81c8p13", Float.toHexString(12345.0f));
+    assertEquals("0x0.0p0", Float.toHexString(0.0f));
+    assertEquals("-0x0.0p0", Float.toHexString(-0.0f));
+    assertEquals("Infinity", Float.toHexString(Float.POSITIVE_INFINITY));
+    assertEquals("-Infinity", Float.toHexString(Float.NEGATIVE_INFINITY));
+    assertEquals("NaN", Float.toHexString(Float.NaN));
+    assertEquals("0x1.0p-126", Float.toHexString(Float.MIN_NORMAL));
+    assertEquals("0x0.8p-126", Float.toHexString(Float.MIN_NORMAL / 2));
+    assertEquals("0x1.0p-1", Float.toHexString(0.5f));
+    assertEquals("0x1.0p-2", Float.toHexString(0.25f));
+    assertEquals("0x1.fffffep127", Float.toHexString(Float.MAX_VALUE));
+    assertEquals("0x0.fffffep-126",
+        Float.toHexString(Float.MIN_NORMAL - Math.ulp(Float.MIN_NORMAL)));
+    assertEquals("0x0.000002p-126", Float.toHexString(Float.MIN_VALUE));
   }
 
   public void testFloatBits() {

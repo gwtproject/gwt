@@ -66,10 +66,12 @@ class BlacklistTypeFilter implements TypeFilter {
     blacklist = new RpcBlacklist(logger, prop.getValues());
   }
 
+  @Override
   public String getName() {
     return "BlacklistTypeFilter";
   }
 
+  @Override
   public boolean isAllowed(JClassType type) {
     String name = getBaseTypeName(type);
     // For types not handled by getBaseTypeName just return true.

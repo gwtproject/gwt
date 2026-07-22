@@ -32,6 +32,7 @@ import com.google.gwt.uibinder.rebind.model.ImplicitDataResource;
 import com.google.gwt.uibinder.rebind.model.ImplicitImageResource;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -117,7 +118,7 @@ public class BundleWriter {
     for (ImplicitDataResource data : bundleClass.getDataMethods()) {
       writer.write("@Source(\"%s\")", data.getSource());
       writer.newline();
-      if (data.getDoNotEmbed() == Boolean.TRUE) {
+      if (Objects.equals(data.getDoNotEmbed(), Boolean.TRUE)) {
         writer.write("@DoNotEmbed");
         writer.newline();
       }

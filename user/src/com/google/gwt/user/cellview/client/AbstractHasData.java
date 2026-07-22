@@ -233,11 +233,13 @@ public abstract class AbstractHasData<T> extends Composite implements HasData<T>
       void onRedraw();
     }
 
-    @Override public Type<Handler> getAssociatedType() {
+    @Override
+    public Type<Handler> getAssociatedType() {
       return TYPE;
     }
 
-    @Override protected void dispatch(RedrawEvent.Handler handler) {
+    @Override
+    protected void dispatch(RedrawEvent.Handler handler) {
       handler.onRedraw();
     }
   }

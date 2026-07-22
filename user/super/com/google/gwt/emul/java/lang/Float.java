@@ -113,6 +113,25 @@ public final class Float extends Number implements Comparable<Float>, Constable,
     return new Float(s);
   }
 
+  public static String toHexString(float f) {
+    if (!Float.isFinite(f)) {
+      return Float.toString(f);
+    }
+    int exp = Math.abs(f) == 0 ? -1 : Math.getExponent(f);
+    int allBits = Float.floatToIntBits(f);
+    String sign = allBits < 0 ? "-" : "";
+    int significantBits = allBits << 1 & 0xffffff;
+    String sigBitsString = Integer.toString(significantBits, 16);
+    String unsignedPrefix =  "0x1.";
+    String zeros = "0".repeat(6 - sigBitsString.length());
+    if (Math.abs(f) < Float.MIN_NORMAL) {
+      unsignedPrefix = "0x0.";
+      exp++;
+    }
+    return sign + unsignedPrefix + (zeros + sigBitsString)
+        .replaceFirst("(.)0+$", "$1") + "p" + exp;
+  }
+
   private final transient float value;
 
   public Float(double value) {

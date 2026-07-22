@@ -45,6 +45,7 @@ public abstract class RequestFactoryEditorDelegate<P, E extends Editor<P>>
   private class SubscriptionHandler implements
       EntityProxyChange.Handler<EntityProxy> {
 
+    @Override
     public void onProxyChange(EntityProxyChange<EntityProxy> event) {
       if (event.getWriteOperation().equals(WriteOperation.UPDATE)
           && event.getProxyId().equals(((EntityProxy) getObject()).stableId())) {
@@ -113,6 +114,7 @@ public abstract class RequestFactoryEditorDelegate<P, E extends Editor<P>>
         EntityProxyChange.<EntityProxy> registerForProxyType(eventBus, clazz,
             new SubscriptionHandler());
     return new HandlerRegistration() {
+      @Override
       public void removeHandler() {
         toReturn.removeHandler();
       }
@@ -138,7 +140,7 @@ public abstract class RequestFactoryEditorDelegate<P, E extends Editor<P>>
       return object;
     }
     if (object instanceof BaseProxy) {
-      @SuppressWarnings("unchecked")
+      // noinspection unchecked
       T toReturn = (T) request.edit((BaseProxy) object);
       return toReturn;
     }

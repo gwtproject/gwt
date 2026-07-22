@@ -15,6 +15,8 @@
  */
 package com.google.gwt.emultest.java.lang;
 
+import static com.google.gwt.emultest.java.util.EmulTestBase.assertThrows;
+
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -98,6 +100,16 @@ public class IntegerTest extends GWTTestCase {
     } catch (NumberFormatException e) {
       // Expected behavior
     }
+  }
+
+  public void testParseIntWithIndex() {
+    assertEquals(42, Integer.parseInt("a42", 1, 3, 10));
+    assertThrows(NumberFormatException.class, () ->
+        assertEquals(42, Integer.parseInt("bad", 1, 3, 10)));
+    assertThrows(StringIndexOutOfBoundsException.class, () ->
+        assertEquals(42, Integer.parseInt("bad", 1, 30, 10)));
+    assertThrows(StringIndexOutOfBoundsException.class, () ->
+        assertEquals(42, Integer.parseInt("bad", -1, 3, 10)));
   }
 
   public void testBinaryString() {

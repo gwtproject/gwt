@@ -55,10 +55,12 @@ public class Java8Test extends GWTTestCase {
     T run(int a, int b);
   }
 
+  @SuppressWarnings({"JavaLangClash", "TypeNameShadowing"})
   interface Lambda2<String> {
     boolean run(String a, String b);
   }
 
+  @SuppressWarnings({"JavaLangClash", "TypeNameShadowing"})
   interface Lambda3<String> {
     boolean run(String a);
   }
@@ -108,31 +110,39 @@ public class Java8Test extends GWTTestCase {
   }
 
   interface DefaultInterfaceSubType extends DefaultInterface {
+    @Override
     default int method2() { return 43; }
+    @Override
     default String print() {
       return "DefaultInterfaceSubType " + DefaultInterface.super.print();
     }
   }
 
   static abstract class DualImplementorSuper implements DefaultInterface {
+    @Override
     public void method1() {
     }
 
+    @Override
     public abstract int redeclaredAsAbstract();
   }
 
   static class DualImplementorBoth extends VirtualUpRef implements DefaultInterface,
           DefaultInterface2 {
+    @Override
     public void method1() {
     }
+    @Override
     public void method3() {
     }
   }
 
   static class DualImplementor extends DualImplementorSuper implements DefaultInterface2 {
+    @Override
     public void method3() {
     }
 
+    @Override
     public int redeclaredAsAbstract() {
       return DefaultInterface2.super.redeclaredAsAbstract();
     }
@@ -179,27 +189,33 @@ public class Java8Test extends GWTTestCase {
   }
 
   static class DefaultInterfaceImpl implements DefaultInterface {
+    @Override
     public void method1() {
     }
   }
 
   static class DefaultInterfaceImpl2 implements DefaultInterface {
+    @Override
     public void method1() {
     }
+    @Override
     public int method2() {
       return 100;
     }
   }
 
   static class DefaultInterfaceImplVirtualUpRef extends VirtualUpRef implements DefaultInterface {
+    @Override
     public void method1() {
     }
   }
 
   static class DefaultInterfaceImplVirtualUpRefTwoInterfaces extends VirtualUpRef
           implements DefaultInterfaceSubType {
+    @Override
     public void method1() {
     }
+    @Override
     public String print() {
       return "DefaultInterfaceImplVirtualUpRefTwoInterfaces";
     }
@@ -222,7 +238,8 @@ public class Java8Test extends GWTTestCase {
   public void testLambdaCaptureLocalWithInnerClass() {
     int x = 10;
     Lambda<Integer> l = (a,b) -> new Lambda<Integer>() {
-      @Override public Integer run(int a, int b) {
+      @Override
+      public Integer run(int a, int b) {
         int t = x;
         return t + a + b;
       }
@@ -238,7 +255,8 @@ public class Java8Test extends GWTTestCase {
   public void testLambdaCaptureLocalAndFieldWithInnerClass() {
     int x = 10;
     Lambda<Integer> l = (a,b) -> new Lambda<Integer>() {
-      @Override public Integer run(int j, int k) {
+      @Override
+      public Integer run(int j, int k) {
         int t = x;
         int s = local;
         return t + s + a + b;
@@ -387,6 +405,7 @@ public class Java8Test extends GWTTestCase {
     }
 
     class X extends Y {
+      @Override
       int foo(Integer i) {
         return 23;
       }
@@ -408,6 +427,7 @@ public class Java8Test extends GWTTestCase {
     }
 
     class X extends Y {
+      @Override
       int foo(Integer i) {
         return 23;
       }
@@ -472,6 +492,7 @@ public class Java8Test extends GWTTestCase {
     }
 
     class X extends Base {
+      @Override
       int foo(Object... objects) {
         throw new AssertionError();
       }
@@ -543,6 +564,7 @@ public class Java8Test extends GWTTestCase {
   }
 
   class ClassImplementOneDefenderMethod implements InterfaceWithTwoDefenderMethods {
+    @Override
     public String foo() {
       return "class.foo";
     }
@@ -558,6 +580,7 @@ public class Java8Test extends GWTTestCase {
   }
 
   interface InterfaceImplementOneDefenderMethod extends InterfaceWithTwoDefenderMethods {
+    @Override
     default String foo() { return "interface1.foo"; }
   }
 
@@ -577,6 +600,7 @@ public class Java8Test extends GWTTestCase {
   }
 
   class Child1 extends AbstractClass {
+    @Override
     public String foo() {
       return super.foo() + " child1.foo";
     }
@@ -604,6 +628,7 @@ public class Java8Test extends GWTTestCase {
     }
   }
   class ClassII extends ClassI implements InterfaceI, InterfaceII {
+    @Override
     public String print() {
       return super.print() + " " + InterfaceI.super.print() + " " + InterfaceII.super.print();
     }
@@ -619,7 +644,9 @@ public class Java8Test extends GWTTestCase {
     default String foo() { return "foo() in i.\n"; };
   }
   interface JJ extends II {
+    @Override
     default String fun() { return "fun() in j: " + this.foo() + II.super.fun(); };
+    @Override
     default String foo() { return "foo() in j.\n"; }
   }
   class AA {
@@ -631,14 +658,17 @@ public class Java8Test extends GWTTestCase {
     }
   }
   class BB extends AA implements JJ {
+    @Override
     public String fun() {
       return "fun() in b: " + this.foo() + super.fun() + JJ.super.fun();
     }
+    @Override
     public String foo() {
       return "foo() in b.\n";
     }
   }
   class CC extends BB implements JJ {
+    @Override
     public String fun() {
       return "fun() in c: " + super.fun();
     }
@@ -776,16 +806,19 @@ public class Java8Test extends GWTTestCase {
   }
 
   class SimpleB extends SimpleA implements SimpleI {
+    @Override
     public int fun() {
       return 22;
     }
   }
 
   class SimpleC extends SimpleA implements SimpleI {
+    @Override
     public int fun() {
       return 33;
     }
 
+    @Override
     public int bar() {
       return 44;
     }
@@ -840,6 +873,7 @@ public class Java8Test extends GWTTestCase {
   public void testLambdaNestingInAnonymousCaptureLocal() {
     int[] x = new int[] {42};
     new Runnable() {
+      @Override
       public void run() {
         Lambda<Integer> l = (a, b) -> x[0] = x[0] + a + b;
         l.run(1, 2);
@@ -857,9 +891,11 @@ public class Java8Test extends GWTTestCase {
         class B {
           void b() {
             I i = new I() {
+              @Override
               public int foo(Integer arg) {
                 Runnable r = () -> {
                   new Runnable() {
+                    @Override
                     public void run() {
                       Lambda<Integer> l = (a, b) -> x[0] = x[0] + a + b + arg;
                       l.run(1, 2);
@@ -892,9 +928,11 @@ public class Java8Test extends GWTTestCase {
           int b() {
             int[] x = new int[] {22};
             I i = new I() {
+              @Override
               public int foo(Integer arg) {
                 Runnable r = () -> {
                   new Runnable() {
+                    @Override
                     public void run() {
                       Lambda<Integer> l = (a, b) -> x[0] = x[0] + a + b + arg;
                       l.run(1, 2);
@@ -931,9 +969,11 @@ public class Java8Test extends GWTTestCase {
             I i = new I() {
               int fI = 3;
 
+              @Override
               public int foo(Integer arg) {
                 Runnable r = () -> {
                   new Runnable() {
+                    @Override
                     public void run() {
                       Lambda<Integer> l = (a, b) -> x[0] = x[0] + a + b + arg + fA + fB + fI;
                       l.run(1, 2);
@@ -960,10 +1000,13 @@ public class Java8Test extends GWTTestCase {
     // class with multile nesting
     int[] x = new int[] {42};
     int result = new I() {
+      @Override
       public int foo(Integer i1) {
         return new I() {
+          @Override
           public int foo(Integer i2) {
             return new I() {
+              @Override
               public int foo(Integer i3) {
                 Lambda<Integer> l = (a, b) -> x[0] = x[0] + a + b + i1 + i2 + i3;
                 return l.run(1, 2);
@@ -1005,6 +1048,7 @@ public class Java8Test extends GWTTestCase {
       Lambda<Integer> r = (rA, rB) -> {
         int[] x2 = new int[] {22};
         I i = new I() {
+          @Override
           public int foo(Integer arg) {
             x1[0] = x1[0] + 1;
             x[0] = x[0] + 1;
@@ -1123,6 +1167,7 @@ public class Java8Test extends GWTTestCase {
   }
 
   interface IRight extends ITop {
+    @Override
     default String m() {
       return "IRight.m()";
     }
@@ -1162,6 +1207,7 @@ public class Java8Test extends GWTTestCase {
     }
 
     interface SubInterface extends SuperInterface {
+      @Override
       default String m() {
         return "SubInterface.m()";
       }
@@ -1183,6 +1229,7 @@ public class Java8Test extends GWTTestCase {
     }
 
     interface SubInterface extends SuperInterface {
+      @Override
       default String m() {
         return "SubInterface.m()";
       }
@@ -1202,11 +1249,13 @@ public class Java8Test extends GWTTestCase {
     }
     default String callNUnqualified() {
       class Super implements InterfaceWithThisReference {
+        @Override
         public String n() {
           return "super n";
         }
       }
       return new Super() {
+        @Override
         public String callNUnqualified() {
           return "Object " + n();
         }
@@ -1214,11 +1263,13 @@ public class Java8Test extends GWTTestCase {
     }
     default String callNWithThis() {
       class Super implements InterfaceWithThisReference {
+        @Override
         public String n() {
           return "super n";
         }
       }
       return new Super() {
+        @Override
         public String callNWithThis() {
           return "Object " + this.n();
         }
@@ -1226,11 +1277,13 @@ public class Java8Test extends GWTTestCase {
     }
     default String callNWithInterfaceThis() {
       class Super implements InterfaceWithThisReference {
+        @Override
         public String n() {
           return "super n";
         }
       }
       return new Super() {
+        @Override
         public String callNWithInterfaceThis() {
           // In this method this has interface Test as its type, but it refers to outer n();
           return "Object " + InterfaceWithThisReference.this.n();
@@ -1239,11 +1292,13 @@ public class Java8Test extends GWTTestCase {
     }
     default String callNWithSuper() {
       class Super implements InterfaceWithThisReference {
+        @Override
         public String n() {
           return "super n";
         }
       }
       return new Super() {
+        @Override
         public String callNWithSuper() {
           // In this method this has interface Test as its type.
           return "Object " + super.n();
@@ -1252,9 +1307,11 @@ public class Java8Test extends GWTTestCase {
     }
     default String callNWithInterfaceSuper() {
       return new InterfaceWithThisReference() {
+        @Override
         public String n() {
           return "this n";
         }
+        @Override
         public String callNWithInterfaceSuper() {
           // In this method this has interface Test as its type and refers to default n();
           return "Object " + InterfaceWithThisReference.super.n();
@@ -1265,6 +1322,7 @@ public class Java8Test extends GWTTestCase {
 
   public void testInterfaceThis() {
     class A implements InterfaceWithThisReference {
+      @Override
       public String n() {
         return "n";
       }
@@ -1422,6 +1480,7 @@ public class Java8Test extends GWTTestCase {
 
   static class JavaTypeImplementingNativeJsTypeInterceWithDefaultMethod implements
           NativeJsTypeInterfaceWithStaticInitializationAndInstanceOverlayMethod {
+    @Override
     public int getA() {
       return 4;
     }
@@ -1842,9 +1901,11 @@ public class Java8Test extends GWTTestCase {
   @FunctionalInterface
   interface FunctionalExpressionBridges_J<T extends Comparable>
           extends FunctionalExpressionBridges_I<T> {
+    @Override
     T apply(T t);
 
     // Overrides I.m() and specializes return type
+    @Override
     default FunctionalExpressionBridges_J<T> m(T t) {
       return this;
     }
@@ -1928,6 +1989,7 @@ public class Java8Test extends GWTTestCase {
   // orderings.
   interface SubSub_SuperDefaultMethodDevirtualizationOrder
           extends Sub_SuperDefaultMethodDevirtualizationOrder {
+    @Override
     default String m() {
       return Sub_SuperDefaultMethodDevirtualizationOrder.super.m();
     }
@@ -2042,7 +2104,10 @@ public class Java8Test extends GWTTestCase {
 
   interface I2<T> { T foo(T arg); }
 
-  interface I1 extends I2<String> { String foo(String arg0); }
+  interface I1 extends I2<String> {
+    @Override
+    String foo(String arg0);
+  }
 
   @SuppressWarnings({"rawtypes", "unchecked"})
   public void testIntersectionCastLambda() {

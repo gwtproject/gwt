@@ -40,6 +40,7 @@ public class IntegerParser implements Parser<Integer> {
   protected IntegerParser() {
   }
 
+  @Override
   public Integer parse(CharSequence object) throws ParseException {
     if ("".equals(object.toString())) {
       return null;

@@ -35,6 +35,7 @@ public interface ScopeResource extends ClientBundle {
    * Not shared CssResource.
    */
   interface ScopeB extends ScopeA {
+    @Override
     String foo();
   }
 

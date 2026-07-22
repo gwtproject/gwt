@@ -74,9 +74,9 @@ public class RenderablePanel extends ComplexPanel implements IsRenderable {
   /**
    * Initializes the panel's HTML from a given {@link SafeHtml} object.
    *
-   * Similar to {@link #HTMLPanel(String)}
+   * Similar to {@link HTMLPanel#HTMLPanel(String)}
    *
-   * @param safeHtml the html to set.
+   * @param safeHtml the HTML to set.
    */
   public RenderablePanel(SafeHtml safeHtml) {
     this.html = safeHtml;

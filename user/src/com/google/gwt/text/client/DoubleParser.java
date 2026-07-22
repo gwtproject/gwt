@@ -40,6 +40,7 @@ public class DoubleParser implements Parser<Double> {
   protected DoubleParser() {
   }
 
+  @Override
   public Double parse(CharSequence object) throws ParseException {
     if ("".equals(object.toString())) {
       return null;

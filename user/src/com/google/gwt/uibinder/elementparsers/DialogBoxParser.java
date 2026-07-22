@@ -32,6 +32,7 @@ public class DialogBoxParser implements ElementParser {
 
   private static final String CAPTION = "caption";
   private static final String CUSTOM_CAPTION = "customCaption";
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
 

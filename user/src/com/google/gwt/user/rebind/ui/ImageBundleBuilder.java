@@ -63,30 +63,37 @@ class ImageBundleBuilder {
       this.height = image.getHeight();
     }
 
+    @Override
     public int getHeight() {
       return height;
     }
 
+    @Override
     public int getLeft() {
       return left;
     }
 
+    @Override
     public String getName() {
       return name;
     }
 
+    @Override
     public int getTop() {
       return top;
     }
 
+    @Override
     public int getWidth() {
       return width;
     }
 
+    @Override
     public boolean hasBeenPositioned() {
       return hasBeenPositioned;
     }
 
+    @Override
     public void setPosition(int left, int top) {
       hasBeenPositioned = true;
       this.left = left;
@@ -116,7 +123,7 @@ class ImageBundleBuilder {
 
   /**
    * Used to return the size of the resulting image from the method
-   * {@link ImageBundleBuilder#arrangeImages()}.
+   * {@link ImageBundleBuilder#arrangeImages(Collection)}.
    */
   private static class Size {
     private final int width, height;
@@ -128,6 +135,7 @@ class ImageBundleBuilder {
   }
 
   private static final Comparator<HasRect> decreasingHeightComparator = new Comparator<HasRect>() {
+    @Override
     public int compare(HasRect a, HasRect b) {
       final int c = b.getHeight() - a.getHeight();
       // If we encounter equal heights, use the name to keep things
@@ -137,6 +145,7 @@ class ImageBundleBuilder {
   };
 
   private static final Comparator<HasRect> decreasingWidthComparator = new Comparator<HasRect>() {
+    @Override
     public int compare(HasRect a, HasRect b) {
       final int c = b.getWidth() - a.getWidth();
       // If we encounter equal heights, use the name to keep things
@@ -232,7 +241,7 @@ class ImageBundleBuilder {
   }
 
   /**
-   * Companion method to {@link #arrangeImages()}. This method does a best
+   * Companion method to {@link #arrangeImages(Collection)}. This method does a best
    * effort horizontal packing of a column after it was packed vertically. This
    * is the Decreasing Width part of Next-Fit Decreasing Height Decreasing
    * Width. The basic strategy is to sort the remaining rectangles by decreasing
@@ -433,7 +442,7 @@ class ImageBundleBuilder {
    * images.
    *
    * In this particular implementation, we use NFDHDW (see
-   * {@link #arrangeImages()}) to get an approximate optimal image packing.
+   * {@link #arrangeImages(Collection)}) to get an approximate optimal image packing.
    *
    * The most important aspect of drawing the bundled image is that it be drawn
    * in a deterministic way. The drawing of the image should not rely on

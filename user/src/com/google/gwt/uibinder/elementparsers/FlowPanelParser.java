@@ -26,6 +26,7 @@ import com.google.gwt.uibinder.rebind.model.OwnerField;
  */
 public class FlowPanelParser implements ElementParser {
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       final UiBinderWriter writer) throws UnableToCompleteException {
     String customTag = elem.consumeStringAttribute("tag", null);

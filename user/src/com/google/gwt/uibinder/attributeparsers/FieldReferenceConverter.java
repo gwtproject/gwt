@@ -101,14 +101,17 @@ public class FieldReferenceConverter {
       return computedCount;
     }
 
+    @Override
     public JType[] getTypes() {
       return new JType[0];
     }
 
+    @Override
     public String handleFragment(String fragment) {
       return fragment;
     }
 
+    @Override
     public String handleReference(String reference) {
       computedCount++;
       return reference;

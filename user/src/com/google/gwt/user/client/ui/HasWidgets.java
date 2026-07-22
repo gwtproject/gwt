@@ -50,6 +50,7 @@ public interface HasWidgets extends Iterable<Widget> {
    * Gets an iterator for the contained widgets. This iterator is required to
    * implement {@link Iterator#remove()}.
    */
+  @Override
   Iterator<Widget> iterator();
 
   /**

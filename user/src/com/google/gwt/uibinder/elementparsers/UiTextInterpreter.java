@@ -31,6 +31,7 @@ public class UiTextInterpreter implements XMLElement.Interpreter<String> {
    * Used in {@link #interpretElement} to invoke the {@link ComputedAttributeInterpreter}.
    */
   protected class Delegate implements ComputedAttributeInterpreter.Delegate {
+    @Override
     public String getAttributeToken(XMLAttribute attribute) throws UnableToCompleteException {
       return writer.tokenForStringExpression(attribute.getElement(), attribute.consumeStringValue());
     }
@@ -46,6 +47,7 @@ public class UiTextInterpreter implements XMLElement.Interpreter<String> {
     this.computedAttributeInterpreter = createComputedAttributeInterpreter();
   }
   
+  @Override
   public String interpretElement(XMLElement elem)
       throws UnableToCompleteException {
    // Must be in the format: <ui:string from="{myMsg.message}" />

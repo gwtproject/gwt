@@ -35,7 +35,8 @@ public class FactoryHandler implements InvocationHandler {
   /**
    * Constructor.
    * 
-   * @param categories the classes specified by a Category annotation
+   * @param configuration provides collections of categories and
+   *     classes that shouldn't be wrapped in autobean proxies
    */
   public FactoryHandler(Configuration configuration) {
     this.configuration = configuration;
@@ -45,6 +46,7 @@ public class FactoryHandler implements InvocationHandler {
    * Handles both declared factory methods as well as the dynamic create
    * methods.
    */
+  @Override
   public Object invoke(Object proxy, Method method, Object[] args)
       throws Throwable {
 

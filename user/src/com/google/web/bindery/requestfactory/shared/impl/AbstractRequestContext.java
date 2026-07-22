@@ -186,6 +186,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
     /**
      * Called by generated subclasses to enqueue a method invocation.
      */
+    @Override
     public void addInvocation(AbstractRequest<?, ?> request) {
       /*
        * TODO(bobv): Support for multiple invocations per request needs to be ironed out. Once this
@@ -201,6 +202,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
       }
     }
 
+    @Override
     public String makePayload() {
       RequestData data = state.invocations.get(0).getRequestData();
 
@@ -226,6 +228,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
       return AutoBeanCodex.encode(bean).getPayload();
     }
 
+    @Override
     public void processPayload(Receiver<Void> receiver, String payload) {
       Splittable raw = StringQuoter.split(payload);
 
@@ -311,6 +314,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
     /**
      * Called by generated subclasses to enqueue a method invocation.
      */
+    @Override
     public void addInvocation(AbstractRequest<?, ?> request) {
       state.invocations.add(request);
       for (Object arg : request.getRequestData().getOrderedParameters()) {
@@ -325,6 +329,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
      * <li>Invocations accumulated as Request subtypes passed to {@link #addInvocation}.
      * </ul>
      */
+    @Override
     public String makePayload() {
       // Get the factory from the runtime-specific holder.
       MessageFactory f = MessageFactoryHolder.FACTORY;
@@ -345,6 +350,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
       return AutoBeanCodex.encode(bean).getPayload();
     }
 
+    @Override
     public void processPayload(final Receiver<Void> receiver, String payload) {
       ResponseMessage response =
           AutoBeanCodex.decode(MessageFactoryHolder.FACTORY, ResponseMessage.class, payload).as();
@@ -434,28 +440,35 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
       rootBean = rootProxy.as();
     }
 
+    @Override
     public ConstraintDescriptor<?> getConstraintDescriptor() {
       return null;
     }
 
+    @Override
     public Object getInvalidValue() {
       return null;
     }
 
+    @Override
     public Object getLeafBean() {
       return leafBean;
     }
 
+    @Override
     public String getMessage() {
       return message;
     }
 
+    @Override
     public String getMessageTemplate() {
       return messageTemplate;
     }
 
+    @Override
     public Path getPropertyPath() {
       return new Path() {
+        @Override
         public Iterator<Node> iterator() {
           return Collections.<Node> emptyList().iterator();
         }
@@ -467,10 +480,12 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
       };
     }
 
+    @Override
     public BaseProxy getRootBean() {
       return rootBean;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public Class<BaseProxy> getRootBeanClass() {
       return (Class<BaseProxy>) rootBeanClass;
@@ -500,6 +515,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
     setState(new State(factory, dialect.create(this), this));
   }
 
+  @Override
   public <T extends RequestContext> T append(T other) {
     AbstractRequestContext child = (AbstractRequestContext) other;
     if (!state.isCompatible(child.state)) {
@@ -516,6 +532,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
   /**
    * Create a new object, with an ephemeral id.
    */
+  @Override
   public <T extends BaseProxy> T create(Class<T> clazz) {
     checkLocked();
 
@@ -524,6 +541,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
     return takeOwnership(created);
   }
 
+  @Override
   public <T extends BaseProxy> T edit(T object) {
     return editProxy(object);
   }
@@ -575,6 +593,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
    * revisited when chaining is supported, depending on whether or not chained invocations can fail
    * independently.
    */
+  @Override
   public void fire() {
     boolean needsReceiver = true;
     for (AbstractRequest<?, ?> request : state.invocations) {
@@ -596,6 +615,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
     }
   }
 
+  @Override
   public void fire(final Receiver<Void> receiver) {
     if (receiver == null) {
       throw new IllegalArgumentException();
@@ -606,6 +626,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
   /**
    * EntityCodex support.
    */
+  @Override
   public <Q extends BaseProxy> AutoBean<Q> getBeanForPayload(Splittable serializedProxyId) {
     IdMessage ref =
         AutoBeanCodex.decode(MessageFactoryHolder.FACTORY, IdMessage.class, serializedProxyId).as();
@@ -614,6 +635,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
     return getProxyForReturnPayloadGraph(id);
   }
 
+  @Override
   public AbstractRequestFactory getRequestFactory() {
     return state.requestFactory;
   }
@@ -621,6 +643,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
   /**
    * EntityCodex support.
    */
+  @Override
   public Splittable getSerializedProxyId(SimpleProxyId<?> stableId) {
     AutoBean<IdMessage> bean = MessageFactoryHolder.FACTORY.id();
     IdMessage ref = bean.as();
@@ -636,6 +659,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
     return AutoBeanCodex.encode(bean);
   }
 
+  @Override
   public boolean isChanged() {
     /*
      * NB: Don't use the presence of ephemeral objects for this test.
@@ -670,6 +694,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
   /**
    * EntityCodex support.
    */
+  @Override
   public boolean isEntityType(Class<?> clazz) {
     return state.requestFactory.isEntityType(clazz);
   }
@@ -681,6 +706,7 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
   /**
    * EntityCodex support.
    */
+  @Override
   public boolean isValueType(Class<?> clazz) {
     return state.requestFactory.isValueType(clazz);
   }
@@ -912,8 +938,8 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
    * Create a new EntityProxy from a snapshot in the return payload.
    *
    * @param id the EntityProxyId of the object
-   * @param returnRecord the JSON map containing property/value pairs
-   * @param operations the WriteOperation eventns to broadcast over the EventBus
+   * @param op the operation message, containing a map of property/value pairs
+   * @param operations the WriteOperation events to broadcast over the EventBus
    */
   <Q extends BaseProxy> Q processReturnOperation(SimpleProxyId<Q> id, OperationMessage op,
       WriteOperation... operations) {
@@ -1152,10 +1178,12 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
 
     String payload = state.dialect.makePayload();
     state.requestFactory.getRequestTransport().send(payload, new TransportReceiver() {
+      @Override
       public void onTransportFailure(ServerFailure failure) {
         fail(finalReceiver, failure);
       }
 
+      @Override
       public void onTransportSuccess(String payload) {
         state.dialect.processPayload(finalReceiver, payload);
       }

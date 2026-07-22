@@ -50,6 +50,7 @@ class InProcessRequestContext extends AbstractRequestContext {
       return InProcessRequestContext.this;
     }
 
+    @Override
     public Object invoke(Object proxy, Method method, final Object[] args) throws Throwable {
       // Maybe delegate to superclass
       Class<?> owner = method.getDeclaringClass();
@@ -165,6 +166,7 @@ class InProcessRequestContext extends AbstractRequestContext {
         Class<?> requestType = method.getReturnType().asSubclass(Request.class);
         return Proxy.newProxyInstance(requestType.getClassLoader(), new Class<?>[] {requestType},
             new InvocationHandler() {
+              @Override
               public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                 if (Object.class.equals(method.getDeclaringClass())
                     || Request.class.equals(method.getDeclaringClass())) {

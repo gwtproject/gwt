@@ -42,6 +42,7 @@ import java.util.zip.CRC32;
  */
 public class SerializationUtils {
   static final Comparator<JField> FIELD_COMPARATOR = new Comparator<JField>() {
+    @Override
     public int compare(JField f1, JField f2) {
       return f1.getName().compareTo(f2.getName());
     }
@@ -160,7 +161,7 @@ public class SerializationUtils {
   /**
    * Returns the serialization signature for a type.
    * 
-   * @param instanceType
+   * @param type the type
    * @return a string representing the serialization signature of a type
    */
   static String getSerializationSignature(GeneratorContext context, JType type)

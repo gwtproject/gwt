@@ -27,7 +27,8 @@ class AnimationSchedulerImplStandard extends AnimationScheduler {
   public AnimationHandle requestAnimationFrame(AnimationCallback callback, Element element) {
     final JavaScriptObject handle = requestImpl(callback, element);
     return new AnimationHandle() {
-      @Override public void cancel() {
+      @Override
+      public void cancel() {
         cancelImpl(handle);
       }
     };

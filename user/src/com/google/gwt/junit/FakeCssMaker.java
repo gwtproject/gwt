@@ -46,6 +46,7 @@ public class FakeCssMaker implements InvocationHandler {
         new FakeCssMaker()));
   }
 
+  @Override
   public Object invoke(Object proxy, Method method, Object[] args)
       throws Throwable {
     if (method.getName().equals("ensureInjected")

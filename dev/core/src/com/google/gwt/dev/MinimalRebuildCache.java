@@ -658,23 +658,20 @@ public class MinimalRebuildCache implements Serializable {
     compilationUnitTypeNameByNestedTypeName.put(nestedTypeName, compilationUnitTypeName);
   }
 
-  public void recordNestedTypeNamesPerType(CompilationUnit compilationUnit, List<JDeclaredType> types) {
+  public void recordNestedTypeNamesPerType(CompilationUnit compilationUnit,
+     List<JDeclaredType> types) {
     // For the root type in the compilation unit the source name and binary name are the same.
     String compilationUnitTypeName = compilationUnit.getTypeName();
 
     // Clean up the reverse map for old nested type names, then clear all entries
-    Collection<String> oldNestedTypeNames = nestedTypeNamesByUnitTypeName.get(compilationUnitTypeName);
-    for (String oldNestedTypeName : oldNestedTypeNames) {
-      compilationUnitTypeNameByNestedTypeName.remove(oldNestedTypeName);
-    }
+    Collection<String> oldNestedTypeNames = nestedTypeNamesByUnitTypeName
+        .get(compilationUnitTypeName);
+    compilationUnitTypeNameByNestedTypeName.keySet().removeAll(oldNestedTypeNames);
     nestedTypeNamesByUnitTypeName.removeAll(compilationUnitTypeName);
 
     // Record all GWT types that were derived from that compilation unit
     for (JDeclaredType type : types) {
-      String typeName = type.getName();
-      if (!nestedTypeNamesByUnitTypeName.containsEntry(compilationUnitTypeName, typeName)) {
-        recordNestedTypeName(compilationUnitTypeName, typeName);
-      }
+      recordNestedTypeName(compilationUnitTypeName, type.getName());
     }
   }
 

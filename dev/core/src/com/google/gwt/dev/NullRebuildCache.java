@@ -178,7 +178,8 @@ public class NullRebuildCache extends MinimalRebuildCache {
   }
 
   @Override
-  public void recordNestedTypeNamesPerType(CompilationUnit compilationUnit, List<JDeclaredType> types) {
+  public void recordNestedTypeNamesPerType(CompilationUnit compilationUnit,
+       List<JDeclaredType> types) {
   }
 
   @Override

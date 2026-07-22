@@ -562,6 +562,10 @@ public class JsToStringGenerationVisitor extends JsVisitor {
     _rparen();
     JsStatement thenStmt = x.getThenStmt();
     if (!(thenStmt instanceof JsBlock) && x.getElseStmt() != null) {
+      // Defensively wrap the if's only statement in {}s since there is an else statement, in order
+      // to avoid dangling else ambiguity. It could be more specific and only add this wrapper block
+      // if the then statement was found to contain an "if", but that's too much to do in this
+      // visitor, and should either be simpler or done in a different pass.
       JsBlock b = new JsBlock(thenStmt.getSourceInfo());
       b.getStatements().add(thenStmt);
       thenStmt = b;

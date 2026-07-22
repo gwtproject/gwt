@@ -105,7 +105,8 @@ public class JsToStringGenerationVisitorTest extends FullCompileTestBase {
     assertNull(outerIf.getElseStmt());
   }
 
-  private JsStatement compileAndParseStatement(String statements) throws UnableToCompleteException, IOException, JsParserException {
+  private JsStatement compileAndParseStatement(String statements) throws UnableToCompleteException,
+      IOException, JsParserException {
     String code = """
       package test;
       public class EntryPoint {
@@ -123,20 +124,22 @@ public class JsToStringGenerationVisitorTest extends FullCompileTestBase {
     jsSourceGenerationVisitor.accept(jsProgram);
 
     List<NamedRange> classRanges = jsSourceGenerationVisitor.getClassRanges();
-    String entrypoint = classRanges.stream().filter(r -> r.getName().equals("test.EntryPoint")).findFirst().map(r -> {
+    String entrypoint = classRanges.stream()
+        .filter(r -> r.getName().equals("test.EntryPoint"))
+        .findFirst().map(r -> {
       return text.toString().substring(r.getStartPosition(), r.getEndPosition());
     }).get();
 
     // Parse the source to be sure that the printed output has the expected characteristics
-    List<JsStatement> parsed = JsParser.parse(SourceOrigin.UNKNOWN, jsProgram.getScope(), new StringReader(entrypoint));
+    List<JsStatement> parsed = JsParser.parse(SourceOrigin.UNKNOWN, jsProgram.getScope(),
+        new StringReader(entrypoint));
 
     JsStatement result = null;
     for (JsStatement jsStatement : parsed) {
-      if (jsStatement instanceof JsExprStmt && ((JsExprStmt) jsStatement).getExpression() instanceof JsFunction) {
-        JsFunction jsFunction = (JsFunction) ((JsExprStmt) jsStatement).getExpression();
-        if (jsFunction.getName().getShortIdent().equals("onModuleLoad")) {
+      if (jsStatement instanceof JsExprStmt expr && expr.getExpression() instanceof JsFunction f) {
+        if (f.getName().getShortIdent().equals("onModuleLoad")) {
           // In case of clinit, return the last statement only
-          List<JsStatement> s = jsFunction.getBody().getStatements();
+          List<JsStatement> s = f.getBody().getStatements();
           result = s.get(s.size() - 1);
           break;
         }

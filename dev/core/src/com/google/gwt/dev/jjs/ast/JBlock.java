@@ -37,8 +37,8 @@ public class JBlock extends JStatement {
     if (statement == null) {
       return new JBlock(info);
     }
-    if (statement instanceof JBlock) {
-      return (JBlock) statement;
+    if (statement instanceof JBlock block) {
+      return block;
     }
 
     return new JBlock(statement.getSourceInfo(), statement);
@@ -117,17 +117,31 @@ public class JBlock extends JStatement {
     return false;
   }
 
+  /**
+   * If possible, expresses this block as a single statement.
+   * <ul>
+   *   <li>If the block is empty, return null</li>
+   *   <li>If there are multiple items in this block, return the block</li>
+   *   <li>If the only item is another block, invoke {@code singleStatement()} on it</li>
+   *   <li>Otherwise, return the only item as is.</li>
+   * </ul>
+   *
+   * @return the contents of this block as a single nullable statement
+   */
   public JStatement singleStatement() {
     if (statements.isEmpty()) {
       return null;
     }
-    if (statements.size() == 1) {
-      JStatement jStatement = statements.get(0);
-      if (jStatement instanceof JBlock) {
-        return ((JBlock) jStatement).singleStatement();
-      }
-      return jStatement;
+
+    if (statements.size() > 1) {
+      return this;
     }
-    return this;
+
+    JStatement onlyStatement = statements.get(0);
+    if (onlyStatement instanceof JBlock block) {
+      return block.singleStatement();
+    }
+
+    return onlyStatement;
   }
 }

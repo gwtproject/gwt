@@ -561,6 +561,13 @@ public class JsToStringGenerationVisitor extends JsVisitor {
     accept(x.getIfExpr());
     _rparen();
     JsStatement thenStmt = x.getThenStmt();
+    if (!(thenStmt instanceof JsBlock) && x.getElseStmt() != null && acceptsDanglingElse(thenStmt)) {
+      // Defensively wrap the if's only statement in {}s since there is an else statement, in order
+      // to avoid dangling else ambiguity.
+      JsBlock b = new JsBlock(thenStmt.getSourceInfo());
+      b.getStatements().add(thenStmt);
+      thenStmt = b;
+    }
     _nestedPush(thenStmt, false);
     accept(thenStmt);
     _nestedPop(thenStmt);
@@ -585,6 +592,46 @@ public class JsToStringGenerationVisitor extends JsVisitor {
         _nestedPop(elseStmt);
       }
     }
+    return false;
+  }
+
+  /**
+   * Recursively looks for trailing if statements with no else that aren't otherwise protected by
+   * a block.
+   *
+   * @param statement the statement to check
+   * @return true if the statement will require a block
+   */
+  private boolean acceptsDanglingElse(JsStatement statement) {
+    if (statement instanceof JsIf ifStmt) {
+      if (ifStmt.getElseStmt() == null) {
+        // Found a candidate for dangling else, return true
+        return true;
+      } else {
+        // Descend into else, see if there is another if missing an else
+        return acceptsDanglingElse(ifStmt.getElseStmt());
+      }
+    }
+    // If we encounter a block, no need to check children for ifs
+    if (statement instanceof JsBlock) {
+      return false;
+    }
+
+    // Check different types of statements that optionally can wrap trailing blocks
+    if (statement instanceof JsFor forStmt) {
+      return acceptsDanglingElse(forStmt.getBody());
+    }
+    if (statement instanceof JsForIn forStmt) {
+      return acceptsDanglingElse(forStmt.getBody());
+    }
+    if (statement instanceof JsWhile whileStmt) {
+      return acceptsDanglingElse(whileStmt.getBody());
+    }
+    if (statement instanceof JsLabel labelStmt) {
+      return acceptsDanglingElse(labelStmt.getStmt());
+    }
+
+    // All other statements (do/while, break/continue/return, expr, etc) are safe
     return false;
   }
 

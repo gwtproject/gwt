@@ -81,7 +81,7 @@ public class JForStatement extends JStatement {
       if (increments != null) {
         increments = visitor.accept(increments);
       }
-      body = JBlock.ensureBlock(getSourceInfo(), visitor.accept(body, false));//TODO no tests fail without this change...
+      body = JBlock.ensureBlock(getSourceInfo(), visitor.accept(body, true));
     }
     visitor.endVisit(this, ctx);
   }

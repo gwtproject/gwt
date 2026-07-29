@@ -43,7 +43,7 @@ public class JWhileStatement extends JStatement {
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {
       testExpr = visitor.accept(testExpr);
-      body = JBlock.ensureBlock(getSourceInfo(), visitor.accept(body, false));//TODO no tests fail without this change...
+      body = JBlock.ensureBlock(getSourceInfo(), visitor.accept(body, true));
     }
     visitor.endVisit(this, ctx);
   }

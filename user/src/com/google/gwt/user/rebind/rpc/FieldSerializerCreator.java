@@ -530,7 +530,7 @@ public class FieldSerializerCreator {
      * server, store additional server-only field data using {@link WeakMapping}
      * .
      */
-    if (serializableClass.isEnhanced()) {
+    if (Shared.isEnhancedClass(context.getPropertyOracle(), serializableClass)) {
       sourceWriter.println(WEAK_MAPPING_CLASS_NAME + ".set(instance, " + "\"server-enhanced-data-"
           + getDepth(serializableClass) + "\", streamReader.readString());");
     }
@@ -580,7 +580,7 @@ public class FieldSerializerCreator {
      * {@link WeakMapping}.
      */
 
-    if (serializableClass.isEnhanced()) {
+    if (Shared.isEnhancedClass(context.getPropertyOracle(), serializableClass)) {
       sourceWriter.println("streamWriter.writeString((String) " + WEAK_MAPPING_CLASS_NAME
           + ".get(instance, \"server-enhanced-data-" + getDepth(serializableClass) + "\"));");
     }

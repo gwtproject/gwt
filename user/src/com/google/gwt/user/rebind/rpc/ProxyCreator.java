@@ -92,6 +92,8 @@ public class ProxyCreator {
    */
   public static final String CACHED_PROPERTY_INFO_KEY = "cached-property-info";
   public static final String CACHED_TYPE_INFO_KEY = "cached-type-info";
+  static final String CACHED_ENHANCED_CLASSES_PROPERTY_INFO_KEY =
+      "cached-enhanced-classes-property-info";
 
   /**
    * The directory within which RPC manifests are placed for individual
@@ -103,7 +105,10 @@ public class ProxyCreator {
    * Properties which need to be checked to determine cache reusability.
    */
   private static final Collection<String> configPropsToCheck = Arrays.asList(
-      TypeSerializerCreator.GWT_ELIDE_TYPE_NAMES_FROM_RPC, Shared.RPC_ENHANCED_CLASSES);
+      TypeSerializerCreator.GWT_ELIDE_TYPE_NAMES_FROM_RPC, Shared.RPC_ENHANCED_CLASSES,
+      Shared.RPC_ENHANCED_CLASSES_ENABLED);
+  private static final Collection<String> enhancedClassesConfigPropsToCheck =
+      Arrays.asList(Shared.RPC_ENHANCED_CLASSES, Shared.RPC_ENHANCED_CLASSES_ENABLED);
   private static final Collection<String> selectionPropsToCheck = Arrays
       .asList(Shared.RPC_PROP_SUPPRESS_NON_STATIC_FINAL_FIELD_WARNINGS);
 
@@ -396,8 +401,12 @@ public class ProxyCreator {
       CachedPropertyInformation cpi =
           new CachedPropertyInformation(logger, context.getPropertyOracle(), selectionPropsToCheck,
               configPropsToCheck);
+      CachedPropertyInformation enhancedClassesCpi =
+          new CachedPropertyInformation(logger, context.getPropertyOracle(), null,
+              enhancedClassesConfigPropsToCheck);
       result.putClientData(CACHED_TYPE_INFO_KEY, cti);
       result.putClientData(CACHED_PROPERTY_INFO_KEY, cpi);
+      result.putClientData(CACHED_ENHANCED_CLASSES_PROPERTY_INFO_KEY, enhancedClassesCpi);
 
       return result;
     } else {
@@ -776,7 +785,8 @@ public class ProxyCreator {
          * containing the keyword '@ClientFields', the class name, and a list of
          * all potentially serializable client-visible fields.
          */
-        if ((type instanceof JClassType) && ((JClassType) type).isEnhanced()) {
+        if (type instanceof JClassType
+            && Shared.isEnhancedClass(ctx.getPropertyOracle(), (JClassType) type)) {
           JField[] fields = ((JClassType) type).getFields();
           JField[] rpcFields = new JField[fields.length];
           int numRpcFields = 0;

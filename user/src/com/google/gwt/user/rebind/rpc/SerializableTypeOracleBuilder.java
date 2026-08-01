@@ -98,6 +98,14 @@ import java.util.TreeSet;
  * </pre>
  *
  * <p>
+ * Enhanced class handling can be disabled entirely, including the automatic detection of JDO and
+ * JPA annotations, by setting the following configuration property:
+ *
+ * <pre>
+ * <set-configuration-property name='rpc.enhancedClasses.enabled' value='false'/>
+ * </pre>
+ *
+ * <p>
  * Enhanced classes are checked for the presence of additional serializable
  * fields on the server that were not defined in client code as seen by the GWT
  * compiler. If it is possible for an instance of such a class to be transmitted
@@ -694,6 +702,8 @@ public class SerializableTypeOracleBuilder {
 
   private final GeneratorContext context;
 
+  private final boolean enhancedClassesEnabled;
+
   private Set<String> enhancedClasses = null;
 
   private PrintWriter logOutputWriter;
@@ -751,6 +761,8 @@ public class SerializableTypeOracleBuilder {
     }
 
     enhancedClasses = Shared.getEnhancedTypes(context.getPropertyOracle());
+    enhancedClassesEnabled =
+        Shared.shouldEnableEnhancedClasses(context.getPropertyOracle());
   }
 
   public void addRootType(TreeLogger logger, JType type) {
@@ -867,8 +879,10 @@ public class SerializableTypeOracleBuilder {
         fieldSerializableTypes.add(type);
       }
 
-      if (tic.maybeEnhanced()
-          || (enhancedClasses != null && enhancedClasses.contains(type.getQualifiedSourceName()))) {
+      if (enhancedClassesEnabled
+          && (tic.maybeEnhanced()
+              || (enhancedClasses != null
+                  && enhancedClasses.contains(type.getQualifiedSourceName())))) {
         logger.log(TreeLogger.WARN, "The class " + type.getQualifiedSourceName() + " has " +
                 "JPA/JDO annotations or is explicitly configured as an enhanced class using the " +
                 "configuration property rpc.enhancedClasses. This makes the server vulnerable " +

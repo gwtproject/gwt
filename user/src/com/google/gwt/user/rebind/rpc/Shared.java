@@ -54,6 +54,12 @@ class Shared {
   public static final String RPC_ENHANCED_CLASSES = "rpc.enhancedClasses";
 
   /**
+   * Single-valued configuration property used to disable all enhanced class handling at compile
+   * time.
+   */
+  public static final String RPC_ENHANCED_CLASSES_ENABLED = "rpc.enhancedClasses.enabled";
+
+  /**
    * Capitalizes a name.
    * 
    * @param name the string to be capitalized
@@ -78,6 +84,32 @@ class Shared {
     } catch (BadPropertyValueException e) {
       return null;
     }
+  }
+
+  /**
+   * Returns whether RPC should generate support for server-enhanced classes.
+   *
+   * @param propertyOracle the property oracle used to access the relevant configuration property
+   * @return whether enhanced class handling is enabled
+   */
+  static boolean shouldEnableEnhancedClasses(PropertyOracle propertyOracle) {
+    try {
+      ConfigurationProperty prop =
+          propertyOracle.getConfigurationProperty(RPC_ENHANCED_CLASSES_ENABLED);
+      if (prop.getValues().size() == 1) {
+        return Boolean.parseBoolean(prop.getValues().get(0));
+      }
+    } catch (BadPropertyValueException e) {
+      // Preserve the historical behavior when compiling without the new property.
+    }
+    return true;
+  }
+
+  /**
+   * Returns whether the type should be treated as enhanced for the current compilation.
+   */
+  static boolean isEnhancedClass(PropertyOracle propertyOracle, JClassType type) {
+    return shouldEnableEnhancedClasses(propertyOracle) && type.isEnhanced();
   }
 
   static String getStreamReadMethodNameFor(JType type) {

@@ -43,6 +43,7 @@ import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.javac.testing.impl.StaticJavaResource;
 import com.google.gwt.dev.resource.Resource;
+import com.google.gwt.dev.util.UnitTestTreeLogger;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.user.rebind.rpc.testcases.client.AbstractSerializableTypes;
 import com.google.gwt.user.rebind.rpc.testcases.client.ClassWithTypeParameterThatErasesToObject;
@@ -1057,8 +1058,8 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     sob.build(logger);
     assertFalse(enhanced.isEnhanced());
 
-    // The property defaults to true so existing applications retain their prior behavior.
-    properties.remove(Shared.RPC_ENHANCED_CLASSES_ENABLED);
+    // The module defaults the property to true so existing applications retain their behavior.
+    properties.put(Shared.RPC_ENHANCED_CLASSES_ENABLED, Collections.singletonList("true"));
     sob = createSerializableTypeOracleBuilder(logger, to, properties);
     sob.addRootType(logger, enhanced);
     sob.build(logger);
@@ -1066,41 +1067,37 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
   }
 
   /**
-   * Tests that disabling enhanced classes masks state left on a shared type oracle.
+   * Tests parsing and backwards-compatible fallback for the enhanced class switch.
    */
-  public void testEnhancedClassesCanBeDisabledAfterBeingEnabled()
-      throws UnableToCompleteException, NotFoundException {
-    Set<Resource> resources = new HashSet<Resource>();
-    addStandardClasses(resources);
-
-    StringBuilder code = new StringBuilder();
-    code.append("import java.io.Serializable;\n");
-    code.append("public class Enhanced implements Serializable {\n");
-    code.append("}\n");
-    resources.add(new StaticJavaResource("Enhanced", code));
-
-    TreeLogger logger = createLogger();
-    TypeOracle to = TypeOracleTestingUtils.buildTypeOracle(logger, resources);
-    JClassType enhanced = to.getType("Enhanced");
-
+  public void testEnhancedClassesEnabledPropertyParsing() {
     Map<String, List<String>> properties = new HashMap<String, List<String>>();
-    properties.put(Shared.RPC_ENHANCED_CLASSES, Collections.singletonList("Enhanced"));
-
-    SerializableTypeOracleBuilder sob =
-        createSerializableTypeOracleBuilder(logger, to, properties);
-    sob.addRootType(logger, enhanced);
-    sob.build(logger);
-    assertTrue(enhanced.isEnhanced());
+    properties.put(Shared.RPC_ENHANCED_CLASSES_ENABLED, Collections.singletonList("TRUE"));
+    assertTrue(Shared.shouldEnableEnhancedClasses(TreeLogger.NULL,
+        createPropertyOracle(properties)));
 
     properties.put(Shared.RPC_ENHANCED_CLASSES_ENABLED, Collections.singletonList("false"));
-    PropertyOracle disabledProperties = createPropertyOracle(properties);
-    sob = new SerializableTypeOracleBuilder(logger, new MockContext(to, disabledProperties));
-    sob.addRootType(logger, enhanced);
-    sob.build(logger);
+    assertFalse(Shared.shouldEnableEnhancedClasses(TreeLogger.NULL,
+        createPropertyOracle(properties)));
 
-    // JClassType enhancement is sticky, so downstream generators must also consult the property.
-    assertTrue(enhanced.isEnhanced());
-    assertFalse(Shared.isEnhancedClass(disabledProperties, enhanced));
+    String warning = "The configuration property " + Shared.RPC_ENHANCED_CLASSES_ENABLED
+        + " was missing or did not have exactly one 'true' or 'false' value. Is "
+        + "RemoteService.gwt.xml inherited? Enhanced class support will remain enabled.";
+    UnitTestTreeLogger.Builder loggerBuilder = new UnitTestTreeLogger.Builder();
+    loggerBuilder.setLowestLogLevel(TreeLogger.WARN);
+    loggerBuilder.expectWarn(warning, null);
+    loggerBuilder.expectWarn(warning, null);
+    loggerBuilder.expectWarn(warning, null);
+    UnitTestTreeLogger logger = loggerBuilder.createLogger();
+
+    properties.clear();
+    assertTrue(Shared.shouldEnableEnhancedClasses(logger, createPropertyOracle(properties)));
+
+    properties.put(Shared.RPC_ENHANCED_CLASSES_ENABLED, Collections.singletonList("invalid"));
+    assertTrue(Shared.shouldEnableEnhancedClasses(logger, createPropertyOracle(properties)));
+
+    properties.put(Shared.RPC_ENHANCED_CLASSES_ENABLED, Arrays.asList("true", "false"));
+    assertTrue(Shared.shouldEnableEnhancedClasses(logger, createPropertyOracle(properties)));
+    logger.assertCorrectLogEntries();
   }
 
   /**

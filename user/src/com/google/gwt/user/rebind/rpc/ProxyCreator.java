@@ -785,8 +785,7 @@ public class ProxyCreator {
          * containing the keyword '@ClientFields', the class name, and a list of
          * all potentially serializable client-visible fields.
          */
-        if (type instanceof JClassType
-            && Shared.isEnhancedClass(ctx.getPropertyOracle(), (JClassType) type)) {
+        if ((type instanceof JClassType) && ((JClassType) type).isEnhanced()) {
           JField[] fields = ((JClassType) type).getFields();
           JField[] rpcFields = new JField[fields.length];
           int numRpcFields = 0;

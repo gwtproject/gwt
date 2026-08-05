@@ -92,24 +92,27 @@ class Shared {
    * @param propertyOracle the property oracle used to access the relevant configuration property
    * @return whether enhanced class handling is enabled
    */
-  static boolean shouldEnableEnhancedClasses(PropertyOracle propertyOracle) {
+  static boolean shouldEnableEnhancedClasses(TreeLogger logger, PropertyOracle propertyOracle) {
     try {
       ConfigurationProperty prop =
           propertyOracle.getConfigurationProperty(RPC_ENHANCED_CLASSES_ENABLED);
       if (prop.getValues().size() == 1) {
-        return Boolean.parseBoolean(prop.getValues().get(0));
+        String value = prop.getValues().get(0);
+        if ("true".equalsIgnoreCase(value)) {
+          return true;
+        }
+        if ("false".equalsIgnoreCase(value)) {
+          return false;
+        }
       }
     } catch (BadPropertyValueException e) {
-      // Preserve the historical behavior when compiling without the new property.
+      // Warn below and retain the backwards-compatible behavior.
     }
-    return true;
-  }
 
-  /**
-   * Returns whether the type should be treated as enhanced for the current compilation.
-   */
-  static boolean isEnhancedClass(PropertyOracle propertyOracle, JClassType type) {
-    return shouldEnableEnhancedClasses(propertyOracle) && type.isEnhanced();
+    logger.log(TreeLogger.WARN, "The configuration property " + RPC_ENHANCED_CLASSES_ENABLED
+        + " was missing or did not have exactly one 'true' or 'false' value. Is "
+        + "RemoteService.gwt.xml inherited? Enhanced class support will remain enabled.");
+    return true;
   }
 
   static String getStreamReadMethodNameFor(JType type) {

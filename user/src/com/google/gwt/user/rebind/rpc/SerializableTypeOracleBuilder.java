@@ -762,7 +762,7 @@ public class SerializableTypeOracleBuilder {
 
     enhancedClasses = Shared.getEnhancedTypes(context.getPropertyOracle());
     enhancedClassesEnabled =
-        Shared.shouldEnableEnhancedClasses(context.getPropertyOracle());
+        Shared.shouldEnableEnhancedClasses(logger, context.getPropertyOracle());
   }
 
   public void addRootType(TreeLogger logger, JType type) {

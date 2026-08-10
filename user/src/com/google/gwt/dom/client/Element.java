@@ -531,6 +531,15 @@ public class Element extends Node {
   }
 
   /**
+   * Tests whether the element would be selected by the specified CSS selector.
+   * @param selectors A string containing valid CSS selectors to test the Element against.
+   * @return true if the Element matches the selectors. Otherwise, false.
+   */
+  public final native boolean matches(String selectors) /*-{
+    return this.matches && this.matches(selectors);
+  }-*/;
+
+  /**
    * Removes an attribute by name.
    */
   public final native void removeAttribute(String name) /*-{

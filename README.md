@@ -39,7 +39,7 @@
 
    `$ ant clean dist`
    
- - To create maven artifacts (after building .jar using ant), use [following guide](./maven/README.txt).
+ - To create maven artifacts (after building .jar using ant), use [following guide](./maven/README.md).
 
 ### How to verify GWT code conventions:
 

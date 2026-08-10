@@ -23,7 +23,8 @@ import jsinterop.annotations.JsMethod;
 /**
  * Wraps a primitive <code>double</code> as an object.
  */
-public final class Double extends Number implements Comparable<Double> {
+public final class Double extends Number implements Comparable<Double>,
+    Constable, ConstantDesc {
   public static final double MAX_VALUE = 1.7976931348623157e+308;
   public static final double MIN_VALUE = 4.9e-324;
   public static final double MIN_NORMAL = 2.2250738585072014e-308;

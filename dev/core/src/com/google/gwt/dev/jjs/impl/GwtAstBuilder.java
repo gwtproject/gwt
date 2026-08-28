@@ -3815,7 +3815,7 @@ public class GwtAstBuilder {
         JFieldRef mapRef = new JFieldRef(info, null, mapField, mapClass);
         JDeclarationStatement declStmt = new JDeclarationStatement(info, mapRef, call);
         JMethod clinit =
-            createSyntheticMethod(info, "$clinit", mapClass, JPrimitiveType.VOID, false, true,
+            createSyntheticMethod(info, CLINIT_METHOD_NAME, mapClass, JPrimitiveType.VOID, false, true,
                 true, AccessModifier.PRIVATE);
         JBlock clinitBlock = ((JMethodBody) clinit.getBody()).getBlock();
         clinitBlock.addStmt(declStmt);

@@ -207,7 +207,7 @@ function __MODULE_FUNC__() {
             }
             metaProps[name] = value;
           }
-        } else if (name == 'gwt:onPropertyErrorFn') {
+        } else if (__ENABLE_META_ERROR_HANDLERS__ && name == 'gwt:onPropertyErrorFn') {
           content = meta.getAttribute('content');
           if (content) {
             try {
@@ -217,7 +217,7 @@ function __MODULE_FUNC__() {
                 '\" for \"gwt:onPropertyErrorFn\"');
             }
           }
-        } else if (name == 'gwt:onLoadErrorFn') {
+        } else if (__ENABLE_META_ERROR_HANDLERS__ && name == 'gwt:onLoadErrorFn') {
           content = meta.getAttribute('content');
           if (content) {
             try {

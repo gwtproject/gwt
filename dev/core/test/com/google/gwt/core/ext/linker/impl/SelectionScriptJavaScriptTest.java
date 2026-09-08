@@ -16,7 +16,17 @@
 
 package com.google.gwt.core.ext.linker.impl;
 
+import com.google.gwt.core.ext.LinkerContext;
+import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.linker.ArtifactSet;
+import com.google.gwt.core.ext.linker.ConfigurationProperty;
 import com.google.gwt.core.ext.linker.LinkerUtils;
+import com.google.gwt.core.ext.linker.SelectionProperty;
+import com.google.gwt.core.linker.CrossSiteIframeLinker;
+import com.google.gwt.core.linker.IFrameLinker;
+import com.google.gwt.core.linker.SingleScriptLinker;
+import com.google.gwt.core.linker.XSLinker;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -30,13 +40,83 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Tests the JavaScript code in the selection script test using HtmlUnit.
  */
 public class SelectionScriptJavaScriptTest extends TestCase {
+  private static class MetaErrorHandlerContext implements LinkerContext {
+    private final String setting;
+
+    MetaErrorHandlerContext(String setting) {
+      this.setting = setting;
+    }
+
+    @Override
+    public SortedSet<ConfigurationProperty> getConfigurationProperties() {
+      SortedSet<ConfigurationProperty> properties =
+          new TreeSet<>(Comparator.comparing(ConfigurationProperty::getName));
+      if (setting != null) {
+        properties.add(new ConfigurationProperty() {
+          @Override
+          public String getName() {
+            return "gwt.enableMetaErrorHandlers";
+          }
+
+          @Override
+          public List<String> getValues() {
+            return Collections.singletonList(setting);
+          }
+
+          @Override
+          public boolean hasMultipleValues() {
+            return false;
+          }
+        });
+      }
+      return properties;
+    }
+
+    @Override
+    public String getModuleFunctionName() {
+      return "test_Module";
+    }
+
+    @Override
+    public long getModuleLastModified() {
+      return 0;
+    }
+
+    @Override
+    public String getModuleName() {
+      return TEST_MODULE_NAME;
+    }
+
+    @Override
+    public SortedSet<SelectionProperty> getProperties() {
+      return new TreeSet<>();
+    }
+
+    @Override
+    public boolean isOutputCompact() {
+      return false;
+    }
+
+    @Override
+    public String optimizeJavaScript(TreeLogger logger, String jsProgram) {
+      return jsProgram;
+    }
+  }
+
   private static String TEST_MODULE_NAME = "test.Module";
 
   /**
@@ -64,7 +144,48 @@ public class SelectionScriptJavaScriptTest extends TestCase {
     code.append("var metaProps = { }, propertyErrorFunc, onLoadErrorFunc;\n");
     code.append(LinkerUtils.readClasspathFileAsString(SelectionScriptLinker.PROCESS_METAS_JS));
     code.append("processMetas();\n");
-    return code.toString().replaceAll("__MODULE_NAME__", TEST_MODULE_NAME);
+    return code.toString().replaceAll("__MODULE_NAME__", TEST_MODULE_NAME)
+        .replace("__ENABLE_META_ERROR_HANDLERS__", "true");
+  }
+
+  public void testGeneratedMetaErrorHandlersDefault() throws Exception {
+    for (SelectionScriptLinker linker : createMetaErrorHandlerLinkers()) {
+      assertGeneratedMetaBehavior(linker, null, "", true, true);
+    }
+  }
+
+  public void testGeneratedMetaErrorHandlersDisabled() throws Exception {
+    for (SelectionScriptLinker linker : createMetaErrorHandlerLinkers()) {
+      assertGeneratedMetaBehavior(linker, "false", "", true, false);
+    }
+  }
+
+  public void testGeneratedMetaErrorHandlersEnabled() throws Exception {
+    for (SelectionScriptLinker linker : createMetaErrorHandlerLinkers()) {
+      assertGeneratedMetaBehavior(linker, "true", "", true, true);
+    }
+  }
+
+  public void testGeneratedMetaErrorHandlersInvalidValue() throws Exception {
+    for (SelectionScriptLinker linker : createMetaErrorHandlerLinkers()) {
+      SelectionScriptLinker.permutationsUtil.setupPermutationsMap(new ArtifactSet());
+      try {
+        linker.generateSelectionScript(TreeLogger.NULL,
+            new MetaErrorHandlerContext("unexpected"), new ArtifactSet());
+        fail("Expected an invalid configuration error for " + linker.getDescription());
+      } catch (UnableToCompleteException expected) {
+        // An invalid value must not silently select a different behavior.
+      }
+    }
+  }
+
+  public void testGeneratedModuleSpecificMetaErrorHandlers() throws Exception {
+    for (SelectionScriptLinker linker : Arrays.asList(
+        new CrossSiteIframeLinker(), new IFrameLinker(), new XSLinker())) {
+      assertGeneratedMetaBehavior(linker, "true", TEST_MODULE_NAME + "::", true, true);
+      assertGeneratedMetaBehavior(linker, "false", TEST_MODULE_NAME + "::", true, false);
+      assertGeneratedMetaBehavior(linker, "true", "another.Module::", false, false);
+    }
   }
 
   /**
@@ -249,6 +370,58 @@ public class SelectionScriptJavaScriptTest extends TestCase {
 
     assertEquals(1, alerts.size());
     assertEquals("base=http://foo.test/from/nocache/", alerts.get(0));
+  }
+
+  private void assertGeneratedMetaBehavior(SelectionScriptLinker linker, String setting,
+      String prefix, boolean hasProperties, boolean hasHandlers) throws Exception {
+    ArtifactSet artifacts = new ArtifactSet();
+    SelectionScriptLinker.permutationsUtil.setupPermutationsMap(artifacts);
+    String generated = linker.generateSelectionScript(TreeLogger.NULL,
+        new MetaErrorHandlerContext(setting), artifacts);
+
+    // Exercise the actual generated metadata helper in the existing offline page fixture.
+    Matcher helper = Pattern.compile("(?ms)^([ \\t]*)function processMetas\\(\\) \\{.*?^\\1\\}")
+        .matcher(generated);
+    assertTrue("Missing metadata helper for " + linker.getDescription(), helper.find());
+    StringBuilder code = new StringBuilder();
+    code.append("var metaProps={}, propertyErrorFunc, onLoadErrorFunc;");
+    code.append("var $doc=document, __propertyErrorFunction, test_Module={};");
+    code.append("var __gwt_getMetaProperty=function(name){return metaProps[name];};");
+    code.append(helper.group()).append("\nprocessMetas();\n");
+    code.append("alert('ordinary='+(__gwt_getMetaProperty('ordinary') || 'absent'));");
+    code.append("alert('empty='+(__gwt_getMetaProperty('empty') === ''));");
+    code.append("var propertyHandler=__propertyErrorFunction || propertyErrorFunc;");
+    code.append("var loadHandler=test_Module.__errFn || onLoadErrorFunc;");
+    code.append("alert('propertyHandler='+typeof propertyHandler);");
+    code.append("alert('loadHandler='+typeof loadHandler);");
+    code.append("if (propertyHandler) propertyHandler(); if (loadHandler) loadHandler();");
+
+    StringBuilder metas = new StringBuilder();
+    metas.append("<meta name=\"").append(prefix)
+        .append("gwt:property\" content=\"ordinary=value\">\n");
+    metas.append("<meta name=\"").append(prefix)
+        .append("gwt:property\" content=\"empty\">\n");
+    metas.append("<meta name=\"").append(prefix).append("gwt:onPropertyErrorFn\" ")
+        .append("content=\"function(){alert('property callback');}\">\n");
+    metas.append("<meta name=\"").append(prefix).append("gwt:onLoadErrorFn\" ")
+        .append("content=\"function(){alert('load callback');}\">\n");
+
+    List<String> expected = new ArrayList<>();
+    expected.add("ordinary=" + (hasProperties ? "value" : "absent"));
+    expected.add("empty=" + hasProperties);
+    expected.add("propertyHandler=" + (hasHandlers ? "function" : "undefined"));
+    expected.add("loadHandler=" + (hasHandlers ? "function" : "undefined"));
+    if (hasHandlers) {
+      expected.add("property callback");
+      expected.add("load callback");
+    }
+    assertEquals(linker.getDescription() + " setting=" + setting + " prefix=" + prefix,
+        expected, loadPage(makeHostPage(metas), code));
+  }
+
+  private List<SelectionScriptLinker> createMetaErrorHandlerLinkers() {
+    return Arrays.asList(new CrossSiteIframeLinker(), new IFrameLinker(), new XSLinker(),
+        new SingleScriptLinker(), new HostedModeLinker());
   }
 
   /**

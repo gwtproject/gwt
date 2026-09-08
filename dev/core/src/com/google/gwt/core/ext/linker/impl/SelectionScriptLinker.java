@@ -167,6 +167,27 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
     return sb.charAt(sb.length() - 1);
   }
 
+  private static boolean shouldEnableMetaErrorHandlers(TreeLogger logger, LinkerContext context)
+      throws UnableToCompleteException {
+    for (ConfigurationProperty property : context.getConfigurationProperties()) {
+      if ("gwt.enableMetaErrorHandlers".equals(property.getName())) {
+        List<String> values = property.getValues();
+        if (values.size() == 1) {
+          if ("true".equalsIgnoreCase(values.get(0))) {
+            return true;
+          }
+          if ("false".equalsIgnoreCase(values.get(0))) {
+            return false;
+          }
+        }
+        logger.log(TreeLogger.ERROR,
+            "Configuration property gwt.enableMetaErrorHandlers must be true or false");
+        throw new UnableToCompleteException();
+      }
+    }
+    return true;
+  }
+
   /**
    * This method is left in place for existing subclasses of SelectionScriptLinker that have not
    * been upgraded for the sharding API.
@@ -425,6 +446,8 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
         getSelectionScriptTemplate(logger, context), logger);
     selectionScriptText = fillSelectionScriptTemplate(
         buffer, logger, context, artifacts, result);
+    selectionScriptText = selectionScriptText.replace("__ENABLE_META_ERROR_HANDLERS__",
+        Boolean.toString(shouldEnableMetaErrorHandlers(logger, context)));
     selectionScriptText =
         context.optimizeJavaScript(logger, selectionScriptText);
     return selectionScriptText;

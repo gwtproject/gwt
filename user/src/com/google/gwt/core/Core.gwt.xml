@@ -53,6 +53,16 @@
   <define-configuration-property name="iframe.linker.suppressDeprecationWarning" is-multi-valued="false" />
   <set-configuration-property name="iframe.linker.suppressDeprecationWarning" value="false" />
 
+  <!--
+    Set to false to ignore gwt:onPropertyErrorFn and gwt:onLoadErrorFn meta tags
+    without disabling ordinary gwt:property metadata. This prevents those legacy
+    callbacks from being evaluated or installed by the built-in selection scripts.
+    The default preserves existing applications. Disabling these callbacks does
+    not by itself make an application fully compatible with a restrictive CSP.
+  -->
+  <define-configuration-property name="gwt.enableMetaErrorHandlers" is-multi-valued="false" />
+  <set-configuration-property name="gwt.enableMetaErrorHandlers" value="true" />
+
   <replace-with class="com.google.gwt.core.client.impl.SuperDevModeLogger">
       <when-property-is name="superdevmode" value="on"/>
       <when-type-is class="com.google.gwt.core.shared.impl.JsLogger"/>

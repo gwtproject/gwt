@@ -233,17 +233,6 @@ public class RPCTypeCheckFactory {
   /**
    * Add data for an int object.
    */
-  /**
-   * Writes an EnumMap whose exemplar object (the value from which the server
-   * derives the enum key type) is a plain Integer rather than an enum constant.
-   */
-  public void writeEnumMapWithSpoofedExemplar(int spoofedExemplar)
-      throws SerializationException {
-    writeStringFromTable(generateSerializedClassString(java.util.EnumMap.class));
-    write(Integer.valueOf(spoofedExemplar));
-    bodyString += "0" + RPC_SEPARATOR_CHAR; // empty map body
-  }
-
   public void write(int integer) throws SerializationException {
     try {
       bodyString += Integer.toString(integer) + RPC_SEPARATOR_CHAR;
@@ -414,6 +403,17 @@ public class RPCTypeCheckFactory {
   public void writeEmptySet() {
     Set<?> emptySet = java.util.Collections.emptySet();
     writeStringFromTable(generateSerializedClassString(emptySet.getClass()));
+  }
+
+  /**
+   * Writes an EnumMap whose exemplar object (the value from which the server
+   * derives the enum key type) is a plain Integer rather than an enum constant.
+   */
+  public void writeEnumMapWithSpoofedExemplar(int spoofedExemplar)
+      throws SerializationException {
+    writeStringFromTable(generateSerializedClassString(java.util.EnumMap.class));
+    write(Integer.valueOf(spoofedExemplar));
+    bodyString += "0" + RPC_SEPARATOR_CHAR; // empty map body
   }
 
   private boolean getEncodedIndex(Object obj) {

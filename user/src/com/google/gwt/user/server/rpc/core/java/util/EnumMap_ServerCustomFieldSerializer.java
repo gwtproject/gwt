@@ -77,7 +77,7 @@ public final class EnumMap_ServerCustomFieldSerializer extends ServerCustomField
      * {@link NullPointerException} rather than a clean serialization error.
      */
     public static EnumMap instantiate(ServerSerializationStreamReader streamReader,
-        Type[] expectedParameterTypes, DequeMap<TypeVariable< ? >, Type> resolvedTypes)
+        Type[] expectedParameterTypes, DequeMap<TypeVariable<?>, Type> resolvedTypes)
         throws SerializationException {
       Object exemplar = streamReader.readObject(expectedParameterTypes[0], resolvedTypes);
       return new EnumMap(exemplar.getClass());

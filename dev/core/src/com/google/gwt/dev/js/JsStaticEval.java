@@ -35,6 +35,7 @@ import com.google.gwt.dev.js.ast.JsFor;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsIf;
 import com.google.gwt.dev.js.ast.JsModVisitor;
+import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsNullLiteral;
 import com.google.gwt.dev.js.ast.JsNumberLiteral;
 import com.google.gwt.dev.js.ast.JsPrefixOperation;
@@ -700,6 +701,40 @@ public class JsStaticEval {
     if (!arg1.hasSideEffects()) {
       return arg2;
     }
+
+    // Simplify (name = expr, name) to (name = expr), a pattern produced by both java and js method
+    // inlining passes.
+    if (arg1 instanceof JsBinaryOperation op
+        && arg2 instanceof JsNameRef resultRef
+        && op.getOperator().isAssignment()
+        && op.getArg1() instanceof JsNameRef assignRef
+        && resultRef.getQualifier() == null
+        && assignRef.getQualifier() == null
+        && assignRef.getName() == resultRef.getName()) {
+      assert assignRef.isResolved() : "assignRef was not resolved: " + assignRef;
+      assert resultRef.isResolved() : "resultRef was not resolved: " + resultRef;
+      return arg1;
+    }
+
+    // Likewise, simplify (name++, name) or (++name, name) to (++name)
+    if (arg1 instanceof JsUnaryOperation unaryOp
+        && arg2 instanceof JsNameRef resultRef
+        && (unaryOp.getOperator() == JsUnaryOperator.INC
+            || unaryOp.getOperator() == JsUnaryOperator.DEC)
+        && unaryOp.getArg() instanceof JsNameRef unaryArgRef
+        && resultRef.getQualifier() == null
+        && unaryArgRef.getQualifier() == null
+        && unaryArgRef.getName() == resultRef.getName()) {
+      assert unaryArgRef.isResolved() : "unaryArgRef was not resolved: " + unaryArgRef;
+      assert resultRef.isResolved() : "resultRef was not resolved: " + resultRef;
+      if (unaryOp instanceof JsPrefixOperation) {
+        return unaryOp;
+      }
+      // Rewrite the discarded postfix operation into the equivalent prefix operation.
+      return new JsPrefixOperation(unaryOp.getSourceInfo(), unaryOp.getOperator(),
+          unaryOp.getArg());
+    }
+
     return expr;
   }
 

@@ -234,7 +234,69 @@ public class JsStaticEvalTest extends OptimizerTestBase {
     assertEquals("alert(false);", optimize("alert(null != null)"));
   }
 
+  /**
+   * Simplify (name = expr, name) to (name = expr), since the assignment expression already
+   * evaluates to the assigned value.
+   */
+  public void testSimplifyCommaAssignmentReturn() throws Exception {
+    // Assign a local name and use it
+    assertEquals("function f(){var a;alert(a=foo())}\n",
+        optimize("function f() { var a; alert((a = foo(), a)); }"));
+    // Test with a name out of scope
+    assertEquals("alert(a=foo());", optimize("alert((a = foo(), a))"));
+
+    // Confirm that we only use the same local (fails if resolver is not used)
+    assertEquals("function f(){var a,b=1;alert((a=foo(),b))}\n",
+        optimize("function f() { var a, b = 1; alert((a = foo(), b)); }"));
+  }
+
+  /**
+   * Simplify (name op= expr, name) to (name op= expr) for any compound assignment, since the
+   * compound assignment already evaluates to the updated value.
+   */
+  public void testSimplifyCommaCompoundAssignmentReturn() throws Exception {
+    assertEquals("function f(){var a;alert(a+=foo())}\n",
+        optimize("function f() { var a; alert((a += foo(), a)); }"));
+    assertEquals("alert(a-=foo());", optimize("alert((a -= foo(), a))"));
+    assertEquals("alert(a|=foo());", optimize("alert((a |= foo(), a))"));
+
+    // Confirm that we only simplify when the read is the same local
+    assertEquals("function f(){var a,b=1;alert((a+=foo(),b))}\n",
+        optimize("function f() { var a, b = 1; alert((a += foo(), b)); }"));
+  }
+
+  public void testSimplifyCommaIncDecReturn() throws Exception {
+    // Prefix is returned as-is
+    assertEquals("function f(){var a;alert(++a)}\n",
+        optimize("function f() { var a; alert((++a, a)); }"));
+    assertEquals("alert(--a);", optimize("alert((--a, a))"));
+
+    // Postfix is rewritten to the equivalent prefix form
+    assertEquals("function f(){var a;alert(++a)}\n",
+        optimize("function f() { var a; alert((a++, a)); }"));
+    assertEquals("alert(--a);", optimize("alert((a--, a))"));
+
+    // Confirm that we only simplify when the read is the same local
+    assertEquals("function f(){var a,b=1;alert((a++,b))}\n",
+        optimize("function f() { var a, b = 1; alert((a++, b)); }"));
+
+    // Confirm postfix exprs are left alone, even in a comma expr
+    assertEquals("alert(a++);", optimize("alert(a++)"));
+    assertEquals("alert((foo(),a++));", optimize("alert((foo(), a++))"));
+
+    // In theory this could be optimized, but it doesn't match the known pattern. If we
+    // fill this in later, it would be through some expression inliner
+    assertEquals("alert((g(),a++,a));", optimize("alert((g(), a++, a))"));
+  }
+
+  /**
+   * Delete evaluates to a boolean, the only unary that can't be cleaned up like this.
+   */
+  public void testDoNotSimplifyCommaDelete() throws Exception {
+    assertEquals("alert((delete a,a));", optimize("alert((delete a, a))"));
+  }
+
   private String optimize(String js) throws Exception {
-    return optimizeToSource(js, JsStaticEval.class);
+    return optimizeToSource(js, JsSymbolResolver.class, JsStaticEval.class);
   }
 }

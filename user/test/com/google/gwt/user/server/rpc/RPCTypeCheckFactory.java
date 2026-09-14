@@ -405,6 +405,51 @@ public class RPCTypeCheckFactory {
     writeStringFromTable(generateSerializedClassString(emptySet.getClass()));
   }
 
+  /**
+   * Add data for an enum constant. The type written is the declaring class, and
+   * the value is the constant's ordinal.
+   */
+  public void writeEnum(Enum<?> value) {
+    writeStringFromTable(generateSerializedClassString(value.getDeclaringClass()));
+    bodyString += Integer.toString(value.ordinal()) + RPC_SEPARATOR_CHAR;
+  }
+
+  /**
+   * Add data for an EnumMap whose exemplar object (the value from which the
+   * server derives the enum key type) is the given enum constant, and which has
+   * a single entry.
+   */
+  public void writeEnumMapWithEntry(Enum<?> exemplar, Enum<?> key, Integer value)
+      throws SerializationException {
+    writeStringFromTable(generateSerializedClassString(java.util.EnumMap.class));
+    writeEnum(exemplar);
+    bodyString += "1" + RPC_SEPARATOR_CHAR;
+    writeEnum(key);
+    write(value);
+  }
+
+  /**
+   * Add data for an EnumMap whose exemplar object (the value from which the
+   * server derives the enum key type) is the given enum constant, and whose map
+   * body is empty.
+   */
+  public void writeEnumMapWithExemplar(Enum<?> exemplar) {
+    writeStringFromTable(generateSerializedClassString(java.util.EnumMap.class));
+    writeEnum(exemplar);
+    bodyString += "0" + RPC_SEPARATOR_CHAR; // empty map body
+  }
+
+  /**
+   * Writes an EnumMap whose exemplar object (the value from which the server
+   * derives the enum key type) is a plain Integer rather than an enum constant.
+   */
+  public void writeEnumMapWithSpoofedExemplar(int spoofedExemplar)
+      throws SerializationException {
+    writeStringFromTable(generateSerializedClassString(java.util.EnumMap.class));
+    write(Integer.valueOf(spoofedExemplar));
+    bodyString += "0" + RPC_SEPARATOR_CHAR; // empty map body
+  }
+
   private boolean getEncodedIndex(Object obj) {
     Integer foundIndex = encodedObjectTable.get(obj);
     if (foundIndex == null) {

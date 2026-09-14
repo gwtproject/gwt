@@ -54,6 +54,12 @@ class Shared {
   public static final String RPC_ENHANCED_CLASSES = "rpc.enhancedClasses";
 
   /**
+   * Single-valued configuration property used to disable all enhanced class handling at compile
+   * time.
+   */
+  public static final String RPC_ENHANCED_CLASSES_ENABLED = "rpc.enhancedClasses.enabled";
+
+  /**
    * Capitalizes a name.
    * 
    * @param name the string to be capitalized
@@ -78,6 +84,35 @@ class Shared {
     } catch (BadPropertyValueException e) {
       return null;
     }
+  }
+
+  /**
+   * Returns whether RPC should generate support for server-enhanced classes.
+   *
+   * @param propertyOracle the property oracle used to access the relevant configuration property
+   * @return whether enhanced class handling is enabled
+   */
+  static boolean shouldEnableEnhancedClasses(TreeLogger logger, PropertyOracle propertyOracle) {
+    try {
+      ConfigurationProperty prop =
+          propertyOracle.getConfigurationProperty(RPC_ENHANCED_CLASSES_ENABLED);
+      if (prop.getValues().size() == 1) {
+        String value = prop.getValues().get(0);
+        if ("true".equalsIgnoreCase(value)) {
+          return true;
+        }
+        if ("false".equalsIgnoreCase(value)) {
+          return false;
+        }
+      }
+    } catch (BadPropertyValueException e) {
+      // Warn below and retain the backwards-compatible behavior.
+    }
+
+    logger.log(TreeLogger.WARN, "The configuration property " + RPC_ENHANCED_CLASSES_ENABLED
+        + " was missing or did not have exactly one 'true' or 'false' value. Is "
+        + "RemoteService.gwt.xml inherited? Enhanced class support will remain enabled.");
+    return true;
   }
 
   static String getStreamReadMethodNameFor(JType type) {

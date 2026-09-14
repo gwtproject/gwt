@@ -185,7 +185,7 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
         throw new UnableToCompleteException();
       }
     }
-    return true;
+    return false;
   }
 
   /**
@@ -446,8 +446,15 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
         getSelectionScriptTemplate(logger, context), logger);
     selectionScriptText = fillSelectionScriptTemplate(
         buffer, logger, context, artifacts, result);
-    selectionScriptText = selectionScriptText.replace("__ENABLE_META_ERROR_HANDLERS__",
-        Boolean.toString(shouldEnableMetaErrorHandlers(logger, context)));
+    // Remove the complete callback branches before optimization, including their eval calls.
+    // A runtime Boolean guard can leave the inactive callback code in the generated script.
+    if (shouldEnableMetaErrorHandlers(logger, context)) {
+      selectionScriptText = selectionScriptText.replace("/*__META_ERROR_HANDLERS_BEGIN__*/", "")
+          .replace("/*__META_ERROR_HANDLERS_END__*/", "");
+    } else {
+      selectionScriptText = selectionScriptText.replaceAll(
+          "(?s)/\\*__META_ERROR_HANDLERS_BEGIN__\\*/.*?/\\*__META_ERROR_HANDLERS_END__\\*/", "");
+    }
     selectionScriptText =
         context.optimizeJavaScript(logger, selectionScriptText);
     return selectionScriptText;

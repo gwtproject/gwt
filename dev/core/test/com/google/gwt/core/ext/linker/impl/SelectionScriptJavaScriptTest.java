@@ -144,13 +144,12 @@ public class SelectionScriptJavaScriptTest extends TestCase {
     code.append("var metaProps = { }, propertyErrorFunc, onLoadErrorFunc;\n");
     code.append(LinkerUtils.readClasspathFileAsString(SelectionScriptLinker.PROCESS_METAS_JS));
     code.append("processMetas();\n");
-    return code.toString().replaceAll("__MODULE_NAME__", TEST_MODULE_NAME)
-        .replace("__ENABLE_META_ERROR_HANDLERS__", "true");
+    return code.toString().replaceAll("__MODULE_NAME__", TEST_MODULE_NAME);
   }
 
   public void testGeneratedMetaErrorHandlersDefault() throws Exception {
     for (SelectionScriptLinker linker : createMetaErrorHandlerLinkers()) {
-      assertGeneratedMetaBehavior(linker, null, "", true, true);
+      assertGeneratedMetaBehavior(linker, null, "", true, false);
     }
   }
 
@@ -383,6 +382,15 @@ public class SelectionScriptJavaScriptTest extends TestCase {
     Matcher helper = Pattern.compile("(?ms)^([ \\t]*)function processMetas\\(\\) \\{.*?^\\1\\}")
         .matcher(generated);
     assertTrue("Missing metadata helper for " + linker.getDescription(), helper.find());
+    boolean enabled = "true".equals(setting);
+    assertFalse("Unresolved callback marker for " + linker.getDescription(),
+        generated.contains("__META_ERROR_HANDLERS_"));
+    assertEquals("Property callback branch for " + linker.getDescription(), enabled,
+        helper.group().contains("gwt:onPropertyErrorFn"));
+    assertEquals("Load callback branch for " + linker.getDescription(), enabled,
+        helper.group().contains("gwt:onLoadErrorFn"));
+    assertEquals("Callback evaluation for " + linker.getDescription(), enabled,
+        helper.group().contains("eval("));
     StringBuilder code = new StringBuilder();
     code.append("var metaProps={}, propertyErrorFunc, onLoadErrorFunc;");
     code.append("var $doc=document, __propertyErrorFunction, test_Module={};");

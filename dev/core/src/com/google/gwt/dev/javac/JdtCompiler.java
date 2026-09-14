@@ -333,6 +333,10 @@ public class JdtCompiler {
       processor.process(builder, cud, cudOriginalImports, compiledClasses);
     }
 
+    // Annotations such as javax.annotation.CheckForNull may appear next to a type parameter,
+    // though they have no target. They should be binding to the method / parameter,
+    // but JDT 3.40 binds them to the type and reports incorrect usage.
+    // We remove these false reports here.
     private void removeFalseProblems(CompilationResult result) {
       if (result.problems != null) {
         for (CategorizedProblem problem : result.problems) {

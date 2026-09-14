@@ -49,8 +49,8 @@ public class AnnotationCompilerTest extends FullCompileTestBase {
 
   public void testAnnotationWithNoTarget() throws UnableToCompleteException {
     // Annotations such as javax.annotation.CheckForNull may appear next to a type parameter,
-    // though they have no target. They should be binding to the method / parameter, but JDT 3.40 binds them to the type
-    // and reports incorrect usage.
+    // though they have no target. They should be binding to the method / parameter,
+    // but JDT 3.40 binds them to the type and reports incorrect usage.
     String code =
       """
       package test;

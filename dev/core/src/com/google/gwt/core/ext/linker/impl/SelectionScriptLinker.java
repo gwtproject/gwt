@@ -167,6 +167,27 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
     return sb.charAt(sb.length() - 1);
   }
 
+  private static boolean shouldEnableMetaErrorHandlers(TreeLogger logger, LinkerContext context)
+      throws UnableToCompleteException {
+    for (ConfigurationProperty property : context.getConfigurationProperties()) {
+      if ("gwt.enableMetaErrorHandlers".equals(property.getName())) {
+        List<String> values = property.getValues();
+        if (values.size() == 1) {
+          if ("true".equalsIgnoreCase(values.get(0))) {
+            return true;
+          }
+          if ("false".equalsIgnoreCase(values.get(0))) {
+            return false;
+          }
+        }
+        logger.log(TreeLogger.ERROR,
+            "Configuration property gwt.enableMetaErrorHandlers must be true or false");
+        throw new UnableToCompleteException();
+      }
+    }
+    return false;
+  }
+
   /**
    * This method is left in place for existing subclasses of SelectionScriptLinker that have not
    * been upgraded for the sharding API.
@@ -425,6 +446,15 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
         getSelectionScriptTemplate(logger, context), logger);
     selectionScriptText = fillSelectionScriptTemplate(
         buffer, logger, context, artifacts, result);
+    // Remove the complete callback branches before optimization, including their eval calls.
+    // A runtime Boolean guard can leave the inactive callback code in the generated script.
+    if (shouldEnableMetaErrorHandlers(logger, context)) {
+      selectionScriptText = selectionScriptText.replace("/*__META_ERROR_HANDLERS_BEGIN__*/", "")
+          .replace("/*__META_ERROR_HANDLERS_END__*/", "");
+    } else {
+      selectionScriptText = selectionScriptText.replaceAll(
+          "(?s)/\\*__META_ERROR_HANDLERS_BEGIN__\\*/.*?/\\*__META_ERROR_HANDLERS_END__\\*/", "");
+    }
     selectionScriptText =
         context.optimizeJavaScript(logger, selectionScriptText);
     return selectionScriptText;

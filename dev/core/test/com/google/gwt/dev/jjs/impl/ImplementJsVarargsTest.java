@@ -89,9 +89,8 @@ public class ImplementJsVarargsTest extends OptimizerTestBase {
             "public static void m(Object[] _arguments_){",
             "  {",
             "    Object[] obj = new Object[][_arguments_.length];",
-            "    for (int $i = 0; $i < _arguments_.length; $i++) {",
+            "    for (int $i = 0; $i < _arguments_.length; $i++)",
             "      obj[$i] = _arguments_[$i];",
-            "    }",
             "  }",
             "  obj[5] = Integer.valueOf(1);",
             "}"), result.findMethod("test.EntryPoint$A.m([Ljava/lang/Object;)V").toSource());
@@ -111,9 +110,8 @@ public class ImplementJsVarargsTest extends OptimizerTestBase {
             "public static void m(int[] _arguments_){",
             "  {",
             "    int[] obj = new int[][_arguments_.length];",
-            "    for (int $i = 0; $i < _arguments_.length; $i++) {",
+            "    for (int $i = 0; $i < _arguments_.length; $i++)",
             "      obj[$i] = _arguments_[$i];",
-            "    }",
             "  }",
             "  obj[5]++;",
             "}"), result.findMethod("test.EntryPoint$A.m([I)V").toSource());
@@ -133,9 +131,8 @@ public class ImplementJsVarargsTest extends OptimizerTestBase {
             "public static void m(int[] _arguments_){",
             "  {",
             "    int[] obj = new int[][_arguments_.length];",
-            "    for (int $i = 0; $i < _arguments_.length; $i++) {",
+            "    for (int $i = 0; $i < _arguments_.length; $i++)",
             "      obj[$i] = _arguments_[$i];",
-            "    }",
             "  }",
             "  --obj[5];",
             "}"), result.findMethod("test.EntryPoint$A.m([I)V").toSource());
@@ -156,9 +153,8 @@ public class ImplementJsVarargsTest extends OptimizerTestBase {
             "public static void m(int[] _arguments_){",
             "  {",
             "    int[] obj = new int[][_arguments_.length];",
-            "    for (int $i = 0; $i < _arguments_.length; $i++) {",
+            "    for (int $i = 0; $i < _arguments_.length; $i++)",
             "      obj[$i] = _arguments_[$i];",
-            "    }",
             "  }",
             "  EntryPoint$A.n(obj);",
             "}"), result.findMethod("test.EntryPoint$A.m([I)V").toSource());

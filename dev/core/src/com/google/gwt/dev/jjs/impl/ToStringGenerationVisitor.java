@@ -431,10 +431,11 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   public boolean visit(JDoStatement x, Context ctx) {
     print(CHARS_DO);
     needSemi = true;
-    if (x.getBody() != null) {
-      nestedStatementPush(x.getBody());
-      accept(x.getBody());
-      nestedStatementPop(x.getBody());
+    JStatement body = x.getBody().singleStatement();
+    if (body != null) {
+      nestedStatementPush(body);
+      accept(body);
+      nestedStatementPop(body);
     }
     if (needSemi) {
       semi();
@@ -522,10 +523,11 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
     }
     rparen();
 
-    if (x.getBody() != null) {
-      nestedStatementPush(x.getBody());
-      accept(x.getBody());
-      nestedStatementPop(x.getBody());
+    JStatement body = x.getBody().singleStatement();
+    if (body != null) {
+      nestedStatementPush(body);
+      accept(body);
+      nestedStatementPop(body);
     }
     return false;
   }
@@ -537,13 +539,18 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
     accept(x.getIfExpr());
     rparen();
 
-    if (x.getThenStmt() != null) {
-      nestedStatementPush(x.getThenStmt());
-      accept(x.getThenStmt());
-      nestedStatementPop(x.getThenStmt());
+    JStatement then = x.getThenStmt().singleStatement();
+    if (then != null) {
+      if (!x.getElseStmt().isEmpty() && !(then instanceof JBlock)) {
+        then = new JBlock(then.getSourceInfo(), then);
+      }
+      nestedStatementPush(then);
+      accept(then);
+      nestedStatementPop(then);
     }
 
-    if (x.getElseStmt() != null) {
+    JStatement elseStmt = x.getElseStmt().singleStatement();
+    if (elseStmt != null) {
       if (needSemi) {
         semi();
         newline();
@@ -552,7 +559,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
         needSemi = true;
       }
       print(CHARS_ELSE);
-      boolean elseIf = x.getElseStmt() instanceof JIfStatement;
+      boolean elseIf = elseStmt instanceof JIfStatement;
       if (!elseIf) {
         nestedStatementPush(x.getElseStmt());
       } else {
@@ -920,10 +927,11 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
     lparen();
     accept(x.getTestExpr());
     rparen();
-    if (x.getBody() != null) {
-      nestedStatementPush(x.getBody());
-      accept(x.getBody());
-      nestedStatementPop(x.getBody());
+    JStatement body = x.getBody().singleStatement();
+    if (body != null) {
+      nestedStatementPush(body);
+      accept(body);
+      nestedStatementPop(body);
     }
     return false;
   }

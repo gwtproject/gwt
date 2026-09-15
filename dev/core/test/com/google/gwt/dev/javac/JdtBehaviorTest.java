@@ -53,6 +53,18 @@ import java.util.Set;
 public class JdtBehaviorTest extends TestCase {
 
   /**
+   * Classes that may be read from classpath. {@link JdtCompiler} may read anything
+   * from classpath, in tests we provide an explicit list to make sure we only use it for
+   * classes that are not being transpiled.
+   */
+  private static final List<String> REFLECTION_CLASSES = List.of(
+          "java.lang.invoke.MethodHandles",
+          "java.lang.invoke.MethodHandle",
+          "java.lang.invoke.MethodHandles$Lookup",
+          "java.lang.invoke.StringConcatFactory"
+  );
+
+  /**
    * Hook-point if we need to modify the compiler behavior.
    */
   private static class CompilerImpl extends Compiler {
@@ -132,8 +144,13 @@ public class JdtBehaviorTest extends TestCase {
           return new NameEnvironmentAnswer(cfr, null);
         } catch (ClassFormatException e) {
           throw new RuntimeException("Unexpectedly unable to parse class file",
-              e);
+                  e);
         }
+      }
+      if (REFLECTION_CLASSES.contains(typeName)) {
+        char[] internalNameChars = CharOperation.concatWith(compoundTypeName, '/');
+        String internalName = String.valueOf(internalNameChars);
+        return JdtCompiler.doFindTypeInClassPath(internalName);
       }
       return null;
     }

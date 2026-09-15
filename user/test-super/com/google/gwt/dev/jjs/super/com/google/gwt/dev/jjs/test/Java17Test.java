@@ -20,6 +20,7 @@ import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -140,6 +141,18 @@ public class Java17Test extends GWTTestCase {
     public static String foo = "bar";
   }
 
+  record RecordWithDefaultConstructor(String foo) {
+    public RecordWithDefaultConstructor {
+      Objects.requireNonNull(foo);
+    }
+  }
+
+  record RecordWithExtraConstructor(String foo) {
+    RecordWithExtraConstructor(int fooInt) {
+      this(fooInt + "");
+    }
+  }
+
   /**
    * Record type that takes a record as a component
    */
@@ -205,6 +218,17 @@ public class Java17Test extends GWTTestCase {
     assertTrue(new TopLevelRecord(null, 1).equals(new TopLevelRecord(null, 1)));
     assertFalse(new TopLevelRecord("asdf", 2).equals(new TopLevelRecord(null, 2)));
     assertFalse(new TopLevelRecord(null, 3).equals(new TopLevelRecord("abc", 3)));
+  }
+
+  public void testRecordConstructors() {
+    assertEquals("7", new RecordWithExtraConstructor(7).foo());
+    assertEquals("7", new RecordWithDefaultConstructor("7").foo());
+    try {
+      new RecordWithDefaultConstructor(null).foo();
+      fail("Should have thrown NPE");
+    } catch (RuntimeException expected) {
+      // expected
+    }
   }
 
   /**

@@ -610,6 +610,7 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
         servletValidator = ServletValidator.create(getTopLogger(), webXml);
       } else {
         servletWriter = new ServletWriter();
+        servletWriter.setJspLevel(getJspLevel());
       }
     }
 
@@ -755,6 +756,10 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
   protected void warnAboutNoStartupUrls() {
     getTopLogger().log(TreeLogger.WARN,
         "No startup URLs supplied and no plausible ones found -- use " + "-startupUrl");
+  }
+
+  protected String getJspLevel() {
+    return null;
   }
 
   private void validateServletTags(TreeLogger logger, ServletValidator servletValidator,

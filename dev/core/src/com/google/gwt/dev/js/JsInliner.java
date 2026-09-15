@@ -591,6 +591,8 @@ public class JsInliner {
     private final InvocationCountingVisitor invocationCountingVisitor =
         new InvocationCountingVisitor();
     private final Stack<List<JsName>> newLocalVariableStack = Stack.create();
+    private final Map<JsFunction, Boolean> containsNestedFunctionsCache =
+        Maps.newIdentityHashMap();
 
     /**
      * A map containing the next integer to try as an identifier suffix for a
@@ -1023,6 +1025,172 @@ public class JsInliner {
       int inlinedComplexity = complexity(op);
       return ((double) inlinedComplexity) / (originalComplexity + INLINING_BIAS)
           > MAX_COMPLEXITY_INCREASE;
+    }
+
+    /**
+     * Determine whether or not a list of AST nodes are affected by side effects.
+     * The context parameter provides a scope in which local (and therefore
+     * immutable) variables are defined.
+     */
+    private boolean affectedBySideEffects(List<JsExpression> list,
+        JsFunction context) {
+      /*
+       * If the caller contains no nested functions, none of its locals can
+       * possibly be affected by side effects.
+       */
+      JsScope safeScope = null;
+      if (context != null && !containsNestedFunctions(context)) {
+        safeScope = context.getScope();
+      }
+      AffectedBySideEffectsVisitor v = new AffectedBySideEffectsVisitor(safeScope);
+      v.acceptList(list);
+      return v.affectedBySideEffects();
+    }
+
+    /**
+     * Examine a JsFunction to determine if it contains nested functions.
+     *
+     * <p>Memoized, since the answer would otherwise be recomputed at every call site. An inlined
+     * body is a {@link JsSafeCloner} clone and that cloner rejects anything holding a function,
+     * so inlining never moves a function into the caller it rewrites.
+     */
+    private boolean containsNestedFunctions(JsFunction func) {
+      Boolean cached = containsNestedFunctionsCache.computeIfAbsent(
+          func, InliningVisitor::computeContainsNestedFunctions);
+      assert cached == computeContainsNestedFunctions(func) : "Stale nested function memo";
+      return cached;
+    }
+
+    private static boolean computeContainsNestedFunctions(JsFunction func) {
+      NestedFunctionVisitor v = new NestedFunctionVisitor();
+      v.accept(func.getBody());
+      return v.containsNestedFunctions();
+    }
+
+    /**
+     * Determine if a statement can be inlined into a call site.
+     */
+    private boolean isInlinable(JsFunction caller, JsFunction callee,
+        JsExpression thisExpr, List<JsExpression> arguments, JsNode toInline) {
+
+      /*
+       * This will happen with varargs-style JavaScript functions that rely on the
+       * "arguments" array. The reference to arguments would be detected in
+       * BoundedScopeVisitor, but the code below assumes the same number of
+       * parameters and arguments.
+       */
+      if (arguments.size() != callee.getParameters().size()) {
+        return false;
+      }
+
+      // Build up a list of all parameter names
+      Set<JsName> parameterNames = Sets.newHashSet();
+      Set<String> parameterIdents = Sets.newHashSet();
+      for (JsParameter param : callee.getParameters()) {
+        parameterNames.add(param.getName());
+        parameterIdents.add(param.getName().getIdent());
+      }
+
+      /*
+       * Make sure that inlining won't change the final name of non-parameter
+       * idents due to the change of scope. The most likely cause would be the use
+       * of an unqualified variable reference in a JSNI block that happened to
+       * conflict with a Java-derived identifier.
+       */
+      StableNameChecker detector = new StableNameChecker(caller.getScope(),
+          callee.getScope(), parameterNames);
+      detector.accept(toInline);
+      if (!detector.isStable()) {
+        return false;
+      }
+
+      /*
+       * Ensure that the names referred to by the argument list and the statement
+       * are disjoint. This prevents inlining of the following:
+       *
+       * static int i; public void add(int a) { i += a; }; add(i++);
+       */
+      if (hasCommonIdents(arguments, toInline, parameterIdents)) {
+        return false;
+      }
+
+      List<JsExpression> evalArgs;
+      if (thisExpr == null) {
+        evalArgs = arguments;
+      } else {
+        evalArgs = Lists.newArrayListWithCapacity(1 + arguments.size());
+        evalArgs.add(thisExpr);
+        evalArgs.addAll(arguments);
+      }
+
+      /*
+       * Determine if the evaluation of the invocation's arguments may create side
+       * effects. This will determine how aggressively the parameters may be
+       * reordered.
+       */
+      if (isVolatile(evalArgs, caller)) {
+        /*
+         * Determine the order in which the parameters must be evaluated. This
+         * will vary between call sites, based on whether or not the invocation's
+         * arguments can be repeated without ill effect.
+         */
+        List<JsName> requiredOrder = Lists.newArrayList();
+        if (thisExpr != null && isVolatile(thisExpr, callee)) {
+          requiredOrder.add(EvaluationOrderVisitor.THIS_NAME);
+        }
+        for (int i = 0; i < arguments.size(); i++) {
+          JsExpression e = arguments.get(i);
+          JsParameter p = callee.getParameters().get(i);
+
+          if (isVolatile(e, callee)) {
+            requiredOrder.add(p.getName());
+          }
+        }
+
+        // This would indicate that isVolatile changed its output between
+        // the if statement and the loop.
+        assert requiredOrder.size() > 0;
+
+        /*
+         * Verify that the non-reorderable arguments are evaluated in the right
+         * order.
+         */
+        EvaluationOrderVisitor orderVisitor = new EvaluationOrderVisitor(
+            requiredOrder, callee);
+        orderVisitor.accept(toInline);
+        if (!orderVisitor.maintainsOrder()) {
+          return false;
+        }
+      }
+
+      // Check that parameters aren't used in such a way as to prohibit inlining
+      ParameterUsageVisitor v = new ParameterUsageVisitor(thisExpr != null,
+          parameterNames);
+      v.accept(toInline);
+      if (v.hasViolation()) {
+        return false;
+      }
+
+      // Hooray!
+      return true;
+    }
+
+    /**
+     * Indicates if an expression would create side effects or possibly be
+     * affected by side effects when evaluated within a particular function
+     * context.
+     */
+    private boolean isVolatile(JsExpression e, JsFunction context) {
+      return isVolatile(Collections.singletonList(e), context);
+    }
+
+    /**
+     * Indicates if a list of expressions would create side effects or possibly be
+     * affected by side effects when evaluated within a particular function
+     * context.
+     */
+    private boolean isVolatile(List<JsExpression> list, JsFunction context) {
+      return hasSideEffects(list) || affectedBySideEffects(list, context);
     }
   }
 
@@ -1523,41 +1691,12 @@ public class JsInliner {
   }
 
   /**
-   * Determine whether or not a list of AST nodes are affected by side effects.
-   * The context parameter provides a scope in which local (and therefore
-   * immutable) variables are defined.
-   */
-  private static boolean affectedBySideEffects(List<JsExpression> list,
-      JsFunction context) {
-    /*
-     * If the caller contains no nested functions, none of its locals can
-     * possibly be affected by side effects.
-     */
-    JsScope safeScope = null;
-    if (context != null && !containsNestedFunctions(context)) {
-      safeScope = context.getScope();
-    }
-    AffectedBySideEffectsVisitor v = new AffectedBySideEffectsVisitor(safeScope);
-    v.acceptList(list);
-    return v.affectedBySideEffects();
-  }
-
-  /**
    * Generate an estimated measure of the syntactic complexity of a JsNode.
    */
   private static int complexity(JsNode toEstimate) {
     ComplexityEstimator e = new ComplexityEstimator();
     e.accept(toEstimate);
     return e.getComplexity();
-  }
-
-  /**
-   * Examine a JsFunction to determine if it contains nested functions.
-   */
-  private static boolean containsNestedFunctions(JsFunction func) {
-    NestedFunctionVisitor v = new NestedFunctionVisitor();
-    v.accept(func.getBody());
-    return v.containsNestedFunctions();
   }
 
   private static int execImpl(JsProgram program, Collection<JsNode> toInline) {
@@ -1700,137 +1839,11 @@ public class JsInliner {
   }
 
   /**
-   * Determine if a statement can be inlined into a call site.
-   */
-  private static boolean isInlinable(JsFunction caller, JsFunction callee,
-      JsExpression thisExpr, List<JsExpression> arguments, JsNode toInline) {
-
-    /*
-     * This will happen with varargs-style JavaScript functions that rely on the
-     * "arguments" array. The reference to arguments would be detected in
-     * BoundedScopeVisitor, but the code below assumes the same number of
-     * parameters and arguments.
-     */
-    if (arguments.size() != callee.getParameters().size()) {
-      return false;
-    }
-
-    // Build up a list of all parameter names
-    Set<JsName> parameterNames = Sets.newHashSet();
-    Set<String> parameterIdents = Sets.newHashSet();
-    for (JsParameter param : callee.getParameters()) {
-      parameterNames.add(param.getName());
-      parameterIdents.add(param.getName().getIdent());
-    }
-
-    /*
-     * Make sure that inlining won't change the final name of non-parameter
-     * idents due to the change of scope. The most likely cause would be the use
-     * of an unqualified variable reference in a JSNI block that happened to
-     * conflict with a Java-derived identifier.
-     */
-    StableNameChecker detector = new StableNameChecker(caller.getScope(),
-        callee.getScope(), parameterNames);
-    detector.accept(toInline);
-    if (!detector.isStable()) {
-      return false;
-    }
-
-    /*
-     * Ensure that the names referred to by the argument list and the statement
-     * are disjoint. This prevents inlining of the following:
-     *
-     * static int i; public void add(int a) { i += a; }; add(i++);
-     */
-    if (hasCommonIdents(arguments, toInline, parameterIdents)) {
-      return false;
-    }
-
-    List<JsExpression> evalArgs;
-    if (thisExpr == null) {
-      evalArgs = arguments;
-    } else {
-      evalArgs = Lists.newArrayListWithCapacity(1 + arguments.size());
-      evalArgs.add(thisExpr);
-      evalArgs.addAll(arguments);
-    }
-
-    /*
-     * Determine if the evaluation of the invocation's arguments may create side
-     * effects. This will determine how aggressively the parameters may be
-     * reordered.
-     */
-    if (isVolatile(evalArgs, caller)) {
-      /*
-       * Determine the order in which the parameters must be evaluated. This
-       * will vary between call sites, based on whether or not the invocation's
-       * arguments can be repeated without ill effect.
-       */
-      List<JsName> requiredOrder = Lists.newArrayList();
-      if (thisExpr != null && isVolatile(thisExpr, callee)) {
-        requiredOrder.add(EvaluationOrderVisitor.THIS_NAME);
-      }
-      for (int i = 0; i < arguments.size(); i++) {
-        JsExpression e = arguments.get(i);
-        JsParameter p = callee.getParameters().get(i);
-
-        if (isVolatile(e, callee)) {
-          requiredOrder.add(p.getName());
-        }
-      }
-
-      // This would indicate that isVolatile changed its output between
-      // the if statement and the loop.
-      assert requiredOrder.size() > 0;
-
-      /*
-       * Verify that the non-reorderable arguments are evaluated in the right
-       * order.
-       */
-      EvaluationOrderVisitor orderVisitor = new EvaluationOrderVisitor(
-          requiredOrder, callee);
-      orderVisitor.accept(toInline);
-      if (!orderVisitor.maintainsOrder()) {
-        return false;
-      }
-    }
-
-    // Check that parameters aren't used in such a way as to prohibit inlining
-    ParameterUsageVisitor v = new ParameterUsageVisitor(thisExpr != null,
-        parameterNames);
-    v.accept(toInline);
-    if (v.hasViolation()) {
-      return false;
-    }
-
-    // Hooray!
-    return true;
-  }
-
-  /**
    * This is used to indicate if a given statement would terminate the list of hoisted
    * expressions.
    */
   private static boolean isReturnStatement(JsStatement statement) {
     return statement instanceof JsReturn;
-  }
-
-  /**
-   * Indicates if an expression would create side effects or possibly be
-   * affected by side effects when evaluated within a particular function
-   * context.
-   */
-  private static boolean isVolatile(JsExpression e, JsFunction context) {
-    return isVolatile(Collections.singletonList(e), context);
-  }
-
-  /**
-   * Indicates if a list of expressions would create side effects or possibly be
-   * affected by side effects when evaluated within a particular function
-   * context.
-   */
-  private static boolean isVolatile(List<JsExpression> list, JsFunction context) {
-    return hasSideEffects(list) || affectedBySideEffects(list, context);
   }
 
   /**

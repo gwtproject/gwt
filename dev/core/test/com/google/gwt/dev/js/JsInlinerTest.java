@@ -264,6 +264,55 @@ public class JsInlinerTest extends OptimizerTestBase {
   }
 
   /**
+   * Test that a nested function in the caller breaks argument ordering.
+   */
+  public void testOrderingCallerWithNestedFunction() throws Exception {
+    String code = Joiner.on('\n').join(
+        // callee evaluates its arguments in reverse
+        "function callee(a, b) { return b + a; }",
+
+        // the nested function leaves the caller's locals open to side effects
+        "function caller_doNotInline() {",
+        "  var closure = function() { return global; };",
+        "  var first = one;",
+        "  var second = two;",
+        "  return closure() + callee(first, second);",
+        "  }",
+
+        // bootstrap the program
+        "caller_doNotInline();");
+
+    verifyNoChange(code);
+  }
+
+  /**
+   * Test that a caller without nested functions does not break argument ordering.
+   */
+  public void testOrderingCallerWithoutNestedFunction() throws Exception {
+    String code = Joiner.on('\n').join(
+        // callee evaluates its arguments in reverse
+        "function callee(a, b) { return b + a; }",
+
+        // with no nested function the caller's locals cannot be affected by side effects
+        "function caller_doNotInline() {",
+        "  var first = one;",
+        "  var second = two;",
+        "  return callee(first, second);",
+        "  }",
+
+        // bootstrap the program
+        "caller_doNotInline();");
+
+    String expected = Joiner.on('\n').join(
+        "function caller_doNotInline() {",
+        "  var first = one; var second = two; return second + first;",
+        "  }",
+        "caller_doNotInline();");
+
+    verifyOptimized(expected, code);
+  }
+
+  /**
    * Test that a field reference breaks argument ordering.
    */
   public void testOrderingField() throws Exception {

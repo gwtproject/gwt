@@ -272,7 +272,7 @@ public class JsDuplicateClinitRemoverTest extends OptimizerTestBase {
         "clinit_A();"
         )
         .into(CLINIT_DECL,
-            "alert((clinit_A(), cond) ? a() : b());");
+            "alert((clinit_A(), cond ? a() : b()));");
 
     optimize(CLINIT_DECL,
         "clinit_A();",

@@ -94,17 +94,20 @@ public class ExternalClassesCollector extends DefaultTreeVisitor implements CssC
    * <p>The set will contain also the class names that are not in the AST anymore (defined in a
    * conditional node that has been evaluated to false) and are not associated to a java method.
    * That doesn't make sense to rename these class names because they are not in the final css
-   * and javascript. Moreover we handle the case where an {@code @external} related to these
+   * and JavaScript. Moreover we handle the case where an {@code @external} related to these
    * style classes has been removed from the AST (because it was also defined in a conditional
    * node evaluated to false) and the compiler doesn't have to throw and error for this case.
-   * <pre>
-   *   /{@literal *} conditional node evaluated to false at compile time {@literal *}/
+   *
+   * <p>The snippet below shows a conditional node evaluated to false at compile time.</p>
+   *  <pre>
+   *  {@code
    *   @if (is("property", "true")) {
    *     @external foo;
    *     .foo {
    *       width: 100%;
    *     }
    *   }
+   * }
    * </pre>
    *
    * @param styleClassesSet a set of class names that should be filtered to

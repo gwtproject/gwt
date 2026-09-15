@@ -353,7 +353,7 @@ public class Devirtualizer {
 
   /**
    * Creates and empty devirtualized method for devirtualizing {@code method} in class
-   * {@code inclass}.
+   * {@code inClass}.
    */
   private JMethod createDevirtualMethodFor(JMethod method, JDeclaredType inClass) {
     SourceInfo sourceInfo = method.getSourceInfo().makeChild();

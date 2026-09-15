@@ -28,7 +28,7 @@ import java.util.Locale;
 /**
  * Miscellaneous tests of the Java to JavaScript compiler.
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "DuplicateBranches"})
 public class CompilerTest extends GWTTestCase {
   interface MyMap {
     Object get(String key);

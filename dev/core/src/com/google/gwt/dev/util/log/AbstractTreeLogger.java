@@ -334,7 +334,7 @@ public abstract class AbstractTreeLogger extends TreeLogger implements CanUpdate
    * @param t a possibly null {@link Throwable}
    * @return true if {@link OutOfMemoryError} or {@link StackOverflowError}
    *         appears anywhere in the cause list or if <code>t</code> is an
-   *         {@link OutOfMemoryError} or {@link StackOverflowError.
+   *         {@link OutOfMemoryError} or {@link StackOverflowError}.
    */
   private String causedBySpecialError(Throwable t) {
     while (t != null) {

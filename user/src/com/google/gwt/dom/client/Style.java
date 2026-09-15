@@ -407,6 +407,7 @@ public class Style extends JavaScriptObject {
   /**
    * Enum for the float property.
    */
+  @SuppressWarnings("JavaLangClash")
   public enum Float implements HasCssName {
     LEFT {
       @Override

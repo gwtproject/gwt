@@ -230,7 +230,7 @@ public class ProblemReport {
    * Adds an entry to one of the problem maps.
    * 
    * @param type the type to add
-   * @param message the message to add for {@code type}
+   * @param problem contains the message to add for {@code type}
    * @param map the map to add to
    */
   private void addToMap(JClassType type, Problem problem, Map<JClassType, List<Problem>> map) {

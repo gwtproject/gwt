@@ -55,10 +55,12 @@ public class Java8Test extends GWTTestCase {
     T run(int a, int b);
   }
 
+  @SuppressWarnings({"JavaLangClash", "TypeNameShadowing"})
   interface Lambda2<String> {
     boolean run(String a, String b);
   }
 
+  @SuppressWarnings({"JavaLangClash", "TypeNameShadowing"})
   interface Lambda3<String> {
     boolean run(String a);
   }

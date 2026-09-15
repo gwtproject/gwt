@@ -24,7 +24,7 @@ package com.google.gwt.dom.client;
  * </span>
  * </p>
  * 
- * @see <a href="http://www.w3.org/TR/html5/video.html#video">W3C HTML 5 Specification</a>
+ * @see <a href="https://html.spec.whatwg.org/multipage/media.html#the-video-element">W3C HTML 5 Specification</a>
  */
 @TagName(VideoElement.TAG)
 public class VideoElement extends MediaElement {

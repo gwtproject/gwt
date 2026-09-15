@@ -63,7 +63,7 @@ class Pages {
     final URL resource;
 
     /**
-     * @see {@link #newHtmlPage}.
+     * @see #newHtmlPage
      */
     private HtmlPage(String variableName, JsonObject json, URL resource) {
       this.variableName = variableName;

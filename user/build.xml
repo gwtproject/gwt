@@ -159,7 +159,8 @@
       <move file="${project.build}/no-servlet-src/com/google/gwt/user/server/Util.java" tofile="${project.build}/jakarta-src/com/google/gwt/user/server/jakarta/Util.java">
         <filterchain>
           <tokenfilter>
-            <replacestring from="com.google.gwt.user.server" to="com.google.gwt.user.server.jakarta"/>
+            <replacestring from="com.google.gwt.user.server.rpc" to="com.google.gwt.user.server.rpc.jakarta"/>
+            <replacestring from="package com.google.gwt.user.server" to="package com.google.gwt.user.server.jakarta"/>
             <replacestring from="javax.servlet" to="jakarta.servlet"/>
           </tokenfilter>
         </filterchain>

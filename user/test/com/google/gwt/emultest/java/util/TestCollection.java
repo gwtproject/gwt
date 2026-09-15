@@ -89,17 +89,14 @@ import java.util.Set;
  * Those methods should provide a confirmed collection implementation that's compatible with your
  * collection implementation.
  *
- * <p>If you're extending {@link TestList}, {@link TestSet}, or {@link TestBag}, you probably don't
+ * <p>If you're extending {@link TestList} or {@link TestSet} you probably don't
  * have to worry about the above methods, because those three classes already override the methods
  * to provide standard JDK confirmed collections.
  *
  * <p><B>Other notes</B>
  *
  * <p>If your {@link Collection} fails one of these tests by design, you may still use this base set
- * of cases. Simply override the test case (method) your {@link Collection} fails. For instance, the
- * {@link #testIteratorFailFast()} method is provided since most collections have fail-fast
- * iterators; however, that's not strictly required by the collection contract, so you may want to
- * override that method to do nothing.
+ * of cases. Simply override the test case (method) your {@link Collection} fails.
  *
  * <p>
  */

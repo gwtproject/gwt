@@ -64,9 +64,6 @@ public class ModulePanel extends JPanel implements Disconnectable {
     session.addModule(moduleName, this);
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.dev.Disconnectable#disconnect()
-   */
   @Override
   public void disconnect() {
     setDisconnected();
@@ -76,9 +73,6 @@ public class ModulePanel extends JPanel implements Disconnectable {
     return loggerPanel.getLogger();
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.dev.Disconnectable#isDisconnected()
-   */
   @Override
   public boolean isDisconnected() {
     return disconnected;

@@ -218,7 +218,7 @@ class TypeIndexedSet<T extends Comparable> extends ForwardingSortedSet<T> implem
     private transient Multimap<Class<?>, Comparable> index = null;
 
     /**
-     * Caches the results of {@link #find(Class)}.  If an entry for the Class
+     * Caches the results of {@link #findAssignableTo(Class)}.  If an entry for the Class
      * being found is located in the cache, it can be returned immediately.
      *
      * <p>If a set is mutated, the cache is cleared.

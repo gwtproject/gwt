@@ -34,7 +34,7 @@ import com.google.web.bindery.event.shared.EventBus;
  * Polymorphism is not supported at this time. RequestFactory encoding and
  * decoding requires exact knowledge of the concrete type. If a method declares
  * a given type <code>T</code> as a parameter or return type, only
- * <code>T</code>'s transferrable properties will be sent over the wire if it is
+ * <code>T</code>'s transferable properties will be sent over the wire if it is
  * a proxy, even if the underlying domain value contains extra fields, in
  * effect, treating it as an instance of the supertype. Returning abstract
  * supertypes of value types is not supported (e.g. Object, Enum, Number).

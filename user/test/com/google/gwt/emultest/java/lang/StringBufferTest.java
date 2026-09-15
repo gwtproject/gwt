@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 /**
  * This class tests classes StringBuffer and StringBuilder.
  */
+@SuppressWarnings("UnnecessaryStringBuilder")
 public class StringBufferTest extends GWTTestCase {
 
   private static void assertEqualsReverse(String expected, String input) {

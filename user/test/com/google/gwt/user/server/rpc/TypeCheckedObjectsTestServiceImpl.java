@@ -30,12 +30,6 @@ import com.google.gwt.user.client.rpc.TypeUncheckedGenericClass;
 public class TypeCheckedObjectsTestServiceImpl extends RemoteServiceServlet implements
     TypeCheckedObjectsTestService {
 
-  /*
-   * @see
-   * com.google.gwt.user.client.rpc.TypeCheckedObjectsTestService#echo(com.google
-   * .
-   * gwt.user.client.rpc.TypeCheckedObjectsTestSetFactory.TypeCheckedFieldClass)
-   */
   @Override
   public TypeCheckedFieldClass<Integer, String> echo(TypeCheckedFieldClass<Integer, String> arg1) {
     if (!TypeCheckedObjectsTestSetValidator.isValid(arg1)) {
@@ -45,12 +39,6 @@ public class TypeCheckedObjectsTestServiceImpl extends RemoteServiceServlet impl
     return arg1;
   }
 
-  /*
-   * @see
-   * com.google.gwt.user.client.rpc.TypeCheckedObjectsTestService#echo(com.google
-   * .
-   * gwt.user.client.rpc.TypeCheckedObjectsTestSetFactory.TypeCheckedNestedLists)
-   */
   @Override
   public TypeCheckedNestedLists echo(TypeCheckedNestedLists arg1) {
     if (!TypeCheckedObjectsTestSetValidator.isValid(arg1)) {
@@ -60,11 +48,6 @@ public class TypeCheckedObjectsTestServiceImpl extends RemoteServiceServlet impl
     return arg1;
   }
 
-  /*
-   * @see
-   * com.google.gwt.user.client.rpc.TypeCheckedObjectsTestService#echo(com.google
-   * .gwt.user.client.rpc.TypeCheckedGenericClass)
-   */
   @Override
   public TypeCheckedGenericClass<Integer, String> echo(
       TypeCheckedGenericClass<Integer, String> arg1) {
@@ -75,12 +58,6 @@ public class TypeCheckedObjectsTestServiceImpl extends RemoteServiceServlet impl
     return arg1;
   }
 
-  /*
-   * @see
-   * com.google.gwt.user.client.rpc.TypeCheckedObjectsTestService#echo(com.google
-   * .
-   * gwt.user.client.rpc.TypeCheckedObjectsTestSetFactory.TypeCheckedSuperClass)
-   */
   @Override
   public TypeCheckedSuperClass<Integer, String> echo(TypeCheckedSuperClass<Integer, String> arg1) {
     if (!TypeCheckedObjectsTestSetValidator.isValid(arg1)) {
@@ -90,11 +67,6 @@ public class TypeCheckedObjectsTestServiceImpl extends RemoteServiceServlet impl
     return arg1;
   }
 
-  /*
-   * @see
-   * com.google.gwt.user.client.rpc.TypeCheckedObjectsTestService#echo(com.google
-   * .gwt.user.client.rpc.TypeUncheckedGenericClass)
-   */
   @Override
   public TypeUncheckedGenericClass<Integer, String> echo(
       TypeUncheckedGenericClass<Integer, String> arg1) {

@@ -19,7 +19,7 @@ package com.google.gwt.typedarrays.shared;
  * A view representing an {@link ArrayBuffer} as 8-bit unsigned integers.  Storing
  * out-of-range values are mapped to valid values by clamping to the range 0-255.
  * 
- * {@link "http://www.khronos.org/registry/typedarray/specs/latest/#7"}
+ * @see <a href="https://262.ecma-international.org/6.0/#sec-typedarray-objects">typed array specification</a>
  */
 public interface Uint8ClampedArray extends Uint8Array {
 

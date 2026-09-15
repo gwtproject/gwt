@@ -23,17 +23,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * A class for regular expressions with features like Javascript's RegExp, plus
- * Javascript String's replace and split methods (which can take a RegExp
+ * A class for regular expressions with features like JavaScript's RegExp, plus
+ * JavaScript String's replace and split methods (which can take a RegExp
  * parameter). The pure Java implementation (for server-side use) uses Java's
  * Pattern class, unavailable under GWT. The super-sourced GWT implementation
- * simply calls on to the native Javascript classes.
+ * simply calls on to the native JavaScript classes.
  * <p>
  * There are a few small incompatibilities between the two implementations.
- * Java-specific constructs in the regular expression syntax (e.g. [a-z&&[^bc]],
- * (?<=foo), \A, \Q) work only in the pure Java implementation, not the GWT
- * implementation, and are not rejected by either. Also, the Javascript-specific
- * constructs $` and $' in the replacement expression work only in the GWT
+ * Java-specific constructs in the regular expression syntax (e.g. {@code [a-z&&[^bc]]},
+ * {@code (?<=foo)}, {@code \A}, {@code \Q} work only in the pure Java implementation, not the GWT
+ * implementation, and are not rejected by either. Also, the JavaScript-specific
+ * constructs {@code $`} and {@code $'} in the replacement expression work only in the GWT
  * implementation, not the pure Java implementation, which rejects them.
  */
 public class RegExp {

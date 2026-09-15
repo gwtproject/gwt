@@ -315,12 +315,9 @@ public abstract class ServiceLayer {
   /**
    * Return the domain service method associated with a RequestContext method
    * declaration. The {@code requestContextMethod} will have been previously
-   * resolved by {@link #resolveRequestContextMethod(String, String)}.
+   * resolved by {@link #resolveRequestContextMethod(String)}.
    * 
-   * @param requestContext the RequestContext requested by the client
-   * @param requestContextMethod a RequestContext method declaration. Note that
-   *          this Method may be defined in a supertype of
-   *          {@code requestContext}
+   * @param operation the operation
    * @return the domain service method that should be invoked
    */
   public abstract Method resolveDomainMethod(String operation);

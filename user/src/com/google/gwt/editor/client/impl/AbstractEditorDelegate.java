@@ -216,7 +216,7 @@ public abstract class AbstractEditorDelegate<T, E extends Editor<T>> implements
   protected abstract void setObject(T object);
 
   /**
-   * Indicates whether or not calls to {@link #flush} are expected as part of
+   * Indicates whether calls to {@link com.google.gwt.editor.client.ValueAwareEditor#flush} are expected as part of
    * normal operation.
    */
   protected boolean shouldFlush() {

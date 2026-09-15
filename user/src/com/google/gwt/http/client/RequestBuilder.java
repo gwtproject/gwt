@@ -360,9 +360,9 @@ public class RequestBuilder {
   }
 
   /**
-   * Sets whether the cross origin request will include credentials.
+   * Sets whether the cross-origin request will include credentials.
    *
-   * @param withCredentials whether to include credentials in XHR
+   * @param includeCredentials whether to include credentials in XHR
    */
   public void setIncludeCredentials(boolean includeCredentials) {
     this.includeCredentials = includeCredentials;

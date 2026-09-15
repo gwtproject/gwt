@@ -93,7 +93,7 @@ public abstract class Column<T, C> implements HasCell<T, C>, HasAlignment {
   /**
    * Returns the {@link FieldUpdater} used for updating values in the column.
    * 
-   * @return an instance of FieldUpdater<T, C>
+   * @return an instance of {@code FieldUpdater<T, C>}
    * @see #setFieldUpdater(FieldUpdater)
    */
   @Override

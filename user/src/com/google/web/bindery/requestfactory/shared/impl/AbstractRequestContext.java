@@ -938,8 +938,8 @@ public abstract class AbstractRequestContext implements RequestContext, EntityCo
    * Create a new EntityProxy from a snapshot in the return payload.
    *
    * @param id the EntityProxyId of the object
-   * @param returnRecord the JSON map containing property/value pairs
-   * @param operations the WriteOperation eventns to broadcast over the EventBus
+   * @param op the operation message, containing a map of property/value pairs
+   * @param operations the WriteOperation events to broadcast over the EventBus
    */
   <Q extends BaseProxy> Q processReturnOperation(SimpleProxyId<Q> id, OperationMessage op,
       WriteOperation... operations) {

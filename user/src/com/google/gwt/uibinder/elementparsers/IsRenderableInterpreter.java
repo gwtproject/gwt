@@ -23,8 +23,9 @@ import com.google.gwt.uibinder.rebind.XMLElement;
 
 /**
  * Used by {@link RenderablePanelParser} to interpret renderable elements.
- * Declares the appropriate {@link IsRenderable}, and returns the correct HTML
- * to be inlined in the {@link RenderablePanel}.
+ * Declares the appropriate {@link com.google.gwt.user.client.ui.IsRenderable},
+ * and returns the correct HTML to be inlined in the
+ * {@link com.google.gwt.user.client.ui.RenderablePanel}.
  */
 class IsRenderableInterpreter implements XMLElement.Interpreter<String> {
 

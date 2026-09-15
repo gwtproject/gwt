@@ -355,9 +355,85 @@ public class JsInlinerTest extends OptimizerTestBase {
     verifyOptimized(expected, input);
   }
 
-  /*
-   * This is inspired by issue 5936:
-   * @see http://code.google.com/p/google-web-toolkit/issues/detail?id=5936
+  /**
+   * Regression test for <a href="https://github.com/gwtproject/gwt/issues/10389">issue 10389</a>.
+   * CommaNormalizer used to remove apparently unnecessary var decls, producing incorrect code.
+   */
+  public void testInlinePreservesVarDeclWithMultipleAssignments() throws Exception {
+    String code = Joiner.on('\n').join(
+        "function callee(arg) {",
+        "  var result;",
+        "  result = arg;",
+        "  result = result + 1;",
+        "  return result;",
+        "}",
+        "function caller_doNotInline(x) {",
+        "  return callee(x);",
+        "}",
+        "caller_doNotInline(5);");
+
+    String expected = Joiner.on('\n').join(
+        "function caller_doNotInline(x){var result;return result=x,result=result+1,result}",
+        "caller_doNotInline(5);");
+
+    verifyOptimized(expected, code);
+  }
+
+  /**
+   * Regression test for <a href="https://github.com/gwtproject/gwt/issues/10389">issue 10389</a>.
+   * CommaNormalizer visited all comma expressions in the inlined body, including pre-existing ones,
+   * which could result in incorrectly optimized inlined output.
+   */
+  public void testInlinePreservesVarDeclWithCommaInSubexpression() throws Exception {
+    String code = Joiner.on('\n').join(
+        "function callee() {",
+        "  var a;",
+        "  return bar((a = baz(), a), a);",
+        "}",
+        "function caller_doNotInline() {",
+        "  return callee();",
+        "}",
+        "caller_doNotInline();");
+
+    String expected = Joiner.on('\n').join(
+        "function caller_doNotInline(){var a;return bar((a=baz(),a),a)}",
+        "caller_doNotInline();");
+
+    verifyOptimized(expected, code);
+  }
+
+  /**
+   * This is inspired by <a href="https://github.com/gwtproject/gwt/issues/10389">issue 10389</a>.
+   */
+  public void testDeclareLocalStillReferencedAfterCommaNormalization() throws Exception {
+    String code = Joiner.on('\n').join(
+        "function readUnsignedShort(t){",
+        "  var b1 = t.read();",
+        "  var b2 = t.read();",
+        "  var result = b2;",
+        "  result = (result << 8) | (b1 & 255);",
+        "  return result;",
+        "}",
+
+        "function readChar_doNotInline(t){",
+        "  return readUnsignedShort(t) & 65535;",
+        "}",
+
+        "readChar_doNotInline(o);");
+
+    String expected = Joiner.on('\n').join(
+        "function readChar_doNotInline(t){",
+        "  var b1,b2,result;",
+        "  return (b1=t.read(),b2=t.read(),result=b2,result=result<<8|b1&255,result)&65535;",
+        "}",
+
+        "readChar_doNotInline(o);");
+
+    verifyOptimized(expected, code);
+  }
+
+  /**
+   * This is inspired by <a href="https://github.com/gwtproject/gwt/issues/5935">issue 5935</a>.
    */
   public void testPreserveNameScopeWithDoubleInliningAndObfuscation() throws Exception {
     String code = Joiner.on('\n').join(
@@ -382,8 +458,8 @@ public class JsInlinerTest extends OptimizerTestBase {
         "var x = 10; start(x);");
 
     String expected = Joiner.on('\n').join(
-        "function c(a){var b;b='t';if(a!=10){$wnd.alert('y != 10')}}",
-        "var d=10;c(d);");
+        "function d(a){var b,c;b=(c='t',c=c+'',c);if(a!=10){$wnd.alert('y != 10')}}",
+        "var e=10;d(e);");
 
     verifyOptimizedObfuscated(expected, code);
   }

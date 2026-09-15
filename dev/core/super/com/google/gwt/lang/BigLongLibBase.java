@@ -21,7 +21,7 @@ package com.google.gwt.lang;
  */
 class BigLongLibBase {
 
-  /*
+  /**
    * Implementation: A LongEmul containing three values {l, m, h} (low, middle,
    * high) such that (x.l + ((long) x.m << 22) + ((long) x.h << 44)) is equal to
    * the original long integer. The constant 22 is chosen since some browsers

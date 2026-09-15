@@ -763,7 +763,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
       "Malformed HTML: The table section returned by HeaderBuilder or FooterBuilder must use the "
           + "tag name thead or tfoot, as appropriate, and cannot contain any attributes or styles.";
 
-  /*
+  /**
    * The table specific {@link Impl}.
    */
   private static Impl TABLE_IMPL;
@@ -1664,7 +1664,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
    * Sets the skipRowHoverStyleUpdate flag. If set, the CellTable will not update
    * the row's style on row-level hover events (MOUSEOVER and MOUSEOUT).
    *
-   * @param skipRowHoverCheck the new flag value
+   * @param skipRowHoverStyleUpdate the new flag value
    */
   public void setSkipRowHoverStyleUpdate(boolean skipRowHoverStyleUpdate) {
     this.skipRowHoverStyleUpdate = skipRowHoverStyleUpdate;

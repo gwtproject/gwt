@@ -236,7 +236,7 @@ public abstract class AbstractEditorDriverGenerator extends Generator {
 
   /**
    * Create an EditorContext implementation that will provide access to
-   * {@link data} owned by {@link parent}. In other words, given the EditorData
+   * {@code data} owned by {@code parent}. In other words, given the EditorData
    * for a {@code PersonEditor} and the EditorData for a {@code AddressEditor}
    * nested in the {@code PersonEditor}, create an EditorContext that will
    * describe the relationship.

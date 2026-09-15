@@ -25,8 +25,8 @@ import com.google.gwt.uibinder.rebind.XMLElement;
  * references.
  * <p>
  * Simple String literals are passed through
- * {@link com.google.gwt.safehtml.shared.UriUtils#fromConstantString(String)
- * UriUtils.fromConstantString(String)}
+ * {@link com.google.gwt.safehtml.shared.UriUtils#fromSafeConstant(String)
+ * UriUtils.fromSafeConstant(String)}
  * <p>
  * Accepts concatenated string expressions, mainly for compatibility with legacy
  * <code>&lt;a href="{foo.bar}{baz.bang}"></code> abuses. Passes such nonsense

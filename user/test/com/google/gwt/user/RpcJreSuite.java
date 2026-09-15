@@ -29,6 +29,7 @@ import com.google.gwt.user.server.rpc.RPCRequestTest;
 import com.google.gwt.user.server.rpc.RPCServletUtilsTest;
 import com.google.gwt.user.server.rpc.RPCTest;
 import com.google.gwt.user.server.rpc.RPCTypeCheckArraysTest;
+import com.google.gwt.user.server.rpc.RPCTypeCheckCollectionsTest;
 import com.google.gwt.user.server.rpc.RPCTypeCheckTest;
 import com.google.gwt.user.server.rpc.RemoteServiceServletTest;
 import com.google.gwt.user.server.rpc.SerializationPolicyLoaderTest;
@@ -69,6 +70,7 @@ public class RpcJreSuite {
     suite.addTestSuite(RPCServletUtilsTest.class);
     suite.addTestSuite(RPCRequestTest.class);
     suite.addTestSuite(RPCTypeCheckArraysTest.class);
+    suite.addTestSuite(RPCTypeCheckCollectionsTest.class);
     suite.addTestSuite(Base64Test.class);
     suite.addTestSuite(UtilTest.class);
     suite.addTestSuite(AbstractXsrfProtectedServiceServletTest.class);

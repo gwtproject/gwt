@@ -494,10 +494,6 @@ public class RPCTypeCheckFactory {
   }
 
   private void writeListBody(List<?> list) throws SerializationException {
-    if (list.getClass().toString().matches(".*Arrays\\$ArrayList.*")) {
-      write(list.toArray());
-      return;
-    }
     if (!list.getClass().toString().matches(".*Collections\\$SingletonList.*")) {
       bodyString += Integer.toString(list.size()) + RPC_SEPARATOR_CHAR;
     }

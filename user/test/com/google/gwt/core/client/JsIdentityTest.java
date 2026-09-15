@@ -21,11 +21,7 @@ import com.google.gwt.junit.client.GWTTestCase;
  * Test Js Identity.
  */
 public class JsIdentityTest extends GWTTestCase {
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.google.gwt.junit.client.GWTTestCase#getModuleName()
-   */
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.core.Core";

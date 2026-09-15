@@ -24,8 +24,8 @@ import java.lang.annotation.Target;
 /**
  * Annotation on methods of {@link RequestContext}, {@link EntityProxy}, or
  * {@link ValueProxy} interfaces so that the
- * {@link com.google.web.bindery.requestfactory.server.RequestFactoryInterfaceValidator
- * RequestFactoryInterfaceValidator} doesn't enforce the presence of a
+ * {@link com.google.web.bindery.requestfactory.apt.RfValidator
+ * RfValidator} doesn't enforce the presence of a
  * corresponding method on the domain type.
  */
 @Documented

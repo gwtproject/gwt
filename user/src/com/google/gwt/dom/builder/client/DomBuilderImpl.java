@@ -599,7 +599,7 @@ class DomBuilderImpl extends ElementBuilderImpl {
    * Assert that the builder is in a state where an attribute can be added.
    * 
    * @return the element on which the attribute can be set
-   * @throw {@link IllegalStateException} if the start tag is closed
+   * @throws IllegalStateException if the start tag is closed
    */
   Element assertCanAddAttribute() {
     assertCanAddAttributeImpl();
@@ -610,7 +610,7 @@ class DomBuilderImpl extends ElementBuilderImpl {
    * Assert that the builder is in a state where a style property can be added.
    * 
    * @return the {@link Style} on which the property can be set
-   * @throw {@link IllegalStateException} if the style is not accessible
+   * @throws IllegalStateException if the style is not accessible
    */
   Style assertCanAddStyleProperty() {
     assertCanAddStylePropertyImpl();

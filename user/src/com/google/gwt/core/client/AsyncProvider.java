@@ -20,8 +20,8 @@ package com.google.gwt.core.client;
  * An object capable of providing an instance of type T asynchronously
  * via {@link Callback}. For example, the instance might be
  * created within a GWT.runAsync block using the following template:
- *
- *  <pre style=code>
+ * <pre>
+ *  {@code
  *      public void get(final Callback<T, Throwable> callback) {
  *        GWT.runAsync(new RunAsyncCallback() {
  *          public void onSuccess() {
@@ -32,8 +32,8 @@ package com.google.gwt.core.client;
  *          }
  *        }
  *      }
- *  </pre>
- *
+ *  }
+ * </pre>
  * @param <T> the type of the provided value
  * @param <F> the type returned on failure
  */

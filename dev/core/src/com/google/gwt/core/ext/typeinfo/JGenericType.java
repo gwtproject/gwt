@@ -24,8 +24,8 @@ public interface JGenericType extends JRealClassType, HasTypeParameters {
 
   /**
    * Returns the raw type for this generic type. The raw type removes all 'generics' information
-   * from the class. i.e. {@code void a1(List<T>)} & {@code void a2(List<String>)} becomes
-   * {@code void a1(List)} & {@code void a2(List))} respectively.
+   * from the class. i.e. {@code void a1(List<T>)} and {@code void a2(List<String>)} becomes
+   * {@code void a1(List)} and {@code void a2(List))} respectively.
    */
   JRawType getRawType();
 }

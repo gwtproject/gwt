@@ -147,7 +147,7 @@ public abstract class StackTraceDeobfuscator {
   }
 
   private static final Pattern JsniRefPattern = Pattern.compile("@?([^:]+)::([^(]+)(\\((.*)\\))?");
-  private static final Pattern fragmentIdPattern = Pattern.compile(".*(\\d+)\\.js");
+  private static final Pattern fragmentIdPattern = Pattern.compile("(?:.*\\D)?(\\d+)\\.js");
   // Matches ServerSerializationStreamReader: the strong name reaches us straight from the
   // client (X-GWT-Permutation header) and is concatenated into symbol/source map file names.
   private static final Pattern strongNamePattern = Pattern.compile("[a-zA-Z0-9_]+");

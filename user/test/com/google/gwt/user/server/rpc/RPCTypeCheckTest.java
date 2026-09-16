@@ -2356,12 +2356,12 @@ public class RPCTypeCheckTest extends TestCase {
    * This checks that an EnumMap whose exemplar is the declared key type is
    * accepted, and that it is built with that key type.
    */
-  public void testEnumMapTypedValid() throws Exception {
+  public void testEnumMapTypedValid() {
     RPCRequest decoded = RPC.decodeRequest(generateEnumMapTypedValid());
     Object deserializedArg = decoded.getParameters()[0];
     assertEquals(EnumMap.class, deserializedArg.getClass());
 
-    EnumMap<NEnum, Integer> expected = new EnumMap<NEnum, Integer>(NEnum.class);
+    EnumMap<NEnum, Integer> expected = new EnumMap<>(NEnum.class);
     expected.put(NEnum.B, 12345);
     assertEquals(expected, deserializedArg);
   }

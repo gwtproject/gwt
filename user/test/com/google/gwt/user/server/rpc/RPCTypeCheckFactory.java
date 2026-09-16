@@ -27,6 +27,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.Comparator;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
@@ -421,7 +422,7 @@ public class RPCTypeCheckFactory {
    */
   public void writeEnumMapWithEntry(Enum<?> exemplar, Enum<?> key, Integer value)
       throws SerializationException {
-    writeStringFromTable(generateSerializedClassString(java.util.EnumMap.class));
+    writeStringFromTable(generateSerializedClassString(EnumMap.class));
     writeEnum(exemplar);
     bodyString += "1" + RPC_SEPARATOR_CHAR;
     writeEnum(key);
@@ -434,7 +435,7 @@ public class RPCTypeCheckFactory {
    * body is empty.
    */
   public void writeEnumMapWithExemplar(Enum<?> exemplar) {
-    writeStringFromTable(generateSerializedClassString(java.util.EnumMap.class));
+    writeStringFromTable(generateSerializedClassString(EnumMap.class));
     writeEnum(exemplar);
     bodyString += "0" + RPC_SEPARATOR_CHAR; // empty map body
   }
@@ -445,7 +446,7 @@ public class RPCTypeCheckFactory {
    */
   public void writeEnumMapWithSpoofedExemplar(int spoofedExemplar)
       throws SerializationException {
-    writeStringFromTable(generateSerializedClassString(java.util.EnumMap.class));
+    writeStringFromTable(generateSerializedClassString(EnumMap.class));
     write(Integer.valueOf(spoofedExemplar));
     bodyString += "0" + RPC_SEPARATOR_CHAR; // empty map body
   }

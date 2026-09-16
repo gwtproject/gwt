@@ -278,9 +278,9 @@ public class JsDuplicateClinitRemover extends JsModVisitor {
       }
     } else {
       if (x.getFinallyBlock() != null) {
-        // On the other hand, if there is a finally block, the try block isn't guaranteed to complete
-        // before finally runs, so finally needs to start from the same initial state as try did. We
-        // can do that by branch()ing finally first, then accept()ing try
+        // On the other hand, if there is a finally block, the try block isn't guaranteed to
+        // complete before finally runs, so finally needs to start from the same initial state as
+        // try did. We can do that by branch()ing finally first, then accept()ing try.
         x.setFinallyBlock(branch(x.getFinallyBlock()));
       }
       x.setTryBlock(accept(x.getTryBlock()));

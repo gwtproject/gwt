@@ -591,6 +591,21 @@ public class RPCTypeCheckTest extends TestCase {
     }
   }
 
+  private static String generateEnumMapValid(Enum<?> exemplar, Enum<?> key) {
+    try {
+      RPCTypeCheckFactory strFactory =
+          new RPCTypeCheckFactory(ClassesParamTestClass.class, "testEnumMap");
+
+      strFactory.writeEnumMapWithEntry(exemplar, key, Integer.valueOf(12345));
+
+      return strFactory.toString();
+    } catch (Exception e) {
+      fail(e.getMessage());
+
+      return null;
+    }
+  }
+
   private static String generateEnumMapSpoofingEnum() {
     try {
       RPCTypeCheckFactory strFactory =
@@ -2335,6 +2350,29 @@ public class RPCTypeCheckTest extends TestCase {
       // Expected: a clean type-violation, not an uncaught NullPointerException
       assertEquals(SerializedTypeViolationException.class, e.getCause().getClass());
     }
+  }
+
+  /**
+   * This checks that an EnumMap on the raw parameter, which declares no key
+   * type, is accepted whichever enum its exemplar is, and that it is built with
+   * that enum as its key type.
+   */
+  public void testEnumMapValid() {
+    RPCRequest decoded = RPC.decodeRequest(generateEnumMapValid(NEnum.A, NEnum.B));
+    Object deserializedArg = decoded.getParameters()[0];
+    assertEquals(EnumMap.class, deserializedArg.getClass());
+
+    EnumMap<NEnum, Integer> expectedN = new EnumMap<>(NEnum.class);
+    expectedN.put(NEnum.B, 12345);
+    assertEquals(expectedN, deserializedArg);
+
+    decoded = RPC.decodeRequest(generateEnumMapValid(OEnum.A, OEnum.B));
+    deserializedArg = decoded.getParameters()[0];
+    assertEquals(EnumMap.class, deserializedArg.getClass());
+
+    EnumMap<OEnum, Integer> expectedO = new EnumMap<>(OEnum.class);
+    expectedO.put(OEnum.B, 12345);
+    assertEquals(expectedO, deserializedArg);
   }
 
   /**

@@ -1189,6 +1189,11 @@ public class JUnitShell extends DevMode {
     }), path, EnumSet.of(DispatcherType.REQUEST));
   }
 
+  @Override
+  protected String getJspLevel() {
+    return "17";
+  }
+
   private void checkArgs() {
     if (runStyle.getTries() > 1
         && !(batchingStrategy instanceof NoBatchingStrategy)) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 GWT Project Authors
+ * Copyright 2026 GWT Project Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -13,14 +13,7 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
-
 /**
- * Annotation with no bytecode for GWT, and multiple members.
+ * Annotation with no bytecode for GWT, and no target meta-annotation.
  */
-@Target({ElementType.METHOD, ElementType.TYPE_USE})
-public @interface SampleBytecodeOnlyNormalAnnotation {
-  int a();
-  int b();
-}
+public @interface SampleBytecodeOnlyNoTargetAnnotation { }

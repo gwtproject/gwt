@@ -29,8 +29,9 @@ import com.google.gwt.dev.js.ast.JsVars.JsVar;
 import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.util.collect.IdentityHashSet;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Set;
-import java.util.Stack;
 
 /**
  * Removes variable declarations and write-only assignments for local variables that are never read
@@ -73,7 +74,7 @@ public class JsUnusedVarPruner {
    */
   private static class FunctionVisitor extends JsVisitor {
     private int totalMods = 0;
-    private final Stack<Set<JsName>> namesStack = new Stack<>();
+    private final Deque<Set<JsName>> namesStack = new ArrayDeque<>();
 
     @Override
     public boolean visit(JsFunction x, JsContext ctx) {

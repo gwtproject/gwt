@@ -58,9 +58,13 @@ public class JsUnusedVarPrunerTest extends OptimizerTestBase {
   }
 
   public void testPreserveCompoundAssignment() throws Exception {
-    // Compound assignment reads the var, so it must be preserved.
+    // Compound assignment reads the var, so it must be preserved. Could be pruned in the future.
     assertEquals("function f(){var a=0;a+=1}\n",
         optimize("function f() { var a = 0; a += 1; }"));
+
+    // Similar, but actually use the compound assignment value
+    assertEquals("function f(){var a=0;alert(a+=1);alert(a+=1)}\n",
+        optimize("function f() { var a = 0; alert(a += 1); alert(a += 1); }"));
   }
 
   public void testPreserveIncrementedVar() throws Exception {

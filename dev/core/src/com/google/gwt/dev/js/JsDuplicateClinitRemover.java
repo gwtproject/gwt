@@ -51,13 +51,8 @@ import java.util.Set;
  * efficient elimination of duplicated calls, but it handles the general case
  * and is simple to verify.
  */
-public class DuplicateClinitRemover extends JsModVisitor {
-  private static final String NAME = DuplicateClinitRemover.class.getSimpleName();
-
-  /*
-   * TODO: Most of the special casing below can be removed if complex
-   * statements always use blocks, rather than plain statements.
-   */
+public class JsDuplicateClinitRemover extends JsModVisitor {
+  private static final String NAME = JsDuplicateClinitRemover.class.getSimpleName();
 
   /**
    * Retains the functions that we know have been called.
@@ -65,12 +60,12 @@ public class DuplicateClinitRemover extends JsModVisitor {
   private final Set<JsFunction> called;
   private final JsProgram program;
 
-  public DuplicateClinitRemover(JsProgram program) {
+  public JsDuplicateClinitRemover(JsProgram program) {
     this.program = program;
     this.called = new HashSet<>();
   }
 
-  public DuplicateClinitRemover(JsProgram program, Set<JsFunction> alreadyCalled) {
+  public JsDuplicateClinitRemover(JsProgram program, Set<JsFunction> alreadyCalled) {
     this.program = program;
     this.called = new HashSet<>(alreadyCalled);
   }
@@ -311,7 +306,7 @@ public class DuplicateClinitRemover extends JsModVisitor {
 
   private static int execImpl(JsProgram program) {
     try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
-      DuplicateClinitRemover r = new DuplicateClinitRemover(program);
+      JsDuplicateClinitRemover r = new JsDuplicateClinitRemover(program);
       r.accept(program);
       stats.recordModified(r.getNumMods());
 
@@ -320,13 +315,13 @@ public class DuplicateClinitRemover extends JsModVisitor {
   }
 
   private <T extends JsNode> void branch(List<T> x) {
-    DuplicateClinitRemover dup = new DuplicateClinitRemover(program, called);
+    JsDuplicateClinitRemover dup = new JsDuplicateClinitRemover(program, called);
     dup.acceptWithInsertRemove(x);
     numMods += dup.getNumMods();
   }
 
   private <T extends JsNode> T branch(T x) {
-    DuplicateClinitRemover dup = new DuplicateClinitRemover(program, called);
+    JsDuplicateClinitRemover dup = new JsDuplicateClinitRemover(program, called);
     T toReturn = dup.accept(x);
 
     if ((toReturn != x) && dup.getNumMods() == 0) {

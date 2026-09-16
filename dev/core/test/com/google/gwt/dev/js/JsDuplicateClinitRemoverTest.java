@@ -382,7 +382,7 @@ public class JsDuplicateClinitRemoverTest extends OptimizerTestBase {
   @Override
   protected boolean doOptimize(JsProgram program) {
     JsSymbolResolver.exec(program);
-    int changes = DuplicateClinitRemover.exec(program);
+    int changes = JsDuplicateClinitRemover.exec(program);
     // Duplicate clinits are replaced by nulls, so we need to run static eval to remove them
     JsStaticEval.exec(program);
     return changes != 0;

@@ -1089,7 +1089,7 @@ public class JsInliner {
      * so inlining never moves a function into the caller it rewrites.
      */
     private boolean containsNestedFunctions(JsFunction func) {
-      Boolean cached = containsNestedFunctionsCache.computeIfAbsent(
+      boolean cached = containsNestedFunctionsCache.computeIfAbsent(
           func, InliningVisitor::computeContainsNestedFunctions);
       assert cached == computeContainsNestedFunctions(func) : "Stale nested function memo";
       return cached;

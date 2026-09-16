@@ -278,7 +278,7 @@ public class DuplicateClinitRemover extends JsModVisitor {
       List<JsCatch> catches = x.getCatches();
       for (int i = 0; i < catches.size(); i++) {
         JsCatch aCatch = catches.get(i);
-        JsCatch c = accept(aCatch);
+        JsCatch c = branch(aCatch);
         catches.set(i, c);
       }
     } else {

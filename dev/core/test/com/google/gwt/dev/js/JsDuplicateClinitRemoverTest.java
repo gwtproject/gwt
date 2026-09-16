@@ -234,6 +234,8 @@ public class JsDuplicateClinitRemoverTest extends OptimizerTestBase {
 
   public void testKeepClinitsAroundTry() throws Exception {
     // Ensure we're careful with exceptions as flow control to avoid a clinit
+
+    // Can't guarantee that the clinit will run before any exception
     optimize(CLINIT_DECL, """
         try {
           a();
@@ -241,6 +243,27 @@ public class JsDuplicateClinitRemoverTest extends OptimizerTestBase {
         } catch (e) {
           clinit_A();
         }
+        """).noChange();
+
+    // Can't guarantee that the catch will be run
+    optimize(CLINIT_DECL, """
+        try {
+          a();
+        } catch (e) {
+          clinit_A();
+        }
+        clinit_A();
+        """).noChange();
+
+    // try might not complete and catch won't run the clinit, and catch returns control to surrounding block
+    optimize(CLINIT_DECL, """
+        try {
+          a();
+          clinit_A();
+        } catch (e) {
+          b();
+        }
+        clinit_A();
         """).noChange();
   }
 

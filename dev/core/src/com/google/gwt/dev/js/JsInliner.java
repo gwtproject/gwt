@@ -1091,6 +1091,8 @@ public class JsInliner {
     private boolean containsNestedFunctions(JsFunction func) {
       boolean cached = containsNestedFunctionsCache.computeIfAbsent(
           func, InliningVisitor::computeContainsNestedFunctions);
+      // Recomputing here defeats the purpose of memoizing, but only happens with assertions
+      // enabled. Do not turn it into an exception or remove it without measuring the cost.
       assert cached == computeContainsNestedFunctions(func) : "Stale nested function memo";
       return cached;
     }

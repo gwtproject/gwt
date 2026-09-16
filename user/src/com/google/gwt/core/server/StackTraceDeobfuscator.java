@@ -154,7 +154,7 @@ public abstract class StackTraceDeobfuscator {
   private static final int LINE_NUMBER_UNKNOWN = -1;
   private static final String SYMBOL_DATA_UNKNOWN = "";
 
-  private final Map<String, SourceMapping> sourceMaps = new HashMap<String, SourceMapping>();
+  private final Map<String, SourceMapping> sourceMaps = new ConcurrentHashMap<>();
   private final SymbolCache symbolCache = new SymbolCache();
   private boolean lazyLoad = false;
 
@@ -376,17 +376,18 @@ public abstract class StackTraceDeobfuscator {
   }
 
   private SourceMapping loadSourceMap(String permutationStrongName, int fragmentId) {
-    SourceMapping toReturn = sourceMaps.get(permutationStrongName + fragmentId);
-    if (toReturn == null && isValidStrongName(permutationStrongName)) {
+    if (!isValidStrongName(permutationStrongName)) {
+      return null;
+    }
+    return sourceMaps.computeIfAbsent(permutationStrongName + fragmentId, key -> {
       try {
         String sourceMapString = loadStreamAsString(
             getSourceMapInputStream(permutationStrongName, fragmentId));
-        toReturn = SourceMapConsumerFactory.parse(sourceMapString);
-        sourceMaps.put(permutationStrongName + fragmentId, toReturn);
+        return SourceMapConsumerFactory.parse(sourceMapString);
       } catch (Exception e) {
+        return null;
       }
-    }
-    return toReturn;
+    });
   }
 
   private String loadStreamAsString(InputStream stream) {

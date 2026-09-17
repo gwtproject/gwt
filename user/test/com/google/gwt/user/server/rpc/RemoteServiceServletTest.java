@@ -366,6 +366,41 @@ public class RemoteServiceServletTest extends TestCase {
     }
   }
 
+  /**
+   * A crafted moduleBaseURL containing ".." segments must not be able to walk
+   * out of the module directory when the strong name and file suffix are
+   * appended to build the serialization policy resource path.
+   */
+  public void testDoGetSerializationPolicy_ModuleBaseUrlTraversal()
+      throws ServletException {
+    final StringBuilder requestedResource = new StringBuilder();
+    MockServletContext mockContext = new MockServletContext() {
+      @Override
+      public InputStream getResourceAsStream(String resource) {
+        requestedResource.append(resource);
+        return null;
+      }
+    };
+    MockServletConfig mockConfig = new MockServletConfig(mockContext);
+
+    RemoteServiceServlet rss = new RemoteServiceServlet();
+
+    MockHttpServletRequestContextPath mockRequest = new MockHttpServletRequestContextPath();
+    rss.init(mockConfig);
+
+    mockRequest.contextPath = "/MyModule";
+
+    SerializationPolicy serializationPolicy = rss.doGetSerializationPolicy(
+        mockRequest, "http://www.google.com/MyModule/../../../secret", "12345");
+
+    // The traversal walks above the context path, so no policy is loaded and
+    // the resource path handed to the container never escapes the module dir.
+    assertNull(serializationPolicy);
+    assertNotNull(mockContext.messageLogged);
+    assertFalse("resource path must not contain a traversal segment: "
+        + requestedResource, requestedResource.toString().contains(".."));
+  }
+
   public void testDoGetSerializationPolicy_FailToOpenMD5Resource()
       throws ServletException {
     MockServletContext mockContext = new MockServletContext() {

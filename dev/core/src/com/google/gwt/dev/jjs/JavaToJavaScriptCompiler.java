@@ -131,7 +131,7 @@ import com.google.gwt.dev.jjs.impl.codesplitter.ReplaceRunAsyncs;
 import com.google.gwt.dev.jjs.impl.gflow.DataflowOptimizer;
 import com.google.gwt.dev.js.BaselineCoverageGatherer;
 import com.google.gwt.dev.js.CoverageInstrumentor;
-import com.google.gwt.dev.js.DuplicateClinitRemover;
+import com.google.gwt.dev.js.JsDuplicateClinitRemover;
 import com.google.gwt.dev.js.EvalFunctionsAtTopScope;
 import com.google.gwt.dev.js.FreshNameGenerator;
 import com.google.gwt.dev.js.JsBreakUpLargeVarStatements;
@@ -1022,6 +1022,8 @@ public final class JavaToJavaScriptCompiler {
         stats.recordModified(JsStaticEval.exec(jsProgram));
         // Inline Js function invocations
         stats.recordModified(JsInliner.exec(jsProgram, toInline));
+        // After inlining, reduce clinit calls within each function
+        stats.recordModified(JsDuplicateClinitRemover.exec(jsProgram));
         // Remove unused functions if possible.
         stats.recordModified(JsUnusedFunctionRemover.exec(jsProgram));
 
@@ -1036,10 +1038,6 @@ public final class JavaToJavaScriptCompiler {
       if (nodeChangeRate <= minChangeRate && sizeChangeRate <= minChangeRate) {
         break;
       }
-    }
-
-    if (optimizationLevel > OptionOptimize.OPTIMIZE_LEVEL_DRAFT) {
-      DuplicateClinitRemover.exec(jsProgram);
     }
   }
 

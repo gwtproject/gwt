@@ -54,18 +54,6 @@ import java.util.regex.Pattern;
  */
 public class JsUtils {
   /**
-   * Given a JsInvocation, determine if it is invoking a JsFunction that is
-   * specified to be executed only once during the program's lifetime.
-   */
-  public static JsFunction isExecuteOnce(JsInvocation invocation) {
-    JsFunction f = isFunction(invocation.getQualifier());
-    if (f != null && f.isClinit()) {
-      return f;
-    }
-    return null;
-  }
-
-  /**
    * Given an expression, determine if it is a JsNameRef that refers to a
    * statically-defined JsFunction.
    */

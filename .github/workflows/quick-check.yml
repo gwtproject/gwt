@@ -31,7 +31,7 @@ jobs:
       - name: Set up reviewdog for easier checks on the PR's checkstyle output
         uses: reviewdog/action-setup@d8a7baabd7f3e8544ee4dbde3ee41d0011c3a93f #v1.5.0
         with:
-          reviewdog_version: latest
+          reviewdog_version: v0.21.2
 
       - name: Build, style/api checks, produce docs
         # Presently this runs no tests at all, but could run quick tests

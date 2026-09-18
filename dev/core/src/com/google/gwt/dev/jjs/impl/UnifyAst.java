@@ -1030,11 +1030,11 @@ public class UnifyAst {
     }
     // Staleness calculations need to be able to trace from CompilationUnit name to the names of
     // immediately nested types. So record those associations now.
-    if (incrementalCompile) {
-      compilerContext.getMinimalRebuildCache().recordNestedTypeNamesPerType(unit);
-    }
     // TODO(zundel): ask for a recompile if deserialization fails?
     List<JDeclaredType> types = unit.getTypes();
+    if (incrementalCompile) {
+      compilerContext.getMinimalRebuildCache().recordNestedTypeNamesPerType(unit, types);
+    }
     assert containsAllTypes(unit, types);
     for (JDeclaredType type : types) {
       program.addType(type);

@@ -153,6 +153,7 @@ import com.google.gwt.dev.js.JsStaticEval;
 import com.google.gwt.dev.js.JsSymbolResolver;
 import com.google.gwt.dev.js.JsToStringGenerationVisitor;
 import com.google.gwt.dev.js.JsUnusedFunctionRemover;
+import com.google.gwt.dev.js.JsUnusedVarPruner;
 import com.google.gwt.dev.js.JsVerboseNamer;
 import com.google.gwt.dev.js.SizeBreakdown;
 import com.google.gwt.dev.js.ast.JavaScriptVerifier;
@@ -1024,6 +1025,8 @@ public final class JavaToJavaScriptCompiler {
         stats.recordModified(JsInliner.exec(jsProgram, toInline));
         // Remove unused functions if possible.
         stats.recordModified(JsUnusedFunctionRemover.exec(jsProgram));
+        // Remove unused local variable declarations and write-only assignments.
+        stats.recordModified(JsUnusedVarPruner.exec(jsProgram));
 
         nodeCount = jsProgram.getNodeCount();
         mods = stats.getNumMods();

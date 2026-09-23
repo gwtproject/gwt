@@ -203,22 +203,25 @@ public class MethodInlinerTest extends OptimizerTestBase {
           "}");
 
   /**
-   * The standard mock Double boxes with {@code new Double(d)}. Emulated Double boxes through
-   * {@code $create}, an unchecked cast of the primitive. The rewrite of {@code new Double} into
-   * {@code $create} is a pass this test does not run, so the mock calls it directly.
+   * Models the boxing path in emulated Double: valueOf calls $create, which uses uncheckedCast.
+   * The usual mock creates a Double with a constructor. Since this test does not run the pass
+   * that replaces constructor calls with $create, this mock calls $create directly.
    */
   private static final MockJavaResource BOXING_DOUBLE =
       JavaResourceBase.createMockJavaResource("java.lang.Double",
           "package java.lang;",
           "import javaemul.internal.JsUtils;",
           "public class Double extends Number {",
+          // AutoboxUtils requires an unboxing method even though this test only exercises boxing.
+          "  public double doubleValue() { return 0; }",
           "  public static Double valueOf(double d) { return $create(d); }",
           "  protected static Double $create(double x) { return JsUtils.uncheckedCast(x); }",
           "}");
 
   /**
-   * Since JsUtils.uncheckedCast stopped being JSNI it can be inlined, so the coercion it carries
-   * reaches whoever boxed the primitive. A double is never null, so the Double is not either.
+   * GWT 2.13 made JsUtils.uncheckedCast a Java method, allowing the inliner to expose its type
+   * coercion in the caller. The compiler can then use the primitive's non-null type to establish
+   * that the boxed result is non-null too. Keep that type information through inlining.
    */
   public void testBoxedPrimitiveIsNonNullOnceUncheckedCastIsInlined() throws Exception {
     addAll(JS_UTILS, BOXING_DOUBLE);

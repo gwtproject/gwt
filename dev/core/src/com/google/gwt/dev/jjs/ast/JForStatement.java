@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class JForStatement extends JStatement {
 
-  private JStatement body;
+  private JBlock body;
   private List<JStatement> initializers;
   private JExpression condition;
   private JExpression increments;
@@ -40,13 +40,13 @@ public class JForStatement extends JStatement {
     this.initializers = Lists.newArrayList(initializers);
     this.condition = condition;
     this.increments = increments;
-    this.body = body;
+    this.body = JBlock.ensureBlock(info, body);
   }
 
   /**
    * Returns the {@code for} statement body.
    */
-  public JStatement getBody() {
+  public JBlock getBody() {
     return body;
   }
 
@@ -81,9 +81,7 @@ public class JForStatement extends JStatement {
       if (increments != null) {
         increments = visitor.accept(increments);
       }
-      if (body != null) {
-        body = visitor.accept(body, true);
-      }
+      body = JBlock.ensureBlock(getSourceInfo(), visitor.accept(body, false));//TODO no tests fail without this change...
     }
     visitor.endVisit(this, ctx);
   }

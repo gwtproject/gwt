@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dom.client;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
@@ -29,6 +30,41 @@ public class StyleInjectorTest extends GWTTestCase {
   @Override
   public String getModuleName() {
     return "com.google.gwt.dom.DOMTest";
+  }
+
+  @SuppressWarnings("deprecation")
+  public void testStyleInjectorCopiesNonceFromExistingScriptElement() {
+    final String nonce = "StyleInjectorNonce";
+    ScriptElement noncedScript = Document.get().createScriptElement();
+    noncedScript.setAttribute("nonce", nonce);
+    Document.get().getHead().insertBefore(noncedScript, Document.get().getHead().getFirstChild());
+
+    StyleElement style = null;
+    try {
+      style = StyleInjector.injectStylesheet(".styleInjectorNonceTest { color: red; }");
+      assertEquals(nonce, getNonce(style));
+    } finally {
+      if (style != null) {
+        style.removeFromParent();
+      }
+      noncedScript.removeFromParent();
+    }
+  }
+
+  @SuppressWarnings("deprecation")
+  public void testStyleInjectorDoesNotCreateNonceWithoutSource() {
+    JavaScriptObject savedNonces = removeScriptNonces();
+    StyleElement style = null;
+    try {
+      assertFalse(hasNoncedScript());
+      style = StyleInjector.injectStylesheet(".styleInjectorNoNonceTest { color: blue; }");
+      assertNull(getNonce(style));
+    } finally {
+      if (style != null) {
+        style.removeFromParent();
+      }
+      restoreScriptNonces(savedNonces);
+    }
   }
 
   @SuppressWarnings("deprecation")
@@ -139,4 +175,31 @@ public class StyleInjectorTest extends GWTTestCase {
       delayTestFinish(TEST_DELAY);
     }
   }
+
+  private static native String getNonce(Element element) /*-{
+    return element['nonce'] || element.getAttribute('nonce') || null;
+  }-*/;
+
+  private static native boolean hasNoncedScript() /*-{
+    return !!$doc.querySelector('script[nonce]');
+  }-*/;
+
+  private static native JavaScriptObject removeScriptNonces() /*-{
+    var scripts = $doc.querySelectorAll('script[nonce]');
+    var savedNonces = [];
+    for (var i = 0; i < scripts.length; i++) {
+      savedNonces.push({
+        element: scripts[i],
+        nonce: scripts[i]['nonce'] || scripts[i].getAttribute('nonce')
+      });
+      scripts[i].removeAttribute('nonce');
+    }
+    return savedNonces;
+  }-*/;
+
+  private static native void restoreScriptNonces(JavaScriptObject savedNonces) /*-{
+    for (var i = 0; i < savedNonces.length; i++) {
+      savedNonces[i].element.setAttribute('nonce', savedNonces[i].nonce);
+    }
+  }-*/;
 }

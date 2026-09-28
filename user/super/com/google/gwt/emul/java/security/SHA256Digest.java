@@ -66,6 +66,16 @@ class SHA256Digest extends MessageDigest {
     byteCounter = 0;
   }
 
+  public Object clone() {
+    SHA256Digest copy = new SHA256Digest();
+    copy.wordBuffer = Arrays.copyOf(wordBuffer, wordBuffer.length);
+    copy.blockBuffer = Arrays.copyOf(blockBuffer, blockBuffer.length);
+    copy.wordOff = wordOff;
+    copy.byteCounter = byteCounter;
+    copy.blockOff = blockOff;
+    return copy;
+  }
+
   @Override
   protected void engineUpdate(byte input) {
     wordBuffer[wordOff] = input;

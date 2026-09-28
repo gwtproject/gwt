@@ -802,6 +802,109 @@ public class Collections {
     }
   }
 
+  static class UnmodifiableNavigableMap<K, V> extends UnmodifiableSortedMap<K, V>
+      implements NavigableMap<K, V> {
+
+    private final NavigableMap<K, V> navigableMap;
+
+    public UnmodifiableNavigableMap(NavigableMap<K, V> navigableMap) {
+      super(navigableMap);
+      this.navigableMap = navigableMap;
+    }
+
+    @Override
+    public Entry<K, V> lowerEntry(K key) {
+      return navigableMap.lowerEntry(key);
+    }
+
+    @Override
+    public K lowerKey(K key) {
+      return navigableMap.lowerKey(key);
+    }
+
+    @Override
+    public Entry<K, V> floorEntry(K key) {
+      return navigableMap.floorEntry(key);
+    }
+
+    @Override
+    public K floorKey(K key) {
+      return navigableMap.floorKey(key);
+    }
+
+    @Override
+    public Entry<K, V> ceilingEntry(K key) {
+      return navigableMap.ceilingEntry(key);
+    }
+
+    @Override
+    public K ceilingKey(K key) {
+      return navigableMap.ceilingKey(key);
+    }
+
+    @Override
+    public Entry<K, V> higherEntry(K key) {
+      return navigableMap.higherEntry(key);
+    }
+
+    @Override
+    public K higherKey(K key) {
+      return navigableMap.higherKey(key);
+    }
+
+    @Override
+    public Entry<K, V> firstEntry() {
+      return navigableMap.firstEntry();
+    }
+
+    @Override
+    public Entry<K, V> lastEntry() {
+      return navigableMap.lastEntry();
+    }
+
+    @Override
+    public Entry<K, V> pollFirstEntry() {
+      return navigableMap.pollFirstEntry();
+    }
+
+    @Override
+    public Entry<K, V> pollLastEntry() {
+      return navigableMap.pollLastEntry();
+    }
+
+    @Override
+    public NavigableMap<K, V> descendingMap() {
+      return new UnmodifiableNavigableMap<>(navigableMap.descendingMap());
+    }
+
+    @Override
+    public NavigableSet<K> navigableKeySet() {
+      return new UnmodifiableNavigableSet<K>(navigableMap.navigableKeySet());
+    }
+
+    @Override
+    public NavigableSet<K> descendingKeySet() {
+      return null;
+    }
+
+    @Override
+    public NavigableMap<K, V> subMap(K fromKey, boolean fromInclusive,
+        K toKey, boolean toInclusive) {
+      return new UnmodifiableNavigableMap<>(navigableMap
+          .subMap(fromKey, fromInclusive, toKey, toInclusive));
+    }
+
+    @Override
+    public NavigableMap<K, V> headMap(K toKey, boolean inclusive) {
+      return new UnmodifiableNavigableMap<>(navigableMap.headMap(toKey, inclusive));
+    }
+
+    @Override
+    public NavigableMap<K, V> tailMap(K fromKey, boolean inclusive) {
+      return new UnmodifiableNavigableMap<>(navigableMap.tailMap(fromKey, inclusive));
+    }
+  }
+
   static class UnmodifiableSortedSet<E> extends UnmodifiableSet<E> implements
       SortedSet<E> {
     private SortedSet<E> sortedSet;
@@ -851,6 +954,73 @@ public class Collections {
     @Override
     public SortedSet<E> tailSet(E fromElement) {
       return new UnmodifiableSortedSet<E>(sortedSet.tailSet(fromElement));
+    }
+  }
+
+  private static class UnmodifiableNavigableSet<T> extends UnmodifiableSortedSet<T>
+      implements NavigableSet<T> {
+    private NavigableSet<T> navigableSet;
+
+    public UnmodifiableNavigableSet(NavigableSet<T> sortedSet) {
+      super(sortedSet);
+      this.navigableSet = sortedSet;
+    }
+
+    @Override
+    public T lower(T t) {
+      return navigableSet.lower(t);
+    }
+
+    @Override
+    public T floor(T t) {
+      return navigableSet.floor(t);
+    }
+
+    @Override
+    public T ceiling(T t) {
+      return navigableSet.ceiling(t);
+    }
+
+    @Override
+    public T higher(T t) {
+      return navigableSet.higher(t);
+    }
+
+    @Override
+    public T pollFirst() {
+      return navigableSet.pollFirst();
+    }
+
+    @Override
+    public T pollLast() {
+      return navigableSet.pollLast();
+    }
+
+    @Override
+    public NavigableSet<T> descendingSet() {
+      return new UnmodifiableNavigableSet<>(navigableSet.descendingSet());
+    }
+
+    @Override
+    public Iterator<T> descendingIterator() {
+      return navigableSet.descendingIterator();
+    }
+
+    @Override
+    public NavigableSet<T> subSet(T fromElement, boolean fromInclusive, T toElement,
+        boolean toInclusive) {
+      return new UnmodifiableNavigableSet<>(
+          navigableSet.subSet(fromElement,  fromInclusive, toElement, toInclusive));
+    }
+
+    @Override
+    public NavigableSet<T> headSet(T toElement, boolean inclusive) {
+      return new UnmodifiableNavigableSet<>(navigableSet.headSet(toElement, inclusive));
+    }
+
+    @Override
+    public NavigableSet<T> tailSet(T fromElement, boolean inclusive) {
+      return new UnmodifiableNavigableSet<>(navigableSet.tailSet(fromElement, inclusive));
     }
   }
 
@@ -1124,6 +1294,20 @@ public class Collections {
     };
   }
 
+  public static <T> Enumeration<T> emptyEnumeration() {
+    return new Enumeration<T>() {
+      @Override
+      public boolean hasMoreElements() {
+        return false;
+      }
+
+      @Override
+      public T nextElement() {
+        throw new NoSuchElementException();
+      }
+    };
+  }
+
   public static <T> void fill(List<? super T> list, T obj) {
     for (ListIterator<? super T> it = list.listIterator(); it.hasNext();) {
       it.next();
@@ -1371,6 +1555,57 @@ public class Collections {
 
   public static <T> SortedSet<T> unmodifiableSortedSet(SortedSet<T> set) {
     return new UnmodifiableSortedSet<T>(set);
+  }
+
+  public static <K,V> NavigableMap unmodifiableNavigableMap(NavigableMap<K, V> map) {
+    return new UnmodifiableNavigableMap<>(map);
+  }
+
+  public static <T> NavigableSet unmodifiableNavigableSet(NavigableSet<T> set) {
+    return new UnmodifiableNavigableSet<>(set);
+  }
+
+  public static <E> SortedSet<E> emptySortedSet() {
+    return new UnmodifiableSortedSet<E>(new TreeSet<>());
+  }
+
+  public static <K, V> SortedMap<K,V> emptySortedMap() {
+    return new UnmodifiableSortedMap<>(new TreeMap<>());
+  }
+
+  public static <E> NavigableSet<E> emptyNavigableSet() {
+    return new UnmodifiableNavigableSet<E>(new TreeSet<>());
+  }
+
+  public static <K, V> NavigableMap<K,V> emptyNavigableMap() {
+    return new UnmodifiableNavigableMap<>(new TreeMap<>());
+  }
+
+  public static int indexOfSubList(List<?> source, List<?> target) {
+    for (int start = 0; start <= source.size() - target.size(); start++) {
+      if (sublistMatch(source, target, start)) {
+        return start;
+      }
+    }
+    return -1;
+  }
+
+  private static boolean sublistMatch(List<?> source, List<?> target, int start) {
+    for (int idx = 0; idx < target.size(); idx++) {
+      if (!Objects.equals(target.get(idx), source.get(idx + start))) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static int lastIndexOfSubList(List<?> source, List<?> target) {
+    for (int start = source.size() - target.size(); start >= 0; start--) {
+      if (sublistMatch(source, target, start)) {
+        return start;
+      }
+    }
+    return -1;
   }
 
   /**

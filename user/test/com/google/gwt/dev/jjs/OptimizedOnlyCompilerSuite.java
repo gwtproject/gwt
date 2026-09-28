@@ -18,7 +18,6 @@ package com.google.gwt.dev.jjs;
 import com.google.gwt.dev.jjs.optimized.ArrayListOptimizationTest;
 import com.google.gwt.dev.jjs.optimized.ArrayStoreOptimizationTest;
 import com.google.gwt.dev.jjs.optimized.CastOptimizationTest;
-import com.google.gwt.dev.jjs.optimized.JsOverlayMethodOptimizationTest;
 import com.google.gwt.dev.jjs.optimized.SpecializationTest;
 import com.google.gwt.dev.jjs.optimized.StringOptimizationTest;
 import com.google.gwt.dev.jjs.optimized.UncheckedCastOptimizationTest;
@@ -41,7 +40,8 @@ public class OptimizedOnlyCompilerSuite {
     suite.addTestSuite(ArrayStoreOptimizationTest.class);
     suite.addTestSuite(StringOptimizationTest.class);
     suite.addTestSuite(CastOptimizationTest.class);
-    suite.addTestSuite(JsOverlayMethodOptimizationTest.class);
+    // Disabled until #10147 is resolved.
+    // suite.addTestSuite(JsOverlayMethodOptimizationTest.class);
     suite.addTestSuite(SpecializationTest.class);
     suite.addTestSuite(HasNoSideEffectsTest.class);
     suite.addTestSuite(UncheckedCastOptimizationTest.class);

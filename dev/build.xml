@@ -70,7 +70,7 @@
           <include name="objectweb/asm-9.10.1/asm-util-9.10.1.jar"/>
           <include name="guava/guava-33.0/guava-33.0.0-jre-rebased.jar"/>
           <include name="guava/guava-33.0/failureaccess-1.0.2-rebased.jar"/>
-          <include name="icu4j/74.2/icu4j.jar"/>
+          <include name="icu4j/71.1/icu4j.jar"/>
           <include name="jetty/jetty-9.4.58.v20250814/jetty-all-9.4.58.v20250814.jar"/>
           <include name="gson/gson-2.11.0.jar"/>
           <include name="jscomp/20231112/sourcemap-rebased.jar"/>
@@ -130,7 +130,7 @@
           </zipgroupfileset>
           <zipfileset src="${gwt.tools.lib}/guava/guava-33.0/guava-33.0.0-jre-rebased.jar"/>
           <zipfileset src="${gwt.tools.lib}/guava/guava-33.0/failureaccess-1.0.2-rebased.jar" />
-          <zipfileset src="${gwt.tools.lib}/icu4j/74.2/icu4j.jar"/>
+          <zipfileset src="${gwt.tools.lib}/icu4j/71.1/icu4j.jar"/>
           <zipfileset
               src="${gwt.tools.lib}/jetty/jetty-9.4.58.v20250814/jetty-all-9.4.58.v20250814.jar">
             <!--

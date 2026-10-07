@@ -194,7 +194,9 @@ public final class Utility {
    * @deprecated use {@link Files#createTempDirectory(Path, String, FileAttribute[])} instead.
    */
   public static File makeTemporaryDirectory(File baseDir, String prefix) throws IOException {
-    return Files.createTempDirectory(baseDir.toPath(), prefix).toFile();
+    return baseDir == null
+      ? Files.createTempDirectory(prefix).toFile()
+      : Files.createTempDirectory(baseDir.toPath(), prefix).toFile();
   }
 
   /**

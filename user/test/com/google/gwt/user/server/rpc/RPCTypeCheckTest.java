@@ -33,6 +33,7 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
@@ -59,6 +60,8 @@ public class RPCTypeCheckTest extends TestCase {
    *   - EmptyList<Integer>: testEmptyListSpoofingClass
    *   - EmptyMap<String, Integer>: testEmptyMapSpoofingClass
    *   - EmptySet<Integer>: testEmptySetSpoofingClass
+   *   - EnumMap (raw): testEnumMapSpoofingClass
+   *   - EnumMap<NEnum, Integer>: testEnumMapSpoofingEnum
    *   - HashMap<String, Integer>: testHashMapSpoofingClass
    *   - HashSet<Integer>: testHashSetSpoofingClass
    *   - IdentityHashMap<AClass, Integer>: testIdentityHashMapSpoofingClass
@@ -194,6 +197,14 @@ public class RPCTypeCheckTest extends TestCase {
       implements RemoteService {
     @SuppressWarnings("unused")
     public static void testAClass(AClass arg1) {
+    }
+
+    @SuppressWarnings({"unused", "rawtypes"})
+    public static void testEnumMap(EnumMap arg1) {
+    }
+
+    @SuppressWarnings("unused")
+    public static void testEnumMapTyped(EnumMap<NEnum, Integer> arg1) {
     }
 
     @SuppressWarnings("unused")
@@ -535,6 +546,21 @@ public class RPCTypeCheckTest extends TestCase {
   }
 
   /**
+   * An enum used as the declared key type of an EnumMap parameter.
+   */
+  public enum NEnum implements IsSerializable {
+    A, B;
+  }
+
+  /**
+   * An enum used to substitute the exemplar of an EnumMap parameter whose
+   * declared key type is {@link NEnum}.
+   */
+  public enum OEnum implements IsSerializable {
+    A, B;
+  }
+
+  /**
    * A class containing a method used to check type spoofing attacks on RPC
    * messages containing primitive types.
    */
@@ -545,6 +571,70 @@ public class RPCTypeCheckTest extends TestCase {
 
     @SuppressWarnings("unused")
     public static void testIntString(int arg1, String arg2) {
+    }
+  }
+
+  private static String generateEnumMapSpoofingClass() {
+    try {
+      RPCTypeCheckFactory strFactory =
+          new RPCTypeCheckFactory(ClassesParamTestClass.class, "testEnumMap");
+
+      // The exemplar the server reads to derive the enum key type is replaced
+      // with a plain Integer, an allowlisted non-enum type.
+      strFactory.writeEnumMapWithSpoofedExemplar(12345);
+
+      return strFactory.toString();
+    } catch (Exception e) {
+      fail(e.getMessage());
+
+      return null;
+    }
+  }
+
+  private static String generateEnumMapValid(Enum<?> exemplar, Enum<?> key) {
+    try {
+      RPCTypeCheckFactory strFactory =
+          new RPCTypeCheckFactory(ClassesParamTestClass.class, "testEnumMap");
+
+      strFactory.writeEnumMapWithEntry(exemplar, key, Integer.valueOf(12345));
+
+      return strFactory.toString();
+    } catch (Exception e) {
+      fail(e.getMessage());
+
+      return null;
+    }
+  }
+
+  private static String generateEnumMapSpoofingEnum() {
+    try {
+      RPCTypeCheckFactory strFactory =
+          new RPCTypeCheckFactory(ClassesParamTestClass.class, "testEnumMapTyped");
+
+      // The exemplar the server reads to derive the enum key type is a valid
+      // enum, but not the one the service method declares.
+      strFactory.writeEnumMapWithExemplar(OEnum.A);
+
+      return strFactory.toString();
+    } catch (Exception e) {
+      fail(e.getMessage());
+
+      return null;
+    }
+  }
+
+  private static String generateEnumMapTypedValid() {
+    try {
+      RPCTypeCheckFactory strFactory =
+          new RPCTypeCheckFactory(ClassesParamTestClass.class, "testEnumMapTyped");
+
+      strFactory.writeEnumMapWithEntry(NEnum.A, NEnum.B, Integer.valueOf(12345));
+
+      return strFactory.toString();
+    } catch (Exception e) {
+      fail(e.getMessage());
+
+      return null;
     }
   }
 
@@ -2244,6 +2334,74 @@ public class RPCTypeCheckTest extends TestCase {
       assertEquals(SerializedTypeViolationException.class, e.getCause().getClass());
       assertTrue(e.getCause().getMessage().matches(".*List.*AClass.*"));
     }
+  }
+
+  /**
+   * The EnumMap server custom field serializer derives its key type from an
+   * exemplar object. Without a type check on that read, a substituted type
+   * reaches new EnumMap(nonEnumClass), which fails with an uncaught
+   * NullPointerException rather than a clean serialization error.
+   */
+  public void testEnumMapSpoofingClass() {
+    try {
+      RPC.decodeRequest(generateEnumMapSpoofingClass());
+      fail("Expected IncompatibleRemoteServiceException from testEnumMapSpoofingClass");
+    } catch (IncompatibleRemoteServiceException e) {
+      // Expected: a clean type-violation, not an uncaught NullPointerException
+      assertEquals(SerializedTypeViolationException.class, e.getCause().getClass());
+    }
+  }
+
+  /**
+   * This checks that an EnumMap on the raw parameter, which declares no key
+   * type, is accepted whichever enum its exemplar is, and that it is built with
+   * that enum as its key type.
+   */
+  public void testEnumMapValid() {
+    RPCRequest decoded = RPC.decodeRequest(generateEnumMapValid(NEnum.A, NEnum.B));
+    Object deserializedArg = decoded.getParameters()[0];
+    assertEquals(EnumMap.class, deserializedArg.getClass());
+
+    EnumMap<NEnum, Integer> expectedN = new EnumMap<>(NEnum.class);
+    expectedN.put(NEnum.B, 12345);
+    assertEquals(expectedN, deserializedArg);
+
+    decoded = RPC.decodeRequest(generateEnumMapValid(OEnum.A, OEnum.B));
+    deserializedArg = decoded.getParameters()[0];
+    assertEquals(EnumMap.class, deserializedArg.getClass());
+
+    EnumMap<OEnum, Integer> expectedO = new EnumMap<>(OEnum.class);
+    expectedO.put(OEnum.B, 12345);
+    assertEquals(expectedO, deserializedArg);
+  }
+
+  /**
+   * This checks that an EnumMap whose exemplar is a valid enum, but not the
+   * declared key type, correctly reports that it is an incorrect type.
+   */
+  public void testEnumMapSpoofingEnum() {
+    try {
+      RPC.decodeRequest(generateEnumMapSpoofingEnum());
+      fail("Expected IncompatibleRemoteServiceException from testEnumMapSpoofingEnum");
+    } catch (IncompatibleRemoteServiceException e) {
+      // Expected to get here
+      assertEquals(SerializedTypeViolationException.class, e.getCause().getClass());
+      assertTrue(e.getCause().getMessage().matches(".*OEnum.*NEnum.*"));
+    }
+  }
+
+  /**
+   * This checks that an EnumMap whose exemplar is the declared key type is
+   * accepted, and that it is built with that key type.
+   */
+  public void testEnumMapTypedValid() {
+    RPCRequest decoded = RPC.decodeRequest(generateEnumMapTypedValid());
+    Object deserializedArg = decoded.getParameters()[0];
+    assertEquals(EnumMap.class, deserializedArg.getClass());
+
+    EnumMap<NEnum, Integer> expected = new EnumMap<>(NEnum.class);
+    expected.put(NEnum.B, 12345);
+    assertEquals(expected, deserializedArg);
   }
 
   /**

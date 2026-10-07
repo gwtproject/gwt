@@ -1141,7 +1141,7 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
       tempFile = File.createTempFile(UUID.randomUUID() + "css_converter", "css.tmp");
 
       fos = new FileOutputStream(tempFile);
-      IOUtils.write(concatenatedCss, fos);
+      IOUtils.write(concatenatedCss, fos, StandardCharsets.UTF_8);
       fos.close();
 
       ConfigurationPropertyMatcher configurationPropertyMatcher =

@@ -16,6 +16,9 @@
 package com.google.gwt.view.client;
 
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.user.client.Timer;
+
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -123,34 +126,52 @@ public class MultiSelectionModelTest extends AbstractSelectionModelTest {
   }
 
   public void testNoDuplicateChangeEvent() {
-    MultiSelectionModel<String> model = createSelectionModel(null);
-    SelectionChangeEvent.Handler handler = new SelectionChangeEvent.Handler() {
-        @Override
-      public void onSelectionChange(SelectionChangeEvent event) {
-        fail();
-      }
-    };
+    delayTestFinish(2000);
+    final MultiSelectionModel<String> model = createSelectionModel(null);
+    final MockSelectionChangeHandler handler = new AssertOneSelectionChangeEventOnlyHandler();
 
-    model.setSelected("test", true);
     model.addSelectionChangeHandler(handler);
-    model.setSelected("test", true); // Should not fire change event
-    model.setSelected("test", true); // Should not fire change event
+    model.setSelected("test", true);
+    // selection events fire at the end of current event loop (finally command)
+    handler.assertEventFired(false);
+
+    Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+      @Override
+      public void execute() {
+        handler.assertEventFired(true);
+        // No further selection events should be fired
+        model.addSelectionChangeHandler(new FailingSelectionChangeEventHandler());
+        model.setSelected("test", true);
+        model.setSelected("test", true);
+      }
+    });
+
+    new Timer() {
+      @Override
+      public void run() {
+        finishTest();
+      }
+    }.schedule(1000);
   }
 
   public void testNoDuplicateChangeEvent2() {
+    delayTestFinish(2000);
     MultiSelectionModel<String> model = createSelectionModel(null);
-    SelectionChangeEvent.Handler handler = new SelectionChangeEvent.Handler() {
-        @Override
-      public void onSelectionChange(SelectionChangeEvent event) {
-        fail();
-      }
-    };
 
+    // no event at all should be fired, as selection events fire at the end of current event loop
+    // and at that point no state has been effectively changed.
+    model.addSelectionChangeHandler(new FailingSelectionChangeEventHandler());
     model.setSelected("test", true);
     model.setSelected("test", false);
-    model.addSelectionChangeHandler(handler);
-    model.setSelected("test", false); // Should not fire change event
-    model.setSelected("test", false); // Should not fire change event
+    model.setSelected("test", false);
+    model.setSelected("test", false);
+
+    new Timer() {
+      @Override
+      public void run() {
+        finishTest();
+      }
+    }.schedule(1000);
   }
 
   /**
@@ -158,6 +179,7 @@ public class MultiSelectionModelTest extends AbstractSelectionModelTest {
    * change event.
    */
   public void testNoDuplicateChangeEventWithKeyProvider() {
+    delayTestFinish(2000);
     ProvidesKey<String> keyProvider = new ProvidesKey<String>() {
         @Override
       public Object getKey(String item) {
@@ -165,24 +187,25 @@ public class MultiSelectionModelTest extends AbstractSelectionModelTest {
       }
     };
     MultiSelectionModel<String> model = createSelectionModel(keyProvider);
-    SelectionChangeEvent.Handler handler = new SelectionChangeEvent.Handler() {
-        @Override
-      public void onSelectionChange(SelectionChangeEvent event) {
-        fail();
-      }
-    };
 
     model.setSelected("test1", true);
     assertTrue(model.isSelected("test1"));
 
-    model.addSelectionChangeHandler(handler);
     // Selecting a different item with the same key should not be seen as a
     // selection change
     String replacement = "TEST1";
+    model.addSelectionChangeHandler(new FailingSelectionChangeEventHandler());
     model.setSelected(replacement, true);
     assertTrue(model.isSelected(replacement));
     assertEquals(1, model.getSelectedSet().size());
     assertSame(replacement, model.getSelectedSet().iterator().next());
+
+    new Timer() {
+      @Override
+      public void run() {
+        finishTest();
+      }
+    }.schedule(1000);
   }
 
   public void testSetSelected() {

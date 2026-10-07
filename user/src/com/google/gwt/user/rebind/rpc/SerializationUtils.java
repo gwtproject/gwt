@@ -161,7 +161,7 @@ public class SerializationUtils {
   /**
    * Returns the serialization signature for a type.
    * 
-   * @param instanceType
+   * @param type the type
    * @return a string representing the serialization signature of a type
    */
   static String getSerializationSignature(GeneratorContext context, JType type)

@@ -35,6 +35,7 @@ import java.util.Stack;
  *
  * <p>For example, the following GSS code
  * <pre>
+ * {@code
  *   @if(eval("com.foo.bar()")) {
  *     .foo {
  *       padding: 5px;

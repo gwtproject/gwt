@@ -270,7 +270,7 @@ public abstract class ElementBuilderImpl {
   /**
    * Assert that the builder is in a state where an attribute can be added.
    * 
-   * @throw {@link IllegalStateException} if the start tag is closed
+   * @throws IllegalStateException if the start tag is closed
    */
   protected void assertCanAddAttributeImpl() {
     assertStartTagOpen("Attributes cannot be added after appending HTML or adding a child "
@@ -388,7 +388,7 @@ public abstract class ElementBuilderImpl {
    * Assert that the current builder does not forbid end tags.
    * 
    * @param operation the operation that the user is attempting
-   * @throw {@link UnsupportedOperationException} if not supported
+   * @throws UnsupportedOperationException if not supported
    */
   private void assertEndTagNotForbidden(String operation) {
     if (getCurrentBuilder().isEndTagForbidden()) {
@@ -401,7 +401,7 @@ public abstract class ElementBuilderImpl {
    * Assert that the start tag is still open.
    * 
    * @param message the error message if the start tag is not open
-   * @throw {@link IllegalStateException} if the start tag is closed
+   * @throws IllegalStateException if the start tag is closed
    */
   private void assertStartTagOpen(String message) {
     if (!isStartTagOpen) {

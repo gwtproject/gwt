@@ -25,6 +25,7 @@ import com.google.gwt.emultest.java.io.InputStreamTest;
 import com.google.gwt.emultest.java.io.OutputStreamTest;
 import com.google.gwt.emultest.java.io.OutputStreamWriterTest;
 import com.google.gwt.emultest.java.io.PrintStreamTest;
+import com.google.gwt.emultest.java.io.StringWriterTest;
 import com.google.gwt.emultest.java.io.WriterTest;
 import com.google.gwt.emultest.java.lang.BooleanTest;
 import com.google.gwt.emultest.java.lang.ByteTest;
@@ -84,6 +85,7 @@ import org.junit.runners.Suite.SuiteClasses;
   OutputStreamTest.class,
   OutputStreamWriterTest.class,
   PrintStreamTest.class,
+  StringWriterTest.class,
   WriterTest.class,
 
   // -- java.lang

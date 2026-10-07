@@ -332,7 +332,8 @@ public final class RPC {
    * <p>
    * This method should be used if the RPC request could not be decoded or
    * could not be executed because of an exception thrown, e.g.
-   * {@link IncompatibleRemoteServiceException}, {@link RpcTokenException}
+   * {@link IncompatibleRemoteServiceException},
+   * {@link com.google.gwt.user.client.rpc.RpcTokenException}
    * </p>
    * @param rpcRequest the RPCRequest that failed to execute, may be null
    * @param cause the {@link Throwable} that was thrown

@@ -33,8 +33,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Represents a factory for implementations of an endpoint that will invoke
  * CompilePerms. Implementations of PermutationWorkerFactory should be
- * default-instantiable and will have {@link #init} called immediately after
- * construction.
+ * default-instantiable.
  */
 public abstract class PermutationWorkerFactory {
 
@@ -217,7 +216,7 @@ public abstract class PermutationWorkerFactory {
   public static final String FACTORY_IMPL_PROPERTY = "gwt.jjs.permutationWorkerFactory";
 
   /**
-   * This value can be passed into {@link #setLocalWorkers(int)} to indicate
+   * This value can be passed into {@link #createWorkers(TreeLogger, UnifiedAst, int, int, List)} to indicate
    * that a heuristic should be used to determine the total number of local
    * workers.
    */

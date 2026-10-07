@@ -510,7 +510,7 @@ public class StandardGeneratorContext implements GeneratorContext {
    *
    * @return any newly generated artifacts since the last call
    *
-   * @throw UnableToCompleteException if the compiler aborted (not
+   * @throws UnableToCompleteException if the compiler aborted (not
    * a normal compile error).</p>
    */
   public ArtifactSet finish(TreeLogger logger) throws UnableToCompleteException {

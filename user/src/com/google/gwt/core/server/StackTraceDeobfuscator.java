@@ -147,14 +147,14 @@ public abstract class StackTraceDeobfuscator {
   }
 
   private static final Pattern JsniRefPattern = Pattern.compile("@?([^:]+)::([^(]+)(\\((.*)\\))?");
-  private static final Pattern fragmentIdPattern = Pattern.compile(".*(\\d+)\\.js");
+  private static final Pattern fragmentIdPattern = Pattern.compile("(?:.*\\D)?(\\d+)\\.js");
   // Matches ServerSerializationStreamReader: the strong name reaches us straight from the
   // client (X-GWT-Permutation header) and is concatenated into symbol/source map file names.
   private static final Pattern strongNamePattern = Pattern.compile("[a-zA-Z0-9_]+");
   private static final int LINE_NUMBER_UNKNOWN = -1;
   private static final String SYMBOL_DATA_UNKNOWN = "";
 
-  private final Map<String, SourceMapping> sourceMaps = new HashMap<String, SourceMapping>();
+  private final Map<String, SourceMapping> sourceMaps = new ConcurrentHashMap<>();
   private final SymbolCache symbolCache = new SymbolCache();
   private boolean lazyLoad = false;
 
@@ -376,17 +376,18 @@ public abstract class StackTraceDeobfuscator {
   }
 
   private SourceMapping loadSourceMap(String permutationStrongName, int fragmentId) {
-    SourceMapping toReturn = sourceMaps.get(permutationStrongName + fragmentId);
-    if (toReturn == null && isValidStrongName(permutationStrongName)) {
+    if (!isValidStrongName(permutationStrongName)) {
+      return null;
+    }
+    return sourceMaps.computeIfAbsent(permutationStrongName + fragmentId, key -> {
       try {
         String sourceMapString = loadStreamAsString(
             getSourceMapInputStream(permutationStrongName, fragmentId));
-        toReturn = SourceMapConsumerFactory.parse(sourceMapString);
-        sourceMaps.put(permutationStrongName + fragmentId, toReturn);
+        return SourceMapConsumerFactory.parse(sourceMapString);
       } catch (Exception e) {
+        return null;
       }
-    }
-    return toReturn;
+    });
   }
 
   private String loadStreamAsString(InputStream stream) {

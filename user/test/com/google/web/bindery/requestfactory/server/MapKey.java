@@ -42,9 +42,6 @@ public class MapKey {
     return findMapKeyById(id);
   }
 
-  /**
-   * Returns <code>null</code> if {@link #findFails} is <code>true</code>.
-   */
   public static MapKey findMapKeyById(String id) {
     return get().get(id);
   }

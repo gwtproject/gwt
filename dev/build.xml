@@ -64,7 +64,7 @@
           <include name="apache/tapestry-util-text-4.0.2.jar"/>
           <include name="apache/ant-zipscanner/ant-zipscanner-1.6.5-1-rebased.jar"/>
           <include name="colt/colt-1.2.jar"/>
-          <include name="eclipse/3.33.0/*.jar"/>
+          <include name="eclipse/3.40.0/*.jar"/>
           <include name="objectweb/asm-9.10.1/asm-9.10.1.jar"/>
           <include name="objectweb/asm-9.10.1/asm-commons-9.10.1.jar"/>
           <include name="objectweb/asm-9.10.1/asm-util-9.10.1.jar"/>
@@ -125,7 +125,7 @@
           <zipfileset src="${gwt.tools.lib}/apache/tapestry-util-text-4.0.2.jar"/>
           <zipfileset src="${gwt.tools.lib}/apache/ant-zipscanner/ant-zipscanner-1.6.5-1-rebased.jar"/>
           <zipfileset src="${gwt.tools.lib}/colt/colt-1.2.jar"/>
-          <zipgroupfileset dir="${gwt.tools.lib}/eclipse/3.33.0">
+          <zipgroupfileset dir="${gwt.tools.lib}/eclipse/3.40.0">
             <include name="**/*.jar"/>
           </zipgroupfileset>
           <zipfileset src="${gwt.tools.lib}/guava/guava-33.0/guava-33.0.0-jre-rebased.jar"/>
@@ -218,7 +218,7 @@
         <pathelement location="${gwt.tools.lib}/objectweb/asm-9.10.1/asm-9.10.1.jar"/>
         <pathelement location="${gwt.tools.lib}/objectweb/asm-9.10.1/asm-commons-9.10.1.jar"/>
         <pathelement location="${gwt.tools.lib}/objectweb/asm-9.10.1/asm-util-9.10.1.jar"/>
-        <fileset dir="${gwt.tools.lib}/eclipse/3.33.0">
+        <fileset dir="${gwt.tools.lib}/eclipse/3.40.0">
           <include name="**/*.jar"/>
         </fileset>
         <pathelement

@@ -53,6 +53,7 @@ import java.util.List;
  * Visitor that detects sprite definitions and replace them by several css rules in order to create
  * the corresponding sprited image.
  * <p>This visitor will replace the following gss:
+ * <pre>
  * {@code
  *   .foo {
  *     padding: 5px;
@@ -60,18 +61,19 @@ import java.util.List;
  *     width: 150px;
  *   }
  * }
+ * </pre>
  * to the corresponding gss:
- * {@code
- *   .foo {
- *     padding: 5px;
- *     /* @alternate &#42;/ width: eval("imageResource.getWidth", "px");
- *     /* @alternate &#42;/ height: eval("imageResource.getHeight", "px");
- *     /* @alternate &#42;/ overflow: hidden;
- *     /* @alternate &#42;/ background: resourceUrl("imageResource") eval("imageResource.getLeft",
- *          "px") eval("imageResource.getTop", "px") no-repeat;
- *     width: 150px;
- *   }
+ * <pre><code>
+ * .foo {
+ *   padding: 5px;
+ *   /* @alternate {@literal *}/ width: eval("imageResource.getWidth", "px");
+ *   /* @alternate {@literal *}/ height: eval("imageResource.getHeight", "px");
+ *   /* @alternate {@literal *}/ overflow: hidden;
+ *   /* @alternate {@literal *}/ background: resourceUrl("imageResource") eval("imageResource.getLeft",
+ *        "px") eval("imageResource.getTop", "px") no-repeat;
+ *   width: 150px;
  * }
+ * </code></pre>
  * <p>This visitor will also check the presence of the {@link ImageOptions} annotation on the
  * image resource in order to support correctly horizontal or vertical repetition.
  */

@@ -33,6 +33,7 @@ import com.google.web.bindery.requestfactory.shared.impl.AbstractRequestContext;
  * RequestFactory.
  * 
  * <pre>
+ * {@code
  * public class MyRequestBatcher extends RequestBatcher<MyRequestFactory, MyRequestContext> {
  *   public MyRequestBatcher() {
  *     // MyRequestFactory could also be injected
@@ -42,6 +43,7 @@ import com.google.web.bindery.requestfactory.shared.impl.AbstractRequestContext;
  *   protected MyRequestContext createContext(MyRequestFactory factory) {
  *     return factory.myRequestContext();
  *   }
+ * }
  * }
  * </pre>
  * A singleton or otherwise scoped instance of RequestBatcher should be injected

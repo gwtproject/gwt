@@ -466,9 +466,9 @@ public class JUnitMessageQueue {
   }
 
   /**
-   * Ensure that a {@link ClientStatus} for the clientId exists.
+   * Ensure that a {@link ClientStatus} for the given client exists.
    * 
-   * @param clientId the id of the client
+   * @param clientInfo contains the session ID of the client
    * @return the {@link ClientStatus} for the client
    */
   private ClientStatus ensureClientStatus(ClientInfoExt clientInfo) {

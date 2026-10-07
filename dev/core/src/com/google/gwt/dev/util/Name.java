@@ -26,7 +26,7 @@ public class Name {
    * Represents a Java class name in binary form, for example:
    * {@code org.example.Foo$Bar}.
    *
-   * See {@link "http://java.sun.com/docs/books/jls/third_edition/html/binaryComp.html#59892"}
+   * See <a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-13.html#jls-13.1">JLS 13.1</a>
    */
   public static class BinaryName {
 
@@ -75,7 +75,7 @@ public class Name {
      * Represents a Java class name in internal form, for example:
      * {@code org/example/Foo$Bar}.
      *
-     * See {@link "http://java.sun.com/docs/books/jvms/second_edition/html/ClassFile.doc.html#14757"}
+     * See <a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-13.html#jls-13.1">JLS 13.1</a>
      */
     public static class InternalName {
 
@@ -113,7 +113,7 @@ public class Name {
   /**
    * Represents a Java class name in source form, for example: {@code org.example.Foo.Bar}.
    *
-   * See {@link "http://java.sun.com/docs/books/jvms/second_edition/html/Concepts.doc.html#20207"}
+   * See <a href="https://docs.oracle.com/en/java/javase/25/docs/specs/jls/jls-6.html#jls-6.7">JLS 6.7</a>
    */
   public static class SourceName {
 
@@ -147,7 +147,7 @@ public class Name {
    * Represents a Java class name in either source or binary form, for example:
    * {@code org.example.Foo.Bar or org.example.Foo$Bar}.
    *
-   * See {@link "http://java.sun.com/docs/books/jls/third_edition/html/binaryComp.html#59892"}
+   * See <a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-13.html#jls-13.1">JLS 13.1</a>
    */
   public static class SourceOrBinaryName {
 

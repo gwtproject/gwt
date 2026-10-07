@@ -30,11 +30,13 @@ import java.io.ObjectStreamClass;
  * <p>
  * 
  * Use like this: <pre>
+ * {@code
  *      private static enum MyBoolean {
  *          TRUE, FALSE
  *      };
  *      EnumMap<MyBoolean, Integer> enumMap = new EnumMap<>(MyBoolean.class);
  *      Class<?> c = EnumMapUtil.getKeyType(enumMap);
+ * }
  * </pre>
  * <p>
  * 

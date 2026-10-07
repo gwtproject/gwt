@@ -41,7 +41,7 @@ public class TextButtonCell extends ButtonCellBase<String> {
      * <p>
      * The {@link DefaultAppearance} may be replaced with a more modern
      * appearance in the future. If you want to stay up to date with the latest
-     * appearance, use {@link TextButtonCell#createDefaultAppearance()} instead
+     * appearance, use {@link GWT#create(Class) GWT.create(Appearence.class)} instead
      * of this constructor. If you do not want the appearance to be updated with
      * successive versions of GWT, use this constructor.
      */

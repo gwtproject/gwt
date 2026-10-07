@@ -51,7 +51,7 @@ public abstract class AbstractInputCell<C, V> extends
   /**
    * Get the events consumed by the input cell.
    * 
-   * @param userEvents the events consumed by the subclass
+   * @param consumedEvents the events consumed by the subclass
    * @return the events
    */
   private static Set<String> getConsumedEventsImpl(String... consumedEvents) {

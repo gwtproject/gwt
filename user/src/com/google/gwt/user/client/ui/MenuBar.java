@@ -967,7 +967,7 @@ public class MenuBar extends Widget implements PopupListener, HasAnimation,
     }
   }
 
-  /*
+  /**
    * Performs the action associated with the given menu item. If the item has a
    * popup associated with it, the popup will be shown. If it has a command
    * associated with it, and 'fireCommand' is true, then the command will be

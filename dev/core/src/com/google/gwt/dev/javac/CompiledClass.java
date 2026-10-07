@@ -107,7 +107,7 @@ public class CompiledClass implements Serializable {
    *          14.3)
    * @param internalName the internal binary name for this class. e.g.
    *          {@code java/util/Map$Entry}. See
-   *          {@link "http://java.sun.com/docs/books/jvms/second_edition/html/ClassFile.doc.html#14757"}
+   *          <a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-13.html#jls-13.1">JLS 13.1</a>.
    * @param sourceName the qualified source name, e.g. {@code java.util.Map.Entry}.
    */
   CompiledClass(byte[] classBytes, CompiledClass enclosingClass, boolean isLocal,

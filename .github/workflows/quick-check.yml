@@ -12,26 +12,26 @@ jobs:
         java-version: ['17', '21', '25']
     steps:
       - name: Checkout GWT itself into one directory
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 #v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
         with:
           path: 'gwt'
           # we need depth=2 to see which style violations overlap with the current changes
           fetch-depth: 2
       - name: Checkout GWT tools into a sibling directory
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 #v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
         with:
           repository: 'gwtproject/tools'
           path: 'tools'
       - name: Set up JDK ${{ matrix.java-version }}
         # GWT presently requires Java 17+ to build
-        uses: actions/setup-java@1bcf9fb12cf4aa7d266a90ae39939e61372fe520 #v5.4.0
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 #v6.0.1
         with:
           java-version: ${{ matrix.java-version }}
           distribution: 'temurin'
       - name: Set up reviewdog for easier checks on the PR's checkstyle output
         uses: reviewdog/action-setup@d8a7baabd7f3e8544ee4dbde3ee41d0011c3a93f #v1.5.0
         with:
-          reviewdog_version: latest
+          reviewdog_version: v0.21.2
 
       - name: Build, style/api checks, produce docs
         # Presently this runs no tests at all, but could run quick tests

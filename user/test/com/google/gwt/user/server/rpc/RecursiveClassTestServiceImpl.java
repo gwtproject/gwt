@@ -24,9 +24,6 @@ import com.google.gwt.user.client.rpc.RecursiveClassTestService;
 public class RecursiveClassTestServiceImpl extends RemoteServiceServlet
     implements RecursiveClassTestService {
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.user.client.rpc.RecursiveClassTestService#greetServer(java.lang.String)
-   */
   @Override
   public <T extends ResultNode<T>> ResultNode<T> greetServer(String name)
       throws IllegalArgumentException {

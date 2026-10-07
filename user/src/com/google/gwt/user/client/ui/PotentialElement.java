@@ -30,7 +30,7 @@ import com.google.gwt.dom.client.Element;
  * {@link IsRenderable} widget code can be written without taking into account
  * whether or not the widget has yet been rendered.
  * <p>
- * {@link DOM#appendChild} is aware of PotentialElement, and calls its
+ * {@link com.google.gwt.user.client.DOM#appendChild} is aware of PotentialElement, and calls its
  * resolve() method. This triggers a call to
  * {@link UIObject#resolvePotentialElement()}, which widgets can customize
  * to get a real {@link Element} in place at the last moment.

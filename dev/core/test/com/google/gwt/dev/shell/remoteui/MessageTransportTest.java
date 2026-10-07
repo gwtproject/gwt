@@ -94,7 +94,6 @@ public class MessageTransportTest extends TestCase {
    * Tests that sending an async request to a server when the server's socket is
    * closed with result in an ExecutionException on a call to future.get().
    *
-   * @throws ExecutionException
    * @throws InterruptedException
    * @throws IOException
    */
@@ -333,8 +332,6 @@ public class MessageTransportTest extends TestCase {
    * successfully received by the client.
    *
    * @throws IOException
-   * @throws ExecutionException
-   * @throws InterruptedException
    */
   public void testRequestProcessor() throws IOException {
     MockNetwork network = createMockNetwork();
@@ -408,8 +405,6 @@ public class MessageTransportTest extends TestCase {
    * passed back in the form of an error response to the client.
    *
    * @throws IOException
-   * @throws ExecutionException
-   * @throws InterruptedException
    */
   public void testRequestProcessorThrowsException() throws IOException {
     MockNetwork network = createMockNetwork();

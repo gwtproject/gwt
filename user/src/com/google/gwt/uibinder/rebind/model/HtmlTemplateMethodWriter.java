@@ -124,9 +124,7 @@ public class HtmlTemplateMethodWriter {
   /**
    * Creates the template method invocation.
    * 
-   * @param w
-   * 
-   * @return String the template method call with parameters
+   * @param w indented writer
    */
   public void writeTemplateCaller(IndentedWriter w) {
     ensureArgumentsResolved();

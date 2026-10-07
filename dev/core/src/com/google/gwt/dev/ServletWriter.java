@@ -56,13 +56,18 @@ class ServletWriter {
   }
 
   Map<String, String> mappings = new LinkedHashMap<String, String>();
+  private String jspLevel;
 
   public void addMapping(String servletClass, String servletPath) {
     mappings.put(servletClass, servletPath);
   }
 
+  public void setJspLevel(String jspLevel) {
+    this.jspLevel = jspLevel;
+  }
+
   public void realize(File webXml) throws IOException {
-    if (mappings.size() == 0) {
+    if (mappings.isEmpty() && jspLevel == null) {
       // Only generate a file if necessary.
       return;
     }
@@ -81,7 +86,25 @@ class ServletWriter {
         xmlWriter.write(generateServletMappingTag(servletName, servletPath));
         xmlWriter.write('\n');
       }
-
+      if (jspLevel != null) {
+        if (!jspLevel.matches("[0-9.]*")) { // lenient, but ensures valid XML
+          throw new IllegalStateException("Invalid JSP Java level: " + jspLevel);
+        }
+        xmlWriter.write(String.format("""
+            <servlet>
+                <servlet-name>jsp</servlet-name>
+                <servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
+                <init-param>
+                    <param-name>compilerSourceVM</param-name>
+                    <param-value>%1$s</param-value>
+                </init-param>
+                <init-param>
+                    <param-name>compilerTargetVM</param-name>
+                    <param-value>%1$s</param-value>
+                </init-param>
+                <load-on-startup>3</load-on-startup>
+            </servlet>""", jspLevel));
+      }
       xmlWriter.write("\n</web-app>\n");
     }
   }

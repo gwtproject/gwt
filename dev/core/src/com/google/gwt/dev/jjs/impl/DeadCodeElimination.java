@@ -108,7 +108,7 @@ public class DeadCodeElimination {
    * operations in favor of pure side effects.
    *
    * TODO: move more simplifications into methods like
-   * {@link #cast(JExpression, SourceInfo, JType, JExpression) simplifyCast}, so
+   * {@link Simplifier#cast(JType, JExpression)}, so
    * that more simplifications can be made on a single pass through a tree.
    */
   public class DeadCodeVisitor extends JChangeTrackingVisitor {

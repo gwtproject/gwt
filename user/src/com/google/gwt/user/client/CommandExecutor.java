@@ -32,7 +32,7 @@ import java.util.List;
  * warning which a user may choose to cancel. In that event, a
  * {@link CommandCanceledException} or an
  * {@link IncrementalCommandCanceledException} is reported through
- * {@link GWT#reportUncaughtException} depending on the type of command which
+ * {@link com.google.gwt.core.client.GWT#reportUncaughtException} depending on the type of command which
  * caused the warning. All other commands will continue to be executed.
  * </p>
  *

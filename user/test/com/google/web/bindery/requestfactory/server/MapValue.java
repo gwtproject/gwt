@@ -41,9 +41,6 @@ public class MapValue {
     return findMapValueById(id);
   }
 
-  /**
-   * Returns <code>null</code> if {@link #findFails} is <code>true</code>.
-   */
   public static MapValue findMapValueById(String id) {
     return get().get(id);
   }

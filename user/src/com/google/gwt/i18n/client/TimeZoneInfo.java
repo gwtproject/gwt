@@ -35,7 +35,7 @@ public class TimeZoneInfo extends JavaScriptObject {
    * your data.
    * 
    * @param json JSON text describing a time zone, like what comes from
-   * {@link  com.google.gwt.i18n.client.constants.TimeZoneConstants}.
+   * {@link com.google.gwt.i18n.client.constants.TimeZoneConstants}.
    * @return a TimeZoneInfo object made from the supplied JSON.
    */
   public static TimeZoneInfo buildTimeZoneData(String json) {

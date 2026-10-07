@@ -38,7 +38,7 @@ public abstract class Generator {
    * <p>
    * When this annotation is applied, the generator cannot access global level type information
    * (e.g. {@code JClassType#getSubTypes} or {@code TypeOracle#getTypes}) and also accesses to
-   * property values are restricted to the ones defined by {@link #requiredProperties}.
+   * property values are restricted to the ones defined by {@link #requiresProperties}.
    * <p>
    * This information is used by Generator invocation during incremental compilation to run
    * Generators as early as possible in the compile tree (and thus as parallelized and cached as

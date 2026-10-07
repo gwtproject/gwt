@@ -282,7 +282,7 @@ public class CollectionsTest extends EmulTestBase {
   }
 
   /**
-   * @tests java.util.Collections#rotate(java.util.List, int)
+   * Tests {@link java.util.Collections#rotate(java.util.List, int)}.
    */
   public void testRotate() {
     try {

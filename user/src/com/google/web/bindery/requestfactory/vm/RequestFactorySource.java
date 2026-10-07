@@ -37,7 +37,7 @@ public class RequestFactorySource {
    * @param <T> the RequestFactory type
    * @param requestFactory the RequestFactory type
    * @return an instance of the RequestFactory type
-   * @see InProcessRequestTransport
+   * @see com.google.web.bindery.requestfactory.server.testing.InProcessRequestTransport
    */
   public static <T extends RequestFactory> T create(Class<T> requestFactory) {
     RequestFactoryHandler handler =

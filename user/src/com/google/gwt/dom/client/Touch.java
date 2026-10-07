@@ -20,7 +20,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 /**
  * Class representing touches.
  *
- * See {@link <a href="http://developer.apple.com/library/safari/#documentation/UserExperience/Reference/TouchClassReference/Touch/Touch.html">Safari Touch Documentation</a>}
+ * See <a href="https://developer.apple.com/documentation/webkitjs/touchevent">Safari Touch Documentation</a>.
  */
 public class Touch extends JavaScriptObject {
 

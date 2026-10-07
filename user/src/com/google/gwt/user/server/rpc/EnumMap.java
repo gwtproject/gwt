@@ -17,13 +17,13 @@ package com.google.gwt.user.server.rpc;
  * A serialization-compatible mock for {@link java.util.EnumMap} that uses an equal
  * {@link #serialVersionUID} and a compatible set of fields. When de-serializing an
  * {@link java.util.EnumMap} instance into an instance of this class, e.g., by overriding
- * {@link ObjectInputStream}'s {@link ObjectInputStream#resolveClass} method such that it delivers
+ * {@link java.io.ObjectInputStream}'s {@code resolveClass} method such that it delivers
  * this class instead of {@link java.util.EnumMap}, the fields are made accessible through getters;
  * in particular, {@link #getKeyType()} reveals the original {@link java.util.EnumMap}'s key type,
  * even if the map is empty.
  * <p>
  * 
- * The {@link EnumMap#getEnumMapKeyType(java.util.EnumMap)} method can be used to determine the key
+ * The {@link EnumMap#getKeyType()} method can be used to determine the key
  * type of any {@link java.util.EnumMap}, even if it's empty.
  */
 class EnumMap<K extends Enum<K>, V> extends java.util.EnumMap<K, V> {

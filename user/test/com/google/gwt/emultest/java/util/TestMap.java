@@ -37,7 +37,7 @@ import jsinterop.annotations.JsProperty;
  * operations, simply extend this class, and implement the {@link
  * #makeEmptyMap()} method.
  * <p>
- * On the other hand, if your map implemenation is weird, you may have to
+ * On the other hand, if your map implementation is weird, you may have to
  * override one or more of the other protected methods.  They're described
  * below.<P>
  *
@@ -93,13 +93,10 @@ import jsinterop.annotations.JsProperty;
  *
  * After a modification operation to both {@link #map} and {@link #confirmed},
  * the {@link #verify()} method is invoked to compare the results.  The {@link
- * verify()} method calls separate methods to verify the map and its three
- * collection views ({@link verifyMap(), {@link verifyEntrySet()}, {@link
- * verifyKeySet()}, and {@link verifyValues()}).  You may want to override one
- * of the verification methodsto perform additional verifications.  For
- * instance, {@link TestDoubleOrderedMap} would want override its {@link
- * #verifyValues()} method to verify that the values are unique and in
- * ascending order.<P>
+ * #verify()} method calls separate methods to verify the map and its three
+ * collection views ({@link #verifyMap()}, {@link #verifyEntrySet()} and {@link
+ * #verifyKeySet()}). You may want to override one
+ * of the verification methods to perform additional verifications.<P>
  *
  * <B>Other Notes</B><P>
  *
@@ -336,7 +333,7 @@ abstract class TestMap extends TestObject {
   /**
    * Return a new, populated map. The mappings in the map should match the keys and values returned
    * from {@link #getSampleKeys()} and {@link #getSampleValues()}. The default implementation uses
-   * makeEmptyMap() and calls {@link #addSampleMappings()} to add all the mappings to the map.
+   * makeEmptyMap() and calls {@link #addSampleMappings} to add all the mappings to the map.
    */
   protected Map makeFullMap() {
     Map m = makeEmptyMap();

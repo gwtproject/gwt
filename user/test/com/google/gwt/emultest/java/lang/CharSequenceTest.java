@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 /**
  * Tests for Java 17 java.lang.CharSequence emulation.
  */
+@SuppressWarnings("UnnecessaryStringBuilder")
 public class CharSequenceTest extends EmulTestBase {
 
   public void testCompare() {

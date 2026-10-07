@@ -289,7 +289,7 @@ public class AsyncFragmentLoader {
   /**
    * Creates the loader stored as {@link #BROWSER_LOADER}.
    * 
-   * @returns {@code null} if not in GWT client code, where
+   * @return {@code null} if not in GWT client code, where
    *          {@link GWT#create(Class)} cannot be used, or a fragment loader for
    *          the user's application otherwise.
    */

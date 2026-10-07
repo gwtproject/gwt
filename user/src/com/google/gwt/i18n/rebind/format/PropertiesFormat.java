@@ -41,12 +41,6 @@ public class PropertiesFormat implements MessageCatalogFormat {
     return ".properties";
   }
 
-  /*
-   * (non-Javadoc)
-   *
-   * @see com.google.gwt.i18n.rebind.format.MessageCatalogFormat#write(com.google.gwt.i18n.rebind.util.AbstractResource,
-   *      java.io.File, com.google.gwt.core.ext.typeinfo.JClassType)
-   */
   @Override
   public void write(TreeLogger logger, String locale,
       ResourceList resourceList, PrintWriter out, JClassType messageInterface) {

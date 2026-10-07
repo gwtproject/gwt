@@ -18,7 +18,7 @@ package com.google.gwt.typedarrays.shared;
 /**
  * A buffer containing an arbitrary sequence of bytes.
  * 
- * {@link "http://www.khronos.org/registry/typedarray/specs/latest/#5"}
+ * @see <a href="https://262.ecma-international.org/6.0/#sec-typedarray-objects">typed array specification</a>
  */
 public interface ArrayBuffer {
 

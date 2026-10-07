@@ -27,6 +27,7 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
@@ -206,7 +207,9 @@ public class RPCTypeCheckCollectionsTest extends TestCase {
       linkedList.add(12345);
       linkedList.add(67890);
       strFactory.write(linkedList);
-      
+      strFactory.write(linkedList);
+      strFactory.write(linkedList);
+
       return strFactory.toString();
       
     } catch (Exception e) {
@@ -851,7 +854,7 @@ public class RPCTypeCheckCollectionsTest extends TestCase {
       linkedHashMap.put("bar", new Integer(12));
       strFactory.write(linkedHashMap);
 
-      TreeMap<HashSet, Integer> treeMap = new TreeMap<HashSet, Integer>();
+      TreeMap<HashSet, Integer> treeMap = new TreeMap<HashSet, Integer>(new IdentitySorter());
       treeMap.put(RPCTypeCheckFactory.generateTestHashSet(), 12345);
       strFactory.write(treeMap);
 
@@ -896,6 +899,12 @@ public class RPCTypeCheckCollectionsTest extends TestCase {
       return null;
     }
   }
+  public static class IdentitySorter implements Comparator<Object>, IsSerializable {
+    @Override
+    public int compare(Object o1, Object o2) {
+      return System.identityHashCode(o1) - System.identityHashCode(o2);
+    }
+  }
 
   @SuppressWarnings("unchecked")
   private static String generateTreeSetHashSetSpoofingSetInteger() {
@@ -908,7 +917,7 @@ public class RPCTypeCheckCollectionsTest extends TestCase {
       hashSet.add(67890);
       strFactory.write(hashSet);
 
-      ReverseSorter sorter = new ReverseSorter();
+      IdentitySorter sorter = new IdentitySorter();
       TreeSet treeSet = new TreeSet(sorter);
       treeSet.add(RPCTypeCheckFactory.generateTestHashSet());
       strFactory.write(treeSet);
@@ -1034,7 +1043,7 @@ public class RPCTypeCheckCollectionsTest extends TestCase {
 
   /**
    * This checks that List correctly handles correct types, and reports when it
-   * gets and incorrectly parameterized generic type.
+   * gets an incorrectly parameterized generic type.
    */
   public void testListSpoofingListRaw() {
     try {

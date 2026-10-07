@@ -18,7 +18,7 @@ package com.google.gwt.typedarrays.shared;
 /**
  * A view representing an {@link ArrayBuffer} as 32-bit floats.
  * 
- * {@link "http://www.khronos.org/registry/typedarray/specs/latest/#7"}
+ * @see <a href="https://262.ecma-international.org/6.0/#sec-typedarray-objects">typed array specification</a>
  */
 public interface Float64Array extends ArrayBufferView {
 

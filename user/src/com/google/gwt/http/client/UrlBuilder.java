@@ -149,7 +149,7 @@ public class UrlBuilder {
    * 
    * <p>
    * <h3>Example Output</h3>
-   * <code>?mykey=value0&mykey=value1&mykey=value2</code>
+   * {@code ?mykey=value0&mykey=value1&mykey=value2}
    * </p>
    * 
    * @param key the key

@@ -42,7 +42,7 @@ import java.util.TreeSet;
 import java.util.zip.GZIPOutputStream;
 
 /**
- * Records {@link Story}s to a file for Compile Reports.
+ * Records {@link com.google.gwt.core.ext.soyc.Story}s to a file for Compile Reports.
  */
 public class StoryRecorder {
 
@@ -80,7 +80,7 @@ public class StoryRecorder {
   private String[] js;
 
   /**
-   * Used by {@link #popAndRecord(Stack)} to determine start and end ranges.
+   * Used by {@link #popAndRecord(Stack, int)} to determine start and end ranges.
    */
   private int lastEnd = 0;
 

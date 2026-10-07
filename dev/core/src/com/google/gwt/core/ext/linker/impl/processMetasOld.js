@@ -15,7 +15,7 @@
  */
 
 /** Called to slurp up all <meta> tags:
- * gwt:property, gwt:onPropertyErrorFn, gwt:onLoadErrorFn
+ * ordinary properties and optional legacy error callbacks
  * 
  * This is included into the selection scripts
  * wherever PROCESS_METAS appears with underlines
@@ -48,7 +48,7 @@ function processMetas() {
           }
           metaProps[name] = value;
         }
-      } else if (name == 'gwt:onPropertyErrorFn') {
+      } /*__META_ERROR_HANDLERS_BEGIN__*/ else if (name == 'gwt:onPropertyErrorFn') {
         content = meta.getAttribute('content');
         if (content) {
           try {
@@ -67,7 +67,7 @@ function processMetas() {
             alert('Bad handler \"' + content + '\" for \"gwt:onLoadErrorFn\"');
           }
         }
-      }
+      } /*__META_ERROR_HANDLERS_END__*/
     }
   }
 }

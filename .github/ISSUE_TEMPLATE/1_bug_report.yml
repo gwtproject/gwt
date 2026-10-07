@@ -1,0 +1,59 @@
+name: 🐛 Bug report
+description: Create a report to help us improve GWT
+title: "Bug: "
+labels: [bug]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please make sure your issue can be reproduced in the latest version of GWT.
+        If possible, test in latest beta or release candidate (RC) as well.
+  - type: input
+    id: gwt_version
+    attributes:
+      label: GWT version
+      description: "The version of GWT where the issue occurs"
+      placeholder: "e.g. 2.9.0"
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser (with version)
+      description: "Browser and version where the issue was observed"
+      placeholder: "e.g. Firefox 117"
+  - type: input
+    id: os
+    attributes:
+      label: Operating System
+      description: "Operating system where the issue was observed"
+      placeholder: "e.g. Windows 10"
+  - type: markdown
+    attributes:
+      value: "---"
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: "Describe the issue. For long logs, provide a gist link."
+      placeholder: "What happened?"
+    validations:
+      required: true
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: Steps to reproduce
+      description: "List the steps to reproduce the issue or provide a demo project link."
+      placeholder: "1. ...\n2. ...\n3. ..."
+  - type: textarea
+    id: known_workarounds
+    attributes:
+      label: Known workarounds
+      description: "If there are any known workarounds, describe them here (optional)."
+  - type: textarea
+    id: links_to_further_discussions
+    attributes:
+      label: Links to further discussions
+      description: "Any links to related issues, PRs, or discussions (optional)."

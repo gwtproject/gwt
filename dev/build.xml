@@ -90,7 +90,7 @@
           <include name="apache/http/httpmime-4.5.13.jar"/>
           <include name="apache/james/apache-mime4j-0.6.jar"/>
           <include name="apache/commons/commons-codec-1.10.jar"/>
-          <include name="apache/commons/commons-io-2.4.jar"/>
+          <include name="apache/commons/commons-io-2.22.0.jar"/>
           <include name="apache/commons/commons-lang3-3.4.jar"/>
           <include name="apache/commons/commons-logging-1.2.jar"/>
           <include name="htmlunit/htmlunit-2.55.0/htmlunit-cssparser-1.10.0.jar"/>
@@ -158,7 +158,7 @@
           <zipfileset src="${gwt.tools.lib}/apache/http/httpmime-4.5.13.jar"/>
           <zipfileset src="${gwt.tools.lib}/apache/james/apache-mime4j-0.6.jar"/>
           <zipfileset src="${gwt.tools.lib}/apache/commons/commons-codec-1.10.jar"/>
-          <zipfileset src="${gwt.tools.lib}/apache/commons/commons-io-2.4.jar"/>
+          <zipfileset src="${gwt.tools.lib}/apache/commons/commons-io-2.22.0.jar"/>
           <zipfileset src="${gwt.tools.lib}/apache/commons/commons-lang3-3.4.jar"/>
           <zipfileset src="${gwt.tools.lib}/apache/commons/commons-logging-1.2.jar"/>
           <zipfileset src="${gwt.tools.lib}/htmlunit/htmlunit-2.55.0/htmlunit-cssparser-1.10.0.jar"/>

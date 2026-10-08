@@ -78,8 +78,7 @@ public class SameParameterValueOptimizerTest extends OptimizerTestBase {
     addSnippetClassDecl("static void foo(int i) { if (i == 2) {} int j = i; }");
     optimizeMethod("foo", "void",
         "foo(1); ").intoString(
-            "if (1 == 2) {",
-            "}",
+            "if (1 == 2);",
             "int j = 1;");
   }
 

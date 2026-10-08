@@ -15,6 +15,8 @@
  */
 package com.google.gwt.i18n.server;
 
+import static com.google.gwt.testing.server.Assertions.assertThrows;
+
 import com.google.gwt.i18n.shared.GwtLocale;
 import com.google.gwt.i18n.shared.GwtLocaleFactory;
 
@@ -182,11 +184,9 @@ public class GwtLocaleTest extends TestCase {
         "en.US",
     };
     for (String locale : invalid) {
-      try {
-        factory.fromString(locale);
-        fail("Should have thrown IllegalArgumentException on " + locale);
-      } catch (IllegalArgumentException expected) {
-      }
+      assertThrows(IllegalArgumentException.class,
+          () -> factory.fromString(locale),
+          "Should have thrown IllegalArgumentException on " + locale);
     }
     // Well-formed tags, including extended-language and private-use forms, are
     // still accepted with the language preserved verbatim.

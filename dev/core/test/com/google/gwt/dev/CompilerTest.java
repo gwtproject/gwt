@@ -47,6 +47,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -1500,6 +1501,135 @@ public class CompilerTest extends ArgProcessorTestBase {
       IOException, InterruptedException {
     checkIncrementalRecompile_dateStampChange(JsOutputOption.OBFUSCATED);
     checkIncrementalRecompile_dateStampChange(JsOutputOption.DETAILED);
+  }
+
+  // Repro for issue #9565. A stale type that is not currently reachable must still have its
+  // cached JS cleared; otherwise, when it becomes reachable again in a later compile, its
+  // outdated JS is reused and can reference (or collide with) global names inconsistently with
+  // freshly generated code.
+  public void testIncrementalRecompile_unreachableStaleTypeRegainsReachability()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    // Uses PRETTY output so that synthetic lambda type names are recognizable in the JS.
+    JsOutputOption output = JsOutputOption.PRETTY;
+
+    MockJavaResource widgetsWithThreeLambdas =
+        JavaResourceBase.createMockJavaResource("com.foo.Widgets",
+            """
+            package com.foo;
+            public class Widgets {
+              interface IntFilter {
+                boolean test(int value);
+              }
+              public static int state;
+              public static void ping() {
+                state++;
+              }
+              public static void trigger() {
+                Runnable a = () -> state++;
+                int cursorRow = 10;
+                IntFilter filter = value -> value >= cursorRow;
+                Runnable c = () -> state--;
+                a.run();
+                if (filter.test(11)) {
+                  c.run();
+                }
+              }
+            }
+            """);
+    // The same type with an extra lambda inserted first, so that the synthetic lambda types of
+    // trigger() are renumbered and the name 'Widgets$lambda$1$Type' etc. now denote different
+    // lambdas than before.
+    MockJavaResource widgetsWithFourLambdas =
+        JavaResourceBase.createMockJavaResource("com.foo.Widgets",
+            """
+            package com.foo;
+            public class Widgets {
+              interface IntFilter {
+                boolean test(int value);
+              }
+              public static int state;
+              public static void ping() {
+                state++;
+              }
+              public static void trigger() {
+                Runnable z = () -> state = state + 12345;
+                z.run();
+                Runnable a = () -> state++;
+                int cursorRow = 10;
+                IntFilter filter = value -> value >= cursorRow;
+                Runnable c = () -> state--;
+                a.run();
+                if (filter.test(11)) {
+                  c.run();
+                }
+              }
+            }
+            """);
+    MockJavaResource entryPointCallingTrigger =
+        JavaResourceBase.createMockJavaResource("com.foo.TestEntryPoint",
+            """
+            package com.foo;
+            import com.google.gwt.core.client.EntryPoint;
+            public class TestEntryPoint implements EntryPoint {
+              @Override
+              public void onModuleLoad() {
+                Widgets.ping();
+                Widgets.trigger();
+              }
+            }
+            """);
+    MockJavaResource entryPointNotCallingTrigger =
+        JavaResourceBase.createMockJavaResource("com.foo.TestEntryPoint",
+            """
+            package com.foo;
+            import com.google.gwt.core.client.EntryPoint;
+            public class TestEntryPoint implements EntryPoint {
+              @Override
+              public void onModuleLoad() {
+                Widgets.ping();
+              }
+            }
+            """);
+
+    MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();
+    File relinkApplicationDir = createTempDir();
+
+    // Compile the app so that the lambda types in Widgets.trigger() are reachable and their JS is
+    // cached.
+    compileToJs(relinkApplicationDir, "com.foo.SimpleModule", Lists.newArrayList(
+        simpleModuleResource, entryPointCallingTrigger, widgetsWithThreeLambdas),
+        relinkMinimalRebuildCache, null, output);
+
+    // Stop calling trigger(). Its lambda types become unreachable, but since Widgets was not
+    // modified their cached JS is retained.
+    compileToJs(relinkApplicationDir, "com.foo.SimpleModule",
+        Lists.<MockResource> newArrayList(entryPointNotCallingTrigger), relinkMinimalRebuildCache,
+        null, output);
+
+    // Call trigger() again and modify Widgets so that its lambda types are renumbered. The lambda
+    // types are stale but were unreachable in the previous compile; their outdated cached JS must
+    // not leak into the output.
+    String relinkedJs = compileToJs(relinkApplicationDir, "com.foo.SimpleModule",
+        Lists.<MockResource> newArrayList(entryPointCallingTrigger, widgetsWithFourLambdas),
+        relinkMinimalRebuildCache, null, output);
+
+    // The output must contain the current version of trigger(), not the cached stale one.
+    assertTrue("expected the regenerated trigger() body to be present in the output",
+        relinkedJs.contains("12345"));
+
+    // Every referenced lambda type constructor must be defined in the output. A dangling
+    // reference indicates that a stale, differently-named version of the type was reused.
+    Matcher useMatcher =
+        Pattern.compile("new\\s+([\\w$]*Widgets\\$lambda\\$\\d+\\$Type[\\w$]*)\\(")
+            .matcher(relinkedJs);
+    int lambdaCtorUses = 0;
+    while (useMatcher.find()) {
+      lambdaCtorUses++;
+      String usedCtorName = useMatcher.group(1);
+      assertTrue("lambda type constructor " + usedCtorName + " is referenced but never defined",
+          relinkedJs.contains("function " + usedCtorName + "("));
+    }
+    assertTrue("expected at least one lambda type constructor reference", lambdaCtorUses > 0);
   }
 
   // Repro for bug #9518

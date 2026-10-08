@@ -278,6 +278,10 @@ public class MinimalRebuildCache implements Serializable {
    * changes in the modified types. For example if the parent of class Foo was changed then the
    * castmaps in all children of Foo need to be recreated.
    * <p>
+   * Note that the returned set is not the same as the set of types whose cache was cleared. Cached
+   * output is cleared for every stale type, while the returned set is narrowed to the stale types
+   * that are currently reachable, since unreachable types should not be artificially retraversed.
+   * <p>
    * In some ways this process is similar to that performed by the CompilationUnitInvalidator but it
    * differs both in what type of cached objects are being cleared (JS versus CompilationUnits) and
    * in what invalidation rules must be applied. CompilationUnitInvalidator is concerned only with
@@ -324,6 +328,15 @@ public class MinimalRebuildCache implements Serializable {
       staleTypeNames.removeAll(JProgram.SYNTHETIC_TYPE_NAMES);
     }
 
+    // Clear the cached output of every stale type, including those that are not currently
+    // reachable. A stale type that is unreachable now may become reachable again in some later
+    // compile without being remarked stale, and it must not be reused from cache at that point:
+    // its cached JS was generated from an old version of its compilation unit and may reference
+    // (or collide with) global names differently than freshly generated code does.
+    for (String staleTypeName : staleTypeNames) {
+      clearCachedTypeOutput(staleTypeName);
+    }
+
     /*
      * Filter for just those stale types that are actually reachable. Since if they're not reachable
      * we don't want to artificially traverse them and unnecessarily reveal dependency problems. And
@@ -337,11 +350,7 @@ public class MinimalRebuildCache implements Serializable {
       logger.log(TreeLogger.DEBUG, "known modified types = " + modifiedTypeNames);
       logger.log(TreeLogger.DEBUG, "known modified resources = " + modifiedResourcePaths);
       logger.log(TreeLogger.DEBUG,
-          "clearing cached output for resulting stale types = " + staleTypeNames);
-    }
-
-    for (String staleTypeName : staleTypeNames) {
-      clearCachedTypeOutput(staleTypeName);
+          "stale types to retraverse = " + staleTypeNames);
     }
 
     return Sets.newHashSet(staleTypeNames);

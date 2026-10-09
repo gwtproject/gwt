@@ -15,6 +15,8 @@
  */
 package com.google.gwt.i18n.server;
 
+import static com.google.gwt.testing.server.Assertions.assertThrows;
+
 import com.google.gwt.i18n.shared.GwtLocale;
 import com.google.gwt.i18n.shared.GwtLocaleFactory;
 
@@ -172,6 +174,26 @@ public class GwtLocaleTest extends TestCase {
       fail("Should have thrown IllegalArgumentException on english_USA");
     } catch (IllegalArgumentException expected) {
     }
+  }
+
+  public void testFromStringRejectsInvalidLanguage() {
+    // The language subtag is concatenated into class names resolved reflectively
+    // on the server, so it must not carry characters like '.', '$' or '/'.
+    String[] invalid = {
+        "com.google.gwt.dev.Compiler", "java.lang.Runtime", "x$Evil", "a/b/c",
+        "en.US",
+    };
+    for (String locale : invalid) {
+      assertThrows(IllegalArgumentException.class,
+          () -> factory.fromString(locale),
+          "Should have thrown IllegalArgumentException on " + locale);
+    }
+    // Well-formed tags, including extended-language and private-use forms, are
+    // still accepted with the language preserved verbatim.
+    assertEquals("en", factory.fromString("en_US").getLanguage());
+    assertEquals("zh-cmn", factory.fromString("zh-cmn").getLanguage());
+    assertEquals("i-klingon", factory.fromString("i-klingon").getLanguage());
+    assertEquals("x-foo123", factory.fromString("x-foo123").getLanguage());
   }
 
   public void testInheritance() {

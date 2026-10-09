@@ -36,6 +36,24 @@ public class GwtLocaleFactoryImpl implements GwtLocaleFactory {
     return matches(str, min, max, false);
   }
 
+  private static boolean isAlphaNumeric(String str, int min, int max) {
+    int len = str.length();
+    if (len < min || len > max) {
+      return false;
+    }
+    for (int i = 0; i < len; ++i) {
+      char c = str.charAt(i);
+      // BCP47 subtags are ASCII only, so avoid Character.isLetterOrDigit which
+      // would also accept non-ASCII letters and digits.
+      boolean alphaNumeric = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+          || (c >= '0' && c <= '9');
+      if (!alphaNumeric) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   /**
    * Check if the supplied string matches length and composition requirements.
    * 
@@ -143,6 +161,14 @@ public class GwtLocaleFactoryImpl implements GwtLocaleFactory {
       ArrayList<String> localeParts = new ArrayList<String>();
       String[] parts = localeName.split("[-_]");
       for (int i = 0; i < parts.length; ++i) {
+        // The split only breaks on '-'/'_', so any other character stays inside
+        // a part. Require each subtag to be alphanumeric and 1-8 chars, matching
+        // BCP47, so an untrusted server-side locale can't smuggle '.', '$' or
+        // '/' into the class name LocalizableInstantiator resolves reflectively.
+        if (!isAlphaNumeric(parts[i], 1, 8)) {
+          throw new IllegalArgumentException("Unrecognized locale format: "
+              + localeName);
+        }
         if (parts[i].length() == 1 && i + 1 < parts.length) {
           localeParts.add(parts[i] + '-' + parts[++i]);
         } else {

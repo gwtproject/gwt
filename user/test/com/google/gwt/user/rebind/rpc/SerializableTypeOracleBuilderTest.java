@@ -15,6 +15,8 @@
  */
 package com.google.gwt.user.rebind.rpc;
 
+import com.google.gwt.core.ext.CachedGeneratorResult;
+import com.google.gwt.core.ext.CachedPropertyInformation;
 import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.StubGeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
@@ -41,6 +43,7 @@ import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.javac.testing.impl.StaticJavaResource;
 import com.google.gwt.dev.resource.Resource;
+import com.google.gwt.dev.util.UnitTestTreeLogger;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.user.rebind.rpc.testcases.client.AbstractSerializableTypes;
 import com.google.gwt.user.rebind.rpc.testcases.client.ClassWithTypeParameterThatErasesToObject;
@@ -75,6 +78,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
    * {@code SerializableTypeOracleBuilder}.
    */
   static class MockContext extends StubGeneratorContext {
+    private CachedGeneratorResult cachedGeneratorResult;
     private TypeOracle typeOracle;
     private PropertyOracle propertyOracle;
 
@@ -87,9 +91,25 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
       this.propertyOracle = propertyOracle;
     }
 
+    MockContext(TypeOracle typeOracle, PropertyOracle propertyOracle,
+        CachedGeneratorResult cachedGeneratorResult) {
+      this(typeOracle, propertyOracle);
+      this.cachedGeneratorResult = cachedGeneratorResult;
+    }
+
+    @Override
+    public CachedGeneratorResult getCachedGeneratorResult() {
+      return cachedGeneratorResult;
+    }
+
     @Override
     public TypeOracle getTypeOracle() {
       return typeOracle;
+    }
+
+    @Override
+    public boolean isGeneratorResultCachingEnabled() {
+      return cachedGeneratorResult != null;
     }
 
     @Override
@@ -231,6 +251,47 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     PropertyOracle props =
         new BindingProperties(new BindingProperty[0], new String[0], ConfigurationProperties.EMPTY).toPropertyOracle();
     return new SerializableTypeOracleBuilder(logger, new MockContext(to, props));
+  }
+
+  private static SerializableTypeOracleBuilder createSerializableTypeOracleBuilder(
+      TreeLogger logger, TypeOracle to, Map<String, List<String>> configurationProperties)
+      throws UnableToCompleteException {
+    return new SerializableTypeOracleBuilder(
+        logger, new MockContext(to, createPropertyOracle(configurationProperties)));
+  }
+
+  private static PropertyOracle createPropertyOracle(
+      Map<String, List<String>> configurationProperties) {
+    return new BindingProperties(new BindingProperty[0], new String[0],
+        new ConfigurationProperties(configurationProperties)).toPropertyOracle();
+  }
+
+  private static CachedGeneratorResult createCachedGeneratorResult(
+      final CachedPropertyInformation cachedPropertyInformation) {
+    return new CachedGeneratorResult() {
+      @Override
+      public Object getClientData(String key) {
+        if (ProxyCreator.CACHED_ENHANCED_CLASSES_PROPERTY_INFO_KEY.equals(key)) {
+          return cachedPropertyInformation;
+        }
+        return null;
+      }
+
+      @Override
+      public String getResultTypeName() {
+        return null;
+      }
+
+      @Override
+      public long getTimeGenerated() {
+        return 0;
+      }
+
+      @Override
+      public boolean isTypeCached(String typeName) {
+        return false;
+      }
+    };
   }
 
   private static TypeInfo[] getActualTypeInfo(SerializableTypeOracle sto) {
@@ -967,6 +1028,107 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     assertInstantiable(sto, subArray);
     assertInstantiable(sto, supArrayArray);
     assertInstantiable(sto, supArray);
+  }
+
+  /**
+   * Tests that enhanced class support can be disabled for an entire compilation.
+   */
+  public void testEnhancedClassesCanBeDisabled() throws UnableToCompleteException,
+      NotFoundException {
+    Set<Resource> resources = new HashSet<Resource>();
+    addStandardClasses(resources);
+
+    StringBuilder code = new StringBuilder();
+    code.append("import java.io.Serializable;\n");
+    code.append("public class Enhanced implements Serializable {\n");
+    code.append("}\n");
+    resources.add(new StaticJavaResource("Enhanced", code));
+
+    TreeLogger logger = createLogger();
+    TypeOracle to = TypeOracleTestingUtils.buildTypeOracle(logger, resources);
+    JClassType enhanced = to.getType("Enhanced");
+
+    Map<String, List<String>> properties = new HashMap<String, List<String>>();
+    properties.put(Shared.RPC_ENHANCED_CLASSES, Collections.singletonList("Enhanced"));
+    properties.put(Shared.RPC_ENHANCED_CLASSES_ENABLED, Collections.singletonList("false"));
+
+    SerializableTypeOracleBuilder sob =
+        createSerializableTypeOracleBuilder(logger, to, properties);
+    sob.addRootType(logger, enhanced);
+    sob.build(logger);
+    assertFalse(enhanced.isEnhanced());
+
+    // The module defaults the property to true so existing applications retain their behavior.
+    properties.put(Shared.RPC_ENHANCED_CLASSES_ENABLED, Collections.singletonList("true"));
+    sob = createSerializableTypeOracleBuilder(logger, to, properties);
+    sob.addRootType(logger, enhanced);
+    sob.build(logger);
+    assertTrue(enhanced.isEnhanced());
+  }
+
+  /**
+   * Tests parsing and backwards-compatible fallback for the enhanced class switch.
+   */
+  public void testEnhancedClassesEnabledPropertyParsing() {
+    Map<String, List<String>> properties = new HashMap<String, List<String>>();
+    properties.put(Shared.RPC_ENHANCED_CLASSES_ENABLED, Collections.singletonList("TRUE"));
+    assertTrue(Shared.shouldEnableEnhancedClasses(TreeLogger.NULL,
+        createPropertyOracle(properties)));
+
+    properties.put(Shared.RPC_ENHANCED_CLASSES_ENABLED, Collections.singletonList("false"));
+    assertFalse(Shared.shouldEnableEnhancedClasses(TreeLogger.NULL,
+        createPropertyOracle(properties)));
+
+    String warning = "The configuration property " + Shared.RPC_ENHANCED_CLASSES_ENABLED
+        + " was missing or did not have exactly one 'true' or 'false' value. Is "
+        + "RemoteService.gwt.xml inherited? Enhanced class support will remain enabled.";
+    UnitTestTreeLogger.Builder loggerBuilder = new UnitTestTreeLogger.Builder();
+    loggerBuilder.setLowestLogLevel(TreeLogger.WARN);
+    loggerBuilder.expectWarn(warning, null);
+    loggerBuilder.expectWarn(warning, null);
+    loggerBuilder.expectWarn(warning, null);
+    UnitTestTreeLogger logger = loggerBuilder.createLogger();
+
+    properties.clear();
+    assertTrue(Shared.shouldEnableEnhancedClasses(logger, createPropertyOracle(properties)));
+
+    properties.put(Shared.RPC_ENHANCED_CLASSES_ENABLED, Collections.singletonList("invalid"));
+    assertTrue(Shared.shouldEnableEnhancedClasses(logger, createPropertyOracle(properties)));
+
+    properties.put(Shared.RPC_ENHANCED_CLASSES_ENABLED, Arrays.asList("true", "false"));
+    assertTrue(Shared.shouldEnableEnhancedClasses(logger, createPropertyOracle(properties)));
+    logger.assertCorrectLogEntries();
+  }
+
+  /**
+   * Tests that changing the enhanced class property invalidates cached field serializers.
+   */
+  public void testEnhancedClassesPropertyInvalidatesCachedFieldSerializers() {
+    TreeLogger logger = createLogger();
+    Map<String, List<String>> properties = new HashMap<String, List<String>>();
+    properties.put(Shared.RPC_ENHANCED_CLASSES, Collections.singletonList("Enhanced"));
+    properties.put(Shared.RPC_ENHANCED_CLASSES_ENABLED, Collections.singletonList("true"));
+    PropertyOracle enabledProperties = createPropertyOracle(properties);
+    CachedPropertyInformation cachedPropertyInformation =
+        new CachedPropertyInformation(logger, enabledProperties, null,
+            Arrays.asList(
+                Shared.RPC_ENHANCED_CLASSES, Shared.RPC_ENHANCED_CLASSES_ENABLED));
+    CachedGeneratorResult cachedGeneratorResult =
+        createCachedGeneratorResult(cachedPropertyInformation);
+
+    MockContext context = new MockContext(null, enabledProperties, cachedGeneratorResult);
+    assertTrue(TypeSerializerCreator.cachedEnhancedClassesConfigurationMatches(logger, context));
+
+    properties.put(Shared.RPC_ENHANCED_CLASSES_ENABLED, Collections.singletonList("false"));
+    PropertyOracle disabledProperties = createPropertyOracle(properties);
+    context = new MockContext(null, disabledProperties, cachedGeneratorResult);
+    assertFalse(TypeSerializerCreator.cachedEnhancedClassesConfigurationMatches(logger, context));
+
+    properties.put(Shared.RPC_ENHANCED_CLASSES_ENABLED, Collections.singletonList("true"));
+    properties.put(Shared.RPC_ENHANCED_CLASSES, Collections.singletonList("OtherEnhanced"));
+    PropertyOracle changedEnhancedClasses = createPropertyOracle(properties);
+    context = new MockContext(null, changedEnhancedClasses, cachedGeneratorResult);
+    assertFalse(TypeSerializerCreator.cachedEnhancedClassesConfigurationMatches(logger, context));
   }
 
   /**

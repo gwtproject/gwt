@@ -14,8 +14,14 @@
 package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
+import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
+import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.ast.JReturnStatement;
+import com.google.gwt.dev.jjs.ast.JUnsafeTypeCoercion;
 
 /**
  * Test for {@link MethodInliner}.
@@ -184,6 +190,49 @@ public class MethodInlinerTest extends OptimizerTestBase {
     assertEquals(
         "static int fun2(int a){ return a <= 0 ? a : EntryPoint.fun1(a - 1) + a; }",
         getCanonicalSource(result.findMethod("fun2")));
+  }
+
+  private static final MockJavaResource JS_UTILS =
+      JavaResourceBase.createMockJavaResource("javaemul.internal.JsUtils",
+          "package javaemul.internal;",
+          "import javaemul.internal.annotations.DoNotAutobox;",
+          "import javaemul.internal.annotations.UncheckedCast;",
+          "public final class JsUtils {",
+          "  @UncheckedCast",
+          "  public static <T> T uncheckedCast(@DoNotAutobox Object o) { return (T) o; }",
+          "}");
+
+  /**
+   * Models the boxing path in emulated Double: valueOf calls $create, which uses uncheckedCast.
+   * The usual mock creates a Double with a constructor. Since this test does not run the pass
+   * that replaces constructor calls with $create, this mock calls $create directly.
+   */
+  private static final MockJavaResource BOXING_DOUBLE =
+      JavaResourceBase.createMockJavaResource("java.lang.Double",
+          "package java.lang;",
+          "import javaemul.internal.JsUtils;",
+          "public class Double extends Number {",
+          // AutoboxUtils requires an unboxing method even though this test only exercises boxing.
+          "  public double doubleValue() { return 0; }",
+          "  public static Double valueOf(double d) { return $create(d); }",
+          "  protected static Double $create(double x) { return JsUtils.uncheckedCast(x); }",
+          "}");
+
+  /**
+   * GWT 2.13 made JsUtils.uncheckedCast a Java method, allowing the inliner to expose its type
+   * coercion in the caller. The compiler can then use the primitive's non-null type to establish
+   * that the boxed result is non-null too. Keep that type information through inlining.
+   */
+  public void testBoxedPrimitiveIsNonNullOnceUncheckedCastIsInlined() throws Exception {
+    addAll(JS_UTILS, BOXING_DOUBLE);
+    addSnippetClassDecl("static Double box(double d) { return d; }");
+    Result result = optimize("void", "box(1);");
+
+    JMethodBody body = (JMethodBody) result.findMethod("box").getBody();
+    JExpression boxed = ((JReturnStatement) body.getStatements().get(0)).getExpr();
+    assertTrue("boxing should have inlined down to the coercion",
+        boxed instanceof JUnsafeTypeCoercion);
+    assertFalse("the boxed double should be non-null", boxed.getType().canBeNull());
   }
 
   @Override

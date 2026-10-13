@@ -62,7 +62,7 @@ import javaemul.internal.annotations.HasNoSideEffects;
  *  - isUpperCase(char c)
  * </pre>
  */
-public final class Character implements Comparable<Character>, Serializable {
+public final class Character implements Comparable<Character>, Constable, Serializable {
   /**
    * Helper class to share code between implementations, by making a char
    * array look like a CharSequence.

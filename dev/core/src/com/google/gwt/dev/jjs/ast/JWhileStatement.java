@@ -22,16 +22,16 @@ import com.google.gwt.dev.jjs.SourceInfo;
  */
 public class JWhileStatement extends JStatement {
 
-  private JStatement body;
+  private JBlock body;
   private JExpression testExpr;
 
   public JWhileStatement(SourceInfo info, JExpression testExpr, JStatement body) {
     super(info);
     this.testExpr = testExpr;
-    this.body = body;
+    this.body = JBlock.ensureBlock(info, body);
   }
 
-  public JStatement getBody() {
+  public JBlock getBody() {
     return body;
   }
 
@@ -43,9 +43,7 @@ public class JWhileStatement extends JStatement {
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {
       testExpr = visitor.accept(testExpr);
-      if (body != null) {
-        body = visitor.accept(body, true);
-      }
+      body = JBlock.ensureBlock(getSourceInfo(), visitor.accept(body, false));//TODO no tests fail without this change...
     }
     visitor.endVisit(this, ctx);
   }

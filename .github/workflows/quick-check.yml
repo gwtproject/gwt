@@ -60,7 +60,7 @@ jobs:
           done
           reviewdog -efm="    [javac] %f:%l: warning: %m" -filter-mode=diff_context -reporter=github-pr-annotations -level=info < log.txt || true
       - name: Upload checkstyle xml for manual review
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 #v7.0.2
         if: ${{ matrix.java-version == '21' }}
         with:
           name: checkstyle-reports-java${{ matrix.java-version }}

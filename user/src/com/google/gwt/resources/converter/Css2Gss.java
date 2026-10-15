@@ -29,7 +29,6 @@ import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.thirdparty.guava.common.io.Files;
 
-import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -37,6 +36,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -190,7 +190,7 @@ public class Css2Gss {
 
   private static void writeGss(String gss, File cssFile) throws IOException {
     File gssFile = getCorrespondingGssFile(cssFile);
-    Files.asCharSink(gssFile, Charsets.UTF_8).write(gss);
+    Files.asCharSink(gssFile, StandardCharsets.UTF_8).write(gss);
   }
 
   private static String convertFile(File resource, Set<String> simpleBooleanConditions,

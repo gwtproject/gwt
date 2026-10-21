@@ -774,6 +774,17 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   }
 
   /**
+   * check ZERO.
+   */
+  public void testFieldZERO() {
+    String oneS = "0";
+    double oneD = 0.0;
+    assertEquals("incorrect string value", oneS, BigDecimal.ZERO.toString());
+    assertEquals("incorrect double value", oneD, BigDecimal.ZERO.doubleValue(),
+        0);
+  }
+
+  /**
    * check ONE.
    */
   public void testFieldONE() {
@@ -785,6 +796,17 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   }
 
   /**
+   * check TWO.
+   */
+  public void testFieldTWO() {
+    String twoS = "2";
+    double twoD = 2.0;
+    assertEquals("incorrect string value", twoS, BigDecimal.TWO.toString());
+    assertEquals("incorrect double value", twoD, BigDecimal.TWO.doubleValue(),
+        0);
+  }
+
+  /**
    * check TEN.
    */
   public void testFieldTEN() {
@@ -792,17 +814,6 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
     double oneD = 10.0;
     assertEquals("incorrect string value", oneS, BigDecimal.TEN.toString());
     assertEquals("incorrect double value", oneD, BigDecimal.TEN.doubleValue(),
-        0);
-  }
-
-  /**
-   * check ZERO.
-   */
-  public void testFieldZERO() {
-    String oneS = "0";
-    double oneD = 0.0;
-    assertEquals("incorrect string value", oneS, BigDecimal.ZERO.toString());
-    assertEquals("incorrect double value", oneD, BigDecimal.ZERO.doubleValue(),
         0);
   }
 

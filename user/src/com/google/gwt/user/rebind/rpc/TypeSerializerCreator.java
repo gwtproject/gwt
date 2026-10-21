@@ -21,6 +21,7 @@ import com.google.gwt.core.client.GwtScriptOnly;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.CachedGeneratorResult;
+import com.google.gwt.core.ext.CachedPropertyInformation;
 import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
@@ -114,6 +115,8 @@ public class TypeSerializerCreator {
 
   private final boolean elideTypeNames;
 
+  private final boolean canReuseCachedFieldSerializers;
+
   private final JType[] serializableTypes;
 
   private final SerializableTypeOracle serializationOracle;
@@ -170,9 +173,12 @@ public class TypeSerializerCreator {
     }
 
     if (context.isGeneratorResultCachingEnabled()) {
+      canReuseCachedFieldSerializers =
+          cachedEnhancedClassesConfigurationMatches(logger, context);
       typesNotUsingCustomFieldSerializers = new HashSet<JType>();
       customFieldSerializersUsed = new HashSet<JType>();
     } else {
+      canReuseCachedFieldSerializers = false;
       typesNotUsingCustomFieldSerializers = null;
       customFieldSerializersUsed = null;
     }
@@ -303,6 +309,10 @@ public class TypeSerializerCreator {
   private boolean findReusableCachedFieldSerializerIfAvailable(TreeLogger logger,
       GeneratorContext ctx, JType type, JType customFieldSerializer) {
 
+    if (!canReuseCachedFieldSerializers) {
+      return false;
+    }
+
     CachedGeneratorResult lastResult = ctx.getCachedGeneratorResult();
     if (lastResult == null || !ctx.isGeneratorResultCachingEnabled()) {
       return false;
@@ -350,6 +360,20 @@ public class TypeSerializerCreator {
     }
 
     return foundMatch;
+  }
+
+  static boolean cachedEnhancedClassesConfigurationMatches(TreeLogger logger,
+      GeneratorContext context) {
+    CachedGeneratorResult lastResult = context.getCachedGeneratorResult();
+    if (lastResult == null || !context.isGeneratorResultCachingEnabled()) {
+      return false;
+    }
+
+    CachedPropertyInformation cpi =
+        (CachedPropertyInformation) lastResult.getClientData(
+            ProxyCreator.CACHED_ENHANCED_CLASSES_PROPERTY_INFO_KEY);
+    return cpi != null
+        && cpi.checkPropertiesWithPropertyOracle(logger, context.getPropertyOracle());
   }
 
   private String[] getPackageAndClassName(String fullClassName) {
@@ -849,4 +873,3 @@ public class TypeSerializerCreator {
     srcWriter.outdent();
   }
 }
-

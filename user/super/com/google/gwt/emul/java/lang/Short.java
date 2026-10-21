@@ -20,7 +20,7 @@ import javaemul.internal.annotations.HasNoSideEffects;
 /**
  * Wraps a primitive <code>short</code> as an object.
  */
-public final class Short extends Number implements Comparable<Short> {
+public final class Short extends Number implements Comparable<Short>, Constable {
 
   public static final short MIN_VALUE = (short) 0x8000;
   public static final short MAX_VALUE = (short) 0x7fff;

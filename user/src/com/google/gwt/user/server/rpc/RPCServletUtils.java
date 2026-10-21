@@ -52,6 +52,40 @@ public class RPCServletUtils {
    */
   static final int BUFFER_SIZE = 4096;
 
+  /**
+   * Name of the system property that overrides the maximum accepted request body size, in
+   * bytes. Values that are not a positive integer are ignored in favour of the default, so a
+   * malformed override cannot disable the cap.
+   */
+  public static final String MAX_REQUEST_BODY_BYTES_PROPERTY = "gwt.rpc.maxRequestBodyBytes";
+
+  /**
+   * Default maximum request body size accepted by {@link #readContent}, in bytes.
+   */
+  static final int DEFAULT_MAX_REQUEST_BODY_BYTES = 1024 * 1024;
+
+  /**
+   * Maximum number of bytes {@link #readContent} buffers from a request body before rejecting
+   * it. Without a ceiling the read loop buffers an arbitrarily large attacker-supplied body
+   * into memory and then duplicates it as a String, exhausting the heap (CWE-400).
+   */
+  static final int MAX_REQUEST_BODY_BYTES = readMaxRequestBodyBytes();
+
+  private static int readMaxRequestBodyBytes() {
+    String override = System.getProperty(MAX_REQUEST_BODY_BYTES_PROPERTY);
+    if (override != null) {
+      try {
+        int parsed = Integer.parseInt(override.trim());
+        if (parsed > 0) {
+          return parsed;
+        }
+      } catch (NumberFormatException e) {
+        // Fall through to the default rather than leaving the body unbounded.
+      }
+    }
+    return DEFAULT_MAX_REQUEST_BODY_BYTES;
+  }
+
   private static final String ACCEPT_ENCODING = "Accept-Encoding";
 
   private static final String ATTACHMENT = "attachment";
@@ -201,7 +235,8 @@ public class RPCServletUtils {
    *         from or closed
    * @throws ServletException if the request's content type does not
    *         equal the supplied <code>expectedContentType</code> or
-   *         <code>expectedCharSet</code>
+   *         <code>expectedCharSet</code>, or if the request body exceeds
+   *         {@link #MAX_REQUEST_BODY_BYTES}
    */
   public static String readContent(HttpServletRequest request,
       String expectedContentType, String expectedCharSet)
@@ -215,16 +250,30 @@ public class RPCServletUtils {
 
     /*
      * Need to support 'Transfer-Encoding: chunked', so do not rely on
-     * presence of a 'Content-Length' request header.
+     * presence of a 'Content-Length' request header. When the header is present and already
+     * over the limit, reject before reading any of the body; the accumulated-byte check below
+     * is what enforces the limit for chunked requests and for an understated header.
      */
+    int declaredLength = request.getContentLength();
+    if (declaredLength > MAX_REQUEST_BODY_BYTES) {
+      throw new ServletException("Request body of " + declaredLength
+          + " bytes exceeds the maximum of " + MAX_REQUEST_BODY_BYTES + " bytes");
+    }
+
     InputStream in = request.getInputStream();
     byte[] buffer = new byte[BUFFER_SIZE];
     ByteArrayOutputStream out = new  ByteArrayOutputStream(BUFFER_SIZE);
     try {
+      int totalRead = 0;
       while (true) {
         int byteCount = in.read(buffer);
         if (byteCount == -1) {
           break;
+        }
+        totalRead += byteCount;
+        if (totalRead > MAX_REQUEST_BODY_BYTES) {
+          throw new ServletException("Request body exceeds the maximum of "
+              + MAX_REQUEST_BODY_BYTES + " bytes");
         }
         out.write(buffer, 0, byteCount);
       }

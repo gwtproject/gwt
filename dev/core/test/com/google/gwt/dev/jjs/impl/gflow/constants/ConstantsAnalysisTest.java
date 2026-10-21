@@ -117,12 +117,10 @@ public class ConstantsAnalysisTest extends CfgAnalysisTestBase<ConstantsAssumpti
         "STMT -> [* T]",
         "READ(i) -> [* T]",
         "COND (i == 1) -> [THEN=* {i = 1}, ELSE=1 T]",
-        "BLOCK -> [* {i = 1}]",
         "STMT -> [* {i = 1}]",
         "READ(i) -> [* {i = 1}]",
         "WRITE(j, i) -> [2 {i = 1, j = 1}]",
-        "1: BLOCK -> [* T]",
-        "STMT -> [* T]",
+        "1: STMT -> [* T]",
         "READ(i) -> [* T]",
         "WRITE(j, i) -> [* T]",
         "2: END");
@@ -180,9 +178,8 @@ public class ConstantsAnalysisTest extends CfgAnalysisTestBase<ConstantsAssumpti
         "WRITE(j, 0) -> [* {j = 0}]",
         "STMT -> [* {j = 0}]",
         "1: READ(j) -> [* {j = 0}]",
-        "COND (j > 0) -> [THEN=* {j = 0}, ELSE=2 {j = 0}]",
-        "BLOCK -> [1 {j = 0}]",
-        "2: END");
+        "COND (j > 0) -> [THEN=1 {j = 0}, ELSE=* {j = 0}]",
+        "END");
   }
 
   public void testConditionalExpressions() throws Exception {
@@ -238,7 +235,6 @@ public class ConstantsAnalysisTest extends CfgAnalysisTestBase<ConstantsAssumpti
         "STMT -> [* T]",
         "READ(j) -> [* T]",
         "COND (j == 0) -> [THEN=* {j = 0}, ELSE=1 T]",
-        "BLOCK -> [* {j = 0}]",
         "STMT -> [* {j = 0}]",
         "WRITE(i, 0) -> [* {i = 0, j = 0}]",
         "1: STMT -> [* T]",

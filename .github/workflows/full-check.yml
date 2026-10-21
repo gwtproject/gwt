@@ -54,9 +54,10 @@ jobs:
             ANT_OPTS='-Dfile.encoding=UTF8 -Xmx2g' \
             GWT_VERSION=HEAD-SNAPSHOT
           # Run the ant tasks, disabling watchFileChanges to work around a github actions limitation
+          # Only Java 21 will run optimized tests
           ant clean test dist doc \
             -Dtest.jvmargs='-ea -Dgwt.watchFileChanges=false' \
-            -Dtest.web.htmlunit.disable=true \
+            -Dtest.web.htmlunit.disable=${{ matrix.java-version != '21' }} \
             -Dtest.nometa.htmlunit.disable=true \
             -Dtest.emma.htmlunit.disable=true
 

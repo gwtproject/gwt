@@ -411,9 +411,15 @@ class Resolver {
     }
 
     Set<String> toReturn = new TreeSet<String>();
+    final int maxDepth = 32; // bound per-ref prefix expansion (CWE-400)
     for (String raw : refs) {
+      int depth = 0;
       for (int idx = raw.length(); idx >= 0; idx = raw.lastIndexOf('.', idx - 1)) {
         toReturn.add(raw.substring(0, idx));
+        if (++depth > maxDepth) {
+          throw new ReportableException("Property reference exceeds the maximum depth of "
+              + maxDepth + ": " + raw);
+        }
       }
     }
     return toReturn;

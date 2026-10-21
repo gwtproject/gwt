@@ -28,13 +28,13 @@ import com.google.gwt.core.linker.IFrameLinker;
 import com.google.gwt.core.linker.SingleScriptLinker;
 import com.google.gwt.core.linker.XSLinker;
 
-import com.gargoylesoftware.htmlunit.AlertHandler;
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.WebClient;
-
 import junit.framework.TestCase;
+
+import org.htmlunit.AlertHandler;
+import org.htmlunit.FailingHttpStatusCodeException;
+import org.htmlunit.MockWebConnection;
+import org.htmlunit.Page;
+import org.htmlunit.WebClient;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

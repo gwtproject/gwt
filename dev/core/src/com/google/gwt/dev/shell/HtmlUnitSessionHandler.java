@@ -23,23 +23,21 @@ import com.google.gwt.dev.shell.BrowserChannel.Value.ValueType;
 import com.google.gwt.dev.shell.BrowserChannelClient.SessionHandlerClient;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 
-import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptableProxy;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
-
-import net.sourceforge.htmlunit.corejs.javascript.ConsString;
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.ScriptException;
+import org.htmlunit.ScriptResult;
+import org.htmlunit.WebClient;
+import org.htmlunit.WebWindow;
+import org.htmlunit.corejs.javascript.ConsString;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.JavaScriptException;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.HtmlUnitScriptableProxy;
+import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.host.Window;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -185,13 +183,14 @@ public class HtmlUnitSessionHandler extends SessionHandlerClient {
       jsThis = window;
     } else {
       Object obj = makeJsvalFromValue(jsContext, thisObj);
+      if (obj instanceof HtmlUnitScriptableProxy) {
+        obj = ((HtmlUnitScriptableProxy<?>) obj).getDelegee();
+      }
       if (obj instanceof ScriptableObject) {
         jsThis = (ScriptableObject) obj;
-      } else if (obj instanceof SimpleScriptableProxy<?>) {
-        jsThis = ((SimpleScriptableProxy<SimpleScriptable>) obj).getDelegee();
       } else {
         logger.log(TreeLogger.ERROR, "Unable to convert " + obj + " to either "
-            + " ScriptableObject or SimpleScriptableProxy");
+            + " ScriptableObject or HtmlUnitScriptableProxy");
         return new ExceptionOrReturnValue(true, new Value(null));
       }
     }
@@ -289,14 +288,14 @@ public class HtmlUnitSessionHandler extends SessionHandlerClient {
       return returnVal;
     }
     if (value instanceof Scriptable) {
-      if (value instanceof SimpleScriptableProxy) {
+      if (value instanceof HtmlUnitScriptableProxy) {
         // HtmlUnit will return proxies to java for the window/document objects,
         // so that those objects can work after navigating away from the page.
         // However, GWTTestCase operates inside a single page session, so we
         // can unwrap these proxies to get the real instance. Without doing
         // this, the refToJsObject mapping would indicate that an object might
         // not equal itself
-        value = ((SimpleScriptableProxy<?>) value).getDelegee();
+        value = ((HtmlUnitScriptableProxy<?>) value).getDelegee();
       }
       if (value instanceof ScriptableObject) {
         /*

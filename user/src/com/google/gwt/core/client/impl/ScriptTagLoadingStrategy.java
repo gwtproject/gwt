@@ -21,9 +21,11 @@ import com.google.gwt.core.client.impl.AsyncFragmentLoader.HttpDownloadFailure;
 
 /**
  * A download strategy that uses a JSONP style script tag mechanism. and is
- * therefore cross site compatible. Note that if this strategy is used, the
- * deferred fragments must be wrapped in a callback called runAsyncCallbackX()
- * where X is the fragment number.
+ * therefore cross site compatible. Note that if this strategy is used, each
+ * deferred fragment must call a callback called runAsyncCallbackX(), where X is
+ * the fragment number, exactly once: either with the fragment code as a string
+ * to install, or with null when the fragment code runs directly from the
+ * script tag.
  *
  * This is the default strategy for the CrossSiteIframeLinker.
  */
@@ -54,9 +56,13 @@ public class ScriptTagLoadingStrategy extends LoadingStrategyBase {
     }
   }
 
+  /**
+   * Called by a downloaded fragment. {@code code} is null when the fragment's
+   * code runs directly from its script tag and needs no separate install.
+   */
   private static void asyncCallback(RequestData request, String code) {
     boolean firstTimeCalled = clearAsyncCallback(request.getFragment());
-    if (firstTimeCalled) {
+    if (firstTimeCalled && code != null) {
       request.tryInstall(code);
     }
   }

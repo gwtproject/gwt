@@ -128,13 +128,14 @@ public class ImplementRecordComponents {
   }
 
   private void implementHashCode(JRecordType type, JMethod method, SourceInfo info) {
+    List<JField> fields = getComponentFields(type);
     final JExpression hashcodeStatement;
-    if (type.getFields().isEmpty()) {
-      // No fields, just emit hashcode=0
+    if (fields.isEmpty()) {
+      // No components, just emit hashcode=0
       hashcodeStatement = new JIntLiteral(info, 0);
     } else {
-      List<JExpression> exprs = Lists.newArrayListWithCapacity(type.getFields().size());
-      for (JField field : type.getFields()) {
+      List<JExpression> exprs = Lists.newArrayListWithCapacity(fields.size());
+      for (JField field : fields) {
         JFieldRef jFieldRef = new JFieldRef(info, new JThisRef(info, type), field, type);
         if (jFieldRef.getType().isPrimitiveType()) {
           exprs.add(autoboxUtils.box(jFieldRef, (JPrimitiveType) jFieldRef.getType()));
@@ -231,7 +232,7 @@ public class ImplementRecordComponents {
     JExpression toStrExpr = new JMethodCall(info, getClass, getSimpleNameMethod);
 
     args.add(new JStringLiteral(info, "[", javaLangString));
-    List<JField> fields = type.getFields();
+    List<JField> fields = getComponentFields(type);
     for (int i = 0; i < fields.size(); i++) {
       if (i != 0) {
         args.add(new JStringLiteral(info, ", ", javaLangString));
@@ -250,5 +251,20 @@ public class ImplementRecordComponents {
     JMethodBody body = new JMethodBody(info);
     body.getBlock().addStmt(toStrExpr.makeReturnStatement());
     method.setBody(body);
+  }
+
+  /**
+   * Returns the fields that correspond to the record's components. A record type's fields also
+   * include any static fields it declares, which are not components and so must take no part in
+   * equals, hashCode or toString.
+   */
+  private static List<JField> getComponentFields(JRecordType type) {
+    List<JField> fields = new ArrayList<>();
+    for (JField field : type.getFields()) {
+      if (!field.isStatic()) {
+        fields.add(field);
+      }
+    }
+    return fields;
   }
 }

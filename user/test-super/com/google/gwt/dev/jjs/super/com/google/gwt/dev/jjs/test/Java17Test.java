@@ -164,6 +164,12 @@ public class Java17Test extends GWTTestCase {
    */
   record RecordWithFloatingPointComponents(double doubleValue, float floatValue) {}
 
+  /**
+   * Record with boxed floating point components, which equals must compare by value rather than
+   * by the emulated Double.equals and Float.equals.
+   */
+  record RecordWithBoxedFloatingPointComponents(Double doubleValue, Float floatValue) {}
+
   public void testRecordClasses() {
     /**
      * Sample local record.
@@ -247,6 +253,34 @@ public class Java17Test extends GWTTestCase {
             new RecordWithFloatingPointComponents(1.5, 2.5f));
     assertFalse(new RecordWithFloatingPointComponents(1.5, 2.5f)
             .equals(new RecordWithFloatingPointComponents(1.5, 2.25f)));
+  }
+
+  public void testRecordEqualsWithBoxedFloatingPointComponents() {
+    // JLS 8.10.3 compares a component of reference type as if by Objects.equals, which for
+    // Double and Float means Double.equals and Float.equals: NaN is equal to itself and 0.0 is
+    // distinct from -0.0, even though the emulated equals compares with ==.
+    assertEquals(new RecordWithBoxedFloatingPointComponents(Double.NaN, Float.NaN),
+            new RecordWithBoxedFloatingPointComponents(Double.NaN, Float.NaN));
+    assertFalse(new RecordWithBoxedFloatingPointComponents(0.0, 0.0f)
+            .equals(new RecordWithBoxedFloatingPointComponents(-0.0, 0.0f)));
+    assertFalse(new RecordWithBoxedFloatingPointComponents(0.0, 0.0f)
+            .equals(new RecordWithBoxedFloatingPointComponents(0.0, -0.0f)));
+
+    // A null component equals only another null component.
+    assertEquals(new RecordWithBoxedFloatingPointComponents(null, null),
+            new RecordWithBoxedFloatingPointComponents(null, null));
+    assertFalse(new RecordWithBoxedFloatingPointComponents(null, 1.5f)
+            .equals(new RecordWithBoxedFloatingPointComponents(1.5, 1.5f)));
+    assertFalse(new RecordWithBoxedFloatingPointComponents(1.5, 1.5f)
+            .equals(new RecordWithBoxedFloatingPointComponents(null, 1.5f)));
+    assertFalse(new RecordWithBoxedFloatingPointComponents(1.5, null)
+            .equals(new RecordWithBoxedFloatingPointComponents(1.5, 1.5f)));
+
+    // Ordinary values are unaffected.
+    assertEquals(new RecordWithBoxedFloatingPointComponents(1.5, 2.5f),
+            new RecordWithBoxedFloatingPointComponents(1.5, 2.5f));
+    assertFalse(new RecordWithBoxedFloatingPointComponents(1.5, 2.5f)
+            .equals(new RecordWithBoxedFloatingPointComponents(1.5, 2.25f)));
   }
 
   public void testRecordConstructors() {

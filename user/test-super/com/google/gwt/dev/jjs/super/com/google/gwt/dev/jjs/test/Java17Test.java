@@ -158,6 +158,12 @@ public class Java17Test extends GWTTestCase {
    */
   record RecordWithReferenceType(TopLevelRecord refType){}
 
+  /**
+   * Record with floating point components, which equals must compare as if by Double.compare and
+   * Float.compare rather than with ==.
+   */
+  record RecordWithFloatingPointComponents(double doubleValue, float floatValue) {}
+
   public void testRecordClasses() {
     /**
      * Sample local record.
@@ -218,6 +224,29 @@ public class Java17Test extends GWTTestCase {
     assertTrue(new TopLevelRecord(null, 1).equals(new TopLevelRecord(null, 1)));
     assertFalse(new TopLevelRecord("asdf", 2).equals(new TopLevelRecord(null, 2)));
     assertFalse(new TopLevelRecord(null, 3).equals(new TopLevelRecord("abc", 3)));
+  }
+
+  public void testRecordEqualsWithFloatingPointComponents() {
+    // JLS 8.10.3: a component of primitive type is equal if the compare method of its wrapper
+    // class returns 0 for the two values, which for NaN and -0.0 differs from ==.
+    assertEquals(new RecordWithFloatingPointComponents(Double.NaN, Float.NaN),
+            new RecordWithFloatingPointComponents(Double.NaN, Float.NaN));
+    assertFalse(new RecordWithFloatingPointComponents(0.0, 0.0f)
+            .equals(new RecordWithFloatingPointComponents(-0.0, 0.0f)));
+    assertFalse(new RecordWithFloatingPointComponents(0.0, 0.0f)
+            .equals(new RecordWithFloatingPointComponents(0.0, -0.0f)));
+
+    // A record equals a copy of itself made by passing its components to the canonical
+    // constructor, even when a component is NaN.
+    RecordWithFloatingPointComponents nan =
+            new RecordWithFloatingPointComponents(Double.NaN, Float.NaN);
+    assertEquals(nan, new RecordWithFloatingPointComponents(nan.doubleValue(), nan.floatValue()));
+
+    // Ordinary values are unaffected.
+    assertEquals(new RecordWithFloatingPointComponents(1.5, 2.5f),
+            new RecordWithFloatingPointComponents(1.5, 2.5f));
+    assertFalse(new RecordWithFloatingPointComponents(1.5, 2.5f)
+            .equals(new RecordWithFloatingPointComponents(1.5, 2.25f)));
   }
 
   public void testRecordConstructors() {

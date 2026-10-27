@@ -39,6 +39,7 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JRecordType;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.jjs.ast.JThisRef;
+import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JUnsafeTypeCoercion;
 import com.google.gwt.dev.jjs.ast.RuntimeConstants;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
@@ -62,6 +63,8 @@ public class ImplementRecordComponents {
   private final JMethod getSimpleNameMethod;
   private final JClassType javaLangString;
   private final JMethod objectsEquals;
+  private final JMethod doubleCompare;
+  private final JMethod floatCompare;
 
   private ImplementRecordComponents(JProgram program) {
     this.program = program;
@@ -72,6 +75,17 @@ public class ImplementRecordComponents {
     javaLangString = program.getTypeJavaLangString();
     objectsEquals = program.getIndexedType("Objects")
         .findMethod("equals(Ljava/lang/Object;Ljava/lang/Object;)Z", false);
+    doubleCompare = findCompareMethod(program, JPrimitiveType.DOUBLE);
+    floatCompare = findCompareMethod(program, JPrimitiveType.FLOAT);
+  }
+
+  /**
+   * Returns the static compare method of the wrapper class for a floating point primitive type.
+   */
+  private static JMethod findCompareMethod(JProgram program, JPrimitiveType type) {
+    String signatureName = type.getJsniSignatureName();
+    return program.getFromTypeMap(type.getWrapperTypeName())
+        .findMethod("compare(" + signatureName + signatureName + ")I", false);
   }
 
   private void execImpl() {
@@ -197,8 +211,18 @@ public class ImplementRecordComponents {
       if (!field.isStatic()) {
         JFieldRef myField = new JFieldRef(info, new JThisRef(info, type), field, type);
         JFieldRef otherField = new JFieldRef(info, typedOther.createRef(info), field, type);
+        JType fieldType = field.getType();
         final JExpression equals;
-        if (field.getType().isPrimitiveType()) {
+        if (fieldType == JPrimitiveType.DOUBLE || fieldType == JPrimitiveType.FLOAT) {
+          // JLS 8.10.3 compares a floating point component as if by Double.compare or
+          // Float.compare, which, unlike ==, treat NaN as equal to itself and 0.0 as distinct
+          // from -0.0.
+          JMethod compare = fieldType == JPrimitiveType.DOUBLE ? doubleCompare : floatCompare;
+          equals = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,
+                  JBinaryOperator.EQ,
+                  new JMethodCall(info, null, compare, myField, otherField),
+                  new JIntLiteral(info, 0));
+        } else if (fieldType.isPrimitiveType()) {
           equals = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,
                   JBinaryOperator.EQ,
                   myField,

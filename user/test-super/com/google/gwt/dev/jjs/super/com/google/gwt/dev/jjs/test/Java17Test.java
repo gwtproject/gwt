@@ -141,6 +141,15 @@ public class Java17Test extends GWTTestCase {
     public static String foo = "bar";
   }
 
+  /**
+   * Record whose static fields include a constant of its own type. Treating that constant as a
+   * component makes hashCode and toString recurse until the stack overflows.
+   */
+  record RecordWithSelfReferentialConstant(int value) {
+    public static final RecordWithSelfReferentialConstant ZERO =
+        new RecordWithSelfReferentialConstant(0);
+  }
+
   record RecordWithDefaultConstructor(String foo) {
     public RecordWithDefaultConstructor {
       Objects.requireNonNull(foo);
@@ -185,6 +194,18 @@ public class Java17Test extends GWTTestCase {
     assertEquals("Banana", withValues.name());
     assertEquals(7, withValues.count());
     assertEquals("bar", RecordWithStaticField.foo);
+
+    // Static fields are not record components, so they take no part in hashCode or toString.
+    assertEquals(0, new RecordWithStaticField().hashCode());
+    assertEquals(new RecordWithStaticField(), new RecordWithStaticField());
+    assertTrue(new RecordWithStaticField().toString().startsWith("RecordWithStaticField"));
+    assertFalse(new RecordWithStaticField().toString().contains("bar"));
+
+    // A static constant of the record's own type recurses forever if it is treated as a component.
+    assertEquals(new RecordWithSelfReferentialConstant(7).hashCode(),
+            new RecordWithSelfReferentialConstant(7).hashCode());
+    assertFalse(new RecordWithSelfReferentialConstant(7).toString().contains("ZERO"));
+    assertEquals(RecordWithSelfReferentialConstant.ZERO, new RecordWithSelfReferentialConstant(0));
     // Under the current implementation this next line would fail - this is not inconsistent with the spec,
     // but it is different than what the JVM does.
     // assertEquals(0, new TopLevelRecord("", 0).hashCode());

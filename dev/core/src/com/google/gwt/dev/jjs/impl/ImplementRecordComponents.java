@@ -21,6 +21,7 @@ import com.google.gwt.dev.jjs.ast.JBinaryOperator;
 import com.google.gwt.dev.jjs.ast.JBooleanLiteral;
 import com.google.gwt.dev.jjs.ast.JClassLiteral;
 import com.google.gwt.dev.jjs.ast.JClassType;
+import com.google.gwt.dev.jjs.ast.JConditional;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JField;
@@ -39,6 +40,7 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JRecordType;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.jjs.ast.JThisRef;
+import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JUnsafeTypeCoercion;
 import com.google.gwt.dev.jjs.ast.RuntimeConstants;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
@@ -62,6 +64,12 @@ public class ImplementRecordComponents {
   private final JMethod getSimpleNameMethod;
   private final JClassType javaLangString;
   private final JMethod objectsEquals;
+  private final JDeclaredType javaLangDouble;
+  private final JDeclaredType javaLangFloat;
+  private final JMethod doubleCompare;
+  private final JMethod floatCompare;
+  private final JMethod doubleValue;
+  private final JMethod floatValue;
 
   private ImplementRecordComponents(JProgram program) {
     this.program = program;
@@ -72,6 +80,28 @@ public class ImplementRecordComponents {
     javaLangString = program.getTypeJavaLangString();
     objectsEquals = program.getIndexedType("Objects")
         .findMethod("equals(Ljava/lang/Object;Ljava/lang/Object;)Z", false);
+    javaLangDouble = program.getFromTypeMap(JPrimitiveType.DOUBLE.getWrapperTypeName());
+    javaLangFloat = program.getFromTypeMap(JPrimitiveType.FLOAT.getWrapperTypeName());
+    doubleCompare = findCompareMethod(javaLangDouble, JPrimitiveType.DOUBLE);
+    floatCompare = findCompareMethod(javaLangFloat, JPrimitiveType.FLOAT);
+    doubleValue = findValueMethod(javaLangDouble, JPrimitiveType.DOUBLE);
+    floatValue = findValueMethod(javaLangFloat, JPrimitiveType.FLOAT);
+  }
+
+  /**
+   * Returns the static compare method of the wrapper class for a floating point primitive type.
+   */
+  private static JMethod findCompareMethod(JDeclaredType wrapper, JPrimitiveType type) {
+    String signatureName = type.getJsniSignatureName();
+    return wrapper.findMethod("compare(" + signatureName + signatureName + ")I", false);
+  }
+
+  /**
+   * Returns the method that unwraps the wrapper class of a floating point primitive type, such
+   * as {@link Double#doubleValue()}.
+   */
+  private static JMethod findValueMethod(JDeclaredType wrapper, JPrimitiveType type) {
+    return wrapper.findMethod(type.getName() + "Value()" + type.getJsniSignatureName(), false);
   }
 
   private void execImpl() {
@@ -198,12 +228,49 @@ public class ImplementRecordComponents {
       if (!field.isStatic()) {
         JFieldRef myField = new JFieldRef(info, new JThisRef(info, type), field, type);
         JFieldRef otherField = new JFieldRef(info, typedOther.createRef(info), field, type);
+        JType fieldType = field.getType();
         final JExpression equals;
-        if (field.getType().isPrimitiveType()) {
+        if (fieldType == JPrimitiveType.DOUBLE || fieldType == JPrimitiveType.FLOAT) {
+          // JLS 8.10.3 compares a floating point component as if by Double.compare or
+          // Float.compare, which, unlike ==, treat NaN as equal to itself and 0.0 as distinct
+          // from -0.0.
+          JMethod compare = fieldType == JPrimitiveType.DOUBLE ? doubleCompare : floatCompare;
+          equals = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,
+                  JBinaryOperator.EQ,
+                  new JMethodCall(info, null, compare, myField, otherField),
+                  new JIntLiteral(info, 0));
+        } else if (fieldType.isPrimitiveType()) {
           equals = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,
                   JBinaryOperator.EQ,
                   myField,
                   otherField);
+        } else if (isFloatingPointWrapper(fieldType)) {
+          // JLS 8.10.3 compares a component of reference type as if by Objects.equals, but the
+          // emulated Double.equals and Float.equals compare with JavaScript ==, so NaN would not
+          // be equal to itself and 0.0 would be equal to -0.0. Unwrap and compare the values
+          // instead, which is what Objects.equals amounts to on the JVM.
+          boolean isDouble = fieldType.getUnderlyingType() == javaLangDouble;
+          JMethod compare = isDouble ? doubleCompare : floatCompare;
+          JMethod value = isDouble ? doubleValue : floatValue;
+          // Double.compare(this.component.doubleValue(), other.component.doubleValue()) == 0
+          JExpression valuesEqual = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,
+                  JBinaryOperator.EQ,
+                  new JMethodCall(info, null, compare,
+                          new JMethodCall(info, myField, value),
+                          new JMethodCall(info, otherField, value)),
+                  new JIntLiteral(info, 0));
+          // other.component != null && Double.compare(...) == 0
+          JExpression bothPresent = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,
+                  JBinaryOperator.AND,
+                  nullCheck(info, type, field, typedOther, JBinaryOperator.NEQ),
+                  valuesEqual);
+          // this.component == null ? other.component == null : (...)
+          equals = new JConditional(info, JPrimitiveType.BOOLEAN,
+                  new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.EQ,
+                          new JFieldRef(info, new JThisRef(info, type), field, type),
+                          JNullLiteral.INSTANCE),
+                  nullCheck(info, type, field, typedOther, JBinaryOperator.EQ),
+                  bothPresent);
         } else {
           equals = new JMethodCall(info, null, objectsEquals, myField, otherField);
         }
@@ -220,6 +287,25 @@ public class ImplementRecordComponents {
 
     body.getBlock().addStmt(componentCheck.makeReturnStatement());
     method.setBody(body);
+  }
+
+  /**
+   * Returns whether a component of this type holds a boxed float or double, whose emulated equals
+   * does not match the JVM.
+   */
+  private boolean isFloatingPointWrapper(JType fieldType) {
+    JType underlyingType = fieldType.getUnderlyingType();
+    return underlyingType == javaLangDouble || underlyingType == javaLangFloat;
+  }
+
+  /**
+   * Builds {@code other.component == null}, or its negation.
+   */
+  private static JExpression nullCheck(SourceInfo info, JRecordType type, JField field,
+          JLocal typedOther, JBinaryOperator op) {
+    return new JBinaryOperation(info, JPrimitiveType.BOOLEAN, op,
+            new JFieldRef(info, typedOther.createRef(info), field, type),
+            JNullLiteral.INSTANCE);
   }
 
   private void implementToString(JRecordType type, JMethod method, SourceInfo info) {

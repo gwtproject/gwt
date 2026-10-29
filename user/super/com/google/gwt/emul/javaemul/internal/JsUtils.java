@@ -39,8 +39,15 @@ public final class JsUtils {
   @JsMethod(namespace = "<window>", name = "typeof")
   public static native String typeOf(Object obj);
 
-  @JsMethod(namespace = "<window>", name = "Object.is")
-  public static native boolean objectIs(Object a, Object b);
+  // This is broken in HtmlUnit for all versions up to 5.6.0
+  // @JsMethod(namespace = "<window>", name = "Object.is")
+  // public static native boolean objectIs(@DoNotAutobox Object a, @DoNotAutobox Object b);
+
+  public static boolean sameValue(double a, double b) {
+    // Same basic logic as Object.is for Numbers, except avoids a bug in HtmlUnit around internal boxed integer/double
+    // values. HtmlUnit 5.6.0 is the first to not have this bug.
+    return a == b ? a != 0.0 || 1.0 / a == 1.0 / b : Double.isNaN(a) && Double.isNaN(b);
+  }
 
   public static String toPrecision(double value, int precision) {
     NativeNumber number = JsUtils.uncheckedCast(value);
@@ -147,4 +154,3 @@ public final class JsUtils {
 
   private JsUtils() {}
 }
-

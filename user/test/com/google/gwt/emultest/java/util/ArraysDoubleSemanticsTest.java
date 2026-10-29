@@ -21,7 +21,6 @@ import java.util.Arrays;
 public class ArraysDoubleSemanticsTest extends EmulTestBase {
 
   public void testEquals() throws Exception {
-
     assertFalse(Arrays.equals(new Double[] {-0.0d}, new Double[] {0.0d}));
     assertTrue(Arrays.equals(new Double[] {Double.NaN}, new Double[] {Double.NaN}));
 

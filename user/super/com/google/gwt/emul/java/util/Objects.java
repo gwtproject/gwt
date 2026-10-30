@@ -16,7 +16,6 @@
 package java.util;
 
 import java.util.function.Supplier;
-import javaemul.internal.JsUtils;
 
 /**
  * See <a

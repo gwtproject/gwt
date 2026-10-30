@@ -163,7 +163,8 @@ public final class Float extends Number implements Comparable<Float>, Constable,
 
   @Override
   public boolean equals(Object o) {
-    return (o instanceof Float) && JsUtils.sameValue(value, ((Float) o).value);
+    // Make sure Float follow the same semantic as Double for consistency.
+    return (o instanceof Float) && Double.valueOf(value).equals(Double.valueOf(((Float) o).value));
   }
 
   @Override

@@ -175,7 +175,7 @@ public final class Double extends Number implements Comparable<Double> {
 
   @Override
   public boolean equals(Object o) {
-    return (o instanceof Double) && JsUtils.sameValue(doubleValue(), ((Double) o).doubleValue());
+    return checkNotNull(this) == o;
   }
 
   @Override

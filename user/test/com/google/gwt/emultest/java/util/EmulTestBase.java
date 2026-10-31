@@ -16,7 +16,6 @@
 package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.junit.client.GWTTestCase;
-import javaemul.internal.JsUtils;
 
 import java.util.Arrays;
 import java.util.List;

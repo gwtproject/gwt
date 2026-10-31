@@ -107,7 +107,29 @@ public class EqualityNormalizer {
           ctx.replaceMe(binOp);
           break;
         }
+        case I: {
+          if (canBeNull(lhs) && canBeNull(rhs)) {
+            /*
+             * If it's possible for one side to be null and the other side
+             * undefined, then mask both sides.
+             */
+            lhs = maskUndefined(lhs);
+            rhs = maskUndefined(rhs);
+          }
 
+          // Replace with a call to Cast.jsIs, which will use Object.is internally.
+          String methodName;
+          if (op == JBinaryOperator.EQ) {
+            methodName = "Cast.jsIs";
+          } else {
+            methodName = "Cast.jsNotIs";
+          }
+          JMethod eqMethod = program.getIndexedMethod(methodName);
+          JMethodCall call = new JMethodCall(x.getSourceInfo(), null, eqMethod);
+          call.addArgs(lhs, rhs);
+          ctx.replaceMe(call);
+          break;
+        }
         case D: {
           boolean lhsNullLit = lhs == program.getLiteralNull();
           boolean rhsNullLit = rhs == program.getLiteralNull();
@@ -211,17 +233,23 @@ public class EqualityNormalizer {
   private static final int T = 1;
 
   /**
+   * The comparison strategy of using Object.is (or a polyfill).
+   * Mnemonic: I = Object.is
+   */
+  private static final int I = 2;
+
+  /**
    * A map of the combinations where each comparison strategy should be used.
    */
   private static int[][] COMPARISON_TABLE = {
-      // any type compared to unknown uses triple eq
-      {T, T, T, T, T, D,}, // UNKNOWN
+      // any type compared to unknown uses triple eq or is, except null
+      {I, T, T, I, T, D,}, // UNKNOWN
       // string type uses D only against String and null
       {T, D, T, T, T, D,}, // STRING
-      // double type uses D only against Double and null
-      {T, T, D, T, T, D,}, // DOUBLE
       // boolean type uses D only against Boolean and null
-      {T, T, T, D, T, D,}, // BOOLEAN
+      {T, T, D, T, T, D,}, // BOOLEAN
+      // double type uses I against Double and Unknown, and D only against null
+      {I, T, T, I, T, D,}, // DOUBLE
       // non-unboxed type uses D only against other non-unboxed types and null
       {T, T, T, T, D, D,}, // NOT_UNBOXEDTYPE
       // null vs null is safe everywhere

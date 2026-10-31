@@ -290,6 +290,18 @@ final class Cast {
     return a != b;
   }-*/;
 
+  static native boolean jsIs(Object a, Object b) /*-{
+    // Once we move to HtmlUnit 5.6.0+ we can use Object.is() instead of this polyfill.
+    // return Object.is(a, b);
+    return a === b ? (a !== 0 || 1 / a === 1 / b) : (a !== a && b !== b);
+  }-*/;
+
+  static native boolean jsNotIs(Object a, Object b) /*-{
+    // Once we move to HtmlUnit 5.6.0+ we can use Object.is() instead of this polyfill.
+    // return !Object.is(a, b);
+    return a === b ? (a === 0 && 1 / a !== 1 / b) : (a === a || b === b);
+  }-*/;
+
   static native Object maskUndefined(Object src) /*-{
     return (src == null) ? null : src;
   }-*/;

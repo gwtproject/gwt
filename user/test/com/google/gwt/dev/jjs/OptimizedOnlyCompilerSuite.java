@@ -17,6 +17,7 @@ package com.google.gwt.dev.jjs;
 
 import com.google.gwt.dev.jjs.optimized.ArrayListOptimizationTest;
 import com.google.gwt.dev.jjs.optimized.ArrayStoreOptimizationTest;
+import com.google.gwt.dev.jjs.optimized.BoxingOptimizationTest;
 import com.google.gwt.dev.jjs.optimized.CastOptimizationTest;
 import com.google.gwt.dev.jjs.optimized.JsOverlayMethodOptimizationTest;
 import com.google.gwt.dev.jjs.optimized.SpecializationTest;
@@ -45,6 +46,7 @@ public class OptimizedOnlyCompilerSuite {
     suite.addTestSuite(SpecializationTest.class);
     suite.addTestSuite(HasNoSideEffectsTest.class);
     suite.addTestSuite(UncheckedCastOptimizationTest.class);
+    suite.addTestSuite(BoxingOptimizationTest.class);
     // RunAsyncContentTest relies in string interning for its assertions which is now always off
     // in non optimzied compiles.
     suite.addTestSuite(RunAsyncContentTest.class);

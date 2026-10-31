@@ -336,5 +336,6 @@ public class BoxedDoubleIdentityTest extends GWTTestCase {
   }
 
   private static native Object undefined() /*-{
+    return undefined;
   }-*/;
 }

@@ -33,6 +33,17 @@ public class JBlock extends JStatement {
     this.statements.addAll(Arrays.asList(statements));
   }
 
+  public static JBlock ensureBlock(SourceInfo info, JStatement statement) {
+    if (statement == null) {
+      return new JBlock(info);
+    }
+    if (statement instanceof JBlock) {
+      return (JBlock) statement;
+    }
+
+    return new JBlock(statement.getSourceInfo(), statement);
+  }
+
   /**
    * Insert a statement into this block.
    */
@@ -104,5 +115,19 @@ public class JBlock extends JStatement {
       }
     }
     return false;
+  }
+
+  public JStatement singleStatement() {
+    if (statements.isEmpty()) {
+      return null;
+    }
+    if (statements.size() == 1) {
+      JStatement jStatement = statements.get(0);
+      if (jStatement instanceof JBlock) {
+        return ((JBlock) jStatement).singleStatement();
+      }
+      return jStatement;
+    }
+    return this;
   }
 }

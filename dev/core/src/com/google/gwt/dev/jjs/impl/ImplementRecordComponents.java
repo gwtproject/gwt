@@ -248,6 +248,8 @@ public class ImplementRecordComponents {
           // emulated Double.equals and Float.equals compare with JavaScript ==, so NaN would not
           // be equal to itself and 0.0 would be equal to -0.0. Unwrap and compare the values
           // instead, which is what Objects.equals amounts to on the JVM.
+          // TODO(#9568): Once Double.equals/Float.equals match the JVM, drop this branch and use
+          // Objects.equals instead of Double|Float.compare() == 0.
           boolean isDouble = fieldType.getUnderlyingType() == javaLangDouble;
           JMethod compare = isDouble ? doubleCompare : floatCompare;
           JMethod value = isDouble ? doubleValue : floatValue;

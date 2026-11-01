@@ -170,6 +170,12 @@ public class Java17Test extends GWTTestCase {
    */
   record RecordWithBoxedFloatingPointComponents(Double doubleValue, Float floatValue) {}
 
+  /**
+   * Record with a boxed floating point component, which equals must compare by value rather than
+   * by the emulated Double.equals and Float.equals.
+   */
+  record RecordWithBoxedDoubleComponent(Double doubleValue) {}
+
   public void testRecordClasses() {
     /**
      * Sample local record.
@@ -266,6 +272,14 @@ public class Java17Test extends GWTTestCase {
     assertFalse(new RecordWithBoxedFloatingPointComponents(0.0, 0.0f)
             .equals(new RecordWithBoxedFloatingPointComponents(0.0, -0.0f)));
 
+    assertEquals(new RecordWithBoxedDoubleComponent(Double.NaN),
+        new RecordWithBoxedDoubleComponent(Double.NaN));
+    assertFalse(new RecordWithBoxedDoubleComponent(0.0)
+        .equals(new RecordWithBoxedDoubleComponent(-0.0)));
+    assertFalse(new RecordWithBoxedDoubleComponent(0.0)
+        .equals(new RecordWithBoxedDoubleComponent(0.0)));
+
+
     // A null component equals only another null component.
     assertEquals(new RecordWithBoxedFloatingPointComponents(null, null),
             new RecordWithBoxedFloatingPointComponents(null, null));
@@ -276,11 +290,24 @@ public class Java17Test extends GWTTestCase {
     assertFalse(new RecordWithBoxedFloatingPointComponents(1.5, null)
             .equals(new RecordWithBoxedFloatingPointComponents(1.5, 1.5f)));
 
+    assertEquals(new RecordWithBoxedDoubleComponent(null),
+        new RecordWithBoxedDoubleComponent(null));
+    assertFalse(new RecordWithBoxedDoubleComponent(null)
+        .equals(new RecordWithBoxedDoubleComponent(1.5)));
+    assertFalse(new RecordWithBoxedDoubleComponent(1.5)
+        .equals(new RecordWithBoxedDoubleComponent(null)));
+
+
     // Ordinary values are unaffected.
     assertEquals(new RecordWithBoxedFloatingPointComponents(1.5, 2.5f),
             new RecordWithBoxedFloatingPointComponents(1.5, 2.5f));
     assertFalse(new RecordWithBoxedFloatingPointComponents(1.5, 2.5f)
             .equals(new RecordWithBoxedFloatingPointComponents(1.5, 2.25f)));
+
+    assertEquals(new RecordWithBoxedDoubleComponent(42.5),
+        new RecordWithBoxedDoubleComponent(42.5));
+    assertFalse(new RecordWithBoxedDoubleComponent(42.5)
+        .equals(new RecordWithBoxedDoubleComponent(98.4)));
   }
 
   public void testRecordConstructors() {

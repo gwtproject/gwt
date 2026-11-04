@@ -181,6 +181,15 @@ public class MethodInliner {
         return InlineResult.BLACKLIST;
       }
 
+      // Check that none of the call arguments contain a switch expression.
+      // Cloning switch expressions in ParameterReplacer throws UnsupportedOperationException,
+      // so we must not attempt to inline methods called with switch expression arguments.
+      for (JExpression arg : x.getArgs()) {
+        if (!CannotBeInlinedVisitor.check(arg)) {
+          return InlineResult.BLACKLIST;
+        }
+      }
+
       // try to inline
       List<JExpression> expressions = extractExpressionsFromBody(body);
       if (expressions == null) {

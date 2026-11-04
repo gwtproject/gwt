@@ -105,4 +105,12 @@
 
   <!-- To support legacy logging flags -->
   <inherits name="com.google.gwt.logging.LogImpl"/>
+
+  <!--
+   Raises the Error.stackTraceLimit to at least the specified value. Most useful for Chromium browsers, at this
+   time Chromium defaults to 10, while Firefox defaults to 128, and Safari defaults to 100. Setting this value to
+   0 will result in compiling out the check entirely.
+  -->
+  <define-configuration-property name="gwt.error.stackTraceLimit" is-multi-valued="false" />
+  <set-configuration-property name="gwt.error.stackTraceLimit" value="0" />
 </module>

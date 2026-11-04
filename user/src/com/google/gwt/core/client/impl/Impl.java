@@ -45,6 +45,26 @@ public final class Impl {
    */
   private static int watchdogEntryDepthTimerId = -1;
 
+  static {
+    // Test the string first to see if we should compile out the check entirely
+    String stackTraceLimit = System.getProperty("gwt.error.stackTraceLimit");
+    if (!stackTraceLimit.equals("0")) {
+      maybeIncreaseStackTraceLimit(Integer.parseInt(stackTraceLimit));
+    }
+  }
+
+  /**
+   * Helper to raise the stack trace limit for JS errors.
+   */
+  private static native void maybeIncreaseStackTraceLimit(int stackTraceLimit) /*-{
+    if (stackTraceLimit > Error.stackTraceLimit) {
+      Error.stackTraceLimit = stackTraceLimit;
+    }
+     if (stackTraceLimit > $wnd.Error.stackTraceLimit) {
+      $wnd.Error.stackTraceLimit = stackTraceLimit;
+    }
+  }-*/;
+
   /**
    * This method should be used whenever GWT code is entered from a JS context
    * and there is no GWT code in the same module on the call stack. Examples

@@ -92,6 +92,8 @@ public class EqualityNormalizer {
       int comparisonStrategy = COMPARISON_TABLE[lhsStatus.getIndex()][rhsStatus.getIndex()];
 
       switch (comparisonStrategy) {
+        case X:
+            throw new AssertionError("Shouldn't happen: " + lhsStatus + " vs. " + rhsStatus);
         case T: {
           if (canBeNull(lhs) && canBeNull(rhs)) {
             /*
@@ -254,6 +256,10 @@ public class EqualityNormalizer {
   }
 
   /**
+   * Represents an illegal comparison, which should have been prevented by JDT's type checking.
+   */
+  private static final int X = -1;
+  /**
    * The comparison strategy of using ==.
    * Mnemonic: D = double eq
    */
@@ -276,15 +282,15 @@ public class EqualityNormalizer {
    */
   private static int[][] COMPARISON_TABLE = {
       // any type compared to unknown uses triple eq or is, except null
-      {T, T, T, T, T, D, T,}, // UNKNOWN
+      {T, T, X, X, T, D, T,}, // UNKNOWN
       // string type uses D only against String and null
-      {T, D, T, T, T, D, T,}, // STRING
+      {T, D, X, X, X, D, T,}, // STRING
       // boolean type uses D only against Boolean and null
-      {T, T, D, T, T, D, T,}, // BOOLEAN
+      {X, X, D, X, X, D, T,}, // BOOLEAN
       // double type uses I against Double and Unknown, and D only against null
-      {T, T, T, I, T, D, I,}, // DOUBLE
+      {X, X, X, I, X, D, I,}, // DOUBLE
       // non-unboxed type uses D only against other non-unboxed types and null
-      {T, T, T, T, D, D, T,}, // NOT_UNBOXEDTYPE
+      {T, X, X, X, D, D, T,}, // NOT_UNBOXEDTYPE
       // null vs null is safe everywhere
       {D, D, D, D, D, D, D,}, // NULL
       // potentially double type uses I against Double and Unknown, and D only against null

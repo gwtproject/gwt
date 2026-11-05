@@ -171,22 +171,26 @@ public class EqualityNormalizer {
       if (type.isNullType()) {
         return UnboxedTypeStatus.NULL;
       } else {
-        for (Map.Entry<JClassType, DispatchType> nativeDispatchType :
-            program.getRepresentedAsNativeTypesDispatchMap().entrySet()) {
-          if (type.getUnderlyingType() == nativeDispatchType.getKey()) {
-            switch (nativeDispatchType.getValue()) {
-              case DOUBLE:
-                return UnboxedTypeStatus.DOUBLE;
-              case BOOLEAN:
-                return UnboxedTypeStatus.BOOLEAN;
-              case STRING:
-                return UnboxedTypeStatus.STRING;
-              default:
-                throw new AssertionError("Shouldn't happen");
-            }
-          } else if (!program.typeOracle.castFailsTrivially(type, nativeDispatchType.getKey())) {
-            return UnboxedTypeStatus.UNKNOWN;
+        Map<JClassType, DispatchType> dispatchMap = program.getRepresentedAsNativeTypesDispatchMap();
+        if (dispatchMap.containsKey(type.getUnderlyingType())) {
+          switch (dispatchMap.get(type.getUnderlyingType())) {
+            case DOUBLE:
+              return UnboxedTypeStatus.DOUBLE;
+            case BOOLEAN:
+              return UnboxedTypeStatus.BOOLEAN;
+            case STRING:
+              return UnboxedTypeStatus.STRING;
+            default:
+              throw new AssertionError("Shouldn't happen");
           }
+        } else if (program.typeOracle.isSuperClassOrInterface(program.getIndexedType("Double"), type)) {
+          // Special case for supertypes of java.lang.Double, which could hold a Double value and must be always
+          // compared with Object.is().
+          return UnboxedTypeStatus.POTENTIALLY_DOUBLE;
+        } else if (!program.typeOracle.castFailsTrivially(type, program.getIndexedType("Double"))
+                || !program.typeOracle.castFailsTrivially(type, program.getIndexedType("Boolean"))
+                || !program.typeOracle.castFailsTrivially(type, program.getTypeJavaLangString())) {
+            return UnboxedTypeStatus.UNKNOWN;
         }
         return UnboxedTypeStatus.NOT_UNBOXEDTYPE;
       }
@@ -207,9 +211,38 @@ public class EqualityNormalizer {
    * <code>null</code> status.
    */
   private enum UnboxedTypeStatus {
-    NOT_UNBOXEDTYPE(4), NULL(5), DOUBLE(3), BOOLEAN(2) ,STRING(1), UNKNOWN(0);
+    /**
+     * A Java type, some supertype of Double.
+     */
+    POTENTIALLY_DOUBLE(6),
+    /**
+     * A Java type, but it is not a String, Boolean, or Double, or any supertype of those. There is possible overlap
+     * between NOT_UNBOXEDTYPE and UNKNOWN.
+     */
+    NOT_UNBOXEDTYPE(4),
+    /**
+     * Can only be null.
+     */
+    NULL(5),
+    /**
+     * Can only be java.lang.Double.
+     */
+    DOUBLE(3),
+    /**
+     * Can only be java.lang.Boolean.
+     */
+    BOOLEAN(2),
+    /**
+     * Can only be java.lang.String.
+     */
+    STRING(1),
+    /**
+     * Potentially a JS type, Boolean, or String, but must not be a Double or a supertype of Double. Any other Java type
+     * is technically possible too, allowing for possible overlap between NOT_UNBOXEDTYPE and UNKNOWN.
+     */
+    UNKNOWN(0);
 
-    private int index;
+    private final int index;
 
     UnboxedTypeStatus(int index) {
       this.index = index;
@@ -243,17 +276,19 @@ public class EqualityNormalizer {
    */
   private static int[][] COMPARISON_TABLE = {
       // any type compared to unknown uses triple eq or is, except null
-      {I, T, T, I, T, D,}, // UNKNOWN
+      {T, T, T, T, T, D, T,}, // UNKNOWN
       // string type uses D only against String and null
-      {T, D, T, T, T, D,}, // STRING
+      {T, D, T, T, T, D, T,}, // STRING
       // boolean type uses D only against Boolean and null
-      {T, T, D, T, T, D,}, // BOOLEAN
+      {T, T, D, T, T, D, T,}, // BOOLEAN
       // double type uses I against Double and Unknown, and D only against null
-      {I, T, T, I, T, D,}, // DOUBLE
+      {T, T, T, I, T, D, I,}, // DOUBLE
       // non-unboxed type uses D only against other non-unboxed types and null
-      {T, T, T, T, D, D,}, // NOT_UNBOXEDTYPE
+      {T, T, T, T, D, D, T,}, // NOT_UNBOXEDTYPE
       // null vs null is safe everywhere
-      {D, D, D, D, D, D,}, // NULL
+      {D, D, D, D, D, D, D,}, // NULL
+      // potentially double type uses I against Double and Unknown, and D only against null
+      {T, T, T, I, T, D, I,}, // POTENTIALLY_DOUBLE
   };
 
   public static void exec(JProgram program) {

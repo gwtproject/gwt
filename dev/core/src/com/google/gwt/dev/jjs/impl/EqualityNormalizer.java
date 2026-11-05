@@ -108,16 +108,7 @@ public class EqualityNormalizer {
           break;
         }
         case I: {
-          if (canBeNull(lhs) && canBeNull(rhs)) {
-            /*
-             * If it's possible for one side to be null and the other side
-             * undefined, then mask both sides.
-             */
-            lhs = maskUndefined(lhs);
-            rhs = maskUndefined(rhs);
-          }
-
-          // Replace with a call to Cast.jsIs, which will use Object.is internally.
+          // Replace with a call to Cast.jsIs, which will use Object.is internally (or a polyfill)
           String methodName;
           if (op == JBinaryOperator.EQ) {
             methodName = "Cast.jsIs";

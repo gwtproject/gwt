@@ -46,10 +46,12 @@ public final class Impl {
   private static int watchdogEntryDepthTimerId = -1;
 
   static {
-    // Test the string first to see if we should compile out the check entirely
-    String stackTraceLimit = System.getProperty("gwt.error.stackTraceLimit");
-    if (!stackTraceLimit.equals("0")) {
-      maybeIncreaseStackTraceLimit(Integer.parseInt(stackTraceLimit));
+    if (GWT.isClient()) {
+      // Test the string first to see if we should compile out the check entirely
+      String stackTraceLimit = System.getProperty("gwt.error.stackTraceLimit");
+      if (!stackTraceLimit.equals("0")) {
+        maybeIncreaseStackTraceLimit(Integer.parseInt(stackTraceLimit));
+      }
     }
   }
 

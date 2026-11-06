@@ -430,6 +430,10 @@ public class SimpleRequestProcessor {
       // No method invocations which can happen via RequestContext.fire()
       return;
     }
+    if (invocations.size() > MAX_INVOCATIONS) {
+      throw new ReportableException("Request contained " + invocations.size()
+          + " invocations, exceeding the maximum of " + MAX_INVOCATIONS);
+    }
     List<Method> contextMethods = new ArrayList<Method>(invocations.size());
     List<Object> invocationResults = new ArrayList<Object>(invocations.size());
     Map<Object, SortedSet<String>> allPropertyRefs = new HashMap<Object, SortedSet<String>>();
@@ -462,6 +466,11 @@ public class SimpleRequestProcessor {
         // Invoke it
         domainReturnValue = service.invoke(domainMethod, args.toArray());
         if (invocation.getPropertyRefs() != null) {
+          if (invocation.getPropertyRefs().size() > MAX_PROPERTY_REFS_PER_INVOCATION) {
+            throw new ReportableException("Invocation contained "
+                + invocation.getPropertyRefs().size()
+                + " propertyRefs, exceeding the maximum of " + MAX_PROPERTY_REFS_PER_INVOCATION);
+          }
           SortedSet<String> paths = allPropertyRefs.get(domainReturnValue);
           if (paths == null) {
             paths = new TreeSet<String>();
@@ -500,10 +509,24 @@ public class SimpleRequestProcessor {
     }
   }
 
+  /**
+   * Maximum number of operations accepted in a single RequestFactory request, bounding the
+   * per-operation reflective work (CWE-400 / CWE-409).
+   */
+  private static final int MAX_OPERATIONS = 1000;
+  /** Maximum number of invocations accepted in a single RequestFactory request (CWE-400). */
+  private static final int MAX_INVOCATIONS = 1000;
+  /** Maximum propertyRefs accepted on a single invocation (CWE-400). */
+  private static final int MAX_PROPERTY_REFS_PER_INVOCATION = 100;
+
   private void processOperationMessages(final RequestState state, RequestMessage req) {
     List<OperationMessage> operations = req.getOperations();
     if (operations == null) {
       return;
+    }
+    if (operations.size() > MAX_OPERATIONS) {
+      throw new ReportableException("Request contained " + operations.size()
+          + " operations, exceeding the maximum of " + MAX_OPERATIONS);
     }
 
     List<AutoBean<? extends BaseProxy>> beans = state.getBeansForPayload(operations);

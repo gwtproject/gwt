@@ -37,6 +37,10 @@ public class UncheckedCastTest extends GWTTestCase {
     return (T) object;
   }
 
+  private static native double nullDouble() /*-{
+    return null;
+  }-*/;
+
   public void testUnsafeCast() {
     Integer boxedInt = uncheckedCast(new Object());
     assertNotNull(boxedInt);
@@ -44,5 +48,16 @@ public class UncheckedCastTest extends GWTTestCase {
     assertNotNull(d);
     boolean unboxedBoolean = uncheckedCast(new Double(12));
     assertTrue(unboxedBoolean);
+  }
+
+  public void testUnboxingNullDoubleThrows() {
+    // Needs checkLevel NORMAL: at MINIMAL the checkNotNull in doubleValue() is compiled away.
+    Double boxed = nullDouble();
+    try {
+      double unboxed = boxed;
+      fail("expected a NullPointerException, got " + unboxed);
+    } catch (NullPointerException expected) {
+      // a double cannot hold null
+    }
   }
 }

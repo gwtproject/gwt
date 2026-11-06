@@ -16,6 +16,8 @@
 
 package com.google.gwt.dev.jjs;
 
+import com.google.gwt.dev.jjs.test.CrossSiteIframeDirectInstallRunAsyncFailureTest;
+import com.google.gwt.dev.jjs.test.CrossSiteIframeDirectInstallRunAsyncTest;
 import com.google.gwt.dev.jjs.test.CrossSiteIframeRunAsyncFailureTest;
 import com.google.gwt.dev.jjs.test.CrossSiteIframeRunAsyncTest;
 import com.google.gwt.junit.tools.GWTTestSuite;
@@ -31,6 +33,8 @@ public class CrossSiteIframeRunAsyncSuite {
 
     suite.addTestSuite(CrossSiteIframeRunAsyncFailureTest.class);
     suite.addTestSuite(CrossSiteIframeRunAsyncTest.class);
+    suite.addTestSuite(CrossSiteIframeDirectInstallRunAsyncFailureTest.class);
+    suite.addTestSuite(CrossSiteIframeDirectInstallRunAsyncTest.class);
 
     return suite;
   }

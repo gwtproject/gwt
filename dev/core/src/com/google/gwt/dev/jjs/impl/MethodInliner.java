@@ -73,12 +73,12 @@ public class MethodInliner {
   }
 
   /**
-   * Determines if the given expression can be inlined. Any switch expression will fail this check.
+   * Determines if the given expression can be cloned. Any switch expression will fail this check.
    */
-  private static class CannotBeInlinedVisitor extends JVisitor {
+  private static class CanBeClonedVisitor extends JVisitor {
     private boolean succeed = true;
     public static boolean check(JExpression expr) {
-      CannotBeInlinedVisitor v = new CannotBeInlinedVisitor();
+      CanBeClonedVisitor v = new CanBeClonedVisitor();
       v.accept(expr);
       return v.succeed;
     }
@@ -86,7 +86,7 @@ public class MethodInliner {
     @Override
     public boolean visit(JStatement x, Context ctx) {
       // To ensure we didn't miss an important case, throw if we see a statement, as those cannot
-      // be inlined.
+      // be cloned.
       throw new IllegalStateException("Should never visit statements");
     }
 
@@ -281,7 +281,7 @@ public class MethodInliner {
           if (initializer == null) {
             continue;
           }
-          if (!CannotBeInlinedVisitor.check(initializer)) {
+          if (!CanBeClonedVisitor.check(initializer)) {
             return null;
           }
           JLocal local = (JLocal) declStatement.getVariableRef().getTarget();
@@ -293,7 +293,7 @@ public class MethodInliner {
         } else if (stmt instanceof JExpressionStatement) {
           JExpressionStatement exprStmt = (JExpressionStatement) stmt;
           JExpression expr = exprStmt.getExpr();
-          if (!CannotBeInlinedVisitor.check(expr)) {
+          if (!CanBeClonedVisitor.check(expr)) {
             return null;
           }
           JExpression clone = cloner.cloneExpression(expr);
@@ -303,7 +303,7 @@ public class MethodInliner {
           JExpression expr = returnStatement.getExpr();
 
           if (expr != null) {
-            if (!CannotBeInlinedVisitor.check(expr)) {
+            if (!CanBeClonedVisitor.check(expr)) {
               return null;
             }
             JExpression clone = cloner.cloneExpression(expr);
@@ -385,6 +385,15 @@ public class MethodInliner {
       if (x.getTarget().getParams().size() != x.getArgs().size()) {
         // Could not inline this call but the method might be inlineable at a different call site.
         return InlineResult.DO_NOT_BLACKLIST;
+      }
+
+      // Check that none of the call arguments contain a switch expression.
+      // Cloning switch expressions fails at this time, but doesn't prevent the
+      // method from being inlined at other callsites.
+      for (JExpression arg : x.getArgs()) {
+        if (!CanBeClonedVisitor.check(arg)) {
+          return InlineResult.DO_NOT_BLACKLIST;
+        }
       }
 
       // Run the order check. This verifies that all the parameters are

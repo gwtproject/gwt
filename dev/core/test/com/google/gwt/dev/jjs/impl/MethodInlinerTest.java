@@ -186,6 +186,28 @@ public class MethodInlinerTest extends OptimizerTestBase {
         getCanonicalSource(result.findMethod("fun2")));
   }
 
+  public void testSwitchExpressionAsArgument() throws Exception {
+    addSnippetClassDecl("static String toString(int x) { return String.valueOf(x); }");
+    addSnippetClassDecl("static String describe(int value) {",
+        "  return toString(switch (value) {",
+        "    case 1 -> 3;",
+        "    default -> 4;",
+        "  }) + toString(1);",
+        "}");
+    // Compile, ensuring it isn't inlined, and compilation doesn't throw
+    Result result = optimize("void", "describe(1);");
+    String entrypoint = getCanonicalSource(result.findMethod("onModuleLoad"));
+    assertEquals("public static void onModuleLoad(){ EntryPoint.describe(1); }", entrypoint);
+
+    String describe = getCanonicalSource(result.findMethod("describe"));
+    assertEquals("static String describe(int value){" +
+            " return EntryPoint.toString(switch (value) {" +
+            " case 1: yield 3;" +
+            " default: yield 4;" +
+            " })" +
+            " + \"1\" }", describe);
+  }
+
   @Override
   protected boolean doOptimizeMethod(TreeLogger logger, JProgram program, JMethod method) {
     program.addEntryMethod(findMainMethod(program));

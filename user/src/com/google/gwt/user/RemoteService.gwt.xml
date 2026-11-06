@@ -90,6 +90,22 @@
   -->
   <define-configuration-property name="rpc.enhancedClasses" is-multi-valued="true"/>
 
+  <!--
+      Controls whether RPC generates support for server-enhanced classes. Set
+      this to false to ignore both JPA/JDO annotations and the
+      rpc.enhancedClasses list, preventing @ClientFields entries and the
+      corresponding client-side payload handling from being generated, and so
+      preventing the server from seeing JPA/JDO fields returned to it from
+      client calls.
+
+      This remains enabled by default for backwards compatibility. The server
+      separately refuses serialization policies with enhanced classes unless
+      the application explicitly enables them at runtime.
+  -->
+  <define-configuration-property name="rpc.enhancedClasses.enabled"
+      is-multi-valued="false"/>
+  <set-configuration-property name="rpc.enhancedClasses.enabled" value="true"/>
+
   <generate-with class="com.google.gwt.user.rebind.rpc.ServiceInterfaceProxyGenerator">
     <when-type-assignable class="com.google.gwt.user.client.rpc.RemoteService"/>
   </generate-with>

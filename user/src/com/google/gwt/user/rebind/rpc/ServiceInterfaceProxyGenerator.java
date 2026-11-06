@@ -36,7 +36,7 @@ public class ServiceInterfaceProxyGenerator extends IncrementalGenerator {
    * generator results will be invalidated automatically if they were generated
    * by a version of this generator with a different version id.
    */
-  private static final long GENERATOR_VERSION_ID = 1L;
+  private static final long GENERATOR_VERSION_ID = 2L;
 
   @Override
   public RebindResult generateIncrementally(TreeLogger logger, GeneratorContext ctx,

@@ -1023,7 +1023,8 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     return staticImpl;
   }
 
-  public JArrayType getTypeArray(JType elementType) {
+  // Synchronized because CodeSplitter reaches this from concurrent CFA traversals.
+  public synchronized JArrayType getTypeArray(JType elementType) {
     JArrayType arrayType = arrayTypes.get(elementType);
     if (arrayType == null) {
       arrayType = new JArrayType(elementType);

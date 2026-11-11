@@ -161,7 +161,9 @@ public class BytecodeSignatureMaker {
             methodBuilder.append(exception);
           }
         }
-        methods.put(name, methodBuilder.toString());
+        // Overloads share a name, so key on the descriptor as well. Keyed on the name
+        // alone, only the last overload visited would contribute to the signature.
+        methods.put(name + desc, methodBuilder.toString());
       }
       return null;
     }

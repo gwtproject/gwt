@@ -53,8 +53,6 @@ public class BytecodeSignatureMaker {
             | Opcodes.ACC_SYNCHRONIZED | Opcodes.ACC_SUPER | Opcodes.ACC_TRANSIENT | Opcodes.ACC_VOLATILE);
 
     private String header;
-    // Lists, not maps keyed on the member name: every member has to reach the
-    // signature, and overloads share a name.
     private List<String> fields = new ArrayList<String>();
     private List<String> methods = new ArrayList<String>();
 

@@ -16,7 +16,6 @@
 package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.testing.TestUtils;
 
 /** Tests (incorrect) equals semantics for Double. */
 public final class DoubleEqualsSemanticsTest extends GWTTestCase {
@@ -27,23 +26,15 @@ public final class DoubleEqualsSemanticsTest extends GWTTestCase {
   }
 
   public void testEquals() {
-    // Semantics don't match JVM.
-    if (TestUtils.isJvm()) {
-      return;
-    }
-
-    // Should be assertTrue(Double.valueOf(Double.NaN).equals(Double.NaN));
-    assertFalse(Double.valueOf(Double.NaN).equals(Double.NaN));
-    // Should be assertFalse(Double.valueOf(0.0d).equals(-0.0d));
-    assertTrue(Double.valueOf(0.0d).equals(-0.0d));
+    assertTrue(Double.valueOf(Double.NaN).equals(Double.NaN));
+    assertFalse(Double.valueOf(0.0d).equals(-0.0d));
 
     // Also make sure the behavior doesn't change when Object trampoline is used.
     Object o;
     o = Double.NaN;
-    // Should be assertTrue(o.equals(Double.NaN));
-    assertFalse(o.equals(Double.NaN));
+    assertTrue(o.equals(Double.NaN));
     o = 0.0d;
     // Should be assertFalse
-    assertTrue(o.equals(-0.0d));
+    assertFalse(o.equals(-0.0d));
   }
 }

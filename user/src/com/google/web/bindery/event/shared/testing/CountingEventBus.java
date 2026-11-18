@@ -23,6 +23,7 @@ import com.google.web.bindery.event.shared.SimpleEventBus;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Wraps an {@link EventBus} to keep a count of registered handlers and how many times events have
@@ -105,6 +106,7 @@ public class CountingEventBus extends EventBus {
 
   private <H> HandlerRegistration makeReg(final Type<H> type, final HandlerRegistration superReg) {
     return new HandlerRegistration() {
+      @Override
       public void removeHandler() {
         handlerCounts.decrement(type);
         superReg.removeHandler();
@@ -130,8 +132,8 @@ public class CountingEventBus extends EventBus {
         return false;
       }
 
-      TypeSourcePair pair = (TypeSourcePair) o;      
-      return doNullEquals(type, pair.type) && doNullEquals(source, pair.source);
+      TypeSourcePair pair = (TypeSourcePair) o;
+      return Objects.equals(type, pair.type) && Objects.equals(source, pair.source);
     }
 
     @Override
@@ -140,13 +142,6 @@ public class CountingEventBus extends EventBus {
       hash = (hash * 31) + (type == null ? 0 : type.hashCode());
       hash = (hash * 31) + (source == null ? 0 : source.hashCode());
       return hash;
-    }
-
-    private boolean doNullEquals(Object a, Object b) {
-      if ((a == null) ^ (b == null)) {
-        return false;
-      }
-      return ((a == null) && (b == null)) || a.equals(b);
     }
   }
   

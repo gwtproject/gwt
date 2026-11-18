@@ -296,7 +296,7 @@ public class OwnerFieldClass {
   }
 
   /**
-   * Finds the constructor annotated with @UiConcontructor if there is one, and
+   * Finds the constructor annotated with {@code @UiConstructor} if there is one, and
    * puts it in the {@link #uiConstructor} field.
    *
    * @param fieldType the type of the field

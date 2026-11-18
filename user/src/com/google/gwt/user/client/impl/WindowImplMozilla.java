@@ -17,14 +17,16 @@ package com.google.gwt.user.client.impl;
 
 /**
  * Mozilla implementation of {@link com.google.gwt.user.client.impl.WindowImpl}.
+ * @deprecated This class is only used to make tests work with HtmlUnit 2.55.0, and will
+ * be removed in a future release after HtmlUnit is updated.
  */
+@Deprecated
 public class WindowImplMozilla extends WindowImpl {
 
   /**
-   * For Mozilla, reading from $wnd.location.hash decodes the fragment.
-   * https://bugzilla.mozilla.org/show_bug.cgi?id=483304
-   * https://bugzilla.mozilla.org/show_bug.cgi?id=135309
-   * To avoid this bug, we use location.href instead.
+   * For old Firefox versions, reading from $wnd.location.hash decodes the fragment.
+   * The <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=483304">issue</a>
+   * still exists in the HtmlUnit version currently used for testing.
    */
   @Override
   public native String getHash() /*-{

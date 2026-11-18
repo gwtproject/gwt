@@ -86,7 +86,8 @@ public abstract class Attribute<T> {
   }
 
   /**
-   * Sets the state/property {@code value} for the HTML element {@code element}.
+   * Sets the state/property for the HTML element {@code element}
+   * to space-separated list of {@code values}.
    *
    * @param element HTML element
    * @param values Attribute value

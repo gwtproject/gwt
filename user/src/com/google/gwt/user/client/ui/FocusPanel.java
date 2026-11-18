@@ -102,10 +102,12 @@ public class FocusPanel extends SimplePanel implements HasFocus,
     setWidget(child);
   }
 
+  @Override
   public HandlerRegistration addBlurHandler(BlurHandler handler) {
     return addDomHandler(handler, BlurEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addClickHandler(ClickHandler handler) {
     return addDomHandler(handler, ClickEvent.getType());
   }
@@ -118,38 +120,47 @@ public class FocusPanel extends SimplePanel implements HasFocus,
     ListenerWrapper.WrappedClickListener.add(this, listener);
   }
 
+  @Override
   public HandlerRegistration addDoubleClickHandler(DoubleClickHandler handler) {
     return addDomHandler(handler, DoubleClickEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragEndHandler(DragEndHandler handler) {
     return addBitlessDomHandler(handler, DragEndEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragEnterHandler(DragEnterHandler handler) {
     return addBitlessDomHandler(handler, DragEnterEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragHandler(DragHandler handler) {
     return addBitlessDomHandler(handler, DragEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragLeaveHandler(DragLeaveHandler handler) {
     return addBitlessDomHandler(handler, DragLeaveEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragOverHandler(DragOverHandler handler) {
     return addBitlessDomHandler(handler, DragOverEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragStartHandler(DragStartHandler handler) {
     return addBitlessDomHandler(handler, DragStartEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDropHandler(DropHandler handler) {
     return addBitlessDomHandler(handler, DropEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addFocusHandler(FocusHandler handler) {
     return addDomHandler(handler, FocusEvent.getType());
   }
@@ -162,14 +173,17 @@ public class FocusPanel extends SimplePanel implements HasFocus,
     ListenerWrapper.WrappedFocusListener.add(this, listener);
   }
 
+  @Override
   public HandlerRegistration addGestureChangeHandler(GestureChangeHandler handler) {
     return addDomHandler(handler, GestureChangeEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addGestureEndHandler(GestureEndHandler handler) {
     return addDomHandler(handler, GestureEndEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addGestureStartHandler(GestureStartHandler handler) {
     return addDomHandler(handler, GestureStartEvent.getType());
   }
@@ -183,18 +197,22 @@ public class FocusPanel extends SimplePanel implements HasFocus,
     ListenerWrapper.WrappedKeyboardListener.add(this, listener);
   }
 
+  @Override
   public HandlerRegistration addKeyDownHandler(KeyDownHandler handler) {
     return addDomHandler(handler, KeyDownEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addKeyPressHandler(KeyPressHandler handler) {
     return addDomHandler(handler, KeyPressEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addKeyUpHandler(KeyUpHandler handler) {
     return addDomHandler(handler, KeyUpEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addMouseDownHandler(MouseDownHandler handler) {
     return addDomHandler(handler, MouseDownEvent.getType());
   }
@@ -209,22 +227,27 @@ public class FocusPanel extends SimplePanel implements HasFocus,
     ListenerWrapper.WrappedMouseListener.add(this, listener);
   }
 
+  @Override
   public HandlerRegistration addMouseMoveHandler(MouseMoveHandler handler) {
     return addDomHandler(handler, MouseMoveEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addMouseOutHandler(MouseOutHandler handler) {
     return addDomHandler(handler, MouseOutEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addMouseOverHandler(MouseOverHandler handler) {
     return addDomHandler(handler, MouseOverEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addMouseUpHandler(MouseUpHandler handler) {
     return addDomHandler(handler, MouseUpEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addMouseWheelHandler(MouseWheelHandler handler) {
     return addDomHandler(handler, MouseWheelEvent.getType());
   }
@@ -237,22 +260,27 @@ public class FocusPanel extends SimplePanel implements HasFocus,
     ListenerWrapper.WrappedMouseWheelListener.add(this, listener);
   }
 
+  @Override
   public HandlerRegistration addTouchCancelHandler(TouchCancelHandler handler) {
     return addDomHandler(handler, TouchCancelEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addTouchEndHandler(TouchEndHandler handler) {
     return addDomHandler(handler, TouchEndEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addTouchMoveHandler(TouchMoveHandler handler) {
     return addDomHandler(handler, TouchMoveEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addTouchStartHandler(TouchStartHandler handler) {
     return addDomHandler(handler, TouchStartEvent.getType());
   }
 
+  @Override
   public int getTabIndex() {
     return impl.getTabIndex(getElement());
   }
@@ -302,10 +330,12 @@ public class FocusPanel extends SimplePanel implements HasFocus,
     ListenerWrapper.WrappedMouseWheelListener.remove(this, listener);
   }
 
+  @Override
   public void setAccessKey(char key) {
     impl.setAccessKey(getElement(), key);
   }
 
+  @Override
   public void setFocus(boolean focused) {
     if (focused) {
       impl.focus(getElement());
@@ -314,6 +344,7 @@ public class FocusPanel extends SimplePanel implements HasFocus,
     }
   }
 
+  @Override
   public void setTabIndex(int index) {
     impl.setTabIndex(getElement(), index);
   }

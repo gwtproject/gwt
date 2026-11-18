@@ -44,12 +44,14 @@ import com.google.gwt.i18n.client.PluralRule;
  */
 public class DefaultRule implements Localizable, PluralRule {
 
+  @Override
   public PluralForm[] pluralForms() {
     return new PluralForm[] {
         new PluralForm("other", "Default plural form"),
     };
   }
 
+  @Override
   public int select(int n) {
     return 0;
   }

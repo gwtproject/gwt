@@ -486,6 +486,7 @@ public class JsTypeTest extends GWTTestCase {
   }
 
   static class JavaConcrete implements InterfaceWithSingleJavaConcrete {
+    @Override
     public int m() {
       return 5;
     }
@@ -509,6 +510,7 @@ public class JsTypeTest extends GWTTestCase {
   }
 
   static final class JavaConcreteJsFunction implements JsFunctionInterface {
+    @Override
     public int m() {
       return 5;
     }
@@ -534,11 +536,13 @@ public class JsTypeTest extends GWTTestCase {
   // Do not rename this class.
   @JsType
   static abstract class SomeZAbstractSubclass extends SomeAbstractClass {
+    @Override
     public abstract SomeZAbstractSubclass m();
   }
 
   @JsType
   static class SomeConcreteSubclass extends SomeZAbstractSubclass {
+    @Override
     public SomeConcreteSubclass m() {
       return this;
     }
@@ -599,6 +603,7 @@ public class JsTypeTest extends GWTTestCase {
   }
 
   static class ClassWithJsMethodInheritingName extends ClassWithJsMethod {
+    @Override
     @JsMethod
     public String className() {
       return ClassWithJsMethodInheritingName.class.getName();

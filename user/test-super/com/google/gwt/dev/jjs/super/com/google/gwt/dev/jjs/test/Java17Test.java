@@ -20,8 +20,10 @@ import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Arrays;
 import java.util.List;
-
-import jsinterop.annotations.*;
+import java.util.Objects;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * Tests Java 17 features. It is super sourced so that gwt can be compiles under Java 11.
@@ -45,11 +47,10 @@ public class Java17Test extends GWTTestCase {
   public sealed class Shape permits Square, Circle {
     public static int count = 0;
 
-    public static Shape returnAndIncrement(Shape shape){
+    public static Shape returnAndIncrement(Shape shape) {
       count++;
       return shape;
     }
-
   }
 
   public final class Square extends Shape {
@@ -141,6 +142,27 @@ public class Java17Test extends GWTTestCase {
   }
 
   /**
+   * Record whose static fields include a constant of its own type. Treating that constant as a
+   * component makes hashCode and toString recurse until the stack overflows.
+   */
+  record RecordWithSelfReferentialConstant(int value) {
+    public static final RecordWithSelfReferentialConstant ZERO =
+        new RecordWithSelfReferentialConstant(0);
+  }
+
+  record RecordWithDefaultConstructor(String foo) {
+    public RecordWithDefaultConstructor {
+      Objects.requireNonNull(foo);
+    }
+  }
+
+  record RecordWithExtraConstructor(String foo) {
+    RecordWithExtraConstructor(int fooInt) {
+      this(fooInt + "");
+    }
+  }
+
+  /**
    * Record type that takes a record as a component
    */
   record RecordWithReferenceType(TopLevelRecord refType){}
@@ -172,9 +194,21 @@ public class Java17Test extends GWTTestCase {
     assertEquals("Banana", withValues.name());
     assertEquals(7, withValues.count());
     assertEquals("bar", RecordWithStaticField.foo);
+
+    // Static fields are not record components, so they take no part in hashCode or toString.
+    assertEquals(0, new RecordWithStaticField().hashCode());
+    assertEquals(new RecordWithStaticField(), new RecordWithStaticField());
+    assertTrue(new RecordWithStaticField().toString().startsWith("RecordWithStaticField"));
+    assertFalse(new RecordWithStaticField().toString().contains("bar"));
+
+    // A static constant of the record's own type recurses forever if it is treated as a component.
+    assertEquals(new RecordWithSelfReferentialConstant(7).hashCode(),
+            new RecordWithSelfReferentialConstant(7).hashCode());
+    assertFalse(new RecordWithSelfReferentialConstant(7).toString().contains("ZERO"));
+    assertEquals(RecordWithSelfReferentialConstant.ZERO, new RecordWithSelfReferentialConstant(0));
     // Under the current implementation this next line would fail - this is not inconsistent with the spec,
     // but it is different than what the JVM does.
-//    assertEquals(0, new TopLevelRecord("", 0).hashCode());
+    // assertEquals(0, new TopLevelRecord("", 0).hashCode());
     assertFalse(0 == new TopLevelRecord("", 7).hashCode());
     assertFalse(0 == new TopLevelRecord("Pear", 0).hashCode());
 
@@ -185,10 +219,11 @@ public class Java17Test extends GWTTestCase {
     RecordWithReferenceType sameA = new RecordWithReferenceType(new TopLevelRecord("a", 1));
     RecordWithReferenceType sameB = new RecordWithReferenceType(new TopLevelRecord("a", 1));
     RecordWithReferenceType different = new RecordWithReferenceType(new TopLevelRecord("a", 2));
+    RecordWithReferenceType nullChild = new RecordWithReferenceType(null);
     // check that an instance is equal to itself
     assertEquals(sameA, sameA);
     assertEquals(sameA.hashCode(), sameA.hashCode());
-    //check that an instance is equal to a different record instance with same values
+    // check that an instance is equal to a different record instance with same values
     assertEquals(sameA, sameB);
     assertEquals(sameA.hashCode(), sameB.hashCode());
 
@@ -196,6 +231,25 @@ public class Java17Test extends GWTTestCase {
     assertFalse(sameA.hashCode() == different.hashCode());
 
     assertFalse(sameA.equals(null));
+    assertFalse(nullChild.equals(sameA));
+    assertFalse(sameA.equals(nullChild));
+    assertTrue(new RecordWithReferenceType(null).equals(nullChild));
+    assertTrue(nullChild.equals(nullChild));
+
+    assertTrue(new TopLevelRecord(null, 1).equals(new TopLevelRecord(null, 1)));
+    assertFalse(new TopLevelRecord("asdf", 2).equals(new TopLevelRecord(null, 2)));
+    assertFalse(new TopLevelRecord(null, 3).equals(new TopLevelRecord("abc", 3)));
+  }
+
+  public void testRecordConstructors() {
+    assertEquals("7", new RecordWithExtraConstructor(7).foo());
+    assertEquals("7", new RecordWithDefaultConstructor("7").foo());
+    try {
+      new RecordWithDefaultConstructor(null).foo();
+      fail("Should have thrown NPE");
+    } catch (RuntimeException expected) {
+      // expected
+    }
   }
 
   /**

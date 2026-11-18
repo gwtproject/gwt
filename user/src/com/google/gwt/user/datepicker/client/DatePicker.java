@@ -311,10 +311,12 @@ public class DatePicker extends Composite implements
     addStyleToDates(css().dayIsToday(), new Date());
   }
 
+  @Override
   public HandlerRegistration addHighlightHandler(HighlightHandler<Date> handler) {
     return addHandler(handler, HighlightEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addShowRangeHandler(ShowRangeHandler<Date> handler) {
     return addHandler(handler, ShowRangeEvent.getType());
   }
@@ -396,6 +398,7 @@ public class DatePicker extends Composite implements
     }
   }
 
+  @Override
   public HandlerRegistration addValueChangeHandler(
       ValueChangeHandler<Date> handler) {
     return addHandler(handler, ValueChangeEvent.getType());
@@ -404,6 +407,7 @@ public class DatePicker extends Composite implements
   /**
    * Returns a {@link TakesValueEditor} backed by the DatePicker.
    */
+  @Override
   public LeafValueEditor<Date> asEditor() {
     if (editor == null) {
       editor = TakesValueEditor.of(this);
@@ -478,6 +482,7 @@ public class DatePicker extends Composite implements
    *
    * @return the selected date, or null
    */
+  @Override
   public final Date getValue() {
     return CalendarUtil.copyDate(value);
   }
@@ -652,6 +657,7 @@ public class DatePicker extends Composite implements
    *
    * @param newValue the new value
    */
+  @Override
   public final void setValue(Date newValue) {
     setValue(newValue, false);
   }
@@ -662,6 +668,7 @@ public class DatePicker extends Composite implements
    * @param newValue the new value for this date picker
    * @param fireEvents should events be fired.
    */
+  @Override
   public final void setValue(Date newValue, boolean fireEvents) {
     Date oldValue = value;
 

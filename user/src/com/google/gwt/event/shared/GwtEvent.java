@@ -73,6 +73,7 @@ public abstract class GwtEvent<H extends EventHandler> extends Event<H> {
    * 
    * @param handler handler
    */
+  @Override
   protected abstract void dispatch(H handler);
 
   /**

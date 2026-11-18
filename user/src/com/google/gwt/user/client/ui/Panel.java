@@ -59,15 +59,18 @@ public abstract class Panel extends Widget implements HasWidgets.ForIsWidget {
    *           often this means that a specific overload must be called)
    * @see HasWidgets#add(Widget)
    */
+  @Override
   public void add(Widget child) {
     throw new UnsupportedOperationException(
         "This panel does not support no-arg add()");
   }
 
+  @Override
   public void add(IsWidget child) {
     this.add(asWidgetOrNull(child));
   }
 
+  @Override
   public void clear() {
     Iterator<Widget> it = iterator();
     while (it.hasNext()) {
@@ -103,8 +106,10 @@ public abstract class Panel extends Widget implements HasWidgets.ForIsWidget {
    * @param child the widget to be removed
    * @return <code>true</code> if the child was present
    */
+  @Override
   public abstract boolean remove(Widget child);
 
+  @Override
   public boolean remove(IsWidget child) {
     return remove(asWidgetOrNull(child));
   }

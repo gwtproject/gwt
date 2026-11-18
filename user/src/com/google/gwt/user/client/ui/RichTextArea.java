@@ -347,6 +347,7 @@ public class RichTextArea extends FocusWidget implements HasHTML,
      * 
      * @param url the URL to be linked to
      */
+    @Override
     void createLink(String url);
 
     /**
@@ -354,6 +355,7 @@ public class RichTextArea extends FocusWidget implements HasHTML,
      * 
      * @return the background color
      */
+    @Override
     String getBackColor();
 
     /**
@@ -361,11 +363,13 @@ public class RichTextArea extends FocusWidget implements HasHTML,
      * 
      * @return the foreground color
      */
+    @Override
     String getForeColor();
 
     /**
      * Inserts a horizontal rule.
      */
+    @Override
     void insertHorizontalRule();
 
     /**
@@ -380,16 +384,19 @@ public class RichTextArea extends FocusWidget implements HasHTML,
      * 
      * @param url the url of the image to be inserted
      */
+    @Override
     void insertImage(String url);
 
     /**
      * Starts an numbered list. Indentation will create nested items.
      */
+    @Override
     void insertOrderedList();
 
     /**
      * Starts an bulleted list. Indentation will create nested items.
      */
+    @Override
     void insertUnorderedList();
 
     /**
@@ -397,6 +404,7 @@ public class RichTextArea extends FocusWidget implements HasHTML,
      * 
      * @return true if the current region is bold
      */
+    @Override
     boolean isBold();
 
     /**
@@ -404,6 +412,7 @@ public class RichTextArea extends FocusWidget implements HasHTML,
      * 
      * @return true if the current region is italic
      */
+    @Override
     boolean isItalic();
 
     /**
@@ -411,6 +420,7 @@ public class RichTextArea extends FocusWidget implements HasHTML,
      * 
      * @return true if the current region is strikethrough
      */
+    @Override
     boolean isStrikethrough();
 
     /**
@@ -418,6 +428,7 @@ public class RichTextArea extends FocusWidget implements HasHTML,
      * 
      * @return true if the current region is subscript
      */
+    @Override
     boolean isSubscript();
 
     /**
@@ -425,6 +436,7 @@ public class RichTextArea extends FocusWidget implements HasHTML,
      * 
      * @return true if the current region is superscript
      */
+    @Override
     boolean isSuperscript();
 
     /**
@@ -432,11 +444,13 @@ public class RichTextArea extends FocusWidget implements HasHTML,
      * 
      * @return true if the current region is underlined
      */
+    @Override
     boolean isUnderlined();
 
     /**
      * Left indent.
      */
+    @Override
     void leftIndent();
 
     /**
@@ -447,21 +461,25 @@ public class RichTextArea extends FocusWidget implements HasHTML,
     /**
      * Removes all formatting on the selected text.
      */
+    @Override
     void removeFormat();
 
     /**
      * Removes any link from the selected text.
      */
+    @Override
     void removeLink();
 
     /**
      * Right indent.
      */
+    @Override
     void rightIndent();
 
     /**
      * Selects all the text.
      */
+    @Override
     void selectAll();
 
     /**
@@ -469,6 +487,7 @@ public class RichTextArea extends FocusWidget implements HasHTML,
      * 
      * @param color the new background color
      */
+    @Override
     void setBackColor(String color);
 
     /**
@@ -476,6 +495,7 @@ public class RichTextArea extends FocusWidget implements HasHTML,
      * 
      * @param name the new font name
      */
+    @Override
     void setFontName(String name);
 
     /**
@@ -483,6 +503,7 @@ public class RichTextArea extends FocusWidget implements HasHTML,
      * 
      * @param fontSize the new font size
      */
+    @Override
     void setFontSize(FontSize fontSize);
 
     /**
@@ -490,6 +511,7 @@ public class RichTextArea extends FocusWidget implements HasHTML,
      * 
      * @param color the new foreground color
      */
+    @Override
     void setForeColor(String color);
 
     /**
@@ -497,36 +519,43 @@ public class RichTextArea extends FocusWidget implements HasHTML,
      * 
      * @param justification the new justification
      */
+    @Override
     void setJustification(Justification justification);
 
     /**
      * Toggles bold.
      */
+    @Override
     void toggleBold();
 
     /**
      * Toggles italic.
      */
+    @Override
     void toggleItalic();
 
     /**
      * Toggles strikethrough.
      */
+    @Override
     void toggleStrikethrough();
 
     /**
      * Toggles subscript.
      */
+    @Override
     void toggleSubscript();
 
     /**
      * Toggles superscript.
      */
+    @Override
     void toggleSuperscript();
 
     /**
      * Toggles underline.
      */
+    @Override
     void toggleUnderline();
 
     /**
@@ -584,6 +613,7 @@ public class RichTextArea extends FocusWidget implements HasHTML,
     impl.setOwner(this);
   }
 
+  @Override
   public HandlerRegistration addInitializeHandler(InitializeHandler handler) {
     return addHandler(handler, InitializeEvent.getType());
   }
@@ -628,10 +658,12 @@ public class RichTextArea extends FocusWidget implements HasHTML,
     return null;
   }
 
+  @Override
   public String getHTML() {
     return impl.getHTML();
   }
 
+  @Override
   public String getText() {
     return impl.getText();
   }
@@ -655,14 +687,17 @@ public class RichTextArea extends FocusWidget implements HasHTML,
     }
   }
 
+  @Override
   public void setHTML(@IsSafeHtml String html) {
     impl.setHTML(html);
   }
 
+  @Override
   public void setHTML(SafeHtml html) {
     setHTML(html.asString());
   }
 
+  @Override
   public void setText(String text) {
     impl.setText(text);
   }

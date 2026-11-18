@@ -31,6 +31,7 @@ public class MenuBarParser implements ElementParser {
 
   static final String BAD_CHILD = "Only MenuItem or MenuItemSeparator subclasses are valid children";
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
     // Generate instantiation (Vertical MenuBars require a ctor param).

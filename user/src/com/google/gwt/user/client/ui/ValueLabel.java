@@ -124,6 +124,7 @@ public class ValueLabel<T> extends LabelBase<T> implements TakesValue<T>,
     this.renderer = renderer;
   }
 
+  @Override
   public LeafValueEditor<T> asEditor() {
     if (editor == null) {
       editor = TakesValueEditor.of(this);
@@ -131,10 +132,12 @@ public class ValueLabel<T> extends LabelBase<T> implements TakesValue<T>,
     return editor;
   }
 
+  @Override
   public T getValue() {
     return value;
   }
 
+  @Override
   public void setValue(T value) {
     this.value = value;
     directionalTextHelper.setText(renderer.render(value));

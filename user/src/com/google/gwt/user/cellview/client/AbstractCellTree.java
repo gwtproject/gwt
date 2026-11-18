@@ -51,14 +51,17 @@ public abstract class AbstractCellTree extends Composite implements
     this.viewModel = viewModel;
   }
 
+  @Override
   public HandlerRegistration addCloseHandler(CloseHandler<TreeNode> handler) {
     return addHandler(handler, CloseEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addOpenHandler(OpenHandler<TreeNode> handler) {
     return addHandler(handler, OpenEvent.getType());
   }
 
+  @Override
   public KeyboardSelectionPolicy getKeyboardSelectionPolicy() {
     return keyboardSelectionPolicy;
   }
@@ -79,6 +82,7 @@ public abstract class AbstractCellTree extends Composite implements
     return viewModel;
   }
 
+  @Override
   public void setKeyboardSelectionPolicy(KeyboardSelectionPolicy policy) {
     if (policy == null) {
       throw new NullPointerException("KeyboardSelectionPolicy cannot be null");

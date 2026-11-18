@@ -22,6 +22,7 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
  * request. Suppresses stack traces and the exception class name.
  */
 public class DefaultExceptionHandler implements ExceptionHandler {
+  @Override
   public ServerFailure createServerFailure(Throwable throwable) {
     return new ServerFailure(
         "Server Error: " + (throwable == null ? null : throwable.getMessage()), null, null, true);

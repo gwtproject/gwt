@@ -122,8 +122,8 @@ public class RPCServletUtils {
   /**
    * Get the Charset for a named character set. Caches Charsets to work around
    * a concurrency bottleneck in FastCharsetProvider.
-   * See http://code.google.com/p/google-web-toolkit/issues/detail?id=6398
-   * @see {@link Charset#forName(String)}
+   * See <a href="https://github.com/gwtproject/gwt/issues/6397">#6397</a>.
+   * @see Charset#forName(String)
    *
    * @param encoding the name of the Charset to get. If this is null
    *                 the default UTF-8 character set will be returned.

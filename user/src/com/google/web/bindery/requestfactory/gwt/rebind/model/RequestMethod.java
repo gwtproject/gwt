@@ -136,6 +136,7 @@ public class RequestMethod implements AcceptsModelVisitor {
   private RequestMethod() {
   }
 
+  @Override
   public void accept(ModelVisitor visitor) {
     if (visitor.visit(this)) {
       // Empty

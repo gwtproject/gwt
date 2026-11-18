@@ -27,12 +27,14 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 public abstract class AbstractResourceGenerator implements ResourceGenerator {
   protected static final boolean STRIP_COMMENTS = System.getProperty("gwt.resourceBundle.stripComments") != null;
 
+  @Override
   public abstract String createAssignment(TreeLogger logger,
       ResourceContext context, JMethod method) throws UnableToCompleteException;
 
   /**
    * A no-op implementation.
    */
+  @Override
   public void createFields(TreeLogger logger, ResourceContext context,
       ClientBundleFields fields) throws UnableToCompleteException {
   }
@@ -40,6 +42,7 @@ public abstract class AbstractResourceGenerator implements ResourceGenerator {
   /**
    * A no-op implementation.
    */
+  @Override
   public void finish(TreeLogger logger, ResourceContext context)
       throws UnableToCompleteException {
   }
@@ -47,6 +50,7 @@ public abstract class AbstractResourceGenerator implements ResourceGenerator {
   /**
    * A no-op implementation.
    */
+  @Override
   public void init(TreeLogger logger, ResourceContext context)
       throws UnableToCompleteException {
   }
@@ -54,6 +58,7 @@ public abstract class AbstractResourceGenerator implements ResourceGenerator {
   /**
    * A no-op implementation.
    */
+  @Override
   public void prepare(TreeLogger logger, ResourceContext context,
       ClientBundleRequirements requirements, JMethod method)
       throws UnableToCompleteException {

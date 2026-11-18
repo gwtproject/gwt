@@ -208,7 +208,7 @@ public class JMethodCall extends JExpression {
   /**
    * Override the return type.
    * <p>
-   * The method call expression will have {@code overridentReturnType} as its type ignoring the
+   * The method call expression will have {@code overriddenReturnType} as its type ignoring the
    * return type of the target method. This is used during normalizing transformations to preserve
    * type semantics when calling externally-defined compiler implementation methods.
    * <p>
@@ -216,9 +216,9 @@ public class JMethodCall extends JExpression {
    * operation. Using a stronger type on the call expression allows us to preserve type information
    * during the latter phases of compilation.
    */
-  public void overrideReturnType(JType overridenReturnType) {
+  public void overrideReturnType(JType overriddenReturnType) {
     assert this.overriddenReturnType == null;
-    this.overriddenReturnType = overridenReturnType;
+    this.overriddenReturnType = overriddenReturnType;
   }
   /**
    * Resolve an external reference during AST stitching.

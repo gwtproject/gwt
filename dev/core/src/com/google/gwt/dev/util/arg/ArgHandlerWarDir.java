@@ -46,6 +46,11 @@ public class ArgHandlerWarDir extends ArgHandlerDir {
   }
 
   @Override
+  public String[] getTags() {
+    return new String[] {getTag(), "-launcherDir"};
+  }
+
+  @Override
   public void setDir(File dir) {
     option.setWarDir(dir);
   }

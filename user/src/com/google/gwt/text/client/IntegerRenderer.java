@@ -38,6 +38,7 @@ public class IntegerRenderer extends AbstractRenderer<Integer> {
   protected IntegerRenderer() {
   }
 
+  @Override
   public String render(Integer object) {
     if (null == object) {
       return "";

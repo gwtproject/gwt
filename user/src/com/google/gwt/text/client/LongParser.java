@@ -40,6 +40,7 @@ public class LongParser implements Parser<Long> {
   protected LongParser() {
   }
 
+  @Override
   public Long parse(CharSequence object) throws ParseException {
     if ("".equals(object.toString())) {
       return null;

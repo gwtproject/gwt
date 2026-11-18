@@ -51,6 +51,7 @@ public abstract class EventBus extends com.google.web.bindery.event.shared.Event
         + "Use that directly, or try com.google.gwt.event.shared.SimpleEventBus");
   }
 
+  @Override
   public abstract void fireEvent(GwtEvent<?> event);
 
   @Override

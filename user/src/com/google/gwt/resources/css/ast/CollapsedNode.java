@@ -34,6 +34,7 @@ public class CollapsedNode extends CssNode implements HasNodes {
     this.nodes = nodes;
   }
 
+  @Override
   public List<CssNode> getNodes() {
     return nodes;
   }
@@ -43,6 +44,7 @@ public class CollapsedNode extends CssNode implements HasNodes {
     return true;
   }
 
+  @Override
   public void traverse(CssVisitor visitor, Context context) {
     visitor.acceptWithInsertRemove(getNodes());
   }

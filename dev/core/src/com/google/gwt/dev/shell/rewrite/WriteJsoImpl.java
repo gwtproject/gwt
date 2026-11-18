@@ -259,8 +259,6 @@ abstract class WriteJsoImpl extends ClassVisitor {
    * Construct a new rewriter instance.
    *
    * @param cv the visitor to chain to
-   * @param jsoDescriptors an unmodifiable set of descriptors containing
-   *          <code>JavaScriptObject</code> and all subclasses
    * @param mapper maps methods to the class in which they are declared
    */
   private WriteJsoImpl(ClassVisitor cv, InstanceMethodOracle mapper) {

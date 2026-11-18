@@ -49,18 +49,22 @@ public class HorizontalPanel extends CellPanel implements HasAlignment,
     add(w, td);
   }
 
+  @Override
   public HorizontalAlignmentConstant getHorizontalAlignment() {
     return horzAlign;
   }
 
+  @Override
   public VerticalAlignmentConstant getVerticalAlignment() {
     return vertAlign;
   }
 
+  @Override
   public void insert(IsWidget w, int beforeIndex) {
     insert(asWidgetOrNull(w), beforeIndex);
   }
 
+  @Override
   public void insert(Widget w, int beforeIndex) {
     checkIndexBoundsForInsertion(beforeIndex);
 
@@ -95,6 +99,7 @@ public class HorizontalPanel extends CellPanel implements HasAlignment,
    * 
    * @see HasHorizontalAlignment#setHorizontalAlignment(HasHorizontalAlignment.HorizontalAlignmentConstant)
    */
+  @Override
   public void setHorizontalAlignment(HorizontalAlignmentConstant align) {
     horzAlign = align;
   }
@@ -105,6 +110,7 @@ public class HorizontalPanel extends CellPanel implements HasAlignment,
    * 
    * @see HasVerticalAlignment#setVerticalAlignment(HasVerticalAlignment.VerticalAlignmentConstant)
    */
+  @Override
   public void setVerticalAlignment(VerticalAlignmentConstant align) {
     vertAlign = align;
   }

@@ -102,6 +102,7 @@ public class SimpleCheckBox extends FocusWidget implements HasName,
     return addHandler(handler, ValueChangeEvent.getType());
   }
 
+  @Override
   public LeafValueEditor<Boolean> asEditor() {
     if (editor == null) {
       editor = TakesValueEditor.of(this);
@@ -122,6 +123,7 @@ public class SimpleCheckBox extends FocusWidget implements HasName,
     return getInputElement().getValue();
   }
 
+  @Override
   public String getName() {
     return getInputElement().getName();
   }
@@ -136,6 +138,7 @@ public class SimpleCheckBox extends FocusWidget implements HasName,
    * @return <code>true</code> if the check box is checked, false otherwise.
    *         Will not return null
    */
+  @Override
   public Boolean getValue() {
     String propName = isAttached() ? "checked" : "defaultChecked";
     return getInputElement().getPropertyBoolean(propName);
@@ -189,6 +192,7 @@ public class SimpleCheckBox extends FocusWidget implements HasName,
     getInputElement().setAttribute("value", value);
   }
 
+  @Override
   public void setName(String name) {
     getInputElement().setName(name);
   }
@@ -202,6 +206,7 @@ public class SimpleCheckBox extends FocusWidget implements HasName,
    * 
    * @param value true to check, false to uncheck; null value implies false
    */
+  @Override
   public void setValue(Boolean value) {
     setValue(value, false);
   }

@@ -37,6 +37,7 @@ import java.util.regex.Pattern;
  * <p>The corresponding GSS handled by this pass looks like:
  *
  * <pre>
+ * {@code
  *   @if(eval("com.foo.BAR")) {
  *   }
  *   @elseif(eval("com.foo.bar()")) {

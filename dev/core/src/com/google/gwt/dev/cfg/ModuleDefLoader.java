@@ -17,9 +17,6 @@ package com.google.gwt.dev.cfg;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.dev.util.xml.ReflectiveParser;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
@@ -133,9 +130,7 @@ public class ModuleDefLoader {
       ResourceLoader resources, boolean refresh)
       throws UnableToCompleteException {
 
-    Event moduleDefLoadFromClassPathEvent = SpeedTracerLogger.start(
-        CompilerEventType.MODULE_DEF, "phase", "loadFromClassPath", "moduleName", moduleName);
-    try {
+    try (ModuleDefEvent ignored = new ModuleDefEvent("loadFromResources", moduleName)) {
       // Look up the module's physical name; if null, we are either encountering
       // the module for the first time, or else the name is already physical
       String physicalName = moduleEffectiveNameToPhysicalName.get(moduleName);
@@ -148,8 +143,6 @@ public class ModuleDefLoader {
       }
       ModuleDefLoader loader = new ModuleDefLoader(resources);
       return ModuleDefLoader.doLoadModule(loader, logger, moduleName, resources, true, true);
-    } finally {
-      moduleDefLoadFromClassPathEvent.end();
     }
   }
 
@@ -187,17 +180,15 @@ public class ModuleDefLoader {
       throws UnableToCompleteException {
 
     ModuleDef moduleDef = new ModuleDef(moduleName, resources, monolithic, mergePathPrefixes);
-    Event moduleLoadEvent = SpeedTracerLogger.start(CompilerEventType.MODULE_DEF,
-        "phase", "strategy.load()");
-    loader.load(logger, moduleName, moduleDef);
-    moduleLoadEvent.end();
+    try (ModuleDefEvent ignored = new ModuleDefEvent("loader.load()", moduleName)) {
+      loader.load(logger, moduleName, moduleDef);
+    }
 
     // Do any final setup.
     //
-    Event moduleNormalizeEvent = SpeedTracerLogger.start(CompilerEventType.MODULE_DEF,
-        "phase", "moduleDef.normalize()");
-    moduleDef.normalize(logger);
-    moduleNormalizeEvent.end();
+    try (ModuleDefEvent ignored = new ModuleDefEvent("moduleDef.normalize()", moduleName)) {
+      moduleDef.normalize(logger);
+    }
 
     // Add the "physical" module name: com.google.Module
     getModulesCache().put(moduleName, moduleDef);

@@ -22,7 +22,7 @@ import java.util.EventObject;
  * 
  * @deprecated Use
  *             {@link com.google.gwt.event.logical.shared.CloseEvent} and
- *             {@link  com.google.gwt.event.logical.shared.OpenEvent} instead
+ *             {@link com.google.gwt.event.logical.shared.OpenEvent} instead
  */
 @Deprecated
 public class DisclosureEvent extends EventObject {
@@ -34,7 +34,7 @@ public class DisclosureEvent extends EventObject {
    * @see DisclosureHandler
    * @deprecated Use
    *             {@link com.google.gwt.event.logical.shared.CloseEvent} and
-   *             {@link  com.google.gwt.event.logical.shared.OpenEvent} instead
+   *             {@link com.google.gwt.event.logical.shared.OpenEvent} instead
    */
   @Deprecated
   public DisclosureEvent(DisclosurePanel sender) {

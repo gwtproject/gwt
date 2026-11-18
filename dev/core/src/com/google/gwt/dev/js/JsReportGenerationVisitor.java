@@ -56,8 +56,8 @@ public class JsReportGenerationVisitor extends
   private List<JsNode> parentStack = Lists.newArrayList();
 
   public JsReportGenerationVisitor(TextOutput out, JavaToJavaScriptMap map,
-      boolean needSourcemapNames) {
-    super(out, map);
+      boolean needSourcemapNames, PrintOptions options) {
+    super(out, map, options);
     this.out = out;
     this.needSourcemapNames = needSourcemapNames;
   }

@@ -24,6 +24,7 @@ import java.io.IOException;
  * @param <T> the type to render
  */
 public abstract class AbstractRenderer<T> implements Renderer<T> {
+  @Override
   public void render(T object, Appendable appendable) throws IOException {
     appendable.append(render(object));
   }

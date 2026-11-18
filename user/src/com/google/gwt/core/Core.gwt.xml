@@ -53,6 +53,16 @@
   <define-configuration-property name="iframe.linker.suppressDeprecationWarning" is-multi-valued="false" />
   <set-configuration-property name="iframe.linker.suppressDeprecationWarning" value="false" />
 
+  <!--
+    Legacy gwt:onPropertyErrorFn and gwt:onLoadErrorFn meta callbacks are disabled
+    by default. Their handling code is omitted from the built-in selection scripts.
+    Set to true to restore these callbacks for applications that still use them.
+    Ordinary gwt:property metadata is always retained. This option alone does not
+    make an application fully compatible with a restrictive CSP.
+  -->
+  <define-configuration-property name="gwt.enableMetaErrorHandlers" is-multi-valued="false" />
+  <set-configuration-property name="gwt.enableMetaErrorHandlers" value="false" />
+
   <replace-with class="com.google.gwt.core.client.impl.SuperDevModeLogger">
       <when-property-is name="superdevmode" value="on"/>
       <when-type-is class="com.google.gwt.core.shared.impl.JsLogger"/>
@@ -95,4 +105,12 @@
 
   <!-- To support legacy logging flags -->
   <inherits name="com.google.gwt.logging.LogImpl"/>
+
+  <!--
+   Raises the Error.stackTraceLimit to at least the specified value. Most useful for Chromium browsers, at this
+   time Chromium defaults to 10, while Firefox defaults to 128, and Safari defaults to 100. Setting this value to
+   0 will result in compiling out the check entirely.
+  -->
+  <define-configuration-property name="gwt.error.stackTraceLimit" is-multi-valued="false" />
+  <set-configuration-property name="gwt.error.stackTraceLimit" value="64" />
 </module>

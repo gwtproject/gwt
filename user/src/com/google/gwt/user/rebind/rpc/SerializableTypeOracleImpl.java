@@ -32,6 +32,7 @@ final class SerializableTypeOracleImpl implements SerializableTypeOracle {
     this.possiblyInstantiatedTypes = possiblyInstantiatedTypes;
   }
 
+  @Override
   public JType[] getSerializableTypes() {
     return serializableTypesSet.toArray(new JType[serializableTypesSet.size()]);
   }
@@ -39,6 +40,7 @@ final class SerializableTypeOracleImpl implements SerializableTypeOracle {
   /**
    * Returns <code>true</code> if the type's fields can be serializede.
    */
+  @Override
   public boolean isSerializable(JType type) {
     return serializableTypesSet.contains(type);
   }
@@ -47,6 +49,7 @@ final class SerializableTypeOracleImpl implements SerializableTypeOracle {
    * Returns <code>true</code> if the type can be serialized and then
    * instantiated on the other side.
    */
+  @Override
   public boolean maybeInstantiated(JType type) {
     return possiblyInstantiatedTypes.contains(type);
   }

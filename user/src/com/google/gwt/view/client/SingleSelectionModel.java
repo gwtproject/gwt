@@ -18,6 +18,7 @@ package com.google.gwt.view.client;
 import com.google.gwt.view.client.SelectionModel.AbstractSelectionModel;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -93,7 +94,7 @@ public class SingleSelectionModel<T> extends AbstractSelectionModel<T>
     if (!selected) {
       Object oldKey = newSelectedPending ? getKey(newSelectedItem) : curKey;
       Object newKey = getKey(item);
-      if (!equalsOrBothNull(oldKey, newKey)) {
+      if (!Objects.equals(oldKey, newKey)) {
         return;
       }
     }
@@ -111,17 +112,13 @@ public class SingleSelectionModel<T> extends AbstractSelectionModel<T>
     resolveChanges();
   }
 
-  private boolean equalsOrBothNull(Object a, Object b) {
-    return (a == null) ? (b == null) : a.equals(b);
-  }
-
   private void resolveChanges() {
     if (!newSelectedPending) {
       return;
     }
 
     Object key = getKey(newSelectedItem);
-    boolean sameKey = equalsOrBothNull(curKey, key);
+    boolean sameKey = Objects.equals(curKey, key);
     boolean changed = false;
     if (newSelected) {
       changed = !sameKey;

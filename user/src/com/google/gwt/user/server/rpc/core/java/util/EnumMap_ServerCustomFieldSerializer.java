@@ -68,11 +68,26 @@ public final class EnumMap_ServerCustomFieldSerializer extends ServerCustomField
         return EnumMap_CustomFieldSerializer.instantiate(streamReader);
     }
 
+    /**
+     * Read the exemplar object with a type check, as the other server custom
+     * field serializers do, so that another type cannot be substituted for it.
+     * The declared key type is used rather than {@link Enum}, so a different
+     * enum is rejected as well. Without the check the substituted type reaches
+     * {@code new EnumMap(nonEnumClass)}, which throws an uncaught
+     * {@link NullPointerException} rather than a clean serialization error.
+     */
+    public static EnumMap instantiate(ServerSerializationStreamReader streamReader,
+        Type[] expectedParameterTypes, DequeMap<TypeVariable<?>, Type> resolvedTypes)
+        throws SerializationException {
+      Object exemplar = streamReader.readObject(expectedParameterTypes[0], resolvedTypes);
+      return new EnumMap(exemplar.getClass());
+    }
+
     @Override
     public EnumMap instantiateInstance(ServerSerializationStreamReader streamReader,
         Type[] expectedParameterTypes, DequeMap<TypeVariable< ? >, Type> resolvedTypes)
         throws SerializationException {
-      return EnumMap_CustomFieldSerializer.instantiate(streamReader);
+      return instantiate(streamReader, expectedParameterTypes, resolvedTypes);
     }
 
     @Override

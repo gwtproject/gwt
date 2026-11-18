@@ -40,9 +40,7 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.generator.NameFactory;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
@@ -94,6 +92,8 @@ public class ProxyCreator {
    */
   public static final String CACHED_PROPERTY_INFO_KEY = "cached-property-info";
   public static final String CACHED_TYPE_INFO_KEY = "cached-type-info";
+  static final String CACHED_ENHANCED_CLASSES_PROPERTY_INFO_KEY =
+      "cached-enhanced-classes-property-info";
 
   /**
    * The directory within which RPC manifests are placed for individual
@@ -105,7 +105,10 @@ public class ProxyCreator {
    * Properties which need to be checked to determine cache reusability.
    */
   private static final Collection<String> configPropsToCheck = Arrays.asList(
-      TypeSerializerCreator.GWT_ELIDE_TYPE_NAMES_FROM_RPC, Shared.RPC_ENHANCED_CLASSES);
+      TypeSerializerCreator.GWT_ELIDE_TYPE_NAMES_FROM_RPC, Shared.RPC_ENHANCED_CLASSES,
+      Shared.RPC_ENHANCED_CLASSES_ENABLED);
+  private static final Collection<String> enhancedClassesConfigPropsToCheck =
+      Arrays.asList(Shared.RPC_ENHANCED_CLASSES, Shared.RPC_ENHANCED_CLASSES_ENABLED);
   private static final Collection<String> selectionPropsToCheck = Arrays
       .asList(Shared.RPC_PROP_SUPPRESS_NON_STATIC_FINAL_FIELD_WARNINGS);
 
@@ -284,11 +287,10 @@ public class ProxyCreator {
     TypeFilter blacklistTypeFilter = new BlacklistTypeFilter(logger, propertyOracle);
 
     // Determine the set of serializable types
-    Event event = SpeedTracerLogger.start(CompilerEventType.GENERATOR_RPC_STOB);
     SerializableTypeOracle typesSentFromBrowser;
     SerializableTypeOracle typesSentToBrowser;
     String rpcLog = null;
-    try {
+    try (SimpleEvent ignore = new SimpleEvent("RPC STOB")) {
       SerializableTypeOracleBuilder typesSentFromBrowserBuilder =
           new SerializableTypeOracleBuilder(logger, context);
       typesSentFromBrowserBuilder.setTypeFilter(blacklistTypeFilter);
@@ -327,9 +329,6 @@ public class ProxyCreator {
           typesSentToBrowser = typesSentToBrowserBuilder.build(logger);
         }
       }
-
-    } finally {
-      event.end();
     }
 
     // Check previous cached result, to see if we can return now
@@ -368,7 +367,7 @@ public class ProxyCreator {
     generateProxyFields(srcWriter, typesSentFromBrowser, serializationPolicyStrongName,
         remoteServiceInterfaceName);
 
-    generateProxyContructor(srcWriter);
+    generateProxyConstructor(srcWriter);
 
     generateProxyMethods(srcWriter, typesSentFromBrowser, typeOracle, syncMethToAsyncMethMap);
 
@@ -402,8 +401,12 @@ public class ProxyCreator {
       CachedPropertyInformation cpi =
           new CachedPropertyInformation(logger, context.getPropertyOracle(), selectionPropsToCheck,
               configPropsToCheck);
+      CachedPropertyInformation enhancedClassesCpi =
+          new CachedPropertyInformation(logger, context.getPropertyOracle(), null,
+              enhancedClassesConfigPropsToCheck);
       result.putClientData(CACHED_TYPE_INFO_KEY, cti);
       result.putClientData(CACHED_PROPERTY_INFO_KEY, cpi);
+      result.putClientData(CACHED_ENHANCED_CLASSES_PROPERTY_INFO_KEY, enhancedClassesCpi);
 
       return result;
     } else {
@@ -444,7 +447,7 @@ public class ProxyCreator {
     for (JClassType rpcTokenSubtype : rpcTokenSubtypes) {
       if (typesSentFromBrowser.isSerializable(rpcTokenSubtype)) {
         if (rpcTokenImplementation.length() > 0) {
-          // >1 implematation of RpcToken, bail
+          // >1 implementation of RpcToken, bail
           rpcTokenImplementation = "";
           break;
         } else {
@@ -472,7 +475,7 @@ public class ProxyCreator {
    * using the default address for the
    * {@link com.google.gwt.user.client.rpc.RemoteService RemoteService}.
    */
-  protected void generateProxyContructor(SourceWriter srcWriter) {
+  protected void generateProxyConstructor(SourceWriter srcWriter) {
     srcWriter.println("public " + getProxySimpleName() + "() {");
     srcWriter.indent();
     srcWriter.println("super(GWT.getModuleBaseURL(),");
@@ -702,15 +705,15 @@ public class ProxyCreator {
   protected void generateTypeHandlers(TreeLogger logger, GeneratorContext context,
       SerializableTypeOracle typesSentFromBrowser, SerializableTypeOracle typesSentToBrowser)
       throws UnableToCompleteException {
-    Event event = SpeedTracerLogger.start(CompilerEventType.GENERATOR_RPC_TYPE_SERIALIZER);
-    TypeSerializerCreator tsc =
-        new TypeSerializerCreator(logger, typesSentFromBrowser, typesSentToBrowser, context,
-            SerializationUtils.getTypeSerializerQualifiedName(serviceIntf), SerializationUtils
-                .getTypeSerializerSimpleName(serviceIntf));
-    tsc.realize(logger);
-    event.end();
+    final TypeSerializerCreator tsc;
+    try (SimpleEvent ignore = new SimpleEvent("RPC TypeSerializerCreator")) {
+      tsc = new TypeSerializerCreator(logger, typesSentFromBrowser, typesSentToBrowser, context,
+          SerializationUtils.getTypeSerializerQualifiedName(serviceIntf), SerializationUtils
+          .getTypeSerializerSimpleName(serviceIntf));
+      tsc.realize(logger);
+    }
 
-    typeStrings = new HashMap<JType, String>(tsc.getTypeStrings());
+    typeStrings = new HashMap<>(tsc.getTypeStrings());
     typeStrings.put(serviceIntf, TypeNameObfuscator.SERVICE_INTERFACE_ID);
 
     customSerializersUsed = tsc.getCustomSerializersUsed();

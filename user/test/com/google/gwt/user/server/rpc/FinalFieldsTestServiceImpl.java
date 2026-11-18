@@ -25,6 +25,7 @@ import com.google.gwt.user.client.rpc.FinalFieldsTestService;
 public class FinalFieldsTestServiceImpl extends RemoteServiceServlet
   implements FinalFieldsTestService {
 
+  @Override
   public FinalFieldsNode transferObject(FinalFieldsNode node) {
     return new FinalFieldsNode(6, "B", 10);
   }

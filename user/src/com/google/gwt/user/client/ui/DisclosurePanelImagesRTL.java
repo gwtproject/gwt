@@ -27,6 +27,7 @@ public interface DisclosurePanelImagesRTL extends DisclosurePanelImages {
    *
    * @return a prototype of this image
    */
+  @Override
   @Resource("disclosurePanelClosed_rtl.png")
   AbstractImagePrototype disclosurePanelClosed();
 }

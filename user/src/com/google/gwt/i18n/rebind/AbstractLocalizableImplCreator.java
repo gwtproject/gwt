@@ -73,6 +73,7 @@ abstract class AbstractLocalizableImplCreator extends
       this.logger = logger;
     }
 
+    @Override
     public OutputStream createBinaryFile(String catalogName) {
       try {
         final OutputStream ostr = context.tryCreateResource(logger, catalogName);
@@ -107,6 +108,7 @@ abstract class AbstractLocalizableImplCreator extends
       return null;
     }
 
+    @Override
     public PrintWriter createTextFile(String catalogName, String charSet) {
       OutputStream outStr = createBinaryFile(catalogName);
       if (outStr != null) {
@@ -120,22 +122,27 @@ abstract class AbstractLocalizableImplCreator extends
       return null;
     }
 
+    @Override
     public void error(String msg) {
       logger.log(TreeLogger.ERROR, msg);
     }
 
+    @Override
     public void error(String msg, Throwable cause) {
       logger.log(TreeLogger.ERROR, msg, cause);
     }
 
+    @Override
     public GwtLocaleFactory getLocaleFactory() {
       return LocaleUtils.getLocaleFactory();
     }
 
+    @Override
     public void warning(String msg) {
       logger.log(TreeLogger.WARN, msg);
     }
 
+    @Override
     public void warning(String msg, Throwable cause) {
       logger.log(TreeLogger.WARN, msg, cause);
     }

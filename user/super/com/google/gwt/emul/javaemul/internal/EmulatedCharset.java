@@ -38,7 +38,7 @@ public abstract class EmulatedCharset extends Charset {
       int n = offset + count;
       byte[] bytes = new byte[count];
       for (int i = offset; i < n; ++i) {
-        bytes[i] = (byte) (buffer[i] & 255);
+        bytes[i - offset] = (byte) (buffer[i] & 255);
       }
       return bytes;
     }

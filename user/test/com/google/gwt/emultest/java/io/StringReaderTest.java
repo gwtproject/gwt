@@ -102,6 +102,14 @@ public class StringReaderTest extends GWTTestCase {
     assertEquals(-1, reader.read());
   }
 
+  public void testClose() throws Exception {
+    char[] out = new char[3];
+    try (StringReader reader = new StringReader("foo")) {
+      assertEquals(3, reader.read(out));
+    }
+    assertEquals("foo", new String(out));
+  }
+
   private static String repeat(char c, int count) {
     char[] arr = new char[count];
     Arrays.fill(arr, c);

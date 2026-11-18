@@ -225,7 +225,7 @@ public class HashSet<E> extends AbstractSet<E> implements Serializable {
   }
 
   /**
-   * Adapted from {@link org.apache.commons.collections.map.AbstractHashedMap}.
+   * Adapted from {@code org.apache.commons.collections.map.AbstractHashedMap}.
    */
   @SuppressWarnings("unchecked")
   protected void doReadObject(ObjectInputStream in) throws IOException,
@@ -238,7 +238,7 @@ public class HashSet<E> extends AbstractSet<E> implements Serializable {
   }
 
   /**
-   * Adapted from {@link org.apache.commons.collections.map.AbstractHashedMap}.
+   * Adapted from {@code org.apache.commons.collections.map.AbstractHashedMap}.
    */
   protected void doWriteObject(ObjectOutputStream out) throws IOException {
     out.writeInt(table.length);

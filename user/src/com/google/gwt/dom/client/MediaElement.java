@@ -21,7 +21,7 @@ import com.google.gwt.media.dom.client.TimeRanges;
 /**
  * Common superclass for Audio and Video elements.
  *
- * See {@link <a href="http://www.w3.org/TR/html5/video.html">W3C HTML5 Video and Audio</a>}
+ * See <a href="https://html.spec.whatwg.org/multipage/media.html">W3C HTML5 Video and Audio</a>
  */
 public class MediaElement extends Element {
 

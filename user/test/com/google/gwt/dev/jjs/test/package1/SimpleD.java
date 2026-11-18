@@ -22,6 +22,7 @@ import com.google.gwt.dev.jjs.test.package2.SimpleB;
  * and the default interface method of super interface.
  */
 public class SimpleD extends SimpleA implements SimpleB {
+  @Override
   public String m() {
     return super.m() + SimpleB.super.m();
   }

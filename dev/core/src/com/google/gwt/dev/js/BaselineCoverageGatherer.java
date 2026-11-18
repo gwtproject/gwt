@@ -87,7 +87,8 @@ public class BaselineCoverageGatherer {
      * otherwise e.g. class declarations will be visited.
      */
     new JVisitor() {
-      @Override public void endVisit(JMethodCall x, Context ctx) {
+      @Override
+      public void endVisit(JMethodCall x, Context ctx) {
         // this is a bit of a hack. The compiler inserts no-arg super calls, but
         // there isn't really a way to detect that they're synthetic, and the
         // strategy below of comparing source info with that of the enclosing type
@@ -100,27 +101,32 @@ public class BaselineCoverageGatherer {
         endVisit((JExpression) x, ctx);
       }
 
-      @Override public void endVisit(JThisRef x, Context ctx) {
+      @Override
+      public void endVisit(JThisRef x, Context ctx) {
         if (x.getSourceInfo().equals(x.getClassType().getSourceInfo())) {
           return;
         }
         endVisit((JExpression) x, ctx);
       }
 
-      @Override public void endVisit(JClassLiteral x, Context ctx) {
+      @Override
+      public void endVisit(JClassLiteral x, Context ctx) {
         if (x.getSourceInfo().equals(x.getRefType().getSourceInfo())) {
           return;
         }
         endVisit((JExpression) x, ctx);
       }
 
-      @Override public void endVisit(JExpression x, Context ctx) {
+      @Override
+      public void endVisit(JExpression x, Context ctx) {
         cover(x.getSourceInfo());
       }
 
-      @Override public void endVisit(JsniMethodBody x, Context ctx) {
+      @Override
+      public void endVisit(JsniMethodBody x, Context ctx) {
         new CoverageVisitor(instrumentedFiles) {
-          @Override public void endVisit(JsExpression x, JsContext ctx) {
+          @Override
+          public void endVisit(JsExpression x, JsContext ctx) {
             cover(x.getSourceInfo());
           }
         }.accept(x.getFunc());
@@ -129,14 +135,16 @@ public class BaselineCoverageGatherer {
       // don't instrument fields whose initializers are literals, because (1) CoverageVisitor
       // doesn't visit literals because it can introduce syntax errors in some cases, and (2) it's
       // consistent with other coverage tools, e.g. Emma.
-      @Override public boolean visit(JDeclarationStatement x, Context ctx) {
+      @Override
+      public boolean visit(JDeclarationStatement x, Context ctx) {
         return !(x.getInitializer() instanceof JValueLiteral &&
             x.getVariableRef().getTarget() instanceof JField);
       }
 
       // don't instrument method call arguments; we can get weird coverage results when a call is
       // spread over several lines
-      @Override public boolean visit(JMethodCall x, Context ctx) {
+      @Override
+      public boolean visit(JMethodCall x, Context ctx) {
         return false;
       }
     }.accept(jProgram);

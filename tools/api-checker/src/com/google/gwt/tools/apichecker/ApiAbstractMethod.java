@@ -73,6 +73,7 @@ abstract class ApiAbstractMethod implements Comparable<ApiAbstractMethod>, ApiEl
     this.apiClass = apiClass;
   }
 
+  @Override
   public int compareTo(ApiAbstractMethod other) {
     return getRelativeSignature().compareTo(other.getRelativeSignature());
   }
@@ -97,6 +98,7 @@ abstract class ApiAbstractMethod implements Comparable<ApiAbstractMethod>, ApiEl
     return method;
   }
 
+  @Override
   public String getRelativeSignature() {
     if (relativeSignature == null) {
       relativeSignature = computeRelativeSignature();

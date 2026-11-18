@@ -43,14 +43,14 @@ public class JsModVisitor extends JsVisitor {
     public void insertAfter(JsVisitable node) {
       checkRemoved();
       collection.add(index + 1, (T) node);
-      didChange = true;
+      numMods++;
     }
 
     @Override
     public void insertBefore(JsVisitable node) {
       checkRemoved();
       collection.add(index++, (T) node);
-      didChange = true;
+      numMods++;
     }
 
     @Override
@@ -62,7 +62,8 @@ public class JsModVisitor extends JsVisitor {
     public void removeMe() {
       checkState();
       collection.remove(index--);
-      didChange = removed = true;
+      removed = true;
+      numMods++;
     }
 
     @Override
@@ -70,7 +71,8 @@ public class JsModVisitor extends JsVisitor {
       checkState();
       checkReplacement(collection.get(index), node);
       collection.set(index, (T) node);
-      didChange = replaced = true;
+      replaced = true;
+      numMods++;
     }
 
     protected void traverse(List<T> collection) {
@@ -144,7 +146,8 @@ public class JsModVisitor extends JsVisitor {
       }
       checkReplacement(this.node, node);
       this.node = (T) node;
-      didChange = replaced = true;
+      replaced = true;
+      numMods++;
     }
 
     protected T traverse(T node) {
@@ -164,11 +167,10 @@ public class JsModVisitor extends JsVisitor {
     }
   }
 
-  protected boolean didChange = false;
+  protected int numMods = 0;
 
-  @Override
-  public boolean didChange() {
-    return didChange;
+  public int getNumMods() {
+    return numMods;
   }
 
   @Override

@@ -65,6 +65,7 @@ public abstract class AbstractEditorDelegate<T, E extends Editor<T>> implements
       }
     }
 
+    @Override
     public void attach(R object, S subEditor) {
       AbstractEditorDelegate<R, S> subDelegate = map.get(subEditor);
 
@@ -83,10 +84,12 @@ public abstract class AbstractEditorDelegate<T, E extends Editor<T>> implements
       traverse(createInitializerVisitor(), subDelegate);
     }
 
+    @Override
     public void detach(S subEditor) {
       map.remove(subEditor);
     }
 
+    @Override
     public R getValue(S subEditor) {
       AbstractEditorDelegate<R, S> subDelegate = map.get(subEditor);
       if (subDelegate == null) {
@@ -119,6 +122,7 @@ public abstract class AbstractEditorDelegate<T, E extends Editor<T>> implements
 
   public abstract T getObject();
 
+  @Override
   public String getPath() {
     return path;
   }
@@ -130,6 +134,7 @@ public abstract class AbstractEditorDelegate<T, E extends Editor<T>> implements
     return dirty;
   }
 
+  @Override
   public void recordError(String message, Object value, Object userData) {
     EditorError error = new SimpleError(this, message, value, userData);
     errors.add(error);
@@ -142,10 +147,12 @@ public abstract class AbstractEditorDelegate<T, E extends Editor<T>> implements
     errors.add(error);
   }
 
+  @Override
   public void setDirty(boolean dirty) {
     this.dirty = dirty;
   }
 
+  @Override
   public abstract HandlerRegistration subscribe();
 
   /**
@@ -209,7 +216,7 @@ public abstract class AbstractEditorDelegate<T, E extends Editor<T>> implements
   protected abstract void setObject(T object);
 
   /**
-   * Indicates whether or not calls to {@link #flush} are expected as part of
+   * Indicates whether calls to {@link com.google.gwt.editor.client.ValueAwareEditor#flush} are expected as part of
    * normal operation.
    */
   protected boolean shouldFlush() {

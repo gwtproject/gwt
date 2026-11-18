@@ -382,7 +382,7 @@ public class Context {
      * @see java.beans.PropertyChangeEvent
      * @param  property  the bound property
      * @param  oldValue  the old value
-     * @param  newVale   the new value
+     * @param  newValue   the new value
      */
     void firePropertyChange(String property, Object oldValue,
                             Object newValue)

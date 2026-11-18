@@ -28,6 +28,7 @@ public class StackPanelParser implements ElementParser {
 
   private static final String ATTRIBUTE_TEXT = "StackPanel-text";
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
     // Parse children.

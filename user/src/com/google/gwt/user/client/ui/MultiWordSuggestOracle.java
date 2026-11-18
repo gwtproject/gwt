@@ -93,11 +93,13 @@ public class MultiWordSuggestOracle extends SuggestOracle {
       this.displayString = displayString;
     }
     
+    @Override
     @IsSafeHtml
     public String getDisplayString() {
       return displayString;
     }
 
+    @Override
     public String getReplacementString() {
       return replacementString;
     }
@@ -119,6 +121,7 @@ public class MultiWordSuggestOracle extends SuggestOracle {
       this.endIndex = startIndex + length;
     }
 
+    @Override
     public int compareTo(WordBounds that) {
       int comparison = this.startIndex - that.startIndex;
       if (comparison == 0) {

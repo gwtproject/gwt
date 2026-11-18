@@ -488,10 +488,12 @@ public class FormPanel extends SimplePanel implements FiresFormEvents, FormPanel
    *
    * @return true if the form is submitted, false if canceled
    */
+  @Override
   public boolean onFormSubmit() {
     return onFormSubmitImpl();
   }
 
+  @Override
   public void onFrameLoad() {
     onFrameLoadImpl();
   }
@@ -646,6 +648,7 @@ public class FormPanel extends SimplePanel implements FiresFormEvents, FormPanel
     // complete can cause some browsers (i.e. Mozilla) to go into an
     // 'infinite loading' state. See issue 916.
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+      @Override
       public void execute() {
         fireEvent(new SubmitCompleteEvent(impl.getContents(synthesizedFrame)));
       }

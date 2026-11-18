@@ -26,7 +26,6 @@
   <target name="build" depends="filter, merge_codeserver" description="Packages the distro">
     <!-- TODO: figure out how to share most of this across platforms -->
     <mkdir dir="${gwt.build.dist}" />
-    <mkdir dir="${gwt.build.out}/samples-scripts"/>
     <zip destfile="${project.dist}">
       <!-- jars -->
       <zipfileset file="${gwt.build.lib}/gwt-dev.jar" prefix="${project.distname}" />
@@ -56,14 +55,10 @@
       <zipfileset dir="${gwt.build.out}" prefix="${project.distname}">
         <include name="samples" />
         <include name="samples/*" />
-        <include name="samples/*/build.xml" />
-        <include name="samples/*/pom.xml" />
-        <include name="samples/*/README-MAVEN.txt" />
-        <include name="samples/*/src/**" />
-        <include name="samples/*/war/**" />
-      </zipfileset>
-      <zipfileset dir="${gwt.build.out}/samples-scripts" prefix="${project.distname}/samples">
-        <include name="*/*" />
+        <include name="samples/**/pom.xml" />
+        <include name="samples/*/README.md" />
+        <include name="samples/*/COPYING" />
+        <include name="samples/**/src/**" />
       </zipfileset>
     </zip>
 

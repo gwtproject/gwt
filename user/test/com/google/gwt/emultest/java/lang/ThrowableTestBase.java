@@ -72,7 +72,8 @@ public abstract class ThrowableTestBase extends GWTTestCase {
 
   protected static Thrower createNativeThrower(final Object e) {
     return new Thrower() {
-      @Override public void throwException() {
+      @Override
+      public void throwException() {
         throwNative(e);
       }
     };

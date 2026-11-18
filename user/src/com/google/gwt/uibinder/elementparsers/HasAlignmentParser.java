@@ -29,11 +29,12 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConst
  * these classes.
  * <p>
  * 
- * See {@link "http://code.google.com/p/google-web-toolkit/issues/detail?id=5518"}
+ * See <a href="https://github.com/gwtproject/gwt/issues/5517">#5517</a>
  * for issue details.
  */
 
 public class HasAlignmentParser implements ElementParser {
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
 

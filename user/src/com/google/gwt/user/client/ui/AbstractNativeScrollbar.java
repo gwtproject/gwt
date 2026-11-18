@@ -109,6 +109,7 @@ public abstract class AbstractNativeScrollbar extends Widget implements HasScrol
     scrollable.removeFromParent();
   }
 
+  @Override
   public HandlerRegistration addScrollHandler(ScrollHandler handler) {
     // Sink the event on the scrollable element, not the root element.
     Event.sinkEvents(getScrollableElement(), Event.ONSCROLL);

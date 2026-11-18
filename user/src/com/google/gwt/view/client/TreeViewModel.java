@@ -88,22 +88,27 @@ public interface TreeViewModel {
       this.selectionEventManager = selectionEventManager;
     }
 
+    @Override
     public Cell<T> getCell() {
       return cell;
     }
 
+    @Override
     public ProvidesKey<T> getProvidesKey() {
       return dataProvider;
     }
 
+    @Override
     public SelectionModel<? super T> getSelectionModel() {
       return selectionModel;
     }
 
+    @Override
     public ValueUpdater<T> getValueUpdater() {
       return valueUpdater;
     }
 
+    @Override
     public void setDataDisplay(HasData<T> display) {
       this.display = display;
       if (selectionEventManager != null) {
@@ -112,6 +117,7 @@ public interface TreeViewModel {
       dataProvider.addDataDisplay(display);
     }
 
+    @Override
     public void unsetDataDisplay() {
       if (display != null) {
         dataProvider.removeDataDisplay(display);

@@ -28,6 +28,7 @@ public class StableShortTypeObfuscationStyleTest extends RenamingClassNameTest {
     return "com.google.gwt.resources.GssStableShortTypeStyle";
   }
 
+  @Override
   public void testClassesRenaming() {
     ClassNameAnnotation classNameAnnotation = res().classNameAnnotation();
     String renamedClass = classNameAnnotation.renamedClass();

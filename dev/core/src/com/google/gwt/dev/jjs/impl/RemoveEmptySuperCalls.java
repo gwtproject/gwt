@@ -27,6 +27,7 @@ import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
  * Removes calls to no-op super constructors.
  */
 public class RemoveEmptySuperCalls {
+  private static final String NAME = RemoveEmptySuperCalls.class.getSimpleName();
 
   /**
    * Removes calls to no-op super constructors.
@@ -55,9 +56,11 @@ public class RemoveEmptySuperCalls {
     }
   }
 
-  public static boolean exec(JProgram program) {
-    EmptySuperCallVisitor v = new EmptySuperCallVisitor();
-    v.accept(program);
-    return v.didChange();
+  public static void exec(JProgram program) {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      EmptySuperCallVisitor v = new EmptySuperCallVisitor();
+      v.accept(program);
+      stats.recordModified(v.getNumMods());
+    }
   }
 }

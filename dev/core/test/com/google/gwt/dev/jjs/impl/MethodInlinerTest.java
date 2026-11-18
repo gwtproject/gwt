@@ -190,7 +190,7 @@ public class MethodInlinerTest extends OptimizerTestBase {
   protected boolean doOptimizeMethod(TreeLogger logger, JProgram program, JMethod method) {
     program.addEntryMethod(findMainMethod(program));
     boolean didChange = false;
-    while (MethodInliner.exec(program).didChange()) {
+    while (MethodInliner.exec(program) > 0) {
       didChange = true;
     }
     return didChange;

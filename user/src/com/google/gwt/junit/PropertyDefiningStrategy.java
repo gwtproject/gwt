@@ -95,6 +95,7 @@ public class PropertyDefiningStrategy implements Strategy {
     if (properties == null) {
       Set<Property> props = new TreeSet<Property>(
           new Comparator<Property>() {
+        @Override
         public int compare(Property p1, Property p2) {
           int r = p1.name().compareTo(p2.name());
           if (r == 0) {

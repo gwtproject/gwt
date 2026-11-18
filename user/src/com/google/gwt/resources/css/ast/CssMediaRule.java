@@ -29,6 +29,7 @@ public class CssMediaRule extends CssNode implements HasNodes {
     return selectors;
   }
 
+  @Override
   public List<CssNode> getNodes() {
     return nodes;
   }
@@ -38,6 +39,7 @@ public class CssMediaRule extends CssNode implements HasNodes {
     return true;
   }
 
+  @Override
   public void traverse(CssVisitor visitor, Context context) {
     if (visitor.visit(this, context)) {
       visitor.acceptWithInsertRemove(nodes);

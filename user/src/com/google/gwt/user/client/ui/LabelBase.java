@@ -64,22 +64,27 @@ public class LabelBase<T> extends Widget implements HasWordWrap,
         isElementInline);
   }
 
+  @Override
   public AutoHorizontalAlignmentConstant getAutoHorizontalAlignment() {
     return autoHorizontalAlignment;
   }
 
+  @Override
   public DirectionEstimator getDirectionEstimator() {
     return directionalTextHelper.getDirectionEstimator();
   }
 
+  @Override
   public HorizontalAlignmentConstant getHorizontalAlignment() {
     return horzAlign;
   }
 
+  @Override
   public boolean getWordWrap() {
     return !WhiteSpace.NOWRAP.getCssName().equals(getElement().getStyle().getWhiteSpace());
   }
 
+  @Override
   public void setAutoHorizontalAlignment(
       AutoHorizontalAlignmentConstant autoAlignment) {
     autoHorizontalAlignment = autoAlignment;
@@ -91,6 +96,7 @@ public class LabelBase<T> extends Widget implements HasWordWrap,
    * <p>
    * See note at {@link #setDirectionEstimator(DirectionEstimator)}.
    */
+  @Override
   public void setDirectionEstimator(boolean enabled) {
     directionalTextHelper.setDirectionEstimator(enabled);
     updateHorizontalAlignment();
@@ -105,6 +111,7 @@ public class LabelBase<T> extends Widget implements HasWordWrap,
    * according to the new estimator's result. This may cause flicker, and thus
    * should be avoided.
    */
+  @Override
   public void setDirectionEstimator(DirectionEstimator directionEstimator) {
     directionalTextHelper.setDirectionEstimator(directionEstimator);
     updateHorizontalAlignment();
@@ -123,10 +130,12 @@ public class LabelBase<T> extends Widget implements HasWordWrap,
    * 
    * @see #setAutoHorizontalAlignment
    */
+  @Override
   public void setHorizontalAlignment(HorizontalAlignmentConstant align) {
     setAutoHorizontalAlignment(align);
   }
 
+  @Override
   public void setWordWrap(boolean wrap) {
     getElement().getStyle().setWhiteSpace(wrap ? WhiteSpace.NORMAL : WhiteSpace.NOWRAP);
   }

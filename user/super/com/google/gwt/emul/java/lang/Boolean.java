@@ -18,13 +18,14 @@ package java.lang;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
+import java.lang.constant.Constable;
 import javaemul.internal.JsUtils;
 import jsinterop.annotations.JsMethod;
 
 /**
  * Wraps native <code>boolean</code> as an object.
  */
-public final class Boolean implements Comparable<Boolean>, Serializable {
+public final class Boolean implements Comparable<Boolean>, Serializable, Constable {
 
   public static final Boolean FALSE = false;
   public static final Boolean TRUE = true;

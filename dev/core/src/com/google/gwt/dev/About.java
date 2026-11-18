@@ -24,7 +24,7 @@ import java.util.Properties;
  */
 public class About {
   /**
-   * Tag used for text replacement of the SVN version (split up to avoid
+   * Tag used for text replacement of the Git version (split up to avoid
    * replacing it here).
    */
   private static final String GWT_GITREV_TAG = "@GWT_" + "GITREV@";
@@ -35,7 +35,7 @@ public class About {
    */
   private static final String GWT_VERSION_TAG = "@GWT_" + "VERSION@";
 
-  private static final String gwtName = "Google Web Toolkit";
+  private static final String gwtName = "GWT Web Toolkit";
   private static final String gwtGitRev;
   private static final GwtVersion gwtVersion;
 

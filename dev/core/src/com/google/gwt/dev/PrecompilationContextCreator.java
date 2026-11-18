@@ -31,9 +31,6 @@ import com.google.gwt.dev.jdt.RebindOracle;
 import com.google.gwt.dev.jdt.RebindPermutationOracle;
 import com.google.gwt.dev.jjs.PrecompilationContext;
 import com.google.gwt.dev.shell.StandardRebindOracle;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.Deque;
@@ -80,7 +77,6 @@ class PrecompilationContextCreator {
             logger = logger.branch(TreeLogger.DEBUG, msg, null);
 
             Set<String> answers = Sets.newHashSet();
-            Event getAllRebindsEvent = SpeedTracerLogger.start(CompilerEventType.GET_ALL_REBINDS);
             for (int i = 0; i < permutations.length; ++i) {
               String resultTypeName = rebindOracles[i].rebind(logger, requestTypeName);
               answers.add(resultTypeName);
@@ -88,7 +84,6 @@ class PrecompilationContextCreator {
               permutations[i].putRebindAnswer(requestTypeName, resultTypeName);
             }
             String[] result = answers.toArray(String[]::new);
-            getAllRebindsEvent.end();
             return result;
           }
 

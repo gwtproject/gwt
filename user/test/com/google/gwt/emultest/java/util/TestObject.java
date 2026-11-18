@@ -47,6 +47,7 @@ abstract class TestObject extends EmulTestBase {
   /** Return a new, empty {@link Object} to used for testing. */
   public abstract Object makeObject();
 
+  @SuppressWarnings("SelfAssertion")
   public void testObjectEqualsSelf() {
     Object obj = makeObject();
     assertEquals("A Object should equal itself", obj, obj);

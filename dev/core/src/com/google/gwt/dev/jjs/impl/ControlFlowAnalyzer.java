@@ -911,7 +911,7 @@ public class ControlFlowAnalyzer {
    * These are arguments that have not yet been rescued on account of the
    * associated parameter not having been read yet. If the parameter becomes
    * read, we will need to rescue the associated arguments. See comments in
-   * {@link #rescueArgumentsIfParametersCanBeRead}.
+   * {@code rescueArgumentsIfParametersCanBeRead}.
    */
   private ListMultimap<JParameter, JExpression> argumentsToRescueIfParameterRead;
 

@@ -395,14 +395,17 @@ public abstract class AbstractResource {
       }
     }
 
+    @Override
     public String getForm(String form) {
       return values.get(form);
     }
 
+    @Override
     public Collection<String> getForms() {
       return forms;
     }
 
+    @Override
     public String getKey() {
       return key;
     }
@@ -433,14 +436,17 @@ public abstract class AbstractResource {
       return key.equals(other.key) && value.equals(other.value);
     }
 
+    @Override
     public String getForm(String form) {
       return form != null ? null : value;
     }
 
+    @Override
     public Collection<String> getForms() {
       return Collections.emptyList();
     }
 
+    @Override
     public String getKey() {
       return key;
     }

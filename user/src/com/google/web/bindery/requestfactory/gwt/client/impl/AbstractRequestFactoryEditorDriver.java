@@ -92,18 +92,22 @@ public abstract class AbstractRequestFactoryEditorDriver<R, E extends Editor<R>>
       this.violations = violations;
     }
 
+    @Override
     public Iterator<SimpleViolation> iterator() {
       final Iterator<com.google.web.bindery.requestfactory.shared.Violation> source =
           violations.iterator();
       return new Iterator<SimpleViolation>() {
+        @Override
         public boolean hasNext() {
           return source.hasNext();
         }
 
+        @Override
         public SimpleViolation next() {
           return new SimpleViolationAdapter(source.next());
         }
 
+        @Override
         public void remove() {
           source.remove();
         }
@@ -134,6 +138,7 @@ public abstract class AbstractRequestFactoryEditorDriver<R, E extends Editor<R>>
   }
 
   private static final DelegateMap.KeyMethod PROXY_ID_KEY = new DelegateMap.KeyMethod() {
+    @Override
     public Object key(Object object) {
       if (object instanceof EntityProxy) {
         return ((EntityProxy) object).stableId();
@@ -155,10 +160,12 @@ public abstract class AbstractRequestFactoryEditorDriver<R, E extends Editor<R>>
   private RequestFactory factory;
   private RequestContext saveRequest;
 
+  @Override
   public void display(R object) {
     edit(object, null);
   }
 
+  @Override
   public void edit(R object, RequestContext saveRequest) {
     this.saveRequest = saveRequest;
     /*
@@ -169,26 +176,31 @@ public abstract class AbstractRequestFactoryEditorDriver<R, E extends Editor<R>>
     doEdit(object);
   }
 
+  @Override
   public RequestContext flush() {
     checkSaveRequest();
     doFlush();
     return saveRequest;
   }
 
+  @Override
   public String[] getPaths() {
     return paths.toArray(new String[paths.size()]);
   }
 
+  @Override
   public void initialize(E editor) {
     doInitialize(null, null, editor);
   }
 
+  @Override
   public void initialize(EventBus eventBus, RequestFactory requestFactory, E editor) {
     assert eventBus != null : "eventBus must not be null";
     assert requestFactory != null : "requestFactory must not be null";
     doInitialize(eventBus, requestFactory, editor);
   }
 
+  @Override
   public void initialize(RequestFactory requestFactory, E editor) {
     initialize(requestFactory.getEventBus(), requestFactory, editor);
   }

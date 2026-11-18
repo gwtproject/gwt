@@ -98,6 +98,7 @@ public class ValueBoxEditorDecorator<T> extends Composite implements
    * @return a {@link ValueBoxEditor} instance
    * @see #setEditor(ValueBoxEditor)
    */
+  @Override
   public ValueBoxEditor<T> asEditor() {
     return editor;
   }
@@ -131,6 +132,7 @@ public class ValueBoxEditorDecorator<T> extends Composite implements
    * 
    * @param errors a List of {@link EditorError} instances
    */
+  @Override
   public void showErrors(List<EditorError> errors) {
     StringBuilder sb = new StringBuilder();
     for (EditorError error : errors) {

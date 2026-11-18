@@ -97,6 +97,7 @@ public class ValueBoxEditor<T> extends TakesValueEditor<T> implements
    * @param delegate an {@link EditorDelegate}, or {@code null}
    * @see #getDelegate()
    */
+  @Override
   public void setDelegate(EditorDelegate<T> delegate) {
     this.delegate = delegate;
   }

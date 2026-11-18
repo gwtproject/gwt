@@ -42,6 +42,7 @@ public class DockPanelParser implements ElementParser {
     values.put("LINE_END", "com.google.gwt.user.client.ui.DockPanel.LINE_END");
   }
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
     // Parse children.

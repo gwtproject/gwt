@@ -63,6 +63,7 @@ public class LoggingPopup extends PopupPanel {
 
     public abstract void handleDrag(int absX, int absY);
 
+    @Override
     public void onMouseDown(MouseDownEvent event) {
       dragging = true;
       DOM.setCapture(dragHandle.getElement());
@@ -71,6 +72,7 @@ public class LoggingPopup extends PopupPanel {
       DOM.eventGetCurrentEvent().preventDefault();
     }
  
+    @Override
     public void onMouseMove(MouseMoveEvent event) {
       if (dragging) {
         handleDrag(event.getClientX() - dragStartX,
@@ -80,6 +82,7 @@ public class LoggingPopup extends PopupPanel {
       }
     }
     
+    @Override
     public void onMouseUp(MouseUpEvent event) {
       dragging = false;
       DOM.releaseCapture(dragHandle.getElement());
@@ -158,6 +161,7 @@ public class LoggingPopup extends PopupPanel {
     final Button maxmin = new Button("Minimize");
     bottomBar.add(maxmin);
     maxmin.addClickHandler(new ClickHandler() {
+      @Override
       public void onClick(ClickEvent event) {
         if (maxmin.getText().equals("Minimize")) {
           maxmin.setText("Maximize");

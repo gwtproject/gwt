@@ -125,7 +125,7 @@ public class JsLiteralInterner {
     }
 
     /**
-     * Count occurences of String literal.
+     * Count occurrences of String literal.
      */
     @Override
     public boolean visit(JsStringLiteral x, JsContext ctx) {
@@ -133,7 +133,7 @@ public class JsLiteralInterner {
     }
 
     /**
-     * Count occurences of Object literal.
+     * Count occurrences of Object literal.
      */
     @Override
     public boolean visit(JsObjectLiteral x, JsContext ctx) {
@@ -151,7 +151,7 @@ public class JsLiteralInterner {
     }
 
     /**
-     * Count occurences of Array literal.
+     * Count occurrences of Array literal.
      */
     @Override
     public boolean visit(JsArrayLiteral x, JsContext ctx) {
@@ -211,7 +211,7 @@ public class JsLiteralInterner {
     private long lastId = 0;
 
     /**
-     * Count of # of occurences of each literal, or null if
+     * Count of # of occurrences of each literal, or null if
      * count-sensitive interning is off.
      */
     private Multiset<JsLiteral> occurrencesPerLiteral;
@@ -494,9 +494,8 @@ public class JsLiteralInterner {
    * @param block the block to visit.
    * @param scope the JsScope in which to reserve the new identifiers.
    * @param alwaysIntern whether to intern all literals regardless of their occurrence count.
-   * @return {@code true} if any changes were made to the block.
    */
-  public static boolean exec(JsProgram program, JsBlock block, JsScope scope,
+  public static void exec(JsProgram program, JsBlock block, JsScope scope,
       boolean alwaysIntern) {
 
     Multiset<JsLiteral> occurrencesPerLiteral = null;
@@ -510,8 +509,6 @@ public class JsLiteralInterner {
 
     createVars(program, block, v.variableNameForInternedLiteral.keySet(),
         v.variableNameForInternedLiteral);
-
-    return v.didChange();
   }
 
   /**

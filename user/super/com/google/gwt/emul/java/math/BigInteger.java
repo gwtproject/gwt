@@ -72,6 +72,11 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
   public static final BigInteger TEN = new BigInteger(1, 10);
 
   /**
+   * The {@code BigInteger} constant 2.
+   */
+  public static final BigInteger TWO = new BigInteger(1, 2);
+
+  /**
    * The {@code BigInteger} constant 0.
    */
   public static final BigInteger ZERO = new BigInteger(0, 0);

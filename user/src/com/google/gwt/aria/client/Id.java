@@ -66,7 +66,7 @@ public class Id implements AriaAttributeType {
   }
 
   private void init(String elementId) {
-    assert elementId != null || elementId.equals("") :
+    assert elementId != null && !elementId.isEmpty() :
       "Invalid elementId: cannot be null or empty.";
     this.id = elementId;
   }

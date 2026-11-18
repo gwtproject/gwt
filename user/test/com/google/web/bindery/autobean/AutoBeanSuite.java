@@ -22,6 +22,7 @@ import com.google.web.bindery.autobean.shared.SplittableTest;
 import com.google.web.bindery.autobean.vm.AutoBeanCodexJreTest;
 import com.google.web.bindery.autobean.vm.AutoBeanJreTest;
 import com.google.web.bindery.autobean.vm.SplittableJreTest;
+import com.google.web.bindery.autobean.vm.StringQuoterJreTest;
 
 import junit.framework.Test;
 
@@ -38,6 +39,7 @@ public class AutoBeanSuite {
     suite.addTestSuite(AutoBeanTest.class);
     suite.addTestSuite(SplittableJreTest.class);
     suite.addTestSuite(SplittableTest.class);
+    suite.addTestSuite(StringQuoterJreTest.class);
     return suite;
   }
 }

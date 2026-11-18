@@ -48,6 +48,7 @@ public class LengthAttributeParser implements AttributeParser {
     this.logger = logger;
   }
 
+  @Override
   public String parse(XMLElement source, String lengthStr) throws UnableToCompleteException {
     Matcher matcher = pattern.matcher(lengthStr);
     if (!matcher.matches()) {

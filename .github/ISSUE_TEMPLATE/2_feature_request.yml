@@ -1,0 +1,22 @@
+name: 🚀 Feature request
+description: Create a report to help us improve
+labels: ["feature-request"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please describe the feature you'd like to see. Note that some parts of GWT are in maintenance mode
+        and will generally not receive new features, please consider using their replacements instead
+        of filing a feature request (DOM can be replaced by [https://github.com/google/elemental2](Elemental2),
+        widgets by an external UI library such as [Domino UI](https://github.com/DominoKit/domino-ui)).
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: "Describe the feature."
+  - type: textarea
+    attributes:
+      label: Are you interested in contributing this feature?
+      description: Indicate if this is something you would like to work on, and how we can best support you in doing so.

@@ -46,6 +46,7 @@ public abstract class AbstractRequestFactory extends IdFactory implements Reques
   };
   private RequestTransport transport;
 
+  @Override
   public <P extends EntityProxy> Request<P> find(EntityProxyId<P> proxyId) {
     if (((SimpleEntityProxyId<P>) proxyId).isEphemeral()) {
       throw new IllegalArgumentException("Cannot fetch unpersisted entity");
@@ -62,6 +63,7 @@ public abstract class AbstractRequestFactory extends IdFactory implements Reques
     return context.find(proxyId);
   }
 
+  @Override
   public EventBus getEventBus() {
     return eventBus;
   }
@@ -72,14 +74,17 @@ public abstract class AbstractRequestFactory extends IdFactory implements Reques
    */
   public abstract String getFactoryTypeToken();
 
+  @Override
   public String getHistoryToken(Class<? extends EntityProxy> clazz) {
     return getTypeToken(clazz);
   }
 
+  @Override
   public String getHistoryToken(EntityProxyId<?> proxy) {
     return getHistoryToken((SimpleProxyId<?>) proxy);
   }
 
+  @Override
   public Class<? extends EntityProxy> getProxyClass(String historyToken) {
     String typeToken = IdUtil.getTypeToken(historyToken);
     if (typeToken != null) {
@@ -88,15 +93,18 @@ public abstract class AbstractRequestFactory extends IdFactory implements Reques
     return getTypeFromToken(historyToken);
   }
 
+  @Override
   @SuppressWarnings("unchecked")
   public <T extends EntityProxy> EntityProxyId<T> getProxyId(String historyToken) {
     return (EntityProxyId<T>) getBaseProxyId(historyToken);
   }
 
+  @Override
   public RequestTransport getRequestTransport() {
     return transport;
   }
 
+  @Override
   public ProxySerializer getSerializer(ProxyStore store) {
     return new ProxySerializerImpl(this, store);
   }
@@ -104,8 +112,10 @@ public abstract class AbstractRequestFactory extends IdFactory implements Reques
   /**
    * The choice of a default request transport is runtime-specific.
    */
+  @Override
   public abstract void initialize(EventBus eventBus);
 
+  @Override
   public void initialize(EventBus eventBus, RequestTransport transport) {
     this.eventBus = eventBus;
     this.transport = transport;

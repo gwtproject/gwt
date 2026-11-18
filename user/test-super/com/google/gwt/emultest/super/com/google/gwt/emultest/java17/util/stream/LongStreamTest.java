@@ -34,6 +34,6 @@ public class LongStreamTest extends EmulTestBase {
     assertEquals(new long[]{1L, 2L, 3L, 6L},
         LongStream.of(1L, 3L).mapMulti(doubling).toArray());
     assertEquals(new long[0],
-        LongStream.of(1L, 2L).mapMulti((a, b) -> {}).toArray());
+        LongStream.of(1L, 2L).mapMulti((a, b) -> { }).toArray());
   }
 }

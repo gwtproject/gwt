@@ -125,6 +125,7 @@ public interface SelectionModel<T> extends HasSelectionChangedHandlers, Provides
       if (!isEventScheduled()) {
         setEventScheduled(true);
         Scheduler.get().scheduleFinally(new ScheduledCommand() {
+          @Override
           public void execute() {
             setEventScheduled(false);
             if (isEventCancelled()) {

@@ -150,6 +150,7 @@ public class ReflectionMessage extends AbstractMessage {
         annotClass, true) != null;
   }
 
+  @Override
   public boolean isVarArgs() {
     return method.isVarArgs();
   }

@@ -144,7 +144,7 @@ public abstract class RemoteServiceProxy implements SerializationStreamFactory,
   }
 
   /**
-   * @deprected use {@link RpcStatsContext}.
+   * @deprecated use {@link RpcStatsContext}.
    */
   @Deprecated
   protected static int getNextRequestId() {
@@ -252,6 +252,7 @@ public abstract class RemoteServiceProxy implements SerializationStreamFactory,
    *         SerializationStreamReader} that is ready for reading
    * @throws SerializationException
    */
+  @Override
   public SerializationStreamReader createStreamReader(String encoded)
       throws SerializationException {
     ClientSerializationStreamReader clientSerializationStreamReader = new ClientSerializationStreamReader(
@@ -273,6 +274,7 @@ public abstract class RemoteServiceProxy implements SerializationStreamFactory,
    *         it and it has already had had the name of the remote service
    *         interface written as well
    */
+  @Override
   public SerializationStreamWriter createStreamWriter() {
     ClientSerializationStreamWriter clientSerializationStreamWriter = new ClientSerializationStreamWriter(
         serializer, moduleBaseURL, serializationPolicyName);
@@ -283,6 +285,7 @@ public abstract class RemoteServiceProxy implements SerializationStreamFactory,
   /**
    * @see HasRpcToken#getRpcToken()
    */
+  @Override
   public RpcToken getRpcToken() {
     return rpcToken;
   }
@@ -290,10 +293,12 @@ public abstract class RemoteServiceProxy implements SerializationStreamFactory,
   /**
    * @see HasRpcToken#getRpcTokenExceptionHandler()
    */
+  @Override
   public RpcTokenExceptionHandler getRpcTokenExceptionHandler() {
     return rpcTokenExceptionHandler;
   }
 
+  @Override
   public String getSerializationPolicyName() {
     return serializationPolicyName;
   }
@@ -301,10 +306,12 @@ public abstract class RemoteServiceProxy implements SerializationStreamFactory,
   /**
    * @see ServiceDefTarget#getServiceEntryPoint()
    */
+  @Override
   public String getServiceEntryPoint() {
     return remoteServiceURL;
   }
 
+  @Override
   public void setRpcRequestBuilder(RpcRequestBuilder builder) {
     this.rpcRequestBuilder = builder;
   }
@@ -312,6 +319,7 @@ public abstract class RemoteServiceProxy implements SerializationStreamFactory,
   /**
    * @see HasRpcToken#setRpcToken(RpcToken)
    */
+  @Override
   public void setRpcToken(RpcToken token) {
     checkRpcTokenType(token);
     this.rpcToken = token;
@@ -320,6 +328,7 @@ public abstract class RemoteServiceProxy implements SerializationStreamFactory,
   /**
    * @see HasRpcToken#setRpcTokenExceptionHandler(RpcTokenExceptionHandler)
    */
+  @Override
   public void setRpcTokenExceptionHandler(RpcTokenExceptionHandler handler) {
     this.rpcTokenExceptionHandler = handler;
   }
@@ -327,6 +336,7 @@ public abstract class RemoteServiceProxy implements SerializationStreamFactory,
   /**
    * @see ServiceDefTarget#setServiceEntryPoint(String)
    */
+  @Override
   public void setServiceEntryPoint(String url) {
     this.remoteServiceURL = url;
   }

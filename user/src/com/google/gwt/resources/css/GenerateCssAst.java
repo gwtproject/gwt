@@ -128,11 +128,13 @@ public class GenerateCssAst {
       return logOrBranch(type, message, t, true);
     }
 
+    @Override
     public void error(CSSParseException exception) throws CSSException {
       // TODO Since this indicates a loss of data, should this be a fatal error?
       log(TreeLogger.WARN, exception);
     }
 
+    @Override
     public void fatalError(CSSParseException exception) throws CSSException {
       log(TreeLogger.ERROR, exception);
     }
@@ -145,6 +147,7 @@ public class GenerateCssAst {
       logOrBranch(type, message, t, false);
     }
 
+    @Override
     public void warning(CSSParseException exception) throws CSSException {
       log(TreeLogger.DEBUG, exception);
     }
@@ -218,30 +221,37 @@ public class GenerateCssAst {
       currentParent.push(css);
     }
 
+    @Override
     public void comment(String text) throws CSSException {
       // Ignore comments
       // TODO Should comments be retained but not generally printed?
     }
 
+    @Override
     public void endDocument(InputSource source) throws CSSException {
     }
 
+    @Override
     public void endFontFace() throws CSSException {
     }
 
+    @Override
     public void endMedia(SACMediaList media) throws CSSException {
       currentParent.pop();
     }
 
+    @Override
     public void endPage(String name, String pseudoPage) throws CSSException {
     }
 
+    @Override
     public void endSelector(SelectorList selectors) throws CSSException {
     }
 
     /**
      * Reflectively invoke a method named parseRule on this instance.
      */
+    @Override
     public void ignorableAtRule(String atRule) throws CSSException {
       int idx = atRule.indexOf(" ");
       if (idx == -1) {
@@ -280,14 +290,17 @@ public class GenerateCssAst {
       }
     }
 
+    @Override
     public void importStyle(String uri, SACMediaList media,
         String defaultNamespaceURI) throws CSSException {
     }
 
+    @Override
     public void namespaceDeclaration(String prefix, String uri)
         throws CSSException {
     }
 
+    @Override
     public void property(String name, LexicalUnit value, boolean important)
         throws CSSException {
       List<Value> values = new ArrayList<Value>();
@@ -298,6 +311,7 @@ public class GenerateCssAst {
           new CssProperty(escapeIdent(name), new ListValue(values), important));
     }
 
+    @Override
     public void startDocument(InputSource source) throws CSSException {
       // Unfortunately flute doesn't call parseCharset() method when it reaches a charset
       // declaration. The only place to get the charset is in this method. Flute use ASCII by
@@ -310,12 +324,14 @@ public class GenerateCssAst {
       }
     }
 
+    @Override
     public void startFontFace() throws CSSException {
       CssFontFace rule = new CssFontFace();
       addNode(rule);
       currentRule = rule;
     }
 
+    @Override
     public void startMedia(SACMediaList media) throws CSSException {
       CssMediaRule r = new CssMediaRule();
       for (int i = 0; i < media.getLength(); i++) {
@@ -325,6 +341,7 @@ public class GenerateCssAst {
       pushParent(r);
     }
 
+    @Override
     public void startPage(String name, String pseudoPage) throws CSSException {
       CssPageRule r = new CssPageRule();
       // name appears to be unused in CSS2
@@ -333,6 +350,7 @@ public class GenerateCssAst {
       currentRule = r;
     }
 
+    @Override
     public void startSelector(SelectorList selectors) throws CSSException {
       CssRule r;
 
@@ -625,52 +643,67 @@ public class GenerateCssAst {
       this.values = values;
     }
 
+    @Override
     public void comment(String text) throws CSSException {
     }
 
+    @Override
     public void endDocument(InputSource source) throws CSSException {
     }
 
+    @Override
     public void endFontFace() throws CSSException {
     }
 
+    @Override
     public void endMedia(SACMediaList media) throws CSSException {
     }
 
+    @Override
     public void endPage(String name, String pseudoPage) throws CSSException {
     }
 
+    @Override
     public void endSelector(SelectorList selectors) throws CSSException {
     }
 
+    @Override
     public void ignorableAtRule(String atRule) throws CSSException {
     }
 
+    @Override
     public void importStyle(String uri, SACMediaList media,
         String defaultNamespaceURI) throws CSSException {
     }
 
+    @Override
     public void namespaceDeclaration(String prefix, String uri)
         throws CSSException {
     }
 
+    @Override
     public void property(String name, LexicalUnit value, boolean important)
         throws CSSException {
       extractValueOf(values, value);
     }
 
+    @Override
     public void startDocument(InputSource source) throws CSSException {
     }
 
+    @Override
     public void startFontFace() throws CSSException {
     }
 
+    @Override
     public void startMedia(SACMediaList media) throws CSSException {
     }
 
+    @Override
     public void startPage(String name, String pseudoPage) throws CSSException {
     }
 
+    @Override
     public void startSelector(SelectorList selectors) throws CSSException {
     }
   }

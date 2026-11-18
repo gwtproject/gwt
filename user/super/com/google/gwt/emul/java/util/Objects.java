@@ -139,15 +139,14 @@ public final class Objects {
 
   public static int checkIndex(int index, int length) {
     if (index < 0 || index >= length) {
-      throw new IndexOutOfBoundsException("Index " + index + " out of bounds for length " + length);
+      throw getIndexError(index, length);
     }
     return index;
   }
 
   public static int checkFromToIndex(int fromIndex, int toIndex, int length) {
     if (fromIndex < 0 || fromIndex > toIndex || toIndex > length) {
-      throw new IndexOutOfBoundsException("Range [" + fromIndex + ", " + toIndex
-          + ") out of bounds for length " + length);
+      throw getFromIndexError(fromIndex, toIndex, length);
     }
     return fromIndex;
   }
@@ -155,8 +154,29 @@ public final class Objects {
   public static int checkFromIndexSize(int fromIndex, int size, int length) {
     // in JS fromIndex + size cannot overflow because int is not limited to 32 bits
     if (fromIndex < 0 || size < 0 || fromIndex + size > length) {
-      throw new IndexOutOfBoundsException("Range [" + fromIndex + ", " + (fromIndex + size)
-          + ") out of bounds for length " + length);
+      throw getFromIndexError(fromIndex, fromIndex + size, length);
+    }
+    return fromIndex;
+  }
+
+  public static long checkIndex(long index, long length) {
+    if (index < 0 || index >= length) {
+      throw getIndexError(index, length);
+    }
+    return index;
+  }
+
+  public static long checkFromToIndex(long fromIndex, long toIndex, long length) {
+    if (fromIndex < 0 || fromIndex > toIndex || toIndex > length) {
+      throw getFromIndexError(fromIndex, toIndex, length);
+    }
+    return fromIndex;
+  }
+
+  public static long checkFromIndexSize(long fromIndex, long size, long length) {
+    // in JS fromIndex + size cannot overflow because int is not limited to 64 bits
+    if (fromIndex < 0 || size < 0 || fromIndex + size > length) {
+      throw getFromIndexError(fromIndex, fromIndex + size, length);
     }
     return fromIndex;
   }
@@ -167,5 +187,15 @@ public final class Objects {
 
   public static String toString(Object o, String nullDefault) {
     return o != null ? o.toString() : nullDefault;
+  }
+
+  private static IndexOutOfBoundsException getIndexError(long index, long length) {
+    return new IndexOutOfBoundsException("Index " + index + " out of bounds for length " + length);
+  }
+
+  private static IndexOutOfBoundsException getFromIndexError(long fromIndex,
+       long toIndex, long length) {
+    return new IndexOutOfBoundsException("Range [" + fromIndex + ", " + toIndex
+        + ") out of bounds for length " + length);
   }
 }

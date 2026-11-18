@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.google.gwt.sample.mobilewebapp</groupId>
+    <artifactId>mobilewebapp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>mobilewebapp-client</artifactId>
+  <packaging>gwt-app</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mobilewebapp-shared</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>mobilewebapp-shared</artifactId>
+      <version>${project.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>org.gwtproject</groupId>
+      <artifactId>gwt-user</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.gwtproject</groupId>
+      <artifactId>gwt-dev</artifactId>
+    </dependency>
+
+    <!-- Unit tests -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- GWT Maven Plugin-->
+      <plugin>
+        <groupId>net.ltgt.gwt.maven</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <configuration>
+          <moduleName>com.google.gwt.sample.mobilewebapp.MobileWebApp</moduleName>
+          <moduleShortName>MobileWebApp</moduleShortName>
+          <failOnError>true</failOnError>
+          <sourceLevel>11</sourceLevel>
+          <!-- Compiler configuration -->
+          <compilerArgs>
+            <!-- Ask GWT to create the Story of Your Compile (SOYC) (gwt:compile) -->
+            <arg>-compileReport</arg>
+            <arg>-XcompilerMetrics</arg>
+          </compilerArgs>
+          <!-- DevMode configuration -->
+          <launcherDir>${project.build.directory}/${project.build.finalName}</launcherDir>
+          <classpathScope>compile+runtime</classpathScope>
+          <codeserverArgs>
+            <!-- Uncomment the snippet below to bind to all IPs instead of just localhost -->
+            <!-- <codeserverArg>-bindAddress</codeserverArg> -->
+            <!-- <codeserverArg>0.0.0.0</codeserverArg> -->
+          </codeserverArgs>
+          <!-- URL(s) that should be opened by DevMode (gwt:devmode). -->
+          <startupUrls>
+            <startupUrl>MobileWebApp.html</startupUrl>
+          </startupUrls>
+          <includes>
+            <include>**/*Test.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

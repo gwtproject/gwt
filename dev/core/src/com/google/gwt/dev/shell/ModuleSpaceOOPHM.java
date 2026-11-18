@@ -18,9 +18,7 @@ package com.google.gwt.dev.shell;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.javac.JsniMethod;
 import com.google.gwt.dev.shell.JsValue.DispatchObject;
-import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 
 import java.util.List;
 
@@ -93,42 +91,36 @@ public class ModuleSpaceOOPHM extends ModuleSpace {
       Object[] args) throws Throwable {
     TreeLogger branch = host.getLogger().branch(TreeLogger.SPAM,
         "Invoke native method " + name, null);
-    Event javaToJsCallEvent =
-        SpeedTracerLogger.start(DevModeEventType.JAVA_TO_JS_CALL);
-    if (SpeedTracerLogger.jsniCallLoggingEnabled()) {
-      javaToJsCallEvent.addData("name", name);
-    }
-
-    CompilingClassLoader isolatedClassLoader = getIsolatedClassLoader();
-    JsValueOOPHM jsthis = new JsValueOOPHM();
-    Class<?> jthisType = (jthis == null) ? Object.class : jthis.getClass();
-    JsValueGlue.set(jsthis, isolatedClassLoader, jthisType, jthis);
-    if (branch.isLoggable(TreeLogger.SPAM)) {
-      branch.log(TreeLogger.SPAM, "  this=" + jsthis);
-    }
-
-    int argc = args.length;
-    JsValueOOPHM argv[] = new JsValueOOPHM[argc];
-    for (int i = 0; i < argc; ++i) {
-      argv[i] = new JsValueOOPHM();
-      JsValueGlue.set(argv[i], isolatedClassLoader, types[i], args[i]);
+    try (SimpleEvent ignored = new SimpleEvent("Java to JS call")) {
+      CompilingClassLoader isolatedClassLoader = getIsolatedClassLoader();
+      JsValueOOPHM jsthis = new JsValueOOPHM();
+      Class<?> jthisType = (jthis == null) ? Object.class : jthis.getClass();
+      JsValueGlue.set(jsthis, isolatedClassLoader, jthisType, jthis);
       if (branch.isLoggable(TreeLogger.SPAM)) {
-        branch.log(TreeLogger.SPAM, "  arg[" + i + "]=" + argv[i]);
+        branch.log(TreeLogger.SPAM, "  this=" + jsthis);
       }
-    }
-    JsValueOOPHM returnVal = new JsValueOOPHM();
-    try {
-      channel.invokeJavascript(isolatedClassLoader, jsthis, name, argv,
-          returnVal);
-      if (branch.isLoggable(TreeLogger.SPAM)) {
-        branch.log(TreeLogger.SPAM, "  returned " + returnVal);
+
+      int argc = args.length;
+      JsValueOOPHM argv[] = new JsValueOOPHM[argc];
+      for (int i = 0; i < argc; ++i) {
+        argv[i] = new JsValueOOPHM();
+        JsValueGlue.set(argv[i], isolatedClassLoader, types[i], args[i]);
+        if (branch.isLoggable(TreeLogger.SPAM)) {
+          branch.log(TreeLogger.SPAM, "  arg[" + i + "]=" + argv[i]);
+        }
       }
-      return returnVal;
-    } catch (Throwable t) {
-      branch.log(TreeLogger.SPAM, "exception thrown", t);
-      throw t;
-    } finally {
-      javaToJsCallEvent.end();
+      JsValueOOPHM returnVal = new JsValueOOPHM();
+      try {
+        channel.invokeJavascript(isolatedClassLoader, jsthis, name, argv,
+            returnVal);
+        if (branch.isLoggable(TreeLogger.SPAM)) {
+          branch.log(TreeLogger.SPAM, "  returned " + returnVal);
+        }
+        return returnVal;
+      } catch (Throwable t) {
+        branch.log(TreeLogger.SPAM, "exception thrown", t);
+        throw t;
+      }
     }
   }
 

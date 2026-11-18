@@ -29,14 +29,17 @@ package com.google.gwt.core.client;
  * <p>
  * 
  * <pre>
+ * {@code
  *   String scriptBody = "var foo = ...";
  *   ScriptInjector.fromString(scriptBody).inject();
+ * }
  * </pre>
  * <p>
  * Usage with script loaded as URL:
  * <p>
  * 
  * <pre>
+ * {@code
  *   ScriptInjector.fromUrl("http://example.com/foo.js").setCallback(
  *     new Callback<Void, Exception>() {
  *        public void onFailure(Exception reason) {
@@ -46,6 +49,7 @@ package com.google.gwt.core.client;
  *          Window.alert("Script load success.");
  *        }
  *     }).inject();
+ * }
  * </pre>
  * 
  * 

@@ -55,6 +55,7 @@ public class FakeMessagesMaker implements InvocationHandler {
         new FakeMessagesMaker()));
   }
 
+  @Override
   public Object invoke(Object proxy, Method method, Object[] args)
       throws Throwable {
     String name = method.getName();

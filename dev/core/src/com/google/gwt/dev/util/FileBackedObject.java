@@ -17,8 +17,7 @@ package com.google.gwt.dev.util;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 
 import java.io.BufferedInputStream;
@@ -102,17 +101,14 @@ public class FileBackedObject<T extends Serializable> implements PersistenceBack
     Preconditions.checkState(!alreadyWritten);
     alreadyWritten = true;
     backingFile.getParentFile().mkdirs();
-    SpeedTracerLogger.Event writeObjectAsFileEvent = SpeedTracerLogger.start(
-        CompilerEventType.WRITE_OBJECT_AS_FILE);
-    try (OutputStream stream = new FileOutputStream(backingFile);
+    try (SimpleEvent ignored = new SimpleEvent("Write " + clazz + " to disk");
+         OutputStream stream = new FileOutputStream(backingFile);
          ObjectOutputStream objectStream = new ObjectOutputStream(stream)) {
       objectStream.writeObject(object);
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to write file: "
           + backingFile.getAbsolutePath(), e);
       throw new UnableToCompleteException();
-    } finally {
-      writeObjectAsFileEvent.end();
     }
   }
 

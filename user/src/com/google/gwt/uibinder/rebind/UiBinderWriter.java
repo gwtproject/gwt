@@ -457,6 +457,7 @@ public class UiBinderWriter implements Statements {
    * @param args
    * @see #beginAttachedSection(String)
    */
+  @Override
   public void addDetachStatement(String format, Object... args) {
     detachStatementsStack.getFirst().add(String.format(format, args));
   }
@@ -465,6 +466,7 @@ public class UiBinderWriter implements Statements {
    * Add a statement to be run after everything has been instantiated, in the
    * style of {@link String#format}.
    */
+  @Override
   public void addInitStatement(String format, Object... params) {
     initStatements.add(formatCode(format, params));
   }
@@ -473,6 +475,7 @@ public class UiBinderWriter implements Statements {
    * Adds a statement to the block run after fields are declared, in the style
    * of {@link String#format}.
    */
+  @Override
   public void addStatement(String format, Object... args) {
     String code = formatCode(format, args);
 

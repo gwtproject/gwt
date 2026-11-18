@@ -100,6 +100,7 @@ public abstract class AbstractSerializationStreamReader extends
     setFlags(readInt());
   }
 
+  @Override
   public final Object readObject() throws SerializationException {
     int token = readInt();
 

@@ -75,33 +75,41 @@ public abstract class AbstractSerializationStreamWriter extends
   @Override
   public abstract String toString();
 
+  @Override
   public void writeBoolean(boolean fieldValue) {
     append(fieldValue ? "1" : "0");
   }
 
+  @Override
   public void writeByte(byte fieldValue) {
     append(String.valueOf(fieldValue));
   }
 
+  @Override
   public void writeChar(char ch) {
     // just use an int, it's more foolproof
     append(String.valueOf((int) ch));
   }
 
+  @Override
   public void writeDouble(double fieldValue) {
     append(String.valueOf(fieldValue));
   }
 
+  @Override
   public void writeFloat(float fieldValue) {
     writeDouble(fieldValue);
   }
 
+  @Override
   public void writeInt(int fieldValue) {
     append(String.valueOf(fieldValue));
   }
   
+  @Override
   public abstract void writeLong(long value);
 
+  @Override
   public void writeObject(Object instance) throws SerializationException {
     if (instance == null) {
       // write a null string
@@ -130,10 +138,12 @@ public abstract class AbstractSerializationStreamWriter extends
     serialize(instance, typeSignature);
   }
 
+  @Override
   public void writeShort(short value) {
     append(String.valueOf(value));
   }
 
+  @Override
   public void writeString(String value) {
     writeInt(addString(value));
   }

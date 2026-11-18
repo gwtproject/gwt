@@ -76,7 +76,7 @@ public abstract class HasWidgetsTester {
 
   /**
    * Runs all tests for {@link HasWidgets}. It is recommended that tests call
-   * this method or {@link #testAll(HasWidgets, WidgetAdder} so that future
+   * this method or {@link #testAll(HasWidgets, WidgetAdder)} so that future
    * tests are automatically included.
    * 
    * @param container
@@ -118,10 +118,9 @@ public abstract class HasWidgetsTester {
    * Tests attach and detach order, assuming that the container's
    * {@link HasWidgets#add(Widget)} method does not throw
    * {@link UnsupportedOperationException}.
-   * 
-   * @param test
-   * @param container
-   * @see #testAttachDetachOrder(TestCase, HasWidgets,
+   *
+   * @param container container
+   * @see #testAttachDetachOrder(HasWidgets,
    *      com.google.gwt.user.client.ui.HasWidgetsTester.WidgetAdder)
    */
   static void testAttachDetachOrder(HasWidgets container) {

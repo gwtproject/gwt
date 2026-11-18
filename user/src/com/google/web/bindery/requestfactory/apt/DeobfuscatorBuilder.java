@@ -45,6 +45,7 @@ class DeobfuscatorBuilder extends ScannerBase<Void> {
   private TypeElement requestFactoryElement;
   private final StringBuilder sb = new StringBuilder();
 
+  @Override
   public String toString() {
     return sb.toString();
   }

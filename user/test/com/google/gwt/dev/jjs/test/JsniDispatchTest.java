@@ -33,6 +33,7 @@ public class JsniDispatchTest extends GWTTestCase {
   }
 
   static class SuperSuperFoo extends SuperSuperSuperFoo {
+    @Override
     public String sayHello(String to) {
       return "Hello " + to + " from SuperSuperFoo";
     }
@@ -42,18 +43,21 @@ public class JsniDispatchTest extends GWTTestCase {
   }
 
   static class SuperFoo extends SuperSuperFoo {
+    @Override
     public String sayHello(String to) {
       return "Hello " + to + " from SuperFoo";
     }
     private String sayHello(int n) {
       return "Hello from SuperFoo " + n + " times";
     }
+    @Override
     public String sayHelloNTimes(int n) {
       return "Hello from SuperFoo " + n + " times";
     }
   }
 
   static class Foo extends SuperFoo {
+    @Override
     public String sayHello(String to) {
       return "Hello to " + to + " from Foo";
     }
@@ -110,12 +114,14 @@ public class JsniDispatchTest extends GWTTestCase {
   }
 
   private static class JavaImplementor implements DualInterface {
+    @Override
     public int m() {
       return 1;
     }
   }
 
   private static class JsoImplementor extends JavaScriptObject implements DualInterface {
+    @Override
     public final native int m() /*-{
       return this.a;
     }-*/;

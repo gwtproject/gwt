@@ -25,26 +25,31 @@ import com.google.gwt.i18n.shared.GwtLocale;
  */
 public class DefaultVisitor implements MessageInterfaceVisitor, MessageVisitor {
 
+  @Override
   public void endMessage(Message msg, MessageTranslation trans)
       throws MessageProcessingException {
     // do nothing by default
   }
 
+  @Override
   public void endMessageInterface(MessageInterface msgIntf) 
       throws MessageProcessingException {
     // do nothing by default
   }
 
+  @Override
   public MessageVisitor visitMessage(Message msg, MessageTranslation trans)
       throws MessageProcessingException {
     return this;
   }
 
+  @Override
   public void visitMessageInterface(MessageInterface msgIntf,
       GwtLocale sourceLocale) throws MessageProcessingException {
     // do nothing by default
   }
 
+  @Override
   public void visitTranslation(String[] formNames, boolean isDefault,
       MessageStyle style, String msg) throws MessageProcessingException {
     // do nothing by default

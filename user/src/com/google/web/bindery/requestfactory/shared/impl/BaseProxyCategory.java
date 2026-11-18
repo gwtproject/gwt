@@ -49,7 +49,7 @@ public class BaseProxyCategory {
      * delegate to the edit() method for wiring up the context.
      */
     if (returnValue instanceof BaseProxy) {
-      @SuppressWarnings("unchecked")
+      // noinspection unchecked
       T toReturn = (T) context.editProxy((BaseProxy) returnValue);
       return toReturn;
     }

@@ -46,11 +46,13 @@ public class ExternalTextResourcePrototype implements ExternalTextResource {
     }
 
     // For RequestCallback
+    @Override
     public void onError(Request request, Throwable exception) {
       onFailure(exception);
     }
 
     // For AsyncCallback
+    @Override
     public void onFailure(Throwable exception) {
       callback.onError(new ResourceException(
           ExternalTextResourcePrototype.this,
@@ -58,6 +60,7 @@ public class ExternalTextResourcePrototype implements ExternalTextResource {
     }
 
     // For RequestCallback
+    @Override
     public void onResponseReceived(Request request, final Response response) {
       String responseText = response.getText();
       // Call eval() on the object.
@@ -66,6 +69,7 @@ public class ExternalTextResourcePrototype implements ExternalTextResource {
      }
 
     // For AsyncCallback
+    @Override
     public void onSuccess(JavaScriptObject jso) {
       if (jso == null) {
         callback.onError(new ResourceException(
@@ -77,10 +81,12 @@ public class ExternalTextResourcePrototype implements ExternalTextResource {
       final String resourceText = extractString(jso, index);
       cache[index] = new TextResource() {
 
+        @Override
         public String getName() {
           return name;
         }
 
+        @Override
         public String getText() {
           return resourceText;
         }
@@ -151,6 +157,7 @@ public class ExternalTextResourcePrototype implements ExternalTextResource {
     this.md5Hash = md5Hash;
   }
 
+  @Override
   public String getName() {
     return name;
   }
@@ -158,6 +165,7 @@ public class ExternalTextResourcePrototype implements ExternalTextResource {
   /**
    * Possibly fire off an HTTPRequest for the text resource.
    */
+  @Override
   @SuppressIsTrustedResourceUriCastCheck
   public void getText(ResourceCallback<TextResource> callback) throws ResourceException {
 

@@ -107,6 +107,7 @@ public class DateBox extends Composite implements HasEnabled, HasValue<Date>,
       this.dateTimeFormat = dateTimeFormat;
     }
 
+    @Override
     public String format(DateBox box, Date date) {
       if (date == null) {
         return "";
@@ -124,6 +125,7 @@ public class DateBox extends Composite implements HasEnabled, HasValue<Date>,
       return dateTimeFormat;
     }
 
+    @Override
     @SuppressWarnings("deprecation")
     public Date parse(DateBox dateBox, String dateText, boolean reportError) {
       Date date = null;
@@ -146,6 +148,7 @@ public class DateBox extends Composite implements HasEnabled, HasValue<Date>,
       return date;
     }
 
+    @Override
     public void reset(DateBox dateBox, boolean abandon) {
       dateBox.removeStyleName(DATE_BOX_FORMAT_ERROR);
     }
@@ -192,16 +195,19 @@ public class DateBox extends Composite implements HasEnabled, HasValue<Date>,
       FocusHandler, BlurHandler, ClickHandler, KeyDownHandler,
       CloseHandler<PopupPanel> {
 
+    @Override
     public void onBlur(BlurEvent event) {
       if (isDatePickerShowing() == false) {
         updateDateFromTextBox();
       }
     }
 
+    @Override
     public void onClick(ClickEvent event) {
       showDatePicker();
     }
 
+    @Override
     public void onClose(CloseEvent<PopupPanel> event) {
       // If we are not closing because we have picked a new value, make sure the
       // current value is updated.
@@ -210,12 +216,14 @@ public class DateBox extends Composite implements HasEnabled, HasValue<Date>,
       }
     }
 
+    @Override
     public void onFocus(FocusEvent event) {
       if (allowDPShow && isDatePickerShowing() == false) {
         showDatePicker();
       }
     }
 
+    @Override
     public void onKeyDown(KeyDownEvent event) {
       switch (event.getNativeKeyCode()) {
         case KeyCodes.KEY_ENTER:
@@ -232,6 +240,7 @@ public class DateBox extends Composite implements HasEnabled, HasValue<Date>,
       }
     }
 
+    @Override
     public void onValueChange(ValueChangeEvent<Date> event) {
       setValue(parseDate(false), normalize(event.getValue()), true, true);
       hideDatePicker();
@@ -303,6 +312,7 @@ public class DateBox extends Composite implements HasEnabled, HasValue<Date>,
     setValue(date);
   }
 
+  @Override
   public HandlerRegistration addValueChangeHandler(
       ValueChangeHandler<Date> handler) {
     return addHandler(handler, ValueChangeEvent.getType());
@@ -311,6 +321,7 @@ public class DateBox extends Composite implements HasEnabled, HasValue<Date>,
   /**
    * Returns a {@link TakesValueEditor} backed by the DateBox.
    */
+  @Override
   public LeafValueEditor<Date> asEditor() {
     if (editor == null) {
       editor = TakesValueEditor.of(this);
@@ -379,6 +390,7 @@ public class DateBox extends Composite implements HasEnabled, HasValue<Date>,
    *
    * @return the current date value
    */
+  @Override
   public Date getValue() {
     return parseDate(true);
   }
@@ -400,6 +412,7 @@ public class DateBox extends Composite implements HasEnabled, HasValue<Date>,
   /**
    * Returns true if the date box is enabled, false if not.
    */
+  @Override
   public boolean isEnabled() {
     return box.isEnabled();
   }
@@ -419,6 +432,7 @@ public class DateBox extends Composite implements HasEnabled, HasValue<Date>,
    *
    * @param enabled is the box enabled
    */
+  @Override
   public void setEnabled(boolean enabled) {
     box.setEnabled(enabled);
   }
@@ -479,10 +493,12 @@ public class DateBox extends Composite implements HasEnabled, HasValue<Date>,
   /**
    * Set the date.
    */
+  @Override
   public void setValue(Date date) {
     setValue(date, false);
   }
 
+  @Override
   public void setValue(Date date, boolean fireEvents) {
     setValue(picker.getValue(), date, fireEvents, true);
   }
@@ -510,6 +526,7 @@ public class DateBox extends Composite implements HasEnabled, HasValue<Date>,
   private void preventDatePickerPopup() {
     allowDPShow = false;
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+      @Override
       public void execute() {
         allowDPShow = true;
       }

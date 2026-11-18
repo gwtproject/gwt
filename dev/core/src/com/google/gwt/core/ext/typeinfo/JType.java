@@ -37,7 +37,7 @@ public interface JType {
    * <ul>
    * <li><b>boolean</b> = <code>Z</code></li>
    * <li><b>byte[]</b> = <code>[B</code></li>
-   * <li><b>java.lang.String</b> = <code>Ljava/lang/String;</li>
+   * <li><b>java.lang.String</b> = <code>Ljava/lang/String;</code></li>
    * </ul>
    */
   String getJNISignature();
@@ -51,9 +51,9 @@ public interface JType {
   /**
    * Returns a type name as it would be specified in Java source, with the
    * package name included.  Includes the type parameters.  If called on a type parameter,
-   * does not include any bounds.  For example, a type Foo<T extends Bar> declared in
-   * com.example would be given as "com.example.Foo<T>", while the same type instantiated
-   * with Baz would be "com.example.Foo<com.example.Baz>".
+   * does not include any bounds.  For example, a type {@code Foo<T extends Bar>} declared in
+   * {@code com.example} would be given as {@code "com.example.Foo<T>"}, while the same type
+   * instantiated with {@code Baz} would be {@code "com.example.Foo<com.example.Baz>"}.
    */
   String getParameterizedQualifiedSourceName();
 

@@ -15,12 +15,8 @@
  */
 package com.google.gwt.user.client.ui.impl;
 
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Display;
-import com.google.gwt.dom.client.Style.Overflow;
-import com.google.gwt.user.client.DOM;
 
 /**
  * Implementation class used by {@link com.google.gwt.user.client.ui.PopupPanel}.
@@ -46,78 +42,6 @@ import com.google.gwt.user.client.DOM;
  * </p>
  */
 public class PopupImplMozilla extends PopupImpl {
-
-  /**
-   * Cache the value to avoid repeated calls.
-   */
-  private static boolean isFF2Mac = isFF2Mac();
-  
-  private static native boolean isFF2Mac() /*-{
-    function makeVersion(result) {
-      return (parseInt(result[1]) * 1000) + parseInt(result[2]);
-    }
-
-    var ua = navigator.userAgent;
-    if (ua.indexOf("Macintosh") != -1) {
-      // Version logic taken from UserAgentPropertyGenerator
-      var result = /rv:([0-9]+)\.([0-9]+)/.exec(ua);
-      if (result && result.length == 3) {
-        // Gecko 1.8 and earlier had the scrollbar bug on OS X.
-        // (Firefox3 == Gecko 1.9)
-        if (makeVersion(result) <= 1008) {
-          return true;
-        }
-      }
-    }
-
-    return false;
-  }-*/;
-
-  @Override
-  public Element createElement() {
-    final Element outerElem = DOM.createDiv();
-
-    if (isFF2Mac) {
-      // To solve the scrollbar rendering problem on the Mac, we have to make
-      // the PopupPanel a 'heavyweight' element by setting a style of
-      // 'overflow:auto' on the outermost div. This ensures that all of the
-      // elements that are children of this div will be rendered on top of
-      // any underlying scrollbars.
-
-      // Unfortunately, if we add a border to the outer div (which has
-      // a style of 'overflow:auto'), the border will not be rendered on top
-      // of underlying scrollbars. To get around this problem, we introduce an
-      // inner div which acts as the new containing element for the PopupPanel,
-      // and this element is the one to which all styling is applied to.
-      outerElem.setInnerHTML("<div></div>");
-
-      // Mozilla determines the default stacking order for heavyweight elements
-      // by their order on the page. If the PopupPanel is declared before
-      // another
-      // heavyweight element on the page, then the scrollbars of the heavyweight
-      // element will still shine through the PopupPanel. By setting
-      // 'overflow:auto' after all of the elements on the page have been
-      // rendered,
-      // the PopupPanel becomes the highest element in the stacking order.
-      Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-        public void execute() {
-          outerElem.getStyle().setOverflow(Overflow.AUTO);
-        }
-      });
-    }
-
-    return outerElem;
-  }
-
-  @Override
-  public Element getContainerElement(Element outerElem) {
-    return isFF2Mac ? outerElem.getFirstChildElement() : outerElem;
-  }
-
-  @Override
-  public Element getStyleElement(Element outerElem) {
-    return isFF2Mac ? outerElem : super.getStyleElement(outerElem);
-  }
 
   @Override
   public void setClip(Element popup, String rect) {

@@ -18,10 +18,13 @@ package com.google.gwt.emultest.java.lang;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Locale;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  * This class tests classes StringBuffer and StringBuilder.
  */
+@SuppressWarnings("UnnecessaryStringBuilder")
 public class StringBufferTest extends GWTTestCase {
 
   private static void assertEqualsReverse(String expected, String input) {
@@ -112,7 +115,7 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * This method tests string creation and equality.
    */
-  public void testContructor() {
+  public void testConstructor() {
     String constant = "abcdef";
     assertEquals(new StringBuffer(constant).toString(), constant);
     assertEquals("", new StringBuffer().toString());
@@ -551,5 +554,31 @@ public class StringBufferTest extends GWTTestCase {
     assertEquals("cd", haystack.substring(2, 4));
     assertEquals("bc", "abcdef".substring(1, 3));
     assertEquals("bcdef", "abcdef".substring(1));
+  }
+
+  public void testCompareToBuffer() {
+    assertTrue(new StringBuffer("b").compareTo(new StringBuffer("a")) > 0);
+    assertTrue(new StringBuffer("b").compareTo(new StringBuffer("c")) < 0);
+    assertEquals(0, new StringBuffer("b").compareTo(new StringBuffer("b")));
+
+    TreeSet<StringBuffer> sorted = new TreeSet<>();
+    sorted.add(new StringBuffer("b"));
+    sorted.add(new StringBuffer("c"));
+    sorted.add(new StringBuffer("d"));
+    sorted.add(new StringBuffer("a"));
+    assertEquals("abcd", sorted.stream().map(Object::toString).collect(Collectors.joining()));
+  }
+
+  public void testCompareToBuilder() {
+    assertTrue(new StringBuilder("b").compareTo(new StringBuilder("a")) > 0);
+    assertTrue(new StringBuilder("b").compareTo(new StringBuilder("c")) < 0);
+    assertEquals(0, new StringBuilder("b").compareTo(new StringBuilder("b")));
+
+    TreeSet<StringBuilder> sorted = new TreeSet<>();
+    sorted.add(new StringBuilder("b"));
+    sorted.add(new StringBuilder("c"));
+    sorted.add(new StringBuilder("d"));
+    sorted.add(new StringBuilder("a"));
+    assertEquals("abcd", sorted.stream().map(Object::toString).collect(Collectors.joining()));
   }
 }

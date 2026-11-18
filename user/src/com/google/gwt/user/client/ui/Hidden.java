@@ -93,6 +93,7 @@ public class Hidden extends Widget implements HasName, TakesValue<String>, IsEdi
     setElement(element);
   }
 
+  @Override
   public LeafValueEditor<String> asEditor() {
     if (editor == null) {
       editor = TakesValueEditor.of(this);
@@ -124,6 +125,7 @@ public class Hidden extends Widget implements HasName, TakesValue<String>, IsEdi
    * @return the name
    */
 
+  @Override
   public String getName() {
     return getInputElement().getName();
   }
@@ -133,6 +135,7 @@ public class Hidden extends Widget implements HasName, TakesValue<String>, IsEdi
    * 
    * @return the value
    */
+  @Override
   public String getValue() {
     return getInputElement().getValue();
   }
@@ -160,6 +163,7 @@ public class Hidden extends Widget implements HasName, TakesValue<String>, IsEdi
    * 
    * @param name name of the field
    */
+  @Override
   public void setName(String name) {
     if (name == null) {
       throw new NullPointerException("Name cannot be null");
@@ -175,6 +179,7 @@ public class Hidden extends Widget implements HasName, TakesValue<String>, IsEdi
    * 
    * @param value value to set
    */
+  @Override
   public void setValue(String value) {
     getInputElement().setValue(value);
   }

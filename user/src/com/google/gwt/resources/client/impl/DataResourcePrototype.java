@@ -33,10 +33,12 @@ public class DataResourcePrototype implements DataResource {
     this.uri = uri;
   }
 
+  @Override
   public String getName() {
     return name;
   }
 
+  @Override
   public SafeUri getSafeUri() {
     return uri;
   }

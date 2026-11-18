@@ -25,10 +25,12 @@ import com.google.gwt.editor.client.LeafValueEditor;
 public class FakeLeafValueEditor<T> implements LeafValueEditor<T> {
   private T value;
 
+  @Override
   public T getValue() {
     return value;
   }
 
+  @Override
   public void setValue(T value) {
     this.value = value;
   }

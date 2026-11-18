@@ -25,9 +25,7 @@ import com.google.gwt.dev.cfg.PropertyCombinations;
 import com.google.gwt.dev.util.Memory;
 import com.google.gwt.dev.util.arg.ArgHandlerPerm;
 import com.google.gwt.dev.util.arg.OptionPerm;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -96,8 +94,6 @@ public class PrecompileOnePerm {
    */
   public static void main(String[] args) {
     Memory.initialize();
-    SpeedTracerLogger.init();
-    Event precompileEvent = SpeedTracerLogger.start(CompilerEventType.PRECOMPILE);
     if (System.getProperty("gwt.jjs.dumpAst") != null) {
       System.out.println("Will dump AST to: "
           + System.getProperty("gwt.jjs.dumpAst"));
@@ -123,7 +119,6 @@ public class PrecompileOnePerm {
         success = true;
       }
     }
-    precompileEvent.end();
     System.exit(success ? 0 : 1);
   }
 
@@ -247,17 +242,14 @@ public class PrecompileOnePerm {
     File precompilationFile = new File(compilerWorkDir, getPrecompileFilename(permId));
     // The Precompilation instance must be the only, top-level object written to the stream here,
     // as it will start a second OOS stream to handle generated artifacts
-    Event writeObjectAsFileEvent = SpeedTracerLogger.start(CompilerEventType.WRITE_OBJECT_AS_FILE);
-
-    try (OutputStream out = new FileOutputStream(precompilationFile);
+    try (SimpleEvent ignored = new SimpleEvent("Write Precompilation to disk");
+         OutputStream out = new FileOutputStream(precompilationFile);
          ObjectOutputStream objectStream = new ObjectOutputStream(out)) {
       objectStream.writeObject(precompilation);
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to write file: "
           + precompilationFile.getAbsolutePath(), e);
       throw new UnableToCompleteException();
-    } finally {
-      writeObjectAsFileEvent.end();
     }
 
     if (branch.isLoggable(TreeLogger.INFO)) {

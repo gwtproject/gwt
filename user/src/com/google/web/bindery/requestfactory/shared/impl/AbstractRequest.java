@@ -52,10 +52,12 @@ public abstract class AbstractRequest<P extends BaseProxy, T> implements
     this.requestContext = requestContext;
   }
 
+  @Override
   public void fire() {
     requestContext.fire();
   }
 
+  @Override
   public void fire(Receiver<? super T> receiver) {
     to(receiver);
     fire();
@@ -80,6 +82,7 @@ public abstract class AbstractRequest<P extends BaseProxy, T> implements
     return requestData;
   }
 
+  @Override
   public RequestContext to(Receiver<? super T> receiver) {
     this.receiver = receiver;
     return requestContext;
@@ -89,6 +92,7 @@ public abstract class AbstractRequest<P extends BaseProxy, T> implements
    * This method comes from the {@link InstanceRequest}
    * interface. Instance methods place the instance in the first parameter slot.
    */
+  @Override
   public Request<T> using(P instanceObject) {
     getRequestData().getOrderedParameters()[0] = instanceObject;
     /*
@@ -100,6 +104,7 @@ public abstract class AbstractRequest<P extends BaseProxy, T> implements
     return this;
   }
 
+  @Override
   public Request<T> with(String... propertyRefs) {
     this.propertyRefs.addAll(Arrays.asList(propertyRefs));
     return this;

@@ -793,38 +793,47 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
     setElement(tableElem);
   }
 
+  @Override
   public HandlerRegistration addClickHandler(ClickHandler handler) {
     return addDomHandler(handler, ClickEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDoubleClickHandler(DoubleClickHandler handler) {
     return addDomHandler(handler, DoubleClickEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragEndHandler(DragEndHandler handler) {
     return addBitlessDomHandler(handler, DragEndEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragEnterHandler(DragEnterHandler handler) {
     return addBitlessDomHandler(handler, DragEnterEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragHandler(DragHandler handler) {
     return addBitlessDomHandler(handler, DragEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragLeaveHandler(DragLeaveHandler handler) {
     return addBitlessDomHandler(handler, DragLeaveEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragOverHandler(DragOverHandler handler) {
     return addBitlessDomHandler(handler, DragOverEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragStartHandler(DragStartHandler handler) {
     return addBitlessDomHandler(handler, DragStartEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDropHandler(DropHandler handler) {
     return addBitlessDomHandler(handler, DropEvent.getType());
   }
@@ -1023,6 +1032,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
    * 
    * @return the iterator
    */
+  @Override
   public Iterator<Widget> iterator() {
     return new Iterator<Widget>() {
       final ArrayList<Widget> widgetList = widgetMap.getObjectList();
@@ -1032,10 +1042,12 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
         findNext();
       }
 
+      @Override
       public boolean hasNext() {
         return nextIndex < widgetList.size();
       }
 
+      @Override
       public Widget next() {
         if (!hasNext()) {
           throw new NoSuchElementException();
@@ -1046,6 +1058,7 @@ public abstract class HTMLTable extends Panel implements SourcesTableEvents,
         return result;
       }
 
+      @Override
       public void remove() {
         if (lastIndex < 0) {
           throw new IllegalStateException();

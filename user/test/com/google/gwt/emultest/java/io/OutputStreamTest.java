@@ -35,7 +35,8 @@ public class OutputStreamTest extends OutputStreamBaseTest {
   @Override
   protected OutputStream createDefaultOutputStream() {
     return new OutputStream() {
-      @Override public void write(int b) {
+      @Override
+      public void write(int b) {
         outputBytes.add((byte) b);
       }
     };

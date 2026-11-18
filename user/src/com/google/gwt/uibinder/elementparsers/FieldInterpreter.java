@@ -33,6 +33,7 @@ import com.google.gwt.uibinder.rebind.XMLElement;
     this.element = ancestorExpression;
   }
 
+  @Override
   public String interpretElement(XMLElement elem)
       throws UnableToCompleteException {
     String fieldName = writer.declareFieldIfNeeded(elem);

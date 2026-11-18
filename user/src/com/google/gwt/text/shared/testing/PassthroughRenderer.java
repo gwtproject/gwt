@@ -39,6 +39,7 @@ public class PassthroughRenderer extends AbstractRenderer<String> {
   protected PassthroughRenderer() {
   }
 
+  @Override
   public String render(String object) {
     return object;
   }

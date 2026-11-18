@@ -37,10 +37,12 @@ public class SimpleSafeHtmlRenderer implements SafeHtmlRenderer<String> {
   private SimpleSafeHtmlRenderer() {
   }
 
+  @Override
   public SafeHtml render(String object) {
     return (object == null) ? SafeHtmlUtils.EMPTY_SAFE_HTML : SafeHtmlUtils.fromString(object);
   }
 
+  @Override
   public void render(String object, SafeHtmlBuilder appendable) {
     appendable.append(SafeHtmlUtils.fromString(object));
   }

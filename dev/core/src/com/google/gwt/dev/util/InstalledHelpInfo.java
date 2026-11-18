@@ -24,7 +24,11 @@ import java.net.URL;
 
 /**
  * Help info based on the GWT installation directory.
+ *
+ * @deprecated Use {@link GwtprojectOrgHelpInfo} instead so that links work when users aren't using
+ * the GWT SDK zip.
  */
+@Deprecated
 public class InstalledHelpInfo extends HelpInfo {
   private URL url;
 

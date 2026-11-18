@@ -48,6 +48,7 @@ public class StringKeyTest extends TestCase {
     assertTrue(a.compareTo(b) < 0);
   }
 
+  @SuppressWarnings("SelfAssertion")
   public void test() {
     StringKey a = new KeyA("hello");
     StringKey b = new KeyB("world");
@@ -64,6 +65,7 @@ public class StringKeyTest extends TestCase {
     assertGT(b, a);
   }
 
+  @SuppressWarnings("SelfAssertion")
   public void testNull() {
     StringKey a = new KeyA(null);
     StringKey b = new KeyB(null);

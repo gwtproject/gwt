@@ -186,7 +186,7 @@ function __MODULE_FUNC__() {
   }
 
   // Called to slurp up all <meta> tags:
-  // gwt:property, gwt:onPropertyErrorFn, gwt:onLoadErrorFn
+  // ordinary properties and optional legacy error callbacks
   //
   function processMetas() {
     var metas = document.getElementsByTagName('meta');
@@ -207,7 +207,7 @@ function __MODULE_FUNC__() {
             }
             metaProps[name] = value;
           }
-        } else if (name == 'gwt:onPropertyErrorFn') {
+        } /*__META_ERROR_HANDLERS_BEGIN__*/ else if (name == 'gwt:onPropertyErrorFn') {
           content = meta.getAttribute('content');
           if (content) {
             try {
@@ -226,7 +226,7 @@ function __MODULE_FUNC__() {
               alert('Bad handler \"' + content + '\" for \"gwt:onLoadErrorFn\"');
             }
           }
-        }
+        } /*__META_ERROR_HANDLERS_END__*/
       }
     }
   }

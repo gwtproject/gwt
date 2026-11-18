@@ -49,6 +49,7 @@ public abstract class AbstractPlaceHistoryMapper<F> implements
 
   protected F factory;
   
+  @Override
   public Place getPlace(String token) {
     int colonAt = token.indexOf(':');
     String initial;
@@ -67,6 +68,7 @@ public abstract class AbstractPlaceHistoryMapper<F> implements
     return null;
   }
   
+  @Override
   public String getToken(Place place) {
     PrefixAndToken token = getPrefixAndToken(place);
     if (token != null) {
@@ -75,6 +77,7 @@ public abstract class AbstractPlaceHistoryMapper<F> implements
     return null;
   }
   
+  @Override
   public void setFactory(F factory) {
     this.factory = factory;
   }

@@ -138,6 +138,7 @@ public class JsTypeVarargsTest extends GWTTestCase {
       super(0, new NativeJsType[0]);
     }
 
+    @Override
     Object varargsMethod(int i, Object... args) {
       return super.varargsMethod(i, args);
     }

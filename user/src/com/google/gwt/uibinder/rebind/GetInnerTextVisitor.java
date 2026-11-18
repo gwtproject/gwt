@@ -68,10 +68,12 @@ class GetInnerTextVisitor implements NodeVisitor {
     this.escapeHtmlEntities = escapeHtmlEntities;
   }
 
+  @Override
   public void visitCData(CDATASection d) {
     // TODO(jgw): write this back just as it came in.
   }
 
+  @Override
   public void visitElement(Element e) throws UnableToCompleteException {
     String replacement = interpreter.interpretElement(elementProvider.get(e));
 
@@ -80,6 +82,7 @@ class GetInnerTextVisitor implements NodeVisitor {
     }
   }
 
+  @Override
   public void visitText(Text t) {
     String escaped;
     if (escapeHtmlEntities) {

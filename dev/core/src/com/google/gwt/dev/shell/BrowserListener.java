@@ -200,6 +200,7 @@ public class BrowserListener implements CodeServerListener {
    *
    * @param ignoreRemoteDeath
    */
+  @Override
   public void setIgnoreRemoteDeath(boolean ignoreRemoteDeath) {
     this.ignoreRemoteDeath = ignoreRemoteDeath;
   }

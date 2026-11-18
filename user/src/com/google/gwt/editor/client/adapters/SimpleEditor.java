@@ -54,10 +54,12 @@ public class SimpleEditor<T> implements LeafValueEditor<T> {
     this.value = value;
   }
 
+  @Override
   public T getValue() {
     return value;
   }
 
+  @Override
   public void setValue(T value) {
     this.value = value;
   }

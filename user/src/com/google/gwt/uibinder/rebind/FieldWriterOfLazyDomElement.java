@@ -57,14 +57,17 @@ public class FieldWriterOfLazyDomElement extends AbstractFieldWriter {
     }
   }
 
+  @Override
   public JClassType getAssignableType() {
     return ownerFieldType;
   }
 
+  @Override
   public JClassType getInstantiableType() {
     return ownerFieldType;
   }
 
+  @Override
   public String getQualifiedSourceName() {
     return ownerFieldType.getQualifiedSourceName()
         + "<" + parameterType.getQualifiedSourceName() + ">";

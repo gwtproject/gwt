@@ -359,208 +359,276 @@ public class JTransformer<T> {
   private class JRewriterVisitor extends JVisitor {
     T result = null;
 
+    @Override
     public boolean didChange() {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public final void endVisit(JAbstractMethodBody x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JArrayLength x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JArrayRef x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JArrayType x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JAssertStatement x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JBinaryOperation x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JBlock x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JBooleanLiteral x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JBreakStatement x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JCaseStatement x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JCastMap x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JCastOperation x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JCharLiteral x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JClassLiteral x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JClassType x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JConditional x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JConstructor x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JContinueStatement x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JDebuggerStatement x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JDeclarationStatement x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JDeclaredType x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JDoStatement x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JDoubleLiteral x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JExpression x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JExpressionStatement x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JField x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JFieldRef x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JFloatLiteral x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JForStatement x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JIfStatement x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JInstanceOf x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JInterfaceType x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JIntLiteral x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JLabel x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JLabeledStatement x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JLiteral x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JLocal x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JLocalRef x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JLongLiteral x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JMethod x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JMethodBody x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JMethodCall x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JMultiExpression x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JNameOf x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JNewArray x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JNewInstance x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JNode x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JNullLiteral x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JNumericEntry x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JParameter x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JParameterRef x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JPermutationDependentValue x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JPostfixOperation x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JPrefixOperation x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JPrimitiveType x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JProgram x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JReferenceType x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JReturnStatement x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JRunAsync x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JRuntimeTypeReference x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JsniClassLiteral x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JsniFieldRef x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JsniMethodBody x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JsniMethodRef x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JsonArray x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JStatement x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JStringLiteral x, Context ctx) {
     }
 
@@ -568,21 +636,27 @@ public class JTransformer<T> {
     public void endVisit(JSwitchExpression x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JSwitchStatement x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JThisRef x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JThrowStatement x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JTryStatement x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JType x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JUnaryOperation x, Context ctx) {
     }
 
@@ -590,15 +664,19 @@ public class JTransformer<T> {
     public void endVisit(JUnsafeTypeCoercion x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JValueLiteral x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JVariable x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JVariableRef x, Context ctx) {
     }
 
+    @Override
     public final void endVisit(JWhileStatement x, Context ctx) {
     }
 
@@ -606,156 +684,182 @@ public class JTransformer<T> {
     public void endVisit(JYieldStatement x, Context ctx) {
     }
 
+    @Override
     public final boolean visit(JAbstractMethodBody x, Context ctx) {
       assert result == null;
       result = transformAbstractMethodBody(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JArrayLength x, Context ctx) {
       assert result == null;
       result = transformArrayLength(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JArrayRef x, Context ctx) {
       assert result == null;
       result = transformArrayRef(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JArrayType x, Context ctx) {
       assert result == null;
       result = transformArrayType(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JAssertStatement x, Context ctx) {
       assert result == null;
       result = transformAssertStatement(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JBinaryOperation x, Context ctx) {
       assert result == null;
       result = transformBinaryOperation(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JBlock x, Context ctx) {
       assert result == null;
       result = transformBlock(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JBooleanLiteral x, Context ctx) {
       assert result == null;
       result = transformBooleanLiteral(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JBreakStatement x, Context ctx) {
       assert result == null;
       result = transformBreakStatement(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JCaseStatement x, Context ctx) {
       assert result == null;
       result = transformCaseStatement(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JCastMap x, Context ctx) {
       assert result == null;
       result = transformCastMap(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JCastOperation x, Context ctx) {
       assert result == null;
       result = transformCastOperation(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JCharLiteral x, Context ctx) {
       assert result == null;
       result = transformCharLiteral(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JClassLiteral x, Context ctx) {
       assert result == null;
       result = transformClassLiteral(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JClassType x, Context ctx) {
       assert result == null;
       result = transformClassType(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JConditional x, Context ctx) {
       assert result == null;
       result = transformConditional(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JConstructor x, Context ctx) {
       assert result == null;
       result = transformConstructor(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JContinueStatement x, Context ctx) {
       assert result == null;
       result = transformContinueStatement(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JDebuggerStatement x, Context ctx) {
       assert result == null;
       result = transformDebuggerStatement(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JDeclarationStatement x, Context ctx) {
       assert result == null;
       result = transformDeclarationStatement(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JDeclaredType x, Context ctx) {
       assert result == null;
       result = transformDeclaredType(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JDoStatement x, Context ctx) {
       assert result == null;
       result = transformDoStatement(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JDoubleLiteral x, Context ctx) {
       assert result == null;
       result = transformDoubleLiteral(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JExpression x, Context ctx) {
       assert result == null;
       result = transformExpression(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JExpressionStatement x, Context ctx) {
       assert result == null;
       result = transformExpressionStatement(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JField x, Context ctx) {
       assert result == null;
       result = transformField(x);
@@ -765,215 +869,251 @@ public class JTransformer<T> {
     /**
      * NOTE: not called from JsniFieldRef.
      */
+    @Override
     public final boolean visit(JFieldRef x, Context ctx) {
       assert result == null;
       result = transformFieldRef(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JFloatLiteral x, Context ctx) {
       assert result == null;
       result = transformFloatLiteral(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JForStatement x, Context ctx) {
       assert result == null;
       result = transformForStatement(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JIfStatement x, Context ctx) {
       assert result == null;
       result = transformIfStatement(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JInstanceOf x, Context ctx) {
       assert result == null;
       result = transformInstanceOf(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JInterfaceType x, Context ctx) {
       assert result == null;
       result = transformInterfaceType(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JIntLiteral x, Context ctx) {
       assert result == null;
       result = transformIntLiteral(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JLabel x, Context ctx) {
       assert result == null;
       result = transformLabel(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JLabeledStatement x, Context ctx) {
       assert result == null;
       result = transformLabeledStatement(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JLiteral x, Context ctx) {
       assert result == null;
       result = transformLiteral(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JLocal x, Context ctx) {
       assert result == null;
       result = transformLocal(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JLocalRef x, Context ctx) {
       assert result == null;
       result = transformLocalRef(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JLongLiteral x, Context ctx) {
       assert result == null;
       result = transformLongLiteral(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JMethod x, Context ctx) {
       assert result == null;
       result = transformMethod(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JMethodBody x, Context ctx) {
       assert result == null;
       result = transformMethodBody(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JMethodCall x, Context ctx) {
       assert result == null;
       result = transformMethodCall(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JMultiExpression x, Context ctx) {
       assert result == null;
       result = transformMultiExpression(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JNameOf x, Context ctx) {
       assert result == null;
       result = transformNameOf(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JNewArray x, Context ctx) {
       assert result == null;
       result = transformNewArray(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JNewInstance x, Context ctx) {
       assert result == null;
       result = transformNewInstance(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JNode x, Context ctx) {
       missing(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JNullLiteral x, Context ctx) {
       assert result == null;
       result = transformNullLiteral(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JNumericEntry x, Context ctx) {
       assert result == null;
       result = transformNumericEntry(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JParameter x, Context ctx) {
       assert result == null;
       result = transformParameter(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JParameterRef x, Context ctx) {
       assert result == null;
       result = transformParameterRef(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JPermutationDependentValue x, Context ctx) {
       assert result == null;
       result = transformPermutationDependentValue(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JPostfixOperation x, Context ctx) {
       assert result == null;
       result = transformPostfixOperation(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JPrefixOperation x, Context ctx) {
       assert result == null;
       result = transformPrefixOperation(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JPrimitiveType x, Context ctx) {
       assert result == null;
       result = transformPrimitiveType(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JProgram x, Context ctx) {
       assert result == null;
       result = transformProgram(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JReferenceType x, Context ctx) {
       assert result == null;
       result = transformReferenceType(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JReturnStatement x, Context ctx) {
       assert result == null;
       result = transformReturnStatement(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JRunAsync x, Context ctx) {
       assert result == null;
       result = transformRunAsync(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JRuntimeTypeReference x, Context ctx) {
       assert result == null;
       result = transformRuntimeTypeReference(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JsniClassLiteral x, Context ctx) {
       assert result == null;
       result = transformJsniClassLiteral(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JsniFieldRef x, Context ctx) {
       /* NOTE: Skip JFieldRef */
       assert result == null;
@@ -981,12 +1121,14 @@ public class JTransformer<T> {
       return false;
     }
 
+    @Override
     public final boolean visit(JsniMethodBody x, Context ctx) {
       assert result == null;
       result = transformJsniMethodBody(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JsniMethodRef x, Context ctx) {
       /* NOTE: Skip JMethodCall */
       assert result == null;
@@ -994,90 +1136,105 @@ public class JTransformer<T> {
       return false;
     }
 
+    @Override
     public final boolean visit(JsonArray x, Context ctx) {
       assert result == null;
       result = transformJsonArray(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JStatement x, Context ctx) {
       assert result == null;
       result = transformStatement(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JStringLiteral x, Context ctx) {
       assert result == null;
       result = transformStringLiteral(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JSwitchExpression x, Context ctx) {
       assert result == null;
       result = transformSwitchExpression(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JSwitchStatement x, Context ctx) {
       assert result == null;
       result = transformSwitchStatement(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JThisRef x, Context ctx) {
       assert result == null;
       result = transformThisRef(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JThrowStatement x, Context ctx) {
       assert result == null;
       result = transformThrowStatement(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JTryStatement x, Context ctx) {
       assert result == null;
       result = transformTryStatement(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JType x, Context ctx) {
       assert result == null;
       result = transformType(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JUnaryOperation x, Context ctx) {
       assert result == null;
       result = transformUnaryOperation(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JUnsafeTypeCoercion x, Context ctx) {
       assert result == null;
       result = transformUnsafeTypeCoercion(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JValueLiteral x, Context ctx) {
       assert result == null;
       result = transformValueLiteral(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JVariable x, Context ctx) {
       assert result == null;
       result = transformVariable(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JVariableRef x, Context ctx) {
       assert result == null;
       result = transformVariableRef(x);
       return false;
     }
 
+    @Override
     public final boolean visit(JWhileStatement x, Context ctx) {
       assert result == null;
       result = transformWhileStatement(x);

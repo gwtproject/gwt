@@ -283,6 +283,7 @@ public final class VerticalSplitPanel extends SplitPanel {
      */
     setSplitPosition(lastSplitPosition);
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+      @Override
       public void execute() {
         setSplitPosition(lastSplitPosition);
       }

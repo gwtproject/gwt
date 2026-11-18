@@ -169,6 +169,7 @@ public class HTML extends Label
     super(element);
   }
 
+  @Override
   public String getHTML() {
     return directionalTextHelper.getHtml();
   }
@@ -180,6 +181,7 @@ public class HTML extends Label
    *
    * @param html the new widget's HTML content
    */
+  @Override
   public void setHTML(@IsSafeHtml String html) {
     directionalTextHelper.setHtml(html);
     updateHorizontalAlignment();
@@ -195,6 +197,7 @@ public class HTML extends Label
    * @param dir the content's direction. Note: {@code Direction.DEFAULT} means
    *          direction should be inherited from the widget's parent element.
    */
+  @Override
   public void setHTML(@IsSafeHtml String html, Direction dir) {
     directionalTextHelper.setHtml(html, dir);
     updateHorizontalAlignment();
@@ -206,10 +209,12 @@ public class HTML extends Label
    * @see com.google.gwt.safehtml.client.HasSafeHtml#setHTML(SafeHtml)
    * @param html the html to set.
    */
+  @Override
   public void setHTML(SafeHtml html) {
     setHTML(html.asString());
   }
 
+  @Override
   public void setHTML(SafeHtml html, Direction dir) {
     setHTML(html.asString(), dir);
   }

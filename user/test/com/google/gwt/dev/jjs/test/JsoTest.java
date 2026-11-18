@@ -542,6 +542,7 @@ public class JsoTest extends GWTTestCase {
     }
   }
 
+  @SuppressWarnings("SelfAssertion")
   public void testEquality() {
     JavaScriptObject jso = makeJSO();
     assertEquals(jso, jso);

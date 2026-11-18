@@ -38,6 +38,7 @@ public abstract class PlaceholderInterpreter implements
     this.message = message;
   }
 
+  @Override
   public String interpretElement(XMLElement elem)
       throws UnableToCompleteException {
     if (isPlaceholderElement(elem)) {
@@ -97,6 +98,7 @@ public abstract class PlaceholderInterpreter implements
    * Performs escaping on the consumed text to make it safe for use as a
    * Messages {@literal @}Default value
    */
+  @Override
   @SuppressWarnings("unused")
   public String postProcess(String consumed) throws UnableToCompleteException {
     return tokenator.detokenate(MessageWriter.escapeMessageFormat(consumed));
@@ -132,6 +134,7 @@ public abstract class PlaceholderInterpreter implements
 
   protected String stripTokens(String value) {
     String rtn = Tokenator.detokenate(value, new Resolver() {
+      @Override
       public String resolveToken(String token) {
         return "";
       }

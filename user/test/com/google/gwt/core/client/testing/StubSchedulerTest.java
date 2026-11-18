@@ -44,7 +44,8 @@ public class StubSchedulerTest extends TestCase {
     events = new ArrayList<String>();
     thrownExceptionMessages = new ArrayList<String>();
     GWT.setUncaughtExceptionHandler(new GWT.UncaughtExceptionHandler() {
-      @Override public void onUncaughtException(Throwable throwable) {
+      @Override
+      public void onUncaughtException(Throwable throwable) {
         if (throwable.getMessage().contains("Fake failure")) {
           thrownExceptionMessages.add(throwable.getMessage());
         } else {

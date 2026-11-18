@@ -273,6 +273,7 @@ abstract class SplitPanel extends Panel {
     return isResizing;
   }
 
+  @Override
   public Iterator<Widget> iterator() {
     return WidgetIterators.createWidgetIterator(this, widgets);
   }

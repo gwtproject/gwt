@@ -54,6 +54,7 @@ public class ApiCompatibilityUnitTest extends TestCase {
       this.signature = signature;
     }
 
+    @Override
     public String getRelativeSignature() {
       return signature;
     }

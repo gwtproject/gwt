@@ -175,6 +175,16 @@ public abstract class AbstractLocalizableInterfaceCreator {
   }
 
   /**
+   * Create a String method declaration from a Dictionary/value pair.
+   * 
+   * @param key Dictionary
+   * @param defaultValue default value
+   */
+  public void genSimpleMethodDecl(String key, String defaultValue) {
+    genMethodDecl("String", defaultValue, key);
+  }
+
+  /**
    * Create method args based upon the default value.
    * 
    * @param defaultValue
@@ -240,15 +250,11 @@ public abstract class AbstractLocalizableInterfaceCreator {
               + resourceFile
               + "' cannot be used to generate message classes, as it has no key/value pairs defined.");
     }
-    generateMethods(p, keys);
-    composer.commit(new PrintWriterTreeLogger());
-  }
-
-  void generateMethods(LocalizedProperties properties, String[] keys) {
     for (String key : keys) {
-      String value = properties.getProperty(key);
-      genMethodDecl(key, value);
+      String value = p.getProperty(key);
+      genSimpleMethodDecl(key, value);
     }
+    composer.commit(new PrintWriterTreeLogger());
   }
 
   private void addFormatters() {
@@ -259,14 +265,14 @@ public abstract class AbstractLocalizableInterfaceCreator {
     formatters.add(new RenameDuplicates());
   }
 
-  protected String formatKey(String key) {
+  private String formatKey(String key) {
     for (ResourceKeyFormatter formatter : formatters) {
       key = formatter.format(key);
     }
     return key;
   }
 
-  private void genMethodDecl(String defaultValue, String key) {
+  private void genMethodDecl(String type, String defaultValue, String key) {
     composer.beginJavaDocComment();
     String escaped = makeJavaString(defaultValue);
     composer.println("Translated " + escaped + ".\n");
@@ -275,7 +281,7 @@ public abstract class AbstractLocalizableInterfaceCreator {
     genValueAnnotation(defaultValue);
     composer.println("@Key(" + makeJavaString(key) + ")");
     String methodName = formatKey(key);
-    composer.print("String " + methodName);
+    composer.print(type + " " + methodName);
     composer.print("(");
     genMethodArgs(defaultValue);
     composer.print(");\n");

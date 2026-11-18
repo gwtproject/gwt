@@ -245,6 +245,7 @@ public class Hyperlink extends Widget implements HasHTML, SourcesClickEvents,
    *     History.newItem from the handler if you need to process the
    *     click before the history token is set.
    */
+  @Override
   @Deprecated
   public HandlerRegistration addClickHandler(ClickHandler handler) {
     return addHandler(handler, ClickEvent.getType());
@@ -260,10 +261,12 @@ public class Hyperlink extends Widget implements HasHTML, SourcesClickEvents,
     ListenerWrapper.WrappedClickListener.add(this, listener);
   }
 
+  @Override
   public DirectionEstimator getDirectionEstimator() {
     return directionalTextHelper.getDirectionEstimator();
   }
 
+  @Override
   public String getHTML() {
     return directionalTextHelper.getHtml();
   }
@@ -278,10 +281,12 @@ public class Hyperlink extends Widget implements HasHTML, SourcesClickEvents,
     return targetHistoryToken;
   }
 
+  @Override
   public String getText() {
     return directionalTextHelper.getText();
   }
 
+  @Override
   public Direction getTextDirection() {
     return directionalTextHelper.getTextDirection();
   }
@@ -309,6 +314,7 @@ public class Hyperlink extends Widget implements HasHTML, SourcesClickEvents,
    * <p>
    * See note at {@link #setDirectionEstimator(DirectionEstimator)}.
    */
+  @Override
   public void setDirectionEstimator(boolean enabled) {
     directionalTextHelper.setDirectionEstimator(enabled);
   }
@@ -322,18 +328,22 @@ public class Hyperlink extends Widget implements HasHTML, SourcesClickEvents,
    * according to the new estimator's result. This may cause flicker, and thus
    * should be avoided.
    */
+  @Override
   public void setDirectionEstimator(DirectionEstimator directionEstimator) {
     directionalTextHelper.setDirectionEstimator(directionEstimator);
   }
 
+  @Override
   public void setHTML(SafeHtml html) {
     setHTML(html.asString());
   }
 
+  @Override
   public void setHTML(@IsSafeHtml String html) {
     directionalTextHelper.setHtml(html);
   }
 
+  @Override
   public void setHTML(SafeHtml html, Direction dir) {
     directionalTextHelper.setHtml(html, dir);
   }
@@ -355,10 +365,12 @@ public class Hyperlink extends Widget implements HasHTML, SourcesClickEvents,
     anchorElem.setPropertyString("href", "#" + hash);
   }
 
+  @Override
   public void setText(String text) {
     directionalTextHelper.setText(text);
   }
 
+  @Override
   public void setText(String text, Direction dir) {
     directionalTextHelper.setText(text, dir);
   }

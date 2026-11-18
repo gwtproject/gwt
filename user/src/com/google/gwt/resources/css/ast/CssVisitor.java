@@ -26,26 +26,32 @@ import java.util.List;
 public class CssVisitor {
   protected static final Context UNMODIFIABLE_CONTEXT = new Context() {
 
+    @Override
     public boolean canInsert() {
       return false;
     }
 
+    @Override
     public boolean canRemove() {
       return false;
     }
 
+    @Override
     public void insertAfter(CssNode node) {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public void insertBefore(CssNode node) {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public void removeMe() {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public void replaceMe(CssNode node) {
       throw new UnsupportedOperationException();
     }

@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * Add {@link TestSuite} that runs test cases in alphabetical order.
  */
-class TestSuiteWithOrder extends TestSuite {
+public class TestSuiteWithOrder extends TestSuite {
 
   /*
    * Implementation Note: When batching is active, TestModuleInfo in GWTTestCase#ALL_GWT_TESTS

@@ -25,45 +25,66 @@ import com.google.gwt.i18n.client.Constants;
  * perform late binding to the property file that specific to user's locale.
  */
 public interface DateTimeConstantsImpl extends Constants, DateTimeConstants {
+  @Override
   String[] ampms();
 
+  @Override
   String[] dateFormats();
 
+  @Override
   String[] eraNames();
 
+  @Override
   String[] eras();
 
+  @Override
   String firstDayOfTheWeek();
 
+  @Override
   String[] months();
 
+  @Override
   String[] narrowMonths();
 
+  @Override
   String[] narrowWeekdays();
 
+  @Override
   String[] quarters();
 
+  @Override
   String[] shortMonths();
 
+  @Override
   String[] shortQuarters();
 
+  @Override
   String[] shortWeekdays();
 
+  @Override
   String[] standaloneMonths();
 
+  @Override
   String[] standaloneNarrowMonths();
 
+  @Override
   String[] standaloneNarrowWeekdays();
 
+  @Override
   String[] standaloneShortMonths();
 
+  @Override
   String[] standaloneShortWeekdays();
 
+  @Override
   String[] standaloneWeekdays();
 
+  @Override
   String[] timeFormats();
 
+  @Override
   String[] weekdays();
 
+  @Override
   String[] weekendRange();
 }

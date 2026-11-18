@@ -35,11 +35,11 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.validation.Configuration;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.ValidationException;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 
 /**
  * Implements all methods that interact with domain objects.
@@ -57,8 +57,11 @@ final class ReflectiveServiceLayer extends ServiceLayerDecorator {
   static {
     Validator found;
     try {
-      ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-      found = validatorFactory.getValidator();
+      Configuration<?> config = Validation.byDefaultProvider().configure();
+      if ("true".equals(System.getProperty("gwt.validation.ignoreXml"))) {
+        config = config.ignoreXmlConfiguration();
+      }
+      found = config.buildValidatorFactory().getValidator();
     } catch (ValidationException e) {
       log.log(Level.INFO, "Unable to initialize a JSR 303 Bean Validator", e);
       found = null;

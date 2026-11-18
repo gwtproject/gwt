@@ -71,10 +71,12 @@ class Resolver {
       return keyType.equals(other.keyType) && valueType.equals(other.valueType);
     }
 
+    @Override
     public Type[] getActualTypeArguments() {
       return new Type[] {keyType, valueType};
     }
 
+    @Override
     public Type getOwnerType() {
       return null;
     }
@@ -111,14 +113,17 @@ class Resolver {
       return rawType.equals(other.rawType) && elementType.equals(other.elementType);
     }
 
+    @Override
     public Type[] getActualTypeArguments() {
       return new Type[] {elementType};
     }
 
+    @Override
     public Type getOwnerType() {
       return null;
     }
 
+    @Override
     public Type getRawType() {
       return rawType;
     }

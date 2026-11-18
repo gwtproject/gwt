@@ -42,6 +42,7 @@ import com.google.gwt.uibinder.rebind.messages.MessagesWriter;
     this.writer = writer;
   }
 
+  @Override
   public String interpretElement(XMLElement elem)
       throws UnableToCompleteException {
     MessagesWriter messages = writer.getMessages();

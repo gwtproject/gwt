@@ -32,6 +32,7 @@ class IntPairAttributeParser implements AttributeParser {
     this.logger = logger;
   }
   
+  @Override
   public String parse(XMLElement source, String value) throws UnableToCompleteException {
     String[] values = value.split(",");
     if (values.length != 2) {

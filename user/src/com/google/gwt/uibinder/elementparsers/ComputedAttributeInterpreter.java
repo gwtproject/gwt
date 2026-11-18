@@ -36,6 +36,7 @@ class ComputedAttributeInterpreter implements XMLElement.Interpreter<String> {
   }
   
   class DefaultDelegate implements Delegate {
+    @Override
     public String getAttributeToken(XMLAttribute attribute)
  throws UnableToCompleteException {
       return writer.tokenForStringExpression(attribute.getElement(), attribute.consumeStringValue());
@@ -55,6 +56,7 @@ class ComputedAttributeInterpreter implements XMLElement.Interpreter<String> {
     this.writer = writer;
   }
 
+  @Override
   public String interpretElement(XMLElement elem)
       throws UnableToCompleteException {
     Map<String, String> attNameToToken = new HashMap<String, String>();

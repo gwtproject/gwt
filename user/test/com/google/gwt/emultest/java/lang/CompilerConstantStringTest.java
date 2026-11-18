@@ -38,6 +38,7 @@ public class CompilerConstantStringTest extends GWTTestCase {
     assertEquals('b', "abc".charAt(1));
   }
 
+  @SuppressWarnings("SelfAssertion")
   public void testConcat() {
     assertEquals("abcdef", "abc" + "def");
     assertEquals("abcdef", "abc".concat("def"));

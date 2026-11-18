@@ -152,6 +152,7 @@ public class RequestFactoryModel implements AcceptsModelVisitor, HasExtraTypes {
     }
   }
 
+  @Override
   public void accept(ModelVisitor visitor) {
     if (visitor.visit(this)) {
       for (EntityProxyModel model : getAllProxyModels()) {
@@ -172,6 +173,7 @@ public class RequestFactoryModel implements AcceptsModelVisitor, HasExtraTypes {
    * These extra types will have already been added to the extra types for each
    * {@link ContextMethod} in the model.
    */
+  @Override
   public List<EntityProxyModel> getExtraTypes() {
     return Collections.unmodifiableList(extraTypes);
   }

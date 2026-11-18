@@ -623,7 +623,7 @@ public class JjsUtils {
    * Returns the constructor which this constructor delegates or null if none.
    */
   public static JConstructor getDelegatedThisOrSuperConstructor(JConstructor constructor) {
-    JStatement contructorInvocaton = FluentIterable
+    JStatement constructorInvocaton = FluentIterable
             .from(constructor.getBody().getStatements())
             .filter(new Predicate<JStatement>() {
               @Override
@@ -632,8 +632,8 @@ public class JjsUtils {
               }
             }).first().orNull();
 
-    return contructorInvocaton != null
-        ? (JConstructor) getThisOrSuperConstructorCall(contructorInvocaton).getTarget()
+    return constructorInvocaton != null
+        ? (JConstructor) getThisOrSuperConstructorCall(constructorInvocaton).getTarget()
         : null;
   }
 

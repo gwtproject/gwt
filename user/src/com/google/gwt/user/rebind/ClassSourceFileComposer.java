@@ -92,12 +92,14 @@ class ClassSourceFileComposer implements SourceWriter {
   /**
    * Begin emitting a JavaDoc comment.
    */
+  @Override
   public void beginJavaDocComment() {
     println("\n/**");
     inComment = true;
     commentIndicator = STAR_COMMENT_LINE;
   }
 
+  @Override
   public void commit(TreeLogger logger) {
     outdent();
     println("}");
@@ -111,29 +113,35 @@ class ClassSourceFileComposer implements SourceWriter {
   /**
    * End emitting a JavaDoc comment.
    */
+  @Override
   public void endJavaDocComment() {
     inComment = false;
     println("\n */");
   }
 
+  @Override
   public void indent() {
     ++indent;
   }
 
+  @Override
   public void indentln(String s) {
     indent();
     println(s);
     outdent();
   }
 
+  @Override
   public void indentln(String s, Object... args) {
     indentln(String.format(s, args));
   }
 
+  @Override
   public void outdent() {
     --indent;
   }
 
+  @Override
   public void print(String s) {
     int pos = 0;
     for (;;) {
@@ -166,20 +174,24 @@ class ClassSourceFileComposer implements SourceWriter {
     }
   }
 
+  @Override
   public void print(String s, Object... args) {
     print(String.format(s, args));
   }
 
+  @Override
   public void println() {
     print("\n");
     atStart = true;
   }
 
+  @Override
   public void println(String s) {
     print(s + "\n");
     atStart = true;
   }
 
+  @Override
   public void println(String s, Object... args) {
     println(String.format(s, args));
   }

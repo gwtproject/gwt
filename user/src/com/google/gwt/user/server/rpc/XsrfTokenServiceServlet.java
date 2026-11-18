@@ -160,6 +160,7 @@ public class XsrfTokenServiceServlet extends RemoteServiceServlet
   /**
    * Generates and returns new XSRF token.
    */
+  @Override
   public XsrfToken getNewXsrfToken() {
     return new XsrfToken(generateTokenValue());
   }

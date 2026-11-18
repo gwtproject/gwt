@@ -37,7 +37,6 @@ public interface ShellJavaScriptHost {
    * Define one or more JSNI methods.
    *
    * @param logger
-   * @param compiledClass
    * @param jsniMethods
    * @param dispatchIdOracle
    */

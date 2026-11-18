@@ -84,7 +84,7 @@ public class EntityProxyChange<P extends EntityProxy> extends Event<EntityProxyC
   /**
    * Returns the type associated with this instance.
    * 
-   * @return an instance of {@link Event.Type Type} of type Handler&lt;P&gt
+   * @return an instance of {@link Event.Type Type} of type Handler&lt;P&gt;
    */
   @SuppressWarnings({"unchecked", "rawtypes"})
   @Override

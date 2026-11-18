@@ -22,7 +22,7 @@ import com.google.gwt.safehtml.shared.annotations.IsSafeUri;
  * 
  * <p>
  * This class is package-private and intended for internal use by the
- * {@link com.google.gwt.safehtml} package.
+ * {@link com.google.gwt.safehtml.shared} package.
  * 
  * All implementors must implement .equals and .hashCode so that they operate
  * just like String.equals() and String.hashCode().
@@ -55,6 +55,7 @@ class SafeUriString implements SafeUri {
   /**
    * {@inheritDoc}
    */
+  @Override
   @IsSafeUri
   public String asString() {
     return uri;

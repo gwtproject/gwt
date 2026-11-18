@@ -116,6 +116,7 @@ class RequestState implements EntityCodex.EntitySource {
   /**
    * EntityCodex support.
    */
+  @Override
   public <Q extends BaseProxy> AutoBean<Q> getBeanForPayload(Splittable serializedProxyId) {
     IdMessage idMessage =
         AutoBeanCodex.decode(MessageFactoryHolder.FACTORY, IdMessage.class, serializedProxyId).as();
@@ -162,6 +163,7 @@ class RequestState implements EntityCodex.EntitySource {
    * <p>
    * XXX: Merge this with AbstsractRequestContext's implementation
    */
+  @Override
   public Splittable getSerializedProxyId(SimpleProxyId<?> stableId) {
     AutoBean<IdMessage> bean = MessageFactoryHolder.FACTORY.id();
     IdMessage ref = bean.as();
@@ -196,6 +198,7 @@ class RequestState implements EntityCodex.EntitySource {
   /**
    * EntityCodex support.
    */
+  @Override
   public boolean isEntityType(Class<?> clazz) {
     return idFactory.isEntityType(clazz);
   }
@@ -203,6 +206,7 @@ class RequestState implements EntityCodex.EntitySource {
   /**
    * EntityCodex support.
    */
+  @Override
   public boolean isValueType(Class<?> clazz) {
     return idFactory.isValueType(clazz);
   }

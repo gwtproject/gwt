@@ -79,10 +79,12 @@ public class RunStyleHtmlUnit extends RunStyle {
       this.developmentMode = developmentMode;
     }
 
+    @Override
     public void handleAlert(Page page, String message) {
       treeLogger.log(TreeLogger.ERROR, "Alert: " + message);
     }
 
+    @Override
     public boolean handleEvent(Page page, String returnValue) {
       synchronized (waitForUnload) {
         waitForUnload.notifyAll();
@@ -90,6 +92,7 @@ public class RunStyleHtmlUnit extends RunStyle {
       return true;
     }
 
+    @Override
     public void notify(String message, Object origin) {
       if ("Obsolete content type encountered: 'text/javascript'.".equals(message) ||
           "Obsolete content type encountered: 'application/x-javascript'.".equals(message)) {

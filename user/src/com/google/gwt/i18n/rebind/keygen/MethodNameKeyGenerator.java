@@ -26,6 +26,7 @@ package com.google.gwt.i18n.rebind.keygen;
 @Deprecated
 public class MethodNameKeyGenerator implements KeyGenerator {
 
+  @Override
   public String generateKey(String className, String methodName, String text,
       String meaning) {
     return methodName;

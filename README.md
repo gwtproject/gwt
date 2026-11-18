@@ -17,7 +17,7 @@
 
 ### Building the GWT SDK:
 
- - In order to build GWT, `java` and `ant` are required in your system.
+ - In order to build GWT, `java` (minimum version 17) and `ant` are required in your system.
 
  - You need the [GWT tools repository](https://github.com/gwtproject/tools/)
    checked out and up-to-date. By default it is expected to be found at `../tools`.
@@ -201,3 +201,34 @@
 
    `$ ( cd user && ant test.dev.htmlunit )`
 
+### Testing the latest version
+Builds are uploaded to Sonatype snapshots repository after each push to the main branch.
+To test them, you can download GWT from https://central.sonatype.com/repository/maven-snapshots/
+or add the following to your Maven POM:
+
+```xml
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>org.gwtproject</groupId>
+      <artifactId>gwt</artifactId>
+      <version>HEAD-SNAPSHOT</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+
+<repositories>
+  <repository>
+    <id>sonatype-snapshots</id>
+    <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+    <releases>
+      <enabled>false</enabled>
+    </releases>
+    <snapshots>
+      <enabled>true</enabled>
+    </snapshots>
+  </repository>
+</repositories>
+```

@@ -97,6 +97,7 @@ final class ApiChange implements Comparable<ApiChange> {
     this.message = message;
   }
 
+  @Override
   public int compareTo(ApiChange arg0) {
     return this.toString().compareTo(arg0.toString());
   }

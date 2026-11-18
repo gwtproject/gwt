@@ -38,6 +38,7 @@ public class TextInterpreter implements XMLElement.Interpreter<String> {
     this.writer = writer;
   }
 
+  @Override
   public String interpretElement(XMLElement elem)
       throws UnableToCompleteException {
     MessagesWriter messages = writer.getMessages();

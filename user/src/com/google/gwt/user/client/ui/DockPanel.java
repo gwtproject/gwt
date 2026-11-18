@@ -206,10 +206,12 @@ public class DockPanel extends CellPanel implements HasAlignment {
    this.add(widget.asWidget(), direction);
   }
 
+  @Override
   public HorizontalAlignmentConstant getHorizontalAlignment() {
     return horzAlign;
   }
 
+  @Override
   public VerticalAlignmentConstant getVerticalAlignment() {
     return vertAlign;
   }
@@ -284,6 +286,7 @@ public class DockPanel extends CellPanel implements HasAlignment {
    *
    * @see HasHorizontalAlignment#setHorizontalAlignment(HasHorizontalAlignment.HorizontalAlignmentConstant)
    */
+  @Override
   public void setHorizontalAlignment(HorizontalAlignmentConstant align) {
     horzAlign = align;
   }
@@ -294,6 +297,7 @@ public class DockPanel extends CellPanel implements HasAlignment {
    *
    * @see HasVerticalAlignment#setVerticalAlignment(HasVerticalAlignment.VerticalAlignmentConstant)
    */
+  @Override
   public void setVerticalAlignment(VerticalAlignmentConstant align) {
     vertAlign = align;
   }

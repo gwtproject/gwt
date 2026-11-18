@@ -233,6 +233,7 @@ public class ProxyAutoBean<T> extends AbstractAutoBean<T> {
     return configuration;
   }
 
+  @Override
   public Class<T> getType() {
     return beanType;
   }

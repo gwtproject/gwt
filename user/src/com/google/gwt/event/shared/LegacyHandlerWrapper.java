@@ -26,6 +26,7 @@ public class LegacyHandlerWrapper implements HandlerRegistration {
     this.real = real;
   }
 
+  @Override
   public void removeHandler() {
     real.removeHandler();
   }

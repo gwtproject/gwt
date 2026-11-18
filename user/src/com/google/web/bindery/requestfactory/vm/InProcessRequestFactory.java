@@ -50,6 +50,7 @@ class InProcessRequestFactory extends AbstractRequestFactory {
   }
 
   class RequestFactoryHandler implements InvocationHandler {
+    @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
       if (Object.class.equals(method.getDeclaringClass())
           || RequestFactory.class.equals(method.getDeclaringClass())) {

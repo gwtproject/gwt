@@ -40,12 +40,14 @@ public class JsTypeBridgeTest extends GWTTestCase {
   private static class CollectionBase implements Collection {
     Object x;
 
+    @Override
     public void add(Object o) {
       x = o + "CollectionBase";
     }
   }
 
   private interface List extends Collection, JsListInterface {
+    @Override
     void add(Object o);
   }
 

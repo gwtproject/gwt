@@ -49,10 +49,12 @@ public class DelegateMap implements Iterable<AbstractEditorDelegate<?, ?>> {
       next();
     }
 
+    @Override
     public boolean hasNext() {
       return next != null;
     }
 
+    @Override
     public AbstractEditorDelegate<?, ?> next() {
       AbstractEditorDelegate<?, ?> toReturn = next;
 
@@ -74,12 +76,14 @@ public class DelegateMap implements Iterable<AbstractEditorDelegate<?, ?>> {
       return toReturn;
     }
 
+    @Override
     public void remove() {
       throw new UnsupportedOperationException();
     }
   }
 
   public static final KeyMethod IDENTITY = new KeyMethod() {
+    @Override
     public Object key(Object object) {
       return object;
     }
@@ -137,6 +141,7 @@ public class DelegateMap implements Iterable<AbstractEditorDelegate<?, ?>> {
     return map.get(key);
   }
 
+  @Override
   public Iterator<AbstractEditorDelegate<?, ?>> iterator() {
     return new MapIterator(this);
   }

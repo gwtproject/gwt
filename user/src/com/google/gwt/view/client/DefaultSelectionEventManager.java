@@ -71,6 +71,7 @@ public class DefaultSelectionEventManager<T> implements
       blacklist.clear();
     }
 
+    @Override
     public boolean clearCurrentSelection(CellPreviewEvent<T> event) {
       return false;
     }
@@ -99,6 +100,7 @@ public class DefaultSelectionEventManager<T> implements
       }
     }
 
+    @Override
     public SelectAction translateSelectionEvent(CellPreviewEvent<T> event) {
       return isColumnBlacklisted(event.getColumn()) ? SelectAction.IGNORE
           : SelectAction.DEFAULT;
@@ -136,10 +138,12 @@ public class DefaultSelectionEventManager<T> implements
       this.column = column;
     }
 
+    @Override
     public boolean clearCurrentSelection(CellPreviewEvent<T> event) {
       return false;
     }
 
+    @Override
     public SelectAction translateSelectionEvent(CellPreviewEvent<T> event) {
       // Handle the event.
       NativeEvent nativeEvent = event.getNativeEvent();
@@ -221,6 +225,7 @@ public class DefaultSelectionEventManager<T> implements
       }
     }
 
+    @Override
     public boolean clearCurrentSelection(CellPreviewEvent<T> event) {
       return false;
     }
@@ -256,6 +261,7 @@ public class DefaultSelectionEventManager<T> implements
       }
     }
 
+    @Override
     public SelectAction translateSelectionEvent(CellPreviewEvent<T> event) {
       return isColumnWhitelisted(event.getColumn()) ? SelectAction.DEFAULT
           : SelectAction.IGNORE;
@@ -457,6 +463,7 @@ public class DefaultSelectionEventManager<T> implements
     }
   }
 
+  @Override
   public void onCellPreview(CellPreviewEvent<T> event) {
     // Early exit if selection is already handled or we are editing.
     if (event.isCellEditing() || event.isSelectionHandled()) {

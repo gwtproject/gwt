@@ -228,7 +228,7 @@ public interface Messages extends LocalizableResource {
      * </pre>
      * 
      * Note that the plural form "other" gets the translation specified in
-     * {@code &#64;DefaultMessage}, as does any {@code &#64;Select} value not
+     * {@code @DefaultMessage}, as does any {@code @Select} value not
      * listed. 
      * 
      * If more than one way of selecting a translation exists, they will be

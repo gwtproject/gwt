@@ -33,11 +33,13 @@ public abstract class AbstractAutoBeanFactory implements AutoBeanFactory, EnumMa
   protected Map<String, List<Enum<?>>> stringsToEnumsMap;
   private JsniCreatorMap creatorMap;
 
+  @Override
   public <T> AutoBean<T> create(Class<T> clazz) {
     maybeInitializeCreatorMap();
     return creatorMap.create(clazz, this);
   }
 
+  @Override
   public <T, U extends T> AutoBean<T> create(Class<T> clazz, U delegate) {
     maybeInitializeCreatorMap();
     return creatorMap.create(clazz, this, delegate);
@@ -46,6 +48,7 @@ public abstract class AbstractAutoBeanFactory implements AutoBeanFactory, EnumMa
   /**
    * EnumMap support.
    */
+  @Override
   public <E extends Enum<?>> E getEnum(Class<E> clazz, String token) {
     maybeInitializeEnumMap();
     List<Enum<?>> list = stringsToEnumsMap.get(token);
@@ -65,6 +68,7 @@ public abstract class AbstractAutoBeanFactory implements AutoBeanFactory, EnumMa
   /**
    * EnumMap support.
    */
+  @Override
   public String getToken(Enum<?> e) {
     maybeInitializeEnumMap();
     String toReturn = enumToStringMap.get(e);

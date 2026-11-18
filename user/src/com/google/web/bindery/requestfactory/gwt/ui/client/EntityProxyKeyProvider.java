@@ -34,6 +34,7 @@ public class EntityProxyKeyProvider<P extends EntityProxy> implements ProvidesKe
    * 
    * @param item an item of type P
    */
+  @Override
   public Object getKey(P item) {
     return item == null ? null : item.stableId();
   }

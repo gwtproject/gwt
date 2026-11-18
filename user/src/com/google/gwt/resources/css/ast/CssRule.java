@@ -25,10 +25,12 @@ public class CssRule extends CssNode implements HasProperties, HasSelectors {
   protected final List<CssProperty> properties = new ArrayList<CssProperty>();
   protected final List<CssSelector> selectors = new ArrayList<CssSelector>();
 
+  @Override
   public List<CssProperty> getProperties() {
     return properties;
   }
 
+  @Override
   public List<CssSelector> getSelectors() {
     return selectors;
   }
@@ -38,6 +40,7 @@ public class CssRule extends CssNode implements HasProperties, HasSelectors {
     return true;
   }
 
+  @Override
   public void traverse(CssVisitor visitor, Context context) {
     if (visitor.visit(this, context)) {
       visitor.acceptWithInsertRemove(selectors);

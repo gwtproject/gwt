@@ -31,10 +31,12 @@ public class DatePoser extends Date implements Poser<Date> {
     setFrozen(true);
   }
 
+  @Override
   public Date getPosedValue() {
     return new Date(getTime());
   }
 
+  @Override
   public boolean isFrozen() {
     return frozen;
   }
@@ -45,6 +47,7 @@ public class DatePoser extends Date implements Poser<Date> {
     super.setDate(date);
   }
 
+  @Override
   public void setFrozen(boolean frozen) {
     this.frozen = frozen;
   }

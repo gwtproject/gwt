@@ -93,6 +93,7 @@ public class TypeOracleMessage extends AbstractMessage {
       this.matchedLocale = matchedLocale;
     }
 
+    @Override
     public Iterable<AlternateFormMapping> getAllMessageForms() {
       List<AlternateFormMapping> mapping = new ArrayList<AlternateFormMapping>();
       // add the default form
@@ -113,10 +114,12 @@ public class TypeOracleMessage extends AbstractMessage {
       return mapping;
     }
 
+    @Override
     public String getDefaultMessage() {
       return resourceEntry.getForm(null);
     }
 
+    @Override
     public GwtLocale getMatchedLocale() {
       return matchedLocale;
     }
@@ -199,6 +202,7 @@ public String getMethodName() {
     return method.isAnnotationPresent(annotClass);
   }
 
+  @Override
   public boolean isVarArgs() {
     return method.isVarArgs();
   }

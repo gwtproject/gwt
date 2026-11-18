@@ -282,7 +282,7 @@ public class CollectionsTest extends EmulTestBase {
   }
 
   /**
-   * @tests java.util.Collections#rotate(java.util.List, int)
+   * Tests {@link java.util.Collections#rotate(java.util.List, int)}.
    */
   public void testRotate() {
     try {
@@ -293,12 +293,14 @@ public class CollectionsTest extends EmulTestBase {
     }
     // Test optimized RandomAccess code path
     testRotateImpl(new ListImplProvider() {
+      @Override
       public List<Integer> copyOf(Collection<Integer> data) {
         return new ArrayList<>(data);
       }
     });
     // Test sequential List code path
     testRotateImpl(new ListImplProvider() {
+      @Override
       public List<Integer> copyOf(Collection<Integer> data) {
         return new LinkedList<>(data);
       }

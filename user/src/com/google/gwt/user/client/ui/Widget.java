@@ -58,6 +58,7 @@ public class Widget extends UIObject implements EventListener, HasAttachHandlers
   private Object layoutData;
   private Widget parent;
 
+  @Override
   public HandlerRegistration addAttachHandler(Handler handler) {
     return addHandler(handler, AttachEvent.getType());
   }
@@ -120,10 +121,12 @@ public class Widget extends UIObject implements EventListener, HasAttachHandlers
     return ensureHandlers().addHandler(type, handler);
   }
 
+  @Override
   public Widget asWidget() {
     return this;
   }
 
+  @Override
   public void fireEvent(GwtEvent<?> event) {
     if (handlerManager != null) {
       handlerManager.fireEvent(event);
@@ -156,10 +159,12 @@ public class Widget extends UIObject implements EventListener, HasAttachHandlers
    *
    * @return <code>true</code> if the widget is attached
    */
+  @Override
   public boolean isAttached() {
     return attached;
   }
 
+  @Override
   public void onBrowserEvent(Event event) {
     switch (DOM.eventGetType(event)) {
       case Event.ONMOUSEOVER:

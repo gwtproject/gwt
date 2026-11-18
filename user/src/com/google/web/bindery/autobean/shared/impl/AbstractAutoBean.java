@@ -97,24 +97,29 @@ public abstract class AbstractAutoBean<T> implements AutoBean<T>, HasSplittable 
     WeakMapping.setWeak(wrapped, AutoBean.class.getName(), this);
   }
 
+  @Override
   public void accept(AutoBeanVisitor visitor) {
     traverse(visitor, new OneShotContext());
   }
 
+  @Override
   public abstract T as();
 
   public AutoBean<T> clone(boolean deep) {
     throw new UnsupportedOperationException();
   }
 
+  @Override
   public AutoBeanFactory getFactory() {
     return factory;
   }
 
+  @Override
   public Splittable getSplittable() {
     return data;
   }
 
+  @Override
   @SuppressWarnings("unchecked")
   public <Q> Q getTag(String tagName) {
     return tags == null ? null : (Q) tags.get(tagName);
@@ -128,10 +133,12 @@ public abstract class AbstractAutoBean<T> implements AutoBean<T>, HasSplittable 
     return data.isReified(UNSPLITTABLE_VALUES_KEY);
   }
 
+  @Override
   public boolean isFrozen() {
     return frozen;
   }
 
+  @Override
   public boolean isWrapper() {
     return !usingSimplePeer;
   }
@@ -146,10 +153,12 @@ public abstract class AbstractAutoBean<T> implements AutoBean<T>, HasSplittable 
     wrapped = createSimplePeer();
   }
 
+  @Override
   public void setFrozen(boolean frozen) {
     this.frozen = frozen;
   }
 
+  @Override
   public void setTag(String tagName, Object value) {
     if (tags == null) {
       tags = new HashMap<String, Object>();
@@ -168,6 +177,7 @@ public abstract class AbstractAutoBean<T> implements AutoBean<T>, HasSplittable 
     visitor.endVisit(this, ctx);
   }
 
+  @Override
   public T unwrap() {
     if (usingSimplePeer) {
       throw new IllegalStateException();

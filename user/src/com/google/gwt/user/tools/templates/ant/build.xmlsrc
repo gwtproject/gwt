@@ -64,7 +64,6 @@
       <!-- Additional arguments like -style PRETTY, -logLevel DEBUG or -nosuperDevMode -->
       <arg line="${gwt.args}"/>
       <arg value="@moduleName"/>
-      <arg value="@moduleName"/>
     </java>
   </target>@antEclipseRule
 @testTargetsBegin

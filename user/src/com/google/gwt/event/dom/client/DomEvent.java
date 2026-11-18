@@ -142,6 +142,7 @@ public abstract class DomEvent<H extends EventHandler> extends GwtEvent<H>
   @Override
   public abstract DomEvent.Type<H> getAssociatedType();
 
+  @Override
   public final NativeEvent getNativeEvent() {
     assertLive();
     return nativeEvent;

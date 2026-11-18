@@ -42,6 +42,7 @@ public class FieldInitializationOrderTest extends GWTTestCase {
       int i = 1;
     }
 
+    @Override
     void performTest() {
       new Child();
     }
@@ -58,6 +59,7 @@ public class FieldInitializationOrderTest extends GWTTestCase {
       int i = 1;
     }
 
+    @Override
     void performTest() {
       new Child();
     }
@@ -73,9 +75,11 @@ public class FieldInitializationOrderTest extends GWTTestCase {
 
     static class Child extends Base {
       int i = 1;
+      @Override
       void m() { assertEquals(0, i); }
     }
 
+    @Override
     void performTest() {
       // Construct both parent and child to ensure that polymorphic dispatch for m() does not go
       // away
@@ -94,8 +98,10 @@ public class FieldInitializationOrderTest extends GWTTestCase {
 
     static class Child extends Base {
       int i = 1;
+      @Override
       void m() { assertEquals(0, i); }
     }
+    @Override
     void performTest() {
       // Construct both parent and child to ensure that polymorphic dispatch for m() does not go
       // away
@@ -114,8 +120,10 @@ public class FieldInitializationOrderTest extends GWTTestCase {
 
     static class Child extends Base {
       String s = "blah";
+      @Override
       void m() { assertTrue(s == null); }
     }
+    @Override
     void performTest() {
       // Construct both parent and child to ensure that polymorphic dispatch for m() does not go
       // away

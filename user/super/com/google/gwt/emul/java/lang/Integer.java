@@ -15,13 +15,15 @@
  */
 package java.lang;
 
+import java.lang.constant.Constable;
+import java.lang.constant.ConstantDesc;
 import javaemul.internal.JsUtils;
 import javaemul.internal.annotations.HasNoSideEffects;
 
 /**
  * Wraps a primitive <code>int</code> as an object.
  */
-public final class Integer extends Number implements Comparable<Integer> {
+public final class Integer extends Number implements Comparable<Integer>, Constable, ConstantDesc {
 
   public static final int MAX_VALUE = 0x7fffffff;
   public static final int MIN_VALUE = 0x80000000;
@@ -168,6 +170,11 @@ public final class Integer extends Number implements Comparable<Integer> {
 
   public static int parseInt(String s, int radix) throws NumberFormatException {
     return __parseAndValidateInt(s, radix, MIN_VALUE, MAX_VALUE);
+  }
+
+  public static int parseInt(CharSequence s, int beginIndex, int endIndex, int radix)
+      throws NumberFormatException {
+    return parseInt(s.subSequence(beginIndex, endIndex).toString(), radix);
   }
 
   public static int reverse(int i) {

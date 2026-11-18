@@ -30,6 +30,7 @@ class ScrollImpl {
    * container is resized, so we synthesize one as needed. IE scrolls in the
    * positive direction, even in RTL mode.
    */
+  @Deprecated
   static class ScrollImplTrident extends ScrollImpl {
 
     private static JavaScriptObject scrollHandler;
@@ -137,7 +138,7 @@ class ScrollImpl {
    * @param container the container
    */
   public void initialize(Element scrollable, Element container) {
-    // Overridden by ScrollImplTrident.
+    // No-op, formerly used to handle IE-specific behavior
   }
 
   /**

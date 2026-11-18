@@ -103,6 +103,7 @@ public class NativeLongTest extends GWTTestCase {
     assertEquals(0x1234, (short) LONG_1234);
   }
 
+  @SuppressWarnings("SelfAssertion")
   public void testConstants() {
     assertEquals(LONG_5DEECE66D, LONG_5DEECE66D);
     assertTrue(LONG_5DEECE66D > 0L);

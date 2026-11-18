@@ -31,7 +31,7 @@ public final class Impl {
   private static final int WATCHDOG_ENTRY_DEPTH_CHECK_INTERVAL_MS = 2000;
 
   /**
-   * Used by {@link #entry0(Object, Object)} to handle reentrancy.
+   * Used by {@code entry0} to handle reentrancy.
    */
   private static int entryDepth = 0;
 
@@ -44,6 +44,28 @@ public final class Impl {
    * Timer id of the entry depth watchdog. -1 if not scheduled.
    */
   private static int watchdogEntryDepthTimerId = -1;
+
+  static {
+    if (GWT.isClient()) {
+      // Test the string first to see if we should compile out the check entirely
+      String stackTraceLimit = System.getProperty("gwt.error.stackTraceLimit");
+      if (!stackTraceLimit.equals("0")) {
+        maybeIncreaseStackTraceLimit(Integer.parseInt(stackTraceLimit));
+      }
+    }
+  }
+
+  /**
+   * Helper to raise the stack trace limit for JS errors.
+   */
+  private static native void maybeIncreaseStackTraceLimit(int stackTraceLimit) /*-{
+    if (stackTraceLimit > Error.stackTraceLimit) {
+      Error.stackTraceLimit = stackTraceLimit;
+    }
+     if (stackTraceLimit > $wnd.Error.stackTraceLimit) {
+      $wnd.Error.stackTraceLimit = stackTraceLimit;
+    }
+  }-*/;
 
   /**
    * This method should be used whenever GWT code is entered from a JS context

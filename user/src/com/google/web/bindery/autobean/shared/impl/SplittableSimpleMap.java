@@ -51,6 +51,7 @@ public class SplittableSimpleMap<K, V> implements Map<K, V>, HasSplittable {
     this.valueCoder = valueCoder;
   }
 
+  @Override
   public void clear() {
     for (String key : data.getPropertyKeys()) {
       Splittable.NULL.assign(data, key);
@@ -58,15 +59,18 @@ public class SplittableSimpleMap<K, V> implements Map<K, V>, HasSplittable {
     }
   }
 
+  @Override
   public boolean containsKey(Object key) {
     String encodedKey = encodedKey(key);
     return !data.isUndefined(encodedKey) || reified.isReified(encodedKey);
   }
 
+  @Override
   public boolean containsValue(Object value) {
     return values().contains(value);
   }
 
+  @Override
   public Set<java.util.Map.Entry<K, V>> entrySet() {
     return new AbstractSet<Map.Entry<K, V>>() {
       final List<String> keys = data.getPropertyKeys();
@@ -77,10 +81,12 @@ public class SplittableSimpleMap<K, V> implements Map<K, V>, HasSplittable {
           Iterator<String> keyIterator = keys.iterator();
           String encodedKey;
 
+          @Override
           public boolean hasNext() {
             return keyIterator.hasNext();
           }
 
+          @Override
           public java.util.Map.Entry<K, V> next() {
             encodedKey = keyIterator.next();
             return new Map.Entry<K, V>() {
@@ -90,20 +96,24 @@ public class SplittableSimpleMap<K, V> implements Map<K, V>, HasSplittable {
               @SuppressWarnings("unchecked")
               final V value = (V) valueCoder.decode(state, data.get(encodedKey));
 
+              @Override
               public K getKey() {
                 return key;
               }
 
+              @Override
               public V getValue() {
                 return value;
               }
 
+              @Override
               public V setValue(V newValue) {
                 return put(key, newValue);
               }
             };
           }
 
+          @Override
           public void remove() {
             Splittable.NULL.assign(data, encodedKey);
             reified.setReified(encodedKey, null);
@@ -118,19 +128,23 @@ public class SplittableSimpleMap<K, V> implements Map<K, V>, HasSplittable {
     };
   }
 
+  @Override
   public V get(Object key) {
     String encodedKey = encodedKey(key);
     return getRaw(encodedKey);
   }
 
+  @Override
   public Splittable getSplittable() {
     return data;
   }
 
+  @Override
   public boolean isEmpty() {
     return data.getPropertyKeys().isEmpty();
   }
 
+  @Override
   public Set<K> keySet() {
     return new AbstractSet<K>() {
       final List<String> keys = data.getPropertyKeys();
@@ -141,10 +155,12 @@ public class SplittableSimpleMap<K, V> implements Map<K, V>, HasSplittable {
           final Iterator<String> it = keys.iterator();
           String lastEncodedKey;
 
+          @Override
           public boolean hasNext() {
             return it.hasNext();
           }
 
+          @Override
           public K next() {
             lastEncodedKey = it.next();
             @SuppressWarnings("unchecked")
@@ -153,6 +169,7 @@ public class SplittableSimpleMap<K, V> implements Map<K, V>, HasSplittable {
             return toReturn;
           }
 
+          @Override
           public void remove() {
             Splittable.NULL.assign(data, lastEncodedKey);
             reified.setReified(lastEncodedKey, null);
@@ -167,6 +184,7 @@ public class SplittableSimpleMap<K, V> implements Map<K, V>, HasSplittable {
     };
   }
 
+  @Override
   public V put(K key, V value) {
     V toReturn = get(key);
     String encodedKey = encodedKey(key);
@@ -181,12 +199,14 @@ public class SplittableSimpleMap<K, V> implements Map<K, V>, HasSplittable {
     return toReturn;
   }
 
+  @Override
   public void putAll(Map<? extends K, ? extends V> m) {
     for (Map.Entry<? extends K, ? extends V> entry : m.entrySet()) {
       put(entry.getKey(), entry.getValue());
     }
   }
 
+  @Override
   public V remove(Object key) {
     V toReturn = get(key);
     String encodedKey = encodedKey(key);
@@ -195,10 +215,12 @@ public class SplittableSimpleMap<K, V> implements Map<K, V>, HasSplittable {
     return toReturn;
   }
 
+  @Override
   public int size() {
     return data.getPropertyKeys().size();
   }
 
+  @Override
   public Collection<V> values() {
     return new AbstractCollection<V>() {
       final List<String> keys = data.getPropertyKeys();
@@ -209,15 +231,18 @@ public class SplittableSimpleMap<K, V> implements Map<K, V>, HasSplittable {
           final Iterator<String> it = keys.iterator();
           String lastEncodedKey;
 
+          @Override
           public boolean hasNext() {
             return it.hasNext();
           }
 
+          @Override
           public V next() {
             lastEncodedKey = it.next();
             return getRaw(lastEncodedKey);
           }
 
+          @Override
           public void remove() {
             Splittable.NULL.assign(data, lastEncodedKey);
             reified.setReified(lastEncodedKey, null);

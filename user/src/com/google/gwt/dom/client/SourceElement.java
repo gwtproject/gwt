@@ -21,7 +21,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  * The SOURCE element specifies one of potentially multiple source file in a
  * media element.
  * 
- * @see <a href="http://www.w3.org/TR/html5/video.html#the-source-element">W3C
+ * @see <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-source-element">W3C
  *      HTML Specification</a>
  */
 @TagName(SourceElement.TAG)

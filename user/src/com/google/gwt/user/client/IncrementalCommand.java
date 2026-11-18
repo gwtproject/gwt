@@ -38,5 +38,6 @@ public interface IncrementalCommand extends RepeatingCommand {
    * @return <code>true</code> if the command has more work to do,
    *         <code>false</code> otherwise
    */
+  @Override
   boolean execute();
 }

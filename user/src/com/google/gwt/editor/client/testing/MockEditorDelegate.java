@@ -25,6 +25,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
  */
 public class MockEditorDelegate<T> implements EditorDelegate<T> {
   private static final HandlerRegistration FAKE_REGISTRATION = new HandlerRegistration() {
+    @Override
     public void removeHandler() {
     }
   };
@@ -35,6 +36,7 @@ public class MockEditorDelegate<T> implements EditorDelegate<T> {
   /**
    * Returns a zero-length string or the last value passed to {@link #setPath}.
    */
+  @Override
   public String getPath() {
     return path;
   }
@@ -50,6 +52,7 @@ public class MockEditorDelegate<T> implements EditorDelegate<T> {
   /**
    * No-op.
    */
+  @Override
   public void recordError(String message, Object value, Object userData) {
   }
 
@@ -57,6 +60,7 @@ public class MockEditorDelegate<T> implements EditorDelegate<T> {
    * Records the value of {@code dirty} which can be retrieved from
    * {@link #isDirty()}.
    */
+  @Override
   public void setDirty(boolean dirty) {
     this.dirty = dirty;
   }
@@ -71,6 +75,7 @@ public class MockEditorDelegate<T> implements EditorDelegate<T> {
   /**
    * Returns a no-op HandlerRegistration instance.
    */
+  @Override
   public HandlerRegistration subscribe() {
     return FAKE_REGISTRATION;
   }

@@ -29,6 +29,7 @@ class NodeListImpl extends DOMItem implements NodeList {
     super(o);
   }
 
+  @Override
   public int getLength() {
     return XMLParserImpl.getLength(this.getJsObject());
   }
@@ -40,6 +41,7 @@ class NodeListImpl extends DOMItem implements NodeList {
    * @return the item at this index
    * @see com.google.gwt.xml.client.NodeList#item(int)
    */
+  @Override
   public Node item(int index) {
     return NodeImpl.build(XMLParserImpl.item(this.getJsObject(), index));
   }

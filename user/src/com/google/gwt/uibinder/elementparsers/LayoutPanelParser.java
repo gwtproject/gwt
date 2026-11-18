@@ -32,6 +32,7 @@ public class LayoutPanelParser implements ElementParser {
   private static final String ERR_NEGATIVE_HEIGHT = "Attribute 'height' can not be negative.";
   private static final String LAYER = "layer";
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
 

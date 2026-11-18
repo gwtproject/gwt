@@ -57,6 +57,7 @@ public abstract class StackTraceDeobfuscator {
     final String basePath = symbolMapsPath.endsWith("/") ? symbolMapsPath : symbolMapsPath + "/";
     final ClassLoader classLoader = StackTraceDeobfuscator.class.getClassLoader();
     return new StackTraceDeobfuscator() {
+      @Override
       protected InputStream openInputStream(String fileName) throws IOException {
         String filePath = basePath + fileName;
         InputStream inputStream = classLoader.getResourceAsStream(filePath);
@@ -73,6 +74,7 @@ public abstract class StackTraceDeobfuscator {
    */
   public static StackTraceDeobfuscator fromFileSystem(final String symbolMapsDirectory) {
     return new StackTraceDeobfuscator() {
+      @Override
       protected InputStream openInputStream(String fileName) throws IOException {
         return new FileInputStream(new File(symbolMapsDirectory, fileName));
       }
@@ -84,6 +86,7 @@ public abstract class StackTraceDeobfuscator {
    */
   public static StackTraceDeobfuscator fromUrl(final URL urlPath) {
     return new StackTraceDeobfuscator() {
+      @Override
       protected InputStream openInputStream(String fileName) throws IOException {
         return new URL(urlPath, fileName).openStream();
       }
@@ -144,11 +147,14 @@ public abstract class StackTraceDeobfuscator {
   }
 
   private static final Pattern JsniRefPattern = Pattern.compile("@?([^:]+)::([^(]+)(\\((.*)\\))?");
-  private static final Pattern fragmentIdPattern = Pattern.compile(".*(\\d+)\\.js");
+  private static final Pattern fragmentIdPattern = Pattern.compile("(?:.*\\D)?(\\d+)\\.js");
+  // Matches ServerSerializationStreamReader: the strong name reaches us straight from the
+  // client (X-GWT-Permutation header) and is concatenated into symbol/source map file names.
+  private static final Pattern strongNamePattern = Pattern.compile("[a-zA-Z0-9_]+");
   private static final int LINE_NUMBER_UNKNOWN = -1;
   private static final String SYMBOL_DATA_UNKNOWN = "";
 
-  private final Map<String, SourceMapping> sourceMaps = new HashMap<String, SourceMapping>();
+  private final Map<String, SourceMapping> sourceMaps = new ConcurrentHashMap<>();
   private final SymbolCache symbolCache = new SymbolCache();
   private boolean lazyLoad = false;
 
@@ -365,18 +371,23 @@ public abstract class StackTraceDeobfuscator {
    */
   protected abstract InputStream openInputStream(String fileName) throws IOException;
 
+  private static boolean isValidStrongName(String strongName) {
+    return strongName != null && strongNamePattern.matcher(strongName).matches();
+  }
+
   private SourceMapping loadSourceMap(String permutationStrongName, int fragmentId) {
-    SourceMapping toReturn = sourceMaps.get(permutationStrongName + fragmentId);
-    if (toReturn == null) {
+    if (!isValidStrongName(permutationStrongName)) {
+      return null;
+    }
+    return sourceMaps.computeIfAbsent(permutationStrongName + fragmentId, key -> {
       try {
         String sourceMapString = loadStreamAsString(
             getSourceMapInputStream(permutationStrongName, fragmentId));
-        toReturn = SourceMapConsumerFactory.parse(sourceMapString);
-        sourceMaps.put(permutationStrongName + fragmentId, toReturn);
+        return SourceMapConsumerFactory.parse(sourceMapString);
       } catch (Exception e) {
+        return null;
       }
-    }
-    return toReturn;
+    });
   }
 
   private String loadStreamAsString(InputStream stream) {
@@ -407,6 +418,9 @@ public abstract class StackTraceDeobfuscator {
     String line;
 
     try {
+      if (!isValidStrongName(strongName)) {
+        throw new IOException("Invalid permutation strong name: " + strongName);
+      }
       BufferedReader bin = new BufferedReader(
           new InputStreamReader(getSymbolMapInputStream(strongName)));
       try {

@@ -49,6 +49,7 @@ public class DOM {
       super(listener);
     }
 
+    @Override
     public void onPreviewNativeEvent(NativePreviewEvent event) {
       // The legacy EventHandler should only fire if it is on the top of the
       // stack (ie. the last one added).
@@ -830,7 +831,7 @@ public class DOM {
    * @param elem the element whose property is to be retrieved
    * @param prop the name of the property
    * @return the property's value
-   * @deprecated Use {@link Element#getProperty(String)} instead.
+   * @deprecated Use {@link Element#getPropertyString(String)} instead.
    */
   @Deprecated
   public static String getElementProperty(Element elem, String prop) {
@@ -984,7 +985,7 @@ public class DOM {
    * @param attr the name of the style attribute to be retrieved
    * @return the style attribute's value
    * @deprecated Use {@link Element#getStyle()} and
-   *             {@link Style#getProperty(String)} instead.
+   *             {@link com.google.gwt.dom.client.Style#getProperty(String)} instead.
    */
   @Deprecated
   public static String getStyleAttribute(Element elem, String attr) {
@@ -1081,7 +1082,7 @@ public class DOM {
    * @param parent the potential parent element
    * @param child the potential child element
    * @return <code>true</code> if the relationship holds
-   * @deprecated Use {@link Element#isOrHasChild(Element)} instead.
+   * @deprecated Use {@link Element#isOrHasChild(com.google.gwt.dom.client.Node)} instead.
    */
   @Deprecated
   public static boolean isOrHasChild(Element parent, Element child) {
@@ -1108,7 +1109,7 @@ public class DOM {
    * 
    * @param parent the parent element
    * @param child the child element to be removed
-   * @deprecated Use {@link Element#removeChild(Element)} instead.
+   * @deprecated Use {@link Element#removeChild(com.google.gwt.dom.client.Node)} instead.
    */
   @Deprecated
   public static void removeChild(Element parent, Element child) {
@@ -1344,7 +1345,7 @@ public class DOM {
    * @param attr the name of the style attribute to be set
    * @param value the style attribute's new value
    * @deprecated Use {@link Element#getStyle()} and
-   *             {@link Style#setProperty(String, String)} instead.
+   *             {@link com.google.gwt.dom.client.Style#setProperty(String, String)} instead.
    */
   @Deprecated
   public static void setStyleAttribute(Element elem, String attr, String value) {

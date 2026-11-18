@@ -37,22 +37,27 @@ public abstract class ButtonBase extends FocusWidget
     super(elem);
   }
 
+  @Override
   public String getHTML() {
     return getElement().getInnerHTML();
   }
 
+  @Override
   public String getText() {
     return getElement().getInnerText();
   }
 
+  @Override
   public void setHTML(@IsSafeHtml String html) {
     getElement().setInnerHTML(html);
   }
 
+  @Override
   public void setHTML(SafeHtml html) {
     setHTML(html.asString());
   }
 
+  @Override
   public void setText(String text) {
     getElement().setInnerText(text);
   }

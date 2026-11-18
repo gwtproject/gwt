@@ -117,6 +117,7 @@ public class GWTTestCaseTest extends GWTTestCaseTestBase {
   }
 
 
+  @SuppressWarnings("SelfAssertion")
   public void testAssertEqualsDouble() {
     assertEquals(0.0, 0.0, 0.0);
     assertEquals(1.1, 1.1, 0.0);
@@ -134,6 +135,7 @@ public class GWTTestCaseTest extends GWTTestCaseTestBase {
     assertNotEquals(-2.0, -1.0, 0.1);
   }
 
+  @SuppressWarnings("SelfAssertion")
   public void testAssertEqualsFloat() {
     assertEquals(0.0f, 0.0f, 0.0f);
     assertEquals(1.1f, 1.1f, 0.0f);
@@ -151,6 +153,7 @@ public class GWTTestCaseTest extends GWTTestCaseTestBase {
     assertNotEquals(-2.0f, -1.0f, 0.1f);
   }
 
+  @SuppressWarnings("SelfAssertion")
   public void testAssertEqualsIntInt() {
     assertEquals(5, 5);
     assertEquals("msg", 5, 5);
@@ -166,6 +169,7 @@ public class GWTTestCaseTest extends GWTTestCaseTestBase {
     assertEquals("msg", 5, 4);
   }
 
+  @SuppressWarnings("SelfAssertion")
   public void testAssertEqualsObjectObject() {
     assertEquals(obj1, obj1Equal);
     assertEquals("msg", obj1, obj1);

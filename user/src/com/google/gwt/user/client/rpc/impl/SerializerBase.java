@@ -85,6 +85,7 @@ public abstract class SerializerBase implements Serializer {
     this.signatureMapNative = signatureMapNative;
   }
 
+  @Override
   public final void deserialize(SerializationStreamReader stream,
       Object instance, String typeSignature) throws SerializationException {
     if (GWT.isScript()) {
@@ -96,6 +97,7 @@ public abstract class SerializerBase implements Serializer {
     }
   }
 
+  @Override
   public final String getSerializationSignature(Class<?> clazz) {
     assert clazz != null : "clazz";
     if (GWT.isScript()) {
@@ -105,6 +107,7 @@ public abstract class SerializerBase implements Serializer {
     }
   }
 
+  @Override
   public final Object instantiate(SerializationStreamReader stream,
       String typeSignature) throws SerializationException {
     if (GWT.isScript()) {
@@ -116,6 +119,7 @@ public abstract class SerializerBase implements Serializer {
     }
   }
 
+  @Override
   public final void serialize(SerializationStreamWriter stream,
       Object instance, String typeSignature) throws SerializationException {
     if (GWT.isScript()) {

@@ -123,6 +123,7 @@ public class HtmlInterpreter implements XMLElement.Interpreter<String> {
     pipe.add(messageInterpreter);
   }
 
+  @Override
   public String interpretElement(XMLElement elem) throws UnableToCompleteException {
     if (writer.useLazyWidgetBuilders() && writer.isElementAssignableTo(elem, SafeHtml.class)) {
       FieldWriter childField = writer.parseElementToField(elem);

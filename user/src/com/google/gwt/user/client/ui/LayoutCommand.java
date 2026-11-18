@@ -55,6 +55,7 @@ public class LayoutCommand implements ScheduledCommand {
     canceled = true;
   }
 
+  @Override
   public final void execute() {
     scheduled = false;
     if (canceled) {
@@ -64,6 +65,7 @@ public class LayoutCommand implements ScheduledCommand {
     doBeforeLayout();
 
     layout.layout(duration, new Layout.AnimationCallback() {
+      @Override
       public void onAnimationComplete() {
         // Chain to the passed callback.
         if (callback != null) {
@@ -71,6 +73,7 @@ public class LayoutCommand implements ScheduledCommand {
         }
       }
 
+      @Override
       public void onLayout(Layer layer, double progress) {
         // Inform the child associated with this layer that its size may
         // have changed.

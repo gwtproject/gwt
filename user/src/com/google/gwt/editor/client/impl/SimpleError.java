@@ -52,34 +52,42 @@ class SimpleError implements EditorError {
     this.userData = userData;
   }
 
+  @Override
   public String getAbsolutePath() {
     return absolutePath;
   }
 
+  @Override
   public Editor<?> getEditor() {
     return editor;
   }
 
+  @Override
   public String getMessage() {
     return message;
   }
 
+  @Override
   public String getPath() {
     return absolutePath.substring(pathPrefixLength);
   }
 
+  @Override
   public Object getUserData() {
     return userData;
   }
 
+  @Override
   public Object getValue() {
     return value;
   }
 
+  @Override
   public boolean isConsumed() {
     return consumed;
   }
 
+  @Override
   public void setConsumed(boolean consumed) {
     this.consumed = consumed;
   }

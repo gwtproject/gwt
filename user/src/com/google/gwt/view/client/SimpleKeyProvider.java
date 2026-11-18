@@ -25,6 +25,7 @@ public class SimpleKeyProvider<T> implements ProvidesKey<T> {
   /**
    * Return the passed-in item.
    */
+  @Override
   public Object getKey(T item) {
     return item;
   }

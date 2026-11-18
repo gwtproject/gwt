@@ -597,6 +597,7 @@ public class SingleJsoImplTest extends GWTTestCase {
       return function() { return 42; };
     }-*/;
 
+    @Override
     public native int call() /*-{
       return this();
     }-*/;
@@ -607,10 +608,10 @@ public class SingleJsoImplTest extends GWTTestCase {
     return "com.google.gwt.dev.jjs.CompilerSuite";
   }
 
-  /*
+  /**
    * These "testAssign*" tests below are inspired by the issue reported here:
    * 
-   * @see http://code.google.com/p/google-web-toolkit/issues/detail?id=6448
+   * @see <a href="https://github.com/gwtproject/gwt/issues/6447">#6447</a>
    */
   public void testAssignToDualJavaJsoImplInterfaceArray() {
     int i = 0;

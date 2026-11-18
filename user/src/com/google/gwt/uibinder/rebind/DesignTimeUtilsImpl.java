@@ -45,6 +45,7 @@ public class DesignTimeUtilsImpl implements DesignTimeUtils {
   private final Map<Element, String> elementPaths = new HashMap<Element, String>();
   private final Map<String, String> attributes = new HashMap<String, String>();
 
+  @Override
   public void addDeclarations(IndentedWriter w) {
     // handler
     w.write("public static interface DTObjectHandler {");
@@ -80,14 +81,17 @@ public class DesignTimeUtilsImpl implements DesignTimeUtils {
     w.write("}");
   }
 
+  @Override
   public String getImplName(String implName) {
     return implName + "_designTime" + System.currentTimeMillis();
   }
 
+  @Override
   public String getPath(Element element) {
     return elementPaths.get(element);
   }
 
+  @Override
   public String getProvidedFactory(String typeName, String methodName,
       String args) {
     return String.format(
@@ -95,16 +99,19 @@ public class DesignTimeUtilsImpl implements DesignTimeUtils {
         typeName, methodName, args);
   }
 
+  @Override
   public String getProvidedField(String typeName, String fieldName) {
     return String.format(
         "(%1$s) dtObjectHandler.provideField(%1s.class, \"%2$s\")", typeName,
         fieldName);
   }
 
+  @Override
   public String getTemplateContent(String path) {
     return System.getProperty("gwt.UiBinder.designTime " + path);
   }
 
+  @Override
   public void handleUIObject(Statements writer, XMLElement elem,
       String fieldName) {
     writer.addStatement(
@@ -112,16 +119,19 @@ public class DesignTimeUtilsImpl implements DesignTimeUtils {
         elem.getDesignTimePath(), fieldName);
   }
 
+  @Override
   public boolean isDesignTime() {
     return true;
   }
 
+  @Override
   public void putAttribute(XMLElement elem, String name, String value) {
     String path = elem.getDesignTimePath();
     String key = path + " " + name;
     attributes.put(key, value);
   }
 
+  @Override
   public void putAttribute(XMLElement elem, String name, String[] values) {
     if (values.length == 0) {
       return;
@@ -138,10 +148,12 @@ public class DesignTimeUtilsImpl implements DesignTimeUtils {
     putAttribute(elem, name, sb.toString());
   }
 
+  @Override
   public void rememberPathForElements(Document doc) {
     rememberPathForElements(doc.getDocumentElement(), "0");
   }
 
+  @Override
   public void writeAttributes(Statements writer) {
     for (Map.Entry<String, String> entry : attributes.entrySet()) {
       String key = entry.getKey();

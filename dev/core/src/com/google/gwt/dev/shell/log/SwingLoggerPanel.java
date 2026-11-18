@@ -386,14 +386,18 @@ public class SwingLoggerPanel extends JPanel implements TreeSelectionListener,
     root = new DefaultMutableTreeNode();
     treeModel = new DefaultTreeModel(root);
     treeModel.addTreeModelListener(new TreeModelListener() {
-      @Override public void treeNodesInserted(TreeModelEvent e) {
+      @Override
+      public void treeNodesInserted(TreeModelEvent e) {
         for (Object treeNode : e.getChildren()) {
           onTreeNodeAdded((DefaultMutableTreeNode) treeNode);
         }
       }
-      @Override public void treeStructureChanged(TreeModelEvent e) { }
-      @Override public void treeNodesRemoved(TreeModelEvent e) { }
-      @Override public void treeNodesChanged(TreeModelEvent e) { }
+      @Override
+      public void treeStructureChanged(TreeModelEvent e) { }
+      @Override
+      public void treeNodesRemoved(TreeModelEvent e) { }
+      @Override
+      public void treeNodesChanged(TreeModelEvent e) { }
     });
     tree = new JTree(treeModel);
     tree.setRootVisible(false);

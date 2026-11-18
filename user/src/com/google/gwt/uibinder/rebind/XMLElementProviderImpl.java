@@ -40,6 +40,7 @@ public class XMLElementProviderImpl implements XMLElementProvider {
     this.designTime = designTime;
   }
 
+  @Override
   public XMLElement get(Element e) {
     return new XMLElement(e, attributeParsers, oracle, logger, designTime,
         this);

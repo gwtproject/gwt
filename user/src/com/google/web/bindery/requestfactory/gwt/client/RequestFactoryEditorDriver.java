@@ -76,6 +76,7 @@ public interface RequestFactoryEditorDriver<P, E extends Editor<? super P>> exte
    * @throws IllegalStateException if {@link #edit(Object, RequestContext)} has
    *           not been called
    */
+  @Override
   RequestContext flush();
 
   /**

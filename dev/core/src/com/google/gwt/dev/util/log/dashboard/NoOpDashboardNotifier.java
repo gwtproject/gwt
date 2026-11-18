@@ -21,6 +21,7 @@ import com.google.gwt.dev.shell.DevModeSession;
  * Implements the {@code DashboardNotifier} interface but does not actually
  * do anything.
  */
+@Deprecated
 public class NoOpDashboardNotifier implements DashboardNotifier {
 
   @Override
@@ -29,7 +30,7 @@ public class NoOpDashboardNotifier implements DashboardNotifier {
   }
 
   @Override
-  public void devModeEventEnd(DevModeSession sesion, String eventType, long startTimeNanos,
+  public void devModeEventEnd(DevModeSession session, String eventType, long startTimeNanos,
       long durationNanos) {
     // do nothing
   }

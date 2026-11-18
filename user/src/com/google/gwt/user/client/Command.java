@@ -51,5 +51,6 @@ public interface Command extends Scheduler.ScheduledCommand {
   /**
    * Causes the Command to perform its encapsulated behavior.
    */
+  @Override
   void execute();
 }

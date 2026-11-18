@@ -40,33 +40,41 @@ public abstract class LoggingCodeGenContext implements CodeGenContext {
     this.logger = logger;
   }
 
+  @Override
   public JavaSourceWriterBuilder addClass(String pkgName, String className) {
     return addClass(null, pkgName, className);
   }
 
+  @Override
   public abstract JavaSourceWriterBuilder addClass(String superPkg, String pkgName,
       String className);
 
+  @Override
   public void error(String msg) {
     logger.log(Level.SEVERE, msg);
   }
 
+  @Override
   public void error(String msg, Throwable cause) {
     logger.log(Level.SEVERE, msg, cause);
   }
 
+  @Override
   public void error(Throwable cause) {
     logger.log(Level.SEVERE, cause.getMessage(), cause);
   }
 
+  @Override
   public void warn(String msg) {
     logger.log(Level.WARNING, msg);
   }
 
+  @Override
   public void warn(String msg, Throwable cause) {
     logger.log(Level.WARNING, msg);
   }
 
+  @Override
   public void warn(Throwable cause) {
     logger.log(Level.WARNING, cause.getMessage(), cause);
   }

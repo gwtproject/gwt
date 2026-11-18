@@ -28,7 +28,7 @@ import java.util.Locale;
 /**
  * Miscellaneous tests of the Java to JavaScript compiler.
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "DuplicateBranches"})
 public class CompilerTest extends GWTTestCase {
   interface MyMap {
     Object get(String key);
@@ -333,11 +333,6 @@ public class CompilerTest extends GWTTestCase {
   }
 
   public void testArrayAccessSideEffect() {
-    if (System.getProperty("user.agent", "safari").equals("gecko1_8")) {
-      // Firefox bug: https://bugzilla.mozilla.org/show_bug.cgi?id=1259605
-      return;
-    }
-
     int index = 1;
     int[] array = null;
     try {

@@ -154,7 +154,7 @@ public final class Math {
     return (int) floorMod(dividend, (long) divisor);
   }
 
-  @SuppressWarnings("CheckStyle.MethodName")
+  @SuppressWarnings("checkstyle:MethodName")
   public static double IEEEremainder(double v, double m) {
     double ratio = v / m;
     double closest = Math.ceil(ratio);

@@ -124,6 +124,7 @@ public final class DefaultMonthSelector extends MonthSelector {
     PushButton button = new PushButton();
 
     button.addClickHandler(new ClickHandler() {
+      @Override
       public void onClick(ClickEvent event) {
         addMonths(noOfMonths);
       }

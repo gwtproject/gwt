@@ -75,10 +75,12 @@ public class OptionalFieldEditor<T, E extends Editor<? super T>> implements
    *
    * @return an {@link Editor} of type E
    */
+  @Override
   public E createEditorForTraversal() {
     return subEditor;
   }
 
+  @Override
   public void flush() {
     currentValue = chain.getValue(subEditor);
   }
@@ -86,24 +88,30 @@ public class OptionalFieldEditor<T, E extends Editor<? super T>> implements
   /**
    * Returns an empty string because there is only ever one sub-editor used.
    */
+  @Override
   public String getPathElement(E subEditor) {
     return "";
   }
 
+  @Override
   public T getValue() {
     return currentValue;
   }
 
+  @Override
   public void onPropertyChange(String... paths) {
   }
 
+  @Override
   public void setDelegate(EditorDelegate<T> delegate) {
   }
 
+  @Override
   public void setEditorChain(EditorChain<T, E> chain) {
     this.chain = chain;
   }
 
+  @Override
   public void setValue(T value) {
     if (currentValue != null && value == null) {
       chain.detach(subEditor);

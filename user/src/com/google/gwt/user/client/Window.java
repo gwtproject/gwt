@@ -490,10 +490,12 @@ public class Window {
       super(null);
     }
 
+    @Override
     public HandlerRegistration addCloseHandler(CloseHandler<Window> handler) {
       return addHandler(CloseEvent.getType(), handler);
     }
 
+    @Override
     public HandlerRegistration addResizeHandler(ResizeHandler handler) {
       return addHandler(ResizeEvent.getType(), handler);
     }

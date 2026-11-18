@@ -32,9 +32,6 @@ import com.google.gwt.dev.jjs.ast.JUnaryOperation;
 import com.google.gwt.dev.jjs.ast.JUnaryOperator;
 import com.google.gwt.dev.jjs.ast.RuntimeConstants;
 import com.google.gwt.dev.jjs.ast.js.JDebuggerStatement;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 
 /**
  * Replaces all assertion statements in the AST with if statements.
@@ -51,6 +48,8 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
  * If the assertion has a message, it will be passed in the call to the Exceptions method.
  */
 public class AssertionNormalizer {
+
+  public static final String NAME = AssertionNormalizer.class.getSimpleName();
 
   /**
    * Normalizes all asserts.
@@ -81,10 +80,7 @@ public class AssertionNormalizer {
   }
 
   public static void exec(JProgram program) {
-    Event assertionNormalizerEvent =
-        SpeedTracerLogger.start(CompilerEventType.ASSERTION_NORMALIZER);
     new AssertionNormalizer(program).execImpl();
-    assertionNormalizerEvent.end();
   }
 
   private static String getAssertMethodSuffix(JExpression arg) {
@@ -107,7 +103,10 @@ public class AssertionNormalizer {
   }
 
   private void execImpl() {
-    AssertNormalizeVisitor assertNormalizer = new AssertNormalizeVisitor();
-    assertNormalizer.accept(program);
+    try (OptimizerStats stats = OptimizerStats.normalizer(NAME)) {
+      AssertNormalizeVisitor assertNormalizer = new AssertNormalizeVisitor();
+      assertNormalizer.accept(program);
+      stats.recordModified(assertNormalizer.getNumMods());
+    }
   }
 }

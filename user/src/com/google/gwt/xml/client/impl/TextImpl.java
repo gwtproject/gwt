@@ -33,6 +33,7 @@ class TextImpl extends CharacterDataImpl implements Text {
    * This function delegates to the native method <code>splitText</code> in
    * XMLParserImpl.
    */
+  @Override
   public Text splitText(int offset) {
     try {
       return (Text) NodeImpl.build(XMLParserImpl.splitText(this.getJsObject(),

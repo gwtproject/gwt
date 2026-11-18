@@ -61,6 +61,7 @@ public class ImageResourcePrototype implements ImageResource {
   /**
    * Exists for testing purposes, not part of the ImageResource interface.
    */
+  @Override
   public int getHeight() {
     return height;
   }
@@ -68,18 +69,22 @@ public class ImageResourcePrototype implements ImageResource {
   /**
    * Exists for testing purposes, not part of the ImageResource interface.
    */
+  @Override
   public int getLeft() {
     return left;
   }
 
+  @Override
   public String getName() {
     return name;
   }
 
+  @Override
   public SafeUri getSafeUri() {
     return url;
   }
 
+  @Override
   public int getTop() {
     return top;
   }
@@ -91,10 +96,12 @@ public class ImageResourcePrototype implements ImageResource {
   /**
    * Exists for testing purposes, not part of the ImageResource interface.
    */
+  @Override
   public int getWidth() {
     return width;
   }
 
+  @Override
   public boolean isAnimated() {
     return animated;
   }

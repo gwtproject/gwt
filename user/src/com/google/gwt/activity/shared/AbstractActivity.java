@@ -21,13 +21,16 @@ package com.google.gwt.activity.shared;
  */
 public abstract class AbstractActivity implements Activity {
 
+  @Override
   public String mayStop() {
     return null;
   }
 
+  @Override
   public void onCancel() {
   }
 
+  @Override
   public void onStop() {
   }
 }

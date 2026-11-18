@@ -45,6 +45,7 @@ public class ActivityManager implements PlaceChangeEvent.Handler, PlaceChangeReq
       this.activity = activity;
     }
 
+    @Override
     public void setWidget(IsWidget view) {
       if (this.activity == ActivityManager.this.currentActivity) {
         startingNext = false;
@@ -54,6 +55,7 @@ public class ActivityManager implements PlaceChangeEvent.Handler, PlaceChangeReq
   }
 
   private static final Activity NULL_ACTIVITY = new AbstractActivity() {
+    @Override
     public void start(AcceptsOneWidget panel, com.google.gwt.event.shared.EventBus eventBus) {
     }
   };
@@ -112,6 +114,7 @@ public class ActivityManager implements PlaceChangeEvent.Handler, PlaceChangeReq
    * this by providing a widget immediately, with some kind of "loading"
    * treatment.
    */
+  @Override
   public void onPlaceChange(PlaceChangeEvent event) {
     Activity nextActivity = getNextActivity(event);
 
@@ -174,6 +177,7 @@ public class ActivityManager implements PlaceChangeEvent.Handler, PlaceChangeReq
    * 
    * @see com.google.gwt.place.shared.PlaceChangeRequestEvent.Handler#onPlaceChangeRequest(PlaceChangeRequestEvent)
    */
+  @Override
   public void onPlaceChangeRequest(PlaceChangeRequestEvent event) {
     event.setWarning(currentActivity.mayStop());
   }
@@ -257,6 +261,7 @@ public class ActivityManager implements PlaceChangeEvent.Handler, PlaceChangeReq
           eventBus.addHandler(PlaceChangeRequestEvent.TYPE, this);
 
       this.handlerRegistration = new HandlerRegistration() {
+        @Override
         public void removeHandler() {
           placeReg.removeHandler();
           placeRequestReg.removeHandler();

@@ -36,10 +36,12 @@ public class DefaultMomentum implements Momentum {
    */
   private static final double MIN_DECELERATION = 0.0005;
 
+  @Override
   public State createState(Point initialPosition, Point initialVelocity) {
     return new State(initialPosition, initialVelocity);
   }
 
+  @Override
   public boolean updateState(State state) {
     // Calculate the new velocity.
     int ellapsedMillis = state.getElapsedMillis();

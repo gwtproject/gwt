@@ -33,6 +33,7 @@ public class ThrowableTest extends ThrowableTestBase {
     assertTrue(e.getStackTrace().length > 0);
 
     e = new Throwable("<my msg>") {
+      @Override
       public Throwable fillInStackTrace() {
         // Replace fill in stack trace with no-op.
         return this;
@@ -83,6 +84,7 @@ public class ThrowableTest extends ThrowableTestBase {
       return;
     }
     Throwable e = new Throwable("<my msg>") {
+      @Override
       public Throwable fillInStackTrace() {
         // Replace fill in stack trace with no-op.
         return this;

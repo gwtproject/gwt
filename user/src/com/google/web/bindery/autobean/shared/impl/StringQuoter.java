@@ -30,12 +30,20 @@ import java.util.Locale;
  */
 public class StringQuoter {
   private static final String ISO8601_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSz";
-  private static final DateFormat ISO8601 = new SimpleDateFormat(ISO8601_PATTERN, Locale
-      .getDefault());
+  private static final ThreadLocal<DateFormat> ISO8601 = new ThreadLocal<DateFormat>() {
+    @Override
+    protected DateFormat initialValue() {
+      return new SimpleDateFormat(ISO8601_PATTERN, Locale.getDefault());
+    }
+  };
 
   private static final String RFC2822_PATTERN = "EEE, d MMM yyyy HH:mm:ss Z";
-  private static final DateFormat RFC2822 = new SimpleDateFormat(RFC2822_PATTERN, Locale
-      .getDefault());
+  private static final ThreadLocal<DateFormat> RFC2822 = new ThreadLocal<DateFormat>() {
+    @Override
+    protected DateFormat initialValue() {
+      return new SimpleDateFormat(RFC2822_PATTERN, Locale.getDefault());
+    }
+  };
 
   public static Splittable create(boolean value) {
     return JsonSplittable.create(String.valueOf(value));
@@ -85,11 +93,11 @@ public class StringQuoter {
       date = date.substring(0, date.length() - 1) + "+0000";
     }
     try {
-      return ISO8601.parse(date);
+      return ISO8601.get().parse(date);
     } catch (ParseException ignored) {
     }
     try {
-      return RFC2822.parse(date);
+      return RFC2822.get().parse(date);
     } catch (ParseException ignored) {
     }
     return null;

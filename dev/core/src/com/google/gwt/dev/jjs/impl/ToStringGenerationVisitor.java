@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
+import com.google.gwt.dev.jjs.ast.AccessModifier;
 import com.google.gwt.dev.jjs.ast.CanBeAbstract;
 import com.google.gwt.dev.jjs.ast.CanBeFinal;
 import com.google.gwt.dev.jjs.ast.CanBeStatic;
@@ -34,6 +35,7 @@ import com.google.gwt.dev.jjs.ast.JCastMap;
 import com.google.gwt.dev.jjs.ast.JCastOperation;
 import com.google.gwt.dev.jjs.ast.JCharLiteral;
 import com.google.gwt.dev.jjs.ast.JClassLiteral;
+import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConditional;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JContinueStatement;
@@ -81,6 +83,7 @@ import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JThrowStatement;
 import com.google.gwt.dev.jjs.ast.JTryStatement;
 import com.google.gwt.dev.jjs.ast.JType;
+import com.google.gwt.dev.jjs.ast.JUnsafeTypeCoercion;
 import com.google.gwt.dev.jjs.ast.JWhileStatement;
 import com.google.gwt.dev.jjs.ast.JYieldStatement;
 import com.google.gwt.dev.jjs.ast.js.JDebuggerStatement;
@@ -114,6 +117,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   protected static final char[] CHARS_DO = "do".toCharArray();
   protected static final char[] CHARS_DOTCLASS = ".class".toCharArray();
   protected static final char[] CHARS_ELSE = "else".toCharArray();
+  protected static final char[] CHARS_ENUM = "enum ".toCharArray();
   protected static final char[] CHARS_EXTENDS = "extends ".toCharArray();
   protected static final char[] CHARS_FALSE = "false".toCharArray();
   protected static final char[] CHARS_FINAL = "final ".toCharArray();
@@ -131,6 +135,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   protected static final char[] CHARS_PRIVATE = "private ".toCharArray();
   protected static final char[] CHARS_PROTECTED = "protected ".toCharArray();
   protected static final char[] CHARS_PUBLIC = "public ".toCharArray();
+  protected static final char[] CHARS_RECORD = "record ".toCharArray();
   protected static final char[] CHARS_RETURN = "return".toCharArray();
   protected static final char[] CHARS_RUNTIMETYPEREFERENCE =
       " JRuntimeTypeReference ".toCharArray();
@@ -141,14 +146,14 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   protected static final char[] CHARS_SWITCH = "switch ".toCharArray();
   protected static final char[] CHARS_THIS = "this".toCharArray();
   protected static final char[] CHARS_THROW = "throw".toCharArray();
+  protected static final char[] CHARS_THROWS = "throws ".toCharArray();
   protected static final char[] CHARS_TRUE = "true".toCharArray();
   protected static final char[] CHARS_TRY = "try ".toCharArray();
+  protected static final char[] CHARS_UNCHECKED_CAST = "(/* @unchecked cast to ".toCharArray();
   protected static final char[] CHARS_WHILE = "while ".toCharArray();
   protected static final char[] CHARS_YIELD = "yield ".toCharArray();
 
   private boolean needSemi = true;
-
-  private boolean suppressType = false;
 
   public ToStringGenerationVisitor(TextOutput textOutput) {
     super(textOutput);
@@ -284,6 +289,17 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   }
 
   @Override
+  public boolean visit(JUnsafeTypeCoercion x, Context ctx) {
+    lparen();
+    print(CHARS_UNCHECKED_CAST);
+    printType(x);
+    space();
+    accept(x.getExpression());
+    rparen();
+    return false;
+  }
+
+  @Override
   public boolean visit(JCastMap x, Context ctx) {
     print('[');
     visitCollectionWithCommas(x.getCanCastToTypes().iterator());
@@ -363,11 +379,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   @Override
   public boolean visit(JConstructor x, Context ctx) {
     // Modifiers
-    if (x.isPrivate()) {
-      print(CHARS_PRIVATE);
-    } else {
-      print(CHARS_PUBLIC);
-    }
+    printAccess(x.getAccess());
     printName(x);
 
     // Parameters
@@ -401,11 +413,12 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
 
   @Override
   public boolean visit(JDeclarationStatement x, Context ctx) {
-    if (!suppressType) {
-      accept(x.getVariableRef().getTarget());
-    } else {
-      accept(x.getVariableRef());
+    if (!(x.getVariableRef().getTarget() instanceof JField)) {
+      printFinalFlag(x.getVariableRef().getTarget());
+      printType(x.getVariableRef().getTarget());
+      space();
     }
+    printName(x.getVariableRef().getTarget());
     JExpression initializer = x.getInitializer();
     if (initializer != null) {
       print(" = ");
@@ -490,13 +503,11 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
       JStatement stmt = iter.next();
       accept(stmt);
     }
-    suppressType = true;
     while (iter.hasNext()) {
       print(CHARS_COMMA);
       JStatement stmt = iter.next();
       accept(stmt);
     }
-    suppressType = false;
 
     semi();
     space();
@@ -1024,7 +1035,9 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
         print("\\\\");
         break;
       default:
-        if (Character.isISOControl(c)) {
+        if (' ' <= c && c <= '~') {
+          print(c);
+        } else {
           print("\\u");
           if (c < 0x1000) {
             print('0');
@@ -1038,8 +1051,6 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
             print('0');
           }
           print(Integer.toHexString(c));
-        } else {
-          print(c);
         }
     }
   }
@@ -1067,7 +1078,31 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
 
   protected void printMethodHeader(JMethod x) {
     // Modifiers
-    switch (x.getAccess()) {
+    printAccess(x.getAccess());
+    printStaticFlag(x);
+    printAbstractFlag(x);
+    printNativeFlag(x);
+    printFinalFlag(x);
+    printType(x);
+    space();
+    printName(x);
+
+    // Parameters
+    printParameterList(x);
+
+    // Declared exceptions
+    if (!x.getThrownExceptions().isEmpty()) {
+      space();
+      print(CHARS_THROWS);
+      for (JClassType thrownException : x.getThrownExceptions()) {
+        printTypeName(thrownException);
+        space();
+      }
+    }
+  }
+
+  private void printAccess(AccessModifier access) {
+    switch (access) {
       case PUBLIC:
         print(CHARS_PUBLIC);
         break;
@@ -1080,16 +1115,6 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
       case DEFAULT:
         break;
     }
-    printStaticFlag(x);
-    printAbstractFlag(x);
-    printNativeFlag(x);
-    printFinalFlag(x);
-    printType(x);
-    space();
-    printName(x);
-
-    // Parameters
-    printParameterList(x);
   }
 
   protected void printName(HasName x) {
@@ -1097,7 +1122,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   }
 
   protected void printNativeFlag(JMethod x) {
-    if (x.isJsniMethod()) {
+    if (x.isJsniMethod() || x.isJsNative()) {
       print(CHARS_NATIVE);
     }
   }

@@ -37,6 +37,7 @@ public interface HasValue<T> extends TakesValue<T>, HasValueChangeHandlers<T> {
    *
    * @return the object's value
    */
+  @Override
   T getValue();
 
   /**
@@ -53,6 +54,7 @@ public interface HasValue<T> extends TakesValue<T>, HasValueChangeHandlers<T> {
    *
    * @param value the object's new value
    */
+  @Override
   void setValue(T value);
 
   /**

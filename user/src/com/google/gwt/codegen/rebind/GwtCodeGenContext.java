@@ -43,10 +43,12 @@ public class GwtCodeGenContext implements CodeGenContext {
     this.ctx = ctx;
   }
 
+  @Override
   public JavaSourceWriterBuilder addClass(String pkgName, String className) {
     return addClass(null, pkgName, className);
   }
 
+  @Override
   public JavaSourceWriterBuilder addClass(String superPath, String pkgName, String className) {
     String superPkg = superPath == null ? pkgName : superPath + "." + pkgName;
     final PrintWriter pw = ctx.tryCreate(logger, superPkg, className);
@@ -63,26 +65,32 @@ public class GwtCodeGenContext implements CodeGenContext {
     }, pkgName, className);
   }
 
+  @Override
   public void error(String msg) {
     logger.log(TreeLogger.ERROR, msg);
   }
 
+  @Override
   public void error(String msg, Throwable cause) {
     logger.log(TreeLogger.ERROR, msg, cause);
   }
 
+  @Override
   public void error(Throwable cause) {
     logger.log(TreeLogger.ERROR, cause.getMessage(), cause);
   }
 
+  @Override
   public void warn(String msg) {
     logger.log(TreeLogger.WARN, msg);
   }
 
+  @Override
   public void warn(String msg, Throwable cause) {
     logger.log(TreeLogger.WARN, msg, cause);
   }
 
+  @Override
   public void warn(Throwable cause) {
     logger.log(TreeLogger.WARN, cause.getMessage(), cause);
   }

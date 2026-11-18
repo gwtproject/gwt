@@ -28,15 +28,18 @@ import com.google.gwt.editor.client.SimpleBeanEditorDriver;
 public abstract class AbstractSimpleBeanEditorDriver<T, E extends Editor<T>>
     extends BaseEditorDriver<T, E> implements SimpleBeanEditorDriver<T, E> {
 
+  @Override
   public void edit(T object) {
     doEdit(object);
   }
 
+  @Override
   public T flush() {
     doFlush();
     return getObject();
   }
 
+  @Override
   public void initialize(E editor) {
     doInitialize(editor);
   }

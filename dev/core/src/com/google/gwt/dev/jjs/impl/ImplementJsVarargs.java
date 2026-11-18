@@ -261,6 +261,7 @@ public class ImplementJsVarargs {
       return expression;
     }
 
+    @Override
     JExpression replace(JArrayRef expression) {
       SourceInfo sourceInfo = expression.getSourceInfo();
       return new JArrayRef(expression.getSourceInfo(),
@@ -269,6 +270,7 @@ public class ImplementJsVarargs {
               expression.getIndexExpr(), new JIntLiteral(sourceInfo, varargsIndex)));
     }
 
+    @Override
     JExpression replace(JArrayLength expression) {
       SourceInfo sourceInfo = expression.getSourceInfo();
       return new JBinaryOperation(sourceInfo, JPrimitiveType.INT, JBinaryOperator.SUB,

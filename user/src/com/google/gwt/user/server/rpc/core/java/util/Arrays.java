@@ -45,8 +45,13 @@ public final class Arrays {
     public static List<?> instantiate(ServerSerializationStreamReader streamReader,
         Type[] expectedParameterTypes, DequeMap<TypeVariable<?>, Type> resolvedTypes)
         throws SerializationException {
-      return com.google.gwt.user.client.rpc.core.java.util.Arrays.ArrayList_CustomFieldSerializer
-            .instantiate(streamReader);
+      int size = streamReader.readInt();
+      Object[] array = new Object[size];
+      for (int i = 0; i < size; ++i) {
+        Object obj = streamReader.readObject(expectedParameterTypes[0], resolvedTypes);
+        array[i] = obj;
+      }
+      return java.util.Arrays.asList(array);
     }
 
     @Override

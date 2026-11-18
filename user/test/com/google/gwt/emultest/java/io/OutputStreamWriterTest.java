@@ -88,6 +88,14 @@ public class OutputStreamWriterTest extends GWTTestCase {
             new String(ASCII_CHAR_ARRAY).getBytes(StandardCharsets.UTF_8), baos.toByteArray()));
   }
 
+  public void testWriteArrayWithOffset() throws IOException {
+    OutputStreamWriter latin1Writer = new OutputStreamWriter(baos, StandardCharsets.ISO_8859_1);
+    char[] chars = {'a', 'b', 'c', 'd'};
+    latin1Writer.write(chars, 1, 2);
+    latin1Writer.close();
+    assertTrue(Arrays.equals(new byte[] {'b', 'c'}, baos.toByteArray()));
+  }
+
   public void testWriteArrayUsingNullArray() throws IOException {
     final char[] b = null;
     try {

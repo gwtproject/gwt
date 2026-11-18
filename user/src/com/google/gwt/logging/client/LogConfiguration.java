@@ -40,12 +40,15 @@ public class LogConfiguration implements EntryPoint {
    * Implementation which does nothing and compiles out if logging is disabled.
    */
   private static class LogConfigurationImplNull implements LogConfigurationImpl {
+    @Override
     public void configureClientSideLogging() { }
 
+    @Override
     public boolean loggingIsEnabled() {
       return false;
     }
 
+    @Override
     public boolean loggingIsEnabled(Level level) {
       return false;
     }
@@ -61,6 +64,7 @@ public class LogConfiguration implements EntryPoint {
     // weak references to the loggers that are created.
     private Logger root;
 
+    @Override
     public void configureClientSideLogging() {
       assert GWT.isClient();
 
@@ -73,6 +77,7 @@ public class LogConfiguration implements EntryPoint {
       setDefaultHandlers(root);
     }
 
+    @Override
     public boolean loggingIsEnabled() {
       return true;
     }
@@ -80,6 +85,7 @@ public class LogConfiguration implements EntryPoint {
     /**
      * Returns whether logging enabled for the passed in level.
      */
+    @Override
     public boolean loggingIsEnabled(Level level) {
       return true;
     }
@@ -158,6 +164,7 @@ public class LogConfiguration implements EntryPoint {
     return impl.loggingIsEnabled(level);
   }
 
+  @Override
   public void onModuleLoad() {
     impl.configureClientSideLogging();
 
@@ -165,6 +172,7 @@ public class LogConfiguration implements EntryPoint {
       if (GWT.getUncaughtExceptionHandler() == null) {
         final Logger log = Logger.getLogger(LogConfiguration.class.getName());
         GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+          @Override
           public void onUncaughtException(Throwable e) {
             log.log(Level.SEVERE, e.getMessage(), e);
           }

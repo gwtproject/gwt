@@ -90,6 +90,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeMap;
@@ -931,7 +932,7 @@ public class CssResourceGenerator extends AbstractCssResourceGenerator
      * be be worth the effort to simplify this.
      */
 
-    if (context.getCachedData(KEY_HAS_CACHED_DATA, Boolean.class) != Boolean.TRUE) {
+    if (!Objects.equals(context.getCachedData(KEY_HAS_CACHED_DATA, Boolean.class), Boolean.TRUE)) {
 
       ConfigurationProperty prop;
       TreeSet<String> reservedPrefixes = new TreeSet<String>();

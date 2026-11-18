@@ -35,7 +35,7 @@ public interface HasCell<T, C> {
   /**
    * Returns the {@link FieldUpdater} instance.
    * 
-   * @return an instance of FieldUpdater<T, C>
+   * @return an instance of {@code FieldUpdater<T,C>}
    */
   FieldUpdater<T, C> getFieldUpdater();
 

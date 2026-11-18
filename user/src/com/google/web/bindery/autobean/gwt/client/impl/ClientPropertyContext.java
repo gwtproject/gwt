@@ -91,14 +91,17 @@ public final class ClientPropertyContext implements PropertyContext, CollectionP
     }
   }
 
+  @Override
   public void accept(ParameterizationVisitor visitor) {
     traverse(visitor, 0);
   }
 
+  @Override
   public boolean canSet() {
     return setter != null;
   }
 
+  @Override
   public Class<?> getElementType() {
     if (paramTypes == null || paramTypes.length < 2) {
       return null;
@@ -109,6 +112,7 @@ public final class ClientPropertyContext implements PropertyContext, CollectionP
     return null;
   }
 
+  @Override
   public Class<?> getKeyType() {
     if (paramTypes == null || paramTypes.length < 3) {
       return null;
@@ -119,10 +123,12 @@ public final class ClientPropertyContext implements PropertyContext, CollectionP
     return null;
   }
 
+  @Override
   public Class<?> getType() {
     return simpleType == null ? paramTypes[0] : simpleType;
   }
 
+  @Override
   public Class<?> getValueType() {
     if (paramTypes == null || paramTypes.length < 3) {
       return null;
@@ -133,6 +139,7 @@ public final class ClientPropertyContext implements PropertyContext, CollectionP
     return null;
   }
 
+  @Override
   public void set(Object value) {
     setter.call(instance, value);
   }

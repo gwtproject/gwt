@@ -34,6 +34,6 @@ public class DoubleStreamTest extends EmulTestBase {
     assertEquals(new double[]{1.0, 2.0, 3.0, 6.0},
         DoubleStream.of(1.0, 3.0).mapMulti(doubling).toArray());
     assertEquals(new double[0],
-        DoubleStream.of(1.0, 2.0).mapMulti((a, b) -> {}).toArray());
+        DoubleStream.of(1.0, 2.0).mapMulti((a, b) -> { }).toArray());
   }
 }

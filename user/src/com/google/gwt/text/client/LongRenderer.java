@@ -38,6 +38,7 @@ public class LongRenderer extends AbstractRenderer<Long> {
   protected LongRenderer() {
   }
 
+  @Override
   public String render(Long object) {
     if (object == null) {
       return "";

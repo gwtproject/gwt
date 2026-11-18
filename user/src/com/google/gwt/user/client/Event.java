@@ -145,6 +145,7 @@ public class Event extends NativeEvent {
       return TYPE;
     }
 
+    @Override
     public NativeEvent getNativeEvent() {
       return nativeEvent;
     }

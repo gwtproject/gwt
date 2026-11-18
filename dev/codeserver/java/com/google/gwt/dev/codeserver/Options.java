@@ -79,7 +79,6 @@ public class Options {
   private String preferredHost = ArgHandlerBindAddress.DEFAULT_BIND_ADDRESS;
   private int port = 9876;
 
-  private RecompileListener recompileListener = RecompileListener.NONE;
   private JobChangeListener jobChangeListener = JobChangeListener.NONE;
 
   private TreeLogger.Type logLevel = TreeLogger.Type.INFO;
@@ -174,24 +173,7 @@ public class Options {
 
   /**
    * A Java application that embeds Super Dev Mode can use this hook to find out
-   * when compiles start and end.
-   *
-   * @deprecated replaced by {@link #setJobChangeListener}
-   */
-  @Deprecated
-  public void setRecompileListener(RecompileListener listener) {
-    this.recompileListener = listener == null ? RecompileListener.NONE : listener;
-  }
-
-  RecompileListener getRecompileListener() {
-    return recompileListener;
-  }
-
-  /**
-   * A Java application that embeds Super Dev Mode can use this hook to find out
    * when compile jobs change state.
-   *
-   * <p>Replaces {@link #setRecompileListener}
    */
   public void setJobChangeListener(JobChangeListener listener) {
     this.jobChangeListener = listener == null ? JobChangeListener.NONE : listener;

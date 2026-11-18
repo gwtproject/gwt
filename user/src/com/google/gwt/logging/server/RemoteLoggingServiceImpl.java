@@ -40,6 +40,7 @@ public class RemoteLoggingServiceImpl extends RemoteServiceServlet implements Re
    * Logs a Log Record which has been serialized using GWT RPC on the server.
    * @return either an error message, or null if logging is successful.
    */
+  @Override
   public final String logOnServer(LogRecord lr) {
     String strongName = getPermutationStrongName();
     try {

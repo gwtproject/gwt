@@ -66,10 +66,12 @@ public class JsPropertyTest extends GWTTestCase {
       implements MyJsTypeInterfaceWithProperty {
     private int x;
 
+    @Override
     public int getX() {
       return x + GET_X;
     }
 
+    @Override
     public void setX(int x) {
       this.x = x + SET_X;
     }
@@ -311,10 +313,12 @@ public class JsPropertyTest extends GWTTestCase {
       extends MyNativeJsTypeInterfaceImplNeedingBridgeSubclassed {
     private int y;
 
+    @Override
     public int getX() {
       return y + GET_X;
     }
 
+    @Override
     public void setX(int y) {
       this.y = y + SET_X;
     }

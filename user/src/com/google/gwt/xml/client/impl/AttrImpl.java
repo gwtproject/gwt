@@ -30,6 +30,7 @@ class AttrImpl extends NodeImpl implements Attr {
    * This function delegates to the native method <code>getName</code> in
    * XMLParserImpl.
    */
+  @Override
   public String getName() {
     return XMLParserImpl.getName(this.getJsObject());
   }
@@ -38,6 +39,7 @@ class AttrImpl extends NodeImpl implements Attr {
    * This function delegates to the native method <code>getSpecified</code> in
    * XMLParserImpl.
    */
+  @Override
   public boolean getSpecified() {
     return XMLParserImpl.getSpecified(this.getJsObject());
   }
@@ -46,6 +48,7 @@ class AttrImpl extends NodeImpl implements Attr {
    * This function delegates to the native method <code>getValue</code> in
    * XMLParserImpl.
    */
+  @Override
   public String getValue() {
     return XMLParserImpl.getValue(this.getJsObject());
   }

@@ -181,12 +181,14 @@ public class ResizeLayoutPanel extends SimplePanel implements ProvidesResize,
        * the offsetHeight/Width correctly.
        */
       Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+        @Override
         public void execute() {
           resetScrollables();
         }
       });
     }
 
+    @Override
     public void onBrowserEvent(Event event) {
       if (!resettingScrollables && Event.ONSCROLL == event.getTypeInt()) {
         EventTarget eventTarget = event.getEventTarget();
@@ -263,6 +265,7 @@ public class ResizeLayoutPanel extends SimplePanel implements ProvidesResize,
   /**
    * Implementation of resize event used by IE.
    */
+  @Deprecated
   static class ImplTrident extends Impl {
 
     @Override
@@ -310,6 +313,7 @@ public class ResizeLayoutPanel extends SimplePanel implements ProvidesResize,
   private Layer layer;
   private final Layout layout;
   private final ScheduledCommand resizeCmd = new ScheduledCommand() {
+    @Override
     public void execute() {
       resizeCmdScheduled = false;
       handleResize();
@@ -320,12 +324,14 @@ public class ResizeLayoutPanel extends SimplePanel implements ProvidesResize,
   public ResizeLayoutPanel() {
     layout = new Layout(getElement());
     impl.init(getElement(), new Delegate() {
+      @Override
       public void onResize() {
         scheduleResize();
       }
     });
   }
 
+  @Override
   public HandlerRegistration addResizeHandler(ResizeHandler handler) {
     return addHandler(handler, ResizeEvent.getType());
   }

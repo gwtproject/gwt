@@ -50,11 +50,11 @@ public class JavaToJavaScriptMapImpl implements JavaToJavaScriptMap {
     // Generate reverse indexes for names.
     Map<JsName, JMethod> methodsByJsName = Maps.newHashMap();
     Map<JsName, JField> staticFieldsByJsName = Maps.newHashMap();
-    Map<JsName, JClassType> typesByContructorJsName = Maps.newHashMap();
+    Map<JsName, JClassType> typesByConstructorJsName = Maps.newHashMap();
     for (JDeclaredType type : types) {
       JsName typeName = names.get(type);
       if (type instanceof JClassType && typeName != null) {
-        typesByContructorJsName.put(typeName, (JClassType) type);
+        typesByConstructorJsName.put(typeName, (JClassType) type);
       }
       for (JField field : type.getFields()) {
         if (field.isStatic()) {
@@ -75,7 +75,7 @@ public class JavaToJavaScriptMapImpl implements JavaToJavaScriptMap {
     this.names = names;
     this.fieldForName = staticFieldsByJsName;
     this.methodForName = methodsByJsName;
-    this.typeForConstructorName = typesByContructorJsName;
+    this.typeForConstructorName = typesByConstructorJsName;
 
     this.typeForStatement = typeForStatement;
     this.methodForStatement = methodForStatement;

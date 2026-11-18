@@ -80,14 +80,17 @@ public abstract class AbstractCell<C> implements Cell<C> {
     init(consumedEvents);
   }
 
+  @Override
   public boolean dependsOnSelection() {
     return false;
   }
 
+  @Override
   public Set<String> getConsumedEvents() {
     return consumedEvents;
   }
 
+  @Override
   public boolean handlesSelection() {
     return false;
   }
@@ -96,6 +99,7 @@ public abstract class AbstractCell<C> implements Cell<C> {
    * Returns false. Subclasses that support editing should override this method
    * to return the current editing status.
    */
+  @Override
   public boolean isEditing(Context context, Element parent, C value) {
     return false;
   }
@@ -108,6 +112,7 @@ public abstract class AbstractCell<C> implements Cell<C> {
    * event types that the cell expects into the constructor.
    * </p>
    */
+  @Override
   public void onBrowserEvent(Context context, Element parent, C value,
       NativeEvent event, ValueUpdater<C> valueUpdater) {
     String eventType = event.getType();
@@ -117,6 +122,7 @@ public abstract class AbstractCell<C> implements Cell<C> {
     }
   }
 
+  @Override
   public abstract void render(Context context, C value, SafeHtmlBuilder sb);
 
   /**
@@ -128,10 +134,12 @@ public abstract class AbstractCell<C> implements Cell<C> {
    * containing widget is refreshed.
    * </p>
    */
+  @Override
   public boolean resetFocus(Context context, Element parent, C value) {
     return false;
   }
 
+  @Override
   public void setValue(Context context, Element parent, C value) {
     SafeHtmlBuilder sb = new SafeHtmlBuilder();
     render(context, value, sb);

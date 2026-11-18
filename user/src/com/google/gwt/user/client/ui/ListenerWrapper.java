@@ -141,10 +141,12 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       super(listener);
     }
 
+    @Override
     public void onError(ErrorEvent event) {
       getListener().onError(getSource(event));
     }
 
+    @Override
     public void onLoad(LoadEvent event) {
       getListener().onLoad(getSource(event));
     }
@@ -193,6 +195,7 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       super(listener);
     }
 
+    @Override
     public void onChange(ChangeEvent event) {
       getListener().onChange(getSource(event));
     }
@@ -242,6 +245,7 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       super(listener);
     }
 
+    @Override
     public void onClick(ClickEvent event) {
       getListener().onClick(getSource(event));
     }
@@ -288,10 +292,12 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       super(listener);
     }
 
+    @Override
     public void onBlur(BlurEvent event) {
       getListener().onLostFocus(getSource(event));
     }
 
+    @Override
     public void onFocus(FocusEvent event) {
       getListener().onFocus(getSource(event));
     }
@@ -339,6 +345,7 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       super(listener);
     }
 
+    @Override
     public void onKeyDown(KeyDownEvent event) {
       getListener().onKeyDown(
           getSource(event),
@@ -346,6 +353,7 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
           KeyboardListenerCollection.getKeyboardModifiers(Event.as(event.getNativeEvent())));
     }
 
+    @Override
     public void onKeyPress(KeyPressEvent event) {
       getListener().onKeyPress(
           getSource(event),
@@ -353,6 +361,7 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
           KeyboardListenerCollection.getKeyboardModifiers(Event.as(event.getNativeEvent())));
     }
 
+    @Override
     public void onKeyUp(KeyUpEvent event) {
       getSource(event);
       getListener().onKeyUp(
@@ -412,6 +421,7 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       super(listener);
     }
 
+    @Override
     public void onValueChange(ValueChangeEvent<V> event) {
       getListener().onChange(getSource(event));
     }
@@ -462,24 +472,29 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       super(listener);
     }
 
+    @Override
     public void onMouseDown(MouseDownEvent event) {
       Widget source = getSource(event);
       getListener().onMouseDown(source, event.getX(), event.getY());
     }
 
+    @Override
     public void onMouseMove(MouseMoveEvent event) {
       Widget source = getSource(event);
       getListener().onMouseMove(source, event.getX(), event.getY());
     }
 
+    @Override
     public void onMouseOut(MouseOutEvent event) {
       getListener().onMouseLeave(getSource(event));
     }
 
+    @Override
     public void onMouseOver(MouseOverEvent event) {
       getListener().onMouseEnter(getSource(event));
     }
 
+    @Override
     public void onMouseUp(MouseUpEvent event) {
       Widget source = getSource(event);
       getListener().onMouseUp(source, event.getX(), event.getY());
@@ -524,6 +539,7 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       super(listener);
     }
 
+    @Override
     public void onMouseWheel(MouseWheelEvent event) {
       getListener().onMouseWheel(getSource(event),
           new MouseWheelVelocity(Event.as(event.getNativeEvent())));
@@ -570,6 +586,7 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       super(listener);
     }
 
+    @Override
     public void onScroll(ScrollEvent event) {
       Widget source = getSource(event);
       Element elem = source.getElement();
@@ -597,11 +614,13 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       super(listener);
     }
 
+    @Override
     public void onClose(CloseEvent<DisclosurePanel> event) {
       getListener().onClose(
           new DisclosureEvent((DisclosurePanel) event.getSource()));
     }
 
+    @Override
     public void onOpen(OpenEvent<DisclosurePanel> event) {
       getListener().onOpen(
           new DisclosureEvent((DisclosurePanel) event.getSource()));
@@ -626,6 +645,7 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       super(listener);
     }
 
+    @Override
     public void onSubmit(FormPanel.SubmitEvent event) {
       FormSubmitEvent fse = new FormSubmitEvent((FormPanel) event.getSource());
       getListener().onSubmit(fse);
@@ -634,6 +654,7 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       }
     }
 
+    @Override
     public void onSubmitComplete(FormPanel.SubmitCompleteEvent event) {
       getListener().onSubmitComplete(
           new FormSubmitCompleteEvent((FormPanel) event.getSource(),
@@ -660,6 +681,7 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       super(listener);
     }
 
+    @Override
     public void onSelection(SelectionEvent<SuggestOracle.Suggestion> event) {
       getListener().onSuggestionSelected(
           new SuggestionEvent((SuggestBox) event.getSource(),
@@ -683,6 +705,7 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       super(listener);
     }
 
+    @Override
     public void onClose(CloseEvent<PopupPanel> event) {
       getListener().onPopupClosed((PopupPanel) event.getSource(),
           event.isAutoClosed());
@@ -707,6 +730,7 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       super(listener);
     }
 
+    @Override
     public void onClick(ClickEvent event) {
       HTMLTable table = (HTMLTable) event.getSource();
       HTMLTable.Cell cell = table.getCellForEvent(event);
@@ -744,6 +768,7 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       super(listener);
     }
 
+    @Override
     public void onBeforeSelection(BeforeSelectionEvent<Integer> event) {
       if (!getListener().onBeforeTabSelected(
           (SourcesTabEvents) event.getSource(), event.getItem().intValue())) {
@@ -751,6 +776,7 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       }
     }
 
+    @Override
     public void onSelection(SelectionEvent<Integer> event) {
       getListener().onTabSelected((SourcesTabEvents) event.getSource(),
           event.getSelectedItem().intValue());
@@ -780,14 +806,17 @@ public abstract class ListenerWrapper<T> extends BaseListenerWrapper<T> {
       super(listener);
     }
 
+    @Override
     public void onClose(CloseEvent<TreeItem> event) {
       getListener().onTreeItemStateChanged(event.getTarget());
     }
 
+    @Override
     public void onOpen(OpenEvent<TreeItem> event) {
       getListener().onTreeItemStateChanged(event.getTarget());
     }
 
+    @Override
     public void onSelection(SelectionEvent<TreeItem> event) {
       getListener().onTreeItemSelected(event.getSelectedItem());
     }

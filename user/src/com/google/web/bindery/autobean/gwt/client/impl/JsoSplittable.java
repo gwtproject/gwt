@@ -103,14 +103,17 @@ public final class JsoSplittable extends JavaScriptObject implements Splittable,
   protected JsoSplittable() {
   };
 
+  @Override
   public native boolean asBoolean() /*-{
     return this && this.valueOf();
   }-*/;
 
+  @Override
   public native double asNumber() /*-{
     return this && this.valueOf();
   }-*/;
 
+  @Override
   public void assign(Splittable parent, int index) {
     if (isString()) {
       assign0(parent, index, asString());
@@ -119,6 +122,7 @@ public final class JsoSplittable extends JavaScriptObject implements Splittable,
     }
   }
 
+  @Override
   public void assign(Splittable parent, String index) {
     if (isString()) {
       assign0(parent, index, asString());
@@ -127,22 +131,27 @@ public final class JsoSplittable extends JavaScriptObject implements Splittable,
     }
   }
 
+  @Override
   public native String asString() /*-{
     return this.__s;
   }-*/;
 
+  @Override
   public Splittable deepCopy() {
     return StringQuoter.split(getPayload());
   }
 
+  @Override
   public JsoSplittable get(int index) {
     return getRaw(index);
   }
 
+  @Override
   public JsoSplittable get(String key) {
     return getRaw(key);
   }
 
+  @Override
   public String getPayload() {
     if (isString()) {
       return JsonUtils.escapeValue(asString());
@@ -153,20 +162,24 @@ public final class JsoSplittable extends JavaScriptObject implements Splittable,
     return stringifySlow();
   }
 
+  @Override
   public List<String> getPropertyKeys() {
     List<String> toReturn = new ArrayList<String>();
     getPropertyKeys0(toReturn);
     return Collections.unmodifiableList(toReturn);
   }
 
+  @Override
   public native Object getReified(String key) /*-{
     return this.__reified && this.__reified[':' + key];
   }-*/;
 
+  @Override
   public Splittable getSplittable() {
     return this;
   }
 
+  @Override
   public native boolean isBoolean() /*-{
     return this && typeof(this.valueOf()) === 'boolean';
   }-*/;
@@ -175,26 +188,32 @@ public final class JsoSplittable extends JavaScriptObject implements Splittable,
     return Object.prototype.toString.call(this) == '[object Function]';
   }-*/;
 
+  @Override
   public native boolean isIndexed() /*-{
     return Object.prototype.toString.call(this) == '[object Array]';
   }-*/;
 
+  @Override
   public boolean isKeyed() {
     return this != NULL && !isString() && !isIndexed() && !isFunction();
   }
 
+  @Override
   public native boolean isNull(int index) /*-{
     return this[index] == null;
   }-*/;
 
+  @Override
   public native boolean isNull(String key) /*-{
     return this[key] == null;
   }-*/;
 
+  @Override
   public native boolean isNumber() /*-{
     return this && typeof(this.valueOf()) === 'number';
   }-*/;
 
+  @Override
   public native boolean isReified(String key) /*-{
     return !!(this.__reified && this.__reified.hasOwnProperty(':' + key));
   }-*/;
@@ -202,10 +221,12 @@ public final class JsoSplittable extends JavaScriptObject implements Splittable,
   /**
    * Returns whether or not the current object is a string-carrier.
    */
+  @Override
   public native boolean isString() /*-{
     return this && this.__s != null;
   }-*/;
 
+  @Override
   public native boolean isUndefined(String key) /*-{
     return this[key] === undefined;
   }-*/;
@@ -217,16 +238,19 @@ public final class JsoSplittable extends JavaScriptObject implements Splittable,
     }
   }-*/;
 
+  @Override
   public native void setReified(String key, Object object) /*-{
     // Use a function object so native JSON.stringify will ignore
     (this.__reified || (this.__reified = function() {
     }))[':' + key] = object;
   }-*/;
 
+  @Override
   public native void setSize(int size) /*-{
     this.length = size;
   }-*/;
 
+  @Override
   public native int size() /*-{
     return this.length;
   }-*/;

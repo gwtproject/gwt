@@ -22,6 +22,7 @@ import com.google.gwt.user.client.DoubleClickEventSinkTest;
 import com.google.gwt.user.client.DragAndDropEventsSinkTest;
 import com.google.gwt.user.client.EventTest;
 import com.google.gwt.user.client.GestureEventSinkTest;
+import com.google.gwt.user.client.RandomTest;
 import com.google.gwt.user.client.TimerTest;
 import com.google.gwt.user.client.TouchEventSinkTest;
 import com.google.gwt.user.client.WindowTest;
@@ -48,6 +49,7 @@ public class MiscSuite {
     suite.addTestSuite(EventTest.class);
     suite.addTestSuite(GestureEventSinkTest.class);
     suite.addTestSuite(ImageBundleGeneratorTest.class);
+    suite.addTestSuite(RandomTest.class);
     suite.addTestSuite(TimerTest.class);
     suite.addTestSuite(TouchEventSinkTest.class);
     suite.addTestSuite(WindowTest.class);

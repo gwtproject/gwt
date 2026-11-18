@@ -8,16 +8,16 @@
 	<classpathentry kind="var" path="GWT_TOOLS/lib/apache/tapestry-util-text-4.0.2.jar" sourcepath="/GWT_TOOLS/lib/apache/tapestry-util-text-4.0.2-src.zip"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/org.eclipse.jdt.core_3.17.0.v20190306-2240.jar" sourcepath="/GWT_TOOLS/lib/eclipse/org.eclipse.jdt.core.source_3.17.0.v20190306-2240.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/eclipse/jdtCompilerAdapter_3.17.0.v20190306-2240.jar"/>
-	<classpathentry exported="true" kind="var" path="GWT_TOOLS/lib/jetty/jetty-9.2.14.v20151106/jetty-all-9.2.14.v20151106.jar"/>
+	<classpathentry exported="true" kind="var" path="GWT_TOOLS/lib/jetty/jetty-9.4.58.v20250814/jetty-all-9.4.58.v20250814.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/jsr305/jsr305.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/junit/junit-4.8.2.jar" sourcepath="/GWT_TOOLS/lib/junit/junit-4.8.2-src.zip"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/objectweb/asm-7.1/asm-7.1.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/tomcat/ant-launcher-1.6.5.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/tomcat/catalina-1.0.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/tomcat/catalina-optional-1.0.jar"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/jetty/jetty-9.2.14.v20151106/mortbay-apache-jsp-8.0.9.M3.jar"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/jetty/jetty-9.2.14.v20151106/mortbay-apache-el-8.0.9.M3.jar"/>
-	<classpathentry kind="var" path="GWT_TOOLS/lib/jetty/jetty-9.2.14.v20151106/jetty-apache-jsp-9.2.14.v20151106.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/jetty/jetty-9.4.58.v20250814/mortbay-apache-jsp-8.5.100.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/jetty/jetty-9.4.58.v20250814/mortbay-apache-el-8.5.100.jar"/>
+	<classpathentry kind="var" path="GWT_TOOLS/lib/jetty/jetty-9.4.58.v20250814/jetty-apache-jsp-9.4.58.v20250814.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/htmlunit/htmlunit-2.19/htmlunit-2.19.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/htmlunit/htmlunit-2.19/htmlunit-core-js-2.15.jar"/>
 	<classpathentry kind="var" path="GWT_TOOLS/lib/protobuf/protobuf-2.5.0/protobuf-java-rebased-2.5.0.jar"/>

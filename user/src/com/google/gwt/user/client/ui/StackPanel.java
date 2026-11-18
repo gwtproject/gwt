@@ -126,10 +126,12 @@ public class StackPanel extends ComplexPanel implements InsertPanel.ForIsWidget 
     return visibleStack;
   }
 
+  @Override
   public void insert(IsWidget w, int beforeIndex) {
     insert(asWidgetOrNull(w), beforeIndex);
   }
 
+  @Override
   public void insert(Widget w, int beforeIndex) {
     // header
     Element trh = DOM.createTR();

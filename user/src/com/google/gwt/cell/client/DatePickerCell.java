@@ -133,6 +133,7 @@ public class DatePickerCell extends AbstractEditableCell<Date, Date> {
       }
     };
     panel.addCloseHandler(new CloseHandler<PopupPanel>() {
+      @Override
       public void onClose(CloseEvent<PopupPanel> event) {
         lastKey = null;
         lastValue = null;
@@ -150,6 +151,7 @@ public class DatePickerCell extends AbstractEditableCell<Date, Date> {
 
     // Hide the panel and call valueUpdater.update when a date is selected
     datePicker.addValueChangeHandler(new ValueChangeHandler<Date>() {
+      @Override
       public void onValueChange(ValueChangeEvent<Date> event) {
         // Remember the values before hiding the popup.
         Element cellParent = lastParent;
@@ -227,6 +229,7 @@ public class DatePickerCell extends AbstractEditableCell<Date, Date> {
     datePicker.setCurrentMonth(date);
     datePicker.setValue(date);
     panel.setPopupPositionAndShow(new PositionCallback() {
+      @Override
       public void setPosition(int offsetWidth, int offsetHeight) {
         panel.setPopupPosition(lastParent.getAbsoluteLeft() + offsetX,
             lastParent.getAbsoluteTop() + offsetY);

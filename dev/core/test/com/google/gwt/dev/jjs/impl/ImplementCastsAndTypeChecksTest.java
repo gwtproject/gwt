@@ -52,8 +52,8 @@ public class ImplementCastsAndTypeChecksTest extends OptimizerTestBase {
     boolean didChange = true;
 
     do {
-      didChange &= TypeTightener.exec(program).didChange();
-      didChange &= MethodCallTightener.exec(program).didChange();
+      didChange &= TypeTightener.exec(program, new FullOptimizerContext(program)) > 0;
+      didChange &= MethodCallTightener.exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT) > 0;
     } while (didChange);
     ImplementCastsAndTypeChecks.exec(program);
     return true;

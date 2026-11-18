@@ -52,6 +52,7 @@ public class NumberLabelParser implements ElementParser {
     predefinedFormats = Collections.unmodifiableMap(formats);
   }
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
     if (hasNumberFormatConstructor(writer.getOracle(), type)) {

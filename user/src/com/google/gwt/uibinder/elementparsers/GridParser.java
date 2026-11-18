@@ -100,6 +100,7 @@ public class GridParser implements ElementParser {
 
   private static final String STYLE_NAME_ATTRIBUTE = "styleName";
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
 

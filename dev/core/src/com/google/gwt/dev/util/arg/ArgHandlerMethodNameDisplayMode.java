@@ -45,6 +45,7 @@ public class ArgHandlerMethodNameDisplayMode extends ArgHandlerEnum<Mode> {
     return true;
   }
 
+  @Override
   public void setValue(Mode value) {
     if (option.getMethodNameDisplayMode() != value) {
       option.setMethodNameDisplayMode(value);

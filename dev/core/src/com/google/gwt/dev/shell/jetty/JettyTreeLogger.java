@@ -37,68 +37,83 @@ public class JettyTreeLogger implements Logger {
     this.logger = logger;
   }
 
+  @Override
   public void debug(String msg, long arg) {
     logger.log(TreeLogger.SPAM, format(msg, arg));
   }
 
+  @Override
   public void debug(String msg, Object... args) {
     if (logger.isLoggable(TreeLogger.SPAM)) {
       logger.log(TreeLogger.SPAM, format(msg, args));
     }
   }
 
+  @Override
   public void debug(String msg, Throwable th) {
     logger.log(TreeLogger.SPAM, msg, th);
   }
 
+  @Override
   public void debug(Throwable th) {
     logger.log(TreeLogger.SPAM, "", th);
   }
 
+  @Override
   public Logger getLogger(String name) {
     return this;
   }
 
+  @Override
   public String getName() {
     return "";
   }
 
+  @Override
   public void info(String msg, Object... args) {
     if (logger.isLoggable(TreeLogger.TRACE)) {
       logger.log(TreeLogger.TRACE, format(msg, args));
     }
   }
 
+  @Override
   public void info(String msg, Throwable th) {
     logger.log(TreeLogger.TRACE, msg, th);
   }
 
+  @Override
   public void info(Throwable th) {
     logger.log(TreeLogger.TRACE, "", th);
   }
 
+  @Override
   public boolean isDebugEnabled() {
     return logger.isLoggable(TreeLogger.SPAM);
   }
 
+  @Override
   public void setDebugEnabled(boolean enabled) {
     // ignored
   }
 
+  @Override
   public void warn(String msg, Object... args) {
     if (logger.isLoggable(TreeLogger.WARN)) {
       logger.log(TreeLogger.WARN, format(msg, args));
     }
   }
 
+  @Override
   public void warn(String msg, Throwable th) {
     logger.log(TreeLogger.WARN, msg, th);
   }
 
+  @Override
   public void warn(Throwable th) {
     logger.log(TreeLogger.WARN, "", th);
   }
 
+  @Override
   public void ignore(Throwable th) {
     logger.log(TreeLogger.SPAM, "IGNORE", th);
   }

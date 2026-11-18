@@ -18,9 +18,7 @@ package com.google.gwt.dev.shell.rewrite;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.javac.asmbridge.EmptyVisitor;
 import com.google.gwt.dev.shell.JsValueGlue;
-import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -222,32 +220,31 @@ public class HostedModeClassRewriter {
    */
   public byte[] rewrite(TypeOracle typeOracle, String className,
       byte[] classBytes, Map<String, String> anonymousClassMap) {
-    Event classBytesRewriteEvent =
-        SpeedTracerLogger.start(DevModeEventType.CLASS_BYTES_REWRITE, "Class Name", className);
-    String desc = toDescriptor(className);
-    assert (!jsoIntfDescs.contains(desc));
+    try (SimpleEvent ignored = new SimpleEvent("Class bytes rewrite: " + className)) {
+      String desc = toDescriptor(className);
+      assert (!jsoIntfDescs.contains(desc));
 
-    // The ASM model is to chain a bunch of visitors together.
-    ClassWriter writer = new ClassWriter(0);
-    ClassVisitor v = writer;
+      // The ASM model is to chain a bunch of visitors together.
+      ClassWriter writer = new ClassWriter(0);
+      ClassVisitor v = writer;
 
-    // v = new CheckClassAdapter(v);
-    // v = new TraceClassVisitor(v, new PrintWriter(System.out));
-    v = new UseMirroredClasses(v, className);
+      // v = new CheckClassAdapter(v);
+      // v = new TraceClassVisitor(v, new PrintWriter(System.out));
+      v = new UseMirroredClasses(v, className);
 
-    v = new RewriteSingleJsoImplDispatches(v, typeOracle, jsoData);
+      v = new RewriteSingleJsoImplDispatches(v, typeOracle, jsoData);
 
-    v = new RewriteRefsToJsoClasses(v, jsoIntfDescs, mapper);
+      v = new RewriteRefsToJsoClasses(v, jsoIntfDescs, mapper);
 
-    if (jsoImplDescs.contains(desc)) {
-      v = WriteJsoImpl.create(v, desc, jsoIntfDescs, mapper, jsoData);
+      if (jsoImplDescs.contains(desc)) {
+        v = WriteJsoImpl.create(v, desc, jsoIntfDescs, mapper, jsoData);
+      }
+
+      v = new RewriteJsniMethods(v, anonymousClassMap);
+
+      new ClassReader(classBytes).accept(v, 0);
+      return writer.toByteArray();
     }
-
-    v = new RewriteJsniMethods(v, anonymousClassMap);
-
-    new ClassReader(classBytes).accept(v, 0);
-    classBytesRewriteEvent.end();
-    return writer.toByteArray();
   }
 
   public byte[] writeJsoIntf(final String className, byte classBytes[]) {

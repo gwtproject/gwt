@@ -35,7 +35,7 @@ public class MockClassPathEntry extends ClassPathEntry {
 
   /**
    * By default, MockClassPathEntry has an all-inclusive path prefix. Tests may
-   * change it by calling {@link #setPathPrefixes(PathPrefixSet)}.
+   * change it by calling {@link ResourceOracleImpl#setPathPrefixes(PathPrefixSet)}.
    */
   public MockClassPathEntry(String pathRoot) {
     this.pathRoot = pathRoot;

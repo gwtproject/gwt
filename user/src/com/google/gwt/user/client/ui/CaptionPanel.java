@@ -108,6 +108,7 @@ public class CaptionPanel extends Composite implements HasWidgets.ForIsWidget {
       fieldset.getStyle().setProperty("visibility", "hidden");
       super.setCaption(fieldset, legend, caption, asHTML);
       Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+        @Override
         public void execute() {
           fieldset.getStyle().setProperty("visibility", "");
         }
@@ -171,6 +172,7 @@ public class CaptionPanel extends Composite implements HasWidgets.ForIsWidget {
     }
   }
 
+  @Override
   public void add(Widget w) {
     ((SimplePanel) getWidget()).add(w);
   }
@@ -180,6 +182,7 @@ public class CaptionPanel extends Composite implements HasWidgets.ForIsWidget {
    * 
    * @see #add(Widget)
    */
+  @Override
   public void add(IsWidget w) {
     this.add(asWidgetOrNull(w));
   }
@@ -187,6 +190,7 @@ public class CaptionPanel extends Composite implements HasWidgets.ForIsWidget {
   /**
    * Removes the content widget.
    */
+  @Override
   public void clear() {
     ((SimplePanel) getWidget()).clear();
   }
@@ -224,6 +228,7 @@ public class CaptionPanel extends Composite implements HasWidgets.ForIsWidget {
   /**
    * Iterates over the singular content widget, if present.
    */
+  @Override
   public Iterator<Widget> iterator() {
     return ((SimplePanel) getWidget()).iterator();
   }
@@ -235,6 +240,7 @@ public class CaptionPanel extends Composite implements HasWidgets.ForIsWidget {
    * @param w the widget to remove; note that anything other than the Widget
    *            returned by {@link #getContentWidget()} will have no effect
    */
+  @Override
   public boolean remove(Widget w) {
     return ((SimplePanel) getWidget()).remove(w);
   }
@@ -244,6 +250,7 @@ public class CaptionPanel extends Composite implements HasWidgets.ForIsWidget {
    * 
    * @see #remove(Widget)
    */
+  @Override
   public boolean remove(IsWidget w) {
     return this.remove(asWidgetOrNull(w));
   }

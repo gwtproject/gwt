@@ -39,10 +39,12 @@ class StrictAttributeParser implements AttributeParser {
       this.types = types;
     }
 
+    @Override
     public JType[] getTypes() {
       return types;
     }
 
+    @Override
     public String handleFragment(String fragment)
         throws IllegalFieldReferenceException {
       if (fragment.length() > 0) {
@@ -51,6 +53,7 @@ class StrictAttributeParser implements AttributeParser {
       return fragment;
     }
 
+    @Override
     public String handleReference(String reference)
         throws IllegalFieldReferenceException {
       assertOnly();
@@ -83,6 +86,7 @@ class StrictAttributeParser implements AttributeParser {
    * In any other case (e.g. more than one field reference), an
    * UnableToCompleteException is thrown.
    */
+  @Override
   public String parse(XMLElement source, String value) throws UnableToCompleteException {
     if ("".equals(value.trim())) {
       logger.die(source, "Cannot use empty value as type %s", FieldReference.renderTypesList(types));

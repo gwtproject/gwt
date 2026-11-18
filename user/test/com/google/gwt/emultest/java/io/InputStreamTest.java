@@ -30,7 +30,8 @@ public class InputStreamTest extends InputStreamBaseTest {
       // note that GWT fails here when trying to use clone().
       private final byte[] b = Arrays.copyOf(expectedBytes, expectedBytes.length);
       private int index = 0;
-      @Override public int read() {
+      @Override
+      public int read() {
         int c = -1;
         if (index < b.length) {
           c = b[index];

@@ -73,6 +73,7 @@ public class SchedulerImpl extends Scheduler {
    * Calls {@link SchedulerImpl#flushPostEventPumpCommands()}.
    */
   private final class Flusher implements RepeatingCommand {
+    @Override
     public boolean execute() {
       flushRunning = true;
       flushPostEventPumpCommands();
@@ -90,6 +91,7 @@ public class SchedulerImpl extends Scheduler {
    * Keeps {@link Flusher} running.
    */
   private final class Rescuer implements RepeatingCommand {
+    @Override
     public boolean execute() {
       if (flushRunning) {
         /*

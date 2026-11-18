@@ -43,6 +43,7 @@ final class ApiField implements Comparable<ApiField>, ApiElement {
     this.apiClass = apiClass;
   }
 
+  @Override
   public int compareTo(ApiField other) {
     return getRelativeSignature().compareTo(other.getRelativeSignature());
   }
@@ -63,6 +64,7 @@ final class ApiField implements Comparable<ApiField>, ApiElement {
     return apiClass;
   }
 
+  @Override
   public String getRelativeSignature() {
     if (relativeSignature == null) {
       relativeSignature = computeRelativeSignature();

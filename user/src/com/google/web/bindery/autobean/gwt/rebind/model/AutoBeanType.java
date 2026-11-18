@@ -56,6 +56,7 @@ public class AutoBeanType {
     public void setMethods(List<AutoBeanMethod> methods) {
       toReturn.methods = new ArrayList<AutoBeanMethod>(methods);
       Collections.sort(toReturn.methods, new Comparator<AutoBeanMethod>() {
+        @Override
         public int compare(AutoBeanMethod o1, AutoBeanMethod o2) {
           int c = o1.getAction().compareTo(o2.getAction());
           if (c != 0) {

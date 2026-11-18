@@ -170,12 +170,12 @@ public abstract class CompilationStateTestBase extends TestCase {
         // Not always true due to caching! A source unit for FOO can b
         // identical to the generated FOO and already be cached.
         // assertTrue(unit.isGenerated());
-        assertNotNull(generatedTypes.remove(className));
+        assertTrue(generatedTypes.remove(className));
       } else {
         String partialPath = className.replace('.', '/') + ".java";
         assertTrue(resourcePathNames.contains(partialPath));
         // TODO: Validate the source file matches the resource.
-        assertNotNull(resourcePathNames.remove(partialPath));
+        assertTrue(resourcePathNames.remove(partialPath));
       }
     }
     // The mutable sets should be empty now.

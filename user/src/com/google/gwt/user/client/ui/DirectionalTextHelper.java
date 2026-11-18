@@ -107,6 +107,7 @@ public class DirectionalTextHelper implements HasDirectionEstimator {
     isDirectionExplicitlySet = true;
   }
 
+  @Override
   public DirectionEstimator getDirectionEstimator() {
     return directionEstimator;
   }
@@ -172,6 +173,7 @@ public class DirectionalTextHelper implements HasDirectionEstimator {
    * See note at
    * {@link #setDirectionEstimator(com.google.gwt.i18n.shared.DirectionEstimator)}.
    */
+  @Override
   public void setDirectionEstimator(boolean enabled) {
     setDirectionEstimator(enabled ? DEFAULT_DIRECTION_ESTIMATOR : null);
   }
@@ -182,6 +184,7 @@ public class DirectionalTextHelper implements HasDirectionEstimator {
    * flicker, and thus should be avoided; DirectionEstimator should be set
    * before the element has any content.
    */
+  @Override
   @SuppressIsSafeHtmlCastCheck
   public void setDirectionEstimator(DirectionEstimator directionEstimator) {
     this.directionEstimator = directionEstimator;

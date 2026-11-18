@@ -44,6 +44,7 @@ public class PermutationsCollector extends ExtendedConditionalNodeVisitor
     permutationAxesSet = new HashSet<String>();
   }
 
+  @Override
   public void enterBooleanExpression(CssBooleanExpressionNode booleanExpressionNode) {
     if (booleanExpressionNode.getType() == Type.CONSTANT &&
         booleanExpressionNode.getValue() != null) {

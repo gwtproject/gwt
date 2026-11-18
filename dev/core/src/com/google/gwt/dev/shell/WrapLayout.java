@@ -127,7 +127,7 @@ public class WrapLayout extends FlowLayout {
     return layoutSize(target, true);
   }
 
-  /*
+  /**
    * A new row has been completed. Use the dimensions of this row to update the
    * preferred size for the container.
    *

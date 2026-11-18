@@ -40,18 +40,21 @@ public class ProxyForInterfacesTest extends GWTTestCase {
   }
 
   static class C0 implements I1 {
+    @Override
     public String getName() {
       return "C0";
     }
   }
 
   static class C1 implements I2 {
+    @Override
     public String getName() {
       return "C1";
     }
   }
 
   static class C2 extends C1 {
+    @Override
     public String getName() {
       return "C2";
     }
@@ -132,6 +135,7 @@ public class ProxyForInterfacesTest extends GWTTestCase {
     ctx.getC1_RetI2().to(new ReceiverAssert<I2>("C1"));
     ctx.getC2_RetI2().to(new ReceiverAssert<I2>("C2"));
     ctx.fire(new Receiver<Void>() {
+      @Override
       public void onSuccess(Void response) {
         finishTest();
       }

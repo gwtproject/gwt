@@ -136,6 +136,7 @@ public class CrossSiteLoadingStrategy implements LoadingStrategy {
 
   private final IntToIntMap serialNumbers = IntToIntMap.create();
 
+  @Override
   public void startLoadingFragment(int fragment,
       LoadTerminatedHandler loadFinishedHandler) {
     JavaScriptObject tag = createScriptTag(getUrl(fragment));

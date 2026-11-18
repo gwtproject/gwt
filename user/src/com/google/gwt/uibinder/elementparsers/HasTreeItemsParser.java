@@ -31,6 +31,7 @@ public class HasTreeItemsParser implements ElementParser {
 
   static final String BAD_CHILD = "Only TreeItem or Widget subclasses are valid children";
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
     // Prepare base types.

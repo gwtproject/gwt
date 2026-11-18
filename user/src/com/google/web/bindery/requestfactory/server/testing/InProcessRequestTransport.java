@@ -32,8 +32,8 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
  * f.initialize(eventBus, new InProcessRequestTransport(processor));
  * </pre>
  * 
- * @see com.google.web.bindery.vm.RequestFactorySource
- * @see com.google.web.bindery.requestfactory.server.ServiceLayer#create(com.google.gwt.requestfactory.server.ServiceLayerDecorator...)
+ * @see com.google.web.bindery.requestfactory.vm.RequestFactorySource
+ * @see com.google.web.bindery.requestfactory.server.ServiceLayer#create(com.google.web.bindery.requestfactory.server.ServiceLayerDecorator...)
  *      ServiceLayer.create()
  * @see com.google.gwt.event.shared.SimpleEventBus SimpleEventBus
  * @see SimpleRequestProcessor
@@ -46,6 +46,7 @@ public class InProcessRequestTransport implements RequestTransport {
     this.processor = processor;
   }
 
+  @Override
   public void send(String payload, TransportReceiver receiver) {
     String result;
     try {

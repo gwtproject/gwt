@@ -44,6 +44,7 @@ public class CssDef extends CssNode {
     return true;
   }
 
+  @Override
   public void traverse(CssVisitor visitor, Context context) {
     visitor.visit(this, context);
     visitor.endVisit(this, context);

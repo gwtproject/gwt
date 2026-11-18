@@ -47,6 +47,7 @@ public class JsTypeObjectMethodsTest extends GWTTestCase {
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   static class NativeClassWithHashCode {
+    @Override
     public native int hashCode();
   }
 
@@ -57,6 +58,7 @@ public class JsTypeObjectMethodsTest extends GWTTestCase {
       this.n = n;
     }
 
+    @Override
     @JsMethod
     public int hashCode() {
       return n;
@@ -67,6 +69,7 @@ public class JsTypeObjectMethodsTest extends GWTTestCase {
     public ImplementsNativeObject(int n) {
       this.n = n;
     }
+    @Override
     @JsMethod
     public int hashCode() {
       return n;
@@ -107,6 +110,7 @@ public class JsTypeObjectMethodsTest extends GWTTestCase {
   private static class MyNativeError {
     MyNativeError() { }
     MyNativeError(String error) { }
+    @Override
     public native int hashCode();
     public int myValue;
   }
@@ -116,6 +120,7 @@ public class JsTypeObjectMethodsTest extends GWTTestCase {
       myValue = n;
     }
 
+    @Override
     public String toString() {
       return "(Sub)myValue: " + myValue;
     }

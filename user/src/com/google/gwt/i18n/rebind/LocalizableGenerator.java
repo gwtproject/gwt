@@ -61,6 +61,7 @@ public class LocalizableGenerator extends Generator {
    */
   public class JMethodComparator implements Comparator<JMethod> {
 
+    @Override
     public int compare(JMethod a, JMethod b) {
       if (a.isPublic() != b.isPublic()) {
         return a.isPublic() ? -1 : 1;

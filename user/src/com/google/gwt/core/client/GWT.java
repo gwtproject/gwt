@@ -278,7 +278,8 @@ public final class GWT {
 
   private static void runAsyncImpl(final RunAsyncCallback callback) {
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-      @Override public void execute() {
+      @Override
+      public void execute() {
         callback.onSuccess();
       }
     });

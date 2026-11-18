@@ -90,6 +90,7 @@ public class ProblemReport {
    */
   public ProblemReport() {
     Comparator<JClassType> comparator = new Comparator<JClassType>() {
+      @Override
       public int compare(JClassType o1, JClassType o2) {
         assert o1 != null;
         assert o2 != null;
@@ -229,7 +230,7 @@ public class ProblemReport {
    * Adds an entry to one of the problem maps.
    * 
    * @param type the type to add
-   * @param message the message to add for {@code type}
+   * @param problem contains the message to add for {@code type}
    * @param map the map to add to
    */
   private void addToMap(JClassType type, Problem problem, Map<JClassType, List<Problem>> map) {

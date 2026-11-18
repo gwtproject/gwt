@@ -54,6 +54,7 @@ class PrefixTree extends AbstractCollection<String> {
       addTree(tree, "");
     }
 
+    @Override
     public boolean hasNext() {
       // Have nextImpl peek at the next value that would be returned.
       return nextImpl(true) != null;
@@ -62,6 +63,7 @@ class PrefixTree extends AbstractCollection<String> {
     /**
      * {@inheritDoc} Wraps the native implementation with some sanity checking.
      */
+    @Override
     public String next() {
       final String toReturn = nextImpl(false);
 
@@ -79,6 +81,7 @@ class PrefixTree extends AbstractCollection<String> {
       return toReturn;
     }
 
+    @Override
     public void remove() {
       throw new UnsupportedOperationException("PrefixTree does not support "
           + "removal.  Use clear()");

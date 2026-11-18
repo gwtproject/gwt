@@ -133,7 +133,8 @@ public class RunAsyncTest extends GWTTestCase {
 
     // Give it little bit more time to loaded and try runAsync again
     Scheduler.get().scheduleFixedPeriod(new RepeatingCommand() {
-      @Override public boolean execute() {
+      @Override
+      public boolean execute() {
         if (staticWrittenByAsync == 0) {
           return true;
         }

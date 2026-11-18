@@ -24,7 +24,7 @@ package com.google.gwt.dom.client;
  * </span>
  * </p>
  * 
- * @see <a href="http://www.w3.org/TR/html5/video.html#audio">W3C HTML 5 Specification</a>
+ * @see <a href="https://html.spec.whatwg.org/multipage/media.html#audio">W3C HTML 5 Specification</a>
  */
 @TagName(AudioElement.TAG)
 public class AudioElement extends MediaElement {

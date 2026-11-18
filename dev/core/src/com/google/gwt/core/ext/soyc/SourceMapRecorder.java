@@ -22,9 +22,7 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.JsSourceMap;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceInfoCorrelation;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapGeneratorV3;
 import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapParseException;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
@@ -85,30 +83,30 @@ public class SourceMapRecorder {
 
   private List<SyntheticArtifact> createArtifacts()
       throws IOException, SourceMapParseException {
-    Event event = SpeedTracerLogger.start(CompilerEventType.SOURCE_MAP_RECORDER);
-    List<SyntheticArtifact> toReturn = Lists.newArrayList();
-    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    SourceMapGeneratorV3 generator = new SourceMapGeneratorV3();
-    int fragment = 0;
-    for (JsSourceMap sourceMap : fragmentMaps) {
-      generator.reset();
+    try (SimpleEvent ignored = new SimpleEvent("SourceMap Recorder")) {
+      List<SyntheticArtifact> toReturn = Lists.newArrayList();
+      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      SourceMapGeneratorV3 generator = new SourceMapGeneratorV3();
+      int fragment = 0;
+      for (JsSourceMap sourceMap : fragmentMaps) {
+        generator.reset();
 
-      if (sourceRoot != null) {
-        generator.setSourceRoot(sourceRoot);
+        if (sourceRoot != null) {
+          generator.setSourceRoot(sourceRoot);
+        }
+        addExtensions(generator, fragment);
+        addMappings(new SourceMappingWriter(generator), sourceMap);
+
+        baos.reset();
+        OutputStreamWriter out = new OutputStreamWriter(baos);
+        generator.appendTo(out, "sourceMap" + fragment);
+        out.flush();
+        toReturn.add(new SymbolMapsLinker.SourceMapArtifact(permutationId, fragment,
+            baos.toByteArray(), sourceRoot));
+        fragment++;
       }
-      addExtensions(generator, fragment);
-      addMappings(new SourceMappingWriter(generator), sourceMap);
-
-      baos.reset();
-      OutputStreamWriter out = new OutputStreamWriter(baos);
-      generator.appendTo(out, "sourceMap" + fragment);
-      out.flush();
-      toReturn.add(new SymbolMapsLinker.SourceMapArtifact(permutationId, fragment,
-          baos.toByteArray(), sourceRoot));
-      fragment++;
+      return toReturn;
     }
-    event.end();
-    return toReturn;
   }
 
   private void addExtensions(SourceMapGeneratorV3 generator, int fragment)

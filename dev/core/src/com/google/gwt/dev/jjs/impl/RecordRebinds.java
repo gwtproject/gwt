@@ -19,9 +19,7 @@ import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JPermutationDependentValue;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JVisitor;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.Set;
@@ -41,11 +39,11 @@ public class RecordRebinds {
   }
 
   public static Set<String> exec(JProgram program) {
-    Event recordRebindsEvent = SpeedTracerLogger.start(CompilerEventType.RECORD_REBINDS);
-    Set<String> liveRebindRequests = Sets.newHashSet();
-    new RecordRebinds(program, liveRebindRequests).execImpl();
-    recordRebindsEvent.end();
-    return liveRebindRequests;
+    try (SimpleEvent ignored = new SimpleEvent("Record Rebinds")) {
+      Set<String> liveRebindRequests = Sets.newHashSet();
+      new RecordRebinds(program, liveRebindRequests).execImpl();
+      return liveRebindRequests;
+    }
   }
 
   private final Set<String> liveRebindRequests;

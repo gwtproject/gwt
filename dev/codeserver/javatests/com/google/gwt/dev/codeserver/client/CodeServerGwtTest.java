@@ -150,7 +150,7 @@ public class CodeServerGwtTest extends GWTTestCase {
     // do the test
     recompiler.compile(function(result) {
       callbackCalled = true;
-      //compile is done
+      // compile is done
       assertStringEquals('ok', result.status);
       assertStringEquals('http://mytesthost:7812/recompile/testModule' +
           '?prop1=val1&prop2=val2&_callback=__gwt_sdm_globals.callbacks.c1234',
@@ -200,7 +200,7 @@ public class CodeServerGwtTest extends GWTTestCase {
     assertStringEquals('test2', props.test1);
   }-*/;
 
-  public native void testBaseUrlProvider_nocache () /*-{
+  public native void testBaseUrlProvider_nocache() /*-{
     var assertStringEquals = @CodeServerGwtTest::assertEquals(Ljava/lang/String;Ljava/lang/String;);
     var BaseUrlProvider = $wnd.namespace.lib.BaseUrlProvider;
     var baseUrlProvider = new BaseUrlProvider('testModule');
@@ -228,7 +228,7 @@ public class CodeServerGwtTest extends GWTTestCase {
   }-*/;
 
   // Issue #8973
-  public native void testBaseUrlProvider_nocache_relative_with_querystring () /*-{
+  public native void testBaseUrlProvider_nocache_relative_with_querystring() /*-{
     var assertStringEquals = @CodeServerGwtTest::assertEquals(Ljava/lang/String;Ljava/lang/String;);
     var BaseUrlProvider = $wnd.namespace.lib.BaseUrlProvider;
     var baseUrlProvider = new BaseUrlProvider('testModule');
@@ -293,7 +293,6 @@ public class CodeServerGwtTest extends GWTTestCase {
       return null;
     };
 
-
     baseUrlProvider.__getBaseElements = function() {
       return [
         {href: 'http://localhost:9876/somepath1/'},
@@ -312,7 +311,7 @@ public class CodeServerGwtTest extends GWTTestCase {
   }-*/;
 
   private void ensureJsInjected() {
-    if(injected) {
+    if (injected) {
       return;
     }
     Resource res = GWT.create(Resource.class);

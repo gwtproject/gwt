@@ -321,6 +321,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
       suggestionPopup.hide();
     }
 
+    @Override
     public boolean isAnimationEnabled() {
       return suggestionPopup.isAnimationEnabled();
     }
@@ -340,6 +341,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
       return suggestionPopup.isShowing();
     }
 
+    @Override
     public void setAnimationEnabled(boolean enable) {
       suggestionPopup.setAnimationEnabled(enable);
     }
@@ -496,6 +498,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
         final SuggestionMenuItem menuItem = new SuggestionMenuItem(
             curSuggestion, isDisplayStringHTML);
         menuItem.setScheduledCommand(new ScheduledCommand() {
+          @Override
           public void execute() {
             callback.onSuggestionSelected(curSuggestion);
           }
@@ -662,6 +665,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
   private final SuggestionDisplay display;
   private final ValueBoxBase<String> box;
   private final Callback callback = new Callback() {
+    @Override
     public void onSuggestionsReady(Request request, Response response) {
       // If disabled while request was in-flight, drop it
       if (!isEnabled()) {
@@ -675,6 +679,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
     }
   };
   private final SuggestionCallback suggestionCallback = new SuggestionCallback() {
+    @Override
     public void onSuggestionSelected(Suggestion suggestion) {
       box.setFocus(true);
       setNewSelection(suggestion);
@@ -795,23 +800,28 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
     ListenerWrapper.WrappedKeyboardListener.add(this, listener);
   }
 
+  @Override
   public HandlerRegistration addKeyDownHandler(KeyDownHandler handler) {
     return addDomHandler(handler, KeyDownEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addKeyPressHandler(KeyPressHandler handler) {
     return addDomHandler(handler, KeyPressEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addKeyUpHandler(KeyUpHandler handler) {
     return addDomHandler(handler, KeyUpEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addSelectionHandler(
       SelectionHandler<Suggestion> handler) {
     return addHandler(handler, SelectionEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addValueChangeHandler(
       ValueChangeHandler<String> handler) {
     return addHandler(handler, ValueChangeEvent.getType());
@@ -820,6 +830,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
   /**
    * Returns a {@link TakesValueEditor} backed by the SuggestBox.
    */
+  @Override
   public LeafValueEditor<String> asEditor() {
     if (editor == null) {
       editor = TakesValueEditor.of(this);
@@ -856,10 +867,12 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
     return oracle;
   }
 
+  @Override
   public int getTabIndex() {
     return box.getTabIndex();
   }
 
+  @Override
   public String getText() {
     return box.getText();
   }
@@ -877,6 +890,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
     return (TextBoxBase) box;
   }
 
+  @Override
   public String getValue() {
     return box.getValue();
   }
@@ -909,6 +923,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
    * @deprecated use {@link DefaultSuggestionDisplay#isAnimationEnabled()}
    *             instead
    */
+  @Override
   @Deprecated
   public boolean isAnimationEnabled() {
     return display.isAnimationEnabledImpl();
@@ -929,6 +944,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
    *
    * @return <code>true</code> if the widget is enabled
    */
+  @Override
   public boolean isEnabled() {
     return box.isEnabled();
   }
@@ -999,6 +1015,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
     ListenerWrapper.WrappedKeyboardListener.remove(this, listener);
   }
 
+  @Override
   public void setAccessKey(char key) {
     box.setAccessKey(key);
   }
@@ -1012,6 +1029,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
    *             {@link DefaultSuggestionDisplay#setAnimationEnabled(boolean)}
    *             instead
    */
+  @Override
   @Deprecated
   public void setAnimationEnabled(boolean enable) {
     display.setAnimationEnabledImpl(enable);
@@ -1034,6 +1052,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
    * @param enabled <code>true</code> to enable the widget, <code>false</code>
    *          to disable it
    */
+  @Override
   public void setEnabled(boolean enabled) {
     box.setEnabled(enabled);
     if (!enabled) {
@@ -1041,6 +1060,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
     }
   }
 
+  @Override
   public void setFocus(boolean focused) {
     box.setFocus(focused);
   }
@@ -1070,18 +1090,22 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
     getSuggestionDisplay().setPopupStyleNameImpl(style);
   }
 
+  @Override
   public void setTabIndex(int index) {
     box.setTabIndex(index);
   }
 
+  @Override
   public void setText(String text) {
     box.setText(text);
   }
 
+  @Override
   public void setValue(String newValue) {
     box.setValue(newValue);
   }
 
+  @Override
   public void setValue(String value, boolean fireEvents) {
     box.setValue(value, fireEvents);
   }
@@ -1113,6 +1137,7 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
   private void addEventsToTextBox() {
     class TextBoxEvents implements KeyDownHandler, KeyUpHandler, ValueChangeHandler<String> {
 
+      @Override
       public void onKeyDown(KeyDownEvent event) {
         switch (event.getNativeKeyCode()) {
           case KeyCodes.KEY_DOWN:
@@ -1139,11 +1164,13 @@ public class SuggestBox extends Composite implements HasText, HasFocus,
         }
       }
 
+      @Override
       public void onKeyUp(KeyUpEvent event) {
         // After every user key input, refresh the popup's suggestions.
         refreshSuggestions();
       }
 
+      @Override
       public void onValueChange(ValueChangeEvent<String> event) {
         delegateEvent(SuggestBox.this, event);
       }

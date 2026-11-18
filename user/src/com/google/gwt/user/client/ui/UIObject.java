@@ -875,7 +875,7 @@ public abstract class UIObject implements HasVisibility {
    * The receiver must:
    * <ul>
    * <li> create a real {@link Element} to replace its {@link PotentialElement}
-   * <li> call {@link #setElement()} with the new Element
+   * <li> call {@link #setElement(Element)} with the new Element
    * <li> and return the new Element
    * </ul>
    * <p>

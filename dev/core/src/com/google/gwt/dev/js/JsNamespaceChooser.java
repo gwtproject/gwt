@@ -291,7 +291,7 @@ public class JsNamespaceChooser {
       }
 
       x.setQualifier(new JsNameRef(x.getSourceInfo(), namespace));
-      didChange = true;
+      numMods++;
     }
   }
 }

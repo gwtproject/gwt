@@ -33,9 +33,6 @@ import com.google.gwt.dev.jjs.impl.gflow.constants.ConstantsAnalysis;
 import com.google.gwt.dev.jjs.impl.gflow.copy.CopyAnalysis;
 import com.google.gwt.dev.jjs.impl.gflow.liveness.LivenessAnalysis;
 import com.google.gwt.dev.jjs.impl.gflow.unreachable.UnreachableAnalysis;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 
 /**
@@ -43,14 +40,11 @@ import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 public class DataflowOptimizer {
   public static String NAME = DataflowOptimizer.class.getSimpleName();
 
-  public static OptimizerStats exec(JProgram jprogram, JNode node) {
-    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new DataflowOptimizer(jprogram).execImpl(node);
-    optimizeEvent.end();
-    return stats;
+  public static int exec(JProgram jprogram, JNode node) {
+    return new DataflowOptimizer(jprogram).execImpl(node);
   }
 
-  public static OptimizerStats exec(JProgram jprogram) {
+  public static int exec(JProgram jprogram) {
     return exec(jprogram, jprogram);
   }
 
@@ -112,9 +106,13 @@ public class DataflowOptimizer {
     }
   }
 
-  private OptimizerStats execImpl(JNode node) {
-    DataflowOptimizerVisitor visitor = new DataflowOptimizerVisitor();
-    visitor.accept(node);
-    return new OptimizerStats(NAME).recordModified(visitor.getNumMods());
+  private int execImpl(JNode node) {
+    try (OptimizerStats stats = OptimizerStats.optimization(NAME)) {
+      DataflowOptimizerVisitor visitor = new DataflowOptimizerVisitor();
+      visitor.accept(node);
+      stats.recordModified(visitor.getNumMods());
+
+      return stats.getNumMods();
+    }
   }
 }

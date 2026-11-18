@@ -34,6 +34,7 @@ public class LazyPanelParser implements ElementParser {
       + "  }\n"
       + "}";
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
 

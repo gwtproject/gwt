@@ -20,7 +20,7 @@ package com.google.gwt.safecss.shared;
  * 
  * <p>
  * This class is package-private and intended for internal use by the
- * {@link com.google.gwt.safecss} package.
+ * {@link com.google.gwt.safecss.shared} package.
  * 
  * <p>
  * All implementors must implement .equals and .hashCode so that they operate
@@ -53,6 +53,7 @@ class SafeStylesString implements SafeStyles {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String asString() {
     return css;
   }

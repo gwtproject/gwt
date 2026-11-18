@@ -74,6 +74,7 @@ class NodeImpl extends DOMItem implements Node {
    * This function delegates to the native method <code>appendChild</code> in
    * XMLParserImpl.
    */
+  @Override
   public Node appendChild(Node newChild) {
     try {
       final JavaScriptObject newChildJs = ((DOMItem) newChild).getJsObject();
@@ -89,22 +90,27 @@ class NodeImpl extends DOMItem implements Node {
    * This function delegates to the native method <code>cloneNode</code> in
    * XMLParserImpl.
    */
+  @Override
   public Node cloneNode(boolean deep) {
     return NodeImpl.build(XMLParserImpl.cloneNode(this.getJsObject(), deep));
   }
 
+  @Override
   public NamedNodeMap getAttributes() {
     return new NamedNodeMapImpl(XMLParserImpl.getAttributes(this.getJsObject()));
   }
 
+  @Override
   public NodeList getChildNodes() {
     return new NodeListImpl(XMLParserImpl.getChildNodes(this.getJsObject()));
   }
 
+  @Override
   public Node getFirstChild() {
     return getChildNodes().item(0);
   }
 
+  @Override
   public Node getLastChild() {
     return getChildNodes().item(getChildNodes().getLength() - 1);
   }
@@ -113,30 +119,37 @@ class NodeImpl extends DOMItem implements Node {
    * This function delegates to the native method <code>getNamespaceURI</code>
    * in XMLParserImpl.
    */
+  @Override
   public String getNamespaceURI() {
     return XMLParserImpl.getNamespaceURI(this.getJsObject());
   }
 
+  @Override
   public Node getNextSibling() {
     return NodeImpl.build(XMLParserImpl.getNextSibling(this.getJsObject()));
   }
 
+  @Override
   public String getNodeName() {
     return XMLParserImpl.getNodeName(this.getJsObject());
   }
 
+  @Override
   public short getNodeType() {
     return XMLParserImpl.getNodeType(this.getJsObject());
   }
 
+  @Override
   public String getNodeValue() {
     return XMLParserImpl.getNodeValue(this.getJsObject());
   }
 
+  @Override
   public Document getOwnerDocument() {
     return (Document) NodeImpl.build(XMLParserImpl.getOwnerDocument(this.getJsObject()));
   }
 
+  @Override
   public Node getParentNode() {
     return NodeImpl.build(XMLParserImpl.getParentNode(this.getJsObject()));
   }
@@ -145,10 +158,12 @@ class NodeImpl extends DOMItem implements Node {
    * This function delegates to the native method <code>getPrefix</code> in
    * XMLParserImpl.
    */
+  @Override
   public String getPrefix() {
     return XMLParserImpl.getPrefix(this.getJsObject());
   }
 
+  @Override
   public Node getPreviousSibling() {
     return NodeImpl.build(XMLParserImpl.getPreviousSibling(this.getJsObject()));
   }
@@ -157,6 +172,7 @@ class NodeImpl extends DOMItem implements Node {
    * This function delegates to the native method <code>hasAttributes</code>
    * in XMLParserImpl.
    */
+  @Override
   public boolean hasAttributes() {
     return XMLParserImpl.hasAttributes(this.getJsObject());
   }
@@ -165,6 +181,7 @@ class NodeImpl extends DOMItem implements Node {
    * This function delegates to the native method <code>hasChildNodes</code>
    * in XMLParserImpl.
    */
+  @Override
   public boolean hasChildNodes() {
     return XMLParserImpl.hasChildNodes(this.getJsObject());
   }
@@ -173,6 +190,7 @@ class NodeImpl extends DOMItem implements Node {
    * This function delegates to the native method <code>insertBefore</code> in
    * XMLParserImpl.
    */
+  @Override
   public Node insertBefore(Node newChild, Node refChild) {
     try {
       final JavaScriptObject newChildJs = ((DOMItem) newChild).getJsObject();
@@ -194,6 +212,7 @@ class NodeImpl extends DOMItem implements Node {
    * This function delegates to the native method <code>normalize</code> in
    * XMLParserImpl.
    */
+  @Override
   public void normalize() {
     XMLParserImpl.normalize(this.getJsObject());
   }
@@ -202,6 +221,7 @@ class NodeImpl extends DOMItem implements Node {
    * This function delegates to the native method <code>removeChild</code> in
    * XMLParserImpl.
    */
+  @Override
   public Node removeChild(Node oldChild) {
     try {
       final JavaScriptObject oldChildJs = ((DOMItem) oldChild).getJsObject();
@@ -217,6 +237,7 @@ class NodeImpl extends DOMItem implements Node {
    * This function delegates to the native method <code>replaceChild</code> in
    * XMLParserImpl.
    */
+  @Override
   public Node replaceChild(Node newChild, Node oldChild) {
     try {
       final JavaScriptObject newChildJs = ((DOMItem) newChild).getJsObject();
@@ -233,6 +254,7 @@ class NodeImpl extends DOMItem implements Node {
    * This function delegates to the native method <code>setNodeValue</code> in
    * XMLParserImpl.
    */
+  @Override
   public void setNodeValue(String nodeValue) {
     try {
       XMLParserImpl.setNodeValue(this.getJsObject(), nodeValue);

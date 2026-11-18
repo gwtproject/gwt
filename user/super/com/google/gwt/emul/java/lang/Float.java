@@ -15,12 +15,14 @@
  */
 package java.lang;
 
+import java.lang.constant.Constable;
+import java.lang.constant.ConstantDesc;
 import javaemul.internal.JsUtils;
 
 /**
  * Wraps a primitive <code>float</code> as an object.
  */
-public final class Float extends Number implements Comparable<Float> {
+public final class Float extends Number implements Comparable<Float>, Constable, ConstantDesc {
   public static final float MAX_VALUE = 3.4028235e+38f;
   public static final float MIN_VALUE = 1.4e-45f;
   public static final int MAX_EXPONENT = 127;
@@ -109,6 +111,25 @@ public final class Float extends Number implements Comparable<Float> {
 
   public static Float valueOf(String s) throws NumberFormatException {
     return new Float(s);
+  }
+
+  public static String toHexString(float f) {
+    if (!Float.isFinite(f)) {
+      return Float.toString(f);
+    }
+    int exp = Math.abs(f) == 0 ? -1 : Math.getExponent(f);
+    int allBits = Float.floatToIntBits(f);
+    String sign = allBits < 0 ? "-" : "";
+    int significantBits = allBits << 1 & 0xffffff;
+    String sigBitsString = Integer.toString(significantBits, 16);
+    String unsignedPrefix =  "0x1.";
+    String zeros = "0".repeat(6 - sigBitsString.length());
+    if (Math.abs(f) < Float.MIN_NORMAL) {
+      unsignedPrefix = "0x0.";
+      exp++;
+    }
+    return sign + unsignedPrefix + (zeros + sigBitsString)
+        .replaceFirst("(.)0+$", "$1") + "p" + exp;
   }
 
   private final transient float value;

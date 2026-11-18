@@ -20,9 +20,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.jjs.UnifiedAst;
 import com.google.gwt.dev.util.PersistenceBackedObject;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,8 +33,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Represents a factory for implementations of an endpoint that will invoke
  * CompilePerms. Implementations of PermutationWorkerFactory should be
- * default-instantiable and will have {@link #init} called immediately after
- * construction.
+ * default-instantiable.
  */
 public abstract class PermutationWorkerFactory {
 
@@ -137,9 +134,10 @@ public abstract class PermutationWorkerFactory {
         int workToDo = work.size();
         int aliveWorkers = workers.size();
         waitForWorkers : while (workToDo > 0 && aliveWorkers > 0) {
-          Event blockedEvent = SpeedTracerLogger.start(CompilerEventType.BLOCKED);
-          Result take = resultsQueue.take();
-          blockedEvent.end();
+          Result take;
+          try (SimpleEvent ignored = new SimpleEvent("Blocked")) {
+            take = resultsQueue.take();
+          }
           switch (take) {
             case SUCCESS:
               --workToDo;
@@ -218,7 +216,7 @@ public abstract class PermutationWorkerFactory {
   public static final String FACTORY_IMPL_PROPERTY = "gwt.jjs.permutationWorkerFactory";
 
   /**
-   * This value can be passed into {@link #setLocalWorkers(int)} to indicate
+   * This value can be passed into {@link #createWorkers(TreeLogger, UnifiedAst, int, int, List)} to indicate
    * that a heuristic should be used to determine the total number of local
    * workers.
    */

@@ -46,6 +46,7 @@ public class CssSprite extends CssRule implements CssSubstitution {
       this.source = source;
     }
 
+    @Override
     public boolean add(CssProperty o) {
       if (!processProperty(o)) {
         return source.add(o);
@@ -54,28 +55,34 @@ public class CssSprite extends CssRule implements CssSubstitution {
       }
     }
 
+    @Override
     public void add(int index, CssProperty element) {
       if (!processProperty(element)) {
         source.add(index, element);
       }
     }
 
+    @Override
     public boolean addAll(Collection<? extends CssProperty> c) {
       return source.addAll(c);
     }
 
+    @Override
     public boolean addAll(int index, Collection<? extends CssProperty> c) {
       return source.addAll(index, c);
     }
 
+    @Override
     public void clear() {
       source.clear();
     }
 
+    @Override
     public boolean contains(Object o) {
       return source.contains(o);
     }
 
+    @Override
     public boolean containsAll(Collection<?> c) {
       return source.containsAll(c);
     }
@@ -85,6 +92,7 @@ public class CssSprite extends CssRule implements CssSubstitution {
       return source.equals(o);
     }
 
+    @Override
     public CssProperty get(int index) {
       return source.get(index);
     }
@@ -94,46 +102,57 @@ public class CssSprite extends CssRule implements CssSubstitution {
       return source.hashCode();
     }
 
+    @Override
     public int indexOf(Object o) {
       return source.indexOf(o);
     }
 
+    @Override
     public boolean isEmpty() {
       return source.isEmpty();
     }
 
+    @Override
     public Iterator<CssProperty> iterator() {
       return source.iterator();
     }
 
+    @Override
     public int lastIndexOf(Object o) {
       return source.lastIndexOf(o);
     }
 
+    @Override
     public ListIterator<CssProperty> listIterator() {
       return source.listIterator();
     }
 
+    @Override
     public ListIterator<CssProperty> listIterator(int index) {
       return source.listIterator(index);
     }
 
+    @Override
     public CssProperty remove(int index) {
       return source.remove(index);
     }
 
+    @Override
     public boolean remove(Object o) {
       return source.remove(o);
     }
 
+    @Override
     public boolean removeAll(Collection<?> c) {
       return source.removeAll(c);
     }
 
+    @Override
     public boolean retainAll(Collection<?> c) {
       return source.retainAll(c);
     }
 
+    @Override
     public CssProperty set(int index, CssProperty element) {
       if (!processProperty(element)) {
         return source.set(index, element);
@@ -142,18 +161,22 @@ public class CssSprite extends CssRule implements CssSubstitution {
       }
     }
 
+    @Override
     public int size() {
       return source.size();
     }
 
+    @Override
     public List<CssProperty> subList(int fromIndex, int toIndex) {
       return source.subList(fromIndex, toIndex);
     }
 
+    @Override
     public Object[] toArray() {
       return source.toArray();
     }
 
+    @Override
     public <T> T[] toArray(T[] a) {
       return source.toArray(a);
     }

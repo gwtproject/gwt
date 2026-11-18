@@ -55,32 +55,39 @@ public abstract class CoverageVisitor extends JsModVisitor {
     this.instrumentedFiles = instrumentedFiles;
   }
 
-  @Override public void endVisit(JsArrayAccess x, JsContext ctx) {
+  @Override
+  public void endVisit(JsArrayAccess x, JsContext ctx) {
     visitExpression(x, ctx);
   }
 
-  @Override public void endVisit(JsBinaryOperation x, JsContext ctx) {
+  @Override
+  public void endVisit(JsBinaryOperation x, JsContext ctx) {
     visitExpression(x, ctx);
   }
 
-  @Override public void endVisit(JsInvocation x, JsContext ctx) {
+  @Override
+  public void endVisit(JsInvocation x, JsContext ctx) {
     nodesInRefContext.remove(x.getQualifier());
     visitExpression(x, ctx);
   }
 
-  @Override public void endVisit(JsNameRef x, JsContext ctx) {
+  @Override
+  public void endVisit(JsNameRef x, JsContext ctx) {
     visitExpression(x, ctx);
   }
 
-  @Override public void endVisit(JsNew x, JsContext ctx) {
+  @Override
+  public void endVisit(JsNew x, JsContext ctx) {
     visitExpression(x, ctx);
   }
 
-  @Override public void endVisit(JsPostfixOperation x, JsContext ctx) {
+  @Override
+  public void endVisit(JsPostfixOperation x, JsContext ctx) {
     visitExpression(x, ctx);
   }
 
-  @Override public void endVisit(JsPrefixOperation x, JsContext ctx) {
+  @Override
+  public void endVisit(JsPrefixOperation x, JsContext ctx) {
     visitExpression(x, ctx);
     nodesInRefContext.remove(x.getArg());
   }
@@ -91,7 +98,8 @@ public abstract class CoverageVisitor extends JsModVisitor {
    * lastLine before the condition and increment expressions in the for loop
    * so that location data will be recorded correctly.
    */
-  @Override public boolean visit(JsFor x, JsContext ctx) {
+  @Override
+  public boolean visit(JsFor x, JsContext ctx) {
     if (x.getInitExpr() != null) {
       x.setInitExpr(accept(x.getInitExpr()));
     } else if (x.getInitVars() != null) {
@@ -111,18 +119,21 @@ public abstract class CoverageVisitor extends JsModVisitor {
     return false;
   }
 
-  @Override public boolean visit(JsInvocation x, JsContext ctx) {
+  @Override
+  public boolean visit(JsInvocation x, JsContext ctx) {
     nodesInRefContext.add(x.getQualifier());
     return true;
   }
 
-  @Override public boolean visit(JsPropertyInitializer x, JsContext ctx) {
+  @Override
+  public boolean visit(JsPropertyInitializer x, JsContext ctx) {
     // Do not instrument labels.
     x.setValueExpr(accept(x.getValueExpr()));
     return false;
   }
 
-  @Override public boolean visit(JsPrefixOperation x, JsContext ctx) {
+  @Override
+  public boolean visit(JsPrefixOperation x, JsContext ctx) {
     if (x.getOperator() == JsUnaryOperator.DELETE
         || x.getOperator() == JsUnaryOperator.TYPEOF) {
       nodesInRefContext.add(x.getArg());
@@ -134,7 +145,8 @@ public abstract class CoverageVisitor extends JsModVisitor {
    * Similar to JsFor, this resets the current location information before
    * evaluating the condition.
    */
-  @Override public boolean visit(JsWhile x, JsContext ctx) {
+  @Override
+  public boolean visit(JsWhile x, JsContext ctx) {
     resetPosition();
     x.setCondition(accept(x.getCondition()));
     accept(x.getBody());

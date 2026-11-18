@@ -53,7 +53,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * <li>a-z
  * <li>A-Z
  * <li>0-9
- * <li>;,/?:@&=+$-_.!~*()
+ * <li>;,/?:@&amp;=+$-_.!~*()
  * </ul>
  * </p>
  */

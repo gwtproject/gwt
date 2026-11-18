@@ -56,6 +56,7 @@ public class PageSizePager extends AbstractPager {
 
     // Show more button.
     showMoreButton.addClickHandler(new ClickHandler() {
+      @Override
       public void onClick(ClickEvent event) {
         // Display should be non-null, but we check defensively.
         HasRows display = getDisplay();
@@ -69,6 +70,7 @@ public class PageSizePager extends AbstractPager {
       }
     });
     showLessButton.addClickHandler(new ClickHandler() {
+      @Override
       public void onClick(ClickEvent event) {
         // Display should be non-null, but we check defensively.
         HasRows display = getDisplay();

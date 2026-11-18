@@ -35,6 +35,7 @@ public class FakeEditorContext<T> implements EditorContext<T> {
   /**
    * Returns {@code null}.
    */
+  @Override
   public CompositeEditor<T, ?, ?> asCompositeEditor() {
     return null;
   }
@@ -42,6 +43,7 @@ public class FakeEditorContext<T> implements EditorContext<T> {
   /**
    * Returns {@code null}.
    */
+  @Override
   public HasEditorDelegate<T> asHasEditorDelegate() {
     return null;
   }
@@ -49,6 +51,7 @@ public class FakeEditorContext<T> implements EditorContext<T> {
   /**
    * Returns {@code null}.
    */
+  @Override
   public HasEditorErrors<T> asHasEditorErrors() {
     return null;
   }
@@ -56,6 +59,7 @@ public class FakeEditorContext<T> implements EditorContext<T> {
   /**
    * Returns {@code null}.
    */
+  @Override
   public LeafValueEditor<T> asLeafValueEditor() {
     return null;
   }
@@ -63,6 +67,7 @@ public class FakeEditorContext<T> implements EditorContext<T> {
   /**
    * Returns {@code null}.
    */
+  @Override
   public ValueAwareEditor<T> asValueAwareEditor() {
     return null;
   }
@@ -70,6 +75,7 @@ public class FakeEditorContext<T> implements EditorContext<T> {
   /**
    * Returns {@code false}.
    */
+  @Override
   public boolean canSetInModel() {
     return false;
   }
@@ -77,6 +83,7 @@ public class FakeEditorContext<T> implements EditorContext<T> {
   /**
    * Returns {@code value} via an unchecked generic cast.
    */
+  @Override
   @SuppressWarnings("unchecked")
   public T checkAssignment(Object value) {
     return (T) value;
@@ -85,6 +92,7 @@ public class FakeEditorContext<T> implements EditorContext<T> {
   /**
    * Returns {@link EditorContext#ROOT_PATH}.
    */
+  @Override
   public String getAbsolutePath() {
     return ROOT_PATH;
   }
@@ -92,6 +100,7 @@ public class FakeEditorContext<T> implements EditorContext<T> {
   /**
    * Returns {@code null}.
    */
+  @Override
   public Class<T> getEditedType() {
     return null;
   }
@@ -99,6 +108,7 @@ public class FakeEditorContext<T> implements EditorContext<T> {
   /**
    * Returns {@code null}.
    */
+  @Override
   public Editor<T> getEditor() {
     return null;
   }
@@ -106,6 +116,7 @@ public class FakeEditorContext<T> implements EditorContext<T> {
   /**
    * Returns {@code null}.
    */
+  @Override
   public EditorDelegate<T> getEditorDelegate() {
     return null;
   }
@@ -113,6 +124,7 @@ public class FakeEditorContext<T> implements EditorContext<T> {
   /**
    * Returns {@code null}.
    */
+  @Override
   public T getFromModel() {
     return null;
   }
@@ -120,12 +132,14 @@ public class FakeEditorContext<T> implements EditorContext<T> {
   /**
    * A no-op.
    */
+  @Override
   public void setInModel(T data) {
   }
 
   /**
    * No-op.
    */
+  @Override
   public void traverseSyntheticCompositeEditor(EditorVisitor visitor) {
   }
 }

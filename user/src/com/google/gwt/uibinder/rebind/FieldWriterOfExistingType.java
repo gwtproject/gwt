@@ -35,14 +35,17 @@ class FieldWriterOfExistingType extends AbstractFieldWriter {
     this.type = type;
   }
 
+  @Override
   public JClassType getAssignableType() {
     return type;
   }
 
+  @Override
   public JClassType getInstantiableType() {
     return type;
   }
 
+  @Override
   public String getQualifiedSourceName() {
     return type.getQualifiedSourceName();
   }

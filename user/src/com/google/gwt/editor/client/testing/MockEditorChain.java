@@ -31,16 +31,19 @@ public class MockEditorChain<C> implements
     CompositeEditor.EditorChain<C, FakeLeafValueEditor<C>> {
   private Map<FakeLeafValueEditor<C>, Boolean> attached = new HashMap<FakeLeafValueEditor<C>, Boolean>();
 
+  @Override
   public void attach(C object, FakeLeafValueEditor<C> subEditor) {
     subEditor.setValue(object);
     attached.put(subEditor, true);
   }
 
+  @Override
   public void detach(FakeLeafValueEditor<C> subEditor) {
     subEditor.setValue(null);
     attached.put(subEditor, false);
   }
 
+  @Override
   public C getValue(FakeLeafValueEditor<C> subEditor) {
     return subEditor.getValue();
   }

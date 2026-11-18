@@ -18,8 +18,7 @@ package com.google.gwt.resources.rg;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
-import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
-import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
+import com.google.gwt.dev.util.log.perf.SimpleEvent;
 
 import org.w3c.dom.Node;
 
@@ -79,6 +78,7 @@ class ImageBundleBuilder {
    */
   static class BestFitArranger implements Arranger {
     private static final Comparator<ImageRect> decreasingHeightComparator = new Comparator<ImageRect>() {
+      @Override
       public int compare(ImageRect a, ImageRect b) {
         final int c = b.getHeight() - a.getHeight();
         // If we encounter equal heights, use the name to keep things
@@ -88,6 +88,7 @@ class ImageBundleBuilder {
     };
 
     private static final Comparator<ImageRect> decreasingWidthComparator = new Comparator<ImageRect>() {
+      @Override
       public int compare(ImageRect a, ImageRect b) {
         final int c = b.getWidth() - a.getWidth();
         // If we encounter equal heights, use the name to keep things
@@ -96,6 +97,7 @@ class ImageBundleBuilder {
       }
     };
 
+    @Override
     public Size arrangeImages(Collection<ImageRect> rects) {
       if (rects.size() == 0) {
         return new Size(0, 0);
@@ -171,7 +173,7 @@ class ImageBundleBuilder {
     }
 
     /**
-     * Companion method to {@link #arrangeImages()}. This method does a best
+     * Companion method to {@link #arrangeImages(Collection)}. This method does a best
      * effort horizontal packing of a column after it was packed vertically.
      * This is the Decreasing Width part of Next-Fit Decreasing Height
      * Decreasing Width. The basic strategy is to sort the remaining rectangles
@@ -224,6 +226,7 @@ class ImageBundleBuilder {
    * tiled vertically to fill to fill the full height of the image.
    */
   static class HorizontalArranger implements Arranger {
+    @Override
     public Size arrangeImages(Collection<ImageRect> rects) {
       int height = 1;
       int width = 0;
@@ -255,6 +258,7 @@ class ImageBundleBuilder {
    * canvas needed to hold the images in their current positions.
    */
   static class IdentityArranger implements Arranger {
+    @Override
     public Size arrangeImages(Collection<ImageRect> rects) {
       int height = 0;
       int width = 0;
@@ -423,7 +427,7 @@ class ImageBundleBuilder {
 
   /**
    * Used to return the size of the resulting image from the method
-   * {@link ImageBundleBuilder#arrangeImages()}.
+   * {@link ImageBundleBuilder#arrangeImages(Collection)}.
    */
   static class Size {
     private final int width, height;
@@ -439,6 +443,7 @@ class ImageBundleBuilder {
    * horizontally to fill the full width of the image.
    */
   static class VerticalArranger implements Arranger {
+    @Override
     public Size arrangeImages(Collection<ImageRect> rects) {
       int height = 0;
       int width = 1;
@@ -535,19 +540,17 @@ class ImageBundleBuilder {
     BufferedImage bundledImage = new BufferedImage(rect.getWidth(),
         rect.getHeight(), BufferedImage.TYPE_INT_ARGB_PRE);
 
-    SpeedTracerLogger.Event createGraphicsEvent =
-      SpeedTracerLogger.start(CompilerEventType.GRAPHICS_INIT,
-          "java.awt.headless", System.getProperty("java.awt.headless"));
-    Graphics2D g2d = bundledImage.createGraphics();
-    createGraphicsEvent.end();
+    final Graphics2D g2d;
+    try (SimpleEvent ignored = new SimpleEvent("Graphics2d")) {
+      g2d = bundledImage.createGraphics();
+    }
 
     setBetterRenderingQuality(g2d);
 
     g2d.drawImage(rect.getImage(), rect.transform(), null);
     g2d.dispose();
 
-    byte[] imageBytes = createImageBytes(logger, bundledImage);
-    return imageBytes;
+    return createImageBytes(logger, bundledImage);
   }
 
   /**
@@ -627,7 +630,7 @@ class ImageBundleBuilder {
    *
    * @param logger a hierarchical logger which logs to the hosted console
    * @param imageName the name of an image that can be found on the classpath
-   * @param resource the URL from which the image data wil be loaded
+   * @param resource the URL from which the image data will be loaded
    * @throws UnableToCompleteException if the image with name
    *           <code>imageName</code> cannot be added to the master composite
    *           image
@@ -802,7 +805,7 @@ class ImageBundleBuilder {
    * images.
    *
    * In this particular implementation, we use NFDHDW (see
-   * {@link #arrangeImages()}) to get an approximate optimal image packing.
+   * {@link Arranger#arrangeImages(Collection)}) to get an approximate optimal image packing.
    *
    * The most important aspect of drawing the bundled image is that it be drawn
    * in a deterministic way. The drawing of the image should not rely on
@@ -826,13 +829,12 @@ class ImageBundleBuilder {
     BufferedImage bundledImage = new BufferedImage(size.width, size.height,
         BufferedImage.TYPE_INT_ARGB_PRE);
 
-    SpeedTracerLogger.Event graphicsEvent = SpeedTracerLogger.start(CompilerEventType.GRAPHICS_INIT,
-        "java.awt.headless", System.getProperty("java.awt.headless"));
-    Graphics2D g2d = bundledImage.createGraphics();
+    final Graphics2D g2d;
+    try (SimpleEvent ignored = new SimpleEvent("Graphics2d")) {
+      g2d = bundledImage.createGraphics();
 
-    setBetterRenderingQuality(g2d);
-
-    graphicsEvent.end();
+      setBetterRenderingQuality(g2d);
+    }
 
     for (ImageRect imageRect : imageRects) {
       g2d.drawImage(imageRect.getImage(), imageRect.transform(), null);

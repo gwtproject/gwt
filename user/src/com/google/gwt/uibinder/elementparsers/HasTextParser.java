@@ -25,6 +25,7 @@ import com.google.gwt.uibinder.rebind.XMLElement;
  */
 public class HasTextParser implements ElementParser {
 
+  @Override
   public void parse(XMLElement elem, String fieldName, JClassType type,
       UiBinderWriter writer) throws UnableToCompleteException {
     // Widgets that implement HasText will use their elements' inner text.

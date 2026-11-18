@@ -30,6 +30,7 @@ public class KeyGeneratorAdapter implements KeyGenerator {
     this.keygen = keygen;
   }
 
+  @Override
   public String generateKey(Message msg) {
     String className = msg.getMessageInterface().getQualifiedName();
     String methodName = msg.getMethodName();

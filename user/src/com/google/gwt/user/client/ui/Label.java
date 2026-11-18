@@ -199,6 +199,7 @@ public class Label extends LabelBase<String> implements HasDirectionalText,
     super(element);
   }
 
+  @Override
   public HandlerRegistration addClickHandler(ClickHandler handler) {
     return addDomHandler(handler, ClickEvent.getType());
   }
@@ -211,50 +212,62 @@ public class Label extends LabelBase<String> implements HasDirectionalText,
     ListenerWrapper.WrappedClickListener.add(this, listener);
   }
 
+  @Override
   public HandlerRegistration addDoubleClickHandler(DoubleClickHandler handler) {
     return addDomHandler(handler, DoubleClickEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragEndHandler(DragEndHandler handler) {
     return addBitlessDomHandler(handler, DragEndEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragEnterHandler(DragEnterHandler handler) {
     return addBitlessDomHandler(handler, DragEnterEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragHandler(DragHandler handler) {
     return addBitlessDomHandler(handler, DragEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragLeaveHandler(DragLeaveHandler handler) {
     return addBitlessDomHandler(handler, DragLeaveEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragOverHandler(DragOverHandler handler) {
     return addBitlessDomHandler(handler, DragOverEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDragStartHandler(DragStartHandler handler) {
     return addBitlessDomHandler(handler, DragStartEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addDropHandler(DropHandler handler) {
     return addBitlessDomHandler(handler, DropEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addGestureChangeHandler(GestureChangeHandler handler) {
     return addDomHandler(handler, GestureChangeEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addGestureEndHandler(GestureEndHandler handler) {
     return addDomHandler(handler, GestureEndEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addGestureStartHandler(GestureStartHandler handler) {
     return addDomHandler(handler, GestureStartEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addMouseDownHandler(MouseDownHandler handler) {
     return addDomHandler(handler, MouseDownEvent.getType());
   }
@@ -269,22 +282,27 @@ public class Label extends LabelBase<String> implements HasDirectionalText,
     ListenerWrapper.WrappedMouseListener.add(this, listener);
   }
 
+  @Override
   public HandlerRegistration addMouseMoveHandler(MouseMoveHandler handler) {
     return addDomHandler(handler, MouseMoveEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addMouseOutHandler(MouseOutHandler handler) {
     return addDomHandler(handler, MouseOutEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addMouseOverHandler(MouseOverHandler handler) {
     return addDomHandler(handler, MouseOverEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addMouseUpHandler(MouseUpHandler handler) {
     return addDomHandler(handler, MouseUpEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addMouseWheelHandler(MouseWheelHandler handler) {
     return addDomHandler(handler, MouseWheelEvent.getType());
   }
@@ -297,22 +315,27 @@ public class Label extends LabelBase<String> implements HasDirectionalText,
     ListenerWrapper.WrappedMouseWheelListener.add(this, listener);
   }
 
+  @Override
   public HandlerRegistration addTouchCancelHandler(TouchCancelHandler handler) {
     return addDomHandler(handler, TouchCancelEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addTouchEndHandler(TouchEndHandler handler) {
     return addDomHandler(handler, TouchEndEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addTouchMoveHandler(TouchMoveHandler handler) {
     return addDomHandler(handler, TouchMoveEvent.getType());
   }
 
+  @Override
   public HandlerRegistration addTouchStartHandler(TouchStartHandler handler) {
     return addDomHandler(handler, TouchStartEvent.getType());
   }
 
+  @Override
   public LeafValueEditor<String> asEditor() {
     if (editor == null) {
       editor = HasTextEditor.of(this);
@@ -324,15 +347,18 @@ public class Label extends LabelBase<String> implements HasDirectionalText,
    * Gets the widget element's direction.
    * @deprecated Use {@link #getTextDirection} instead
    */
+  @Override
   @Deprecated
   public Direction getDirection() {
     return BidiUtils.getDirectionOnElement(getElement());
   }
 
+  @Override
   public String getText() {
     return directionalTextHelper.getText();
   }
 
+  @Override
   public Direction getTextDirection() {
     return directionalTextHelper.getTextDirection();
   }
@@ -369,6 +395,7 @@ public class Label extends LabelBase<String> implements HasDirectionalText,
    * @deprecated Use {@link #setDirectionEstimator} and / or pass explicit
    * direction to {@link #setText} instead
    */
+  @Override
   @Deprecated
   public void setDirection(Direction direction) {
     directionalTextHelper.setDirection(direction);
@@ -385,6 +412,7 @@ public class Label extends LabelBase<String> implements HasDirectionalText,
    *
    * @param text the widget's new text
    */
+  @Override
   public void setText(String text) {
     directionalTextHelper.setText(text);
     updateHorizontalAlignment();
@@ -410,6 +438,7 @@ public class Label extends LabelBase<String> implements HasDirectionalText,
    * @param dir the text's direction. Note: {@code Direction.DEFAULT} means
    *        direction should be inherited from the widget's parent element.
    */
+  @Override
   public void setText(String text, Direction dir) {
     directionalTextHelper.setText(text, dir);
     updateHorizontalAlignment();

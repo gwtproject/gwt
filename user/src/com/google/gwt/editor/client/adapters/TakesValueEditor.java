@@ -47,10 +47,12 @@ public class TakesValueEditor<T> implements LeafValueEditor<T> {
     this.peer = peer;
   }
 
+  @Override
   public T getValue() {
     return peer.getValue();
   }
 
+  @Override
   public void setValue(T value) {
     peer.setValue(value);
   }

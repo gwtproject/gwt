@@ -298,6 +298,10 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
             + "static int f1;"
             + "static A createA() { A.f1 = 1; return new A(); } "
             + "static boolean booleanWithSideEffects() { createA(); return true;}"
+            + "@javaemul.internal.annotations.DoNotInline "
+            + "static boolean notInlinedBool1() { return true;}"
+            + "@javaemul.internal.annotations.DoNotInline "
+            + "static boolean notInlinedBool2() { return true;}"
             + "static boolean booleanWithoutSideEffects() { return true;}"
             + "static int arithmeticWithSideEffects() { createA(); return 4;}"
             + "}");
@@ -310,6 +314,28 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
 
     optimizeExpressions(false, "boolean", "false && A.booleanWithSideEffects()")
         .intoString("return false;");
+
+    optimizeExpressions(false, "boolean", "A.notInlinedBool1() && false")
+        .intoString("return (EntryPoint$A.notInlinedBool1(), false);");
+
+    optimizeExpressions(false, "int",
+        "A.notInlinedBool1() && (false && A.notInlinedBool2()) ? 1 : 2")
+        .intoString("return (EntryPoint$A.notInlinedBool1(), 2);");
+
+    optimizeExpressions(false, "int",
+        "(A.notInlinedBool1() && false) && A.notInlinedBool2() ? 1 : 2")
+        .intoString("return (EntryPoint$A.notInlinedBool1(), 2);");
+
+    optimizeExpressions(false, "boolean", "A.notInlinedBool1() || true")
+        .intoString("return (EntryPoint$A.notInlinedBool1(), true);");
+
+    optimizeExpressions(false, "int",
+        "A.notInlinedBool1() || (true || A.notInlinedBool2()) ? 1 : 2")
+        .intoString("return (EntryPoint$A.notInlinedBool1(), 1);");
+
+    optimizeExpressions(false, "int",
+        "(A.notInlinedBool1() || true) || A.notInlinedBool2() ? 1 : 2")
+        .intoString("return (EntryPoint$A.notInlinedBool1(), 1);");
 
     optimizeExpressions(false, "int", "3 + A.arithmeticWithSideEffects()")
         .intoString("return (EntryPoint$A.f1 = 1, new EntryPoint$A(), 7);");
@@ -522,14 +548,16 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
       MethodInliner.exec(program);
     }
     if (runSpecializer) {
-      Finalizer.exec(program); // required so that method is marked final
+      // required so that method is marked final
+      Finalizer.exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
       MakeCallsStatic.exec(program, false); // required so that method is static
-      TypeTightener.exec(program); // required so that the parameter types are tightened
-      MethodCallSpecializer.exec(program);
+      // required so that the parameter types are tightened
+      TypeTightener.exec(program, new FullOptimizerContext(program));
+      MethodCallSpecializer.exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
     }
 
-    OptimizerStats result = DeadCodeElimination.exec(program, method);
-    if (result.didChange()) {
+    int mods = DeadCodeElimination.exec(program, method);
+    if (mods > 0) {
       // Make sure we converge in one pass.
       //
       // TODO(rluble): It does not appear to be true in general unless we iterate until a
@@ -543,8 +571,8 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
       // If m is processed first, it will see the constructor as having side effects.
       // Then the constructor will become empty enabling m() become empty in the next round.
       //
-      assertFalse(DeadCodeElimination.exec(program, method).didChange());
+      assertEquals(0, DeadCodeElimination.exec(program, method));
     }
-    return result.didChange();
+    return mods > 0;
   }
 }

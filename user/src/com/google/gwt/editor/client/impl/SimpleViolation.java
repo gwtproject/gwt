@@ -44,18 +44,22 @@ public abstract class SimpleViolation {
       this.violations = violations;
     }
 
+    @Override
     public Iterator<SimpleViolation> iterator() {
       // Use a fresh source iterator each time
       final Iterator<ConstraintViolation<?>> source = violations.iterator();
       return new Iterator<SimpleViolation>() {
+        @Override
         public boolean hasNext() {
           return source.hasNext();
         }
 
+        @Override
         public SimpleViolation next() {
           return new SimpleViolationAdapter(source.next());
         }
 
+        @Override
         public void remove() {
           source.remove();
         }

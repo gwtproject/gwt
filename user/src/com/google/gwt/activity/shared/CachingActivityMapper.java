@@ -37,6 +37,7 @@ public class CachingActivityMapper implements ActivityMapper {
     this.wrapped = wrapped;
   }
 
+  @Override
   public Activity getActivity(Place place) {
     if (!place.equals(lastPlace)) {
       lastPlace = place;

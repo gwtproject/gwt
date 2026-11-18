@@ -40,8 +40,8 @@ public class JsSourceGenerationVisitorWithSizeBreakdown extends JsSourceGenerati
   private final Map<JsName, Integer> sizeMap = new HashMap<JsName, Integer>();
 
   public JsSourceGenerationVisitorWithSizeBreakdown(TextOutput out,
-      JavaToJavaScriptMap javaToJavaScriptMap) {
-    super(out);
+      JavaToJavaScriptMap javaToJavaScriptMap, PrintOptions options) {
+    super(out, options);
     this.out = out;
     this.map = javaToJavaScriptMap;
   }

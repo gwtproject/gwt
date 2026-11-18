@@ -50,6 +50,7 @@ public class FilteredActivityMapper implements ActivityMapper {
     this.wrapped = wrapped;
   }
 
+  @Override
   public Activity getActivity(Place place) {
     return wrapped.getActivity(filter.filter(place));
   }

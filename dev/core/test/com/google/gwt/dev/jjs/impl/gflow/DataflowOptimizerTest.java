@@ -19,6 +19,7 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.impl.DeadCodeElimination;
+import com.google.gwt.dev.jjs.impl.FullOptimizerContext;
 import com.google.gwt.dev.jjs.impl.MethodInliner;
 import com.google.gwt.dev.jjs.impl.OptimizerTestBase;
 
@@ -456,16 +457,16 @@ public class DataflowOptimizerTest extends OptimizerTestBase {
     do {
       optimizeChange = false;
       if (runDCE) {
-        optimizeChange = DeadCodeElimination.exec(program).didChange() || optimizeChange;
+        optimizeChange = DeadCodeElimination.exec(program, new FullOptimizerContext(program)) > 0 || optimizeChange;
       }
 
       if (runMethodInliner) {
-        optimizeChange = MethodInliner.exec(program).didChange() || optimizeChange;
+        optimizeChange = MethodInliner.exec(program) > 0 || optimizeChange;
       }
       didChange = didChange || optimizeChange;
     } while (optimizeChange);
 
-    didChange = DataflowOptimizer.exec(program, method).didChange() || didChange;
+    didChange = DataflowOptimizer.exec(program, method) > 0 || didChange;
     return didChange;
   }
 }

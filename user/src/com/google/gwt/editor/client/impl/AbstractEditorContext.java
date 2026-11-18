@@ -60,29 +60,36 @@ public abstract class AbstractEditorContext<T> implements EditorContext<T> {
         ? (ValueAwareEditor<T>) editor : null;
   }
 
+  @Override
   @SuppressWarnings("unchecked")
   public CompositeEditor<T, ?, ?> asCompositeEditor() {
     return (CompositeEditor<T, ?, ?>) compositeEditor;
   }
 
+  @Override
   public HasEditorDelegate<T> asHasEditorDelegate() {
     return hasEditorDelegate;
   }
 
+  @Override
   public HasEditorErrors<T> asHasEditorErrors() {
     return hasEditorErrors;
   }
 
+  @Override
   public LeafValueEditor<T> asLeafValueEditor() {
     return leafValueEditor;
   }
 
+  @Override
   public ValueAwareEditor<T> asValueAwareEditor() {
     return valueAwareEditor;
   }
 
+  @Override
   public abstract boolean canSetInModel();
 
+  @Override
   public abstract T checkAssignment(Object value);
 
   @SuppressWarnings(value = {"rawtypes", "unchecked"})
@@ -93,21 +100,26 @@ public abstract class AbstractEditorContext<T> implements EditorContext<T> {
     delegate.getEditorChain().traverse(visitor, subDelegate);
   }
 
+  @Override
   public String getAbsolutePath() {
     // Not delegate.getPath() since delegate might be null for a leaf editor
     return path;
   }
 
+  @Override
   public abstract Class<T> getEditedType();
 
+  @Override
   public Editor<T> getEditor() {
     return editor;
   }
 
+  @Override
   public EditorDelegate<T> getEditorDelegate() {
     return delegate;
   }
 
+  @Override
   public abstract T getFromModel();
 
   public void halt() {
@@ -122,6 +134,7 @@ public abstract class AbstractEditorContext<T> implements EditorContext<T> {
     this.delegate = delegate;
   }
 
+  @Override
   public abstract void setInModel(T data);
 
   public void traverse(EditorVisitor visitor, AbstractEditorDelegate<?, ?> next) {
@@ -131,6 +144,7 @@ public abstract class AbstractEditorContext<T> implements EditorContext<T> {
     visitor.endVisit(this);
   }
 
+  @Override
   public void traverseSyntheticCompositeEditor(EditorVisitor visitor) {
     if (asCompositeEditor() == null) {
       throw new IllegalStateException();

@@ -13,9 +13,13 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
+
 /**
  * Annotation with no bytecode for GWT, and multiple members.
  */
+@Target({ElementType.METHOD, ElementType.TYPE_USE})
 public @interface SampleBytecodeOnlyNormalAnnotation {
   int a();
   int b();

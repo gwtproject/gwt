@@ -564,7 +564,7 @@ public class HashMap<K, V> implements Map<K, V>, Serializable {
   }
 
   /**
-   * Adapted from {@link org.apache.commons.collections.map.AbstractHashedMap}.
+   * Adapted from {@code org.apache.commons.collections.map.AbstractHashedMap}.
    */
   @SuppressWarnings("unchecked")
   protected void doReadObject(ObjectInputStream in) throws IOException,
@@ -580,7 +580,7 @@ public class HashMap<K, V> implements Map<K, V>, Serializable {
   }
 
   /**
-   * Adapted from {@link org.apache.commons.collections.map.AbstractHashedMap}.
+   * Adapted from {@code org.apache.commons.collections.map.AbstractHashedMap}.
    */
   protected void doWriteObject(ObjectOutputStream out) throws IOException {
     out.writeInt(keys.length);
@@ -593,7 +593,8 @@ public class HashMap<K, V> implements Map<K, V>, Serializable {
       }
       Arrays.sort(idx, new Comparator<Integer>() {
           @SuppressWarnings({"rawtypes", "unchecked"})
-          @Override public int compare(final Integer o1, final Integer o2) {
+          @Override
+          public int compare(final Integer o1, final Integer o2) {
               Comparable c1 = (Comparable)(keys[o1]);
               Comparable c2 = (Comparable)(keys[o2]);
               if (c1 == null) {

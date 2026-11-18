@@ -186,7 +186,7 @@ public class MethodInlinerTest extends OptimizerTestBase {
         getCanonicalSource(result.findMethod("fun2")));
   }
 
-  public void testSwitchExpressionAsArgument() throws Exception {
+  public void testSwitchExpressionAsArgument() {
     addSnippetClassDecl("static String toString(int x) { return String.valueOf(x); }");
     addSnippetClassDecl("static String describe(int value) {",
         "  return toString(switch (value) {",
@@ -206,6 +206,32 @@ public class MethodInlinerTest extends OptimizerTestBase {
             " default: yield 4;" +
             " })" +
             " + \"1\" }", describe);
+  }
+
+  public void testSwitchExpressionAsThis() {
+    addSnippetClassDecl("""
+      public static class Instance {
+        private String s = "1";
+        public Instance(String s) {this.s = s;}
+        String getStr() { return this.s; }
+      }
+      static String describe(int value) {
+        return (switch (value) {
+           case 1 -> new Instance("2");
+          default -> new Instance("3");
+        }).getStr();
+      }""");
+
+    Result result = optimize("void", "describe(1);");
+    String entrypoint = getCanonicalSource(result.findMethod("onModuleLoad"));
+    assertEquals("public static void onModuleLoad(){ EntryPoint.describe(1); }", entrypoint);
+
+    assertEquals("static String describe(int value){ " +
+            "return (switch (value) { " +
+            "case 1: yield new EntryPoint$Instance(\"2\"); " +
+            "default: yield new EntryPoint$Instance(\"3\"); " +
+            "}).getStr() " +
+            "}", getCanonicalSource(result.findMethod("describe")));
   }
 
   @Override

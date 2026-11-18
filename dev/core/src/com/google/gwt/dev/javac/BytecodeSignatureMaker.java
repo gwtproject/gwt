@@ -27,6 +27,7 @@ import org.objectweb.asm.Opcodes;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -53,8 +54,8 @@ public class BytecodeSignatureMaker {
             | Opcodes.ACC_SYNCHRONIZED | Opcodes.ACC_SUPER | Opcodes.ACC_TRANSIENT | Opcodes.ACC_VOLATILE);
 
     private String header;
-    private List<String> fields = new ArrayList<String>();
-    private List<String> methods = new ArrayList<String>();
+    private final List<String> fields = new ArrayList<>();
+    private final List<String> methods = new ArrayList<>();
 
     public CompileDependencyVisitor() {
       super(Opcodes.ASM9);
@@ -182,16 +183,14 @@ public class BytecodeSignatureMaker {
       signatureBuilder.append("|");
 
       // sort all fields and methods for a deterministic signature.
-      String[] sortedFields = fields.toArray(new String[0]);
-      Arrays.sort(sortedFields);
-      for (String field : sortedFields) {
+      fields.sort(Comparator.naturalOrder());
+      for (String field : fields) {
         signatureBuilder.append(field);
         signatureBuilder.append("|");
       }
 
-      String[] sortedMethods = methods.toArray(new String[0]);
-      Arrays.sort(sortedMethods);
-      for (String method : sortedMethods) {
+      methods.sort(Comparator.naturalOrder());
+      for (String method : methods) {
         signatureBuilder.append(method);
         signatureBuilder.append("|");
       }

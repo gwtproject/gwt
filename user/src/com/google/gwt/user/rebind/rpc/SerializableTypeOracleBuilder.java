@@ -939,7 +939,7 @@ public class SerializableTypeOracleBuilder {
     JClassType classType = (JClassType) type;
 
     TypeInfoComputed tic = typeToTypeInfoComputed.get(classType);
-    if (tic != null && tic.isDone()) {
+    if (tic != null && (tic.isDone() || tic.isPendingInstantiable())) {
       // we have an answer already; use it.
       return tic;
     }
@@ -1017,9 +1017,7 @@ public class SerializableTypeOracleBuilder {
     Set<JClassType> instantiableTypes = new HashSet<JClassType>();
     boolean anySubtypes =
         checkSubtypes(localLogger, originalType, instantiableTypes, path, problems);
-    if (tic.isPendingInstantiable()) {
-      tic.setInstantiableSubtypes(anySubtypes);
-    } else if (!tic.isDone()) {
+    if (!tic.isDone()) {
       tic.setInstantiableSubtypes(anySubtypes);
       tic.setInstantiable(false);
     }

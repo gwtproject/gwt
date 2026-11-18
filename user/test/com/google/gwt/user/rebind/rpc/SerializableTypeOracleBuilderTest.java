@@ -1757,6 +1757,109 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     validateSTO(sto, expected);
   }
 
+  public void testInstantiabilityDetectionIsIndependentOfFieldOrder()
+      throws UnableToCompleteException, NotFoundException {
+    Set<Resource> resources = new HashSet<>();
+    addStandardClasses(resources);
+
+    // Full graph (A/D/B/C): all six permutations of B's fields.
+    addFullGraph(resources, "full.abc", "A a;", "B b;", "C c;");
+    addFullGraph(resources, "full.acb", "A a;", "C c;", "B b;");
+    addFullGraph(resources, "full.bac", "B b;", "A a;", "C c;");
+    addFullGraph(resources, "full.bca", "B b;", "C c;", "A a;");
+    addFullGraph(resources, "full.cab", "C c;", "A a;", "B b;");
+    addFullGraph(resources, "full.cba", "C c;", "B b;", "A a;");
+
+    // Simplified graph (A/B/C): both permutations of B's fields.
+    addSimpleGraph(resources, "simple.bc", "B b;", "C c;");
+    addSimpleGraph(resources, "simple.cb", "C c;", "B b;");
+
+    TreeLogger logger = createLogger();
+    TypeOracle typeOracle = TypeOracleTestingUtils.buildTypeOracle(logger, resources);
+
+    String[] packages = new String[] {
+        "full.abc",
+        "full.acb",
+        "full.bac",
+        "full.bca",
+        "full.cab",
+        "full.cba",
+        "simple.bc",
+        "simple.cb"};
+    for (String packageName : packages) {
+      assertRecursiveTypeGraphIsSerializable(logger, typeOracle, packageName);
+    }
+  }
+
+  private void assertRecursiveTypeGraphIsSerializable(TreeLogger logger, TypeOracle typeOracle,
+      String packageName) throws UnableToCompleteException, NotFoundException {
+    JClassType a = typeOracle.getType(packageName + ".A");
+    JClassType b = typeOracle.getType(packageName + ".B");
+    JClassType c = typeOracle.getType(packageName + ".C");
+
+    TypeInfo[] expected = new TypeInfo[] {
+        new TypeInfo(b.getParameterizedQualifiedSourceName(), true),
+        new TypeInfo(c.getParameterizedQualifiedSourceName(), true)};
+
+    // Check with the interface as the root type.
+    SerializableTypeOracleBuilder stob = createSerializableTypeOracleBuilder(logger, typeOracle);
+    stob.addRootType(logger, a);
+    validateSTO(stob.build(logger), expected);
+
+    // Check with the concrete class as the root type.
+    stob = createSerializableTypeOracleBuilder(logger, typeOracle);
+    stob.addRootType(logger, b);
+    validateSTO(stob.build(logger), expected);
+  }
+
+  private static void addFullGraph(Set<Resource> resources, String packageName,
+      String firstField, String secondField, String thirdField) {
+    String packageDeclaration = "package " + packageName + ";\n";
+    String serializableImport = "import java.io.Serializable;\n";
+
+    String a = packageDeclaration + serializableImport
+        + "public interface A extends Serializable {\n}\n";
+    String d = packageDeclaration + serializableImport
+        + "public interface D extends Serializable {\n}\n";
+    String b = packageDeclaration + serializableImport
+        + "public class B implements A, D {\n"
+        + "  " + firstField + "\n"
+        + "  " + secondField + "\n"
+        + "  " + thirdField + "\n"
+        + "}\n";
+    String c = packageDeclaration + serializableImport
+        + "public class C implements Serializable {\n"
+        + "  D d;\n"
+        + "}\n";
+
+    resources.add(new StaticJavaResource(packageName + ".A", a));
+    resources.add(new StaticJavaResource(packageName + ".D", d));
+    resources.add(new StaticJavaResource(packageName + ".B", b));
+    resources.add(new StaticJavaResource(packageName + ".C", c));
+  }
+
+  private static void addSimpleGraph(Set<Resource> resources, String packageName,
+      String firstField, String secondField) {
+    String packageDeclaration = "package " + packageName + ";\n";
+    String serializableImport = "import java.io.Serializable;\n";
+
+    String a = packageDeclaration + serializableImport
+        + "public interface A extends Serializable {\n}\n";
+    String b = packageDeclaration + serializableImport
+        + "public class B implements A {\n"
+        + "  " + firstField + "\n"
+        + "  " + secondField + "\n"
+        + "}\n";
+    String c = packageDeclaration + serializableImport
+        + "public class C implements Serializable {\n"
+        + "  A a;\n"
+        + "}\n";
+
+    resources.add(new StaticJavaResource(packageName + ".A", a));
+    resources.add(new StaticJavaResource(packageName + ".B", b));
+    resources.add(new StaticJavaResource(packageName + ".C", c));
+  }
+
   /**
    * Tests that Object[] is not instantiable.
    */

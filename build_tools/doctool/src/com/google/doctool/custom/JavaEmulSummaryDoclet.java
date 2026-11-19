@@ -117,13 +117,13 @@ public class JavaEmulSummaryDoclet implements Doclet {
       printWriter.close();
     }
 
-    public void formatLine(String template, Object... args) {
+    void formatLine(String template, Object... args) {
       maySkip = template.startsWith(" ");
       printWriter.format(template, args);
       printWriter.println();
     }
 
-    public void skipLine() {
+    void skipLine() {
       if (maySkip) {
         printWriter.println();
       }

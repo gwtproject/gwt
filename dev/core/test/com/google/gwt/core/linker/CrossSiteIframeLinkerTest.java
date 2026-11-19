@@ -86,16 +86,15 @@ public class CrossSiteIframeLinkerTest extends TestCase {
 
     String out = new TestDirectInstallLinker().deferredFragment(2, code + "\n", artifacts);
 
-    assertTrue(out, out.startsWith("$wnd.mockFunc.runAsyncCallback2(null);\n" + code + "\n"));
+    // No prefix, so source maps need no shift; the callback comes after the code.
+    assertTrue(out, out.startsWith(code + "\n"));
+    assertTrue(out, out.contains("\n$wnd.mockFunc.runAsyncCallback2(null);\n"));
+    assertEquals(out, out.indexOf("runAsyncCallback2("), out.lastIndexOf("runAsyncCallback2("));
     assertFalse("fragment code must not be passed as a string", out.contains("\"" + code));
 
-    // The source map of the fragment has to be shifted by exactly the lines in
-    // front of its code.
     SortedSet<ScriptFragmentEditsArtifact> edits =
         artifacts.find(ScriptFragmentEditsArtifact.class);
     assertEquals(1, edits.size());
     assertEquals(2, edits.first().getFragment());
-    String[] lines = out.split("\n", -1);
-    assertEquals(code, lines[edits.first().getPrefixLineCount()]);
   }
 }

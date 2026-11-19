@@ -37,12 +37,4 @@ public class SymbolMapsLinkerTest extends TestCase {
     SortedSet<ScriptFragmentEditsArtifact> found = set.find(ScriptFragmentEditsArtifact.class);
     assertEquals(4, found.size());
   }
-
-  public void testPrefixLineCount() {
-    ScriptFragmentEditsArtifact edits = new ScriptFragmentEditsArtifact("strong", 1);
-    assertEquals(0, edits.getPrefixLineCount());
-    edits.prefixLines("a\nb\n");
-    edits.prefixLines("c\n");
-    assertEquals(3, edits.getPrefixLineCount());
-  }
 }

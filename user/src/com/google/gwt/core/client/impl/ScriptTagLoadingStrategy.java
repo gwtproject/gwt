@@ -26,7 +26,7 @@ import com.google.gwt.core.client.impl.AsyncFragmentLoader.HttpDownloadFailure;
  * the fragment number, exactly once: either with the fragment code as a string
  * to install, or with null when the fragment code runs directly from the
  * script tag.
- *
+ * <p>
  * This is the default strategy for the CrossSiteIframeLinker.
  */
 

@@ -190,30 +190,18 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     return ".cache.js";
   }
 
-  /**
-   * When {@link #shouldInstallCode} is false, a deferred fragment runs directly
-   * from the script tag that loads it, in the window that runs the primary
-   * fragment, so it starts with a call that only reports the download.
-   * Passing the code as a string instead would make the bootstrap install it
-   * as an inline script, which a Content-Security-Policy without
-   * 'unsafe-inline' blocks. Returning the call as the prefix keeps source maps
-   * aligned.
-   */
-  @Override
-  protected String getDeferredFragmentPrefix(TreeLogger logger, LinkerContext context,
-      int fragment) {
-    if (shouldInstallCode(context)) {
-      return super.getDeferredFragmentPrefix(logger, context, fragment);
-    }
-    return String.format("$wnd.%s.runAsyncCallback%d(null);\n",
-        context.getModuleFunctionName(), fragment);
-  }
-
   @Override
   protected String getDeferredFragmentSuffix2(TreeLogger logger, LinkerContext context,
       int fragment, String strongName) {
 
     DefaultTextOutput out = new DefaultTextOutput(context.isOutputCompact());
+    if (!shouldInstallCode(context)) {
+      // The fragment code runs directly from its script tag, so the callback
+      // only reports the download. It is a suffix, so source maps are unaffected.
+      out.print(String.format("$wnd.%s.runAsyncCallback%d(null);",
+          context.getModuleFunctionName(), fragment));
+      out.newline();
+    }
     writeMagicComments(out, context, fragment, strongName);
     return out.toString();
   }
@@ -680,7 +668,7 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
    * {@code runAsyncCallbackN(code)} call that passes the code as a string to be
    * installed. When it is false, returns the fragment unchanged: the
    * {@code runAsyncCallbackN(null)} call that reports the download is already
-   * in the prefix, see {@link #getDeferredFragmentPrefix}. A subclass that
+   * in the suffix, see {@link #getDeferredFragmentSuffix2}. A subclass that
    * overrides either method has to keep that call exactly once per fragment,
    * or the loading strategy treats the download as failed.
    */
@@ -695,7 +683,7 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     // on what strategy is being used. Otherwise, we should make a property which
     // users can set to turn this wrapping off if they override the loading strategy.
     if (!shouldInstallCode(context)) {
-      // The callback is already in the prefix, see getDeferredFragmentPrefix.
+      // The callback is already in the suffix, see getDeferredFragmentSuffix2.
       return js;
     }
     return String.format("$wnd.%s.runAsyncCallback%d(%s)\n",

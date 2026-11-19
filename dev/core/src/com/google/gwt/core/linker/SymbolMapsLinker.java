@@ -54,7 +54,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -118,11 +117,6 @@ public class SymbolMapsLinker extends AbstractLinker {
       }
     }
 
-    private static final Comparator<ScriptFragmentEditsArtifact> ORDER =
-        Comparator.comparing(ScriptFragmentEditsArtifact::getStrongName,
-            Comparator.nullsFirst(Comparator.<String>naturalOrder()))
-        .thenComparingInt(ScriptFragmentEditsArtifact::getFragment);
-
     private List<EditOperation> editOperations = new ArrayList<EditOperation>();
 
     private String strongName;
@@ -152,23 +146,9 @@ public class SymbolMapsLinker extends AbstractLinker {
       editOperations.add(EditOperation.prefix(lines));
     }
 
-    /**
-     * Returns the number of lines added in front of the fragment's code, which is
-     * how far its source map has to be shifted.
-     */
-    public int getPrefixLineCount() {
-      int lines = 0;
-      for (EditOperation op : editOperations) {
-        if (op.getOp() == Edit.PREFIX) {
-          lines += op.getNumLines();
-        }
-      }
-      return lines;
-    }
-
     @Override
     protected int compareToComparableArtifact(SymbolMapsLinker.ScriptFragmentEditsArtifact o) {
-      return ORDER.compare(this, o);
+      return (strongName + fragment).compareTo(o.strongName + o.fragment);
     }
 
     @Override
@@ -329,9 +309,18 @@ public class SymbolMapsLinker extends AbstractLinker {
             }
           }
 
+          int totalPrefixLines = 0;
+          if (editArtifact != null) {
+            for (ScriptFragmentEditsArtifact.EditOperation op : editArtifact.editOperations) {
+              if (op.getOp() == ScriptFragmentEditsArtifact.Edit.PREFIX) {
+                totalPrefixLines += op.getNumLines();
+              }
+            }
+          }
+
           SyntheticArtifact emArt = null;
           // no need to adjust source map
-          if (editArtifact == null || (editArtifact.getPrefixLineCount() == 0
+          if (editArtifact == null || (totalPrefixLines == 0
               && !stdContext.getModule().shouldEmbedSourceMapContents())) {
             emArt = emitSourceMapString(logger, sourceMapString, partialPath);
           } else {
@@ -343,8 +332,6 @@ public class SymbolMapsLinker extends AbstractLinker {
             }
 
             try {
-              int totalPrefixLines = editArtifact.getPrefixLineCount();
-
               // TODO(cromwellian): apply insert and remove edits
               if (stdContext.getModule().shouldEmbedSourceMapContents()) {
                 embedSourcesInSourceMaps(logger, stdContext, artifacts, sourceMapGenerator,

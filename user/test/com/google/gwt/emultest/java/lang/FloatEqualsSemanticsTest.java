@@ -16,7 +16,6 @@
 package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.testing.TestUtils;
 
 /** Tests (incorrect) equals semantics for Float. */
 public final class FloatEqualsSemanticsTest extends GWTTestCase {
@@ -27,14 +26,7 @@ public final class FloatEqualsSemanticsTest extends GWTTestCase {
   }
 
   public void testEquals() {
-    // Semantics don't match JVM.
-    if (TestUtils.isJvm()) {
-      return;
-    }
-
-    // Should be assertTrue(Float.valueOf(Float.NaN).equals(Float.NaN));
-    assertFalse(Float.valueOf(Float.NaN).equals(Float.NaN));
-    // Should be assertFalse(Float.valueOf(0.0f).equals(-0.0f));
-    assertTrue(Float.valueOf(0.0f).equals(-0.0f));
+    assertTrue(Float.valueOf(Float.NaN).equals(Float.NaN));
+    assertFalse(Float.valueOf(0.0f).equals(-0.0f));
   }
 }

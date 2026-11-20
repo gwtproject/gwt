@@ -123,7 +123,7 @@ public class DoubleTest extends GWTTestCase {
   public void testEqualityNormalizer() {
     Double d = 0.0;
     if (d != null) {
-      assertEquals(0.0, d.doubleValue());
+      assertEquals(0.0, d.doubleValue(), 0.0);
     } else {
       fail("0.0 should not evaluate to null");
     }
@@ -132,6 +132,28 @@ public class DoubleTest extends GWTTestCase {
 
     Object b = Boolean.FALSE;
     assertTrue(b != s);
+  }
+
+  public void testEqualsBoxed() {
+    assertEquals(hideFromCompiler(0.0), hideFromCompiler(-0.0), 0.0);
+    assertTrue(hideFromCompiler(0.0) == hideFromCompiler(-0.0));
+    assertFalse(hideFromCompiler(Double.valueOf(0.0)).equals(Double.valueOf(-0.0)));
+
+    assertFalse(hideFromCompiler(Double.NaN) == hideFromCompiler(Double.NaN));
+    assertTrue(hideFromCompiler(Double.valueOf(Double.NaN)).equals(Double.valueOf(Double.NaN)));
+  }
+
+  private static Double hideFromCompiler(Double d) {
+    if (Math.random() > 2) {
+      return 7.0;
+    }
+    return d;
+  }
+  private static double hideFromCompiler(double d) {
+    if (Math.random() > 2) {
+      return 7;
+    }
+    return d;
   }
 
   @SuppressWarnings("SelfComparison")

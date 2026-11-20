@@ -124,6 +124,8 @@ public class JavaAstConstructor {
           "  public static boolean isJavaScriptObject(Object o) { return true; }",
           "  public static native boolean isNull(Object a) /*-{ }-*/;",
           "  public static native boolean isNotNull(Object a) /*-{ }-*/;",
+          "  public static native boolean jsIs(Object a, Object b) /*-{ }-*/;",
+          "  public static native boolean jsNotIs(Object a, Object b) /*-{ }-*/;",
           "  public static native boolean jsEquals(Object a, Object b) /*-{ }-*/;",
           "  public static native boolean jsNotEquals(Object a, Object b) /*-{ }-*/;",
           "  public static native Object maskUndefined(Object src) /*-{ }-*/;",

@@ -102,7 +102,7 @@ public class Float32ArrayTest extends GWTTestCase {
     for (int i = 0; i < offset; ++i) {
       assertEquals("index " + i, 0.0f, array.get(i));
     }
-    assertEquals("Index " + offset, 1.0f, array.get(offset++));
+    assertEquals("Index " + offset, 1.0f, array.get(offset++), 0);
     assertTrue("Index " + offset, Float.isInfinite(array.get(offset)));
     assertTrue("Index " + offset, array.get(offset++) < 0);
     assertTrue("Index " + offset, Float.isNaN(array.get(offset++)));

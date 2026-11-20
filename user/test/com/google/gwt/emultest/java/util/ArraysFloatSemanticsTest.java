@@ -15,27 +15,16 @@
  */
 package com.google.gwt.emultest.java.util;
 
-import com.google.gwt.testing.TestUtils;
-
 import java.util.Arrays;
 
-/** Tests {@link Arrays} (incorrect) Float semantics. */
+/** Tests {@link Arrays} Float semantics. */
 public class ArraysFloatSemanticsTest extends EmulTestBase {
 
   public void testEquals() throws Exception {
-    // Semantics don't match JVM.
-    if (TestUtils.isJvm()) {
-      return;
-    }
+    assertFalse(Arrays.equals(new Float[] {-0.0f}, new Float[] {0.0f}));
+    assertTrue(Arrays.equals(new Float[] {Float.NaN}, new Float[] {Float.NaN}));
 
-    // Should be assertFalse(Arrays.equals(new Float[] {-0.0f}, new Float[] {0.0f}));
-    assertTrue(Arrays.equals(new Float[] {-0.0f}, new Float[] {0.0f}));
-    // Should be assertTrue(Arrays.equals(new Float[] {Float.NaN}, new Float[] {Float.NaN}));
-    assertFalse(Arrays.equals(new Float[] {Float.NaN}, new Float[] {Float.NaN}));
-
-    // Should be assertFalse(Arrays.equals(new float[] {-0.0f}, new float[] {0.0f}));
-    assertTrue(Arrays.equals(new float[] {-0.0f}, new float[] {0.0f}));
-    // Should be assertTrue(Arrays.equals(new float[] {Float.NaN}, new float[] {Float.NaN}));
-    assertFalse(Arrays.equals(new float[] {Float.NaN}, new float[] {Float.NaN}));
+    assertFalse(Arrays.equals(new float[] {-0.0f}, new float[] {0.0f}));
+    assertTrue(Arrays.equals(new float[] {Float.NaN}, new float[] {Float.NaN}));
   }
 }

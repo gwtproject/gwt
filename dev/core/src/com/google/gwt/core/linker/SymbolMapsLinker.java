@@ -148,8 +148,7 @@ public class SymbolMapsLinker extends AbstractLinker {
 
     @Override
     protected int compareToComparableArtifact(SymbolMapsLinker.ScriptFragmentEditsArtifact o) {
-      int result = (strongName + fragment).compareTo(strongName + fragment);
-      return result;
+      return (strongName + fragment).compareTo(o.strongName + o.fragment);
     }
 
     @Override
@@ -303,16 +302,26 @@ public class SymbolMapsLinker extends AbstractLinker {
           int fragment = se.getFragment();
           ScriptFragmentEditsArtifact editArtifact = null;
           for (ScriptFragmentEditsArtifact mp : artifacts.find(ScriptFragmentEditsArtifact.class)) {
-            if (mp.getStrongName().equals(strongName) && mp.getFragment() == fragment) {
+            if (strongName.equals(mp.getStrongName()) && mp.getFragment() == fragment) {
               editArtifact = mp;
               artifacts.remove(editArtifact);
               break;
             }
           }
 
+          int totalPrefixLines = 0;
+          if (editArtifact != null) {
+            for (ScriptFragmentEditsArtifact.EditOperation op : editArtifact.editOperations) {
+              if (op.getOp() == ScriptFragmentEditsArtifact.Edit.PREFIX) {
+                totalPrefixLines += op.getNumLines();
+              }
+            }
+          }
+
           SyntheticArtifact emArt = null;
           // no need to adjust source map
-          if (editArtifact == null) {
+          if (editArtifact == null || (totalPrefixLines == 0
+              && !stdContext.getModule().shouldEmbedSourceMapContents())) {
             emArt = emitSourceMapString(logger, sourceMapString, partialPath);
           } else {
             SourceMapGeneratorV3 sourceMapGenerator = new SourceMapGeneratorV3();
@@ -323,13 +332,6 @@ public class SymbolMapsLinker extends AbstractLinker {
             }
 
             try {
-              int totalPrefixLines = 0;
-              for (ScriptFragmentEditsArtifact.EditOperation op : editArtifact.editOperations) {
-                if (op.getOp() == ScriptFragmentEditsArtifact.Edit.PREFIX) {
-                  totalPrefixLines += op.getNumLines();
-                }
-              }
-
               // TODO(cromwellian): apply insert and remove edits
               if (stdContext.getModule().shouldEmbedSourceMapContents()) {
                 embedSourcesInSourceMaps(logger, stdContext, artifacts, sourceMapGenerator,

@@ -939,7 +939,7 @@ public class SerializableTypeOracleBuilder {
     JClassType classType = (JClassType) type;
 
     TypeInfoComputed tic = typeToTypeInfoComputed.get(classType);
-    if (tic != null && tic.isDone()) {
+    if (tic != null && (tic.isDone() || tic.isPendingInstantiable())) {
       // we have an answer already; use it.
       return tic;
     }

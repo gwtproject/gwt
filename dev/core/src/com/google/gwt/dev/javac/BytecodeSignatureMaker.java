@@ -25,9 +25,10 @@ import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Opcodes;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Creates string hashes for various purposes from walking bytecode.
@@ -53,8 +54,8 @@ public class BytecodeSignatureMaker {
             | Opcodes.ACC_SYNCHRONIZED | Opcodes.ACC_SUPER | Opcodes.ACC_TRANSIENT | Opcodes.ACC_VOLATILE);
 
     private String header;
-    private Map<String, String> fields = new HashMap<String, String>();
-    private Map<String, String> methods = new HashMap<String, String>();
+    private final List<String> fields = new ArrayList<>();
+    private final List<String> methods = new ArrayList<>();
 
     public CompileDependencyVisitor() {
       super(Opcodes.ASM9);
@@ -125,7 +126,7 @@ public class BytecodeSignatureMaker {
           fieldBuilder.append(":");
           fieldBuilder.append(value.toString());
         }
-        fields.put(name, fieldBuilder.toString());
+        fields.add(fieldBuilder.toString());
       }
 
       // ignoring annotations/attributes on the field.
@@ -161,7 +162,7 @@ public class BytecodeSignatureMaker {
             methodBuilder.append(exception);
           }
         }
-        methods.put(name, methodBuilder.toString());
+        methods.add(methodBuilder.toString());
       }
       return null;
     }
@@ -182,16 +183,14 @@ public class BytecodeSignatureMaker {
       signatureBuilder.append("|");
 
       // sort all fields and methods for a deterministic signature.
-      String[] sortedFields = fields.values().toArray(new String[0]);
-      Arrays.sort(sortedFields);
-      for (String field : sortedFields) {
+      fields.sort(Comparator.naturalOrder());
+      for (String field : fields) {
         signatureBuilder.append(field);
         signatureBuilder.append("|");
       }
 
-      String[] sortedMethods = methods.values().toArray(new String[0]);
-      Arrays.sort(sortedMethods);
-      for (String method : sortedMethods) {
+      methods.sort(Comparator.naturalOrder());
+      for (String method : methods) {
         signatureBuilder.append(method);
         signatureBuilder.append("|");
       }

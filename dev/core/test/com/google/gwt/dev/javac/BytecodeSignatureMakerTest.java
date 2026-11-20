@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.javac;
 
+import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
@@ -549,6 +550,62 @@ public class BytecodeSignatureMakerTest extends CompilationStateTestBase {
     assertSignaturesNotEqual(originalClass,
         buildClass(CLASS_DEP_INTERFACE_MOD2));
     assertSignaturesEqual(originalClass, buildClass(CLASS_DEP_INTERFACE_MOD3));
+  }
+
+  public void testClassDependencySignatureWithOverloads() {
+    MockJavaResource overloadsOrig =
+        JavaResourceBase.createMockJavaResource(CLASS_DEP_TYPE_NAME,
+            """
+            package test;
+            public class ClassDependency {
+              public void method(String arg) {}
+              public void method(String arg, int count) {}
+            }
+            """);
+    // changed the return type of the overload declared first
+    MockJavaResource overloadsFirstChanged =
+        JavaResourceBase.createMockJavaResource(CLASS_DEP_TYPE_NAME,
+            """
+            package test;
+            public class ClassDependency {
+              public boolean method(String arg) { return true; }
+              public void method(String arg, int count) {}
+            }
+            """);
+    // changed the return type of the overload declared last
+    MockJavaResource overloadsLastChanged =
+        JavaResourceBase.createMockJavaResource(CLASS_DEP_TYPE_NAME,
+            """
+            package test;
+            public class ClassDependency {
+              public void method(String arg) {}
+              public boolean method(String arg, int count) { return true; }
+            }
+            """);
+    // removed the overload declared first
+    MockJavaResource overloadsFirstRemoved =
+        JavaResourceBase.createMockJavaResource(CLASS_DEP_TYPE_NAME,
+            """
+            package test;
+            public class ClassDependency {
+              public void method(String arg, int count) {}
+            }
+            """);
+    // flipped order of the overloads
+    MockJavaResource overloadsReordered =
+        JavaResourceBase.createMockJavaResource(CLASS_DEP_TYPE_NAME,
+            """
+            package test;
+            public class ClassDependency {
+              public void method(String arg, int count) {}
+              public void method(String arg) {}
+            }
+            """);
+    CompiledClass originalClass = buildClass(overloadsOrig);
+    assertSignaturesNotEqual(originalClass, buildClass(overloadsFirstChanged));
+    assertSignaturesNotEqual(originalClass, buildClass(overloadsLastChanged));
+    assertSignaturesNotEqual(originalClass, buildClass(overloadsFirstRemoved));
+    assertSignaturesEqual(originalClass, buildClass(overloadsReordered));
   }
 
   private void assertSignaturesEqual(CompiledClass original,

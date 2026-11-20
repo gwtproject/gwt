@@ -43,6 +43,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * <p>
@@ -274,6 +279,12 @@ public class CodeSplitter {
    */
   private Map<Fragment, ControlFlowAnalyzer> computeNotExclusiveCfaForFragments(
       Collection<Fragment> exclusiveFragments) {
+    // Recording a dependency graph is order sensitive, so it keeps the serial loop below.
+    if (dependencyRecorder == MultipleDependencyGraphRecorder.NULL_RECORDER
+        && exclusiveFragments.size() > 1) {
+      return computeNotExclusiveCfaForFragmentsInParallel(exclusiveFragments);
+    }
+
     String dependencyGraphNameAfterInitialSequence = dependencyGraphNameAfterInitialSequence();
 
     Map<Fragment, ControlFlowAnalyzer> notExclusiveCfaByFragment = Maps.newHashMap();
@@ -302,6 +313,59 @@ public class CodeSplitter {
       notExclusiveCfaByFragment.put(fragment, cfa);
     }
     return notExclusiveCfaByFragment;
+  }
+
+  /**
+   * Runs {@link #computeNotExclusiveCfaForFragment} for every fragment in parallel. The iterations
+   * are independent: each builds its own ControlFlowAnalyzer, whose copy constructor duplicates
+   * every mutable set, and otherwise only reads the program.
+   */
+  private Map<Fragment, ControlFlowAnalyzer> computeNotExclusiveCfaForFragmentsInParallel(
+      final Collection<Fragment> exclusiveFragments) {
+    Map<Fragment, ControlFlowAnalyzer> notExclusiveCfaByFragment = Maps.newLinkedHashMap();
+    int threads = Math.min(Runtime.getRuntime().availableProcessors(), exclusiveFragments.size());
+    ExecutorService executor = Executors.newFixedThreadPool(threads);
+    try {
+      Map<Fragment, Future<ControlFlowAnalyzer>> futures = Maps.newLinkedHashMap();
+      for (final Fragment fragment : exclusiveFragments) {
+        assert fragment.isExclusive();
+        futures.put(fragment, executor.submit(new Callable<ControlFlowAnalyzer>() {
+          @Override
+          public ControlFlowAnalyzer call() {
+            return computeNotExclusiveCfaForFragment(fragment, exclusiveFragments);
+          }
+        }));
+      }
+      for (Map.Entry<Fragment, Future<ControlFlowAnalyzer>> entry : futures.entrySet()) {
+        try {
+          notExclusiveCfaByFragment.put(entry.getKey(), entry.getValue().get());
+        } catch (InterruptedException e) {
+          Thread.currentThread().interrupt();
+          throw new RuntimeException(e);
+        } catch (ExecutionException e) {
+          throw new RuntimeException(e.getCause());
+        }
+      }
+    } finally {
+      executor.shutdown();
+    }
+    return notExclusiveCfaByFragment;
+  }
+
+  private ControlFlowAnalyzer computeNotExclusiveCfaForFragment(Fragment fragment,
+      Collection<Fragment> exclusiveFragments) {
+    ControlFlowAnalyzer cfa = new ControlFlowAnalyzer(initialSequenceCfa);
+    for (Fragment otherFragment : exclusiveFragments) {
+      // don't trace the initial fragments as they have already been traced and their atoms are
+      // already in {@code initialSequenceCfa}.
+      if (otherFragment.isInitial() || otherFragment == fragment) {
+        continue;
+      }
+      for (JRunAsync otherRunAsync : otherFragment.getRunAsyncs()) {
+        cfa.traverseFromRunAsync(otherRunAsync);
+      }
+    }
+    return cfa;
   }
 
   /**

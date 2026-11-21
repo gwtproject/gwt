@@ -72,18 +72,16 @@ public class Java10AstTest extends FullCompileTestBase {
   public void testLocalVarType_EnhancedForLoopArray() throws Exception {
     assertEqualBlock(
           "for(final String[] s$array=new String[]{},int s$index=0,final int s$max=s$array.length;"
-        + "          s$index<s$max;++s$index){"
+        + "          s$index<s$max;++s$index)"
         + "  String s=s$array[s$index];"
-        + "}"
         ,
           "for(var s : new String[]{});");
   }
 
   public void testLocalVarType_EnhancedForLoopIterable() throws Exception {
     assertEqualBlock(
-          "for(Iterator s$iterator=((Iterable)null).iterator();s$iterator.hasNext();){"
+          "for(Iterator s$iterator=((Iterable)null).iterator();s$iterator.hasNext();)"
         + "  String s=(String)s$iterator.next();"
-        + "}"
           ,
           "for (var s : (Iterable<String>)null);"
         );

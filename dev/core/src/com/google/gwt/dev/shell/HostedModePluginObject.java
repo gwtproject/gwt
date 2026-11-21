@@ -17,17 +17,15 @@ package com.google.gwt.dev.shell;
 
 import com.google.gwt.core.ext.TreeLogger;
 
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.WebClient;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.host.Window;
 
 import java.io.IOException;
-import java.util.Collections;
 
 /**
  * HTMLUnit object that represents the hosted-mode plugin.
@@ -187,15 +185,6 @@ public class HostedModePluginObject extends ScriptableObject {
       return false;
     }
     // TODO: add whitelist and default-port support?
-
-    // We know that legacy dev mode is running, we need to tell HtmlUnit that it is safe
-    // to permit plain Java objects to leak into JS - the JavaObject type will return a
-    // Object[] with a success boolean and a value, and HtmlUnit will guard against this.
-    // The simplest way to do that here is to mark java.lang.Object as the java equivalent
-    // of some JS type - the name of the type doesn't matter.
-    webClient.setActiveXObjectMap(Collections.singletonMap(
-            "GwtLegacyDevModeExceptionOrReturnValue", "java.lang.Object"));
-
     try {
       HtmlUnitSessionHandler htmlUnitSessionHandler = new HtmlUnitSessionHandler(
           window, jsEngine, webClient);

@@ -74,10 +74,20 @@ public class StyleInjector {
 
     private StyleElement createElement(String contents) {
       StyleElement style = Document.get().createStyleElement();
+      propagateNonceIfPossible(style);
       style.setPropertyString("language", "text/css");
       setContents(style, contents);
       return style;
     }
+
+    private static native void propagateNonceIfPossible(Element element) /*-{
+      var doc = element.ownerDocument;
+      if (doc.querySelector && doc.querySelector('script[nonce]')) {
+        var firstNoncedScript = doc.querySelector('script[nonce]');
+        var nonce = firstNoncedScript['nonce'] || firstNoncedScript.getAttribute('nonce');
+        element.setAttribute('nonce', nonce);
+      }
+    }-*/;
 
     private HeadElement getHead() {
       if (head == null) {

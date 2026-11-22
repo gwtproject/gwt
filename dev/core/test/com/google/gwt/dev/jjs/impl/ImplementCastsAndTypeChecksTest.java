@@ -31,8 +31,7 @@ public class ImplementCastsAndTypeChecksTest extends OptimizerTestBase {
     result.intoString(
         "EntryPoint$A a = new EntryPoint$A();",
         "a = null;",
-        "if (a != null) {",
-        "}");
+        "if (a != null);");
   }
 
   public void testRemoveCastCheck_exactType() throws Exception {
@@ -42,8 +41,7 @@ public class ImplementCastsAndTypeChecksTest extends OptimizerTestBase {
         optimize("void", "A a = new A(); if (a instanceof A) {}");
     result.intoString(
         "EntryPoint$A a = new EntryPoint$A();",
-        "if (a != null) {",
-        "}");
+        "if (a != null);");
   }
 
   @Override

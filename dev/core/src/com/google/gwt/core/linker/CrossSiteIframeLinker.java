@@ -195,6 +195,13 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
       int fragment, String strongName) {
 
     DefaultTextOutput out = new DefaultTextOutput(context.isOutputCompact());
+    if (!shouldInstallCode(context)) {
+      // The fragment code runs directly from its script tag, so the callback
+      // only reports the download. It is a suffix, so source maps are unaffected.
+      out.print(String.format("$wnd.%s.runAsyncCallback%d(null);",
+          context.getModuleFunctionName(), fragment));
+      out.newline();
+    }
     writeMagicComments(out, context, fragment, strongName);
     return out.toString();
   }
@@ -639,8 +646,10 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
   /**
    * Determines the strategy for installing JavaScript code into the iframe.
    * If set to false, a &lt;script&gt; tag pointing to the js file is added
-   * directly to the iframe. Otherwise, GWT downloads the JavaScript code
-   * as a list of strings and then adds it to the iframe.
+   * directly to the iframe, and runAsync fragments run directly from the
+   * &lt;script&gt; tags that load them, so no inline script is created.
+   * Otherwise, GWT downloads the JavaScript code as a list of strings and then
+   * adds it to the iframe.
    */
   protected boolean shouldInstallCode(LinkerContext context) {
     return getBooleanConfigurationProperty(context, "installCode", context.isOutputCompact());
@@ -654,6 +663,15 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     return false;
   }
 
+  /**
+   * When {@link #shouldInstallCode} is true, wraps the fragment in a
+   * {@code runAsyncCallbackN(code)} call that passes the code as a string to be
+   * installed. When it is false, returns the fragment unchanged: the
+   * {@code runAsyncCallbackN(null)} call that reports the download is already
+   * in the suffix, see {@link #getDeferredFragmentSuffix2}. A subclass that
+   * overrides either method has to keep that call exactly once per fragment,
+   * or the loading strategy treats the download as failed.
+   */
   @Override
   protected String wrapDeferredFragment(TreeLogger logger,
       LinkerContext context, int fragment, String js, ArtifactSet artifacts) {
@@ -664,6 +682,10 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     // in this way.  Ideally, we should make a way for this code to be dependent
     // on what strategy is being used. Otherwise, we should make a property which
     // users can set to turn this wrapping off if they override the loading strategy.
+    if (!shouldInstallCode(context)) {
+      // The callback is already in the suffix, see getDeferredFragmentSuffix2.
+      return js;
+    }
     return String.format("$wnd.%s.runAsyncCallback%d(%s)\n",
         context.getModuleFunctionName(),
         fragment,

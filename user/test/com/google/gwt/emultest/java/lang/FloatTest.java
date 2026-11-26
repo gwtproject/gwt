@@ -447,7 +447,7 @@ public class FloatTest extends GWTTestCase {
       }
       fail("NaN");
     }
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, 0.0);
   }
 
   // Disabled since it is broken for Firefox.

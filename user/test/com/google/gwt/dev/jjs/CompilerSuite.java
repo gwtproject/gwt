@@ -18,6 +18,7 @@ package com.google.gwt.dev.jjs;
 import com.google.gwt.dev.jjs.test.AnnotationsTest;
 import com.google.gwt.dev.jjs.test.ArrayTest;
 import com.google.gwt.dev.jjs.test.AutoboxTest;
+import com.google.gwt.dev.jjs.test.BoxedDoubleIdentityTest;
 import com.google.gwt.dev.jjs.test.ClassCastTest;
 import com.google.gwt.dev.jjs.test.ClassLiteralsTest;
 import com.google.gwt.dev.jjs.test.EnhancedForLoopTest;
@@ -62,6 +63,7 @@ public class CompilerSuite {
     suite.addTestSuite(AnnotationsTest.class);
     suite.addTestSuite(ArrayTest.class);
     suite.addTestSuite(AutoboxTest.class);
+    suite.addTestSuite(BoxedDoubleIdentityTest.class);
     suite.addTestSuite(ClassCastTest.class);
     suite.addTestSuite(ClassLiteralsTest.class);
     suite.addTestSuite(EnhancedForLoopTest.class);

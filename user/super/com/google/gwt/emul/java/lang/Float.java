@@ -163,7 +163,7 @@ public final class Float extends Number implements Comparable<Float>, Constable,
 
   @Override
   public boolean equals(Object o) {
-    // Make sure Float follow the same semantic as Double for consistency.
+    // Use Double.equals for proper boxed comparison of float values
     return (o instanceof Float) && Double.valueOf(value).equals(Double.valueOf(((Float) o).value));
   }
 

@@ -13,5 +13,9 @@
 <!-- limitations under the License.                                         -->
 
 <module>
-  <source path='' />
+  <!-- The server subpackage holds JVM-only test helpers and must stay out of
+       the translatable source path. -->
+  <source path=''>
+    <exclude name='server/**' />
+  </source>
 </module>
